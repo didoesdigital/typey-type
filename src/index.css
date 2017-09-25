@@ -1,13 +1,13 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,300,300italic,600,800);
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0; }
 
 body {
+  font: 400 16px/1.6 "Clear Sans", "Open Sans", Helvetica, sans-serif;
   margin: 0 auto;
-  line-height: 1.6;
-  font-size: 16px;
-  color: #444; }
+  color: #321E3E; }
 
 h1, h2, h3 {
   line-height: 1.4; }
@@ -19,7 +19,7 @@ p {
   margin-bottom: 0.5em; }
 
 .app-header {
-  background-color: #222;
+  background-color: #321E3E;
   color: #fff;
   height: 150px;
   padding: 20px;
@@ -30,8 +30,11 @@ p {
   max-width: 650px;
   padding: 0 10px; }
 
+.material p {
+  padding: 0.25em; }
+
 .input-textarea {
   width: 100%; }
 
 .matched {
-  background-color: #AD66D5; }
+  background-color: #e6d1f2; }
