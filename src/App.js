@@ -8,11 +8,9 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.sourceMaterial = `List of words`;
+    this.sourceMaterial = `List of longer collection of things`;
     this.charsPerWord = 5;
-    this.state = {material: `
-List of words
-`,
+    this.state = {
       typedText: ``,
       startTime: null,
       timer: null,
@@ -22,7 +20,7 @@ List of words
   }
 
   startTimer() {
-    let intervalID = window.setInterval(this.updateWPM.bind(this), 1000);
+    this.intervalID = window.setInterval(this.updateWPM.bind(this), 1000);
   }
 
   stopTimer() {
@@ -43,12 +41,12 @@ List of words
       this.startTimer();
     }
 
-    this.state.numberOfMatchedChars = this.calculateMatchedChars(this.state.material, this.state.typedText);
-    this.state.numberOfMatchedWords = this.state.numberOfMatchedChars / this.charsPerWord;
+    var numberOfMatchedChars = this.calculateMatchedChars(this.sourceMaterial, this.state.typedText);
 
     this.setState({
-      typedText: typedText,
-      material: this.markUpMaterial(this.sourceMaterial, typedText)
+      numberOfMatchedChars: numberOfMatchedChars,
+      numberOfMatchedWords: numberOfMatchedChars / this.charsPerWord,
+      typedText: typedText
     });
   }
 
@@ -61,12 +59,11 @@ List of words
         break;
       }
     };
+    if (i+1 == material.length) {
+      this.stopTimer();
+    }
     let matchedMaterial = materialChars.slice(0,i).join('');
     return matchedMaterial.length;
-  }
-
-  markUpMaterial(material, typedText) {
-    return material+typedText;
   }
 
   render() {
