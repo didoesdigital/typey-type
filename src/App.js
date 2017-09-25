@@ -21,13 +21,26 @@ List of words
     };
   }
 
+  startTimer() {
+    let intervalID = window.setInterval(this.updateWPM.bind(this), 1000);
+  }
+
+  stopTimer() {
+    clearInterval(this.intervalID);
+  }
+
+  updateWPM() {
+    this.setState({
+      timer: new Date() - this.state.startTime
+    });
+  }
+
   updateMarkup(event) {
     const typedText = event.target.value;
 
     if (this.state.startTime == null) {
       this.state.startTime = new Date();
-    } else {
-      this.state.timer = new Date() - this.state.startTime;
+      this.startTimer();
     }
 
     this.state.numberOfMatchedChars = this.calculateMatchedChars(this.state.material, this.state.typedText);
