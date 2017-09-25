@@ -5,6 +5,7 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.sourceMaterial = `List of words`;
     this.state = {material: `
 List of words
 `,
@@ -13,7 +14,15 @@ List of words
   }
 
   updateMarkup(event) {
-    this.setState({typedText: event.target.value});
+    const typedText = event.target.value;
+    this.setState({
+      typedText: typedText,
+      material: this.markUpMaterial(this.sourceMaterial, typedText)
+    });
+  }
+
+  markUpMaterial(material, typedText) {
+    return material+typedText;
   }
 
   render() {
