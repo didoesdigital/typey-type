@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Material from './Material';
+import TypedText from './TypedText';
 import logo from './logo.svg';
 import './App.css';
 
@@ -35,7 +36,7 @@ List of words
         <div className="main">
           <div className="">
             <Material sourceMaterial={this.sourceMaterial} typedText={this.state.typedText} />
-            <div>Typed:</div><div className="typed-text">{this.state.typedText}</div>
+            <TypedText sourceMaterial={this.sourceMaterial} typedText={this.state.typedText} />
             <p className="input-text">
               <textarea classname="input-textarea" rows="1"
                 onChange={this.updateMarkup.bind(this)}

@@ -32,8 +32,8 @@ class Material extends Component {
     };
     let matchedMaterial = materialChars.slice(0,i).join('');
     let unmatchedMaterial = materialChars.slice(i).join('');
-    let matchedMarkup = `<span class="matched">${matchedMaterial}</span><span>${unmatchedMaterial}</span>`;
-    return {__html: matchedMarkup};
+    let matchedMaterialMarkup = `<span class="matched">${matchedMaterial}</span><span>${unmatchedMaterial}</span>`;
+    return {__html: matchedMaterialMarkup};
   }
 
   render() {

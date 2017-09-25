@@ -38,3 +38,6 @@ p {
 
 .matched {
   background-color: #e6d1f2; }
+
+.unmatched {
+  background-color: #dfc798; }

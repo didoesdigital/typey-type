@@ -46,3 +46,7 @@ p {
 .matched {
   background-color: mix($heavy-primary-tint-2, #fff, 30);
 }
+
+.unmatched {
+  background-color: mix($heavy-tertiary-shade-1, #fff, 50);
+}
