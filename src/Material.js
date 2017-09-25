@@ -5,21 +5,7 @@ import './App.css';
 class Material extends Component {
   constructor(props) {
     super(props);
-    // this.sourceMaterial = `List of words`;
-    // this.state = {material: `
-// List of words
-// `,
-  // typedText: ``
-    // };
   }
-
-  // updateMarkup(event) {
-  //   const typedText = event.target.value;
-  //   this.setState({
-  //     typedText: typedText,
-  //     material: this.markUpMaterial(this.sourceMaterial, typedText)
-  //   });
-  // }
 
   markUpMaterial(material, typedText) {
     let materialChars = material.split('');
