@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Material from './Material';
 import logo from './logo.svg';
 import './App.css';
 
@@ -33,7 +34,7 @@ List of words
         </div>
         <div className="main">
           <div className="">
-            <div>Material:</div><div className="material matched">{this.state.material}</div>
+            <Material sourceMaterial={this.sourceMaterial} typedText={this.state.typedText} />
             <div>Typed:</div><div className="typed-text">{this.state.typedText}</div>
             <p className="input-text">
               <textarea classname="input-textarea" rows="1"
