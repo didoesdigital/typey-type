@@ -1,0 +1,19 @@
+{
+  "name": "typey-type",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "marked": "^0.3.6",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.13"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
