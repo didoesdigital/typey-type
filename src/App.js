@@ -6,62 +6,35 @@ import marked from 'marked';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {markdown: `
-Heading
-=======
-
-Sub-heading
------------
- 
-### Another deeper heading
- 
-Paragraphs are separated
-by a blank line.
-
-Leave 2 spaces at the end of a line to do a  
-line break
-
-Text attributes *italic*, **bold**, 
-\`monospace\`, ~~strikethrough~~ .
-
-Shopping list:
-
-  * apples
-  * oranges
-  * pears
-
-Numbered list:
-
-  1. apples
-  2. oranges
-  3. pears
-
-The rain---not the reign---in
-Spain.
-
- *[Herman Fassett](https://freecodecamp.com/hermanfassett)*`
+    this.state = {material: `
+List of words
+`,
+  typedText: ``
     };
   }
 
   updateMarkup(event) {
-    this.setState({markdown: event.target.value});
+    this.setState({typedText: event.target.value});
   }
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Markdown Previewer</h2>
+      <div className="app">
+        <div className="app-header">
+          <h1>Typey type</h1>
         </div>
-        <div className="flex">
-          <p className="half app-input">
-            <textarea rows="34"
-              onChange={this.updateMarkup.bind(this)}
-              value={this.state.markdown}
-              >
-            </textarea>
-          </p>
-          <div className="half app-preview" dangerouslySetInnerHTML={{__html: marked(this.state.markdown)}} />
+        <div className="main">
+          <div className="">
+            <div>Material:</div><div className="material matched" dangerouslySetInnerHTML={{__html: marked(this.state.material)}} />
+            <div>Typed:</div><div className="typed-text" dangerouslySetInnerHTML={{__html: marked(this.state.typedText)}} />
+            <p className="input-text">
+              <textarea classname="input-textarea" rows="1"
+                onChange={this.updateMarkup.bind(this)}
+                value={this.state.markdown}
+                >
+              </textarea>
+            </p>
+          </div>
         </div>
       </div>
     );
