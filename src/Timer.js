@@ -8,8 +8,7 @@ class Timer extends Component {
   }
 
   calculateWordsPerMinute(timer, numberOfMatchedWords) {
-    let wordsPerMinute = numberOfMatchedWords/(timer/60/1000);
-    // let wordsPerMinute = timer;
+    let wordsPerMinute = Math.round(numberOfMatchedWords/(timer/60/1000));
     let result = `
       <p>Timer:</p>
       <p>${Math.round(timer/1000)} seconds</p>
