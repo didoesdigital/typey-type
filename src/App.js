@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Material from './Material';
 import TypedText from './TypedText';
 import Timer from './Timer';
+import matchSplitText from './typey-type';
 import logo from './logo.svg';
 import './App.css';
 
@@ -50,22 +51,8 @@ class App extends Component {
     });
   }
 
-  matchSplitText(material, typedText) {
-    let materialChars = material.split('');
-    let typedTextChars = typedText.split('');
-    let i = 0;
-    for (; i < typedTextChars.length; i++) {
-      if (typedTextChars[i] != materialChars[i]) {
-        break;
-      }
-    };
-    let matched = materialChars.slice(0,i).join('');
-    let unmatched = materialChars.slice(i).join('');
-    return [matched, unmatched];
-  }
-
   calculateMatchedChars(material, typedText) {
-    let [matched, unmatched] = this.matchSplitText(material, typedText);
+    let [matched, unmatched] = matchSplitText(material, typedText);
     if (unmatched.length == 1) {
       this.stopTimer();
     }
