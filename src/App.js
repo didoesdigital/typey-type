@@ -41,7 +41,7 @@ class App extends Component {
       this.startTimer();
     }
 
-    var numberOfMatchedChars = this.calculateMatchedChars(this.sourceMaterial, this.state.typedText);
+    var numberOfMatchedChars = this.calculateMatchedChars(this.sourceMaterial, typedText);
 
     this.setState({
       numberOfMatchedChars: numberOfMatchedChars,
@@ -50,7 +50,7 @@ class App extends Component {
     });
   }
 
-  calculateMatchedChars(material, typedText) {
+  matchSplitText(material, typedText) {
     let materialChars = material.split('');
     let typedTextChars = typedText.split('');
     let i = 0;
@@ -59,11 +59,17 @@ class App extends Component {
         break;
       }
     };
-    if (i+1 == material.length) {
+    let matched = materialChars.slice(0,i).join('');
+    let unmatched = materialChars.slice(i).join('');
+    return [matched, unmatched];
+  }
+
+  calculateMatchedChars(material, typedText) {
+    let [matched, unmatched] = this.matchSplitText(material, typedText);
+    if (unmatched.length == 1) {
       this.stopTimer();
     }
-    let matchedMaterial = materialChars.slice(0,i).join('');
-    return matchedMaterial.length;
+    return matched.length;
   }
 
   render() {
