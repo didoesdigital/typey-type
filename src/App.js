@@ -16,13 +16,15 @@ class App extends Component {
       timer: null,
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
-      totalNumberOfMatchedChars: 0
+      totalNumberOfMatchedChars: 0,
+      lesson: {}
     };
   }
 
   componentDidMount() {
     this.getLesson().then((lessonText) => {
       var lesson = parseLesson(lessonText);
+      this.setState({ lesson: lesson });
       this.setState({ sourceMaterial: lesson.phrases.map(pair => pair[0]) });
       this.setState({ currentPhraseID: 0 });
     });
