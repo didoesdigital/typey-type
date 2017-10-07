@@ -14,14 +14,15 @@ class App extends Component {
       typedText: ``,
       startTime: null,
       timer: null,
-      numberOfMatchedWords: 0,
-      numberOfMatchedChars: 0
+      totalNumberOfMatchedWords: 0,
+      numberOfMatchedChars: 0,
+      totalNumberOfMatchedChars: 0
     };
   }
 
   componentDidMount() {
     this.getLesson().then((lessonText) => {
-      var phrases = lessonText.split("\n");
+      var phrases = lessonText.split("\n").filter(phrase => phrase !== '');
       this.setState({ sourceMaterial: phrases });
       this.setState({ currentPhraseID: 0 });
     });
@@ -68,12 +69,25 @@ class App extends Component {
       this.startTimer();
     }
 
-    var numberOfMatchedChars = this.calculateMatchedChars(this.state.sourceMaterial[this.state.currentPhraseID], typedText);
+    let [numberOfMatchedChars, numberOfUnmatchedChars] =
+      matchSplitText(this.state.sourceMaterial[this.state.currentPhraseID], typedText)
+      .map(text => text.length);
 
-    this.setState({
+    var newState = {
       numberOfMatchedChars: numberOfMatchedChars,
-      numberOfMatchedWords: numberOfMatchedChars / this.charsPerWord,
+      totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       typedText: typedText
+    };
+
+    if (numberOfUnmatchedChars == 0) {
+      newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
+      newState.currentPhraseID = this.state.currentPhraseID + 1;
+    }
+
+    this.setState(newState, () => {
+      if (this.isFinished()) {
+        this.stopTimer();
+      }
     });
   }
 
@@ -81,29 +95,14 @@ class App extends Component {
     return (this.state.currentPhraseID == this.state.sourceMaterial.length);
   }
 
-  calculateMatchedChars(currentPhrase, typedText) {
-    let [matched, unmatched] = matchSplitText(currentPhrase, typedText);
-    if (unmatched.length == 0) {
-      this.setState({
-        currentPhraseID: this.state.currentPhraseID + 1
-      }, () => {
-        if (this.isFinished()) {
-          this.stopTimer();
-        }
-      });
-
-    }
-    return matched.length;
-  }
-
   render() {
     if (this.isFinished()) {
       return (
-        <Finished currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} numberOfMatchedWords={this.state.numberOfMatchedWords} />
+        <Finished currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords} />
       );
     } else {
       return (
-        <Typing updateMarkup={this.updateMarkup.bind(this)} currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} numberOfMatchedWords={this.state.numberOfMatchedWords}/>
+        <Typing updateMarkup={this.updateMarkup.bind(this)} currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}/>
       );
     }
   }

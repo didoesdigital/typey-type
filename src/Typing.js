@@ -27,7 +27,7 @@ class Typing extends Component {
                 >
               </textarea>
             </p>
-            <Scores timer={this.props.timer} numberOfMatchedWords={this.props.numberOfMatchedWords}/>
+            <Scores timer={this.props.timer} totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}/>
           </div>
         </div>
       </div>

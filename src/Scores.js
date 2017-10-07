@@ -6,14 +6,14 @@ class Scores extends Component {
     super(props);
   }
 
-  calculateWordsPerMinute(timer, numberOfMatchedWords) {
-    let wordsPerMinute = Math.round(numberOfMatchedWords/(timer/60/1000));
+  calculateWordsPerMinute(timer, totalNumberOfMatchedWords) {
+    let wordsPerMinute = Math.round(totalNumberOfMatchedWords/(timer/60/1000));
     let result = `
       <p>Time in seconds:</p>
       <p>${Math.round(timer/1000)} seconds</p>
 
       <p>Number of matched words:</p>
-      <p>~${Math.ceil(numberOfMatchedWords)} words</p>
+      <p>~${Math.ceil(totalNumberOfMatchedWords)} words</p>
 
       <p><abbr title="words per minute">WPM</abbr>:</p>
       <p>${wordsPerMinute}</p>
@@ -25,7 +25,7 @@ class Scores extends Component {
     if (this.props.timer) {
       return (
         <div className="">
-          <div className="timer" dangerouslySetInnerHTML={this.calculateWordsPerMinute(this.props.timer, this.props.numberOfMatchedWords)} />
+          <div className="timer" dangerouslySetInnerHTML={this.calculateWordsPerMinute(this.props.timer, this.props.totalNumberOfMatchedWords)} />
         </div>
       );
     } else {

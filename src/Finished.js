@@ -17,7 +17,7 @@ class Finished extends Component {
         <div className="main">
           <div className="">
             <h1>Finished!</h1>
-            <Scores timer={this.props.timer} numberOfMatchedWords={this.props.numberOfMatchedWords}/>
+            <Scores timer={this.props.timer} totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}/>
           </div>
         </div>
       </div>
