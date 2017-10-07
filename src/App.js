@@ -62,7 +62,9 @@ class App extends Component {
     const typedText = event.target.value;
 
     if (this.state.startTime == null) {
-      this.state.startTime = new Date();
+      this.setState({
+        startTime: new Date()
+      });
       this.startTimer();
     }
 
@@ -84,8 +86,12 @@ class App extends Component {
     if (unmatched.length == 0) {
       this.setState({
         currentPhraseID: this.state.currentPhraseID + 1
+      }, () => {
+        if (this.isFinished()) {
+          this.stopTimer();
+        }
       });
-      this.stopTimer();
+
     }
     return matched.length;
   }
@@ -93,7 +99,7 @@ class App extends Component {
   render() {
     if (this.isFinished()) {
       return (
-        <Finished currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} />
+        <Finished currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} numberOfMatchedWords={this.state.numberOfMatchedWords} />
       );
     } else {
       return (
