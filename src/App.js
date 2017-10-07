@@ -29,7 +29,7 @@ class App extends Component {
   }
 
   getLesson() {
-    return fetch('/test.txt', {
+    return fetch('/lesson.txt', {
       method: "GET",
       credentials: "same-origin"
     }).then(function(response) {
