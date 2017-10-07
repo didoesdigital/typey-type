@@ -76,6 +76,10 @@ class App extends Component {
     });
   }
 
+  isFinished() {
+    return (this.state.currentPhraseID == this.state.sourceMaterial.length);
+  }
+
   calculateMatchedChars(currentPhrase, typedText) {
     let [matched, unmatched] = matchSplitText(currentPhrase, typedText);
     if (unmatched.length == 0) {
@@ -88,6 +92,13 @@ class App extends Component {
   }
 
   render() {
+    if (this.isFinished()) {
+      return (
+        <div>
+          <h1>Finished!</h1>
+        </div>
+      );
+    }
     return (
       <div className="app">
         <div className="app-header">
