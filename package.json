@@ -6,10 +6,8 @@
     "marked": "^0.3.6",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.1",
-    "promise-polyfill": "^6.0.2",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "whatwg-fetch": "^2.0.3"
+    "react-dom": "^15.5.4"
   },
   "devDependencies": {
     "react-scripts": "1.0.13"
