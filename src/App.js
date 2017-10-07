@@ -81,6 +81,7 @@ class App extends Component {
 
     if (numberOfUnmatchedChars == 0) {
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
+      newState.typedText = '';
       newState.currentPhraseID = this.state.currentPhraseID + 1;
     }
 
