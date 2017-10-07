@@ -10,8 +10,8 @@ class App extends Component {
     super(props);
     this.charsPerWord = 5;
     this.state = {
-      sourceMaterial: [],
-      currentPhrase: '',
+      sourceMaterial: [''],
+      currentPhraseID: 0,
       typedText: ``,
       startTime: null,
       timer: null,
@@ -24,7 +24,7 @@ class App extends Component {
     this.getLesson().then((lessonText) => {
       var phrases = lessonText.split("\n");
       this.setState({ sourceMaterial: phrases });
-      this.setState({ currentPhrase: phrases[0] });
+      this.setState({ currentPhraseID: 0 });
     });
   }
 
@@ -67,7 +67,7 @@ class App extends Component {
       this.startTimer();
     }
 
-    var numberOfMatchedChars = this.calculateMatchedChars(this.state.currentPhrase, typedText);
+    var numberOfMatchedChars = this.calculateMatchedChars(this.state.sourceMaterial[this.state.currentPhraseID], typedText);
 
     this.setState({
       numberOfMatchedChars: numberOfMatchedChars,
@@ -80,7 +80,7 @@ class App extends Component {
     let [matched, unmatched] = matchSplitText(currentPhrase, typedText);
     if (unmatched.length == 0) {
       this.setState({
-        currentPhrase: this.state.sourceMaterial[1]
+        currentPhraseID: this.state.currentPhraseID + 1
       });
       this.stopTimer();
     }
@@ -95,8 +95,8 @@ class App extends Component {
         </div>
         <div className="main">
           <div className="">
-            <Material currentPhrase={this.state.currentPhrase} typedText={this.state.typedText} />
-            <TypedText currentPhrase={this.state.currentPhrase} typedText={this.state.typedText} />
+            <Material currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} />
+            <TypedText currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} />
             <p className="input-text">
               <textarea className="input-textarea" rows="1"
                 onChange={this.updateMarkup.bind(this)}
