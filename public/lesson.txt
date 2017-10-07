@@ -1,2 +1,4 @@
+Lesson 1 Exercise 1
+One-Syllable Words
 'had': HAD
 'half': HAF

@@ -15,10 +15,9 @@ function matchSplitText(material, typedText) {
 function parseLesson(lessonText) {
   console.log("Parsing!");
   var phrasesAndHints = lessonText.split("\n").filter(phrase => phrase !== '');
-    // for (i in 2...lines.length)
     var phrases = [];
     var settings = [];
-    for (var i = 0; i < phrasesAndHints.length; i++) {
+    for (var i = 2; i < phrasesAndHints.length; i++) {
       var line = phrasesAndHints[i];
       var firstChar = line.charAt(0);
 
