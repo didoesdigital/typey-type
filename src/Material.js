@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import matchSplitText from './typey-type';
-import logo from './logo.svg';
 import './App.css';
 
 class Material extends Component {

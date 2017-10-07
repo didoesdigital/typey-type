@@ -3,7 +3,6 @@ import Material from './Material';
 import TypedText from './TypedText';
 import Timer from './Timer';
 import matchSplitText from './typey-type';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
