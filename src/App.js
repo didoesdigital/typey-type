@@ -19,6 +19,29 @@ class App extends Component {
     };
   }
 
+  componentDidMount() {
+    this.getLesson().then((lessonText) => {
+      this.setState({ sourceMaterial: lessonText });
+    });
+  }
+
+  getLesson() {
+    return fetch('/test.txt', {
+      method: "GET",
+      credentials: "same-origin"
+    }).then(function(response) {
+      response.status     //=> number 100–599
+      response.statusText //=> String
+      response.headers    //=> Headers
+      response.url        //=> String
+
+      return response.text()
+    }, function(error) {
+      error.message //=> String
+    })
+
+  }
+
   startTimer() {
     this.intervalID = window.setInterval(this.updateWPM.bind(this), 1000);
   }
