@@ -64,7 +64,8 @@ class App extends Component {
 
     if (this.state.startTime == null) {
       this.setState({
-        startTime: new Date()
+        startTime: new Date(),
+        timer: 0
       });
       this.startTimer();
     }
