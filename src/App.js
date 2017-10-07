@@ -79,6 +79,9 @@ class App extends Component {
   calculateMatchedChars(currentPhrase, typedText) {
     let [matched, unmatched] = matchSplitText(currentPhrase, typedText);
     if (unmatched.length == 0) {
+      this.setState({
+        currentPhrase: this.state.sourceMaterial[1]
+      });
       this.stopTimer();
     }
     return matched.length;
