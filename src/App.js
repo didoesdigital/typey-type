@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Material from './Material';
-import TypedText from './TypedText';
-import Scores from './Scores';
+import Finished from './Finished';
+import Typing from './Typing';
 import matchSplitText from './typey-type';
 import './App.css';
 
@@ -94,32 +93,13 @@ class App extends Component {
   render() {
     if (this.isFinished()) {
       return (
-        <div>
-          <h1>Finished!</h1>
-        </div>
+        <Finished currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} />
+      );
+    } else {
+      return (
+        <Typing updateMarkup={this.updateMarkup.bind(this)} currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} numberOfMatchedWords={this.state.numberOfMatchedWords}/>
       );
     }
-    return (
-      <div className="app">
-        <div className="app-header">
-          <h1>Typey type</h1>
-        </div>
-        <div className="main">
-          <div className="">
-            <Material currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} />
-            <TypedText currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} />
-            <p className="input-text">
-              <textarea className="input-textarea" rows="1"
-                onChange={this.updateMarkup.bind(this)}
-                value={this.state.typedText}
-                >
-              </textarea>
-            </p>
-            <Scores timer={this.state.timer} numberOfMatchedWords={this.state.numberOfMatchedWords}/>
-          </div>
-        </div>
-      </div>
-    );
   }
 }
 
