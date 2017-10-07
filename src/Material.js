@@ -7,8 +7,8 @@ class Material extends Component {
     super(props);
   }
 
-  markUpMaterial(material, typedText) {
-    let [matched, unmatched] = matchSplitText(material, typedText);
+  markUpMaterial(currentPhrase, typedText) {
+    let [matched, unmatched] = matchSplitText(currentPhrase, typedText);
     let matchedMaterialMarkup = `<span class="matched">${matched}</span><span>${unmatched}</span>`;
     return {__html: matchedMaterialMarkup};
   }
@@ -17,7 +17,7 @@ class Material extends Component {
     return (
       <div className="">
         <div>Material:</div>
-        <div className="material" dangerouslySetInnerHTML={this.markUpMaterial(this.props.sourceMaterial, this.props.typedText)} />
+        <div className="material" dangerouslySetInnerHTML={this.markUpMaterial(this.props.currentPhrase, this.props.typedText)} />
       </div>
     );
   }

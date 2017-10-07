@@ -10,7 +10,8 @@ class App extends Component {
     super(props);
     this.charsPerWord = 5;
     this.state = {
-      sourceMaterial: '',
+      sourceMaterial: [],
+      currentPhrase: '',
       typedText: ``,
       startTime: null,
       timer: null,
@@ -21,7 +22,9 @@ class App extends Component {
 
   componentDidMount() {
     this.getLesson().then((lessonText) => {
-      this.setState({ sourceMaterial: lessonText });
+      var phrases = lessonText.split("\n");
+      this.setState({ sourceMaterial: phrases });
+      this.setState({ currentPhrase: phrases[0] });
     });
   }
 
@@ -64,7 +67,7 @@ class App extends Component {
       this.startTimer();
     }
 
-    var numberOfMatchedChars = this.calculateMatchedChars(this.state.sourceMaterial, typedText);
+    var numberOfMatchedChars = this.calculateMatchedChars(this.state.currentPhrase, typedText);
 
     this.setState({
       numberOfMatchedChars: numberOfMatchedChars,
@@ -73,9 +76,9 @@ class App extends Component {
     });
   }
 
-  calculateMatchedChars(material, typedText) {
-    let [matched, unmatched] = matchSplitText(material, typedText);
-    if (unmatched.length == 1) {
+  calculateMatchedChars(currentPhrase, typedText) {
+    let [matched, unmatched] = matchSplitText(currentPhrase, typedText);
+    if (unmatched.length == 0) {
       this.stopTimer();
     }
     return matched.length;
@@ -89,8 +92,8 @@ class App extends Component {
         </div>
         <div className="main">
           <div className="">
-            <Material sourceMaterial={this.state.sourceMaterial} typedText={this.state.typedText} />
-            <TypedText sourceMaterial={this.state.sourceMaterial} typedText={this.state.typedText} />
+            <Material currentPhrase={this.state.currentPhrase} typedText={this.state.typedText} />
+            <TypedText currentPhrase={this.state.currentPhrase} typedText={this.state.typedText} />
             <p className="input-text">
               <textarea className="input-textarea" rows="1"
                 onChange={this.updateMarkup.bind(this)}
