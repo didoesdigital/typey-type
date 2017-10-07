@@ -8,9 +8,9 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.sourceMaterial = `List of longer collection of things`;
     this.charsPerWord = 5;
     this.state = {
+      sourceMaterial: '',
       typedText: ``,
       startTime: null,
       timer: null,
@@ -41,7 +41,7 @@ class App extends Component {
       this.startTimer();
     }
 
-    var numberOfMatchedChars = this.calculateMatchedChars(this.sourceMaterial, typedText);
+    var numberOfMatchedChars = this.calculateMatchedChars(this.state.sourceMaterial, typedText);
 
     this.setState({
       numberOfMatchedChars: numberOfMatchedChars,
@@ -66,8 +66,8 @@ class App extends Component {
         </div>
         <div className="main">
           <div className="">
-            <Material sourceMaterial={this.sourceMaterial} typedText={this.state.typedText} />
-            <TypedText sourceMaterial={this.sourceMaterial} typedText={this.state.typedText} />
+            <Material sourceMaterial={this.state.sourceMaterial} typedText={this.state.typedText} />
+            <TypedText sourceMaterial={this.state.sourceMaterial} typedText={this.state.typedText} />
             <p className="input-text">
               <textarea className="input-textarea" rows="1"
                 onChange={this.updateMarkup.bind(this)}
