@@ -1,2 +1,2 @@
-UX phrase
-penguin phrase
+'had': HAD
+'half': HAF

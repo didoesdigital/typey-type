@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import matchSplitText from './typey-type';
+import {matchSplitText} from './typey-type';
 import './App.css';
 
 class Material extends Component {

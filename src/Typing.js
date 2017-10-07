@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Material from './Material';
 import TypedText from './TypedText';
 import Scores from './Scores';
-// import matchSplitText from './typey-type';
 import './App.css';
 
 class Typing extends Component {

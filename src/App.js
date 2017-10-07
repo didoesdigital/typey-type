@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Finished from './Finished';
 import Typing from './Typing';
-import matchSplitText from './typey-type';
+import {matchSplitText, parseLesson} from './typey-type';
 import './App.css';
 
 class App extends Component {
@@ -22,8 +22,8 @@ class App extends Component {
 
   componentDidMount() {
     this.getLesson().then((lessonText) => {
-      var phrases = lessonText.split("\n").filter(phrase => phrase !== '');
-      this.setState({ sourceMaterial: phrases });
+      var lesson = parseLesson(lessonText);
+      this.setState({ sourceMaterial: lesson.phrases.map(pair => pair[0]) });
       this.setState({ currentPhraseID: 0 });
     });
   }

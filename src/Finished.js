@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Scores from './Scores';
-// import matchSplitText from './typey-type';
 import './App.css';
 
 class Finished extends Component {

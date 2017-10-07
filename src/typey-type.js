@@ -12,4 +12,27 @@ function matchSplitText(material, typedText) {
   return [matched, unmatched];
 }
 
-export default matchSplitText;
+function parseLesson(lessonText) {
+  console.log("Parsing!");
+  var phrasesAndHints = lessonText.split("\n").filter(phrase => phrase !== '');
+    // for (i in 2...lines.length)
+    var phrases = [];
+    var settings = [];
+    for (var i = 0; i < phrasesAndHints.length; i++) {
+      var line = phrasesAndHints[i];
+      var firstChar = line.charAt(0);
+
+      if (firstChar == "'") {
+        var phraseAndHint = line.split("\': ");
+        var phrase = phraseAndHint[0].substring(1, phraseAndHint[0].length);
+        var hint = phraseAndHint[1];
+        phrases.push( [ phrase, hint ] );
+      } else if (line.indexOf("=") != -1) {
+        var optionAndValue = line.split("=");
+        settings.push( [optionAndValue[0], optionAndValue[1]] );
+      }
+    }
+  return { phrases: phrases, settings: settings }
+}
+
+export {matchSplitText, parseLesson};
