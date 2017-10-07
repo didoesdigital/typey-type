@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-class Timer extends Component {
+class Scores extends Component {
   constructor(props) {
     super(props);
   }
@@ -9,7 +9,7 @@ class Timer extends Component {
   calculateWordsPerMinute(timer, numberOfMatchedWords) {
     let wordsPerMinute = Math.round(numberOfMatchedWords/(timer/60/1000));
     let result = `
-      <p>Timer:</p>
+      <p>Time in seconds:</p>
       <p>${Math.round(timer/1000)} seconds</p>
 
       <p>Number of matched words:</p>
@@ -31,7 +31,7 @@ class Timer extends Component {
     } else {
       return (
         <div className="">
-          <p>Timer:</p>
+          <p>Time in seconds:</p>
           <p>&nbsp;</p>
 
           <p>Number of matched words:</p>
@@ -46,4 +46,4 @@ class Timer extends Component {
   }
 }
 
-export default Timer;
+export default Scores;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Material from './Material';
 import TypedText from './TypedText';
-import Timer from './Timer';
+import Scores from './Scores';
 import matchSplitText from './typey-type';
 import './App.css';
 
@@ -98,7 +98,7 @@ class App extends Component {
                 >
               </textarea>
             </p>
-            <Timer timer={this.state.timer} numberOfMatchedWords={this.state.numberOfMatchedWords}/>
+            <Scores timer={this.state.timer} numberOfMatchedWords={this.state.numberOfMatchedWords}/>
           </div>
         </div>
       </div>
