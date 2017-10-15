@@ -16,7 +16,7 @@ class App extends Component {
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
-      lesson: {sourceMaterial: [''], settings: {}, title: 'Loading…', subtitle: 'Loading…' }
+      lesson: {sourceMaterial: [''], settings: {caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '^'}, title: 'Loading…', subtitle: 'Loading…' }
     };
   }
 
@@ -71,7 +71,7 @@ class App extends Component {
     }
 
     let [numberOfMatchedChars, numberOfUnmatchedChars] =
-      matchSplitText(this.state.lesson.sourceMaterial[this.state.currentPhraseID], actualText)
+      matchSplitText(this.state.lesson.sourceMaterial[this.state.currentPhraseID], actualText, this.state.settings)
       .map(text => text.length);
 
     var newState = {
@@ -100,11 +100,28 @@ class App extends Component {
   render() {
     if (this.isFinished()) {
       return (
-        <Finished lessonSubTitle={this.state.lesson.subtitle} lessonTitle={this.state.lesson.title} currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID]} actualText={this.state.actualText} timer={this.state.timer} totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords} />
+        <Finished
+          lessonSubTitle={this.state.lesson.subtitle}
+          lessonTitle={this.state.lesson.title}
+          currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID]}
+          actualText={this.state.actualText}
+          timer={this.state.timer}
+          totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+          settings={this.state.settings}
+          />
       );
     } else {
       return (
-        <Typing lessonSubTitle={this.state.lesson.subtitle} lessonTitle={this.state.lesson.title} updateMarkup={this.updateMarkup.bind(this)} currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID]} actualText={this.state.actualText} timer={this.state.timer} totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}/>
+        <Typing
+          lessonSubTitle={this.state.lesson.subtitle}
+          lessonTitle={this.state.lesson.title}
+          updateMarkup={this.updateMarkup.bind(this)}
+          currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID]}
+          actualText={this.state.actualText}
+          timer={this.state.timer}
+          totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+          settings={this.state.settings}
+          />
       );
     }
   }
