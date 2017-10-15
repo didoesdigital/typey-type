@@ -16,7 +16,8 @@ class App extends Component {
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
-      repeat: false,
+      repeat: true,
+      random: true,
       lesson: {sourceMaterial: [''], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'}, title: 'Loading…', subtitle: 'Loading…' }
     };
   }
@@ -27,9 +28,26 @@ class App extends Component {
       if (this.state.repeat === true) {
         lesson.sourceMaterial = lesson.sourceMaterial.concat(lesson.sourceMaterial).concat(lesson.sourceMaterial);
       }
+      if (this.state.random === true) {
+        lesson.sourceMaterial = this.randomize(lesson.sourceMaterial);
+      }
       this.setState({ lesson: lesson });
       this.setState({ currentPhraseID: 0 });
     });
+  }
+
+  randomize(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    while (0 !== currentIndex) {
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
   }
 
   getLesson(lessonFile = '/lesson.txt') {

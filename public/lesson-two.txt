@@ -4,7 +4,9 @@ Haz Spaces
 'behind': PWE HAOEUPBD or HEUPBD
 'be hind': -B HEUPBD
 'beside': PWE SAOEUD
+'^us': KWRUS
 ignore_characters='^'
+notice_spaces=true
 require_spaces=true
 case_sensitive=true
 warning_message=Hint: use TK-LS between strokes
