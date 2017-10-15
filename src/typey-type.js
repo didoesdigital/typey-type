@@ -1,4 +1,4 @@
-function matchSplitText(expected, actualText, settings={caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '^'}) {
+function matchSplitText(expected, actualText, settings={caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}) {
   let expectedChars = expected.split('');
   let actualTextChars = actualText.split('');
   let charactersMatch;
@@ -47,11 +47,28 @@ function parseLesson(lessonText) {
       phrases.push( [ phrase, hint ] );
     } else if (line.indexOf("=") != -1) {
       var optionAndValue = line.split("=");
-      settings.push( [optionAndValue[0], optionAndValue[1]] );
+      if (optionAndValue[0] === 'case_sensitive') {
+        settings.push(['caseSensitive', optionAndValue[1]]);
+      } else if (optionAndValue[0] === 'require_spaces') {
+        settings.push(['requireSpaces', optionAndValue[1]]);
+      } else if (optionAndValue[0] === 'notice_spaces') {
+        settings.push(['noticeSpaces', optionAndValue[1]]);
+      } else if (optionAndValue[0] === 'ignore_characters') {
+        settings.push(['ignoredChars', optionAndValue[1].substring(1,optionAndValue[1].length-1)]);
+      } else if (optionAndValue[0] === 'warning_message') {
+        settings.push(['customMessage', optionAndValue[1].substring(1,optionAndValue[1].length-1)]);
+      } else if (optionAndValue[0] === 'locales') {
+        settings.push(['locales', optionAndValue[1].substring(1,optionAndValue[1].length)]);
+      }
     }
   }
 
-  return { sourceMaterial: phrases.map(pair => pair[0]), settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
+  let settingsObj = settings.reduce((o, [ key, value ]) => {
+      o[key] = value;
+      return o;
+  }, {});
+
+  return { sourceMaterial: phrases.map(pair => pair[0]), settings: settingsObj, title: lessonTitle, subtitle: lessonSubtitle }
 }
 
 export {matchSplitText, parseLesson};

@@ -16,7 +16,7 @@ class App extends Component {
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
-      lesson: {sourceMaterial: [''], settings: {caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '^'}, title: 'Loading…', subtitle: 'Loading…' }
+      lesson: {sourceMaterial: [''], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}, title: 'Loading…', subtitle: 'Loading…' }
     };
   }
 
@@ -71,7 +71,7 @@ class App extends Component {
     }
 
     let [numberOfMatchedChars, numberOfUnmatchedChars] =
-      matchSplitText(this.state.lesson.sourceMaterial[this.state.currentPhraseID], actualText, this.state.settings)
+      matchSplitText(this.state.lesson.sourceMaterial[this.state.currentPhraseID], actualText, this.state.lesson.settings)
       .map(text => text.length);
 
     var newState = {
@@ -107,7 +107,7 @@ class App extends Component {
           actualText={this.state.actualText}
           timer={this.state.timer}
           totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-          settings={this.state.settings}
+          settings={this.state.lesson.settings}
           />
       );
     } else {
@@ -120,7 +120,7 @@ class App extends Component {
           actualText={this.state.actualText}
           timer={this.state.timer}
           totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-          settings={this.state.settings}
+          settings={this.state.lesson.settings}
           />
       );
     }
