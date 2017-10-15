@@ -1,22 +1,25 @@
 function matchSplitText(material, typedText, matchSettings={caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}) {
   let materialChars = material.split('');
   let typedTextChars = typedText.split('');
-
+  let charactersMatch;
   let i = 0;
 
-  if (matchSettings.caseSensitive === false) {
-    for (; i < typedTextChars.length && i < materialChars.length; i++) {
-      if (typedTextChars[i].toUpperCase() !== materialChars[i].toUpperCase()) {
-        break;
-      }
-    };
+  if (matchSettings.caseSensitive === true) {
+    charactersMatch = function (char1, char2) {
+      return char1 === char2;
+    }
   } else {
-    for (; i < typedTextChars.length && i < materialChars.length; i++) {
-      if (typedTextChars[i] !== materialChars[i]) {
-        break;
-      }
-    };
+    charactersMatch = function (char1, char2) {
+      return char1.toUpperCase() === char2.toUpperCase();
+    }
   }
+
+  for (; i < typedTextChars.length && i < materialChars.length; i++) {
+    if (!charactersMatch(typedTextChars[i], materialChars[i])) {
+      break;
+    }
+  }
+
   let matched = materialChars.slice(0,i).join('');
   let unmatched = materialChars.slice(i).join('');
   return [matched, unmatched];
