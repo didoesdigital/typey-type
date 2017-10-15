@@ -16,6 +16,7 @@ class App extends Component {
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
+      spacePlacement: 'Before Output',
       lesson: {sourceMaterial: [''], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}, title: 'Loading…', subtitle: 'Loading…' }
     };
   }

@@ -6,4 +6,5 @@ One-Syllable Words
 'Hag': KPA*/HAG
 'half': HAF
 ignore_characters='^'
+notice_spaces=false
 case_sensitive=true

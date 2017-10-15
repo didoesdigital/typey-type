@@ -1,4 +1,4 @@
-function matchSplitText(expected, actualText, settings={caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}) {
+function matchSplitText(expected, actualText, settings={spacePlacement: 'Before Output', caseSensitive: true, requireSpaces: false, noticeSpaces: true, ignoredChars: ''}) {
   let expectedChars = expected.split('');
   let actualTextChars = actualText.split('');
   let charactersMatch;
@@ -16,7 +16,18 @@ function matchSplitText(expected, actualText, settings={caseSensitive: true, req
   }
 
   for (; actualTextIndex < actualTextChars.length && expectedIndex < expectedChars.length; expectedIndex++, actualTextIndex++) {
-    while(settings.ignoredChars.indexOf(expectedChars[expectedIndex]) !== -1 && expectedIndex < expectedChars.length) { expectedIndex++ };
+    while(settings.ignoredChars.indexOf(expectedChars[expectedIndex]) !== -1) {
+      expectedIndex++;
+      if (expectedIndex >= expectedChars.length) {
+        break;
+      };
+    }
+    while(settings.noticeSpaces === false && actualTextChars[actualTextIndex] === ' ') {
+      actualTextIndex++
+      if (actualTextIndex >= actualTextChars.length) {
+        break;
+      }
+    };
     if (!charactersMatch(actualTextChars[actualTextIndex], expectedChars[expectedIndex])) {
       break;
     }
