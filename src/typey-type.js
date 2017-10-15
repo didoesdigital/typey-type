@@ -1,6 +1,6 @@
-function matchSplitText(material, typedText, matchSettings={caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}) {
-  let materialChars = material.split('');
-  let typedTextChars = typedText.split('');
+function matchSplitText(expected, actualText, matchSettings={caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '^'}) {
+  let expectedChars = expected.split('');
+  let actualTextChars = actualText.split('');
   let charactersMatch;
   let i = 0;
 
@@ -14,14 +14,14 @@ function matchSplitText(material, typedText, matchSettings={caseSensitive: true,
     }
   }
 
-  for (; i < typedTextChars.length && i < materialChars.length; i++) {
-    if (!charactersMatch(typedTextChars[i], materialChars[i])) {
+  for (; i < actualTextChars.length && i < expectedChars.length; i++) {
+    if (!charactersMatch(actualTextChars[i], expectedChars[i])) {
       break;
     }
   }
 
-  let matched = materialChars.slice(0,i).join('');
-  let unmatched = materialChars.slice(i).join('');
+  let matched = expectedChars.slice(0,i).join('');
+  let unmatched = expectedChars.slice(i).join('');
   return [matched, unmatched];
 }
 

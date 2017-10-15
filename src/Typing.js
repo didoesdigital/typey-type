@@ -19,12 +19,12 @@ class Typing extends Component {
         </div>
         <div className="main">
           <div className="">
-            <Material currentPhrase={this.props.currentPhrase} typedText={this.props.typedText} />
-            <TypedText currentPhrase={this.props.currentPhrase} typedText={this.props.typedText} />
+            <Material currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} />
+            <TypedText currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} />
             <p className="input-text">
               <textarea className="input-textarea" rows="1"
                 onChange={this.props.updateMarkup}
-                value={this.props.typedText}
+                value={this.props.actualText}
                 >
               </textarea>
             </p>

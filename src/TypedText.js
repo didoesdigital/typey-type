@@ -17,7 +17,7 @@ class TypedText extends Component {
     return (
       <div className="">
         <div>Typed:</div>
-        <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.typedText, this.props.currentPhrase)} />
+        <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.actualText, this.props.currentPhrase)} />
       </div>
     );
   }
