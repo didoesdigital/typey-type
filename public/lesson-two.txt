@@ -7,3 +7,4 @@ Haz Spaces
 ignore_characters='^'
 require_spaces=true
 case_sensitive=true
+warning_message=Hint: use TK-LS between strokes
