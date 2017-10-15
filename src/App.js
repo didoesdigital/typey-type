@@ -16,7 +16,7 @@ class App extends Component {
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
-      lesson: {sourceMaterial: [''], settings: {}, title: '', subtitle: '' }
+      lesson: {sourceMaterial: [''], settings: {}, title: 'Loading…', subtitle: 'Loading…' }
     };
   }
 
@@ -25,8 +25,6 @@ class App extends Component {
       var lesson = parseLesson(lessonText);
       this.setState({ lesson: lesson });
       this.setState({ currentPhraseID: 0 });
-      // this.setState({ title: lessonTitle });
-      // this.setState({ subtitle: lessonSubtitle });
     });
   }
 
@@ -102,11 +100,11 @@ class App extends Component {
   render() {
     if (this.isFinished()) {
       return (
-        <Finished currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords} />
+        <Finished lessonSubTitle={this.state.lesson.subtitle} lessonTitle={this.state.lesson.title} currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords} />
       );
     } else {
       return (
-        <Typing updateMarkup={this.updateMarkup.bind(this)} currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}/>
+        <Typing lessonSubTitle={this.state.lesson.subtitle} lessonTitle={this.state.lesson.title} updateMarkup={this.updateMarkup.bind(this)} currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}/>
       );
     }
   }
