@@ -7,8 +7,8 @@ class TypedText extends Component {
     super(props);
   }
 
-  markUpTypedText(typedText, remainingText) {
-    let [matched, unmatched] = matchSplitText(typedText, remainingText);
+  markUpTypedText(currentPhrase, actualText) {
+    let [_, __, matched, unmatched] = matchSplitText(currentPhrase, actualText);
     let matchedTypedTextMarkup = `<span class="matched">${matched}</span><span class="unmatched">${unmatched}</span>`;
     return {__html: matchedTypedTextMarkup};
   }
@@ -17,7 +17,7 @@ class TypedText extends Component {
     return (
       <div className="">
         <div>Typed:</div>
-        <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.actualText, this.props.currentPhrase)} />
+        <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText)} />
       </div>
     );
   }

@@ -2,7 +2,8 @@ function matchSplitText(expected, actualText, matchSettings={caseSensitive: true
   let expectedChars = expected.split('');
   let actualTextChars = actualText.split('');
   let charactersMatch;
-  let i = 0;
+  let expectedIndex = 0;
+  let actualTextIndex = 0;
 
   if (matchSettings.caseSensitive === true) {
     charactersMatch = function (char1, char2) {
@@ -14,15 +15,18 @@ function matchSplitText(expected, actualText, matchSettings={caseSensitive: true
     }
   }
 
-  for (; i < actualTextChars.length && i < expectedChars.length; i++) {
-    if (!charactersMatch(actualTextChars[i], expectedChars[i])) {
+  for (; actualTextIndex < actualTextChars.length && expectedIndex < expectedChars.length; expectedIndex++, actualTextIndex++) {
+    while(matchSettings.ignoredChars.indexOf(expectedChars[expectedIndex]) !== -1 && expectedIndex < expectedChars.length) { expectedIndex++ };
+    if (!charactersMatch(actualTextChars[actualTextIndex], expectedChars[expectedIndex])) {
       break;
     }
   }
 
-  let matched = expectedChars.slice(0,i).join('');
-  let unmatched = expectedChars.slice(i).join('');
-  return [matched, unmatched];
+  let matchedExpected = expectedChars.slice(0,expectedIndex).join('');
+  let unmatchedExpected = expectedChars.slice(expectedIndex).join('');
+  let matchedActual = actualTextChars.slice(0,actualTextIndex).join('');
+  let unmatchedActual = actualTextChars.slice(actualTextIndex).join('');
+  return [matchedExpected, unmatchedExpected, matchedActual, unmatchedActual];
 }
 
 function parseLesson(lessonText) {

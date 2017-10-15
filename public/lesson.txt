@@ -1,5 +1,7 @@
 Lesson 1 Exercise 1
 One-Syllable Words
 'had': HAD
+'^us': KWRUS
+'teft^us': teft/KWRUS
 'Hag': KPA*/HAG
 'half': HAF
