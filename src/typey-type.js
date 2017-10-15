@@ -41,7 +41,7 @@ const SETTINGS_NAME_MAP = {
 function parseLesson(lessonText) {
   var lines = lessonText.split("\n").filter(phrase => phrase !== '');
   var phrases = [];
-  var settings = [];
+  var settings = {};
   var lessonTitle = lines[0];
   var lessonSubtitle = lines[1];
 
@@ -56,16 +56,13 @@ function parseLesson(lessonText) {
       phrases.push( [ phrase, hint ] );
     } else if (line.indexOf("=") != -1) {
       var optionAndValue = line.split("=");
-      settings.push([SETTINGS_NAME_MAP[optionAndValue[0]], optionAndValue[1].replace(/'/g, "")]);
+      var value = optionAndValue[1].replace(/'/g, "");
+      if (value == "true") { value = true; } else if (value == "false") { value = false; }
+      settings[SETTINGS_NAME_MAP[optionAndValue[0]]] = value;
     }
   }
 
-  let settingsObj = settings.reduce((o, [ key, value ]) => {
-      o[key] = value;
-      return o;
-  }, {});
-
-  return { sourceMaterial: phrases.map(pair => pair[0]), settings: settingsObj, title: lessonTitle, subtitle: lessonSubtitle }
+  return { sourceMaterial: phrases.map(pair => pair[0]), settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
 }
 
 export {matchSplitText, parseLesson};
