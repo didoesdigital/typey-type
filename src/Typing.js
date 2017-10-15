@@ -5,10 +5,6 @@ import Scores from './Scores';
 import './App.css';
 
 class Typing extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="app">

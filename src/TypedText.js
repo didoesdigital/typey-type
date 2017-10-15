@@ -3,12 +3,10 @@ import {matchSplitText} from './typey-type';
 import './App.css';
 
 class TypedText extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   markUpTypedText(currentPhrase, actualText, settings) {
-    let [_, __, matched, unmatched] = matchSplitText(currentPhrase, actualText, settings);
+    let array = matchSplitText(currentPhrase, actualText, settings);
+    let matched = array[2];
+    let unmatched = array[3];
     let matchedTypedTextMarkup = `<span class="matched">${matched}</span><span class="unmatched">${unmatched}</span>`;
     return {__html: matchedTypedTextMarkup};
   }

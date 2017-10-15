@@ -32,15 +32,10 @@ class App extends Component {
     return fetch('/lesson.txt', {
       method: "GET",
       credentials: "same-origin"
-    }).then(function(response) {
-      response.status     //=> number 100–599
-      response.statusText //=> String
-      response.headers    //=> Headers
-      response.url        //=> String
-
+    }).then((response) => {
       return response.text()
     }, function(error) {
-      error.message //=> String
+      return error.message
     })
 
   }
@@ -62,7 +57,7 @@ class App extends Component {
   updateMarkup(event) {
     const actualText = event.target.value;
 
-    if (this.state.startTime == null) {
+    if (this.state.startTime === null) {
       this.setState({
         startTime: new Date(),
         timer: 0
@@ -80,7 +75,7 @@ class App extends Component {
       actualText: actualText
     };
 
-    if (numberOfUnmatchedChars == 0) {
+    if (numberOfUnmatchedChars === 0) {
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
       newState.actualText = '';
       newState.currentPhraseID = this.state.currentPhraseID + 1;
@@ -94,7 +89,7 @@ class App extends Component {
   }
 
   isFinished() {
-    return (this.state.currentPhraseID == this.state.lesson.sourceMaterial.length);
+    return (this.state.currentPhraseID === this.state.lesson.sourceMaterial.length);
   }
 
   render() {

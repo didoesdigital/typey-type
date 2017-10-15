@@ -3,10 +3,6 @@ import {matchSplitText} from './typey-type';
 import './App.css';
 
 class Material extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   markUpMaterial(currentPhrase, actualText, settings) {
     let [matched, unmatched] = matchSplitText(currentPhrase, actualText, settings);
     let matchedMaterialMarkup = `<span class="matched">${matched}</span><span>${unmatched}</span>`;

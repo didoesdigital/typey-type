@@ -49,15 +49,15 @@ function parseLesson(lessonText) {
     var line = lines[i];
     var firstChar = line.charAt(0);
 
-    if (firstChar == "'") {
-      var phraseAndHint = line.split("\': ");
+    if (firstChar === "'") {
+      var phraseAndHint = line.split("': ");
       var phrase = phraseAndHint[0].substring(1, phraseAndHint[0].length);
       var hint = phraseAndHint[1];
       phrases.push( [ phrase, hint ] );
-    } else if (line.indexOf("=") != -1) {
+    } else if (line.indexOf("=") !== -1) {
       var optionAndValue = line.split("=");
       var value = optionAndValue[1].replace(/'/g, "");
-      if (value == "true") { value = true; } else if (value == "false") { value = false; }
+      if (value === "true") { value = true; } else if (value === "false") { value = false; }
       settings[SETTINGS_NAME_MAP[optionAndValue[0]]] = value;
     }
   }

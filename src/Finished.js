@@ -3,10 +3,6 @@ import Scores from './Scores';
 import './App.css';
 
 class Finished extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="app">

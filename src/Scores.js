@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 
 class Scores extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   calculateScores(timer, totalNumberOfMatchedWords) {
     let wordsPerMinute;
     if (this.props.timer > 0) {
