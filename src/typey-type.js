@@ -1,12 +1,22 @@
-function matchSplitText(material, typedText) {
+function matchSplitText(material, typedText, matchSettings={caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}) {
   let materialChars = material.split('');
   let typedTextChars = typedText.split('');
+
   let i = 0;
-  for (; i < typedTextChars.length; i++) {
-    if (typedTextChars[i] !== materialChars[i]) {
-      break;
-    }
-  };
+
+  if (matchSettings.caseSensitive === false) {
+    for (; i < typedTextChars.length && i < materialChars.length; i++) {
+      if (typedTextChars[i].toUpperCase() !== materialChars[i].toUpperCase()) {
+        break;
+      }
+    };
+  } else {
+    for (; i < typedTextChars.length && i < materialChars.length; i++) {
+      if (typedTextChars[i] !== materialChars[i]) {
+        break;
+      }
+    };
+  }
   let matched = materialChars.slice(0,i).join('');
   let unmatched = materialChars.slice(i).join('');
   return [matched, unmatched];
