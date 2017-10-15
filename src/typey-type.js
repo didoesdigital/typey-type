@@ -29,6 +29,15 @@ function matchSplitText(expected, actualText, settings={caseSensitive: true, req
   return [matchedExpected, unmatchedExpected, matchedActual, unmatchedActual];
 }
 
+const SETTINGS_NAME_MAP = {
+  case_sensitive: 'caseSensitive',
+  require_spaces: 'requireSpaces',
+  notice_spaces: 'noticeSpaces',
+  ignore_characters: 'ignoredChars',
+  warning_message: 'customMessage',
+  locales: 'locales'
+}
+
 function parseLesson(lessonText) {
   var lines = lessonText.split("\n").filter(phrase => phrase !== '');
   var phrases = [];
@@ -47,19 +56,7 @@ function parseLesson(lessonText) {
       phrases.push( [ phrase, hint ] );
     } else if (line.indexOf("=") != -1) {
       var optionAndValue = line.split("=");
-      if (optionAndValue[0] === 'case_sensitive') {
-        settings.push(['caseSensitive', optionAndValue[1]]);
-      } else if (optionAndValue[0] === 'require_spaces') {
-        settings.push(['requireSpaces', optionAndValue[1]]);
-      } else if (optionAndValue[0] === 'notice_spaces') {
-        settings.push(['noticeSpaces', optionAndValue[1]]);
-      } else if (optionAndValue[0] === 'ignore_characters') {
-        settings.push(['ignoredChars', optionAndValue[1].substring(1,optionAndValue[1].length-1)]);
-      } else if (optionAndValue[0] === 'warning_message') {
-        settings.push(['customMessage', optionAndValue[1].substring(1,optionAndValue[1].length-1)]);
-      } else if (optionAndValue[0] === 'locales') {
-        settings.push(['locales', optionAndValue[1].substring(1,optionAndValue[1].length)]);
-      }
+      settings.push([SETTINGS_NAME_MAP[optionAndValue[0]], optionAndValue[1].replace(/'/g, "")]);
     }
   }
 
