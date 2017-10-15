@@ -16,6 +16,7 @@ class App extends Component {
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
+      repeat: false,
       lesson: {sourceMaterial: [''], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'}, title: 'Loading…', subtitle: 'Loading…' }
     };
   }
@@ -23,6 +24,9 @@ class App extends Component {
   componentDidMount() {
     this.getLesson().then((lessonText) => {
       var lesson = parseLesson(lessonText);
+      if (this.state.repeat === true) {
+        lesson.sourceMaterial = lesson.sourceMaterial.concat(lesson.sourceMaterial).concat(lesson.sourceMaterial);
+      }
       this.setState({ lesson: lesson });
       this.setState({ currentPhraseID: 0 });
     });
