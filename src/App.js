@@ -28,8 +28,8 @@ class App extends Component {
     });
   }
 
-  getLesson() {
-    return fetch('/lesson.txt', {
+  getLesson(lessonFile = '/lesson.txt') {
+    return fetch(lessonFile, {
       method: "GET",
       credentials: "same-origin"
     }).then((response) => {
@@ -52,6 +52,24 @@ class App extends Component {
     this.setState({
       timer: new Date() - this.state.startTime
     });
+  }
+
+  handleLesson(event) {
+    this.getLesson(event.target.href).then((lessonText) => {
+      var lesson = parseLesson(lessonText);
+      this.stopTimer();
+      this.setState({
+        lesson: lesson,
+        currentPhraseID: 0,
+        actualText: ``,
+        startTime: null,
+        timer: null,
+        totalNumberOfMatchedWords: 0,
+        numberOfMatchedChars: 0,
+        totalNumberOfMatchedChars: 0
+      });
+    });
+    event.preventDefault();
   }
 
   updateMarkup(event) {
@@ -103,6 +121,7 @@ class App extends Component {
           timer={this.state.timer}
           totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
           settings={this.state.lesson.settings}
+          getLesson={this.handleLesson.bind(this)}
           />
       );
     } else {
@@ -116,6 +135,7 @@ class App extends Component {
           timer={this.state.timer}
           totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
           settings={this.state.lesson.settings}
+          getLesson={this.handleLesson.bind(this)}
           />
       );
     }

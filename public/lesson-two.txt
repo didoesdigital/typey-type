@@ -1,0 +1,9 @@
+Lesson 2
+Haz Spaces
+'be kind': -B KAOEUPBD
+'behind': PWE HAOEUPBD or HEUPBD
+'be hind': -B HEUPBD
+'beside': PWE SAOEUD
+ignore_characters='^'
+require_spaces=true
+case_sensitive=true
