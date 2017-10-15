@@ -1,4 +1,9 @@
 function matchSplitText(expected, actualText, settings={spacePlacement: 'Before Output', caseSensitive: true, requireSpaces: false, noticeSpaces: true, ignoredChars: ''}) {
+  if (settings.requireSpaces === true && settings.spacePlacement === 'Before Output') {
+    expected = ' '+expected;
+  } else if (settings.requireSpaces === true && settings.spacePlacement === 'After Output') {
+    expected = expected+' ';
+  }
   let expectedChars = expected.split('');
   let actualTextChars = actualText.split('');
   let charactersMatch;
@@ -27,7 +32,7 @@ function matchSplitText(expected, actualText, settings={spacePlacement: 'Before 
       if (actualTextIndex >= actualTextChars.length) {
         break;
       }
-    };
+    }
     if (!charactersMatch(actualTextChars[actualTextIndex], expectedChars[expectedIndex])) {
       break;
     }
@@ -52,7 +57,7 @@ const SETTINGS_NAME_MAP = {
 function parseLesson(lessonText) {
   var lines = lessonText.split("\n").filter(phrase => phrase !== '');
   var phrases = [];
-  var settings = {};
+  var settings = {caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'};
   var lessonTitle = lines[0];
   var lessonSubtitle = lines[1];
 
