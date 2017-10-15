@@ -9,7 +9,6 @@ class App extends Component {
     super(props);
     this.charsPerWord = 5;
     this.state = {
-      sourceMaterial: [''],
       currentPhraseID: 0,
       typedText: ``,
       startTime: null,
@@ -17,7 +16,7 @@ class App extends Component {
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
-      lesson: {}
+      lesson: {sourceMaterial: [''], settings: {}, title: '', subtitle: '' }
     };
   }
 
@@ -25,8 +24,9 @@ class App extends Component {
     this.getLesson().then((lessonText) => {
       var lesson = parseLesson(lessonText);
       this.setState({ lesson: lesson });
-      this.setState({ sourceMaterial: lesson.phrases.map(pair => pair[0]) });
       this.setState({ currentPhraseID: 0 });
+      // this.setState({ title: lessonTitle });
+      // this.setState({ subtitle: lessonSubtitle });
     });
   }
 
@@ -73,7 +73,7 @@ class App extends Component {
     }
 
     let [numberOfMatchedChars, numberOfUnmatchedChars] =
-      matchSplitText(this.state.sourceMaterial[this.state.currentPhraseID], typedText)
+      matchSplitText(this.state.lesson.sourceMaterial[this.state.currentPhraseID], typedText)
       .map(text => text.length);
 
     var newState = {
@@ -96,17 +96,17 @@ class App extends Component {
   }
 
   isFinished() {
-    return (this.state.currentPhraseID == this.state.sourceMaterial.length);
+    return (this.state.currentPhraseID == this.state.lesson.sourceMaterial.length);
   }
 
   render() {
     if (this.isFinished()) {
       return (
-        <Finished currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords} />
+        <Finished currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords} />
       );
     } else {
       return (
-        <Typing updateMarkup={this.updateMarkup.bind(this)} currentPhrase={this.state.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}/>
+        <Typing updateMarkup={this.updateMarkup.bind(this)} currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID]} typedText={this.state.typedText} timer={this.state.timer} totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}/>
       );
     }
   }

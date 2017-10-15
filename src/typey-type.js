@@ -13,14 +13,14 @@ function matchSplitText(material, typedText) {
 }
 
 function parseLesson(lessonText) {
-  var phrasesAndHints = lessonText.split("\n").filter(phrase => phrase !== '');
+  var lines = lessonText.split("\n").filter(phrase => phrase !== '');
   var phrases = [];
   var settings = [];
-  var lessonTitle = phrasesAndHints[0];
-  var lessonSubtitle = phrasesAndHints[1];
+  var lessonTitle = lines[0];
+  var lessonSubtitle = lines[1];
 
-  for (var i = 2; i < phrasesAndHints.length; i++) {
-    var line = phrasesAndHints[i];
+  for (var i = 2; i < lines.length; i++) {
+    var line = lines[i];
     var firstChar = line.charAt(0);
 
     if (firstChar == "'") {
@@ -34,7 +34,7 @@ function parseLesson(lessonText) {
     }
   }
 
-  return { phrases: phrases, settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
+  return { sourceMaterial: phrases.map(pair => pair[0]), settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
 }
 
 export {matchSplitText, parseLesson};
