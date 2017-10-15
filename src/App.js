@@ -33,11 +33,11 @@ class App extends Component {
       method: "GET",
       credentials: "same-origin"
     }).then((response) => {
-      return response.text()
+      return response.text();
     }, function(error) {
-      return error.message
-    })
-
+      console.log(error);
+      return error.message;
+    });
   }
 
   startTimer() {
