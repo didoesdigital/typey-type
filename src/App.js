@@ -152,6 +152,7 @@ class App extends Component {
           lessonTitle={this.state.lesson.title}
           updateMarkup={this.updateMarkup.bind(this)}
           currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID].phrase}
+          currentStroke={this.state.lesson.sourceMaterial[this.state.currentPhraseID].stroke}
           actualText={this.state.actualText}
           timer={this.state.timer}
           totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}

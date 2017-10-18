@@ -28,7 +28,7 @@ class Typing extends Component {
         </div>
         <div className="main">
           <div className="">
-            <Material currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} settings={this.props.settings} />
+            <Material currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} settings={this.props.settings} currentStroke={this.props.currentStroke} />
             <TypedText currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} settings={this.props.settings} />
             <p className="input-text">
               <textarea className="input-textarea" rows="1"
