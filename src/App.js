@@ -138,7 +138,6 @@ class App extends Component {
         <Finished
           lessonSubTitle={this.state.lesson.subtitle}
           lessonTitle={this.state.lesson.title}
-          currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID].phrase}
           actualText={this.state.actualText}
           timer={this.state.timer}
           totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
