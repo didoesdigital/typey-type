@@ -66,10 +66,10 @@ function parseLesson(lessonText) {
     var firstChar = line.charAt(0);
 
     if (firstChar === "'") {
-      var phraseAndHint = line.split("': ");
-      var phrase = phraseAndHint[0].substring(1, phraseAndHint[0].length);
-      var hint = phraseAndHint[1];
-      phrases.push( [ phrase, hint ] );
+      var phraseAndStroke = line.split("': ");
+      var phrase = phraseAndStroke[0].substring(1, phraseAndStroke[0].length);
+      var stroke = phraseAndStroke[1];
+      phrases.push( [ phrase, stroke ] );
     } else if (line.indexOf("=") !== -1) {
       var optionAndValue = line.split("=");
       var value = optionAndValue[1].replace(/'/g, "");
@@ -78,7 +78,7 @@ function parseLesson(lessonText) {
     }
   }
 
-  return { sourceMaterial: phrases.map(pair => pair[0]), settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
+  return { sourceMaterial: phrases.map(pair => pair[0]), strokes: phrases.map(pair => pair[1]), settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
 }
 
 export {matchSplitText, parseLesson};

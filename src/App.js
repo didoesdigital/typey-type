@@ -18,7 +18,7 @@ class App extends Component {
       totalNumberOfMatchedChars: 0,
       random: (window.location.hash === "#random") ? true : false,
       repeat: (window.location.hash === "#repeat") ? true : false,
-      lesson: {sourceMaterial: [''], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'}, title: 'Loading…', subtitle: 'Loading…' }
+      lesson: {sourceMaterial: [''], strokes: [''], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'}, title: 'Loading…', subtitle: 'Loading…' }
     };
   }
 
