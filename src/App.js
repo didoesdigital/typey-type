@@ -18,7 +18,7 @@ class App extends Component {
       totalNumberOfMatchedChars: 0,
       random: (window.location.hash === "#random") ? true : false,
       repeat: (window.location.hash === "#repeat") ? true : false,
-      lesson: {sourceMaterial: [''], strokes: [''], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'}, title: 'Loading…', subtitle: 'Loading…' }
+      lesson: {sourceMaterial: [{phrase: '', stroke: ''}], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'}, title: 'Loading…', subtitle: 'Loading…' }
     };
   }
 
@@ -106,7 +106,7 @@ class App extends Component {
     }
 
     let [numberOfMatchedChars, numberOfUnmatchedChars] =
-      matchSplitText(this.state.lesson.sourceMaterial[this.state.currentPhraseID], actualText, this.state.lesson.settings)
+      matchSplitText(this.state.lesson.sourceMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings)
       .map(text => text.length);
 
     var newState = {
@@ -138,7 +138,7 @@ class App extends Component {
         <Finished
           lessonSubTitle={this.state.lesson.subtitle}
           lessonTitle={this.state.lesson.title}
-          currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID]}
+          currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID].phrase}
           actualText={this.state.actualText}
           timer={this.state.timer}
           totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
@@ -152,7 +152,7 @@ class App extends Component {
           lessonSubTitle={this.state.lesson.subtitle}
           lessonTitle={this.state.lesson.title}
           updateMarkup={this.updateMarkup.bind(this)}
-          currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID]}
+          currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID].phrase}
           actualText={this.state.actualText}
           timer={this.state.timer}
           totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}

@@ -56,7 +56,7 @@ const SETTINGS_NAME_MAP = {
 
 function parseLesson(lessonText) {
   var lines = lessonText.split("\n").filter(phrase => phrase !== '');
-  var phrases = [];
+  var sourceMaterial = [];
   var settings = {caseSensitive: false, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'};
   var lessonTitle = lines[0];
   var lessonSubtitle = lines[1];
@@ -69,7 +69,7 @@ function parseLesson(lessonText) {
       var phraseAndStroke = line.split("': ");
       var phrase = phraseAndStroke[0].substring(1, phraseAndStroke[0].length);
       var stroke = phraseAndStroke[1];
-      phrases.push( [ phrase, stroke ] );
+      sourceMaterial.push( {phrase: phrase, stroke: stroke} );
     } else if (line.indexOf("=") !== -1) {
       var optionAndValue = line.split("=");
       var value = optionAndValue[1].replace(/'/g, "");
@@ -78,7 +78,7 @@ function parseLesson(lessonText) {
     }
   }
 
-  return { sourceMaterial: phrases.map(pair => pair[0]), strokes: phrases.map(pair => pair[1]), settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
+  return { sourceMaterial: sourceMaterial, settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
 }
 
 export {matchSplitText, parseLesson};
