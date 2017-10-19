@@ -27,8 +27,23 @@ class Typing extends Component {
           </nav>
         </div>
         <div className="main">
+          <div>
+            <fieldset>
+              <legend>Settings</legend>
+              <div className="checkbox">
+                <label htmlFor="checkbox-1-id">Show strokes</label>
+                <input
+                  type="checkbox"
+                  name="showStrokes"
+                  id="showStrokes"
+                  checked={this.props.userSettings.showStrokes}
+                  onChange={this.props.changeUserSettings}
+                  />
+              </div>
+            </fieldset>
+          </div>
           <div className="">
-            <Material currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} settings={this.props.settings} currentStroke={this.props.currentStroke} />
+            <Material currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} userSettings={this.props.userSettings} settings={this.props.settings} currentStroke={this.props.currentStroke} />
             <TypedText currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} settings={this.props.settings} />
             <p className="input-text">
               <textarea className="input-textarea" rows="1"

@@ -16,6 +16,9 @@ class App extends Component {
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
+      userSettings: {
+        showStrokes: true
+      },
       random: (window.location.hash === "#random") ? true : false,
       repeat: (window.location.hash === "#repeat") ? true : false,
       lesson: {sourceMaterial: [{phrase: '', stroke: ''}], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'}, title: 'Loading…', subtitle: 'Loading…' }
@@ -74,6 +77,19 @@ class App extends Component {
     this.setState({
       timer: new Date() - this.state.startTime
     });
+  }
+
+  changeUserSettings(event) {
+    let currentState = this.state.userSettings;
+    let newState = Object.assign({}, currentState);
+
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    newState.showStrokes = value;
+
+    this.setState({userSettings: newState});
   }
 
   handleLesson(event) {
@@ -157,6 +173,8 @@ class App extends Component {
           timer={this.state.timer}
           totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
           settings={this.state.lesson.settings}
+          userSettings={this.state.userSettings}
+          changeUserSettings={this.changeUserSettings.bind(this)}
           getLesson={this.handleLesson.bind(this)}
           />
       );

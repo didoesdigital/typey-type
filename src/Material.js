@@ -3,11 +3,18 @@ import {matchSplitText} from './typey-type';
 import './App.css';
 
 class Material extends Component {
-  markUpMaterial(currentPhrase, actualText, settings, currentStroke) {
+  markUpMaterial(currentPhrase, actualText, settings) {
     let [matched, unmatched] = matchSplitText(currentPhrase, actualText, settings);
-    let matchedMaterialMarkup = `<span class="matched">${matched}</span><span>${unmatched}</span>
+    let matchedMaterialMarkup;
+
+    if (this.props.userSettings.showStrokes) {
+      matchedMaterialMarkup = `<span class="matched">${matched}</span><span>${unmatched}</span>
       <br>
-      <span>Stroke: ${currentStroke}</span>`;
+      <span>Stroke: ${this.props.currentStroke}</span>`;
+    } else {
+      matchedMaterialMarkup = `<span class="matched">${matched}</span><span>${unmatched}</span>`;
+    }
+
     return {__html: matchedMaterialMarkup};
   }
 
