@@ -7,7 +7,7 @@ class TypedText extends Component {
     let array = matchSplitText(currentPhrase, actualText, settings);
     let matched = array[2];
     let unmatched = array[3];
-    let matchedTypedTextMarkup = `<span aria-hidden="true">&#8203;</span><span class="matched">${matched}</span><span class="unmatched">${unmatched}</span>`;
+    let matchedTypedTextMarkup = `<pre><span aria-hidden="true">&#8203;</span><span class="matched">${matched}</span><span class="unmatched">${unmatched}</span></pre>`;
     return {__html: matchedTypedTextMarkup};
   }
 

@@ -8,11 +8,10 @@ class Material extends Component {
     let matchedMaterialMarkup;
 
     if (this.props.userSettings.showStrokes) {
-      matchedMaterialMarkup = `<span class="matched">${matched}</span><span>${unmatched}</span>
-      <br>
-      <span>Stroke: ${this.props.currentStroke}</span>`;
+      matchedMaterialMarkup = `<pre><span class="matched">${matched}</span><span>${unmatched}</span></pre>
+      <span>Stroke: <pre>${this.props.currentStroke}</pre></span>`;
     } else {
-      matchedMaterialMarkup = `<span class="matched">${matched}</span><span>${unmatched}</span>`;
+      matchedMaterialMarkup = `<pre><span class="matched">${matched}</span><span>${unmatched}</span></pre>`;
     }
 
     return {__html: matchedMaterialMarkup};
