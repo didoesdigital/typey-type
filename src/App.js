@@ -163,8 +163,6 @@ class App extends Component {
             <Finished
               actualText={this.state.actualText}
               getLesson={this.handleLesson.bind(this)}
-              lessonSubTitle={this.state.lesson.subtitle}
-              lessonTitle={this.state.lesson.title}
               settings={this.state.lesson.settings}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
@@ -188,8 +186,6 @@ class App extends Component {
               currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID].phrase}
               currentStroke={this.state.lesson.sourceMaterial[this.state.currentPhraseID].stroke}
               getLesson={this.handleLesson.bind(this)}
-              lessonSubTitle={this.state.lesson.subtitle}
-              lessonTitle={this.state.lesson.title}
               settings={this.state.lesson.settings}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
