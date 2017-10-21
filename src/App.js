@@ -161,13 +161,13 @@ class App extends Component {
           />
           <div className="main">
             <Finished
+              actualText={this.state.actualText}
+              getLesson={this.handleLesson.bind(this)}
               lessonSubTitle={this.state.lesson.subtitle}
               lessonTitle={this.state.lesson.title}
-              actualText={this.state.actualText}
+              settings={this.state.lesson.settings}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-              settings={this.state.lesson.settings}
-              getLesson={this.handleLesson.bind(this)}
               />
           </div>
         </div>
@@ -176,25 +176,25 @@ class App extends Component {
       return (
         <div className="app">
           <Header
+            getLesson={this.handleLesson.bind(this)}
             lessonSubTitle={this.state.lesson.subtitle}
             lessonTitle={this.state.lesson.title}
-            getLesson={this.handleLesson.bind(this)}
             settings={this.state.lesson.settings}
           />
           <div className="main">
             <Typing
-              lessonSubTitle={this.state.lesson.subtitle}
-              lessonTitle={this.state.lesson.title}
-              updateMarkup={this.updateMarkup.bind(this)}
+              actualText={this.state.actualText}
+              changeUserSettings={this.changeUserSettings.bind(this)}
               currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID].phrase}
               currentStroke={this.state.lesson.sourceMaterial[this.state.currentPhraseID].stroke}
-              actualText={this.state.actualText}
+              getLesson={this.handleLesson.bind(this)}
+              lessonSubTitle={this.state.lesson.subtitle}
+              lessonTitle={this.state.lesson.title}
+              settings={this.state.lesson.settings}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-              settings={this.state.lesson.settings}
+              updateMarkup={this.updateMarkup.bind(this)}
               userSettings={this.state.userSettings}
-              changeUserSettings={this.changeUserSettings.bind(this)}
-              getLesson={this.handleLesson.bind(this)}
               />
           </div>
         </div>
