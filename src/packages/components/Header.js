@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-// import Material from './Material';
-// import TypedText from './TypedText';
-// import Scores from './Scores';
+// import Material from 'components/Material';
+// import TypedText from 'components/TypedText';
+// import Scores from 'components/Scores';
 import './App.css';
 
 class Header extends Component {

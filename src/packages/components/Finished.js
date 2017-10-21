@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Scores from './Scores';
+import Scores from 'components/Scores';
 import './App.css';
 
 class Finished extends Component {
