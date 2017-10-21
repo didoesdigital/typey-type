@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Finished from './Finished';
+import Header from './Header';
 import Typing from './Typing';
 import {matchSplitText, parseLesson} from './typey-type';
 import './App.css';
@@ -151,32 +152,48 @@ class App extends Component {
   render() {
     if (this.isFinished()) {
       return (
-        <Finished
-          lessonSubTitle={this.state.lesson.subtitle}
-          lessonTitle={this.state.lesson.title}
-          actualText={this.state.actualText}
-          timer={this.state.timer}
-          totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-          settings={this.state.lesson.settings}
-          getLesson={this.handleLesson.bind(this)}
+        <div>
+          <Header
+            lessonSubTitle={this.state.lesson.subtitle}
+            lessonTitle={this.state.lesson.title}
+            getLesson={this.handleLesson.bind(this)}
+            settings={this.state.lesson.settings}
           />
+          <Finished
+            lessonSubTitle={this.state.lesson.subtitle}
+            lessonTitle={this.state.lesson.title}
+            actualText={this.state.actualText}
+            timer={this.state.timer}
+            totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+            settings={this.state.lesson.settings}
+            getLesson={this.handleLesson.bind(this)}
+            />
+        </div>
       );
     } else {
       return (
-        <Typing
-          lessonSubTitle={this.state.lesson.subtitle}
-          lessonTitle={this.state.lesson.title}
-          updateMarkup={this.updateMarkup.bind(this)}
-          currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID].phrase}
-          currentStroke={this.state.lesson.sourceMaterial[this.state.currentPhraseID].stroke}
-          actualText={this.state.actualText}
-          timer={this.state.timer}
-          totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-          settings={this.state.lesson.settings}
-          userSettings={this.state.userSettings}
-          changeUserSettings={this.changeUserSettings.bind(this)}
-          getLesson={this.handleLesson.bind(this)}
+        <div>
+          <Header
+            lessonSubTitle={this.state.lesson.subtitle}
+            lessonTitle={this.state.lesson.title}
+            getLesson={this.handleLesson.bind(this)}
+            settings={this.state.lesson.settings}
           />
+          <Typing
+            lessonSubTitle={this.state.lesson.subtitle}
+            lessonTitle={this.state.lesson.title}
+            updateMarkup={this.updateMarkup.bind(this)}
+            currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID].phrase}
+            currentStroke={this.state.lesson.sourceMaterial[this.state.currentPhraseID].stroke}
+            actualText={this.state.actualText}
+            timer={this.state.timer}
+            totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+            settings={this.state.lesson.settings}
+            userSettings={this.state.userSettings}
+            changeUserSettings={this.changeUserSettings.bind(this)}
+            getLesson={this.handleLesson.bind(this)}
+            />
+        </div>
       );
     }
   }
