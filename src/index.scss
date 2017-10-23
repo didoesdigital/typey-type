@@ -1,5 +1,6 @@
 @import "palette.scss";
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,300,300italic,600,800);
+@import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:300,300i,700,700i');
+/* @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i'); */
 
 * {
   box-sizing: border-box;
@@ -7,24 +8,50 @@
   padding: 0;
 }
 body {
-  font: 400 16px/1.6 "Clear Sans", "Open Sans", Helvetica, sans-serif;
+  font: 400 16px/1.6 "Montserrat", "Open Sans", Helvetica, sans-serif;
   margin: 0 auto;
   color: $medium-primary;
 }
-h1,h2,h3 {
+h1 {
+  font-size: 44px;
+  line-height: 1.4;
+}
+h2 {
+  font-size: 37px;
+  line-height: 1.4;
+}
+h3 {
+  font-size: 27px;
+  line-height: 1.4;
+}
+h4 {
+  font-size: 23px;
+  line-height: 1.4;
+}
+h5 {
+  font-size: 18px;
+  line-height: 1.4;
+}
+h6 {
+  font-size: 16px;
   line-height: 1.4;
 }
 li {
   margin-left: 1em;
 }
 p {
+  line-height: 1.5;
   margin-bottom: 0.5em;
+}
+
+.site-heading {
+  font-size: 44px;
+  color: #fff;
 }
 
 .app-header {
   background-color: $medium-primary;
   color: #fff;
-  height: 150px;
   padding: 20px;
   text-align: center;
 }

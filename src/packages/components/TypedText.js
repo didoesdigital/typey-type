@@ -7,14 +7,14 @@ class TypedText extends Component {
     let array = matchSplitText(currentPhrase, actualText, settings);
     let matched = array[2];
     let unmatched = array[3];
-    let matchedTypedTextMarkup = `<pre><span aria-hidden="true">&#8203;</span><span class="matched">${matched}</span><span class="unmatched">${unmatched}</span></pre>`;
+    let matchedTypedTextMarkup = `<pre><span aria-hidden="true">&#8203;</span><span class="matched steno-typing">${matched}</span><span class="unmatched steno-typing">${unmatched}</span></pre>`;
     return {__html: matchedTypedTextMarkup};
   }
 
   render() {
     return (
       <div className="">
-        <div>Typed:</div>
+        <div className="visually-hidden">Your typed text:</div>
         <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
       </div>
     );

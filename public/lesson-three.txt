@@ -1,0 +1,4 @@
+Lesson 3
+Test words
+'supercalifragilisticexpialidocious': STPRAPBLG
+case_sensitive=false
