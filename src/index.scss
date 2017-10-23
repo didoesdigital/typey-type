@@ -1,7 +1,8 @@
 @import "global.scss";
 @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:300,300i,700,700i');
-/* @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i'); */
+// @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 
+// Element styles
 * {
   box-sizing: border-box;
   margin: 0;
@@ -43,21 +44,56 @@ p {
   line-height: 1.5;
   margin-bottom: 0.5em;
 }
-
 pre {
   font: 700 16px/1.6 "Overpass Mono", monospace;
 }
 
-.site-heading {
-  font-size: 44px;
-  color: #fff;
-}
-
-.app-header {
+// Class styles
+.header {
   background-color: $medium-primary;
   color: #fff;
+  padding: 24px;
+  nav {
+    display: grid;
+    grid-gap: 24px;
+  }
+  .site-heading-banner {
+    grid-column: 1;
+  }
+  nav ul {
+    grid-column: 2;
+  }
+  nav ul li {
+    display: inline-block;
+  }
+}
+.site-heading-link {
+  color: #fff;
+  font-size: 44px;
+  text-decoration: none;
+
+  &:hover, &:active, &:focus {
+    box-shadow: inset $medium-primary-tint-2 0px -8px 0px 0px;
+  }
+}
+
+.subheader {
+  align-items: baseline;
+  background-color: $heavy-primary-shade-1;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
   padding: 20px;
-  text-align: center;
+  h1 {
+    margin-right: 24px;
+  }
+  h2 {
+    font-size: 27px;
+  }
+}
+
+/*h3*/.pad-24 {
+  padding: 24px;
 }
 
 .main {

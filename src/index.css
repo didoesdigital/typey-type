@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:300,300i,700,700i");
-/* @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i'); */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -44,15 +43,42 @@ p {
 pre {
   font: 700 16px/1.6 "Overpass Mono", monospace; }
 
-.site-heading {
-  font-size: 44px;
-  color: #fff; }
-
-.app-header {
+.header {
   background-color: #321E3E;
   color: #fff;
-  padding: 20px;
-  text-align: center; }
+  padding: 24px; }
+  .header nav {
+    display: grid;
+    grid-gap: 24px; }
+  .header .site-heading-banner {
+    grid-column: 1; }
+  .header nav ul {
+    grid-column: 2; }
+  .header nav ul li {
+    display: inline-block; }
+
+.site-heading-link {
+  color: #fff;
+  font-size: 44px;
+  text-decoration: none; }
+  .site-heading-link:hover, .site-heading-link:active, .site-heading-link:focus {
+    box-shadow: inset #AEABAF 0px -8px 0px 0px; }
+
+.subheader {
+  align-items: baseline;
+  background-color: #5F2580;
+  color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px; }
+  .subheader h1 {
+    margin-right: 24px; }
+  .subheader h2 {
+    font-size: 27px; }
+
+/*h3*/
+.pad-24 {
+  padding: 24px; }
 
 .main {
   margin: 0 auto;
