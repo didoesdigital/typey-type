@@ -47,6 +47,25 @@ p {
 pre {
   font: 700 16px/1.6 "Overpass Mono", monospace;
 }
+dl.inline-flex {
+  display: flex;
+  flex-flow: row;
+  flex-wrap: wrap;
+  overflow: visible;
+  width: 180px-16px-16px;
+}
+dl.inline-flex dt {
+  flex: 0 0 70%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+dl.inline-flex dd {
+  flex: 0 0 30%;
+  margin-left: auto;
+  overflow: hidden;
+  text-align: right;
+  text-overflow: ellipsis;
+}
 
 // Utilities
 .visually-hidden {

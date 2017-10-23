@@ -10,14 +10,16 @@ class Scores extends Component {
       wordsPerMinute = 0;
     }
     let result = `
-      <p><abbr title="words per minute">WPM</abbr>:</p>
-      <p>${wordsPerMinute}</p>
+      <dl class="inline-flex">
+      <dt><abbr title="words per minute">WPM</abbr>:</dt>
+      <dd>${wordsPerMinute}</dd>
 
-      <p>Time (s):</p>
-      <p>${Math.round(timer/1000)} seconds</p>
+      <dt>Time:</dt>
+      <dd>${Math.round(timer/1000)}s</dd>
 
-      <p>Word count:</p>
-      <p>~${Math.round(totalNumberOfMatchedWords)} words</p>
+      <dt>Word count:</dt>
+      <dd>~${Math.round(totalNumberOfMatchedWords)}</dd>
+      </dl>
     `
     return {__html: result};
   }
@@ -26,20 +28,24 @@ class Scores extends Component {
     if (this.props.timer !== null) {
       return (
         <div>
+          <h6>Scores</h6>
           <div className="timer" dangerouslySetInnerHTML={this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords)} />
         </div>
       );
     } else {
       return (
         <div>
-          <p><abbr title="words per minute">WPM</abbr>:</p>
-          <p>&nbsp;</p>
+          <h6>Scores</h6>
+          <dl className="inline-flex">
+            <dt><abbr title="words per minute">WPM</abbr>:</dt>
+            <dd>&nbsp;</dd>
 
-          <p>Time (s):</p>
-          <p>&nbsp;</p>
+            <dt>Time:</dt>
+            <dd>&nbsp;</dd>
 
-          <p>Word count:</p>
-          <p>&nbsp;</p>
+            <dt>Word count:</dt>
+            <dd>&nbsp;</dd>
+          </dl>
         </div>
       );
     }
