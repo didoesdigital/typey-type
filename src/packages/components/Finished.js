@@ -14,8 +14,29 @@ class Finished extends Component {
       <div>
         {customMessage}
         <div className="content">
+          <div className="user-settings">
+            <form>
+              <legend>Settings</legend>
+              <div className="checkbox-group">
+                <label className="checkbox-label">
+                  <input
+                    disabled
+                    className="checkbox-input"
+                    type="checkbox"
+                    name="showStrokes"
+                    id="showStrokes"
+                    checked={this.props.userSettings.showStrokes}
+                    onChange={this.props.changeUserSettings}
+                    />
+                  Show strokes
+                </label>
+              </div>
+            </form>
+          </div>
+          <div className="lesson-canvas">
+            <div role="alert" aria-live="polite">Finished!</div>
+          </div>
           <div className="scores">
-            <h1>Finished!</h1>
             <Scores timer={this.props.timer} totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}/>
           </div>
         </div>

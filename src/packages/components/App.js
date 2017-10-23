@@ -164,6 +164,7 @@ class App extends Component {
               actualText={this.state.actualText}
               getLesson={this.handleLesson.bind(this)}
               settings={this.state.lesson.settings}
+              userSettings={this.state.userSettings}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
               />
