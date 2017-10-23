@@ -134,3 +134,30 @@ label {
   margin-top: 8px;
   margin-left: -24px;
   touch-action: manipulation; }
+
+.steno-stroke {
+  background-color: #474548;
+  color: #ACAAA6; }
+
+.material {
+  margin-left: auto;
+  margin-right: auto;
+  width: 8em; }
+
+.typed-text {
+  margin-left: auto;
+  margin-right: auto;
+  width: 8em; }
+
+.stroke-tip {
+  margin-left: auto;
+  margin-right: auto;
+  width: 8em; }
+
+.input-text {
+  margin-left: auto;
+  margin-right: auto;
+  width: 8em; }
+
+.matched.steno-material {
+  border-bottom: 2px solid #474548; }

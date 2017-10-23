@@ -9,7 +9,7 @@ class Material extends Component {
 
     if (this.props.userSettings.showStrokes) {
       matchedMaterialMarkup = `<div class="material"><pre><span class="matched steno-material">${matched}</span><span class="steno-material">${unmatched}</span></span></pre></div>
-      <div class="stroke-suggestion"><span class="visually-hidden">Stroke: </span><pre><span class="steno-stroke">${this.props.currentStroke}</span></pre></div>`;
+      <div class="stroke-tip"><span class="visually-hidden">Stroke: </span><pre><span class="steno-stroke">${this.props.currentStroke}</span></pre></div>`;
     } else {
       matchedMaterialMarkup = `<div class="material"><pre><span class="matched steno-material">${matched}</span><span class="steno-material">${unmatched}</span></pre></div>`;
     }

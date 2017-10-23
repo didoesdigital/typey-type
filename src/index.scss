@@ -163,3 +163,30 @@ label {
   margin-left: -24px;
   touch-action: manipulation;
 }
+.steno-stroke {
+  background-color: $medium-primary-shade-2;
+  color: $light-tertiary-shade-1;
+}
+.material {
+  margin-left: auto;
+  margin-right: auto;
+  width: 8em;
+}
+.typed-text {
+  margin-left: auto;
+  margin-right: auto;
+  width: 8em;
+}
+.stroke-tip {
+  margin-left: auto;
+  margin-right: auto;
+  width: 8em;
+}
+.input-text {
+  margin-left: auto;
+  margin-right: auto;
+  width: 8em;
+}
+.matched.steno-material {
+  border-bottom: 2px solid $medium-primary-shade-2;
+}
