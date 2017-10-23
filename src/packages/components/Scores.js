@@ -31,7 +31,7 @@ class Scores extends Component {
       );
     } else {
       return (
-        <div className="scores">
+        <div>
           <p>Time in seconds:</p>
           <p>&nbsp;</p>
 
