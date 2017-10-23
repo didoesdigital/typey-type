@@ -10,14 +10,14 @@ class Scores extends Component {
       wordsPerMinute = 0;
     }
     let result = `
-      <p>Time in seconds:</p>
-      <p>${Math.round(timer/1000)} seconds</p>
-
-      <p>Number of matched words:</p>
-      <p>~${Math.round(totalNumberOfMatchedWords)} words</p>
-
       <p><abbr title="words per minute">WPM</abbr>:</p>
       <p>${wordsPerMinute}</p>
+
+      <p>Time (s):</p>
+      <p>${Math.round(timer/1000)} seconds</p>
+
+      <p>Word count:</p>
+      <p>~${Math.round(totalNumberOfMatchedWords)} words</p>
     `
     return {__html: result};
   }
@@ -32,13 +32,13 @@ class Scores extends Component {
     } else {
       return (
         <div>
-          <p>Time in seconds:</p>
-          <p>&nbsp;</p>
-
-          <p>Number of matched words:</p>
-          <p>&nbsp;</p>
-
           <p><abbr title="words per minute">WPM</abbr>:</p>
+          <p>&nbsp;</p>
+
+          <p>Time (s):</p>
+          <p>&nbsp;</p>
+
+          <p>Word count:</p>
           <p>&nbsp;</p>
         </div>
       );
