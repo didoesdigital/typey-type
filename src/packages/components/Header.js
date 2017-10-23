@@ -6,12 +6,6 @@ import './App.css';
 
 class Header extends Component {
   render() {
-    var customMessage;
-    if (this.props.settings.customMessage) {
-      customMessage = <h3 className="pad-24">{this.props.settings.customMessage}</h3>;
-    } else {
-      customMessage = '';
-    }
     return (
       <div>
         <div className="header">
@@ -28,7 +22,6 @@ class Header extends Component {
           <h1>{this.props.lessonTitle}</h1>
           <h2>{this.props.lessonSubTitle}</h2>
         </div>
-        {customMessage}
       </div>
     )
   }

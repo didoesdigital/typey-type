@@ -51,3 +51,7 @@ $light-tertiary-shade-1: #ACAAA6;
 $light-tertiary-shade-2: #E6E2DA;
 $light-tertiary-tint-1: #F2EFE9;
 $light-tertiary-tint-2: #F2F0EC;
+
+@function add-tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}

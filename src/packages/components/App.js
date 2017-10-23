@@ -179,7 +179,7 @@ class App extends Component {
             lessonTitle={this.state.lesson.title}
             settings={this.state.lesson.settings}
           />
-          <div className="main">
+          <div>
             <Typing
               actualText={this.state.actualText}
               changeUserSettings={this.changeUserSettings.bind(this)}

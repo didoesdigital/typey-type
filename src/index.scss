@@ -92,14 +92,31 @@ pre {
   }
 }
 
-/*h3*/.pad-24 {
+.custom-message {
   padding: 24px;
 }
 
-.main {
-  margin: 0 auto;
-  max-width: 650px;
-  padding: 0 10px;
+.content {
+  display: grid;
+  padding: 0 24px;
+  grid-gap: 24px;
+  max-width: 1440px;
+  .user-settings {
+    grid-column: 1;
+  }
+  .lesson-canvas {
+    grid-column: span 2;
+  }
+  .scores {
+    grid-column: 4;
+  }
+  .user-settings,
+  .lesson-canvas,
+  .scores {
+    background-color: add-tint($medium-tertiary-tint-1, 90);
+    border: thin solid $medium-tertiary-tint-2;
+    padding: 16px;
+  }
 }
 
 .material p {
@@ -116,4 +133,31 @@ pre {
 
 .unmatched {
   background-color: mix($heavy-tertiary-shade-1, #fff, 50);
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 8px;
+}
+.checkbox-group {
+  position: relative;
+  display: block;
+  margin-bottom: 8px;
+}
+.checkbox-label {
+  padding-left: 24px;
+  margin-bottom: 0;
+}
+.checkbox-input {
+  position: absolute;
+  margin-top: 8px;
+  margin-left: -24px;
+  touch-action: manipulation;
+}
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
 }

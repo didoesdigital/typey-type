@@ -76,14 +76,26 @@ pre {
   .subheader h2 {
     font-size: 27px; }
 
-/*h3*/
-.pad-24 {
+.custom-message {
   padding: 24px; }
 
-.main {
-  margin: 0 auto;
-  max-width: 650px;
-  padding: 0 10px; }
+.content {
+  display: grid;
+  padding: 0 24px;
+  grid-gap: 24px;
+  max-width: 1440px; }
+  .content .user-settings {
+    grid-column: 1; }
+  .content .lesson-canvas {
+    grid-column: span 2; }
+  .content .scores {
+    grid-column: 4; }
+  .content .user-settings,
+  .content .lesson-canvas,
+  .content .scores {
+    background-color: #f9f9f9;
+    border: thin solid #C7C5C1;
+    padding: 16px; }
 
 .material p {
   padding: 0.25em; }
@@ -96,3 +108,29 @@ pre {
 
 .unmatched {
   background-color: #dfc798; }
+
+label {
+  display: inline-block;
+  margin-bottom: 8px; }
+
+.checkbox-group {
+  position: relative;
+  display: block;
+  margin-bottom: 8px; }
+
+.checkbox-label {
+  padding-left: 24px;
+  margin-bottom: 0; }
+
+.checkbox-input {
+  position: absolute;
+  margin-top: 8px;
+  margin-left: -24px;
+  touch-action: manipulation; }
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px); }

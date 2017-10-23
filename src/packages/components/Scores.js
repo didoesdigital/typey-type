@@ -25,13 +25,13 @@ class Scores extends Component {
   render() {
     if (this.props.timer !== null) {
       return (
-        <div className="">
+        <div>
           <div className="timer" dangerouslySetInnerHTML={this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords)} />
         </div>
       );
     } else {
       return (
-        <div className="">
+        <div className="scores">
           <p>Time in seconds:</p>
           <p>&nbsp;</p>
 
