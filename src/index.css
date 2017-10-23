@@ -41,6 +41,9 @@ p {
   line-height: 1.5;
   margin-bottom: 0.5em; }
 
+pre {
+  font: 700 16px/1.6 "Overpass Mono", monospace; }
+
 .site-heading {
   font-size: 44px;
   color: #fff; }
