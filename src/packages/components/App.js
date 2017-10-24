@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Autocomplete from 'react-autocomplete';
+import { getLessons, matchLessonToTerm, sortLessons } from 'utils/utils'
 import Finished from 'components/Finished';
 import Header from 'components/Header';
 import Typing from 'components/Typing';
@@ -10,6 +12,7 @@ class App extends Component {
     super(props);
     this.charsPerWord = 5;
     this.state = {
+      value: '',
       currentPhraseID: 0,
       actualText: ``,
       startTime: null,
@@ -174,6 +177,45 @@ class App extends Component {
     } else {
       return (
         <div className="app">
+          <label htmlFor="lessons-autocomplete">Choose a lesson</label>
+          <Autocomplete
+            items={[
+              { id: 'foo', code: 'foo' },
+              { id: 'bar', code: 'bar' },
+              { id: 'baz', code: 'baz' },
+            ]}
+            shouldItemRender={(item, value) => item.code.toLowerCase().indexOf(value.toLowerCase()) > -1}
+            getItemValue={item => item.code}
+            renderItem={(item, highlighted) =>
+              <div
+                key={item.code}
+                style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
+              >
+                {item.name}
+              </div>
+            }
+            value={this.state.value}
+            onChange={e => this.setState({ value: e.target.value })}
+            onSelect={value => this.setState({ value })}
+
+            menuStyle={{
+              borderRadius: '8px',
+              boxShadow: '0 2px 12px deeppink',
+              background: 'rgba(255, 255, 255, 0.9)',
+              padding: '2px 0',
+              fontSize: '90%',
+              position: 'fixed',
+              overflow: 'auto',
+              maxHeight: '50%',
+            }}
+            inputProps={{ id: 'lessons-autocomplete' }}
+            wrapperStyle={{ position: 'relative', display: 'inline-block' }}
+            items={getLessons()}
+            getItemValue={(item) => item.name}
+            shouldItemRender={matchLessonToTerm}
+            sortItems={sortLessons}
+          />
+          <a href={`/?lesson=${this.state.value}`}>Search</a>
           <Header
             getLesson={this.handleLesson.bind(this)}
             lessonSubTitle={this.state.lesson.subtitle}
