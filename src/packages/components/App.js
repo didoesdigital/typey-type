@@ -57,7 +57,7 @@ class App extends Component {
     return array;
   }
 
-  getLesson(lessonFile = '/lesson.txt') {
+  getLesson(lessonFile = '/lesson-one.txt') {
     return fetch(lessonFile, {
       method: "GET",
       credentials: "same-origin"
@@ -180,9 +180,9 @@ class App extends Component {
           <label htmlFor="lessons-autocomplete">Choose a lesson</label>
           <Autocomplete
             items={[
-              { id: 'foo', code: 'foo' },
-              { id: 'bar', code: 'bar' },
-              { id: 'baz', code: 'baz' },
+              { id: 'foo', code: 'lesson-one.txt' },
+              { id: 'bar', code: 'lesson-one.txt' },
+              { id: 'baz', code: 'lesson-one.txt' },
             ]}
             shouldItemRender={(item, value) => item.code.toLowerCase().indexOf(value.toLowerCase()) > -1}
             getItemValue={item => item.code}
