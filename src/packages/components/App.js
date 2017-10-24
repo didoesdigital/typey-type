@@ -89,7 +89,7 @@ class App extends Component {
 
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    // const name = target.name;
 
     newState.showStrokes = value;
 
@@ -179,19 +179,18 @@ class App extends Component {
         <div className="app">
           <label htmlFor="lessons-autocomplete">Choose a lesson</label>
           <Autocomplete
-            items={[
-              { id: 'foo', code: 'lesson-one.txt' },
-              { id: 'bar', code: 'lesson-one.txt' },
-              { id: 'baz', code: 'lesson-one.txt' },
-            ]}
-            shouldItemRender={(item, value) => item.code.toLowerCase().indexOf(value.toLowerCase()) > -1}
-            getItemValue={item => item.code}
+            shouldItemRender={(item, value) => item.title.toLowerCase().indexOf(value.toLowerCase()) > -1}
+            getItemValue={item => item.title}
+        debugger
             renderItem={(item, highlighted) =>
               <div
-                key={item.code}
+                key={item.path}
                 style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
               >
-                {item.name}
+                <h5>{item.title}</h5>
+                <h6>{item.subtitle}</h6>
+                {item.category} >&nbsp;
+                {item.subcategory}
               </div>
             }
             value={this.state.value}
@@ -200,18 +199,18 @@ class App extends Component {
 
             menuStyle={{
               borderRadius: '8px',
-              boxShadow: '0 2px 12px deeppink',
-              background: 'rgba(255, 255, 255, 0.9)',
+              boxShadow: '0 2px 12px rgba(0,0,0,0.5)',
+              background: 'rgba(255,255,255,1)',
               padding: '2px 0',
               fontSize: '90%',
               position: 'fixed',
               overflow: 'auto',
-              maxHeight: '50%',
+              maxHeight: '100%',
             }}
             inputProps={{ id: 'lessons-autocomplete' }}
             wrapperStyle={{ position: 'relative', display: 'inline-block' }}
             items={getLessons()}
-            getItemValue={(item) => item.name}
+            getItemValue={(item) => item.title}
             shouldItemRender={matchLessonToTerm}
             sortItems={sortLessons}
           />
