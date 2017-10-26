@@ -13,6 +13,7 @@ class App extends Component {
     this.charsPerWord = 5;
     this.state = {
       value: '',
+      path: '',
       currentPhraseID: 0,
       actualText: ``,
       startTime: null,
@@ -192,7 +193,10 @@ class App extends Component {
             }
             value={this.state.value}
             onChange={e => this.setState({ value: e.target.value })}
-            onSelect={value => this.setState({ value })}
+            onSelect={(value, item) => this.setState({
+              value: value,
+              path: item.path
+            })}
 
             menuStyle={{
               borderRadius: '8px',
@@ -211,7 +215,7 @@ class App extends Component {
             shouldItemRender={matchLessonToTerm}
             sortItems={sortLessons}
           />
-          <a href={`/?lesson=${this.state.value}`}>Search</a>
+          <a href={this.state.path} onClick={this.handleLesson.bind(this)}>Search</a>
           <Header
             getLesson={this.handleLesson.bind(this)}
             lessonSubTitle={this.state.lesson.subtitle}
