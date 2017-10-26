@@ -179,9 +179,6 @@ class App extends Component {
         <div className="app">
           <label htmlFor="lessons-autocomplete">Choose a lesson</label>
           <Autocomplete
-            shouldItemRender={(item, value) => item.title.toLowerCase().indexOf(value.toLowerCase()) > -1}
-            getItemValue={item => item.title}
-        debugger
             renderItem={(item, highlighted) =>
               <div
                 key={item.path}
