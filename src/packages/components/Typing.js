@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Material from 'components/Material';
 import TypedText from 'components/TypedText';
 import Scores from 'components/Scores';
+import UserSettings from 'components/UserSettings';
 import './App.css';
 
 class Typing extends Component {
@@ -16,24 +17,7 @@ class Typing extends Component {
       <div>
         {customMessage}
         <div className="content">
-          <div className="user-settings">
-            <form>
-              <legend>Settings</legend>
-              <div className="checkbox-group">
-                <label className="checkbox-label">
-                  <input
-                    className="checkbox-input"
-                    type="checkbox"
-                    name="showStrokes"
-                    id="showStrokes"
-                    checked={this.props.userSettings.showStrokes}
-                    onChange={this.props.changeUserSettings}
-                    />
-                  Show strokes
-                </label>
-              </div>
-            </form>
-          </div>
+          <UserSettings checked={this.props.userSettings.showStrokes} onChange={this.props.changeUserSettings} />
           <div className="lesson-canvas">
             <Material currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} userSettings={this.props.userSettings} settings={this.props.settings} currentStroke={this.props.currentStroke} />
             <TypedText currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} settings={this.props.settings} />

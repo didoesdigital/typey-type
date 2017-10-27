@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Scores from 'components/Scores';
+import UserSettings from 'components/UserSettings';
 import './App.css';
 
 class Finished extends Component {
@@ -14,25 +15,7 @@ class Finished extends Component {
       <div>
         {customMessage}
         <div className="content">
-          <div className="user-settings">
-            <form>
-              <legend>Settings</legend>
-              <div className="checkbox-group">
-                <label className="checkbox-label">
-                  <input
-                    disabled
-                    className="checkbox-input"
-                    type="checkbox"
-                    name="showStrokes"
-                    id="showStrokes"
-                    checked={this.props.userSettings.showStrokes}
-                    onChange={this.props.changeUserSettings}
-                    />
-                  Show strokes
-                </label>
-              </div>
-            </form>
-          </div>
+          <UserSettings checked={this.props.userSettings.showStrokes} onChange={this.props.changeUserSettings} />
           <div className="lesson-canvas">
             <div role="alert" aria-live="polite">Finished!</div>
           </div>
