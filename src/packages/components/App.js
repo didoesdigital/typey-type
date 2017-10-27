@@ -48,14 +48,14 @@ class App extends Component {
         lesson.presentedMaterial = lesson.sourceMaterial.concat(lesson.sourceMaterial).concat(lesson.sourceMaterial);
       }
       if (this.state.userSettings.randomise) {
-        lesson.presentedMaterial = this.randomize(lesson.sourceMaterial);
+        lesson.presentedMaterial = this.randomise(lesson.sourceMaterial);
       }
       this.setState({ lesson: lesson });
       this.setState({ currentPhraseID: 0 });
     });
   }
 
-  randomize(array) {
+  randomise(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
     while (0 !== currentIndex) {
@@ -121,7 +121,7 @@ class App extends Component {
     }
 
     if (this.state.userSettings.randomise) {
-      newLesson.presentedMaterial = this.randomize(newLesson.presentedMaterial);
+      newLesson.presentedMaterial = this.randomise(newLesson.presentedMaterial);
     }
 
     this.setState({ lesson: newLesson });
