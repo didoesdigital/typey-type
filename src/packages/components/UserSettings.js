@@ -14,7 +14,7 @@ class UserSettings extends Component {
                 name="showStrokes"
                 id="showStrokes"
                 checked={this.props.userSettings.showStrokes}
-                onChange={this.props.onChange}
+                onChange={this.props.changeShowStrokesSetting}
                 />
               Show strokes
             </label>
@@ -26,8 +26,8 @@ class UserSettings extends Component {
                 type="checkbox"
                 name="randomise"
                 id="randomise"
-                checked={this.props.userSettings.random}
-                onChange={this.props.onChange}
+                checked={this.props.userSettings.randomise}
+                onChange={this.props.changeRandomiseLessonSetting}
                 />
               Randomise lesson
             </label>
