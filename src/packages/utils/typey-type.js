@@ -78,7 +78,7 @@ function parseLesson(lessonText) {
     }
   }
 
-  return { sourceMaterial: sourceMaterial, settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
+  return { sourceMaterial: sourceMaterial, presentedMaterial: sourceMaterial, settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
 }
 
 export {matchSplitText, parseLesson};

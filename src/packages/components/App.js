@@ -26,7 +26,7 @@ class App extends Component {
       },
       random: (window.location.hash === "#random") ? true : false,
       repeat: (window.location.hash === "#repeat") ? true : false,
-      lesson: {sourceMaterial: [{phrase: '', stroke: ''}], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'}, title: 'Loading…', subtitle: 'Loading…' }
+      lesson: {sourceMaterial: [{phrase: '', stroke: ''}], presentedMaterial: [{phrase: '', stroke: ''}], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'}, title: 'Loading…', subtitle: 'Loading…' }
     };
   }
 
@@ -34,10 +34,10 @@ class App extends Component {
     this.getLesson().then((lessonText) => {
       var lesson = parseLesson(lessonText);
       if (this.state.repeat === true) {
-        lesson.sourceMaterial = lesson.sourceMaterial.concat(lesson.sourceMaterial).concat(lesson.sourceMaterial);
+        lesson.presentedMaterial = lesson.sourceMaterial.concat(lesson.sourceMaterial).concat(lesson.sourceMaterial);
       }
       if (this.state.random === true) {
-        lesson.sourceMaterial = this.randomize(lesson.sourceMaterial);
+        lesson.presentedMaterial = this.randomize(lesson.sourceMaterial);
       }
       this.setState({ lesson: lesson });
       this.setState({ currentPhraseID: 0 });
@@ -127,7 +127,7 @@ class App extends Component {
     }
 
     let [numberOfMatchedChars, numberOfUnmatchedChars] =
-      matchSplitText(this.state.lesson.sourceMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings)
+      matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings)
       .map(text => text.length);
 
     var newState = {
@@ -150,7 +150,7 @@ class App extends Component {
   }
 
   isFinished() {
-    return (this.state.currentPhraseID === this.state.lesson.sourceMaterial.length);
+    return (this.state.currentPhraseID === this.state.lesson.presentedMaterial.length);
   }
 
   render() {
@@ -226,8 +226,8 @@ class App extends Component {
             <Typing
               actualText={this.state.actualText}
               changeUserSettings={this.changeUserSettings.bind(this)}
-              currentPhrase={this.state.lesson.sourceMaterial[this.state.currentPhraseID].phrase}
-              currentStroke={this.state.lesson.sourceMaterial[this.state.currentPhraseID].stroke}
+              currentPhrase={this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase}
+              currentStroke={this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke}
               getLesson={this.handleLesson.bind(this)}
               settings={this.state.lesson.settings}
               timer={this.state.timer}
