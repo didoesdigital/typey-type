@@ -26,7 +26,18 @@ class App extends Component {
         randomise: false
       },
       repeat: (window.location.hash === "#repeat") ? true : false,
-      lesson: {sourceMaterial: [{phrase: '', stroke: ''}], presentedMaterial: [{phrase: '', stroke: ''}], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'}, title: 'Loading…', subtitle: 'Loading…' }
+      lesson: {
+        sourceMaterial: [{phrase: '', stroke: ''}],
+        presentedMaterial: [{phrase: '', stroke: ''}],
+        settings: {
+          caseSensitive: true,
+          requireSpaces: false,
+          noticeSpaces: false,
+          ignoredChars: '',
+          spacePlacement: 'Before Output'
+        },
+        title: 'Loading…', subtitle: 'Loading…'
+      }
     };
   }
 
