@@ -25,7 +25,6 @@ class App extends Component {
         showStrokes: true,
         randomise: false
       },
-      random: (window.location.hash === "#random") ? true : false,
       repeat: (window.location.hash === "#repeat") ? true : false,
       lesson: {sourceMaterial: [{phrase: '', stroke: ''}], presentedMaterial: [{phrase: '', stroke: ''}], settings: { caseSensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'}, title: 'Loading…', subtitle: 'Loading…' }
     };
