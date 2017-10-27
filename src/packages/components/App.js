@@ -95,41 +95,27 @@ class App extends Component {
 
     newState[name] = value;
 
-    this.setState({userSettings: newState});
+    this.setState({userSettings: newState}, () => {
+      this.generateNewLesson();
+    });
     return value;
   }
 
-  changeRandomiseLessonSetting(event) {
-    const randomise = this.changeUserSetting(event);
-
-    if (randomise) {
-      let currentState = this.state.lesson;
-      let newState = Object.assign({}, currentState);
-      newState.presentedMaterial = this.randomize(currentState.sourceMaterial);
-      this.setState({lesson: newState});
-    } else {
-      this.generateNewLesson();
-    }
-
-  }
-
   generateNewLesson() {
-    let lesson = this.state.lesson;
-    lesson.presentedMaterial = lesson.sourceMaterial;
+    let currentLesson = this.state.lesson;
+    let newLesson = Object.assign({}, currentLesson);
+    newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
 
     if (this.state.repeat) {
-      lesson.presentedMaterial = lesson.sourceMaterial.concat(lesson.sourceMaterial).concat(lesson.sourceMaterial);
+      newLesson.presentedMaterial = newLesson.sourceMaterial.concat(newLesson.sourceMaterial).concat(newLesson.sourceMaterial);
     }
-    console.log(this.state.userSettings.randomise);
-    if (this.state.userSettings.randomise) {
-      lesson.presentedMaterial = this.randomize(lesson.sourceMaterial);
-    }
-    this.setState({ lesson: lesson });
-    this.setState({ currentPhraseID: 0 });
-  }
 
-  changeShowStrokesSetting(event) {
-    this.changeUserSetting(event);
+    if (this.state.userSettings.randomise) {
+      newLesson.presentedMaterial = this.randomize(newLesson.presentedMaterial);
+    }
+
+    this.setState({ lesson: newLesson });
+    this.setState({ currentPhraseID: 0 });
   }
 
   handleLesson(event) {
@@ -204,6 +190,7 @@ class App extends Component {
               getLesson={this.handleLesson.bind(this)}
               settings={this.state.lesson.settings}
               userSettings={this.state.userSettings}
+              changeUserSetting={this.changeUserSetting.bind(this)}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
               />
@@ -260,8 +247,7 @@ class App extends Component {
           <div>
             <Typing
               actualText={this.state.actualText}
-              changeRandomiseLessonSetting={this.changeRandomiseLessonSetting.bind(this)}
-              changeShowStrokesSetting={this.changeShowStrokesSetting.bind(this)}
+              changeUserSetting={this.changeUserSetting.bind(this)}
               currentPhrase={this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase}
               currentStroke={this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke}
               getLesson={this.handleLesson.bind(this)}
