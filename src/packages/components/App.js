@@ -85,7 +85,7 @@ class App extends Component {
     });
   }
 
-  changeUserSettings(event) {
+  changeUserSetting(event) {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
 
@@ -96,6 +96,23 @@ class App extends Component {
     newState[name] = value;
 
     this.setState({userSettings: newState});
+    return value;
+  }
+
+  changeRandomiseLessonSetting(event) {
+    const randomise = this.changeUserSetting(event);
+
+    if (randomise) {
+      let currentState = this.state.lesson;
+      let newState = Object.assign({}, currentState);
+      newState.presentedMaterial = this.randomize(currentState.sourceMaterial);
+      this.setState({lesson: newState});
+    }
+
+  }
+
+  changeShowStrokesSetting(event) {
+    this.changeUserSetting(event);
   }
 
   handleLesson(event) {
@@ -226,7 +243,9 @@ class App extends Component {
           <div>
             <Typing
               actualText={this.state.actualText}
-              changeUserSettings={this.changeUserSettings.bind(this)}
+              changeRandomiseLessonSetting={this.changeRandomiseLessonSetting.bind(this)}
+              changeShowStrokesSetting={this.changeShowStrokesSetting.bind(this)}
+              changeUserSetting={this.changeUserSetting.bind(this)}
               currentPhrase={this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase}
               currentStroke={this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke}
               getLesson={this.handleLesson.bind(this)}
