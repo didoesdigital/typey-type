@@ -33,11 +33,11 @@ class App extends Component {
 
   componentDidMount() {
     this.getLesson().then((lessonText) => {
-      var lesson = parseLesson(lessonText);
-      if (this.state.repeat === true) {
+      let lesson = parseLesson(lessonText);
+      if (this.state.repeat) {
         lesson.presentedMaterial = lesson.sourceMaterial.concat(lesson.sourceMaterial).concat(lesson.sourceMaterial);
       }
-      if (this.state.userSettings === true) {
+      if (this.state.userSettings.randomise) {
         lesson.presentedMaterial = this.randomize(lesson.sourceMaterial);
       }
       this.setState({ lesson: lesson });
@@ -107,8 +107,25 @@ class App extends Component {
       let newState = Object.assign({}, currentState);
       newState.presentedMaterial = this.randomize(currentState.sourceMaterial);
       this.setState({lesson: newState});
+    } else {
+      this.generateNewLesson();
     }
 
+  }
+
+  generateNewLesson() {
+    let lesson = this.state.lesson;
+    lesson.presentedMaterial = lesson.sourceMaterial;
+
+    if (this.state.repeat) {
+      lesson.presentedMaterial = lesson.sourceMaterial.concat(lesson.sourceMaterial).concat(lesson.sourceMaterial);
+    }
+    console.log(this.state.userSettings.randomise);
+    if (this.state.userSettings.randomise) {
+      lesson.presentedMaterial = this.randomize(lesson.sourceMaterial);
+    }
+    this.setState({ lesson: lesson });
+    this.setState({ currentPhraseID: 0 });
   }
 
   changeShowStrokesSetting(event) {
