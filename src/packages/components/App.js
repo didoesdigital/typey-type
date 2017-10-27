@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Autocomplete from 'react-autocomplete';
-import { getLessons, matchLessonToTerm, sortLessons } from 'utils/utils'
+import { getLessons, matchLessonToTerm, sortLessons, randomise } from 'utils/utils'
 import Finished from 'components/Finished';
 import Header from 'components/Header';
 import Typing from 'components/Typing';
@@ -48,25 +48,11 @@ class App extends Component {
         lesson.presentedMaterial = lesson.sourceMaterial.concat(lesson.sourceMaterial).concat(lesson.sourceMaterial);
       }
       if (this.state.userSettings.randomise) {
-        lesson.presentedMaterial = this.randomise(lesson.sourceMaterial);
+        lesson.presentedMaterial = randomise(lesson.sourceMaterial);
       }
       this.setState({ lesson: lesson });
       this.setState({ currentPhraseID: 0 });
     });
-  }
-
-  randomise(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-
-    while (0 !== currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-
-    return array;
   }
 
   getLesson(lessonFile = '/lesson-one.txt') {
@@ -121,7 +107,7 @@ class App extends Component {
     }
 
     if (this.state.userSettings.randomise) {
-      newLesson.presentedMaterial = this.randomise(newLesson.presentedMaterial);
+      newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
     }
 
     this.setState({ lesson: newLesson });
