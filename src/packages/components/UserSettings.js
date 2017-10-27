@@ -13,10 +13,23 @@ class UserSettings extends Component {
                 type="checkbox"
                 name="showStrokes"
                 id="showStrokes"
-                checked={this.props.checked}
+                checked={this.props.userSettings.showStrokes}
                 onChange={this.props.onChange}
                 />
               Show strokes
+            </label>
+          </div>
+          <div className="checkbox-group">
+            <label className="checkbox-label">
+              <input
+                className="checkbox-input"
+                type="checkbox"
+                name="randomise"
+                id="randomise"
+                checked={this.props.userSettings.random}
+                onChange={this.props.onChange}
+                />
+              Randomise lesson
             </label>
           </div>
         </form>

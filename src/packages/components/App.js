@@ -22,7 +22,8 @@ class App extends Component {
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
       userSettings: {
-        showStrokes: true
+        showStrokes: true,
+        randomise: false
       },
       random: (window.location.hash === "#random") ? true : false,
       repeat: (window.location.hash === "#repeat") ? true : false,
@@ -36,7 +37,7 @@ class App extends Component {
       if (this.state.repeat === true) {
         lesson.presentedMaterial = lesson.sourceMaterial.concat(lesson.sourceMaterial).concat(lesson.sourceMaterial);
       }
-      if (this.state.random === true) {
+      if (this.state.userSettings === true) {
         lesson.presentedMaterial = this.randomize(lesson.sourceMaterial);
       }
       this.setState({ lesson: lesson });
@@ -90,9 +91,9 @@ class App extends Component {
 
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
-    // const name = target.name;
+    const name = target.name;
 
-    newState.showStrokes = value;
+    newState[name] = value;
 
     this.setState({userSettings: newState});
   }

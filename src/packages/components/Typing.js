@@ -17,7 +17,7 @@ class Typing extends Component {
       <div>
         {customMessage}
         <div className="content">
-          <UserSettings checked={this.props.userSettings.showStrokes} onChange={this.props.changeUserSettings} />
+          <UserSettings userSettings={this.props.userSettings} onChange={this.props.changeUserSettings} />
           <div className="lesson-canvas">
             <Material currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} userSettings={this.props.userSettings} settings={this.props.settings} currentStroke={this.props.currentStroke} />
             <TypedText currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} settings={this.props.settings} />
