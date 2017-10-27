@@ -245,7 +245,6 @@ class App extends Component {
               actualText={this.state.actualText}
               changeRandomiseLessonSetting={this.changeRandomiseLessonSetting.bind(this)}
               changeShowStrokesSetting={this.changeShowStrokesSetting.bind(this)}
-              changeUserSetting={this.changeUserSetting.bind(this)}
               currentPhrase={this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase}
               currentStroke={this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke}
               getLesson={this.handleLesson.bind(this)}
