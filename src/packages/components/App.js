@@ -24,7 +24,8 @@ class App extends Component {
       userSettings: {
         showStrokes: true,
         randomise: false,
-        repeat: false
+        repeat: false,
+        repetitions: 1
       },
       lesson: {
         sourceMaterial: [{phrase: '', stroke: ''}],
@@ -108,6 +109,13 @@ class App extends Component {
 
     if (this.state.userSettings.randomise) {
       newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
+    }
+
+    let reps = this.state.userSettings.repetitions;
+    if (reps > 0) {
+      for (let i = 1; i < reps && i < 30; i++) {
+        newLesson.presentedMaterial = newLesson.presentedMaterial.concat(newLesson.sourceMaterial);
+      }
     }
 
     this.setState({ lesson: newLesson });

@@ -45,6 +45,16 @@ class UserSettings extends Component {
               Repeat lesson
             </label>
           </div>
+          <label>
+            Number of repetitions:
+            <input
+              name="repetitions"
+              type="number"
+              min="1"
+              max="30"
+              value={this.props.userSettings.repetitions}
+              onChange={this.props.changeUserSetting} />
+          </label>
         </form>
       </div>
     )
