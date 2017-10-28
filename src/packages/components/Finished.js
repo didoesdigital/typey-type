@@ -9,7 +9,7 @@ class Finished extends Component {
     if (this.props.settings.customMessage) {
       customMessage = <h3 className="custom-message">{this.props.settings.customMessage}</h3>;
     } else {
-      customMessage = '';
+      customMessage = <span style="padding-top: 24px;">&nbsp;</span>
     }
     return (
       <div>
