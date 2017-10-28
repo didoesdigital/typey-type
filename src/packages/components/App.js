@@ -66,10 +66,9 @@ class App extends Component {
     }).then((response) => {
       return response.json()
     }).then(json => {
-      console.log(json);
       this.setState({ lessonIndex: json });
-    }).catch(function(ex) {
-      console.log('parsing failed', ex)
+    }).catch(function(e) {
+      console.log('Unable to load lesson index', e)
     });
   }
 
