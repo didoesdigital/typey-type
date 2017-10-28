@@ -51,20 +51,12 @@ class App extends Component {
   componentDidMount() {
     this.getLesson().then((lessonText) => {
       let lesson = parseLesson(lessonText);
-      if (this.state.userSettings.randomise) {
-        lesson.presentedMaterial = randomise(lesson.sourceMaterial);
-      }
-
-      let reps = this.state.userSettings.repetitions;
-      if (reps > 0) {
-        for (let i = 1; i < reps && i < 30; i++) {
-          let currentLesson = this.state.lesson;
-          currentLesson.presentedMaterial = currentLesson.presentedMaterial.concat(currentLesson.sourceMaterial);
-        }
-      }
-
-      this.setState({ lesson: lesson });
-      this.setState({ currentPhraseID: 0 });
+      this.setState({
+        lesson: lesson,
+        currentPhraseID: 0
+      }, () => {
+        this.setupLesson();
+      });
     });
 
     fetch('/lessonIndex.json', {
@@ -116,12 +108,12 @@ class App extends Component {
     newState[name] = value;
 
     this.setState({userSettings: newState}, () => {
-      this.generateNewLesson();
+      this.setupLesson();
     });
     return value;
   }
 
-  generateNewLesson() {
+  setupLesson() {
     let currentLesson = this.state.lesson;
     let newLesson = Object.assign({}, currentLesson);
     newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
