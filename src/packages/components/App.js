@@ -23,7 +23,8 @@ class App extends Component {
       totalNumberOfMatchedChars: 0,
       userSettings: {
         showStrokes: true,
-        randomise: false
+        randomise: false,
+        repeat: false
       },
       repeat: (window.location.hash === "#repeat") ? true : false,
       lesson: {
@@ -44,7 +45,7 @@ class App extends Component {
   componentDidMount() {
     this.getLesson().then((lessonText) => {
       let lesson = parseLesson(lessonText);
-      if (this.state.repeat) {
+      if (this.state.userSettings.repeat) {
         lesson.presentedMaterial = lesson.sourceMaterial.concat(lesson.sourceMaterial).concat(lesson.sourceMaterial);
       }
       if (this.state.userSettings.randomise) {
@@ -102,7 +103,7 @@ class App extends Component {
     let newLesson = Object.assign({}, currentLesson);
     newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
 
-    if (this.state.repeat) {
+    if (this.state.userSettings.repeat) {
       newLesson.presentedMaterial = newLesson.sourceMaterial.concat(newLesson.sourceMaterial).concat(newLesson.sourceMaterial);
     }
 
