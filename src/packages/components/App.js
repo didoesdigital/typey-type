@@ -26,7 +26,6 @@ class App extends Component {
         randomise: false,
         repeat: false
       },
-      repeat: (window.location.hash === "#repeat") ? true : false,
       lesson: {
         sourceMaterial: [{phrase: '', stroke: ''}],
         presentedMaterial: [{phrase: '', stroke: ''}],
