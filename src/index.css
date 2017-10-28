@@ -160,6 +160,9 @@ label {
   margin-left: -24px;
   touch-action: manipulation; }
 
+.form-control {
+  display: block; }
+
 .steno-stroke {
   background-color: #474548;
   color: #ACAAA6; }

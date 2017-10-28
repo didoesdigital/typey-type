@@ -33,8 +33,9 @@ class UserSettings extends Component {
             </label>
           </div>
           <label>
-            Number of repetitions:
+            Number of repetitions
             <input
+              className="form-control"
               name="repetitions"
               type="number"
               min="1"
