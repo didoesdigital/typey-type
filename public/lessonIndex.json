@@ -1,5 +1,12 @@
 [
     {
+      "title": "A test lesson",
+      "subtitle": "QWERTY friendly",
+      "category": "Fundamentals",
+      "subcategory": "Testing",
+      "path": "/lessons/lesson.txt"
+    },
+    {
       "title": "Belling the Cat",
       "subtitle": "",
       "category": "Stories",
