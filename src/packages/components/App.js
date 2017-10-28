@@ -37,7 +37,14 @@ class App extends Component {
           spacePlacement: 'Before Output'
         },
         title: 'Loading…', subtitle: 'Loading…'
-      }
+      },
+      lessonIndex: [{
+        "title": "Top 1,000 English words",
+        "subtitle": "",
+        "category": "Collections",
+        "subcategory": "",
+        "path": "/lessons/collections/google-1000-english/lesson.txt"
+      }]
     };
   }
 
@@ -58,6 +65,18 @@ class App extends Component {
 
       this.setState({ lesson: lesson });
       this.setState({ currentPhraseID: 0 });
+    });
+
+    fetch('/lessonIndex.json', {
+      method: "GET",
+      credentials: "same-origin"
+    }).then((response) => {
+      return response.json()
+    }).then(json => {
+      console.log(json);
+      this.setState({ lessonIndex: json });
+    }).catch(function(ex) {
+      console.log('parsing failed', ex)
     });
   }
 
@@ -219,7 +238,11 @@ class App extends Component {
               </div>
             }
             value={this.state.value}
-            onChange={e => this.setState({ value: e.target.value })}
+            onChange={(ev, value) => {
+              this.setState({
+                value: ev.target.value
+              })}
+            }
             onSelect={(value, item) => this.setState({
               value: value,
               path: item.path
@@ -237,7 +260,7 @@ class App extends Component {
             }}
             inputProps={{ id: 'lessons-autocomplete' }}
             wrapperStyle={{ position: 'relative', display: 'inline-block' }}
-            items={getLessons()}
+            items={this.state.lessonIndex}
             getItemValue={(item) => item.title}
             shouldItemRender={matchLessonToTerm}
             sortItems={sortLessons}

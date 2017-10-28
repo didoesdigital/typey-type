@@ -24,60 +24,6 @@ function fakeRequest(value, cb) {
   )
 }
 
-function getLessons() {
-  return [
-    {
-      title: "Belling the Cat",
-      subtitle: "",
-      category: "Stories",
-      subcategory: "Aesop's Fables",
-      path: "/lessons/stories/fables/belling-the-cat/lesson.txt"
-    },
-    {
-      title: "Single-stroke-briefs",
-      subtitle: "",
-      category: "Collections",
-      subcategory: "",
-      path: "/lessons/collections/single-stroke-briefs/lesson.txt"
-    },
-    {
-      title: "Common words",
-      subtitle: "",
-      category: "Collections",
-      subcategory: "",
-      path: "/lessons/collections/common-words/lesson.txt"
-    },
-    {
-      title: "Top 1,000 English words",
-      subtitle: "",
-      category: "Collections",
-      subcategory: "",
-      path: "/lessons/collections/google-1000-english/lesson.txt"
-    },
-    {
-      title: "UX",
-      subtitle: "",
-      category: "Domain specific",
-      subcategory: "",
-      path: "/lessons/domains/ux/lesson.txt"
-    },
-    {
-      title: "Lesson 1 Exercise 1",
-      subtitle: "One-syllable words",
-      category: "Fundamentals",
-      subcategory: "",
-      path: "/lessons/fundamentals/one-syllable-words/lesson.txt"
-    },
-    {
-      title: "FR",
-      subtitle: "-fer",
-      category: "Drills",
-      subcategory: "",
-      path: "/lessons/drills/fr/lesson.txt"
-    }
-  ]
-}
-
 function randomise(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -92,4 +38,4 @@ function randomise(array) {
   return array;
 }
 
-export {getLessons,fakeRequest,matchLessonToTerm,sortLessons,randomise}
+export {getLessons,fakeRequest,matchLessonToTerm,sortLessons,randomise};
