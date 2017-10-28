@@ -24,7 +24,6 @@ class App extends Component {
       userSettings: {
         showStrokes: true,
         randomise: false,
-        repeat: false,
         repetitions: 1
       },
       lesson: {
@@ -45,12 +44,17 @@ class App extends Component {
   componentDidMount() {
     this.getLesson().then((lessonText) => {
       let lesson = parseLesson(lessonText);
-      if (this.state.userSettings.repeat) {
-        lesson.presentedMaterial = lesson.sourceMaterial.concat(lesson.sourceMaterial).concat(lesson.sourceMaterial);
-      }
       if (this.state.userSettings.randomise) {
         lesson.presentedMaterial = randomise(lesson.sourceMaterial);
       }
+
+      let reps = this.state.userSettings.repetitions;
+      if (reps > 0) {
+        for (let i = 1; i < reps && i < 30; i++) {
+          newLesson.presentedMaterial = newLesson.presentedMaterial.concat(newLesson.sourceMaterial);
+        }
+      }
+
       this.setState({ lesson: lesson });
       this.setState({ currentPhraseID: 0 });
     });
@@ -102,10 +106,6 @@ class App extends Component {
     let currentLesson = this.state.lesson;
     let newLesson = Object.assign({}, currentLesson);
     newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
-
-    if (this.state.userSettings.repeat) {
-      newLesson.presentedMaterial = newLesson.sourceMaterial.concat(newLesson.sourceMaterial).concat(newLesson.sourceMaterial);
-    }
 
     if (this.state.userSettings.randomise) {
       newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
