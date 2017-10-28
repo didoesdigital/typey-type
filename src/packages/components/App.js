@@ -51,7 +51,8 @@ class App extends Component {
       let reps = this.state.userSettings.repetitions;
       if (reps > 0) {
         for (let i = 1; i < reps && i < 30; i++) {
-          newLesson.presentedMaterial = newLesson.presentedMaterial.concat(newLesson.sourceMaterial);
+          let currentLesson = this.state.lesson;
+          currentLesson.presentedMaterial = currentLesson.presentedMaterial.concat(currentLesson.sourceMaterial);
         }
       }
 
