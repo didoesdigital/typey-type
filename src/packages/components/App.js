@@ -88,7 +88,6 @@ class App extends Component {
       return response.text();
     }, function(error) {
       console.log(error);
-      return error.message;
     });
   }
 
