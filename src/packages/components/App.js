@@ -30,7 +30,7 @@ class App extends Component {
         sourceMaterial: [{phrase: '', stroke: ''}],
         presentedMaterial: [{phrase: '', stroke: ''}],
         settings: {
-          caseSensitive: true,
+          caseSensitive: false,
           requireSpaces: false,
           noticeSpaces: false,
           ignoredChars: '',
