@@ -41,6 +41,7 @@ class UserSettings extends Component {
                 type="checkbox"
                 name="caseInsensitive"
                 id="caseInsensitive"
+                disabled={this.props.disableUserSettings}
                 checked={this.props.userSettings.caseInsensitive}
                 onChange={this.props.changeUserSetting}
                 />
