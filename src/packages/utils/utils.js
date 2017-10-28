@@ -17,13 +17,6 @@ function sortLessons(a, b, value) {
   return aLower < bLower ? -1 : 1
 }
 
-function fakeRequest(value, cb) {
-  return setTimeout(cb, 500, value ?
-    getLessons().filter(lesson => matchLessonToTerm(lesson, value)) :
-    getLessons()
-  )
-}
-
 function randomise(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -38,4 +31,4 @@ function randomise(array) {
   return array;
 }
 
-export {getLessons,fakeRequest,matchLessonToTerm,sortLessons,randomise};
+export {matchLessonToTerm,sortLessons,randomise};
