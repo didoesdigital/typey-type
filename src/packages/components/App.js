@@ -24,13 +24,14 @@ class App extends Component {
       userSettings: {
         showStrokes: true,
         randomise: false,
-        repetitions: 1
+        repetitions: 1,
+        caseInsensitive: true
       },
       lesson: {
         sourceMaterial: [{phrase: '', stroke: ''}],
         presentedMaterial: [{phrase: '', stroke: ''}],
         settings: {
-          caseSensitive: false,
+          caseInsensitive: true,
           requireSpaces: false,
           noticeSpaces: false,
           ignoredChars: '',
@@ -163,7 +164,7 @@ class App extends Component {
     }
 
     let [numberOfMatchedChars, numberOfUnmatchedChars] =
-      matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings)
+      matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings, this.state.userSettings)
       .map(text => text.length);
 
     var newState = {

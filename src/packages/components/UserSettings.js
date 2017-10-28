@@ -32,6 +32,19 @@ class UserSettings extends Component {
               Randomise lesson
             </label>
           </div>
+          <div className="checkbox-group">
+            <label className="checkbox-label">
+              <input
+                className="checkbox-input"
+                type="checkbox"
+                name="caseInsensitive"
+                id="caseInsensitive"
+                checked={this.props.userSettings.caseInsensitive}
+                onChange={this.props.changeUserSetting}
+                />
+              Case insensitive
+            </label>
+          </div>
           <label>
             Number of repetitions
             <input

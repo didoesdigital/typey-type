@@ -1,4 +1,4 @@
-function matchSplitText(expected, actualText, settings={spacePlacement: 'Before Output', caseSensitive: false, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}) {
+function matchSplitText(expected, actualText, settings={spacePlacement: 'Before Output', caseInsensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}, userSettings={}) {
   if (settings.requireSpaces === true && settings.spacePlacement === 'Before Output') {
     expected = ' '+expected;
   } else if (settings.requireSpaces === true && settings.spacePlacement === 'After Output') {
@@ -10,7 +10,7 @@ function matchSplitText(expected, actualText, settings={spacePlacement: 'Before 
   let expectedIndex = 0;
   let actualTextIndex = 0;
 
-  if (settings.caseSensitive === true) {
+  if (!userSettings.caseInsensitive) {
     charactersMatch = function (char1, char2) {
       return char1 === char2;
     }
@@ -46,7 +46,7 @@ function matchSplitText(expected, actualText, settings={spacePlacement: 'Before 
 }
 
 const SETTINGS_NAME_MAP = {
-  case_sensitive: 'caseSensitive',
+  case_sensitive: 'caseInsensitive',
   require_spaces: 'requireSpaces',
   notice_spaces: 'noticeSpaces',
   ignore_characters: 'ignoredChars',
@@ -57,7 +57,7 @@ const SETTINGS_NAME_MAP = {
 function parseLesson(lessonText) {
   var lines = lessonText.split("\n").filter(phrase => phrase !== '');
   var sourceMaterial = [];
-  var settings = {caseSensitive: false, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'};
+  var settings = {caseInsensitive: false, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'};
   var lessonTitle = lines[0];
   var lessonSubtitle = lines[1];
 
@@ -77,6 +77,9 @@ function parseLesson(lessonText) {
       settings[SETTINGS_NAME_MAP[optionAndValue[0]]] = value;
     }
   }
+
+  // Flip this because lesson shows case_sensitive and I want caseInsensitive
+  settings.caseInsensitive = !settings.caseInsensitive;
 
   return { sourceMaterial: sourceMaterial, presentedMaterial: sourceMaterial, settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
 }
