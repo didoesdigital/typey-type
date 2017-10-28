@@ -15,7 +15,7 @@ class Finished extends Component {
       <div>
         {customMessage}
         <div className="content">
-          <UserSettings userSettings={this.props.userSettings} changeUserSetting={this.props.changeUserSetting} />
+          <UserSettings userSettings={this.props.userSettings} changeUserSetting={this.props.changeUserSetting} disableUserSettings={this.props.disableUserSettings} />
           <div className="lesson-canvas">
             <div role="alert" aria-live="polite">Finished!</div>
           </div>

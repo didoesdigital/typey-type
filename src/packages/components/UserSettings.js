@@ -13,6 +13,7 @@ class UserSettings extends Component {
                 type="checkbox"
                 name="showStrokes"
                 id="showStrokes"
+                disabled={this.props.disableUserSettings}
                 checked={this.props.userSettings.showStrokes}
                 onChange={this.props.changeUserSetting}
                 />
@@ -26,6 +27,7 @@ class UserSettings extends Component {
                 type="checkbox"
                 name="randomise"
                 id="randomise"
+                disabled={this.props.disableUserSettings}
                 checked={this.props.userSettings.randomise}
                 onChange={this.props.changeUserSetting}
                 />
@@ -39,6 +41,7 @@ class UserSettings extends Component {
               type="number"
               min="1"
               max="30"
+              disabled={this.props.disableUserSettings}
               value={this.props.userSettings.repetitions}
               onChange={this.props.changeUserSetting} />
           </label>

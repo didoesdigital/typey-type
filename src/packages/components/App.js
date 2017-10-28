@@ -21,6 +21,7 @@ class App extends Component {
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
+      disableUserSettings: false,
       userSettings: {
         showStrokes: true,
         randomise: false,
@@ -157,7 +158,8 @@ class App extends Component {
     if (this.state.startTime === null) {
       this.setState({
         startTime: new Date(),
-        timer: 0
+        timer: 0,
+        disableUserSettings: true
       });
       this.startTimer();
     }
@@ -208,6 +210,7 @@ class App extends Component {
               changeUserSetting={this.changeUserSetting.bind(this)}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+              disableUserSettings={this.state.disableUserSettings}
               />
           </div>
         </div>
@@ -275,6 +278,7 @@ class App extends Component {
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
               updateMarkup={this.updateMarkup.bind(this)}
               userSettings={this.state.userSettings}
+              disableUserSettings={this.state.disableUserSettings}
               />
           </div>
         </div>
