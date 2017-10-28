@@ -4,7 +4,7 @@ import './App.css';
 
 class Material extends Component {
   markUpMaterial(currentPhrase, actualText, settings) {
-    let [matched, unmatched] = matchSplitText(currentPhrase, actualText, settings);
+    let [matched, unmatched] = matchSplitText(currentPhrase, actualText, settings, this.props.userSettings);
     let matchedMaterialMarkup;
 
     if (this.props.userSettings.showStrokes) {

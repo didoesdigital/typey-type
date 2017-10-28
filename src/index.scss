@@ -188,6 +188,9 @@ label {
   margin-left: -24px;
   touch-action: manipulation;
 }
+.form-control {
+  display: block;
+}
 .steno-stroke {
   background-color: $medium-primary-shade-2;
   color: $light-tertiary-shade-1;

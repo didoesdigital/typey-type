@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Autocomplete from 'react-autocomplete';
-import { getLessons, matchLessonToTerm, sortLessons, randomise } from 'utils/utils'
+import { matchLessonToTerm, sortLessons, randomise } from 'utils/utils'
 import Finished from 'components/Finished';
 import Header from 'components/Header';
 import Typing from 'components/Typing';
@@ -25,13 +25,14 @@ class App extends Component {
       userSettings: {
         showStrokes: true,
         randomise: false,
-        repetitions: 1
+        repetitions: 1,
+        caseInsensitive: true
       },
       lesson: {
         sourceMaterial: [{phrase: '', stroke: ''}],
         presentedMaterial: [{phrase: '', stroke: ''}],
         settings: {
-          caseSensitive: true,
+          caseInsensitive: true,
           requireSpaces: false,
           noticeSpaces: false,
           ignoredChars: '',
@@ -66,10 +67,9 @@ class App extends Component {
     }).then((response) => {
       return response.json()
     }).then(json => {
-      console.log(json);
       this.setState({ lessonIndex: json });
-    }).catch(function(ex) {
-      console.log('parsing failed', ex)
+    }).catch(function(e) {
+      console.log('Unable to load lesson index', e)
     });
   }
 
@@ -165,7 +165,7 @@ class App extends Component {
     }
 
     let [numberOfMatchedChars, numberOfUnmatchedChars] =
-      matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings)
+      matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings, this.state.userSettings)
       .map(text => text.length);
 
     var newState = {
