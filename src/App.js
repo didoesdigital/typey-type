@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Autocomplete from 'react-autocomplete';
-import { matchLessonToTerm, sortLessons, randomise } from 'utils/utils';
-import Finished from 'components/Finished';
-import Header from 'components/Header';
-import Typing from 'components/Typing';
-import {matchSplitText, parseLesson} from 'utils/typey-type';
+import { matchLessonToTerm, sortLessons, randomise } from './utils';
+import Finished from './Finished';
+import Header from './Header';
+import Typing from './Typing';
+import {matchSplitText, parseLesson} from './typey-type';
 import './App.css';
 
 class App extends Component {

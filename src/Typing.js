@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import Material from 'components/Material';
-import TypedText from 'components/TypedText';
-import Scores from 'components/Scores';
-import UserSettings from 'components/UserSettings';
+import Material from './Material';
+import TypedText from './TypedText';
+import Scores from './Scores';
+import UserSettings from './UserSettings';
 import './App.css';
 
 class Typing extends Component {

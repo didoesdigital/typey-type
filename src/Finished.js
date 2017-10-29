@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Scores from 'components/Scores';
-import UserSettings from 'components/UserSettings';
+import Scores from './Scores';
+import UserSettings from './UserSettings';
 import './App.css';
 
 class Finished extends Component {
