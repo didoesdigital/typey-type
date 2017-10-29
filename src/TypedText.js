@@ -3,6 +3,7 @@ import {matchSplitText} from './typey-type';
 import './App.css';
 
 class TypedText extends Component {
+  // Show how much of what you've typed is correct
   markUpTypedText(currentPhrase, actualText, settings) {
     let array = matchSplitText(currentPhrase, actualText, settings, this.props.userSettings);
     let matched = array[2];

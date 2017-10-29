@@ -4,6 +4,7 @@ import './App.css';
 
 class Material extends Component {
   markUpMaterial(currentPhrase, actualText, settings) {
+    // Show how much of material you've typed correctly
     let [matched, unmatched] = matchSplitText(currentPhrase, actualText, settings, this.props.userSettings);
     let matchedMaterialMarkup;
 

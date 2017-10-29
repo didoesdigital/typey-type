@@ -20,19 +20,39 @@ function matchSplitText(expected, actualText, settings={spacePlacement: 'Before 
     }
   }
 
+  if (settings.noticeSpaces === false) {
+    settings.ignoredChars += " ";
+  }
+
   for (; actualTextIndex < actualTextChars.length && expectedIndex < expectedChars.length; expectedIndex++, actualTextIndex++) {
+
+    // Is material char an ignored char?
     while(settings.ignoredChars.indexOf(expectedChars[expectedIndex]) !== -1) {
       expectedIndex++;
       if (expectedIndex >= expectedChars.length) {
         break;
       };
     }
+
+    // Is typed char an ignored space?
     while(settings.noticeSpaces === false && actualTextChars[actualTextIndex] === ' ') {
       actualTextIndex++
       if (actualTextIndex >= actualTextChars.length) {
         break;
       }
     }
+
+    // If typed char is undefined, break
+    if (!actualTextChars[actualTextIndex]) {
+      break;
+    }
+
+    // If material char is undefined, break
+    if (!expectedChars[expectedIndex]) {
+      break;
+    }
+
+    // Do material and typed chars match?
     if (!charactersMatch(actualTextChars[actualTextIndex], expectedChars[expectedIndex])) {
       break;
     }

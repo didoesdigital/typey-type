@@ -166,6 +166,7 @@ class App extends Component {
       this.startTimer();
     }
 
+    // This informs word count, WPM, moving onto next phrase, ending lesson
     let [numberOfMatchedChars, numberOfUnmatchedChars] =
       matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings, this.state.userSettings)
       .map(text => text.length);
