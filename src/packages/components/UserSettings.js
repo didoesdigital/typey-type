@@ -61,6 +61,7 @@ class UserSettings extends Component {
               onChange={this.props.changeUserSetting} />
           </label>
         </form>
+        <p><strong>Total word count:</strong> {this.props.totalWordCount}</p>
       </div>
     )
   }

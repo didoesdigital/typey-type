@@ -210,6 +210,7 @@ class App extends Component {
               changeUserSetting={this.changeUserSetting.bind(this)}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+              totalWordCount={this.state.lesson.presentedMaterial.length}
               disableUserSettings={this.state.disableUserSettings}
               />
           </div>
@@ -276,6 +277,7 @@ class App extends Component {
               settings={this.state.lesson.settings}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+              totalWordCount={this.state.lesson.presentedMaterial.length}
               updateMarkup={this.updateMarkup.bind(this)}
               userSettings={this.state.userSettings}
               disableUserSettings={this.state.disableUserSettings}
