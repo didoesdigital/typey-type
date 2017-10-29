@@ -219,12 +219,12 @@ class App extends Component {
     } else {
       return (
         <div className="app">
-          <label htmlFor="lessons-autocomplete">Choose a lesson</label>
+          <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
           <Autocomplete
             renderItem={(item, highlighted) =>
               <div
                 key={item.path}
-                style={{ backgroundColor: highlighted ? '#eee' : 'transparent'}}
+                style={{ backgroundColor: highlighted ? '#ffd073' : 'transparent'}}
               >
                 <h5>{item.title}</h5>
                 <h6>{item.subtitle}</h6>
@@ -243,6 +243,9 @@ class App extends Component {
               path: item.path
             })}
 
+            renderInput={function(props) {
+              return <input {...props} className="form-control" />
+            }}
             menuStyle={{
               borderRadius: '8px',
               boxShadow: '0 2px 12px rgba(0,0,0,0.5)',
@@ -260,7 +263,7 @@ class App extends Component {
             shouldItemRender={matchLessonToTerm}
             sortItems={sortLessons}
           />
-          <a href={this.state.path} onClick={this.handleLesson.bind(this)}>Start lesson</a>
+          <a href={this.state.path} onClick={this.handleLesson.bind(this)} className="link-button" role="button">Start lesson</a>
           <Header
             getLesson={this.handleLesson.bind(this)}
             lessonSubTitle={this.state.lesson.subtitle}
