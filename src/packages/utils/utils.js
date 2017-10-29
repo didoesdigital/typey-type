@@ -31,4 +31,4 @@ function randomise(array) {
   return array;
 }
 
-export {matchLessonToTerm,sortLessons,randomise};
+export { matchLessonToTerm, sortLessons, randomise };
