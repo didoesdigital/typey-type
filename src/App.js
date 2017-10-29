@@ -109,7 +109,9 @@ class App extends Component {
     newState[name] = value;
 
     this.setState({userSettings: newState}, () => {
-      this.setupLesson();
+      if (!(name === 'caseInsensitive')) {
+        this.setupLesson();
+      }
     });
     return value;
   }
