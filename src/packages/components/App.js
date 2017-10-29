@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Autocomplete from 'react-autocomplete';
-import { matchLessonToTerm, sortLessons, randomise } from 'utils/utils'
+import { matchLessonToTerm, sortLessons, randomise } from 'utils/utils';
 import Finished from 'components/Finished';
 import Header from 'components/Header';
 import Typing from 'components/Typing';
