@@ -260,7 +260,7 @@ class App extends Component {
             shouldItemRender={matchLessonToTerm}
             sortItems={sortLessons}
           />
-          <a href={this.state.path} onClick={this.handleLesson.bind(this)}>Search</a>
+          <a href={this.state.path} onClick={this.handleLesson.bind(this)}>Start lesson</a>
           <Header
             getLesson={this.handleLesson.bind(this)}
             lessonSubTitle={this.state.lesson.subtitle}
