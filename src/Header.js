@@ -28,10 +28,7 @@ class Header extends Component {
                   value: ev.target.value
                 })}
               }
-              onSelect={(value, item) => this.setState({
-                value: value,
-                path: item.path
-              })}
+              onSelect={this.props.onSelect}
               menuStyle={{ }}
               renderInput={function(props) {
                 return <input {...props} className="form-control" />

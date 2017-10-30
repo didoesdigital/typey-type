@@ -233,6 +233,10 @@ class App extends Component {
             items={this.state.lessonIndex}
             lessonSubTitle={this.state.lesson.subtitle}
             lessonTitle={this.state.lesson.title}
+            onSelect={(value, item) => this.setState({
+                value: value,
+                path: item.path
+              })}
             settings={this.state.lesson.settings}
             value={this.state.value}
           />
