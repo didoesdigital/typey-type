@@ -167,7 +167,7 @@ label {
   touch-action: manipulation; }
 
 .form-control {
-  display: block;
+  display: inline-block;
   border-radius: 4px;
   padding: 4px 8px;
   border: 1px solid #5F2580;
