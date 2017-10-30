@@ -11,6 +11,19 @@ class Header extends Component {
           <nav>
             <div role="banner" className="site-heading-banner"><a href="/" className="site-heading-link">Typey type</a></div>
             <Autocomplete
+              getItemValue={(item) => item.title}
+              inputProps={{ id: 'lessons-autocomplete' }}
+              items={this.props.items}
+              menuStyle={{ }}
+              onChange={(ev, value) => {
+                this.setState({
+                  value: ev.target.value
+                })}
+              }
+              onSelect={this.props.onSelect}
+              renderInput={function(props) {
+                return <input {...props} className="form-control" />
+              }}
               renderItem={(item, highlighted) =>
                 <div
                   key={item.path}
@@ -22,27 +35,15 @@ class Header extends Component {
                   {item.subcategory}
                 </div>
               }
-              value={this.props.value}
-              onChange={(ev, value) => {
-                this.setState({
-                  value: ev.target.value
-                })}
-              }
-              onSelect={this.props.onSelect}
-              menuStyle={{ }}
-              renderInput={function(props) {
-                return <input {...props} className="form-control" />
-              }}
               renderMenu={function(items, value, style) {
                 return <div style={{ ...style, ...this.menuStyle }} className="autocomplete-menu" children={items}/>
               }}
-              inputProps={{ id: 'lessons-autocomplete' }}
-              wrapperStyle={{ position: 'relative', display: 'inline-block' }}
-              items={this.props.items}
-              getItemValue={(item) => item.title}
               shouldItemRender={matchLessonToTerm}
               sortItems={sortLessons}
+              value={this.props.value}
+              wrapperStyle={{ position: 'relative', display: 'inline-block' }}
             />
+            <a href={this.props.path} onClick={this.props.getLesson} className="link-button" role="button">Start lesson</a>
           </nav>
         </div>
         <div className="subheader">

@@ -205,6 +205,7 @@ class App extends Component {
             items={this.state.lessonIndex}
             lessonSubTitle={this.state.lesson.subtitle}
             lessonTitle={this.state.lesson.title}
+            path={this.state.path}
             settings={this.state.lesson.settings}
             value={this.state.value}
           />
@@ -227,7 +228,6 @@ class App extends Component {
       return (
         <div className="app">
           <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
-          <a href={this.state.path} onClick={this.handleLesson.bind(this)} className="link-button" role="button">Start lesson</a>
           <Header
             getLesson={this.handleLesson.bind(this)}
             items={this.state.lessonIndex}
@@ -237,6 +237,7 @@ class App extends Component {
                 value: value,
                 path: item.path
               })}
+            path={this.state.path}
             settings={this.state.lesson.settings}
             value={this.state.value}
           />
