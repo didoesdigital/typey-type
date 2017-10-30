@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Autocomplete from 'react-autocomplete';
-import { matchLessonToTerm, sortLessons, randomise } from './utils';
+import { randomise } from './utils';
 import Finished from './Finished';
 import Header from './Header';
 import Typing from './Typing';
@@ -202,10 +201,12 @@ class App extends Component {
       return (
         <div className="app">
           <Header
+            getLesson={this.handleLesson.bind(this)}
+            items={this.state.lessonIndex}
             lessonSubTitle={this.state.lesson.subtitle}
             lessonTitle={this.state.lesson.title}
-            getLesson={this.handleLesson.bind(this)}
             settings={this.state.lesson.settings}
+            value={this.state.value}
           />
           <div className="main">
             <Finished
@@ -226,55 +227,14 @@ class App extends Component {
       return (
         <div className="app">
           <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
-          <Autocomplete
-            renderItem={(item, highlighted) =>
-              <div
-                key={item.path}
-                style={{ backgroundColor: highlighted ? '#ffd073' : 'transparent'}}
-              >
-                <h5>{item.title}</h5>
-                <h6>{item.subtitle}</h6>
-                {item.category} >&nbsp;
-                {item.subcategory}
-              </div>
-            }
-            value={this.state.value}
-            onChange={(ev, value) => {
-              this.setState({
-                value: ev.target.value
-              })}
-            }
-            onSelect={(value, item) => this.setState({
-              value: value,
-              path: item.path
-            })}
-
-            renderInput={function(props) {
-              return <input {...props} className="form-control" />
-            }}
-            menuStyle={{
-              borderRadius: '8px',
-              boxShadow: '0 2px 12px rgba(0,0,0,0.5)',
-              background: 'rgba(255,255,255,1)',
-              padding: '2px 0',
-              fontSize: '90%',
-              position: 'fixed',
-              overflow: 'auto',
-              maxHeight: '100%',
-            }}
-            inputProps={{ id: 'lessons-autocomplete' }}
-            wrapperStyle={{ position: 'relative', display: 'inline-block' }}
-            items={this.state.lessonIndex}
-            getItemValue={(item) => item.title}
-            shouldItemRender={matchLessonToTerm}
-            sortItems={sortLessons}
-          />
           <a href={this.state.path} onClick={this.handleLesson.bind(this)} className="link-button" role="button">Start lesson</a>
           <Header
             getLesson={this.handleLesson.bind(this)}
+            items={this.state.lessonIndex}
             lessonSubTitle={this.state.lesson.subtitle}
             lessonTitle={this.state.lesson.title}
             settings={this.state.lesson.settings}
+            value={this.state.value}
           />
           <div>
             <Typing
