@@ -15,11 +15,7 @@ class Header extends Component {
               inputProps={{ id: 'lessons-autocomplete' }}
               items={this.props.items}
               menuStyle={{ }}
-              onChange={(ev, value) => {
-                this.setState({
-                  value: ev.target.value
-                })}
-              }
+              onChange={this.props.onChange}
               onSelect={this.props.onSelect}
               renderInput={function(props) {
                 return <input {...props} className="form-control" />

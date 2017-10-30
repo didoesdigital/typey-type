@@ -205,6 +205,14 @@ class App extends Component {
             items={this.state.lessonIndex}
             lessonSubTitle={this.state.lesson.subtitle}
             lessonTitle={this.state.lesson.title}
+            onChange={(ev, value) => {
+            this.setState({
+              value: ev.target.value
+            })}}
+            onSelect={(value, item) => this.setState({
+              value: value,
+              path: item.path
+            })}
             path={this.state.path}
             settings={this.state.lesson.settings}
             value={this.state.value}
@@ -233,10 +241,14 @@ class App extends Component {
             items={this.state.lessonIndex}
             lessonSubTitle={this.state.lesson.subtitle}
             lessonTitle={this.state.lesson.title}
+            onChange={(ev, value) => {
+            this.setState({
+              value: ev.target.value
+            })}}
             onSelect={(value, item) => this.setState({
-                value: value,
-                path: item.path
-              })}
+              value: value,
+              path: item.path
+            })}
             path={this.state.path}
             settings={this.state.lesson.settings}
             value={this.state.value}
