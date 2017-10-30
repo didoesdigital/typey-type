@@ -32,19 +32,12 @@ class Header extends Component {
                 value: value,
                 path: item.path
               })}
-
+              menuStyle={{ }}
               renderInput={function(props) {
                 return <input {...props} className="form-control" />
               }}
-              menuStyle={{
-                borderRadius: '8px',
-                boxShadow: '0 2px 12px rgba(0,0,0,0.5)',
-                background: 'rgba(255,255,255,1)',
-                padding: '2px 0',
-                fontSize: '90%',
-                position: 'fixed',
-                overflow: 'auto',
-                maxHeight: '100%',
+              renderMenu={function(items, value, style) {
+                return <div style={{ ...style, ...this.menuStyle }} className="autocomplete-menu" children={items}/>
               }}
               inputProps={{ id: 'lessons-autocomplete' }}
               wrapperStyle={{ position: 'relative', display: 'inline-block' }}
