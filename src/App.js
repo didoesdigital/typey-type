@@ -167,9 +167,12 @@ class App extends Component {
     }
 
     // This informs word count, WPM, moving onto next phrase, ending lesson
-    let [numberOfMatchedChars, numberOfUnmatchedChars] =
-      matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings, this.state.userSettings)
-      .map(text => text.length);
+    let [matchedChars, unmatchedChars] =
+      matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings, this.state.userSettings);
+
+    matchedChars = matchedChars.replace(new RegExp(this.state.lesson.settings.ignoredChars,'g'), '');
+
+    let [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
     var newState = {
       numberOfMatchedChars: numberOfMatchedChars,
