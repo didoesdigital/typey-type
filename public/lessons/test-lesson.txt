@@ -1,0 +1,9 @@
+Test lesson
+
+'qwerty': KW*ERT
+'xxxxxqwerty': KW*ERT
+'qwerty': KW*ERT
+case_sensitive=false
+notice_spaces=false
+require_spaces=false
+ignore_characters='x'
