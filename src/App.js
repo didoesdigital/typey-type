@@ -61,7 +61,7 @@ class App extends Component {
       });
     });
 
-    fetch('/lessonIndex.json', {
+    fetch('/lessons/lessonIndex.json', {
       method: "GET",
       credentials: "same-origin"
     }).then((response) => {
