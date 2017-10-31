@@ -91,6 +91,7 @@ input, textarea {
   .header nav {
     align-items: center;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between; }
   .header .search-container {
     max-width: 576px; }
@@ -122,12 +123,13 @@ input, textarea {
   padding: 0 24px;
   grid-gap: 24px;
   margin: 0 auto; }
-  .content .user-settings {
-    grid-column: 1; }
-  .content .lesson-canvas {
-    grid-column: span 2; }
-  .content .scores {
-    grid-column: 4; }
+  @media (min-width: 960px) {
+    .content .user-settings {
+      grid-column: 1; }
+    .content .lesson-canvas {
+      grid-column: span 2; }
+    .content .scores {
+      grid-column: 4; } }
   .content .user-settings,
   .content .lesson-canvas,
   .content .scores {
