@@ -68,6 +68,9 @@ dl.inline-flex dd {
   text-align: right;
   text-overflow: ellipsis; }
 
+input, textarea {
+  font: 400 16px/1.6 "Overpass Mono", "Montserrat", "Open Sans", Helvetica, sans-serif; }
+
 .visually-hidden {
   position: absolute !important;
   height: 1px;
@@ -75,19 +78,22 @@ dl.inline-flex dd {
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px); }
 
+.table {
+  display: table; }
+
+.table-cell {
+  display: table-cell; }
+
 .header {
   background-color: #321E3E;
   color: #fff;
   padding: 24px; }
   .header nav {
-    display: grid;
-    grid-gap: 24px; }
-  .header .site-heading-banner {
-    grid-column: 1; }
-  .header nav ul {
-    grid-column: 2; }
-  .header nav ul li {
-    display: inline-block; }
+    align-items: center;
+    display: flex;
+    justify-content: space-between; }
+  .header .search-container {
+    max-width: 576px; }
 
 .site-heading-link {
   color: #fff;
@@ -115,7 +121,7 @@ dl.inline-flex dd {
   display: grid;
   padding: 0 24px;
   grid-gap: 24px;
-  max-width: 1440px; }
+  margin: 0 auto; }
   .content .user-settings {
     grid-column: 1; }
   .content .lesson-canvas {
@@ -174,6 +180,14 @@ label {
   font-size: 1rem;
   line-height: 1.5; }
 
+.inline-form-control {
+  border-radius: 4px;
+  padding: 4px 8px;
+  border: 1px solid #5F2580;
+  font-size: 1rem;
+  line-height: 1.5;
+  width: 100%; }
+
 .autocomplete-menu {
   background-color: #F2F0EC;
   border-radius: 4px;
@@ -190,7 +204,6 @@ label {
   border-radius: 4px;
   border: 1px solid #5F2580;
   color: #fff;
-  display: inline-block;
   padding: 4px 8px;
   text-align: center;
   text-decoration: none;

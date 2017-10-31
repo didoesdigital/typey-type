@@ -2,14 +2,19 @@
 @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:300,300i,700,700i');
 // @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 
+// variables
+
+$type: 400 16px/1.6 "Overpass Mono", "Montserrat", "Open Sans", Helvetica, sans-serif;
+
 // Element styles
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
 body {
-  font: 400 16px/1.6 "Overpass Mono", "Montserrat", "Open Sans", Helvetica, sans-serif;
+  font: $type;
   margin: 0 auto;
   color: $medium-primary;
 }
@@ -73,6 +78,10 @@ dl.inline-flex dd {
   text-overflow: ellipsis;
 }
 
+input, textarea {
+  font: $type;
+}
+
 // Utilities
 .visually-hidden {
   position: absolute !important;
@@ -81,6 +90,12 @@ dl.inline-flex dd {
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
 }
+.table {
+  display: table;
+}
+.table-cell {
+  display: table-cell;
+}
 
 // Class styles
 .header {
@@ -88,17 +103,12 @@ dl.inline-flex dd {
   color: #fff;
   padding: 24px;
   nav {
-    display: grid;
-    grid-gap: 24px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
   }
-  .site-heading-banner {
-    grid-column: 1;
-  }
-  nav ul {
-    grid-column: 2;
-  }
-  nav ul li {
-    display: inline-block;
+  .search-container {
+    max-width: 576px;
   }
 }
 .site-heading-link {
@@ -134,7 +144,7 @@ dl.inline-flex dd {
   display: grid;
   padding: 0 24px;
   grid-gap: 24px;
-  max-width: 1440px;
+  margin: 0 auto;
   .user-settings {
     grid-column: 1;
   }
@@ -202,6 +212,14 @@ label {
   font-size: 1rem;
   line-height: 1.5;
 }
+.inline-form-control {
+  border-radius: 4px;
+  padding: 4px 8px;
+  border: 1px solid $heavy-primary-shade-1;
+  font-size: 1rem;
+  line-height: 1.5;
+  width: 100%;
+}
 .autocomplete-menu {
   background-color: $light-tertiary-tint-2;
   border-radius: 4px;
@@ -218,7 +236,6 @@ label {
   border-radius: 4px;
   border: 1px solid $heavy-primary-shade-1;
   color: #fff;
-  display: inline-block;
   padding: 4px 8px;
   text-align: center;
   text-decoration: none;
