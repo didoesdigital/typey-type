@@ -235,7 +235,6 @@ class App extends Component {
     } else {
       return (
         <div className="app">
-          <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
           <Header
             getLesson={this.handleLesson.bind(this)}
             items={this.state.lessonIndex}
