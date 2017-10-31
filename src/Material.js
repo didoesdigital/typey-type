@@ -10,7 +10,7 @@ class Material extends Component {
 
     if (this.props.userSettings.showStrokes) {
       matchedMaterialMarkup = `<div class="material"><pre><span class="matched steno-material">${matched}</span><span class="steno-material">${unmatched}</span></span></pre></div>
-      <div class="stroke-tip"><span class="visually-hidden">Stroke: </span><pre><span class="steno-stroke">${this.props.currentStroke}</span></pre></div>`;
+      <div class="stroke-tip"><span class="visually-hidden">Hint: </span><pre><span class="steno-stroke">${this.props.currentStroke}</span></pre></div>`;
     } else {
       matchedMaterialMarkup = `<div class="material"><pre><span class="matched steno-material">${matched}</span><span class="steno-material">${unmatched}</span></pre></div>`;
     }
@@ -21,7 +21,7 @@ class Material extends Component {
   render() {
     return (
       <div className="">
-        <div className="visually-hidden">Material to type:</div>
+        <div className="visually-hidden">Material to type: <div role="status" aria-live="assertive">{this.props.currentPhrase}</div></div>
         <div className="expected" dangerouslySetInnerHTML={this.markUpMaterial(this.props.currentPhrase, this.props.actualText, this.props.settings, this.props.currentStroke)} />
       </div>
     );
