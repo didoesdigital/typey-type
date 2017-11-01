@@ -84,6 +84,10 @@ input, textarea {
 .table-cell {
   display: table-cell; }
 
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto; }
+
 .header {
   background-color: #2e173b;
   color: #fff;
@@ -137,6 +141,10 @@ input, textarea {
     border: thin solid #c6bdcb;
     border-radius: 4px;
     padding: 16px; }
+
+.lesson-canvas {
+  display: flex;
+  align-items: center; }
 
 .material p {
   padding: 0.25em; }

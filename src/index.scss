@@ -96,6 +96,10 @@ input, textarea {
 .table-cell {
   display: table-cell;
 }
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
 
 // Class styles
 .header {
@@ -165,6 +169,10 @@ input, textarea {
     border-radius: 4px;
     padding: 16px;
   }
+}
+.lesson-canvas {
+  display: flex;
+  align-items: center;
 }
 
 .material p {
