@@ -18,7 +18,7 @@ class TypedText extends Component {
         <div className="visually-hidden">Your typed text:</div>
         <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
         <p className="input-text">
-          <textarea className="input-textarea" rows="1"
+          <textarea className="input-textarea" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" rows="1"
             onChange={this.props.updateMarkup}
             value={this.props.actualText}
             >
