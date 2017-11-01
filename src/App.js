@@ -21,7 +21,7 @@ class App extends Component {
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
       disableUserSettings: false,
-      metWords: [{'the': 1, 'of': 2, 'and': 3, 'a': 4}],
+      metWords: {'the': 1, 'of': 2, 'and': 3, 'a': 4},
       userSettings: {
         showStrokes: true,
         randomise: false,
@@ -161,7 +161,7 @@ class App extends Component {
     if (this.state.userSettings.randomise) {
       newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
     }
-    newLesson.presentedMaterial = newLesson.presentedMaterial.filter(item => !this.state.metWords[0][item.phrase]);
+    newLesson.presentedMaterial = newLesson.presentedMaterial.filter(item => !this.state.metWords[item.phrase]);
 
     let reps = this.state.userSettings.repetitions;
     if (reps > 0) {
@@ -215,13 +215,15 @@ class App extends Component {
     var newState = {
       numberOfMatchedChars: numberOfMatchedChars,
       totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
-      actualText: actualText
+      actualText: actualText,
+      metWords: this.state.metWords
     };
 
     if (numberOfUnmatchedChars === 0) {
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
       newState.actualText = '';
       newState.currentPhraseID = this.state.currentPhraseID + 1;
+      newState.metWords[actualText] = 1;
     }
 
     this.setState(newState, () => {
