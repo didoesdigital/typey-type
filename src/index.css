@@ -243,8 +243,7 @@ label {
   width: 8em; }
 
 .typed-text-container {
-  position: relative;
-  overflow: hidden; }
+  position: relative; }
 
 .typed-text {
   display: none;
