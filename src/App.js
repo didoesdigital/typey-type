@@ -71,6 +71,17 @@ class App extends Component {
     }).catch(function(e) {
       console.log('Unable to load lesson index', e)
     });
+
+    fetch('met-words.json', {
+      method: "GET",
+      credentials: "same-origin"
+    }).then((response) => {
+      return response.json()
+    }).then(json => {
+      this.setState({ metWords: json });
+    }).catch(function(e) {
+      console.log('Unable to load met words', e)
+    });
   }
 
   getLesson(lessonFile = this.state.path) {
