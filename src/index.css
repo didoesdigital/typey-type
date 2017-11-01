@@ -57,12 +57,12 @@ dl.inline-flex {
   width: 148px; }
 
 dl.inline-flex dt {
-  flex: 0 0 70%;
+  flex: 0 0 80%;
   overflow: hidden;
   text-overflow: ellipsis; }
 
 dl.inline-flex dd {
-  flex: 0 0 30%;
+  flex: 0 0 20%;
   margin-left: auto;
   overflow: hidden;
   text-align: right;
