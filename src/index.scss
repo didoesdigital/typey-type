@@ -266,17 +266,28 @@ label {
   margin-right: auto;
   width: 8em;
 }
+.typed-text-container {
+  position: relative;
+  overflow: hidden;
+}
 .typed-text {
   margin-left: auto;
   margin-right: auto;
   width: 8em;
-}
-.stroke-tip {
-  margin-left: auto;
-  margin-right: auto;
-  width: 8em;
+  border: 1px solid $brand-primary;
 }
 .input-text {
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  position: absolute;
+  width: 8em;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.stroke-tip {
   margin-left: auto;
   margin-right: auto;
   width: 8em;
