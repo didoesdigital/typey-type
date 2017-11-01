@@ -72,7 +72,7 @@ class App extends Component {
     });
   }
 
-  getLesson(lessonFile = '/lesson-one.txt') {
+  getLesson(lessonFile = this.state.path) {
     return fetch(lessonFile, {
       method: "GET",
       credentials: "same-origin"
