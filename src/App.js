@@ -12,7 +12,7 @@ class App extends Component {
     this.charsPerWord = 5;
     this.state = {
       value: '',
-      path: '/lesson-one.txt',
+      path: '/lessons/drills/google-1000-english/lesson.txt',
       currentPhraseID: 0,
       actualText: ``,
       startTime: null,
@@ -40,11 +40,11 @@ class App extends Component {
         title: 'Loading…', subtitle: 'Loading…'
       },
       lessonIndex: [{
-        "title": "Top 1,000 English words",
+        "title": "Top 1000 English words",
         "subtitle": "",
         "category": "Collections",
         "subcategory": "",
-        "path": "/lessons/collections/google-1000-english/lesson.txt"
+        "path": "/lessons/drills/google-1000-english/lesson.txt"
       }]
     };
   }
