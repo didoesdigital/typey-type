@@ -7,7 +7,7 @@
 body {
   font: 400 16px/1.6 "Overpass Mono", "Montserrat", "Open Sans", Helvetica, sans-serif;
   margin: 0 auto;
-  color: #321E3E; }
+  color: #2e173b; }
 
 h1 {
   font-size: 44px;
@@ -85,7 +85,7 @@ input, textarea {
   display: table-cell; }
 
 .header {
-  background-color: #321E3E;
+  background-color: #2e173b;
   color: #fff;
   padding: 24px; }
   .header nav {
@@ -97,16 +97,16 @@ input, textarea {
     max-width: 576px; }
 
 .site-heading-link {
-  color: #fff;
+  color: #ece9ee;
   font-size: 44px;
   text-decoration: none; }
   .site-heading-link:hover, .site-heading-link:active, .site-heading-link:focus {
-    box-shadow: inset #AEABAF 0px -8px 0px 0px; }
+    box-shadow: inset #a091a8 0px -8px 0px 0px; }
 
 .subheader {
   align-items: baseline;
-  background-color: #5F2580;
-  color: #fff;
+  background-color: #402351;
+  color: #ece9ee;
   display: flex;
   flex-wrap: wrap;
   padding: 20px; }
@@ -133,8 +133,9 @@ input, textarea {
   .content .user-settings,
   .content .lesson-canvas,
   .content .scores {
-    background-color: #f9f9f9;
-    border: thin solid #C7C5C1;
+    background-color: #f9f8fa;
+    border: thin solid #c6bdcb;
+    border-radius: 4px;
     padding: 16px; }
 
 .material p {
@@ -142,7 +143,7 @@ input, textarea {
 
 .input-textarea {
   border-radius: 4px;
-  border: 1px solid #5F2580;
+  border: 1px solid #402351;
   display: block;
   font-size: 1rem;
   line-height: 1.5;
@@ -150,10 +151,10 @@ input, textarea {
   width: 100%; }
 
 .matched {
-  background-color: #e6d1f2; }
+  background-color: #cbabdd; }
 
 .unmatched {
-  background-color: #dfc798; }
+  background-color: #ffdfa0; }
 
 label {
   display: inline-block;
@@ -178,23 +179,25 @@ label {
   display: inline-block;
   border-radius: 4px;
   padding: 4px 8px;
-  border: 1px solid #5F2580;
+  border: 1px solid #402351;
   font-size: 1rem;
   line-height: 1.5; }
 
 .inline-form-control {
+  background-color: #533962;
   border-radius: 4px;
-  padding: 4px 8px;
-  border: 1px solid #5F2580;
+  border: 1px solid #533962;
+  color: #fff;
   font-size: 1rem;
   line-height: 1.5;
+  padding: 4px 8px;
   width: 100%; }
 
 .autocomplete-menu {
-  background-color: #F2F0EC;
+  background-color: #f9f8fa;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-  color: #321E3E;
+  color: #1c0925;
   max-height: 100%;
   overflow: auto;
   padding: 2px 0;
@@ -202,9 +205,9 @@ label {
   z-index: 1; }
 
 .link-button {
-  background-color: #5F2580;
+  background-color: #402351;
   border-radius: 4px;
-  border: 1px solid #5F2580;
+  border: 1px solid transparent;
   color: #fff;
   padding: 4px 8px;
   text-align: center;
@@ -214,8 +217,8 @@ label {
   white-space: nowrap; }
 
 .steno-stroke {
-  background-color: #474548;
-  color: #ACAAA6; }
+  background-color: #4e4e4e;
+  color: #ece9ee; }
 
 .material {
   margin-left: auto;
@@ -238,4 +241,4 @@ label {
   width: 8em; }
 
 .matched.steno-material {
-  border-bottom: 2px solid #474548; }
+  border-bottom: 2px solid #c6bdcb; }

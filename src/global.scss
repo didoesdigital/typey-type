@@ -1,57 +1,12 @@
-// # Triad colour scheme #
-// #######################
-
-// heavy
-$heavy-primary: #7109AA;
-$heavy-primary-shade-1: #5F2580;
-$heavy-primary-shade-2: #48036F;
-$heavy-primary-tint-1: #9F3ED5;
-$heavy-primary-tint-2: #AD66D5;
-$heavy-secondary: #00CC00;
-$heavy-secondary-shade-1: #269926;
-$heavy-secondary-shade-2: #008500;
-$heavy-secondary-tint-1: #39E639;
-$heavy-secondary-tint-2: #67E667;
-$heavy-tertiary: #FFAA00;
-$heavy-tertiary-shade-1: #BF8F30;
-$heavy-tertiary-shade-2: #A66F00;
-$heavy-tertiary-tint-1: #FFBF40;
-$heavy-tertiary-tint-2: #FFD073;
-
-// medium
-$medium-primary: #321E3E;
-$medium-primary-shade-1: #5E5B5F;
-$medium-primary-shade-2: #474548;
-$medium-primary-tint-1: #ADA9AF;
-$medium-primary-tint-2: #AEABAF;
-$medium-secondary: #234A23;
-$medium-secondary-shade-1: #6D726D;
-$medium-secondary-shade-2: #525652;
-$medium-secondary-tint-1: #B2B9B2;
-$medium-secondary-tint-2: #B4B9B4;
-$medium-tertiary: #5D4D2C;
-$medium-tertiary-shade-1: #8F8C88;
-$medium-tertiary-shade-2: #6B6A67;
-$medium-tertiary-tint-1: #C7C4BF;
-$medium-tertiary-tint-2: #C7C5C1;
-
-// light
-$light-primary: #512F64;
-$light-primary-shade-1: #716F73;
-$light-primary-shade-2: #979299;
-$light-primary-tint-1: #CAC5CC;
-$light-primary-tint-2: #CAC7CC;
-$light-secondary: #397739;
-$light-secondary-shade-1: #858A85;
-$light-secondary-shade-2: #AEB8AE;
-$light-secondary-tint-1: #D3DBD3;
-$light-secondary-tint-2: #D5DBD5;
-$light-tertiary: #957B47;
-$light-tertiary-shade-1: #ACAAA6;
-$light-tertiary-shade-2: #E6E2DA;
-$light-tertiary-tint-1: #F2EFE9;
-$light-tertiary-tint-2: #F2F0EC;
+$brand-primary: #402351;
+$brand-warning: #FFBF40;
+$brand-highlight: #FFD073;
+$brand-success: #23512C;
+$brand-danger: #953159;
 
 @function add-tint($color, $percentage) {
   @return mix(white, $color, $percentage);
+}
+@function add-shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
 }

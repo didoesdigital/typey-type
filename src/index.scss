@@ -16,7 +16,7 @@ $type: 400 16px/1.6 "Overpass Mono", "Montserrat", "Open Sans", Helvetica, sans-
 body {
   font: $type;
   margin: 0 auto;
-  color: $medium-primary;
+  color: saturate(add-shade($brand-primary, 30%), 5%);
 }
 h1 {
   font-size: 44px;
@@ -99,7 +99,7 @@ input, textarea {
 
 // Class styles
 .header {
-  background-color: $medium-primary;
+  background-color: saturate(add-shade($brand-primary, 30%), 5%);
   color: #fff;
   padding: 24px;
   nav {
@@ -113,19 +113,19 @@ input, textarea {
   }
 }
 .site-heading-link {
-  color: #fff;
+  color: add-tint($brand-primary, 90%);
   font-size: 44px;
   text-decoration: none;
 
   &:hover, &:active, &:focus {
-    box-shadow: inset $medium-primary-tint-2 0px -8px 0px 0px;
+    box-shadow: inset add-tint($brand-primary, 50%) 0px -8px 0px 0px;
   }
 }
 
 .subheader {
   align-items: baseline;
-  background-color: $heavy-primary-shade-1;
-  color: #fff;
+  background-color: $brand-primary;
+  color: add-tint($brand-primary, 90%);
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
@@ -160,8 +160,9 @@ input, textarea {
   .user-settings,
   .lesson-canvas,
   .scores {
-    background-color: add-tint($medium-tertiary-tint-1, 90);
-    border: thin solid $medium-tertiary-tint-2;
+    background-color: add-tint($brand-primary, 97%);
+    border: thin solid add-tint($brand-primary, 70%);
+    border-radius: 4px;
     padding: 16px;
   }
 }
@@ -172,7 +173,7 @@ input, textarea {
 
 .input-textarea {
   border-radius: 4px;
-  border: 1px solid $heavy-primary-shade-1;
+  border: 1px solid $brand-primary;
   display: block;
   font-size: 1rem;
   line-height: 1.5;
@@ -181,11 +182,11 @@ input, textarea {
 }
 
 .matched {
-  background-color: mix($heavy-primary-tint-2, #fff, 30);
+  background-color: saturate(add-tint($brand-primary, 70%), 30%);
 }
 
 .unmatched {
-  background-color: mix($heavy-tertiary-shade-1, #fff, 50);
+  background-color: add-tint($brand-warning, 50%);
 }
 
 label {
@@ -211,23 +212,25 @@ label {
   display: inline-block;
   border-radius: 4px;
   padding: 4px 8px;
-  border: 1px solid $heavy-primary-shade-1;
+  border: 1px solid $brand-primary;
   font-size: 1rem;
   line-height: 1.5;
 }
 .inline-form-control {
+  background-color: add-tint($brand-primary, 10%);
   border-radius: 4px;
-  padding: 4px 8px;
-  border: 1px solid $heavy-primary-shade-1;
+  border: 1px solid add-tint($brand-primary, 10%);
+  color: #fff;
   font-size: 1rem;
   line-height: 1.5;
+  padding: 4px 8px;
   width: 100%;
 }
 .autocomplete-menu {
-  background-color: $light-tertiary-tint-2;
+  background-color: add-tint($brand-primary, 97%);
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-  color: $medium-primary;
+  color: saturate(add-shade($brand-primary, 60%), 20%);
   max-height: 100%;
   overflow: auto;
   padding: 2px 0;
@@ -235,9 +238,9 @@ label {
   z-index: 1;
 }
 .link-button {
-  background-color: $heavy-primary-shade-1;
+  background-color: $brand-primary;
   border-radius: 4px;
-  border: 1px solid $heavy-primary-shade-1;
+  border: 1px solid transparent;
   color: #fff;
   padding: 4px 8px;
   text-align: center;
@@ -247,8 +250,8 @@ label {
   white-space: nowrap;
 }
 .steno-stroke {
-  background-color: $medium-primary-shade-2;
-  color: $light-tertiary-shade-1;
+  background-color: desaturate(add-tint($brand-primary, 10%), 40%);
+  color: add-tint($brand-primary, 90%);
 }
 .material {
   margin-left: auto;
@@ -271,5 +274,5 @@ label {
   width: 8em;
 }
 .matched.steno-material {
-  border-bottom: 2px solid $medium-primary-shade-2;
+  border-bottom: 2px solid add-tint($brand-primary, 70%);
 }
