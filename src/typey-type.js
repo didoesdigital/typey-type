@@ -75,11 +75,12 @@ const SETTINGS_NAME_MAP = {
 }
 
 function parseLesson(lessonText) {
-  var lines = lessonText.split("\n").filter(phrase => phrase !== '');
-  var sourceMaterial = [];
-  var settings = {caseInsensitive: false, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'};
+  var lines = lessonText.split("\n");
   var lessonTitle = lines[0];
   var lessonSubtitle = lines[1];
+  lines.filter(phrase => phrase !== '');
+  var sourceMaterial = [];
+  var settings = {caseInsensitive: false, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'};
 
   for (var i = 2; i < lines.length; i++) {
     var line = lines[i];
