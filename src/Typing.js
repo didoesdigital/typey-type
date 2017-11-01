@@ -7,12 +7,21 @@ import './App.css';
 
 class Typing extends Component {
   render() {
-    var customMessage;
+    let customMessage;
+    let strokeTip;
+
     if (this.props.settings.customMessage) {
       customMessage = <h3 className="custom-message">{this.props.settings.customMessage}</h3>;
     } else {
       customMessage = <span style={{paddingTop: '24px' }}>&nbsp;</span>
     }
+
+    if (this.props.userSettings.showStrokes) {
+      strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre><span className="steno-stroke">{this.props.currentStroke}</span></pre></div>;
+    } else {
+      strokeTip = <div className="stroke-tip"><span aria-hidden="true">&#8203;</span></div>;
+    }
+
     return (
       <div>
         {customMessage}
@@ -21,14 +30,8 @@ class Typing extends Component {
           <div className="lesson-canvas">
             <div className="mx-auto">
               <Material currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} userSettings={this.props.userSettings} settings={this.props.settings} currentStroke={this.props.currentStroke} />
-              <TypedText currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} userSettings={this.props.userSettings} settings={this.props.settings} />
-              <p className="input-text">
-                <textarea className="input-textarea" rows="1"
-                  onChange={this.props.updateMarkup}
-                  value={this.props.actualText}
-                  >
-                </textarea>
-              </p>
+              <TypedText currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} userSettings={this.props.userSettings} settings={this.props.settings} actualText={this.props.actualText} updateMarkup={this.props.updateMarkup.bind(this)} />
+              {strokeTip}
             </div>
           </div>
           <div className="scores">

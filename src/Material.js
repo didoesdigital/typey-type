@@ -8,12 +8,7 @@ class Material extends Component {
     let [matched, unmatched] = matchSplitText(currentPhrase, actualText, settings, this.props.userSettings);
     let matchedMaterialMarkup;
 
-    if (this.props.userSettings.showStrokes) {
-      matchedMaterialMarkup = `<div class="material"><pre><span class="matched steno-material">${matched}</span><span class="steno-material">${unmatched}</span></span></pre></div>
-      <div class="stroke-tip"><span class="visually-hidden">Hint: </span><pre><span class="steno-stroke">${this.props.currentStroke}</span></pre></div>`;
-    } else {
-      matchedMaterialMarkup = `<div class="material"><pre><span class="matched steno-material">${matched}</span><span class="steno-material">${unmatched}</span></pre></div>`;
-    }
+    matchedMaterialMarkup = `<div class="material"><pre><span class="matched steno-material">${matched}</span><span class="steno-material">${unmatched}</span></pre></div>`;
 
     return {__html: matchedMaterialMarkup};
   }

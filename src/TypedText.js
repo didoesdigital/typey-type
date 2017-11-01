@@ -14,9 +14,16 @@ class TypedText extends Component {
 
   render() {
     return (
-      <div className="">
+      <div className="typed-text-container">
         <div className="visually-hidden">Your typed text:</div>
         <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
+        <p className="input-text">
+          <textarea className="input-textarea" rows="1"
+            onChange={this.props.updateMarkup}
+            value={this.props.actualText}
+            >
+          </textarea>
+        </p>
       </div>
     );
   }
