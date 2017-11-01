@@ -28,15 +28,15 @@ class Scores extends Component {
     if (this.props.timer !== null) {
       return (
         <div>
-          <h6>Scores</h6>
+          <h6 className="mb1">Scores</h6>
           <div className="timer" dangerouslySetInnerHTML={this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords)} />
         </div>
       );
     } else {
       return (
         <div>
-          <h6>Scores</h6>
-          <dl className="inline-flex">
+          <h6 className="mb1">Scores</h6>
+          <dl className="timer inline-flex">
             <dt><abbr title="words per minute">WPM</abbr>:</dt>
             <dd>&nbsp;</dd>
 

@@ -88,6 +88,9 @@ input, textarea {
   margin-left: auto;
   margin-right: auto; }
 
+.mb1 {
+  margin-bottom: 8px; }
+
 .text-center {
   text-align: center; }
 
@@ -185,7 +188,7 @@ label {
 
 .checkbox-input {
   position: absolute;
-  margin-top: 8px;
+  margin-top: 6px;
   margin-left: -24px;
   touch-action: manipulation; }
 

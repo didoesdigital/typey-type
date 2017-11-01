@@ -5,7 +5,7 @@ class UserSettings extends Component {
     return (
       <div className="user-settings">
         <form>
-          <legend>Settings</legend>
+          <legend className="mb1">Settings</legend>
           <div className="checkbox-group">
             <label className="checkbox-label">
               <input
