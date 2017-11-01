@@ -21,6 +21,7 @@ class App extends Component {
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
       disableUserSettings: false,
+      metWords: {'the': 1, 'of': 2, 'and': 3},
       userSettings: {
         showStrokes: true,
         randomise: false,
@@ -149,8 +150,7 @@ class App extends Component {
     if (this.state.userSettings.randomise) {
       newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
     }
-    let metWords = {'the': 1, 'of': 2, 'and': 3};
-    newLesson.presentedMaterial = newLesson.presentedMaterial.filter(item => !metWords[item.phrase]);
+    newLesson.presentedMaterial = newLesson.presentedMaterial.filter(item => !this.state.metWords[item.phrase]);
 
     let reps = this.state.userSettings.repetitions;
     if (reps > 0) {
