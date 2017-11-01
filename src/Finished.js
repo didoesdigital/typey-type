@@ -17,7 +17,7 @@ class Finished extends Component {
         <div className="content">
           <UserSettings userSettings={this.props.userSettings} changeUserSetting={this.props.changeUserSetting} disableUserSettings={this.props.disableUserSettings} totalWordCount={this.props.totalWordCount} />
           <div className="lesson-canvas">
-            <div className="mx-auto">
+            <div className="mx-auto text-center">
               <div role="alert" aria-live="polite">Finished!</div>
             </div>
           </div>

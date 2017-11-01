@@ -46,8 +46,12 @@ class Header extends Component {
           </nav>
         </div>
         <div className="subheader">
-          <h1>{this.props.lessonTitle}</h1>
-          <h2>{this.props.lessonSubTitle}</h2>
+          <div className="flex">
+            <header>
+              <h1>{this.props.lessonTitle}</h1>
+              <h2>{this.props.lessonSubTitle}</h2>
+            </header>
+          </div>
           <a href={this.props.path} onClick={this.props.getLesson} className="link-button table-cell" role="button">Restart lesson</a>
           <a href={this.props.path} onClick={this.props.stopLesson} className="link-button table-cell" role="button">Stop lesson</a>
         </div>

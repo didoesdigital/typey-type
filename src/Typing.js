@@ -28,7 +28,7 @@ class Typing extends Component {
         <div className="content">
           <UserSettings userSettings={this.props.userSettings} changeUserSetting={this.props.changeUserSetting} disableUserSettings={this.props.disableUserSettings} totalWordCount={this.props.totalWordCount} />
           <div className="lesson-canvas">
-            <div className="mx-auto">
+            <div className="mx-auto text-center">
               <Material currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} userSettings={this.props.userSettings} settings={this.props.settings} currentStroke={this.props.currentStroke} />
               <TypedText currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} userSettings={this.props.userSettings} settings={this.props.settings} actualText={this.props.actualText} updateMarkup={this.props.updateMarkup.bind(this)} />
               {strokeTip}
