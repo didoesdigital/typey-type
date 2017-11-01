@@ -83,6 +83,15 @@ class App extends Component {
     });
   }
 
+  stopLesson(event) {
+    this.getLesson(event.target.href).then((lessonText) => {
+      this.setState({currentPhraseID: this.state.lesson.presentedMaterial.length}, () => {
+        this.stopTimer();
+      });
+    });
+    event.preventDefault();
+  }
+
   startTimer() {
     this.intervalID = window.setInterval(this.updateWPM.bind(this), 1000);
   }
@@ -215,6 +224,7 @@ class App extends Component {
             })}
             path={this.state.path}
             settings={this.state.lesson.settings}
+            stopLesson={this.stopLesson.bind(this)}
             value={this.state.value}
           />
           <div className="main">
@@ -250,6 +260,7 @@ class App extends Component {
             })}
             path={this.state.path}
             settings={this.state.lesson.settings}
+            stopLesson={this.stopLesson.bind(this)}
             value={this.state.value}
           />
           <div>
