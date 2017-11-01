@@ -17,7 +17,9 @@ class Finished extends Component {
         <div className="content">
           <UserSettings userSettings={this.props.userSettings} changeUserSetting={this.props.changeUserSetting} disableUserSettings={this.props.disableUserSettings} totalWordCount={this.props.totalWordCount} />
           <div className="lesson-canvas">
-            <div role="alert" aria-live="polite">Finished!</div>
+            <div className="mx-auto">
+              <div role="alert" aria-live="polite">Finished!</div>
+            </div>
           </div>
           <div className="scores">
             <Scores timer={this.props.timer} totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}/>
