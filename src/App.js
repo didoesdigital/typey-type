@@ -12,7 +12,7 @@ class App extends Component {
     this.charsPerWord = 5;
     this.state = {
       value: '',
-      path: '',
+      path: '/lesson-one.txt',
       currentPhraseID: 0,
       actualText: ``,
       startTime: null,

@@ -48,6 +48,7 @@ class Header extends Component {
         <div className="subheader">
           <h1>{this.props.lessonTitle}</h1>
           <h2>{this.props.lessonSubTitle}</h2>
+          <a href={this.props.path} onClick={this.props.getLesson} className="link-button table-cell" role="button">Restart lesson</a>
         </div>
       </div>
     )
