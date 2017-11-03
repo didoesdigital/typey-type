@@ -232,14 +232,15 @@ class App extends Component {
       var lesson = parseLesson(lessonText);
       this.stopTimer();
       this.setState({
-        lesson: lesson,
-        currentPhraseID: 0,
         actualText: ``,
+        currentPhraseID: 0,
+        disableUserSettings: false,
+        lesson: lesson,
+        numberOfMatchedChars: 0,
         startTime: null,
         timer: null,
-        totalNumberOfMatchedWords: 0,
-        numberOfMatchedChars: 0,
-        totalNumberOfMatchedChars: 0
+        totalNumberOfMatchedChars: 0,
+        totalNumberOfMatchedWords: 0
       });
     });
     event.preventDefault();
