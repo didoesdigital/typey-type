@@ -328,6 +328,14 @@ label {
   line-height: 1.5;
   padding: 4px 8px;
   width: 100%;
+  &:hover {
+    background-color: add-tint($brand-primary, 15%);
+  }
+  &:active,
+  &:focus {
+    background-color: add-tint($brand-primary, 90%);
+    color: saturate(add-shade($brand-primary, 30%), 5%);
+  }
 }
 .autocomplete-menu {
   background-color: add-tint($brand-primary, 97%);
@@ -351,6 +359,13 @@ label {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+  &:hover {
+    background-color: add-tint($brand-primary, 10%);
+  }
+  &:active,
+  &:focus {
+    background-color: add-tint($brand-primary, 20%);
+  }
 }
 .steno-stroke {
   background-color: desaturate(add-tint($brand-primary, 10%), 40%);

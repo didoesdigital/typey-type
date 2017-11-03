@@ -279,6 +279,11 @@ label {
   line-height: 1.5;
   padding: 4px 8px;
   width: 100%; }
+  .inline-form-control:hover {
+    background-color: #5d446b; }
+  .inline-form-control:active, .inline-form-control:focus {
+    background-color: #ece9ee;
+    color: #2e173b; }
 
 .autocomplete-menu {
   background-color: #f9f8fa;
@@ -302,6 +307,10 @@ label {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap; }
+  .link-button:hover {
+    background-color: #533962; }
+  .link-button:active, .link-button:focus {
+    background-color: #664f74; }
 
 .steno-stroke {
   background-color: #4e4e4e;
