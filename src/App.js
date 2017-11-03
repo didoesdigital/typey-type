@@ -54,14 +54,15 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getLesson().then((lessonText) => {
-      let lesson = parseLesson(lessonText);
-      this.setState({
-        lesson: lesson,
-        currentPhraseID: 0
-      }, () => {
-        this.setupLesson();
-      });
+    fetch('met-words.json', {
+      method: "GET",
+      credentials: "same-origin"
+    }).then((response) => {
+      return response.json()
+    }).then(json => {
+      this.setState({ metWords: json });
+    }).catch(function(e) {
+      console.log('Unable to load met words', e)
     });
 
     fetch('/lessons/lessonIndex.json', {
@@ -75,15 +76,14 @@ class App extends Component {
       console.log('Unable to load lesson index', e)
     });
 
-    fetch('met-words.json', {
-      method: "GET",
-      credentials: "same-origin"
-    }).then((response) => {
-      return response.json()
-    }).then(json => {
-      this.setState({ metWords: json });
-    }).catch(function(e) {
-      console.log('Unable to load met words', e)
+    this.getLesson().then((lessonText) => {
+      let lesson = parseLesson(lessonText);
+      this.setState({
+        lesson: lesson,
+        currentPhraseID: 0
+      }, () => {
+        this.setupLesson();
+      });
     });
   }
 
