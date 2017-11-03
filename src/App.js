@@ -286,6 +286,9 @@ class App extends Component {
       } else {
         newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess;
       }
+      if (!this.state.userSettings.showStrokes) {
+        newState.currentPhraseMeetingSuccess = 1;
+      }
     }
 
     this.setState(newState, () => {
