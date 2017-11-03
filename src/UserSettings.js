@@ -91,6 +91,7 @@ class UserSettings extends Component {
               Familiar words
             </label>
           </div>
+          <label htmlFor="repetitions">Repetitions</label>
           <NumericInput
             autoCapitalize="off"
             autoComplete="on"
@@ -98,6 +99,7 @@ class UserSettings extends Component {
             autoFocus={false}
             className="form-control"
             disabled={this.props.disableUserSettings}
+            id="repetitions"
             max={30}
             min={1}
             name="repetitions"
