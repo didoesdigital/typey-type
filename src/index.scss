@@ -243,7 +243,6 @@ label {
     right: 36px - 1px;
     text-align: center;
     top: 0px;
-    transition: all 0.1s;
     width: 36px;
     &:hover {
       background-color: desaturate(add-tint($brand-primary, 90%), 50%);
@@ -274,7 +273,6 @@ label {
     right: 0px;
     text-align: center;
     top: 0px;
-    transition: all 0.1s;
     width: 36px;
     &:hover {
       background-color: desaturate(add-tint($brand-primary, 90%), 50%);

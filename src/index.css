@@ -204,7 +204,6 @@ label {
     right: 35px;
     text-align: center;
     top: 0px;
-    transition: all 0.1s;
     width: 36px; }
     .react-numeric-input b:hover {
       background-color: #ececec; }
@@ -230,7 +229,6 @@ label {
     right: 0px;
     text-align: center;
     top: 0px;
-    transition: all 0.1s;
     width: 36px; }
     .react-numeric-input b:last-child:hover {
       background-color: #ececec; }
