@@ -14,6 +14,7 @@ class App extends Component {
       value: '',
       path: 'lessons/test-lesson.txt',
       currentPhraseID: 0,
+      currentPhraseMeetingSuccess: 1,
       actualText: ``,
       startTime: null,
       timer: null,
@@ -276,9 +277,9 @@ class App extends Component {
       newState.actualText = '';
       newState.currentPhraseID = this.state.currentPhraseID + 1;
       if (actualText in newState.metWords) {
-        newState.metWords[actualText] ++;
+        newState.metWords[actualText] += this.state.currentPhraseMeetingSuccess;
       } else {
-        newState.metWords[actualText] = 1;
+        newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess;
       }
     }
 
