@@ -215,29 +215,43 @@ label {
   display: block;
   position: relative;
   input {
-    padding-right: 3ex;
-    box-sizing: border-box;
+    width: 100%;
     &:disabled {
       border: 1px solid add-tint($brand-primary, 85);
       background-color: add-tint($brand-primary, 97);
       color: add-tint($brand-primary, 70);
+      & ~ b {
+        cursor: default;
+        border-color: add-tint($brand-primary, 85) !important;
+        background-color: add-tint($brand-primary, 95) !important;
+      }
+      & ~ b i {
+        border-color: transparent transparent add-tint($brand-primary, 75) !important;
+      }
+      & ~ b:last-child i {
+        border-color: add-tint($brand-primary, 75) transparent transparent !important;
+      }
     }
   }
   b {
+    background-color: desaturate(add-tint($brand-primary, 97%), 50%);
+    border-radius: 0px 0px 0px 0px;
+    border: 1px solid $brand-primary;
+    bottom: 0px;
+    cursor: pointer;
     position: absolute;
-    right: 2px;
-    width: 2.26ex;
-    border-color: rgba(0, 0, 0, 0.1);
-    border-style: solid;
+    right: 36px - 1px;
     text-align: center;
-    cursor: default;
+    top: 0px;
     transition: all 0.1s;
-    background: rgba(0, 0, 0, 0.1);
-    box-shadow: rgba(0, 0, 0, 0.1) -1px -1px 3px inset, rgba(255, 255, 255, 0.7) 1px 1px 3px inset;
-    top: 2px;
-    bottom: 50%;
-    border-radius: 2px 2px 0px 0px;
-    border-width: 1px 1px 0px;
+    width: 36px;
+    &:hover {
+      background-color: desaturate(add-tint($brand-primary, 90%), 50%);
+    }
+    &:active,
+    &:focus {
+      background-color: desaturate(add-tint($brand-primary, 85%), 50%);
+    }
     i {
       position: absolute;
       top: 50%;
@@ -249,29 +263,26 @@ label {
       border-style: solid;
       margin: -0.3ex 0px 0px -0.56ex;
     }
+  }
+  b:last-child {
+    background-color: desaturate(add-tint($brand-primary, 97%), 50%);
+    border-radius: 0px 3px 3px 0px;
+    border: 1px solid $brand-primary;
+    bottom: 0px;
+    cursor: pointer;
+    position: absolute;
+    right: 0px;
+    text-align: center;
+    top: 0px;
+    transition: all 0.1s;
+    width: 36px;
     &:hover {
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: desaturate(add-tint($brand-primary, 90%), 50%);
     }
     &:active,
     &:focus {
-      background-color: rgba(0, 0, 0, 0.5);
+      background-color: desaturate(add-tint($brand-primary, 85%), 50%);
     }
-  }
-  b:last-child {
-    position: absolute;
-    right: 2px;
-    width: 2.26ex;
-    border-color: rgba(0, 0, 0, 0.1);
-    border-style: solid;
-    text-align: center;
-    cursor: default;
-    transition: all 0.1s;
-    background: rgba(0, 0, 0, 0.1);
-    box-shadow: rgba(0, 0, 0, 0.1) -1px -1px 3px inset, rgba(255, 255, 255, 0.7) 1px 1px 3px inset;
-    top: 50%;
-    bottom: 2px;
-    border-radius: 0px 0px 2px 2px;
-    border-width: 0px 1px 1px;
     i {
       position: absolute;
       top: 50%;
@@ -282,13 +293,6 @@ label {
       border-color: rgba(0, 0, 0, 0.7) transparent transparent;
       border-style: solid;
       margin: -0.3ex 0px 0px -0.56ex;
-    }
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.3);
-    }
-    &:active,
-    &:focus {
-      background-color: rgba(0, 0, 0, 0.5);
     }
   }
 }
