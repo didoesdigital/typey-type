@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { randomise } from './utils';
+import { matchSplitText, parseLesson } from './typey-type';
 import Finished from './Finished';
 import Header from './Header';
 import Typing from './Typing';
-import {matchSplitText, parseLesson} from './typey-type';
 import './App.css';
 
 class App extends Component {
@@ -104,6 +104,23 @@ class App extends Component {
     this.setState({
       timer: new Date() - this.state.startTime
     });
+  }
+
+  handleRepetitionsChange(event) {
+    let currentState = this.state.userSettings;
+    let newState = Object.assign({}, currentState);
+
+    const name = "repetitions"
+    const value = event;
+
+    newState[name] = value;
+
+    this.setState({userSettings: newState}, () => {
+      if (!(name === 'caseInsensitive')) {
+        this.setupLesson();
+      }
+    });
+    return value;
   }
 
   changeUserSetting(event) {
@@ -230,14 +247,15 @@ class App extends Component {
           <div className="main">
             <Finished
               actualText={this.state.actualText}
-              getLesson={this.handleLesson.bind(this)}
-              settings={this.state.lesson.settings}
-              userSettings={this.state.userSettings}
               changeUserSetting={this.changeUserSetting.bind(this)}
+              disableUserSettings={this.state.disableUserSettings}
+              getLesson={this.handleLesson.bind(this)}
+              handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
+              settings={this.state.lesson.settings}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
               totalWordCount={this.state.lesson.presentedMaterial.length}
-              disableUserSettings={this.state.disableUserSettings}
+              userSettings={this.state.userSettings}
               />
           </div>
         </div>
@@ -269,14 +287,15 @@ class App extends Component {
               changeUserSetting={this.changeUserSetting.bind(this)}
               currentPhrase={this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase}
               currentStroke={this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke}
+              disableUserSettings={this.state.disableUserSettings}
               getLesson={this.handleLesson.bind(this)}
+              handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
               settings={this.state.lesson.settings}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
               totalWordCount={this.state.lesson.presentedMaterial.length}
               updateMarkup={this.updateMarkup.bind(this)}
               userSettings={this.state.userSettings}
-              disableUserSettings={this.state.disableUserSettings}
               />
           </div>
         </div>

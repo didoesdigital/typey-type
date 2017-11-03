@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NumericInput from 'react-numeric-input';
 
 class UserSettings extends Component {
   render() {
@@ -48,23 +49,42 @@ class UserSettings extends Component {
               Case insensitive
             </label>
           </div>
-          <label>
-            Number of repetitions
-            <input
-              className="form-control"
-              name="repetitions"
-              type="number"
-              min="1"
-              max="30"
-              disabled={this.props.disableUserSettings}
-              value={this.props.userSettings.repetitions}
-              onChange={this.props.changeUserSetting} />
-          </label>
+          <NumericInput
+            autoCapitalize="off"
+            autoComplete="on"
+            autoCorrect="on"
+            autoFocus={false}
+            className="form-control"
+            disabled={this.props.disableUserSettings}
+            max={30}
+            min={1}
+            name="repetitions"
+            onChange={this.props.handleRepetitionsChange}
+            precision={0}
+            spellCheck="false"
+            step={1}
+            style={false}
+            type="number"
+            value={this.props.userSettings.repetitions}
+            snap
+          />
         </form>
         <p><strong>Total word count:</strong> {this.props.totalWordCount}</p>
       </div>
     )
   }
 }
+          // <label>
+          //   Number of repetitions
+          //   <input
+          //     className="form-control"
+          //     name="repetitions"
+          //     type="number"
+          //     min="1"
+          //     max="30"
+          //     disabled={this.props.disableUserSettings}
+          //     value={this.props.userSettings.repetitions}
+          //     onChange={this.props.changeUserSetting} />
+          // </label>
 
 export default UserSettings;

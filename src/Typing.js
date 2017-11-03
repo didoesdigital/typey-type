@@ -26,11 +26,29 @@ class Typing extends Component {
       <div>
         {customMessage}
         <div className="content">
-          <UserSettings userSettings={this.props.userSettings} changeUserSetting={this.props.changeUserSetting} disableUserSettings={this.props.disableUserSettings} totalWordCount={this.props.totalWordCount} />
+          <UserSettings
+            changeUserSetting={this.props.changeUserSetting}
+            disableUserSettings={this.props.disableUserSettings}
+            handleRepetitionsChange={this.props.handleRepetitionsChange}
+            totalWordCount={this.props.totalWordCount}
+            userSettings={this.props.userSettings}
+          />
           <div className="lesson-canvas">
             <div className="mx-auto text-center">
-              <Material currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} userSettings={this.props.userSettings} settings={this.props.settings} currentStroke={this.props.currentStroke} />
-              <TypedText currentPhrase={this.props.currentPhrase} actualText={this.props.actualText} userSettings={this.props.userSettings} settings={this.props.settings} actualText={this.props.actualText} updateMarkup={this.props.updateMarkup.bind(this)} />
+              <Material
+                actualText={this.props.actualText}
+                currentPhrase={this.props.currentPhrase}
+                currentStroke={this.props.currentStroke}
+                settings={this.props.settings}
+                userSettings={this.props.userSettings}
+              />
+              <TypedText
+                actualText={this.props.actualText}
+                currentPhrase={this.props.currentPhrase}
+                settings={this.props.settings}
+                updateMarkup={this.props.updateMarkup.bind(this)}
+                userSettings={this.props.userSettings}
+              />
               {strokeTip}
             </div>
           </div>
