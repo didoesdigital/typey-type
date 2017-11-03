@@ -49,6 +49,48 @@ class UserSettings extends Component {
               Case insensitive
             </label>
           </div>
+          <div className="checkbox-group">
+            <label className="checkbox-label">
+              <input
+                className="checkbox-input"
+                type="checkbox"
+                name="newWords"
+                id="newWords"
+                disabled={this.props.disableUserSettings}
+                checked={this.props.userSettings.newWords}
+                onChange={this.props.changeUserSetting}
+                />
+              New Words
+            </label>
+          </div>
+          <div className="checkbox-group">
+            <label className="checkbox-label">
+              <input
+                className="checkbox-input"
+                type="checkbox"
+                name="unfamiliarWords"
+                id="unfamiliarWords"
+                disabled={this.props.disableUserSettings}
+                checked={this.props.userSettings.unfamiliarWords}
+                onChange={this.props.changeUserSetting}
+                />
+              &lt; 30 exposures
+            </label>
+          </div>
+          <div className="checkbox-group">
+            <label className="checkbox-label">
+              <input
+                className="checkbox-input"
+                type="checkbox"
+                name="familiarWords"
+                id="familiarWords"
+                disabled={this.props.disableUserSettings}
+                checked={this.props.userSettings.familiarWords}
+                onChange={this.props.changeUserSetting}
+                />
+              Familiar words
+            </label>
+          </div>
           <NumericInput
             autoCapitalize="off"
             autoComplete="on"

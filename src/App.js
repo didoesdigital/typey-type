@@ -23,10 +23,13 @@ class App extends Component {
       disableUserSettings: false,
       metWords: {'the': 1, 'of': 2, 'and': 3, 'a': 4},
       userSettings: {
-        showStrokes: true,
+        caseInsensitive: true,
+        familiarWords: false,
+        newWords: true,
         randomise: false,
         repetitions: 1,
-        caseInsensitive: true
+        showStrokes: true,
+        unfamiliarWords: true
       },
       lesson: {
         sourceMaterial: [{phrase: '', stroke: ''}],
