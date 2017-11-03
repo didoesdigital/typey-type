@@ -285,6 +285,7 @@ class App extends Component {
     this.setState(newState, () => {
       if (this.isFinished()) {
         this.stopTimer();
+        this.setState({disableUserSettings: false});
       }
     });
   }
