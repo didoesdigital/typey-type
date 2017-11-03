@@ -203,7 +203,6 @@ class App extends Component {
     if (newWords) {
       tests.push(testNewWords);
     }
-    console.log(tests);
 
     var filterFunction = function (phrase) {
       for (var i = 0; i < tests.length; i++) {
@@ -211,8 +210,6 @@ class App extends Component {
           return true;
         };
       }
-
-      // No test returned true, so default is return false
       return false;
     }
 
