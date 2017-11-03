@@ -12,7 +12,7 @@ class App extends Component {
     this.charsPerWord = 5;
     this.state = {
       value: '',
-      path: '/lessons/drills/google-1000-english/lesson.txt',
+      path: 'lessons/test-lesson.txt',
       currentPhraseID: 0,
       actualText: ``,
       startTime: null,
@@ -21,7 +21,7 @@ class App extends Component {
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
       disableUserSettings: false,
-      metWords: {'the': 1, 'of': 2, 'and': 3, 'a': 4},
+      metWords: {'the': 1},
       userSettings: {
         caseInsensitive: true,
         familiarWords: false,
@@ -164,9 +164,59 @@ class App extends Component {
     if (this.state.userSettings.randomise) {
       newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
     }
-    if (this.state.userSettings.newWords) {
-      newLesson.presentedMaterial = newLesson.presentedMaterial.filter(item => !this.state.metWords[item.phrase]);
+
+    var met = this.state.metWords;
+
+    var newWords = this.state.userSettings.newWords,
+      unfamiliarWords = this.state.userSettings.unfamiliarWords,
+      familiarWords = this.state.userSettings.familiarWords;
+
+    var testNewWords = function(phrase) {
+      if (!(phrase in met)) {
+        return true;
+      } else {
+        return (met[phrase] < 1);
+      }
     }
+    var testUnfamiliarWords = function(phrase) {
+      if (!(phrase in met)) {
+        return false;
+      } else {
+        return ((met[phrase] > 0) && (met[phrase] < 30));
+      }
+    }
+    var testFamiliarWords = function(phrase) {
+      if (!(phrase in met)) {
+        return false;
+      } else {
+        return (met[phrase] > 29);
+      }
+    }
+
+    var tests = [];
+    if (familiarWords) {
+      tests.push(testFamiliarWords);
+    }
+    if (unfamiliarWords) {
+      tests.push(testUnfamiliarWords);
+    }
+    if (newWords) {
+      tests.push(testNewWords);
+    }
+    console.log(tests);
+
+    var filterFunction = function (phrase) {
+      for (var i = 0; i < tests.length; i++) {
+        if (tests[i](phrase)) {
+          return true;
+        };
+      }
+
+      // No test returned true, so default is return false
+      return false;
+    }
+
+    newLesson.presentedMaterial = newLesson.presentedMaterial.filter(item => filterFunction(item.phrase) );
 
     let reps = this.state.userSettings.repetitions;
     if (reps > 0) {
