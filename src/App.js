@@ -275,7 +275,11 @@ class App extends Component {
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
       newState.actualText = '';
       newState.currentPhraseID = this.state.currentPhraseID + 1;
-      newState.metWords[actualText] = 1;
+      if (actualText in newState.metWords) {
+        newState.metWords[actualText] ++;
+      } else {
+        newState.metWords[actualText] = 1;
+      }
     }
 
     this.setState(newState, () => {
