@@ -164,7 +164,9 @@ class App extends Component {
     if (this.state.userSettings.randomise) {
       newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
     }
-    newLesson.presentedMaterial = newLesson.presentedMaterial.filter(item => !this.state.metWords[item.phrase]);
+    if (this.state.userSettings.newWords) {
+      newLesson.presentedMaterial = newLesson.presentedMaterial.filter(item => !this.state.metWords[item.phrase]);
+    }
 
     let reps = this.state.userSettings.repetitions;
     if (reps > 0) {
