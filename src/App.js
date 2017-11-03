@@ -162,6 +162,15 @@ class App extends Component {
     let newLesson = Object.assign({}, currentLesson);
     newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
 
+    this.setState({
+      currentPhraseMeetingSuccess: this.state.userSettings.showStrokes ? 0 : 1,
+      numberOfMatchedChars: 0,
+      startTime: null,
+      timer: null,
+      totalNumberOfMatchedChars: 0,
+      totalNumberOfMatchedWords: 0
+    });
+
     if (this.state.userSettings.randomise) {
       newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
     }
