@@ -54,17 +54,31 @@ class App extends Component {
     };
   }
 
+  loadMetWords() {
+    if (window.localStorage && window.localStorage.getItem('metWords')) {
+      return JSON.parse(window.localStorage.getItem('metWords'));
+    } else {
+      return {};
+    }
+  }
+  writeMetWords() {
+    let metWordsJSON = JSON.stringify(this.state.metWords);
+    window.localStorage.setItem('metWords', metWordsJSON);
+  }
+
   componentDidMount() {
-    fetch('met-words.json', {
-      method: "GET",
-      credentials: "same-origin"
-    }).then((response) => {
-      return response.json()
-    }).then(json => {
-      this.setState({ metWords: json });
-    }).catch(function(e) {
-      console.log('Unable to load met words', e)
-    });
+    this.setState({metWords: this.loadMetWords()});
+
+    // fetch('met-words.json', {
+    //   method: "GET",
+    //   credentials: "same-origin"
+    // }).then((response) => {
+    //   return response.json()
+    // }).then(json => {
+    //   this.setState({ metWords: json });
+    // }).catch(function(e) {
+    //   console.log('Unable to load met words', e)
+    // });
 
     fetch('/lessons/lessonIndex.json', {
       method: "GET",
@@ -303,6 +317,7 @@ class App extends Component {
     this.setState(newState, () => {
       if (this.isFinished()) {
         this.stopTimer();
+        this.writeMetWords();
         this.setState({disableUserSettings: false});
       }
     });
