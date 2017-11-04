@@ -103,11 +103,9 @@ class App extends Component {
   }
 
   stopLesson(event) {
-    this.getLesson(event.target.href).then((lessonText) => {
-      this.setState({currentPhraseID: this.state.lesson.presentedMaterial.length}, () => {
-        this.stopTimer();
-      });
-    });
+    this.stopTimer();
+    this.writeMetWords();
+    this.setState({disableUserSettings: false});
     event.preventDefault();
   }
 
