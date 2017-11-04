@@ -29,7 +29,7 @@ class App extends Component {
         newWords: true,
         randomise: false,
         repetitions: 1,
-        showStrokes: true,
+        showStrokes: false,
         unfamiliarWords: true
       },
       lesson: {
