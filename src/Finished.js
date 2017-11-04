@@ -15,7 +15,14 @@ class Finished extends Component {
       <div>
         {customMessage}
         <div className="content">
-          <UserSettings userSettings={this.props.userSettings} changeUserSetting={this.props.changeUserSetting} disableUserSettings={this.props.disableUserSettings} totalWordCount={this.props.totalWordCount} />
+          <UserSettings
+            changeUserSetting={this.props.changeUserSetting}
+            disableUserSettings={this.props.disableUserSettings}
+            handleLimitWordsChange={this.props.handleLimitWordsChange}
+            handleRepetitionsChange={this.props.handleRepetitionsChange}
+            totalWordCount={this.props.totalWordCount}
+            userSettings={this.props.userSettings}
+          />
           <div className="lesson-canvas">
             <div className="mx-auto text-center">
               <div role="alert" aria-live="polite">Finished!</div>

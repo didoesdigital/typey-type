@@ -29,6 +29,7 @@ class Typing extends Component {
           <UserSettings
             changeUserSetting={this.props.changeUserSetting}
             disableUserSettings={this.props.disableUserSettings}
+            handleLimitWordsChange={this.props.handleLimitWordsChange}
             handleRepetitionsChange={this.props.handleRepetitionsChange}
             totalWordCount={this.props.totalWordCount}
             userSettings={this.props.userSettings}

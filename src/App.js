@@ -26,6 +26,7 @@ class App extends Component {
       userSettings: {
         caseInsensitive: true,
         familiarWords: false,
+        limitNumberOfWords: 0,
         newWords: true,
         randomise: false,
         repetitions: 1,
@@ -132,6 +133,23 @@ class App extends Component {
     });
   }
 
+  handleLimitWordsChange(event) {
+    let currentState = this.state.userSettings;
+    let newState = Object.assign({}, currentState);
+
+    const name = "limitNumberOfWords"
+    const value = event;
+
+    newState[name] = value;
+
+    this.setState({userSettings: newState}, () => {
+      if (!(name === 'caseInsensitive')) {
+        this.setupLesson();
+      }
+    });
+    return value;
+  }
+
   handleRepetitionsChange(event) {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
@@ -183,6 +201,10 @@ class App extends Component {
 
     if (this.state.userSettings.randomise) {
       newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
+    }
+
+    if (this.state.userSettings.limitNumberOfWords > 0) {
+      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
     }
 
     var met = this.state.metWords;
@@ -349,6 +371,7 @@ class App extends Component {
               changeUserSetting={this.changeUserSetting.bind(this)}
               disableUserSettings={this.state.disableUserSettings}
               handleGetLesson={this.handleLesson.bind(this)}
+              handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
               handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
               settings={this.state.lesson.settings}
               timer={this.state.timer}
@@ -388,6 +411,7 @@ class App extends Component {
               currentStroke={this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke}
               disableUserSettings={this.state.disableUserSettings}
               handleGetLesson={this.handleLesson.bind(this)}
+              handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
               handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
               settings={this.state.lesson.settings}
               timer={this.state.timer}

@@ -91,6 +91,26 @@ class UserSettings extends Component {
               Familiar words
             </label>
           </div>
+          <label htmlFor="limitNumberOfWords">Limit word count</label>
+          <NumericInput
+            autoCapitalize="off"
+            autoComplete="on"
+            autoCorrect="on"
+            autoFocus={false}
+            className="form-control"
+            disabled={this.props.disableUserSettings}
+            id="limitNumberOfWords"
+            min={0}
+            name="limitNumberOfWords"
+            onChange={this.props.handleLimitWordsChange}
+            precision={0}
+            spellCheck="false"
+            step={1}
+            style={false}
+            type="number"
+            value={this.props.userSettings.limitNumberOfWords}
+            snap
+          />
           <label htmlFor="repetitions">Repetitions</label>
           <NumericInput
             autoCapitalize="off"
