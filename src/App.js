@@ -102,11 +102,20 @@ class App extends Component {
     });
   }
 
-  stopLesson(event) {
+  handleStopLesson(event) {
+    this.stopLesson();
+    event.preventDefault();
+  }
+
+  stopLesson() {
     this.stopTimer();
     this.writeMetWords();
-    this.setState({disableUserSettings: false});
-    event.preventDefault();
+    this.setState({
+      disableUserSettings: false,
+      currentPhraseID: this.state.lesson.presentedMaterial.length
+    }, () => {
+      this.stopTimer();
+    });
   }
 
   startTimer() {
@@ -303,9 +312,7 @@ class App extends Component {
 
     this.setState(newState, () => {
       if (this.isFinished()) {
-        this.stopTimer();
-        this.writeMetWords();
-        this.setState({disableUserSettings: false});
+        this.stopLesson();
       }
     });
   }
@@ -319,7 +326,7 @@ class App extends Component {
       return (
         <div className="app">
           <Header
-            getLesson={this.handleLesson.bind(this)}
+            handleGetLesson={this.handleLesson.bind(this)}
             items={this.state.lessonIndex}
             lessonSubTitle={this.state.lesson.subtitle}
             lessonTitle={this.state.lesson.title}
@@ -333,7 +340,7 @@ class App extends Component {
             })}
             path={this.state.path}
             settings={this.state.lesson.settings}
-            stopLesson={this.stopLesson.bind(this)}
+            handleStopLesson={this.handleStopLesson.bind(this)}
             value={this.state.value}
           />
           <div className="main">
@@ -341,7 +348,7 @@ class App extends Component {
               actualText={this.state.actualText}
               changeUserSetting={this.changeUserSetting.bind(this)}
               disableUserSettings={this.state.disableUserSettings}
-              getLesson={this.handleLesson.bind(this)}
+              handleGetLesson={this.handleLesson.bind(this)}
               handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
               settings={this.state.lesson.settings}
               timer={this.state.timer}
@@ -356,7 +363,7 @@ class App extends Component {
       return (
         <div className="app">
           <Header
-            getLesson={this.handleLesson.bind(this)}
+            handleGetLesson={this.handleLesson.bind(this)}
             items={this.state.lessonIndex}
             lessonSubTitle={this.state.lesson.subtitle}
             lessonTitle={this.state.lesson.title}
@@ -370,7 +377,7 @@ class App extends Component {
             })}
             path={this.state.path}
             settings={this.state.lesson.settings}
-            stopLesson={this.stopLesson.bind(this)}
+            handleStopLesson={this.handleStopLesson.bind(this)}
             value={this.state.value}
           />
           <div>
@@ -380,7 +387,7 @@ class App extends Component {
               currentPhrase={this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase}
               currentStroke={this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke}
               disableUserSettings={this.state.disableUserSettings}
-              getLesson={this.handleLesson.bind(this)}
+              handleGetLesson={this.handleLesson.bind(this)}
               handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
               settings={this.state.lesson.settings}
               timer={this.state.timer}

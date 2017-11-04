@@ -41,7 +41,7 @@ class Header extends Component {
                 value={this.props.value}
                 wrapperStyle={{ position: 'relative', display: 'table-cell', paddingRight: '0.5em', width: '100%' }}
               />
-              <a href={this.props.path} onClick={this.props.getLesson} className="link-button table-cell" role="button">Start lesson</a>
+              <a href={this.props.path} onClick={this.props.handleGetLesson} className="link-button table-cell" role="button">Start lesson</a>
             </div>
           </nav>
         </div>
@@ -52,8 +52,8 @@ class Header extends Component {
               <h2>{this.props.lessonSubTitle}</h2>
             </header>
           </div>
-          <a href={this.props.path} onClick={this.props.getLesson} className="link-button table-cell" role="button">Restart lesson</a>
-          <a href={this.props.path} onClick={this.props.stopLesson} className="link-button table-cell" role="button">Stop lesson</a>
+          <a href={this.props.path} onClick={this.props.handleGetLesson} className="link-button table-cell" role="button">Restart lesson</a>
+          <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button table-cell" role="button">Stop lesson</a>
         </div>
       </div>
     )
