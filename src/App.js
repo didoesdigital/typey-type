@@ -69,17 +69,6 @@ class App extends Component {
   componentDidMount() {
     this.setState({metWords: this.loadMetWords()});
 
-    // fetch('met-words.json', {
-    //   method: "GET",
-    //   credentials: "same-origin"
-    // }).then((response) => {
-    //   return response.json()
-    // }).then(json => {
-    //   this.setState({ metWords: json });
-    // }).catch(function(e) {
-    //   console.log('Unable to load met words', e)
-    // });
-
     fetch('/lessons/lessonIndex.json', {
       method: "GET",
       credentials: "same-origin"
