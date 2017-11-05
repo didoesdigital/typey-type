@@ -258,11 +258,13 @@ class App extends Component {
     newLesson.presentedMaterial = newLesson.presentedMaterial.filter(item => filterFunction(item.phrase) );
 
     let reps = this.state.userSettings.repetitions;
+    let repeatedLesson = newLesson.presentedMaterial;
     if (reps > 0) {
       for (let i = 1; i < reps && i < 30; i++) {
-        newLesson.presentedMaterial = newLesson.presentedMaterial.concat(newLesson.sourceMaterial);
+        repeatedLesson = repeatedLesson.concat(newLesson.presentedMaterial);
       }
     }
+    newLesson.presentedMaterial = repeatedLesson;
 
     this.setState({ lesson: newLesson });
     this.setState({ currentPhraseID: 0 });
