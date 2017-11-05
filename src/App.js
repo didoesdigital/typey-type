@@ -112,8 +112,14 @@ class App extends Component {
     this.stopTimer();
     this.writeMetWords();
     this.setState({
+      actualText: ``,
+      currentPhraseID: this.state.lesson.presentedMaterial.length,
       disableUserSettings: false,
-      currentPhraseID: this.state.lesson.presentedMaterial.length
+      numberOfMatchedChars: 0,
+      startTime: null,
+      timer: null,
+      totalNumberOfMatchedChars: 0,
+      totalNumberOfMatchedWords: 0
     }, () => {
       this.stopTimer();
     });
@@ -273,17 +279,9 @@ class App extends Component {
   handleLesson(event) {
     this.getLesson(event.target.href).then((lessonText) => {
       var lesson = parseLesson(lessonText);
-      this.stopTimer();
-      this.setState({
-        actualText: ``,
-        currentPhraseID: 0,
-        disableUserSettings: false,
-        lesson: lesson,
-        numberOfMatchedChars: 0,
-        startTime: null,
-        timer: null,
-        totalNumberOfMatchedChars: 0,
-        totalNumberOfMatchedWords: 0
+      this.setState({lesson: lesson}, () => {
+        this.stopLesson();
+        this.setupLesson();
       });
     });
     event.preventDefault();
