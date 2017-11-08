@@ -209,10 +209,6 @@ class App extends Component {
       newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
     }
 
-    if (this.state.userSettings.limitNumberOfWords > 0) {
-      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
-    }
-
     var met = this.state.metWords;
 
     var newWords = this.state.userSettings.newWords,
@@ -262,6 +258,10 @@ class App extends Component {
     }
 
     newLesson.presentedMaterial = newLesson.presentedMaterial.filter(item => filterFunction(item.phrase) );
+
+    if (this.state.userSettings.limitNumberOfWords > 0) {
+      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
+    }
 
     let reps = this.state.userSettings.repetitions;
     let repeatedLesson = newLesson.presentedMaterial;
