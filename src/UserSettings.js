@@ -91,6 +91,39 @@ class UserSettings extends Component {
               Familiar words
             </label>
           </div>
+          <div className="radio-button-group clearfix">
+            <legend className="mb1">Match spaces</legend>
+            <input
+              className="radio-button"
+              type="radio"
+              name="spacePlacement"
+              id="spaceBeforeOutput"
+              disabled={this.props.disableUserSettings}
+              checked={this.props.userSettings.spacePlacement==="Before Output"}
+              onChange={this.props.changeSpacePlacementUserSetting}
+              />
+            <label htmlFor="spaceBeforeOutput" aria-label="Before Output">" x"</label>
+            <input
+              className="radio-button"
+              type="radio"
+              name="spacePlacement"
+              id="spaceAfterOutput"
+              disabled={this.props.disableUserSettings}
+              checked={this.props.userSettings.spacePlacement==="After Output"}
+              onChange={this.props.changeSpacePlacementUserSetting}
+              />
+            <label htmlFor="spaceAfterOutput" aria-label="After Output">"x "</label>
+            <input
+              className="radio-button"
+              type="radio"
+              name="spacePlacement"
+              id="spaceOff"
+              disabled={this.props.disableUserSettings}
+              checked={this.props.userSettings.spacePlacement==="Off"}
+              onChange={this.props.changeSpacePlacementUserSetting}
+              />
+            <label htmlFor="spaceOff">Off</label>
+          </div>
           <label htmlFor="limitNumberOfWords">Limit word count</label>
           <NumericInput
             autoCapitalize="off"
