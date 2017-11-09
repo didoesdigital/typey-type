@@ -1,7 +1,7 @@
 function matchSplitText(expected, actualText, settings={spacePlacement: 'Before Output', caseInsensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}, userSettings={}) {
-  if (settings.requireSpaces === true && userSettings.spacePlacement === 'Before Output') {
+  if (settings.requireSpaces === true && userSettings.spacePlacement === 'spaceBeforeOutput') {
     expected = ' '+expected;
-  } else if (settings.requireSpaces === true && userSettings.spacePlacement === 'After Output') {
+  } else if (settings.requireSpaces === true && userSettings.spacePlacement === 'spaceAfterOutput') {
     expected = expected+' ';
   }
   let expectedChars = expected.split('');
@@ -20,7 +20,7 @@ function matchSplitText(expected, actualText, settings={spacePlacement: 'Before 
     }
   }
 
-  if (settings.noticeSpaces === false) {
+  if (userSettings.spacePlacement === 'spaceOff') {
     settings.ignoredChars += " ";
   }
 
@@ -35,7 +35,7 @@ function matchSplitText(expected, actualText, settings={spacePlacement: 'Before 
     }
 
     // Is typed char an ignored space?
-    while(settings.noticeSpaces === false && actualTextChars[actualTextIndex] === ' ') {
+    while(userSettings.spacePlacement === 'spaceOff' && actualTextChars[actualTextIndex] === ' ') {
       actualTextIndex++
       if (actualTextIndex >= actualTextChars.length) {
         break;

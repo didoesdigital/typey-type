@@ -31,7 +31,12 @@ class App extends Component {
         randomise: false,
         repetitions: 1,
         showStrokes: false,
-        spacePlacement: 'Before Output',
+        spacePlacement: 'spaceBeforeOutput',
+        spacePlacementOptions: {
+          spaceBeforeOutput: 'Before Output',
+          spaceAfterOutput: 'After Output',
+          spaceOff: 'Off'
+        },
         unfamiliarWords: true
       },
       lesson: {
@@ -181,6 +186,23 @@ class App extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
+
+    newState[name] = value;
+
+    this.setState({userSettings: newState}, () => {
+      if (!(name === 'caseInsensitive')) {
+        this.setupLesson();
+      }
+    });
+    return value;
+  }
+
+  changeSpacePlacementUserSetting(event) {
+    let currentState = this.state.userSettings;
+    let newState = Object.assign({}, currentState);
+
+    const name = 'spacePlacement'
+    const value = event.target.id;
 
     newState[name] = value;
 
@@ -369,6 +391,7 @@ class App extends Component {
           <div className="main">
             <Finished
               actualText={this.state.actualText}
+              changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
               changeUserSetting={this.changeUserSetting.bind(this)}
               disableUserSettings={this.state.disableUserSettings}
               handleGetLesson={this.handleLesson.bind(this)}
@@ -407,6 +430,7 @@ class App extends Component {
           <div>
             <Typing
               actualText={this.state.actualText}
+              changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
               changeUserSetting={this.changeUserSetting.bind(this)}
               currentPhrase={this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase}
               currentStroke={this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke}
