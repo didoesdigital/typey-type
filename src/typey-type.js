@@ -1,7 +1,7 @@
 function matchSplitText(expected, actualText, settings={spacePlacement: 'Before Output', caseInsensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}, userSettings={}) {
-  if (settings.requireSpaces === true && settings.spacePlacement === 'Before Output') {
+  if (settings.requireSpaces === true && userSettings.spacePlacement === 'Before Output') {
     expected = ' '+expected;
-  } else if (settings.requireSpaces === true && settings.spacePlacement === 'After Output') {
+  } else if (settings.requireSpaces === true && userSettings.spacePlacement === 'After Output') {
     expected = expected+' ';
   }
   let expectedChars = expected.split('');
@@ -80,7 +80,7 @@ function parseLesson(lessonText) {
   var lessonSubtitle = lines[1];
   lines.filter(phrase => phrase !== '');
   var sourceMaterial = [];
-  var settings = {caseInsensitive: false, requireSpaces: false, noticeSpaces: false, ignoredChars: '', spacePlacement: 'Before Output'};
+  var settings = {caseInsensitive: false, requireSpaces: false, noticeSpaces: false, ignoredChars: ''};
 
   for (var i = 2; i < lines.length; i++) {
     var line = lines[i];

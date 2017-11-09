@@ -31,6 +31,7 @@ class App extends Component {
         randomise: false,
         repetitions: 1,
         showStrokes: false,
+        spacePlacement: 'Before Output',
         unfamiliarWords: true
       },
       lesson: {
