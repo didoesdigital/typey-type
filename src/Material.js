@@ -15,7 +15,7 @@ class Material extends Component {
 
   render() {
     return (
-      <div className="">
+      <div className="mb1">
         <div className="visually-hidden">Material to type: <div role="status" aria-live="assertive">{this.props.currentPhrase}</div></div>
         <div className="expected" dangerouslySetInnerHTML={this.markUpMaterial(this.props.currentPhrase, this.props.actualText, this.props.settings, this.props.currentStroke)} />
       </div>

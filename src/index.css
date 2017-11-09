@@ -343,5 +343,8 @@ label {
   margin-right: auto;
   width: 8em; }
 
+.steno-material {
+  border-bottom: 2px solid #FFD073; }
+
 .matched.steno-material {
-  border-bottom: 2px solid #c6bdcb; }
+  border-bottom: 2px solid #91a896; }

@@ -401,6 +401,9 @@ label {
   margin-right: auto;
   width: 8em;
 }
+.steno-material {
+  border-bottom: 2px solid $brand-highlight;
+}
 .matched.steno-material {
-  border-bottom: 2px solid add-tint($brand-primary, 70%);
+  border-bottom: 2px solid add-tint($brand-success, 50%);
 }
