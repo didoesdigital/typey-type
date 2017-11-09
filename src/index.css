@@ -313,17 +313,6 @@ label {
   .link-button:active, .link-button:focus {
     background-color: #664f74; }
 
-.button-group .button {
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  vertical-align: middle;
-  white-space: nowrap; }
-  .button-group .button:hover {
-    background-color: #533962; }
-  .button-group .button:active, .button-group .button:focus {
-    background-color: #664f74; }
-
 .radio-button {
   opacity: 0;
   position: absolute; }
@@ -334,7 +323,11 @@ label {
     float: left;
     margin-right: -1px;
     padding: 4px 8px;
-    position: relative; }
+    position: relative;
+    text-align: center;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap; }
     .radio-button + label:first-of-type {
       border-radius: 4px 0 0 4px; }
     .radio-button + label:last-of-type {

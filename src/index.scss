@@ -368,22 +368,6 @@ label {
     background-color: add-tint($brand-primary, 20%);
   }
 }
-.button-group {
-  .button {
-    text-align: center;
-    text-decoration: none;
-    user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
-    &:hover {
-      background-color: add-tint($brand-primary, 10%);
-    }
-    &:active,
-    &:focus {
-      background-color: add-tint($brand-primary, 20%);
-    }
-  }
-}
 
 .radio-button {
   opacity: 0;
@@ -396,6 +380,10 @@ label {
     margin-right: -1px;
     padding: 4px 8px;
     position: relative;
+    text-align: center;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
 
     &:first-of-type {
       border-radius: 4px 0 0 4px;
