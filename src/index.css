@@ -50,7 +50,7 @@ pre {
   font: 700 16px/1.6 "Overpass Mono", monospace; }
 
 abbr[title] {
-  border-bottom: thin dotted #402351;
+  border-bottom: thin dotted currentColor;
   border-radius: 1px;
   cursor: help;
   text-decoration: none; }
