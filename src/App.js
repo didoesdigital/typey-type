@@ -142,7 +142,6 @@ class App extends Component {
       disableUserSettings: false,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
-      totalNumberOfMatchedWords: 0,
       totalNumberOfNewWordsMet: 0
     }, () => {
       this.stopTimer();
