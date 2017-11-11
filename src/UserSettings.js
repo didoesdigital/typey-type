@@ -100,7 +100,7 @@ class UserSettings extends Component {
               id="spaceBeforeOutput"
               value="spaceBeforeOutput"
               disabled={this.props.disableUserSettings}
-              checked={this.props.userSettings.spacePlacement==="Before Output"}
+              checked={this.props.userSettings.spacePlacement==="spaceBeforeOutput"}
               onChange={this.props.changeSpacePlacementUserSetting}
               />
             <label htmlFor="spaceBeforeOutput" aria-label="Before Output">" x"</label>
@@ -111,7 +111,7 @@ class UserSettings extends Component {
               id="spaceAfterOutput"
               value="spaceAfterOutput"
               disabled={this.props.disableUserSettings}
-              checked={this.props.userSettings.spacePlacement==="After Output"}
+              checked={this.props.userSettings.spacePlacement==="spaceAfterOutput"}
               onChange={this.props.changeSpacePlacementUserSetting}
               />
             <label htmlFor="spaceAfterOutput" aria-label="After Output">"x "</label>
@@ -122,7 +122,7 @@ class UserSettings extends Component {
               id="spaceOff"
               value="spaceOff"
               disabled={this.props.disableUserSettings}
-              checked={this.props.userSettings.spacePlacement==="Off"}
+              checked={this.props.userSettings.spacePlacement==="spaceOff"}
               onChange={this.props.changeSpacePlacementUserSetting}
               />
             <label htmlFor="spaceOff">Off</label>
