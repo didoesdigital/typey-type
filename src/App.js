@@ -446,6 +446,9 @@ class App extends Component {
               userSettings={this.state.userSettings}
               />
           </div>
+          <footer>
+            <p className="text-center mb1 mt1"><small>Learn more about <a href="https://didoesdigital.com/plover/">stenography and Plover</a>.</small></p>
+          </footer>
         </div>
       );
     }
