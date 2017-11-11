@@ -21,7 +21,7 @@ class App extends Component {
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
-      numberNewWordsMet: 0,
+      totalNumberOfNewWordsMet: 0,
       disableUserSettings: false,
       metWords: {'the': 1},
       userSettings: {
@@ -143,7 +143,7 @@ class App extends Component {
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
       totalNumberOfMatchedWords: 0,
-      numberNewWordsMet: 0
+      totalNumberOfNewWordsMet: 0
     }, () => {
       this.stopTimer();
     });
@@ -244,7 +244,7 @@ class App extends Component {
       timer: null,
       totalNumberOfMatchedChars: 0,
       totalNumberOfMatchedWords: 0,
-      numberNewWordsMet: 0
+      totalNumberOfNewWordsMet: 0
     });
 
     if (this.state.userSettings.randomise) {
@@ -352,7 +352,7 @@ class App extends Component {
     var newState = {
       numberOfMatchedChars: numberOfMatchedChars,
       totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
-      numberNewWordsMet: this.state.numberNewWordsMet,
+      totalNumberOfNewWordsMet: this.state.totalNumberOfNewWordsMet,
       actualText: actualText,
       metWords: this.state.metWords
     };
@@ -369,7 +369,7 @@ class App extends Component {
         newState.metWords[actualText] += this.state.currentPhraseMeetingSuccess;
       } else {
         newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess;
-        newState.numberNewWordsMet = this.state.numberNewWordsMet + this.state.currentPhraseMeetingSuccess;
+        newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + this.state.currentPhraseMeetingSuccess;
       }
       if (!this.state.userSettings.showStrokes) {
         newState.currentPhraseMeetingSuccess = 1;
@@ -421,7 +421,7 @@ class App extends Component {
               settings={this.state.lesson.settings}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-              numberNewWordsMet={this.state.numberNewWordsMet}
+              totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
               totalWordCount={this.state.lesson.presentedMaterial.length}
               userSettings={this.state.userSettings}
               />
@@ -467,7 +467,7 @@ class App extends Component {
               settings={this.state.lesson.settings}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-              numberNewWordsMet={this.state.numberNewWordsMet}
+              totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
               totalWordCount={this.state.lesson.presentedMaterial.length}
               updateMarkup={this.updateMarkup.bind(this)}
               userSettings={this.state.userSettings}
