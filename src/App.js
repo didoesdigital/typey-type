@@ -32,11 +32,6 @@ class App extends Component {
         repetitions: 1,
         showStrokes: false,
         spacePlacement: 'spaceBeforeOutput',
-        spacePlacementOptions: {
-          spaceBeforeOutput: 'Before Output',
-          spaceAfterOutput: 'After Output',
-          spaceOff: 'Off'
-        },
         unfamiliarWords: true
       },
       lesson: {
