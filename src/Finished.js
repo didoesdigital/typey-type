@@ -33,7 +33,7 @@ class Finished extends Component {
             <Scores
               timer={this.props.timer}
               totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-              totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+              numberNewWordsMet={this.props.totalNumberOfNewWordsMet}
             />
           </div>
         </div>

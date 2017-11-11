@@ -18,7 +18,7 @@ class Scores extends Component {
       <dd>${Math.round(timer/1000)}s</dd>
 
       <dt>New words:</dt>
-      <dd>${this.props.totalNumberOfNewWordsMet}</dd>
+      <dd>${this.props.numberNewWordsMet}</dd>
 
       <dt class="hide">Word count:</dt>
       <dd class="hide">~${Math.round(totalNumberOfMatchedWords)}</dd>
