@@ -421,6 +421,7 @@ class App extends Component {
               settings={this.state.lesson.settings}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+              totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
               totalWordCount={this.state.lesson.presentedMaterial.length}
               userSettings={this.state.userSettings}
               />
