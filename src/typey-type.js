@@ -1,7 +1,7 @@
 function matchSplitText(expected, actualText, settings={spacePlacement: 'Before Output', caseInsensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}, userSettings={}) {
-  if (settings.requireSpaces === true && userSettings.spacePlacement === 'spaceBeforeOutput') {
+  if (userSettings.spacePlacement === 'spaceBeforeOutput') {
     expected = ' '+expected;
-  } else if (settings.requireSpaces === true && userSettings.spacePlacement === 'spaceAfterOutput') {
+  } else if (userSettings.spacePlacement === 'spaceAfterOutput') {
     expected = expected+' ';
   }
   let expectedChars = expected.split('');
@@ -9,6 +9,7 @@ function matchSplitText(expected, actualText, settings={spacePlacement: 'Before 
   let charactersMatch;
   let expectedIndex = 0;
   let actualTextIndex = 0;
+  let ignoredChars = settings.ignoredChars.slice(0);
 
   if (!userSettings.caseInsensitive) {
     charactersMatch = function (char1, char2) {
@@ -21,13 +22,13 @@ function matchSplitText(expected, actualText, settings={spacePlacement: 'Before 
   }
 
   if (userSettings.spacePlacement === 'spaceOff') {
-    settings.ignoredChars += " ";
+    ignoredChars += " ";
   }
 
   for (; actualTextIndex < actualTextChars.length && expectedIndex < expectedChars.length; expectedIndex++, actualTextIndex++) {
 
     // Is material char an ignored char?
-    while(settings.ignoredChars.indexOf(expectedChars[expectedIndex]) !== -1) {
+    while(ignoredChars.indexOf(expectedChars[expectedIndex]) !== -1) {
       expectedIndex++;
       if (expectedIndex >= expectedChars.length) {
         break;
