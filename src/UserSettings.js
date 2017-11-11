@@ -182,7 +182,7 @@ class UserSettings extends Component {
             snap
           />
         </form>
-        <p><strong>Total word count:</strong> {this.props.totalWordCount}</p>
+        <p className="mt1"><strong>Total word count:</strong> {this.props.totalWordCount}</p>
       </div>
     )
   }
