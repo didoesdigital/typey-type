@@ -187,17 +187,5 @@ class UserSettings extends Component {
     )
   }
 }
-          // <label>
-          //   Number of repetitions
-          //   <input
-          //     className="form-control"
-          //     name="repetitions"
-          //     type="number"
-          //     min="1"
-          //     max="30"
-          //     disabled={this.props.disableUserSettings}
-          //     value={this.props.userSettings.repetitions}
-          //     onChange={this.props.changeUserSetting} />
-          // </label>
 
 export default UserSettings;
