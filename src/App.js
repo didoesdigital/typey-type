@@ -63,9 +63,31 @@ class App extends Component {
     let metWordsJSON = JSON.stringify(this.state.metWords);
     window.localStorage.setItem('metWords', metWordsJSON);
   }
+  loadUserSettings() {
+    if (window.localStorage && window.localStorage.getItem('userSettings')) {
+      return JSON.parse(window.localStorage.getItem('userSettings'));
+    } else {
+      return {
+        caseInsensitive: true,
+        familiarWords: false,
+        limitNumberOfWords: 0,
+        newWords: true,
+        randomise: false,
+        repetitions: 1,
+        showStrokes: false,
+        spacePlacement: 'spaceBeforeOutput',
+        unfamiliarWords: true
+      };
+    }
+  }
+  writeUserSettings() {
+    let userSettingsJSON = JSON.stringify(this.state.userSettings);
+    window.localStorage.setItem('userSettings', userSettingsJSON);
+  }
 
   componentDidMount() {
     this.setState({metWords: this.loadMetWords()});
+    this.setState({userSettings: this.loadUserSettings()});
 
     fetch('/lessons/lessonIndex.json', {
       method: "GET",
@@ -108,6 +130,7 @@ class App extends Component {
   stopLesson() {
     this.stopTimer();
     this.writeMetWords();
+    this.writeUserSettings();
     this.setState({
       actualText: ``,
       currentPhraseID: this.state.lesson.presentedMaterial.length,
