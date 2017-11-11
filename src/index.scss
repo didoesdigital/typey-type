@@ -55,6 +55,9 @@ p {
   line-height: 1.5;
   margin-bottom: 0.5em;
 }
+a {
+  color: adjust-hue(add-tint($brand-primary, 30%), -45deg);
+}
 pre {
   font: 700 16px/1.6 "Overpass Mono", monospace;
 }
