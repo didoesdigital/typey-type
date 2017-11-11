@@ -403,22 +403,31 @@ label {
     &:last-of-type {
       border-radius: 0 4px 4px 0;
     }
-    &:hover {
-      background-color: add-tint($brand-primary, 95%);
+    &:hover:not(disabled) {
+      background-color: saturate(add-tint($brand-primary, 30%), 10%);
+      color: #fff;
     }
-    &:active,
-    &:focus {
-      background-color: add-tint($brand-primary, 85%);
+    &:active:not(disabled),
+    &:focus:not(disabled) {
+      background-color: saturate(add-tint($brand-primary, 20%), 10%);
+      color: #fff;
     }
+  }
+  &:disabled + label {
+    background-color: add-tint($brand-primary, 97%);
+    border-color: add-tint($brand-primary, 97%);
+  }
+  &:disabled:checked + label {
+    background-color: saturate(add-tint($brand-primary, 70%), 10%);
   }
   &:checked + label {
-    background-color: desaturate(add-tint($brand-primary, 90%), 40%);
-    color: desaturate(add-shade($brand-primary, 10%), 40%);
+    background-color: saturate(add-tint($brand-primary, 20%), 10%);
+    color: #fff;
   }
-  &:hover + label:before,
-  &:active + label:before,
-  &:focus + label:before,
-  &:checked + label:before {
+  &:hover:not(disabled) + label:before,
+  &:active:not(disabled) + label:before,
+  &:focus:not(disabled) + label:before,
+  &:checked:not(disabled) + label:before {
     content: '';
     border-radius: 0;
     border: 2px solid #fff;
@@ -429,8 +438,8 @@ label {
     top: 0px;
     z-index: 1;
   }
-  &:active + label:before,
-  &:focus + label:before {
+  &:active:not(disabled) + label:before,
+  &:focus:not(disabled) + label:before {
     border: none;
   }
   &:hover + label:first-of-type:before,

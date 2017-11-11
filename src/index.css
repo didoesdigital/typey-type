@@ -344,17 +344,24 @@ label {
       border-radius: 4px 0 0 4px; }
     .radio-button + label:last-of-type {
       border-radius: 0 4px 4px 0; }
-    .radio-button + label:hover {
-      background-color: #f5f4f6; }
-    .radio-button + label:active, .radio-button + label:focus {
-      background-color: #e2dee5; }
+    .radio-button + label:hover:not(disabled) {
+      background-color: #7c5991;
+      color: #fff; }
+    .radio-button + label:active:not(disabled), .radio-button + label:focus:not(disabled) {
+      background-color: #68457e;
+      color: #fff; }
+  .radio-button:disabled + label {
+    background-color: #f9f8fa;
+    border-color: #f9f8fa; }
+  .radio-button:disabled:checked + label {
+    background-color: #c8b7d1; }
   .radio-button:checked + label {
-    background-color: #ececec;
-    color: #353535; }
-  .radio-button:hover + label:before,
-  .radio-button:active + label:before,
-  .radio-button:focus + label:before,
-  .radio-button:checked + label:before {
+    background-color: #68457e;
+    color: #fff; }
+  .radio-button:hover:not(disabled) + label:before,
+  .radio-button:active:not(disabled) + label:before,
+  .radio-button:focus:not(disabled) + label:before,
+  .radio-button:checked:not(disabled) + label:before {
     content: '';
     border-radius: 0;
     border: 2px solid #fff;
@@ -364,8 +371,8 @@ label {
     right: 0px;
     top: 0px;
     z-index: 1; }
-  .radio-button:active + label:before,
-  .radio-button:focus + label:before {
+  .radio-button:active:not(disabled) + label:before,
+  .radio-button:focus:not(disabled) + label:before {
     border: none; }
   .radio-button:hover + label:first-of-type:before,
   .radio-button:active + label:first-of-type:before,
