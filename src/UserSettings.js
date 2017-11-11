@@ -26,20 +26,6 @@ class UserSettings extends Component {
               <input
                 className="checkbox-input"
                 type="checkbox"
-                name="randomise"
-                id="randomise"
-                disabled={this.props.disableUserSettings}
-                checked={this.props.userSettings.randomise}
-                onChange={this.props.changeUserSetting}
-                />
-              Randomise lesson
-            </label>
-          </div>
-          <div className="checkbox-group">
-            <label className="checkbox-label">
-              <input
-                className="checkbox-input"
-                type="checkbox"
                 name="caseInsensitive"
                 id="caseInsensitive"
                 disabled={this.props.disableUserSettings}
@@ -141,7 +127,7 @@ class UserSettings extends Component {
           </div>
 
           <div className="radio-button-group clearfix">
-            <legend className="mb1">Sort lesson by</legend>
+            <legend className="mb1">Sort</legend>
 
             <input
               className="radio-button"
@@ -179,8 +165,8 @@ class UserSettings extends Component {
               checked={this.props.userSettings.sortOrder==="sortNew"}
               onChange={this.props.changeSortOrderUserSetting}
               />
-            <label htmlFor="sortNew" aria-hidden="true" title="New words first">New</label>
-            <label htmlFor="sortNew" className="visually-hidden" aria-label="New words first"></label>
+            <label htmlFor="sortNew" aria-hidden="true" title="Newest words first">New</label>
+            <label htmlFor="sortNew" className="visually-hidden" aria-label="Newest words first"></label>
 
             <label htmlFor="sortOld" className="visually-hidden" aria-label="Oldest words first"></label>
             {/*
@@ -195,7 +181,7 @@ class UserSettings extends Component {
               id="sortOld"
               value="sortOld"
               disabled={this.props.disableUserSettings}
-              checked={this.props.userSettings.sortOrder==="spaceOld"}
+              checked={this.props.userSettings.sortOrder==="sortOld"}
               onChange={this.props.changeSortOrderUserSetting}
               />
             <label htmlFor="sortOld" aria-hidden="true" title="Oldest words first">Old</label>

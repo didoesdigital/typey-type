@@ -31,7 +31,6 @@ class App extends Component {
         familiarWords: false,
         limitNumberOfWords: 0,
         newWords: true,
-        randomise: false,
         repetitions: 1,
         showStrokes: false,
         spacePlacement: 'spaceBeforeOutput',
@@ -64,7 +63,6 @@ class App extends Component {
         familiarWords: false,
         limitNumberOfWords: 0,
         newWords: true,
-        randomise: false,
         repetitions: 1,
         showStrokes: false,
         spacePlacement: 'spaceBeforeOutput',
@@ -270,6 +268,25 @@ class App extends Component {
 
     if (this.state.userSettings.sortOrder === 'sortRandom') {
       newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
+    } else if ((this.state.userSettings.sortOrder === 'sortNew') || (this.state.userSettings.sortOrder === 'sortOld')) {
+      let sortable = [];
+      for (let meeting in this.state.metWords) {
+          sortable.push([meeting, this.state.metWords[meeting]]);
+      }
+      let sortedMeetings = sortable.sort(function(a, b) {
+          return a[1] - b[1];
+      });
+
+      let reference_object = {};
+      for (let i = 0; i < sortedMeetings.length; i++) {
+          reference_object[sortedMeetings[i]] = i;
+      }
+      newLesson.presentedMaterial = newLesson.presentedMaterial.sort(function(a, b) {
+        return reference_object[a] - reference_object[b];
+      });
+      if (this.state.userSettings.sortOrder === 'sortOld') {
+        newLesson.presentedMaterial.reverse();
+      }
     }
 
     var met = this.state.metWords;
