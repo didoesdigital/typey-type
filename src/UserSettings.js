@@ -98,6 +98,7 @@ class UserSettings extends Component {
               type="radio"
               name="spacePlacement"
               id="spaceBeforeOutput"
+              value="spaceBeforeOutput"
               disabled={this.props.disableUserSettings}
               checked={this.props.userSettings.spacePlacement==="Before Output"}
               onChange={this.props.changeSpacePlacementUserSetting}
@@ -108,6 +109,7 @@ class UserSettings extends Component {
               type="radio"
               name="spacePlacement"
               id="spaceAfterOutput"
+              value="spaceAfterOutput"
               disabled={this.props.disableUserSettings}
               checked={this.props.userSettings.spacePlacement==="After Output"}
               onChange={this.props.changeSpacePlacementUserSetting}
@@ -118,6 +120,7 @@ class UserSettings extends Component {
               type="radio"
               name="spacePlacement"
               id="spaceOff"
+              value="spaceOff"
               disabled={this.props.disableUserSettings}
               checked={this.props.userSettings.spacePlacement==="Off"}
               onChange={this.props.changeSpacePlacementUserSetting}

@@ -197,7 +197,7 @@ class App extends Component {
     let newState = Object.assign({}, currentState);
 
     const name = 'spacePlacement'
-    const value = event.target.id;
+    const value = event.target.value;
 
     newState[name] = value;
 
