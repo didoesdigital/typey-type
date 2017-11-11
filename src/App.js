@@ -38,11 +38,7 @@ class App extends Component {
         sourceMaterial: [{phrase: '', stroke: ''}],
         presentedMaterial: [{phrase: '', stroke: ''}],
         settings: {
-          caseInsensitive: true,
-          requireSpaces: false,
-          noticeSpaces: false,
-          ignoredChars: '',
-          spacePlacement: 'Before Output'
+          ignoredChars: ''
         },
         title: 'Loading…', subtitle: 'Loading…'
       },

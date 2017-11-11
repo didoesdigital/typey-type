@@ -1,4 +1,4 @@
-function matchSplitText(expected, actualText, settings={spacePlacement: 'Before Output', caseInsensitive: true, requireSpaces: false, noticeSpaces: false, ignoredChars: ''}, userSettings={}) {
+function matchSplitText(expected, actualText, settings={ignoredChars: ''}, userSettings={}) {
   if (userSettings.spacePlacement === 'spaceBeforeOutput') {
     expected = ' '+expected;
   } else if (userSettings.spacePlacement === 'spaceAfterOutput') {
@@ -67,9 +67,6 @@ function matchSplitText(expected, actualText, settings={spacePlacement: 'Before 
 }
 
 const SETTINGS_NAME_MAP = {
-  case_sensitive: 'caseInsensitive',
-  require_spaces: 'requireSpaces',
-  notice_spaces: 'noticeSpaces',
   ignore_characters: 'ignoredChars',
   warning_message: 'customMessage',
   locales: 'locales'
@@ -81,7 +78,7 @@ function parseLesson(lessonText) {
   var lessonSubtitle = lines[1];
   lines.filter(phrase => phrase !== '');
   var sourceMaterial = [];
-  var settings = {caseInsensitive: false, requireSpaces: false, noticeSpaces: false, ignoredChars: ''};
+  var settings = {ignoredChars: ''};
 
   for (var i = 2; i < lines.length; i++) {
     var line = lines[i];
