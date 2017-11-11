@@ -55,7 +55,11 @@ class Typing extends Component {
             </div>
           </div>
           <div className="scores">
-            <Scores timer={this.props.timer} totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}/>
+            <Scores
+              timer={this.props.timer}
+              totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
+              totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+            />
           </div>
         </div>
       </div>

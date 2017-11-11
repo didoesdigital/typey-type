@@ -17,8 +17,11 @@ class Scores extends Component {
       <dt>Time:</dt>
       <dd>${Math.round(timer/1000)}s</dd>
 
-      <dt>Word count:</dt>
-      <dd>~${Math.round(totalNumberOfMatchedWords)}</dd>
+      <dt>New words:</dt>
+      <dd>${this.props.totalNumberOfNewWordsMet}</dd>
+
+      <dt className="hide">Word count:</dt>
+      <dd className="hide">~${Math.round(totalNumberOfMatchedWords)}</dd>
       </dl>
     `
     return {__html: result};
@@ -43,8 +46,11 @@ class Scores extends Component {
             <dt>Time:</dt>
             <dd>&nbsp;</dd>
 
-            <dt>Word count:</dt>
+            <dt>New words:</dt>
             <dd>&nbsp;</dd>
+
+            <dt className="hide">Word count:</dt>
+            <dd className="hide">&nbsp;</dd>
           </dl>
         </div>
       );
