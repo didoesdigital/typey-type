@@ -52,22 +52,10 @@ class App extends Component {
     };
   }
 
-  loadMetWords() {
-    if (window.localStorage && window.localStorage.getItem('metWords')) {
-      return JSON.parse(window.localStorage.getItem('metWords'));
-    } else {
-      return {};
-    }
-  }
-  writeMetWords() {
-    let metWordsJSON = JSON.stringify(this.state.metWords);
-    window.localStorage.setItem('metWords', metWordsJSON);
-  }
-  loadUserSettings() {
-    if (window.localStorage && window.localStorage.getItem('userSettings')) {
-      return JSON.parse(window.localStorage.getItem('userSettings'));
-    } else {
-      return {
+  loadPersonalPreferences() {
+    if (window.localStorage) {
+      let metWords = {};
+      let userSettings = {
         caseInsensitive: true,
         familiarWords: false,
         limitNumberOfWords: 0,
@@ -78,16 +66,33 @@ class App extends Component {
         spacePlacement: 'spaceBeforeOutput',
         unfamiliarWords: true
       };
+      if (window.localStorage.getItem('metWords')) {
+        metWords = JSON.parse(window.localStorage.getItem('metWords'));
+      }
+      if (window.localStorage.getItem('userSettings')) {
+        userSettings = JSON.parse(window.localStorage.getItem('userSettings'));
+      }
+      return [metWords, userSettings];
     }
   }
-  writeUserSettings() {
+
+  writePersonalPreferences() {
     let userSettingsJSON = JSON.stringify(this.state.userSettings);
-    window.localStorage.setItem('userSettings', userSettingsJSON);
+    let metWordsJSON = JSON.stringify(this.state.metWords);
+    if (window.localStorage) {
+      window.localStorage.setItem('userSettings', userSettingsJSON);
+      window.localStorage.setItem('metWords', metWordsJSON);
+    } else {
+      console.log('Unable to write to local storage. Changes to User Settings and Met Words will be lost.');
+    }
   }
 
   componentDidMount() {
-    this.setState({metWords: this.loadMetWords()});
-    this.setState({userSettings: this.loadUserSettings()});
+    let [metWords, userSettings] = this.loadPersonalPreferences();
+    this.setState({
+      metWords: metWords,
+      userSettings: userSettings
+    });
 
     fetch('/lessons/lessonIndex.json', {
       method: "GET",
@@ -129,8 +134,7 @@ class App extends Component {
 
   stopLesson() {
     this.stopTimer();
-    this.writeMetWords();
-    this.writeUserSettings();
+    this.writePersonalPreferences();
     this.setState({
       actualText: ``,
       currentPhraseID: this.state.lesson.presentedMaterial.length,
