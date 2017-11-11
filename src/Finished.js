@@ -17,6 +17,7 @@ class Finished extends Component {
         <div className="content">
           <UserSettings
             changeUserSetting={this.props.changeUserSetting}
+            changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
             disableUserSettings={this.props.disableUserSettings}
             handleLimitWordsChange={this.props.handleLimitWordsChange}
             handleRepetitionsChange={this.props.handleRepetitionsChange}
