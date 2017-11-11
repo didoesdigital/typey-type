@@ -91,8 +91,10 @@ class UserSettings extends Component {
               Familiar words
             </label>
           </div>
+
           <div className="radio-button-group clearfix">
             <legend className="mb1">Match spaces</legend>
+
             <input
               className="radio-button"
               type="radio"
@@ -103,7 +105,9 @@ class UserSettings extends Component {
               checked={this.props.userSettings.spacePlacement==="spaceBeforeOutput"}
               onChange={this.props.changeSpacePlacementUserSetting}
               />
-            <label htmlFor="spaceBeforeOutput" aria-label="Before Output">" x"</label>
+            <label htmlFor="spaceBeforeOutput" aria-hidden="true">" x"</label>
+            <label htmlFor="spaceBeforeOutput" className="visually-hidden" aria-label="Space Before Output"></label>
+
             <input
               className="radio-button"
               type="radio"
@@ -114,7 +118,15 @@ class UserSettings extends Component {
               checked={this.props.userSettings.spacePlacement==="spaceAfterOutput"}
               onChange={this.props.changeSpacePlacementUserSetting}
               />
-            <label htmlFor="spaceAfterOutput" aria-label="After Output">"x "</label>
+            <label htmlFor="spaceAfterOutput" aria-hidden="true">" x"</label>
+            <label htmlFor="spaceAfterOutput" className="visually-hidden" aria-label="Space After Output"></label>
+
+            <label htmlFor="spaceOff" className="visually-hidden" aria-label="Ignore spaces"></label>
+            {/*
+              This label is in a different location to other hidden screen reader labels so that
+              input+label works for styled buttons and :first-of-type/:last-of-type work for rounded
+              button group corners.
+              */}
             <input
               className="radio-button"
               type="radio"
@@ -125,8 +137,9 @@ class UserSettings extends Component {
               checked={this.props.userSettings.spacePlacement==="spaceOff"}
               onChange={this.props.changeSpacePlacementUserSetting}
               />
-            <label htmlFor="spaceOff">Off</label>
+            <label htmlFor="spaceOff" aria-hidden="true">Off</label>
           </div>
+
           <label htmlFor="limitNumberOfWords">Limit word count</label>
           <NumericInput
             autoCapitalize="off"
