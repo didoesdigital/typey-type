@@ -59,6 +59,8 @@ class Typing extends Component {
               timer={this.props.timer}
               totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+              totalNumberOfLowExposures={this.props.totalNumberOfLowExposures}
+              totalNumberOfFamiliarWords={this.props.totalNumberOfFamiliarWords}
             />
           </div>
         </div>

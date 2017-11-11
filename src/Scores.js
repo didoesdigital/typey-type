@@ -20,6 +20,12 @@ class Scores extends Component {
       <dt>New words:</dt>
       <dd>${this.props.totalNumberOfNewWordsMet}</dd>
 
+      <dt>Exposures:</dt>
+      <dd>${this.props.totalNumberOfLowExposures}</dd>
+
+      <dt>Familiar:</dt>
+      <dd>${this.props.totalNumberOfFamiliarWords}</dd>
+
       <dt class="hide">Word count:</dt>
       <dd class="hide">~${Math.round(totalNumberOfMatchedWords)}</dd>
       </dl>
@@ -47,6 +53,12 @@ class Scores extends Component {
             <dd>&nbsp;</dd>
 
             <dt>New words:</dt>
+            <dd>&nbsp;</dd>
+
+            <dt>Exposures:</dt>
+            <dd>&nbsp;</dd>
+
+            <dt>Familiar:</dt>
             <dd>&nbsp;</dd>
 
             <dt className="hide">Word count:</dt>

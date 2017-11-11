@@ -22,6 +22,8 @@ class App extends Component {
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
       totalNumberOfNewWordsMet: 0,
+      totalNumberOfLowExposures: 0,
+      totalNumberOfFamiliarWords: 0,
       disableUserSettings: false,
       metWords: {'the': 1},
       userSettings: {
@@ -141,8 +143,7 @@ class App extends Component {
       currentPhraseID: this.state.lesson.presentedMaterial.length,
       disableUserSettings: false,
       numberOfMatchedChars: 0,
-      totalNumberOfMatchedChars: 0,
-      totalNumberOfNewWordsMet: 0
+      totalNumberOfMatchedChars: 0
     }, () => {
       this.stopTimer();
     });
@@ -243,7 +244,9 @@ class App extends Component {
       timer: null,
       totalNumberOfMatchedChars: 0,
       totalNumberOfMatchedWords: 0,
-      totalNumberOfNewWordsMet: 0
+      totalNumberOfNewWordsMet: 0,
+      totalNumberOfLowExposures: 0,
+      totalNumberOfFamiliarWords: 0
     });
 
     if (this.state.userSettings.randomise) {
@@ -352,6 +355,8 @@ class App extends Component {
       numberOfMatchedChars: numberOfMatchedChars,
       totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       totalNumberOfNewWordsMet: this.state.totalNumberOfNewWordsMet,
+      totalNumberOfLowExposures: this.state.totalNumberOfLowExposures,
+      totalNumberOfFamiliarWords: this.state.totalNumberOfFamiliarWords,
       actualText: actualText,
       metWords: this.state.metWords
     };
@@ -366,6 +371,11 @@ class App extends Component {
       newState.currentPhraseID = this.state.currentPhraseID + 1;
       if (actualText in newState.metWords) {
         newState.metWords[actualText] += this.state.currentPhraseMeetingSuccess;
+        if (newState.metWords[actualText] > 29) {
+          newState.totalNumberOfFamiliarWords = this.state.totalNumberOfFamiliarWords + this.state.currentPhraseMeetingSuccess;
+        } else {
+          newState.totalNumberOfLowExposures = this.state.totalNumberOfLowExposures + this.state.currentPhraseMeetingSuccess;
+        }
       } else {
         newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess;
         newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + this.state.currentPhraseMeetingSuccess;
@@ -421,6 +431,8 @@ class App extends Component {
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
+              totalNumberOfLowExposures={this.state.totalNumberOfLowExposures}
+              totalNumberOfFamiliarWords={this.state.totalNumberOfFamiliarWords}
               totalWordCount={this.state.lesson.presentedMaterial.length}
               userSettings={this.state.userSettings}
               />
@@ -467,6 +479,8 @@ class App extends Component {
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
+              totalNumberOfLowExposures={this.state.totalNumberOfLowExposures}
+              totalNumberOfFamiliarWords={this.state.totalNumberOfFamiliarWords}
               totalWordCount={this.state.lesson.presentedMaterial.length}
               updateMarkup={this.updateMarkup.bind(this)}
               userSettings={this.state.userSettings}
