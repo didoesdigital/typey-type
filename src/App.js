@@ -73,7 +73,7 @@ class App extends Component {
         metWords = JSON.parse(window.localStorage.getItem('metWords'));
       }
       if (window.localStorage.getItem('userSettings')) {
-        userSettings = JSON.parse(window.localStorage.getItem('userSettings'));
+        userSettings = Object.assign(userSettings, JSON.parse(window.localStorage.getItem('userSettings')));
       }
       return [metWords, userSettings];
     }
