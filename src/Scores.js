@@ -20,8 +20,8 @@ class Scores extends Component {
       <dt>New words:</dt>
       <dd>${this.props.totalNumberOfNewWordsMet}</dd>
 
-      <dt className="hide">Word count:</dt>
-      <dd className="hide">~${Math.round(totalNumberOfMatchedWords)}</dd>
+      <dt class="hide">Word count:</dt>
+      <dd class="hide">~${Math.round(totalNumberOfMatchedWords)}</dd>
       </dl>
     `
     return {__html: result};
