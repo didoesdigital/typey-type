@@ -141,8 +141,6 @@ class App extends Component {
       currentPhraseID: this.state.lesson.presentedMaterial.length,
       disableUserSettings: false,
       numberOfMatchedChars: 0,
-      startTime: null,
-      timer: null,
       totalNumberOfMatchedChars: 0,
       totalNumberOfMatchedWords: 0,
       totalNumberOfNewWordsMet: 0
