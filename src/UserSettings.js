@@ -118,7 +118,7 @@ class UserSettings extends Component {
               checked={this.props.userSettings.spacePlacement==="spaceAfterOutput"}
               onChange={this.props.changeSpacePlacementUserSetting}
               />
-            <label htmlFor="spaceAfterOutput" aria-hidden="true">" x"</label>
+            <label htmlFor="spaceAfterOutput" aria-hidden="true">"x "</label>
             <label htmlFor="spaceAfterOutput" className="visually-hidden" aria-label="Space After Output"></label>
 
             <label htmlFor="spaceOff" className="visually-hidden" aria-label="Ignore spaces"></label>
