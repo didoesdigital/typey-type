@@ -140,6 +140,67 @@ class UserSettings extends Component {
             <label htmlFor="spaceOff" aria-hidden="true">Off</label>
           </div>
 
+          <div className="radio-button-group clearfix">
+            <legend className="mb1">Sort lesson by</legend>
+
+            <input
+              className="radio-button"
+              type="radio"
+              name="sortOrder"
+              id="sortOff"
+              value="sortOff"
+              disabled={this.props.disableUserSettings}
+              checked={this.props.userSettings.sortOrder==="sortOff"}
+              onChange={this.props.changeSortOrderUserSetting}
+              />
+            <label htmlFor="sortOff" aria-hidden="true" title="Normal lesson order">Off</label>
+            <label htmlFor="sortOff" className="visually-hidden" aria-label="Normal lesson order"></label>
+
+            <input
+              className="radio-button"
+              type="radio"
+              name="sortOrder"
+              id="sortRandom"
+              value="sortRandom"
+              disabled={this.props.disableUserSettings}
+              checked={this.props.userSettings.sortOrder==="sortRandom"}
+              onChange={this.props.changeSortOrderUserSetting}
+              />
+            <label htmlFor="sortRandom" aria-hidden="true" title="Mixed, random order">Mix</label>
+            <label htmlFor="sortRandom" className="visually-hidden" aria-label="Mixed, random order"></label>
+
+            <input
+              className="radio-button"
+              type="radio"
+              name="sortOrder"
+              id="sortNew"
+              value="sortNew"
+              disabled={this.props.disableUserSettings}
+              checked={this.props.userSettings.sortOrder==="sortNew"}
+              onChange={this.props.changeSortOrderUserSetting}
+              />
+            <label htmlFor="sortNew" aria-hidden="true" title="New words first">New</label>
+            <label htmlFor="sortNew" className="visually-hidden" aria-label="New words first"></label>
+
+            <label htmlFor="sortOld" className="visually-hidden" aria-label="Oldest words first"></label>
+            {/*
+              This label is in a different location to other hidden screen reader labels so that
+              input+label works for styled buttons and :first-of-type/:last-of-type work for rounded
+              button group corners.
+              */}
+            <input
+              className="radio-button"
+              type="radio"
+              name="sortOrder"
+              id="sortOld"
+              value="sortOld"
+              disabled={this.props.disableUserSettings}
+              checked={this.props.userSettings.sortOrder==="spaceOld"}
+              onChange={this.props.changeSortOrderUserSetting}
+              />
+            <label htmlFor="sortOld" aria-hidden="true" title="Oldest words first">Old</label>
+          </div>
+
           <label htmlFor="limitNumberOfWords">Limit word count</label>
           <NumericInput
             autoCapitalize="off"

@@ -35,6 +35,7 @@ class App extends Component {
         repetitions: 1,
         showStrokes: false,
         spacePlacement: 'spaceBeforeOutput',
+        sortOrder: 'off',
         unfamiliarWords: true
       },
       lesson: {
@@ -67,6 +68,7 @@ class App extends Component {
         repetitions: 1,
         showStrokes: false,
         spacePlacement: 'spaceBeforeOutput',
+        sortOrder: 'sortOff',
         unfamiliarWords: true
       };
       if (window.localStorage.getItem('metWords')) {
@@ -215,6 +217,23 @@ class App extends Component {
     return value;
   }
 
+  changeSortOrderUserSetting(event) {
+    let currentState = this.state.userSettings;
+    let newState = Object.assign({}, currentState);
+
+    const name = 'sortOrder'
+    const value = event.target.value;
+
+    newState[name] = value;
+
+    this.setState({userSettings: newState}, () => {
+      if (!(name === 'caseInsensitive')) {
+        this.setupLesson();
+      }
+    });
+    return value;
+  }
+
   changeSpacePlacementUserSetting(event) {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
@@ -249,7 +268,7 @@ class App extends Component {
       totalNumberOfFamiliarWords: 0
     });
 
-    if (this.state.userSettings.randomise) {
+    if (this.state.userSettings.sortOrder === 'sortRandom') {
       newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
     }
 
@@ -421,6 +440,7 @@ class App extends Component {
           <div className="main">
             <Finished
               actualText={this.state.actualText}
+              changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
               changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
               changeUserSetting={this.changeUserSetting.bind(this)}
               disableUserSettings={this.state.disableUserSettings}
@@ -467,6 +487,7 @@ class App extends Component {
           <div>
             <Typing
               actualText={this.state.actualText}
+              changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
               changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
               changeUserSetting={this.changeUserSetting.bind(this)}
               currentPhrase={this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase}
