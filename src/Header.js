@@ -14,7 +14,7 @@ class Header extends Component {
             <div className="table search-container">
               <Autocomplete
                 getItemValue={(item) => item.title}
-                inputProps={{ id: 'lessons-autocomplete' }}
+                inputProps={{ id: 'lessons-autocomplete', spellCheck: 'false', autoCapitalize: "off", autoCorrect: "off" }}
                 items={this.props.items}
                 menuStyle={{ }}
                 onChange={this.props.onChange}
