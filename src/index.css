@@ -106,8 +106,25 @@ input, textarea {
 .mt1 {
   margin-top: 8px; }
 
+.py05 {
+  padding-top: 4px;
+  padding-bottom: 4px; }
+
+.px1 {
+  padding-left: 8px;
+  padding-right: 8px; }
+
 .text-center {
   text-align: center; }
+
+.text-uppercase {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #757575; }
+
+.text-small, small {
+  font-size: 12.8px;
+  line-height: 1.6; }
 
 .clearfix {
   display: flow-root; }

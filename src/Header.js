@@ -26,11 +26,10 @@ class Header extends Component {
                   <div
                     key={item.path}
                     style={{ backgroundColor: highlighted ? '#ffd073' : 'transparent'}}
+                    className="py05 px1 text-small"
                   >
-                    <h5>{item.title}</h5>
-                    <h6>{item.subtitle}</h6>
-                    {item.category} >&nbsp;
-                    {item.subcategory}
+                    <span className="text-uppercase text-small">{item.category} >&nbsp;{item.subcategory}</span><br />
+                    <span className="text-small">{item.title}</span> <span className="text-small">{item.subtitle}</span>
                   </div>
                 }
                 renderMenu={function(items, value, style) {
