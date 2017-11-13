@@ -10,24 +10,37 @@ class Scores extends Component {
       wordsPerMinute = 0;
     }
     let result = `
-      <dl class="inline-flex">
-      <dt><abbr title="words per minute">WPM</abbr>:</dt>
-      <dd>${wordsPerMinute}</dd>
+      <table>
+        <tr>
+          <th><abbr title="words per minute">WPM:</abbr></th>
+          <td>${wordsPerMinute}</td>
+        </tr>
+        <tr>
+          <th>Time:</th>
+          <td>${Math.round(timer/1000)}s</td>
+        </tr>
+        <tr>
+          <th>New words:</th>
+          <td>${this.props.totalNumberOfNewWordsMet}</td>
+        </tr>
+        <tr>
+          <th>Seen words:</th>
+          <td>${this.props.totalNumberOfLowExposures}</td>
+        </tr>
+        <tr>
+          <th>Memorised words:</th>
+          <td>${this.props.totalNumberOfFamiliarWords}</td>
+        </tr>
+        <tr>
+          <th>Misstrokes:</th>
+          <td>0</td>
+        </tr>
+        <tr>
+          <th class="hide">Word count:</th>
+          <td class="hide">~${Math.round(totalNumberOfMatchedWords)}</td>
+        </tr>
+      </table>
 
-      <dt>Time:</dt>
-      <dd>${Math.round(timer/1000)}s</dd>
-
-      <dt>New words:</dt>
-      <dd>${this.props.totalNumberOfNewWordsMet}</dd>
-
-      <dt>Seen words:</dt>
-      <dd>${this.props.totalNumberOfLowExposures}</dd>
-
-      <dt>Memorised words:</dt>
-      <dd>${this.props.totalNumberOfFamiliarWords}</dd>
-
-      <dt class="hide">Word count:</dt>
-      <dd class="hide">~${Math.round(totalNumberOfMatchedWords)}</dd>
       </dl>
     `
     return {__html: result};
@@ -45,25 +58,36 @@ class Scores extends Component {
       return (
         <div>
           <h6 className="mb1">Scores</h6>
-          <dl className="timer inline-flex">
-            <dt><abbr title="words per minute">WPM</abbr>:</dt>
-            <dd>0</dd>
-
-            <dt>Time:</dt>
-            <dd>0</dd>
-
-            <dt>New words:</dt>
-            <dd>0</dd>
-
-            <dt>Seen words:</dt>
-            <dd>0</dd>
-
-            <dt>Memorised words:</dt>
-            <dd>0</dd>
-
-            <dt className="hide">Word count:</dt>
-            <dd className="hide">&nbsp;</dd>
-          </dl>
+          <table>
+            <tr>
+              <th><abbr title="words per minute">WPM:</abbr></th>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th>Time:</th>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th>New words:</th>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th>Seen words:</th>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th>Memorised words:</th>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th>Misstrokes:</th>
+              <td>0</td>
+            </tr>
+            <tr>
+              <th class="hide">Word count:</th>
+              <td class="hide">0</td>
+            </tr>
+          </table>
         </div>
       );
     }

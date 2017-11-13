@@ -3,7 +3,6 @@
 // @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
 
 // variables
-
 $type: 400 16px/1.6 "Overpass Mono", "Montserrat", "Open Sans", Helvetica, sans-serif;
 
 // Element styles
@@ -66,6 +65,9 @@ abbr[title] {
   border-radius: 1px;
   cursor: help;
   text-decoration: none;
+}
+th {
+  text-align: left;
 }
 dl.inline-flex {
   display: flex;

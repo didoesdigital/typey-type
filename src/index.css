@@ -58,6 +58,9 @@ abbr[title] {
   cursor: help;
   text-decoration: none; }
 
+th {
+  text-align: left; }
+
 dl.inline-flex {
   display: flex;
   flex-flow: row;
