@@ -462,3 +462,6 @@ label {
 
 .timer-table {
   width: 148px; }
+
+.link-missing-full-stop:after {
+  content: "."; }
