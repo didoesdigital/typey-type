@@ -29,7 +29,7 @@ class Scores extends Component {
             <td>${this.props.totalNumberOfLowExposures}</td>
           </tr>
           <tr>
-            <th>Memorised words:</th>
+            <th>Retained words:</th>
             <td>${this.props.totalNumberOfFamiliarWords}</td>
           </tr>
           <tr>
@@ -77,7 +77,7 @@ class Scores extends Component {
                 <td>0</td>
               </tr>
               <tr>
-                <th>Memorised words:</th>
+                <th>Retained words:</th>
                 <td>0</td>
               </tr>
               <tr>

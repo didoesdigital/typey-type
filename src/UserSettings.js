@@ -75,7 +75,7 @@ class UserSettings extends Component {
                   checked={this.props.userSettings.familiarWords}
                   onChange={this.props.changeUserSetting}
                   />
-                Memorised words
+                Retained words
               </label>
             </div>
 
