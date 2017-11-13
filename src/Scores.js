@@ -32,8 +32,8 @@ class Scores extends Component {
           <td>${this.props.totalNumberOfFamiliarWords}</td>
         </tr>
         <tr>
-          <th>Misstrokes:</th>
-          <td>0</td>
+          <th>Misstroked words:</th>
+          <td>${this.props.totalNumberOfMisstrokes}</td>
         </tr>
         <tr>
           <th class="hide">Word count:</th>
@@ -80,7 +80,7 @@ class Scores extends Component {
               <td>0</td>
             </tr>
             <tr>
-              <th>Misstrokes:</th>
+              <th>Misstroked words:</th>
               <td>0</td>
             </tr>
             <tr>

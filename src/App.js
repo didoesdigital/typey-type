@@ -24,6 +24,7 @@ class App extends Component {
       totalNumberOfNewWordsMet: 0,
       totalNumberOfLowExposures: 0,
       totalNumberOfFamiliarWords: 0,
+      totalNumberOfMisstrokes: 0,
       disableUserSettings: false,
       metWords: {'the': 1},
       userSettings: {
@@ -263,7 +264,8 @@ class App extends Component {
       totalNumberOfMatchedWords: 0,
       totalNumberOfNewWordsMet: 0,
       totalNumberOfLowExposures: 0,
-      totalNumberOfFamiliarWords: 0
+      totalNumberOfFamiliarWords: 0,
+      totalNumberOfMisstrokes: 0
     });
 
     if (this.state.userSettings.sortOrder === 'sortRandom') {
@@ -393,6 +395,7 @@ class App extends Component {
       totalNumberOfNewWordsMet: this.state.totalNumberOfNewWordsMet,
       totalNumberOfLowExposures: this.state.totalNumberOfLowExposures,
       totalNumberOfFamiliarWords: this.state.totalNumberOfFamiliarWords,
+      totalNumberOfMisstrokes: this.state.totalNumberOfMisstrokes,
       actualText: actualText,
       metWords: this.state.metWords
     };
@@ -415,6 +418,9 @@ class App extends Component {
       } else {
         newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess;
         newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + this.state.currentPhraseMeetingSuccess;
+      }
+      if (this.state.currentPhraseMeetingSuccess === 0) {
+        newState.totalNumberOfMisstrokes = this.state.totalNumberOfMisstrokes + 1;
       }
       if (!this.state.userSettings.showStrokes) {
         newState.currentPhraseMeetingSuccess = 1;
@@ -470,6 +476,7 @@ class App extends Component {
               totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
               totalNumberOfLowExposures={this.state.totalNumberOfLowExposures}
               totalNumberOfFamiliarWords={this.state.totalNumberOfFamiliarWords}
+              totalNumberOfMisstrokes={this.state.totalNumberOfMisstrokes}
               totalWordCount={this.state.lesson.presentedMaterial.length}
               userSettings={this.state.userSettings}
               />
@@ -519,6 +526,7 @@ class App extends Component {
               totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
               totalNumberOfLowExposures={this.state.totalNumberOfLowExposures}
               totalNumberOfFamiliarWords={this.state.totalNumberOfFamiliarWords}
+              totalNumberOfMisstrokes={this.state.totalNumberOfMisstrokes}
               totalWordCount={this.state.lesson.presentedMaterial.length}
               updateMarkup={this.updateMarkup.bind(this)}
               userSettings={this.state.userSettings}
