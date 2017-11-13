@@ -2,6 +2,7 @@
   "name": "typey-type",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://didoesdigital.com/typey-type",
   "dependencies": {
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.1",
