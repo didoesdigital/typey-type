@@ -7,229 +7,231 @@ class UserSettings extends Component {
       <div className="user-settings">
         <form>
           <legend className="mb1">Settings</legend>
-          <div className="checkbox-group">
-            <label className="checkbox-label">
+          <div className="text-small">
+            <div className="checkbox-group">
+              <label className="checkbox-label">
+                <input
+                  className="checkbox-input"
+                  type="checkbox"
+                  name="showStrokes"
+                  id="showStrokes"
+                  disabled={this.props.disableUserSettings}
+                  checked={this.props.userSettings.showStrokes}
+                  onChange={this.props.changeUserSetting}
+                  />
+                Show strokes
+              </label>
+            </div>
+            <div className="checkbox-group">
+              <label className="checkbox-label">
+                <input
+                  className="checkbox-input"
+                  type="checkbox"
+                  name="caseInsensitive"
+                  id="caseInsensitive"
+                  disabled={this.props.disableUserSettings}
+                  checked={this.props.userSettings.caseInsensitive}
+                  onChange={this.props.changeUserSetting}
+                  />
+                Case insensitive
+              </label>
+            </div>
+            <div className="checkbox-group">
+              <label className="checkbox-label">
+                <input
+                  className="checkbox-input"
+                  type="checkbox"
+                  name="newWords"
+                  id="newWords"
+                  disabled={this.props.disableUserSettings}
+                  checked={this.props.userSettings.newWords}
+                  onChange={this.props.changeUserSetting}
+                  />
+                New words
+              </label>
+            </div>
+            <div className="checkbox-group">
+              <label className="checkbox-label">
+                <input
+                  className="checkbox-input"
+                  type="checkbox"
+                  name="unfamiliarWords"
+                  id="unfamiliarWords"
+                  disabled={this.props.disableUserSettings}
+                  checked={this.props.userSettings.unfamiliarWords}
+                  onChange={this.props.changeUserSetting}
+                  />
+                &lt;30 exposures
+              </label>
+            </div>
+            <div className="checkbox-group">
+              <label className="checkbox-label">
+                <input
+                  className="checkbox-input"
+                  type="checkbox"
+                  name="familiarWords"
+                  id="familiarWords"
+                  disabled={this.props.disableUserSettings}
+                  checked={this.props.userSettings.familiarWords}
+                  onChange={this.props.changeUserSetting}
+                  />
+                Memorised words
+              </label>
+            </div>
+
+            <div className="radio-button-group clearfix">
+              <legend className="mb1">Match spaces</legend>
+
               <input
-                className="checkbox-input"
-                type="checkbox"
-                name="showStrokes"
-                id="showStrokes"
+                className="radio-button"
+                type="radio"
+                name="spacePlacement"
+                id="spaceBeforeOutput"
+                value="spaceBeforeOutput"
                 disabled={this.props.disableUserSettings}
-                checked={this.props.userSettings.showStrokes}
-                onChange={this.props.changeUserSetting}
+                checked={this.props.userSettings.spacePlacement==="spaceBeforeOutput"}
+                onChange={this.props.changeSpacePlacementUserSetting}
                 />
-              Show strokes
-            </label>
-          </div>
-          <div className="checkbox-group">
-            <label className="checkbox-label">
+              <label htmlFor="spaceBeforeOutput" aria-hidden="true">" x"</label>
+              <label htmlFor="spaceBeforeOutput" className="visually-hidden" aria-label="Space Before Output"></label>
+
               <input
-                className="checkbox-input"
-                type="checkbox"
-                name="caseInsensitive"
-                id="caseInsensitive"
+                className="radio-button"
+                type="radio"
+                name="spacePlacement"
+                id="spaceAfterOutput"
+                value="spaceAfterOutput"
                 disabled={this.props.disableUserSettings}
-                checked={this.props.userSettings.caseInsensitive}
-                onChange={this.props.changeUserSetting}
+                checked={this.props.userSettings.spacePlacement==="spaceAfterOutput"}
+                onChange={this.props.changeSpacePlacementUserSetting}
                 />
-              Case insensitive
-            </label>
-          </div>
-          <div className="checkbox-group">
-            <label className="checkbox-label">
+              <label htmlFor="spaceAfterOutput" aria-hidden="true">"x "</label>
+              <label htmlFor="spaceAfterOutput" className="visually-hidden" aria-label="Space After Output"></label>
+
+              <label htmlFor="spaceOff" className="visually-hidden" aria-label="Ignore spaces"></label>
+              {/*
+                This label is in a different location to other hidden screen reader labels so that
+                input+label works for styled buttons and :first-of-type/:last-of-type work for rounded
+                button group corners.
+                */}
               <input
-                className="checkbox-input"
-                type="checkbox"
-                name="newWords"
-                id="newWords"
+                className="radio-button"
+                type="radio"
+                name="spacePlacement"
+                id="spaceOff"
+                value="spaceOff"
                 disabled={this.props.disableUserSettings}
-                checked={this.props.userSettings.newWords}
-                onChange={this.props.changeUserSetting}
+                checked={this.props.userSettings.spacePlacement==="spaceOff"}
+                onChange={this.props.changeSpacePlacementUserSetting}
                 />
-              New words
-            </label>
-          </div>
-          <div className="checkbox-group">
-            <label className="checkbox-label">
+              <label htmlFor="spaceOff" aria-hidden="true">Off</label>
+            </div>
+
+            <div className="radio-button-group clearfix">
+              <legend className="mb1">Sort</legend>
+
               <input
-                className="checkbox-input"
-                type="checkbox"
-                name="unfamiliarWords"
-                id="unfamiliarWords"
+                className="radio-button"
+                type="radio"
+                name="sortOrder"
+                id="sortOff"
+                value="sortOff"
                 disabled={this.props.disableUserSettings}
-                checked={this.props.userSettings.unfamiliarWords}
-                onChange={this.props.changeUserSetting}
+                checked={this.props.userSettings.sortOrder==="sortOff"}
+                onChange={this.props.changeSortOrderUserSetting}
                 />
-              &lt;30 exposures
-            </label>
-          </div>
-          <div className="checkbox-group">
-            <label className="checkbox-label">
+              <label htmlFor="sortOff" aria-hidden="true" title="Normal lesson order">Off</label>
+              <label htmlFor="sortOff" className="visually-hidden" aria-label="Normal lesson order"></label>
+
               <input
-                className="checkbox-input"
-                type="checkbox"
-                name="familiarWords"
-                id="familiarWords"
+                className="radio-button"
+                type="radio"
+                name="sortOrder"
+                id="sortRandom"
+                value="sortRandom"
                 disabled={this.props.disableUserSettings}
-                checked={this.props.userSettings.familiarWords}
-                onChange={this.props.changeUserSetting}
+                checked={this.props.userSettings.sortOrder==="sortRandom"}
+                onChange={this.props.changeSortOrderUserSetting}
                 />
-              Memorised words
-            </label>
+              <label htmlFor="sortRandom" aria-hidden="true" title="Mixed, random order">Mix</label>
+              <label htmlFor="sortRandom" className="visually-hidden" aria-label="Mixed, random order"></label>
+
+              <input
+                className="radio-button"
+                type="radio"
+                name="sortOrder"
+                id="sortNew"
+                value="sortNew"
+                disabled={this.props.disableUserSettings}
+                checked={this.props.userSettings.sortOrder==="sortNew"}
+                onChange={this.props.changeSortOrderUserSetting}
+                />
+              <label htmlFor="sortNew" aria-hidden="true" title="Newest words first">New</label>
+              <label htmlFor="sortNew" className="visually-hidden" aria-label="Newest words first"></label>
+
+              <label htmlFor="sortOld" className="visually-hidden" aria-label="Oldest words first"></label>
+              {/*
+                This label is in a different location to other hidden screen reader labels so that
+                input+label works for styled buttons and :first-of-type/:last-of-type work for rounded
+                button group corners.
+                */}
+              <input
+                className="radio-button"
+                type="radio"
+                name="sortOrder"
+                id="sortOld"
+                value="sortOld"
+                disabled={this.props.disableUserSettings}
+                checked={this.props.userSettings.sortOrder==="sortOld"}
+                onChange={this.props.changeSortOrderUserSetting}
+                />
+              <label htmlFor="sortOld" aria-hidden="true" title="Oldest words first">Old</label>
+            </div>
+
+            <label htmlFor="limitNumberOfWords">Limit word count</label>
+            <NumericInput
+              autoCapitalize="off"
+              autoComplete="on"
+              autoCorrect="on"
+              autoFocus={false}
+              className="form-control"
+              disabled={this.props.disableUserSettings}
+              id="limitNumberOfWords"
+              min={0}
+              name="limitNumberOfWords"
+              onChange={this.props.handleLimitWordsChange}
+              precision={0}
+              spellCheck="false"
+              step={1}
+              style={false}
+              type="number"
+              value={this.props.userSettings.limitNumberOfWords}
+              snap
+            />
+            <label htmlFor="repetitions">Repetitions</label>
+            <NumericInput
+              autoCapitalize="off"
+              autoComplete="on"
+              autoCorrect="on"
+              autoFocus={false}
+              className="form-control"
+              disabled={this.props.disableUserSettings}
+              id="repetitions"
+              max={30}
+              min={1}
+              name="repetitions"
+              onChange={this.props.handleRepetitionsChange}
+              precision={0}
+              spellCheck="false"
+              step={1}
+              style={false}
+              type="number"
+              value={this.props.userSettings.repetitions}
+              snap
+            />
           </div>
-
-          <div className="radio-button-group clearfix">
-            <legend className="mb1">Match spaces</legend>
-
-            <input
-              className="radio-button"
-              type="radio"
-              name="spacePlacement"
-              id="spaceBeforeOutput"
-              value="spaceBeforeOutput"
-              disabled={this.props.disableUserSettings}
-              checked={this.props.userSettings.spacePlacement==="spaceBeforeOutput"}
-              onChange={this.props.changeSpacePlacementUserSetting}
-              />
-            <label htmlFor="spaceBeforeOutput" aria-hidden="true">" x"</label>
-            <label htmlFor="spaceBeforeOutput" className="visually-hidden" aria-label="Space Before Output"></label>
-
-            <input
-              className="radio-button"
-              type="radio"
-              name="spacePlacement"
-              id="spaceAfterOutput"
-              value="spaceAfterOutput"
-              disabled={this.props.disableUserSettings}
-              checked={this.props.userSettings.spacePlacement==="spaceAfterOutput"}
-              onChange={this.props.changeSpacePlacementUserSetting}
-              />
-            <label htmlFor="spaceAfterOutput" aria-hidden="true">"x "</label>
-            <label htmlFor="spaceAfterOutput" className="visually-hidden" aria-label="Space After Output"></label>
-
-            <label htmlFor="spaceOff" className="visually-hidden" aria-label="Ignore spaces"></label>
-            {/*
-              This label is in a different location to other hidden screen reader labels so that
-              input+label works for styled buttons and :first-of-type/:last-of-type work for rounded
-              button group corners.
-              */}
-            <input
-              className="radio-button"
-              type="radio"
-              name="spacePlacement"
-              id="spaceOff"
-              value="spaceOff"
-              disabled={this.props.disableUserSettings}
-              checked={this.props.userSettings.spacePlacement==="spaceOff"}
-              onChange={this.props.changeSpacePlacementUserSetting}
-              />
-            <label htmlFor="spaceOff" aria-hidden="true">Off</label>
-          </div>
-
-          <div className="radio-button-group clearfix">
-            <legend className="mb1">Sort</legend>
-
-            <input
-              className="radio-button"
-              type="radio"
-              name="sortOrder"
-              id="sortOff"
-              value="sortOff"
-              disabled={this.props.disableUserSettings}
-              checked={this.props.userSettings.sortOrder==="sortOff"}
-              onChange={this.props.changeSortOrderUserSetting}
-              />
-            <label htmlFor="sortOff" aria-hidden="true" title="Normal lesson order">Off</label>
-            <label htmlFor="sortOff" className="visually-hidden" aria-label="Normal lesson order"></label>
-
-            <input
-              className="radio-button"
-              type="radio"
-              name="sortOrder"
-              id="sortRandom"
-              value="sortRandom"
-              disabled={this.props.disableUserSettings}
-              checked={this.props.userSettings.sortOrder==="sortRandom"}
-              onChange={this.props.changeSortOrderUserSetting}
-              />
-            <label htmlFor="sortRandom" aria-hidden="true" title="Mixed, random order">Mix</label>
-            <label htmlFor="sortRandom" className="visually-hidden" aria-label="Mixed, random order"></label>
-
-            <input
-              className="radio-button"
-              type="radio"
-              name="sortOrder"
-              id="sortNew"
-              value="sortNew"
-              disabled={this.props.disableUserSettings}
-              checked={this.props.userSettings.sortOrder==="sortNew"}
-              onChange={this.props.changeSortOrderUserSetting}
-              />
-            <label htmlFor="sortNew" aria-hidden="true" title="Newest words first">New</label>
-            <label htmlFor="sortNew" className="visually-hidden" aria-label="Newest words first"></label>
-
-            <label htmlFor="sortOld" className="visually-hidden" aria-label="Oldest words first"></label>
-            {/*
-              This label is in a different location to other hidden screen reader labels so that
-              input+label works for styled buttons and :first-of-type/:last-of-type work for rounded
-              button group corners.
-              */}
-            <input
-              className="radio-button"
-              type="radio"
-              name="sortOrder"
-              id="sortOld"
-              value="sortOld"
-              disabled={this.props.disableUserSettings}
-              checked={this.props.userSettings.sortOrder==="sortOld"}
-              onChange={this.props.changeSortOrderUserSetting}
-              />
-            <label htmlFor="sortOld" aria-hidden="true" title="Oldest words first">Old</label>
-          </div>
-
-          <label htmlFor="limitNumberOfWords">Limit word count</label>
-          <NumericInput
-            autoCapitalize="off"
-            autoComplete="on"
-            autoCorrect="on"
-            autoFocus={false}
-            className="form-control"
-            disabled={this.props.disableUserSettings}
-            id="limitNumberOfWords"
-            min={0}
-            name="limitNumberOfWords"
-            onChange={this.props.handleLimitWordsChange}
-            precision={0}
-            spellCheck="false"
-            step={1}
-            style={false}
-            type="number"
-            value={this.props.userSettings.limitNumberOfWords}
-            snap
-          />
-          <label htmlFor="repetitions">Repetitions</label>
-          <NumericInput
-            autoCapitalize="off"
-            autoComplete="on"
-            autoCorrect="on"
-            autoFocus={false}
-            className="form-control"
-            disabled={this.props.disableUserSettings}
-            id="repetitions"
-            max={30}
-            min={1}
-            name="repetitions"
-            onChange={this.props.handleRepetitionsChange}
-            precision={0}
-            spellCheck="false"
-            step={1}
-            style={false}
-            type="number"
-            value={this.props.userSettings.repetitions}
-            snap
-          />
         </form>
-        <p className="mt1"><strong>Total word count:</strong> {this.props.totalWordCount}</p>
+        <p className="mt2"><small>Total word count: {this.props.totalWordCount}</small></p>
       </div>
     )
   }
