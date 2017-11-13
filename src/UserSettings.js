@@ -46,7 +46,7 @@ class UserSettings extends Component {
                 checked={this.props.userSettings.newWords}
                 onChange={this.props.changeUserSetting}
                 />
-              New Words
+              New words
             </label>
           </div>
           <div className="checkbox-group">
@@ -60,7 +60,7 @@ class UserSettings extends Component {
                 checked={this.props.userSettings.unfamiliarWords}
                 onChange={this.props.changeUserSetting}
                 />
-              &lt; 30 exposures
+              &lt;30 exposures
             </label>
           </div>
           <div className="checkbox-group">
@@ -74,7 +74,7 @@ class UserSettings extends Component {
                 checked={this.props.userSettings.familiarWords}
                 onChange={this.props.changeUserSetting}
                 />
-              Familiar words
+              Memorised words
             </label>
           </div>
 

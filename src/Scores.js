@@ -20,10 +20,10 @@ class Scores extends Component {
       <dt>New words:</dt>
       <dd>${this.props.totalNumberOfNewWordsMet}</dd>
 
-      <dt>Exposures:</dt>
+      <dt>Seen words:</dt>
       <dd>${this.props.totalNumberOfLowExposures}</dd>
 
-      <dt>Familiar:</dt>
+      <dt>Memorised words:</dt>
       <dd>${this.props.totalNumberOfFamiliarWords}</dd>
 
       <dt class="hide">Word count:</dt>
@@ -47,19 +47,19 @@ class Scores extends Component {
           <h6 className="mb1">Scores</h6>
           <dl className="timer inline-flex">
             <dt><abbr title="words per minute">WPM</abbr>:</dt>
-            <dd>&nbsp;</dd>
+            <dd>0</dd>
 
             <dt>Time:</dt>
-            <dd>&nbsp;</dd>
+            <dd>0</dd>
 
             <dt>New words:</dt>
-            <dd>&nbsp;</dd>
+            <dd>0</dd>
 
-            <dt>Exposures:</dt>
-            <dd>&nbsp;</dd>
+            <dt>Seen words:</dt>
+            <dd>0</dd>
 
-            <dt>Familiar:</dt>
-            <dd>&nbsp;</dd>
+            <dt>Memorised words:</dt>
+            <dd>0</dd>
 
             <dt className="hide">Word count:</dt>
             <dd className="hide">&nbsp;</dd>
