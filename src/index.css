@@ -59,7 +59,8 @@ abbr[title] {
   text-decoration: none; }
 
 th {
-  text-align: left; }
+  text-align: left;
+  font-weight: normal; }
 
 dl.inline-flex {
   display: flex;
@@ -108,6 +109,9 @@ input, textarea {
 
 .mt1 {
   margin-top: 8px; }
+
+.mt2 {
+  margin-top: 16px; }
 
 .py05 {
   padding-top: 4px;
@@ -173,6 +177,7 @@ input, textarea {
   display: grid;
   padding: 0 24px;
   grid-gap: 24px;
+  justify-content: space-between;
   margin: 0 auto; }
   @media (min-width: 960px) {
     .content .user-settings {
@@ -190,8 +195,13 @@ input, textarea {
     padding: 16px; }
 
 .lesson-canvas {
+  align-items: center;
   display: flex;
-  align-items: center; }
+  min-width: 544px; }
+
+.user-settings,
+.scores {
+  max-width: 200px; }
 
 .material p {
   padding: 0.25em; }
@@ -203,7 +213,10 @@ input, textarea {
   font-size: 1rem;
   line-height: 1.5;
   padding: 4px 8px;
-  width: 100%; }
+  text-align: center;
+  text-decoration: underline;
+  text-underline-position: under;
+  width: 480px; }
 
 .matched {
   background-color: #cbabdd; }
@@ -294,7 +307,7 @@ label {
 
 .checkbox-input {
   position: absolute;
-  margin-top: 6px;
+  margin-top: 2px;
   margin-left: -24px;
   touch-action: manipulation; }
 
@@ -415,7 +428,7 @@ label {
 .material {
   margin-left: auto;
   margin-right: auto;
-  width: 8em; }
+  min-width: 480px; }
 
 .typed-text-container {
   position: relative; }
@@ -424,13 +437,13 @@ label {
   display: none;
   margin-left: auto;
   margin-right: auto;
-  width: 8em;
+  min-width: 480px;
   border: 1px solid #402351; }
 
 .input-text {
   margin-left: auto;
   margin-right: auto;
-  width: 8em;
+  min-width: 480px;
   top: 0;
   left: 0;
   right: 0;
@@ -439,10 +452,13 @@ label {
 .stroke-tip {
   margin-left: auto;
   margin-right: auto;
-  width: 8em; }
+  min-width: 480px; }
 
 .steno-material {
   border-bottom: 2px solid #FFD073; }
 
 .matched.steno-material {
   border-bottom: 2px solid #91a896; }
+
+.timer-table {
+  width: 148px; }
