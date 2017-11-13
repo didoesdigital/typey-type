@@ -12,7 +12,7 @@ class App extends Component {
     this.charsPerWord = 5;
     this.state = {
       value: '',
-      path: 'lessons/test-lesson.txt',
+      path: './lessons/drills/google-1000-english/lesson.txt',
       currentPhraseID: 0,
       currentPhraseMeetingSuccess: 1,
       actualText: ``,
@@ -51,7 +51,7 @@ class App extends Component {
         "subtitle": "",
         "category": "Collections",
         "subcategory": "",
-        "path": "/lessons/drills/google-1000-english/lesson.txt"
+        "path": "./lessons/drills/google-1000-english/lesson.txt"
       }]
     };
   }
@@ -98,7 +98,7 @@ class App extends Component {
       userSettings: userSettings
     });
 
-    fetch('/lessons/lessonIndex.json', {
+    fetch('./lessons/lessonIndex.json', {
       method: "GET",
       credentials: "same-origin"
     }).then((response) => {
