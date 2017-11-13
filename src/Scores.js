@@ -10,38 +10,38 @@ class Scores extends Component {
       wordsPerMinute = 0;
     }
     let result = `
-      <table>
-        <tr>
-          <th><abbr title="words per minute">WPM:</abbr></th>
-          <td>${wordsPerMinute}</td>
-        </tr>
-        <tr>
-          <th>Time:</th>
-          <td>${Math.round(timer/1000)}s</td>
-        </tr>
-        <tr>
-          <th>New words:</th>
-          <td>${this.props.totalNumberOfNewWordsMet}</td>
-        </tr>
-        <tr>
-          <th>Seen words:</th>
-          <td>${this.props.totalNumberOfLowExposures}</td>
-        </tr>
-        <tr>
-          <th>Memorised words:</th>
-          <td>${this.props.totalNumberOfFamiliarWords}</td>
-        </tr>
-        <tr>
-          <th>Misstroked words:</th>
-          <td>${this.props.totalNumberOfMisstrokes}</td>
-        </tr>
-        <tr>
-          <th class="hide">Word count:</th>
-          <td class="hide">~${Math.round(totalNumberOfMatchedWords)}</td>
-        </tr>
+      <table class="timer-table text-small">
+        <tbody>
+          <tr>
+            <th><abbr title="words per minute">WPM:</abbr></th>
+            <td>${wordsPerMinute}</td>
+          </tr>
+          <tr>
+            <th>Time (seconds):</th>
+            <td>${Math.round(timer/1000)}</td>
+          </tr>
+          <tr>
+            <th>New words:</th>
+            <td>${this.props.totalNumberOfNewWordsMet}</td>
+          </tr>
+          <tr>
+            <th>Seen words:</th>
+            <td>${this.props.totalNumberOfLowExposures}</td>
+          </tr>
+          <tr>
+            <th>Memorised words:</th>
+            <td>${this.props.totalNumberOfFamiliarWords}</td>
+          </tr>
+          <tr>
+            <th>Mistyped words:</th>
+            <td>${this.props.totalNumberOfMisstrokes}</td>
+          </tr>
+          <tr>
+            <th class="hide">Word count:</th>
+            <td class="hide">~${Math.round(totalNumberOfMatchedWords)}</td>
+          </tr>
+        </tbody>
       </table>
-
-      </dl>
     `
     return {__html: result};
   }
@@ -58,35 +58,37 @@ class Scores extends Component {
       return (
         <div>
           <h6 className="mb1">Scores</h6>
-          <table>
-            <tr>
-              <th><abbr title="words per minute">WPM:</abbr></th>
-              <td>0</td>
-            </tr>
-            <tr>
-              <th>Time:</th>
-              <td>0</td>
-            </tr>
-            <tr>
-              <th>New words:</th>
-              <td>0</td>
-            </tr>
-            <tr>
-              <th>Seen words:</th>
-              <td>0</td>
-            </tr>
-            <tr>
-              <th>Memorised words:</th>
-              <td>0</td>
-            </tr>
-            <tr>
-              <th>Misstroked words:</th>
-              <td>0</td>
-            </tr>
-            <tr>
-              <th class="hide">Word count:</th>
-              <td class="hide">0</td>
-            </tr>
+          <table className="timer-table text-small">
+            <tbody>
+              <tr>
+                <th><abbr title="words per minute">WPM:</abbr></th>
+                <td>0</td>
+              </tr>
+              <tr>
+                <th>Time (seconds):</th>
+                <td>0</td>
+              </tr>
+              <tr>
+                <th>New words:</th>
+                <td>0</td>
+              </tr>
+              <tr>
+                <th>Seen words:</th>
+                <td>0</td>
+              </tr>
+              <tr>
+                <th>Memorised words:</th>
+                <td>0</td>
+              </tr>
+              <tr>
+                <th>Mistyped words:</th>
+                <td>0</td>
+              </tr>
+              <tr>
+                <th className="hide">Word count:</th>
+                <td className="hide">0</td>
+              </tr>
+            </tbody>
           </table>
         </div>
       );
