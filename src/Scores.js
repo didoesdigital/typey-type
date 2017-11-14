@@ -14,31 +14,31 @@ class Scores extends Component {
         <tbody>
           <tr>
             <th><abbr title="words per minute">WPM:</abbr></th>
-            <td>${wordsPerMinute}</td>
+            <td class="text-right">${wordsPerMinute}</td>
           </tr>
           <tr>
             <th>Time (seconds):</th>
-            <td>${Math.round(timer/1000)}</td>
+            <td class="text-right">${Math.round(timer/1000)}</td>
           </tr>
           <tr>
             <th>New words:</th>
-            <td>${this.props.totalNumberOfNewWordsMet}</td>
+            <td class="text-right">${this.props.totalNumberOfNewWordsMet}</td>
           </tr>
           <tr>
             <th>Seen words:</th>
-            <td>${this.props.totalNumberOfLowExposures}</td>
+            <td class="text-right">${this.props.totalNumberOfLowExposures}</td>
           </tr>
           <tr>
             <th>Retained words:</th>
-            <td>${this.props.totalNumberOfFamiliarWords}</td>
+            <td class="text-right">${this.props.totalNumberOfFamiliarWords}</td>
           </tr>
           <tr>
             <th>Mistyped words:</th>
-            <td>${this.props.totalNumberOfMisstrokes}</td>
+            <td class="text-right">${this.props.totalNumberOfMisstrokes}</td>
           </tr>
           <tr>
             <th class="hide">Word count:</th>
-            <td class="hide">~${Math.round(totalNumberOfMatchedWords)}</td>
+            <td class="text-right hide">~${Math.round(totalNumberOfMatchedWords)}</td>
           </tr>
         </tbody>
       </table>
@@ -62,31 +62,31 @@ class Scores extends Component {
             <tbody>
               <tr>
                 <th><abbr title="words per minute">WPM:</abbr></th>
-                <td>0</td>
+                <td className="text-right">0</td>
               </tr>
               <tr>
                 <th>Time (seconds):</th>
-                <td>0</td>
+                <td className="text-right">0</td>
               </tr>
               <tr>
                 <th>New words:</th>
-                <td>0</td>
+                <td className="text-right">0</td>
               </tr>
               <tr>
                 <th>Seen words:</th>
-                <td>0</td>
+                <td className="text-right">0</td>
               </tr>
               <tr>
                 <th>Retained words:</th>
-                <td>0</td>
+                <td className="text-right">0</td>
               </tr>
               <tr>
                 <th>Mistyped words:</th>
-                <td>0</td>
+                <td className="text-right">0</td>
               </tr>
               <tr>
                 <th className="hide">Word count:</th>
-                <td className="hide">0</td>
+                <td className="right-right hide">0</td>
               </tr>
             </tbody>
           </table>
