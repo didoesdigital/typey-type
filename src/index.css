@@ -199,8 +199,10 @@ input, textarea {
 
 .lesson-canvas {
   align-items: center;
-  display: flex;
-  min-width: 544px; }
+  display: flex; }
+  @media (min-width: 960px) {
+    .lesson-canvas {
+      min-width: 544px; } }
 
 .user-settings,
 .scores {
@@ -218,8 +220,10 @@ input, textarea {
   padding: 4px 8px;
   text-align: center;
   text-decoration: underline;
-  text-underline-position: under;
-  width: 480px; }
+  text-underline-position: under; }
+  @media (min-width: 960px) {
+    .input-textarea {
+      width: 480px; } }
 
 .matched {
   background-color: #cbabdd; }
@@ -430,8 +434,10 @@ label {
 
 .material {
   margin-left: auto;
-  margin-right: auto;
-  min-width: 480px; }
+  margin-right: auto; }
+  @media (min-width: 960px) {
+    .material {
+      min-width: 480px; } }
 
 .typed-text-container {
   position: relative; }
@@ -440,22 +446,28 @@ label {
   display: none;
   margin-left: auto;
   margin-right: auto;
-  min-width: 480px;
   border: 1px solid #402351; }
+  @media (min-width: 960px) {
+    .typed-text {
+      min-width: 480px; } }
 
 .input-text {
   margin-left: auto;
   margin-right: auto;
-  min-width: 480px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0; }
+  @media (min-width: 960px) {
+    .input-text {
+      min-width: 480px; } }
 
 .stroke-tip {
   margin-left: auto;
-  margin-right: auto;
-  min-width: 480px; }
+  margin-right: auto; }
+  @media (min-width: 960px) {
+    .stroke-tip {
+      min-width: 480px; } }
 
 .steno-material {
   border-bottom: 2px solid #FFD073; }
@@ -464,7 +476,7 @@ label {
   border-bottom: 2px solid #91a896; }
 
 .timer-table {
-  width: 148px; }
+  width: 156px; }
 
 .link-missing-full-stop:after {
   content: "."; }

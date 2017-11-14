@@ -228,7 +228,9 @@ input, textarea {
 .lesson-canvas {
   align-items: center;
   display: flex;
-  min-width: 544px;
+  @media (min-width: 960px) {
+    min-width: 544px;
+  }
 }
 .user-settings,
 .scores {
@@ -249,7 +251,9 @@ input, textarea {
   text-align: center;
   text-decoration: underline;
   text-underline-position: under;
-  width: 480px;
+  @media (min-width: 960px) {
+    width: 480px;
+  }
 }
 
 .matched {
@@ -501,7 +505,9 @@ label {
 .material {
   margin-left: auto;
   margin-right: auto;
-  min-width: 480px;
+  @media (min-width: 960px) {
+    min-width: 480px;
+  }
 }
 .typed-text-container {
   position: relative;
@@ -511,7 +517,9 @@ label {
   display: none;
   margin-left: auto;
   margin-right: auto;
-  min-width: 480px;
+  @media (min-width: 960px) {
+    min-width: 480px;
+  }
   border: 1px solid $brand-primary;
 }
 .input-text {
@@ -519,7 +527,9 @@ label {
   margin-right: auto;
   // opacity: 0;
   // position: absolute;
-  min-width: 480px;
+  @media (min-width: 960px) {
+    min-width: 480px;
+  }
   top: 0;
   left: 0;
   right: 0;
@@ -528,7 +538,9 @@ label {
 .stroke-tip {
   margin-left: auto;
   margin-right: auto;
-  min-width: 480px;
+  @media (min-width: 960px) {
+    min-width: 480px;
+  }
 }
 .steno-material {
   border-bottom: 2px solid $brand-highlight;
@@ -537,7 +549,7 @@ label {
   border-bottom: 2px solid add-tint($brand-success, 50%);
 }
 .timer-table {
-  width: 148px;
+  width: 156px;
 }
 .link-missing-full-stop:after {
   content: ".";
