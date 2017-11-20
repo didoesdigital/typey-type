@@ -1,8 +1,8 @@
 function matchLessonToTerm(lesson, value) {
+  var text = [lesson.title, lesson.subtitle, lesson.category, lesson.subcategory].join(' ').toLowerCase();
   return (
-    lesson.title.toLowerCase().indexOf(value.toLowerCase()) !== -1 ||
-    lesson.subtitle.toLowerCase().indexOf(value.toLowerCase()) !== -1
-  )
+    text.indexOf(value.toLowerCase()) !== -1
+  );
 }
 
 function sortLessons(a, b, value) {
