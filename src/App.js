@@ -26,7 +26,10 @@ class App extends Component {
       totalNumberOfFamiliarWords: 0,
       totalNumberOfMisstrokes: 0,
       disableUserSettings: false,
-      metWords: {'the': 1},
+      metWords: {
+        'the': 0,
+        'and': 1
+      },
       userSettings: {
         caseInsensitive: true,
         familiarWords: false,
@@ -276,6 +279,7 @@ class App extends Component {
       newLesson.presentedMaterial = newLesson.presentedMaterial.sort(function(a, b) {
         return metWords[a.phrase] - metWords[b.phrase];
       });
+
       if (this.state.userSettings.sortOrder === 'sortOld') {
         newLesson.presentedMaterial.reverse();
       }
