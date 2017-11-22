@@ -376,7 +376,8 @@ class App extends Component {
     }
 
     // This informs word count, WPM, moving onto next phrase, ending lesson
-    let [matchedChars, unmatchedChars, matchedActual, unmatchedActual] =
+    // eslint-disable-next-line
+    let [matchedChars, unmatchedChars, _, unmatchedActual] =
       matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings, this.state.userSettings);
 
     matchedChars = matchedChars.replace(new RegExp(this.state.lesson.settings.ignoredChars,'g'), '');
