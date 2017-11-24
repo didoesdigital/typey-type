@@ -3,6 +3,7 @@ import NumericInput from 'react-numeric-input';
 
 class UserSettings extends Component {
   render() {
+    var grabStyle = function() {return false};
     return (
       <div className="user-settings">
         <form>
@@ -203,7 +204,7 @@ class UserSettings extends Component {
               precision={0}
               spellCheck="false"
               step={1}
-              style={false}
+              style={grabStyle()}
               type="number"
               value={this.props.userSettings.limitNumberOfWords}
               snap
@@ -224,7 +225,7 @@ class UserSettings extends Component {
               precision={0}
               spellCheck="false"
               step={1}
-              style={false}
+              style={grabStyle()}
               type="number"
               value={this.props.userSettings.repetitions}
               snap
