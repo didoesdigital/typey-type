@@ -141,6 +141,8 @@ input, textarea {
 .text-uppercase {
   text-transform: uppercase;
   letter-spacing: 0.1em;
+}
+.de-emphasized {
   color: desaturate(add-tint($brand-primary, 30%), 40%);
 }
 .text-small, small {
@@ -402,6 +404,9 @@ label {
   padding: 2px 0;
   position: fixed;
   z-index: 1;
+}
+.autocomplete-highlight {
+  background-color: $brand-highlight;
 }
 .link-button {
   background-color: $brand-primary;

@@ -25,10 +25,9 @@ class Header extends Component {
                 renderItem={(item, highlighted) =>
                   <div
                     key={item.path}
-                    style={{ backgroundColor: highlighted ? '#ffd073' : 'transparent'}}
-                    className="py05 px1 text-small"
+                    className={ highlighted ? "autocomplete-highlight py05 px1 text-small" : "py05 px1 text-small" }
                   >
-                    <span className="text-uppercase text-small">{item.category} >&nbsp;{item.subcategory}</span><br />
+                    <span className={ highlighted ? "text-uppercase text-small" : "text-uppercase text-small de-emphasized" }>{item.category} >&nbsp;{item.subcategory}</span><br />
                     <span className="text-small">{item.title}</span> <span className="text-small">{item.subtitle}</span>
                   </div>
                 }

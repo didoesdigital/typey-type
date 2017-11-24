@@ -129,7 +129,9 @@ input, textarea {
 
 .text-uppercase {
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.1em; }
+
+.de-emphasized {
   color: #757575; }
 
 .text-small, small {
@@ -351,6 +353,9 @@ label {
   padding: 2px 0;
   position: fixed;
   z-index: 1; }
+
+.autocomplete-highlight {
+  background-color: #FFD073; }
 
 .link-button {
   background-color: #402351;
