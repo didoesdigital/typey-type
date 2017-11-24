@@ -15,10 +15,10 @@ class TypedText extends Component {
   render() {
     return (
       <div className="typed-text-container">
-        <div className="visually-hidden">Your typed text:</div>
+        <label className="visually-hidden" htmlFor="your-typed-text">Your typed text:</label>
         <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
         <p className="input-text">
-          <textarea className="input-textarea" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" rows="1"
+          <textarea id="your-typed-text" className="input-textarea" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" rows="1"
             onChange={this.props.updateMarkup}
             value={this.props.actualText}
             >
