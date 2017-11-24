@@ -19,7 +19,7 @@ class Typing extends Component {
     if (this.props.userSettings.showStrokes) {
       strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre><span className="steno-stroke">{this.props.currentStroke}</span></pre></div>;
     } else {
-      strokeTip = <div className="stroke-tip"><span aria-hidden="true">&#8203;</span></div>;
+      strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre>?</pre></div>;
     }
 
     return (
