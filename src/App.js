@@ -424,9 +424,9 @@ class App extends Component {
         newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1;
       }
       else if (this.state.currentPhraseMeetingSuccess === 1) {
-        let [newWordsState, metWords] = this.increaseMetWords(newState.metWords[actualText], actualText);
-        Object.assign(newState.metWords, metWords);
-        Object.assign(newState, newWordsState);
+        const meetingsCount = newState.metWords[actualText] || 0;
+        Object.assign(newState, this.increaseMetWords(meetingsCount));
+        newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess + meetingsCount;
       }
       newState.currentPhraseMeetingSuccess = 1;
     }
@@ -438,10 +438,8 @@ class App extends Component {
     });
   }
 
-  increaseMetWords(meetingsCount, actualText) {
-    meetingsCount = meetingsCount !== undefined ? meetingsCount : 0;
+  increaseMetWords(meetingsCount) {
     let newState = {};
-    let metWords = {[actualText]:this.state.currentPhraseMeetingSuccess + meetingsCount };
 
     if (meetingsCount === 0) {
       newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + this.state.currentPhraseMeetingSuccess;
@@ -452,7 +450,7 @@ class App extends Component {
     else if (meetingsCount >= 30) {
       newState.totalNumberOfFamiliarWords = this.state.totalNumberOfFamiliarWords + this.state.currentPhraseMeetingSuccess;
     }
-    return [newState, metWords];
+    return newState;
   }
 
   isFinished() {
