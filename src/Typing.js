@@ -16,42 +16,23 @@ class Typing extends Component {
       customMessage = <span style={{paddingTop: '24px' }}>&nbsp;</span>
     }
 
-    if (this.props.userSettings.showStrokes) {
+    if (this.props.userSettings.showStrokes || this.props.showStrokesInLesson) {
       strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre><span className="steno-stroke">{this.props.currentStroke}</span></pre></div>;
-    } else if (this.props.showStrokesInLesson) {
-      strokeTip =
-        <div className="stroke-tip"><span className="visually-hidden">Hint: </span>
-          <div className="checkbox-group">
-            <label className="checkbox-label">
-              <input
-                className="checkbox-input"
-                type="checkbox"
-                name="showStrokesInLesson"
-                id="showStrokesInLesson"
-                checked={this.props.showStrokesInLesson}
-                onChange={this.props.changeShowStrokesInLesson}
-                />
-              {this.props.currentStroke}
-            </label>
-          </div>
-        </div>;
     } else {
       console.log(this.props.showStrokesInLesson);
       strokeTip =
-        <div className="stroke-tip"><span className="visually-hidden">Hint: </span>
-          <div className="checkbox-group">
-            <label className="checkbox-label">
-              <input
-                className="checkbox-input"
-                type="checkbox"
-                name="showStrokesInLesson"
-                id="showStrokesInLesson"
-                checked={this.props.showStrokesInLesson}
-                onChange={this.props.changeShowStrokesInLesson}
-                />
-              ?
-            </label>
-          </div>
+        <div className="stroke-tip">
+          <label className="mb0">
+            <input
+              className="checkbox-input hide"
+              type="checkbox"
+              name="showStrokesInLesson"
+              id="showStrokesInLesson"
+              checked={this.props.showStrokesInLesson}
+              onChange={this.props.changeShowStrokesInLesson}
+              />
+            Show stroke?
+          </label>
         </div>;
     }
 

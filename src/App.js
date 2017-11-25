@@ -411,6 +411,7 @@ class App extends Component {
     if (numberOfUnmatchedChars === 0) {
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
       newState.actualText = '';
+      newState.showStrokesInLesson = false;
       newState.currentPhraseID = this.state.currentPhraseID + 1;
       if (actualText in newState.metWords) {
         newState.metWords[actualText] += this.state.currentPhraseMeetingSuccess;
