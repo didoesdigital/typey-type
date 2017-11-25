@@ -34,7 +34,7 @@ class Scores extends Component {
           </tr>
           <tr>
             <th>Mistyped words:</th>
-            <td class="text-right">${this.props.totalNumberOfMisstrokes}</td>
+            <td class="text-right">${this.props.totalNumberOfMistypedWords}</td>
           </tr>
           <tr>
             <th class="hide">Word count:</th>

@@ -37,7 +37,7 @@ class Finished extends Component {
               totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
               totalNumberOfLowExposures={this.props.totalNumberOfLowExposures}
               totalNumberOfFamiliarWords={this.props.totalNumberOfFamiliarWords}
-              totalNumberOfMisstrokes={this.props.totalNumberOfMisstrokes}
+              totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
             />
           </div>
         </div>
