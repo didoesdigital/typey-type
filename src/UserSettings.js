@@ -56,10 +56,10 @@ class UserSettings extends Component {
                 <input
                   className="checkbox-input"
                   type="checkbox"
-                  name="unfamiliarWords"
-                  id="unfamiliarWords"
+                  name="seenWords"
+                  id="seenWords"
                   disabled={this.props.disableUserSettings}
-                  checked={this.props.userSettings.unfamiliarWords}
+                  checked={this.props.userSettings.seenWords}
                   onChange={this.props.changeUserSetting}
                   />
                 &lt;30 exposures

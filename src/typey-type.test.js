@@ -14,7 +14,7 @@ describe('matchSplitText', () => {
       showStrokes: false,
       spacePlacement: 'spaceOff',
       sortOrder: 'off',
-      unfamiliarWords: true
+      seenWords: true
     };
 
     it('splits typed text into matching and not matching text for partially matching typed text with a misstroke, ignore spacing', () => {
@@ -78,7 +78,7 @@ describe('matchSplitText', () => {
       showStrokes: false,
       spacePlacement: 'spaceOff',
       sortOrder: 'off',
-      unfamiliarWords: true
+      seenWords: true
     };
 
     it('splits typed text into matching and not matching text for partially matching typed text with a misstroke, ignore spacing', () => {
@@ -142,7 +142,7 @@ describe('matchSplitText', () => {
       showStrokes: false,
       spacePlacement: 'spaceBefore',
       sortOrder: 'off',
-      unfamiliarWords: true
+      seenWords: true
     };
 
     it('splits typed text into matching and not matching text for partially matching typed text with a misstroke, space before', () => {
@@ -206,7 +206,7 @@ describe('matchSplitText', () => {
       showStrokes: false,
       spacePlacement: 'spaceBefore',
       sortOrder: 'off',
-      unfamiliarWords: true
+      seenWords: true
     };
 
     it('splits typed text into matching and not matching text for partially matching typed text with a misstroke, an ignored char, space before', () => {
@@ -263,7 +263,7 @@ describe('matchSplitText', () => {
       showStrokes: false,
       spacePlacement: 'spaceAfter',
       sortOrder: 'off',
-      unfamiliarWords: true
+      seenWords: true
     };
 
     it('splits typed text into matching and not matching text for partially matching typed text with a misstroke, an ignored char, space after', () => {
@@ -320,7 +320,7 @@ describe('matchSplitText', () => {
       showStrokes: false,
       spacePlacement: 'spaceOff',
       sortOrder: 'off',
-      unfamiliarWords: true
+      seenWords: true
     };
 
     it('splits typed text into matching and not matching text for incorrectly spaced multi-word text, an ignored char, space off', () => {

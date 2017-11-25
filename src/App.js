@@ -41,7 +41,7 @@ class App extends Component {
         showStrokes: false,
         spacePlacement: 'spaceBeforeOutput',
         sortOrder: 'off',
-        unfamiliarWords: true
+        seenWords: true
       },
       lesson: {
         sourceMaterial: [{phrase: '', stroke: ''}],
@@ -73,7 +73,7 @@ class App extends Component {
         showStrokes: false,
         spacePlacement: 'spaceBeforeOutput',
         sortOrder: 'sortOff',
-        unfamiliarWords: true
+        seenWords: true
       };
       if (window.localStorage.getItem('metWords')) {
         metWords = JSON.parse(window.localStorage.getItem('metWords'));
@@ -299,7 +299,7 @@ class App extends Component {
     var met = this.state.metWords;
 
     var newWords = this.state.userSettings.newWords,
-      unfamiliarWords = this.state.userSettings.unfamiliarWords,
+      seenWords = this.state.userSettings.seenWords,
       familiarWords = this.state.userSettings.familiarWords;
 
     var testNewWords = function(phrase) {
@@ -309,7 +309,7 @@ class App extends Component {
         return (met[phrase] < 1);
       }
     }
-    var testUnfamiliarWords = function(phrase) {
+    var testSeenWords = function(phrase) {
       if (!(phrase in met)) {
         return false;
       } else {
@@ -328,8 +328,8 @@ class App extends Component {
     if (familiarWords) {
       tests.push(testFamiliarWords);
     }
-    if (unfamiliarWords) {
-      tests.push(testUnfamiliarWords);
+    if (seenWords) {
+      tests.push(testSeenWords);
     }
     if (newWords) {
       tests.push(testNewWords);
