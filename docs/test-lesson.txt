@@ -1,0 +1,12 @@
+Test lesson
+
+'as well as': SW-LS
+'and': SKP
+'by': PWEU
+'can': K
+'can': K
+'by': PWEU
+'and': SKP
+'do': TKO
+case_sensitive=false
+ignore_characters='^'
