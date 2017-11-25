@@ -3,30 +3,18 @@ import {matchSplitText} from './typey-type';
 import './App.css';
 
 class Material extends Component {
-  markUpMaterial(currentPhrase, actualText, settings) {
-    // Show how much of material you've typed correctly
-    let [matched, unmatched] = matchSplitText(currentPhrase, actualText, settings, this.props.userSettings);
-    let matchedMaterialMarkup;
-
-    matchedMaterialMarkup = `<div class="material"><pre><span class="matched steno-material">${matched}</span><span class="steno-material">${unmatched}</span></pre></div>`;
-
-    return {__html: matchedMaterialMarkup};
-  }
-
-  markUpMaterialForAssistiveDevices(currentPhrase, actualText, settings) {
-    let [matched, unmatched] = matchSplitText(currentPhrase, actualText, settings, this.props.userSettings);
-    let matchedMaterialMarkup;
-
-    matchedMaterialMarkup = `<div class="material"><pre><span class="steno-material">${matched}${unmatched}</span></pre></div>`;
-
-    return {__html: matchedMaterialMarkup};
-  }
-
   render() {
+    const [matched, unmatched] = matchSplitText(this.props.currentPhrase, this.props.actualText, this.props.settings, this.props.userSettings);
     return (
       <div className="mb1">
-        <div className="visually-hidden">Material to type: <div role="status" aria-live="assertive"><div className="" dangerouslySetInnerHTML={this.markUpMaterialForAssistiveDevices(this.props.currentPhrase, this.props.actualText, this.props.settings, this.props.currentStroke)} /></div></div>
-        <div className="expected" dangerouslySetInnerHTML={this.markUpMaterial(this.props.currentPhrase, this.props.actualText, this.props.settings, this.props.currentStroke)} />
+        <div className="visually-hidden">Material to type:
+          <div role="status" aria-live="assertive">
+            <div className="material"><pre><span className="steno-material">{matched + unmatched}</span></pre></div>
+          </div>
+        </div>
+        <div className="expected">
+          <div className="material"><pre><span className="matched steno-material">{matched}</span><span className="steno-material">{unmatched}</span></pre></div>
+        </div>
       </div>
     );
   }
