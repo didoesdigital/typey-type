@@ -93,7 +93,9 @@ function parseLesson(lessonText) {
       var optionAndValue = line.split("=");
       var value = optionAndValue[1].replace(/'/g, "");
       if (value === "true") { value = true; } else if (value === "false") { value = false; }
-      settings[SETTINGS_NAME_MAP[optionAndValue[0]]] = value;
+      if (optionAndValue[0] in SETTINGS_NAME_MAP) {
+        settings[SETTINGS_NAME_MAP[optionAndValue[0]]] = value;
+      }
     }
   }
 
