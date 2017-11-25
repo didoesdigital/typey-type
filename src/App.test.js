@@ -19,11 +19,11 @@ describe('increaseMetWords', () => {
   });
   describe('meetingsCount is between 1 and 29 (inclusive)', () => {
     const state = {
-      totalNumberOfLowExposures: 3,
+      totalNumberOfLowExposuresSeen: 3,
       currentPhraseMeetingSuccess: 1
     };
     it('increments total number of new words met from 3', () => {
-      expect(increaseMetWords.call({state: state}, 3)).toEqual({totalNumberOfLowExposures: 4});
+      expect(increaseMetWords.call({state: state}, 3)).toEqual({totalNumberOfLowExposuresSeen: 4});
     });
   });
   describe('meetingsCount is 30 or higher', () => {

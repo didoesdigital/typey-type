@@ -73,7 +73,7 @@ class Typing extends Component {
               timer={this.props.timer}
               totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-              totalNumberOfLowExposures={this.props.totalNumberOfLowExposures}
+              totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
               totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
               totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
               totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}

@@ -26,7 +26,7 @@ class Scores extends Component {
           </tr>
           <tr>
             <th>Seen words:</th>
-            <td class="text-right">${this.props.totalNumberOfLowExposures}</td>
+            <td class="text-right">${this.props.totalNumberOfLowExposuresSeen}</td>
           </tr>
           <tr>
             <th>Retained words:</th>

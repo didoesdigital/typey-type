@@ -23,7 +23,7 @@ class App extends Component {
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
       totalNumberOfNewWordsMet: 0,
-      totalNumberOfLowExposures: 0,
+      totalNumberOfLowExposuresSeen: 0,
       totalNumberOfRetainedWords: 0,
       totalNumberOfMistypedWords: 0,
       totalNumberOfHintedWords: 0,
@@ -276,7 +276,7 @@ class App extends Component {
       totalNumberOfMatchedChars: 0,
       totalNumberOfMatchedWords: 0,
       totalNumberOfNewWordsMet: 0,
-      totalNumberOfLowExposures: 0,
+      totalNumberOfLowExposuresSeen: 0,
       totalNumberOfRetainedWords: 0,
       totalNumberOfMistypedWords: 0,
       totalNumberOfHintedWords: 0
@@ -399,7 +399,7 @@ class App extends Component {
       numberOfMatchedChars: numberOfMatchedChars,
       totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       totalNumberOfNewWordsMet: this.state.totalNumberOfNewWordsMet,
-      totalNumberOfLowExposures: this.state.totalNumberOfLowExposures,
+      totalNumberOfLowExposuresSeen: this.state.totalNumberOfLowExposuresSeen,
       totalNumberOfRetainedWords: this.state.totalNumberOfRetainedWords,
       totalNumberOfMistypedWords: this.state.totalNumberOfMistypedWords,
       totalNumberOfHintedWords: this.state.totalNumberOfHintedWords,
@@ -478,7 +478,7 @@ class App extends Component {
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
-              totalNumberOfLowExposures={this.state.totalNumberOfLowExposures}
+              totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
               totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
               totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
               totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
@@ -532,7 +532,7 @@ class App extends Component {
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
-              totalNumberOfLowExposures={this.state.totalNumberOfLowExposures}
+              totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
               totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
               totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
               totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
@@ -559,7 +559,7 @@ function increaseMetWords(meetingsCount) {
     newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + this.state.currentPhraseMeetingSuccess;
   }
   else if (meetingsCount >= 1 && meetingsCount <= 29) {
-    newState.totalNumberOfLowExposures = this.state.totalNumberOfLowExposures + this.state.currentPhraseMeetingSuccess;
+    newState.totalNumberOfLowExposuresSeen = this.state.totalNumberOfLowExposuresSeen + this.state.currentPhraseMeetingSuccess;
   }
   else if (meetingsCount >= 30) {
     newState.totalNumberOfRetainedWords = this.state.totalNumberOfRetainedWords + this.state.currentPhraseMeetingSuccess;
