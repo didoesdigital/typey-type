@@ -17,6 +17,7 @@ class App extends Component {
       currentPhraseMeetingSuccess: 1,
       actualText: ``,
       startTime: null,
+      showStrokesInLesson: false,
       timer: null,
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
@@ -198,6 +199,14 @@ class App extends Component {
         this.setupLesson();
       }
     });
+    return value;
+  }
+
+  changeShowStrokesInLesson(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+
+    this.setState({showStrokesInLesson: value});
     return value;
   }
 
@@ -507,6 +516,7 @@ class App extends Component {
           <div>
             <Typing
               actualText={this.state.actualText}
+              changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
               changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
               changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
               changeUserSetting={this.changeUserSetting.bind(this)}
@@ -517,6 +527,7 @@ class App extends Component {
               handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
               handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
               settings={this.state.lesson.settings}
+              showStrokesInLesson={this.state.showStrokesInLesson}
               timer={this.state.timer}
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}

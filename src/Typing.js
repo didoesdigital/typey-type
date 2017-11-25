@@ -18,8 +18,41 @@ class Typing extends Component {
 
     if (this.props.userSettings.showStrokes) {
       strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre><span className="steno-stroke">{this.props.currentStroke}</span></pre></div>;
+    } else if (this.props.showStrokesInLesson) {
+      strokeTip =
+        <div className="stroke-tip"><span className="visually-hidden">Hint: </span>
+          <div className="checkbox-group">
+            <label className="checkbox-label">
+              <input
+                className="checkbox-input"
+                type="checkbox"
+                name="showStrokesInLesson"
+                id="showStrokesInLesson"
+                checked={this.props.showStrokesInLesson}
+                onChange={this.props.changeShowStrokesInLesson}
+                />
+              {this.props.currentStroke}
+            </label>
+          </div>
+        </div>;
     } else {
-      strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre>?</pre></div>;
+      console.log(this.props.showStrokesInLesson);
+      strokeTip =
+        <div className="stroke-tip"><span className="visually-hidden">Hint: </span>
+          <div className="checkbox-group">
+            <label className="checkbox-label">
+              <input
+                className="checkbox-input"
+                type="checkbox"
+                name="showStrokesInLesson"
+                id="showStrokesInLesson"
+                checked={this.props.showStrokesInLesson}
+                onChange={this.props.changeShowStrokesInLesson}
+                />
+              ?
+            </label>
+          </div>
+        </div>;
     }
 
     return (
