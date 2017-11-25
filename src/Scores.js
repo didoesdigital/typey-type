@@ -30,7 +30,7 @@ class Scores extends Component {
           </tr>
           <tr>
             <th>Retained words:</th>
-            <td class="text-right">${this.props.totalNumberOfFamiliarWords}</td>
+            <td class="text-right">${this.props.totalNumberOfRetainedWords}</td>
           </tr>
           <tr>
             <th>Mistyped words:</th>

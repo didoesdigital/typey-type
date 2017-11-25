@@ -28,13 +28,13 @@ class UserSettings extends Component {
                 <input
                   className="checkbox-input"
                   type="checkbox"
-                  name="caseInsensitive"
-                  id="caseInsensitive"
+                  name="caseSensitive"
+                  id="caseSensitive"
                   disabled={this.props.disableUserSettings}
-                  checked={this.props.userSettings.caseInsensitive}
+                  checked={this.props.userSettings.caseSensitive}
                   onChange={this.props.changeUserSetting}
                   />
-                Case insensitive
+                Case sensitive
               </label>
             </div>
             <div className="checkbox-group">
@@ -70,10 +70,10 @@ class UserSettings extends Component {
                 <input
                   className="checkbox-input"
                   type="checkbox"
-                  name="familiarWords"
-                  id="familiarWords"
+                  name="retainedWords"
+                  id="retainedWords"
                   disabled={this.props.disableUserSettings}
-                  checked={this.props.userSettings.familiarWords}
+                  checked={this.props.userSettings.retainedWords}
                   onChange={this.props.changeUserSetting}
                   />
                 Retained words

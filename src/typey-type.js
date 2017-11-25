@@ -11,7 +11,7 @@ function matchSplitText(expected, actualText, settings={ignoredChars: ''}, userS
   let actualTextIndex = 0;
   let ignoredChars = settings.ignoredChars.slice(0);
 
-  if (!userSettings.caseInsensitive) {
+  if (userSettings.caseSensitive) {
     charactersMatch = function (char1, char2) {
       return char1 === char2;
     }
@@ -96,9 +96,6 @@ function parseLesson(lessonText) {
       settings[SETTINGS_NAME_MAP[optionAndValue[0]]] = value;
     }
   }
-
-  // Flip this because lesson shows case_sensitive and I want caseInsensitive
-  settings.caseInsensitive = !settings.caseInsensitive;
 
   return { sourceMaterial: sourceMaterial, presentedMaterial: sourceMaterial, settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
 }

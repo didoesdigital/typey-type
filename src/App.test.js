@@ -28,11 +28,11 @@ describe('increaseMetWords', () => {
   });
   describe('meetingsCount is 30 or higher', () => {
     const state = {
-      totalNumberOfFamiliarWords: 30,
+      totalNumberOfRetainedWords: 30,
       currentPhraseMeetingSuccess: 1
     };
     it('increments total number of new words met from 3', () => {
-      expect(increaseMetWords.call({state: state}, 30)).toEqual({totalNumberOfFamiliarWords: 31});
+      expect(increaseMetWords.call({state: state}, 30)).toEqual({totalNumberOfRetainedWords: 31});
     });
   });
 });

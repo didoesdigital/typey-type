@@ -24,7 +24,7 @@ class App extends Component {
       totalNumberOfMatchedChars: 0,
       totalNumberOfNewWordsMet: 0,
       totalNumberOfLowExposures: 0,
-      totalNumberOfFamiliarWords: 0,
+      totalNumberOfRetainedWords: 0,
       totalNumberOfMistypedWords: 0,
       totalNumberOfHintedWords: 0,
       disableUserSettings: false,
@@ -33,8 +33,8 @@ class App extends Component {
         'and': 1
       },
       userSettings: {
-        caseInsensitive: true,
-        familiarWords: false,
+        caseSensitive: true,
+        retainedWords: false,
         limitNumberOfWords: 0,
         newWords: true,
         repetitions: 1,
@@ -65,8 +65,8 @@ class App extends Component {
     if (window.localStorage) {
       let metWords = {};
       let userSettings = {
-        caseInsensitive: true,
-        familiarWords: false,
+        caseSensitive: true,
+        retainedWords: false,
         limitNumberOfWords: 0,
         newWords: true,
         repetitions: 1,
@@ -179,7 +179,7 @@ class App extends Component {
     newState[name] = value;
 
     this.setState({userSettings: newState}, () => {
-      if (!(name === 'caseInsensitive')) {
+      if (!(name === 'caseSensitive')) {
         this.setupLesson();
       }
     });
@@ -196,7 +196,7 @@ class App extends Component {
     newState[name] = value;
 
     this.setState({userSettings: newState}, () => {
-      if (!(name === 'caseInsensitive')) {
+      if (!(name === 'caseSensitive')) {
         this.setupLesson();
       }
     });
@@ -222,7 +222,7 @@ class App extends Component {
     newState[name] = value;
 
     this.setState({userSettings: newState}, () => {
-      if (!(name === 'caseInsensitive')) {
+      if (!(name === 'caseSensitive')) {
         this.setupLesson();
       }
     });
@@ -239,7 +239,7 @@ class App extends Component {
     newState[name] = value;
 
     this.setState({userSettings: newState}, () => {
-      if (!(name === 'caseInsensitive')) {
+      if (!(name === 'caseSensitive')) {
         this.setupLesson();
       }
     });
@@ -256,7 +256,7 @@ class App extends Component {
     newState[name] = value;
 
     this.setState({userSettings: newState}, () => {
-      if (!(name === 'caseInsensitive')) {
+      if (!(name === 'caseSensitive')) {
         this.setupLesson();
       }
     });
@@ -277,7 +277,7 @@ class App extends Component {
       totalNumberOfMatchedWords: 0,
       totalNumberOfNewWordsMet: 0,
       totalNumberOfLowExposures: 0,
-      totalNumberOfFamiliarWords: 0,
+      totalNumberOfRetainedWords: 0,
       totalNumberOfMistypedWords: 0,
       totalNumberOfHintedWords: 0
     });
@@ -300,7 +300,7 @@ class App extends Component {
 
     var newWords = this.state.userSettings.newWords,
       seenWords = this.state.userSettings.seenWords,
-      familiarWords = this.state.userSettings.familiarWords;
+      retainedWords = this.state.userSettings.retainedWords;
 
     var testNewWords = function(phrase) {
       if (!(phrase in met)) {
@@ -316,7 +316,7 @@ class App extends Component {
         return ((met[phrase] > 0) && (met[phrase] < 30));
       }
     }
-    var testFamiliarWords = function(phrase) {
+    var testRetainedWords = function(phrase) {
       if (!(phrase in met)) {
         return false;
       } else {
@@ -325,8 +325,8 @@ class App extends Component {
     }
 
     var tests = [];
-    if (familiarWords) {
-      tests.push(testFamiliarWords);
+    if (retainedWords) {
+      tests.push(testRetainedWords);
     }
     if (seenWords) {
       tests.push(testSeenWords);
@@ -400,7 +400,7 @@ class App extends Component {
       totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       totalNumberOfNewWordsMet: this.state.totalNumberOfNewWordsMet,
       totalNumberOfLowExposures: this.state.totalNumberOfLowExposures,
-      totalNumberOfFamiliarWords: this.state.totalNumberOfFamiliarWords,
+      totalNumberOfRetainedWords: this.state.totalNumberOfRetainedWords,
       totalNumberOfMistypedWords: this.state.totalNumberOfMistypedWords,
       totalNumberOfHintedWords: this.state.totalNumberOfHintedWords,
       actualText: actualText,
@@ -479,7 +479,7 @@ class App extends Component {
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
               totalNumberOfLowExposures={this.state.totalNumberOfLowExposures}
-              totalNumberOfFamiliarWords={this.state.totalNumberOfFamiliarWords}
+              totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
               totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
               totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
               totalWordCount={this.state.lesson.presentedMaterial.length}
@@ -533,7 +533,7 @@ class App extends Component {
               totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
               totalNumberOfLowExposures={this.state.totalNumberOfLowExposures}
-              totalNumberOfFamiliarWords={this.state.totalNumberOfFamiliarWords}
+              totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
               totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
               totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
               totalWordCount={this.state.lesson.presentedMaterial.length}
@@ -562,7 +562,7 @@ function increaseMetWords(meetingsCount) {
     newState.totalNumberOfLowExposures = this.state.totalNumberOfLowExposures + this.state.currentPhraseMeetingSuccess;
   }
   else if (meetingsCount >= 30) {
-    newState.totalNumberOfFamiliarWords = this.state.totalNumberOfFamiliarWords + this.state.currentPhraseMeetingSuccess;
+    newState.totalNumberOfRetainedWords = this.state.totalNumberOfRetainedWords + this.state.currentPhraseMeetingSuccess;
   }
   return newState;
 }

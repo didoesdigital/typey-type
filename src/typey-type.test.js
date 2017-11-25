@@ -6,8 +6,8 @@ describe('matchSplitText', () => {
   describe('case insensitive, ignore spacing', () => {
     const settings = {ignoredChars: ''};
     const userSettings = {
-      caseInsensitive: true,
-      familiarWords: false,
+      caseSensitive: false,
+      retainedWords: false,
       limitNumberOfWords: 0,
       newWords: true,
       repetitions: 1,
@@ -70,8 +70,8 @@ describe('matchSplitText', () => {
   describe('case sensitive, no spacing', () => {
     const settings = {ignoredChars: ''};
     const userSettings = {
-      caseInsensitive: false,
-      familiarWords: false,
+      caseSensitive: true,
+      retainedWords: false,
       limitNumberOfWords: 0,
       newWords: true,
       repetitions: 1,
@@ -134,8 +134,8 @@ describe('matchSplitText', () => {
   describe('case sensitive, space before', () => {
     const settings = {ignoredChars: ''};
     const userSettings = {
-      caseInsensitive: false,
-      familiarWords: false,
+      caseSensitive: true,
+      retainedWords: false,
       limitNumberOfWords: 0,
       newWords: true,
       repetitions: 1,
@@ -198,8 +198,8 @@ describe('matchSplitText', () => {
   describe('case sensitive, space before, ignoredChars', () => {
     const settings = {ignoredChars: '^-'};
     const userSettings = {
-      caseInsensitive: false,
-      familiarWords: false,
+      caseSensitive: true,
+      retainedWords: false,
       limitNumberOfWords: 0,
       newWords: true,
       repetitions: 1,
@@ -255,8 +255,8 @@ describe('matchSplitText', () => {
   describe('case sensitive, space after, ignoredChars', () => {
     const settings = {ignoredChars: '^-'};
     const userSettings = {
-      caseInsensitive: false,
-      familiarWords: false,
+      caseSensitive: true,
+      retainedWords: false,
       limitNumberOfWords: 0,
       newWords: true,
       repetitions: 1,
@@ -312,8 +312,8 @@ describe('matchSplitText', () => {
   describe('case sensitive, space off, ignoredChars', () => {
     const settings = {ignoredChars: '^-'};
     const userSettings = {
-      caseInsensitive: false,
-      familiarWords: false,
+      caseSensitive: true,
+      retainedWords: false,
       limitNumberOfWords: 0,
       newWords: true,
       repetitions: 1,
