@@ -13,10 +13,19 @@ class Material extends Component {
     return {__html: matchedMaterialMarkup};
   }
 
+  markUpMaterialForAssistiveDevices(currentPhrase, actualText, settings) {
+    let [matched, unmatched] = matchSplitText(currentPhrase, actualText, settings, this.props.userSettings);
+    let matchedMaterialMarkup;
+
+    matchedMaterialMarkup = `<div class="material"><pre><span class="steno-material">${matched}${unmatched}</span></pre></div>`;
+
+    return {__html: matchedMaterialMarkup};
+  }
+
   render() {
     return (
       <div className="mb1">
-        <div className="visually-hidden">Material to type: <div role="status" aria-live="assertive">{this.props.currentPhrase}</div></div>
+        <div className="visually-hidden">Material to type: <div role="status" aria-live="assertive"><div className="" dangerouslySetInnerHTML={this.markUpMaterialForAssistiveDevices(this.props.currentPhrase, this.props.actualText, this.props.settings, this.props.currentStroke)} /></div></div>
         <div className="expected" dangerouslySetInnerHTML={this.markUpMaterial(this.props.currentPhrase, this.props.actualText, this.props.settings, this.props.currentStroke)} />
       </div>
     );
