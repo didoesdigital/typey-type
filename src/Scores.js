@@ -37,6 +37,10 @@ class Scores extends Component {
             <td class="text-right">${this.props.totalNumberOfMistypedWords}</td>
           </tr>
           <tr>
+            <th>Hinted words:</th>
+            <td class="text-right">${this.props.totalNumberOfHintedWords}</td>
+          </tr>
+          <tr>
             <th class="hide">Word count:</th>
             <td class="text-right hide">~${Math.round(totalNumberOfMatchedWords)}</td>
           </tr>
@@ -82,6 +86,10 @@ class Scores extends Component {
               </tr>
               <tr>
                 <th>Mistyped words:</th>
+                <td className="text-right">0</td>
+              </tr>
+              <tr>
+                <th>Hinted words:</th>
                 <td className="text-right">0</td>
               </tr>
               <tr>

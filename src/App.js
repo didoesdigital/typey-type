@@ -26,6 +26,7 @@ class App extends Component {
       totalNumberOfLowExposures: 0,
       totalNumberOfFamiliarWords: 0,
       totalNumberOfMistypedWords: 0,
+      totalNumberOfHintedWords: 0,
       disableUserSettings: false,
       metWords: {
         'the': 0,
@@ -277,7 +278,8 @@ class App extends Component {
       totalNumberOfNewWordsMet: 0,
       totalNumberOfLowExposures: 0,
       totalNumberOfFamiliarWords: 0,
-      totalNumberOfMistypedWords: 0
+      totalNumberOfMistypedWords: 0,
+      totalNumberOfHintedWords: 0
     });
 
     if (this.state.userSettings.sortOrder === 'sortRandom') {
@@ -400,6 +402,7 @@ class App extends Component {
       totalNumberOfLowExposures: this.state.totalNumberOfLowExposures,
       totalNumberOfFamiliarWords: this.state.totalNumberOfFamiliarWords,
       totalNumberOfMistypedWords: this.state.totalNumberOfMistypedWords,
+      totalNumberOfHintedWords: this.state.totalNumberOfHintedWords,
       actualText: actualText,
       metWords: this.state.metWords
     };
@@ -413,23 +416,66 @@ class App extends Component {
       newState.actualText = '';
       newState.showStrokesInLesson = false;
       newState.currentPhraseID = this.state.currentPhraseID + 1;
-      if (actualText in newState.metWords) {
-        newState.metWords[actualText] += this.state.currentPhraseMeetingSuccess;
-        if (newState.metWords[actualText] > 29) {
-          newState.totalNumberOfFamiliarWords = this.state.totalNumberOfFamiliarWords + this.state.currentPhraseMeetingSuccess;
-        } else {
-          newState.totalNumberOfLowExposures = this.state.totalNumberOfLowExposures + this.state.currentPhraseMeetingSuccess;
-        }
-      } else {
-        newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess;
-        newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + this.state.currentPhraseMeetingSuccess;
+
+
+      // if (hinted===true) { add to hinted count }
+      if (this.state.userSettings.showStrokes || this.state.showStrokesInLesson) {
+        newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1;
       }
-      if (this.state.currentPhraseMeetingSuccess === 0) {
+      // if (success===0) { increase mistypedwords }
+      else if (this.state.currentPhraseMeetingSuccess === 0) {
         newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1;
       }
-      if (!this.state.userSettings.showStrokes) {
-        newState.currentPhraseMeetingSuccess = 1;
+      // if (success===1) { add to SOME count }
+      else if (this.state.currentPhraseMeetingSuccess === 1) {
+        if (actualText in newState.metWords) {
+          // change word:0 to word:1
+          // change word:25 to word:26
+          // change word:33 to word:34
+          newState.metWords[actualText] += this.state.currentPhraseMeetingSuccess;
+
+          if (newState.metWords[actualText] === 0) {
+            // increase new words count
+            console.log( newState.totalNumberOfNewWordsMet );
+            console.log( this.state.totalNumberOfNewWordsMet );
+            console.log( this.state.currentPhraseMeetingSuccess);
+            newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + this.state.currentPhraseMeetingSuccess;
+          }
+          else if (newState.metWords[actualText] >= 1 && newState.metWords[actualText] <= 29) {
+            // increase low exposure word count
+            newState.totalNumberOfLowExposures = this.state.totalNumberOfLowExposures + this.state.currentPhraseMeetingSuccess;
+          }
+          else if (newState.metWords[actualText] >= 30) {
+            // increase familiar words count
+            newState.totalNumberOfFamiliarWords = this.state.totalNumberOfFamiliarWords + this.state.currentPhraseMeetingSuccess;
+          }
+        } else {
+          // add word to metWords i.e. word:1
+          newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess;
+          // increase new words count
+          newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + this.state.currentPhraseMeetingSuccess;
+        }
       }
+      newState.currentPhraseMeetingSuccess = 1;
+
+
+      // if (actualText in newState.metWords) {
+      //   newState.metWords[actualText] += this.state.currentPhraseMeetingSuccess;
+      //   if (newState.metWords[actualText] > 29) {
+      //     newState.totalNumberOfFamiliarWords = this.state.totalNumberOfFamiliarWords + this.state.currentPhraseMeetingSuccess;
+      //   } else {
+      //     newState.totalNumberOfLowExposures = this.state.totalNumberOfLowExposures + this.state.currentPhraseMeetingSuccess;
+      //   }
+      // } else {
+      //   newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess;
+      //   newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + this.state.currentPhraseMeetingSuccess;
+      // }
+      // if (this.state.currentPhraseMeetingSuccess === 0) {
+      //   newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1;
+      // }
+      // if (!this.state.userSettings.showStrokes) {
+      //   newState.currentPhraseMeetingSuccess = 1;
+      // }
     }
 
     this.setState(newState, () => {
@@ -482,6 +528,7 @@ class App extends Component {
               totalNumberOfLowExposures={this.state.totalNumberOfLowExposures}
               totalNumberOfFamiliarWords={this.state.totalNumberOfFamiliarWords}
               totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
+              totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
               totalWordCount={this.state.lesson.presentedMaterial.length}
               userSettings={this.state.userSettings}
               />
@@ -535,6 +582,7 @@ class App extends Component {
               totalNumberOfLowExposures={this.state.totalNumberOfLowExposures}
               totalNumberOfFamiliarWords={this.state.totalNumberOfFamiliarWords}
               totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
+              totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
               totalWordCount={this.state.lesson.presentedMaterial.length}
               updateMarkup={this.updateMarkup.bind(this)}
               userSettings={this.state.userSettings}
