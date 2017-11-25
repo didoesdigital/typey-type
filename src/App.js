@@ -425,7 +425,7 @@ class App extends Component {
       }
       else if (this.state.currentPhraseMeetingSuccess === 1) {
         const meetingsCount = newState.metWords[actualText] || 0;
-        Object.assign(newState, this.increaseMetWords(meetingsCount));
+        Object.assign(newState, increaseMetWords.call(this, meetingsCount));
         newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess + meetingsCount;
       }
       newState.currentPhraseMeetingSuccess = 1;
@@ -436,21 +436,6 @@ class App extends Component {
         this.stopLesson();
       }
     });
-  }
-
-  increaseMetWords(meetingsCount) {
-    let newState = {};
-
-    if (meetingsCount === 0) {
-      newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + this.state.currentPhraseMeetingSuccess;
-    }
-    else if (meetingsCount >= 1 && meetingsCount <= 29) {
-      newState.totalNumberOfLowExposures = this.state.totalNumberOfLowExposures + this.state.currentPhraseMeetingSuccess;
-    }
-    else if (meetingsCount >= 30) {
-      newState.totalNumberOfFamiliarWords = this.state.totalNumberOfFamiliarWords + this.state.currentPhraseMeetingSuccess;
-    }
-    return newState;
   }
 
   isFinished() {
@@ -567,4 +552,20 @@ class App extends Component {
   }
 }
 
+function increaseMetWords(meetingsCount) {
+  let newState = {};
+
+  if (meetingsCount === 0) {
+    newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + this.state.currentPhraseMeetingSuccess;
+  }
+  else if (meetingsCount >= 1 && meetingsCount <= 29) {
+    newState.totalNumberOfLowExposures = this.state.totalNumberOfLowExposures + this.state.currentPhraseMeetingSuccess;
+  }
+  else if (meetingsCount >= 30) {
+    newState.totalNumberOfFamiliarWords = this.state.totalNumberOfFamiliarWords + this.state.currentPhraseMeetingSuccess;
+  }
+  return newState;
+}
+
 export default App;
+export {increaseMetWords};
