@@ -336,6 +336,34 @@ describe('matchSplitText', () => {
       const expected = [" as^we", "ll^as", " as  we", ""];
       expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
     });
+
+    // it('splits typed text into matching and not matching text for typed text that matches but needs a trailing space, ignored caret, no added spaces to material', () => {
+    //   const expectedText = "and^ ";
+    //   const actualText = "and";
+    //   const expected = ["and", "^ ", "and", ""];
+    //   expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    // });
+
+    // it('splits typed text into matching and not matching text for typed text that matches with a trailing space, an ignored char, space off', () => {
+    //   const expectedText = "and^ ";
+    //   const actualText = "and ";
+    //   const expected = ["and^ ", "", "and ", ""];
+    //   expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    // });
+
+    // it('splits typed text into matching and not matching text for typed text that matches with no trailing space, an ignored char, space off', () => {
+    //   const expectedText = "and^";
+    //   const actualText = "and";
+    //   const expected = ["and^", "", "and", ""];
+    //   expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    // });
+
+    // it('splits typed text into matching and not matching text for typed text that matches so far but is not finished, an ignored char, space off', () => {
+    //   const expectedText = "and^ the";
+    //   const actualText = "and the";
+    //   const expected = ["and^ the", "", "and the", ""];
+    //   expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    // });
   });
   // return [matchedExpected, unmatchedExpected, matchedActual, unmatchedActual];
 });
