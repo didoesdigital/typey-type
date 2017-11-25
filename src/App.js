@@ -208,6 +208,8 @@ class App extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
 
     this.setState({showStrokesInLesson: value});
+    const element = document.getElementById('your-typed-text');
+    if (element) { element.focus(); }
     return value;
   }
 
