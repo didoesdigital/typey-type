@@ -252,6 +252,63 @@ describe('matchSplitText', () => {
     });
   });
 
+  describe('case sensitive, space after, ignoredChars', () => {
+    const settings = {ignoredChars: '^-'};
+    const userSettings = {
+      caseInsensitive: false,
+      familiarWords: false,
+      limitNumberOfWords: 0,
+      newWords: true,
+      repetitions: 1,
+      showStrokes: false,
+      spacePlacement: 'spaceAfter',
+      sortOrder: 'off',
+      unfamiliarWords: true
+    };
+
+    it('splits typed text into matching and not matching text for partially matching typed text with a misstroke, an ignored char, space after', () => {
+      const expectedText = "^and ";
+      const actualText = "ant ";
+      const expected = ["^an", "d ", "an", "t "];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it('splits typed text into matching and not matching text for a misstroke, an ignored char, space after', () => {
+      const expectedText = "and ";
+      const actualText = "and";
+      const expected = ["and", " ", "and", ""];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it('splits typed text into matching and not matching text for typed text that matches so far but is not finished, an ignored char, space after', () => {
+      const expectedText = "and^ ";
+      const actualText = "and";
+      const expected = ["and", "^ ", "and", ""];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it('splits typed text into matching and not matching text for perfectly stroked text, space after', () => {
+      const expectedText = "and ";
+      const actualText = "and ";
+      const expected = ["and ", "", "and ", ""];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it('splits typed text into matching and not matching text for correctly stroked text with incorrect capitalisation, an ignored char, space after', () => {
+      const expectedText = "And ";
+      const actualText = "and ";
+      const expected = ["", "And ", "", "and "];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it('splits typed text into matching and not matching text for incorrectly spaced multi-word text, an ignored char, space after', () => {
+      const expectedText = "as^well^as ";
+      const actualText = "aswell as ";
+      const expected = ["as^well^", "as ", "aswell", " as "];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
+  });
+
   describe('case sensitive, space off, ignoredChars', () => {
     const settings = {ignoredChars: '^-'};
     const userSettings = {
