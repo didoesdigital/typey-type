@@ -17,7 +17,7 @@ class Typing extends Component {
     }
 
     if (this.props.userSettings.showStrokes || this.props.showStrokesInLesson) {
-      strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre><span className="steno-stroke">{this.props.currentStroke}</span></pre></div>;
+      strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre><span className="steno-stroke"><abbr>{this.props.currentStroke}</abbr></span></pre></div>;
     } else {
       strokeTip =
         <div className="stroke-tip">
@@ -65,7 +65,9 @@ class Typing extends Component {
                 updateMarkup={this.props.updateMarkup.bind(this)}
                 userSettings={this.props.userSettings}
               />
-              {strokeTip}
+              <div role="status" aria-live="assertive">
+                {strokeTip}
+              </div>
             </div>
           </div>
           <div className="scores">
