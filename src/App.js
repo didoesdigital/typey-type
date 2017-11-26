@@ -479,12 +479,11 @@ function increaseMetWords(meetingsCount) {
   return newState;
 }
 
-function filterByFamiliarity(presentedMaterial) {
-  var met = this.state.metWords;
+function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings) {
 
-  var newWords = this.state.userSettings.newWords,
-    seenWords = this.state.userSettings.seenWords,
-    retainedWords = this.state.userSettings.retainedWords;
+  var newWords = userSettings.newWords,
+    seenWords = userSettings.seenWords,
+    retainedWords = userSettings.retainedWords;
 
   var testNewWords = function(phrase) {
     if (!(phrase in met)) {
