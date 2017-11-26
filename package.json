@@ -10,7 +10,7 @@
     "react-autocomplete": "^1.7.2",
     "react-dom": "^16.0.0",
     "react-numeric-input": "^2.2.0",
-    "react-scripts": "1.0.14"
+    "react-scripts": "1.0.15"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
