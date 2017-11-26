@@ -244,55 +244,7 @@ class App extends Component {
       }
     }
 
-    var met = this.state.metWords;
-
-    var newWords = this.state.userSettings.newWords,
-      seenWords = this.state.userSettings.seenWords,
-      retainedWords = this.state.userSettings.retainedWords;
-
-    var testNewWords = function(phrase) {
-      if (!(phrase in met)) {
-        return true;
-      } else {
-        return (met[phrase] < 1);
-      }
-    }
-    var testSeenWords = function(phrase) {
-      if (!(phrase in met)) {
-        return false;
-      } else {
-        return ((met[phrase] > 0) && (met[phrase] < 30));
-      }
-    }
-    var testRetainedWords = function(phrase) {
-      if (!(phrase in met)) {
-        return false;
-      } else {
-        return (met[phrase] > 29);
-      }
-    }
-
-    var tests = [];
-    if (retainedWords) {
-      tests.push(testRetainedWords);
-    }
-    if (seenWords) {
-      tests.push(testSeenWords);
-    }
-    if (newWords) {
-      tests.push(testNewWords);
-    }
-
-    var filterFunction = function (phrase) {
-      for (var i = 0; i < tests.length; i++) {
-        if (tests[i](phrase)) {
-          return true;
-        };
-      }
-      return false;
-    }
-
-    newLesson.presentedMaterial = newLesson.presentedMaterial.filter(item => filterFunction(item.phrase) );
+    newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial);
 
     if (this.state.userSettings.limitNumberOfWords > 0) {
       newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
@@ -527,5 +479,57 @@ function increaseMetWords(meetingsCount) {
   return newState;
 }
 
+function filterByFamiliarity(presentedMaterial) {
+  var met = this.state.metWords;
+
+  var newWords = this.state.userSettings.newWords,
+    seenWords = this.state.userSettings.seenWords,
+    retainedWords = this.state.userSettings.retainedWords;
+
+  var testNewWords = function(phrase) {
+    if (!(phrase in met)) {
+      return true;
+    } else {
+      return (met[phrase] < 1);
+    }
+  }
+  var testSeenWords = function(phrase) {
+    if (!(phrase in met)) {
+      return false;
+    } else {
+      return ((met[phrase] > 0) && (met[phrase] < 30));
+    }
+  }
+  var testRetainedWords = function(phrase) {
+    if (!(phrase in met)) {
+      return false;
+    } else {
+      return (met[phrase] > 29);
+    }
+  }
+
+  var tests = [];
+  if (retainedWords) {
+    tests.push(testRetainedWords);
+  }
+  if (seenWords) {
+    tests.push(testSeenWords);
+  }
+  if (newWords) {
+    tests.push(testNewWords);
+  }
+
+  var filterFunction = function (phrase) {
+    for (var i = 0; i < tests.length; i++) {
+      if (tests[i](phrase)) {
+        return true;
+      };
+    }
+    return false;
+  }
+
+  return presentedMaterial.filter(item => filterFunction(item.phrase) );
+}
+
 export default App;
-export {increaseMetWords};
+export {increaseMetWords, filterByFamiliarity};
