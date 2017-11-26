@@ -2,9 +2,6 @@ import Lesson from './lesson';
 
 describe('Lesson', () => {
 
-  it('works', () => {
-  });
-
   describe('initialisation', () => {
     let lessonSource = ['one', 'two', 'three'];
 
