@@ -22,6 +22,25 @@ describe('loadPersonalPreferences', () => {
   });
 });
 
+describe('writePersonalPreferences', () => {
+  describe('without localStorage', () => {
+    it('should log error', () => {
+      let metWords = { "hi": 0, "hey": 1 };
+      let userSettings = {
+        caseSensitive: true,
+        retainedWords: true,
+        limitNumberOfWords: 0,
+        newWords: true,
+        repetitions: 1,
+        showStrokes: false,
+        spacePlacement: 'spaceBeforeOutput',
+        sortOrder: 'sortRandom',
+        seenWords: true
+      };
+    });
+  });
+});
+
 describe('matchSplitText', () => {
   describe('case insensitive, ignore spacing', () => {
     const settings = {ignoredChars: ''};
