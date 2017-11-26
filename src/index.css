@@ -438,7 +438,11 @@ label {
 
 .steno-stroke {
   background-color: #4e4e4e;
-  color: #ece9ee; }
+  color: #ece9ee;
+  letter-spacing: 0.1em;
+  padding-left: 4px;
+  padding-right: 4px;
+  speak: spell-out; }
 
 .material {
   margin-left: auto;

@@ -509,6 +509,10 @@ label {
 .steno-stroke {
   background-color: desaturate(add-tint($brand-primary, 10%), 40%);
   color: add-tint($brand-primary, 90%);
+  letter-spacing: 0.1em;
+  padding-left: 4px;
+  padding-right: 4px;
+  speak: spell-out;
 }
 .material {
   margin-left: auto;
