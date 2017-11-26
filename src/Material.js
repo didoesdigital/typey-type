@@ -12,7 +12,7 @@ class Material extends Component {
             <div className="material"><pre><span className="steno-material">{matched + unmatched}</span></pre></div>
           </div>
         </div>
-        <div className="expected">
+        <div className="expected"><div className="visually-hidden">Matching and unmatching material typed:</div>
           <div className="material"><pre><span className="matched steno-material">{matched}</span><span className="steno-material">{unmatched}</span></pre></div>
         </div>
       </div>
