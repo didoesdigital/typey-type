@@ -103,19 +103,19 @@ function parseLesson(lessonText) {
 }
 
 function loadPersonalPreferences() {
+  let metWords = {};
+  let userSettings = {
+    caseSensitive: true,
+    retainedWords: false,
+    limitNumberOfWords: 0,
+    newWords: true,
+    repetitions: 1,
+    showStrokes: false,
+    spacePlacement: 'spaceBeforeOutput',
+    sortOrder: 'sortOff',
+    seenWords: true
+  };
   if (window.localStorage) {
-    let metWords = {};
-    let userSettings = {
-      caseSensitive: true,
-      retainedWords: false,
-      limitNumberOfWords: 0,
-      newWords: true,
-      repetitions: 1,
-      showStrokes: false,
-      spacePlacement: 'spaceBeforeOutput',
-      sortOrder: 'sortOff',
-      seenWords: true
-    };
     if (window.localStorage.getItem('metWords')) {
       metWords = JSON.parse(window.localStorage.getItem('metWords'));
     }
@@ -124,6 +124,7 @@ function loadPersonalPreferences() {
     }
     return [metWords, userSettings];
   }
+  return [metWords, userSettings];
 }
 
 function writePersonalPreferences(userSettings, metWords) {
