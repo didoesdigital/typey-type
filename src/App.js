@@ -61,9 +61,9 @@ class App extends Component {
     };
   }
 
-  writePersonalPreferences() {
-    let userSettingsJSON = JSON.stringify(this.state.userSettings);
-    let metWordsJSON = JSON.stringify(this.state.metWords);
+  writePersonalPreferences(userSettings, metWords) {
+    let userSettingsJSON = JSON.stringify(userSettings);
+    let metWordsJSON = JSON.stringify(metWords);
     if (window.localStorage) {
       window.localStorage.setItem('userSettings', userSettingsJSON);
       window.localStorage.setItem('metWords', metWordsJSON);
@@ -111,7 +111,7 @@ class App extends Component {
 
   stopLesson() {
     this.stopTimer();
-    this.writePersonalPreferences();
+    this.writePersonalPreferences(this.state.userSettings, this.state.metWords);
     this.setState({
       actualText: ``,
       currentPhraseID: this.state.lesson.presentedMaterial.length,
