@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { increaseMetWords, filterByFamiliarity } from './App';
+import { increaseMetWords, filterByFamiliarity, sortLesson } from './App';
 
 it('renders without crashing', () => {
 //   const div = document.createElement('div');
@@ -37,6 +37,78 @@ describe('increaseMetWords', () => {
   });
 });
 
+describe('sortLesson', () => {
+  const metWords = {
+    "the":30,
+    "of":1
+  };
+  let presentedMaterial;
+  beforeEach(() => {
+    presentedMaterial = [
+      {phrase: 'the', stroke: '-T'},
+      {phrase: 'of', stroke: '-F'},
+      {phrase: 'and', stroke: 'SKP'}
+    ]
+  });
+
+  describe('when settings sort by random', () => {
+    const userSettings = {
+      sortOrder: 'sortRandom'
+    };
+    it('should present material in a randomised order', () => {
+      expect(sortLesson(presentedMaterial, metWords, userSettings)).not.toEqual(
+        [
+          {phrase: 'the', stroke: '-T'},
+          {phrase: 'of', stroke: '-F'},
+          {phrase: 'and', stroke: 'SKP'}
+        ]
+      );
+    });
+  });
+  describe('when settings sort by old', () => {
+    const userSettings = {
+      sortOrder: 'sortOld'
+    };
+    it('should present material by oldest met brief first', () => {
+      expect(sortLesson(presentedMaterial, metWords, userSettings)).toEqual(
+        [
+          {phrase: 'the', stroke: '-T'},
+          {phrase: 'of', stroke: '-F'},
+          {phrase: 'and', stroke: 'SKP'}
+        ]
+      );
+    });
+  });
+  describe('when settings sort by newest met brief first', () => {
+    const userSettings = {
+      sortOrder: 'sortNew'
+    };
+    it('should present material by newest met brief first', () => {
+      expect(sortLesson(presentedMaterial, metWords, userSettings)).toEqual(
+        [
+          {phrase: 'and', stroke: 'SKP'},
+          {phrase: 'of', stroke: '-F'},
+          {phrase: 'the', stroke: '-T'}
+        ]
+      );
+    });
+  });
+  describe('when settings sort off, by natural lesson order', () => {
+    const userSettings = {
+      sortOrder: 'sortOff'
+    };
+    it('should present material in order', () => {
+      expect(sortLesson(presentedMaterial, metWords, userSettings)).toEqual(
+        [
+          {phrase: 'the', stroke: '-T'},
+          {phrase: 'of', stroke: '-F'},
+          {phrase: 'and', stroke: 'SKP'}
+        ]
+      );
+    });
+  });
+});
+
 describe('filterByFamiliarity', () => {
   const presentedMaterial = [
     {phrase: 'the', stroke: '-T'},
@@ -55,7 +127,7 @@ describe('filterByFamiliarity', () => {
       seenWords: false
     };
     it('should include new words in returned presented material', () => {
-      expect(filterByFamiliarity.call({userSettings: userSettings}, presentedMaterial, metWords, userSettings)).toEqual(
+      expect(filterByFamiliarity(presentedMaterial, metWords, userSettings)).toEqual(
         [
           {phrase: 'and', stroke: 'SKP'}
         ]
@@ -69,7 +141,7 @@ describe('filterByFamiliarity', () => {
       seenWords: true
     };
     it('should include new words in returned presented material', () => {
-      expect(filterByFamiliarity.call({userSettings: userSettings}, presentedMaterial, metWords, userSettings)).toEqual(
+      expect(filterByFamiliarity(presentedMaterial, metWords, userSettings)).toEqual(
         [
           {phrase: 'of', stroke: '-F'}
         ]
@@ -83,7 +155,7 @@ describe('filterByFamiliarity', () => {
       seenWords: false
     };
     it('should include new words in returned presented material', () => {
-      expect(filterByFamiliarity.call({userSettings: userSettings}, presentedMaterial, metWords, userSettings)).toEqual(
+      expect(filterByFamiliarity(presentedMaterial, metWords, userSettings)).toEqual(
         [
           {phrase: 'the', stroke: '-T'}
         ]
@@ -97,7 +169,7 @@ describe('filterByFamiliarity', () => {
       seenWords: true
     };
     it('should include new words in returned presented material', () => {
-      expect(filterByFamiliarity.call({userSettings: userSettings}, presentedMaterial, metWords, userSettings)).toEqual(
+      expect(filterByFamiliarity(presentedMaterial, metWords, userSettings)).toEqual(
         [
           {phrase: 'the', stroke: '-T'},
           {phrase: 'of', stroke: '-F'},

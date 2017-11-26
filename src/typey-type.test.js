@@ -52,7 +52,7 @@ describe('matchSplitText', () => {
       repetitions: 1,
       showStrokes: false,
       spacePlacement: 'spaceOff',
-      sortOrder: 'off',
+      sortOrder: 'sortOff',
       seenWords: true
     };
 
@@ -116,7 +116,7 @@ describe('matchSplitText', () => {
       repetitions: 1,
       showStrokes: false,
       spacePlacement: 'spaceOff',
-      sortOrder: 'off',
+      sortOrder: 'sortOff',
       seenWords: true
     };
 
@@ -180,7 +180,7 @@ describe('matchSplitText', () => {
       repetitions: 1,
       showStrokes: false,
       spacePlacement: 'spaceBefore',
-      sortOrder: 'off',
+      sortOrder: 'sortOff',
       seenWords: true
     };
 
@@ -244,7 +244,7 @@ describe('matchSplitText', () => {
       repetitions: 1,
       showStrokes: false,
       spacePlacement: 'spaceBefore',
-      sortOrder: 'off',
+      sortOrder: 'sortOff',
       seenWords: true
     };
 
@@ -301,7 +301,7 @@ describe('matchSplitText', () => {
       repetitions: 1,
       showStrokes: false,
       spacePlacement: 'spaceAfter',
-      sortOrder: 'off',
+      sortOrder: 'sortOff',
       seenWords: true
     };
 
@@ -358,7 +358,7 @@ describe('matchSplitText', () => {
       repetitions: 1,
       showStrokes: false,
       spacePlacement: 'spaceOff',
-      sortOrder: 'off',
+      sortOrder: 'sortOff',
       seenWords: true
     };
 

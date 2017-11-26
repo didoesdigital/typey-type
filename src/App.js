@@ -40,7 +40,7 @@ class App extends Component {
         repetitions: 1,
         showStrokes: false,
         spacePlacement: 'spaceBeforeOutput',
-        sortOrder: 'off',
+        sortOrder: 'sortOff',
         seenWords: true
       },
       lesson: {
@@ -469,9 +469,16 @@ function increaseMetWords(meetingsCount) {
 function sortLesson(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings) {
   if (userSettings.sortOrder === 'sortRandom') {
     return randomise(presentedMaterial);
-  } else if ((userSettings.sortOrder === 'sortNew') || (userSettings.sortOrder === 'sortOld')) {
+  }
+  else if ((userSettings.sortOrder === 'sortNew') || (userSettings.sortOrder === 'sortOld')) {
 
     presentedMaterial = presentedMaterial.sort(function(a, b) {
+      if (!(a.phrase in met)) {
+        return -1;
+      }
+      if (!(b.phrase in met)) {
+        return 1;
+      }
       return met[a.phrase] - met[b.phrase];
     });
 
