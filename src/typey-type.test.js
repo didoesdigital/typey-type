@@ -1,6 +1,24 @@
 // import React from 'react';
 // import ReactDOM from 'react-dom';
-import { matchSplitText } from './typey-type';
+import { matchSplitText, loadPersonalPreferences, writePersonalPreferences } from './typey-type';
+
+describe('loadPersonalPreferences', () => {
+  it('should return previously met words and user settings', () => {
+    let metWords = {};
+    let userSettings = {
+      caseSensitive: true,
+      retainedWords: false,
+      limitNumberOfWords: 0,
+      newWords: true,
+      repetitions: 1,
+      showStrokes: false,
+      spacePlacement: 'spaceBeforeOutput',
+      sortOrder: 'sortOff',
+      seenWords: true
+    };
+    expect(loadPersonalPreferences()).toEqual([metWords, userSettings]);
+  });
+});
 
 describe('matchSplitText', () => {
   describe('case insensitive, ignore spacing', () => {
