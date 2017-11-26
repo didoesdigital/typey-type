@@ -230,20 +230,7 @@ class App extends Component {
       totalNumberOfHintedWords: 0
     });
 
-    if (this.state.userSettings.sortOrder === 'sortRandom') {
-      newLesson.presentedMaterial = randomise(newLesson.presentedMaterial);
-    } else if ((this.state.userSettings.sortOrder === 'sortNew') || (this.state.userSettings.sortOrder === 'sortOld')) {
-
-      var metWords = this.state.metWords;
-      newLesson.presentedMaterial = newLesson.presentedMaterial.sort(function(a, b) {
-        return metWords[a.phrase] - metWords[b.phrase];
-      });
-
-      if (this.state.userSettings.sortOrder === 'sortOld') {
-        newLesson.presentedMaterial.reverse();
-      }
-    }
-
+    newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
     newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial);
 
     if (this.state.userSettings.limitNumberOfWords > 0) {
@@ -479,6 +466,22 @@ function increaseMetWords(meetingsCount) {
   return newState;
 }
 
+function sortLesson(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings) {
+  if (userSettings.sortOrder === 'sortRandom') {
+    return randomise(presentedMaterial);
+  } else if ((userSettings.sortOrder === 'sortNew') || (userSettings.sortOrder === 'sortOld')) {
+
+    presentedMaterial = presentedMaterial.sort(function(a, b) {
+      return met[a.phrase] - met[b.phrase];
+    });
+
+    if (userSettings.sortOrder === 'sortOld') {
+      presentedMaterial = presentedMaterial.reverse();
+    }
+  }
+  return presentedMaterial;
+}
+
 function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings) {
 
   var newWords = userSettings.newWords,
@@ -531,4 +534,4 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
 }
 
 export default App;
-export {increaseMetWords, filterByFamiliarity};
+export {increaseMetWords, filterByFamiliarity, sortLesson};
