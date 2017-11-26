@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { randomise } from './utils';
-import { matchSplitText, parseLesson } from './typey-type';
+import { matchSplitText, parseLesson, loadPersonalPreferences} from './typey-type';
 import Finished from './Finished';
 import Header from './Header';
 import Typing from './Typing';
@@ -61,30 +61,6 @@ class App extends Component {
     };
   }
 
-  loadPersonalPreferences() {
-    if (window.localStorage) {
-      let metWords = {};
-      let userSettings = {
-        caseSensitive: true,
-        retainedWords: false,
-        limitNumberOfWords: 0,
-        newWords: true,
-        repetitions: 1,
-        showStrokes: false,
-        spacePlacement: 'spaceBeforeOutput',
-        sortOrder: 'sortOff',
-        seenWords: true
-      };
-      if (window.localStorage.getItem('metWords')) {
-        metWords = JSON.parse(window.localStorage.getItem('metWords'));
-      }
-      if (window.localStorage.getItem('userSettings')) {
-        userSettings = Object.assign(userSettings, JSON.parse(window.localStorage.getItem('userSettings')));
-      }
-      return [metWords, userSettings];
-    }
-  }
-
   writePersonalPreferences() {
     let userSettingsJSON = JSON.stringify(this.state.userSettings);
     let metWordsJSON = JSON.stringify(this.state.metWords);
@@ -97,7 +73,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let [metWords, userSettings] = this.loadPersonalPreferences();
+    let [metWords, userSettings] = loadPersonalPreferences();
     this.setState({
       metWords: metWords,
       userSettings: userSettings

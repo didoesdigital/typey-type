@@ -102,4 +102,28 @@ function parseLesson(lessonText) {
   return { sourceMaterial: sourceMaterial, presentedMaterial: sourceMaterial, settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
 }
 
-export {matchSplitText, parseLesson};
+function loadPersonalPreferences() {
+  if (window.localStorage) {
+    let metWords = {};
+    let userSettings = {
+      caseSensitive: true,
+      retainedWords: false,
+      limitNumberOfWords: 0,
+      newWords: true,
+      repetitions: 1,
+      showStrokes: false,
+      spacePlacement: 'spaceBeforeOutput',
+      sortOrder: 'sortOff',
+      seenWords: true
+    };
+    if (window.localStorage.getItem('metWords')) {
+      metWords = JSON.parse(window.localStorage.getItem('metWords'));
+    }
+    if (window.localStorage.getItem('userSettings')) {
+      userSettings = Object.assign(userSettings, JSON.parse(window.localStorage.getItem('userSettings')));
+    }
+    return [metWords, userSettings];
+  }
+}
+
+export {matchSplitText, parseLesson, loadPersonalPreferences};
