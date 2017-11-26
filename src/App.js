@@ -114,15 +114,7 @@ class App extends Component {
       console.log('Unable to load lesson index', e)
     });
 
-    this.getLesson().then((lessonText) => {
-      let lesson = parseLesson(lessonText);
-      this.setState({
-        lesson: lesson,
-        currentPhraseID: 0
-      }, () => {
-        this.setupLesson();
-      });
-    });
+    this.handleLesson();
   }
 
   getLesson(lessonFile = this.state.path) {
@@ -366,14 +358,26 @@ class App extends Component {
   }
 
   handleLesson(event) {
-    this.getLesson(event.target.href).then((lessonText) => {
-      var lesson = parseLesson(lessonText);
-      this.setState({lesson: lesson}, () => {
-        this.stopLesson();
-        this.setupLesson();
+    if(event) {
+      this.getLesson(event.target.href).then((lessonText) => {
+        var lesson = parseLesson(lessonText);
+        this.setState({lesson: lesson}, () => {
+          this.stopLesson();
+          this.setupLesson();
+        });
       });
-    });
-    event.preventDefault();
+      event.preventDefault();
+    } else {
+      this.getLesson().then((lessonText) => {
+        let lesson = parseLesson(lessonText);
+        this.setState({
+          lesson: lesson,
+          currentPhraseID: 0
+        }, () => {
+          this.setupLesson();
+        });
+      });
+    }
   }
 
   updateMarkup(event) {
