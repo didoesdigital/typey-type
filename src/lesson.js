@@ -15,8 +15,10 @@ class Lesson {
     return this.remainingPhrases;
   }
   visitNextPhrase() {
-    this.completedPhrases.push(this.currentPhrase);
-    this.currentPhrase = this.remainingPhrases.shift();
+    if(this.remainingPhrases.length !== 0) {
+      this.completedPhrases.push(this.currentPhrase);
+      this.currentPhrase = this.remainingPhrases.shift();
+    }
   }
 }
 
