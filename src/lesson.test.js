@@ -5,8 +5,8 @@ describe('Lesson', () => {
   it('works', () => {
   });
 
-  describe('Initialisation', () => {
-    let lessonSource = ['one','two','three'];
+  describe('initialisation', () => {
+    let lessonSource = ['one', 'two', 'three'];
 
     it('sets initial properties', () => {
       let lesson = new Lesson(lessonSource);
@@ -16,7 +16,7 @@ describe('Lesson', () => {
     });
 
     it('does not mutate source', () => {
-      expect(lessonSource).toEqual(['one','two','three']);
+      expect(lessonSource).toEqual(['one', 'two', 'three']);
     });
   });
 
