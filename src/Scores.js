@@ -13,7 +13,7 @@ class Scores extends Component {
       <table class="timer-table text-small">
         <tbody>
           <tr>
-            <th><abbr title="words per minute">WPM:</abbr></th>
+            <th><abbr title="words per minute">WPM</abbr>:</th>
             <td class="text-right">${wordsPerMinute}</td>
           </tr>
           <tr>
@@ -65,7 +65,7 @@ class Scores extends Component {
           <table className="timer-table text-small">
             <tbody>
               <tr>
-                <th><abbr title="words per minute">WPM:</abbr></th>
+                <th><abbr title="words per minute">WPM</abbr>:</th>
                 <td className="text-right">0</td>
               </tr>
               <tr>
