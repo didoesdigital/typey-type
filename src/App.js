@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { randomise } from './utils';
-import { matchSplitText, parseLesson, loadPersonalPreferences} from './typey-type';
+import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences} from './typey-type';
 import Finished from './Finished';
 import Header from './Header';
 import Typing from './Typing';
@@ -61,17 +61,6 @@ class App extends Component {
     };
   }
 
-  writePersonalPreferences(userSettings, metWords) {
-    let userSettingsJSON = JSON.stringify(userSettings);
-    let metWordsJSON = JSON.stringify(metWords);
-    if (window.localStorage) {
-      window.localStorage.setItem('userSettings', userSettingsJSON);
-      window.localStorage.setItem('metWords', metWordsJSON);
-    } else {
-      console.log('Unable to write to local storage. Changes to User Settings and Met Words will be lost.');
-    }
-  }
-
   componentDidMount() {
     let [metWords, userSettings] = loadPersonalPreferences();
     this.setState({
@@ -111,7 +100,7 @@ class App extends Component {
 
   stopLesson() {
     this.stopTimer();
-    this.writePersonalPreferences(this.state.userSettings, this.state.metWords);
+    writePersonalPreferences(this.state.userSettings, this.state.metWords);
     this.setState({
       actualText: ``,
       currentPhraseID: this.state.lesson.presentedMaterial.length,

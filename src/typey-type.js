@@ -126,4 +126,15 @@ function loadPersonalPreferences() {
   }
 }
 
-export {matchSplitText, parseLesson, loadPersonalPreferences};
+function writePersonalPreferences(userSettings, metWords) {
+  let userSettingsJSON = JSON.stringify(userSettings);
+  let metWordsJSON = JSON.stringify(metWords);
+  if (window.localStorage) {
+    window.localStorage.setItem('userSettings', userSettingsJSON);
+    window.localStorage.setItem('metWords', metWordsJSON);
+  } else {
+    console.log('Unable to write to local storage. Changes to User Settings and Met Words will be lost.');
+  }
+}
+
+export {matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences};
