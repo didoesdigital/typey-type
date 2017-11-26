@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { randomise } from './utils';
-import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences} from './typey-type';
+import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson} from './typey-type';
 import Finished from './Finished';
 import Header from './Header';
 import Typing from './Typing';
@@ -80,17 +80,6 @@ class App extends Component {
     });
 
     this.handleLesson();
-  }
-
-  getLesson(lessonFile = this.state.path) {
-    return fetch(lessonFile, {
-      method: "GET",
-      credentials: "same-origin"
-    }).then((response) => {
-      return response.text();
-    }, function(error) {
-      console.log(error);
-    });
   }
 
   handleStopLesson(event) {
@@ -324,7 +313,7 @@ class App extends Component {
 
   handleLesson(event) {
     if(event) {
-      this.getLesson(event.target.href).then((lessonText) => {
+      getLesson(event.target.href || this.state.path).then((lessonText) => {
         var lesson = parseLesson(lessonText);
         this.setState({lesson: lesson}, () => {
           this.stopLesson();
@@ -333,7 +322,7 @@ class App extends Component {
       });
       event.preventDefault();
     } else {
-      this.getLesson().then((lessonText) => {
+      getLesson(this.state.path).then((lessonText) => {
         let lesson = parseLesson(lessonText);
         this.setState({
           lesson: lesson,

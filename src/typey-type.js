@@ -138,4 +138,15 @@ function writePersonalPreferences(userSettings, metWords) {
   }
 }
 
-export {matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences};
+function getLesson(lessonFile) {
+  return fetch(lessonFile, {
+    method: "GET",
+    credentials: "same-origin"
+  }).then((response) => {
+    return response.text();
+  }, function(error) {
+    console.log(error);
+  });
+}
+
+export {matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson};
