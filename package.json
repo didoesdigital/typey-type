@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://didoesdigital.com/typey-type",
   "dependencies": {
+    "flow-bin": "^0.59.0",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.1",
     "react": "^16.0.0",
@@ -19,6 +20,7 @@
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "flow": "flow",
     "eject": "react-scripts eject"
   }
 }
