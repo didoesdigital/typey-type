@@ -1,10 +1,21 @@
-function matchLessonToTerm(lesson, value) {
+// @flow
+
+type Lesson = {
+  "title": "Test lesson",
+  "subtitle": "Test",
+  "category": "Drills",
+  "subcategory": "Test drills",
+  "path": "./lessons/test-lesson.txt"
+};
+type PresentedMaterial = [{phrase: '', stroke: ''}];
+
+function matchLessonToTerm(lesson : Lesson, value : string) {
   var terms = value.toLowerCase().split(/\s+/);
   var text = [lesson.title, lesson.subtitle, lesson.category, lesson.subcategory].join(' ').toLowerCase();
   return terms.every( term => text.indexOf(term) !== -1);
 }
 
-function sortLessons(a, b, value) {
+function sortLessons(a : Lesson, b : Lesson, value : string) {
   const aLower = a.title.toLowerCase()
   const bLower = b.title.toLowerCase()
   const valueLower = value.toLowerCase()
@@ -16,7 +27,7 @@ function sortLessons(a, b, value) {
   return aLower < bLower ? -1 : 1
 }
 
-function randomise(array) {
+function randomise(array : Array<PresentedMaterial>) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   while (0 !== currentIndex) {
