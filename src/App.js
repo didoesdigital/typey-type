@@ -4,8 +4,11 @@ import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPref
 import {
   BrowserRouter as Router,
   Route,
+  Switch,
   Link
 } from 'react-router-dom';
+import Category from './Category';
+import Lessons from './Lessons';
 import Finished from './Finished';
 import Header from './Header';
 import Typing from './Typing';
@@ -419,7 +422,14 @@ class App extends Component {
             value={this.state.value}
           />
           <div>
-            <BasicExample />
+            <Link to="/">Home</Link>
+            <Link to="/category">Category</Link>
+            <Link to="/lessons">Lessons</Link>
+            <Switch>
+              <Route exact={true} path="/" component={Home}/>
+              <Route path="/category" component={Category}/>
+              <Route path="/lessons" component={Lessons}/>
+            </Switch>
             <Typing
               actualText={this.state.actualText}
               changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
@@ -552,68 +562,27 @@ const Home = () => (
   </div>
 )
 
-const About = () => (
-  <div>
-    <h2>About</h2>
-<p>The process of writing shorthand is called stenography. Using a stenotype machine, you can type over 100 or even 200 words per minute. For a real overview, see the Open steno project.</p>
+// const About = () => (
+//   <div>
+//     <h2>About</h2>
+// <p>The process of writing shorthand is called stenography. Using a stenotype machine, you can type over 100 or even 200 words per minute. For a real overview, see the Open steno project.</p>
 
-<p>Plover is the world's first free, open-source stenography program, which translates chorded key strokes into meaningful words.</p>
-<p>Note: The words per minute score is an estimate, assuming 5 characters per word.</p>
-  </div>
-)
+// <p>Plover is the world's first free, open-source stenography program, which translates chorded key strokes into meaningful words.</p>
+// <p>Note: The words per minute score is an estimate, assuming 5 characters per word.</p>
+//   </div>
+// )
 
-const Lesson = ({ match }) => (
-  <div>
-    <h3>{match.params.lessonId}</h3>
-  </div>
-)
+// const Lesson = ({ match }) => (
+//   <div>
+//     <h3>{match.params.lessonId}</h3>
+//   </div>
+// )
 
-const Lessons = ({ match }) => (
-  <div>
-    <h2>Lessons</h2>
-    <ul>
-      <li>
-        <Link to={`${match.url}/drills`}>
-          Drills
-        </Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/collections`}>
-          Collections
-        </Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/stories`}>
-          Stories
-        </Link>
-      </li>
-    </ul>
+// const Lessons = ({ match }) => (
+//   <div>
+//     <h2>Lessons</h2>
+//   </div>
+// )
 
-    <Route path={`${match.url}/:lessonId`} component={Lesson}/>
-    <Route exact path={match.url} render={() => (
-      <h3>Please select a lesson.</h3>
-    )}/>
-  </div>
-)
-
-const BasicExample = () => (
-  <Router>
-    <div>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/lessons">Lessons</Link></li>
-      </ul>
-
-      <hr/>
-
-      <Route exact path="/" component={Home}/>
-      <Route path="/about" component={About}/>
-      <Route path="/lessons" component={Lessons}/>
-    </div>
-  </Router>
-)
-
-export {BasicExample};
 export default App;
 export {increaseMetWords, filterByFamiliarity, sortLesson};
