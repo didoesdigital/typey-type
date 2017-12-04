@@ -4,16 +4,16 @@ import React from 'react';
 // import './index.css';
 
 const Lesson = ({match,data}) => {
-  const lessonId = parseInt(match.params.lessonId, 10);
-  const lesson = data.find(lesson => lesson.id === lessonId);
+  const lesson = data.find(lesson => lesson.path === '/'+match.params.category+'/'+match.params.lessonPath+'/lesson.txt');
   let lessonData;
 
   if(lesson)
     lessonData = <div>
-      <h3>{lesson.name}</h3>
-      <p>{lesson.description}</p>
-      <hr/>
-      <h4>{lesson.status}</h4>  </div>;
+      <h3>{lesson.title}</h3>
+      <p>{lesson.subtitle}</p>
+      <p>{lesson.category}</p>
+      <p>{lesson.subcategory}</p>
+       </div>;
   else
     lessonData = <h2>That lesson is missing.</h2>;
 

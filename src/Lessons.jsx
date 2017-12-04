@@ -11,16 +11,16 @@ class Lessons extends Component {
     super(props);
     this.charsPerWord = 5;
     this.state = {
-      lessonsIndex: []
+      lessonIndex: []
     };
   }
 
   componentDidMount() {
-    fetchLessonIndex().then((json) => this.setState({ lessonsIndex: json }, () => {
-      let linkList = this.state.lessonsIndex.map( (lesson) => {
+    fetchLessonIndex().then((json) => this.setState({ lessonIndex: json }, () => {
+      let linkList = this.state.lessonIndex.map( (lesson) => {
         return(
           <li key={ lesson.path }>
-            <Link to={`${this.props.match.url}/${lesson.path}`}>{lesson.title}</Link>
+            <Link to={`${this.props.match.url}${lesson.path}`}>{lesson.title}</Link>
           </li>
         )
       });
@@ -32,18 +32,18 @@ class Lessons extends Component {
   render() {
     return(
       <div>
-        <div>
-          <div>
-            <h3>Lessons</h3>
-            <ul>{this.state.linkList}</ul>
-          </div>
-        </div>
 
-        <Route path={`${this.props.match.url}/:lessonId`} render={ (props) =>
-          <Lesson data={this.state.lessonsIndex} {...props} />
+        <Route path={`${this.props.match.url}/:category/:lessonPath`} render={ (props) =>
+          <Lesson data={this.state.lessonIndex} {...props} />
         } />
-        <Route exact path={this.props.match.url} render={() => (
-          <div>Select a lesson.</div>
+        <Route exact={true} path={this.props.match.url} render={() => (
+          <div>
+            <div>
+              <h3>Lessons</h3>
+              <p>Select a lesson:</p>
+              <ul>{this.state.linkList}</ul>
+            </div>
+          </div>
         )} />
       </div>
     )
