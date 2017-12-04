@@ -43,8 +43,7 @@ class Header extends Component {
                 value={this.props.value}
                 wrapperStyle={{ position: 'relative', display: 'table-cell', paddingRight: '0.5em', width: '100%' }}
               />
-              <a href={this.props.path} onClick={this.props.handleGetLesson} className="link-button table-cell" role="button">Start lesson</a>
-              <Link to={this.props.path} className="link-button table-cell" role="button">{this.props.lessonTitle || 'Go'}</Link>
+              <Link to={'/lessons'+this.props.path.replace(/lesson\.txt$/,'')} className="link-button table-cell" role="button">Start</Link>
             </div>
           </nav>
         </div>
