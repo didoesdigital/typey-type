@@ -4,7 +4,7 @@ import React from 'react';
 // import './index.css';
 
 const Lesson = ({match,data}) => {
-  const lesson = data.find(lesson => lesson.path === '/'+match.params.category+'/'+match.params.lessonPath+'/lesson.txt');
+  const lesson = data.find(lesson => '/lessons'+lesson.path === match.url+'lesson.txt');
   let lessonData;
 
   if(lesson)
