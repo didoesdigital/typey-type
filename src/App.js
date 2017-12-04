@@ -411,7 +411,9 @@ class App extends Component {
             <Switch>
               <Route exact={true} path="/" component={Home}/>
               <Route path="/about" component={About}/>
-              <Route path="/lessons" component={Lessons}/>
+              <Route path="/lessons" render={ (props) =>
+                <Lessons data={this.state.lessonIndex} {...props} />
+              } />
             </Switch>
             <Typing
               actualText={this.state.actualText}
