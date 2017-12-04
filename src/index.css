@@ -144,6 +144,10 @@ input, textarea {
 .clearfix {
   display: flow-root; }
 
+.unstyled-list {
+  list-style-type: none;
+  margin-left: 0; }
+
 .header {
   background-color: #2e173b;
   color: #fff;

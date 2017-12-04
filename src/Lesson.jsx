@@ -10,17 +10,17 @@ const Lesson = ({match,data}) => {
 
   if(lesson)
     lessonData = <div>
-      <h3> {lesson.name} </h3>
+      <h3>{lesson.name}</h3>
       <p>{lesson.description}</p>
       <hr/>
       <h4>{lesson.status}</h4>  </div>;
   else
-    lessonData = <h2> Sorry. Lesson doesnt exist </h2>;
+    lessonData = <h2>That lesson is missing.</h2>;
 
   return (
-  <div>
+    <div>
       <div>
-         {lessonData}
+        {lessonData}
       </div>
     </div>
   )

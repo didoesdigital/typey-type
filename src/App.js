@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { randomise } from './utils';
 import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson} from './typey-type';
 import {
-  BrowserRouter as Router,
   Route,
   Switch,
   Link
@@ -20,7 +19,7 @@ class App extends Component {
     this.charsPerWord = 5;
     this.state = {
       value: '',
-      path: './lessons/drills/google-1000-english/lesson.txt',
+      path: process.env.PUBLIC_URL + '/lessons/drills/google-1000-english/lesson.txt',
       currentPhraseID: 0,
       currentPhraseMeetingSuccess: 1,
       actualText: ``,
@@ -64,7 +63,7 @@ class App extends Component {
         "subtitle": "",
         "category": "Collections",
         "subcategory": "",
-        "path": "./lessons/drills/google-1000-english/lesson.txt"
+        "path": process.env.PUBLIC_URL + "/lessons/drills/google-1000-english/lesson.txt"
       }]
     };
   }
@@ -76,7 +75,7 @@ class App extends Component {
       userSettings: userSettings
     });
 
-    fetch('./lessons/lessonIndex.json', {
+    fetch(process.env.PUBLIC_URL + '/lessons/lessonIndex.json', {
       method: "GET",
       credentials: "same-origin"
     }).then((response) => {

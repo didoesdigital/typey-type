@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Autocomplete from 'react-autocomplete';
 import { matchLessonToTerm, sortLessons } from './utils';
 import './App.css';
@@ -40,6 +41,7 @@ class Header extends Component {
                 wrapperStyle={{ position: 'relative', display: 'table-cell', paddingRight: '0.5em', width: '100%' }}
               />
               <a href={this.props.path} onClick={this.props.handleGetLesson} className="link-button table-cell" role="button">Start lesson</a>
+              <Link to={this.props.path} className="link-button table-cell" role="button">{this.props.lessonTitle || 'Go'}</Link>
             </div>
           </nav>
         </div>

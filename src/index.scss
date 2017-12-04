@@ -155,6 +155,10 @@ input, textarea {
 .clearfix {
   display: flow-root;
 }
+.unstyled-list {
+  list-style-type: none;
+  margin-left: 0;
+}
 
 // Class styles
 .header {
