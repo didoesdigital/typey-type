@@ -9,6 +9,7 @@ import {
 import Lessons from './Lessons';
 import Finished from './Finished';
 import Header from './Header';
+import Footer from './Footer';
 import Typing from './Typing';
 import './App.css';
 
@@ -391,11 +392,7 @@ class App extends Component {
               userSettings={this.state.userSettings}
               />
           </div>
-          <footer>
-            <p className="text-center mb1 mt1"><small>Learn more about <a href="https://didoesdigital.com/plover/">stenography and Plover</a>.</small></p>
-            <p className="text-center mb1 mt1"><small>Email: <a href="mailto:didoesdigital+steno@gmail.com" className="link-missing-full-stop">DiDoesDigital+Steno@gmail.com</a></small></p>
-            <p className="text-center mb1 mt1"><small>Made with <span aria-label="love" role="img">❤️</span> by <a href="https://twitter.com/didoesdigital">@DiDoesDigital</a>.</small></p>
-          </footer>
+          <Footer />
         </div>
       );
     } else {
@@ -422,6 +419,7 @@ class App extends Component {
           <div>
             <Switch>
               <Route exact={true} path="/" component={Home}/>
+              <Route path="/about" component={About}/>
               <Route path="/lessons" component={Lessons}/>
             </Switch>
             <Typing
@@ -450,11 +448,7 @@ class App extends Component {
               userSettings={this.state.userSettings}
               />
           </div>
-          <footer>
-            <p className="text-center mb1 mt1"><small>Learn more about <a href="https://didoesdigital.com/plover/">stenography and Plover</a>.</small></p>
-            <p className="text-center mb1 mt1"><small>Email: <a href="mailto:didoesdigital+steno@gmail.com" className="link-missing-full-stop">DiDoesDigital+Steno@gmail.com</a></small></p>
-            <p className="text-center mb1 mt1"><small>Made with <span aria-label="love" role="img">❤️</span> by <a href="https://twitter.com/didoesdigital">@DiDoesDigital</a>.</small></p>
-          </footer>
+          <Footer />
         </div>
       );
     }
@@ -566,15 +560,15 @@ const Home = () => {
   }
 }
 
-// const About = () => (
-//   <div>
-//     <h2>About</h2>
-// <p>The process of writing shorthand is called stenography. Using a stenotype machine, you can type over 100 or even 200 words per minute. For a real overview, see the Open steno project.</p>
+const About = () => (
+  <div>
+    <h2>About</h2>
+<p>The process of writing shorthand is called stenography. Using a stenotype machine, you can type over 100 or even 200 words per minute. For a real overview, see the Open steno project.</p>
 
-// <p>Plover is the world's first free, open-source stenography program, which translates chorded key strokes into meaningful words.</p>
-// <p>Note: The words per minute score is an estimate, assuming 5 characters per word.</p>
-//   </div>
-// )
+<p>Plover is the world's first free, open-source stenography program, which translates chorded key strokes into meaningful words.</p>
+<p>Note: The words per minute score is an estimate, assuming 5 characters per word.</p>
+  </div>
+)
 
 // const Lesson = ({ match }) => (
 //   <div>
