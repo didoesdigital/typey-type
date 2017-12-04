@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { randomise } from './utils';
-import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson} from './typey-type';
+import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, isFirstVisit} from './typey-type';
 import {
   Route,
   Switch,
   Link
 } from 'react-router-dom';
-import Category from './Category';
 import Lessons from './Lessons';
 import Finished from './Finished';
 import Header from './Header';
@@ -421,12 +420,8 @@ class App extends Component {
             value={this.state.value}
           />
           <div>
-            <Link to="/">Home</Link>
-            <Link to="/category">Category</Link>
-            <Link to="/lessons">Lessons</Link>
             <Switch>
               <Route exact={true} path="/" component={Home}/>
-              <Route path="/category" component={Category}/>
               <Route path="/lessons" component={Lessons}/>
             </Switch>
             <Typing
@@ -555,11 +550,21 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
   return presentedMaterial.filter(item => filterFunction(item.phrase) );
 }
 
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-)
+const Home = () => {
+  if (isFirstVisit()) {
+    return (
+      <div>
+        <h2>Welcome to Typey type for stenographers</h2>
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <h2>Welcome back</h2>
+      </div>
+    )
+  }
+}
 
 // const About = () => (
 //   <div>

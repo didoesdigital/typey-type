@@ -11,7 +11,9 @@ class Header extends Component {
         <div className="header">
           <nav>
             <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
-            <div role="banner" className="site-heading-banner"><a href="./" className="site-heading-link">Typey type</a></div>
+            <div role="banner" className="site-heading-banner"><a href="./" className="site-heading-link">Typey type</a>
+              <Link to="/lessons">All lessons</Link>
+            </div>
             <div className="table search-container">
               <Autocomplete
                 getItemValue={(item) => item.title}

@@ -22,30 +22,30 @@ const Lessons = ({ match }) => {
     }
   ];
 
-  var linkList = lessonsIndex.map( (lesson) => {
+  let linkList = lessonsIndex.map( (lesson) => {
     return(
       <li key={ lesson.id }>
         <Link to={`${match.url}/${lesson.id}`}>{lesson.name}</Link>
       </li>
       )
-  })
+  });
 
   return(
     <div>
       <div>
-      <div>
-        <h3>Lessons</h3>
-        <ul>{linkList}</ul>
+        <div>
+          <h3>Lessons</h3>
+          <ul>{linkList}</ul>
+        </div>
       </div>
-    </div>
 
-    <Route path={`${match.url}/:lessonId`} render={ (props) =>
-        <Lesson data={lessonsIndex} {...props} />}/>
-    <Route exact path={match.url} render={() => (
-      <div>Please select a lesson.</div>
-    )}
-  />
-  </div>
+      <Route path={`${match.url}/:lessonId`} render={ (props) =>
+        <Lesson data={lessonsIndex} {...props} />
+      } />
+      <Route exact path={match.url} render={() => (
+        <div>Select a lesson.</div>
+      )} />
+    </div>
   )
 
 }

@@ -102,6 +102,14 @@ function parseLesson(lessonText) {
   return { sourceMaterial: sourceMaterial, presentedMaterial: sourceMaterial, settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
 }
 
+function isFirstVisit() {
+  if (window.localStorage && window.localStorage.getItem('metWords')) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 function loadPersonalPreferences() {
   let metWords = {};
   let userSettings = {
@@ -149,4 +157,4 @@ function getLesson(lessonFile) {
   });
 }
 
-export {matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson};
+export {matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, isFirstVisit};
