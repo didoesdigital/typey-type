@@ -157,4 +157,17 @@ function getLesson(lessonFile) {
   });
 }
 
-export {matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, isFirstVisit};
+function fetchLessonIndex() {
+  return fetch(process.env.PUBLIC_URL + '/lessons/lessonIndex.json', {
+    method: "GET",
+    credentials: "same-origin"
+  }).then((response) => {
+    return response.json()
+  }).then(json => {
+    return(json);
+  }).catch(function(e) {
+    console.log('Unable to load lesson index', e)
+  });
+}
+
+export {matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, fetchLessonIndex, isFirstVisit};

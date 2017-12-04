@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { randomise } from './utils';
-import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, isFirstVisit} from './typey-type';
+import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, fetchLessonIndex, isFirstVisit} from './typey-type';
 import {
   Route,
   Switch,
@@ -75,16 +75,7 @@ class App extends Component {
       userSettings: userSettings
     });
 
-    fetch(process.env.PUBLIC_URL + '/lessons/lessonIndex.json', {
-      method: "GET",
-      credentials: "same-origin"
-    }).then((response) => {
-      return response.json()
-    }).then(json => {
-      this.setState({ lessonIndex: json });
-    }).catch(function(e) {
-      console.log('Unable to load lesson index', e)
-    });
+    fetchLessonIndex().then((json) => this.setState({ lessonIndex: json }))
 
     this.handleLesson();
   }

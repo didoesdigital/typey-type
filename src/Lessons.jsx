@@ -1,52 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 // import App from './App';
 import { Route, Link } from 'react-router-dom';
+import { fetchLessonIndex } from './typey-type';
 import Lesson from './Lesson';
 // import './index.css';
 
-const Lessons = ({ match }) => {
+class Lessons extends Component {
+  constructor(props) {
+    super(props);
+    this.charsPerWord = 5;
+    this.state = {
+      lessonsIndex: []
+    };
+  }
 
-  const lessonsIndex = [
-    {
-      id: 1,
-      name: 'test1 name',
-      description: 'test1 desc',
-      status: 'test1 status'
-    },
-    {
-      id: 2,
-      name: 'test2 name',
-      description: 'test2 desc',
-      status: 'test2 status'
-    }
-  ];
+  componentDidMount() {
+    fetchLessonIndex().then((json) => this.setState({ lessonsIndex: json }, () => {
+      let linkList = this.state.lessonsIndex.map( (lesson) => {
+        return(
+          <li key={ lesson.path }>
+            <Link to={`${this.props.match.url}/${lesson.path}`}>{lesson.title}</Link>
+          </li>
+        )
+      });
+      this.setState({linkList: linkList});
+    }));
 
-  let linkList = lessonsIndex.map( (lesson) => {
+  }
+
+  render() {
     return(
-      <li key={ lesson.id }>
-        <Link to={`${match.url}/${lesson.id}`}>{lesson.name}</Link>
-      </li>
-      )
-  });
-
-  return(
-    <div>
       <div>
         <div>
-          <h3>Lessons</h3>
-          <ul>{linkList}</ul>
+          <div>
+            <h3>Lessons</h3>
+            <ul>{this.state.linkList}</ul>
+          </div>
         </div>
-      </div>
 
-      <Route path={`${match.url}/:lessonId`} render={ (props) =>
-        <Lesson data={lessonsIndex} {...props} />
-      } />
-      <Route exact path={match.url} render={() => (
-        <div>Select a lesson.</div>
-      )} />
-    </div>
-  )
+        <Route path={`${this.props.match.url}/:lessonId`} render={ (props) =>
+          <Lesson data={this.state.lessonsIndex} {...props} />
+        } />
+        <Route exact path={this.props.match.url} render={() => (
+          <div>Select a lesson.</div>
+        )} />
+      </div>
+    )
+  }
 
 }
 
