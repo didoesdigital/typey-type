@@ -10,7 +10,7 @@ const Lessons = ({match,data}) => {
     }
     return(
       <li key={ lesson.path }>
-        <Link to={`${match.url}${lesson.path}`.replace(/lesson\.txt$/,'')}>{lesson.title}{lessonsubtitle}</Link>
+        <Link to={`${match.url}${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')}>{lesson.title}{lessonsubtitle}</Link>
       </li>
     )
   });
