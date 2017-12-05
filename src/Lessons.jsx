@@ -18,7 +18,10 @@ const Lessons = ({match,data}) => {
   return(
     <div>
 
-      <Route path={`${match.url}/:category/:lessonPath`} render={ (props) =>
+      <Route path={`${match.url}/:category/:subcategory/:lessonPath`} render={ (props) =>
+        <Lesson data={data} {...props} />
+      } />
+      <Route path={`${match.url}/drills/:lessonPath`} render={ (props) =>
         <Lesson data={data} {...props} />
       } />
       <Route exact={true} path={match.url} render={() => (
