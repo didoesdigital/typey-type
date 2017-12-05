@@ -4,9 +4,13 @@ import Lesson from './Lesson';
 
 const Lessons = ({match,data}) => {
   const linkList = data.map( (lesson) => {
+    let lessonsubtitle = '';
+    if (lesson.subtitle.length > 0) {
+      lessonsubtitle = ': '+lesson.subtitle;
+    }
     return(
       <li key={ lesson.path }>
-        <Link to={`${match.url}${lesson.path}`.replace(/lesson\.txt$/,'')}>{lesson.title}</Link>
+        <Link to={`${match.url}${lesson.path}`.replace(/lesson\.txt$/,'')}>{lesson.title}{lessonsubtitle}</Link>
       </li>
     )
   });

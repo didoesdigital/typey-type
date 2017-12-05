@@ -7,15 +7,20 @@ const Lesson = ({match,data}) => {
   const lesson = data.find(lesson => '/lessons'+lesson.path === match.url+'lesson.txt');
   let lessonData;
 
-  if(lesson)
+  if(lesson) {
+    let lessonsubtitle = '';
+    if (lesson.subtitle.length > 0) {
+      lessonsubtitle = ': '+lesson.subtitle;
+    }
+
     lessonData = <div>
-      <h3>{lesson.title}</h3>
-      <p>{lesson.subtitle}</p>
+      <h3>{lesson.title}{lessonsubtitle}</h3>
       <p>{lesson.category}</p>
       <p>{lesson.subcategory}</p>
-       </div>;
-  else
+    </div>;
+  } else {
     lessonData = <h2>That lesson is missing.</h2>;
+  }
 
   return (
     <div>
