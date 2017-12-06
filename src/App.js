@@ -3,8 +3,7 @@ import { randomise } from './utils';
 import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, fetchLessonIndex} from './typey-type';
 import {
   Route,
-  Switch,
-  Link
+  Switch
 } from 'react-router-dom';
 import Lessons from './Lessons';
 import Finished from './Finished';

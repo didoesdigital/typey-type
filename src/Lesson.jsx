@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
-// import App from './App';
-// import './index.css';
 import Material from './Material';
 import TypedText from './TypedText';
 import Scores from './Scores';
 import UserSettings from './UserSettings';
-import './App.css';
 
 class Lesson extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const lesson = this.props.lessonIndex.find(lesson => '/lessons'+lesson.path === this.props.match.url+'lesson.txt');
     let lessonData;
