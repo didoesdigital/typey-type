@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Link } from 'react-router-dom';
 import Lesson from './Lesson';
 
-const Lessons = ({match,data}) => {
+const Lessons = ({match,data, handleLesson}) => {
   const linkList = data.map( (lesson) => {
     let lessonsubtitle = '';
     if (lesson.subtitle.length > 0) {
@@ -19,10 +19,14 @@ const Lessons = ({match,data}) => {
     <div>
 
       <Route path={`${match.url}/:category/:subcategory/:lessonPath`} render={ (props) =>
-        <Lesson data={data} {...props} />
+          <Lesson data={data}
+            handleLesson={handleLesson}
+            {...props} />
       } />
       <Route path={`${match.url}/drills/:lessonPath`} render={ (props) =>
-        <Lesson data={data} {...props} />
+          <Lesson data={data}
+            handleLesson={handleLesson}
+            {...props} />
       } />
       <Route exact={true} path={match.url} render={() => (
         <div>

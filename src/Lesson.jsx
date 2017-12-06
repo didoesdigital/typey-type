@@ -3,11 +3,12 @@ import React from 'react';
 // import App from './App';
 // import './index.css';
 
-const Lesson = ({match,data}) => {
+const Lesson = ({match,data, handleLesson}) => {
   const lesson = data.find(lesson => '/lessons'+lesson.path === match.url+'lesson.txt');
   let lessonData;
 
   if(lesson) {
+    handleLesson('/lessons'+lesson.path);
     let lessonsubtitle = '';
     if (lesson.subtitle.length > 0) {
       lessonsubtitle = ': '+lesson.subtitle;

@@ -248,27 +248,19 @@ class App extends Component {
     this.setState({ currentPhraseID: 0 });
   }
 
-  handleLesson(event) {
-    if(event) {
-      getLesson(event.target.href || this.state.path).then((lessonText) => {
-        var lesson = parseLesson(lessonText);
-        this.setState({lesson: lesson}, () => {
-          this.stopLesson();
-          this.setupLesson();
-        });
+  handleLesson(path) {
+    if (path === this.state.path) {return;}
+    console.log("handlelesson");
+    console.log(path);
+    getLesson(path || this.state.path).then((lessonText) => {
+      let lesson = parseLesson(lessonText);
+      this.setState({
+        lesson: lesson,
+        currentPhraseID: 0
+      }, () => {
+        this.setupLesson();
       });
-      event.preventDefault();
-    } else {
-      getLesson(this.state.path).then((lessonText) => {
-        let lesson = parseLesson(lessonText);
-        this.setState({
-          lesson: lesson,
-          currentPhraseID: 0
-        }, () => {
-          this.setupLesson();
-        });
-      });
-    }
+    });
   }
 
   updateMarkup(event) {
@@ -412,7 +404,9 @@ class App extends Component {
               <Route exact={true} path="/" component={Home}/>
               <Route path="/about" component={About}/>
               <Route path="/lessons" render={ (props) =>
-                <Lessons data={this.state.lessonIndex} {...props} />
+                  <Lessons data={this.state.lessonIndex}
+                    handleLesson={this.handleLesson.bind(this)}
+                {...props} />
               } />
             </Switch>
             <Typing
