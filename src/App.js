@@ -248,7 +248,6 @@ class App extends Component {
   }
 
   handleLesson(path) {
-    if (path === this.state.path) {return;}
     getLesson(path || this.state.path).then((lessonText) => {
       let lesson = parseLesson(lessonText);
       this.setState({
