@@ -54,7 +54,7 @@ class Header extends Component {
               <h2>{this.props.lessonSubTitle}</h2>
             </header>
           </div>
-          <a href={this.props.path} onClick={this.props.handleGetLesson} className="link-button table-cell" role="button">Restart lesson</a>
+          <Link to={'/lessons'+this.props.path.replace(/lesson\.txt$/,'')} className="link-button table-cell" role="button">Restart lesson</Link>
           <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button table-cell" role="button">Stop lesson</a>
         </div>
       </div>

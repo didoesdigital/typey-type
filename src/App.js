@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { randomise } from './utils';
-import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, fetchLessonIndex, isFirstVisit} from './typey-type';
+import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, fetchLessonIndex} from './typey-type';
 import {
   Route,
   Switch,
@@ -9,8 +9,8 @@ import {
 import Lessons from './Lessons';
 import Finished from './Finished';
 import Header from './Header';
+import Home from './Home';
 import Footer from './Footer';
-import Typing from './Typing';
 import './App.css';
 
 class App extends Component {
@@ -250,8 +250,6 @@ class App extends Component {
 
   handleLesson(path) {
     if (path === this.state.path) {return;}
-    console.log("handlelesson");
-    console.log(path);
     getLesson(path || this.state.path).then((lessonText) => {
       let lesson = parseLesson(lessonText);
       this.setState({
@@ -401,16 +399,11 @@ class App extends Component {
           />
           <div>
             <Switch>
-              <Route exact={true} path="/" component={Home}/>
-              <Route path="/about" component={About}/>
-              <Route path="/lessons" render={ (props) =>
-                  <Lessons data={this.state.lessonIndex}
+              <Route exact={true} path="/" render={(props) =>
+                  <Home 
+                    lessonIndex={this.state.lessonIndex}
                     lesson={this.state.lesson}
                     handleLesson={this.handleLesson.bind(this)}
-                {...props} />
-              } />
-            </Switch>
-            <Typing
               actualText={this.state.actualText}
               changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
               changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
@@ -434,7 +427,41 @@ class App extends Component {
               totalWordCount={this.state.lesson.presentedMaterial.length}
               updateMarkup={this.updateMarkup.bind(this)}
               userSettings={this.state.userSettings}
-              />
+              {...props}
+                  />
+              }/>
+              <Route path="/about" component={About}/>
+              <Route path="/lessons" render={ (props) =>
+                  <Lessons
+                    lessonIndex={this.state.lessonIndex}
+                    lesson={this.state.lesson}
+                    handleLesson={this.handleLesson.bind(this)}
+              actualText={this.state.actualText}
+              changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
+              changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
+              changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
+              changeUserSetting={this.changeUserSetting.bind(this)}
+              currentPhrase={this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase}
+              currentStroke={this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke}
+              disableUserSettings={this.state.disableUserSettings}
+              handleGetLesson={this.handleLesson.bind(this)}
+              handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
+              handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
+              settings={this.state.lesson.settings}
+              showStrokesInLesson={this.state.showStrokesInLesson}
+              timer={this.state.timer}
+              totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+              totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
+              totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
+              totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
+              totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
+              totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
+              totalWordCount={this.state.lesson.presentedMaterial.length}
+              updateMarkup={this.updateMarkup.bind(this)}
+              userSettings={this.state.userSettings}
+                {...props} />
+              } />
+            </Switch>
           </div>
           <Footer />
         </div>
@@ -530,22 +557,6 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
   }
 
   return presentedMaterial.filter(item => filterFunction(item.phrase) );
-}
-
-const Home = () => {
-  if (isFirstVisit()) {
-    return (
-      <div>
-        <h2>Welcome to Typey type for stenographers</h2>
-      </div>
-    )
-  } else {
-    return (
-      <div>
-        <h2>Welcome back</h2>
-      </div>
-    )
-  }
 }
 
 const About = () => (
