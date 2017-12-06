@@ -1,35 +1,39 @@
-import React from 'react';
+import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 // import App from './App';
 // import './index.css';
 
-const Lesson = ({match,data, handleLesson}) => {
-  const lesson = data.find(lesson => '/lessons'+lesson.path === match.url+'lesson.txt');
-  let lessonData;
+class Lesson extends Component {
+  componentDidMount() {
+    const lesson = this.props.data.find(lesson => '/lessons'+lesson.path === this.props.match.url+'lesson.txt');
+    let lessonData;
 
-  if(lesson) {
-    handleLesson('/lessons'+lesson.path);
-    let lessonsubtitle = '';
-    if (lesson.subtitle.length > 0) {
-      lessonsubtitle = ': '+lesson.subtitle;
+    if(lesson) {
+      this.props.handleLesson('/lessons'+lesson.path);
+      let lessonsubtitle = '';
+      if (lesson.subtitle.length > 0) {
+        lessonsubtitle = ': '+lesson.subtitle;
+      }
+
+      lessonData = <div>
+        <h3>{lesson.title}{lessonsubtitle}</h3>
+        <p>{lesson.category}</p>
+        <p>{lesson.subcategory}</p>
+      </div>;
+    } else {
+      lessonData = <h2>That lesson is missing.</h2>;
     }
-
-    lessonData = <div>
-      <h3>{lesson.title}{lessonsubtitle}</h3>
-      <p>{lesson.category}</p>
-      <p>{lesson.subcategory}</p>
-    </div>;
-  } else {
-    lessonData = <h2>That lesson is missing.</h2>;
   }
 
-  return (
-    <div>
+  render() {
+    return (
       <div>
-        {lessonData}
+        <div>
+          {this.props.lesson.title}
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 export default Lesson;

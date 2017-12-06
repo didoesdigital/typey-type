@@ -405,6 +405,7 @@ class App extends Component {
               <Route path="/about" component={About}/>
               <Route path="/lessons" render={ (props) =>
                   <Lessons data={this.state.lessonIndex}
+                    lesson={this.state.lesson}
                     handleLesson={this.handleLesson.bind(this)}
                 {...props} />
               } />
