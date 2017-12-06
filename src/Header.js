@@ -7,7 +7,7 @@ import './App.css';
 class Header extends Component {
   restartLesson(event) {
     event.preventDefault();
-    this.props.handleLesson(this.props.path);
+    this.props.handleGetLesson(this.props.path);
   }
 
   render() {
