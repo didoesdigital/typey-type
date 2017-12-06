@@ -13,9 +13,10 @@ class Header extends Component {
             <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
             <div role="banner" className="site-heading-banner">
               <Link to="/" className="site-heading-link">Typey type</Link>
-              <Link to="/lessons">All lessons</Link>
             </div>
             <div className="table search-container">
+              <Link to="/lessons" className="link-button mr1">Lessons</Link>
+
               <Autocomplete
                 getItemValue={(item) => item.title}
                 inputProps={{ id: 'lessons-autocomplete', spellCheck: 'false', autoCapitalize: "off", autoCorrect: "off" }}

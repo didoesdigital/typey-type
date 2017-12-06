@@ -12,32 +12,38 @@ body {
 h1 {
   font-size: 44px;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.4;
+  margin-bottom: 22px; }
 
 h2 {
   font-size: 37px;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.4;
+  margin-bottom: 18.5px; }
 
 h3 {
   font-size: 27px;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.4;
+  margin-bottom: 13.5px; }
 
 h4 {
   font-size: 23px;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.4;
+  margin-bottom: 11.5px; }
 
 h5 {
   font-size: 18px;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.4;
+  margin-bottom: 9px; }
 
 h6 {
   font-size: 16px;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.4;
+  margin-bottom: 8px; }
 
 li {
   margin-left: 1em; }
@@ -110,6 +116,9 @@ input, textarea {
 .mb1 {
   margin-bottom: 8px; }
 
+.mr1 {
+  margin-right: 8px; }
+
 .mt1 {
   margin-top: 8px; }
 
@@ -123,6 +132,15 @@ input, textarea {
 .px1 {
   padding-left: 8px;
   padding-right: 8px; }
+
+.p4 {
+  padding: 24px; }
+
+.pb0 {
+  padding-bottom: 0; }
+
+.pb4 {
+  padding-bottom: 24px; }
 
 .text-center {
   text-align: center; }
@@ -146,6 +164,9 @@ input, textarea {
 
 .unstyled-list {
   list-style-type: none;
+  margin-left: 0; }
+
+.unstyled-list-item {
   margin-left: 0; }
 
 .header {
@@ -182,12 +203,9 @@ input, textarea {
     display: flex;
     align-items: baseline; }
 
-.custom-message {
-  padding: 24px; }
-
 .content {
   display: grid;
-  padding: 0 24px;
+  padding: 24px;
   grid-gap: 24px;
   justify-content: space-between;
   margin: 0 auto; }

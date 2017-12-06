@@ -18,9 +18,9 @@ class Lesson extends Component {
     let strokeTip;
 
     if (this.props.settings.customMessage) {
-      customMessage = <h3 className="custom-message">{this.props.settings.customMessage}</h3>;
+      customMessage = <h3 className='p4'>{this.props.settings.customMessage}</h3>;
     } else {
-      customMessage = <span style={{paddingTop: '24px' }}>&nbsp;</span>
+      customMessage = ''
     }
 
     if (this.props.userSettings.showStrokes || this.props.showStrokesInLesson) {

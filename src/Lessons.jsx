@@ -9,7 +9,7 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
       lessonsubtitle = ': '+lesson.subtitle;
     }
     return(
-      <li key={ lesson.path }>
+      <li class="unstyled-list-item" key={ lesson.path }>
         <Link to={`${match.url}${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')}>{lesson.title}{lessonsubtitle}</Link>
       </li>
     )
@@ -36,10 +36,11 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
       } />
       <Route exact={true} path={match.url} render={() => (
         <div>
-          <div>
-            <h3>Lessons</h3>
-            <p>Select a lesson:</p>
-            <ul>{linkList}</ul>
+          <div className="main">
+            <div className="p4">
+              <h3>Lessons</h3>
+              <ul className="unstyled-list">{linkList}</ul>
+            </div>
           </div>
         </div>
       )} />
