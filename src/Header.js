@@ -5,6 +5,11 @@ import { matchLessonToTerm, sortLessons } from './utils';
 import './App.css';
 
 class Header extends Component {
+  restartLesson(event) {
+    event.preventDefault();
+    this.props.handleLesson(this.props.path);
+  }
+
   render() {
     return (
       <div>
@@ -55,7 +60,7 @@ class Header extends Component {
               <h2>{this.props.lessonSubTitle}</h2>
             </header>
           </div>
-          <Link to={'/lessons'+this.props.path.replace(/lesson\.txt$/,'')} className="link-button table-cell" role="button">Restart lesson</Link>
+          <a href={this.props.path} onClick={this.restartLesson.bind(this)} className="link-button table-cell mr1" role="button">Restart lesson</a>
           <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button table-cell" role="button">Stop lesson</a>
         </div>
       </div>
