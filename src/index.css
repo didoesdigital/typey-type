@@ -12,38 +12,32 @@ body {
 h1 {
   font-size: 44px;
   font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 22px; }
+  line-height: 1.4; }
 
 h2 {
   font-size: 37px;
   font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 18.5px; }
+  line-height: 1.4; }
 
 h3 {
   font-size: 27px;
   font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 13.5px; }
+  line-height: 1.4; }
 
 h4 {
   font-size: 23px;
   font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 11.5px; }
+  line-height: 1.4; }
 
 h5 {
   font-size: 18px;
   font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 9px; }
+  line-height: 1.4; }
 
 h6 {
   font-size: 16px;
   font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 8px; }
+  line-height: 1.4; }
 
 li {
   margin-left: 1em; }
