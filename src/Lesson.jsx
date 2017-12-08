@@ -9,7 +9,7 @@ class Lesson extends Component {
     const lesson = this.props.lessonIndex.find(lesson => '/lessons'+lesson.path === this.props.match.url+'lesson.txt');
 
     if (lesson) {
-      this.props.handleLesson('/lessons'+lesson.path);
+      this.props.handleLesson(process.env.PUBLIC_URL + '/lessons' + lesson.path);
     }
   }
 
