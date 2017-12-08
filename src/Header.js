@@ -6,7 +6,6 @@ import './App.css';
 
 class Header extends Component {
 
-
   render() {
     return (
       <div>
