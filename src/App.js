@@ -3,6 +3,7 @@ import { randomise } from './utils';
 import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, fetchLessonIndex} from './typey-type';
 import {
   Route,
+  Link,
   Switch
 } from 'react-router-dom';
 import Lessons from './Lessons';
@@ -452,6 +453,24 @@ class App extends Component {
                     userSettings={this.state.userSettings}
                     {...props}
                   />
+                </div>
+                }
+              />
+              <Route render={ () =>
+                <div>
+                  <div>
+                    <div className="header">
+                      <nav>
+                        <div role="banner" className="site-heading-banner">
+                          <Link to="/" className="site-heading-link">Typey type</Link>
+                        </div>
+                      </nav>
+                    </div>
+                    <div className="main content">
+                      <h1>That page doesn't exist</h1>
+                      <p>Try <Link to="/">home</Link> instead.</p>
+                    </div>
+                  </div>
                 </div>
                 }
               />
