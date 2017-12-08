@@ -218,21 +218,6 @@ class App extends Component {
 
     this.stopTimer();
 
-    this.setState({
-      currentPhraseMeetingSuccess: this.state.userSettings.showStrokes ? 0 : 1,
-      disableUserSettings: false,
-      numberOfMatchedChars: 0,
-      startTime: null,
-      timer: null,
-      totalNumberOfMatchedChars: 0,
-      totalNumberOfMatchedWords: 0,
-      totalNumberOfNewWordsMet: 0,
-      totalNumberOfLowExposuresSeen: 0,
-      totalNumberOfRetainedWords: 0,
-      totalNumberOfMistypedWords: 0,
-      totalNumberOfHintedWords: 0
-    });
-
     newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
     newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings);
 
@@ -249,8 +234,22 @@ class App extends Component {
     }
     newLesson.presentedMaterial = repeatedLesson;
 
-    this.setState({ lesson: newLesson });
-    this.setState({ currentPhraseID: 0 });
+    this.setState({
+      currentPhraseMeetingSuccess: this.state.userSettings.showStrokes ? 0 : 1,
+      disableUserSettings: false,
+      numberOfMatchedChars: 0,
+      startTime: null,
+      timer: null,
+      totalNumberOfMatchedChars: 0,
+      totalNumberOfMatchedWords: 0,
+      totalNumberOfNewWordsMet: 0,
+      totalNumberOfLowExposuresSeen: 0,
+      totalNumberOfRetainedWords: 0,
+      totalNumberOfMistypedWords: 0,
+      totalNumberOfHintedWords: 0,
+      lesson: newLesson,
+      currentPhraseID: 0
+    });
   }
 
   handleLesson(path) {
