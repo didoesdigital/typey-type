@@ -272,6 +272,8 @@ class App extends Component {
       this.stopLesson();
       this.setupLesson();
     });
+    const element = document.getElementById('your-typed-text');
+    if (element) { element.focus(); }
   }
 
   updateMarkup(event) {
