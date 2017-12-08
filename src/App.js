@@ -21,6 +21,7 @@ class App extends Component {
       currentPhraseID: 0,
       currentPhraseMeetingSuccess: 1,
       actualText: ``,
+      nextLessonPath: '',
       startTime: null,
       showStrokesInLesson: false,
       timer: null,
@@ -62,7 +63,7 @@ class App extends Component {
         "subtitle": "",
         "category": "Collections",
         "subcategory": "",
-        "path": process.env.PUBLIC_URL + "/lessons/drills/google-1000-english/lesson.txt"
+        "path": process.env.PUBLIC_URL + "/drills/google-1000-english/lesson.txt"
       }]
     };
   }
@@ -354,13 +355,14 @@ class App extends Component {
             items={this.state.lessonIndex}
             lessonSubTitle={this.state.lesson.subtitle}
             lessonTitle={this.state.lesson.title}
+            nextLessonPath={this.state.nextLessonPath}
             onChange={(ev, value) => {
             this.setState({
             value: ev.target.value
             })}}
             onSelect={(value, item) => this.setState({
             value: value,
-            path: item.path
+            nextLessonPath: item.path
             })}
             path={this.state.lesson.path}
             settings={this.state.lesson.settings}
@@ -404,13 +406,14 @@ class App extends Component {
                     items={this.state.lessonIndex}
                     lessonSubTitle={this.state.lesson.subtitle}
                     lessonTitle={this.state.lesson.title}
+                    nextLessonPath={this.state.nextLessonPath}
                     onChange={(ev, value) => {
                     this.setState({
                     value: ev.target.value
                     })}}
                     onSelect={(value, item) => this.setState({
                     value: value,
-                    path: item.path
+                    nextLessonPath: item.path
                     })}
                     path={this.state.lesson.path}
                     settings={this.state.lesson.settings}
@@ -456,13 +459,14 @@ class App extends Component {
                     items={this.state.lessonIndex}
                     lessonSubTitle={this.state.lesson.subtitle}
                     lessonTitle={this.state.lesson.title}
+                    nextLessonPath={this.state.nextLessonPath}
                     onChange={(ev, value) => {
                     this.setState({
                     value: ev.target.value
                     })}}
                     onSelect={(value, item) => this.setState({
                     value: value,
-                    path: item.path
+                    nextLessonPath: item.path
                     })}
                     path={this.state.lesson.path}
                     settings={this.state.lesson.settings}
