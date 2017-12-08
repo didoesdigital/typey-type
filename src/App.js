@@ -352,46 +352,122 @@ class App extends Component {
     if (this.isFinished()) {
       return (
         <div className="app">
-          <Header
-            restartLesson={this.restartLesson.bind(this)}
-            items={this.state.lessonIndex}
-            lessonSubTitle={this.state.lesson.subtitle}
-            lessonTitle={this.state.lesson.title}
-            nextLessonPath={this.state.nextLessonPath}
-            onChange={(ev, value) => {
-            this.setState({
-            value: ev.target.value
-            })}}
-            onSelect={(value, item) => this.setState({
-            value: value,
-            nextLessonPath: item.path
-            })}
-            path={this.state.lesson.path}
-            settings={this.state.lesson.settings}
-            handleStopLesson={this.handleStopLesson.bind(this)}
-            value={this.state.value}
-          />
-          <div className="main">
-            <Finished
-              actualText={this.state.actualText}
-              changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
-              changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
-              changeUserSetting={this.changeUserSetting.bind(this)}
-              disableUserSettings={this.state.disableUserSettings}
-              handleGetLesson={this.handleLesson.bind(this)}
-              handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
-              handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
-              settings={this.state.lesson.settings}
-              timer={this.state.timer}
-              totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-              totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
-              totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
-              totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
-              totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
-              totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
-              totalWordCount={this.state.lesson.presentedMaterial.length}
-              userSettings={this.state.userSettings}
-            />
+          <div>
+            <Switch>
+              <Route exact={true} path="/" render={(props) =>
+                <div>
+                  <Header
+                    restartLesson={this.restartLesson.bind(this)}
+                    items={this.state.lessonIndex}
+                    lessonSubTitle={this.state.lesson.subtitle}
+                    lessonTitle={this.state.lesson.title}
+                    nextLessonPath={this.state.nextLessonPath}
+                    onChange={(ev, value) => {
+                    this.setState({
+                    value: ev.target.value
+                    })}}
+                    onSelect={(value, item) => this.setState({
+                    value: value,
+                    nextLessonPath: item.path
+                    })}
+                    path={this.state.lesson.path}
+                    settings={this.state.lesson.settings}
+                    handleStopLesson={this.handleStopLesson.bind(this)}
+                    value={this.state.value}
+                  />
+                  <Finished
+                    actualText={this.state.actualText}
+                    changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
+                    changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
+                    changeUserSetting={this.changeUserSetting.bind(this)}
+                    disableUserSettings={this.state.disableUserSettings}
+                    handleGetLesson={this.handleLesson.bind(this)}
+                    handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
+                    handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
+                    settings={this.state.lesson.settings}
+                    timer={this.state.timer}
+                    totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+                    totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
+                    totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
+                    totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
+                    totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
+                    totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
+                    totalWordCount={this.state.lesson.presentedMaterial.length}
+                    userSettings={this.state.userSettings}
+                  />
+                </div>
+                }
+              />
+              <Route path="/about" render={ () =>
+                <div>
+                  <Header
+                    restartLesson={this.restartLesson.bind(this)}
+                    items={this.state.lessonIndex}
+                    lessonSubTitle={this.state.lesson.subtitle}
+                    lessonTitle={this.state.lesson.title}
+                    nextLessonPath={this.state.nextLessonPath}
+                    onChange={(ev, value) => {
+                    this.setState({
+                    value: ev.target.value
+                    })}}
+                    onSelect={(value, item) => this.setState({
+                    value: value,
+                    nextLessonPath: item.path
+                    })}
+                    path={this.state.lesson.path}
+                    settings={this.state.lesson.settings}
+                    handleStopLesson={this.handleStopLesson.bind(this)}
+                    value={this.state.value}
+                  />
+                  <About />
+                </div>
+                }
+              />
+              <Route path="/lessons" render={ (props) =>
+                <div>
+                  <Header
+                    restartLesson={this.restartLesson.bind(this)}
+                    items={this.state.lessonIndex}
+                    lessonSubTitle={this.state.lesson.subtitle}
+                    lessonTitle={this.state.lesson.title}
+                    nextLessonPath={this.state.nextLessonPath}
+                    onChange={(ev, value) => {
+                    this.setState({
+                    value: ev.target.value
+                    })}}
+                    onSelect={(value, item) => this.setState({
+                    value: value,
+                    nextLessonPath: item.path
+                    })}
+                    path={this.state.lesson.path}
+                    settings={this.state.lesson.settings}
+                    handleStopLesson={this.handleStopLesson.bind(this)}
+                    value={this.state.value}
+                  />
+                  <Finished
+                    actualText={this.state.actualText}
+                    changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
+                    changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
+                    changeUserSetting={this.changeUserSetting.bind(this)}
+                    disableUserSettings={this.state.disableUserSettings}
+                    handleGetLesson={this.handleLesson.bind(this)}
+                    handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
+                    handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
+                    settings={this.state.lesson.settings}
+                    timer={this.state.timer}
+                    totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+                    totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
+                    totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
+                    totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
+                    totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
+                    totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
+                    totalWordCount={this.state.lesson.presentedMaterial.length}
+                    userSettings={this.state.userSettings}
+                  />
+                </div>
+                }
+              />
+            </Switch>
           </div>
           <Footer />
         </div>
@@ -452,8 +528,33 @@ class App extends Component {
                     {...props}
                   />
                 </div>
-              }/>
-              <Route path="/about" component={About}/>
+                }
+              />
+              <Route path="/about" render={ () =>
+                <div>
+                  <Header
+                    restartLesson={this.restartLesson.bind(this)}
+                    items={this.state.lessonIndex}
+                    lessonSubTitle={this.state.lesson.subtitle}
+                    lessonTitle={this.state.lesson.title}
+                    nextLessonPath={this.state.nextLessonPath}
+                    onChange={(ev, value) => {
+                    this.setState({
+                    value: ev.target.value
+                    })}}
+                    onSelect={(value, item) => this.setState({
+                    value: value,
+                    nextLessonPath: item.path
+                    })}
+                    path={this.state.lesson.path}
+                    settings={this.state.lesson.settings}
+                    handleStopLesson={this.handleStopLesson.bind(this)}
+                    value={this.state.value}
+                  />
+                  <About />
+                </div>
+                }
+              />
               <Route path="/lessons" render={ (props) =>
                 <div>
                   <Header
@@ -502,9 +603,11 @@ class App extends Component {
                     totalWordCount={this.state.lesson.presentedMaterial.length}
                     updateMarkup={this.updateMarkup.bind(this)}
                     userSettings={this.state.userSettings}
-                    {...props} />
+                    {...props}
+                  />
                 </div>
-                } />
+                }
+              />
             </Switch>
           </div>
           <Footer />
