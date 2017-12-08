@@ -235,6 +235,7 @@ class App extends Component {
     newLesson.presentedMaterial = repeatedLesson;
 
     this.setState({
+      actualText: ``,
       currentPhraseMeetingSuccess: this.state.userSettings.showStrokes ? 0 : 1,
       disableUserSettings: false,
       numberOfMatchedChars: 0,
