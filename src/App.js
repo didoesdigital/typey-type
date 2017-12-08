@@ -542,7 +542,8 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
 
   var newWords = userSettings.newWords,
     seenWords = userSettings.seenWords,
-    retainedWords = userSettings.retainedWords;
+    retainedWords = userSettings.retainedWords,
+    spacePlacement = userSettings.spacePlacement;
 
   var testNewWords = function(phrase) {
     if (!(phrase in met)) {
@@ -578,6 +579,11 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
   }
 
   var filterFunction = function (phrase) {
+    if (spacePlacement === 'spaceBeforeOutput') {
+      phrase = ' '+phrase;
+    } else if (spacePlacement === 'spaceAfterOutput') {
+      phrase = phrase+' ';
+    }
     for (var i = 0; i < tests.length; i++) {
       if (tests[i](phrase)) {
         return true;
