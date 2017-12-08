@@ -3,11 +3,9 @@ import { randomise } from './utils';
 import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, fetchLessonIndex} from './typey-type';
 import {
   Route,
-  Link,
   Switch
 } from 'react-router-dom';
 import Lessons from './Lessons';
-import Finished from './Finished';
 import Header from './Header';
 import Home from './Home';
 import Footer from './Footer';
@@ -370,82 +368,11 @@ class App extends Component {
       value={this.state.value}
     />
 
-    let finished = <Finished
-      actualText={this.state.actualText}
-      changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
-      changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
-      changeUserSetting={this.changeUserSetting.bind(this)}
-      disableUserSettings={this.state.disableUserSettings}
-      handleGetLesson={this.handleLesson.bind(this)}
-      handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
-      handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
-      settings={this.state.lesson.settings}
-      timer={this.state.timer}
-      totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-      totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
-      totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
-      totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
-      totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
-      totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
-      totalWordCount={this.state.lesson.presentedMaterial.length}
-      userSettings={this.state.userSettings}
-    />
-
-    if (this.isFinished()) {
-      const linkList = this.state.lessonIndex.map( (lesson) => {
-        let lessonsubtitle = '';
-        if (lesson.subtitle.length > 0) {
-          lessonsubtitle = ': '+lesson.subtitle;
-        }
-        return(
-          <li className="unstyled-list-item" key={ lesson.path }>
-            <Link to={'/lessons'+lesson.path.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')}>{lesson.title}{lessonsubtitle}</Link>
-          </li>
-        )
-      });
-      return (
-        <div className="app">
-          <div>
-            <Switch>
-              <Route exact={true} path="/" render={(props) =>
-                <div>
-                  {header}
-                  {finished}
-                </div>
-                }
-              />
-              <Route path="/about" render={ () =>
-                <div>
-                  {header}
-                  <About />
-                </div>
-                }
-              />
-              <Route exact={true} path="/lessons" render={() => (
-                <div>
-                  {header}
-                  <div className="main">
-                    <div className="p4">
-                      <h3>Lessons</h3>
-                      <ul className="unstyled-list">{linkList}</ul>
-                    </div>
-                  </div>
-                </div>
-                )}
-              />
-              <Route path="/lessons" render={ (props) =>
-                <div>
-                  {header}
-                  {finished}
-                </div>
-                }
-              />
-            </Switch>
-          </div>
-          <Footer />
-        </div>
-      );
-    } else {
+    if (true) {
+      // console.log("about to render everything");
+      // console.log(this.state.lesson.presentedMaterial);
+      // console.log(this.state.currentPhraseID);
+      let presentedMaterialCurrentItem = this.state.lesson.presentedMaterial[this.state.currentPhraseID] || {};
       return (
         <div className="app">
           <div>
@@ -462,8 +389,8 @@ class App extends Component {
                     changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
                     changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
                     changeUserSetting={this.changeUserSetting.bind(this)}
-                    currentPhrase={this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase}
-                    currentStroke={this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke}
+                    currentPhrase={presentedMaterialCurrentItem.phrase}
+                    currentStroke={presentedMaterialCurrentItem.stroke}
                     disableUserSettings={this.state.disableUserSettings}
                     handleGetLesson={this.handleLesson.bind(this)}
                     handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
@@ -504,8 +431,9 @@ class App extends Component {
                     changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
                     changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
                     changeUserSetting={this.changeUserSetting.bind(this)}
-                    currentPhrase={this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase}
-                    currentStroke={this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke}
+                    currentPhraseID={this.state.currentPhraseID}
+                    currentPhrase={presentedMaterialCurrentItem.phrase}
+                    currentStroke={presentedMaterialCurrentItem.stroke}
                     disableUserSettings={this.state.disableUserSettings}
                     handleGetLesson={this.handleLesson.bind(this)}
                     handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
