@@ -72,7 +72,7 @@ const SETTINGS_NAME_MAP = {
   locales: 'locales'
 }
 
-function parseLesson(lessonText) {
+function parseLesson(lessonText, path) {
   var lines = lessonText.split("\n");
   var lessonTitle = lines[0];
   var lessonSubtitle = lines[1];
@@ -99,7 +99,14 @@ function parseLesson(lessonText) {
     }
   }
 
-  return { sourceMaterial: sourceMaterial, presentedMaterial: sourceMaterial, settings: settings, title: lessonTitle, subtitle: lessonSubtitle }
+  return {
+    sourceMaterial: sourceMaterial,
+    presentedMaterial: sourceMaterial,
+    settings: settings,
+    title: lessonTitle,
+    subtitle: lessonSubtitle,
+    path: path
+  }
 }
 
 function isFirstVisit() {

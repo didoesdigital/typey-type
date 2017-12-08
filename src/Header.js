@@ -5,10 +5,7 @@ import { matchLessonToTerm, sortLessons } from './utils';
 import './App.css';
 
 class Header extends Component {
-  restartLesson(event) {
-    event.preventDefault();
-    this.props.handleGetLesson(this.props.path);
-  }
+
 
   render() {
     return (
@@ -60,7 +57,7 @@ class Header extends Component {
               <h2>{this.props.lessonSubTitle}</h2>
             </header>
           </div>
-          <a href={this.props.path} onClick={this.restartLesson.bind(this)} className="link-button table-cell mr1" role="button">Restart lesson</a>
+          <a href={this.props.path} onClick={this.props.restartLesson} className="link-button table-cell mr1" role="button">Restart lesson</a>
           <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button table-cell" role="button">Stop lesson</a>
         </div>
       </div>
