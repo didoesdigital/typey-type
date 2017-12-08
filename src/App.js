@@ -103,7 +103,10 @@ class App extends Component {
   }
 
   stopTimer() {
-    clearInterval(this.intervalID);
+    if (this.intervalID) {
+      clearInterval(this.intervalID);
+      this.intervalID = null;
+    }
   }
 
   updateWPM() {
@@ -212,6 +215,8 @@ class App extends Component {
     let currentLesson = this.state.lesson;
     let newLesson = Object.assign({}, currentLesson);
     newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
+
+    this.stopTimer();
 
     this.setState({
       currentPhraseMeetingSuccess: this.state.userSettings.showStrokes ? 0 : 1,
