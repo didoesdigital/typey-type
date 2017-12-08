@@ -7,7 +7,7 @@ import {
 import './index.css';
 
 ReactDOM.render(
-  <Router>
+  <Router basename="/typey-type">
     <App />
   </Router>,
   document.getElementById('root')
