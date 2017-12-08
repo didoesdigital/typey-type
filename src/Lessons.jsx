@@ -36,11 +36,9 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
           } />
         <Route exact={true} path={match.url} render={() => (
           <div>
-            <div className="main">
-              <div className="p4">
-                <h3>Lessons</h3>
-                <ul className="unstyled-list">{linkList}</ul>
-              </div>
+            <div className="p4">
+              <h3>Lessons</h3>
+              <ul className="unstyled-list">{linkList}</ul>
             </div>
           </div>
           )} />

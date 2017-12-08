@@ -12,36 +12,34 @@ class Finished extends Component {
       customMessage = ''
     }
     return (
-      <div className="main">
-        <div>
-          {customMessage}
-          <div className="content">
-            <UserSettings
-              changeUserSetting={this.props.changeUserSetting}
-              changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
-              changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
-              disableUserSettings={this.props.disableUserSettings}
-              handleLimitWordsChange={this.props.handleLimitWordsChange}
-              handleRepetitionsChange={this.props.handleRepetitionsChange}
-              totalWordCount={this.props.totalWordCount}
-              userSettings={this.props.userSettings}
+      <div>
+        {customMessage}
+        <div className="content">
+          <UserSettings
+            changeUserSetting={this.props.changeUserSetting}
+            changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+            disableUserSettings={this.props.disableUserSettings}
+            handleLimitWordsChange={this.props.handleLimitWordsChange}
+            handleRepetitionsChange={this.props.handleRepetitionsChange}
+            totalWordCount={this.props.totalWordCount}
+            userSettings={this.props.userSettings}
+          />
+          <div className="lesson-canvas">
+            <div className="mx-auto text-center">
+              <div role="alert" aria-live="polite">Finished!</div>
+            </div>
+          </div>
+          <div className="scores">
+            <Scores
+              timer={this.props.timer}
+              totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
+              totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+              totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
+              totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
+              totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
+              totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
             />
-            <div className="lesson-canvas">
-              <div className="mx-auto text-center">
-                <div role="alert" aria-live="polite">Finished!</div>
-              </div>
-            </div>
-            <div className="scores">
-              <Scores
-                timer={this.props.timer}
-                totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-                totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-                totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-                totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-                totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-                totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-              />
-            </div>
           </div>
         </div>
       </div>

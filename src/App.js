@@ -370,9 +370,6 @@ class App extends Component {
     />
 
     if (true) {
-      // console.log("about to render everything");
-      // console.log(this.state.lesson.presentedMaterial);
-      // console.log(this.state.currentPhraseID);
       let presentedMaterialCurrentItem = this.state.lesson.presentedMaterial[this.state.currentPhraseID] || {};
       return (
         <div className="app">
@@ -466,7 +463,7 @@ class App extends Component {
                         </div>
                       </nav>
                     </div>
-                    <div className="main content">
+                    <div className="p4">
                       <h1>That page doesn't exist</h1>
                       <p>Try <Link to="/">home</Link> instead.</p>
                     </div>
@@ -587,18 +584,6 @@ const About = () => (
 <p>Note: The words per minute score is an estimate, assuming 5 characters per word.</p>
   </div>
 )
-
-// const Lesson = ({ match }) => (
-//   <div>
-//     <h3>{match.params.lessonId}</h3>
-//   </div>
-// )
-
-// const Lessons = ({ match }) => (
-//   <div>
-//     <h2>Lessons</h2>
-//   </div>
-// )
 
 export default App;
 export {increaseMetWords, filterByFamiliarity, sortLesson};
