@@ -3,6 +3,7 @@ import { randomise } from './utils';
 import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, fetchLessonIndex} from './typey-type';
 import {
   Route,
+  Link,
   Switch
 } from 'react-router-dom';
 import Lessons from './Lessons';
@@ -349,121 +350,93 @@ class App extends Component {
   }
 
   render() {
+    let header = <Header
+      restartLesson={this.restartLesson.bind(this)}
+      items={this.state.lessonIndex}
+      lessonSubTitle={this.state.lesson.subtitle}
+      lessonTitle={this.state.lesson.title}
+      nextLessonPath={this.state.nextLessonPath}
+      onChange={(ev, value) => {
+      this.setState({
+      value: ev.target.value
+      })}}
+      onSelect={(value, item) => this.setState({
+      value: value,
+      nextLessonPath: item.path
+      })}
+      path={this.state.lesson.path}
+      settings={this.state.lesson.settings}
+      handleStopLesson={this.handleStopLesson.bind(this)}
+      value={this.state.value}
+    />
+
+    let finished = <Finished
+      actualText={this.state.actualText}
+      changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
+      changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
+      changeUserSetting={this.changeUserSetting.bind(this)}
+      disableUserSettings={this.state.disableUserSettings}
+      handleGetLesson={this.handleLesson.bind(this)}
+      handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
+      handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
+      settings={this.state.lesson.settings}
+      timer={this.state.timer}
+      totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+      totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
+      totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
+      totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
+      totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
+      totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
+      totalWordCount={this.state.lesson.presentedMaterial.length}
+      userSettings={this.state.userSettings}
+    />
+
     if (this.isFinished()) {
+      const linkList = this.state.lessonIndex.map( (lesson) => {
+        let lessonsubtitle = '';
+        if (lesson.subtitle.length > 0) {
+          lessonsubtitle = ': '+lesson.subtitle;
+        }
+        return(
+          <li className="unstyled-list-item" key={ lesson.path }>
+            <Link to={'/lessons'+lesson.path.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')}>{lesson.title}{lessonsubtitle}</Link>
+          </li>
+        )
+      });
       return (
         <div className="app">
           <div>
             <Switch>
               <Route exact={true} path="/" render={(props) =>
                 <div>
-                  <Header
-                    restartLesson={this.restartLesson.bind(this)}
-                    items={this.state.lessonIndex}
-                    lessonSubTitle={this.state.lesson.subtitle}
-                    lessonTitle={this.state.lesson.title}
-                    nextLessonPath={this.state.nextLessonPath}
-                    onChange={(ev, value) => {
-                    this.setState({
-                    value: ev.target.value
-                    })}}
-                    onSelect={(value, item) => this.setState({
-                    value: value,
-                    nextLessonPath: item.path
-                    })}
-                    path={this.state.lesson.path}
-                    settings={this.state.lesson.settings}
-                    handleStopLesson={this.handleStopLesson.bind(this)}
-                    value={this.state.value}
-                  />
-                  <Finished
-                    actualText={this.state.actualText}
-                    changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
-                    changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
-                    changeUserSetting={this.changeUserSetting.bind(this)}
-                    disableUserSettings={this.state.disableUserSettings}
-                    handleGetLesson={this.handleLesson.bind(this)}
-                    handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
-                    handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
-                    settings={this.state.lesson.settings}
-                    timer={this.state.timer}
-                    totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-                    totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
-                    totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
-                    totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
-                    totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
-                    totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
-                    totalWordCount={this.state.lesson.presentedMaterial.length}
-                    userSettings={this.state.userSettings}
-                  />
+                  {header}
+                  {finished}
                 </div>
                 }
               />
               <Route path="/about" render={ () =>
                 <div>
-                  <Header
-                    restartLesson={this.restartLesson.bind(this)}
-                    items={this.state.lessonIndex}
-                    lessonSubTitle={this.state.lesson.subtitle}
-                    lessonTitle={this.state.lesson.title}
-                    nextLessonPath={this.state.nextLessonPath}
-                    onChange={(ev, value) => {
-                    this.setState({
-                    value: ev.target.value
-                    })}}
-                    onSelect={(value, item) => this.setState({
-                    value: value,
-                    nextLessonPath: item.path
-                    })}
-                    path={this.state.lesson.path}
-                    settings={this.state.lesson.settings}
-                    handleStopLesson={this.handleStopLesson.bind(this)}
-                    value={this.state.value}
-                  />
+                  {header}
                   <About />
                 </div>
                 }
               />
+              <Route exact={true} path="/lessons" render={() => (
+                <div>
+                  {header}
+                  <div className="main">
+                    <div className="p4">
+                      <h3>Lessons</h3>
+                      <ul className="unstyled-list">{linkList}</ul>
+                    </div>
+                  </div>
+                </div>
+                )}
+              />
               <Route path="/lessons" render={ (props) =>
                 <div>
-                  <Header
-                    restartLesson={this.restartLesson.bind(this)}
-                    items={this.state.lessonIndex}
-                    lessonSubTitle={this.state.lesson.subtitle}
-                    lessonTitle={this.state.lesson.title}
-                    nextLessonPath={this.state.nextLessonPath}
-                    onChange={(ev, value) => {
-                    this.setState({
-                    value: ev.target.value
-                    })}}
-                    onSelect={(value, item) => this.setState({
-                    value: value,
-                    nextLessonPath: item.path
-                    })}
-                    path={this.state.lesson.path}
-                    settings={this.state.lesson.settings}
-                    handleStopLesson={this.handleStopLesson.bind(this)}
-                    value={this.state.value}
-                  />
-                  <Finished
-                    actualText={this.state.actualText}
-                    changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
-                    changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
-                    changeUserSetting={this.changeUserSetting.bind(this)}
-                    disableUserSettings={this.state.disableUserSettings}
-                    handleGetLesson={this.handleLesson.bind(this)}
-                    handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
-                    handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
-                    settings={this.state.lesson.settings}
-                    timer={this.state.timer}
-                    totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-                    totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
-                    totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
-                    totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
-                    totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
-                    totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
-                    totalWordCount={this.state.lesson.presentedMaterial.length}
-                    userSettings={this.state.userSettings}
-                  />
+                  {header}
+                  {finished}
                 </div>
                 }
               />
@@ -479,25 +452,7 @@ class App extends Component {
             <Switch>
               <Route exact={true} path="/" render={(props) =>
                 <div>
-                  <Header
-                    restartLesson={this.restartLesson.bind(this)}
-                    items={this.state.lessonIndex}
-                    lessonSubTitle={this.state.lesson.subtitle}
-                    lessonTitle={this.state.lesson.title}
-                    nextLessonPath={this.state.nextLessonPath}
-                    onChange={(ev, value) => {
-                    this.setState({
-                    value: ev.target.value
-                    })}}
-                    onSelect={(value, item) => this.setState({
-                    value: value,
-                    nextLessonPath: item.path
-                    })}
-                    path={this.state.lesson.path}
-                    settings={this.state.lesson.settings}
-                    handleStopLesson={this.handleStopLesson.bind(this)}
-                    value={this.state.value}
-                  />
+                  {header}
                   <Home 
                     lessonIndex={this.state.lessonIndex}
                     lesson={this.state.lesson}
@@ -532,50 +487,14 @@ class App extends Component {
               />
               <Route path="/about" render={ () =>
                 <div>
-                  <Header
-                    restartLesson={this.restartLesson.bind(this)}
-                    items={this.state.lessonIndex}
-                    lessonSubTitle={this.state.lesson.subtitle}
-                    lessonTitle={this.state.lesson.title}
-                    nextLessonPath={this.state.nextLessonPath}
-                    onChange={(ev, value) => {
-                    this.setState({
-                    value: ev.target.value
-                    })}}
-                    onSelect={(value, item) => this.setState({
-                    value: value,
-                    nextLessonPath: item.path
-                    })}
-                    path={this.state.lesson.path}
-                    settings={this.state.lesson.settings}
-                    handleStopLesson={this.handleStopLesson.bind(this)}
-                    value={this.state.value}
-                  />
+                  {header}
                   <About />
                 </div>
                 }
               />
               <Route path="/lessons" render={ (props) =>
                 <div>
-                  <Header
-                    restartLesson={this.restartLesson.bind(this)}
-                    items={this.state.lessonIndex}
-                    lessonSubTitle={this.state.lesson.subtitle}
-                    lessonTitle={this.state.lesson.title}
-                    nextLessonPath={this.state.nextLessonPath}
-                    onChange={(ev, value) => {
-                    this.setState({
-                    value: ev.target.value
-                    })}}
-                    onSelect={(value, item) => this.setState({
-                    value: value,
-                    nextLessonPath: item.path
-                    })}
-                    path={this.state.lesson.path}
-                    settings={this.state.lesson.settings}
-                    handleStopLesson={this.handleStopLesson.bind(this)}
-                    value={this.state.value}
-                  />
+                  {header}
                   <Lessons
                     lessonIndex={this.state.lessonIndex}
                     lesson={this.state.lesson}

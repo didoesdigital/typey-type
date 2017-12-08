@@ -3,18 +3,6 @@ import { Route, Switch, Link } from 'react-router-dom';
 import Lesson from './Lesson';
 
 const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => {
-    // console.log('/lessons'+lessonObject.path);
-    // console.log(currentPathname);
-  // let isPathnameAValidLesson = lessonIndex.some(pathnameIsAValidLesson);
-
-
-  // console.log(lessonProps.location);
-  // console.log(lessonIndex);
-  // console.log(lessonProps);
-  // console.log(match);
-  // console.log(match.path);
-  // console.log(lessonIndex);
-  // console.log(lesson);
   const linkList = lessonIndex.map( (lesson) => {
     let lessonsubtitle = '';
     if (lesson.subtitle.length > 0) {
