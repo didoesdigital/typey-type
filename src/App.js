@@ -215,6 +215,7 @@ class App extends Component {
 
     this.setState({
       currentPhraseMeetingSuccess: this.state.userSettings.showStrokes ? 0 : 1,
+      disableUserSettings: false,
       numberOfMatchedChars: 0,
       startTime: null,
       timer: null,
