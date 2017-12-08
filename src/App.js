@@ -77,19 +77,21 @@ class App extends Component {
 
     fetchLessonIndex().then((json) => this.setState({ lessonIndex: json }))
 
-    this.handleLesson(process.env.PUBLIC_URL + '/lessons/drills/google-1000-english/lesson.txt');
+    if(this.state.lesson.path==='') {
+      this.handleLesson(process.env.PUBLIC_URL + '/lessons/drills/google-1000-english/lesson.txt');
+    }
   }
 
   handleStopLesson(event) {
-    this.stopLesson();
     event.preventDefault();
+    this.stopLesson();
   }
 
   stopLesson() {
     this.stopTimer();
     writePersonalPreferences(this.state.userSettings, this.state.metWords);
     this.setState({
-      actualText: ``,
+      actualText: '',
       currentPhraseID: this.state.lesson.presentedMaterial.length,
       disableUserSettings: false,
       numberOfMatchedChars: 0,

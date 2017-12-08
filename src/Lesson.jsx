@@ -6,10 +6,13 @@ import UserSettings from './UserSettings';
 
 class Lesson extends Component {
   componentDidMount() {
-    const lesson = this.props.lessonIndex.find(lesson => '/lessons'+lesson.path === this.props.match.url+'lesson.txt');
-
-    if (lesson) {
-      this.props.handleLesson(process.env.PUBLIC_URL + '/lessons' + lesson.path);
+    if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
+      this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if((prevProps.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
+      this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
     }
   }
 
