@@ -76,10 +76,6 @@ class App extends Component {
     });
 
     fetchLessonIndex().then((json) => this.setState({ lessonIndex: json }))
-
-    if(this.state.lesson.path==='') {
-      this.handleLesson(process.env.PUBLIC_URL + '/lessons/drills/google-1000-english/lesson.txt');
-    }
   }
 
   handleStopLesson(event) {
