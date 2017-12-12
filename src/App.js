@@ -609,7 +609,7 @@ const About = () => (
     <p>100–200.</p>
 
     <h3>Support</h3>
-    <p>For help with Typey type, email <a href="mailto:didoesdigital+steno@gmail.com" className="link-missing-full-stop">DiDoesDigital+Steno@gmail.com</a> or <a href="https://twitter.com/didoesdigital">tweet @DiDoesDigital</a>.</p>
+    <p>For help with Typey type, email <a href="mailto:typeytype@didoesdigital.com" className="link-missing-full-stop">typetype@didoesdigital.com</a> or <a href="https://twitter.com/didoesdigital">tweet @DiDoesDigital</a>.</p>
   </div>
 )
 
