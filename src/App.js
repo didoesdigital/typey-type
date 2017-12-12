@@ -387,6 +387,7 @@ class App extends Component {
                     changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
                     changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
                     changeUserSetting={this.changeUserSetting.bind(this)}
+                    currentPhraseID={this.state.currentPhraseID}
                     currentPhrase={presentedMaterialCurrentItem.phrase}
                     currentStroke={presentedMaterialCurrentItem.stroke}
                     disableUserSettings={this.state.disableUserSettings}
