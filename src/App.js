@@ -55,7 +55,7 @@ class App extends Component {
         settings: {
           ignoredChars: ''
         },
-        title: 'Loading…', subtitle: 'Loading…',
+        title: 'Loading…', subtitle: '',
         path: ''
       },
       lessonIndex: [{
