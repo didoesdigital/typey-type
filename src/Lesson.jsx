@@ -58,7 +58,6 @@ class Lesson extends Component {
             changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
             changeUserSetting={this.props.changeUserSetting}
             disableUserSettings={this.props.disableUserSettings}
-            handleGetLesson={this.props.handleLesson}
             handleLimitWordsChange={this.props.handleLimitWordsChange}
             handleRepetitionsChange={this.props.handleRepetitionsChange}
             settings={this.props.lesson.settings}

@@ -395,7 +395,6 @@ class App extends Component {
                     currentPhrase={presentedMaterialCurrentItem.phrase}
                     currentStroke={presentedMaterialCurrentItem.stroke}
                     disableUserSettings={this.state.disableUserSettings}
-                    handleGetLesson={this.handleLesson.bind(this)}
                     handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
                     handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
                     settings={this.state.lesson.settings}
@@ -438,7 +437,6 @@ class App extends Component {
                     currentPhrase={presentedMaterialCurrentItem.phrase}
                     currentStroke={presentedMaterialCurrentItem.stroke}
                     disableUserSettings={this.state.disableUserSettings}
-                    handleGetLesson={this.handleLesson.bind(this)}
                     handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
                     handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
                     settings={this.state.lesson.settings}
