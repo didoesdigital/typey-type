@@ -26,6 +26,14 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
             {...props}
           />
           } />
+        <Route path={`${match.url}/fundamentals/:lessonPath`} render={ (props) =>
+          <Lesson lessonIndex={lessonIndex}
+            handleLesson={handleLesson}
+            lesson={lesson}
+            {...lessonProps}
+            {...props}
+          />
+          } />
         <Route path={`${match.url}/drills/:lessonPath`} render={ (props) =>
           <Lesson lessonIndex={lessonIndex}
             handleLesson={handleLesson}
