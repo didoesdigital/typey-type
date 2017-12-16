@@ -122,9 +122,9 @@ function loadPersonalPreferences() {
   let userSettings = {
     caseSensitive: true,
     retainedWords: false,
-    limitNumberOfWords: 0,
+    limitNumberOfWords: 15,
     newWords: true,
-    repetitions: 1,
+    repetitions: 3,
     showStrokes: false,
     spacePlacement: 'spaceBeforeOutput',
     sortOrder: 'sortOff',
