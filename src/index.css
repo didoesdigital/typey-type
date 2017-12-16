@@ -1,41 +1,41 @@
-@import url("https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:300,300i,700,700i");
+@import url("https://fonts.googleapis.com/css?family=Overpass+Mono:400,700");
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0; }
 
 body {
-  font: 400 16px/1.6 "Overpass Mono", "Montserrat", "Open Sans", Helvetica, sans-serif;
+  font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
   margin: 0 auto;
   color: #2e173b; }
 
 h1 {
-  font-size: 44px;
+  font-size: 39.0625px;
   font-weight: normal;
   line-height: 1.4; }
 
 h2 {
-  font-size: 37px;
+  font-size: 31.25px;
   font-weight: normal;
   line-height: 1.4; }
 
 h3 {
-  font-size: 27px;
+  font-size: 25px;
   font-weight: normal;
   line-height: 1.4; }
 
 h4 {
-  font-size: 23px;
+  font-size: 20px;
   font-weight: normal;
   line-height: 1.4; }
 
 h5 {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: normal;
   line-height: 1.4; }
 
 h6 {
-  font-size: 16px;
+  font-size: 12.8px;
   font-weight: normal;
   line-height: 1.4; }
 
@@ -82,7 +82,11 @@ dl.inline-flex dd {
   text-overflow: ellipsis; }
 
 input, textarea {
-  font: 400 16px/1.6 "Overpass Mono", "Montserrat", "Open Sans", Helvetica, sans-serif; }
+  font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
+
+small, .text-small {
+  font-size: 12.8px;
+  line-height: 1.6; }
 
 .visually-hidden {
   position: absolute !important;
@@ -149,10 +153,6 @@ input, textarea {
 .de-emphasized {
   color: #757575; }
 
-.text-small, small {
-  font-size: 12.8px;
-  line-height: 1.6; }
-
 .clearfix {
   display: flow-root; }
 
@@ -165,7 +165,7 @@ input, textarea {
 
 .header {
   background-color: #2e173b;
-  color: #fff;
+  color: #c6bdcb;
   padding: 24px; }
   .header nav {
     align-items: center;
@@ -176,9 +176,10 @@ input, textarea {
     max-width: 576px; }
 
 .site-heading-link {
-  color: #ece9ee;
-  font-size: 44px;
+  color: #c6bdcb;
   text-decoration: none; }
+  .site-heading-link h1 {
+    line-height: 1; }
   .site-heading-link:hover, .site-heading-link:active, .site-heading-link:focus {
     box-shadow: inset #a091a8 0px -8px 0px 0px; }
 
@@ -192,7 +193,7 @@ input, textarea {
   .subheader h1 {
     margin-right: 24px; }
   .subheader h2 {
-    font-size: 27px; }
+    font-size: 31.25px; }
   .subheader header {
     display: flex;
     align-items: baseline; }

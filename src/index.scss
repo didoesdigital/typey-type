@@ -1,9 +1,16 @@
 @import "global.scss";
-@import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:300,300i,700,700i');
-// @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i');
+@import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700');
 
 // Variables
-$type: 400 16px/1.6 "Overpass Mono", "Montserrat", "Open Sans", Helvetica, sans-serif;
+$type: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+$base-font-size: 16px;
+$font-scale: 1.25; // Major third scale
+$h1-size: $base-font-size * $font-scale * $font-scale * $font-scale * $font-scale; // 39.056px
+$h2-size: $base-font-size * $font-scale * $font-scale * $font-scale; // 31.248px
+$h3-size: $base-font-size * $font-scale * $font-scale; // 25.008px
+$h4-size: $base-font-size * $font-scale; // 20px
+$h5-size: $base-font-size; // 16px
+$h6-size: $base-font-size / $font-scale; // 12.8px
 
 // Element styles
 * {
@@ -18,37 +25,37 @@ body {
   color: saturate(add-shade($brand-primary, 30%), 5%);
 }
 h1 {
-  font-size: 44px;
+  font-size: $h1-size;
   font-weight: normal;
   line-height: 1.4;
   // margin-bottom: 22px;
 }
 h2 {
-  font-size: 37px;
+  font-size: $h2-size;
   font-weight: normal;
   line-height: 1.4;
   // margin-bottom: 18.5px;
 }
 h3 {
-  font-size: 27px;
+  font-size: $h3-size;
   font-weight: normal;
   line-height: 1.4;
   // margin-bottom: 13.5px;
 }
 h4 {
-  font-size: 23px;
+  font-size: $h4-size;
   font-weight: normal;
   line-height: 1.4;
   // margin-bottom: 11.5px;
 }
 h5 {
-  font-size: 18px;
+  font-size: $h5-size;
   font-weight: normal;
   line-height: 1.4;
   // margin-bottom: 9px;
 }
 h6 {
-  font-size: 16px;
+  font-size: $h6-size;
   font-weight: normal;
   line-height: 1.4;
   // margin-bottom: 8px;
@@ -98,6 +105,11 @@ dl.inline-flex dd {
 
 input, textarea {
   font: $type;
+}
+
+small, .text-small {
+  font-size: $base-font-size / $font-scale; // 12.8px
+  line-height: 1.6;
 }
 
 // Utilities
@@ -166,10 +178,6 @@ input, textarea {
 .de-emphasized {
   color: desaturate(add-tint($brand-primary, 30%), 40%);
 }
-.text-small, small {
-  font-size: 12.8px;
-  line-height: 1.6;
-}
 .clearfix {
   display: flow-root;
 }
@@ -184,7 +192,7 @@ input, textarea {
 // Class styles
 .header {
   background-color: saturate(add-shade($brand-primary, 30%), 5%);
-  color: #fff;
+  color: add-tint($brand-primary, 70%);
   padding: 24px;
   nav {
     align-items: center;
@@ -197,9 +205,12 @@ input, textarea {
   }
 }
 .site-heading-link {
-  color: add-tint($brand-primary, 90%);
-  font-size: 44px;
+  color: add-tint($brand-primary, 70%);
   text-decoration: none;
+
+  h1 {
+    line-height: 1;
+  }
 
   &:hover, &:active, &:focus {
     box-shadow: inset add-tint($brand-primary, 50%) 0px -8px 0px 0px;
@@ -217,7 +228,7 @@ input, textarea {
     margin-right: 24px;
   }
   h2 {
-    font-size: 27px;
+    font-size: $h2-size;
   }
   header {
     display: flex;

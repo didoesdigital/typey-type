@@ -12,7 +12,7 @@ class Header extends Component {
         <div className="header">
           <nav>
             <div role="banner" className="site-heading-banner">
-              <Link to="/" className="site-heading-link">Typey type</Link>
+              <Link to="/" className="site-heading-link"><h1>Typey type</h1></Link>
             </div>
             <div className="table search-container">
               <Link to="/lessons" className="link-button mr1">Lessons</Link>
@@ -52,8 +52,8 @@ class Header extends Component {
         <div className="subheader">
           <div className="flex">
             <header>
-              <h1>{this.props.lessonTitle}</h1>
-              <h2>{this.props.lessonSubTitle}</h2>
+              <h2>{this.props.lessonTitle}</h2>
+              <h3>{this.props.lessonSubTitle}</h3>
             </header>
           </div>
           <a href={this.props.path} onClick={this.props.restartLesson} className="link-button table-cell mr1" role="button">Restart lesson</a>
