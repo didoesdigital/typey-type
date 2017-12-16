@@ -7,11 +7,12 @@ import './App.css';
 class Header extends Component {
 
   render() {
+  let nextLesson = this.props.value || 'No lesson selected. See all lessons.';
     return (
       <div>
         <div className="header">
           <nav>
-            <div role="banner" className="site-heading-banner">
+            <div className="site-heading-banner">
               <Link to="/" className="site-heading-link"><h1>Typey type</h1></Link>
             </div>
             <div className="table search-container">
@@ -44,6 +45,11 @@ class Header extends Component {
                 value={this.props.value}
                 wrapperStyle={{ position: 'relative', display: 'table-cell', paddingLeft: '0.5em', paddingRight: '0.5em', width: '100%' }}
               />
+              <div className="visually-hidden">Selected lesson to start next:
+                <div role="status" aria-live="assertive">
+                  {nextLesson}
+                </div>
+              </div>
               <Link to={'/lessons'+this.props.nextLessonPath.replace(/lesson\.txt$/,'')} className="link-button table-cell" role="button">Start</Link>
             </div>
           </nav>
