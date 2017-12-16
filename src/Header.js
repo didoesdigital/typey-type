@@ -11,13 +11,13 @@ class Header extends Component {
       <div>
         <div className="header">
           <nav>
-            <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
             <div role="banner" className="site-heading-banner">
               <Link to="/" className="site-heading-link">Typey type</Link>
             </div>
             <div className="table search-container">
               <Link to="/lessons" className="link-button mr1">Lessons</Link>
 
+              <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
               <Autocomplete
                 getItemValue={(item) => item.title}
                 inputProps={{ id: 'lessons-autocomplete', spellCheck: 'false', autoCapitalize: "off", autoCorrect: "off" }}
