@@ -418,6 +418,7 @@ label {
   color: #fff;
   font-size: 1rem;
   line-height: 1.5;
+  height: 40px;
   padding: 4px 8px;
   width: 100%;
   &:hover {
@@ -448,6 +449,7 @@ label {
   border-radius: 4px;
   border: 1px solid transparent;
   color: #fff;
+  height: 40px;
   padding: 4px 8px;
   text-align: center;
   text-decoration: none;
@@ -460,6 +462,25 @@ label {
   &:active,
   &:focus {
     background-color: add-tint($brand-primary, 20%);
+  }
+}
+.link-ghost-button {
+  border-radius: 4px;
+  border: 1px solid transparent;
+  color: add-tint($brand-primary, 70%);
+  font-size: $h5-size;
+  height: 40px;
+  padding: 4px 8px;
+  text-align: center;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  &:hover {
+    color: add-tint($brand-primary, 90%);
+  }
+  &:active,
+  &:focus {
+    color: add-tint($brand-primary, 50%);
   }
 }
 

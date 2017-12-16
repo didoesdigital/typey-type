@@ -355,6 +355,7 @@ label {
   color: #fff;
   font-size: 1rem;
   line-height: 1.5;
+  height: 40px;
   padding: 4px 8px;
   width: 100%; }
   .inline-form-control:hover {
@@ -382,6 +383,7 @@ label {
   border-radius: 4px;
   border: 1px solid transparent;
   color: #fff;
+  height: 40px;
   padding: 4px 8px;
   text-align: center;
   text-decoration: none;
@@ -392,6 +394,22 @@ label {
     background-color: #533962; }
   .link-button:active, .link-button:focus {
     background-color: #664f74; }
+
+.link-ghost-button {
+  border-radius: 4px;
+  border: 1px solid transparent;
+  color: #c6bdcb;
+  font-size: 16px;
+  height: 40px;
+  padding: 4px 8px;
+  text-align: center;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap; }
+  .link-ghost-button:hover {
+    color: #ece9ee; }
+  .link-ghost-button:active, .link-ghost-button:focus {
+    color: #a091a8; }
 
 .radio-button {
   opacity: 0;

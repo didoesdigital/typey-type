@@ -15,8 +15,7 @@ class Header extends Component {
               <Link to="/" className="site-heading-link"><h1>Typey type</h1></Link>
             </div>
             <div className="table search-container">
-              <Link to="/lessons" className="link-button mr1">Lessons</Link>
-
+              <Link to="/lessons" className="link-ghost-button mr1 table-cell">Lessons</Link>
               <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
               <Autocomplete
                 getItemValue={(item) => item.title}
@@ -43,7 +42,7 @@ class Header extends Component {
                 shouldItemRender={matchLessonToTerm}
                 sortItems={sortLessons}
                 value={this.props.value}
-                wrapperStyle={{ position: 'relative', display: 'table-cell', paddingRight: '0.5em', width: '100%' }}
+                wrapperStyle={{ position: 'relative', display: 'table-cell', paddingLeft: '0.5em', paddingRight: '0.5em', width: '100%' }}
               />
               <Link to={'/lessons'+this.props.nextLessonPath.replace(/lesson\.txt$/,'')} className="link-button table-cell" role="button">Start</Link>
             </div>
