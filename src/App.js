@@ -544,7 +544,13 @@ class App extends Component {
                     </div>
                     <div className="p3 mx-auto mw-1024">
                       <h1>That page doesn't exist</h1>
-                      <p>Try <Link to="/">home</Link> instead.</p>
+                      <p>Try one of these instead:</p>
+                      <ul>
+                        <li><Link to="/">Home</Link>.</li>
+                        <li><Link to="/lessons/">Lessons</Link>.</li>
+                        <li><Link to="/lessons/drills/google-1000-english/">Top 1000 English words</Link>.</li>
+                        <li><Link to="/support/">Help and about</Link>.</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
