@@ -368,10 +368,10 @@ label {
     bottom: 0px;
     cursor: pointer;
     position: absolute;
-    right: 36px - 1px;
+    right: 32px - 1px;
     text-align: center;
     top: 0px;
-    width: 36px;
+    width: 32px;
     &:hover {
       background-color: desaturate(add-tint($brand-primary, 90%), 50%);
     }
@@ -401,7 +401,7 @@ label {
     right: 0px;
     text-align: center;
     top: 0px;
-    width: 36px;
+    width: 32px;
     &:hover {
       background-color: desaturate(add-tint($brand-primary, 90%), 50%);
     }
@@ -438,12 +438,13 @@ label {
   touch-action: manipulation;
 }
 .form-control {
-  display: inline-block;
   border-radius: 4px;
-  padding: 4px 8px;
   border: 1px solid add-tint($brand-primary, 70%);
-  font-size: 1rem;
-  line-height: 1.5;
+  display: inline-block;
+  font-size: $h6-size;
+  height: 32px;
+  line-height: 1.4;
+  padding: 4px 8px;
 }
 .inline-form-control {
   background-color: add-tint($brand-primary, 10%);
@@ -519,6 +520,7 @@ label {
     border: 1px solid add-tint($brand-primary, 70%);
     cursor: pointer;
     float: left;
+    height: 32px;
     margin-right: -1px;
     padding: 4px 8px;
     position: relative;
@@ -642,6 +644,19 @@ label {
 }
 .timer-table {
   width: 156px;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+}
+.subsection-header {
+  background: add-tint($brand-primary, 95%);
+  border-top: 1px solid add-tint($brand-primary, 70%);
+  border-bottom: 1px solid add-tint($brand-primary, 70%);
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 .link-missing-full-stop:after {
   content: ".";

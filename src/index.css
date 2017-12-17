@@ -356,10 +356,10 @@ label {
     bottom: 0px;
     cursor: pointer;
     position: absolute;
-    right: 35px;
+    right: 31px;
     text-align: center;
     top: 0px;
-    width: 36px; }
+    width: 32px; }
     .react-numeric-input b:hover {
       background-color: #ececec; }
     .react-numeric-input b:active, .react-numeric-input b:focus {
@@ -384,7 +384,7 @@ label {
     right: 0px;
     text-align: center;
     top: 0px;
-    width: 36px; }
+    width: 32px; }
     .react-numeric-input b:last-child:hover {
       background-color: #ececec; }
     .react-numeric-input b:last-child:active, .react-numeric-input b:last-child:focus {
@@ -416,12 +416,13 @@ label {
   touch-action: manipulation; }
 
 .form-control {
-  display: inline-block;
   border-radius: 4px;
-  padding: 4px 8px;
   border: 1px solid #c6bdcb;
-  font-size: 1rem;
-  line-height: 1.5; }
+  display: inline-block;
+  font-size: 12.8px;
+  height: 32px;
+  line-height: 1.4;
+  padding: 4px 8px; }
 
 .inline-form-control {
   background-color: #533962;
@@ -486,6 +487,7 @@ label {
     border: 1px solid #c6bdcb;
     cursor: pointer;
     float: left;
+    height: 32px;
     margin-right: -1px;
     padding: 4px 8px;
     position: relative;
@@ -590,7 +592,20 @@ label {
   border-bottom: 2px solid #91a896; }
 
 .timer-table {
-  width: 156px; }
+  width: 156px;
+  border-collapse: separate;
+  border-spacing: 0 4px; }
+
+.subsection-header {
+  background: #f5f4f6;
+  border-top: 1px solid #c6bdcb;
+  border-bottom: 1px solid #c6bdcb;
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px; }
 
 .link-missing-full-stop:after {
   content: "."; }

@@ -21,23 +21,23 @@ class Scores extends Component {
             <td class="text-right">${Math.round(timer/1000)}</td>
           </tr>
           <tr>
-            <th>New words:</th>
+            <th>New:</th>
             <td class="text-right">${this.props.totalNumberOfNewWordsMet}</td>
           </tr>
           <tr>
-            <th>Seen words:</th>
+            <th>Seen before:</th>
             <td class="text-right">${this.props.totalNumberOfLowExposuresSeen}</td>
           </tr>
           <tr>
-            <th>Retained words:</th>
+            <th>From memory:</th>
             <td class="text-right">${this.props.totalNumberOfRetainedWords}</td>
           </tr>
           <tr>
-            <th>Mistyped words:</th>
+            <th>Misstroked:</th>
             <td class="text-right">${this.props.totalNumberOfMistypedWords}</td>
           </tr>
           <tr>
-            <th>Hinted words:</th>
+            <th>Hinted:</th>
             <td class="text-right">${this.props.totalNumberOfHintedWords}</td>
           </tr>
           <tr>
@@ -54,14 +54,14 @@ class Scores extends Component {
     if (this.props.timer !== null) {
       return (
         <div>
-          <h6 className="mb1">Scores</h6>
+          <h5 className="mb1">Scores</h5>
           <div className="timer" dangerouslySetInnerHTML={this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords)} />
         </div>
       );
     } else {
       return (
         <div>
-          <h6 className="mb1">Scores</h6>
+          <h5 className="mb1">Scores</h5>
           <table className="timer-table text-small">
             <tbody>
               <tr>
@@ -72,24 +72,30 @@ class Scores extends Component {
                 <th>Time (seconds):</th>
                 <td className="text-right">0</td>
               </tr>
+            </tbody>
+          </table>
+
+          <h6 className="mt1 mb1 de-emphasized text-uppercase subsection-header">Words typed</h6>
+          <table className="timer-table text-small">
+            <tbody>
               <tr>
-                <th>New words:</th>
+                <th>New:</th>
                 <td className="text-right">0</td>
               </tr>
               <tr>
-                <th>Seen words:</th>
+                <th>Seen before:</th>
                 <td className="text-right">0</td>
               </tr>
               <tr>
-                <th>Retained words:</th>
+                <th>From memory:</th>
                 <td className="text-right">0</td>
               </tr>
               <tr>
-                <th>Mistyped words:</th>
+                <th>Misstroked:</th>
                 <td className="text-right">0</td>
               </tr>
               <tr>
-                <th>Hinted words:</th>
+                <th>Hinted:</th>
                 <td className="text-right">0</td>
               </tr>
               <tr>

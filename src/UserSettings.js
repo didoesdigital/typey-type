@@ -63,7 +63,7 @@ class UserSettings extends Component {
                     checked={this.props.userSettings.seenWords}
                     onChange={this.props.changeUserSetting}
                     />
-                  &lt;30 exposures
+                  Seen words
                 </label>
               </div>
               <div className="checkbox-group">
@@ -141,7 +141,7 @@ class UserSettings extends Component {
             </div>
 
             <label htmlFor="limitNumberOfWords">Limit word count</label>
-            <div className="mb1">
+            <div className="mb2">
               <NumericInput
                 autoCapitalize="off"
                 autoComplete="on"
@@ -188,7 +188,7 @@ class UserSettings extends Component {
             </div>
           </div>
         </form>
-        <p className="mt2"><small>Total word count: {this.props.totalWordCount}</small></p>
+        <p className="mt2"><small>Total words: {this.props.totalWordCount}</small></p>
       </div>
     )
   }
