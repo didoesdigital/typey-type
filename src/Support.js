@@ -4,13 +4,13 @@ const Support = () => {
   return (
     <div className="p3 mx-auto mw-1024">
       <div className="mw-568">
-        <h2>About Typey type</h2>
+        <h2>About Typey type for stenographers</h2>
         <p>Typey type is a typing app designed specifically to help <a href="#about-stenography">stenography</a> students learn <abbr title="stenography">steno</abbr> faster. You can learn briefs and improve your stenographic speed and accuracy using tailored education options, including tight feedback loops so you learn to fix misstrokes immediately. You can effortlessly track progress in your brief vocabulary and rapidly increase in steno skill.</p>
 
         <h3 id="about-stenography">Stenography</h3>
         <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. When you press keys together on a stenotype machine—like playing a piano chord—the software translates the key combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the <a href="http://openstenoproject.org/">Open steno project</a>.</p>
 
-        <h4>Steno and Typey type terms</h4>
+        <h4>Steno terms</h4>
         <dl className="inline-flex">
           <dt>Briefs</dt>
           <dd>Loosely, a brief or outline is the specified combination of keys pressed together to produce a specific word or phrase.</dd>
@@ -18,8 +18,16 @@ const Support = () => {
           <dd>A stroke is a combination of keys held together a released to write a word or sound. A multi-stroke brief is a combination of strokes pressed in order to produce a word or phrase (usually of more syllables).</dd>
           <dt>Plover</dt>
           <dd><a href="http://openstenoproject.org/">Plover</a> is the world’s first free, open-source stenography program that works cross-platform on Windows, mac OS, and *nix operating systems.</dd>
+        </dl>
+
+        <h3>Typey type notes</h3>
+        <p>Typey type embraces ideas of spaced repetitions and deliberate practice to teach steno effectively.</p>
+        <p>When you stop a lesson before reaching the end or you complete a lesson, Typey type will save your progress, including all the new words you’ve successfully met. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress.</p>
+
+        <h4>Typey type terms</h4>
+        <dl className="inline-flex">
           <dt>Spacing</dt>
-          <dd>Steno software can be used to automatically insert spaces before or after words, depending on the specific software and its settings. For example, Plover inserts spaces before words by default, and has a setting to insert spaces after words. Plover also provides extra spacing and capitalisation modes that can be set on the fly to suppress spaces or insert other punctuation (like dashes). For this reason, Typey type lets you choose where spaces should appear in a phrase for checking if you typed it correctly.</dd>
+          <dd>Typey type lets you choose where spaces should appear in a phrase for checking if you typed it correctly. This is because steno software can be used to automatically insert spaces before or after words, depending on the specific software and its settings. For example, Plover inserts spaces before words by default, and has a setting to insert spaces after words. Plover also provides extra spacing and capitalisation modes that can be set on the fly to suppress spaces or insert other punctuation (like dashes). A QWERTYist may feel more comfortable drilling words without any spaces, or sentences with spaces as the end.</dd>
           <dt>Seen words</dt>
           <dd>Typey type tracks words you’ve "seen" or "met". Each time you successfully type a new word, that’s logged as a successful meeting.</dd>
           <dt>Words per minute (WPM)</dt>
@@ -33,14 +41,16 @@ const Support = () => {
           <dt>Practice</dt>
           <dd>The final type of study session lets you mimic real usage as closely as possible. Write as fast as you can without causing misstrokes. Explore stories that use real sentences.</dd>
         </dl>
-        <h3>Typey type notes</h3>
-        <p>Typey type embraces ideas of spaced repetitions and deliberate practice to teach steno effectively.</p>
-        <p>When you stop a lesson before reaching the end or you complete a lesson, Typey type will save your progress, including all the new words you’ve successfully met. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress.</p>
-        <h3>FAQ</h3>
-        <h4>How many new briefs should I learn per day?</h4>
+
+        <h3>Learning stenography</h3>
+        <h4>How long does it take to learn steno?</h4>
+        <p>To write text for personal use, such as writing emails and instant messages, you could learn basic steno at ~40WPM within 3–6 months. To productively use steno to write most text at under 100WPM, it might take 6–18&nbsp;months. For live dictation at 200WPM, it might take you 2&nbsp;or&nbsp;more years. If you are learning stenography for ergonomic reasons and have injuries to manage, it could take longer.</p>
+
+        <h4>How many new briefs should you learn each day?</h4>
         <p>5–40.</p>
         <p>Learning new briefs is like expanding your vocabulary in a new language. One rule of thumb in learning languages is to strive for 15 new words a day, conservatively, or 25 new words a day, aggressively. For one day that might not seem like much, but after a month that’s about 500 new words.</p>
-        <h4>How many briefs should I revise per day?</h4>
+
+        <h4>How many briefs should you revise each day?</h4>
         <p>100–200.</p>
 
         <h3>Support</h3>
