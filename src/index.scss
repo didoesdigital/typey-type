@@ -11,6 +11,7 @@ $h3-size: $base-font-size * $font-scale * $font-scale; // 25.008px
 $h4-size: $base-font-size * $font-scale; // 20px
 $h5-size: $base-font-size; // 16px
 $h6-size: $base-font-size / $font-scale; // 12.8px
+$breakpoint: 1024px;
 
 // Element styles
 * {
@@ -120,71 +121,65 @@ small, .text-small {
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
 }
-.table {
-  display: table;
-}
-.table-cell {
-  display: table-cell;
-}
-.hide {
-  display: none;
-}
+
+.dib             { display: inline-block; }
+.table           { display: table; }
+.table-cell      { display: table-cell; }
+.flex            { display: flex; }
+.flex-wrap       { flex-wrap: wrap; }
+.justify-between { justify-content: space-between; }
+.justify-around  { justify-content: space-around; }
+.items-baseline  { align-items: baseline; }
+.hide            { display: none; }
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
 }
-.mb0 {
-  margin-bottom: 0;
-}
-.mb1 {
-  margin-bottom: 8px;
-}
-.mx1 {
-  margin-left: 8px;
-  margin-right: 8px;
-}
-.mr1 {
-  margin-right: 8px;
-}
-.mt1 {
-  margin-top: 8px;
-}
-.mt2 {
-  margin-top: 16px;
-}
+
+.mb0     { margin-bottom: 0; }
+.mb1     { margin-bottom: 8px; }
+.mr1     { margin-right: 8px; }
+.mr2     { margin-right: 16px; }
+.mr3     { margin-right: 24px; }
+.mt1     { margin-top: 8px; }
+.mt2     { margin-top: 16px; }
+.mx1     { margin-left: 8px; margin-right: 8px; }
+.mxn1    { margin-left: -8px; margin-right: -8px; }
+.mxn2    { margin-left: -16px; margin-right: -16px; }
+
+.mw-1024 { max-width: 1024px; }
+.mw-568  { max-width: 568px; }
+
+.p3      { padding: 24px; }
+.pb0     { padding-bottom: 0; }
+.pb4     { padding-bottom: 24px; }
+
 .py05 {
   padding-top: 4px;
   padding-bottom: 4px;
+}
+.py3 {
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 .px1 {
   padding-left: 8px;
   padding-right: 8px;
 }
-.p4 {
-  padding: 24px;
-}
-.pb0 {
-  padding-bottom: 0;
-}
-.pb4 {
-  padding-bottom: 24px;
-}
-.text-center {
-  text-align: center;
-}
-.text-right {
-  text-align: right;
-}
+
+.text-center { text-align: center; }
+.text-right  { text-align: right; }
+
 .text-uppercase {
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
-.de-emphasized {
-  color: desaturate(add-tint($brand-primary, 30%), 40%);
-}
-.clearfix {
-  display: flow-root;
-}
+
+.de-emphasized { color: desaturate(add-tint($brand-primary, 30%), 40%); }
+
+.clearfix { display: flow-root; }
+
 .unstyled-list {
   list-style-type: none;
   margin-left: 0;
@@ -197,7 +192,6 @@ small, .text-small {
 .header {
   background-color: saturate(add-shade($brand-primary, 30%), 5%);
   color: add-tint($brand-primary, 70%);
-  padding: 24px;
   nav {
     align-items: center;
     display: flex;
@@ -206,9 +200,13 @@ small, .text-small {
   }
   .search-container {
     max-width: 576px;
+    @media (max-width: 864px) {
+      margin-left: -16px;
+      margin-top: 24px;
+    }
   }
 }
-.site-heading-link {
+.heading-link {
   color: add-tint($brand-primary, 70%);
   text-decoration: none;
 
@@ -217,36 +215,25 @@ small, .text-small {
   }
 
   &:hover, &:active, &:focus {
+    color: add-tint($brand-primary, 90%);
     box-shadow: inset add-tint($brand-primary, 50%) 0px -8px 0px 0px;
   }
 }
 
 .subheader {
-  align-items: baseline;
   background-color: $brand-primary;
   color: add-tint($brand-primary, 70%);
-  display: flex;
-  flex-wrap: wrap;
-  padding: 20px;
-  h1 {
-    margin-right: 24px;
-  }
   h2 {
-    font-size: $h2-size;
-  }
-  header {
-    display: flex;
-    align-items: baseline;
+    line-height: 1.55;
   }
 }
 
-.content {
+.lesson-wrapper {
   display: grid;
-  padding: 24px;
   grid-gap: 24px;
   justify-content: space-between;
   margin: 0 auto;
-  @media (min-width: 960px) {
+  @media (min-width: $breakpoint) {
     .user-settings {
       grid-column: 1;
     }
@@ -269,13 +256,24 @@ small, .text-small {
 .lesson-canvas {
   align-items: center;
   display: flex;
-  @media (min-width: 960px) {
+  @media (min-width: $breakpoint) {
     min-width: 544px;
   }
 }
 .user-settings,
 .scores {
-  max-width: 200px;
+  width: 192px;
+}
+@media (max-width: $breakpoint - 1) {
+  .lesson-canvas {
+    order: 1;
+  }
+  .user-settings {
+    order: 2;
+  }
+  .scores {
+    order: 3;
+  }
 }
 
 .material p {
@@ -292,7 +290,7 @@ small, .text-small {
   text-align: center;
   text-decoration: underline;
   text-underline-position: under;
-  @media (min-width: 960px) {
+  @media (min-width: $breakpoint) {
     width: 480px;
   }
 }
@@ -454,7 +452,7 @@ label {
   border: 1px solid transparent;
   color: add-tint($brand-primary, 70%);
   height: 40px;
-  padding: 4px 8px;
+  padding: 4px 16px;
   text-align: center;
   text-decoration: none;
   user-select: none;
@@ -467,24 +465,17 @@ label {
   &:focus {
     background-color: add-tint($brand-primary, 20%);
   }
-}
-.link-ghost-button {
-  border-radius: 4px;
-  border: 1px solid transparent;
-  color: add-tint($brand-primary, 70%);
-  font-size: $h5-size;
-  height: 40px;
-  padding: 4px 8px;
-  text-align: center;
-  user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
-  &:hover {
-    color: add-tint($brand-primary, 90%);
-  }
-  &:active,
-  &:focus {
-    color: add-tint($brand-primary, 50%);
+  &.link-button-ghost {
+    background-color: transparent;
+    font-size: $h5-size;
+    text-decoration: underline;
+    &:hover {
+      color: add-tint($brand-primary, 90%);
+    }
+    &:active,
+    &:focus {
+      color: add-tint($brand-primary, 50%);
+    }
   }
 }
 
@@ -574,7 +565,7 @@ label {
 .material {
   margin-left: auto;
   margin-right: auto;
-  @media (min-width: 960px) {
+  @media (min-width: $breakpoint) {
     min-width: 480px;
   }
 }
@@ -586,7 +577,7 @@ label {
   display: none;
   margin-left: auto;
   margin-right: auto;
-  @media (min-width: 960px) {
+  @media (min-width: $breakpoint) {
     min-width: 480px;
   }
   border: 1px solid $brand-primary;
@@ -596,7 +587,7 @@ label {
   margin-right: auto;
   // opacity: 0;
   // position: absolute;
-  @media (min-width: 960px) {
+  @media (min-width: $breakpoint) {
     min-width: 480px;
   }
   top: 0;
@@ -607,7 +598,7 @@ label {
 .stroke-tip {
   margin-left: auto;
   margin-right: auto;
-  @media (min-width: 960px) {
+  @media (min-width: $breakpoint) {
     min-width: 480px;
   }
 }

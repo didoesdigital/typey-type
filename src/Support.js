@@ -2,7 +2,7 @@ import React from 'react';
 
 const Support = () => {
   return (
-    <div className="p4">
+    <div className="p3 mx-auto mw-1024">
       <h2>About Typey type</h2>
       <p>Typey type is a typing app designed specifically to help <a href="#about-stenography">stenography</a> students learn <abbr title="stenography">steno</abbr> faster. You can learn briefs and improve your stenographic speed and accuracy using tailored education options, including tight feedback loops so you learn to fix misstrokes immediately. You can effortlessly track progress in your brief vocabulary and rapidly increase in steno skill.</p>
 

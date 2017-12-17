@@ -26,7 +26,7 @@ class Lesson extends Component {
     let strokeTip;
 
     if (this.props.settings.customMessage) {
-      customMessage = <h3 className='p4'>{this.props.settings.customMessage}</h3>;
+      customMessage = <h3 className='p3'>{this.props.settings.customMessage}</h3>;
     } else {
       customMessage = ''
     }
@@ -76,7 +76,7 @@ class Lesson extends Component {
         return (
           <div>
             {customMessage}
-            <div className="content">
+            <div className="lesson-wrapper mw-1024 p3">
               <UserSettings
                 changeUserSetting={this.props.changeUserSetting}
                 changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
@@ -87,7 +87,7 @@ class Lesson extends Component {
                 totalWordCount={this.props.totalWordCount}
                 userSettings={this.props.userSettings}
               />
-              <div className="lesson-canvas">
+              <div className="lesson-canvas mw-568">
                 <div className="mx-auto text-center">
                   <Material
                     actualText={this.props.actualText}

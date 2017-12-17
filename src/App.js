@@ -460,13 +460,15 @@ class App extends Component {
                 <div>
                   <div>
                     <div className="header">
-                      <nav>
-                        <div role="banner" className="site-heading-banner">
-                          <Link to="/" className="site-heading-link">Typey type</Link>
-                        </div>
-                      </nav>
+                      <div className="mx-auto mw-1024 p3">
+                        <nav>
+                          <div className="site-heading-banner">
+                            <Link to="/" className="heading-link dib"><h1>Typey type</h1></Link>
+                          </div>
+                        </nav>
+                      </div>
                     </div>
-                    <div className="p4">
+                    <div className="p3 mx-auto mw-1024">
                       <h1>That page doesn't exist</h1>
                       <p>Try <Link to="/">home</Link> instead.</p>
                     </div>
