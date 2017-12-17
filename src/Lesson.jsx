@@ -57,6 +57,7 @@ class Lesson extends Component {
             changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
             changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
             changeUserSetting={this.props.changeUserSetting}
+            chooseStudy={this.props.chooseStudy}
             disableUserSettings={this.props.disableUserSettings}
             handleLimitWordsChange={this.props.handleLimitWordsChange}
             handleRepetitionsChange={this.props.handleRepetitionsChange}
@@ -83,6 +84,7 @@ class Lesson extends Component {
                 changeUserSetting={this.props.changeUserSetting}
                 changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
                 changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+                chooseStudy={this.props.chooseStudy}
                 disableUserSettings={this.props.disableUserSettings}
                 handleLimitWordsChange={this.props.handleLimitWordsChange}
                 handleRepetitionsChange={this.props.handleRepetitionsChange}

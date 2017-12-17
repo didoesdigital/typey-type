@@ -49,7 +49,8 @@ class App extends Component {
         showStrokes: false,
         spacePlacement: 'spaceBeforeOutput',
         sortOrder: 'sortOff',
-        seenWords: true
+        seenWords: true,
+        study: 'discover'
       },
       lesson: {
         sourceMaterial: [{phrase: '', stroke: ''}],
@@ -193,6 +194,64 @@ class App extends Component {
     const value = event.target.value;
 
     newState[name] = value;
+
+    this.setState({userSettings: newState}, () => {
+      if (!(name === 'caseSensitive')) {
+        this.setupLesson();
+      }
+    });
+    return value;
+  }
+
+  chooseStudy(event) {
+    let currentState = this.state.userSettings;
+    let newState = Object.assign({}, currentState);
+
+    const name = 'study'
+    const value = event.target.value;
+
+    newState[name] = value;
+
+    switch (value) {
+      case "discover":
+        newState.showStrokes = true;
+        newState.newWords = true;
+        newState.seenWords = false;
+        newState.retainedWords = false;
+        newState.repetitions = 3;
+        newState.limitNumberOfWords = 15;
+        newState.sortOrder = 'sortOff';
+        break;
+      case "revise":
+        newState.showStrokes = false;
+        newState.newWords = false;
+        newState.seenWords = true;
+        newState.retainedWords = false;
+        newState.repetitions = 3;
+        newState.limitNumberOfWords = 50;
+        newState.sortOrder = 'sortNew';
+        break;
+      case "drill":
+        newState.showStrokes = false;
+        newState.newWords = false;
+        newState.seenWords = true;
+        newState.retainedWords = true;
+        newState.repetitions = 1;
+        newState.limitNumberOfWords = 100;
+        newState.sortOrder = 'sortRandom';
+        break;
+      case "practice":
+        newState.showStrokes = false;
+        newState.newWords = true;
+        newState.seenWords = true;
+        newState.retainedWords = true;
+        newState.repetitions = 1;
+        newState.limitNumberOfWords = 0;
+        newState.sortOrder = 'sortOff';
+        break;
+      default:
+        break;
+    }
 
     this.setState({userSettings: newState}, () => {
       if (!(name === 'caseSensitive')) {
@@ -400,6 +459,7 @@ class App extends Component {
                     changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
                     changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
                     changeUserSetting={this.changeUserSetting.bind(this)}
+                    chooseStudy={this.chooseStudy.bind(this)}
                     currentPhraseID={this.state.currentPhraseID}
                     currentPhrase={presentedMaterialCurrentItem.phrase}
                     currentStroke={presentedMaterialCurrentItem.stroke}
@@ -443,6 +503,7 @@ class App extends Component {
                     changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
                     changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
                     changeUserSetting={this.changeUserSetting.bind(this)}
+                    chooseStudy={this.chooseStudy.bind(this)}
                     currentPhraseID={this.state.currentPhraseID}
                     currentPhrase={presentedMaterialCurrentItem.phrase}
                     currentStroke={presentedMaterialCurrentItem.stroke}

@@ -128,7 +128,8 @@ function loadPersonalPreferences() {
     showStrokes: false,
     spacePlacement: 'spaceBeforeOutput',
     sortOrder: 'sortOff',
-    seenWords: true
+    seenWords: true,
+    study: 'discover'
   };
   if (window.localStorage) {
     if (window.localStorage.getItem('metWords')) {

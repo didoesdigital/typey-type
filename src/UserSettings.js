@@ -17,6 +17,71 @@ class UserSettings extends Component {
           <legend className="mb1">Settings</legend>
           <div className="text-small">
             <div className="mb2">
+              <div className="radio-group">
+                <label className="radio-label">
+                  <input
+                    className="radio-input"
+                    type="radio"
+                    name="study"
+                    id="discover"
+                    value="discover"
+                    disabled={this.props.disableUserSettings}
+                    checked={this.props.userSettings.study==="discover"}
+                    onChange={this.props.chooseStudy}
+                    />
+                  Discover
+                </label>
+              </div>
+              <div className="radio-group">
+                <label className="radio-label">
+                  <input
+                    className="radio-input"
+                    type="radio"
+                    name="study"
+                    id="revise"
+                    value="revise"
+                    disabled={this.props.disableUserSettings}
+                    checked={this.props.userSettings.study==="revise"}
+                    onChange={this.props.chooseStudy}
+                    />
+                  Revise
+                </label>
+              </div>
+              <div className="radio-group">
+                <label className="radio-label">
+                  <input
+                    className="radio-input"
+                    type="radio"
+                    name="study"
+                    id="drill"
+                    value="drill"
+                    disabled={this.props.disableUserSettings}
+                    checked={this.props.userSettings.study==="drill"}
+                    onChange={this.props.chooseStudy}
+                    />
+                  Drill
+                </label>
+              </div>
+              <div className="radio-group">
+                <label className="radio-label">
+                  <input
+                    className="radio-input"
+                    type="radio"
+                    name="study"
+                    id="practice"
+                    value="practice"
+                    disabled={this.props.disableUserSettings}
+                    checked={this.props.userSettings.study==="practice"}
+                    onChange={this.props.chooseStudy}
+                    />
+                  Practice
+                </label>
+              </div>
+            </div>
+
+            <h6 className={toggleClasses} onClick={this.props.toggleHideOtherSettings} role="button" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">Other settings{this.props.hideOtherSettings}</h6>
+            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'hide' : ''} aria-hidden={this.props.hideOtherSettings}>
+
               <div className="checkbox-group">
                 <label className="checkbox-label">
                   <input
@@ -87,10 +152,7 @@ class UserSettings extends Component {
                   Retained words
                 </label>
               </div>
-            </div>
 
-            <h6 className={toggleClasses} onClick={this.props.toggleHideOtherSettings} role="button" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">Other settings{this.props.hideOtherSettings}</h6>
-            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'hide' : ''} aria-hidden={this.props.hideOtherSettings}>
               <div className="radio-button-group clearfix mb1 mt2">
                 <legend className="mb1">Match spaces</legend>
 
