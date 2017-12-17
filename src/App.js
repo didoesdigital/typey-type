@@ -466,6 +466,7 @@ class App extends Component {
                     disableUserSettings={this.state.disableUserSettings}
                     handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
                     handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
+                    hideOtherSettings={this.state.hideOtherSettings}
                     settings={this.state.lesson.settings}
                     showStrokesInLesson={this.state.showStrokesInLesson}
                     timer={this.state.timer}
