@@ -108,6 +108,37 @@ input, textarea {
   font: $type;
 }
 
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  border-radius: 4px;
+  border: 1px solid add-tint($brand-primary, 70%);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1rem;
+  font: $type;
+  line-height: 1.5;
+  max-width: 100%;
+  padding: 4px 32px 4px 8px !important;
+  -webkit-padding-end: 32px !important;
+  -webkit-padding-start: 8px !important;
+  background-image:
+    linear-gradient(45deg, transparent 50%, add-tint($brand-primary, 30%) 50%),
+    linear-gradient(135deg, add-tint($brand-primary, 30%) 50%, transparent 50%);
+  background-position:
+    calc(100% - 16px) calc(1em - 1px),
+    calc(100% - 11px) calc(1em - 1px);
+  background-size:
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+}
+select::-ms-expand {
+  display: none; // hide default arrows in IE10 & IE11
+}
+
 small, .text-small {
   font-size: $base-font-size / $font-scale; // 12.8px
   line-height: 1.6;
@@ -139,6 +170,7 @@ small, .text-small {
 
 .mb0     { margin-bottom: 0; }
 .mb1     { margin-bottom: 8px; }
+.mb2     { margin-bottom: 16px; }
 .mr1     { margin-right: 8px; }
 .mr2     { margin-right: 16px; }
 .mr3     { margin-right: 24px; }
