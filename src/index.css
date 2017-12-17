@@ -12,38 +12,47 @@ body {
 h1 {
   font-size: 39.0625px;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.4;
+  margin-bottom: 22px; }
 
 h2 {
   font-size: 31.25px;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.4;
+  margin-bottom: 18.5px; }
 
 h3 {
   font-size: 25px;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.4;
+  margin-bottom: 13.5px; }
 
 h4 {
   font-size: 20px;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.4;
+  margin-bottom: 11.5px; }
 
 h5 {
   font-size: 16px;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.4;
+  margin-bottom: 9px; }
 
 h6 {
   font-size: 12.8px;
   font-weight: normal;
-  line-height: 1.4; }
+  line-height: 1.4;
+  margin-bottom: 8px; }
 
 li {
   margin-left: 1em; }
 
 p {
   line-height: 2;
+  margin-bottom: 1em; }
+
+li, dd, dt {
   margin-bottom: 1em; }
 
 a {
@@ -66,19 +75,17 @@ dl.inline-flex {
   display: flex;
   flex-flow: row;
   flex-wrap: wrap;
-  overflow: visible;
-  width: 148px; }
+  overflow: visible; }
 
 dl.inline-flex dt {
-  flex: 0 0 80%;
+  flex: 0 0 134px;
   overflow: hidden;
   text-overflow: ellipsis; }
 
 dl.inline-flex dd {
-  flex: 0 0 20%;
+  flex: 0 0 434px;
   margin-left: auto;
   overflow: hidden;
-  text-align: right;
   text-overflow: ellipsis; }
 
 input, textarea {
@@ -255,7 +262,8 @@ small, .text-small {
   color: #c6bdcb;
   text-decoration: none; }
   .heading-link h1 {
-    line-height: 1; }
+    line-height: 1;
+    margin-bottom: 0; }
   .heading-link:hover, .heading-link:active, .heading-link:focus {
     color: #ece9ee;
     box-shadow: inset #a091a8 0px -8px 0px 0px; }
@@ -264,7 +272,8 @@ small, .text-small {
   background-color: #402351;
   color: #c6bdcb; }
   .subheader h2 {
-    line-height: 1.55; }
+    line-height: 1.55;
+    margin-bottom: 0; }
 
 .lesson-wrapper {
   display: grid;
@@ -629,13 +638,13 @@ label {
 
 .subsection-header-toggle {
   cursor: pointer;
-  background-image: linear-gradient(45deg, transparent 50%, #796585 50%), linear-gradient(135deg, #796585 60%, transparent 50%);
-  background-position: calc(100% - 16px) calc(1.25em - 1px), calc(100% - 11px) calc(1.25em - 1px);
+  background-image: linear-gradient(135deg, transparent 60%, #796585 50%), linear-gradient(45deg, #796585 50%, transparent 50%);
+  background-position: calc(100% - 16px) calc(1.25em - 2px), calc(100% - 11px) calc(1.25em - 2px);
   background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat; }
   .subsection-header-toggle.collapsed {
-    background-image: linear-gradient(135deg, transparent 60%, #796585 50%), linear-gradient(45deg, #796585 50%, transparent 50%);
-    background-position: calc(100% - 16px) calc(1.25em - 2px), calc(100% - 11px) calc(1.25em - 2px);
+    background-image: linear-gradient(45deg, transparent 50%, #796585 50%), linear-gradient(135deg, #796585 60%, transparent 50%);
+    background-position: calc(100% - 16px) calc(1.25em - 1px), calc(100% - 11px) calc(1.25em - 1px);
     background-size: 5px 5px, 5px 5px;
     background-repeat: no-repeat; }
   .subsection-header-toggle:hover {

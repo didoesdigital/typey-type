@@ -11,7 +11,7 @@ const Support = () => {
         <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. When you press keys together on a stenotype machine—like playing a piano chord—the software translates the key combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the <a href="http://openstenoproject.org/">Open steno project</a>.</p>
 
         <h4>Steno and Typey type terms</h4>
-        <dl>
+        <dl className="inline-flex">
           <dt>Briefs</dt>
           <dd>Loosely, a brief or outline is the specified combination of keys pressed together to produce a specific word or phrase.</dd>
           <dt>Strokes</dt>
@@ -19,13 +19,22 @@ const Support = () => {
           <dt>Plover</dt>
           <dd><a href="http://openstenoproject.org/">Plover</a> is the world’s first free, open-source stenography program that works cross-platform on Windows, mac OS, and *nix operating systems.</dd>
           <dt>Spacing</dt>
-          <dd>Steno software can be used to automatically insert spaces before or after words, depending on the specific software and its settings. For example, Plover inserts spaces before words by default, and has a setting to insert spaces after words, as well as providing alternative spacing and capitalisation modes that can be set on the fly to suppress spaces or insert other punctuation (like dashes). For this reason, Typey type lets you choose where spaces should appear in a phrase for checking if you typed it correctly.</dd>
-          <dt>Met words</dt>
-          <dd>Typey type tracks words you’ve "met" or "seen". Each time you successfully type a new word, that’s logged as a successful meeting.</dd>
-          <dt>Words per minute</dt>
+          <dd>Steno software can be used to automatically insert spaces before or after words, depending on the specific software and its settings. For example, Plover inserts spaces before words by default, and has a setting to insert spaces after words. Plover also provides extra spacing and capitalisation modes that can be set on the fly to suppress spaces or insert other punctuation (like dashes). For this reason, Typey type lets you choose where spaces should appear in a phrase for checking if you typed it correctly.</dd>
+          <dt>Seen words</dt>
+          <dd>Typey type tracks words you’ve "seen" or "met". Each time you successfully type a new word, that’s logged as a successful meeting.</dd>
+          <dt>Words per minute (WPM)</dt>
           <dd>To track your typing speed, Typey type displays the number of words you’ve typed per minute using the unit "words per minute (WPM)", where a word is considered to be 5 letters long on average. This means you might type many short words and have a higher WPM score.</dd>
+          <dt>Discover</dt>
+          <dd>The first type of study session lets you discover new briefs by showing only a limited number of new words while revealing their strokes. Write these words slowly, concentrating on accuracy and forming good habits around how you stroke word parts. Focus on lessons with interesting words, especially top words for your needs (such as common English words for general usage or domain specific phrases for steno in particular industries).</dd>
+          <dt>Revise</dt>
+          <dd>The next type of study session helps you revise recently learned briefs by showing only words you’ve seen. Apply effort in recalling these briefs before showing strokes, and avoid fingerspelling or stroking out long, phonetic forms of words so you can memorise the rehearse the best brief for every word. Choose a lesson with the majority of words you’re interested in nailing first like the top 1000 English words.</dd>
+          <dt>Drill</dt>
+          <dd>The third type of study session is about building up your muscle memory and testing your skills. Write as fast and furiously as you can and aim for a high WPM score. Pick specific drills that focus on a certain kind of brief or many similar words so you can associate them together.</dd>
+          <dt>Practice</dt>
+          <dd>The final type of study session lets you mimic real usage as closely as possible. Write as fast as you can without causing misstrokes. Explore stories that use real sentences.</dd>
         </dl>
         <h3>Typey type notes</h3>
+        <p>Typey type embraces ideas of spaced repetitions and deliberate practice to teach steno effectively.</p>
         <p>When you stop a lesson before reaching the end or you complete a lesson, Typey type will save your progress, including all the new words you’ve successfully met. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress.</p>
         <h3>FAQ</h3>
         <h4>How many new briefs should I learn per day?</h4>
