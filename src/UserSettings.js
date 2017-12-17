@@ -14,7 +14,8 @@ class UserSettings extends Component {
     return (
       <div className="user-settings">
         <form>
-          <legend className="mb1">Settings</legend>
+          <h5 className="mb1">Settings</h5>
+          <legend className="mb1 text-small">Choose study type:</legend>
           <div className="text-small">
             <div className="mb2">
               <div className="radio-group">
@@ -82,7 +83,7 @@ class UserSettings extends Component {
             <h6 className={toggleClasses} onClick={this.props.toggleHideOtherSettings} role="button" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">Other settings{this.props.hideOtherSettings}</h6>
             <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'hide' : ''} aria-hidden={this.props.hideOtherSettings}>
 
-              <div className="checkbox-group">
+              <div className="checkbox-group mt2">
                 <label className="checkbox-label">
                   <input
                     className="checkbox-input"

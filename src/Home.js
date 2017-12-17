@@ -6,7 +6,7 @@ const Home = ( props ) => {
   if (isFirstVisit()) {
     return (
       <div>
-        <h3 className='p3 pb0'>Welcome to Typey type for stenographers</h3>
+        <h3 className='p3 pb0 mx-auto mw-1024'>Welcome to Typey type for stenographers</h3>
         <Lesson
           {...props}
           />

@@ -20,6 +20,12 @@ class Scores extends Component {
             <th>Time (seconds):</th>
             <td class="text-right">${Math.round(timer/1000)}</td>
           </tr>
+        </tbody>
+      </table>
+
+      <h6 class="mt1 mb1 de-emphasized text-uppercase subsection-header">Words typed</h6>
+      <table class="timer-table text-small">
+        <tbody>
           <tr>
             <th>New:</th>
             <td class="text-right">${this.props.totalNumberOfNewWordsMet}</td>
