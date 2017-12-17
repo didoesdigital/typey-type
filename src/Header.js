@@ -55,14 +55,14 @@ class Header extends Component {
           </nav>
         </div>
         <div className="subheader">
-          <div className="flex">
+          <div className="flex mr1">
             <header>
               <h2>{this.props.lessonTitle}</h2>
               <h3>{this.props.lessonSubTitle}</h3>
             </header>
           </div>
-          <a href={this.props.path} onClick={this.props.restartLesson} className="link-button table-cell mr1" role="button">Restart lesson</a>
-          <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button table-cell" role="button">Stop lesson</a>
+          <a href={this.props.path} onClick={this.props.restartLesson} className="link-button table-cell mr1" role="button">Restart</a>
+          <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button table-cell" role="button">Stop</a>
         </div>
       </div>
     )

@@ -6,7 +6,7 @@ const Home = ( props ) => {
   if (isFirstVisit()) {
     return (
       <div>
-        <h2 className='p4 pb0'>Welcome to Typey type for stenographers</h2>
+        <h3 className='p4 pb0'>Welcome to Typey type for stenographers</h3>
         <Lesson
           {...props}
           />
@@ -15,7 +15,6 @@ const Home = ( props ) => {
   } else {
     return (
       <div>
-        <h2 className='p4 pb0'>Welcome back</h2>
         <Lesson
           {...props}
           />

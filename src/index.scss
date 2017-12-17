@@ -22,7 +22,7 @@ $h6-size: $base-font-size / $font-scale; // 12.8px
 body {
   font: $type;
   margin: 0 auto;
-  color: saturate(add-shade($brand-primary, 30%), 5%);
+  color: desaturate($brand-primary, 5%);
 }
 h1 {
   font-size: $h1-size;
@@ -139,6 +139,10 @@ small, .text-small {
 .mb1 {
   margin-bottom: 8px;
 }
+.mx1 {
+  margin-left: 8px;
+  margin-right: 8px;
+}
 .mr1 {
   margin-right: 8px;
 }
@@ -220,7 +224,7 @@ small, .text-small {
 .subheader {
   align-items: baseline;
   background-color: $brand-primary;
-  color: add-tint($brand-primary, 90%);
+  color: add-tint($brand-primary, 70%);
   display: flex;
   flex-wrap: wrap;
   padding: 20px;
@@ -448,7 +452,7 @@ label {
   background-color: $brand-primary;
   border-radius: 4px;
   border: 1px solid transparent;
-  color: #fff;
+  color: add-tint($brand-primary, 70%);
   height: 40px;
   padding: 4px 8px;
   text-align: center;
