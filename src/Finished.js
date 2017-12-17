@@ -22,6 +22,8 @@ class Finished extends Component {
             disableUserSettings={this.props.disableUserSettings}
             handleLimitWordsChange={this.props.handleLimitWordsChange}
             handleRepetitionsChange={this.props.handleRepetitionsChange}
+            hideOtherSettings={this.props.hideOtherSettings}
+            toggleHideOtherSettings={this.props.toggleHideOtherSettings}
             totalWordCount={this.props.totalWordCount}
             userSettings={this.props.userSettings}
           />

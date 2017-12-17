@@ -4,6 +4,13 @@ import NumericInput from 'react-numeric-input';
 class UserSettings extends Component {
   render() {
     var grabStyle = function() {return false};
+    let toggleClasses;
+    if (this.props.hideOtherSettings) {
+      toggleClasses = "mt1 mb1 de-emphasized text-uppercase subsection-header subsection-header-toggle collapsed";
+    } else {
+      toggleClasses = "mt1 mb1 de-emphasized text-uppercase subsection-header subsection-header-toggle";
+    }
+
     return (
       <div className="user-settings">
         <form>
@@ -82,113 +89,116 @@ class UserSettings extends Component {
               </div>
             </div>
 
-            <div className="radio-button-group clearfix mb1">
-              <legend className="mb1">Match spaces</legend>
+            <h6 className={toggleClasses} onClick={this.props.toggleHideOtherSettings} role="button" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">Other settings{this.props.hideOtherSettings}</h6>
+            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'hide' : ''} aria-hidden={this.props.hideOtherSettings}>
+              <div className="radio-button-group clearfix mb1 mt2">
+                <legend className="mb1">Match spaces</legend>
 
-              <input
-                className="radio-button"
-                type="radio"
-                name="spacePlacement"
-                id="spaceBeforeOutput"
-                value="spaceBeforeOutput"
-                disabled={this.props.disableUserSettings}
-                checked={this.props.userSettings.spacePlacement==="spaceBeforeOutput"}
-                onChange={this.props.changeSpacePlacementUserSetting}
+                <input
+                  className="radio-button"
+                  type="radio"
+                  name="spacePlacement"
+                  id="spaceBeforeOutput"
+                  value="spaceBeforeOutput"
+                  disabled={this.props.disableUserSettings}
+                  checked={this.props.userSettings.spacePlacement==="spaceBeforeOutput"}
+                  onChange={this.props.changeSpacePlacementUserSetting}
+                  />
+                <label htmlFor="spaceBeforeOutput" aria-hidden="true">" x"</label>
+                <label htmlFor="spaceBeforeOutput" className="visually-hidden" aria-label="Space Before Output"></label>
+
+                <input
+                  className="radio-button"
+                  type="radio"
+                  name="spacePlacement"
+                  id="spaceAfterOutput"
+                  value="spaceAfterOutput"
+                  disabled={this.props.disableUserSettings}
+                  checked={this.props.userSettings.spacePlacement==="spaceAfterOutput"}
+                  onChange={this.props.changeSpacePlacementUserSetting}
+                  />
+                <label htmlFor="spaceAfterOutput" aria-hidden="true">"x "</label>
+                <label htmlFor="spaceAfterOutput" className="visually-hidden" aria-label="Space After Output"></label>
+
+                <label htmlFor="spaceOff" className="visually-hidden" aria-label="Ignore spaces"></label>
+                {/*
+                  This label is in a different location to other hidden screen reader labels so that
+                  input+label works for styled buttons and :first-of-type/:last-of-type work for rounded
+                  button group corners.
+                  */}
+                <input
+                  className="radio-button"
+                  type="radio"
+                  name="spacePlacement"
+                  id="spaceOff"
+                  value="spaceOff"
+                  disabled={this.props.disableUserSettings}
+                  checked={this.props.userSettings.spacePlacement==="spaceOff"}
+                  onChange={this.props.changeSpacePlacementUserSetting}
+                  />
+                <label htmlFor="spaceOff" aria-hidden="true">Off</label>
+              </div>
+
+              <div className="clearfix mb2">
+                <label className="mb1">Sort</label>
+                <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small">
+                  <option value="sortOff">Lesson default</option>
+                  <option value="sortRandom">Random</option>
+                  <option value="sortNew">Newest words first</option>
+                  <option value="sortOld">Oldest words first</option>
+                </select>
+              </div>
+
+              <label htmlFor="limitNumberOfWords">Limit word count</label>
+              <div className="mb2">
+                <NumericInput
+                  autoCapitalize="off"
+                  autoComplete="on"
+                  autoCorrect="on"
+                  autoFocus={false}
+                  className="form-control"
+                  disabled={this.props.disableUserSettings}
+                  id="limitNumberOfWords"
+                  min={0}
+                  name="limitNumberOfWords"
+                  onChange={this.props.handleLimitWordsChange}
+                  precision={0}
+                  spellCheck="false"
+                  step={1}
+                  style={grabStyle()}
+                  type="number"
+                  value={this.props.userSettings.limitNumberOfWords}
+                  snap
                 />
-              <label htmlFor="spaceBeforeOutput" aria-hidden="true">" x"</label>
-              <label htmlFor="spaceBeforeOutput" className="visually-hidden" aria-label="Space Before Output"></label>
+              </div>
 
-              <input
-                className="radio-button"
-                type="radio"
-                name="spacePlacement"
-                id="spaceAfterOutput"
-                value="spaceAfterOutput"
-                disabled={this.props.disableUserSettings}
-                checked={this.props.userSettings.spacePlacement==="spaceAfterOutput"}
-                onChange={this.props.changeSpacePlacementUserSetting}
+              <label htmlFor="repetitions">Repetitions</label>
+              <div className="mb1">
+                <NumericInput
+                  autoCapitalize="off"
+                  autoComplete="on"
+                  autoCorrect="on"
+                  autoFocus={false}
+                  className="form-control"
+                  disabled={this.props.disableUserSettings}
+                  id="repetitions"
+                  max={30}
+                  min={1}
+                  name="repetitions"
+                  onChange={this.props.handleRepetitionsChange}
+                  precision={0}
+                  spellCheck="false"
+                  step={1}
+                  style={grabStyle()}
+                  type="number"
+                  value={this.props.userSettings.repetitions}
+                  snap
                 />
-              <label htmlFor="spaceAfterOutput" aria-hidden="true">"x "</label>
-              <label htmlFor="spaceAfterOutput" className="visually-hidden" aria-label="Space After Output"></label>
-
-              <label htmlFor="spaceOff" className="visually-hidden" aria-label="Ignore spaces"></label>
-              {/*
-                This label is in a different location to other hidden screen reader labels so that
-                input+label works for styled buttons and :first-of-type/:last-of-type work for rounded
-                button group corners.
-                */}
-              <input
-                className="radio-button"
-                type="radio"
-                name="spacePlacement"
-                id="spaceOff"
-                value="spaceOff"
-                disabled={this.props.disableUserSettings}
-                checked={this.props.userSettings.spacePlacement==="spaceOff"}
-                onChange={this.props.changeSpacePlacementUserSetting}
-                />
-              <label htmlFor="spaceOff" aria-hidden="true">Off</label>
-            </div>
-
-            <div className="clearfix mb2">
-              <label className="mb1">Sort</label>
-              <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small">
-                <option value="sortOff">Lesson default</option>
-                <option value="sortRandom">Random</option>
-                <option value="sortNew">Newest words first</option>
-                <option value="sortOld">Oldest words first</option>
-              </select>
-            </div>
-
-            <label htmlFor="limitNumberOfWords">Limit word count</label>
-            <div className="mb2">
-              <NumericInput
-                autoCapitalize="off"
-                autoComplete="on"
-                autoCorrect="on"
-                autoFocus={false}
-                className="form-control"
-                disabled={this.props.disableUserSettings}
-                id="limitNumberOfWords"
-                min={0}
-                name="limitNumberOfWords"
-                onChange={this.props.handleLimitWordsChange}
-                precision={0}
-                spellCheck="false"
-                step={1}
-                style={grabStyle()}
-                type="number"
-                value={this.props.userSettings.limitNumberOfWords}
-                snap
-              />
-            </div>
-
-            <label htmlFor="repetitions">Repetitions</label>
-            <div className="mb1">
-              <NumericInput
-                autoCapitalize="off"
-                autoComplete="on"
-                autoCorrect="on"
-                autoFocus={false}
-                className="form-control"
-                disabled={this.props.disableUserSettings}
-                id="repetitions"
-                max={30}
-                min={1}
-                name="repetitions"
-                onChange={this.props.handleRepetitionsChange}
-                precision={0}
-                spellCheck="false"
-                step={1}
-                style={grabStyle()}
-                type="number"
-                value={this.props.userSettings.repetitions}
-                snap
-              />
+              </div>
             </div>
           </div>
         </form>
-        <p className="mt2"><small>Total words: {this.props.totalWordCount}</small></p>
+        <p className="mt1"><small>Total words: {this.props.totalWordCount}</small></p>
       </div>
     )
   }

@@ -125,7 +125,7 @@ select {
   -webkit-padding-end: 32px !important;
   -webkit-padding-start: 8px !important;
   background-image:
-    linear-gradient(45deg, transparent 50%, add-tint($brand-primary, 30%) 50%),
+    linear-gradient(45deg, transparent 60%, add-tint($brand-primary, 30%) 50%),
     linear-gradient(135deg, add-tint($brand-primary, 30%) 50%, transparent 50%);
   background-position:
     calc(100% - 16px) calc(1em - 1px),
@@ -291,11 +291,17 @@ small, .text-small {
   @media (min-width: $breakpoint) {
     min-width: 544px;
   }
+  max-height: 320px;
 }
-.user-settings,
-.scores {
+.user-settings {
+  min-height: 320px;
   width: 192px;
 }
+.scores {
+  max-height: 320px;
+  width: 192px;
+}
+
 @media (max-width: $breakpoint - 1) {
   .lesson-canvas {
     order: 1;
@@ -386,7 +392,7 @@ label {
       width: 0px;
       height: 0px;
       border-width: 0px 0.6ex 0.6ex;
-      border-color: transparent transparent rgba(0, 0, 0, 0.7);
+      border-color: transparent transparent add-tint($brand-primary, 30%);
       border-style: solid;
       margin: -0.3ex 0px 0px -0.56ex;
     }
@@ -416,7 +422,7 @@ label {
       width: 0px;
       height: 0px;
       border-width: 0.6ex 0.6ex 0px;
-      border-color: rgba(0, 0, 0, 0.7) transparent transparent;
+      border-color: add-tint($brand-primary, 30%) transparent transparent;
       border-style: solid;
       margin: -0.3ex 0px 0px -0.56ex;
     }
@@ -657,6 +663,34 @@ label {
   padding-right: 16px;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+.subsection-header-toggle {
+  cursor: pointer;
+  background-image:
+    linear-gradient(45deg, transparent 50%, add-tint($brand-primary, 30%) 50%),
+    linear-gradient(135deg, add-tint($brand-primary, 30%) 60%, transparent 50%);
+  background-position:
+    calc(100% - 16px) calc(1.25em - 1px),
+    calc(100% - 11px) calc(1.25em - 1px);
+  background-size:
+    5px 5px,
+    5px 5px;
+  background-repeat: no-repeat;
+  &.collapsed {
+    background-image:
+      linear-gradient(135deg, transparent 60%, add-tint($brand-primary, 30%) 50%),
+      linear-gradient(45deg, add-tint($brand-primary, 30%) 50%, transparent 50%);
+    background-position:
+      calc(100% - 16px) calc(1.25em - 2px),
+      calc(100% - 11px) calc(1.25em - 2px);
+    background-size:
+      5px 5px,
+      5px 5px;
+    background-repeat: no-repeat;
+  }
+  &:hover {
+    color: desaturate($brand-primary, 5%);
+  }
 }
 .link-missing-full-stop:after {
   content: ".";

@@ -22,6 +22,7 @@ class App extends Component {
       currentPhraseID: 0,
       currentPhraseMeetingSuccess: 1,
       actualText: ``,
+      hideOtherSettings: true,
       nextLessonPath: '',
       startTime: null,
       showStrokesInLesson: false,
@@ -272,6 +273,14 @@ class App extends Component {
     });
   }
 
+  toggleHideOtherSettings() {
+    console.log("ping");
+    let newState = !this.state.hideOtherSettings;
+    this.setState({
+      hideOtherSettings: newState
+    });
+  }
+
   restartLesson(event) {
     event.preventDefault();
     this.setState({
@@ -400,6 +409,7 @@ class App extends Component {
                     settings={this.state.lesson.settings}
                     showStrokesInLesson={this.state.showStrokesInLesson}
                     timer={this.state.timer}
+                    toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
                     totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
                     totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
                     totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
@@ -439,9 +449,11 @@ class App extends Component {
                     disableUserSettings={this.state.disableUserSettings}
                     handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
                     handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
+                    hideOtherSettings={this.state.hideOtherSettings}
                     settings={this.state.lesson.settings}
                     showStrokesInLesson={this.state.showStrokesInLesson}
                     timer={this.state.timer}
+                    toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
                     totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
                     totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
                     totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
