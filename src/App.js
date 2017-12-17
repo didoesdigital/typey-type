@@ -3,13 +3,13 @@ import { randomise } from './utils';
 import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, fetchLessonIndex} from './typey-type';
 import {
   Route,
-  Link,
   Switch
 } from 'react-router-dom';
 import Lessons from './Lessons';
 import Home from './Home';
 import Header from './Header';
 import Support from './Support';
+import PageNotFound from './PageNotFound';
 import Footer from './Footer';
 import './App.css';
 
@@ -532,27 +532,7 @@ class App extends Component {
               />
               <Route render={ () =>
                 <div>
-                  <div>
-                    <div className="header">
-                      <div className="mx-auto mw-1024 p3">
-                        <nav>
-                          <div className="site-heading-banner">
-                            <Link to="/" className="heading-link dib"><h1>Typey type</h1></Link>
-                          </div>
-                        </nav>
-                      </div>
-                    </div>
-                    <div className="p3 mx-auto mw-1024">
-                      <h1>That page doesn't exist</h1>
-                      <p>Try one of these instead:</p>
-                      <ul>
-                        <li><Link to="/">Home</Link>.</li>
-                        <li><Link to="/lessons/">Lessons</Link>.</li>
-                        <li><Link to="/lessons/drills/google-1000-english/">Top 1000 English words</Link>.</li>
-                        <li><Link to="/support/">Help and about</Link>.</li>
-                      </ul>
-                    </div>
-                  </div>
+                  <PageNotFound />
                 </div>
                 }
               />
