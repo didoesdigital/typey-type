@@ -98,6 +98,10 @@ describe('repetitionsRemaining', () => {
       currentPhraseID = 11;
       expect(repetitionsRemaining(userSettings, presentedMaterial, currentPhraseID)).toEqual(1);
     });
+    it('on words higher than lesson length, returns 0 reps remaining', () => {
+      currentPhraseID = 12;
+      expect(repetitionsRemaining(userSettings, presentedMaterial, currentPhraseID)).toEqual(0);
+    });
 
   });
 
