@@ -391,7 +391,8 @@ class App extends Component {
       totalNumberOfMistypedWords: this.state.totalNumberOfMistypedWords,
       totalNumberOfHintedWords: this.state.totalNumberOfHintedWords,
       actualText: actualText,
-      metWords: this.state.metWords
+      metWords: this.state.metWords,
+      userSettings: this.state.userSettings
     };
 
     if (unmatchedActual.length > 0) {
@@ -416,11 +417,11 @@ class App extends Component {
         newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess + meetingsCount;
       }
       newState.currentPhraseMeetingSuccess = 1;
-    }
 
-    // if (this.studyType(this.state.userSettings) === 'discover' && repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID) === 1) {
-    //   newState.userSettings.showStrokes = false;
-    // }
+      if (this.studyType(this.state.userSettings) === 'discover' && repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1) === 1) {
+        newState.userSettings.showStrokes = false;
+      }
+    }
 
     this.setState(newState, () => {
       if (this.isFinished()) {
