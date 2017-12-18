@@ -70,18 +70,18 @@ class App extends Component {
         path: ''
       },
       lessonIndex: [{
-        "title": "Top 1000 English words",
+        "title": "Top 10000 English words",
         "subtitle": "",
         "category": "Collections",
         "subcategory": "",
-        "path": process.env.PUBLIC_URL + "/drills/google-1000-english/lesson.txt"
+        "path": process.env.PUBLIC_URL + "/drills/top-10000-english-words/lesson.txt"
       }]
     };
   }
 
   componentWillMount() {
     if(this.state.lesson.path==='') {
-      this.handleLesson(process.env.PUBLIC_URL + '/lessons/drills/google-1000-english/lesson.txt');
+      this.handleLesson(process.env.PUBLIC_URL + '/lessons/drills/top-10000-english-words/lesson.txt');
     }
   }
 

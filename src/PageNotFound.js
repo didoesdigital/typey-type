@@ -21,7 +21,7 @@ const PageNotFound = () => {
         <ul>
           <li><Link to="/">Home</Link>.</li>
           <li><Link to="/lessons/">Lessons</Link>.</li>
-          <li><Link to="/lessons/drills/google-1000-english/">Top 1000 English words</Link>.</li>
+          <li><Link to="/lessons/drills/top-10000-english-words/">Top 10000 English words</Link>.</li>
           <li><Link to="/support/">Help and about</Link>.</li>
         </ul>
       </div>
