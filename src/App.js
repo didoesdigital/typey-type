@@ -341,7 +341,6 @@ class App extends Component {
   }
 
   toggleHideOtherSettings() {
-    console.log("ping");
     let newState = !this.state.hideOtherSettings;
     this.setState({
       hideOtherSettings: newState
@@ -593,12 +592,12 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
   }
   else if ((userSettings.sortOrder === 'sortNew') || (userSettings.sortOrder === 'sortOld')) {
 
-    presentedMaterial = presentedMaterial.sort(function(a, b) {
-      if (!(a.phrase in met)) {
-        return -1;
+    presentedMaterial.sort(function(a, b) {
+      if (!met[a.phrase]) {
+        return 0;
       }
-      if (!(b.phrase in met)) {
-        return 1;
+      if (!met[b.phrase]) {
+        return 0;
       }
       return met[a.phrase] - met[b.phrase];
     });
