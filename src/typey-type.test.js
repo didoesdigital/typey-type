@@ -9,34 +9,39 @@ describe('loadPersonalPreferences', () => {
       let userSettings = {
         caseSensitive: true,
         retainedWords: false,
-        limitNumberOfWords: 0,
+        limitNumberOfWords: 15,
         newWords: true,
-        repetitions: 1,
+        repetitions: 3,
         showStrokes: false,
         spacePlacement: 'spaceBeforeOutput',
         sortOrder: 'sortOff',
-        seenWords: true
+        seenWords: true,
+        study: 'discover'
       };
       expect(loadPersonalPreferences()).toEqual([metWords, userSettings]);
     });
   });
 });
 
-describe('writePersonalPreferences', () => {
-  describe('without localStorage', () => {
-    it('should log error', () => {
-      let metWords = { "hi": 0, "hey": 1 };
-      let userSettings = {
-        caseSensitive: true,
-        retainedWords: true,
-        limitNumberOfWords: 0,
-        newWords: true,
-        repetitions: 1,
-        showStrokes: false,
-        spacePlacement: 'spaceBeforeOutput',
-        sortOrder: 'sortRandom',
-        seenWords: true
-      };
+// describe('writePersonalPreferences', () => {
+//   describe('without localStorage', () => {
+//     it('should log error', () => {
+//       let metWords = { "hi": 0, "hey": 1 };
+//       let userSettings = {
+//         caseSensitive: true,
+//         retainedWords: true,
+//         limitNumberOfWords: 0,
+//         newWords: true,
+//         repetitions: 1,
+//         showStrokes: false,
+//         spacePlacement: 'spaceBeforeOutput',
+//         sortOrder: 'sortRandom',
+//         seenWords: true
+//       };
+//     });
+//   });
+// });
+
     });
   });
 });
