@@ -121,12 +121,12 @@ function loadPersonalPreferences() {
   let metWords = {};
   let userSettings = {
     caseSensitive: true,
-    retainedWords: false,
-    limitNumberOfWords: 15,
+    retainedWords: true,
+    limitNumberOfWords: 30,
     newWords: true,
-    repetitions: 3,
+    repetitions: 1,
     showStrokes: false,
-    spacePlacement: 'spaceBeforeOutput',
+    spacePlacement: 'spaceOff',
     sortOrder: 'sortOff',
     seenWords: true,
     study: 'discover'

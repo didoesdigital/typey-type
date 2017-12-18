@@ -45,44 +45,99 @@ class App extends Component {
       totalNumberOfHintedWords: 0,
       disableUserSettings: false,
       metWords: {
-        'the': 0,
-        'and': 1
+        '.': 0
       },
       userSettings: {
         caseSensitive: true,
-        retainedWords: false,
-        limitNumberOfWords: 15,
+        retainedWords: true,
+        limitNumberOfWords: 30,
         newWords: true,
-        repetitions: 3,
+        repetitions: 1,
         showStrokes: false,
-        spacePlacement: 'spaceBeforeOutput',
+        spacePlacement: 'spaceOff',
         sortOrder: 'sortOff',
         seenWords: true,
         study: 'discover'
       },
       lesson: {
-        sourceMaterial: [{phrase: '', stroke: ''}],
-        presentedMaterial: [{phrase: '', stroke: ''}],
+        sourceMaterial: [
+          {phrase: 'The', stroke: '-T'},
+          {phrase: 'process', stroke: 'PROEUS'},
+          {phrase: 'of', stroke: '-F'},
+          {phrase: 'writing', stroke: 'WREUG'},
+          {phrase: 'shorthand', stroke: 'SHORT/HA*PBD'},
+          {phrase: 'is', stroke: 'S'},
+          {phrase: 'called', stroke: 'KAULD'},
+          {phrase: 'stenography.', stroke: 'STEPB/OG/TPEU TP-PL'},
+          {phrase: 'Using', stroke: 'AOUFG'},
+          {phrase: 'a', stroke: 'AEU'},
+          {phrase: 'stenotype', stroke: 'STEPB/TAOEUP'},
+          {phrase: 'machine', stroke: 'PH-PB'},
+          {phrase: 'or', stroke: 'OR'},
+          {phrase: 'a', stroke: 'AEU'},
+          {phrase: 'fancy', stroke: 'TPAPB/SEU'},
+          {phrase: 'keyboard,', stroke: 'KAOEBD'},
+          {phrase: 'you', stroke: 'U'},
+          {phrase: 'can', stroke: 'K'},
+          {phrase: 'type', stroke: 'TAOEUP'},
+          {phrase: 'over', stroke: 'OEFR'},
+          {phrase: '200', stroke: '2-Z'},
+          {phrase: 'words', stroke: 'WORDZ'},
+          {phrase: 'per', stroke: 'PER'},
+          {phrase: 'minute.', stroke: 'PHEUPB TP-PL'},
+          {phrase: 'Typey type.', stroke: 'TAOEUP/KWREU TAOEUP'},
+          {phrase: 'helps', stroke: 'HEPS'},
+          {phrase: 'you', stroke: 'U'},
+          {phrase: 'rapidly', stroke: 'RAEPLD'},
+          {phrase: 'learn', stroke: 'HRERPB'},
+          {phrase: 'stenography.', stroke: 'STEPB/OG/TPEU TP-PL'}
+        ],
+        presentedMaterial: [
+          {phrase: 'The', stroke: '-T'},
+          {phrase: 'process', stroke: 'PROEUS'},
+          {phrase: 'of', stroke: '-F'},
+          {phrase: 'writing', stroke: 'WREUG'},
+          {phrase: 'shorthand', stroke: 'SHORT/HA*PBD'},
+          {phrase: 'is', stroke: 'S'},
+          {phrase: 'called', stroke: 'KAULD'},
+          {phrase: 'stenography.', stroke: 'STEPB/OG/TPEU TP-PL'},
+          {phrase: 'Using', stroke: 'AOUFG'},
+          {phrase: 'a', stroke: 'AEU'},
+          {phrase: 'stenotype', stroke: 'STEPB/TAOEUP'},
+          {phrase: 'machine', stroke: 'PH-PB'},
+          {phrase: 'or', stroke: 'OR'},
+          {phrase: 'a', stroke: 'AEU'},
+          {phrase: 'fancy', stroke: 'TPAPB/SEU'},
+          {phrase: 'keyboard,', stroke: 'KAOEBD'},
+          {phrase: 'you', stroke: 'U'},
+          {phrase: 'can', stroke: 'K'},
+          {phrase: 'type', stroke: 'TAOEUP'},
+          {phrase: 'over', stroke: 'OEFR'},
+          {phrase: '200', stroke: '2-Z'},
+          {phrase: 'words', stroke: 'WORDZ'},
+          {phrase: 'per', stroke: 'PER'},
+          {phrase: 'minute.', stroke: 'PHEUPB TP-PL'},
+          {phrase: 'Typey type.', stroke: 'TAOEUP/KWREU TAOEUP'},
+          {phrase: 'helps', stroke: 'HEPS'},
+          {phrase: 'you', stroke: 'U'},
+          {phrase: 'rapidly', stroke: 'RAEPLD'},
+          {phrase: 'learn', stroke: 'HRERPB'},
+          {phrase: 'stenography.', stroke: 'STEPB/OG/TPEU TP-PL'}
+        ],
         settings: {
           ignoredChars: ''
         },
-        title: 'Loading…', subtitle: '',
+        title: 'Steno', subtitle: '',
         path: ''
       },
       lessonIndex: [{
-        "title": "Top 10000 English words",
+        "title": "Steno",
         "subtitle": "",
-        "category": "Collections",
+        "category": "Drills",
         "subcategory": "",
-        "path": process.env.PUBLIC_URL + "/drills/top-10000-english-words/lesson.txt"
+        "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
       }]
     };
-  }
-
-  componentWillMount() {
-    if(this.state.lesson.path==='') {
-      this.handleLesson(process.env.PUBLIC_URL + '/lessons/drills/top-10000-english-words/lesson.txt');
-    }
   }
 
   componentDidMount() {
