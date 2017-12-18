@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import { randomise } from './utils';
-import { matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, fetchLessonIndex} from './typey-type';
+import {
+  fetchLessonIndex,
+  getLesson,
+  loadPersonalPreferences,
+  matchSplitText,
+  repetitionsRemaining,
+  studyType,
+  parseLesson,
+  writePersonalPreferences
+} from './typey-type';
 import {
   Route,
   Switch
@@ -409,11 +418,29 @@ class App extends Component {
       newState.currentPhraseMeetingSuccess = 1;
     }
 
+    // if (this.studyType(this.state.userSettings) === 'discover' && repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID) === 1) {
+    //   newState.userSettings.showStrokes = false;
+    // }
+
     this.setState(newState, () => {
       if (this.isFinished()) {
         this.stopLesson();
       }
     });
+  }
+
+  studyType(userSettings) {
+    if (
+      userSettings.showStrokes === true &&
+      userSettings.newWords === true &&
+      userSettings.seenWords === false &&
+      userSettings.retainedWords === false &&
+      userSettings.repetitions === 3 &&
+      userSettings.limitNumberOfWords === 15 &&
+      userSettings.sortOrder === 'sortOff'
+    ) { return 'discover'; }
+
+    return 'custom';
   }
 
   isFinished() {
