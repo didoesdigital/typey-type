@@ -16,6 +16,9 @@ function matchLessonToTerm(lesson : Lesson, value : string) {
 }
 
 function sortLessons(a : Lesson, b : Lesson, value : string) {
+  if (value === '') {
+    return 0;
+  }
   const aLower = a.title.toLowerCase()
   const bLower = b.title.toLowerCase()
   const valueLower = value.toLowerCase()
