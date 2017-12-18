@@ -155,14 +155,11 @@ function writePersonalPreferences(userSettings, metWords) {
 }
 
 function repetitionsRemaining(userSettings, presentedMaterial, currentPhraseID) {
-  let length = presentedMaterial.length;
+  let lessonlength = presentedMaterial.length;
   let reps = userSettings.repetitions;
   let wordsPerRep = presentedMaterial.length / userSettings.repetitions;
-
-  let wordsRemaining = length - currentPhraseID;
-  let repsRemaining = reps - Math.floor(((length - wordsRemaining)/wordsPerRep));
-
-  return repsRemaining;
+  let wordsRemaining = lessonlength - currentPhraseID;
+  return reps - Math.floor(((lessonlength - wordsRemaining)/wordsPerRep));
 }
 
 function getLesson(lessonFile) {
