@@ -713,3 +713,9 @@ label {
 .link-missing-full-stop:after {
   content: ".";
 }
+.external-link::after {
+  content: "⇱";
+  display: inline-block;
+  margin-left: 0.328rem;
+  transform: rotate(90deg);
+}

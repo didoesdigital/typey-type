@@ -6,7 +6,6 @@ import {
   loadPersonalPreferences,
   matchSplitText,
   repetitionsRemaining,
-  studyType,
   parseLesson,
   writePersonalPreferences
 } from './typey-type';

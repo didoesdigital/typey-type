@@ -8,7 +8,7 @@ const Support = () => {
         <p>Typey type is a typing app designed specifically to help <a href="#about-stenography">stenography</a> students learn <abbr title="stenography">steno</abbr> faster. You can learn briefs and improve your stenographic speed and accuracy using tailored education options, including tight feedback loops so you learn to fix misstrokes immediately. You can effortlessly track progress in your brief vocabulary and rapidly increase in steno skill.</p>
 
         <h3 id="about-stenography">Stenography</h3>
-        <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. When you press keys together on a stenotype machine—like playing a piano chord—the software translates the key combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the <a href="http://openstenoproject.org/">Open steno project</a>.</p>
+        <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. When you press keys together on a stenotype machine—like playing a piano chord—the software translates the key combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the <a href="http://openstenoproject.org/">Open steno project<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
 
         <h4>Steno terms</h4>
         <dl className="inline-flex">
@@ -17,11 +17,11 @@ const Support = () => {
           <dt>Strokes</dt>
           <dd>A stroke is a combination of keys held together a released to write a word or sound. A multi-stroke brief is a combination of strokes pressed in order to produce a word or phrase (usually of more syllables).</dd>
           <dt>Plover</dt>
-          <dd><a href="http://openstenoproject.org/">Plover</a> is the world’s first free, open-source stenography program that works cross-platform on Windows, mac OS, and *nix operating systems.</dd>
+          <dd><a href="http://www.openstenoproject.org/plover/">Plover<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> is the world’s first free, open-source stenography program that works cross-platform on Windows, mac OS, and *nix operating systems.</dd>
         </dl>
 
         <h3>Typey type notes</h3>
-        <p>Typey type embraces ideas of spaced repetitions and deliberate practice to teach steno effectively.</p>
+        <p>Typey type embraces ideas of <a href="https://en.wikipedia.org/wiki/Spaced_repetition">spaced repetitions<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and <a href="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice">deliberate practice<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> to teach steno effectively.</p>
         <p>When you stop a lesson before reaching the end or you complete a lesson, Typey type will save your progress, including all the new words you’ve successfully met. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress.</p>
 
         <h4>Typey type terms</h4>
