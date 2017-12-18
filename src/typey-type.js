@@ -154,6 +154,17 @@ function writePersonalPreferences(userSettings, metWords) {
   }
 }
 
+function repetitionsRemaining(userSettings, presentedMaterial, currentPhraseID) {
+  let length = presentedMaterial.length;
+  let reps = userSettings.repetitions;
+  let wordsPerRep = presentedMaterial.length / userSettings.repetitions;
+
+  let wordsRemaining = length - currentPhraseID;
+  let repsRemaining = reps - Math.floor(((length - wordsRemaining)/wordsPerRep));
+
+  return repsRemaining;
+}
+
 function getLesson(lessonFile) {
   return fetch(lessonFile, {
     method: "GET",
@@ -178,4 +189,13 @@ function fetchLessonIndex() {
   });
 }
 
-export {matchSplitText, parseLesson, loadPersonalPreferences, writePersonalPreferences, getLesson, fetchLessonIndex, isFirstVisit};
+export {
+  fetchLessonIndex,
+  getLesson,
+  isFirstVisit,
+  loadPersonalPreferences,
+  matchSplitText,
+  repetitionsRemaining,
+  parseLesson,
+  writePersonalPreferences
+};
