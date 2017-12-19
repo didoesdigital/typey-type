@@ -532,6 +532,22 @@ class App extends Component {
                 <div>
                   {header}
                   <Home 
+                    restartLesson={this.restartLesson.bind(this)}
+                    items={this.state.lessonIndex}
+                    lessonSubTitle={this.state.lesson.subtitle}
+                    lessonTitle={this.state.lesson.title}
+                    nextLessonPath={this.state.nextLessonPath}
+                    onChange={(ev, value) => {
+                    this.setState({
+                    value: ev.target.value
+                    })}}
+                    onSelect={(value, item) => this.setState({
+                    value: value,
+                    nextLessonPath: item.path
+                    })}
+                    path={this.state.lesson.path}
+                    handleStopLesson={this.handleStopLesson.bind(this)}
+                    value={this.state.value}
                     lessonIndex={this.state.lessonIndex}
                     lesson={this.state.lesson}
                     handleLesson={this.handleLesson.bind(this)}
@@ -577,6 +593,22 @@ class App extends Component {
                 <div>
                   {header}
                   <Lessons
+                    restartLesson={this.restartLesson.bind(this)}
+                    items={this.state.lessonIndex}
+                    lessonSubTitle={this.state.lesson.subtitle}
+                    lessonTitle={this.state.lesson.title}
+                    nextLessonPath={this.state.nextLessonPath}
+                    onChange={(ev, value) => {
+                    this.setState({
+                    value: ev.target.value
+                    })}}
+                    onSelect={(value, item) => this.setState({
+                    value: value,
+                    nextLessonPath: item.path
+                    })}
+                    path={this.state.lesson.path}
+                    handleStopLesson={this.handleStopLesson.bind(this)}
+                    value={this.state.value}
                     lessonIndex={this.state.lessonIndex}
                     lesson={this.state.lesson}
                     handleLesson={this.handleLesson.bind(this)}

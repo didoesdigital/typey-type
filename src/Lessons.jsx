@@ -44,8 +44,16 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
           } />
         <Route exact={true} path={match.url} render={() => (
           <div>
+            <div className="subheader">
+              <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
+                <div className="flex mr1">
+                  <header className="flex items-baseline">
+                    <h2>Lessons</h2>
+                  </header>
+                </div>
+              </div>
+            </div>
             <div className="p3 mx-auto mw-1024">
-              <h3>Lessons</h3>
               <ul className="unstyled-list">{linkList}</ul>
             </div>
           </div>

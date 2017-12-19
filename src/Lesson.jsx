@@ -24,6 +24,10 @@ class Lesson extends Component {
   render() {
     let customMessage;
     let strokeTip;
+    let lessonSubTitle = '';
+    if (this.props.lesson.subtitle.length > 0) {
+      lessonSubTitle = ': '+this.props.lessonSubTitle;
+    }
 
     if (this.props.settings.customMessage) {
       customMessage = <h3 className='p3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
@@ -52,31 +56,64 @@ class Lesson extends Component {
     if (this.props.lesson) {
       if (this.isFinished()) {
         return (
-          <Finished
-            actualText={this.props.actualText}
-            changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
-            changeUserSetting={this.props.changeUserSetting}
-            chooseStudy={this.props.chooseStudy}
-            disableUserSettings={this.props.disableUserSettings}
-            handleLimitWordsChange={this.props.handleLimitWordsChange}
-            handleRepetitionsChange={this.props.handleRepetitionsChange}
-            hideOtherSettings={this.props.hideOtherSettings}
-            settings={this.props.lesson.settings}
-            timer={this.props.timer}
-            toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-            totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-            totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-            totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-            totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-            totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-            totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-            totalWordCount={this.props.lesson.presentedMaterial.length}
-            userSettings={this.props.userSettings}
-          />
-          )
+          <div>
+            <div className="subheader">
+              <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
+                <div className="flex mr1">
+                  <header className="flex items-baseline">
+                    <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
+                      <h2>{this.props.lessonTitle}{lessonSubTitle}</h2>
+                    </a>
+                  </header>
+                </div>
+                <div className="mxn2">
+                  <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
+                  <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
+                </div>
+              </div>
+            </div>
+            <Finished
+              actualText={this.props.actualText}
+              changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
+              changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+              changeUserSetting={this.props.changeUserSetting}
+              chooseStudy={this.props.chooseStudy}
+              disableUserSettings={this.props.disableUserSettings}
+              handleLimitWordsChange={this.props.handleLimitWordsChange}
+              handleRepetitionsChange={this.props.handleRepetitionsChange}
+              hideOtherSettings={this.props.hideOtherSettings}
+              settings={this.props.lesson.settings}
+              timer={this.props.timer}
+              toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+              totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
+              totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+              totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
+              totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
+              totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
+              totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
+              totalWordCount={this.props.lesson.presentedMaterial.length}
+              userSettings={this.props.userSettings}
+            />
+          </div>
+        )
       } else {
         return (
+          <div>
+            <div className="subheader">
+              <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
+                <div className="flex mr1">
+                  <header className="flex items-baseline">
+                    <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
+                      <h2>{this.props.lessonTitle}{lessonSubTitle}</h2>
+                    </a>
+                  </header>
+                </div>
+                <div className="mxn2">
+                  <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
+                  <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
+                </div>
+              </div>
+            </div>
           <div>
             <div className="mx-auto mw-1024">
               {customMessage}
@@ -129,6 +166,7 @@ class Lesson extends Component {
               </div>
             </div>
           </div>
+        </div>
         )
       }
     } else {
