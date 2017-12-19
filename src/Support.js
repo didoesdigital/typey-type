@@ -17,7 +17,7 @@ const Support = () => {
           <dt>Strokes</dt>
           <dd>A stroke is a combination of keys held together a released to write a word or sound. A multi-stroke brief is a combination of strokes pressed in order to produce a word or phrase (usually of more syllables).</dd>
           <dt>Plover</dt>
-          <dd><a href="http://www.openstenoproject.org/plover/">Plover<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> is the world’s first free, open-source stenography program that works cross-platform on Windows, mac OS, and *nix operating systems.</dd>
+          <dd><a href="http://www.openstenoproject.org/plover/">Plover<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> is the world’s first free, open-source stenography program that works cross-platform on Windows, macOS, and Linux operating systems.</dd>
         </dl>
 
         <h3>Typey type notes</h3>
