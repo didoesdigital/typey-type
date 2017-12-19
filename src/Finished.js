@@ -7,13 +7,15 @@ class Finished extends Component {
   render() {
     var customMessage;
     if (this.props.settings.customMessage) {
-      customMessage = <h3 className='p3'>{this.props.settings.customMessage}</h3>;
+      customMessage = <h3 className='p3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
     } else {
       customMessage = ''
     }
     return (
       <div>
-        {customMessage}
+        <div className="mx-auto mw-1024">
+          {customMessage}
+        </div>
         <div className="lesson-wrapper mw-1024 p3">
           <UserSettings
             changeUserSetting={this.props.changeUserSetting}
