@@ -654,8 +654,12 @@ label {
 .link-missing-full-stop:after {
   content: "."; }
 
+.external-link {
+  margin-right: 1rem; }
+
 .external-link::after {
   content: "⇱";
   display: inline-block;
   margin-left: 0.328rem;
+  position: absolute;
   transform: rotate(90deg); }
