@@ -23,7 +23,6 @@ class Lesson extends Component {
 
   render() {
     let customMessage;
-    let firstVisit;
     let strokeTip;
     let lessonSubTitle = '';
     if (this.props.lesson.subtitle.length > 0) {
@@ -34,12 +33,6 @@ class Lesson extends Component {
       customMessage = <h3 className='p3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
     } else {
       customMessage = ''
-    }
-
-    if (this.props.firstVisit) {
-      firstVisit = <h2 className='p3 pb0 mb0 mx-auto mw-1024'>Welcome to Typey type for stenographers</h2>;
-    } else {
-      firstVisit = '';
     }
 
     if (this.props.userSettings.showStrokes || this.props.showStrokesInLesson) {
@@ -122,7 +115,6 @@ class Lesson extends Component {
               </div>
             </div>
           <div>
-            {firstVisit}
             <div className="mx-auto mw-1024">
               {customMessage}
             </div>
