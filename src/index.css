@@ -26,12 +26,14 @@ h3 {
   font-size: 25px;
   font-weight: normal;
   line-height: 1.4;
+  margin-top: 31.25px;
   margin-bottom: 13.5px; }
 
 h4 {
   font-size: 20px;
   font-weight: normal;
   line-height: 1.4;
+  margin-top: 25px;
   margin-bottom: 11.5px; }
 
 h5 {
@@ -247,6 +249,8 @@ small, .text-small {
 .header {
   background-color: #2e173b;
   color: #c6bdcb; }
+  .header h1 {
+    font-size: 25px; }
   .header nav {
     align-items: center;
     display: flex;

@@ -41,12 +41,14 @@ h3 {
   font-size: $h3-size;
   font-weight: normal;
   line-height: 1.4;
+  margin-top: $h3-size * $font-scale;
   margin-bottom: 13.5px;
 }
 h4 {
   font-size: $h4-size;
   font-weight: normal;
   line-height: 1.4;
+  margin-top: $h4-size * $font-scale;
   margin-bottom: 11.5px;
 }
 h5 {
@@ -225,6 +227,10 @@ small, .text-small {
 .header {
   background-color: saturate(add-shade($brand-primary, 30%), 5%);
   color: add-tint($brand-primary, 70%);
+
+  h1 {
+    font-size: $h3-size;
+  }
   nav {
     align-items: center;
     display: flex;
