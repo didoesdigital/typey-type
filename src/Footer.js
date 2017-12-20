@@ -6,9 +6,8 @@ class Footer extends Component {
   render() {
     return (
       <footer>
-        <p className="text-center mb1 mt1"><small><Link to="/support">Help and about Typey type</Link>.</small></p>
-        <p className="text-center mb1 mt1"><small>Email: <a href="mailto:typeytype@didoesdigital.com">typeytype@didoesdigital.com</a><span aria-hidden="true" className="link-missing-full-stop">&#8203;</span></small></p>
-        <p className="text-center mb1 mt1"><small>Made with <span aria-label="love" role="img">❤️</span> by <a href="https://twitter.com/didoesdigital">@DiDoesDigital</a>.</small></p>
+        <p className="text-center mt1 mb0"><small>Made with <span aria-label="love" role="img">❤️</span> by <a href="https://twitter.com/didoesdigital">@DiDoesDigital</a>.</small></p>
+        <p className="text-center mb1"><small><Link to="/support">Learn more about Typey type</Link>.</small></p>
       </footer>
     )
   }
