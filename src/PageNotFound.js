@@ -10,13 +10,13 @@ const PageNotFound = () => {
         <div className="mx-auto mw-1024 p3">
           <nav>
             <div className="site-heading-banner">
-              <Link to="/" className="heading-link dib"><h1 className="mb0 mt0">Typey type</h1></Link>
+              <Link to="/" className="heading-link dib"><h1>Typey type</h1></Link>
             </div>
           </nav>
         </div>
       </div>
       <div className="p3 mx-auto mw-1024">
-        <h1 className="mb0 mt0">That page doesn't exist</h1>
+        <h1>That page doesn't exist</h1>
         <p>Try one of these instead:</p>
         <ul>
           <li><Link to="/">Home</Link>.</li>

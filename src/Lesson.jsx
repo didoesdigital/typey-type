@@ -69,7 +69,7 @@ class Lesson extends Component {
                 <div className="flex mr1">
                   <header className="flex items-baseline">
                     <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                      <h2 class="mb0 mt0">{this.props.lessonTitle}{lessonSubTitle}</h2>
+                      <h2>{this.props.lessonTitle}{lessonSubTitle}</h2>
                     </a>
                   </header>
                 </div>
@@ -111,7 +111,7 @@ class Lesson extends Component {
                 <div className="flex mr1">
                   <header className="flex items-baseline">
                     <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                      <h2 class="mb0 mt0">{this.props.lessonTitle}{lessonSubTitle}</h2>
+                      <h2>{this.props.lessonTitle}{lessonSubTitle}</h2>
                     </a>
                   </header>
                 </div>

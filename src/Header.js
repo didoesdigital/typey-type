@@ -14,7 +14,7 @@ class Header extends Component {
           <div className="mx-auto mw-1024 p3">
             <nav>
               <div className="site-heading-banner">
-                <Link to="/" className="heading-link dib"><h1 className="mb0 mt0">Typey type</h1></Link>
+                <Link to="/" className="heading-link dib"><h1>Typey type</h1></Link>
               </div>
               <div className="table search-container">
                 <Link to="/lessons" className="link-button link-button-ghost mr1 table-cell">Lessons</Link>

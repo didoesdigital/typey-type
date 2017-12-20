@@ -13,50 +13,43 @@ body {
 h1 {
   font-size: 39.0625px;
   font-weight: normal;
-  line-height: 1.5;
-  margin-top: 32px;
-  margin-bottom: 8px; }
+  line-height: 1.4;
+  margin-bottom: 22px; }
 
 h2 {
   font-size: 31.25px;
   font-weight: normal;
-  line-height: 1.5;
-  margin-top: 32px;
-  margin-bottom: 8px; }
+  line-height: 1.4;
+  margin-bottom: 18.5px; }
 
 h3 {
   font-size: 25px;
   font-weight: normal;
-  line-height: 1.5;
-  margin-top: 32px;
-  margin-bottom: 8px; }
+  line-height: 1.4;
+  margin-bottom: 13.5px; }
 
 h4 {
   font-size: 20px;
   font-weight: normal;
-  line-height: 1.5;
-  margin-top: 32px;
-  margin-bottom: 8px; }
+  line-height: 1.4;
+  margin-bottom: 11.5px; }
 
 h5 {
   font-size: 16px;
   font-weight: normal;
-  line-height: 1.5;
-  margin-top: 32px;
-  margin-bottom: 8px; }
+  line-height: 1.4;
+  margin-bottom: 9px; }
 
 h6 {
   font-size: 12.8px;
   font-weight: normal;
-  line-height: 1.5;
-  margin-top: 32px;
+  line-height: 1.4;
   margin-bottom: 8px; }
 
 li {
   margin-left: 1em; }
 
 p {
-  font-size: 16px;
   line-height: 2;
   margin-bottom: 1em; }
 
@@ -183,9 +176,6 @@ small, .text-small {
 .mr3 {
   margin-right: 24px; }
 
-.mt0 {
-  margin-top: 0; }
-
 .mt1 {
   margin-top: 8px; }
 
@@ -283,7 +273,8 @@ small, .text-small {
   background-color: #402351;
   color: #c6bdcb; }
   .subheader h2 {
-    line-height: 1.55; }
+    line-height: 1.55;
+    margin-bottom: 0; }
 
 .lesson-wrapper {
   display: grid;
