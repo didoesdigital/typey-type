@@ -2,8 +2,10 @@
 @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700');
 
 // Variables
+$grid-unit: 8px;
 $type: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
-$base-font-size: 16px;
+$base-font-size: $grid-unit * 2;
+$base-line-height: 2;
 $font-scale: 1.25; // Major third scale
 $h1-size: $base-font-size * $font-scale * $font-scale * $font-scale * $font-scale; // 39.056px
 $h2-size: $base-font-size * $font-scale * $font-scale * $font-scale; // 31.248px
@@ -28,44 +30,51 @@ body {
 h1 {
   font-size: $h1-size;
   font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 22px;
+  line-height: 1.5;
+  margin-top: $base-font-size * 2;
+  margin-bottom: $base-font-size / 2;
 }
 h2 {
   font-size: $h2-size;
   font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 18.5px;
+  line-height: 1.5;
+  margin-top: $base-font-size * 2;
+  margin-bottom: $base-font-size / 2;
 }
 h3 {
   font-size: $h3-size;
   font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 13.5px;
+  line-height: 1.5;
+  margin-top: $base-font-size * 2;
+  margin-bottom: $base-font-size / 2;
 }
 h4 {
   font-size: $h4-size;
   font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 11.5px;
+  line-height: 1.5;
+  margin-top: $base-font-size * 2;
+  margin-bottom: $base-font-size / 2;
 }
 h5 {
   font-size: $h5-size;
   font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 9px;
+  line-height: 1.5;
+  margin-top: $base-font-size * 2;
+  margin-bottom: $base-font-size / 2;
 }
 h6 {
   font-size: $h6-size;
   font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 8px;
+  line-height: 1.5;
+  margin-top: $base-font-size * 2;
+  margin-bottom: $base-font-size / 2;
 }
 li {
   margin-left: 1em;
 }
 p {
-  line-height: 2;
+  font-size: $base-font-size;
+  line-height: $base-line-height;;
   margin-bottom: 1em;
 }
 ol, ul, dd, dt {
@@ -175,6 +184,7 @@ small, .text-small {
 .mr1     { margin-right: 8px; }
 .mr2     { margin-right: 16px; }
 .mr3     { margin-right: 24px; }
+.mt0     { margin-top: 0; }
 .mt1     { margin-top: 8px; }
 .mt2     { margin-top: 16px; }
 .mx1     { margin-left: 8px; margin-right: 8px; }
@@ -259,7 +269,6 @@ small, .text-small {
   color: add-tint($brand-primary, 70%);
   h2 {
     line-height: 1.55;
-    margin-bottom: 0;
   }
 }
 

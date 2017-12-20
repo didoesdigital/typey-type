@@ -7,7 +7,7 @@ const Support = () => {
         <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
           <div className="flex mr1">
             <header className="flex items-baseline">
-              <h2>About Typey type for stenographers</h2>
+              <h2 class="mb0 mt0">About Typey type for stenographers</h2>
             </header>
           </div>
         </div>
