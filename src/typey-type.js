@@ -126,7 +126,7 @@ function loadPersonalPreferences() {
     newWords: true,
     repetitions: 1,
     showStrokes: false,
-    spacePlacement: 'spaceOff',
+    spacePlacement: 'spaceBeforeOutput',
     sortOrder: 'sortOff',
     seenWords: true,
     study: 'discover'
