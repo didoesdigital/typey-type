@@ -74,7 +74,16 @@ ol, ul, dd, dt {
   margin-bottom: 1em;
 }
 a {
-  color: adjust-hue(add-tint($brand-primary, 30%), -45deg);
+  color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
+  &:visited {
+    color: add-tint($brand-primary, 40%);
+  }
+  &:hover {
+    color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
+  }
+  &:active, &:focus {
+    color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
+  }
 }
 pre {
   font: 700 16px/1.6 "Overpass Mono", monospace;
@@ -187,6 +196,7 @@ small, .text-small {
 .mw-568  { max-width: 568px; }
 
 .p3      { padding: 24px; }
+.px3     { padding-left: 24px; padding-right: 24px; }
 .pb0     { padding-bottom: 0; }
 .pb4     { padding-bottom: 24px; }
 
@@ -248,15 +258,21 @@ small, .text-small {
 .heading-link {
   color: add-tint($brand-primary, 70%);
   text-decoration: none;
+  &:visited {
+    color: add-tint($brand-primary, 70%);
+  }
+  &:hover {
+    color: add-tint($brand-primary, 90%);
+    box-shadow: inset add-tint($brand-primary, 50%) 0px -8px 0px 0px;
+  }
+  &:active, &:focus {
+    color: add-tint($brand-primary, 90%);
+    box-shadow: inset add-tint($brand-primary, 50%) 0px -8px 0px 0px;
+  }
 
   h1 {
     line-height: 1;
     margin-bottom: 0;
-  }
-
-  &:hover, &:active, &:focus {
-    color: add-tint($brand-primary, 90%);
-    box-shadow: inset add-tint($brand-primary, 50%) 0px -8px 0px 0px;
   }
 }
 
@@ -521,11 +537,16 @@ label {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
+  &:visited {
+    color: add-tint($brand-primary, 70%);
+  }
   &:hover {
+    color: add-tint($brand-primary, 70%);
     background-color: add-tint($brand-primary, 10%);
   }
   &:active,
   &:focus {
+    color: add-tint($brand-primary, 70%);
     background-color: add-tint($brand-primary, 20%);
   }
   &.link-button-ghost {

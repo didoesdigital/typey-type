@@ -59,7 +59,13 @@ ol, ul, dd, dt {
   margin-bottom: 1em; }
 
 a {
-  color: #656985; }
+  color: #596091; }
+  a:visited {
+    color: #8c7b97; }
+  a:hover {
+    color: #9193a8; }
+  a:active, a:focus {
+    color: #202549; }
 
 pre {
   font: 700 16px/1.6 "Overpass Mono", monospace; }
@@ -205,6 +211,10 @@ small, .text-small {
 .p3 {
   padding: 24px; }
 
+.px3 {
+  padding-left: 24px;
+  padding-right: 24px; }
+
 .pb0 {
   padding-bottom: 0; }
 
@@ -266,12 +276,17 @@ small, .text-small {
 .heading-link {
   color: #c6bdcb;
   text-decoration: none; }
+  .heading-link:visited {
+    color: #c6bdcb; }
+  .heading-link:hover {
+    color: #ece9ee;
+    box-shadow: inset #a091a8 0px -8px 0px 0px; }
+  .heading-link:active, .heading-link:focus {
+    color: #ece9ee;
+    box-shadow: inset #a091a8 0px -8px 0px 0px; }
   .heading-link h1 {
     line-height: 1;
     margin-bottom: 0; }
-  .heading-link:hover, .heading-link:active, .heading-link:focus {
-    color: #ece9ee;
-    box-shadow: inset #a091a8 0px -8px 0px 0px; }
 
 .subheader {
   background-color: #402351;
@@ -500,9 +515,13 @@ label {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap; }
+  .link-button:visited {
+    color: #c6bdcb; }
   .link-button:hover {
+    color: #c6bdcb;
     background-color: #533962; }
   .link-button:active, .link-button:focus {
+    color: #c6bdcb;
     background-color: #664f74; }
   .link-button.link-button-ghost {
     background-color: transparent;

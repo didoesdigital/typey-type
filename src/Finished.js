@@ -7,7 +7,7 @@ class Finished extends Component {
   render() {
     var customMessage;
     if (this.props.settings.customMessage) {
-      customMessage = <h3 className='p3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
+      customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
     } else {
       customMessage = ''
     }
