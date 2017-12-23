@@ -143,7 +143,7 @@ class App extends Component {
 
   componentDidMount() {
     this.setPersonalPreferences();
-    fetchLessonIndex().then((json) => this.setState({ lessonIndex: json }))
+    fetchLessonIndex().then((json) => this.setState({ lessonIndex: json }));
   }
 
   handleStopLesson(event) {
@@ -201,6 +201,7 @@ class App extends Component {
       userSettings: userSettings
     }, () => {
       writePersonalPreferences(this.state.userSettings, this.state.metWords);
+      this.setupLesson();
     });
   }
 
