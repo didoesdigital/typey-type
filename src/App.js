@@ -183,9 +183,15 @@ class App extends Component {
   }
 
   setPersonalPreferences(source) {
-    let metWords = {}, userSettings = this.state.userSettings;
+    let metWords = this.state.metWords, userSettings = this.state.userSettings;
     if (source && source !== '') {
-      metWords = JSON.parse(source);
+      try {
+        let parsedSource = JSON.parse(source);
+        if (parsedSource && typeof parsedSource === "object") {
+          metWords = parsedSource;
+        }
+      }
+      catch (error) { }
     }
     else {
       [metWords, userSettings] = loadPersonalPreferences();
@@ -194,7 +200,7 @@ class App extends Component {
       metWords: metWords,
       userSettings: userSettings
     }, () => {
-    writePersonalPreferences(this.state.userSettings, this.state.metWords);
+      writePersonalPreferences(this.state.userSettings, this.state.metWords);
     });
   }
 
