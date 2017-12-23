@@ -17,6 +17,7 @@ import Lessons from './Lessons';
 import Home from './Home';
 import Header from './Header';
 import Support from './Support';
+import Progress from './Progress';
 import PageNotFound from './PageNotFound';
 import Footer from './Footer';
 import './App.css';
@@ -141,14 +142,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let [metWords, userSettings] = loadPersonalPreferences();
-    this.setState({
-      metWords: metWords,
-      userSettings: userSettings
-    });
-
+    this.setPersonalPreferences();
     fetchLessonIndex().then((json) => this.setState({ lessonIndex: json }))
-
   }
 
   handleStopLesson(event) {
@@ -184,6 +179,27 @@ class App extends Component {
   updateWPM() {
     this.setState({
       timer: new Date() - this.state.startTime
+    });
+  }
+
+  setPersonalPreferences(source) {
+    let metWords = {}, userSettings = {};
+    if (source) {
+      if (source !== '') {
+        [metWords, userSettings] = [
+          JSON.parse(source),
+          this.state.userSettings
+        ];
+      }
+    }
+    else {
+      [metWords, userSettings] = loadPersonalPreferences();
+    }
+    this.setState({
+      metWords: metWords,
+      userSettings: userSettings
+    }, () => {
+    writePersonalPreferences(this.state.userSettings, this.state.metWords);
     });
   }
 
@@ -586,6 +602,16 @@ class App extends Component {
                 <div>
                   {header}
                   <Support />
+                </div>
+                }
+              />
+              <Route path="/progress" render={ () =>
+                <div>
+                  {header}
+                  <Progress
+                    setPersonalPreferences={this.setPersonalPreferences.bind(this)}
+                    metWords={this.state.metWords}
+                  />
                 </div>
                 }
               />
