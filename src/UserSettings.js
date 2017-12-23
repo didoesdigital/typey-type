@@ -12,7 +12,7 @@ class UserSettings extends Component {
     }
 
     return (
-      <div className="user-settings">
+      <div className="user-settings panel p2">
         <form>
           <h5 className="mb1">Settings</h5>
           <legend className="mb1 text-small">Choose study type:</legend>

@@ -192,6 +192,7 @@ small, .text-small {
 .mr1     { margin-right: 8px; }
 .mr2     { margin-right: 16px; }
 .mr3     { margin-right: 24px; }
+.mt0     { margin-top: 0; }
 .mt1     { margin-top: 8px; }
 .mt2     { margin-top: 16px; }
 .mt3     { margin-top: 24px; }
@@ -201,7 +202,11 @@ small, .text-small {
 
 .mw-1024 { max-width: 1024px; }
 .mw-568  { max-width: 568px; }
+.mw-384  { max-width: 384px; }
 
+.p0      { padding: 0px; }
+.p1      { padding: 8px; }
+.p2      { padding: 16px; }
 .p3      { padding: 24px; }
 .px3     { padding-left: 24px; padding-right: 24px; }
 .pb0     { padding-bottom: 0; }
@@ -228,6 +233,7 @@ small, .text-small {
 
 .text-center { text-align: center; }
 .text-right  { text-align: right; }
+.bg-danger   { background-color: add-tint($brand-danger, 80%); }
 
 .text-uppercase {
   text-transform: uppercase;
@@ -314,14 +320,6 @@ small, .text-small {
       grid-column: 4;
     }
   }
-  .user-settings,
-  .lesson-canvas,
-  .scores {
-    background-color: add-tint($brand-primary, 97%);
-    border: thin solid add-tint($brand-primary, 70%);
-    border-radius: 4px;
-    padding: 16px;
-  }
 }
 .lesson-canvas {
   align-items: center;
@@ -338,6 +336,11 @@ small, .text-small {
 .scores {
   max-height: 320px;
   width: 192px;
+}
+.panel {
+  background-color: add-tint($brand-primary, 97%);
+  border: thin solid add-tint($brand-primary, 70%);
+  border-radius: 4px;
 }
 
 @media (max-width: $breakpoint - 1) {
@@ -789,4 +792,15 @@ label {
   content: "Copied" attr(href) "!";
   opacity: 0;
 }
-
+.progress-layout {
+  display: grid;
+  grid-template-columns: 4fr 3fr;
+  grid-gap: 24px;
+}
+.quote {
+  border-left: 8px solid saturate(add-tint($brand-primary, 30%), 30%);
+  font-size: $h4-size;
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
+  padding-left: 1em;
+}

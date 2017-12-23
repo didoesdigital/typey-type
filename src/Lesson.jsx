@@ -37,7 +37,7 @@ class Lesson extends Component {
     }
 
     if (this.props.firstVisit) {
-      firstVisit = <h2 className='p3 pb0 mb0 mx-auto mw-1024'>Welcome to Typey type for stenographers</h2>;
+      firstVisit = <h2 className='p3 pb0 mb0 mx-auto mw-1024'>Welcome to Typey&nbsp;type for stenographers</h2>;
     } else {
       firstVisit = '';
     }
@@ -140,7 +140,7 @@ class Lesson extends Component {
                 totalWordCount={this.props.totalWordCount}
                 userSettings={this.props.userSettings}
               />
-              <div className="lesson-canvas mw-568">
+              <div className="lesson-canvas panel mw-568 p2">
                 <div className="mx-auto text-center">
                   <Material
                     actualText={this.props.actualText}
@@ -161,7 +161,7 @@ class Lesson extends Component {
                   </div>
                 </div>
               </div>
-              <div className="scores">
+              <div className="scores panel p2">
                 <Scores
                   timer={this.props.timer}
                   totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}

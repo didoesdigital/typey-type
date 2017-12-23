@@ -30,12 +30,12 @@ class Finished extends Component {
             totalWordCount={this.props.totalWordCount}
             userSettings={this.props.userSettings}
           />
-          <div className="lesson-canvas">
+          <div className="lesson-canvas panel p2">
             <div className="mx-auto text-center">
               <div role="alert" aria-live="polite">Finished!</div>
             </div>
           </div>
-          <div className="scores">
+          <div className="scores panel p2">
             <Scores
               timer={this.props.timer}
               totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}

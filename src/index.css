@@ -192,6 +192,9 @@ small, .text-small {
 .mr3 {
   margin-right: 24px; }
 
+.mt0 {
+  margin-top: 0; }
+
 .mt1 {
   margin-top: 8px; }
 
@@ -218,6 +221,18 @@ small, .text-small {
 
 .mw-568 {
   max-width: 568px; }
+
+.mw-384 {
+  max-width: 384px; }
+
+.p0 {
+  padding: 0px; }
+
+.p1 {
+  padding: 8px; }
+
+.p2 {
+  padding: 16px; }
 
 .p3 {
   padding: 24px; }
@@ -255,6 +270,9 @@ small, .text-small {
 
 .text-right {
   text-align: right; }
+
+.bg-danger {
+  background-color: #ead6de; }
 
 .text-uppercase {
   text-transform: uppercase;
@@ -324,13 +342,6 @@ small, .text-small {
       grid-column: span 2; }
     .lesson-wrapper .scores {
       grid-column: 4; } }
-  .lesson-wrapper .user-settings,
-  .lesson-wrapper .lesson-canvas,
-  .lesson-wrapper .scores {
-    background-color: #f9f8fa;
-    border: thin solid #c6bdcb;
-    border-radius: 4px;
-    padding: 16px; }
 
 .lesson-canvas {
   align-items: center;
@@ -347,6 +358,11 @@ small, .text-small {
 .scores {
   max-height: 320px;
   width: 192px; }
+
+.panel {
+  background-color: #f9f8fa;
+  border: thin solid #c6bdcb;
+  border-radius: 4px; }
 
 @media (max-width: 1023px) {
   .lesson-canvas {
@@ -726,3 +742,15 @@ label {
   position: absolute;
   content: "Copied" attr(href) "!";
   opacity: 0; }
+
+.progress-layout {
+  display: grid;
+  grid-template-columns: 4fr 3fr;
+  grid-gap: 24px; }
+
+.quote {
+  border-left: 8px solid #8242a8;
+  font-size: 20px;
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
+  padding-left: 1em; }

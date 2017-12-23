@@ -7,14 +7,14 @@ const Support = () => {
         <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
           <div className="flex mr1">
             <header className="flex items-baseline">
-              <h2>About Typey type for stenographers</h2>
+              <h2>About Typey&nbsp;type for stenographers</h2>
             </header>
           </div>
         </div>
       </div>
       <div className="p3 mx-auto mw-1024">
         <div className="mw-568">
-          <p>Typey type is a typing app designed specifically to help <a href="#about-stenography">stenography</a> students learn <abbr title="stenography">steno</abbr> faster. You can learn briefs and improve your stenographic speed and accuracy using tailored education options, including tight feedback loops so you learn to fix misstrokes immediately. You can effortlessly track progress in your brief vocabulary and rapidly increase in steno skill.</p>
+          <p>Typey&nbsp;type is a typing app designed specifically to help <a href="#about-stenography">stenography</a> students learn <abbr title="stenography">steno</abbr> faster. You can learn briefs and improve your stenographic speed and accuracy using tailored education options, including tight feedback loops so you learn to fix misstrokes immediately. You can effortlessly track progress in your brief vocabulary and rapidly increase in steno skill.</p>
 
           <h3 id="about-stenography">Stenography</h3>
           <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. When you press keys together on a stenotype machine—like playing a piano chord—the software translates the key combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the <a href="http://openstenoproject.org/">Open steno project<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
@@ -29,18 +29,18 @@ const Support = () => {
             <dd><a href="http://www.openstenoproject.org/plover/">Plover<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> is the world’s first free, open-source stenography program that works cross-platform on Windows, macOS, and Linux operating systems.</dd>
           </dl>
 
-          <h3>Typey type notes</h3>
-          <p>Typey type embraces ideas of <a href="https://en.wikipedia.org/wiki/Spaced_repetition">spaced repetitions<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and <a href="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice">deliberate practice<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> to teach steno effectively.</p>
-          <p>When you stop a lesson before reaching the end or you complete a lesson, Typey type will save your progress, including all the new words you’ve successfully met. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress.</p>
+          <h3>Typey&nbsp;type notes</h3>
+          <p>Typey&nbsp;type embraces ideas of <a href="https://en.wikipedia.org/wiki/Spaced_repetition">spaced repetitions<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and <a href="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice">deliberate practice<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> to teach steno effectively.</p>
+          <p>When you stop a lesson before reaching the end or you complete a lesson, Typey&nbsp;type will save your progress, including all the new words you’ve successfully met. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress.</p>
 
-          <h4>Typey type terms</h4>
+          <h4>Typey&nbsp;type terms</h4>
           <dl className="inline-flex">
             <dt>Spacing</dt>
-            <dd>Typey type lets you choose where spaces should appear in a phrase for checking if you typed it correctly. This is because steno software can be used to automatically insert spaces before or after words, depending on the specific software and its settings. For example, Plover inserts spaces before words by default, and has a setting to insert spaces after words. Plover also provides extra spacing and capitalisation modes that can be set on the fly to suppress spaces or insert other punctuation (like dashes). A QWERTYist may feel more comfortable drilling words without any spaces, or sentences with spaces as the end.</dd>
+            <dd>Typey&nbsp;type lets you choose where spaces should appear in a phrase for checking if you typed it correctly. This is because steno software can be used to automatically insert spaces before or after words, depending on the specific software and its settings. For example, Plover inserts spaces before words by default, and has a setting to insert spaces after words. Plover also provides extra spacing and capitalisation modes that can be set on the fly to suppress spaces or insert other punctuation (like dashes). A QWERTYist may feel more comfortable drilling words without any spaces, or sentences with spaces as the end.</dd>
             <dt>Seen words</dt>
-            <dd>Typey type tracks words you’ve "seen" or "met". Each time you successfully type a new word, that’s logged as a successful meeting.</dd>
+            <dd>Typey&nbsp;type tracks words you’ve "seen" or "met". Each time you successfully type a new word, that’s logged as a successful meeting.</dd>
             <dt>Words per minute (WPM)</dt>
-            <dd>To track your typing speed, Typey type displays the number of words you’ve typed per minute using the unit "words per minute (WPM)", where a word is considered to be 5 letters long on average. This means you might type many short words and have a higher WPM score.</dd>
+            <dd>To track your typing speed, Typey&nbsp;type displays the number of words you’ve typed per minute using the unit "words per minute (WPM)", where a word is considered to be 5 letters long on average. This means you might type many short words and have a higher WPM score.</dd>
             <dt>Discover</dt>
             <dd>The first type of study session lets you discover new briefs by showing only a limited number of new words while revealing their strokes. Write these words slowly, concentrating on accuracy and forming good habits around how you stroke word parts. Focus on lessons with interesting words, especially top words for your needs (such as common English words for general usage or domain specific phrases for steno in particular industries).</dd>
             <dt>Revise</dt>
@@ -63,7 +63,7 @@ const Support = () => {
           <p>100–200.</p>
 
           <h3>Support</h3>
-          <p>For help with Typey type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or <a href="https://twitter.com/didoesdigital">tweet @DiDoesDigital</a>.</p>
+          <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or <a href="https://twitter.com/didoesdigital">tweet @DiDoesDigital</a>.</p>
         </div>
       </div>
     </div>
