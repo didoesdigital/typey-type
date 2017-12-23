@@ -183,14 +183,9 @@ class App extends Component {
   }
 
   setPersonalPreferences(source) {
-    let metWords = {}, userSettings = {};
-    if (source) {
-      if (source !== '') {
-        [metWords, userSettings] = [
-          JSON.parse(source),
-          this.state.userSettings
-        ];
-      }
+    let metWords = {}, userSettings = this.state.userSettings;
+    if (source && source !== '') {
+      metWords = JSON.parse(source);
     }
     else {
       [metWords, userSettings] = loadPersonalPreferences();
