@@ -80,22 +80,25 @@ th {
   text-align: left;
   font-weight: normal; }
 
-dl.inline-flex {
-  display: flex;
-  flex-flow: row;
-  flex-wrap: wrap;
-  overflow: visible; }
+@media (min-width: 1024px) {
+  dl.inline-flex {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    overflow: visible; } }
 
-dl.inline-flex dt {
-  flex: 0 0 134px;
-  overflow: hidden;
-  text-overflow: ellipsis; }
+@media (min-width: 1024px) {
+  dl.inline-flex dt {
+    flex: 0 0 134px;
+    overflow: hidden;
+    text-overflow: ellipsis; } }
 
-dl.inline-flex dd {
-  flex: 0 0 434px;
-  margin-left: auto;
-  overflow: hidden;
-  text-overflow: ellipsis; }
+@media (min-width: 1024px) {
+  dl.inline-flex dd {
+    flex: 0 0 434px;
+    margin-left: auto;
+    overflow: hidden;
+    text-overflow: ellipsis; } }
 
 input, textarea {
   font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
@@ -743,10 +746,11 @@ label {
   content: "Copied" attr(href) "!";
   opacity: 0; }
 
-.progress-layout {
-  display: grid;
-  grid-template-columns: 4fr 3fr;
-  grid-gap: 24px; }
+@media (min-width: 1024px) {
+  .progress-layout {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    grid-gap: 24px; } }
 
 .quote {
   border-left: 8px solid #8242a8;

@@ -99,21 +99,27 @@ th {
   font-weight: normal;
 }
 dl.inline-flex {
-  display: flex;
-  flex-flow: row;
-  flex-wrap: wrap;
-  overflow: visible;
+  @media (min-width: $breakpoint) {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    overflow: visible;
+  }
 }
 dl.inline-flex dt {
-  flex: 0 0 134px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @media (min-width: $breakpoint) {
+    flex: 0 0 134px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 dl.inline-flex dd {
-  flex: 0 0 434px;
-  margin-left: auto;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  @media (min-width: $breakpoint) {
+    flex: 0 0 434px;
+    margin-left: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 input, textarea {
@@ -793,9 +799,11 @@ label {
   opacity: 0;
 }
 .progress-layout {
-  display: grid;
-  grid-template-columns: 4fr 3fr;
-  grid-gap: 24px;
+  @media (min-width: $breakpoint) {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    grid-gap: 24px;
+  }
 }
 .quote {
   border-left: 8px solid saturate(add-tint($brand-primary, 30%), 30%);
