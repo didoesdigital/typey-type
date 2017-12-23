@@ -714,10 +714,10 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
       if (!met[b.phrase]) {
         return 0;
       }
-      return met[a.phrase] - met[b.phrase];
+      return met[b.phrase] - met[a.phrase];
     });
 
-    if (userSettings.sortOrder === 'sortOld') {
+    if (userSettings.sortOrder === 'sortNew') {
       presentedMaterial = presentedMaterial.reverse();
     }
   }
