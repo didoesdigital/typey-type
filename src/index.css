@@ -395,7 +395,7 @@ small, .text-small {
   margin-bottom: -1.5em;
   margin-right: calc(50% + 2.5em);
   text-align: right;
-  transform: translateY(-2em);
+  transform: translateY(-2.075em);
   font-weight: normal; }
 
 .current-and-upcoming-phrases {
