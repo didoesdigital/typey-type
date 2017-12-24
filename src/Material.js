@@ -12,8 +12,11 @@ class Material extends Component {
             <div className="material"><pre><span className="steno-material">{matched + unmatched}</span></pre></div>
           </div>
         </div>
-        <div className="expected"><div className="visually-hidden">Matching and unmatching material typed:</div>
-          <div className="material"><pre><span className="matched steno-material">{matched}</span><span className="steno-material">{unmatched}</span></pre></div>
+        <div className="expected">
+          <div className="visually-hidden">Matching and unmatching material typed:</div>
+          <div className="material">
+            <pre className="material-pre"><div className="dib current-and-upcoming-phrases"><span className="matched steno-material">{matched}</span><span className="steno-material">{unmatched}</span> <span className="de-emphasized upcoming-phrases">{this.props.upcomingPhrases}</span></div><span className="dib de-emphasized completed-phrases">&#8203;{this.props.completedPhrases}</span></pre>
+          </div>
         </div>
       </div>
     );

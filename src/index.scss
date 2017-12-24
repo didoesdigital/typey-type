@@ -206,6 +206,8 @@ small, .text-small {
 .mxn1    { margin-left: -8px; margin-right: -8px; }
 .mxn2    { margin-left: -16px; margin-right: -16px; }
 
+.mw100 { max-width: 100%; }
+
 .mw-1024 { max-width: 1024px; }
 .mw-568  { max-width: 568px; }
 .mw-384  { max-width: 384px; }
@@ -330,10 +332,13 @@ small, .text-small {
 .lesson-canvas {
   align-items: center;
   display: flex;
+  position: relative;
+  max-height: 320px;
+  overflow: hidden;
+
   @media (min-width: $breakpoint) {
     min-width: 544px;
   }
-  max-height: 320px;
 }
 .user-settings {
   min-height: 320px;
@@ -361,20 +366,52 @@ small, .text-small {
   }
 }
 
+.material {
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: $breakpoint) {
+    min-width: 480px;
+  }
+}
+.material-pre {
+}
+
+.completed-phrases {
+  float: right;
+  margin-bottom: -1.5em;
+  margin-right: calc(50% + 2.5em);
+  transform: translateY(-1.5em);
+  font-weight: normal;
+}
+.current-and-upcoming-phrases {
+  margin-left: calc(50% - 3em);
+  width: 100%;
+  transform: translateX(2px + 8px);
+}
+.upcoming-phrases {
+  font-weight: normal;
+}
+
 .material p {
   padding: 0.25em;
 }
 
+.expected {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .input-textarea {
+  border: 2px solid saturate(add-tint($brand-primary, 30%), 30%);
   display: block;
   font-size: 1rem;
   line-height: 1.5;
-  text-align: center;
+  margin-left: calc(50% - 3em);
   text-decoration: underline;
   text-underline-position: under;
-  @media (min-width: $breakpoint) {
-    width: 480px;
-  }
+  white-space: nowrap;
+  width: 6em;
 }
 
 .matched {
@@ -666,13 +703,6 @@ label {
   padding-left: 4px;
   padding-right: 4px;
   speak: spell-out;
-}
-.material {
-  margin-left: auto;
-  margin-right: auto;
-  @media (min-width: $breakpoint) {
-    min-width: 480px;
-  }
 }
 .typed-text-container {
   position: relative;

@@ -46,7 +46,7 @@ class Lesson extends Component {
       strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre><span className="steno-stroke"><abbr>{this.props.currentStroke}</abbr></span></pre></div>;
     } else {
       strokeTip = <div className="stroke-tip">
-        <label className="mb0">
+        <label className="mb0 text-small">
           <input
             className="checkbox-input hide"
             type="checkbox"
@@ -141,13 +141,15 @@ class Lesson extends Component {
                 userSettings={this.props.userSettings}
               />
               <div className="lesson-canvas panel mw-568 p2">
-                <div className="mx-auto text-center">
+                <div className="mx-auto mw100 text-center">
                   <Material
                     actualText={this.props.actualText}
                     currentPhrase={this.props.currentPhrase}
                     currentStroke={this.props.currentStroke}
                     settings={this.props.settings}
                     userSettings={this.props.userSettings}
+                    completedPhrases={this.props.completedPhrases}
+                    upcomingPhrases={this.props.upcomingPhrases}
                   />
                   <TypedText
                     actualText={this.props.actualText}

@@ -1,3 +1,5 @@
+import Zipper from './zipper';
+
 function matchSplitText(expected, actualText, settings={ignoredChars: ''}, userSettings={}) {
   if (userSettings.spacePlacement === 'spaceBeforeOutput') {
     expected = ' '+expected;
@@ -105,6 +107,7 @@ function parseLesson(lessonText, path) {
     settings: settings,
     title: lessonTitle,
     subtitle: lessonSubtitle,
+    newPresentedMaterial: new Zipper([sourceMaterial]),
     path: path
   }
 }

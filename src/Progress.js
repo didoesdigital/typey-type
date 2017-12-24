@@ -36,7 +36,7 @@ class Progress extends Component {
 
               <div className="panel mt3 p3">
                 <h3 className="mt0">Restore your progress</h3>
-                <p className="mt3 lh1">
+                <p className="mt3 mb3 lh1">
                   <label htmlFor="metWords-from-personal-store" className="inline-block">Enter your progress here:</label>
                   <textarea
                     id="metwords-from-personal-store"

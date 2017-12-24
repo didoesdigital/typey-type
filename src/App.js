@@ -20,6 +20,7 @@ import Support from './Support';
 import Progress from './Progress';
 import PageNotFound from './PageNotFound';
 import Footer from './Footer';
+import Zipper from './zipper';
 import './App.css';
 
 class App extends Component {
@@ -129,6 +130,7 @@ class App extends Component {
           ignoredChars: ''
         },
         title: 'Steno', subtitle: '',
+        newPresentedMaterial: new Zipper([{phrase: '', stroke: ''}]),
         path: ''
       },
       lessonIndex: [{
@@ -381,6 +383,7 @@ class App extends Component {
       }
     }
     newLesson.presentedMaterial = repeatedLesson;
+    newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
     this.setState({
       actualText: ``,
@@ -488,6 +491,7 @@ class App extends Component {
         newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess + meetingsCount;
       }
       newState.currentPhraseMeetingSuccess = 1;
+      this.state.lesson.newPresentedMaterial.visitNext();
 
       if (this.studyType(this.state.userSettings) === 'discover' && repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1) === 1) {
         newState.userSettings.showStrokes = false;
@@ -519,7 +523,18 @@ class App extends Component {
     return (this.state.currentPhraseID === this.state.lesson.presentedMaterial.length);
   }
 
+  presentCompletedMaterial() {
+    console.log(this.state.lesson);
+    console.log(this.state.lesson.newPresentedMaterial.getCompleted());
+    return this.state.lesson.newPresentedMaterial.getCompleted().map(item => item.phrase).join(" ");
+  }
+  presentUpcomingMaterial() {
+    return this.state.lesson.newPresentedMaterial.getRemaining().slice(0,19).map(item => item.phrase).join(" ");
+  }
+
   render() {
+    let completedMaterial = this.presentCompletedMaterial();
+    let upcomingMaterial = this.presentUpcomingMaterial();
     let header = <Header
       restartLesson={this.restartLesson.bind(this)}
       items={this.state.lessonIndex}
@@ -575,6 +590,7 @@ class App extends Component {
                     changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
                     changeUserSetting={this.changeUserSetting.bind(this)}
                     chooseStudy={this.chooseStudy.bind(this)}
+                    completedPhrases={completedMaterial}
                     currentPhraseID={this.state.currentPhraseID}
                     currentPhrase={presentedMaterialCurrentItem.phrase}
                     currentStroke={presentedMaterialCurrentItem.stroke}
@@ -593,6 +609,7 @@ class App extends Component {
                     totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
                     totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
                     totalWordCount={this.state.lesson.presentedMaterial.length}
+                    upcomingPhrases={upcomingMaterial}
                     updateMarkup={this.updateMarkup.bind(this)}
                     userSettings={this.state.userSettings}
                     {...props}
@@ -646,6 +663,7 @@ class App extends Component {
                     changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
                     changeUserSetting={this.changeUserSetting.bind(this)}
                     chooseStudy={this.chooseStudy.bind(this)}
+                    completedPhrases={completedMaterial}
                     currentPhraseID={this.state.currentPhraseID}
                     currentPhrase={presentedMaterialCurrentItem.phrase}
                     currentStroke={presentedMaterialCurrentItem.stroke}
@@ -664,6 +682,7 @@ class App extends Component {
                     totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
                     totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
                     totalWordCount={this.state.lesson.presentedMaterial.length}
+                    upcomingPhrases={upcomingMaterial}
                     updateMarkup={this.updateMarkup.bind(this)}
                     userSettings={this.state.userSettings}
                     {...props}

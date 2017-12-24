@@ -219,6 +219,9 @@ small, .text-small {
   margin-left: -16px;
   margin-right: -16px; }
 
+.mw100 {
+  max-width: 100%; }
+
 .mw-1024 {
   max-width: 1024px; }
 
@@ -349,7 +352,9 @@ small, .text-small {
 .lesson-canvas {
   align-items: center;
   display: flex;
-  max-height: 320px; }
+  position: relative;
+  max-height: 320px;
+  overflow: hidden; }
   @media (min-width: 1024px) {
     .lesson-canvas {
       min-width: 544px; } }
@@ -375,19 +380,45 @@ small, .text-small {
   .scores {
     order: 3; } }
 
+.material {
+  margin-left: auto;
+  margin-right: auto; }
+  @media (min-width: 1024px) {
+    .material {
+      min-width: 480px; } }
+
+.completed-phrases {
+  float: right;
+  margin-bottom: -1.5em;
+  margin-right: calc(50% + 2.5em);
+  transform: translateY(-1.5em);
+  font-weight: normal; }
+
+.current-and-upcoming-phrases {
+  margin-left: calc(50% - 3em);
+  width: 100%;
+  transform: translateX(10px); }
+
+.upcoming-phrases {
+  font-weight: normal; }
+
 .material p {
   padding: 0.25em; }
 
+.expected {
+  overflow: hidden;
+  white-space: nowrap; }
+
 .input-textarea {
+  border: 2px solid #8242a8;
   display: block;
   font-size: 1rem;
   line-height: 1.5;
-  text-align: center;
+  margin-left: calc(50% - 3em);
   text-decoration: underline;
-  text-underline-position: under; }
-  @media (min-width: 1024px) {
-    .input-textarea {
-      width: 480px; } }
+  text-underline-position: under;
+  white-space: nowrap;
+  width: 6em; }
 
 .matched {
   background-color: #cbabdd; }
@@ -634,13 +665,6 @@ label {
   padding-left: 4px;
   padding-right: 4px;
   speak: spell-out; }
-
-.material {
-  margin-left: auto;
-  margin-right: auto; }
-  @media (min-width: 1024px) {
-    .material {
-      min-width: 480px; } }
 
 .typed-text-container {
   position: relative; }
