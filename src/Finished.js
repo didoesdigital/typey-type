@@ -4,8 +4,17 @@ import UserSettings from './UserSettings';
 import './App.css';
 
 class Finished extends Component {
+
+  isEmpty() {
+    return (this.props.lessonLength === 0);
+  }
+
   render() {
-    var customMessage;
+    let customMessage;
+    let emptyAndZeroStateMessage = "Finished!";
+    if (this.isEmpty()) {
+      emptyAndZeroStateMessage = "There are no words.";
+    }
     if (this.props.settings.customMessage) {
       customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
     } else {
@@ -32,7 +41,7 @@ class Finished extends Component {
           />
           <div className="lesson-canvas panel p2">
             <div className="mx-auto text-center">
-              <div role="alert" aria-live="polite">Finished!</div>
+              <div role="alert" aria-live="polite">{emptyAndZeroStateMessage}</div>
             </div>
           </div>
           <div className="scores panel p2">

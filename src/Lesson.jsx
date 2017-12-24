@@ -89,6 +89,7 @@ class Lesson extends Component {
               handleLimitWordsChange={this.props.handleLimitWordsChange}
               handleRepetitionsChange={this.props.handleRepetitionsChange}
               hideOtherSettings={this.props.hideOtherSettings}
+              lessonLength={this.props.lesson.presentedMaterial.length}
               settings={this.props.lesson.settings}
               timer={this.props.timer}
               toggleHideOtherSettings={this.props.toggleHideOtherSettings}
