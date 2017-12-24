@@ -381,16 +381,19 @@ small, .text-small {
   float: right;
   margin-bottom: -1.5em;
   margin-right: calc(50% + 2.5em);
+  text-align: right;
   transform: translateY(-1.5em);
   font-weight: normal;
 }
 .current-and-upcoming-phrases {
   margin-left: calc(50% - 3em);
+  text-align: left;
   width: 100%;
   transform: translateX(2px + 8px);
 }
 .upcoming-phrases {
   font-weight: normal;
+  text-align: left;
 }
 
 .material p {
