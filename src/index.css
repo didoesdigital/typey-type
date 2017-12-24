@@ -395,11 +395,12 @@ small, .text-small {
   margin-bottom: -1.5em;
   margin-right: calc(50% + 2.5em);
   text-align: right;
-  transform: translateY(-1.5em);
+  transform: translateY(-2em);
   font-weight: normal; }
 
 .current-and-upcoming-phrases {
   margin-left: calc(50% - 3em);
+  margin-bottom: 0.5em;
   text-align: left;
   width: 100%;
   transform: translateX(10px); }

@@ -142,7 +142,7 @@ class Lesson extends Component {
                 userSettings={this.props.userSettings}
               />
               <div className="lesson-canvas panel mw-568 p2">
-                <div className="mx-auto mw100 text-center">
+                <div className="mx-auto mw100 mt2 text-center">
                   <Material
                     actualText={this.props.actualText}
                     currentPhrase={this.props.currentPhrase}
