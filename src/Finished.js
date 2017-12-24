@@ -13,7 +13,7 @@ class Finished extends Component {
     let customMessage;
     let emptyAndZeroStateMessage = "Finished!";
     if (this.isEmpty()) {
-      emptyAndZeroStateMessage = "There are no words.";
+      emptyAndZeroStateMessage = "There are no words to write.";
     }
     if (this.props.settings.customMessage) {
       customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
