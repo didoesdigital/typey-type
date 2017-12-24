@@ -524,8 +524,6 @@ class App extends Component {
   }
 
   presentCompletedMaterial() {
-    console.log(this.state.lesson);
-    console.log(this.state.lesson.newPresentedMaterial.getCompleted());
     return this.state.lesson.newPresentedMaterial.getCompleted().map(item => item.phrase).join(" ");
   }
   presentUpcomingMaterial() {
