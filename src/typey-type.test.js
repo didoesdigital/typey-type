@@ -9,10 +9,10 @@ describe('loadPersonalPreferences', () => {
       let userSettings = {
         caseSensitive: true,
         retainedWords: true,
-        limitNumberOfWords: 30,
+        limitNumberOfWords: 45,
         newWords: true,
         repetitions: 1,
-        showStrokes: false,
+        showStrokes: true,
         spacePlacement: 'spaceBeforeOutput',
         sortOrder: 'sortOff',
         seenWords: true,
@@ -33,10 +33,11 @@ describe('loadPersonalPreferences', () => {
 //         limitNumberOfWords: 0,
 //         newWords: true,
 //         repetitions: 1,
-//         showStrokes: false,
+//         showStrokes: true,
 //         spacePlacement: 'spaceBeforeOutput',
 //         sortOrder: 'sortRandom',
-//         seenWords: true
+//         seenWords: true,
+//         study: discover
 //       };
 //     });
 //   });

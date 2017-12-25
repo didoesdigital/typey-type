@@ -52,10 +52,10 @@ class App extends Component {
       userSettings: {
         caseSensitive: true,
         retainedWords: true,
-        limitNumberOfWords: 30,
+        limitNumberOfWords: 45,
         newWords: true,
         repetitions: 1,
-        showStrokes: false,
+        showStrokes: true,
         spacePlacement: 'spaceBeforeOutput',
         sortOrder: 'sortOff',
         seenWords: true,
