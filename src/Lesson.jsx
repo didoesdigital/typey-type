@@ -37,7 +37,11 @@ class Lesson extends Component {
     }
 
     if (this.props.firstVisit) {
-      firstVisit = <h2 className='p3 pb0 mb0 mx-auto mw-1024'>Welcome to Typey&nbsp;type for stenographers</h2>;
+      firstVisit = (
+        <div className='p3 pb0 mb0 mx-auto mw-1024'>
+          <p className="mb0">Welcome to Typey&nbsp;type for stenographers. Type the words shown, including the first space.</p>
+        </div>
+      );
     } else {
       firstVisit = '';
     }

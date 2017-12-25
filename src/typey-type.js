@@ -113,7 +113,8 @@ function parseLesson(lessonText, path) {
 }
 
 function isFirstVisit() {
-  if (window.localStorage && window.localStorage.getItem('metWords')) {
+  // metWords should at least contain `{'.':0}` so it should be length 7 or greater
+  if (window.localStorage && window.localStorage.getItem('metWords') && window.localStorage.getItem('metWords').length>=7) {
     return false;
   } else {
     return true;
