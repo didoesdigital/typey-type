@@ -400,13 +400,13 @@ small, .text-small {
 .completed-phrases {
   float: right;
   margin-bottom: -1.5em;
-  margin-right: calc(50% + 2.5em);
+  margin-right: calc(50% + 10em - 8px);
   text-align: right;
   transform: translateY(-2.075em);
   font-weight: normal; }
 
 .current-and-upcoming-phrases {
-  margin-left: calc(50% - 3em);
+  margin-left: calc(50% - 10em);
   margin-bottom: 0.5em;
   text-align: left;
   width: 100%;
@@ -428,12 +428,13 @@ small, .text-small {
   display: block;
   font-size: 1rem;
   line-height: 1.5;
-  margin-left: calc(50% - 3em);
+  margin-left: calc(50% - 10em);
+  padding: 4px 8px;
   overflow: hidden;
   text-decoration: underline;
   text-underline-position: under;
   white-space: nowrap;
-  width: 6em; }
+  width: calc(2 * 10em); }
 
 .matched {
   background-color: #cbabdd; }
