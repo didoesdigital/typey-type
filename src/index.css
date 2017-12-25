@@ -231,6 +231,9 @@ small, .text-small {
 .mw-568 {
   max-width: 568px; }
 
+.mw-584 {
+  max-width: 584px; }
+
 .mw-384 {
   max-width: 384px; }
 
@@ -299,6 +302,10 @@ small, .text-small {
 
 .unstyled-list-item {
   margin-left: 0; }
+
+.wrap {
+  overflow-wrap: break-word;
+  word-wrap: break-word; }
 
 .header {
   background-color: #2e173b;

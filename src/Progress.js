@@ -17,10 +17,10 @@ class Progress extends Component {
         <div className="mx-auto mw-1024 p3">
           <div className="progress-layout">
 
-            <div>
+            <div className="mw-584">
               <h1>Progress</h1>
               <p>Words you’ve seen and times you’ve typed them without misstrokes:</p>
-              <p id="js-metwords-from-typey-type" className="w-100 mt3 mb3 quote">{metWordsFromTypeyType}</p>
+              <p id="js-metwords-from-typey-type" className="w-100 mt3 mb3 quote wrap">{metWordsFromTypeyType}</p>
             </div>
 
             <div>
