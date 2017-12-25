@@ -15,70 +15,72 @@ class UserSettings extends Component {
       <div className="user-settings panel p2">
         <form>
           <h5 className="mb1">Settings</h5>
-          <legend className="mb1 text-small">Choose study type:</legend>
           <div className="text-small">
-            <div className="mb2">
-              <div className="radio-group">
-                <label className="radio-label">
-                  <input
-                    className="radio-input"
-                    type="radio"
-                    name="study"
-                    id="discover"
-                    value="discover"
-                    disabled={this.props.disableUserSettings}
-                    checked={this.props.userSettings.study==="discover"}
-                    onChange={this.props.chooseStudy}
-                    />
-                  Discover
-                </label>
+            <fieldset>
+              <legend className="mb1">Choose study type:</legend>
+              <div className="mb2">
+                <div className="radio-group">
+                  <label className="radio-label">
+                    <input
+                      className="radio-input"
+                      type="radio"
+                      name="study"
+                      id="discover"
+                      value="discover"
+                      disabled={this.props.disableUserSettings}
+                      checked={this.props.userSettings.study==="discover"}
+                      onChange={this.props.chooseStudy}
+                      />
+                    Discover
+                  </label>
+                </div>
+                <div className="radio-group">
+                  <label className="radio-label">
+                    <input
+                      className="radio-input"
+                      type="radio"
+                      name="study"
+                      id="revise"
+                      value="revise"
+                      disabled={this.props.disableUserSettings}
+                      checked={this.props.userSettings.study==="revise"}
+                      onChange={this.props.chooseStudy}
+                      />
+                    Revise
+                  </label>
+                </div>
+                <div className="radio-group">
+                  <label className="radio-label">
+                    <input
+                      className="radio-input"
+                      type="radio"
+                      name="study"
+                      id="drill"
+                      value="drill"
+                      disabled={this.props.disableUserSettings}
+                      checked={this.props.userSettings.study==="drill"}
+                      onChange={this.props.chooseStudy}
+                      />
+                    Drill
+                  </label>
+                </div>
+                <div className="radio-group">
+                  <label className="radio-label">
+                    <input
+                      className="radio-input"
+                      type="radio"
+                      name="study"
+                      id="practice"
+                      value="practice"
+                      disabled={this.props.disableUserSettings}
+                      checked={this.props.userSettings.study==="practice"}
+                      onChange={this.props.chooseStudy}
+                      />
+                    Practice
+                  </label>
+                </div>
               </div>
-              <div className="radio-group">
-                <label className="radio-label">
-                  <input
-                    className="radio-input"
-                    type="radio"
-                    name="study"
-                    id="revise"
-                    value="revise"
-                    disabled={this.props.disableUserSettings}
-                    checked={this.props.userSettings.study==="revise"}
-                    onChange={this.props.chooseStudy}
-                    />
-                  Revise
-                </label>
-              </div>
-              <div className="radio-group">
-                <label className="radio-label">
-                  <input
-                    className="radio-input"
-                    type="radio"
-                    name="study"
-                    id="drill"
-                    value="drill"
-                    disabled={this.props.disableUserSettings}
-                    checked={this.props.userSettings.study==="drill"}
-                    onChange={this.props.chooseStudy}
-                    />
-                  Drill
-                </label>
-              </div>
-              <div className="radio-group">
-                <label className="radio-label">
-                  <input
-                    className="radio-input"
-                    type="radio"
-                    name="study"
-                    id="practice"
-                    value="practice"
-                    disabled={this.props.disableUserSettings}
-                    checked={this.props.userSettings.study==="practice"}
-                    onChange={this.props.chooseStudy}
-                    />
-                  Practice
-                </label>
-              </div>
-            </div>
+            </fieldset>
 
             <h6 className={toggleClasses} onClick={this.props.toggleHideOtherSettings} role="button" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">Other settings{this.props.hideOtherSettings}</h6>
             <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'hide' : ''} aria-hidden={this.props.hideOtherSettings}>
@@ -154,53 +156,55 @@ class UserSettings extends Component {
                 </label>
               </div>
 
-              <div className="radio-button-group clearfix mb1 mt2">
-                <legend className="mb1">Match spaces</legend>
+              <fieldset>
+                <div className="radio-button-group clearfix mb1 mt2">
+                  <legend className="mb1">Match spaces</legend>
 
-                <input
-                  className="radio-button"
-                  type="radio"
-                  name="spacePlacement"
-                  id="spaceBeforeOutput"
-                  value="spaceBeforeOutput"
-                  disabled={this.props.disableUserSettings}
-                  checked={this.props.userSettings.spacePlacement==="spaceBeforeOutput"}
-                  onChange={this.props.changeSpacePlacementUserSetting}
-                  />
-                <label htmlFor="spaceBeforeOutput" aria-hidden="true">" x"</label>
-                <label htmlFor="spaceBeforeOutput" className="visually-hidden" aria-label="Space Before Output"></label>
+                  <input
+                    className="radio-button"
+                    type="radio"
+                    name="spacePlacement"
+                    id="spaceBeforeOutput"
+                    value="spaceBeforeOutput"
+                    disabled={this.props.disableUserSettings}
+                    checked={this.props.userSettings.spacePlacement==="spaceBeforeOutput"}
+                    onChange={this.props.changeSpacePlacementUserSetting}
+                    />
+                  <label htmlFor="spaceBeforeOutput" aria-hidden="true">" x"</label>
+                  <label htmlFor="spaceBeforeOutput" className="visually-hidden" aria-label="Space Before Output"></label>
 
-                <input
-                  className="radio-button"
-                  type="radio"
-                  name="spacePlacement"
-                  id="spaceAfterOutput"
-                  value="spaceAfterOutput"
-                  disabled={this.props.disableUserSettings}
-                  checked={this.props.userSettings.spacePlacement==="spaceAfterOutput"}
-                  onChange={this.props.changeSpacePlacementUserSetting}
-                  />
-                <label htmlFor="spaceAfterOutput" aria-hidden="true">"x "</label>
-                <label htmlFor="spaceAfterOutput" className="visually-hidden" aria-label="Space After Output"></label>
+                  <input
+                    className="radio-button"
+                    type="radio"
+                    name="spacePlacement"
+                    id="spaceAfterOutput"
+                    value="spaceAfterOutput"
+                    disabled={this.props.disableUserSettings}
+                    checked={this.props.userSettings.spacePlacement==="spaceAfterOutput"}
+                    onChange={this.props.changeSpacePlacementUserSetting}
+                    />
+                  <label htmlFor="spaceAfterOutput" aria-hidden="true">"x "</label>
+                  <label htmlFor="spaceAfterOutput" className="visually-hidden" aria-label="Space After Output"></label>
 
-                <label htmlFor="spaceOff" className="visually-hidden" aria-label="Ignore spaces"></label>
-                {/*
-                  This label is in a different location to other hidden screen reader labels so that
-                  input+label works for styled buttons and :first-of-type/:last-of-type work for rounded
-                  button group corners.
-                  */}
-                <input
-                  className="radio-button"
-                  type="radio"
-                  name="spacePlacement"
-                  id="spaceOff"
-                  value="spaceOff"
-                  disabled={this.props.disableUserSettings}
-                  checked={this.props.userSettings.spacePlacement==="spaceOff"}
-                  onChange={this.props.changeSpacePlacementUserSetting}
-                  />
-                <label htmlFor="spaceOff" aria-hidden="true">Off</label>
-              </div>
+                  <label htmlFor="spaceOff" className="visually-hidden" aria-label="Ignore spaces"></label>
+                  {/*
+                    This label is in a different location to other hidden screen reader labels so that
+                    input+label works for styled buttons and :first-of-type/:last-of-type work for rounded
+                    button group corners.
+                    */}
+                  <input
+                    className="radio-button"
+                    type="radio"
+                    name="spacePlacement"
+                    id="spaceOff"
+                    value="spaceOff"
+                    disabled={this.props.disableUserSettings}
+                    checked={this.props.userSettings.spacePlacement==="spaceOff"}
+                    onChange={this.props.changeSpacePlacementUserSetting}
+                    />
+                  <label htmlFor="spaceOff" aria-hidden="true">Off</label>
+                </div>
+              </fieldset>
 
               <div className="clearfix mb2">
                 <label className="mb1">Sort</label>
