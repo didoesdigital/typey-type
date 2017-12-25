@@ -11,6 +11,7 @@ class Header extends Component {
     return (
       <div>
         <div className="header">
+        <a href="#main" className="skip-to-main-link link-button link-button-ghost">Skip to main content</a>
           <div className="mx-auto mw-1024 p3">
             <nav>
               <div className="site-heading-banner">

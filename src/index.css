@@ -100,6 +100,9 @@ th {
     overflow: hidden;
     text-overflow: ellipsis; } }
 
+fieldset {
+  border: none; }
+
 input, textarea {
   font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
 
@@ -798,3 +801,17 @@ label {
   margin-bottom: 1.5em;
   margin-top: 1.5em;
   padding-left: 1em; }
+
+.skip-to-main-link {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px); }
+  .skip-to-main-link:focus, .skip-to-main-link:active {
+    position: absolute;
+    height: initial;
+    padding: 28px;
+    width: initial;
+    overflow: initial;
+    clip: initial; }

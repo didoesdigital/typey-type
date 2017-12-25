@@ -859,3 +859,20 @@ label {
   margin-top: 1.5em;
   padding-left: 1em;
 }
+.skip-to-main-link {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+
+  &:focus,
+  &:active {
+    position: absolute;
+    height: initial;
+    padding: 28px;
+    width: initial;
+    overflow: initial;
+    clip: initial;
+  }
+}
