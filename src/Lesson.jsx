@@ -67,7 +67,7 @@ class Lesson extends Component {
     if (this.props.lesson) {
       if (this.isFinished()) {
         return (
-          <div>
+          <main role="main" id="main">
             <div className="subheader">
               <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
                 <div className="flex mr1">
@@ -106,11 +106,11 @@ class Lesson extends Component {
               totalWordCount={this.props.lesson.presentedMaterial.length}
               userSettings={this.props.userSettings}
             />
-          </div>
+          </main>
         )
       } else {
         return (
-          <div>
+          <main role="main" id="main">
             <div className="subheader">
               <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
                 <div className="flex mr1">
@@ -126,62 +126,62 @@ class Lesson extends Component {
                 </div>
               </div>
             </div>
-          <div>
-            {firstVisit}
-            <div className="mx-auto mw-1024">
-              {customMessage}
-            </div>
-            <div className="lesson-wrapper mw-1024 p3">
-              <UserSettings
-                changeUserSetting={this.props.changeUserSetting}
-                changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
-                changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
-                chooseStudy={this.props.chooseStudy}
-                disableUserSettings={this.props.disableUserSettings}
-                handleLimitWordsChange={this.props.handleLimitWordsChange}
-                handleRepetitionsChange={this.props.handleRepetitionsChange}
-                hideOtherSettings={this.props.hideOtherSettings}
-                toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-                totalWordCount={this.props.totalWordCount}
-                userSettings={this.props.userSettings}
-              />
-              <div className="lesson-canvas panel mw-568 p2">
-                <div className="mx-auto mw100 mt2 text-center">
-                  <Material
-                    actualText={this.props.actualText}
-                    currentPhrase={this.props.currentPhrase}
-                    currentStroke={this.props.currentStroke}
-                    settings={this.props.settings}
-                    userSettings={this.props.userSettings}
-                    completedPhrases={this.props.completedPhrases}
-                    upcomingPhrases={this.props.upcomingPhrases}
-                  />
-                  <TypedText
-                    actualText={this.props.actualText}
-                    currentPhrase={this.props.currentPhrase}
-                    settings={this.props.settings}
-                    updateMarkup={this.props.updateMarkup.bind(this)}
-                    userSettings={this.props.userSettings}
-                  />
-                  <div role="status" aria-live="assertive">
-                    {strokeTip}
+            <div>
+              {firstVisit}
+              <div role="complementary" className="mx-auto mw-1024">
+                {customMessage}
+              </div>
+              <div className="lesson-wrapper mw-1024 p3">
+                <UserSettings
+                  changeUserSetting={this.props.changeUserSetting}
+                  changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
+                  changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+                  chooseStudy={this.props.chooseStudy}
+                  disableUserSettings={this.props.disableUserSettings}
+                  handleLimitWordsChange={this.props.handleLimitWordsChange}
+                  handleRepetitionsChange={this.props.handleRepetitionsChange}
+                  hideOtherSettings={this.props.hideOtherSettings}
+                  toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+                  totalWordCount={this.props.totalWordCount}
+                  userSettings={this.props.userSettings}
+                />
+                <div role="article" className="lesson-canvas panel mw-568 p2">
+                  <div className="mx-auto mw100 mt2 text-center">
+                    <Material
+                      actualText={this.props.actualText}
+                      currentPhrase={this.props.currentPhrase}
+                      currentStroke={this.props.currentStroke}
+                      settings={this.props.settings}
+                      userSettings={this.props.userSettings}
+                      completedPhrases={this.props.completedPhrases}
+                      upcomingPhrases={this.props.upcomingPhrases}
+                    />
+                    <TypedText
+                      actualText={this.props.actualText}
+                      currentPhrase={this.props.currentPhrase}
+                      settings={this.props.settings}
+                      updateMarkup={this.props.updateMarkup.bind(this)}
+                      userSettings={this.props.userSettings}
+                    />
+                    <div role="status" aria-live="assertive">
+                      {strokeTip}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="scores panel p2">
-                <Scores
-                  timer={this.props.timer}
-                  totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-                  totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-                  totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-                  totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-                  totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-                  totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-                />
+                <div className="scores panel p2">
+                  <Scores
+                    timer={this.props.timer}
+                    totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
+                    totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+                    totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
+                    totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
+                    totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
+                    totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </main>
         )
       }
     } else {

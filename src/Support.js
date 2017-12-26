@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Support = () => {
   return (
-    <div>
+    <main role="main" id="main">
       <div className="subheader">
         <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
           <div className="flex mr1">
@@ -32,7 +32,7 @@ const Support = () => {
 
           <h3 id="typey-type-notes">Typey&nbsp;type notes</h3>
           <p>Typey&nbsp;type embraces ideas of <a href="https://en.wikipedia.org/wiki/Spaced_repetition">spaced repetitions<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and <a href="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice">deliberate practice<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> to teach steno effectively.</p>
-          <p>When you stop a lesson before reaching the end or you complete a lesson, Typey&nbsp;type will save <Link to="/progress">your progress</Link>, including all the new words you’ve successfully met. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress. Typey&nbsp;type saves your brief progress in your browser’s local storage. You’ll lose your progress if you clear your browsing data (history, cookies, and cache). If you share this device with other people or use Typey&nbsp;type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;type.</p>
+          <p>When you stop a lesson before reaching the end or you complete a lesson, Typey&nbsp;type will save <Link to="/progress#main">your progress</Link>, including all the new words you’ve successfully met. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress. Typey&nbsp;type saves your brief progress in your browser’s local storage. You’ll lose your progress if you clear your browsing data (history, cookies, and cache). If you share this device with other people or use Typey&nbsp;type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;type.</p>
 
           <h4 id="typey-type-terms">Typey&nbsp;type terms</h4>
           <dl className="inline-flex">
@@ -73,7 +73,7 @@ const Support = () => {
           <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or <a href="https://twitter.com/didoesdigital">tweet @DiDoesDigital</a>.</p>
         </div>
       </div>
-    </div>
+    </main>
   )
 }
 

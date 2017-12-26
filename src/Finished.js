@@ -21,7 +21,7 @@ class Finished extends Component {
       customMessage = ''
     }
     return (
-      <div>
+      <main role="main" id="main">
         <div className="mx-auto mw-1024">
           {customMessage}
         </div>
@@ -56,7 +56,7 @@ class Finished extends Component {
             />
           </div>
         </div>
-      </div>
+      </main>
     )
   }
 

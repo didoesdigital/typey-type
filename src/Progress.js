@@ -14,7 +14,7 @@ class Progress extends Component {
     let metWordsFromTypeyType = JSON.stringify(this.props.metWords);
     return (
       <div>
-        <div className="mx-auto mw-1024 p3">
+        <main className="mx-auto mw-1024 p3" role="main" id="main">
           <div className="progress-layout">
 
             <div className="mw-584">
@@ -58,7 +58,7 @@ class Progress extends Component {
             </div>
 
           </div>
-        </div>
+        </main>
       </div>
     )
   }

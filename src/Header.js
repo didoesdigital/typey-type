@@ -10,15 +10,15 @@ class Header extends Component {
     let nextLesson = this.props.value || 'No lesson selected. See all lessons.';
     return (
       <div>
-        <div className="header">
         <a href="#main" className="skip-to-main-link link-button link-button-ghost">Skip to main content</a>
+        <div className="header" role="banner">
           <div className="mx-auto mw-1024 p3">
             <nav>
               <div className="site-heading-banner">
-                <Link to="/" className="heading-link dib"><h1>Typey&nbsp;type</h1></Link>
+                <Link to="/#main" className="heading-link dib"><h1>Typey&nbsp;type</h1></Link>
               </div>
               <div className="table search-container">
-                <Link to="/lessons" className="link-button link-button-ghost mr1 table-cell">Lessons</Link>
+                <Link to="/lessons#main" className="link-button link-button-ghost mr1 table-cell">Lessons</Link>
                 <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
                 <Autocomplete
                   getItemValue={(item) => item.title}
@@ -42,6 +42,7 @@ class Header extends Component {
                   renderMenu={function(items, value, style) {
                     return <div style={{ ...style, ...this.menuStyle }} className="autocomplete-menu" children={items}/>
                   }}
+                  role="search"
                   shouldItemRender={matchLessonToTerm}
                   sortItems={sortLessons}
                   value={this.props.value}
