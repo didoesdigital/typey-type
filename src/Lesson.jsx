@@ -47,7 +47,9 @@ class Lesson extends Component {
     }
 
     if (this.props.userSettings.showStrokes || this.props.showStrokesInLesson) {
-      strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre><span className="steno-stroke"><abbr>{this.props.currentStroke}</abbr></span></pre></div>;
+      if (this.props.currentStroke) {
+        strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre><span className="steno-stroke">{this.props.currentStroke.split('').map((item, i)=><kbd className="raw-steno-key" key={i}>{item}</kbd>)}</span></pre></div>;
+      }
     } else {
       strokeTip = <div className="stroke-tip">
         <label className="mb0 text-small">
@@ -163,9 +165,15 @@ class Lesson extends Component {
                       updateMarkup={this.props.updateMarkup.bind(this)}
                       userSettings={this.props.userSettings}
                     />
-                    <div role="status" aria-live="assertive">
+                    <div>
                       {strokeTip}
                     </div>
+                  </div>
+                </div>
+                <div className="visually-hidden">
+                  <div role="status" aria-live="assertive">
+                    <div className="material"><pre><span className="steno-material">{this.props.currentPhrase}</span></pre></div>
+                    {strokeTip}
                   </div>
                 </div>
                 <div className="scores panel p2">

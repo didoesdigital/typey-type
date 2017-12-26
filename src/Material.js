@@ -16,11 +16,6 @@ class Material extends Component {
     const [matched, unmatched] = matchSplitText(this.props.currentPhrase, this.props.actualText, this.props.settings, this.props.userSettings);
     return (
       <div className="mb1">
-        <div className="visually-hidden">Material to type:
-          <div role="status" aria-live="assertive">
-            <div className="material"><pre><span className="steno-material">{matched + unmatched}</span></pre></div>
-          </div>
-        </div>
         <div className="expected">
           <div className="visually-hidden">Matching and unmatching material typed:</div>
           <div className="material">
