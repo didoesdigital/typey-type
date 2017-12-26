@@ -68,7 +68,7 @@ a {
     color: #202549; }
 
 pre {
-  font: 700 16px/1.6 "Overpass Mono", monospace; }
+  font: 700 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
 
 abbr[title] {
   border-bottom: thin dotted currentColor;
@@ -102,6 +102,9 @@ th {
 
 fieldset {
   border: none; }
+
+tt, code, kbd, samp {
+  font: 700 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
 
 input, textarea {
   font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
@@ -681,6 +684,16 @@ label {
   background-color: #4e4e4e;
   color: #ece9ee;
   letter-spacing: 0.1em;
+  padding-left: 4px;
+  padding-right: 4px;
+  speak: spell-out; }
+  .steno-stroke .raw-steno-key {
+    padding-left: 0;
+    padding-right: 0; }
+
+.raw-steno-key {
+  background-color: #4e4e4e;
+  color: #ece9ee;
   padding-left: 4px;
   padding-right: 4px;
   speak: spell-out; }

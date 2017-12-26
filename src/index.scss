@@ -3,6 +3,7 @@
 
 // Variables
 $type: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+$heavy-type: 700 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
 $base-font-size: 16px;
 $font-scale: 1.25; // Major third scale
 $h1-size: $base-font-size * $font-scale * $font-scale * $font-scale * $font-scale; // 39.056px
@@ -86,7 +87,7 @@ a {
   }
 }
 pre {
-  font: 700 16px/1.6 "Overpass Mono", monospace;
+  font: $heavy-type;
 }
 abbr[title] {
   border-bottom: thin dotted currentColor;
@@ -126,6 +127,9 @@ fieldset {
   border: none;
 }
 
+tt, code, kbd, samp {
+  font: $heavy-type;
+}
 input, textarea {
   font: $type;
 }
@@ -721,6 +725,17 @@ label {
   background-color: desaturate(add-tint($brand-primary, 10%), 40%);
   color: add-tint($brand-primary, 90%);
   letter-spacing: 0.1em;
+  padding-left: 4px;
+  padding-right: 4px;
+  speak: spell-out;
+  .raw-steno-key {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+.raw-steno-key {
+  background-color: desaturate(add-tint($brand-primary, 10%), 40%);
+  color: add-tint($brand-primary, 90%);
   padding-left: 4px;
   padding-right: 4px;
   speak: spell-out;
