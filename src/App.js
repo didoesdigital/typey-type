@@ -523,7 +523,7 @@ class App extends Component {
       newState.currentPhraseMeetingSuccess = 1;
       this.state.lesson.newPresentedMaterial.visitNext();
 
-      if (this.studyType(this.state.userSettings) === 'discover' && repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1) === 1) {
+      if (this.studyType(this.state.userSettings) === 'discover' && repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1) === 1 && this.state.userSettings.showStrokes === true) {
         newState.userSettings.showStrokes = false;
       }
     }
