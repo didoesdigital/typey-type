@@ -43,7 +43,7 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
           />
           } />
         <Route exact={true} path={match.url} render={() => (
-          <main role="main" id="main">
+          <main id="main">
             <div className="subheader">
               <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
                 <div className="flex mr1">

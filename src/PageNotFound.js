@@ -5,7 +5,7 @@ import {
 
 const PageNotFound = () => {
   return (
-    <main role="main" id="main">
+    <main id="main">
       <a href="#main" className="skip-to-main-link link-button link-button-ghost">Skip to main content</a>
       <div className="header" role="banner">
         <div className="mx-auto mw-1024 p3">

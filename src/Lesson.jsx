@@ -67,7 +67,7 @@ class Lesson extends Component {
     if (this.props.lesson) {
       if (this.isFinished()) {
         return (
-          <main role="main" id="main">
+          <main id="main">
             <div className="subheader">
               <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
                 <div className="flex mr1">
@@ -110,7 +110,7 @@ class Lesson extends Component {
         )
       } else {
         return (
-          <main role="main" id="main">
+          <main id="main">
             <div className="subheader">
               <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
                 <div className="flex mr1">
