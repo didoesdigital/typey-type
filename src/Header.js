@@ -15,10 +15,10 @@ class Header extends Component {
           <div className="mx-auto mw-1024 p3">
             <nav>
               <div className="site-heading-banner">
-                <Link to="/#main" className="heading-link dib"><h1>Typey&nbsp;type</h1></Link>
+                <Link to="/" className="heading-link dib"><h1>Typey&nbsp;type</h1></Link>
               </div>
               <div className="table search-container">
-                <Link to="/lessons#main" className="link-button link-button-ghost mr1 table-cell">Lessons</Link>
+                <Link to="/lessons" className="link-button link-button-ghost mr1 table-cell">Lessons</Link>
                 <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
                 <Autocomplete
                   getItemValue={(item) => item.title}

@@ -65,7 +65,7 @@ class Scores extends Component {
         <div>
           <h5 className="mb1">Scores</h5>
           <div className="timer" dangerouslySetInnerHTML={this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords)} />
-          <div><Link to="/progress#main" className="text-small">View your progress</Link>.</div>
+          <div><Link to="/progress" className="text-small">View your progress</Link>.</div>
         </div>
       );
     } else {
@@ -114,7 +114,7 @@ class Scores extends Component {
               </tr>
             </tbody>
           </table>
-          <div><Link to="/progress#main" className="text-small">View your progress</Link>.</div>
+          <div><Link to="/progress" className="text-small">View your progress</Link>.</div>
         </div>
       );
     }
