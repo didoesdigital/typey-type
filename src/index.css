@@ -827,3 +827,16 @@ label {
     width: initial;
     overflow: initial;
     clip: initial; }
+
+.fill-fade-parent {
+  position: relative; }
+
+.fill-fade-edges {
+  background-image: linear-gradient(to right, #f9f8fa 0%, #f9f8fa 5%, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0) 90%, #f9f8fa 95%, #f9f8fa 100%);
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1; }

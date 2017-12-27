@@ -894,3 +894,23 @@ label {
     clip: initial;
   }
 }
+
+.fill-fade-parent {
+  position: relative;
+}
+.fill-fade-edges {
+  background-image: linear-gradient(to right,
+    add-tint($brand-primary, 97%) 0%,
+    add-tint($brand-primary, 97%) 5%,
+    rgba(255,255,255,0) 10%,
+    rgba(255,255,255,0) 90%,
+    add-tint($brand-primary, 97%) 95%,
+    add-tint($brand-primary, 97%) 100%);
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
