@@ -439,7 +439,6 @@ small, .text-small {
   overflow: hidden;
   text-decoration: underline;
   text-underline-position: under;
-  white-space: nowrap;
   width: calc(2 * 10em); }
 
 .matched {
