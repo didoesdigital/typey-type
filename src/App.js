@@ -422,9 +422,14 @@ class App extends Component {
     newLesson.presentedMaterial = repeatedLesson;
     newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
+    let meetingSuccess = 1;
+    if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
+      meetingSuccess = 0;
+    }
+
     this.setState({
       actualText: ``,
-      currentPhraseMeetingSuccess: this.state.userSettings.showStrokes ? 0 : 1,
+      currentPhraseMeetingSuccess: meetingSuccess,
       disableUserSettings: false,
       numberOfMatchedChars: 0,
       repetitionsRemaining: reps,
