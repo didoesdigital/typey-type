@@ -21,7 +21,7 @@ class Progress extends Component {
 
             <div className="mw-584">
               <h1>Progress</h1>
-              <p>You’ve successfully stroked {wordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words.</p>
+              <p>You’ve successfully typed {wordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words.</p>
               <p>Words you’ve seen and times you’ve typed them well:</p>
               <p id="js-metwords-from-typey-type" className="w-100 mt3 mb3 quote wrap">{metWordsFromTypeyType}</p>
             </div>
