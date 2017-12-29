@@ -166,7 +166,7 @@ class UserSettings extends Component {
                     checked={this.props.userSettings.retainedWords}
                     onChange={this.props.changeUserSetting}
                     />
-                  Retained words
+                  Memorised words
                 </label>
               </div>
 
