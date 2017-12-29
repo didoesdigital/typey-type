@@ -4,6 +4,7 @@ import TypedText from './TypedText';
 import Scores from './Scores';
 import UserSettings from './UserSettings';
 import Finished from './Finished';
+import { shouldShowStroke } from './typey-type';
 
 class Lesson extends Component {
   componentDidMount() {
@@ -46,7 +47,7 @@ class Lesson extends Component {
       firstVisit = '';
     }
 
-    if (this.props.userSettings.showStrokes || this.props.showStrokesInLesson) {
+    if (shouldShowStroke(this.props.showStrokesInLesson, this.props.userSettings.showStrokes, this.props.repetitionsRemaining, this.props.userSettings.hideStrokesOnLastRepetition)) {
       if (this.props.currentStroke) {
         strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre><span className="steno-stroke">{this.props.currentStroke.split('').map((item, i)=><kbd className="raw-steno-key" key={i}>{item}</kbd>)}</span></pre></div>;
       }

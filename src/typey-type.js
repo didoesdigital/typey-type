@@ -130,6 +130,7 @@ function loadPersonalPreferences() {
     newWords: true,
     repetitions: 1,
     showStrokes: true,
+    hideStrokesOnLastRepetition: true,
     spacePlacement: 'spaceBeforeOutput',
     sortOrder: 'sortOff',
     seenWords: true,
@@ -167,6 +168,17 @@ function repetitionsRemaining(userSettings, presentedMaterial, currentPhraseID) 
   return reps - Math.floor(((lessonLength - wordsRemaining)/wordsPerRep));
 }
 
+function shouldShowStroke(showStrokesInLesson, showStrokes, repetitionsRemaining, hideStrokesOnLastRepetition) {
+  if (showStrokesInLesson) {
+    return true;
+  } else if (showStrokes && repetitionsRemaining > 1) {
+    return true;
+  } else if (showStrokes && repetitionsRemaining <= 1 && !(hideStrokesOnLastRepetition) ) {
+    return true;
+  }
+  return false;
+}
+
 function getLesson(lessonFile) {
   return fetch(lessonFile, {
     method: "GET",
@@ -197,7 +209,8 @@ export {
   isFirstVisit,
   loadPersonalPreferences,
   matchSplitText,
-  repetitionsRemaining,
   parseLesson,
+  repetitionsRemaining,
+  shouldShowStroke,
   writePersonalPreferences
 };

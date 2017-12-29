@@ -5,8 +5,9 @@ import {
   getLesson,
   loadPersonalPreferences,
   matchSplitText,
-  repetitionsRemaining,
   parseLesson,
+  repetitionsRemaining,
+  shouldShowStroke,
   writePersonalPreferences
 } from './typey-type';
 import {
@@ -34,6 +35,7 @@ class App extends Component {
       actualText: ``,
       hideOtherSettings: true,
       nextLessonPath: '',
+      repetitionsRemaining: 1,
       startTime: null,
       showStrokesInLesson: false,
       timer: null,
@@ -56,6 +58,7 @@ class App extends Component {
         newWords: true,
         repetitions: 1,
         showStrokes: true,
+        hideStrokesOnLastRepetition: true,
         spacePlacement: 'spaceBeforeOutput',
         sortOrder: 'sortOff',
         seenWords: true,
@@ -328,6 +331,7 @@ class App extends Component {
     switch (value) {
       case "discover":
         newState.showStrokes = true;
+        newState.hideStrokesOnLastRepetition = true;
         newState.newWords = true;
         newState.seenWords = false;
         newState.retainedWords = false;
@@ -337,6 +341,7 @@ class App extends Component {
         break;
       case "revise":
         newState.showStrokes = false;
+        newState.hideStrokesOnLastRepetition = true;
         newState.newWords = false;
         newState.seenWords = true;
         newState.retainedWords = false;
@@ -346,6 +351,7 @@ class App extends Component {
         break;
       case "drill":
         newState.showStrokes = false;
+        newState.hideStrokesOnLastRepetition = true;
         newState.newWords = false;
         newState.seenWords = true;
         newState.retainedWords = true;
@@ -355,6 +361,7 @@ class App extends Component {
         break;
       case "practice":
         newState.showStrokes = false;
+        newState.hideStrokesOnLastRepetition = true;
         newState.newWords = true;
         newState.seenWords = true;
         newState.retainedWords = true;
@@ -420,6 +427,7 @@ class App extends Component {
       currentPhraseMeetingSuccess: this.state.userSettings.showStrokes ? 0 : 1,
       disableUserSettings: false,
       numberOfMatchedChars: 0,
+      repetitionsRemaining: reps,
       startTime: null,
       timer: null,
       totalNumberOfMatchedChars: 0,
@@ -507,9 +515,10 @@ class App extends Component {
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
       newState.actualText = '';
       newState.showStrokesInLesson = false;
+      newState.repetitionsRemaining = this.state.userSettings.repetitions;
       newState.currentPhraseID = this.state.currentPhraseID + 1;
 
-      if (this.state.userSettings.showStrokes || this.state.showStrokesInLesson) {
+      if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
         newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1;
       }
       else if (this.state.currentPhraseMeetingSuccess === 0) {
@@ -523,9 +532,8 @@ class App extends Component {
       newState.currentPhraseMeetingSuccess = 1;
       this.state.lesson.newPresentedMaterial.visitNext();
 
-      if (this.studyType(this.state.userSettings) === 'discover' && repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1) === 1 && this.state.userSettings.showStrokes === true) {
-        newState.userSettings.showStrokes = false;
-      }
+      newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
+
     }
 
     this.setState(newState, () => {
@@ -626,6 +634,7 @@ class App extends Component {
                     handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
                     handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
                     hideOtherSettings={this.state.hideOtherSettings}
+                    repetitionsRemaining={this.state.repetitionsRemaining}
                     settings={this.state.lesson.settings}
                     showStrokesInLesson={this.state.showStrokesInLesson}
                     timer={this.state.timer}
@@ -699,6 +708,7 @@ class App extends Component {
                     handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
                     handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
                     hideOtherSettings={this.state.hideOtherSettings}
+                    repetitionsRemaining={this.state.repetitionsRemaining}
                     settings={this.state.lesson.settings}
                     showStrokesInLesson={this.state.showStrokesInLesson}
                     timer={this.state.timer}

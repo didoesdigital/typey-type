@@ -13,6 +13,7 @@ describe('loadPersonalPreferences', () => {
         newWords: true,
         repetitions: 1,
         showStrokes: true,
+        hideStrokesOnLastRepetition: true,
         spacePlacement: 'spaceBeforeOutput',
         sortOrder: 'sortOff',
         seenWords: true,
@@ -34,6 +35,7 @@ describe('loadPersonalPreferences', () => {
 //         newWords: true,
 //         repetitions: 1,
 //         showStrokes: true,
+//         hideStrokesOnLastRepetition: false,
 //         spacePlacement: 'spaceBeforeOutput',
 //         sortOrder: 'sortRandom',
 //         seenWords: true,
@@ -134,6 +136,7 @@ describe('matchSplitText', () => {
       newWords: true,
       repetitions: 1,
       showStrokes: false,
+      hideStrokesOnLastRepetition: false,
       spacePlacement: 'spaceOff',
       sortOrder: 'sortOff',
       seenWords: true
@@ -198,6 +201,7 @@ describe('matchSplitText', () => {
       newWords: true,
       repetitions: 1,
       showStrokes: false,
+      hideStrokesOnLastRepetition: false,
       spacePlacement: 'spaceOff',
       sortOrder: 'sortOff',
       seenWords: true
@@ -262,6 +266,7 @@ describe('matchSplitText', () => {
       newWords: true,
       repetitions: 1,
       showStrokes: false,
+      hideStrokesOnLastRepetition: false,
       spacePlacement: 'spaceBefore',
       sortOrder: 'sortOff',
       seenWords: true
@@ -326,6 +331,7 @@ describe('matchSplitText', () => {
       newWords: true,
       repetitions: 1,
       showStrokes: false,
+      hideStrokesOnLastRepetition: false,
       spacePlacement: 'spaceBefore',
       sortOrder: 'sortOff',
       seenWords: true
@@ -383,6 +389,7 @@ describe('matchSplitText', () => {
       newWords: true,
       repetitions: 1,
       showStrokes: false,
+      hideStrokesOnLastRepetition: false,
       spacePlacement: 'spaceAfter',
       sortOrder: 'sortOff',
       seenWords: true
@@ -440,6 +447,7 @@ describe('matchSplitText', () => {
       newWords: true,
       repetitions: 1,
       showStrokes: false,
+      hideStrokesOnLastRepetition: false,
       spacePlacement: 'spaceOff',
       sortOrder: 'sortOff',
       seenWords: true

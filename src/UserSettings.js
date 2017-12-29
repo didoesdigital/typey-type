@@ -90,6 +90,20 @@ class UserSettings extends Component {
                   <input
                     className="checkbox-input"
                     type="checkbox"
+                    name="caseSensitive"
+                    id="caseSensitive"
+                    disabled={this.props.disableUserSettings}
+                    checked={this.props.userSettings.caseSensitive}
+                    onChange={this.props.changeUserSetting}
+                    />
+                  Case sensitive
+                </label>
+              </div>
+              <div className="checkbox-group">
+                <label className="checkbox-label">
+                  <input
+                    className="checkbox-input"
+                    type="checkbox"
                     name="showStrokes"
                     id="showStrokes"
                     disabled={this.props.disableUserSettings}
@@ -104,13 +118,13 @@ class UserSettings extends Component {
                   <input
                     className="checkbox-input"
                     type="checkbox"
-                    name="caseSensitive"
-                    id="caseSensitive"
+                    name="hideStrokesOnLastRepetition"
+                    id="hideStrokesOnLastRepetition"
                     disabled={this.props.disableUserSettings}
-                    checked={this.props.userSettings.caseSensitive}
+                    checked={this.props.userSettings.hideStrokesOnLastRepetition}
                     onChange={this.props.changeUserSetting}
                     />
-                  Case sensitive
+                  Hide strokes on last repetition
                 </label>
               </div>
               <div className="checkbox-group">
