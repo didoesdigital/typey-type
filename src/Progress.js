@@ -12,8 +12,8 @@ class Progress extends Component {
 
   render () {
     let metWordsFromTypeyType = JSON.stringify(this.props.metWords);
-    let wordCount = Object.keys(this.props.metWords).length;
-    let progressPercent = Object.keys(this.props.metWords).length / 10000 * 100;
+    let wordCount = Object.keys(this.props.metWords).length || 0;
+    let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
     return (
       <div>
         <main className="mx-auto mw-1024 p3" id="main">
