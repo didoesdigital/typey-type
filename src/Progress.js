@@ -12,6 +12,8 @@ class Progress extends Component {
 
   render () {
     let metWordsFromTypeyType = JSON.stringify(this.props.metWords);
+    let wordCount = Object.keys(this.props.metWords).length;
+    let progressPercent = Object.keys(this.props.metWords).length / 10000 * 100;
     return (
       <div>
         <main className="mx-auto mw-1024 p3" id="main">
@@ -19,7 +21,8 @@ class Progress extends Component {
 
             <div className="mw-584">
               <h1>Progress</h1>
-              <p>Words you’ve seen and times you’ve typed them without misstrokes:</p>
+              <p>You’ve successfully stroked {wordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words.</p>
+              <p>Words you’ve seen and times you’ve typed them well:</p>
               <p id="js-metwords-from-typey-type" className="w-100 mt3 mb3 quote wrap">{metWordsFromTypeyType}</p>
             </div>
 
