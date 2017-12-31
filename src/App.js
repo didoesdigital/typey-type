@@ -18,6 +18,7 @@ import Lessons from './Lessons';
 import Home from './Home';
 import Header from './Header';
 import Support from './Support';
+import Contribute from './Contribute';
 import Progress from './Progress';
 import PageNotFound from './PageNotFound';
 import Footer from './Footer';
@@ -663,6 +664,13 @@ class App extends Component {
                 <div>
                   {header}
                   <Support />
+                </div>
+                }
+              />
+              <Route path="/contribute" render={ () =>
+                <div>
+                  {header}
+                  <Contribute />
                 </div>
                 }
               />

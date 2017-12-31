@@ -18,7 +18,7 @@ const Support = () => {
           <p>Typey&nbsp;type is a typing app designed specifically to help <a href="#about-stenography">stenography</a> students learn <abbr title="stenography">steno</abbr> faster. You can learn briefs and improve your stenographic speed and accuracy using tailored education options, including tight feedback loops so you learn to fix misstrokes immediately. You can effortlessly track progress in your brief vocabulary and rapidly increase in steno skill.</p>
 
           <h3 id="about-stenography">Stenography</h3>
-          <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. When you press keys together on a stenotype machine—like playing a piano chord—the software translates the key combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the <a href="http://openstenoproject.org/">Open steno project<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
+          <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. When you press keys together on a stenotype machine—like playing a piano chord—the software translates the key combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the <a href="http://openstenoproject.org/" target="_blank" rel="noopener noreferrer">Open steno project<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
 
           <h4 id="steno-terms">Steno terms</h4>
           <dl className="inline-flex">
@@ -27,11 +27,11 @@ const Support = () => {
             <dt>Strokes</dt>
             <dd>A stroke is a combination of keys held together a released to write a word or sound. A multi-stroke brief is a combination of strokes pressed in order to produce a word or phrase (usually of more syllables).</dd>
             <dt>Plover</dt>
-            <dd><a href="http://www.openstenoproject.org/plover/">Plover<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> is the world’s first free, open-source stenography program that works cross-platform on Windows, macOS, and Linux operating systems.</dd>
+            <dd><a href="http://www.openstenoproject.org/plover/" target="_blank" rel="noopener noreferrer">Plover<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> is the world’s first free, open-source stenography program that works cross-platform on Windows, macOS, and Linux operating systems.</dd>
           </dl>
 
           <h3 id="typey-type-notes">Typey&nbsp;type notes</h3>
-          <p>Typey&nbsp;type embraces ideas of <a href="https://en.wikipedia.org/wiki/Spaced_repetition">spaced repetitions<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and <a href="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice">deliberate practice<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> to teach steno effectively.</p>
+          <p>Typey&nbsp;type embraces ideas of <a href="https://en.wikipedia.org/wiki/Spaced_repetition" target="_blank" rel="noopener noreferrer">spaced repetitions<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and <a href="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice" target="_blank" rel="noopener noreferrer">deliberate practice<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> to teach steno effectively.</p>
           <p>When you stop a lesson before reaching the end or you complete a lesson, Typey&nbsp;type will save <Link to="/progress">your progress</Link>, including all the new words you’ve successfully met. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress. Typey&nbsp;type saves your brief progress in your browser’s local storage. You’ll lose your progress if you clear your browsing data (history, cookies, and cache). If you share this device with other people or use Typey&nbsp;type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;type.</p>
 
           <h4 id="typey-type-terms">Typey&nbsp;type terms</h4>
@@ -54,10 +54,10 @@ const Support = () => {
 
           <h3 id="learn-steno">Learning stenography</h3>
           <h4 id="try-steno">How can you try out steno?</h4>
-          <p>For an idea of how steno feels and works, you can <a href="https://github.com/openstenoproject/plover/wiki/Installation-Guide">install Plover<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and use its “arpeggiate” setting. This setting lets you use a QWERTY keyboard to write stenography. The trick is that you press each key separately and then press space bar to send the stroke. Usually a stenographer will press all keys together and release them together. Most QWERTY keyboards, however, are non-NKRO (N-key roll over), meaning only the first 6 keys held together will be noticed; later keys are ignored. Arpeggiate will let you explore steno, but is unrealistic.</p>
+          <p>For an idea of how steno feels and works, you can <a href="https://github.com/openstenoproject/plover/wiki/Installation-Guide" target="_blank" rel="noopener noreferrer">install Plover<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and use its “arpeggiate” setting. This setting lets you use a QWERTY keyboard to write stenography. The trick is that you press each key separately and then press space bar to send the stroke. Usually a stenographer will press all keys together and release them together. Most QWERTY keyboards, however, are non-NKRO (N-key roll over), meaning only the first 6 keys held together will be noticed; later keys are ignored. Arpeggiate will let you explore steno, but is unrealistic.</p>
 
           <h4 id="requirements-for-steno">What do you need to learn steno?</h4>
-          <p>You need a <a href="https://github.com/openstenoproject/plover/wiki/Supported-Hardware#known-supported-keyboards">true NKRO (N-key roll over) supported keyboard<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> with key caps or key toppers, or a <a href="https://github.com/openstenoproject/plover/wiki/Supported-Hardware">stenotype machine<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and software like <a href="http://www.openstenoproject.org/plover/">Plover (free and open)<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
+          <p>You need a <a href="https://github.com/openstenoproject/plover/wiki/Supported-Hardware#known-supported-keyboards" target="_blank" rel="noopener noreferrer">true NKRO (N-key roll over) supported keyboard<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> with key caps or key toppers, or a <a href="https://github.com/openstenoproject/plover/wiki/Supported-Hardware" target="_blank" rel="noopener noreferrer">stenotype machine<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and software like <a href="http://www.openstenoproject.org/plover/" target="_blank" rel="noopener noreferrer">Plover (free and open)<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
 
           <h4 id="time-to-learn">How long does it take to learn steno?</h4>
           <p>To write text for personal use, such as writing emails and instant messages, you could learn basic steno at ~40WPM within 3–6 months. To productively use steno to write most text at under 100WPM, it might take 6–18&nbsp;months. For live dictation at 200WPM, it might take you 2&nbsp;or&nbsp;more years. If you are learning stenography for ergonomic reasons and have injuries to manage, it could take longer.</p>
@@ -68,6 +68,12 @@ const Support = () => {
 
           <h4 id="revision">How many briefs should you revise each day?</h4>
           <p>100–200.</p>
+
+          <h3 id="progress">Progress</h3>
+          <p>See how much <Link to="/progress">progress you’ve made with Typey&nbsp;type</Link>.</p>
+
+          <h3 id="contribute">Want to contribute?</h3>
+          <p>Learn how to <Link to="/contribute">contribute to Typey&nbsp;type</Link>.</p>
 
           <h3 id="support">Support</h3>
           <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or <a href="https://twitter.com/didoesdigital">tweet @DiDoesDigital</a>.</p>
