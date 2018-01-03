@@ -159,6 +159,10 @@ function writePersonalPreferences(userSettings, metWords) {
   }
 }
 
+function targetStrokeCount(currentOutline) {
+  return currentOutline.stroke.split(/[/ ]/).length || 1;
+}
+
 function repetitionsRemaining(userSettings, presentedMaterial, currentPhraseID) {
   let lessonLength = presentedMaterial.length;
   if (currentPhraseID > lessonLength) { return 0; }
@@ -212,5 +216,6 @@ export {
   parseLesson,
   repetitionsRemaining,
   shouldShowStroke,
+  targetStrokeCount,
   writePersonalPreferences
 };

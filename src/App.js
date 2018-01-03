@@ -8,6 +8,7 @@ import {
   parseLesson,
   repetitionsRemaining,
   shouldShowStroke,
+  targetStrokeCount,
   writePersonalPreferences
 } from './typey-type';
 import {
@@ -423,7 +424,7 @@ class App extends Component {
     newLesson.presentedMaterial = repeatedLesson;
     newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
-    let meetingSuccess = 1;
+    let meetingSuccess = targetStrokeCount(newLesson.presentedMaterial[this.state.currentPhraseID] || { phrase: '', stroke: '' });
     if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
       meetingSuccess = 0;
     }
@@ -501,6 +502,7 @@ class App extends Component {
     let [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
     var newState = {
+      currentPhraseMeetingSuccess: this.state.currentPhraseMeetingSuccess,
       numberOfMatchedChars: numberOfMatchedChars,
       totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       totalNumberOfNewWordsMet: this.state.totalNumberOfNewWordsMet,
@@ -513,8 +515,8 @@ class App extends Component {
       userSettings: this.state.userSettings
     };
 
-    if (unmatchedActual.length > 0) {
-      newState.currentPhraseMeetingSuccess = 0;
+    if (unmatchedActual.length > 0 && newState.currentPhraseMeetingSuccess > 0) {
+      newState.currentPhraseMeetingSuccess--;
     }
 
     if (numberOfUnmatchedChars === 0) {
@@ -530,12 +532,13 @@ class App extends Component {
       else if (this.state.currentPhraseMeetingSuccess === 0) {
         newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1;
       }
-      else if (this.state.currentPhraseMeetingSuccess === 1) {
+      else if (this.state.currentPhraseMeetingSuccess > 0) {
         const meetingsCount = newState.metWords[actualText] || 0;
         Object.assign(newState, increaseMetWords.call(this, meetingsCount));
-        newState.metWords[actualText] = this.state.currentPhraseMeetingSuccess + meetingsCount;
+        newState.metWords[actualText] = meetingsCount + 1;
       }
-      newState.currentPhraseMeetingSuccess = 1;
+
+      newState.currentPhraseMeetingSuccess = targetStrokeCount(this.state.lesson.presentedMaterial[this.state.currentPhraseID + 1] || { phrase: '', stroke: '' });
       this.state.lesson.newPresentedMaterial.visitNext();
 
       newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
@@ -598,7 +601,7 @@ class App extends Component {
     />
 
     if (true) {
-      let presentedMaterialCurrentItem = this.state.lesson.presentedMaterial[this.state.currentPhraseID] || {};
+      let presentedMaterialCurrentItem = this.state.lesson.presentedMaterial[this.state.currentPhraseID] || { phrase: '', stroke: '' };
       return (
         <div className="app">
           <div>
@@ -758,15 +761,21 @@ class App extends Component {
 
 function increaseMetWords(meetingsCount) {
   let newState = {};
+  let currentPhraseMeetingSuccess;
+  if (this.state.currentPhraseMeetingSuccess > 0) {
+    currentPhraseMeetingSuccess = 1;
+  } else {
+    currentPhraseMeetingSuccess = 0;
+  }
 
   if (meetingsCount === 0) {
-    newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + this.state.currentPhraseMeetingSuccess;
+    newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + currentPhraseMeetingSuccess;
   }
   else if (meetingsCount >= 1 && meetingsCount <= 29) {
-    newState.totalNumberOfLowExposuresSeen = this.state.totalNumberOfLowExposuresSeen + this.state.currentPhraseMeetingSuccess;
+    newState.totalNumberOfLowExposuresSeen = this.state.totalNumberOfLowExposuresSeen + currentPhraseMeetingSuccess;
   }
   else if (meetingsCount >= 30) {
-    newState.totalNumberOfRetainedWords = this.state.totalNumberOfRetainedWords + this.state.currentPhraseMeetingSuccess;
+    newState.totalNumberOfRetainedWords = this.state.totalNumberOfRetainedWords + currentPhraseMeetingSuccess;
   }
   return newState;
 }
