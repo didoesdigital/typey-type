@@ -67,7 +67,7 @@ class Lesson extends Component {
             checked={this.props.showStrokesInLesson}
             onChange={this.props.changeShowStrokesInLesson}
             />
-          Show brief? ({strokeTarget})
+          {strokeTarget} (hint?)
         </label>
       </div>;
     }

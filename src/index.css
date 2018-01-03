@@ -721,11 +721,21 @@ label {
       min-width: 480px; } }
 
 .stroke-tip {
-  margin-left: auto;
-  margin-right: auto; }
+  color: #596091;
+  margin-bottom: 0.5em;
+  margin-left: calc(50% - 10.5em);
+  text-align: left;
+  transform: translateX(10px);
+  width: 100%; }
+  .stroke-tip:hover {
+    color: #9193a8; }
+  .stroke-tip:active, .stroke-tip:focus {
+    color: #202549; }
   @media (min-width: 1024px) {
     .stroke-tip {
       min-width: 480px; } }
+  .stroke-tip label {
+    text-decoration: underline; }
 
 .steno-material {
   border-bottom: 2px solid #FFD073; }

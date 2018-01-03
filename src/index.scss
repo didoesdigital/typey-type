@@ -766,11 +766,24 @@ label {
   bottom: 0;
 }
 .stroke-tip {
-  margin-left: auto;
-  margin-right: auto;
+  color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
+  &:hover {
+    color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
+  }
+  &:active, &:focus {
+    color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
+  }
+
+  margin-bottom: 0.5em;
+  margin-left: calc(50% - #{$left-offset-for-zipper + 0.5em});
+  text-align: left;
+  transform: translateX(2px + 8px);
+  width: 100%;
   @media (min-width: $breakpoint) {
     min-width: 480px;
   }
+
+  label { text-decoration: underline; }
 }
 .steno-material {
   border-bottom: 2px solid $brand-highlight;
