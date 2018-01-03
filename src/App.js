@@ -424,19 +424,20 @@ class App extends Component {
     newLesson.presentedMaterial = repeatedLesson;
     newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
-    let meetingSuccess = targetStrokeCount(newLesson.presentedMaterial[this.state.currentPhraseID] || { phrase: '', stroke: '' });
+    let target = targetStrokeCount(newLesson.presentedMaterial[this.state.currentPhraseID] || { phrase: '', stroke: '' });
     if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
-      meetingSuccess = 0;
+      target = 0;
     }
 
     this.setState({
       actualText: ``,
-      currentPhraseMeetingSuccess: meetingSuccess,
+      currentPhraseMeetingSuccess: target,
       disableUserSettings: false,
       numberOfMatchedChars: 0,
       repetitionsRemaining: reps,
       startTime: null,
       timer: null,
+      targetStrokeCount: target,
       totalNumberOfMatchedChars: 0,
       totalNumberOfMatchedWords: 0,
       totalNumberOfNewWordsMet: 0,
@@ -538,7 +539,9 @@ class App extends Component {
         newState.metWords[actualText] = meetingsCount + 1;
       }
 
-      newState.currentPhraseMeetingSuccess = targetStrokeCount(this.state.lesson.presentedMaterial[this.state.currentPhraseID + 1] || { phrase: '', stroke: '' });
+      let target = targetStrokeCount(this.state.lesson.presentedMaterial[this.state.currentPhraseID + 1] || { phrase: '', stroke: '' });
+      newState.currentPhraseMeetingSuccess = target;
+      newState.targetStrokeCount = target;
       this.state.lesson.newPresentedMaterial.visitNext();
 
       newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
@@ -646,6 +649,7 @@ class App extends Component {
                     repetitionsRemaining={this.state.repetitionsRemaining}
                     settings={this.state.lesson.settings}
                     showStrokesInLesson={this.state.showStrokesInLesson}
+                    targetStrokeCount={this.state.targetStrokeCount}
                     timer={this.state.timer}
                     toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
                     totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
@@ -727,6 +731,7 @@ class App extends Component {
                     repetitionsRemaining={this.state.repetitionsRemaining}
                     settings={this.state.lesson.settings}
                     showStrokesInLesson={this.state.showStrokesInLesson}
+                    targetStrokeCount={this.state.targetStrokeCount}
                     timer={this.state.timer}
                     toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
                     totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}

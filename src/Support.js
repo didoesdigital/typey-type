@@ -23,9 +23,9 @@ const Support = () => {
           <h4 id="steno-terms">Steno terms</h4>
           <dl className="inline-flex">
             <dt>Briefs</dt>
-            <dd>Loosely, a brief or outline is the specified combination of keys pressed together to produce a specific word or phrase.</dd>
+            <dd>Loosely, a brief or outline is the specified combination of keys pressed together to produce a specific word or phrase. Strictly, a brief or abbreviation is a shortened outline form with fewer strokes than the phonetic outline.</dd>
             <dt>Strokes</dt>
-            <dd>A stroke is a combination of keys held together a released to write a word or sound. A multi-stroke brief is a combination of strokes pressed in order to produce a word or phrase (usually of more syllables).</dd>
+            <dd>A stroke is a combination of keys held together and released to write a word or sound. A multi-stroke brief is a combination of strokes pressed in order to produce a word or phrase (usually of more syllables).</dd>
             <dt>Plover</dt>
             <dd><a href="http://www.openstenoproject.org/plover/" target="_blank" rel="noopener noreferrer">Plover<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> is the world’s first free, open-source stenography program that works cross-platform on Windows, macOS, and Linux operating systems.</dd>
           </dl>

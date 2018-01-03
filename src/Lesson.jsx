@@ -47,6 +47,11 @@ class Lesson extends Component {
       firstVisit = '';
     }
 
+    let strokeTarget = this.props.targetStrokeCount + ' strokes';
+    if (this.props.targetStrokeCount === 1) {
+      strokeTarget = this.props.targetStrokeCount + ' stroke';
+    }
+
     if (shouldShowStroke(this.props.showStrokesInLesson, this.props.userSettings.showStrokes, this.props.repetitionsRemaining, this.props.userSettings.hideStrokesOnLastRepetition)) {
       if (this.props.currentStroke) {
         strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre><span className="steno-stroke">{this.props.currentStroke.split('').map((item, i)=><kbd className="raw-steno-key" key={i}>{item}</kbd>)}</span></pre></div>;
@@ -62,7 +67,7 @@ class Lesson extends Component {
             checked={this.props.showStrokesInLesson}
             onChange={this.props.changeShowStrokesInLesson}
             />
-          Show stroke?
+          Show brief? ({strokeTarget})
         </label>
       </div>;
     }

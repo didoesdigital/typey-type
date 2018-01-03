@@ -110,7 +110,7 @@ class UserSettings extends Component {
                     checked={this.props.userSettings.showStrokes}
                     onChange={this.props.changeUserSetting}
                     />
-                  Show strokes
+                  Show briefs
                 </label>
               </div>
               <div className="checkbox-group">
@@ -124,7 +124,7 @@ class UserSettings extends Component {
                     checked={this.props.userSettings.hideStrokesOnLastRepetition}
                     onChange={this.props.changeUserSetting}
                     />
-                  Hide strokes on last repetition
+                  Hide briefs on last repetition
                 </label>
               </div>
               <div className="checkbox-group">
