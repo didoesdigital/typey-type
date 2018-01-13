@@ -25,6 +25,11 @@ class Flashcards extends Component {
     }
   }
 
+  shuffleFlashCards(event) {
+    event.preventDefault();
+    this.setState({flashcards: randomise(this.state.flashcards)});
+  }
+
   componentDidMount() {
     let path = process.env.PUBLIC_URL + '/lessons/collections/human-resources/hris-vocabulary/lesson.txt';
     getLesson(path).then((lessonText) => {
@@ -65,6 +70,9 @@ class Flashcards extends Component {
                 <header className="flex items-baseline">
                   <h2 id="about-typey-type-for-stenographers">Flashcards</h2>
                 </header>
+              </div>
+              <div className="mxn2">
+                <a href="/flashcards" onClick={this.shuffleFlashCards.bind(this)} className="link-button link-button-ghost table-cell" role="button">Shuffle</a>
               </div>
             </div>
           </div>
