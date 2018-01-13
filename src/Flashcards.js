@@ -16,6 +16,7 @@ let paneNodes = function (flashcards) {
   });
 }
 
+
 class Flashcards extends Component {
   constructor(props) {
     super(props);
@@ -25,7 +26,7 @@ class Flashcards extends Component {
   }
 
   componentDidMount() {
-    let path = process.env.PUBLIC_URL + '/lessons/collections/user-experience/ux-vocabulary/lesson.txt';
+    let path = process.env.PUBLIC_URL + '/lessons/collections/human-resources/hris-vocabulary/lesson.txt';
     getLesson(path).then((lessonText) => {
       let lesson = parseLesson(lessonText, path);
       let randomisedLessonMaterial = randomise(lesson.presentedMaterial);
@@ -62,18 +63,17 @@ class Flashcards extends Component {
             </div>
           </div>
           <div className="p3 mx-auto mw-1024">
-            <div className="mw-568">
-              <ReactSwipe ref={reactSwipe => this.reactSwipe = reactSwipe} className="" key={this.state.flashcards.length}>
+            <div>
+              <div className="visually-hidden">
                 {paneNodes(this.state.flashcards)}
-              </ReactSwipe>
-
-              <div>
-                <button type="button" onClick={this.prev.bind(this)}>Prev</button>
-                <button type="button" onClick={this.next.bind(this)}>Next</button>
               </div>
-
-
-
+              <div className="swipe-wrapper flex justify-between" aria-hidden="true">
+                <div className="flex items-center"><button className="link-button" type="button" onClick={this.prev.bind(this)} aria-label="Previous card"><span className="pagination-nav-button--prev">▸</span></button></div>
+                <ReactSwipe ref={reactSwipe => this.reactSwipe = reactSwipe} className="swipe" key={this.state.flashcards.length}>
+                  {paneNodes(this.state.flashcards)}
+                </ReactSwipe>
+                <div className="flex items-center"><button className="link-button" type="button" onClick={this.next.bind(this)} aria-label="Next card">▸</button></div>
+              </div>
             </div>
           </div>
         </main>

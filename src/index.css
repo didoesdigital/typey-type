@@ -176,6 +176,9 @@ small, .text-small {
 .items-baseline {
   align-items: baseline; }
 
+.items-center {
+  align-items: center; }
+
 .hide {
   display: none; }
 
@@ -204,6 +207,15 @@ small, .text-small {
 .mr3 {
   margin-right: 24px; }
 
+.ml1 {
+  margin-left: 8px; }
+
+.ml2 {
+  margin-left: 16px; }
+
+.ml3 {
+  margin-left: 24px; }
+
 .mt0 {
   margin-top: 0; }
 
@@ -227,6 +239,42 @@ small, .text-small {
 .mxn2 {
   margin-left: -16px;
   margin-right: -16px; }
+
+.nb1 {
+  margin-bottom: -8px; }
+
+.nb2 {
+  margin-bottom: -16px; }
+
+.nb3 {
+  margin-bottom: -24px; }
+
+.nr1 {
+  margin-right: -8px; }
+
+.nr2 {
+  margin-right: -16px; }
+
+.nr3 {
+  margin-right: -24px; }
+
+.nl1 {
+  margin-left: -8px; }
+
+.nl2 {
+  margin-left: -16px; }
+
+.nl3 {
+  margin-left: -24px; }
+
+.nt1 {
+  margin-top: -8px; }
+
+.nt2 {
+  margin-top: -16px; }
+
+.nt3 {
+  margin-top: -24px; }
 
 .mw100 {
   max-width: 100%; }
@@ -850,3 +898,30 @@ label {
   bottom: 0;
   left: 0;
   z-index: 1; }
+
+.swipe-wrapper {
+  margin-right: 0; }
+
+.swipe {
+  margin: 0 auto; }
+  .swipe .item {
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    margin: 0 12px;
+    padding: 144px 24px;
+    box-shadow: 0 1px #EBEBEB;
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid;
+    border-color: #E5E5E5 #D3D3D3 #B9C1C6;
+    height: 37vh;
+    padding: 16vh 24px; }
+
+.pagination-nav-button--prev {
+  visibility: hidden; }
+  .pagination-nav-button--prev:before {
+    content: "▸";
+    visibility: initial;
+    position: absolute;
+    transform: rotate(180deg); }
