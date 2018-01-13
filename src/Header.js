@@ -6,12 +6,19 @@ import './App.css';
 
 class Header extends Component {
 
+
   render() {
     let nextLesson = this.props.value || 'No lesson selected. See all lessons.';
+    let fullscreen = "";
+    if (this.props.fullscreen) {
+      fullscreen = " fullscreen";
+    } else {
+      fullscreen = "";
+    }
     return (
       <div>
         <a href="#main" className="skip-to-main-link link-button link-button-ghost">Skip to main content</a>
-        <div className="header" role="banner">
+        <div className={"header hide-in-fullscreen" + fullscreen} role="banner">
           <div className="mx-auto mw-1024 p3">
             <nav>
               <div className="site-heading-banner">

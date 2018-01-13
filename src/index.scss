@@ -195,11 +195,14 @@ small, .text-small {
 .items-baseline  { align-items: baseline; }
 .items-center    { align-items: center; }
 .hide            { display: none; }
+.relative        { position: relative; }
+.absolute        { position: absolute; }
 
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
 }
+.absolute--fill { top: 0; right: 0; bottom: 0; left: 0; }
 
 .mb0     { margin-bottom: 0; }
 .mb1     { margin-bottom: 8px; }
@@ -974,5 +977,90 @@ label {
     visibility: initial;
     position: absolute;
     transform: rotate(180deg);
+  }
+}
+
+.hide-in-fullscreen.fullscreen {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+.fullscreen.swipe-wrapper {
+  @media (min-width: $breakpoint) {
+    margin-left: 24px;
+    margin-right: 24px;
+  }
+}
+
+.fullscreen-button {
+  position: absolute;
+  background-color: $brand-primary;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  color: add-tint($brand-primary, 30%);
+  font: $type;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 40px;
+  height: 40px;
+  top: 12px;
+  right: 72px;
+  &.fullscreen {
+    top: 12px;
+    right: 24px;
+  }
+  &.fullscreen-button-ghost {
+    background-color: transparent;
+    border: 1px solid add-tint($brand-primary, 90%);
+    font-size: $h5-size;
+    text-decoration: underline;
+    &:hover {
+      color: add-tint($brand-primary, 90%);
+    }
+    &:active,
+    &:focus {
+      color: add-tint($brand-primary, 50%);
+    }
+  }
+  label {
+    width: 40px;
+    height: 40px;
+  }
+  input {
+    visibility: hidden;
+    touch-action: manipulation;
+    &:before {
+      content: "⬄";
+      color: add-tint($brand-primary, 30%);
+      position: absolute;
+      visibility: initial;
+      font-size: 24px;
+      left: 50%;
+      margin-right: -50%;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%)
+                    rotate(135deg);
+    }
+    &:checked:before {
+      content: "×";
+      position: absolute;
+      visibility: initial;
+      font-size: 24px;
+      left: 50%;
+      margin-right: -50%;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
   }
 }

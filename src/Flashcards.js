@@ -50,10 +50,16 @@ class Flashcards extends Component {
   }
 
   render () {
+    let fullscreen = "";
+    if (this.props.fullscreen) {
+      fullscreen = " fullscreen";
+    } else {
+      fullscreen = "";
+    }
     return (
       <div>
         <main id="main">
-          <div className="subheader">
+          <div className={"subheader hide-in-fullscreen" + fullscreen}>
             <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
               <div className="flex mr1">
                 <header className="flex items-baseline">
@@ -64,16 +70,27 @@ class Flashcards extends Component {
           </div>
           <div className="p3 mx-auto mw-1024">
             <div>
+
               <div className="visually-hidden">
                 {paneNodes(this.state.flashcards)}
               </div>
-              <div className="swipe-wrapper flex justify-between" aria-hidden="true">
-                <div className="flex items-center"><button className="link-button" type="button" onClick={this.prev.bind(this)} aria-label="Previous card"><span className="pagination-nav-button--prev">▸</span></button></div>
-                <ReactSwipe ref={reactSwipe => this.reactSwipe = reactSwipe} className="swipe" key={this.state.flashcards.length}>
+
+              <div className={"swipe-wrapper flex justify-between relative" + fullscreen} aria-hidden="true">
+
+                <div className={"flex items-center hide-in-fullscreen" + fullscreen}><button className="link-button" type="button" onClick={this.prev.bind(this)} aria-label="Previous card"><span className="pagination-nav-button--prev">▸</span></button></div>
+
+                <ReactSwipe ref={reactSwipe => this.reactSwipe = reactSwipe} className={"swipe" + fullscreen} key={this.state.flashcards.length + this.props.fullscreen}>
                   {paneNodes(this.state.flashcards)}
                 </ReactSwipe>
-                <div className="flex items-center"><button className="link-button" type="button" onClick={this.next.bind(this)} aria-label="Next card">▸</button></div>
+
+                <div className={"checkbox-group text-center fullscreen-button fullscreen-button-ghost" + fullscreen}>
+                  <label className="absolute absolute--fill" aria-label="Fullscreen"><input type="checkbox" name="fullscreen" id="fullscreen" checked={this.props.fullscreen} onChange={this.props.changeFullscreen} /></label>
+                </div>
+
+                <div className={"flex items-center hide-in-fullscreen" + fullscreen}><button className="link-button" type="button" onClick={this.next.bind(this)} aria-label="Next card">▸</button></div>
+
               </div>
+
             </div>
           </div>
         </main>

@@ -182,9 +182,21 @@ small, .text-small {
 .hide {
   display: none; }
 
+.relative {
+  position: relative; }
+
+.absolute {
+  position: absolute; }
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto; }
+
+.absolute--fill {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; }
 
 .mb0 {
   margin-bottom: 0; }
@@ -925,3 +937,74 @@ label {
     visibility: initial;
     position: absolute;
     transform: rotate(180deg); }
+
+.hide-in-fullscreen.fullscreen {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px); }
+
+@media (min-width: 1024px) {
+  .fullscreen.swipe-wrapper {
+    margin-left: 24px;
+    margin-right: 24px; } }
+
+.fullscreen-button {
+  position: absolute;
+  background-color: #402351;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  color: #796585;
+  font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+  width: 40px;
+  height: 40px;
+  top: 12px;
+  right: 72px; }
+  .fullscreen-button.fullscreen {
+    top: 12px;
+    right: 24px; }
+  .fullscreen-button.fullscreen-button-ghost {
+    background-color: transparent;
+    border: 1px solid #ece9ee;
+    font-size: 16px;
+    text-decoration: underline; }
+    .fullscreen-button.fullscreen-button-ghost:hover {
+      color: #ece9ee; }
+    .fullscreen-button.fullscreen-button-ghost:active, .fullscreen-button.fullscreen-button-ghost:focus {
+      color: #a091a8; }
+  .fullscreen-button label {
+    width: 40px;
+    height: 40px; }
+  .fullscreen-button input {
+    visibility: hidden;
+    touch-action: manipulation; }
+    .fullscreen-button input:before {
+      content: "⬄";
+      color: #796585;
+      position: absolute;
+      visibility: initial;
+      font-size: 24px;
+      left: 50%;
+      margin-right: -50%;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%) rotate(135deg); }
+    .fullscreen-button input:checked:before {
+      content: "×";
+      position: absolute;
+      visibility: initial;
+      font-size: 24px;
+      left: 50%;
+      margin-right: -50%;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%); }

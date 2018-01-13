@@ -36,6 +36,7 @@ class App extends Component {
       currentPhraseID: 0,
       currentPhraseMeetingSuccess: 1,
       actualText: ``,
+      fullscreen: false,
       hideOtherSettings: true,
       nextLessonPath: '',
       repetitionsRemaining: 1,
@@ -284,6 +285,13 @@ class App extends Component {
     this.setState({showStrokesInLesson: value});
     const element = document.getElementById('your-typed-text');
     if (element) { element.focus(); }
+    return value;
+  }
+
+  changeFullscreen(event) {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    this.setState({fullscreen: value});
     return value;
   }
 
@@ -585,6 +593,7 @@ class App extends Component {
     let completedMaterial = this.presentCompletedMaterial();
     let upcomingMaterial = this.presentUpcomingMaterial();
     let header = <Header
+      fullscreen={this.state.fullscreen}
       restartLesson={this.restartLesson.bind(this)}
       items={this.state.lessonIndex}
       lessonSubTitle={this.state.lesson.subtitle}
@@ -695,7 +704,10 @@ class App extends Component {
               <Route path="/flashcards" render={ () =>
                 <div>
                   {header}
-                  <Flashcards />
+                  <Flashcards
+                    fullscreen={this.state.fullscreen}
+                    changeFullscreen={this.changeFullscreen.bind(this)}
+                  />
                 </div>
                 }
               />
@@ -765,7 +777,9 @@ class App extends Component {
               />
             </Switch>
           </div>
-          <Footer />
+          <Footer
+            fullscreen={this.state.fullscreen}
+          />
         </div>
       );
     }
