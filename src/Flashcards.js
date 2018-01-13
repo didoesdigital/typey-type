@@ -33,7 +33,7 @@ class Flashcards extends Component {
 
   setupFlashCards(event) {
     if (event) { event.preventDefault() };
-    let randomisedLessonMaterial = randomise(this.state.sourceMaterial.slice(0)).slice(0,3);
+    let randomisedLessonMaterial = randomise(this.state.sourceMaterial.slice(0)).slice(0,29);
     let flashcards = [];
 
     randomisedLessonMaterial.forEach(function (obj) {
