@@ -21,12 +21,12 @@ class Flashcards extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      flashcards: [ "Loading…" ],
+      flashcards: [ "Loading flashcards…" ],
       sourceMaterial: [
-        {phrase: 'Loading…', stroke: 'HRAOGD/SKWR-RBGS'},
+        {phrase: 'Loading flashcards…', stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'},
       ],
       presentedMaterial: [
-        {phrase: 'Loading…', stroke: 'HRAOGD/SKWR-RBGS'},
+        {phrase: 'Loading flashcards…', stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'},
       ]
     }
   }
