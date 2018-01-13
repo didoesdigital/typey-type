@@ -75,6 +75,9 @@ const Support = () => {
           <h3 id="contribute">Want to contribute?</h3>
           <p>Learn how to <Link to="/contribute">contribute to Typey&nbsp;type</Link>.</p>
 
+          <h3 id="news">Want news?</h3>
+          <p>Sign up for <a href="https://didoesdigital.com/#newsletter" target="_blank" rel="noopener noreferrer">Typey&nbsp;type updates and steno news<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
+
           <h3 id="support">Support</h3>
           <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or <a href="https://twitter.com/didoesdigital">tweet @DiDoesDigital</a>.</p>
         </div>
