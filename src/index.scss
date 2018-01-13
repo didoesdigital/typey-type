@@ -967,6 +967,8 @@ label {
     border-color: #E5E5E5 #D3D3D3 #B9C1C6;
     height: 37vh;
     padding: 16vh 24px;
+    overflow-wrap: break-word; // break long words if they won't naturally break anywhere on one line
+    word-wrap: break-word; // for IE 11
   }
 }
 
@@ -986,12 +988,25 @@ label {
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
+  @media (min-width: $breakpoint) {
+    &.pagination-nav-button {
+      position: inherit !important;
+      height: inherit;
+      width: inherit;
+      overflow: inherit;
+      clip: inherit;
+    }
+  }
 }
 
 .fullscreen.swipe-wrapper {
   @media (min-width: $breakpoint) {
     margin-left: 24px;
     margin-right: 24px;
+  }
+  .item {
+    padding: 40vh 24px;
+    height: 92vh;
   }
 }
 
@@ -1012,6 +1027,9 @@ label {
   height: 40px;
   top: 12px;
   right: 72px;
+  @media (min-width: $breakpoint) {
+    display: none;
+  }
   &.fullscreen {
     top: 12px;
     right: 24px;

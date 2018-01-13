@@ -928,7 +928,9 @@ label {
     border: 1px solid;
     border-color: #E5E5E5 #D3D3D3 #B9C1C6;
     height: 37vh;
-    padding: 16vh 24px; }
+    padding: 16vh 24px;
+    overflow-wrap: break-word;
+    word-wrap: break-word; }
 
 .pagination-nav-button--prev {
   visibility: hidden; }
@@ -944,11 +946,22 @@ label {
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px); }
+  @media (min-width: 1024px) {
+    .hide-in-fullscreen.fullscreen.pagination-nav-button {
+      position: inherit !important;
+      height: inherit;
+      width: inherit;
+      overflow: inherit;
+      clip: inherit; } }
 
 @media (min-width: 1024px) {
   .fullscreen.swipe-wrapper {
     margin-left: 24px;
     margin-right: 24px; } }
+
+.fullscreen.swipe-wrapper .item {
+  padding: 40vh 24px;
+  height: 92vh; }
 
 .fullscreen-button {
   position: absolute;
@@ -967,6 +980,9 @@ label {
   height: 40px;
   top: 12px;
   right: 72px; }
+  @media (min-width: 1024px) {
+    .fullscreen-button {
+      display: none; } }
   .fullscreen-button.fullscreen {
     top: 12px;
     right: 24px; }
