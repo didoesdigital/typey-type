@@ -51,7 +51,7 @@ class Flashcards extends Component {
   }
 
   componentDidMount() {
-    let path = process.env.PUBLIC_URL + '/lessons/collections/human-resources/hris-vocabulary/lesson.txt';
+    let path = process.env.PUBLIC_URL + '/lessons/drills/top-10000-english-words/lesson.txt';
     getLesson(path).then((lessonText) => {
       let lesson = parseLesson(lessonText, path);
       this.setState({
