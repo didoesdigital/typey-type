@@ -21,6 +21,7 @@ import Header from './Header';
 import Support from './Support';
 import Contribute from './Contribute';
 import Progress from './Progress';
+import Flashcards from './Flashcards';
 import PageNotFound from './PageNotFound';
 import Footer from './Footer';
 import Zipper from './zipper';
@@ -688,6 +689,13 @@ class App extends Component {
                     setPersonalPreferences={this.setPersonalPreferences.bind(this)}
                     metWords={this.state.metWords}
                   />
+                </div>
+                }
+              />
+              <Route path="/flashcards" render={ () =>
+                <div>
+                  {header}
+                  <Flashcards />
                 </div>
                 }
               />
