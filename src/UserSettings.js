@@ -82,7 +82,7 @@ class UserSettings extends Component {
               </div>
             </fieldset>
 
-            <h6 className={toggleClasses} onClick={this.props.toggleHideOtherSettings} role="button" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">Other settings{this.props.hideOtherSettings}</h6>
+            <h6 className={toggleClasses} onClick={this.props.toggleHideOtherSettings} role="button" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">Your settings{this.props.hideOtherSettings}</h6>
             <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'hide' : ''} aria-hidden={this.props.hideOtherSettings}>
 
               <div className="checkbox-group mt2">
