@@ -13,6 +13,7 @@ $h4-size: $base-font-size * $font-scale; // 20px
 $h5-size: $base-font-size; // 16px
 $h6-size: $base-font-size / $font-scale; // 12.8px
 $breakpoint: 1024px;
+$z-index-autocomplete-menu: 1;
 
 // Element styles
 * {
@@ -621,7 +622,7 @@ label {
   overflow: auto;
   padding: 2px 0;
   position: fixed;
-  z-index: 1;
+  z-index: $z-index-autocomplete-menu;
 }
 .autocomplete-highlight {
   background-color: $brand-highlight;
@@ -929,8 +930,10 @@ label {
   }
 }
 
+// new-stacking-context
 .fill-fade-parent {
   position: relative;
+  z-index: 0;
 }
 .fill-fade-edges {
   background-image: linear-gradient(to right,

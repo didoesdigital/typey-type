@@ -900,7 +900,8 @@ label {
     clip: initial; }
 
 .fill-fade-parent {
-  position: relative; }
+  position: relative;
+  z-index: 0; }
 
 .fill-fade-edges {
   background-image: linear-gradient(to right, #f9f8fa 0%, #f9f8fa 5%, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0) 90%, #f9f8fa 95%, #f9f8fa 100%);
