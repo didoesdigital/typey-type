@@ -102,6 +102,8 @@ class Lesson extends Component {
               handleRepetitionsChange={this.props.handleRepetitionsChange}
               hideOtherSettings={this.props.hideOtherSettings}
               lessonLength={this.props.lesson.presentedMaterial.length}
+              path={this.props.path}
+              restartLesson={this.props.restartLesson}
               settings={this.props.lesson.settings}
               timer={this.props.timer}
               toggleHideOtherSettings={this.props.toggleHideOtherSettings}

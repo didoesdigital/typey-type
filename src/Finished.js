@@ -9,9 +9,32 @@ class Finished extends Component {
     return (this.props.lessonLength === 0);
   }
 
+  calculateScores(timer, totalNumberOfMatchedWords) {
+    let wordsPerMinute;
+    if (this.props.timer > 0) {
+      wordsPerMinute = Math.round(totalNumberOfMatchedWords/(timer/60/1000));
+    } else {
+      wordsPerMinute = 0;
+    }
+    return wordsPerMinute;
+  }
+
   render() {
     let customMessage;
-    let emptyAndZeroStateMessage = "Finished!";
+    let accuracy = '';
+    if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
+      accuracy = ' Perfect accuracy!';
+    }
+    let emptyAndZeroStateMessage = (
+      <div>
+        <h2>Finished!</h2>
+        <h3 className="mt0">{this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords)}WPM!{accuracy}</h3>
+        <p>
+          <a href={this.props.path} onClick={this.props.restartLesson} className="" role="button">
+            Restart lesson</a>
+        </p>
+      </div>
+    );
     if (this.isEmpty()) {
       emptyAndZeroStateMessage = "There are no words to write.";
     }
