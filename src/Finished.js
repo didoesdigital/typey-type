@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Scores from './Scores';
 import UserSettings from './UserSettings';
+import { IconRestart } from './Icon';
 import './App.css';
 
 class Finished extends Component {
@@ -31,6 +32,7 @@ class Finished extends Component {
         <h3 className="mt0">{this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords)}WPM!{accuracy}</h3>
         <p>
           <a href={this.props.path} onClick={this.props.restartLesson} className="" role="button">
+            <IconRestart role="img" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
             Restart lesson</a>
         </p>
       </div>

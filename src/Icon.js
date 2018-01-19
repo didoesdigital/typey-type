@@ -24,4 +24,22 @@ function IconTypeyType(props) {
   )
 }
 
-export { IconTypeyType };
+function IconRestart(props) {
+  const iconWidth = props.iconWidth || 24;
+  const iconHeight = props.iconHeight || 24;
+  const iconFill = props.iconFill || '#7109AA';
+  const iconTitle = props.iconTitle || 'Typey type for stenographers';
+  const classes = props.className || '';
+  const role = props.role || 'img';
+  const ariaHidden = props.ariaHidden || 'false';
+  return (
+    <div className={classes}>
+      <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><defs></defs><g fill="none" fill-rule="evenodd"><mask id="b" fill="#fff"><path d="M4.017 12.5H6.02A6 6 0 0 0 12 18.997 6 6 0 0 0 12.002 7V4.999A8.001 8.001 0 1 1 4.017 12.5zM7 6l5-5v10L7 6z" id="a"/></mask><g mask="url(#b)" fill={iconFill}><path d="M0 0h24v24H0z"/></g></g></svg>
+    </div>
+  )
+}
+
+export {
+  IconRestart,
+  IconTypeyType
+};
