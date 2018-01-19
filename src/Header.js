@@ -25,7 +25,7 @@ class Header extends Component {
               <div className="site-heading-banner">
                 <Link to="/" className="heading-link dib" aria-label="Typey type">
                   <h1>
-                    <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" iconFill="#fff" className="mr1 svg-icon-wrapper svg-baseline" />
+                    <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" className="mr1 svg-icon-wrapper svg-baseline" />
                     Typey&nbsp;type
                   </h1>
                 </Link>
