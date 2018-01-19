@@ -16,11 +16,19 @@ class Progress extends Component {
     let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
     return (
       <div>
-        <main className="mx-auto mw-1024 p3" id="main">
-          <div className="progress-layout">
+        <main  id="main">
+          <div className="subheader">
+            <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
+              <div className="flex mr1">
+                <header className="flex items-baseline">
+                  <h2 id="Progress">Progress</h2>
+                </header>
+              </div>
+            </div>
+          </div>
+          <div className="progress-layout p3 mx-auto mw-1024">
 
             <div className="mw-584">
-              <h1>Progress</h1>
               <p>You’ve successfully typed {wordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words.</p>
               <p>Words you’ve seen and times you’ve typed them well:</p>
               <p id="js-metwords-from-typey-type" className="w-100 mt3 mb3 quote wrap">{metWordsFromTypeyType}</p>
