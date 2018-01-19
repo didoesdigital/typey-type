@@ -407,6 +407,7 @@ small, .text-small {
 
 .subheader {
   background-color: #402351;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
   color: #c6bdcb; }
   .subheader h2 {
     line-height: 1.55;
