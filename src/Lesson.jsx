@@ -22,6 +22,20 @@ class Lesson extends Component {
     return (this.props.currentPhraseID === this.props.lesson.presentedMaterial.length);
   }
 
+  nextLessonPath() {
+    let thisLesson = this.props.lesson.path;
+    let suggestedNext = "/";
+    let match = (el) => '/lessons'+el.path === thisLesson;
+    let lessonIndexItem = this.props.lessonIndex.find(match);
+    if (lessonIndexItem !== undefined) {
+      if (lessonIndexItem.hasOwnProperty("suggestedNext")){
+        suggestedNext = lessonIndexItem.suggestedNext;
+      }
+    }
+    let nextLessonPath = '/lessons'+suggestedNext.replace(/lesson\.txt$/,'');
+    return nextLessonPath;
+  }
+
   render() {
     let customMessage;
     let firstVisit;
@@ -101,6 +115,7 @@ class Lesson extends Component {
               handleLimitWordsChange={this.props.handleLimitWordsChange}
               handleRepetitionsChange={this.props.handleRepetitionsChange}
               hideOtherSettings={this.props.hideOtherSettings}
+              suggestedNext={this.nextLessonPath()}
               lessonLength={this.props.lesson.presentedMaterial.length}
               path={this.props.path}
               restartLesson={this.props.restartLesson}

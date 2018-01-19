@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Scores from './Scores';
 import UserSettings from './UserSettings';
+import { Link } from 'react-router-dom';
 import { IconRestart } from './Icon';
 import './App.css';
 
@@ -30,6 +31,11 @@ class Finished extends Component {
       <div>
         <h2>Finished!</h2>
         <h3 className="mt0">{this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords)}WPM!{accuracy}</h3>
+        <p>
+          <Link to={this.props.suggestedNext} className="link-button dib" style={{lineHeight: 2}} role="button">
+            Next lesson
+          </Link>
+        </p>
         <p>
           <a href={this.props.path} onClick={this.props.restartLesson} className="" role="button">
             <IconRestart role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
