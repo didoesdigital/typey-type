@@ -1024,3 +1024,18 @@ label {
       position: absolute;
       top: 50%;
       transform: translate(-50%, -50%); }
+
+.svg-icon-wrapper {
+  display: inline-flex;
+  align-self: center;
+  position: relative;
+  height: 1em;
+  width: 1em; }
+
+.svg-icon-wrapper svg {
+  height: 1em;
+  width: 1em; }
+
+.svg-icon-wrapper.svg-baseline svg {
+  bottom: -0.125em;
+  position: absolute; }

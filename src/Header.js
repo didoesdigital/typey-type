@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Autocomplete from 'react-autocomplete';
+import { IconTypeyType } from './Icon';
 import { matchLessonToTerm, sortLessons } from './utils';
 import './App.css';
 
@@ -22,7 +23,12 @@ class Header extends Component {
           <div className="mx-auto mw-1024 p3">
             <nav>
               <div className="site-heading-banner">
-                <Link to="/" className="heading-link dib"><h1>Typey&nbsp;type</h1></Link>
+                <Link to="/" className="heading-link dib" aria-label="Typey type">
+                  <h1>
+                    <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" iconFill="#fff" className="mr1 svg-icon-wrapper svg-baseline" />
+                    Typey&nbsp;type
+                  </h1>
+                </Link>
               </div>
               <div className="table search-container">
                 <Link to="/lessons" className="link-button link-button-ghost mr1 table-cell">Lessons</Link>
