@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/Light bulb</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M11,15.9101284 L11,14.2087912 L9.22885873,13.6638247 C8.49843162,13.4390779 8,12.7642217 8,12 L11,12.9375 L11,11.9010989 L10.2288587,11.6638247 C9.49843162,11.4390779 9,10.7642217 9,10 L11,10.625 L11,9 L13,9 L13,11.25 L15.8571429,12.1428571 L14.5714286,13 L13,12.5164835 L13,13.5625 L14.8571429,14.1428571 L13.5714286,15 L13,14.8241758 L13,15.9101284 C15.8377133,15.3943771 18,12.720746 18,9.5 C18,5.91014913 15.3137085,3 12,3 C8.6862915,3 6,5.91014913 6,9.5 C6,12.720746 8.16228666,15.3943771 11,15.9101284 Z M7.10619332,16.2246064 C5.21652895,14.6698687 4,12.2358814 4,9.5 C4,4.80557963 7.581722,1 12,1 C16.418278,1 20,4.80557963 20,9.5 C20,11.9409938 19.0315855,14.1416657 17.4806992,15.6919517 C16.4935664,17.2654424 16,17.8923716 16,20 L16,21 C16,22.1045695 15.1045695,23 14,23 L10,23 C8.8954305,23 8,22.1045695 8,21 L8,19.9999993 C7.99999992,18.3624955 7.70206436,17.3208625 7.10619332,16.2246064 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons/Light-bulb">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Combined-Shape" fill="#B16ED7" xlink:href="#path-1"></use>
+            <g id="Colors/heavy-primary" mask="url(#mask-2)" fill="#7109AA">
+                <g transform="translate(0.000000, 1.000000)" id="heavy-primary">
+                    <rect x="0" y="0" width="24" height="24"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

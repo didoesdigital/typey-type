@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/Chevron left</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M8.40808235,11.8127493 L15.6250824,19.0297494 C16.3417639,19.7464308 16.3417639,20.908401 15.6250824,21.6250824 C14.908401,22.3417639 13.7464308,22.3417639 13.0297494,21.6250824 L4.71146393,13.306797 C4.3006315,12.8959646 4.10589739,12.3508659 4.12726159,11.8127493 C4.10589739,11.2746327 4.3006315,10.729534 4.71146393,10.3187016 L13.0297494,2.00041617 C13.7464308,1.28373473 14.908401,1.28373473 15.6250824,2.00041617 C16.3417639,2.7170976 16.3417639,3.87906779 15.6250824,4.59574923 L8.40808235,11.8127493 Z" id="path-1"></path>
+    </defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icons/Chevron-left">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="Combined-Shape" fill="#FFFFFF" xlink:href="#path-1"></use>
+            <g id="Colors/heavy-primary-tint-1" mask="url(#mask-2)" fill="#AD66D5">
+                <rect id="heavy-primary-tint-1" x="0" y="0" width="24" height="24"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
