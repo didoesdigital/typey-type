@@ -74,7 +74,7 @@ class Lesson extends Component {
       strokeTip = <div className="stroke-tip">
         <label className="mb0 text-small">
           <input
-            className="checkbox-input hide"
+            className="checkbox-input visually-hidden"
             type="checkbox"
             name="showStrokesInLesson"
             id="showStrokesInLesson"
@@ -189,7 +189,7 @@ class Lesson extends Component {
                       updateMarkup={this.props.updateMarkup.bind(this)}
                       userSettings={this.props.userSettings}
                     />
-                    <div>
+                    <div aria-hidden="true">
                       {strokeTip}
                     </div>
                   </div>
