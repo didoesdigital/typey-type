@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Autocomplete from 'react-autocomplete';
-import { IconTypeyType } from './Icon';
+import { IconTypeyType, IconSearch } from './Icon';
 import { matchLessonToTerm, sortLessons } from './utils';
 import './App.css';
 
@@ -30,7 +30,7 @@ class Header extends Component {
                   </h1>
                 </Link>
               </div>
-              <div className="table search-container">
+              <div className="table search-container relative">
                 <Link to="/lessons" className="link-button link-button-ghost mr1 table-cell">Lessons</Link>
                 <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
                 <Autocomplete
@@ -61,6 +61,7 @@ class Header extends Component {
                   value={this.props.value}
                   wrapperStyle={{ position: 'relative', display: 'table-cell', paddingLeft: '0.5em', paddingRight: '0.5em', width: '100%' }}
                 />
+                <IconSearch role="presentation" iconWidth="24" iconHeight="24" className="mr1 svg-icon-wrapper svg-baseline search-icon" />
                 <div className="visually-hidden">Selected lesson to start next:
                   <div role="status" aria-live="assertive">
                     {nextLesson}

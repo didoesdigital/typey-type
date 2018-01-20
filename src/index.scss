@@ -1108,3 +1108,10 @@ label {
   bottom: -0.125em;
   position: absolute;
 }
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  transform: translate(-40px, -64%);
+  pointer-events: none;
+}
