@@ -1064,18 +1064,16 @@ label {
     visibility: hidden;
     touch-action: manipulation;
     &:before {
-      content: "⬄";
       color: add-tint($brand-primary, 30%);
       position: absolute;
       visibility: initial;
+      margin: 4px;
       font-size: 24px;
       left: 50%;
       margin-right: -50%;
       margin: 0;
       position: absolute;
       top: 50%;
-      transform: translate(-50%, -50%)
-                    rotate(135deg);
     }
     &:checked:before {
       content: "×";
@@ -1114,4 +1112,23 @@ label {
   top: 50%;
   transform: translate(-40px, -64%);
   pointer-events: none;
+}
+
+.icon-button {
+  position: absolute;
+  font-size: 24px;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  svg {
+    left: 50%;
+    margin-right: -50%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

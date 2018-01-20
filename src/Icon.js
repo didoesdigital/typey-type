@@ -49,7 +49,23 @@ function IconSearch(props) {
   )
 }
 
+function IconFullscreen(props) {
+  const iconWidth = props.iconWidth || 24;
+  const iconHeight = props.iconHeight || 24;
+  const iconTitle = props.iconTitle || 'Fullscreen';
+  const classes = props.className || '';
+  const role = props.role || 'img';
+  const ariaHidden = props.ariaHidden || 'false';
+  return (
+    <span className={classes}>
+      <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby="iconFullscreenTitle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title id="iconFullscreenTitle">{iconTitle}</title>
+      <mask id="mask-fullscreen-a" fill="#fff"><path d="M2 14h2v5h5v2H2v-7zM9 3v2H4v5H2V3h7zm13 7h-2V5h-5V3h7v7zm-7 11v-2h5v-5h2v7h-7z"/></mask><path d="M2 14h2v5h5v2H2v-7zM9 3v2H4v5H2V3h7zm13 7h-2V5h-5V3h7v7zm-7 11v-2h5v-5h2v7h-7z"/><g mask="url(#mask-fullscreen-a)" fill="currentColor"><path d="M0 0h24v24H0z"/></g></svg>
+    </span>
+  )
+}
+
 export {
+  IconFullscreen,
   IconRestart,
   IconSearch,
   IconTypeyType
