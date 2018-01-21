@@ -8,7 +8,8 @@
 body {
   font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
   margin: 0 auto;
-  color: #3f264e; }
+  color: #3f264e;
+  background-color: #fff; }
 
 h1 {
   font-size: 39.0625px;

@@ -26,6 +26,7 @@ body {
   font: $type;
   margin: 0 auto;
   color: desaturate($brand-primary, 5%);
+  background-color: #fff;
 }
 h1 {
   font-size: $h1-size;
