@@ -1008,28 +1008,6 @@ label {
   .fullscreen-button input {
     visibility: hidden;
     touch-action: manipulation; }
-    .fullscreen-button input:before {
-      color: #796585;
-      position: absolute;
-      visibility: initial;
-      margin: 4px;
-      font-size: 24px;
-      left: 50%;
-      margin-right: -50%;
-      margin: 0;
-      position: absolute;
-      top: 50%; }
-    .fullscreen-button input:checked:before {
-      content: "×";
-      position: absolute;
-      visibility: initial;
-      font-size: 24px;
-      left: 50%;
-      margin-right: -50%;
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%); }
 
 .svg-icon-wrapper {
   display: inline-flex;

@@ -1064,30 +1064,6 @@ label {
   input {
     visibility: hidden;
     touch-action: manipulation;
-    &:before {
-      color: add-tint($brand-primary, 30%);
-      position: absolute;
-      visibility: initial;
-      margin: 4px;
-      font-size: 24px;
-      left: 50%;
-      margin-right: -50%;
-      margin: 0;
-      position: absolute;
-      top: 50%;
-    }
-    &:checked:before {
-      content: "×";
-      position: absolute;
-      visibility: initial;
-      font-size: 24px;
-      left: 50%;
-      margin-right: -50%;
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
   }
 }
 
