@@ -78,6 +78,12 @@ const Support = () => {
           <h3 id="news">Want news?</h3>
           <p>Sign up for <a href="https://didoesdigital.com/#newsletter" target="_blank" rel="noopener noreferrer">Typey&nbsp;type updates and steno news<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
 
+          <h3 id="credits">Credits</h3>
+          <ul>
+            <li><a href="https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists">Wiktionary provides frequency lists<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</li>
+            <li><a href="https://github.com/first20hours/google-10000-english">Josh Kaufman provides a typing word list<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> from <a href="http://books.google.com/ngrams">Google’s Trillion Word Corpus<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</li>
+          </ul>
+
           <h3 id="support">Support</h3>
           <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or <a href="https://twitter.com/didoesdigital">tweet @DiDoesDigital</a>.</p>
         </div>
