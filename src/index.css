@@ -199,6 +199,14 @@ small, .text-small {
   bottom: 0;
   left: 0; }
 
+.center-all {
+  left: 50%;
+  margin-right: -50%;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%); }
+
 .mb0 {
   margin-bottom: 0; }
 
