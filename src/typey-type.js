@@ -1,5 +1,48 @@
 import Zipper from './zipper';
 
+// function misstrokedWord(currentPhraseAttempts, currentPhrase, strokeHint, targetStrokeCount) {
+function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
+  let strokeAccuracy = true;
+  let internals = currentPhraseAttempts.slice(1, currentPhraseAttempts.length);
+  if (internals.includes("")) {
+    return false;
+  } else if (internals.includes(" ")) {
+    return false;
+  }
+
+  // let attempts = [
+  // {" ", "forward"},
+  // {" c", "forward"},
+  // {" cu", "forward"},
+  // {" cut", "forward"},
+  // {" cu", "backward"},
+  // {" c", "backward"},
+  // {" ca", "forward"},
+  // {" cat", "forward"},
+  // ];
+  // let attempts = [
+  //   " cut",
+  //   " cat"
+  // ];
+  let attempts = [];
+  for (let i = 1; i < currentPhraseAttempts.length - 1; i++) {
+    let currentLength = currentPhraseAttempts[i].length;
+    let previousLength = currentPhraseAttempts[i-1].length;
+    let previousAttemptLength = attempts.slice(-1).length;
+    if ((currentLength < previousLength)) {
+      attempts.push(currentPhraseAttempts[i-1]);
+    }
+  }
+  console.log(attempts); // incorrectly logging ["cut", "cu"] as attempts; should be [["cut"], or maybe ["cut", "cat"] (whether we're tracking misstrokes or all attempts including the final, successful attempt)
+  if (attempts.length >= targetStrokeCount) {
+    // strokeAccuracy = false;
+    // return strokeAccuracy;
+    return false;
+  }
+
+  return strokeAccuracy;
+}
+
 function matchSplitText(expected, actualText, settings={ignoredChars: ''}, userSettings={}) {
   if (userSettings.spacePlacement === 'spaceBeforeOutput') {
     expected = ' '+expected;
@@ -213,6 +256,7 @@ export {
   isFirstVisit,
   loadPersonalPreferences,
   matchSplitText,
+  strokeAccuracy,
   parseLesson,
   repetitionsRemaining,
   shouldShowStroke,

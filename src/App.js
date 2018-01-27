@@ -33,8 +33,10 @@ class App extends Component {
     this.charsPerWord = 5;
     this.state = {
       value: '',
+      currentPhraseAttempts: [],
       currentPhraseID: 0,
       currentPhraseMeetingSuccess: 1,
+      currentLessonStrokes: [],
       actualText: ``,
       fullscreen: false,
       hideOtherSettings: true,
@@ -196,6 +198,7 @@ class App extends Component {
     this.setState({
       actualText: '',
       currentPhraseID: this.state.lesson.presentedMaterial.length,
+      currentPhraseAttempts: [],
       disableUserSettings: false,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0
@@ -440,6 +443,7 @@ class App extends Component {
 
     this.setState({
       actualText: ``,
+      currentPhraseAttempts: [],
       currentPhraseMeetingSuccess: target,
       disableUserSettings: false,
       numberOfMatchedChars: 0,
@@ -511,8 +515,14 @@ class App extends Component {
 
     let [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
+    let currentPhraseAttempts = this.state.currentPhraseAttempts;
+    currentPhraseAttempts.push(actualText);
+    // TODO: remove this:
+    console.log(this.state.currentPhraseAttempts);
+
     var newState = {
       currentPhraseMeetingSuccess: this.state.currentPhraseMeetingSuccess,
+      currentPhraseAttempts: currentPhraseAttempts,
       numberOfMatchedChars: numberOfMatchedChars,
       totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       totalNumberOfNewWordsMet: this.state.totalNumberOfNewWordsMet,
@@ -535,6 +545,7 @@ class App extends Component {
       newState.showStrokesInLesson = false;
       newState.repetitionsRemaining = this.state.userSettings.repetitions;
       newState.currentPhraseID = this.state.currentPhraseID + 1;
+      newState.currentPhraseAttempts = [];
 
       if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
         newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1;
