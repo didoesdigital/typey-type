@@ -1,6 +1,6 @@
 // import React from 'react';
 // import ReactDOM from 'react-dom';
-import { sortLessons } from './utils';
+import { sortLessons, isPeak } from './utils';
 
 describe('sortLessons', () => {
   const a = {
@@ -32,5 +32,28 @@ describe('sortLessons', () => {
   });
   it('sorts lesson by title alphabetically where the query is at the same position', () => {
     expect(sortLessons(b, c, "Word")).toEqual(1);
+  });
+});
+
+describe('isPeak', () => {
+  it('returns true for peaks', () => {
+    let previousItemLength = 2;
+    let currentItemLength = 3;
+    let nextItemLength = 2;
+    expect(isPeak(currentItemLength, previousItemLength, nextItemLength)).toEqual(true);
+  });
+
+  it('returns false for slopes', () => {
+    let previousItemLength = 4;
+    let currentItemLength = 3;
+    let nextItemLength = 2;
+    expect(isPeak(currentItemLength, previousItemLength, nextItemLength)).toEqual(false);
+  });
+
+  it('returns false for valleys', () => {
+    let previousItemLength = 4;
+    let currentItemLength = 3;
+    let nextItemLength = 4;
+    expect(isPeak(currentItemLength, previousItemLength, nextItemLength)).toEqual(false);
   });
 });
