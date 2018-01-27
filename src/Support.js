@@ -80,6 +80,7 @@ const Support = () => {
 
           <h3 id="credits">Credits</h3>
           <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/Homophones">Wikipedia provides words<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</li>
             <li><a href="https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists">Wiktionary provides frequency lists<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</li>
             <li><a href="https://github.com/first20hours/google-10000-english">Josh Kaufman provides a typing word list<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> from <a href="http://books.google.com/ngrams">Google’s Trillion Word Corpus<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</li>
           </ul>
