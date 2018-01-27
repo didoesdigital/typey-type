@@ -1,4 +1,5 @@
 import Zipper from './zipper';
+import { isPeak } from './utils.js';
 
 // function misstrokedWord(currentPhraseAttempts, currentPhrase, strokeHint, targetStrokeCount) {
 function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
@@ -10,33 +11,16 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
     return false;
   }
 
-  // let attempts = [
-  // {" ", "forward"},
-  // {" c", "forward"},
-  // {" cu", "forward"},
-  // {" cut", "forward"},
-  // {" cu", "backward"},
-  // {" c", "backward"},
-  // {" ca", "forward"},
-  // {" cat", "forward"},
-  // ];
-  // let attempts = [
-  //   " cut",
-  //   " cat"
-  // ];
   let attempts = [];
   for (let i = 1; i < currentPhraseAttempts.length - 1; i++) {
-    let currentLength = currentPhraseAttempts[i].length;
-    let previousLength = currentPhraseAttempts[i-1].length;
-    let previousAttemptLength = attempts.slice(-1).length;
-    if ((currentLength < previousLength)) {
-      attempts.push(currentPhraseAttempts[i-1]);
+    if (currentPhraseAttempts[i-1] !== undefined && currentPhraseAttempts[i+1] !== undefined) {
+      if (isPeak(currentPhraseAttempts[i].length, currentPhraseAttempts[i-1].length, currentPhraseAttempts[i+1].length)) {
+        attempts.push(currentPhraseAttempts[i]);
+      }
     }
   }
-  console.log(attempts); // incorrectly logging ["cut", "cu"] as attempts; should be [["cut"], or maybe ["cut", "cat"] (whether we're tracking misstrokes or all attempts including the final, successful attempt)
+  console.log(attempts);
   if (attempts.length >= targetStrokeCount) {
-    // strokeAccuracy = false;
-    // return strokeAccuracy;
     return false;
   }
 
