@@ -571,7 +571,7 @@ class App extends Component {
         newState.metWords[actualText] = meetingsCount + 1;
       }
 
-      let target = targetStrokeCount(this.state.lesson.presentedMaterial[this.state.currentPhraseID + 1] || { phrase: '', stroke: '' });
+      let target = targetStrokeCount(this.state.lesson.presentedMaterial[this.state.currentPhraseID + 1] || { phrase: '', stroke: 'TK-LS' });
       newState.currentPhraseMeetingSuccess = target;
       newState.targetStrokeCount = target;
       this.state.lesson.newPresentedMaterial.visitNext();
