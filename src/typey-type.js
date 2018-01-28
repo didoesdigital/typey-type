@@ -20,7 +20,7 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
       }
     }
   }
-  console.log(attempts);
+  // console.log(attempts);
   if (attempts.length >= targetStrokeCount) {
     return {strokeAccuracy: false, attempts: attempts};
   }

@@ -25,7 +25,7 @@ class Finished extends Component {
     let customMessage;
     let accuracy = '';
     let currentLessonStrokes = this.props.currentLessonStrokes;
-    console.log(currentLessonStrokes);
+    // console.log(currentLessonStrokes);
 
     let misstrokesSummary = '';
 
@@ -59,7 +59,8 @@ class Finished extends Component {
     if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
       accuracy = ' 100%';
     } else if (this.props.totalNumberOfMistypedWords > 0 || this.props.totalNumberOfHintedWords > 0) {
-      let accuracyPercent = ((this.props.totalWordCount / this.props.charsPerWord) - this.props.totalNumberOfMistypedWords - this.props.totalNumberOfHintedWords) / (this.props.totalWordCount / this.props.charsPerWord) * 100;
+      let totalWords = this.props.totalNumberOfNewWordsMet + this.props.totalNumberOfLowExposuresSeen + this.props.totalNumberOfRetainedWords + this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords;
+      let accuracyPercent = (this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords) / totalWords * 100;
       let accuracyPercentRoundedToTwoDecimalPlaces = (Math.floor(accuracyPercent * 100) / 100);
       accuracy = ' ' + accuracyPercentRoundedToTwoDecimalPlaces + '% accuracy!';
     } else {

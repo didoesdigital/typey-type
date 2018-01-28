@@ -519,8 +519,7 @@ class App extends Component {
 
     let currentPhraseAttempts = this.state.currentPhraseAttempts;
     currentPhraseAttempts.push(actualText);
-    // TODO: remove this:
-    console.log(this.state.currentPhraseAttempts);
+    // console.log(this.state.currentPhraseAttempts);
 
     var newState = {
       currentPhraseMeetingSuccess: this.state.currentPhraseMeetingSuccess,
