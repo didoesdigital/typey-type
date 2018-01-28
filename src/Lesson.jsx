@@ -123,6 +123,7 @@ class Lesson extends Component {
               settings={this.props.lesson.settings}
               timer={this.props.timer}
               toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+              charsPerWord={this.props.charsPerWord}
               totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
               totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}

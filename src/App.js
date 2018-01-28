@@ -686,6 +686,7 @@ class App extends Component {
                     targetStrokeCount={this.state.targetStrokeCount}
                     timer={this.state.timer}
                     toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
+                    charsPerWord={this.charsPerWord}
                     totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
                     totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
                     totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
@@ -779,6 +780,7 @@ class App extends Component {
                     targetStrokeCount={this.state.targetStrokeCount}
                     timer={this.state.timer}
                     toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
+                    charsPerWord={this.charsPerWord}
                     totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
                     totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
                     totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}

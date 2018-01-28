@@ -24,11 +24,6 @@ class Finished extends Component {
   render() {
     let customMessage;
     let accuracy = '';
-    if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
-      accuracy = ' Perfect accuracy!';
-    }
-    let emptyAndZeroStateMessage = '';
-
     let currentLessonStrokes = this.props.currentLessonStrokes;
     console.log(currentLessonStrokes);
 
@@ -43,7 +38,8 @@ class Finished extends Component {
         });
         return(
           <li key={ i } className="unstyled-list-item mr3 dib">
-            <h4 className="mt0"><span className="matched steno-material px1 nowrap">{phrase.word}</span></h4>
+            <h4 className="mt0"><span className="visually-hidden">Material to write:</span><span className="matched steno-material px1 nowrap">{phrase.word}</span></h4>
+            <p><span className="visually-hidden">You wrote:</span></p>
             <ol className="unstyled-list mb0 misstroke-list">
               {strokeAttempts}
             </ol>
@@ -54,17 +50,64 @@ class Finished extends Component {
 
       misstrokesSummary = (
         <div>
-          <h3 className="mt0">Possible stroke improvements</h3>
+          <h3 className="mt0 nowrap">Possible stroke improvements</h3>
           <ol className="flex mb0">{listOfPossibleStrokeImprovements}</ol>
         </div>
       );
     }
 
+    if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
+      accuracy = ' 100%';
+    } else if (this.props.totalNumberOfMistypedWords > 0 || this.props.totalNumberOfHintedWords > 0) {
+      let accuracyPercent = ((this.props.totalWordCount / this.props.charsPerWord) - this.props.totalNumberOfMistypedWords - this.props.totalNumberOfHintedWords) / (this.props.totalWordCount / this.props.charsPerWord) * 100;
+      let accuracyPercentRoundedToTwoDecimalPlaces = (Math.floor(accuracyPercent * 100) / 100);
+      accuracy = ' ' + accuracyPercentRoundedToTwoDecimalPlaces + '% accuracy!';
+    } else {
+      accuracy = ' Keep it up!';
+    }
+    let emptyAndZeroStateMessage = '';
+    let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
+    if (wpm === 0) {
+      accuracy = ' Keep trying!';
+    }
+
+    let wpmCommentary = '';
+    if (wpm > 5000) {
+      wpmCommentary = 'Faster than you can think…';
+    } else if (wpm > 1500) {
+      wpmCommentary = 'Faster than a speed reader!';
+    } else if (wpm > 300) {
+      wpmCommentary = 'Faster than you can read!';
+    } else if (wpm > 250) {
+      wpmCommentary = 'As fast as an auctioneer!';
+    } else if (wpm > 225) {
+      wpmCommentary = 'Faster than a pro stenographer!';
+    } else if (wpm > 160) {
+      wpmCommentary = 'Faster than a stenographer!';
+    } else if (wpm > 150) {
+      wpmCommentary = 'Faster than you can talk!';
+    } else if (wpm > 100) {
+      wpmCommentary = 'Faster than a stenotype student!';
+    } else if (wpm > 80) {
+      wpmCommentary = 'Faster than a pro typist!';
+    } else if (wpm > 60) {
+      wpmCommentary = 'Faster than a good QWERTY typist!';
+    } else if (wpm > 40) {
+      wpmCommentary = 'Faster than your average typist!';
+    } else if (wpm > 27) {
+      wpmCommentary = 'Faster than hunt and peck typists!';
+    } else if (wpm > 22) {
+      wpmCommentary = 'Faster than Morse code!';
+    } else if (wpm > 20) {
+      wpmCommentary = 'Faster than handwriting!';
+    }
+
     let lessonSummary = (
       <div className="finished-lesson mr1">
         <div className="finished-summary">
-          <h2>Finished!</h2>
-          <h3 className="mt0">{this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords)}<abbr title="words per minute">WPM</abbr>!{accuracy}</h3>
+          <h2 className="mb1">Finished</h2>
+          <h3 className="mt0 nowrap">{wpm}&nbsp;<abbr title="words per minute">WPM</abbr>!{accuracy}</h3>
+          <h4 className="mt0 nowrap">{wpmCommentary}</h4>
           <p>
             <Link to={this.props.suggestedNext} className="link-button dib" style={{lineHeight: 2}} role="button">
               Next lesson
@@ -76,7 +119,7 @@ class Finished extends Component {
               Restart lesson</a>
           </p>
         </div>
-        <div className="misstrokes-summary">
+        <div className="misstrokes-summary mr3">
           {misstrokesSummary}
         </div>
       </div>
