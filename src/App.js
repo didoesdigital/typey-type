@@ -437,9 +437,9 @@ class App extends Component {
     newLesson.presentedMaterial = repeatedLesson;
     newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
-    if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
       target = 0;
     let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: '' });
+    if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, reps, this.state.userSettings.hideStrokesOnLastRepetition)) {
     }
 
     this.setState({
