@@ -66,7 +66,7 @@ class Finished extends Component {
       // console.log("this.props.totalNumberOfMistypedWords" + this.props.totalNumberOfMistypedWords);
       let totalWords = this.props.totalNumberOfNewWordsMet + this.props.totalNumberOfLowExposuresSeen + this.props.totalNumberOfRetainedWords + this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords;
       // console.log("Total Words: " + totalWords);
-      let accuracyPercent = ((1 - this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords) / totalWords) * 100;
+      let accuracyPercent = (1 - ((this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords) / totalWords)) * 100;
       // console.log("Accuracy percent: " + accuracyPercent);
       let accuracyPercentRoundedToTwoDecimalPlaces = (Math.floor(accuracyPercent * 100) / 100);
       // console.log("Accuracy percent rounded: " + accuracyPercentRoundedToTwoDecimalPlaces);
