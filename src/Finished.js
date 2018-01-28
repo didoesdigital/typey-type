@@ -59,10 +59,19 @@ class Finished extends Component {
     if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
       accuracy = ' 100%';
     } else if (this.props.totalNumberOfMistypedWords > 0 || this.props.totalNumberOfHintedWords > 0) {
+      // console.log("this.props.totalNumberOfNewWordsMet" + this.props.totalNumberOfNewWordsMet);
+      // console.log("this.props.totalNumberOfLowExposuresSeen" + this.props.totalNumberOfLowExposuresSeen);
+      // console.log("this.props.totalNumberOfRetainedWords" + this.props.totalNumberOfRetainedWords);
+      // console.log("this.props.totalNumberOfHintedWords" + this.props.totalNumberOfHintedWords);
+      // console.log("this.props.totalNumberOfMistypedWords" + this.props.totalNumberOfMistypedWords);
       let totalWords = this.props.totalNumberOfNewWordsMet + this.props.totalNumberOfLowExposuresSeen + this.props.totalNumberOfRetainedWords + this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords;
+      // console.log("Total Words: " + totalWords);
       let accuracyPercent = (1 - (this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords) / totalWords) * 100;
+      // console.log("Accuracy percent: " + accuracyPercent);
       let accuracyPercentRoundedToTwoDecimalPlaces = (Math.floor(accuracyPercent * 100) / 100);
+      // console.log("Accuracy percent rounded: " + accuracyPercentRoundedToTwoDecimalPlaces);
       accuracy = ' ' + accuracyPercentRoundedToTwoDecimalPlaces + '% accuracy!';
+
     } else {
       accuracy = ' Keep it up!';
     }

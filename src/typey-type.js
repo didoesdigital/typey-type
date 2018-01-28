@@ -1,7 +1,6 @@
 import Zipper from './zipper';
 import { isPeak } from './utils.js';
 
-// function misstrokedWord(currentPhraseAttempts, currentPhrase, strokeHint, targetStrokeCount) {
 function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
   let strokeAccuracy = true;
   let attempts = [];
@@ -17,7 +16,6 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
       }
     }
   }
-  // console.log(attempts);
   if (attempts.length >= targetStrokeCount) {
     return {strokeAccuracy: false, attempts: attempts};
   }

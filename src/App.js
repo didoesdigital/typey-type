@@ -519,7 +519,7 @@ class App extends Component {
 
     let currentPhraseAttempts = this.state.currentPhraseAttempts;
     currentPhraseAttempts.push(actualText);
-    // console.log(this.state.currentPhraseAttempts);
+    console.log(this.state.currentPhraseAttempts);
 
     var newState = {
       currentPhraseMeetingSuccess: this.state.currentPhraseMeetingSuccess,
@@ -543,7 +543,7 @@ class App extends Component {
     if (numberOfUnmatchedChars === 0) {
       let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
       let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
-      let attempts = phraseMisstrokes.attempts; // ["sign", "ss"]
+      let attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
       newState.currentPhraseAttempts = []; // reset for next word
       newState.currentLessonStrokes = this.state.currentLessonStrokes; // [{word: "cat", attempts: ["cut"], stroke: "KAT"}, {word: "sciences", attempts ["sign", "ss"], stroke: "SAOEUPB/EPBC/-S"]
       if (!accurateStroke) {
