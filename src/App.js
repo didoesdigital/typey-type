@@ -816,21 +816,15 @@ class App extends Component {
 
 function increaseMetWords(meetingsCount) {
   let newState = {};
-  let currentPhraseMeetingSuccess;
-  if (this.state.currentPhraseMeetingSuccess > 0) {
-    currentPhraseMeetingSuccess = 1;
-  } else {
-    currentPhraseMeetingSuccess = 0;
-  }
 
   if (meetingsCount === 0) {
-    newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + currentPhraseMeetingSuccess;
+    newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + 1;
   }
   else if (meetingsCount >= 1 && meetingsCount <= 29) {
-    newState.totalNumberOfLowExposuresSeen = this.state.totalNumberOfLowExposuresSeen + currentPhraseMeetingSuccess;
+    newState.totalNumberOfLowExposuresSeen = this.state.totalNumberOfLowExposuresSeen + 1;
   }
   else if (meetingsCount >= 30) {
-    newState.totalNumberOfRetainedWords = this.state.totalNumberOfRetainedWords + currentPhraseMeetingSuccess;
+    newState.totalNumberOfRetainedWords = this.state.totalNumberOfRetainedWords + 1;
   }
   return newState;
 }
