@@ -25,7 +25,7 @@ class Finished extends Component {
     let customMessage;
     let accuracy = '';
     let currentLessonStrokes = this.props.currentLessonStrokes;
-    // console.log(currentLessonStrokes);
+    console.log(currentLessonStrokes);
 
     let misstrokesSummary = '';
 
@@ -72,6 +72,11 @@ class Finished extends Component {
       // console.log("Accuracy percent rounded: " + accuracyPercentRoundedToTwoDecimalPlaces);
       accuracy = ' ' + accuracyPercentRoundedToTwoDecimalPlaces + '% accuracy!';
 
+      // When you have only stroked hinted words, show nothing instead of 0% accuracy.
+      // When you have stroked many words, and some hinted words, subtract hinted words from total accuracy.
+      if (accuracy === ' 0% accuracy!') {
+        accuracy = '';
+      }
     } else {
       accuracy = ' Keep it up!';
     }
