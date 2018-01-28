@@ -561,7 +561,7 @@ class App extends Component {
         newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1;
       }
       // else if (this.state.currentPhraseMeetingSuccess === 0) {
-      else if (accurateStroke === false) {
+      else if (!accurateStroke) {
         newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1;
       }
       // maybe this should be `else {`
