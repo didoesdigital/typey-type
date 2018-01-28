@@ -150,6 +150,9 @@ small, .text-small {
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px); }
 
+.nowrap {
+  white-space: nowrap; }
+
 .db {
   display: block; }
 
@@ -373,6 +376,9 @@ small, .text-small {
 
 .bg-danger {
   background-color: #ead6de; }
+
+.bg-warning {
+  background-color: #ffe5b3; }
 
 .text-uppercase {
   text-transform: uppercase;
@@ -781,13 +787,24 @@ label {
   .steno-stroke .raw-steno-key {
     padding-left: 0;
     padding-right: 0; }
+  .steno-stroke.steno-stroke--subtle {
+    background-color: #757575;
+    color: #d9d3dc; }
 
 .raw-steno-key {
-  background-color: #4e4e4e;
+  background-color: #444444;
   color: #ece9ee;
   padding-left: 4px;
   padding-right: 4px;
   speak: spell-out; }
+  .raw-steno-key.raw-steno-key--subtle {
+    background-color: #757575;
+    color: #ece9ee; }
+
+.misstroke-list {
+  max-height: 124px;
+  overflow: scroll;
+  max-width: 528px; }
 
 .typed-text-container {
   position: relative; }
@@ -833,7 +850,7 @@ label {
   border-bottom: 2px solid #FFD073; }
 
 .matched.steno-material {
-  border-bottom: 2px solid #91a896; }
+  border-bottom: 2px solid #402351; }
 
 .timer-table {
   width: 156px;

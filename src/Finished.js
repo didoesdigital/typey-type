@@ -32,57 +32,33 @@ class Finished extends Component {
     let currentLessonStrokes = this.props.currentLessonStrokes;
     console.log(currentLessonStrokes);
 
-    let headings = currentLessonStrokes.map( (phrase, index) => {
-      return(
-        <th key={ index } scope="col" className="p1"><span className="steno-material">{phrase.word}</span></th>
-      );
-    });
+    let misstrokesSummary = '';
 
-    let misstrokeCells = currentLessonStrokes.map( (phrase, i) => {
-      let items = phrase.attempts.map( ( attempt, j ) => {
+    if (currentLessonStrokes.length > 0) {
+      let listOfPossibleStrokeImprovements = currentLessonStrokes.map( (phrase, i) => {
+        let strokeAttempts = phrase.attempts.map( ( attempt, j ) => {
+          return(
+              <li key={ j } className="unstyled-list-item nowrap"><span className="bg-warning px1">{attempt}</span></li>
+          );
+        });
         return(
-          <li key={ j } className="unstyled-list-item"><span className="bg-danger">{attempt}</span></li>
+          <li key={ i } className="unstyled-list-item mr3 dib">
+            <h4 className="mt0"><span className="matched steno-material px1 nowrap">{phrase.word}</span></h4>
+            <ol className="unstyled-list mb0 misstroke-list">
+              {strokeAttempts}
+            </ol>
+            <p><span className="visually-hidden text-small">Hint: </span><span className="steno-stroke steno-stroke--subtle text-small px1">{phrase.stroke.split('').map((item, i)=><kbd className="raw-steno-key raw-steno-key--subtle text-small" key={i}>{item}</kbd>)}</span></p>
+          </li>
         );
       });
 
-      return(
-        <td key={ i } className="p1 v-top">
-          <ol className="unstyled-list mb0">
-            {items}
-          </ol>
-        </td>
+      misstrokesSummary = (
+        <div>
+          <h3 className="mt0">Possible stroke improvements</h3>
+          <ol className="flex mb0">{listOfPossibleStrokeImprovements}</ol>
+        </div>
       );
-    });
-
-    let strokeTipCells = currentLessonStrokes.map( (phrase, index) => {
-      return(
-        <td key={ index } className="p1 v-top"><kbd className="steno-stroke">{phrase.stroke}</kbd></td>
-      );
-    });
-
-    let tableOfPossibleMisstrokes = (
-      <div className="misstrokes-summary">
-        <table>
-          <caption className="text-left p1"><strong>Possible stroke improvements</strong></caption>
-          <thead>
-              <tr>
-                <th className="visually-hidden" scope="row">Material to type:</th>
-                {headings}
-              </tr>
-          </thead>
-          <tbody>
-              <tr>
-                <th className="visually-hidden" scope="row">You wrote:</th>
-                {misstrokeCells}
-              </tr>
-              <tr>
-                <th className="visually-hidden" scope="row">The brief was:</th>
-                {strokeTipCells}
-              </tr>
-          </tbody>
-        </table>
-      </div>
-    )
+    }
 
     let lessonSummary = (
       <div className="finished-lesson mr1">
@@ -100,7 +76,9 @@ class Finished extends Component {
               Restart lesson</a>
           </p>
         </div>
-        {tableOfPossibleMisstrokes}
+        <div className="misstrokes-summary">
+          {misstrokesSummary}
+        </div>
       </div>
     );
 

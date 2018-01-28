@@ -186,6 +186,10 @@ small, .text-small {
   clip: rect(1px, 1px, 1px, 1px);
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 .db              { display: block; }
 .dib             { display: inline-block; }
 .table           { display: table; }
@@ -291,6 +295,7 @@ small, .text-small {
 .text-center { text-align: center; }
 .text-right  { text-align: right; }
 .bg-danger   { background-color: add-tint($brand-danger, 80%); }
+.bg-warning   { background-color: add-tint($brand-warning, 60%); }
 
 .text-uppercase {
   text-transform: uppercase;
@@ -785,13 +790,26 @@ label {
     padding-left: 0;
     padding-right: 0;
   }
+  &.steno-stroke--subtle {
+    background-color: desaturate(add-tint($brand-primary, 30%), 40%);
+    color: add-tint($brand-primary, 80%);
+  }
 }
 .raw-steno-key {
-  background-color: desaturate(add-tint($brand-primary, 10%), 40%);
+  background-color: desaturate(add-tint($brand-primary, 5%), 40%);
   color: add-tint($brand-primary, 90%);
   padding-left: 4px;
   padding-right: 4px;
   speak: spell-out;
+  &.raw-steno-key--subtle {
+    background-color: desaturate(add-tint($brand-primary, 30%), 40%);
+    color: add-tint($brand-primary, 90%);
+  }
+}
+.misstroke-list {
+  max-height: 124px;
+  overflow: scroll;
+  max-width: 528px;
 }
 .typed-text-container {
   position: relative;
@@ -843,7 +861,7 @@ label {
   border-bottom: 2px solid $brand-highlight;
 }
 .matched.steno-material {
-  border-bottom: 2px solid add-tint($brand-success, 50%);
+  border-bottom: 2px solid $brand-primary;
 }
 .timer-table {
   width: 156px;
