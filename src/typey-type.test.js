@@ -55,6 +55,12 @@ describe('stroke accuracy for current phrase', () => {
       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
     });
 
+    it('you wrote sign, ss, and ss for sciences', () => {
+      let currentPhraseAttempts = [" ", " s", " si", " sig", " sign", " sig", " si", " s", " ss", " s", " ss", " s", " sc", " sci", " scie", " scien", " scienc", " science", " sciences"];
+      let targetStrokeCount = 3;
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" sign", " ss", " ss"]});
+    });
+
     it('you wrote "verticax", "verticaw" for vertical', () => {
       let currentPhraseAttempts = [" ", " v", " ve", " ver", " vert", " verti", " vertic", " vertica", " verticax", " verticaw", " vertical"];
       let targetStrokeCount = 2;
