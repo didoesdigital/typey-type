@@ -16,7 +16,7 @@ describe('stroke accuracy for current phrase', () => {
         " cat"
       ];
       let targetStrokeCount = 1;
-      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(false);
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
     });
 
     it('you wrote cut instead of cat and Plover backtracked to " "', () => {
@@ -33,7 +33,7 @@ describe('stroke accuracy for current phrase', () => {
         " cat"
       ];
       let targetStrokeCount = 1;
-      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(false);
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
     });
 
     it('you wrote cut instead of cat and Plover backtracked to ""', () => {
@@ -52,44 +52,44 @@ describe('stroke accuracy for current phrase', () => {
         " cat"
       ];
       let targetStrokeCount = 1;
-      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(false);
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
     });
 
-    // it("you wrote were instead of we're", () => {
-    //   let currentPhraseAttempts = [
-    //   " ",
-        // " w",
-        // " we",
-        // " wer",
-        // " were",
-        // " wer",
-        // " we",
-        // " w",
-        // " ",
-        // " w",
-        // " we",
-        // " we'",
-        // " we'r",
-      // " we're"
-  // ];
-    //   let targetStrokeCount = 1;
-    //   expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(false);
-    // });
+//     it("you wrote were instead of we're", () => {
+//       let currentPhraseAttempts = [
+//       " ",
+//         " w",
+//         " we",
+//         " wer",
+//         " were",
+//         " wer",
+//         " we",
+//         " w",
+//         " ",
+//         " w",
+//         " we",
+//         " we'",
+//         " we'r",
+//         " we're"
+//       ];
+//       let targetStrokeCount = 1;
+//       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(false);
+//     });
 
-    // it("you wrote we're instead of were", () => {
-    //   let currentPhraseAttempts = [" ", " w", " we", " we'", " we'r", " we're", " we'r", " we'", " we", " w", " ", " w", " we", " wer", " were"];
-    //   let targetStrokeCount = 1;
-    //   expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(false);
-    // });
+//     it("you wrote we're instead of were", () => {
+//       let currentPhraseAttempts = [" ", " w", " we", " we'", " we'r", " we're", " we'r", " we'", " we", " w", " ", " w", " we", " wer", " were"];
+//       let targetStrokeCount = 1;
+//       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(false);
+//     });
   });
 
-  // describe('should return true for real successful meetings', () => {
-  //   it('should return true for real successful meetings', () => {
-  //     let currentPhraseAttempts = [" ", " s", " si", " sig", " sign", " sig", " si", " s", " sc", " sci", " scie", " scien", " scienc", " science", " sciences"];
-  //     let targetStrokeCount = 3;
-  //     expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(true);
-  //   });
-  // });
+  describe('should return true for real successful meetings', () => {
+    it('should return true for real successful meetings', () => {
+      let currentPhraseAttempts = [" ", " s", " si", " sig", " sign", " sig", " si", " s", " sc", " sci", " scie", " scien", " scienc", " science", " sciences"];
+      let targetStrokeCount = 3;
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" sign"]});
+    });
+  });
 });
 
 describe('loadPersonalPreferences', () => {

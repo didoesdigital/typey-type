@@ -27,24 +27,88 @@ class Finished extends Component {
     if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
       accuracy = ' Perfect accuracy!';
     }
-    let emptyAndZeroStateMessage = (
-      <div>
-        <h2>Finished!</h2>
-        <h3 className="mt0">{this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords)}WPM!{accuracy}</h3>
-        <p>
-          <Link to={this.props.suggestedNext} className="link-button dib" style={{lineHeight: 2}} role="button">
-            Next lesson
-          </Link>
-        </p>
-        <p>
-          <a href={this.props.path} onClick={this.props.restartLesson} className="" role="button">
-            <IconRestart aria-hidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
-            Restart lesson</a>
-        </p>
+    let emptyAndZeroStateMessage = '';
+
+    let currentLessonStrokes = this.props.currentLessonStrokes;
+    console.log(currentLessonStrokes);
+
+    let headings = currentLessonStrokes.map( (phrase, index) => {
+      return(
+        <th key={ index } scope="col" className="p1"><span className="steno-material">{phrase.word}</span></th>
+      );
+    });
+
+    let misstrokeCells = currentLessonStrokes.map( (phrase, i) => {
+      let items = phrase.attempts.map( ( attempt, j ) => {
+        return(
+          <li key={ j } className="unstyled-list-item"><span className="bg-danger">{attempt}</span></li>
+        );
+      });
+
+      return(
+        <td key={ i } className="p1 v-top">
+          <ol className="unstyled-list mb0">
+            {items}
+          </ol>
+        </td>
+      );
+    });
+
+    let strokeTipCells = currentLessonStrokes.map( (phrase, index) => {
+      return(
+        <td key={ index } className="p1 v-top"><kbd className="steno-stroke">{phrase.stroke}</kbd></td>
+      );
+    });
+
+    let tableOfPossibleMisstrokes = (
+      <div className="misstrokes-summary">
+        <table>
+          <caption className="text-left p1"><strong>Possible stroke improvements</strong></caption>
+          <thead>
+              <tr>
+                <th className="visually-hidden" scope="row">Material to type:</th>
+                {headings}
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <th className="visually-hidden" scope="row">You wrote:</th>
+                {misstrokeCells}
+              </tr>
+              <tr>
+                <th className="visually-hidden" scope="row">The brief was:</th>
+                {strokeTipCells}
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    )
+
+    let lessonSummary = (
+      <div className="finished-lesson mr1">
+        <div className="finished-summary">
+          <h2>Finished!</h2>
+          <h3 className="mt0">{this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords)}<abbr title="words per minute">WPM</abbr>!{accuracy}</h3>
+          <p>
+            <Link to={this.props.suggestedNext} className="link-button dib" style={{lineHeight: 2}} role="button">
+              Next lesson
+            </Link>
+          </p>
+          <p>
+            <a href={this.props.path} onClick={this.props.restartLesson} className="" role="button">
+              <IconRestart aria-hidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
+              Restart lesson</a>
+          </p>
+        </div>
+        {tableOfPossibleMisstrokes}
       </div>
     );
+
     if (this.isEmpty()) {
-      emptyAndZeroStateMessage = "There are no words to write.";
+      emptyAndZeroStateMessage = (
+        <div className="text-center">There are no words to write.</div>
+      );
+      lessonSummary = '';
     }
     if (this.props.settings.customMessage) {
       customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
@@ -70,9 +134,12 @@ class Finished extends Component {
             totalWordCount={this.props.totalWordCount}
             userSettings={this.props.userSettings}
           />
-          <div className="lesson-canvas panel p2">
-            <div className="mx-auto text-center">
-              <div role="alert" aria-live="polite">{emptyAndZeroStateMessage}</div>
+          <div className="lesson-canvas panel p2 overflow-scroll">
+            <div className="mx-auto">
+              <div role="alert" aria-live="polite">
+                {emptyAndZeroStateMessage}
+                {lessonSummary}
+              </div>
             </div>
           </div>
           <div className="scores panel p2">

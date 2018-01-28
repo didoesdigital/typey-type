@@ -4,14 +4,15 @@ import { isPeak } from './utils.js';
 // function misstrokedWord(currentPhraseAttempts, currentPhrase, strokeHint, targetStrokeCount) {
 function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
   let strokeAccuracy = true;
+  let attempts = [];
   let internals = currentPhraseAttempts.slice(1, currentPhraseAttempts.length);
+
   if (internals.includes("")) {
-    return false;
+    return {strokeAccuracy: false, attempts: attempts};
   } else if (internals.includes(" ")) {
-    return false;
+    return {strokeAccuracy: false, attempts: attempts};
   }
 
-  let attempts = [];
   for (let i = 1; i < currentPhraseAttempts.length - 1; i++) {
     if (currentPhraseAttempts[i-1] !== undefined && currentPhraseAttempts[i+1] !== undefined) {
       if (isPeak(currentPhraseAttempts[i].length, currentPhraseAttempts[i-1].length, currentPhraseAttempts[i+1].length)) {
@@ -21,10 +22,10 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
   }
   console.log(attempts);
   if (attempts.length >= targetStrokeCount) {
-    return false;
+    return {strokeAccuracy: false, attempts: attempts};
   }
 
-  return strokeAccuracy;
+  return {strokeAccuracy: strokeAccuracy, attempts: attempts};
 }
 
 function matchSplitText(expected, actualText, settings={ignoredChars: ''}, userSettings={}) {

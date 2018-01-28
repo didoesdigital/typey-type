@@ -8,6 +8,7 @@ import {
   parseLesson,
   repetitionsRemaining,
   shouldShowStroke,
+  strokeAccuracy,
   targetStrokeCount,
   writePersonalPreferences
 } from './typey-type';
@@ -444,6 +445,7 @@ class App extends Component {
     this.setState({
       actualText: ``,
       currentPhraseAttempts: [],
+      currentLessonStrokes: [],
       currentPhraseMeetingSuccess: target,
       disableUserSettings: false,
       numberOfMatchedChars: 0,
@@ -540,19 +542,30 @@ class App extends Component {
     }
 
     if (numberOfUnmatchedChars === 0) {
+      let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
+      let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
+      let attempts = phraseMisstrokes.attempts; // ["sign", "ss"]
+      newState.currentPhraseAttempts = []; // reset for next word
+      newState.currentLessonStrokes = this.state.currentLessonStrokes; // [{word: "cat", attempts: ["cut"], stroke: "KAT"}, {word: "sciences", attempts ["sign", "ss"], stroke: "SAOEUPB/EPBC/-S"]
+      if (!accurateStroke) {
+        newState.currentLessonStrokes.push({word: this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, attempts: attempts, stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke});
+      }
+      console.log(newState.currentLessonStrokes);
+
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
       newState.actualText = '';
       newState.showStrokesInLesson = false;
       newState.repetitionsRemaining = this.state.userSettings.repetitions;
       newState.currentPhraseID = this.state.currentPhraseID + 1;
-      newState.currentPhraseAttempts = [];
 
       if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
         newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1;
       }
-      else if (this.state.currentPhraseMeetingSuccess === 0) {
+      // else if (this.state.currentPhraseMeetingSuccess === 0) {
+      else if (accurateStroke === false) {
         newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1;
       }
+      // maybe this should be `else {`
       else if (this.state.currentPhraseMeetingSuccess > 0) {
         const meetingsCount = newState.metWords[actualText] || 0;
         Object.assign(newState, increaseMetWords.call(this, meetingsCount));
@@ -752,6 +765,7 @@ class App extends Component {
                     changeUserSetting={this.changeUserSetting.bind(this)}
                     chooseStudy={this.chooseStudy.bind(this)}
                     completedPhrases={completedMaterial}
+                    currentLessonStrokes={this.state.currentLessonStrokes}
                     currentPhraseID={this.state.currentPhraseID}
                     currentPhrase={presentedMaterialCurrentItem.phrase}
                     currentStroke={presentedMaterialCurrentItem.stroke}

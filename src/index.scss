@@ -200,6 +200,13 @@ small, .text-small {
 .relative        { position: relative; }
 .absolute        { position: absolute; }
 
+.collapse {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.overflow-scroll { overflow: scroll; }
+.v-top      { vertical-align: top; }
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -280,6 +287,7 @@ small, .text-small {
   line-height: 1;
 }
 
+.text-left { text-align: left; }
 .text-center { text-align: center; }
 .text-right  { text-align: right; }
 .bg-danger   { background-color: add-tint($brand-danger, 80%); }
@@ -380,12 +388,26 @@ small, .text-small {
   display: flex;
   position: relative;
   max-height: 320px;
-  overflow: hidden;
+  // overflow: hidden;
 
   @media (min-width: $breakpoint) {
     min-width: 544px;
   }
 }
+
+.finished-lesson {
+  display: grid;
+  grid-gap: 24px;
+  justify-content: space-between;
+  margin: 0 auto;
+  .finished-summary {
+    grid-column: 1;
+  }
+  .misstrokes-summary {
+    grid-column: 2;
+  }
+}
+
 .user-settings {
   min-height: 320px;
   width: 192px;
