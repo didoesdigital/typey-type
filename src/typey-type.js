@@ -5,13 +5,6 @@ import { isPeak } from './utils.js';
 function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
   let strokeAccuracy = true;
   let attempts = [];
-  let internals = currentPhraseAttempts.slice(1, currentPhraseAttempts.length);
-
-  if (internals.includes("")) {
-    return {strokeAccuracy: false, attempts: attempts};
-  } else if (internals.includes(" ")) {
-    return {strokeAccuracy: false, attempts: attempts};
-  }
 
   for (let i = 1; i < currentPhraseAttempts.length - 1; i++) {
     if (currentPhraseAttempts[i-1] !== undefined && currentPhraseAttempts[i+1] !== undefined) {
