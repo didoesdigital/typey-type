@@ -6,9 +6,13 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
   let strokeAccuracy = true;
   let attempts = [];
 
-  for (let i = 1; i < currentPhraseAttempts.length - 1; i++) {
+  for (let i = 0; i < currentPhraseAttempts.length - 1; i++) {
     if (currentPhraseAttempts[i-1] !== undefined && currentPhraseAttempts[i+1] !== undefined) {
       if (isPeak(currentPhraseAttempts[i].length, currentPhraseAttempts[i-1].length, currentPhraseAttempts[i+1].length)) {
+        attempts.push(currentPhraseAttempts[i]);
+      }
+    } else if (currentPhraseAttempts[i+1] !== undefined) {
+      if (currentPhraseAttempts[i].length > currentPhraseAttempts[i+1].length) {
         attempts.push(currentPhraseAttempts[i]);
       }
     }
