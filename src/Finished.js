@@ -60,7 +60,7 @@ class Finished extends Component {
       accuracy = ' 100%';
     } else if (this.props.totalNumberOfMistypedWords > 0 || this.props.totalNumberOfHintedWords > 0) {
       let totalWords = this.props.totalNumberOfNewWordsMet + this.props.totalNumberOfLowExposuresSeen + this.props.totalNumberOfRetainedWords + this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords;
-      let accuracyPercent = (this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords) / totalWords * 100;
+      let accuracyPercent = (1 - (this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords) / totalWords) * 100;
       let accuracyPercentRoundedToTwoDecimalPlaces = (Math.floor(accuracyPercent * 100) / 100);
       accuracy = ' ' + accuracyPercentRoundedToTwoDecimalPlaces + '% accuracy!';
     } else {
