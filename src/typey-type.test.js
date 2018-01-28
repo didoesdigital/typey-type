@@ -93,7 +93,7 @@ describe('stroke accuracy for current phrase', () => {
     it('should return true for real successful meetings', () => {
       let currentPhraseAttempts = [" ", " s", " si", " sig", " sign", " sig", " si", " s", " sc", " sci", " scie", " scien", " scienc", " science", " sciences"];
       let targetStrokeCount = 3;
-      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" sign"]});
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: true, attempts: [" sign"]});
     });
   });
 });
