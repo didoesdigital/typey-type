@@ -565,7 +565,7 @@ class App extends Component {
         newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1;
       }
       // maybe this should be `else {`
-      else if (this.state.currentPhraseMeetingSuccess > 0) {
+      else if (accurateStroke) {
         const meetingsCount = newState.metWords[actualText] || 0;
         Object.assign(newState, increaseMetWords.call(this, meetingsCount));
         newState.metWords[actualText] = meetingsCount + 1;
