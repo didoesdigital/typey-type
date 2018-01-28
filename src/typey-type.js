@@ -9,18 +9,23 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
     if (currentPhraseAttempts[i-1] !== undefined && currentPhraseAttempts[i+1] !== undefined) {
       if (isPeak(currentPhraseAttempts[i].length, currentPhraseAttempts[i-1].length, currentPhraseAttempts[i+1].length)) {
         attempts.push(currentPhraseAttempts[i]);
+        console.log("IS A PEAK");
       } else if (currentPhraseAttempts[i].length === currentPhraseAttempts[i-1].length || currentPhraseAttempts[i].length === currentPhraseAttempts[i+1].length) {
         attempts.push(currentPhraseAttempts[i]);
+        console.log("IS A PEAK");
       }
     } else if (currentPhraseAttempts[i+1] !== undefined) {
       if (currentPhraseAttempts[i].length > currentPhraseAttempts[i+1].length) {
         attempts.push(currentPhraseAttempts[i]);
+        console.log("IS A PEAK");
       } else if (currentPhraseAttempts[i].length === currentPhraseAttempts[i+1].length) {
         attempts.push(currentPhraseAttempts[i]);
+        console.log("IS A PEAK");
       }
     } else if (currentPhraseAttempts[i-1] !== undefined) {
       if (currentPhraseAttempts[i].length > currentPhraseAttempts[i-1].length) {
         attempts.push(currentPhraseAttempts[i]);
+        console.log("IS A PEAK");
       } else if (currentPhraseAttempts[i].length === currentPhraseAttempts[i-1].length) {
         attempts.push(currentPhraseAttempts[i]);
         console.log("IS A PEAK");
@@ -29,9 +34,11 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
   }
 
   if (attempts.length >= targetStrokeCount) {
+    console.log("More attempts than expected strokes");
     return {strokeAccuracy: false, attempts: attempts};
   }
 
+  console.log("Fewer attempts than expected strokes");
   return {strokeAccuracy: strokeAccuracy, attempts: attempts};
 }
 
@@ -195,6 +202,7 @@ function writePersonalPreferences(userSettings, metWords) {
 }
 
 function targetStrokeCount(currentOutline) {
+  console.log(currentOutline.stroke.split(/[/ ]/).length);
   return currentOutline.stroke.split(/[/ ]/).length || 1;
 }
 
@@ -209,12 +217,16 @@ function repetitionsRemaining(userSettings, presentedMaterial, currentPhraseID) 
 
 function shouldShowStroke(showStrokesInLesson, showStrokes, repetitionsRemaining, hideStrokesOnLastRepetition) {
   if (showStrokesInLesson) {
+    console.log("You clicked the hint linked");
     return true;
   } else if (showStrokes && repetitionsRemaining > 1) {
+    console.log("show strokes and more than 1 rep left");
     return true;
   } else if (showStrokes && repetitionsRemaining <= 1 && !(hideStrokesOnLastRepetition) ) {
+    console.log("show strokes and <=1 rep and not hide briefs on lest rep");
     return true;
   }
+    console.log("show stroke");
   return false;
 }
 
