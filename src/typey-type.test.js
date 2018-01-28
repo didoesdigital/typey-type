@@ -55,6 +55,12 @@ describe('stroke accuracy for current phrase', () => {
       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
     });
 
+    it('you wrote "verticax", "verticaw" for vertical', () => {
+      let currentPhraseAttempts = [" ", " v", " ve", " ver", " vert", " verti", " vertic", " vertica", " verticax", " verticaw", " vertical"];
+      let targetStrokeCount = 2;
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" verticax", " verticaw"]});
+    });
+
 //     it("you wrote were instead of we're", () => {
 //       let currentPhraseAttempts = [
 //       " ",
