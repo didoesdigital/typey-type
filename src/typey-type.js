@@ -9,8 +9,7 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
     if (currentPhraseAttempts[i-1] !== undefined && currentPhraseAttempts[i+1] !== undefined) {
       if (isPeak(currentPhraseAttempts[i].length, currentPhraseAttempts[i-1].length, currentPhraseAttempts[i+1].length)) {
         attempts.push(currentPhraseAttempts[i]);
-      }
-      if (currentPhraseAttempts[i].length === currentPhraseAttempts[i-1].length || currentPhraseAttempts[i].length === currentPhraseAttempts[i+1].length) {
+      } else if (currentPhraseAttempts[i].length === currentPhraseAttempts[i-1].length || currentPhraseAttempts[i].length === currentPhraseAttempts[i+1].length) {
         attempts.push(currentPhraseAttempts[i]);
       }
     } else if (currentPhraseAttempts[i+1] !== undefined) {
