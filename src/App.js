@@ -542,9 +542,10 @@ class App extends Component {
       newState.currentPhraseMeetingSuccess--;
     }
 
-    let teft = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
-    console.log(teft.strokeAccuracy);
-    console.log(teft.attempts);
+    // let testStrokeAccuracy = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
+    // console.log(testStrokeAccuracy.strokeAccuracy);
+    // console.log(testStrokeAccuracy.attempts);
+
     if (numberOfUnmatchedChars === 0) {
       let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
       let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
@@ -552,30 +553,27 @@ class App extends Component {
       newState.currentPhraseAttempts = []; // reset for next word
       newState.currentLessonStrokes = this.state.currentLessonStrokes; // [{word: "cat", attempts: ["cut"], stroke: "KAT"}, {word: "sciences", attempts ["sign", "ss"], stroke: "SAOEUPB/EPBC/-S"]
       if (!accurateStroke) {
-        newState.currentLessonStrokes.push({word: this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, attempts: attempts, stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke});
+        newState.currentLessonStrokes.push({
+          word: this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase,
+          attempts: attempts,
+          stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke
+        });
       }
-      // console.log(newState.currentLessonStrokes);
-
+      // can these newState assignments be moved down below the scores assignments?
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
       newState.actualText = '';
       newState.showStrokesInLesson = false;
       newState.repetitionsRemaining = this.state.userSettings.repetitions;
       newState.currentPhraseID = this.state.currentPhraseID + 1;
 
-      // console.log(accurateStroke);
       if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
-        // console.log("should show stroke");
         newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1;
       }
-      // else if (this.state.currentPhraseMeetingSuccess === 0) {
       else if (!accurateStroke) {
-        // console.log("inacccurate stroke");
         newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1;
       }
-        // console.log("acccurate stroke");
       else {
         const meetingsCount = newState.metWords[actualText] || 0;
-        // console.log("meetingsCount: " + newState.metWords[actualText] || 0);
         Object.assign(newState, increaseMetWords.call(this, meetingsCount));
         newState.metWords[actualText] = meetingsCount + 1;
       }
@@ -583,8 +581,6 @@ class App extends Component {
       let target = targetStrokeCount(this.state.lesson.presentedMaterial[this.state.currentPhraseID + 1] || { phrase: '', stroke: 'TK-LS' });
       newState.currentPhraseMeetingSuccess = target;
       newState.targetStrokeCount = target;
-      // console.log("TARGET");
-      // console.log(newState.targetStrokeCount);
       this.state.lesson.newPresentedMaterial.visitNext();
 
       newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);

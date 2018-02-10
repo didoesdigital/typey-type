@@ -64,7 +64,6 @@ class Finished extends Component {
       // console.log("this.props.totalNumberOfRetainedWords" + this.props.totalNumberOfRetainedWords);
       // console.log("this.props.totalNumberOfHintedWords" + this.props.totalNumberOfHintedWords);
       // console.log("this.props.totalNumberOfMistypedWords" + this.props.totalNumberOfMistypedWords);
-// [" ", " s", " sc", " sci", " scie", " scien", " sciens", " scien", " sciene", " scienes", " sciene", " scien", " scienc", " science", " sciences"]
       let totalWords = this.props.totalNumberOfNewWordsMet + this.props.totalNumberOfLowExposuresSeen + this.props.totalNumberOfRetainedWords + this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords;
       // console.log("Total Words: " + totalWords);
       let accuracyPercent = (1 - ((this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords) / totalWords)) * 100;
