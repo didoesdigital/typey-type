@@ -120,6 +120,8 @@ class Finished extends Component {
       wpmCommentary = 'Faster than Morse code!';
     } else if (wpm > 20) {
       wpmCommentary = 'Faster than handwriting!';
+    } else {
+      wpmCommentary = 'Practice this lesson again';
     }
 
     let lessonSummary = (
