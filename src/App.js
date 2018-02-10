@@ -566,7 +566,6 @@ class App extends Component {
       newState.targetStrokeCount = target;
       this.state.lesson.newPresentedMaterial.visitNext();
 
-      // newState.repetitionsRemaining = this.state.userSettings.repetitions;
       newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
       newState.actualText = '';
