@@ -437,8 +437,6 @@ class App extends Component {
     newLesson.presentedMaterial = repeatedLesson;
     newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
-    // console.log(newLesson.presentedMaterial);
-    // console.log(newLesson.presentedMaterial[0]);
     let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
     this.setState({
