@@ -572,9 +572,8 @@ class App extends Component {
         // console.log("inacccurate stroke");
         newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1;
       }
-      // maybe this should be `else {`
-      else if (accurateStroke) {
         // console.log("acccurate stroke");
+      else {
         const meetingsCount = newState.metWords[actualText] || 0;
         // console.log("meetingsCount: " + newState.metWords[actualText] || 0);
         Object.assign(newState, increaseMetWords.call(this, meetingsCount));
