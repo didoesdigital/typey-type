@@ -36,7 +36,6 @@ class App extends Component {
       value: '',
       currentPhraseAttempts: [],
       currentPhraseID: 0,
-      currentPhraseMeetingSuccess: 1,
       currentLessonStrokes: [],
       actualText: ``,
       fullscreen: false,
@@ -443,7 +442,6 @@ class App extends Component {
       actualText: ``,
       currentPhraseAttempts: [],
       currentLessonStrokes: [],
-      currentPhraseMeetingSuccess: target,
       disableUserSettings: false,
       numberOfMatchedChars: 0,
       repetitionsRemaining: reps,
@@ -519,7 +517,6 @@ class App extends Component {
     // console.log(this.state.currentPhraseAttempts);
 
     var newState = {
-      currentPhraseMeetingSuccess: this.state.currentPhraseMeetingSuccess,
       currentPhraseAttempts: currentPhraseAttempts,
       numberOfMatchedChars: numberOfMatchedChars,
       totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
@@ -532,10 +529,6 @@ class App extends Component {
       metWords: this.state.metWords,
       userSettings: this.state.userSettings
     };
-
-    if (unmatchedActual.length > 0 && newState.currentPhraseMeetingSuccess > 0) {
-      newState.currentPhraseMeetingSuccess--;
-    }
 
     // let testStrokeAccuracy = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
     // console.log(testStrokeAccuracy.strokeAccuracy);
@@ -555,11 +548,6 @@ class App extends Component {
         });
       }
       // can these newState assignments be moved down below the scores assignments?
-      newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
-      newState.actualText = '';
-      newState.showStrokesInLesson = false;
-      newState.repetitionsRemaining = this.state.userSettings.repetitions;
-      newState.currentPhraseID = this.state.currentPhraseID + 1;
 
       if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
         newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1;
@@ -573,12 +561,17 @@ class App extends Component {
         newState.metWords[actualText] = meetingsCount + 1;
       }
 
-      let target = targetStrokeCount(this.state.lesson.presentedMaterial[this.state.currentPhraseID + 1] || { phrase: '', stroke: 'TK-LS' });
-      newState.currentPhraseMeetingSuccess = target;
+      let nextPhraseID = this.state.currentPhraseID + 1;
+      let target = targetStrokeCount(this.state.lesson.presentedMaterial[nextPhraseID] || { phrase: '', stroke: 'TK-LS' });
       newState.targetStrokeCount = target;
       this.state.lesson.newPresentedMaterial.visitNext();
 
+      // newState.repetitionsRemaining = this.state.userSettings.repetitions;
       newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
+      newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
+      newState.actualText = '';
+      newState.showStrokesInLesson = false;
+      newState.currentPhraseID = nextPhraseID;
 
     }
 
