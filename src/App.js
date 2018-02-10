@@ -439,7 +439,7 @@ class App extends Component {
 
     // console.log(newLesson.presentedMaterial);
     // console.log(newLesson.presentedMaterial[0]);
-    let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: '' });
+    let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
     this.setState({
       actualText: ``,
