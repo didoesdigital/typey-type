@@ -4,7 +4,7 @@
     <title>Input/Radio/Unchecked</title>
     <desc>Created with Sketch.</desc>
     <defs>
-        <circle id="path-1" cx="8" cy="8" r="8"></circle>
+        <circle id="input-radio-unchecked-path-1" cx="8" cy="8" r="8"></circle>
         <filter x="-9.4%" y="-9.4%" width="118.8%" height="118.8%" filterUnits="objectBoundingBox" id="filter-2">
             <feGaussianBlur stdDeviation="1" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
             <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
@@ -15,8 +15,8 @@
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Input/Radio/Unchecked">
             <g id="Oval">
-                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
-                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#input-radio-unchecked-path-1"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#input-radio-unchecked-path-1"></use>
                 <circle stroke="#CAC7CC" stroke-width="1" cx="8" cy="8" r="7.5"></circle>
             </g>
         </g>

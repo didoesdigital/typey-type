@@ -4,14 +4,14 @@
     <title>Icons/Domain specific</title>
     <desc>Created with Sketch.</desc>
     <defs>
-        <path d="M14,18 L14,19 L16,19 C16.5522847,19 17,19.4477153 17,20 L17,21 C17,21.5522847 16.5522847,22 16,22 L8,22 C7.44771525,22 7,21.5522847 7,21 L7,20 C7,19.4477153 7.44771525,19 8,19 L10,19 L10,18 L3,18 L3,4 L21,4 L21,18 L14,18 Z M5,6 L5,16 L19,16 L19,6 L5,6 Z" id="path-1"></path>
+        <path d="M14,18 L14,19 L16,19 C16.5522847,19 17,19.4477153 17,20 L17,21 C17,21.5522847 16.5522847,22 16,22 L8,22 C7.44771525,22 7,21.5522847 7,21 L7,20 C7,19.4477153 7.44771525,19 8,19 L10,19 L10,18 L3,18 L3,4 L21,4 L21,18 L14,18 Z M5,6 L5,16 L19,16 L19,6 L5,6 Z" id="domain-path-1"></path>
     </defs>
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Icons/Domain-specific">
             <mask id="mask-2" fill="white">
-                <use xlink:href="#path-1"></use>
+                <use xlink:href="#domain-path-1"></use>
             </mask>
-            <use id="Combined-Shape" fill="#FFFFFF" xlink:href="#path-1"></use>
+            <use id="Combined-Shape" fill="#FFFFFF" xlink:href="#domain-path-1"></use>
             <g id="Colors/light-primary" mask="url(#mask-2)" fill="#512F64">
                 <rect id="light-primary" x="0" y="0" width="24" height="24"></rect>
             </g>

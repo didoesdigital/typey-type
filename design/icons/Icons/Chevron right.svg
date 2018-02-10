@@ -9,9 +9,9 @@
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Icons/Chevron-right">
             <mask id="mask-2" fill="white">
-                <use xlink:href="#path-1"></use>
+                <use xlink:href="#chevron-right-path"></use>
             </mask>
-            <use id="Combined-Shape" fill="#FFFFFF" xlink:href="#path-1"></use>
+            <use id="Combined-Shape" fill="#FFFFFF" xlink:href="#chevron-right-path"></use>
             <g id="Colors/heavy-primary-tint-1" mask="url(#mask-2)" fill="#AD66D5">
                 <rect id="heavy-primary-tint-1" x="0" y="0" width="24" height="24"></rect>
             </g>
