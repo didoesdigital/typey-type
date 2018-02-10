@@ -440,9 +440,6 @@ class App extends Component {
     // console.log(newLesson.presentedMaterial);
     // console.log(newLesson.presentedMaterial[0]);
     let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: '' });
-    if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, reps, this.state.userSettings.hideStrokesOnLastRepetition)) {
-      target = 0;
-    }
 
     this.setState({
       actualText: ``,
