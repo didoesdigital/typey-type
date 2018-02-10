@@ -437,8 +437,8 @@ class App extends Component {
     newLesson.presentedMaterial = repeatedLesson;
     newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
-    console.log(newLesson.presentedMaterial);
-    console.log(newLesson.presentedMaterial[0]);
+    // console.log(newLesson.presentedMaterial);
+    // console.log(newLesson.presentedMaterial[0]);
     let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: '' });
     if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, reps, this.state.userSettings.hideStrokesOnLastRepetition)) {
       target = 0;
@@ -521,7 +521,7 @@ class App extends Component {
 
     let currentPhraseAttempts = this.state.currentPhraseAttempts;
     currentPhraseAttempts.push(actualText);
-    console.log(this.state.currentPhraseAttempts);
+    // console.log(this.state.currentPhraseAttempts);
 
     var newState = {
       currentPhraseMeetingSuccess: this.state.currentPhraseMeetingSuccess,
@@ -542,6 +542,9 @@ class App extends Component {
       newState.currentPhraseMeetingSuccess--;
     }
 
+    let teft = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
+    console.log(teft.strokeAccuracy);
+    console.log(teft.attempts);
     if (numberOfUnmatchedChars === 0) {
       let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
       let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
@@ -551,7 +554,7 @@ class App extends Component {
       if (!accurateStroke) {
         newState.currentLessonStrokes.push({word: this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, attempts: attempts, stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke});
       }
-      console.log(newState.currentLessonStrokes);
+      // console.log(newState.currentLessonStrokes);
 
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
       newState.actualText = '';
@@ -559,21 +562,21 @@ class App extends Component {
       newState.repetitionsRemaining = this.state.userSettings.repetitions;
       newState.currentPhraseID = this.state.currentPhraseID + 1;
 
-      console.log(accurateStroke);
+      // console.log(accurateStroke);
       if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
-        console.log("should show stroke");
+        // console.log("should show stroke");
         newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1;
       }
       // else if (this.state.currentPhraseMeetingSuccess === 0) {
       else if (!accurateStroke) {
-        console.log("inacccurate stroke");
+        // console.log("inacccurate stroke");
         newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1;
       }
       // maybe this should be `else {`
       else if (accurateStroke) {
-        console.log("acccurate stroke");
+        // console.log("acccurate stroke");
         const meetingsCount = newState.metWords[actualText] || 0;
-        console.log("meetingsCount: " + newState.metWords[actualText] || 0);
+        // console.log("meetingsCount: " + newState.metWords[actualText] || 0);
         Object.assign(newState, increaseMetWords.call(this, meetingsCount));
         newState.metWords[actualText] = meetingsCount + 1;
       }
@@ -581,8 +584,8 @@ class App extends Component {
       let target = targetStrokeCount(this.state.lesson.presentedMaterial[this.state.currentPhraseID + 1] || { phrase: '', stroke: 'TK-LS' });
       newState.currentPhraseMeetingSuccess = target;
       newState.targetStrokeCount = target;
-      console.log("TARGET");
-      console.log(newState.targetStrokeCount);
+      // console.log("TARGET");
+      // console.log(newState.targetStrokeCount);
       this.state.lesson.newPresentedMaterial.visitNext();
 
       newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
@@ -825,15 +828,15 @@ function increaseMetWords(meetingsCount) {
   let newState = {};
 
   if (meetingsCount === 0) {
-    console.log("meetingsCount = 0;");
+    // console.log("meetingsCount = 0;");
     newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + 1;
   }
   else if (meetingsCount >= 1 && meetingsCount <= 29) {
-    console.log("meetingsCount 1–29;");
+    // console.log("meetingsCount 1–29;");
     newState.totalNumberOfLowExposuresSeen = this.state.totalNumberOfLowExposuresSeen + 1;
   }
   else if (meetingsCount >= 30) {
-    console.log("meetingsCount&gt;30;");
+    // console.log("meetingsCount&gt;30;");
     newState.totalNumberOfRetainedWords = this.state.totalNumberOfRetainedWords + 1;
   }
   return newState;

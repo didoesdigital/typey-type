@@ -25,7 +25,7 @@ class Finished extends Component {
     let customMessage;
     let accuracy = '';
     let currentLessonStrokes = this.props.currentLessonStrokes;
-    console.log(currentLessonStrokes);
+    // console.log(currentLessonStrokes);
 
     let misstrokesSummary = '';
 
