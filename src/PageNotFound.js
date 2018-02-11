@@ -23,6 +23,7 @@ const PageNotFound = () => {
           <li><Link to="/">Home</Link>.</li>
           <li><Link to="/lessons">Lessons</Link>.</li>
           <li><Link to="/support">Help and about</Link>.</li>
+          <li><Link to="/contribute">Contribute to Typey&nbsp;type</Link>.</li>
         </ul>
       </main>
     </main>
