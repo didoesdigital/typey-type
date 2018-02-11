@@ -7,50 +7,47 @@ class CustomLessonSetup extends Component {
 
     return (
       <main id="main">
-        <div className="lesson-wrapper mw-1024 p3">
-          <div className="panel p2">
-            <div>
-              <h4 className="mb1 mt0">Starting a custom lesson</h4>
-              <div>
-                <p>To start a custom lesson, supply a list of words and their strokes. An easy way to create a lesson is to copy columns from a spreadsheet. See the <a className="" href="/typey-type/progress">community's lessons</a>.</p>
-                <ul className="text-small">
-                  <li>Each word must be on its own line.</li>
-                  <li>Each word must be separated from its stroke hint by a "Tab" character.</li>
-
-                  <li>The strokes are used to work out stroke accuracy.</li>
-                </ul>
-              </div>
+        <div className="subheader">
+          <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
+            <div className="flex mr1">
+              <header className="flex items-baseline">
+                <h2 id="about-typey-type-for-stenographers">Create a custom lesson</h2>
+              </header>
             </div>
           </div>
-          <div className="lesson-canvas panel p2 overflow-scroll">
-            <div className="mx-auto">
-              <div role="alert" aria-live="polite">
-                <div className="typed-text-container">
-                  <label htmlFor="your-material">Paste your material here:</label>
-                  <p className="input-text">
-                    <textarea
-                      id="your-material"
-                      className="input-textarea"
-                      autoComplete="off"
-                      autoCorrect="off"
-                      autoCapitalize="off"
-                      spellCheck="false"
-                      placeholder="consist	KAOFT
+        </div>
+        <div className="p3 mx-auto mw-1024">
+          <div className="mw-568">
+            <h4 className="mb1 mt0">Starting a custom lesson</h4>
+            <p>To start a custom lesson, supply a list of words and their strokes. An easy way to create a lesson is to copy columns from a spreadsheet.</p>
+            <p>See the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community's lessons (opens in new tab)</a>.</p>
+            <p className="text-small">Notes about custom lesson material:</p>
+            <ul className="text-small">
+              <li>Each word must be on its own line.</li>
+              <li>Each word must be separated from its stroke hint by a "Tab" character.</li>
+
+              <li>The strokes are used to work out stroke accuracy.</li>
+            </ul>
+            <label htmlFor="your-material">Paste your material here:</label>
+          </div>
+          <p className="mw-568">
+            <textarea
+              id="your-material"
+              className="input-textarea"
+              autoComplete="off"
+              autoCorrect="off"
+              autoCapitalize="off"
+              spellCheck="false"
+              placeholder="consist	KAOFT
 consist of	SKAOF
 consisted of	KAOFTD
 consistency	KAOPBS"
-                      rows="8"
-                      wrap="off"
-                      onChange={this.props.createCustomLesson}
-                      >
-                    </textarea>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="scores panel p2">
-          </div>
+              rows="8"
+              wrap="off"
+              onChange={this.props.createCustomLesson}
+              >
+            </textarea>
+          </p>
         </div>
       </main>
     )
