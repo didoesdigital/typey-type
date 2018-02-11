@@ -4,6 +4,7 @@ import Clipboard from 'clipboard';
 class Progress extends Component {
   componentDidMount() {
     new Clipboard('.js-clipboard-button');
+    this.mainHeading.focus();
   }
 
   restoreButtonOnClickFunction() {
@@ -21,7 +22,7 @@ class Progress extends Component {
             <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
               <div className="flex mr1">
                 <header className="flex items-baseline">
-                  <h2 id="Progress">Progress</h2>
+                  <h2 id="progress" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Progress</h2>
                 </header>
               </div>
             </div>
