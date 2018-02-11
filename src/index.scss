@@ -177,6 +177,52 @@ small, .text-small {
   line-height: 1.6;
 }
 
+// Cross-browser placeholder styling
+// Reference: https://stackoverflow.com/questions/2610497/change-an-html5-inputs-placeholder-color-with-css
+::-webkit-input-placeholder { // WebKit, Blink, Edge
+  color:   #949494;
+}
+:-moz-placeholder { // Mozilla Firefox 4 to 18
+  color:    #949494;
+  opacity:  1;
+}
+::-moz-placeholder { // Mozilla Firefox 19+
+  color:    #949494;
+  opacity:  1;
+}
+:-ms-input-placeholder { // Internet Explorer 10-11
+  color:    #949494;
+}
+::-ms-input-placeholder { // Microsoft Edge
+  color:    #949494;
+}
+::placeholder {
+  color:    #949494;
+}
+
+// Hide placeholder text on focus
+// Reference: https://coderwall.com/p/7rc0fa/hide-placeholder-text-on-focus
+textarea:focus::-webkit-input-placeholder,
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+}
+textarea:focus:-moz-placeholder,
+input:focus:-moz-placeholder { // FF 4-18
+  color: transparent;
+}
+textarea:focus::-moz-placeholder,
+input:focus::-moz-placeholder { // FF 19+
+  color: transparent;
+}
+textarea:focus:-ms-input-placeholder,
+input:focus:-ms-input-placeholder { // IE 10+
+  color: transparent;
+}
+textarea:focus::placeholder,
+input:focus::placeholder {
+  color: transparent;
+}
+
 // Utilities
 .visually-hidden {
   position: absolute !important;
@@ -496,10 +542,10 @@ $textarea-padding-x: 8px;
   line-height: 1.5;
   padding: $textarea-padding-y $textarea-padding-x;
   overflow: hidden;
-  text-decoration: underline;
 }
 .typed-text-input-textarea {
   margin-left: calc(50% - #{$left-offset-for-zipper});
+  text-decoration: underline;
   text-underline-position: under;
   width: calc(2 * #{$left-offset-for-zipper});
 }

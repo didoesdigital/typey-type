@@ -143,6 +143,46 @@ small, .text-small {
   font-size: 12.8px;
   line-height: 1.6; }
 
+::-webkit-input-placeholder {
+  color: #949494; }
+
+:-moz-placeholder {
+  color: #949494;
+  opacity: 1; }
+
+::-moz-placeholder {
+  color: #949494;
+  opacity: 1; }
+
+:-ms-input-placeholder {
+  color: #949494; }
+
+::-ms-input-placeholder {
+  color: #949494; }
+
+::placeholder {
+  color: #949494; }
+
+textarea:focus::-webkit-input-placeholder,
+input:focus::-webkit-input-placeholder {
+  color: transparent; }
+
+textarea:focus:-moz-placeholder,
+input:focus:-moz-placeholder {
+  color: transparent; }
+
+textarea:focus::-moz-placeholder,
+input:focus::-moz-placeholder {
+  color: transparent; }
+
+textarea:focus:-ms-input-placeholder,
+input:focus:-ms-input-placeholder {
+  color: transparent; }
+
+textarea:focus::placeholder,
+input:focus::placeholder {
+  color: transparent; }
+
 .visually-hidden {
   position: absolute !important;
   height: 1px;
@@ -545,11 +585,11 @@ small, .text-small {
   font-size: 1rem;
   line-height: 1.5;
   padding: 4px 8px;
-  overflow: hidden;
-  text-decoration: underline; }
+  overflow: hidden; }
 
 .typed-text-input-textarea {
   margin-left: calc(50% - 10em);
+  text-decoration: underline;
   text-underline-position: under;
   width: calc(2 * 10em); }
 
