@@ -666,6 +666,7 @@ class App extends Component {
                     changeUserSetting={this.changeUserSetting.bind(this)}
                     chooseStudy={this.chooseStudy.bind(this)}
                     completedPhrases={completedMaterial}
+                    currentLessonStrokes={this.state.currentLessonStrokes}
                     currentPhraseID={this.state.currentPhraseID}
                     currentPhrase={presentedMaterialCurrentItem.phrase}
                     currentStroke={presentedMaterialCurrentItem.stroke}
