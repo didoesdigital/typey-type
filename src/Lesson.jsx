@@ -16,8 +16,8 @@ class Lesson extends Component {
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.location.pathname.includes('custom')) {
-      // do nothing
+    if (this.props.location.pathname.includes('custom') && this.props.lesson.title !== "Custom") {
+      this.props.setCustomLesson();
     } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
     }
