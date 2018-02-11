@@ -38,10 +38,9 @@ class CustomLessonSetup extends Component {
               autoCorrect="off"
               autoCapitalize="off"
               spellCheck="false"
-              placeholder="consist	KAOFT
-consist of	SKAOF
-consisted of	KAOFTD
-consistency	KAOPBS"
+              placeholder="example	KP-PL
+consisting of	KAOFG
+examples.	KP-PLS TP-PL"
               rows="8"
               wrap="off"
               onChange={this.props.createCustomLesson}
