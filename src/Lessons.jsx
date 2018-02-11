@@ -42,6 +42,14 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
             {...props}
           />
           } />
+        <Route exact={true} path={`${match.url}/custom`} render={ (props) =>
+          <Lesson lessonIndex={lessonIndex}
+            handleLesson={handleLesson}
+            lesson={lesson}
+            {...lessonProps}
+            {...props}
+          />
+          } />
         <Route exact={true} path={match.url} render={() => (
           <main id="main">
             <div className="subheader">

@@ -1,6 +1,5 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-import { matchSplitText, loadPersonalPreferences, strokeAccuracy, writePersonalPreferences, repetitionsRemaining } from './typey-type';
+import { parseCustomMaterial, matchSplitText, loadPersonalPreferences, strokeAccuracy, writePersonalPreferences, repetitionsRemaining } from './typey-type';
+import Zipper from './zipper';
 
 describe('stroke accuracy for current phrase', () => {
   describe('should return false for real failed meetings', () => {
@@ -100,6 +99,60 @@ describe('stroke accuracy for current phrase', () => {
       let currentPhraseAttempts = [" ", " s", " si", " sig", " sign", " sig", " si", " s", " sc", " sci", " scie", " scien", " scienc", " science", " sciences"];
       let targetStrokeCount = 3;
       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: true, attempts: [" sign"]});
+    });
+  });
+});
+
+describe('parseCustomMaterial', () => {
+  let emptyCustomLesson = {
+    sourceMaterial: [],
+    presentedMaterial: [{phrase: 'The', stroke: '-T'}],
+    settings: { ignoredChars: '' },
+    title: 'Custom',
+    subtitle: '',
+    newPresentedMaterial: new Zipper([{phrase: 'The', stroke: '-T'}]),
+    path: '/lessons/custom'
+  }
+  describe('has no content', () => {
+    it('should return empty source material', () => {
+      let customMaterial = "";
+      expect(parseCustomMaterial(customMaterial)).toEqual(emptyCustomLesson);
+    });
+  });
+  describe('has no tabs', () => {
+    it('should return empty source material', () => {
+      let customMaterial = "test TEFT";
+      expect(parseCustomMaterial(customMaterial)).toEqual(emptyCustomLesson);
+    });
+  });
+  describe('has a line with no tabs', () => {
+    it('should return a lesson without that line', () => {
+      let customMaterial = `testWithSpace TEFT
+testWithTab	TEFT
+`;
+      expect(parseCustomMaterial(customMaterial)).toEqual({
+        sourceMaterial: [{phrase: 'testWithTab', stroke: 'TEFT'}],
+        presentedMaterial: [{phrase: 'testWithTab', stroke: 'TEFT'}],
+        settings: { ignoredChars: '' },
+        title: 'Custom',
+        subtitle: '',
+        newPresentedMaterial: new Zipper([{phrase: 'testWithTab', stroke: 'TEFT'}]),
+        path: '/lessons/custom'
+      });
+    });
+  });
+  describe('has a line with multiple tabs', () => {
+    it('should return a lesson with the first stroke provided', () => {
+      let customMaterial = `testWithTab	TEFT	TEFTD`;
+      expect(parseCustomMaterial(customMaterial)).toEqual({
+        sourceMaterial: [{phrase: 'testWithTab', stroke: 'TEFT'}],
+        presentedMaterial: [{phrase: 'testWithTab', stroke: 'TEFT'}],
+        settings: { ignoredChars: '' },
+        title: 'Custom',
+        subtitle: '',
+        newPresentedMaterial: new Zipper([{phrase: 'testWithTab', stroke: 'TEFT'}]),
+        path: '/lessons/custom'
+      });
     });
   });
 });

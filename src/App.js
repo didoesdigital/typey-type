@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { randomise } from './utils';
 import {
+  parseCustomMaterial,
   fetchLessonIndex,
   getLesson,
   loadPersonalPreferences,
@@ -472,6 +473,37 @@ class App extends Component {
     });
   }
 
+  setCustomLesson() {
+    let lesson = {
+      sourceMaterial: [],
+      presentedMaterial: [{phrase: 'The', stroke: '-T'}],
+      settings: { ignoredChars: '' },
+      title: 'Custom',
+      subtitle: '',
+      newPresentedMaterial: new Zipper([{phrase: 'The', stroke: '-T'}]),
+      path: '/lessons/custom'
+    }
+    this.setState({
+      lesson: lesson,
+      currentPhraseID: 0
+    }, () => {
+      this.setupLesson();
+    });
+  }
+
+  createCustomLesson(event) {
+    if (event && event.target && event.target.value && event.target.value.length > 0) {
+      let lesson = parseCustomMaterial(event.target.value);
+      this.setState({
+        lesson: lesson,
+        currentPhraseID: 0
+      }, () => {
+        this.setupLesson();
+      });
+    }
+    return event;
+  }
+
   toggleHideOtherSettings() {
     let newState = !this.state.hideOtherSettings;
     this.setState({
@@ -675,6 +707,7 @@ class App extends Component {
                     handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
                     hideOtherSettings={this.state.hideOtherSettings}
                     repetitionsRemaining={this.state.repetitionsRemaining}
+                    setCustomLesson={this.setCustomLesson.bind(this)}
                     settings={this.state.lesson.settings}
                     showStrokesInLesson={this.state.showStrokesInLesson}
                     targetStrokeCount={this.state.targetStrokeCount}
@@ -760,6 +793,7 @@ class App extends Component {
                     changeUserSetting={this.changeUserSetting.bind(this)}
                     chooseStudy={this.chooseStudy.bind(this)}
                     completedPhrases={completedMaterial}
+                    createCustomLesson={this.createCustomLesson.bind(this)}
                     currentLessonStrokes={this.state.currentLessonStrokes}
                     currentPhraseID={this.state.currentPhraseID}
                     currentPhrase={presentedMaterialCurrentItem.phrase}
@@ -769,6 +803,7 @@ class App extends Component {
                     handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
                     hideOtherSettings={this.state.hideOtherSettings}
                     repetitionsRemaining={this.state.repetitionsRemaining}
+                    setCustomLesson={this.setCustomLesson.bind(this)}
                     settings={this.state.lesson.settings}
                     showStrokesInLesson={this.state.showStrokesInLesson}
                     targetStrokeCount={this.state.targetStrokeCount}

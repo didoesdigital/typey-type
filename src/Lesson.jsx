@@ -4,18 +4,31 @@ import TypedText from './TypedText';
 import Scores from './Scores';
 import UserSettings from './UserSettings';
 import Finished from './Finished';
+import CustomLessonSetup from './CustomLessonSetup';
 import { shouldShowStroke } from './typey-type';
 
 class Lesson extends Component {
   componentDidMount() {
-    if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
+    if (this.props.location.pathname.includes('custom')) {
+      this.props.setCustomLesson();
+    } else if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/lessons'))) {
+    if (this.props.location.pathname.includes('custom')) {
+      // do nothing
+    } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
     }
+  }
+
+  isCustom() {
+    return (this.props.location.pathname === '/lessons/custom');
+  }
+
+  isSetup() {
+    return (this.props.lesson.sourceMaterial.length !== 0);
   }
 
   isFinished() {
@@ -87,7 +100,13 @@ class Lesson extends Component {
     }
 
     if (this.props.lesson) {
-      if (this.isFinished()) {
+      if (this.isCustom() && !this.isSetup()) {
+        return (
+          <CustomLessonSetup
+            createCustomLesson={this.props.createCustomLesson}
+          />
+        )
+      } else if (this.isFinished()) {
         return (
           <main id="main">
             <div className="subheader">

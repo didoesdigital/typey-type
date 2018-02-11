@@ -116,11 +116,54 @@ const SETTINGS_NAME_MAP = {
   locales: 'locales'
 }
 
+function parseCustomMaterial(lessonTextAndStrokes) {
+  let emptyCustomLesson = {
+    sourceMaterial: [],
+    presentedMaterial: [{phrase: 'The', stroke: '-T'}],
+    settings: { ignoredChars: '' },
+    title: 'Custom',
+    subtitle: '',
+    newPresentedMaterial: new Zipper([{phrase: 'The', stroke: '-T'}]),
+    path: '/lessons/custom'
+  }
+  if (lessonTextAndStrokes.length === 0 || !lessonTextAndStrokes.includes("	")) {
+    return emptyCustomLesson;
+  }
+  let lessonTitle = 'Custom';
+  let lessonSubtitle = '';
+  let lines = lessonTextAndStrokes.split("\n");
+  lines = lines.filter(phrase => phrase !== '');
+  lines = lines.filter(phrase => phrase.includes("	"));
+  if (lines.length === 0) {
+    return emptyCustomLesson;
+  }
+  let sourceMaterial = [];
+  let settings = {ignoredChars: ''};
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    let phraseAndStroke = line.split("	");
+    let phrase = phraseAndStroke[0];
+    let stroke = phraseAndStroke[1];
+    sourceMaterial.push( {phrase: phrase, stroke: stroke} );
+  }
+
+  return {
+    sourceMaterial: sourceMaterial,
+    presentedMaterial: sourceMaterial,
+    settings: settings,
+    title: lessonTitle,
+    subtitle: lessonSubtitle,
+    newPresentedMaterial: new Zipper(sourceMaterial),
+    path: '/lessons/custom'
+  }
+}
+
 function parseLesson(lessonText, path) {
   var lines = lessonText.split("\n");
   var lessonTitle = lines[0];
   var lessonSubtitle = lines[1];
-  lines.filter(phrase => phrase !== '');
+  lines = lines.filter(phrase => phrase !== '');
   var sourceMaterial = [];
   var settings = {ignoredChars: ''};
 
@@ -255,6 +298,7 @@ function fetchLessonIndex() {
 }
 
 export {
+  parseCustomMaterial,
   fetchLessonIndex,
   getLesson,
   isFirstVisit,
