@@ -494,10 +494,12 @@ $textarea-padding-x: 8px;
   display: block;
   font-size: 1rem;
   line-height: 1.5;
-  margin-left: calc(50% - #{$left-offset-for-zipper});
   padding: $textarea-padding-y $textarea-padding-x;
   overflow: hidden;
   text-decoration: underline;
+}
+.typed-text-input-textarea {
+  margin-left: calc(50% - #{$left-offset-for-zipper});
   text-underline-position: under;
   width: calc(2 * #{$left-offset-for-zipper});
 }

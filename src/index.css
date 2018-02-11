@@ -544,10 +544,12 @@ small, .text-small {
   display: block;
   font-size: 1rem;
   line-height: 1.5;
-  margin-left: calc(50% - 10em);
   padding: 4px 8px;
   overflow: hidden;
-  text-decoration: underline;
+  text-decoration: underline; }
+
+.typed-text-input-textarea {
+  margin-left: calc(50% - 10em);
   text-underline-position: under;
   width: calc(2 * 10em); }
 
