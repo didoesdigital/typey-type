@@ -20,10 +20,11 @@ const PageNotFound = () => {
         <h1>That page doesn't exist</h1>
         <p>Try one of these instead:</p>
         <ul>
-          <li><Link to="/">Home</Link>.</li>
-          <li><Link to="/lessons">Lessons</Link>.</li>
-          <li><Link to="/support">Help and about</Link>.</li>
-          <li><Link to="/contribute">Contribute to Typey&nbsp;type</Link>.</li>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/lessons">Lessons</Link></li>
+          <li><Link to="/support">Help and about</Link></li>
+          <li><Link to="/contribute">Contribute to Typey&nbsp;type</Link></li>
+          <li><Link to="/progress">Your progress</Link></li>
         </ul>
       </main>
     </main>
