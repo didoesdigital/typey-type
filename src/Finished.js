@@ -38,7 +38,7 @@ class Finished extends Component {
         });
         return(
           <li key={ i } className="unstyled-list-item mr3 dib">
-            <h4 className="mt0"><span className="visually-hidden">Material to write:</span><span className="matched steno-material px1 nowrap">{phrase.word}</span></h4>
+            <h4 className="mt0"><span className="visually-hidden">Material to write: </span><span className="matched steno-material px1 nowrap">{phrase.word}</span></h4>
             <p><span className="visually-hidden">You wrote:</span></p>
             <ol className="unstyled-list mb0 misstroke-list">
               {strokeAttempts}
