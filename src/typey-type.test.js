@@ -1,6 +1,108 @@
 // import React from 'react';
 // import ReactDOM from 'react-dom';
-import { matchSplitText, loadPersonalPreferences, writePersonalPreferences, repetitionsRemaining } from './typey-type';
+import { matchSplitText, loadPersonalPreferences, strokeAccuracy, writePersonalPreferences, repetitionsRemaining } from './typey-type';
+
+describe('stroke accuracy for current phrase', () => {
+  describe('should return false for real failed meetings', () => {
+    it('you wrote cut instead of cat and Plover backtracked to " c"', () => {
+      let currentPhraseAttempts = [
+        " ",
+        " c",
+        " cu",
+        " cut",
+        " cu",
+        " c",
+        " ca",
+        " cat"
+      ];
+      let targetStrokeCount = 1;
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
+    });
+
+    it('you wrote cut instead of cat and Plover backtracked to " "', () => {
+      let currentPhraseAttempts = [
+        " ",
+        " c",
+        " cu",
+        " cut",
+        " cu",
+        " c",
+        " ",
+        " c",
+        " ca",
+        " cat"
+      ];
+      let targetStrokeCount = 1;
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
+    });
+
+    it('you wrote cut instead of cat and Plover backtracked to ""', () => {
+      let currentPhraseAttempts = [
+        " ",
+        " c",
+        " cu",
+        " cut",
+        " cu",
+        " c",
+        " ",
+        "",
+        " ",
+        " c",
+        " ca",
+        " cat"
+      ];
+      let targetStrokeCount = 1;
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
+    });
+
+    it('you wrote sign, ss, and ss for sciences', () => {
+      let currentPhraseAttempts = [" ", " s", " si", " sig", " sign", " sig", " si", " s", " ss", " s", " ss", " s", " sc", " sci", " scie", " scien", " scienc", " science", " sciences"];
+      let targetStrokeCount = 3;
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" sign", " ss", " ss"]});
+    });
+
+    it('you wrote "verticax", "verticaw" for vertical', () => {
+      let currentPhraseAttempts = [" ", " v", " ve", " ver", " vert", " verti", " vertic", " vertica", " verticax", " verticaw", " vertical"];
+      let targetStrokeCount = 2;
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" verticax", " verticaw"]});
+    });
+
+//     it("you wrote were instead of we're", () => {
+//       let currentPhraseAttempts = [
+//       " ",
+//         " w",
+//         " we",
+//         " wer",
+//         " were",
+//         " wer",
+//         " we",
+//         " w",
+//         " ",
+//         " w",
+//         " we",
+//         " we'",
+//         " we'r",
+//         " we're"
+//       ];
+//       let targetStrokeCount = 1;
+//       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(false);
+//     });
+
+//     it("you wrote we're instead of were", () => {
+//       let currentPhraseAttempts = [" ", " w", " we", " we'", " we'r", " we're", " we'r", " we'", " we", " w", " ", " w", " we", " wer", " were"];
+//       let targetStrokeCount = 1;
+//       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(false);
+//     });
+  });
+
+  describe('should return true for real successful meetings', () => {
+    it('should return true for real successful meetings', () => {
+      let currentPhraseAttempts = [" ", " s", " si", " sig", " sign", " sig", " si", " s", " sc", " sci", " scie", " scien", " scienc", " science", " sciences"];
+      let targetStrokeCount = 3;
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: true, attempts: [" sign"]});
+    });
+  });
+});
 
 describe('loadPersonalPreferences', () => {
   describe('without localStorage', () => {

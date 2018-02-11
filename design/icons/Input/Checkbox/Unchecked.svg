@@ -4,7 +4,7 @@
     <title>Input/Checkbox/Unchecked</title>
     <desc>Created with Sketch.</desc>
     <defs>
-        <rect id="path-1" x="0" y="0" width="16" height="16" rx="2"></rect>
+        <rect id="input-checkbox-unchecked-path-1" x="0" y="0" width="16" height="16" rx="2"></rect>
         <filter x="-12.5%" y="-12.5%" width="125.0%" height="125.0%" filterUnits="objectBoundingBox" id="filter-2">
             <feGaussianBlur stdDeviation="1" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur>
             <feOffset dx="0" dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset>
@@ -15,9 +15,9 @@
     <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Input/Checkbox/Unchecked">
             <g id="Checkbox">
-                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
-                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
-                <use stroke="#CAC7CC" stroke-width="1" xlink:href="#path-1"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#input-checkbox-unchecked-path-1"></use>
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#input-checkbox-unchecked-path-1"></use>
+                <use stroke="#CAC7CC" stroke-width="1" xlink:href="#input-checkbox-unchecked-path-1"></use>
             </g>
         </g>
     </g>

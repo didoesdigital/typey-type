@@ -111,6 +111,7 @@ class Lesson extends Component {
               changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
               changeUserSetting={this.props.changeUserSetting}
               chooseStudy={this.props.chooseStudy}
+              currentLessonStrokes={this.props.currentLessonStrokes}
               disableUserSettings={this.props.disableUserSettings}
               handleLimitWordsChange={this.props.handleLimitWordsChange}
               handleRepetitionsChange={this.props.handleRepetitionsChange}
@@ -122,6 +123,7 @@ class Lesson extends Component {
               settings={this.props.lesson.settings}
               timer={this.props.timer}
               toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+              charsPerWord={this.props.charsPerWord}
               totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
               totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}

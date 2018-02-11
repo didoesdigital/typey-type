@@ -31,6 +31,12 @@ function sortLessons(a : Lesson, b : Lesson, value : string) {
   return aLower < bLower ? -1 : 1
 }
 
+function isPeak(currentItemLength : number, previousItemLength : number, nextItemLength : number) {
+  let isPeak = false;
+  if ((currentItemLength > previousItemLength) && (currentItemLength > nextItemLength)) { isPeak = true };
+  return isPeak;
+}
+
 function randomise(array : Array<PresentedMaterial>) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -45,4 +51,4 @@ function randomise(array : Array<PresentedMaterial>) {
   return array;
 }
 
-export { matchLessonToTerm, sortLessons, randomise };
+export { matchLessonToTerm, sortLessons, isPeak, randomise};

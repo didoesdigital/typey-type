@@ -8,6 +8,7 @@ import {
   parseLesson,
   repetitionsRemaining,
   shouldShowStroke,
+  strokeAccuracy,
   targetStrokeCount,
   writePersonalPreferences
 } from './typey-type';
@@ -33,8 +34,9 @@ class App extends Component {
     this.charsPerWord = 5;
     this.state = {
       value: '',
+      currentPhraseAttempts: [],
       currentPhraseID: 0,
-      currentPhraseMeetingSuccess: 1,
+      currentLessonStrokes: [],
       actualText: ``,
       fullscreen: false,
       hideOtherSettings: true,
@@ -196,6 +198,7 @@ class App extends Component {
     this.setState({
       actualText: '',
       currentPhraseID: this.state.lesson.presentedMaterial.length,
+      currentPhraseAttempts: [],
       disableUserSettings: false,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0
@@ -433,14 +436,12 @@ class App extends Component {
     newLesson.presentedMaterial = repeatedLesson;
     newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
-    let target = targetStrokeCount(newLesson.presentedMaterial[this.state.currentPhraseID] || { phrase: '', stroke: '' });
-    if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
-      target = 0;
-    }
+    let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
     this.setState({
       actualText: ``,
-      currentPhraseMeetingSuccess: target,
+      currentPhraseAttempts: [],
+      currentLessonStrokes: [],
       disableUserSettings: false,
       numberOfMatchedChars: 0,
       repetitionsRemaining: reps,
@@ -511,8 +512,12 @@ class App extends Component {
 
     let [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
+    let currentPhraseAttempts = this.state.currentPhraseAttempts;
+    currentPhraseAttempts.push(actualText);
+    // console.log(this.state.currentPhraseAttempts);
+
     var newState = {
-      currentPhraseMeetingSuccess: this.state.currentPhraseMeetingSuccess,
+      currentPhraseAttempts: currentPhraseAttempts,
       numberOfMatchedChars: numberOfMatchedChars,
       totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       totalNumberOfNewWordsMet: this.state.totalNumberOfNewWordsMet,
@@ -525,35 +530,47 @@ class App extends Component {
       userSettings: this.state.userSettings
     };
 
-    if (unmatchedActual.length > 0 && newState.currentPhraseMeetingSuccess > 0) {
-      newState.currentPhraseMeetingSuccess--;
-    }
+    // let testStrokeAccuracy = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
+    // console.log(testStrokeAccuracy.strokeAccuracy);
+    // console.log(testStrokeAccuracy.attempts);
 
     if (numberOfUnmatchedChars === 0) {
-      newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
-      newState.actualText = '';
-      newState.showStrokesInLesson = false;
-      newState.repetitionsRemaining = this.state.userSettings.repetitions;
-      newState.currentPhraseID = this.state.currentPhraseID + 1;
+      let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
+      let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
+      let attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
+      newState.currentPhraseAttempts = []; // reset for next word
+      newState.currentLessonStrokes = this.state.currentLessonStrokes; // [{word: "cat", attempts: ["cut"], stroke: "KAT"}, {word: "sciences", attempts ["sign", "ss"], stroke: "SAOEUPB/EPBC/-S"]
+      if (!accurateStroke) {
+        newState.currentLessonStrokes.push({
+          word: this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase,
+          attempts: attempts,
+          stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke
+        });
+      }
+      // can these newState assignments be moved down below the scores assignments?
 
       if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
         newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1;
       }
-      else if (this.state.currentPhraseMeetingSuccess === 0) {
+      else if (!accurateStroke) {
         newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1;
       }
-      else if (this.state.currentPhraseMeetingSuccess > 0) {
+      else {
         const meetingsCount = newState.metWords[actualText] || 0;
         Object.assign(newState, increaseMetWords.call(this, meetingsCount));
         newState.metWords[actualText] = meetingsCount + 1;
       }
 
-      let target = targetStrokeCount(this.state.lesson.presentedMaterial[this.state.currentPhraseID + 1] || { phrase: '', stroke: '' });
-      newState.currentPhraseMeetingSuccess = target;
+      let nextPhraseID = this.state.currentPhraseID + 1;
+      let target = targetStrokeCount(this.state.lesson.presentedMaterial[nextPhraseID] || { phrase: '', stroke: 'TK-LS' });
       newState.targetStrokeCount = target;
       this.state.lesson.newPresentedMaterial.visitNext();
 
       newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
+      newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
+      newState.actualText = '';
+      newState.showStrokesInLesson = false;
+      newState.currentPhraseID = nextPhraseID;
 
     }
 
@@ -662,6 +679,7 @@ class App extends Component {
                     targetStrokeCount={this.state.targetStrokeCount}
                     timer={this.state.timer}
                     toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
+                    charsPerWord={this.charsPerWord}
                     totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
                     totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
                     totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
@@ -741,6 +759,7 @@ class App extends Component {
                     changeUserSetting={this.changeUserSetting.bind(this)}
                     chooseStudy={this.chooseStudy.bind(this)}
                     completedPhrases={completedMaterial}
+                    currentLessonStrokes={this.state.currentLessonStrokes}
                     currentPhraseID={this.state.currentPhraseID}
                     currentPhrase={presentedMaterialCurrentItem.phrase}
                     currentStroke={presentedMaterialCurrentItem.stroke}
@@ -754,6 +773,7 @@ class App extends Component {
                     targetStrokeCount={this.state.targetStrokeCount}
                     timer={this.state.timer}
                     toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
+                    charsPerWord={this.charsPerWord}
                     totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
                     totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
                     totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
@@ -788,21 +808,18 @@ class App extends Component {
 
 function increaseMetWords(meetingsCount) {
   let newState = {};
-  let currentPhraseMeetingSuccess;
-  if (this.state.currentPhraseMeetingSuccess > 0) {
-    currentPhraseMeetingSuccess = 1;
-  } else {
-    currentPhraseMeetingSuccess = 0;
-  }
 
   if (meetingsCount === 0) {
-    newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + currentPhraseMeetingSuccess;
+    // console.log("meetingsCount = 0;");
+    newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + 1;
   }
   else if (meetingsCount >= 1 && meetingsCount <= 29) {
-    newState.totalNumberOfLowExposuresSeen = this.state.totalNumberOfLowExposuresSeen + currentPhraseMeetingSuccess;
+    // console.log("meetingsCount 1–29;");
+    newState.totalNumberOfLowExposuresSeen = this.state.totalNumberOfLowExposuresSeen + 1;
   }
   else if (meetingsCount >= 30) {
-    newState.totalNumberOfRetainedWords = this.state.totalNumberOfRetainedWords + currentPhraseMeetingSuccess;
+    // console.log("meetingsCount&gt;30;");
+    newState.totalNumberOfRetainedWords = this.state.totalNumberOfRetainedWords + 1;
   }
   return newState;
 }
