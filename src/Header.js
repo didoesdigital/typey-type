@@ -7,6 +7,9 @@ import './App.css';
 
 class Header extends Component {
 
+  componentDidMount() {
+    this.mainHeading.focus();
+  }
 
   render() {
     let nextLesson = this.props.value || 'No lesson selected. See all lessons.';
@@ -24,7 +27,7 @@ class Header extends Component {
             <nav>
               <div className="site-heading-banner">
                 <Link to="/" className="heading-link dib" aria-label="Typey type">
-                  <h1>
+                  <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">
                     <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" className="mr1 svg-icon-wrapper svg-baseline" />
                     Typey&nbsp;type
                   </h1>

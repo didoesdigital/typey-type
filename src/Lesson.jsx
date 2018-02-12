@@ -14,6 +14,7 @@ class Lesson extends Component {
     } else if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
     }
+    this.mainHeading.focus();
   }
   componentDidUpdate(prevProps, prevState) {
     if (this.props.location.pathname.startsWith('/lessons/custom') && this.props.lesson.title !== "Custom") {
@@ -114,7 +115,7 @@ class Lesson extends Component {
                 <div className="flex mr1">
                   <header className="flex items-baseline">
                     <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                      <h2>{this.props.lessonTitle}{lessonSubTitle}</h2>
+                      <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
                     </a>
                   </header>
                 </div>
@@ -162,7 +163,7 @@ class Lesson extends Component {
                 <div className="flex mr1">
                   <header className="flex items-baseline">
                     <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                      <h2>{this.props.lessonTitle}{lessonSubTitle}</h2>
+                      <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
                     </a>
                   </header>
                 </div>
@@ -238,7 +239,7 @@ class Lesson extends Component {
         )
       }
     } else {
-      return '<div><h2>That lesson is missing.</h2></div>';
+      return <div><h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">That lesson is missing.</h2></div>;
     }
   }
 }

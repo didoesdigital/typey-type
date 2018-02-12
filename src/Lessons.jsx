@@ -1,20 +1,9 @@
 import React from 'react';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Lesson from './Lesson';
+import LessonsIndex from './LessonsIndex';
 
 const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => {
-  const linkList = lessonIndex.map( (lesson) => {
-    let lessonsubtitle = '';
-    if (lesson.subtitle.length > 0) {
-      lessonsubtitle = ': '+lesson.subtitle;
-    }
-    return(
-      <li className="unstyled-list-item" key={ lesson.path }>
-        <Link to={`${match.url}${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')}>{lesson.title}{lessonsubtitle}</Link>
-      </li>
-    )
-  });
-
   return(
     <div>
       <Switch>
@@ -25,7 +14,7 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
             {...lessonProps}
             {...props}
           />
-          } />
+        } />
         <Route path={`${match.url}/fundamentals/:lessonPath`} render={ (props) =>
           <Lesson lessonIndex={lessonIndex}
             handleLesson={handleLesson}
@@ -33,7 +22,7 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
             {...lessonProps}
             {...props}
           />
-          } />
+        } />
         <Route path={`${match.url}/drills/:lessonPath`} render={ (props) =>
           <Lesson lessonIndex={lessonIndex}
             handleLesson={handleLesson}
@@ -41,7 +30,7 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
             {...lessonProps}
             {...props}
           />
-          } />
+        } />
         <Route exact={true} path={`${match.url}/custom`} render={ (props) =>
           <Lesson lessonIndex={lessonIndex}
             handleLesson={handleLesson}
@@ -49,23 +38,16 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
             {...lessonProps}
             {...props}
           />
-          } />
-        <Route exact={true} path={match.url} render={() => (
-          <main id="main">
-            <div className="subheader">
-              <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
-                <div className="flex mr1">
-                  <header className="flex items-baseline">
-                    <h2>Lessons</h2>
-                  </header>
-                </div>
-              </div>
-            </div>
-            <div className="p3 mx-auto mw-1024">
-              <ul className="unstyled-list">{linkList}</ul>
-            </div>
-          </main>
-          )} />
+        } />
+        <Route exact={true} path={match.url} render={ (props) =>
+          <LessonsIndex match={match}
+            lessonIndex={lessonIndex}
+            handleLesson={handleLesson}
+            lesson={lesson}
+            {...lessonProps}
+            {...props}
+          />
+        } />
       </Switch>
     </div>
   )

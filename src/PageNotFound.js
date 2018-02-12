@@ -17,7 +17,7 @@ const PageNotFound = () => {
         </div>
       </div>
       <main id="main" className="p3 mx-auto mw-1024">
-        <h1>That page doesn't exist</h1>
+        <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">That page doesn't exist</h1>
         <p>Try one of these instead:</p>
         <ul>
           <li><Link to="/">Home</Link></li>
