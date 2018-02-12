@@ -16,7 +16,7 @@ class Progress extends Component {
     let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
     return (
       <div>
-        <main  id="main">
+        <main id="main">
           <div className="subheader">
             <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
               <div className="flex mr1">
