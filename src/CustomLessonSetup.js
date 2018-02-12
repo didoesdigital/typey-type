@@ -33,7 +33,7 @@ class CustomLessonSetup extends Component {
           <p className="mw-568">
             <textarea
               id="your-material"
-              className="input-textarea mw100 w-100"
+              className="input-textarea mw100 w-100 overflow-scroll"
               autoComplete="off"
               autoCorrect="off"
               autoCapitalize="off"

@@ -248,11 +248,11 @@ input:focus::placeholder {
   border-collapse: collapse;
   border-spacing: 0; }
 
-.overflow-scroll {
-  overflow: scroll; }
-
 .v-top {
   vertical-align: top; }
+
+.overflow-scroll {
+  overflow: scroll; }
 
 .mx-auto {
   margin-left: auto;
