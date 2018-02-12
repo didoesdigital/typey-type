@@ -8,7 +8,9 @@ import './App.css';
 class Header extends Component {
 
   componentDidMount() {
-    this.mainHeading.focus();
+    if (this.mainHeading) {
+      this.mainHeading.focus();
+    }
   }
 
   render() {

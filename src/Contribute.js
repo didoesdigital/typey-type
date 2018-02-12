@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 
 class Contribute extends Component {
   componentDidMount() {
-    this.mainHeading.focus();
+    if (this.mainHeading) {
+      this.mainHeading.focus();
+    }
   }
   render() {
     return (

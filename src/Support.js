@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 class Support extends Component {
   componentDidMount() {
-    this.mainHeading.focus();
+    if (this.mainHeading) {
+      this.mainHeading.focus();
+    }
   }
 
   render() {

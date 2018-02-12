@@ -4,7 +4,9 @@ import Clipboard from 'clipboard';
 class Progress extends Component {
   componentDidMount() {
     new Clipboard('.js-clipboard-button');
-    this.mainHeading.focus();
+    if (this.mainHeading) {
+      this.mainHeading.focus();
+    }
   }
 
   restoreButtonOnClickFunction() {

@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 
 class LessonsIndex extends Component {
   componentDidMount() {
-    this.mainHeading.focus();
+    if (this.mainHeading) {
+      this.mainHeading.focus();
+    }
   }
 
   render() {
