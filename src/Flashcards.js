@@ -55,7 +55,12 @@ class Flashcards extends Component {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
+
     let path = process.env.PUBLIC_URL + '/lessons/drills/top-10000-english-words/lesson.txt';
+    if (this.props.lessonpath) {
+      path = this.props.lessonpath;
+    }
+
     getLesson(path).then((lessonText) => {
       let lesson = parseLesson(lessonText, path);
       this.setState({

@@ -767,6 +767,8 @@ class App extends Component {
                 <div>
                   {header}
                   <Lessons
+                    fullscreen={this.state.fullscreen}
+                    changeFullscreen={this.changeFullscreen.bind(this)}
                     restartLesson={this.restartLesson.bind(this)}
                     items={this.state.lessonIndex}
                     lessonSubTitle={this.state.lesson.subtitle}

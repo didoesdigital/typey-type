@@ -4,6 +4,7 @@ import TypedText from './TypedText';
 import Scores from './Scores';
 import UserSettings from './UserSettings';
 import Finished from './Finished';
+import Flashcards from './Flashcards';
 import CustomLessonSetup from './CustomLessonSetup';
 import { shouldShowStroke } from './typey-type';
 
@@ -28,6 +29,9 @@ class Lesson extends Component {
 
   isCustom() {
     return (this.props.location.pathname === '/lessons/custom');
+  }
+  isFlashcards() {
+    return (this.props.location.pathname.startsWith('/lessons/') && this.props.location.pathname.endsWith('/flashcards'));
   }
 
   isSetup() {
@@ -103,7 +107,15 @@ class Lesson extends Component {
     }
 
     if (this.props.lesson) {
-      if (this.isCustom() && !this.isSetup()) {
+      if (this.isFlashcards()) {
+        return (
+          <Flashcards
+            fullscreen={this.props.fullscreen}
+            changeFullscreen={this.props.changeFullscreen.bind(this)}
+            lessonpath={process.env.PUBLIC_URL + this.props.location.pathname.replace(/flashcards/, '') + 'lesson.txt'}
+          />
+        )
+      } else if (this.isCustom() && !this.isSetup()) {
         return (
           <CustomLessonSetup
             createCustomLesson={this.props.createCustomLesson}
