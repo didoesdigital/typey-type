@@ -52,6 +52,7 @@ class Flashcards extends Component {
   }
 
   componentDidMount() {
+    this.mainHeading.focus();
     let path = process.env.PUBLIC_URL + '/lessons/drills/top-10000-english-words/lesson.txt';
     getLesson(path).then((lessonText) => {
       let lesson = parseLesson(lessonText, path);
@@ -86,7 +87,7 @@ class Flashcards extends Component {
             <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
               <div className="flex mr1">
                 <header className="flex items-baseline">
-                  <h2 id="about-typey-type-for-stenographers">Flashcards</h2>
+                  <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="about-typey-type-for-stenographers">Flashcards</h2>
                 </header>
               </div>
 

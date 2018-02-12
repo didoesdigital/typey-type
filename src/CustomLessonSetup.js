@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 
 class CustomLessonSetup extends Component {
+  componentDidMount() {
+    this.mainHeading.focus();
+  }
 
   render() {
 
@@ -11,7 +14,7 @@ class CustomLessonSetup extends Component {
           <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
             <div className="flex mr1">
               <header className="flex items-baseline">
-                <h2 id="about-typey-type-for-stenographers">Create a custom lesson</h2>
+                <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="about-typey-type-for-stenographers">Create a custom lesson</h2>
               </header>
             </div>
           </div>
