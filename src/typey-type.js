@@ -163,11 +163,10 @@ function parseLesson(lessonText, path) {
   let lines = lessonText.split("\n");
   let lessonTitle = lines[0];
   let lessonSubtitle = lines[1];
-  lines = lines.filter(phrase => phrase !== '');
   let sourceMaterial = [];
   let settings = {ignoredChars: ''};
 
-  for (var i = 2; i < lines.length; i++) {
+  for (let i = 2; i < lines.length; i++) {
     let line = lines[i];
     let firstChar = line.charAt(0);
 
