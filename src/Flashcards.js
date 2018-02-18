@@ -60,7 +60,19 @@ class Flashcards extends Component {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
+    this.fetchAndSetupFlashCards();
+  }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (this.mainHeading) {
+      this.mainHeading.focus();
+    }
+    if ((prevProps.lessonpath !== this.props.lessonpath) && (this.props.locationpathname.endsWith('flashcards'))) {
+      this.fetchAndSetupFlashCards();
+    }
+  }
+
+  fetchAndSetupFlashCards() {
     let path = process.env.PUBLIC_URL + '/lessons/drills/top-10000-english-words/lesson.txt';
     if (this.props.lessonpath) {
       path = this.props.lessonpath;
@@ -77,28 +89,8 @@ class Flashcards extends Component {
         this.setupFlashCards();
       });
     });
-  }
+  };
 
-  componentDidUpdate(prevProps, prevState) {
-    if ((prevProps.lessonpath !== this.props.lessonpath) && (this.props.locationpathname.endsWith('flashcards'))) {
-      let path = process.env.PUBLIC_URL + '/lessons/drills/top-10000-english-words/lesson.txt';
-      if (this.props.lessonpath) {
-        path = this.props.lessonpath;
-      }
-
-      getLesson(path).then((lessonText) => {
-        let lesson = parseLesson(lessonText, path);
-        this.setState({
-          presentedMaterial: lesson.presentedMaterial,
-          sourceMaterial: lesson.sourceMaterial,
-          title: lesson.title,
-          subtitle: lesson.subtitle
-        }, () => {
-          this.setupFlashCards();
-        });
-      });
-    }
-  }
   next() {
     this.reactSwipe.next();
   }
