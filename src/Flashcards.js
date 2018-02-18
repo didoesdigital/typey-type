@@ -28,7 +28,9 @@ class Flashcards extends Component {
       ],
       presentedMaterial: [
         {phrase: 'Loading flashcards…', stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'},
-      ]
+      ],
+      title: 'Steno',
+      subtitle: ''
     }
   }
 
@@ -65,7 +67,9 @@ class Flashcards extends Component {
       let lesson = parseLesson(lessonText, path);
       this.setState({
         presentedMaterial: lesson.presentedMaterial,
-        sourceMaterial: lesson.sourceMaterial
+        sourceMaterial: lesson.sourceMaterial,
+        title: lesson.title,
+        subtitle: lesson.subtitle
       }, () => {
         this.setupFlashCards();
       });
@@ -87,6 +91,14 @@ class Flashcards extends Component {
     } else {
       fullscreen = "";
     }
+    let flashcardsHeading = 'Flashcards';
+    let flashcardsSubtitle = '';
+    if (this.state.subtitle) {
+      flashcardsSubtitle = ' ' + this.state.subtitle;
+    }
+    if (this.state.title) {
+      flashcardsHeading = this.state.title + flashcardsSubtitle + ' flashcards';
+    }
     return (
       <div>
         <main id="main">
@@ -94,7 +106,7 @@ class Flashcards extends Component {
             <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
               <div className="flex mr1">
                 <header className="flex items-baseline">
-                  <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="about-typey-type-for-stenographers">Flashcards</h2>
+                  <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="flashcards">{flashcardsHeading}</h2>
                 </header>
               </div>
 
