@@ -64,9 +64,6 @@ class Flashcards extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.mainHeading) {
-      this.mainHeading.focus();
-    }
     if ((prevProps.lessonpath !== this.props.lessonpath) && (this.props.locationpathname.endsWith('flashcards'))) {
       this.fetchAndSetupFlashCards();
     }
