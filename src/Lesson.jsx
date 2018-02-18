@@ -60,6 +60,19 @@ class Lesson extends Component {
     return nextLessonPath;
   }
 
+  prefillSurveyLink() {
+    // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
+    let googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
+    let param = "&entry.1202724812&entry.936119214";
+    let prefillLesson = '';
+    if (this.props.location.pathname) {
+      prefillLesson = this.props.location.pathname;
+    }
+    if (this.surveyLink) {
+      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param;
+    }
+  }
+
   render() {
     let customMessage;
     let firstVisit;
@@ -253,6 +266,7 @@ class Lesson extends Component {
                   />
                 </div>
               </div>
+              <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)}>Give feedback on this lesson (form opens in a new tab)</a></p>
             </div>
           </main>
         )
