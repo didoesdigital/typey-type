@@ -99,6 +99,23 @@ class Flashcards extends Component {
     this.reactSwipe.prev();
   }
 
+  prefillSurveyLink() {
+    let googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSc3XqvJC2lwIRieR5NVoAI7nYa4fTFSZL4Ifk1YA7K7I-lnog/viewform?usp=pp_url&entry.1884511690=";
+    let param = "&entry.1893816394=";
+    let prefillLesson = '';
+    let prefillFlashcard = '';
+    if (this.props.locationpathname) {
+      prefillLesson = this.props.locationpathname;
+    }
+    if (this.state.flashcards && this.reactSwipe) {
+      prefillFlashcard = this.state.flashcards[this.reactSwipe.getPos()];
+    }
+    if (this.surveyLink) {
+      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
+    }
+    return googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
+  }
+
   render () {
     let fullscreen = "";
     if (this.props.fullscreen) {
@@ -171,6 +188,7 @@ class Flashcards extends Component {
 
               </div>
               <p className="text-center"><Link to="./" className="text-small mt0">{this.state.title} lesson</Link></p>
+              <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)}>Give feedback on this flashcard (form opens in a new tab)</a></p>
 
             </div>
           </div>
