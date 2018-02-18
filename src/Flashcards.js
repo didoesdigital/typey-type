@@ -117,7 +117,7 @@ class Flashcards extends Component {
 
               <div className="mxn2">
                 {/* Shuffle button */}
-                <a href="/flashcards" onClick={this.setupFlashCards.bind(this)} className="link-button link-button-ghost table-cell" role="button">Shuffle</a>
+                <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="link-button link-button-ghost table-cell" role="button">Shuffle</a>
               </div>
             </div>
           </div>
