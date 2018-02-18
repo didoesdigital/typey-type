@@ -160,25 +160,25 @@ function parseCustomMaterial(lessonTextAndStrokes) {
 }
 
 function parseLesson(lessonText, path) {
-  var lines = lessonText.split("\n");
-  var lessonTitle = lines[0];
-  var lessonSubtitle = lines[1];
+  let lines = lessonText.split("\n");
+  let lessonTitle = lines[0];
+  let lessonSubtitle = lines[1];
   lines = lines.filter(phrase => phrase !== '');
-  var sourceMaterial = [];
-  var settings = {ignoredChars: ''};
+  let sourceMaterial = [];
+  let settings = {ignoredChars: ''};
 
   for (var i = 2; i < lines.length; i++) {
-    var line = lines[i];
-    var firstChar = line.charAt(0);
+    let line = lines[i];
+    let firstChar = line.charAt(0);
 
     if (firstChar === "'") {
-      var phraseAndStroke = line.split("': ");
-      var phrase = phraseAndStroke[0].substring(1, phraseAndStroke[0].length);
-      var stroke = phraseAndStroke[1];
+      let phraseAndStroke = line.split("': ");
+      let phrase = phraseAndStroke[0].substring(1, phraseAndStroke[0].length);
+      let stroke = phraseAndStroke[1];
       sourceMaterial.push( {phrase: phrase, stroke: stroke} );
     } else if (line.indexOf("=") !== -1) {
-      var optionAndValue = line.split("=");
-      var value = optionAndValue[1].replace(/'/g, "");
+      let optionAndValue = line.split("=");
+      let value = optionAndValue[1].replace(/'/g, "");
       if (value === "true") { value = true; } else if (value === "false") { value = false; }
       if (optionAndValue[0] in SETTINGS_NAME_MAP) {
         settings[SETTINGS_NAME_MAP[optionAndValue[0]]] = value;
