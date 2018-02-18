@@ -139,6 +139,7 @@ class Flashcards extends Component {
 
               {/* Screenreader flashcard list */}
               <div className="visually-hidden">
+                <h3>List of lesson words and their strokes</h3>
                 {paneNodes(this.state.flashcards)}
               </div>
 
