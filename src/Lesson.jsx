@@ -117,6 +117,7 @@ class Lesson extends Component {
             fullscreen={this.props.fullscreen}
             changeFullscreen={this.props.changeFullscreen.bind(this)}
             lessonpath={process.env.PUBLIC_URL + this.props.location.pathname.replace(/flashcards/, '') + 'lesson.txt'}
+            locationpathname={this.props.location.pathname}
           />
         )
       } else if (this.isCustom() && !this.isSetup()) {
