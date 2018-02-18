@@ -6,6 +6,9 @@ import {
   getLesson,
   parseLesson
 } from './typey-type';
+import {
+  Link
+} from 'react-router-dom';
 
 let paneNodes = function (flashcards) {
   return flashcards.map((item, i) => {
@@ -152,6 +155,7 @@ class Flashcards extends Component {
                 <div className={"pagination-nav-button flex items-center hide-in-fullscreen" + fullscreen}><button className="link-button" type="button" onClick={this.next.bind(this)} aria-label="Next card">▸</button></div>
 
               </div>
+              <p className="text-center"><Link to="./" className="text-small mt0">{this.state.title} lesson</Link></p>
 
             </div>
           </div>
