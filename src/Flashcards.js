@@ -110,7 +110,6 @@ class Flashcards extends Component {
     if (this.surveyLink) {
       this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
     }
-    return googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
   }
 
   render () {
