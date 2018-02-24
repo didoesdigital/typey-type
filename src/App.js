@@ -263,6 +263,7 @@ class App extends Component {
       if (!(name === 'caseSensitive')) {
         this.setupLesson();
       }
+      writePersonalPreferences('userSettings', this.state.userSettings);
     });
     return value;
   }
@@ -280,6 +281,7 @@ class App extends Component {
       if (!(name === 'caseSensitive')) {
         this.setupLesson();
       }
+      writePersonalPreferences('userSettings', this.state.userSettings);
     });
     return value;
   }
@@ -315,6 +317,7 @@ class App extends Component {
       if (!(name === 'caseSensitive')) {
         this.setupLesson();
       }
+      writePersonalPreferences('userSettings', this.state.userSettings);
     });
     return value;
   }
@@ -332,6 +335,7 @@ class App extends Component {
       if (!(name === 'caseSensitive')) {
         this.setupLesson();
       }
+      writePersonalPreferences('userSettings', this.state.userSettings);
     });
     return value;
   }
@@ -394,6 +398,7 @@ class App extends Component {
       if (!(name === 'caseSensitive')) {
         this.setupLesson();
       }
+      writePersonalPreferences('userSettings', this.state.userSettings);
     });
     return value;
   }
@@ -411,6 +416,7 @@ class App extends Component {
       if (!(name === 'caseSensitive')) {
         this.setupLesson();
       }
+      writePersonalPreferences('userSettings', this.state.userSettings);
     });
     return value;
   }
