@@ -195,7 +195,8 @@ class App extends Component {
 
   stopLesson() {
     this.stopTimer();
-    writePersonalPreferences(this.state.userSettings, this.state.metWords);
+    writePersonalPreferences('userSettings', this.state.userSettings);
+    writePersonalPreferences('metWords', this.state.metWords);
     this.setState({
       actualText: '',
       currentPhraseID: this.state.lesson.presentedMaterial.length,
@@ -243,7 +244,8 @@ class App extends Component {
       metWords: metWords,
       userSettings: userSettings
     }, () => {
-      writePersonalPreferences(this.state.userSettings, this.state.metWords);
+      writePersonalPreferences('userSettings', this.state.userSettings);
+      writePersonalPreferences('metWords', this.state.metWords);
       this.setupLesson();
     });
   }
