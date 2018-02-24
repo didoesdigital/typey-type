@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Material from './Material';
 import TypedText from './TypedText';
 import Scores from './Scores';
@@ -74,12 +75,19 @@ class Lesson extends Component {
   }
 
   render() {
+    let createNewCustomLesson = '';
     let customMessage;
     let firstVisit;
     let strokeTip;
     let lessonSubTitle = '';
     if (this.props.lesson.subtitle.length > 0) {
       lessonSubTitle = ': '+this.props.lessonSubTitle;
+    }
+
+    if (this.isCustom() && this.isSetup()) {
+      createNewCustomLesson = (<Link to={process.env.PUBLIC_URL + '/lessons/custom'} onClick={this.props.setCustomLesson} className="link-button link-button-ghost table-cell mr1" role="button">Create new lesson</Link>);
+    } else {
+      createNewCustomLesson = '';
     }
 
     if (this.props.settings.customMessage) {
@@ -152,6 +160,7 @@ class Lesson extends Component {
                   </header>
                 </div>
                 <div className="mxn2">
+                  {createNewCustomLesson}
                   <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
                   <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
                 </div>
@@ -200,6 +209,7 @@ class Lesson extends Component {
                   </header>
                 </div>
                 <div className="mxn2">
+                  {createNewCustomLesson}
                   <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
                   <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
                 </div>
