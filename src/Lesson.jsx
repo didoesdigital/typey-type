@@ -180,6 +180,7 @@ class Lesson extends Component {
               suggestedNext={this.nextLessonPath()}
               lessonLength={this.props.lesson.presentedMaterial.length}
               path={this.props.path}
+              prefillSurveyLink={this.prefillSurveyLink}
               restartLesson={this.props.restartLesson}
               settings={this.props.lesson.settings}
               timer={this.props.timer}
