@@ -85,7 +85,7 @@ class Lesson extends Component {
     }
 
     if (this.isCustom() && this.isSetup()) {
-      createNewCustomLesson = (<Link to={process.env.PUBLIC_URL + '/lessons/custom'} onClick={this.props.setCustomLesson} className="link-button link-button-ghost table-cell mr1" role="button">Create new lesson</Link>);
+      createNewCustomLesson = (<Link to='/lessons/custom' onClick={this.props.setCustomLesson} className="link-button link-button-ghost table-cell mr1" role="button">Create new lesson</Link>);
     } else {
       createNewCustomLesson = '';
     }
