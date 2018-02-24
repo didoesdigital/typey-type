@@ -489,7 +489,7 @@ class App extends Component {
       title: 'Custom',
       subtitle: '',
       newPresentedMaterial: new Zipper([{phrase: 'The', stroke: '-T'}]),
-      path: '/lessons/custom'
+      path: process.env.PUBLIC_URL + '/lessons/custom'
     }
     this.setState({
       lesson: lesson,

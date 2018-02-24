@@ -124,7 +124,7 @@ function parseCustomMaterial(lessonTextAndStrokes) {
     title: 'Custom',
     subtitle: '',
     newPresentedMaterial: new Zipper([{phrase: 'The', stroke: '-T'}]),
-    path: '/lessons/custom'
+    path: process.env.PUBLIC_URL + '/lessons/custom'
   }
   if (lessonTextAndStrokes.length === 0 || !lessonTextAndStrokes.includes("	")) {
     return emptyCustomLesson;
@@ -155,7 +155,7 @@ function parseCustomMaterial(lessonTextAndStrokes) {
     title: lessonTitle,
     subtitle: lessonSubtitle,
     newPresentedMaterial: new Zipper(sourceMaterial),
-    path: '/lessons/custom'
+    path: process.env.PUBLIC_URL + '/lessons/custom'
   }
 }
 
