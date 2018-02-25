@@ -94,7 +94,7 @@ examples.	KP-PLS TP-PL"
               </textarea>
             </div>
             <div>
-              <div className="panel p3 mb3">
+              <div className="panel p3">
                 <h2>Share your lessons</h2>
                 <p className="mb0">To help Typey type grow even faster, be sure to add your lessons to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community's lessons <small>(opens in new tab)</small></a>.</p>
                 <h3>Custom material format</h3>
@@ -106,7 +106,6 @@ examples.	KP-PLS TP-PL"
               </div>
             </div>
           </div>
-
 
           <h3>Create Plover lesson from word list</h3>
           <div className="custom-lesson-generator">
