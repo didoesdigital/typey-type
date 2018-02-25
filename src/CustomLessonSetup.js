@@ -34,9 +34,9 @@ class CustomLessonSetup extends Component {
 
   render() {
 
-    const dictionaryEntries = this.state.dictionary.map( (entry) => {
+    const dictionaryEntries = this.state.dictionary.map( (entry, index) => {
       return(
-        <code className="unstyled-list-item" key={ entry.phrase }>
+        <code className="unstyled-list-item" key={ index }>
           {entry.phrase}{`	`}{entry.stroke}{`
 `}
         </code>
