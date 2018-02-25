@@ -244,7 +244,9 @@ function processDictionary(swappedDictionaryFile) {
     [/({\^)(.*)(\^})/, '$2'], // Replace "{^ ^}" with " "
     [/({\^})(.*)/, '$2'], // Replace "{^}™" with "™"
     [/(.*)(\^})/, '$1'], // Replace "words{^}" with "words"
+    [/(^})(.*)({$)/, '$2'], // Replace "}words{" leftover from prev regex with "words"
     [/({)(.)(})/, '$2'], // Replace "{;}" with ";"
+    [/({&)([0-9])(})/, '$2'], // Replace "{&1}" with "1"
   ];
   for (let property in swappedDictionaryFile) {
     let value = swappedDictionaryFile[property];
