@@ -1046,6 +1046,10 @@ label {
   border-left: 8px solid saturate(add-tint($brand-primary, 30%), 30%);
   font-size: $h4-size;
   padding-left: 1em;
+  &:empty {
+    border-left: none;
+    padding-left: inherit;
+  }
 }
 .skip-to-main-link {
   position: absolute !important;

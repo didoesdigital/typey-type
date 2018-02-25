@@ -1006,6 +1006,9 @@ label {
   border-left: 8px solid #8242a8;
   font-size: 20px;
   padding-left: 1em; }
+  .quote:empty {
+    border-left: none;
+    padding-left: inherit; }
 
 .skip-to-main-link {
   position: absolute !important;
