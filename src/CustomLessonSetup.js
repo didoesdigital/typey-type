@@ -36,9 +36,10 @@ class CustomLessonSetup extends Component {
 
     const dictionaryEntries = this.state.dictionary.map( (entry) => {
       return(
-        <li className="unstyled-list-item" key={ entry.phrase }>
-          {entry.phrase}&#9;{entry.stroke}
-        </li>
+        <code className="unstyled-list-item" key={ entry.phrase }>
+          {entry.phrase}{`	`}{entry.stroke}{`
+`}
+        </code>
       )
     });
 
@@ -85,22 +86,6 @@ examples.	KP-PLS TP-PL"
           <hr />
 
           <h3>Helper tools</h3>
-          <p>Drop words here and get related words:</p>
-          <textarea
-            id="your-words-for-related-words"
-            className="input-textarea mw100 w-100 overflow-scroll"
-            autoComplete="off"
-            autoCorrect="off"
-            autoCapitalize="off"
-            spellCheck="false"
-            placeholder="example
-cat
-elucidate."
-            rows="8"
-            wrap="off"
-            onChange={this.generateRelatedWords}
-            >
-          </textarea>
           <p>Drop words here and get dictionary entries:</p>
           <textarea
             id="your-words-for-dictionary-entries"
@@ -117,7 +102,7 @@ plover"
             onChange={this.handleWordsForDictionaryEntries.bind(this)}
             >
           </textarea>
-          <ul id="dictionary-entries" className="">{dictionaryEntries}</ul>
+          <pre id="dictionary-entries" className="">{dictionaryEntries}</pre>
 
         </div>
       </main>
