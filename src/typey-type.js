@@ -295,16 +295,16 @@ function fetchLessonIndex() {
 }
 
 export {
-  parseCustomMaterial,
   fetchLessonIndex,
   getLesson,
   isFirstVisit,
   loadPersonalPreferences,
   matchSplitText,
-  strokeAccuracy,
+  parseCustomMaterial,
   parseLesson,
   repetitionsRemaining,
   shouldShowStroke,
+  strokeAccuracy,
   targetStrokeCount,
   writePersonalPreferences
 };
