@@ -159,6 +159,52 @@ function parseCustomMaterial(lessonTextAndStrokes) {
   }
 }
 
+function parseWordList(userInputWordList) {
+  let wordList = [];
+  if (userInputWordList.length === 0) {
+    return wordList;
+  }
+  let lines = userInputWordList.split("\n");
+  lines = lines.filter(phrase => phrase !== '');
+  if (lines.length === 0) {
+    return wordList;
+  }
+
+  for (let i = 0; i < lines.length; i++) {
+    let line = lines[i];
+    wordList.push( line );
+  }
+
+  return wordList;
+}
+
+function generateDictionaryEntries(wordList) {
+  let dictionary = [];
+  let sourceDictionaryFile = {
+    "-T": "the",
+    "TPHRABGS": "interaction",
+    "EUPBT/TAEFT": "interactivity",
+    "PHAOEURBG/SPWRABGS": "microinteraction",
+    "STKAOEUPB": "design",
+    "REFRPB": "research"
+  };
+
+  let sourceWordsAndStrokes = {};
+  for (let stroke in sourceDictionaryFile) {
+    let word = sourceDictionaryFile[stroke];
+    sourceWordsAndStrokes[word] = stroke;
+  }
+
+  for (let i = 0; i < wordList.length; i++) {
+    let entry = wordList[i];
+    let stroke = sourceWordsAndStrokes[entry];
+    if (!stroke) { stroke = "xxx"; }
+    dictionary.push({phrase: entry, stroke: stroke});
+  }
+
+  return dictionary;
+}
+
 function parseLesson(lessonText, path) {
   let lines = lessonText.split("\n");
   let lessonTitle = lines[0];
@@ -296,12 +342,14 @@ function fetchLessonIndex() {
 
 export {
   fetchLessonIndex,
+  generateDictionaryEntries,
   getLesson,
   isFirstVisit,
   loadPersonalPreferences,
   matchSplitText,
   parseCustomMaterial,
   parseLesson,
+  parseWordList,
   repetitionsRemaining,
   shouldShowStroke,
   strokeAccuracy,

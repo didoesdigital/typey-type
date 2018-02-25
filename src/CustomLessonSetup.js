@@ -1,14 +1,46 @@
 import React, { Component } from 'react';
 import './App.css';
+import { parseWordList, generateDictionaryEntries } from './typey-type';
 
 class CustomLessonSetup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dictionary: []
+    }
+  }
+
   componentDidMount() {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
   }
 
+  handleWordsForDictionaryEntries(event) {
+    if (event && event.target && event.target.value && event.target.value.length > 0) {
+      let result = parseWordList(event.target.value);
+      if (result && result.length > 0) {
+        let dictionary = generateDictionaryEntries(result);
+        if (dictionary && dictionary.length > 0) {
+          this.setState({
+            dictionary: dictionary
+          });
+        }
+      }
+    }
+    return event;
+  }
+
+
   render() {
+
+    const dictionaryEntries = this.state.dictionary.map( (entry) => {
+      return(
+        <li className="unstyled-list-item" key={ entry.phrase }>
+          {entry.phrase}&#9;{entry.stroke}
+        </li>
+      )
+    });
 
     return (
       <main id="main">
@@ -49,6 +81,44 @@ examples.	KP-PLS TP-PL"
             <li>Each word must be separated from its stroke by a "Tab" character.</li>
             <li>If you skip strokes, multi-stroke words may count as misstrokes.</li>
           </ul>
+
+          <hr />
+
+          <h3>Helper tools</h3>
+          <p>Drop words here and get related words:</p>
+          <textarea
+            id="your-words-for-related-words"
+            className="input-textarea mw100 w-100 overflow-scroll"
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            placeholder="example
+cat
+elucidate."
+            rows="8"
+            wrap="off"
+            onChange={this.generateRelatedWords}
+            >
+          </textarea>
+          <p>Drop words here and get dictionary entries:</p>
+          <textarea
+            id="your-words-for-dictionary-entries"
+            className="input-textarea mw100 w-100 overflow-scroll"
+            autoComplete="off"
+            autoCorrect="off"
+            autoCapitalize="off"
+            spellCheck="false"
+            placeholder="capitalise
+excluded
+plover"
+            rows="8"
+            wrap="off"
+            onChange={this.handleWordsForDictionaryEntries.bind(this)}
+            >
+          </textarea>
+          <ul id="dictionary-entries" className="">{dictionaryEntries}</ul>
+
         </div>
       </main>
     )
