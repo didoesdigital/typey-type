@@ -228,13 +228,31 @@ function parseLesson(lessonText, path) {
   }
 }
 
-function processDictionaries(sourceDictionaryFile) {
-  let sourceWordsAndStrokes = {"the": "-T"};
+function swapKeyValueInDictionary(sourceDictionaryFile) {
+  let sourceWordsAndStrokes = {};
   for (let stroke in sourceDictionaryFile) {
     let word = sourceDictionaryFile[stroke];
     sourceWordsAndStrokes[word] = stroke;
   }
   return sourceWordsAndStrokes;
+}
+
+function processDictionary(swappedDictionaryFile) {
+  let processedDictionary = {};
+  let charsToRemove = [
+    [/({\^)(.*)(\^})/, '$2'], // Replace "{^ ^}" with " "
+    [/({\^})(.*)/, '$2'], // Replace "{^}™" with "™"
+    [/(.*)(\^})/, '$1'], // Replace "words{^}" with "words"
+    [/({)(.)(})/, '$2'], // Replace "{;}" with ";"
+  ];
+  for (let property in swappedDictionaryFile) {
+    let value = swappedDictionaryFile[property];
+    for (let i = 0; i < charsToRemove.length; i++) {
+      property = property.replace(charsToRemove[i][0], charsToRemove[i][1]);
+    }
+    processedDictionary[property] = value;
+  }
+  return processedDictionary;
 }
 
 function isFirstVisit() {
@@ -359,7 +377,8 @@ export {
   parseCustomMaterial,
   parseLesson,
   parseWordList,
-  processDictionaries,
+  processDictionary,
+  swapKeyValueInDictionary,
   repetitionsRemaining,
   shouldShowStroke,
   strokeAccuracy,

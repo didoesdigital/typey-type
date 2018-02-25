@@ -4,7 +4,8 @@ import Clipboard from 'clipboard';
 import {
   fetchDictionaries,
   parseWordList,
-  processDictionaries,
+  processDictionary,
+  swapKeyValueInDictionary,
   generateDictionaryEntries
 } from './typey-type';
 
@@ -13,7 +14,8 @@ class CustomLessonSetup extends Component {
     super(props);
     this.state = {
       dictionary: [],
-      sourceWordsAndStrokes: {"the": "-T"}
+      sourceWordsAndStrokes: {"the": "-T"},
+      processedSourceWordsAndStrokes: {"the": "-T"}
     }
   }
 
@@ -23,8 +25,12 @@ class CustomLessonSetup extends Component {
       this.mainHeading.focus();
     }
     fetchDictionaries().then((json) => {
-      let sourceWordsAndStrokes = processDictionaries(json);
-      this.setState({ sourceWordsAndStrokes: sourceWordsAndStrokes });
+      let sourceWordsAndStrokes = swapKeyValueInDictionary(json);
+      let processedSourceWordsAndStrokes = Object.assign({}, processDictionary(sourceWordsAndStrokes));
+      this.setState({
+        // sourceWordsAndStrokes: sourceWordsAndStrokes,
+        processedSourceWordsAndStrokes: processedSourceWordsAndStrokes
+      });
     });
   }
 
@@ -32,7 +38,7 @@ class CustomLessonSetup extends Component {
     if (event && event.target && event.target.value && event.target.value.length > 0) {
       let result = parseWordList(event.target.value);
       if (result && result.length > 0) {
-        let dictionary = generateDictionaryEntries(result, this.state.sourceWordsAndStrokes);
+        let dictionary = generateDictionaryEntries(result, this.state.processedSourceWordsAndStrokes);
         if (dictionary && dictionary.length > 0) {
           this.setState({
             dictionary: dictionary

@@ -1,4 +1,13 @@
-import { parseCustomMaterial, matchSplitText, loadPersonalPreferences, strokeAccuracy, writePersonalPreferences, repetitionsRemaining } from './typey-type';
+import {
+  parseCustomMaterial,
+  matchSplitText,
+  loadPersonalPreferences,
+  processDictionary,
+  strokeAccuracy,
+  swapKeyValueInDictionary,
+  writePersonalPreferences,
+  repetitionsRemaining
+} from './typey-type';
 import Zipper from './zipper';
 
 describe('stroke accuracy for current phrase', () => {
@@ -199,6 +208,28 @@ describe('loadPersonalPreferences', () => {
 //     });
 //   });
 // });
+
+describe('processDictionary', () => {
+  describe('without dictionary commands', () => {
+    it('should return as it was', () => {
+      let dictionary = { "design": "STKAOEUPB" };
+      expect(processDictionary(dictionary)).toEqual({ "design": "STKAOEUPB" });
+    });
+  });
+  describe('with dictionary commands', () => {
+    it('should return with command characters stripped', () => {
+      let dictionary = { "{^ ^}": "S-P" };
+      expect(processDictionary(dictionary)).toEqual({ " ": "S-P" });
+    });
+  });
+});
+
+describe('swapKeyValueInDictionary', () => {
+  it('should log error', () => {
+    let dictionary = { "hi": "HEU", "HAEU": "hey" };
+    expect(swapKeyValueInDictionary(dictionary)).toEqual({ "HEU": "hi", "hey": "HAEU" });
+  });
+});
 
 describe('repetitionsRemaining', () => {
   describe('for 4 reps and 3 words', () => {
