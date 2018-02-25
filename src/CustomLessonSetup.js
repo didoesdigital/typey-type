@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Clipboard from 'clipboard';
 import { parseWordList, generateDictionaryEntries } from './typey-type';
 
 class CustomLessonSetup extends Component {
@@ -11,6 +12,7 @@ class CustomLessonSetup extends Component {
   }
 
   componentDidMount() {
+    new Clipboard('.js-clipboard-button');
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
@@ -102,7 +104,10 @@ plover"
             onChange={this.handleWordsForDictionaryEntries.bind(this)}
             >
           </textarea>
-          <pre id="dictionary-entries" className="">{dictionaryEntries}</pre>
+          <pre id="js-custom-lesson-dictionary-entries" className="">{dictionaryEntries}</pre>
+          <button className="js-clipboard-button link-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-custom-lesson-dictionary-entries">
+            Copy custom lesson to clipboard
+          </button>
 
         </div>
       </main>
