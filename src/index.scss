@@ -289,6 +289,8 @@ input:focus::placeholder {
   transform: translate(-50%, -50%);
 }
 
+.h-192 { height: 192px; }
+
 .mb0     { margin-bottom: 0; }
 .mb1     { margin-bottom: 8px; }
 .mb2     { margin-bottom: 16px; }
@@ -1026,11 +1028,23 @@ label {
     grid-gap: 24px;
   }
 }
+.custom-page-layout {
+  @media (min-width: $breakpoint) {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    grid-gap: 24px;
+  }
+}
+.custom-lesson-generator {
+  @media (min-width: $breakpoint) {
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+    grid-gap: 24px;
+  }
+}
 .quote {
   border-left: 8px solid saturate(add-tint($brand-primary, 30%), 30%);
   font-size: $h4-size;
-  margin-bottom: 1.5em;
-  margin-top: 1.5em;
   padding-left: 1em;
 }
 .skip-to-main-link {

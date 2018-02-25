@@ -272,6 +272,9 @@ input:focus::placeholder {
   top: 50%;
   transform: translate(-50%, -50%); }
 
+.h-192 {
+  height: 192px; }
+
 .mb0 {
   margin-bottom: 0; }
 
@@ -987,11 +990,21 @@ label {
     grid-template-columns: 4fr 3fr;
     grid-gap: 24px; } }
 
+@media (min-width: 1024px) {
+  .custom-page-layout {
+    display: grid;
+    grid-template-columns: 4fr 3fr;
+    grid-gap: 24px; } }
+
+@media (min-width: 1024px) {
+  .custom-lesson-generator {
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+    grid-gap: 24px; } }
+
 .quote {
   border-left: 8px solid #8242a8;
   font-size: 20px;
-  margin-bottom: 1.5em;
-  margin-top: 1.5em;
   padding-left: 1em; }
 
 .skip-to-main-link {
