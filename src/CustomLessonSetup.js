@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 import Clipboard from 'clipboard';
-import { parseWordList, generateDictionaryEntries } from './typey-type';
+import {
+  fetchDictionaries,
+  parseWordList,
+  processDictionaries,
+  generateDictionaryEntries
+} from './typey-type';
 
 class CustomLessonSetup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dictionary: []
+      dictionary: [],
+      sourceWordsAndStrokes: {"the": "-T"}
     }
   }
 
@@ -16,13 +22,17 @@ class CustomLessonSetup extends Component {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
+    fetchDictionaries().then((json) => {
+      let sourceWordsAndStrokes = processDictionaries(json);
+      this.setState({ sourceWordsAndStrokes: sourceWordsAndStrokes });
+    });
   }
 
   handleWordsForDictionaryEntries(event) {
     if (event && event.target && event.target.value && event.target.value.length > 0) {
       let result = parseWordList(event.target.value);
       if (result && result.length > 0) {
-        let dictionary = generateDictionaryEntries(result, this.props.sourceWordsAndStrokes);
+        let dictionary = generateDictionaryEntries(result, this.state.sourceWordsAndStrokes);
         if (dictionary && dictionary.length > 0) {
           this.setState({
             dictionary: dictionary

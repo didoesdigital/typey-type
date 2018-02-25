@@ -3,12 +3,10 @@ import { randomise } from './utils';
 import {
   parseCustomMaterial,
   fetchLessonIndex,
-  fetchDictionaries,
   getLesson,
   loadPersonalPreferences,
   matchSplitText,
   parseLesson,
-  processDictionaries,
   repetitionsRemaining,
   shouldShowStroke,
   strokeAccuracy,
@@ -181,18 +179,13 @@ class App extends Component {
         "category": "Drills",
         "subcategory": "",
         "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
-      }],
-      sourceWordsAndStrokes: {"the": "-T"}
+      }]
     };
   }
 
   componentDidMount() {
     this.setPersonalPreferences();
     fetchLessonIndex().then((json) => this.setState({ lessonIndex: json }));
-    fetchDictionaries().then((json) => {
-      let sourceWordsAndStrokes = processDictionaries(json);
-      this.setState({ sourceWordsAndStrokes: sourceWordsAndStrokes });
-    });
   }
 
   handleStopLesson(event) {
@@ -725,7 +718,6 @@ class App extends Component {
                     setCustomLesson={this.setCustomLesson.bind(this)}
                     settings={this.state.lesson.settings}
                     showStrokesInLesson={this.state.showStrokesInLesson}
-                    sourceWordsAndStrokes={this.state.sourceWordsAndStrokes}
                     targetStrokeCount={this.state.targetStrokeCount}
                     timer={this.state.timer}
                     toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
@@ -824,7 +816,6 @@ class App extends Component {
                     setCustomLesson={this.setCustomLesson.bind(this)}
                     settings={this.state.lesson.settings}
                     showStrokesInLesson={this.state.showStrokesInLesson}
-                    sourceWordsAndStrokes={this.state.sourceWordsAndStrokes}
                     targetStrokeCount={this.state.targetStrokeCount}
                     timer={this.state.timer}
                     toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
