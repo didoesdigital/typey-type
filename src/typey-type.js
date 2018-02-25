@@ -184,6 +184,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
   for (let i = 0; i < wordList.length; i++) {
     let entry = wordList[i];
     let stroke = sourceWordsAndStrokes[entry];
+    if (!stroke) { stroke = sourceWordsAndStrokes[entry.toLowerCase()]; }
     if (!stroke) { stroke = "xxx"; }
     dictionary.push({phrase: entry, stroke: stroke});
   }
