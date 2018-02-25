@@ -48,7 +48,7 @@ class CustomLessonSetup extends Component {
 
     const dictionaryEntries = this.state.dictionary.map( (entry, index) => {
       return(
-        <code className="unstyled-list-item" key={ index }>
+        <code key={ index }>
           {entry.phrase}{`	`}{entry.stroke}{`
 `}
         </code>
