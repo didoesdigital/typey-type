@@ -145,6 +145,7 @@ class Lesson extends Component {
         return (
           <CustomLessonSetup
             createCustomLesson={this.props.createCustomLesson}
+            sourceWordsAndStrokes={this.props.sourceWordsAndStrokes}
           />
         )
       } else if (this.isFinished()) {

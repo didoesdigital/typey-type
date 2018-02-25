@@ -20,7 +20,7 @@ class CustomLessonSetup extends Component {
     if (event && event.target && event.target.value && event.target.value.length > 0) {
       let result = parseWordList(event.target.value);
       if (result && result.length > 0) {
-        let dictionary = generateDictionaryEntries(result);
+        let dictionary = generateDictionaryEntries(result, this.props.sourceWordsAndStrokes);
         if (dictionary && dictionary.length > 0) {
           this.setState({
             dictionary: dictionary

@@ -178,22 +178,8 @@ function parseWordList(userInputWordList) {
   return wordList;
 }
 
-function generateDictionaryEntries(wordList) {
+function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T"}) {
   let dictionary = [];
-  let sourceDictionaryFile = {
-    "-T": "the",
-    "TPHRABGS": "interaction",
-    "EUPBT/TAEFT": "interactivity",
-    "PHAOEURBG/SPWRABGS": "microinteraction",
-    "STKAOEUPB": "design",
-    "REFRPB": "research"
-  };
-
-  let sourceWordsAndStrokes = {};
-  for (let stroke in sourceDictionaryFile) {
-    let word = sourceDictionaryFile[stroke];
-    sourceWordsAndStrokes[word] = stroke;
-  }
 
   for (let i = 0; i < wordList.length; i++) {
     let entry = wordList[i];
@@ -240,6 +226,15 @@ function parseLesson(lessonText, path) {
     newPresentedMaterial: new Zipper([sourceMaterial]),
     path: path
   }
+}
+
+function processDictionaries(sourceDictionaryFile) {
+  let sourceWordsAndStrokes = {"the": "-T"};
+  for (let stroke in sourceDictionaryFile) {
+    let word = sourceDictionaryFile[stroke];
+    sourceWordsAndStrokes[word] = stroke;
+  }
+  return sourceWordsAndStrokes;
 }
 
 function isFirstVisit() {
@@ -340,8 +335,22 @@ function fetchLessonIndex() {
   });
 }
 
+function fetchDictionaries() {
+  return fetch(process.env.PUBLIC_URL + '/dictionaries/dict.json', {
+    method: "GET",
+    credentials: "same-origin"
+  }).then((response) => {
+    return response.json()
+  }).then(json => {
+    return(json);
+  }).catch(function(e) {
+    console.log('Unable to load lesson index', e)
+  });
+}
+
 export {
   fetchLessonIndex,
+  fetchDictionaries,
   generateDictionaryEntries,
   getLesson,
   isFirstVisit,
@@ -350,6 +359,7 @@ export {
   parseCustomMaterial,
   parseLesson,
   parseWordList,
+  processDictionaries,
   repetitionsRemaining,
   shouldShowStroke,
   strokeAccuracy,
