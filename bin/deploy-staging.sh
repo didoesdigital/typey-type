@@ -39,5 +39,5 @@ ruby ~/projects/plover-tools/typey-type-lesson-generator/build-dict-for-typey-ty
   ~/dropbox-personal/projects/Plover/dictionaries/top-level-domains.json
 
 yarn run build
-# git tag -n
+git tag -n
 rsync --archive --verbose --delete --exclude=".DS_Store" -e "ssh -p 2222" ~/projects/typey-type/build/ di@localhost:www/typey-type/

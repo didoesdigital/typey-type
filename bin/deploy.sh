@@ -45,3 +45,7 @@ make
 cd -
 cd ~/projects/thebakery/di.id.au/
 tig status
+
+# yarn run build
+# git tag -n
+# rsync --archive --verbose --delete --exclude=".DS_Store" -e "ssh -p 4242" ~/projects/typey-type/build/ di@didoesdigital:www/typey-type/
