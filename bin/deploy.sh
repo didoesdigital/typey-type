@@ -40,12 +40,14 @@ ruby ~/projects/plover-tools/typey-type-lesson-generator/build-dict-for-typey-ty
 
 yarn run build
 git tag -n
-cd ~/projects/thebakery/diidau-src/typey-type/
-make
-cd -
-cd ~/projects/thebakery/di.id.au/
+# cd ~/projects/thebakery/diidau-src/typey-type/
+# make
+# cd -
+# cd ~/projects/thebakery/di.id.au/
 tig status
 
 # yarn run build
 # git tag -n
 # rsync --archive --verbose --delete --exclude=".DS_Store" -e "ssh -p 4242" ~/projects/typey-type/build/ di@didoesdigital:www/typey-type/
+# rsync -avz --delete --exclude=".DS_Store" ~/projects/typey-type/build/ di@didoesdigital:www/typey-type/
+rsync -avz --delete --exclude=".DS_Store" ~/projects/typey-type/build/ di@167.99.9.71:www/typey-type/
