@@ -156,7 +156,7 @@ class Finished extends Component {
         <p>
           <a href={this.props.path} onClick={this.props.reviseLesson} className="" role="button">
             <IconRestart aria-hidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
-            Revise lesson</a>
+            Revise these words</a>
         </p>
       </div>
     );
@@ -192,11 +192,9 @@ class Finished extends Component {
             userSettings={this.props.userSettings}
           />
           <div className="lesson-canvas panel p2 overflow-scroll">
-            <div className="mx-auto">
-              <div role="alert" aria-live="polite">
-                {emptyAndZeroStateMessage}
-                {lessonSummary}
-              </div>
+            <div role="alert" aria-live="polite">
+              {emptyAndZeroStateMessage}
+              {lessonSummary}
             </div>
           </div>
           <div className="scores panel p2">

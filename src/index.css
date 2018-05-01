@@ -538,9 +538,6 @@ input:focus::placeholder {
     .lesson-canvas {
       min-width: 544px; } }
 
-.finished-lesson {
-  margin: 0 auto; }
-
 .user-settings {
   min-height: 320px;
   width: 192px; }
