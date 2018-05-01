@@ -28,6 +28,7 @@ class Finished extends Component {
     // console.log(currentLessonStrokes);
 
     let misstrokesSummary = '';
+    let strokeAttemptsPresentation;
 
     if (currentLessonStrokes.length > 0) {
       let listOfPossibleStrokeImprovements = currentLessonStrokes.map( (phrase, i) => {
@@ -36,6 +37,16 @@ class Finished extends Component {
               <li key={ j } className="nowrap di ml1"><span className="bg-warning px1">{attempt}</span></li>
           );
         });
+        if (phrase.attempts.length > 0) {
+          strokeAttemptsPresentation = (
+            <div>
+              <p className="visually-hidden di"><span className="visually-hidden">You wrote:</span></p>
+              <ol className="unstyled-list mb0 misstroke-list di">
+                {strokeAttempts}
+              </ol>
+            </div>
+          );
+        }
         return(
           <li key={ i } className="unstyled-list-item bg-slat p1 mb1 overflow-scroll">
             <label className="checkbox-label mt0">
@@ -49,10 +60,7 @@ class Finished extends Component {
                 />
                 <span className="matched steno-material px1 nowrap">{phrase.word}</span>
             </label>
-            <p className="visually-hidden di"><span className="visually-hidden">You wrote:</span></p>
-            <ol className="unstyled-list mb0 misstroke-list di">
-              {strokeAttempts}
-            </ol>
+            {strokeAttemptsPresentation}
             <p className="pl3 mb0"><span className="visually-hidden text-small">Hint: </span><span className="steno-stroke steno-stroke--subtle text-small px1">{phrase.stroke.split('').map((item, i)=><kbd className="raw-steno-key raw-steno-key--subtle text-small" key={i}>{item}</kbd>)}</span></p>
           </li>
         );
