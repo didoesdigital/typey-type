@@ -179,7 +179,9 @@ class App extends Component {
         "category": "Drills",
         "subcategory": "",
         "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
-      }]
+      }],
+      revisionMaterial: [
+      ]
     };
   }
 
@@ -300,6 +302,21 @@ class App extends Component {
     const target = event.target;
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({fullscreen: value});
+    return value;
+  }
+
+  updateRevisionMaterial(event) {
+    let currentState = this.state.currentLessonStrokes;
+    let newState = Object.assign({}, currentState);
+
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
+
+    // newState[name] = value.replace(/-checkbox/,'');
+    newState[name].checked = value;
+
+    this.setState({revisionMaterial: newState});
     return value;
   }
 
@@ -519,6 +536,38 @@ class App extends Component {
     });
   }
 
+  reviseLesson(event) {
+    event.preventDefault();
+    let newSourceMaterial = this.state.revisionMaterial;
+    let newArray = [];
+    for (let i = 0; i < newSourceMaterial.length; i++) {
+      if (newSourceMaterial[i].checked === true) {
+        let obj = {};
+        obj.phrase = newSourceMaterial[i].word;
+        obj.stroke = newSourceMaterial[i].stroke;
+        newArray.push(obj);
+      }
+    }
+    console.log(newArray);
+    if (newArray.length === 0 ) {
+      console.log("EMPTY ARRAY!");
+      // console.log(this.state.lesson.sourceMaterial);
+      newArray[0] = {phrase: "The", stroke: "-T"};
+      // newArray.push(this.state.lesson.sourceMaterial);
+    }
+    // console.log(newArray);
+    let currentLesson = this.state.lesson;
+    let newLesson = Object.assign({}, currentLesson);
+    newLesson.sourceMaterial = newArray;
+    this.setState({
+      lesson: newLesson
+    }, () => {
+      this.stopLesson();
+      this.setupLesson();
+    });
+    this.restartLesson(event);
+  }
+
   restartLesson(event) {
     event.preventDefault();
     this.setState({
@@ -580,13 +629,12 @@ class App extends Component {
       let attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
       newState.currentPhraseAttempts = []; // reset for next word
       newState.currentLessonStrokes = this.state.currentLessonStrokes; // [{word: "cat", attempts: ["cut"], stroke: "KAT"}, {word: "sciences", attempts ["sign", "ss"], stroke: "SAOEUPB/EPBC/-S"]
-      if (!accurateStroke) {
         newState.currentLessonStrokes.push({
           word: this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase,
           attempts: attempts,
-          stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke
+          stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke,
+          checked: true
         });
-      }
       // can these newState assignments be moved down below the scores assignments?
 
       if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
@@ -681,6 +729,9 @@ class App extends Component {
                   {header}
                   <Home 
                     restartLesson={this.restartLesson.bind(this)}
+                    reviseLesson={this.reviseLesson.bind(this)}
+                    revisionMaterial={this.state.revisionMaterial}
+                    updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
                     items={this.state.lessonIndex}
                     lessonSubTitle={this.state.lesson.subtitle}
                     lessonTitle={this.state.lesson.title}
@@ -778,6 +829,7 @@ class App extends Component {
                     fullscreen={this.state.fullscreen}
                     changeFullscreen={this.changeFullscreen.bind(this)}
                     restartLesson={this.restartLesson.bind(this)}
+                    reviseLesson={this.reviseLesson.bind(this)}
                     items={this.state.lessonIndex}
                     lessonSubTitle={this.state.lesson.subtitle}
                     lessonTitle={this.state.lesson.title}
@@ -813,6 +865,8 @@ class App extends Component {
                     handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
                     hideOtherSettings={this.state.hideOtherSettings}
                     repetitionsRemaining={this.state.repetitionsRemaining}
+                    revisionMaterial={this.state.revisionMaterial}
+                    updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
                     setCustomLesson={this.setCustomLesson.bind(this)}
                     settings={this.state.lesson.settings}
                     showStrokesInLesson={this.state.showStrokesInLesson}

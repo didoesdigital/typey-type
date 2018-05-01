@@ -33,17 +33,27 @@ class Finished extends Component {
       let listOfPossibleStrokeImprovements = currentLessonStrokes.map( (phrase, i) => {
         let strokeAttempts = phrase.attempts.map( ( attempt, j ) => {
           return(
-              <li key={ j } className="unstyled-list-item nowrap"><span className="bg-warning px1">{attempt}</span></li>
+              <li key={ j } className="nowrap di ml1"><span className="bg-warning px1">{attempt}</span></li>
           );
         });
         return(
-          <li key={ i } className="unstyled-list-item mr3 dib">
-            <h4 className="mt0"><span className="visually-hidden">Material to write: </span><span className="matched steno-material px1 nowrap">{phrase.word}</span></h4>
-            <p><span className="visually-hidden">You wrote:</span></p>
-            <ol className="unstyled-list mb0 misstroke-list">
+          <li key={ i } className="unstyled-list-item mr3 bg-slat p1 mb1">
+            <label className="checkbox-label mt0">
+              <input
+                className="checkbox-input"
+                type="checkbox"
+                name={ i }
+                id={ i }
+                checked={this.props.currentLessonStrokes[i].checked}
+                onChange={this.props.updateRevisionMaterial}
+                />
+                <span className="matched steno-material px1 nowrap">{phrase.word}</span>
+            </label>
+            <p className="visually-hidden di"><span className="visually-hidden">You wrote:</span></p>
+            <ol className="unstyled-list mb0 misstroke-list di">
               {strokeAttempts}
             </ol>
-            <p><span className="visually-hidden text-small">Hint: </span><span className="steno-stroke steno-stroke--subtle text-small px1">{phrase.stroke.split('').map((item, i)=><kbd className="raw-steno-key raw-steno-key--subtle text-small" key={i}>{item}</kbd>)}</span></p>
+            <p className="pl3 mb0"><span className="visually-hidden text-small">Hint: </span><span className="steno-stroke steno-stroke--subtle text-small px1">{phrase.stroke.split('').map((item, i)=><kbd className="raw-steno-key raw-steno-key--subtle text-small" key={i}>{item}</kbd>)}</span></p>
           </li>
         );
       });
@@ -51,7 +61,7 @@ class Finished extends Component {
       misstrokesSummary = (
         <div>
           <h3 className="mt0 nowrap">Possible stroke improvements</h3>
-          <ol className="flex mb0">{listOfPossibleStrokeImprovements}</ol>
+          <ol className="mb0 unstyled-list">{listOfPossibleStrokeImprovements}</ol>
         </div>
       );
     }
@@ -143,6 +153,11 @@ class Finished extends Component {
         <div className="misstrokes-summary mr3">
           {misstrokesSummary}
         </div>
+        <p>
+          <a href={this.props.path} onClick={this.props.reviseLesson} className="" role="button">
+            <IconRestart aria-hidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
+            Revise lesson</a>
+        </p>
       </div>
     );
 

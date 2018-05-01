@@ -237,6 +237,7 @@ input:focus::placeholder {
 }
 
 .db              { display: block; }
+.di             { display: inline; }
 .dib             { display: inline-block; }
 .table           { display: table; }
 .table-cell      { display: table-cell; }
@@ -336,7 +337,7 @@ input:focus::placeholder {
 .p3      { padding: 24px; }
 .px3     { padding-left: 24px; padding-right: 24px; }
 .pb0     { padding-bottom: 0; }
-.pb4     { padding-bottom: 24px; }
+.pl3     { padding-left: 24px; }
 
 .py05 {
   padding-top: 4px;
@@ -361,7 +362,9 @@ input:focus::placeholder {
 .text-center { text-align: center; }
 .text-right  { text-align: right; }
 .bg-danger   { background-color: add-tint($brand-danger, 80%); }
-.bg-warning   { background-color: add-tint($brand-warning, 60%); }
+.bg-warning  { background-color: add-tint($brand-warning, 60%); }
+.bg-info     { background-color: add-tint($brand-primary, 95%); }
+.bg-slat     { background-color: add-tint($brand-primary, 90%); }
 
 .text-uppercase {
   text-transform: uppercase;
@@ -455,7 +458,7 @@ input:focus::placeholder {
   }
 }
 .lesson-canvas {
-  align-items: center;
+  // align-items: center;
   display: flex;
   position: relative;
   max-height: 320px;
@@ -467,16 +470,16 @@ input:focus::placeholder {
 }
 
 .finished-lesson {
-  display: grid;
-  grid-gap: 24px;
-  justify-content: space-between;
+  // display: grid;
+  // grid-gap: 24px;
+  // justify-content: space-between;
   margin: 0 auto;
-  .finished-summary {
-    grid-column: 1;
-  }
-  .misstrokes-summary {
-    grid-column: 2;
-  }
+  // .finished-summary {
+  //   grid-column: 1;
+  // }
+  // .misstrokes-summary {
+  //   grid-column: 2;
+  // }
 }
 
 .user-settings {

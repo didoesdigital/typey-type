@@ -196,6 +196,9 @@ input:focus::placeholder {
 .db {
   display: block; }
 
+.di {
+  display: inline; }
+
 .dib {
   display: inline-block; }
 
@@ -402,8 +405,8 @@ input:focus::placeholder {
 .pb0 {
   padding-bottom: 0; }
 
-.pb4 {
-  padding-bottom: 24px; }
+.pl3 {
+  padding-left: 24px; }
 
 .py05 {
   padding-top: 4px;
@@ -437,6 +440,12 @@ input:focus::placeholder {
 
 .bg-warning {
   background-color: #ffe5b3; }
+
+.bg-info {
+  background-color: #f5f4f6; }
+
+.bg-slat {
+  background-color: #ece9ee; }
 
 .text-uppercase {
   text-transform: uppercase;
@@ -513,7 +522,6 @@ input:focus::placeholder {
       grid-column: 4; } }
 
 .lesson-canvas {
-  align-items: center;
   display: flex;
   position: relative;
   max-height: 320px; }
@@ -522,14 +530,7 @@ input:focus::placeholder {
       min-width: 544px; } }
 
 .finished-lesson {
-  display: grid;
-  grid-gap: 24px;
-  justify-content: space-between;
   margin: 0 auto; }
-  .finished-lesson .finished-summary {
-    grid-column: 1; }
-  .finished-lesson .misstrokes-summary {
-    grid-column: 2; }
 
 .user-settings {
   min-height: 320px;

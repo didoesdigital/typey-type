@@ -182,10 +182,13 @@ class Lesson extends Component {
               path={this.props.path}
               prefillSurveyLink={this.prefillSurveyLink}
               restartLesson={this.props.restartLesson}
+              reviseLesson={this.props.reviseLesson}
               settings={this.props.lesson.settings}
               timer={this.props.timer}
               toggleHideOtherSettings={this.props.toggleHideOtherSettings}
               charsPerWord={this.props.charsPerWord}
+              revisionMaterial={this.props.revisionMaterial}
+              updateRevisionMaterial={this.props.updateRevisionMaterial}
               totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
               totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
