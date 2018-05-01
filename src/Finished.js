@@ -39,12 +39,12 @@ class Finished extends Component {
         });
         if (phrase.attempts.length > 0) {
           strokeAttemptsPresentation = (
-            <div>
+            <span>
               <p className="visually-hidden di"><span className="visually-hidden">You wrote: </span></p>
               <ol className="unstyled-list mb0 misstroke-list di">
                 {strokeAttempts}
               </ol>
-            </div>
+            </span>
           );
         } else {
           strokeAttemptsPresentation = [];
