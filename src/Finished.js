@@ -37,7 +37,7 @@ class Finished extends Component {
           );
         });
         return(
-          <li key={ i } className="unstyled-list-item mr3 bg-slat p1 mb1">
+          <li key={ i } className="unstyled-list-item bg-slat p1 mb1 overflow-scroll">
             <label className="checkbox-label mt0">
               <input
                 className="checkbox-input"
@@ -134,7 +134,7 @@ class Finished extends Component {
     }
 
     let lessonSummary = (
-      <div className="finished-lesson mr1">
+      <div className="finished-lesson mr1 mw-504 overflow-hidden">
         <div className="finished-summary">
           <h2 className="mb1">Finished</h2>
           <h3 className="mt0 nowrap">{wpm}&nbsp;<abbr title="words per minute">WPM</abbr>!{accuracy}</h3>
@@ -150,7 +150,7 @@ class Finished extends Component {
               Restart lesson</a>
           </p>
         </div>
-        <div className="misstrokes-summary mr3">
+        <div className="misstrokes-summary">
           {misstrokesSummary}
         </div>
         <p>

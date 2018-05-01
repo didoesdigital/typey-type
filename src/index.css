@@ -260,6 +260,9 @@ input:focus::placeholder {
 .overflow-scroll {
   overflow: scroll; }
 
+.overflow-hidden {
+  overflow: hidden; }
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto; }
@@ -382,6 +385,9 @@ input:focus::placeholder {
 
 .mw-584 {
   max-width: 584px; }
+
+.mw-504 {
+  max-width: 504px; }
 
 .mw-408 {
   max-width: 408px; }
