@@ -313,7 +313,8 @@ class App extends Component {
 
     const target = event.target;
     const checked = target.type === 'checkbox' ? target.checked : target.value;
-    const index = target.name;
+    const name = target.name.replace(/-checkbox/,'');
+    const index = name;
     // console.log("index:");
     // console.log(index);
     // console.log("checked:");

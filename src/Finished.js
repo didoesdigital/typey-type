@@ -42,8 +42,8 @@ class Finished extends Component {
               <input
                 className="checkbox-input"
                 type="checkbox"
-                name={ i }
-                id={ i }
+                name={ i + "-checkbox" }
+                id={ i + "-checkbox" }
                 checked={this.props.currentLessonStrokes[i].checked}
                 onChange={this.props.updateRevisionMaterial}
                 />
