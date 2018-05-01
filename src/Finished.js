@@ -40,12 +40,14 @@ class Finished extends Component {
         if (phrase.attempts.length > 0) {
           strokeAttemptsPresentation = (
             <div>
-              <p className="visually-hidden di"><span className="visually-hidden">You wrote:</span></p>
+              <p className="visually-hidden di"><span className="visually-hidden">You wrote: </span></p>
               <ol className="unstyled-list mb0 misstroke-list di">
                 {strokeAttempts}
               </ol>
             </div>
           );
+        } else {
+          strokeAttemptsPresentation = [];
         }
         return(
           <li key={ i } className="unstyled-list-item bg-slat p1 mb1 overflow-scroll">
