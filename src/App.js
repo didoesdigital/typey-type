@@ -200,6 +200,14 @@ class App extends Component {
     this.stopTimer();
     writePersonalPreferences('userSettings', this.state.userSettings);
     writePersonalPreferences('metWords', this.state.metWords);
+
+    let currentLessonStrokes = this.state.currentLessonStrokes;
+    for (let i = 0; i < currentLessonStrokes.length; i++) {
+      if (currentLessonStrokes[i].attempts.length === 0) {
+        currentLessonStrokes[i].checked = false;
+      }
+    }
+
     this.setState({
       actualText: '',
       currentPhraseID: this.state.lesson.presentedMaterial.length,
