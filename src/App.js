@@ -451,9 +451,9 @@ class App extends Component {
     let currentLesson = this.state.lesson;
     let newLesson = Object.assign({}, currentLesson);
     newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
-    // if (this.state.revisionMode) {
-    //   newLesson.presentedMaterial = this.state.revisionMaterial.map(line => ({...line}));
-    // }
+    if (this.state.revisionMode) {
+      newLesson.presentedMaterial = this.state.revisionMaterial.map(line => ({...line}));
+    }
 
     this.stopTimer();
 
@@ -474,7 +474,6 @@ class App extends Component {
     newLesson.presentedMaterial = repeatedLesson;
     newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
-    console.log(newLesson.presentedMaterial);
     let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
     this.setState({
@@ -558,32 +557,32 @@ class App extends Component {
         newRevisionMaterial.push({ phrase: currentLessonStrokes[i].word, stroke: currentLessonStrokes[i].stroke });
       }
     }
-    console.log(newRevisionMaterial);
+    // console.log(newRevisionMaterial);
     if (newRevisionMaterial.length === 0 ) {
       // console.log(this.state.lesson.sourceMaterial);
       // newRevisionMaterial[0] = {phrase: "The", stroke: "-T"};
       newRevisionMaterial.push(this.state.lesson.sourceMaterial);
     }
     // console.log(newRevisionMaterial);
-    let currentLesson = this.state.lesson;
-    let newLesson = Object.assign({}, currentLesson);
-    newLesson.sourceMaterial = newRevisionMaterial;
+    // let newLesson = Object.assign({}, this.state.lesson);
+    // newLesson.sourceMaterial = newRevisionMaterial;
     this.setState({
-      lesson: newLesson,
+      revisionMaterial: newRevisionMaterial,
       revisionMode: true
     }, () => {
       this.stopLesson();
       this.setupLesson();
     });
-    this.restartLesson(event);
+    let revise = true;
+    this.restartLesson(event, revise);
   }
 
-  restartLesson(event) {
+  restartLesson(event, revise = false) {
     event.preventDefault();
+    let revisionMode = revise;
     this.setState({
       currentPhraseID: 0,
-      revisionMode: false,
-      revisionMaterial: []
+      revisionMode: revisionMode
     }, () => {
       this.stopLesson();
       this.setupLesson();
