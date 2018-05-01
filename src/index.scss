@@ -237,7 +237,7 @@ input:focus::placeholder {
 }
 
 .db              { display: block; }
-.di             { display: inline; }
+.di              { display: inline; }
 .dib             { display: inline-block; }
 .table           { display: table; }
 .table-cell      { display: table-cell; }
@@ -247,6 +247,7 @@ input:focus::placeholder {
 .justify-around  { justify-content: space-around; }
 .items-baseline  { align-items: baseline; }
 .items-center    { align-items: center; }
+.self-center     { align-self: center; }
 .hide            { display: none; }
 .relative        { position: relative; }
 .absolute        { position: absolute; }

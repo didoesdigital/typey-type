@@ -226,6 +226,9 @@ input:focus::placeholder {
 .items-center {
   align-items: center; }
 
+.self-center {
+  align-self: center; }
+
 .hide {
   display: none; }
 
