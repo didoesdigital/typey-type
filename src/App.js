@@ -58,6 +58,7 @@ class App extends Component {
       metWords: {
         '.': 0
       },
+      revisionMode: false,
       userSettings: {
         caseSensitive: true,
         retainedWords: true,
@@ -306,18 +307,26 @@ class App extends Component {
   }
 
   updateRevisionMaterial(event) {
-    let currentState = this.state.currentLessonStrokes;
-    let newState = Object.assign({}, currentState);
+    let newCurrentLessonStrokes = this.state.currentLessonStrokes.map(stroke => ({...stroke}));
+    // console.log("newCurrentLessonStrokes:");
+    // console.log(newCurrentLessonStrokes);
 
     const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
+    const checked = target.type === 'checkbox' ? target.checked : target.value;
+    const index = target.name;
+    // console.log("index:");
+    // console.log(index);
+    // console.log("checked:");
+    // console.log(checked);
+    // console.log("newCurrentLessonStrokes[index].checked: ");
+    // console.log(newCurrentLessonStrokes[index].checked);
 
+    // currently the name or checkbox id is an index integer i e.g. 0
     // newState[name] = value.replace(/-checkbox/,'');
-    newState[name].checked = value;
+    newCurrentLessonStrokes[index].checked = checked;
 
-    this.setState({revisionMaterial: newState});
-    return value;
+    this.setState({currentLessonStrokes: newCurrentLessonStrokes});
+    return checked;
   }
 
   changeUserSetting(event) {
@@ -442,6 +451,9 @@ class App extends Component {
     let currentLesson = this.state.lesson;
     let newLesson = Object.assign({}, currentLesson);
     newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
+    // if (this.state.revisionMode) {
+    //   newLesson.presentedMaterial = this.state.revisionMaterial.map(line => ({...line}));
+    // }
 
     this.stopTimer();
 
@@ -462,6 +474,7 @@ class App extends Component {
     newLesson.presentedMaterial = repeatedLesson;
     newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
+    console.log(newLesson.presentedMaterial);
     let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
     this.setState({
@@ -538,29 +551,26 @@ class App extends Component {
 
   reviseLesson(event) {
     event.preventDefault();
-    let newSourceMaterial = this.state.revisionMaterial;
-    let newArray = [];
-    for (let i = 0; i < newSourceMaterial.length; i++) {
-      if (newSourceMaterial[i].checked === true) {
-        let obj = {};
-        obj.phrase = newSourceMaterial[i].word;
-        obj.stroke = newSourceMaterial[i].stroke;
-        newArray.push(obj);
+    let currentLessonStrokes = this.state.currentLessonStrokes;
+    let newRevisionMaterial = [];
+    for (let i = 0; i < currentLessonStrokes.length; i++) {
+      if (currentLessonStrokes[i].checked === true) {
+        newRevisionMaterial.push({ phrase: currentLessonStrokes[i].word, stroke: currentLessonStrokes[i].stroke });
       }
     }
-    console.log(newArray);
-    if (newArray.length === 0 ) {
-      console.log("EMPTY ARRAY!");
+    console.log(newRevisionMaterial);
+    if (newRevisionMaterial.length === 0 ) {
       // console.log(this.state.lesson.sourceMaterial);
-      newArray[0] = {phrase: "The", stroke: "-T"};
-      // newArray.push(this.state.lesson.sourceMaterial);
+      // newRevisionMaterial[0] = {phrase: "The", stroke: "-T"};
+      newRevisionMaterial.push(this.state.lesson.sourceMaterial);
     }
-    // console.log(newArray);
+    // console.log(newRevisionMaterial);
     let currentLesson = this.state.lesson;
     let newLesson = Object.assign({}, currentLesson);
-    newLesson.sourceMaterial = newArray;
+    newLesson.sourceMaterial = newRevisionMaterial;
     this.setState({
-      lesson: newLesson
+      lesson: newLesson,
+      revisionMode: true
     }, () => {
       this.stopLesson();
       this.setupLesson();
@@ -571,7 +581,9 @@ class App extends Component {
   restartLesson(event) {
     event.preventDefault();
     this.setState({
-      currentPhraseID: 0
+      currentPhraseID: 0,
+      revisionMode: false,
+      revisionMaterial: []
     }, () => {
       this.stopLesson();
       this.setupLesson();
