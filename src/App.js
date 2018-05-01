@@ -203,7 +203,7 @@ class App extends Component {
 
     let currentLessonStrokes = this.state.currentLessonStrokes;
     for (let i = 0; i < currentLessonStrokes.length; i++) {
-      if (currentLessonStrokes[i].attempts.length === 0) {
+      if (currentLessonStrokes[i].accuracy === true) {
         currentLessonStrokes[i].checked = false;
       }
     }
@@ -636,7 +636,8 @@ class App extends Component {
           word: this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase,
           attempts: attempts,
           stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke,
-          checked: true
+          checked: true,
+          accuracy: accurateStroke
         });
       // can these newState assignments be moved down below the scores assignments?
 
