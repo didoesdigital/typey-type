@@ -263,6 +263,9 @@ input:focus::placeholder {
 .overflow-hidden {
   overflow: hidden; }
 
+.overflow-auto {
+  overflow: auto; }
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto; }
