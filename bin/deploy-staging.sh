@@ -4,14 +4,14 @@ set -e
 
 yarn run test
 
-read -q "?Reviewed deploy checklist? (y/n) "
-if [[ $REPLY =~ ^[Yy]$ ]];
-  then
-    echo "Continuing... "
-  else
-    echo "... Goodbye!"
-    exit
-fi
+# read -q "?Reviewed deploy checklist? (y/n) "
+# if [[ $REPLY =~ ^[Yy]$ ]];
+#   then
+#     echo "Continuing... "
+#   else
+#     echo "... Goodbye!"
+#     exit
+# fi
 
 ruby ~/projects/plover-tools/typey-type-lesson-generator/build-dict-for-typey-type.rb \
   ~/dropbox-personal/projects/Plover/dictionaries/nouns.json \
@@ -39,5 +39,5 @@ ruby ~/projects/plover-tools/typey-type-lesson-generator/build-dict-for-typey-ty
   ~/dropbox-personal/projects/Plover/dictionaries/top-level-domains.json
 
 yarn run build
-git tag -n
+# git tag -n
 rsync --archive --verbose --delete --exclude=".DS_Store" -e "ssh -p 2222" ~/projects/typey-type/build/ di@localhost:www/typey-type/
