@@ -21,6 +21,7 @@ class CustomLessonSetup extends Component {
 
   componentDidMount() {
     new Clipboard('.js-clipboard-button');
+    document.title = 'Typey type | Custom lesson'
     if (this.mainHeading) {
       this.mainHeading.focus();
     }

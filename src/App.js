@@ -187,6 +187,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    document.title = "Typey type for stenographers";
     this.setPersonalPreferences();
     fetchLessonIndex().then((json) => this.setState({ lessonIndex: json }));
   }
@@ -503,6 +504,7 @@ class App extends Component {
         currentPhraseID: 0
       }, () => {
         this.setupLesson();
+        document.title = 'Typey type | ' + this.state.lesson.title;
       });
     });
   }
@@ -522,6 +524,7 @@ class App extends Component {
       currentPhraseID: 0
     }, () => {
       this.setupLesson();
+      document.title = 'Typey type | ' + this.state.lesson.title;
     });
   }
 
@@ -533,6 +536,7 @@ class App extends Component {
         currentPhraseID: 0
       }, () => {
         this.setupLesson();
+        document.title = 'Typey type | ' + this.state.lesson.title;
       });
     }
     return event;

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 class Contribute extends Component {
   componentDidMount() {
+    document.title = 'Typey type | Contribute'
     if (this.mainHeading) {
       this.mainHeading.focus();
     }

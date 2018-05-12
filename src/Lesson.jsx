@@ -13,10 +13,13 @@ class Lesson extends Component {
   componentDidMount() {
     if (this.props.location.pathname.startsWith('/lessons/custom')) {
       this.props.setCustomLesson();
+      document.title = 'Typey type | Custom lesson';
     } else if(this.isFlashcards()) {
       // do nothing
+      document.title = 'Typey type | Flashcards';
     } else if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
+      document.title = 'Typey type | ' + this.props.lesson.title;
     }
     if (!this.props.firstVisit && this.mainHeading) {
       this.mainHeading.focus();
@@ -25,10 +28,12 @@ class Lesson extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.location.pathname.startsWith('/lessons/custom') && this.props.lesson.title !== "Custom") {
       this.props.setCustomLesson();
+      document.title = 'Typey type | ' + this.props.lesson.title;
     } else if(this.isFlashcards()) {
       // do nothing
     } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
+      document.title = 'Typey type | ' + this.props.lesson.title;
     }
   }
 
