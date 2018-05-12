@@ -17,6 +17,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
+import Announcements from './Announcements';
 import Lessons from './Lessons';
 import Home from './Home';
 import Header from './Header';
@@ -34,6 +35,7 @@ class App extends Component {
     super(props);
     this.charsPerWord = 5;
     this.state = {
+      announcementMessage: null,
       value: '',
       currentPhraseAttempts: [],
       currentPhraseID: 0,
@@ -500,6 +502,7 @@ class App extends Component {
     getLesson(path).then((lessonText) => {
       let lesson = parseLesson(lessonText, path);
       this.setState({
+        announcementMessage: 'Navigated to: ' + lesson.title,
         lesson: lesson,
         currentPhraseID: 0
       }, () => {
@@ -730,6 +733,7 @@ class App extends Component {
       let presentedMaterialCurrentItem = this.state.lesson.presentedMaterial[this.state.currentPhraseID] || { phrase: '', stroke: '' };
       return (
         <div className="app">
+          <Announcements message={this.state.announcementMessage} />
           <div>
             <Switch>
               <Route exact={true} path="/" render={(props) =>

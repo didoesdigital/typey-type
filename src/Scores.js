@@ -5,6 +5,7 @@ import {
 } from 'react-router-dom';
 
 class Scores extends Component {
+
   calculateScores(timer, totalNumberOfMatchedWords) {
     let wordsPerMinute;
     if (this.props.timer > 0) {
