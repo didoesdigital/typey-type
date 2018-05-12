@@ -523,6 +523,7 @@ class App extends Component {
       path: process.env.PUBLIC_URL + '/lessons/custom'
     }
     this.setState({
+      announcementMessage: 'Navigated to: ' + lesson.title,
       lesson: lesson,
       currentPhraseID: 0
     }, () => {
@@ -535,6 +536,7 @@ class App extends Component {
     if (event && event.target && event.target.value && event.target.value.length > 0) {
       let lesson = parseCustomMaterial(event.target.value);
       this.setState({
+        announcementMessage: 'Navigated to: ' + this.state.lesson.title,
         lesson: lesson,
         currentPhraseID: 0
       }, () => {
@@ -739,7 +741,7 @@ class App extends Component {
               <Route exact={true} path="/" render={(props) =>
                 <div>
                   {header}
-                  <Home 
+                  <Home
                     restartLesson={this.restartLesson.bind(this)}
                     reviseLesson={this.reviseLesson.bind(this)}
                     revisionMaterial={this.state.revisionMaterial}

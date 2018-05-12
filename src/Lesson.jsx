@@ -268,7 +268,7 @@ class Lesson extends Component {
                   </div>
                 </div>
                 <div className="visually-hidden">
-                  <div role="status" aria-live="assertive">
+                  <div role="status" aria-live="polite">
                     <div className="material"><pre><span className="steno-material">{this.props.currentPhrase}</span></pre></div>
                     {strokeTip}
                   </div>
