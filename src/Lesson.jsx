@@ -50,7 +50,7 @@ class Lesson extends Component {
   nextLessonPath() {
     let thisLesson = this.props.lesson.path;
     let suggestedNext = "/";
-    let match = (el) => '/lessons'+el.path === thisLesson;
+    let match = (el) => process.env.PUBLIC_URL + '/lessons' + el.path === thisLesson;
     let lessonIndexItem = this.props.lessonIndex.find(match);
     if (lessonIndexItem !== undefined) {
       if (lessonIndexItem.hasOwnProperty("suggestedNext")){
