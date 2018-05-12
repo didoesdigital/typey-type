@@ -94,6 +94,9 @@ class Support extends Component {
 
             <h3 id="support">Support</h3>
             <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or <a href="https://twitter.com/didoesdigital">tweet @DiDoesDigital</a>.</p>
+
+            <h3 id="privacy">Privacy</h3>
+            <p>This site uses <a href="https://www.google.com/intl/en/policies/privacy/">Google Analytics</a> to track usage data for improving the site (see the <a href="https://support.google.com/analytics/answer/6004245?hl=en">Google&nbsp;Analytics privacy controls to opt out</a>). From 1 July 2018, Typey type will track custom lesson material as part of that usage data unless you opt out.</p>
           </div>
         </div>
       </main>

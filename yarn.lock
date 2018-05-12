@@ -5686,6 +5686,13 @@ react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
 
+react-ga@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/react-ga/-/react-ga-2.5.0.tgz#fbba2b33d41ce727f7d4cf383d54dbbfbf96c507"
+  optionalDependencies:
+    prop-types "^15.6.0"
+    react "^15.6.2 || ^16.0"
+
 react-numeric-input@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-numeric-input/-/react-numeric-input-2.2.0.tgz#5f4f1ce99b32960a9ededa43670a5da225aef850"
@@ -5763,6 +5770,15 @@ react-swipe@^5.1.1:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
     swipe-js-iso "^2.0.4"
+
+"react@^15.6.2 || ^16.0":
+  version "16.3.2"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.3.2.tgz#fdc8420398533a1e58872f59091b272ce2f91ea9"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
 
 react@^16.0.0:
   version "16.1.1"

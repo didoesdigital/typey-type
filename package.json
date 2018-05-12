@@ -11,6 +11,7 @@
     "react": "^16.0.0",
     "react-autocomplete": "^1.7.2",
     "react-dom": "^16.0.0",
+    "react-ga": "^2.5.0",
     "react-numeric-input": "^2.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.15",
