@@ -57,7 +57,6 @@ class Flashcards extends Component {
   }
 
   componentDidMount() {
-    document.title = 'Typey type | Flashcards'
     if (this.mainHeading) {
       this.mainHeading.focus();
     }

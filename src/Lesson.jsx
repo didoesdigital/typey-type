@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import DocumentTitle from 'react-document-title';
 import Material from './Material';
 import TypedText from './TypedText';
 import Scores from './Scores';
@@ -13,13 +14,10 @@ class Lesson extends Component {
   componentDidMount() {
     if (this.props.location.pathname.startsWith('/lessons/custom')) {
       this.props.setCustomLesson();
-      document.title = 'Typey type | Custom lesson';
     } else if(this.isFlashcards()) {
       // do nothing
-      document.title = 'Typey type | Flashcards';
     } else if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
-      document.title = 'Typey type | ' + this.props.lesson.title;
     }
     if (!this.props.firstVisit && this.mainHeading) {
       this.mainHeading.focus();
@@ -28,12 +26,10 @@ class Lesson extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.location.pathname.startsWith('/lessons/custom') && this.props.lesson.title !== "Custom") {
       this.props.setCustomLesson();
-      document.title = 'Typey type | ' + this.props.lesson.title;
     } else if(this.isFlashcards()) {
       // do nothing
     } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
-      document.title = 'Typey type | ' + this.props.lesson.title;
     }
   }
 
@@ -139,155 +135,163 @@ class Lesson extends Component {
     if (this.props.lesson) {
       if (this.isFlashcards()) {
         return (
-          <Flashcards
-            fullscreen={this.props.fullscreen}
-            changeFullscreen={this.props.changeFullscreen.bind(this)}
-            lessonpath={process.env.PUBLIC_URL + this.props.location.pathname.replace(/flashcards/, '') + 'lesson.txt'}
-            locationpathname={this.props.location.pathname}
-          />
+          <DocumentTitle title={'Typey type | Flashcards'}>
+            <Flashcards
+              fullscreen={this.props.fullscreen}
+              changeFullscreen={this.props.changeFullscreen.bind(this)}
+              lessonpath={process.env.PUBLIC_URL + this.props.location.pathname.replace(/flashcards/, '') + 'lesson.txt'}
+              locationpathname={this.props.location.pathname}
+            />
+          </DocumentTitle>
         )
       } else if (this.isCustom() && !this.isSetup()) {
         return (
-          <CustomLessonSetup
-            createCustomLesson={this.props.createCustomLesson}
-          />
+          <DocumentTitle title='Typey type | Create a custom lesson'>
+            <CustomLessonSetup
+              createCustomLesson={this.props.createCustomLesson}
+            />
+          </DocumentTitle>
         )
       } else if (this.isFinished()) {
         return (
-          <main id="main">
-            <div className="subheader">
-              <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
-                <div className="flex mr1">
-                  <header className="flex items-baseline">
-                    <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                      <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
-                    </a>
-                  </header>
-                </div>
-                <div className="mxn2">
-                  {createNewCustomLesson}
-                  <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
-                  <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
+          <DocumentTitle title={'Typey type | ' + this.props.lesson.title}>
+            <main id="main">
+              <div className="subheader">
+                <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
+                  <div className="flex mr1">
+                    <header className="flex items-baseline">
+                      <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
+                        <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
+                      </a>
+                    </header>
+                  </div>
+                  <div className="mxn2">
+                    {createNewCustomLesson}
+                    <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
+                    <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <Finished
-              actualText={this.props.actualText}
-              changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
-              changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
-              changeUserSetting={this.props.changeUserSetting}
-              chooseStudy={this.props.chooseStudy}
-              currentLessonStrokes={this.props.currentLessonStrokes}
-              disableUserSettings={this.props.disableUserSettings}
-              handleLimitWordsChange={this.props.handleLimitWordsChange}
-              handleRepetitionsChange={this.props.handleRepetitionsChange}
-              hideOtherSettings={this.props.hideOtherSettings}
-              suggestedNext={this.nextLessonPath()}
-              lessonLength={this.props.lesson.presentedMaterial.length}
-              path={this.props.path}
-              prefillSurveyLink={this.prefillSurveyLink}
-              restartLesson={this.props.restartLesson}
-              reviseLesson={this.props.reviseLesson}
-              settings={this.props.lesson.settings}
-              timer={this.props.timer}
-              toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-              charsPerWord={this.props.charsPerWord}
-              revisionMaterial={this.props.revisionMaterial}
-              updateRevisionMaterial={this.props.updateRevisionMaterial}
-              totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-              totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-              totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-              totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-              totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-              totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-              totalWordCount={this.props.lesson.presentedMaterial.length}
-              userSettings={this.props.userSettings}
-            />
-          </main>
+              <Finished
+                actualText={this.props.actualText}
+                changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
+                changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+                changeUserSetting={this.props.changeUserSetting}
+                chooseStudy={this.props.chooseStudy}
+                currentLessonStrokes={this.props.currentLessonStrokes}
+                disableUserSettings={this.props.disableUserSettings}
+                handleLimitWordsChange={this.props.handleLimitWordsChange}
+                handleRepetitionsChange={this.props.handleRepetitionsChange}
+                hideOtherSettings={this.props.hideOtherSettings}
+                suggestedNext={this.nextLessonPath()}
+                lessonLength={this.props.lesson.presentedMaterial.length}
+                path={this.props.path}
+                prefillSurveyLink={this.prefillSurveyLink}
+                restartLesson={this.props.restartLesson}
+                reviseLesson={this.props.reviseLesson}
+                settings={this.props.lesson.settings}
+                timer={this.props.timer}
+                toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+                charsPerWord={this.props.charsPerWord}
+                revisionMaterial={this.props.revisionMaterial}
+                updateRevisionMaterial={this.props.updateRevisionMaterial}
+                totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
+                totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+                totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
+                totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
+                totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
+                totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
+                totalWordCount={this.props.lesson.presentedMaterial.length}
+                userSettings={this.props.userSettings}
+              />
+            </main>
+          </DocumentTitle>
         )
       } else {
         return (
-          <main id="main">
-            <div className="subheader">
-              <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
-                <div className="flex mr1">
-                  <header className="flex items-baseline">
-                    <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                      <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
-                    </a>
-                  </header>
-                </div>
-                <div className="mxn2">
-                  {createNewCustomLesson}
-                  <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
-                  <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
+          <DocumentTitle title={'Typey type | ' + this.props.lesson.title}>
+            <main id="main">
+              <div className="subheader">
+                <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
+                  <div className="flex mr1">
+                    <header className="flex items-baseline">
+                      <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
+                        <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
+                      </a>
+                    </header>
+                  </div>
+                  <div className="mxn2">
+                    {createNewCustomLesson}
+                    <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
+                    <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div>
-              {firstVisit}
-              <div role="complementary" className="mx-auto mw-1024">
-                {customMessage}
-              </div>
-              <div className="lesson-wrapper mw-1024 p3">
-                <UserSettings
-                  changeUserSetting={this.props.changeUserSetting}
-                  changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
-                  changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
-                  chooseStudy={this.props.chooseStudy}
-                  disableUserSettings={this.props.disableUserSettings}
-                  handleLimitWordsChange={this.props.handleLimitWordsChange}
-                  handleRepetitionsChange={this.props.handleRepetitionsChange}
-                  hideOtherSettings={this.props.hideOtherSettings}
-                  toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-                  totalWordCount={this.props.totalWordCount}
-                  userSettings={this.props.userSettings}
-                />
-                <div role="article" className="lesson-canvas panel mw-568 p2 fill-fade-parent">
-                  <span className="fill-fade-edges"></span>
-                  <div className="mx-auto mw100 mt2 text-center self-center">
-                    <Material
-                      actualText={this.props.actualText}
-                      currentPhrase={this.props.currentPhrase}
-                      currentStroke={this.props.currentStroke}
-                      settings={this.props.settings}
-                      userSettings={this.props.userSettings}
-                      completedPhrases={this.props.completedPhrases}
-                      upcomingPhrases={this.props.upcomingPhrases}
-                    />
-                    <TypedText
-                      actualText={this.props.actualText}
-                      currentPhrase={this.props.currentPhrase}
-                      settings={this.props.settings}
-                      updateMarkup={this.props.updateMarkup.bind(this)}
-                      userSettings={this.props.userSettings}
-                    />
-                    <div aria-hidden="true">
+              <div>
+                {firstVisit}
+                <div role="complementary" className="mx-auto mw-1024">
+                  {customMessage}
+                </div>
+                <div className="lesson-wrapper mw-1024 p3">
+                  <UserSettings
+                    changeUserSetting={this.props.changeUserSetting}
+                    changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
+                    changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+                    chooseStudy={this.props.chooseStudy}
+                    disableUserSettings={this.props.disableUserSettings}
+                    handleLimitWordsChange={this.props.handleLimitWordsChange}
+                    handleRepetitionsChange={this.props.handleRepetitionsChange}
+                    hideOtherSettings={this.props.hideOtherSettings}
+                    toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+                    totalWordCount={this.props.totalWordCount}
+                    userSettings={this.props.userSettings}
+                  />
+                  <div role="article" className="lesson-canvas panel mw-568 p2 fill-fade-parent">
+                    <span className="fill-fade-edges"></span>
+                    <div className="mx-auto mw100 mt2 text-center self-center">
+                      <Material
+                        actualText={this.props.actualText}
+                        currentPhrase={this.props.currentPhrase}
+                        currentStroke={this.props.currentStroke}
+                        settings={this.props.settings}
+                        userSettings={this.props.userSettings}
+                        completedPhrases={this.props.completedPhrases}
+                        upcomingPhrases={this.props.upcomingPhrases}
+                      />
+                      <TypedText
+                        actualText={this.props.actualText}
+                        currentPhrase={this.props.currentPhrase}
+                        settings={this.props.settings}
+                        updateMarkup={this.props.updateMarkup.bind(this)}
+                        userSettings={this.props.userSettings}
+                      />
+                      <div aria-hidden="true">
+                        {strokeTip}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="visually-hidden">
+                    <div role="status" aria-live="polite">
+                      <div className="material"><pre><span className="steno-material">{this.props.currentPhrase}</span></pre></div>
                       {strokeTip}
                     </div>
                   </div>
-                </div>
-                <div className="visually-hidden">
-                  <div role="status" aria-live="polite">
-                    <div className="material"><pre><span className="steno-material">{this.props.currentPhrase}</span></pre></div>
-                    {strokeTip}
+                  <div className="scores panel p2">
+                    <Scores
+                      timer={this.props.timer}
+                      totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
+                      totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+                      totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
+                      totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
+                      totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
+                      totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
+                    />
                   </div>
                 </div>
-                <div className="scores panel p2">
-                  <Scores
-                    timer={this.props.timer}
-                    totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-                    totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-                    totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-                    totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-                    totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-                    totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-                  />
-                </div>
+                <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)}>Give feedback on this lesson (form opens in a new tab)</a></p>
               </div>
-              <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)}>Give feedback on this lesson (form opens in a new tab)</a></p>
-            </div>
-          </main>
+            </main>
+          </DocumentTitle>
         )
       }
     } else {

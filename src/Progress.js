@@ -4,7 +4,6 @@ import Clipboard from 'clipboard';
 class Progress extends Component {
   componentDidMount() {
     new Clipboard('.js-clipboard-button');
-    document.title = 'Typey type | Progress'
     if (this.mainHeading) {
       this.mainHeading.focus();
     }

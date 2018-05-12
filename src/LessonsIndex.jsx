@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 class LessonsIndex extends Component {
 
   componentDidMount() {
-    document.title = 'Typey type | Lessons';
     if (this.mainHeading) {
       this.mainHeading.focus();
     }

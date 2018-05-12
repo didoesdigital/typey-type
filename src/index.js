@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import DocumentTitle from 'react-document-title';
 import App from './App';
 import withTracker from './withTracker';
 import {
@@ -9,8 +10,10 @@ import {
 import './index.css';
 
 ReactDOM.render(
-  <Router basename="/typey-type">
-    <Route component={withTracker(App)} />
-  </Router>,
+  <DocumentTitle title='Typey type for stenographers'>
+    <Router basename="/typey-type">
+      <Route component={withTracker(App)} />
+    </Router>
+  </DocumentTitle>,
   document.getElementById('root')
 );

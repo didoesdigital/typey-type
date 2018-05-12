@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 class Support extends Component {
   componentDidMount() {
-    document.title = 'Typey type | About'
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
