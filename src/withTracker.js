@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
 
-GoogleAnalytics.initialize('UA-113450929-1');
+// GoogleAnalytics.initialize('UA-113450929-1', {debug: true, titleCase: false });
+GoogleAnalytics.initialize('UA-113450929-1', { titleCase: false });
 
 const withTracker = (WrappedComponent, options = {}) => {
   const trackPage = page => {
@@ -14,13 +15,13 @@ const withTracker = (WrappedComponent, options = {}) => {
 
   const HOC = class extends Component {
     componentDidMount() {
-      const page = this.props.location.pathname;
+      const page = process.env.PUBLIC_URL + this.props.location.pathname;
       trackPage(page);
     }
 
     componentWillReceiveProps(nextProps) {
-      const currentPage = this.props.location.pathname;
-      const nextPage = nextProps.location.pathname;
+      const currentPage = process.env.PUBLIC_URL + this.props.location.pathname;
+      const nextPage = process.env.PUBLIC_URL + nextProps.location.pathname;
 
       if (currentPage !== nextPage) {
         trackPage(nextPage);
