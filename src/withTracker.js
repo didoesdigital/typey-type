@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
 
-// GoogleAnalytics.initialize('UA-113450929-1', {debug: true});
-GoogleAnalytics.initialize([{
-  trackingId: 'UA-113450929-1',
-  gaOptions: { name: 'DiDoesDigital' }
-}, {
-  trackingId: 'UA-113450929-2',
-  gaOptions: { name: 'Typey type' }
-}]);
+// GoogleAnalytics.initialize('UA-113450929-1', {debug: true, titleCase: false });
+GoogleAnalytics.initialize('UA-113450929-1', { titleCase: false });
 
 const withTracker = (WrappedComponent, options = {}) => {
   const trackPage = page => {
