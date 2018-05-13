@@ -738,63 +738,8 @@ class App extends Component {
               <Route exact={true} path="/" render={(props) =>
                 <div>
                   {header}
-                  <DocumentTitle title={'Typey type | ' + this.state.lesson.title}>
+                  <DocumentTitle title='Typey type for stenographers'>
                     <Home
-                      restartLesson={this.restartLesson.bind(this)}
-                      reviseLesson={this.reviseLesson.bind(this)}
-                      revisionMaterial={this.state.revisionMaterial}
-                      updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
-                      items={this.state.lessonIndex}
-                      lessonSubTitle={this.state.lesson.subtitle}
-                      lessonTitle={this.state.lesson.title}
-                      nextLessonPath={this.state.nextLessonPath}
-                      onChange={(ev, value) => {
-                      this.setState({
-                      value: ev.target.value
-                      })}}
-                      onSelect={(value, item) => this.setState({
-                      value: value,
-                      nextLessonPath: item.path
-                      })}
-                      path={this.state.lesson.path}
-                      handleStopLesson={this.handleStopLesson.bind(this)}
-                      value={this.state.value}
-                      lessonIndex={this.state.lessonIndex}
-                      lesson={this.state.lesson}
-                      handleLesson={this.handleLesson.bind(this)}
-                      actualText={this.state.actualText}
-                      changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
-                      changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
-                      changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
-                      changeUserSetting={this.changeUserSetting.bind(this)}
-                      chooseStudy={this.chooseStudy.bind(this)}
-                      completedPhrases={completedMaterial}
-                      currentLessonStrokes={this.state.currentLessonStrokes}
-                      currentPhraseID={this.state.currentPhraseID}
-                      currentPhrase={presentedMaterialCurrentItem.phrase}
-                      currentStroke={presentedMaterialCurrentItem.stroke}
-                      disableUserSettings={this.state.disableUserSettings}
-                      handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
-                      handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
-                      hideOtherSettings={this.state.hideOtherSettings}
-                      repetitionsRemaining={this.state.repetitionsRemaining}
-                      setCustomLesson={this.setCustomLesson.bind(this)}
-                      settings={this.state.lesson.settings}
-                      showStrokesInLesson={this.state.showStrokesInLesson}
-                      targetStrokeCount={this.state.targetStrokeCount}
-                      timer={this.state.timer}
-                      toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
-                      charsPerWord={this.charsPerWord}
-                      totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-                      totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
-                      totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
-                      totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
-                      totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
-                      totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
-                      totalWordCount={this.state.lesson.presentedMaterial.length}
-                      upcomingPhrases={upcomingMaterial}
-                      updateMarkup={this.updateMarkup.bind(this)}
-                      userSettings={this.state.userSettings}
                       {...props}
                     />
                   </DocumentTitle>

@@ -220,6 +220,9 @@ input:focus::placeholder {
 .justify-around {
   justify-content: space-around; }
 
+.justify-end {
+  justify-content: flex-end; }
+
 .items-baseline {
   align-items: baseline; }
 
@@ -237,6 +240,12 @@ input:focus::placeholder {
 
 .absolute {
   position: absolute; }
+
+.lh-single {
+  line-height: 1; }
+
+.lh-double {
+  line-height: 2; }
 
 .top-0 {
   top: 0; }
@@ -269,6 +278,9 @@ input:focus::placeholder {
 .mx-auto {
   margin-left: auto;
   margin-right: auto; }
+
+.ml-auto {
+  margin-left: auto; }
 
 .absolute--fill {
   top: 0;
@@ -417,8 +429,14 @@ input:focus::placeholder {
 .pb0 {
   padding-bottom: 0; }
 
+.pb4 {
+  padding-bottom: 32px; }
+
 .pl3 {
   padding-left: 24px; }
+
+.pr3 {
+  padding-right: 24px; }
 
 .py05 {
   padding-top: 4px;
@@ -458,6 +476,9 @@ input:focus::placeholder {
 
 .bg-slat {
   background-color: #ece9ee; }
+
+.bg-white {
+  background-color: #fff; }
 
 .text-uppercase {
   text-transform: uppercase;
@@ -751,7 +772,7 @@ label {
   overflow: auto;
   padding: 2px 0;
   position: fixed;
-  z-index: 1; }
+  z-index: 2; }
 
 .autocomplete-highlight {
   background-color: #FFD073; }
@@ -1180,3 +1201,59 @@ label {
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%); }
+
+.text-vertical {
+  position: absolute;
+  writing-mode: vertical-rl;
+  z-index: 1; }
+
+.strapline {
+  display: none; }
+  @media (min-width: 1024px) {
+    .strapline {
+      left: 8px;
+      top: 208px;
+      top: 240px;
+      transform-origin: center;
+      transform: rotate(180deg);
+      display: initial;
+      position: fixed; } }
+  @media (min-width: 1280px) {
+    .strapline {
+      left: 40px;
+      top: 240px; } }
+
+.landing-page-section {
+  padding-bottom: 32px; }
+
+.tiny-rule {
+  position: relative;
+  margin-bottom: 24px; }
+  .tiny-rule:after {
+    position: absolute;
+    content: '';
+    height: 3px;
+    width: 48px;
+    background-color: #402351;
+    display: block;
+    margin-bottom: 16px;
+    margin-top: 8px; }
+
+.tiny-rule--adjacent {
+  position: relative;
+  margin-bottom: 24px; }
+  @media (min-width: 1280px) {
+    .tiny-rule--adjacent:after {
+      position: absolute;
+      content: '';
+      height: 2px;
+      width: 140px;
+      background-color: #402351;
+      display: block;
+      right: -144px;
+      bottom: 4px; } }
+
+.overline {
+  border-top: 3px solid #57b669;
+  display: inline-block;
+  padding-top: .25em; }
