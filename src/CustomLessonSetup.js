@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GoogleAnalytics from 'react-ga';
 import './App.css';
 import Clipboard from 'clipboard';
 import {
@@ -81,7 +82,13 @@ class CustomLessonSetup extends Component {
           <div className="custom-page-layout">
             <div>
               <p>To start a custom lesson, supply a list of words and their strokes. An easy way to create a lesson is to copy columns from a spreadsheet.</p>
-              <p>See the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community's lessons <small>(opens in new tab)</small></a>.</p>
+              <p>See the&nbsp;&#8203;
+                <GoogleAnalytics.OutboundLink
+                  eventLabel="Outbound Link"
+                  to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
+                  target="_blank">
+                  community's lessons <small>(opens in new tab)</small>
+                </GoogleAnalytics.OutboundLink>.</p>
               <label htmlFor="your-material">Paste your material here:</label>
               <textarea
                 id="your-material"
