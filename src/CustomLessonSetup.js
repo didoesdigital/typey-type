@@ -84,7 +84,7 @@ class CustomLessonSetup extends Component {
               <p>To start a custom lesson, supply a list of words and their strokes. An easy way to create a lesson is to copy columns from a spreadsheet.</p>
               <p>See the&nbsp;&#8203;
                 <GoogleAnalytics.OutboundLink
-                  eventLabel="Outbound Link"
+                  eventLabel="community's lessons"
                   to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
                   target="_blank">
                   community's lessons <small>(opens in new tab)</small>
