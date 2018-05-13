@@ -14,13 +14,13 @@ const withTracker = (WrappedComponent, options = {}) => {
 
   const HOC = class extends Component {
     componentDidMount() {
-      const page = this.props.location.pathname;
+      const page = process.env.PUBLIC_URL + this.props.location.pathname;
       trackPage(page);
     }
 
     componentWillReceiveProps(nextProps) {
-      const currentPage = this.props.location.pathname;
-      const nextPage = nextProps.location.pathname;
+      const currentPage = process.env.PUBLIC_URL + this.props.location.pathname;
+      const nextPage = process.env.PUBLIC_URL + nextProps.location.pathname;
 
       if (currentPage !== nextPage) {
         trackPage(nextPage);
