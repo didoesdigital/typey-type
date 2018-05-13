@@ -178,7 +178,7 @@ describe('loadPersonalPreferences', () => {
         repetitions: 1,
         showStrokes: true,
         hideStrokesOnLastRepetition: true,
-        spacePlacement: 'spaceBeforeOutput',
+        spacePlacement: 'spaceOff',
         sortOrder: 'sortOff',
         seenWords: true,
         study: 'discover'

@@ -63,14 +63,14 @@ class App extends Component {
       },
       revisionMode: false,
       userSettings: {
-        caseSensitive: true,
+        caseSensitive: false,
         retainedWords: true,
         limitNumberOfWords: 45,
         newWords: true,
-        repetitions: 1,
+        repetitions: 3,
         showStrokes: true,
         hideStrokesOnLastRepetition: true,
-        spacePlacement: 'spaceBeforeOutput',
+        spacePlacement: 'spaceOff',
         sortOrder: 'sortOff',
         seenWords: true,
         study: 'discover'
@@ -383,7 +383,7 @@ class App extends Component {
         newState.newWords = true;
         newState.seenWords = false;
         newState.retainedWords = false;
-        newState.repetitions = 3;
+        newState.repetitions = 5;
         newState.limitNumberOfWords = 15;
         newState.sortOrder = 'sortOff';
         break;
@@ -403,7 +403,7 @@ class App extends Component {
         newState.newWords = false;
         newState.seenWords = true;
         newState.retainedWords = true;
-        newState.repetitions = 1;
+        newState.repetitions = 3;
         newState.limitNumberOfWords = 100;
         newState.sortOrder = 'sortRandom';
         break;

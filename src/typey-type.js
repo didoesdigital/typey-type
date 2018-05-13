@@ -270,14 +270,14 @@ function isFirstVisit() {
 function loadPersonalPreferences() {
   let metWords = {};
   let userSettings = {
-    caseSensitive: true,
+    caseSensitive: false,
     retainedWords: true,
     limitNumberOfWords: 45,
     newWords: true,
-    repetitions: 1,
+    repetitions: 3,
     showStrokes: true,
     hideStrokesOnLastRepetition: true,
-    spacePlacement: 'spaceBeforeOutput',
+    spacePlacement: 'spaceOff',
     sortOrder: 'sortOff',
     seenWords: true,
     study: 'discover'
