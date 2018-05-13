@@ -23,12 +23,12 @@ class Header extends Component {
     }
     return (
       <div>
-        <a href="#main" className="skip-to-main-link link-button link-button-ghost">Skip to main content</a>
+        <a href="#main" className="skip-to-main-link link-button link-button-ghost" id="ga--header--skip-to-main-content">Skip to main content</a>
         <div className={"header hide-in-fullscreen" + fullscreen} role="banner">
           <div className="mx-auto mw-1024 p3">
             <nav>
               <div className="site-heading-banner">
-                <Link to="/" className="heading-link dib" aria-label="Typey type">
+                <Link to="/" className="heading-link dib" aria-label="Typey type" id="ga--header--logo">
                   <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">
                     <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" className="mr1 svg-icon-wrapper svg-baseline" />
                     Typey&nbsp;type
@@ -36,7 +36,7 @@ class Header extends Component {
                 </Link>
               </div>
               <div className="table search-container relative">
-                <Link to="/lessons" className="link-button link-button-ghost mr1 table-cell">Lessons</Link>
+                <Link to="/lessons" className="link-button link-button-ghost mr1 table-cell" id="ga--header--lessons">Lessons</Link>
                 <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
                 <Autocomplete
                   getItemValue={(item) => item.title}
@@ -72,7 +72,7 @@ class Header extends Component {
                     {nextLesson}
                   </div>
                 </div>
-                <Link to={'/lessons'+this.props.nextLessonPath.replace(/lesson\.txt$/,'')} className="link-button table-cell" role="button">Start</Link>
+                <Link to={'/lessons'+this.props.nextLessonPath.replace(/lesson\.txt$/,'')} className="link-button table-cell" role="button" id="ga--header--start">Start</Link>
               </div>
             </nav>
           </div>

@@ -17,7 +17,7 @@ class LessonsIndex extends Component {
       }
       return(
         <li className="unstyled-list-item" key={ lesson.path }>
-          <Link to={`${this.props.match.url}${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')}>{lesson.title}{lessonsubtitle}</Link>
+          <Link to={`${this.props.match.url}${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link>
         </li>
       )
     });
@@ -34,7 +34,7 @@ class LessonsIndex extends Component {
           </div>
         </div>
         <div className="p3 mx-auto mw-1024">
-          <p><Link to={`${this.props.match.url}/custom`.replace(/\/{2,}/g,'/')}>Create a custom lesson</Link></p>
+          <p><Link to={`${this.props.match.url}/custom`.replace(/\/{2,}/g,'/')} id="ga--lesson-index--custom">Create a custom lesson</Link></p>
           <ul className="unstyled-list">{linkList}</ul>
         </div>
       </main>
