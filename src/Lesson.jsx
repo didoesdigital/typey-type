@@ -118,7 +118,7 @@ class Lesson extends Component {
       }
     } else {
       strokeTip = <div className="stroke-tip">
-        <label className="mb0 text-small">
+        <label className="mb0 text-small stroke-tip__label">
           <input
             className="checkbox-input visually-hidden"
             type="checkbox"

@@ -913,8 +913,11 @@ label {
   @media (min-width: 1024px) {
     .stroke-tip {
       min-width: 480px; } }
-  .stroke-tip label {
-    text-decoration: underline; }
+
+.stroke-tip__label {
+  text-decoration: underline; }
+  .stroke-tip__label:focus-within {
+    color: #202549; }
 
 .steno-material {
   border-bottom: 2px solid #FFD073; }

@@ -928,8 +928,14 @@ label {
     min-width: 480px;
   }
 
-  label { text-decoration: underline; }
 }
+.stroke-tip__label {
+  text-decoration: underline;
+  &:focus-within {
+    color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
+  }
+}
+
 .steno-material {
   border-bottom: 2px solid $brand-highlight;
 }
