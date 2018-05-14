@@ -1257,3 +1257,36 @@ label {
   border-top: 3px solid #57b669;
   display: inline-block;
   padding-top: .25em; }
+
+.homepage-demo-xs {
+  max-width: 100%;
+  margin-bottom: 12px; }
+  @media (min-width: 960px) {
+    .homepage-demo-xs {
+      display: none; } }
+
+.homepage-demo-lg {
+  display: none; }
+  @media (min-width: 960px) {
+    .homepage-demo-lg {
+      display: initial;
+      left: 584px;
+      padding-left: 24px;
+      position: absolute;
+      top: 59px;
+      width: calc(960px - 584px - 24px - 24px); } }
+  @media (min-width: 1024px) {
+    .homepage-demo-lg {
+      display: initial;
+      left: 584px;
+      padding-left: 24px;
+      position: absolute;
+      top: 59px;
+      width: calc(1024px - 584px - 24px - 24px); } }
+  @media (min-width: 1440px) {
+    .homepage-demo-lg {
+      position: absolute;
+      left: 584px;
+      top: 0;
+      max-width: 100%;
+      width: calc(1440px - 584px - 24px - 24px); } }
