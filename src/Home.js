@@ -39,7 +39,7 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3>Steno students</h3>
-                <p>After learning a little bit of steno theory, check out Typey&nbsp;type’s fundamental <a href="/lessons/">lessons</a>, starting with <a href="/lessons/fundamentals/one-syllable-words-with-simple-keys/">one-syllable words with simple keys</a>. Before you start typing, customise “your settings” so spaces match your steno settings: spaces before words, spaces after words, or ignore spaces completely.</p>
+                <p>After learning a little bit of steno theory, check out Typey&nbsp;type’s fundamental <Link to="/lessons/">lessons</Link>, starting with <Link to="/lessons/fundamentals/one-syllable-words-with-simple-keys/">one-syllable words with simple keys</Link>. Before you start typing, customise “your settings” so spaces match your steno settings: spaces before words, spaces after words, or ignore spaces completely.</p>
                 <Link to='/lessons/fundamentals/one-syllable-words-with-simple-keys/' className="link-button dib" style={{lineHeight: 2}} role="button">Start typing</Link>
               </div>
             </div>
@@ -112,7 +112,7 @@ class Home extends Component {
               <div className="text-center">
                 <h3 id="steno-news">Keep up with news</h3>
                 <p>Sign up for <a href="https://didoesdigital.com/#newsletter" target="_blank" rel="noopener noreferrer">Typey&nbsp;type updates and steno news<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
-                <Link to='https://didoesdigital.com/#newsletter' className="link-button dib" style={{lineHeight: 2}} role="button">Steno news</Link>
+                <a href='https://didoesdigital.com/#newsletter' className="link-button dib" style={{lineHeight: 2}} role="button">Steno news</a>
               </div>
             </div>
           </div>
