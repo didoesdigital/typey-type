@@ -258,14 +258,14 @@ function processDictionary(swappedDictionaryFile) {
   return processedDictionary;
 }
 
-function isFirstVisit() {
-  // metWords should at least contain `{'.':0}` so it should be length 7 or greater
-  if (window.localStorage && window.localStorage.getItem('metWords') && window.localStorage.getItem('metWords').length>=7) {
-    return false;
-  } else {
-    return true;
-  }
-}
+// function isFirstVisit() {
+//   // metWords should at least contain `{'.':0}` so it should be length 7 or greater
+//   if (window.localStorage && window.localStorage.getItem('metWords') && window.localStorage.getItem('metWords').length>=7) {
+//     return false;
+//   } else {
+//     return true;
+//   }
+// }
 
 function loadPersonalPreferences() {
   let metWords = {};
@@ -374,7 +374,6 @@ export {
   fetchDictionaries,
   generateDictionaryEntries,
   getLesson,
-  isFirstVisit,
   loadPersonalPreferences,
   matchSplitText,
   parseCustomMaterial,

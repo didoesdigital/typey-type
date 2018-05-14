@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { isFirstVisit } from './typey-type';
 
 class Home extends Component {
   componentDidMount() {
@@ -10,13 +9,6 @@ class Home extends Component {
   }
 
   render () {
-    // let firstVisit;
-    // if (isFirstVisit()) {
-    //   firstVisit = "If this is your first visit to Typey type, be sure to customise your settings in the first lesson before you start typing.";
-    // } else {
-    //   firstVisit = "";
-    // }
-
     return (
       <div>
         <main id="main">
