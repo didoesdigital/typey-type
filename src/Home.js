@@ -44,7 +44,7 @@ class Home extends Component {
           <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
-                <h3 class="overline">Discover</h3>
+                <h3 className="overline">Discover</h3>
                 <p>Discover 5–15 new briefs a day from various lessons, revealing their strokes as you learn to write them. Write them slowly, concentrating on accuracy and forming good habits around how you stroke word parts.</p>
                 <Link to='/lessons/fundamentals/one-syllable-words-with-simple-keys/' className="link-button dib" style={{lineHeight: 2}} role="button">Discover</Link>
               </div>
@@ -53,7 +53,7 @@ class Home extends Component {
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
-                <h3 class="overline">Revise</h3>
+                <h3 className="overline">Revise</h3>
                 <p>Revise 100 briefs a day from a lesson with loads of words you want to memorise, like the top 10000 English words. Try to recall the briefs before revealing their strokes. Avoid fingerspelling or writing out the long forms of words, so you can memorise the best brief for every word. </p>
                 <Link to='/lessons/drills/top-10000-project-gutenberg-words/' className="link-button dib" style={{lineHeight: 2}} role="button">Revise</Link>
               </div>
@@ -62,7 +62,7 @@ class Home extends Component {
           <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
-                <h3 class="overline">Drill</h3>
+                <h3 className="overline">Drill</h3>
                 <p>Regularly drill common words to build up your muscle memory and test your skills. Write as fast and furiously as you can, aiming for a high speed score. Pick specific drills that focus on a certain kind of brief or many similar words so you can associate them together.</p>
                 <Link to='/lessons/drills/pronouns/' className="link-button dib" style={{lineHeight: 2}} role="button">Drill</Link>
               </div>
@@ -71,7 +71,7 @@ class Home extends Component {
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
-                <h3 class="overline">Practice</h3>
+                <h3 className="overline">Practice</h3>
                 <p>Finally, practice longer lessons to mimic real usage as closely as possible. Write as fast as you can without causing misstrokes. Explore classic stories that use simple sentences and common words.</p>
                 <Link to='/lessons/stories/fables/belling-the-cat/' className="link-button dib" style={{lineHeight: 2}} role="button">Practice</Link>
               </div>
