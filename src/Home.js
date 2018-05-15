@@ -26,11 +26,11 @@ class Home extends Component {
           <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
-                <div className="relative"><img src={typeyTypeyDemoGIF} className="homepage-demo-lg" alt='Demo of Typey Type for stenographers in action' /></div>
+                <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-lg" alt='Demo of Typey Type for stenographers in action' /></Link></div>
                 <h3 className="tiny-rule">What is this?</h3>
                 <p>The process of writing shorthand is called <strong>stenography</strong>. Want to write over 100 words per minute? Grab yourself a fancy keyboard and start learning stenography!</p>
                 <p>Typey&nbsp;type for stenographers is a free typing app designed specifically to help <abbr title="stenography">steno</abbr> students practice and rapidly master stenography.</p>
-                <div className="relative"><img src={typeyTypeyDemoGIF} className="homepage-demo-xs" alt='Demo of Typey Type for stenographers in action' /></div>
+                <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-xs" alt='Demo of Typey Type for stenographers in action' /></Link></div>
                 <Link to='/support' className="link-button dib" style={{lineHeight: 2}} role="button">Learn more</Link>
               </div>
             </div>
