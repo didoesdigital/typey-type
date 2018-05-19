@@ -5,6 +5,26 @@ import {
 } from 'react-router-dom';
 
 class Scores extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      wordCount: 0,
+      wordsPerMinute: 0,
+      timeInSeconds: 0
+    }
+  }
+
+  componentDidMount() {
+    this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.timer !== null) {
+      if (prevProps.timer < this.props.timer) {
+        this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
+      }
+    }
+  }
 
   calculateScores(timer, totalNumberOfMatchedWords) {
     let wordsPerMinute;
@@ -13,51 +33,13 @@ class Scores extends Component {
     } else {
       wordsPerMinute = 0;
     }
-    let result = `
-      <table class="timer-table text-small">
-        <tbody>
-          <tr>
-            <th><abbr title="words per minute">WPM</abbr>:</th>
-            <td class="text-right">${wordsPerMinute}</td>
-          </tr>
-          <tr>
-            <th>Time (seconds):</th>
-            <td class="text-right">${Math.round(timer/1000)}</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h6 class="mt1 mb1 de-emphasized text-uppercase subsection-header">Words typed</h6>
-      <table class="timer-table text-small">
-        <tbody>
-          <tr>
-            <th>New:</th>
-            <td class="text-right">${this.props.totalNumberOfNewWordsMet}</td>
-          </tr>
-          <tr>
-            <th>Seen before:</th>
-            <td class="text-right">${this.props.totalNumberOfLowExposuresSeen}</td>
-          </tr>
-          <tr>
-            <th>From memory:</th>
-            <td class="text-right">${this.props.totalNumberOfRetainedWords}</td>
-          </tr>
-          <tr>
-            <th>Misstroked:</th>
-            <td class="text-right">${this.props.totalNumberOfMistypedWords}</td>
-          </tr>
-          <tr>
-            <th>Hinted:</th>
-            <td class="text-right">${this.props.totalNumberOfHintedWords}</td>
-          </tr>
-          <tr>
-            <th class="hide">Word count:</th>
-            <td class="text-right hide">~${Math.round(totalNumberOfMatchedWords)}</td>
-          </tr>
-        </tbody>
-      </table>
-    `
-    return {__html: result};
+    let timeInSeconds = Math.round(timer/1000);
+    let wordCount = Math.round(totalNumberOfMatchedWords);
+    this.setState({
+      wordCount: wordCount,
+      wordsPerMinute: wordsPerMinute,
+      timeInSeconds: timeInSeconds
+    });
   }
 
   render() {
@@ -65,7 +47,51 @@ class Scores extends Component {
       return (
         <div>
           <h5 className="mb1">Scores</h5>
-          <div className="timer" dangerouslySetInnerHTML={this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords)} />
+          <div className="timer">
+            <table className="timer-table text-small">
+              <tbody>
+                <tr>
+                  <th>
+                      WPM:</th>
+                  <td className="text-right">{this.state.wordsPerMinute}</td>
+                </tr>
+                <tr>
+                  <th>Time (seconds):</th>
+                  <td className="text-right">{this.state.timeInSeconds}</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h6 className="mt1 mb1 de-emphasized text-uppercase subsection-header">Words typed</h6>
+            <table className="timer-table text-small">
+              <tbody>
+                <tr>
+                  <th>New:</th>
+                  <td className="text-right">{this.props.totalNumberOfNewWordsMet}</td>
+                </tr>
+                <tr>
+                  <th>Seen before:</th>
+                  <td className="text-right">{this.props.totalNumberOfLowExposuresSeen}</td>
+                </tr>
+                <tr>
+                  <th>From memory:</th>
+                  <td className="text-right">{this.props.totalNumberOfRetainedWords}</td>
+                </tr>
+                <tr>
+                  <th>Misstroked:</th>
+                  <td className="text-right">{this.props.totalNumberOfMistypedWords}</td>
+                </tr>
+                <tr>
+                  <th>Hinted:</th>
+                  <td className="text-right">{this.props.totalNumberOfHintedWords}</td>
+                </tr>
+                <tr>
+                  <th className="hide">Word count:</th>
+                  <td className="text-right hide">~{this.state.wordCount}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
           <div><Link to="/progress" className="text-small" id="ga--scores--view-your-progress">View your progress</Link></div>
         </div>
       );
