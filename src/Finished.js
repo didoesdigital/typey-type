@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Scores from './Scores';
 import UserSettings from './UserSettings';
 import { Link } from 'react-router-dom';
+import {
+  Tooltip,
+} from 'react-tippy';
+import 'react-tippy/dist/tippy.css'
 import { IconRestart } from './Icon';
 import './App.css';
 
@@ -147,7 +151,19 @@ class Finished extends Component {
       <div className="finished-lesson mr1 mw-504 overflow-hidden">
         <div className="finished-summary">
           <h2 className="mb1">Finished</h2>
-          <h3 className="mt0 nowrap">{wpm}&nbsp;<abbr title="words per minute">WPM</abbr>!{accuracy}</h3>
+          <h3 className="mt0 nowrap">{wpm}&nbsp;
+            <Tooltip
+              animation="shift"
+              arrow="true"
+              className="abbr"
+              duration="200"
+              tabIndex="0"
+              tag="abbr"
+              theme="didoesdigital"
+              title="words per minute"
+              trigger="mouseenter focus click"
+              onShow={this.props.setAnnouncementMessage}
+            >WPM</Tooltip>!{accuracy}</h3>
           <h4 className="mt0 nowrap">{wpmCommentary}</h4>
           <p>
             <Link to={this.props.suggestedNext} className="link-button dib" style={{lineHeight: 2}} role="button">
@@ -196,6 +212,7 @@ class Finished extends Component {
             handleLimitWordsChange={this.props.handleLimitWordsChange}
             handleRepetitionsChange={this.props.handleRepetitionsChange}
             hideOtherSettings={this.props.hideOtherSettings}
+            setAnnouncementMessage={this.props.setAnnouncementMessage}
             toggleHideOtherSettings={this.props.toggleHideOtherSettings}
             totalWordCount={this.props.totalWordCount}
             userSettings={this.props.userSettings}
@@ -208,6 +225,7 @@ class Finished extends Component {
           </div>
           <div className="scores panel p2">
             <Scores
+              setAnnouncementMessage={this.props.setAnnouncementMessage}
               timer={this.props.timer}
               totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}

@@ -183,6 +183,7 @@ class Lesson extends Component {
                 handleLimitWordsChange={this.props.handleLimitWordsChange}
                 handleRepetitionsChange={this.props.handleRepetitionsChange}
                 hideOtherSettings={this.props.hideOtherSettings}
+                setAnnouncementMessage={this.props.setAnnouncementMessage}
                 suggestedNext={this.nextLessonPath()}
                 lessonLength={this.props.lesson.presentedMaterial.length}
                 path={this.props.path}
@@ -239,6 +240,7 @@ class Lesson extends Component {
                     changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
                     chooseStudy={this.props.chooseStudy}
                     disableUserSettings={this.props.disableUserSettings}
+                    setAnnouncementMessage={this.props.setAnnouncementMessage}
                     handleLimitWordsChange={this.props.handleLimitWordsChange}
                     handleRepetitionsChange={this.props.handleRepetitionsChange}
                     hideOtherSettings={this.props.hideOtherSettings}
@@ -278,6 +280,7 @@ class Lesson extends Component {
                   </div>
                   <div className="scores panel p2">
                     <Scores
+                      setAnnouncementMessage={this.props.setAnnouncementMessage}
                       timer={this.props.timer}
                       totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
                       totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}

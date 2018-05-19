@@ -766,7 +766,9 @@ class App extends Component {
                 <div>
                   {header}
                   <DocumentTitle title={'Typey type | About'}>
-                    <Support />
+                    <Support
+                      setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                    />
                   </DocumentTitle>
                 </div>
                 }
@@ -850,6 +852,7 @@ class App extends Component {
                       repetitionsRemaining={this.state.repetitionsRemaining}
                       revisionMaterial={this.state.revisionMaterial}
                       updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
+                      setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                       setCustomLesson={this.setCustomLesson.bind(this)}
                       settings={this.state.lesson.settings}
                       showStrokesInLesson={this.state.showStrokesInLesson}

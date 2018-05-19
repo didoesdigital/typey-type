@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import {
+  Tooltip,
+} from 'react-tippy';
+import 'react-tippy/dist/tippy.css'
+import {
   Link
 } from 'react-router-dom';
 
@@ -52,7 +56,18 @@ class Scores extends Component {
               <tbody>
                 <tr>
                   <th>
-                      WPM:</th>
+                    <Tooltip
+                      animation="shift"
+                      arrow="true"
+                      className="abbr"
+                      duration="200"
+                      tabIndex="0"
+                      tag="abbr"
+                      theme="didoesdigital"
+                      title="words per minute"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >WPM</Tooltip>:</th>
                   <td className="text-right">{this.state.wordsPerMinute}</td>
                 </tr>
                 <tr>
@@ -102,7 +117,19 @@ class Scores extends Component {
           <table className="timer-table text-small">
             <tbody>
               <tr>
-                <th><abbr title="words per minute">WPM</abbr>:</th>
+                <th>
+                  <Tooltip
+                    animation="shift"
+                    arrow="true"
+                    className="abbr"
+                    duration="200"
+                    tabIndex="0"
+                    tag="abbr"
+                    theme="didoesdigital"
+                    title="words per minute"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >WPM</Tooltip>:</th>
                 <td className="text-right">0</td>
               </tr>
               <tr>
