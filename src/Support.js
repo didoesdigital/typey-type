@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import {
+  Tooltip,
+} from 'react-tippy';
+import 'react-tippy/dist/tippy.css'
 import { Link } from 'react-router-dom';
 
 class Support extends Component {
@@ -22,7 +26,22 @@ class Support extends Component {
         </div>
         <div className="p3 mx-auto mw-1024">
           <div className="mw-568">
-            <p>Typey&nbsp;type is a typing app designed specifically to help <a href="#about-stenography">stenography</a> students learn <abbr title="stenography">steno</abbr> faster. You can learn briefs and improve your stenographic speed and accuracy using tailored education options, including tight feedback loops so you learn to fix misstrokes immediately. You can effortlessly track progress in your brief vocabulary and rapidly increase in steno skill.</p>
+            <p>Typey&nbsp;type is a typing app designed specifically to help <a href="#about-stenography">stenography</a> students learn{" "}
+              <Tooltip
+                animation="shift"
+                arrow="true"
+                className="abbr"
+                duration="200"
+                tabIndex="0"
+                tag="abbr"
+                theme="didoesdigital"
+                title="stenography"
+                trigger="mouseenter focus click"
+                onShow={this.props.setAnnouncementMessage}
+              >
+                steno
+              </Tooltip>{" "}
+              faster. You can learn briefs and improve your stenographic speed and accuracy using tailored education options, including tight feedback loops so you learn to fix misstrokes immediately. You can effortlessly track progress in your brief vocabulary and rapidly increase in steno skill.</p>
 
             <h3 id="about-stenography">Stenography</h3>
             <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. When you press keys together on a stenotype machine—like playing a piano chord—the software translates the key combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the <a href="http://openstenoproject.org/" target="_blank" rel="noopener noreferrer">Open steno project<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
