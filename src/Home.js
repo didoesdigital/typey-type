@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import {
+  Tooltip,
+} from 'react-tippy';
+import 'react-tippy/dist/tippy.css'
 import typeyTypeyDemoGIF from './images/typey-type-for-stenographers-demo.gif';
 
 class Home extends Component {
@@ -29,7 +33,18 @@ class Home extends Component {
                 <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-lg" alt='Demo of Typey Type for stenographers in action' /></Link></div>
                 <h3 className="tiny-rule">What is this?</h3>
                 <p>The process of writing shorthand is called <strong>stenography</strong>. Want to write over 100 words per minute? Grab yourself a fancy keyboard and start learning stenography!</p>
-                <p>Typey&nbsp;type for stenographers is a free typing app designed specifically to help <abbr title="stenography">steno</abbr> students practice and rapidly master stenography.</p>
+                <p>Typey&nbsp;type for stenographers is a free typing app designed specifically to help{" "}
+                  <Tooltip
+                    title="stenography"
+                    className="abbr"
+                    position="bottom"
+                    tabIndex="0"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                     steno
+                  </Tooltip>{" "}
+                  students practice and rapidly master stenography.</p>
                 <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-xs" alt='Demo of Typey Type for stenographers in action' /></Link></div>
                 <Link to='/support' className="link-button dib" style={{lineHeight: 2}} role="button">Learn more</Link>
               </div>

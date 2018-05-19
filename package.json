@@ -16,7 +16,8 @@
     "react-numeric-input": "^2.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.15",
-    "react-swipe": "^5.1.1"
+    "react-swipe": "^5.1.1",
+    "react-tippy": "^1.2.2"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

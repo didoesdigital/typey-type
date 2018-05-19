@@ -551,6 +551,20 @@ class App extends Component {
     });
   }
 
+  setAnnouncementMessage(app, content) {
+    let newAnnouncementMessage;
+    if (content) {
+      // TODO: if we want to make this function generic for other announcement content, here is the
+      // start of a handler for that:
+      // if (typeof content === "string") {
+      //   newAnnouncementMessage = content;
+      // } else if (typeof content === "object") {
+        newAnnouncementMessage = content.querySelector('.tippy-tooltip-content').innerText;
+      // }
+    }
+    app.setState({announcementMessage: newAnnouncementMessage || ""});
+  }
+
   reviseLesson(event) {
     event.preventDefault();
     let currentLessonStrokes = this.state.currentLessonStrokes;
@@ -730,6 +744,7 @@ class App extends Component {
 
     if (true) {
       let presentedMaterialCurrentItem = this.state.lesson.presentedMaterial[this.state.currentPhraseID] || { phrase: '', stroke: '' };
+      let app = this;
       return (
         <div className="app">
           <Announcements message={this.state.announcementMessage} />
@@ -740,6 +755,7 @@ class App extends Component {
                   {header}
                   <DocumentTitle title='Typey type for stenographers'>
                     <Home
+                      setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                       {...props}
                     />
                   </DocumentTitle>
