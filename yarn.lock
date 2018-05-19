@@ -5801,9 +5801,9 @@ react-swipe@^5.1.1:
     prop-types "^15.6.0"
     swipe-js-iso "^2.0.4"
 
-react-tippy@^1.2.2:
+"react-tippy@git+ssh://git@github.com:dimonster/react-tippy.git#custom-tag-element-for-tooltip-trigger":
   version "1.2.2"
-  resolved "https://registry.yarnpkg.com/react-tippy/-/react-tippy-1.2.2.tgz#061467d34d29e7a5a9421822d125c451d6bb5153"
+  resolved "git+ssh://git@github.com:dimonster/react-tippy.git#b0b290506da59ba1d5768d240f3212a3dcd177ec"
   dependencies:
     popper.js "^1.11.1"
 

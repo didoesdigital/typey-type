@@ -35,14 +35,18 @@ class Home extends Component {
                 <p>The process of writing shorthand is called <strong>stenography</strong>. Want to write over 100 words per minute? Grab yourself a fancy keyboard and start learning stenography!</p>
                 <p>Typey&nbsp;type for stenographers is a free typing app designed specifically to help{" "}
                   <Tooltip
-                    title="stenography"
+                    animation="shift"
+                    arrow="true"
                     className="abbr"
-                    position="bottom"
+                    duration="200"
                     tabIndex="0"
+                    tag="abbr"
+                    theme="didoesdigital"
+                    title="stenography"
                     trigger="mouseenter focus click"
                     onShow={this.props.setAnnouncementMessage}
                   >
-                     steno
+                    steno
                   </Tooltip>{" "}
                   students practice and rapidly master stenography.</p>
                 <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-xs" alt='Demo of Typey Type for stenographers in action' /></Link></div>

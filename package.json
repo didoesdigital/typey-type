@@ -17,7 +17,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.15",
     "react-swipe": "^5.1.1",
-    "react-tippy": "^1.2.2"
+    "react-tippy": "git+ssh://git@github.com:dimonster/react-tippy.git#custom-tag-element-for-tooltip-trigger"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

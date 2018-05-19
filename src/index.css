@@ -71,7 +71,7 @@ a {
 pre {
   font: 700 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
 
-.abbr,
+abbr[data-original-title],
 abbr[title] {
   border-bottom: thin dotted currentColor;
   border-radius: 1px;
@@ -1291,3 +1291,51 @@ label {
       top: 0;
       max-width: 100%;
       width: calc(1440px - 584px - 24px - 24px); } }
+
+.tippy-tooltip.didoesdigital-theme {
+  background-color: #fff;
+  border: 2px solid #9d9d9d;
+  box-shadow: 1px 4px 24px 1px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  color: #757575; }
+
+.tippy-popper[x-placement^=top] .tippy-tooltip.didoesdigital-theme .arrow-regular {
+  border-top-color: #9d9d9d;
+  box-shadow: 1px 4px 24px 1px rgba(0, 0, 0, 0.1); }
+  .tippy-popper[x-placement^=top] .tippy-tooltip.didoesdigital-theme .arrow-regular:before {
+    content: '';
+    position: absolute;
+    border-top: 5px solid #fff;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    transform: translate(-5px, -8px); }
+
+.tippy-popper[x-placement^=right] .tippy-tooltip.didoesdigital-theme .arrow-regular {
+  border-right-color: #9d9d9d; }
+  .tippy-popper[x-placement^=right] .tippy-tooltip.didoesdigital-theme .arrow-regular:before {
+    content: '';
+    position: absolute;
+    border-top: 5px solid transparent;
+    border-right: 5px solid #fff;
+    border-bottom: 5px solid transparent;
+    transform: translate(3px, -5px); }
+
+.tippy-popper[x-placement^=bottom] .tippy-tooltip.didoesdigital-theme .arrow-regular {
+  border-bottom-color: #9d9d9d; }
+  .tippy-popper[x-placement^=bottom] .tippy-tooltip.didoesdigital-theme .arrow-regular:before {
+    content: '';
+    position: absolute;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    border-bottom: 5px solid #fff;
+    transform: translate(-5px, 3px); }
+
+.tippy-popper[x-placement^=left] .tippy-tooltip.didoesdigital-theme .arrow-regular {
+  border-left-color: #9d9d9d; }
+  .tippy-popper[x-placement^=left] .tippy-tooltip.didoesdigital-theme .arrow-regular:before {
+    content: '';
+    position: absolute;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid #fff;
+    transform: translate(-8px, -5px); }
