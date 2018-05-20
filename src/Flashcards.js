@@ -6,6 +6,8 @@ import {
   getLesson,
   parseLesson
 } from './typey-type';
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import 'pure-react-carousel/dist/react-carousel.es.css';
 import {
   Link
 } from 'react-router-dom';
@@ -19,6 +21,18 @@ let paneNodes = function (flashcards) {
     );
   });
 }
+
+let slideNodes = function (flashcards) {
+  return flashcards.map((item, i) => {
+    return (
+      <Slide index={i} key={i} innerClassName={"slideInner"}>
+        <div className="item flex items-center justify-center">{item}</div>
+      </Slide>
+    );
+  });
+}
+
+
 
 
 class Flashcards extends Component {
@@ -48,7 +62,7 @@ class Flashcards extends Component {
     });
 
     flashcards.push("Finished!");
-    this.reactSwipe.slide(0, 500);
+    // this.reactSwipe.slide(0, 500);
 
     this.setState({
       flashcards: flashcards,
@@ -89,11 +103,11 @@ class Flashcards extends Component {
   };
 
   next() {
-    this.reactSwipe.next();
+    // this.reactSwipe.next();
   }
 
   prev() {
-    this.reactSwipe.prev();
+    // this.reactSwipe.prev();
   }
 
   prefillSurveyLink() {
@@ -104,9 +118,9 @@ class Flashcards extends Component {
     if (this.props.locationpathname) {
       prefillLesson = this.props.locationpathname;
     }
-    if (this.state.flashcards && this.reactSwipe) {
-      prefillFlashcard = this.state.flashcards[this.reactSwipe.getPos()];
-    }
+    // if (this.state.flashcards && this.reactSwipe) {
+    //   prefillFlashcard = this.state.flashcards[this.reactSwipe.getPos()];
+    // }
     if (this.surveyLink) {
       this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
     }
@@ -139,16 +153,15 @@ class Flashcards extends Component {
                   </a>
                 </header>
               </div>
-
               <div className="mxn2">
                 {/* Shuffle button */}
                 <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="link-button link-button-ghost table-cell" role="button">Shuffle</a>
               </div>
             </div>
           </div>
+
           <div className="p3 mx-auto mw-1024">
             <div>
-
 
               {/* Screenreader flashcard list */}
               <div className="visually-hidden">
@@ -156,20 +169,34 @@ class Flashcards extends Component {
                 {paneNodes(this.state.flashcards)}
               </div>
 
-              <div className={"swipe-wrapper flex justify-between relative" + fullscreen} aria-hidden="true">
+              {/* Missing `flex` class and aria-hidden=true */}
+              <CarouselProvider
+                naturalSlideWidth={16}
+                naturalSlideHeight={9}
+                totalSlides={30}
+                className={"flashcards-wrapper relative" + fullscreen}
+              >
+
+                {/* Slide-able flashcards */}
+                {/* missing  swipeOptions={{continuous: false}} */}
+                <Slider
+                  ref={reactSlide => this.reactSlide = reactSlide}
+                  className={"swipe" + fullscreen}
+                  key={this.state.flashcards.length + this.props.fullscreen}
+                >
+                  {slideNodes(this.state.flashcards)}
+                </Slider>
 
                 {/* Page left, previous flashcard */}
-                <div className={"pagination-nav-button flex items-center hide-in-fullscreen" + fullscreen}><button className="link-button" type="button" onClick={this.prev.bind(this)} aria-label="Previous card"><span className="pagination-nav-button--prev">▸</span></button></div>
+                <div className={"pagination-nav-button pagination-nav-button--prev absolute hide-in-fullscreen" + fullscreen}>
+                  <ButtonBack className="link-button" type="button" onClick={this.prev.bind(this)} aria-label="Previous card"><span className="pagination-nav-button--prev__icon">◂</span></ButtonBack>
+                </div>
 
-                {/* Swipe-able flashcards */}
-                <ReactSwipe
-                    ref={reactSwipe => this.reactSwipe = reactSwipe}
-                    className={"swipe" + fullscreen}
-                    key={this.state.flashcards.length + this.props.fullscreen}
-                    swipeOptions={{continuous: false}}
-                  >
-                  {paneNodes(this.state.flashcards)}
-                </ReactSwipe>
+                {/* Page right, next flashcard */}
+                {/* missing  flex items-center hide-in-fullscreen*/}
+                <div className={"pagination-nav-button pagination-nav-button--next absolute right-0 hide-in-fullscreen" + fullscreen}>
+                  <ButtonNext className="link-button" type="button" onClick={this.next.bind(this)} aria-label="Next card">▸</ButtonNext>
+                </div>
 
                 {/* Fullscreen button */}
                 <div className={"checkbox-group text-center fullscreen-button fullscreen-button-ghost" + fullscreen}>
@@ -178,11 +205,11 @@ class Flashcards extends Component {
                     <IconFullscreen iconWidth="24" iconHeight="24" className="icon-button" title="custom title for this context" />
                   </label>
                 </div>
+              </CarouselProvider>
 
-                {/* Page right, next flashcard */}
-                <div className={"pagination-nav-button flex items-center hide-in-fullscreen" + fullscreen}><button className="link-button" type="button" onClick={this.next.bind(this)} aria-label="Next card">▸</button></div>
 
-              </div>
+
+
               <p className="text-center mt1 mb0"><Link to="./" className={"text-small hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link></p>
               <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--flashcards--give-feedback">Give feedback on this flashcard (form opens in a new tab)</a></p>
 

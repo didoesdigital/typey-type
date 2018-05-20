@@ -15,6 +15,8 @@ $h6-size: $base-font-size / $font-scale; // 12.8px
 $breakpoint: 1024px;
 $z-index-autocomplete-menu: 2;
 $z-index-vertical-text: 1;
+$link-button-height: 40px;
+$link-button-width: 40px;
 
 // Element styles
 * {
@@ -248,6 +250,7 @@ input:focus::placeholder {
 .justify-between { justify-content: space-between; }
 .justify-around  { justify-content: space-around; }
 .justify-end     { justify-content: flex-end; }
+.justify-center  { justify-content: center; }
 .items-baseline  { align-items: baseline; }
 .items-center    { align-items: center; }
 .self-center     { align-self: center; }
@@ -755,7 +758,7 @@ label {
   border: 1px solid transparent;
   color: add-tint($brand-primary, 70%);
   font: $type;
-  height: 40px;
+  height: $link-button-height;
   padding: 4px 16px;
   text-align: center;
   text-decoration: none;
@@ -1114,9 +1117,6 @@ label {
   z-index: 1;
 }
 
-.swipe-wrapper {
-  margin-right: 0;
-}
 .swipe {
   margin: 0 auto;
 
@@ -1124,21 +1124,42 @@ label {
     font-weight: bold;
     font-size: 20px;
     text-align: center;
-    margin: 0 12px;
-    padding: 144px 24px;
     box-shadow: 0 1px #EBEBEB;
     background: #fff;
     border-radius: 4px;
     border: 1px solid;
     border-color: #E5E5E5 #D3D3D3 #B9C1C6;
-    height: 37vh;
-    padding: 16vh 24px;
     overflow-wrap: break-word; // break long words if they won't naturally break anywhere on one line
     word-wrap: break-word; // for IE 11
+    width: 100%;
+    height: 100%;
+  }
+}
+.flashcards-wrapper {
+  margin-left: $link-button-width + 12px;
+  margin-right: $link-button-width + 12px;
+  &.fullscreen {
+    margin-left: -12px;
+    margin-right: -12px;
   }
 }
 
-.pagination-nav-button--prev {
+.slideInner {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.pagination-nav-button {
+  top: calc(50% - #{$link-button-height / 2});
+  &.pagination-nav-button--prev {
+    left: -$link-button-width - 12px;
+  }
+  &.pagination-nav-button--next {
+    right: -$link-button-width - 12px;
+  }
+}
+
+.pagination-nav-button--prev__icon {
   visibility: hidden;
   &:before {
     content: "▸";
@@ -1154,8 +1175,12 @@ label {
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
+  &.pagination-nav-button {
+    display: none;
+  }
   @media (min-width: $breakpoint) {
     &.pagination-nav-button {
+      display: inherit;
       position: inherit !important;
       height: inherit;
       width: inherit;
@@ -1189,10 +1214,10 @@ label {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  width: 40px;
-  height: 40px;
+  width: $link-button-width;
+  height: $link-button-height;
   top: 12px;
-  right: 72px;
+  right: 24px;
   @media (min-width: $breakpoint) {
     display: none;
   }
@@ -1214,8 +1239,8 @@ label {
     }
   }
   label {
-    width: 40px;
-    height: 40px;
+    width: $link-button-width;
+    height: $link-button-height;
   }
   input {
     visibility: hidden;
@@ -1275,7 +1300,7 @@ label {
 .strapline {
   display: none;
   // transition: color 0.3s ease;
-  @media (min-width: 1024px) {
+  @media (min-width: $breakpoint) {
     left: 8px;
     top: 208px;
     top: 240px;
@@ -1347,7 +1372,7 @@ $lineAdjustment: 4px;
     top: 35px + 24px;
     width: calc(960px - 584px - 24px - 24px);
   }
-  @media (min-width: 1024px) {
+  @media (min-width: $breakpoint) {
     display: initial;
     left: 584px;
     padding-left: 24px;
