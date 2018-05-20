@@ -145,20 +145,15 @@ class Flashcards extends Component {
             <div>
 
               {/* Screenreader flashcard heading for context */}
-              <div className="visually-hidden">
-                <h3>Carousel of lesson words and their strokes</h3>
-              </div>
+              <div className="visually-hidden"><h3>Carousel of lesson words and their strokes</h3></div>
 
-              {/* Missing `flex` class and aria-hidden=true */}
               <CarouselProvider
                 naturalSlideWidth={16}
                 naturalSlideHeight={9}
                 totalSlides={30}
                 className={"flashcards-wrapper relative" + fullscreen}
               >
-
-                {/* Slide-able flashcards */}
-                {/* missing  swipeOptions={{continuous: false}} */}
+                {/* Carousel Slider Slide flashcards */}
                 <Slider
                   ref={flashcardsCarousel => this.flashcardsCarousel = flashcardsCarousel}
                   className={"swipe" + fullscreen}
@@ -173,7 +168,6 @@ class Flashcards extends Component {
                 </div>
 
                 {/* Page right, next flashcard */}
-                {/* missing  flex items-center hide-in-fullscreen*/}
                 <div className={"pagination-nav-button pagination-nav-button--next absolute right-0 hide-in-fullscreen" + fullscreen}>
                   <ButtonNext className="link-button" type="button" aria-label="Next card">▸</ButtonNext>
                 </div>
@@ -186,7 +180,6 @@ class Flashcards extends Component {
                   </label>
                 </div>
               </CarouselProvider>
-
 
 
 
