@@ -12,16 +12,6 @@ import {
   Link
 } from 'react-router-dom';
 
-let paneNodes = function (flashcards) {
-  return flashcards.map((item, i) => {
-    return (
-      <div key={i}>
-        <div className="item">{item}</div>
-      </div>
-    );
-  });
-}
-
 let slideNodes = function (flashcards) {
   return flashcards.map((item, i) => {
     return (
@@ -155,10 +145,9 @@ class Flashcards extends Component {
           <div className="p3 mx-auto mw-1024">
             <div>
 
-              {/* Screenreader flashcard list */}
+              {/* Screenreader flashcard heading for context */}
               <div className="visually-hidden">
-                <h3>List of lesson words and their strokes</h3>
-                {paneNodes(this.state.flashcards)}
+                <h3>Carousel of lesson words and their strokes</h3>
               </div>
 
               {/* Missing `flex` class and aria-hidden=true */}
