@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactSwipe from 'react-swipe';
 import { IconFullscreen } from './Icon';
 import { randomise } from './utils';
 import {
@@ -15,8 +14,8 @@ import {
 let slideNodes = function (flashcards) {
   return flashcards.map((item, i) => {
     return (
-      <Slide index={i} key={i} innerClassName={"slideInner"}>
-        <div className="item flex items-center justify-center">{item}</div>
+      <Slide index={i} key={i} innerClassName={"carousel__slider__slide__slideInner"}>
+        <div className="carousel__slider__slide flex items-center justify-center">{item}</div>
       </Slide>
     );
   });
@@ -172,12 +171,12 @@ class Flashcards extends Component {
                 naturalSlideWidth={this.state.naturalSlideWidth}
                 naturalSlideHeight={this.state.naturalSlideHeight}
                 totalSlides={this.state.flashcards.length}
-                className={"flashcards-wrapper relative" + fullscreen}
+                className={"carousel--flashcards relative" + fullscreen}
               >
                 {/* Carousel Slider Slide flashcards */}
                 <Slider
                   ref={flashcardsCarousel => this.flashcardsCarousel = flashcardsCarousel}
-                  className={"swipe" + fullscreen}
+                  className={"carousel__slider" + fullscreen}
                   key={this.state.flashcards.length + this.props.fullscreen}
                 >
                   {slideNodes(this.state.flashcards)}
