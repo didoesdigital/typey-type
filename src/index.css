@@ -1300,8 +1300,7 @@ label {
   color: #757575; }
 
 .tippy-popper[x-placement^=top] .tippy-tooltip.didoesdigital-theme .arrow-regular {
-  border-top-color: #9d9d9d;
-  box-shadow: 1px 4px 24px 1px rgba(0, 0, 0, 0.1); }
+  border-top-color: #9d9d9d; }
   .tippy-popper[x-placement^=top] .tippy-tooltip.didoesdigital-theme .arrow-regular:before {
     content: '';
     position: absolute;

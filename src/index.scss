@@ -1372,7 +1372,6 @@ $lineAdjustment: 4px;
 }
 .tippy-popper[x-placement^=top] .tippy-tooltip.didoesdigital-theme .arrow-regular {
   border-top-color: desaturate(add-tint($brand-primary, 50%), 40%);
-  box-shadow: 1px 4px 24px 1px rgba(0, 0, 0, 0.1);
   &:before {
     content: '';
     position: absolute;
