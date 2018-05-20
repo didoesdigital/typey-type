@@ -75,12 +75,44 @@ class Flashcards extends Component {
         stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
       },
     ];
+    let exampleFlashcardsMetWords = [
+      {
+        phrase: 'The',
+        stroke: '-T',
+        times_seen: [1526815977]
+      }
+    ];
+    flashcardsMetWords = [
+      {
+        phrase: 'wolf',
+        stroke: 'WOFL',
+        times_seen: [1526815977, 1526815977, 1526815977, 1526815977]
+      }
+    ];
 
     // TODO: change this to actually check the sourceMaterial provided is valid
     if (sourceMaterial) {
       presentedMaterial = sourceMaterial.slice(0, numberOfFlashcardsToShow - 1);
     }
-    return presentedMaterial;
+
+    let tmp = [];
+
+    // TODO: change this to actually check the flashcardsMetWords provided is valid
+    if (flashcardsMetWords) {
+      presentedMaterial.forEach((item, i) => {
+        tmp.push(item);
+        flashcardsMetWords.forEach((obj, j) => {
+          if (obj.phrase === item.phrase) {
+            // add word to lesson inversely according to times you've seen it
+            let repeat = 12 - obj.times_seen.length;
+            for (var i = 0; i < repeat; i++) tmp.push(item);
+          }
+        });
+      });
+      console.log(tmp);
+    }
+
+    return tmp;
   }
 
   setupFlashCards(event) {

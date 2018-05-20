@@ -137,6 +137,7 @@ class Lesson extends Component {
         return (
           <DocumentTitle title={'Typey type | Flashcards'}>
             <Flashcards
+              flashcardsMetWords={this.props.flashcardsMetWords}
               fullscreen={this.props.fullscreen}
               changeFullscreen={this.props.changeFullscreen.bind(this)}
               lessonpath={process.env.PUBLIC_URL + this.props.location.pathname.replace(/flashcards/, '') + 'lesson.txt'}
