@@ -102,14 +102,6 @@ class Flashcards extends Component {
     });
   };
 
-  next() {
-    // this.reactSwipe.next();
-  }
-
-  prev() {
-    // this.reactSwipe.prev();
-  }
-
   prefillSurveyLink() {
     let googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSc3XqvJC2lwIRieR5NVoAI7nYa4fTFSZL4Ifk1YA7K7I-lnog/viewform?usp=pp_url&entry.1884511690=";
     let param = "&entry.1893816394=";
@@ -189,13 +181,13 @@ class Flashcards extends Component {
 
                 {/* Page left, previous flashcard */}
                 <div className={"pagination-nav-button pagination-nav-button--prev absolute hide-in-fullscreen" + fullscreen}>
-                  <ButtonBack className="link-button" type="button" onClick={this.prev.bind(this)} aria-label="Previous card"><span className="pagination-nav-button--prev__icon">◂</span></ButtonBack>
+                  <ButtonBack className="link-button" type="button" aria-label="Previous card"><span className="pagination-nav-button--prev__icon">◂</span></ButtonBack>
                 </div>
 
                 {/* Page right, next flashcard */}
                 {/* missing  flex items-center hide-in-fullscreen*/}
                 <div className={"pagination-nav-button pagination-nav-button--next absolute right-0 hide-in-fullscreen" + fullscreen}>
-                  <ButtonNext className="link-button" type="button" onClick={this.next.bind(this)} aria-label="Next card">▸</ButtonNext>
+                  <ButtonNext className="link-button" type="button" aria-label="Next card">▸</ButtonNext>
                 </div>
 
                 {/* Fullscreen button */}
