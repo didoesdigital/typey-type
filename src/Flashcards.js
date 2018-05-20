@@ -169,9 +169,9 @@ class Flashcards extends Component {
               <div className="visually-hidden"><h3>Carousel of lesson words and their strokes</h3></div>
 
               <CarouselProvider
-                totalSlides={30}
                 naturalSlideWidth={this.state.naturalSlideWidth}
                 naturalSlideHeight={this.state.naturalSlideHeight}
+                totalSlides={this.state.flashcards.length}
                 className={"flashcards-wrapper relative" + fullscreen}
               >
                 {/* Carousel Slider Slide flashcards */}
