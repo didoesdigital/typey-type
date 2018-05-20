@@ -35,8 +35,8 @@ class Flashcards extends Component {
       presentedMaterial: [
         {phrase: 'Loading flashcards…', stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'},
       ],
-      naturalSlideWidth: 16,
-      naturalSlideHeight: 9,
+      naturalSlideWidth: 9,
+      naturalSlideHeight: 16,
       currentSlide: 0,
       title: 'Steno',
       subtitle: ''
@@ -58,6 +58,20 @@ class Flashcards extends Component {
 
     if (this.flashcardsCarousel) {
       currentSlide = this.flashcardsCarousel.state.currentSlide;
+    }
+
+    if (window.matchMedia("(orientation: landscape)").matches) {
+      let currentSlide = 0;
+      if (this.flashcardsCarousel) {
+        currentSlide = this.flashcardsCarousel.state.currentSlide;
+      }
+      if (this.state.naturalSlideWidth === 9) {
+        this.setState({
+          naturalSlideWidth: 16,
+          naturalSlideHeight: 9,
+          currentSlide: currentSlide
+        });
+      }
     }
 
     this.setState({
