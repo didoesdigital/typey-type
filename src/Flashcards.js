@@ -42,7 +42,12 @@ class Flashcards extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      flashcards: [ "Loading flashcards…" ],
+      flashcards: [
+        {
+          phrase: 'Loading flashcards…',
+          stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
+        },
+      ],
       sourceMaterial: [
         {
           phrase: 'Loading flashcards…',
@@ -184,9 +189,21 @@ class Flashcards extends Component {
     if (this.props.locationpathname) {
       prefillLesson = this.props.locationpathname;
     }
-    // if (this.state.flashcards && this.flashcardsCarousel) {
-    //   prefillFlashcard = this.state.flashcards[this.flashcardsCarousel.state.currentSlide];
-    // }
+    if (this.state.flashcards && this.flashcardsCarousel) {
+      let currentSlide = this.flashcardsCarousel.state.currentSlide;
+      let index = 0;
+      if (currentSlide % 2 === 1) {
+        index = (currentSlide - 1) / 2;
+        prefillFlashcard = this.state.flashcards[index].stroke;
+      } else if (currentSlide % 2 === 0) {
+        index = currentSlide / 2;
+        if (index === this.state.flashcards.length) {
+          prefillFlashcard = "Finished!";
+        } else {
+          prefillFlashcard = this.state.flashcards[index].phrase;
+        }
+      }
+    }
     if (this.surveyLink) {
       this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
     }
