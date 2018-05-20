@@ -118,9 +118,9 @@ class Flashcards extends Component {
     if (this.props.locationpathname) {
       prefillLesson = this.props.locationpathname;
     }
-    // if (this.state.flashcards && this.reactSwipe) {
-    //   prefillFlashcard = this.state.flashcards[this.reactSwipe.getPos()];
-    // }
+    if (this.state.flashcards && this.flashcardsCarousel) {
+      prefillFlashcard = this.state.flashcards[this.flashcardsCarousel.state.currentSlide];
+    }
     if (this.surveyLink) {
       this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
     }
@@ -180,7 +180,7 @@ class Flashcards extends Component {
                 {/* Slide-able flashcards */}
                 {/* missing  swipeOptions={{continuous: false}} */}
                 <Slider
-                  ref={reactSlide => this.reactSlide = reactSlide}
+                  ref={flashcardsCarousel => this.flashcardsCarousel = flashcardsCarousel}
                   className={"swipe" + fullscreen}
                   key={this.state.flashcards.length + this.props.fullscreen}
                 >
