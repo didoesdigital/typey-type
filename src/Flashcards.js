@@ -36,6 +36,8 @@ class Flashcards extends Component {
       presentedMaterial: [
         {phrase: 'Loading flashcards…', stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'},
       ],
+      naturalSlideWidth: 16,
+      naturalSlideHeight: 9,
       title: 'Steno',
       subtitle: ''
     }
@@ -63,12 +65,31 @@ class Flashcards extends Component {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
+    window.addEventListener('resize', this.handleResize);
     this.fetchAndSetupFlashCards();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if ((prevProps.lessonpath !== this.props.lessonpath) && (this.props.locationpathname.endsWith('flashcards'))) {
       this.fetchAndSetupFlashCards();
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleResize)
+  }
+
+  handleResize = (event) => {
+    if (window.matchMedia("(orientation: landscape)").matches) {
+      this.setState({
+        naturalSlideWidth: 16,
+        naturalSlideHeight: 9
+      });
+    } else if (window.matchMedia("(orientation: portrait)").matches) {
+      this.setState({
+        naturalSlideWidth: 9,
+        naturalSlideHeight: 16
+      });
     }
   }
 
@@ -148,9 +169,9 @@ class Flashcards extends Component {
               <div className="visually-hidden"><h3>Carousel of lesson words and their strokes</h3></div>
 
               <CarouselProvider
-                naturalSlideWidth={16}
-                naturalSlideHeight={9}
                 totalSlides={30}
+                naturalSlideWidth={this.state.naturalSlideWidth}
+                naturalSlideHeight={this.state.naturalSlideHeight}
                 className={"flashcards-wrapper relative" + fullscreen}
               >
                 {/* Carousel Slider Slide flashcards */}
