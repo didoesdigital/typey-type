@@ -789,6 +789,10 @@ label {
       color: add-tint($brand-primary, 50%);
     }
   }
+  &:disabled {
+    color: add-tint($brand-primary, 90%);
+    background-color: add-tint(desaturate($brand-primary, 90%), 60%);
+  }
 }
 
 .radio-button {

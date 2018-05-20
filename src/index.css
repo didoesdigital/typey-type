@@ -810,6 +810,9 @@ label {
       color: #ece9ee; }
     .link-button.link-button-ghost:active, .link-button.link-button-ghost:focus {
       color: #a091a8; }
+  .link-button:disabled {
+    color: #ece9ee;
+    background-color: #b0b0b0; }
 
 .radio-button {
   opacity: 0;
