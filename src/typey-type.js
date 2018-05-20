@@ -269,6 +269,13 @@ function processDictionary(swappedDictionaryFile) {
 
 function loadPersonalPreferences() {
   let metWords = {};
+  let flashcardsMetWords = [
+    {
+      phrase: 'The',
+      stroke: '-T',
+      times_seen: []
+    }
+  ];
   let userSettings = {
     caseSensitive: false,
     retainedWords: true,
@@ -289,9 +296,12 @@ function loadPersonalPreferences() {
     if (window.localStorage.getItem('userSettings')) {
       userSettings = Object.assign(userSettings, JSON.parse(window.localStorage.getItem('userSettings')));
     }
-    return [metWords, userSettings];
+    if (window.localStorage.getItem('flashcardsMetWords')) {
+      flashcardsMetWords = Object.assign(flashcardsMetWords, JSON.parse(window.localStorage.getItem('flashcardsMetWords')));
+    }
+    return [metWords, userSettings, flashcardsMetWords];
   }
-  return [metWords, userSettings];
+  return [metWords, userSettings, flashcardsMetWords];
 }
 
 function writePersonalPreferences(itemToStore, JSONToStore) {

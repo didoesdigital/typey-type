@@ -42,6 +42,13 @@ class App extends Component {
       currentPhraseID: 0,
       currentLessonStrokes: [],
       actualText: ``,
+      flashcardsMetWords: [
+        {
+          phrase: 'The',
+          stroke: '-T',
+          times_seen: [1526815977]
+        }
+      ],
       fullscreen: false,
       hideOtherSettings: true,
       nextLessonPath: '',
@@ -203,6 +210,7 @@ class App extends Component {
     this.stopTimer();
     writePersonalPreferences('userSettings', this.state.userSettings);
     writePersonalPreferences('metWords', this.state.metWords);
+    writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
 
     let currentLessonStrokes = this.state.currentLessonStrokes;
     for (let i = 0; i < currentLessonStrokes.length; i++) {
@@ -241,7 +249,9 @@ class App extends Component {
   }
 
   setPersonalPreferences(source) {
-    let metWords = this.state.metWords, userSettings = this.state.userSettings;
+    let metWords = this.state.metWords;
+    let flashcardsMetWords = this.state.flashcardsMetWords;
+    let userSettings = this.state.userSettings;
     if (source && source !== '') {
       try {
         let parsedSource = JSON.parse(source);
@@ -252,14 +262,16 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWords, userSettings] = loadPersonalPreferences();
+      [metWords, userSettings, flashcardsMetWords] = loadPersonalPreferences();
     }
     this.setState({
+      flashcardsMetWords: flashcardsMetWords,
       metWords: metWords,
       userSettings: userSettings
     }, () => {
       writePersonalPreferences('userSettings', this.state.userSettings);
       writePersonalPreferences('metWords', this.state.metWords);
+      writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
       this.setupLesson();
     });
   }
@@ -789,6 +801,7 @@ class App extends Component {
                     <Progress
                       setPersonalPreferences={this.setPersonalPreferences.bind(this)}
                       metWords={this.state.metWords}
+                      flashcardsMetWords={this.state.flashcardsMetWords}
                     />
                   </DocumentTitle>
                 </div>
@@ -800,6 +813,7 @@ class App extends Component {
                   <DocumentTitle title={'Typey type | Flashcards'}>
                     <Flashcards
                       fullscreen={this.state.fullscreen}
+                      flashcardsMetWords={this.state.flashcardsMetWords}
                       changeFullscreen={this.changeFullscreen.bind(this)}
                     />
                   </DocumentTitle>
@@ -811,6 +825,7 @@ class App extends Component {
                   {header}
                   <DocumentTitle title={'Typey type | Lessons'}>
                     <Lessons
+                      flashcardsMetWords={this.state.flashcardsMetWords}
                       fullscreen={this.state.fullscreen}
                       changeFullscreen={this.changeFullscreen.bind(this)}
                       restartLesson={this.restartLesson.bind(this)}

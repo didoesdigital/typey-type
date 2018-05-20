@@ -12,15 +12,29 @@ import {
 } from 'react-router-dom';
 
 let slideNodes = function (flashcards) {
-  return flashcards.map((item, i) => {
-    return (
-      <Slide index={i} key={i} innerClassName={"carousel__slider__slide__slideInner"}>
-        <div className="carousel__slider__slide flex items-center justify-center">{item}</div>
-      </Slide>
+  let slides = [];
+
+  flashcards.forEach((item, i) => {
+    slides.push(
+      <React.Fragment key={i}>
+        <Slide index={i + "-phrase"} key={i + "-phrase"} innerClassName={"carousel__slider__slide__slideInner"}>
+          <div className="carousel__slider__slide flex items-center justify-center">{item.phrase}</div>
+        </Slide>
+        <Slide index={i + "-stroke"} key={i + "-stroke"} innerClassName={"carousel__slider__slide__slideInner"}>
+          <div className="carousel__slider__slide flex items-center justify-center">{item.stroke}</div>
+        </Slide>
+      </React.Fragment>
     );
   });
-}
 
+  slides.push(
+    <Slide index={"finished"} key={"finished"} innerClassName={"carousel__slider__slide__slideInner"}>
+      <div className="carousel__slider__slide flex items-center justify-center">Finished!</div>
+    </Slide>
+  )
+
+  return slides;
+}
 
 
 
@@ -30,31 +44,48 @@ class Flashcards extends Component {
     this.state = {
       flashcards: [ "Loading flashcards…" ],
       sourceMaterial: [
-        {phrase: 'Loading flashcards…', stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'},
+        {
+          phrase: 'Loading flashcards…',
+          stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
+        },
       ],
       presentedMaterial: [
-        {phrase: 'Loading flashcards…', stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'},
+        {
+          phrase: 'Loading flashcards…',
+          stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
+        },
       ],
       naturalSlideWidth: 9,
       naturalSlideHeight: 16,
       currentSlide: 0,
       title: 'Steno',
-      subtitle: ''
+      subtitle: '',
     }
+  }
+
+  chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlashcardsToShow = 30) {
+    let presentedMaterial = [
+      {
+        phrase: 'Loading flashcards…',
+        stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
+      },
+    ];
+
+    // TODO: change this to actually check the sourceMaterial provided is valid
+    if (sourceMaterial) {
+      presentedMaterial = sourceMaterial.slice(0, numberOfFlashcardsToShow - 1);
+    }
+    return presentedMaterial;
   }
 
   setupFlashCards(event) {
     if (event) { event.preventDefault() };
-    let randomisedLessonMaterial = randomise(this.state.sourceMaterial.slice(0)).slice(0,29);
-    let flashcards = [];
+
     let currentSlide = 0;
 
-    randomisedLessonMaterial.forEach(function (obj) {
-      flashcards.push(obj.phrase);
-      flashcards.push(obj.stroke);
-    });
-
-    flashcards.push("Finished!");
+    let flashcards = [];
+    flashcards = this.chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, 30);
+    flashcards = randomise(flashcards);
 
     if (this.flashcardsCarousel) {
       currentSlide = this.flashcardsCarousel.state.currentSlide;
@@ -76,7 +107,6 @@ class Flashcards extends Component {
 
     this.setState({
       flashcards: flashcards,
-      presentedMaterial: randomisedLessonMaterial,
       currentSlide: currentSlide
     });
   }
@@ -154,9 +184,9 @@ class Flashcards extends Component {
     if (this.props.locationpathname) {
       prefillLesson = this.props.locationpathname;
     }
-    if (this.state.flashcards && this.flashcardsCarousel) {
-      prefillFlashcard = this.state.flashcards[this.flashcardsCarousel.state.currentSlide];
-    }
+    // if (this.state.flashcards && this.flashcardsCarousel) {
+    //   prefillFlashcard = this.state.flashcards[this.flashcardsCarousel.state.currentSlide];
+    // }
     if (this.surveyLink) {
       this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
     }
@@ -205,7 +235,7 @@ class Flashcards extends Component {
               <CarouselProvider
                 naturalSlideWidth={this.state.naturalSlideWidth}
                 naturalSlideHeight={this.state.naturalSlideHeight}
-                totalSlides={this.state.flashcards.length}
+                totalSlides={this.state.flashcards.length * 2 + 1}
                 currentSlide={this.state.currentSlide}
                 className={"carousel--flashcards relative" + fullscreen}
               >
