@@ -52,7 +52,6 @@ class Flashcards extends Component {
     });
 
     flashcards.push("Finished!");
-    // this.reactSwipe.slide(0, 500);
 
     this.setState({
       flashcards: flashcards,
