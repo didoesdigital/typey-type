@@ -37,6 +37,7 @@ class Flashcards extends Component {
       ],
       naturalSlideWidth: 16,
       naturalSlideHeight: 9,
+      currentSlide: 0,
       title: 'Steno',
       subtitle: ''
     }
@@ -46,6 +47,7 @@ class Flashcards extends Component {
     if (event) { event.preventDefault() };
     let randomisedLessonMaterial = randomise(this.state.sourceMaterial.slice(0)).slice(0,29);
     let flashcards = [];
+    let currentSlide = 0;
 
     randomisedLessonMaterial.forEach(function (obj) {
       flashcards.push(obj.phrase);
@@ -54,9 +56,14 @@ class Flashcards extends Component {
 
     flashcards.push("Finished!");
 
+    if (this.flashcardsCarousel) {
+      currentSlide = this.flashcardsCarousel.state.currentSlide;
+    }
+
     this.setState({
       flashcards: flashcards,
-      presentedMaterial: randomisedLessonMaterial
+      presentedMaterial: randomisedLessonMaterial,
+      currentSlide: currentSlide
     });
   }
 
@@ -80,15 +87,29 @@ class Flashcards extends Component {
 
   handleResize = (event) => {
     if (window.matchMedia("(orientation: landscape)").matches) {
-      this.setState({
-        naturalSlideWidth: 16,
-        naturalSlideHeight: 9
-      });
+      let currentSlide = 0;
+      if (this.flashcardsCarousel) {
+        currentSlide = this.flashcardsCarousel.state.currentSlide;
+      }
+      if (this.state.naturalSlideWidth === 9) {
+        this.setState({
+          naturalSlideWidth: 16,
+          naturalSlideHeight: 9,
+          currentSlide: currentSlide
+        });
+      }
     } else if (window.matchMedia("(orientation: portrait)").matches) {
-      this.setState({
-        naturalSlideWidth: 9,
-        naturalSlideHeight: 16
-      });
+      let currentSlide = 0;
+      if (this.flashcardsCarousel) {
+        currentSlide = this.flashcardsCarousel.state.currentSlide;
+      }
+      if (this.state.naturalSlideWidth === 16) {
+        this.setState({
+          naturalSlideWidth: 9,
+          naturalSlideHeight: 16,
+          currentSlide: currentSlide
+        });
+      }
     }
   }
 
@@ -171,6 +192,7 @@ class Flashcards extends Component {
                 naturalSlideWidth={this.state.naturalSlideWidth}
                 naturalSlideHeight={this.state.naturalSlideHeight}
                 totalSlides={this.state.flashcards.length}
+                currentSlide={this.state.currentSlide}
                 className={"carousel--flashcards relative" + fullscreen}
               >
                 {/* Carousel Slider Slide flashcards */}
