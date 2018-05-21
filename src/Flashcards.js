@@ -3,7 +3,8 @@ import { IconFullscreen } from './Icon';
 import { randomise } from './utils';
 import {
   getLesson,
-  parseLesson
+  parseLesson,
+  writePersonalPreferences
 } from './typey-type';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -11,7 +12,7 @@ import {
   Link
 } from 'react-router-dom';
 
-let slideNodes = function (flashcards) {
+let slideNodes = (flashcards) => {
   let slides = [];
 
   flashcards.forEach((item, i) => {
@@ -63,6 +64,7 @@ class Flashcards extends Component {
       naturalSlideWidth: 9,
       naturalSlideHeight: 16,
       currentSlide: 0,
+      currentSlideContent: "",
       title: 'Steno',
       subtitle: '',
     }
@@ -75,20 +77,21 @@ class Flashcards extends Component {
         stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
       },
     ];
-    let exampleFlashcardsMetWords = [
-      {
-        phrase: 'The',
-        stroke: '-T',
-        times_seen: [1526815977]
-      }
-    ];
-    flashcardsMetWords = [
-      {
-        phrase: 'wolf',
-        stroke: 'WOFL',
-        times_seen: [1526815977, 1526815977, 1526815977, 1526815977]
-      }
-    ];
+    // let exampleFlashcardsMetWords = {
+    //   "The": {
+    //     phrase: 'The',
+    //     stroke: '-T',
+    //     times_seen: [1526815977]
+    //   }
+    // };
+    // flashcardsMetWords = this.props.flashcardsMetWords;
+      // {
+      // "wolf": {
+      //   phrase: 'wolf',
+      //   stroke: 'WOFL',
+      //   times_seen: [1526815977, 1526815977, 1526815977, 1526815977]
+      // }
+    // };
 
     // TODO: change this to actually check the sourceMaterial provided is valid
     if (sourceMaterial) {
@@ -101,13 +104,12 @@ class Flashcards extends Component {
     if (flashcardsMetWords) {
       presentedMaterial.forEach((item, i) => {
         tmp.push(item);
-        flashcardsMetWords.forEach((obj, j) => {
-          if (obj.phrase === item.phrase) {
-            // add word to lesson inversely according to times you've seen it
-            let repeat = 12 - obj.times_seen.length;
-            for (var i = 0; i < repeat; i++) tmp.push(item);
-          }
-        });
+        if (flashcardsMetWords[item.phrase]) {
+          // add word to lesson inversely according to times you've seen it
+          // TODO: deal with large numbers of times seen
+          let repeat = 12 - flashcardsMetWords[item.phrase].times_seen.length;
+          for (let i = 0; i < repeat; i++) tmp.push(item);
+        }
       });
       console.log(tmp);
     }
@@ -221,24 +223,56 @@ class Flashcards extends Component {
     if (this.props.locationpathname) {
       prefillLesson = this.props.locationpathname;
     }
+    prefillFlashcard = this.getCurrentSlideContent();
+    if (this.surveyLink) {
+      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
+    }
+  }
+
+  getStrokeForCurrentSlideContent(word) {
+    let stroke = "XXX";
+
+    for (let i = 0; i < this.state.sourceMaterial.length; i++) {
+      if (this.state.sourceMaterial[i].phrase === word) {
+        stroke = this.state.sourceMaterial[i].stroke;
+      }
+    }
+    return stroke;
+  }
+
+  getCurrentSlideContent() {
+    let currentSlideContent = '';
     if (this.state.flashcards && this.flashcardsCarousel) {
       let currentSlide = this.flashcardsCarousel.state.currentSlide;
       let index = 0;
       if (currentSlide % 2 === 1) {
         index = (currentSlide - 1) / 2;
-        prefillFlashcard = this.state.flashcards[index].stroke;
+        currentSlideContent = this.state.flashcards[index].stroke;
       } else if (currentSlide % 2 === 0) {
         index = currentSlide / 2;
         if (index === this.state.flashcards.length) {
-          prefillFlashcard = "Finished!";
+          currentSlideContent = "Finished!";
         } else {
-          prefillFlashcard = this.state.flashcards[index].phrase;
+          currentSlideContent = this.state.flashcards[index].phrase;
         }
       }
     }
-    if (this.surveyLink) {
-      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
+    return currentSlideContent;
+  }
+
+  nextSlide(event) {
+    event.preventDefault();
+    let feedback = "skip";
+    if (event) {
+      feedback = event.target.dataset.flashcardFeedback;
     }
+    let currentSlideContent = this.getCurrentSlideContent();
+    let stroke = this.getStrokeForCurrentSlideContent(currentSlideContent);
+    let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, feedback, stroke);
+    writePersonalPreferences('flashcardsMetWords', newFlashcardsMetWords);
+    this.setState({
+      currentSlideContent: currentSlideContent
+    });
   }
 
   render () {
@@ -305,6 +339,11 @@ class Flashcards extends Component {
                 {/* Page right, next flashcard */}
                 <div className={"pagination-nav-button pagination-nav-button--next absolute right-0 hide-in-fullscreen" + fullscreen}>
                   <ButtonNext className="link-button" type="button" aria-label="Next card">▸</ButtonNext>
+                </div>
+
+                <div className="text-right mr2">
+                  <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="easy" value={this.state.currentSlideContent} aria-label="Next card">Easy</ButtonNext>
+                  <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="hard" value={this.state.currentSlideContent} aria-label="Next card">Hard</ButtonNext>
                 </div>
 
                 {/* Fullscreen button */}

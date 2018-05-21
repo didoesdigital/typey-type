@@ -42,13 +42,13 @@ class App extends Component {
       currentPhraseID: 0,
       currentLessonStrokes: [],
       actualText: ``,
-      flashcardsMetWords: [
-        {
+      flashcardsMetWords: {
+        "The": {
           phrase: 'The',
           stroke: '-T',
           times_seen: [1526815977]
         }
-      ],
+      },
       fullscreen: false,
       hideOtherSettings: true,
       nextLessonPath: '',
@@ -328,6 +328,40 @@ class App extends Component {
     this.setState({fullscreen: value});
     return value;
   }
+
+  updateFlashcardsMetWords(word, feedback, stroke) {
+    let flashcardsMetWords = this.state.flashcardsMetWords;
+
+    if (feedback === "skip") {
+      // flashcardsMetWords.word
+    }
+    else if (feedback === "easy") {
+      let times_seen = [];
+      if (flashcardsMetWords[word]) {
+        times_seen = flashcardsMetWords[word].times_seen;
+      }
+      times_seen.push(Date.now());
+      flashcardsMetWords[word] = {
+        phrase: word,
+        stroke: stroke,
+        times_seen: times_seen
+      }
+    }
+    else if (feedback === "hard") {
+      // flashcardsMetWords.word = {
+      //   word: {
+      //     phrase: word,
+      //     stroke: stroke,
+      //     times_seen: this.state.flashcardsMetWords[word].times_seen.push("teft")
+      //   }
+      // }
+    }
+    this.setState({
+      flashcardsMetWords: flashcardsMetWords,
+    });
+    return flashcardsMetWords;
+  }
+
 
   updateRevisionMaterial(event) {
     let newCurrentLessonStrokes = this.state.currentLessonStrokes.map(stroke => ({...stroke}));
@@ -814,6 +848,7 @@ class App extends Component {
                     <Flashcards
                       fullscreen={this.state.fullscreen}
                       flashcardsMetWords={this.state.flashcardsMetWords}
+                      updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
                       changeFullscreen={this.changeFullscreen.bind(this)}
                     />
                   </DocumentTitle>
@@ -825,6 +860,7 @@ class App extends Component {
                   {header}
                   <DocumentTitle title={'Typey type | Lessons'}>
                     <Lessons
+                      updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
                       flashcardsMetWords={this.state.flashcardsMetWords}
                       fullscreen={this.state.fullscreen}
                       changeFullscreen={this.changeFullscreen.bind(this)}

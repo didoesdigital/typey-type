@@ -269,13 +269,13 @@ function processDictionary(swappedDictionaryFile) {
 
 function loadPersonalPreferences() {
   let metWords = {};
-  let flashcardsMetWords = [
-    {
+  let flashcardsMetWords = {
+    "The": {
       phrase: 'The',
       stroke: '-T',
       times_seen: []
     }
-  ];
+  };
   let userSettings = {
     caseSensitive: false,
     retainedWords: true,
