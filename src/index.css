@@ -812,7 +812,8 @@ label {
       color: #a091a8; }
   .link-button:disabled {
     color: #ece9ee;
-    background-color: #b0b0b0; }
+    background-color: #b0b0b0;
+    cursor: default; }
 
 .radio-button {
   opacity: 0;
@@ -1080,11 +1081,11 @@ label {
   z-index: 1; }
 
 .carousel--flashcards {
-  margin-left: 52px;
-  margin-right: 52px; }
+  margin-left: 56px;
+  margin-right: 56px; }
   .carousel--flashcards.fullscreen {
-    margin-left: -12px;
-    margin-right: -12px; }
+    margin-left: -16px;
+    margin-right: -16px; }
 
 .carousel__slider {
   margin: 0 auto; }
@@ -1104,15 +1105,15 @@ label {
   height: 100%; }
 
 .carousel__slider__slide__slideInner {
-  padding-left: 12px;
-  padding-right: 12px; }
+  padding-left: 16px;
+  padding-right: 16px; }
 
 .pagination-nav-button {
   top: calc(50% - 20px); }
   .pagination-nav-button.pagination-nav-button--prev {
-    left: -52px; }
+    left: -56px; }
   .pagination-nav-button.pagination-nav-button--next {
-    right: -52px; }
+    right: -56px; }
 
 .pagination-nav-button--prev__icon {
   visibility: hidden; }
@@ -1154,13 +1155,13 @@ label {
   white-space: nowrap;
   width: 40px;
   height: 40px;
-  top: 12px;
+  top: 16px;
   right: 24px; }
   @media (min-width: 1024px) {
     .fullscreen-button {
       display: none; } }
   .fullscreen-button.fullscreen {
-    top: 12px;
+    top: 16px;
     right: 24px; }
   .fullscreen-button.fullscreen-button-ghost {
     background-color: transparent;
@@ -1275,7 +1276,7 @@ label {
 
 .homepage-demo-xs {
   max-width: 100%;
-  margin-bottom: 12px; }
+  margin-bottom: 16px; }
   @media (min-width: 960px) {
     .homepage-demo-xs {
       display: none; } }

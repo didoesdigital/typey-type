@@ -792,6 +792,7 @@ label {
   &:disabled {
     color: add-tint($brand-primary, 90%);
     background-color: add-tint(desaturate($brand-primary, 90%), 60%);
+    cursor: default;
   }
 }
 
@@ -1122,11 +1123,11 @@ label {
 }
 
 .carousel--flashcards {
-  margin-left: $link-button-width + 12px;
-  margin-right: $link-button-width + 12px;
+  margin-left: $link-button-width + 16px;
+  margin-right: $link-button-width + 16px;
   &.fullscreen {
-    margin-left: -12px;
-    margin-right: -12px;
+    margin-left: -16px;
+    margin-right: -16px;
   }
 }
 .carousel__slider {
@@ -1147,17 +1148,17 @@ label {
   height: 100%;
 }
 .carousel__slider__slide__slideInner {
-  padding-left: 12px;
-  padding-right: 12px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .pagination-nav-button {
   top: calc(50% - #{$link-button-height / 2});
   &.pagination-nav-button--prev {
-    left: -$link-button-width - 12px;
+    left: -$link-button-width - 16px;
   }
   &.pagination-nav-button--next {
-    right: -$link-button-width - 12px;
+    right: -$link-button-width - 16px;
   }
 }
 
@@ -1207,13 +1208,13 @@ label {
   white-space: nowrap;
   width: $link-button-width;
   height: $link-button-height;
-  top: 12px;
+  top: 16px;
   right: 24px;
   @media (min-width: $breakpoint) {
     display: none;
   }
   &.fullscreen {
-    top: 12px;
+    top: 16px;
     right: 24px;
   }
   &.fullscreen-button-ghost {
@@ -1348,7 +1349,7 @@ $lineAdjustment: 4px;
 
 .homepage-demo-xs {
   max-width: 100%;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   @media (min-width: 960px) {
     display: none;
   }
