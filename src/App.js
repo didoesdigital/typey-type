@@ -329,16 +329,13 @@ class App extends Component {
     return value;
   }
 
-  updateFlashcardsMetWords(word, feedback, stroke) {
-    let flashcardsMetWords = this.state.flashcardsMetWords;
+  updateFlashcardsMetWords(word, feedback, stroke = "XXX") {
+    let flashcardsMetWords = Object.assign({}, this.state.flashcardsMetWords);
 
-    if (feedback === "skip") {
-      // flashcardsMetWords.word
-    }
-    else if (feedback === "easy") {
+    if (feedback === "easy") {
       let times_seen = [];
       if (flashcardsMetWords[word]) {
-        times_seen = flashcardsMetWords[word].times_seen;
+        times_seen = flashcardsMetWords[word].times_seen.slice(0);
       }
       times_seen.push(Date.now());
       flashcardsMetWords[word] = {
@@ -346,15 +343,6 @@ class App extends Component {
         stroke: stroke,
         times_seen: times_seen
       }
-    }
-    else if (feedback === "hard") {
-      // flashcardsMetWords.word = {
-      //   word: {
-      //     phrase: word,
-      //     stroke: stroke,
-      //     times_seen: this.state.flashcardsMetWords[word].times_seen.push("teft")
-      //   }
-      // }
     }
     this.setState({
       flashcardsMetWords: flashcardsMetWords,
@@ -846,8 +834,8 @@ class App extends Component {
                   {header}
                   <DocumentTitle title={'Typey type | Flashcards'}>
                     <Flashcards
-                      fullscreen={this.state.fullscreen}
                       flashcardsMetWords={this.state.flashcardsMetWords}
+                      fullscreen={this.state.fullscreen}
                       updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
                       changeFullscreen={this.changeFullscreen.bind(this)}
                     />
