@@ -6,7 +6,6 @@ import { matchLessonToTerm, sortLessons } from './utils';
 import './App.css';
 
 class Header extends Component {
-
   componentDidMount() {
     if (this.mainHeading) {
       this.mainHeading.focus();
@@ -14,12 +13,12 @@ class Header extends Component {
   }
 
   render() {
-    let nextLesson = this.props.value || 'No lesson selected. See all lessons.';
-    let fullscreen = "";
+    const nextLesson = this.props.value || 'No lesson selected. See all lessons.';
+    let fullscreen = '';
     if (this.props.fullscreen) {
-      fullscreen = " fullscreen";
+      fullscreen = ' fullscreen';
     } else {
-      fullscreen = "";
+      fullscreen = '';
     }
     return (
       <div>
