@@ -357,7 +357,6 @@ currentSlide: currentSlide
   }
 
   nextSlide(event) {
-    event.preventDefault();
     let feedback = "skip";
     if (event) {
       feedback = event.target.dataset.flashcardFeedback;
