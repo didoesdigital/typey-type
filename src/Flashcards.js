@@ -460,6 +460,7 @@ currentSlide: currentSlide
                   flashcards={this.state.flashcards}
                   key={this.state.flashcards.length + this.props.fullscreen}
                   ref={flashcardsCarousel => this.flashcardsCarousel = flashcardsCarousel}
+                  callback={this.onChangeCurrentSlide.bind(this)}
                 >
                   {slideNodes(this.state.flashcards)}
                 </Slider>
