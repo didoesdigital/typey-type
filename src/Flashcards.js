@@ -223,10 +223,21 @@ currentSlide: currentSlide
     if (this.props.locationpathname) {
       prefillLesson = this.props.locationpathname;
     }
-    prefillFlashcard = this.getCurrentSlideContent();
+    prefillFlashcard = this.getCurrentSlideContent()[0];
     if (this.surveyLink) {
       this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
     }
+  }
+
+  getWordForCurrentSlideContent(stroke) {
+    let word = "";
+
+    for (let i = 0; i < this.state.sourceMaterial.length; i++) {
+      if (this.state.sourceMaterial[i].stroke === stroke) {
+        word = this.state.sourceMaterial[i].phrase;
+      }
+    }
+    return word;
   }
 
   getStrokeForCurrentSlideContent(word) {
@@ -241,19 +252,22 @@ currentSlide: currentSlide
   }
 
   getCurrentSlideContent() {
-    let currentSlideContent = '';
+    let currentSlideContent = ["", ""];
     if (this.state.flashcards && this.flashcardsCarousel) {
       let currentSlide = this.flashcardsCarousel.state.currentSlide;
       let index = 0;
       if (currentSlide % 2 === 1) {
         index = (currentSlide - 1) / 2;
-        currentSlideContent = this.state.flashcards[index].stroke;
+        currentSlideContent[0] = this.state.flashcards[index].stroke;
+        currentSlideContent[1] = "stroke";
       } else if (currentSlide % 2 === 0) {
         index = currentSlide / 2;
         if (index === this.state.flashcards.length) {
-          currentSlideContent = "Finished!";
+          currentSlideContent[0] = "Finished!";
+          currentSlideContent[1] = "finished";
         } else {
-          currentSlideContent = this.state.flashcards[index].phrase;
+          currentSlideContent[0] = this.state.flashcards[index].phrase;
+          currentSlideContent[1] = "phrase";
         }
       }
     }
@@ -271,11 +285,17 @@ currentSlide: currentSlide
     if (event) {
       feedback = event.target.dataset.flashcardFeedback;
     }
-    let currentSlideContent = this.getCurrentSlideContent();
-    let stroke = this.getStrokeForCurrentSlideContent(currentSlideContent);
-    let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, feedback, stroke);
-    writePersonalPreferences('flashcardsMetWords', newFlashcardsMetWords);
-    console.log(currentSlideContent);
+    let [currentSlideContent, currentSlideContentType] = this.getCurrentSlideContent();
+    if (currentSlideContentType === "stroke") {
+      let word = this.getWordForCurrentSlideContent(currentSlideContent);
+      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, feedback, currentSlideContent);
+      writePersonalPreferences('flashcardsMetWords', newFlashcardsMetWords);
+    }
+    // else if (currentSlideContentType === "phrase") {
+    //   let stroke = this.getStrokeForCurrentSlideContent(currentSlideContent);
+    //   let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContentType, feedback, stroke);
+    //   writePersonalPreferences('flashcardsMetWords', newFlashcardsMetWords);
+    // }
     this.setState({
       currentSlideContent: currentSlideContent
     });
