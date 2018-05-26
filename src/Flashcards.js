@@ -11,9 +11,20 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import {
   Link
 } from 'react-router-dom';
+// Load the full build.
+var _ = require('lodash');
+// Load the core build.
+var _ = require('lodash/core');
+// Load the FP build for immutable auto-curried iteratee-first data-last methods.
+var fp = require('lodash/fp');
+ 
+// Load method categories.
+var array = require('lodash/array');
+var object = require('lodash/fp/object');
 
 class YourComponentHereInner extends Component {
   componentWillReceiveProps (nextProps) {
+    // debugger
     const { currentSlide, onChangeCurrentSlide } = this.props;
     if (nextProps.currentSlide !== currentSlide && onChangeCurrentSlide) {
       onChangeCurrentSlide(nextProps.currentSlide)
@@ -84,9 +95,22 @@ const YourComponentHere = WithStore(YourComponentHereInner, state => ({
     // npm package to make these properties immutable. You don't have to use
     // all of these, just pick the ones you need.
     currentSlide: state.currentSlide,
+    disableAnimation: state.disableAnimation,
+    hasMasterSpinner: state.hasMasterSpinner,
+    imageErrorCount: state.imageErrorCount,
+    imageSuccessCount: state.imageSuccessCount,
+    lockOnWindowScroll: state.lockOnWindowScroll,
+    masterSpinnerThreshold: state.masterSpinnerThreshold,
     naturalSlideHeight: state.naturalSlideHeight,
     naturalSlideWidth: state.naturalSlideWidth,
     orientation: state.orientation,
+    slideSize: state.slideSize,
+    slideTraySize: state.slideTraySize,
+    step: state.step,
+    totalSlides: state.totalSlides,
+    touchEnabled: state.touchEnabled,
+    dragEnabled: state.dragEnabled,
+    visibleSlides: state.visibleSlides,
   }));
 
 class Flashcards extends Component {
@@ -152,6 +176,7 @@ class Flashcards extends Component {
     let tmp = [];
 
     // TODO: change this to actually check the flashcardsMetWords provided is valid
+    // debugger
     if (flashcardsMetWords) {
       presentedMaterial.forEach((item, i) => {
         tmp.push(item);
@@ -162,7 +187,7 @@ class Flashcards extends Component {
           for (let i = 0; i < repeat; i++) tmp.push(item);
         }
       });
-      console.log(tmp);
+      // console.log(tmp);
     }
 
     return tmp;
@@ -190,11 +215,12 @@ class Flashcards extends Component {
         this.setState({
           naturalSlideWidth: 16,
           naturalSlideHeight: 9,
-          currentSlide: currentSlide
+currentSlide: currentSlide
         });
       }
     }
 
+    // debugger
     this.setState({
       flashcards: flashcards,
       currentSlide: currentSlide
@@ -202,12 +228,24 @@ class Flashcards extends Component {
   }
 
   componentDidMount() {
+if (process.env.NODE_ENV !== 'production') {
+  const {whyDidYouUpdate} = require('why-did-you-update')
+  whyDidYouUpdate(React)
+}
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
     window.addEventListener('resize', this.handleResize);
     this.fetchAndSetupFlashCards();
   }
+componentWillReceiveProps (nextProps) {
+  const changedProps = _.reduce(this.props, function (result, value, key) {
+    return _.isEqual(value, nextProps[key])
+      ? result
+      : result.concat(key)
+  }, [])
+  console.log('changedProps: ', changedProps)
+}
 
   componentDidUpdate(prevProps, prevState) {
     if ((prevProps.lessonpath !== this.props.lessonpath) && (this.props.locationpathname.endsWith('flashcards'))) {
@@ -229,7 +267,7 @@ class Flashcards extends Component {
         this.setState({
           naturalSlideWidth: 16,
           naturalSlideHeight: 9,
-          currentSlide: currentSlide
+currentSlide: currentSlide
         });
       }
     } else if (window.matchMedia("(orientation: portrait)").matches) {
@@ -241,7 +279,7 @@ class Flashcards extends Component {
         this.setState({
           naturalSlideWidth: 9,
           naturalSlideHeight: 16,
-          currentSlide: currentSlide
+currentSlide: currentSlide
         });
       }
     }
@@ -293,6 +331,7 @@ class Flashcards extends Component {
 
   getCurrentSlideContent() {
     let currentSlideContent = '';
+    // debugger
     if (this.state.flashcards && this.flashcardsCarousel) {
       let currentSlide = this.flashcardsCarousel.state.currentSlide;
       let index = 0;
@@ -325,14 +364,19 @@ class Flashcards extends Component {
     }
     let currentSlideContent = this.getCurrentSlideContent();
     let stroke = this.getStrokeForCurrentSlideContent(currentSlideContent);
+    // debugger
     let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, feedback, stroke);
+    // debugger
     writePersonalPreferences('flashcardsMetWords', newFlashcardsMetWords);
+    console.log(currentSlideContent);
     this.setState({
       currentSlideContent: currentSlideContent
     });
   }
 
   render () {
+    // console.log(this.props);
+    // debugger
     let fullscreen = "";
     if (this.props.fullscreen) {
       fullscreen = " fullscreen";
@@ -376,8 +420,8 @@ class Flashcards extends Component {
                 naturalSlideWidth={this.state.naturalSlideWidth}
                 naturalSlideHeight={this.state.naturalSlideHeight}
                 totalSlides={this.state.flashcards.length * 2 + 1}
-                currentSlide={this.state.currentSlide}
                 className={"carousel--flashcards relative" + fullscreen}
+                currentSlide={this.state.currentSlide}
               >
                 <YourComponentHere
                   flashcards={this.state.flashcards}

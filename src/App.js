@@ -344,6 +344,7 @@ class App extends Component {
         times_seen: times_seen
       }
     }
+    console.log(flashcardsMetWords);
     this.setState({
       flashcardsMetWords: flashcardsMetWords,
     });
