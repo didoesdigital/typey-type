@@ -10,9 +10,9 @@ type Lesson = {
 type PresentedMaterial = [{phrase: '', stroke: ''}];
 
 function matchLessonToTerm(lesson : Lesson, value : string) {
-  var terms = value.toLowerCase().split(/\s+/);
+  let terms = value.toLowerCase().split(/\s+/);
   if (terms.length === 1 && terms[0] === "") { return false; }
-  var text = [lesson.title, lesson.subtitle, lesson.category, lesson.subcategory].join(' ').toLowerCase();
+  let text = [lesson.title, lesson.subtitle, lesson.category, lesson.subcategory].join(' ').toLowerCase();
   return terms.every( term => text.indexOf(term) !== -1);
 }
 
