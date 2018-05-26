@@ -34,6 +34,7 @@ class YourComponentHereInner extends Component {
   render () {
     let fullscreen = false;
     let slideNodes = [];
+    const forwardedRef = this.props.forwardedRef;
 
     this.props.flashcards.forEach((item, i) => {
       slideNodes.push(
@@ -57,7 +58,7 @@ class YourComponentHereInner extends Component {
       <React.Fragment>
                 {/* Carousel Slider Slide flashcards */}
                 <Slider
-                  ref={flashcardsCarousel => this.flashcardsCarousel = flashcardsCarousel}
+                  ref={forwardedRef}
                   key={"test"}
                 >
                   {slideNodes}
@@ -390,6 +391,9 @@ currentSlide: currentSlide
     if (this.state.title) {
       flashcardsHeading = this.state.title + flashcardsSubtitle + ' flashcards';
     }
+
+    const sliderRef = React.createRef();
+
     return (
       <div>
         <main id="main">
@@ -423,6 +427,7 @@ currentSlide: currentSlide
                 currentSlide={this.state.currentSlide}
               >
                 <YourComponentHere
+                  sliderRef={sliderRef}
                   flashcards={this.state.flashcards}
                   nextSlide={this.nextSlide.bind(this)}
                   onChangeCurrentSlide={this.onChangeCurrentSlide.bind(this)}
