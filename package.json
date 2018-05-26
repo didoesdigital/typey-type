@@ -9,7 +9,7 @@
     "lodash": "^4.17.10",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.1",
-    "pure-react-carousel": "^1.10.0",
+    "pure-react-carousel": "/Users/di/projects/github/pure-react-carousel/",
     "react": "^16.2.0",
     "react-autocomplete": "^1.7.2",
     "react-document-title": "^2.0.3",
