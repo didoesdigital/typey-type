@@ -6,25 +6,11 @@ import {
   parseLesson,
   writePersonalPreferences
 } from './typey-type';
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext, WithStore } from 'pure-react-carousel';
+import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import {
   Link
 } from 'react-router-dom';
-// Load the full build.
-var _ = require('lodash');
-// Load the core build.
-var _ = require('lodash/core');
-// Load the FP build for immutable auto-curried iteratee-first data-last methods.
-var fp = require('lodash/fp');
- 
-// Load method categories.
-var array = require('lodash/array');
-var object = require('lodash/fp/object');
-
-
-
-
 
 let slideNodes = (flashcards) => {
   let slides = [];
@@ -50,98 +36,6 @@ let slideNodes = (flashcards) => {
 
   return slides;
 }
-
-
-// class YourComponentHereInner extends Component {
-//   componentWillReceiveProps (nextProps) {
-//     // debugger
-//     const { currentSlide, onChangeCurrentSlide } = this.props;
-//     if (nextProps.currentSlide !== currentSlide && onChangeCurrentSlide) {
-//       onChangeCurrentSlide(nextProps.currentSlide)
-//     }
-//   }
-
-  // render () {
-  //   let fullscreen = false;
-  //   let slideNodes = [];
-
-  //   this.props.flashcards.forEach((item, i) => {
-  //     slideNodes.push(
-  //       <React.Fragment key={i}>
-  //         <Slide index={i + "-phrase"} key={i + "-phrase"} innerClassName={"carousel__slider__slide__slideInner"}>
-  //           <div className="carousel__slider__slide flex items-center justify-center">{item.phrase}</div>
-  //         </Slide>
-  //         <Slide index={i + "-stroke"} key={i + "-stroke"} innerClassName={"carousel__slider__slide__slideInner"}>
-  //           <div className="carousel__slider__slide flex items-center justify-center">{item.stroke}</div>
-  //         </Slide>
-  //       </React.Fragment>
-  //     );
-  //   });
-
-  //   slideNodes.push(
-  //     <Slide index={"finished"} key={"finished"} innerClassName={"carousel__slider__slide__slideInner"}>
-  //       <div className="carousel__slider__slide flex items-center justify-center">Finished!</div>
-  //     </Slide>
-  //   )
-  //   return (
-  //     <React.Fragment>
-  //               {/* Carousel Slider Slide flashcards */}
-  //               <Slider
-  //                 ref={forwardedRef}
-  //                 key={"test"}
-  //               >
-  //                 {slideNodes}
-  //               </Slider>
-
-  //               {/* Page left, previous flashcard */}
-  //               <div className={"pagination-nav-button pagination-nav-button--prev absolute hide-in-fullscreen" + fullscreen}>
-  //                 <ButtonBack className="link-button" type="button" aria-label="Previous card"><span className="pagination-nav-button--prev__icon">◂</span></ButtonBack>
-  //               </div>
-
-  //               {/* Page right, next flashcard */}
-  //               <div className={"pagination-nav-button pagination-nav-button--next absolute right-0 hide-in-fullscreen" + fullscreen}>
-  //                 <ButtonNext className="link-button" type="button" aria-label="Next card">▸</ButtonNext>
-  //               </div>
-
-  //               <div className="text-right mr2">
-  //                 <ButtonNext className="link-button" type="button" onClick={this.props.nextSlide.bind(this)} data-flashcard-feedback="easy" value={this.props.currentSlideContent} aria-label="Next card">Easy</ButtonNext>
-  //                 <ButtonNext className="link-button" type="button" onClick={this.props.nextSlide.bind(this)} data-flashcard-feedback="hard" value={this.props.currentSlideContent} aria-label="Next card">Hard</ButtonNext>
-  //               </div>
-
-  //               {/* Fullscreen button */}
-  //               <div className={"checkbox-group text-center fullscreen-button fullscreen-button-ghost" + fullscreen}>
-  //                 <label className="absolute absolute--fill" aria-label="Fullscreen">
-  //                   <input className="absolute" type="checkbox" name="fullscreen" id="fullscreen" checked={this.props.fullscreen} onChange={this.props.changeFullscreen.bind(this)} />
-  //                   <IconFullscreen iconWidth="24" iconHeight="24" className="icon-button" title="custom title for this context" />
-  //                 </label>
-  //               </div>
-  //             </React.Fragment>
-  // );
-  // }
-// }
-
-// const YourComponentHere = WithStore(YourComponentHereInner, state => ({
-  //   // these are read only properties.  we use the "deepFreeze"
-  //   // npm package to make these properties immutable. You don't have to use
-  //   // all of these, just pick the ones you need.
-  //   currentSlide: state.currentSlide,
-  //   disableAnimation: state.disableAnimation,
-  //   hasMasterSpinner: state.hasMasterSpinner,
-  //   imageErrorCount: state.imageErrorCount,
-  //   imageSuccessCount: state.imageSuccessCount,
-  //   lockOnWindowScroll: state.lockOnWindowScroll,
-  //   masterSpinnerThreshold: state.masterSpinnerThreshold,
-  //   naturalSlideHeight: state.naturalSlideHeight,
-  //   naturalSlideWidth: state.naturalSlideWidth,
-  //   orientation: state.orientation,
-  //   slideSize: state.slideSize,
-  //   slideTraySize: state.slideTraySize,
-  //   step: state.step,
-  //   totalSlides: state.totalSlides,
-  //   touchEnabled: state.touchEnabled,
-  //   dragEnabled: state.dragEnabled,
-  //   visibleSlides: state.visibleSlides,
-  // }));
 
 class Flashcards extends Component {
   constructor(props) {
@@ -250,7 +144,6 @@ currentSlide: currentSlide
       }
     }
 
-    // debugger
     this.setState({
       flashcards: flashcards,
       currentSlide: currentSlide
@@ -258,24 +151,12 @@ currentSlide: currentSlide
   }
 
   componentDidMount() {
-if (process.env.NODE_ENV !== 'production') {
-  const {whyDidYouUpdate} = require('why-did-you-update')
-  whyDidYouUpdate(React)
-}
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
     window.addEventListener('resize', this.handleResize);
     this.fetchAndSetupFlashCards();
   }
-componentWillReceiveProps (nextProps) {
-  const changedProps = _.reduce(this.props, function (result, value, key) {
-    return _.isEqual(value, nextProps[key])
-      ? result
-      : result.concat(key)
-  }, [])
-  console.log('changedProps: ', changedProps)
-}
 
   componentDidUpdate(prevProps, prevState) {
     if ((prevProps.lessonpath !== this.props.lessonpath) && (this.props.locationpathname.endsWith('flashcards'))) {
@@ -361,7 +242,6 @@ currentSlide: currentSlide
 
   getCurrentSlideContent() {
     let currentSlideContent = '';
-    // debugger
     if (this.state.flashcards && this.flashcardsCarousel) {
       let currentSlide = this.flashcardsCarousel.state.currentSlide;
       let index = 0;
@@ -393,9 +273,7 @@ currentSlide: currentSlide
     }
     let currentSlideContent = this.getCurrentSlideContent();
     let stroke = this.getStrokeForCurrentSlideContent(currentSlideContent);
-    // debugger
     let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, feedback, stroke);
-    // debugger
     writePersonalPreferences('flashcardsMetWords', newFlashcardsMetWords);
     console.log(currentSlideContent);
     this.setState({
@@ -404,8 +282,6 @@ currentSlide: currentSlide
   }
 
   render () {
-    // console.log(this.props);
-    // debugger
     let fullscreen = "";
     if (this.props.fullscreen) {
       fullscreen = " fullscreen";
@@ -464,6 +340,7 @@ currentSlide: currentSlide
                 >
                   {slideNodes(this.state.flashcards)}
                 </Slider>
+
                 {/* Page left, previous flashcard */}
                 <div className={"pagination-nav-button pagination-nav-button--prev absolute hide-in-fullscreen" + fullscreen}>
                   <ButtonBack className="link-button" type="button" aria-label="Previous card"><span className="pagination-nav-button--prev__icon">◂</span></ButtonBack>
