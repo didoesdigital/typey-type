@@ -69,8 +69,8 @@ class Flashcards extends Component {
     }
   }
 
-  chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlashcardsToShow, lessonpath, flashcardsProgress) {
-    // let presentedMaterial = [
+  chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlashcardsToShow, lessonpath, threshold) {
+    // let sourceMaterial = [
     //   {
     //     phrase: 'Loading flashcards…',
     //     stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
@@ -84,27 +84,13 @@ class Flashcards extends Component {
       //   },
       // },
 
-    // TODO: check this handles < 30 slides
     let presentedMaterial = sourceMaterial.slice(0, numberOfFlashcardsToShow - 1);
-
     let flashcardItemsToShow = [];
 
-    let newlesson = false;
-    if (!flashcardsProgress[lessonpath]) {
-      flashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
-      console.log("NEW LESSON");
-      newlesson = true;
-    }
-
-    let lastSeen = flashcardsProgress[lessonpath].lastSeen;
-    let timeAgoInMinutes = (Date.now() - lastSeen) / 60000;
-    let threshold = this.getFlashcardsBox(timeAgoInMinutes);
-    if (newlesson === true) { threshold = 1; }
-
     // TODO: change this to actually check the flashcardsMetWords provided is valid
+    // then remove if(flashcardsMetWords)
     if (flashcardsMetWords) {
       presentedMaterial.forEach((item, i) => {
-          // console.log(flashcardsMetWords);
         if (flashcardsMetWords[item.phrase]) {
           console.log("Considering: "+flashcardsMetWords[item.phrase].phrase + " against threshold: "+threshold+" where rung is: "+flashcardsMetWords[item.phrase].rung);
           if (flashcardsMetWords[item.phrase].rung <= threshold) {
@@ -150,7 +136,16 @@ class Flashcards extends Component {
     let flashcards = [];
     let lessonpath = this.props.locationpathname.replace(/flashcards$/,'');
     let flashcardsProgress = Object.assign({}, this.props.flashcardsProgress);
-    flashcards = this.chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, 30, lessonpath, flashcardsProgress);
+    let lastSeen = flashcardsProgress[lessonpath].lastSeen;
+    let timeAgoInMinutes = (Date.now() - lastSeen) / 60000;
+    let threshold = this.getFlashcardsBox(timeAgoInMinutes);
+    let newlesson = false;
+    if (!flashcardsProgress[lessonpath]) {
+      flashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
+      newlesson = true;
+    }
+    if (newlesson === true) { threshold = 1; }
+    flashcards = this.chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, 30, lessonpath, threshold);
     // flashcards = randomise(flashcards);
 
     if (this.flashcardsCarousel) {
