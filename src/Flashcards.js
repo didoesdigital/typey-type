@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { IconFullscreen } from './Icon';
-import { randomise } from './utils';
+// import { randomise } from './utils';
 import {
   getLesson,
   parseLesson,
@@ -76,45 +76,76 @@ class Flashcards extends Component {
         stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
       },
     ];
-    // let exampleFlashcardsMetWords = {
-    //   "The": {
-    //     phrase: 'The',
-    //     stroke: '-T',
-    //     times_seen: [1526815977]
-    //   }
-    // };
-    // flashcardsMetWords = this.props.flashcardsMetWords;
-      // {
-      // "wolf": {
-      //   phrase: 'wolf',
-      //   stroke: 'WOFL',
-      //   times_seen: [1526815977, 1526815977, 1526815977, 1526815977]
-      // }
-    // };
+      // let eg = flashcardsMetWords: {
+      //   "the": {
+      //     phrase: "the",
+      //     stroke: "-T",
+      //     currentStatus: 0,
+      //   },
+      // },
 
     // TODO: change this to actually check the sourceMaterial provided is valid
+    // TODO: check this handles < 30 slides
     if (sourceMaterial) {
       presentedMaterial = sourceMaterial.slice(0, numberOfFlashcardsToShow - 1);
     }
 
     let tmp = [];
+    let thisLesson = this.props.locationpathname.replace(/flashcards$/,'');
+    let flashcardsProgress = Object.assign({}, this.props.flashcardsProgress);
 
-    // TODO: change this to actually check the flashcardsMetWords provided is valid
-    // debugger
-    if (flashcardsMetWords) {
-      presentedMaterial.forEach((item, i) => {
-        tmp.push(item);
-        if (flashcardsMetWords[item.phrase]) {
-          // add word to lesson inversely according to times you've seen it
-          // TODO: deal with large numbers of times seen
-          let repeat = 12 - flashcardsMetWords[item.phrase].times_seen.length;
-          for (let i = 0; i < repeat; i++) tmp.push(item);
-        }
-      });
-      // console.log(tmp);
+    let newlesson = false;
+    if (!flashcardsProgress[thisLesson]) {
+      flashcardsProgress = this.props.updateFlashcardsProgress(thisLesson);
+      console.log("NEW LESSON");
+      newlesson = true;
     }
 
+    let lastSeen = flashcardsProgress[thisLesson].lastSeen;
+    let timeAgoInMilliseconds = Date.now() - lastSeen;
+    let timeAgoInMinutes = timeAgoInMilliseconds / 60000;
+    let threshold = this.getFlashcardsBox(timeAgoInMinutes);
+    if (newlesson === true) {threshold = 1;}
+
+    // TODO: change this to actually check the flashcardsMetWords provided is valid
+    if (flashcardsMetWords) {
+      presentedMaterial.forEach((item, i) => {
+          // console.log(flashcardsMetWords);
+        if (flashcardsMetWords[item.phrase]) {
+          console.log("Considering: "+flashcardsMetWords[item.phrase].phrase + " against threshold: "+threshold+" where currentStatus is: "+flashcardsMetWords[item.phrase].currentStatus);
+          if (flashcardsMetWords[item.phrase].currentStatus <= threshold) {
+            console.log("Pushing: "+flashcardsMetWords[item.phrase].phrase);
+            tmp.push(item);
+          }
+        } else {
+          flashcardsMetWords[item.phrase] = {
+            phrase: item.phrase,
+            stroke: item.stroke,
+            currentStatus: 0
+          }
+          tmp.push(item);
+          flashcardsMetWords = this.props.updateFlashcardsMetWords(item.phrase, "skip", item.stroke, 0);
+        }
+      });
+    }
+    // flashcardsMetWords = updateFlashcardsMetWords(word, feedback, stroke = "XXX")
+
+    // console.log(tmp);
     return tmp;
+  }
+
+  getFlashcardsBox(timeAgoInMinutes) {
+    // timeAgoInMinutes = 1200; // 1.3 days ago // 6
+    let threshold = 0;
+    let baseUnitInMinutes = 30;
+    let multiplier = 2;
+    let i = 1;
+    while (i < timeAgoInMinutes) {
+      i = baseUnitInMinutes * Math.pow(multiplier, (threshold));
+      threshold = threshold + 1;
+    }
+    console.log("Threshold: "+threshold+ " because baseUnitInMinutes was: "+ baseUnitInMinutes+" and multiplier was: "+multiplier+" and i: "+i+" and of course timeAgoInMinutes was: "+timeAgoInMinutes);
+    return threshold;
   }
 
   setupFlashCards(event) {
@@ -124,7 +155,7 @@ class Flashcards extends Component {
 
     let flashcards = [];
     flashcards = this.chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, 30);
-    flashcards = randomise(flashcards);
+    // flashcards = randomise(flashcards);
 
     if (this.flashcardsCarousel) {
       currentSlide = this.flashcardsCarousel.state.currentSlide;
@@ -229,14 +260,17 @@ currentSlide: currentSlide
     }
   }
 
-  getWordForCurrentSlideContent(stroke) {
+  getWordForCurrentStrokeSlideIndex(slideNumber) {
     let word = "";
-
-    for (let i = 0; i < this.state.sourceMaterial.length; i++) {
-      if (this.state.sourceMaterial[i].stroke === stroke) {
-        word = this.state.sourceMaterial[i].phrase;
+    if (this.state.flashcards && this.flashcardsCarousel) {
+      let index = 0;
+      // assumes stroke slides are always odd
+      if (slideNumber % 2 === 1) {
+        index = (slideNumber - 1) / 2;
+        word = this.state.flashcards[index].phrase;
       }
     }
+    // debugger
     return word;
   }
 
@@ -256,10 +290,12 @@ currentSlide: currentSlide
     if (this.state.flashcards && this.flashcardsCarousel) {
       let currentSlide = this.flashcardsCarousel.state.currentSlide;
       let index = 0;
+      // assumes stroke slides are always odd
       if (currentSlide % 2 === 1) {
         index = (currentSlide - 1) / 2;
         currentSlideContent[0] = this.state.flashcards[index].stroke;
         currentSlideContent[1] = "stroke";
+      // assumes word and Finished! slides are always even
       } else if (currentSlide % 2 === 0) {
         index = currentSlide / 2;
         if (index === this.state.flashcards.length) {
@@ -274,12 +310,31 @@ currentSlide: currentSlide
     return currentSlideContent;
   }
 
+  // this happens automagically whenever a slide changes, but doesn't have user
+  // feedback to say if it was a known flashcard or not
   onChangeCurrentSlide(slideNumber) {
+    let lessonpath = this.props.locationpathname.replace(/flashcards$/,'');
+    let newFlashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
+
+    let [currentSlideContent, currentSlideContentType] = this.getCurrentSlideContent();
+    if (currentSlideContentType === "stroke") {
+      let word = this.getWordForCurrentStrokeSlideIndex(slideNumber);
+      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, "skip", currentSlideContent);
+    }
+    else if (currentSlideContentType === "phrase") {
+      let stroke = this.getStrokeForCurrentSlideContent(currentSlideContent);
+      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke);
+    }
+
+      // this.nextSlide();
     this.setState({
       currentSlide: slideNumber
+    }, () => {
+    // console.log(this.getCurrentSlideContent());
     });
   }
 
+  // this happens specifically when you click Easy/Hard and that feedback needs to be recorded
   nextSlide(event) {
     let feedback = "skip";
     if (event) {
@@ -287,17 +342,16 @@ currentSlide: currentSlide
     }
     let [currentSlideContent, currentSlideContentType] = this.getCurrentSlideContent();
     if (currentSlideContentType === "stroke") {
-      let word = this.getWordForCurrentSlideContent(currentSlideContent);
+      let word = this.getWordForCurrentStrokeSlideIndex(this.state.currentSlide);
       let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, feedback, currentSlideContent);
-      writePersonalPreferences('flashcardsMetWords', newFlashcardsMetWords);
     }
-    // else if (currentSlideContentType === "phrase") {
-    //   let stroke = this.getStrokeForCurrentSlideContent(currentSlideContent);
-    //   let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContentType, feedback, stroke);
-    //   writePersonalPreferences('flashcardsMetWords', newFlashcardsMetWords);
-    // }
+    else if (currentSlideContentType === "phrase") {
+      let stroke = this.getStrokeForCurrentSlideContent(currentSlideContent);
+      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke);
+    }
+    // debugger
     this.setState({
-      currentSlideContent: currentSlideContent
+      currentSlideContent: currentSlideContent,
     });
   }
 

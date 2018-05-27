@@ -269,12 +269,13 @@ function processDictionary(swappedDictionaryFile) {
 
 function loadPersonalPreferences() {
   let metWords = {};
+  let flashcardsProgress = {};
   let flashcardsMetWords = {
-    "The": {
-      phrase: 'The',
-      stroke: '-T',
-      times_seen: []
-    }
+    "the": {
+      phrase: "the",
+      stroke: "-T",
+      currentStatus: 0,
+    },
   };
   let userSettings = {
     caseSensitive: false,
@@ -299,9 +300,12 @@ function loadPersonalPreferences() {
     if (window.localStorage.getItem('flashcardsMetWords')) {
       flashcardsMetWords = Object.assign(flashcardsMetWords, JSON.parse(window.localStorage.getItem('flashcardsMetWords')));
     }
-    return [metWords, userSettings, flashcardsMetWords];
+    if (window.localStorage.getItem('flashcardsProgress')) {
+      flashcardsProgress = Object.assign(flashcardsProgress, JSON.parse(window.localStorage.getItem('flashcardsProgress')));
+    }
+    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress];
   }
-  return [metWords, userSettings, flashcardsMetWords];
+  return [metWords, userSettings, flashcardsMetWords, flashcardsProgress];
 }
 
 function writePersonalPreferences(itemToStore, JSONToStore) {
