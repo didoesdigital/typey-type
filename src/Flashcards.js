@@ -80,7 +80,7 @@ class Flashcards extends Component {
       //   "the": {
       //     phrase: "the",
       //     stroke: "-T",
-      //     currentStatus: 0,
+      //     rung: 0,
       //   },
       // },
 
@@ -112,8 +112,8 @@ class Flashcards extends Component {
       presentedMaterial.forEach((item, i) => {
           // console.log(flashcardsMetWords);
         if (flashcardsMetWords[item.phrase]) {
-          console.log("Considering: "+flashcardsMetWords[item.phrase].phrase + " against threshold: "+threshold+" where currentStatus is: "+flashcardsMetWords[item.phrase].currentStatus);
-          if (flashcardsMetWords[item.phrase].currentStatus <= threshold) {
+          console.log("Considering: "+flashcardsMetWords[item.phrase].phrase + " against threshold: "+threshold+" where rung is: "+flashcardsMetWords[item.phrase].rung);
+          if (flashcardsMetWords[item.phrase].rung <= threshold) {
             console.log("Pushing: "+flashcardsMetWords[item.phrase].phrase);
             tmp.push(item);
           }
@@ -121,7 +121,7 @@ class Flashcards extends Component {
           flashcardsMetWords[item.phrase] = {
             phrase: item.phrase,
             stroke: item.stroke,
-            currentStatus: 0
+            rung: 0
           }
           tmp.push(item);
           flashcardsMetWords = this.props.updateFlashcardsMetWords(item.phrase, "skip", item.stroke, 0);

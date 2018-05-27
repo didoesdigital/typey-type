@@ -46,7 +46,7 @@ class App extends Component {
         "the": {
           phrase: "the",
           stroke: "-T",
-          currentStatus: 0,
+          rung: 0,
         },
       },
       flashcardsProgress: {
@@ -349,28 +349,28 @@ class App extends Component {
     return flashcardsProgress;
   }
 
-  updateFlashcardsMetWords(word, feedback, stroke, currentStatus = 0) {
+  updateFlashcardsMetWords(word, feedback, stroke, rung = 0) {
     let localStroke = stroke || "XXX";
     let flashcardsMetWords = Object.assign({}, this.state.flashcardsMetWords);
     if (flashcardsMetWords[word]) {
-      if (flashcardsMetWords[word].currentStatus) {
-        currentStatus = flashcardsMetWords[word].currentStatus;
+      if (flashcardsMetWords[word].rung) {
+        rung = flashcardsMetWords[word].rung;
       }
     }
 
     if (feedback === "easy") {
-      currentStatus = currentStatus + 1;
+      rung = rung + 1;
       // debugger
     } else if (feedback === "hard") {
-      currentStatus = currentStatus - 1;
+      rung = rung - 1;
       // debugger
-      if (currentStatus < 0 ) { currentStatus = 0;}
+      if (rung < 0 ) { rung = 0;}
     }
 
     flashcardsMetWords[word] = {
       phrase: word,
       stroke: localStroke,
-      currentStatus: currentStatus
+      rung: rung
     }
 
     // debugger

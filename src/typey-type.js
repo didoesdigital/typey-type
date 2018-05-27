@@ -274,7 +274,7 @@ function loadPersonalPreferences() {
     "the": {
       phrase: "the",
       stroke: "-T",
-      currentStatus: 0,
+      rung: 0,
     },
   };
   let userSettings = {
