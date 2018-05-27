@@ -87,7 +87,7 @@ class Flashcards extends Component {
     // TODO: check this handles < 30 slides
     let presentedMaterial = sourceMaterial.slice(0, numberOfFlashcardsToShow - 1);
 
-    let tmp = [];
+    let flashcardItemsToShow = [];
 
     let newlesson = false;
     if (!flashcardsProgress[lessonpath]) {
@@ -109,7 +109,7 @@ class Flashcards extends Component {
           console.log("Considering: "+flashcardsMetWords[item.phrase].phrase + " against threshold: "+threshold+" where rung is: "+flashcardsMetWords[item.phrase].rung);
           if (flashcardsMetWords[item.phrase].rung <= threshold) {
             console.log("Pushing: "+flashcardsMetWords[item.phrase].phrase);
-            tmp.push(item);
+            flashcardItemsToShow.push(item);
           }
         } else {
           flashcardsMetWords[item.phrase] = {
@@ -117,15 +117,15 @@ class Flashcards extends Component {
             stroke: item.stroke,
             rung: 0
           }
-          tmp.push(item);
+          flashcardItemsToShow.push(item);
           flashcardsMetWords = this.props.updateFlashcardsMetWords(item.phrase, "skip", item.stroke, 0);
         }
       });
     }
     // flashcardsMetWords = updateFlashcardsMetWords(word, feedback, stroke = "XXX")
 
-    // console.log(tmp);
-    return tmp;
+    // console.log(flashcardItemsToShow);
+    return flashcardItemsToShow;
   }
 
   getFlashcardsBox(timeAgoInMinutes) {
