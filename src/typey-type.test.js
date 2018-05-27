@@ -171,10 +171,10 @@ describe('loadPersonalPreferences', () => {
     it('should return previously met words and user settings', () => {
       let metWords = {};
       let flashcardsMetWords = {
-        "The": {
-          "phrase": "The",
+        "the": {
+          "phrase": "the",
           "stroke": "-T",
-          "times_seen": []
+          "rung": 0
         }
       }
       let flashcardsProgress = {}
