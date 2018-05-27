@@ -70,12 +70,12 @@ class Flashcards extends Component {
   }
 
   chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlashcardsToShow, lessonpath, flashcardsProgress) {
-    let presentedMaterial = [
-      {
-        phrase: 'Loading flashcards…',
-        stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
-      },
-    ];
+    // let presentedMaterial = [
+    //   {
+    //     phrase: 'Loading flashcards…',
+    //     stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
+    //   },
+    // ];
       // let eg = flashcardsMetWords: {
       //   "the": {
       //     phrase: "the",
@@ -84,11 +84,8 @@ class Flashcards extends Component {
       //   },
       // },
 
-    // TODO: change this to actually check the sourceMaterial provided is valid
     // TODO: check this handles < 30 slides
-    if (sourceMaterial) {
-      presentedMaterial = sourceMaterial.slice(0, numberOfFlashcardsToShow - 1);
-    }
+    let presentedMaterial = sourceMaterial.slice(0, numberOfFlashcardsToShow - 1);
 
     let tmp = [];
 
