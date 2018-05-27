@@ -69,7 +69,7 @@ class Flashcards extends Component {
     }
   }
 
-  chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlashcardsToShow = 30) {
+  chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlashcardsToShow, lessonpath, flashcardsProgress) {
     let presentedMaterial = [
       {
         phrase: 'Loading flashcards…',
@@ -91,21 +91,18 @@ class Flashcards extends Component {
     }
 
     let tmp = [];
-    let thisLesson = this.props.locationpathname.replace(/flashcards$/,'');
-    let flashcardsProgress = Object.assign({}, this.props.flashcardsProgress);
 
     let newlesson = false;
-    if (!flashcardsProgress[thisLesson]) {
-      flashcardsProgress = this.props.updateFlashcardsProgress(thisLesson);
+    if (!flashcardsProgress[lessonpath]) {
+      flashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
       console.log("NEW LESSON");
       newlesson = true;
     }
 
-    let lastSeen = flashcardsProgress[thisLesson].lastSeen;
-    let timeAgoInMilliseconds = Date.now() - lastSeen;
-    let timeAgoInMinutes = timeAgoInMilliseconds / 60000;
+    let lastSeen = flashcardsProgress[lessonpath].lastSeen;
+    let timeAgoInMinutes = (Date.now() - lastSeen) / 60000;
     let threshold = this.getFlashcardsBox(timeAgoInMinutes);
-    if (newlesson === true) {threshold = 1;}
+    if (newlesson === true) { threshold = 1; }
 
     // TODO: change this to actually check the flashcardsMetWords provided is valid
     if (flashcardsMetWords) {
@@ -154,7 +151,9 @@ class Flashcards extends Component {
     let currentSlide = 0;
 
     let flashcards = [];
-    flashcards = this.chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, 30);
+    let lessonpath = this.props.locationpathname.replace(/flashcards$/,'');
+    let flashcardsProgress = Object.assign({}, this.props.flashcardsProgress);
+    flashcards = this.chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, 30, lessonpath, flashcardsProgress);
     // flashcards = randomise(flashcards);
 
     if (this.flashcardsCarousel) {
