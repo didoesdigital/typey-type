@@ -69,52 +69,6 @@ class Flashcards extends Component {
     }
   }
 
-  setupFlashCards(event) {
-    if (event) { event.preventDefault() };
-
-    let flashcards = [];
-
-    let lessonpath = this.props.locationpathname.replace(/flashcards$/,'');
-    let flashcardsProgress = Object.assign({}, this.props.flashcardsProgress);
-    let timeAgoInMinutes = (Date.now() - flashcardsProgress[lessonpath].lastSeen) / 60000;
-    const baseUnitInMinutes = 30;
-    const multiplier = 2;
-    let threshold = getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier);
-    let newlesson = false;
-    if (!flashcardsProgress[lessonpath]) {
-      flashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
-      newlesson = true;
-    }
-    if (newlesson === true) { threshold = 1; }
-    let numberOfFlashcardsToShow = 2;
-    flashcards = chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, numberOfFlashcardsToShow, threshold);
-    // flashcards = randomise(flashcards);
-
-    let currentSlide = 0;
-    if (this.flashcardsCarousel) {
-      currentSlide = this.flashcardsCarousel.state.currentSlide;
-    }
-
-    if (window.matchMedia("(orientation: landscape)").matches) {
-      let currentSlide = 0;
-      if (this.flashcardsCarousel) {
-        currentSlide = this.flashcardsCarousel.state.currentSlide;
-      }
-      if (this.state.naturalSlideWidth === 9) {
-        this.setState({
-          naturalSlideWidth: 16,
-          naturalSlideHeight: 9,
-currentSlide: currentSlide
-        });
-      }
-    }
-
-    this.setState({
-      flashcards: flashcards,
-      currentSlide: currentSlide
-    });
-  }
-
   componentDidMount() {
     if (this.mainHeading) {
       this.mainHeading.focus();
@@ -180,18 +134,50 @@ currentSlide: currentSlide
     });
   };
 
-  prefillSurveyLink() {
-    let googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSc3XqvJC2lwIRieR5NVoAI7nYa4fTFSZL4Ifk1YA7K7I-lnog/viewform?usp=pp_url&entry.1884511690=";
-    let param = "&entry.1893816394=";
-    let prefillLesson = '';
-    let prefillFlashcard = '';
-    if (this.props.locationpathname) {
-      prefillLesson = this.props.locationpathname;
+  setupFlashCards(event) {
+    if (event) { event.preventDefault() };
+
+    let flashcards = [];
+
+    let lessonpath = this.props.locationpathname.replace(/flashcards$/,'');
+    let flashcardsProgress = Object.assign({}, this.props.flashcardsProgress);
+    let timeAgoInMinutes = (Date.now() - flashcardsProgress[lessonpath].lastSeen) / 60000;
+    const baseUnitInMinutes = 30;
+    const multiplier = 2;
+    let threshold = getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier);
+    let newlesson = false;
+    if (!flashcardsProgress[lessonpath]) {
+      flashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
+      newlesson = true;
     }
-    prefillFlashcard = this.getCurrentSlideContent()[0];
-    if (this.surveyLink) {
-      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
+    if (newlesson === true) { threshold = 1; }
+    let numberOfFlashcardsToShow = 2;
+    flashcards = chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, numberOfFlashcardsToShow, threshold);
+    // flashcards = randomise(flashcards);
+
+    let currentSlide = 0;
+    if (this.flashcardsCarousel) {
+      currentSlide = this.flashcardsCarousel.state.currentSlide;
     }
+
+    if (window.matchMedia("(orientation: landscape)").matches) {
+      let currentSlide = 0;
+      if (this.flashcardsCarousel) {
+        currentSlide = this.flashcardsCarousel.state.currentSlide;
+      }
+      if (this.state.naturalSlideWidth === 9) {
+        this.setState({
+          naturalSlideWidth: 16,
+          naturalSlideHeight: 9,
+currentSlide: currentSlide
+        });
+      }
+    }
+
+    this.setState({
+      flashcards: flashcards,
+      currentSlide: currentSlide
+    });
   }
 
   getWordForCurrentStrokeSlideIndex(slideNumber) {
@@ -287,6 +273,20 @@ currentSlide: currentSlide
     this.setState({
       currentSlideContent: currentSlideContent,
     });
+  }
+
+  prefillSurveyLink() {
+    let googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSc3XqvJC2lwIRieR5NVoAI7nYa4fTFSZL4Ifk1YA7K7I-lnog/viewform?usp=pp_url&entry.1884511690=";
+    let param = "&entry.1893816394=";
+    let prefillLesson = '';
+    let prefillFlashcard = '';
+    if (this.props.locationpathname) {
+      prefillLesson = this.props.locationpathname;
+    }
+    prefillFlashcard = this.getCurrentSlideContent()[0];
+    if (this.surveyLink) {
+      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
+    }
   }
 
   render () {

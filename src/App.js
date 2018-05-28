@@ -274,10 +274,10 @@ class App extends Component {
       metWords: metWords,
       userSettings: userSettings
     }, () => {
-      writePersonalPreferences('userSettings', this.state.userSettings);
-      writePersonalPreferences('metWords', this.state.metWords);
       writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
       writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
+      writePersonalPreferences('metWords', this.state.metWords);
+      writePersonalPreferences('userSettings', this.state.userSettings);
       this.setupLesson();
     });
   }
