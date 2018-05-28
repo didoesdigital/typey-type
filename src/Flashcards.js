@@ -349,7 +349,7 @@ currentSlide: currentSlide
       // console.log("Considering: '"+flashcardsMetWords[item.phrase].phrase + "' against threshold: "+threshold+" where rung is: "+flashcardsMetWords[item.phrase].rung);
         // console.log("Pushing: '"+flashcardsMetWords[item.phrase].phrase+"'");
 function chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlashcardsToShow, threshold) {
-  let presentedMaterial = sourceMaterial.slice(0, numberOfFlashcardsToShow);
+  let presentedMaterial = sourceMaterial.slice(0, 100); // estimated comfortable rendering/animation limit
   let flashcardItemsToShow = [];
 
   presentedMaterial.forEach((item, i) => {
@@ -367,6 +367,7 @@ function chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlas
       // flashcardsMetWords = this.props.updateFlashcardsMetWords(item.phrase, "skip", item.stroke, 0);
     }
   });
+  flashcardItemsToShow = flashcardItemsToShow.slice(0, numberOfFlashcardsToShow);
   return flashcardItemsToShow;
 }
 
