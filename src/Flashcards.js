@@ -389,7 +389,7 @@ function getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multipl
     rungThreshold = rungThreshold + 1; // rungThreshold = 1
     i = baseUnitInMinutes * Math.pow(multiplier, (rungThreshold)); // i = 60
   }
-  console.log("Threshold: "+rungThreshold+ " because baseUnitInMinutes was: "+ baseUnitInMinutes+" and multiplier was: "+multiplier+" and i: "+i+" and of course timeAgoInMinutes was: "+timeAgoInMinutes);
+  // console.log("Threshold: "+rungThreshold+ " because baseUnitInMinutes was: "+ baseUnitInMinutes+" and multiplier was: "+multiplier+" and i: "+i+" and of course timeAgoInMinutes was: "+timeAgoInMinutes);
   return rungThreshold;
 }
 
