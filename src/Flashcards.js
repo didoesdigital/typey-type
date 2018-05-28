@@ -153,12 +153,12 @@ currentSlide: currentSlide
       flashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
       newlesson = true;
     }
-    if (newlesson === true) { threshold = 1; }
 
     let timeAgoInMinutes = (Date.now() - flashcardsProgress[lessonpath].lastSeen) / 60000;
     const baseUnitInMinutes = 30;
     const multiplier = 2;
     let threshold = getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier);
+    if (newlesson === true) { threshold = 1; }
 
     flashcards = chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, numberOfFlashcardsToShow, threshold, shuffle);
 
