@@ -2,6 +2,7 @@ import {
   chooseFlashcardsToShow,
   getCurrentSlideContentAndType,
   getFlashcardsRungThreshold,
+  getStrokeForCurrentSlideContent,
   getWordForCurrentStrokeSlideIndex
 } from './Flashcards';
 
@@ -206,7 +207,6 @@ describe('getFlashcardsRungThreshold', () => {
   });
 });
 
-
 describe('getWordForCurrentStrokeSlideIndex', () => {
   let flashcards = [
     {
@@ -235,5 +235,21 @@ describe('getWordForCurrentStrokeSlideIndex', () => {
   });
   it('sixth slide index word for stroke should be empty because there are not that many slides', () => {
     expect(getWordForCurrentStrokeSlideIndex(flashcards, 5)).toEqual("");
+  });
+});
+
+describe('getStrokeForCurrentSlideContent', () => {
+  let sourceMaterial = [
+    {
+      phrase: 'Loading flashcards…',
+      stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
+    },
+  ];
+  let word = 'Loading flashcards…';
+  it('stroke should match stroke for phrase in sourceMaterial', () => {
+    expect(getStrokeForCurrentSlideContent(word, sourceMaterial)).toEqual("HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ");
+  });
+  it('stroke should be XXX when the word cannot be found', () => {
+    expect(getStrokeForCurrentSlideContent("Not a real word", sourceMaterial)).toEqual("XXX");
   });
 });

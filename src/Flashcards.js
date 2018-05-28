@@ -436,5 +436,6 @@ export {
   chooseFlashcardsToShow,
   getCurrentSlideContentAndType,
   getFlashcardsRungThreshold,
+  getStrokeForCurrentSlideContent,
   getWordForCurrentStrokeSlideIndex
 };
