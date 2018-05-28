@@ -869,6 +869,7 @@ class App extends Component {
                   {header}
                   <DocumentTitle title={'Typey type | Flashcards'}>
                     <Flashcards
+                      locationpathname={this.props.location.pathname}
                       flashcardsMetWords={this.state.flashcardsMetWords}
                       flashcardsProgress={this.state.flashcardsProgress}
                       fullscreen={this.state.fullscreen}

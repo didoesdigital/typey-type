@@ -119,6 +119,7 @@ currentSlide: currentSlide
     let path = process.env.PUBLIC_URL + '/lessons/drills/top-10000-english-words/lesson.txt';
     if (this.props.lessonpath) {
       path = this.props.lessonpath;
+      if (path === 'flashcards') { path = process.env.PUBLIC_URL + '/lessons/drills/top-10000-english-words/lesson.txt'; }
     }
 
     getLesson(path).then((lessonText) => {
@@ -141,7 +142,8 @@ currentSlide: currentSlide
     let numberOfFlashcardsToShow = 2;
     let newlesson = false;
 
-    let lessonpath = this.props.locationpathname.replace(/flashcards$/,'');
+    let lessonpath = this.props.locationpathname;
+    if (lessonpath && lessonpath !== '/flashcards/') { lessonpath.replace(/flashcards$/,''); }
     let flashcardsProgress = Object.assign({}, this.props.flashcardsProgress);
     if (!flashcardsProgress[lessonpath]) {
       flashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
