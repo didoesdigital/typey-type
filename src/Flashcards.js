@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { IconFullscreen } from './Icon';
-// import { randomise } from './utils';
+import * as Utils from './utils';
 import {
   getLesson,
   parseLesson,
@@ -136,7 +136,11 @@ currentSlide: currentSlide
   };
 
   setupFlashCards(event) {
-    if (event) { event.preventDefault() };
+    let shuffle = false;
+    if (event) {
+      if (event.target.dataset.shuffle) { shuffle = true; }
+      event.preventDefault()
+    };
 
     let flashcards = [];
     let numberOfFlashcardsToShow = 100;
@@ -156,12 +160,15 @@ currentSlide: currentSlide
     const multiplier = 2;
     let threshold = getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier);
 
-    flashcards = chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, numberOfFlashcardsToShow, threshold);
-    // flashcards = randomise(flashcards);
+    flashcards = chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, numberOfFlashcardsToShow, threshold, shuffle);
 
     let currentSlide = 0;
     if (this.flashcardsCarousel) {
-      currentSlide = this.flashcardsCarousel.state.currentSlide;
+      // if there's an event, you clicked Shuffle or the heading or something to start again
+      if (!event) {
+        // if you've resized or rotated your device, keep the same flashcard
+        currentSlide = this.flashcardsCarousel.state.currentSlide;
+      }
     }
 
     if (window.matchMedia("(orientation: landscape)").matches) {
@@ -279,10 +286,10 @@ currentSlide: currentSlide
                   </a>
                 </header>
               </div>
-              {/*<div className="mxn2"> */}
+              <div className="mxn2">
                 {/* Shuffle button */}
-                {/*<a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="link-button link-button-ghost table-cell" role="button">Shuffle</a> */}
-                {/*</div> */}
+                <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="link-button link-button-ghost table-cell" data-shuffle="true" role="button">Shuffle</a>
+              </div>
             </div>
           </div>
 
@@ -348,9 +355,11 @@ currentSlide: currentSlide
 
       // console.log("Considering: '"+flashcardsMetWords[item.phrase].phrase + "' against threshold: "+threshold+" where rung is: "+flashcardsMetWords[item.phrase].rung);
         // console.log("Pushing: '"+flashcardsMetWords[item.phrase].phrase+"'");
-function chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlashcardsToShow, threshold) {
+function chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlashcardsToShow, threshold, randomise = false) {
   let presentedMaterial = sourceMaterial.slice(0, 100); // estimated comfortable rendering/animation limit
   let flashcardItemsToShow = [];
+
+  if (randomise) { presentedMaterial = Utils.randomise(presentedMaterial); }
 
   presentedMaterial.forEach((item, i) => {
     if (flashcardsMetWords[item.phrase]) {
