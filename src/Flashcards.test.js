@@ -1,5 +1,6 @@
 import {
   chooseFlashcardsToShow,
+  getCurrentSlideContentAndType,
   getFlashcardsRungThreshold
 } from './Flashcards';
 
@@ -102,6 +103,37 @@ describe('chooseFlashcardsToShow', () => {
         ]
       );
     });
+  });
+});
+
+describe('getCurrentSlideContentAndType', () => {
+  let flashcards = [
+    {
+      phrase: 'it',
+      stroke: 'T'
+    },
+    {
+      phrase: 'and',
+      stroke: 'SKP'
+    }
+  ]
+  it('first flashcard should be a phrase', () => {
+    expect(getCurrentSlideContentAndType(flashcards, 0)).toEqual(["it", "phrase"]);
+  });
+  it('second flashcard should be a stroke', () => {
+    expect(getCurrentSlideContentAndType(flashcards, 1)).toEqual(["T", "stroke"]);
+  });
+  it('third flashcard should be a phrase', () => {
+    expect(getCurrentSlideContentAndType(flashcards, 2)).toEqual(["and", "phrase"]);
+  });
+  it('fourth flashcard should be a stroke', () => {
+    expect(getCurrentSlideContentAndType(flashcards, 3)).toEqual(["SKP", "stroke"]);
+  });
+  it('fifth flashcard should be a finished slide', () => {
+    expect(getCurrentSlideContentAndType(flashcards, 4)).toEqual(["Finished!", "finished"]);
+  });
+  it('should have no sixth flashcard', () => {
+    expect(getCurrentSlideContentAndType(flashcards, 5)).toEqual(["Finished…", "finished"]);
   });
 });
 
