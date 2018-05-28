@@ -69,31 +69,17 @@ class Flashcards extends Component {
     }
   }
 
-  getFlashcardsBox(timeAgoInMinutes) {
-    // timeAgoInMinutes = 1200; // 1.3 days ago // 6
-    let threshold = 0;
-    let baseUnitInMinutes = 30;
-    let multiplier = 2;
-    let i = 1;
-    while (i < timeAgoInMinutes) {
-      i = baseUnitInMinutes * Math.pow(multiplier, (threshold));
-      threshold = threshold + 1;
-    }
-    console.log("Threshold: "+threshold+ " because baseUnitInMinutes was: "+ baseUnitInMinutes+" and multiplier was: "+multiplier+" and i: "+i+" and of course timeAgoInMinutes was: "+timeAgoInMinutes);
-    return threshold;
-  }
-
   setupFlashCards(event) {
     if (event) { event.preventDefault() };
 
-    let currentSlide = 0;
-
     let flashcards = [];
+
     let lessonpath = this.props.locationpathname.replace(/flashcards$/,'');
     let flashcardsProgress = Object.assign({}, this.props.flashcardsProgress);
-    let lastSeen = flashcardsProgress[lessonpath].lastSeen;
-    let timeAgoInMinutes = (Date.now() - lastSeen) / 60000;
-    let threshold = this.getFlashcardsBox(timeAgoInMinutes);
+    let timeAgoInMinutes = (Date.now() - flashcardsProgress[lessonpath].lastSeen) / 60000;
+    const baseUnitInMinutes = 30;
+    const multiplier = 2;
+    let threshold = getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier);
     let newlesson = false;
     if (!flashcardsProgress[lessonpath]) {
       flashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
@@ -104,6 +90,7 @@ class Flashcards extends Component {
     flashcards = chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, numberOfFlashcardsToShow, threshold);
     // flashcards = randomise(flashcards);
 
+    let currentSlide = 0;
     if (this.flashcardsCarousel) {
       currentSlide = this.flashcardsCarousel.state.currentSlide;
     }
@@ -423,7 +410,20 @@ function chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlas
   return flashcardItemsToShow;
 }
 
+// timeAgoInMinutes = 40
+function getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier) {
+  let rungThreshold = 0;
+  let i = baseUnitInMinutes * Math.pow(multiplier, (rungThreshold)); // i = 30
+  while (i < timeAgoInMinutes) { // 30 < 40 === true; 60 < 40 === false;
+    rungThreshold = rungThreshold + 1; // rungThreshold = 1
+    i = baseUnitInMinutes * Math.pow(multiplier, (rungThreshold)); // i = 60
+  }
+  console.log("Threshold: "+rungThreshold+ " because baseUnitInMinutes was: "+ baseUnitInMinutes+" and multiplier was: "+multiplier+" and i: "+i+" and of course timeAgoInMinutes was: "+timeAgoInMinutes);
+  return rungThreshold;
+}
+
 export default Flashcards;
 export {
-  chooseFlashcardsToShow
+  chooseFlashcardsToShow,
+  getFlashcardsRungThreshold
 };
