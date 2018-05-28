@@ -367,6 +367,7 @@ function chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlas
       // flashcardsMetWords = this.props.updateFlashcardsMetWords(item.phrase, "skip", item.stroke, 0);
     }
   });
+  if (threshold < 2) { numberOfFlashcardsToShow = 15; }
   flashcardItemsToShow = flashcardItemsToShow.slice(0, numberOfFlashcardsToShow);
   return flashcardItemsToShow;
 }
