@@ -139,7 +139,7 @@ currentSlide: currentSlide
     if (event) { event.preventDefault() };
 
     let flashcards = [];
-    let numberOfFlashcardsToShow = 2;
+    let numberOfFlashcardsToShow = 100;
     let newlesson = false;
 
     let lessonpath = this.props.locationpathname;
