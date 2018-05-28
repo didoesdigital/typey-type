@@ -1,7 +1,8 @@
 import {
   chooseFlashcardsToShow,
   getCurrentSlideContentAndType,
-  getFlashcardsRungThreshold
+  getFlashcardsRungThreshold,
+  getWordForCurrentStrokeSlideIndex
 } from './Flashcards';
 
 describe('chooseFlashcardsToShow', () => {
@@ -132,7 +133,7 @@ describe('getCurrentSlideContentAndType', () => {
   it('fifth flashcard should be a finished slide', () => {
     expect(getCurrentSlideContentAndType(flashcards, 4)).toEqual(["Finished!", "finished"]);
   });
-  it('should have no sixth flashcard', () => {
+  it('should have no sixth flashcard and return a finished slide', () => {
     expect(getCurrentSlideContentAndType(flashcards, 5)).toEqual(["Finished…", "finished"]);
   });
 });
@@ -202,5 +203,37 @@ describe('getFlashcardsRungThreshold', () => {
         expect(getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier)).toEqual(8);
       });
     });
+  });
+});
+
+
+describe('getWordForCurrentStrokeSlideIndex', () => {
+  let flashcards = [
+    {
+      phrase: 'it',
+      stroke: 'T'
+    },
+    {
+      phrase: 'and',
+      stroke: 'SKP'
+    }
+  ]
+  it('first slide index word for stroke should be empty because it is a word', () => {
+    expect(getWordForCurrentStrokeSlideIndex(flashcards, 0)).toEqual("");
+  });
+  it('second slide index word for stroke should be a valid word', () => {
+    expect(getWordForCurrentStrokeSlideIndex(flashcards, 1)).toEqual("it");
+  });
+  it('third slide index word for stroke should be empty because it is a word', () => {
+    expect(getWordForCurrentStrokeSlideIndex(flashcards, 2)).toEqual("");
+  });
+  it('fourth index word for stroke should be a valid word', () => {
+    expect(getWordForCurrentStrokeSlideIndex(flashcards, 3)).toEqual("and");
+  });
+  it('fifth slide index word for stroke should be empty because it is a word', () => {
+    expect(getWordForCurrentStrokeSlideIndex(flashcards, 4)).toEqual("");
+  });
+  it('sixth slide index word for stroke should be empty because there are not that many slides', () => {
+    expect(getWordForCurrentStrokeSlideIndex(flashcards, 5)).toEqual("");
   });
 });

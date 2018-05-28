@@ -182,20 +182,6 @@ currentSlide: currentSlide
     });
   }
 
-  getWordForCurrentStrokeSlideIndex(slideIndex) {
-    let word = "";
-    if (this.state.flashcards && this.flashcardsCarousel) {
-      let index = 0;
-      // assumes stroke slides are always odd
-      if (slideIndex % 2 === 1) {
-        index = (slideIndex - 1) / 2;
-        word = this.state.flashcards[index].phrase;
-      }
-    }
-    // debugger
-    return word;
-  }
-
   getStrokeForCurrentSlideContent(word) {
     let stroke = "XXX";
 
@@ -215,7 +201,7 @@ currentSlide: currentSlide
 
     let [currentSlideContent, currentSlideContentType] = getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
     if (currentSlideContentType === "stroke") {
-      let word = this.getWordForCurrentStrokeSlideIndex(slideIndex);
+      let word = getWordForCurrentStrokeSlideIndex(this.state.flashcards, slideIndex);
       let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, "skip", currentSlideContent, this.state.flashcardsMetWords);
     }
     else if (currentSlideContentType === "phrase") {
@@ -241,7 +227,7 @@ currentSlide: currentSlide
     if (this.flashcardsCarousel) { slideIndex = this.flashcardsCarousel.state.currentSlide; }
     let [currentSlideContent, currentSlideContentType] = getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
     if (currentSlideContentType === "stroke") {
-      let word = this.getWordForCurrentStrokeSlideIndex(this.state.currentSlide);
+      let word = getWordForCurrentStrokeSlideIndex(this.state.flashcards, this.state.currentSlide);
       let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, feedback, currentSlideContent, this.state.flashcardsMetWords);
     }
     else if (currentSlideContentType === "phrase") {
@@ -430,9 +416,23 @@ function getCurrentSlideContentAndType(flashcards, flashcardsCarouselCurrentSlid
   return currentSlideContent;
 }
 
+function getWordForCurrentStrokeSlideIndex(flashcards, slideIndex) {
+  let word = "";
+  let flashcardsIndex = 0;
+  // assumes stroke slides are always odd
+  if (slideIndex > (flashcards.length * 2)) {
+    word = "";
+  } else if (slideIndex % 2 === 1) {
+    flashcardsIndex = (slideIndex - 1) / 2;
+    word = flashcards[flashcardsIndex].phrase;
+  }
+  return word;
+}
+
 export default Flashcards;
 export {
   chooseFlashcardsToShow,
   getCurrentSlideContentAndType,
-  getFlashcardsRungThreshold
+  getFlashcardsRungThreshold,
+  getWordForCurrentStrokeSlideIndex
 };
