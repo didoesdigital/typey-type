@@ -69,51 +69,6 @@ class Flashcards extends Component {
     }
   }
 
-  chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlashcardsToShow, lessonpath, threshold) {
-    // let sourceMaterial = [
-    //   {
-    //     phrase: 'Loading flashcards…',
-    //     stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
-    //   },
-    // ];
-      // let eg = flashcardsMetWords: {
-      //   "the": {
-      //     phrase: "the",
-      //     stroke: "-T",
-      //     rung: 0,
-      //   },
-      // },
-
-    let presentedMaterial = sourceMaterial.slice(0, numberOfFlashcardsToShow - 1);
-    let flashcardItemsToShow = [];
-
-    // TODO: change this to actually check the flashcardsMetWords provided is valid
-    // then remove if(flashcardsMetWords)
-    if (flashcardsMetWords) {
-      presentedMaterial.forEach((item, i) => {
-        if (flashcardsMetWords[item.phrase]) {
-          console.log("Considering: "+flashcardsMetWords[item.phrase].phrase + " against threshold: "+threshold+" where rung is: "+flashcardsMetWords[item.phrase].rung);
-          if (flashcardsMetWords[item.phrase].rung <= threshold) {
-            console.log("Pushing: "+flashcardsMetWords[item.phrase].phrase);
-            flashcardItemsToShow.push(item);
-          }
-        } else {
-          flashcardsMetWords[item.phrase] = {
-            phrase: item.phrase,
-            stroke: item.stroke,
-            rung: 0
-          }
-          flashcardItemsToShow.push(item);
-          flashcardsMetWords = this.props.updateFlashcardsMetWords(item.phrase, "skip", item.stroke, 0);
-        }
-      });
-    }
-    // flashcardsMetWords = updateFlashcardsMetWords(word, feedback, stroke = "XXX")
-
-    // console.log(flashcardItemsToShow);
-    return flashcardItemsToShow;
-  }
-
   getFlashcardsBox(timeAgoInMinutes) {
     // timeAgoInMinutes = 1200; // 1.3 days ago // 6
     let threshold = 0;
@@ -145,7 +100,8 @@ class Flashcards extends Component {
       newlesson = true;
     }
     if (newlesson === true) { threshold = 1; }
-    flashcards = this.chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, 30, lessonpath, threshold);
+    let numberOfFlashcardsToShow = 2;
+    flashcards = chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, numberOfFlashcardsToShow, threshold);
     // flashcards = randomise(flashcards);
 
     if (this.flashcardsCarousel) {
@@ -443,4 +399,31 @@ currentSlide: currentSlide
   }
 }
 
+      // console.log("Considering: '"+flashcardsMetWords[item.phrase].phrase + "' against threshold: "+threshold+" where rung is: "+flashcardsMetWords[item.phrase].rung);
+        // console.log("Pushing: '"+flashcardsMetWords[item.phrase].phrase+"'");
+function chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlashcardsToShow, threshold) {
+  let presentedMaterial = sourceMaterial.slice(0, numberOfFlashcardsToShow);
+  let flashcardItemsToShow = [];
+
+  presentedMaterial.forEach((item, i) => {
+    if (flashcardsMetWords[item.phrase]) {
+      if (flashcardsMetWords[item.phrase].rung <= threshold) {
+        flashcardItemsToShow.push(item);
+      }
+    } else {
+      flashcardsMetWords[item.phrase] = {
+        phrase: item.phrase,
+        stroke: item.stroke,
+        rung: 0
+      }
+      flashcardItemsToShow.push(item);
+      // flashcardsMetWords = this.props.updateFlashcardsMetWords(item.phrase, "skip", item.stroke, 0);
+    }
+  });
+  return flashcardItemsToShow;
+}
+
 export default Flashcards;
+export {
+  chooseFlashcardsToShow
+};
