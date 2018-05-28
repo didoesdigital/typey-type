@@ -5652,7 +5652,7 @@ punycode@^1.2.4, punycode@^1.4.1:
 
 "pure-react-carousel@git+ssh://git@github.com:dimonster/pure-react-carousel.git#add-slider-callback":
   version "1.12.2"
-  resolved "git+ssh://git@github.com:dimonster/pure-react-carousel.git#b8cc766584abfd7371af20c0eca120128f69d134"
+  resolved "git+ssh://git@github.com:dimonster/pure-react-carousel.git#89d6974180a8cafa99dc328bd41691a70f3d3840"
   dependencies:
     deep-freeze "0.0.1"
     deepmerge "^1.3.2"
