@@ -182,17 +182,6 @@ currentSlide: currentSlide
     });
   }
 
-  getStrokeForCurrentSlideContent(word) {
-    let stroke = "XXX";
-
-    for (let i = 0; i < this.state.sourceMaterial.length; i++) {
-      if (this.state.sourceMaterial[i].phrase === word) {
-        stroke = this.state.sourceMaterial[i].stroke;
-      }
-    }
-    return stroke;
-  }
-
   // this happens automagically whenever a slide changes, but doesn't have user
   // feedback to say if it was a known flashcard or not
   onChangeCurrentSlide(slideIndex) {
@@ -205,7 +194,7 @@ currentSlide: currentSlide
       let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, "skip", currentSlideContent, this.state.flashcardsMetWords);
     }
     else if (currentSlideContentType === "phrase") {
-      let stroke = this.getStrokeForCurrentSlideContent(currentSlideContent);
+      let stroke = getStrokeForCurrentSlideContent(currentSlideContent, this.state.sourceMaterial);
       let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke, this.state.flashcardsMetWords);
     }
 
@@ -231,7 +220,7 @@ currentSlide: currentSlide
       let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, feedback, currentSlideContent, this.state.flashcardsMetWords);
     }
     else if (currentSlideContentType === "phrase") {
-      let stroke = this.getStrokeForCurrentSlideContent(currentSlideContent);
+      let stroke = getStrokeForCurrentSlideContent(currentSlideContent, this.state.sourceMaterial);
       let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke, this.state.flashcardsMetWords);
     }
     // debugger
@@ -427,6 +416,19 @@ function getWordForCurrentStrokeSlideIndex(flashcards, slideIndex) {
     word = flashcards[flashcardsIndex].phrase;
   }
   return word;
+}
+
+function getStrokeForCurrentSlideContent(word, sourceMaterial) {
+  let stroke = "XXX";
+  let i = 0;
+  let length = sourceMaterial.length;
+
+  for (; i < length; i++) {
+    if (sourceMaterial[i].phrase === word) {
+      stroke = sourceMaterial[i].stroke;
+    }
+  }
+  return stroke;
 }
 
 export default Flashcards;
