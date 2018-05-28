@@ -207,24 +207,24 @@ currentSlide: currentSlide
     return stroke;
   }
 
-  getCurrentSlideContent() {
+  getCurrentSlideContent(flashcards, flashcardsCarousel) {
     let currentSlideContent = ["", ""];
-    if (this.state.flashcards && this.flashcardsCarousel) {
-      let currentSlide = this.flashcardsCarousel.state.currentSlide;
+    if (flashcards && flashcardsCarousel) {
+      let currentSlide = flashcardsCarousel.state.currentSlide;
       let index = 0;
       // assumes stroke slides are always odd
       if (currentSlide % 2 === 1) {
         index = (currentSlide - 1) / 2;
-        currentSlideContent[0] = this.state.flashcards[index].stroke;
+        currentSlideContent[0] = flashcards[index].stroke;
         currentSlideContent[1] = "stroke";
       // assumes word and Finished! slides are always even
       } else if (currentSlide % 2 === 0) {
         index = currentSlide / 2;
-        if (index === this.state.flashcards.length) {
+        if (index === flashcards.length) {
           currentSlideContent[0] = "Finished!";
           currentSlideContent[1] = "finished";
         } else {
-          currentSlideContent[0] = this.state.flashcards[index].phrase;
+          currentSlideContent[0] = flashcards[index].phrase;
           currentSlideContent[1] = "phrase";
         }
       }
@@ -238,21 +238,21 @@ currentSlide: currentSlide
     let lessonpath = this.props.locationpathname.replace(/flashcards$/,'');
     let newFlashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
 
-    let [currentSlideContent, currentSlideContentType] = this.getCurrentSlideContent();
+    let [currentSlideContent, currentSlideContentType] = this.getCurrentSlideContent(this.state.flashcards, this.flashcardsCarousel);
     if (currentSlideContentType === "stroke") {
       let word = this.getWordForCurrentStrokeSlideIndex(slideNumber);
-      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, "skip", currentSlideContent);
+      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, "skip", currentSlideContent, this.state.flashcardsMetWords);
     }
     else if (currentSlideContentType === "phrase") {
       let stroke = this.getStrokeForCurrentSlideContent(currentSlideContent);
-      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke);
+      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke, this.state.flashcardsMetWords);
     }
 
       // this.nextSlide();
     this.setState({
       currentSlide: slideNumber
     }, () => {
-    // console.log(this.getCurrentSlideContent());
+    // console.log(this.getCurrentSlideContent(this.state.flashcards, this.flashcardsCarousel));
     });
   }
 
@@ -262,14 +262,14 @@ currentSlide: currentSlide
     if (event) {
       feedback = event.target.dataset.flashcardFeedback;
     }
-    let [currentSlideContent, currentSlideContentType] = this.getCurrentSlideContent();
+    let [currentSlideContent, currentSlideContentType] = this.getCurrentSlideContent(this.state.flashcards, this.flashcardsCarousel);
     if (currentSlideContentType === "stroke") {
       let word = this.getWordForCurrentStrokeSlideIndex(this.state.currentSlide);
-      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, feedback, currentSlideContent);
+      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, feedback, currentSlideContent, this.state.flashcardsMetWords);
     }
     else if (currentSlideContentType === "phrase") {
       let stroke = this.getStrokeForCurrentSlideContent(currentSlideContent);
-      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke);
+      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke, this.state.flashcardsMetWords);
     }
     // debugger
     this.setState({
@@ -285,7 +285,7 @@ currentSlide: currentSlide
     if (this.props.locationpathname) {
       prefillLesson = this.props.locationpathname;
     }
-    prefillFlashcard = this.getCurrentSlideContent()[0];
+    prefillFlashcard = this.getCurrentSlideContent(this.state.flashcards, this.flashcardsCarousel)[0];
     if (this.surveyLink) {
       this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param + encodeURIComponent(prefillFlashcard);
     }
