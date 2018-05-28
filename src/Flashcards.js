@@ -272,8 +272,6 @@ currentSlide: currentSlide
       flashcardsHeading = this.state.title + flashcardsSubtitle + ' flashcards';
     }
 
-    const sliderRef = React.createRef();
-
     return (
       <div>
         <main id="main">
