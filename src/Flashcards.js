@@ -279,10 +279,10 @@ currentSlide: currentSlide
                   </a>
                 </header>
               </div>
-              <div className="mxn2">
+              {/*<div className="mxn2"> */}
                 {/* Shuffle button */}
-                <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="link-button link-button-ghost table-cell" role="button">Shuffle</a>
-              </div>
+                {/*<a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="link-button link-button-ghost table-cell" role="button">Shuffle</a> */}
+                {/*</div> */}
             </div>
           </div>
 
