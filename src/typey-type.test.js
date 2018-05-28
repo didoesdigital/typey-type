@@ -170,6 +170,14 @@ describe('loadPersonalPreferences', () => {
   describe('without localStorage', () => {
     it('should return previously met words and user settings', () => {
       let metWords = {};
+      let flashcardsMetWords = {
+        "the": {
+          "phrase": "the",
+          "stroke": "-T",
+          "rung": 0
+        }
+      }
+      let flashcardsProgress = {}
       let userSettings = {
         caseSensitive: false,
         retainedWords: true,
@@ -183,7 +191,7 @@ describe('loadPersonalPreferences', () => {
         seenWords: true,
         study: 'discover'
       };
-      expect(loadPersonalPreferences()).toEqual([metWords, userSettings]);
+      expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress]);
     });
   });
 });

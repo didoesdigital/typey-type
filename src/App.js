@@ -42,6 +42,15 @@ class App extends Component {
       currentPhraseID: 0,
       currentLessonStrokes: [],
       actualText: ``,
+      flashcardsMetWords: {
+        "the": {
+          phrase: "the",
+          stroke: "-T",
+          rung: 0,
+        },
+      },
+      flashcardsProgress: {
+      },
       fullscreen: false,
       hideOtherSettings: true,
       nextLessonPath: '',
@@ -203,6 +212,8 @@ class App extends Component {
     this.stopTimer();
     writePersonalPreferences('userSettings', this.state.userSettings);
     writePersonalPreferences('metWords', this.state.metWords);
+    writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
+    writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
 
     let currentLessonStrokes = this.state.currentLessonStrokes;
     for (let i = 0; i < currentLessonStrokes.length; i++) {
@@ -241,7 +252,10 @@ class App extends Component {
   }
 
   setPersonalPreferences(source) {
-    let metWords = this.state.metWords, userSettings = this.state.userSettings;
+    let metWords = this.state.metWords;
+    let flashcardsMetWords = this.state.flashcardsMetWords;
+    let flashcardsProgress = this.state.flashcardsProgress;
+    let userSettings = this.state.userSettings;
     if (source && source !== '') {
       try {
         let parsedSource = JSON.parse(source);
@@ -252,14 +266,18 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWords, userSettings] = loadPersonalPreferences();
+      [metWords, userSettings, flashcardsMetWords, flashcardsProgress] = loadPersonalPreferences();
     }
     this.setState({
+      flashcardsMetWords: flashcardsMetWords,
+      flashcardsProgress: flashcardsProgress,
       metWords: metWords,
       userSettings: userSettings
     }, () => {
-      writePersonalPreferences('userSettings', this.state.userSettings);
+      writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
+      writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
       writePersonalPreferences('metWords', this.state.metWords);
+      writePersonalPreferences('userSettings', this.state.userSettings);
       this.setupLesson();
     });
   }
@@ -316,6 +334,56 @@ class App extends Component {
     this.setState({fullscreen: value});
     return value;
   }
+
+  updateFlashcardsProgress(lessonpath) {
+    let flashcardsProgress = Object.assign({}, this.state.flashcardsProgress);
+
+    flashcardsProgress[lessonpath] = {
+      lastSeen: Date.now()
+    }
+    this.setState({
+      flashcardsProgress: flashcardsProgress,
+    }, () => {
+      writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
+    });
+    return flashcardsProgress;
+  }
+
+  updateFlashcardsMetWords(word, feedback, stroke, rung = 0) {
+    let localStroke = stroke || "XXX";
+    let flashcardsMetWords = Object.assign({}, this.state.flashcardsMetWords);
+    if (flashcardsMetWords[word]) {
+      if (flashcardsMetWords[word].rung) {
+        rung = flashcardsMetWords[word].rung;
+      }
+    }
+
+    if (feedback === "easy") {
+      rung = rung + 1;
+      // debugger
+    } else if (feedback === "hard") {
+      rung = rung - 1;
+      // debugger
+      if (rung < 0 ) { rung = 0;}
+    }
+
+    flashcardsMetWords[word] = {
+      phrase: word,
+      stroke: localStroke,
+      rung: rung
+    }
+
+    // debugger
+
+    this.setState({
+      flashcardsMetWords: flashcardsMetWords,
+    }, () => {
+      writePersonalPreferences('flashcardsMetWords', flashcardsMetWords);
+    });
+    // debugger
+    return flashcardsMetWords;
+  }
+
 
   updateRevisionMaterial(event) {
     let newCurrentLessonStrokes = this.state.currentLessonStrokes.map(stroke => ({...stroke}));
@@ -789,6 +857,8 @@ class App extends Component {
                     <Progress
                       setPersonalPreferences={this.setPersonalPreferences.bind(this)}
                       metWords={this.state.metWords}
+                      flashcardsMetWords={this.state.flashcardsMetWords}
+                      flashcardsProgress={this.state.flashcardsProgress}
                     />
                   </DocumentTitle>
                 </div>
@@ -799,7 +869,13 @@ class App extends Component {
                   {header}
                   <DocumentTitle title={'Typey type | Flashcards'}>
                     <Flashcards
+                      locationpathname={this.props.location.pathname}
+                      flashcardsMetWords={this.state.flashcardsMetWords}
+                      flashcardsProgress={this.state.flashcardsProgress}
                       fullscreen={this.state.fullscreen}
+                      lessonpath="flashcards"
+                      updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
+                      updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
                       changeFullscreen={this.changeFullscreen.bind(this)}
                     />
                   </DocumentTitle>
@@ -811,6 +887,10 @@ class App extends Component {
                   {header}
                   <DocumentTitle title={'Typey type | Lessons'}>
                     <Lessons
+                      updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
+                      updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
+                      flashcardsMetWords={this.state.flashcardsMetWords}
+                      flashcardsProgress={this.state.flashcardsProgress}
                       fullscreen={this.state.fullscreen}
                       changeFullscreen={this.changeFullscreen.bind(this)}
                       restartLesson={this.restartLesson.bind(this)}

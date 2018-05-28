@@ -39,8 +39,9 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
             {...props}
           />
         } />
-        <Route exact={true} path={`${match.url}/flashcards`} render={ (props) =>
-          <Lesson lessonIndex={lessonIndex}
+      <Route exact={true} path={`${match.url}/flashcards`} render={ (props) =>
+          <Lesson
+            lessonIndex={lessonIndex}
             handleLesson={handleLesson}
             lesson={lesson}
             {...lessonProps}
