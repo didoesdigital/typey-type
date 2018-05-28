@@ -195,16 +195,16 @@ currentSlide: currentSlide
   // feedback to say if it was a known flashcard or not
   onChangeCurrentSlide(slideIndex) {
     let lessonpath = this.props.locationpathname.replace(/flashcards$/,'');
-    let newFlashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
+    this.props.updateFlashcardsProgress(lessonpath);
 
     let [currentSlideContent, currentSlideContentType] = getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
     if (currentSlideContentType === "stroke") {
       let word = getWordForCurrentStrokeSlideIndex(this.state.flashcards, slideIndex);
-      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, "skip", currentSlideContent, this.state.flashcardsMetWords);
+      this.props.updateFlashcardsMetWords(word, "skip", currentSlideContent, this.state.flashcardsMetWords);
     }
     else if (currentSlideContentType === "phrase") {
       let stroke = getStrokeForCurrentSlideContent(currentSlideContent, this.state.sourceMaterial);
-      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke, this.state.flashcardsMetWords);
+      this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke, this.state.flashcardsMetWords);
     }
 
       // this.nextSlide();
