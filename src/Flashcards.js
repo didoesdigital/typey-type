@@ -138,20 +138,22 @@ currentSlide: currentSlide
     if (event) { event.preventDefault() };
 
     let flashcards = [];
+    let numberOfFlashcardsToShow = 2;
+    let newlesson = false;
 
     let lessonpath = this.props.locationpathname.replace(/flashcards$/,'');
     let flashcardsProgress = Object.assign({}, this.props.flashcardsProgress);
-    let timeAgoInMinutes = (Date.now() - flashcardsProgress[lessonpath].lastSeen) / 60000;
-    const baseUnitInMinutes = 30;
-    const multiplier = 2;
-    let threshold = getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier);
-    let newlesson = false;
     if (!flashcardsProgress[lessonpath]) {
       flashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
       newlesson = true;
     }
     if (newlesson === true) { threshold = 1; }
-    let numberOfFlashcardsToShow = 2;
+
+    let timeAgoInMinutes = (Date.now() - flashcardsProgress[lessonpath].lastSeen) / 60000;
+    const baseUnitInMinutes = 30;
+    const multiplier = 2;
+    let threshold = getFlashcardsRungThreshold(timeAgoInMinutes, baseUnitInMinutes, multiplier);
+
     flashcards = chooseFlashcardsToShow(this.state.sourceMaterial.slice(0), this.props.flashcardsMetWords, numberOfFlashcardsToShow, threshold);
     // flashcards = randomise(flashcards);
 
