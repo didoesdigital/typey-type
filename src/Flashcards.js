@@ -325,8 +325,8 @@ currentSlide: currentSlide
                 </div>
 
                 <div className="text-right mr2">
-                  <ButtonNext className="link-button" disabled={this.state.currentSlide % 2 === 0} type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="easy" value={this.state.currentSlideContent} aria-label="Next card">Easy</ButtonNext>
-                  <ButtonNext className="link-button" disabled={this.state.currentSlide % 2 === 0} type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="hard" value={this.state.currentSlideContent} aria-label="Next card">Hard</ButtonNext>
+                  <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="easy" value={this.state.currentSlideContent} aria-label="Next card">Easy</ButtonNext>
+                  <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="hard" value={this.state.currentSlideContent} aria-label="Next card">Hard</ButtonNext>
                 </div>
 
                 {/* Fullscreen button */}
