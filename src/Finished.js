@@ -176,7 +176,7 @@ class Finished extends Component {
           </p>
           <p>
             <a href={this.props.path} onClick={this.props.restartLesson} className="" role="button">
-              <IconRestart aria-hidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
+              <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
               Restart lesson</a>
           </p>
         </div>
