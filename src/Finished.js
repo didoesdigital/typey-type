@@ -75,6 +75,10 @@ class Finished extends Component {
       misstrokesSummary = (
         <div>
           <h3 className="mt0 nowrap">Possible stroke improvements</h3>
+          <p>
+            <a href={this.props.path} onClick={this.props.reviseLesson} role="button">
+              Revise these words</a>
+          </p>
           <ol className="mb0 unstyled-list">{listOfPossibleStrokeImprovements}</ol>
         </div>
       );
@@ -180,7 +184,7 @@ class Finished extends Component {
           {misstrokesSummary}
         </div>
         <p>
-          <a href={this.props.path} onClick={this.props.reviseLesson} className="" role="button">
+          <a href={this.props.path} onClick={this.props.reviseLesson} role="button">
             Revise these words</a>
         </p>
       </div>
