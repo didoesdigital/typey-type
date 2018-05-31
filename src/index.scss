@@ -1011,7 +1011,7 @@ label {
     color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
   }
 }
-.link-missing-full-stop:after {
+.tag-missing-full-stop:after {
   content: ".";
 }
 .external-link {

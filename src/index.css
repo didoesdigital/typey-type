@@ -988,7 +988,7 @@ label {
   .subsection-header-toggle:active, .subsection-header-toggle:focus {
     color: #202549; }
 
-.link-missing-full-stop:after {
+.tag-missing-full-stop:after {
   content: "."; }
 
 .external-link {

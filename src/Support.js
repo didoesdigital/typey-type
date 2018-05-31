@@ -13,6 +13,7 @@ class Support extends Component {
   }
 
   render() {
+    const dictionaryEntryForTabSpace = '"STA*PB": "{#Tab}{#space}",';
     return (
       <main id="main">
         <div className="subheader">
@@ -58,7 +59,17 @@ class Support extends Component {
 
             <h3 id="typey-type-notes">Typey&nbsp;type notes</h3>
             <p>Typey&nbsp;type embraces ideas of <a href="https://en.wikipedia.org/wiki/Spaced_repetition" target="_blank" rel="noopener noreferrer">spaced repetitions<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and <a href="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice" target="_blank" rel="noopener noreferrer">deliberate practice<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> to teach steno effectively.</p>
+
+            <h4 id="typey-type-progress-tracking">Typey type progress tracking</h4>
             <p>When you stop a lesson before reaching the end or you complete a lesson, Typey&nbsp;type will save <Link to="/progress">your progress</Link>, including all the new words you’ve successfully met. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress. Typey&nbsp;type saves your brief progress in your browser’s local storage. You’ll lose your progress if you clear your browsing data (history, cookies, and cache). If you share this device with other people or use Typey&nbsp;type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;type.</p>
+
+            <h4 id="typey-type-dictionary">Typey&nbsp;type dictionary</h4>
+            <p>Typey&nbsp;type uses a version of the Plover dictionary that comes built into the Plover software. Typey&nbsp;type’s version is based on a copy of Plover’s from a few years ago that <a href="https://didoesdigital.com/">DiDoesDigital</a> has since spent many hours meticulously amending so that Typey&nbsp;type automatically suggests the best brief available. It chooses the “best” stroke by looking for the shortest stroke, where there are penalties for multi-stroke briefs and briefs that use the star (<code>*</code>) key. <a href="https://didoesdigital.com/">DiDoesDigital</a> has also removed thousands of misstrokes so that they are not suggested when learning Plover theory.</p>
+            <p>If you want to use a different dictionary or learn a different steno theory, you can upload your words and strokes to a <Link to="/lessons/custom">Typey&nbsp;type custom lesson</Link> and the briefs shown will match the dictionary you’re using.</p>
+            <p>If you notice any odd strokes, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">post to the feedback form<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
+
+            <h4 id="typey-type-hints">Typey&nbsp;type hints</h4>
+            <p>To manually show a brief hint in a lesson that otherwise hides briefs, press <kbd>Tab</kbd> to focus on the stroke hint and <kbd>Space</kbd> activate it. This will automatically move your focus back to typing. To avoid losing time doing this, you can create a brief to press <kbd>Tab</kbd> and <kbd>Space</kbd> for you, such as <code className="tag-missing-full-stop">{dictionaryEntryForTabSpace}</code></p>
 
             <h4 id="typey-type-terms">Typey&nbsp;type terms</h4>
             <dl className="inline-flex">
@@ -67,7 +78,7 @@ class Support extends Component {
               <dt>Seen words</dt>
               <dd>Typey&nbsp;type tracks words you’ve "seen" or "met". Each time you successfully type a new word, that’s logged as a successful meeting.</dd>
               <dt>Words per minute (WPM)</dt>
-              <dd>To track your typing speed, Typey&nbsp;type displays the number of words you’ve typed per minute using the unit "words per minute (WPM)", where a word is considered to be 5 letters long on average. This means you might type many short words and have a higher WPM score.</dd>
+              <dd>To track your typing speed, Typey&nbsp;type displays the number of words you’ve typed per minute using the unit “words per minute (WPM)”, where a word is considered to be 5 letters long on average. This means you might type many short words and have a higher WPM score.</dd>
               <dt>Discover</dt>
               <dd>The first type of study session lets you discover new briefs by showing only a limited number of new words while revealing their strokes. Write these words slowly, concentrating on accuracy and forming good habits around how you stroke word parts. Focus on lessons with interesting words, especially top words for your needs (such as common English words for general usage or domain specific phrases for steno in particular industries).</dd>
               <dt>Revise</dt>
@@ -112,7 +123,7 @@ class Support extends Component {
             </ul>
 
             <h3 id="support">Support</h3>
-            <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or <a href="https://twitter.com/didoesdigital">tweet @DiDoesDigital</a>.</p>
+            <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a>, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">post to the feedback form<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>, or <a href="https://twitter.com/didoesdigital" target="_blank" rel="noopener noreferrer">tweet @DiDoesDigital<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
 
             <h3 id="privacy">Privacy</h3>
             <p>This site uses <a href="https://www.google.com/intl/en/policies/privacy/">Google Analytics</a> to track usage data for improving the site (see the <a href="https://support.google.com/analytics/answer/6004245?hl=en">Google&nbsp;Analytics privacy controls to opt out</a>). From 1 July 2018, Typey type will track custom lesson material as part of that usage data unless you opt out.</p>
