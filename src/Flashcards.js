@@ -341,7 +341,8 @@ currentSlide: currentSlide
 
 
               <p className="text-center mt1 mb0"><Link to="./" className={"text-small hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link></p>
-              <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--flashcards--give-feedback">Give feedback on this flashcard (form opens in a new tab)</a></p>
+              <p className="text-center mb0"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--flashcards--give-feedback">Give feedback on this flashcard (form opens in a new tab)</a></p>
+              <p className="text-center"><a href="http://stenoknight.com/plover/ploverlookup/" className="text-small" rel="noopener noreferrer" target="_blank">Look up brief on StenoKnight’s Plover lookup<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a></p>
 
             </div>
           </div>
