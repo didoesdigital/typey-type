@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
 
-// GoogleAnalytics.initialize('UA-113450929-1', {debug: true, titleCase: false });
-GoogleAnalytics.initialize('UA-113450929-1', { titleCase: false });
+if (process.env.NODE_ENV !== 'production') {
+  // GoogleAnalytics.initialize('UA-113450929-2', { debug: true, titleCase: false });
+  GoogleAnalytics.initialize('UA-113450929-2', { titleCase: false });
+} else {
+  GoogleAnalytics.initialize('UA-113450929-1', { titleCase: false });
+}
+
 
 const withTracker = (WrappedComponent, options = {}) => {
   const trackPage = page => {
