@@ -133,7 +133,20 @@ class Home extends Component {
                 <h3 id="steno-news">Keep up with news</h3>
                 <p>Sign up for{" "}
                   <a href="https://didoesdigital.com/#newsletter" target="_blank" rel="noopener noreferrer" aria-label="Typey type updates and steno news (external link opens in new tab)">Typey&nbsp;type updates and steno news
+                    <Tooltip
+                      animation="shift"
+                      arrow="true"
+                      className=""
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital"
+                      title="(external link opens in new tab)"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
                       <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                    </Tooltip>
                   </a>.
                 </p>
                 <a href='https://didoesdigital.com/#newsletter' className="link-button dib" style={{lineHeight: 2}} role="button" aria-label="Steno news (external link)">Steno news</a>
