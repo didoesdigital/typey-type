@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-const withTracker = (WrappedComponent, options = {}) => {
+const withTracker = (WrappedComponent, options = { anonymizeIp: true }) => {
   const trackPage = page => {
     GoogleAnalytics.set({
       page,
