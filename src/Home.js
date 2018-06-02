@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { IconExternal } from './Icon';
 import {
   Tooltip,
 } from 'react-tippy';
@@ -130,8 +131,12 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="text-center">
                 <h3 id="steno-news">Keep up with news</h3>
-                <p>Sign up for <a href="https://didoesdigital.com/#newsletter" target="_blank" rel="noopener noreferrer">Typey&nbsp;type updates and steno news<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
-                <a href='https://didoesdigital.com/#newsletter' className="link-button dib" style={{lineHeight: 2}} role="button">Steno news</a>
+                <p>Sign up for{" "}
+                  <a href="https://didoesdigital.com/#newsletter" target="_blank" rel="noopener noreferrer" aria-label="Typey type updates and steno news (external link opens in new tab)">Typey&nbsp;type updates and steno news
+                      <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                  </a>.
+                </p>
+                <a href='https://didoesdigital.com/#newsletter' className="link-button dib" style={{lineHeight: 2}} role="button" aria-label="Steno news (external link)">Steno news</a>
               </div>
             </div>
           </div>
