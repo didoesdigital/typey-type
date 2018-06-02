@@ -126,7 +126,7 @@ class Support extends Component {
             <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a>, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">post to the feedback form<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>, or <a href="https://twitter.com/didoesdigital" target="_blank" rel="noopener noreferrer">tweet @DiDoesDigital<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
 
             <h3 id="privacy">Privacy</h3>
-            <p>This site uses <a href="https://www.google.com/intl/en/policies/privacy/">Google Analytics</a> to track usage data for improving the site (see the <a href="https://support.google.com/analytics/answer/6004245?hl=en">Google&nbsp;Analytics privacy controls to opt out</a>). From 1 July 2018, Typey type will track custom lesson material as part of that usage data unless you opt out.</p>
+            <p>This site uses <a href="https://www.google.com/intl/en/policies/privacy/">Google Analytics</a> to track usage data for improving the site using cookies. Typey&nbsp;type anonymises IP addresses before sending them to Google and Google Analytics retains cookie data for 26 months.</p>
           </div>
         </div>
       </main>
