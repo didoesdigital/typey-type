@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import GoogleAnalytics from 'react-ga';
 import { Link } from 'react-router-dom';
+import GoogleAnalytics from 'react-ga';
 import { IconExternal } from './Icon';
 import {
   Tooltip,
@@ -23,13 +23,14 @@ class Footer extends Component {
         <p className="text-center mb1"><small><Link to="/contribute">Contribute to Typey&nbsp;type</Link> and{" "}
           <GoogleAnalytics.OutboundLink
             eventLabel="DiDoesDigital: Typey type updates and steno news (external link opens in new tab)"
+            aria-label="Typey type updates and steno news (external link opens in new tab)"
             to="https://didoesdigital.com/#newsletter"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Typey type updates and steno news (external link opens in new tab)"
           >
             sign up to steno news
             <Tooltip
+              title="(external link opens in new tab)"
               animation="shift"
               arrow="true"
               className=""
@@ -37,7 +38,6 @@ class Footer extends Component {
               tabIndex="0"
               tag="span"
               theme="didoesdigital"
-              title="(external link opens in new tab)"
               trigger="mouseenter focus click"
               onShow={this.props.setAnnouncementMessage}
             >
