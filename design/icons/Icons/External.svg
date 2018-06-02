@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/External</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M11,22 L11,20 L17,20 L17,13.5 C17,13.2238576 17.2238576,13 17.5,13 L18.5,13 C18.7761424,13 19,13.2238576 19,13.5 L19,21.5 C19,21.7761424 18.7761424,22 18.5,22 L11,22 Z M2,13 L4,13 L4,20 L11,20 L11,22 L2.5,22 C2.22385763,22 2,21.7761424 2,21.5 L2,13 Z M11,5.5 L11,6.5 C11,6.77614237 10.7761424,7 10.5,7 L4,7 L4,13 L2,13 L2,5.5 C2,5.22385763 2.22385763,5 2.5,5 L10.5,5 C10.7761424,5 11,5.22385763 11,5.5 Z M21.5,9 L20.5,9 C20.2238576,9 20,8.77614237 20,8.5 L20,5.5 L11.8535534,13.6464466 C11.6582912,13.8417088 11.3417088,13.8417088 11.1464466,13.6464466 L10.3535534,12.8535534 C10.1582912,12.6582912 10.1582912,12.3417088 10.3535534,12.1464466 L18.5,4 L15.5,4 C15.2238576,4 15,3.77614237 15,3.5 L15,2.5 C15,2.22385763 15.2238576,2 15.5,2 L21.5,2 C21.7761424,2 22,2.22385763 22,2.5 L22,8.5 C22,8.77614237 21.7761424,9 21.5,9 Z" id="path-1"></path>
+    </defs>
+    <g id="Icons/External" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <g id="Combined-Shape"></g>
+        <g id="Colors/heavy-primary" mask="url(#mask-2)" fill="#7109AA">
+            <rect id="heavy-primary" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>
