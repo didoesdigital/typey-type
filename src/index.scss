@@ -404,7 +404,16 @@ input:focus::placeholder {
   word-wrap: break-word; // for IE 11
 }
 
+
+
+
+
 // Class styles
+
+.divider {
+  border-top: 1px solid add-tint($brand-primary, 80%);
+}
+
 .header {
   background-color: saturate(add-shade($brand-primary, 30%), 5%);
   color: add-tint($brand-primary, 70%);

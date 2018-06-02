@@ -74,7 +74,8 @@ class Finished extends Component {
 
       misstrokesSummary = (
         <div>
-          <h3 className="mt0 nowrap">Possible stroke improvements</h3>
+          <div className="divider mt2 mb2" />
+          <h4 className="mt0 nowrap">Possible stroke improvements</h4>
           <p>
             <a href={this.props.path} onClick={this.props.reviseLesson} role="button">
               Revise these words</a>
@@ -173,9 +174,7 @@ class Finished extends Component {
             <Link to={this.props.suggestedNext} className="link-button dib" style={{lineHeight: 2}} role="button">
               Next lesson
             </Link>
-          </p>
-          <p>
-            <a href={this.props.path} onClick={this.props.restartLesson} className="" role="button">
+            <a href={this.props.path} onClick={this.props.restartLesson} className="ml1" role="button">
               <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
               Restart lesson</a>
           </p>

@@ -505,6 +505,9 @@ input:focus::placeholder {
   overflow-wrap: break-word;
   word-wrap: break-word; }
 
+.divider {
+  border-top: 1px solid #d9d3dc; }
+
 .header {
   background-color: #2e173b;
   color: #c6bdcb; }
