@@ -620,7 +620,7 @@ class App extends Component {
   }
 
   setAnnouncementMessage(app, content) {
-    let newAnnouncementMessage;
+    let newAnnouncementMessage = "";
     if (content) {
       // TODO: if we want to make this function generic for other announcement content, here is the
       // start of a handler for that:
@@ -630,7 +630,21 @@ class App extends Component {
         newAnnouncementMessage = content.querySelector('.tippy-tooltip-content').innerText;
       // }
     }
-    app.setState({announcementMessage: newAnnouncementMessage || ""});
+    app.setState({announcementMessage: newAnnouncementMessage});
+    // TODO: figure out how to re-announce things if the announcement hasn't
+    // changed content but you've encountered a new instance of the same
+    // content that should be announced
+    // if (this.state.announcementMessage === newAnnouncementMessage) {
+    //   app.setState({
+    //     announcementSubsequentMessage: newAnnouncementMessage,
+    //     announcementMessage: "",
+    //   });
+    // } else {
+    //   app.setState({
+    //     announcementMessage: newAnnouncementMessage,
+    //     announcementSubsequentMessage: "",
+    //   });
+    // }
   }
 
   reviseLesson(event) {
