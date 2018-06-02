@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import { IconFullscreen } from './Icon';
+import GoogleAnalytics from 'react-ga';
+import { IconExternal } from './Icon';
+import {
+  Tooltip,
+} from 'react-tippy';
+import 'react-tippy/dist/tippy.css'
 import * as Utils from './utils';
 import {
   getLesson,
@@ -342,7 +348,32 @@ currentSlide: currentSlide
 
               <p className="text-center mt1 mb0"><Link to="./" className={"text-small hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link></p>
               <p className="text-center mb0"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--flashcards--give-feedback">Give feedback on this flashcard (form opens in a new tab)</a></p>
-              <p className="text-center"><a href="http://stenoknight.com/plover/ploverlookup/" className="text-small" rel="noopener noreferrer" target="_blank">Look up brief on StenoKnight’s Plover lookup<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a></p>
+              <p className="text-center">
+                <GoogleAnalytics.OutboundLink
+                  eventLabel="Look up brief on StenoKnight’s Plover lookup"
+                  aria-label="Look up brief on StenoKnight’s Plover lookup (external link opens in new tab)"
+                  to="http://stenoknight.com/plover/ploverlookup/"
+                  className="text-small"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Look up brief on StenoKnight’s Plover lookup
+                  <Tooltip
+                    title="(external link opens in new tab)"
+                    animation="shift"
+                    arrow="true"
+                    className=""
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                  </Tooltip>
+                </GoogleAnalytics.OutboundLink>.
+              </p>
 
             </div>
           </div>
