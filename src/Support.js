@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import GoogleAnalytics from 'react-ga';
+import { IconExternal } from './Icon';
 import {
   Tooltip,
 } from 'react-tippy';
@@ -45,7 +47,31 @@ class Support extends Component {
               faster. You can learn briefs and improve your stenographic speed and accuracy using tailored education options, including tight feedback loops so you learn to fix misstrokes immediately. You can effortlessly track progress in your brief vocabulary and rapidly increase in steno skill.</p>
 
             <h3 id="about-stenography">Stenography</h3>
-            <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. When you press keys together on a stenotype machine—like playing a piano chord—the software translates the key combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the <a href="http://openstenoproject.org/" target="_blank" rel="noopener noreferrer">Open steno project<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
+            <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. When you press keys together on a stenotype machine—like playing a piano chord—the software translates the key combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Open steno project"
+                aria-label="Open steno project (external link opens in new tab)"
+                to="http://openstenoproject.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open steno <span className="nowrap">project
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.
+            </p>
 
             <h4 id="steno-terms">Steno terms</h4>
             <dl className="inline-flex">
@@ -54,11 +80,80 @@ class Support extends Component {
               <dt>Strokes</dt>
               <dd>A stroke is a combination of keys held together and released to write a word or sound. A multi-stroke brief is a combination of strokes pressed in order to produce a word or phrase (usually of more syllables).</dd>
               <dt>Plover</dt>
-              <dd><a href="http://www.openstenoproject.org/plover/" target="_blank" rel="noopener noreferrer">Plover<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> is the world’s first free, open-source stenography program that works cross-platform on Windows, macOS, and Linux operating systems.</dd>
+              <dd>{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Plover"
+                aria-label="Plover (external link opens in new tab)"
+                to="http://www.openstenoproject.org/plover/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="nowrap">Plover
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink> is the world’s first free, open-source stenography program that works cross-platform on Windows, macOS, and Linux operating systems.</dd>
             </dl>
 
             <h3 id="typey-type-notes">Typey&nbsp;type notes</h3>
-            <p>Typey&nbsp;type embraces ideas of <a href="https://en.wikipedia.org/wiki/Spaced_repetition" target="_blank" rel="noopener noreferrer">spaced repetitions<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and <a href="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice" target="_blank" rel="noopener noreferrer">deliberate practice<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> to teach steno effectively.</p>
+            <p>Typey&nbsp;type embraces ideas of{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="spaced repetitions"
+                aria-label="spaced repetitions (external link opens in new tab)"
+                to="https://en.wikipedia.org/wiki/Spaced_repetition"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                spaced <span className="nowrap">repetitions
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink> and{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="deliberate practice"
+                aria-label="deliberate practice (external link opens in new tab)"
+                to="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                deliberate <span className="nowrap">practice
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink> to teach steno effectively.</p>
 
             <h4 id="typey-type-progress-tracking">Typey type progress tracking</h4>
             <p>When you stop a lesson before reaching the end or you complete a lesson, Typey&nbsp;type will save <Link to="/progress">your progress</Link>, including all the new words you’ve successfully met. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress. Typey&nbsp;type saves your brief progress in your browser’s local storage. You’ll lose your progress if you clear your browsing data (history, cookies, and cache). If you share this device with other people or use Typey&nbsp;type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;type.</p>
@@ -66,7 +161,30 @@ class Support extends Component {
             <h4 id="typey-type-dictionary">Typey&nbsp;type dictionary</h4>
             <p>Typey&nbsp;type uses a version of the Plover dictionary that comes built into the Plover software. Typey&nbsp;type’s version is based on a copy of Plover’s from a few years ago that <a href="https://didoesdigital.com/">DiDoesDigital</a> has since spent many hours meticulously amending so that Typey&nbsp;type automatically suggests the best brief available. It chooses the “best” stroke by looking for the shortest stroke, where there are penalties for multi-stroke briefs and briefs that use the star (<code>*</code>) key. <a href="https://didoesdigital.com/">DiDoesDigital</a> has also removed thousands of misstrokes so that they are not suggested when learning Plover theory.</p>
             <p>If you want to use a different dictionary or learn a different steno theory, you can upload your words and strokes to a <Link to="/lessons/custom">Typey&nbsp;type custom lesson</Link> and the briefs shown will match the dictionary you’re using.</p>
-            <p>If you notice any odd strokes, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">post to the feedback form<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
+            <p>If you notice any odd strokes, {" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="post to the feedback form"
+                aria-label="post to the feedback form (external link opens in new tab)"
+                to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                post to the feedback <span className="nowrap">form
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.</p>
 
             <h4 id="typey-type-hints">Typey&nbsp;type hints</h4>
             <p>To manually show a brief hint in a lesson that otherwise hides briefs, press <kbd>Tab</kbd> to focus on the stroke hint and <kbd>Space</kbd> activate it. This will automatically move your focus back to typing. To avoid losing time doing this, you can create a brief to press <kbd>Tab</kbd> and <kbd>Space</kbd> for you, such as <code className="tag-missing-full-stop">{dictionaryEntryForTabSpace}</code></p>
@@ -91,10 +209,102 @@ class Support extends Component {
 
             <h3 id="learn-steno">Learning stenography</h3>
             <h4 id="try-steno">How can you try out steno?</h4>
-            <p>For an idea of how steno feels and works, you can <a href="https://github.com/openstenoproject/plover/wiki/Installation-Guide" target="_blank" rel="noopener noreferrer">install Plover<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and use its “arpeggiate” setting. This setting lets you use a QWERTY keyboard to write stenography. The trick is that you press each key separately and then press space bar to send the stroke. Usually a stenographer will press all keys together and release them together. Most QWERTY keyboards, however, are non-NKRO (N-key roll over), meaning only the first 6 keys held together will be noticed; later keys are ignored. Arpeggiate will let you explore steno, but is unrealistic.</p>
+            <p>For an idea of how steno feels and works, you can {" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="install Plover"
+                aria-label="install Plover (external link opens in new tab)"
+                to="http://openstenoproject.org/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                install Plover<span className="nowrap">
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+              </GoogleAnalytics.OutboundLink> and use its “arpeggiate” setting. This setting lets you use a QWERTY keyboard to write stenography. The trick is that you press each key separately and then press space bar to send the stroke. Usually a stenographer will press all keys together and release them together. Most QWERTY keyboards, however, are non-NKRO (N-key roll over), meaning only the first 6 keys held together will be noticed; later keys are ignored. Arpeggiate will let you explore steno, but is unrealistic.</p>
 
             <h4 id="requirements-for-steno">What do you need to learn steno?</h4>
-            <p>You need a <a href="https://github.com/openstenoproject/plover/wiki/Supported-Hardware#known-supported-keyboards" target="_blank" rel="noopener noreferrer">true NKRO (N-key roll over) supported keyboard<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> with key caps or key toppers, or a <a href="https://github.com/openstenoproject/plover/wiki/Supported-Hardware" target="_blank" rel="noopener noreferrer">stenotype machine<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> and software like <a href="http://www.openstenoproject.org/plover/" target="_blank" rel="noopener noreferrer">Plover (free and open)<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
+            <p>You need a{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="true NKRO (N-key roll over) supported keyboard"
+                aria-label="true NKRO (N-key roll over) supported keyboard (external link opens in new tab)"
+                to="https://github.com/openstenoproject/plover/wiki/Supported-Hardware#known-supported-keyboards"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                true NKRO (N-key roll over) supported <span className="nowrap">keyboard
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+              </GoogleAnalytics.OutboundLink> with key caps or key toppers, or a{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="stenotype machine"
+                aria-label="stenotype machine (external link opens in new tab)"
+                to="https://github.com/openstenoproject/plover/wiki/Supported-Hardware"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                stenotype <span className="nowrap">machine
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+              </GoogleAnalytics.OutboundLink> and software like{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Plover (free and open)"
+                aria-label="Plover (free and open) (external link opens in new tab)"
+                to="http://www.openstenoproject.org/plover/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Plover (free and <span className="nowrap">open)
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.</p>
 
             <h4 id="time-to-learn">How long does it take to learn steno?</h4>
             <p>To write text for personal use, such as writing emails and instant messages, you could learn basic steno at ~40WPM within 3–6 months. To productively use steno to write most text at under 100WPM, it might take 6–18&nbsp;months. For live dictation at 200WPM, it might take you 2&nbsp;or&nbsp;more years. If you are learning stenography for ergonomic reasons and have injuries to manage, it could take longer.</p>
@@ -113,20 +323,204 @@ class Support extends Component {
             <p>Learn how to <Link to="/contribute">contribute to Typey&nbsp;type</Link>.</p>
 
             <h3 id="news">Want news?</h3>
-            <p>Sign up for <a href="https://didoesdigital.com/#newsletter" target="_blank" rel="noopener noreferrer">Typey&nbsp;type updates and steno news<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
+            <p>Sign up for{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Typey type updates and steno news"
+                aria-label="Typey type updates and steno news (external link opens in new tab)"
+                to="https://didoesdigital.com/#newsletter"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Typey&nbsp;type updates and steno <span className="nowrap">news
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.</p>
 
             <h3 id="credits">Credits</h3>
             <ul>
-              <li><a href="https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/Homophones">Wikipedia provides words<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</li>
-              <li><a href="https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists">Wiktionary provides frequency lists<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</li>
-              <li><a href="https://github.com/first20hours/google-10000-english">Josh Kaufman provides a typing word list<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a> from <a href="http://books.google.com/ngrams">Google’s Trillion Word Corpus<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</li>
+              <li>{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Wikipedia provides words"
+                aria-label="Wikipedia provides words (external link opens in new tab)"
+                to="https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/Homophones"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Wikipedia provides <span className="nowrap">words
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.</li>
+              <li>{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Wiktionary provides frequency lists"
+                aria-label="Wiktionary provides frequency lists (external link opens in new tab)"
+                to="https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Wiktionary provides frequency <span className="nowrap">lists
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.</li>
+              <li>{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Josh Kaufman provides a typing word list"
+                aria-label="Josh Kaufman provides a typing word list (external link opens in new tab)"
+                to="https://github.com/first20hours/google-10000-english"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Josh Kaufman provides a typing word <span className="nowrap">list
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink> from{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Google’s Trillion Word Corpus"
+                aria-label="Google’s Trillion Word Corpus (external link opens in new tab)"
+                to="http://books.google.com/ngrams"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google’s Trillion Word <span className="nowrap">Corpus
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.</li>
             </ul>
 
             <h3 id="support">Support</h3>
-            <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a>, <a href="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link" target="_blank" rel="noopener noreferrer">post to the feedback form<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>, or <a href="https://twitter.com/didoesdigital" target="_blank" rel="noopener noreferrer">tweet @DiDoesDigital<span className="external-link" aria-label=" (External link)" title="(External link)"></span></a>.</p>
+            <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a>, {" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="post to the feedback form"
+                aria-label="post to the feedback form (form opens in new tab)"
+                to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                post to the feedback <span className="nowrap">form
+                <Tooltip
+                  title="(form opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>, or {" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="tweet @DiDoesDigital"
+                aria-label="tweet @DiDoesDigital (external link opens in new tab)"
+                to="https://twitter.com/didoesdigital"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                tweet <span className="nowrap">@DiDoesDigital
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.</p>
 
             <h3 id="privacy">Privacy</h3>
-            <p>This site uses <a href="https://www.google.com/intl/en/policies/privacy/">Google Analytics</a> to track usage data for improving the site using cookies. Typey&nbsp;type anonymises IP addresses before sending them to Google and Google Analytics retains cookie data for 26 months.</p>
+            <p>This site uses{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Google Analytics"
+                aria-label="Google Analytics (external link opens in new tab)"
+                to="https://www.google.com/intl/en/policies/privacy/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Google <span className="nowrap">Analytics
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink> to track usage data for improving the site using cookies. Typey&nbsp;type anonymises IP addresses before sending them to Google and Google Analytics retains cookie data for 26 months.</p>
           </div>
         </div>
       </main>
