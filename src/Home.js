@@ -155,7 +155,7 @@ class Home extends Component {
           </div>
           <div className="bg-white">
             <div className="p3 mx-auto mw-1024">
-              &nbsp;
+              <span aria-hidden="true">&nbsp;</span>
             </div>
           </div>
         </main>
