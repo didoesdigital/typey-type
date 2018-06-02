@@ -58,7 +58,30 @@ class Contribute extends Component {
 
             <h3 id="lessons">Lessons</h3>
             <p>You can create your own <Link to="/lessons/custom">custom lesson</Link> and add it to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community's lessons (opens in new tab)</a>.</p>
-            <p>If you have an idea for a new lesson, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or <a href="https://twitter.com/didoesdigital">tweet @DiDoesDigital</a>.</p>
+            <p>If you have an idea for a new lesson, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="tweet @DiDoesDigital"
+                aria-label="tweet @DiDoesDigital (external link opens in new tab)"
+                to="https://twitter.com/didoesdigital"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                tweet <span className="nowrap">@DiDoesDigital
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.</p>
 
             <h3 id="feedback">Feedback</h3>
             <p>

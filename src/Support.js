@@ -161,7 +161,7 @@ class Support extends Component {
             <h4 id="typey-type-dictionary">Typey&nbsp;type dictionary</h4>
             <p>Typey&nbsp;type uses a version of the Plover dictionary that comes built into the Plover software. Typey&nbsp;type’s version is based on a copy of Plover’s from a few years ago that <a href="https://didoesdigital.com/">DiDoesDigital</a> has since spent many hours meticulously amending so that Typey&nbsp;type automatically suggests the best brief available. It chooses the “best” stroke by looking for the shortest stroke, where there are penalties for multi-stroke briefs and briefs that use the star (<code>*</code>) key. <a href="https://didoesdigital.com/">DiDoesDigital</a> has also removed thousands of misstrokes so that they are not suggested when learning Plover theory.</p>
             <p>If you want to use a different dictionary or learn a different steno theory, you can upload your words and strokes to a <Link to="/lessons/custom">Typey&nbsp;type custom lesson</Link> and the briefs shown will match the dictionary you’re using.</p>
-            <p>If you notice any odd strokes, {" "}
+            <p>If you notice any odd strokes,{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="post to the feedback form"
                 aria-label="post to the feedback form (external link opens in new tab)"
@@ -209,7 +209,7 @@ class Support extends Component {
 
             <h3 id="learn-steno">Learning stenography</h3>
             <h4 id="try-steno">How can you try out steno?</h4>
-            <p>For an idea of how steno feels and works, you can {" "}
+            <p>For an idea of how steno feels and works, you can{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="install Plover"
                 aria-label="install Plover (external link opens in new tab)"
@@ -448,7 +448,7 @@ class Support extends Component {
             </ul>
 
             <h3 id="support">Support</h3>
-            <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a>, {" "}
+            <p>For help with Typey&nbsp;type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a>,{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="post to the feedback form"
                 aria-label="post to the feedback form (form opens in new tab)"
@@ -471,7 +471,7 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>, or {" "}
+              </GoogleAnalytics.OutboundLink>, or{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="tweet @DiDoesDigital"
                 aria-label="tweet @DiDoesDigital (external link opens in new tab)"
