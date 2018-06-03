@@ -86,7 +86,7 @@ class Progress extends Component {
       if (lesson.category === "Fundamentals") {
         return(
           <li className="unstyled-list-item mb1" key={ lesson.path }>
-            <Link to={process.env.PUBLIC_URL + `/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> {lessonCompletion}
+            <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> {lessonCompletion}
             { // <!-- {numberOfWordsSeen} words seen of {lessonWordCountInIndex}-->
             }
           </li>
