@@ -681,13 +681,16 @@ class App extends Component {
   setAnnouncementMessage(app, content) {
     let newAnnouncementMessage = "";
     if (content) {
-      // TODO: if we want to make this function generic for other announcement content, here is the
-      // start of a handler for that:
       // if (typeof content === "string") {
       //   newAnnouncementMessage = content;
+      // // TODO: if we want to make this function generic for other announcement objects, here is the
+      // // start of a handler for that:
       // } else if (typeof content === "object") {
-        newAnnouncementMessage = content.querySelector('.tippy-tooltip-content').innerText;
+      //   if (isElement(content)) {
+      //     newAnnouncementMessage = content.querySelector('.tippy-tooltip-content').innerText;
+      //   }
       // }
+      newAnnouncementMessage = content.querySelector('.tippy-tooltip-content').innerText;
     }
     app.setState({announcementMessage: newAnnouncementMessage});
     // TODO: figure out how to re-announce things if the announcement hasn't
@@ -928,6 +931,7 @@ class App extends Component {
                   {header}
                   <DocumentTitle title={'Typey type | Progress'}>
                     <Progress
+                      setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                       setPersonalPreferences={this.setPersonalPreferences.bind(this)}
                       metWords={this.state.metWords}
                       flashcardsMetWords={this.state.flashcardsMetWords}
@@ -1148,6 +1152,17 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
 
   return presentedMaterial.filter(item => filterFunction(item.phrase) );
 }
+
+// function isElement(obj) {
+//   try {
+//     return obj instanceof HTMLElement;
+//   }
+//   catch(e){
+//     return (typeof obj==="object") &&
+//       (obj.nodeType===1) && (typeof obj.style === "object") &&
+//       (typeof obj.ownerDocument ==="object");
+//   }
+// }
 
 export default App;
 export {increaseMetWords, filterByFamiliarity, sortLesson};

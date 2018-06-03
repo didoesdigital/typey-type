@@ -17,6 +17,7 @@ class Progress extends Component {
 
   restoreButtonOnClickFunction() {
     this.props.setPersonalPreferences(document.querySelectorAll(".js-metwords-from-personal-store")[0].value);
+    // this.props.setAnnouncementMessage(this, "teft");
   };
 
   render () {
