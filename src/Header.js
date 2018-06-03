@@ -33,8 +33,11 @@ class Header extends Component {
                     Typey&nbsp;type
                   </h1>
                 </Link>
+                <Link to="/progress" className="progress-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>
               </div>
               <div className="table search-container relative">
+                <Link to="/progress" className="progress-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>
+                <span className="divider--vertical hide-sm"></span>
                 <Link to="/lessons" className="link-button link-button-ghost mr1 table-cell" id="ga--header--lessons">Lessons</Link>
                 <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
                 <Autocomplete
