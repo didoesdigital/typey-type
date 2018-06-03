@@ -352,10 +352,35 @@ class App extends Component {
 
   updateLessonsProgress(lessonpath) {
     let lessonsProgress = Object.assign({}, this.state.lessonsProgress);
+    let numberOfWordsSeen = 0;
+
+    if (lessonsProgress[lessonpath] && lessonsProgress[lessonpath].numberOfWordsSeen) {
+      numberOfWordsSeen = lessonsProgress[lessonpath].numberOfWordsSeen;
+    }
+
+    let metWords = this.state.metWords;
+    let sourceMaterial = this.state.lesson.sourceMaterial;
+    let len = sourceMaterial.length;
+    let accumulator = 0;
+
+    let normalisedMetWords = {};
+    Object.keys(metWords).forEach(function(key,index) {
+      normalisedMetWords[key.trim().toLowerCase()] = metWords[key];
+    });
+    for (let i = 0; i < len; ++i) {
+      let sourceMaterialPhrase = sourceMaterial[i].phrase;
+      sourceMaterialPhrase = sourceMaterialPhrase.trim();
+      sourceMaterialPhrase = sourceMaterialPhrase.toLowerCase();
+      if (normalisedMetWords[sourceMaterialPhrase] && normalisedMetWords[sourceMaterialPhrase] > 1) {
+        accumulator = accumulator + 1;
+      }
+    }
+    numberOfWordsSeen = accumulator;
 
     lessonsProgress[lessonpath] = {
-      lastSeen: Date.now()
+      numberOfWordsSeen: numberOfWordsSeen
     }
+
     this.setState({
       lessonsProgress: lessonsProgress,
     }, () => {
@@ -908,6 +933,7 @@ class App extends Component {
                       flashcardsMetWords={this.state.flashcardsMetWords}
                       flashcardsProgress={this.state.flashcardsProgress}
                       lessonsProgress={this.state.lessonsProgress}
+                      lessonIndex={this.state.lessonIndex}
                     />
                   </DocumentTitle>
                 </div>
