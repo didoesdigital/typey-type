@@ -3,6 +3,7 @@ import { randomise } from './utils';
 import {
   parseCustomMaterial,
   fetchLessonIndex,
+  setupLessonProgress,
   getLesson,
   loadPersonalPreferences,
   matchSplitText,
@@ -48,6 +49,8 @@ class App extends Component {
           stroke: "-T",
           rung: 0,
         },
+      },
+      lessonsProgress: {
       },
       flashcardsProgress: {
       },
@@ -200,7 +203,11 @@ class App extends Component {
 
   componentDidMount() {
     this.setPersonalPreferences();
-    fetchLessonIndex().then((json) => this.setState({ lessonIndex: json }));
+    fetchLessonIndex().then((json) => {
+      this.setState({ lessonIndex: json }, () => {
+        setupLessonProgress(json);
+      })
+    });
   }
 
   handleStopLesson(event) {
@@ -214,6 +221,7 @@ class App extends Component {
     writePersonalPreferences('metWords', this.state.metWords);
     writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
     writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
+    writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
 
     let currentLessonStrokes = this.state.currentLessonStrokes;
     for (let i = 0; i < currentLessonStrokes.length; i++) {
@@ -255,6 +263,7 @@ class App extends Component {
     let metWords = this.state.metWords;
     let flashcardsMetWords = this.state.flashcardsMetWords;
     let flashcardsProgress = this.state.flashcardsProgress;
+    let lessonsProgress = this.state.lessonsProgress;
     let userSettings = this.state.userSettings;
     if (source && source !== '') {
       try {
@@ -266,16 +275,18 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWords, userSettings, flashcardsMetWords, flashcardsProgress] = loadPersonalPreferences();
+      [metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress] = loadPersonalPreferences();
     }
     this.setState({
       flashcardsMetWords: flashcardsMetWords,
       flashcardsProgress: flashcardsProgress,
+      lessonsProgress: lessonsProgress,
       metWords: metWords,
       userSettings: userSettings
     }, () => {
       writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
       writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
+      writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
       writePersonalPreferences('metWords', this.state.metWords);
       writePersonalPreferences('userSettings', this.state.userSettings);
       this.setupLesson();
@@ -333,6 +344,20 @@ class App extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     this.setState({fullscreen: value});
     return value;
+  }
+
+  updateLessonsProgress(lessonpath) {
+    let lessonsProgress = Object.assign({}, this.state.lessonsProgress);
+
+    lessonsProgress[lessonpath] = {
+      lastSeen: Date.now()
+    }
+    this.setState({
+      lessonsProgress: lessonsProgress,
+    }, () => {
+      writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
+    });
+    return lessonsProgress;
   }
 
   updateFlashcardsProgress(lessonpath) {
@@ -873,6 +898,7 @@ class App extends Component {
                       metWords={this.state.metWords}
                       flashcardsMetWords={this.state.flashcardsMetWords}
                       flashcardsProgress={this.state.flashcardsProgress}
+                      lessonsProgress={this.state.lessonsProgress}
                     />
                   </DocumentTitle>
                 </div>
@@ -905,6 +931,7 @@ class App extends Component {
                       updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
                       flashcardsMetWords={this.state.flashcardsMetWords}
                       flashcardsProgress={this.state.flashcardsProgress}
+                      lessonsProgress={this.state.lessonsProgress}
                       fullscreen={this.state.fullscreen}
                       changeFullscreen={this.changeFullscreen.bind(this)}
                       restartLesson={this.restartLesson.bind(this)}

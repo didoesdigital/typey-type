@@ -277,6 +277,7 @@ function loadPersonalPreferences() {
       rung: 0,
     },
   };
+  let lessonsProgress = {};
   let userSettings = {
     caseSensitive: false,
     retainedWords: true,
@@ -303,9 +304,12 @@ function loadPersonalPreferences() {
     if (window.localStorage.getItem('flashcardsProgress')) {
       flashcardsProgress = Object.assign(flashcardsProgress, JSON.parse(window.localStorage.getItem('flashcardsProgress')));
     }
-    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress];
+    if (window.localStorage.getItem('lessonsProgress')) {
+      lessonsProgress = Object.assign(lessonsProgress, JSON.parse(window.localStorage.getItem('lessonsProgress')));
+    }
+    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress];
   }
-  return [metWords, userSettings, flashcardsMetWords, flashcardsProgress];
+  return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress];
 }
 
 function writePersonalPreferences(itemToStore, JSONToStore) {
@@ -370,6 +374,12 @@ function fetchLessonIndex() {
   });
 }
 
+function setupLessonProgress(lessonIndex) {
+  let lessonProgress = {};
+  // debugger;
+  return lessonProgress;
+}
+
 function fetchDictionaries() {
   return fetch(process.env.PUBLIC_URL + '/dictionaries/dict.json', {
     method: "GET",
@@ -396,6 +406,7 @@ export {
   processDictionary,
   swapKeyValueInDictionary,
   repetitionsRemaining,
+  setupLessonProgress,
   shouldShowStroke,
   strokeAccuracy,
   targetStrokeCount,
