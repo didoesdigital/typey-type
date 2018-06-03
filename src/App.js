@@ -371,7 +371,7 @@ class App extends Component {
       let sourceMaterialPhrase = sourceMaterial[i].phrase;
       sourceMaterialPhrase = sourceMaterialPhrase.trim();
       sourceMaterialPhrase = sourceMaterialPhrase.toLowerCase();
-      if (normalisedMetWords[sourceMaterialPhrase] && normalisedMetWords[sourceMaterialPhrase] > 1) {
+      if (normalisedMetWords[sourceMaterialPhrase] && normalisedMetWords[sourceMaterialPhrase] > 0) {
         accumulator = accumulator + 1;
       }
     }
