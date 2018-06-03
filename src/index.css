@@ -310,6 +310,9 @@ input:focus::placeholder {
 .mb0 {
   margin-bottom: 0; }
 
+.mb05 {
+  margin-bottom: 4px; }
+
 .mb1 {
   margin-bottom: 8px; }
 
@@ -348,6 +351,9 @@ input:focus::placeholder {
 
 .mt3 {
   margin-top: 24px; }
+
+.mt4 {
+  margin-top: 32px; }
 
 .mx1 {
   margin-left: 8px;
@@ -446,6 +452,9 @@ input:focus::placeholder {
 .pr3 {
   padding-right: 24px; }
 
+.pt3 {
+  padding-top: 24px; }
+
 .py05 {
   padding-top: 4px;
   padding-bottom: 4px; }
@@ -487,6 +496,12 @@ input:focus::placeholder {
 
 .bg-white {
   background-color: #fff; }
+
+.color-purple-bright {
+  color: #8242a8; }
+
+.color-green-bright {
+  color: #57b669; }
 
 .text-uppercase {
   text-transform: uppercase;

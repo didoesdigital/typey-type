@@ -307,6 +307,7 @@ input:focus::placeholder {
 .h-192 { height: 192px; }
 
 .mb0     { margin-bottom: 0; }
+.mb05    { margin-bottom: 4px; }
 .mb1     { margin-bottom: 8px; }
 .mb2     { margin-bottom: 16px; }
 .mb3     { margin-bottom: 24px; }
@@ -320,6 +321,7 @@ input:focus::placeholder {
 .mt1     { margin-top: 8px; }
 .mt2     { margin-top: 16px; }
 .mt3     { margin-top: 24px; }
+.mt4     { margin-top: 32px; }
 .mx1     { margin-left: 8px; margin-right: 8px; }
 
 .mxn1    { margin-left: -8px; margin-right: -8px; }
@@ -355,6 +357,7 @@ input:focus::placeholder {
 .pb4     { padding-bottom: 32px; }
 .pl3     { padding-left: 24px; }
 .pr3     { padding-right: 24px; }
+.pt3     { padding-top: 24px; }
 
 .py05 {
   padding-top: 4px;
@@ -383,6 +386,9 @@ input:focus::placeholder {
 .bg-info     { background-color: add-tint($brand-primary, 95%); }
 .bg-slat     { background-color: add-tint($brand-primary, 90%); }
 .bg-white    { background-color: #fff; }
+
+.color-purple-bright { color: saturate(add-tint($brand-primary, 30%), 30%); }
+.color-green-bright { color: lighten($brand-success, 30%); }
 
 .text-uppercase {
   text-transform: uppercase;
