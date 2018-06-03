@@ -43,8 +43,8 @@ class Progress extends Component {
         lessonWordCount = lesson.wordCount;
         lessonWordCountInIndex = '' + lessonWordCount;
       }
-      if (lessonsProgressFromTypeyType && lessonsProgressFromTypeyType["/lessons" + lesson.path]) {
-        numberOfWordsSeen = lessonsProgressFromTypeyType["/lessons" + lesson.path].numberOfWordsSeen;
+      if (lessonsProgressFromTypeyType && lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]) {
+        numberOfWordsSeen = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path].numberOfWordsSeen;
         if ((numberOfWordsSeen >= lessonWordCountInIndex) || (numberOfWordsSeen > 100)) {
           lessonCompletion = (
             <Tooltip
@@ -86,7 +86,7 @@ class Progress extends Component {
       if (lesson.category === "Fundamentals") {
         return(
           <li className="unstyled-list-item mb1" key={ lesson.path }>
-            <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> {lessonCompletion}
+            <Link to={process.env.PUBLIC_URL + `/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> {lessonCompletion}
             { // <!-- {numberOfWordsSeen} words seen of {lessonWordCountInIndex}-->
             }
           </li>
