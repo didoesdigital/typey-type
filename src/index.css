@@ -446,8 +446,14 @@ input:focus::placeholder {
 .pb4 {
   padding-bottom: 32px; }
 
+.pl1 {
+  padding-left: 8px; }
+
 .pl3 {
   padding-left: 24px; }
+
+.pr1 {
+  padding-right: 8px; }
 
 .pr3 {
   padding-right: 24px; }

@@ -8,6 +8,13 @@ import {
 import 'react-tippy/dist/tippy.css'
 
 class Progress extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      flashWarning: '',
+    }
+  }
+
   componentDidMount() {
     new Clipboard('.js-clipboard-button');
     if (this.mainHeading) {
@@ -18,6 +25,7 @@ class Progress extends Component {
   restoreButtonOnClickFunction() {
     this.props.setPersonalPreferences(document.querySelectorAll(".js-metwords-from-personal-store")[0].value);
     // this.props.setAnnouncementMessage(this, "teft");
+    this.setState({flashWarning: "To update your lesson progress, visit the lessons."});
   };
 
   render () {
@@ -144,6 +152,7 @@ class Progress extends Component {
             <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words.</p>
 
             <h3>Fundamental lessons progress</h3>
+            <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
             <ul className="unstyled-list">{linkList}</ul>
 
             <h3>Vocabulary progress</h3>
