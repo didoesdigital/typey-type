@@ -12,7 +12,10 @@ import React from 'react';
 function IconTypeyType(props) {
   const iconWidth = props.iconWidth || 32;
   const iconHeight = props.iconHeight || 17;
-  const iconTitle = props.iconTitle || 'Typey type for stenographers';
+  let iconTitle = "";
+  if (props.iconTitle === "") { iconTitle = ""; }
+  else if (props.iconTitle) { iconTitle = props.iconTitle; }
+  else { iconTitle = 'Typey type for stenographers'; }
   const classes = props.className || '';
   const role = props.role || 'img';
   const ariaHidden = props.ariaHidden || 'false';
@@ -20,6 +23,22 @@ function IconTypeyType(props) {
     <span className={classes}>
       <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" aria-labelledby="iconTypeyTypeTitle"><title id="iconTypeyTypeTitle">{iconTitle}</title><g fill="currentColor" fillRule="evenodd"><rect x="21" y="61" width="11" height="21" rx="4"/><rect x="36" y="61" width="11" height="21" rx="4"/><rect x="51" y="61" width="11" height="21" rx="4"/><rect x="75" y="61" width="16" height="21" rx="4"/><rect x="5" y="44" width="170" height="11" rx="4"/><rect x="104" y="61" width="11" height="21" rx="4"/><rect x="119" y="61" width="11" height="21" rx="4"/><rect x="134" y="61" width="11" height="21" rx="4"/><rect x="149" y="61" width="11" height="21" rx="4"/><rect x="5" y="61" width="11" height="48" rx="4"/><rect x="21" y="88" width="11" height="21" rx="4"/><rect x="36" y="88" width="11" height="21" rx="4"/><rect x="51" y="88" width="11" height="21" rx="4"/><rect x="75" y="88" width="16" height="21" rx="4"/><rect x="104" y="88" width="11" height="21" rx="4"/><rect x="119" y="88" width="11" height="21" rx="4"/><rect x="47" y="114" width="11" height="21" rx="4"/><rect x="62" y="114" width="11" height="21" rx="4"/><rect x="93" y="114" width="11" height="21" rx="4"/><rect x="108" y="114" width="11" height="21" rx="4"/><rect x="134" y="88" width="11" height="21" rx="4"/><rect x="149" y="88" width="11" height="21" rx="4"/><rect x="164" y="61" width="11" height="21" rx="4"/><rect x="164" y="88" width="11" height="21" rx="4"/></g></svg>
     </span>
+  )
+}
+
+function IconCheckmark(props) {
+  const iconWidth = props.iconWidth || 24;
+  const iconHeight = props.iconHeight || 24;
+  let iconTitle = "";
+  if (props.iconTitle === "") { iconTitle = ""; }
+  else if (props.iconTitle) { iconTitle = props.iconTitle; }
+  else { iconTitle = 'Checkmark'; }
+  const classes = props.className || '';
+  const role = props.role || 'img';
+  const ariaHidden = props.ariaHidden || 'false';
+  return (
+    <span className={classes}>
+      <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby="iconCheckmarkTitle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title id="iconCheckmarkTitle">{iconTitle}</title><defs><path d="M1.707 16.707l5.441 5.441a1 1 0 0 0 1.532-.142L20.251 5.094a1 1 0 0 0-.509-1.513l-1.041-.347a1 1 0 0 0-1.13.367L8 17l-3.293-3.293a1 1 0 0 0-1.414 0l-1.586 1.586a1 1 0 0 0 0 1.414z" id="checkmarkPath"/></defs><g fill="currentColor" fillRule="evenodd"><mask id="checkmarkMask" fill="currentColor"></mask><path stroke="currentColor" d="M2.06 16.354l5.442 5.44a.5.5 0 0 0 .766-.07l11.57-16.912a.5.5 0 0 0-.254-.757l-1.041-.347a.5.5 0 0 0-.565.184L8.064 17.77l-3.71-3.71a.5.5 0 0 0-.708 0l-1.585 1.585a.5.5 0 0 0 0 .708z"/><g mask="url(#checkmarkMask)" fill="currentColor"><path d="M0 0h24v24H0z"/></g></g></svg></span>
   )
 }
 
@@ -39,7 +58,10 @@ function IconRestart(props) {
 function IconSearch(props) {
   const iconWidth = props.iconWidth || 24;
   const iconHeight = props.iconHeight || 24;
-  const iconTitle = props.iconTitle || 'Search';
+  let iconTitle = "";
+  if (props.iconTitle === "") { iconTitle = ""; }
+  else if (props.iconTitle) { iconTitle = props.iconTitle; }
+  else { iconTitle = 'Search'; }
   const classes = props.className || '';
   const role = props.role || 'img';
   const ariaHidden = props.ariaHidden || 'false';
@@ -68,7 +90,10 @@ function IconExternal(props) {
 function IconFullscreen(props) {
   const iconWidth = props.iconWidth || 24;
   const iconHeight = props.iconHeight || 24;
-  const iconTitle = props.iconTitle || 'Fullscreen';
+  let iconTitle = "";
+  if (props.iconTitle === "") { iconTitle = ""; }
+  else if (props.iconTitle) { iconTitle = props.iconTitle; }
+  else { iconTitle = 'Fullscreen'; }
   const classes = props.className || '';
   const role = props.role || 'img';
   const ariaHidden = props.ariaHidden || 'false';
@@ -81,6 +106,7 @@ function IconFullscreen(props) {
 }
 
 export {
+  IconCheckmark,
   IconExternal,
   IconFullscreen,
   IconRestart,
