@@ -178,6 +178,7 @@ describe('loadPersonalPreferences', () => {
         }
       }
       let flashcardsProgress = {}
+      let lessonsProgress = {};
       let userSettings = {
         caseSensitive: false,
         retainedWords: true,
@@ -191,7 +192,7 @@ describe('loadPersonalPreferences', () => {
         seenWords: true,
         study: 'discover'
       };
-      expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress]);
+      expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress]);
     });
   });
 });
