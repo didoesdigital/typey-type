@@ -221,7 +221,11 @@ class App extends Component {
     writePersonalPreferences('metWords', this.state.metWords);
     writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
     writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
-    writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
+
+    if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
+      let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
+      writePersonalPreferences('lessonsProgress', lessonsProgress);
+    }
 
     let currentLessonStrokes = this.state.currentLessonStrokes;
     for (let i = 0; i < currentLessonStrokes.length; i++) {
@@ -542,6 +546,11 @@ class App extends Component {
   }
 
   setupLesson() {
+    if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
+      let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
+      writePersonalPreferences('lessonsProgress', lessonsProgress);
+    }
+
     let newLesson = Object.assign({}, this.state.lesson);
     newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
     if (this.state.revisionMode) {
