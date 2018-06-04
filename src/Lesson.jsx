@@ -19,7 +19,8 @@ class Lesson extends Component {
     } else if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
     }
-    if (!this.props.firstVisit && this.mainHeading) {
+
+    if (this.mainHeading) {
       this.mainHeading.focus();
     }
   }
