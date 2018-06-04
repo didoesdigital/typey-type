@@ -605,6 +605,7 @@ class App extends Component {
 
     this.setState({
       actualText: ``,
+      announcementMessage: 'Navigated to: ' + newLesson.title,
       currentPhraseAttempts: [],
       currentLessonStrokes: [],
       disableUserSettings: false,
@@ -634,6 +635,13 @@ class App extends Component {
         currentPhraseID: 0
       }, () => {
         this.setupLesson();
+
+        if (this.mainHeading) {
+          this.mainHeading.focus();
+        } else {
+          const element = document.getElementById('your-typed-text');
+          if (element) { element.focus(); }
+        }
       });
     });
   }

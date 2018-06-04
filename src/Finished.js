@@ -11,6 +11,12 @@ import './App.css';
 
 class Finished extends Component {
 
+  componentDidMount() {
+    if (this.finishedHeading) {
+      this.finishedHeading.focus();
+    }
+  }
+
   isEmpty() {
     return (this.props.lessonLength === 0);
   }
@@ -155,7 +161,11 @@ class Finished extends Component {
     let lessonSummary = (
       <div className="finished-lesson mr1 mw-504 overflow-hidden">
         <div className="finished-summary">
-          <h2 className="mb1">Finished</h2>
+          <h2
+            className="mb1"
+            ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }} tabIndex="-1" id="finished-heading">
+            Finished
+          </h2>
           <h3 className="mt0 nowrap">{wpm}&nbsp;
             <Tooltip
               animation="shift"
@@ -221,7 +231,7 @@ class Finished extends Component {
             userSettings={this.props.userSettings}
           />
           <div className="lesson-canvas panel p2 overflow-scroll">
-            <div role="alert" aria-live="polite">
+            <div>
               {emptyAndZeroStateMessage}
               {lessonSummary}
             </div>
