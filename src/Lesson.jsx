@@ -115,7 +115,7 @@ class Lesson extends Component {
 
     if (shouldShowStroke(this.props.showStrokesInLesson, this.props.userSettings.showStrokes, this.props.repetitionsRemaining, this.props.userSettings.hideStrokesOnLastRepetition)) {
       if (this.props.currentStroke) {
-        strokeTip = <div className="stroke-tip"><span className="visually-hidden">Hint: </span><pre className="overflow-auto mw-408"><span className="steno-stroke">{this.props.currentStroke.split('').map((item, i)=><kbd className="raw-steno-key" key={i}>{item}</kbd>)}</span></pre></div>;
+        strokeTip = <div className="stroke-tip" aria-live="polite"><span className="visually-hidden">Hint: </span><pre className="overflow-auto mw-408"><span className="steno-stroke">{this.props.currentStroke.split('').map((item, i)=><kbd className="raw-steno-key" key={i}>{item}</kbd>)}</span></pre></div>;
       }
     } else {
       strokeTip = <div className="stroke-tip">
@@ -280,8 +280,8 @@ class Lesson extends Component {
                   <div className="visually-hidden">
                     <div role="status" aria-live="polite">
                       <div className="material"><pre><span className="steno-material">{this.props.currentPhrase}</span></pre></div>
-                      {strokeTip}
                     </div>
+                    {strokeTip}
                   </div>
                   <div className="scores panel p2">
                     <Scores
