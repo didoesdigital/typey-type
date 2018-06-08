@@ -15,6 +15,11 @@ class UserSettings extends Component {
       toggleClasses = "mt1 mb1 de-emphasized text-uppercase subsection-header subsection-header-toggle";
     }
 
+    let hideStrokesOnLastRepetitionTooltip = "Hide briefs during the last repetition";
+    if (!this.props.userSettings.showStrokes) {
+      hideStrokesOnLastRepetitionTooltip = "This does nothing while “Show briefs” is turned off";
+    }
+
     return (
       <div className="user-settings panel p2">
         <form>
@@ -248,6 +253,33 @@ class UserSettings extends Component {
                     onShow={this.props.setAnnouncementMessage}
                   >
                     Memorised words
+                  </Tooltip>
+                </label>
+              </div>
+              <div className="checkbox-group">
+                <label className="checkbox-label">
+                  <input
+                    className="checkbox-input"
+                    type="checkbox"
+                    name="blurMaterial"
+                    id="blurMaterial"
+                    disabled={this.props.disableUserSettings}
+                    checked={this.props.userSettings.blurMaterial}
+                    onChange={this.props.changeUserSetting}
+                  />
+                  <Tooltip
+                    title="Blur words and use a screen reader to practice transcription"
+                    className="mw-240"
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital didoesdigital-sm"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    Blur words
                   </Tooltip>
                 </label>
               </div>

@@ -648,13 +648,21 @@ input:focus::placeholder {
 .current-and-upcoming-phrases {
   margin-left: calc(50% - 10em);
   margin-bottom: 0.5em;
+  margin-top: 8px;
   text-align: left;
   width: 100%;
   transform: translateX(10px); }
+  .current-and-upcoming-phrases.blur {
+    color: transparent;
+    text-shadow: 0 0 8px rgba(63, 38, 78, 0.5);
+    filter: blur(4px); }
 
 .upcoming-phrases {
   font-weight: normal;
   text-align: left; }
+
+.current-phrase-material {
+  font-weight: 700; }
 
 .material p {
   padding: 0.25em; }
@@ -1392,6 +1400,3 @@ small .svg-icon-wrapper.svg-baseline svg {
     border-bottom: 5px solid transparent;
     border-left: 5px solid #fff;
     transform: translate(-8px, -5px); }
-
-.currentPhrase-material {
-  font-weight: 700; }

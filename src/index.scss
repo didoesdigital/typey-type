@@ -590,13 +590,24 @@ $textarea-padding-x: 8px;
 .current-and-upcoming-phrases {
   margin-left: calc(50% - #{$left-offset-for-zipper});
   margin-bottom: 0.5em;
+  margin-top: 8px;
   text-align: left;
   width: 100%;
   transform: translateX(2px + 8px);
+
+  &.blur {
+    color: transparent;
+    text-shadow: 0 0 8px add-alpha(desaturate($brand-primary, 5%), 50%);
+    filter: blur(4px);
+  }
 }
 .upcoming-phrases {
   font-weight: normal;
   text-align: left;
+}
+
+.current-phrase-material {
+  font-weight: 700; // applied to strong tag
 }
 
 .material p {
@@ -1475,7 +1486,4 @@ $lineAdjustment: 4px;
     border-left: 5px solid #fff;
     transform: translate(-8px,-5px);
   }
-}
-.currentPhrase-material {
-  font-weight: 700;
 }

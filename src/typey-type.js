@@ -279,6 +279,7 @@ function loadPersonalPreferences() {
   };
   let lessonsProgress = {};
   let userSettings = {
+    blurMaterial: false,
     caseSensitive: false,
     retainedWords: true,
     limitNumberOfWords: 45,
