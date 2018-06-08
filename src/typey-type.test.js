@@ -180,6 +180,7 @@ describe('loadPersonalPreferences', () => {
       let flashcardsProgress = {}
       let lessonsProgress = {};
       let userSettings = {
+        blurMaterial: false,
         caseSensitive: false,
         retainedWords: true,
         limitNumberOfWords: 45,
