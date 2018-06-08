@@ -10,3 +10,8 @@ $brand-danger: #953159;
 @function add-shade($color, $percentage) {
   @return mix(black, $color, $percentage);
 }
+@function add-alpha($color, $percentage) {
+  $decimal: $percentage / 100%;
+  $inverse: 1 - $decimal;
+  @return transparentize($color, $inverse);
+}

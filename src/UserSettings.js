@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import {
+  Tooltip,
+} from 'react-tippy';
+import 'react-tippy/dist/tippy.css'
 import NumericInput from 'react-numeric-input';
 
 class UserSettings extends Component {
@@ -96,7 +100,20 @@ class UserSettings extends Component {
                     checked={this.props.userSettings.caseSensitive}
                     onChange={this.props.changeUserSetting}
                     />
-                  Case sensitive
+                  <Tooltip
+                    title="Capital letters in material won’t match typed lowercase letters"
+                    className="mw-240"
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital didoesdigital-sm"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    Case sensitive
+                  </Tooltip>
                 </label>
               </div>
               <div className="checkbox-group">
@@ -110,7 +127,20 @@ class UserSettings extends Component {
                     checked={this.props.userSettings.showStrokes}
                     onChange={this.props.changeUserSetting}
                     />
-                  Show briefs
+                  <Tooltip
+                    title={!this.props.userSettings.hideStrokesOnLastRepetition ? "Show stroke briefs for every word" : "Show briefs for each word except during the last repetition" }
+                    className="mw-240"
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital didoesdigital-sm"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    Show briefs
+                  </Tooltip>
                 </label>
               </div>
               <div className="checkbox-group">
@@ -124,7 +154,20 @@ class UserSettings extends Component {
                     checked={this.props.userSettings.hideStrokesOnLastRepetition}
                     onChange={this.props.changeUserSetting}
                     />
-                  Hide briefs on last repetition
+                  <Tooltip
+                    title={hideStrokesOnLastRepetitionTooltip}
+                    className="mw-240"
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital didoesdigital-sm"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    Hide briefs on last repetition
+                  </Tooltip>
                 </label>
               </div>
               <div className="checkbox-group">
@@ -138,7 +181,20 @@ class UserSettings extends Component {
                     checked={this.props.userSettings.newWords}
                     onChange={this.props.changeUserSetting}
                     />
-                  New words
+                  <Tooltip
+                    title="Show new words you haven’t yet typed correctly"
+                    className="mw-240"
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital didoesdigital-sm"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    New words
+                  </Tooltip>
                 </label>
               </div>
               <div className="checkbox-group">
@@ -152,7 +208,20 @@ class UserSettings extends Component {
                     checked={this.props.userSettings.seenWords}
                     onChange={this.props.changeUserSetting}
                     />
-                  Seen words
+                  <Tooltip
+                    title="Show words you seen before"
+                    className="mw-240"
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital didoesdigital-sm"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    Seen words
+                  </Tooltip>
                 </label>
               </div>
               <div className="checkbox-group">
@@ -166,7 +235,20 @@ class UserSettings extends Component {
                     checked={this.props.userSettings.retainedWords}
                     onChange={this.props.changeUserSetting}
                     />
-                  Memorised words
+                  <Tooltip
+                    title="Show memorised words you’ve typed 30 times or more"
+                    className="mw-240"
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital didoesdigital-sm"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    Memorised words
+                  </Tooltip>
                 </label>
               </div>
 
