@@ -15,7 +15,7 @@ class TypedText extends Component {
   render() {
     return (
       <div className="typed-text-container">
-        <label className="visually-hidden" htmlFor="your-typed-text">Your typed text:</label>
+        <label className="visually-hidden" htmlFor="your-typed-text">Write <div aria-live="polite">{this.props.currentPhrase}</div></label>
         <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
         <p className="input-text">
           <textarea id="your-typed-text" className="input-textarea typed-text-input-textarea" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" rows="1"

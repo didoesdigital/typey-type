@@ -278,9 +278,6 @@ class Lesson extends Component {
                     </div>
                   </div>
                   <div className="visually-hidden">
-                    <div role="status" aria-live="polite">
-                      <div className="material"><pre><span className="steno-material">{this.props.currentPhrase}</span></pre></div>
-                    </div>
                     {strokeTip}
                   </div>
                   <div className="scores panel p2">
