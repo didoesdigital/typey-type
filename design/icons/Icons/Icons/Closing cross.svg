@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/Closing cross</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M12.0024463,15.0843 L8.93882631,18.14792 C8.20971619,18.8770301 7.03767056,18.8871056 6.32098912,18.1704241 C5.60430769,17.4537427 5.61438313,16.2816971 6.34349325,15.5525869 L9.40711328,12.4889669 L5.9734928,9.05534643 C5.24438268,8.32623631 5.23430724,7.15419068 5.95098867,6.43750924 C6.66767011,5.72082781 7.83971574,5.73090325 8.56882586,6.46001337 L12.0024463,9.89363385 L15.4360668,6.46001337 C16.1651769,5.73090325 17.3372226,5.72082781 18.053904,6.43750924 C18.7705854,7.15419068 18.76051,8.32623631 18.0313999,9.05534643 L14.5977794,12.4889669 L17.6613994,15.5525869 C18.3905096,16.2816971 18.400585,17.4537427 17.6839036,18.1704241 C16.9672221,18.8871056 15.7951765,18.8770301 15.0660664,18.14792 L12.0024463,15.0843 Z" id="path-1"></path>
+    </defs>
+    <g id="Icons/Closing-cross" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-1"></use>
+        <g id="Colors/heavy-primary-tint-1" mask="url(#mask-2)" fill="#AD66D5">
+            <rect id="heavy-primary-tint-1" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>

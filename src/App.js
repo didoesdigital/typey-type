@@ -1025,6 +1025,7 @@ class App extends Component {
                       hideOtherSettings={this.state.hideOtherSettings}
                       repetitionsRemaining={this.state.repetitionsRemaining}
                       revisionMaterial={this.state.revisionMaterial}
+                      revisionMode={this.state.revisionMode}
                       updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
                       setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                       setCustomLesson={this.setCustomLesson.bind(this)}

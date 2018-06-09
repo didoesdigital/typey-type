@@ -26,6 +26,34 @@ function IconTypeyType(props) {
   )
 }
 
+function IconClosingCross(props) {
+  const iconWidth = props.iconWidth || 24;
+  const iconHeight = props.iconHeight || 24;
+  let iconTitle = "";
+  if (props.iconTitle === "") { iconTitle = ""; }
+  else if (props.iconTitle) { iconTitle = props.iconTitle; }
+  else { iconTitle = 'Checkmark'; }
+  const classes = props.className || '';
+  const role = props.role || 'img';
+  const ariaHidden = props.ariaHidden || 'false';
+  return (
+    <span className={classes}>
+      <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby="iconClosingCrossTitle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <title id="iconTypeyTypeTitle">{iconTitle}</title>
+        <g fill="none" fillRule="evenodd">
+          <mask id="closingCrossMask" fill="#fff">
+            <path d="M12.002 15.084L8.94 18.148c-.73.729-1.901.74-2.618.022-.717-.716-.707-1.888.022-2.617l3.064-3.064-3.434-3.434c-.729-.729-.739-1.9-.022-2.617.717-.717 1.889-.707 2.618.022l3.433 3.434 3.434-3.434c.73-.73 1.901-.74 2.618-.022.717.716.707 1.888-.023 2.617l-3.433 3.434 3.063 3.064c.73.729.74 1.9.023 2.617-.717.717-1.889.707-2.618-.022l-3.064-3.064z" id="closingCrossPath"/>
+          </mask>
+          <use fill="currentColor" fillRule="nonzero" />
+          <g mask="url(#closingCrossMask)" fill="currentColor">
+            <path d="M0 0h24v24H0z"/>
+          </g>
+        </g>
+      </svg>
+    </span>
+  )
+}
+
 function IconCheckmark(props) {
   const iconWidth = props.iconWidth || 24;
   const iconHeight = props.iconHeight || 24;
@@ -107,6 +135,7 @@ function IconFullscreen(props) {
 
 export {
   IconCheckmark,
+  IconClosingCross,
   IconExternal,
   IconFullscreen,
   IconRestart,

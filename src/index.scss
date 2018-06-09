@@ -13,8 +13,10 @@ $h4-size: $base-font-size * $font-scale; // 20px
 $h5-size: $base-font-size; // 16px
 $h6-size: $base-font-size / $font-scale; // 12.8px
 $breakpoint: 1024px;
-$z-index-autocomplete-menu: 2;
-$z-index-vertical-text: 1;
+$z-index-autocomplete-menu: 4;
+$z-index-vertical-text: 3;
+$z-index-revision-mode-button: 2;
+$z-index-fill-fade-edges: 1;
 $link-button-height: 40px;
 $link-button-width: 40px;
 
@@ -294,6 +296,8 @@ input:focus::placeholder {
 }
 
 .absolute--fill { top: 0; right: 0; bottom: 0; left: 0; }
+
+.no-underline { text-decoration: none; }
 
 .center-all {
   left: 50%;
@@ -845,6 +849,15 @@ label {
   }
 }
 
+.revision-mode-button {
+  color: desaturate($brand-primary, 5%);
+  font-size: $h6-size;
+  letter-spacing: 0.05em;
+  padding-right: 24px;
+  text-transform: uppercase;
+  z-index: $z-index-revision-mode-button;
+}
+
 .radio-button {
   opacity: 0;
   position: absolute;
@@ -1162,13 +1175,14 @@ label {
     rgba(255,255,255,0) 90%,
     add-tint($brand-primary, 97%) 95%,
     add-tint($brand-primary, 97%) 100%);
+  border-radius: 4px;
   position: absolute;
   pointer-events: none;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: $z-index-fill-fade-edges;
 }
 
 .carousel--flashcards {

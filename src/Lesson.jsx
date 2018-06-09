@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { IconClosingCross } from './Icon';
 import { Link } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import Material from './Material';
@@ -113,6 +114,14 @@ class Lesson extends Component {
       strokeTarget = this.props.targetStrokeCount + ' stroke';
     }
 
+    let revisionModeButton;
+    if (this.props.revisionMode) {
+      revisionModeButton = (
+        <div><Link to={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="revision-mode-button no-underline absolute right-0">Revision mode<IconClosingCross role="img" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="Exit revision mode" />
+        </Link></div>
+      );
+    }
+
     if (shouldShowStroke(this.props.showStrokesInLesson, this.props.userSettings.showStrokes, this.props.repetitionsRemaining, this.props.userSettings.hideStrokesOnLastRepetition)) {
       if (this.props.currentStroke) {
         strokeTip = <div className="stroke-tip" aria-live="polite"><span className="visually-hidden">Hint: </span><pre className="overflow-auto mw-408"><span className="steno-stroke">{this.props.currentStroke.split('').map((item, i)=><kbd className="raw-steno-key" key={i}>{item}</kbd>)}</span></pre></div>;
@@ -172,7 +181,7 @@ class Lesson extends Component {
                   </div>
                   <div className="mxn2">
                     {createNewCustomLesson}
-                    <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
+                    <a href={this.props.path} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
                     <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
                   </div>
                 </div>
@@ -254,6 +263,7 @@ class Lesson extends Component {
                     userSettings={this.props.userSettings}
                   />
                   <div role="article" className="lesson-canvas panel mw-568 p2 fill-fade-parent">
+                    {revisionModeButton}
                     <span className="fill-fade-edges"></span>
                     <div className="mx-auto mw100 mt2 text-center self-center">
                       <Material

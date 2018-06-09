@@ -296,6 +296,9 @@ input:focus::placeholder {
   bottom: 0;
   left: 0; }
 
+.no-underline {
+  text-decoration: none; }
+
 .center-all {
   left: 50%;
   margin-right: -50%;
@@ -827,7 +830,7 @@ label {
   overflow: auto;
   padding: 2px 0;
   position: fixed;
-  z-index: 2; }
+  z-index: 4; }
 
 .autocomplete-highlight {
   background-color: #FFD073; }
@@ -865,6 +868,14 @@ label {
     color: #ece9ee;
     background-color: #b0b0b0;
     cursor: default; }
+
+.revision-mode-button {
+  color: #3f264e;
+  font-size: 12.8px;
+  letter-spacing: 0.05em;
+  padding-right: 24px;
+  text-transform: uppercase;
+  z-index: 2; }
 
 .radio-button {
   opacity: 0;
@@ -1113,6 +1124,7 @@ label {
 
 .fill-fade-edges {
   background-image: linear-gradient(to right, #f9f8fa 0%, #f9f8fa 5%, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0) 90%, #f9f8fa 95%, #f9f8fa 100%);
+  border-radius: 4px;
   position: absolute;
   pointer-events: none;
   top: 0;
@@ -1266,7 +1278,7 @@ small .svg-icon-wrapper.svg-baseline svg {
 .text-vertical {
   position: absolute;
   writing-mode: vertical-rl;
-  z-index: 1; }
+  z-index: 3; }
 
 .strapline {
   display: none; }
