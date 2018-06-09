@@ -28,3 +28,4 @@ tig status
 # rsync --archive --verbose --delete --exclude=".DS_Store" -e "ssh -p 4242" ~/projects/typey-type/build/ di@didoesdigital:www/typey-type/
 # rsync -avz --delete --exclude=".DS_Store" ~/projects/typey-type/build/ di@didoesdigital:www/typey-type/
 rsync -avz --delete --exclude=".DS_Store" ~/projects/typey-type/build/ di@167.99.9.71:www/typey-type/
+say "Deployed to production at DaɪDoesDigital.com"

@@ -18,3 +18,4 @@ ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-type
 yarn run build
 # git tag -n
 rsync --archive --verbose --delete --exclude=".DS_Store" -e "ssh -p 2222" ~/projects/typey-type/build/ di@localhost:www/typey-type/
+say "Deployed to staging on port 8080."
