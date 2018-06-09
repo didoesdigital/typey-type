@@ -1112,7 +1112,8 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
 
 function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings) {
 
-  var newWords = userSettings.newWords,
+  var revisionMode = userSettings.revisionMode,
+    newWords = userSettings.newWords,
     seenWords = userSettings.seenWords,
     retainedWords = userSettings.retainedWords,
     spacePlacement = userSettings.spacePlacement;
@@ -1140,14 +1141,20 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
   }
 
   var tests = [];
-  if (retainedWords) {
-    tests.push(testRetainedWords);
-  }
-  if (seenWords) {
-    tests.push(testSeenWords);
-  }
-  if (newWords) {
+  if (revisionMode) {
     tests.push(testNewWords);
+    tests.push(testSeenWords);
+    tests.push(testRetainedWords);
+  } else {
+    if (retainedWords) {
+      tests.push(testRetainedWords);
+    }
+    if (seenWords) {
+      tests.push(testSeenWords);
+    }
+    if (newWords) {
+      tests.push(testNewWords);
+    }
   }
 
   var filterFunction = function (phrase) {
