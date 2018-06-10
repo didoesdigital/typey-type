@@ -85,11 +85,7 @@ class Progress extends Component {
       }
       if (lesson.category === "Fundamentals") {
         return(
-          <li className="unstyled-list-item mb1" key={ lesson.path }>
-            <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> {lessonCompletion}
-            { // <!-- {numberOfWordsSeen} words seen of {lessonWordCountInIndex}-->
-            }
-          </li>
+          <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeen} of {lessonWordCountInIndex}</small></li>
         )
       } else {
         return "";
