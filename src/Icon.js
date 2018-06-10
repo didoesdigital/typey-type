@@ -1,13 +1,15 @@
 import React from 'react';
 
+// https://jakearchibald.github.io/svgomg/
+//
 // custom size, meaningful SVG image
-// <IconTypeyType iconWidth="300" iconHeight="300" iconFill="#fff" className="m1" title="custom title for this icon" />
+// <IconTypeyType iconWidth="300" iconHeight="300" className="m1" title="custom title for this icon" />
 //
 // SVG icon inline with text
-// <IconTypeyType iconFill="#fff" className="mr1 svg-icon-wrapper svg-baseline" title="custom title for this icon" />
+// <IconTypeyType className="mr1 svg-icon-wrapper svg-baseline" title="custom title for this icon" />
 //
 // Linked SVG icon, no text TEST THIS
-// <Link to="/" aria-label="Label"><IconTypeyType iconFill="#fff" className="mr1 svg-icon-wrapper svg-baseline" /></Link>
+// <Link to="/" aria-label="Label"><IconTypeyType className="mr1 svg-icon-wrapper svg-baseline" /></Link>
 
 function IconTypeyType(props) {
   const iconWidth = props.iconWidth || 32;
@@ -32,7 +34,7 @@ function IconClosingCross(props) {
   let iconTitle = "";
   if (props.iconTitle === "") { iconTitle = ""; }
   else if (props.iconTitle) { iconTitle = props.iconTitle; }
-  else { iconTitle = 'Checkmark'; }
+  else { iconTitle = 'Cross'; }
   const classes = props.className || '';
   const role = props.role || 'img';
   const ariaHidden = props.ariaHidden || 'false';
