@@ -56,6 +56,56 @@ function IconClosingCross(props) {
   )
 }
 
+function IconChevronRight(props) {
+  const iconWidth = props.iconWidth || 24;
+  const iconHeight = props.iconHeight || 24;
+  let iconTitle = "";
+  if (props.iconTitle === "") { iconTitle = ""; }
+  else if (props.iconTitle) { iconTitle = props.iconTitle; }
+  else { iconTitle = 'Chevron right'; }
+  const classes = props.className || '';
+  const role = props.role || 'img';
+  const ariaHidden = props.ariaHidden || 'false';
+  return (
+    <span className={classes}>
+      <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby="iconChevronRightTitle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <title id="iconChevronRightTitle">{iconTitle}</title>
+        <mask id="iconChevronRightMask" fill="#fff">
+          <path d="M15.812 11.813L8.595 4.596A1.835 1.835 0 1 1 11.19 2l8.319 8.319c.41.41.605.956.584 1.494a1.995 1.995 0 0 1-.584 1.494l-8.319 8.318a1.835 1.835 0 1 1-2.595-2.595l7.217-7.217z" id="iconChevronRightPath"/>
+        </mask>
+        <g mask="url(#iconChevronRightMask)" fill="currentColor">
+          <path d="M0 0h24v24H0z"/>
+        </g>
+      </svg>
+    </span>
+  )
+}
+
+function IconTriangleRight(props) {
+  const iconWidth = props.iconWidth || 24;
+  const iconHeight = props.iconHeight || 24;
+  let iconTitle = "";
+  if (props.iconTitle === "") { iconTitle = ""; }
+  else if (props.iconTitle) { iconTitle = props.iconTitle; }
+  else { iconTitle = 'Triangle right'; }
+  const classes = props.className || '';
+  const role = props.role || 'img';
+  const ariaHidden = props.ariaHidden || 'false';
+  return (
+    <span className={classes}>
+      <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby="iconTriangleRightTitle" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <title id="iconTriangleRightTitle">{iconTitle}</title>
+        <mask id="iconTriangleRightMask" fill="#fff">
+          <path d="M8.445 2.557l7.305 9.13a.5.5 0 0 1 0 .625l-7.305 9.131A.25.25 0 0 1 8 21.287V2.713a.25.25 0 0 1 .445-.156z" id="iconTriangleRightPath"/>
+        </mask>
+        <g mask="url(#iconTriangleRightMask)" fill="currentColor">
+          <path d="M0 0h24v24H0z"/>
+        </g>
+      </svg>
+    </span>
+  )
+}
+
 function IconCheckmark(props) {
   const iconWidth = props.iconWidth || 24;
   const iconHeight = props.iconHeight || 24;
@@ -137,10 +187,12 @@ function IconFullscreen(props) {
 
 export {
   IconCheckmark,
+  IconChevronRight,
   IconClosingCross,
   IconExternal,
   IconFullscreen,
   IconRestart,
   IconSearch,
+  IconTriangleRight,
   IconTypeyType
 };

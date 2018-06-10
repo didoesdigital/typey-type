@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>Icons/Triangle right</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M8.4452172,2.5565215 L15.750122,11.6876525 C15.8962094,11.8702618 15.8962094,12.1297382 15.750122,12.3123475 L8.4452172,21.4434785 C8.35896482,21.551294 8.20164172,21.5687743 8.09382624,21.4825219 C8.03452243,21.4350789 8,21.3632507 8,21.2873047 L8,2.71269526 C8,2.57462408 8.11192881,2.46269526 8.25,2.46269526 C8.32594593,2.46269526 8.39777416,2.49721769 8.4452172,2.5565215 Z" id="path-1"></path>
+    </defs>
+    <g id="Icons/Triangle-right" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Combined-Shape" fill="#FFFFFF" opacity="0.699999988" transform="translate(11.929844, 12.000005) rotate(-360.000000) translate(-11.929844, -12.000005) " xlink:href="#path-1"></use>
+        <g id="Colors/heavy-primary-tint-1" mask="url(#mask-2)" fill="#AD66D5">
+            <rect id="heavy-primary-tint-1" x="0" y="0" width="24" height="24"></rect>
+        </g>
+    </g>
+</svg>
