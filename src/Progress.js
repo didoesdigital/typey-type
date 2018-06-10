@@ -55,7 +55,7 @@ class Progress extends Component {
               duration="200"
               tabIndex="0"
               tag="span"
-              theme="didoesdigital"
+              theme="didoesdigital didoesdigital-sm"
               trigger="mouseenter focus click"
               onShow={this.props.setAnnouncementMessage}
             >
