@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Clipboard from 'clipboard';
-import { IconCheckmark } from './Icon';
+import { IconCheckmark, IconTriangleRight } from './Icon';
 import { Link } from 'react-router-dom';
 import {
   Tooltip,
@@ -59,28 +59,46 @@ class Progress extends Component {
               trigger="mouseenter focus click"
               onShow={this.props.setAnnouncementMessage}
             >
-              <IconCheckmark role="img" className="svg-icon-wrapper svg-baseline color-green-bright" iconTitle="" />
+              <IconCheckmark ariaHidden="true" role="presentation" className="svg-icon-wrapper svg-baseline progress-circle color-green-bright" iconWidth="16" iconHeight="16" iconTitle="" />
               <span className="visually-hidden">100 words done or lesson complete</span>
             </Tooltip>
           );
         } else if (numberOfWordsSeen > 0) {
-          lessonCompletion = ( <small className="ml1">Started</small> );
-          // lessonCompletion = (
-          //       <Tooltip
-          //         title="In progress"
-          //         className=""
-          //         animation="shift"
-          //         arrow="true"
-          //         duration="200"
-          //         tabIndex="0"
-          //         tag="span"
-          //         theme="didoesdigital"
-          //         trigger="mouseenter focus click"
-          //         onShow={this.props.setAnnouncementMessage}
-          //       >
-          //         <IconCheckmark ariaHidden="true" role="presentation" iconFill="#8242a8" className="svg-icon-wrapper svg-baseline" iconTitle="" />
-          //       </Tooltip>
-          // );
+          lessonCompletion = (
+                <Tooltip
+                  title="In progress"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital didoesdigital-sm"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconTriangleRight ariaHidden="true" role="presentation" className="svg-icon-wrapper svg-baseline progress-circle color-purple-bright" iconTitle="" />
+                  <span className="visually-hidden">In progress</span>
+                </Tooltip>
+          );
+        } else {
+          lessonCompletion = (
+                <Tooltip
+                  title="Unstarted"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital didoesdigital-sm"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <div aria-hidden="true" className="svg-icon-wrapper svg-baseline progress-circle color-purple-bright o-30" />
+                  <span className="visually-hidden">Unstarted</span>
+                </Tooltip>
+          );
         }
       }
       if (lesson.category === "Fundamentals") {

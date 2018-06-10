@@ -267,6 +267,9 @@ input:focus::placeholder {
 .left-0 {
   left: 0; }
 
+.o-30 {
+  opacity: .3; }
+
 .collapse {
   border-collapse: collapse;
   border-spacing: 0; }
@@ -510,7 +513,7 @@ input:focus::placeholder {
   color: #8242a8; }
 
 .color-green-bright {
-  color: #57b669; }
+  color: #457e50; }
 
 .text-uppercase {
   text-transform: uppercase;
@@ -1274,6 +1277,23 @@ small .svg-icon-wrapper.svg-baseline svg {
     position: absolute;
     top: 50%;
     transform: translate(-50%, -50%); }
+
+.progress-circle {
+  position: relative;
+  transform: scale(0.6) translateY(1px); }
+  .progress-circle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 2px;
+    width: 24px;
+    height: 24px;
+    transform: translateX(-6px) translateY(-4px); }
 
 .text-vertical {
   position: absolute;
