@@ -116,6 +116,7 @@ describe('filterByFamiliarity', () => {
     "the":30,
     "of":1
   };
+  const revisionMode = false;
 
   describe('when settings include showing new words', () => {
     const userSettings = {
@@ -124,7 +125,7 @@ describe('filterByFamiliarity', () => {
       seenWords: false
     };
     it('should include new words in returned presented material', () => {
-      expect(filterByFamiliarity(presentedMaterial, metWords, userSettings)).toEqual(
+      expect(filterByFamiliarity(presentedMaterial, metWords, userSettings, revisionMode)).toEqual(
         [
           {phrase: 'and', stroke: 'SKP'}
         ]
@@ -138,7 +139,7 @@ describe('filterByFamiliarity', () => {
       seenWords: true
     };
     it('should include new words in returned presented material', () => {
-      expect(filterByFamiliarity(presentedMaterial, metWords, userSettings)).toEqual(
+      expect(filterByFamiliarity(presentedMaterial, metWords, userSettings, revisionMode)).toEqual(
         [
           {phrase: 'of', stroke: '-F'}
         ]
@@ -152,7 +153,7 @@ describe('filterByFamiliarity', () => {
       seenWords: false
     };
     it('should include new words in returned presented material', () => {
-      expect(filterByFamiliarity(presentedMaterial, metWords, userSettings)).toEqual(
+      expect(filterByFamiliarity(presentedMaterial, metWords, userSettings, revisionMode)).toEqual(
         [
           {phrase: 'the', stroke: '-T'}
         ]
@@ -166,7 +167,7 @@ describe('filterByFamiliarity', () => {
       seenWords: true
     };
     it('should include new words in returned presented material', () => {
-      expect(filterByFamiliarity(presentedMaterial, metWords, userSettings)).toEqual(
+      expect(filterByFamiliarity(presentedMaterial, metWords, userSettings, revisionMode)).toEqual(
         [
           {phrase: 'the', stroke: '-T'},
           {phrase: 'of', stroke: '-F'},

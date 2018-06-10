@@ -590,7 +590,7 @@ class App extends Component {
     this.stopTimer();
 
     newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
-    newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings);
+    newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings, this.state.revisionMode);
 
     if (this.state.userSettings.limitNumberOfWords > 0) {
       newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
@@ -1111,9 +1111,9 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
   return presentedMaterial;
 }
 
-function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings) {
+function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings, revisionMode = this.state.revisionMode) {
 
-  var revisionMode = userSettings.revisionMode,
+  var revisionMode = revisionMode,
     newWords = userSettings.newWords,
     seenWords = userSettings.seenWords,
     retainedWords = userSettings.retainedWords,
