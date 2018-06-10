@@ -9,8 +9,7 @@ import 'react-tippy/dist/tippy.css'
 import * as Utils from './utils';
 import {
   getLesson,
-  parseLesson,
-  writePersonalPreferences
+  parseLesson
 } from './typey-type';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -232,11 +231,11 @@ currentSlide: currentSlide
     let [currentSlideContent, currentSlideContentType] = getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
     if (currentSlideContentType === "stroke") {
       let word = getWordForCurrentStrokeSlideIndex(this.state.flashcards, this.state.currentSlide);
-      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(word, feedback, currentSlideContent, this.state.flashcardsMetWords);
+      this.props.updateFlashcardsMetWords(word, feedback, currentSlideContent, this.state.flashcardsMetWords);
     }
     else if (currentSlideContentType === "phrase") {
       let stroke = getStrokeForCurrentSlideContent(currentSlideContent, this.state.sourceMaterial);
-      let newFlashcardsMetWords = this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke, this.state.flashcardsMetWords);
+      this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke, this.state.flashcardsMetWords);
     }
     // debugger
     this.setState({
