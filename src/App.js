@@ -1113,7 +1113,7 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
 
 function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings, revisionMode = this.state.revisionMode) {
 
-  var revisionMode = revisionMode,
+  var localRevisionMode = revisionMode,
     newWords = userSettings.newWords,
     seenWords = userSettings.seenWords,
     retainedWords = userSettings.retainedWords,
@@ -1142,7 +1142,7 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
   }
 
   var tests = [];
-  if (revisionMode) {
+  if (localRevisionMode) {
     tests.push(testNewWords);
     tests.push(testSeenWords);
     tests.push(testRetainedWords);
