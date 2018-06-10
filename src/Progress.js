@@ -100,6 +100,10 @@ class Progress extends Component {
                 </Tooltip>
           );
         }
+      } else {
+          lessonCompletion = (
+            <div aria-hidden="true" className="svg-icon-wrapper svg-baseline color-purple-bright o-30" />
+        );
       }
       if (lesson.category === "Fundamentals") {
         return(
