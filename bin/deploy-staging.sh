@@ -4,14 +4,27 @@ set -e
 
 yarn run test
 
-# read -q "?Reviewed deploy checklist? (y/n) "
-# if [[ $REPLY =~ ^[Yy]$ ]];
-#   then
-#     echo "Continuing... "
-#   else
-#     echo "... Goodbye!"
-#     exit
-# fi
+read -q "?Build steno drills? (y/n) "
+if [[ $REPLY =~ ^[Yy]$ ]];
+  then
+    cd /Users/di/projects/plover-tools/typey-type-lesson-generator
+    ruby ./generate-all-drills-files.rb drills wordlist && ruby ./generate-all-drills-files.rb drills dictionary && ruby ./generate-all-drills-files.rb drills lesson
+    cd -
+    echo "Remember to copy those files and update lesson index word counts!"
+  else
+    echo "... No lessons for you!"
+fi
+
+read -q "?Build steno fundamentals? (y/n) "
+if [[ $REPLY =~ ^[Yy]$ ]];
+  then
+    cd /Users/di/projects/plover-tools/typey-type-lesson-generator
+    ruby ./generate-all-drills-files.rb fundamentals wordlist && ruby ./generate-all-drills-files.rb fundamentals dictionary && ruby ./generate-all-drills-files.rb fundamentals lesson
+    cd -
+    echo "Remember to copy those files and update lesson index word counts!"
+  else
+    echo "... No lessons for you!"
+fi
 
 ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-typey-type-for-standard-dict-set.rb
 
