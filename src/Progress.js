@@ -109,6 +109,10 @@ class Progress extends Component {
         return(
           <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeen} of {lessonWordCountInIndex}</small></li>
         )
+      } else if (lesson.category === "Drills" && lesson.title.startsWith("Top 100")) {
+        return(
+          <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeen} of {lessonWordCountInIndex}</small></li>
+        )
       } else {
         return "";
       }
@@ -168,9 +172,9 @@ class Progress extends Component {
           <div className="p3 mx-auto mw-1024">
             <h2>Your progress</h2>
             <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words.</p>
-
-            <h3>Fundamental lessons progress</h3>
             <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
+
+            <h3>Lessons progress</h3>
             <ul className="unstyled-list">{linkList}</ul>
 
             <h3>Vocabulary progress</h3>
