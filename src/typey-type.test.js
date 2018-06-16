@@ -20,6 +20,14 @@ describe('map stroke to keys', () => {
     let brief = "SAEUPL";
     expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: true, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: true, leftO: false, star: false, rightE: true, rightU: true, rightF: false, rightR: false, rightP: true, rightB: false, rightL: true, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
   });
+  it('show 1 key for "M" brief', () => {
+    let brief = "PH*P";
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: false, leftP: true, leftW: false, leftH: true, leftR: false, leftA: false, leftO: false, star: true, rightE: false, rightU: false, rightF: false, rightR: false, rightP: true, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
+  });
+  it('show nothing when given non-steno letters', () => {
+    let brief = "⌘";
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
+  });
 });
 
 describe('stroke accuracy for current phrase', () => {

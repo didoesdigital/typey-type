@@ -2,31 +2,7 @@ import Zipper from './zipper';
 import { isPeak } from './utils.js';
 
 function mapBriefToKeys (brief) {
-  let keys = {
-    numberBar: false,
-    leftS: false,
-    leftT: false,
-    leftK: false,
-    leftP: false,
-    leftW: false,
-    leftH: false,
-    leftR: false,
-    leftA: false,
-    leftO: false,
-    star: false,
-    rightE: false,
-    rightU: false,
-    rightF: false,
-    rightR: false,
-    rightP: false,
-    rightB: false,
-    rightL: false,
-    rightG: false,
-    rightT: false,
-    rightS: false,
-    rightD: false,
-    rightZ: false,
-  };
+  let keys = { numberBar: false, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, };
 
   // let brief = ["S","A","E","U","P","L";
   brief = brief.split("");
