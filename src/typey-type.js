@@ -1,6 +1,128 @@
 import Zipper from './zipper';
 import { isPeak } from './utils.js';
 
+function mapBriefToKeys (brief) {
+  let keys = {
+    numberBar: false,
+    leftS: false,
+    leftT: false,
+    leftK: false,
+    leftP: false,
+    leftW: false,
+    leftH: false,
+    leftR: false,
+    leftA: false,
+    leftO: false,
+    star: false,
+    rightE: false,
+    rightU: false,
+    rightF: false,
+    rightR: false,
+    rightP: false,
+    rightB: false,
+    rightL: false,
+    rightG: false,
+    rightT: false,
+    rightS: false,
+    rightD: false,
+    rightZ: false,
+  };
+
+  // let brief = ["S","A","E","U","P","L";
+  brief = brief.split("");
+  let stenoOrder = ["#","S","T","K","P","W","H","R","A","O","*","E","U","F","R","P","B","L","G","T","S","D","Z"];
+  let stenoKeys = ['numberBar','leftS','leftT','leftK','leftP','leftW','leftH','leftR','leftA','leftO','star','rightE','rightU','rightF','rightR','rightP','rightB','rightL','rightG','rightT','rightS','rightD','rightZ'];
+  let stenoOrderMappingToKeys = [ '#', 'numberBar', 'S', 'leftS', 'T', 'leftT', 'K', 'leftK', 'P', 'leftP', 'W', 'leftW', 'H', 'leftH', 'R', 'leftR', 'A', 'leftA', 'O', 'leftO', '*', 'star', 'E', 'rightE', 'U', 'rightU', 'F', 'rightF', 'R', 'rightR', 'P', 'rightP', 'B', 'rightB', 'L', 'rightL', 'G', 'rightG', 'T', 'rightT', 'S', 'rightS', 'D', 'rightD', 'Z', 'rightZ'];
+
+  for (let i = 0; i < stenoOrder.length; i++) {
+    if (brief.length > 0 && brief[0] === stenoOrder[i]) {
+      keys[stenoKeys[i]] = true;
+      brief.shift();
+    }
+  }
+
+  // for (let i = 0; i < brief.length; i++) {
+  //   let copyOfStenoOrder = stenoOrder.slice(0);
+  //   let copyOfStenoKeys = stenoKeys.slice(0);
+  //   let index = 0;
+  //   for (let j = 0; j < copyOfStenoOrder.length; j++) {
+  //     console.log("Brief letter: " + brief[i] + " <> Steno Order letter: " + copyOfStenoOrder[index]);
+  //     if (brief[i] === copyOfStenoOrder[index]) {
+  //       keys[copyOfStenoKeys[index]] = true;
+  //     } else {
+  //     }
+  //     let throwawayletter = copyOfStenoOrder.shift();
+  //     let throwawaykey = copyOfStenoKeys.shift();
+  //   }
+  // }
+
+  // brief = brief.split("");
+  // for (let i = 0; i < brief.length; i++) {
+  //   let copyOfStenoOrderMappingToKeys = stenoOrderMappingToKeys.slice(0);
+  //   for (let j = 0; j < copyOfStenoOrderMappingToKeys.length; j++) {
+  //     console.log(brief[i]);
+  //     console.log(copyOfStenoOrderMappingToKeys);
+  //     if (brief[i] === copyOfStenoOrderMappingToKeys[j]) {
+  //       keys[copyOfStenoOrderMappingToKeys[j+1]] = true;
+  //     }
+  //     copyOfStenoOrderMappingToKeys.shift();
+  //   }
+  // }
+
+    // '#', 'numberBar',
+    // 'S', 'leftS',
+    // 'T', 'leftT',
+    // 'K', 'leftK',
+    // 'P', 'leftP',
+    // 'W', 'leftW',
+    // 'H', 'leftH',
+    // 'R', 'leftR',
+    // 'A', 'leftA',
+    // 'O', 'leftO',
+    // '*', 'star',
+    // 'E', 'rightE',
+    // 'U', 'rightU',
+    // 'F', 'rightF',
+    // 'R', 'rightR',
+    // 'P', 'rightP',
+    // 'B', 'rightB',
+    // 'L', 'rightL',
+    // 'G', 'rightG',
+    // 'T', 'rightT',
+    // 'S', 'rightS',
+    // 'D', 'rightD',
+    // 'Z', 'rightZ'
+
+  // let keys = {
+  //   numberBar: false,
+  //   leftS: true,
+  //   leftT: false,
+  //   leftK: false,
+  //   leftP: false,
+  //   leftW: false,
+  //   leftH: false,
+  //   leftR: false,
+  //   leftA: true,
+  //   leftO: false,
+  //   star: false,
+  //   rightE: true,
+  //   rightU: true,
+  //   rightF: false,
+  //   rightR: false,
+  //   rightP: true,
+  //   rightB: false,
+  //   rightL: true,
+  //   rightG: false,
+  //   rightT: false,
+  //   rightS: false,
+  //   rightD: false,
+  //   rightZ: false,
+  // };
+
+
+  return keys;
+}
+
 function strokeAccuracy(currentPhraseAttempts, targetStrokeCount) {
   let strokeAccuracy = true;
   let attempts = [];
@@ -401,6 +523,7 @@ export {
   getLesson,
   loadPersonalPreferences,
   matchSplitText,
+  mapBriefToKeys,
   parseCustomMaterial,
   parseLesson,
   parseWordList,

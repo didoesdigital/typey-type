@@ -6,9 +6,21 @@ import {
   strokeAccuracy,
   swapKeyValueInDictionary,
   writePersonalPreferences,
+  mapBriefToKeys,
   repetitionsRemaining
 } from './typey-type';
 import Zipper from './zipper';
+
+describe('map stroke to keys', () => {
+  it('show no keys for empty brief', () => {
+    let brief = "";
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
+  });
+  it('show 5 keys for "same" brief', () => {
+    let brief = "SAEUPL";
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: true, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: true, leftO: false, star: false, rightE: true, rightU: true, rightF: false, rightR: false, rightP: true, rightB: false, rightL: true, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
+  });
+});
 
 describe('stroke accuracy for current phrase', () => {
   describe('should return false for real failed meetings', () => {
