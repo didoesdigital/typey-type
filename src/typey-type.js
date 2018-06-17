@@ -4,13 +4,11 @@ import { isPeak } from './utils.js';
 function mapBriefToKeys (brief) {
   let keys = { numberBar: false, leftSUpper: false, leftSLower: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, dash: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, };
 
-  // let brief = ["S","A","E","U","P","L";
   let briefLetters = brief.split("");
 
   // stenoOrder and stenoKeys should always be updated together
   let stenoOrder = ["#","1","S","T","2","K","3","P","W","4","H","R","5","A","0","O","*","-","E","U","6","F","R","7","P","B","8","L","G","9","T","S","D","Z"];
   let stenoKeys = ['numberBar','leftSUpper','leftSLower','leftT','leftT','leftK','leftP','leftP','leftW','leftH','leftH','leftR','leftA','leftA','leftO','leftO','star','dash','rightE','rightU','rightF','rightF','rightR','rightP','rightP','rightB','rightL','rightL','rightG','rightT','rightT','rightS','rightD','rightZ'];
-  // let stenoOrderMappingToKeys = [ '#', 'numberBar', 'S', 'leftSLower', 'T', 'leftT', 'K', 'leftK', 'P', 'leftP', 'W', 'leftW', 'H', 'leftH', 'R', 'leftR', 'A', 'leftA', 'O', 'leftO', '*', 'star', 'E', 'rightE', 'U', 'rightU', 'F', 'rightF', 'R', 'rightR', 'P', 'rightP', 'B', 'rightB', 'L', 'rightL', 'G', 'rightG', 'T', 'rightT', 'S', 'rightS', 'D', 'rightD', 'Z', 'rightZ'];
 
   for (let i = 0; i < stenoOrder.length; i++) {
     if (briefLetters.length > 0) {
@@ -24,85 +22,6 @@ function mapBriefToKeys (brief) {
   if (brief.match(/[0-9]/)) {
     keys["numberBar"] = true;
   }
-
-  // for (let i = 0; i < brief.length; i++) {
-  //   let copyOfStenoOrder = stenoOrder.slice(0);
-  //   let copyOfStenoKeys = stenoKeys.slice(0);
-  //   let index = 0;
-  //   for (let j = 0; j < copyOfStenoOrder.length; j++) {
-  //     console.log("Brief letter: " + brief[i] + " <> Steno Order letter: " + copyOfStenoOrder[index]);
-  //     if (brief[i] === copyOfStenoOrder[index]) {
-  //       keys[copyOfStenoKeys[index]] = true;
-  //     } else {
-  //     }
-  //     let throwawayletter = copyOfStenoOrder.shift();
-  //     let throwawaykey = copyOfStenoKeys.shift();
-  //   }
-  // }
-
-  // brief = brief.split("");
-  // for (let i = 0; i < brief.length; i++) {
-  //   let copyOfStenoOrderMappingToKeys = stenoOrderMappingToKeys.slice(0);
-  //   for (let j = 0; j < copyOfStenoOrderMappingToKeys.length; j++) {
-  //     console.log(brief[i]);
-  //     console.log(copyOfStenoOrderMappingToKeys);
-  //     if (brief[i] === copyOfStenoOrderMappingToKeys[j]) {
-  //       keys[copyOfStenoOrderMappingToKeys[j+1]] = true;
-  //     }
-  //     copyOfStenoOrderMappingToKeys.shift();
-  //   }
-  // }
-
-    // '#', 'numberBar',
-    // 'S', 'leftSLower',
-    // 'T', 'leftT',
-    // 'K', 'leftK',
-    // 'P', 'leftP',
-    // 'W', 'leftW',
-    // 'H', 'leftH',
-    // 'R', 'leftR',
-    // 'A', 'leftA',
-    // 'O', 'leftO',
-    // '*', 'star',
-    // 'E', 'rightE',
-    // 'U', 'rightU',
-    // 'F', 'rightF',
-    // 'R', 'rightR',
-    // 'P', 'rightP',
-    // 'B', 'rightB',
-    // 'L', 'rightL',
-    // 'G', 'rightG',
-    // 'T', 'rightT',
-    // 'S', 'rightS',
-    // 'D', 'rightD',
-    // 'Z', 'rightZ'
-
-  // let keys = {
-  //   numberBar: false,
-  //   leftSLower: true,
-  //   leftT: false,
-  //   leftK: false,
-  //   leftP: false,
-  //   leftW: false,
-  //   leftH: false,
-  //   leftR: false,
-  //   leftA: true,
-  //   leftO: false,
-  //   star: false,
-  //   rightE: true,
-  //   rightU: true,
-  //   rightF: false,
-  //   rightR: false,
-  //   rightP: true,
-  //   rightB: false,
-  //   rightL: true,
-  //   rightG: false,
-  //   rightT: false,
-  //   rightS: false,
-  //   rightD: false,
-  //   rightZ: false,
-  // };
-
 
   return keys;
 }
