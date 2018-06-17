@@ -131,9 +131,9 @@ class Lesson extends Component {
           <div className="stroke-tip" aria-live="polite">
             <span className="visually-hidden">Hint: </span>
             {strokes.map((strokeToDraw, index) =>
-              <div className="dib mt1 mr1"  key={index}>
-                <StenoboardDiagram {...mapBriefToKeys(strokeToDraw)} brief={strokeToDraw} />
-              </div>
+              <React.Fragment key={index}>
+                {(Object.values(mapBriefToKeys(strokeToDraw)).some(item => item)) && <div className="dib mt1 mr1"><StenoboardDiagram {...mapBriefToKeys(strokeToDraw)} brief={strokeToDraw} /></div> }
+              </React.Fragment>
             )}
             <div className="db">
               <pre className="overflow-auto mw-408">
