@@ -126,15 +126,16 @@ class Lesson extends Component {
     if (shouldShowStroke(this.props.showStrokesInLesson, this.props.userSettings.showStrokes, this.props.repetitionsRemaining, this.props.userSettings.hideStrokesOnLastRepetition)) {
       if (this.props.currentStroke) {
         let strokes = splitBriefsIntoStrokes(this.props.currentStroke);
-        // let keys = mapBriefToKeys(strokes[0]);
         strokeTip =
           <div className="stroke-tip" aria-live="polite">
             <span className="visually-hidden">Hint: </span>
-            {strokes.map((strokeToDraw, index) =>
-              <React.Fragment key={index}>
-                {(Object.values(mapBriefToKeys(strokeToDraw)).some(item => item)) && <div className="dib mt1 mr1"><StenoboardDiagram {...mapBriefToKeys(strokeToDraw)} brief={strokeToDraw} /></div> }
-              </React.Fragment>
-            )}
+            <div className="flex overflow-x-scroll">
+              {strokes.map((strokeToDraw, index) =>
+                <React.Fragment key={index}>
+                  {(Object.values(mapBriefToKeys(strokeToDraw)).some(item => item)) && <div className="mt1 mr1"><StenoboardDiagram {...mapBriefToKeys(strokeToDraw)} brief={strokeToDraw} /></div> }
+                </React.Fragment>
+              )}
+            </div>
             <div className="db">
               <pre className="overflow-auto mw-408">
                 <span className="steno-stroke">

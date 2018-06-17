@@ -282,7 +282,7 @@ input:focus::placeholder {
 .overflow-auto { overflow: auto; }
 // .overflow-x-visible { overflow-x: visible; }
 // .overflow-x-hidden { overflow-x: hidden; }
-// .overflow-x-scroll { overflow-x: scroll; }
+.overflow-x-scroll { overflow-x: scroll; }
 // .overflow-x-auto { overflow-x: auto; }
 // .overflow-y-visible { overflow-y: visible; }
 // .overflow-y-hidden { overflow-y: hidden; }
@@ -1006,6 +1006,7 @@ label {
 
   margin-bottom: 0.5em;
   margin-left: calc(50% - #{$left-offset-for-zipper + 0.5em});
+  padding-right: calc(50% - 9.5em); // avoid fill-fade edge
   text-align: left;
   transform: translateX(2px + 8px);
   width: 100%;

@@ -283,6 +283,9 @@ input:focus::placeholder {
 .overflow-auto {
   overflow: auto; }
 
+.overflow-x-scroll {
+  overflow-x: scroll; }
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto; }
@@ -997,6 +1000,7 @@ label {
   color: #596091;
   margin-bottom: 0.5em;
   margin-left: calc(50% - 10.5em);
+  padding-right: calc(50% - 9.5em);
   text-align: left;
   transform: translateX(10px);
   width: 100%; }
