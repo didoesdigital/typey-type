@@ -14,19 +14,47 @@ import Zipper from './zipper';
 describe('map stroke to keys', () => {
   it('show no keys for empty brief', () => {
     let brief = "";
-    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, dash: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
+  });
+  it('show star key for brief with star "eyes"', () => {
+    let brief = "AO*EUS";
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: true, leftO: true, star: true, dash: false, rightE: true, rightU: true, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: true, rightD: false, rightZ: false, });
+  });
+  it('show keys for dash only brief "welcome"', () => {
+    let brief = "HR-BG";
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: true, leftR: true, leftA: false, leftO: false, star: false, dash: true, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: true, rightL: false, rightG: true, rightT: false, rightS: false, rightD: false, rightZ: false, });
+  });
+  it('show keys for left-side only brief "consider"', () => {
+    let brief = "KR";
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: true, leftP: false, leftW: false, leftH: false, leftR: true, leftA: false, leftO: false, star: false, dash: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
+  });
+  it('show keys for right-side only brief "be"', () => {
+    let brief = "-B";
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, dash: true, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: true, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
   });
   it('show 5 keys for "same" brief', () => {
     let brief = "SAEUPL";
-    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: true, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: true, leftO: false, star: false, rightE: true, rightU: true, rightF: false, rightR: false, rightP: true, rightB: false, rightL: true, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: true, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: true, leftO: false, star: false, dash: false, rightE: true, rightU: true, rightF: false, rightR: false, rightP: true, rightB: false, rightL: true, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
   });
   it('show 1 key for "M" brief', () => {
     let brief = "PH*P";
-    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: false, leftP: true, leftW: false, leftH: true, leftR: false, leftA: false, leftO: false, star: true, rightE: false, rightU: false, rightF: false, rightR: false, rightP: true, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: false, leftP: true, leftW: false, leftH: true, leftR: false, leftA: false, leftO: false, star: true, dash: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: true, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
   });
   it('show nothing when given non-steno letters', () => {
     let brief = "⌘";
-    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: false, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, dash: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, });
+  });
+  it('show correct brief containing numbers and letters for 70s', () => {
+    let brief = "0EU7S";
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: true, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: true, star: false, dash: false, rightE: true, rightU: true, rightF: false, rightR: false, rightP: true, rightB: false, rightL: false, rightG: false, rightT: false, rightS: true, rightD: false, rightZ: false, });
+  });
+  it('show correct brief containing numbers for 90', () => {
+    let brief = "0EU9";
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: true, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: true, star: false, dash: false, rightE: true, rightU: true, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: true, rightS: false, rightD: false, rightZ: false, });
+  });
+  it('show correct brief containing duplicated numbers like 11', () => {
+    let brief = "1-D";
+    expect(mapBriefToKeys(brief)).toEqual({ numberBar: true, leftS: true, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, dash: true, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: true, rightZ: false, });
   });
 });
 

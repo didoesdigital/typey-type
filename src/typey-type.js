@@ -2,19 +2,27 @@ import Zipper from './zipper';
 import { isPeak } from './utils.js';
 
 function mapBriefToKeys (brief) {
-  let keys = { numberBar: false, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, };
+  let keys = { numberBar: false, leftS: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, dash: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, };
 
   // let brief = ["S","A","E","U","P","L";
-  brief = brief.split("");
-  let stenoOrder = ["#","S","T","K","P","W","H","R","A","O","*","E","U","F","R","P","B","L","G","T","S","D","Z"];
-  let stenoKeys = ['numberBar','leftS','leftT','leftK','leftP','leftW','leftH','leftR','leftA','leftO','star','rightE','rightU','rightF','rightR','rightP','rightB','rightL','rightG','rightT','rightS','rightD','rightZ'];
-  let stenoOrderMappingToKeys = [ '#', 'numberBar', 'S', 'leftS', 'T', 'leftT', 'K', 'leftK', 'P', 'leftP', 'W', 'leftW', 'H', 'leftH', 'R', 'leftR', 'A', 'leftA', 'O', 'leftO', '*', 'star', 'E', 'rightE', 'U', 'rightU', 'F', 'rightF', 'R', 'rightR', 'P', 'rightP', 'B', 'rightB', 'L', 'rightL', 'G', 'rightG', 'T', 'rightT', 'S', 'rightS', 'D', 'rightD', 'Z', 'rightZ'];
+  let briefLetters = brief.split("");
+
+  // stenoOrder and stenoKeys should always be updated together
+  let stenoOrder = ["#","1","S","T","2","K","3","P","W","4","H","R","5","A","0","O","*","-","E","U","6","F","R","7","P","B","8","L","G","9","T","S","D","Z"];
+  let stenoKeys = ['numberBar','leftS','leftS','leftT','leftT','leftK','leftP','leftP','leftW','leftH','leftH','leftR','leftA','leftA','leftO','leftO','star','dash','rightE','rightU','rightF','rightF','rightR','rightP','rightP','rightB','rightL','rightL','rightG','rightT','rightT','rightS','rightD','rightZ'];
+  // let stenoOrderMappingToKeys = [ '#', 'numberBar', 'S', 'leftS', 'T', 'leftT', 'K', 'leftK', 'P', 'leftP', 'W', 'leftW', 'H', 'leftH', 'R', 'leftR', 'A', 'leftA', 'O', 'leftO', '*', 'star', 'E', 'rightE', 'U', 'rightU', 'F', 'rightF', 'R', 'rightR', 'P', 'rightP', 'B', 'rightB', 'L', 'rightL', 'G', 'rightG', 'T', 'rightT', 'S', 'rightS', 'D', 'rightD', 'Z', 'rightZ'];
 
   for (let i = 0; i < stenoOrder.length; i++) {
-    if (brief.length > 0 && brief[0] === stenoOrder[i]) {
-      keys[stenoKeys[i]] = true;
-      brief.shift();
+    if (briefLetters.length > 0) {
+      if (briefLetters[0] === stenoOrder[i]) {
+        keys[stenoKeys[i]] = true;
+        briefLetters.shift();
+      }
     }
+  }
+
+  if (brief.match(/[0-9]/)) {
+    keys["numberBar"] = true;
   }
 
   // for (let i = 0; i < brief.length; i++) {
