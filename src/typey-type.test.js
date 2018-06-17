@@ -74,6 +74,69 @@ describe('map stroke to keys', () => {
     });
   });
 
+  it('shows left-hand T for "it"', () => {
+    let brief = "T";
+    expect(mapBriefToKeys(brief)).toEqual({
+      numberBar: false,
+      leftSUpper: false,
+      leftSLower: false,
+      leftT: true,
+      leftK: false,
+      leftP: false,
+      leftW: false,
+      leftH: false,
+      leftR: false,
+      leftA: false,
+      leftO: false,
+      star: false,
+      dash: false,
+      rightE: false,
+      rightU: false,
+      rightF: false,
+      rightR: false,
+      rightP: false,
+      rightB: false,
+      rightL: false,
+      rightG: false,
+      rightT: false,
+      rightS: false,
+      rightD: false,
+      rightZ: false,
+    });
+  });
+
+
+  it('shows right-hand -T for "the"', () => {
+    let brief = "-T";
+    expect(mapBriefToKeys(brief)).toEqual({
+      numberBar: false,
+      leftSUpper: false,
+      leftSLower: false,
+      leftT: false,
+      leftK: false,
+      leftP: false,
+      leftW: false,
+      leftH: false,
+      leftR: false,
+      leftA: false,
+      leftO: false,
+      star: false,
+      dash: true,
+      rightE: false,
+      rightU: false,
+      rightF: false,
+      rightR: false,
+      rightP: false,
+      rightB: false,
+      rightL: false,
+      rightG: false,
+      rightT: true,
+      rightS: false,
+      rightD: false,
+      rightZ: false,
+    });
+  });
+
   it('show star key for brief with star "eyes"', () => {
     let brief = "AO*EUS";
     expect(mapBriefToKeys(brief)).toEqual({
