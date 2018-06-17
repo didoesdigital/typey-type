@@ -233,9 +233,6 @@ input:focus::placeholder {
 .items-center {
   align-items: center; }
 
-.self-center {
-  align-self: center; }
-
 .hide {
   display: none; }
 
@@ -360,6 +357,9 @@ input:focus::placeholder {
 
 .mt4 {
   margin-top: 32px; }
+
+.mt6 {
+  margin-top: 48px; }
 
 .mx1 {
   margin-left: 8px;

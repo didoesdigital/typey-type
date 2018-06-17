@@ -255,7 +255,7 @@ input:focus::placeholder {
 .justify-center  { justify-content: center; }
 .items-baseline  { align-items: baseline; }
 .items-center    { align-items: center; }
-.self-center     { align-self: center; }
+// .self-center     { align-self: center; }
 .hide            { display: none; }
 .hide-sm         { @media (max-width: 960px) { display: none; } }
 .relative        { position: relative; }
@@ -328,6 +328,7 @@ input:focus::placeholder {
 .mt2     { margin-top: 16px; }
 .mt3     { margin-top: 24px; }
 .mt4     { margin-top: 32px; }
+.mt6     { margin-top: 48px; }
 .mx1     { margin-left: 8px; margin-right: 8px; }
 
 .mxn1    { margin-left: -8px; margin-right: -8px; }
