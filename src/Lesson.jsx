@@ -5,11 +5,12 @@ import DocumentTitle from 'react-document-title';
 import Material from './Material';
 import TypedText from './TypedText';
 import Scores from './Scores';
+import StenoboardDiagram from './StenoboardDiagram';
 import UserSettings from './UserSettings';
 import Finished from './Finished';
 import Flashcards from './Flashcards';
 import CustomLessonSetup from './CustomLessonSetup';
-import { shouldShowStroke } from './typey-type';
+import { shouldShowStroke, splitBriefsIntoStrokes, mapBriefToKeys } from './typey-type';
 
 class Lesson extends Component {
   componentDidMount() {
@@ -122,9 +123,12 @@ class Lesson extends Component {
       );
     }
 
+    let strokes = splitBriefsIntoStrokes(this.props.currentStroke);
+    let keys = mapBriefToKeys(strokes[0]);
+
     if (shouldShowStroke(this.props.showStrokesInLesson, this.props.userSettings.showStrokes, this.props.repetitionsRemaining, this.props.userSettings.hideStrokesOnLastRepetition)) {
       if (this.props.currentStroke) {
-        strokeTip = <div className="stroke-tip" aria-live="polite"><span className="visually-hidden">Hint: </span><pre className="overflow-auto mw-408"><span className="steno-stroke">{this.props.currentStroke.split('').map((item, i)=><kbd className="raw-steno-key" key={i}>{item}</kbd>)}</span></pre></div>;
+        strokeTip = <div className="stroke-tip" aria-live="polite"><span className="visually-hidden">Hint: </span><pre className="overflow-auto mw-408"><span className="steno-stroke">{this.props.currentStroke.split('').map((item, i)=><kbd className="raw-steno-key" key={i}>{item}</kbd>)}</span><StenoboardDiagram {...keys} /></pre></div>;
       }
     } else {
       strokeTip = <div className="stroke-tip">
