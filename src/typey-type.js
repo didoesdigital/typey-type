@@ -1,6 +1,10 @@
 import Zipper from './zipper';
 import { isPeak } from './utils.js';
 
+function splitBriefsIntoStrokes (currentStroke) {
+  return currentStroke.split(/[/ ]/);
+}
+
 function mapBriefToKeys (brief) {
   let keys = { numberBar: false, leftSUpper: false, leftSLower: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, dash: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, };
 
@@ -435,6 +439,7 @@ export {
   repetitionsRemaining,
   setupLessonProgress,
   shouldShowStroke,
+  splitBriefsIntoStrokes,
   strokeAccuracy,
   targetStrokeCount,
   writePersonalPreferences
