@@ -123,12 +123,30 @@ class Lesson extends Component {
       );
     }
 
-    let strokes = splitBriefsIntoStrokes(this.props.currentStroke);
-    let keys = mapBriefToKeys(strokes[0]);
-
     if (shouldShowStroke(this.props.showStrokesInLesson, this.props.userSettings.showStrokes, this.props.repetitionsRemaining, this.props.userSettings.hideStrokesOnLastRepetition)) {
       if (this.props.currentStroke) {
-        strokeTip = <div className="stroke-tip" aria-live="polite"><span className="visually-hidden">Hint: </span><pre className="overflow-auto mw-408"><span className="steno-stroke">{this.props.currentStroke.split('').map((item, i)=><kbd className="raw-steno-key" key={i}>{item}</kbd>)}</span><StenoboardDiagram {...keys} /></pre></div>;
+        let strokes = splitBriefsIntoStrokes(this.props.currentStroke);
+        // let keys = mapBriefToKeys(strokes[0]);
+        strokeTip =
+          <div className="stroke-tip" aria-live="polite">
+            <span className="visually-hidden">Hint: </span>
+            {strokes.map((strokeToDraw, index) =>
+              <div className="dib mt1 mr1"  key={index}>
+                <StenoboardDiagram {...mapBriefToKeys(strokeToDraw)} brief={strokeToDraw} />
+              </div>
+            )}
+            <div className="db">
+              <pre className="overflow-auto mw-408">
+                <span className="steno-stroke">
+                  {this.props.currentStroke.split('').map((item, i) =>
+                    <kbd className="raw-steno-key" key={i}>
+                      {item}
+                    </kbd>
+                  )}
+                </span>
+              </pre>
+            </div>
+          </div>;
       }
     } else {
       strokeTip = <div className="stroke-tip">

@@ -13,8 +13,13 @@ class StenoboardDiagram extends Component {
   render() {
     // const strokeColor = '#321E3E';
     // const strokeColor = '#6c6076';
-    const strokeColor = 'hsla(277, 10%, 60%, 1)';
-    const onTextColor = '#CAC7CC';
+    // const offTextColor = '#CAC7CC';
+    // const strokeColor = 'hsla(277, 10%, 60%, 1)';
+    // const strokeColor = '#321E3E';
+    let hidden = true;
+
+    const strokeColor = '#7109AA';
+    const onTextColor = '#fff';
     const offTextColor = '#fff';
 
     let rightZOnColor = '#7109AA';
@@ -67,40 +72,9 @@ class StenoboardDiagram extends Component {
     let leftSUpperOffColor = '#f2ddfd';
     let numberBarOffColor = '#f2ddfd';
 
-      // numberBar: false,
-      // leftSUpper: false,
-      // leftSLower: false,
-      // leftT: false,
-      // leftK: false,
-      // leftP: false,
-      // leftW: false,
-      // leftH: false,
-      // leftR: false,
-      // leftA: false,
-      // leftO: false,
-      // star: false,
-      // dash: true,
-      // rightE: false,
-      // rightU: false,
-      // rightF: false,
-      // rightR: false,
-      // rightP: false,
-      // rightB: false,
-      // rightL: false,
-      // rightG: false,
-      // rightT: true,
-      // rightS: false,
-      // rightD: false,
-      // rightZ: false,
-    //
-
-
     return (
-      <svg viewBox="0 0 204 100" xmlns="http://www.w3.org/2000/svg">
-        <title>
-          Stenoboard
-        </title>
-        <g id="Stenoboard" fill="none" fillRule="evenodd">
+      <svg viewBox="0 0 204 100" width="144" xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
+        <g id={"stenoboard-" + this.props.brief } fill="none" fillRule="evenodd">
           <rect id="rightZ" stroke={strokeColor} fill={this.props.rightZ ? rightZOnColor : rightZOffColor} x="188.5" y="48.5" width="15" height="23" rx="4"/>
           <rect id="rightD" stroke={strokeColor} fill={this.props.rightD ? rightDOnColor : rightDOffColor} x="188.5" y="20.5" width="15" height="23" rx="4"/>
           <rect id="rightS" stroke={strokeColor} fill={this.props.rightS ? rightSOnColor : rightSOffColor} x="168.5" y="48.5" width="15" height="23" rx="4"/>
