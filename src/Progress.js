@@ -163,7 +163,7 @@ class Progress extends Component {
               </p>
               <p className="mt2 mb0">
                 <button onClick={this.restoreButtonOnClickFunction.bind(this)} className="link-button load-progress fade-out-up">
-                  Load progress into Typey&nbsp;type
+                  Load progress from text
                 </button>
               </p>
             </div>
