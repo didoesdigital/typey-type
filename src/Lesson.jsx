@@ -130,7 +130,7 @@ class Lesson extends Component {
           <div className="stroke-tip" aria-live="polite">
             <span className="visually-hidden">Hint: </span>
             <div className="flex overflow-auto">
-              {strokes.map((strokeToDraw, index) =>
+              {this.props.userSettings.showStrokesAsDiagrams && strokes.map((strokeToDraw, index) =>
                 <React.Fragment key={index}>
                   {(Object.values(mapBriefToKeys(strokeToDraw)).some(item => item)) && <div className="mt1 mr2"><StenoboardDiagram {...mapBriefToKeys(strokeToDraw)} brief={strokeToDraw} /></div> }
                 </React.Fragment>
@@ -288,7 +288,7 @@ class Lesson extends Component {
                   <div role="article" className="lesson-canvas panel mw-568 p2 fill-fade-parent">
                     {revisionModeButton}
                     <span className="fill-fade-edges"></span>
-                    <div className="mx-auto mw100 mt6 text-center">
+                    <div className="mx-auto mw100 mt11 text-center">
                       <Material
                         actualText={this.props.actualText}
                         currentPhrase={this.props.currentPhrase}

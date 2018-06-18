@@ -82,6 +82,7 @@ class App extends Component {
         newWords: true,
         repetitions: 3,
         showStrokes: true,
+        showStrokesAsDiagrams: false,
         hideStrokesOnLastRepetition: true,
         spacePlacement: 'spaceOff',
         sortOrder: 'sortOff',
