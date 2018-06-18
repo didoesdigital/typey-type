@@ -73,7 +73,7 @@ class StenoboardDiagram extends Component {
     let numberBarOffColor = '#f2ddfd';
 
     return (
-      <svg viewBox="0 0 204 100" width="144" xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
+      <svg viewBox="0 0 204 100" width="120" xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
         <g id={"stenoboard-" + this.props.brief } fill="none" fillRule="evenodd">
           <rect id="rightZ" stroke={strokeColor} fill={this.props.rightZ ? rightZOnColor : rightZOffColor} x="188.5" y="48.5" width="15" height="23" rx="4"/>
           <rect id="rightD" stroke={strokeColor} fill={this.props.rightD ? rightDOnColor : rightDOffColor} x="188.5" y="20.5" width="15" height="23" rx="4"/>
@@ -85,11 +85,11 @@ class StenoboardDiagram extends Component {
           <rect id="rightP" stroke={strokeColor} fill={this.props.rightP ? rightPOnColor : rightPOffColor} x="128.5" y="20.5" width="15" height="23" rx="4"/>
           <rect id="rightR" stroke={strokeColor} fill={this.props.rightR ? rightROnColor : rightROffColor} x="108.5" y="48.5" width="15" height="23" rx="4"/>
           <rect id="rightF" stroke={strokeColor} fill={this.props.rightF ? rightFOnColor : rightFOffColor} x="108.5" y="20.5" width="15" height="23" rx="4"/>
-          <rect id="rightU" stroke={strokeColor} fill={this.props.rightU ? rightUOnColor : rightUOffColor} x="118.5" y="76.5" width="15" height="23" rx="4"/>
-          <rect id="rightE" stroke={strokeColor} fill={this.props.rightE ? rightEOnColor : rightEOffColor} x="98.5" y="76.5" width="15" height="23" rx="4"/>
+          <rect id="rightU" stroke={strokeColor} fill={this.props.rightU ? rightUOnColor : rightUOffColor} x="117.5" y="76.5" width="15" height="23" rx="4"/>
+          <rect id="rightE" stroke={strokeColor} fill={this.props.rightE ? rightEOnColor : rightEOffColor} x="97.5" y="76.5" width="15" height="23" rx="4"/>
           <rect id="star" stroke={strokeColor} fill={this.props.star ? starOnColor : starOffColor} x="82.5" y="20.5" width="19" height="51" rx="4"/>
-          <rect id="leftO" stroke={strokeColor} fill={this.props.leftO ? leftOOnColor : leftOOffColor} x="70.5" y="76.5" width="15" height="23" rx="4"/>
-          <rect id="leftA" stroke={strokeColor} fill={this.props.leftA ? leftAOnColor : leftAOffColor} x="50.5" y="76.5" width="15" height="23" rx="4"/>
+          <rect id="leftO" stroke={strokeColor} fill={this.props.leftO ? leftOOnColor : leftOOffColor} x="71.5" y="76.5" width="15" height="23" rx="4"/>
+          <rect id="leftA" stroke={strokeColor} fill={this.props.leftA ? leftAOnColor : leftAOffColor} x="51.5" y="76.5" width="15" height="23" rx="4"/>
           <rect id="leftR" stroke={strokeColor} fill={this.props.leftR ? leftROnColor : leftROffColor} x="60.5" y="48.5" width="15" height="23" rx="4"/>
           <rect id="leftH" stroke={strokeColor} fill={this.props.leftH ? leftHOnColor : leftHOffColor} x="60.5" y="20.5" width="15" height="23" rx="4"/>
           <rect id="leftW" stroke={strokeColor} fill={this.props.leftW ? leftWOnColor : leftWOffColor} x="40.5" y="48.5" width="15" height="23" rx="4"/>

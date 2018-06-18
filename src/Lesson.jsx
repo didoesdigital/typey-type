@@ -132,15 +132,15 @@ class Lesson extends Component {
             <div className="flex overflow-auto">
               {strokes.map((strokeToDraw, index) =>
                 <React.Fragment key={index}>
-                  {(Object.values(mapBriefToKeys(strokeToDraw)).some(item => item)) && <div className="mt1 mr1"><StenoboardDiagram {...mapBriefToKeys(strokeToDraw)} brief={strokeToDraw} /></div> }
+                  {(Object.values(mapBriefToKeys(strokeToDraw)).some(item => item)) && <div className="mt1 mr2"><StenoboardDiagram {...mapBriefToKeys(strokeToDraw)} brief={strokeToDraw} /></div> }
                 </React.Fragment>
               )}
             </div>
             <div className="db">
-              <pre className="overflow-auto mw-408">
+              <pre className="overflow-auto mw-408 text-small">
                 <span className="steno-stroke">
                   {this.props.currentStroke.split('').map((item, i) =>
-                    <kbd className="raw-steno-key" key={i}>
+                    <kbd className="raw-steno-key text-small" key={i}>
                       {item}
                     </kbd>
                   )}
