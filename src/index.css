@@ -203,6 +203,9 @@ input:focus::placeholder {
 .dib {
   display: inline-block; }
 
+.dc {
+  display: contents; }
+
 .table {
   display: table; }
 

@@ -199,11 +199,15 @@ class Finished extends Component {
       </div>
     );
 
+    let lessonEmpty = false;
     if (this.isEmpty()) {
+      lessonEmpty = true;
       emptyAndZeroStateMessage = (
         <div className="text-center mt11 mx-auto">There are no words to write.</div>
       );
       lessonSummary = '';
+    } else {
+      lessonEmpty = false;
     }
     if (this.props.settings.customMessage) {
       customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
@@ -231,10 +235,10 @@ class Finished extends Component {
             userSettings={this.props.userSettings}
           />
           <div className="lesson-canvas panel p2 overflow-scroll">
-            <React.Fragment>
+            <div className={lessonEmpty ? 'dc' : ''}>
               {emptyAndZeroStateMessage}
               {lessonSummary}
-            </React.Fragment>
+            </div>
           </div>
           <div className="scores panel p2">
             <Scores
