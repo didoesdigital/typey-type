@@ -201,7 +201,7 @@ class Finished extends Component {
 
     if (this.isEmpty()) {
       emptyAndZeroStateMessage = (
-        <div className="text-center mt6 mx-auto">There are no words to write.</div>
+        <div className="text-center mt11 mx-auto">There are no words to write.</div>
       );
       lessonSummary = '';
     }
