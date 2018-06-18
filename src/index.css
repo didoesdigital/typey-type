@@ -283,9 +283,6 @@ input:focus::placeholder {
 .overflow-auto {
   overflow: auto; }
 
-.overflow-x-scroll {
-  overflow-x: scroll; }
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto; }

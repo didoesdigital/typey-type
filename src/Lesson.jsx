@@ -129,7 +129,7 @@ class Lesson extends Component {
         strokeTip =
           <div className="stroke-tip" aria-live="polite">
             <span className="visually-hidden">Hint: </span>
-            <div className="flex overflow-x-scroll">
+            <div className="flex overflow-auto">
               {strokes.map((strokeToDraw, index) =>
                 <React.Fragment key={index}>
                   {(Object.values(mapBriefToKeys(strokeToDraw)).some(item => item)) && <div className="mt1 mr1"><StenoboardDiagram {...mapBriefToKeys(strokeToDraw)} brief={strokeToDraw} /></div> }
