@@ -1024,6 +1024,7 @@ class App extends Component {
                       handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
                       handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
                       hideOtherSettings={this.state.hideOtherSettings}
+                      metWords={this.state.metWords}
                       repetitionsRemaining={this.state.repetitionsRemaining}
                       revisionMaterial={this.state.revisionMaterial}
                       revisionMode={this.state.revisionMode}
