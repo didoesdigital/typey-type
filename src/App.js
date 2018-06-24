@@ -1095,14 +1095,15 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
   }
   else if ((userSettings.sortOrder === 'sortNew') || (userSettings.sortOrder === 'sortOld')) {
 
+    let spaceBefore = "";
+    let spaceAfter = "";
+    if (userSettings && userSettings.spacePlacement && userSettings.spacePlacement === "spaceBeforeOutput" ) { spaceBefore = " "; }
+    if (userSettings && userSettings.spacePlacement && userSettings.spacePlacement === "spaceAfterOutput" ) { spaceAfter = " "; }
+
     presentedMaterial.sort(function(a, b) {
-      if (!met[a.phrase]) {
-        return 0;
-      }
-      if (!met[b.phrase]) {
-        return 0;
-      }
-      return met[b.phrase] - met[a.phrase];
+      let seenA = met[spaceBefore + a.phrase + spaceAfter] || 0;
+      let seenB = met[spaceBefore + b.phrase + spaceAfter] || 0;
+      return seenB - seenA;
     });
 
     if (userSettings.sortOrder === 'sortNew') {
