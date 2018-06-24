@@ -1095,14 +1095,22 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
   }
   else if ((userSettings.sortOrder === 'sortNew') || (userSettings.sortOrder === 'sortOld')) {
 
+    let spaceBefore = "";
+    let spaceAfter = "";
+    if (userSettings && userSettings.spacePlacement && userSettings.spacePlacement === "spaceBeforeOutput" ) { spaceBefore = " "; }
+    if (userSettings && userSettings.spacePlacement && userSettings.spacePlacement === "spaceAfterOutput" ) { spaceAfter = " "; }
+
     presentedMaterial.sort(function(a, b) {
-      if (!met[a.phrase]) {
+      if (!met[spaceBefore + a.phrase + spaceAfter]) {
         return 0;
       }
-      if (!met[b.phrase]) {
+      // this method still has issues if 1 of a or b has is missing with this spacing setting
+      // resulting in an non-intuitive sort order because it messes up adjacent words that *do*
+      // match the spacing setting
+      if (!met[spaceBefore + b.phrase + spaceAfter]) {
         return 0;
       }
-      return met[b.phrase] - met[a.phrase];
+      return met[spaceBefore + b.phrase + spaceAfter] - met[spaceBefore + a.phrase + spaceAfter];
     });
 
     if (userSettings.sortOrder === 'sortNew') {
