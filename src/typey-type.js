@@ -1,6 +1,27 @@
 import Zipper from './zipper';
 import { isPeak } from './utils.js';
 
+function createWordListFromMetWords (metWords) {
+  let munged = sumUniqMetWords(metWords);
+  let metWordsEntries = Object.entries(munged).sort(function (a, b) {
+    return b[1] - a[1]
+  });
+  return metWordsEntries.map(entry => entry[0].trim());
+}
+
+function sumUniqMetWords (metWords) {
+  let mungedUniqWords = {};
+  for (const [metWord, timesSeen] of Object.entries(metWords)) {
+    let trimmedWord = metWord.trim();
+    if (mungedUniqWords[trimmedWord]) {
+      mungedUniqWords[trimmedWord] += timesSeen;
+    } else {
+      mungedUniqWords[trimmedWord] = timesSeen;
+    }
+  }
+  return mungedUniqWords;
+}
+
 function splitBriefsIntoStrokes (currentStroke) {
   return currentStroke.split(/[/ ]/);
 }
@@ -425,6 +446,7 @@ function fetchDictionaries() {
 }
 
 export {
+  createWordListFromMetWords,
   fetchLessonIndex,
   fetchDictionaries,
   generateDictionaryEntries,
@@ -432,6 +454,7 @@ export {
   loadPersonalPreferences,
   matchSplitText,
   mapBriefToKeys,
+  sumUniqMetWords,
   parseCustomMaterial,
   parseLesson,
   parseWordList,

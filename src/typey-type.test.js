@@ -1,16 +1,43 @@
 import {
+  createWordListFromMetWords,
   parseCustomMaterial,
   matchSplitText,
   loadPersonalPreferences,
   processDictionary,
   strokeAccuracy,
   splitBriefsIntoStrokes,
+  sumUniqMetWords,
   swapKeyValueInDictionary,
   writePersonalPreferences,
   mapBriefToKeys,
   repetitionsRemaining
 } from './typey-type';
 import Zipper from './zipper';
+
+describe('sum uniq met words', () => {
+  it('returns met words without duplicate entries with different spacing', () => {
+    let metWords = {"the": 1, " the": 3, "the ": 2, "steno": 1};
+    expect(sumUniqMetWords(metWords)).toEqual(
+      {"the": 6, "steno": 1}
+    );
+  });
+});
+
+describe('create sorted word list from met words', () => {
+  it('returns sorted word list', () => {
+    let metWords = {"the": 1, "machine": 3, "test": 2, "steno": 3};
+    expect(createWordListFromMetWords(metWords)).toEqual(
+      ["machine", "steno", "test", "the"]
+    );
+  });
+
+  it('returns empty word list for empty metWords', () => {
+    let metWords = {};
+    expect(createWordListFromMetWords(metWords)).toEqual(
+      []
+    );
+  });
+});
 
 describe('split briefs into strokes', () => {
   it('returns single stroke as array of that stroke', () => {

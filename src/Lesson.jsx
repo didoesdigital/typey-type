@@ -186,6 +186,7 @@ class Lesson extends Component {
           <DocumentTitle title='Typey type | Create a custom lesson'>
             <CustomLessonSetup
               createCustomLesson={this.props.createCustomLesson}
+              metWords={this.props.metWords}
             />
           </DocumentTitle>
         )

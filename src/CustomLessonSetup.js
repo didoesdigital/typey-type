@@ -3,6 +3,7 @@ import GoogleAnalytics from 'react-ga';
 import './App.css';
 import Clipboard from 'clipboard';
 import {
+  createWordListFromMetWords,
   fetchDictionaries,
   parseWordList,
   processDictionary,
@@ -16,7 +17,8 @@ class CustomLessonSetup extends Component {
     this.state = {
       dictionary: [],
       sourceWordsAndStrokes: {"the": "-T"},
-      processedSourceWordsAndStrokes: {"the": "-T"}
+      processedSourceWordsAndStrokes: {"the": "-T"},
+      customWordList: ''
     }
   }
 
@@ -35,21 +37,31 @@ class CustomLessonSetup extends Component {
     });
   }
 
-  handleWordsForDictionaryEntries(event) {
-    if (event && event.target && event.target.value && event.target.value.length > 0) {
-      let result = parseWordList(event.target.value);
-      if (result && result.length > 0) {
-        let dictionary = generateDictionaryEntries(result, this.state.processedSourceWordsAndStrokes);
-        if (dictionary && dictionary.length > 0) {
-          this.setState({
-            dictionary: dictionary
-          });
-        }
+  handleWordsForDictionaryEntries(value) {
+    let result = parseWordList(value);
+    if (result && result.length > 0) {
+      let dictionary = generateDictionaryEntries(result, this.state.processedSourceWordsAndStrokes);
+      if (dictionary && dictionary.length > 0) {
+        this.setState({
+          dictionary: dictionary,
+          customWordList: value
+        });
       }
+    }
+  }
+
+  handleWordListTextAreaChange(event) {
+    if (event && event.target && event.target.value) {
+      this.handleWordsForDictionaryEntries(event.target.value);
     }
     return event;
   }
 
+  addWordListToTextArea() {
+    let myWords = createWordListFromMetWords(this.props.metWords).join("\n");
+    this.handleWordsForDictionaryEntries(myWords);
+    this.setState({customWordList: myWords});
+  }
 
   render() {
 
@@ -136,7 +148,8 @@ excluded
 plover"
                 rows="8"
                 wrap="off"
-                onChange={this.handleWordsForDictionaryEntries.bind(this)}
+                onChange={this.handleWordListTextAreaChange.bind(this)}
+                value={this.state.customWordList}
                 >
               </textarea>
             </div>
@@ -147,7 +160,11 @@ plover"
               </button>
             </div>
           </div>
-
+          <p>Create a word list using words you’ve seen:<br />
+            <button className="link-button" onClick={this.addWordListToTextArea.bind(this)}>
+              Use my words
+            </button>
+          </p>
         </div>
       </main>
     )
