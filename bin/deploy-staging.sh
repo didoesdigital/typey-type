@@ -4,29 +4,17 @@ set -e
 
 yarn run test
 
-read -q "?Build steno drills? (y/n) "
+echo "cd ~/projects/plover-tools/typey-type-lesson-generator && bat --paging never README.md"
+read -q "?Have you built steno drills, fundamentals, and dictionary? (y/n) "
 if [[ $REPLY =~ ^[Yy]$ ]];
   then
-    cd /Users/di/projects/plover-tools/typey-type-lesson-generator
-    ruby ./generate-all-drills-files.rb drills wordlist && ruby ./generate-all-drills-files.rb drills dictionary && ruby ./generate-all-drills-files.rb drills lesson
-    cd -
-    echo "Remember to copy those files and update lesson index word counts!"
+    echo "Great!"
   else
-    echo "... No lessons for you!"
+    echo "... No build for you!"
+    exit 1
 fi
 
-read -q "?Build steno fundamentals? (y/n) "
-if [[ $REPLY =~ ^[Yy]$ ]];
-  then
-    cd /Users/di/projects/plover-tools/typey-type-lesson-generator
-    ruby ./generate-all-drills-files.rb fundamentals wordlist && ruby ./generate-all-drills-files.rb fundamentals dictionary && ruby ./generate-all-drills-files.rb fundamentals lesson
-    cd -
-    echo "Remember to copy those files and update lesson index word counts!"
-  else
-    echo "... No lessons for you!"
-fi
-
-ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-typey-type-for-standard-dict-set.rb
+# ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-typey-type-for-standard-dict-set.rb
 
 yarn run build
 # git tag -n
