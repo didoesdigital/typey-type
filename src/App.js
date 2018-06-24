@@ -1101,16 +1101,9 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
     if (userSettings && userSettings.spacePlacement && userSettings.spacePlacement === "spaceAfterOutput" ) { spaceAfter = " "; }
 
     presentedMaterial.sort(function(a, b) {
-      if (!met[spaceBefore + a.phrase + spaceAfter]) {
-        return 0;
-      }
-      // this method still has issues if 1 of a or b has is missing with this spacing setting
-      // resulting in an non-intuitive sort order because it messes up adjacent words that *do*
-      // match the spacing setting
-      if (!met[spaceBefore + b.phrase + spaceAfter]) {
-        return 0;
-      }
-      return met[spaceBefore + b.phrase + spaceAfter] - met[spaceBefore + a.phrase + spaceAfter];
+      let seenA = met[spaceBefore + a.phrase + spaceAfter] || 0;
+      let seenB = met[spaceBefore + b.phrase + spaceAfter] || 0;
+      return seenB - seenA;
     });
 
     if (userSettings.sortOrder === 'sortNew') {
