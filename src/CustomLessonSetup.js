@@ -104,6 +104,7 @@ class CustomLessonSetup extends Component {
               <label htmlFor="your-material">Paste your material here:</label>
               <textarea
                 id="your-material"
+                aria-describedby="custom-material-format"
                 className="input-textarea mw100 w-100 h-192 overflow-scroll"
                 autoComplete="off"
                 autoCorrect="off"
@@ -123,7 +124,7 @@ examples.	KP-PLS TP-PL"
                 <h2>Share your lessons</h2>
                 <p className="mb0">To help Typey type grow even faster, be sure to add your lessons to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community's lessons <small>(opens in new tab)</small></a>.</p>
                 <h3>Custom material format</h3>
-                <ul className="text-small ml1 mt0 mb0">
+                <ul id="custom-material-format" className="text-small ml1 mt0 mb0">
                   <li>Each word must be on its own line.</li>
                   <li>Each word must be separated from its stroke by a "Tab" character.</li>
                   <li>If you skip strokes, multi-stroke words may count as misstrokes.</li>
