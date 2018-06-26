@@ -29,10 +29,15 @@ class Lesson extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.location.pathname.startsWith('/lessons/custom') && this.props.lesson.title !== "Custom") {
       this.props.setCustomLesson();
-    } else if(this.isFlashcards()) {
+    } else if (this.isFlashcards()) {
       // do nothing
     } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
+    }
+    if (this.props.location.pathname.startsWith('/lessons/custom') && (prevProps.totalWordCount === 0 || prevProps.currentPhrase === "")) {
+      if (this.mainHeading) {
+        this.mainHeading.focus();
+      }
     }
   }
 
