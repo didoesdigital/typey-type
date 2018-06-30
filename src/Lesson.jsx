@@ -130,7 +130,7 @@ class Lesson extends Component {
     if (shouldShowStroke(this.props.showStrokesInLesson, this.props.userSettings.showStrokes, this.props.repetitionsRemaining, this.props.userSettings.hideStrokesOnLastRepetition)) {
       if (this.props.currentStroke) {
         let strokes = splitBriefsIntoStrokes(this.props.currentStroke);
-        strokeTip =
+        strokeTip = (
           <div className="stroke-tip" aria-live="polite">
             <span className="visually-hidden">Hint: </span>
             <div className="flex overflow-auto">
@@ -140,18 +140,22 @@ class Lesson extends Component {
                 </React.Fragment>
               )}
             </div>
-            <div className="db">
-              <pre className="overflow-auto mw-408 text-small">
-                <span className="steno-stroke">
-                  {this.props.currentStroke.split('').map((item, i) =>
-                    <kbd className="raw-steno-key text-small" key={i}>
-                      {item}
-                    </kbd>
-                  )}
-                </span>
-              </pre>
-            </div>
-          </div>;
+            {!this.props.userSettings.showStrokesAsDiagrams ?
+              <div className="db">
+                <pre className="overflow-auto mw-408 text-small">
+                  <span className="steno-stroke">
+                    {this.props.currentStroke.split('').map((item, i) =>
+                      <kbd className="raw-steno-key text-small" key={i}>
+                        {item}
+                      </kbd>
+                    )}
+                  </span>
+                </pre>
+              </div>
+              : undefined
+            }
+          </div>
+        );
       }
     } else {
       strokeTip = <div className="stroke-tip">
@@ -218,6 +222,7 @@ class Lesson extends Component {
                 actualText={this.props.actualText}
                 changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
                 changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+                changeShowStrokesAs={this.props.changeShowStrokesAs}
                 changeUserSetting={this.props.changeUserSetting}
                 chooseStudy={this.props.chooseStudy}
                 currentLessonStrokes={this.props.currentLessonStrokes}
@@ -277,15 +282,16 @@ class Lesson extends Component {
                 </div>
                 <div className="lesson-wrapper mw-1024 p3">
                   <UserSettings
-                    changeUserSetting={this.props.changeUserSetting}
                     changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
                     changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+                    changeShowStrokesAs={this.props.changeShowStrokesAs}
+                    changeUserSetting={this.props.changeUserSetting}
                     chooseStudy={this.props.chooseStudy}
                     disableUserSettings={this.props.disableUserSettings}
-                    setAnnouncementMessage={this.props.setAnnouncementMessage}
                     handleLimitWordsChange={this.props.handleLimitWordsChange}
                     handleRepetitionsChange={this.props.handleRepetitionsChange}
                     hideOtherSettings={this.props.hideOtherSettings}
+                    setAnnouncementMessage={this.props.setAnnouncementMessage}
                     toggleHideOtherSettings={this.props.toggleHideOtherSettings}
                     totalWordCount={this.props.totalWordCount}
                     userSettings={this.props.userSettings}

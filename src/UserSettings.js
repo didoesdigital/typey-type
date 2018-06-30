@@ -175,6 +175,41 @@ class UserSettings extends Component {
                   </Tooltip>
                 </label>
               </div>
+
+              <fieldset>
+                <legend className="mb1">Show briefs as:</legend>
+                <div className="mb2">
+                  <div className="radio-group">
+                    <label className="radio-label">
+                      <input
+                        className="radio-input"
+                        type="radio"
+                        name="showStrokesAs"
+                        id="strokesAsDiagrams"
+                        value="showStrokesAsDiagrams"
+                        checked={this.props.userSettings.showStrokesAsDiagrams}
+                        onChange={this.props.changeShowStrokesAs}
+                        />
+                      Diagrams
+                    </label>
+                  </div>
+                  <div className="radio-group">
+                    <label className="radio-label">
+                      <input
+                        className="radio-input"
+                        type="radio"
+                        name="showStrokesAs"
+                        id="strokesAsText"
+                        value="strokesAsText"
+                        checked={!this.props.userSettings.showStrokesAsDiagrams}
+                        onChange={this.props.changeShowStrokesAs}
+                        />
+                      Text
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+
               <div className="checkbox-group">
                 <label className="checkbox-label">
                   <input

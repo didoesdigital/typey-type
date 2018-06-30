@@ -224,6 +224,7 @@ class Finished extends Component {
             changeUserSetting={this.props.changeUserSetting}
             changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
             changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+            changeShowStrokesAs={this.props.changeShowStrokesAs}
             chooseStudy={this.props.chooseStudy}
             disableUserSettings={this.props.disableUserSettings}
             handleLimitWordsChange={this.props.handleLimitWordsChange}

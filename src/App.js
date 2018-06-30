@@ -491,6 +491,24 @@ class App extends Component {
     return value;
   }
 
+  changeShowStrokesAs(event) {
+    let newState = Object.assign({}, this.state.userSettings);
+
+    const name = 'showStrokesAsDiagrams'
+    const value = event.target.value;
+
+    if (value === 'strokesAsText') {
+      newState[name] = false;
+    } else {
+      newState[name] = true;
+    }
+
+    this.setState({userSettings: newState}, () => {
+      writePersonalPreferences('userSettings', this.state.userSettings);
+    });
+    return value;
+  }
+
   chooseStudy(event) {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
@@ -1012,6 +1030,7 @@ class App extends Component {
                       changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
                       changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
                       changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
+                      changeShowStrokesAs={this.changeShowStrokesAs.bind(this)}
                       changeUserSetting={this.changeUserSetting.bind(this)}
                       chooseStudy={this.chooseStudy.bind(this)}
                       completedPhrases={completedMaterial}
