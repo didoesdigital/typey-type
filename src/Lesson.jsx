@@ -280,23 +280,20 @@ class Lesson extends Component {
                 <div role="complementary" className="mx-auto mw-1024">
                   {customMessage}
                 </div>
-                <div className="lesson-wrapper mw-1024 p3">
-                  <UserSettings
-                    changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
-                    changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
-                    changeShowStrokesAs={this.props.changeShowStrokesAs}
-                    changeUserSetting={this.props.changeUserSetting}
-                    chooseStudy={this.props.chooseStudy}
-                    disableUserSettings={this.props.disableUserSettings}
-                    handleLimitWordsChange={this.props.handleLimitWordsChange}
-                    handleRepetitionsChange={this.props.handleRepetitionsChange}
-                    hideOtherSettings={this.props.hideOtherSettings}
-                    setAnnouncementMessage={this.props.setAnnouncementMessage}
-                    toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-                    totalWordCount={this.props.totalWordCount}
-                    userSettings={this.props.userSettings}
-                  />
-                  <div role="article" className="lesson-canvas panel mw-568 p2 fill-fade-parent">
+                <div className="mx-auto mw-1024 p3">
+                  <div className="scores panel p2 mb3">
+                    <Scores
+                      setAnnouncementMessage={this.props.setAnnouncementMessage}
+                      timer={this.props.timer}
+                      totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
+                      totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+                      totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
+                      totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
+                      totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
+                      totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
+                    />
+                  </div>
+                  <div role="article" className="lesson-canvas panel mw-1024 p2 fill-fade-parent mb3">
                     {revisionModeButton}
                     <span className="fill-fade-edges"></span>
                     <div className="mx-auto mw100 mt11 text-center">
@@ -324,18 +321,21 @@ class Lesson extends Component {
                   <div className="visually-hidden">
                     {strokeTip}
                   </div>
-                  <div className="scores panel p2">
-                    <Scores
-                      setAnnouncementMessage={this.props.setAnnouncementMessage}
-                      timer={this.props.timer}
-                      totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-                      totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-                      totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-                      totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-                      totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-                      totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-                    />
-                  </div>
+                  <UserSettings
+                    changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
+                    changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+                    changeShowStrokesAs={this.props.changeShowStrokesAs}
+                    changeUserSetting={this.props.changeUserSetting}
+                    chooseStudy={this.props.chooseStudy}
+                    disableUserSettings={this.props.disableUserSettings}
+                    handleLimitWordsChange={this.props.handleLimitWordsChange}
+                    handleRepetitionsChange={this.props.handleRepetitionsChange}
+                    hideOtherSettings={this.props.hideOtherSettings}
+                    setAnnouncementMessage={this.props.setAnnouncementMessage}
+                    toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+                    totalWordCount={this.props.totalWordCount}
+                    userSettings={this.props.userSettings}
+                  />
                 </div>
                 <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
               </div>

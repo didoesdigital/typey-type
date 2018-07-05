@@ -23,73 +23,75 @@ class UserSettings extends Component {
     return (
       <div className="user-settings panel p2">
         <form>
-          <h5 className="mb1">Settings</h5>
+          <h5 className="mb1 visually-hidden">Settings</h5>
           <div className="text-small">
-            <fieldset>
-              <legend className="mb1">Choose study type:</legend>
-              <div className="mb2">
-                <div className="radio-group">
-                  <label className="radio-label">
-                    <input
-                      className="radio-input"
-                      type="radio"
-                      name="study"
-                      id="discover"
-                      value="discover"
-                      disabled={this.props.disableUserSettings}
-                      checked={this.props.userSettings.study==="discover"}
-                      onChange={this.props.chooseStudy}
+            <div className="flex mw-1024 mx-auto justify-center">
+              <fieldset className="dc">
+                <legend className="flex">Choose study type:</legend>
+                <div className="flex">
+                  <div className="radio-group ml3">
+                    <label className="radio-label">
+                      <input
+                        className="radio-input"
+                        type="radio"
+                        name="study"
+                        id="discover"
+                        value="discover"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.study==="discover"}
+                        onChange={this.props.chooseStudy}
                       />
-                    Discover
-                  </label>
-                </div>
-                <div className="radio-group">
-                  <label className="radio-label">
-                    <input
-                      className="radio-input"
-                      type="radio"
-                      name="study"
-                      id="revise"
-                      value="revise"
-                      disabled={this.props.disableUserSettings}
-                      checked={this.props.userSettings.study==="revise"}
-                      onChange={this.props.chooseStudy}
+                      Discover
+                    </label>
+                  </div>
+                  <div className="radio-group ml3">
+                    <label className="radio-label">
+                      <input
+                        className="radio-input"
+                        type="radio"
+                        name="study"
+                        id="revise"
+                        value="revise"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.study==="revise"}
+                        onChange={this.props.chooseStudy}
                       />
-                    Revise
-                  </label>
-                </div>
-                <div className="radio-group">
-                  <label className="radio-label">
-                    <input
-                      className="radio-input"
-                      type="radio"
-                      name="study"
-                      id="drill"
-                      value="drill"
-                      disabled={this.props.disableUserSettings}
-                      checked={this.props.userSettings.study==="drill"}
-                      onChange={this.props.chooseStudy}
+                      Revise
+                    </label>
+                  </div>
+                  <div className="radio-group ml3">
+                    <label className="radio-label">
+                      <input
+                        className="radio-input"
+                        type="radio"
+                        name="study"
+                        id="drill"
+                        value="drill"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.study==="drill"}
+                        onChange={this.props.chooseStudy}
                       />
-                    Drill
-                  </label>
-                </div>
-                <div className="radio-group">
-                  <label className="radio-label">
-                    <input
-                      className="radio-input"
-                      type="radio"
-                      name="study"
-                      id="practice"
-                      value="practice"
-                      disabled={this.props.disableUserSettings}
-                      checked={this.props.userSettings.study==="practice"}
-                      onChange={this.props.chooseStudy}
+                      Drill
+                    </label>
+                  </div>
+                  <div className="radio-group ml3">
+                    <label className="radio-label">
+                      <input
+                        className="radio-input"
+                        type="radio"
+                        name="study"
+                        id="practice"
+                        value="practice"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.study==="practice"}
+                        onChange={this.props.chooseStudy}
                       />
-                    Practice
-                  </label>
+                      Practice
+                    </label>
+                  </div>
                 </div>
-              </div>
-            </fieldset>
+              </fieldset>
+            </div>
 
             <h6 className={toggleClasses} onClick={this.props.toggleHideOtherSettings} onKeyPress={this.props.toggleHideOtherSettings} role="button" tabIndex="0" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">Your settings{this.props.hideOtherSettings}</h6>
             <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'hide' : ''} aria-hidden={this.props.hideOtherSettings}>

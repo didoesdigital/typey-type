@@ -219,7 +219,25 @@ class Finished extends Component {
         <div className="mx-auto mw-1024">
           {customMessage}
         </div>
-        <div className="lesson-wrapper mw-1024 p3">
+        <div className="mx-auto mw-1024 p3">
+          <div className="scores panel p2 mb3">
+            <Scores
+              setAnnouncementMessage={this.props.setAnnouncementMessage}
+              timer={this.props.timer}
+              totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
+              totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+              totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
+              totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
+              totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
+              totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
+            />
+          </div>
+          <div className="lesson-canvas panel p2 overflow-scroll mb3">
+            <div className={lessonEmpty ? 'dc' : ''}>
+              {emptyAndZeroStateMessage}
+              {lessonSummary}
+            </div>
+          </div>
           <UserSettings
             changeUserSetting={this.props.changeUserSetting}
             changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
@@ -235,24 +253,6 @@ class Finished extends Component {
             totalWordCount={this.props.totalWordCount}
             userSettings={this.props.userSettings}
           />
-          <div className="lesson-canvas panel p2 overflow-scroll">
-            <div className={lessonEmpty ? 'dc' : ''}>
-              {emptyAndZeroStateMessage}
-              {lessonSummary}
-            </div>
-          </div>
-          <div className="scores panel p2">
-            <Scores
-              setAnnouncementMessage={this.props.setAnnouncementMessage}
-              timer={this.props.timer}
-              totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-              totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-              totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-              totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-              totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-              totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-            />
-          </div>
         </div>
       </main>
     )

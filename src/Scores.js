@@ -49,64 +49,56 @@ class Scores extends Component {
   render() {
     return (
       <div>
-        <h5 className="mb1">Scores</h5>
-        <div className="timer">
-          <table className="timer-table text-small">
-            <tbody>
-              <tr>
-                <th>
-                  <Tooltip
-                    animation="shift"
-                    arrow="true"
-                    className="abbr"
-                    duration="200"
-                    tabIndex="0"
-                    tag="abbr"
-                    theme="didoesdigital"
-                    title="words per minute"
-                    trigger="mouseenter focus click"
-                    onShow={this.props.setAnnouncementMessage}
-                  >WPM</Tooltip>:</th>
-                <td className="text-right">{this.state.wordsPerMinute}</td>
-              </tr>
-              <tr>
-                <th>Time (seconds):</th>
-                <td className="text-right">{this.state.timeInSeconds}</td>
-              </tr>
-            </tbody>
-          </table>
+        <h5 className="mb1 visually-hidden">Scores</h5>
+        <div className="timer flex justify-around">
+          <div className="stat">
+            <div className="stat__number text-center">{this.state.wordsPerMinute}</div>
+            <div className="stat__label text-center">
+              <Tooltip
+                animation="shift"
+                arrow="true"
+                className="abbr"
+                duration="200"
+                tabIndex="0"
+                tag="abbr"
+                theme="didoesdigital"
+                title="words per minute"
+                trigger="mouseenter focus click"
+                onShow={this.props.setAnnouncementMessage}
+              >WPM</Tooltip>
+            </div>
+          </div>
+          <div className="stat">
+            <div className="stat__number text-center">{this.state.timeInSeconds}</div>
+            <div className="stat__label text-center">Time (seconds)</div>
+          </div>
 
-          <h6 className="mt1 mb1 de-emphasized text-uppercase subsection-header">Words typed</h6>
-          <table className="timer-table text-small">
-            <tbody>
-              <tr>
-                <th>New:</th>
-                <td className="text-right">{this.props.totalNumberOfNewWordsMet}</td>
-              </tr>
-              <tr>
-                <th>Seen before:</th>
-                <td className="text-right">{this.props.totalNumberOfLowExposuresSeen}</td>
-              </tr>
-              <tr>
-                <th>From memory:</th>
-                <td className="text-right">{this.props.totalNumberOfRetainedWords}</td>
-              </tr>
-              <tr>
-                <th>Misstroked:</th>
-                <td className="text-right">{this.props.totalNumberOfMistypedWords}</td>
-              </tr>
-              <tr>
-                <th>Hinted:</th>
-                <td className="text-right">{this.props.totalNumberOfHintedWords}</td>
-              </tr>
-              <tr>
-                <th className="hide">Word count:</th>
-                <td className="text-right hide">~{this.state.wordCount}</td>
-              </tr>
-            </tbody>
-          </table>
+          <h6 className="visually-hidden">Words typed</h6>
+          <div className="stat">
+            <div className="stat__number text-center">{this.props.totalNumberOfNewWordsMet}</div>
+            <div className="stat__label text-center">New</div>
+          </div>
+          <div className="stat">
+            <div className="stat__number text-center">{this.props.totalNumberOfLowExposuresSeen}</div>
+            <div className="stat__label text-center">Seen before</div>
+          </div>
+          <div className="stat">
+            <div className="stat__number text-center">{this.props.totalNumberOfRetainedWords}</div>
+            <div className="stat__label text-center">From memory</div>
+          </div>
+          <div className="stat">
+            <div className="stat__number text-center">{this.props.totalNumberOfMistypedWords}</div>
+            <div className="stat__label text-center">Misstroked</div>
+          </div>
+          <div className="stat">
+            <div className="stat__number text-center">{this.props.totalNumberOfHintedWords}</div>
+            <div className="stat__label text-center">Hinted</div>
+          </div>
+          <div className="stat visually-hidden">
+            <div className="stat__number text-center hide">~{this.state.wordCount}</div>
+            <div className="stat__label hide">Word count</div>
+          </div>
         </div>
-        <div><Link to="/progress" className="text-small" id="ga--scores--view-your-progress">View your progress</Link></div>
       </div>
     );
   }

@@ -504,23 +504,6 @@ input:focus::placeholder {
   }
 }
 
-.lesson-wrapper {
-  display: grid;
-  grid-gap: 24px;
-  justify-content: space-between;
-  margin: 0 auto;
-  @media (min-width: $breakpoint) {
-    .user-settings {
-      grid-column: 1;
-    }
-    .lesson-canvas {
-      grid-column: span 2;
-    }
-    .scores {
-      grid-column: 4;
-    }
-  }
-}
 .lesson-canvas {
   // align-items: center;
   display: flex;
@@ -546,18 +529,18 @@ input:focus::placeholder {
   // }
 // }
 
-.user-settings {
-  min-height: 320px;
-  width: 192px;
-}
-.scores {
-  max-height: 320px;
-  width: 192px;
-}
 .panel {
   background-color: add-tint($brand-primary, 97%);
   border: thin solid add-tint($brand-primary, 70%);
   border-radius: 4px;
+}
+
+.stat__number {
+  font-size: $h3-size;
+}
+
+.stat__label {
+  font-size: $h6-size;
 }
 
 @media (max-width: $breakpoint - 1) {

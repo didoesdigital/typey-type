@@ -597,19 +597,6 @@ input:focus::placeholder {
     line-height: 1.55;
     margin-bottom: 0; }
 
-.lesson-wrapper {
-  display: grid;
-  grid-gap: 24px;
-  justify-content: space-between;
-  margin: 0 auto; }
-  @media (min-width: 1024px) {
-    .lesson-wrapper .user-settings {
-      grid-column: 1; }
-    .lesson-wrapper .lesson-canvas {
-      grid-column: span 2; }
-    .lesson-wrapper .scores {
-      grid-column: 4; } }
-
 .lesson-canvas {
   display: flex;
   position: relative;
@@ -618,18 +605,16 @@ input:focus::placeholder {
     .lesson-canvas {
       min-width: 544px; } }
 
-.user-settings {
-  min-height: 320px;
-  width: 192px; }
-
-.scores {
-  max-height: 320px;
-  width: 192px; }
-
 .panel {
   background-color: #f9f8fa;
   border: thin solid #c6bdcb;
   border-radius: 4px; }
+
+.stat__number {
+  font-size: 25px; }
+
+.stat__label {
+  font-size: 12.8px; }
 
 @media (max-width: 1023px) {
   .lesson-canvas {
