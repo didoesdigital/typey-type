@@ -80,7 +80,6 @@ class Finished extends Component {
 
       misstrokesSummary = (
         <div>
-          <div className="divider mt2 mb2" />
           <h4 className="mt0 nowrap">Possible stroke improvements</h4>
           <p>
             <a href={this.props.path} onClick={this.props.reviseLesson} role="button">
@@ -159,43 +158,45 @@ class Finished extends Component {
     }
 
     let lessonSummary = (
-      <div className="finished-lesson mr1 mw-504 overflow-hidden">
-        <div className="finished-summary">
-          <h2
-            className="mb1"
-            ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }} tabIndex="-1" id="finished-heading">
-            Finished
-          </h2>
-          <h3 className="mt0 nowrap">{wpm}&nbsp;
-            <Tooltip
-              animation="shift"
-              arrow="true"
-              className="abbr"
-              duration="200"
-              tabIndex="0"
-              tag="abbr"
-              theme="didoesdigital"
-              title="words per minute"
-              trigger="mouseenter focus click"
-              onShow={this.props.setAnnouncementMessage}
-            >WPM</Tooltip>!{accuracy}</h3>
-          <h4 className="mt0 nowrap">{wpmCommentary}</h4>
-          <p>
-            <Link to={this.props.suggestedNext} className="link-button dib" style={{lineHeight: 2}} role="button">
-              Next lesson
-            </Link>
-            <a href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="ml1" role="button">
-              <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
-              Restart lesson</a>
-          </p>
+      <div className="finished-lesson mr1 mw-1024 overflow-hidden">
+        <div className="flex">
+          <div className="finished-summary">
+            <h2
+              className="mb1"
+              ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }} tabIndex="-1" id="finished-heading">
+              Finished
+            </h2>
+            <h3 className="mt0 nowrap">{wpm}&nbsp;
+              <Tooltip
+                animation="shift"
+                arrow="true"
+                className="abbr"
+                duration="200"
+                tabIndex="0"
+                tag="abbr"
+                theme="didoesdigital"
+                title="words per minute"
+                trigger="mouseenter focus click"
+                onShow={this.props.setAnnouncementMessage}
+              >WPM</Tooltip>!{accuracy}</h3>
+            <h4 className="mt0 nowrap">{wpmCommentary}</h4>
+            <p>
+              <Link to={this.props.suggestedNext} className="link-button dib" style={{lineHeight: 2}} role="button">
+                Next lesson
+              </Link>
+              <a href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="ml1" role="button">
+                <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
+                Restart lesson</a>
+            </p>
+          </div>
+          <div className="misstrokes-summary ml15">
+            {misstrokesSummary}
+            <p>
+              <a href={this.props.path} onClick={this.props.reviseLesson} role="button">
+                Revise these words</a>
+            </p>
+          </div>
         </div>
-        <div className="misstrokes-summary">
-          {misstrokesSummary}
-        </div>
-        <p>
-          <a href={this.props.path} onClick={this.props.reviseLesson} role="button">
-            Revise these words</a>
-        </p>
       </div>
     );
 
@@ -232,7 +233,7 @@ class Finished extends Component {
               totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
             />
           </div>
-          <div className="lesson-canvas panel p2 overflow-scroll mb3">
+          <div className="lesson-canvas panel p3 overflow-scroll mb3">
             <div className={lessonEmpty ? 'dc' : ''}>
               {emptyAndZeroStateMessage}
               {lessonSummary}

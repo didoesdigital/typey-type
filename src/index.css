@@ -346,6 +346,9 @@ input:focus::placeholder {
 .ml3 {
   margin-left: 24px; }
 
+.ml15 {
+  margin-left: 120px; }
+
 .mt0 {
   margin-top: 0; }
 
