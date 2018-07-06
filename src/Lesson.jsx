@@ -281,7 +281,7 @@ class Lesson extends Component {
                   {customMessage}
                 </div>
                 <div className="mx-auto mw-1024 p3">
-                  <div className="scores panel p2 mb3">
+                  <div className="scores mb3">
                     <Scores
                       setAnnouncementMessage={this.props.setAnnouncementMessage}
                       timer={this.props.timer}
@@ -296,7 +296,7 @@ class Lesson extends Component {
                   <div role="article" className="lesson-canvas panel mw-1024 p2 fill-fade-parent mb3">
                     {revisionModeButton}
                     <span className="fill-fade-edges"></span>
-                    <div className="mx-auto mw100 mt11 text-center">
+                    <div className="mx-auto mw100 mt10 text-center">
                       <Material
                         actualText={this.props.actualText}
                         currentPhrase={this.props.currentPhrase}

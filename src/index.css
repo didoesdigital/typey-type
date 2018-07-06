@@ -9,7 +9,7 @@ body {
   font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
   margin: 0 auto;
   color: #3f264e;
-  background-color: #fff; }
+  background-color: #f5f4f6; }
 
 h1 {
   font-size: 39.0625px;
@@ -361,8 +361,8 @@ input:focus::placeholder {
 .mt4 {
   margin-top: 32px; }
 
-.mt11 {
-  margin-top: 88px; }
+.mt10 {
+  margin-top: 80px; }
 
 .mx1 {
   margin-left: 8px;
@@ -600,13 +600,14 @@ input:focus::placeholder {
 .lesson-canvas {
   display: flex;
   position: relative;
-  max-height: 320px; }
+  max-height: 320px;
+  min-height: 320px; }
   @media (min-width: 1024px) {
     .lesson-canvas {
       min-width: 544px; } }
 
 .panel {
-  background-color: #f9f8fa;
+  background-color: #fff;
   border: thin solid #c6bdcb;
   border-radius: 4px; }
 
@@ -634,13 +635,13 @@ input:focus::placeholder {
 .completed-phrases {
   float: right;
   margin-bottom: -1.5em;
-  margin-right: calc(50% + 10em - 8px);
+  margin-right: calc(50% + 20em - 8px);
   text-align: right;
   transform: translateY(-2.075em);
   font-weight: normal; }
 
 .current-and-upcoming-phrases {
-  margin-left: calc(50% - 10em);
+  margin-left: calc(50% - 20em);
   margin-bottom: 0.5em;
   margin-top: 8px;
   text-align: left;
@@ -674,10 +675,10 @@ input:focus::placeholder {
   overflow: hidden; }
 
 .typed-text-input-textarea {
-  margin-left: calc(50% - 10em);
+  margin-left: calc(50% - 20em);
   text-decoration: underline;
   text-underline-position: under;
-  width: calc(2 * 10em); }
+  width: calc(2 * 20em); }
 
 .matched {
   background-color: #cbabdd; }
@@ -984,7 +985,7 @@ label {
 .stroke-tip {
   color: #596091;
   margin-bottom: 0.5em;
-  margin-left: calc(50% - 10.5em);
+  margin-left: calc(50% - 20.5em);
   padding-right: calc(50% - 9.5em);
   text-align: left;
   transform: translateX(10px);
@@ -1017,24 +1018,22 @@ label {
   background: #f5f4f6;
   border-top: 1px solid #c6bdcb;
   border-bottom: 1px solid #c6bdcb;
-  margin-left: -16px;
-  margin-right: -16px;
   padding-left: 16px;
   padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px; }
+  padding-top: 16px;
+  padding-bottom: 16px; }
 
 .subsection-header-toggle {
   cursor: pointer;
   border-color: #878bb2;
   background-image: linear-gradient(135deg, transparent 60%, #796585 50%), linear-gradient(45deg, #796585 50%, transparent 50%);
-  background-position: calc(100% - 16px) calc(1.25em - 2px), calc(100% - 11px) calc(1.25em - 2px);
+  background-position: calc(100% - 16px) calc(2em - 2px), calc(100% - 11px) calc(2em - 2px);
   background-size: 5px 5px, 5px 5px;
   background-repeat: no-repeat;
   color: #596091; }
   .subsection-header-toggle.collapsed {
     background-image: linear-gradient(45deg, transparent 50%, #796585 50%), linear-gradient(135deg, #796585 60%, transparent 50%);
-    background-position: calc(100% - 16px) calc(1.25em - 1px), calc(100% - 11px) calc(1.25em - 1px);
+    background-position: calc(100% - 16px) calc(2em - 1px), calc(100% - 11px) calc(2em - 1px);
     background-size: 5px 5px, 5px 5px;
     background-repeat: no-repeat; }
   .subsection-header-toggle:hover {

@@ -4,9 +4,6 @@ import {
   Tooltip,
 } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
-import {
-  Link
-} from 'react-router-dom';
 
 class Scores extends Component {
   constructor(props) {

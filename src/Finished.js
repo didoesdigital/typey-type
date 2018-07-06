@@ -203,7 +203,7 @@ class Finished extends Component {
     if (this.isEmpty()) {
       lessonEmpty = true;
       emptyAndZeroStateMessage = (
-        <div className="text-center mt11 mx-auto">There are no words to write.</div>
+        <div className="text-center mt10 mx-auto">There are no words to write.</div>
       );
       lessonSummary = '';
     } else {
@@ -220,7 +220,7 @@ class Finished extends Component {
           {customMessage}
         </div>
         <div className="mx-auto mw-1024 p3">
-          <div className="scores panel p2 mb3">
+          <div className="scores mb3">
             <Scores
               setAnnouncementMessage={this.props.setAnnouncementMessage}
               timer={this.props.timer}

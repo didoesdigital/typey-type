@@ -29,7 +29,7 @@ class Home extends Component {
             </div>
           </div>
           <div className="strapline text-vertical p0 m0 lh-single">Typey type for stenographers</div>
-          <div className="bg-white landing-page-section">
+          <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
                 <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-lg" alt='Demo of Typey Type for stenographers in action' /></Link></div>
@@ -56,7 +56,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-info landing-page-section">
+          <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3>Steno students</h3>
@@ -65,7 +65,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-white landing-page-section">
+          <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
                 <h3 className="overline">Discover</h3>
@@ -74,7 +74,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-info landing-page-section">
+          <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3 className="overline">Revise</h3>
@@ -83,7 +83,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-white landing-page-section">
+          <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
                 <h3 className="overline">Drill</h3>
@@ -92,7 +92,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-info landing-page-section">
+          <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3 className="overline">Practice</h3>
@@ -101,7 +101,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-white landing-page-section">
+          <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
                 <h3>Track your progress</h3>
@@ -110,7 +110,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-info landing-page-section">
+          <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3 className="tiny-rule--adjacent">Custom material</h3>
@@ -119,7 +119,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-white landing-page-section">
+          <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
                 <h3>Want to get involved?</h3>
@@ -128,7 +128,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-info landing-page-section">
+          <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="text-center">
                 <h3 id="steno-news">Keep up with news</h3>
@@ -163,7 +163,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-white">
+          <div className="bg-info">
             <div className="p3 mx-auto mw-1024">
               <span aria-hidden="true">&nbsp;</span>
             </div>

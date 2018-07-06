@@ -31,7 +31,7 @@ body {
   font: $type;
   margin: 0 auto;
   color: desaturate($brand-primary, 5%);
-  background-color: #fff;
+  background-color: add-tint($brand-primary, 95%);
 }
 h1 {
   font-size: $h1-size;
@@ -330,7 +330,9 @@ input:focus::placeholder {
 .mt3     { margin-top: 24px; }
 .mt4     { margin-top: 32px; }
 // .mt6     { margin-top: 48px; }
-.mt11     { margin-top: 88px; }
+// .mt8     { margin-top: 64px; }
+.mt10    { margin-top: 80px; }
+// .mt11    { margin-top: 88px; }
 .mx1     { margin-left: 8px; margin-right: 8px; }
 
 .mxn1    { margin-left: -8px; margin-right: -8px; }
@@ -509,6 +511,7 @@ input:focus::placeholder {
   display: flex;
   position: relative;
   max-height: 320px;
+  min-height: 320px;
   // overflow: hidden;
 
   @media (min-width: $breakpoint) {
@@ -530,7 +533,7 @@ input:focus::placeholder {
 // }
 
 .panel {
-  background-color: add-tint($brand-primary, 97%);
+  background-color: #fff;
   border: thin solid add-tint($brand-primary, 70%);
   border-radius: 4px;
 }
@@ -566,7 +569,7 @@ input:focus::placeholder {
 .material-pre {
 }
 
-$left-offset-for-zipper: 10em;
+$left-offset-for-zipper: 20em;
 $textarea-border: 2px;
 $textarea-padding-y: 4px;
 $textarea-padding-x: 8px;
@@ -1022,12 +1025,10 @@ label {
   background: add-tint($brand-primary, 95%);
   border-top: 1px solid add-tint($brand-primary, 70%);
   border-bottom: 1px solid add-tint($brand-primary, 70%);
-  margin-left: -16px;
-  margin-right: -16px;
   padding-left: 16px;
   padding-right: 16px;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 .subsection-header-toggle {
   cursor: pointer;
@@ -1036,8 +1037,8 @@ label {
     linear-gradient(135deg, transparent 60%, add-tint($brand-primary, 30%) 50%),
     linear-gradient(45deg, add-tint($brand-primary, 30%) 50%, transparent 50%);
   background-position:
-    calc(100% - 16px) calc(1.25em - 2px),
-    calc(100% - 11px) calc(1.25em - 2px);
+    calc(100% - 16px) calc(2em - 2px),
+    calc(100% - 11px) calc(2em - 2px);
   background-size:
     5px 5px,
     5px 5px;
@@ -1047,8 +1048,8 @@ label {
       linear-gradient(45deg, transparent 50%, add-tint($brand-primary, 30%) 50%),
       linear-gradient(135deg, add-tint($brand-primary, 30%) 60%, transparent 50%);
     background-position:
-      calc(100% - 16px) calc(1.25em - 1px),
-      calc(100% - 11px) calc(1.25em - 1px);
+      calc(100% - 16px) calc(2em - 1px),
+      calc(100% - 11px) calc(2em - 1px);
     background-size:
       5px 5px,
       5px 5px;
