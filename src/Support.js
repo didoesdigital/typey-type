@@ -29,7 +29,7 @@ class Support extends Component {
         </div>
         <div className="p3 mx-auto mw-1024">
           <div className="mw-568">
-            <p>Typey&nbsp;type is a typing app designed specifically to help <a href="#about-stenography">stenography</a> students learn{" "}
+            <p className="mt3">Typey&nbsp;type is a typing app designed specifically to help <a href="#about-stenography">stenography</a> students learn{" "}
               <Tooltip
                 animation="shift"
                 arrow="true"
