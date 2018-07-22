@@ -990,7 +990,7 @@ label {
 .stroke-tip {
   color: #596091;
   margin-bottom: 0.5em;
-  margin-left: calc(50% - 20.5em);
+  margin-left: calc(50% - 20.55em);
   padding-right: calc(50% - 9.5em);
   text-align: left;
   transform: translateX(10px);

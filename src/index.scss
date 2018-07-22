@@ -1001,7 +1001,7 @@ label {
   }
 
   margin-bottom: 0.5em;
-  margin-left: calc(50% - #{$left-offset-for-zipper + 0.5em});
+  margin-left: calc(50% - #{$left-offset-for-zipper + 0.55em});
   padding-right: calc(50% - 9.5em); // avoid fill-fade edge
   text-align: left;
   transform: translateX(2px + 8px);
