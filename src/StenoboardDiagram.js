@@ -47,30 +47,30 @@ class StenoboardDiagram extends Component {
     let leftSUpperOnColor = '#7109AA';
     let numberBarOnColor = '#7109AA';
 
-    let rightZOffColor = '#f2ddfd';
-    let rightDOffColor = '#f2ddfd';
-    let rightSOffColor = '#f2ddfd';
-    let rightTOffColor = '#f2ddfd';
-    let rightGOffColor = '#f2ddfd';
-    let rightLOffColor = '#f2ddfd';
-    let rightBOffColor = '#f2ddfd';
-    let rightPOffColor = '#f2ddfd';
-    let rightROffColor = '#f2ddfd';
-    let rightFOffColor = '#f2ddfd';
-    let rightUOffColor = '#f2ddfd';
-    let rightEOffColor = '#f2ddfd';
-    let starOffColor = '#f2ddfd';
-    let leftOOffColor = '#f2ddfd';
-    let leftAOffColor = '#f2ddfd';
-    let leftROffColor = '#f2ddfd';
-    let leftHOffColor = '#f2ddfd';
-    let leftWOffColor = '#f2ddfd';
-    let leftPOffColor = '#f2ddfd';
-    let leftKOffColor = '#f2ddfd';
-    let leftTOffColor = '#f2ddfd';
-    let leftSLowerOffColor = '#f2ddfd';
-    let leftSUpperOffColor = '#f2ddfd';
-    let numberBarOffColor = '#f2ddfd';
+    let rightZOffColor = '#e9d9f2';
+    let rightDOffColor = '#e9d9f2';
+    let rightSOffColor = '#e9d9f2';
+    let rightTOffColor = '#e9d9f2';
+    let rightGOffColor = '#e9d9f2';
+    let rightLOffColor = '#e9d9f2';
+    let rightBOffColor = '#e9d9f2';
+    let rightPOffColor = '#e9d9f2';
+    let rightROffColor = '#e9d9f2';
+    let rightFOffColor = '#e9d9f2';
+    let rightUOffColor = '#e9d9f2';
+    let rightEOffColor = '#e9d9f2';
+    let starOffColor = '#e9d9f2';
+    let leftOOffColor = '#e9d9f2';
+    let leftAOffColor = '#e9d9f2';
+    let leftROffColor = '#e9d9f2';
+    let leftHOffColor = '#e9d9f2';
+    let leftWOffColor = '#e9d9f2';
+    let leftPOffColor = '#e9d9f2';
+    let leftKOffColor = '#e9d9f2';
+    let leftTOffColor = '#e9d9f2';
+    let leftSLowerOffColor = '#e9d9f2';
+    let leftSUpperOffColor = '#e9d9f2';
+    let numberBarOffColor = '#e9d9f2';
 
     return (
       <svg viewBox="0 0 215 101" width="140" xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
