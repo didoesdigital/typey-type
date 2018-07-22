@@ -48,7 +48,7 @@ class Header extends Component {
                   onChange={this.props.onChange}
                   onSelect={this.props.onSelect}
                   renderInput={function(props) {
-                    return <input {...props} className="inline-form-control" />
+                    return <input {...props} className="inline-form-control inline-form-control--with-right-icon" />
                   }}
                   renderItem={(item, highlighted) =>
                     <div

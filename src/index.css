@@ -815,6 +815,8 @@ label {
   .inline-form-control:active, .inline-form-control:focus {
     background-color: #ece9ee;
     color: #2e173b; }
+  .inline-form-control.inline-form-control--with-right-icon {
+    padding: 4px 40px 4px 8px; }
 
 .autocomplete-menu {
   background-color: #f9f8fa;

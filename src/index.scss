@@ -774,15 +774,22 @@ label {
   height: 40px;
   padding: 4px 8px;
   width: 100%;
+
   &:hover {
     background-color: add-tint($brand-primary, 15%);
   }
+
   &:active,
   &:focus {
     background-color: add-tint($brand-primary, 90%);
     color: saturate(add-shade($brand-primary, 30%), 5%);
   }
+
+  &.inline-form-control--with-right-icon {
+    padding: 4px 40px 4px 8px;
+  }
 }
+
 .autocomplete-menu {
   background-color: add-tint($brand-primary, 97%);
   border-radius: 4px;
