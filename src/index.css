@@ -328,6 +328,9 @@ input:focus::placeholder {
 .mb3 {
   margin-bottom: 24px; }
 
+.mr05 {
+  margin-right: 4px; }
+
 .mr1 {
   margin-right: 8px; }
 
@@ -633,7 +636,7 @@ input:focus::placeholder {
   margin-right: auto; }
   @media (min-width: 1024px) {
     .material {
-      min-width: 480px; } }
+      min-width: 936px; } }
 
 .completed-phrases {
   float: right;
@@ -974,7 +977,7 @@ label {
   border: 1px solid #402351; }
   @media (min-width: 1024px) {
     .typed-text {
-      min-width: 480px; } }
+      min-width: 936px; } }
 
 .input-text {
   margin-left: auto;
@@ -985,7 +988,7 @@ label {
   bottom: 0; }
   @media (min-width: 1024px) {
     .input-text {
-      min-width: 480px; } }
+      min-width: 936px; } }
 
 .stroke-tip {
   color: #596091;
@@ -1001,7 +1004,7 @@ label {
     color: #202549; }
   @media (min-width: 1024px) {
     .stroke-tip {
-      min-width: 480px; } }
+      min-width: 960px; } }
 
 .stroke-tip__label {
   text-decoration: underline; }
