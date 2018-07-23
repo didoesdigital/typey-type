@@ -380,7 +380,7 @@ class UserSettings extends Component {
 
                     <div className="clearfix mb2">
                       <label className="mb1 db">Sort</label>
-                      <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small">
+                      <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control">
                         <option value="sortOff">Lesson default</option>
                         <option value="sortRandom">Random</option>
                         <option value="sortNew">Newest words first</option>
