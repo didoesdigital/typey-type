@@ -328,55 +328,14 @@ class UserSettings extends Component {
                 </div>
 
                 <div>
-                  <fieldset>
-                    <div className="radio-button-group clearfix mb1 mt2">
-                      <legend className="mb1">Match spaces</legend>
-
-                      <input
-                        className="radio-button"
-                        type="radio"
-                        name="spacePlacement"
-                        id="spaceBeforeOutput"
-                        value="spaceBeforeOutput"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.spacePlacement==="spaceBeforeOutput"}
-                        onChange={this.props.changeSpacePlacementUserSetting}
-                      />
-                      <label htmlFor="spaceBeforeOutput" aria-hidden="true">" x"</label>
-                      <label htmlFor="spaceBeforeOutput" className="visually-hidden" aria-label="Space Before Output"></label>
-
-                      <input
-                        className="radio-button"
-                        type="radio"
-                        name="spacePlacement"
-                        id="spaceAfterOutput"
-                        value="spaceAfterOutput"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.spacePlacement==="spaceAfterOutput"}
-                        onChange={this.props.changeSpacePlacementUserSetting}
-                      />
-                      <label htmlFor="spaceAfterOutput" aria-hidden="true">"x "</label>
-                      <label htmlFor="spaceAfterOutput" className="visually-hidden" aria-label="Space After Output"></label>
-
-                      <label htmlFor="spaceOff" className="visually-hidden" aria-label="Ignore spaces"></label>
-                      {/*
-                        This label is in a different location to other hidden screen reader labels so that
-                        input+label works for styled buttons and :first-of-type/:last-of-type work for rounded
-                        button group corners.
-                        */}
-                        <input
-                          className="radio-button"
-                          type="radio"
-                          name="spacePlacement"
-                          id="spaceOff"
-                          value="spaceOff"
-                          disabled={this.props.disableUserSettings}
-                          checked={this.props.userSettings.spacePlacement==="spaceOff"}
-                          onChange={this.props.changeSpacePlacementUserSetting}
-                        />
-                        <label htmlFor="spaceOff" aria-hidden="true">Off</label>
-                      </div>
-                    </fieldset>
+                    <div className="clearfix mb2 mt2">
+                      <label className="mb1 db">Match spaces</label>
+                      <select name="spacePlacement" value={this.props.userSettings.spacePlacement} onChange={this.props.changeSpacePlacementUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control">
+                        <option value="spaceBeforeOutput">Space before output</option>
+                        <option value="spaceAfterOutput">Space after output</option>
+                        <option value="spaceOff">Ignore spaces</option>
+                      </select>
+                    </div>
 
                     <div className="clearfix mb2">
                       <label className="mb1 db">Sort</label>
