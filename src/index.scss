@@ -638,6 +638,19 @@ $textarea-padding-x: 8px;
   }
 }
 
+.progress-textarea {
+  background-color: add-tint($brand-primary, 95%);
+
+  &:hover {
+    background-color: add-tint($brand-primary, 97%);
+  }
+
+  &:active,
+  &:focus {
+    background-color: #fff;
+  }
+}
+
 .matched {
   background-color: saturate(add-tint($brand-primary, 70%), 30%);
 }

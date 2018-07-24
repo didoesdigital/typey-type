@@ -693,6 +693,13 @@ input:focus::placeholder {
       width: 240px;
       margin-left: 0; } }
 
+.progress-textarea {
+  background-color: #f5f4f6; }
+  .progress-textarea:hover {
+    background-color: #f9f8fa; }
+  .progress-textarea:active, .progress-textarea:focus {
+    background-color: #fff; }
+
 .matched {
   background-color: #cbabdd; }
 
