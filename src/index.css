@@ -164,6 +164,9 @@ small, .text-small {
 ::placeholder {
   color: #949494; }
 
+.inline-form-control::placeholder {
+  color: #796585; }
+
 textarea:focus::-webkit-input-placeholder,
 input:focus::-webkit-input-placeholder {
   color: transparent; }

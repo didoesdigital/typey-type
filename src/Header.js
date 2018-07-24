@@ -42,7 +42,7 @@ class Header extends Component {
                 <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
                 <Autocomplete
                   getItemValue={(item) => item.title}
-                  inputProps={{ id: 'lessons-autocomplete', spellCheck: 'false', autoCapitalize: "off", autoCorrect: "off" }}
+                  inputProps={{ id: 'lessons-autocomplete', spellCheck: 'false', autoCapitalize: "off", autoCorrect: "off", placeholder: "Search for a lesson" }}
                   items={this.props.items}
                   menuStyle={{ }}
                   onChange={this.props.onChange}

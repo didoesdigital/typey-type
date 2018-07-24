@@ -206,6 +206,10 @@ small, .text-small {
   color:    #949494;
 }
 
+.inline-form-control::placeholder {
+  color: add-tint($brand-primary, 30%);
+}
+
 // Hide placeholder text on focus
 // Reference: https://coderwall.com/p/7rc0fa/hide-placeholder-text-on-focus
 textarea:focus::-webkit-input-placeholder,
