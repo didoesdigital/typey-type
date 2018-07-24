@@ -162,7 +162,7 @@ class Finished extends Component {
         <div className="flex">
           <div className="finished-summary">
             <h2
-              className="mb1"
+              className="mb1 negative-outline-offset"
               ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }} tabIndex="-1" id="finished-heading">
               Finished
             </h2>

@@ -1377,3 +1377,6 @@ small .svg-icon-wrapper.svg-baseline svg {
     border-bottom: 5px solid transparent;
     border-left: 5px solid #fff;
     transform: translate(-8px, -5px); }
+
+.negative-outline-offset {
+  outline-offset: -4px; }
