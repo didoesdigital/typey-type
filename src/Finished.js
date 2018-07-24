@@ -79,14 +79,20 @@ class Finished extends Component {
       });
 
       misstrokesSummary = (
-        <div>
-          <h4 className="mt0 nowrap">Possible stroke improvements</h4>
+        <React.Fragment>
+          <div>
+            <h4 className="mt0 nowrap">Possible stroke improvements</h4>
+            <p>
+              <a href={this.props.path} onClick={this.props.reviseLesson} role="button">
+                Revise these words</a>
+            </p>
+            <ol className="mb0 unstyled-list">{listOfPossibleStrokeImprovements}</ol>
+          </div>
           <p>
             <a href={this.props.path} onClick={this.props.reviseLesson} role="button">
               Revise these words</a>
           </p>
-          <ol className="mb0 unstyled-list">{listOfPossibleStrokeImprovements}</ol>
-        </div>
+        </React.Fragment>
       );
     }
 
@@ -191,10 +197,6 @@ class Finished extends Component {
           </div>
           <div className="misstrokes-summary ml15">
             {misstrokesSummary}
-            <p>
-              <a href={this.props.path} onClick={this.props.reviseLesson} role="button">
-                Revise these words</a>
-            </p>
           </div>
         </div>
       </div>
