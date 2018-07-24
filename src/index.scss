@@ -591,6 +591,9 @@ $textarea-padding-x: 8px;
   text-align: left;
   width: 100%;
   transform: translateX(2px + 8px);
+  @media (max-width: 736px) {
+    margin-left: 0;
+  }
 
   &.blur {
     color: transparent;
@@ -629,6 +632,10 @@ $textarea-padding-x: 8px;
   text-decoration: underline;
   text-underline-position: under;
   width: calc(2 * #{$left-offset-for-zipper});
+  @media (max-width: 736px) {
+    width: 240px;
+    margin-left: 0;
+  }
 }
 
 .matched {
@@ -1009,6 +1016,9 @@ label {
   width: 100%;
   @media (min-width: $breakpoint) {
     min-width: 960px;
+  }
+  @media (max-width: 736px) {
+    margin-left: 0;
   }
 
 }

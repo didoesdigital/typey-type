@@ -47,7 +47,7 @@ class Scores extends Component {
     return (
       <div>
         <h5 className="mb1 visually-hidden">Scores</h5>
-        <div className="timer flex justify-around">
+        <div className="timer flex flex-wrap justify-around">
           <div className="stat">
             <div className="stat__number text-center">{this.state.wordsPerMinute}</div>
             <div className="stat__label text-center">

@@ -25,8 +25,8 @@ class UserSettings extends Component {
         <form>
           <h5 className="mb1 visually-hidden">Settings</h5>
           <div className="text-small">
-            <div className="flex mw-1024 mx-auto justify-center mb2">
-              <fieldset className="dc">
+            <div className="flex flex-wrap mw-1024 mx-auto justify-center mb2">
+              <fieldset className="dc hide-sm">
                 <legend className="flex">Choose study type:</legend>
                 <div className="flex">
                   <div className="radio-group ml3">
@@ -96,7 +96,7 @@ class UserSettings extends Component {
             <h6 className={toggleClasses} onClick={this.props.toggleHideOtherSettings} onKeyPress={this.props.toggleHideOtherSettings} role="button" tabIndex="0" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">Your settings{this.props.hideOtherSettings}</h6>
             <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'hide' : ''} aria-hidden={this.props.hideOtherSettings}>
 
-              <div className="flex justify-between">
+              <div className="flex flex-wrap justify-between">
                 <div>
                   <div className="checkbox-group mt2">
                     <label className="checkbox-label">

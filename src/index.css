@@ -653,6 +653,9 @@ input:focus::placeholder {
   text-align: left;
   width: 100%;
   transform: translateX(10px); }
+  @media (max-width: 736px) {
+    .current-and-upcoming-phrases {
+      margin-left: 0; } }
   .current-and-upcoming-phrases.blur {
     color: transparent;
     text-shadow: 0 0 8px rgba(63, 38, 78, 0.5);
@@ -685,6 +688,10 @@ input:focus::placeholder {
   text-decoration: underline;
   text-underline-position: under;
   width: calc(2 * 20em); }
+  @media (max-width: 736px) {
+    .typed-text-input-textarea {
+      width: 240px;
+      margin-left: 0; } }
 
 .matched {
   background-color: #cbabdd; }
@@ -944,6 +951,9 @@ label {
   @media (min-width: 1024px) {
     .stroke-tip {
       min-width: 960px; } }
+  @media (max-width: 736px) {
+    .stroke-tip {
+      margin-left: 0; } }
 
 .stroke-tip__label {
   text-decoration: underline; }
