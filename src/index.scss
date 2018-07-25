@@ -84,7 +84,7 @@ ol, ul, dd, dt {
 a {
   color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
   &:visited {
-    color: add-tint($brand-primary, 40%);
+    color: add-tint($brand-primary, 30%);
   }
   &:hover {
     color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
