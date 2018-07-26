@@ -195,7 +195,7 @@ class Finished extends Component {
                 Restart lesson</a>
             </p>
           </div>
-          <div className="misstrokes-summary ml15">
+          <div className="misstrokes-summary ml12">
             {misstrokesSummary}
           </div>
         </div>
