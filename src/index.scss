@@ -1016,6 +1016,15 @@ label {
   right: 0;
   bottom: 0;
 }
+
+.successfully-typed-text {
+  position: absolute;
+  left: 10%;
+  // left: 19%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .stroke-tip {
   color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
   &:hover {
@@ -1551,4 +1560,52 @@ $lineAdjustment: 4px;
 
 .negative-outline-offset {
   outline-offset: -4px;
+}
+
+
+
+
+
+.fade-appear {
+  opacity: 0.01;
+  transform: translateY(10px);
+  transition: opacity 5s linear .1s,
+            transform 5s linear .1s;
+}
+
+.fade-appear.fade-appear-active {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: opacity 5s linear .1s,
+            transform 5s linear .1s;
+}
+
+
+
+.fade-enter {
+  opacity: 0.01;
+  transform: translateY(10px);
+  transition: opacity 5s ease-in-out 0s;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: opacity 5s linear .1s,
+            transform 5s linear .1s;
+}
+
+
+
+.fade-exit {
+  opacity: 1;
+  transform: translateY(0px);
+  transition: opacity 1s ease-in-out 0s;
+}
+
+.fade-exit.fade-exit-active {
+  opacity: 0.01;
+  transform: translateY(-10px);
+  transition: opacity 1s linear .1s,
+            transform 1s linear .1s;
 }

@@ -57,6 +57,7 @@ class App extends Component {
       fullscreen: false,
       hideOtherSettings: true,
       nextLessonPath: '',
+      previousCompletedPhraseAsTyped: '',
       repetitionsRemaining: 1,
       startTime: null,
       showStrokesInLesson: false,
@@ -239,6 +240,7 @@ class App extends Component {
     this.setState({
       actualText: '',
       currentPhraseID: this.state.lesson.presentedMaterial.length,
+      previousCompletedPhraseAsTyped: '',
       currentPhraseAttempts: [],
       disableUserSettings: false,
       numberOfMatchedChars: 0,
@@ -634,6 +636,7 @@ class App extends Component {
       currentLessonStrokes: [],
       disableUserSettings: false,
       numberOfMatchedChars: 0,
+      previousCompletedPhraseAsTyped: '',
       repetitionsRemaining: reps,
       startTime: null,
       timer: null,
@@ -856,6 +859,7 @@ class App extends Component {
 
       newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
+      newState.previousCompletedPhraseAsTyped = actualText;
       newState.actualText = '';
       newState.showStrokesInLesson = false;
       newState.currentPhraseID = nextPhraseID;
@@ -1044,6 +1048,7 @@ class App extends Component {
                       handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
                       hideOtherSettings={this.state.hideOtherSettings}
                       metWords={this.state.metWords}
+                      previousCompletedPhraseAsTyped={this.state.previousCompletedPhraseAsTyped}
                       repetitionsRemaining={this.state.repetitionsRemaining}
                       revisionMaterial={this.state.revisionMaterial}
                       revisionMode={this.state.revisionMode}
