@@ -15,23 +15,37 @@ class TypedText extends Component {
   }
 
   render() {
-
-    let previousCompletedPhraseAsTypedKey;
-    if (this.props.completedPhrases) {
-      previousCompletedPhraseAsTypedKey = this.props.completedPhrases.length;
-    } else {
-      previousCompletedPhraseAsTypedKey = 0;
-    }
+    let previousCompletedPhraseAsTypedKey = this.props.completedPhrases ? this.props.completedPhrases.length : 0;
 
     return (
       <div className="typed-text-container">
         <label className="visually-hidden" htmlFor="your-typed-text">Write <div aria-live="polite">{this.props.currentPhrase}</div></label>
         <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
         <p className="input-text">
-          <textarea id="your-typed-text" className="input-textarea typed-text-input-textarea" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" rows="1"
-            wrap="off"
+          <TransitionGroup
+            className="previous-completed-phrase-as-typed-wrapper absolute absolute--fill w-100"
+            component={"span"}
+            key={previousCompletedPhraseAsTypedKey}
+          >
+            <CSSTransition
+              timeout={5000}
+              classNames='fade'
+              appear={true}
+            >
+              <kbd className="successfully-typed-text typed-text-input-positioning pre relative" aria-hidden="true">{this.props.previousCompletedPhraseAsTyped}</kbd>
+            </CSSTransition>
+          </TransitionGroup>
+          <textarea
+            autoCapitalize="off"
+            autoComplete="off"
+            autoCorrect="off"
+            className="input-textarea typed-text-input-positioning typed-text-input-textarea"
+            id="your-typed-text"
             onChange={this.props.updateMarkup}
+            rows="1"
+            spellCheck="false"
             value={this.props.actualText}
+            wrap="off"
             >
           </textarea>
         </p>

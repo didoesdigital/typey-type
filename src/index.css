@@ -689,15 +689,17 @@ input:focus::placeholder {
   padding: 4px 8px;
   overflow: hidden; }
 
-.typed-text-input-textarea {
+.typed-text-input-positioning {
   margin-left: calc(50% - 20em);
-  text-decoration: underline;
-  text-underline-position: under;
   width: calc(2 * 20em); }
   @media (max-width: 736px) {
-    .typed-text-input-textarea {
+    .typed-text-input-positioning {
       width: 240px;
       margin-left: 0; } }
+
+.typed-text-input-textarea {
+  text-decoration: underline;
+  text-underline-position: under; }
 
 .progress-textarea {
   background-color: #f5f4f6; }
@@ -949,11 +951,17 @@ label {
     .input-text {
       min-width: 936px; } }
 
+.previous-completed-phrase-as-typed-wrapper {
+  pointer-events: none; }
+
 .successfully-typed-text {
-  position: absolute;
-  left: 10%;
-  top: 50%;
-  transform: translate(-50%, -50%); }
+  text-align: left;
+  transform: translateY(0px);
+  padding: 4px 8px;
+  overflow: hidden;
+  text-align: left;
+  width: 640px;
+  display: block; }
 
 .stroke-tip {
   color: #596091;
@@ -1401,23 +1409,18 @@ small .svg-icon-wrapper.svg-baseline svg {
   outline-offset: -4px; }
 
 .fade-appear {
-  opacity: 0.01;
+  opacity: 1;
   transform: translateY(10px);
   transition: opacity 5s linear .1s, transform 5s linear .1s; }
 
 .fade-appear.fade-appear-active {
-  opacity: 1;
-  transform: translateY(0px);
+  opacity: 0.01;
+  transform: translateY(20px);
   transition: opacity 5s linear .1s, transform 5s linear .1s; }
 
-.fade-enter {
-  opacity: 0.01;
-  transform: translateY(10px);
-  transition: opacity 5s ease-in-out 0s; }
-
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transform: translateY(0px);
+.fade-enter-done {
+  opacity: 0.0;
+  transform: translateY(50px);
   transition: opacity 5s linear .1s, transform 5s linear .1s; }
 
 .fade-exit {
