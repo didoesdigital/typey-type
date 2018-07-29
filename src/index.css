@@ -1410,25 +1410,5 @@ small .svg-icon-wrapper.svg-baseline svg {
 
 .fade-appear {
   opacity: 1;
-  transform: translateY(10px);
-  transition: opacity 5s linear .1s, transform 5s linear .1s; }
-
-.fade-appear.fade-appear-active {
-  opacity: 0.01;
-  transform: translateY(20px);
-  transition: opacity 5s linear .1s, transform 5s linear .1s; }
-
-.fade-enter-done {
-  opacity: 0.0;
-  transform: translateY(50px);
-  transition: opacity 5s linear .1s, transform 5s linear .1s; }
-
-.fade-exit {
-  opacity: 1;
-  transform: translateY(0px);
-  transition: opacity 1s ease-in-out 0s; }
-
-.fade-exit.fade-exit-active {
-  opacity: 0.01;
-  transform: translateY(-10px);
-  transition: opacity 1s linear .1s, transform 1s linear .1s; }
+  transform: translateX(0px);
+  transition: opacity .2s ease-in, transform .2s ease-in; }
