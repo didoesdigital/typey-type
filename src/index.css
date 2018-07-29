@@ -681,13 +681,21 @@ input:focus::placeholder {
   overflow: hidden;
   white-space: nowrap; }
 
-.input-textarea {
+.input-textarea, .successfully-typed-text {
   border: 2px solid #8242a8;
   display: block;
   font-size: 1rem;
   line-height: 1.5;
   padding: 4px 8px;
   overflow: hidden; }
+
+.successfully-typed-text {
+  border: 2px solid transparent;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  transform: translateX(0);
+  width: 640px; }
 
 .typed-text-input-positioning {
   margin-left: calc(50% - 20em);
@@ -933,9 +941,9 @@ label {
 
 .typed-text {
   display: none;
+  border: 1px solid #402351;
   margin-left: auto;
-  margin-right: auto;
-  border: 1px solid #402351; }
+  margin-right: auto; }
   @media (min-width: 1024px) {
     .typed-text {
       min-width: 936px; } }
@@ -953,15 +961,6 @@ label {
 
 .previous-completed-phrase-as-typed-wrapper {
   pointer-events: none; }
-
-.successfully-typed-text {
-  display: block;
-  overflow: hidden;
-  padding: 4px 8px;
-  text-align: left;
-  text-align: left;
-  transform: translateX(0px);
-  width: 640px; }
 
 .stroke-tip {
   color: #596091;
@@ -1411,4 +1410,14 @@ small .svg-icon-wrapper.svg-baseline svg {
 .fade-appear {
   opacity: 1;
   transform: translateX(0px);
+  transition: opacity .2s ease-in, transform .2s ease-in; }
+
+.fade-appear.fade-appear-active {
+  opacity: 0.01;
+  transform: translateX(-40px);
+  transition: opacity .2s ease-in, transform .2s ease-in; }
+
+.fade-enter-done {
+  opacity: 0.0;
+  transform: translateX(-9999px);
   transition: opacity .2s ease-in, transform .2s ease-in; }

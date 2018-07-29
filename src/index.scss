@@ -627,13 +627,27 @@ $textarea-padding-x: 8px;
   white-space: nowrap;
 }
 
-.input-textarea {
+%input-textarea-styles {
   border: $textarea-border solid saturate(add-tint($brand-primary, 30%), 30%);
   display: block;
   font-size: 1rem;
   line-height: 1.5;
   padding: $textarea-padding-y $textarea-padding-x;
   overflow: hidden;
+}
+
+.input-textarea {
+  @extend %input-textarea-styles;
+}
+
+.successfully-typed-text {
+  @extend %input-textarea-styles;
+  border: $textarea-border solid transparent;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  transform: translateX(0);
+  width: 640px;
 }
 
 .typed-text-input-positioning {
@@ -1003,12 +1017,12 @@ label {
 }
 .typed-text {
   display: none;
+  border: 1px solid $brand-primary;
   margin-left: auto;
   margin-right: auto;
   @media (min-width: $breakpoint) {
     min-width: 936px;
   }
-  border: 1px solid $brand-primary;
 }
 .input-text {
   margin-left: auto;
@@ -1026,17 +1040,6 @@ label {
 
 .previous-completed-phrase-as-typed-wrapper {
   pointer-events: none;
-}
-
-.successfully-typed-text {
-  // position: absolute;
-  display: block;
-  overflow: hidden;
-  padding: 4px 8px;
-  text-align: left;
-  text-align: left;
-  transform: translateX(0px);
-  width: 640px;
 }
 
 .stroke-tip {
@@ -1587,19 +1590,19 @@ $lineAdjustment: 4px;
             transform .2s ease-in;
 }
 
-// .fade-appear.fade-appear-active {
-//   opacity: 0.01;
-//   transform: translateX(-40px);
-//   transition: opacity .2s ease-in,
-//             transform .2s ease-in;
-// }
+.fade-appear.fade-appear-active {
+  opacity: 0.01;
+  transform: translateX(-40px);
+  transition: opacity .2s ease-in,
+            transform .2s ease-in;
+}
 
-// .fade-enter-done {
-//   opacity: 0.0;
-//   transform: translateX(-9999px);
-//   transition: opacity .2s ease-in,
-//             transform .2s ease-in;
-// }
+.fade-enter-done {
+  opacity: 0.0;
+  transform: translateX(-9999px);
+  transition: opacity .2s ease-in,
+            transform .2s ease-in;
+}
 
 
 
