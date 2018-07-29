@@ -1587,24 +1587,23 @@ $lineAdjustment: 4px;
 
 
 .fade-appear {
+  color: desaturate($brand-primary, 5%);
+  filter: blur(0);
   opacity: 1;
-  transform: translateX(0px);
-  // transition: opacity .1s ease-in,
-  //           transform .1s ease-in;
 }
 
 .fade-appear.fade-appear-active {
+  color: saturate(add-tint($brand-success, 20%), 10%);
+  filter: blur(2rem);
   opacity: 0.01;
-  transform: translateX(-100px);
-  transition: opacity .2s ease-in,
-            transform .2s ease-in .1s;
+  transition: opacity .2s linear,
+              color   .1s linear,
+              filter   1s linear;
 }
 
 .fade-enter-done {
   opacity: 0.0;
-  transform: translateX(-9999px);
-  transition: opacity .1s ease-in .1s,
-            transform .1s ease-in .1s;
+  transition: opacity .2s linear .1s;
 }
 
 
