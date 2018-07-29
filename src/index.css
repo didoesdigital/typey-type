@@ -197,6 +197,9 @@ input:focus::placeholder {
 .nowrap {
   white-space: nowrap; }
 
+.pre {
+  white-space: pre; }
+
 .db {
   display: block; }
 

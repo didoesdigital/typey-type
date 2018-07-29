@@ -246,6 +246,10 @@ input:focus::placeholder {
   white-space: nowrap;
 }
 
+.pre {
+  white-space: pre;
+}
+
 .db              { display: block; }
 .di              { display: inline; }
 .dib             { display: inline-block; }
