@@ -4,13 +4,6 @@ import { matchSplitText } from './typey-type';
 import './App.css';
 
 class TypedText extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      animatePreviousCompletedPhrase: false,
-      items: ['first','second']
-    }
-  }
 
   // Show how much of what you've typed is correct
   markUpTypedText(currentPhrase, actualText, settings) {
