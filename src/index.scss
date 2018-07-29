@@ -1029,14 +1029,14 @@ label {
 }
 
 .successfully-typed-text {
-  text-align: left;
-  transform: translateY(0px);
   // position: absolute;
-  padding: 4px 8px;
-  overflow: hidden;
-  text-align: left;
-  width: 640px;
   display: block;
+  overflow: hidden;
+  padding: 4px 8px;
+  text-align: left;
+  text-align: left;
+  transform: translateX(0px);
+  width: 640px;
 }
 
 .stroke-tip {
