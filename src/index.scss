@@ -17,6 +17,7 @@ $z-index-autocomplete-menu: 4;
 $z-index-vertical-text: 3;
 $z-index-revision-mode-button: 2;
 $z-index-fill-fade-edges: 1;
+$z-index-successfully-typed-text: -1;
 $link-button-height: 40px;
 $link-button-width: 40px;
 
@@ -638,6 +639,7 @@ $textarea-padding-x: 8px;
 
 .input-textarea {
   @extend %input-textarea-styles;
+  background-color: transparent;
 }
 
 .successfully-typed-text {
@@ -648,6 +650,7 @@ $textarea-padding-x: 8px;
   text-align: left;
   transform: translateX(0);
   width: 640px;
+  z-index: $z-index-successfully-typed-text;
 }
 
 .typed-text-input-positioning {
@@ -1586,22 +1589,22 @@ $lineAdjustment: 4px;
 .fade-appear {
   opacity: 1;
   transform: translateX(0px);
-  transition: opacity .2s ease-in,
-            transform .2s ease-in;
+  // transition: opacity .1s ease-in,
+  //           transform .1s ease-in;
 }
 
 .fade-appear.fade-appear-active {
   opacity: 0.01;
-  transform: translateX(-40px);
+  transform: translateX(-100px);
   transition: opacity .2s ease-in,
-            transform .2s ease-in;
+            transform .2s ease-in .1s;
 }
 
 .fade-enter-done {
   opacity: 0.0;
   transform: translateX(-9999px);
-  transition: opacity .2s ease-in,
-            transform .2s ease-in;
+  transition: opacity .1s ease-in .1s,
+            transform .1s ease-in .1s;
 }
 
 

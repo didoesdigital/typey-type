@@ -689,13 +689,17 @@ input:focus::placeholder {
   padding: 4px 8px;
   overflow: hidden; }
 
+.input-textarea {
+  background-color: transparent; }
+
 .successfully-typed-text {
   border: 2px solid transparent;
   font-weight: 400;
   line-height: 1.5;
   text-align: left;
   transform: translateX(0);
-  width: 640px; }
+  width: 640px;
+  z-index: -1; }
 
 .typed-text-input-positioning {
   margin-left: calc(50% - 20em);
@@ -1409,15 +1413,14 @@ small .svg-icon-wrapper.svg-baseline svg {
 
 .fade-appear {
   opacity: 1;
-  transform: translateX(0px);
-  transition: opacity .2s ease-in, transform .2s ease-in; }
+  transform: translateX(0px); }
 
 .fade-appear.fade-appear-active {
   opacity: 0.01;
-  transform: translateX(-40px);
-  transition: opacity .2s ease-in, transform .2s ease-in; }
+  transform: translateX(-100px);
+  transition: opacity .2s ease-in, transform .2s ease-in .1s; }
 
 .fade-enter-done {
   opacity: 0.0;
   transform: translateX(-9999px);
-  transition: opacity .2s ease-in, transform .2s ease-in; }
+  transition: opacity .1s ease-in .1s, transform .1s ease-in .1s; }
