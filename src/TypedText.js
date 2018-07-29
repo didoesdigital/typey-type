@@ -16,6 +16,8 @@ class TypedText extends Component {
 
   render() {
     let previousCompletedPhraseAsTypedKey = this.props.completedPhrases ? this.props.completedPhrases.length : 0;
+    let strokes = this.props.currentLessonStrokes;
+    let previousCompletedPhraseAccuracy = strokes && strokes.length > 0 ? strokes[strokes.length - 1].accuracy : true;
 
     return (
       <div className="typed-text-container">
@@ -32,7 +34,7 @@ class TypedText extends Component {
               classNames='fade'
               appear={true}
             >
-              <kbd className="successfully-typed-text typed-text-input-positioning pre relative" aria-hidden="true">{this.props.previousCompletedPhraseAsTyped}</kbd>
+              <kbd className="successfully-typed-text typed-text-input-positioning pre relative" style={{"color": previousCompletedPhraseAccuracy ? '#23512C' : '#953159' }} aria-hidden="true">{this.props.previousCompletedPhraseAsTyped}</kbd>
             </CSSTransition>
           </TransitionGroup>
           <textarea

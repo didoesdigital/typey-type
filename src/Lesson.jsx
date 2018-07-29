@@ -308,6 +308,7 @@ class Lesson extends Component {
                       />
                       <TypedText
                         actualText={this.props.actualText}
+                        currentLessonStrokes={this.props.currentLessonStrokes}
                         currentPhrase={this.props.currentPhrase}
                         completedPhrases={this.props.lesson.newPresentedMaterial.completed}
                         previousCompletedPhraseAsTyped={this.props.previousCompletedPhraseAsTyped}
