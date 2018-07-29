@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import {matchSplitText} from './typey-type';
-import PreviousCompletedPhrase from './PreviousCompletedPhrase';
 import './App.css';
 
 class TypedText extends Component {
@@ -36,7 +35,6 @@ class TypedText extends Component {
         <label className="visually-hidden" htmlFor="your-typed-text">Write <div aria-live="polite">{this.props.currentPhrase}</div></label>
         <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
         <p className="input-text">
-          <PreviousCompletedPhrase key={previousCompletedPhraseAsTypedKey} previousCompletedPhraseAsTyped={this.props.previousCompletedPhraseAsTyped} />
           <textarea id="your-typed-text" className="input-textarea typed-text-input-textarea" autoComplete="off" autoCorrect="off" autoCapitalize="off" spellCheck="false" rows="1"
             wrap="off"
             onChange={this.props.updateMarkup}
