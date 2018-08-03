@@ -24,8 +24,9 @@ class TypedText extends Component {
         <label className="visually-hidden" htmlFor="your-typed-text">Write <div aria-live="polite">{this.props.currentPhrase}</div></label>
         <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
         <p className="input-text">
+          <samp className="previous-completed-phrase-as-typed-wrapper absolute absolute--fill w-100">
           <TransitionGroup
-            className="previous-completed-phrase-as-typed-wrapper absolute absolute--fill w-100"
+            className="dib"
             component={"span"}
             key={previousCompletedPhraseAsTypedKey}
           >
@@ -37,6 +38,7 @@ class TypedText extends Component {
               <kbd className="successfully-typed-text typed-text-input-positioning pre relative" style={{"color": previousCompletedPhraseAccuracy ? '#23512C' : '#953159' }} aria-hidden="true">{this.props.previousCompletedPhraseAsTyped}</kbd>
             </CSSTransition>
           </TransitionGroup>
+          </samp>
           <textarea
             autoCapitalize="off"
             autoComplete="off"
