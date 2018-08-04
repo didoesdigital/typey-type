@@ -55,7 +55,7 @@ class App extends Component {
       flashcardsProgress: {
       },
       fullscreen: false,
-      hideOtherSettings: true,
+      hideOtherSettings: false,
       nextLessonPath: '',
       previousCompletedPhraseAsTyped: '',
       repetitionsRemaining: 1,
