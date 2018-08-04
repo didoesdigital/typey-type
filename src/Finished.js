@@ -106,7 +106,7 @@ class Finished extends Component {
       // console.log("this.props.totalNumberOfMistypedWords" + this.props.totalNumberOfMistypedWords);
       let totalWords = this.props.totalNumberOfNewWordsMet + this.props.totalNumberOfLowExposuresSeen + this.props.totalNumberOfRetainedWords + this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords;
       // console.log("Total Words: " + totalWords);
-      let accuracyPercent = (1 - ((this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords) / totalWords)) * 100;
+      let accuracyPercent = (1 - ((this.props.totalNumberOfMistypedWords) / totalWords)) * 100;
       // console.log("Accuracy percent: " + accuracyPercent);
       let accuracyPercentRoundedToTwoDecimalPlaces = (Math.floor(accuracyPercent * 100) / 100);
       // console.log("Accuracy percent rounded: " + accuracyPercentRoundedToTwoDecimalPlaces);
@@ -114,9 +114,9 @@ class Finished extends Component {
 
     } else if (this.props.totalNumberOfHintedWords > 0 && (this.props.totalNumberOfNewWordsMet > 0 || this.props.totalNumberOfLowExposuresSeen > 0 || this.props.totalNumberOfRetainedWords > 0)) {
       let totalWords = this.props.totalNumberOfNewWordsMet + this.props.totalNumberOfLowExposuresSeen + this.props.totalNumberOfRetainedWords + this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords;
-      let accuracyPercent = (1 - (this.props.totalNumberOfHintedWords / totalWords)) * 100;
+      let accuracyPercent = (1 - (this.props.totalNumberOfMistypedWords / totalWords)) * 100;
       let accuracyPercentRoundedToTwoDecimalPlaces = (Math.floor(accuracyPercent * 100) / 100);
-      accuracy = ' ' + accuracyPercentRoundedToTwoDecimalPlaces + '% accuracy!';
+      accuracy = ' ' + accuracyPercentRoundedToTwoDecimalPlaces + '% accuracy! ' + this.props.totalNumberOfHintedWords + ' hints';
     } else {
       accuracy = ' Keep it up!';
     }

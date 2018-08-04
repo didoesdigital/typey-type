@@ -840,13 +840,13 @@ class App extends Component {
         });
       // can these newState assignments be moved down below the scores assignments?
 
-      if (shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)) {
-        newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1;
-      }
-      else if (!accurateStroke) {
-        newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1;
-      }
-      else {
+      let strokeHintShown = shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition);
+
+      if (strokeHintShown) { newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1; }
+
+      if (!accurateStroke) { newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1; }
+
+      if (!strokeHintShown && accurateStroke) {
         const meetingsCount = newState.metWords[actualText] || 0;
         Object.assign(newState, increaseMetWords.call(this, meetingsCount));
         newState.metWords[actualText] = meetingsCount + 1;
