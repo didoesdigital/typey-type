@@ -987,12 +987,10 @@ label {
   background-color: desaturate(add-tint($brand-primary, 10%), 40%);
   color: add-tint($brand-primary, 90%);
   letter-spacing: 0.1em;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding: 4px;
   speak: spell-out;
   .raw-steno-key {
-    padding-left: 0;
-    padding-right: 0;
+    padding: 4px 0px;
   }
   &.steno-stroke--subtle {
     background-color: desaturate(add-tint($brand-primary, 30%), 40%);

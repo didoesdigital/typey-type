@@ -916,12 +916,10 @@ label {
   background-color: #4e4e4e;
   color: #ece9ee;
   letter-spacing: 0.1em;
-  padding-left: 4px;
-  padding-right: 4px;
+  padding: 4px;
   speak: spell-out; }
   .steno-stroke .raw-steno-key {
-    padding-left: 0;
-    padding-right: 0; }
+    padding: 4px 0px; }
   .steno-stroke.steno-stroke--subtle {
     background-color: #757575;
     color: #d9d3dc; }
