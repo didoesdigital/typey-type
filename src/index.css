@@ -1420,7 +1420,7 @@ small .svg-icon-wrapper.svg-baseline svg {
   color: #457e50;
   filter: blur(0.5rem);
   opacity: 0.01;
-  transition: opacity .3s linear, color   .0s linear, filter   .5s linear; }
+  transition: opacity .2s linear, color   .0s linear, filter   .5s linear; }
 
 .fade-enter-done {
   opacity: 0.0;

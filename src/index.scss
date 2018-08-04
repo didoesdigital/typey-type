@@ -1596,7 +1596,7 @@ $lineAdjustment: 4px;
   color: saturate(add-tint($brand-success, 20%), 10%);
   filter: blur(.5rem);
   opacity: 0.01;
-  transition: opacity .3s linear,
+  transition: opacity .2s linear,
               color   .0s linear,
               filter   .5s linear;
 }
