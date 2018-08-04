@@ -32,7 +32,7 @@ class LessonsIndex extends Component {
       <main id="main">
         <div className="subheader">
           <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
-            <div className="flex mr1">
+            <div className="flex mr1 self-center">
               <header className="flex items-baseline">
                 <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Lessons</h2>
               </header>

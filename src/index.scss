@@ -265,7 +265,7 @@ input:focus::placeholder {
 .justify-center  { justify-content: center; }
 .items-baseline  { align-items: baseline; }
 .items-center    { align-items: center; }
-// .self-center     { align-self: center; }
+.self-center     { align-self: center; }
 .hide            { display: none; }
 .hide-sm         { @media (max-width: 960px) { display: none; } }
 .relative        { position: relative; }
@@ -323,6 +323,7 @@ input:focus::placeholder {
 .h-192 { height: 192px; }
 
 .mb0     { margin-bottom: 0; }
+.mb025   { margin-bottom: 2px; }
 .mb05    { margin-bottom: 4px; }
 .mb1     { margin-bottom: 8px; }
 .mb2     { margin-bottom: 16px; }
@@ -512,8 +513,12 @@ input:focus::placeholder {
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
   color: add-tint($brand-primary, 70%);
   h2 {
-    line-height: 1.55;
-    margin-bottom: 0;
+    font-size: $h3-size;
+    line-height: 1.52;
+    margin-bottom: 2px;
+  }
+  .link-button {
+    line-height: 2.1;
   }
 }
 

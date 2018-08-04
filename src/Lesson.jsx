@@ -204,14 +204,14 @@ class Lesson extends Component {
             <main id="main">
               <div className="subheader">
                 <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
-                  <div className="flex mr1">
+                  <div className="flex mr1 self-center">
                     <header className="flex items-baseline">
                       <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
                         <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
                       </a>
                     </header>
                   </div>
-                  <div className="mxn2">
+                  <div className="flex mxn2">
                     {createNewCustomLesson}
                     <a href={this.props.path} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
                     <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
@@ -261,14 +261,14 @@ class Lesson extends Component {
             <main id="main">
               <div className="subheader">
                 <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
-                  <div className="flex mr1">
+                  <div className="flex mr1 self-center">
                     <header className="flex items-baseline">
                       <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
                         <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
                       </a>
                     </header>
                   </div>
-                  <div className="mxn2">
+                  <div className="flex mxn2">
                     {createNewCustomLesson}
                     <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
                     <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>

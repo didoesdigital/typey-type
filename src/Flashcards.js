@@ -282,14 +282,14 @@ currentSlide: currentSlide
         <main id="main">
           <div className={"subheader hide-in-fullscreen" + fullscreen}>
             <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
-              <div className="flex mr1">
+              <div className="flex mr1 self-center">
                 <header className="flex items-baseline">
                   <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="heading-link table-cell mr2" role="button">
                     <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="flashcards">{flashcardsHeading}</h2>
                   </a>
                 </header>
               </div>
-              <div className="mxn2">
+              <div className="flex mxn2">
                 {/* Shuffle button */}
                 <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="link-button link-button-ghost table-cell" data-shuffle="true" role="button">Shuffle</a>
               </div>
