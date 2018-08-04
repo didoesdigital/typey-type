@@ -1414,15 +1414,13 @@ small .svg-icon-wrapper.svg-baseline svg {
 .fade-appear {
   color: #3f264e;
   filter: blur(0);
-  opacity: 1;
-  transform: scale(1); }
+  opacity: 1; }
 
 .fade-appear.fade-appear-active {
   color: #457e50;
   filter: blur(0.5rem);
   opacity: 0.01;
-  transform: scale(1.2);
-  transition: opacity .3s linear, color   .0s linear, transform .2s linear, filter   .5s linear; }
+  transition: opacity .3s linear, color   .0s linear, filter   .5s linear; }
 
 .fade-enter-done {
   opacity: 0.0;

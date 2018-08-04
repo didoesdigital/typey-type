@@ -1590,17 +1590,14 @@ $lineAdjustment: 4px;
   color: desaturate($brand-primary, 5%);
   filter: blur(0);
   opacity: 1;
-  transform: scale(1);
 }
 
 .fade-appear.fade-appear-active {
   color: saturate(add-tint($brand-success, 20%), 10%);
   filter: blur(.5rem);
   opacity: 0.01;
-  transform: scale(1.2);
   transition: opacity .3s linear,
               color   .0s linear,
-              transform .2s linear,
               filter   .5s linear;
 }
 
