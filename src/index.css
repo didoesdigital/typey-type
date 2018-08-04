@@ -624,7 +624,8 @@ input:focus::placeholder {
   border-radius: 4px; }
 
 .stat__number {
-  font-size: 25px; }
+  font-size: 25px;
+  min-width: 48px; }
 
 .stat__label {
   font-size: 12.8px; }
