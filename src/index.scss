@@ -989,7 +989,7 @@ label {
 // }
 
 .steno-stroke {
-  background-color: desaturate(add-tint($brand-primary, 10%), 40%);
+  background-color: desaturate(add-tint($brand-primary, 5%), 40%);
   color: add-tint($brand-primary, 90%);
   letter-spacing: 0.1em;
   padding: 4px;
