@@ -790,7 +790,7 @@ describe('repetitionsRemaining', () => {
 
 describe('matchSplitText', () => {
   describe('case insensitive, ignore spacing', () => {
-    const settings = {ignoredChars: ''};
+    let settings = {ignoredChars: ''};
     const userSettings = {
       caseSensitive: false,
       retainedWords: false,
@@ -851,6 +851,14 @@ describe('matchSplitText', () => {
       const expectedText = "as well as";
       const actualText = "aswell  as";
       const expected = ["as well as", "", "aswell  as", ""];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it('splits typed text into matching and not matching text for prefix with ignored chars, ignore spacing', () => {
+      let settings = {ignoredChars: '^'};
+      const expectedText = "over-the-^";
+      const actualText = "over-the-";
+      const expected = ["over-the-", "", "over-the-", ""];
       expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
     });
   });
@@ -985,6 +993,14 @@ describe('matchSplitText', () => {
       const expected = ["", " as well as", "", "as well as"];
       expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
     });
+
+    it('splits typed text into matching and not matching text for prefix with ignored chars, ignore spacing', () => {
+      let settings = {ignoredChars: '^'};
+      const expectedText = " over-the-^";
+      const actualText = " over-the-";
+      const expected = [" over-the-", "", " over-the-", ""];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
   });
 
   describe('case sensitive, space before, ignoredChars', () => {
@@ -1101,6 +1117,14 @@ describe('matchSplitText', () => {
       const expectedText = "as^well^as ";
       const actualText = "aswell as ";
       const expected = ["as^well^", "as ", "aswell", " as "];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it('splits typed text into matching and not matching text for prefix with ignored chars, ignore spacing', () => {
+      let settings = {ignoredChars: '^'};
+      const expectedText = "over-the-^ ";
+      const actualText = "over-the- ";
+      const expected = ["over-the- ", "", "over-the- ", ""];
       expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
     });
   });
