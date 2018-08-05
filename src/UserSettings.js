@@ -333,6 +333,7 @@ class UserSettings extends Component {
                       <select name="spacePlacement" value={this.props.userSettings.spacePlacement} onChange={this.props.changeSpacePlacementUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control">
                         <option value="spaceBeforeOutput">Space before output</option>
                         <option value="spaceAfterOutput">Space after output</option>
+                        <option value="spaceExact">Exact spacing</option>
                         <option value="spaceOff">Ignore spaces</option>
                       </select>
                     </div>
