@@ -11,6 +11,7 @@ import {
   repetitionsRemaining,
   shouldShowStroke,
   strokeAccuracy,
+  trimAndSumUniqMetWords,
   targetStrokeCount,
   writePersonalPreferences
 } from './typey-type';
@@ -1139,6 +1140,11 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
 }
 
 function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings, revisionMode = this.state.revisionMode) {
+
+  if (userSettings.spacePlacement === 'spaceOff') {
+    // met = trimAndSumUniqMetWords(met);
+
+  }
 
   var localRevisionMode = revisionMode,
     newWords = userSettings.newWords,

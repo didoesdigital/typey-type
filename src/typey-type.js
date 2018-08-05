@@ -2,14 +2,14 @@ import Zipper from './zipper';
 import { isPeak } from './utils.js';
 
 function createWordListFromMetWords (metWords) {
-  let munged = sumUniqMetWords(metWords);
+  let munged = trimAndSumUniqMetWords(metWords);
   let metWordsEntries = Object.entries(munged).sort(function (a, b) {
     return b[1] - a[1]
   });
   return metWordsEntries.map(entry => entry[0].trim());
 }
 
-function sumUniqMetWords (metWords) {
+function trimAndSumUniqMetWords (metWords) {
   let mungedUniqWords = {};
   for (const [metWord, timesSeen] of Object.entries(metWords)) {
     let trimmedWord = metWord.trim();
@@ -454,7 +454,7 @@ export {
   loadPersonalPreferences,
   matchSplitText,
   mapBriefToKeys,
-  sumUniqMetWords,
+  trimAndSumUniqMetWords,
   parseCustomMaterial,
   parseLesson,
   parseWordList,
