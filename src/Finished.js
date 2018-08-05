@@ -97,29 +97,33 @@ class Finished extends Component {
     }
 
     if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
-      accuracy = ' 100%';
+      accuracy = ' 100%!';
     } else if (this.props.totalNumberOfMistypedWords > 0) {
       // console.log("this.props.totalNumberOfNewWordsMet" + this.props.totalNumberOfNewWordsMet);
       // console.log("this.props.totalNumberOfLowExposuresSeen" + this.props.totalNumberOfLowExposuresSeen);
       // console.log("this.props.totalNumberOfRetainedWords" + this.props.totalNumberOfRetainedWords);
       // console.log("this.props.totalNumberOfHintedWords" + this.props.totalNumberOfHintedWords);
       // console.log("this.props.totalNumberOfMistypedWords" + this.props.totalNumberOfMistypedWords);
-      let totalWords = this.props.totalNumberOfNewWordsMet + this.props.totalNumberOfLowExposuresSeen + this.props.totalNumberOfRetainedWords + this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords;
-      // console.log("Total Words: " + totalWords);
-      let accuracyPercent = (1 - ((this.props.totalNumberOfMistypedWords) / totalWords)) * 100;
+      //
+      // Test for stopping the lesson before the end
+      let accuracyPercent;
+      if (this.props.currentLessonStrokes && this.props.currentLessonStrokes.length > 0) { // avoid division by zero
+        accuracyPercent = (1 - ((this.props.totalNumberOfMistypedWords) / this.props.currentLessonStrokes.length)) * 100;
+      } else { // this should never happen because first `if` code path handles zero state
+        accuracyPercent = 100.0;
+      }
       // console.log("Accuracy percent: " + accuracyPercent);
       let accuracyPercentRoundedToTwoDecimalPlaces = (Math.floor(accuracyPercent * 100) / 100);
       // console.log("Accuracy percent rounded: " + accuracyPercentRoundedToTwoDecimalPlaces);
       accuracy = ' ' + accuracyPercentRoundedToTwoDecimalPlaces + '% accuracy!';
-
-    } else if (this.props.totalNumberOfHintedWords > 0 && (this.props.totalNumberOfNewWordsMet > 0 || this.props.totalNumberOfLowExposuresSeen > 0 || this.props.totalNumberOfRetainedWords > 0)) {
-      let totalWords = this.props.totalNumberOfNewWordsMet + this.props.totalNumberOfLowExposuresSeen + this.props.totalNumberOfRetainedWords + this.props.totalNumberOfMistypedWords + this.props.totalNumberOfHintedWords;
-      let accuracyPercent = (1 - (this.props.totalNumberOfMistypedWords / totalWords)) * 100;
-      let accuracyPercentRoundedToTwoDecimalPlaces = (Math.floor(accuracyPercent * 100) / 100);
-      accuracy = ' ' + accuracyPercentRoundedToTwoDecimalPlaces + '% accuracy! ' + this.props.totalNumberOfHintedWords + ' hints';
+    } else if (this.props.totalNumberOfHintedWords > 1) {
+      accuracy = accuracy + ' 100%! ' + this.props.totalNumberOfHintedWords + ' hints'; // plural
+    } else if (this.props.totalNumberOfHintedWords === 1) {
+      accuracy = accuracy + ' 100%! ' + this.props.totalNumberOfHintedWords + ' hint'; // singular
     } else {
       accuracy = ' Keep it up!';
     }
+
     // When you have stroked nothing right, except hinted or misstroked words, show nothing instead of 0%
     if (accuracy === ' 0% accuracy!') {
       accuracy = '';
