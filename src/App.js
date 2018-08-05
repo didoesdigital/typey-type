@@ -1211,10 +1211,7 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
     return false;
   }
 
-  function filtering(item) {
-    return filterFunction(item.phrase)
-  }
-  return presentedMaterial.filter(filtering);
+  return presentedMaterial.filter(item => filterFunction(item.phrase) );
 }
 
 // function isElement(obj) {
