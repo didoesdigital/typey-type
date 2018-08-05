@@ -22,6 +22,19 @@ function trimAndSumUniqMetWords (metWords) {
   return mungedUniqWords;
 }
 
+function removeWhitespaceAndSumUniqMetWords (metWords) {
+  let mungedUniqWords = {};
+  for (const [metWord, timesSeen] of Object.entries(metWords)) {
+    let removedWhitespaceWord = metWord.replace(/\s/g,'')
+    if (mungedUniqWords[removedWhitespaceWord]) {
+      mungedUniqWords[removedWhitespaceWord] += timesSeen;
+    } else {
+      mungedUniqWords[removedWhitespaceWord] = timesSeen;
+    }
+  }
+  return mungedUniqWords;
+}
+
 function splitBriefsIntoStrokes (currentStroke) {
   return currentStroke.split(/[/ ]/);
 }
@@ -460,6 +473,7 @@ export {
   parseWordList,
   processDictionary,
   swapKeyValueInDictionary,
+  removeWhitespaceAndSumUniqMetWords,
   repetitionsRemaining,
   setupLessonProgress,
   shouldShowStroke,

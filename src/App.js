@@ -8,6 +8,7 @@ import {
   loadPersonalPreferences,
   matchSplitText,
   parseLesson,
+  removeWhitespaceAndSumUniqMetWords,
   repetitionsRemaining,
   shouldShowStroke,
   strokeAccuracy,
@@ -1141,9 +1142,12 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
 
 function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings, revisionMode = this.state.revisionMode) {
 
-  if (userSettings.spacePlacement === 'spaceOff') {
-    // met = trimAndSumUniqMetWords(met);
+  if (userSettings.spacePlacement === 'spaceExact') {
+    met = trimAndSumUniqMetWords(met);
+  }
 
+  if (userSettings.spacePlacement === 'spaceOff') {
+    met = removeWhitespaceAndSumUniqMetWords(met);
   }
 
   var localRevisionMode = revisionMode,
@@ -1196,6 +1200,8 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
       phrase = ' '+phrase;
     } else if (spacePlacement === 'spaceAfterOutput') {
       phrase = phrase+' ';
+    } else if (spacePlacement === 'spaceOff') {
+      phrase = phrase.replace(/\s/g,'');
     }
     for (var i = 0; i < tests.length; i++) {
       if (tests[i](phrase)) {
@@ -1205,7 +1211,10 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
     return false;
   }
 
-  return presentedMaterial.filter(item => filterFunction(item.phrase) );
+  function filtering(item) {
+    return filterFunction(item.phrase)
+  }
+  return presentedMaterial.filter(filtering);
 }
 
 // function isElement(obj) {
