@@ -14,7 +14,7 @@ if [[ $REPLY =~ ^[Yy]$ ]];
     exit 1
 fi
 
-# ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-typey-type-for-standard-dict-set.rb
+ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-typey-type-for-standard-dict-set.rb
 
 yarn run build
 # git tag -n
