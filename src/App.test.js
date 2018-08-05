@@ -162,13 +162,14 @@ describe('filterByFamiliarity', () => {
     {phrase: 'and', stroke: 'SKP'}
   ],
   metWords = {
-    "the":30,
-    "of":1
+    " the":30,
+    " of":1
   };
   const revisionMode = false;
 
-  describe('when settings include showing new words', () => {
+  describe('when settings include showing new words for spaceBefore', () => {
     const userSettings = {
+      spacePlacement: "spaceBeforeOutput",
       retainedWords: false,
       newWords: true,
       seenWords: false
@@ -181,8 +182,10 @@ describe('filterByFamiliarity', () => {
       );
     });
   });
-  describe('when settings include showing seen words with few exposures', () => {
+
+  describe('when settings include showing seen words with few exposures for spaceBefore', () => {
     const userSettings = {
+      spacePlacement: "spaceBeforeOutput",
       retainedWords: false,
       newWords: false,
       seenWords: true
@@ -195,8 +198,10 @@ describe('filterByFamiliarity', () => {
       );
     });
   });
-  describe('when settings include showing memorised, retained, familiar words', () => {
+
+  describe('when settings include showing memorised, retained, familiar words for spaceBefore', () => {
     const userSettings = {
+      spacePlacement: "spaceBeforeOutput",
       retainedWords: true,
       newWords: false,
       seenWords: false
@@ -209,8 +214,10 @@ describe('filterByFamiliarity', () => {
       );
     });
   });
-  describe('when settings include all words of any familiarity level', () => {
+
+  describe('when settings include all words of any familiarity level for spaceBefore', () => {
     const userSettings = {
+      spacePlacement: "spaceBeforeOutput",
       retainedWords: true,
       newWords: true,
       seenWords: true
