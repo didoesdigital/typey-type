@@ -898,7 +898,7 @@ class App extends Component {
     return this.state.lesson.newPresentedMaterial.getCompleted().map(item => item.phrase).join(" ");
   }
   presentUpcomingMaterial() {
-    return this.state.lesson.newPresentedMaterial.getRemaining().slice(0,19).map(item => item.phrase).join(" ");
+    return this.state.lesson.newPresentedMaterial.getRemaining().slice(0,31).map(item => item.phrase).join(" ");
   }
 
   render() {
