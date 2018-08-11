@@ -61,9 +61,8 @@ function mapBriefToKeys (brief) {
     keys["numberBar"] = true;
   }
 
-  if (keys.numberBar === true && keys.leftSUpper === false && keys.leftSLower === true) {
+  if (keys.leftSLower === true && keys.leftSUpper === false) {
     keys.leftSUpper = true;
-    keys.leftSLower = false;
   }
 
   return keys;

@@ -292,7 +292,7 @@ describe('map stroke to keys', () => {
     let brief = "SAEUPL";
     expect(mapBriefToKeys(brief)).toEqual({
       numberBar: false,
-      leftSUpper: false,
+      leftSUpper: true,
       leftSLower: true,
       leftT: false,
       leftK: false,
