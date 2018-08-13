@@ -11,7 +11,7 @@ const PageNotFound = () => {
         <div className="mx-auto mw-1024 p3">
           <nav>
             <div className="site-heading-banner">
-              <Link to="/" className="heading-link dib"><h1>Typey&nbsp;type</h1></Link>
+              <Link to="/" className="heading-link dib"><h1>Typey&nbsp;Type</h1></Link>
             </div>
           </nav>
         </div>
@@ -23,7 +23,7 @@ const PageNotFound = () => {
           <li><Link to="/">Home</Link></li>
           <li><Link to="/lessons">Lessons</Link></li>
           <li><Link to="/support">Help and about</Link></li>
-          <li><Link to="/contribute">Contribute to Typey&nbsp;type</Link></li>
+          <li><Link to="/contribute">Contribute to Typey&nbsp;Type</Link></li>
           <li><Link to="/progress">Your progress</Link></li>
         </ul>
       </main>

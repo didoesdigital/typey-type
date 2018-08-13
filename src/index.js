@@ -10,7 +10,7 @@ import {
 import './index.css';
 
 ReactDOM.render(
-  <DocumentTitle title='Typey type for stenographers'>
+  <DocumentTitle title='Typey Type for Stenographers'>
     <Router basename="/typey-type">
       <Route component={withTracker(App)} />
     </Router>

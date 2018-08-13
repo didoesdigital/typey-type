@@ -107,7 +107,7 @@ class Lesson extends Component {
     if (this.props.firstVisit) {
       firstVisit = (
         <div className='p3 pb0 mb0 mx-auto mw-1024'>
-          <p className="mb0">Welcome to Typey&nbsp;type for stenographers. Type the words shown, including the first space.</p>
+          <p className="mb0">Welcome to Typey&nbsp;Type for Stenographers. Type the words shown, including the first space.</p>
         </div>
       );
     } else {
@@ -176,7 +176,7 @@ class Lesson extends Component {
     if (this.props.lesson) {
       if (this.isFlashcards()) {
         return (
-          <DocumentTitle title={'Typey type | Flashcards'}>
+          <DocumentTitle title={'Typey Type | Flashcards'}>
             <Flashcards
               flashcardsMetWords={this.props.flashcardsMetWords}
               flashcardsProgress={this.props.flashcardsProgress}
@@ -191,7 +191,7 @@ class Lesson extends Component {
         )
       } else if (this.isCustom() && !this.isSetup()) {
         return (
-          <DocumentTitle title='Typey type | Create a custom lesson'>
+          <DocumentTitle title='Typey Type | Create a custom lesson'>
             <CustomLessonSetup
               createCustomLesson={this.props.createCustomLesson}
               metWords={this.props.metWords}
@@ -200,7 +200,7 @@ class Lesson extends Component {
         )
       } else if (this.isFinished()) {
         return (
-          <DocumentTitle title={'Typey type | ' + this.props.lesson.title}>
+          <DocumentTitle title={'Typey Type | ' + this.props.lesson.title}>
             <main id="main">
               <div className="subheader">
                 <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
@@ -257,7 +257,7 @@ class Lesson extends Component {
         )
       } else {
         return (
-          <DocumentTitle title={'Typey type | ' + this.props.lesson.title}>
+          <DocumentTitle title={'Typey Type | ' + this.props.lesson.title}>
             <main id="main">
               <div className="subheader">
                 <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">

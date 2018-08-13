@@ -936,7 +936,7 @@ class App extends Component {
               <Route exact={true} path="/" render={(props) =>
                 <div>
                   {header}
-                  <DocumentTitle title='Typey type for stenographers'>
+                  <DocumentTitle title='Typey Type for Stenographers'>
                     <Home
                       setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                       {...props}
@@ -948,7 +948,7 @@ class App extends Component {
               <Route path="/support" render={ () =>
                 <div>
                   {header}
-                  <DocumentTitle title={'Typey type | About'}>
+                  <DocumentTitle title={'Typey Type | About'}>
                     <Support
                       setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                     />
@@ -959,7 +959,7 @@ class App extends Component {
               <Route path="/contribute" render={ () =>
                 <div>
                   {header}
-                  <DocumentTitle title={'Typey type | Contribute'}>
+                  <DocumentTitle title={'Typey Type | Contribute'}>
                     <Contribute />
                   </DocumentTitle>
                 </div>
@@ -968,7 +968,7 @@ class App extends Component {
               <Route path="/progress" render={ () =>
                 <div>
                   {header}
-                  <DocumentTitle title={'Typey type | Progress'}>
+                  <DocumentTitle title={'Typey Type | Progress'}>
                     <Progress
                       setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                       setPersonalPreferences={this.setPersonalPreferences.bind(this)}
@@ -985,7 +985,7 @@ class App extends Component {
               <Route path="/flashcards" render={ () =>
                 <div>
                   {header}
-                  <DocumentTitle title={'Typey type | Flashcards'}>
+                  <DocumentTitle title={'Typey Type | Flashcards'}>
                     <Flashcards
                       locationpathname={this.props.location.pathname}
                       flashcardsMetWords={this.state.flashcardsMetWords}
@@ -1003,7 +1003,7 @@ class App extends Component {
               <Route path="/lessons" render={ (props) =>
                 <div>
                   {header}
-                  <DocumentTitle title={'Typey type | Lessons'}>
+                  <DocumentTitle title={'Typey Type | Lessons'}>
                     <Lessons
                       updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
                       updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
@@ -1081,7 +1081,7 @@ class App extends Component {
               />
               <Route render={ () =>
                 <div>
-                  <DocumentTitle title={'Typey type | Page not found'}>
+                  <DocumentTitle title={'Typey Type | Page not found'}>
                     <PageNotFound />
                   </DocumentTitle>
                 </div>

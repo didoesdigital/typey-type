@@ -5,4 +5,4 @@ One-Syllable Words
 'half': HAF
 case_sensitive=false
 notice_spaces=true
-warning_message=Welcome to the Typey type alpha. This is a test lesson.
+warning_message=Welcome to the Typey Type alpha. This is a test lesson.

@@ -27,10 +27,10 @@ class Header extends Component {
           <div className="mx-auto mw-1024 p3">
             <nav>
               <div className="site-heading-banner">
-                <Link to="/" className="heading-link dib" aria-label="Typey type" id="ga--header--logo">
+                <Link to="/" className="heading-link dib" aria-label="Typey Type" id="ga--header--logo">
                   <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">
                     <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" className="mr1 svg-icon-wrapper svg-baseline" />
-                    Typey&nbsp;type
+                    Typey&nbsp;Type
                   </h1>
                 </Link>
                 <Link to="/progress" className="progress-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>

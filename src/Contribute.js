@@ -20,14 +20,14 @@ class Contribute extends Component {
           <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
             <div className="flex mr1 self-center">
               <header className="flex items-baseline">
-                <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="contribute-to-typey-type">Contribute to Typey&nbsp;type</h2>
+                <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="contribute-to-typey-type">Contribute to Typey&nbsp;Type</h2>
               </header>
             </div>
           </div>
         </div>
         <div className="p3 mx-auto mw-1024">
           <div className="mw-568">
-            <p>Thanks for your interest in Typey&nbsp;type!</p>
+            <p>Thanks for your interest in Typey&nbsp;Type!</p>
 
             <h3 id="patreon">Patreon</h3>
             <p>You can support my efforts on{" "}
@@ -86,7 +86,7 @@ class Contribute extends Component {
             <h3 id="feedback">Feedback</h3>
             <p>
               <GoogleAnalytics.OutboundLink
-                eventLabel="Typey type for stenographers feedback form"
+                eventLabel="Typey Type for Stenographers feedback form"
                 aria-label="Share your feedback (form opens in new tab)"
                 to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
                 target="_blank"

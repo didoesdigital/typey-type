@@ -17,7 +17,7 @@ function IconTypeyType(props) {
   let iconTitle = "";
   if (props.iconTitle === "") { iconTitle = ""; }
   else if (props.iconTitle) { iconTitle = props.iconTitle; }
-  else { iconTitle = 'Typey type for stenographers'; }
+  else { iconTitle = 'Typey Type for Stenographers'; }
   const classes = props.className || '';
   const role = props.role || 'img';
   const ariaHidden = props.ariaHidden || 'false';

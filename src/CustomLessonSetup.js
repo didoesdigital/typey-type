@@ -122,7 +122,7 @@ examples.	KP-PLS TP-PL"
             <div>
               <div className="panel p3">
                 <h2>Share your lessons</h2>
-                <p className="mb0">To help Typey type grow even faster, be sure to add your lessons to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community's lessons <small>(opens in new tab)</small></a>.</p>
+                <p className="mb0">To help Typey Type grow even faster, be sure to add your lessons to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community's lessons <small>(opens in new tab)</small></a>.</p>
                 <h3>Custom material format</h3>
                 <ul id="custom-material-format" className="text-small ml1 mt0 mb0">
                   <li>Each word must be on its own line.</li>

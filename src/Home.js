@@ -23,19 +23,19 @@ class Home extends Component {
             <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
               <div className="flex mr1 self-center">
                 <header className="flex items-baseline">
-                  <h2 id="home-typey-type-for-stenographers" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Typey type for stenographers</h2>
+                  <h2 id="home-typey-type-for-stenographers" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Typey Type for Stenographers</h2>
                 </header>
               </div>
             </div>
           </div>
-          <div className="strapline text-vertical p0 m0 lh-single">Typey type for stenographers</div>
+          <div className="strapline text-vertical p0 m0 lh-single">Typey Type for Stenographers</div>
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
-                <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-lg" alt='Demo of Typey Type for stenographers in action' /></Link></div>
-                <h3 className="tiny-rule">What is this?</h3>
+                <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-lg" alt='Demo of Typey Type for Stenographers in action' /></Link></div>
+                <h3 className="tiny-rule">What is stenography?</h3>
                 <p>The process of writing shorthand is called <strong>stenography</strong>. Want to write over 100 words per minute? Grab yourself a fancy keyboard and start learning stenography!</p>
-                <p>Typey&nbsp;type for stenographers is a free typing app designed specifically to help{" "}
+                <p>Typey&nbsp;Type for Stenographers is a free typing app designed specifically to help{" "}
                   <Tooltip
                     animation="shift"
                     arrow="true"
@@ -51,7 +51,7 @@ class Home extends Component {
                     steno
                   </Tooltip>{" "}
                   students practice and rapidly master stenography.</p>
-                <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-xs" alt='Demo of Typey Type for stenographers in action' /></Link></div>
+                <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-xs" alt='Demo of Typey Type for Stenographers in action' /></Link></div>
                 <Link to='/support' className="link-button dib" style={{lineHeight: 2}} role="button">Learn more</Link>
               </div>
             </div>
@@ -60,7 +60,7 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3>Steno students</h3>
-                <p>After learning a little bit of steno theory, check out Typey&nbsp;type’s fundamental <Link to="/lessons/">lessons</Link>, starting with <Link to="/lessons/fundamentals/one-syllable-words-with-simple-keys/">one-syllable words with simple keys</Link>. Before you start typing, customise “your settings” so spaces match your steno settings: spaces before words, spaces after words, or ignore spaces completely.</p>
+                <p>After learning a little bit of steno theory, check out Typey&nbsp;Type’s fundamental <Link to="/lessons/">lessons</Link>, starting with <Link to="/lessons/fundamentals/one-syllable-words-with-simple-keys/">one-syllable words with simple keys</Link>. Before you start typing, customise “your settings” so spaces match your steno settings: spaces before words, spaces after words, or ignore spaces completely.</p>
                 <Link to='/lessons/fundamentals/one-syllable-words-with-simple-keys/' className="link-button dib" style={{lineHeight: 2}} role="button">Start typing</Link>
               </div>
             </div>
@@ -105,7 +105,7 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
                 <h3>Track your progress</h3>
-                <p>Typey&nbsp;type tracks your progress automatically without signing in. To keep your progress safe, however, you need to save it out of Typey&nbsp;type regularly.</p>
+                <p>Typey&nbsp;Type tracks your progress automatically without signing in. To keep your progress safe, however, you need to save it out of Typey&nbsp;Type regularly.</p>
                 <Link to='/progress/' className="link-button dib" style={{lineHeight: 2}} role="button">Your progress</Link>
               </div>
             </div>
@@ -134,13 +134,13 @@ class Home extends Component {
                 <h3 id="steno-news">Keep up with news</h3>
                 <p>Sign up for{" "}
                   <GoogleAnalytics.OutboundLink
-                    eventLabel="DiDoesDigital: Typey type updates and steno news (external link opens in new tab)"
+                    eventLabel="DiDoesDigital: Typey Type updates and steno news (external link opens in new tab)"
                     to="https://didoesdigital.com/#newsletter"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Typey type updates and steno news (external link opens in new tab)"
+                    aria-label="Typey Type updates and steno news (external link opens in new tab)"
                   >
-                    Typey&nbsp;type updates and steno news
+                    Typey&nbsp;Type updates and steno news
                     <Tooltip
                       animation="shift"
                       arrow="true"
