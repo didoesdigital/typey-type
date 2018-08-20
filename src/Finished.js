@@ -40,6 +40,20 @@ class Finished extends Component {
     let misstrokesSummary = '';
     let strokeAttemptsPresentation;
 
+    let wordsTyped = '';
+
+    if (this.props.currentLessonStrokes && this.props.currentLessonStrokes.length > 0) {
+      let pluralisedString = '' + this.props.currentLessonStrokes.length + ' words typed';
+
+      if (this.props.currentLessonStrokes.length === 1) {
+        pluralisedString = '' + this.props.currentLessonStrokes.length + ' word typed';
+      }
+
+      wordsTyped = (
+        <div><p className="mt0 nowrap">{pluralisedString}</p></div>
+      );
+    }
+
     if (currentLessonStrokes.length > 0) {
       let listOfPossibleStrokeImprovements = currentLessonStrokes.map( (phrase, i) => {
         let strokeAttempts = phrase.attempts.map( ( attempt, j ) => {
@@ -190,6 +204,7 @@ class Finished extends Component {
                 onShow={this.props.setAnnouncementMessage}
               >WPM</Tooltip>!{accuracy}</h3>
             <h4 className="mt0 nowrap">{wpmCommentary}</h4>
+            {wordsTyped}
             <p>
               <Link to={this.props.suggestedNext} className="link-button dib" style={{lineHeight: 2}} role="button">
                 Next lesson
