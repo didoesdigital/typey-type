@@ -131,7 +131,7 @@ class Lesson extends Component {
       if (this.props.currentStroke) {
         let strokes = splitBriefsIntoStrokes(this.props.currentStroke);
         strokeTip = (
-          <div className="stroke-tip" aria-live="polite">
+          <div className="stroke-tip" aria-live="polite" aria-atomic="true">
             <span className="visually-hidden">Hint: </span>
             <div className="flex overflow-auto mr05">
               {this.props.userSettings.showStrokesAsDiagrams && strokes.map((strokeToDraw, index) =>
