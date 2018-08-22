@@ -950,9 +950,11 @@ class App extends Component {
                 <div>
                   {header}
                   <DocumentTitle title={'Typey Type | About'}>
-                    <Support
-                      setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-                    />
+                    <ErrorBoundary>
+                      <Support
+                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                      />
+                    </ErrorBoundary>
                   </DocumentTitle>
                 </div>
                 }
@@ -961,7 +963,9 @@ class App extends Component {
                 <div>
                   {header}
                   <DocumentTitle title={'Typey Type | Contribute'}>
-                    <Contribute />
+                    <ErrorBoundary>
+                      <Contribute />
+                    </ErrorBoundary>
                   </DocumentTitle>
                 </div>
                 }
@@ -1007,77 +1011,79 @@ class App extends Component {
                 <div>
                   {header}
                   <DocumentTitle title={'Typey Type | Lessons'}>
-                    <Lessons
-                      updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
-                      updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
-                      flashcardsMetWords={this.state.flashcardsMetWords}
-                      flashcardsProgress={this.state.flashcardsProgress}
-                      lessonsProgress={this.state.lessonsProgress}
-                      fullscreen={this.state.fullscreen}
-                      changeFullscreen={this.changeFullscreen.bind(this)}
-                      restartLesson={this.restartLesson.bind(this)}
-                      reviseLesson={this.reviseLesson.bind(this)}
-                      items={this.state.lessonIndex}
-                      lessonSubTitle={this.state.lesson.subtitle}
-                      lessonTitle={this.state.lesson.title}
-                      nextLessonPath={this.state.nextLessonPath}
-                      onChange={(ev, value) => {
-                      this.setState({
-                      value: ev.target.value
-                      })}}
-                      onSelect={(value, item) => this.setState({
-                      value: value,
-                      nextLessonPath: item.path
-                      })}
-                      path={this.state.lesson.path}
-                      handleStopLesson={this.handleStopLesson.bind(this)}
-                      value={this.state.value}
-                      lessonIndex={this.state.lessonIndex}
-                      lesson={this.state.lesson}
-                      handleLesson={this.handleLesson.bind(this)}
-                      actualText={this.state.actualText}
-                      changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
-                      changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
-                      changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
-                      changeShowStrokesAs={this.changeShowStrokesAs.bind(this)}
-                      changeUserSetting={this.changeUserSetting.bind(this)}
-                      chooseStudy={this.chooseStudy.bind(this)}
-                      completedPhrases={completedMaterial}
-                      createCustomLesson={this.createCustomLesson.bind(this)}
-                      currentLessonStrokes={this.state.currentLessonStrokes}
-                      currentPhraseID={this.state.currentPhraseID}
-                      currentPhrase={presentedMaterialCurrentItem.phrase}
-                      currentStroke={presentedMaterialCurrentItem.stroke}
-                      disableUserSettings={this.state.disableUserSettings}
-                      handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
-                      handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
-                      hideOtherSettings={this.state.hideOtherSettings}
-                      metWords={this.state.metWords}
-                      previousCompletedPhraseAsTyped={this.state.previousCompletedPhraseAsTyped}
-                      repetitionsRemaining={this.state.repetitionsRemaining}
-                      revisionMaterial={this.state.revisionMaterial}
-                      revisionMode={this.state.revisionMode}
-                      updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
-                      setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-                      setCustomLesson={this.setCustomLesson.bind(this)}
-                      settings={this.state.lesson.settings}
-                      showStrokesInLesson={this.state.showStrokesInLesson}
-                      targetStrokeCount={this.state.targetStrokeCount}
-                      timer={this.state.timer}
-                      toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
-                      charsPerWord={this.charsPerWord}
-                      totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-                      totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
-                      totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
-                      totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
-                      totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
-                      totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
-                      totalWordCount={this.state.lesson.presentedMaterial.length}
-                      upcomingPhrases={upcomingMaterial}
-                      updateMarkup={this.updateMarkup.bind(this)}
-                      userSettings={this.state.userSettings}
-                      {...props}
-                    />
+                    <ErrorBoundary>
+                      <Lessons
+                        updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
+                        updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
+                        flashcardsMetWords={this.state.flashcardsMetWords}
+                        flashcardsProgress={this.state.flashcardsProgress}
+                        lessonsProgress={this.state.lessonsProgress}
+                        fullscreen={this.state.fullscreen}
+                        changeFullscreen={this.changeFullscreen.bind(this)}
+                        restartLesson={this.restartLesson.bind(this)}
+                        reviseLesson={this.reviseLesson.bind(this)}
+                        items={this.state.lessonIndex}
+                        lessonSubTitle={this.state.lesson.subtitle}
+                        lessonTitle={this.state.lesson.title}
+                        nextLessonPath={this.state.nextLessonPath}
+                        onChange={(ev, value) => {
+                        this.setState({
+                        value: ev.target.value
+                        })}}
+                        onSelect={(value, item) => this.setState({
+                        value: value,
+                        nextLessonPath: item.path
+                        })}
+                        path={this.state.lesson.path}
+                        handleStopLesson={this.handleStopLesson.bind(this)}
+                        value={this.state.value}
+                        lessonIndex={this.state.lessonIndex}
+                        lesson={this.state.lesson}
+                        handleLesson={this.handleLesson.bind(this)}
+                        actualText={this.state.actualText}
+                        changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
+                        changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
+                        changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
+                        changeShowStrokesAs={this.changeShowStrokesAs.bind(this)}
+                        changeUserSetting={this.changeUserSetting.bind(this)}
+                        chooseStudy={this.chooseStudy.bind(this)}
+                        completedPhrases={completedMaterial}
+                        createCustomLesson={this.createCustomLesson.bind(this)}
+                        currentLessonStrokes={this.state.currentLessonStrokes}
+                        currentPhraseID={this.state.currentPhraseID}
+                        currentPhrase={presentedMaterialCurrentItem.phrase}
+                        currentStroke={presentedMaterialCurrentItem.stroke}
+                        disableUserSettings={this.state.disableUserSettings}
+                        handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
+                        handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
+                        hideOtherSettings={this.state.hideOtherSettings}
+                        metWords={this.state.metWords}
+                        previousCompletedPhraseAsTyped={this.state.previousCompletedPhraseAsTyped}
+                        repetitionsRemaining={this.state.repetitionsRemaining}
+                        revisionMaterial={this.state.revisionMaterial}
+                        revisionMode={this.state.revisionMode}
+                        updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
+                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                        setCustomLesson={this.setCustomLesson.bind(this)}
+                        settings={this.state.lesson.settings}
+                        showStrokesInLesson={this.state.showStrokesInLesson}
+                        targetStrokeCount={this.state.targetStrokeCount}
+                        timer={this.state.timer}
+                        toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
+                        charsPerWord={this.charsPerWord}
+                        totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+                        totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
+                        totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
+                        totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
+                        totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
+                        totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
+                        totalWordCount={this.state.lesson.presentedMaterial.length}
+                        upcomingPhrases={upcomingMaterial}
+                        updateMarkup={this.updateMarkup.bind(this)}
+                        userSettings={this.state.userSettings}
+                        {...props}
+                      />
+                    </ErrorBoundary>
                   </DocumentTitle>
                 </div>
                 }

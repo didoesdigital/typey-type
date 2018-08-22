@@ -13,7 +13,9 @@ import './index.css';
 ReactDOM.render(
   <DocumentTitle title='Typey Type for Stenographers'>
     <Router basename="/typey-type">
-      <Route component={withTracker(App)} />
+      <ErrorBoundary>
+        <Route component={withTracker(App)} />
+      </ErrorBoundary>
     </Router>
   </DocumentTitle>,
   document.getElementById('root')

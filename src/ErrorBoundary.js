@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ErrorBoundary extends React.Component {
+class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -17,7 +17,11 @@ class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       // You can render any custom fallback UI
-      return <h1>Something went wrong.</h1>;
+      return (
+        <div className="center-all">
+          <p>Sorry, Typey Type hit an error. I’ve been notified and will look into this as soon as I can. Meanwhile, try <a href=".">refresh the page</a>. Thanks for your patience. —Di</p>
+        </div>
+      )
     }
     return this.props.children;
   }
