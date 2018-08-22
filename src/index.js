@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DocumentTitle from 'react-document-title';
+import ErrorBoundary from './ErrorBoundary'
 import App from './App';
 import withTracker from './withTracker';
 import {

@@ -22,6 +22,7 @@ import {
 } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import Announcements from './Announcements';
+import ErrorBoundary from './ErrorBoundary'
 import Lessons from './Lessons';
 import Home from './Home';
 import Header from './Header';
@@ -969,15 +970,17 @@ class App extends Component {
                 <div>
                   {header}
                   <DocumentTitle title={'Typey Type | Progress'}>
-                    <Progress
-                      setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-                      setPersonalPreferences={this.setPersonalPreferences.bind(this)}
-                      metWords={this.state.metWords}
-                      flashcardsMetWords={this.state.flashcardsMetWords}
-                      flashcardsProgress={this.state.flashcardsProgress}
-                      lessonsProgress={this.state.lessonsProgress}
-                      lessonIndex={this.state.lessonIndex}
-                    />
+                    <ErrorBoundary>
+                      <Progress
+                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                        setPersonalPreferences={this.setPersonalPreferences.bind(this)}
+                        metWords={this.state.metWords}
+                        flashcardsMetWords={this.state.flashcardsMetWords}
+                        flashcardsProgress={this.state.flashcardsProgress}
+                        lessonsProgress={this.state.lessonsProgress}
+                        lessonIndex={this.state.lessonIndex}
+                      />
+                    </ErrorBoundary>
                   </DocumentTitle>
                 </div>
                 }
