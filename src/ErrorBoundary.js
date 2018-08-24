@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser';
 import React, { Component } from 'react';
 
 // To test this component out, throw an error in the child component that the boundary wraps:
@@ -18,6 +19,7 @@ class ErrorBoundary extends Component {
     // You can also log the error to an error reporting service
     // Sentry capture here!
     // logErrorToMyService(error, info);
+    Sentry.captureException(error, { extra: info });
   }
 
   render() {

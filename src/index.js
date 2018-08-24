@@ -1,3 +1,4 @@
+import { init } from '@sentry/browser';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DocumentTitle from 'react-document-title';
@@ -9,6 +10,10 @@ import {
   Route
 } from 'react-router-dom';
 import './index.css';
+
+init({
+  dsn: 'https://50e71fa7abea49288b136cb517fc55be@sentry.io/1268615',
+});
 
 ReactDOM.render(
   <DocumentTitle title='Typey Type for Stenographers'>

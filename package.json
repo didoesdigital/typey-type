@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://didoesdigital.com/typey-type",
   "dependencies": {
+    "@sentry/browser": "^4.0.0-beta.12",
     "clipboard": "^1.7.1",
     "flow-bin": "^0.59.0",
     "lodash": "^4.17.10",
