@@ -11,9 +11,11 @@ import {
 } from 'react-router-dom';
 import './index.css';
 
-init({
-  dsn: 'https://50e71fa7abea49288b136cb517fc55be@sentry.io/1268615',
-});
+if (process.env.NODE_ENV === 'production') {
+  init({
+    dsn: 'https://50e71fa7abea49288b136cb517fc55be@sentry.io/1268615',
+  });
+}
 
 ReactDOM.render(
   <DocumentTitle title='Typey Type for Stenographers'>
