@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 
+// To test this component out, throw an error in the child component that the boundary wraps:
+// constructor () {
+  // super() 
+  // throw new Error('This is an error')
+// }
+
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
