@@ -126,6 +126,34 @@ class UserSettings extends Component {
                     </label>
                   </div>
 
+                  <div className="checkbox-group mt2">
+                    <label className="checkbox-label">
+                      <input
+                        className="checkbox-input"
+                        type="checkbox"
+                        name="strictTypography"
+                        id="strictTypography"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.strictTypography}
+                        onChange={this.props.changeUserSetting}
+                      />
+                      <Tooltip
+                        title='Typing "Straight quotes" won’t match “curly quotes” in lesson material'
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Strict typography
+                      </Tooltip>
+                    </label>
+                  </div>
+
                   <div className="checkbox-group">
                     <label className="checkbox-label">
                       <input

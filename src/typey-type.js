@@ -371,6 +371,7 @@ function loadPersonalPreferences() {
   let userSettings = {
     blurMaterial: false,
     caseSensitive: false,
+    strictTypography: false,
     retainedWords: true,
     limitNumberOfWords: 45,
     newWords: true,
