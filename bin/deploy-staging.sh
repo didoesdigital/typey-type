@@ -26,25 +26,10 @@ ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-type
 
 
 
-VERSION=`git describe --abbrev=0 --tags`
-yarn run sentry-cli releases new "$VERSION"
-
-
-
-REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build
-
-
-
-
 # git tag -n
 rsync --archive --verbose --delete --exclude=".DS_Store" -e "ssh -p 2222" ~/projects/typey-type/build/ di@localhost:www/typey-type/
 
 
 
-yarn run sentry-cli releases files "$VERSION" upload-sourcemaps ~/projects/typey-type/build/static/js --url-prefix '~/typey-type/static/js'
-yarn run sentry-cli releases finalize "$VERSION"
-yarn run sentry-cli releases deploys "$VERSION" new -e staging
-
-
-
+VERSION=`git describe --abbrev=0 --tags`
 say "Deployed $VERSION to staging on port 8080."

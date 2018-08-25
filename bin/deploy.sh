@@ -31,7 +31,15 @@ git tag -n
 # cd -
 # cd ~/projects/thebakery/di.id.au/
 tig status
+
+
+
 VERSION=`git describe --abbrev=0 --tags`
+yarn run sentry-cli releases new "$VERSION"
+
+
+
+# Build the production app!
 REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build
 
 
@@ -44,6 +52,9 @@ rsync -avz --delete --exclude=".DS_Store" ~/projects/typey-type/build/ di@167.99
 
 
 
+
+yarn run sentry-cli releases files "$VERSION" upload-sourcemaps ~/projects/typey-type/build/static/js --url-prefix '~/typey-type/static/js'
+yarn run sentry-cli releases finalize "$VERSION"
 yarn run sentry-cli releases deploys "$VERSION" new -e production
 
 
