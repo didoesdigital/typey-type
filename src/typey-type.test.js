@@ -647,7 +647,7 @@ describe('loadPersonalPreferences', () => {
       let userSettings = {
         blurMaterial: false,
         caseSensitive: false,
-        strictTypography: false,
+        simpleTypography: true,
         retainedWords: true,
         limitNumberOfWords: 45,
         newWords: true,
@@ -794,7 +794,7 @@ describe('matchSplitText', () => {
     let settings = {ignoredChars: ''};
     const userSettings = {
       caseSensitive: false,
-      strictTypography: false,
+      simpleTypography: true,
       retainedWords: false,
       limitNumberOfWords: 0,
       newWords: true,
@@ -869,7 +869,7 @@ describe('matchSplitText', () => {
     const settings = {ignoredChars: ''};
     const userSettings = {
       caseSensitive: true,
-      strictTypography: false,
+      simpleTypography: true,
       retainedWords: false,
       limitNumberOfWords: 0,
       newWords: true,
@@ -1010,7 +1010,7 @@ describe('matchSplitText', () => {
     const settings = {ignoredChars: '^-'};
     const userSettings = {
       caseSensitive: true,
-      strictTypography: false,
+      simpleTypography: true,
       retainedWords: false,
       limitNumberOfWords: 0,
       newWords: true,
@@ -1070,7 +1070,7 @@ describe('matchSplitText', () => {
     const settings = {ignoredChars: '^-'};
     const userSettings = {
       caseSensitive: true,
-      strictTypography: false,
+      simpleTypography: true,
       retainedWords: false,
       limitNumberOfWords: 0,
       newWords: true,

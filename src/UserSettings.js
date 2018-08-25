@@ -131,14 +131,14 @@ class UserSettings extends Component {
                       <input
                         className="checkbox-input"
                         type="checkbox"
-                        name="strictTypography"
-                        id="strictTypography"
+                        name="simpleTypography"
+                        id="simpleTypography"
                         disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.strictTypography}
+                        checked={this.props.userSettings.simpleTypography}
                         onChange={this.props.changeUserSetting}
                       />
                       <Tooltip
-                        title='Typing "Straight quotes" won’t match “curly quotes” in lesson material'
+                        title='Simple typography replaces “curly quotes” in lesson material with "straight quotes"'
                         className="mw-240"
                         animation="shift"
                         arrow="true"
@@ -149,7 +149,7 @@ class UserSettings extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        Strict typography
+                        Simple typography
                       </Tooltip>
                     </label>
                   </div>

@@ -500,9 +500,9 @@ describe('replaceSmartTypography with typography', () => {
     ];
   });
 
-  describe('has strict typography', () => {
+  describe('has fancy typography', () => {
     let userSettings = {
-      strictTypography: true
+      simpleTypography: false
     }
 
     it('should return a lesson with smart typography', () => {
@@ -524,9 +524,9 @@ describe('replaceSmartTypography with typography', () => {
     });
   });
 
-  describe('has non-strict typography', () => {
+  describe('has simple typography', () => {
     let userSettings = {
-      strictTypography: false
+      simpleTypography: true
     }
 
     it('should return a lesson with dumb typography', () => {

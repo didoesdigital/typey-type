@@ -81,7 +81,7 @@ class App extends Component {
       userSettings: {
         blurMaterial: false,
         caseSensitive: false,
-        strictTypography: false,
+        simpleTypography: true,
         retainedWords: true,
         limitNumberOfWords: 45,
         newWords: true,
@@ -614,7 +614,7 @@ class App extends Component {
 
     this.stopTimer();
 
-    if (!this.state.userSettings.strictTypography) {
+    if (this.state.userSettings.simpleTypography) {
       newLesson.presentedMaterial = replaceSmartTypography.call(this, newLesson.presentedMaterial);
     }
 
@@ -1131,7 +1131,7 @@ function increaseMetWords(meetingsCount) {
 }
 
 function replaceSmartTypography(presentedMaterial, userSettings = this.state.userSettings) {
-  if (userSettings.strictTypography === false) {
+  if (userSettings.simpleTypography) {
     let presentedMaterialLength = presentedMaterial.length;
     for (let i = 0; i < presentedMaterialLength; i++) {
       let phrase = presentedMaterial[i].phrase;
