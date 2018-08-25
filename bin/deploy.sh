@@ -13,7 +13,6 @@ if [[ $REPLY =~ ^[Yy]$ ]];
     exit
 fi
 
-ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-typey-type-for-standard-dict-set.rb
 if [[ `git branch-name` != master ]];
   then
     echo "Not on master!"
@@ -22,16 +21,17 @@ if [[ `git branch-name` != master ]];
     echo "You're on master"
 fi
 
+ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-typey-type-for-standard-dict-set.rb
 
 
 
-yarn run build
 git tag -n
 # cd ~/projects/thebakery/diidau-src/typey-type/
 # make
 # cd -
 # cd ~/projects/thebakery/di.id.au/
 tig status
+REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build
 
 
 
@@ -43,4 +43,8 @@ rsync -avz --delete --exclude=".DS_Store" ~/projects/typey-type/build/ di@167.99
 
 
 
-say "Deployed to production at DaɪDoesDigital.com"
+yarn run sentry-cli releases deploys "$VERSION" new -e production
+
+
+
+say "Deployed $VERSION to production at DaɪDoesDigital.com"
