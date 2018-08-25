@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { increaseMetWords, filterByFamiliarity, sortLesson } from './App';
+import {
+  increaseMetWords,
+  filterByFamiliarity,
+  replaceSmartTypography,
+  sortLesson
+} from './App';
 
 it('renders without crashing', () => {
 //   const div = document.createElement('div');
@@ -475,4 +480,71 @@ describe('filterByFamiliarity with different spacing settings', () => {
     });
   });
 
+});
+
+describe('replaceSmartTypography with typography', () => {
+  let presentedMaterial;
+  beforeEach(() => {
+    presentedMaterial = [
+      {phrase: '—', stroke: 'PH-RB'}, // em dash
+      {phrase: '–', stroke: 'TPH-RB'}, // en dash
+      {phrase: '-', stroke: 'XXX'}, // hyphen minus
+      {phrase: '−', stroke: 'XXX'}, // minus sign
+      {phrase: '᠆', stroke: 'XXX'}, // mongolian todo soft hyphen
+      {phrase: '‑', stroke: 'XXX'}, // non-breaking hyphen
+      {phrase: '…', stroke: 'XXX'},
+      {phrase: '“', stroke: 'XXX'},
+      {phrase: '”', stroke: 'XXX'},
+      {phrase: '‘', stroke: 'XXX'},
+      {phrase: '’', stroke: 'XXX'}
+    ];
+  });
+
+  describe('has strict typography', () => {
+    let userSettings = {
+      strictTypography: true
+    }
+
+    it('should return a lesson with smart typography', () => {
+      expect(replaceSmartTypography(presentedMaterial, userSettings)).toEqual(
+        [
+          {phrase: '—', stroke: 'PH-RB'}, // em dash
+          {phrase: '–', stroke: 'TPH-RB'}, // en dash
+          {phrase: '-', stroke: 'XXX'}, // hyphen minus
+          {phrase: '−', stroke: 'XXX'}, // minus sign
+          {phrase: '᠆', stroke: 'XXX'}, // mongolian todo soft hyphen
+          {phrase: '‑', stroke: 'XXX'}, // non-breaking hyphen
+          {phrase: '…', stroke: 'XXX'},
+          {phrase: '“', stroke: 'XXX'},
+          {phrase: '”', stroke: 'XXX'},
+          {phrase: '‘', stroke: 'XXX'},
+          {phrase: '’', stroke: 'XXX'}
+        ]
+      );
+    });
+  });
+
+  describe('has non-strict typography', () => {
+    let userSettings = {
+      strictTypography: false
+    }
+
+    it('should return a lesson with dumb typography', () => {
+      expect(replaceSmartTypography(presentedMaterial, userSettings)).toEqual(
+        [
+          {phrase: '-', stroke: 'H-PB'},
+          {phrase: '-', stroke: 'H-PB'},
+          {phrase: '-', stroke: 'H-PB'},
+          {phrase: '-', stroke: 'H-PB'},
+          {phrase: '-', stroke: 'H-PB'},
+          {phrase: '-', stroke: 'H-PB'},
+          {phrase: '...', stroke: 'HR-PS'},
+          {phrase: '"', stroke: 'KW-GS'},
+          {phrase: '"', stroke: 'KR-GS'},
+          {phrase: "'", stroke: 'AE'},
+          {phrase: "'", stroke: 'AE'}
+        ]
+      );
+    });
+  });
 });

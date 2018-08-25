@@ -126,7 +126,7 @@ class UserSettings extends Component {
                     </label>
                   </div>
 
-                  <div className="checkbox-group mt2">
+                  <div className="checkbox-group">
                     <label className="checkbox-label">
                       <input
                         className="checkbox-input"

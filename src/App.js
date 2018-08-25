@@ -614,6 +614,10 @@ class App extends Component {
 
     this.stopTimer();
 
+    if (!this.state.userSettings.strictTypography) {
+      newLesson.presentedMaterial = replaceSmartTypography.call(this, newLesson.presentedMaterial);
+    }
+
     newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
     newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings, this.state.revisionMode);
 
@@ -1126,6 +1130,46 @@ function increaseMetWords(meetingsCount) {
   return newState;
 }
 
+function replaceSmartTypography(presentedMaterial, userSettings = this.state.userSettings) {
+  if (userSettings.strictTypography === false) {
+    let presentedMaterialLength = presentedMaterial.length;
+    for (let i = 0; i < presentedMaterialLength; i++) {
+      let phrase = presentedMaterial[i].phrase;
+
+      // dashes: em dash, en dash, minus sign, hyphen minus, non-breaking hyphen, mongolian soft hyphen, double hyphen
+      if (phrase === '—' || phrase === '–' || phrase === '−' || phrase === '-' || phrase === '‑' || phrase === '᠆' || phrase === '⹀') {
+        presentedMaterial[i].phrase = '-';
+        presentedMaterial[i].stroke = 'H-PB';
+      }
+
+      // ellipsis
+      if (phrase === '…') {
+        presentedMaterial[i].phrase = '...';
+        presentedMaterial[i].stroke = 'HR-PS';
+      }
+
+      // curly single quote
+      if (phrase === '‘' || phrase === '’') {
+        presentedMaterial[i].phrase = "'";
+        presentedMaterial[i].stroke = 'AE';
+      }
+
+      // curly left double quote
+      if (phrase === '“') {
+        presentedMaterial[i].phrase = '"';
+        presentedMaterial[i].stroke = 'KW-GS';
+      }
+
+      // curly right double quote
+      if (phrase === '”') {
+        presentedMaterial[i].phrase = '"';
+        presentedMaterial[i].stroke = 'KR-GS';
+      }
+    }
+  }
+  return presentedMaterial;
+}
+
 function sortLesson(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings) {
   if (userSettings.sortOrder === 'sortRandom') {
     return randomise(presentedMaterial);
@@ -1236,4 +1280,4 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
 // }
 
 export default App;
-export {increaseMetWords, filterByFamiliarity, sortLesson};
+export {increaseMetWords, filterByFamiliarity, sortLesson, replaceSmartTypography};
