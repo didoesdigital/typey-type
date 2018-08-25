@@ -521,6 +521,30 @@ class Support extends Component {
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
               </GoogleAnalytics.OutboundLink> to track usage data for improving the site using cookies. Typey&nbsp;Type anonymises IP addresses before sending them to Google and Google Analytics retains cookie data for 26 months.</p>
+            <p>This site uses{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Sentry"
+                aria-label="Sentry (external link opens in new tab)"
+                to="https://sentry.io/privacy/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="nowrap">Sentry
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink> for error reporting to improve the site.</p>
           </div>
         </div>
       </main>
