@@ -31,6 +31,7 @@ git tag -n
 # cd -
 # cd ~/projects/thebakery/di.id.au/
 tig status
+VERSION=`git describe --abbrev=0 --tags`
 REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build
 
 
