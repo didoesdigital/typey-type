@@ -24,6 +24,11 @@ fi
 
 ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-typey-type-for-standard-dict-set.rb
 
+VERSION=`git describe --abbrev=0 --tags`
+# Build the production app!
+REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build
+
+
 
 
 # git tag -n
@@ -31,5 +36,4 @@ rsync --archive --verbose --delete --exclude=".DS_Store" -e "ssh -p 2222" ~/proj
 
 
 
-VERSION=`git describe --abbrev=0 --tags`
 say "Deployed $VERSION to staging on port 8080."
