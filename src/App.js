@@ -615,7 +615,7 @@ class App extends Component {
     this.stopTimer();
 
     if (this.state.userSettings.simpleTypography) {
-      newLesson.presentedMaterial = replaceSmartTypography.call(this, newLesson.presentedMaterial);
+      newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial);
     }
 
     newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
@@ -1130,40 +1130,53 @@ function increaseMetWords(meetingsCount) {
   return newState;
 }
 
-function replaceSmartTypography(presentedMaterial, userSettings = this.state.userSettings) {
+function replaceSmartTypographyInPresentedMaterial(presentedMaterial, userSettings = this.state.userSettings) {
   if (userSettings.simpleTypography) {
     let presentedMaterialLength = presentedMaterial.length;
     for (let i = 0; i < presentedMaterialLength; i++) {
       let phrase = presentedMaterial[i].phrase;
+      let stroke = presentedMaterial[i].stroke;
 
       // dashes: em dash, en dash, minus sign, hyphen minus, non-breaking hyphen, mongolian soft hyphen, double hyphen
-      if (phrase === '—' || phrase === '–' || phrase === '−' || phrase === '-' || phrase === '‑' || phrase === '᠆' || phrase === '⹀') {
-        presentedMaterial[i].phrase = '-';
-        presentedMaterial[i].stroke = 'H-PB';
-      }
-
-      // ellipsis
-      if (phrase === '…') {
-        presentedMaterial[i].phrase = '...';
-        presentedMaterial[i].stroke = 'HR-PS';
+      if (phrase.match(/[—–−‑᠆⹀-]/)) {
+        presentedMaterial[i].phrase = phrase.replace(/[—–−‑᠆⹀-]/g, "-");
+        presentedMaterial[i].stroke = stroke.split(' ').map(stroke => {
+          return stroke.replace(/^(EPL\/TKA\*RB|PH-RB)$/, 'H-PB'); // replace EPL/TKA*RB and PH-RB with H-PB
+        }).join(' ');
       }
 
       // curly single quote
-      if (phrase === '‘' || phrase === '’') {
-        presentedMaterial[i].phrase = "'";
-        presentedMaterial[i].stroke = 'AE';
+      if (phrase.match(/[‘’]/)) {
+        presentedMaterial[i].phrase.replace(/[‘’]/g, "'");
+        presentedMaterial[i].stroke.split(' ').map(stroke => {
+          stroke.replace(/^(TP-P|TP-L)$/, 'AE'); // replace TP-P, TP-L with AE
+        }).join(' ');
+      }
+
+      // ellipsis
+      if (phrase.match(/[…]/)) {
+        presentedMaterial[i].phrase.replace(/[…]/g, "...");
+        presentedMaterial[i].stroke.split(' ').map(stroke => {
+          stroke.replace(/^SKWR-RBGSZ$/, 'HR-PS');
+        }).join(' ');
       }
 
       // curly left double quote
-      if (phrase === '“') {
-        presentedMaterial[i].phrase = '"';
-        presentedMaterial[i].stroke = 'KW-GS';
+      if (phrase.match(/[“]/)) {
+        presentedMaterial[i].phrase.replace(/[“]/g, "...");
+        // The stroke is already correct
+        // presentedMaterial[i].stroke.split(' ').map(stroke => {
+        //   stroke.replace(/^KW-GS$/, 'KW-GS');
+        // }).join(' ');
       }
 
       // curly right double quote
-      if (phrase === '”') {
-        presentedMaterial[i].phrase = '"';
-        presentedMaterial[i].stroke = 'KR-GS';
+      if (phrase.match(/[”]/)) {
+        presentedMaterial[i].phrase.replace(/[“]/g, "...");
+        // The stroke is already correct
+        // presentedMaterial[i].stroke.split(' ').map(stroke => {
+        //   stroke.replace(/^KR-GS$/, 'KR-GS');
+        // }).join(' ');
       }
     }
   }
@@ -1280,4 +1293,4 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
 // }
 
 export default App;
-export {increaseMetWords, filterByFamiliarity, sortLesson, replaceSmartTypography};
+export {increaseMetWords, filterByFamiliarity, sortLesson, replaceSmartTypographyInPresentedMaterial};
