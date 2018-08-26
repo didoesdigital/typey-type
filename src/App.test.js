@@ -1,5 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import {
   increaseMetWords,
   filterByFamiliarity,
@@ -489,10 +487,9 @@ describe('replaceSmartTypographyInPresentedMaterial with typography', () => {
       {phrase: 'madness—a', stroke: 'PHAD/-PBS EPL/TKA*RB AEU'}, // em dash in a string
       {phrase: '—', stroke: 'PH-RB'}, // em dash
       {phrase: '–', stroke: 'TPH-RB'}, // en dash
-      {phrase: '-', stroke: 'XXX'}, // hyphen minus
-      {phrase: '−', stroke: 'XXX'}, // minus sign
-      {phrase: '᠆', stroke: 'XXX'}, // mongolian todo soft hyphen
       {phrase: '‑', stroke: 'XXX'}, // non-breaking hyphen
+      {phrase: '᠆', stroke: 'XXX'}, // mongolian todo soft hyphen
+      {phrase: '⹀', stroke: 'XXX'}, // double hyphen
       {phrase: '…', stroke: 'SKWR-RBGSZ'},
       {phrase: '“', stroke: 'KW-GS'},
       {phrase: '”', stroke: 'KR-GS'},
@@ -512,10 +509,9 @@ describe('replaceSmartTypographyInPresentedMaterial with typography', () => {
           {phrase: 'madness—a', stroke: 'PHAD/-PBS EPL/TKA*RB AEU'}, // em dash in a string
           {phrase: '—', stroke: 'PH-RB'}, // em dash
           {phrase: '–', stroke: 'TPH-RB'}, // en dash
-          {phrase: '-', stroke: 'XXX'}, // hyphen minus
-          {phrase: '−', stroke: 'XXX'}, // minus sign
-          {phrase: '᠆', stroke: 'XXX'}, // mongolian todo soft hyphen
           {phrase: '‑', stroke: 'XXX'}, // non-breaking hyphen
+          {phrase: '᠆', stroke: 'XXX'}, // mongolian todo soft hyphen
+          {phrase: '⹀', stroke: 'XXX'}, // double hyphen
           {phrase: '…', stroke: 'SKWR-RBGSZ'},
           {phrase: '“', stroke: 'KW-GS'},
           {phrase: '”', stroke: 'KR-GS'},
@@ -535,7 +531,6 @@ describe('replaceSmartTypographyInPresentedMaterial with typography', () => {
       expect(replaceSmartTypographyInPresentedMaterial(presentedMaterial, userSettings)).toEqual(
         [
           {phrase: 'madness-a', stroke: 'PHAD/-PBS H-PB AEU'},
-          {phrase: '-', stroke: 'H-PB'},
           {phrase: '-', stroke: 'H-PB'},
           {phrase: '-', stroke: 'H-PB'},
           {phrase: '-', stroke: 'H-PB'},

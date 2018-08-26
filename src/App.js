@@ -1135,8 +1135,8 @@ function replaceSmartTypographyInPresentedMaterial(presentedMaterial, userSettin
     let presentedMaterialLength = presentedMaterial.length;
     for (let i = 0; i < presentedMaterialLength; i++) {
 
-      // dashes: em dash, en dash, minus sign, hyphen minus, non-breaking hyphen, mongolian soft hyphen, double hyphen
-      replaceSmartTypographyInPhraseAndStroke(presentedMaterial[i], /[—–−‑᠆⹀-]/g, "-", /^(EPL\/TKA\*RB|TPH-RB|PH-RB)$/, 'H-PB');
+      // dashes: em dash, en dash, non-breaking hyphen, mongolian soft hyphen, double hyphen
+      replaceSmartTypographyInPhraseAndStroke(presentedMaterial[i], /[—–‑᠆⹀]/g, "-", /^(EPL\/TKA\*RB|TPH-RB|PH-RB)$/, 'H-PB');
 
       // curly single quote
       replaceSmartTypographyInPhraseAndStroke(presentedMaterial[i], /[‘’]/g, "'", /^(TP-P|TP-L)$/, 'AE');
@@ -1160,7 +1160,9 @@ function replaceSmartTypographyInPhraseAndStroke(presentedMaterialItem, smartTyp
     presentedMaterialItem.stroke = presentedMaterialItem.stroke.split(' ').map(stroke => {
       return stroke.replace(smartTypographyStrokesRegex, dumbTypographyStroke);
     }).join(' ');
-    if (presentedMaterialItem.phrase === '-' && presentedMaterialItem.stroke !== 'H-PB') { presentedMaterialItem.stroke = 'H-PB'; }
+
+    // by keeping this inside this function and only after matching on unusual hyphens or dashes, we don't replace people's preferred hyphen stroke for normal hyphens
+    if (presentedMaterialItem.phrase === '-' && presentedMaterialItem.stroke === 'XXX') { presentedMaterialItem.stroke = 'H-PB'; }
   }
 }
 
