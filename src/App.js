@@ -1134,53 +1134,74 @@ function replaceSmartTypographyInPresentedMaterial(presentedMaterial, userSettin
   if (userSettings.simpleTypography) {
     let presentedMaterialLength = presentedMaterial.length;
     for (let i = 0; i < presentedMaterialLength; i++) {
-      let phrase = presentedMaterial[i].phrase;
-      let stroke = presentedMaterial[i].stroke;
 
       // dashes: em dash, en dash, minus sign, hyphen minus, non-breaking hyphen, mongolian soft hyphen, double hyphen
-      if (phrase.match(/[—–−‑᠆⹀-]/)) {
-        presentedMaterial[i].phrase = phrase.replace(/[—–−‑᠆⹀-]/g, "-");
-        presentedMaterial[i].stroke = stroke.split(' ').map(stroke => {
-          return stroke.replace(/^(EPL\/TKA\*RB|PH-RB)$/, 'H-PB'); // replace EPL/TKA*RB and PH-RB with H-PB
-        }).join(' ');
-      }
+      replaceThings(presentedMaterial[i], /[—–−‑᠆⹀-]/g, "-", /^(EPL\/TKA\*RB|TPH-RB|PH-RB)$/, 'H-PB');
 
       // curly single quote
-      if (phrase.match(/[‘’]/)) {
-        presentedMaterial[i].phrase.replace(/[‘’]/g, "'");
-        presentedMaterial[i].stroke.split(' ').map(stroke => {
-          stroke.replace(/^(TP-P|TP-L)$/, 'AE'); // replace TP-P, TP-L with AE
-        }).join(' ');
-      }
+      replaceThings(presentedMaterial[i], /[‘’]/g, "'", /^(TP-P|TP-L)$/, 'AE');
 
       // ellipsis
-      if (phrase.match(/[…]/)) {
-        presentedMaterial[i].phrase.replace(/[…]/g, "...");
-        presentedMaterial[i].stroke.split(' ').map(stroke => {
-          stroke.replace(/^SKWR-RBGSZ$/, 'HR-PS');
-        }).join(' ');
-      }
+      replaceThings(presentedMaterial[i], /[…]/g, "...", /^SKWR-RBGSZ$/, 'HR-PS');
 
       // curly left double quote
-      if (phrase.match(/[“]/)) {
-        presentedMaterial[i].phrase.replace(/[“]/g, "...");
-        // The stroke is already correct
-        // presentedMaterial[i].stroke.split(' ').map(stroke => {
-        //   stroke.replace(/^KW-GS$/, 'KW-GS');
-        // }).join(' ');
-      }
+      replaceThings(presentedMaterial[i], /[“]/g, '"', /^KW-GS$/, 'KW-GS');
 
       // curly right double quote
-      if (phrase.match(/[”]/)) {
-        presentedMaterial[i].phrase.replace(/[“]/g, "...");
-        // The stroke is already correct
-        // presentedMaterial[i].stroke.split(' ').map(stroke => {
-        //   stroke.replace(/^KR-GS$/, 'KR-GS');
-        // }).join(' ');
-      }
+      replaceThings(presentedMaterial[i], /[”]/g, '"', /^KR-GS$/, 'KR-GS');
+
+      // if (phrase.match(/[—–−‑᠆⹀-]/)) {
+      //   presentedMaterial[i].phrase = phrase.replace(/[—–−‑᠆⹀-]/g, "-");
+      //   presentedMaterial[i].stroke = stroke.split(' ').map(stroke => {
+      //     return stroke.replace(/^(EPL\/TKA\*RB|PH-RB)$/, 'H-PB'); // replace EPL/TKA*RB and PH-RB with H-PB
+      //   }).join(' ');
+      // }
+
+      // curly single quote
+      // if (phrase.match(/[‘’]/)) {
+      //   presentedMaterial[i].phrase.replace(/[‘’]/g, "'");
+      //   presentedMaterial[i].stroke.split(' ').map(stroke => {
+      //     stroke.replace(/^(TP-P|TP-L)$/, 'AE'); // replace TP-P, TP-L with AE
+      //   }).join(' ');
+      // }
+
+      // ellipsis
+      // if (phrase.match(/[…]/)) {
+      //   presentedMaterial[i].phrase.replace(/[…]/g, "...");
+      //   presentedMaterial[i].stroke.split(' ').map(stroke => {
+      //     stroke.replace(/^SKWR-RBGSZ$/, 'HR-PS');
+      //   }).join(' ');
+      // }
+
+      // curly left double quote
+      // if (phrase.match(/[“]/)) {
+      //   presentedMaterial[i].phrase.replace(/[“]/g, "...");
+      //   // The stroke is already correct
+      //   // presentedMaterial[i].stroke.split(' ').map(stroke => {
+      //   //   stroke.replace(/^KW-GS$/, 'KW-GS');
+      //   // }).join(' ');
+      // }
+
+      // curly right double quote
+      // if (phrase.match(/[”]/)) {
+      //   presentedMaterial[i].phrase.replace(/[“]/g, "...");
+      //   // The stroke is already correct
+      //   // presentedMaterial[i].stroke.split(' ').map(stroke => {
+      //   //   stroke.replace(/^KR-GS$/, 'KR-GS');
+      //   // }).join(' ');
+      // }
     }
   }
   return presentedMaterial;
+}
+
+function replaceThings(presentedMaterialItem, smartTypographyRegex, dumbTypographyChar, smartTypographyStrokesRegex, dumbTypographyStroke) {
+  if (presentedMaterialItem.phrase.match(smartTypographyRegex)) {
+    presentedMaterialItem.phrase = presentedMaterialItem.phrase.replace(smartTypographyRegex, dumbTypographyChar);
+    presentedMaterialItem.stroke = presentedMaterialItem.stroke.split(' ').map(stroke => {
+      return stroke.replace(smartTypographyStrokesRegex, dumbTypographyStroke);
+    }).join(' ');
+  }
 }
 
 function sortLesson(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings) {

@@ -494,10 +494,10 @@ describe('replaceSmartTypographyInPresentedMaterial with typography', () => {
       {phrase: '᠆', stroke: 'XXX'}, // mongolian todo soft hyphen
       {phrase: '‑', stroke: 'XXX'}, // non-breaking hyphen
       {phrase: '…', stroke: 'SKWR-RBGSZ'},
-      {phrase: '“', stroke: 'XXX'},
-      {phrase: '”', stroke: 'XXX'},
-      {phrase: '‘', stroke: 'XXX'},
-      {phrase: '’', stroke: 'XXX'}
+      {phrase: '“', stroke: 'KW-GS'},
+      {phrase: '”', stroke: 'KR-GS'},
+      {phrase: '‘', stroke: 'TP-P'},
+      {phrase: '’', stroke: 'TP-L'}
     ];
   });
 
@@ -517,10 +517,10 @@ describe('replaceSmartTypographyInPresentedMaterial with typography', () => {
           {phrase: '᠆', stroke: 'XXX'}, // mongolian todo soft hyphen
           {phrase: '‑', stroke: 'XXX'}, // non-breaking hyphen
           {phrase: '…', stroke: 'SKWR-RBGSZ'},
-          {phrase: '“', stroke: 'XXX'},
-          {phrase: '”', stroke: 'XXX'},
-          {phrase: '‘', stroke: 'XXX'},
-          {phrase: '’', stroke: 'XXX'}
+          {phrase: '“', stroke: 'KW-GS'},
+          {phrase: '”', stroke: 'KR-GS'},
+          {phrase: '‘', stroke: 'TP-P'},
+          {phrase: '’', stroke: 'TP-L'}
         ]
       );
     });
