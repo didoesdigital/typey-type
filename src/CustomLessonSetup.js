@@ -18,7 +18,8 @@ class CustomLessonSetup extends Component {
       dictionary: [],
       sourceWordsAndStrokes: {"the": "-T"},
       processedSourceWordsAndStrokes: {"the": "-T"},
-      customWordList: ''
+      customWordList: '',
+      myWords: ''
     }
   }
 
@@ -27,6 +28,7 @@ class CustomLessonSetup extends Component {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
+
     fetchDictionaries().then((json) => {
       let sourceWordsAndStrokes = swapKeyValueInDictionary(json);
       let processedSourceWordsAndStrokes = Object.assign({}, processDictionary(sourceWordsAndStrokes));
@@ -35,6 +37,8 @@ class CustomLessonSetup extends Component {
         processedSourceWordsAndStrokes: processedSourceWordsAndStrokes
       });
     });
+
+    this.addWordListToTextArea(this.state.myWords);
   }
 
   handleWordsForDictionaryEntries(value) {
@@ -60,7 +64,7 @@ class CustomLessonSetup extends Component {
   addWordListToTextArea() {
     let myWords = createWordListFromMetWords(this.props.metWords).join("\n");
     this.handleWordsForDictionaryEntries(myWords);
-    this.setState({customWordList: myWords});
+    this.setState({myWords: myWords});
   }
 
   render() {
@@ -90,83 +94,102 @@ class CustomLessonSetup extends Component {
             </div>
           </div>
         </div>
-        <div className="p3 mx-auto mw-1024">
-          <div className="custom-page-layout">
-            <div>
-              <p>To start a custom lesson, supply a list of words and their strokes. An easy way to create a lesson is to copy columns from a spreadsheet.</p>
-              <p>See the&nbsp;&#8203;
-                <GoogleAnalytics.OutboundLink
-                  eventLabel="community's lessons"
-                  to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
-                  target="_blank">
-                  community's lessons <small>(opens in new tab)</small>
-                </GoogleAnalytics.OutboundLink>.</p>
-              <label htmlFor="your-material">Paste your material here:</label>
-              <textarea
-                id="your-material"
-                aria-describedby="custom-material-format"
-                className="input-textarea mw100 w-100 h-192 overflow-scroll"
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-                spellCheck="false"
-                placeholder="example	KP-PL
+
+          <div className="bg-info landing-page-section">
+            <div className="p3 mx-auto mw-1024">
+              <h3 className="mt0">Create a custom lesson using a list of words and their strokes</h3>
+              <div className="custom-page-layout">
+                <div>
+                  <p>To start a custom lesson, supply a list of words and their strokes. An easy way to create a lesson is to copy columns from a spreadsheet.</p>
+                  <p>See the&nbsp;&#8203;
+                    <GoogleAnalytics.OutboundLink
+                      eventLabel="community's lessons"
+                      to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
+                      target="_blank">
+                      community's lessons <small>(opens in new tab)</small>
+                    </GoogleAnalytics.OutboundLink>.</p>
+                  <label htmlFor="your-material">Paste your material here:</label>
+                  <textarea
+                    id="your-material"
+                    aria-describedby="custom-material-format"
+                    className="input-textarea mw100 w-100 h-192 overflow-scroll"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck="false"
+                    placeholder="example	KP-PL
 consisting of	KAOFG
 examples.	KP-PLS TP-PL"
-                rows="8"
-                wrap="off"
-                onChange={this.props.createCustomLesson}
-                >
-              </textarea>
-            </div>
-            <div>
-              <div className="panel p3">
-                <h2>Share your lessons</h2>
-                <p className="mb0">To help Typey Type grow even faster, be sure to add your lessons to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community's lessons <small>(opens in new tab)</small></a>.</p>
-                <h3>Custom material format</h3>
-                <ul id="custom-material-format" className="text-small ml1 mt0 mb0">
-                  <li>Each word must be on its own line.</li>
-                  <li>Each word must be separated from its stroke by a "Tab" character.</li>
-                  <li>If you skip strokes, multi-stroke words may count as misstrokes.</li>
-                </ul>
+                    rows="8"
+                    wrap="off"
+                    onChange={this.props.createCustomLesson}
+                    >
+                  </textarea>
+                </div>
+                <div>
+                  <div className="panel p3">
+                    <h2>Share your lessons</h2>
+                    <p className="mb0">To help Typey Type grow even faster, be sure to add your lessons to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community's lessons <small>(opens in new tab)</small></a>.</p>
+                    <h3>Custom material format</h3>
+                    <ul id="custom-material-format" className="text-small ml1 mt0 mb0">
+                      <li>Each word must be on its own line.</li>
+                      <li>Each word must be separated from its stroke by a "Tab" character.</li>
+                      <li>If you skip strokes, multi-stroke words may count as misstrokes.</li>
+                    </ul>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <h3>Create Plover lesson from word list</h3>
-          <div className="custom-lesson-generator">
-            <div>
-              <label htmlFor="your-words-for-dictionary-entries">Paste a word list without strokes here to create a custom lesson using Plover theory:</label>
-              <textarea
-                id="your-words-for-dictionary-entries"
-                className="input-textarea mw100 w-100 mb1 overflow-scroll"
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-                spellCheck="false"
-                placeholder="capitalise
+          <div className="bg-white landing-page-section">
+            <div className="p3 mx-auto mw-1024">
+              <h3>Create Plover lesson using a word list</h3>
+              <div className="custom-lesson-generator">
+                <div>
+                  <label htmlFor="your-words-for-dictionary-entries">Paste a word list without strokes here to create a custom lesson using Plover theory:</label>
+                  <textarea
+                    id="your-words-for-dictionary-entries"
+                    className="input-textarea mw100 w-100 mb1 overflow-scroll"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck="false"
+                    placeholder="capitalise
 excluded
 plover"
-                rows="8"
-                wrap="off"
-                onChange={this.handleWordListTextAreaChange.bind(this)}
-                value={this.state.customWordList}
-                >
-              </textarea>
-            </div>
-            <div>
-              <pre id="js-custom-lesson-dictionary-entries" className={filledPre + "h-192 overflow-scroll mw-384 mt1 mb3"}>{dictionaryEntries}</pre>
-              <button className="js-clipboard-button link-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-custom-lesson-dictionary-entries">
-                Copy custom lesson to clipboard
-              </button>
+                    rows="8"
+                    wrap="off"
+                    onChange={this.handleWordListTextAreaChange.bind(this)}
+                    >
+                  </textarea>
+                </div>
+                <div>
+                  <pre id="js-custom-lesson-dictionary-entries" className={filledPre + "h-192 overflow-scroll mw-384 mt1 mb3"}>{dictionaryEntries}</pre>
+                  <button className="js-clipboard-button link-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-custom-lesson-dictionary-entries">
+                    Copy custom lesson to clipboard
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-          <p>Create a word list using words you’ve seen:<br />
-            <button className="link-button" onClick={this.addWordListToTextArea.bind(this)}>
-              Use my words
-            </button>
-          </p>
-        </div>
+
+          <div className="bg-info landing-page-section">
+            <div className="p3 mx-auto mw-1024">
+              <h3>Revise words you have seen</h3>
+              <p>{this.state.myWords && this.state.myWords.length > 0 ? "Words you’ve seen:" : "Once you’ve made some progress, your words will appear here."}</p>
+              <div>
+                <pre
+                  id="js-your-words-for-dictionary-entries"
+                  className="quote h-192 overflow-scroll mw-384 mt1 mb3"
+                ><code>{this.state.myWords}</code></pre>
+                <button className="js-select-all-my-words link-button js-clipboard-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-your-words-for-dictionary-entries">
+                  Copy your words to clipboard
+                </button>
+              </div>
+            </div>
+          </div>
+
       </main>
     )
   }
