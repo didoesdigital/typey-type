@@ -1077,7 +1077,7 @@ label {
     grid-gap: 24px; } }
 
 @media (min-width: 1024px) {
-  .custom-lesson-generator {
+  .gtc-4fr-3fr {
     display: grid;
     grid-template-columns: 4fr 3fr;
     grid-gap: 24px; } }

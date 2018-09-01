@@ -97,7 +97,7 @@ class CustomLessonSetup extends Component {
 
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
-              <h3 className="mt0">Create a custom lesson using a list of words and their strokes</h3>
+              <h3>Create a custom lesson using a list of words and their strokes</h3>
               <div className="custom-page-layout">
                 <div>
                   <p>To start a custom lesson, supply a list of words and their strokes. An easy way to create a lesson is to copy columns from a spreadsheet.</p>
@@ -145,7 +145,7 @@ examples.	KP-PLS TP-PL"
           <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <h3>Create Plover lesson using a word list</h3>
-              <div className="custom-lesson-generator">
+              <div className="gtc-4fr-3fr">
                 <div>
                   <label htmlFor="your-words-for-dictionary-entries">Paste a word list without strokes here to create a custom lesson using Plover theory:</label>
                   <textarea
@@ -177,15 +177,19 @@ plover"
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <h3>Revise words you have seen</h3>
-              <p>{this.state.myWords && this.state.myWords.length > 0 ? "Words you’ve seen:" : "Once you’ve made some progress, your words will appear here."}</p>
-              <div>
-                <pre
-                  id="js-your-words-for-dictionary-entries"
-                  className="quote h-192 overflow-scroll mw-384 mt1 mb3"
-                ><code>{this.state.myWords}</code></pre>
-                <button className="js-select-all-my-words link-button js-clipboard-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-your-words-for-dictionary-entries">
-                  Copy your words to clipboard
-                </button>
+              <div className="gtc-4fr-3fr">
+                <div>
+                  <p>{this.state.myWords && this.state.myWords.length > 0 ? "You can use these words you’ve seen to create a custom lesson:" : "Once you’ve made some progress, your words will appear here."}</p>
+                  <pre
+                    id="js-your-words-for-dictionary-entries"
+                    className="quote h-192 overflow-scroll mw-384 mt1 mb3"
+                  ><code>{this.state.myWords}</code></pre>
+                  <button className="js-select-all-my-words link-button js-clipboard-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-your-words-for-dictionary-entries">
+                    Copy your words to clipboard
+                  </button>
+                </div>
+                <div>
+                </div>
               </div>
             </div>
           </div>
