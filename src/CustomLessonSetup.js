@@ -38,7 +38,7 @@ class CustomLessonSetup extends Component {
       });
     });
 
-    this.addWordListToTextArea(this.state.myWords);
+    this.addWordListToPage(this.state.myWords);
   }
 
   handleWordsForDictionaryEntries(value) {
@@ -61,7 +61,7 @@ class CustomLessonSetup extends Component {
     return event;
   }
 
-  addWordListToTextArea() {
+  addWordListToPage() {
     let myWords = createWordListFromMetWords(this.props.metWords).join("\n");
     this.handleWordsForDictionaryEntries(myWords);
     this.setState({myWords: myWords});
