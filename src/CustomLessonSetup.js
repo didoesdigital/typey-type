@@ -39,6 +39,9 @@ class CustomLessonSetup extends Component {
     });
 
     this.addWordListToPage(this.state.myWords);
+    this.setState({
+      dictionary: []
+    });
   }
 
   handleWordsForDictionaryEntries(value) {
