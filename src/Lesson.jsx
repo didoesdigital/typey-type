@@ -88,7 +88,7 @@ class Lesson extends Component {
     let firstVisit;
     let strokeTip;
     let lessonSubTitle = '';
-    if (this.props.lesson.subtitle.length > 0) {
+    if (this.props.lesson && this.props.lesson.subtitle && this.props.lesson.subtitle.length > 0) {
       lessonSubTitle = ': '+this.props.lessonSubTitle;
     }
 
