@@ -70,7 +70,7 @@ class Header extends Component {
                 />
                 <IconSearch role="presentation" iconWidth="24" iconHeight="24" className="mr1 svg-icon-wrapper svg-baseline search-icon" />
                 <div className="visually-hidden">Selected lesson to start next:
-                  <div role="status" aria-live="assertive">
+                  <div role="status" aria-live="assertive" aria-atomic="true">
                     {nextLesson}
                   </div>
                 </div>
