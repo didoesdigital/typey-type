@@ -856,9 +856,15 @@ class App extends Component {
 
       if (!strokeHintShown && accurateStroke) {
 
+        // for suffixes and prefixes, record material with ignored chars instead of actualText
         let lesson = this.state.lesson;
         if (lesson && lesson.settings && lesson.settings.ignoredChars && lesson.settings.ignoredChars.length > 0 ) {
           actualText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
+          if (this.state.userSettings.spacePlacement === 'spaceBeforeOutput') {
+            actualText = ' ' + this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
+          } else if (this.state.userSettings.spacePlacement === 'spaceAfterOutput') {
+            actualText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase + ' ';
+          }
         }
 
         const meetingsCount = newState.metWords[actualText] || 0;
