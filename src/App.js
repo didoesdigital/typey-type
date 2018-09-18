@@ -791,7 +791,7 @@ class App extends Component {
   }
 
   updateMarkup(event) {
-    const actualText = event.target.value;
+    let actualText = event.target.value;
 
     if (this.state.startTime === null) {
       this.setState({
@@ -855,6 +855,12 @@ class App extends Component {
       if (!accurateStroke) { newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1; }
 
       if (!strokeHintShown && accurateStroke) {
+
+        let lesson = this.state.lesson;
+        if (lesson && lesson.settings && lesson.settings.ignoredChars && lesson.settings.ignoredChars.length > 0 ) {
+          actualText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
+        }
+
         const meetingsCount = newState.metWords[actualText] || 0;
         Object.assign(newState, increaseMetWords.call(this, meetingsCount));
         newState.metWords[actualText] = meetingsCount + 1;
