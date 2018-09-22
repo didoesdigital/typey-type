@@ -27,7 +27,7 @@ class Contribute extends Component {
         </div>
         <div className="p3 mx-auto mw-1024">
           <div className="mw-568">
-            <p>Thanks for your interest in Typey&nbsp;Type!</p>
+            <p className="mt3">Thanks for your interest in Typey&nbsp;Type!</p>
 
             <h3 id="patreon">Patreon</h3>
             <p>You can support my efforts on{" "}
