@@ -18,7 +18,7 @@
     "react-ga": "^2.5.0",
     "react-numeric-input": "^2.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.15",
+    "react-scripts": "1.0.16",
     "react-tippy": "git+ssh://git@github.com:dimonster/react-tippy.git#custom-tag-element-for-tooltip-trigger",
     "react-transition-group": "^2.4.0",
     "why-did-you-update": "^0.1.1"
