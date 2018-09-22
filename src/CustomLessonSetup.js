@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
 import './App.css';
 import Clipboard from 'clipboard';
+import { IconExternal } from './Icon';
+import { Tooltip } from 'react-tippy';
 import {
   createWordListFromMetWords,
   fetchDictionaries,
@@ -106,11 +108,26 @@ class CustomLessonSetup extends Component {
                   <p>To start a custom lesson, supply a list of words and their strokes. An easy way to create a lesson is to copy columns from a spreadsheet.</p>
                   <p>See the&nbsp;&#8203;
                     <GoogleAnalytics.OutboundLink
-                      eventLabel="community's lessons"
+                      eventLabel="community’s lessons"
                       to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
                       target="_blank">
-                      community's lessons <small>(opens in new tab)</small>
-                    </GoogleAnalytics.OutboundLink>.</p>
+                      community’s lessons
+                      <Tooltip
+                        title="Opens in a new tab"
+                        animation="shift"
+                        arrow="true"
+                        className=""
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                      </Tooltip>
+                    </GoogleAnalytics.OutboundLink>.
+                  </p>
                   <label htmlFor="your-material">Paste your material here:</label>
                   <textarea
                     id="your-material"
@@ -132,7 +149,28 @@ examples.	KP-PLS TP-PL"
                 <div>
                   <div className="panel p3">
                     <h2>Share your lessons</h2>
-                    <p className="mb0">To help Typey Type grow even faster, be sure to add your lessons to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community's lessons <small>(opens in new tab)</small></a>.</p>
+                    <p className="mb0">To help Typey Type grow even faster, be sure to add your lessons to the{' '}
+                      <GoogleAnalytics.OutboundLink
+                        eventLabel="community’s lessons"
+                        to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
+                        target="_blank">
+                        community’s lessons
+                        <Tooltip
+                          title="Opens in a new tab"
+                          animation="shift"
+                          arrow="true"
+                          className=""
+                          duration="200"
+                          tabIndex="0"
+                          tag="span"
+                          theme="didoesdigital"
+                          trigger="mouseenter focus click"
+                          onShow={this.props.setAnnouncementMessage}
+                        >
+                          <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                        </Tooltip>
+                      </GoogleAnalytics.OutboundLink>.
+                    </p>
                     <h3>Custom material format</h3>
                     <ul id="custom-material-format" className="text-small ml1 mt0 mb0">
                       <li>Each word must be on its own line.</li>
