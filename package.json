@@ -11,7 +11,7 @@
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.1",
     "pure-react-carousel": "git+ssh://git@github.com:dimonster/pure-react-carousel.git#add-slider-callback",
-    "react": "^16.2.0",
+    "react": "16.3.0",
     "react-autocomplete": "^1.7.2",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.0.0",
