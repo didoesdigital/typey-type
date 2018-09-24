@@ -6377,12 +6377,6 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-aria-live@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/react-aria-live/-/react-aria-live-2.0.2.tgz#9cfc2352544275586f74b66d18c54a8b3b00398a"
-  dependencies:
-    uuid "^3.2.1"
-
 react-autocomplete@^1.7.2:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/react-autocomplete/-/react-autocomplete-1.7.2.tgz#c55a0a4b8a9f4cba911dfccb74ef74f2161c46e0"
@@ -7960,7 +7954,7 @@ uuid@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.0.1.tgz#6544bba2dfda8c1cf17e629a3a305e2bb1fee6c1"
 
-uuid@^3.0.1, uuid@^3.2.1:
+uuid@^3.0.1:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
 
