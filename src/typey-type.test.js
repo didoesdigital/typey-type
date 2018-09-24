@@ -656,6 +656,7 @@ describe('loadPersonalPreferences', () => {
         showStrokesAsDiagrams: false,
         hideStrokesOnLastRepetition: true,
         spacePlacement: 'spaceOff',
+        speakMaterial: false,
         sortOrder: 'sortOff',
         seenWords: true,
         study: 'discover'

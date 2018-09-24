@@ -90,6 +90,7 @@ class App extends Component {
         showStrokesAsDiagrams: false,
         hideStrokesOnLastRepetition: true,
         spacePlacement: 'spaceOff',
+        speakMaterial: false,
         sortOrder: 'sortOff',
         seenWords: true,
         study: 'discover'
