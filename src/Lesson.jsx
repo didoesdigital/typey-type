@@ -312,6 +312,7 @@ class Lesson extends Component {
                         currentPhrase={this.props.currentPhrase}
                         completedPhrases={this.props.lesson.newPresentedMaterial.completed}
                         previousCompletedPhraseAsTyped={this.props.previousCompletedPhraseAsTyped}
+                        sayCurrentPhraseAgain={this.props.sayCurrentPhraseAgain}
                         settings={this.props.settings}
                         updateMarkup={this.props.updateMarkup.bind(this)}
                         userSettings={this.props.userSettings}

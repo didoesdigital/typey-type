@@ -906,6 +906,15 @@ class App extends Component {
     synth.speak(utterThis);
   }
 
+  sayCurrentPhraseAgain() {
+    if (this.state.userSettings.speakMaterial) {
+      let currentPhrase = this.state.lesson.presentedMaterial[this.state.currentPhraseID];
+      if (currentPhrase && currentPhrase.hasOwnProperty('phrase')) {
+        this.say(currentPhrase.phrase);
+      }
+    }
+  }
+
   studyType(userSettings) {
     if (
       userSettings.blurMaterial === false &&
@@ -1093,6 +1102,7 @@ class App extends Component {
                         revisionMaterial={this.state.revisionMaterial}
                         revisionMode={this.state.revisionMode}
                         updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
+                        sayCurrentPhraseAgain={this.sayCurrentPhraseAgain.bind(this)}
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setCustomLesson={this.setCustomLesson.bind(this)}
                         settings={this.state.lesson.settings}
