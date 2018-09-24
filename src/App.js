@@ -872,6 +872,10 @@ class App extends Component {
         newState.metWords[actualText] = meetingsCount + 1;
       }
 
+        let remaining = this.state.lesson.newPresentedMaterial.getRemaining();
+        if (remaining && remaining.length > 0 && remaining[0].hasOwnProperty('phrase')) {
+          this.say(remaining[0].phrase);
+        }
       let nextPhraseID = this.state.currentPhraseID + 1;
       let target = targetStrokeCount(this.state.lesson.presentedMaterial[nextPhraseID] || { phrase: '', stroke: 'TK-LS' });
       newState.targetStrokeCount = target;
@@ -891,6 +895,12 @@ class App extends Component {
         this.stopLesson();
       }
     });
+  }
+
+  say(utterance) {
+    let synth = window.speechSynthesis;
+    let utterThis = new SpeechSynthesisUtterance(utterance);
+    synth.speak(utterThis);
   }
 
   studyType(userSettings) {

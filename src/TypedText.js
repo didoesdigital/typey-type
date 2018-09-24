@@ -21,7 +21,7 @@ class TypedText extends Component {
 
     return (
       <div className="typed-text-container">
-        <label className="visually-hidden" htmlFor="your-typed-text">Write <div aria-live="polite" aria-atomic="true">{this.props.currentPhrase}</div></label>
+        <label className="visually-hidden" htmlFor="your-typed-text">Write {this.props.currentPhrase}</label>
         <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
         <p className="input-text">
           <samp className="previous-completed-phrase-as-typed-wrapper absolute absolute--fill w-100">
@@ -39,19 +39,21 @@ class TypedText extends Component {
             </CSSTransition>
           </TransitionGroup>
           </samp>
-          <textarea
-            autoCapitalize="off"
-            autoComplete="off"
-            autoCorrect="off"
-            className="input-textarea typed-text-input-positioning typed-text-input-textarea"
-            id="your-typed-text"
-            onChange={this.props.updateMarkup}
-            rows="1"
-            spellCheck="false"
-            value={this.props.actualText}
-            wrap="off"
-            >
-          </textarea>
+          <span aria-hidden="true">
+            <textarea
+              autoCapitalize="off"
+              autoComplete="off"
+              autoCorrect="off"
+              className="input-textarea typed-text-input-positioning typed-text-input-textarea"
+              id="your-typed-text"
+              onChange={this.props.updateMarkup}
+              rows="1"
+              spellCheck="false"
+              value={this.props.actualText}
+              wrap="off"
+              >
+            </textarea>
+          </span>
         </p>
       </div>
     );
