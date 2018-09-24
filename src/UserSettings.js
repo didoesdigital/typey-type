@@ -274,7 +274,7 @@ class UserSettings extends Component {
                         onChange={this.props.changeUserSetting}
                       />
                       <Tooltip
-                        title="Speak words to practice transcription"
+                        title="Speak words aloud when sound is turned on"
                         className="mw-240"
                         animation="shift"
                         arrow="true"
@@ -285,7 +285,7 @@ class UserSettings extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        Speak words
+                        Speak words (with sound!)
                       </Tooltip>
                     </label>
                   </div>
