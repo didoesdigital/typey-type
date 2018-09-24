@@ -872,10 +872,13 @@ class App extends Component {
         newState.metWords[actualText] = meetingsCount + 1;
       }
 
+      if (this.state.userSettings.speakMaterial) {
         let remaining = this.state.lesson.newPresentedMaterial.getRemaining();
         if (remaining && remaining.length > 0 && remaining[0].hasOwnProperty('phrase')) {
           this.say(remaining[0].phrase);
         }
+      }
+
       let nextPhraseID = this.state.currentPhraseID + 1;
       let target = targetStrokeCount(this.state.lesson.presentedMaterial[nextPhraseID] || { phrase: '', stroke: 'TK-LS' });
       newState.targetStrokeCount = target;

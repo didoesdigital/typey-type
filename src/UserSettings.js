@@ -247,7 +247,7 @@ class UserSettings extends Component {
                         onChange={this.props.changeUserSetting}
                       />
                       <Tooltip
-                        title="Blur words and use a screen reader to practice transcription"
+                        title="Blur words and use a screen reader or speak setting to practice transcription"
                         className="mw-240"
                         animation="shift"
                         arrow="true"
@@ -262,8 +262,34 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
+                  <div className="checkbox-group">
+                    <label className="checkbox-label">
+                      <input
+                        className="checkbox-input"
+                        type="checkbox"
+                        name="speakMaterial"
+                        id="speakMaterial"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.speakMaterial}
+                        onChange={this.props.changeUserSetting}
+                      />
+                      <Tooltip
+                        title="Speak words to practice transcription"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Speak words
+                      </Tooltip>
+                    </label>
+                  </div>
                 </div>
-
 
                 <div className="mt2">
                   <fieldset>
