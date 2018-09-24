@@ -903,6 +903,11 @@ class App extends Component {
 
   say(utterance) {
     let synth = window.speechSynthesis;
+    if (utterance === ",") { utterance = "comma"; }
+    if (utterance === ":") { utterance = "colon"; }
+    if (utterance === ".") { utterance = "full stop"; }
+    if (utterance === ")") { utterance = "closing bracket"; }
+    if (utterance === "!") { utterance = "exclamation mark"; }
     let utterThis = new SpeechSynthesisUtterance(utterance);
     synth.speak(utterThis);
   }
