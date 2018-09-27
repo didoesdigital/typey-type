@@ -281,7 +281,7 @@ class Lesson extends Component {
                   {customMessage}
                 </div>
                 <div className="mx-auto mw-1024 p3">
-                  <div className="scores mb3">
+                  <div className={"scores mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'scores--shown' : 'scores--hidden')} onClick={this.props.changeShowScoresWhileTyping}>
                     <Scores
                       setAnnouncementMessage={this.props.setAnnouncementMessage}
                       timer={this.props.timer}

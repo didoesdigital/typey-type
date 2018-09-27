@@ -279,6 +279,12 @@ input:focus::placeholder {
 .o-30 {
   opacity: .3; }
 
+.o-100 {
+  opacity: 1; }
+
+.o-0 {
+  opacity: 0; }
+
 .collapse {
   border-collapse: collapse;
   border-spacing: 0; }
@@ -1432,4 +1438,27 @@ small .svg-icon-wrapper.svg-baseline svg {
 
 .fade-enter-done {
   opacity: 0.0;
-  transition: opacity .2s linear .1s; }
+  transition: opacity .2s linear; }
+
+.transition-scores-enter {
+  filter: blur(0);
+  opacity: 0; }
+
+.transition-scores-enter.transition-scores-enter-active {
+  opacity: 1 !important;
+  transition: opacity .1s linear !important; }
+
+.transition-scores-enter-done {
+  opacity: 1 !important; }
+
+.transition-scores-exit {
+  opacity: 1 !important;
+  transition: opacity .2s linear !important; }
+
+.transition-scores-exit.transition-scores-exit-active {
+  filter: blur(0.5rem) !important;
+  opacity: 0.01 !important;
+  transition: filter .2s linear, opacity .2s linear !important; }
+
+.transition-scores-exit-done {
+  opacity: 0 !important; }

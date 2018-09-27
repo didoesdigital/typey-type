@@ -386,6 +386,7 @@ function loadPersonalPreferences() {
     limitNumberOfWords: 45,
     newWords: true,
     repetitions: 3,
+    showScoresWhileTyping: true,
     showStrokes: true,
     showStrokesAsDiagrams: false,
     hideStrokesOnLastRepetition: true,

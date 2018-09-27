@@ -279,6 +279,8 @@ input:focus::placeholder {
 .left-0   { left:   0; }
 
 .o-30 { opacity: .3; }
+.o-100 { opacity: 1; }
+.o-0 { opacity: 0; }
 
 .collapse {
   border-collapse: collapse;
@@ -1607,7 +1609,7 @@ $lineAdjustment: 4px;
 
 .fade-enter-done {
   opacity: 0.0;
-  transition: opacity .2s linear .1s;
+  transition: opacity .2s linear;
 }
 
 
@@ -1627,15 +1629,57 @@ $lineAdjustment: 4px;
 
 
 
-// .fade-exit {
-//   opacity: 1;
-//   transform: translateX(0px);
-//   transition: opacity 1s ease-in-out 0s;
+// .transition-scores-appear {
+//   opacity: 0.5;
+//   transition: opacity 1s linear;
 // }
 
-// .fade-exit.fade-exit-active {
-//   opacity: 0.01;
-//   transform: translateX(-10px);
-//   transition: opacity 1s linear .1s,
-//             transform 1s linear .1s;
+// .transition-scores-appear.transition-scores-appear-active {
+//   opacity: .5;
+//   transition: opacity 1s linear;
 // }
+
+// .transition-scores-appear-done {
+//   opacity: .5;
+//   transition: opacity 1s linear;
+// }
+// .transition-scores-appear {
+//   opacity: 0;
+//   transition: opacity 0s linear;
+// }
+
+// .transition-scores-appear.transition-scores-appear-active {
+//   opacity: 1;
+//   transition: opacity 0s linear;
+// }
+
+.transition-scores-enter {
+  filter: blur(0);
+  opacity: 0;
+}
+
+.transition-scores-enter.transition-scores-enter-active {
+  opacity: 1 !important;
+  transition: opacity .1s linear !important;
+}
+
+.transition-scores-enter-done {
+  opacity: 1 !important;
+}
+
+.transition-scores-exit {
+  opacity: 1 !important;
+  transition: opacity .2s linear !important;
+}
+
+.transition-scores-exit.transition-scores-exit-active {
+  filter: blur(.5rem) !important;
+  opacity: 0.01 !important;
+  transition: filter .2s linear,
+              opacity .2s linear !important;
+}
+
+.transition-scores-exit-done {
+  opacity: 0 !important;
+}
+

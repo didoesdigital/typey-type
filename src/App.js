@@ -86,6 +86,7 @@ class App extends Component {
         limitNumberOfWords: 45,
         newWords: true,
         repetitions: 3,
+        showScoresWhileTyping: true,
         showStrokes: true,
         showStrokesAsDiagrams: false,
         hideStrokesOnLastRepetition: true,
@@ -514,6 +515,17 @@ class App extends Component {
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
     return value;
+  }
+
+  changeShowScoresWhileTyping(event) {
+    let newState = Object.assign({}, this.state.userSettings);
+
+    newState['showScoresWhileTyping'] = !newState['showScoresWhileTyping'];
+
+    this.setState({userSettings: newState}, () => {
+      writePersonalPreferences('userSettings', this.state.userSettings);
+    });
+    return newState['showScoresWhileTyping'];
   }
 
   chooseStudy(event) {
@@ -1089,6 +1101,7 @@ class App extends Component {
                         changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
                         changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
                         changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
+                        changeShowScoresWhileTyping={this.changeShowScoresWhileTyping.bind(this)}
                         changeShowStrokesAs={this.changeShowStrokesAs.bind(this)}
                         changeUserSetting={this.changeUserSetting.bind(this)}
                         chooseStudy={this.chooseStudy.bind(this)}
