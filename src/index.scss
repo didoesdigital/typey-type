@@ -1596,6 +1596,7 @@ $lineAdjustment: 4px;
   color: desaturate($brand-primary, 5%);
   filter: blur(0);
   opacity: 1;
+  // will-change: filter;
 }
 
 .fade-appear.fade-appear-active {
@@ -1614,72 +1615,16 @@ $lineAdjustment: 4px;
 
 
 
-// .fade-enter {
-//   opacity: 1;
-//   transform: translateX(10px);
-//   transition: opacity 5s ease-in-out 0s;
-// }
-
-// .fade-enter.fade-enter-active {
-//   opacity: 0.01;
-//   transform: translateX(20px);
-//   transition: opacity 5s linear .1s,
-//             transform 5s linear .1s;
-// }
-
-
-
-// .transition-scores-appear {
-//   opacity: 0.5;
-//   transition: opacity 1s linear;
-// }
-
-// .transition-scores-appear.transition-scores-appear-active {
-//   opacity: .5;
-//   transition: opacity 1s linear;
-// }
-
-// .transition-scores-appear-done {
-//   opacity: .5;
-//   transition: opacity 1s linear;
-// }
-// .transition-scores-appear {
-//   opacity: 0;
-//   transition: opacity 0s linear;
-// }
-
-// .transition-scores-appear.transition-scores-appear-active {
-//   opacity: 1;
-//   transition: opacity 0s linear;
-// }
-
-.transition-scores-enter {
+.scores--shown {
   filter: blur(0);
-  opacity: 0;
-}
-
-.transition-scores-enter.transition-scores-enter-active {
-  opacity: 1 !important;
-  transition: opacity .1s linear !important;
-}
-
-.transition-scores-enter-done {
-  opacity: 1 !important;
-}
-
-.transition-scores-exit {
-  opacity: 1 !important;
-  transition: opacity .2s linear !important;
-}
-
-.transition-scores-exit.transition-scores-exit-active {
-  filter: blur(.5rem) !important;
-  opacity: 0.01 !important;
+  opacity: 1;
   transition: filter .2s linear,
               opacity .2s linear !important;
 }
 
-.transition-scores-exit-done {
+.scores--hidden {
+  filter: blur(.5rem) !important;
   opacity: 0 !important;
+  transition: opacity .1s linear !important;
 }
 
