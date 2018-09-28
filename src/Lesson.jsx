@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { IconClosingCross } from './Icon';
 import { Link } from 'react-router-dom';
+import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
 import Material from './Material';
 import TypedText from './TypedText';
@@ -281,18 +282,25 @@ class Lesson extends Component {
                   {customMessage}
                 </div>
                 <div className="mx-auto mw-1024 p3">
-                  <div className={"scores mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'scores--shown' : 'scores--hidden')} onClick={this.props.changeShowScoresWhileTyping}>
-                    <Scores
-                      setAnnouncementMessage={this.props.setAnnouncementMessage}
-                      timer={this.props.timer}
-                      totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-                      totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-                      totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-                      totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-                      totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-                      totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-                    />
-                  </div>
+                    <button onClick={this.props.changeShowScoresWhileTyping} className={"de-emphasized-button show-scores-control absolute mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'show-scores-control--hidden' : 'show-scores-control--shown')}>Show scores</button>
+                  <AnimateHeight
+                    duration={ 300 }
+                    height={ this.props.userSettings.showScoresWhileTyping ? 'auto' : '0' }
+                    ease={'cubic-bezier(0.645, 0.045, 0.355, 1)'}
+                  >
+                    <div className={"mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'scores--shown' : 'scores--hidden')} onClick={this.props.changeShowScoresWhileTyping}>
+                      <Scores
+                        setAnnouncementMessage={this.props.setAnnouncementMessage}
+                        timer={this.props.timer}
+                        totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
+                        totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+                        totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
+                        totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
+                        totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
+                        totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
+                      />
+                    </div>
+                  </AnimateHeight>
                   <div role="article" className="lesson-canvas panel mw-1024 p2 fill-fade-parent mb3">
                     {revisionModeButton}
                     <span className="fill-fade-edges"></span>

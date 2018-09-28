@@ -16,6 +16,7 @@ $breakpoint: 1024px;
 $z-index-autocomplete-menu: 4;
 $z-index-vertical-text: 3;
 $z-index-revision-mode-button: 2;
+$z-index-show-scores-control: 2;
 $z-index-fill-fade-edges: 1;
 $z-index-successfully-typed-text: -1;
 $link-button-height: 40px;
@@ -565,18 +566,6 @@ input:focus::placeholder {
   font-size: $h6-size;
 }
 
-@media (max-width: $breakpoint - 1) {
-  .lesson-canvas {
-    order: 1;
-  }
-  .user-settings {
-    order: 2;
-  }
-  .scores {
-    order: 3;
-  }
-}
-
 .material {
   margin-left: auto;
   margin-right: auto;
@@ -905,6 +894,22 @@ label {
   }
 }
 
+.de-emphasized-button {
+  background-color: transparent;
+  border: none;
+  color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
+  font: $type;
+  text-decoration: underline;
+
+  &:hover {
+    color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
+  }
+  &:active, &:focus {
+    color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
+  }
+}
+
+// see also: .show-scores-control
 .revision-mode-button {
   color: desaturate($brand-primary, 5%);
   font-size: $h6-size;
@@ -912,6 +917,9 @@ label {
   padding-right: 24px;
   text-transform: uppercase;
   z-index: $z-index-revision-mode-button;
+  &:visited {
+    color: desaturate($brand-primary, 5%);
+  }
 }
 
 // .radio-button {
@@ -1160,21 +1168,25 @@ label {
     transform: translateY(0rem);
   }
 }
-.fade-out-up:focus:before {
+
+.fade-out-up:focus::before {
   animation-name: fade-out-up;
   animation-duration: 1s;
-  animation-timing-function: ease;
+  animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-.load-progress:before {
+
+.load-progress::before {
   position: absolute;
   content: "Loaded" attr(href) "!";
   opacity: 0;
 }
-.copy-to-clipboard:before {
+
+.copy-to-clipboard::before {
   position: absolute;
   content: "Copied" attr(href) "!";
   opacity: 0;
 }
+
 .progress-layout {
   @media (min-width: $breakpoint) {
     display: grid;
@@ -1613,7 +1625,25 @@ $lineAdjustment: 4px;
   transition: opacity .2s linear;
 }
 
+// see also: revision-mode-button
+.show-scores-control {
+  color: desaturate($brand-primary, 5%);
+  font-size: $h6-size;
+  letter-spacing: 0.05em;
+  margin: 16px;
+  text-transform: uppercase;
+  text-decoration: none;
+  z-index: $z-index-show-scores-control;
+}
 
+.show-scores-control--shown {
+  opacity: 1;
+  transition: opacity .1s linear .1s;
+}
+.show-scores-control--hidden {
+  opacity: 0;
+  transition: opacity .1s linear;
+}
 
 .scores--shown {
   filter: blur(0);

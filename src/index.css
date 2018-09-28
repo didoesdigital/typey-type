@@ -645,14 +645,6 @@ input:focus::placeholder {
 .stat__label {
   font-size: 12.8px; }
 
-@media (max-width: 1023px) {
-  .lesson-canvas {
-    order: 1; }
-  .user-settings {
-    order: 2; }
-  .scores {
-    order: 3; } }
-
 .material {
   margin-left: auto;
   margin-right: auto; }
@@ -919,6 +911,17 @@ label {
     background-color: #b0b0b0;
     cursor: default; }
 
+.de-emphasized-button {
+  background-color: transparent;
+  border: none;
+  color: #596091;
+  font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  text-decoration: underline; }
+  .de-emphasized-button:hover {
+    color: #9193a8; }
+  .de-emphasized-button:active, .de-emphasized-button:focus {
+    color: #202549; }
+
 .revision-mode-button {
   color: #3f264e;
   font-size: 12.8px;
@@ -926,6 +929,8 @@ label {
   padding-right: 24px;
   text-transform: uppercase;
   z-index: 2; }
+  .revision-mode-button:visited {
+    color: #3f264e; }
 
 .steno-stroke {
   background-color: #444444;
@@ -1055,17 +1060,17 @@ label {
   100% {
     transform: translateY(0rem); } }
 
-.fade-out-up:focus:before {
+.fade-out-up:focus::before {
   animation-name: fade-out-up;
   animation-duration: 1s;
-  animation-timing-function: ease; }
+  animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); }
 
-.load-progress:before {
+.load-progress::before {
   position: absolute;
   content: "Loaded" attr(href) "!";
   opacity: 0; }
 
-.copy-to-clipboard:before {
+.copy-to-clipboard::before {
   position: absolute;
   content: "Copied" attr(href) "!";
   opacity: 0; }
@@ -1439,6 +1444,23 @@ small .svg-icon-wrapper.svg-baseline svg {
 .fade-enter-done {
   opacity: 0.0;
   transition: opacity .2s linear; }
+
+.show-scores-control {
+  color: #3f264e;
+  font-size: 12.8px;
+  letter-spacing: 0.05em;
+  margin: 16px;
+  text-transform: uppercase;
+  text-decoration: none;
+  z-index: 2; }
+
+.show-scores-control--shown {
+  opacity: 1;
+  transition: opacity .1s linear .1s; }
+
+.show-scores-control--hidden {
+  opacity: 0;
+  transition: opacity .1s linear; }
 
 .scores--shown {
   filter: blur(0);
