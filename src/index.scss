@@ -920,6 +920,9 @@ label {
   &:visited {
     color: desaturate($brand-primary, 5%);
   }
+  &:hover {
+    color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
+  }
 }
 
 // .radio-button {
@@ -1626,6 +1629,7 @@ $lineAdjustment: 4px;
 }
 
 // see also: revision-mode-button
+// see also: de-emphasized-button
 .show-scores-control {
   color: desaturate($brand-primary, 5%);
   font-size: $h6-size;
@@ -1634,6 +1638,9 @@ $lineAdjustment: 4px;
   text-transform: uppercase;
   text-decoration: none;
   z-index: $z-index-show-scores-control;
+  &:hover {
+    color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
+  }
 }
 
 .show-scores-control--shown {

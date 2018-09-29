@@ -931,6 +931,8 @@ label {
   z-index: 2; }
   .revision-mode-button:visited {
     color: #3f264e; }
+  .revision-mode-button:hover {
+    color: #596091; }
 
 .steno-stroke {
   background-color: #444444;
@@ -1453,6 +1455,8 @@ small .svg-icon-wrapper.svg-baseline svg {
   text-transform: uppercase;
   text-decoration: none;
   z-index: 2; }
+  .show-scores-control:hover {
+    color: #596091; }
 
 .show-scores-control--shown {
   opacity: 1;
