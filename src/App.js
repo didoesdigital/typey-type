@@ -228,6 +228,11 @@ class App extends Component {
 
   stopLesson() {
     this.stopTimer();
+
+    if (window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+
     writePersonalPreferences('userSettings', this.state.userSettings);
     writePersonalPreferences('metWords', this.state.metWords);
     writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
@@ -473,6 +478,10 @@ class App extends Component {
     const name = target.name;
 
     newState[name] = value;
+
+    if (!newState.speakMaterial && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
 
     this.setState({userSettings: newState}, () => {
       if (!(name === 'caseSensitive')) {
