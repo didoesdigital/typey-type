@@ -39,6 +39,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.charsPerWord = 5;
+    // When updating default state for anything stored in local storage,
+    // add the same default to personal preferences code.
     this.state = {
       announcementMessage: null,
       value: '',
