@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import './App.css';
 
-class StenoboardDiagram extends Component {
+class AmericanStenoDiagram extends Component {
   // componentDidMount() {
   //   if (this.props.currentPhrase) {
   //     // let strokes = splitBriefsIntoStrokes(this.props.currentPhrase);
@@ -131,4 +130,4 @@ class StenoboardDiagram extends Component {
   }
 }
 
-export default StenoboardDiagram;
+export default AmericanStenoDiagram;

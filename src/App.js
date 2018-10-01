@@ -96,7 +96,8 @@ class App extends Component {
         speakMaterial: false,
         sortOrder: 'sortOff',
         seenWords: true,
-        study: 'discover'
+        study: 'discover',
+        stenoLayout: 'stenoLayoutAmericanSteno' // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianSteno' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
       },
       lesson: {
         sourceMaterial: [
@@ -624,6 +625,24 @@ class App extends Component {
     return value;
   }
 
+  changeStenoLayout(event) {
+    let currentState = this.state.userSettings;
+    let newState = Object.assign({}, currentState);
+
+    const name = 'stenoLayout'
+    const value = event.target.value;
+
+    newState[name] = value;
+
+    this.setState({userSettings: newState}, () => {
+      if (!(name === 'caseSensitive')) {
+        this.setupLesson();
+      }
+      writePersonalPreferences('userSettings', this.state.userSettings);
+    });
+    return value;
+  }
+
   setupLesson() {
     if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
       let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
@@ -1112,6 +1131,7 @@ class App extends Component {
                         changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
                         changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
                         changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
+                        changeStenoLayout={this.changeStenoLayout.bind(this)}
                         changeShowScoresWhileTyping={this.changeShowScoresWhileTyping.bind(this)}
                         changeShowStrokesAs={this.changeShowStrokesAs.bind(this)}
                         changeUserSetting={this.changeUserSetting.bind(this)}

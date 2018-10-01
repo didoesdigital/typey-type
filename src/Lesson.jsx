@@ -6,12 +6,13 @@ import DocumentTitle from 'react-document-title';
 import Material from './Material';
 import TypedText from './TypedText';
 import Scores from './Scores';
-import StenoboardDiagram from './StenoboardDiagram';
+import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
+import DanishStenoDiagram from './StenoLayout/DanishStenoDiagram';
 import UserSettings from './UserSettings';
 import Finished from './Finished';
 import Flashcards from './Flashcards';
 import CustomLessonSetup from './CustomLessonSetup';
-import { shouldShowStroke, splitBriefsIntoStrokes, mapBriefToKeys } from './typey-type';
+import { shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys } from './typey-type';
 
 class Lesson extends Component {
   componentDidMount() {
@@ -131,13 +132,35 @@ class Lesson extends Component {
     if (shouldShowStroke(this.props.showStrokesInLesson, this.props.userSettings.showStrokes, this.props.repetitionsRemaining, this.props.userSettings.hideStrokesOnLastRepetition)) {
       if (this.props.currentStroke) {
         let strokes = splitBriefsIntoStrokes(this.props.currentStroke);
+
+        let mapBriefsFunction = mapBriefToAmericanStenoKeys;
+        let StenoLayoutDiagram = AmericanStenoDiagram;
+        switch (this.props.userSettings.stenoLayout) {
+          case 'stenoLayoutAmericanSteno':
+            mapBriefsFunction = mapBriefToAmericanStenoKeys;
+            StenoLayoutDiagram = AmericanStenoDiagram;
+            break;
+          case 'stenoLayoutDanishSteno':
+            mapBriefsFunction = mapBriefToDanishStenoKeys;
+            StenoLayoutDiagram = DanishStenoDiagram;
+            break;
+          // case 'stenoLayoutPalantype':
+          //   mapBriefsFunction = 'mapBriefToPalantypeKeys';
+          //   StenoLayoutDiagram = PalantypeDiagram;
+          //   break;
+          default:
+            mapBriefsFunction = mapBriefToAmericanStenoKeys;
+            StenoLayoutDiagram = AmericanStenoDiagram;
+            break;
+        }
+
         strokeTip = (
           <div className="stroke-tip" aria-live="polite" aria-atomic="true">
             <span className="visually-hidden">Hint: </span>
             <div className="flex overflow-auto mr05">
               {this.props.userSettings.showStrokesAsDiagrams && strokes.map((strokeToDraw, index) =>
                 <React.Fragment key={index}>
-                  {(Object.values(mapBriefToKeys(strokeToDraw)).some(item => item)) && <div className="mt1 mr2"><StenoboardDiagram {...mapBriefToKeys(strokeToDraw)} brief={strokeToDraw} /></div> }
+                  {(Object.values(mapBriefsFunction(strokeToDraw)).some(item => item)) && <div className="mt1 mr2"><StenoLayoutDiagram {...mapBriefsFunction(strokeToDraw)} brief={strokeToDraw} /></div> }
                 </React.Fragment>
               )}
             </div>
@@ -224,6 +247,7 @@ class Lesson extends Component {
                 changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
                 changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
                 changeShowStrokesAs={this.props.changeShowStrokesAs}
+                changeStenoLayout={this.props.changeStenoLayout}
                 changeUserSetting={this.props.changeUserSetting}
                 chooseStudy={this.props.chooseStudy}
                 currentLessonStrokes={this.props.currentLessonStrokes}
@@ -336,6 +360,7 @@ class Lesson extends Component {
                   <UserSettings
                     changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
                     changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+                    changeStenoLayout={this.props.changeStenoLayout}
                     changeShowStrokesAs={this.props.changeShowStrokesAs}
                     changeUserSetting={this.props.changeUserSetting}
                     chooseStudy={this.props.chooseStudy}

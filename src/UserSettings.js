@@ -393,6 +393,17 @@ class UserSettings extends Component {
                     </div>
 
                     <div className="clearfix mb2">
+                      <label className="mb1 db">Steno layout</label>
+                      <select name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control">
+                        <option value="stenoLayoutAmericanSteno">American steno</option>
+                        <option value="stenoLayoutPalantype">Palantype</option>
+                        <option value="stenoLayoutDanishSteno">Danish steno</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="mt2">
+                    <div className="mb2">
                       <label className="mb1 db">Sort</label>
                       <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control">
                         <option value="sortOff">Lesson default</option>
@@ -401,9 +412,6 @@ class UserSettings extends Component {
                         <option value="sortOld">Oldest words first</option>
                       </select>
                     </div>
-                  </div>
-
-                  <div className="mt2">
                     <label htmlFor="limitNumberOfWords">Limit word count</label>
                     <div className="mb2">
                       <NumericInput
