@@ -4,11 +4,13 @@ import {
   createWordListFromMetWords,
   parseCustomMaterial,
   parseWordList,
+  fetchDictionaryIndex,
   fetchLessonIndex,
   setupLessonProgress,
   fetchDictionaries,
-  generateDictionaryEntries,
+  getDictionary,
   getLesson,
+  generateDictionaryEntries,
   loadPersonalPreferences,
   matchSplitText,
   parseLesson,
@@ -26,6 +28,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
+import Dictionaries from './Dictionaries';
 import DocumentTitle from 'react-document-title';
 import Announcements from './Announcements';
 import ErrorBoundary from './ErrorBoundary'
@@ -105,6 +108,22 @@ class App extends Component {
         seenWords: true,
         study: 'discover',
         stenoLayout: 'stenoLayoutAmericanSteno' // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianSteno' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
+      },
+      dictionary: {
+        contents: {
+          "-T": "the",
+          "-F": "of",
+          "SKP": "and",
+          "TO": "to",
+          "AEU": "a",
+          "TPH": "in",
+          "TPOR": "for",
+          "S": "is",
+          "OPB": "on",
+          "THA": "that"
+        },
+        title: 'Top 10 dict',
+        path: ''
       },
       lesson: {
         sourceMaterial: [
@@ -208,6 +227,18 @@ class App extends Component {
         newPresentedMaterial: new Zipper([{phrase: '', stroke: ''}]),
         path: ''
       },
+      dictionaryIndex: [{
+          "title": "Typey Type",
+          "category": "Typey Type",
+          "subcategory": "",
+          "path": process.env.PUBLIC_URL + "/typey-type/typey-type.json"
+        },
+        {
+          "title": "Steno",
+          "category": "Drills",
+          "subcategory": "",
+          "path": process.env.PUBLIC_URL + "/drills/steno/steno.json"
+        }],
       lessonIndex: [{
         "title": "Steno",
         "subtitle": "",
@@ -238,6 +269,10 @@ class App extends Component {
       this.setState({ lessonIndex: json}, () => {
         setupLessonProgress(json);
       })
+    });
+
+    fetchDictionaryIndex().then((json) => {
+      this.setState({ dictionaryIndex: json })
     });
   }
 
@@ -800,6 +835,32 @@ class App extends Component {
     });
   }
 
+  handleDictionary(path) {
+    getDictionary(path).then((dictionaryText) => {
+      // let dictionary = parseDictionary(dictionaryText, path);
+      let dictionary = {
+        contents: {
+          "-T": "the",
+          "-F": "of",
+          "SKP": "and",
+          "TO": "to",
+          "AEU": "a",
+          "TPH": "in",
+          "TPOR": "for",
+          "S": "is",
+          "OPB": "on",
+          "THA": "that"
+        },
+        title: 'Top 10 dict',
+        path: ''
+      }
+      this.setState({
+        announcementMessage: 'Navigated to: ' + dictionary.title,
+        dictionary: dictionary
+      });
+    });
+  }
+
   handleLesson(path) {
     getLesson(path).then((lessonText) => {
       if (isLessonTextValid(lessonText)) {
@@ -1195,6 +1256,22 @@ class App extends Component {
                       updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
                       changeFullscreen={this.changeFullscreen.bind(this)}
                     />
+                  </DocumentTitle>
+                </div>
+                }
+              />
+              <Route path="/dictionaries" render={ (props) =>
+                <div>
+                  {header}
+                  <DocumentTitle title={'Typey Type | Dictionaries'}>
+                    <ErrorBoundary>
+                      <Dictionaries
+                        dictionary={this.state.dictionary}
+                        dictionaryIndex={this.state.dictionaryIndex}
+                        handleDictionary={this.handleDictionary.bind(this)}
+                        {...props}
+                      />
+                    </ErrorBoundary>
                   </DocumentTitle>
                 </div>
                 }

@@ -468,6 +468,18 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
   return dictionary;
 }
 
+// function parseDictionary(dictionaryText, path) {
+//   let lines = dictionaryText.split("\n");
+//   let dictionaryTitle = lines[0];
+//   let dictionarySubtitle = lines[1];
+
+//   return {
+//     title: dictionaryTitle,
+//     subtitle: dictionarySubtitle,
+//     path: path
+//   }
+// }
+
 function parseLesson(lessonText, path) {
   let lines = lessonText.split("\n");
   let lessonTitle = lines[0];
@@ -632,12 +644,51 @@ function shouldShowStroke(showStrokesInLesson, showStrokes, repetitionsRemaining
   return false;
 }
 
+function getDictionary(DictionaryFile) {
+  return fetch(DictionaryFile, {
+    method: "GET",
+    credentials: "same-origin"
+  }).then((response) => {
+    return response.text();
+  }, function(error) {
+    console.log(error);
+  });
+}
+
 function getLesson(lessonFile) {
   return fetch(lessonFile, {
     method: "GET",
     credentials: "same-origin"
   }).then((response) => {
     return response.text();
+  });
+}
+
+function fetchDictionaryIndex() {
+  return fetch(process.env.PUBLIC_URL + '/dictionaries/dictionaryIndex.json', {
+    method: "GET",
+    credentials: "same-origin"
+  }).then((response) => {
+    return response.json()
+  }).then(json => {
+    return(json);
+  }).catch(function(e) {
+    console.log('Unable to load dictionary index', e)
+    return(
+      [
+      {
+        "title": "Typey Type",
+        "category": "Typey Type",
+        "subcategory": "",
+        "path": process.env.PUBLIC_URL + "/typey-type/typey-type.json"
+      },
+      {
+        "title": "Steno",
+        "category": "Drills",
+        "subcategory": "",
+        "path": process.env.PUBLIC_URL + "/drills/steno/steno.json"
+      }]
+    );
   });
 }
 
@@ -658,6 +709,7 @@ function setupLessonProgress(lessonIndex) {
   return lessonProgress;
 }
 
+// for custom lesson setup
 function fetchDictionaries() {
   return fetch(process.env.PUBLIC_URL + '/dictionaries/dict.json', {
     method: "GET",
@@ -672,8 +724,10 @@ function fetchDictionaries() {
 export {
   createWordListFromMetWords,
   fetchLessonIndex,
-  fetchDictionaries,
+  fetchDictionaryIndex,
+  fetchDictionaries, // for custom lesson setup
   generateDictionaryEntries,
+  getDictionary,
   getLesson,
   loadPersonalPreferences,
   matchSplitText,
