@@ -8,11 +8,12 @@ import TypedText from './TypedText';
 import Scores from './Scores';
 import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
 import DanishStenoDiagram from './StenoLayout/DanishStenoDiagram';
+import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
 import UserSettings from './UserSettings';
 import Finished from './Finished';
 import Flashcards from './Flashcards';
 import CustomLessonSetup from './CustomLessonSetup';
-import { shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys } from './typey-type';
+import { shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToPalantypeKeys } from './typey-type';
 
 class Lesson extends Component {
   componentDidMount() {
@@ -144,10 +145,10 @@ class Lesson extends Component {
             mapBriefsFunction = mapBriefToDanishStenoKeys;
             StenoLayoutDiagram = DanishStenoDiagram;
             break;
-          // case 'stenoLayoutPalantype':
-          //   mapBriefsFunction = 'mapBriefToPalantypeKeys';
-          //   StenoLayoutDiagram = PalantypeDiagram;
-          //   break;
+          case 'stenoLayoutPalantype':
+            mapBriefsFunction = mapBriefToPalantypeKeys;
+            StenoLayoutDiagram = PalantypeDiagram;
+            break;
           default:
             mapBriefsFunction = mapBriefToAmericanStenoKeys;
             StenoLayoutDiagram = AmericanStenoDiagram;
