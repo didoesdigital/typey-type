@@ -403,15 +403,6 @@ class UserSettings extends Component {
                   </div>
 
                   <div className="mt2">
-                    <div className="mb2">
-                      <label className="mb1 db">Sort</label>
-                      <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
-                        <option value="sortOff">Lesson default</option>
-                        <option value="sortRandom">Random</option>
-                        <option value="sortNew">Newest words first</option>
-                        <option value="sortOld">Oldest words first</option>
-                      </select>
-                    </div>
                     <label htmlFor="limitNumberOfWords">Limit word count</label>
                     <div className="mb2">
                       <NumericInput
@@ -436,7 +427,7 @@ class UserSettings extends Component {
                     </div>
 
                     <label htmlFor="repetitions">Repetitions</label>
-                    <div className="mb1">
+                    <div className="mb2">
                       <NumericInput
                         autoCapitalize="off"
                         autoComplete="on"
@@ -458,6 +449,17 @@ class UserSettings extends Component {
                         snap
                       />
                     </div>
+
+                    <div className="mb1">
+                      <label className="mb1 db">Sort</label>
+                      <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
+                        <option value="sortOff">Lesson default</option>
+                        <option value="sortRandom">Random</option>
+                        <option value="sortNew">Newest words first</option>
+                        <option value="sortOld">Oldest words first</option>
+                      </select>
+                    </div>
+
                   </div>
                 </div>
               </div>
