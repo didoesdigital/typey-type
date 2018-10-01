@@ -655,6 +655,7 @@ describe('loadPersonalPreferences', () => {
         showScoresWhileTyping: true,
         showStrokes: true,
         showStrokesAsDiagrams: false,
+        stenoLayout: 'stenoLayoutAmericanSteno',
         hideStrokesOnLastRepetition: true,
         spacePlacement: 'spaceOff',
         speakMaterial: false,
