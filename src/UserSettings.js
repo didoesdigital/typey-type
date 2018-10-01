@@ -384,7 +384,7 @@ class UserSettings extends Component {
                 <div>
                     <div className="clearfix mb2 mt2">
                       <label className="mb1 db">Match spaces</label>
-                      <select name="spacePlacement" value={this.props.userSettings.spacePlacement} onChange={this.props.changeSpacePlacementUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control">
+                      <select name="spacePlacement" value={this.props.userSettings.spacePlacement} onChange={this.props.changeSpacePlacementUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
                         <option value="spaceBeforeOutput">Space before output</option>
                         <option value="spaceAfterOutput">Space after output</option>
                         <option value="spaceExact">Exact spacing</option>
@@ -394,7 +394,7 @@ class UserSettings extends Component {
 
                     <div className="clearfix mb2">
                       <label className="mb1 db">Steno layout</label>
-                      <select name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control">
+                      <select name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control w6">
                         <option value="stenoLayoutAmericanSteno">American steno</option>
                         <option value="stenoLayoutPalantype">Palantype</option>
                         <option value="stenoLayoutDanishSteno">Danish steno</option>
@@ -405,7 +405,7 @@ class UserSettings extends Component {
                   <div className="mt2">
                     <div className="mb2">
                       <label className="mb1 db">Sort</label>
-                      <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control">
+                      <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
                         <option value="sortOff">Lesson default</option>
                         <option value="sortRandom">Random</option>
                         <option value="sortNew">Newest words first</option>
@@ -419,7 +419,7 @@ class UserSettings extends Component {
                         autoComplete="on"
                         autoCorrect="on"
                         autoFocus={false}
-                        className="form-control"
+                        className="form-control w6"
                         disabled={this.props.disableUserSettings}
                         id="limitNumberOfWords"
                         min={0}
@@ -442,7 +442,7 @@ class UserSettings extends Component {
                         autoComplete="on"
                         autoCorrect="on"
                         autoFocus={false}
-                        className="form-control"
+                        className="form-control w6"
                         disabled={this.props.disableUserSettings}
                         id="repetitions"
                         max={30}

@@ -506,6 +506,24 @@ input:focus::placeholder {
   padding-left: 8px;
   padding-right: 8px; }
 
+.w1 {
+  width: 8px; }
+
+.w2 {
+  width: 16px; }
+
+.w3 {
+  width: 24px; }
+
+.w4 {
+  width: 48px; }
+
+.w5 {
+  width: 96px; }
+
+.w6 {
+  width: 192px; }
+
 .w-100 {
   width: 100%; }
 
