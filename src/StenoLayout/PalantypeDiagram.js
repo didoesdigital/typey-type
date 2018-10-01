@@ -7,7 +7,7 @@ class PalantypeDiagram extends Component {
 
     const strokeColor = '#7109AA';
     const onTextColor = '#fff';
-    const offTextColor = '#fff';
+    // const offTextColor = '#fff';
 
     let leftEOnColor = '#7109AA';
     let leftOOnColor = '#7109AA';
