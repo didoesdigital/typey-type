@@ -28,7 +28,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import Dictionaries from './Dictionaries';
+import asyncComponent from "./AsyncComponent";
 import DocumentTitle from 'react-document-title';
 import Announcements from './Announcements';
 import ErrorBoundary from './ErrorBoundary'
@@ -43,6 +43,8 @@ import PageNotFound from './PageNotFound';
 import Footer from './Footer';
 import Zipper from './zipper';
 import './App.css';
+
+const AsyncDictionaries = asyncComponent(() => import("./Dictionaries"));
 
 class App extends Component {
   constructor(props) {
@@ -1265,7 +1267,7 @@ class App extends Component {
                   {header}
                   <DocumentTitle title={'Typey Type | Dictionaries'}>
                     <ErrorBoundary>
-                      <Dictionaries
+                      <AsyncDictionaries
                         dictionary={this.state.dictionary}
                         dictionaryIndex={this.state.dictionaryIndex}
                         handleDictionary={this.handleDictionary.bind(this)}
