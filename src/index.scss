@@ -23,6 +23,7 @@ $z-index-fill-fade-edges: 1;
 $z-index-successfully-typed-text: -1;
 $link-button-height: 40px;
 $link-button-width: 40px;
+$header-plus-footer-height: 208px;
 
 // Element styles
 * {
@@ -412,6 +413,8 @@ input:focus::placeholder {
 .mw-504  { max-width: 504px; }
 .mw-408  { max-width: 408px; }
 .mw-384  { max-width: 384px; }
+
+.mh-page { min-height: calc(100vh - #{$header-plus-footer-height}); }
 
 .p0      { padding: 0px; }
 .p1      { padding: 8px; }

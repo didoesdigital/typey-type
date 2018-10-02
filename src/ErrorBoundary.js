@@ -22,8 +22,10 @@ class ErrorBoundary extends Component {
   render() {
     if (this.state.hasError) {
       return (
-        <div className="center-all">
-          <p>Sorry, Typey Type hit an error. I’ve been notified and will look into this as soon as I can. Meanwhile, try <a href=".">refresh the page</a>. Thanks for your patience. —Di</p>
+        <div className="mh-page">
+          <div className="center-all">
+            <p>Sorry, Typey Type hit an error. I’ve been notified and will look into this as soon as I can. Meanwhile, try <a href=".">refresh the page</a>. Thanks for your patience. —Di</p>
+          </div>
         </div>
       )
     }
