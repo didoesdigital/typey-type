@@ -316,6 +316,58 @@ class Support extends Component {
             <h4 id="revision">How many briefs should you revise each day?</h4>
             <p>100–200.</p>
 
+            <h4 id="palantype">What’s a “palantype”?</h4>
+            <p>Typey&nbsp;Type supports alternative steno key layouts such as “palantype”. A palantype is an alternative shorthand machine to a stenotype with more keys. That means palantype can have fewer theory conflicts and be easier to learn. Stenography, on the other hand, is more popular and more ergonomic.{' '}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Learn palantype"
+                aria-label="Learn palantype (external link opens in new tab)"
+                to="http://www.openstenoproject.org/palantype/tutorial/2016/08/21/learn-palantype.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Learn <span className="nowrap">palantype
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>{' '}
+              and learn more about{' '}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Palan versus Steno"
+                aria-label="Palan versus Steno (external link opens in new tab)"
+                to="http://www.openstenoproject.org/palantype/palantype/2016/08/21/palan-versus-steno.html"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Palan versus <span className="nowrap">Steno
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>{' '}
+              from the Open Steno Project.
+            </p>
+
             <h3 id="progress">Progress</h3>
             <p>See how much <Link to="/progress">progress you’ve made with Typey&nbsp;Type</Link>.</p>
 
