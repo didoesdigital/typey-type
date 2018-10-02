@@ -28,8 +28,9 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
-import asyncComponent from "./AsyncComponent";
 import DocumentTitle from 'react-document-title';
+import Loadable from 'react-loadable';
+import PageLoading from './PageLoading';
 import Announcements from './Announcements';
 import ErrorBoundary from './ErrorBoundary'
 import Lessons from './Lessons';
@@ -44,7 +45,25 @@ import Footer from './Footer';
 import Zipper from './zipper';
 import './App.css';
 
-const AsyncDictionaries = asyncComponent(() => import("./Dictionaries"));
+const AsyncDictionaries = Loadable({
+  loader: () => import("./Dictionaries"),
+  loading: PageLoading,
+  delay: 300
+});
+
+// Test PageLoadingPastDelay at Dictionaries route:
+// import PageLoadingPastDelay from './PageLoadingPastDelay';
+// const AsyncDictionaries = Loadable({
+//   loader: () => import('./PageLoadingPastDelay'), // oh no!
+//   loading: PageLoading,
+// });
+
+// Test PageLoadingFailed at Dictionaries route:
+// import PageLoadingFailed from './PageLoadingFailed';
+// const AsyncDictionaries = Loadable({
+//   loader: () => import('./PageLoadingFailed'), // oh no!
+//   loading: PageLoading,
+// });
 
 class App extends Component {
   constructor(props) {
