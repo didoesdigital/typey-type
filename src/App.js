@@ -12,6 +12,7 @@ import {
   getLesson,
   generateDictionaryEntries,
   loadPersonalPreferences,
+  lookUpDictionaryInIndex,
   matchSplitText,
   parseLesson,
   removeWhitespaceAndSumUniqMetWords,
@@ -131,6 +132,14 @@ class App extends Component {
         stenoLayout: 'stenoLayoutAmericanSteno' // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianSteno' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
       },
       dictionary: {
+        author: "Typey Type",
+        title: 'Top 10 dict',
+        subtitle: "",
+        category: "Typey Type",
+        subcategory: "",
+        tagline: "Typey&nbsp;Type’s top 10 words.",
+        link: "/typey-type/support#typey-type-dictionary",
+        path: "/dictionaries/typey-type/top-10.json",
         contents: {
           "-T": "the",
           "-F": "of",
@@ -142,9 +151,7 @@ class App extends Component {
           "S": "is",
           "OPB": "on",
           "THA": "that"
-        },
-        title: 'Top 10 dict',
-        path: ''
+        }
       },
       lesson: {
         sourceMaterial: [
@@ -856,30 +863,93 @@ class App extends Component {
     });
   }
 
-  handleDictionary(path) {
-    getDictionary(path).then((dictionaryText) => {
-      // let dictionary = parseDictionary(dictionaryText, path);
-      let dictionary = {
-        contents: {
-          "-T": "the",
-          "-F": "of",
-          "SKP": "and",
-          "TO": "to",
-          "AEU": "a",
-          "TPH": "in",
-          "TPOR": "for",
-          "S": "is",
-          "OPB": "on",
-          "THA": "that"
-        },
-        title: 'Top 10 dict',
-        path: ''
-      }
-      this.setState({
-        announcementMessage: 'Navigated to: ' + dictionary.title,
-        dictionary: dictionary
+  handleDictionary(path, dictionaryIndex) {
+    console.log("PATH: " + path);
+    let dictionaryFile = path.replace(/^\/dictionaries/,'').replace(/\/$/,'.json');
+    // getDictionary(path.replace(/^\/dictionaries/,'').replace(/\/$/,'.json')).then((dictionaryContents) => {
+      fetch(dictionaryFile, {
+        method: "GET",
+        credentials: "same-origin"
+      }).then((response) => {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+          return response.json().then(dictionaryContents => {
+            let dictionary = {};
+            dictionary['contents'] = dictionaryContents;
+            debugger
+
+            let dictionaryMetadata = lookUpDictionaryInIndex(path, dictionaryIndex);
+            for (const [metadataKey, metadataValue] of Object.entries(dictionaryMetadata)) {
+              dictionary[metadataKey] = metadataValue;
+            }
+
+            this.setState({
+              announcementMessage: 'Navigated to: ' + dictionary.title,
+              dictionary: dictionary
+            });
+          });
+        } else {
+          console.log("WRONG PATH?")
+          let dictionary = {
+            author: "Typey Type",
+            title: 'Top 10 dict', subtitle: "",
+            category: "Typey Type", subcategory: "",
+            tagline: "Typey&nbsp;Type’s top 10 words.",
+            link: "/typey-type/support#typey-type-dictionary",
+            path: "/dictionaries/typey-type/top-10.json",
+            contents: { "-T": "the", "-F": "of", "SKP": "and", "TO": "to", "AEU": "a", "TPH": "in", "TPOR": "for", "S": "is", "OPB": "on", "THA": "that" }
+          };
+
+          this.setState({
+            announcementMessage: 'Navigated to: missing dictionary',
+            dictionary: dictionary
+          });
+          // return response.text().then(text => {
+          // });
+        }
+        // // return response.text();
+        // console.log(DictionaryFile);
+        // return response.json();
+      }, function(error) {
+        console.log(error);
       });
-    });
+    // getDictionary(path.replace(/^\/dictionaries/,'').replace(/\/$/,'.json')).then((dictionaryContents) => {
+      // let dictionary = {
+      //   author: "Typey Type",
+      //   title: "Dictionary",
+      //   subtitle: "",
+      //   category: "Typey Type",
+      //   subcategory: "",
+      //   tagline: "Typey&nbsp;Type’s dictionary is a version of the Plover dictionary with misstrokes removed for the top 10,000 words.",
+      //   link: "/typey-type/support#typey-type-dictionary",
+      //   path: "/dictionaries/typey-type/typey-type.json",
+      //   contents: {
+      //     "-T": "the",
+      //     "-F": "of",
+      //     "SKP": "and",
+      //     "TO": "to",
+      //     "AEU": "a",
+      //     "TPH": "in",
+      //     "TPOR": "for",
+      //     "S": "is",
+      //     "OPB": "on",
+      //     "THA": "that"
+      //   }
+      // }
+
+//       let dictionary = {};
+//       dictionary['contents'] = dictionaryContents;
+
+//       let dictionaryMetadata = lookUpDictionaryInIndex(path, this.state.dictionaryIndex);
+//       for (const [metadataKey, metadataValue] of Object.entries(dictionaryMetadata)) {
+//         dictionary[metadataKey] = metadataValue;
+//       }
+
+//       this.setState({
+//         announcementMessage: 'Navigated to: ' + dictionary.title,
+//         dictionary: dictionary
+//       });
+    // });
   }
 
   handleLesson(path) {

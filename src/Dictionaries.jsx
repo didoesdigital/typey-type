@@ -7,9 +7,55 @@ const Dictionaries = ({match, dictionaryIndex, handleDictionary, dictionary, ...
   return(
     <div>
       <Switch>
-        <Route path={`${match.url}/:category/:subcategory/:dictionaryPath`} render={ (props) =>
+        <Route path={`${match.url}/lessons/:category/:subcategory/:dictionaryPath`} render={ (props) =>
           <Dictionary
             dictionary={dictionary}
+            dictionaryIndex={dictionaryIndex}
+            handleDictionary={handleDictionary}
+            {...dictionaryProps}
+            {...props}
+          />
+        } />
+        <Route path={`${match.url}/lessons/fundamentals/:dictionaryPath`} render={ (props) =>
+          <Dictionary
+            dictionary={dictionary}
+            dictionaryIndex={dictionaryIndex}
+            handleDictionary={handleDictionary}
+            {...dictionaryProps}
+            {...props}
+          />
+        } />
+        <Route path={`${match.url}/lessons/drills/:dictionaryPath`} render={ (props) =>
+          <Dictionary
+            dictionary={dictionary}
+            dictionaryIndex={dictionaryIndex}
+            handleDictionary={handleDictionary}
+            {...dictionaryProps}
+            {...props}
+          />
+        } />
+      <Route path={`${match.url}/dictionaries/typey-type/:dictionaryPath`} render={ (props) =>
+          <Dictionary
+            dictionary={dictionary}
+            dictionaryIndex={dictionaryIndex}
+            handleDictionary={handleDictionary}
+            {...dictionaryProps}
+            {...props}
+          />
+        } />
+      <Route path={`${match.url}/dictionaries/didoesdigital/:dictionaryPath`} render={ (props) =>
+          <Dictionary
+            dictionary={dictionary}
+            dictionaryIndex={dictionaryIndex}
+            handleDictionary={handleDictionary}
+            {...dictionaryProps}
+            {...props}
+          />
+        } />
+      <Route path={`${match.url}/dictionaries/plover/:dictionaryPath`} render={ (props) =>
+          <Dictionary
+            dictionary={dictionary}
+            dictionaryIndex={dictionaryIndex}
             handleDictionary={handleDictionary}
             {...dictionaryProps}
             {...props}
@@ -24,9 +70,9 @@ const Dictionaries = ({match, dictionaryIndex, handleDictionary, dictionary, ...
         } />
         <Route exact={true} path={match.url} render={ (props) =>
           <DictionariesIndex
-            match={match}
             dictionaryIndex={dictionaryIndex}
             dictionary={dictionary}
+            match={match}
             {...dictionaryProps}
             {...props}
           />

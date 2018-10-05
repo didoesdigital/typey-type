@@ -14,9 +14,40 @@ class DictionariesIndex extends Component {
 
   render() {
     const linkList = this.props.dictionaryIndex.map( (dictionary) => {
+      let author = 'Typey Type';
+      if (dictionary.author && dictionary.author.length > 0) {
+        author = dictionary.author;
+      }
+      let title = 'dictionary';
+      if (dictionary.title && dictionary.title.length > 0) {
+        title = dictionary.title;
+      }
+      let subtitle = '';
+      if (dictionary.subtitle && dictionary.subtitle.length > 0) {
+        subtitle = ': '+dictionary.subtitle;
+      }
+      let learnMoreLink = [];
+      if (dictionary.link && dictionary.link.length > 0) {
+        let ariaLabel = "Learn more about " + title;
+        learnMoreLink = (<span> · <a href={dictionary.link} aria-label={ariaLabel}>Learn more</a></span>);
+      }
+      // console.log(path);
+      // /typey-type/typey-type.json
+      // /drills/steno/steno.json
+      // /dictionaries/typey-type/typey-type.json
+      // /dictionaries/plover/main-16-aug-2017.json
+      // /dictionaries/didoesdigital/navigation.json
+      // /lessons/stories/fables/the-nurse-and-the-wolf/lesson.txt
+      // console.log(dictionary.path);
+      // console.log(this.props.location.pathname);
+      let dictionarypath = dictionary.path;
+      dictionarypath = dictionarypath.replace(/lesson.txt/,'lesson/');
+      dictionarypath = dictionarypath.replace(/.json/,'/');
+
+      // console.log(dictionarypath);
       return(
         <li className="unstyled-list-item" key={ dictionary.path }>
-          <Link to={`${this.props.match.url}${dictionary.path}`.replace(/path\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--dictionary-index-'+dictionary.path.replace(/\/dictionary\.txt/g,'').replace(/[/.]/g,'-')}>{dictionary.title}</Link>
+          <Link to={`${this.props.match.url}${dictionarypath}`.replace(/path\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--dictionary-index-'+dictionarypath.replace(/[/.]/g,'-')}>{author}’s {dictionary.title}{subtitle}</Link>{learnMoreLink}
         </li>
       )
     });
@@ -34,7 +65,7 @@ class DictionariesIndex extends Component {
         </div>
         <div className="p3 mx-auto mw-1024">
           <h3>Custom dictionaries</h3>
-          <p>To help the open steno community and Typey&nbsp;Type grow even faster, add your custom dictionaries to the{' '}
+          <p>To help the open steno community and Typey&nbsp;Type grow even faster, add your custom dictionaries to{' '}
             <GoogleAnalytics.OutboundLink
               eventLabel="Stenodict"
               to="http://www.openstenoproject.org/stenodict/"

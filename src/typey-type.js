@@ -517,6 +517,55 @@ function parseLesson(lessonText, path) {
   }
 }
 
+function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
+  let dictionaryMetadata = dictionaryIndex.find(metadataEntry => metadataEntry.path === path.replace(/\/$/,'.json'));
+
+  if (typeof dictionaryMetadata === "undefined") {
+    dictionaryMetadata = {
+      author: "Typey Type",
+      title: 'Top 10 dict',
+      subtitle: "",
+      category: "Typey Type",
+      subcategory: "",
+      tagline: "Typey&nbsp;Type’s top 10 words.",
+      link: "/typey-type/support#typey-type-dictionary",
+      path: "/dictionaries/typey-type/top-10.json",
+    }
+  }
+
+
+  // let dictionaryMetadata = {
+  //   author: "Typey Type",
+  //   title: "Dictionary",
+  //   subtitle: "",
+  //   category: "Typey Type",
+  //   subcategory: "",
+  //   tagline: "Typey&nbsp;Type’s dictionary is a version of the Plover dictionary with misstrokes removed for the top 10,000 words.",
+  //   link: "/typey-type/support#typey-type-dictionary",
+  //   path: "/dictionaries/typey-type/typey-type.json"
+  // }
+  // let dictionaryIndex = [
+  //   {
+  //     "author": "Typey Type",
+  //     "title": "Dictionary",
+  //     "subtitle": "",
+  //     "category": "Typey Type",
+  //     "subcategory": "",
+  //     "tagline": "Typey&nbsp;Type’s dictionary is a version of the Plover dictionary with misstrokes removed for the top 10,000 words.",
+  //     "link": "/typey-type/support#typey-type-dictionary",
+  //     "path": "/dictionaries/typey-type/typey-type.json"
+  //   }
+  // ];
+
+  // let len = dictionaryIndex.length;
+  // for (let i = 0; i < len; i++) {
+  //   if (i.path === path) {
+  //   }
+  // }
+
+  return dictionaryMetadata;
+}
+
 function swapKeyValueInDictionary(sourceDictionaryFile) {
   let sourceWordsAndStrokes = {};
   for (let stroke in sourceDictionaryFile) {
@@ -649,7 +698,16 @@ function getDictionary(DictionaryFile) {
     method: "GET",
     credentials: "same-origin"
   }).then((response) => {
-    return response.text();
+    const contentType = response.headers.get("content-type");
+    if (contentType && contentType.indexOf("application/json") !== -1) {
+      return response.json();
+    } else {
+      return response.text().then(text => {
+      });
+    }
+    // // return response.text();
+    // console.log(DictionaryFile);
+    // return response.json();
   }, function(error) {
     console.log(error);
   });
@@ -730,6 +788,7 @@ export {
   getDictionary,
   getLesson,
   loadPersonalPreferences,
+  lookUpDictionaryInIndex,
   matchSplitText,
   mapBriefToAmericanStenoKeys,
   mapBriefToDanishStenoKeys,
