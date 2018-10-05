@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Clipboard from 'clipboard';
 import { IconCheckmark, IconTriangleRight } from './Icon';
 import { Link } from 'react-router-dom';
+import { loadPersonalPreferences } from './typey-type';
 import {
   Tooltip,
 } from 'react-tippy';
@@ -12,18 +13,44 @@ class Progress extends Component {
     super(props);
     this.state = {
       flashWarning: '',
+      reducedSaveAndLoad: false,
+      showLoadInput: false,
     }
   }
 
   componentDidMount() {
     new Clipboard('.js-clipboard-button');
+
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
+
+    this.setState({showLoadInput: false});
+
+    let metWords = loadPersonalPreferences()[0];
+    if (Object.keys(metWords).length > 2000) {
+      this.setState({reducedSaveAndLoad: true});
+    } else {
+      this.setState({
+        reducedSaveAndLoad: false,
+        showLoadInput: false
+      });
+    }
+  }
+
+  showLoadInput() {
+    this.setState({showLoadInput: true});
   }
 
   restoreButtonOnClickFunction() {
-    this.props.setPersonalPreferences(document.querySelectorAll(".js-metwords-from-personal-store")[0].value);
+    let textareas = document.querySelectorAll(".js-metwords-from-personal-store");
+    let textareaContents;
+    if (textareas.length > 1) {
+      textareaContents = textareas[1];
+    } else {
+      textareaContents = textareas[0];
+    }
+    this.props.setPersonalPreferences(textareaContents.value);
     // this.props.setAnnouncementMessage(this, "teft");
     this.setState({flashWarning: "To update your lesson progress, visit the lessons."});
   };
@@ -121,6 +148,86 @@ class Progress extends Component {
     let metWordsFromTypeyType = JSON.stringify(this.props.metWords);
     let yourWordCount = Object.keys(this.props.metWords).length || 0;
     let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
+
+    let saveAndLoadPanels = (
+      <div className={this.state.reducedSaveAndLoad ? "visually-hidden" : "progress-layout pl3 pr3 pt3 mx-auto mw-1024"}>
+        <div className="panel p3 mb3">
+          <h2>Save your progress</h2>
+          <p>Typey&nbsp;Type saves your brief progress in your browser’s local storage.<strong className="bg-danger"> You’ll lose your progress if you clear your browsing data (history, cookies, and cache).</strong> If you share this device with other people or use Typey&nbsp;Type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;Type.</p>
+          <p className="mb0">
+            <button className="js-clipboard-button link-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-metwords-from-typey-type">
+              Copy progress to clipboard
+            </button>
+          </p>
+        </div>
+
+        <div className="panel p3 mb3">
+          <h2 className="mt0">Load your progress</h2>
+          <p className="mt2 mb3">
+            Restore your progress from a previous session by entering your saved progress and loading it into Typey&nbsp;Type. You can also clear your progress by loading in empty curly braces, <code>{"{}"}</code>.
+          </p>
+          <p className="mt4 mb0">
+            <label htmlFor="metWords-from-personal-store" className="inline-block mb05">Enter your progress here:</label>
+            <textarea
+              id="metwords-from-personal-store"
+              className="js-metwords-from-personal-store progress-textarea db w-100"
+              autoCapitalize="off"
+              autoComplete="off"
+              autoCorrect="off"
+              spellCheck="false"
+              rows="2"
+            />
+          </p>
+          <p className="mt2 mb0">
+            <button onClick={this.restoreButtonOnClickFunction.bind(this)} className="link-button load-progress fade-out-up">
+              Load progress from text
+            </button>
+          </p>
+        </div>
+      </div>
+    );
+
+    let reducedSaveAndLoadForms;
+    let loadForm = (
+      <button onClick={this.showLoadInput.bind(this)} className="de-emphasized-button mr2">
+        Load
+      </button>
+    );
+
+    if (this.state.reducedSaveAndLoad) {
+      if (this.state.showLoadInput) {
+        loadForm = (
+          <React.Fragment>
+            <label htmlFor="metWords-from-personal-store--small" className="inline-block mb05 visually-hidden">Enter your progress here:</label>
+            <textarea
+              id="metwords-from-personal-store--small"
+              className="js-metwords-from-personal-store progress-textarea db w-100 mr1"
+              autoCapitalize="off"
+              autoComplete="off"
+              autoCorrect="off"
+              spellCheck="false"
+              style={{maxWidth: '200px', maxHeight: '40px'}}
+              rows="1"
+            />
+            <button onClick={this.restoreButtonOnClickFunction.bind(this)} className="link-button load-progress fade-out-up mr3">
+              Load
+            </button>
+          </React.Fragment>
+        );
+      }
+      reducedSaveAndLoadForms = (
+        <div className="flex mb3">
+          <div className="flex">
+            {loadForm}
+          </div>
+          <button className="js-clipboard-button link-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-metwords-from-typey-type">
+            Copy
+          </button>
+        </div>
+      );
+    }
+
+
     return (
       <div>
         <main id="main">
@@ -133,44 +240,14 @@ class Progress extends Component {
               </div>
             </div>
           </div>
-          <div className="progress-layout pl3 pr3 pt3 mx-auto mw-1024">
-            <div className="panel p3 mb3">
-              <h2>Save your progress</h2>
-              <p>Typey&nbsp;Type saves your brief progress in your browser’s local storage.<strong className="bg-danger"> You’ll lose your progress if you clear your browsing data (history, cookies, and cache).</strong> If you share this device with other people or use Typey&nbsp;Type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;Type.</p>
-              <p className="mb0">
-                <button className="js-clipboard-button link-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-metwords-from-typey-type">
-                  Copy progress to clipboard
-                </button>
-              </p>
-            </div>
 
-            <div className="panel p3 mb3">
-              <h2 className="mt0">Load your progress</h2>
-              <p className="mt2 mb3">
-                Restore your progress from a previous session by entering your saved progress and loading it into Typey&nbsp;Type. You can also clear your progress by loading in empty curly braces, <code>{"{}"}</code>.
-              </p>
-              <p className="mt4 mb0">
-                <label htmlFor="metWords-from-personal-store" className="inline-block mb05">Enter your progress here:</label>
-                <textarea
-                  id="metwords-from-personal-store"
-                  className="js-metwords-from-personal-store progress-textarea db w-100"
-                  autoCapitalize="off"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  spellCheck="false"
-                  rows="2"
-                />
-              </p>
-              <p className="mt2 mb0">
-                <button onClick={this.restoreButtonOnClickFunction.bind(this)} className="link-button load-progress fade-out-up">
-                  Load progress from text
-                </button>
-              </p>
-            </div>
-          </div>
+          {saveAndLoadPanels}
 
-          <div className="p3 mx-auto mw-1024">
-            <h2>Your progress</h2>
+          <div className={this.state.reducedSaveAndLoad ? "p3 mx-auto mw-1024 mt3" : "p3 mx-auto mw-1024"}>
+            <div className="flex justify-between">
+              <h2 className="mb0">Your progress</h2>
+              {reducedSaveAndLoadForms}
+            </div>
             <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words.</p>
             <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
 
