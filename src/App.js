@@ -486,13 +486,20 @@ class App extends Component {
   //   {phrase: 'cat', stroke: '-T'}
   // ],
 
-  setupRevisionLesson(metWords, userSettings) {
+  setupRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
     let newUserSettings = Object.assign({}, userSettings);
-    newUserSettings.newWords = false;
-    newUserSettings.seenWords = true;
-    newUserSettings.study = 'revise';
-    newUserSettings.sortOrder = 'sortNew';
-    newUserSettings.limitNumberOfWords = 50;
+    newUserSettings.newWords = newSeenOrMemorised[0];
+    newUserSettings.seenWords = newSeenOrMemorised[1];
+    newUserSettings.retainedWords = newSeenOrMemorised[2];
+    if (newSeenOrMemorised[2]) {
+      newUserSettings.study = 'drill';
+      newUserSettings.sortOrder = 'sortRandom';
+      newUserSettings.limitNumberOfWords = 100;
+    } else {
+      newUserSettings.study = 'revise';
+      newUserSettings.sortOrder = 'sortNew';
+      newUserSettings.limitNumberOfWords = 50;
+    }
     newUserSettings.repetitions = 3;
 
     let lesson = {};
@@ -532,6 +539,7 @@ class App extends Component {
           };
           lesson.path = process.env.PUBLIC_URL + '/lessons/progress-revision/'
           lesson.title = 'Your revision words'
+          if (newSeenOrMemorised[2]) { lesson.title = 'Your memorised words'; }
           lesson.subtitle = ''
         }
       }

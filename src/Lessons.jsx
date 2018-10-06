@@ -31,7 +31,15 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
             {...props}
           />
         } />
-        <Route exact={true} path={`${match.url}/progress-revision/`} render={ (props) =>
+        <Route exact={true} path={`${match.url}/progress-seen/`} render={ (props) =>
+          <Lesson lessonIndex={lessonIndex}
+            handleLesson={handleLesson}
+            lesson={lesson}
+            {...lessonProps}
+            {...props}
+          />
+        } />
+        <Route exact={true} path={`${match.url}/progress-memorised/`} render={ (props) =>
           <Lesson lessonIndex={lessonIndex}
             handleLesson={handleLesson}
             lesson={lesson}

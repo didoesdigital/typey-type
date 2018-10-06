@@ -17,14 +17,23 @@ import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapB
 
 class Lesson extends Component {
   componentDidMount() {
-    if (this.props.location.pathname.startsWith('/lessons/progress-revision/')) {
+    if (this.props.location.pathname.startsWith('/lessons/progress-seen/')) {
       let loadedPersonalPreferences = loadPersonalPreferences();
-      this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1]);
-    } else if (this.props.location.pathname.startsWith('/lessons/custom')) {
+      let newSeenOrMemorised = [false, true, false]
+      this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);
+    }
+    else if (this.props.location.pathname.startsWith('/lessons/progress-memorised/')) {
+      let loadedPersonalPreferences = loadPersonalPreferences();
+      let newSeenOrMemorised = [false, false, true]
+      this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);
+    }
+    else if (this.props.location.pathname.startsWith('/lessons/custom')) {
       this.props.setCustomLesson();
-    } else if(this.isFlashcards()) {
+    }
+    else if(this.isFlashcards()) {
       // do nothing
-    } else if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
+    }
+    else if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
     }
 
