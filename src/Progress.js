@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Clipboard from 'clipboard';
+import PseudoContentButton from './PseudoContentButton';
 import { IconCheckmark, IconTriangleRight } from './Icon';
 import { Link } from 'react-router-dom';
 import { loadPersonalPreferences } from './typey-type';
@@ -19,8 +19,6 @@ class Progress extends Component {
   }
 
   componentDidMount() {
-    new Clipboard('.js-clipboard-button');
-
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
@@ -157,9 +155,7 @@ class Progress extends Component {
           <h2>Save your progress</h2>
           <p>Typey&nbsp;Type saves your brief progress in your browser’s local storage.<strong className="bg-danger"> You’ll lose your progress if you clear your browsing data (history, cookies, and cache).</strong> If you share this device with other people or use Typey&nbsp;Type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;Type.</p>
           <p className="mb0">
-            <button className="js-clipboard-button link-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-metwords-from-typey-type">
-              Copy progress to clipboard
-            </button>
+            <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-metwords-from-typey-type">Copy progress to clipboard</PseudoContentButton>
           </p>
         </div>
 
@@ -181,9 +177,7 @@ class Progress extends Component {
             />
           </p>
           <p className="mt2 mb0">
-            <button onClick={this.restoreButtonOnClickFunction.bind(this)} className="link-button load-progress fade-out-up">
-              Load progress from text
-            </button>
+            <PseudoContentButton className="link-button load-progress" onClick={this.restoreButtonOnClickFunction.bind(this)}>Load progress from text</PseudoContentButton>
           </p>
         </div>
       </div>
@@ -211,9 +205,7 @@ class Progress extends Component {
               style={{maxWidth: '200px', maxHeight: '40px'}}
               rows="1"
             />
-            <button onClick={this.restoreButtonOnClickFunction.bind(this)} className="link-button load-progress fade-out-up mr3">
-              Load
-            </button>
+            <PseudoContentButton className="link-button load-progress mr3" onClick={this.restoreButtonOnClickFunction.bind(this)}>Load</PseudoContentButton>
           </React.Fragment>
         );
       }
@@ -222,9 +214,7 @@ class Progress extends Component {
           <div className="flex">
             {loadForm}
           </div>
-          <button className="js-clipboard-button link-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-metwords-from-typey-type">
-            Copy
-          </button>
+          <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-metwords-from-typey-type">Copy</PseudoContentButton>
         </div>
       );
     }

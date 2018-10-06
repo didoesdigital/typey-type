@@ -1199,7 +1199,7 @@ label {
   }
 }
 
-.fade-out-up:focus::before {
+.fade-out-up::before {
   animation-name: fade-out-up;
   animation-duration: 1s;
   animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
+import PseudoContentButton from './PseudoContentButton';
 import './App.css';
-import Clipboard from 'clipboard';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 import {
@@ -26,7 +26,6 @@ class CustomLessonSetup extends Component {
   }
 
   componentDidMount() {
-    new Clipboard('.js-clipboard-button');
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
@@ -207,9 +206,7 @@ plover"
                 </div>
                 <div>
                   <pre id="js-custom-lesson-dictionary-entries" className={filledPre + "h-192 overflow-scroll mw-384 mt1 mb3"}>{dictionaryEntries}</pre>
-                  <button className="js-clipboard-button link-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-custom-lesson-dictionary-entries">
-                    Copy custom lesson to clipboard
-                  </button>
+                  <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-custom-lesson-dictionary-entries">Copy custom lesson to clipboard</PseudoContentButton>
                 </div>
               </div>
             </div>
@@ -225,9 +222,7 @@ plover"
                     id="js-your-words-for-dictionary-entries"
                     className="quote h-192 overflow-scroll mw-384 mt1 mb3"
                   ><code>{this.state.myWords}</code></pre>
-                  <button className="js-select-all-my-words link-button js-clipboard-button copy-to-clipboard fade-out-up" data-clipboard-target="#js-your-words-for-dictionary-entries">
-                    Copy your words to clipboard
-                  </button>
+                  <PseudoContentButton className="js-select-all-my-words link-button js-clipboard-button copy-to-clipboard" dataClipboardTarget="#js-your-words-for-dictionary-entries">Copy your words to clipboard</PseudoContentButton>
                 </div>
                 <div>
                 </div>
