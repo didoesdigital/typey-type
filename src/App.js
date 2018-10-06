@@ -462,30 +462,6 @@ class App extends Component {
     return flashcardsMetWords;
   }
 
-  // "S-P/S*EPT": "sept",
-  // "TK-F/OPS": "DevOps",
-  // "TKAET/SREUZ": "data viz",
-  //
-  // "sept": "S-P/S*EPT",
-  // "DevOps": "TK-F/OPS",
-  // "data viz": "TKAET/SREUZ",
-  //
-  // " appose": 1
-  // " approach": 2
-  // " appropriate": 1
-  //
-  // appose
-  // appropriate
-  // approach
-  //
-  // [{phrase: 'appose', stroke: 'A/POES'},{phrase: 'appropriate', stroke: 'PROEPT'},{phrase: 'approach', stroke: 'PROEFP'}]
-  // sourceMaterial: [
-  //   {phrase: 'cat', stroke: '-T'},
-  // ],
-  // presentedMaterial: [
-  //   {phrase: 'cat', stroke: '-T'}
-  // ],
-
   setupRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
     let newUserSettings = Object.assign({}, userSettings);
     newUserSettings.newWords = newSeenOrMemorised[0];
@@ -505,34 +481,22 @@ class App extends Component {
     let lesson = {};
     fetchDictionaries().then((json) => {
       let sourceWordsAndStrokes = swapKeyValueInDictionary(json);
-    // remove garbage like {^}
+      // remove garbage like {^}
       let processedSourceWordsAndStrokes = Object.assign({}, processDictionary(sourceWordsAndStrokes));
-      // perhaps we can replace these with result = createWordListFromMetWords?
-      // let myWords = createWordListFromMetWords(metWords).join("\n");
-      // let result = parseWordList(myWords);
-    // grab metWords
-    // trim spaces
-    // sort by times seen
+      // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWords).join("\n");
-    // parseWordList appears to remove empty lines and other garbage, we might not need it here
+      // parseWordList appears to remove empty lines and other garbage, we might not need it here
       let result = parseWordList(myWords);
+        // perhaps we can replace these with result = createWordListFromMetWords?
+        // let myWords = createWordListFromMetWords(metWords).join("\n");
+        // let result = parseWordList(myWords);
       if (result && result.length > 0) {
-    // look up strokes for each word
+        // look up strokes for each word
         let dictionary = generateDictionaryEntries(result, processedSourceWordsAndStrokes);
         if (dictionary && dictionary.length > 0) {
-    // add to sourceMaterial array with phrase and stroke
-      // sourceMaterial: sourceMaterial,
           lesson.sourceMaterial = dictionary;
-    // copy to presentedMaterial?
-      // presentedMaterial: sourceMaterial,
           lesson.presentedMaterial = dictionary;
-    // something something zipper?
-      // newPresentedMaterial: new Zipper([sourceMaterial]),
           lesson.newPresentedMaterial = new Zipper([dictionary]);
-          // this.setState({
-          //   dictionary: dictionary,
-          //   customWordList: myWords
-          // });
           lesson.settings = {
             ignoredChars: '',
             customMessage: ''
@@ -543,8 +507,6 @@ class App extends Component {
           lesson.subtitle = ''
         }
       }
-      // settings: settings,
-        // maybe add ^ to ignored chars; probably not, handle that in processed dict or wherever
       this.setState({
         announcementMessage: 'Navigated to: Your revision words',
         currentPhraseID: 0,
