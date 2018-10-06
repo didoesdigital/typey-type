@@ -486,7 +486,11 @@ class App extends Component {
   //   {phrase: 'cat', stroke: '-T'}
   // ],
 
-  setupRevisionLesson(metWords) {
+  setupRevisionLesson(metWords, userSettings) {
+    let newUserSettings = Object.assign({}, userSettings);
+    newUserSettings.newWords = false;
+    newUserSettings.seenWords = true;
+
     let lesson = {};
     fetchDictionaries().then((json) => {
       let sourceWordsAndStrokes = swapKeyValueInDictionary(json);
@@ -532,7 +536,8 @@ class App extends Component {
       this.setState({
         announcementMessage: 'Navigated to: Your revision words',
         currentPhraseID: 0,
-        lesson: lesson
+        lesson: lesson,
+        userSettings: newUserSettings
       }, () => {
         this.setupLesson();
 

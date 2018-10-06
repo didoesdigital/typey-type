@@ -18,8 +18,8 @@ import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapB
 class Lesson extends Component {
   componentDidMount() {
     if (this.props.location.pathname.startsWith('/lessons/progress-revision/')) {
-      let metWords = loadPersonalPreferences()[0];
-      this.props.setupRevisionLesson(metWords);
+      let loadedPersonalPreferences = loadPersonalPreferences();
+      this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1]);
     } else if (this.props.location.pathname.startsWith('/lessons/custom')) {
       this.props.setCustomLesson();
     } else if(this.isFlashcards()) {
