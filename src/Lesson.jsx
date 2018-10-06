@@ -13,11 +13,14 @@ import UserSettings from './UserSettings';
 import Finished from './Finished';
 import Flashcards from './Flashcards';
 import CustomLessonSetup from './CustomLessonSetup';
-import { shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToPalantypeKeys } from './typey-type';
+import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToPalantypeKeys } from './typey-type';
 
 class Lesson extends Component {
   componentDidMount() {
-    if (this.props.location.pathname.startsWith('/lessons/custom')) {
+    if (this.props.location.pathname.startsWith('/lessons/progress-revision/')) {
+      let metWords = loadPersonalPreferences()[0];
+      this.props.setupRevisionLesson(metWords);
+    } else if (this.props.location.pathname.startsWith('/lessons/custom')) {
       this.props.setCustomLesson();
     } else if(this.isFlashcards()) {
       // do nothing
@@ -101,7 +104,7 @@ class Lesson extends Component {
       createNewCustomLesson = '';
     }
 
-    if (this.props.settings.customMessage) {
+    if (this.props.settings && this.props.settings.customMessage) {
       customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
     } else {
       customMessage = ''

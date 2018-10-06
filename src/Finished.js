@@ -231,7 +231,7 @@ class Finished extends Component {
     } else {
       lessonEmpty = false;
     }
-    if (this.props.settings.customMessage) {
+    if (this.props.settings && this.props.settings.customMessage) {
       customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
     } else {
       customMessage = ''

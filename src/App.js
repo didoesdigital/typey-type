@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import { randomise } from './utils';
 import {
+  createWordListFromMetWords,
   parseCustomMaterial,
+  parseWordList,
   fetchLessonIndex,
   setupLessonProgress,
+  fetchDictionaries,
+  generateDictionaryEntries,
   getLesson,
   loadPersonalPreferences,
   matchSplitText,
   parseLesson,
   removeWhitespaceAndSumUniqMetWords,
   repetitionsRemaining,
+  processDictionary,
   shouldShowStroke,
   strokeAccuracy,
+  swapKeyValueInDictionary,
   trimAndSumUniqMetWords,
   targetStrokeCount,
   writePersonalPreferences
@@ -456,6 +462,89 @@ class App extends Component {
     return flashcardsMetWords;
   }
 
+  // "S-P/S*EPT": "sept",
+  // "TK-F/OPS": "DevOps",
+  // "TKAET/SREUZ": "data viz",
+  //
+  // "sept": "S-P/S*EPT",
+  // "DevOps": "TK-F/OPS",
+  // "data viz": "TKAET/SREUZ",
+  //
+  // " appose": 1
+  // " approach": 2
+  // " appropriate": 1
+  //
+  // appose
+  // appropriate
+  // approach
+  //
+  // [{phrase: 'appose', stroke: 'A/POES'},{phrase: 'appropriate', stroke: 'PROEPT'},{phrase: 'approach', stroke: 'PROEFP'}]
+  // sourceMaterial: [
+  //   {phrase: 'cat', stroke: '-T'},
+  // ],
+  // presentedMaterial: [
+  //   {phrase: 'cat', stroke: '-T'}
+  // ],
+
+  setupRevisionLesson(metWords) {
+    let lesson = {};
+    fetchDictionaries().then((json) => {
+      let sourceWordsAndStrokes = swapKeyValueInDictionary(json);
+    // remove garbage like {^}
+      let processedSourceWordsAndStrokes = Object.assign({}, processDictionary(sourceWordsAndStrokes));
+      // perhaps we can replace these with result = createWordListFromMetWords?
+      // let myWords = createWordListFromMetWords(metWords).join("\n");
+      // let result = parseWordList(myWords);
+    // grab metWords
+    // trim spaces
+    // sort by times seen
+      let myWords = createWordListFromMetWords(metWords).join("\n");
+    // parseWordList appears to remove empty lines and other garbage, we might not need it here
+      let result = parseWordList(myWords);
+      if (result && result.length > 0) {
+    // look up strokes for each word
+        let dictionary = generateDictionaryEntries(result, processedSourceWordsAndStrokes);
+        if (dictionary && dictionary.length > 0) {
+    // add to sourceMaterial array with phrase and stroke
+      // sourceMaterial: sourceMaterial,
+          lesson.sourceMaterial = dictionary;
+    // copy to presentedMaterial?
+      // presentedMaterial: sourceMaterial,
+          lesson.presentedMaterial = dictionary;
+    // something something zipper?
+      // newPresentedMaterial: new Zipper([sourceMaterial]),
+          lesson.newPresentedMaterial = new Zipper([dictionary]);
+          // this.setState({
+          //   dictionary: dictionary,
+          //   customWordList: myWords
+          // });
+          lesson.settings = {
+            ignoredChars: '',
+            customMessage: ''
+          };
+          lesson.path = process.env.PUBLIC_URL + '/lessons/progress-revision/'
+          lesson.title = 'Your revision words'
+          lesson.subtitle = ''
+        }
+      }
+      // settings: settings,
+        // maybe add ^ to ignored chars; probably not, handle that in processed dict or wherever
+      this.setState({
+        announcementMessage: 'Navigated to: Your revision words',
+        currentPhraseID: 0,
+        lesson: lesson
+      }, () => {
+        this.setupLesson();
+
+        if (this.mainHeading) {
+          this.mainHeading.focus();
+        } else {
+          const element = document.getElementById('your-typed-text');
+          if (element) { element.focus(); }
+        }
+      });
+    });
+  }
 
   updateRevisionMaterial(event) {
     let newCurrentLessonStrokes = this.state.currentLessonStrokes.map(stroke => ({...stroke}));
@@ -1155,6 +1244,7 @@ class App extends Component {
                         sayCurrentPhraseAgain={this.sayCurrentPhraseAgain.bind(this)}
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setCustomLesson={this.setCustomLesson.bind(this)}
+                        setupRevisionLesson={this.setupRevisionLesson.bind(this)}
                         settings={this.state.lesson.settings}
                         showStrokesInLesson={this.state.showStrokesInLesson}
                         targetStrokeCount={this.state.targetStrokeCount}
