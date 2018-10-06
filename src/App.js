@@ -490,6 +490,7 @@ class App extends Component {
     let newUserSettings = Object.assign({}, userSettings);
     newUserSettings.newWords = false;
     newUserSettings.seenWords = true;
+    newUserSettings.study = 'revise';
 
     let lesson = {};
     fetchDictionaries().then((json) => {
