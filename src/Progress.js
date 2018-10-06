@@ -147,6 +147,8 @@ class Progress extends Component {
 
     let metWordsFromTypeyType = JSON.stringify(this.props.metWords);
     let yourWordCount = Object.keys(this.props.metWords).length || 0;
+    let yourSeenWordCount = Math.round(Object.values(this.props.metWords).filter( timesSeen => timesSeen > 0 && timesSeen < 30).length) || 0;
+    let yourMemorisedWordCount = Math.round(Object.values(this.props.metWords).filter( timesSeen => timesSeen > 29).length) || 0;
     let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
 
     let saveAndLoadPanels = (
@@ -227,6 +229,19 @@ class Progress extends Component {
       );
     }
 
+    let progressSummaryAndLinks = (
+      <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words.</p>
+    );
+    if (yourWordCount > 1) {
+      progressSummaryAndLinks = (
+        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise your {yourSeenWordCount} seen words</Link>.</p>
+      );
+    }
+    if (yourWordCount > 1 && yourMemorisedWordCount > 1) {
+      progressSummaryAndLinks = (
+        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise your {yourSeenWordCount} seen words</Link>. <Link to='/lessons/progress/memorised/'>Drill your {yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/'>Practice all your words</Link>.</p>
+      );
+    }
 
     return (
       <div>
@@ -248,7 +263,7 @@ class Progress extends Component {
               <h2 className="mb0">Your progress</h2>
               {reducedSaveAndLoadForms}
             </div>
-            <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise your seen words</Link>. <Link to='/lessons/progress/memorised/'>Drill your memorised words</Link>. <Link to='/lessons/progress/'>Practice all your words</Link>.</p>
+            {progressSummaryAndLinks}
             <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
 
             <h3>Lessons progress</h3>
