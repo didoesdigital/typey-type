@@ -248,7 +248,7 @@ class Progress extends Component {
               <h2 className="mb0">Your progress</h2>
               {reducedSaveAndLoadForms}
             </div>
-            <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress-seen/'>Revise your seen words</Link>. <Link to='/lessons/progress-memorised/'>Drill your memorised words</Link>.</p>
+            <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise your seen words</Link>. <Link to='/lessons/progress/memorised/'>Drill your memorised words</Link>. <Link to='/lessons/progress/'>Practice all your words</Link>.</p>
             <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
 
             <h3>Lessons progress</h3>

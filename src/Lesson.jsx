@@ -17,12 +17,17 @@ import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapB
 
 class Lesson extends Component {
   componentDidMount() {
-    if (this.props.location.pathname.startsWith('/lessons/progress-seen/')) {
+    if (this.props.location.pathname.startsWith('/lessons/progress/') && !this.props.location.pathname.includes('/lessons/progress/seen/') && !this.props.location.pathname.includes('/lessons/progress/memorised/')) {
+      let loadedPersonalPreferences = loadPersonalPreferences();
+      let newSeenOrMemorised = [false, true, true]
+      this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);
+    }
+    else if (this.props.location.pathname.startsWith('/lessons/progress/seen/')) {
       let loadedPersonalPreferences = loadPersonalPreferences();
       let newSeenOrMemorised = [false, true, false]
       this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);
     }
-    else if (this.props.location.pathname.startsWith('/lessons/progress-memorised/')) {
+    else if (this.props.location.pathname.startsWith('/lessons/progress/memorised/')) {
       let loadedPersonalPreferences = loadPersonalPreferences();
       let newSeenOrMemorised = [false, false, true]
       this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);

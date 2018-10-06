@@ -467,16 +467,26 @@ class App extends Component {
     newUserSettings.newWords = newSeenOrMemorised[0];
     newUserSettings.seenWords = newSeenOrMemorised[1];
     newUserSettings.retainedWords = newSeenOrMemorised[2];
-    if (newSeenOrMemorised[2]) {
-      newUserSettings.study = 'drill';
-      newUserSettings.sortOrder = 'sortRandom';
-      newUserSettings.limitNumberOfWords = 100;
-    } else {
+    if (newSeenOrMemorised[1] && !newSeenOrMemorised[2]) {
       newUserSettings.study = 'revise';
       newUserSettings.sortOrder = 'sortNew';
       newUserSettings.limitNumberOfWords = 50;
+      newUserSettings.repetitions = 3;
+      newUserSettings.showStrokes = false;
     }
-    newUserSettings.repetitions = 3;
+    else if (newSeenOrMemorised[2] && !newSeenOrMemorised[1]) {
+      newUserSettings.study = 'drill';
+      newUserSettings.sortOrder = 'sortRandom';
+      newUserSettings.limitNumberOfWords = 100;
+      newUserSettings.repetitions = 3;
+      newUserSettings.showStrokes = false;
+    } else {
+      newUserSettings.study = 'practice';
+      newUserSettings.sortOrder = 'sortOff';
+      newUserSettings.limitNumberOfWords = 0;
+      newUserSettings.repetitions = 1;
+      newUserSettings.showStrokes = false;
+    }
 
     let lesson = {};
     fetchDictionaries().then((json) => {
@@ -504,6 +514,7 @@ class App extends Component {
           lesson.path = process.env.PUBLIC_URL + '/lessons/progress-revision/'
           lesson.title = 'Your revision words'
           if (newSeenOrMemorised[2]) { lesson.title = 'Your memorised words'; }
+          if (newSeenOrMemorised[1] && newSeenOrMemorised[2]) { lesson.title = 'Your words'; }
           lesson.subtitle = ''
         }
       }
