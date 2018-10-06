@@ -491,6 +491,9 @@ class App extends Component {
     newUserSettings.newWords = false;
     newUserSettings.seenWords = true;
     newUserSettings.study = 'revise';
+    newUserSettings.sortOrder = 'sortNew';
+    newUserSettings.limitNumberOfWords = 50;
+    newUserSettings.repetitions = 3;
 
     let lesson = {};
     fetchDictionaries().then((json) => {
