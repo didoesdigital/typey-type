@@ -243,12 +243,12 @@ class Progress extends Component {
     }
     if (yourSeenWordCount === 1 && yourMemorisedWordCount === 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise&nbsp;your {yourSeenWordCount} seen word</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;your {yourMemorisedWordCount} memorised word</Link></p>
+        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/memorised/'>Drill&nbsp;your {yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;your {yourSeenWordCount} seen word</Link>.</p>
       );
     }
     if (yourSeenWordCount === 1 && yourMemorisedWordCount > 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise&nbsp;your {yourSeenWordCount} seen word</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;your {yourMemorisedWordCount} memorised words</Link></p>
+        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/memorised/'>Drill&nbsp;your {yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;your {yourSeenWordCount} seen word</Link>.</p>
       );
     }
     if (yourSeenWordCount === 0 && yourMemorisedWordCount === 1) {
@@ -268,12 +268,12 @@ class Progress extends Component {
     }
     if (yourSeenWordCount > 1 && yourMemorisedWordCount === 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise&nbsp;your {yourSeenWordCount} seen words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;your {yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/'>Practice all your words</Link>.</p>
+        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;all your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;your {yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;your {yourSeenWordCount} seen words</Link>.</p>
       );
     }
     if (yourSeenWordCount > 1 && yourMemorisedWordCount > 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise&nbsp;your {yourSeenWordCount} seen words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;your {yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/'>Practice all your words</Link>.</p>
+        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;all your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;your {yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;your {yourSeenWordCount} seen words</Link>.</p>
       );
     }
 
