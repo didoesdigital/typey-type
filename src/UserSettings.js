@@ -395,7 +395,7 @@ class UserSettings extends Component {
                     <div className="clearfix mb2">
                       <label className="mb1 db">Steno layout</label>
                       <select name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control w6">
-                        <option value="stenoLayoutAmericanSteno">American steno</option>
+                        <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
                         <option value="stenoLayoutPalantype">Palantype</option>
                         <option value="stenoLayoutDanishSteno">Danish steno</option>
                         <option value="stenoLayoutKoreanModernCSteno">Korean Modern C steno</option>
