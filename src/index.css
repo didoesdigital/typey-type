@@ -971,7 +971,7 @@ label {
   padding: 4px;
   speak: spell-out; }
   .steno-stroke .raw-steno-key {
-    padding: 4px 0px; }
+    padding: 4px 0; }
   .steno-stroke.steno-stroke--subtle {
     background-color: #757575;
     color: #d9d3dc; }

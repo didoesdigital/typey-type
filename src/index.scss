@@ -1,4 +1,4 @@
-@import "global.scss";
+@import 'global.scss';
 @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700');
 
 // Variables
@@ -37,18 +37,21 @@ body {
   color: desaturate($brand-primary, 5%);
   background-color: add-tint($brand-primary, 95%);
 }
+
 h1 {
   font-size: $h1-size;
   font-weight: normal;
   line-height: 1.4;
   margin-bottom: 22px;
 }
+
 h2 {
   font-size: $h2-size;
   font-weight: normal;
   line-height: 1.4;
   margin-bottom: 18.5px;
 }
+
 h3 {
   font-size: $h3-size;
   font-weight: normal;
@@ -56,6 +59,7 @@ h3 {
   margin-top: $h3-size * $font-scale;
   margin-bottom: 13.5px;
 }
+
 h4 {
   font-size: $h4-size;
   font-weight: normal;
@@ -63,43 +67,55 @@ h4 {
   margin-top: $h4-size * $font-scale;
   margin-bottom: 11.5px;
 }
+
 h5 {
   font-size: $h5-size;
   font-weight: normal;
   line-height: 1.4;
   margin-bottom: 9px;
 }
+
 h6 {
   font-size: $h6-size;
   font-weight: normal;
   line-height: 1.4;
   margin-bottom: 8px;
 }
+
 li {
   margin-left: 1em;
 }
+
 p {
   line-height: 2;
   margin-bottom: 1em;
 }
+
 ol, ul, dd, dt {
   margin-bottom: 1em;
 }
+
 a {
   color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
+
   &:visited {
     color: add-tint($brand-primary, 30%);
   }
+
   &:hover {
     color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
   }
-  &:active, &:focus {
+
+  &:active,
+  &:focus {
     color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
   }
 }
+
 pre {
   font: $heavy-type;
 }
+
 abbr[data-original-title],
 abbr[title] {
   border-bottom: thin dotted currentColor;
@@ -107,10 +123,12 @@ abbr[title] {
   cursor: help;
   text-decoration: none;
 }
+
 th {
   text-align: left;
   font-weight: normal;
 }
+
 dl.inline-flex {
   @media (min-width: $breakpoint) {
     display: flex;
@@ -119,6 +137,7 @@ dl.inline-flex {
     overflow: visible;
   }
 }
+
 dl.inline-flex dt {
   @media (min-width: $breakpoint) {
     flex: 0 0 134px;
@@ -126,6 +145,7 @@ dl.inline-flex dt {
     text-overflow: ellipsis;
   }
 }
+
 dl.inline-flex dd {
   @media (min-width: $breakpoint) {
     flex: 0 0 434px;
@@ -142,6 +162,7 @@ fieldset {
 tt, code, kbd, samp {
   font: $heavy-type;
 }
+
 .heavy-type-face--korean tt,
 .heavy-type-face--korean code,
 .heavy-type-face--korean kbd,
@@ -152,6 +173,7 @@ tt, code, kbd, samp {
 input, textarea {
   font: $type;
 }
+
 textarea {
   border-radius: 4px;
   border: 1px solid add-tint($brand-primary, 70%);
@@ -1051,9 +1073,11 @@ label {
   letter-spacing: 0.1em;
   padding: 4px;
   speak: spell-out;
+
   .raw-steno-key {
-    padding: 4px 0px;
+    padding: 4px 0;
   }
+
   &.steno-stroke--subtle {
     background-color: desaturate(add-tint($brand-primary, 30%), 40%);
     color: add-tint($brand-primary, 80%);
