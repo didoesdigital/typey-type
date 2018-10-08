@@ -188,7 +188,7 @@ class Lesson extends Component {
               )}
             </div>
             {!this.props.userSettings.showStrokesAsDiagrams ?
-              <div className="db">
+              <div className={"db" + (this.props.userSettings.stenoLayout === 'stenoLayoutKoreanModernCSteno' ? ' heavy-type-face--korean' : '')}>
                 <pre className="overflow-auto mw-408 text-small">
                   <span className="steno-stroke">
                     {this.props.currentStroke.split('').map((item, i) =>

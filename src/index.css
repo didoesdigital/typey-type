@@ -108,6 +108,12 @@ fieldset {
 tt, code, kbd, samp {
   font: 700 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
 
+.heavy-type-face--korean tt,
+.heavy-type-face--korean code,
+.heavy-type-face--korean kbd,
+.heavy-type-face--korean samp {
+  font-family: "NanumGothicCoding", "Nanum Gothic Coding", "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
+
 input, textarea {
   font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
 
@@ -186,6 +192,12 @@ input:focus:-ms-input-placeholder {
 textarea:focus::placeholder,
 input:focus::placeholder {
   color: transparent; }
+
+.type-face--korean {
+  font-family: "NanumGothicCoding", "Nanum Gothic Coding", "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
+
+.heavy-type-face--korean {
+  font-family: "NanumGothicCoding", "Nanum Gothic Coding", "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
 
 .visually-hidden {
   position: absolute !important;

@@ -2,8 +2,10 @@
 @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700');
 
 // Variables
-$type: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
-$heavy-type: 700 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+$type: 400 16px/1.6 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
+$type-face--korean: 'NanumGothicCoding', 'Nanum Gothic Coding', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
+$heavy-type: 700 16px/1.6 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
+$heavy-type-face--korean: 'NanumGothicCoding', 'Nanum Gothic Coding', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $base-font-size: 16px;
 $font-scale: 1.25; // Major third scale
 $h1-size: $base-font-size * $font-scale * $font-scale * $font-scale * $font-scale; // 39.056px
@@ -140,6 +142,13 @@ fieldset {
 tt, code, kbd, samp {
   font: $heavy-type;
 }
+.heavy-type-face--korean tt,
+.heavy-type-face--korean code,
+.heavy-type-face--korean kbd,
+.heavy-type-face--korean samp {
+  font-family: $heavy-type-face--korean;
+}
+
 input, textarea {
   font: $type;
 }
@@ -233,6 +242,14 @@ input:focus:-ms-input-placeholder { // IE 10+
 textarea:focus::placeholder,
 input:focus::placeholder {
   color: transparent;
+}
+
+.type-face--korean {
+  font-family: $type-face--korean;
+}
+
+.heavy-type-face--korean {
+  font-family: $heavy-type-face--korean;
 }
 
 // Utilities
