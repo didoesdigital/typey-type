@@ -1031,8 +1031,10 @@ class App extends Component {
     if (utterance === ".") { utterance = "full stop"; }
     if (utterance === ")") { utterance = "closing bracket"; }
     if (utterance === "!") { utterance = "exclamation mark"; }
-    let utterThis = new SpeechSynthesisUtterance(utterance);
-    synth.speak(utterThis);
+    if (SpeechSynthesisUtterance) {
+      let utterThis = new SpeechSynthesisUtterance(utterance);
+      synth.speak(utterThis);
+    }
   }
 
   sayCurrentPhraseAgain() {
