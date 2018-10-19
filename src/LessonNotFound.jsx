@@ -32,7 +32,7 @@ class Lesson extends Component {
         for (let i = 0; i < length; i++) {
           let tmpBetterPath = '/lessons' + this.props.lessonIndex[i].path;
           if (attemptedPathLessonTxt === tmpBetterPath) {
-            possibleBetterPath = process.env.PUBLIC_URL + tmpBetterPath.replace('lesson.txt','');
+            possibleBetterPath = tmpBetterPath.replace('lesson.txt','');
             possibleBetterLessonTitle = this.props.lessonIndex[i].title;
           }
         }
