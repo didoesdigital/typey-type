@@ -10,7 +10,7 @@ type Lesson = {
 type PresentedMaterial = [{phrase: '', stroke: ''}];
 
 function isLessonTextValid(lessonText : string) {
-  return !(lessonText === '' || typeof lessonText !== 'string' || (typeof lessonText === 'string' && lessonText.startsWith('<!doctype html>')));
+  return !(lessonText === '' || typeof lessonText !== 'string' || (typeof lessonText === 'string' && lessonText.toLowerCase().startsWith('<!doctype html>')));
 }
 
 function matchLessonToTerm(lesson : Lesson, value : string) {
