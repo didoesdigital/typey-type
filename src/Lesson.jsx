@@ -106,7 +106,7 @@ class Lesson extends Component {
 
   render() {
     if (this.props.lessonNotFound) {
-      return <LessonNotFound path={this.props.path} location={this.props.location} />
+      return <LessonNotFound path={this.props.path} location={this.props.location} lessonIndex={this.props.lessonIndex} />
     }
 
     let createNewCustomLesson = '';
