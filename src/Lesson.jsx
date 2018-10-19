@@ -3,6 +3,7 @@ import { IconClosingCross } from './Icon';
 import { Link } from 'react-router-dom';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
+import LessonNotFound from './LessonNotFound';
 import Material from './Material';
 import TypedText from './TypedText';
 import Scores from './Scores';
@@ -104,6 +105,10 @@ class Lesson extends Component {
   }
 
   render() {
+    if (this.props.lessonNotFound) {
+      return <LessonNotFound path={this.props.path} location={this.props.location} />
+    }
+
     let createNewCustomLesson = '';
     let customMessage;
     let firstVisit;

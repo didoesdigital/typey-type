@@ -61,6 +61,7 @@ class App extends Component {
           rung: 0,
         },
       },
+      lessonNotFound: false,
       lessonsProgress: {
       },
       flashcardsProgress: {
@@ -787,21 +788,26 @@ class App extends Component {
 
   handleLesson(path) {
     getLesson(path).then((lessonText) => {
-      let lesson = parseLesson(lessonText, path);
-      this.setState({
-        announcementMessage: 'Navigated to: ' + lesson.title,
-        lesson: lesson,
-        currentPhraseID: 0
-      }, () => {
-        this.setupLesson();
+      if (lessonText === '' || typeof lessonText !== 'string' || (typeof lessonText === 'string' && lessonText.startsWith('<!doctype html>'))) {
+        this.setState({lessonNotFound: true});
+      } else {
+        this.setState({lessonNotFound: false});
+        let lesson = parseLesson(lessonText, path);
+        this.setState({
+          announcementMessage: 'Navigated to: ' + lesson.title,
+          lesson: lesson,
+          currentPhraseID: 0
+        }, () => {
+          this.setupLesson();
 
-        if (this.mainHeading) {
-          this.mainHeading.focus();
-        } else {
-          const element = document.getElementById('your-typed-text');
-          if (element) { element.focus(); }
-        }
-      });
+          if (this.mainHeading) {
+            this.mainHeading.focus();
+          } else {
+            const element = document.getElementById('your-typed-text');
+            if (element) { element.focus(); }
+          }
+        });
+      }
     });
   }
 
@@ -1188,6 +1194,7 @@ class App extends Component {
                         flashcardsMetWords={this.state.flashcardsMetWords}
                         flashcardsProgress={this.state.flashcardsProgress}
                         lessonsProgress={this.state.lessonsProgress}
+                        lessonNotFound={this.state.lessonNotFound}
                         fullscreen={this.state.fullscreen}
                         changeFullscreen={this.changeFullscreen.bind(this)}
                         restartLesson={this.restartLesson.bind(this)}
