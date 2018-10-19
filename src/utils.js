@@ -9,6 +9,10 @@ type Lesson = {
 };
 type PresentedMaterial = [{phrase: '', stroke: ''}];
 
+function isLessonTextValid(lessonText : string) {
+  return !(lessonText === '' || typeof lessonText !== 'string' || (typeof lessonText === 'string' && lessonText.startsWith('<!doctype html>')));
+}
+
 function matchLessonToTerm(lesson : Lesson, value : string) {
   let terms = value.toLowerCase().split(/\s+/);
   if (terms.length === 1 && terms[0] === "") { return false; }
@@ -51,4 +55,4 @@ function randomise(array : Array<PresentedMaterial>) {
   return array;
 }
 
-export { matchLessonToTerm, sortLessons, isPeak, randomise};
+export { matchLessonToTerm, sortLessons, isPeak, randomise, isLessonTextValid};

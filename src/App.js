@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { randomise } from './utils';
+import { randomise, isLessonTextValid } from './utils';
 import {
   createWordListFromMetWords,
   parseCustomMaterial,
@@ -788,9 +788,7 @@ class App extends Component {
 
   handleLesson(path) {
     getLesson(path).then((lessonText) => {
-      if (lessonText === '' || typeof lessonText !== 'string' || (typeof lessonText === 'string' && lessonText.startsWith('<!doctype html>'))) {
-        this.setState({lessonNotFound: true});
-      } else {
+      if (isLessonTextValid(lessonText)) {
         this.setState({lessonNotFound: false});
         let lesson = parseLesson(lessonText, path);
         this.setState({
@@ -807,6 +805,8 @@ class App extends Component {
             if (element) { element.focus(); }
           }
         });
+      } else {
+        this.setState({lessonNotFound: true});
       }
     });
   }

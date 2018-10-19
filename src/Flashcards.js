@@ -128,15 +128,21 @@ currentSlide: currentSlide
     }
 
     getLesson(path).then((lessonText) => {
-      let lesson = parseLesson(lessonText, path);
-      this.setState({
-        presentedMaterial: lesson.presentedMaterial,
-        sourceMaterial: lesson.sourceMaterial,
-        title: lesson.title,
-        subtitle: lesson.subtitle
-      }, () => {
-        this.setupFlashCards();
-      });
+      if (Utils.isLessonTextValid(lessonText)) {
+        let lesson = parseLesson(lessonText, path);
+        this.setState({
+          presentedMaterial: lesson.presentedMaterial,
+          sourceMaterial: lesson.sourceMaterial,
+          title: lesson.title,
+          subtitle: lesson.subtitle
+        }, () => {
+          this.setupFlashCards();
+        });
+      } else {
+        this.setState({title: "Flashcards not found"}, () => {
+          this.setupFlashCards();
+        });
+      }
     });
   };
 
