@@ -469,20 +469,6 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
 }
 
 function parseLesson(lessonText, path) {
-  if (lessonText === '' || typeof lessonText !== 'string' || (typeof lessonText === 'string' && lessonText.startsWith('<!doctype html>'))) {
-    lessonText = `
-Top 8 words
-
-'the': -T
-'of': -F
-'and': SKP
-'to': TO
-'in': TPH
-'I': EU
-'that': THA
-'was': WAS
-`
-  }
   let lines = lessonText.split("\n");
   let lessonTitle = lines[0];
   let lessonSubtitle = lines[1];
