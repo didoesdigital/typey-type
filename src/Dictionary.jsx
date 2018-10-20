@@ -69,8 +69,16 @@ class Dictionary extends Component {
           for (const [metadataKey, metadataValue] of Object.entries(dictionaryMetadata)) {
             newDictionary[metadataKey] = metadataValue;
           }
-          this.setState({dictionary: newDictionary});
+          this.setState({
+            announcementMessage: 'Navigated to: ' + newDictionary.title,
+            dictionary: newDictionary
+          });
         })
+      }).catch((error) => {
+        console.log('Unable to load dictionary index', error)
+        this.setState({
+          announcementMessage: 'Navigated to: missing dictionary index'
+        });
       });
       this.loadDictionaryContents(process.env.PUBLIC_URL + this.props.location.pathname);
 
@@ -129,6 +137,7 @@ class Dictionary extends Component {
           newDictionary['contents'] = dictionaryContents;
 
           this.setState({
+            announcementMessage: 'Dictionary finished loaded',
             dictionary: newDictionary
           });
 
@@ -147,6 +156,9 @@ class Dictionary extends Component {
       }
     }).catch((error) => {
       console.log('Unable to load dictionary', error)
+      this.setState({
+        announcementMessage: 'Navigated to: unable to load dictionary'
+      });
     });
 
   //       this.setState({
