@@ -130,28 +130,6 @@ class App extends Component {
         study: 'discover',
         stenoLayout: 'stenoLayoutAmericanSteno' // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianSteno' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
       },
-      dictionary: {
-        author: "Typey Type",
-        title: 'Top 10 dict',
-        subtitle: "",
-        category: "Typey Type",
-        subcategory: "",
-        tagline: "Typey&nbsp;Type’s top 10 words.",
-        link: "/typey-type/support#typey-type-dictionary",
-        path: "/dictionaries/typey-type/top-10.json",
-        contents: {
-          "-T": "the",
-          "-F": "of",
-          "SKP": "and",
-          "TO": "to",
-          "AEU": "a",
-          "TPH": "in",
-          "TPOR": "for",
-          "S": "is",
-          "OPB": "on",
-          "THA": "that"
-        }
-      },
       lesson: {
         sourceMaterial: [
           {phrase: 'The', stroke: '-T'},
@@ -254,18 +232,6 @@ class App extends Component {
         newPresentedMaterial: new Zipper([{phrase: '', stroke: ''}]),
         path: ''
       },
-      dictionaryIndex: [{
-          "title": "Typey Type",
-          "category": "Typey Type",
-          "subcategory": "",
-          "path": process.env.PUBLIC_URL + "/typey-type/typey-type.json"
-        },
-        {
-          "title": "Steno",
-          "category": "Drills",
-          "subcategory": "",
-          "path": process.env.PUBLIC_URL + "/drills/steno/steno.json"
-        }],
       lessonIndex: [{
         "title": "Steno",
         "subtitle": "",
@@ -1263,8 +1229,6 @@ class App extends Component {
                   <DocumentTitle title={'Typey Type | Dictionaries'}>
                     <ErrorBoundary>
                       <AsyncDictionaries
-                        dictionary={this.state.dictionary}
-                        dictionaryIndex={this.state.dictionaryIndex}
                         {...props}
                       />
                     </ErrorBoundary>
