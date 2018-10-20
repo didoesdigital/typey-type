@@ -72,7 +72,7 @@ class Dictionary extends Component {
 
     }
 
-    // if (this.props.dictionary.path === '/dictionaries/typey-type/top-10.json') {
+    // if (this.state.dictionary.path === '/dictionaries/typey-type/top-10.json') {
     //   this.setState({defaultDictionary: true});
     // } else {
     //   this.setState({defaultDictionary: false});
@@ -87,23 +87,26 @@ class Dictionary extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     // let locationpathname = this.props.location.pathname.replace(/\/$/,'.json');
-    if (this.props.location.pathname.startsWith('/dictionaries/custom') && this.props.dictionary.title !== "Custom") {
+    if (this.props.location.pathname.startsWith('/dictionaries/custom') && this.state.dictionary.title !== "Custom") {
       // this.props.setCustomDictionary();
     } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/dictionaries'))) {
       console.log("WRONG HANDLE CALL");
       this.handleDictionary(process.env.PUBLIC_URL + this.props.location.pathname, this.state.dictionaryIndex);
     }
 
-    // if (this.props.dictionary.path === '/dictionaries/typey-type/top-10.json' && !this.state.defaultDictionary) {
+    // if (this.state.dictionary.path === '/dictionaries/typey-type/top-10.json' && !this.state.defaultDictionary) {
     //   this.setState({defaultDictionary: true});
-    // } else if (this.props.dictionary.path !== '/dictionaries/typey-type/top-10.json' && this.state.defaultDictionary) {
+    // } else if (this.state.dictionary.path !== '/dictionaries/typey-type/top-10.json' && this.state.defaultDictionary) {
     //   this.setState({defaultDictionary: false});
     // }
 
   }
 
   handleDictionary(path) {
+    // console.log("PATH: " + path);
+    // let dictionaryFile = path.replace(/^\/dictionaries/,'').replace(/\/$/,'.json');
     let dictionaryFile = path.replace(/\/$/,'.json');
+    // getDictionary(path.replace(/^\/dictionaries/,'').replace(/\/$/,'.json')).then((dictionaryContents) => {
       fetch(dictionaryFile, {
         method: "GET",
         credentials: "same-origin"
@@ -141,11 +144,11 @@ class Dictionary extends Component {
   }
 
   // isSetup() {
-  //   return (this.props.dictionary.sourceMaterial.length !== 0);
+  //   return (this.state.dictionary.sourceMaterial.length !== 0);
   // }
 
   // isFinished() {
-  //   return (this.props.currentPhraseID === this.props.dictionary.presentedMaterial.length);
+  //   return (this.state.currentPhraseID === this.state.dictionary.presentedMaterial.length);
   // }
 
   downloadDictionary(event) {
@@ -183,7 +186,7 @@ class Dictionary extends Component {
             // <CustomDictionarySetup
             //   createCustomDictionary={this.props.createCustomDictionary}
             // />
-    if (this.props.dictionary) {
+    if (this.state.dictionary) {
       // console.log("Dictionary");
       if (this.isCustom() && !this.isSetup()) {
       // console.log("custom");
@@ -193,7 +196,7 @@ class Dictionary extends Component {
           </DocumentTitle>
         )
       } else {
-        if (false && this.props.dictionary.path === '/dictionaries/typey-type/top-10.json') {
+        if (false && this.state.dictionary.path === '/dictionaries/typey-type/top-10.json') {
           return (
             <DocumentTitle title={'Typey Type | Missing dictionary'}>
               <main id="main">
@@ -201,7 +204,7 @@ class Dictionary extends Component {
                   <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
                     <div className="flex mr1 self-center">
                       <header className="flex items-baseline">
-                        <a href={this.props.path} className="heading-link table-cell mr2" role="button">
+                        <a href={this.state.dictionary.path} className="heading-link table-cell mr2" role="button">
                           <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Missing dictionary</h2>
                         </a>
                       </header>
@@ -227,20 +230,20 @@ class Dictionary extends Component {
           // contents = JSON.stringify(this.props.dictionary.contents);
           contents = JSON.stringify(this.state.dictionary.contents).split(',').join(',\n');
           return (
-            <DocumentTitle title={'Typey Type | ' + this.props.dictionary.title}>
+            <DocumentTitle title={'Typey Type | ' + this.state.dictionary.title}>
               <main id="main">
                 <div className="subheader">
                   <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
                     <div className="flex mr1 self-center">
                       <header className="flex items-baseline">
-                        <a href={this.props.path} className="heading-link table-cell mr2" role="button">
+                        <a href={this.state.dictionary.path} className="heading-link table-cell mr2" role="button">
                           <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.state.dictionary.title}</h2>
                         </a>
                       </header>
                     </div>
                     <div className="flex mxn2">
-                      <a href={this.props.path} onClick={this.downloadDictionary} className="link-button link-button-ghost table-cell mr1" role="button">Download</a>
-                      <a href={this.props.path} data-clipboard-target="#js-dictionary-json-pre" className="js-clipboard-button link-button link-button-ghost table-cell mr1 copy-to-clipboard fade-out-up" role="button">Copy to clipboard</a>
+                      <a href={this.state.dictionary.path} onClick={this.downloadDictionary} className="link-button link-button-ghost table-cell mr1" role="button">Download</a>
+                      <a href={this.state.dictionary.path} data-clipboard-target="#js-dictionary-json-pre" className="js-clipboard-button link-button link-button-ghost table-cell mr1 copy-to-clipboard fade-out-up" role="button">Copy to clipboard</a>
                     </div>
                   </div>
                 </div>
