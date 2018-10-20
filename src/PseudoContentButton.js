@@ -10,9 +10,13 @@ class PseudoContentButton extends Component {
   }
 
   componentDidMount() {
-    new Clipboard('.js-clipboard-button');
+    this.clipboard = new Clipboard('.js-clipboard-button');
 
     this.setState({clicked: false});
+  }
+
+  componentWillUnmount() {
+    this.clipboard.destroy();
   }
 
   animatedPseudoContent(event) {
