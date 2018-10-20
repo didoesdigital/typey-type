@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { Link } from 'react-router-dom';
 
-class Lesson extends Component {
+class LessonNotFound extends Component {
   componentDidMount() {
     if (this.mainHeading) {
       this.mainHeading.focus();
@@ -54,13 +54,15 @@ class Lesson extends Component {
             </div>
           </div>
           <div className="mx-auto mw-1024 p3">
-            <p className="mt3">That lesson couldn’t be found. Try one of these instead:</p>
-            <ul>
-              <li><Link to="/lessons">All lessons</Link></li>
-              <li><Link to="/lessons/drills/top-100-words/">Top 100 words lesson</Link></li>
-              {possibleBetterPath.length > 0 && <li><Link to={possibleBetterPath}>{possibleBetterLessonTitle} lesson</Link></li>}
-            </ul>
-            <p>Or <a href={this.prefillSurveyLink()} className="" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">let me know about this missing lesson (form opens in a new tab)</a></p>
+            <div className="mw-568">
+              <p className="mt3">That lesson couldn’t be found. Try one of these instead:</p>
+              <ul>
+                <li><Link to="/lessons">All lessons</Link></li>
+                <li><Link to="/lessons/drills/top-100-words/">Top 100 words lesson</Link></li>
+                {possibleBetterPath.length > 0 && <li><Link to={possibleBetterPath}>{possibleBetterLessonTitle} lesson</Link></li>}
+              </ul>
+              <p>Or <a href={this.prefillSurveyLink()} className="" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">let me know (form opens in a new tab)</a></p>
+            </div>
           </div>
         </main>
       </DocumentTitle>
@@ -68,4 +70,4 @@ class Lesson extends Component {
   }
 }
 
-export default Lesson;
+export default LessonNotFound;
