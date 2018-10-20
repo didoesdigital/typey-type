@@ -97,22 +97,22 @@ class Dictionary extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    // let locationpathname = this.props.location.pathname.replace(/\/$/,'.json');
-    if (this.props.location.pathname.startsWith('/dictionaries/custom') && this.state.dictionary.title !== "Custom") {
-      // this.props.setCustomDictionary();
-    } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/dictionaries'))) {
-      console.log("WRONG HANDLE CALL");
-      this.handleDictionary(process.env.PUBLIC_URL + this.props.location.pathname, this.state.dictionaryIndex);
-    }
+  // componentDidUpdate(prevProps, prevState) {
+  //   // let locationpathname = this.props.location.pathname.replace(/\/$/,'.json');
+  //   if (this.props.location.pathname.startsWith('/dictionaries/custom') && this.state.dictionary.title !== "Custom") {
+  //     // this.props.setCustomDictionary();
+  //   } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/dictionaries'))) {
+  //     console.log("WRONG HANDLE CALL");
+  //     this.handleDictionary(process.env.PUBLIC_URL + this.props.location.pathname);
+  //   }
 
-    // if (this.state.dictionary.path === '/dictionaries/typey-type/top-10.json' && !this.state.defaultDictionary) {
-    //   this.setState({defaultDictionary: true});
-    // } else if (this.state.dictionary.path !== '/dictionaries/typey-type/top-10.json' && this.state.defaultDictionary) {
-    //   this.setState({defaultDictionary: false});
-    // }
+  //   // if (this.state.dictionary.path === '/dictionaries/typey-type/top-10.json' && !this.state.defaultDictionary) {
+  //   //   this.setState({defaultDictionary: true});
+  //   // } else if (this.state.dictionary.path !== '/dictionaries/typey-type/top-10.json' && this.state.defaultDictionary) {
+  //   //   this.setState({defaultDictionary: false});
+  //   // }
 
-  }
+  // }
 
   handleDictionary(path) {
     let dictionaryFile = path.replace(/\/$/,'.json');
