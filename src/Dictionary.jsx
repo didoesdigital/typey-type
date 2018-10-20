@@ -18,7 +18,7 @@ class Dictionary extends Component {
         subtitle: "",
         category: "Typey Type",
         subcategory: "",
-        tagline: "Typey&nbsp;Type’s top 10 words.",
+        tagline: "Typey Type’s top 10 words.",
         link: "/typey-type/support#typey-type-dictionary",
         path: "/dictionaries/typey-type/top-10.json",
         contents: {
@@ -126,7 +126,7 @@ class Dictionary extends Component {
             author: "Typey Type",
             title: 'Top 10 dict', subtitle: "",
             category: "Typey Type", subcategory: "",
-            tagline: "Typey&nbsp;Type’s top 10 words.",
+            tagline: "Typey Type’s top 10 words.",
             link: "/typey-type/support#typey-type-dictionary",
             path: "/dictionaries/typey-type/top-10.json",
             contents: { "-T": "the", "-F": "of", "SKP": "and", "TO": "to", "AEU": "a", "TPH": "in", "TPOR": "for", "S": "is", "OPB": "on", "THA": "that" }
