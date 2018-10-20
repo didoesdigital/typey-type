@@ -155,11 +155,6 @@ class Dictionary extends Component {
   //   return (this.state.currentPhraseID === this.state.dictionary.presentedMaterial.length);
   // }
 
-  downloadDictionary(event) {
-    event.preventDefault();
-    // TODO download file
-  }
-
   prefillSurveyLink() {
     // TODO: create a new feedback form just for dictionary feedback
     // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=dictionary&entry.1202724812&entry.936119214";
@@ -240,7 +235,7 @@ class Dictionary extends Component {
                     </header>
                   </div>
                   <div className="flex mxn2">
-                    <a href={this.state.dictionary.path} onClick={this.downloadDictionary} className="link-button link-button-ghost table-cell mr1" role="button">Download</a>
+                    <a href={this.state.dictionary.path} download="" className="link-button link-button-ghost table-cell mr1">Download</a>
                     <PseudoContentButton className="js-clipboard-button link-button link-button-ghost table-cell mr1 copy-to-clipboard" role="button" dataClipboardTarget="#js-dictionary-json-pre">Copy to clipboard</PseudoContentButton>
                   </div>
                 </div>
