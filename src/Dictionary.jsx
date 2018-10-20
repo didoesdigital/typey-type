@@ -232,9 +232,7 @@ class Dictionary extends Component {
                   <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
                     <div className="flex mr1 self-center">
                       <header className="flex items-baseline">
-                        <a href={this.state.dictionary.path} className="heading-link table-cell mr2" role="button">
-                          <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.state.dictionary.title}</h2>
-                        </a>
+                        <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.state.dictionary.title}</h2>
                       </header>
                     </div>
                     <div className="flex mxn2">
