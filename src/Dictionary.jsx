@@ -51,13 +51,17 @@ class Dictionary extends Component {
 
   componentDidMount() {
     let locationpathname = this.props.location.pathname.replace(/\/$/,'.json');
-    console.log(locationpathname);
 
 
+    // console.log(locationpathname);
+    // console.log("COMPONENT MOUNTS");
+    // console.log(this.state.dictionary.path);
+    // console.log(locationpathname);
+    // console.log(this.props.location.pathname);
     if (this.props.location.pathname.startsWith('/dictionaries/custom')) {
       // this.props.setCustomDictionary();
     }
-    else if((this.props.dictionary.path!==locationpathname) && (this.props.location.pathname.startsWith('/dictionaries'))) {
+    else if((this.state.dictionary.path!==locationpathname) && (this.props.location.pathname.startsWith('/dictionaries'))) {
       fetchDictionaryIndex().then((json) => {
         this.setState({ dictionaryIndex: json }, () => {
           let dictionaryMetadata = lookUpDictionaryInIndex(process.env.PUBLIC_URL + this.props.location.pathname, this.state.dictionaryIndex);
@@ -70,6 +74,14 @@ class Dictionary extends Component {
       });
       this.handleDictionary(process.env.PUBLIC_URL + this.props.location.pathname);
 
+            // this.setState({
+            //   announcementMessage: 'Navigated to: ' + dictionary.title,
+            //   dictionary: dictionary
+            // });
+          // this.setState({
+            // announcementMessage: 'Navigated to: missing dictionary',
+            // dictionary: dictionary
+          // });
     }
 
     // if (this.state.dictionary.path === '/dictionaries/typey-type/top-10.json') {
@@ -103,39 +115,44 @@ class Dictionary extends Component {
   }
 
   handleDictionary(path) {
-    // console.log("PATH: " + path);
-    // let dictionaryFile = path.replace(/^\/dictionaries/,'').replace(/\/$/,'.json');
     let dictionaryFile = path.replace(/\/$/,'.json');
-    // getDictionary(path.replace(/^\/dictionaries/,'').replace(/\/$/,'.json')).then((dictionaryContents) => {
-      fetch(dictionaryFile, {
-        method: "GET",
-        credentials: "same-origin"
-      }).then((response) => {
-        const contentType = response.headers.get("content-type");
-        if (contentType && contentType.indexOf("application/json") !== -1) {
-          return response.json().then(dictionaryContents => {
-            let newDictionary = Object.assign({}, this.state.dictionary);
-            newDictionary['contents'] = dictionaryContents;
-            this.setState({
-              dictionary: newDictionary
-            });
+    fetch(dictionaryFile, {
+      method: "GET",
+      credentials: "same-origin"
+    }).then((response) => {
+      const contentType = response.headers.get("content-type");
 
+      if (contentType && contentType.indexOf("application/json") !== -1) {
+        return response.json().then(dictionaryContents => {
+          let newDictionary = Object.assign({}, this.state.dictionary);
+
+          newDictionary['contents'] = dictionaryContents;
+
+          this.setState({
+            dictionary: newDictionary
           });
-        } else {
-          let dictionary = {
-            author: "Typey Type",
-            title: 'Top 10 dict', subtitle: "",
-            category: "Typey Type", subcategory: "",
-            tagline: "Typey Type’s top 10 words.",
-            link: "/typey-type/support#typey-type-dictionary",
-            path: "/dictionaries/typey-type/top-10.json",
-            contents: { "-T": "the", "-F": "of", "SKP": "and", "TO": "to", "AEU": "a", "TPH": "in", "TPOR": "for", "S": "is", "OPB": "on", "THA": "that" }
-          };
 
-        }
-      }).catch((error) => {
-        console.log('Unable to load dictionary', error)
-      });
+        });
+      } else {
+        console.log("WRONG PATH?")
+        let dictionary = {
+          author: "Typey Type",
+          title: 'Top 10 dict', subtitle: "",
+          category: "Typey Type", subcategory: "",
+          tagline: "Typey Type’s top 10 words.",
+          link: "/typey-type/support#typey-type-dictionary",
+          path: "/dictionaries/typey-type/top-10.json",
+          contents: { "-T": "the", "-F": "of", "SKP": "and", "TO": "to", "AEU": "a", "TPH": "in", "TPOR": "for", "S": "is", "OPB": "on", "THA": "that" }
+        };
+      }
+    }).catch((error) => {
+      console.log('Unable to load dictionary', error)
+    });
+
+  //       this.setState({
+  //         announcementMessage: 'Navigated to: ' + dictionary.title,
+  //         dictionary: dictionary
+  //       });
   }
 
 
@@ -171,23 +188,7 @@ class Dictionary extends Component {
   }
 
   render() {
-      // console.log("dictionary component");
-
-    // let createNewCustomDictionary = '';
-
-    // if (this.isCustom() && this.isSetup()) {
-    //   createNewCustomDictionary = (<Link to='/dictionaries/custom' onClick={this.props.setCustomDictionary} className="link-button link-button-ghost table-cell mr1" role="button">Create new dictionary</Link>);
-    // } else {
-    //   createNewCustomDictionary = '';
-    // }
-    //
-              // {createNewCustomDictionary}
-
-            // <CustomDictionarySetup
-            //   createCustomDictionary={this.props.createCustomDictionary}
-            // />
     if (this.state.dictionary) {
-      // console.log("Dictionary");
       if (this.isCustom() && !this.isSetup()) {
       // console.log("custom");
         return (
@@ -220,14 +221,14 @@ class Dictionary extends Component {
             </DocumentTitle>
           );
         } else {
-          // console.log(this.props.dictionary.path);
-                        // <a href={this.props.path} onClick={this.props.restartDictionary} className="heading-link table-cell mr2" role="button">
-                      // <a href={this.props.path} onClick={this.downloadDictionary} className="link-button link-button-ghost table-cell mr1" role="button">Download</a>
+          // console.log(this.state.dictionary.path);
+                        // <a href={this.state.dictionary.path} onClick={this.state.restartDictionary} className="heading-link table-cell mr2" role="button">
+                      // <a href={this.state.dictionary.path} onClick={this.downloadDictionary} className="link-button link-button-ghost table-cell mr1" role="button">Download</a>
         // console.log("not custom");
           let contents = '';
-          // console.log(this.props.dictionary);
-          // contents = Object.entries(this.props.dictionary.contents).join('\n');
-          // contents = JSON.stringify(this.props.dictionary.contents);
+          // console.log(this.state.dictionary);
+          // contents = Object.entries(this.state.dictionary.contents).join('\n');
+          // contents = JSON.stringify(this.state.dictionary.contents);
           contents = JSON.stringify(this.state.dictionary.contents).split(',').join(',\n');
           return (
             <DocumentTitle title={'Typey Type | ' + this.state.dictionary.title}>

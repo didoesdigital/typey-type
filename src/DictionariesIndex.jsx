@@ -56,20 +56,10 @@ class DictionariesIndex extends Component {
         let ariaLabel = "Learn more about " + title;
         learnMoreLink = (<span> · <a href={dictionary.link} aria-label={ariaLabel}>Learn more</a></span>);
       }
-      // console.log(path);
-      // /typey-type/typey-type.json
-      // /drills/steno/steno.json
-      // /dictionaries/typey-type/typey-type.json
-      // /dictionaries/plover/main-16-aug-2017.json
-      // /dictionaries/didoesdigital/navigation.json
-      // /lessons/stories/fables/the-nurse-and-the-wolf/lesson.txt
-      // console.log(dictionary.path);
-      // console.log(this.props.location.pathname);
       let dictionarypath = dictionary.path;
       dictionarypath = dictionarypath.replace(/lesson.txt/,'lesson/');
       dictionarypath = dictionarypath.replace(/.json/,'/');
 
-      // console.log(dictionarypath);
       return(
         <li className="unstyled-list-item" key={ dictionary.path }>
           <Link to={`${dictionarypath}`.replace(/path\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--dictionary-index-'+dictionarypath.replace(/[/.]/g,'-')}>{author}’s {dictionary.title}{subtitle}</Link>{learnMoreLink}
