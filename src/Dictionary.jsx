@@ -11,7 +11,8 @@ class Dictionary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultDictionary: false,
+      loadingDictionaryContents: false,
+      loadingError: false,
       dictionary: {
         author: "Typey Type",
         title: 'Top 10 dict',
@@ -62,6 +63,11 @@ class Dictionary extends Component {
       // this.props.setCustomDictionary();
     }
     else if((this.state.dictionary.path!==locationpathname) && (this.props.location.pathname.startsWith('/dictionaries'))) {
+      this.setState({
+        loadingDictionaryContents: true,
+        loadingError: false
+      });
+
       fetchDictionaryIndex().then((json) => {
         this.setState({ dictionaryIndex: json }, () => {
           let dictionaryMetadata = lookUpDictionaryInIndex(process.env.PUBLIC_URL + this.props.location.pathname, this.state.dictionaryIndex);
@@ -81,22 +87,10 @@ class Dictionary extends Component {
         });
       });
       this.loadDictionaryContents(process.env.PUBLIC_URL + this.props.location.pathname);
-
-            // this.setState({
-            //   announcementMessage: 'Navigated to: ' + dictionary.title,
-            //   dictionary: dictionary
-            // });
-          // this.setState({
-            // announcementMessage: 'Navigated to: missing dictionary',
-            // dictionary: dictionary
-          // });
     }
 
-    // if (this.state.dictionary.path === '/dictionaries/typey-type/top-10.json') {
     //   this.setState({defaultDictionary: true});
-    // } else {
     //   this.setState({defaultDictionary: false});
-    // }
 
     new Clipboard('.js-clipboard-button');
 
@@ -105,22 +99,12 @@ class Dictionary extends Component {
     }
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   // let locationpathname = this.props.location.pathname.replace(/\/$/,'.json');
-  //   if (this.props.location.pathname.startsWith('/dictionaries/custom') && this.state.dictionary.title !== "Custom") {
-  //     // this.props.setCustomDictionary();
-  //   } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/dictionaries'))) {
-  //     console.log("WRONG HANDLE CALL");
-  //     this.loadDictionaryContents(process.env.PUBLIC_URL + this.props.location.pathname);
-  //   }
-
-  //   // if (this.state.dictionary.path === '/dictionaries/typey-type/top-10.json' && !this.state.defaultDictionary) {
-  //   //   this.setState({defaultDictionary: true});
-  //   // } else if (this.state.dictionary.path !== '/dictionaries/typey-type/top-10.json' && this.state.defaultDictionary) {
-  //   //   this.setState({defaultDictionary: false});
-  //   // }
-
-  // }
+  componentWillUnmount() {
+    this.setState({
+      loadingDictionaryContents: false,
+      loadingError: false
+    });
+  }
 
   loadDictionaryContents(path) {
     let dictionaryFile = path.replace(/\/$/,'.json');
@@ -138,35 +122,22 @@ class Dictionary extends Component {
 
           this.setState({
             announcementMessage: 'Dictionary finished loaded',
-            dictionary: newDictionary
+            dictionary: newDictionary,
+            loadingDictionaryContents: false,
+            loadingError: false
           });
-
         });
       } else {
-        console.log("WRONG PATH?")
-        let dictionary = {
-          author: "Typey Type",
-          title: 'Top 10 dict', subtitle: "",
-          category: "Typey Type", subcategory: "",
-          tagline: "Typey Type’s top 10 words.",
-          link: "/typey-type/support#typey-type-dictionary",
-          path: "/dictionaries/typey-type/top-10.json",
-          contents: { "-T": "the", "-F": "of", "SKP": "and", "TO": "to", "AEU": "a", "TPH": "in", "TPOR": "for", "S": "is", "OPB": "on", "THA": "that" }
-        };
+        throw new Error('Unable to load dictionary');
       }
     }).catch((error) => {
       console.log('Unable to load dictionary', error)
       this.setState({
-        announcementMessage: 'Navigated to: unable to load dictionary'
+        announcementMessage: 'Unable to load dictionary',
+        loadingError: true
       });
     });
-
-  //       this.setState({
-  //         announcementMessage: 'Navigated to: ' + dictionary.title,
-  //         dictionary: dictionary
-  //       });
   }
-
 
   isCustom() {
     return (this.props.location.pathname === '/dictionaries/custom');
@@ -238,10 +209,22 @@ class Dictionary extends Component {
                       // <a href={this.state.dictionary.path} onClick={this.downloadDictionary} className="link-button link-button-ghost table-cell mr1" role="button">Download</a>
         // console.log("not custom");
           let contents = '';
-          // console.log(this.state.dictionary);
-          // contents = Object.entries(this.state.dictionary.contents).join('\n');
-          // contents = JSON.stringify(this.state.dictionary.contents);
-          contents = JSON.stringify(this.state.dictionary.contents).split(',').join(',\n');
+          let truncatedMessage = ``;
+          contents = JSON.stringify(this.state.dictionary.contents).split('",').join('",\n');
+          contents = "{\n" + contents.slice(1,contents.length); // split first line {"STROKE": "TRANSLATION", on {"
+
+          let contentsArray = contents.split("\n");
+          let contentsArrayLength = contentsArray.length;
+          let truncationLimit = 1000;
+          if (contentsArrayLength > truncationLimit) {
+            truncatedMessage = <p className="bg-danger">The dictionary is too large to display in full so this only shows the first {truncationLimit} entries.</p>
+            let newContents = contentsArray.slice(0,truncationLimit);
+            newContents[truncationLimit - 1] = newContents[truncationLimit - 1].slice(0, -1); // removing trailing comma
+            newContents.push("}");
+            contents = newContents.join('\n');
+          }
+
+
           return (
             <DocumentTitle title={'Typey Type | Dictionary: ' + this.state.dictionary.title}>
               <main id="main">
@@ -270,10 +253,14 @@ class Dictionary extends Component {
                     )}
 
                     <h3 id="TODO-linkable-heading-id">The dictionary</h3>
-                    <pre
-                      className="quote h-192 overflow-scroll mw-384 mt1 mb3"
-                      id="js-dictionary-json-pre"
-                    ><code>{contents}</code></pre>
+                    {this.state.loadingError && <p>Loading failed.</p>}
+                    {!this.state.loadingDictionaryContents && truncatedMessage}
+                    {this.state.loadingDictionaryContents ? <p>Loading…</p> :
+                      <pre
+                        className="quote h-192 overflow-scroll mw-384 mt1 mb3"
+                        id="js-dictionary-json-pre"
+                      ><code>{contents}</code></pre>
+                    }
 
                   </div>
                 </div>
