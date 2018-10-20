@@ -18,7 +18,7 @@ class Dictionary extends Component {
         subtitle: "",
         category: "Typey Type",
         subcategory: "",
-        tagline: "No dictionary intro.",
+        tagline: "Loading…",
         link: "/typey-type/support#typey-type-dictionary",
         path: "/dictionaries/typey-type/top-10.json",
         contents: {
@@ -262,7 +262,12 @@ class Dictionary extends Component {
                 </div>
                 <div className="p3 mx-auto mw-1024">
                   <div className="mw-568">
-                    <p className="mt3">{this.state.dictionary.tagline}</p>
+                    {this.state.dictionary.tagline && !this.state.dictionary.tagline.includes('Loading') && (
+                      <p className="mt3">{this.state.dictionary.tagline}</p>
+                    )}
+                    {this.state.dictionary.link && !this.state.dictionary.link.includes('typey-type/support') && (
+                      <p className="mt3"><a href={this.state.dictionary.link}>Learn more</a></p>
+                    )}
 
                     <h3 id="TODO-linkable-heading-id">The dictionary</h3>
                     <pre
