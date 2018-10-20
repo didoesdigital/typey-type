@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import DictionaryNotFound from './DictionaryNotFound';
+import PseudoContentButton from './PseudoContentButton';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 import Clipboard from 'clipboard';
@@ -240,7 +241,7 @@ class Dictionary extends Component {
                   </div>
                   <div className="flex mxn2">
                     <a href={this.state.dictionary.path} onClick={this.downloadDictionary} className="link-button link-button-ghost table-cell mr1" role="button">Download</a>
-                    <a href={this.state.dictionary.path} data-clipboard-target="#js-dictionary-json-pre" className="js-clipboard-button link-button link-button-ghost table-cell mr1 copy-to-clipboard fade-out-up" role="button">Copy to clipboard</a>
+                    <PseudoContentButton className="js-clipboard-button link-button link-button-ghost table-cell mr1 copy-to-clipboard" role="button" dataClipboardTarget="#js-dictionary-json-pre">Copy to clipboard</PseudoContentButton>
                   </div>
                 </div>
               </div>
@@ -253,7 +254,7 @@ class Dictionary extends Component {
                   {this.state.dictionary.link && !this.state.dictionary.link.includes('/typey-type/support') && internalLink }
                   {this.state.dictionary.link && externalLink }
 
-                  <h3 id="TODO-linkable-heading-id">The dictionary</h3>
+                  <h3>The dictionary</h3>
                   {this.state.loadingError && <p>Loading failed.</p>}
                   {!this.state.loadingDictionaryContents && truncatedMessage}
                   {this.state.loadingDictionaryContents ? <p>Loading…</p> :
