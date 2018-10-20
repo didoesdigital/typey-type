@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
+import DictionaryNotFound from './DictionaryNotFound';
+import { IconExternal } from './Icon';
+import { Tooltip } from 'react-tippy';
 import Clipboard from 'clipboard';
 import {
   fetchDictionaryIndex,
@@ -171,6 +174,10 @@ class Dictionary extends Component {
   }
 
   render() {
+    if (this.state.loadingError) {
+      return <DictionaryNotFound path={this.props.path} location={this.props.location} dictionaryIndex={this.props.dictionaryIndex} />
+    }
+
     if (this.state.dictionary) {
       if (this.isCustom() && !this.isSetup()) {
       // console.log("custom");
@@ -180,93 +187,88 @@ class Dictionary extends Component {
           </DocumentTitle>
         )
       } else {
-        if (false && this.state.dictionary.path === '/dictionaries/typey-type/top-10.json') {
-          return (
-            <DocumentTitle title={'Typey Type | Missing dictionary'}>
-              <main id="main">
-                <div className="subheader">
-                  <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
-                    <div className="flex mr1 self-center">
-                      <header className="flex items-baseline">
-                        <a href={this.state.dictionary.path} className="heading-link table-cell mr2" role="button">
-                          <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Missing dictionary</h2>
-                        </a>
-                      </header>
-                    </div>
-                  </div>
-                </div>
-                <div className="p3 mx-auto mw-1024">
-                  <div className="mw-568">
-                    <p className="mt3">This dictionary is missing.</p>
-                  </div>
-                </div>
-              </main>
-            </DocumentTitle>
-          );
-        } else {
-          // console.log(this.state.dictionary.path);
-                        // <a href={this.state.dictionary.path} onClick={this.state.restartDictionary} className="heading-link table-cell mr2" role="button">
-                      // <a href={this.state.dictionary.path} onClick={this.downloadDictionary} className="link-button link-button-ghost table-cell mr1" role="button">Download</a>
-        // console.log("not custom");
-          let contents = '';
-          let truncatedMessage = ``;
-          contents = JSON.stringify(this.state.dictionary.contents).split('",').join('",\n');
-          contents = "{\n" + contents.slice(1,contents.length); // split first line {"STROKE": "TRANSLATION", on {"
+        let contents = '';
+        let truncatedMessage = ``;
+        contents = JSON.stringify(this.state.dictionary.contents).split('",').join('",\n');
+        contents = "{\n" + contents.slice(1,contents.length); // split first line {"STROKE": "TRANSLATION", on {"
 
-          let contentsArray = contents.split("\n");
-          let contentsArrayLength = contentsArray.length;
-          let truncationLimit = 1000;
-          if (contentsArrayLength > truncationLimit) {
-            truncatedMessage = <p className="bg-danger">The dictionary is too large to display in full so this only shows the first {truncationLimit} entries.</p>
-            let newContents = contentsArray.slice(0,truncationLimit);
-            newContents[truncationLimit - 1] = newContents[truncationLimit - 1].slice(0, -1); // removing trailing comma
-            newContents.push("}");
-            contents = newContents.join('\n');
-          }
-
-
-          return (
-            <DocumentTitle title={'Typey Type | Dictionary: ' + this.state.dictionary.title}>
-              <main id="main">
-                <div className="subheader">
-                  <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
-                    <div className="flex mr1 self-center">
-                      <header className="flex items-baseline">
-                        <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.state.dictionary.title}</h2>
-                      </header>
-                    </div>
-                    <div className="flex mxn2">
-                      <a href={this.state.dictionary.path} onClick={this.downloadDictionary} className="link-button link-button-ghost table-cell mr1" role="button">Download</a>
-                      <a href={this.state.dictionary.path} data-clipboard-target="#js-dictionary-json-pre" className="js-clipboard-button link-button link-button-ghost table-cell mr1 copy-to-clipboard fade-out-up" role="button">Copy to clipboard</a>
-                    </div>
-                  </div>
-                </div>
-                <div className="p3 mx-auto mw-1024">
-                  <div className="mw-568">
-                    {this.state.dictionary.tagline && !this.state.dictionary.tagline.includes('Loading') && (
-                      <p className="mt3">{this.state.dictionary.tagline}</p>
-                    )}
-                    {this.state.dictionary.link && !this.state.dictionary.link.includes('typey-type/support') && (
-                      <p className="mt3"><a href={this.state.dictionary.link}>Learn more</a></p>
-                    )}
-
-                    <h3 id="TODO-linkable-heading-id">The dictionary</h3>
-                    {this.state.loadingError && <p>Loading failed.</p>}
-                    {!this.state.loadingDictionaryContents && truncatedMessage}
-                    {this.state.loadingDictionaryContents ? <p>Loading…</p> :
-                      <pre
-                        className="quote h-192 overflow-scroll mw-384 mt1 mb3"
-                        id="js-dictionary-json-pre"
-                      ><code>{contents}</code></pre>
-                    }
-
-                  </div>
-                </div>
-                <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--dictionary--give-feedback">Give feedback on this dictionary (form opens in a new tab)</a></p>
-              </main>
-            </DocumentTitle>
-          )
+        let contentsArray = contents.split("\n");
+        let contentsArrayLength = contentsArray.length;
+        let truncationLimit = 1000;
+        if (contentsArrayLength > truncationLimit) {
+          truncatedMessage = <p className="bg-danger">The dictionary is too large to display in full so this only shows the first {truncationLimit} entries.</p>
+          let newContents = contentsArray.slice(0,truncationLimit);
+          newContents[truncationLimit - 1] = newContents[truncationLimit - 1].slice(0, -1); // removing trailing comma
+          newContents.push("}");
+          contents = newContents.join('\n');
         }
+
+        let externalLink = '';
+        let internalLink = '';
+        if (this.state.dictionary.link.startsWith("/typey-type")) {
+          internalLink = <p className="mt3"><a href={this.state.dictionary.link}>Learn more</a></p>
+        } else {
+          externalLink = (
+            <p className="mt3"><a href={this.state.dictionary.link} target='_blank'>Learn more
+              <Tooltip
+                title="Opens in a new tab"
+                animation="shift"
+                arrow="true"
+                className=""
+                duration="200"
+                tabIndex="0"
+                tag="span"
+                theme="didoesdigital"
+                trigger="mouseenter focus click"
+                onShow={this.props.setAnnouncementMessage}
+              >
+                <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip>
+            </a></p>
+          );
+        }
+
+        return (
+          <DocumentTitle title={'Typey Type | Dictionary: ' + this.state.dictionary.title}>
+            <main id="main">
+              <div className="subheader">
+                <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
+                  <div className="flex mr1 self-center">
+                    <header className="flex items-baseline">
+                      <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.state.dictionary.title}</h2>
+                    </header>
+                  </div>
+                  <div className="flex mxn2">
+                    <a href={this.state.dictionary.path} onClick={this.downloadDictionary} className="link-button link-button-ghost table-cell mr1" role="button">Download</a>
+                    <a href={this.state.dictionary.path} data-clipboard-target="#js-dictionary-json-pre" className="js-clipboard-button link-button link-button-ghost table-cell mr1 copy-to-clipboard fade-out-up" role="button">Copy to clipboard</a>
+                  </div>
+                </div>
+              </div>
+              <div className="p3 mx-auto mw-1024">
+                <div className="mw-568">
+                  {this.state.dictionary.tagline && !this.state.dictionary.tagline.includes('Loading') && (
+                    <p className="mt3">{this.state.dictionary.tagline}</p>
+                  )}
+
+                  {this.state.dictionary.link && !this.state.dictionary.link.includes('/typey-type/support') && internalLink }
+                  {this.state.dictionary.link && externalLink }
+
+                  <h3 id="TODO-linkable-heading-id">The dictionary</h3>
+                  {this.state.loadingError && <p>Loading failed.</p>}
+                  {!this.state.loadingDictionaryContents && truncatedMessage}
+                  {this.state.loadingDictionaryContents ? <p>Loading…</p> :
+                    <pre
+                      className="quote h-192 overflow-scroll mw-384 mt1 mb3"
+                      id="js-dictionary-json-pre"
+                    ><code>{contents}</code></pre>
+                  }
+
+                </div>
+              </div>
+              <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--dictionary--give-feedback">Give feedback on this dictionary (form opens in a new tab)</a></p>
+            </main>
+          </DocumentTitle>
+        )
       }
     } else {
       console.log("no dictionary");
