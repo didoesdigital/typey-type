@@ -252,7 +252,7 @@ class Lesson extends Component {
         )
       } else if (this.isFinished()) {
         return (
-          <DocumentTitle title={'Typey Type | ' + this.props.lesson.title}>
+          <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
             <main id="main">
               <div className="subheader">
                 <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
@@ -310,7 +310,7 @@ class Lesson extends Component {
         )
       } else {
         return (
-          <DocumentTitle title={'Typey Type | ' + this.props.lesson.title}>
+          <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
             <main id="main">
               <div className="subheader">
                 <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">

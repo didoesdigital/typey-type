@@ -231,7 +231,7 @@ class Dictionary extends Component {
           // contents = JSON.stringify(this.state.dictionary.contents);
           contents = JSON.stringify(this.state.dictionary.contents).split(',').join(',\n');
           return (
-            <DocumentTitle title={'Typey Type | ' + this.state.dictionary.title}>
+            <DocumentTitle title={'Typey Type | Dictionary: ' + this.state.dictionary.title}>
               <main id="main">
                 <div className="subheader">
                   <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
