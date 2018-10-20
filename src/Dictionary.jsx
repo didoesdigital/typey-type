@@ -153,16 +153,14 @@ class Dictionary extends Component {
   // }
 
   prefillSurveyLink() {
-    // TODO: create a new feedback form just for dictionary feedback
-    // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=dictionary&entry.1202724812&entry.936119214";
-    let googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
-    let param = "&entry.1202724812&entry.936119214";
+    // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=Example";
+    let googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690="
     let prefillDictionary = '';
     if (this.props.location && this.props.location.pathname) {
       prefillDictionary = this.props.location.pathname;
     }
     if (this.surveyLink) {
-      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillDictionary) + param;
+      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillDictionary);
     }
   }
 
@@ -257,8 +255,8 @@ class Dictionary extends Component {
                   }
 
                 </div>
+                <p><a href={this.prefillSurveyLink()} target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--dictionary--give-feedback">Give feedback on this dictionary (form opens in a new tab)</a></p>
               </div>
-              <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--dictionary--give-feedback">Give feedback on this dictionary (form opens in a new tab)</a></p>
             </main>
           </DocumentTitle>
         )
