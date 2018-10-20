@@ -72,7 +72,7 @@ class Dictionary extends Component {
           this.setState({dictionary: newDictionary});
         })
       });
-      this.handleDictionary(process.env.PUBLIC_URL + this.props.location.pathname);
+      this.loadDictionaryContents(process.env.PUBLIC_URL + this.props.location.pathname);
 
             // this.setState({
             //   announcementMessage: 'Navigated to: ' + dictionary.title,
@@ -103,7 +103,7 @@ class Dictionary extends Component {
   //     // this.props.setCustomDictionary();
   //   } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/dictionaries'))) {
   //     console.log("WRONG HANDLE CALL");
-  //     this.handleDictionary(process.env.PUBLIC_URL + this.props.location.pathname);
+  //     this.loadDictionaryContents(process.env.PUBLIC_URL + this.props.location.pathname);
   //   }
 
   //   // if (this.state.dictionary.path === '/dictionaries/typey-type/top-10.json' && !this.state.defaultDictionary) {
@@ -114,7 +114,7 @@ class Dictionary extends Component {
 
   // }
 
-  handleDictionary(path) {
+  loadDictionaryContents(path) {
     let dictionaryFile = path.replace(/\/$/,'.json');
     fetch(dictionaryFile, {
       method: "GET",
