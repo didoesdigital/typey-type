@@ -4,7 +4,6 @@ import DictionaryNotFound from './DictionaryNotFound';
 import PseudoContentButton from './PseudoContentButton';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
-import Clipboard from 'clipboard';
 import {
   fetchDictionaryIndex,
   lookUpDictionaryInIndex,
@@ -95,8 +94,6 @@ class Dictionary extends Component {
 
     //   this.setState({defaultDictionary: true});
     //   this.setState({defaultDictionary: false});
-
-    new Clipboard('.js-clipboard-button');
 
     if (this.mainHeading) {
       this.mainHeading.focus();
