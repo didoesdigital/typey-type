@@ -1,50 +1,57 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Dictionary from './Dictionary';
+import Loadable from 'react-loadable';
 import DictionariesIndex from './DictionariesIndex';
+import PageLoading from './PageLoading';
+
+const AsyncDictionary = Loadable({
+  loader: () => import("./Dictionary"),
+  loading: PageLoading,
+  delay: 300
+});
 
 const Dictionaries = ({match, ...dictionaryProps}) => {
   return(
     <div>
       <Switch>
         <Route path={`${match.url}/lessons/:category/:subcategory/:dictionaryPath`} render={ (props) =>
-          <Dictionary
+          <AsyncDictionary
             {...dictionaryProps}
             {...props}
           />
         } />
         <Route path={`${match.url}/lessons/fundamentals/:dictionaryPath`} render={ (props) =>
-          <Dictionary
+          <AsyncDictionary
             {...dictionaryProps}
             {...props}
           />
         } />
         <Route path={`${match.url}/lessons/drills/:dictionaryPath`} render={ (props) =>
-          <Dictionary
+          <AsyncDictionary
             {...dictionaryProps}
             {...props}
           />
         } />
       <Route path={`${match.url}/typey-type/:dictionaryPath`} render={ (props) =>
-          <Dictionary
+          <AsyncDictionary
             {...dictionaryProps}
             {...props}
           />
         } />
       <Route path={`${match.url}/didoesdigital/:dictionaryPath`} render={ (props) =>
-          <Dictionary
+          <AsyncDictionary
             {...dictionaryProps}
             {...props}
           />
         } />
       <Route path={`${match.url}/plover/:dictionaryPath`} render={ (props) =>
-          <Dictionary
+          <AsyncDictionary
             {...dictionaryProps}
             {...props}
           />
         } />
         <Route exact={true} path={`${match.url}/custom`} render={ (props) =>
-          <Dictionary
+          <AsyncDictionary
             {...dictionaryProps}
             {...props}
           />
