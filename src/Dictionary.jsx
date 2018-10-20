@@ -1,31 +1,75 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import Clipboard from 'clipboard';
+import {
+  fetchDictionaryIndex,
+  lookUpDictionaryInIndex,
+} from './typey-type';
 // import CustomDictionarySetup from './CustomDictionarySetup';
 
 class Dictionary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultDictionary: false
+      defaultDictionary: false,
+      dictionary: {
+        author: "Typey Type",
+        title: 'Top 10 dict',
+        subtitle: "",
+        category: "Typey Type",
+        subcategory: "",
+        tagline: "Typey&nbsp;Type’s top 10 words.",
+        link: "/typey-type/support#typey-type-dictionary",
+        path: "/dictionaries/typey-type/top-10.json",
+        contents: {
+          "-T": "the",
+          "-F": "of",
+          "SKP": "and",
+          "TO": "to",
+          "AEU": "a",
+          "TPH": "in",
+          "TPOR": "for",
+          "S": "is",
+          "OPB": "on",
+          "THA": "that"
+        }
+      },
+      dictionaryIndex: [{
+          "title": "Typey Type",
+          "category": "Typey Type",
+          "subcategory": "",
+          "path": process.env.PUBLIC_URL + "/typey-type/typey-type.json"
+        },
+        {
+          "title": "Steno",
+          "category": "Drills",
+          "subcategory": "",
+          "path": process.env.PUBLIC_URL + "/drills/steno/steno.json"
+        }]
     }
   }
 
   componentDidMount() {
     let locationpathname = this.props.location.pathname.replace(/\/$/,'.json');
-
-    console.log("COMPONENT MOUNTS");
-    console.log(this.props.dictionary.path);
     console.log(locationpathname);
-    console.log(this.props.location.pathname);
+
+
     if (this.props.location.pathname.startsWith('/dictionaries/custom')) {
       // this.props.setCustomDictionary();
     }
     else if((this.props.dictionary.path!==locationpathname) && (this.props.location.pathname.startsWith('/dictionaries'))) {
-      console.log("IS NEW DICT, HANDLE IT");
-      console.log("CORRECT HANDLE CALL");
-      console.log(process.env.PUBLIC_URL + this.props.location.pathname);
-      this.props.handleDictionary(process.env.PUBLIC_URL + this.props.location.pathname, this.props.dictionaryIndex);
+      fetchDictionaryIndex().then((json) => {
+        this.setState({ dictionaryIndex: json }, () => {
+          let dictionaryMetadata = lookUpDictionaryInIndex(process.env.PUBLIC_URL + this.props.location.pathname, this.state.dictionaryIndex);
+          let newDictionary = Object.assign({}, this.state.dictionary)
+          for (const [metadataKey, metadataValue] of Object.entries(dictionaryMetadata)) {
+            newDictionary[metadataKey] = metadataValue;
+          }
+          this.setState({dictionary: newDictionary});
+        })
+      });
+      this.handleDictionary(process.env.PUBLIC_URL + this.props.location.pathname);
+
     }
 
     // if (this.props.dictionary.path === '/dictionaries/typey-type/top-10.json') {
@@ -47,7 +91,7 @@ class Dictionary extends Component {
       // this.props.setCustomDictionary();
     } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/dictionaries'))) {
       console.log("WRONG HANDLE CALL");
-      this.props.handleDictionary(process.env.PUBLIC_URL + this.props.location.pathname, this.props.dictionaryIndex);
+      this.handleDictionary(process.env.PUBLIC_URL + this.props.location.pathname, this.state.dictionaryIndex);
     }
 
     // if (this.props.dictionary.path === '/dictionaries/typey-type/top-10.json' && !this.state.defaultDictionary) {
@@ -57,6 +101,40 @@ class Dictionary extends Component {
     // }
 
   }
+
+  handleDictionary(path) {
+    let dictionaryFile = path.replace(/\/$/,'.json');
+      fetch(dictionaryFile, {
+        method: "GET",
+        credentials: "same-origin"
+      }).then((response) => {
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+          return response.json().then(dictionaryContents => {
+            let newDictionary = Object.assign({}, this.state.dictionary);
+            newDictionary['contents'] = dictionaryContents;
+            this.setState({
+              dictionary: newDictionary
+            });
+
+          });
+        } else {
+          let dictionary = {
+            author: "Typey Type",
+            title: 'Top 10 dict', subtitle: "",
+            category: "Typey Type", subcategory: "",
+            tagline: "Typey&nbsp;Type’s top 10 words.",
+            link: "/typey-type/support#typey-type-dictionary",
+            path: "/dictionaries/typey-type/top-10.json",
+            contents: { "-T": "the", "-F": "of", "SKP": "and", "TO": "to", "AEU": "a", "TPH": "in", "TPOR": "for", "S": "is", "OPB": "on", "THA": "that" }
+          };
+
+        }
+      }).catch((error) => {
+        console.log('Unable to load dictionary', error)
+      });
+  }
+
 
   isCustom() {
     return (this.props.location.pathname === '/dictionaries/custom');
@@ -147,7 +225,7 @@ class Dictionary extends Component {
           // console.log(this.props.dictionary);
           // contents = Object.entries(this.props.dictionary.contents).join('\n');
           // contents = JSON.stringify(this.props.dictionary.contents);
-          contents = JSON.stringify(this.props.dictionary.contents).split(',').join(',\n');
+          contents = JSON.stringify(this.state.dictionary.contents).split(',').join(',\n');
           return (
             <DocumentTitle title={'Typey Type | ' + this.props.dictionary.title}>
               <main id="main">
@@ -156,7 +234,7 @@ class Dictionary extends Component {
                     <div className="flex mr1 self-center">
                       <header className="flex items-baseline">
                         <a href={this.props.path} className="heading-link table-cell mr2" role="button">
-                          <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.dictionary.title}</h2>
+                          <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.state.dictionary.title}</h2>
                         </a>
                       </header>
                     </div>
@@ -168,7 +246,7 @@ class Dictionary extends Component {
                 </div>
                 <div className="p3 mx-auto mw-1024">
                   <div className="mw-568">
-                    <p className="mt3">Typey&nbsp;Type’s dictionary is a version of the Plover dictionary with misstrokes removed for the top 10,000 words.</p>
+                    <p className="mt3">{this.state.dictionary.tagline}</p>
 
                     <h3 id="TODO-linkable-heading-id">The dictionary</h3>
                     <pre

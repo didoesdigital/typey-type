@@ -3,17 +3,42 @@ import { Link } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
+import {
+  fetchDictionaryIndex,
+} from './typey-type';
 
 class DictionariesIndex extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dictionaryIndex: [{
+          "title": "Typey Type",
+          "category": "Typey Type",
+          "subcategory": "",
+          "path": process.env.PUBLIC_URL + "/typey-type/typey-type.json"
+        },
+        {
+          "title": "Steno",
+          "category": "Drills",
+          "subcategory": "",
+          "path": process.env.PUBLIC_URL + "/drills/steno/steno.json"
+        }]
+    }
+  }
+
 
   componentDidMount() {
+    fetchDictionaryIndex().then((json) => {
+      this.setState({ dictionaryIndex: json })
+    });
+
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
   }
 
   render() {
-    const linkList = this.props.dictionaryIndex.map( (dictionary) => {
+    const linkList = this.state.dictionaryIndex.map( (dictionary, index, array) => {
       let author = 'Typey Type';
       if (dictionary.author && dictionary.author.length > 0) {
         author = dictionary.author;
@@ -47,7 +72,7 @@ class DictionariesIndex extends Component {
       // console.log(dictionarypath);
       return(
         <li className="unstyled-list-item" key={ dictionary.path }>
-          <Link to={`${this.props.match.url}${dictionarypath}`.replace(/path\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--dictionary-index-'+dictionarypath.replace(/[/.]/g,'-')}>{author}’s {dictionary.title}{subtitle}</Link>{learnMoreLink}
+          <Link to={`${dictionarypath}`.replace(/path\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--dictionary-index-'+dictionarypath.replace(/[/.]/g,'-')}>{author}’s {dictionary.title}{subtitle}</Link>{learnMoreLink}
         </li>
       )
     });

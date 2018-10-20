@@ -34,7 +34,7 @@ const Dictionaries = ({match, dictionaryIndex, handleDictionary, dictionary, ...
             {...props}
           />
         } />
-      <Route path={`${match.url}/dictionaries/typey-type/:dictionaryPath`} render={ (props) =>
+      <Route path={`${match.url}/typey-type/:dictionaryPath`} render={ (props) =>
           <Dictionary
             dictionary={dictionary}
             dictionaryIndex={dictionaryIndex}
@@ -43,7 +43,7 @@ const Dictionaries = ({match, dictionaryIndex, handleDictionary, dictionary, ...
             {...props}
           />
         } />
-      <Route path={`${match.url}/dictionaries/didoesdigital/:dictionaryPath`} render={ (props) =>
+      <Route path={`${match.url}/didoesdigital/:dictionaryPath`} render={ (props) =>
           <Dictionary
             dictionary={dictionary}
             dictionaryIndex={dictionaryIndex}
@@ -52,7 +52,7 @@ const Dictionaries = ({match, dictionaryIndex, handleDictionary, dictionary, ...
             {...props}
           />
         } />
-      <Route path={`${match.url}/dictionaries/plover/:dictionaryPath`} render={ (props) =>
+      <Route path={`${match.url}/plover/:dictionaryPath`} render={ (props) =>
           <Dictionary
             dictionary={dictionary}
             dictionaryIndex={dictionaryIndex}
