@@ -586,7 +586,7 @@ describe('lookUpDictionaryInIndex', () => {
       "subtitle": "",
       "category": "Typey Type",
       "subcategory": "",
-      "tagline": "Typey&nbsp;Type’s dictionary is a version of the Plover dictionary with misstrokes removed for the top 10,000 words.",
+      "tagline": "Typey Type’s dictionary is a version of the Plover dictionary with misstrokes removed for the top 10,000 words.",
       "link": "/typey-type/support#typey-type-dictionary",
       "path": "/dictionaries/typey-type/typey-type.json"
     },
@@ -645,7 +645,7 @@ describe('lookUpDictionaryInIndex', () => {
         subtitle: "",
         category: "Typey Type",
         subcategory: "",
-        tagline: "Typey&nbsp;Type’s top 10 words.",
+        tagline: "Typey Type’s top 10 words.",
         link: "/typey-type/support#typey-type-dictionary",
         path: "/dictionaries/typey-type/top-10.json"
       });
