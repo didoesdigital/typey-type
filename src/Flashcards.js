@@ -143,6 +143,8 @@ currentSlide: currentSlide
           this.setupFlashCards();
         });
       }
+    }).catch((e) => {
+      console.log('Unable to load lesson for flashcards', e)
     });
   };
 

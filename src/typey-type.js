@@ -638,8 +638,6 @@ function getLesson(lessonFile) {
     credentials: "same-origin"
   }).then((response) => {
     return response.text();
-  }, function(error) {
-    console.log(error);
   });
 }
 
@@ -651,8 +649,6 @@ function fetchLessonIndex() {
     return response.json()
   }).then(json => {
     return(json);
-  }).catch(function(e) {
-    console.log('Unable to load lesson index', e)
   });
 }
 
@@ -670,8 +666,6 @@ function fetchDictionaries() {
     return response.json()
   }).then(json => {
     return(json);
-  }).catch(function(e) {
-    console.log('Unable to load lesson index', e)
   });
 }
 

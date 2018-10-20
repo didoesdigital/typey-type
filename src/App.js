@@ -226,6 +226,18 @@ class App extends Component {
       this.setState({ lessonIndex: json }, () => {
         setupLessonProgress(json);
       })
+    }).catch(() => {
+      let json = [{
+        "title": "Steno",
+        "subtitle": "",
+        "category": "Drills",
+        "subcategory": "",
+        "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
+      }];
+
+      this.setState({ lessonIndex: json}, () => {
+        setupLessonProgress(json);
+      })
     });
   }
 
@@ -536,6 +548,8 @@ class App extends Component {
           if (element) { element.focus(); }
         }
       });
+    }).catch((e) => {
+      console.log('Unable to load Typey Type dictionary', e)
     });
   }
 
@@ -808,6 +822,8 @@ class App extends Component {
       } else {
         this.setState({lessonNotFound: true});
       }
+    }).catch((e) => {
+      console.log('Unable to load lesson', e)
     });
   }
 

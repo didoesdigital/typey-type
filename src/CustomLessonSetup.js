@@ -37,6 +37,8 @@ class CustomLessonSetup extends Component {
         // sourceWordsAndStrokes: sourceWordsAndStrokes,
         processedSourceWordsAndStrokes: processedSourceWordsAndStrokes
       });
+    }).catch((e) => {
+      console.log('Unable to load Typey Type dictionary', e)
     });
 
     this.addWordListToPage(this.state.myWords);
