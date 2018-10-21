@@ -468,18 +468,6 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
   return dictionary;
 }
 
-// function parseDictionary(dictionaryText, path) {
-//   let lines = dictionaryText.split("\n");
-//   let dictionaryTitle = lines[0];
-//   let dictionarySubtitle = lines[1];
-
-//   return {
-//     title: dictionaryTitle,
-//     subtitle: dictionarySubtitle,
-//     path: path
-//   }
-// }
-
 function parseLesson(lessonText, path) {
   let lines = lessonText.split("\n");
   let lessonTitle = lines[0];
