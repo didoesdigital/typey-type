@@ -80,7 +80,29 @@ class DictionariesIndex extends Component {
         </div>
         <div className="p3 mx-auto mw-1024">
           <h3>Custom dictionaries</h3>
-          <p>To help the open steno community and Typey&nbsp;Type grow even faster, add your custom dictionaries to{' '}
+          <p>To help the open steno community and Typey&nbsp;Type grow even faster, add your custom dictionaries to the{' '}
+            <GoogleAnalytics.OutboundLink
+              eventLabel="Stenodict"
+              to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
+              target="_blank">
+              community’s dictionaries
+              <Tooltip
+                title="Opens in a new tab"
+                animation="shift"
+                arrow="true"
+                className=""
+                duration="200"
+                tabIndex="0"
+                tag="span"
+                theme="didoesdigital"
+                trigger="mouseenter focus click"
+                onShow={this.props.setAnnouncementMessage}
+              >
+                <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip>
+            </GoogleAnalytics.OutboundLink>.
+          </p>
+          <p className="text-small">You might also be interested in{' '}
             <GoogleAnalytics.OutboundLink
               eventLabel="Stenodict"
               to="http://www.openstenoproject.org/stenodict/"
@@ -110,7 +132,7 @@ class DictionariesIndex extends Component {
             <GoogleAnalytics.OutboundLink
               eventLabel="Typey Type for Stenographers dictionary feedback form"
               aria-label="Share your feedback (form opens in new tab)"
-              to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
+              to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
             >
