@@ -892,18 +892,19 @@ class App extends Component {
   setAnnouncementMessage(app, content) {
     let newAnnouncementMessage = "";
     if (content) {
-      // if (typeof content === "string") {
-      //   newAnnouncementMessage = content;
-      // // TODO: if we want to make this function generic for other announcement objects, here is the
-      // // start of a handler for that:
-      // } else if (typeof content === "object") {
-      //   if (isElement(content)) {
-      //     newAnnouncementMessage = content.querySelector('.tippy-tooltip-content').innerText;
-      //   }
-      // }
-      newAnnouncementMessage = content.querySelector('.tippy-tooltip-content').innerText;
+      if (typeof content === "string") {
+        newAnnouncementMessage = content;
+      // TODO: if we want to make this function generic for other announcement objects, here is the
+      // start of a handler for that:
+      } else if (typeof content === "object") {
+        if (isElement(content)) {
+          newAnnouncementMessage = content.querySelector('.tippy-tooltip-content').innerText;
+        }
+      }
+      // newAnnouncementMessage = content.querySelector('.tippy-tooltip-content').innerText;
     }
     app.setState({announcementMessage: newAnnouncementMessage});
+
     // TODO: figure out how to re-announce things if the announcement hasn't
     // changed content but you've encountered a new instance of the same
     // content that should be announced
@@ -1227,6 +1228,7 @@ class App extends Component {
                   <DocumentTitle title={'Typey Type | Dictionaries'}>
                     <ErrorBoundary>
                       <AsyncDictionaries
+                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         {...props}
                       />
                     </ErrorBoundary>
@@ -1491,16 +1493,16 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
   return presentedMaterial.filter(item => filterFunction(item.phrase) );
 }
 
-// function isElement(obj) {
-//   try {
-//     return obj instanceof HTMLElement;
-//   }
-//   catch(e){
-//     return (typeof obj==="object") &&
-//       (obj.nodeType===1) && (typeof obj.style === "object") &&
-//       (typeof obj.ownerDocument ==="object");
-//   }
-// }
+function isElement(obj) {
+  try {
+    return obj instanceof HTMLElement;
+  }
+  catch(e){
+    return (typeof obj==="object") &&
+      (obj.nodeType===1) && (typeof obj.style === "object") &&
+      (typeof obj.ownerDocument ==="object");
+  }
+}
 
 export default App;
 export {increaseMetWords, filterByFamiliarity, sortLesson, replaceSmartTypographyInPresentedMaterial};
