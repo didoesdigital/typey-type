@@ -82,7 +82,8 @@ class DictionariesIndex extends Component {
           <h3>Custom dictionaries</h3>
           <p>To help the open steno community and Typey&nbsp;Type grow even faster, add your custom dictionaries to the{' '}
             <GoogleAnalytics.OutboundLink
-              eventLabel="Stenodict"
+              eventLabel="community’s dictionaries"
+              aria-label="community’s dictionaries (external link opens in new tab)"
               to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
               target="_blank">
               community’s dictionaries
@@ -105,6 +106,7 @@ class DictionariesIndex extends Component {
           <p className="text-small">You might also be interested in{' '}
             <GoogleAnalytics.OutboundLink
               eventLabel="Stenodict"
+              aria-label="Stenodict (external link opens in new tab)"
               to="http://www.openstenoproject.org/stenodict/"
               target="_blank">
               Stenodict

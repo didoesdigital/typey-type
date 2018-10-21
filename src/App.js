@@ -921,6 +921,10 @@ class App extends Component {
     // }
   }
 
+  setAnnouncementMessageString(string) {
+    this.setState({announcementMessage: string});
+  }
+
   reviseLesson(event) {
     event.preventDefault();
     let currentLessonStrokes = this.state.currentLessonStrokes;
@@ -1155,6 +1159,7 @@ class App extends Component {
                   <DocumentTitle title='Typey Type for Stenographers'>
                     <Home
                       setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                      setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                       {...props}
                     />
                   </DocumentTitle>
@@ -1168,6 +1173,7 @@ class App extends Component {
                     <ErrorBoundary>
                       <Support
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                       />
                     </ErrorBoundary>
                   </DocumentTitle>
@@ -1192,6 +1198,7 @@ class App extends Component {
                     <ErrorBoundary>
                       <Progress
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         setPersonalPreferences={this.setPersonalPreferences.bind(this)}
                         metWords={this.state.metWords}
                         flashcardsMetWords={this.state.flashcardsMetWords}
@@ -1229,6 +1236,7 @@ class App extends Component {
                     <ErrorBoundary>
                       <AsyncDictionaries
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         {...props}
                       />
                     </ErrorBoundary>
@@ -1297,6 +1305,7 @@ class App extends Component {
                         updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
                         sayCurrentPhraseAgain={this.sayCurrentPhraseAgain.bind(this)}
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         setCustomLesson={this.setCustomLesson.bind(this)}
                         setupRevisionLesson={this.setupRevisionLesson.bind(this)}
                         settings={this.state.lesson.settings}

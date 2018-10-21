@@ -78,22 +78,17 @@ class Dictionary extends Component {
           for (const [metadataKey, metadataValue] of Object.entries(dictionaryMetadata)) {
             newDictionary[metadataKey] = metadataValue;
           }
+          this.props.setAnnouncementMessageString('Navigated to: ' + newDictionary.title);
           this.setState({
-            announcementMessage: 'Navigated to: ' + newDictionary.title,
             dictionary: newDictionary
           });
         })
       }).catch((error) => {
         console.log('Unable to load dictionary index', error)
-        this.setState({
-          announcementMessage: 'Navigated to: missing dictionary index'
-        });
+        this.props.setAnnouncementMessageString('Navigated to: missing dictionary index');
       });
       this.loadDictionaryContents(process.env.PUBLIC_URL + this.props.location.pathname);
     }
-
-    //   this.setState({defaultDictionary: true});
-    //   this.setState({defaultDictionary: false});
 
     if (this.mainHeading) {
       this.mainHeading.focus();
@@ -121,8 +116,9 @@ class Dictionary extends Component {
 
           newDictionary['contents'] = dictionaryContents;
 
+          this.props.setAnnouncementMessageString('Finished loading: ' + newDictionary.title);
+
           this.setState({
-            announcementMessage: 'Dictionary finished loaded',
             dictionary: newDictionary,
             loadingDictionaryContents: false,
             loadingError: false
@@ -133,8 +129,9 @@ class Dictionary extends Component {
       }
     }).catch((error) => {
       console.log('Unable to load dictionary', error)
+      this.props.setAnnouncementMessageString('Unable to load dictionary');
+
       this.setState({
-        announcementMessage: 'Unable to load dictionary',
         loadingError: true
       });
     });
@@ -226,7 +223,7 @@ class Dictionary extends Component {
                 <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
                   <div className="flex mr1 self-center">
                     <header className="flex items-baseline">
-                      <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.state.dictionary.title}</h2>
+                      <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.state.loadingDictionaryContents ? <p>Loading dictionary…</p> : this.state.dictionary.title}{this.state.loadingError && <span>Loading failed.</span>}</h2>
                     </header>
                   </div>
                   <div className="flex mxn2">
