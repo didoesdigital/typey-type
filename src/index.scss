@@ -308,7 +308,8 @@ input:focus::placeholder {
 .items-center    { align-items: center; }
 .self-center     { align-self: center; }
 .hide            { display: none; }
-.hide-sm         { @media (max-width: 960px) { display: none; } }
+.hide-xs         { @media (max-width: 959px) { display: none; } }
+.hide-lg         { @media (min-width: 960px) { display: none; } }
 .relative        { position: relative; }
 .absolute        { position: absolute; }
 .lh-single       { line-height: 1; }
@@ -536,8 +537,8 @@ input:focus::placeholder {
     justify-content: space-between;
   }
   .search-container {
-    max-width: 576px;
-    @media (max-width: 864px) {
+    max-width: 725px; // arbitrary to fit nav buttons, search placeholder, button
+    @media (max-width: 959px) {
       margin-left: -16px;
       margin-top: 24px;
     }
@@ -564,7 +565,23 @@ input:focus::placeholder {
   }
 }
 
-.progress-button-xs {
+.site-heading-banner {
+  @media (max-width: 959px) {
+    margin-top: 8px;
+    width: 100%;
+  }
+}
+
+.nav-menu-xs {
+  margin-left: -16px;
+  margin-top: 24px;
+
+  @media (min-width: 960px) {
+    display: none;
+  }
+}
+
+.nav-button-xs {
   display: inline-block;
 
   @media (min-width: 960px) {
@@ -572,7 +589,7 @@ input:focus::placeholder {
   }
 }
 
-.progress-button-lg {
+.nav-button-lg {
   display: none;
 
   @media (min-width: 960px) {

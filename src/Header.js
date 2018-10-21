@@ -33,11 +33,17 @@ class Header extends Component {
                     Typey&nbsp;Type
                   </h1>
                 </Link>
-                <Link to="/progress" className="progress-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>
+              </div>
+              <div className="nav-menu-xs">
+                <Link to="/progress" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>
+                <span className="divider--vertical hide-lg"></span>
+                <Link to="/dictionaries" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Dictionaries</Link>
               </div>
               <div className="table search-container relative">
-                <Link to="/progress" className="progress-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>
-                <span className="divider--vertical hide-sm"></span>
+                <Link to="/progress" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>
+                <span className="divider--vertical hide-xs"></span>
+                <Link to="/dictionaries" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Dictionaries</Link>
+                <span className="divider--vertical hide-xs"></span>
                 <Link to="/lessons" className="link-button link-button-ghost mr1 table-cell" id="ga--header--lessons">Lessons</Link>
                 <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
                 <Autocomplete
