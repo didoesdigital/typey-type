@@ -693,26 +693,6 @@ function shouldShowStroke(showStrokesInLesson, showStrokes, repetitionsRemaining
   return false;
 }
 
-function getDictionary(DictionaryFile) {
-  return fetch(DictionaryFile, {
-    method: "GET",
-    credentials: "same-origin"
-  }).then((response) => {
-    const contentType = response.headers.get("content-type");
-    if (contentType && contentType.indexOf("application/json") !== -1) {
-      return response.json();
-    } else {
-      return response.text().then(text => {
-      });
-    }
-    // // return response.text();
-    // console.log(DictionaryFile);
-    // return response.json();
-  }, function(error) {
-    console.log(error);
-  });
-}
-
 function getLesson(lessonFile) {
   return fetch(lessonFile, {
     method: "GET",
@@ -785,7 +765,6 @@ export {
   fetchDictionaryIndex,
   fetchDictionaries, // for custom lesson setup
   generateDictionaryEntries,
-  getDictionary,
   getLesson,
   loadPersonalPreferences,
   lookUpDictionaryInIndex,
