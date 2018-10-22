@@ -37,7 +37,7 @@ class DictionariesIndex extends Component {
 
         if (dictionary.link.startsWith("/typey-type") || dictionary.link.startsWith('/dictionaries/') || dictionary.link.startsWith('/lessons/') || dictionary.link.startsWith('/support')) {
           learnMoreLink = <span> · <Link to={dictionary.link} aria-label={ariaLabel}>Learn more</Link></span>;
-          if (dictionary.link.startsWith(process.env.PUBLIC_URL + "/lessons")) {
+          if (dictionary.link.startsWith("/lessons")) {
             learnMoreLink = <span> · <Link to={dictionary.link} aria-label={"Lesson: " + dictionary.title}>Lesson</Link></span>;
           }
         } else {
