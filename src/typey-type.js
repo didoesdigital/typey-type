@@ -511,7 +511,7 @@ function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
   if (typeof dictionaryMetadata === "undefined") {
     dictionaryMetadata = {
       author: "Typey Type",
-      title: 'Loading…',
+      title: 'Missing dictionary details',
       subtitle: "",
       category: "Typey Type",
       subcategory: "",

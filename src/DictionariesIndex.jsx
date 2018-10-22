@@ -12,17 +12,17 @@ class DictionariesIndex extends Component {
     super(props);
     this.state = {
       dictionaryIndex: [{
-          "title": "Typey Type",
-          "category": "Typey Type",
-          "subcategory": "",
-          "path": process.env.PUBLIC_URL + "/typey-type/typey-type.json"
-        },
-        {
-          "title": "Steno",
-          "category": "Drills",
-          "subcategory": "",
-          "path": process.env.PUBLIC_URL + "/drills/steno/steno.json"
-        }]
+        "title": "Typey Type",
+        "category": "Typey Type",
+        "subcategory": "",
+        "path": process.env.PUBLIC_URL + "/dictionaries/typey-type/typey-type.json"
+      },
+      {
+        "title": "Steno",
+        "category": "Drills",
+        "subcategory": "",
+        "path": process.env.PUBLIC_URL + "/dictionaries/lessons/drills/steno/steno.json"
+      }]
     }
   }
 

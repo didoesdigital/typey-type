@@ -23,7 +23,7 @@ class Dictionary extends Component {
         category: "Typey Type",
         subcategory: "",
         tagline: "Loading…",
-        link: "/typey-type/support#typey-type-dictionary",
+        link: process.env.PUBLIC_URL + "/support#typey-type-dictionary",
         path: "/dictionaries/typey-type/top-10.json",
         contents: {
           "-T": "the",
@@ -42,13 +42,13 @@ class Dictionary extends Component {
           "title": "Typey Type",
           "category": "Typey Type",
           "subcategory": "",
-          "path": process.env.PUBLIC_URL + "/typey-type/typey-type.json"
+          "path": process.env.PUBLIC_URL + "/dictionaries/typey-type/typey-type.json"
         },
         {
           "title": "Steno",
           "category": "Drills",
           "subcategory": "",
-          "path": process.env.PUBLIC_URL + "/drills/steno/steno.json"
+          "path": process.env.PUBLIC_URL + "/dictionaries/drills/steno/steno.json"
         }]
     }
   }

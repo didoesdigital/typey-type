@@ -641,7 +641,7 @@ describe('lookUpDictionaryInIndex', () => {
       let path = "/dictionaries/bad-path/bad-dict/";
       expect(lookUpDictionaryInIndex(path, dictionaryIndex)).toEqual({
         author: "Typey Type",
-        title: 'Loading dictionary…',
+        title: 'Loading…',
         subtitle: "",
         category: "Typey Type",
         subcategory: "",
