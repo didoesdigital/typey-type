@@ -18,7 +18,7 @@ class Dictionary extends Component {
       loadingError: false,
       dictionary: {
         author: "Typey Type",
-        title: 'Top 10 dict',
+        title: 'Loading dictionary…',
         subtitle: "",
         category: "Typey Type",
         subcategory: "",
@@ -193,8 +193,11 @@ class Dictionary extends Component {
 
         let externalLink = '';
         let internalLink = '';
-        if (this.state.dictionary.link.startsWith("/typey-type")) {
-          internalLink = <p className="mt3"><a href={this.state.dictionary.link}>Learn more</a></p>
+        if (this.state.dictionary.link.startsWith("/typey-type") || this.state.dictionary.link.startsWith(process.env.PUBLIC_URL)) {
+          internalLink = <p className="mt3"><a href={process.env.PUBLIC_URL + this.state.dictionary.link}>Learn more</a></p>;
+          if (this.state.dictionary.link.startsWith("/typey-type/lessons") || this.state.dictionary.link.startsWith(process.env.PUBLIC_URL + "/lessons")) {
+            internalLink = <p className="mt3"><a href={process.env.PUBLIC_URL + this.state.dictionary.link}>Lesson: {this.state.dictionary.title}</a></p>;
+          }
         } else {
           externalLink = (
             <p className="mt3"><a href={this.state.dictionary.link} target='_blank'>Learn more

@@ -641,11 +641,11 @@ describe('lookUpDictionaryInIndex', () => {
       let path = "/dictionaries/bad-path/bad-dict/";
       expect(lookUpDictionaryInIndex(path, dictionaryIndex)).toEqual({
         author: "Typey Type",
-        title: 'Top 10 dict',
+        title: 'Loading dictionary…',
         subtitle: "",
         category: "Typey Type",
         subcategory: "",
-        tagline: "Typey Type’s top 10 words.",
+        tagline: "Loading dictionary details…",
         link: "/typey-type/support#typey-type-dictionary",
         path: "/dictionaries/typey-type/top-10.json"
       });

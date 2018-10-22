@@ -511,11 +511,11 @@ function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
   if (typeof dictionaryMetadata === "undefined") {
     dictionaryMetadata = {
       author: "Typey Type",
-      title: 'Top 10 dict',
+      title: 'Loading…',
       subtitle: "",
       category: "Typey Type",
       subcategory: "",
-      tagline: "Typey Type’s top 10 words.",
+      tagline: "Loading dictionary details…",
       link: "/typey-type/support#typey-type-dictionary",
       path: "/dictionaries/typey-type/top-10.json",
     }
