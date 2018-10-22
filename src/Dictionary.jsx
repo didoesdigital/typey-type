@@ -233,7 +233,7 @@ class Dictionary extends Component {
                     </header>
                   </div>
                   <div className="flex mxn2">
-                    <a href={this.state.dictionary.path} download="" className="link-button link-button-ghost table-cell mr1">Download</a>
+                    <a href={process.env.PUBLIC_URL + this.state.dictionary.path} download="" className="link-button link-button-ghost table-cell mr1">Download</a>
                     <PseudoContentButton className="js-clipboard-button link-button link-button-ghost table-cell mr1 copy-to-clipboard" role="button" dataClipboardTarget="#js-dictionary-json-pre">Copy to clipboard</PseudoContentButton>
                   </div>
                 </div>
