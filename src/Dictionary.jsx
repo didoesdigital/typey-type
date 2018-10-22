@@ -195,11 +195,12 @@ class Dictionary extends Component {
         let externalLink = '';
         let internalLink = '';
         let dictLink = this.state.dictionary.link;
-        if (dictLink.startsWith("/typey-type") || dictLink.startsWith(process.env.PUBLIC_URL + '/dictionaries/') || dictLink.startsWith(process.env.PUBLIC_URL + '/lessons/') || dictLink.startsWith(process.env.PUBLIC_URL + '/support')) {
-          internalLink = <p className="mt3"><Link to={process.env.PUBLIC_URL + dictLink}>Learn more</Link></p>;
+        if (dictLink.startsWith("/typey-type") || dictLink.startsWith('/dictionaries/') || dictLink.startsWith('/lessons/') || dictLink.startsWith('/support')) {
+          internalLink = <p className="mt3"><Link to={dictLink}>Learn more</Link></p>;
           if (dictLink.startsWith(process.env.PUBLIC_URL + "/lessons")) {
-            internalLink = <p className="mt3"><Link to={process.env.PUBLIC_URL + dictLink}>Lesson: {this.state.dictionary.title}</Link></p>;
+            internalLink = <p className="mt3"><Link to={dictLink}>Lesson: {this.state.dictionary.title}</Link></p>;
           }
+          // better check would be `//`, `http`
         } else {
           externalLink = (
             <p className="mt3"><a href={this.state.dictionary.link} target='_blank'>Learn more
