@@ -2,16 +2,33 @@
 
 set -e
 
+a_flag=''
+
+while getopts 'a' flag; do
+  case "${flag}" in
+    a) a_flag='true' ;;
+    *) exit 1 ;;
+  esac
+done
+
+
 yarn run test
 
-echo "cd ~/projects/plover-tools/typey-type-lesson-generator && bat --paging never README.md"
-read -q "?Have you built steno drills, fundamentals, and dictionary? (y/n) "
-if [[ $REPLY =~ ^[Yy]$ ]];
+
+if [ "$a_flag" = true ] ;
   then
-    echo "Great!"
+    echo "Skip building steno lessons, and dictionaries."
   else
-    echo "... No build for you!"
-    exit 1
+    echo "cd ~/projects/plover-tools/typey-type-lesson-generator && bat --paging never README.md"
+    read -q "?Have you built steno drills, fundamentals, and dictionary? (y/n) "
+    if [[ $REPLY =~ ^[Yy]$ ]];
+      then
+        echo "Great!"
+        ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-typey-type-for-standard-dict-set.rb
+      else
+        echo "... No build for you!"
+        exit 1
+    fi
 fi
 
 # if [[ `git branch-name` != master ]];
@@ -22,7 +39,6 @@ fi
 #     echo "You're on master"
 # fi
 
-ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-typey-type-for-standard-dict-set.rb
 
 VERSION=`git describe --abbrev=0 --tags`
 # Build the production app!
