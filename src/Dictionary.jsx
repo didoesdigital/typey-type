@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
+import { Link } from 'react-router-dom';
 import DictionaryNotFound from './DictionaryNotFound';
 import PseudoContentButton from './PseudoContentButton';
 import { IconExternal } from './Icon';
@@ -194,9 +195,9 @@ class Dictionary extends Component {
         let externalLink = '';
         let internalLink = '';
         if (this.state.dictionary.link.startsWith("/typey-type") || this.state.dictionary.link.startsWith(process.env.PUBLIC_URL)) {
-          internalLink = <p className="mt3"><a href={process.env.PUBLIC_URL + this.state.dictionary.link}>Learn more</a></p>;
+          internalLink = <p className="mt3"><Link to={process.env.PUBLIC_URL + this.state.dictionary.link}>Learn more</Link></p>;
           if (this.state.dictionary.link.startsWith("/typey-type/lessons") || this.state.dictionary.link.startsWith(process.env.PUBLIC_URL + "/lessons")) {
-            internalLink = <p className="mt3"><a href={process.env.PUBLIC_URL + this.state.dictionary.link}>Lesson: {this.state.dictionary.title}</a></p>;
+            internalLink = <p className="mt3"><Link to={process.env.PUBLIC_URL + this.state.dictionary.link}>Lesson: {this.state.dictionary.title}</Link></p>;
           }
         } else {
           externalLink = (
