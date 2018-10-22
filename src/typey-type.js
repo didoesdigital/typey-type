@@ -506,7 +506,7 @@ function parseLesson(lessonText, path) {
 }
 
 function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
-  let dictionaryMetadata = dictionaryIndex.find(metadataEntry => metadataEntry.path === process.env.PUBLIC_URL + path.replace(/\/$/,'.json'));
+  let dictionaryMetadata = dictionaryIndex.find(metadataEntry => process.env.PUBLIC_URL + metadataEntry.path === path.replace(/\/$/,'.json'));
 
   if (typeof dictionaryMetadata === "undefined") {
     dictionaryMetadata = {

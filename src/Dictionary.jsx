@@ -194,10 +194,11 @@ class Dictionary extends Component {
 
         let externalLink = '';
         let internalLink = '';
-        if (this.state.dictionary.link.startsWith("/typey-type") || this.state.dictionary.link.startsWith(process.env.PUBLIC_URL)) {
-          internalLink = <p className="mt3"><Link to={process.env.PUBLIC_URL + this.state.dictionary.link}>Learn more</Link></p>;
-          if (this.state.dictionary.link.startsWith("/typey-type/lessons") || this.state.dictionary.link.startsWith(process.env.PUBLIC_URL + "/lessons")) {
-            internalLink = <p className="mt3"><Link to={process.env.PUBLIC_URL + this.state.dictionary.link}>Lesson: {this.state.dictionary.title}</Link></p>;
+        let dictLink = this.state.dictionary.link;
+        if (dictLink.startsWith("/typey-type") || dictLink.startsWith(process.env.PUBLIC_URL + '/dictionaries/') || dictLink.startsWith(process.env.PUBLIC_URL + '/lessons/') || dictLink.startsWith(process.env.PUBLIC_URL + '/support')) {
+          internalLink = <p className="mt3"><Link to={process.env.PUBLIC_URL + dictLink}>Learn more</Link></p>;
+          if (dictLink.startsWith(process.env.PUBLIC_URL + "/lessons")) {
+            internalLink = <p className="mt3"><Link to={process.env.PUBLIC_URL + dictLink}>Lesson: {this.state.dictionary.title}</Link></p>;
           }
         } else {
           externalLink = (
