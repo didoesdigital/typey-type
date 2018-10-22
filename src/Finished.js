@@ -206,7 +206,7 @@ class Finished extends Component {
             <h4 className="mt0 nowrap">{wpmCommentary}</h4>
             {wordsTyped}
             <p>
-              <Link to={this.props.suggestedNext} className="link-button dib" style={{lineHeight: 2}} role="button">
+              <Link to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
                 Next lesson
               </Link>
               <a href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="ml1" role="button">

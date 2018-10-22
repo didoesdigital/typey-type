@@ -217,6 +217,14 @@ small, .text-small {
   line-height: 1.6;
 }
 
+:focus {
+  outline: $brand-highlight outset 3px;
+}
+
+::selection {
+  background-color: add-tint($brand-warning, 60%);
+}
+
 // Cross-browser placeholder styling
 // Reference: https://stackoverflow.com/questions/2610497/change-an-html5-inputs-placeholder-color-with-css
 ::-webkit-input-placeholder { // WebKit, Blink, Edge
@@ -747,6 +755,10 @@ $textarea-padding-x: 8px;
 .typed-text-input-textarea {
   text-decoration: underline;
   text-underline-position: under;
+  &:focus {
+    outline: $brand-highlight outset 3px;
+    border-radius: 0;
+  }
 }
 
 .progress-textarea {
@@ -1177,6 +1189,7 @@ label {
   text-decoration: underline;
   &:focus-within {
     color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
+    outline: $brand-highlight outset 3px;
   }
 }
 
@@ -1688,7 +1701,7 @@ $lineAdjustment: 4px;
 }
 
 .negative-outline-offset {
-  outline-offset: -4px;
+  outline-offset: -3px;
 }
 
 

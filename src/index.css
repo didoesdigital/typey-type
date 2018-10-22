@@ -150,6 +150,12 @@ small, .text-small {
   font-size: 12.8px;
   line-height: 1.6; }
 
+:focus {
+  outline: #FFD073 outset 3px; }
+
+::selection {
+  background-color: #ffe5b3; }
+
 ::-webkit-input-placeholder {
   color: #949494; }
 
@@ -769,6 +775,9 @@ input:focus::placeholder {
 .typed-text-input-textarea {
   text-decoration: underline;
   text-underline-position: under; }
+  .typed-text-input-textarea:focus {
+    outline: #FFD073 outset 3px;
+    border-radius: 0; }
 
 .progress-textarea {
   background-color: #f5f4f6; }
@@ -1058,7 +1067,8 @@ label {
 .stroke-tip__label {
   text-decoration: underline; }
   .stroke-tip__label:focus-within {
-    color: #202549; }
+    color: #202549;
+    outline: #FFD073 outset 3px; }
 
 .steno-material {
   border-bottom: 2px solid #FFD073; }
@@ -1479,7 +1489,7 @@ small .svg-icon-wrapper.svg-baseline svg {
     transform: translate(-8px, -5px); }
 
 .negative-outline-offset {
-  outline-offset: -4px; }
+  outline-offset: -3px; }
 
 .fade-appear {
   color: #3f264e;
