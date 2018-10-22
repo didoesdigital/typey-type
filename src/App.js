@@ -7,6 +7,7 @@ import {
   fetchLessonIndex,
   setupLessonProgress,
   fetchDictionaries,
+  fetchDictionaryIndex,
   getLesson,
   generateDictionaryEntries,
   loadPersonalPreferences,
@@ -76,6 +77,15 @@ class App extends Component {
       currentPhraseID: 0,
       currentLessonStrokes: [],
       actualText: ``,
+      dictionaryIndex: [{
+        "title": "Dictionary",
+        "author": "Typey Type",
+        "category": "Typey Type",
+        "tagline": "Typey Type’s dictionary is a version of the Plover dictionary with misstrokes removed for the top 10,000 words.",
+        "subcategory": "",
+        "link": "/support#typey-type-dictionary",
+        "path": "/dictionaries/typey-type/typey-type.json"
+      }],
       flashcardsMetWords: {
         "the": {
           phrase: "the",
@@ -1121,6 +1131,12 @@ class App extends Component {
     return this.state.lesson.newPresentedMaterial.getRemaining().slice(0,31).map(item => item.phrase).join(" ");
   }
 
+  setDictionaryIndex() {
+    fetchDictionaryIndex().then((json) => {
+      this.setState({ dictionaryIndex: json })
+    });
+  }
+
   render() {
     let completedMaterial = this.presentCompletedMaterial();
     let upcomingMaterial = this.presentUpcomingMaterial();
@@ -1237,6 +1253,8 @@ class App extends Component {
                       <AsyncDictionaries
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                        setDictionaryIndex={this.setDictionaryIndex.bind(this)}
+                        dictionaryIndex={this.state.dictionaryIndex}
                         {...props}
                       />
                     </ErrorBoundary>

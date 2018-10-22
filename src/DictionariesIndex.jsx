@@ -3,34 +3,12 @@ import { Link } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
-import {
-  fetchDictionaryIndex,
-} from './typey-type';
 
 class DictionariesIndex extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dictionaryIndex: [{
-        "title": "Typey Type",
-        "category": "Typey Type",
-        "subcategory": "",
-        "path": process.env.PUBLIC_URL + "/dictionaries/typey-type/typey-type.json"
-      },
-      {
-        "title": "Steno",
-        "category": "Drills",
-        "subcategory": "",
-        "path": process.env.PUBLIC_URL + "/dictionaries/lessons/drills/steno/steno.json"
-      }]
-    }
-  }
-
-
   componentDidMount() {
-    fetchDictionaryIndex().then((json) => {
-      this.setState({ dictionaryIndex: json })
-    });
+    if (this.props.dictionaryIndex && this.props.dictionaryIndex.length < 2) {
+      this.props.setDictionaryIndex();
+    }
 
     if (this.mainHeading) {
       this.mainHeading.focus();
@@ -38,7 +16,7 @@ class DictionariesIndex extends Component {
   }
 
   render() {
-    const linkList = this.state.dictionaryIndex.map( (dictionary, index, array) => {
+    const linkList = this.props.dictionaryIndex.map( (dictionary, index, array) => {
       let author = 'Typey Type';
       if (dictionary.author && dictionary.author.length > 0) {
         author = dictionary.author;
