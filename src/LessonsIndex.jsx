@@ -25,7 +25,7 @@ class LessonsIndex extends Component {
         wordCountInIndex = ' · ' + wordCount + ' words';
       }
       return(
-        <li className="unstyled-list-item" key={ lesson.path }>
+        <li className="unstyled-list-item mb1" key={ lesson.path }>
           <Link to={`${this.props.match.url}${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link>{wordCountInIndex}
         </li>
       )
