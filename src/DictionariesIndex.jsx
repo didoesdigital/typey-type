@@ -132,7 +132,7 @@ class DictionariesIndex extends Component {
             </GoogleAnalytics.OutboundLink>.
           </p>
 
-          <h3>Dictionaries</h3>
+          <h3>Typey&nbsp;Type dictionaries</h3>
           <ul className="unstyled-list">{linkList}</ul>
 
           <p>Want to add another dictionary to this list?{' '}
