@@ -1331,10 +1331,12 @@ class App extends Component {
                 </div>
                 }
               />
-              <Route render={ () =>
+              <Route render={ (props) =>
                 <div>
                   <DocumentTitle title={'Typey Type | Page not found'}>
-                    <PageNotFound />
+                    <PageNotFound
+                      setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                    />
                   </DocumentTitle>
                 </div>
                 }
