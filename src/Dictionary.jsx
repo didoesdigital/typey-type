@@ -196,9 +196,9 @@ class Dictionary extends Component {
         let internalLink = '';
         let dictLink = this.state.dictionary.link;
         if (dictLink.startsWith("/typey-type") || dictLink.startsWith('/dictionaries/') || dictLink.startsWith('/lessons/') || dictLink.startsWith('/support')) {
-          internalLink = <p className="mt3"><Link to={dictLink}>Learn more</Link></p>;
+          internalLink = <p><Link to={dictLink}>Learn more</Link></p>;
           if (dictLink.startsWith(process.env.PUBLIC_URL + "/lessons")) {
-            internalLink = <p className="mt3"><Link to={dictLink}>Lesson: {this.state.dictionary.title}</Link></p>;
+            internalLink = <p><Link to={dictLink}>Lesson: {this.state.dictionary.title}</Link></p>;
           }
           // better check would be `//`, `http`
         } else {
@@ -240,8 +240,12 @@ class Dictionary extends Component {
               </div>
               <div className="p3 mx-auto mw-1024">
                 <div className="mw-568">
+                  {this.state.dictionary.author && !this.state.dictionary.tagline.includes('Loading') && (
+                    <p className="text-small text-uppercase de-emphasized mt3">Contributor: {this.state.dictionary.author}</p>
+                  )}
+
                   {this.state.dictionary.tagline && !this.state.dictionary.tagline.includes('Loading') && (
-                    <p className="mt3">{this.state.dictionary.tagline}</p>
+                    <p>{this.state.dictionary.tagline}</p>
                   )}
 
                   {this.state.dictionary.link && !this.state.dictionary.link.includes('/typey-type/support') && internalLink }
