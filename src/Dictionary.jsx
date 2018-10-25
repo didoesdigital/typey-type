@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { Link } from 'react-router-dom';
 import DictionaryNotFound from './DictionaryNotFound';
+import GoogleAnalytics from 'react-ga';
 import PseudoContentButton from './PseudoContentButton';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
@@ -162,6 +163,21 @@ class Dictionary extends Component {
     }
   }
 
+  downloadDictionary() {
+    let dictionaryPath;
+    if (this.state.dictionary && this.state.dictionary.path && this.state.dictionary.path !== "/dictionaries/typey-type/top-10.json") {
+      dictionaryPath = this.state.dictionary.path;
+    } else {
+      dictionaryPath = 'No dictionary path'
+    }
+
+    GoogleAnalytics.event({
+      category: 'Downloads',
+      action: 'Click',
+      label: dictionaryPath,
+    });
+  }
+
   render() {
     if (this.state.loadingError) {
       return <DictionaryNotFound path={this.props.path} location={this.props.location} dictionaryIndex={this.props.dictionaryIndex} />
@@ -233,7 +249,7 @@ class Dictionary extends Component {
                     </header>
                   </div>
                   <div className="flex mxn2">
-                    <a href={process.env.PUBLIC_URL + this.state.dictionary.path} download="" className="link-button link-button-ghost table-cell mr1">Download</a>
+                    <a href={process.env.PUBLIC_URL + this.state.dictionary.path} download="" onClick={this.downloadDictionary.bind(this)} className="link-button link-button-ghost table-cell mr1">Download</a>
                     <PseudoContentButton className="js-clipboard-button link-button link-button-ghost table-cell mr1 copy-to-clipboard" role="button" dataClipboardTarget="#js-dictionary-json-pre">Copy to clipboard</PseudoContentButton>
                   </div>
                 </div>
