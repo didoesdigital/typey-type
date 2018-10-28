@@ -52,7 +52,7 @@ class Home extends Component {
                   </Tooltip>{" "}
                   students practice and rapidly master stenography.</p>
                 <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-xs" alt='Demo of Typey Type for Stenographers in action' /></Link></div>
-                <Link to='/support' className="link-button dib" style={{lineHeight: 2}} role="button">Learn more</Link>
+                <Link to='/support' className="link-button dib" style={{lineHeight: 2}}>Learn more</Link>
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@ class Home extends Component {
               <div className="mw-584 ml-auto text-right">
                 <h3>Steno students</h3>
                 <p>After learning a little bit of steno theory, check out Typey&nbsp;Type’s fundamental <Link to="/lessons/">lessons</Link>, starting with <Link to="/lessons/fundamentals/one-syllable-words-with-simple-keys/">one-syllable words with simple keys</Link>. Before you start typing, customise “your settings” so spaces match your steno settings: spaces before words, spaces after words, or ignore spaces completely.</p>
-                <Link to='/lessons/fundamentals/one-syllable-words-with-simple-keys/' className="link-button dib" style={{lineHeight: 2}} role="button">Start typing</Link>
+                <Link to='/lessons/fundamentals/one-syllable-words-with-simple-keys/' className="link-button dib" style={{lineHeight: 2}}>Start typing</Link>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@ class Home extends Component {
               <div className="mw-584">
                 <h3 className="overline">Discover</h3>
                 <p>Discover 5–15 new briefs a day from various lessons, revealing their strokes as you learn to write them. Write them slowly, concentrating on accuracy and forming good habits around how you stroke word parts.</p>
-                <Link to='/lessons/fundamentals/one-syllable-words-with-simple-keys/' className="link-button dib" style={{lineHeight: 2}} role="button">Discover</Link>
+                <Link to='/lessons/fundamentals/one-syllable-words-with-simple-keys/' className="link-button dib" style={{lineHeight: 2}}>Discover</Link>
               </div>
             </div>
           </div>
@@ -78,8 +78,8 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3 className="overline">Revise</h3>
-                <p>Revise 100 briefs a day from a lesson with loads of words you want to memorise, like the top 10000 English words. Try to recall the briefs before revealing their strokes. Avoid fingerspelling or writing out the long forms of words, so you can memorise the best brief for every word. </p>
-                <Link to='/lessons/drills/top-10000-project-gutenberg-words/' className="link-button dib" style={{lineHeight: 2}} role="button">Revise</Link>
+                <p>Revise 50 briefs a day from a lesson with loads of words you want to memorise, like the top 10000 English words. Try to recall the briefs before revealing their strokes. Avoid fingerspelling or writing out the long forms of words, so you can memorise the best brief for every word. </p>
+                <Link to='/lessons/drills/top-10000-project-gutenberg-words/' className="link-button dib" style={{lineHeight: 2}}>Revise</Link>
               </div>
             </div>
           </div>
@@ -88,7 +88,7 @@ class Home extends Component {
               <div className="mw-584">
                 <h3 className="overline">Drill</h3>
                 <p>Regularly drill common words to build up your muscle memory and test your skills. Write as fast and furiously as you can, aiming for a high speed score. Pick specific drills that focus on a certain kind of brief or many similar words so you can associate them together.</p>
-                <Link to='/lessons/drills/pronouns/' className="link-button dib" style={{lineHeight: 2}} role="button">Drill</Link>
+                <Link to='/lessons/drills/pronouns/' className="link-button dib" style={{lineHeight: 2}}>Drill</Link>
               </div>
             </div>
           </div>
@@ -97,7 +97,7 @@ class Home extends Component {
               <div className="mw-584 ml-auto text-right">
                 <h3 className="overline">Practice</h3>
                 <p>Finally, practice longer lessons to mimic real usage as closely as possible. Write as fast as you can without causing misstrokes. Explore classic stories that use simple sentences and common words.</p>
-                <Link to='/lessons/stories/fables/belling-the-cat/' className="link-button dib" style={{lineHeight: 2}} role="button">Practice</Link>
+                <Link to='/lessons/stories/fables/belling-the-cat/' className="link-button dib" style={{lineHeight: 2}}>Practice</Link>
               </div>
             </div>
           </div>
@@ -106,7 +106,7 @@ class Home extends Component {
               <div className="mw-584">
                 <h3>Track your progress</h3>
                 <p>Typey&nbsp;Type tracks your progress automatically without signing in. To keep your progress safe, however, you need to save it out of Typey&nbsp;Type regularly.</p>
-                <Link to='/progress/' className="link-button dib" style={{lineHeight: 2}} role="button">Your progress</Link>
+                <Link to='/progress/' className="link-button dib" style={{lineHeight: 2}}>Your progress</Link>
               </div>
             </div>
           </div>
@@ -115,7 +115,25 @@ class Home extends Component {
               <div className="mw-584 ml-auto text-right">
                 <h3 className="tiny-rule--adjacent">Custom material</h3>
                 <p>Practice any text you like. Paste in a word list to create a custom lesson using Plover theory, or paste in words and strokes to use your own theory and material.</p>
-                <Link to='/lessons/custom' className="link-button dib" style={{lineHeight: 2}} role="button">Custom lessons</Link>
+                <Link to='/lessons/custom' className="link-button dib" style={{lineHeight: 2}}>Custom lessons</Link>
+              </div>
+            </div>
+          </div>
+          <div className="bg-info landing-page-section">
+            <div className="p3 mx-auto mw-1024">
+              <div className="mw-584">
+                <h3>Dictionaries</h3>
+                <p>In addition to Typey&nbsp;Type’s own dictionary, you can find recent Plover dictionaries, links to community dictionaries, and a dictionary for every lesson.</p>
+                <Link to='/dictionaries/' className="link-button dib" style={{lineHeight: 2}}>Dictionaries</Link>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white landing-page-section">
+            <div className="p3 mx-auto mw-1024">
+              <div className="mw-584 ml-auto text-right">
+                <h3>Your settings</h3>
+                <p>Choose the right settings for you. Try other steno layouts, blur words, or have words spoken to you.</p>
+                <Link to='/lessons/fundamentals/one-syllable-words-with-simple-keys/' className="link-button dib" style={{lineHeight: 2}}>Explore</Link>
               </div>
             </div>
           </div>
@@ -124,7 +142,7 @@ class Home extends Component {
               <div className="mw-584">
                 <h3>Want to get involved?</h3>
                 <p>Support DiDoesDigital, create lessons, or share your feedback. Every bit helps.</p>
-                <Link to='/contribute/' className="link-button dib" style={{lineHeight: 2}} role="button">Contribute</Link>
+                <Link to='/contribute/' className="link-button dib" style={{lineHeight: 2}}>Contribute</Link>
               </div>
             </div>
           </div>
@@ -159,7 +177,7 @@ class Home extends Component {
                 </p>
                 {
                   // eslint-disable-next-line
-                }<a href='https://didoesdigital.com/#newsletter' className="link-button dib" style={{lineHeight: 2}} role="button" target="_blank" aria-label="Steno news (external link opens in new tab)">Steno news</a>
+                }<a href='https://didoesdigital.com/#newsletter' className="link-button dib" style={{lineHeight: 2}} target="_blank" aria-label="Steno news (external link opens in new tab)">Steno news</a>
               </div>
             </div>
           </div>

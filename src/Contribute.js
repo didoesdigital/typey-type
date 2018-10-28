@@ -11,6 +11,7 @@ class Contribute extends Component {
       this.mainHeading.focus();
     }
   }
+
   render() {
     return (
       <main id="main">
@@ -55,7 +56,22 @@ class Contribute extends Component {
             </p>
 
             <h3 id="lessons">Lessons</h3>
-            <p>You can create your own <Link to="/lessons/custom">custom lesson</Link> and add it to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community's lessons (opens in new tab)</a>.</p>
+            <p>You can create your own <Link to="/lessons/custom">custom lesson</Link> and add it to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community’s lessons
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></a>.
+            </p>
             <p>If you have an idea for a new lesson, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="tweet @DiDoesDigital"
@@ -80,6 +96,49 @@ class Contribute extends Component {
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
               </GoogleAnalytics.OutboundLink>.</p>
+
+            <h3 id="dictionaries">Dictionaries</h3>
+            <p>To help the open steno community and Typey&nbsp;Type grow even faster, add your custom dictionaries to the{' '}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="community’s dictionaries"
+                aria-label="community’s dictionaries (external link opens in new tab)"
+                to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                community’s&nbsp;dictionaries
+                <Tooltip
+                  title="Opens in a new tab"
+                  animation="shift"
+                  arrow="true"
+                  className=""
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip>
+              </GoogleAnalytics.OutboundLink>.
+            </p>
+            <p>If you notice anything unexpected in a dictionary, especially Typey&nbsp;Type’s own dictionary, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=" target="_blank" id="ga--contribute--give-feedback-on-dictionary">share your feedback on that dictionary
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></a>.
+            </p>
 
             <h3 id="feedback">Feedback</h3>
             <p>
