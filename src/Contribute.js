@@ -123,7 +123,7 @@ class Contribute extends Component {
                 </Tooltip>
               </GoogleAnalytics.OutboundLink>.
             </p>
-            <p>If you notice anything unexpected in a dictionary, especially Typey&nbsp;Type’s own dictionary, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=" target="_blank" id="ga--contribute--give-feedback-on-dictionary">share your feedback on that dictionary
+            <p>If you notice anything unexpected in a dictionary, especially Typey&nbsp;Type’s own dictionary, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=" target="_blank" rel="noopener noreferrer" id="ga--contribute--give-feedback-on-dictionary">share your feedback on that dictionary
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
