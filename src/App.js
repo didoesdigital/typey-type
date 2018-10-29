@@ -809,7 +809,14 @@ class App extends Component {
 
     newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings, this.state.revisionMode);
 
-    if (this.state.userSettings.startFromWord > 0 && this.state.userSettings.limitNumberOfWords > 0) {
+    if (this.state.revisionMode && this.state.userSettings.limitNumberOfWords > 0) {
+      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
+    }
+    else if (this.state.revisionMode) {
+      // Don't do anything to limit material if it's a revision lesson without limitNumberOfWords set
+      // newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0);
+    }
+    else if (this.state.userSettings.startFromWord > 0 && this.state.userSettings.limitNumberOfWords > 0) {
       let startFrom = this.state.userSettings.startFromWord - 1;
       newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom, startFrom + this.state.userSettings.limitNumberOfWords);
     }

@@ -399,6 +399,7 @@ class Lesson extends Component {
                     handleRepetitionsChange={this.props.handleRepetitionsChange}
                     hideOtherSettings={this.props.hideOtherSettings}
                     maxStartFromWord={this.props.lessonLength}
+                    revisionMode={this.props.revisionMode}
                     setAnnouncementMessage={this.props.setAnnouncementMessage}
                     toggleHideOtherSettings={this.props.toggleHideOtherSettings}
                     totalWordCount={this.props.totalWordCount}

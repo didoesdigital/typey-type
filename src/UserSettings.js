@@ -445,7 +445,7 @@ class UserSettings extends Component {
                         autoCorrect="on"
                         autoFocus={false}
                         className="form-control w6"
-                        disabled={this.props.disableUserSettings}
+                        disabled={this.props.disableUserSettings || this.props.revisionMode}
                         id="startFromWord"
                         max={this.props.maxStartFromWord || 30000}
                         min={1}
