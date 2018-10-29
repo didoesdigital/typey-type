@@ -453,7 +453,7 @@ class UserSettings extends Component {
                         onChange={this.props.handleStartFromWordChange}
                         precision={0}
                         spellCheck="false"
-                        step={100}
+                        step={1}
                         style={grabStyle()}
                         type="number"
                         value={this.props.userSettings.startFromWord}

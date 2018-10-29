@@ -810,12 +810,15 @@ class App extends Component {
     newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings, this.state.revisionMode);
 
     if (this.state.userSettings.limitNumberOfWords > 0) {
-      if (this.state.userSettings.startFromWord && this.state.userSettings.startFromWord > 0 && this.state.userSettings.startFromWord < newLesson.presentedMaterial.length) {
+      if (this.state.userSettings.startFromWord && this.state.userSettings.startFromWord > 0) {
         let startFrom = this.state.userSettings.startFromWord - 1;
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom, startFrom + this.state.userSettings.limitNumberOfWords);
       } else {
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
       }
+    } else if (this.state.userSettings.startFromWord && this.state.userSettings.startFromWord > 0) {
+      let startFrom = this.state.userSettings.startFromWord - 1;
+      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom);
     }
     newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
 
