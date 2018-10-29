@@ -1402,6 +1402,9 @@ function replaceSmartTypographyInPresentedMaterial(presentedMaterial, userSettin
       // ellipsis
       replaceSmartTypographyInPhraseAndStroke(presentedMaterial[i], /[…]/g, "...", /^SKWR-RBGSZ$/, 'HR-PS');
 
+      // grave used as left single quote
+      replaceSmartTypographyInPhraseAndStroke(presentedMaterial[i], /[`]/g, "'", /^(TR\*RL|TR-RL|KH-FG|KH\*FG)$/, 'A*E');
+
       // curly left double quote
       replaceSmartTypographyInPhraseAndStroke(presentedMaterial[i], /[“]/g, '"', /^KW-GS$/, 'KW-GS');
 
