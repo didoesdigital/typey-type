@@ -447,7 +447,7 @@ class UserSettings extends Component {
                         className="form-control w6"
                         disabled={this.props.disableUserSettings}
                         id="startFromWord"
-                        max={this.props.maxStartFromWord || 10000}
+                        max={this.props.maxStartFromWord || 30000}
                         min={1}
                         name="startFromWord"
                         onChange={this.props.handleStartFromWordChange}
