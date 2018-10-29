@@ -609,6 +609,7 @@ function loadPersonalPreferences() {
     simpleTypography: true,
     retainedWords: true,
     limitNumberOfWords: 45,
+    startFromWord: 1,
     newWords: true,
     repetitions: 3,
     showScoresWhileTyping: true,

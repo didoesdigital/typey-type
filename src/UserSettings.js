@@ -392,13 +392,23 @@ class UserSettings extends Component {
                       </select>
                     </div>
 
-                    <div className="clearfix mb2">
+                    <div className="mb2">
                       <label className="mb1 db">Steno layout</label>
                       <select name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control w6">
                         <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
                         <option value="stenoLayoutPalantype">Palantype</option>
                         <option value="stenoLayoutDanishSteno">Danish steno</option>
                         <option value="stenoLayoutKoreanModernCSteno">Korean Modern C steno</option>
+                      </select>
+                    </div>
+
+                    <div className="mb1">
+                      <label className="mb1 db">Sort</label>
+                      <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
+                        <option value="sortOff">Lesson default</option>
+                        <option value="sortRandom">Random</option>
+                        <option value="sortNew">Newest words first</option>
+                        <option value="sortOld">Oldest words first</option>
                       </select>
                     </div>
                   </div>
@@ -427,8 +437,32 @@ class UserSettings extends Component {
                       />
                     </div>
 
-                    <label htmlFor="repetitions">Repetitions</label>
+                    <label htmlFor="startFromWord">Start from word</label>
                     <div className="mb2">
+                      <NumericInput
+                        autoCapitalize="off"
+                        autoComplete="on"
+                        autoCorrect="on"
+                        autoFocus={false}
+                        className="form-control w6"
+                        disabled={this.props.disableUserSettings}
+                        id="startFromWord"
+                        max={this.props.maxStartFromWord || 10000}
+                        min={1}
+                        name="startFromWord"
+                        onChange={this.props.handleStartFromWordChange}
+                        precision={0}
+                        spellCheck="false"
+                        step={100}
+                        style={grabStyle()}
+                        type="number"
+                        value={this.props.userSettings.startFromWord}
+                        snap
+                      />
+                    </div>
+
+                    <label htmlFor="repetitions">Repetitions</label>
+                    <div className="mb1">
                       <NumericInput
                         autoCapitalize="off"
                         autoComplete="on"
@@ -449,16 +483,6 @@ class UserSettings extends Component {
                         value={this.props.userSettings.repetitions}
                         snap
                       />
-                    </div>
-
-                    <div className="mb1">
-                      <label className="mb1 db">Sort</label>
-                      <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
-                        <option value="sortOff">Lesson default</option>
-                        <option value="sortRandom">Random</option>
-                        <option value="sortNew">Newest words first</option>
-                        <option value="sortOld">Oldest words first</option>
-                      </select>
                     </div>
 
                   </div>

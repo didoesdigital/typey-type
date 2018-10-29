@@ -384,6 +384,24 @@ class App extends Component {
     return value;
   }
 
+  handleStartFromWordChange(event) {
+    let currentState = this.state.userSettings;
+    let newState = Object.assign({}, currentState);
+
+    const name = "startFromWord"
+    const value = event;
+
+    newState[name] = value;
+
+    this.setState({userSettings: newState}, () => {
+      if (!(name === 'caseSensitive')) {
+        this.setupLesson();
+      }
+      writePersonalPreferences('userSettings', this.state.userSettings);
+    });
+    return value;
+  }
+
   handleRepetitionsChange(event) {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
@@ -789,12 +807,17 @@ class App extends Component {
       newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial);
     }
 
-    newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
     newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings, this.state.revisionMode);
 
     if (this.state.userSettings.limitNumberOfWords > 0) {
-      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
+      if (this.state.userSettings.startFromWord && this.state.userSettings.startFromWord > 0 && this.state.userSettings.startFromWord < newLesson.presentedMaterial.length) {
+        let startFrom = this.state.userSettings.startFromWord - 1;
+        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom, startFrom + this.state.userSettings.limitNumberOfWords);
+      } else {
+        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
+      }
     }
+    newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
 
     let reps = this.state.userSettings.repetitions;
     let repeatedLesson = newLesson.presentedMaterial;
@@ -1313,6 +1336,7 @@ class App extends Component {
                         currentStroke={presentedMaterialCurrentItem.stroke}
                         disableUserSettings={this.state.disableUserSettings}
                         handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
+                        handleStartFromWordChange={this.handleStartFromWordChange.bind(this)}
                         handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
                         hideOtherSettings={this.state.hideOtherSettings}
                         metWords={this.state.metWords}
