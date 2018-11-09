@@ -808,6 +808,12 @@ class App extends Component {
 
     this.setState({userSettings: newSettings}, () => {
       writePersonalPreferences('userSettings', this.state.userSettings);
+
+      this.props.history.replace({
+        pathname: this.props.location.pathname,
+        search: ""
+      });
+
       if (this.state.userSettings.simpleTypography) {
         newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial);
       }
