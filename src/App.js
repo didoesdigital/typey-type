@@ -1450,6 +1450,7 @@ class App extends Component {
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         setCustomLesson={this.setCustomLesson.bind(this)}
                         setupRevisionLesson={this.setupRevisionLesson.bind(this)}
+                        setupLesson={this.setupLesson.bind(this)}
                         settings={this.state.lesson.settings}
                         showStrokesInLesson={this.state.showStrokesInLesson}
                         targetStrokeCount={this.state.targetStrokeCount}

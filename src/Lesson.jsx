@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { IconClosingCross } from './Icon';
 import { Link } from 'react-router-dom';
+import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
 import LessonNotFound from './LessonNotFound';
@@ -42,6 +43,20 @@ class Lesson extends Component {
     }
     else if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
+    }
+
+    const parsedParams = queryString.parse(this.props.location.search);
+    let hasSettingsParams = false;
+
+    if (Object.keys(parsedParams).some((param) => {
+      return this.props.userSettings.hasOwnProperty(param);
+      })) {
+      hasSettingsParams = true;
+    }
+
+    if (hasSettingsParams) {
+      this.props.setupLesson();
+      hasSettingsParams = false;
     }
 
     if (this.mainHeading) {
