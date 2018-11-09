@@ -804,8 +804,10 @@ class App extends Component {
 
     this.stopTimer();
 
-    this.setState({userSettings: this.state.userSettings}, () => {
+    let newSettings = Object.assign({}, this.state.userSettings);
 
+    this.setState({userSettings: newSettings}, () => {
+      writePersonalPreferences('userSettings', this.state.userSettings);
       if (this.state.userSettings.simpleTypography) {
         newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial);
       }
