@@ -804,66 +804,70 @@ class App extends Component {
 
     this.stopTimer();
 
-    if (this.state.userSettings.simpleTypography) {
-      newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial);
-    }
+    this.setState({userSettings: this.state.userSettings}, () => {
 
-    newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings, this.state.revisionMode);
-
-    if (this.state.revisionMode && this.state.userSettings.limitNumberOfWords > 0) {
-      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
-    }
-    else if (this.state.revisionMode) {
-      // Don't do anything to limit material if it's a revision lesson without limitNumberOfWords set
-      // newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0);
-    }
-    else if (this.state.userSettings.startFromWord > 0 && this.state.userSettings.limitNumberOfWords > 0) {
-      let startFrom = this.state.userSettings.startFromWord - 1;
-      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom, startFrom + this.state.userSettings.limitNumberOfWords);
-    }
-    else if (this.state.userSettings.startFromWord > 0) {
-      let startFrom = this.state.userSettings.startFromWord - 1;
-      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom);
-    }
-    else if (this.state.userSettings.limitNumberOfWords > 0) {
-      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
-    }
-
-    newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
-
-    let reps = this.state.userSettings.repetitions;
-    let repeatedLesson = newLesson.presentedMaterial;
-    if (reps > 0) {
-      for (let i = 1; i < reps && i < 30; i++) {
-        repeatedLesson = repeatedLesson.concat(newLesson.presentedMaterial);
+      if (this.state.userSettings.simpleTypography) {
+        newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial);
       }
-    }
-    newLesson.presentedMaterial = repeatedLesson;
-    newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
-    let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
+      newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings, this.state.revisionMode);
 
-    this.setState({
-      actualText: ``,
-      announcementMessage: 'Navigated to: ' + newLesson.title,
-      currentPhraseAttempts: [],
-      currentLessonStrokes: [],
-      disableUserSettings: false,
-      numberOfMatchedChars: 0,
-      previousCompletedPhraseAsTyped: '',
-      repetitionsRemaining: reps,
-      startTime: null,
-      timer: null,
-      targetStrokeCount: target,
-      totalNumberOfMatchedChars: 0,
-      totalNumberOfMatchedWords: 0,
-      totalNumberOfNewWordsMet: 0,
-      totalNumberOfLowExposuresSeen: 0,
-      totalNumberOfRetainedWords: 0,
-      totalNumberOfMistypedWords: 0,
-      totalNumberOfHintedWords: 0,
-      lesson: newLesson,
-      currentPhraseID: 0
+      if (this.state.revisionMode && this.state.userSettings.limitNumberOfWords > 0) {
+        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
+      }
+      else if (this.state.revisionMode) {
+        // Don't do anything to limit material if it's a revision lesson without limitNumberOfWords set
+        // newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0);
+      }
+      else if (this.state.userSettings.startFromWord > 0 && this.state.userSettings.limitNumberOfWords > 0) {
+        let startFrom = this.state.userSettings.startFromWord - 1;
+        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom, startFrom + this.state.userSettings.limitNumberOfWords);
+      }
+      else if (this.state.userSettings.startFromWord > 0) {
+        let startFrom = this.state.userSettings.startFromWord - 1;
+        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom);
+      }
+      else if (this.state.userSettings.limitNumberOfWords > 0) {
+        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
+      }
+
+      newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
+
+      let reps = this.state.userSettings.repetitions;
+      let repeatedLesson = newLesson.presentedMaterial;
+      if (reps > 0) {
+        for (let i = 1; i < reps && i < 30; i++) {
+          repeatedLesson = repeatedLesson.concat(newLesson.presentedMaterial);
+        }
+      }
+      newLesson.presentedMaterial = repeatedLesson;
+      newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
+
+      let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
+
+      this.setState({
+        actualText: ``,
+        announcementMessage: 'Navigated to: ' + newLesson.title,
+        currentPhraseAttempts: [],
+        currentLessonStrokes: [],
+        disableUserSettings: false,
+        numberOfMatchedChars: 0,
+        previousCompletedPhraseAsTyped: '',
+        repetitionsRemaining: reps,
+        startTime: null,
+        timer: null,
+        targetStrokeCount: target,
+        totalNumberOfMatchedChars: 0,
+        totalNumberOfMatchedWords: 0,
+        totalNumberOfNewWordsMet: 0,
+        totalNumberOfLowExposuresSeen: 0,
+        totalNumberOfRetainedWords: 0,
+        totalNumberOfMistypedWords: 0,
+        totalNumberOfHintedWords: 0,
+        lesson: newLesson,
+        currentPhraseID: 0
+      });
+
     });
   }
 
