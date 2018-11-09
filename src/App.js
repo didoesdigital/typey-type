@@ -27,6 +27,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
+import queryString from 'query-string';
 import DocumentTitle from 'react-document-title';
 import Loadable from 'react-loadable';
 import PageLoading from './PageLoading';
@@ -804,7 +805,82 @@ class App extends Component {
 
     this.stopTimer();
 
+    const parsedParams = queryString.parse(this.props.location.search);
+
     let newSettings = Object.assign({}, this.state.userSettings);
+    for (const [param, paramVal] of Object.entries(parsedParams)) {
+      if (param in this.state.userSettings) {
+        const booleanParams = [
+          'blurMaterial',
+          'caseSensitive',
+          'simpleTypography',
+          'retainedWords',
+          'newWords',
+          'showScoresWhileTyping',
+          'showStrokes',
+          'showStrokesAsDiagrams',
+          'hideStrokesOnLastRepetition',
+          'speakMaterial',
+          'seenWords'
+        ];
+
+        if (booleanParams.includes(param)) {
+          if (paramVal === "1") { newSettings[param] = true; }
+          if (paramVal === "0") { newSettings[param] = false; }
+        }
+
+        const spacePlacementValidValues = [
+          'spaceOff',
+          'spaceBeforeOutput',
+          'spaceAfterOutput',
+          'spaceExact'
+        ];
+
+        if (param === 'spacePlacement' && spacePlacementValidValues.includes(paramVal)) {
+          newSettings[param] = paramVal;
+        }
+
+        const sortOrderValidValues = [
+          'sortOff',
+          'sortNew',
+          'sortOld',
+          'sortRandom'
+        ];
+
+        if (param === 'sortOrder' && sortOrderValidValues.includes(paramVal)) {
+          newSettings[param] = paramVal;
+        }
+
+        const studyValidValues = [
+          'discover',
+          'revise',
+          'drill',
+          'practice'
+        ];
+
+        if (param === 'study' && studyValidValues.includes(paramVal)) {
+          newSettings[param] = paramVal;
+        }
+
+        const stenoLayoutValidValues = [
+          'stenoLayoutAmericanSteno',
+          'stenoLayoutPalantype',
+          'stenoLayoutDanishSteno',
+          'stenoLayoutItalianMichelaSteno',
+          'stenoLayoutItalianMelaniSteno',
+          'stenoLayoutKoreanModernC',
+          'stenoLayoutKoreanModernS'
+        ];
+
+        if (param === 'stenoLayout' && stenoLayoutValidValues.includes(paramVal)) {
+          newSettings[param] = paramVal;
+        }
+
+        if ((param === 'repetitions' || param === 'limitNumberOfWords' || param === 'startFromWord') && isNormalInteger(paramVal)) {
+          newSettings[param] = paramVal;
+        }
+      }
+    }
 
     this.setState({userSettings: newSettings}, () => {
       writePersonalPreferences('userSettings', this.state.userSettings);
@@ -1582,6 +1658,11 @@ function isElement(obj) {
       (obj.nodeType===1) && (typeof obj.style === "object") &&
       (typeof obj.ownerDocument ==="object");
   }
+}
+
+function isNormalInteger(str) {
+  let n = Math.floor(Number(str));
+  return n !== Infinity && String(n) === str && n >= 0;
 }
 
 export default App;
