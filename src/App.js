@@ -135,6 +135,7 @@ class App extends Component {
         speakMaterial: false,
         sortOrder: 'sortOff',
         seenWords: true,
+        startFromWord: 1,
         study: 'discover',
         stenoLayout: 'stenoLayoutAmericanSteno' // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianSteno' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
       },
