@@ -226,7 +226,7 @@ class Progress extends Component {
     // console.log("Your memorised word count: " + yourMemorisedWordCount);
     // TODO: write a pluralisation function for this monstrosity and add tests
     let progressSummaryAndLinks = (
-      <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words.</p>
+      <p>You’ve successfully typed {yourWordCount} words without hints or misstrokes.</p>
     );
     if (yourSeenWordCount === 1 && yourMemorisedWordCount === 0) {
       progressSummaryAndLinks = (
