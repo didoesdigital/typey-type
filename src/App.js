@@ -1209,7 +1209,7 @@ class App extends Component {
     if (utterance === ".") { utterance = "full stop"; }
     if (utterance === ")") { utterance = "closing bracket"; }
     if (utterance === "!") { utterance = "exclamation mark"; }
-    if (SpeechSynthesisUtterance) {
+    if (window.SpeechSynthesisUtterance) {
       let utterThis = new SpeechSynthesisUtterance(utterance);
       synth.speak(utterThis);
     }
