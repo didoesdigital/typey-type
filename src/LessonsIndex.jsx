@@ -48,7 +48,9 @@ class LessonsIndex extends Component {
             <GoogleAnalytics.OutboundLink
               eventLabel="community's lessons"
               to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
-              target="_blank">
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               community’s lessons
               <Tooltip
                 title="Opens in a new tab"

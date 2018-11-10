@@ -40,7 +40,7 @@ class DictionaryNotFound extends Component {
               <ul>
                 <li><Link to="/dictionaries">All dictionaries</Link></li>
               </ul>
-              <p>Or <a href={this.prefillSurveyLink()} target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--dictionary--give-feedback">let me know (form opens in a new tab)</a></p>
+              <p>Or <a href={this.prefillSurveyLink()} target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--dictionary--give-feedback">let me know (form opens in a new tab)</a></p>
             </div>
           </div>
         </main>

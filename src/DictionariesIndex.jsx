@@ -42,7 +42,7 @@ class DictionariesIndex extends Component {
           }
         } else {
           learnMoreLink = (
-            <span> · <a href={dictionary.link} target='_blank'>Learn more
+            <span> · <a href={dictionary.link} target='_blank' rel='noopener noreferrer'>Learn more
               <Tooltip
                 title="Opens in a new tab"
                 animation="shift"
@@ -90,7 +90,9 @@ class DictionariesIndex extends Component {
               eventLabel="community’s dictionaries"
               aria-label="community’s dictionaries (external link opens in new tab)"
               to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
-              target="_blank">
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               community’s dictionaries
               <Tooltip
                 title="Opens in a new tab"
@@ -113,7 +115,9 @@ class DictionariesIndex extends Component {
               eventLabel="Stenodict"
               aria-label="Stenodict (external link opens in new tab)"
               to="http://www.openstenoproject.org/stenodict/"
-              target="_blank">
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Stenodict
               <Tooltip
                 title="Opens in a new tab"

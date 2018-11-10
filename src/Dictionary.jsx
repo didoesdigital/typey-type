@@ -219,7 +219,7 @@ class Dictionary extends Component {
           // better check would be `//`, `http`
         } else {
           externalLink = (
-            <p className="mt3"><a href={this.state.dictionary.link} target='_blank'>Learn more
+            <p className="mt3"><a href={this.state.dictionary.link} target='_blank' rel='noopener noreferrer'>Learn more
               <Tooltip
                 title="Opens in a new tab"
                 animation="shift"
@@ -278,7 +278,7 @@ class Dictionary extends Component {
                   }
 
                 </div>
-                <p><a href={this.prefillSurveyLink()} target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--dictionary--give-feedback">Give feedback on this dictionary (form opens in a new tab)</a></p>
+                <p><a href={this.prefillSurveyLink()} target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--dictionary--give-feedback">Give feedback on this dictionary (form opens in a new tab)</a></p>
               </div>
             </main>
           </DocumentTitle>

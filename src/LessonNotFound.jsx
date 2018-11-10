@@ -61,7 +61,7 @@ class LessonNotFound extends Component {
                 <li><Link to="/lessons/drills/top-100-words/">Top 100 words lesson</Link></li>
                 {possibleBetterPath.length > 0 && <li><Link to={possibleBetterPath}>{possibleBetterLessonTitle} lesson</Link></li>}
               </ul>
-              <p>Or <a href={this.prefillSurveyLink()} className="" target="_blank" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">let me know (form opens in a new tab)</a></p>
+              <p>Or <a href={this.prefillSurveyLink()} className="" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">let me know (form opens in a new tab)</a></p>
             </div>
           </div>
         </main>

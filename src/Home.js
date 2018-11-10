@@ -176,8 +176,7 @@ class Home extends Component {
                   </GoogleAnalytics.OutboundLink>.
                 </p>
                 {
-                  // eslint-disable-next-line
-                }<a href='https://didoesdigital.com/#newsletter' className="link-button dib" style={{lineHeight: 2}} target="_blank" aria-label="Steno news (external link opens in new tab)">Steno news</a>
+                }<a href='https://didoesdigital.com/#newsletter' className="link-button dib" style={{lineHeight: 2}} target="_blank" rel="noopener noreferrer" aria-label="Steno news (external link opens in new tab)">Steno news</a>
               </div>
             </div>
           </div>
