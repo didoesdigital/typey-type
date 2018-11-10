@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
 import PseudoContentButton from './PseudoContentButton';
-import { IconCheckmark, IconTriangleRight } from './Icon';
-import { Link } from 'react-router-dom';
-import { loadPersonalPreferences } from './typey-type';
-import {
-  Tooltip,
-} from 'react-tippy';
+import RecommendationDescription from './RecommendationDescription';
+import { IconExternal, IconCheckmark, IconTriangleRight } from './Icon';
+import { Link, Redirect } from 'react-router-dom';
+import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 
 class Progress extends Component {
@@ -16,6 +14,11 @@ class Progress extends Component {
       flashWarning: '',
       reducedSaveAndLoad: false,
       showLoadInput: false,
+      progressPercent: 0,
+      yourWordCount: 0,
+      yourSeenWordCount: 0,
+      yourMemorisedWordCount: 0,
+      toRecommendedNextLesson: false
     }
   }
 
@@ -24,15 +27,36 @@ class Progress extends Component {
       this.mainHeading.focus();
     }
 
-    this.setState({showLoadInput: false});
+    this.setState({ showLoadInput: false, toRecommendedNextLesson: false });
 
-    let metWords = loadPersonalPreferences()[0];
-    if (Object.keys(metWords).length > 2000) {
+    if (Object.keys(this.props.metWords).length > 2000) {
       this.setState({reducedSaveAndLoad: true});
     } else {
       this.setState({
         reducedSaveAndLoad: false,
         showLoadInput: false
+      });
+    }
+
+    let yourWordCount = Object.keys(this.props.metWords).length || 0;
+    let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
+
+    this.setState({
+      progressPercent: progressPercent,
+      yourWordCount: yourWordCount,
+      yourSeenWordCount: this.props.yourSeenWordCount,
+      yourMemorisedWordCount: this.props.yourMemorisedWordCount
+    });
+  }
+
+  startRecommendedStep(e) {
+    if (this.props.recommendedNextLesson.link.startsWith("http")) {
+      this.props.updateRecommendationHistory(this.props.recommendationHistory);
+    }
+    else {
+      e.preventDefault();
+      this.setState({ toRecommendedNextLesson: true }, () => {
+        this.props.updateRecommendationHistory(this.props.recommendationHistory);
       });
     }
   }
@@ -70,13 +94,26 @@ class Progress extends Component {
     });
   };
 
+  recommendAnotherLesson() {
+    // let newRecommendationHistory = this.props.updateRecommendationHistory(this.props.recommendedNextLesson['studyType']);
+    this.props.updateRecommendationHistory(this.props.recommendationHistory);
+
+    if (this.recommendationSkipButton) {
+      this.recommendationSkipButton.focus();
+    }
+  }
+
   render () {
+    if (this.state.toRecommendedNextLesson === true) {
+      return <Redirect push to={this.props.recommendedNextLesson.link} />
+    }
+
     let lessonsProgressFromTypeyType = this.props.lessonsProgress;
     const linkList = this.props.lessonIndex.map( (lesson) => {
       let lessonsubtitle = '';
       let lessonWordCount = 0;
       let lessonWordCountInIndex = '';
-      let numberOfWordsSeen = 0;
+      let numberOfWordsSeenOrMemorised = 0;
       let lessonCompletion;
       if (lesson.subtitle.length > 0) {
         lessonsubtitle = ': '+lesson.subtitle;
@@ -86,8 +123,11 @@ class Progress extends Component {
         lessonWordCountInIndex = '' + lessonWordCount;
       }
       if (lessonsProgressFromTypeyType && lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]) {
-        numberOfWordsSeen = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path].numberOfWordsSeen;
-        if ((numberOfWordsSeen >= lessonWordCountInIndex) || (numberOfWordsSeen > 100)) {
+        let seen = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path].numberOfWordsSeen || 0;
+        let memorised = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path].numberOfWordsMemorised || 0;
+        numberOfWordsSeenOrMemorised = seen + memorised;
+        if ((numberOfWordsSeenOrMemorised >= lessonWordCountInIndex) || (numberOfWordsSeenOrMemorised > 100)) {
+          if (numberOfWordsSeenOrMemorised >= lessonWordCountInIndex) { numberOfWordsSeenOrMemorised = lessonWordCountInIndex; }
           lessonCompletion = (
             <Tooltip
               title="100 words done or lesson complete"
@@ -105,7 +145,7 @@ class Progress extends Component {
               <span className="visually-hidden">100 words done or lesson complete</span>
             </Tooltip>
           );
-        } else if (numberOfWordsSeen > 0) {
+        } else if (numberOfWordsSeenOrMemorised > 0) {
           lessonCompletion = (
                 <Tooltip
                   title="In progress"
@@ -149,11 +189,11 @@ class Progress extends Component {
       }
       if (lesson.category === "Fundamentals") {
         return(
-          <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeen} of {lessonWordCountInIndex}</small></li>
+          <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeenOrMemorised} of {lessonWordCountInIndex}</small></li>
         )
       } else if (lesson.category === "Drills" && lesson.title.startsWith("Top 100")) {
         return(
-          <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeen} of {lessonWordCountInIndex}</small></li>
+          <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeenOrMemorised} of {lessonWordCountInIndex}</small></li>
         )
       } else {
         return "";
@@ -161,10 +201,10 @@ class Progress extends Component {
     });
 
     let metWordsFromTypeyType = JSON.stringify(this.props.metWords);
-    let yourWordCount = Object.keys(this.props.metWords).length || 0;
-    let yourSeenWordCount = Math.round(Object.values(this.props.metWords).filter( timesSeen => timesSeen > 0 && timesSeen < 30).length) || 0;
-    let yourMemorisedWordCount = Math.round(Object.values(this.props.metWords).filter( timesSeen => timesSeen > 29).length) || 0;
-    let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
+    // let yourWordCount = Object.keys(this.props.metWords).length || 0;
+    // let yourSeenWordCount = Math.round(Object.values(this.props.metWords).filter( timesSeen => timesSeen > 0 && timesSeen < 30).length) || 0;
+    // let yourMemorisedWordCount = Math.round(Object.values(this.props.metWords).filter( timesSeen => timesSeen > 29).length) || 0;
+    // let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
 
     let saveAndLoadPanels = (
       <div className={this.state.reducedSaveAndLoad ? "visually-hidden" : "progress-layout pl3 pr3 pt3 mx-auto mw-1024"}>
@@ -243,48 +283,245 @@ class Progress extends Component {
     // console.log("Your memorised word count: " + yourMemorisedWordCount);
     // TODO: write a pluralisation function for this monstrosity and add tests
     let progressSummaryAndLinks = (
-      <p>You’ve successfully typed {yourWordCount} words without hints or misstrokes.</p>
+      <p>You’ve successfully typed {this.state.yourWordCount} words without hints or misstrokes.</p>
     );
-    if (yourSeenWordCount === 1 && yourMemorisedWordCount === 0) {
+    if (this.state.yourSeenWordCount === 1 && this.state.yourMemorisedWordCount === 0) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} word without misstrokes. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {this.state.yourWordCount} word without misstrokes. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
-    if (yourSeenWordCount === 1 && yourMemorisedWordCount === 1) {
+    if (this.state.yourSeenWordCount === 1 && this.state.yourMemorisedWordCount === 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
-    if (yourSeenWordCount === 1 && yourMemorisedWordCount > 1) {
+    if (this.state.yourSeenWordCount === 1 && this.state.yourMemorisedWordCount > 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
-    if (yourSeenWordCount === 0 && yourMemorisedWordCount === 1) {
+    if (this.state.yourSeenWordCount === 0 && this.state.yourMemorisedWordCount === 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} word without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {this.state.yourWordCount} word without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
-    if (yourSeenWordCount === 0 && yourMemorisedWordCount > 1) {
+    if (this.state.yourSeenWordCount === 0 && this.state.yourMemorisedWordCount > 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
-    if (yourSeenWordCount > 1 && yourMemorisedWordCount === 0) {
+    if (this.state.yourSeenWordCount > 1 && this.state.yourMemorisedWordCount === 0) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. You’re {this.state.progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
-    if (yourSeenWordCount > 1 && yourMemorisedWordCount === 1) {
+    if (this.state.yourSeenWordCount > 1 && this.state.yourMemorisedWordCount === 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;all your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. You’re {this.state.progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;all your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
-    if (yourSeenWordCount > 1 && yourMemorisedWordCount > 1) {
+    if (this.state.yourSeenWordCount > 1 && this.state.yourMemorisedWordCount > 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;all your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. You’re {this.state.progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;all your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
+
+    let recommendedNextLesson;
+    let recommendedNextLessonHeading;
+    let recommendedLink;
+    let recommendedLinkTitle;
+    let metadataStats;
+    let studyType;
+    let recommendedNextLessonCallToActionButton;
+
+    if (this.props.recommendedNextLesson !== undefined) {
+      metadataStats = (
+        <React.Fragment>
+          {this.props.recommendedNextLesson.limitNumberOfWords} words | {this.props.recommendedNextLesson.repetitions} repetitions
+        </React.Fragment>
+      );
+
+      studyType = this.props.recommendedNextLesson.studyType;
+      if (studyType === "error") {
+        metadataStats = (
+          <React.Fragment>
+            No recommendation.
+          </React.Fragment>
+        );
+      }
+      else if (studyType === "wildcard") {
+        metadataStats = (
+          <React.Fragment>
+            External link.
+          </React.Fragment>
+        );
+      }
+      else if (studyType === "game") {
+        metadataStats = (
+          <React.Fragment>
+            Increase your speed while breaking cargo
+          </React.Fragment>
+        );
+      }
+      else if (studyType === "compete") {
+        metadataStats = (
+          <React.Fragment>
+            Increase your speed while racing against others
+          </React.Fragment>
+        );
+      }
+      else if (studyType === "break") {
+        metadataStats = (
+          <React.Fragment>
+            Take 5&nbsp;minutes or come&nbsp;back in 4+&nbsp;hours.
+          </React.Fragment>
+        );
+      }
+      else if (this.props.recommendedNextLesson.repetitions === 1) {
+        metadataStats = (
+          <React.Fragment>
+            {this.props.recommendedNextLesson.limitNumberOfWords} words | {this.props.recommendedNextLesson.repetitions} repetition
+          </React.Fragment>
+        );
+      }
+
+      if (this.props.recommendedNextLesson && this.props.recommendedNextLesson.lessonTitle && this.props.recommendedNextLesson.lessonTitle.length < 10) {
+        metadataStats = (
+          <React.Fragment>
+            {this.props.recommendedNextLesson.limitNumberOfWords} words <br /> {this.props.recommendedNextLesson.repetitions} repetitions
+          </React.Fragment>
+        );
+        if (this.props.recommendedNextLesson.repetitions === 1) {
+          metadataStats = (
+            <React.Fragment>
+              {this.props.recommendedNextLesson.limitNumberOfWords} words <br /> {this.props.recommendedNextLesson.repetitions} repetition
+            </React.Fragment>
+          );
+        }
+      }
+
+      switch (this.props.recommendedNextLesson.studyType) {
+        case "error":
+          recommendedNextLessonCallToActionButton = "Practice";
+          recommendedNextLessonHeading = <h3>Recommended: error</h3>;
+          break;
+        case "practice":
+          recommendedNextLessonCallToActionButton = "Practice";
+          recommendedNextLessonHeading = <h3>Recommended: practice</h3>;
+          break;
+        case "drill":
+          recommendedNextLessonCallToActionButton = "Drill";
+          recommendedNextLessonHeading = <h3>Recommended: drill</h3>;
+          break;
+        case "revise":
+          recommendedNextLessonCallToActionButton = "Revise";
+          recommendedNextLessonHeading = <h3>Recommended: revise</h3>;
+          break;
+        case "discover":
+          recommendedNextLessonCallToActionButton = "Discover";
+          recommendedNextLessonHeading = <h3>Recommended: discover</h3>;
+          break;
+        case "break":
+          recommendedNextLessonCallToActionButton = "Take a break";
+          recommendedNextLessonHeading = <h3>Recommended: break</h3>;
+          break;
+        case "game":
+          recommendedNextLessonCallToActionButton = "Play";
+          recommendedNextLessonHeading = <h3>Recommended: game</h3>;
+          break;
+        case "compete":
+          recommendedNextLessonCallToActionButton = "Compete";
+          recommendedNextLessonHeading = <h3>Recommended: compete</h3>;
+          break;
+        default:
+          recommendedNextLessonCallToActionButton = "Start now";
+          recommendedNextLessonHeading = <h3>Recommended: practice</h3>;
+          break;
+      }
+
+      if (this.props.recommendedNextLesson.link.startsWith('http')) {
+        recommendedLink = (
+          <GoogleAnalytics.OutboundLink
+            eventLabel={recommendedNextLessonCallToActionButton}
+            aria-label={recommendedNextLessonCallToActionButton + " (external link opens in new tab)"}
+            to={this.props.recommendedNextLesson.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={this.startRecommendedStep.bind(this)}
+            className="link-button dib"
+            style={{lineHeight: 2}}
+          >
+            {recommendedNextLessonCallToActionButton}
+            <Tooltip
+              title="(external link opens in new tab)"
+              className=""
+              animation="shift"
+              arrow="true"
+              duration="200"
+              tabIndex="0"
+              tag="span"
+              theme="didoesdigital"
+              trigger="mouseenter focus click"
+              onShow={this.props.setAnnouncementMessage}
+            >
+              <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+            </Tooltip>
+          </GoogleAnalytics.OutboundLink>
+        );
+      } else {
+        recommendedLink = (
+          <Link onClick={this.startRecommendedStep.bind(this)} to={this.props.recommendedNextLesson.link} className="link-button dib" style={{lineHeight: 2}}>{recommendedNextLessonCallToActionButton}</Link>
+        );
+      }
+
+      if (studyType === "error") {
+        recommendedLinkTitle = "Unable to load recommendation";
+        recommendedLink = <a href="." className="link-button dib" style={{lineHeight: 2}}>Refresh</a>
+      } else {
+        recommendedLinkTitle = this.props.recommendedNextLesson.linkTitle;
+      }
+
+      recommendedNextLesson = (
+          <div className="mw-384 w-336 order-1">
+            {recommendedNextLessonHeading}
+            <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
+              <p className="text-right"><strong>{recommendedLinkTitle}</strong></p>
+              <p className="text-right de-emphasized">{metadataStats}</p>
+              <div className="flex flex-wrap justify-end">
+                <button onClick={this.recommendAnotherLesson.bind(this)} ref={(skipButton) => { this.recommendationSkipButton = skipButton; }} className="de-emphasized-button pl3 pr3">Skip</button>
+                <div className="text-right">
+                  {recommendedLink}
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-wrap content-start-ns">
+              <div className="flex flex-wrap">
+                <RecommendationDescription
+                  studyType={this.props.recommendedNextLesson.studyType}
+                  setAnnouncementMessage={this.props.setAnnouncementMessage}
+                />
+              </div>
+            </div>
+          </div>
+      );
+    } else {
+      recommendedNextLesson = (
+          <div className="mw-384 w-336 order-1">
+            <h3>Recommended…</h3>
+            <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
+              <p className="text-right"><strong>Loading…</strong></p>
+              <p className="text-right de-emphasized"></p>
+              <div className="flex flex-wrap justify-end">
+                <button onClick={this.recommendAnotherLesson.bind(this)} ref={(skipButton) => { this.recommendationSkipButton = skipButton; }} className="de-emphasized-button pl3 pr3">Skip</button>
+                <div className="text-right">
+                  <button disabled className="link-button dib" style={{lineHeight: 2}}>Loading…</button>
+                </div>
+              </div>
+            </div>
+          </div>
+      );
+    }
+
 
     return (
       <div>
@@ -309,8 +546,14 @@ class Progress extends Component {
             {progressSummaryAndLinks}
             <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
 
-            <h3>Lessons progress</h3>
-            <ul className="unstyled-list">{linkList}</ul>
+
+            <div className="flex flex-wrap justify-between">
+              {recommendedNextLesson}
+              <div className="mw-568">
+                <h3>Lessons progress</h3>
+                <ul className="unstyled-list">{linkList}</ul>
+              </div>
+            </div>
 
             <h3>Vocabulary progress</h3>
             <p>Words you’ve seen and times you’ve typed them well:</p>

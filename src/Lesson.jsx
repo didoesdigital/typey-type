@@ -308,6 +308,7 @@ class Lesson extends Component {
                 handleStartFromWordChange={this.props.handleStartFromWordChange}
                 handleRepetitionsChange={this.props.handleRepetitionsChange}
                 hideOtherSettings={this.props.hideOtherSettings}
+                recommendationHistory={this.props.recommendationHistory}
                 setAnnouncementMessage={this.props.setAnnouncementMessage}
                 suggestedNext={this.nextLessonPath()}
                 lessonLength={propsLesson.presentedMaterial.length}
@@ -320,6 +321,7 @@ class Lesson extends Component {
                 toggleHideOtherSettings={this.props.toggleHideOtherSettings}
                 charsPerWord={this.props.charsPerWord}
                 revisionMaterial={this.props.revisionMaterial}
+                updateRecommendationHistory={this.props.updateRecommendationHistory}
                 updateRevisionMaterial={this.props.updateRevisionMaterial}
                 totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
                 totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}

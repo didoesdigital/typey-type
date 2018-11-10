@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { randomise, isLessonTextValid } from './utils';
+import { getRecommendedNextLesson } from './recommendations';
 import {
   createWordListFromMetWords,
   parseCustomMaterial,
@@ -46,6 +47,12 @@ import PageNotFound from './PageNotFound';
 import Footer from './Footer';
 import Zipper from './zipper';
 import './App.css';
+
+const AsyncBreak = Loadable({
+  loader: () => import("./Break"),
+  loading: PageLoading,
+  delay: 300
+});
 
 const AsyncDictionaries = Loadable({
   loader: () => import("./Dictionaries"),
@@ -176,6 +183,8 @@ class App extends Component {
     this.charsPerWord = 5;
     // When updating default state for anything stored in local storage,
     // add the same default to personal preferences code.
+    let metWords = loadPersonalPreferences()[0];
+
     this.state = {
       announcementMessage: null,
       value: '',
@@ -208,6 +217,7 @@ class App extends Component {
       },
       fullscreen: false,
       hideOtherSettings: false,
+      recommendationHistory: { previousStep: null },
       nextLessonPath: '',
       previousCompletedPhraseAsTyped: '',
       repetitionsRemaining: 1,
@@ -223,9 +233,7 @@ class App extends Component {
       totalNumberOfMistypedWords: 0,
       totalNumberOfHintedWords: 0,
       disableUserSettings: false,
-      metWords: {
-        '.': 0
-      },
+      metWords: metWords,
       revisionMode: false,
       userSettings: {
         blurMaterial: false,
@@ -255,13 +263,24 @@ class App extends Component {
         "subcategory": "",
         "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
       }],
+      recommendedNextLesson: {
+        studyType: "practice",
+        limitNumberOfWords: 50,
+        repetitions: 1,
+        linkTitle: "Top 10000 Project Gutenberg words",
+        linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
+        link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=1&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1"
+      },
       revisionMaterial: [
-      ]
+      ],
+      yourSeenWordCount: calculateSeenWordCount(metWords),
+      yourMemorisedWordCount: calculateMemorisedWordCount(metWords)
     };
   }
 
   componentDidMount() {
     this.setPersonalPreferences();
+
     fetchLessonIndex().then((json) => {
       this.setState({ lessonIndex: json }, () => {
         setupLessonProgress(json);
@@ -275,7 +294,7 @@ class App extends Component {
         "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
       }];
 
-      this.setState({ lessonIndex: json}, () => {
+      this.setState({ lessonIndex: json }, () => {
         setupLessonProgress(json);
       })
     });
@@ -317,7 +336,9 @@ class App extends Component {
       currentPhraseAttempts: [],
       disableUserSettings: false,
       numberOfMatchedChars: 0,
-      totalNumberOfMatchedChars: 0
+      totalNumberOfMatchedChars: 0,
+      yourSeenWordCount: calculateSeenWordCount(this.state.metWords),
+      yourMemorisedWordCount: calculateMemorisedWordCount(this.state.metWords)
     }, () => {
       this.stopTimer();
     });
@@ -358,12 +379,18 @@ class App extends Component {
     else {
       [metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress] = loadPersonalPreferences();
     }
+
+    let yourSeenWordCount = calculateSeenWordCount(this.state.metWords);
+    let yourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
+
     this.setState({
       flashcardsMetWords: flashcardsMetWords,
       flashcardsProgress: flashcardsProgress,
       lessonsProgress: lessonsProgress,
       metWords: metWords,
-      userSettings: userSettings
+      userSettings: userSettings,
+      yourSeenWordCount: yourSeenWordCount,
+      yourMemorisedWordCount: yourMemorisedWordCount,
     }, () => {
       writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
       writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
@@ -372,6 +399,8 @@ class App extends Component {
       writePersonalPreferences('userSettings', this.state.userSettings);
       this.setupLesson();
     });
+
+    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress];
   }
 
   handleLimitWordsChange(event) {
@@ -501,8 +530,10 @@ class App extends Component {
 
     // This is actually UNIQUE numberOfWordsSeen.
     // Updating localStorage data to rename it, however, seems low value.
+    // FIXME
     let numberOfWordsSeen = 0;
 
+    // FIXME
     if (lessonsProgress[lessonpath] && lessonsProgress[lessonpath].numberOfWordsSeen) {
       numberOfWordsSeen = lessonsProgress[lessonpath].numberOfWordsSeen;
     }
@@ -511,11 +542,18 @@ class App extends Component {
     let sourceMaterial;
     sourceMaterial = (this.state.lesson && this.state.lesson.sourceMaterial) ? this.state.lesson.sourceMaterial : [{phrase: "the", stroke: "-T"}];
     let len = sourceMaterial.length;
-    let accumulator = 0;
+    let seenAccumulator = 0;
+    let memorisedAccumulator = 0;
 
     let normalisedMetWords = {};
     Object.keys(metWords).forEach(function(key,index) {
-      normalisedMetWords[key.trim().toLowerCase()] = metWords[key];
+      if(key.trim().toLowerCase() === "of") { console.log("key.trim().toLowerCase(): " + key.trim().toLowerCase()); }
+      if (normalisedMetWords[key.trim().toLowerCase()]) {
+        normalisedMetWords[key.trim().toLowerCase()] = metWords[key] + normalisedMetWords[key.trim().toLowerCase()];
+      }
+      else {
+        normalisedMetWords[key.trim().toLowerCase()] = metWords[key];
+      }
     });
 
     let alreadyChecked = [];
@@ -528,10 +566,19 @@ class App extends Component {
       // have you seen this word?
       if (normalisedMetWords[sourceMaterialPhrase] && normalisedMetWords[sourceMaterialPhrase] > 0) {
 
+        // console.log(sourceMaterialPhrase);
+        // debugger
         // have you seen this word and seen it in this lesson already?
         if (!(alreadyChecked.indexOf(sourceMaterialPhrase) > -1)) {
           alreadyChecked.push(sourceMaterialPhrase);
-          accumulator = accumulator + 1;
+          if (normalisedMetWords[sourceMaterialPhrase] < 30) {
+            seenAccumulator = seenAccumulator + 1;
+            // console.log("Seen: " + sourceMaterialPhrase);
+          }
+          if (normalisedMetWords[sourceMaterialPhrase] > 29) {
+            memorisedAccumulator = memorisedAccumulator + 1;
+            // console.log("Memorised: " + sourceMaterialPhrase);
+          }
         }
       }
       else {
@@ -541,13 +588,15 @@ class App extends Component {
 
     let uniqueLowerCasedWordsLeftToDiscover = [...new Set(wordsLeftToDiscover)];
 
-    numberOfWordsSeen = accumulator;
     let numberOfWordsToDiscover = 0;
     if (uniqueLowerCasedWordsLeftToDiscover && uniqueLowerCasedWordsLeftToDiscover.length > 0) {
       numberOfWordsToDiscover = uniqueLowerCasedWordsLeftToDiscover.length;
     }
 
+    // FIXME
+    numberOfWordsSeen = seenAccumulator;
     lessonsProgress[lessonpath] = {
+      numberOfWordsMemorised: memorisedAccumulator,
       numberOfWordsSeen: numberOfWordsSeen,
       numberOfWordsToDiscover: numberOfWordsToDiscover
     }
@@ -1264,6 +1313,61 @@ class App extends Component {
     });
   }
 
+  updateRecommendationHistory(prevRecommendationHistory) {
+    let newRecommendationHistory = Object.assign({}, prevRecommendationHistory);
+
+    if ((typeof newRecommendationHistory['previousStep'] === undefined) || (newRecommendationHistory['previousStep'] === null)) {
+      newRecommendationHistory['previousStep'] = 'practice';
+    }
+
+    switch (newRecommendationHistory['previousStep']) {
+      case "practice":
+        newRecommendationHistory['previousStep'] = 'drill';
+        break;
+      case "drill":
+        newRecommendationHistory['previousStep'] = 'revise';
+        break;
+      case "revise":
+        newRecommendationHistory['previousStep'] = 'discover';
+        break;
+      case "discover":
+        newRecommendationHistory['previousStep'] = 'wildcard';
+        // newRecommendationHistory['previousStep'] = 'break';
+        break;
+      case "wildcard":
+        newRecommendationHistory['previousStep'] = 'break';
+        break;
+      case "break":
+        newRecommendationHistory['previousStep'] = 'practice';
+        break;
+      default:
+        newRecommendationHistory['previousStep'] = 'practice';
+        break;
+    }
+
+    getRecommendedNextLesson(this.state.lessonsProgress, newRecommendationHistory, this.state.yourSeenWordCount, this.state.yourMemorisedWordCount, this.state.lessonIndex, this.state.metWords)
+      .then((nextRecommendedLesson) => {
+        this.setState({
+          recommendationHistory: newRecommendationHistory,
+          recommendedNextLesson: nextRecommendedLesson
+        });
+      })
+      .catch( error => {
+        this.setState({
+          recommendationHistory: newRecommendationHistory,
+          recommendedNextLesson: {
+            studyType: "error",
+            limitNumberOfWords: 50,
+            repetitions: 1,
+            linkTitle: "Top 10000 Project Gutenberg words",
+            linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
+            link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=1&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1"
+          }
+        });
+      });
+
+  }
+
   updateMarkup(event) {
     let actualText = event.target.value;
 
@@ -1372,6 +1476,8 @@ class App extends Component {
       newState.showStrokesInLesson = false;
       newState.currentPhraseID = nextPhraseID;
 
+      newState.yourSeenWordCount = calculateSeenWordCount(this.state.metWords);
+      newState.yourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
     }
 
     this.setState(newState, () => {
@@ -1536,6 +1642,21 @@ class App extends Component {
                 </div>
                 }
               />
+              <Route path="/break" render={ (props) =>
+                <div>
+                  {header}
+                  <DocumentTitle title={'Typey Type | Take a break'}>
+                    <ErrorBoundary>
+                      <AsyncBreak
+                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                        {...props}
+                      />
+                    </ErrorBoundary>
+                  </DocumentTitle>
+                </div>
+                }
+              />
               <Route path="/contribute" render={ () =>
                 <div>
                   {header}
@@ -1559,8 +1680,13 @@ class App extends Component {
                         metWords={this.state.metWords}
                         flashcardsMetWords={this.state.flashcardsMetWords}
                         flashcardsProgress={this.state.flashcardsProgress}
+                        recommendationHistory={this.state.recommendationHistory}
+                        recommendedNextLesson={this.state.recommendedNextLesson}
                         lessonsProgress={this.state.lessonsProgress}
                         lessonIndex={this.state.lessonIndex}
+                        updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
+                        yourSeenWordCount={this.state.yourSeenWordCount}
+                        yourMemorisedWordCount={this.state.yourMemorisedWordCount}
                       />
                     </ErrorBoundary>
                   </DocumentTitle>
@@ -1662,6 +1788,7 @@ class App extends Component {
                         hideOtherSettings={this.state.hideOtherSettings}
                         metWords={this.state.metWords}
                         previousCompletedPhraseAsTyped={this.state.previousCompletedPhraseAsTyped}
+                        recommendationHistory={this.state.recommendationHistory}
                         repetitionsRemaining={this.state.repetitionsRemaining}
                         revisionMaterial={this.state.revisionMaterial}
                         revisionMode={this.state.revisionMode}
@@ -1687,6 +1814,7 @@ class App extends Component {
                         totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
                         totalWordCount={stateLesson.presentedMaterial.length}
                         upcomingPhrases={upcomingMaterial}
+                        updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
                         updateMarkup={this.updateMarkup.bind(this)}
                         userSettings={this.state.userSettings}
                         {...props}
@@ -1885,6 +2013,16 @@ function isElement(obj) {
 function isNormalInteger(str) {
   let n = Math.floor(Number(str));
   return n !== Infinity && String(n) === str && n >= 0;
+}
+
+function calculateSeenWordCount(metWords) {
+  let yourSeenWordCount = Math.round(Object.values(metWords).filter( timesSeen => timesSeen > 0 && timesSeen < 30).length) || 0;
+  return yourSeenWordCount;
+}
+
+function calculateMemorisedWordCount(metWords) {
+  let yourMemorisedWordCount = Math.round(Object.values(metWords).filter( timesSeen => timesSeen > 29).length) || 0;
+  return yourMemorisedWordCount;
 }
 
 export default App;

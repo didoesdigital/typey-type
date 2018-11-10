@@ -292,6 +292,9 @@ input:focus::placeholder {
 .self-center {
   align-self: center; }
 
+.content-start-ns {
+  align-content: flex-start; }
+
 .hide {
   display: none; }
 
@@ -336,6 +339,9 @@ input:focus::placeholder {
 .o-0 {
   opacity: 0; }
 
+.order-1 {
+  order: 1; }
+
 .collapse {
   border-collapse: collapse;
   border-spacing: 0; }
@@ -351,6 +357,18 @@ input:focus::placeholder {
 
 .overflow-auto {
   overflow: auto; }
+
+.bw-12 {
+  border-width: 12px; }
+
+.br-4 {
+  border-radius: 4px; }
+
+.b--solid {
+  border-style: solid; }
+
+.b--brand-primary {
+  border-color: #402351; }
 
 .mx-auto {
   margin-left: auto;
@@ -435,6 +453,12 @@ input:focus::placeholder {
 
 .mt4 {
   margin-top: 32px; }
+
+.mt-h2 {
+  margin-top: 39.0625px; }
+
+.mt-h3 {
+  margin-top: 31.25px; }
 
 .mt10 {
   margin-top: 80px; }
@@ -580,6 +604,9 @@ input:focus::placeholder {
 
 .w6 {
   width: 192px; }
+
+.w-336 {
+  width: 336px; }
 
 .w-100 {
   width: 100%; }
