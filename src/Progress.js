@@ -230,42 +230,42 @@ class Progress extends Component {
     );
     if (yourSeenWordCount === 1 && yourMemorisedWordCount === 0) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} word without misstrokes. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-100-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {yourWordCount} word without misstrokes. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
     if (yourSeenWordCount === 1 && yourMemorisedWordCount === 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-100-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
     if (yourSeenWordCount === 1 && yourMemorisedWordCount > 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-100-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
     if (yourSeenWordCount === 0 && yourMemorisedWordCount === 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} word without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised word</Link>. <Link to={'/lessons/drills/top-100-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {yourWordCount} word without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
     if (yourSeenWordCount === 0 && yourMemorisedWordCount > 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised words</Link>. <Link to={'/lessons/drills/top-100-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
     if (yourSeenWordCount > 1 && yourMemorisedWordCount === 0) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-100-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
     if (yourSeenWordCount > 1 && yourMemorisedWordCount === 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;all your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-100-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;all your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
     if (yourSeenWordCount > 1 && yourMemorisedWordCount > 1) {
       progressSummaryAndLinks = (
-        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;all your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-100-words/' + discoverParams}>Discover new words</Link>.</p>
+        <p>You’ve successfully typed {yourWordCount} words without misstrokes. You’re {progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;all your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + discoverParams}>Discover new words</Link>.</p>
       );
     }
 
