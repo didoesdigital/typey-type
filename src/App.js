@@ -699,7 +699,6 @@ class App extends Component {
 
     switch (value) {
       case "discover":
-        newState.blurMaterial = false;
         newState.showStrokes = true;
         newState.hideStrokesOnLastRepetition = true;
         newState.newWords = true;
@@ -710,7 +709,6 @@ class App extends Component {
         newState.sortOrder = 'sortOff';
         break;
       case "revise":
-        newState.blurMaterial = false;
         newState.showStrokes = false;
         newState.hideStrokesOnLastRepetition = true;
         newState.newWords = false;
@@ -721,7 +719,6 @@ class App extends Component {
         newState.sortOrder = 'sortNew';
         break;
       case "drill":
-        newState.blurMaterial = false;
         newState.showStrokes = false;
         newState.hideStrokesOnLastRepetition = true;
         newState.newWords = false;
@@ -732,7 +729,6 @@ class App extends Component {
         newState.sortOrder = 'sortRandom';
         break;
       case "practice":
-        newState.blurMaterial = false;
         newState.showStrokes = false;
         newState.hideStrokesOnLastRepetition = true;
         newState.newWords = true;
