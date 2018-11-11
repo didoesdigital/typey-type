@@ -1265,14 +1265,16 @@ class App extends Component {
   }
 
   isFinished() {
-    return (this.state.currentPhraseID === this.state.lesson.presentedMaterial.length);
+    let presentedMaterialLength = (this.state.lesson && this.state.lesson.presentedMaterial) ? this.state.lesson.presentedMaterial.length : 0;
+    return (this.state.currentPhraseID === presentedMaterialLength);
   }
 
   presentCompletedMaterial() {
-    return this.state.lesson.newPresentedMaterial.getCompleted().map(item => item.phrase).join(" ");
+    return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getCompleted().map(item => item.phrase).join(" ") : [];
   }
+
   presentUpcomingMaterial() {
-    return this.state.lesson.newPresentedMaterial.getRemaining().slice(0,31).map(item => item.phrase).join(" ");
+    return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getRemaining().slice(0,31).map(item => item.phrase).join(" ") : [];
   }
 
   setDictionaryIndex() {
@@ -1305,8 +1307,20 @@ class App extends Component {
       value={this.state.value}
     />
 
-      let presentedMaterialCurrentItem = this.state.lesson.presentedMaterial[this.state.currentPhraseID] || { phrase: '', stroke: '' };
-      let app = this;
+    let stateLesson = this.state.lesson;
+    if ((Object.keys(stateLesson).length === 0 && stateLesson.constructor === Object) || !stateLesson) {
+      stateLesson = {
+        sourceMaterial: [ {phrase: 'The', stroke: '-T'} ],
+        presentedMaterial: [ {phrase: 'The', stroke: '-T'}, ],
+        settings: { ignoredChars: '' },
+        title: 'Steno', subtitle: '',
+        newPresentedMaterial: new Zipper([{phrase: '', stroke: ''}]),
+        path: ''
+      };
+    }
+
+    let presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
+    let app = this;
       return (
         <div className="app">
           <Announcements message={this.state.announcementMessage} />
@@ -1483,7 +1497,7 @@ class App extends Component {
                         totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
                         totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
                         totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
-                        totalWordCount={this.state.lesson.presentedMaterial.length}
+                        totalWordCount={stateLesson.presentedMaterial.length}
                         upcomingPhrases={upcomingMaterial}
                         updateMarkup={this.updateMarkup.bind(this)}
                         userSettings={this.state.userSettings}

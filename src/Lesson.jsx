@@ -20,43 +20,49 @@ import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapB
 
 class Lesson extends Component {
   componentDidMount() {
-    if (this.props.location.pathname.startsWith('/lessons/progress/') && !this.props.location.pathname.includes('/lessons/progress/seen/') && !this.props.location.pathname.includes('/lessons/progress/memorised/')) {
-      let loadedPersonalPreferences = loadPersonalPreferences();
-      let newSeenOrMemorised = [false, true, true]
-      this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);
-    }
-    else if (this.props.location.pathname.startsWith('/lessons/progress/seen/')) {
-      let loadedPersonalPreferences = loadPersonalPreferences();
-      let newSeenOrMemorised = [false, true, false]
-      this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);
-    }
-    else if (this.props.location.pathname.startsWith('/lessons/progress/memorised/')) {
-      let loadedPersonalPreferences = loadPersonalPreferences();
-      let newSeenOrMemorised = [false, false, true]
-      this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);
-    }
-    else if (this.props.location.pathname.startsWith('/lessons/custom')) {
-      this.props.setCustomLesson();
-    }
-    else if(this.isFlashcards()) {
-      // do nothing
-    }
-    else if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
-      this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
-    }
+    // If cookies are disabled, attempting to access localStorage will cause an error.
+    // The disabled cookie error will be handled in ErrorBoundary.
+    // Wrapping this in a try/catch or removing the conditional would fail silently.
+    // By checking here, we let people use the rest of the app but not lessons.
+    if (window.localStorage) {
+      if (this.props.location.pathname.startsWith('/lessons/progress/') && !this.props.location.pathname.includes('/lessons/progress/seen/') && !this.props.location.pathname.includes('/lessons/progress/memorised/')) {
+        let loadedPersonalPreferences = loadPersonalPreferences();
+        let newSeenOrMemorised = [false, true, true]
+        this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);
+      }
+      else if (this.props.location.pathname.startsWith('/lessons/progress/seen/')) {
+        let loadedPersonalPreferences = loadPersonalPreferences();
+        let newSeenOrMemorised = [false, true, false]
+        this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);
+      }
+      else if (this.props.location.pathname.startsWith('/lessons/progress/memorised/')) {
+        let loadedPersonalPreferences = loadPersonalPreferences();
+        let newSeenOrMemorised = [false, false, true]
+        this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);
+      }
+      else if (this.props.location.pathname.startsWith('/lessons/custom')) {
+        this.props.setCustomLesson();
+      }
+      else if(this.isFlashcards()) {
+        // do nothing
+      }
+      else if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
+        this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
+      }
 
-    const parsedParams = queryString.parse(this.props.location.search);
-    let hasSettingsParams = false;
+      const parsedParams = queryString.parse(this.props.location.search);
+      let hasSettingsParams = false;
 
-    if (Object.keys(parsedParams).some((param) => {
-      return this.props.userSettings.hasOwnProperty(param);
-      })) {
-      hasSettingsParams = true;
-    }
+      if (Object.keys(parsedParams).some((param) => {
+        return this.props.userSettings.hasOwnProperty(param);
+        })) {
+        hasSettingsParams = true;
+      }
 
-    if (hasSettingsParams) {
-      this.props.setupLesson();
-      hasSettingsParams = false;
+      if (hasSettingsParams) {
+        this.props.setupLesson();
+        hasSettingsParams = false;
+      }
     }
 
     if (this.mainHeading) {
@@ -89,7 +95,8 @@ class Lesson extends Component {
   }
 
   isFinished() {
-    return (this.props.currentPhraseID === this.props.lesson.presentedMaterial.length);
+    let presentedMaterialLength = (this.props.lesson && this.props.lesson.presentedMaterial) ? this.props.lesson.presentedMaterial.length : 0;
+    return (this.props.currentPhraseID === presentedMaterialLength);
   }
 
   nextLessonPath() {
@@ -240,6 +247,17 @@ class Lesson extends Component {
       </div>;
     }
 
+    let propsLesson = this.props.lesson;
+    if ((Object.keys(propsLesson).length === 0 && propsLesson.constructor === Object) || !propsLesson) {
+      propsLesson = {
+        sourceMaterial: [ {phrase: 'The', stroke: '-T'} ],
+        presentedMaterial: [ {phrase: 'The', stroke: '-T'}, ],
+        settings: { ignoredChars: '' },
+        title: 'Steno', subtitle: '',
+        path: ''
+      };
+    }
+
     if (this.props.lesson) {
       if (this.isFlashcards()) {
         return (
@@ -301,7 +319,7 @@ class Lesson extends Component {
                 hideOtherSettings={this.props.hideOtherSettings}
                 setAnnouncementMessage={this.props.setAnnouncementMessage}
                 suggestedNext={this.nextLessonPath()}
-                lessonLength={this.props.lesson.presentedMaterial.length}
+                lessonLength={propsLesson.presentedMaterial.length}
                 path={this.props.path}
                 prefillSurveyLink={this.prefillSurveyLink}
                 restartLesson={this.props.restartLesson}
@@ -318,7 +336,7 @@ class Lesson extends Component {
                 totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
                 totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
                 totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-                totalWordCount={this.props.lesson.presentedMaterial.length}
+                totalWordCount={propsLesson.presentedMaterial.length}
                 userSettings={this.props.userSettings}
               />
             </main>
