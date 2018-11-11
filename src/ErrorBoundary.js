@@ -14,13 +14,33 @@ class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, info) {
-    // Display fallback UI
     this.setState({ hasError: true });
-    Sentry.captureException(error, { extra: info });
+
+    let disabledCookieError = false;
+
+    if (error.name === "SecurityError" && ((error.message.includes('localStorage') && error.message.includes('Access is denied for this document')) || (error.message === 'The operation is insecure.'))) {
+      disabledCookieError = true;
+    }
+
+    if (disabledCookieError) {
+      this.setState({ disabledCookieError: true });
+      Sentry.captureException(error, { extra: "Possibly disabled cookie error: " + info });
+    } else {
+      Sentry.captureException(error, { extra: info });
+    }
   }
 
   render() {
-    if (this.state.hasError) {
+    if (this.state.hasError && this.state.disabledCookieError) {
+      return (
+        <div className="mh-page">
+          <div className="center-all">
+            <h1>You have cookies disabled</h1>
+            <p>Typey Type uses local storage to keep track of your steno settings and progress. It won’t work with cookies blocked. Please enable cookies and <a href=".">refresh the page</a>. —Di</p>
+          </div>
+        </div>
+      )
+    } else if (this.state.hasError) {
       return (
         <div className="mh-page">
           <div className="center-all">
@@ -29,6 +49,7 @@ class ErrorBoundary extends Component {
         </div>
       )
     }
+
     return this.props.children;
   }
 }
