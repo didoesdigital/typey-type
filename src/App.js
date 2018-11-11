@@ -1305,7 +1305,6 @@ class App extends Component {
       value={this.state.value}
     />
 
-    if (true) {
       let presentedMaterialCurrentItem = this.state.lesson.presentedMaterial[this.state.currentPhraseID] || { phrase: '', stroke: '' };
       let app = this;
       return (
@@ -1512,7 +1511,6 @@ class App extends Component {
           />
         </div>
       );
-    }
   }
 }
 
