@@ -623,33 +623,43 @@ function loadPersonalPreferences() {
     study: 'discover',
     stenoLayout: 'stenoLayoutAmericanSteno'
   };
-  if (window.localStorage) {
-    if (window.localStorage.getItem('metWords')) {
-      metWords = JSON.parse(window.localStorage.getItem('metWords'));
+  try {
+    if (window.localStorage) {
+      if (window.localStorage.getItem('metWords')) {
+        metWords = JSON.parse(window.localStorage.getItem('metWords'));
+      }
+      if (window.localStorage.getItem('userSettings')) {
+        userSettings = Object.assign(userSettings, JSON.parse(window.localStorage.getItem('userSettings')));
+      }
+      if (window.localStorage.getItem('flashcardsMetWords')) {
+        flashcardsMetWords = Object.assign(flashcardsMetWords, JSON.parse(window.localStorage.getItem('flashcardsMetWords')));
+      }
+      if (window.localStorage.getItem('flashcardsProgress')) {
+        flashcardsProgress = Object.assign(flashcardsProgress, JSON.parse(window.localStorage.getItem('flashcardsProgress')));
+      }
+      if (window.localStorage.getItem('lessonsProgress')) {
+        lessonsProgress = Object.assign(lessonsProgress, JSON.parse(window.localStorage.getItem('lessonsProgress')));
+      }
+      return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress];
     }
-    if (window.localStorage.getItem('userSettings')) {
-      userSettings = Object.assign(userSettings, JSON.parse(window.localStorage.getItem('userSettings')));
-    }
-    if (window.localStorage.getItem('flashcardsMetWords')) {
-      flashcardsMetWords = Object.assign(flashcardsMetWords, JSON.parse(window.localStorage.getItem('flashcardsMetWords')));
-    }
-    if (window.localStorage.getItem('flashcardsProgress')) {
-      flashcardsProgress = Object.assign(flashcardsProgress, JSON.parse(window.localStorage.getItem('flashcardsProgress')));
-    }
-    if (window.localStorage.getItem('lessonsProgress')) {
-      lessonsProgress = Object.assign(lessonsProgress, JSON.parse(window.localStorage.getItem('lessonsProgress')));
-    }
-    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress];
+  }
+  catch(error) {
+    console.log('Unable to read local storage.', error);
   }
   return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress];
 }
 
 function writePersonalPreferences(itemToStore, JSONToStore) {
   let stringToStore = JSON.stringify(JSONToStore);
-  if (window.localStorage) {
-    window.localStorage.setItem(itemToStore, stringToStore);
-  } else {
-    console.log('Unable to write to local storage. Changes to User Settings and Met Words will be lost.');
+  try {
+    if (window.localStorage) {
+      window.localStorage.setItem(itemToStore, stringToStore);
+    } else {
+      console.log('Unable to write to local storage. Changes to User Settings and Met Words will be lost.');
+    }
+  }
+  catch(error) {
+    console.log('Unable to write to local storage. Changes to User Settings and Met Words will be lost.', error);
   }
 }
 
