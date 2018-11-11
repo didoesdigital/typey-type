@@ -441,6 +441,9 @@ class App extends Component {
 
   updateLessonsProgress(lessonpath) {
     let lessonsProgress = Object.assign({}, this.state.lessonsProgress);
+
+    // This is actually UNIQUE numberOfWordsSeen.
+    // Updating localStorage data to rename it, however, seems low value.
     let numberOfWordsSeen = 0;
 
     if (lessonsProgress[lessonpath] && lessonsProgress[lessonpath].numberOfWordsSeen) {
@@ -448,7 +451,8 @@ class App extends Component {
     }
 
     let metWords = this.state.metWords;
-    let sourceMaterial = this.state.lesson.sourceMaterial;
+    let sourceMaterial;
+    sourceMaterial = (this.state.lesson && this.state.lesson.sourceMaterial) ? this.state.lesson.sourceMaterial : [{phrase: "the", stroke: "-T"}];
     let len = sourceMaterial.length;
     let accumulator = 0;
 
@@ -456,18 +460,39 @@ class App extends Component {
     Object.keys(metWords).forEach(function(key,index) {
       normalisedMetWords[key.trim().toLowerCase()] = metWords[key];
     });
+
+    let alreadyChecked = [];
+    let wordsLeftToDiscover = [];
     for (let i = 0; i < len; ++i) {
       let sourceMaterialPhrase = sourceMaterial[i].phrase;
       sourceMaterialPhrase = sourceMaterialPhrase.trim();
       sourceMaterialPhrase = sourceMaterialPhrase.toLowerCase();
+
+      // have you seen this word?
       if (normalisedMetWords[sourceMaterialPhrase] && normalisedMetWords[sourceMaterialPhrase] > 0) {
-        accumulator = accumulator + 1;
+
+        // have you seen this word and seen it in this lesson already?
+        if (!(alreadyChecked.indexOf(sourceMaterialPhrase) > -1)) {
+          alreadyChecked.push(sourceMaterialPhrase);
+          accumulator = accumulator + 1;
+        }
+      }
+      else {
+        wordsLeftToDiscover.push(sourceMaterialPhrase);
       }
     }
+
+    let uniqueLowerCasedWordsLeftToDiscover = [...new Set(wordsLeftToDiscover)];
+
     numberOfWordsSeen = accumulator;
+    let numberOfWordsToDiscover = 0;
+    if (uniqueLowerCasedWordsLeftToDiscover && uniqueLowerCasedWordsLeftToDiscover.length > 0) {
+      numberOfWordsToDiscover = uniqueLowerCasedWordsLeftToDiscover.length;
+    }
 
     lessonsProgress[lessonpath] = {
-      numberOfWordsSeen: numberOfWordsSeen
+      numberOfWordsSeen: numberOfWordsSeen,
+      numberOfWordsToDiscover: numberOfWordsToDiscover
     }
 
     this.setState({
