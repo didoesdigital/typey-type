@@ -1390,6 +1390,36 @@ describe('update capitalisation strokes in next item', () => {
     });
   });
 
+  // ` everything." "Be`
+  describe('where previous word ends in an ellipsis', () => {
+    let lastWord = 'everything."';
+
+    describe('where next item has quotes', () => {
+      let nextItem = {phrase: '"Be', stroke: 'KW-GS KPA/-B'};
+      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
+        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+          phrase: '"Be',
+          stroke: "KW-GS -B"
+        })
+      });
+    });
+  });
+
+  // ` "Be everything."`
+  describe('where previous word ends in an ellipsis', () => {
+    let lastWord = '"Be';
+
+    describe('where next item has quotes', () => {
+      let nextItem = {phrase: 'everything."', stroke: 'EFG TP-PL KR-GS'};
+      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
+        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+          phrase: 'everything."',
+          stroke: "EFG TP-PL KR-GS"
+        })
+      });
+    });
+  });
+
   // ` said: "Be`
   describe('where previous word ends in a colon', () => {
     let lastWord = "said:";
