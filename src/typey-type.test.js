@@ -2,6 +2,7 @@ import {
   createWordListFromMetWords,
   parseCustomMaterial,
   matchSplitText,
+  generateDictionaryEntries,
   loadPersonalPreferences,
   lookUpDictionaryInIndex,
   processDictionary,
@@ -734,6 +735,21 @@ testWithTab	TEFT
         path: '/lessons/custom'
       });
     });
+  });
+});
+
+describe('generate dictionary entries', () => {
+  it('returns array of phrases and strokes for words', () => {
+    let wordList = ['tom', 'Heather', 'TUESDAY', 'FIRST'];
+    let sourceWordsAndStrokes = {"Tom": "TOPL", "heather": "H*ET/*ER", "Tuesday": "TAOUZ", "first": "TPEUFRT"};
+    expect(generateDictionaryEntries(wordList, sourceWordsAndStrokes)).toEqual(
+      [
+        {phrase: "tom", stroke: "HRO*ER/TOPL"},
+        {phrase: "Heather", stroke: "KPA/H*ET/*ER"},
+        {phrase: "TUESDAY", stroke: "*URP/TAOUZ"},
+        {phrase: "FIRST", stroke: "*URP/TPEUFRT"}
+      ]
+    );
   });
 });
 
