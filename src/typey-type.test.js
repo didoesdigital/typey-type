@@ -12,7 +12,8 @@ import {
   swapKeyValueInDictionary,
   writePersonalPreferences,
   mapBriefToAmericanStenoKeys,
-  repetitionsRemaining
+  repetitionsRemaining,
+  updateCapitalisationStrokesInNextItem
 } from './typey-type';
 import Zipper from './zipper';
 
@@ -1326,4 +1327,96 @@ describe('matchSplitText', () => {
     // });
   });
   // return [matchedExpected, unmatchedExpected, matchedActual, unmatchedActual];
+});
+
+describe('update capitalisation strokes in next item', () => {
+  describe('where previous word ends in a letter', () => {
+    let lastWord = "cat";
+
+    // ` cat "A`
+    describe('where next item has quotes', () => {
+      let nextItem = {phrase: '"A', stroke: 'KW-GS KPA/AEU'};
+      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
+        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+          phrase: '"A',
+          stroke: "KW-GS KPA*/AEU"
+        })
+      });
+    });
+  });
+
+  // ` cat. "A`
+  describe('where previous word ends in full stop', () => {
+    let lastWord = "cat.";
+
+    describe('where next item has quotes', () => {
+      let nextItem = {phrase: '"A', stroke: 'KW-GS KPA/AEU'};
+      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
+        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+          phrase: '"A',
+          stroke: "KW-GS AEU"
+        })
+      });
+    });
+  });
+
+  // ` request. When`
+  describe('where previous word ends in full stop', () => {
+    let lastWord = "request.";
+
+    describe('where next item has quotes', () => {
+      let nextItem = {phrase: 'When', stroke: 'KPA/WHEPB'};
+      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
+        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+          phrase: 'When',
+          stroke: "WHEPB"
+        })
+      });
+    });
+  });
+
+  // ` cat… "A`
+  describe('where previous word ends in an ellipsis', () => {
+    let lastWord = "cat…";
+
+    describe('where next item has quotes', () => {
+      let nextItem = {phrase: '"A', stroke: 'KW-GS KPA/AEU'};
+      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
+        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+          phrase: '"A',
+          stroke: "KW-GS AEU"
+        })
+      });
+    });
+  });
+
+  // ` said: "Be`
+  describe('where previous word ends in a colon', () => {
+    let lastWord = "said:";
+
+    describe('where next item has quotes', () => {
+      let nextItem = {phrase: '"Be', stroke: 'KR-GS KPA/-B'};
+      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
+        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+          phrase: '"Be',
+          stroke: "KR-GS KPA*/-B"
+        })
+      });
+    });
+  });
+
+  // ` cat… "A`
+  describe('where previous word ends in an ellipsis', () => {
+    let lastWord = "cat…";
+
+    describe('where next item has quotes', () => {
+      let nextItem = {phrase: '"A', stroke: 'KW-GS KPA/AEU'};
+      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
+        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+          phrase: '"A',
+          stroke: "KW-GS AEU"
+        })
+      });
+    });
+  });
 });

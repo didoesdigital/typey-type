@@ -21,6 +21,7 @@ import {
   swapKeyValueInDictionary,
   trimAndSumUniqMetWords,
   targetStrokeCount,
+  updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './typey-type';
 import {
@@ -1207,7 +1208,14 @@ class App extends Component {
       }
 
       let nextPhraseID = this.state.currentPhraseID + 1;
-      let target = targetStrokeCount(this.state.lesson.presentedMaterial[nextPhraseID] || { phrase: '', stroke: 'TK-LS' });
+      let nextItem = this.state.lesson.presentedMaterial[nextPhraseID];
+
+      if (this.state.lesson.presentedMaterial && this.state.lesson.presentedMaterial[this.state.currentPhraseID] && this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase) {
+        let lastWord = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
+        nextItem = updateCapitalisationStrokesInNextItem(nextItem, lastWord);
+      }
+
+      let target = targetStrokeCount(nextItem || { phrase: '', stroke: 'TK-LS' });
       newState.targetStrokeCount = target;
       this.state.lesson.newPresentedMaterial.visitNext();
 
