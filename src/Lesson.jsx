@@ -10,13 +10,14 @@ import TypedText from './TypedText';
 import Scores from './Scores';
 import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
 import DanishStenoDiagram from './StenoLayout/DanishStenoDiagram';
+import ItalianMichelaStenoDiagram from './StenoLayout/ItalianMichelaStenoDiagram';
 import KoreanModernCStenoDiagram from './StenoLayout/KoreanModernCStenoDiagram';
 import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
 import UserSettings from './UserSettings';
 import Finished from './Finished';
 import Flashcards from './Flashcards';
 import CustomLessonSetup from './CustomLessonSetup';
-import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToKoreanModernCStenoKeys, mapBriefToPalantypeKeys } from './typey-type';
+import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToItalianMichelaStenoKeys, mapBriefToKoreanModernCStenoKeys, mapBriefToPalantypeKeys } from './typey-type';
 
 class Lesson extends Component {
   componentDidMount() {
@@ -189,6 +190,10 @@ class Lesson extends Component {
           case 'stenoLayoutDanishSteno':
             mapBriefsFunction = mapBriefToDanishStenoKeys;
             StenoLayoutDiagram = DanishStenoDiagram;
+            break;
+          case 'stenoLayoutItalianMichelaSteno':
+            mapBriefsFunction = mapBriefToItalianMichelaStenoKeys;
+            StenoLayoutDiagram = ItalianMichelaStenoDiagram;
             break;
           case 'stenoLayoutKoreanModernCSteno':
             mapBriefsFunction = mapBriefToKoreanModernCStenoKeys;

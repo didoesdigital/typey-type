@@ -398,6 +398,7 @@ class UserSettings extends Component {
                         <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
                         <option value="stenoLayoutPalantype">Palantype</option>
                         <option value="stenoLayoutDanishSteno">Danish steno</option>
+                        <option value="stenoLayoutItalianMichelaSteno">Italian Michela steno</option>
                         <option value="stenoLayoutKoreanModernCSteno">Korean Modern C steno</option>
                       </select>
                     </div>

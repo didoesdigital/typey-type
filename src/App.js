@@ -140,7 +140,7 @@ class App extends Component {
         seenWords: true,
         startFromWord: 1,
         study: 'discover',
-        stenoLayout: 'stenoLayoutAmericanSteno' // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianSteno' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
+        stenoLayout: 'stenoLayoutAmericanSteno' // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianMichelaSteno' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
       },
       lesson: {
         sourceMaterial: [
