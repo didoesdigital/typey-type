@@ -30,6 +30,7 @@ import {
 } from 'react-router-dom';
 import queryString from 'query-string';
 import DocumentTitle from 'react-document-title';
+import GoogleAnalytics from 'react-ga';
 import Loadable from 'react-loadable';
 import PageLoading from './PageLoading';
 import Announcements from './Announcements';
@@ -1302,13 +1303,31 @@ class App extends Component {
       lessonTitle={this.state.lesson.title}
       nextLessonPath={this.state.nextLessonPath}
       onChange={(ev, value) => {
-      this.setState({
-      value: ev.target.value
-      })}}
-      onSelect={(value, item) => this.setState({
-      value: value,
-      nextLessonPath: item.path
-      })}
+        this.setState({
+          value: ev.target.value
+        });
+
+        GoogleAnalytics.event({
+          category: 'Search',
+          action: 'Change',
+          label: value
+        });
+      }}
+      onSelect={(value, item) => {
+        this.setState({
+          value: value,
+          nextLessonPath: item.path
+        })
+
+        let searchSelectLabel = value;
+        if (item && item.path) { searchSelectLabel = item.path; }
+
+        GoogleAnalytics.event({
+          category: 'Search',
+          action: 'Select',
+          label: searchSelectLabel
+        });
+      }}
       path={this.state.lesson.path}
       settings={this.state.lesson.settings}
       handleStopLesson={this.handleStopLesson.bind(this)}

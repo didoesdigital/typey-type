@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Autocomplete from 'react-autocomplete';
+import GoogleAnalytics from 'react-ga';
 import { IconTypeyType, IconSearch } from './Icon';
 import { matchLessonToTerm, sortLessons } from './utils';
 import './App.css';
@@ -9,6 +10,16 @@ class Header extends Component {
   componentDidMount() {
     if (this.mainHeading) {
       this.mainHeading.focus();
+    }
+  }
+
+  onStart() {
+    if (this.props.nextLessonPath) {
+      GoogleAnalytics.event({
+        category: 'Search',
+        action: 'Start',
+        label: this.props.nextLessonPath
+      });
     }
   }
 
@@ -80,7 +91,7 @@ class Header extends Component {
                     {nextLesson}
                   </div>
                 </div>
-                <Link to={'/lessons'+this.props.nextLessonPath.replace(/lesson\.txt$/,'')} className="link-button table-cell" role="button" id="ga--header--start">Start</Link>
+                <Link to={'/lessons'+this.props.nextLessonPath.replace(/lesson\.txt$/,'')} className="link-button table-cell" role="button" id="ga--header--start" onClick={this.onStart.bind(this)}>Start</Link>
               </div>
             </nav>
           </div>
