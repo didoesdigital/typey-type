@@ -455,8 +455,8 @@ class App extends Component {
 
     if (this.props.location.pathname.includes('custom')) {
       GoogleAnalytics.event({
-        category: 'UserSettings',
-        action: 'Show strokes in lesson',
+        category: 'Stroke hint',
+        action: 'Reveal',
         label: 'CUSTOM_LESSON'
       });
     }
@@ -467,8 +467,8 @@ class App extends Component {
       } catch { }
 
       GoogleAnalytics.event({
-        category: 'UserSettings',
-        action: 'Show strokes in lesson',
+        category: 'Stroke hint',
+        action: 'Reveal',
         label: labelShowStrokesInLesson
       });
     }

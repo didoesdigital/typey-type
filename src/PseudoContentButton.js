@@ -36,19 +36,31 @@ class PseudoContentButton extends Component {
     if (target === '#js-custom-lesson-dictionary-entries') { target = 'Copied custom lesson to clipboard'; }
     if (target === '#js-your-words-for-dictionary-entries') { target = 'Copied your words to clipboard'; }
 
-    if (target) {
+    if (target && target.includes("Copied progress")) {
+      GoogleAnalytics.event({
+        category: 'Progress',
+        action: 'Copied progress',
+        label: 'Target: ' + target
+      });
+    }
+    else if (target && target.includes("Copied")) {
+      GoogleAnalytics.event({
+        category: 'Copy button',
+        action: 'Click',
+        label: 'Target: ' + target
+      });
+    }
+    else if (target) {
       GoogleAnalytics.event({
         category: 'Button',
         action: 'Click',
         label: 'Target: ' + target
       });
-    } else if (this.props.children === "Load progress from text" || this.props.children === "Load") {
-      GoogleAnalytics.event({
-        category: 'Button',
-        action: 'Click',
-        label: 'Target: ' + this.props.children
-      });
-    } else {
+    }
+    else if (this.props.children === "Load progress from text" || this.props.children === "Load") {
+      // already handled by Progress.js restoreButtonOnClickFunction() {}
+    }
+    else {
       GoogleAnalytics.event({
         category: 'Button',
         action: 'Click',
