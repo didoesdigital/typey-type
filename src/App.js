@@ -385,6 +385,13 @@ class App extends Component {
       }
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change limit word count',
+      label: value.toString()
+    });
+
     return value;
   }
 
@@ -403,6 +410,13 @@ class App extends Component {
       }
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change start from word',
+      label: value.toString()
+    });
+
     return value;
   }
 
@@ -421,6 +435,13 @@ class App extends Component {
       }
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change repetitions',
+      label: value.toString()
+    });
+
     return value;
   }
 
@@ -665,6 +686,13 @@ class App extends Component {
       }
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change ' + name,
+      label: value.toString()
+    });
+
     return value;
   }
 
@@ -683,6 +711,13 @@ class App extends Component {
       }
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change sort order',
+      label: value.toString()
+    });
+
     return value;
   }
 
@@ -701,6 +736,13 @@ class App extends Component {
     this.setState({userSettings: newState}, () => {
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change show strokes as',
+      label: value.toString()
+    });
+
     return value;
   }
 
@@ -708,6 +750,12 @@ class App extends Component {
     let newState = Object.assign({}, this.state.userSettings);
 
     newState['showScoresWhileTyping'] = !newState['showScoresWhileTyping'];
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change show scores while typing',
+      label: newState['showScoresWhileTyping'].toString()
+    });
 
     this.setState({userSettings: newState}, () => {
       writePersonalPreferences('userSettings', this.state.userSettings);
@@ -775,6 +823,13 @@ class App extends Component {
       }
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Choose Study Type',
+      label: value.toString()
+    });
+
     return value;
   }
 
@@ -793,6 +848,13 @@ class App extends Component {
       }
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change spacePlacement',
+      label: value.toString()
+    });
+
     return value;
   }
 
@@ -811,6 +873,13 @@ class App extends Component {
       }
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change steno layout',
+      label: value.toString()
+    });
+
     return value;
   }
 
@@ -1042,6 +1111,12 @@ class App extends Component {
     let newState = !this.state.hideOtherSettings;
     this.setState({
       hideOtherSettings: newState
+    });
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Toggle hide other settings',
+      label: newState.toString()
     });
   }
 
@@ -1307,11 +1382,19 @@ class App extends Component {
           value: ev.target.value
         });
 
-        GoogleAnalytics.event({
-          category: 'Search',
-          action: 'Change',
-          label: value
-        });
+        if (value.toString()) {
+          GoogleAnalytics.event({
+            category: 'Search',
+            action: 'Change',
+            label: value.toString()
+          });
+        } else {
+          GoogleAnalytics.event({
+            category: 'Search',
+            action: 'Change',
+            label: 'EMPTY_SEARCH_TEXT'
+          });
+        }
       }}
       onSelect={(value, item) => {
         this.setState({
@@ -1325,7 +1408,7 @@ class App extends Component {
         GoogleAnalytics.event({
           category: 'Search',
           action: 'Select',
-          label: searchSelectLabel
+          label: searchSelectLabel.toString()
         });
       }}
       path={this.state.lesson.path}
