@@ -452,6 +452,27 @@ class App extends Component {
     this.setState({showStrokesInLesson: value});
     const element = document.getElementById('your-typed-text');
     if (element) { element.focus(); }
+
+    if (this.props.location.pathname.includes('custom')) {
+      GoogleAnalytics.event({
+        category: 'UserSettings',
+        action: 'Show strokes in lesson',
+        label: 'CUSTOM_LESSON'
+      });
+    }
+    else {
+      let labelShowStrokesInLesson = 'true';
+      try {
+        labelShowStrokesInLesson = this.state.lesson.newPresentedMaterial.current.phrase + ": " + this.state.lesson.newPresentedMaterial.current.stroke;
+      } catch { }
+
+      GoogleAnalytics.event({
+        category: 'UserSettings',
+        action: 'Show strokes in lesson',
+        label: labelShowStrokesInLesson
+      });
+    }
+
     return value;
   }
 
