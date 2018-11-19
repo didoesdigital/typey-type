@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Clipboard from 'clipboard';
+import GoogleAnalytics from 'react-ga';
 
 class PseudoContentButton extends Component {
   constructor(props) {
@@ -29,6 +30,31 @@ class PseudoContentButton extends Component {
         window.clearTimeout(timeoutID);
       }, 1000);
     });
+
+    let target = this.props.dataClipboardTarget;
+    if (target === '#js-metwords-from-typey-type') { target = 'Copied progress to clipboard'; }
+    if (target === '#js-custom-lesson-dictionary-entries') { target = 'Copied custom lesson to clipboard'; }
+    if (target === '#js-your-words-for-dictionary-entries') { target = 'Copied your words to clipboard'; }
+
+    if (target) {
+      GoogleAnalytics.event({
+        category: 'Button',
+        action: 'Click',
+        label: 'Target: ' + target
+      });
+    } else if (this.props.children === "Load progress from text" || this.props.children === "Load") {
+      GoogleAnalytics.event({
+        category: 'Button',
+        action: 'Click',
+        label: 'Target: ' + this.props.children
+      });
+    } else {
+      GoogleAnalytics.event({
+        category: 'Button',
+        action: 'Click',
+        label: 'Target: NO_TARGET'
+      });
+    }
   }
 
   render () {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GoogleAnalytics from 'react-ga';
 import PseudoContentButton from './PseudoContentButton';
 import { IconCheckmark, IconTriangleRight } from './Icon';
 import { Link } from 'react-router-dom';
@@ -51,6 +52,23 @@ class Progress extends Component {
     this.props.setPersonalPreferences(textareaContents.value);
     // this.props.setAnnouncementMessage(this, "teft");
     this.setState({flashWarning: "To update your lesson progress, visit the lessons."});
+
+    let numberOfMetWords = '0';
+    try {
+      numberOfMetWords = Object.keys(JSON.parse(textareaContents.value)).length.toString();
+    } catch (error) {
+      numberOfMetWords = 'BAD_PROGRESS_INPUT'
+      console.log(error);
+    }
+    if (textareaContents.value === '') {
+      numberOfMetWords = 'EMPTY_PROGRESS_INPUT'
+    }
+
+    GoogleAnalytics.event({
+      category: 'Progress',
+      action: 'Update progress',
+      label: 'Load met words: ' + numberOfMetWords
+    });
   };
 
   render () {
