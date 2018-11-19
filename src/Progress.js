@@ -58,9 +58,8 @@ class Progress extends Component {
       numberOfMetWords = Object.keys(JSON.parse(textareaContents.value)).length.toString();
     } catch (error) {
       numberOfMetWords = 'BAD_PROGRESS_INPUT'
-      console.log(error);
     }
-    if (textareaContents.value === '') {
+    if (textareaContents.value === '' || textareaContents.value === ' ') {
       numberOfMetWords = 'EMPTY_PROGRESS_INPUT'
     }
 
