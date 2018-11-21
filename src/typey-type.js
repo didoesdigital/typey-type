@@ -643,6 +643,7 @@ function processDictionary(swappedDictionaryFile) {
     [/^({)?~\|(.*)$/, '$2'], // Replace "~|’" with "’" or "{~|‘" with "‘"
     ['{-|}', ''], // Remove string "{-|}"
   ];
+  // let punctuationUnescapedString = "[!"#$%&'()*,./:;<=>?@[\]^`{|}~]-";
   let punctuationRegex = /[!"#$%&'()*,./:;<=>?@[\\\]^`{|}~-]/;
 
   for (let property in swappedDictionaryFile) {
@@ -652,11 +653,14 @@ function processDictionary(swappedDictionaryFile) {
       property = property.replace(charsToRemove[i][0], charsToRemove[i][1]);
 
       if (property.match(punctuationRegex) && !property.match(/[A-Za-z0-9 ]/)) {
+        // console.log("BEFORE: " + property);
         for (let i = 0; i < charsToRemoveFromPunctuation.length; i++) {
           property = property.replace(charsToRemoveFromPunctuation[i][0], charsToRemoveFromPunctuation[i][1]);
         }
+        // console.log("AFTER: " + property);
       }
     }
+    // TODO: generalise these hard coded fixes
     if (property === "{}" && value === "WUZ/WUZ") {
       processedDictionary[property] = "TPR-BGT/TK-LS/TPR*BGT";
     } else if (property.match(/^[0-9]$/)) {
