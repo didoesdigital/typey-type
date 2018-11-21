@@ -659,12 +659,24 @@ function processDictionary(swappedDictionaryFile) {
     }
     if (property === "{}" && value === "WUZ/WUZ") {
       processedDictionary[property] = "TPR-BGT/TK-LS/TPR*BGT";
+    } else if (property.match(/^[0-9]$/)) {
+      // don't use `0RBGS` for 0
     } else if (property === "'" && (value === "TP-L" || value === "TP-P")) {
       // don't override AE with TP-L
     } else {
       processedDictionary[property] = value;
     }
   }
+  processedDictionary['0'] = "#O";
+  processedDictionary['1'] = "#S";
+  processedDictionary['2'] = "#T-";
+  processedDictionary['3'] = "#P-";
+  processedDictionary['4'] = "#H";
+  processedDictionary['5'] = "#A";
+  processedDictionary['6'] = "#F";
+  processedDictionary['7'] = "#-P";
+  processedDictionary['8'] = "#L";
+  processedDictionary['9'] = "#-T";
   return processedDictionary;
 }
 
