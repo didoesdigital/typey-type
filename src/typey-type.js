@@ -638,12 +638,6 @@ function processDictionary(swappedDictionaryFile) {
     [/({&)([0-9])(})/, '$2'], // Replace "{&1}" with "1"
   ];
   let charsToRemoveFromPunctuation = [
-    [/({\^)(.*)(\^})/, '$2'], // Replace "{^ ^}" with " "
-    [/({\^})(.*)/, '$2'], // Replace "{^}™" with "™"
-    [/(.*)(\^})/, '$1'], // Replace "words{^}" with "words"
-    [/(^})(.*)({$)/, '$2'], // Replace "}words{" leftover from prev regex with "words"
-    [/({)(.)(})/, '$2'], // Replace "{;}" with ";"
-
     [/({\^)(.*)(})/, '$2'], // Replace "{^x}" with "x"
     [/^\\(.*)({|})$/, '$2'], // Replace "\}" with "}" or "\{" with "{"
     [/^({)?~\|(.*)$/, '$2'], // Replace "~|’" with "’" or "{~|‘" with "‘"
@@ -654,14 +648,14 @@ function processDictionary(swappedDictionaryFile) {
   for (let property in swappedDictionaryFile) {
     let value = swappedDictionaryFile[property];
 
-    if (property.match(punctuationRegex) && !property.match(/[A-Za-z0-9 ]/)) {
-      for (let i = 0; i < charsToRemoveFromPunctuation.length; i++) {
-        property = property.replace(charsToRemoveFromPunctuation[i][0], charsToRemoveFromPunctuation[i][1]);
-      }
-    }
-
     for (let i = 0; i < charsToRemove.length; i++) {
       property = property.replace(charsToRemove[i][0], charsToRemove[i][1]);
+
+      if (property.match(punctuationRegex) && !property.match(/[A-Za-z0-9 ]/)) {
+        for (let i = 0; i < charsToRemoveFromPunctuation.length; i++) {
+          property = property.replace(charsToRemoveFromPunctuation[i][0], charsToRemoveFromPunctuation[i][1]);
+        }
+      }
     }
     if (property === "{}" && value === "WUZ/WUZ") {
       processedDictionary[property] = "TPR-BGT/TK-LS/TPR*BGT";
