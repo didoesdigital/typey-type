@@ -490,42 +490,53 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     let entry = wordList[i];
     let stroke = sourceWordsAndStrokes[entry];
 
-    // FIRST => first
-    if (!stroke) {
-      let uppercasedStroke = sourceWordsAndStrokes[entry.toLowerCase()];
+    function chooseStrokeForWord () {
+      // FIRST => first
+      if (!stroke) {
+        let uppercasedStroke = sourceWordsAndStrokes[entry.toLowerCase()];
 
-      if (entry.toUpperCase() === entry && uppercasedStroke) {
-        stroke = '*URP/' + uppercasedStroke;
+        if (entry.toUpperCase() === entry && uppercasedStroke) {
+          stroke = '*URP/' + uppercasedStroke;
+        }
+      }
+
+      // TUESDAY => Tuesday
+      if (!stroke) {
+        let uppercasedStroke = sourceWordsAndStrokes[entry.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase())];
+
+        if (entry.toUpperCase() === entry && uppercasedStroke) {
+          stroke = '*URP/' + uppercasedStroke;
+        }
+      }
+
+      // tom => Tom
+      if (!stroke) {
+        let capitalisedStroke = sourceWordsAndStrokes[entry.replace(/(^|\s)\S/g, l => l.toUpperCase())];
+
+        if (capitalisedStroke) {
+          stroke = 'HRO*ER/' + capitalisedStroke;
+        }
+      }
+
+      // Heather => heather
+      if (!stroke) {
+        let lowercaseStroke = sourceWordsAndStrokes[entry.toLowerCase()];
+        if (lowercaseStroke) {
+          stroke = 'KPA/' + lowercaseStroke;
+        }
+      }
+
+      if (!stroke) {
+        if (entry.includes("!")) {
+          // try split on ! and try again
+        } else {
+          stroke = "xxx";
+        }
       }
     }
 
-    // TUESDAY => Tuesday
-    if (!stroke) {
-      let uppercasedStroke = sourceWordsAndStrokes[entry.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase())];
+    chooseStrokeForWord();
 
-      if (entry.toUpperCase() === entry && uppercasedStroke) {
-        stroke = '*URP/' + uppercasedStroke;
-      }
-    }
-
-    // tom => Tom
-    if (!stroke) {
-      let capitalisedStroke = sourceWordsAndStrokes[entry.replace(/(^|\s)\S/g, l => l.toUpperCase())];
-
-      if (capitalisedStroke) {
-        stroke = 'HRO*ER/' + capitalisedStroke;
-      }
-    }
-
-    // Heather => heather
-    if (!stroke) {
-      let lowercaseStroke = sourceWordsAndStrokes[entry.toLowerCase()];
-      if (lowercaseStroke) {
-        stroke = 'KPA/' + lowercaseStroke;
-      }
-    }
-
-    if (!stroke) { stroke = "xxx"; }
     dictionary.push({phrase: entry, stroke: stroke});
   }
 
