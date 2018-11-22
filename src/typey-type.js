@@ -484,34 +484,42 @@ function parseWordList(userInputWordList) {
 }
 
 function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T"}) {
-  let dictionary = [];
+  let sourceAndPresentedMaterial = [];
+  // wordList = [ 'bed,', 'man!', "'sinatra'", 'and again', 'media query', 'push origin master', 'diff --cached', 'diff -- cached' ]
 
   for (let i = 0; i < wordList.length; i++) {
-    let entry = wordList[i];
-    let stroke = sourceWordsAndStrokes[entry];
+    let wordOrPhraseMaterial = wordList[i];
+    let remainingWordOrPhrase = wordList[i];
+    let strokes = "";
+    let stroke = "";
+    let strokeLookupAttempts = 0;
+    // if (wordOrPhraseMaterial === "and! and") { debugger; }
+    // if (remainingWordOrPhrase === "and! and") { debugger; }
 
-    function chooseStrokeForWord () {
+    function chooseStrokeForWord (wordOrPhrase) {
+      stroke = sourceWordsAndStrokes[wordOrPhrase];
+
       // FIRST => first
       if (!stroke) {
-        let uppercasedStroke = sourceWordsAndStrokes[entry.toLowerCase()];
+        let uppercasedStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase()];
 
-        if (entry.toUpperCase() === entry && uppercasedStroke) {
+        if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
           stroke = '*URP/' + uppercasedStroke;
         }
       }
 
       // TUESDAY => Tuesday
       if (!stroke) {
-        let uppercasedStroke = sourceWordsAndStrokes[entry.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase())];
+        let uppercasedStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase())];
 
-        if (entry.toUpperCase() === entry && uppercasedStroke) {
+        if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
           stroke = '*URP/' + uppercasedStroke;
         }
       }
 
       // tom => Tom
       if (!stroke) {
-        let capitalisedStroke = sourceWordsAndStrokes[entry.replace(/(^|\s)\S/g, l => l.toUpperCase())];
+        let capitalisedStroke = sourceWordsAndStrokes[wordOrPhrase.replace(/(^|\s)\S/g, l => l.toUpperCase())];
 
         if (capitalisedStroke) {
           stroke = 'HRO*ER/' + capitalisedStroke;
@@ -520,27 +528,144 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
 
       // Heather => heather
       if (!stroke) {
-        let lowercaseStroke = sourceWordsAndStrokes[entry.toLowerCase()];
+        let lowercaseStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase()];
         if (lowercaseStroke) {
           stroke = 'KPA/' + lowercaseStroke;
         }
       }
 
       if (!stroke) {
-        if (entry.includes("!")) {
-          // try split on ! and try again
-        } else {
+        stroke = "xxx";
+      }
+
+      strokeLookupAttempts = strokeLookupAttempts + 1;
+
+      return stroke;
+    }
+
+    function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, strokes, stroke) {
+      // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
+        // FIXME: 4 instances of the punctuation regex:
+        if (remainingWordOrPhrase.match(/^[-!?',]?$/)) { // exactly matches punctuation e.g. "!", "?", "'"
+          stroke = chooseStrokeForWord(remainingWordOrPhrase);
+          strokes = strokes === "" ? stroke : strokes + " " + stroke;
           stroke = "xxx";
+
+          remainingWordOrPhrase = ''; // prevents infinite loop
+        }
+        else {
+          // FIXME: 4 instances of the punctuation regex:
+          let matchingPunctuation = remainingWordOrPhrase.match(/([-!?',])/)[0].charAt(0); // given "man?" => ["?", index: 3, input: "man?", groups: undefined] => "?" => "?"
+          let index = remainingWordOrPhrase.indexOf(matchingPunctuation);
+          let firstWord = '';
+
+          if (index === 0) { // starts with ! e.g. !foo
+            firstWord = remainingWordOrPhrase.slice(0, 1); // "!"
+            remainingWordOrPhrase = remainingWordOrPhrase.slice(index + 1, remainingWordOrPhrase.length); // "foo"
+          }
+          else { // contains ! e.g. foo!
+            firstWord = remainingWordOrPhrase.slice(0, index); // "foo"
+            remainingWordOrPhrase = remainingWordOrPhrase.slice(index, remainingWordOrPhrase.length); // "!"
+          }
+
+          stroke = chooseStrokeForWord(firstWord); // stroke = chooseStrokeForWord("man")
+
+          strokes = strokes === "" ? stroke : strokes + " " + stroke;
+          stroke = "xxx";
+        }
+
+      if (strokeLookupAttempts > 10) { return ['', strokes, stroke]; }
+
+      return [remainingWordOrPhrase, strokes, stroke];
+    }
+
+    // if (wordOrPhraseMaterial === "bed,") { debugger; }
+    stroke = chooseStrokeForWord(wordOrPhraseMaterial); // given "off went the man!" return "xxx"
+
+    // First check for exact matching stroke:
+    if (stroke && stroke.length > 0 && !stroke === "xxx") {
+      strokes = stroke;
+    }
+
+    // if (wordOrPhraseMaterial === "and the cat") { debugger; }
+    // if (wordOrPhraseMaterial === "fut cxt blug") { debugger; }
+    // if (wordOrPhraseMaterial === "and! and") { debugger; }
+
+    while (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
+      // Arbitrary limit to prevent making Typey Type slow from excess look ups and
+      // avoid possible infinite loops
+      if (strokeLookupAttempts > 12) {
+        remainingWordOrPhrase = '';
+        strokes = strokes + ' xxx';
+        stroke = 'xxx';
+      } else {
+
+        // Check for whitespace on remaining words
+        if (remainingWordOrPhrase.startsWith(" ") || remainingWordOrPhrase.endsWith(" ")) {
+          remainingWordOrPhrase = remainingWordOrPhrase.trim();
+        }
+
+        // If we've found a matching stroke for the last remaining word, add the stroke to the hint and remove the word
+        if (stroke && stroke.length > 0 && !(stroke === "xxx")) {
+          strokes = strokes === "" ? stroke : strokes + " " + stroke;
+          remainingWordOrPhrase = '';
+          stroke = "xxx";
+        }
+
+        // Break up phrase on whitespace
+        else if (stroke === "xxx" && remainingWordOrPhrase.includes(" ")) { // "off went the man!"
+          let firstWord = remainingWordOrPhrase.slice(0, remainingWordOrPhrase.indexOf(" ")); // "off"
+          remainingWordOrPhrase = remainingWordOrPhrase.slice(remainingWordOrPhrase.indexOf(" ") + 1, remainingWordOrPhrase.length); // "went the man!"
+
+          stroke = chooseStrokeForWord(firstWord); // "off"
+
+          // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
+          // FIXME: 4 instances of the punctuation regex:
+          if (stroke === "xxx" && (firstWord.match(/[-!?',]/) !== null)) { // "man!"
+            let tmp = '';
+            let tmpstrokes = '';
+            // console.log(firstWord + " XXX " + strokes + " XXX " + stroke);
+            [tmp, tmpstrokes, stroke] = tryMatchingWordsWithPunctuation(firstWord, strokes, stroke); // "and!"
+
+            // if (stroke === "xxx") { // if it still doesn't match, try again
+            //   [tmp, strokes, stroke] = tryMatchingWordsWithPunctuation(firstWord, strokes, stroke); // "!"
+            // }
+            remainingWordOrPhrase = tmp + " " + remainingWordOrPhrase; // This will cause its own bugs be re-introducing spaces where they don't belong in phrases
+            strokes = strokes === "" ? stroke : strokes + " " + tmpstrokes;
+            // if (strokes.startsWith("SKP xxx")) { debugger; }
+            stroke = "xxx";
+          }
+          else {
+            strokes = strokes === "" ? stroke : strokes + " " + stroke;
+            // if (strokes.startsWith("SKP xxx")) { debugger; }
+            // console.log("this one" + strokes);
+            stroke = "xxx";
+          }
+          // FIXME:
+          // and! and	SKP xxx SKHRAPL SKP
+
+        }
+        // Break up phrase on punctuation
+        // FIXME: 4 instances of the punctuation regex:
+        else if (stroke === "xxx" && (remainingWordOrPhrase.match(/[-!?',]/) !== null)) { // "man!"
+          [remainingWordOrPhrase, strokes, stroke] = tryMatchingWordsWithPunctuation(remainingWordOrPhrase, strokes, stroke);
+        }
+        // TODO: try fingerspelling
+        else {
+          if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
+            stroke = chooseStrokeForWord(remainingWordOrPhrase); // stroke = chooseStrokeForWord("man")
+            remainingWordOrPhrase = '';
+            strokes = strokes === "" ? stroke : strokes + " " + stroke;
+          }
+          remainingWordOrPhrase = '';
         }
       }
     }
 
-    chooseStrokeForWord();
-
-    dictionary.push({phrase: entry, stroke: stroke});
+    sourceAndPresentedMaterial.push({phrase: wordOrPhraseMaterial, stroke: strokes });
   }
 
-  return dictionary;
+  return sourceAndPresentedMaterial;
 }
 
 function parseLesson(lessonText, path) {
@@ -678,6 +803,9 @@ function processDictionary(swappedDictionaryFile) {
       // don't use `0RBGS` for 0
     } else if (property === "'" && (value === "TP-L" || value === "TP-P")) {
       // don't override AE with TP-L
+    } else if (property === "," && value === "W-B") {
+      value = "KW-BG"; // hack for preferring spaced comma brief
+      processedDictionary[property] = value;
     } else {
       processedDictionary[property] = value;
     }
