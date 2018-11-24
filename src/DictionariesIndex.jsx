@@ -84,57 +84,95 @@ class DictionariesIndex extends Component {
           </div>
         </div>
         <div className="p3 mx-auto mw-1024">
-          <h3>Custom dictionaries</h3>
-          <p>To help the open steno community and Typey&nbsp;Type grow even faster, add your custom dictionaries to the{' '}
-            <GoogleAnalytics.OutboundLink
-              eventLabel="community’s dictionaries"
-              aria-label="community’s dictionaries (external link opens in new tab)"
-              to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              community’s dictionaries
-              <Tooltip
-                title="Opens in a new tab"
-                animation="shift"
-                arrow="true"
-                className=""
-                duration="200"
-                tabIndex="0"
-                tag="span"
-                theme="didoesdigital"
-                trigger="mouseenter focus click"
-                onShow={this.props.setAnnouncementMessage}
+          <div className="mw-584">
+            <h3 id="typey-type-dictionary">Typey&nbsp;Type dictionary</h3>
+            <p><Link to="/typey-type/dictionaries/typey-type/typey-type/">Typey&nbsp;Type’s dictionary</Link> follows the Plover dictionary with misstrokes removed from the top 10,000 words.</p>
+
+            <p>Typey&nbsp;Type’s stroke suggestions look for the shortest stroke in the cleaned dictionary with penalties for multi-stroke briefs and briefs using the star (<code>*</code>) key.</p>
+
+            <p>You can use <Link to="/typey-type/dictionaries/typey-type/typey-type/">Typey&nbsp;Type’s dictionary</Link> instead of Plover’s.</p>
+
+            <p>The stories lessons like Aesop’s Fables use British English spellings for words such as “neighbour”. For these you can use the <Link to="/typey-type/dictionaries/didoesdigital/dict-en-AU-with-extra-stroke/">Australian English with extra strokes</Link> dictionary.</p>
+
+            <p>If you notice any odd strokes,{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="post to the feedback form"
+                aria-label="post to the feedback form (external link opens in new tab)"
+                to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-              </Tooltip>
-            </GoogleAnalytics.OutboundLink>.
-          </p>
-          <p className="text-small">You might also be interested in{' '}
-            <GoogleAnalytics.OutboundLink
-              eventLabel="Stenodict"
-              aria-label="Stenodict (external link opens in new tab)"
-              to="http://www.openstenoproject.org/stenodict/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Stenodict
-              <Tooltip
-                title="Opens in a new tab"
-                animation="shift"
-                arrow="true"
-                className=""
-                duration="200"
-                tabIndex="0"
-                tag="span"
-                theme="didoesdigital"
-                trigger="mouseenter focus click"
-                onShow={this.props.setAnnouncementMessage}
+                use the feedback <span className="nowrap">form
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.</p>
+
+            <h3>Custom dictionaries</h3>
+            <p>To use a different dictionary or steno theory, upload your words and strokes to a <Link to="/lessons/custom">custom lesson</Link>. The briefs shown will match your dictionary.</p>
+
+            <p>To help the open steno community and Typey&nbsp;Type grow even faster, add your custom dictionaries to the{' '}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="community’s dictionaries"
+                aria-label="community’s dictionaries (external link opens in new tab)"
+                to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-              </Tooltip>
-            </GoogleAnalytics.OutboundLink>.
-          </p>
+                community’s <span className="nowrap">dictionaries list
+                <Tooltip
+                  title="Opens in a new tab"
+                  animation="shift"
+                  arrow="true"
+                  className=""
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.
+            </p>
+            <p className="text-small">You might also be interested in{' '}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Stenodict"
+                aria-label="Stenodict (external link opens in new tab)"
+                to="http://www.openstenoproject.org/stenodict/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Stenodict
+                <Tooltip
+                  title="Opens in a new tab"
+                  animation="shift"
+                  arrow="true"
+                  className=""
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip>
+              </GoogleAnalytics.OutboundLink>.
+            </p>
+          </div>
 
           <h3>Typey&nbsp;Type dictionaries</h3>
           <ul className="unstyled-list">{linkList}</ul>

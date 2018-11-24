@@ -139,6 +139,55 @@ class Contribute extends Component {
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></a>.
             </p>
+            <p>If you want to contribute directly to the dictionaries powering Typey&nbsp;Type’s stroke suggestions and lessons, see{' '}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Di’s Steno Dictionaries repo"
+                aria-label="Di’s Steno Dictionaries repo (external link opens in new tab)"
+                to="https://github.com/didoesdigital/steno-dictionaries"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Di’s Steno Dictionaries <span className="nowrap">repo
+                  <Tooltip
+                    title="(external link opens in new tab)"
+                    animation="shift"
+                    arrow="true"
+                    className=""
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                  </Tooltip>
+                </span>
+              </GoogleAnalytics.OutboundLink> and the{' '}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="repo’s contributing section"
+                aria-label="repo’s contributing section (external link opens in new tab)"
+                to="https://github.com/didoesdigital/steno-dictionaries#contributing"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                repo’s contributing section
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  animation="shift"
+                  arrow="true"
+                  className=""
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip>
+              </GoogleAnalytics.OutboundLink>.
+            </p>
 
             <h3 id="feedback">Feedback</h3>
             <p>

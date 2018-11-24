@@ -43,32 +43,35 @@ class LessonsIndex extends Component {
           </div>
         </div>
         <div className="p3 mx-auto mw-1024">
-          <h3>Custom lessons</h3>
-          <p>To help Typey&nbsp;Type grow even faster, add your custom lessons to the{' '}
-            <GoogleAnalytics.OutboundLink
-              eventLabel="community's lessons"
-              to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              community’s lessons
-              <Tooltip
-                title="Opens in a new tab"
-                animation="shift"
-                arrow="true"
-                className=""
-                duration="200"
-                tabIndex="0"
-                tag="span"
-                theme="didoesdigital"
-                trigger="mouseenter focus click"
-                onShow={this.props.setAnnouncementMessage}
+          <div className="mw-584">
+            <h3>Custom lessons</h3>
+            <p>To help Typey&nbsp;Type grow even faster, add your custom lessons to the{' '}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="community's lessons"
+                to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-              </Tooltip>
-            </GoogleAnalytics.OutboundLink>.
-          </p>
-          <p><Link to={`${this.props.match.url}/custom`.replace(/\/{2,}/g,'/')} className="link-button dib"  style={{lineHeight: 2}} id="ga--lesson-index--create-a-custom-lesson">Create a custom lesson</Link></p>
+                community’s lessons
+                <Tooltip
+                  title="Opens in a new tab"
+                  animation="shift"
+                  arrow="true"
+                  className=""
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip>
+              </GoogleAnalytics.OutboundLink>.
+            </p>
+            <p><Link to={`${this.props.match.url}/custom`.replace(/\/{2,}/g,'/')} className="link-button dib"  style={{lineHeight: 2}} id="ga--lesson-index--create-a-custom-lesson">Create a custom lesson</Link></p>
+          </div>
+
           <h3>Typey&nbsp;Type lessons</h3>
           <ul className="unstyled-list">{linkList}</ul>
         </div>
