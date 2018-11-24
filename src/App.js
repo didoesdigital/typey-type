@@ -386,10 +386,13 @@ class App extends Component {
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
 
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
     GoogleAnalytics.event({
       category: 'UserSettings',
       action: 'Change limit word count',
-      label: value.toString()
+      label: labelString
     });
 
     return value;
@@ -411,10 +414,13 @@ class App extends Component {
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
 
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
     GoogleAnalytics.event({
       category: 'UserSettings',
       action: 'Change start from word',
-      label: value.toString()
+      label: labelString
     });
 
     return value;
@@ -436,10 +442,13 @@ class App extends Component {
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
 
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
     GoogleAnalytics.event({
       category: 'UserSettings',
       action: 'Change repetitions',
-      label: value.toString()
+      label: labelString
     });
 
     return value;
@@ -708,10 +717,13 @@ class App extends Component {
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
 
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
     GoogleAnalytics.event({
       category: 'UserSettings',
       action: 'Change ' + name,
-      label: value.toString()
+      label: labelString
     });
 
     return value;
@@ -733,10 +745,13 @@ class App extends Component {
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
 
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
     GoogleAnalytics.event({
       category: 'UserSettings',
       action: 'Change sort order',
-      label: value.toString()
+      label: labelString
     });
 
     return value;
@@ -758,10 +773,13 @@ class App extends Component {
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
 
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
     GoogleAnalytics.event({
       category: 'UserSettings',
       action: 'Change show strokes as',
-      label: value.toString()
+      label: labelString
     });
 
     return value;
@@ -845,10 +863,13 @@ class App extends Component {
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
 
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
     GoogleAnalytics.event({
       category: 'UserSettings',
       action: 'Choose Study Type',
-      label: value.toString()
+      label: labelString
     });
 
     return value;
@@ -870,10 +891,13 @@ class App extends Component {
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
 
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
     GoogleAnalytics.event({
       category: 'UserSettings',
       action: 'Change spacePlacement',
-      label: value.toString()
+      label: labelString
     });
 
     return value;
@@ -895,10 +919,13 @@ class App extends Component {
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
 
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
     GoogleAnalytics.event({
       category: 'UserSettings',
       action: 'Change steno layout',
-      label: value.toString()
+      label: labelString
     });
 
     return value;
@@ -1403,11 +1430,14 @@ class App extends Component {
           value: ev.target.value
         });
 
-        if (value.toString()) {
+        let labelString = value;
+        if (!value) { labelString = "BAD_INPUT"; }
+
+        if (value && value.toString()) {
           GoogleAnalytics.event({
             category: 'Search',
             action: 'Change',
-            label: value.toString()
+            label: labelString
           });
         } else {
           GoogleAnalytics.event({
