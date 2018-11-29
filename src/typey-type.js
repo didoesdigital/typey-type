@@ -493,6 +493,8 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     let strokes = "";
     let stroke = "";
     let strokeLookupAttempts = 0;
+    let punctuationSplittingRegex = /[-!?',]/;
+    let punctuationSplittingWholeMatchRegex = /^[-!?',]?$/;
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
     // if (remainingWordOrPhrase === "and! and") { debugger; }
 
@@ -545,8 +547,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
 
     function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, strokes, stroke) {
       // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
-        // FIXME: 4 instances of the punctuation regex:
-        if (remainingWordOrPhrase.match(/^[-!?',]?$/)) { // exactly matches punctuation e.g. "!", "?", "'"
+        if (remainingWordOrPhrase.match(punctuationSplittingWholeMatchRegex)) { // exactly matches punctuation e.g. "!", "?", "'"
           stroke = chooseStrokeForWord(remainingWordOrPhrase);
           strokes = strokes === "" ? stroke : strokes + " " + stroke;
           stroke = "xxx";
@@ -555,7 +556,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
         }
         else {
           // FIXME: 4 instances of the punctuation regex:
-          let matchingPunctuation = remainingWordOrPhrase.match(/([-!?',])/)[0].charAt(0); // given "man?" => ["?", index: 3, input: "man?", groups: undefined] => "?" => "?"
+          let matchingPunctuation = remainingWordOrPhrase.match(punctuationSplittingRegex)[0].charAt(0); // given "man?" => ["?", index: 3, input: "man?", groups: undefined] => "?" => "?"
           let index = remainingWordOrPhrase.indexOf(matchingPunctuation);
           let firstWord = '';
 
@@ -621,7 +622,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
 
           // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
           // FIXME: 4 instances of the punctuation regex:
-          if (stroke === "xxx" && (firstWord.match(/[-!?',]/) !== null)) { // "man!"
+          if (stroke === "xxx" && (firstWord.match(punctuationSplittingRegex) !== null)) { // "man!"
             let tmp = '';
             let tmpstrokes = '';
             // console.log(firstWord + " XXX " + strokes + " XXX " + stroke);
@@ -646,8 +647,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
 
         }
         // Break up phrase on punctuation
-        // FIXME: 4 instances of the punctuation regex:
-        else if (stroke === "xxx" && (remainingWordOrPhrase.match(/[-!?',]/) !== null)) { // "man!"
+        else if (stroke === "xxx" && (remainingWordOrPhrase.match(punctuationSplittingRegex) !== null)) { // "man!"
           [remainingWordOrPhrase, strokes, stroke] = tryMatchingWordsWithPunctuation(remainingWordOrPhrase, strokes, stroke);
         }
         // TODO: try fingerspelling
