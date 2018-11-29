@@ -493,8 +493,8 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     let strokes = "";
     let stroke = "";
     let strokeLookupAttempts = 0;
-    let punctuationSplittingRegex = /[-!?',]/;
-    let punctuationSplittingWholeMatchRegex = /^[-!?',]?$/;
+    let punctuationSplittingRegex = /[!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~—–-]/; // includes en and em dashes, curly quotes
+    let punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
     // if (remainingWordOrPhrase === "and! and") { debugger; }
 
