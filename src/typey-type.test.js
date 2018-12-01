@@ -949,6 +949,8 @@ describe('generate dictionary entries', () => {
         {phrase: "push origin master", stroke: "PURB O*RPBLG PHAFRT"},
         {phrase: "diff -- cached", stroke: "TKEUF TK*RB KAERBD"},
         {phrase: "bed, man, and address", stroke: "PWED KW-BG PHAPB KW-BG SKP A/TKRES"},
+        // {phrase: "ef eff ge", stroke: "*EF *E/TP*/TP* TKPW*/*E"},
+        // {phrase: "ef eff eff ge", stroke: "*EF *E/TP*/TP*/S-P/*E/TP*/TP* TKPW*/*E"},
         // {phrase: "diff --cached", stroke: "TKEUF TK*RB TK-LS KAERBD"},
         // {phrase: "<title>Learn!</title>", stroke: "AEPBG/TAOEULT/A*EPBG/KPA*/HRERPB/SKHRAPL/AEPBG/OEU/TAOEULT/A*EPBG"}
       ]
