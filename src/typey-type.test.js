@@ -875,7 +875,7 @@ testWithTab	TEFT
 
 describe('generate dictionary entries', () => {
   it('returns array of phrases and strokes for words', () => {
-    let wordList = [' ', '?', 'address', 'tom', 'Heather', 'TUESDAY', 'FIRST', 'bed,', 'man,', 'man!', 'man?', "'bed'", "'address'", "'Sinatra'", "'sinatra'", "'confuzzled'", 'and! and', 'andx and', 'andx andx and', 'and ', ' and', ' and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff -- cached' ];
+    let wordList = [' ', '?', 'address', 'tom', 'Heather', 'TUESDAY', 'FIRST', '3D', 'bed,', 'man,', 'man!', 'man?', "'bed'", "'address'", "'Sinatra'", "'sinatra'", "'confuzzled'", 'and! and', 'andx and', 'andx andx and', 'and ', ' and', ' and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff -- cached' ];
     // let wordList = [' ', '?', 'tom', 'Heather', 'TUESDAY', 'FIRST', 'bed,', 'man!', 'man?', "'sinatra'", 'and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff --cached', 'diff -- cached', '<title>Learn!</title>' ];
 
     let sourceWordsAndStrokes = {
@@ -886,6 +886,7 @@ describe('generate dictionary entries', () => {
       "heather": "H*ET/*ER",
       "Tuesday": "TAOUZ",
       "first": "TPEUFRT",
+      "3D": "30*EUD",
       "address": "A/TKRES",
       "bed": "PWED",
       "bed,": "PWED KW-BG",
@@ -920,6 +921,7 @@ describe('generate dictionary entries', () => {
         {phrase: "Heather", stroke: "KPA/H*ET/*ER"},
         {phrase: "TUESDAY", stroke: "*URP/TAOUZ"},
         {phrase: "FIRST", stroke: "*URP/TPEUFRT"},
+        {phrase: "3D", stroke: "30*EUD"},
         {phrase: "bed,", stroke: "PWED KW-BG"}, // has exact entry in this test file
         {phrase: "man,", stroke: "PHAPB KW-BG"}, // does not have exact entry
         {phrase: "man!", stroke: "PHAPB SKHRAPL"},

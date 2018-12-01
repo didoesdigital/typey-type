@@ -486,6 +486,117 @@ function parseWordList(userInputWordList) {
 function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T"}) {
   let sourceAndPresentedMaterial = [];
   // wordList = [ 'bed,', 'man!', "'sinatra'", 'and again', 'media query', 'push origin master', 'diff --cached', 'diff -- cached' ]
+  const FINGERSPELLED_LETTERS = {
+    "a": "A*",
+    "b": "PW*",
+    "c": "KR*",
+    "d": "TK*",
+    "e": "*E",
+    "f": "TP*",
+    "g": "TKPW*",
+    "h": "H*",
+    "i": "*EU",
+    "j": "SKWR*",
+    "k": "K*",
+    "l": "HR*",
+    "m": "PH*",
+    "n": "TPH*",
+    "o": "O*",
+    "p": "P*",
+    "q": "KW*",
+    "r": "R*",
+    "s": "S*",
+    "t": "T*",
+    "u": "*U",
+    "v": "SR*",
+    "w": "W*",
+    "x": "KP*",
+    "y": "KWR*",
+    "z": "STKPW*",
+    "A": "A*P",
+    "B": "PW*P",
+    "C": "KR*P",
+    "D": "TK*P",
+    "E": "*EP",
+    "F": "TP*P",
+    "G": "TKPW*P",
+    "H": "H*P",
+    "I": "*EUP",
+    "J": "SKWR*P",
+    "K": "K*P",
+    "L": "HR*P",
+    "M": "PH*P",
+    "N": "TPH*P",
+    "O": "O*P",
+    "P": "P*P",
+    "Q": "KW*P",
+    "R": "R*P",
+    "S": "S*P",
+    "T": "T*P",
+    "U": "*UP",
+    "V": "SR*P",
+    "W": "W*P",
+    "X": "KP*P",
+    "Y": "KWR*P",
+    "Z": "STKPW*P",
+    "@": "SKWRAT",
+    "(": "PREPB",
+    ")": "PR*EPB",
+    "“": "KW-GS/KW-GS",
+    "”": "KR-GS/KR-GS",
+    ",": "KW-BG",
+    "?": "H-F",
+    "!": "SKHRAPL",
+    "–": "EPB/TKA*RB",
+    "—": "EPL/TKA*RB",
+    "`": "KH-FG",
+    "^": "KR-RT",
+    "~": "T*LD",
+    "<": "PWRABG",
+    ">": "PWRA*BG",
+    "=": "KW-L",
+    "|": "PAO*EUP",
+    "_": "RUPBD",
+    "-": "H-PB",
+    ":": "KHR-PB",
+    ";": "SKHR-PB",
+    "/": "OEU",
+    ".": "P-P",
+    "]": "PWR*BGT",
+    "[": "PWR-BGT",
+    "{": "TPR-BGT",
+    "}": "TPR*BGT",
+    "$": "TK-PL",
+    "*": "STA*R",
+    "&": "SKP*",
+    "#": "HAERB",
+    "%": "P*ERS",
+    "+": "PHR*US",
+    "\\": "SPWHRAERB",
+    "\"": "KWR-GS",
+    " ": "S-P",
+    "1": "1",
+    "2": "2",
+    "3": "3",
+    "4": "4",
+    "5": "5",
+    "0": "0",
+    "6": "6",
+    "7": "7",
+    "8": "8",
+    "9": "9"
+  }
+  // Maybe show numbers as letters?
+    // "1": "#S",
+    // "2": "#T-",
+    // "3": "#P-",
+    // "4": "#H",
+    // "5": "#A",
+    // "0": "#O",
+    // "6": "#F",
+    // "7": "#-P",
+    // "8": "#L",
+    // "9": "#-T"
 
   for (let i = 0; i < wordList.length; i++) {
     let wordOrPhraseMaterial = wordList[i];
@@ -493,6 +604,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     let strokes = "";
     let stroke = "";
     let strokeLookupAttempts = 0;
+    let strokeLookupAttemptsLimit = 12;
     let punctuationSplittingRegex = /[!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~—–-]/; // includes en and em dashes, curly quotes
     let punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
@@ -555,7 +667,6 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
           remainingWordOrPhrase = ''; // prevents infinite loop
         }
         else {
-          // FIXME: 4 instances of the punctuation regex:
           let matchingPunctuation = remainingWordOrPhrase.match(punctuationSplittingRegex)[0].charAt(0); // given "man?" => ["?", index: 3, input: "man?", groups: undefined] => "?" => "?"
           let index = remainingWordOrPhrase.indexOf(matchingPunctuation);
           let firstWord = '';
@@ -575,12 +686,11 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
           stroke = "xxx";
         }
 
-      if (strokeLookupAttempts > 10) { return ['', strokes, stroke]; }
+      if (strokeLookupAttempts > strokeLookupAttemptsLimit) { return ['', strokes, stroke]; }
 
       return [remainingWordOrPhrase, strokes, stroke];
     }
 
-    // if (wordOrPhraseMaterial === "bed,") { debugger; }
     stroke = chooseStrokeForWord(wordOrPhraseMaterial); // given "off went the man!" return "xxx"
 
     // First check for exact matching stroke:
@@ -588,14 +698,10 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
       strokes = stroke;
     }
 
-    // if (wordOrPhraseMaterial === "and the cat") { debugger; }
-    // if (wordOrPhraseMaterial === "fut cxt blug") { debugger; }
-    // if (wordOrPhraseMaterial === "and! and") { debugger; }
-
     while (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
       // Arbitrary limit to prevent making Typey Type slow from excess look ups and
       // avoid possible infinite loops
-      if (strokeLookupAttempts > 12) {
+      if (strokeLookupAttempts > strokeLookupAttemptsLimit) {
         remainingWordOrPhrase = '';
         strokes = strokes + ' xxx';
         stroke = 'xxx';
@@ -621,40 +727,43 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
           stroke = chooseStrokeForWord(firstWord); // "off"
 
           // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
-          // FIXME: 4 instances of the punctuation regex:
           if (stroke === "xxx" && (firstWord.match(punctuationSplittingRegex) !== null)) { // "man!"
-            let tmp = '';
-            let tmpstrokes = '';
-            // console.log(firstWord + " XXX " + strokes + " XXX " + stroke);
-            [tmp, tmpstrokes, stroke] = tryMatchingWordsWithPunctuation(firstWord, strokes, stroke); // "and!"
+            let tmpRemainingWordOrPhrase = '';
+            let tmpStrokes = '';
+            [tmpRemainingWordOrPhrase, tmpStrokes, stroke] = tryMatchingWordsWithPunctuation(firstWord, strokes, stroke); // "and!"
 
-            // if (stroke === "xxx") { // if it still doesn't match, try again
-            //   [tmp, strokes, stroke] = tryMatchingWordsWithPunctuation(firstWord, strokes, stroke); // "!"
-            // }
-            remainingWordOrPhrase = tmp + " " + remainingWordOrPhrase; // This will cause its own bugs be re-introducing spaces where they don't belong in phrases
-            strokes = strokes === "" ? stroke : strokes + " " + tmpstrokes;
-            // if (strokes.startsWith("SKP xxx")) { debugger; }
+            remainingWordOrPhrase = tmpRemainingWordOrPhrase + " " + remainingWordOrPhrase; // This will cause its own bugs by re-introducing spaces where they don't belong in phrases
+            strokes = strokes === "" ? stroke : strokes + " " + tmpStrokes;
             stroke = "xxx";
           }
           else {
             strokes = strokes === "" ? stroke : strokes + " " + stroke;
-            // if (strokes.startsWith("SKP xxx")) { debugger; }
-            // console.log("this one" + strokes);
             stroke = "xxx";
           }
-          // FIXME:
-          // and! and	SKP xxx SKHRAPL SKP
-
         }
+
         // Break up phrase on punctuation
         else if (stroke === "xxx" && (remainingWordOrPhrase.match(punctuationSplittingRegex) !== null)) { // "man!"
           [remainingWordOrPhrase, strokes, stroke] = tryMatchingWordsWithPunctuation(remainingWordOrPhrase, strokes, stroke);
         }
-        // TODO: try fingerspelling
         else {
           if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
             stroke = chooseStrokeForWord(remainingWordOrPhrase); // stroke = chooseStrokeForWord("man")
+
+            // if all else fails, try fingerspelling
+            if (stroke === "xxx") {
+              stroke = [...remainingWordOrPhrase].map(char => {
+                let fingerspelledStroke = '';
+                fingerspelledStroke = FINGERSPELLED_LETTERS[char];
+                if (!fingerspelledStroke) {
+                  fingerspelledStroke = "xxx";
+                }
+                return fingerspelledStroke;
+              }).join('/');
+            }
+
             remainingWordOrPhrase = '';
+
             strokes = strokes === "" ? stroke : strokes + " " + stroke;
           }
           remainingWordOrPhrase = '';
