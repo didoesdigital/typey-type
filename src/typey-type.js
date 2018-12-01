@@ -729,11 +729,9 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
           // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
           if (stroke === "xxx" && (firstWord.match(punctuationSplittingRegex) !== null)) { // "man!"
             let tmpRemainingWordOrPhrase = '';
-            let tmpStrokes = '';
-            [tmpRemainingWordOrPhrase, tmpStrokes, stroke] = tryMatchingWordsWithPunctuation(firstWord, strokes, stroke); // "and!"
+            [tmpRemainingWordOrPhrase, strokes, stroke] = tryMatchingWordsWithPunctuation(firstWord, strokes, stroke); // "and!"
 
             remainingWordOrPhrase = tmpRemainingWordOrPhrase + " " + remainingWordOrPhrase; // This will cause its own bugs by re-introducing spaces where they don't belong in phrases
-            strokes = strokes === "" ? stroke : strokes + " " + tmpStrokes;
             stroke = "xxx";
           }
           else {
@@ -1091,7 +1089,6 @@ function fetchLessonIndex() {
 
 function setupLessonProgress(lessonIndex) {
   let lessonProgress = {};
-  // debugger;
   return lessonProgress;
 }
 
