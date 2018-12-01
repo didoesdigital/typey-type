@@ -283,6 +283,7 @@ class Lesson extends Component {
         return (
           <DocumentTitle title='Typey Type | Create a custom lesson'>
             <CustomLessonSetup
+              stenoLayout={this.props.userSettings.stenoLayout}
               createCustomLesson={this.props.createCustomLesson}
               metWords={this.props.metWords}
             />
