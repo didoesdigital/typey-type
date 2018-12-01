@@ -30,9 +30,10 @@ class CustomLessonSetup extends Component {
       this.mainHeading.focus();
     }
 
+    let stenoLayout = this.props.stenoLayout;
     fetchDictionaries().then((json) => {
       let sourceWordsAndStrokes = swapKeyValueInDictionary(json);
-      let processedSourceWordsAndStrokes = Object.assign({}, processDictionary(sourceWordsAndStrokes));
+      let processedSourceWordsAndStrokes = Object.assign({}, processDictionary(sourceWordsAndStrokes, stenoLayout));
       this.setState({
         // sourceWordsAndStrokes: sourceWordsAndStrokes,
         processedSourceWordsAndStrokes: processedSourceWordsAndStrokes

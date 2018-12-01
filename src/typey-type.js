@@ -486,6 +486,7 @@ function parseWordList(userInputWordList) {
 function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T"}) {
   let sourceAndPresentedMaterial = [];
   // wordList = [ 'bed,', 'man!', "'sinatra'", 'and again', 'media query', 'push origin master', 'diff --cached', 'diff -- cached' ]
+  // TODO: don't hardcode this
   const FINGERSPELLED_LETTERS = {
     "a": "A*",
     "b": "PW*",
@@ -870,7 +871,7 @@ function swapKeyValueInDictionary(sourceDictionaryFile) {
   return sourceWordsAndStrokes;
 }
 
-function processDictionary(swappedDictionaryFile) {
+function processDictionary(swappedDictionaryFile, stenoLayout) {
   let processedDictionary = {};
   let charsToRemove = [
     [/({\^)(.*)(\^})/, '$2'], // Replace "{^ ^}" with " "
@@ -917,6 +918,8 @@ function processDictionary(swappedDictionaryFile) {
       processedDictionary[property] = value;
     }
   }
+
+  // TODO: don't hard code these, it probably breaks steno layouts other than Ward Stone Ireland
   processedDictionary['0'] = "#O";
   processedDictionary['1'] = "#S";
   processedDictionary['2'] = "#T-";
@@ -927,6 +930,64 @@ function processDictionary(swappedDictionaryFile) {
   processedDictionary['7'] = "#-P";
   processedDictionary['8'] = "#L";
   processedDictionary['9'] = "#-T";
+
+  if (stenoLayout === "stenoLayoutAmericanSteno") {
+    // TODO: don't hard code these; it probably breaks steno layouts other than Ward Stone Ireland
+    processedDictionary["a"] = "A*";
+    processedDictionary["b"] = "PW*";
+    processedDictionary["c"] = "KR*";
+    processedDictionary["d"] = "TK*";
+    processedDictionary["e"] = "*E";
+    processedDictionary["f"] = "TP*";
+    processedDictionary["g"] = "TKPW*";
+    processedDictionary["h"] = "H*";
+    processedDictionary["i"] = "*EU";
+    processedDictionary["j"] = "SKWR*";
+    processedDictionary["k"] = "K*";
+    processedDictionary["l"] = "HR*";
+    processedDictionary["m"] = "PH*";
+    processedDictionary["n"] = "TPH*";
+    processedDictionary["o"] = "O*";
+    processedDictionary["p"] = "P*";
+    processedDictionary["q"] = "KW*";
+    processedDictionary["r"] = "R*";
+    processedDictionary["s"] = "S*";
+    processedDictionary["t"] = "T*";
+    processedDictionary["u"] = "*U";
+    processedDictionary["v"] = "SR*";
+    processedDictionary["w"] = "W*";
+    processedDictionary["x"] = "KP*";
+    processedDictionary["y"] = "KWR*";
+    processedDictionary["z"] = "STKPW*";
+    processedDictionary["A"] = "A*P";
+    processedDictionary["B"] = "PW*P";
+    processedDictionary["C"] = "KR*P";
+    processedDictionary["D"] = "TK*P";
+    processedDictionary["E"] = "*EP";
+    processedDictionary["F"] = "TP*P";
+    processedDictionary["G"] = "TKPW*P";
+    processedDictionary["H"] = "H*P";
+    processedDictionary["I"] = "*EUP";
+    processedDictionary["J"] = "SKWR*P";
+    processedDictionary["K"] = "K*P";
+    processedDictionary["L"] = "HR*P";
+    processedDictionary["M"] = "PH*P";
+    processedDictionary["N"] = "TPH*P";
+    processedDictionary["O"] = "O*P";
+    processedDictionary["P"] = "P*P";
+    processedDictionary["Q"] = "KW*P";
+    processedDictionary["R"] = "R*P";
+    processedDictionary["S"] = "S*P";
+    processedDictionary["T"] = "T*P";
+    processedDictionary["U"] = "*UP";
+    processedDictionary["V"] = "SR*P";
+    processedDictionary["W"] = "W*P";
+    processedDictionary["X"] = "KP*P";
+    processedDictionary["Y"] = "KWR*P";
+    processedDictionary["Z"] = "STKPW*P";
+    // TODO: don't hard code these; it probably breaks steno layouts other than Ward Stone Ireland
+    processedDictionary["?"] = "H-F";
+  }
   return processedDictionary;
 }
 
