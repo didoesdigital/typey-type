@@ -318,6 +318,7 @@ class Lesson extends Component {
                 changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
                 changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
                 changeShowStrokesAs={this.props.changeShowStrokesAs}
+                changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
                 changeStenoLayout={this.props.changeStenoLayout}
                 changeUserSetting={this.props.changeUserSetting}
                 chooseStudy={this.props.chooseStudy}

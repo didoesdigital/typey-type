@@ -249,6 +249,7 @@ class App extends Component {
         showScoresWhileTyping: true,
         showStrokes: true,
         showStrokesAsDiagrams: false,
+        showStrokesOnMisstroke: true,
         hideStrokesOnLastRepetition: true,
         spacePlacement: 'spaceOff',
         speakMaterial: false,
@@ -505,6 +506,30 @@ class App extends Component {
         label: labelShowStrokesInLesson
       });
     }
+
+    return value;
+  }
+
+  changeShowStrokesOnMisstroke(event) {
+    let newState = Object.assign({}, this.state.userSettings);
+
+    const name = 'showStrokesOnMisstroke'
+    const value = event.target.value;
+
+    newState[name] = !newState[name];
+
+    this.setState({userSettings: newState}, () => {
+      writePersonalPreferences('userSettings', this.state.userSettings);
+    });
+
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change show strokes on misstroke',
+      label: labelString
+    });
 
     return value;
   }
@@ -1442,6 +1467,14 @@ class App extends Component {
     // console.log(testStrokeAccuracy.strokeAccuracy);
     // console.log(testStrokeAccuracy.attempts);
 
+    let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
+    let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
+    if (!accurateStroke && !this.state.showStrokesInLesson) {
+      if (this.state.userSettings.showStrokesOnMisstroke)  {
+        this.setState({showStrokesInLesson: true});
+      }
+    }
+
     if (numberOfUnmatchedChars === 0) {
       let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
       let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
@@ -1809,6 +1842,7 @@ class App extends Component {
                         handleLesson={this.handleLesson.bind(this)}
                         actualText={this.state.actualText}
                         changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
+                        changeShowStrokesOnMisstroke={this.changeShowStrokesOnMisstroke.bind(this)}
                         changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
                         changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
                         changeStenoLayout={this.changeStenoLayout.bind(this)}

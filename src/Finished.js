@@ -265,6 +265,7 @@ class Finished extends Component {
             changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
             changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
             changeShowStrokesAs={this.props.changeShowStrokesAs}
+            changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
             changeStenoLayout={this.props.changeStenoLayout}
             chooseStudy={this.props.chooseStudy}
             disableUserSettings={this.props.disableUserSettings}

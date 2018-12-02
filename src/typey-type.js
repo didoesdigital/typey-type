@@ -1102,6 +1102,7 @@ function loadPersonalPreferences() {
     showScoresWhileTyping: true,
     showStrokes: true,
     showStrokesAsDiagrams: false,
+    showStrokesOnMisstroke: true,
     hideStrokesOnLastRepetition: true,
     spacePlacement: 'spaceOff',
     speakMaterial: false,

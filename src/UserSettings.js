@@ -418,6 +418,33 @@ class UserSettings extends Component {
                         </Tooltip>
                       </label>
                     </div>
+                    <div className="checkbox-group">
+                      <label className="checkbox-label">
+                        <input
+                          className="checkbox-input"
+                          type="checkbox"
+                          name="showStrokesOnMisstroke"
+                          id="showStrokesOnMisstroke"
+                          disabled={this.props.disableUserSettings}
+                          checked={this.props.userSettings.showStrokesOnMisstroke}
+                          onChange={this.props.changeShowStrokesOnMisstroke}
+                        />
+                        <Tooltip
+                          title="Show briefs for words when you misstroke them"
+                          className="mw-240"
+                          animation="shift"
+                          arrow="true"
+                          duration="200"
+                          tabIndex="0"
+                          tag="span"
+                          theme="didoesdigital didoesdigital-sm"
+                          trigger="mouseenter focus click"
+                          onShow={this.props.setAnnouncementMessage}
+                        >
+                          Show briefs on misstroke
+                        </Tooltip>
+                      </label>
+                    </div>
                     <div className="mb2">
                       <div className="radio-group">
                         <label className="radio-label">
