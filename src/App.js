@@ -523,7 +523,7 @@ class App extends Component {
     });
 
     let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; }
+    if (!value) { labelString = "BAD_INPUT"; } else { labelString = value.toString(); }
 
     GoogleAnalytics.event({
       category: 'UserSettings',
@@ -797,7 +797,7 @@ class App extends Component {
     });
 
     let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; }
+    if (!value) { labelString = "BAD_INPUT"; } else { labelString.toString(); }
 
     GoogleAnalytics.event({
       category: 'UserSettings',
