@@ -1463,16 +1463,11 @@ class App extends Component {
       userSettings: this.state.userSettings
     };
 
-    // let testStrokeAccuracy = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
-    // console.log(testStrokeAccuracy.strokeAccuracy);
-    // console.log(testStrokeAccuracy.attempts);
-
     let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
     let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
-    if (!accurateStroke && !this.state.showStrokesInLesson) {
-      if (this.state.userSettings.showStrokesOnMisstroke)  {
-        this.setState({showStrokesInLesson: true});
-      }
+
+    if (!accurateStroke && !this.state.showStrokesInLesson && this.state.userSettings.showStrokesOnMisstroke) {
+      this.setState({showStrokesInLesson: true});
     }
 
     if (numberOfUnmatchedChars === 0) {
