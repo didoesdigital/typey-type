@@ -248,7 +248,7 @@ class App extends Component {
         repetitions: 3,
         showScoresWhileTyping: true,
         showStrokes: true,
-        showStrokesAsDiagrams: false,
+        showStrokesAsDiagrams: true,
         showStrokesOnMisstroke: true,
         hideStrokesOnLastRepetition: true,
         spacePlacement: 'spaceOff',
