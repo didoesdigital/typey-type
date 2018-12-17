@@ -86,13 +86,13 @@ class DictionariesIndex extends Component {
         <div className="p3 mx-auto mw-1024">
           <div className="mw-584">
             <h3 id="typey-type-dictionary">Typey&nbsp;Type dictionary</h3>
-            <p><Link to="/typey-type/dictionaries/typey-type/typey-type/">Typey&nbsp;Type’s dictionary</Link> follows the Plover dictionary with misstrokes removed from the top 10,000 words.</p>
+            <p><Link to="/dictionaries/typey-type/typey-type/">Typey&nbsp;Type’s dictionary</Link> follows the Plover dictionary with misstrokes removed from the top 10,000 words.</p>
 
             <p>Typey&nbsp;Type’s stroke suggestions look for the shortest stroke in the cleaned dictionary with penalties for multi-stroke briefs and briefs using the star (<code>*</code>) key.</p>
 
-            <p>You can use <Link to="/typey-type/dictionaries/typey-type/typey-type/">Typey&nbsp;Type’s dictionary</Link> instead of Plover’s.</p>
+            <p>You can use <Link to="/dictionaries/typey-type/typey-type/">Typey&nbsp;Type’s dictionary</Link> instead of Plover’s.</p>
 
-            <p>The stories lessons like Aesop’s Fables use British English spellings for words such as “neighbour”. For these you can use the <Link to="/typey-type/dictionaries/didoesdigital/dict-en-AU-with-extra-stroke/">Australian English with extra strokes</Link> dictionary.</p>
+            <p>The stories lessons like Aesop’s Fables use British English spellings for words such as “neighbour”. For these you can use the <Link to="/dictionaries/didoesdigital/dict-en-AU-with-extra-stroke/">Australian English with extra strokes</Link> dictionary.</p>
 
             <p>If you notice any odd strokes,{" "}
               <GoogleAnalytics.OutboundLink
