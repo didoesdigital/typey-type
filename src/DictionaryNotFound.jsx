@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
+import GoogleAnalytics from 'react-ga';
+import * as Sentry from '@sentry/browser';
 import DocumentTitle from 'react-document-title';
 import { Link } from 'react-router-dom';
 
 class DictionaryNotFound extends Component {
   componentDidMount() {
+    let labelString = "Missing dictionary";
+    if (this.props.location && this.props.location.pathname) {
+      labelString = this.props.location.pathname;
+    }
+
+    GoogleAnalytics.event({
+      category: 'Dictionary not found',
+      action: 'Visited',
+      label: labelString
+    });
+
+    Sentry.captureException('Dictionary not found');
+
     if (this.mainHeading) {
       this.mainHeading.focus();
     }

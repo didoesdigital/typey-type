@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
+import * as Sentry from '@sentry/browser';
 import { Link } from 'react-router-dom';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 
 class PageNotFound extends Component {
+
+  componentDidMount() {
+    let labelString = "That page doesn’t exist";
+    if (this.props.location && this.props.location.pathname) {
+      labelString = this.props.location.pathname;
+    }
+
+    GoogleAnalytics.event({
+      category: 'Page not found',
+      action: 'Visited',
+      label: labelString
+    });
+
+    Sentry.captureException('Page not found');
+  }
 
   render() {
     return (
@@ -20,7 +36,7 @@ class PageNotFound extends Component {
           </div>
         </div>
         <main id="main" className="p3 mx-auto mw-1024">
-          <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">That page doesn't exist</h1>
+          <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">That page doesn’t exist</h1>
           <p>Try one of these instead:</p>
           <ul>
             <li><Link to="/">Home</Link></li>
