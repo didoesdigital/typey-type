@@ -1,7 +1,20 @@
+// @flow
 import React, { Component } from 'react';
 
-class Break extends Component {
-  constructor(props) {
+type Props = {};
+
+type State = {
+  breakCountdown: ?number,
+  breakTimeMinutes: number,
+  breakTimeSeconds: number,
+  timeToDisplay: string
+};
+
+class Break extends Component<Props, State> {
+  mainHeading: ?HTMLHeadingElement;
+  intervalID: any;
+
+  constructor(props: Props) {
     super(props);
     this.state = {
       breakCountdown: 0,
@@ -51,7 +64,7 @@ class Break extends Component {
 
   updateBreakTime() {
     let breakCountdown = this.state.breakCountdown;
-    let secondsRemaining = Math.floor((breakCountdown - Date.now()) / 1000); // time in milliseconds ÷ 1000 milliseconds per second
+    let secondsRemaining = Math.floor(((breakCountdown || 0) - Date.now()) / 1000); // time in milliseconds ÷ 1000 milliseconds per second
     let breakTimeMinutes = Math.floor(secondsRemaining / 60);
     let breakTimeSeconds = Math.floor(secondsRemaining - (breakTimeMinutes * 60));
     let timeToDisplay = "" + breakTimeMinutes + ":" + (this.addLeadingZeros(breakTimeSeconds));
@@ -68,12 +81,12 @@ class Break extends Component {
     }
   }
 
-  addLeadingZeros(value) {
-    value = String(value);
-    while (value.length < 2) {
-      value = '0' + value;
+  addLeadingZeros(value: number) {
+    let textWithLeadingZeros = String(value);
+    while (textWithLeadingZeros.length < 2) {
+      textWithLeadingZeros = '0' + textWithLeadingZeros;
     }
-    return value;
+    return textWithLeadingZeros;
   }
 
   render() {
@@ -96,7 +109,7 @@ class Break extends Component {
         <div className="p3 mx-auto mw-1024">
           <div className="mx-auto mw-568">
             <h2 className="text-center mt3" aria-hidden="true">{breakHeading}</h2>
-            <p className="mt3 text-center mb3">Rest your hands and your mind. Take a 5-minute break and continue or come back in 4&nbsp;hours for another session.</p>
+            <p className="mt3 text-center mb3">Rest your hands and your mind. Take a 5-minute break and continue or come back in 4+&nbsp;hours for another session.</p>
             <h3 className="text-center mb3"><span aria-live="polite" aria-atomic="true">{timeToDisplay}</span></h3>
           </div>
         </div>
