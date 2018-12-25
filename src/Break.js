@@ -14,14 +14,11 @@ class Break extends Component<Props, State> {
   mainHeading: ?HTMLHeadingElement;
   intervalID: any;
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      breakCountdown: 0,
-      breakTimeMinutes: 0,
-      breakTimeSeconds: 0,
-      timeToDisplay: '5:00'
-    }
+  state = {
+    breakCountdown: 0,
+    breakTimeMinutes: 0,
+    breakTimeSeconds: 0,
+    timeToDisplay: '5:00'
   }
 
   componentDidMount() {
@@ -40,9 +37,8 @@ class Break extends Component<Props, State> {
     this.stopBreak();
   }
 
-
   startCountdown() {
-    this.intervalID = window.setInterval(this.updateBreakTime.bind(this), 1000);
+    this.intervalID = window.setInterval(this.updateBreakTime, 1000);
   }
 
   stopCountdown() {
@@ -62,7 +58,7 @@ class Break extends Component<Props, State> {
     });
   }
 
-  updateBreakTime() {
+  updateBreakTime = () => {
     let breakCountdown = this.state.breakCountdown;
     let secondsRemaining = Math.floor(((breakCountdown || 0) - Date.now()) / 1000); // time in milliseconds ÷ 1000 milliseconds per second
     let breakTimeMinutes = Math.floor(secondsRemaining / 60);
@@ -81,7 +77,7 @@ class Break extends Component<Props, State> {
     }
   }
 
-  addLeadingZeros(value: number) {
+  addLeadingZeros = (value: number): string => {
     let textWithLeadingZeros = String(value);
     while (textWithLeadingZeros.length < 2) {
       textWithLeadingZeros = '0' + textWithLeadingZeros;
@@ -90,7 +86,6 @@ class Break extends Component<Props, State> {
   }
 
   render() {
-
     let timeToDisplay = this.state.timeToDisplay;
     let breakHeading = 'Your break starts now';
     if (timeToDisplay === '0:00') { breakHeading = 'Your break is done'; }
