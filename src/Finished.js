@@ -183,8 +183,8 @@ class Finished extends Component {
 
     let lessonSummary = (
       <div className="finished-lesson mr1 mw-1024 overflow-hidden">
-        <div className="flex">
-          <div className="finished-summary">
+        <div className="flex flex-wrap">
+          <div className="finished-summary mr12 mb3">
             <h2
               className="mb1 negative-outline-offset"
               ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }} tabIndex="-1" id="finished-heading">
@@ -214,7 +214,7 @@ class Finished extends Component {
                 Restart lesson</a>
             </p>
           </div>
-          <div className="misstrokes-summary ml12">
+          <div className="misstrokes-summary">
             {misstrokesSummary}
           </div>
         </div>

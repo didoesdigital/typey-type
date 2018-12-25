@@ -380,6 +380,9 @@ input:focus::placeholder {
 .mr3 {
   margin-right: 24px; }
 
+.mr12 {
+  margin-right: 96px; }
+
 .ml1 {
   margin-left: 8px; }
 
@@ -388,9 +391,6 @@ input:focus::placeholder {
 
 .ml3 {
   margin-left: 24px; }
-
-.ml12 {
-  margin-left: 96px; }
 
 .mt0 {
   margin-top: 0; }
