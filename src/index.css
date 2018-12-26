@@ -688,6 +688,9 @@ input:focus::placeholder {
     .lesson-canvas {
       min-width: 544px; } }
 
+.lesson-canvas--finished {
+  max-height: initial; }
+
 .panel {
   background-color: #fff;
   border: thin solid #c6bdcb;

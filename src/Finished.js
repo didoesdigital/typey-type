@@ -254,7 +254,7 @@ class Finished extends Component {
               totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
             />
           </div>
-          <div className="lesson-canvas panel p3 overflow-scroll mb3">
+          <div className="lesson-canvas lesson-canvas--finished panel p3 overflow-scroll mb3">
             <div className={lessonEmpty ? 'dc' : ''}>
               {emptyAndZeroStateMessage}
               {lessonSummary}

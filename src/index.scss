@@ -632,6 +632,10 @@ input:focus::placeholder {
   }
 }
 
+.lesson-canvas--finished {
+  max-height: initial;
+}
+
 // .finished-lesson {
   // display: grid;
   // grid-gap: 24px;
