@@ -547,7 +547,6 @@ class App extends Component {
 
     let normalisedMetWords = {};
     Object.keys(metWords).forEach(function(key,index) {
-      if(key.trim().toLowerCase() === "of") { console.log("key.trim().toLowerCase(): " + key.trim().toLowerCase()); }
       if (normalisedMetWords[key.trim().toLowerCase()]) {
         normalisedMetWords[key.trim().toLowerCase()] = metWords[key] + normalisedMetWords[key.trim().toLowerCase()];
       }
