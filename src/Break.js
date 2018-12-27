@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 type Props = {};
 
@@ -88,7 +89,15 @@ class Break extends Component<Props, State> {
   render() {
     let timeToDisplay = this.state.timeToDisplay;
     let breakHeading = 'Your break starts now';
-    if (timeToDisplay === '0:00') { breakHeading = 'Your break is done'; }
+    let nextStep;
+    if (timeToDisplay === '0:00') {
+      breakHeading = 'Your break is done';
+      nextStep = (
+        <p className='text-center'>
+          <Link to='/progress' className="link-button dib" style={{lineHeight: 2}}>Review progress</Link>
+        </p>
+      );
+    }
 
     return (
       <main id="main">
@@ -106,6 +115,7 @@ class Break extends Component<Props, State> {
             <h2 className="text-center mt3" aria-hidden="true">{breakHeading}</h2>
             <p className="mt3 text-center mb3">Rest your hands and your mind. Take a 5-minute break and continue or come back in 4+&nbsp;hours for another session.</p>
             <h3 className="text-center mb3"><span aria-live="polite" aria-atomic="true">{timeToDisplay}</span></h3>
+            {nextStep}
           </div>
         </div>
       </main>
