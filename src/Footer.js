@@ -18,7 +18,7 @@ class Footer extends Component {
       <footer role="contentinfo" className={"hide-in-fullscreen" + fullscreen}>
         <p className="text-center mt1 mb0"><small>Made with <span aria-label="love" role="img">❤️</span> by <a href="https://didoesdigital.com/">DiDoesDigital</a>.</small></p>
         <p className="text-center mb0"><small><Link to="/support">Learn more about Typey&nbsp;Type</Link> and <Link to="/support#privacy">privacy</Link>.</small></p>
-        <p className="text-center mb1"><small><Link to="/contribute">Contribute to Typey&nbsp;Type</Link> and{" "}
+        <p className="text-center mb0"><small><Link to="/contribute">Contribute to Typey&nbsp;Type</Link> and{" "}
           <GoogleAnalytics.OutboundLink
             eventLabel="DiDoesDigital: Typey Type updates and steno news (external link opens in new tab)"
             aria-label="Typey Type updates and steno news (external link opens in new tab)"
@@ -41,7 +41,13 @@ class Footer extends Component {
             >
               <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
             </Tooltip>
-          </GoogleAnalytics.OutboundLink>.</small></p>
+        </GoogleAnalytics.OutboundLink>.</small>
+      </p>
+      <p className="text-center mb1">
+        <small>
+          <Link to="/break">Take a 5-minute break</Link>.
+        </small>
+      </p>
       </footer>
     )
   }
