@@ -131,6 +131,24 @@ class Home extends Component {
           <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
+                <h3>Your steno journey</h3>
+                <p>You can follow recommendations tailored to you and your skill level on your journey to mastering stenography.</p>
+                <Link to='/progress' className="link-button dib" style={{lineHeight: 2}}>Your progress</Link>
+              </div>
+            </div>
+          </div>
+          <div className="bg-info landing-page-section">
+            <div className="p3 mx-auto mw-1024">
+              <div className="mw-584">
+                <h3>Rest</h3>
+                <p>Rest your hands and your mind with a 5-minute break timer.</p>
+                <Link to='/break/' className="link-button dib" style={{lineHeight: 2}}>Take a break</Link>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white landing-page-section">
+            <div className="p3 mx-auto mw-1024">
+              <div className="mw-584 ml-auto text-right">
                 <h3>Your settings</h3>
                 <p>Choose the right settings for you. Try other steno layouts, blur words, or have words spoken to you.</p>
                 <Link to='/lessons/fundamentals/one-syllable-words-with-simple-keys/' className="link-button dib" style={{lineHeight: 2}}>Explore</Link>
