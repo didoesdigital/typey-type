@@ -529,10 +529,12 @@ class App extends Component {
     let lessonsProgress = Object.assign({}, this.state.lessonsProgress);
 
     // This is actually UNIQUE numberOfWordsSeen.
-    // Updating localStorage data to rename it, however, seems low value.
+    // It seems low value to update localStorage data to rename it only for readability.
+    // More FIXMEs below
     // FIXME
     let numberOfWordsSeen = 0;
 
+    // See comment above
     // FIXME
     if (lessonsProgress[lessonpath] && lessonsProgress[lessonpath].numberOfWordsSeen) {
       numberOfWordsSeen = lessonsProgress[lessonpath].numberOfWordsSeen;
@@ -566,7 +568,6 @@ class App extends Component {
       if (normalisedMetWords[sourceMaterialPhrase] && normalisedMetWords[sourceMaterialPhrase] > 0) {
 
         // console.log(sourceMaterialPhrase);
-        // debugger
         // have you seen this word and seen it in this lesson already?
         if (!(alreadyChecked.indexOf(sourceMaterialPhrase) > -1)) {
           alreadyChecked.push(sourceMaterialPhrase);
@@ -592,6 +593,7 @@ class App extends Component {
       numberOfWordsToDiscover = uniqueLowerCasedWordsLeftToDiscover.length;
     }
 
+    // See comment above
     // FIXME
     numberOfWordsSeen = seenAccumulator;
     lessonsProgress[lessonpath] = {
