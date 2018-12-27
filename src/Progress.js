@@ -50,7 +50,7 @@ class Progress extends Component {
   }
 
   startRecommendedStep(e) {
-    if (this.props.recommendedNextLesson.link.startsWith("http")) {
+    if (this.props.recommendedNextLesson.link && this.props.recommendedNextLesson.link.startsWith("http")) {
       this.props.updateRecommendationHistory(this.props.recommendationHistory);
     }
     else {
