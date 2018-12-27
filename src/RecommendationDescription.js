@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import GoogleAnalytics from 'react-ga';
-import { IconExternal } from './Icon';
-import { Tooltip, } from 'react-tippy';
-import 'react-tippy/dist/tippy.css'
 
 class RecommendationDescription extends Component {
   render () {
@@ -52,31 +48,7 @@ class RecommendationDescription extends Component {
       case "compete":
         description = (
           <p>
-            To really push your speed and vocabulary, you might add some competition. Try{' '}
-              <GoogleAnalytics.OutboundLink
-                eventLabel="Type Racer"
-                aria-label="Type Racer (external link opens in new tab)"
-                to="https://play.typeracer.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="nowrap">Type Racer
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={this.props.setAnnouncementMessage}
-                  >
-                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-                  </Tooltip>
-                </span>
-              </GoogleAnalytics.OutboundLink>.
+            To really push your speed and vocabulary, you might add some competition. Try a race.
           </p>
         );
         break;
@@ -84,31 +56,7 @@ class RecommendationDescription extends Component {
       case "game":
         description = (
           <p>
-            You’ve been so diligent! You might take a break from drilling and try a game like{' '}
-              <GoogleAnalytics.OutboundLink
-                eventLabel="Cargo Crisis"
-                aria-label="Cargo Crisis (external link opens in new tab)"
-                to="http://qwertysteno.com/Games/CargoCrisis.php"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span className="nowrap">Cargo Crisis
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={this.props.setAnnouncementMessage}
-                  >
-                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-                  </Tooltip>
-                </span>
-              </GoogleAnalytics.OutboundLink>.
+            You’ve been so diligent! You might take a break from drilling and try a game.
           </p>
         );
         break;
