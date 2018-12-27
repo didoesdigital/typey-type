@@ -50,6 +50,16 @@ class Progress extends Component {
   }
 
   startRecommendedStep(e) {
+
+    let labelString = this.props.recommendedNextLesson.link;
+    if (!labelString) { labelString = "BAD_INPUT"; }
+
+    GoogleAnalytics.event({
+      category: 'Recommendations',
+      action: 'Start recommended step',
+      label: labelString
+    });
+
     if (this.props.recommendedNextLesson.link && this.props.recommendedNextLesson.link.startsWith("http")) {
       this.props.updateRecommendationHistory(this.props.recommendationHistory);
     }
@@ -95,7 +105,15 @@ class Progress extends Component {
   };
 
   recommendAnotherLesson() {
-    // let newRecommendationHistory = this.props.updateRecommendationHistory(this.props.recommendedNextLesson['studyType']);
+    let labelString = this.props.recommendedNextLesson.studyType;
+    if (!labelString) { labelString = "BAD_INPUT"; }
+
+    GoogleAnalytics.event({
+      category: 'Recommendations',
+      action: 'Skip recommended',
+      label: labelString
+    });
+
     this.props.updateRecommendationHistory(this.props.recommendationHistory);
 
     if (this.recommendationSkipButton) {
