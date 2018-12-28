@@ -1322,6 +1322,9 @@ class App extends Component {
     }
 
     switch (newRecommendationHistory['previousStep']) {
+      case "null":
+        newRecommendationHistory['previousStep'] = 'drill';
+        break;
       case "practice":
         newRecommendationHistory['previousStep'] = 'drill';
         break;
