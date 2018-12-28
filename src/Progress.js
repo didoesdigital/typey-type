@@ -108,11 +108,11 @@ class Progress extends Component {
     });
   };
 
-  recommendAnotherLesson = (sendGAevent = true) => {
+  recommendAnotherLesson = (skipButtonPressed = true) => {
     let labelString = this.props.recommendedNextLesson.studyType;
     if (!labelString) { labelString = "BAD_INPUT"; }
 
-    if (sendGAevent === false) {
+    if (skipButtonPressed === false) {
       GoogleAnalytics.event({
         category: 'Recommendations',
         action: 'Skip recommended',
@@ -122,8 +122,10 @@ class Progress extends Component {
 
     this.props.updateRecommendationHistory(this.props.recommendationHistory);
 
-    if (this.recommendationSkipButton) {
-      this.recommendationSkipButton.focus();
+    if (skipButtonPressed) {
+      if (this.recommendationSkipButton) {
+        this.recommendationSkipButton.focus();
+      }
     }
   }
 
