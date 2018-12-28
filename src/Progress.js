@@ -27,6 +27,8 @@ class Progress extends Component {
       this.mainHeading.focus();
     }
 
+    this.recommendAnotherLesson(false);
+
     this.setState({ showLoadInput: false, toRecommendedNextLesson: false });
 
     if (Object.keys(this.props.metWords).length > 2000) {
@@ -61,9 +63,11 @@ class Progress extends Component {
     });
 
     if (this.props.recommendedNextLesson.link && this.props.recommendedNextLesson.link.startsWith("http")) {
+      // lets external link open in a new tab
       this.props.updateRecommendationHistory(this.props.recommendationHistory);
     }
     else {
+      // does not navigate using link but instead allows Router Redirect
       e.preventDefault();
       this.setState({ toRecommendedNextLesson: true }, () => {
         this.props.updateRecommendationHistory(this.props.recommendationHistory);
@@ -104,15 +108,17 @@ class Progress extends Component {
     });
   };
 
-  recommendAnotherLesson() {
+  recommendAnotherLesson = (sendGAevent = true) => {
     let labelString = this.props.recommendedNextLesson.studyType;
     if (!labelString) { labelString = "BAD_INPUT"; }
 
-    GoogleAnalytics.event({
-      category: 'Recommendations',
-      action: 'Skip recommended',
-      label: labelString
-    });
+    if (sendGAevent === false) {
+      GoogleAnalytics.event({
+        category: 'Recommendations',
+        action: 'Skip recommended',
+        label: labelString
+      });
+    }
 
     this.props.updateRecommendationHistory(this.props.recommendationHistory);
 
@@ -506,7 +512,7 @@ class Progress extends Component {
               <p className="text-right"><strong>{recommendedLinkTitle}</strong></p>
               <p className="text-right de-emphasized">{metadataStats}</p>
               <div className="flex flex-wrap justify-end">
-                <button onClick={this.recommendAnotherLesson.bind(this)} ref={(skipButton) => { this.recommendationSkipButton = skipButton; }} className="de-emphasized-button pl3 pr3">Skip</button>
+                <button onClick={this.recommendAnotherLesson} ref={(skipButton) => { this.recommendationSkipButton = skipButton; }} className="de-emphasized-button pl3 pr3">Skip</button>
                 <div className="text-right">
                   {recommendedLink}
                 </div>
@@ -530,7 +536,7 @@ class Progress extends Component {
               <p className="text-right"><strong>Loading…</strong></p>
               <p className="text-right de-emphasized"></p>
               <div className="flex flex-wrap justify-end">
-                <button onClick={this.recommendAnotherLesson.bind(this)} ref={(skipButton) => { this.recommendationSkipButton = skipButton; }} className="de-emphasized-button pl3 pr3">Skip</button>
+                <button onClick={this.recommendAnotherLesson} ref={(skipButton) => { this.recommendationSkipButton = skipButton; }} className="de-emphasized-button pl3 pr3">Skip</button>
                 <div className="text-right">
                   <button disabled className="link-button dib" style={{lineHeight: 2}}>Loading…</button>
                 </div>
