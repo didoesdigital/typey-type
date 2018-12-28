@@ -1318,7 +1318,7 @@ class App extends Component {
     let newRecommendationHistory = Object.assign({}, prevRecommendationHistory);
 
     if ((typeof newRecommendationHistory['previousStep'] === undefined) || (newRecommendationHistory['previousStep'] === null)) {
-      newRecommendationHistory['previousStep'] = 'practice';
+      newRecommendationHistory['previousStep'] = 'break';
     }
 
     switch (newRecommendationHistory['previousStep']) {
