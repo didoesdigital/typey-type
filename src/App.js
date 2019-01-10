@@ -1353,12 +1353,14 @@ class App extends Component {
     getRecommendedNextLesson(this.state.lessonsProgress, newRecommendationHistory, this.state.yourSeenWordCount, this.state.yourMemorisedWordCount, this.state.lessonIndex, this.state.metWords)
       .then((nextRecommendedLesson) => {
         this.setState({
+          revisionMode: false,
           recommendationHistory: newRecommendationHistory,
           recommendedNextLesson: nextRecommendedLesson
         });
       })
       .catch( error => {
         this.setState({
+          revisionMode: false,
           recommendationHistory: newRecommendationHistory,
           recommendedNextLesson: {
             studyType: "error",
