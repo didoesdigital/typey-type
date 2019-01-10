@@ -1074,7 +1074,8 @@ class App extends Component {
         }
 
         if ((param === 'repetitions' || param === 'limitNumberOfWords' || param === 'startFromWord') && isNormalInteger(paramVal)) {
-          newSettings[param] = paramVal;
+          let paramValNumber = Number(paramVal);
+          newSettings[param] = paramValNumber;
         }
       }
     }
