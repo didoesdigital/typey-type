@@ -16,7 +16,6 @@ import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
 import UserSettings from './UserSettings';
 import Finished from './Finished';
 import Flashcards from './Flashcards';
-import CustomLessonSetup from './CustomLessonSetup';
 import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToItalianMichelaStenoKeys, mapBriefToKoreanModernCStenoKeys, mapBriefToPalantypeKeys } from './typey-type';
 
 class Lesson extends Component {
@@ -41,8 +40,8 @@ class Lesson extends Component {
         let newSeenOrMemorised = [false, false, true]
         this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);
       }
-      else if (this.props.location.pathname.startsWith('/lessons/custom')) {
-        this.props.setCustomLesson();
+      else if (this.props.location.pathname.startsWith('/lessons/custom') && (!this.props.location.pathname.startsWith('/lessons/custom/setup'))) {
+        this.props.startCustomLesson();
       }
       else if(this.isFlashcards()) {
         // do nothing
@@ -71,21 +70,22 @@ class Lesson extends Component {
     }
   }
   componentDidUpdate(prevProps, prevState) {
-    if (this.props.location.pathname.startsWith('/lessons/custom') && this.props.lesson.title !== "Custom") {
-      this.props.setCustomLesson();
+    if (this.props.location.pathname.startsWith('/lessons/custom') && !this.props.location.pathname.startsWith('/lessons/custom/setup') && this.props.lesson.title !== "Custom") {
+      this.props.startCustomLesson();
     } else if (this.isFlashcards()) {
       // do nothing
     } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
     }
     if (this.props.location.pathname.startsWith('/lessons/custom') && (prevProps.totalWordCount === 0 || prevProps.currentPhrase === "") && (this.props.totalWordCount > 0 || this.props.currentPhrase.length > 0)) {
+      this.props.createCustomLesson();
       const element = document.getElementById('your-typed-text');
       if (element) { element.focus(); }
     }
   }
 
   isCustom() {
-    return (this.props.location.pathname === '/lessons/custom');
+    return ((this.props.location.pathname === '/lessons/custom') || (this.props.location.pathname === '/lessons/custom/setup'));
   }
   isFlashcards() {
     return (this.props.location.pathname.startsWith('/lessons/') && this.props.location.pathname.endsWith('/flashcards'));
@@ -142,7 +142,7 @@ class Lesson extends Component {
     }
 
     if (this.isCustom() && this.isSetup()) {
-      createNewCustomLesson = (<Link to='/lessons/custom' onClick={this.props.setCustomLesson} className="link-button link-button-ghost table-cell mr1" role="button">Create new lesson</Link>);
+      createNewCustomLesson = (<Link to='/lessons/custom/setup' onClick={this.props.stopLesson} className="link-button link-button-ghost table-cell mr1" role="button">Create new lesson</Link>);
     } else {
       createNewCustomLesson = '';
     }
@@ -276,16 +276,6 @@ class Lesson extends Component {
               changeFullscreen={this.props.changeFullscreen.bind(this)}
               lessonpath={process.env.PUBLIC_URL + this.props.location.pathname.replace(/flashcards/, '') + 'lesson.txt'}
               locationpathname={this.props.location.pathname}
-            />
-          </DocumentTitle>
-        )
-      } else if (this.isCustom() && !this.isSetup()) {
-        return (
-          <DocumentTitle title='Typey Type | Create a custom lesson'>
-            <CustomLessonSetup
-              stenoLayout={this.props.userSettings.stenoLayout}
-              createCustomLesson={this.props.createCustomLesson}
-              metWords={this.props.metWords}
             />
           </DocumentTitle>
         )

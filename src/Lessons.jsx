@@ -1,7 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
+import DocumentTitle from 'react-document-title';
 import Lesson from './Lesson';
 import LessonsIndex from './LessonsIndex';
+import CustomLessonSetup from './CustomLessonSetup';
 
 const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => {
   return(
@@ -54,6 +56,14 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
             {...lessonProps}
             {...props}
           />
+        } />
+        <Route exact={true} path={`${match.url}/custom/setup`} render={ (props) =>
+          <DocumentTitle title='Typey Type | Create a custom lesson'>
+            <CustomLessonSetup
+              {...lessonProps}
+              {...props}
+            />
+          </DocumentTitle>
         } />
         <Route exact={true} path={`${match.url}/custom`} render={ (props) =>
           <Lesson lessonIndex={lessonIndex}

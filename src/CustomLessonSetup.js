@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
 import PseudoContentButton from './PseudoContentButton';
 import './App.css';
@@ -42,6 +43,8 @@ class CustomLessonSetup extends Component {
       console.log('Unable to load Typey Type dictionary', e)
     });
 
+    this.props.stopLesson();
+
     this.addWordListToPage(this.state.myWords);
     this.setState({
       dictionary: []
@@ -75,7 +78,6 @@ class CustomLessonSetup extends Component {
   }
 
   render() {
-
     let filledPre = '';
     if (this.state.dictionary.length > 0) {
       filledPre = "quote ";
@@ -147,8 +149,10 @@ examples.	KP-PLS TP-PL"
                     rows="8"
                     wrap="off"
                     onChange={this.props.createCustomLesson}
+                    value={this.props.customLessonMaterial}
                     >
                   </textarea>
+                  <Link to='/lessons/custom' className="link-button dib" style={{lineHeight: 2}}>Start custom lesson</Link>
                 </div>
                 <div>
                   <div className="panel p3">

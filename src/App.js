@@ -182,6 +182,8 @@ class App extends Component {
       currentPhraseAttempts: [],
       currentPhraseID: 0,
       currentLessonStrokes: [],
+      customLessonMaterial: ``,
+      customLesson: fallbackLesson,
       actualText: ``,
       dictionaryIndex: [{
         "title": "Dictionary",
@@ -937,7 +939,7 @@ class App extends Component {
   }
 
   setupLesson() {
-    if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
+    if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom") && !this.state.lesson.path.endsWith("/lessons/custom/setup")) {
       let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
     }
@@ -1127,7 +1129,28 @@ class App extends Component {
     });
   }
 
-  setCustomLesson() {
+  startCustomLesson() {
+    let lesson = Object.assign({}, this.state.customLesson);
+    lesson.title = 'Custom'
+    this.setState({
+      announcementMessage: 'Navigated to: Custom',
+      currentPhraseID: 0,
+      lesson: lesson
+    }, () => {
+      this.setupLesson();
+    });
+  }
+
+  clearCustomLesson () {
+    let customLesson = {
+      sourceMaterial: [ {phrase: 'The', stroke: '-T'} ],
+      presentedMaterial: [ {phrase: 'The', stroke: '-T'} ],
+      settings: { ignoredChars: '' },
+      title: 'Steno', subtitle: '',
+      newPresentedMaterial: new Zipper([{phrase: '', stroke: ''}]),
+      path: ''
+    };
+    let customLessonMaterial = '';
     let lesson = {
       sourceMaterial: [],
       presentedMaterial: [{phrase: 'The', stroke: '-T'}],
@@ -1139,6 +1162,8 @@ class App extends Component {
     }
     this.setState({
       announcementMessage: 'Navigated to: ' + lesson.title,
+      customLesson: customLesson,
+      customLessonMaterial: customLessonMaterial,
       lesson: lesson,
       currentPhraseID: 0
     }, () => {
@@ -1150,7 +1175,20 @@ class App extends Component {
     if (event && event.target && event.target.value && event.target.value.length > 0) {
       let lesson = parseCustomMaterial(event.target.value);
       this.setState({
-        announcementMessage: 'Navigated to: ' + this.state.lesson.title,
+        announcementMessage: 'Navigated to: ' + lesson.title,
+        lesson: lesson,
+        currentPhraseID: 0,
+        customLesson: lesson,
+        customLessonMaterial: event.target.value
+      }, () => {
+        this.setupLesson();
+      });
+    }
+    else { // for navigating straight to custom lesson page without setup
+      let lesson = Object.assign({}, this.state.customLesson);
+      lesson.title = 'Custom'
+      this.setState({
+        customLesson: lesson,
         lesson: lesson,
         currentPhraseID: 0
       }, () => {
@@ -1591,6 +1629,7 @@ class App extends Component {
                   <DocumentTitle title={'Typey Type | Lessons'}>
                     <ErrorBoundary>
                       <Lessons
+                        customLessonMaterial={this.state.customLessonMaterial}
                         updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
                         updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
                         flashcardsMetWords={this.state.flashcardsMetWords}
@@ -1648,7 +1687,9 @@ class App extends Component {
                         sayCurrentPhraseAgain={this.sayCurrentPhraseAgain.bind(this)}
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
-                        setCustomLesson={this.setCustomLesson.bind(this)}
+                        stopLesson={this.stopLesson.bind(this)}
+                        clearCustomLesson={this.clearCustomLesson.bind(this)}
+                        startCustomLesson={this.startCustomLesson.bind(this)}
                         setupRevisionLesson={this.setupRevisionLesson.bind(this)}
                         setupLesson={this.setupLesson.bind(this)}
                         settings={this.state.lesson.settings}
