@@ -134,7 +134,7 @@ class CustomLessonSetup extends Component {
                       </Tooltip>
                     </GoogleAnalytics.OutboundLink>.
                   </p>
-                  <label htmlFor="your-material">Paste your material here:</label>
+                  <label htmlFor="your-material">Enter your material here:</label>
                   <textarea
                     id="your-material"
                     aria-describedby="custom-material-format"

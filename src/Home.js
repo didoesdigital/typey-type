@@ -114,7 +114,7 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3 className="tiny-rule--adjacent">Custom material</h3>
-                <p>Practice any text you like. Paste in a word list to create a custom lesson using Plover theory, or paste in words and strokes to use your own theory and material.</p>
+                <p>Practice any text you like. Add a list of words to create a custom lesson using Plover theory, or supply words and strokes using your own theory and material.</p>
                 <Link to='/lessons/custom' className="link-button dib" style={{lineHeight: 2}}>Custom lessons</Link>
               </div>
             </div>
