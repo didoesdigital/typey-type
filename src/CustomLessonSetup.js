@@ -83,13 +83,8 @@ class CustomLessonSetup extends Component {
     }
 
     const dictionaryEntries = this.state.dictionary.map( (entry, index) => {
-      return(
-        <code key={ index }>
-          {entry.phrase}{`	`}{entry.stroke}{`
-`}
-        </code>
-      )
-    });
+      return( `${entry.phrase}	${entry.stroke}`)
+    }).join('\n');
 
     return (
       <main id="main">
@@ -185,7 +180,7 @@ plover"
                   </textarea>
                 </div>
                 <div>
-                  <pre id="js-custom-lesson-dictionary-entries" className={filledPre + "h-192 overflow-scroll mw-384 mt1 mb3"}>{dictionaryEntries}</pre>
+                  <pre id="js-custom-lesson-dictionary-entries" className={filledPre + "h-192 overflow-scroll mw-384 mt1 mb3"}><code>{dictionaryEntries}</code></pre>
                   <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-custom-lesson-dictionary-entries">Copy custom lesson to clipboard</PseudoContentButton>
                 </div>
               </div>
