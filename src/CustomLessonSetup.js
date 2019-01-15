@@ -8,6 +8,7 @@ import { Tooltip } from 'react-tippy';
 import {
   createWordListFromMetWords,
   fetchDictionaries,
+  loadPersonalPreferences,
   parseWordList,
   processDictionary,
   swapKeyValueInDictionary,
@@ -43,8 +44,9 @@ class CustomLessonSetup extends Component {
       console.log('Unable to load Typey Type dictionary', e)
     });
 
+    let metWords = loadPersonalPreferences()[0];
 
-    this.addWordListToPage(this.state.myWords);
+    this.addWordListToPage(metWords);
     this.setState({
       dictionary: []
     });
@@ -70,8 +72,8 @@ class CustomLessonSetup extends Component {
     return event;
   }
 
-  addWordListToPage() {
-    let myWords = createWordListFromMetWords(this.props.metWords).join("\n");
+  addWordListToPage(metWords) {
+    let myWords = createWordListFromMetWords(metWords).join("\n");
     this.handleWordsForDictionaryEntries(myWords);
     this.setState({myWords: myWords});
   }
