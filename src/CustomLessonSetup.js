@@ -194,7 +194,7 @@ plover"
               <h3>Revise words you have seen</h3>
               <div className="gtc-4fr-3fr">
                 <div>
-                  <p>{this.state.myWords && this.state.myWords.length > 0 ? "You can use these words you’ve seen to create a custom lesson:" : "Once you’ve made some progress, your words will appear here."}</p>
+                  <p>{this.state.myWords && this.state.myWords.length > 0 ? "Use your seen words to create a custom lesson:" : "Once you’ve made some progress, your words will appear here."}</p>
                   <pre
                     id="js-your-words-for-dictionary-entries"
                     className="quote h-192 overflow-scroll mw-384 mt1 mb3"
