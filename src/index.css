@@ -671,7 +671,8 @@ input:focus::placeholder {
 .subheader {
   background-color: #402351;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
-  color: #c6bdcb; }
+  color: #c6bdcb;
+  position: relative; }
   .subheader h2 {
     font-size: 25px;
     line-height: 1.52;
