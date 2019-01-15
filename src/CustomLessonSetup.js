@@ -43,7 +43,6 @@ class CustomLessonSetup extends Component {
       console.log('Unable to load Typey Type dictionary', e)
     });
 
-    this.props.stopLesson();
 
     this.addWordListToPage(this.state.myWords);
     this.setState({
