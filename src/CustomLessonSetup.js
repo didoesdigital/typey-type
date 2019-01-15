@@ -106,11 +106,9 @@ class CustomLessonSetup extends Component {
 
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
-              <h3>Create a custom lesson using a list of words and their strokes</h3>
-              <div className="custom-page-layout">
+              <div className="mw-584 mt3">
                 <div>
-                  <p>To start a custom lesson, supply a list of words and their strokes. An easy way to create a lesson is to copy columns from a spreadsheet.</p>
-                  <p>See the&nbsp;&#8203;
+                  <p>To start a custom lesson, supply a list of words and their strokes. An easy way to create a lesson is to copy columns from a spreadsheet. See the&nbsp;&#8203;
                     <GoogleAnalytics.OutboundLink
                       eventLabel="community’s lessons"
                       to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
@@ -134,11 +132,16 @@ class CustomLessonSetup extends Component {
                       </Tooltip>
                     </GoogleAnalytics.OutboundLink>.
                   </p>
+                  <ul id="custom-material-format" className="text-small ml1 mt0 mb3">
+                    <li>Each word must be on its own line.</li>
+                    <li>Each word must be separated from its stroke by a "Tab" character.</li>
+                    <li>If you skip strokes, multi-stroke words may count as misstrokes.</li>
+                  </ul>
                   <label htmlFor="your-material">Enter your material here:</label>
                   <textarea
                     id="your-material"
                     aria-describedby="custom-material-format"
-                    className="input-textarea mw100 w-100 h-192 overflow-scroll"
+                    className="input-textarea mw100 w-100 mb3 h-192 overflow-scroll"
                     autoComplete="off"
                     autoCorrect="off"
                     autoCapitalize="off"
@@ -152,41 +155,8 @@ examples.	KP-PLS TP-PL"
                     value={this.props.customLessonMaterial}
                     >
                   </textarea>
-                  <Link to='/lessons/custom' className="link-button dib" style={{lineHeight: 2}}>Start custom lesson</Link>
-                </div>
-                <div>
-                  <div className="panel p3">
-                    <h2>Share your lessons</h2>
-                    <p className="mb0">To help Typey Type grow even faster, be sure to add your lessons to the{' '}
-                      <GoogleAnalytics.OutboundLink
-                        eventLabel="community’s lessons"
-                        to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        community’s lessons
-                        <Tooltip
-                          title="Opens in a new tab"
-                          animation="shift"
-                          arrow="true"
-                          className=""
-                          duration="200"
-                          tabIndex="0"
-                          tag="span"
-                          theme="didoesdigital"
-                          trigger="mouseenter focus click"
-                          onShow={this.props.setAnnouncementMessage}
-                        >
-                          <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-                        </Tooltip>
-                      </GoogleAnalytics.OutboundLink>.
-                    </p>
-                    <h3>Custom material format</h3>
-                    <ul id="custom-material-format" className="text-small ml1 mt0 mb0">
-                      <li>Each word must be on its own line.</li>
-                      <li>Each word must be separated from its stroke by a "Tab" character.</li>
-                      <li>If you skip strokes, multi-stroke words may count as misstrokes.</li>
-                    </ul>
+                  <div className="text-right">
+                    <Link to='/lessons/custom' className="link-button dib text-right" style={{lineHeight: 2}}>Start custom lesson</Link>
                   </div>
                 </div>
               </div>
@@ -237,6 +207,64 @@ plover"
                 </div>
                 <div>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white landing-page-section">
+            <div className="p3 mx-auto mw-1024">
+              <div className="text-center">
+                <h3>Share your lessons</h3>
+                <p className="mb0">To help Typey Type grow even faster, add to the{' '}
+                  <GoogleAnalytics.OutboundLink
+                    aria-label="Community’s lessons (external link opens in new tab)"
+                    eventLabel="community’s lessons"
+                    to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    community’s lessons
+                    <Tooltip
+                      title="Opens in a new tab"
+                      animation="shift"
+                      arrow="true"
+                      className=""
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
+                      <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                    </Tooltip>
+                  </GoogleAnalytics.OutboundLink>.
+                </p>{
+                }
+                <GoogleAnalytics.OutboundLink
+                    aria-label="Community’s lessons (external link opens in new tab)"
+                    eventLabel="Community’s lessons"
+                    to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="link-button dib mt3"
+                    style={{lineHeight: 2}}
+                  >
+                    Community’s lessons
+                    <Tooltip
+                      title="Opens in a new tab"
+                      animation="shift"
+                      arrow="true"
+                      className=""
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
+                      <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                    </Tooltip>
+                  </GoogleAnalytics.OutboundLink>
               </div>
             </div>
           </div>
