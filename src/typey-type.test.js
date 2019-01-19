@@ -824,7 +824,7 @@ describe('parseCustomMaterial', () => {
     it('should return empty source material', () => {
       let customMaterial = "";
       expect(parseCustomMaterial(customMaterial)).toEqual([{
-        sourceMaterial: [{phrase: '', stroke: ''}],
+        sourceMaterial: [],
         presentedMaterial: [{phrase: '', stroke: ''}],
         settings: { ignoredChars: '' },
         title: 'Custom',
@@ -838,7 +838,7 @@ describe('parseCustomMaterial', () => {
     it('should return empty source material', () => {
       let customMaterial = "test TEFT";
       expect(parseCustomMaterial(customMaterial)).toEqual([{
-          sourceMaterial: [{phrase: '', stroke: ''}],
+          sourceMaterial: [],
           presentedMaterial: [{phrase: '', stroke: ''}],
           settings: { ignoredChars: '' },
           title: 'Custom',
@@ -852,7 +852,7 @@ describe('parseCustomMaterial', () => {
     it('should return empty source material', () => {
       let customMaterial = "	TEFT";
       expect(parseCustomMaterial(customMaterial)).toEqual([{
-          sourceMaterial: [{phrase: '', stroke: ''}],
+          sourceMaterial: [],
           presentedMaterial: [{phrase: '', stroke: ''}],
           settings: { ignoredChars: '' },
           title: 'Custom',
@@ -884,7 +884,7 @@ testWithTab	TEFT
 testWithNoTab
 `;
       expect(parseCustomMaterial(customMaterial)).toEqual([{
-        sourceMaterial: [{phrase: '', stroke: ''}],
+        sourceMaterial: [],
         presentedMaterial: [{phrase: '', stroke: ''}],
         settings: { ignoredChars: '' },
         title: 'Custom',

@@ -426,7 +426,7 @@ function parseCustomMaterial(lessonTextAndStrokes) {
   let validationMessages = [];
 
   let emptyCustomLesson = {
-    sourceMaterial: [{phrase: '', stroke: ''}],
+    sourceMaterial: [],
     presentedMaterial: [{phrase: '', stroke: ''}],
     settings: { ignoredChars: '' },
     title: 'Custom',
