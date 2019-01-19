@@ -1141,36 +1141,6 @@ class App extends Component {
     });
   }
 
-  clearCustomLesson () {
-    let customLesson = {
-      sourceMaterial: [ {phrase: 'The', stroke: '-T'} ],
-      presentedMaterial: [ {phrase: 'The', stroke: '-T'} ],
-      settings: { ignoredChars: '' },
-      title: 'Steno', subtitle: '',
-      newPresentedMaterial: new Zipper([{phrase: '', stroke: ''}]),
-      path: ''
-    };
-    let customLessonMaterial = '';
-    let lesson = {
-      sourceMaterial: [],
-      presentedMaterial: [{phrase: 'The', stroke: '-T'}],
-      settings: { ignoredChars: '' },
-      title: 'Custom',
-      subtitle: '',
-      newPresentedMaterial: new Zipper([{phrase: 'The', stroke: '-T'}]),
-      path: process.env.PUBLIC_URL + '/lessons/custom'
-    }
-    this.setState({
-      announcementMessage: 'Navigated to: ' + lesson.title,
-      customLesson: customLesson,
-      customLessonMaterial: customLessonMaterial,
-      lesson: lesson,
-      currentPhraseID: 0
-    }, () => {
-      this.setupLesson();
-    });
-  }
-
   createCustomLesson(event) {
     if (event && event.target) {
       let providedText = event.target.value || '';
@@ -1695,7 +1665,6 @@ class App extends Component {
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         stopLesson={this.stopLesson.bind(this)}
-                        clearCustomLesson={this.clearCustomLesson.bind(this)}
                         startCustomLesson={this.startCustomLesson.bind(this)}
                         setupRevisionLesson={this.setupRevisionLesson.bind(this)}
                         setupLesson={this.setupLesson.bind(this)}
