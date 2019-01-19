@@ -1145,11 +1145,12 @@ class App extends Component {
     if (event && event.target) {
       let providedText = event.target.value || '';
       let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
-      if (event.target.value.length < 1) { console.log("customLessonMaterial: " + event.target.value); }
+      let customLesson = this.state.customLesson;
+      if (validationMessages && validationMessages.length < 1) { customLesson = lesson; }
       this.setState({
         lesson: lesson,
         currentPhraseID: 0,
-        customLesson: lesson,
+        customLesson: customLesson,
         customLessonMaterial: providedText,
         customLessonMaterialValidationState: validationState,
         customLessonMaterialValidationMessages: validationMessages
