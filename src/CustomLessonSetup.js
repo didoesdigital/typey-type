@@ -172,7 +172,7 @@ examples.	KP-PLS TP-PL"
                   </textarea>
                   {listOfValidationMessages}
                   <div className="text-right">
-                    <Link to='/lessons/custom' className="link-button dib text-right" style={{lineHeight: 2}}>Start custom lesson</Link>
+                    <Link to='/lessons/custom?study=discover&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1' className="link-button dib text-right" style={{lineHeight: 2}}>Start custom lesson</Link>
                   </div>
                 </div>
               </div>
