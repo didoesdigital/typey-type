@@ -137,7 +137,7 @@ class Lesson extends Component {
     }
 
     if (this.isCustom()) {
-      createNewCustomLesson = (<Link to='/lessons/custom/setup' onClick={this.props.stopLesson} className="link-button link-button-ghost table-cell mr1" role="button">Create new lesson</Link>);
+      createNewCustomLesson = (<Link to='/lessons/custom/setup' onClick={this.props.stopLesson} className="link-button link-button-ghost table-cell mr1" role="button">Edit custom lesson</Link>);
     } else {
       createNewCustomLesson = '';
     }

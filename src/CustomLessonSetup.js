@@ -156,7 +156,7 @@ class CustomLessonSetup extends Component {
                   <textarea
                     id="your-material"
                     aria-describedby="customLessonMaterialValidationMessages"
-                    className={ "input-textarea mw100 w-100 mb3 h-192 overflow-scroll " + validationStateStyle }
+                    className={ "input-textarea mw100 w-100 mb3 h-168 overflow-scroll " + validationStateStyle }
                     autoComplete="off"
                     autoCorrect="off"
                     autoCapitalize="off"
@@ -202,7 +202,7 @@ plover"
                   </textarea>
                 </div>
                 <div>
-                  <pre id="js-custom-lesson-dictionary-entries" className={filledPre + "h-192 overflow-scroll mw-384 mt1 mb3"}><code>{dictionaryEntries}</code></pre>
+                  <pre id="js-custom-lesson-dictionary-entries" className={filledPre + "h-168 overflow-scroll mw-384 mt1 mb3"}><code>{dictionaryEntries}</code></pre>
                   <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-custom-lesson-dictionary-entries">Copy custom lesson to clipboard</PseudoContentButton>
                 </div>
               </div>
@@ -217,7 +217,7 @@ plover"
                   <p>{this.state.myWords && this.state.myWords.length > 0 ? "Use your seen words to create a custom lesson:" : "Once you’ve made some progress, your words will appear here."}</p>
                   <pre
                     id="js-your-words-for-dictionary-entries"
-                    className="quote h-192 overflow-scroll mw-384 mt1 mb3"
+                    className="quote h-168 overflow-scroll mw-384 mt1 mb3"
                   ><code>{this.state.myWords}</code></pre>
                   <PseudoContentButton className="js-select-all-my-words link-button js-clipboard-button copy-to-clipboard" dataClipboardTarget="#js-your-words-for-dictionary-entries">Copy your words to clipboard</PseudoContentButton>
                 </div>

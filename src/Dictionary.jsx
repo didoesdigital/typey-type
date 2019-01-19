@@ -264,7 +264,7 @@ class Dictionary extends Component {
                   {!this.state.loadingDictionaryContents && truncatedMessage}
                   {this.state.loadingDictionaryContents ? <p>Loading…</p> :
                     <pre
-                      className="quote h-192 overflow-scroll mw-384 mt1 mb3"
+                      className="quote h-168 overflow-scroll mw-384 mt1 mb3"
                       id="js-dictionary-json-pre"
                     ><code>{contents}</code></pre>
                   }
