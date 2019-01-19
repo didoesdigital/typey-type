@@ -143,14 +143,6 @@ class Dictionary extends Component {
     return (this.props.location.pathname === '/dictionaries/custom');
   }
 
-  // isSetup() {
-  //   return (this.state.dictionary.sourceMaterial.length !== 0);
-  // }
-
-  // isFinished() {
-  //   return (this.state.currentPhraseID === this.state.dictionary.presentedMaterial.length);
-  // }
-
   prefillSurveyLink() {
     // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=Example";
     let googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690="

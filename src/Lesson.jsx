@@ -90,10 +90,6 @@ class Lesson extends Component {
     return (this.props.location.pathname.startsWith('/lessons/') && this.props.location.pathname.endsWith('/flashcards'));
   }
 
-  isSetup() {
-    return (this.props.lesson.sourceMaterial.length !== 0);
-  }
-
   isFinished() {
     let presentedMaterialLength = (this.props.lesson && this.props.lesson.presentedMaterial) ? this.props.lesson.presentedMaterial.length : 0;
     return (this.props.currentPhraseID === presentedMaterialLength);
