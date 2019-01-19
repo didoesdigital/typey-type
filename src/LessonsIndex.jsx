@@ -69,7 +69,11 @@ class LessonsIndex extends Component {
                 </Tooltip>
               </GoogleAnalytics.OutboundLink>.
             </p>
-            <p><Link to={`${this.props.match.url}/custom`.replace(/\/{2,}/g,'/')} className="link-button dib"  style={{lineHeight: 2}} id="ga--lesson-index--create-a-custom-lesson">Create a custom lesson</Link></p>
+            <p>
+              <Link to={`${this.props.match.url}/custom/setup`.replace(/\/{2,}/g,'/')} className="link-button dib"  style={{lineHeight: 2}} id="ga--lesson-index--create-a-custom-lesson">Create a custom lesson</Link>
+              <Link to={`${this.props.match.url}/custom`.replace(/\/{2,}/g,'/')} onClick={this.props.stopLesson} className="dib ml2">Start now</Link>
+            </p>
+
           </div>
 
           <h3>Typey&nbsp;Type lessons</h3>
