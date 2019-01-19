@@ -78,7 +78,6 @@ class Lesson extends Component {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
     }
     if (this.props.location.pathname.startsWith('/lessons/custom') && (prevProps.totalWordCount === 0 || prevProps.currentPhrase === "") && (this.props.totalWordCount > 0 || this.props.currentPhrase.length > 0)) {
-      this.props.createCustomLesson();
       const element = document.getElementById('your-typed-text');
       if (element) { element.focus(); }
     }
