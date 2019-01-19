@@ -452,6 +452,7 @@ function parseCustomMaterial(lessonTextAndStrokes) {
   let lines = lessonTextAndStrokes.split("\n");
   lines = lines.filter(phrase => phrase !== '');
   lines = lines.filter(phrase => phrase.includes("	"));
+  lines = lines.filter(phrase => !phrase.startsWith("	"));
   if (lines.length === 0) {
     validationState = 'fail';
     validationMessages.push('Your material needs at least 1 word and 1 “Tab” character');
