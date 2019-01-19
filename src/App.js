@@ -1177,7 +1177,6 @@ class App extends Component {
       let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
       if (event.target.value.length < 1) { console.log("customLessonMaterial: " + event.target.value); }
       this.setState({
-        announcementMessage: 'Navigated to: ' + lesson.title,
         lesson: lesson,
         currentPhraseID: 0,
         customLesson: lesson,
