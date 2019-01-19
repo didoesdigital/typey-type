@@ -1172,19 +1172,25 @@ class App extends Component {
   }
 
   createCustomLesson(event) {
-    if (event && event.target && event.target.value && event.target.value.length > 0) {
-      let lesson = parseCustomMaterial(event.target.value);
+    if (event && event.target) {
+      let providedText = event.target.value || '';
+      let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
+      if (event.target.value.length < 1) { console.log("customLessonMaterial: " + event.target.value); }
       this.setState({
         announcementMessage: 'Navigated to: ' + lesson.title,
         lesson: lesson,
         currentPhraseID: 0,
         customLesson: lesson,
-        customLessonMaterial: event.target.value
+        customLessonMaterial: providedText,
+        customLessonMaterialValidationState: validationState,
+        customLessonMaterialValidationMessages: validationMessages
       }, () => {
         this.setupLesson();
       });
     }
     else { // for navigating straight to custom lesson page without setup
+      // debugger;
+    // TODO: is this the place where I should set a default empty custom lesson?
       let lesson = Object.assign({}, this.state.customLesson);
       lesson.title = 'Custom'
       this.setState({
@@ -1630,6 +1636,8 @@ class App extends Component {
                     <ErrorBoundary>
                       <Lessons
                         customLessonMaterial={this.state.customLessonMaterial}
+                        customLessonMaterialValidationState={this.state.customLessonMaterialValidationState}
+                        customLessonMaterialValidationMessages={this.state.customLessonMaterialValidationMessages}
                         updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
                         updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
                         flashcardsMetWords={this.state.flashcardsMetWords}

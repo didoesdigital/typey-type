@@ -84,6 +84,26 @@ class CustomLessonSetup extends Component {
       filledPre = "quote ";
     }
 
+    let validationStateStyle = "";
+    let validationMessages = [];
+    let listOfValidationMessages;
+    switch (this.props.customLessonMaterialValidationState) {
+      case "success":
+        validationStateStyle = "bg-success";
+        break;
+      case "fail":
+        validationStateStyle = "bg-danger";
+        let listItemsOfValidationMessages = this.props.customLessonMaterialValidationMessages.map( (entry, index) => {
+          return( <li key={index}>{ entry }</li>);
+        });
+        listOfValidationMessages = (
+          <ul className="unstyled-list">{listItemsOfValidationMessages}</ul>
+        );
+        break;
+      default:
+        validationStateStyle = "";
+    }
+
     const dictionaryEntries = this.state.dictionary.map( (entry, index) => {
       return( `${entry.phrase}	${entry.stroke}`)
     }).join('\n');
@@ -137,7 +157,7 @@ class CustomLessonSetup extends Component {
                   <textarea
                     id="your-material"
                     aria-describedby="custom-material-format"
-                    className="input-textarea mw100 w-100 mb3 h-192 overflow-scroll"
+                    className={ "input-textarea mw100 w-100 mb3 h-192 overflow-scroll " + validationStateStyle }
                     autoComplete="off"
                     autoCorrect="off"
                     autoCapitalize="off"
@@ -151,6 +171,7 @@ examples.	KP-PLS TP-PL"
                     value={this.props.customLessonMaterial}
                     >
                   </textarea>
+                  {listOfValidationMessages}
                   <div className="text-right">
                     <Link to='/lessons/custom' className="link-button dib text-right" style={{lineHeight: 2}}>Start custom lesson</Link>
                   </div>

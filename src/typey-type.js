@@ -422,26 +422,42 @@ const SETTINGS_NAME_MAP = {
 }
 
 function parseCustomMaterial(lessonTextAndStrokes) {
+  let validationState = 'unvalidated';
+  let validationMessages = [];
+
   let emptyCustomLesson = {
     sourceMaterial: [],
-    presentedMaterial: [{phrase: 'The', stroke: '-T'}],
+    presentedMaterial: [{phrase: '', stroke: ''}],
     settings: { ignoredChars: '' },
     title: 'Custom',
     subtitle: '',
-    newPresentedMaterial: new Zipper([{phrase: 'The', stroke: '-T'}]),
+    newPresentedMaterial: new Zipper([{phrase: '', stroke: ''}]),
     path: process.env.PUBLIC_URL + '/lessons/custom'
   }
-  if (lessonTextAndStrokes.length === 0 || !lessonTextAndStrokes.includes("	")) {
-    return emptyCustomLesson;
+  if (lessonTextAndStrokes.length === 0) {
+    validationState = 'fail';
+    validationMessages.push('Your material needs at least 1 word');
+    return [emptyCustomLesson, validationState, validationMessages];
   }
+
+  if (!lessonTextAndStrokes.includes("	")) {
+    validationState = 'fail';
+    validationMessages.push('Your material needs at least 1 “Tab” character');
+    return [emptyCustomLesson, validationState, validationMessages];
+  }
+
   let lessonTitle = 'Custom';
   let lessonSubtitle = '';
+
   let lines = lessonTextAndStrokes.split("\n");
   lines = lines.filter(phrase => phrase !== '');
   lines = lines.filter(phrase => phrase.includes("	"));
   if (lines.length === 0) {
-    return emptyCustomLesson;
+    validationState = 'fail';
+    validationMessages.push('Your material needs at least 1 word and 1 “Tab” character');
+    return [emptyCustomLesson, validationState, validationMessages];
   }
+
   let sourceMaterial = [];
   let settings = {ignoredChars: ''};
 
@@ -453,7 +469,9 @@ function parseCustomMaterial(lessonTextAndStrokes) {
     sourceMaterial.push( {phrase: phrase, stroke: stroke} );
   }
 
-  return {
+  validationState = 'success';
+
+  return [{
     sourceMaterial: sourceMaterial,
     presentedMaterial: sourceMaterial,
     settings: settings,
@@ -461,7 +479,10 @@ function parseCustomMaterial(lessonTextAndStrokes) {
     subtitle: lessonSubtitle,
     newPresentedMaterial: new Zipper(sourceMaterial),
     path: process.env.PUBLIC_URL + '/lessons/custom'
-  }
+  },
+    validationState,
+    validationMessages
+  ]
 }
 
 function parseWordList(userInputWordList) {

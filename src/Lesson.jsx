@@ -140,7 +140,7 @@ class Lesson extends Component {
       lessonSubTitle = ': '+this.props.lessonSubTitle;
     }
 
-    if (this.isCustom() && this.isSetup()) {
+    if (this.isCustom()) {
       createNewCustomLesson = (<Link to='/lessons/custom/setup' onClick={this.props.stopLesson} className="link-button link-button-ghost table-cell mr1" role="button">Create new lesson</Link>);
     } else {
       createNewCustomLesson = '';

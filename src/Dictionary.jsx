@@ -184,7 +184,7 @@ class Dictionary extends Component {
     }
 
     if (this.state.dictionary) {
-      if (this.isCustom() && !this.isSetup()) {
+      if (this.isCustom()) {
       // console.log("custom");
         return (
           <DocumentTitle title='Typey Type | Create a custom dictionary'>
