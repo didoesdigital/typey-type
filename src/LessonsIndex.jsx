@@ -71,7 +71,7 @@ class LessonsIndex extends Component {
             </p>
             <p>
               <Link to={`${this.props.match.url}/custom/setup`.replace(/\/{2,}/g,'/')} className="link-button dib"  style={{lineHeight: 2}} id="ga--lesson-index--create-a-custom-lesson">Create a custom lesson</Link>
-              <Link to={`${this.props.match.url}/custom`.replace(/\/{2,}/g,'/')} onClick={this.props.stopLesson} className="dib ml2">Start now</Link>
+              { this.props.customLesson.title !== "Steno" ? <Link to={`${this.props.match.url}/custom`.replace(/\/{2,}/g,'/')} onClick={this.props.stopLesson} className="dib ml2">Start custom lesson</Link> : null }
             </p>
 
           </div>

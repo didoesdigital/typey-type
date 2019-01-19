@@ -1605,6 +1605,7 @@ class App extends Component {
                   <DocumentTitle title={'Typey Type | Lessons'}>
                     <ErrorBoundary>
                       <Lessons
+                        customLesson={this.state.customLesson}
                         customLessonMaterial={this.state.customLessonMaterial}
                         customLessonMaterialValidationState={this.state.customLessonMaterialValidationState}
                         customLessonMaterialValidationMessages={this.state.customLessonMaterialValidationMessages}
