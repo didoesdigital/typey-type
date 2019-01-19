@@ -97,7 +97,7 @@ class CustomLessonSetup extends Component {
           return( <li key={index}>{ entry }</li>);
         });
         listOfValidationMessages = (
-          <ul className="unstyled-list bg-danger">{listItemsOfValidationMessages}</ul>
+          <ul id="customLessonMaterialValidationMessages" className="unstyled-list bg-danger">{listItemsOfValidationMessages}</ul>
         );
         break;
       default:
@@ -156,7 +156,7 @@ class CustomLessonSetup extends Component {
                   <label htmlFor="your-material">Enter your material here:</label>
                   <textarea
                     id="your-material"
-                    aria-describedby="custom-material-format"
+                    aria-describedby="customLessonMaterialValidationMessages"
                     className={ "input-textarea mw100 w-100 mb3 h-192 overflow-scroll " + validationStateStyle }
                     autoComplete="off"
                     autoCorrect="off"
