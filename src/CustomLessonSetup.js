@@ -85,7 +85,6 @@ class CustomLessonSetup extends Component {
     }
 
     let validationStateStyle = "";
-    let validationMessages = [];
     let listOfValidationMessages;
     switch (this.props.customLessonMaterialValidationState) {
       case "success":
