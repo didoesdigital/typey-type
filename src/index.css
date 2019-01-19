@@ -579,6 +579,18 @@ input:focus::placeholder {
 .bg-white {
   background-color: #fff; }
 
+.b-danger.b-danger {
+  border-color: #d64e84; }
+
+.b-warning.b-warning {
+  border-color: #ffd279; }
+
+.b-info.b-info {
+  border-color: #8242a8; }
+
+.b-slat.b-slat {
+  border-color: #8242a8; }
+
 .color-purple-bright {
   color: #8242a8; }
 

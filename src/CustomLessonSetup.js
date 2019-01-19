@@ -89,15 +89,15 @@ class CustomLessonSetup extends Component {
     let listOfValidationMessages;
     switch (this.props.customLessonMaterialValidationState) {
       case "success":
-        validationStateStyle = "bg-success";
+        validationStateStyle = "b-success";
         break;
       case "fail":
-        validationStateStyle = "bg-danger";
+        validationStateStyle = "b-danger";
         let listItemsOfValidationMessages = this.props.customLessonMaterialValidationMessages.map( (entry, index) => {
           return( <li key={index}>{ entry }</li>);
         });
         listOfValidationMessages = (
-          <ul className="unstyled-list">{listItemsOfValidationMessages}</ul>
+          <ul className="unstyled-list bg-danger">{listItemsOfValidationMessages}</ul>
         );
         break;
       default:
