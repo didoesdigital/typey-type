@@ -151,7 +151,36 @@ small, .text-small {
   line-height: 1.6; }
 
 :focus {
-  outline: #FFD073 outset 3px; }
+  outline: #FFD073 auto 5px; }
+  :focus:not(:focus-visible) {
+    outline: none; }
+
+h1:focus,
+h2:focus,
+h3:focus {
+  outline: none;
+  position: relative; }
+  h1:focus::before,
+  h2:focus::before,
+  h3:focus::before {
+    border-bottom: #FFD073 solid 2px;
+    content: '';
+    position: absolute;
+    width: 100%;
+    bottom: 0; }
+  h1:focus:focus:not(:focus-visible),
+  h2:focus:focus:not(:focus-visible),
+  h3:focus:focus:not(:focus-visible) {
+    outline: none; }
+    h1:focus:focus:not(:focus-visible)::before,
+    h2:focus:focus:not(:focus-visible)::before,
+    h3:focus:focus:not(:focus-visible)::before {
+      width: 0 !important; }
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline-offset: 0; }
 
 ::selection {
   background-color: #ffe5b3; }
@@ -792,7 +821,7 @@ input:focus::placeholder {
   text-decoration: underline;
   text-underline-position: under; }
   .typed-text-input-textarea:focus {
-    outline: #FFD073 outset 3px;
+    outline: #FFD073 auto 5px;
     border-radius: 0; }
 
 .progress-textarea {
@@ -1084,7 +1113,7 @@ label {
   text-decoration: underline; }
   .stroke-tip__label:focus-within {
     color: #202549;
-    outline: #FFD073 outset 3px; }
+    outline: #FFD073 auto 5px; }
 
 .steno-material {
   border-bottom: 2px solid #FFD073; }

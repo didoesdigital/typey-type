@@ -15,6 +15,7 @@ $h4-size: $base-font-size * $font-scale; // 20px
 $h5-size: $base-font-size; // 16px
 $h6-size: $base-font-size / $font-scale; // 12.8px
 $breakpoint: 1024px;
+$outline-shorthand: $brand-highlight auto 5px;
 $z-index-autocomplete-menu: 4;
 $z-index-vertical-text: 3;
 $z-index-revision-mode-button: 2;
@@ -218,7 +219,41 @@ small, .text-small {
 }
 
 :focus {
-  outline: $brand-highlight outset 3px;
+  outline: $outline-shorthand;
+  // :focus-visible using Chrome flag: Experimental Web Platform features
+  // https://twitter.com/leaverou/status/1045768279753666562?lang=en
+  &:not(:focus-visible) { outline: none; }
+}
+
+h1:focus,
+h2:focus,
+h3:focus {
+  outline: none;
+  position: relative;
+
+  &::before {
+    border-bottom: $brand-highlight solid 2px;
+    content: '';
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
+
+  // :focus-visible using Chrome flag: Experimental Web Platform features
+  // https://twitter.com/leaverou/status/1045768279753666562?lang=en
+  &:focus:not(:focus-visible) {
+    outline: none;
+
+    &::before {
+      width: 0 !important;
+    }
+  }
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline-offset: 0;
 }
 
 ::selection {
@@ -766,7 +801,7 @@ $textarea-padding-x: 8px;
   text-decoration: underline;
   text-underline-position: under;
   &:focus {
-    outline: $brand-highlight outset 3px;
+    outline: $outline-shorthand;
     border-radius: 0;
   }
 }
@@ -1199,7 +1234,7 @@ label {
   text-decoration: underline;
   &:focus-within {
     color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
-    outline: $brand-highlight outset 3px;
+    outline: $outline-shorthand;
   }
 }
 
