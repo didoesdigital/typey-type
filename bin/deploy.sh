@@ -21,7 +21,7 @@ if [[ `git branch-name` != master ]];
     echo "You're on master"
 fi
 
-ruby ~/projects/plover-tools/typey-type-lesson-generator/run-build-dict-for-typey-type-for-standard-dict-set.rb
+ruby ~/projects/plover-tools/typey-type-static-lesson-generator/run-build-dict-for-typey-type-for-standard-dict-set.rb
 
 
 
