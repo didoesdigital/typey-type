@@ -381,7 +381,7 @@ class Lesson extends Component {
                   <div role="article" className="lesson-canvas panel mw-1024 p2 fill-fade-parent mb3">
                     {revisionModeButton}
                     <span className="fill-fade-edges"></span>
-                    <div className="mx-auto mw100 mt10 text-center">
+                    <div className="mx-auto mw100 mt10 text-center min-width-70">
                       <Material
                         actualText={this.props.actualText}
                         currentPhrase={this.props.currentPhrase}

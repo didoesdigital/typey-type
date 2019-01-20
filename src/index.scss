@@ -458,6 +458,8 @@ input:focus::placeholder {
 .mw-408  { max-width: 408px; }
 .mw-384  { max-width: 384px; }
 
+.min-width-70 {min-width: 70%; }
+
 .mh-page { min-height: calc(100vh - #{$header-plus-footer-height}); }
 
 .p0      { padding: 0px; }
