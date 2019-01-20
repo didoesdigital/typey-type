@@ -46,6 +46,14 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, ...dictionary
             {...props}
           />
         } />
+      <Route path={`${match.url}/individual/:dictionaryPath`} render={ (props) =>
+          <AsyncDictionary
+            dictionaryIndex={dictionaryIndex}
+            setDictionaryIndex={setDictionaryIndex}
+            {...dictionaryProps}
+            {...props}
+          />
+        } />
       <Route path={`${match.url}/didoesdigital/:dictionaryPath`} render={ (props) =>
           <AsyncDictionary
             dictionaryIndex={dictionaryIndex}
