@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
 import PseudoContentButton from './PseudoContentButton';
 import RecommendationDescription from './RecommendationDescription';
+import { getLessonIndexData } from './lessonIndexData';
 import { IconExternal, IconCheckmark, IconTriangleRight } from './Icon';
 import { Link, Redirect } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
@@ -27,7 +28,11 @@ class Progress extends Component {
       this.mainHeading.focus();
     }
 
-    // this.recommendAnotherLesson(false);
+    getLessonIndexData().then(() => {
+      if (this.props.recommendationHistory && this.props.recommendationHistory['previousStep'] === null) {
+        this.recommendAnotherLesson(false);
+      }
+    });
 
     this.setState({ showLoadInput: false, toRecommendedNextLesson: false });
 
