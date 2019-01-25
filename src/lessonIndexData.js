@@ -8,6 +8,14 @@ function fetchLessonIndex() {
     return response.json()
   }).then(json => {
     return(json);
+  }).catch(() => {
+    let json = [{
+      "title": "Steno",
+      "subtitle": "",
+      "category": "Drills",
+      "subcategory": "",
+      "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
+    }];
   });
 }
 

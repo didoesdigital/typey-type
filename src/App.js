@@ -284,19 +284,7 @@ class App extends Component {
     getLessonIndexData().then((json) => {
       this.setState({ lessonIndex: json }, () => {
         setupLessonProgress(json);
-      })
-    }).catch(() => {
-      let json = [{
-        "title": "Steno",
-        "subtitle": "",
-        "category": "Drills",
-        "subcategory": "",
-        "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
-      }];
-
-      this.setState({ lessonIndex: json }, () => {
-        setupLessonProgress(json);
-      })
+      });
     });
   }
 
