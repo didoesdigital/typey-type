@@ -1303,7 +1303,7 @@ class App extends Component {
     });
   }
 
-  updateRecommendationHistory(prevRecommendationHistory) {
+  updateRecommendationHistory(prevRecommendationHistory, lessonIndex = this.state.lessonIndex) {
     let newRecommendationHistory = Object.assign({}, prevRecommendationHistory);
 
     if ((typeof newRecommendationHistory['previousStep'] === undefined) || (newRecommendationHistory['previousStep'] === null)) {
@@ -1338,7 +1338,7 @@ class App extends Component {
         break;
     }
 
-    getRecommendedNextLesson(this.state.lessonsProgress, newRecommendationHistory, this.state.yourSeenWordCount, this.state.yourMemorisedWordCount, this.state.lessonIndex, this.state.metWords)
+    getRecommendedNextLesson(this.state.lessonsProgress, newRecommendationHistory, this.state.yourSeenWordCount, this.state.yourMemorisedWordCount, lessonIndex, this.state.metWords)
       .then((nextRecommendedLesson) => {
         this.setState({
           revisionMode: false,

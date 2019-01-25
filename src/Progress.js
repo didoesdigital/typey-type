@@ -28,9 +28,9 @@ class Progress extends Component {
       this.mainHeading.focus();
     }
 
-    getLessonIndexData().then(() => {
+    getLessonIndexData().then((lessonIndex) => {
       if (this.props.recommendationHistory && this.props.recommendationHistory['previousStep'] === null) {
-        this.recommendAnotherLesson(false);
+        this.props.updateRecommendationHistory(this.props.recommendationHistory, lessonIndex);
       }
     });
 
