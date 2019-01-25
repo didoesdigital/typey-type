@@ -16,6 +16,7 @@ function fetchLessonIndex() {
       "subcategory": "",
       "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
     }];
+    return json;
   });
 }
 
