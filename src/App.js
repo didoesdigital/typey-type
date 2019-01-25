@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { randomise, isLessonTextValid } from './utils';
+import { getLessonIndexData } from './lessonIndexData';
 import { getRecommendedNextLesson } from './recommendations';
 import {
   createWordListFromMetWords,
   parseCustomMaterial,
   parseWordList,
-  fetchLessonIndex,
   setupLessonProgress,
   fetchDictionaries,
   fetchDictionaryIndex,
@@ -281,7 +281,7 @@ class App extends Component {
   componentDidMount() {
     this.setPersonalPreferences();
 
-    fetchLessonIndex().then((json) => {
+    getLessonIndexData().then((json) => {
       this.setState({ lessonIndex: json }, () => {
         setupLessonProgress(json);
       })
