@@ -27,7 +27,7 @@ class Progress extends Component {
       this.mainHeading.focus();
     }
 
-    this.recommendAnotherLesson(false);
+    // this.recommendAnotherLesson(false);
 
     this.setState({ showLoadInput: false, toRecommendedNextLesson: false });
 
