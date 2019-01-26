@@ -374,10 +374,8 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
       recommendedNextLesson.linkTitle = "Save your progress and take a break"
       recommendedNextLesson.linkText = "Take a break";
       recommendedNextLesson.link = '/break';
-      // recommendedNextLesson.link = 'https://www.reddit.com/r/Plover/';
     }
 
-    // console.log(recommendedStudySession[recommendedStudySessionIndex]);
     return recommendedNextLesson;
   });
 }
