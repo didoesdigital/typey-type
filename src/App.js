@@ -1090,8 +1090,6 @@ class App extends Component {
       newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings, this.state.revisionMode);
 
       let isRecommendedLesson = false;
-      // This is a heuristic to make a guess if it's a recommended lesson
-      // TODO: update this to actually know if it's a recommended lesson
       if (this.state.recommendedLessonInProgress &&
         this.state.userSettings &&
         this.state.userSettings.showStrokes === false &&
