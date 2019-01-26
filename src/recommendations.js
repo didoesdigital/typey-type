@@ -1,3 +1,5 @@
+import * as PARAMS from './params.js';
+
 let data = null;
 
 let recommendedStudySession = [
@@ -67,13 +69,8 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
       repetitions: 1,
       linkTitle: "Top 10000 Project Gutenberg words",
       linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
-      link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=1&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1"
+      link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/" + PARAMS.practiceParams
     };
-
-    let discoverParams = '?recommended=true&study=discover&limitNumberOfWords=15&repetitions=5&newWords=1&seenWords=0&retainedWords=0&showStrokes=1&hideStrokesOnLastRepetition=1&sortOrder=sortOff&startFromWord=1';
-    let revisionParams = '?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortNew&startFromWord=1';
-    let drillParams = '?recommended=true&study=drill&limitNumberOfWords=100&repetitions=3&newWords=0&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortRandom&startFromWord=1';
-    let practiceParams = '?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1';
 
     // Check previousStep to set index of recommendedStudySession
     // For given step, check if it's viable e.g. you've seen punctuation and basic words so you can do practice:
@@ -131,13 +128,12 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
     }
 
     if (recommendedStudySession[recommendedStudySessionIndex] === "practice") {
+      let practiceParams = PARAMS.practiceParams;
       let recommendedPracticeLesson = lessonIndex.find((recommendable) => {
+        // TODO: should this have process.env.PUBLIC_URL?
         if (recommendable.path === "/drills/project-gutenberg-sentences-using-top-100-words/lesson.txt") {
-          if (!metWords[" man"] > 2 || !metWords["man "] > 2 || !metWords["man"] > 2) {
+          if (!(metWords[" man"] > 2) && !(metWords["man "] > 2) && !(metWords["man"] > 2)) {
             practiceParams = '?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=7';
-          }
-          else {
-            practiceParams = '?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1';
           }
           return true;
         }
@@ -189,7 +185,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
         recommendedNextLesson.repetitions = 3;
         recommendedNextLesson.linkTitle = recommendedDrillLesson.lessonTitle;
         recommendedNextLesson.linkText = "Drill " + recommendedNextLesson.limitNumberOfWords + " words from " + recommendedDrillLesson.lessonTitle + " with " + recommendedNextLesson.repetitions + " repetitions";
-        recommendedNextLesson.link = recommendedDrillLesson.path.replace(/lesson.txt$/,'') + drillParams;
+        recommendedNextLesson.link = recommendedDrillLesson.path.replace(/lesson.txt$/,'') + PARAMS.drillParams;
       }
     }
 
@@ -209,7 +205,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           recommendedNextLesson.repetitions = 3;
           recommendedNextLesson.linkTitle = "Your revision words";
           recommendedNextLesson.linkText = "Your revision words";
-          recommendedNextLesson.link = "/lessons/progress/seen/" + revisionParams;
+          recommendedNextLesson.link = "/lessons/progress/seen/" + PARAMS.revisionParams;
           break;
 
         case "reviseLessons":
@@ -236,7 +232,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
             recommendedNextLesson.repetitions = 3;
             recommendedNextLesson.linkTitle = recommendedRevisionLesson.lessonTitle;
             recommendedNextLesson.linkText = "Revise 50 words from " + recommendedRevisionLesson.lessonTitle + " with 3 repetitions";
-            recommendedNextLesson.link = recommendedRevisionLesson.path.replace(/lesson.txt$/,'') + revisionParams;
+            recommendedNextLesson.link = recommendedRevisionLesson.path.replace(/lesson.txt$/,'') + PARAMS.revisionParams;
           }
           break;
 
@@ -246,7 +242,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           recommendedNextLesson.repetitions = 3;
           recommendedNextLesson.linkTitle = "Your revision words";
           recommendedNextLesson.linkText = "Your revision words";
-          recommendedNextLesson.link = "/lessons/progress/seen/" + revisionParams;
+          recommendedNextLesson.link = "/lessons/progress/seen/" + PARAMS.revisionParams;
           break;
       }
     }
@@ -309,7 +305,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
         recommendedNextLesson.repetitions = 5;
         recommendedNextLesson.linkTitle = recommendedDiscoverLesson.lessonTitle;
         recommendedNextLesson.linkText = "Discover 15 words from " + recommendedDiscoverLesson.lessonTitle + " with 5 repetitions";
-        recommendedNextLesson.link = recommendedDiscoverLesson.path.replace(/lesson.txt$/,'') + discoverParams;
+        recommendedNextLesson.link = recommendedDiscoverLesson.path.replace(/lesson.txt$/,'') + PARAMS.discoverParams;
       }
     }
 

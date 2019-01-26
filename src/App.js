@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as PARAMS from './params.js';
 import { randomise, isLessonTextValid } from './utils';
 import { getLessonIndexData } from './lessonIndexData';
 import { getRecommendedNextLesson } from './recommendations';
@@ -59,6 +60,7 @@ const AsyncDictionaries = Loadable({
   loading: PageLoading,
   delay: 300
 });
+
 
 // Test PageLoadingPastDelay at Dictionaries route:
 // import PageLoadingPastDelay from './PageLoadingPastDelay';
@@ -270,7 +272,7 @@ class App extends Component {
         repetitions: 1,
         linkTitle: "Top 10000 Project Gutenberg words",
         linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
-        link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=1&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1"
+        link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/" + PARAMS.practiceParams
       },
       revisionMaterial: [
       ],
@@ -1379,7 +1381,7 @@ class App extends Component {
             repetitions: 1,
             linkTitle: "Top 10000 Project Gutenberg words",
             linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
-            link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=1&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1"
+            link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/" + PARAMS.practiceParams
           }
         });
       });
