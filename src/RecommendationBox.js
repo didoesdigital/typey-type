@@ -164,43 +164,43 @@ class RecommendationBox extends Component {
       }
 
       recommendedNextLesson = (
-          <div className="mw-384 w-336 order-1">
-            {recommendedNextLessonHeading}
-            <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
-              <p className="text-right"><strong>{recommendedLinkTitle}</strong></p>
-              <p className="text-right de-emphasized">{metadataStats}</p>
-              <div className="flex flex-wrap justify-end">
-                <button onClick={this.props.recommendAnotherLesson} className="de-emphasized-button pl3 pr3">Skip</button>
-                <div className="text-right">
-                  {recommendedLink}
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-wrap content-start-ns">
-              <div className="flex flex-wrap">
-                <RecommendationDescription
-                  studyType={this.props.recommendedNextLesson.studyType}
-                  setAnnouncementMessage={this.props.setAnnouncementMessage}
-                />
+        <React.Fragment>
+          {recommendedNextLessonHeading}
+          <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
+            <p className="text-right"><strong>{recommendedLinkTitle}</strong></p>
+            <p className="text-right de-emphasized">{metadataStats}</p>
+            <div className="flex flex-wrap justify-end">
+              <button onClick={this.props.recommendAnotherLesson} className="de-emphasized-button pl3 pr3">Skip</button>
+              <div className="text-right">
+                {recommendedLink}
               </div>
             </div>
           </div>
+          <div className="flex flex-wrap content-start-ns">
+            <div className="flex flex-wrap">
+              <RecommendationDescription
+                studyType={this.props.recommendedNextLesson.studyType}
+                setAnnouncementMessage={this.props.setAnnouncementMessage}
+              />
+            </div>
+          </div>
+        </React.Fragment>
       );
     } else {
       recommendedNextLesson = (
-          <div className="mw-384 w-336 order-1">
-            <h3>Recommended…</h3>
-            <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
-              <p className="text-right"><strong>Loading…</strong></p>
-              <p className="text-right de-emphasized"></p>
-              <div className="flex flex-wrap justify-end">
-                <button onClick={this.props.recommendAnotherLesson} className="de-emphasized-button pl3 pr3">Skip</button>
-                <div className="text-right">
-                  <button disabled className="link-button dib" style={{lineHeight: 2}}>Loading…</button>
-                </div>
+        <React.Fragment>
+          <h3>Recommended…</h3>
+          <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
+            <p className="text-right"><strong>Loading…</strong></p>
+            <p className="text-right de-emphasized"></p>
+            <div className="flex flex-wrap justify-end">
+              <button onClick={this.props.recommendAnotherLesson} className="de-emphasized-button pl3 pr3">Skip</button>
+              <div className="text-right">
+                <button disabled className="link-button dib" style={{lineHeight: 2}}>Loading…</button>
               </div>
             </div>
           </div>
+        </React.Fragment>
       );
     }
 

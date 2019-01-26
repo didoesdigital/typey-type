@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
+import ErrorBoundary from './ErrorBoundary'
 import PseudoContentButton from './PseudoContentButton';
 import RecommendationBox from './RecommendationBox';
 import { getLessonIndexData } from './lessonIndexData';
@@ -389,13 +390,17 @@ class Progress extends Component {
 
 
             <div className="flex flex-wrap justify-between">
-              <RecommendationBox
-                recommendedNextLesson={this.props.recommendedNextLesson}
-                setAnnouncementMessage={this.props.setAnnouncementMessage}
-                loadingLessonIndex={this.state.loadingLessonIndex}
-                startRecommendedStep={this.startRecommendedStep.bind(this)}
-                recommendAnotherLesson={this.recommendAnotherLesson}
-              />
+              <div className="mw-384 w-336 order-1">
+                <ErrorBoundary relative={true}>
+                  <RecommendationBox
+                    recommendedNextLesson={this.props.recommendedNextLesson}
+                    setAnnouncementMessage={this.props.setAnnouncementMessage}
+                    loadingLessonIndex={this.state.loadingLessonIndex}
+                    startRecommendedStep={this.startRecommendedStep.bind(this)}
+                    recommendAnotherLesson={this.recommendAnotherLesson}
+                  />
+                </ErrorBoundary>
+              </div>
               <div className="mw-568">
                 <h3>Lessons progress</h3>
                 <ul className="unstyled-list">{linkList}</ul>
