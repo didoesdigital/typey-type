@@ -375,8 +375,8 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
       recommendedNextLesson.studyType = 'break';
       recommendedNextLesson.limitNumberOfWords = null;
       recommendedNextLesson.repetitions = null;
-      recommendedNextLesson.linkTitle = "Take a break"
-      recommendedNextLesson.linkText = "Give me more";
+      recommendedNextLesson.linkTitle = "Save your progress and take a break"
+      recommendedNextLesson.linkText = "Take a break";
       recommendedNextLesson.link = '/break';
       // recommendedNextLesson.link = 'https://www.reddit.com/r/Plover/';
     }

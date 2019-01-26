@@ -64,7 +64,7 @@ class RecommendationDescription extends Component {
       case "wildcard":
         description = (
           <p>
-            Well done! You’ve typed a lot of words today. You might rest your hands and your mind for now, and come back in 4+ hours.
+            Well done! You’ve typed a lot of words today. You might rest your hands and your mind for now, and come back in 4+&nbsp;hours.
           </p>
         );
         break;
@@ -72,7 +72,7 @@ class RecommendationDescription extends Component {
       case "break":
         description = (
           <p>
-            Well done! You’ve typed a lot of words today. You might rest your hands and your mind for now, and come back in 4+ hours.
+            Well done! You’ve typed a lot of words today. You might rest your hands and your mind for now. Save your progress and take 5&nbsp;minutes or come back in 4+&nbsp;hours.
           </p>
         );
         break;
