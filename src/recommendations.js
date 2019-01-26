@@ -255,38 +255,8 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
     // Once a step is chosen, pick a valid lesson/step for that
     // For discover, review lessonsProgress for words seen and compare against targets in recommendedDiscoverCourse
     if (recommendedStudySession[recommendedStudySessionIndex] === "discover") {
-      // recommendable = {
-      //   path: "/lessons/fundamentals/one-syllable-words-with-simple-keys/lesson.txt",
-      //   lessonTitle: "One-syllable words with simple keys",
-      //   target: 15
-      // }
-      // anotherRecommendable = {
-      //   path: process.env.PUBLIC_URL + "/lessons/fundamentals/one-syllable-words-with-inversion/lesson.txt",
-      //   lessonTitle: "One-syllable words with inversion",
-      //   target: 6
-      // },
-      // lessonsProgress = {
-      //   "/lessons/fundamentals/one-syllable-words-with-simple-keys/lesson.txt": {
-      //       "numberOfWordsSeen":2,
-      //       "numberOfWordsToDiscover": 202
-      //     },
-      //   "/lessons/drills/top-100-words/lesson.txt": {
-      //       "numberOfWordsSeen":3,
-      //       "numberOfWordsToDiscover": 97
-      //     },
-      //   "/lessons/fundamentals/one-syllable-words-with-inversion/lesson.txt": {
-      //       "numberOfWordsSeen":3,
-      //       "numberOfWordsToDiscover": 3
-      //     }
-      // };
       let entryInLessonsProgress;
       let recommendedDiscoverLesson = courses.discoverCourse.find((recommendable) => {
-        // if (recommendable.path.includes("top-100-words")) {debugger}
-        // // no matching lessons:
-        // if (typeof recommendable === "undefined") { return false; }
-
-        // // no recommendable lesson path:
-        // if (typeof recommendable.path === "undefined") { return false; }
 
         // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
         // so it's probably a good candidate
