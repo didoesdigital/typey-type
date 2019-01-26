@@ -1348,7 +1348,6 @@ class App extends Component {
         break;
       case "discover":
         newRecommendationHistory['previousStep'] = 'wildcard';
-        // newRecommendationHistory['previousStep'] = 'break';
         break;
       case "wildcard":
         newRecommendationHistory['previousStep'] = 'break';

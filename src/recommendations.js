@@ -85,7 +85,6 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
     // 'if.': TP TP-PL
     // If not viable, move to next step; if nothing is valid (e.g. you've discovered ALL words on Typey Type, fall back to top 10,000 project gutenberg words practice
     let recommendedStudySessionIndex = 0;
-    // console.log(history);
     if (typeof history === "object") {
       switch (history["previousStep"]) {
         case "practice":
@@ -120,8 +119,6 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           break;
       }
     }
-    // console.log(recommendedStudySessionIndex);
-    // console.log(recommendedStudySession[recommendedStudySessionIndex]);
 
     if (recommendedStudySession[recommendedStudySessionIndex] === "practice" && numberOfWordsMemorised < 2) {
       recommendedStudySessionIndex = recommendedStudySessionIndex + 1;
@@ -166,15 +163,12 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
       }
     }
 
-    // console.log(numberOfWordsMemorised);
-    // debugger
     if (recommendedStudySession[recommendedStudySessionIndex] === "drill" && numberOfWordsMemorised < 2) {
       recommendedStudySessionIndex = recommendedStudySessionIndex + 1;
     }
 
     if (recommendedStudySession[recommendedStudySessionIndex] === "drill") {
       let entryInLessonsProgress;
-      // debugger;
       let recommendedDrillLesson = courses.drillCourse.find((recommendable) => {
         // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
         // so it's probably a good candidate
@@ -201,13 +195,12 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
       }
     }
 
-    // console.log(numberOfWordsSeen);
     if (recommendedStudySession[recommendedStudySessionIndex] === "revise" && numberOfWordsSeen < 15) {
       recommendedStudySessionIndex = recommendedStudySessionIndex + 1;
     }
 
     if (recommendedStudySession[recommendedStudySessionIndex] === "revise") {
-      // one day it could include an option to revise your worst words or tricky words
+      // One day it could include an option to revise your worst words or tricky words
       let reviseChoice = Math.random() <.5 ? "reviseLessons" : "reviseSeen";
 
       switch (reviseChoice) {
@@ -258,7 +251,6 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           break;
       }
     }
-
 
     // Once a step is chosen, pick a valid lesson/step for that
     // For discover, review lessonsProgress for words seen and compare against targets in recommendedDiscoverCourse
