@@ -42,8 +42,8 @@ class ErrorBoundary extends Component {
       )
     } else if (this.state.hasError) {
       return (
-        <div className="mh-page">
-          <div className="center-all">
+        <div className={this.props.relative ? "" : "mh-page"}>
+          <div className={this.props.relative ? "mt3" : "center-all"}>
             <p>Sorry, Typey Type hit an error. I’ve been notified and will look into this as soon as I can. Meanwhile, try <a href=".">refresh the page</a>. Thanks for your patience. —Di</p>
           </div>
         </div>
