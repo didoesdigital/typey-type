@@ -19,7 +19,7 @@ class RecommendationBox extends Component {
     if (this.props.recommendedNextLesson !== undefined && !this.props.loadingLessonIndex) {
       metadataStats = (
         <React.Fragment>
-          {this.props.recommendedNextLesson.limitNumberOfWords} words | {this.props.recommendedNextLesson.repetitions} repetitions
+          {this.props.recommendedNextLesson.limitNumberOfWords} {this.props.recommendedNextLesson.limitNumberOfWords === 1 ? "word" : "words"} | {this.props.recommendedNextLesson.repetitions} repetitions
         </React.Fragment>
       );
 
@@ -62,7 +62,7 @@ class RecommendationBox extends Component {
       else if (this.props.recommendedNextLesson.repetitions === 1) {
         metadataStats = (
           <React.Fragment>
-            {this.props.recommendedNextLesson.limitNumberOfWords} words | {this.props.recommendedNextLesson.repetitions} repetition
+            {this.props.recommendedNextLesson.limitNumberOfWords} {this.props.recommendedNextLesson.limitNumberOfWords === 1 ? "word" : "words"} | {this.props.recommendedNextLesson.repetitions} repetition
           </React.Fragment>
         );
       }
@@ -70,13 +70,13 @@ class RecommendationBox extends Component {
       if (this.props.recommendedNextLesson && this.props.recommendedNextLesson.lessonTitle && this.props.recommendedNextLesson.lessonTitle.length < 10) {
         metadataStats = (
           <React.Fragment>
-            {this.props.recommendedNextLesson.limitNumberOfWords} words <br /> {this.props.recommendedNextLesson.repetitions} repetitions
+            {this.props.recommendedNextLesson.limitNumberOfWords} {this.props.recommendedNextLesson.limitNumberOfWords === 1 ? "word" : "words"} <br /> {this.props.recommendedNextLesson.repetitions} repetitions
           </React.Fragment>
         );
         if (this.props.recommendedNextLesson.repetitions === 1) {
           metadataStats = (
             <React.Fragment>
-              {this.props.recommendedNextLesson.limitNumberOfWords} words <br /> {this.props.recommendedNextLesson.repetitions} repetition
+              {this.props.recommendedNextLesson.limitNumberOfWords} {this.props.recommendedNextLesson.limitNumberOfWords === 1 ? "word" : "words"} <br /> {this.props.recommendedNextLesson.repetitions} repetition
             </React.Fragment>
           );
         }
