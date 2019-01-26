@@ -144,6 +144,18 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
         return false;
       });
 
+      if (numberOfWordsMemorised < 150) {
+        recommendedPracticeLesson = {
+          "title": "Your words",
+          "subtitle": "",
+          "category": "Typey Type",
+          "subcategory": "",
+          "path": "/progress/",
+          "wordCount": 150,
+          "suggestedNext": "/drills/top-10000-project-gutenberg-words/lesson.txt"
+        }
+      }
+
       if (typeof recommendedPracticeLesson !== "undefined") {
         recommendedNextLesson.studyType = 'practice';
         recommendedNextLesson.limitNumberOfWords = 300;
