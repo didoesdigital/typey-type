@@ -330,8 +330,12 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
       }
     }
 
+    // if (recommendedStudySession[recommendedStudySessionIndex] === "wildcard" && numberOfWordsMemorised < 50) {
+    //   recommendedStudySessionIndex = recommendedStudySessionIndex + 1;
+    // }
+
     if (recommendedStudySession[recommendedStudySessionIndex] === "wildcard") {
-      // one day it could include "test"
+      // One day it could include "test"
       let wildcardChoice = Math.random() <.5 ? "compete" : "game";
 
       switch (wildcardChoice) {
