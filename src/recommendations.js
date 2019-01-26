@@ -158,7 +158,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
 
       if (typeof recommendedPracticeLesson !== "undefined") {
         recommendedNextLesson.studyType = 'practice';
-        recommendedNextLesson.limitNumberOfWords = 300;
+        recommendedNextLesson.limitNumberOfWords = Math.min(300, recommendedPracticeLesson.wordCount);
         recommendedNextLesson.repetitions = 1;
         recommendedNextLesson.linkTitle = recommendedPracticeLesson.title; // lessonIndex has title not lessonTitle
         recommendedNextLesson.linkText = "Practice " + recommendedPracticeLesson.title; // lessonIndex has title not lessonTitle
