@@ -311,12 +311,22 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
         return true;
       });
 
+      let wordCount = 15;
+
+      let recommendedDiscoverLessonInIndex = lessonIndex.find((recommended) => {
+        return "/lessons" + recommended.path === recommendedDiscoverLesson.path;
+      });
+
+      if (typeof recommendedDiscoverLessonInIndex !== "undefined") {
+        wordCount = recommendedDiscoverLessonInIndex.wordCount;
+      }
+
       if (typeof recommendedDiscoverLesson !== "undefined") {
         recommendedNextLesson.studyType = 'discover';
-        recommendedNextLesson.limitNumberOfWords = 15;
+        recommendedNextLesson.limitNumberOfWords = Math.min(15, wordCount);
         recommendedNextLesson.repetitions = 5;
         recommendedNextLesson.linkTitle = recommendedDiscoverLesson.lessonTitle;
-        recommendedNextLesson.linkText = "Discover 15 words from " + recommendedDiscoverLesson.lessonTitle + " with 5 repetitions";
+        recommendedNextLesson.linkText = "Discover " + recommendedNextLesson.limitNumberOfWords + "words from " + recommendedDiscoverLesson.lessonTitle + " with 5 repetitions";
         recommendedNextLesson.link = recommendedDiscoverLesson.path.replace(/lesson.txt$/,'') + PARAMS.discoverParams;
       }
     }
