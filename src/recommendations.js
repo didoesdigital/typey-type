@@ -162,7 +162,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
         recommendedNextLesson.repetitions = 1;
         recommendedNextLesson.linkTitle = recommendedPracticeLesson.title; // lessonIndex has title not lessonTitle
         recommendedNextLesson.linkText = "Practice " + recommendedPracticeLesson.title; // lessonIndex has title not lessonTitle
-        recommendedNextLesson.link = "lessons" + recommendedPracticeLesson.path.replace(/lesson.txt$/,'') + practiceParams;
+        recommendedNextLesson.link = "/lessons" + recommendedPracticeLesson.path.replace(/lesson.txt$/,'') + practiceParams;
       }
     }
 
