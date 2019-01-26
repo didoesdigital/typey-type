@@ -323,9 +323,14 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
         }
       }
 
+      let wordsLeftToDiscover = 15;
+      if (lessonsProgress[recommendedDiscoverLesson.path] && lessonsProgress[recommendedDiscoverLesson.path].numberOfWordsToDiscover) {
+        wordsLeftToDiscover = lessonsProgress[recommendedDiscoverLesson.path].numberOfWordsToDiscover;
+      }
+
       if (typeof recommendedDiscoverLesson !== "undefined") {
         recommendedNextLesson.studyType = 'discover';
-        recommendedNextLesson.limitNumberOfWords = Math.min(15, wordCount);
+        recommendedNextLesson.limitNumberOfWords = Math.min(15, wordCount, wordsLeftToDiscover);
         recommendedNextLesson.repetitions = 5;
         recommendedNextLesson.linkTitle = recommendedDiscoverLesson.lessonTitle;
         recommendedNextLesson.linkText = "Discover " + recommendedNextLesson.limitNumberOfWords + "words from " + recommendedDiscoverLesson.lessonTitle + " with 5 repetitions";
