@@ -1363,10 +1363,15 @@ class App extends Component {
 
     getRecommendedNextLesson(this.state.lessonsProgress, newRecommendationHistory, this.state.yourSeenWordCount, this.state.yourMemorisedWordCount, lessonIndex, this.state.metWords)
       .then((nextRecommendedLesson) => {
+        let prevRecommendedLesson = this.state.recommendedNextLesson;
         this.setState({
           revisionMode: false,
           recommendationHistory: newRecommendationHistory,
           recommendedNextLesson: nextRecommendedLesson
+        }, () => {
+          if (prevRecommendedLesson.linkText === nextRecommendedLesson.linkText && nextRecommendedLesson.studyType !== 'error' && nextRecommendedLesson.studyType !== 'break') {
+            this.updateRecommendationHistory(newRecommendationHistory, lessonIndex);
+          }
         });
       })
       .catch( error => {
