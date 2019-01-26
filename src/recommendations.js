@@ -333,7 +333,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
         recommendedNextLesson.limitNumberOfWords = Math.min(15, wordCount, wordsLeftToDiscover);
         recommendedNextLesson.repetitions = 5;
         recommendedNextLesson.linkTitle = recommendedDiscoverLesson.lessonTitle;
-        recommendedNextLesson.linkText = "Discover " + recommendedNextLesson.limitNumberOfWords + "words from " + recommendedDiscoverLesson.lessonTitle + " with 5 repetitions";
+        recommendedNextLesson.linkText = "Discover " + recommendedNextLesson.limitNumberOfWords + " words from " + recommendedDiscoverLesson.lessonTitle + " with 5 repetitions";
         recommendedNextLesson.link = recommendedDiscoverLesson.path.replace(/lesson.txt$/,'') + PARAMS.discoverParams;
       }
     }
