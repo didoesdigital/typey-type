@@ -84,7 +84,7 @@ describe('recommended next lesson for new stenographer', () => {
       description: 'Discover 5–15 new briefs a day from various lessons, revealing their strokes as you learn to write them. Write them slowly, concentrating on accuracy and forming good habits around how you stroke word parts.',
       linkTitle: 'One-syllable words with simple keys',
       linkText: 'Discover 15 words from One-syllable words with simple keys with 5 repetitions',
-      link: '/lessons/fundamentals/one-syllable-words-with-simple-keys/?study=discover&limitNumberOfWords=15&repetitions=5&newWords=1&seenWords=0&retainedWords=0&showStrokes=1&hideStrokesOnLastRepetition=1&sortOrder=sortOff&startFromWord=1'
+      link: '/lessons/fundamentals/one-syllable-words-with-simple-keys/?recommended=true&study=discover&limitNumberOfWords=15&repetitions=5&newWords=1&seenWords=0&retainedWords=0&showStrokes=1&hideStrokesOnLastRepetition=1&sortOrder=sortOff&startFromWord=1'
     });
   });
 });
@@ -102,7 +102,7 @@ describe('recommended next lesson for beginner stenographer a few lessons in', (
       description: 'Revise 100 briefs a day from a lesson with loads of words you want to memorise, like the top 10000 English words. Try to recall the briefs before revealing their strokes. Avoid fingerspelling or writing out the long forms of words, so you can memorise the best brief for every word.',
       linkTitle: 'Top 100 words',
       linkText: 'Revise 50 words from Top 100 words with 3 repetitions',
-      link: '/lessons/drills/top-100-words/?study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortNew&startFromWord=1'
+      link: '/lessons/drills/top-100-words/?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortNew&startFromWord=1'
     });
   });
 });

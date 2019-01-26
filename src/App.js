@@ -218,6 +218,7 @@ class App extends Component {
       fullscreen: false,
       hideOtherSettings: false,
       recommendationHistory: { previousStep: null },
+      recommendedLessonInProgress: false,
       nextLessonPath: '',
       previousCompletedPhraseAsTyped: '',
       repetitionsRemaining: 1,
@@ -269,7 +270,7 @@ class App extends Component {
         repetitions: 1,
         linkTitle: "Top 10000 Project Gutenberg words",
         linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
-        link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=1&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1"
+        link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=1&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1"
       },
       revisionMaterial: [
       ],
@@ -728,6 +729,10 @@ class App extends Component {
     });
   }
 
+  setRecommendedLessonInProgress(isInProgress = false) {
+    this.setState({recommendedLessonInProgress: isInProgress});
+  }
+
   updateRevisionMaterial(event) {
     let newCurrentLessonStrokes = this.state.currentLessonStrokes.map(stroke => ({...stroke}));
     const target = event.target;
@@ -1085,7 +1090,7 @@ class App extends Component {
       let isRecommendedLesson = false;
       // This is a heuristic to make a guess if it's a recommended lesson
       // TODO: update this to actually know if it's a recommended lesson
-      if (this.state.recommendedNextLesson && this.state.recommendedNextLesson.studyType === 'drill' &&
+      if (this.state.recommendedLessonInProgress &&
         this.state.userSettings &&
         this.state.userSettings.showStrokes === false &&
         this.state.userSettings.newWords === false &&
@@ -1374,7 +1379,7 @@ class App extends Component {
             repetitions: 1,
             linkTitle: "Top 10000 Project Gutenberg words",
             linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
-            link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=1&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1"
+            link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=1&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1"
           }
         });
       });
@@ -1809,6 +1814,7 @@ class App extends Component {
                         sayCurrentPhraseAgain={this.sayCurrentPhraseAgain.bind(this)}
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                        setRecommendedLessonInProgress={this.setRecommendedLessonInProgress.bind(this)}
                         stopLesson={this.stopLesson.bind(this)}
                         startCustomLesson={this.startCustomLesson.bind(this)}
                         setupRevisionLesson={this.setupRevisionLesson.bind(this)}

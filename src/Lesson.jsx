@@ -57,6 +57,7 @@ class Lesson extends Component {
         return this.props.userSettings.hasOwnProperty(param);
         })) {
         hasSettingsParams = true;
+        if (parsedParams["recommended"] !== undefined) { this.props.setRecommendedLessonInProgress(true); }
       }
 
       if (hasSettingsParams) {
@@ -69,6 +70,7 @@ class Lesson extends Component {
       this.mainHeading.focus();
     }
   }
+
   componentDidUpdate(prevProps, prevState) {
     if (this.props.location.pathname.startsWith('/lessons/custom') && !this.props.location.pathname.startsWith('/lessons/custom/setup') && this.props.lesson.title !== "Custom") {
       this.props.startCustomLesson();
@@ -81,6 +83,10 @@ class Lesson extends Component {
       const element = document.getElementById('your-typed-text');
       if (element) { element.focus(); }
     }
+  }
+
+  componentWillUnmount() {
+    this.props.setRecommendedLessonInProgress(false);
   }
 
   isCustom() {

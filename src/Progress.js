@@ -319,7 +319,7 @@ class Progress extends Component {
       );
     }
 
-    let discoverParams = '?study=discover&limitNumberOfWords=15&repetitions=5&newWords=1&seenWords=0&retainedWords=0&showStrokes=1&hideStrokesOnLastRepetition=1&sortOrder=sortOff&startFromWord=1';
+    let discoverParams = '?recommended=true&study=discover&limitNumberOfWords=15&repetitions=5&newWords=1&seenWords=0&retainedWords=0&showStrokes=1&hideStrokesOnLastRepetition=1&sortOrder=sortOff&startFromWord=1';
 
     // console.log("Your total word count: " + yourWordCount);
     // console.log("Your seen word count: " + yourSeenWordCount);

@@ -67,13 +67,13 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
       repetitions: 1,
       linkTitle: "Top 10000 Project Gutenberg words",
       linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
-      link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=1&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1"
+      link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=1&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1"
     };
 
-    let discoverParams = '?study=discover&limitNumberOfWords=15&repetitions=5&newWords=1&seenWords=0&retainedWords=0&showStrokes=1&hideStrokesOnLastRepetition=1&sortOrder=sortOff&startFromWord=1';
-    let revisionParams = '?study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortNew&startFromWord=1';
-    let drillParams = '?study=drill&limitNumberOfWords=100&repetitions=3&newWords=0&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortRandom&startFromWord=1';
-    let practiceParams = '?study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1';
+    let discoverParams = '?recommended=true&study=discover&limitNumberOfWords=15&repetitions=5&newWords=1&seenWords=0&retainedWords=0&showStrokes=1&hideStrokesOnLastRepetition=1&sortOrder=sortOff&startFromWord=1';
+    let revisionParams = '?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortNew&startFromWord=1';
+    let drillParams = '?recommended=true&study=drill&limitNumberOfWords=100&repetitions=3&newWords=0&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortRandom&startFromWord=1';
+    let practiceParams = '?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1';
 
     // Check previousStep to set index of recommendedStudySession
     // For given step, check if it's viable e.g. you've seen punctuation and basic words so you can do practice:
@@ -134,10 +134,10 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
       let recommendedPracticeLesson = lessonIndex.find((recommendable) => {
         if (recommendable.path === "/drills/project-gutenberg-sentences-using-top-100-words/lesson.txt") {
           if (!metWords[" man"] > 2 || !metWords["man "] > 2 || !metWords["man"] > 2) {
-            practiceParams = '?study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=7';
+            practiceParams = '?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=7';
           }
           else {
-            practiceParams = '?study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1';
+            practiceParams = '?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1';
           }
           return true;
         }
