@@ -13,6 +13,8 @@ class Progress extends Component {
     super(props);
     this.state = {
       flashWarning: '',
+      loadingLessonIndex: true,
+      loadingLessonIndexError: false,
       reducedSaveAndLoad: false,
       showLoadInput: false,
       progressPercent: 0,
@@ -32,6 +34,9 @@ class Progress extends Component {
       if (this.props.recommendationHistory && this.props.recommendationHistory['previousStep'] === null) {
         this.props.updateRecommendationHistory(this.props.recommendationHistory, lessonIndex);
       }
+      this.setState({ loadingLessonIndex: false });
+    }).catch((e) => {
+      this.setState({ loadingLessonIndexError: true });
     });
 
     this.setState({ showLoadInput: false, toRecommendedNextLesson: false });
@@ -53,6 +58,13 @@ class Progress extends Component {
       yourWordCount: yourWordCount,
       yourSeenWordCount: this.props.yourSeenWordCount,
       yourMemorisedWordCount: this.props.yourMemorisedWordCount
+    });
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      loadingLessonIndex: false,
+      loadingLessonIndexError: false
     });
   }
 
@@ -365,7 +377,7 @@ class Progress extends Component {
     let studyType;
     let recommendedNextLessonCallToActionButton;
 
-    if (this.props.recommendedNextLesson !== undefined) {
+    if (this.props.recommendedNextLesson !== undefined && !this.state.loadingLessonIndex) {
       metadataStats = (
         <React.Fragment>
           {this.props.recommendedNextLesson.limitNumberOfWords} words | {this.props.recommendedNextLesson.repetitions} repetitions

@@ -1082,6 +1082,24 @@ class App extends Component {
 
       newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings, this.state.revisionMode);
 
+      let isRecommendedLesson = false;
+      // This is a heuristic to make a guess if it's a recommended lesson
+      // TODO: update this to actually know if it's a recommended lesson
+      if (this.state.recommendedNextLesson && this.state.recommendedNextLesson.studyType === 'drill' &&
+        this.state.userSettings &&
+        this.state.userSettings.showStrokes === false &&
+        this.state.userSettings.newWords === false &&
+        this.state.userSettings.seenWords === true &&
+        this.state.userSettings.retainedWords === true &&
+        this.state.userSettings.repetitions === 3 &&
+        this.state.userSettings.sortOrder === 'sortRandom'
+      ) {
+        isRecommendedLesson = true;
+      }
+
+      if (isRecommendedLesson && this.state.userSettings && this.state.userSettings.sortOrder === "sortRandom") {
+        newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
+      }
       if (this.state.revisionMode && this.state.userSettings.limitNumberOfWords > 0) {
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
       }
