@@ -172,9 +172,9 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
       let recommendedDrillLesson = courses.drillCourse.find((recommendable) => {
         // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
         // so it's probably a good candidate
-        if (typeof lessonsProgress[recommendable.path] === "undefined") { return true; }
+        if (typeof lessonsProgress[process.env.PUBLIC_URL + recommendable.path] === "undefined") { return true; }
 
-        entryInLessonsProgress = lessonsProgress[recommendable.path];
+        entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
 
         // don't pick this lesson if you've already seen 15 words and its target was 15
         if (entryInLessonsProgress['numberOfWordsMemorised'] >= recommendable['target']) { return false; }
@@ -218,9 +218,9 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           let recommendedRevisionLesson = courses.revisionCourse.find((recommendable) => {
             // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
             // so it's probably a good candidate
-            if (typeof lessonsProgress[recommendable.path] === "undefined") { return true; }
+            if (typeof lessonsProgress[process.env.PUBLIC_URL + recommendable.path] === "undefined") { return true; }
 
-            entryInLessonsProgress = lessonsProgress[recommendable.path];
+            entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
 
             // don't pick this lesson if you've already seen 15 words and its target was 15
             if (entryInLessonsProgress['numberOfWordsSeen'] >= recommendable['target']) { return false; }
@@ -260,9 +260,9 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
 
         // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
         // so it's probably a good candidate
-        if (typeof lessonsProgress[recommendable.path] === "undefined") { return true; }
+        if (typeof lessonsProgress[process.env.PUBLIC_URL + recommendable.path] === "undefined") { return true; }
 
-        entryInLessonsProgress = lessonsProgress[recommendable.path];
+        entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
 
         // don't pick this lesson if you've already seen 15 words and its target was 15
         if (entryInLessonsProgress['numberOfWordsSeen'] >= recommendable['target']) { return false; }
