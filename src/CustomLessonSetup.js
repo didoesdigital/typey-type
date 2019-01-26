@@ -172,7 +172,11 @@ examples.	KP-PLS TP-PL"
                   </textarea>
                   {listOfValidationMessages}
                   <div className="text-right">
-                    <Link to='/lessons/custom?study=practice&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1' className="link-button dib text-right" style={{lineHeight: 2}}>Start custom lesson</Link>
+                    {this.props.customLessonMaterialValidationState === "fail" ?
+                      <button disabled={ true } className="link-button dib" style={{lineHeight: 2}}>Start custom lesson</button>
+                        :
+                      <Link to='/lessons/custom?study=practice&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1' className="link-button dib text-right" style={{lineHeight: 2}} >Start custom lesson</Link>
+                    }
                   </div>
                 </div>
               </div>
