@@ -318,7 +318,9 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
       });
 
       if (typeof recommendedDiscoverLessonInIndex !== "undefined") {
-        wordCount = recommendedDiscoverLessonInIndex.wordCount;
+        if (typeof recommendedDiscoverLessonInIndex.wordCount !== "undefined") {
+          wordCount = recommendedDiscoverLessonInIndex.wordCount;
+        }
       }
 
       if (typeof recommendedDiscoverLesson !== "undefined") {
