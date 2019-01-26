@@ -306,7 +306,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
         if (entryInLessonsProgress['numberOfWordsSeen'] >= recommendable['target']) { return false; }
 
         // don't pick this lesson if you've seen ALL the words (leftToDiscover === 0)
-        if (entryInLessonsProgress['numberOfWordsToDiscover'] <= 1) { return false; }
+        if (entryInLessonsProgress['numberOfWordsToDiscover'] === 0) { return false; }
 
         return true;
       });
