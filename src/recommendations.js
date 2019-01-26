@@ -190,7 +190,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
     }
 
     // console.log(numberOfWordsSeen);
-    if (recommendedStudySession[recommendedStudySessionIndex] === "revise" && numberOfWordsSeen < 30) {
+    if (recommendedStudySession[recommendedStudySessionIndex] === "revise" && numberOfWordsSeen < 15) {
       recommendedStudySessionIndex = recommendedStudySessionIndex + 1;
     }
 
