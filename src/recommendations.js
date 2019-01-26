@@ -169,29 +169,62 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
 
     if (recommendedStudySession[recommendedStudySessionIndex] === "drill") {
       let entryInLessonsProgress;
-      let recommendedDrillLesson = courses.drillCourse.find((recommendable) => {
-        // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
-        // so it's probably a good candidate
-        if (typeof lessonsProgress[process.env.PUBLIC_URL + recommendable.path] === "undefined") { return true; }
 
-        entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
+      let drillChoice = Math.random() <.5 ? "drillLessons" : "drillMemorised";
 
-        // don't pick this lesson if you've already seen 15 words and its target was 15
-        if (entryInLessonsProgress['numberOfWordsMemorised'] >= recommendable['target']) { return false; }
+      switch (drillChoice) {
+        case "drillMemorised":
+          recommendedNextLesson.studyType = 'drill';
+          recommendedNextLesson.limitNumberOfWords = 100;
+          recommendedNextLesson.repetitions = 3;
+          recommendedNextLesson.linkTitle = "Your memorised words";
+          recommendedNextLesson.linkText = "Your memorised words";
+          recommendedNextLesson.link = "/lessons/progress/memorised/" + PARAMS.drillParams;
+          break;
 
-        // don't pick this lesson if it has fewer than 15 seen words because you've already memorised all the words in this lesson
-        if (entryInLessonsProgress['numberOfWordsMemorised'] < 50) { return false; }
+        case "drillLessons":
+          let recommendedDrillLesson = courses.drillCourse.find((recommendable) => {
 
-        return true;
-      });
+            entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
 
-      if (typeof recommendedDrillLesson !== "undefined") {
-        recommendedNextLesson.studyType = 'drill';
-        recommendedNextLesson.limitNumberOfWords = 100;
-        recommendedNextLesson.repetitions = 3;
-        recommendedNextLesson.linkTitle = recommendedDrillLesson.lessonTitle;
-        recommendedNextLesson.linkText = "Drill " + recommendedNextLesson.limitNumberOfWords + " words from " + recommendedDrillLesson.lessonTitle + " with " + recommendedNextLesson.repetitions + " repetitions";
-        recommendedNextLesson.link = recommendedDrillLesson.path.replace(/lesson.txt$/,'') + PARAMS.drillParams;
+            // No lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
+            // It's not a great candidate for drilling
+            if (typeof entryInLessonsProgress === "undefined") { return false; }
+
+            // Don't pick this lesson if you've already memorised 15 words and its target was 15
+            if ((entryInLessonsProgress['numberOfWordsMemorised'] || 0) >= recommendable['target']) { return false; }
+
+            // Don't pick this lesson if it has fewer than 15 memorised words because it will be a boring lesson
+            if ((entryInLessonsProgress['numberOfWordsMemorised'] || 0) < 15) { return false; }
+
+            return true;
+          });
+
+          if (typeof recommendedDrillLesson !== "undefined") {
+            recommendedNextLesson.studyType = 'drill';
+            recommendedNextLesson.limitNumberOfWords = 100;
+            recommendedNextLesson.repetitions = 3;
+            recommendedNextLesson.linkTitle = recommendedDrillLesson.lessonTitle;
+            recommendedNextLesson.linkText = "Drill " + recommendedNextLesson.limitNumberOfWords + " words from " + recommendedDrillLesson.lessonTitle + " with " + recommendedNextLesson.repetitions + " repetitions";
+            recommendedNextLesson.link = recommendedDrillLesson.path.replace(/lesson.txt$/,'') + PARAMS.drillParams;
+          } else {
+            recommendedNextLesson.studyType = 'drill';
+            recommendedNextLesson.limitNumberOfWords = 100;
+            recommendedNextLesson.repetitions = 3;
+            recommendedNextLesson.linkTitle = "Your memorised words";
+            recommendedNextLesson.linkText = "Your memorised words";
+            recommendedNextLesson.link = "/lessons/progress/memorised/" + PARAMS.drillParams;
+          }
+          break;
+
+        default:
+          recommendedNextLesson.studyType = 'drill';
+          recommendedNextLesson.limitNumberOfWords = 100;
+          recommendedNextLesson.repetitions = 3;
+          recommendedNextLesson.linkTitle = "Your memorised words";
+          recommendedNextLesson.linkText = "Your memorised words";
+          recommendedNextLesson.link = "/lessons/progress/memorised/" + PARAMS.drillParams;
+          break;
       }
     }
 
@@ -216,17 +249,17 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
         case "reviseLessons":
           let entryInLessonsProgress;
           let recommendedRevisionLesson = courses.revisionCourse.find((recommendable) => {
-            // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
-            // so it's probably a good candidate
-            if (typeof lessonsProgress[process.env.PUBLIC_URL + recommendable.path] === "undefined") { return true; }
 
+            // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
+            // so it's probably not a good candidate for revision
             entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
+            if (typeof entryInLessonsProgress === "undefined") { return false; }
 
             // don't pick this lesson if you've already seen 15 words and its target was 15
             if (entryInLessonsProgress['numberOfWordsSeen'] >= recommendable['target']) { return false; }
 
             // don't pick this lesson if it has fewer than 15 seen words because you've already memorised all the words in this lesson
-            if (entryInLessonsProgress['numberOfWordsSeen'] < 50) { return false; }
+            if (entryInLessonsProgress['numberOfWordsSeen'] < 15) { return false; }
 
             return true;
           });
@@ -238,6 +271,13 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
             recommendedNextLesson.linkTitle = recommendedRevisionLesson.lessonTitle;
             recommendedNextLesson.linkText = "Revise 50 words from " + recommendedRevisionLesson.lessonTitle + " with 3 repetitions";
             recommendedNextLesson.link = recommendedRevisionLesson.path.replace(/lesson.txt$/,'') + PARAMS.revisionParams;
+          } else {
+            recommendedNextLesson.studyType = 'revise';
+            recommendedNextLesson.limitNumberOfWords = 50;
+            recommendedNextLesson.repetitions = 3;
+            recommendedNextLesson.linkTitle = "Your revision words";
+            recommendedNextLesson.linkText = "Your revision words";
+            recommendedNextLesson.link = "/lessons/progress/seen/" + PARAMS.revisionParams;
           }
           break;
 
@@ -264,8 +304,8 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
 
         entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
 
-        // don't pick this lesson if you've already seen 15 words and its target was 15
-        if (entryInLessonsProgress['numberOfWordsSeen'] >= recommendable['target']) { return false; }
+        // don't pick this lesson if you've already seen/memorised 15 words and its target was 15
+        if (((entryInLessonsProgress['numberOfWordsSeen'] || 0) + (entryInLessonsProgress['numberOfWordsMemorised'] || 0)) >= recommendable['target']) { return false; }
 
         // don't pick this lesson if you've seen ALL the words (leftToDiscover === 0)
         if (entryInLessonsProgress['numberOfWordsToDiscover'] === 0) { return false; }
