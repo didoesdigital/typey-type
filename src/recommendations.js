@@ -65,10 +65,10 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
     // fallback lesson:
     let recommendedNextLesson = {
       studyType: "practice",
-      limitNumberOfWords: 150,
+      limitNumberOfWords: 300,
       repetitions: 1,
       linkTitle: "Top 10000 Project Gutenberg words",
-      linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
+      linkText: "Practice 300 words from Top 10000 Project Gutenberg words",
       link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/" + PARAMS.practiceParams
     };
 
