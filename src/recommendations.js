@@ -126,40 +126,83 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
 
     if (recommendedStudySession[recommendedStudySessionIndex] === "practice") {
       let practiceParams = PARAMS.practiceParams;
-      let recommendedPracticeLesson = lessonIndex.find((recommendable) => {
-        // TODO: should this have process.env.PUBLIC_URL?
-        if (recommendable.path === "/drills/project-gutenberg-sentences-using-top-100-words/lesson.txt") {
-          if (!(metWords[" man"] > 2) && !(metWords["man "] > 2) && !(metWords["man"] > 2)) {
-            practiceParams = '?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=7';
+      let practiceChoice = Math.random() <.5 ? "practiceLessons" : "practiceAllYourWords";
+
+      switch (practiceChoice) {
+        case "practiceAllYourWords":
+          recommendedNextLesson.limitNumberOfWords = 100;
+          recommendedNextLesson.linkTitle = "Your words";
+          recommendedNextLesson.linkText = "Practice your words";
+          recommendedNextLesson.link = "/lessons/progress/" + PARAMS.practiceParams;
+          recommendedNextLesson.studyType = 'practice';
+          recommendedNextLesson.repetitions = 1;
+          break;
+
+        case "practiceLessons":
+          let recommendedPracticeLesson = courses.practiceCourse.find((recommendable) => {
+            if (recommendable.path === "/lessons/drills/project-gutenberg-sentences-using-top-100-words/lesson.txt") {
+              if (!(metWords[" man"] > 2) && !(metWords["man "] > 2) && !(metWords["man"] > 2)) {
+                // Start from word 7 to skip past 'man'
+                practiceParams = '?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=7';
+              }
+              return true;
+            }
+
+            let entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
+
+            // You've never seen it before, so it's probably a good one to start
+            if (typeof entryInLessonsProgress === "undefined") {
+              return true;
+            }
+            else {
+              if (typeof entryInLessonsProgress['numberOfWordsMemorised'] !== "undefined") {
+                // You've memorised the entire lesson already, so this lesson is probably boring
+                if (entryInLessonsProgress['numberOfWordsMemorised'] === recommendable.target) {
+                  return false;
+                }
+                else {
+                  return true;
+                }
+              }
+              else {
+                return true;
+              }
+            }
+
+            return false;
+          });
+
+          let wordCount = 300;
+
+          let recommendedPracticeLessonInIndex = lessonIndex.find((recommended) => {
+            return recommended.path === recommendedPracticeLesson.path;
+          });
+
+          if (typeof recommendedPracticeLessonInIndex !== "undefined") {
+            if (typeof recommendedPracticeLessonInIndex.wordCount !== "undefined") {
+              wordCount = recommendedPracticeLessonInIndex.wordCount;
+            }
           }
-          return true;
-        }
-        else if (recommendable.category && recommendable.category === "Stories" ) {
-          return true;
-        }
 
-        return false;
-      });
+          if (typeof recommendedPracticeLesson !== "undefined") {
+            recommendedNextLesson.studyType = 'practice';
+            recommendedNextLesson.limitNumberOfWords = Math.min(300, wordCount);
+            recommendedNextLesson.repetitions = 1;
+            recommendedNextLesson.linkTitle = recommendedPracticeLesson.lessonTitle;
+            recommendedNextLesson.linkText = "Practice " + recommendedPracticeLesson.lessonTitle;
+            recommendedNextLesson.link = recommendedPracticeLesson.path.replace(/lesson.txt$/,'') + practiceParams;
+          }
 
-      if (numberOfWordsMemorised < 150) {
-        recommendedPracticeLesson = {
-          "title": "Your words",
-          "subtitle": "",
-          "category": "Typey Type",
-          "subcategory": "",
-          "path": "/progress/",
-          "wordCount": 150,
-          "suggestedNext": "/drills/top-10000-project-gutenberg-words/lesson.txt"
-        }
-      }
+          break;
 
-      if (typeof recommendedPracticeLesson !== "undefined") {
-        recommendedNextLesson.studyType = 'practice';
-        recommendedNextLesson.limitNumberOfWords = Math.min(300, recommendedPracticeLesson.wordCount);
-        recommendedNextLesson.repetitions = 1;
-        recommendedNextLesson.linkTitle = recommendedPracticeLesson.title; // lessonIndex has title not lessonTitle
-        recommendedNextLesson.linkText = "Practice " + recommendedPracticeLesson.title; // lessonIndex has title not lessonTitle
-        recommendedNextLesson.link = "/lessons" + recommendedPracticeLesson.path.replace(/lesson.txt$/,'') + practiceParams;
+        default:
+          recommendedNextLesson.limitNumberOfWords = 100;
+          recommendedNextLesson.linkTitle = "Your words";
+          recommendedNextLesson.linkText = "Practice your words";
+          recommendedNextLesson.link = "/lessons/progress/" + PARAMS.practiceParams;
+          recommendedNextLesson.studyType = 'practice';
+          recommendedNextLesson.repetitions = 1;
+          break;
       }
     }
 
