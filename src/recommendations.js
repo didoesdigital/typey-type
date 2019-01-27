@@ -169,7 +169,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
               }
             }
 
-            return false;
+            // return false;
           });
 
           let wordCount = 300;
