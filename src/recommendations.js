@@ -149,19 +149,33 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
             }
 
             let entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
+            let seenOrMemorisedChoice = Math.random() <.9 ? "numberOfWordsSeen" : "numberOfWordsMemorised";
 
             // You've never seen it before, so it's probably a good one to start
             if (typeof entryInLessonsProgress === "undefined") {
               return true;
             }
             else {
-              if (typeof entryInLessonsProgress['numberOfWordsMemorised'] !== "undefined") {
-                // You've memorised the entire lesson already, so this lesson is probably boring
-                if (entryInLessonsProgress['numberOfWordsMemorised'] === recommendable.target) {
-                  return false;
+              if (typeof entryInLessonsProgress[seenOrMemorisedChoice] !== "undefined") {
+                if (seenOrMemorisedChoice === "numberOfWordsMemorised") {
+                  // You've memorised most of this lesson already, so it is probably boring.
+                  // We don't aim for 100% because we're tracking unique number of words seen.
+                  // Practice lessons contains some word repetition so number of unique words so it
+                  // will always fall short of the target.
+                  if (entryInLessonsProgress[seenOrMemorisedChoice] >= .7 * recommendable.target) {
+                    return false;
+                  }
+                  else {
+                    return true;
+                  }
                 }
                 else {
-                  return true;
+                  if (entryInLessonsProgress["numberOfWordsToDiscover"] === 0) {
+                    return false;
+                  }
+                  else {
+                    return true;
+                  }
                 }
               }
               else {
