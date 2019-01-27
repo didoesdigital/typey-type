@@ -143,7 +143,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
             if (recommendable.path === "/lessons/drills/project-gutenberg-sentences-using-top-100-words/lesson.txt") {
               if (!(metWords[" man"] > 2) && !(metWords["man "] > 2) && !(metWords["man"] > 2)) {
                 // Start from word 7 to skip past 'man'
-                practiceParams = '?recommended=true&study=practice&limitNumberOfWords=150&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=7';
+                practiceParams = practiceParams.replace('startFromWord=1', 'startFromWord=7');
               }
               return true;
             }
