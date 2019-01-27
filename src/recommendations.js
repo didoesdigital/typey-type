@@ -189,7 +189,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           let wordCount = 300;
 
           let recommendedPracticeLessonInIndex = lessonIndex.find((recommended) => {
-            return recommended.path === recommendedPracticeLesson.path;
+            return "/lessons" + recommended.path === recommendedPracticeLesson.path;
           });
 
           if (typeof recommendedPracticeLessonInIndex !== "undefined") {
