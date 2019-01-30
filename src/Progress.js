@@ -128,10 +128,10 @@ class Progress extends Component {
   };
 
   recommendAnotherLesson = (skipButtonPressed = true) => {
-    let labelString = this.props.recommendedNextLesson.studyType;
+    let labelString = this.props.recommendedNextLesson.link;
     if (!labelString) { labelString = "BAD_INPUT"; }
 
-    if (skipButtonPressed === false) {
+    if (skipButtonPressed) {
       GoogleAnalytics.event({
         category: 'Recommendations',
         action: 'Skip recommended',
