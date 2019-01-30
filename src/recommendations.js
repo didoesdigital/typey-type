@@ -352,6 +352,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
     // Once a step is chosen, pick a valid lesson/step for that
     // For discover, review lessonsProgress for words seen and compare against targets in recommendedDiscoverCourse
     if (recommendedStudySession[recommendedStudySessionIndex] === "discover") {
+      let discoverParams = PARAMS.discoverParams;
       let entryInLessonsProgress;
       let recommendedDiscoverLesson = courses.discoverCourse.find((recommendable) => {
 
@@ -387,13 +388,20 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
         wordsLeftToDiscover = lessonsProgress[recommendedDiscoverLesson.path].numberOfWordsToDiscover;
       }
 
+      let limitNumberOfWords = Math.min(15, wordCount, wordsLeftToDiscover);
+
+      if (recommendedDiscoverLesson.path.includes("briefs")) {
+        limitNumberOfWords = Math.min(5, wordCount, wordsLeftToDiscover);
+        discoverParams = discoverParams.replace("limitNumberOfWords=15", "limitNumberOfWords=" + limitNumberOfWords.toString());
+      }
+
       if (typeof recommendedDiscoverLesson !== "undefined") {
         recommendedNextLesson.studyType = 'discover';
-        recommendedNextLesson.limitNumberOfWords = Math.min(15, wordCount, wordsLeftToDiscover);
+        recommendedNextLesson.limitNumberOfWords = limitNumberOfWords;
         recommendedNextLesson.repetitions = 5;
         recommendedNextLesson.linkTitle = recommendedDiscoverLesson.lessonTitle;
-        recommendedNextLesson.linkText = "Discover " + recommendedNextLesson.limitNumberOfWords + " words from " + recommendedDiscoverLesson.lessonTitle + " with 5 repetitions";
-        recommendedNextLesson.link = recommendedDiscoverLesson.path.replace(/lesson.txt$/,'') + PARAMS.discoverParams;
+        recommendedNextLesson.linkText = "Discover " + limitNumberOfWords + " words from " + recommendedDiscoverLesson.lessonTitle + " with 5 repetitions";
+        recommendedNextLesson.link = recommendedDiscoverLesson.path.replace(/lesson.txt$/,'') + discoverParams;
       }
     }
 
