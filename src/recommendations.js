@@ -133,7 +133,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           recommendedNextLesson.limitNumberOfWords = 100;
           recommendedNextLesson.linkTitle = "Your words";
           recommendedNextLesson.linkText = "Practice your words";
-          recommendedNextLesson.link = "/lessons/progress/" + PARAMS.practiceParams;
+          recommendedNextLesson.link = "/lessons/progress/" + practiceParams;
           recommendedNextLesson.studyType = 'practice';
           recommendedNextLesson.repetitions = 1;
           break;
