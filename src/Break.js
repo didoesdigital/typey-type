@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import GoogleAnalytics from 'react-ga';
 
 type Props = {};
 
@@ -86,6 +87,14 @@ class Break extends Component<Props, State> {
     return textWithLeadingZeros;
   }
 
+  reviewProgress() {
+    GoogleAnalytics.event({
+      category: 'Break',
+      action: 'Click',
+      label: 'Review progress'
+    });
+  }
+
   render() {
     let timeToDisplay = this.state.timeToDisplay;
     let breakHeading = 'Your break starts now';
@@ -94,7 +103,7 @@ class Break extends Component<Props, State> {
       breakHeading = 'Your break is done';
       nextStep = (
         <p className='text-center'>
-          <Link to='/progress' className="link-button dib" style={{lineHeight: 2}}>Review progress</Link>
+          <Link to='/progress' onClick={this.reviewProgress} className="link-button dib" style={{lineHeight: 2}}>Review progress</Link>
         </p>
       );
     }
