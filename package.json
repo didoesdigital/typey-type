@@ -37,7 +37,9 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "@sentry/cli": "^1.35.1"
+    "@sentry/cli": "^1.35.1",
+    "jest-fetch-mock": "^2.1.0",
+    "jest-mock-random": "^1.0.2"
   },
   "browserslist": [
     ">0.2%",

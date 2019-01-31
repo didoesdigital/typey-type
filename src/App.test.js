@@ -4,6 +4,7 @@ import {
   replaceSmartTypographyInPresentedMaterial,
   sortLesson
 } from './App';
+import { mockRandomForEach } from 'jest-mock-random';
 
 it('renders without crashing', () => {
 //   const div = document.createElement('div');
@@ -103,6 +104,7 @@ describe('sortLesson', () => {
       const userSettings = {
         sortOrder: 'sortRandom'
       };
+      mockRandomForEach(0.1);
       it('should present material in a randomised order', () => {
         expect(sortLesson(presentedMaterial, metWords, userSettings)).not.toEqual(
           [
