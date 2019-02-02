@@ -130,7 +130,8 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
 
       switch (practiceChoice) {
         case "practiceAllYourWords":
-          recommendedNextLesson.limitNumberOfWords = 100;
+          practiceParams = practiceParams.replace('newWords=1','newWords=0');
+          recommendedNextLesson.limitNumberOfWords = 300;
           recommendedNextLesson.linkTitle = "Your words";
           recommendedNextLesson.linkText = "Practice your words";
           recommendedNextLesson.link = "/lessons/progress/" + practiceParams;
@@ -210,7 +211,8 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           break;
 
         default:
-          recommendedNextLesson.limitNumberOfWords = 100;
+          practiceParams = practiceParams.replace('newWords=1','newWords=0');
+          recommendedNextLesson.limitNumberOfWords = 300;
           recommendedNextLesson.linkTitle = "Your words";
           recommendedNextLesson.linkText = "Practice your words";
           recommendedNextLesson.link = "/lessons/progress/" + PARAMS.practiceParams;
