@@ -418,7 +418,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           recommendedNextLesson.studyType = 'compete';
           recommendedNextLesson.limitNumberOfWords = null;
           recommendedNextLesson.repetitions = null;
-          recommendedNextLesson.linkTitle = "Type Racer"
+          recommendedNextLesson.linkTitle = "Type Racer";
           recommendedNextLesson.linkText = "Play Type Racer";
           recommendedNextLesson.link = 'http://play.typeracer.com';
           break;
@@ -426,7 +426,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           recommendedNextLesson.studyType = 'game';
           recommendedNextLesson.limitNumberOfWords = null;
           recommendedNextLesson.repetitions = null;
-          recommendedNextLesson.linkTitle = "Cargo Crisis"
+          recommendedNextLesson.linkTitle = "Cargo Crisis";
           recommendedNextLesson.linkText = "Play Cargo Crisis";
           recommendedNextLesson.link = 'http://qwertysteno.com/Games/CargoCrisis.php';
           break;
@@ -434,7 +434,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           recommendedNextLesson.studyType = 'break';
           recommendedNextLesson.limitNumberOfWords = null;
           recommendedNextLesson.repetitions = null;
-          recommendedNextLesson.linkTitle = "Take a break"
+          recommendedNextLesson.linkTitle = "Take a break";
           recommendedNextLesson.linkText = "Take a break";
           recommendedNextLesson.link = '/break';
           break;
@@ -446,7 +446,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
       recommendedNextLesson.studyType = 'break';
       recommendedNextLesson.limitNumberOfWords = null;
       recommendedNextLesson.repetitions = null;
-      recommendedNextLesson.linkTitle = "Save your progress and take a break"
+      recommendedNextLesson.linkTitle = "Save your progress and take a break";
       recommendedNextLesson.linkText = "Take a break";
       recommendedNextLesson.link = '/break';
     }
