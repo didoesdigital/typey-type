@@ -33,7 +33,7 @@ class Progress extends Component {
     }
 
     getLessonIndexData().then((lessonIndex) => {
-      if (this.props.recommendationHistory && this.props.recommendationHistory['previousStep'] === null) {
+      if (this.props.recommendationHistory && this.props.recommendationHistory['currentStep'] === null) {
         this.props.updateRecommendationHistory(this.props.recommendationHistory, lessonIndex);
       }
       this.setState({ loadingLessonIndex: false });

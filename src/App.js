@@ -219,7 +219,7 @@ class App extends Component {
       },
       fullscreen: false,
       hideOtherSettings: false,
-      recommendationHistory: { previousStep: null },
+      recommendationHistory: { currentStep: null },
       recommendedLessonInProgress: false,
       nextLessonPath: '',
       previousCompletedPhraseAsTyped: '',
@@ -1334,34 +1334,34 @@ class App extends Component {
   updateRecommendationHistory(prevRecommendationHistory, lessonIndex = this.state.lessonIndex) {
     let newRecommendationHistory = Object.assign({}, prevRecommendationHistory);
 
-    if ((typeof newRecommendationHistory['previousStep'] === 'undefined') || (newRecommendationHistory['previousStep'] === null)) {
-      newRecommendationHistory['previousStep'] = 'break';
+    if ((typeof newRecommendationHistory['currentStep'] === 'undefined') || (newRecommendationHistory['currentStep'] === null)) {
+      newRecommendationHistory['currentStep'] = 'break';
     }
 
-    switch (newRecommendationHistory['previousStep']) {
+    switch (newRecommendationHistory['currentStep']) {
       case "null":
-        newRecommendationHistory['previousStep'] = 'drill';
+        newRecommendationHistory['currentStep'] = 'drill';
         break;
       case "practice":
-        newRecommendationHistory['previousStep'] = 'drill';
+        newRecommendationHistory['currentStep'] = 'drill';
         break;
       case "drill":
-        newRecommendationHistory['previousStep'] = 'revise';
+        newRecommendationHistory['currentStep'] = 'revise';
         break;
       case "revise":
-        newRecommendationHistory['previousStep'] = 'discover';
+        newRecommendationHistory['currentStep'] = 'discover';
         break;
       case "discover":
-        newRecommendationHistory['previousStep'] = 'wildcard';
+        newRecommendationHistory['currentStep'] = 'wildcard';
         break;
       case "wildcard":
-        newRecommendationHistory['previousStep'] = 'break';
+        newRecommendationHistory['currentStep'] = 'break';
         break;
       case "break":
-        newRecommendationHistory['previousStep'] = 'practice';
+        newRecommendationHistory['currentStep'] = 'practice';
         break;
       default:
-        newRecommendationHistory['previousStep'] = 'practice';
+        newRecommendationHistory['currentStep'] = 'practice';
         break;
     }
 

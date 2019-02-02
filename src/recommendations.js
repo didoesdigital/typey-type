@@ -72,7 +72,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
       link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/" + PARAMS.practiceParams
     };
 
-    // Check previousStep to set index of recommendedStudySession
+    // Check currentStep to set index of recommendedStudySession
     // For given step, check if it's viable e.g. you've seen punctuation and basic words so you can do practice:
     // metWords = { "a": 1, "man": 1, "!": 1, ".": 1, "?": 1, "as": 1, "if": 1 }
     // 'A': KPA/AEU
@@ -86,7 +86,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
     // If not viable, move to next step; if nothing is valid (e.g. you've discovered ALL words on Typey Type, fall back to top 10,000 project gutenberg words practice
     let recommendedStudySessionIndex = 0;
     if (typeof history === "object") {
-      switch (history["previousStep"]) {
+      switch (history["currentStep"]) {
         case "practice":
           recommendedStudySessionIndex = 0;
           break;

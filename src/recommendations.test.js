@@ -18,7 +18,7 @@ describe('recommended next lesson for novice stenographer', () => {
     let metWords = {"was": 2, " has": 1, "the ": 8, "of": 5, "and": 3};
     let numberOfWordsSeen = 5;
     let numberOfWordsMemorised = 0;
-    let history = { previousStep: null };
+    let history = { currentStep: null };
 
     mockRandom(0.9);
     fetch.mockResponseOnce(JSON.stringify(recommendationsJSON))
@@ -42,7 +42,7 @@ describe('recommended next lesson for beginner stenographer a few lessons in', (
     let numberOfWordsSeen = 116;
     let numberOfWordsMemorised = 0;
     let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
-    let history = { previousStep: null };
+    let history = { currentStep: null };
 
     mockRandom(0.9);
     fetch.mockResponseOnce(JSON.stringify(recommendationsJSON))
@@ -64,7 +64,7 @@ describe('recommended next lesson for beginner stenographer a few lessons in', (
     let numberOfWordsSeen = 116;
     let numberOfWordsMemorised = 0;
     let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
-    let history = { previousStep: null };
+    let history = { currentStep: null };
 
     mockRandom(0.3);
     fetch.mockResponseOnce(JSON.stringify(recommendationsJSON))
@@ -87,7 +87,7 @@ describe('recommended next lesson for competent stenographer', () => {
   it('returns recommended next lesson', () => {
     let numberOfWordsSeen = 50;
     let numberOfWordsMemorised = 3;
-    let history = { previousStep: 'revise' };
+    let history = { currentStep: 'revise' };
 
     mockRandom(0.3);
     fetch.mockResponseOnce(JSON.stringify(recommendationsJSON))
@@ -111,7 +111,7 @@ describe('recommended next lesson for competent stenographer', () => {
 //     let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
 //     let numberOfWordsSeen = 50;
 //     let numberOfWordsMemorised = 3;
-//     let history = { previousStep: 'discover' };
+//     let history = { currentStep: 'discover' };
 
 //     mockRandom(0.7);
 //     fetch.mockResponseOnce(JSON.stringify(recommendationsJSON))
