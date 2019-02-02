@@ -17,7 +17,7 @@ class LessonsIndex extends Component {
       let lessonsubtitle = '';
       let wordCount = 0;
       let wordCountInIndex = '';
-      if (lesson.subtitle.length > 0) {
+      if (lesson.subtitle && lesson.subtitle.length > 0) {
         lessonsubtitle = ': '+lesson.subtitle;
       }
       if (lesson.wordCount && lesson.wordCount > 0) {

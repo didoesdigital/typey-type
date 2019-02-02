@@ -154,7 +154,7 @@ class Progress extends Component {
       let lessonWordCountInIndex = '';
       let numberOfWordsSeenOrMemorised = 0;
       let lessonCompletion;
-      if (lesson.subtitle.length > 0) {
+      if (lesson.subtitle && lesson.subtitle.length > 0) {
         lessonsubtitle = ': '+lesson.subtitle;
       }
       if (lesson.wordCount && lesson.wordCount > 0) {
