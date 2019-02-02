@@ -28,7 +28,12 @@ class Lesson extends Component {
       if (this.props.location.pathname.startsWith('/lessons/progress/') && !this.props.location.pathname.includes('/lessons/progress/seen/') && !this.props.location.pathname.includes('/lessons/progress/memorised/')) {
         let loadedPersonalPreferences = loadPersonalPreferences();
         let newSeenOrMemorised = [false, true, true]
-        this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised);
+
+        let parsedParams = queryString.parse(this.props.location.search);
+        let isRecommendedLesson = false;
+        if (parsedParams["recommended"] !== undefined) { isRecommendedLesson = true; }
+
+        this.props.setupRevisionLesson(loadedPersonalPreferences[0], loadedPersonalPreferences[1], newSeenOrMemorised, isRecommendedLesson);
       }
       else if (this.props.location.pathname.startsWith('/lessons/progress/seen/')) {
         let loadedPersonalPreferences = loadPersonalPreferences();
