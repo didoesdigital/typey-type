@@ -650,11 +650,13 @@ class App extends Component {
     return flashcardsMetWords;
   }
 
-  setupRevisionLesson(metWords, userSettings, newSeenOrMemorised, isRecommendedLesson = false) {
+  setupRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
     let newUserSettings = Object.assign({}, userSettings);
     newUserSettings.newWords = newSeenOrMemorised[0];
     newUserSettings.seenWords = newSeenOrMemorised[1];
     newUserSettings.retainedWords = newSeenOrMemorised[2];
+
+    // FIXME: These settings should all be using params set in params.js
     if (newSeenOrMemorised[1] && !newSeenOrMemorised[2]) {
       newUserSettings.study = 'revise';
       newUserSettings.sortOrder = 'sortNew';
@@ -671,9 +673,7 @@ class App extends Component {
     } else {
       newUserSettings.study = 'practice';
       newUserSettings.sortOrder = 'sortOff';
-      newUserSettings.limitNumberOfWords = 0;
-      if (isRecommendedLesson) { newUserSettings.limitNumberOfWords = 300; }
-      // newUserSettings.limitNumberOfWords = PARAMS.practice.limitNumberOfWords;
+      newUserSettings.limitNumberOfWords = PARAMS.practiceLimitNumberOfWords;
       newUserSettings.repetitions = 1;
       newUserSettings.showStrokes = false;
     }
