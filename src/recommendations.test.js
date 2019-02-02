@@ -10,15 +10,15 @@ import lessonsProgressCompetent from './fixtures/lessonsProgressCompetent.json'
 import lessonsProgressProficient from './fixtures/lessonsProgressProficient.json'
 import lessonsProgressExpert from './fixtures/lessonsProgressExpert.json'
 
-let history = {
-  previousStep: null
-};
+import metWordsCompetent from './fixtures/metWordsCompetent.json'
+
 
 describe('recommended next lesson for novice stenographer', () => {
   it('returns recommended next lesson', () => {
     let metWords = {"was": 2, " has": 1, "the ": 8, "of": 5, "and": 3};
     let numberOfWordsSeen = 5;
     let numberOfWordsMemorised = 0;
+    let history = { previousStep: null };
 
     mockRandom(0.9);
     fetch.mockResponseOnce(JSON.stringify(recommendationsJSON))
@@ -42,6 +42,7 @@ describe('recommended next lesson for beginner stenographer a few lessons in', (
     let numberOfWordsSeen = 116;
     let numberOfWordsMemorised = 0;
     let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
+    let history = { previousStep: null };
 
     mockRandom(0.9);
     fetch.mockResponseOnce(JSON.stringify(recommendationsJSON))
@@ -57,13 +58,13 @@ describe('recommended next lesson for beginner stenographer a few lessons in', (
       })
       resetMockRandom();
     });
-
   });
 
   it('returns recommended next lesson, revision lesson', () => {
     let numberOfWordsSeen = 116;
     let numberOfWordsMemorised = 0;
     let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
+    let history = { previousStep: null };
 
     mockRandom(0.3);
     fetch.mockResponseOnce(JSON.stringify(recommendationsJSON))
@@ -79,47 +80,52 @@ describe('recommended next lesson for beginner stenographer a few lessons in', (
       })
       resetMockRandom();
     });
-
   });
 });
 
-// describe('recommended next lesson for intermediate stenographer', () => {
-//   it('returns recommended next lesson', () => {
-//     let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
-//     let numberOfWordsSeen = 50;
-//     let numberOfWordsMemorised = 3;
-//     // lessonsProgress = {'lesson.txt': 1000}; // at top of file
+describe('recommended next lesson for competent stenographer', () => {
+  it('returns recommended next lesson', () => {
+    let numberOfWordsSeen = 50;
+    let numberOfWordsMemorised = 3;
+    let history = { previousStep: 'revise' };
 
-//     expect(getRecommendedNextLesson(lessonsProgress, history, numberOfWordsSeen, numberOfWordsMemorised)).toEqual({
-//       studyType: 'revise',
-//       description: "You've already seen a lot of words but haven't memorised as many. Revise 50 words and try to recall the briefs before revealing their strokes. Avoid fingerspelling or writing out the long forms of words, so you can memorise the best brief for every word.",
-//       linkTitle: 'Top 100 English words',
-//       linkText: 'Revise 50 words from Top 100 English words 3 times',
-//       link: '/typey-type/lessons/drills/top-100-words/'
-//     });
-//   });
-// });
+    mockRandom(0.3);
+    fetch.mockResponseOnce(JSON.stringify(recommendationsJSON))
+
+    return getRecommendedNextLesson(lessonsProgressCompetent, history, numberOfWordsSeen, numberOfWordsMemorised, lessonIndexJSON, metWordsCompetent).then(data => {
+      expect(data).toEqual({
+        studyType: 'revise',
+        limitNumberOfWords: 50,
+        linkTitle: 'Top 1000 words',
+        linkText: 'Revise 50 words from Top 1000 words with 3 repetitions',
+        link: '/lessons/drills/top-1000-words/?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortNew&startFromWord=1',
+        repetitions: 3
+      });
+      resetMockRandom();
+    });
+  });
+});
 
 // describe('recommended next lesson is a wildcard game', () => {
 //   it('returns recommended next lesson', () => {
 //     let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
 //     let numberOfWordsSeen = 50;
 //     let numberOfWordsMemorised = 3;
-//     let profile = {
-//       interests: ['UX design', 'Code', 'Legal', 'Medical'],
-//       motivation: ['Ergonomics', 'Efficiency', 'Speed', 'Personal use'],
-//       stenoStudies: {readBeginnerTheory: true, stenoStarterBoard: true, memorisedStenoLayout: true}
-//     };
-//     // lessonsProgress = {'lesson.txt': 1000}; // at top of file
+//     let history = { previousStep: 'discover' };
 
-//     // TODO:
-//     // no studyType
-//     // or maybe studyType could be 'game'?
-//     expect(getRecommendedNextLesson(numberOfWordsSeen, numberOfWordsMemorised, lessonsProgress, profile)).toEqual({
-//       description: "You've been so diligent! You might take a break from drilling and try a game like <a href='http://qwertysteno.com/Games/CargoCrisis.php'>Cargos Crisis</a>.",
-//       linkTitle: 'Top 100 English words',
-//       linkText: 'Revise 50 words from Top 100 English words 3 times',
-//       link: '/typey-type/lessons/drills/top-100-words/'
+//     mockRandom(0.7);
+//     fetch.mockResponseOnce(JSON.stringify(recommendationsJSON))
+
+//     return getRecommendedNextLesson(lessonsProgressCompetent, history, numberOfWordsSeen, numberOfWordsMemorised, lessonIndexJSON, metWordsCompetent).then(data => {
+//       expect(data).toEqual({
+//         studyType: 'game',
+//         limitNumberOfWords: null,
+//         linkTitle: "Cargo Crisis",
+//         linkText: "Play Cargo Crisis",
+//         link: 'http://qwertysteno.com/Games/CargoCrisis.php',
+//         repetitions: null
+//       });
+//       resetMockRandom();
 //     });
 //   });
 // });
