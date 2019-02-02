@@ -990,6 +990,11 @@ class App extends Component {
     }
 
     let newLesson = Object.assign({}, this.state.lesson);
+
+    if ((typeof newLesson === 'object' && Object.entries(newLesson).length === 0 && newLesson.constructor === Object) || newLesson === null ) {
+      newLesson = fallbackLesson;
+    }
+
     newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
     if (this.state.revisionMode) {
       newLesson.presentedMaterial = this.state.revisionMaterial.map(line => ({...line}));
