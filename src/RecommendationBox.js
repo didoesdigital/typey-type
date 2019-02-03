@@ -180,7 +180,6 @@ class RecommendationBox extends Component {
             <div className="flex flex-wrap">
               <RecommendationDescription
                 studyType={this.props.recommendedNextLesson.studyType}
-                setAnnouncementMessage={this.props.setAnnouncementMessage}
               />
             </div>
           </div>
