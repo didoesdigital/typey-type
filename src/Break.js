@@ -41,7 +41,7 @@ class Break extends Component<Props, State> {
   }
 
   componentWillUnmount() {
-    this.stopBreak();
+    this.stopCountdown(false);
   }
 
   startCountdown() {
