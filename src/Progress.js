@@ -139,6 +139,11 @@ class Progress extends Component {
       });
     }
 
+    if (skipButtonPressed) {
+      const element = document.getElementById('js-skip-button');
+      if (element) { element.focus(); }
+    }
+
     this.props.updateRecommendationHistory(this.props.recommendationHistory);
   }
 

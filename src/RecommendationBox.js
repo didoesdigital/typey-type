@@ -170,7 +170,7 @@ class RecommendationBox extends Component {
             <p className="text-right"><strong>{recommendedLinkTitle}</strong></p>
             <p className="text-right de-emphasized">{metadataStats}</p>
             <div className="flex flex-wrap justify-end">
-              <button onClick={this.props.recommendAnotherLesson} className="de-emphasized-button pl3 pr3">Skip</button>
+              <button onClick={this.props.recommendAnotherLesson} id="js-skip-button" className="de-emphasized-button pl3 pr3">Skip</button>
               <div className="text-right">
                 {recommendedLink}
               </div>
@@ -194,7 +194,7 @@ class RecommendationBox extends Component {
             <p className="text-right"><strong>Loading…</strong></p>
             <p className="text-right de-emphasized"></p>
             <div className="flex flex-wrap justify-end">
-              <button onClick={this.props.recommendAnotherLesson} className="de-emphasized-button pl3 pr3">Skip</button>
+              <button onClick={this.props.recommendAnotherLesson} id="js-skip-button" className="de-emphasized-button pl3 pr3">Skip</button>
               <div className="text-right">
                 <button disabled className="link-button dib" style={{lineHeight: 2}}>Loading…</button>
               </div>
