@@ -48,12 +48,14 @@ class Break extends Component<Props, State> {
     this.intervalID = window.setInterval(this.updateBreakTime, 1000);
   }
 
-  stopCountdown() {
+  stopCountdown(announce: bool = true) {
     if (this.intervalID) {
       clearInterval(this.intervalID);
       this.intervalID = null;
     }
-    this.props.setAnnouncementMessageString('Your break is done');
+    if (announce) {
+      this.props.setAnnouncementMessageString('Your break is done');
+    }
   }
 
   stopBreak() {
