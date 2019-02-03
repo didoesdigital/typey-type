@@ -126,7 +126,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
 
     if (recommendedStudySession[recommendedStudySessionIndex] === "practice") {
       let practiceParams = PARAMS.practiceParams;
-      let practiceChoice = Math.random() <.5 ? "practiceLessons" : "practiceAllYourWords";
+      let practiceChoice = Math.random() <.8 ? "practiceLessons" : "practiceAllYourWords";
 
       switch (practiceChoice) {
         case "practiceAllYourWords":
