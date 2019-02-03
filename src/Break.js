@@ -27,7 +27,10 @@ class Break extends Component<Props, State> {
 
   componentDidMount() {
     this.setState({
-      breakCountdown: (Date.now()) + (5 * 60 * 1000) + 999 // (5 minutes * 60 seconds * 1000 milliseconds) + almost a second to avoid skipping 4:59
+      breakCountdown: (Date.now()) + (5 * 60 * 1000) + 999, // (5 minutes * 60 seconds * 1000 milliseconds) + almost a second to avoid skipping 4:59
+      breakTimeMinutes: 0,
+      breakTimeSeconds: 0,
+      timeToDisplay: '5:00'
     }, () => {
       this.startCountdown();
     });
