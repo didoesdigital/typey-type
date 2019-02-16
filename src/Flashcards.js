@@ -13,9 +13,7 @@ import {
 } from './typey-type';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
-import {
-  Link
-} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 let slideNodes = (flashcards) => {
   let slides = [];
