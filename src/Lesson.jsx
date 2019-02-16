@@ -4,6 +4,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
+import LessonOverview from './LessonOverview';
 import LessonNotFound from './LessonNotFound';
 import Material from './Material';
 import TypedText from './TypedText';
@@ -43,6 +44,9 @@ class Lesson extends Component {
       else if (this.props.location.pathname.startsWith('/lessons/custom') && (!this.props.location.pathname.startsWith('/lessons/custom/setup'))) {
         this.props.startCustomLesson();
       }
+      else if(this.isOverview()) {
+        // do nothing
+      }
       else if(this.isFlashcards()) {
         // do nothing
       }
@@ -74,6 +78,8 @@ class Lesson extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.location.pathname.startsWith('/lessons/custom') && !this.props.location.pathname.startsWith('/lessons/custom/setup') && this.props.lesson.title !== "Custom") {
       this.props.startCustomLesson();
+    } else if(this.isOverview()) {
+      // do nothing
     } else if (this.isFlashcards()) {
       // do nothing
     } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/lessons'))) {
@@ -92,6 +98,11 @@ class Lesson extends Component {
   isCustom() {
     return ((this.props.location.pathname === '/lessons/custom') || (this.props.location.pathname === '/lessons/custom/setup'));
   }
+
+  isOverview() {
+    return (this.props.location.pathname.startsWith('/lessons/') && this.props.location.pathname.endsWith('/overview'));
+  }
+
   isFlashcards() {
     return (this.props.location.pathname.startsWith('/lessons/') && this.props.location.pathname.endsWith('/flashcards'));
   }
@@ -329,6 +340,16 @@ class Lesson extends Component {
       } else {
         return (
           <Switch>
+            <Route path={`/lessons/:category/:subcategory?/:lessonPath/overview`} render={(props) =>
+              <div>
+                <DocumentTitle title={'Typey Type | Lesson overview'}>
+                  <LessonOverview
+                    {...this.props}
+                    {...props}
+                  />
+                </DocumentTitle>
+              </div>
+            } />
             <Route path={`/lessons/:category/:subcategory?/:lessonPath/flashcards`} render={(props) =>
               <div>
                 <DocumentTitle title={'Typey Type | Flashcards'}>
@@ -359,6 +380,7 @@ class Lesson extends Component {
                       </div>
                       <div className="flex mxn2">
                         {createNewCustomLesson}
+                        <Link to={this.props.path.replace(/lesson\.txt$/,'') + 'overview'} className="link-button link-button-ghost table-cell" role="button">Overview</Link>
                         <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
                         <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
                       </div>
