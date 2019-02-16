@@ -265,22 +265,7 @@ class Lesson extends Component {
     }
 
     if (this.props.lesson) {
-      if (this.isFlashcards()) {
-        return (
-          <DocumentTitle title={'Typey Type | Flashcards'}>
-            <Flashcards
-              flashcardsMetWords={this.props.flashcardsMetWords}
-              flashcardsProgress={this.props.flashcardsProgress}
-              updateFlashcardsMetWords={this.props.updateFlashcardsMetWords.bind(this)}
-              updateFlashcardsProgress={this.props.updateFlashcardsProgress.bind(this)}
-              fullscreen={this.props.fullscreen}
-              changeFullscreen={this.props.changeFullscreen.bind(this)}
-              lessonpath={process.env.PUBLIC_URL + this.props.location.pathname.replace(/flashcards/, '') + 'lesson.txt'}
-              locationpathname={this.props.location.pathname}
-            />
-          </DocumentTitle>
-        )
-      } else if (this.isFinished()) {
+      if (this.isFinished()) {
         return (
           <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
             <main id="main">
@@ -344,6 +329,22 @@ class Lesson extends Component {
       } else {
         return (
           <Switch>
+            <Route path={`/lessons/:category/:subcategory?/:lessonPath/flashcards`} render={(props) =>
+              <div>
+                <DocumentTitle title={'Typey Type | Flashcards'}>
+                  <Flashcards
+                    flashcardsMetWords={this.props.flashcardsMetWords}
+                    flashcardsProgress={this.props.flashcardsProgress}
+                    updateFlashcardsMetWords={this.props.updateFlashcardsMetWords.bind(this)}
+                    updateFlashcardsProgress={this.props.updateFlashcardsProgress.bind(this)}
+                    fullscreen={this.props.fullscreen}
+                    changeFullscreen={this.props.changeFullscreen.bind(this)}
+                    lessonpath={process.env.PUBLIC_URL + this.props.location.pathname.replace(/flashcards/, '') + 'lesson.txt'}
+                    locationpathname={this.props.location.pathname}
+                  />
+                </DocumentTitle>
+              </div>
+            } />
             <Route exact={true} path={`${this.props.match.url}`} render={(props) =>
               <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
                 <main id="main">

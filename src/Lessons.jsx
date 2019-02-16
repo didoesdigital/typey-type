@@ -9,6 +9,14 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
   return(
     <div>
       <Switch>
+        <Route path={`${match.url}/:category/:subcategory/:lessonPath/flashcards`} render={ (props) =>
+          <Lesson lessonIndex={lessonIndex}
+            handleLesson={handleLesson}
+            lesson={lesson}
+            {...lessonProps}
+            {...props}
+          />
+        } />
         <Route path={`${match.url}/:category/:subcategory/:lessonPath`} render={ (props) =>
           <Lesson lessonIndex={lessonIndex}
             handleLesson={handleLesson}
@@ -17,7 +25,23 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
             {...props}
           />
         } />
+        <Route path={`${match.url}/fundamentals/:lessonPath/flashcards`} render={ (props) =>
+          <Lesson lessonIndex={lessonIndex}
+            handleLesson={handleLesson}
+            lesson={lesson}
+            {...lessonProps}
+            {...props}
+          />
+        } />
         <Route path={`${match.url}/fundamentals/:lessonPath`} render={ (props) =>
+          <Lesson lessonIndex={lessonIndex}
+            handleLesson={handleLesson}
+            lesson={lesson}
+            {...lessonProps}
+            {...props}
+          />
+        } />
+        <Route path={`${match.url}/drills/:lessonPath/flashcards`} render={ (props) =>
           <Lesson lessonIndex={lessonIndex}
             handleLesson={handleLesson}
             lesson={lesson}
