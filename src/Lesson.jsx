@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { IconClosingCross } from './Icon';
-import { Link } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
@@ -343,6 +343,8 @@ class Lesson extends Component {
         )
       } else {
         return (
+          <Switch>
+            <Route exact={true} path={`${this.props.match.url}`} render={(props) =>
           <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
             <main id="main">
               <div className="subheader">
@@ -442,6 +444,8 @@ class Lesson extends Component {
               </div>
             </main>
           </DocumentTitle>
+            } />
+          </Switch>
         )
       }
     } else {
