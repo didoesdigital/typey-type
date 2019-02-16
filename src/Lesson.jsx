@@ -345,105 +345,105 @@ class Lesson extends Component {
         return (
           <Switch>
             <Route exact={true} path={`${this.props.match.url}`} render={(props) =>
-          <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
-            <main id="main">
-              <div className="subheader">
-                <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
-                  <div className="flex mr1 self-center">
-                    <header className="flex items-baseline">
-                      <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                        <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
-                      </a>
-                    </header>
-                  </div>
-                  <div className="flex mxn2">
-                    {createNewCustomLesson}
-                    <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
-                    <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
-                  </div>
-                </div>
-              </div>
-              <div>
-                {firstVisit}
-                <div role="complementary" className="mx-auto mw-1024">
-                  {customMessage}
-                </div>
-                <div className="mx-auto mw-1024 p3">
-                    <button onClick={this.props.changeShowScoresWhileTyping} className={"de-emphasized-button show-scores-control absolute mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'show-scores-control--hidden' : 'show-scores-control--shown')}>Show scores</button>
-                  <AnimateHeight
-                    duration={ 300 }
-                    height={ this.props.userSettings.showScoresWhileTyping ? 'auto' : '0' }
-                    ease={'cubic-bezier(0.645, 0.045, 0.355, 1)'}
-                  >
-                    <div className={"mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'scores--shown' : 'scores--hidden')} onClick={this.props.changeShowScoresWhileTyping}>
-                      <Scores
-                        setAnnouncementMessage={this.props.setAnnouncementMessage}
-                        timer={this.props.timer}
-                        totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-                        totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-                        totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-                        totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-                        totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-                        totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-                      />
-                    </div>
-                  </AnimateHeight>
-                  <div role="article" className="lesson-canvas panel mw-1024 p2 fill-fade-parent mb3">
-                    {revisionModeButton}
-                    <span className="fill-fade-edges"></span>
-                    <div className="mx-auto mw100 mt10 text-center min-width-70">
-                      <Material
-                        actualText={this.props.actualText}
-                        currentPhrase={this.props.currentPhrase}
-                        currentStroke={this.props.currentStroke}
-                        settings={this.props.settings}
-                        userSettings={this.props.userSettings}
-                        completedPhrases={this.props.completedPhrases}
-                        upcomingPhrases={this.props.upcomingPhrases}
-                      />
-                      <TypedText
-                        actualText={this.props.actualText}
-                        currentLessonStrokes={this.props.currentLessonStrokes}
-                        currentPhrase={this.props.currentPhrase}
-                        completedPhrases={this.props.lesson.newPresentedMaterial.completed}
-                        previousCompletedPhraseAsTyped={this.props.previousCompletedPhraseAsTyped}
-                        sayCurrentPhraseAgain={this.props.sayCurrentPhraseAgain}
-                        settings={this.props.settings}
-                        updateMarkup={this.props.updateMarkup.bind(this)}
-                        userSettings={this.props.userSettings}
-                      />
-                      <div aria-hidden="true">
-                        {strokeTip}
+              <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
+                <main id="main">
+                  <div className="subheader">
+                    <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
+                      <div className="flex mr1 self-center">
+                        <header className="flex items-baseline">
+                          <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
+                            <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
+                          </a>
+                        </header>
+                      </div>
+                      <div className="flex mxn2">
+                        {createNewCustomLesson}
+                        <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
+                        <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
                       </div>
                     </div>
                   </div>
-                  <div className="visually-hidden">
-                    {strokeTip}
+                  <div>
+                    {firstVisit}
+                    <div role="complementary" className="mx-auto mw-1024">
+                      {customMessage}
+                    </div>
+                    <div className="mx-auto mw-1024 p3">
+                      <button onClick={this.props.changeShowScoresWhileTyping} className={"de-emphasized-button show-scores-control absolute mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'show-scores-control--hidden' : 'show-scores-control--shown')}>Show scores</button>
+                      <AnimateHeight
+                        duration={ 300 }
+                        height={ this.props.userSettings.showScoresWhileTyping ? 'auto' : '0' }
+                        ease={'cubic-bezier(0.645, 0.045, 0.355, 1)'}
+                      >
+                        <div className={"mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'scores--shown' : 'scores--hidden')} onClick={this.props.changeShowScoresWhileTyping}>
+                          <Scores
+                            setAnnouncementMessage={this.props.setAnnouncementMessage}
+                            timer={this.props.timer}
+                            totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
+                            totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+                            totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
+                            totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
+                            totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
+                            totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
+                          />
+                        </div>
+                      </AnimateHeight>
+                      <div role="article" className="lesson-canvas panel mw-1024 p2 fill-fade-parent mb3">
+                        {revisionModeButton}
+                        <span className="fill-fade-edges"></span>
+                        <div className="mx-auto mw100 mt10 text-center min-width-70">
+                          <Material
+                            actualText={this.props.actualText}
+                            currentPhrase={this.props.currentPhrase}
+                            currentStroke={this.props.currentStroke}
+                            settings={this.props.settings}
+                            userSettings={this.props.userSettings}
+                            completedPhrases={this.props.completedPhrases}
+                            upcomingPhrases={this.props.upcomingPhrases}
+                          />
+                          <TypedText
+                            actualText={this.props.actualText}
+                            currentLessonStrokes={this.props.currentLessonStrokes}
+                            currentPhrase={this.props.currentPhrase}
+                            completedPhrases={this.props.lesson.newPresentedMaterial.completed}
+                            previousCompletedPhraseAsTyped={this.props.previousCompletedPhraseAsTyped}
+                            sayCurrentPhraseAgain={this.props.sayCurrentPhraseAgain}
+                            settings={this.props.settings}
+                            updateMarkup={this.props.updateMarkup.bind(this)}
+                            userSettings={this.props.userSettings}
+                          />
+                          <div aria-hidden="true">
+                            {strokeTip}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="visually-hidden">
+                        {strokeTip}
+                      </div>
+                      <UserSettings
+                        changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
+                        changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+                        changeStenoLayout={this.props.changeStenoLayout}
+                        changeShowStrokesAs={this.props.changeShowStrokesAs}
+                        changeUserSetting={this.props.changeUserSetting}
+                        chooseStudy={this.props.chooseStudy}
+                        disableUserSettings={this.props.disableUserSettings}
+                        handleLimitWordsChange={this.props.handleLimitWordsChange}
+                        handleStartFromWordChange={this.props.handleStartFromWordChange}
+                        handleRepetitionsChange={this.props.handleRepetitionsChange}
+                        hideOtherSettings={this.props.hideOtherSettings}
+                        maxStartFromWord={this.props.lessonLength}
+                        revisionMode={this.props.revisionMode}
+                        setAnnouncementMessage={this.props.setAnnouncementMessage}
+                        toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+                        totalWordCount={this.props.totalWordCount}
+                        userSettings={this.props.userSettings}
+                      />
+                    </div>
+                    <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
                   </div>
-                  <UserSettings
-                    changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
-                    changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
-                    changeStenoLayout={this.props.changeStenoLayout}
-                    changeShowStrokesAs={this.props.changeShowStrokesAs}
-                    changeUserSetting={this.props.changeUserSetting}
-                    chooseStudy={this.props.chooseStudy}
-                    disableUserSettings={this.props.disableUserSettings}
-                    handleLimitWordsChange={this.props.handleLimitWordsChange}
-                    handleStartFromWordChange={this.props.handleStartFromWordChange}
-                    handleRepetitionsChange={this.props.handleRepetitionsChange}
-                    hideOtherSettings={this.props.hideOtherSettings}
-                    maxStartFromWord={this.props.lessonLength}
-                    revisionMode={this.props.revisionMode}
-                    setAnnouncementMessage={this.props.setAnnouncementMessage}
-                    toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-                    totalWordCount={this.props.totalWordCount}
-                    userSettings={this.props.userSettings}
-                  />
-                </div>
-                <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
-              </div>
-            </main>
-          </DocumentTitle>
+                </main>
+              </DocumentTitle>
             } />
           </Switch>
         )
