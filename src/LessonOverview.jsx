@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { getLessonIndexData } from './lessonIndexData';
 
 class LessonOverview extends Component {
@@ -12,9 +12,7 @@ class LessonOverview extends Component {
                   <p>Loading…</p>
                 </div>
       `,
-      error: false,
-      loadingLessonIndex: true,
-      loadingLessonIndexError: false,
+      error: false
     }
   }
 
@@ -24,6 +22,7 @@ class LessonOverview extends Component {
     }
 
     let lessonMetadata;
+    // TODO: avoid fetching again if this.props.lessonIndex already contains all the lessons
     getLessonIndexData().then((lessonIndex) => {
       // This logic to find lesson in index is duplicated in Lesson.jsx
       lessonMetadata = lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === process.env.PUBLIC_URL + this.props.location.pathname.replace('overview','lesson.txt'));
@@ -38,10 +37,8 @@ class LessonOverview extends Component {
       } else {
         this.setState({error: true});
       }
-
-      this.setState({ loadingLessonIndex: false });
     }).catch((e) => {
-      this.setState({ loadingLessonIndexError: true, error: true });
+      this.setState({error: true});
     });
   }
 
