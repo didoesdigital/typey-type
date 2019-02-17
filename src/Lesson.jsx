@@ -147,6 +147,7 @@ class Lesson extends Component {
     let createNewCustomLesson = '';
     let customMessage;
     let firstVisit;
+    let overviewLink = '';
     let strokeTip;
     let lessonSubTitle = '';
     if (this.props.lesson && this.props.lesson.subtitle && this.props.lesson.subtitle.length > 0) {
@@ -158,6 +159,11 @@ class Lesson extends Component {
     } else {
       createNewCustomLesson = '';
     }
+
+    // This logic is duplicated in LessonOverview.jsx
+    let lessonMetadata;
+    lessonMetadata = this.props.lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === process.env.PUBLIC_URL + this.props.lesson.path);
+    overviewLink = lessonMetadata && lessonMetadata['overview'] ? <Link to={this.props.path.replace(/lesson\.txt$/,'') + 'overview'} className="link-button link-button-ghost table-cell" role="button">Overview</Link> : ''
 
     if (this.props.settings && this.props.settings.customMessage) {
       customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
@@ -290,7 +296,7 @@ class Lesson extends Component {
                     </header>
                   </div>
                   <div className="flex mxn2">
-                    {createNewCustomLesson ? createNewCustomLesson : <Link to={this.props.path.replace(/lesson\.txt$/,'') + 'overview'} className="link-button link-button-ghost table-cell" role="button">Overview</Link>}
+                    {createNewCustomLesson ? createNewCustomLesson : overviewLink}
                     <a href={this.props.path} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
                     <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
                   </div>
@@ -344,6 +350,7 @@ class Lesson extends Component {
               <div>
                 <DocumentTitle title={'Typey Type | Lesson overview'}>
                   <LessonOverview
+                    lessonMetadata={lessonMetadata}
                     {...this.props}
                     {...props}
                   />
@@ -379,7 +386,7 @@ class Lesson extends Component {
                         </header>
                       </div>
                       <div className="flex mxn2">
-                        {createNewCustomLesson ? createNewCustomLesson : <Link to={this.props.path.replace(/lesson\.txt$/,'') + 'overview'} className="link-button link-button-ghost table-cell" role="button">Overview</Link>}
+                        {createNewCustomLesson ? createNewCustomLesson : overviewLink}
                         <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
                         <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
                       </div>
