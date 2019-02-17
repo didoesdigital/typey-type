@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 
 class LessonOverview extends Component {
   componentDidMount() {
+    if (!this.props.lesson || this.props.lesson.title === 'Steno') {
+      this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname.replace('overview','lesson.txt'));
+    }
   }
 
   render() {
