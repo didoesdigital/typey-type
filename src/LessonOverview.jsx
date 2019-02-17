@@ -23,7 +23,7 @@ class LessonOverview extends Component {
 
     // This logic to find lesson in index is duplicated in Lesson.jsx
     let lessonMetadata;
-    lessonMetadata = this.props.lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === process.env.PUBLIC_URL + this.props.lesson.path);
+    lessonMetadata = this.props.lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === process.env.PUBLIC_URL + this.props.location.pathname.replace('overview','lesson.txt'));
     if (lessonMetadata && lessonMetadata['overview']) {
       this.getLessonOverview('/lessons' + lessonMetadata['overview']).then((text) => {
         this.setState({content: text});
