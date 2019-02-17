@@ -290,7 +290,7 @@ class Lesson extends Component {
                     </header>
                   </div>
                   <div className="flex mxn2">
-                    {createNewCustomLesson}
+                    {createNewCustomLesson ? createNewCustomLesson : <Link to={this.props.path.replace(/lesson\.txt$/,'') + 'overview'} className="link-button link-button-ghost table-cell" role="button">Overview</Link>}
                     <a href={this.props.path} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
                     <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
                   </div>
@@ -379,8 +379,7 @@ class Lesson extends Component {
                         </header>
                       </div>
                       <div className="flex mxn2">
-                        {createNewCustomLesson}
-                        <Link to={this.props.path.replace(/lesson\.txt$/,'') + 'overview'} className="link-button link-button-ghost table-cell" role="button">Overview</Link>
+                        {createNewCustomLesson ? createNewCustomLesson : <Link to={this.props.path.replace(/lesson\.txt$/,'') + 'overview'} className="link-button link-button-ghost table-cell" role="button">Overview</Link>}
                         <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
                         <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
                       </div>
