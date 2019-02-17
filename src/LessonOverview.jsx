@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { Link, Redirect } from 'react-router-dom';
+import { getLessonIndexData } from './lessonIndexData';
 
 class LessonOverview extends Component {
   constructor(props) {
@@ -8,11 +9,12 @@ class LessonOverview extends Component {
     this.state = {
       content: `
                 <div className="mx-auto mw100 mt10 text-center">
-                  <h3>Overview</h3>
-                  <p>This lesson teaches you X…</p>
+                  <p>Loading…</p>
                 </div>
       `,
-      error: false
+      error: false,
+      loadingLessonIndex: true,
+      loadingLessonIndexError: false,
     }
   }
 
@@ -21,19 +23,26 @@ class LessonOverview extends Component {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname.replace('overview','lesson.txt'));
     }
 
-    // This logic to find lesson in index is duplicated in Lesson.jsx
     let lessonMetadata;
-    lessonMetadata = this.props.lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === process.env.PUBLIC_URL + this.props.location.pathname.replace('overview','lesson.txt'));
-    if (lessonMetadata && lessonMetadata['overview']) {
-      this.getLessonOverview('/lessons' + lessonMetadata['overview']).then((text) => {
-        this.setState({content: text});
-      }).catch((e) => {
+    getLessonIndexData().then((lessonIndex) => {
+      // This logic to find lesson in index is duplicated in Lesson.jsx
+      lessonMetadata = lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === process.env.PUBLIC_URL + this.props.location.pathname.replace('overview','lesson.txt'));
+
+      if (lessonMetadata && lessonMetadata['overview']) {
+        this.getLessonOverview('/lessons' + lessonMetadata['overview']).then((text) => {
+          this.setState({content: text});
+        }).catch((e) => {
+          this.setState({error: true});
+          console.log(e);
+        });
+      } else {
         this.setState({error: true});
-        console.log(e);
-      });
-    } else {
-      this.setState({error: true});
-    }
+      }
+
+      this.setState({ loadingLessonIndex: false });
+    }).catch((e) => {
+      this.setState({ loadingLessonIndexError: true, error: true });
+    });
   }
 
   getLessonOverview(lessonFile) {
@@ -50,10 +59,6 @@ class LessonOverview extends Component {
   }
 
   render() {
-    if (this.state.error) {
-      return <Redirect to={this.props.location.pathname.replace('overview','')} />
-    }
-
     return (
       <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title + ' overview'}>
         <main id="main">
@@ -72,7 +77,7 @@ class LessonOverview extends Component {
           <div>
             <div className="mx-auto mw-1024 p3">
               <div role="article" className="panel mw-1024 p2 mb3">
-                <div dangerouslySetInnerHTML={this.showLessonOverview()} />
+                { this.state.error ? <div className="mx-auto mw100 mt3 mb3 text-center">That overview couldn’t be found. <Link to={this.props.location.pathname.replace('overview','')}>Back to lesson</Link>.</div> : <div dangerouslySetInnerHTML={this.showLessonOverview()} /> }
               </div>
             </div>
           </div>
