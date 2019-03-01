@@ -80,11 +80,14 @@ class LessonOverview extends Component {
             </div>
           </div>
           <div>
+            { this.state.error ?
             <div className="mx-auto mw-1024 p3">
-              <div role="article" className="panel mw-1024 p2 mb3">
-                { this.state.error ? <div className="mx-auto mw100 mt3 mb3 text-center">That overview couldn’t be found. <Link to={this.props.location.pathname.replace('overview','')}>Back to lesson</Link>.</div> : <div dangerouslySetInnerHTML={this.showLessonOverview()} /> }
+              <div role="article" className="mw-1024 mb3 mt3">
+                <div className="mx-auto mw100 mt3 mb3 text-center">That overview couldn’t be found. <Link to={this.props.location.pathname.replace('overview','')}>Back to lesson</Link>.</div>
               </div>
             </div>
+            : <div className="type-face--sans-serif" dangerouslySetInnerHTML={this.showLessonOverview()} />
+            }
           </div>
         </main>
       </DocumentTitle>
