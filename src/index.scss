@@ -1,11 +1,15 @@
 @import 'global.scss';
-@import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700');
+@import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Overpass:300,700');
 
 // Variables
 $type: 400 16px/1.6 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
+$type-face--mono: 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $type-face--korean: 'NanumGothicCoding', 'Nanum Gothic Coding', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
+$type-face--sans-serif: 'Overpass', 'Clear Sans', 'Source Sans Pro', 'Work Sans', 'Open Sans', 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $heavy-type: 700 16px/1.6 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
+$heavy-type-face--mono: 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $heavy-type-face--korean: 'NanumGothicCoding', 'Nanum Gothic Coding', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
+$heavy-type-face--sans-serif: 'Overpass', 'Clear Sans', 'Source Sans Pro', 'Work Sans', 'Open Sans', 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $base-font-size: 16px;
 $font-scale: 1.25; // Major third scale
 $h1-size: $base-font-size * $font-scale * $font-scale * $font-scale * $font-scale; // 39.056px
@@ -310,12 +314,21 @@ input:focus::placeholder {
   color: transparent;
 }
 
+.type-face--sans-serif {
+  font-family: $type-face--sans-serif;
+  font-weight: 300;
+}
+
 .type-face--korean {
   font-family: $type-face--korean;
 }
 
 .heavy-type-face--korean {
   font-family: $heavy-type-face--korean;
+}
+
+.lede {
+  font-size: $h4-size;
 }
 
 // Utilities
@@ -470,6 +483,7 @@ input:focus::placeholder {
 .mw100 { max-width: 100%; }
 
 .mw-1024 { max-width: 1024px; }
+.mw-696  { max-width: 696px; }
 .mw-568  { max-width: 568px; }
 .mw-584  { max-width: 584px; }
 .mw-504  { max-width: 504px; }
@@ -487,11 +501,13 @@ input:focus::placeholder {
 .px3     { padding-left: 24px; padding-right: 24px; }
 .pb0     { padding-bottom: 0; }
 .pb4     { padding-bottom: 32px; }
+.pb24    { padding-bottom: 192px; }
 .pl1     { padding-left: 8px; }
 .pl3     { padding-left: 24px; }
 .pr1     { padding-right: 8px; }
 .pr3     { padding-right: 24px; }
 .pt3     { padding-top: 24px; }
+.pt24    { padding-top: 192px; }
 
 .py05 {
   padding-top: 4px;
@@ -1167,6 +1183,7 @@ label {
 // }
 
 .steno-stroke {
+  font-family: $type-face--mono;
   background-color: desaturate(add-tint($brand-primary, 5%), 40%);
   color: add-tint($brand-primary, 90%);
   letter-spacing: 0.1em;
@@ -1833,3 +1850,53 @@ $lineAdjustment: 4px;
   transition: opacity .1s linear !important;
 }
 
+
+
+
+
+.list--feature {
+  counter-reset: li;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    align-items: center;
+    background: #fff;
+    border: 1px solid add-tint($brand-primary, 70%);
+    border-radius: 2px;
+    display: flex;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    margin-bottom: 2em;
+    margin-left: 0;
+    min-height: 6em;
+    padding: 3rem 2rem 3rem 8rem;
+    position: relative;
+    width: 100%;
+
+    &::after {
+      content: counter(li);
+      counter-increment: li;
+      color: #AD66D5;
+      // color: add-tint($brand-primary, 50%);
+      font-size: $h1-size * $font-scale * $font-scale;
+      font-weight: 700;
+      position: absolute;
+      left: .75em;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+
+    p + p {
+      margin-top: 1rem;
+    }
+  }
+}
