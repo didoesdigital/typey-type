@@ -25,7 +25,7 @@ class Support extends Component {
             </div>
           </div>
         </div>
-        <div className="p3 mx-auto mw-1024">
+        <div className="p3 mx-auto mw-1024 type-face--sans-serif">
           <div className="mw-568">
             <p className="mt3">Typey&nbsp;Type is a typing app designed specifically to help <a href="#about-stenography">stenography</a> students learn{" "}
               <Tooltip

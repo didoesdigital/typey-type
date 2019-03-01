@@ -24,7 +24,7 @@ class Contribute extends Component {
             </div>
           </div>
         </div>
-        <div className="p3 mx-auto mw-1024">
+        <div className="p3 mx-auto mw-1024 type-face--sans-serif">
           <div className="mw-568">
             <p className="mt3">Thanks for your interest in Typey&nbsp;Type!</p>
 
@@ -56,7 +56,7 @@ class Contribute extends Component {
             </p>
 
             <h3 id="lessons">Lessons</h3>
-            <p>You can create your own <Link to="/lessons/custom">custom lesson</Link> and add it to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community’s lessons
+            <p>You can create your own <Link to="/lessons/custom">custom lesson</Link> and add it to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community’s <span className="nowrap">lessons
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -70,7 +70,7 @@ class Contribute extends Component {
                   onShow={this.props.setAnnouncementMessage}
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-              </Tooltip></a>.
+            </Tooltip></span></a>.
             </p>
             <p>If you have an idea for a new lesson, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or{" "}
               <GoogleAnalytics.OutboundLink
