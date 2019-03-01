@@ -4,6 +4,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
+import ErrorBoundary from './ErrorBoundary'
 import LessonOverview from './LessonOverview';
 import LessonNotFound from './LessonNotFound';
 import Material from './Material';
@@ -348,13 +349,15 @@ class Lesson extends Component {
           <Switch>
             <Route path={`/lessons/:category/:subcategory?/:lessonPath/overview`} render={(props) =>
               <div>
-                <DocumentTitle title={'Typey Type | Lesson overview'}>
-                  <LessonOverview
-                    lessonMetadata={lessonMetadata}
-                    {...this.props}
-                    {...props}
-                  />
-                </DocumentTitle>
+                <ErrorBoundary>
+                  <DocumentTitle title={'Typey Type | Lesson overview'}>
+                    <LessonOverview
+                      lessonMetadata={lessonMetadata}
+                      {...this.props}
+                      {...props}
+                    />
+                  </DocumentTitle>
+                </ErrorBoundary>
               </div>
             } />
             <Route path={`/lessons/:category/:subcategory?/:lessonPath/flashcards`} render={(props) =>
