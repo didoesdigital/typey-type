@@ -15,7 +15,7 @@ class Footer extends Component {
       fullscreen = "";
     }
     return (
-      <footer role="contentinfo" className={"hide-in-fullscreen" + fullscreen}>
+      <footer role="contentinfo" className={"ml3 mr3 hide-in-fullscreen" + fullscreen}>
         <p className="text-center mt1 mb0"><small>Made with <span aria-label="love" role="img">❤️</span> by <a href="https://didoesdigital.com/">DiDoesDigital</a>.</small></p>
         <p className="text-center mb0"><small><Link to="/support">Learn more about Typey&nbsp;Type</Link> and <Link to="/support#privacy">privacy</Link>.</small></p>
         <p className="text-center mb0"><small><Link to="/contribute">Contribute to Typey&nbsp;Type</Link> and{" "}
