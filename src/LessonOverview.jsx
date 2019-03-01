@@ -29,7 +29,15 @@ class LessonOverview extends Component {
 
       if (lessonMetadata && lessonMetadata['overview']) {
         this.getLessonOverview('/lessons' + lessonMetadata['overview']).then((text) => {
-          this.setState({content: text});
+          let error = false;
+
+          if (text.toLowerCase().startsWith('<!doctype html>')) { error = true; }
+
+          this.setState({
+            content: text,
+            error: error
+          });
+
         }).catch((e) => {
           this.setState({error: true});
           console.log(e);
