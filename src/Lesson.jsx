@@ -162,8 +162,8 @@ class Lesson extends Component {
 
     // This logic is duplicated in LessonOverview.jsx
     let lessonMetadata;
-    lessonMetadata = this.props.lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === process.env.PUBLIC_URL + this.props.lesson.path);
-    overviewLink = lessonMetadata && lessonMetadata['overview'] ? <Link to={this.props.path.replace(/lesson\.txt$/,'') + 'overview'} className="link-button link-button-ghost table-cell" role="button">Overview</Link> : ''
+    lessonMetadata = this.props.lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === this.props.lesson.path);
+    overviewLink = lessonMetadata && lessonMetadata['overview'] ? <Link to={this.props.location.pathname + 'overview'} className="link-button link-button-ghost table-cell" role="button">Overview</Link> : ''
 
     if (this.props.settings && this.props.settings.customMessage) {
       customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;

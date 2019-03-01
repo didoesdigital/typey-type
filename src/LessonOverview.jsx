@@ -28,7 +28,7 @@ class LessonOverview extends Component {
       lessonMetadata = lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === process.env.PUBLIC_URL + this.props.location.pathname.replace('overview','lesson.txt'));
 
       if (lessonMetadata && lessonMetadata['overview']) {
-        this.getLessonOverview('/lessons' + lessonMetadata['overview']).then((text) => {
+        this.getLessonOverview(process.env.PUBLIC_URL + '/lessons' + lessonMetadata['overview']).then((text) => {
           let error = false;
 
           if (text.toLowerCase().startsWith('<!doctype html>')) { error = true; }
