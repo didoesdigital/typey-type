@@ -48,6 +48,10 @@ class LessonOverview extends Component {
     }).catch((e) => {
       this.setState({error: true});
     });
+
+    if (this.mainHeading) {
+      this.mainHeading.focus();
+    }
   }
 
   getLessonOverview(lessonFile) {
