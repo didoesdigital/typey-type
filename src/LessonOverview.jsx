@@ -8,7 +8,7 @@ class LessonOverview extends Component {
     super(props);
     this.state = {
       content: `
-                <div className="mx-auto mw100 mt10 text-center">
+                <div class="mx-auto mw100 pt24 pb24 de-emphasized text-center">
                   <p>Loading…</p>
                 </div>
       `,
