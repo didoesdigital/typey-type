@@ -11,14 +11,13 @@ while getopts 'a' flag; do
   esac
 done
 
-
-yarn run test
-
-
 if [ "$a_flag" = true ] ;
   then
-    echo "Skip building steno lessons, and dictionaries."
+    echo "Skip building steno lessons and dictionaries, and running tests."
   else
+
+    yarn run test
+
     echo "cd ~/projects/plover-tools/typey-type-static-lesson-generator && bat --paging never README.md"
     read -q "?Have you built steno drills, fundamentals, and dictionary? (y/n) "
     if [[ $REPLY =~ ^[Yy]$ ]];
