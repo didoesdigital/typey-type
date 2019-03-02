@@ -1,14 +1,17 @@
 @import 'global.scss';
 @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Overpass:300,700');
+// <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700&amp;subset=japanese,latin-ext" rel="stylesheet">
 
 // Variables
 $type: 400 16px/1.6 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $type-face--mono: 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $type-face--korean: 'NanumGothicCoding', 'Nanum Gothic Coding', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
+$type-face--japanese: 'M PLUS 1p', 'Noto Sans JP', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $type-face--sans-serif: 'Overpass', 'Clear Sans', 'Source Sans Pro', 'Work Sans', 'Open Sans', 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $heavy-type: 700 16px/1.6 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $heavy-type-face--mono: 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $heavy-type-face--korean: 'NanumGothicCoding', 'Nanum Gothic Coding', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
+$heavy-type-face--japanese: 'M PLUS 1p', 'Noto Sans JP', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $heavy-type-face--sans-serif: 'Overpass', 'Clear Sans', 'Source Sans Pro', 'Work Sans', 'Open Sans', 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $base-font-size: 16px;
 $font-scale: 1.25; // Major third scale
