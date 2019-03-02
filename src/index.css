@@ -108,11 +108,19 @@ fieldset {
 tt, code, kbd, samp {
   font: 700 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
 
+.type-face--japanese tt,
+.type-face--japanese code,
+.type-face--japanese kbd,
+.type-face--japanese samp {
+  font-family: "MPLUS 1p", "M PLUS 1p", "Noto Sans JP", "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-weight: 400; }
+
 .heavy-type-face--korean tt,
 .heavy-type-face--korean code,
 .heavy-type-face--korean kbd,
 .heavy-type-face--korean samp {
-  font-family: "NanumGothicCoding", "Nanum Gothic Coding", "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
+  font-family: "NanumGothicCoding", "Nanum Gothic Coding", "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-weight: 700; }
 
 input, textarea {
   font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }

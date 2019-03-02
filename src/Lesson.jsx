@@ -233,6 +233,11 @@ class Lesson extends Component {
             break;
         }
 
+
+        let layoutTypeStyle;
+        if (this.props.userSettings.stenoLayout === 'stenoLayoutKoreanModernCSteno') { layoutTypeStyle = ' heavy-type-face--korean'; }
+        if (this.props.userSettings.stenoLayout === 'stenoLayoutJapaneseSteno') { layoutTypeStyle = ' type-face--japanese'; }
+
         strokeTip = (
           <div className="stroke-tip" aria-live="polite" aria-atomic="true">
             <span className="visually-hidden">Hint: </span>
@@ -244,7 +249,7 @@ class Lesson extends Component {
               )}
             </div>
             {!this.props.userSettings.showStrokesAsDiagrams ?
-              <div className={"db" + (this.props.userSettings.stenoLayout === 'stenoLayoutKoreanModernCSteno' ? ' heavy-type-face--korean' : '')}>
+              <div className={"db" + layoutTypeStyle}>
                 <pre className="overflow-auto mw-408 text-small">
                   <span className="steno-stroke">
                     {this.props.currentStroke.split('').map((item, i) =>

@@ -6,12 +6,12 @@
 $type: 400 16px/1.6 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $type-face--mono: 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $type-face--korean: 'NanumGothicCoding', 'Nanum Gothic Coding', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
-$type-face--japanese: 'M PLUS 1p', 'Noto Sans JP', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
+$type-face--japanese: 'MPLUS 1p', 'M PLUS 1p', 'Noto Sans JP', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $type-face--sans-serif: 'Overpass', 'Clear Sans', 'Source Sans Pro', 'Work Sans', 'Open Sans', 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $heavy-type: 700 16px/1.6 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $heavy-type-face--mono: 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $heavy-type-face--korean: 'NanumGothicCoding', 'Nanum Gothic Coding', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
-$heavy-type-face--japanese: 'M PLUS 1p', 'Noto Sans JP', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
+$heavy-type-face--japanese: 'MPLUS 1p', 'M PLUS 1p', 'Noto Sans JP', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $heavy-type-face--sans-serif: 'Overpass', 'Clear Sans', 'Source Sans Pro', 'Work Sans', 'Open Sans', 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $base-font-size: 16px;
 $font-scale: 1.25; // Major third scale
@@ -172,11 +172,20 @@ tt, code, kbd, samp {
   font: $heavy-type;
 }
 
+.type-face--japanese tt,
+.type-face--japanese code,
+.type-face--japanese kbd,
+.type-face--japanese samp {
+  font-family: $type-face--japanese;
+  font-weight: 400;
+}
+
 .heavy-type-face--korean tt,
 .heavy-type-face--korean code,
 .heavy-type-face--korean kbd,
 .heavy-type-face--korean samp {
   font-family: $heavy-type-face--korean;
+  font-weight: 700;
 }
 
 input, textarea {
