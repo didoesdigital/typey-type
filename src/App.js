@@ -256,7 +256,7 @@ class App extends Component {
         seenWords: true,
         startFromWord: 1,
         study: 'discover',
-        stenoLayout: 'stenoLayoutAmericanSteno' // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianMichelaSteno' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
+        stenoLayout: 'stenoLayoutAmericanSteno' // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianMichelaSteno' || 'stenoLayoutJapanese' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
       },
       lesson: fallbackLesson,
       lessonIndex: [{
@@ -1067,6 +1067,7 @@ class App extends Component {
           'stenoLayoutDanishSteno',
           'stenoLayoutItalianMichelaSteno',
           'stenoLayoutItalianMelaniSteno',
+          'stenoLayoutJapanese',
           'stenoLayoutKoreanModernC',
           'stenoLayoutKoreanModernS'
         ];
