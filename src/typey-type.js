@@ -636,6 +636,11 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     function chooseStrokeForWord (wordOrPhrase) {
       stroke = sourceWordsAndStrokes[wordOrPhrase];
 
+      let strokeForOneCharacterWord = FINGERSPELLED_LETTERS[wordOrPhrase];
+      if (wordOrPhrase.length === 1 && strokeForOneCharacterWord) {
+        return strokeForOneCharacterWord;
+      }
+
       // FIRST => first
       if (!stroke) {
         let uppercasedStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase()];
