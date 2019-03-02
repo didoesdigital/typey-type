@@ -13,6 +13,7 @@ import {
   writePersonalPreferences,
   mapBriefToAmericanStenoKeys,
   mapBriefToItalianMichelaStenoKeys,
+  mapBriefToJapaneseStenoKeys,
   repetitionsRemaining,
   updateCapitalisationStrokesInNextItem
 } from './typey-type';
@@ -475,6 +476,513 @@ describe('map stroke to keys', () => {
       rightS: false,
       rightD: true,
       rightZ: false
+    });
+  });
+});
+
+describe('map Japanese stroke to Japanese keys', () => {
+  // let japaneseOrder = '漢「4たな3かさ2いう1おっ*4たな3かさ2いう1おっ」カ';
+  it('show no keys for empty brief', () => {
+    let brief = "";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: false,
+      theLeftKagikakkoKey: false,
+      theLeft4Key: false,
+      theLeftたKey: false,
+      theLeftなKey: false,
+      theLeft3Key: false,
+      theLeftかKey: false,
+      theLeftさKey: false,
+      theLeft2Key: false,
+      theLeftいKey: false,
+      theLeftうKey: false,
+      theLeft1Key: false,
+      theLeftおKey: false,
+      theLeftっKey: false,
+      theStarKey: false,
+      dash: false,
+      theRight4Key: false,
+      theRightたKey: false,
+      theRightなKey: false,
+      theRight3Key: false,
+      theRightかKey: false,
+      theRightさKey: false,
+      theRight2Key: false,
+      theRightいKey: false,
+      theRightうKey: false,
+      theRight1Key: false,
+      theRightおKey: false,
+      theRightっKey: false,
+      theRightKagikakkoKey: false,
+      theカKey: false
+    });
+  });
+
+  it('show nothing when given non-steno letters', () => {
+    let brief = "⌘";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: false,
+      theLeftKagikakkoKey: false,
+      theLeft4Key: false,
+      theLeftたKey: false,
+      theLeftなKey: false,
+      theLeft3Key: false,
+      theLeftかKey: false,
+      theLeftさKey: false,
+      theLeft2Key: false,
+      theLeftいKey: false,
+      theLeftうKey: false,
+      theLeft1Key: false,
+      theLeftおKey: false,
+      theLeftっKey: false,
+      theStarKey: false,
+      dash: false,
+      theRight4Key: false,
+      theRightたKey: false,
+      theRightなKey: false,
+      theRight3Key: false,
+      theRightかKey: false,
+      theRightさKey: false,
+      theRight2Key: false,
+      theRightいKey: false,
+      theRightうKey: false,
+      theRight1Key: false,
+      theRightおKey: false,
+      theRightっKey: false,
+      theRightKagikakkoKey: false,
+      theカKey: false
+    });
+  });
+
+  it('shows punctuation brief for 。', () => {
+    let brief = "「か-か」";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: false,
+      theLeftKagikakkoKey: true,
+      theLeft4Key: false,
+      theLeftたKey: false,
+      theLeftなKey: false,
+      theLeft3Key: false,
+      theLeftかKey: true,
+      theLeftさKey: false,
+      theLeft2Key: false,
+      theLeftいKey: false,
+      theLeftうKey: false,
+      theLeft1Key: false,
+      theLeftおKey: false,
+      theLeftっKey: false,
+      theStarKey: false,
+      dash: true,
+      theRight4Key: false,
+      theRightたKey: false,
+      theRightなKey: false,
+      theRight3Key: false,
+      theRightかKey: true,
+      theRightさKey: false,
+      theRight2Key: false,
+      theRightいKey: false,
+      theRightうKey: false,
+      theRight1Key: false,
+      theRightおKey: false,
+      theRightっKey: false,
+      theRightKagikakkoKey: true,
+      theカKey: false
+    });
+  });
+
+  it('shows punctuation brief for ？', () => {
+    let brief = "「-たかいお」";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: false,
+      theLeftKagikakkoKey: true,
+      theLeft4Key: false,
+      theLeftたKey: false,
+      theLeftなKey: false,
+      theLeft3Key: false,
+      theLeftかKey: false,
+      theLeftさKey: false,
+      theLeft2Key: false,
+      theLeftいKey: false,
+      theLeftうKey: false,
+      theLeft1Key: false,
+      theLeftおKey: false,
+      theLeftっKey: false,
+      theStarKey: false,
+      dash: true,
+      theRight4Key: false,
+      theRightたKey: true,
+      theRightなKey: false,
+      theRight3Key: false,
+      theRightかKey: true,
+      theRightさKey: false,
+      theRight2Key: false,
+      theRightいKey: true,
+      theRightうKey: false,
+      theRight1Key: false,
+      theRightおKey: true,
+      theRightっKey: false,
+      theRightKagikakkoKey: true,
+      theカKey: false
+    });
+  });
+
+  it('shows brief for number 50', () => {
+    let brief = "41-4321";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: false,
+      theLeftKagikakkoKey: false,
+      theLeft4Key: true,
+      theLeftたKey: false,
+      theLeftなKey: false,
+      theLeft3Key: false,
+      theLeftかKey: false,
+      theLeftさKey: false,
+      theLeft2Key: false,
+      theLeftいKey: false,
+      theLeftうKey: false,
+      theLeft1Key: true,
+      theLeftおKey: false,
+      theLeftっKey: false,
+      theStarKey: false,
+      dash: true,
+      theRight4Key: true,
+      theRightたKey: false,
+      theRightなKey: false,
+      theRight3Key: true,
+      theRightかKey: false,
+      theRightさKey: false,
+      theRight2Key: true,
+      theRightいKey: false,
+      theRightうKey: false,
+      theRight1Key: true,
+      theRightおKey: false,
+      theRightっKey: false,
+      theRightKagikakkoKey: false,
+      theカKey: false
+    });
+  });
+
+  it('shows brief for number 89', () => {
+    let brief = "431-432";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: false,
+      theLeftKagikakkoKey: false,
+      theLeft4Key: true,
+      theLeftたKey: false,
+      theLeftなKey: false,
+      theLeft3Key: true,
+      theLeftかKey: false,
+      theLeftさKey: false,
+      theLeft2Key: false,
+      theLeftいKey: false,
+      theLeftうKey: false,
+      theLeft1Key: true,
+      theLeftおKey: false,
+      theLeftっKey: false,
+      theStarKey: false,
+      dash: true,
+      theRight4Key: true,
+      theRightたKey: false,
+      theRightなKey: false,
+      theRight3Key: true,
+      theRightかKey: false,
+      theRightさKey: false,
+      theRight2Key: true,
+      theRightいKey: false,
+      theRightうKey: false,
+      theRight1Key: false,
+      theRightおKey: false,
+      theRightっKey: false,
+      theRightKagikakkoKey: false,
+      theカKey: false
+    });
+  });
+
+  it('shows brief for ambiguous kanji with dash 刊', () => {
+    let brief = "漢432っ-た32おっ";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: true,
+      theLeftKagikakkoKey: false,
+      theLeft4Key: true,
+      theLeftたKey: false,
+      theLeftなKey: false,
+      theLeft3Key: true,
+      theLeftかKey: false,
+      theLeftさKey: false,
+      theLeft2Key: true,
+      theLeftいKey: false,
+      theLeftうKey: false,
+      theLeft1Key: false,
+      theLeftおKey: false,
+      theLeftっKey: true,
+      theStarKey: false,
+      dash: true,
+      theRight4Key: false,
+      theRightたKey: true,
+      theRightなKey: false,
+      theRight3Key: true,
+      theRightかKey: false,
+      theRightさKey: false,
+      theRight2Key: true,
+      theRightいKey: false,
+      theRightうKey: false,
+      theRight1Key: false,
+      theRightおKey: true,
+      theRightっKey: true,
+      theRightKagikakkoKey: false,
+      theカKey: false
+    });
+  });
+
+  it('shows brief for ambiguous kanji with star 刑', () => {
+    let brief = "漢432っ*た32おっ";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: true,
+      theLeftKagikakkoKey: false,
+      theLeft4Key: true,
+      theLeftたKey: false,
+      theLeftなKey: false,
+      theLeft3Key: true,
+      theLeftかKey: false,
+      theLeftさKey: false,
+      theLeft2Key: true,
+      theLeftいKey: false,
+      theLeftうKey: false,
+      theLeft1Key: false,
+      theLeftおKey: false,
+      theLeftっKey: true,
+      theStarKey: true,
+      dash: false,
+      theRight4Key: false,
+      theRightたKey: true,
+      theRightなKey: false,
+      theRight3Key: true,
+      theRightかKey: false,
+      theRightさKey: false,
+      theRight2Key: true,
+      theRightいKey: false,
+      theRightうKey: false,
+      theRight1Key: false,
+      theRightおKey: true,
+      theRightっKey: true,
+      theRightKagikakkoKey: false,
+      theカKey: false
+    });
+  });
+
+  it('shows brief for first stroke of multi-stroke word 食べる', () => {
+    let brief = "漢たさうおっ";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: true,
+      theLeftKagikakkoKey: false,
+      theLeft4Key: false,
+      theLeftたKey: true,
+      theLeftなKey: false,
+      theLeft3Key: false,
+      theLeftかKey: false,
+      theLeftさKey: true,
+      theLeft2Key: false,
+      theLeftいKey: false,
+      theLeftうKey: true,
+      theLeft1Key: false,
+      theLeftおKey: true,
+      theLeftっKey: true,
+      theStarKey: false,
+      dash: false,
+      theRight4Key: false,
+      theRightたKey: false,
+      theRightなKey: false,
+      theRight3Key: false,
+      theRightかKey: false,
+      theRightさKey: false,
+      theRight2Key: false,
+      theRightいKey: false,
+      theRightうKey: false,
+      theRight1Key: false,
+      theRightおKey: false,
+      theRightっKey: false,
+      theRightKagikakkoKey: false,
+      theカKey: false
+    });
+  });
+
+  it('shows brief for second stroke of multi-stroke word 食べる', () => {
+    let brief = "たなさいうお-たなう";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: false,
+      theLeftKagikakkoKey: false,
+      theLeft4Key: false,
+      theLeftたKey: true,
+      theLeftなKey: true,
+      theLeft3Key: false,
+      theLeftかKey: false,
+      theLeftさKey: true,
+      theLeft2Key: false,
+      theLeftいKey: true,
+      theLeftうKey: true,
+      theLeft1Key: false,
+      theLeftおKey: true,
+      theLeftっKey: false,
+      theStarKey: false,
+      dash: true,
+      theRight4Key: false,
+      theRightたKey: true,
+      theRightなKey: true,
+      theRight3Key: false,
+      theRightかKey: false,
+      theRightさKey: false,
+      theRight2Key: false,
+      theRightいKey: false,
+      theRightうKey: true,
+      theRight1Key: false,
+      theRightおKey: false,
+      theRightっKey: false,
+      theRightKagikakkoKey: false,
+      theカKey: false
+    });
+  });
+
+  it('shows brief with left keys for だ', () => {
+    let brief = "たなか";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: false,
+      theLeftKagikakkoKey: false,
+      theLeft4Key: false,
+      theLeftたKey: true,
+      theLeftなKey: true,
+      theLeft3Key: false,
+      theLeftかKey: true,
+      theLeftさKey: false,
+      theLeft2Key: false,
+      theLeftいKey: false,
+      theLeftうKey: false,
+      theLeft1Key: false,
+      theLeftおKey: false,
+      theLeftっKey: false,
+      theStarKey: false,
+      dash: false,
+      theRight4Key: false,
+      theRightたKey: false,
+      theRightなKey: false,
+      theRight3Key: false,
+      theRightかKey: false,
+      theRightさKey: false,
+      theRight2Key: false,
+      theRightいKey: false,
+      theRightうKey: false,
+      theRight1Key: false,
+      theRightおKey: false,
+      theRightっKey: false,
+      theRightKagikakkoKey: false,
+      theカKey: false
+    });
+  });
+
+  it('shows brief with right keys for だ', () => {
+    let brief = "-たなか";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: false,
+      theLeftKagikakkoKey: false,
+      theLeft4Key: false,
+      theLeftたKey: false,
+      theLeftなKey: false,
+      theLeft3Key: false,
+      theLeftかKey: false,
+      theLeftさKey: false,
+      theLeft2Key: false,
+      theLeftいKey: false,
+      theLeftうKey: false,
+      theLeft1Key: false,
+      theLeftおKey: false,
+      theLeftっKey: false,
+      theStarKey: false,
+      dash: true,
+      theRight4Key: false,
+      theRightたKey: true,
+      theRightなKey: true,
+      theRight3Key: false,
+      theRightかKey: true,
+      theRightさKey: false,
+      theRight2Key: false,
+      theRightいKey: false,
+      theRightうKey: false,
+      theRight1Key: false,
+      theRightおKey: false,
+      theRightっKey: false,
+      theRightKagikakkoKey: false,
+      theカKey: false
+    });
+  });
+
+  it('shows brief with left and right keys for です', () => {
+    let brief = "たなかいうお-さう";
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: false,
+      theLeftKagikakkoKey: false,
+      theLeft4Key: false,
+      theLeftたKey: true,
+      theLeftなKey: true,
+      theLeft3Key: false,
+      theLeftかKey: true,
+      theLeftさKey: false,
+      theLeft2Key: false,
+      theLeftいKey: true,
+      theLeftうKey: true,
+      theLeft1Key: false,
+      theLeftおKey: true,
+      theLeftっKey: false,
+      theStarKey: false,
+      dash: true,
+      theRight4Key: false,
+      theRightたKey: false,
+      theRightなKey: false,
+      theRight3Key: false,
+      theRightかKey: false,
+      theRightさKey: true,
+      theRight2Key: false,
+      theRightいKey: false,
+      theRightうKey: true,
+      theRight1Key: false,
+      theRightおKey: false,
+      theRightっKey: false,
+      theRightKagikakkoKey: false,
+      theカKey: false
+    });
+  });
+
+  it('shows all keys for full steno order ignoring dash', () => {
+    let brief = '漢「4たな3かさ2いう1おっ*4たな3かさ2いう1おっ」カ';
+    expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
+      the漢Key: true,
+      theLeftKagikakkoKey: true,
+      theLeft4Key: true,
+      theLeftたKey: true,
+      theLeftなKey: true,
+      theLeft3Key: true,
+      theLeftかKey: true,
+      theLeftさKey: true,
+      theLeft2Key: true,
+      theLeftいKey: true,
+      theLeftうKey: true,
+      theLeft1Key: true,
+      theLeftおKey: true,
+      theLeftっKey: true,
+      theStarKey: true,
+      dash: false,
+      theRight4Key: true,
+      theRightたKey: true,
+      theRightなKey: true,
+      theRight3Key: true,
+      theRightかKey: true,
+      theRightさKey: true,
+      theRight2Key: true,
+      theRightいKey: true,
+      theRightうKey: true,
+      theRight1Key: true,
+      theRightおKey: true,
+      theRightっKey: true,
+      theRightKagikakkoKey: true,
+      theカKey: true
     });
   });
 });
