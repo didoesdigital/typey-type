@@ -136,6 +136,58 @@ function mapBriefToDanishStenoKeys (brief) {
   return keys;
 }
 
+function mapBriefToJapaneseStenoKeys (brief) {
+  let keys = {
+    the漢Key: false,
+    theLeftKagikakkoKey: false,
+    theLeft4Key: false,
+    theLeftたKey: false,
+    theLeftなKey: false,
+    theLeft3Key: false,
+    theLeftかKey: false,
+    theLeftさKey: false,
+    theLeft2Key: false,
+    theLeftいKey: false,
+    theLeftうKey: false,
+    theLeft1Key: false,
+    theLeftおKey: false,
+    theLeftっKey: false,
+    theStarKey: false,
+    dash: false,
+    theRight4Key: false,
+    theRightたKey: false,
+    theRightなKey: false,
+    theRight3Key: false,
+    theRightかKey: false,
+    theRightさKey: false,
+    theRight2Key: false,
+    theRightいKey: false,
+    theRightうKey: false,
+    theRight1Key: false,
+    theRightおKey: false,
+    theRightっKey: false,
+    theRightKagikakkoKey: false,
+    theカKey: false
+  };
+
+  let briefLetters = brief.split("");
+
+  // stenoOrder and stenoKeys should always be updated together
+  let stenoOrder = ["漢", "「", "4", "た", "な", "3", "か", "さ", "2", "い", "う", "1", "お", "っ", "*", "-", "4", "た", "な", "3", "か", "さ", "2", "い", "う", "1", "お", "っ", "」", "カ"];
+  let stenoKeys = ["the漢Key", "theLeftKagikakkoKey", "theLeft4Key", "theLeftたKey", "theLeftなKey", "theLeft3Key", "theLeftかKey", "theLeftさKey", "theLeft2Key", "theLeftいKey", "theLeftうKey", "theLeft1Key", "theLeftおKey", "theLeftっKey", "theStarKey", "dash", "theRight4Key", "theRightたKey", "theRightなKey", "theRight3Key", "theRightかKey", "theRightさKey", "theRight2Key", "theRightいKey", "theRightうKey", "theRight1Key", "theRightおKey", "theRightっKey", "theRightKagikakkoKey", "theカKey"];
+
+  for (let i = 0; i < stenoOrder.length; i++) {
+    if (briefLetters.length > 0) {
+      if (briefLetters[0] === stenoOrder[i]) {
+        keys[stenoKeys[i]] = true;
+        briefLetters.shift();
+      }
+    }
+  }
+
+  return keys;
+}
+
 function mapBriefToKoreanModernCStenoKeys (brief) {
   let keys = {
     the1Key: false,
@@ -1215,6 +1267,7 @@ export {
   mapBriefToAmericanStenoKeys,
   mapBriefToDanishStenoKeys,
   mapBriefToItalianMichelaStenoKeys,
+  mapBriefToJapaneseStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
   trimAndSumUniqMetWords,
