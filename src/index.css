@@ -1091,6 +1091,32 @@ label {
   .revision-mode-button:hover {
     color: #596091; }
 
+.hide-recommendation-link {
+  background-color: transparent;
+  border: 0;
+  color: #596091;
+  font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-size: 12.8px;
+  letter-spacing: .05em;
+  margin-right: 12px;
+  margin-top: -12px;
+  text-transform: uppercase;
+  opacity: 0; }
+
+.panel:hover > .hide-recommendation-link,
+.hide-recommendation-link:focus,
+.hide-recommendation-link:hover {
+  color: #9193a8;
+  cursor: pointer;
+  opacity: 1; }
+
+.panel:hover > .hide-recommendation-link:active,
+.panel:hover > .hide-recommendation-link:focus,
+.hide-recommendation-link:active,
+.hide-recommendation-link:focus {
+  color: #202549;
+  opacity: 1; }
+
 .steno-stroke {
   font-family: "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
   background-color: #444444;
@@ -1625,11 +1651,13 @@ small .svg-icon-wrapper.svg-baseline svg {
   opacity: 0;
   transition: opacity .1s linear; }
 
+.recommendation-survey-link--shown,
 .scores--shown {
   filter: blur(0);
   opacity: 1;
   transition: filter .2s linear, opacity .2s linear !important; }
 
+.recommendation-survey-link--hidden,
 .scores--hidden {
   filter: blur(0.5rem) !important;
   opacity: 0 !important;
