@@ -5,7 +5,7 @@ import ErrorBoundary from './ErrorBoundary'
 import PseudoContentButton from './PseudoContentButton';
 import RecommendationBox from './RecommendationBox';
 import { getLessonIndexData } from './lessonIndexData';
-import { IconCheckmark, IconTriangleRight } from './Icon';
+import { IconCheckmark, IconTriangleRight, IconExternal } from './Icon';
 import { Link, Redirect } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
@@ -396,6 +396,33 @@ class Progress extends Component {
             <div className="flex flex-wrap justify-between">
               <div className="mw-384 w-336 order-1">
                 <ErrorBoundary relative={true}>
+                  <p className="panel p3 mb3 mt4">
+                    <span className="bg-danger">Help improve Typey Type!</span><br />
+                    <GoogleAnalytics.OutboundLink
+                      eventLabel="Recommendations survey"
+                      aria-label="Survey about Typey Type recommendations (external link opens in new tab)"
+                      to="https://docs.google.com/forms/d/e/1FAIpQLSf3XiHpSUTdgkGERdpoyqAIFA8t9YOGs8TvuU_d0bfsRe2vQA/viewform?usp=sf_link"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Give feedback on these <span className="nowrap">recommendations
+                        <Tooltip
+                          title="(external link opens in new tab)"
+                          className=""
+                          animation="shift"
+                          arrow="true"
+                          duration="200"
+                          tabIndex="0"
+                          tag="span"
+                          theme="didoesdigital"
+                          trigger="mouseenter focus click"
+                          onShow={this.props.setAnnouncementMessage}
+                        >
+                          <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                        </Tooltip>
+                      </span>
+                    </GoogleAnalytics.OutboundLink>
+                  </p>
                   <RecommendationBox
                     recommendedNextLesson={this.props.recommendedNextLesson}
                     setAnnouncementMessage={this.props.setAnnouncementMessage}
