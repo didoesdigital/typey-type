@@ -41,7 +41,20 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.study==="discover"}
                         onChange={this.props.chooseStudy}
                       />
-                      Discover
+                      <Tooltip
+                        title="Discover 5–15 new words with their briefs shown, concentrating on accuracy"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Discover
+                      </Tooltip>
                     </label>
                   </div>
                   <div className="radio-group ml3">
@@ -56,7 +69,20 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.study==="revise"}
                         onChange={this.props.chooseStudy}
                       />
-                      Revise
+                      <Tooltip
+                        title="Revise 50 briefs, recalling the briefs before revealing their strokes and avoiding fingerspelling"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Revise
+                      </Tooltip>
                     </label>
                   </div>
                   <div className="radio-group ml3">
@@ -71,7 +97,20 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.study==="drill"}
                         onChange={this.props.chooseStudy}
                       />
-                      Drill
+                      <Tooltip
+                        title="Drill common words to build your muscle memory, writing as fast as you can"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Drill
+                      </Tooltip>
                     </label>
                   </div>
                   <div className="radio-group ml3">
@@ -86,7 +125,20 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.study==="practice"}
                         onChange={this.props.chooseStudy}
                       />
-                      Practice
+                      <Tooltip
+                        title="Practice longer text in order, mimicking real usage as closely as possible"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Practice
+                      </Tooltip>
                     </label>
                   </div>
                 </div>
@@ -383,7 +435,20 @@ class UserSettings extends Component {
 
                 <div>
                     <div className="clearfix mb2 mt2">
-                      <label className="mb1 db">Match spaces</label>
+                      <Tooltip
+                        title="Set match spaces to suit your steno settings"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        <label className="mb1 db">Match spaces</label>
+                      </Tooltip>
                       <select name="spacePlacement" value={this.props.userSettings.spacePlacement} onChange={this.props.changeSpacePlacementUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
                         <option value="spaceBeforeOutput">Space before output</option>
                         <option value="spaceAfterOutput">Space after output</option>
@@ -393,7 +458,20 @@ class UserSettings extends Component {
                     </div>
 
                     <div className="mb2">
-                      <label className="mb1 db">Steno layout</label>
+                      <Tooltip
+                        title="Show steno diagrams that suit your steno layout"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        <label className="mb1 db">Steno layout</label>
+                      </Tooltip>
                       <select name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control w6">
                         <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
                         <option value="stenoLayoutPalantype">Palantype</option>
@@ -405,7 +483,20 @@ class UserSettings extends Component {
                     </div>
 
                     <div className="mb1">
-                      <label className="mb1 db">Sort</label>
+                      <Tooltip
+                        title="Sort the lesson (newest words need the most practice)"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        <label className="mb1 db">Sort</label>
+                      </Tooltip>
                       <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
                         <option value="sortOff">Lesson default</option>
                         <option value="sortRandom">Random</option>
@@ -416,7 +507,20 @@ class UserSettings extends Component {
                   </div>
 
                   <div className="mt2">
-                    <label htmlFor="limitNumberOfWords">Limit word count</label>
+                    <Tooltip
+                      title="Limit the number of words shown (0 for unlimited)"
+                      className="mw-240"
+                      animation="shift"
+                      arrow="true"
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital didoesdigital-sm"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
+                      <label htmlFor="limitNumberOfWords">Limit word count</label>
+                    </Tooltip>
                     <div className="mb2">
                       <NumericInput
                         autoCapitalize="off"
@@ -439,7 +543,20 @@ class UserSettings extends Component {
                       />
                     </div>
 
-                    <label htmlFor="startFromWord">Start from word</label>
+                    <Tooltip
+                      title="Start from this place in the lesson"
+                      className="mw-240"
+                      animation="shift"
+                      arrow="true"
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital didoesdigital-sm"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
+                      <label htmlFor="startFromWord">Start from word</label>
+                    </Tooltip>
                     <div className="mb2">
                       <NumericInput
                         autoCapitalize="off"
@@ -463,7 +580,20 @@ class UserSettings extends Component {
                       />
                     </div>
 
-                    <label htmlFor="repetitions">Repetitions</label>
+                    <Tooltip
+                      title="Repeat the lesson up to 30 times"
+                      className="mw-240"
+                      animation="shift"
+                      arrow="true"
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital didoesdigital-sm"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
+                      <label htmlFor="repetitions">Repetitions</label>
+                    </Tooltip>
                     <div className="mb1">
                       <NumericInput
                         autoCapitalize="off"
