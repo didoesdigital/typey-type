@@ -27,7 +27,22 @@ class UserSettings extends Component {
           <div className="text-small">
             <div className="flex flex-wrap mw-1024 mx-auto justify-center mb2">
               <fieldset className="dc hide-sm">
-                <legend className="flex">Choose study type:</legend>
+                <Tooltip
+                  title="Study types are recommended presets for settings you can change"
+                  className="mw-240"
+                  animation="shift"
+                  arrow="true"
+                  delay="100"
+                  duration="200"
+                  position="bottom"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital didoesdigital-sm"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <legend className="flex">Choose study type:</legend>
+                </Tooltip>
                 <div className="flex">
                   <div className="radio-group ml3">
                     <label className="radio-label">
@@ -46,7 +61,9 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
+                        position="bottom"
                         tabIndex="0"
                         tag="span"
                         theme="didoesdigital didoesdigital-sm"
@@ -74,7 +91,9 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
+                        position="bottom"
                         tabIndex="0"
                         tag="span"
                         theme="didoesdigital didoesdigital-sm"
@@ -102,7 +121,9 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
+                        position="bottom"
                         tabIndex="0"
                         tag="span"
                         theme="didoesdigital didoesdigital-sm"
@@ -130,7 +151,9 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
+                        position="bottom"
                         tabIndex="0"
                         tag="span"
                         theme="didoesdigital didoesdigital-sm"
@@ -166,6 +189,7 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
                         tabIndex="0"
                         tag="span"
@@ -194,6 +218,7 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
                         tabIndex="0"
                         tag="span"
@@ -222,6 +247,7 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
                         tabIndex="0"
                         tag="span"
@@ -249,6 +275,7 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
                         tabIndex="0"
                         tag="span"
@@ -276,6 +303,7 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
                         tabIndex="0"
                         tag="span"
@@ -303,6 +331,7 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
                         tabIndex="0"
                         tag="span"
@@ -330,6 +359,7 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
                         tabIndex="0"
                         tag="span"
@@ -362,6 +392,7 @@ class UserSettings extends Component {
                           className="mw-240"
                           animation="shift"
                           arrow="true"
+                          delay="100"
                           duration="200"
                           tabIndex="0"
                           tag="span"
@@ -389,6 +420,7 @@ class UserSettings extends Component {
                           className="mw-240"
                           animation="shift"
                           arrow="true"
+                          delay="100"
                           duration="200"
                           tabIndex="0"
                           tag="span"
@@ -412,7 +444,21 @@ class UserSettings extends Component {
                             checked={this.props.userSettings.showStrokesAsDiagrams}
                             onChange={this.props.changeShowStrokesAs}
                           />
-                          Show briefs as diagrams
+                          <Tooltip
+                            title="Show briefs as diagrams for your steno layout"
+                            className="mw-240"
+                            animation="shift"
+                            arrow="true"
+                            delay="100"
+                            duration="200"
+                            tabIndex="0"
+                            tag="span"
+                            theme="didoesdigital didoesdigital-sm"
+                            trigger="mouseenter focus click"
+                            onShow={this.props.setAnnouncementMessage}
+                          >
+                            Show briefs as diagrams
+                          </Tooltip>
                         </label>
                       </div>
                       <div className="radio-group">
@@ -426,7 +472,21 @@ class UserSettings extends Component {
                             checked={!this.props.userSettings.showStrokesAsDiagrams}
                             onChange={this.props.changeShowStrokesAs}
                           />
-                          Show briefs as text
+                          <Tooltip
+                            title="Show briefs as text and read to screen readers"
+                            className="mw-240"
+                            animation="shift"
+                            arrow="true"
+                            delay="100"
+                            duration="200"
+                            tabIndex="0"
+                            tag="span"
+                            theme="didoesdigital didoesdigital-sm"
+                            trigger="mouseenter focus click"
+                            onShow={this.props.setAnnouncementMessage}
+                          >
+                            Show briefs as text
+                          </Tooltip>
                         </label>
                       </div>
                     </div>
@@ -440,6 +500,7 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
                         tabIndex="0"
                         tag="span"
@@ -463,6 +524,7 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
                         tabIndex="0"
                         tag="span"
@@ -488,6 +550,7 @@ class UserSettings extends Component {
                         className="mw-240"
                         animation="shift"
                         arrow="true"
+                        delay="100"
                         duration="200"
                         tabIndex="0"
                         tag="span"
@@ -512,6 +575,7 @@ class UserSettings extends Component {
                       className="mw-240"
                       animation="shift"
                       arrow="true"
+                      delay="100"
                       duration="200"
                       tabIndex="0"
                       tag="span"
@@ -548,6 +612,7 @@ class UserSettings extends Component {
                       className="mw-240"
                       animation="shift"
                       arrow="true"
+                      delay="100"
                       duration="200"
                       tabIndex="0"
                       tag="span"
@@ -585,6 +650,7 @@ class UserSettings extends Component {
                       className="mw-240"
                       animation="shift"
                       arrow="true"
+                      delay="100"
                       duration="200"
                       tabIndex="0"
                       tag="span"

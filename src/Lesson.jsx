@@ -240,7 +240,7 @@ class Lesson extends Component {
 
         strokeTip = (
           <div className="stroke-tip" aria-live="polite" aria-atomic="true">
-            <span className="visually-hidden">Hint: </span>
+            <span className="visually-hidden" aria-hidden={this.props.userSettings.showStrokesAsDiagrams ? 'true' : 'false'}>Hint: </span>
             <div className="flex overflow-auto mr05">
               {this.props.userSettings.showStrokesAsDiagrams && strokes.map((strokeToDraw, index) =>
                 <React.Fragment key={index}>
