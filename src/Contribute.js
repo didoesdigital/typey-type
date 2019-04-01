@@ -39,7 +39,7 @@ class Contribute extends Component {
               >
                 Patreon
                 <Tooltip
-                  title="(external link opens in new tab)"
+                  title="Opens in a new tab"
                   animation="shift"
                   arrow="true"
                   className=""
@@ -56,9 +56,9 @@ class Contribute extends Component {
             </p>
 
             <h3 id="lessons">Lessons</h3>
-            <p>You can create your own <Link to="/lessons/custom">custom lesson</Link> and add it to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer">community’s <span className="nowrap">lessons
+            <p>You can create your own <Link to="/lessons/custom">custom lesson</Link> and add it to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span className="nowrap">community’s lessons
                 <Tooltip
-                  title="(external link opens in new tab)"
+                  title="Opens in a new tab"
                   className=""
                   animation="shift"
                   arrow="true"
@@ -80,9 +80,9 @@ class Contribute extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                tweet <span className="nowrap">@DiDoesDigital
+                <span className="nowrap">tweet @DiDoesDigital
                 <Tooltip
-                  title="(external link opens in new tab)"
+                  title="Opens in a new tab"
                   className=""
                   animation="shift"
                   arrow="true"
@@ -125,7 +125,7 @@ class Contribute extends Component {
             </p>
             <p>If you notice anything unexpected in a dictionary, especially Typey&nbsp;Type’s own dictionary, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=" target="_blank" rel="noopener noreferrer" id="ga--contribute--give-feedback-on-dictionary">share your feedback on that dictionary
                 <Tooltip
-                  title="(external link opens in new tab)"
+                  title="Opens in a new tab"
                   className=""
                   animation="shift"
                   arrow="true"
@@ -149,7 +149,7 @@ class Contribute extends Component {
               >
                 Di’s Steno Dictionaries <span className="nowrap">repo
                   <Tooltip
-                    title="(external link opens in new tab)"
+                    title="Opens in a new tab"
                     animation="shift"
                     arrow="true"
                     className=""
@@ -173,7 +173,7 @@ class Contribute extends Component {
               >
                 repo’s contributing section
                 <Tooltip
-                  title="(external link opens in new tab)"
+                  title="Opens in a new tab"
                   animation="shift"
                   arrow="true"
                   className=""
@@ -200,7 +200,7 @@ class Contribute extends Component {
               >
                 Share your feedback
                 <Tooltip
-                  title="(form opens in new tab)"
+                  title="Form opens in a new tab"
                   animation="shift"
                   arrow="true"
                   className=""
