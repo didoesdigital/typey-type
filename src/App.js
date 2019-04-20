@@ -1527,6 +1527,16 @@ class App extends Component {
     if (utterance === "!") { utterance = "exclamation mark"; }
     if (window.SpeechSynthesisUtterance) {
       let utterThis = new SpeechSynthesisUtterance(utterance);
+
+      let lang = navigator.language || navigator.userLanguage;
+      if (lang && (lang === "de" || lang.startsWith("de-")) && this.state.userSettings && this.state.userSettings.stenoLayout === "stenoLayoutPalantype") {
+        try {
+          utterThis.lang = lang;
+        } catch (e) {
+          console.log('Unable to set language to speak material', e);
+        }
+      }
+
       synth.speak(utterThis);
     }
   }
