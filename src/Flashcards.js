@@ -320,57 +320,57 @@ currentSlide: currentSlide
               <div className="visually-hidden"><h3>Carousel of lesson words and their strokes</h3></div>
 
               <div className={ this.props.fullscreen ? "" : "ml4 mr4"}>
-              <CarouselProvider
-                naturalSlideWidth={this.state.naturalSlideWidth}
-                naturalSlideHeight={this.state.naturalSlideHeight}
-                totalSlides={this.state.flashcards.length * 2 + 1}
-                className={"carousel--flashcards relative" + fullscreen}
-                currentSlide={this.state.currentSlide}
-              >
-                <Slider
-                  className={"carousel__slider" + fullscreen}
-                  flashcards={this.state.flashcards}
-                  key={this.state.flashcards.length + this.props.fullscreen}
-                  ref={flashcardsCarousel => this.flashcardsCarousel = flashcardsCarousel}
-                  callback={this.onChangeCurrentSlide.bind(this)}
+                <CarouselProvider
+                  naturalSlideWidth={this.state.naturalSlideWidth}
+                  naturalSlideHeight={this.state.naturalSlideHeight}
+                  totalSlides={this.state.flashcards.length * 2 + 1}
+                  className={"carousel--flashcards relative" + fullscreen}
+                  currentSlide={this.state.currentSlide}
                 >
-                  {slideNodes(this.state.flashcards)}
-                </Slider>
+                  <Slider
+                    className={"carousel__slider" + fullscreen}
+                    flashcards={this.state.flashcards}
+                    key={this.state.flashcards.length + this.props.fullscreen}
+                    ref={flashcardsCarousel => this.flashcardsCarousel = flashcardsCarousel}
+                    callback={this.onChangeCurrentSlide.bind(this)}
+                  >
+                    {slideNodes(this.state.flashcards)}
+                  </Slider>
 
-                {/* Page left, previous flashcard */}
-                <div className={"pagination-nav-button pagination-nav-button--prev absolute hide-in-fullscreen" + fullscreen}>
-                  <ButtonBack className="link-button" type="button" aria-label="Previous card"><span className="pagination-nav-button--prev__icon">◂</span></ButtonBack>
-                </div>
+                  {/* Page left, previous flashcard */}
+                  <div className={"pagination-nav-button pagination-nav-button--prev absolute hide-in-fullscreen" + fullscreen}>
+                    <ButtonBack className="link-button" type="button" aria-label="Previous card"><span className="pagination-nav-button--prev__icon">◂</span></ButtonBack>
+                  </div>
 
-                {/* Page right, next flashcard */}
-                <div className={"pagination-nav-button pagination-nav-button--next absolute right-0 hide-in-fullscreen" + fullscreen}>
-                  <ButtonNext className="link-button" type="button" aria-label="Next card">▸</ButtonNext>
-                </div>
+                  {/* Page right, next flashcard */}
+                  <div className={"pagination-nav-button pagination-nav-button--next absolute right-0 hide-in-fullscreen" + fullscreen}>
+                    <ButtonNext className="link-button" type="button" aria-label="Next card">▸</ButtonNext>
+                  </div>
 
-                <div className="text-center">
-                  { currentSlideContentType === 'phrase' ? <ButtonNext className="link-button carousel__button carousel__button--skip" type="button" onClick={this.nextSlide.bind(this)} value={this.state.currentSlideContent} aria-label="Next card">Skip</ButtonNext> : null }
+                  <div className="text-center">
+                    { currentSlideContentType === 'phrase' ? <ButtonNext className="link-button carousel__button carousel__button--skip" type="button" onClick={this.nextSlide.bind(this)} value={this.state.currentSlideContent} aria-label="Next card">Skip</ButtonNext> : null }
 
-                  { currentSlideContentType === 'stroke' ?
-                      <>
-                        <ButtonNext className="link-button carousel__button carousel__button--easy mr1" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="easy" value={this.state.currentSlideContent} aria-label="Easy, Next card">Easy</ButtonNext>
-                        <ButtonNext className="link-button carousel__button carousel__button--hard ml1" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="hard" value={this.state.currentSlideContent} aria-label="Hard, Next card">Hard</ButtonNext>
-                      </>
-                      :
-                      null
-                  }
+                    { currentSlideContentType === 'stroke' ?
+                        <>
+                          <ButtonNext className="link-button carousel__button carousel__button--easy mr1" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="easy" value={this.state.currentSlideContent} aria-label="Easy, Next card">Easy</ButtonNext>
+                          <ButtonNext className="link-button carousel__button carousel__button--hard ml1" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="hard" value={this.state.currentSlideContent} aria-label="Hard, Next card">Hard</ButtonNext>
+                        </>
+                        :
+                        null
+                    }
 
-                  {/* Fake, invisible button to keep space and avoid subsequent content moving up on finished step */}
-                  { currentSlideContentType === 'finished' ? <ButtonNext className="link-button v-hidden" type="button" aria-hidden="true"></ButtonNext> : null }
-                </div>
+                    {/* Fake, invisible button to keep space and avoid subsequent content moving up on finished step */}
+                    { currentSlideContentType === 'finished' ? <ButtonNext className="link-button v-hidden" type="button" aria-hidden="true"></ButtonNext> : null }
+                  </div>
 
-                {/* Fullscreen button */}
-                <div className={"checkbox-group text-center fullscreen-button fullscreen-button-ghost" + fullscreen}>
-                  <label className="absolute absolute--fill" aria-label="Fullscreen">
-                    <input className="absolute" type="checkbox" name="fullscreen" id="fullscreen" checked={this.props.fullscreen} onChange={this.props.changeFullscreen.bind(this)} />
-                    <IconFullscreen iconWidth="24" iconHeight="24" className="icon-button" title="custom title for this context" />
-                  </label>
-                </div>
-              </CarouselProvider>
+                  {/* Fullscreen button */}
+                  <div className={"checkbox-group text-center fullscreen-button fullscreen-button-ghost" + fullscreen}>
+                    <label className="absolute absolute--fill" aria-label="Fullscreen">
+                      <input className="absolute" type="checkbox" name="fullscreen" id="fullscreen" checked={this.props.fullscreen} onChange={this.props.changeFullscreen.bind(this)} />
+                      <IconFullscreen iconWidth="24" iconHeight="24" className="icon-button" title="custom title for this context" />
+                    </label>
+                  </div>
+                </CarouselProvider>
               </div>
 
 
