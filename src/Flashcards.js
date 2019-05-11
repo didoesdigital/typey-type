@@ -378,7 +378,7 @@ currentSlide: currentSlide
               <p className={"text-center hide-in-fullscreen" + fullscreen}>
                 <GoogleAnalytics.OutboundLink
                   eventLabel="Look up brief on StenoKnight’s Plover lookup"
-                  aria-label="Look up brief on StenoKnight’s Plover lookup (external link opens in new tab)"
+                  aria-label="Look up brief on StenoKnight’s Plover lookup (opens in new tab)"
                   to="http://stenoknight.com/plover/ploverlookup/"
                   className="text-small"
                   target="_blank"
@@ -386,7 +386,7 @@ currentSlide: currentSlide
                 >
                   Look up brief on StenoKnight’s Plover lookup
                   <Tooltip
-                    title="(external link opens in new tab)"
+                    title="(opens in new tab)"
                     animation="shift"
                     arrow="true"
                     className=""
