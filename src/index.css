@@ -448,6 +448,12 @@ input:focus::placeholder {
 .mr3 {
   margin-right: 24px; }
 
+.mr4 {
+  margin-right: 48px; }
+
+.mr5 {
+  margin-right: 56px; }
+
 .mr12 {
   margin-right: 96px; }
 
@@ -459,6 +465,9 @@ input:focus::placeholder {
 
 .ml3 {
   margin-left: 24px; }
+
+.ml4 {
+  margin-left: 48px; }
 
 .mt0 {
   margin-top: 0; }
@@ -601,6 +610,9 @@ input:focus::placeholder {
 
 .pt3 {
   padding-top: 24px; }
+
+.pt6 {
+  padding-top: 48px; }
 
 .pt24 {
   padding-top: 192px; }
@@ -1324,11 +1336,16 @@ label {
   z-index: 1; }
 
 .carousel--flashcards {
-  margin-left: 56px;
-  margin-right: 56px; }
-  .carousel--flashcards.fullscreen {
+  margin-left: 48px;
+  margin-right: 48px; }
+  .carousel--flashcards .fullscreen {
     margin-left: -16px;
     margin-right: -16px; }
+  @media (max-width: 768px) {
+    .carousel--flashcards {
+      max-width: 336px;
+      margin-left: auto;
+      margin-right: auto; } }
 
 .carousel__slider {
   margin: 0 auto; }

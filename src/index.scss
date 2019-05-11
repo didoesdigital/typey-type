@@ -21,7 +21,9 @@ $h3-size: $base-font-size * $font-scale * $font-scale; // 25.008px
 $h4-size: $base-font-size * $font-scale; // 20px
 $h5-size: $base-font-size; // 16px
 $h6-size: $base-font-size / $font-scale; // 12.8px
-$breakpoint: 1024px;
+$large-breakpoint: 1024px;
+$medium-breakpoint: 768px;
+// $small-breakpoint: 336px;
 $outline-shorthand: $brand-highlight auto 5px;
 $z-index-autocomplete-menu: 4;
 $z-index-vertical-text: 3;
@@ -139,7 +141,7 @@ th {
 }
 
 dl.inline-flex {
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     display: flex;
     flex-flow: row;
     flex-wrap: wrap;
@@ -148,7 +150,7 @@ dl.inline-flex {
 }
 
 dl.inline-flex dt {
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     flex: 0 0 134px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -156,7 +158,7 @@ dl.inline-flex dt {
 }
 
 dl.inline-flex dd {
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     flex: 0 0 434px;
     margin-left: auto;
     overflow: hidden;
@@ -462,10 +464,13 @@ input:focus::placeholder {
 .mr1     { margin-right: 8px; }
 .mr2     { margin-right: 16px; }
 .mr3     { margin-right: 24px; }
+.mr4     { margin-right: 48px; }
+.mr5     { margin-right: 56px; }
 .mr12    { margin-right: 96px; }
 .ml1     { margin-left: 8px; }
 .ml2     { margin-left: 16px; }
 .ml3     { margin-left: 24px; }
+.ml4     { margin-left: 48px; }
 .mt0     { margin-top: 0; }
 .mt1     { margin-top: 8px; }
 .mt2     { margin-top: 16px; }
@@ -521,6 +526,7 @@ input:focus::placeholder {
 .pr1     { padding-right: 8px; }
 .pr3     { padding-right: 24px; }
 .pt3     { padding-top: 24px; }
+.pt6     { padding-top: 48px; }
 .pt24    { padding-top: 192px; }
 
 .py05 {
@@ -720,7 +726,7 @@ input:focus::placeholder {
   min-height: 320px;
   // overflow: hidden;
 
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     min-width: 544px;
   }
 }
@@ -761,7 +767,7 @@ input:focus::placeholder {
   margin-left: auto;
   margin-right: auto;
 
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     min-width: 936px;
   }
 }
@@ -1267,7 +1273,7 @@ label {
   border: 1px solid $brand-primary;
   margin-left: auto;
   margin-right: auto;
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     min-width: 936px;
   }
 }
@@ -1276,7 +1282,7 @@ label {
   margin-right: auto;
   // opacity: 0;
   // position: absolute;
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     min-width: 936px;
   }
   top: 0;
@@ -1304,7 +1310,7 @@ label {
   text-align: left;
   transform: translateX(2px + 8px);
   width: 100%;
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     min-width: 960px;
   }
   @media (max-width: 736px) {
@@ -1419,21 +1425,21 @@ label {
 }
 
 .progress-layout {
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     display: grid;
     grid-template-columns: 4fr 3fr;
     grid-gap: 24px;
   }
 }
 .custom-page-layout {
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     display: grid;
     grid-template-columns: 4fr 3fr;
     grid-gap: 24px;
   }
 }
 .gtc-4fr-3fr {
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     display: grid;
     grid-template-columns: 4fr 3fr;
     grid-gap: 24px;
@@ -1490,11 +1496,18 @@ label {
 }
 
 .carousel--flashcards {
-  margin-left: $link-button-width + 16px;
-  margin-right: $link-button-width + 16px;
-  &.fullscreen {
+  margin-left: $link-button-width + 8px;
+  margin-right: $link-button-width + 8px;
+
+  & .fullscreen {
     margin-left: -16px;
     margin-right: -16px;
+  }
+
+  @media (max-width: $medium-breakpoint) {
+    max-width: 42 * 8px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }
 .carousel__slider {
@@ -1553,7 +1566,7 @@ label {
   &.pagination-nav-button {
     display: none;
   }
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     &.pagination-nav-button {
       display: inherit;
       position: inherit !important;
@@ -1582,7 +1595,7 @@ label {
   height: $link-button-height;
   top: 16px;
   right: 24px;
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     display: none;
   }
   &.fullscreen {
@@ -1689,7 +1702,7 @@ small .svg-icon-wrapper.svg-baseline svg {
 .strapline {
   display: none;
   // transition: color 0.3s ease;
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     left: 8px;
     top: 208px;
     top: 240px;
@@ -1761,7 +1774,7 @@ $lineAdjustment: 4px;
     top: 35px + 24px;
     width: calc(960px - 584px - 24px - 24px);
   }
-  @media (min-width: $breakpoint) {
+  @media (min-width: $large-breakpoint) {
     display: initial;
     left: 584px;
     padding-left: 24px;

@@ -319,11 +319,12 @@ currentSlide: currentSlide
               {/* Screenreader flashcard heading for context */}
               <div className="visually-hidden"><h3>Carousel of lesson words and their strokes</h3></div>
 
+              <div className={ this.props.fullscreen ? "" : "ml4 mr4"}>
               <CarouselProvider
                 naturalSlideWidth={this.state.naturalSlideWidth}
                 naturalSlideHeight={this.state.naturalSlideHeight}
                 totalSlides={this.state.flashcards.length * 2 + 1}
-                className={"carousel--flashcards mb6 relative" + fullscreen}
+                className={"carousel--flashcards relative" + fullscreen}
                 currentSlide={this.state.currentSlide}
               >
                 <Slider
@@ -370,12 +371,13 @@ currentSlide: currentSlide
                   </label>
                 </div>
               </CarouselProvider>
+              </div>
 
 
 
-              <p className="text-center mt1 mb0"><Link to="./" className={"text-small hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link></p>
+              <p className={"text-center mt1 mb0 pt6 hide-in-fullscreen" + fullscreen}><Link to="./" className={"text-small hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link></p>
               <p className={"text-center mb0 hide-in-fullscreen" + fullscreen}><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--flashcards--give-feedback">Give feedback on this flashcard (form opens in a new tab)</a></p>
-              <p className={"text-center hide-in-fullscreen" + fullscreen}>
+              <p className={"text-center mb0 hide-in-fullscreen" + fullscreen}>
                 <GoogleAnalytics.OutboundLink
                   eventLabel="Look up brief on StenoKnight’s Plover lookup"
                   aria-label="Look up brief on StenoKnight’s Plover lookup (opens in new tab)"
