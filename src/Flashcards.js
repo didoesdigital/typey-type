@@ -283,6 +283,14 @@ currentSlide: currentSlide
       flashcardsHeading = this.state.title + flashcardsSubtitle + ' flashcards';
     }
 
+    let slideIndex = 0;
+    if (this.flashcardsCarousel) { slideIndex = this.flashcardsCarousel.state.currentSlide; }
+    let currentSlideContentAndType = getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
+    let currentSlideContentType = "phrase";
+    if (currentSlideContentAndType && currentSlideContentAndType.length === 2) {
+      currentSlideContentType = currentSlideContentAndType[1];
+    }
+
     return (
       <div>
         <main id="main">
@@ -336,8 +344,14 @@ currentSlide: currentSlide
                 </div>
 
                 <div className="text-right mr2">
-                  <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="easy" value={this.state.currentSlideContent} aria-label="Next card">Easy</ButtonNext>
-                  <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="hard" value={this.state.currentSlideContent} aria-label="Next card">Hard</ButtonNext>
+                  { currentSlideContentType === 'phrase' ?
+                      <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} value={this.state.currentSlideContent} aria-label="Next card">Skip</ButtonNext>
+                      :
+                      <>
+                        <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="easy" value={this.state.currentSlideContent} aria-label="Easy, Next card">Easy</ButtonNext>
+                        <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="hard" value={this.state.currentSlideContent} aria-label="Hard, Next card">Hard</ButtonNext>
+                      </>
+                  }
                 </div>
 
                 {/* Fullscreen button */}
