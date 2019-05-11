@@ -15,6 +15,9 @@ import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-re
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Link } from 'react-router-dom';
 
+const shortestDimension = 3;
+const longestDimension = 4;
+
 let slideNodes = (flashcards) => {
   let slides = [];
 
@@ -63,8 +66,8 @@ class Flashcards extends Component {
           stroke: 'HRAOGD/SKWR-RBGS TPHRARB/TK-LS/KARDZ'
         },
       ],
-      naturalSlideWidth: 9,
-      naturalSlideHeight: 16,
+      naturalSlideWidth: shortestDimension,
+      naturalSlideHeight: longestDimension,
       currentSlide: 0,
       currentSlideContent: "",
       title: 'Steno',
@@ -96,10 +99,10 @@ class Flashcards extends Component {
       if (this.flashcardsCarousel) {
         currentSlide = this.flashcardsCarousel.state.currentSlide;
       }
-      if (this.state.naturalSlideWidth === 9) {
+      if (this.state.naturalSlideWidth === shortestDimension) {
         this.setState({
-          naturalSlideWidth: 16,
-          naturalSlideHeight: 9,
+          naturalSlideWidth: longestDimension,
+          naturalSlideHeight: shortestDimension,
 currentSlide: currentSlide
         });
       }
@@ -108,10 +111,10 @@ currentSlide: currentSlide
       if (this.flashcardsCarousel) {
         currentSlide = this.flashcardsCarousel.state.currentSlide;
       }
-      if (this.state.naturalSlideWidth === 16) {
+      if (this.state.naturalSlideWidth === longestDimension) {
         this.setState({
-          naturalSlideWidth: 9,
-          naturalSlideHeight: 16,
+          naturalSlideWidth: shortestDimension,
+          naturalSlideHeight: longestDimension,
 currentSlide: currentSlide
         });
       }
@@ -187,10 +190,10 @@ currentSlide: currentSlide
       if (this.flashcardsCarousel) {
         currentSlide = this.flashcardsCarousel.state.currentSlide;
       }
-      if (this.state.naturalSlideWidth === 9) {
+      if (this.state.naturalSlideWidth === shortestDimension) {
         this.setState({
-          naturalSlideWidth: 16,
-          naturalSlideHeight: 9,
+          naturalSlideWidth: longestDimension,
+          naturalSlideHeight: shortestDimension,
 currentSlide: currentSlide
         });
       }
