@@ -344,14 +344,19 @@ currentSlide: currentSlide
                 </div>
 
                 <div className="text-right mr2">
-                  { currentSlideContentType === 'phrase' ?
-                      <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} value={this.state.currentSlideContent} aria-label="Next card">Skip</ButtonNext>
-                      :
+                  { currentSlideContentType === 'phrase' ? <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} value={this.state.currentSlideContent} aria-label="Next card">Skip</ButtonNext> : null }
+
+                  { currentSlideContentType === 'stroke' ?
                       <>
                         <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="easy" value={this.state.currentSlideContent} aria-label="Easy, Next card">Easy</ButtonNext>
                         <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="hard" value={this.state.currentSlideContent} aria-label="Hard, Next card">Hard</ButtonNext>
                       </>
+                      :
+                      null
                   }
+
+                  {/* Fake, invisible button to keep space and avoid subsequent content moving up on finished step */}
+                  { currentSlideContentType === 'finished' ? <ButtonNext className="link-button v-hidden" type="button" aria-hidden="true"></ButtonNext> : null }
                 </div>
 
                 {/* Fullscreen button */}

@@ -321,6 +321,9 @@ input:focus::placeholder {
   .hide-lg {
     display: none; } }
 
+.v-hidden {
+  visibility: hidden; }
+
 .relative {
   position: relative; }
 

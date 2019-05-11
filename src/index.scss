@@ -379,6 +379,7 @@ input:focus::placeholder {
 .hide             { display: none; }
 .hide-xs          { @media (max-width: 959px) { display: none; } }
 .hide-lg          { @media (min-width: 960px) { display: none; } }
+.v-hidden         { visibility: hidden; }
 .relative         { position: relative; }
 .absolute         { position: absolute; }
 .lh-single        { line-height: 1; }
