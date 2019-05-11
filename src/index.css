@@ -433,6 +433,9 @@ input:focus::placeholder {
 .mb3 {
   margin-bottom: 24px; }
 
+.mb6 {
+  margin-bottom: 48px; }
+
 .mr05 {
   margin-right: 4px; }
 
@@ -1347,6 +1350,10 @@ label {
 .carousel__slider__slide__slideInner {
   padding-left: 16px;
   padding-right: 16px; }
+
+.carousel__button {
+  margin-top: -40px;
+  transform: translateY(40px); }
 
 .pagination-nav-button {
   top: calc(50% - 20px); }

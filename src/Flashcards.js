@@ -320,7 +320,7 @@ currentSlide: currentSlide
                 naturalSlideWidth={this.state.naturalSlideWidth}
                 naturalSlideHeight={this.state.naturalSlideHeight}
                 totalSlides={this.state.flashcards.length * 2 + 1}
-                className={"carousel--flashcards relative" + fullscreen}
+                className={"carousel--flashcards mb6 relative" + fullscreen}
                 currentSlide={this.state.currentSlide}
               >
                 <Slider
@@ -343,13 +343,13 @@ currentSlide: currentSlide
                   <ButtonNext className="link-button" type="button" aria-label="Next card">▸</ButtonNext>
                 </div>
 
-                <div className="text-right mr2">
-                  { currentSlideContentType === 'phrase' ? <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} value={this.state.currentSlideContent} aria-label="Next card">Skip</ButtonNext> : null }
+                <div className="text-center">
+                  { currentSlideContentType === 'phrase' ? <ButtonNext className="link-button carousel__button carousel__button--skip" type="button" onClick={this.nextSlide.bind(this)} value={this.state.currentSlideContent} aria-label="Next card">Skip</ButtonNext> : null }
 
                   { currentSlideContentType === 'stroke' ?
                       <>
-                        <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="easy" value={this.state.currentSlideContent} aria-label="Easy, Next card">Easy</ButtonNext>
-                        <ButtonNext className="link-button" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="hard" value={this.state.currentSlideContent} aria-label="Hard, Next card">Hard</ButtonNext>
+                        <ButtonNext className="link-button carousel__button carousel__button--easy mr1" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="easy" value={this.state.currentSlideContent} aria-label="Easy, Next card">Easy</ButtonNext>
+                        <ButtonNext className="link-button carousel__button carousel__button--hard ml1" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="hard" value={this.state.currentSlideContent} aria-label="Hard, Next card">Hard</ButtonNext>
                       </>
                       :
                       null
@@ -371,8 +371,8 @@ currentSlide: currentSlide
 
 
               <p className="text-center mt1 mb0"><Link to="./" className={"text-small hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link></p>
-              <p className="text-center mb0"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--flashcards--give-feedback">Give feedback on this flashcard (form opens in a new tab)</a></p>
-              <p className="text-center">
+              <p className={"text-center mb0 hide-in-fullscreen" + fullscreen}><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--flashcards--give-feedback">Give feedback on this flashcard (form opens in a new tab)</a></p>
+              <p className={"text-center hide-in-fullscreen" + fullscreen}>
                 <GoogleAnalytics.OutboundLink
                   eventLabel="Look up brief on StenoKnight’s Plover lookup"
                   aria-label="Look up brief on StenoKnight’s Plover lookup (external link opens in new tab)"
