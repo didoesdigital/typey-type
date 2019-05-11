@@ -360,7 +360,7 @@ currentSlide: currentSlide
                     }
 
                     {/* Fake, invisible button to keep space and avoid subsequent content moving up on finished step */}
-                    { currentSlideContentType === 'finished' ? <ButtonNext className="link-button v-hidden" type="button" aria-hidden="true"></ButtonNext> : null }
+                    { currentSlideContentType === 'finished' ? <ButtonNext className="link-button carousel__button v-hidden" type="button" aria-hidden="true"></ButtonNext> : null }
                   </div>
 
                   {/* Fullscreen button */}
