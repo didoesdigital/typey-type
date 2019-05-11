@@ -158,9 +158,9 @@ currentSlide: currentSlide
     let newlesson = false;
 
     let lessonpath = this.props.locationpathname;
-    if (lessonpath && lessonpath !== '/flashcards/') { lessonpath.replace(/flashcards$/,''); }
     let flashcardsProgress = Object.assign({}, this.props.flashcardsProgress);
     if (!flashcardsProgress[lessonpath]) {
+      // Give this new lesson a lastSeen timestamp
       flashcardsProgress = this.props.updateFlashcardsProgress(lessonpath);
       newlesson = true;
     }
@@ -205,7 +205,7 @@ currentSlide: currentSlide
   // this happens automagically whenever a slide changes, but doesn't have user
   // feedback to say if it was a known flashcard or not
   onChangeCurrentSlide(slideIndex) {
-    let lessonpath = this.props.locationpathname.replace(/flashcards$/,'');
+    let lessonpath = this.props.locationpathname;
     this.props.updateFlashcardsProgress(lessonpath);
 
     let [currentSlideContent, currentSlideContentType] = getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
@@ -402,11 +402,13 @@ function chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlas
         flashcardItemsToShow.push(item);
       }
     } else {
+      // If you've never seen this word in flashcards before, add it and set its rung to 0
       flashcardsMetWords[item.phrase] = {
         phrase: item.phrase,
         stroke: item.stroke,
         rung: 0
       }
+      // If you've never seen it, show the flashcard
       flashcardItemsToShow.push(item);
       // flashcardsMetWords = this.props.updateFlashcardsMetWords(item.phrase, "skip", item.stroke, 0);
     }
