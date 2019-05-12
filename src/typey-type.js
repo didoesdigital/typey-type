@@ -335,7 +335,7 @@ function mapBriefToPalantypeKeys (brief) {
   return keys;
 }
 
-function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual = '') {
+function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual) {
   let strokeAccuracy = true;
   let attempts = [];
 
