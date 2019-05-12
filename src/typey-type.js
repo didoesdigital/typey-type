@@ -380,8 +380,10 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActua
   // If it's the final stroke, fail any unmatched characters immediately
   if (attempts && targetStrokeCount <= attempts.length + 1) {
     if (unmatchedActual.length > 0) {
-      attempts.push(currentPhraseAttempts[currentPhraseAttempts.length - 1]);
-      return {strokeAccuracy: false, attempts: attempts};
+      if ((currentPhraseAttempts.length === 1 && targetStrokeCount === 1) || (currentPhraseAttempts.length > 1 && currentPhraseAttempts[currentPhraseAttempts.length - 2].length < currentPhraseAttempts[currentPhraseAttempts.length - 1].length)) {
+        attempts.push(currentPhraseAttempts[currentPhraseAttempts.length - 1]);
+        return {strokeAccuracy: false, attempts: attempts};
+      }
     }
   }
 
