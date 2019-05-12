@@ -468,6 +468,7 @@ class Lesson extends Component {
                         changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
                         changeStenoLayout={this.props.changeStenoLayout}
                         changeShowStrokesAs={this.props.changeShowStrokesAs}
+                        changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
                         changeUserSetting={this.props.changeUserSetting}
                         chooseStudy={this.props.chooseStudy}
                         disableUserSettings={this.props.disableUserSettings}
