@@ -1213,6 +1213,15 @@ describe('stroke accuracy for current phrase', () => {
       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({strokeAccuracy: false, attempts: [" wer"]});
     });
 
+    it("you wrote x when trying to write courageous in 1 stroke, giving you a misstroke AND recording x in attempts for feedback", () => {
+      let currentPhraseAttempts = [
+        "x"
+      ];
+      let targetStrokeCount = 1;
+      let unmatchedActual = "x";
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({strokeAccuracy: false, attempts: ["x"]});
+    });
+
     it("you wrote cor when trying to write courageous in 1 stroke", () => {
       let currentPhraseAttempts = [
         " ",
@@ -1252,6 +1261,20 @@ describe('stroke accuracy for current phrase', () => {
       let targetStrokeCount = 3;
       let unmatchedActual = "";
       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({strokeAccuracy: true, attempts: [" sign"]});
+    });
+
+    it("you wrote sigh then sig when trying to write silent in 2 strokes", () => {
+      let currentPhraseAttempts = [
+        " ",
+        " s",
+        " si",
+        " sig",
+        " sigh",
+        " sig"
+      ];
+      let targetStrokeCount = 2;
+      let unmatchedActual = "g";
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({strokeAccuracy: true, attempts: [" sigh"]});
     });
   });
 });
