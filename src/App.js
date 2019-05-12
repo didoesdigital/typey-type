@@ -1465,17 +1465,13 @@ class App extends Component {
 
     let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount, unmatchedActual);
     let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
-    let attempts = phraseMisstrokes.attempts; // false
-
+    let attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
 
     if (!accurateStroke && !this.state.showStrokesInLesson && this.state.userSettings.showStrokesOnMisstroke) {
       this.setState({showStrokesInLesson: true});
     }
 
     if (numberOfUnmatchedChars === 0) {
-      let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
-      let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
-      let attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
       newState.currentPhraseAttempts = []; // reset for next word
       newState.currentLessonStrokes = this.state.currentLessonStrokes; // [{word: "cat", attempts: ["cut"], stroke: "KAT"}, {word: "sciences", attempts ["sign", "ss"], stroke: "SAOEUPB/EPBC/-S"]
         newState.currentLessonStrokes.push({
