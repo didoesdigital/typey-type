@@ -338,7 +338,6 @@ function mapBriefToPalantypeKeys (brief) {
 function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual = '') {
   let strokeAccuracy = true;
   let attempts = [];
-  let finalStroke = false;
 
   for (let i = 0; i < currentPhraseAttempts.length - 1; i++) {
     if (currentPhraseAttempts[i-1] !== undefined && currentPhraseAttempts[i+1] !== undefined) {
@@ -373,8 +372,8 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActua
     return {strokeAccuracy: false, attempts: attempts};
   }
 
+  // If it's the final stroke, fail any unmatched characters immediately
   if (attempts && targetStrokeCount <= attempts.length + 1) {
-    finalStroke = true;
     if (unmatchedActual.length > 0) {
       attempts.push(currentPhraseAttempts[currentPhraseAttempts.length - 1]);
       return {strokeAccuracy: false, attempts: attempts};
