@@ -378,16 +378,18 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActua
   }
 
   // If it's the final stroke, fail any unmatched characters immediately
-  if (attempts && targetStrokeCount <= attempts.length + 1) {
-    if (unmatchedActual.length > 0) {
-      if ((currentPhraseAttempts.length === 1 && targetStrokeCount === 1) || (currentPhraseAttempts.length > 1 && currentPhraseAttempts[currentPhraseAttempts.length - 1].length > currentPhraseAttempts[currentPhraseAttempts.length - 2].length)) {
-        attempts.push(currentPhraseAttempts[currentPhraseAttempts.length - 1]);
-        return {strokeAccuracy: false, attempts: attempts};
-      }
-    }
+  // (unless you're undoing a stroke and typed text is getting shorter)
+  let nextAttempt = attempts.length + 1;
+  let isFinalStroke = nextAttempt >= targetStrokeCount;
+  let hasUnmatchedChars = unmatchedActual.length > 0;
+  let failedSingleStrokeBrief = currentPhraseAttempts.length === 1 && targetStrokeCount === 1;
+  let isTypedTextLongerThanPrevious = currentPhraseAttempts.length > 1 && currentPhraseAttempts[currentPhraseAttempts.length - 1].length > currentPhraseAttempts[currentPhraseAttempts.length - 2].length;
+
+  if (isFinalStroke && hasUnmatchedChars && (failedSingleStrokeBrief || isTypedTextLongerThanPrevious)) {
+    attempts.push(currentPhraseAttempts[currentPhraseAttempts.length - 1]);
+    return {strokeAccuracy: false, attempts: attempts};
   }
 
-  // console.log("Fewer attempts than expected strokes");
   return {strokeAccuracy: strokeAccuracy, attempts: attempts};
 }
 
