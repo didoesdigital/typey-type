@@ -1185,26 +1185,54 @@ describe('stroke accuracy for current phrase', () => {
       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" verticax", " verticaw"]});
     });
 
-//     it("you wrote were instead of we're", () => {
-//       let currentPhraseAttempts = [
-//       " ",
-//         " w",
-//         " we",
-//         " wer",
-//         " were",
-//         " wer",
-//         " we",
-//         " w",
-//         " ",
-//         " w",
-//         " we",
-//         " we'",
-//         " we'r",
-//         " we're"
-//       ];
-//       let targetStrokeCount = 1;
-//       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(false);
-//     });
+    it("you wrote were instead of we're", () => {
+      let currentPhraseAttempts = [
+        " ",
+        " w",
+        " we",
+        " wer"
+        // " wer",
+        // " were",
+        // " wer",
+        // " we",
+        // " w",
+        // " ",
+        // " w",
+        // " we",
+        // " we'",
+        // " we'r",
+        // " we're"
+      ];
+      let targetStrokeCount = 1;
+      let unmatchedActual = "r";
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({strokeAccuracy: false, attempts: [" wer"]});
+    });
+
+    it("you wrote cor when trying to write courageous in 1 stroke", () => {
+      let currentPhraseAttempts = [
+        " ",
+        " c",
+        " co",
+        " cor"
+        // " cor",
+        // " co",
+        // " c",
+        // " ",
+        // " c",
+        // " co",
+        // " cou",
+        // " cour",
+        // " coura",
+        // " courag",
+        // " courage",
+        // " courageo",
+        // " courageou",
+        // " courageous"
+      ];
+      let targetStrokeCount = 1;
+      let unmatchedActual = "r";
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({strokeAccuracy: false, attempts: [" cor"]});
+    });
 
 //     it("you wrote we're instead of were", () => {
 //       let currentPhraseAttempts = [" ", " w", " we", " we'", " we'r", " we're", " we'r", " we'", " we", " w", " ", " w", " we", " wer", " were"];
@@ -1571,7 +1599,8 @@ describe('loadPersonalPreferences', () => {
         repetitions: 3,
         showScoresWhileTyping: true,
         showStrokes: true,
-        showStrokesAsDiagrams: false,
+        showStrokesAsDiagrams: true,
+        showStrokesOnMisstroke: true,
         stenoLayout: 'stenoLayoutAmericanSteno',
         hideStrokesOnLastRepetition: true,
         spacePlacement: 'spaceOff',
