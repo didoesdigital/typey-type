@@ -1247,7 +1247,7 @@ describe('stroke accuracy for current phrase', () => {
   });
 
   describe('should return true for real successful meetings', () => {
-    it('should return true for real successful meetings', () => {
+    it('you wrote sign and sciences for sciences with 3 stroke target', () => {
       let currentPhraseAttempts = [" ", " s", " si", " sig", " sign", " sig", " si", " s", " sc", " sci", " scie", " scien", " scienc", " science", " sciences"];
       let targetStrokeCount = 3;
       let unmatchedActual = "";
