@@ -1474,13 +1474,13 @@ class App extends Component {
     if (numberOfUnmatchedChars === 0) {
       newState.currentPhraseAttempts = []; // reset for next word
       newState.currentLessonStrokes = this.state.currentLessonStrokes; // [{word: "cat", attempts: ["cut"], stroke: "KAT"}, {word: "sciences", attempts ["sign", "ss"], stroke: "SAOEUPB/EPBC/-S"]
-        newState.currentLessonStrokes.push({
-          word: this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase,
-          attempts: attempts,
-          stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke,
-          checked: true,
-          accuracy: accurateStroke
-        });
+      newState.currentLessonStrokes.push({
+        word: this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase,
+        attempts: attempts,
+        stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke,
+        checked: true,
+        accuracy: accurateStroke
+      });
       // can these newState assignments be moved down below the scores assignments?
 
       let strokeHintShown = shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition);
