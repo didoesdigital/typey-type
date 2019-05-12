@@ -1134,7 +1134,8 @@ describe('stroke accuracy for current phrase', () => {
         " cat"
       ];
       let targetStrokeCount = 1;
-      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
+      let unmatchedActual = "";
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
     });
 
     it('you wrote cut instead of cat and Plover backtracked to " "', () => {
@@ -1151,7 +1152,8 @@ describe('stroke accuracy for current phrase', () => {
         " cat"
       ];
       let targetStrokeCount = 1;
-      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
+      let unmatchedActual = "";
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
     });
 
     it('you wrote cut instead of cat and Plover backtracked to ""', () => {
@@ -1170,19 +1172,22 @@ describe('stroke accuracy for current phrase', () => {
         " cat"
       ];
       let targetStrokeCount = 1;
-      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
+      let unmatchedActual = "";
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({strokeAccuracy: false, attempts: [" cut"]});
     });
 
     it('you wrote sign, ss, and ss for sciences', () => {
       let currentPhraseAttempts = [" ", " s", " si", " sig", " sign", " sig", " si", " s", " ss", " s", " ss", " s", " sc", " sci", " scie", " scien", " scienc", " science", " sciences"];
       let targetStrokeCount = 3;
-      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" sign", " ss", " ss"]});
+      let unmatchedActual = "";
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({strokeAccuracy: false, attempts: [" sign", " ss", " ss"]});
     });
 
     it('you wrote "verticax", "verticaw" for vertical', () => {
       let currentPhraseAttempts = [" ", " v", " ve", " ver", " vert", " verti", " vertic", " vertica", " verticax", " verticaw", " vertical"];
       let targetStrokeCount = 2;
-      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: false, attempts: [" verticax", " verticaw"]});
+      let unmatchedActual = "";
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({strokeAccuracy: false, attempts: [" verticax", " verticaw"]});
     });
 
     it("you wrote were instead of we're", () => {
@@ -1245,7 +1250,8 @@ describe('stroke accuracy for current phrase', () => {
     it('should return true for real successful meetings', () => {
       let currentPhraseAttempts = [" ", " s", " si", " sig", " sign", " sig", " si", " s", " sc", " sci", " scie", " scien", " scienc", " science", " sciences"];
       let targetStrokeCount = 3;
-      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual({strokeAccuracy: true, attempts: [" sign"]});
+      let unmatchedActual = "";
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({strokeAccuracy: true, attempts: [" sign"]});
     });
   });
 });
