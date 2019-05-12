@@ -1463,16 +1463,12 @@ class App extends Component {
       userSettings: this.state.userSettings
     };
 
-    let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount);
+    let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount, unmatchedActual);
     let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
     let attempts = phraseMisstrokes.attempts; // false
 
-    let shorterThanPrevious = false;
-    if (currentPhraseAttempts && currentPhraseAttempts.length > 2) {
-      shorterThanPrevious = currentPhraseAttempts[currentPhraseAttempts.length - 1].length < currentPhraseAttempts[currentPhraseAttempts.length - 2].length;
-    }
 
-    if (!accurateStroke && !this.state.showStrokesInLesson && this.state.userSettings.showStrokesOnMisstroke && (attempts && attempts.length > this.state.targetStrokeCount && !shorterThanPrevious) ) {
+    if (!accurateStroke && !this.state.showStrokesInLesson && this.state.userSettings.showStrokesOnMisstroke) {
       this.setState({showStrokesInLesson: true});
     }
 
