@@ -392,7 +392,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
 
       let limitNumberOfWords = Math.min(15, wordCount, wordsLeftToDiscover);
 
-      if (recommendedDiscoverLesson.path.includes("briefs") || recommendedDiscoverLesson.path.includes("punctuation")) {
+      if (recommendedDiscoverLesson.path.includes("briefs") || recommendedDiscoverLesson.path.includes("punctuation") || recommendedDiscoverLesson.path.includes("longest")) {
         limitNumberOfWords = Math.min(5, wordCount, wordsLeftToDiscover);
         discoverParams = discoverParams.replace("limitNumberOfWords=15", "limitNumberOfWords=" + limitNumberOfWords.toString());
       }
