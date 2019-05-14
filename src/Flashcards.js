@@ -348,7 +348,7 @@ currentSlide: currentSlide
                   </div>
 
                   <div className="text-center">
-                    { currentSlideContentType === 'phrase' ? <ButtonNext className="link-button carousel__button carousel__button--skip" type="button" onClick={this.nextSlide.bind(this)} value={this.state.currentSlideContent} aria-label="Next card">Skip</ButtonNext> : null }
+                    { currentSlideContentType === 'phrase' ? <ButtonNext className="link-button carousel__button carousel__button--skip" type="button" onClick={this.nextSlide.bind(this)} value={this.state.currentSlideContent} aria-label="Next card">Show</ButtonNext> : null }
 
                     { currentSlideContentType === 'stroke' ?
                         <>
