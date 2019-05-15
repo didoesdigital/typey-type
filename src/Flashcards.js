@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { IconFullscreen } from './Icon';
 import GoogleAnalytics from 'react-ga';
+import FlashcardsCarouselActionButtons from './FlashcardsCarouselActionButtons';
 import { IconExternal } from './Icon';
 import {
   Tooltip,
@@ -70,6 +71,7 @@ class Flashcards extends Component {
       naturalSlideHeight: longestDimension,
       currentSlide: 0,
       currentSlideContent: "",
+      currentSlideContentType: "phrase", // "phrase" || "stroke" || "finished"
       title: 'Steno',
       subtitle: '',
     }
@@ -151,7 +153,9 @@ currentSlide: currentSlide
 
   setupFlashCards(event) {
     let shuffle = false;
+    let unfocus = false;
     if (event) {
+      unfocus = event.target.dataset.unfocus;
       if (event.target.dataset.shuffle) { shuffle = true; }
       event.preventDefault()
     };
@@ -202,6 +206,30 @@ currentSlide: currentSlide
     this.setState({
       flashcards: flashcards,
       currentSlide: currentSlide
+    }, () => {
+      window.setTimeout(function ()
+      {
+        if (unfocus) {
+          if (this.hardButton) {
+            let element = document.getElementById('hardButton');
+            if (element) {
+              element.focus();
+            }
+          }
+          else if (this.showButton) {
+            let element = document.getElementById('showButton');
+            if (element) {
+              element.focus();
+            }
+          }
+          else if (this.shuffleButton) {
+            let element = document.getElementById('shuffleButton');
+            if (element) {
+              element.focus();
+            }
+          }
+        }
+      }, 0);
     });
   }
 
@@ -223,7 +251,8 @@ currentSlide: currentSlide
 
       // this.nextSlide();
     this.setState({
-      currentSlide: slideIndex
+      currentSlide: slideIndex,
+      currentSlideContentType: currentSlideContentType,
     }, () => {
     // console.log(getCurrentSlideContentAndType(this.state.flashcards, slideIndex));
     });
@@ -232,8 +261,10 @@ currentSlide: currentSlide
   // this happens specifically when you click Easy/Hard and that feedback needs to be recorded
   nextSlide(event) {
     let feedback = "skip";
+    let unfocus = false;
     if (event) {
       feedback = event.target.dataset.flashcardFeedback;
+      unfocus = event.target.dataset.unfocus;
     }
     let slideIndex = 0;
     if (this.flashcardsCarousel) { slideIndex = this.flashcardsCarousel.state.currentSlide; }
@@ -246,9 +277,35 @@ currentSlide: currentSlide
       let stroke = getStrokeForCurrentSlideContent(currentSlideContent, this.state.sourceMaterial);
       this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke, this.state.flashcardsMetWords);
     }
+
     // debugger
     this.setState({
       currentSlideContent: currentSlideContent,
+      currentSlideContentType: currentSlideContentType
+    }, () => {
+      window.setTimeout(function ()
+      {
+        if (unfocus) {
+          if (this.hardButton) {
+            let element = document.getElementById('hardButton');
+            if (element) {
+              element.focus();
+            }
+          }
+          else if (this.showButton) {
+            let element = document.getElementById('showButton');
+            if (element) {
+              element.focus();
+            }
+          }
+          else if (this.shuffleButton) {
+            let element = document.getElementById('shuffleButton');
+            if (element) {
+              element.focus();
+            }
+          }
+        }
+      }, 0);
     });
   }
 
@@ -347,22 +404,13 @@ currentSlide: currentSlide
                     <ButtonNext className="link-button" type="button" aria-label="Next card">▸</ButtonNext>
                   </div>
 
-                  <div className="text-center">
-                    { currentSlideContentType === 'phrase' ? <ButtonNext className="link-button carousel__button carousel__button--skip" type="button" onClick={this.nextSlide.bind(this)} value={this.state.currentSlideContent} aria-label="Next card">Show</ButtonNext> : null }
-
-                    { currentSlideContentType === 'stroke' ?
-                        <>
-                          <ButtonNext className="link-button carousel__button carousel__button--easy mr1" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="easy" value={this.state.currentSlideContent} aria-label="Easy, Next card">Easy</ButtonNext>
-                          <ButtonNext className="link-button carousel__button carousel__button--hard ml1" type="button" onClick={this.nextSlide.bind(this)} data-flashcard-feedback="hard" value={this.state.currentSlideContent} aria-label="Hard, Next card">Hard</ButtonNext>
-                        </>
-                        :
-                        null
-                    }
-
-                    {/* Finished buttons; they also keep space and avoid subsequent content moving up on finished step */}
-                    { currentSlideContentType === 'finished' ? <button onClick={this.setupFlashCards.bind(this)} className="mr1 link-button carousel__button">Restart</button> : null }
-                    { currentSlideContentType === 'finished' ? <button onClick={this.setupFlashCards.bind(this)} className="ml1 link-button carousel__button" data-shuffle="true">Shuffle</button> : null }
-                  </div>
+                  <FlashcardsCarouselActionButtons
+                    ButtonNext={ButtonNext}
+                    currentSlideContent={this.state.currentSlideContent}
+                    currentSlideContentType={this.state.currentSlideContentType}
+                    nextSlide={this.nextSlide.bind(this)}
+                    setupFlashCards={this.setupFlashCards.bind(this)}
+                  />
 
                   {/* Fullscreen button */}
                   <div className={"checkbox-group text-center fullscreen-button fullscreen-button-ghost" + fullscreen}>
