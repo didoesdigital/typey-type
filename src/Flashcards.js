@@ -207,6 +207,10 @@ currentSlide: currentSlide
       flashcards: flashcards,
       currentSlide: currentSlide
     }, () => {
+      // A hack for returning focus to a sensible carousel action button
+      // This is used in 2 places
+      // https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
+      // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
       window.setTimeout(function ()
       {
         if (unfocus) {
@@ -283,6 +287,10 @@ currentSlide: currentSlide
       currentSlideContent: currentSlideContent,
       currentSlideContentType: currentSlideContentType
     }, () => {
+      // A hack for returning focus to a sensible carousel action button
+      // This is used in 2 places
+      // https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
+      // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
       window.setTimeout(function ()
       {
         if (unfocus) {

@@ -1351,6 +1351,10 @@ class App extends Component {
     }, () => {
       this.stopLesson();
       this.setupLesson();
+
+      // A hack for returning focus to your-typed-text
+      // https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
+      // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
       window.setTimeout(function ()
       {
         const element = document.getElementById('your-typed-text');
