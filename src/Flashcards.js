@@ -343,14 +343,6 @@ currentSlide: currentSlide
       flashcardsHeading = this.state.title + flashcardsSubtitle + ' flashcards';
     }
 
-    let slideIndex = 0;
-    if (this.flashcardsCarousel) { slideIndex = this.flashcardsCarousel.state.currentSlide; }
-    let currentSlideContentAndType = getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
-    let currentSlideContentType = "phrase";
-    if (currentSlideContentAndType && currentSlideContentAndType.length === 2) {
-      currentSlideContentType = currentSlideContentAndType[1];
-    }
-
     return (
       <div>
         <main id="main">
