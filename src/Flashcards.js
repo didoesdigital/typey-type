@@ -359,8 +359,9 @@ currentSlide: currentSlide
                         null
                     }
 
-                    {/* Fake, invisible button to keep space and avoid subsequent content moving up on finished step */}
-                    { currentSlideContentType === 'finished' ? <ButtonNext className="link-button carousel__button v-hidden" type="button" aria-hidden="true"></ButtonNext> : null }
+                    {/* Finished buttons; they also keep space and avoid subsequent content moving up on finished step */}
+                    { currentSlideContentType === 'finished' ? <button onClick={this.setupFlashCards.bind(this)} className="mr1 link-button carousel__button">Restart</button> : null }
+                    { currentSlideContentType === 'finished' ? <button onClick={this.setupFlashCards.bind(this)} className="ml1 link-button carousel__button" data-shuffle="true">Shuffle</button> : null }
                   </div>
 
                   {/* Fullscreen button */}
