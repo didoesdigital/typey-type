@@ -256,6 +256,7 @@ currentSlide: currentSlide
       // this.nextSlide();
     this.setState({
       currentSlide: slideIndex,
+      currentSlideContent: currentSlideContent,
       currentSlideContentType: currentSlideContentType,
     }, () => {
     // console.log(getCurrentSlideContentAndType(this.state.flashcards, slideIndex));
