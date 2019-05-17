@@ -293,7 +293,7 @@ class Lesson extends Component {
     }
 
     if (this.props.lesson) {
-      if (this.isFinished() && !this.isOverview()) {
+      if (this.isFinished() && !this.isOverview() && !this.isFlashcards()) {
         return (
           <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
             <main id="main">
