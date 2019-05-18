@@ -225,6 +225,7 @@ class App extends Component {
         link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + PARAMS.practiceParams
       },
       flashcardsCourseIndex: 0,
+      flashcardsCourseLevel: "noviceCourse", // noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
       fullscreen: false,
       hideOtherSettings: false,
       recommendationHistory: { currentStep: null },
@@ -1436,7 +1437,7 @@ class App extends Component {
   }
 
   updateFlashcardsRecommendation() {
-    getFlashcardsNextLesson(this.state.flashcardsProgress, "expertCourse", this.state.flashcardsCourseIndex)
+    getFlashcardsNextLesson(this.state.flashcardsProgress, this.state.flashcardsCourseLevel, this.state.flashcardsCourseIndex)
       .then((nextFlashcardsLessonAndCourseIndex) => {
         let [nextFlashcardsLesson, currentFlashcardsCourseIndex] = nextFlashcardsLessonAndCourseIndex;
 
