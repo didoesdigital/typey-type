@@ -595,8 +595,8 @@ input:focus::placeholder {
 .color-green-bright { color: saturate(add-tint($brand-success, 20%), 10%); }
 
 .text-uppercase {
+  letter-spacing: .1em;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
 }
 
 .de-emphasized { color: desaturate(add-tint($brand-primary, 30%), 40%); }
@@ -607,12 +607,15 @@ input:focus::placeholder {
   list-style-type: none;
   margin-left: 0;
 }
+
 .unstyled-list-item {
   margin-left: 0;
 }
+
 .wrap {
-  overflow-wrap: break-word; // break long words if they won't naturally break anywhere on one line
-  word-wrap: break-word; // for IE 11
+  overflow-wrap: break-word;
+  word-break: break-word;
+  word-wrap: break-word; // IE 11, alias for overflow-wrap
 }
 
 

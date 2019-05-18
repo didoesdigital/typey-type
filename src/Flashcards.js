@@ -26,10 +26,18 @@ let slideNodes = (flashcards) => {
     slides.push(
       <React.Fragment key={i}>
         <Slide index={i + "-phrase"} key={i + "-phrase"} innerClassName={"carousel__slider__slide__slideInner"}>
-          <div className="carousel__slider__slide flex items-center justify-center">{item.phrase}</div>
+          <div className="carousel__slider__slide flex items-center justify-center">
+            <div className="flex items-center justify-center p3 wrap">
+              {item.phrase}
+            </div>
+          </div>
         </Slide>
         <Slide index={i + "-stroke"} key={i + "-stroke"} innerClassName={"carousel__slider__slide__slideInner"}>
-          <div className="carousel__slider__slide flex items-center justify-center">{item.stroke}</div>
+          <div className="carousel__slider__slide flex items-center justify-center">
+            <div className="flex items-center justify-center p3 wrap">
+              {item.stroke}
+            </div>
+          </div>
         </Slide>
       </React.Fragment>
     );

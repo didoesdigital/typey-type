@@ -699,8 +699,8 @@ input:focus::placeholder {
   color: #457e50; }
 
 .text-uppercase {
-  text-transform: uppercase;
-  letter-spacing: 0.1em; }
+  letter-spacing: .1em;
+  text-transform: uppercase; }
 
 .de-emphasized {
   color: #757575; }
@@ -717,6 +717,7 @@ input:focus::placeholder {
 
 .wrap {
   overflow-wrap: break-word;
+  word-break: break-word;
   word-wrap: break-word; }
 
 .divider {
