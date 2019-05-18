@@ -9,6 +9,48 @@ type Lesson = {
 };
 type PresentedMaterial = [{phrase: '', stroke: ''}];
 
+function relativeTimeAgo(timeNow : number, timeInThePast : number) {
+  let timeInThePastUnit = " minutes";
+  let timeInThePastHumanized = Math.round((timeNow - timeInThePast) / 60000);
+  let relativeTimeAgo = "";
+
+  if (timeInThePastHumanized >= 60) {
+    timeInThePastHumanized = Math.round(timeInThePastHumanized / 60);
+    timeInThePastUnit = " hours";
+    if (timeInThePastHumanized >= 24) {
+      timeInThePastHumanized = Math.round(timeInThePastHumanized / 24);
+      timeInThePastUnit = " days";
+      if (timeInThePastHumanized >= 7) {
+        timeInThePastHumanized = Math.round(timeInThePastHumanized / 7);
+        timeInThePastUnit = " weeks";
+      }
+    }
+  }
+
+
+  if (timeInThePastHumanized === 1) {
+    switch (timeInThePastUnit) {
+      case " minutes":
+        timeInThePastUnit = " minute";
+        break;
+      case " hours":
+        timeInThePastUnit = " hour";
+        break;
+      case " days":
+        timeInThePastUnit = " day";
+        break;
+      case " weeks":
+        timeInThePastUnit = " week";
+        break;
+      default:
+        timeInThePastUnit = " minute";
+    }
+  }
+
+  relativeTimeAgo = "" + timeInThePastHumanized + timeInThePastUnit;
+  return relativeTimeAgo;
+}
+
 function isLessonTextValid(lessonText : string) {
   return !(lessonText === '' || typeof lessonText !== 'string' || (typeof lessonText === 'string' && lessonText.toLowerCase().startsWith('<!doctype html>')));
 }
@@ -55,4 +97,4 @@ function randomise(array : Array<PresentedMaterial>) {
   return array;
 }
 
-export { matchLessonToTerm, sortLessons, isPeak, randomise, isLessonTextValid};
+export { relativeTimeAgo, matchLessonToTerm, sortLessons, isPeak, randomise, isLessonTextValid};

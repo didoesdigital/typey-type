@@ -3,6 +3,7 @@ import * as PARAMS from './params.js';
 import { randomise, isLessonTextValid } from './utils';
 import { getLessonIndexData } from './lessonIndexData';
 import { getRecommendedNextLesson } from './recommendations';
+import { getFlashcardsNextLesson } from './flashcardsRecommendations';
 import {
   createWordListFromMetWords,
   parseCustomMaterial,
@@ -217,6 +218,13 @@ class App extends Component {
       },
       flashcardsProgress: {
       },
+      flashcardsNextLesson: {
+        lastSeen: 1558144862000, // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
+        linkTitle: "Prefixes",
+        linkText: "Study",
+        link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + PARAMS.practiceParams
+      },
+      flashcardsCourseIndex: 0,
       fullscreen: false,
       hideOtherSettings: false,
       recommendationHistory: { currentStep: null },
@@ -1425,7 +1433,30 @@ class App extends Component {
           }
         });
       });
+  }
 
+  updateFlashcardsRecommendation() {
+    getFlashcardsNextLesson(this.state.flashcardsProgress, "expertCourse", this.state.flashcardsCourseIndex)
+      .then((nextFlashcardsLessonAndCourseIndex) => {
+        let [nextFlashcardsLesson, currentFlashcardsCourseIndex] = nextFlashcardsLessonAndCourseIndex;
+
+        this.setState({
+          flashcardsCourseIndex: currentFlashcardsCourseIndex,
+          flashcardsNextLesson: nextFlashcardsLesson
+        }, () => {
+        });
+      })
+      .catch( error => {
+        console.log(error);
+        this.setState({
+          flashcardsNextLesson: {
+            lastSeen: Date.now(), // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
+            linkTitle: "Error",
+            linkText: "Error",
+            link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + PARAMS.practiceParams
+          }
+        });
+      });
   }
 
   updateMarkup(event) {
@@ -1751,10 +1782,12 @@ class App extends Component {
                         metWords={this.state.metWords}
                         flashcardsMetWords={this.state.flashcardsMetWords}
                         flashcardsProgress={this.state.flashcardsProgress}
+                        flashcardsNextLesson={this.state.flashcardsNextLesson}
                         recommendationHistory={this.state.recommendationHistory}
                         recommendedNextLesson={this.state.recommendedNextLesson}
                         lessonsProgress={this.state.lessonsProgress}
                         lessonIndex={this.state.lessonIndex}
+                        updateFlashcardsRecommendation={this.updateFlashcardsRecommendation.bind(this)}
                         updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
                         yourSeenWordCount={this.state.yourSeenWordCount}
                         yourMemorisedWordCount={this.state.yourMemorisedWordCount}

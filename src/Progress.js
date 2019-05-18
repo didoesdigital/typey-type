@@ -4,6 +4,7 @@ import AnimateHeight from 'react-animate-height';
 import GoogleAnalytics from 'react-ga';
 import ErrorBoundary from './ErrorBoundary'
 import PseudoContentButton from './PseudoContentButton';
+import FlashcardsBox from './FlashcardsBox';
 import RecommendationBox from './RecommendationBox';
 import { getLessonIndexData } from './lessonIndexData';
 import { IconCheckmark, IconTriangleRight, IconExternal } from './Icon';
@@ -25,7 +26,8 @@ class Progress extends Component {
       yourWordCount: 0,
       yourSeenWordCount: 0,
       yourMemorisedWordCount: 0,
-      toRecommendedNextLesson: false
+      toRecommendedNextLesson: false,
+      toFlashcardsNextLesson: false
     }
   }
 
@@ -96,6 +98,25 @@ class Progress extends Component {
     }
   }
 
+  startFlashcards(e) {
+
+    let labelString = this.props.recommendedNextLesson.link;
+    if (!labelString) { labelString = "BAD_INPUT"; }
+
+    GoogleAnalytics.event({
+      category: 'Recommendations',
+      action: 'Start flashcards',
+      label: labelString
+    });
+
+    // does not navigate using link but instead allows Router Redirect
+    e.preventDefault();
+    this.setState({ toFlashcardsNextLesson: true }, () => {
+      // this.props.updateRecommendationHistory(this.props.recommendationHistory);
+    });
+  }
+
+
   showLoadInput() {
     this.setState({showLoadInput: true});
   }
@@ -149,6 +170,26 @@ class Progress extends Component {
     this.props.updateRecommendationHistory(this.props.recommendationHistory);
   }
 
+  moreFlashcards = (skipButtonPressed = true) => {
+    let labelString = this.props.flashcardsNextLesson.link;
+    if (!labelString) { labelString = "BAD_INPUT"; }
+
+    if (skipButtonPressed) {
+      GoogleAnalytics.event({
+        category: 'Flashcards',
+        action: 'Skip recommended flashcards',
+        label: labelString
+      });
+    }
+
+    if (skipButtonPressed) {
+      const element = document.getElementById('js-skip-flashcards-button');
+      if (element) { element.focus(); }
+    }
+
+    this.props.updateFlashcardsRecommendation(this.props.flashcardsCourseIndex);
+  }
+
   hideRecommendationsSurveyLink(event) {
     GoogleAnalytics.event({
       category: 'Surveys',
@@ -162,6 +203,10 @@ class Progress extends Component {
   render () {
     if (this.state.toRecommendedNextLesson === true) {
       return <Redirect push to={this.props.recommendedNextLesson.link} />
+    }
+
+    if (this.state.toFlashcardsNextLesson === true) {
+      return <Redirect push to={this.props.flashcardsNextLesson.link} />
     }
 
     let lessonsProgressFromTypeyType = this.props.lessonsProgress;
@@ -380,6 +425,8 @@ class Progress extends Component {
       );
     }
 
+    let showFlashcards = false;
+    if (this.props.flashcardsProgress && Object.keys(this.props.flashcardsProgress) && Object.keys(this.props.flashcardsProgress).length > 3 && this.props.flashcardsProgress["/lessons/drills/single-stroke-briefs/flashcards"]) { showFlashcards = true; }
 
     return (
       <div>
@@ -393,6 +440,25 @@ class Progress extends Component {
               </div>
             </div>
           </div>
+
+          { showFlashcards ?
+            <div className="flex flex-wrap justify-between p3 mx-auto mw-1024 mt3">
+              <div className="mw-384 w-336">
+                <ErrorBoundary relative={true}>
+                  <FlashcardsBox
+                    flashcardsNextLesson={this.props.flashcardsNextLesson}
+                    setAnnouncementMessage={this.props.setAnnouncementMessage}
+                    loadingLessonIndex={this.state.loadingLessonIndex}
+                    startFlashcards={this.startFlashcards.bind(this)}
+                    moreFlashcards={this.moreFlashcards}
+                  />
+                </ErrorBoundary>
+              </div>
+            </div>
+            :
+            null
+          }
+
 
           {saveAndLoadPanels}
 
