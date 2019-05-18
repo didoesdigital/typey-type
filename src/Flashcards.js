@@ -161,10 +161,12 @@ currentSlide: currentSlide
 
   setupFlashCards(event) {
     let shuffle = false;
+    let restart = false;
     let unfocus = false;
     if (event) {
       unfocus = event.target.dataset.unfocus;
       if (event.target.dataset.shuffle) { shuffle = true; }
+      if (event.target.dataset.restart) { restart = true; }
       event.preventDefault()
     };
 
@@ -211,6 +213,22 @@ currentSlide: currentSlide
       }
     }
 
+    if (restart) {
+      GoogleAnalytics.event({
+        category: 'Flashcards',
+        action: 'Restart',
+        label: 'True'
+      });
+    }
+
+    if (shuffle) {
+      GoogleAnalytics.event({
+        category: 'Flashcards',
+        action: 'Shuffle',
+        label: 'True'
+      });
+    }
+
     this.setState({
       flashcards: flashcards,
       currentSlide: currentSlide
@@ -245,8 +263,8 @@ currentSlide: currentSlide
     });
   }
 
-  // this happens automagically whenever a slide changes, but doesn't have user
-  // feedback to say if it was a known flashcard or not
+  // this happens automagically whenever a slide changes, including on Easy/Hard,
+  // but doesn't have user feedback to say if it was a known flashcard or not
   onChangeCurrentSlide(slideIndex) {
     let lessonpath = this.props.locationpathname;
     this.props.updateFlashcardsProgress(lessonpath);

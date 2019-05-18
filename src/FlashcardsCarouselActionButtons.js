@@ -24,7 +24,7 @@ class FlashcardsCarouselActionButtons extends Component {
           }
 
           {/* Finished buttons; they also keep space and avoid subsequent content moving up on finished step */}
-          { currentSlideContentType === 'finished' && numberOfFlashcards > 0 ? <button onClick={this.props.setupFlashCards} className="mr1 link-button carousel__button" data-unfocus="true">Restart</button> : null }
+          { currentSlideContentType === 'finished' && numberOfFlashcards > 0 ? <button onClick={this.props.setupFlashCards} className="mr1 link-button carousel__button" data-restart="true" data-unfocus="true">Restart</button> : null }
           { currentSlideContentType === 'finished' && numberOfFlashcards > 0 ? <button onClick={this.props.setupFlashCards} className="ml1 link-button carousel__button" data-shuffle="true" data-unfocus="true" id="shuffleButton" ref={(shuffleButton) => { this.shuffleButton = shuffleButton; }}>Shuffle</button> : null }
 
           { numberOfFlashcards === 0 ? <p className="mt1 mb0">There are no more flashcards to practice at the moment.</p> : null }
