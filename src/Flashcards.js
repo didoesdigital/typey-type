@@ -254,12 +254,21 @@ currentSlide: currentSlide
     let [currentSlideContent, currentSlideContentType] = getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
     if (currentSlideContentType === "stroke") {
       let word = getWordForCurrentStrokeSlideIndex(this.state.flashcards, slideIndex);
-      this.props.updateFlashcardsMetWords(word, "skip", currentSlideContent, this.state.flashcardsMetWords);
+      this.props.updateFlashcardsMetWords(word, "show", currentSlideContent, this.state.flashcardsMetWords);
     }
     else if (currentSlideContentType === "phrase") {
       let stroke = getStrokeForCurrentSlideContent(currentSlideContent, this.state.sourceMaterial);
-      this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke, this.state.flashcardsMetWords);
+      this.props.updateFlashcardsMetWords(currentSlideContent, "show", stroke, this.state.flashcardsMetWords);
     }
+
+    let labelString = currentSlideContent;
+    if (!labelString) { labelString = "BAD_INPUT"; } else { labelString = labelString.toString(); }
+
+    GoogleAnalytics.event({
+      category: 'Flashcards',
+      action: 'Change slide',
+      label: labelString
+    });
 
       // this.nextSlide();
     this.setState({
@@ -273,7 +282,7 @@ currentSlide: currentSlide
 
   // this happens specifically when you click Easy/Hard and that feedback needs to be recorded
   nextSlide(event) {
-    let feedback = "skip";
+    let feedback = "show";
     let unfocus = false;
     if (event) {
       feedback = event.target.dataset.flashcardFeedback;
@@ -288,8 +297,20 @@ currentSlide: currentSlide
     }
     else if (currentSlideContentType === "phrase") {
       let stroke = getStrokeForCurrentSlideContent(currentSlideContent, this.state.sourceMaterial);
-      this.props.updateFlashcardsMetWords(currentSlideContent, "skip", stroke, this.state.flashcardsMetWords);
+      this.props.updateFlashcardsMetWords(currentSlideContent, "show", stroke, this.state.flashcardsMetWords);
     }
+
+    let actionString = feedback;
+    let labelString = currentSlideContent;
+
+    if (!actionString) { actionString = "BAD_INPUT"; } else { actionString = actionString.toString(); }
+    if (!labelString) { labelString = "BAD_INPUT"; } else { labelString = labelString.toString(); }
+
+    GoogleAnalytics.event({
+      category: 'Flashcards',
+      action: actionString,
+      label: labelString
+    });
 
     // debugger
     this.setState({

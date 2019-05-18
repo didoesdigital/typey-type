@@ -9,7 +9,7 @@ class FlashcardsCarouselActionButtons extends Component {
     return (
       <React.Fragment>
         <div className="text-center">
-          { currentSlideContentType === 'phrase' && numberOfFlashcards > 0 ? <ButtonNext className="link-button carousel__button carousel__button--skip" type="button" onClick={this.props.nextSlide} value={this.props.currentSlideContent} aria-label="Next card" data-unfocus="true" id="showButton" ref={(showButton) => { this.showButton = showButton; }}>Show</ButtonNext> : null }
+          { currentSlideContentType === 'phrase' && numberOfFlashcards > 0 ? <ButtonNext className="link-button carousel__button carousel__button--skip" type="button" onClick={this.props.nextSlide} data-flashcard-feedback="show" value={this.props.currentSlideContent} aria-label="Next card" data-unfocus="true" id="showButton" ref={(showButton) => { this.showButton = showButton; }}>Show</ButtonNext> : null }
 
           { currentSlideContentType === 'stroke' && numberOfFlashcards > 0 ?
               <>
