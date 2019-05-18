@@ -443,7 +443,7 @@ class Progress extends Component {
           </div>
 
           { showFlashcards ?
-            <div className="p3 mx-auto mw-1024">
+            <div className="p3 mx-auto mw-1024 show-sm-only">
               <div className="mw100 w-336">
                 <ErrorBoundary relative={true}>
                   <FlashcardsBox

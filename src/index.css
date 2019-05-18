@@ -314,11 +314,15 @@ input:focus::placeholder {
   display: none; }
 
 @media (max-width: 959px) {
-  .hide-xs {
+  .hide-md {
     display: none; } }
 
 @media (min-width: 960px) {
   .hide-lg {
+    display: none; } }
+
+@media (min-width: 432px) {
+  .show-sm-only {
     display: none; } }
 
 .v-hidden {

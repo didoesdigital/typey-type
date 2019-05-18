@@ -23,7 +23,8 @@ $h5-size: $base-font-size; // 16px
 $h6-size: $base-font-size / $font-scale; // 12.8px
 $large-breakpoint: 1024px;
 $medium-breakpoint: 768px;
-// $small-breakpoint: 336px;
+$small-breakpoint: 432px;
+// $extra-small-breakpoint: 336px;
 $outline-shorthand: $brand-highlight auto 5px;
 $z-index-autocomplete-menu: 4;
 $z-index-vertical-text: 3;
@@ -379,8 +380,9 @@ input:focus::placeholder {
 .self-center      { align-self: center; }
 .content-start-ns { align-content: flex-start; }
 .hide             { display: none; }
-.hide-xs          { @media (max-width: 959px) { display: none; } }
+.hide-md          { @media (max-width: 959px) { display: none; } }
 .hide-lg          { @media (min-width: 960px) { display: none; } }
+.show-sm-only     { @media (min-width: $small-breakpoint) { display: none; } }
 .v-hidden         { visibility: hidden; }
 .relative         { position: relative; }
 .absolute         { position: absolute; }

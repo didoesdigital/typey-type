@@ -52,9 +52,9 @@ class Header extends Component {
               </div>
               <div className="table search-container relative">
                 <Link to="/progress" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>
-                <span className="divider--vertical hide-xs"></span>
+                <span className="divider--vertical hide-md"></span>
                 <Link to="/dictionaries" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Dictionaries</Link>
-                <span className="divider--vertical hide-xs"></span>
+                <span className="divider--vertical hide-md"></span>
                 <Link to="/lessons" className="link-button link-button-ghost mr1 table-cell" id="ga--header--lessons">Lessons</Link>
                 <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
                 <Autocomplete
