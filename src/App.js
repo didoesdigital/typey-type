@@ -1802,6 +1802,7 @@ class App extends Component {
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         setPersonalPreferences={this.setPersonalPreferences.bind(this)}
                         metWords={this.state.metWords}
+                        flashcardsCourseLevel={this.state.flashcardsCourseLevel}
                         flashcardsMetWords={this.state.flashcardsMetWords}
                         flashcardsProgress={this.state.flashcardsProgress}
                         flashcardsNextLesson={this.state.flashcardsNextLesson}
