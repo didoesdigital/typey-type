@@ -418,6 +418,7 @@ currentSlide: currentSlide
                     currentSlideContent={this.state.currentSlideContent}
                     currentSlideContentType={this.state.currentSlideContentType}
                     nextSlide={this.nextSlide.bind(this)}
+                    numberOfFlashcards={this.state.flashcards.length}
                     setupFlashCards={this.setupFlashCards.bind(this)}
                   />
 
