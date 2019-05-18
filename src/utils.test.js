@@ -6,7 +6,7 @@ describe('relativeTimeAgo', () => {
   it('shows relative 0 minutes ago', () => {
     let millisecondsNow = 1558156382814;
     let millisecondsTimeInThePast = 1558156382814;
-    expect(relativeTimeAgo(millisecondsNow, millisecondsTimeInThePast)).toEqual("0 minutes");
+    expect(relativeTimeAgo(millisecondsNow, millisecondsTimeInThePast)).toEqual("a moment");
   });
 
   it('shows relative 1 minute ago', () => {

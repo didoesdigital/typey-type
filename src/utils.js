@@ -48,6 +48,9 @@ function relativeTimeAgo(timeNow : number, timeInThePast : number) {
   }
 
   relativeTimeAgo = "" + timeInThePastHumanized + timeInThePastUnit;
+  if ((timeInThePastHumanized === 0) && (timeInThePastUnit === " minutes")) {
+    relativeTimeAgo = "a moment";
+  }
   return relativeTimeAgo;
 }
 
