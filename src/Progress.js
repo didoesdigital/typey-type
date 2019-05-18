@@ -39,7 +39,7 @@ class Progress extends Component {
     getLessonIndexData().then((lessonIndex) => {
       if (this.props.recommendationHistory && this.props.recommendationHistory['currentStep'] === null) {
         this.props.updateRecommendationHistory(this.props.recommendationHistory, lessonIndex);
-        this.props.updateFlashcardsRecommendation(this.props.flashcardsCourseIndex);
+        this.props.updateFlashcardsRecommendation();
       }
       this.setState({ loadingLessonIndex: false });
     }).catch((e) => {
@@ -113,7 +113,7 @@ class Progress extends Component {
     // does not navigate using link but instead allows Router Redirect
     e.preventDefault();
     this.setState({ toFlashcardsNextLesson: true }, () => {
-      this.props.updateFlashcardsRecommendation(this.props.flashcardsCourseIndex);
+      this.props.updateFlashcardsRecommendation();
     });
   }
 
@@ -188,7 +188,7 @@ class Progress extends Component {
       if (element) { element.focus(); }
     }
 
-    this.props.updateFlashcardsRecommendation(this.props.flashcardsCourseIndex);
+    this.props.updateFlashcardsRecommendation();
   }
 
   hideRecommendationsSurveyLink(event) {
