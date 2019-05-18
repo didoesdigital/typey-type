@@ -13,9 +13,8 @@ class FlashcardBox extends Component {
     let flashcardsTimeAgo = Utils.relativeTimeAgo(Date.now(), flashcardsNextLesson.lastSeen);
 
     flashcardsLink = (
-      <Link onClick={this.props.startFlashcards} to="/lessons/drills/suffixes/flashcards" className="link-button dib" style={{lineHeight: 2}}>Study</Link>
+      <Link onClick={this.props.startFlashcards} to={this.props.flashcardsNextLesson.link} className="link-button dib" style={{lineHeight: 2}}>Study</Link>
     );
-      // <Link onClick={this.props.startFlashcards} to={this.props.flashcardsNextLesson.link} className="link-button dib" style={{lineHeight: 2}}>Study</Link>
 
     flashcardsLinkTitle = this.props.flashcardsNextLesson.linkTitle;
 
