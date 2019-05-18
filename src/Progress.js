@@ -39,6 +39,7 @@ class Progress extends Component {
     getLessonIndexData().then((lessonIndex) => {
       if (this.props.recommendationHistory && this.props.recommendationHistory['currentStep'] === null) {
         this.props.updateRecommendationHistory(this.props.recommendationHistory, lessonIndex);
+        this.props.updateFlashcardsRecommendation(this.props.flashcardsCourseIndex);
       }
       this.setState({ loadingLessonIndex: false });
     }).catch((e) => {
@@ -112,7 +113,7 @@ class Progress extends Component {
     // does not navigate using link but instead allows Router Redirect
     e.preventDefault();
     this.setState({ toFlashcardsNextLesson: true }, () => {
-      // this.props.updateRecommendationHistory(this.props.recommendationHistory);
+      this.props.updateFlashcardsRecommendation(this.props.flashcardsCourseIndex);
     });
   }
 

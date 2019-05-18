@@ -510,8 +510,8 @@ currentSlide: currentSlide
   }
 }
 
-      // console.log("Considering: '"+flashcardsMetWords[item.phrase].phrase + "' against threshold: "+threshold+" where rung is: "+flashcardsMetWords[item.phrase].rung);
-        // console.log("Pushing: '"+flashcardsMetWords[item.phrase].phrase+"'");
+// console.log("Considering: '"+flashcardsMetWords[item.phrase].phrase + "' against threshold: "+threshold+" where rung is: "+flashcardsMetWords[item.phrase].rung);
+// console.log("Pushing: '"+flashcardsMetWords[item.phrase].phrase+"'");
 function chooseFlashcardsToShow(sourceMaterial, flashcardsMetWords, numberOfFlashcardsToShow, threshold, randomise = false) {
   let presentedMaterial = sourceMaterial.slice(0, 100); // estimated comfortable rendering/animation limit
   let flashcardItemsToShow = [];

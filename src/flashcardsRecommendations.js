@@ -35,7 +35,6 @@ function getFlashcardsRecommendedCourses() {
 function getFlashcardsNextLesson(flashcardsProgress = {}, courseLevel = "expertCourse", currentFlashcardsCourseIndex = 0) {
   return getFlashcardsRecommendedCourses()
   .then(courses => {
-    console.log("got flash nex lesson and got recommended courses and then'd the courses");
 
     // fallback lesson:
     let flashcardsNextLesson = {
@@ -61,11 +60,9 @@ function getFlashcardsNextLesson(flashcardsProgress = {}, courseLevel = "expertC
     }
 
     if (flashcardsProgress[flashcardsNextLesson] && flashcardsProgress[flashcardsNextLesson]["lastSeen"]) {
-      console.log("seeeeN");
       flashcardsNextLesson.lastSeen = flashcardsProgress[flashcardsNextLesson]["lastSeen"];
     }
 
-    console.log(flashcardsNextLesson);
     return [flashcardsNextLesson, currentFlashcardsCourseIndex];
   });
 }

@@ -1443,7 +1443,6 @@ class App extends Component {
         this.setState({
           flashcardsCourseIndex: currentFlashcardsCourseIndex,
           flashcardsNextLesson: nextFlashcardsLesson
-        }, () => {
         });
       })
       .catch( error => {
