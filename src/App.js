@@ -991,6 +991,27 @@ class App extends Component {
     return value;
   }
 
+  changeFlashcardCourseLevel(event) {
+    const value = event.target.value;
+
+    this.setState({flashcardsCourseLevel: value}, () => {
+      this.updateFlashcardsRecommendation();
+      // writePersonalPreferences('flashcardsCourseLevel', this.state.userSettings);
+    });
+
+
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
+    GoogleAnalytics.event({
+      category: 'Flashcards',
+      action: 'Change course level',
+      label: labelString
+    });
+
+    return value;
+  }
+
   changeStenoLayout(event) {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
@@ -1776,6 +1797,7 @@ class App extends Component {
                   <DocumentTitle title={'Typey Type | Progress'}>
                     <ErrorBoundary>
                       <Progress
+                        changeFlashcardCourseLevel={this.changeFlashcardCourseLevel.bind(this)}
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         setPersonalPreferences={this.setPersonalPreferences.bind(this)}

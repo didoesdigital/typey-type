@@ -455,6 +455,16 @@ class Progress extends Component {
                   />
                 </ErrorBoundary>
               </div>
+              <div className="clearfix mb2 mt2">
+                <label className="mb1 db">Choose flashcard difficulty</label>
+                <select name="flashcardCourseLevel" value={this.props.flashcardCourseLevel} onChange={this.props.changeFlashcardCourseLevel} className="text-small form-control w6">
+                  <option value="noviceCourse">Novice</option>
+                  <option value="beginnerCourse">Beginner</option>
+                  <option value="competentCourse">Competent</option>
+                  <option value="proficientCourse">Proficient</option>
+                  <option value="expertCourse">Expert</option>
+                </select>
+              </div>
             </div>
             :
             null
