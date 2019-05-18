@@ -31,7 +31,7 @@ class FlashcardBox extends Component {
           <h3>Flashcards</h3>
           <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
             <p className="text-right"><strong>{flashcardsLinkTitle}</strong></p>
-            <p className="text-right de-emphasized">Last seen {flashcardsTimeAgo} ago</p>
+            <p className="text-right de-emphasized">Seen {flashcardsTimeAgo} ago</p>
             <div className="flex flex-wrap justify-end">
               <button onClick={this.props.moreFlashcards} id="js-flashcards-skip-button" className="de-emphasized-button pl3 pr3">Skip</button>
               <div className="text-right">

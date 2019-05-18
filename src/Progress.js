@@ -443,8 +443,8 @@ class Progress extends Component {
           </div>
 
           { showFlashcards ?
-            <div className="flex flex-wrap justify-between p3 mx-auto mw-1024 mt3">
-              <div className="mw-384 w-336">
+            <div className="p3 mx-auto mw-1024">
+              <div className="mw100 w-336">
                 <ErrorBoundary relative={true}>
                   <FlashcardsBox
                     flashcardsNextLesson={this.props.flashcardsNextLesson}
