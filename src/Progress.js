@@ -445,7 +445,18 @@ class Progress extends Component {
           { showFlashcards ?
             <div className="p3 mx-auto mw-1024 show-sm-only">
               <div className="mw100 w-336">
+                <h3>Flashcards</h3>
                 <ErrorBoundary relative={true}>
+                  <div className="clearfix mb2 mt2">
+                    <label className="mb1 db">Choose flashcard level</label>
+                    <select name="flashcardCourseLevel" value={this.props.flashcardCourseLevel} onChange={this.props.changeFlashcardCourseLevel} className="text-small form-control mw100 w-336">
+                      <option value="noviceCourse">Novice</option>
+                      <option value="beginnerCourse">Beginner</option>
+                      <option value="competentCourse">Competent</option>
+                      <option value="proficientCourse">Proficient</option>
+                      <option value="expertCourse">Expert</option>
+                    </select>
+                  </div>
                   <FlashcardsBox
                     flashcardsNextLesson={this.props.flashcardsNextLesson}
                     setAnnouncementMessage={this.props.setAnnouncementMessage}
@@ -454,16 +465,6 @@ class Progress extends Component {
                     moreFlashcards={this.moreFlashcards}
                   />
                 </ErrorBoundary>
-              </div>
-              <div className="clearfix mb2 mt2">
-                <label className="mb1 db">Choose flashcard difficulty</label>
-                <select name="flashcardCourseLevel" value={this.props.flashcardCourseLevel} onChange={this.props.changeFlashcardCourseLevel} className="text-small form-control w6">
-                  <option value="noviceCourse">Novice</option>
-                  <option value="beginnerCourse">Beginner</option>
-                  <option value="competentCourse">Competent</option>
-                  <option value="proficientCourse">Proficient</option>
-                  <option value="expertCourse">Expert</option>
-                </select>
               </div>
             </div>
             :

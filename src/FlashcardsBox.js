@@ -34,7 +34,6 @@ class FlashcardBox extends Component {
     if (this.props.flashcardsNextLesson !== undefined && !this.props.loadingLessonIndex) {
       flashcardsNextLesson = (
         <React.Fragment>
-          <h3>Flashcards</h3>
           <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
             <p className="text-right"><strong>{flashcardsLinkTitle}</strong></p>
             <p className="text-right de-emphasized">{flashcardsTimeSeenText}</p>
@@ -50,7 +49,6 @@ class FlashcardBox extends Component {
     } else {
       flashcardsNextLesson = (
         <React.Fragment>
-          <h3>Flashcards…</h3>
           <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
             <p className="text-right"><strong>Loading…</strong></p>
             <p className="text-right de-emphasized"></p>
