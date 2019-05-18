@@ -45,8 +45,9 @@ function getFlashcardsNextLesson(flashcardsProgress = {}, courseLevel = "expertC
     };
 
     if (courses && courses[courseLevel]) {
-      flashcardsNextLesson.lastSeen = 1558144862;
+      flashcardsNextLesson.lastSeen = 1558144862000; // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
       flashcardsNextLesson.linkText = "Study";
+
       if (courses[courseLevel][currentFlashcardsCourseIndex + 1]) {
         currentFlashcardsCourseIndex = currentFlashcardsCourseIndex + 1;
         flashcardsNextLesson.linkTitle = courses[courseLevel][currentFlashcardsCourseIndex].lessonTitle + " flashcards";
@@ -56,6 +57,10 @@ function getFlashcardsNextLesson(flashcardsProgress = {}, courseLevel = "expertC
         currentFlashcardsCourseIndex = 0;
         flashcardsNextLesson.linkTitle = courses[courseLevel][currentFlashcardsCourseIndex].lessonTitle + " flashcards";
         flashcardsNextLesson.link = courses[courseLevel][currentFlashcardsCourseIndex].path;
+      }
+
+      if (flashcardsProgress[flashcardsNextLesson.link]) {
+        flashcardsNextLesson.lastSeen = flashcardsProgress[flashcardsNextLesson.link].lastSeen;
       }
     }
 

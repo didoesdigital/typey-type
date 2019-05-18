@@ -330,7 +330,6 @@ currentSlide: currentSlide
       label: labelString
     });
 
-    // debugger
     this.setState({
       currentSlideContent: currentSlideContent,
       currentSlideContentType: currentSlideContentType
