@@ -440,6 +440,15 @@ class Progress extends Component {
 
     let date = new Date();
     let dashifiedDate = date.toDateString().replace(/ /g,'-').toLowerCase();
+    let downloadProgressHref;
+
+    if (Blob !== undefined) {
+      let blob = new Blob([JSON.stringify(this.props.metWords)], {type: "text/json"});
+      downloadProgressHref = URL.createObjectURL(blob);
+    }
+    else {
+      downloadProgressHref = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.metWords));
+    }
 
     return (
       <div>
@@ -452,7 +461,7 @@ class Progress extends Component {
                 </header>
               </div>
               <div className="flex mxn2">
-                <a href={`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(this.props.metWords))}`} download={"typey-type-progress-" + dashifiedDate + ".json"} onClick={this.downloadProgress.bind(this)} className="link-button link-button-ghost table-cell mr1">Download</a>
+                <a href={downloadProgressHref} download={"typey-type-progress-" + dashifiedDate + ".json"} onClick={this.downloadProgress.bind(this)} className="link-button link-button-ghost table-cell mr1">Download progress file</a>
               </div>
             </div>
           </div>
