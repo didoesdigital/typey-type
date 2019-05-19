@@ -454,7 +454,7 @@ class Progress extends Component {
       <div>
         <main id="main">
           <div className="subheader">
-            <div className="flex items-baseline mx-auto mw-1024 justify-between p3">
+            <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
               <div className="flex mr1 self-center">
                 <header className="flex items-baseline">
                   <h2 id="progress" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Progress</h2>
