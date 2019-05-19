@@ -75,6 +75,15 @@ class Progress extends Component {
     });
   }
 
+  downloadProgress() {
+    GoogleAnalytics.event({
+      category: 'Downloads',
+      action: 'Click',
+      label: 'typey-type-progress.json',
+    });
+  }
+
+
   startRecommendedStep(e) {
 
     let labelString = this.props.recommendedNextLesson.link;
@@ -429,6 +438,9 @@ class Progress extends Component {
     let showFlashcards = false;
     if (this.props.flashcardsProgress && Object.keys(this.props.flashcardsProgress) && Object.keys(this.props.flashcardsProgress).length > 3 && this.props.flashcardsProgress["/lessons/drills/single-stroke-briefs/flashcards"]) { showFlashcards = true; }
 
+    let date = new Date();
+    let dashifiedDate = date.toDateString().replace(/ /g,'-').toLowerCase();
+
     return (
       <div>
         <main id="main">
@@ -438,6 +450,9 @@ class Progress extends Component {
                 <header className="flex items-baseline">
                   <h2 id="progress" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Progress</h2>
                 </header>
+              </div>
+              <div className="flex mxn2">
+                <a href={`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(this.props.metWords))}`} download={"typey-type-progress-" + dashifiedDate + ".json"} onClick={this.downloadProgress.bind(this)} className="link-button link-button-ghost table-cell mr1">Download</a>
               </div>
             </div>
           </div>
