@@ -1015,6 +1015,10 @@ label {
   height: 32px;
   line-height: 1.4;
   padding: 4px 8px;
+  &.form-control--large {
+    font-size: $h5-size;
+    height: 40px;
+  }
 }
 .inline-form-control {
   background-color: add-tint($brand-primary, 10%);
