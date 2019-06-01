@@ -43,121 +43,125 @@ class UserSettings extends Component {
                   <legend className="flex">Choose study type:</legend>
                 </Tooltip>
                 <div className="flex">
-                  <div className="radio-group ml3">
-                    <label className="radio-label">
-                      <input
-                        className="radio-input"
-                        type="radio"
-                        name="study"
-                        id="discover"
-                        value="discover"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.study==="discover"}
-                        onChange={this.props.chooseStudy}
-                      />
-                      <Tooltip
-                        title="Discover 5–15 new words with their briefs shown, concentrating on accuracy"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        position="bottom"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Discover
-                      </Tooltip>
-                    </label>
+                  <div className="flex flex-wrap justify-between">
+                    <div className="radio-group ml3">
+                      <label className="radio-label">
+                        <input
+                          className="radio-input"
+                          type="radio"
+                          name="study"
+                          id="discover"
+                          value="discover"
+                          disabled={this.props.disableUserSettings}
+                          checked={this.props.userSettings.study==="discover"}
+                          onChange={this.props.chooseStudy}
+                        />
+                        <Tooltip
+                          title="Discover 5–15 new words with their briefs shown, concentrating on accuracy"
+                          className="mw-240"
+                          animation="shift"
+                          arrow="true"
+                          duration="200"
+                          position="bottom"
+                          tabIndex="0"
+                          tag="span"
+                          theme="didoesdigital didoesdigital-sm"
+                          trigger="mouseenter focus click"
+                          onShow={this.props.setAnnouncementMessage}
+                        >
+                          Discover
+                        </Tooltip>
+                      </label>
+                    </div>
+                    <div className="radio-group ml3">
+                      <label className="radio-label">
+                        <input
+                          className="radio-input"
+                          type="radio"
+                          name="study"
+                          id="revise"
+                          value="revise"
+                          disabled={this.props.disableUserSettings}
+                          checked={this.props.userSettings.study==="revise"}
+                          onChange={this.props.chooseStudy}
+                        />
+                        <Tooltip
+                          title="Revise 50 briefs, recalling the briefs before revealing their strokes and avoiding fingerspelling"
+                          className="mw-240"
+                          animation="shift"
+                          arrow="true"
+                          duration="200"
+                          position="bottom"
+                          tabIndex="0"
+                          tag="span"
+                          theme="didoesdigital didoesdigital-sm"
+                          trigger="mouseenter focus click"
+                          onShow={this.props.setAnnouncementMessage}
+                        >
+                          Revise
+                        </Tooltip>
+                      </label>
+                    </div>
                   </div>
-                  <div className="radio-group ml3">
-                    <label className="radio-label">
-                      <input
-                        className="radio-input"
-                        type="radio"
-                        name="study"
-                        id="revise"
-                        value="revise"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.study==="revise"}
-                        onChange={this.props.chooseStudy}
-                      />
-                      <Tooltip
-                        title="Revise 50 briefs, recalling the briefs before revealing their strokes and avoiding fingerspelling"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        position="bottom"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Revise
-                      </Tooltip>
-                    </label>
-                  </div>
-                  <div className="radio-group ml3">
-                    <label className="radio-label">
-                      <input
-                        className="radio-input"
-                        type="radio"
-                        name="study"
-                        id="drill"
-                        value="drill"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.study==="drill"}
-                        onChange={this.props.chooseStudy}
-                      />
-                      <Tooltip
-                        title="Drill common words to build your muscle memory, writing as fast as you can"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        position="bottom"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Drill
-                      </Tooltip>
-                    </label>
-                  </div>
-                  <div className="radio-group ml3">
-                    <label className="radio-label">
-                      <input
-                        className="radio-input"
-                        type="radio"
-                        name="study"
-                        id="practice"
-                        value="practice"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.study==="practice"}
-                        onChange={this.props.chooseStudy}
-                      />
-                      <Tooltip
-                        title="Practice longer text in order, mimicking real usage as closely as possible"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        position="bottom"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Practice
-                      </Tooltip>
-                    </label>
+                  <div className="flex flex-wrap justify-between">
+                    <div className="radio-group ml3">
+                      <label className="radio-label">
+                        <input
+                          className="radio-input"
+                          type="radio"
+                          name="study"
+                          id="drill"
+                          value="drill"
+                          disabled={this.props.disableUserSettings}
+                          checked={this.props.userSettings.study==="drill"}
+                          onChange={this.props.chooseStudy}
+                        />
+                        <Tooltip
+                          title="Drill common words to build your muscle memory, writing as fast as you can"
+                          className="mw-240"
+                          animation="shift"
+                          arrow="true"
+                          duration="200"
+                          position="bottom"
+                          tabIndex="0"
+                          tag="span"
+                          theme="didoesdigital didoesdigital-sm"
+                          trigger="mouseenter focus click"
+                          onShow={this.props.setAnnouncementMessage}
+                        >
+                          Drill
+                        </Tooltip>
+                      </label>
+                    </div>
+                    <div className="radio-group ml3">
+                      <label className="radio-label">
+                        <input
+                          className="radio-input"
+                          type="radio"
+                          name="study"
+                          id="practice"
+                          value="practice"
+                          disabled={this.props.disableUserSettings}
+                          checked={this.props.userSettings.study==="practice"}
+                          onChange={this.props.chooseStudy}
+                        />
+                        <Tooltip
+                          title="Practice longer text in order, mimicking real usage as closely as possible"
+                          className="mw-240"
+                          animation="shift"
+                          arrow="true"
+                          duration="200"
+                          position="bottom"
+                          tabIndex="0"
+                          tag="span"
+                          theme="didoesdigital didoesdigital-sm"
+                          trigger="mouseenter focus click"
+                          onShow={this.props.setAnnouncementMessage}
+                        >
+                          Practice
+                        </Tooltip>
+                      </label>
+                    </div>
                   </div>
                 </div>
               </fieldset>
