@@ -1099,6 +1099,9 @@ function processDictionary(swappedDictionaryFile, stenoLayout) {
 function loadPersonalPreferences() {
   let metWords = {};
   let flashcardsProgress = {};
+  let globalUserSettings = {
+    flashcardsCourseLevel: "noviceCourse"
+  };
   let flashcardsMetWords = {
     "the": {
       phrase: "the",
@@ -1142,16 +1145,19 @@ function loadPersonalPreferences() {
       if (window.localStorage.getItem('flashcardsProgress')) {
         flashcardsProgress = Object.assign(flashcardsProgress, JSON.parse(window.localStorage.getItem('flashcardsProgress')));
       }
+      if (window.localStorage.getItem('globalUserSettings')) {
+        globalUserSettings = Object.assign(globalUserSettings, JSON.parse(window.localStorage.getItem('globalUserSettings')));
+      }
       if (window.localStorage.getItem('lessonsProgress')) {
         lessonsProgress = Object.assign(lessonsProgress, JSON.parse(window.localStorage.getItem('lessonsProgress')));
       }
-      return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress];
+      return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress];
     }
   }
   catch(error) {
     console.log('Unable to read local storage.', error);
   }
-  return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress];
+  return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress];
 }
 
 function writePersonalPreferences(itemToStore, JSONToStore) {

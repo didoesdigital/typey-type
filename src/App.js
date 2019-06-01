@@ -225,8 +225,10 @@ class App extends Component {
         link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + PARAMS.practiceParams
       },
       flashcardsCourseIndex: 0,
-      flashcardsCourseLevel: "noviceCourse", // noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
       fullscreen: false,
+      globalUserSettings: {
+        flashcardsCourseLevel: "noviceCourse" // noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
+      },
       hideOtherSettings: false,
       recommendationHistory: { currentStep: null },
       recommendedLessonInProgress: false,
@@ -366,6 +368,7 @@ class App extends Component {
     let metWords = this.state.metWords;
     let flashcardsMetWords = this.state.flashcardsMetWords;
     let flashcardsProgress = this.state.flashcardsProgress;
+    let globalUserSettings = this.state.globalUserSettings;
     let lessonsProgress = this.state.lessonsProgress;
     let userSettings = this.state.userSettings;
     if (source && source !== '') {
@@ -378,7 +381,7 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress] = loadPersonalPreferences();
+      [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress] = loadPersonalPreferences();
     }
 
     let yourSeenWordCount = calculateSeenWordCount(this.state.metWords);
@@ -387,6 +390,7 @@ class App extends Component {
     this.setState({
       flashcardsMetWords: flashcardsMetWords,
       flashcardsProgress: flashcardsProgress,
+      globalUserSettings: globalUserSettings,
       lessonsProgress: lessonsProgress,
       metWords: metWords,
       userSettings: userSettings,
@@ -395,13 +399,14 @@ class App extends Component {
     }, () => {
       writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
       writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
+      writePersonalPreferences('globalUserSettings', this.state.globalUserSettings);
       writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
       writePersonalPreferences('metWords', this.state.metWords);
       writePersonalPreferences('userSettings', this.state.userSettings);
       this.setupLesson();
     });
 
-    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress];
+    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress];
   }
 
   handleLimitWordsChange(event) {
@@ -993,10 +998,12 @@ class App extends Component {
 
   changeFlashcardCourseLevel(event) {
     const value = event.target.value;
+    let globalUserSettings = Object.assign({}, this.state.globalUserSettings);
+    globalUserSettings['flashcardsCourseLevel'] = value;
 
-    this.setState({flashcardsCourseLevel: value}, () => {
+    this.setState({globalUserSettings: globalUserSettings}, () => {
       this.updateFlashcardsRecommendation();
-      // writePersonalPreferences('flashcardsCourseLevel', this.state.userSettings);
+      writePersonalPreferences('globalUserSettings', globalUserSettings);
     });
 
 
@@ -1458,7 +1465,7 @@ class App extends Component {
   }
 
   updateFlashcardsRecommendation() {
-    getFlashcardsNextLesson(this.state.flashcardsProgress, this.state.flashcardsCourseLevel, this.state.flashcardsCourseIndex)
+    getFlashcardsNextLesson(this.state.flashcardsProgress, this.state.globalUserSettings.flashcardsCourseLevel, this.state.flashcardsCourseIndex)
       .then((nextFlashcardsLessonAndCourseIndex) => {
         let [nextFlashcardsLesson, currentFlashcardsCourseIndex] = nextFlashcardsLessonAndCourseIndex;
 
@@ -1802,10 +1809,10 @@ class App extends Component {
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         setPersonalPreferences={this.setPersonalPreferences.bind(this)}
                         metWords={this.state.metWords}
-                        flashcardsCourseLevel={this.state.flashcardsCourseLevel}
                         flashcardsMetWords={this.state.flashcardsMetWords}
                         flashcardsProgress={this.state.flashcardsProgress}
                         flashcardsNextLesson={this.state.flashcardsNextLesson}
+                        globalUserSettings={this.state.globalUserSettings}
                         recommendationHistory={this.state.recommendationHistory}
                         recommendedNextLesson={this.state.recommendedNextLesson}
                         lessonsProgress={this.state.lessonsProgress}

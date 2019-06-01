@@ -1614,8 +1614,11 @@ describe('loadPersonalPreferences', () => {
           "stroke": "-T",
           "rung": 0
         }
-      }
-      let flashcardsProgress = {}
+      };
+      let flashcardsProgress = {};
+      let globalUserSettings = {
+        flashcardsCourseLevel: "noviceCourse"
+      };
       let lessonsProgress = {};
       let userSettings = {
         blurMaterial: false,
@@ -1638,7 +1641,7 @@ describe('loadPersonalPreferences', () => {
         seenWords: true,
         study: 'discover'
       };
-      expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress, lessonsProgress]);
+      expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress]);
     });
   });
 });
