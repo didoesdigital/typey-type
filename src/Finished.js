@@ -274,6 +274,7 @@ class Finished extends Component {
             handleRepetitionsChange={this.props.handleRepetitionsChange}
             hideOtherSettings={this.props.hideOtherSettings}
             maxStartFromWord={this.props.lessonLength}
+            path={this.props.path}
             revisionMode={this.props.revisionMode}
             setAnnouncementMessage={this.props.setAnnouncementMessage}
             toggleHideOtherSettings={this.props.toggleHideOtherSettings}
