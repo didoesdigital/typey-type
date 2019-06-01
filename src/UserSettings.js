@@ -522,9 +522,9 @@ class UserSettings extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        <label className="mb1 db">Match spaces</label>
+                        <label className="mb1 db" htmlFor="spacePlacement">Match spaces</label>
                       </Tooltip>
-                      <select name="spacePlacement" value={this.props.userSettings.spacePlacement} onChange={this.props.changeSpacePlacementUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
+                      <select id="spacePlacement" name="spacePlacement" value={this.props.userSettings.spacePlacement} onChange={this.props.changeSpacePlacementUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
                         <option value="spaceBeforeOutput">Space before output</option>
                         <option value="spaceAfterOutput">Space after output</option>
                         <option value="spaceExact">Exact spacing</option>
@@ -545,9 +545,9 @@ class UserSettings extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        <label className="mb1 db">Steno layout</label>
+                        <label className="mb1 db" htmlFor="stenoLayout">Steno layout</label>
                       </Tooltip>
-                      <select name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control w6">
+                      <select id="stenoLayout" name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control w6">
                         <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
                         <option value="stenoLayoutPalantype">Palantype</option>
                         <option value="stenoLayoutDanishSteno">Danish steno</option>
@@ -570,9 +570,9 @@ class UserSettings extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        <label className="mb1 db">Sort</label>
+                        <label className="mb1 db" htmlFor="sortOrder">Sort</label>
                       </Tooltip>
-                      <select name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
+                      <select id="sortOrder" name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
                         <option value="sortOff">Lesson default</option>
                         <option value="sortRandom">Random</option>
                         <option value="sortNew">Newest words first</option>
