@@ -141,6 +141,10 @@ th {
   font-weight: normal;
 }
 
+dt {
+  margin-bottom: 4px;
+}
+
 dl.inline-flex {
   @media (min-width: $large-breakpoint) {
     display: flex;

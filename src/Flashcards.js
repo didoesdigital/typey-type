@@ -420,7 +420,7 @@ currentSlide: currentSlide
           <div className="p3 mx-auto mw-1024">
             <div className="flex flex-wrap justify-between">
               <p className={"text-small hide-in-fullscreen" + fullscreen}>Back to <Link to={this.props.locationpathname.replace('flashcards','')} className={"hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link>.</p>
-              <p className={"text-small hide-in-fullscreen" + fullscreen}>Learn more <Link to="/support" className="mt0">about flashcards</Link>.</p>
+              <p className={"text-small hide-in-fullscreen" + fullscreen}>Learn more <Link to="/support#flashcards" className="mt0">about flashcards</Link>.</p>
             </div>
             <div>
 

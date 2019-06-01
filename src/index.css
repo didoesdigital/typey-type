@@ -82,6 +82,9 @@ th {
   text-align: left;
   font-weight: normal; }
 
+dt {
+  margin-bottom: 4px; }
+
 @media (min-width: 1024px) {
   dl.inline-flex {
     display: flex;

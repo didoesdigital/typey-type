@@ -7,7 +7,34 @@ import { Link } from 'react-router-dom';
 
 class Support extends Component {
   componentDidMount() {
-    if (this.mainHeading) {
+    window.location.hash = window.decodeURIComponent(window.location.hash);
+    const scrollToAnchor = () => {
+      const hash = window.location.hash;
+      if (hash && hash.length > 0) {
+        const el = document.querySelector(hash);
+        let top = 0;
+        if (el && el.getBoundingClientRect().top) {
+          top = el.getBoundingClientRect().top;
+        }
+        let scrollOptions = {
+          left: 0,
+          top: window.pageYOffset + top,
+          behavior: 'smooth'
+        }
+        if (el) {
+          window.scrollTo(scrollOptions);
+          window.setTimeout(function ()
+          {
+            el.focus();
+          }, 1000);
+        }
+      }
+    };
+    scrollToAnchor();
+
+    window.onhashchange = scrollToAnchor;
+
+    if (this.mainHeading && !window.location.hash) {
       this.mainHeading.focus();
     }
   }
@@ -204,6 +231,10 @@ class Support extends Component {
               <dt>Practice</dt>
               <dd>The final type of study session lets you mimic real usage as closely as possible. Write as fast as you can without causing misstrokes. Explore stories that use real sentences.</dd>
             </dl>
+
+            <h4 id="flashcards" tabIndex="-1">Flashcards</h4>
+            <p>Flashcards are designed for mobile devices so you can memorise steno briefs on the go. When you’re unable to recall a brief, tap “Hard” to indicate it was hard to remember. When you can recall a brief without hesitation, tap “Easy”. While studying flashcards, imagine which fingers and the shape of the outline you’d use to stroke a word.</p>
+            <p>If it’s been a while since you’ve studied, the “threshold” will be set quite high. You’ll see flashcards you’ve studied that are below the threshold. That is, if the threshold is 12, you’ll see flashcards for words you’ve marked “Easy” less than 12 times. If you’ve marked a word as “Easy” 15 times, it won’t shown again until more time has passed.</p>
 
             <h3 id="learn-steno">Learning stenography</h3>
             <h4 id="try-steno">How can you try out steno?</h4>
@@ -546,7 +577,7 @@ class Support extends Component {
               </Tooltip></span>
               </GoogleAnalytics.OutboundLink>.</p>
 
-            <h3 id="privacy">Privacy</h3>
+            <h3 id="privacy" tabIndex="-1">Privacy</h3>
             <p>This site uses{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="Google Analytics"
