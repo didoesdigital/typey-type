@@ -110,12 +110,12 @@ class Progress extends Component {
 
   startFlashcards(e) {
 
-    let labelString = this.props.recommendedNextLesson.link;
+    let labelString = this.props.flashcardsNextLesson.link;
     if (!labelString) { labelString = "BAD_INPUT"; }
 
     GoogleAnalytics.event({
-      category: 'Recommendations',
-      action: 'Start flashcards',
+      category: 'Flashcards',
+      action: 'Start recommended flashcards',
       label: labelString
     });
 
