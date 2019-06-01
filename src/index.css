@@ -325,6 +325,10 @@ input:focus::placeholder {
   .show-sm-only {
     display: none; } }
 
+@media (max-width: 431px) {
+  .hide-sm-only {
+    display: none; } }
+
 .v-hidden {
   visibility: hidden; }
 

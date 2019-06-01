@@ -495,7 +495,6 @@ class Progress extends Component {
             null
           }
 
-
           {saveAndLoadPanels}
 
           <div className={this.state.reducedSaveAndLoad ? "p3 mx-auto mw-1024 mt3" : "p3 mx-auto mw-1024"}>
@@ -556,6 +555,35 @@ class Progress extends Component {
                     recommendAnotherLesson={this.recommendAnotherLesson}
                   />
                 </ErrorBoundary>
+
+                { showFlashcards ?
+                  <div className="mx-auto hide-sm-only">
+                    <div className="mw100 w-336">
+                      <h3>Flashcards</h3>
+                      <ErrorBoundary relative={true}>
+                        <div className="clearfix mb2 mt2">
+                          <label className="mb1 db" htmlFor="mdFlashcardsCourseLevel">Choose flashcard level</label>
+                          <select id="mdFlashcardsCourseLevel" name="flashcardsCourseLevel" value={this.props.globalUserSettings.flashcardsCourseLevel} onChange={this.props.changeFlashcardCourseLevel} className="form-control form-control--large mw100 w-336">
+                            <option value="noviceCourse">Novice</option>
+                            <option value="beginnerCourse">Beginner</option>
+                            <option value="competentCourse">Competent</option>
+                            <option value="proficientCourse">Proficient</option>
+                            <option value="expertCourse">Expert</option>
+                          </select>
+                        </div>
+                        <FlashcardsBox
+                          flashcardsNextLesson={this.props.flashcardsNextLesson}
+                          setAnnouncementMessage={this.props.setAnnouncementMessage}
+                          loadingLessonIndex={this.state.loadingLessonIndex}
+                          startFlashcards={this.startFlashcards.bind(this)}
+                          moreFlashcards={this.moreFlashcards}
+                        />
+                      </ErrorBoundary>
+                    </div>
+                  </div>
+                  :
+                  null
+                }
               </div>
               <div className="mw-568">
                 <h3>Lessons progress</h3>

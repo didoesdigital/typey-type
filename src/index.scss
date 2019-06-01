@@ -383,6 +383,7 @@ input:focus::placeholder {
 .hide-md          { @media (max-width: 959px) { display: none; } }
 .hide-lg          { @media (min-width: 960px) { display: none; } }
 .show-sm-only     { @media (min-width: $small-breakpoint) { display: none; } }
+.hide-sm-only     { @media (max-width: $small-breakpoint - 1px) { display: none; } }
 .v-hidden         { visibility: hidden; }
 .relative         { position: relative; }
 .absolute         { position: absolute; }
