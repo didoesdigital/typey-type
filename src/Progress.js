@@ -435,8 +435,7 @@ class Progress extends Component {
       );
     }
 
-    let showFlashcards = false;
-    if (this.props.flashcardsProgress && Object.keys(this.props.flashcardsProgress) && Object.keys(this.props.flashcardsProgress).length > 3 && this.props.flashcardsProgress["/lessons/drills/single-stroke-briefs/flashcards"]) { showFlashcards = true; }
+    let showFlashcards = true;
 
     let date = new Date();
     let dashifiedDate = date.toDateString().replace(/ /g,'-').toLowerCase();
