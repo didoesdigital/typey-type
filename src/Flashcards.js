@@ -418,6 +418,10 @@ currentSlide: currentSlide
           </div>
 
           <div className="p3 mx-auto mw-1024">
+            <div className="flex flex-wrap justify-between">
+              <p className={"text-small hide-in-fullscreen" + fullscreen}>Back to <Link to={this.props.locationpathname.replace('flashcards','')} className={"hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link>.</p>
+              <p className={"text-small hide-in-fullscreen" + fullscreen}>Learn more <Link to="/support" className="mt0">about flashcards</Link>.</p>
+            </div>
             <div>
 
               {/* Screenreader flashcard heading for context */}
@@ -472,14 +476,12 @@ currentSlide: currentSlide
 
 
 
-              <p className={"text-center mt1 mb0 pt6 hide-in-fullscreen" + fullscreen}><Link to="./" className={"text-small hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link></p>
-              <p className={"text-center mb0 hide-in-fullscreen" + fullscreen}><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--flashcards--give-feedback">Give feedback on this flashcard (form opens in a new tab)</a></p>
-              <p className={"text-center mb0 hide-in-fullscreen" + fullscreen}>
+              <p className={"text-small text-center mt1 pt6 hide-in-fullscreen" + fullscreen}><a href={this.prefillSurveyLink()} className="mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--flashcards--give-feedback">Give feedback on this flashcard (form opens in a new tab)</a>.</p>
+              <p className={"text-small text-center mb0 hide-in-fullscreen" + fullscreen}>
                 <GoogleAnalytics.OutboundLink
                   eventLabel="Look up brief on StenoKnight’s Plover lookup"
                   aria-label="Look up brief on StenoKnight’s Plover lookup (opens in new tab)"
                   to="http://stenoknight.com/plover/ploverlookup/"
-                  className="text-small"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
