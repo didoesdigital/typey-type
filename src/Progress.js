@@ -298,11 +298,7 @@ class Progress extends Component {
             <div aria-hidden="true" className="svg-icon-wrapper svg-baseline color-purple-bright o-30" />
         );
       }
-      if (lesson.category === "Fundamentals") {
-        return(
-          <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeenOrMemorised} of {lessonWordCountInIndex}</small></li>
-        )
-      } else if (lesson.category === "Drills" && lesson.title.startsWith("Top 100")) {
+      if (lesson.category === "Fundamentals" || (lesson.category === "Drills" && lesson.title.startsWith("Top 100")) || (lesson.category === "Drills" && lesson.title.startsWith("Top 200"))) {
         return(
           <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeenOrMemorised} of {lessonWordCountInIndex}</small></li>
         )
