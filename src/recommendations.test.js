@@ -27,9 +27,9 @@ describe('recommended next lesson for novice stenographer', () => {
       expect(data).toEqual({
         studyType: 'discover',
         limitNumberOfWords: 15,
-        linkTitle: 'One-syllable words with simple keys',
-        linkText: 'Discover 15 words from One-syllable words with simple keys with 5 repetitions',
-        link: '/lessons/fundamentals/one-syllable-words-with-simple-keys/?recommended=true&study=discover&limitNumberOfWords=15&repetitions=5&newWords=1&seenWords=0&retainedWords=0&showStrokes=1&hideStrokesOnLastRepetition=1&sortOrder=sortOff&startFromWord=1',
+        linkTitle: 'Introduction',
+        linkText: 'Discover 15 words from Introduction with 5 repetitions',
+        link: '/lessons/fundamentals/introduction/?recommended=true&study=discover&limitNumberOfWords=15&repetitions=5&newWords=1&seenWords=0&retainedWords=0&showStrokes=1&hideStrokesOnLastRepetition=1&sortOrder=sortOff&startFromWord=1',
         repetitions: 5
       });
       resetMockRandom();
