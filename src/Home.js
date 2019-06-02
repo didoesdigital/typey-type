@@ -60,8 +60,8 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3>Steno students</h3>
-                <p>After learning a little bit of steno theory, check out Typey&nbsp;Type’s fundamental <Link to="/lessons/">lessons</Link>, starting with <Link to="/lessons/fundamentals/one-syllable-words-with-simple-keys/">one-syllable words with simple keys</Link>. Before you start typing, customise “your settings” so spaces match your steno settings: spaces before words, spaces after words, or ignore spaces completely.</p>
-                <Link to='/lessons/fundamentals/one-syllable-words-with-simple-keys/' className="link-button dib" style={{lineHeight: 2}}>Start typing</Link>
+                <p>After learning a little bit of steno theory, check out Typey&nbsp;Type’s fundamental <Link to="/lessons/">lessons</Link>, starting with the <Link to="/lessons/fundamentals/introduction/">Introduction</Link> lesson. Before you start typing, customise “your settings” so spaces match your steno settings: spaces before words, spaces after words, or ignore spaces&nbsp;completely.</p>
+                <Link to='/lessons/fundamentals/introduction/' className="link-button dib" style={{lineHeight: 2}}>Start typing</Link>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@ class Home extends Component {
               <div className="mw-584">
                 <h3 className="overline">Discover</h3>
                 <p>Discover 5–15 new briefs a day from various lessons, revealing their strokes as you learn to write them. Write them slowly, concentrating on accuracy and forming good habits around how you stroke word parts.</p>
-                <Link to='/lessons/fundamentals/one-syllable-words-with-simple-keys/' className="link-button dib" style={{lineHeight: 2}}>Discover</Link>
+                <Link to='/lessons/fundamentals/introduction/' className="link-button dib" style={{lineHeight: 2}}>Discover</Link>
               </div>
             </div>
           </div>
@@ -122,49 +122,58 @@ class Home extends Component {
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
+                <h3>Flashcards</h3>
+                <p>Study briefs on the go using flashcards designed for mobile&nbsp;devices.</p>
+                <Link to='/flashcards/' className="link-button dib" style={{lineHeight: 2}}>Flashcards</Link>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white landing-page-section">
+            <div className="p3 mx-auto mw-1024">
+              <div className="mw-584 ml-auto text-right">
                 <h3>Dictionaries</h3>
                 <p>In addition to Typey&nbsp;Type’s own dictionary, you can find recent Plover dictionaries, links to community dictionaries, and a dictionary for every lesson.</p>
                 <Link to='/dictionaries/' className="link-button dib" style={{lineHeight: 2}}>Dictionaries</Link>
               </div>
             </div>
           </div>
-          <div className="bg-white landing-page-section">
+          <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
-              <div className="mw-584 ml-auto text-right">
+              <div className="mw-584">
                 <h3>Your steno journey</h3>
                 <p>You can follow recommendations tailored to you and your skill level on your journey to mastering stenography.</p>
                 <Link to='/progress' className="link-button dib" style={{lineHeight: 2}}>Your progress</Link>
               </div>
             </div>
           </div>
-          <div className="bg-info landing-page-section">
+          <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
-              <div className="mw-584">
+              <div className="mw-584 ml-auto text-right">
                 <h3>Rest</h3>
                 <p>Rest your hands and your mind with a 5-minute break timer.</p>
                 <Link to='/break/' className="link-button dib" style={{lineHeight: 2}}>Take a break</Link>
               </div>
             </div>
           </div>
-          <div className="bg-white landing-page-section">
-            <div className="p3 mx-auto mw-1024">
-              <div className="mw-584 ml-auto text-right">
-                <h3>Your settings</h3>
-                <p>Choose the right settings for you. Try other steno layouts, blur words, or have words spoken to you.</p>
-                <Link to='/lessons/fundamentals/one-syllable-words-with-simple-keys/' className="link-button dib" style={{lineHeight: 2}}>Explore</Link>
-              </div>
-            </div>
-          </div>
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
+                <h3>Your settings</h3>
+                <p>Choose the right settings for you. Try other steno layouts, blur words, or have words spoken to you.</p>
+                <Link to='/lessons/fundamentals/introduction/' className="link-button dib" style={{lineHeight: 2}}>Explore</Link>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white landing-page-section">
+            <div className="p3 mx-auto mw-1024">
+              <div className="mw-584 ml-auto text-right">
                 <h3>Want to get involved?</h3>
                 <p>Support DiDoesDigital, create lessons, or share your feedback. Every bit helps.</p>
                 <Link to='/contribute/' className="link-button dib" style={{lineHeight: 2}}>Contribute</Link>
               </div>
             </div>
           </div>
-          <div className="bg-white landing-page-section">
+          <div className="bg-slat landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="text-center">
                 <h3 id="steno-news">Keep up with news</h3>
@@ -185,7 +194,7 @@ class Home extends Component {
                       tabIndex="0"
                       tag="span"
                       theme="didoesdigital"
-                      title="(external link opens in new tab)"
+                      title="External link opens in new tab"
                       trigger="mouseenter focus click"
                       onShow={this.props.setAnnouncementMessage}
                     >
