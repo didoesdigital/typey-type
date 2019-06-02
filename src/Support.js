@@ -510,7 +510,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Google’s Trillion Word <span className="nowrap">Corpus
+                Google’s Trillion <span className="nowrap">Word Corpus
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
