@@ -167,7 +167,7 @@ class UserSettings extends Component {
                 </fieldset>
               </div>
               { !this.props.path.includes("custom") && !this.props.path.includes("progress") ?
-                <p className="mb0">Study <Link to={process.env.PUBLIC_URL + this.props.path.replace("lesson.txt","flashcards")} className="mb0">Flashcards</Link></p>
+                  <p className="mb0">Study <Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="mb0">Flashcards</Link></p>
                 :
                 null
               }

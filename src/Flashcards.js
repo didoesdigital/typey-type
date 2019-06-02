@@ -398,9 +398,9 @@ currentSlide: currentSlide
       flashcardsHeading = this.state.title + flashcardsSubtitle + ' flashcards';
     }
 
-    let lessonpath = process.env.PUBLIC_URL + this.props.locationpathname.replace('flashcards','');
+    let lessonpath = this.props.locationpathname.replace('flashcards','');
     if (this.state.title.includes("Top 10000 English words")) {
-      lessonpath = process.env.PUBLIC_URL + "/lessons/drills/top-10000-english-words/";
+      lessonpath = "/lessons/drills/top-10000-english-words/";
     }
 
     return (
