@@ -398,6 +398,11 @@ currentSlide: currentSlide
       flashcardsHeading = this.state.title + flashcardsSubtitle + ' flashcards';
     }
 
+    let lessonpath = process.env.PUBLIC_URL + this.props.locationpathname.replace('flashcards','');
+    if (this.state.title.includes("Top 10000 English words")) {
+      lessonpath = process.env.PUBLIC_URL + "/lessons/drills/top-10000-english-words/";
+    }
+
     return (
       <div>
         <main id="main">
@@ -419,7 +424,7 @@ currentSlide: currentSlide
 
           <div className="p3 mx-auto mw-1024">
             <div className="flex flex-wrap justify-between">
-              <p className={"text-small hide-in-fullscreen" + fullscreen}>Back to <Link to={this.props.locationpathname.replace('flashcards','')} className={"hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link>.</p>
+              <p className={"text-small hide-in-fullscreen" + fullscreen}>Back to <Link to={lessonpath} className={"hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link>.</p>
               <p className={"text-small hide-in-fullscreen" + fullscreen}>Learn more <Link to="/support#flashcards" className="mt0">about flashcards</Link>.</p>
             </div>
             <div>
