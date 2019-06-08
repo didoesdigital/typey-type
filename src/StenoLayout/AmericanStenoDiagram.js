@@ -71,8 +71,10 @@ class AmericanStenoDiagram extends Component {
     let leftSUpperOffColor = '#e9d9f2';
     let numberBarOffColor = '#e9d9f2';
 
+    let diagramWidth = this.props.diagramWidth || 140;
+
     return (
-      <svg viewBox="0 0 215 101" width="140" xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
+      <svg viewBox="0 0 215 101" width={diagramWidth} xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
         <g id={"stenoboard-" + this.props.brief } transform="translate(1 1)" fill="none" fillRule="evenodd">
           <rect id="rightZ" stroke={strokeColor} fill={this.props.rightZ ? rightZOnColor : rightZOffColor} x="195" y="48" width="18" height="23" rx="4"/>
           <rect id="rightD" stroke={strokeColor} fill={this.props.rightD ? rightDOnColor : rightDOffColor} x="195" y="20" width="18" height="23" rx="4"/>

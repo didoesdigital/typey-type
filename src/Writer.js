@@ -109,7 +109,7 @@ class Writer extends Component<Props, State> {
               />
             </p>
             <div>
-              <AmericanStenoDiagram {...mapBriefToAmericanStenoKeys(this.state.stenoBrief)} brief={"STKPWHRAO*EUFRPBLGTSDZ"} />
+              <AmericanStenoDiagram {...mapBriefToAmericanStenoKeys(this.state.stenoBrief)} brief={"STKPWHRAO*EUFRPBLGTSDZ"} diagramWidth="440" />
             </div>
           </div>
         </div>
