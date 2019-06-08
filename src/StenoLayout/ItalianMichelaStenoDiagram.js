@@ -105,8 +105,10 @@ class ItalianMichelaStenoDiagram extends Component {
     let leftCapitalFLetterOnColor = '#FFFFFF';
     let leftCapitalFLetterOffColor = '#E9D9F2';
 
+    let diagramWidth = this.props.diagramWidth || 160;
+
     return (
-      <svg width="160" viewBox="0 0 258 99" xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
+      <svg width={diagramWidth} viewBox="0 0 258 99" xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
         <g id={"stenoboard-" + this.props.brief } fill="none" fillRule="evenodd" stroke="none" strokeWidth="1">
           <rect height="96" id="sRightLowercase" width="20" fill={this.props.sRightLowercase ? sRightLowercaseOnColor : sRightLowercaseOffColor} fillRule="nonzero" rx="2" stroke={sRightLowercaseStrokeColor} x="237" y="2"/>
           <rect height="96" id="cRightLowercase" width="20" fill={this.props.cRightLowercase ? cRightLowercaseOnColor : cRightLowercaseOffColor} fillRule="nonzero" rx="2" stroke={cRightLowercaseStrokeColor} x="217" y="2"/>
