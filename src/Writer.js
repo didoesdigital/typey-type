@@ -1,7 +1,12 @@
 // @flow
 import React, { Component } from 'react';
 import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
-import { splitBriefsIntoStrokes, mapQWERTYKeysToStenoBrief, mapBriefToAmericanStenoKeys } from './typey-type';
+import {
+  fetchDictionaries,
+  splitBriefsIntoStrokes,
+  mapQWERTYKeysToStenoBrief,
+  mapBriefToAmericanStenoKeys
+} from './typey-type';
 
 type Props = {
   setAnnouncementMessageString: (string) => void
@@ -9,6 +14,7 @@ type Props = {
 
 type State = {
   stenoBrief: string,
+  stenoDictionary: Object,
   writtenText: string,
   valueQWERTYSteno: string
 };
@@ -18,6 +24,7 @@ class Writer extends Component<Props, State> {
 
   state = {
     stenoBrief: '',
+    stenoDictionary: {},
     writtenText: '',
     valueQWERTYSteno: ''
   }
@@ -25,8 +32,10 @@ class Writer extends Component<Props, State> {
   updateQWERTYSteno = this.updateQWERTYSteno.bind(this);
 
   componentDidMount() {
-    this.setState({
-    }, () => {
+    fetchDictionaries().then((json) => {
+      this.setState({
+        stenoDictionary: json
+      });
     });
 
     if (this.mainHeading) {
@@ -59,14 +68,9 @@ class Writer extends Component<Props, State> {
   }
 
   lookUpStrokeInDictionary(stenoBrief: string) {
-    let dict = {
-      'TP': 'if',
-      'S': 'is',
-      'HR': 'will'
-    }
     let translation = stenoBrief;
-    if (dict[stenoBrief]) {
-      translation = dict[stenoBrief];
+    if (this.state.stenoDictionary[stenoBrief]) {
+      translation = this.state.stenoDictionary[stenoBrief];
     }
     return translation;
   }
