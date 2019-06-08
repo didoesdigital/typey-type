@@ -72,6 +72,8 @@ function mapQWERTYKeysToStenoBrief(qwertyString) {
     'v': 'O',
     't': '*',
     'g': '*',
+    'y': '*',
+    'h': '*',
     'n': 'E',
     'm': 'U',
     'u': 'F',
