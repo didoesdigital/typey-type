@@ -1784,8 +1784,10 @@ class App extends Component {
                   <DocumentTitle title={'Typey Type | Writer'}>
                     <ErrorBoundary>
                       <AsyncWriter
+                        changeStenoLayout={this.changeStenoLayout.bind(this)}
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                        userSettings={this.state.userSettings}
                         {...props}
                       />
                     </ErrorBoundary>

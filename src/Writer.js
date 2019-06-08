@@ -1,6 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
+import { Tooltip } from 'react-tippy';
 import {
   fetchDictionaries,
   mapQWERTYKeysToStenoBrief,
@@ -8,7 +9,10 @@ import {
 } from './typey-type';
 
 type Props = {
-  setAnnouncementMessageString: (string) => void
+  changeStenoLayout: (event: SyntheticInputEvent<HTMLSelectElement>) => string,
+  userSettings: Object,
+  setAnnouncementMessageString: (string) => void,
+  setAnnouncementMessage: (Object, any) => void
 };
 
 type State = {
@@ -159,6 +163,31 @@ class Writer extends Component<Props, State> {
                 />
               </p>
             </div>
+            <div className="mb2 mw-240">
+              <Tooltip
+                title="Show a steno diagram that suits your steno layout"
+                className="mw-240"
+                animation="shift"
+                arrow="true"
+                duration="200"
+                tabIndex="0"
+                tag="span"
+                theme="didoesdigital didoesdigital-sm"
+                trigger="mouseenter focus click"
+                onShow={this.props.setAnnouncementMessage}
+              >
+                <label className="mb1 db" htmlFor="stenoLayout">Steno layout</label>
+              </Tooltip>
+              <select id="stenoLayout" name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} className="text-small form-control w6">
+                <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
+                <option value="stenoLayoutPalantype">Palantype</option>
+                <option value="stenoLayoutDanishSteno">Danish steno</option>
+                <option value="stenoLayoutItalianMichelaSteno">Italian Michela steno</option>
+                <option value="stenoLayoutJapaneseSteno">Japanese steno</option>
+                <option value="stenoLayoutKoreanModernCSteno">Korean Modern C steno</option>
+              </select>
+            </div>
+
           </div>
         </div>
       </main>
