@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
 import {
   fetchDictionaries,
-  splitBriefsIntoStrokes,
   mapQWERTYKeysToStenoBrief,
   mapBriefToAmericanStenoKeys
 } from './typey-type';
