@@ -16,6 +16,7 @@ type State = {
   stenoBrief: string,
   stenoDictionary: Object,
   writtenText: string,
+  valueRawSteno: string,
   valueQWERTYSteno: string
 };
 
@@ -26,9 +27,11 @@ class Writer extends Component<Props, State> {
     stenoBrief: '',
     stenoDictionary: {},
     writtenText: '',
+    valueRawSteno: '',
     valueQWERTYSteno: ''
   }
 
+  updateRawSteno = this.updateRawSteno.bind(this);
   updateQWERTYSteno = this.updateQWERTYSteno.bind(this);
 
   componentDidMount() {
@@ -41,6 +44,28 @@ class Writer extends Component<Props, State> {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
+  }
+
+  updateRawSteno(event: SyntheticInputEvent<HTMLInputElement>) {
+    let currentValue: string;
+
+    if (event && event.target && event.target.value) {
+      currentValue = event.target.value;
+    }
+    else {
+      currentValue = '';
+    }
+
+    if (currentValue.includes(' ')) {
+      currentValue = currentValue.trim();
+      this.sendStroke(currentValue);
+      currentValue = '';
+    }
+
+    this.setState({
+      stenoBrief: currentValue,
+      valueRawSteno: currentValue
+    });
   }
 
   updateQWERTYSteno(event: SyntheticInputEvent<HTMLInputElement>) {
@@ -102,18 +127,38 @@ class Writer extends Component<Props, State> {
             <p className="mt3 mb3">
               Written text: {this.state.writtenText}
             </p>
-            <p className="mt3 text-center mb3">
-              <input
-                autoCapitalize="off"
-                autoComplete="off"
-                autoCorrect="off"
-                className="input-textarea"
-                onChange={this.updateQWERTYSteno.bind(this)}
-                value={this.state.valueQWERTYSteno}
-              />
-            </p>
             <div>
               <AmericanStenoDiagram {...mapBriefToAmericanStenoKeys(this.state.stenoBrief)} brief={"STKPWHRAO*EUFRPBLGTSDZ"} diagramWidth="440" />
+            </div>
+            <div className="flex flex-wrap">
+              <p className="mt3 mb3 mr1">
+                <label htmlFor="qwertyStenoInput" className="db">
+                  QWERTY steno input
+                </label>
+                <input
+                  id="qwertyStenoInput"
+                  autoCapitalize="off"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  className="input-textarea"
+                  onChange={this.updateQWERTYSteno}
+                  value={this.state.valueQWERTYSteno}
+                />
+              </p>
+              <p className="mt3 mb3 mr1">
+                <label htmlFor="rawStenoInput" className="db">
+                  Raw steno input
+                </label>
+                <input
+                  id="rawStenoInput"
+                  autoCapitalize="off"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  className="input-textarea"
+                  onChange={this.updateRawSteno}
+                  value={this.state.valueRawSteno}
+                />
+              </p>
             </div>
           </div>
         </div>
