@@ -56,9 +56,10 @@ function splitBriefsIntoStrokes (currentStroke) {
 
 
 
-function mapQWERTYKeysToStenoBrief(qwertyString) {
+function mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout = "stenoLayoutAmericanSteno") {
   let stenoBrief = '';
-  const STENO_MAP = {
+  let stenoMap = {};
+  const QWERTY_TO_AMERICAN_WARD_STONE_IRELAND_STENO_MAP = {
     '3': '#',
     'q': 'S',
     'a': 'S',
@@ -83,11 +84,92 @@ function mapQWERTYKeysToStenoBrief(qwertyString) {
     'o': 'L',
     'l': 'G',
     'p': 'T',
-    ';': 'S', // TODO: check javascript object key name rules
-    '[': 'D', // TODO: check javascript object key name rules
-    "'": 'Z' // TODO: check javascript object key name rules
+    ';': 'S',
+    '[': 'D',
+    "'": 'Z'
   };
-  stenoBrief = qwertyString.split('').map(character => STENO_MAP[character]).join('');
+  const QWERTY_TO_DANISH_STENO_MAP = {
+    '3': "#",
+    'a': "S",
+    'w': "T",
+    's': "K",
+    'e': "P",
+    'd': "V",
+    'r': "H",
+    'f': "R",
+    'c': "A",
+    'v': "O",
+    't': "*",
+    'g': "*",
+    'y': "*",
+    'h': "*",
+    'n': "Æ",
+    'm': "Å",
+    'u': "F",
+    'j': "R",
+    'i': "P",
+    'k': "E",
+    'o': "L",
+    'l': "K",
+    'p': "T",
+    ';': "S",
+    '[': "D",
+    "'": "D",
+    'q': "N"
+  };
+
+  const QWERTY_TO_ITALIAN_MICHELA_STENO_MAP = {
+   'q': "F",
+   'a': "S",
+   's': "C",
+   'w': "Z",
+   'd': "P",
+   'e': "N",
+   'f': "R",
+   'r': "X",
+   'v': "I",
+   'b': "U",
+   'n': "u",
+   'm': "i",
+   'u': "e",
+   'j': "a",
+   'i': "n",
+   'k': "p",
+   'o': "z",
+   'l': "c",
+   ';': "s",
+   'p': "f"
+  };
+
+  // TODO: create maps using default keyboard layouts for these languages
+  const QWERTY_TO_JAPANESE_STENO_MAP = {};
+  const QWERTY_TO_KOREAN_MODERN_C_STENO_MAP = {};
+  const QWERTY_TO_PALANTYPE_MAP = {};
+
+  switch (stenoLayout) {
+    case "stenoLayoutAmericanSteno":
+      stenoMap = QWERTY_TO_AMERICAN_WARD_STONE_IRELAND_STENO_MAP;
+      break;
+    case "stenoLayoutDanishSteno":
+      stenoMap = QWERTY_TO_DANISH_STENO_MAP;
+      break;
+    case "stenoLayoutItalianMichelaSteno":
+      stenoMap = QWERTY_TO_ITALIAN_MICHELA_STENO_MAP;
+      break;
+    case "stenoLayoutJapaneseSteno":
+      stenoMap = QWERTY_TO_JAPANESE_STENO_MAP;
+      break;
+    case "stenoLayoutKoreanModernCSteno":
+      stenoMap = QWERTY_TO_KOREAN_MODERN_C_STENO_MAP;
+      break;
+    case "stenoLayoutPalantype":
+      stenoMap = QWERTY_TO_PALANTYPE_MAP;
+      break;
+    default:
+      stenoMap = QWERTY_TO_AMERICAN_WARD_STONE_IRELAND_STENO_MAP;
+      break;
+  }
+  stenoBrief = qwertyString.split('').map(character => stenoMap[character]).join('');
   return stenoBrief;
 }
 

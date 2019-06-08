@@ -1,12 +1,23 @@
 // @flow
 import React, { Component } from 'react';
 import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
-import { Tooltip } from 'react-tippy';
+import DanishStenoDiagram from './StenoLayout/DanishStenoDiagram';
+import ItalianMichelaStenoDiagram from './StenoLayout/ItalianMichelaStenoDiagram';
+import JapaneseStenoDiagram from './StenoLayout/JapaneseStenoDiagram';
+import KoreanModernCStenoDiagram from './StenoLayout/KoreanModernCStenoDiagram';
+import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
 import {
   fetchDictionaries,
   mapQWERTYKeysToStenoBrief,
-  mapBriefToAmericanStenoKeys
+  mapBriefToAmericanStenoKeys,
+  mapBriefToDanishStenoKeys,
+  mapBriefToItalianMichelaStenoKeys,
+  mapBriefToJapaneseStenoKeys,
+  mapBriefToKoreanModernCStenoKeys,
+  mapBriefToPalantypeKeys
 } from './typey-type';
+import { Tooltip } from 'react-tippy';
+
 
 type Props = {
   changeStenoLayout: (event: SyntheticInputEvent<HTMLSelectElement>) => string,
@@ -107,12 +118,45 @@ class Writer extends Component<Props, State> {
     let stenoBrief : string = '';
     // TODO: let strokes = splitBriefsIntoStrokes(typedText);
     // TODO: for(i in strokes) { briefs = strokes[i].mapQWERTYKeysToStenoBrief() };
-    stenoBrief = mapQWERTYKeysToStenoBrief(typedText);
+    stenoBrief = mapQWERTYKeysToStenoBrief(typedText, this.props.userSettings.stenoLayout);
     this.setState({stenoBrief: stenoBrief});
     return stenoBrief;
   }
 
   render() {
+
+    let mapBriefsFunction = mapBriefToAmericanStenoKeys;
+    let StenoLayoutDiagram = AmericanStenoDiagram;
+    switch (this.props.userSettings.stenoLayout) {
+      case 'stenoLayoutAmericanSteno':
+        mapBriefsFunction = mapBriefToAmericanStenoKeys;
+        StenoLayoutDiagram = AmericanStenoDiagram;
+        break;
+      case 'stenoLayoutDanishSteno':
+        mapBriefsFunction = mapBriefToDanishStenoKeys;
+        StenoLayoutDiagram = DanishStenoDiagram;
+        break;
+      case 'stenoLayoutItalianMichelaSteno':
+        mapBriefsFunction = mapBriefToItalianMichelaStenoKeys;
+        StenoLayoutDiagram = ItalianMichelaStenoDiagram;
+        break;
+      case 'stenoLayoutJapaneseSteno':
+        mapBriefsFunction = mapBriefToJapaneseStenoKeys;
+        StenoLayoutDiagram = JapaneseStenoDiagram;
+        break;
+      case 'stenoLayoutKoreanModernCSteno':
+        mapBriefsFunction = mapBriefToKoreanModernCStenoKeys;
+        StenoLayoutDiagram = KoreanModernCStenoDiagram;
+        break;
+      case 'stenoLayoutPalantype':
+        mapBriefsFunction = mapBriefToPalantypeKeys;
+        StenoLayoutDiagram = PalantypeDiagram;
+        break;
+      default:
+        mapBriefsFunction = mapBriefToAmericanStenoKeys;
+        StenoLayoutDiagram = AmericanStenoDiagram;
+        break;
+    }
 
     return (
       <main id="main">
@@ -131,23 +175,28 @@ class Writer extends Component<Props, State> {
               <span className="visually-hidden">Your written text:</span>{this.state.writtenText}&nbsp;
             </p>
             <div>
-              <AmericanStenoDiagram {...mapBriefToAmericanStenoKeys(this.state.stenoBrief)} brief={"STKPWHRAO*EUFRPBLGTSDZ"} diagramWidth="440" />
+              <StenoLayoutDiagram {...mapBriefsFunction(this.state.stenoBrief)} brief={"STKPWHRAO*EUFRPBLGTSDZ"} diagramWidth="440" />
             </div>
             <div className="flex flex-wrap">
-              <p className="mt3 mb3 mr1">
-                <label htmlFor="qwertyStenoInput" className="db">
-                  QWERTY steno input
-                </label>
-                <input
-                  id="qwertyStenoInput"
-                  autoCapitalize="off"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  className="input-textarea"
-                  onChange={this.updateQWERTYSteno}
-                  value={this.state.valueQWERTYSteno}
-                />
-              </p>
+              { this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno" ||
+                  this.props.userSettings.stenoLayout === "stenoLayoutDanishSteno" ?
+                <p className="mt3 mb3 mr1">
+                  <label htmlFor="qwertyStenoInput" className="db">
+                    QWERTY steno input
+                  </label>
+                  <input
+                    id="qwertyStenoInput"
+                    autoCapitalize="off"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    className="input-textarea"
+                    onChange={this.updateQWERTYSteno}
+                    value={this.state.valueQWERTYSteno}
+                  />
+                </p>
+                :
+                null
+              }
               <p className="mt3 mb3 mr1">
                 <label htmlFor="rawStenoInput" className="db">
                   Raw steno input
