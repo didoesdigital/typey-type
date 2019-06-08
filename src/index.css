@@ -731,6 +731,9 @@ input:focus::placeholder {
   word-break: break-word;
   word-wrap: break-word; }
 
+.h3 {
+  font-size: 25px; }
+
 .divider {
   border-top: 1px solid #d9d3dc; }
 

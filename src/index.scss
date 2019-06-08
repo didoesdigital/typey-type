@@ -625,6 +625,9 @@ input:focus::placeholder {
   word-wrap: break-word; // IE 11, alias for overflow-wrap
 }
 
+.h3 {
+  font-size: $h3-size;
+}
 
 
 

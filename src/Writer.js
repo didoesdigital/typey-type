@@ -124,8 +124,8 @@ class Writer extends Component<Props, State> {
         </div>
         <div className="p3 mx-auto mw-1024">
           <div className="mx-auto mw-568">
-            <p className="mt3 mb3">
-              Written text: {this.state.writtenText}
+            <p className="mt3 mb3 h3">
+              <span className="visually-hidden">Your written text:</span>{this.state.writtenText}&nbsp;
             </p>
             <div>
               <AmericanStenoDiagram {...mapBriefToAmericanStenoKeys(this.state.stenoBrief)} brief={"STKPWHRAO*EUFRPBLGTSDZ"} diagramWidth="440" />
