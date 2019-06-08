@@ -56,6 +56,12 @@ const AsyncBreak = Loadable({
   delay: 300
 });
 
+const AsyncWriter = Loadable({
+  loader: () => import("./Writer"),
+  loading: PageLoading,
+  delay: 300
+});
+
 const AsyncDictionaries = Loadable({
   loader: () => import("./Dictionaries"),
   loading: PageLoading,
@@ -1766,6 +1772,21 @@ class App extends Component {
                       <Support
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                      />
+                    </ErrorBoundary>
+                  </DocumentTitle>
+                </div>
+                }
+              />
+              <Route path="/writer" render={ (props) =>
+                <div>
+                  {header}
+                  <DocumentTitle title={'Typey Type | Writer'}>
+                    <ErrorBoundary>
+                      <AsyncWriter
+                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                        {...props}
                       />
                     </ErrorBoundary>
                   </DocumentTitle>

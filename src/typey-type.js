@@ -49,6 +49,46 @@ function splitBriefsIntoStrokes (currentStroke) {
   return currentStroke.split(/[/ ]/);
 }
 
+
+
+
+
+
+
+
+function mapQWERTYKeysToStenoBrief(qwertyString) {
+  let stenoBrief = '';
+  const STENO_MAP = {
+    '3': '#',
+    'q': 'S',
+    'a': 'S',
+    'w': 'T',
+    's': 'K',
+    'e': 'P',
+    'd': 'W',
+    'r': 'H',
+    'f': 'R',
+    'c': 'A',
+    'v': 'O',
+    't': '*',
+    'g': '*',
+    'n': 'E',
+    'm': 'U',
+    'u': 'F',
+    'j': 'R',
+    'i': 'P',
+    'k': 'B',
+    'o': 'L',
+    'l': 'G',
+    'p': 'T',
+    ';': 'S', // TODO: check javascript object key name rules
+    '[': 'D', // TODO: check javascript object key name rules
+    "'": 'Z' // TODO: check javascript object key name rules
+  };
+  stenoBrief = qwertyString.split('').map(character => STENO_MAP[character]).join('');
+  return stenoBrief;
+}
+
 function mapBriefToAmericanStenoKeys (brief) {
   let keys = { numberBar: false, leftSUpper: false, leftSLower: false, leftT: false, leftK: false, leftP: false, leftW: false, leftH: false, leftR: false, leftA: false, leftO: false, star: false, dash: false, rightE: false, rightU: false, rightF: false, rightR: false, rightP: false, rightB: false, rightL: false, rightG: false, rightT: false, rightS: false, rightD: false, rightZ: false, };
 
@@ -1288,6 +1328,7 @@ export {
   loadPersonalPreferences,
   lookUpDictionaryInIndex,
   matchSplitText,
+  mapQWERTYKeysToStenoBrief,
   mapBriefToAmericanStenoKeys,
   mapBriefToDanishStenoKeys,
   mapBriefToItalianMichelaStenoKeys,
