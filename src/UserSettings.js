@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Tooltip, } from 'react-tippy';
+import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 import { Link } from 'react-router-dom';
 import NumericInput from 'react-numeric-input';
