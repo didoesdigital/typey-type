@@ -179,8 +179,7 @@ class Writer extends Component<Props, State> {
               <StenoLayoutDiagram {...mapBriefsFunction(this.state.stenoBrief)} brief={"STKPWHRAO*EUFRPBLGTSDZ"} diagramWidth="440" />
             </div>
             <div className="flex flex-wrap">
-              { this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno" ||
-                  this.props.userSettings.stenoLayout === "stenoLayoutDanishSteno" ?
+              { this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno" ?
                 <p className="mt3 mb3 mr1">
                   <label htmlFor="qwertyStenoInput" className="db">
                     QWERTY steno input
