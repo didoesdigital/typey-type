@@ -7,7 +7,7 @@ import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 import {
   createWordListFromMetWords,
-  fetchDictionaries,
+  fetchResource,
   loadPersonalPreferences,
   parseWordList,
   processDictionary,
@@ -33,7 +33,7 @@ class CustomLessonSetup extends Component {
     }
 
     let stenoLayout = this.props.stenoLayout;
-    fetchDictionaries().then((json) => {
+    fetchResource(process.env.PUBLIC_URL + '/dictionaries/dict.json').then((json) => {
       let sourceWordsAndStrokes = swapKeyValueInDictionary(json);
       let processedSourceWordsAndStrokes = Object.assign({}, processDictionary(sourceWordsAndStrokes, stenoLayout));
       this.setState({

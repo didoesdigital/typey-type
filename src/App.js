@@ -9,7 +9,7 @@ import {
   parseCustomMaterial,
   parseWordList,
   setupLessonProgress,
-  fetchDictionaries,
+  fetchResource,
   fetchDictionaryIndex,
   getLesson,
   generateDictionaryEntries,
@@ -727,7 +727,7 @@ class App extends Component {
     let stenoLayout = "stenoLayoutAmericanSteno";
     if (this.state.userSettings) { stenoLayout = this.state.userSettings.stenoLayout; }
 
-    fetchDictionaries().then((json) => {
+    fetchResource(process.env.PUBLIC_URL + '/dictionaries/dict.json').then((json) => {
       let sourceWordsAndStrokes = swapKeyValueInDictionary(json);
       // remove garbage like {^}
       let processedSourceWordsAndStrokes = Object.assign({}, processDictionary(sourceWordsAndStrokes, stenoLayout));

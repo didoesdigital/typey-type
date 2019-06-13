@@ -7,7 +7,7 @@ import JapaneseStenoDiagram from './StenoLayout/JapaneseStenoDiagram';
 import KoreanModernCStenoDiagram from './StenoLayout/KoreanModernCStenoDiagram';
 import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
 import {
-  fetchDictionaries,
+  fetchResource,
   mapQWERTYKeysToStenoBrief,
   mapBriefToAmericanStenoKeys,
   mapBriefToDanishStenoKeys,
@@ -49,7 +49,8 @@ class Writer extends Component<Props, State> {
   updateQWERTYSteno = this.updateQWERTYSteno.bind(this);
 
   componentDidMount() {
-    fetchDictionaries().then((json) => {
+    let dict:string = '' + (process.env.PUBLIC_URL || '') + '/dictionaries/didoesdigital/vim.json';
+    fetchResource(dict).then((json) => {
       this.setState({
         stenoDictionary: json
       });

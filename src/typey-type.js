@@ -1370,8 +1370,8 @@ function setupLessonProgress(lessonIndex) {
 }
 
 // for custom lesson setup
-function fetchDictionaries() {
-  return fetch(process.env.PUBLIC_URL + '/dictionaries/dict.json', {
+function fetchResource(resource = process.env.PUBLIC_URL + '/dictionaries/dict.json') {
+  return fetch(resource, {
     method: "GET",
     credentials: "same-origin"
   }).then((response) => {
@@ -1406,7 +1406,7 @@ function updateCapitalisationStrokesInNextItem(nextItem, lastWord) {
 export {
   createWordListFromMetWords,
   fetchDictionaryIndex,
-  fetchDictionaries, // for custom lesson setup
+  fetchResource, // for custom lesson setup and more
   generateDictionaryEntries,
   getLesson,
   loadPersonalPreferences,
