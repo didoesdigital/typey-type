@@ -6,6 +6,7 @@ import ItalianMichelaStenoDiagram from './StenoLayout/ItalianMichelaStenoDiagram
 import JapaneseStenoDiagram from './StenoLayout/JapaneseStenoDiagram';
 import KoreanModernCStenoDiagram from './StenoLayout/KoreanModernCStenoDiagram';
 import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
+import Stroke from './stroke';
 import {
   fetchResource,
   mapQWERTYKeysToStenoBrief,
@@ -28,6 +29,7 @@ type Props = {
 
 type State = {
   stenoBrief: string,
+  stenoStroke: Stroke,
   stenoDictionary: Object,
   writtenText: string,
   valueRawSteno: string,
@@ -39,6 +41,7 @@ class Writer extends Component<Props, State> {
 
   state = {
     stenoBrief: '',
+    stenoStroke: new Stroke(),
     stenoDictionary: {},
     writtenText: '',
     valueRawSteno: '',
@@ -104,7 +107,10 @@ class Writer extends Component<Props, State> {
 
   sendStroke(stenoBrief: string) {
     let writtenText = this.lookUpStrokeInDictionary(stenoBrief);
-    this.setState({writtenText: writtenText});
+    this.setState({
+      stenoStroke: new Stroke(),
+      writtenText: writtenText
+    });
   }
 
   lookUpStrokeInDictionary(stenoBrief: string) {
@@ -125,11 +131,15 @@ class Writer extends Component<Props, State> {
   }
 
   addKeyToStenoBrief(key: string) {
+    let stenoStroke = this.state.stenoStroke.set(key);
     let stenoBrief = this.state.stenoBrief;
     if (!stenoBrief.includes(key)) {
       stenoBrief = stenoBrief + key;
     }
-    this.setState({stenoBrief: stenoBrief});
+    this.setState({
+      stenoBrief: stenoStroke.toString(),
+      stenoStroke: stenoStroke
+    });
   }
 
   render() {

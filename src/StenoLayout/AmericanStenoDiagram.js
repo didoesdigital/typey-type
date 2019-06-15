@@ -1,111 +1,112 @@
 import React, { Component } from 'react';
+import * as stroke from '../stroke';
 
-    let hidden = true;
+let hidden = true;
 
-    const strokeColor = '#7109AA';
-    const onTextColor = '#fff';
-    const offTextColor = '#fff';
+const strokeColor = '#7109AA';
+const onTextColor = '#fff';
+const offTextColor = '#fff';
 
-    let rightZOnColor = '#7109AA';
-    let rightDOnColor = '#7109AA';
-    let rightSOnColor = '#7109AA';
-    let rightTOnColor = '#7109AA';
-    let rightGOnColor = '#7109AA';
-    let rightLOnColor = '#7109AA';
-    let rightBOnColor = '#7109AA';
-    let rightPOnColor = '#7109AA';
-    let rightROnColor = '#7109AA';
-    let rightFOnColor = '#7109AA';
-    let rightUOnColor = '#7109AA';
-    let rightEOnColor = '#7109AA';
-    let starOnColor = '#7109AA';
-    let leftOOnColor = '#7109AA';
-    let leftAOnColor = '#7109AA';
-    let leftROnColor = '#7109AA';
-    let leftHOnColor = '#7109AA';
-    let leftWOnColor = '#7109AA';
-    let leftPOnColor = '#7109AA';
-    let leftKOnColor = '#7109AA';
-    let leftTOnColor = '#7109AA';
-    let leftSLowerOnColor = '#7109AA';
-    let leftSUpperOnColor = '#7109AA';
-    let numberBarOnColor = '#7109AA';
+let rightZOnColor = '#7109AA';
+let rightDOnColor = '#7109AA';
+let rightSOnColor = '#7109AA';
+let rightTOnColor = '#7109AA';
+let rightGOnColor = '#7109AA';
+let rightLOnColor = '#7109AA';
+let rightBOnColor = '#7109AA';
+let rightPOnColor = '#7109AA';
+let rightROnColor = '#7109AA';
+let rightFOnColor = '#7109AA';
+let rightUOnColor = '#7109AA';
+let rightEOnColor = '#7109AA';
+let starOnColor = '#7109AA';
+let leftOOnColor = '#7109AA';
+let leftAOnColor = '#7109AA';
+let leftROnColor = '#7109AA';
+let leftHOnColor = '#7109AA';
+let leftWOnColor = '#7109AA';
+let leftPOnColor = '#7109AA';
+let leftKOnColor = '#7109AA';
+let leftTOnColor = '#7109AA';
+let leftSLowerOnColor = '#7109AA';
+let leftSUpperOnColor = '#7109AA';
+let numberBarOnColor = '#7109AA';
 
-    let rightZOffColor = '#e9d9f2';
-    let rightDOffColor = '#e9d9f2';
-    let rightSOffColor = '#e9d9f2';
-    let rightTOffColor = '#e9d9f2';
-    let rightGOffColor = '#e9d9f2';
-    let rightLOffColor = '#e9d9f2';
-    let rightBOffColor = '#e9d9f2';
-    let rightPOffColor = '#e9d9f2';
-    let rightROffColor = '#e9d9f2';
-    let rightFOffColor = '#e9d9f2';
-    let rightUOffColor = '#e9d9f2';
-    let rightEOffColor = '#e9d9f2';
-    let starOffColor = '#e9d9f2';
-    let leftOOffColor = '#e9d9f2';
-    let leftAOffColor = '#e9d9f2';
-    let leftROffColor = '#e9d9f2';
-    let leftHOffColor = '#e9d9f2';
-    let leftWOffColor = '#e9d9f2';
-    let leftPOffColor = '#e9d9f2';
-    let leftKOffColor = '#e9d9f2';
-    let leftTOffColor = '#e9d9f2';
-    let leftSLowerOffColor = '#e9d9f2';
-    let leftSUpperOffColor = '#e9d9f2';
-    let numberBarOffColor = '#e9d9f2';
+let rightZOffColor = '#e9d9f2';
+let rightDOffColor = '#e9d9f2';
+let rightSOffColor = '#e9d9f2';
+let rightTOffColor = '#e9d9f2';
+let rightGOffColor = '#e9d9f2';
+let rightLOffColor = '#e9d9f2';
+let rightBOffColor = '#e9d9f2';
+let rightPOffColor = '#e9d9f2';
+let rightROffColor = '#e9d9f2';
+let rightFOffColor = '#e9d9f2';
+let rightUOffColor = '#e9d9f2';
+let rightEOffColor = '#e9d9f2';
+let starOffColor = '#e9d9f2';
+let leftOOffColor = '#e9d9f2';
+let leftAOffColor = '#e9d9f2';
+let leftROffColor = '#e9d9f2';
+let leftHOffColor = '#e9d9f2';
+let leftWOffColor = '#e9d9f2';
+let leftPOffColor = '#e9d9f2';
+let leftKOffColor = '#e9d9f2';
+let leftTOffColor = '#e9d9f2';
+let leftSLowerOffColor = '#e9d9f2';
+let leftSUpperOffColor = '#e9d9f2';
+let numberBarOffColor = '#e9d9f2';
 
-    let idKeyLookup = {
-      "rightZ": "Z",
-      "rightD": "D",
-      "rightS": "-S",
-      "rightT": "-T",
-      "rightG": "G",
-      "rightL": "L",
-      "rightB": "B",
-      "rightP": "-P",
-      "rightR": "-R",
-      "rightF": "F",
-      "rightU": "U",
-      "rightE": "E",
-      "star": "*",
-      "leftO": "O",
-      "leftA": "A",
-      "leftR": "R",
-      "leftH": "H",
-      "leftW": "W",
-      "leftP": "P",
-      "leftK": "K",
-      "leftT": "T",
-      "leftSLower": "S",
-      "leftSUpper": "S",
-      "numberBar": "#",
-      "Z": "Z",
-      "D": "D",
-      "SRight": "-S",
-      "TRight": "-T",
-      "G": "G",
-      "L": "L",
-      "B": "B",
-      "PRight": "-P",
-      "RRight": "-R",
-      "F": "F",
-      "U": "U",
-      "E": "E",
-      "O": "O",
-      "A": "A",
-      "*": "*",
-      "RLeft": "R",
-      "H": "H",
-      "W": "W",
-      "PLeft": "P",
-      "K": "K",
-      "TLeft": "T",
-      "SLower": "S",
-      "SUpper": "S",
-      "#": "#"
-    }
+let idKeyLookup = {
+  "rightZ": stroke.Z,
+  "rightD": stroke.D,
+  "rightS": stroke.RS,
+  "rightT": stroke.RT,
+  "rightG": stroke.G,
+  "rightL": stroke.L,
+  "rightB": stroke.B,
+  "rightP": stroke.RP,
+  "rightR": stroke.RR,
+  "rightF": stroke.F,
+  "rightU": stroke.U,
+  "rightE": stroke.E,
+  "star": stroke.STAR,
+  "leftO": stroke.O,
+  "leftA": stroke.A,
+  "leftR": stroke.R,
+  "leftH": stroke.H,
+  "leftW": stroke.W,
+  "leftP": stroke.P,
+  "leftK": stroke.K,
+  "leftT": stroke.T,
+  "leftSLower": stroke.S,
+  "leftSUpper": stroke.S,
+  "numberBar": stroke.HASH,
+  "Z": stroke.Z,
+  "D": stroke.D,
+  "SRight": stroke.RS,
+  "TRight": stroke.RT,
+  "G": stroke.G,
+  "L": stroke.L,
+  "B": stroke.B,
+  "PRight": stroke.RP,
+  "RRight": stroke.RR,
+  "F": stroke.F,
+  "U": stroke.U,
+  "E": stroke.E,
+  "O": stroke.O,
+  "A": stroke.A,
+  "*": stroke.STAR,
+  "RLeft": stroke.R,
+  "H": stroke.H,
+  "W": stroke.W,
+  "PLeft": stroke.P,
+  "K": stroke.K,
+  "TLeft": stroke.T,
+  "SLower": stroke.S,
+  "SUpper": stroke.S,
+  "#": stroke.HASH
+}
 
 
 class AmericanStenoDiagram extends Component {
