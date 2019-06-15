@@ -1690,12 +1690,42 @@ describe('mapQWERTYKeysToStenoBrief', () => {
     });
   });
 
-  describe('American stroke without vowels or star', () => {
+  describe('American stroke with one right-side key that appears on both sides, without vowels or star', () => {
     it('should return as it was', () => {
       let qwertyString = 'dfj';
       let stenoLayout = 'stenoLayoutAmericanSteno';
 
       let stenoBrief = 'WR-R';
+      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+    });
+  });
+
+  describe('American stroke with multiple right-side keys that appears on both sides, without vowels or star', () => {
+    it('should return as it was', () => {
+      let qwertyString = 'rop;';
+      let stenoLayout = 'stenoLayoutAmericanSteno';
+
+      let stenoBrief = 'H-LTS';
+      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+    });
+  });
+
+  describe('American stroke with F and no vowels or star', () => {
+    it('should return as it was', () => {
+      let qwertyString = 'rfu';
+      let stenoLayout = 'stenoLayoutAmericanSteno';
+
+      let stenoBrief = 'HR-F';
+      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+    });
+  });
+
+  describe('American stroke with F, P, and no vowels or star', () => {
+    it('should return as it was', () => {
+      let qwertyString = 'rfui';
+      let stenoLayout = 'stenoLayoutAmericanSteno';
+
+      let stenoBrief = 'HR-FP';
       expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
     });
   });
@@ -1710,11 +1740,34 @@ describe('mapQWERTYKeysToStenoBrief', () => {
     });
   });
 
+  describe('American right-side stroke with one right-side key that appears on both sides, without vowels or star', () => {
+    it('should return as it was', () => {
+      let qwertyString = 'uj';
+      let stenoLayout = 'stenoLayoutAmericanSteno';
+
+      // let stenoBriefClickedString = 'F-R';
+      let stenoBrief = '-FR';
+      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+    });
+  });
+
+  describe('American right-side stroke with multiple right-side keys that appear on both sides, without vowels or star', () => {
+    it('should return as it was', () => {
+      let qwertyString = 'uiop';
+      let stenoLayout = 'stenoLayoutAmericanSteno';
+
+      // let stenoBriefClickedString = 'F-PL-T';
+      let stenoBrief = '-FPLT';
+      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+    });
+  });
+
   describe('American right-side stroke with vowels', () => {
     it('should return as it was', () => {
       let qwertyString = 'nuj';
       let stenoLayout = 'stenoLayoutAmericanSteno';
 
+      // let stenoBriefClickedString = 'EF-R';
       let stenoBrief = 'EFR';
       expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
     });
