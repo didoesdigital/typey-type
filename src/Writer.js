@@ -124,6 +124,14 @@ class Writer extends Component<Props, State> {
     return stenoBrief;
   }
 
+  addKeyToStenoBrief(key: string) {
+    let stenoBrief = this.state.stenoBrief;
+    if (!stenoBrief.includes(key)) {
+      stenoBrief = stenoBrief + key;
+    }
+    this.setState({stenoBrief: stenoBrief});
+  }
+
   render() {
 
     let mapBriefsFunction = mapBriefToAmericanStenoKeys;
@@ -176,7 +184,7 @@ class Writer extends Component<Props, State> {
               <span className="visually-hidden">Your written text:</span>{this.state.writtenText}&nbsp;
             </p>
             <div>
-              <StenoLayoutDiagram {...mapBriefsFunction(this.state.stenoBrief)} brief={"STKPWHRAO*EUFRPBLGTSDZ"} diagramWidth="440" />
+              <StenoLayoutDiagram {...mapBriefsFunction(this.state.stenoBrief)} newOnClick={this.addKeyToStenoBrief.bind(this)} brief={"STKPWHRAO*EUFRPBLGTSDZ"} diagramWidth="440" />
             </div>
             <div className="flex flex-wrap">
               { this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno" ?

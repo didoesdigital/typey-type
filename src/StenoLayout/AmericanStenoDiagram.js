@@ -1,20 +1,5 @@
 import React, { Component } from 'react';
 
-class AmericanStenoDiagram extends Component {
-  // componentDidMount() {
-  //   if (this.props.currentPhrase) {
-  //     // let strokes = splitBriefsIntoStrokes(this.props.currentPhrase);
-  //     // let keys = splitBriefsIntoStrokes(this.props.currentPhrase);
-
-  //   }
-  // }
-
-  render() {
-    // const strokeColor = '#321E3E';
-    // const strokeColor = '#6c6076';
-    // const offTextColor = '#CAC7CC';
-    // const strokeColor = 'hsla(277, 10%, 60%, 1)';
-    // const strokeColor = '#321E3E';
     let hidden = true;
 
     const strokeColor = '#7109AA';
@@ -71,10 +56,81 @@ class AmericanStenoDiagram extends Component {
     let leftSUpperOffColor = '#e9d9f2';
     let numberBarOffColor = '#e9d9f2';
 
+    let idKeyLookup = {
+      "rightZ": "Z",
+      "rightD": "D",
+      "rightS": "-S",
+      "rightT": "-T",
+      "rightG": "G",
+      "rightL": "L",
+      "rightB": "B",
+      "rightP": "-P",
+      "rightR": "-R",
+      "rightF": "F",
+      "rightU": "U",
+      "rightE": "E",
+      "star": "*",
+      "leftO": "O",
+      "leftA": "A",
+      "leftR": "R",
+      "leftH": "H",
+      "leftW": "W",
+      "leftP": "P",
+      "leftK": "K",
+      "leftT": "T",
+      "leftSLower": "S",
+      "leftSUpper": "S",
+      "numberBar": "#",
+      "Z": "Z",
+      "D": "D",
+      "SRight": "-S",
+      "TRight": "-T",
+      "G": "G",
+      "L": "L",
+      "B": "B",
+      "PRight": "-P",
+      "RRight": "-R",
+      "F": "F",
+      "U": "U",
+      "E": "E",
+      "O": "O",
+      "A": "A",
+      "*": "*",
+      "RLeft": "R",
+      "H": "H",
+      "W": "W",
+      "PLeft": "P",
+      "K": "K",
+      "TLeft": "L",
+      "SLower": "S",
+      "SUpper": "S",
+      "#": "#"
+    }
+
+
+class AmericanStenoDiagram extends Component {
+
+  handleClick(event) {
+    let key = "";
+    let clickedKeyID = event.target["id"];
+    if (idKeyLookup[clickedKeyID]) {
+      key = idKeyLookup[clickedKeyID];
+    }
+    this.props.newOnClick(key);
+  }
+
+
+  render() {
+    // const strokeColor = '#321E3E';
+    // const strokeColor = '#6c6076';
+    // const offTextColor = '#CAC7CC';
+    // const strokeColor = 'hsla(277, 10%, 60%, 1)';
+    // const strokeColor = '#321E3E';
+
     let diagramWidth = this.props.diagramWidth || 140;
 
     return (
-      <svg viewBox="0 0 215 101" width={diagramWidth} xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
+      <svg viewBox="0 0 215 101" width={diagramWidth} xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden} onClick={this.handleClick.bind(this)}>
         <g id={"stenoboard-" + this.props.brief } transform="translate(1 1)" fill="none" fillRule="evenodd">
           <rect id="rightZ" stroke={strokeColor} fill={this.props.rightZ ? rightZOnColor : rightZOffColor} x="195" y="48" width="18" height="23" rx="4"/>
           <rect id="rightD" stroke={strokeColor} fill={this.props.rightD ? rightDOnColor : rightDOffColor} x="195" y="20" width="18" height="23" rx="4"/>
