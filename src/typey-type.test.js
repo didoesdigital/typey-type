@@ -5,6 +5,7 @@ import {
   generateDictionaryEntries,
   loadPersonalPreferences,
   lookUpDictionaryInIndex,
+  mapQWERTYKeysToStenoBrief,
   processDictionary,
   strokeAccuracy,
   splitBriefsIntoStrokes,
@@ -1667,6 +1668,78 @@ describe('loadPersonalPreferences', () => {
 //     });
 //   });
 // });
+
+describe('mapQWERTYKeysToStenoBrief', () => {
+  describe('American stroke with star', () => {
+    it('should return as it was', () => {
+      let qwertyString = 'dfchp';
+      let stenoLayout = 'stenoLayoutAmericanSteno';
+
+      let stenoBrief = 'WRA*T';
+      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+    });
+  });
+
+  describe('American stroke with center vowels', () => {
+    it('should return as it was', () => {
+      let qwertyString = 'dc;';
+      let stenoLayout = 'stenoLayoutAmericanSteno';
+
+      let stenoBrief = 'WAS';
+      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+    });
+  });
+
+  describe('American stroke without vowels or star', () => {
+    it('should return as it was', () => {
+      let qwertyString = 'dfj';
+      let stenoLayout = 'stenoLayoutAmericanSteno';
+
+      let stenoBrief = 'WR-R';
+      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+    });
+  });
+
+  describe('American right-side stroke without vowels or star', () => {
+    it('should return as it was', () => {
+      let qwertyString = 'p';
+      let stenoLayout = 'stenoLayoutAmericanSteno';
+
+      let stenoBrief = '-T';
+      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+    });
+  });
+
+  describe('American right-side stroke with vowels', () => {
+    it('should return as it was', () => {
+      let qwertyString = 'nuj';
+      let stenoLayout = 'stenoLayoutAmericanSteno';
+
+      let stenoBrief = 'EFR';
+      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+    });
+  });
+
+  describe('American right-side stroke with star', () => {
+    it('should return as it was', () => {
+      let qwertyString = 'hnuj[';
+      let stenoLayout = 'stenoLayoutAmericanSteno';
+
+      let stenoBrief = '*EFRD';
+      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+    });
+  });
+
+  describe('American number bar stroke', () => {
+    it('should return as it was', () => {
+      let qwertyString = "3'";
+      let stenoLayout = 'stenoLayoutAmericanSteno';
+
+      let stenoBrief = '#Z';
+      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+    });
+  });
+});
 
 describe('processDictionary', () => {
   describe('without dictionary commands', () => {

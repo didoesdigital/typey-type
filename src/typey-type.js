@@ -78,13 +78,13 @@ function mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout = "stenoLayoutAmeri
     'n': 'E',
     'm': 'U',
     'u': 'F',
-    'j': 'R',
-    'i': 'P',
+    'j': '-R',
+    'i': '-P',
     'k': 'B',
     'o': 'L',
     'l': 'G',
-    'p': 'T',
-    ';': 'S',
+    'p': '-T',
+    ';': '-S',
     '[': 'D',
     "'": 'Z'
   };
@@ -106,13 +106,13 @@ function mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout = "stenoLayoutAmeri
     'n': "Æ",
     'm': "Å",
     'u': "F",
-    'j': "R",
-    'i': "P",
+    'j': "-R",
+    'i': "-P",
     'k': "E",
     'o': "L",
     'l': "K",
-    'p': "T",
-    ';': "S",
+    'p': "-T",
+    ';': "-S",
     '[': "D",
     "'": "D",
     'q': "N"
@@ -170,6 +170,9 @@ function mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout = "stenoLayoutAmeri
       break;
   }
   stenoBrief = qwertyString.split('').map(character => stenoMap[character]).join('');
+  if (stenoBrief.includes('-') && stenoBrief.match(/[AOEU*]/) !== null) {
+    stenoBrief = stenoBrief.replace(/-/g, '');
+  }
   return stenoBrief;
 }
 
