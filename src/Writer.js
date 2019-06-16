@@ -238,6 +238,7 @@ class Writer extends Component<Props, State> {
                       autoCorrect="off"
                       className="input-textarea"
                       onChange={this.updateQWERTYSteno}
+                      placeholder="e.g. rnm"
                       value={this.state.valueQWERTYSteno}
                     />
                   </p>
@@ -256,6 +257,7 @@ class Writer extends Component<Props, State> {
                       autoCorrect="off"
                       className="input-textarea"
                       onChange={this.updateRawSteno}
+                      placeholder="e.g. HEU"
                       value={this.state.valueRawSteno}
                     />
                   </p>
