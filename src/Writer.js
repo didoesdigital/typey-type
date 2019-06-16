@@ -365,7 +365,7 @@ class Writer extends Component<Props, State> {
                   </div>
                 </fieldset>
                 :
-                null
+                  <p className="text-small">Note: clicking on the diagram only works for American steno (Ward Stone Ireland) layout at this time.</p>
               }
             </div>
           </div>
