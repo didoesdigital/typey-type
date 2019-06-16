@@ -39,6 +39,7 @@ type State = {
 
 class Writer extends Component<Props, State> {
   mainHeading: ?HTMLHeadingElement;
+  downloadLink: ?HTMLAnchorElement;
 
   state = {
     stenoBrief: '',
@@ -62,6 +63,37 @@ class Writer extends Component<Props, State> {
 
     if (this.mainHeading) {
       this.mainHeading.focus();
+    }
+  }
+
+  downloadDiagramSVG(e: SyntheticInputEvent<HTMLElement>) {
+    // First version of this:
+    let svgFileName = "typey-type-" + this.props.userSettings.stenoLayout.replace('stenoLayout','') + '-' + (this.state.stenoBrief || 'no-brief') + ".svg";
+
+    GoogleAnalytics.event({
+      category: 'Downloads',
+      action: 'Click',
+      label: svgFileName || '',
+    });
+
+    let downloadDiagramSVG;
+    let svg:?HTMLElement = document.getElementById("stenoDiagram");
+    if (svg) {
+      let svgHTML = svg.outerHTML;
+      if (Blob !== undefined) {
+        let blob = new Blob([svgHTML], {type: "image/svg+xml"});
+        downloadDiagramSVG = URL.createObjectURL(blob);
+      }
+      else {
+        downloadDiagramSVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgHTML);
+      }
+    }
+    else {
+      downloadDiagramSVG = null;
+    }
+
+    if (this.downloadLink && downloadDiagramSVG) {
+      this.downloadLink.href = downloadDiagramSVG;
     }
   }
 
@@ -217,6 +249,16 @@ class Writer extends Component<Props, State> {
         break;
     }
 
+    let downloadDiagramSVG = null;
+
+    let svg = document.getElementById("stenoDiagram");
+    if (svg) {
+      downloadDiagramSVG = "#";
+    }
+
+    // Second version of this:
+    let svgFileName = "typey-type-" + this.props.userSettings.stenoLayout.replace('stenoLayout','') + '-' + (this.state.stenoBrief || 'no-brief') + ".svg";
+
     return (
       <main id="main">
         <div className="subheader">
@@ -225,6 +267,13 @@ class Writer extends Component<Props, State> {
               <header className="flex items-baseline">
                 <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="writer">Writer</h2>
               </header>
+            </div>
+            <div className="flex mxn2">
+              {downloadDiagramSVG ?
+                  <a href={downloadDiagramSVG} ref={(downloadLink) => { this.downloadLink = downloadLink; }} download={svgFileName} onClick={this.downloadDiagramSVG.bind(this)} className="link-button link-button-ghost table-cell mr1">Download diagram (SVG)</a>
+                :
+                null
+              }
             </div>
           </div>
         </div>
@@ -236,7 +285,7 @@ class Writer extends Component<Props, State> {
                 <span className="visually-hidden">Your written text: </span>{this.state.writtenText}&#8203;
               </p>
               <div className="responsive-writer">
-                <StenoLayoutDiagram {...mapBriefsFunction(this.state.stenoBrief)} newOnClick={this.addKeyToStenoBrief.bind(this)} brief={this.state.stenoBrief} diagramWidth="440" />
+                <StenoLayoutDiagram id="stenoDiagram" {...mapBriefsFunction(this.state.stenoBrief)} newOnClick={this.addKeyToStenoBrief.bind(this)} brief={this.state.stenoBrief} diagramWidth="440" />
               </div>
               <p className="text-center mr4 mt1">
                 <button onClick={this.sendDiagramStroke.bind(this)} className="button text-center">Send stroke</button>
