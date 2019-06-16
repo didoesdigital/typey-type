@@ -1043,24 +1043,24 @@ class App extends Component {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
 
-    const name = 'stenoLayout'
+    const name = event.target.name;
     const value = event.target.value;
 
-    newState[name] = value;
+    newState['stenoLayout'] = value;
 
     this.setState({userSettings: newState}, () => {
-      if (!(name === 'caseSensitive')) {
-        this.setupLesson();
-      }
+      this.setupLesson();
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
 
     let labelString = value;
+    let actionString = 'Change steno layout';
+    if (name === 'writerStenoLayout') { actionString = 'Change writer steno layout'; }
     if (!value) { labelString = "BAD_INPUT"; }
 
     GoogleAnalytics.event({
       category: 'UserSettings',
-      action: 'Change steno layout',
+      action: actionString,
       label: labelString
     });
 

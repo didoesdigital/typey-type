@@ -275,7 +275,7 @@ class Writer extends Component<Props, State> {
               </div>
               <div className="mb2 mw-240">
                 <label className="mb1 db" htmlFor="stenoLayout">Steno layout</label>
-                <select id="stenoLayout" name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} className="text-small form-control w6">
+                <select id="stenoLayout" name="writerStenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} className="text-small form-control w6">
                   <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
                   <option value="stenoLayoutPalantype">Palantype</option>
                   <option value="stenoLayoutDanishSteno">Danish steno</option>
