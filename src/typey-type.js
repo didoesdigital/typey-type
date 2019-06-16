@@ -61,7 +61,16 @@ function splitBriefsIntoStrokes (currentStroke) {
 function mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout = "stenoLayoutAmericanSteno") {
 
   const QWERTY_TO_AMERICAN_WARD_STONE_IRELAND_STENO_MAP = {
+    '1': stroke.HASH,
+    '2': stroke.HASH,
     '3': stroke.HASH,
+    '4': stroke.HASH,
+    '5': stroke.HASH,
+    '6': stroke.HASH,
+    '7': stroke.HASH,
+    '8': stroke.HASH,
+    '9': stroke.HASH,
+    '0': stroke.HASH,
     'q': stroke.S,
     'a': stroke.S,
     'w': stroke.T,
