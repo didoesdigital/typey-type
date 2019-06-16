@@ -17,6 +17,7 @@ import {
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys
 } from './typey-type';
+import GoogleAnalytics from 'react-ga';
 
 type Props = {
   changeStenoLayout: (event: SyntheticInputEvent<HTMLSelectElement>) => string,
@@ -120,6 +121,16 @@ class Writer extends Component<Props, State> {
 
   sendStroke(stenoBrief: string) {
     let writtenText = this.lookUpStrokeInDictionary(stenoBrief);
+
+    let labelString = this.state.stenoBrief;
+    if (!labelString) { labelString = "BAD_INPUT"; }
+
+    GoogleAnalytics.event({
+      category: 'Writer',
+      action: 'Send stroke',
+      label: labelString
+    });
+
     this.setState({
       stenoBrief: '',
       stenoStroke: new Stroke(),
