@@ -22,9 +22,11 @@ const RS   = 0b00100000000000000000000;
 const D    = 0b01000000000000000000000;
 const Z    = 0b10000000000000000000000;
 
+// const LEFT = S | T | K | P | W | H | R | A | O;
 // const LEFT = 0b00000000000001111111110;
-const AMBIGUOUS_RIGHT_KEYS = RS | RT | RP | RR;
+// const AMBIGUOUS_RIGHT_KEYS = RS | RT | RP | RR;
 const VOWELS_AND_STAR = A | O | STAR | E | U;
+const RIGHT_KEYS = F | RR | RP | B | L | G | RT | RS | D | Z;
 
 class Stroke {
   constructor(bits = 0) {
@@ -115,7 +117,7 @@ class Stroke {
   }
 
   requiresDisambiguation() {
-    return (this.bits & AMBIGUOUS_RIGHT_KEYS) !== 0 && (this.bits & VOWELS_AND_STAR) === 0;
+    return (this.bits & RIGHT_KEYS) !== 0 && (this.bits & VOWELS_AND_STAR) === 0;
   }
 }
 
