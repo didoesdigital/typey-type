@@ -1,4 +1,6 @@
 import Zipper from './zipper';
+import Stroke from './stroke';
+import * as stroke from './stroke';
 import { isPeak } from './utils.js';
 
 function createWordListFromMetWords (metWords) {
@@ -56,124 +58,49 @@ function splitBriefsIntoStrokes (currentStroke) {
 
 
 
-function mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout = "stenoLayoutAmericanSteno") {
-  let stenoBrief = '';
-  let stenoMap = {};
+function mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout = "stenoLayoutAmericanSteno") {
+
   const QWERTY_TO_AMERICAN_WARD_STONE_IRELAND_STENO_MAP = {
-    '3': '#',
-    'q': 'S',
-    'a': 'S',
-    'w': 'T',
-    's': 'K',
-    'e': 'P',
-    'd': 'W',
-    'r': 'H',
-    'f': 'R',
-    'c': 'A',
-    'v': 'O',
-    't': '*',
-    'g': '*',
-    'y': '*',
-    'h': '*',
-    'n': 'E',
-    'm': 'U',
-    'u': 'F',
-    'j': '-R',
-    'i': '-P',
-    'k': 'B',
-    'o': 'L',
-    'l': 'G',
-    'p': '-T',
-    ';': '-S',
-    '[': 'D',
-    "'": 'Z'
-  };
-  const QWERTY_TO_DANISH_STENO_MAP = {
-    '3': "#",
-    'a': "S",
-    'w': "T",
-    's': "K",
-    'e': "P",
-    'd': "V",
-    'r': "H",
-    'f': "R",
-    'c': "A",
-    'v': "O",
-    't': "*",
-    'g': "*",
-    'y': "*",
-    'h': "*",
-    'n': "Æ",
-    'm': "Å",
-    'u': "F",
-    'j': "-R",
-    'i': "-P",
-    'k': "E",
-    'o': "L",
-    'l': "K",
-    'p': "-T",
-    ';': "-S",
-    '[': "D",
-    "'": "D",
-    'q': "N"
+    '3': stroke.HASH,
+    'q': stroke.S,
+    'a': stroke.S,
+    'w': stroke.T,
+    's': stroke.K,
+    'e': stroke.P,
+    'd': stroke.W,
+    'r': stroke.H,
+    'f': stroke.R,
+    'c': stroke.A,
+    'v': stroke.O,
+    't': stroke.STAR,
+    'g': stroke.STAR,
+    'y': stroke.STAR,
+    'h': stroke.STAR,
+    'n': stroke.E,
+    'm': stroke.U,
+    'u': stroke.F,
+    'j': stroke.RR,
+    'i': stroke.RP,
+    'k': stroke.B,
+    'o': stroke.L,
+    'l': stroke.G,
+    'p': stroke.RT,
+    ';': stroke.RS,
+    '[': stroke.D,
+    "'": stroke.Z
   };
 
-  const QWERTY_TO_ITALIAN_MICHELA_STENO_MAP = {
-   'q': "F",
-   'a': "S",
-   's': "C",
-   'w': "Z",
-   'd': "P",
-   'e': "N",
-   'f': "R",
-   'r': "X",
-   'v': "I",
-   'b': "U",
-   'n': "u",
-   'm': "i",
-   'u': "e",
-   'j': "a",
-   'i': "n",
-   'k': "p",
-   'o': "z",
-   'l': "c",
-   ';': "s",
-   'p': "f"
-  };
-
-  // TODO: create maps using default keyboard layouts for these languages
-  const QWERTY_TO_JAPANESE_STENO_MAP = {};
-  const QWERTY_TO_KOREAN_MODERN_C_STENO_MAP = {};
-  const QWERTY_TO_PALANTYPE_MAP = {};
-
-  switch (stenoLayout) {
-    case "stenoLayoutAmericanSteno":
-      stenoMap = QWERTY_TO_AMERICAN_WARD_STONE_IRELAND_STENO_MAP;
-      break;
-    case "stenoLayoutDanishSteno":
-      stenoMap = QWERTY_TO_DANISH_STENO_MAP;
-      break;
-    case "stenoLayoutItalianMichelaSteno":
-      stenoMap = QWERTY_TO_ITALIAN_MICHELA_STENO_MAP;
-      break;
-    case "stenoLayoutJapaneseSteno":
-      stenoMap = QWERTY_TO_JAPANESE_STENO_MAP;
-      break;
-    case "stenoLayoutKoreanModernCSteno":
-      stenoMap = QWERTY_TO_KOREAN_MODERN_C_STENO_MAP;
-      break;
-    case "stenoLayoutPalantype":
-      stenoMap = QWERTY_TO_PALANTYPE_MAP;
-      break;
-    default:
-      stenoMap = QWERTY_TO_AMERICAN_WARD_STONE_IRELAND_STENO_MAP;
-      break;
+  let stenoStroke = new Stroke();
+  let splitQWERTY = [...qwertyString];
+  for (let i = 0; i < splitQWERTY.length; i++) {
+    let character = qwertyString[i];
+    if (QWERTY_TO_AMERICAN_WARD_STONE_IRELAND_STENO_MAP[character]) {
+      stenoStroke = stenoStroke.set(QWERTY_TO_AMERICAN_WARD_STONE_IRELAND_STENO_MAP[character]);
+    }
   }
-  stenoBrief = qwertyString.split('').map(character => stenoMap[character]).join('');
-  if (stenoBrief.includes('-') && stenoBrief.match(/[AOEU*]/) !== null) {
-    stenoBrief = stenoBrief.replace(/-/g, '');
-  }
-  return stenoBrief;
+
+  // debugger;
+  return stenoStroke;
 }
 
 function mapBriefToAmericanStenoKeys (brief) {
@@ -1415,7 +1342,7 @@ export {
   loadPersonalPreferences,
   lookUpDictionaryInIndex,
   matchSplitText,
-  mapQWERTYKeysToStenoBrief,
+  mapQWERTYKeysToStenoStroke,
   mapBriefToAmericanStenoKeys,
   mapBriefToDanishStenoKeys,
   mapBriefToItalianMichelaStenoKeys,

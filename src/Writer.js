@@ -9,7 +9,7 @@ import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
 import Stroke from './stroke';
 import {
   fetchResource,
-  mapQWERTYKeysToStenoBrief,
+  mapQWERTYKeysToStenoStroke,
   mapBriefToAmericanStenoKeys,
   mapBriefToDanishStenoKeys,
   mapBriefToItalianMichelaStenoKeys,
@@ -94,6 +94,7 @@ class Writer extends Component<Props, State> {
     else {
       currentValue = '';
     }
+
     if (currentValue.includes(' ')) {
       let stenoBrief = this.updateBrief(currentValue);
       this.sendStroke(stenoBrief);
@@ -108,18 +109,14 @@ class Writer extends Component<Props, State> {
   sendStroke(stenoBrief: string) {
     let writtenText = this.lookUpStrokeInDictionary(stenoBrief);
     this.setState({
+      stenoBrief: '',
       stenoStroke: new Stroke(),
       writtenText: writtenText
     });
   }
 
   sendDiagramStroke() {
-    let stenoBrief = this.state.stenoStroke.toString();
-    let writtenText = this.lookUpStrokeInDictionary(stenoBrief);
-    this.setState({
-      stenoStroke: new Stroke(),
-      writtenText: writtenText
-    });
+    this.sendStroke(this.state.stenoBrief);
   }
 
   lookUpStrokeInDictionary(stenoBrief: string) {
@@ -131,24 +128,23 @@ class Writer extends Component<Props, State> {
   }
 
   updateBrief(typedText: string) {
-    let stenoBrief : string = '';
     // TODO: let strokes = splitBriefsIntoStrokes(typedText);
-    // TODO: for(i in strokes) { briefs = strokes[i].mapQWERTYKeysToStenoBrief() };
-    stenoBrief = mapQWERTYKeysToStenoBrief(typedText, this.props.userSettings.stenoLayout);
-    this.setState({stenoBrief: stenoBrief});
-    return stenoBrief;
-  }
+    let stenoStroke = mapQWERTYKeysToStenoStroke(typedText, this.props.userSettings.stenoLayout);
 
-  addKeyToStenoBrief(key: string) {
-    let stenoStroke = this.state.stenoStroke.set(key);
-
-    let stenoBrief = this.state.stenoBrief;
-    if (!stenoBrief.includes(key)) {
-      stenoBrief = stenoBrief + key;
-    }
     this.setState({
       stenoBrief: stenoStroke.toString(),
       stenoStroke: stenoStroke
+    });
+    return stenoStroke.toString();
+  }
+
+  addKeyToStenoBrief(key: string) {
+    let stenoStroke:Object = this.state.stenoStroke.set(key);
+
+    this.setState({
+      stenoBrief: stenoStroke.toString(),
+      stenoStroke: stenoStroke,
+      valueQWERTYSteno: ''
     });
   }
 
@@ -217,7 +213,7 @@ class Writer extends Component<Props, State> {
                 <span className="visually-hidden">Your written text:</span>{this.state.writtenText}&nbsp;
               </p>
               <div>
-                <StenoLayoutDiagram {...mapBriefsFunction(this.state.stenoBrief)} newOnClick={this.addKeyToStenoBrief.bind(this)} brief={"STKPWHRAO*EUFRPBLGTSDZ"} diagramWidth="440" />
+                <StenoLayoutDiagram {...mapBriefsFunction(this.state.stenoBrief)} newOnClick={this.addKeyToStenoBrief.bind(this)} brief={this.state.stenoBrief} diagramWidth="440" />
               </div>
               <p className="text-center mr4 mt1">
                 <button onClick={this.sendDiagramStroke.bind(this)} className="button text-center">Send stroke</button>
