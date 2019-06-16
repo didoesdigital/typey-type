@@ -17,8 +17,6 @@ import {
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys
 } from './typey-type';
-import { Tooltip } from 'react-tippy';
-
 
 type Props = {
   changeStenoLayout: (event: SyntheticInputEvent<HTMLSelectElement>) => string,
@@ -255,20 +253,7 @@ class Writer extends Component<Props, State> {
                 }
               </div>
               <div className="mb2 mw-240">
-                <Tooltip
-                  title="Show a steno diagram that suits your steno layout"
-                  className="mw-240"
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital didoesdigital-sm"
-                  trigger="mouseenter focus click"
-                  onShow={this.props.setAnnouncementMessage}
-                >
-                  <label className="mb1 db" htmlFor="stenoLayout">Steno layout</label>
-                </Tooltip>
+                <label className="mb1 db" htmlFor="stenoLayout">Steno layout</label>
                 <select id="stenoLayout" name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} className="text-small form-control w6">
                   <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
                   <option value="stenoLayoutPalantype">Palantype</option>
