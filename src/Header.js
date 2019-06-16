@@ -39,24 +39,24 @@ class Header extends Component {
             <nav>
               <div className="site-heading-banner">
                 <Link to="/" className="heading-link dib" aria-label="Typey Type" id="ga--header--logo">
-                  <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">
-                    <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" className="mr1 svg-icon-wrapper svg-baseline" />
-                    Typey&nbsp;Type
+                  <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" className="flex items-end">
+                    <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" className="h4 mr1 svg-icon-wrapper svg-baseline" />
+                    <span className="h5">Typey&nbsp;Type</span>
                   </h1>
                 </Link>
               </div>
               <div className="nav-menu-xs">
                 <Link to="/progress" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>
-                <span className="divider--vertical hide-lg"></span>
-                <Link to="/dictionaries" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Dictionaries</Link>
+                <Link to="/writer" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--writer">Writer</Link>
+                <Link to="/dictionaries" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--dictionaries">Dictionaries</Link>
+                <Link to="/lessons" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--lessons">Lessons</Link>
               </div>
               <div className="table search-container relative">
                 <Link to="/progress" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>
-                <span className="divider--vertical hide-md"></span>
-                <Link to="/dictionaries" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Dictionaries</Link>
-                <span className="divider--vertical hide-md"></span>
-                <Link to="/lessons" className="link-button link-button-ghost mr1 table-cell" id="ga--header--lessons">Lessons</Link>
-                <label htmlFor="lessons-autocomplete" className="visually-hidden">Search for a lesson</label>
+                <Link to="/writer" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--writer">Writer</Link>
+                <Link to="/dictionaries" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--dictionaries">Dictionaries</Link>
+                <Link to="/lessons" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--lessons">Lessons</Link>
+                <label htmlFor="lessons-autocomplete" className="visually-hidden">Search lessons</label>
                 <Autocomplete
                   getItemValue={(item) => item.title}
                   inputProps={{ id: 'lessons-autocomplete', spellCheck: 'false', autoCapitalize: "off", autoCorrect: "off", placeholder: "Search for a lesson" }}

@@ -307,6 +307,9 @@ input:focus::placeholder {
 .items-center {
   align-items: center; }
 
+.items-end {
+  align-items: flex-end; }
+
 .self-center {
   align-self: center; }
 
@@ -740,6 +743,12 @@ input:focus::placeholder {
 .h3 {
   font-size: 25px; }
 
+.h4 {
+  font-size: 20px; }
+
+.h5 {
+  font-size: 16px; }
+
 .divider {
   border-top: 1px solid #d9d3dc; }
 
@@ -749,13 +758,13 @@ input:focus::placeholder {
 .header {
   background-color: #2e173b;
   color: #c6bdcb; }
-  .header h1 {
-    font-size: 25px; }
   .header nav {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between; }
+    .header nav .link-button.link-button-ghost {
+      text-decoration: none; }
   .header .search-container {
     max-width: 725px; }
     @media (max-width: 959px) {

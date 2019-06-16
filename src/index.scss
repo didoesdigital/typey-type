@@ -381,6 +381,7 @@ input:focus::placeholder {
 .justify-center   { justify-content: center; }
 .items-baseline   { align-items: baseline; }
 .items-center     { align-items: center; }
+.items-end        { align-items: flex-end; }
 .self-center      { align-self: center; }
 .content-start-ns { align-content: flex-start; }
 .hide             { display: none; }
@@ -631,6 +632,14 @@ input:focus::placeholder {
   font-size: $h3-size;
 }
 
+.h4 {
+  font-size: $h4-size;
+}
+
+.h5 {
+  font-size: $h5-size;
+}
+
 
 
 
@@ -648,14 +657,15 @@ input:focus::placeholder {
   background-color: saturate(add-shade($brand-primary, 30%), 5%);
   color: add-tint($brand-primary, 70%);
 
-  h1 {
-    font-size: $h3-size;
-  }
   nav {
     align-items: center;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+
+    .link-button.link-button-ghost {
+      text-decoration: none;
+    }
   }
   .search-container {
     max-width: 725px; // arbitrary to fit nav buttons, search placeholder, button
