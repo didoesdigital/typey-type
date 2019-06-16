@@ -1,13 +1,62 @@
 import React, { Component } from 'react';
 
-class DanishStenoDiagram extends Component {
-  // componentDidMount() {
-  //   if (this.props.currentPhrase) {
-  //     // let strokes = splitBriefsIntoStrokes(this.props.currentPhrase);
-  //     // let keys = splitBriefsIntoStrokes(this.props.currentPhrase);
+let hidden = true;
 
-  //   }
-  // }
+const strokeColor = '#7109AA';
+const onTextColor = '#fff';
+const offTextColor = '#fff';
+
+let rightDLowerOnColor = '#7109AA';
+let rightDUpperOnColor = '#7109AA';
+let rightSOnColor = '#7109AA';
+let rightTOnColor = '#7109AA';
+let rightKOnColor = '#7109AA';
+let rightLOnColor = '#7109AA';
+let rightEOnColor = '#7109AA';
+let rightPOnColor = '#7109AA';
+let rightROnColor = '#7109AA';
+let rightFOnColor = '#7109AA';
+let rightÅOnColor = '#7109AA';
+let rightÆOnColor = '#7109AA';
+let starOnColor = '#7109AA';
+let leftOOnColor = '#7109AA';
+let leftAOnColor = '#7109AA';
+let leftROnColor = '#7109AA';
+let leftHOnColor = '#7109AA';
+let leftVOnColor = '#7109AA';
+let leftPOnColor = '#7109AA';
+let leftKOnColor = '#7109AA';
+let leftTOnColor = '#7109AA';
+let leftSLowerOnColor = '#7109AA';
+let leftNOnColor = '#7109AA';
+let numberBarOnColor = '#7109AA';
+
+let rightDLowerOffColor = '#e9d9f2';
+let rightDUpperOffColor = '#e9d9f2';
+let rightSOffColor = '#e9d9f2';
+let rightTOffColor = '#e9d9f2';
+let rightKOffColor = '#e9d9f2';
+let rightLOffColor = '#e9d9f2';
+let rightEOffColor = '#e9d9f2';
+let rightPOffColor = '#e9d9f2';
+let rightROffColor = '#e9d9f2';
+let rightFOffColor = '#e9d9f2';
+let rightÅOffColor = '#e9d9f2';
+let rightÆOffColor = '#e9d9f2';
+let starOffColor = '#e9d9f2';
+let leftOOffColor = '#e9d9f2';
+let leftAOffColor = '#e9d9f2';
+let leftROffColor = '#e9d9f2';
+let leftHOffColor = '#e9d9f2';
+let leftVOffColor = '#e9d9f2';
+let leftPOffColor = '#e9d9f2';
+let leftKOffColor = '#e9d9f2';
+let leftTOffColor = '#e9d9f2';
+let leftSLowerOffColor = '#e9d9f2';
+let leftNOffColor = '#e9d9f2';
+let numberBarOffColor = '#e9d9f2';
+
+class DanishStenoDiagram extends Component {
 
   render() {
     // const strokeColor = '#321E3E';
@@ -15,62 +64,6 @@ class DanishStenoDiagram extends Component {
     // const offTextColor = '#CAC7CC';
     // const strokeColor = 'hsla(277, 10%, 60%, 1)';
     // const strokeColor = '#321E3E';
-    let hidden = true;
-
-    const strokeColor = '#7109AA';
-    const onTextColor = '#fff';
-    const offTextColor = '#fff';
-
-    let rightDLowerOnColor = '#7109AA';
-    let rightDUpperOnColor = '#7109AA';
-    let rightSOnColor = '#7109AA';
-    let rightTOnColor = '#7109AA';
-    let rightKOnColor = '#7109AA';
-    let rightLOnColor = '#7109AA';
-    let rightEOnColor = '#7109AA';
-    let rightPOnColor = '#7109AA';
-    let rightROnColor = '#7109AA';
-    let rightFOnColor = '#7109AA';
-    let rightÅOnColor = '#7109AA';
-    let rightÆOnColor = '#7109AA';
-    let starOnColor = '#7109AA';
-    let leftOOnColor = '#7109AA';
-    let leftAOnColor = '#7109AA';
-    let leftROnColor = '#7109AA';
-    let leftHOnColor = '#7109AA';
-    let leftVOnColor = '#7109AA';
-    let leftPOnColor = '#7109AA';
-    let leftKOnColor = '#7109AA';
-    let leftTOnColor = '#7109AA';
-    let leftSLowerOnColor = '#7109AA';
-    let leftNOnColor = '#7109AA';
-    let numberBarOnColor = '#7109AA';
-
-    let rightDLowerOffColor = '#e9d9f2';
-    let rightDUpperOffColor = '#e9d9f2';
-    let rightSOffColor = '#e9d9f2';
-    let rightTOffColor = '#e9d9f2';
-    let rightKOffColor = '#e9d9f2';
-    let rightLOffColor = '#e9d9f2';
-    let rightEOffColor = '#e9d9f2';
-    let rightPOffColor = '#e9d9f2';
-    let rightROffColor = '#e9d9f2';
-    let rightFOffColor = '#e9d9f2';
-    let rightÅOffColor = '#e9d9f2';
-    let rightÆOffColor = '#e9d9f2';
-    let starOffColor = '#e9d9f2';
-    let leftOOffColor = '#e9d9f2';
-    let leftAOffColor = '#e9d9f2';
-    let leftROffColor = '#e9d9f2';
-    let leftHOffColor = '#e9d9f2';
-    let leftVOffColor = '#e9d9f2';
-    let leftPOffColor = '#e9d9f2';
-    let leftKOffColor = '#e9d9f2';
-    let leftTOffColor = '#e9d9f2';
-    let leftSLowerOffColor = '#e9d9f2';
-    let leftNOffColor = '#e9d9f2';
-    let numberBarOffColor = '#e9d9f2';
-
     let diagramWidth = this.props.diagramWidth || 140;
 
     return (

@@ -108,7 +108,6 @@ let idKeyLookup = {
   "hashLetter": stroke.HASH
 }
 
-
 class AmericanStenoDiagram extends Component {
 
   handleClick(event) {
