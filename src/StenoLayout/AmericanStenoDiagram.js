@@ -127,9 +127,10 @@ class AmericanStenoDiagram extends Component {
     // const strokeColor = '#321E3E';
 
     let diagramWidth = this.props.diagramWidth || 140;
+    let svgDiagramID = this.props.id || 'stenoDiagram';
 
     return (
-      <svg viewBox="0 0 215 101" width={diagramWidth} xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden} onClick={this.handleClick.bind(this)}>
+      <svg id={svgDiagramID} viewBox="0 0 215 101" width={diagramWidth} xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden} onClick={this.handleClick.bind(this)}>
         <g id={"stenoboard-" + this.props.brief } transform="translate(1 1)" fill="none" fillRule="evenodd">
           <rect id="rightZ" stroke={strokeColor} fill={this.props.rightZ ? rightZOnColor : rightZOffColor} x="195" y="48" width="18" height="23" rx="4"/>
           <rect id="rightD" stroke={strokeColor} fill={this.props.rightD ? rightDOnColor : rightDOffColor} x="195" y="20" width="18" height="23" rx="4"/>
