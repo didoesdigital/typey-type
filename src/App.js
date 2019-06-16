@@ -1013,7 +1013,6 @@ class App extends Component {
       writePersonalPreferences('globalUserSettings', globalUserSettings);
     });
 
-
     let labelString = value;
     if (!value) { labelString = "BAD_INPUT"; }
 
@@ -1029,13 +1028,24 @@ class App extends Component {
   // changeWriterInput(event: SyntheticInputEvent<HTMLInputElement>) {
   changeWriterInput(event) {
     let globalUserSettings = Object.assign({}, this.state.globalUserSettings);
+    let name = 'BAD_INPUT';
 
     if (event && event.target && event.target.name) {
       globalUserSettings['writerInput'] = event.target.name;
+      name = event.target.name;
     }
 
     this.setState({globalUserSettings: globalUserSettings}, () => {
       writePersonalPreferences('globalUserSettings', globalUserSettings);
+    });
+
+    let labelString = name;
+    if (!name) { labelString = "BAD_INPUT"; }
+
+    GoogleAnalytics.event({
+      category: 'Global user settings',
+      action: 'Change writer input',
+      label: labelString
     });
   }
 
