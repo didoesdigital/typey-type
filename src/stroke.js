@@ -24,6 +24,7 @@ const Z    = 0b10000000000000000000000;
 
 // const LEFT = 0b00000000000001111111110;
 const AMBIGUOUS_RIGHT_KEYS = RS | RT | RP | RR;
+const VOWELS_AND_STAR = A | O | STAR | E | U;
 
 class Stroke {
   constructor(bits = 0) {
@@ -114,7 +115,7 @@ class Stroke {
   }
 
   requiresDisambiguation() {
-    return (this.bits & AMBIGUOUS_RIGHT_KEYS) !== 0;
+    return (this.bits & AMBIGUOUS_RIGHT_KEYS) !== 0 && (this.bits & VOWELS_AND_STAR) === 0;
   }
 }
 
