@@ -75,9 +75,10 @@ class PalantypeDiagram extends Component {
   render() {
 
     let diagramWidth = this.props.diagramWidth || 140;
+    let svgDiagramID = this.props.id || 'stenoDiagram';
 
     return (
-      <svg viewBox="0 0 334 180" width={diagramWidth} xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
+      <svg id={svgDiagramID} viewBox="0 0 334 180" width={diagramWidth} xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
         <g id={"stenoboard-" + this.props.brief } transform="translate(1 1)" fill="none" fillRule="evenodd">
           <rect id="leftE" stroke={strokeColor} fill={this.props.leftE? leftEOnColor : leftEOffColor} fillRule="nonzero" transform="rotate(27.065 131.1907 146.10855)" x="117.290594" y="132.208444" width="27.800212" height="27.800212" rx="4"/>
           <path fill={onTextColor} id="E" transform="rotate(27 130.598 146.7)" d="M126.368 153v-12.6h8.082v2.034h-5.94v3.042h3.87v2.034h-3.87v3.456h6.318V153z"/>
