@@ -74,7 +74,12 @@ class Writer extends Component<Props, State> {
       currentValue = '';
     }
 
-    if (currentValue.includes(' ')) {
+    if (currentValue === ' ') {
+      // sends clicked diagram keys
+      this.sendStroke(this.state.stenoBrief);
+      currentValue = '';
+    }
+    else if (currentValue.includes(' ')) {
       currentValue = currentValue.trim();
       this.sendStroke(currentValue);
       currentValue = '';
@@ -96,7 +101,12 @@ class Writer extends Component<Props, State> {
       currentValue = '';
     }
 
-    if (currentValue.includes(' ')) {
+    if (currentValue === ' ') {
+      // sends clicked diagram keys
+      this.sendStroke(this.state.stenoBrief);
+      currentValue = '';
+    }
+    else if (currentValue.includes(' ')) {
       currentValue = currentValue.trim();
       let stenoBrief = this.updateBrief(currentValue);
       this.sendStroke(stenoBrief);
