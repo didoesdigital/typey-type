@@ -157,34 +157,42 @@ class Writer extends Component<Props, State> {
 
     let mapBriefsFunction = mapBriefToAmericanStenoKeys;
     let StenoLayoutDiagram = AmericanStenoDiagram;
+    let placeholderRawSteno = "e.g. HEU";
     switch (this.props.userSettings.stenoLayout) {
       case 'stenoLayoutAmericanSteno':
         mapBriefsFunction = mapBriefToAmericanStenoKeys;
         StenoLayoutDiagram = AmericanStenoDiagram;
+        placeholderRawSteno = "e.g. HEU";
         break;
       case 'stenoLayoutDanishSteno':
         mapBriefsFunction = mapBriefToDanishStenoKeys;
         StenoLayoutDiagram = DanishStenoDiagram;
+        placeholderRawSteno = "e.g. #STKPVHRAO*ÆÅFRPELKTSDDN";
         break;
       case 'stenoLayoutItalianMichelaSteno':
         mapBriefsFunction = mapBriefToItalianMichelaStenoKeys;
         StenoLayoutDiagram = ItalianMichelaStenoDiagram;
+        placeholderRawSteno = "e.g. FSCZPNRXIUuieanpzcsf";
         break;
       case 'stenoLayoutJapaneseSteno':
         mapBriefsFunction = mapBriefToJapaneseStenoKeys;
         StenoLayoutDiagram = JapaneseStenoDiagram;
+        placeholderRawSteno = "e.g. 漢「4たな3かさ2いう1おっ*4たな3かさ2いう1おっ」カ";
         break;
       case 'stenoLayoutKoreanModernCSteno':
         mapBriefsFunction = mapBriefToKoreanModernCStenoKeys;
         StenoLayoutDiagram = KoreanModernCStenoDiagram;
+        placeholderRawSteno = "e.g. 12345ㅎㅁㄱㅈㄴㄷㅇㅅㅂㄹㅗㅏㅜ*ㅓㅣ67890ㅎㅇㄹㄱㄷㅂㄴㅅㅈㅁ";
         break;
       case 'stenoLayoutPalantype':
         mapBriefsFunction = mapBriefToPalantypeKeys;
         StenoLayoutDiagram = PalantypeDiagram;
+        placeholderRawSteno = "e.g. SCPTH+MFRNLYOEAUI^NLCMFRPT+SH";
         break;
       default:
         mapBriefsFunction = mapBriefToAmericanStenoKeys;
         StenoLayoutDiagram = AmericanStenoDiagram;
+        placeholderRawSteno = "e.g. HEU";
         break;
     }
 
@@ -246,7 +254,7 @@ class Writer extends Component<Props, State> {
                       autoCorrect="off"
                       className="input-textarea"
                       onChange={this.updateRawSteno}
-                      placeholder="e.g. HEU"
+                      placeholder={placeholderRawSteno}
                       value={this.state.valueRawSteno}
                     />
                   </p>
