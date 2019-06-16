@@ -1073,6 +1073,7 @@ label {
 .autocomplete-highlight {
   background-color: #FFD073; }
 
+.button,
 .link-button {
   background-color: #402351;
   border-radius: 4px;
@@ -1086,22 +1087,31 @@ label {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap; }
+  .button:visited,
   .link-button:visited {
     color: #c6bdcb; }
+  .button:hover,
   .link-button:hover {
     color: #c6bdcb;
     background-color: #533962; }
-  .link-button:active, .link-button:focus {
+  .button:active, .button:focus,
+  .link-button:active,
+  .link-button:focus {
     color: #c6bdcb;
     background-color: #664f74; }
+  .button.link-button-ghost,
   .link-button.link-button-ghost {
     background-color: transparent;
     font-size: 16px;
     text-decoration: underline; }
+    .button.link-button-ghost:hover,
     .link-button.link-button-ghost:hover {
       color: #ece9ee; }
-    .link-button.link-button-ghost:active, .link-button.link-button-ghost:focus {
+    .button.link-button-ghost:active, .button.link-button-ghost:focus,
+    .link-button.link-button-ghost:active,
+    .link-button.link-button-ghost:focus {
       color: #a091a8; }
+  .button:disabled,
   .link-button:disabled {
     color: #ece9ee;
     background-color: #b0b0b0;
