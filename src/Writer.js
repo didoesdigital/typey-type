@@ -212,7 +212,18 @@ class Writer extends Component<Props, State> {
         </div>
         <div className="p3 mx-auto mw-1024">
           <div className="flex flex-wrap justify-between">
-            <div className="mw-384 w-336 order-1">
+            <div className="mw-568">
+              <p className="mt3 mb3 h3">
+                <span className="visually-hidden">Your written text:</span>{this.state.writtenText}&nbsp;
+              </p>
+              <div>
+                <StenoLayoutDiagram {...mapBriefsFunction(this.state.stenoBrief)} newOnClick={this.addKeyToStenoBrief.bind(this)} brief={"STKPWHRAO*EUFRPBLGTSDZ"} diagramWidth="440" />
+              </div>
+              <p className="text-center mr4 mt1">
+                <button onClick={this.sendDiagramStroke.bind(this)} className="button text-center">Send stroke</button>
+              </p>
+            </div>
+            <div className="mw-384 w-336">
               <h3>Settings</h3>
               <div className="flex flex-wrap">
                 { this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno" && this.state.writerInput === "qwerty" ?
@@ -289,17 +300,6 @@ class Writer extends Component<Props, State> {
                   </div>
                 </div>
               </fieldset>
-            </div>
-            <div className="mw-568">
-              <p className="mt3 mb3 h3">
-                <span className="visually-hidden">Your written text:</span>{this.state.writtenText}&nbsp;
-              </p>
-              <div>
-                <StenoLayoutDiagram {...mapBriefsFunction(this.state.stenoBrief)} newOnClick={this.addKeyToStenoBrief.bind(this)} brief={"STKPWHRAO*EUFRPBLGTSDZ"} diagramWidth="440" />
-              </div>
-              <p className="text-center mr4 mt1">
-                <button onClick={this.sendDiagramStroke.bind(this)} className="button text-center">Send stroke</button>
-              </p>
             </div>
           </div>
         </div>
