@@ -5,7 +5,7 @@ import {
   generateDictionaryEntries,
   loadPersonalPreferences,
   lookUpDictionaryInIndex,
-  mapQWERTYKeysToStenoBrief,
+  mapQWERTYKeysToStenoStroke,
   processDictionary,
   strokeAccuracy,
   splitBriefsIntoStrokes,
@@ -1670,14 +1670,14 @@ describe('loadPersonalPreferences', () => {
 //   });
 // });
 
-describe('mapQWERTYKeysToStenoBrief', () => {
+describe('mapQWERTYKeysToStenoStroke', () => {
   describe('American stroke with star', () => {
     it('should return as it was', () => {
       let qwertyString = 'dfchp';
       let stenoLayout = 'stenoLayoutAmericanSteno';
 
       let stenoBrief = 'WRA*T';
-      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+      expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
   });
 
@@ -1687,7 +1687,7 @@ describe('mapQWERTYKeysToStenoBrief', () => {
       let stenoLayout = 'stenoLayoutAmericanSteno';
 
       let stenoBrief = 'WAS';
-      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+      expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
   });
 
@@ -1697,7 +1697,7 @@ describe('mapQWERTYKeysToStenoBrief', () => {
       let stenoLayout = 'stenoLayoutAmericanSteno';
 
       let stenoBrief = 'WR-R';
-      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+      expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
   });
 
@@ -1707,7 +1707,7 @@ describe('mapQWERTYKeysToStenoBrief', () => {
       let stenoLayout = 'stenoLayoutAmericanSteno';
 
       let stenoBrief = 'H-LTS';
-      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+      expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
   });
 
@@ -1717,7 +1717,7 @@ describe('mapQWERTYKeysToStenoBrief', () => {
       let stenoLayout = 'stenoLayoutAmericanSteno';
 
       let stenoBrief = 'HR-F';
-      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+      expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
   });
 
@@ -1727,7 +1727,7 @@ describe('mapQWERTYKeysToStenoBrief', () => {
       let stenoLayout = 'stenoLayoutAmericanSteno';
 
       let stenoBrief = 'HR-FP';
-      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+      expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
   });
 
@@ -1737,7 +1737,7 @@ describe('mapQWERTYKeysToStenoBrief', () => {
       let stenoLayout = 'stenoLayoutAmericanSteno';
 
       let stenoBrief = '-T';
-      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+      expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
   });
 
@@ -1748,7 +1748,7 @@ describe('mapQWERTYKeysToStenoBrief', () => {
 
       // let stenoBriefClickedString = 'F-R';
       let stenoBrief = '-FR';
-      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+      expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
   });
 
@@ -1759,7 +1759,7 @@ describe('mapQWERTYKeysToStenoBrief', () => {
 
       // let stenoBriefClickedString = 'F-PL-T';
       let stenoBrief = '-FPLT';
-      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+      expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
   });
 
@@ -1770,7 +1770,7 @@ describe('mapQWERTYKeysToStenoBrief', () => {
 
       // let stenoBriefClickedString = 'EF-R';
       let stenoBrief = 'EFR';
-      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+      expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
   });
 
@@ -1780,7 +1780,7 @@ describe('mapQWERTYKeysToStenoBrief', () => {
       let stenoLayout = 'stenoLayoutAmericanSteno';
 
       let stenoBrief = '*EFRD';
-      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+      expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
   });
 
@@ -1789,8 +1789,8 @@ describe('mapQWERTYKeysToStenoBrief', () => {
       let qwertyString = "3'";
       let stenoLayout = 'stenoLayoutAmericanSteno';
 
-      let stenoBrief = '#Z';
-      expect(mapQWERTYKeysToStenoBrief(qwertyString, stenoLayout)).toEqual(stenoBrief);
+      let stenoBrief = '#-Z';
+      expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
   });
 });
