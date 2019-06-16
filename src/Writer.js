@@ -210,7 +210,7 @@ class Writer extends Component<Props, State> {
         <div className="p3 mx-auto mw-1024">
           <div className="flex flex-wrap justify-between">
             <div className="mw-568">
-              <p className="mt3 mb3 h3">
+              <p className="mt3 mb3 h3 mr3 text-center">
                 <span className="visually-hidden">Your written text:</span>{this.state.writtenText}&nbsp;
               </p>
               <div>
