@@ -17,6 +17,7 @@ import {
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys
 } from './typey-type';
+import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';
 
 type Props = {
@@ -295,9 +296,23 @@ class Writer extends Component<Props, State> {
               <h3>Settings</h3>
               <div className="flex flex-wrap">
                 { this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno" && this.props.globalUserSettings.writerInput === "qwerty" ?
-                  <p className="mt3 mb3 mr1">
+                  <p className="mt1 mb2 mr1">
                     <label htmlFor="qwertyStenoInput" className="db">
-                      QWERTY steno input
+                      <Tooltip
+                        title="Type a space to send the stroke"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        position="top"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        QWERTY steno input
+                      </Tooltip>
                     </label>
                     <input
                       id="qwertyStenoInput"
@@ -314,9 +329,23 @@ class Writer extends Component<Props, State> {
                   null
                 }
                 { this.props.globalUserSettings.writerInput === "raw" || !(this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno") ?
-                  <p className="mt3 mb3 mr1">
+                  <p className="mt1 mb2 mr1">
                     <label htmlFor="rawStenoInput" className="db">
-                      Raw steno input
+                      <Tooltip
+                        title="Type a space to send the stroke"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        position="top"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Raw steno input
+                      </Tooltip>
                     </label>
                     <input
                       id="rawStenoInput"
