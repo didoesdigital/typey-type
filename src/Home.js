@@ -167,6 +167,15 @@ class Home extends Component {
           <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
+                <h3>Writer</h3>
+                <p>Try steno out in the browser without any software. You can prepare an SVG diagram to download.</p>
+                <Link to='/writer/' className="link-button dib" style={{lineHeight: 2}}>Writer</Link>
+              </div>
+            </div>
+          </div>
+          <div className="bg-info landing-page-section">
+            <div className="p3 mx-auto mw-1024">
+              <div className="mw-584">
                 <h3>Want to get involved?</h3>
                 <p>Support DiDoesDigital, create lessons, or share your feedback. Every bit helps.</p>
                 <Link to='/contribute/' className="link-button dib" style={{lineHeight: 2}}>Contribute</Link>
