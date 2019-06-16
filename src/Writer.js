@@ -20,7 +20,9 @@ import {
 
 type Props = {
   changeStenoLayout: (event: SyntheticInputEvent<HTMLSelectElement>) => string,
+  changeWriterInput: (event: SyntheticInputEvent<HTMLInputElement>) => void,
   userSettings: Object,
+  globalUserSettings: Object,
   setAnnouncementMessageString: (string) => void,
   setAnnouncementMessage: (Object, any) => void
 };
@@ -29,7 +31,6 @@ type State = {
   stenoBrief: string,
   stenoStroke: Stroke,
   stenoDictionary: Object,
-  writerInput: string,
   writtenText: string,
   valueRawSteno: string,
   valueQWERTYSteno: string
@@ -42,7 +43,6 @@ class Writer extends Component<Props, State> {
     stenoBrief: '',
     stenoStroke: new Stroke(),
     stenoDictionary: {},
-    writerInput: 'qwerty',
     writtenText: '',
     valueRawSteno: '',
     valueQWERTYSteno: ''
@@ -88,6 +88,7 @@ class Writer extends Component<Props, State> {
 
   updateQWERTYSteno(event: SyntheticInputEvent<HTMLInputElement>) {
     let currentValue: string;
+
     if (event && event.target && event.target.value) {
       currentValue = event.target.value;
     }
@@ -149,18 +150,6 @@ class Writer extends Component<Props, State> {
       stenoStroke: stenoStroke,
       valueQWERTYSteno: '',
       valueRawSteno: ''
-    });
-  }
-
-  changeWriterInput(event: SyntheticInputEvent<HTMLInputElement>) {
-    let writerInput = this.state.writerInput;
-
-    if (event && event.target && event.target.name) {
-      writerInput = event.target.name;
-    }
-
-    this.setState({
-      writerInput: writerInput
     });
   }
 
@@ -226,7 +215,7 @@ class Writer extends Component<Props, State> {
             <div className="mw-384 w-336">
               <h3>Settings</h3>
               <div className="flex flex-wrap">
-                { this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno" && this.state.writerInput === "qwerty" ?
+                { this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno" && this.props.globalUserSettings.writerInput === "qwerty" ?
                   <p className="mt3 mb3 mr1">
                     <label htmlFor="qwertyStenoInput" className="db">
                       QWERTY steno input
@@ -245,7 +234,7 @@ class Writer extends Component<Props, State> {
                   :
                   null
                 }
-                { this.state.writerInput === "raw" || !(this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno") ?
+                { this.props.globalUserSettings.writerInput === "raw" || !(this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno") ?
                   <p className="mt3 mb3 mr1">
                     <label htmlFor="rawStenoInput" className="db">
                       Raw steno input
@@ -282,14 +271,14 @@ class Writer extends Component<Props, State> {
                   <div className="flex flex-wrap justify-between">
                     <p className="radio mr3">
                       <label htmlFor="raw">
-                        <input type="radio" name="raw" id="raw" onChange={this.changeWriterInput.bind(this)} checked={this.state.writerInput === "raw"} /> Raw
+                        <input type="radio" name="raw" id="raw" onChange={this.props.changeWriterInput} checked={this.props.globalUserSettings.writerInput === "raw"} /> Raw
                       </label>
                     </p>
                   </div>
                   <div className="flex flex-wrap justify-between">
                     <p className="radio mr3">
                       <label htmlFor="qwerty">
-                        <input type="radio" name="qwerty" id="qwerty" onChange={this.changeWriterInput.bind(this)} checked={this.state.writerInput === "qwerty"} /> QWERTY
+                        <input type="radio" name="qwerty" id="qwerty" onChange={this.props.changeWriterInput} checked={this.props.globalUserSettings.writerInput === "qwerty"} /> QWERTY
                       </label>
                     </p>
                   </div>

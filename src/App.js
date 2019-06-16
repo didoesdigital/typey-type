@@ -233,7 +233,8 @@ class App extends Component {
       flashcardsCourseIndex: 0,
       fullscreen: false,
       globalUserSettings: {
-        flashcardsCourseLevel: "noviceCourse" // noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
+        flashcardsCourseLevel: "noviceCourse", // noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
+        writerInput: "qwerty" // qwerty || raw
       },
       hideOtherSettings: false,
       recommendationHistory: { currentStep: null },
@@ -1025,6 +1026,19 @@ class App extends Component {
     return value;
   }
 
+  // changeWriterInput(event: SyntheticInputEvent<HTMLInputElement>) {
+  changeWriterInput(event) {
+    let globalUserSettings = Object.assign({}, this.state.globalUserSettings);
+
+    if (event && event.target && event.target.name) {
+      globalUserSettings['writerInput'] = event.target.name;
+    }
+
+    this.setState({globalUserSettings: globalUserSettings}, () => {
+      writePersonalPreferences('globalUserSettings', globalUserSettings);
+    });
+  }
+
   changeStenoLayout(event) {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
@@ -1785,8 +1799,10 @@ class App extends Component {
                     <ErrorBoundary>
                       <AsyncWriter
                         changeStenoLayout={this.changeStenoLayout.bind(this)}
+                        changeWriterInput={this.changeWriterInput.bind(this)}
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                        globalUserSettings={this.state.globalUserSettings}
                         userSettings={this.state.userSettings}
                         {...props}
                       />

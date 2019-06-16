@@ -1154,7 +1154,8 @@ function loadPersonalPreferences() {
   let metWords = {};
   let flashcardsProgress = {};
   let globalUserSettings = {
-    flashcardsCourseLevel: "noviceCourse"
+    flashcardsCourseLevel: "noviceCourse",
+    writerInput: "qwerty"
   };
   let flashcardsMetWords = {
     "the": {
