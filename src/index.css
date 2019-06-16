@@ -561,14 +561,17 @@ input:focus::placeholder {
 .mw-696 {
   max-width: 696px; }
 
-.mw-568 {
-  max-width: 568px; }
-
 .mw-584 {
   max-width: 584px; }
 
+.mw-568 {
+  max-width: 568px; }
+
 .mw-504 {
   max-width: 504px; }
+
+.mw-448 {
+  max-width: 448px; }
 
 .mw-408 {
   max-width: 408px; }
@@ -1757,3 +1760,6 @@ small .svg-icon-wrapper.svg-baseline svg {
       margin-bottom: 0; }
     .list--feature li p + p {
       margin-top: 1rem; }
+
+.responsive-writer svg {
+  max-width: 100%; }

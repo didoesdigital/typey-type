@@ -210,10 +210,11 @@ class Writer extends Component<Props, State> {
         <div className="p3 mx-auto mw-1024">
           <div className="flex flex-wrap justify-between">
             <div className="mw-568">
-              <p className="mt3 mb3 h3 mr3 text-center">
-                <span className="visually-hidden">Your written text:</span>{this.state.writtenText}&nbsp;
+              <p className="mw-448 mt3 mb3 h3 mr3 wrap text-center">
+                {/* The trailing zero-width space ensures this area is always filled */}
+                <span className="visually-hidden">Your written text: </span>{this.state.writtenText}&#8203;
               </p>
-              <div>
+              <div className="responsive-writer">
                 <StenoLayoutDiagram {...mapBriefsFunction(this.state.stenoBrief)} newOnClick={this.addKeyToStenoBrief.bind(this)} brief={this.state.stenoBrief} diagramWidth="440" />
               </div>
               <p className="text-center mr4 mt1">

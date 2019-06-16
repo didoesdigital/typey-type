@@ -510,9 +510,10 @@ input:focus::placeholder {
 
 .mw-1024 { max-width: 1024px; }
 .mw-696  { max-width: 696px; }
-.mw-568  { max-width: 568px; }
 .mw-584  { max-width: 584px; }
+.mw-568  { max-width: 568px; }
 .mw-504  { max-width: 504px; }
+.mw-448  { max-width: 448px; }
 .mw-408  { max-width: 408px; }
 .mw-384  { max-width: 384px; }
 .mw-240  { max-width: 240px; }
@@ -1981,4 +1982,8 @@ $lineAdjustment: 4px;
       margin-top: 1rem;
     }
   }
+}
+
+.responsive-writer svg {
+  max-width: 100%;
 }
