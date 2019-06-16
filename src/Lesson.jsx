@@ -244,7 +244,7 @@ class Lesson extends Component {
             <div className="flex overflow-auto mr05">
               {this.props.userSettings.showStrokesAsDiagrams && strokes.map((strokeToDraw, index) =>
                 <React.Fragment key={index}>
-                  {(Object.values(mapBriefsFunction(strokeToDraw)).some(item => item)) && <div className="mt1 mr2"><StenoLayoutDiagram {...mapBriefsFunction(strokeToDraw)} brief={strokeToDraw} /></div> }
+                  {(Object.values(mapBriefsFunction(strokeToDraw)).some(item => item)) && <div className="mt1 mr2"><StenoLayoutDiagram id={'diagramID-' + index + '-' + strokeToDraw} {...mapBriefsFunction(strokeToDraw)} brief={strokeToDraw} /></div> }
                 </React.Fragment>
               )}
             </div>
