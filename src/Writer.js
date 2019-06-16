@@ -144,7 +144,8 @@ class Writer extends Component<Props, State> {
     this.setState({
       stenoBrief: stenoStroke.toString(),
       stenoStroke: stenoStroke,
-      valueQWERTYSteno: ''
+      valueQWERTYSteno: '',
+      valueRawSteno: ''
     });
   }
 
