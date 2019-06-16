@@ -1618,7 +1618,8 @@ describe('loadPersonalPreferences', () => {
       };
       let flashcardsProgress = {};
       let globalUserSettings = {
-        flashcardsCourseLevel: "noviceCourse"
+        flashcardsCourseLevel: "noviceCourse",
+        writerInput: "qwerty"
       };
       let lessonsProgress = {};
       let userSettings = {
