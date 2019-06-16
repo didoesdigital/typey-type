@@ -277,28 +277,21 @@ class Writer extends Component<Props, State> {
                 </select>
               </div>
               <fieldset>
-                <legend>Raw, QWERTY or diagram</legend>
+                <legend>Raw or QWERTY steno input</legend>
                 <div className="flex">
                   <div className="flex flex-wrap justify-between">
-                    <div className="radio mr3">
+                    <p className="radio mr3">
                       <label htmlFor="raw">
                         <input type="radio" name="raw" id="raw" onChange={this.changeWriterInput.bind(this)} checked={this.state.writerInput === "raw"} /> Raw
                       </label>
-                    </div>
+                    </p>
                   </div>
                   <div className="flex flex-wrap justify-between">
-                    <div className="radio mr3">
+                    <p className="radio mr3">
                       <label htmlFor="qwerty">
                         <input type="radio" name="qwerty" id="qwerty" onChange={this.changeWriterInput.bind(this)} checked={this.state.writerInput === "qwerty"} /> QWERTY
                       </label>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap justify-between">
-                    <div className="radio mr3">
-                      <label htmlFor="diagram">
-                        <input type="radio" name="diagram" id="diagram" onChange={this.changeWriterInput.bind(this)} checked={this.state.writerInput === "diagram"} /> Diagram
-                      </label>
-                    </div>
+                    </p>
                   </div>
                 </div>
               </fieldset>
