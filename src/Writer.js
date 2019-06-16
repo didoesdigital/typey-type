@@ -96,6 +96,7 @@ class Writer extends Component<Props, State> {
     }
 
     if (currentValue.includes(' ')) {
+      currentValue = currentValue.trim();
       let stenoBrief = this.updateBrief(currentValue);
       this.sendStroke(stenoBrief);
       currentValue = '';
