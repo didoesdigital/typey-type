@@ -5,29 +5,55 @@ class StrokesForWords extends Component {
     super(props);
     this.state = {
       phrase: "",
-      listOfStrokes: []
+      dict: {
+        "silent": [
+          ["SHREPBT", "dict.json"],
+          ["SHREPBT", "personal.json"],
+          ["SHRAOEUPBT", "dict.json"],
+          ["SAOEU/HREPBT", "dict.json"]
+        ],
+        "sentiment": [
+          ["SEPB/TEUPLT", "sentiment"],
+          ["SEPBT/*PLT", "sentiment"]
+        ],
+        "foo": [
+          ["TPAO", "dict.json"],
+          ["TPAO*", "personal.json"]
+        ],
+        "bar": [
+          ["PWAR", "dict.json"],
+          ["PWA*R", "personal.json"]
+        ],
+        "baz": [
+          ["PWAZ", "personal.json"],
+          ["PWAZ", "code.json"]
+        ]
+      },
+      listOfStrokesAndDicts: []
     }
   }
 
   updateWordsForStrokes(event) {
     let phrase = event.target.value;
-    let listOfStrokes = this.createListOfStrokes(phrase);
+    let listOfStrokesAndDicts = this.createListOfStrokes(phrase);
     this.setState({
       phrase: phrase,
-      listOfStrokes: listOfStrokes
+      listOfStrokesAndDicts: listOfStrokesAndDicts
     })
   }
 
   createListOfStrokes(phrase) {
-    let listOfStrokes = [];
-    listOfStrokes = ['FAO', 'PWAR'];
-    return listOfStrokes;
+    let listOfStrokesAndDicts = [];
+    if (this.state.dict[phrase]) {
+      listOfStrokesAndDicts = this.state.dict[phrase];
+    }
+    return listOfStrokesAndDicts;
   }
 
   render () {
-    let strokeListItems = this.state.listOfStrokes.map( (stroke, i) => {
+    let strokeListItems = this.state.listOfStrokesAndDicts.map( (strokeAndDict, i) => {
       return(
-        <li className="unstyled-list-item mb1" key={ i }>{stroke}</li>
+        <li className="unstyled-list-item mb1" key={ i }>{"" + strokeAndDict[0] + ": " + strokeAndDict[1]}</li>
       )
     });
 
@@ -38,7 +64,7 @@ class StrokesForWords extends Component {
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
-          className="input-textarea typed-text-input-textarea"
+          className="input-textarea typed-text-input-textarea mb3"
           id="words-for-strokes"
           onChange={this.updateWordsForStrokes.bind(this)}
           rows="1"
@@ -47,7 +73,7 @@ class StrokesForWords extends Component {
           wrap="off"
           >
         </textarea>
-        <ul>
+        <ul className="unstyled-list">
           {strokeListItems}
         </ul>
       </React.Fragment>
