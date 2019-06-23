@@ -292,10 +292,10 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
           }
         }
       }
-      return [wordOrPhraseMaterial, strokes];
+      return strokes;
     }
 
-    [wordOrPhraseMaterial, strokes] = createStrokeHintForPhrase(wordOrPhraseMaterial, strokes);
+    strokes = createStrokeHintForPhrase(wordOrPhraseMaterial, strokes);
 
     sourceAndPresentedMaterial.push({phrase: wordOrPhraseMaterial, stroke: strokes });
   }
