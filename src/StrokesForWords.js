@@ -1,17 +1,7 @@
-// @flow
 import * as React from 'react'
 import { Component } from 'react';
 
-type Props = {
-};
-
-type State = {
-  phrase: string,
-  dict: Object,
-  listOfStrokesAndDicts: Array<string>
-};
-
-class StrokesForWords extends Component<Props, State> {
+class StrokesForWords extends Component {
   state = {
     phrase: "",
     dict: {
@@ -46,7 +36,7 @@ class StrokesForWords extends Component<Props, State> {
     this.setState({dict: sortedDict});
   }
 
-  updateWordsForStrokes(event: SyntheticInputEvent<HTMLTextAreaElement>) {
+  updateWordsForStrokes(event) {
     let phrase = event.target.value;
     let listOfStrokesAndDicts = this.createListOfStrokes(phrase);
     this.setState({
@@ -55,8 +45,7 @@ class StrokesForWords extends Component<Props, State> {
     })
   }
 
-  // createListOfStrokes = (phrase: string): Array<string> => {
-  createListOfStrokes(phrase: string) {
+  createListOfStrokes(phrase) {
     let listOfStrokesAndDicts = [];
     let allEntries = Object.entries(this.state.dict);
     if (this.state.dict[phrase]) {
