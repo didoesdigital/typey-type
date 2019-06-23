@@ -127,8 +127,8 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
     // if (remainingWordOrPhrase === "and! and") { debugger; }
 
-    function chooseStrokeForWord (wordOrPhrase) {
-      stroke = sourceWordsAndStrokes[wordOrPhrase];
+    function chooseStrokeForWord (wordOrPhrase, chosenStroke) {
+      chosenStroke = sourceWordsAndStrokes[wordOrPhrase];
 
       let strokeForOneCharacterWord = FINGERSPELLED_LETTERS[wordOrPhrase];
       if (wordOrPhrase.length === 1 && strokeForOneCharacterWord) {
@@ -136,53 +136,53 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
       }
 
       // FIRST => first
-      if (!stroke) {
+      if (!chosenStroke) {
         let uppercasedStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase()];
 
         if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
-          stroke = '*URP/' + uppercasedStroke;
+          chosenStroke = '*URP/' + uppercasedStroke;
         }
       }
 
       // TUESDAY => Tuesday
-      if (!stroke) {
+      if (!chosenStroke) {
         let uppercasedStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase())];
 
         if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
-          stroke = '*URP/' + uppercasedStroke;
+          chosenStroke = '*URP/' + uppercasedStroke;
         }
       }
 
       // tom => Tom
-      if (!stroke) {
+      if (!chosenStroke) {
         let capitalisedStroke = sourceWordsAndStrokes[wordOrPhrase.replace(/(^|\s)\S/g, l => l.toUpperCase())];
 
         if (capitalisedStroke) {
-          stroke = 'HRO*ER/' + capitalisedStroke;
+          chosenStroke = 'HRO*ER/' + capitalisedStroke;
         }
       }
 
       // Heather => heather
-      if (!stroke) {
+      if (!chosenStroke) {
         let lowercaseStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase()];
         if (lowercaseStroke) {
-          stroke = 'KPA/' + lowercaseStroke;
+          chosenStroke = 'KPA/' + lowercaseStroke;
         }
       }
 
-      if (!stroke) {
-        stroke = "xxx";
+      if (!chosenStroke) {
+        chosenStroke = "xxx";
       }
 
       strokeLookupAttempts = strokeLookupAttempts + 1;
 
-      return stroke;
+      return chosenStroke;
     }
 
     function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, strokes, stroke) {
       // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
         if (remainingWordOrPhrase.match(punctuationSplittingWholeMatchRegex)) { // exactly matches punctuation e.g. "!", "?", "'"
-          stroke = chooseStrokeForWord(remainingWordOrPhrase);
+          stroke = chooseStrokeForWord(remainingWordOrPhrase, stroke);
           strokes = strokes === "" ? stroke : strokes + " " + stroke;
           stroke = "xxx";
 
@@ -202,7 +202,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
             remainingWordOrPhrase = remainingWordOrPhrase.slice(index, remainingWordOrPhrase.length); // "!"
           }
 
-          stroke = chooseStrokeForWord(firstWord); // stroke = chooseStrokeForWord("man")
+          stroke = chooseStrokeForWord(firstWord, stroke); // stroke = chooseStrokeForWord("man")
 
           strokes = strokes === "" ? stroke : strokes + " " + stroke;
           stroke = "xxx";
@@ -213,7 +213,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
       return [remainingWordOrPhrase, strokes, stroke];
     }
 
-    stroke = chooseStrokeForWord(wordOrPhraseMaterial); // given "off went the man!" return "xxx"
+    stroke = chooseStrokeForWord(wordOrPhraseMaterial, stroke); // given "off went the man!" return "xxx"
 
     // First check for exact matching stroke:
     if (stroke && stroke.length > 0 && !stroke === "xxx") {
@@ -246,7 +246,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
           let firstWord = remainingWordOrPhrase.slice(0, remainingWordOrPhrase.indexOf(" ")); // "off"
           remainingWordOrPhrase = remainingWordOrPhrase.slice(remainingWordOrPhrase.indexOf(" ") + 1, remainingWordOrPhrase.length); // "went the man!"
 
-          stroke = chooseStrokeForWord(firstWord); // "off"
+          stroke = chooseStrokeForWord(firstWord, stroke); // "off"
 
           // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
           if (stroke === "xxx" && (firstWord.match(punctuationSplittingRegex) !== null)) { // "man!"
@@ -268,7 +268,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
         }
         else {
           if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
-            stroke = chooseStrokeForWord(remainingWordOrPhrase); // stroke = chooseStrokeForWord("man")
+            stroke = chooseStrokeForWord(remainingWordOrPhrase, stroke); // stroke = chooseStrokeForWord("man")
 
             // if all else fails, try fingerspelling
             if (stroke === "xxx") {
