@@ -99,7 +99,7 @@ const FINGERSPELLED_LETTERS = {
   "9": "9"
 }
 
-function chooseStrokeForWord (wordOrPhrase, sourceWordsAndStrokes, chosenStroke, strokeLookupAttempts) {
+function chooseStrokesForPhrase (wordOrPhrase, sourceWordsAndStrokes, chosenStroke, strokeLookupAttempts) {
   chosenStroke = sourceWordsAndStrokes[wordOrPhrase];
 
   let strokeForOneCharacterWord = FINGERSPELLED_LETTERS[wordOrPhrase];
@@ -182,7 +182,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, strokes, stroke) {
       // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
         if (remainingWordOrPhrase.match(punctuationSplittingWholeMatchRegex)) { // exactly matches punctuation e.g. "!", "?", "'"
-          [stroke, strokeLookupAttempts] = chooseStrokeForWord(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts);
+          [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts);
           strokes = strokes === "" ? stroke : strokes + " " + stroke;
           stroke = "xxx";
 
@@ -202,7 +202,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
             remainingWordOrPhrase = remainingWordOrPhrase.slice(index, remainingWordOrPhrase.length); // "!"
           }
 
-          [stroke, strokeLookupAttempts] = chooseStrokeForWord(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseStrokeForWord("man", sourceWordsAndStrokes, "", 0)
+          [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseStrokesForPhrase("man", sourceWordsAndStrokes, "", 0)
 
           strokes = strokes === "" ? stroke : strokes + " " + stroke;
           stroke = "xxx";
@@ -213,7 +213,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
       return [remainingWordOrPhrase, strokes, stroke];
     }
 
-    [stroke, strokeLookupAttempts] = chooseStrokeForWord(wordOrPhraseMaterial, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
+    [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
 
     // First check for exact matching stroke:
     if (stroke && stroke.length > 0 && !stroke === "xxx") {
@@ -246,7 +246,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
           let firstWord = remainingWordOrPhrase.slice(0, remainingWordOrPhrase.indexOf(" ")); // "off"
           remainingWordOrPhrase = remainingWordOrPhrase.slice(remainingWordOrPhrase.indexOf(" ") + 1, remainingWordOrPhrase.length); // "went the man!"
 
-          [stroke, strokeLookupAttempts] = chooseStrokeForWord(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // "off"
+          [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // "off"
 
           // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
           if (stroke === "xxx" && (firstWord.match(punctuationSplittingRegex) !== null)) { // "man!"
@@ -268,7 +268,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
         }
         else {
           if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
-            [stroke, strokeLookupAttempts] = chooseStrokeForWord(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseStrokeForWord("man", sourceWordsAndStrokes, "", 0)
+            [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseStrokesForPhrase("man", sourceWordsAndStrokes, "", 0)
 
             // if all else fails, try fingerspelling
             if (stroke === "xxx") {
