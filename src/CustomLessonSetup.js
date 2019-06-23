@@ -19,7 +19,7 @@ class CustomLessonSetup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dictionary: [],
+      customLessonWordsAndStrokes: [],
       sourceWordsAndStrokes: {"the": "-T"},
       processedSourceWordsAndStrokes: {"the": "-T"},
       customWordList: '',
@@ -48,17 +48,17 @@ class CustomLessonSetup extends Component {
 
     this.addWordListToPage(metWords);
     this.setState({
-      dictionary: []
+      customLessonWordsAndStrokes: []
     });
   }
 
   handleWordsForDictionaryEntries(value) {
     let result = parseWordList(value);
     if (result && result.length > 0) {
-      let dictionary = generateDictionaryEntries(result, this.state.processedSourceWordsAndStrokes);
-      if (dictionary && dictionary.length > 0) {
+      let customLessonWordsAndStrokes = generateDictionaryEntries(result, this.state.processedSourceWordsAndStrokes);
+      if (customLessonWordsAndStrokes && customLessonWordsAndStrokes.length > 0) {
         this.setState({
-          dictionary: dictionary,
+          customLessonWordsAndStrokes: customLessonWordsAndStrokes,
           customWordList: value
         });
       }
@@ -80,7 +80,7 @@ class CustomLessonSetup extends Component {
 
   render() {
     let filledPre = '';
-    if (this.state.dictionary.length > 0) {
+    if (this.state.customLessonWordsAndStrokes.length > 0) {
       filledPre = "quote ";
     }
 
@@ -103,7 +103,7 @@ class CustomLessonSetup extends Component {
         validationStateStyle = "";
     }
 
-    const dictionaryEntries = this.state.dictionary.map( (entry, index) => {
+    const dictionaryEntries = this.state.customLessonWordsAndStrokes.map( (entry, index) => {
       return( `${entry.phrase}	${entry.stroke}`)
     }).join('\n');
 
