@@ -1,4 +1,4 @@
-import Zipper from './zipper';
+import Zipper from './utils/zipper';
 import Stroke from './stroke';
 import * as stroke from './stroke';
 import { isPeak } from './utils/utils.js';

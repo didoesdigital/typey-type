@@ -17,7 +17,7 @@ import {
   repetitionsRemaining,
   updateCapitalisationStrokesInNextItem
 } from './typey-type';
-import Zipper from './zipper';
+import Zipper from './utils/zipper';
 
 describe('sum uniq met words', () => {
   it('returns met words without duplicate entries with different spacing', () => {

@@ -47,7 +47,7 @@ import Progress from './Progress';
 import Flashcards from './Flashcards';
 import PageNotFound from './PageNotFound';
 import Footer from './Footer';
-import Zipper from './zipper';
+import Zipper from './utils/zipper';
 import './App.css';
 
 const AsyncBreak = Loadable({
