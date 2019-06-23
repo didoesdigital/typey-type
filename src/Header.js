@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Autocomplete from 'react-autocomplete';
 import GoogleAnalytics from 'react-ga';
 import { IconTypeyType, IconSearch } from './Icon';
-import { matchLessonToTerm, sortLessons } from './utils';
+import { matchLessonToTerm, sortLessons } from './utils/utils';
 import './App.css';
 
 class Header extends Component {

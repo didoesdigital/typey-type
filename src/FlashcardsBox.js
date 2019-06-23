@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import * as Utils from './utils';
+import * as Utils from './utils/utils';
 import 'react-tippy/dist/tippy.css'
 
 class FlashcardBox extends Component {

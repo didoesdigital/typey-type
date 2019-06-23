@@ -7,7 +7,7 @@ import {
   Tooltip,
 } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
-import * as Utils from './utils';
+import * as Utils from './utils/utils';
 import {
   getLesson,
   parseLesson

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as PARAMS from './params.js';
-import { randomise, isLessonTextValid } from './utils';
+import { randomise, isLessonTextValid } from './utils/utils';
 import { getLessonIndexData } from './lessonIndexData';
 import { getRecommendedNextLesson } from './recommendations';
 import { getFlashcardsNextLesson } from './flashcardsRecommendations';
