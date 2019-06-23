@@ -287,7 +287,7 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes) 
   return strokes;
 }
 
-function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T"}) {
+function generateListOfWordsAndStrokes(wordList, sourceWordsAndStrokes = {"the": "-T"}) {
   // wordList = [ 'bed,', 'man!', "'sinatra'", 'and again', 'media query', 'push origin master', 'diff --cached', 'diff -- cached' ]
   let sourceAndPresentedMaterial = [];
 
@@ -304,5 +304,5 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
 }
 
 export {
-  generateDictionaryEntries,
+  generateListOfWordsAndStrokes,
 };

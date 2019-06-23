@@ -1,4 +1,4 @@
-import { generateDictionaryEntries } from './transformingDictionaries';
+import { generateListOfWordsAndStrokes } from './transformingDictionaries';
 
 describe('generate dictionary entries', () => {
   it('returns array of phrases and strokes for words', () => {
@@ -41,7 +41,7 @@ describe('generate dictionary entries', () => {
       "learn": "HRERPB"
     };
 
-    expect(generateDictionaryEntries(wordList, sourceWordsAndStrokes)).toEqual(
+    expect(generateListOfWordsAndStrokes(wordList, sourceWordsAndStrokes)).toEqual(
       [
         {phrase: "a", stroke: "A*"},
         {phrase: "A", stroke: "A*P"},
@@ -87,7 +87,7 @@ describe('generate dictionary entries', () => {
         // {phrase: "diff --cached", stroke: "TKEUF TK*RB TK-LS KAERBD"},
         // {phrase: "<title>Learn!</title>", stroke: "AEPBG/TAOEULT/A*EPBG/KPA*/HRERPB/SKHRAPL/AEPBG/OEU/TAOEULT/A*EPBG"}
       ]
-    // expect(generateDictionaryEntries(wordList, sourceWordsAndStrokes)).toEqual(
+    // expect(generateListOfWordsAndStrokes(wordList, sourceWordsAndStrokes)).toEqual(
     //   [
     //     {phrase: " ", stroke: "S-P", lookups: 1},
     //     {phrase: "?", stroke: "H-F", lookups: 1},

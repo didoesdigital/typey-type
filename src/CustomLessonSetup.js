@@ -13,7 +13,7 @@ import {
   processDictionary,
   swapKeyValueInDictionary,
 } from './typey-type';
-import { generateDictionaryEntries } from './utils/transformingDictionaries';
+import { generateListOfWordsAndStrokes } from './utils/transformingDictionaries';
 
 class CustomLessonSetup extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class CustomLessonSetup extends Component {
   handleWordsForDictionaryEntries(value) {
     let result = parseWordList(value);
     if (result && result.length > 0) {
-      let customLessonWordsAndStrokes = generateDictionaryEntries(result, this.state.processedSourceWordsAndStrokes);
+      let customLessonWordsAndStrokes = generateListOfWordsAndStrokes(result, this.state.processedSourceWordsAndStrokes);
       if (customLessonWordsAndStrokes && customLessonWordsAndStrokes.length > 0) {
         this.setState({
           customLessonWordsAndStrokes: customLessonWordsAndStrokes,

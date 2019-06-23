@@ -26,7 +26,7 @@ import {
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './typey-type';
-import { generateDictionaryEntries } from './utils/transformingDictionaries';
+import { generateListOfWordsAndStrokes } from './utils/transformingDictionaries';
 import {
   Route,
   Switch
@@ -741,7 +741,7 @@ class App extends Component {
         // let result = parseWordList(myWords);
       if (result && result.length > 0) {
         // look up strokes for each word
-        let lessonWordsAndStrokes = generateDictionaryEntries(result, processedSourceWordsAndStrokes);
+        let lessonWordsAndStrokes = generateListOfWordsAndStrokes(result, processedSourceWordsAndStrokes);
         if (lessonWordsAndStrokes && lessonWordsAndStrokes.length > 0) {
           lesson.sourceMaterial = lessonWordsAndStrokes;
           lesson.presentedMaterial = lessonWordsAndStrokes;
