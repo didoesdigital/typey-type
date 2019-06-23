@@ -81,7 +81,7 @@ class StrokesForWords extends Component<Props, State> {
           wrap="off"
           >
         </textarea>
-        <ul className="unstyled-list">
+        <ul className="unstyled-list mw-240 wrap">
           {strokeListItems}
         </ul>
       </React.Fragment>
