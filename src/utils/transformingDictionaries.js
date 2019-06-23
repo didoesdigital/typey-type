@@ -214,6 +214,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
     // if (remainingWordOrPhrase === "and! and") { debugger; }
 
+    function createStrokeHintForPhrase() {
     [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
 
     // First check for exact matching stroke:
@@ -291,6 +292,9 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
         }
       }
     }
+    }
+
+    createStrokeHintForPhrase();
 
     sourceAndPresentedMaterial.push({phrase: wordOrPhraseMaterial, stroke: strokes });
   }
