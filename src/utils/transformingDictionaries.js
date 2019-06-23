@@ -99,6 +99,9 @@ const FINGERSPELLED_LETTERS = {
   "9": "9"
 }
 
+const punctuationSplittingRegex = /[!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~—–-]/; // includes en and em dashes, curly quotes
+const punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
+
 function chooseStrokesForPhrase (wordOrPhrase, sourceWordsAndStrokes, chosenStroke, strokeLookupAttempts) {
   chosenStroke = sourceWordsAndStrokes[wordOrPhrase];
 
@@ -174,8 +177,6 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     let stroke = "";
     let strokeLookupAttempts = 0;
     let strokeLookupAttemptsLimit = 12;
-    let punctuationSplittingRegex = /[!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~—–-]/; // includes en and em dashes, curly quotes
-    let punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
     // if (remainingWordOrPhrase === "and! and") { debugger; }
 
