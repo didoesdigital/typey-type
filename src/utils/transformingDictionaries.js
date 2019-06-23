@@ -98,6 +98,18 @@ const FINGERSPELLED_LETTERS = {
   "8": "8",
   "9": "9"
 }
+// TODO: don't hardcode this
+// Maybe show numbers as letters?
+  // "1": "#S",
+  // "2": "#T-",
+  // "3": "#P-",
+  // "4": "#H",
+  // "5": "#A",
+  // "0": "#O",
+  // "6": "#F",
+  // "7": "#-P",
+  // "8": "#L",
+  // "9": "#-T"
 
 const punctuationSplittingRegex = /[!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~—–-]/; // includes en and em dashes, curly quotes
 const punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
@@ -192,18 +204,6 @@ function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndSt
 function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T"}) {
   let sourceAndPresentedMaterial = [];
   // wordList = [ 'bed,', 'man!', "'sinatra'", 'and again', 'media query', 'push origin master', 'diff --cached', 'diff -- cached' ]
-  // TODO: don't hardcode this
-  // Maybe show numbers as letters?
-    // "1": "#S",
-    // "2": "#T-",
-    // "3": "#P-",
-    // "4": "#H",
-    // "5": "#A",
-    // "0": "#O",
-    // "6": "#F",
-    // "7": "#-P",
-    // "8": "#L",
-    // "9": "#-T"
 
   for (let i = 0; i < wordList.length; i++) {
     let wordOrPhraseMaterial = wordList[i];
