@@ -180,7 +180,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
     // if (remainingWordOrPhrase === "and! and") { debugger; }
 
-    function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts) {
+    function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts) {
       // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
         if (remainingWordOrPhrase.match(punctuationSplittingWholeMatchRegex)) { // exactly matches punctuation e.g. "!", "?", "'"
           [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts);
@@ -252,7 +252,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
           // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
           if (stroke === "xxx" && (firstWord.match(punctuationSplittingRegex) !== null)) { // "man!"
             let tmpRemainingWordOrPhrase = '';
-            [tmpRemainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(firstWord, strokes, stroke, strokeLookupAttempts); // "and!"
+            [tmpRemainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(firstWord, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts); // "and!"
 
             remainingWordOrPhrase = tmpRemainingWordOrPhrase + " " + remainingWordOrPhrase; // This will cause its own bugs by re-introducing spaces where they don't belong in phrases
             stroke = "xxx";
@@ -265,7 +265,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
 
         // Break up phrase on punctuation
         else if (stroke === "xxx" && (remainingWordOrPhrase.match(punctuationSplittingRegex) !== null)) { // "man!"
-          [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts);
+          [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts);
         }
         else {
           if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
