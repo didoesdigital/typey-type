@@ -207,14 +207,14 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
 
   for (let i = 0; i < wordList.length; i++) {
     let wordOrPhraseMaterial = wordList[i];
-    let remainingWordOrPhrase = wordList[i];
-    let strokes = "";
-    let stroke = "";
-    let strokeLookupAttempts = 0;
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
     // if (remainingWordOrPhrase === "and! and") { debugger; }
 
-    function createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts) {
+    function createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes) {
+      let remainingWordOrPhrase = wordOrPhraseMaterial;
+      let stroke = "";
+      let strokes = "";
+      let strokeLookupAttempts = 0;
       [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
 
       // First check for exact matching stroke:
@@ -295,9 +295,9 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
       return strokes;
     }
 
-    strokes = createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts);
+    let strokes = createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes);
 
-    sourceAndPresentedMaterial.push({phrase: wordOrPhraseMaterial, stroke: strokes });
+    sourceAndPresentedMaterial.push({phrase: wordOrPhraseMaterial, stroke: strokes});
   }
 
   return sourceAndPresentedMaterial;
