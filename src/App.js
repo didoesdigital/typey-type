@@ -12,7 +12,6 @@ import {
   fetchResource,
   fetchDictionaryIndex,
   getLesson,
-  generateDictionaryEntries,
   loadPersonalPreferences,
   matchSplitText,
   parseLesson,
@@ -27,6 +26,7 @@ import {
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './typey-type';
+import { generateDictionaryEntries } from './utils/transformingDictionaries';
 import {
   Route,
   Switch

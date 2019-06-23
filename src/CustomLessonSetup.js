@@ -12,8 +12,8 @@ import {
   parseWordList,
   processDictionary,
   swapKeyValueInDictionary,
-  generateDictionaryEntries
 } from './typey-type';
+import { generateDictionaryEntries } from './utils/transformingDictionaries';
 
 class CustomLessonSetup extends Component {
   constructor(props) {
