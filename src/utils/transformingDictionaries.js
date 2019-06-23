@@ -99,6 +99,58 @@ const FINGERSPELLED_LETTERS = {
   "9": "9"
 }
 
+function chooseStrokeForWord (wordOrPhrase, sourceWordsAndStrokes, chosenStroke, strokeLookupAttempts) {
+  chosenStroke = sourceWordsAndStrokes[wordOrPhrase];
+
+  let strokeForOneCharacterWord = FINGERSPELLED_LETTERS[wordOrPhrase];
+  if (wordOrPhrase.length === 1 && strokeForOneCharacterWord) {
+    return [strokeForOneCharacterWord, strokeLookupAttempts];
+  }
+
+  // FIRST => first
+  if (!chosenStroke) {
+    let uppercasedStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase()];
+
+    if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
+      chosenStroke = '*URP/' + uppercasedStroke;
+    }
+  }
+
+  // TUESDAY => Tuesday
+  if (!chosenStroke) {
+    let uppercasedStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase())];
+
+    if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
+      chosenStroke = '*URP/' + uppercasedStroke;
+    }
+  }
+
+  // tom => Tom
+  if (!chosenStroke) {
+    let capitalisedStroke = sourceWordsAndStrokes[wordOrPhrase.replace(/(^|\s)\S/g, l => l.toUpperCase())];
+
+    if (capitalisedStroke) {
+      chosenStroke = 'HRO*ER/' + capitalisedStroke;
+    }
+  }
+
+  // Heather => heather
+  if (!chosenStroke) {
+    let lowercaseStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase()];
+    if (lowercaseStroke) {
+      chosenStroke = 'KPA/' + lowercaseStroke;
+    }
+  }
+
+  if (!chosenStroke) {
+    chosenStroke = "xxx";
+  }
+
+  strokeLookupAttempts = strokeLookupAttempts + 1;
+
+  return [chosenStroke, strokeLookupAttempts];
+}
+
 function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T"}) {
   let sourceAndPresentedMaterial = [];
   // wordList = [ 'bed,', 'man!', "'sinatra'", 'and again', 'media query', 'push origin master', 'diff --cached', 'diff -- cached' ]
@@ -126,58 +178,6 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     let punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
     // if (remainingWordOrPhrase === "and! and") { debugger; }
-
-    function chooseStrokeForWord (wordOrPhrase, sourceWordsAndStrokes, chosenStroke, strokeLookupAttempts) {
-      chosenStroke = sourceWordsAndStrokes[wordOrPhrase];
-
-      let strokeForOneCharacterWord = FINGERSPELLED_LETTERS[wordOrPhrase];
-      if (wordOrPhrase.length === 1 && strokeForOneCharacterWord) {
-        return [strokeForOneCharacterWord, strokeLookupAttempts];
-      }
-
-      // FIRST => first
-      if (!chosenStroke) {
-        let uppercasedStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase()];
-
-        if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
-          chosenStroke = '*URP/' + uppercasedStroke;
-        }
-      }
-
-      // TUESDAY => Tuesday
-      if (!chosenStroke) {
-        let uppercasedStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase())];
-
-        if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
-          chosenStroke = '*URP/' + uppercasedStroke;
-        }
-      }
-
-      // tom => Tom
-      if (!chosenStroke) {
-        let capitalisedStroke = sourceWordsAndStrokes[wordOrPhrase.replace(/(^|\s)\S/g, l => l.toUpperCase())];
-
-        if (capitalisedStroke) {
-          chosenStroke = 'HRO*ER/' + capitalisedStroke;
-        }
-      }
-
-      // Heather => heather
-      if (!chosenStroke) {
-        let lowercaseStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase()];
-        if (lowercaseStroke) {
-          chosenStroke = 'KPA/' + lowercaseStroke;
-        }
-      }
-
-      if (!chosenStroke) {
-        chosenStroke = "xxx";
-      }
-
-      strokeLookupAttempts = strokeLookupAttempts + 1;
-
-      return [chosenStroke, strokeLookupAttempts];
-    }
 
     function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, strokes, stroke) {
       // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
