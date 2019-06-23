@@ -4,7 +4,7 @@ import { Component } from 'react';
 class StrokesForWords extends Component {
   state = {
     phrase: "",
-    dict: {
+    dictionaryOfWordsStrokesAndSourceDictionary: {
       "silent": [
         ["SAOEU/HREPBT", "dict.json"],
         ["SHREPBT", "dict.json"],
@@ -32,28 +32,17 @@ class StrokesForWords extends Component {
   }
 
   componentDidMount() {
-    let sortedDict = Object.assign({}, this.state.dict);
-    this.setState({dict: sortedDict});
+    let sortedDict = Object.assign({}, this.state.dictionaryOfWordsStrokesAndSourceDictionary);
+    this.setState({dictionaryOfWordsStrokesAndSourceDictionary: sortedDict});
   }
 
   updateWordsForStrokes(event) {
     let phrase = event.target.value;
-    let listOfStrokesAndDicts = this.createListOfStrokes(phrase);
+    let listOfStrokesAndDicts = createListOfStrokes(phrase, this.state.dictionaryOfWordsStrokesAndSourceDictionary);
     this.setState({
       phrase: phrase,
       listOfStrokesAndDicts: listOfStrokesAndDicts
     })
-  }
-
-  createListOfStrokes(phrase) {
-    let listOfStrokesAndDicts = [];
-    let allEntries = Object.entries(this.state.dict);
-    if (this.state.dict[phrase]) {
-      listOfStrokesAndDicts = this.state.dict[phrase];
-    } else {
-      listOfStrokesAndDicts = allEntries;
-    }
-    return listOfStrokesAndDicts;
   }
 
   render () {
@@ -87,4 +76,18 @@ class StrokesForWords extends Component {
   }
 }
 
+function createListOfStrokes(phrase, dictionaryOfWordsStrokesAndSourceDictionary) {
+  let listOfStrokesAndDicts = [];
+  let allEntries = Object.entries(dictionaryOfWordsStrokesAndSourceDictionary);
+  if (dictionaryOfWordsStrokesAndSourceDictionary[phrase]) {
+    listOfStrokesAndDicts = dictionaryOfWordsStrokesAndSourceDictionary[phrase];
+  } else {
+    listOfStrokesAndDicts = allEntries;
+  }
+  return listOfStrokesAndDicts;
+}
+
 export default StrokesForWords;
+export {
+  createListOfStrokes
+};
