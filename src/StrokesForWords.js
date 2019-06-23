@@ -16,10 +16,10 @@ class StrokesForWords extends Component<Props, State> {
     phrase: "",
     dict: {
       "silent": [
+        ["SAOEU/HREPBT", "dict.json"],
         ["SHREPBT", "dict.json"],
-        ["SHREPBT", "personal.json"],
         ["SHRAOEUPBT", "dict.json"],
-        ["SAOEU/HREPBT", "dict.json"]
+        ["SHREPBT", "personal.json"]
       ],
       "sentiment": [
         ["SEPB/TEUPLT", "sentiment"],
@@ -30,8 +30,8 @@ class StrokesForWords extends Component<Props, State> {
         ["TPAO*", "personal.json"]
       ],
       "bar": [
-        ["PWAR", "dict.json"],
-        ["PWA*R", "personal.json"]
+        ["PWA*R", "personal.json"],
+        ["PWAR", "dict.json"]
       ],
       "baz": [
         ["PWAZ", "personal.json"],
@@ -39,6 +39,11 @@ class StrokesForWords extends Component<Props, State> {
       ]
     },
     listOfStrokesAndDicts: []
+  }
+
+  componentDidMount() {
+    let sortedDict = Object.assign({}, this.state.dict);
+    this.setState({dict: sortedDict});
   }
 
   updateWordsForStrokes(event: SyntheticInputEvent<HTMLTextAreaElement>) {
@@ -50,10 +55,14 @@ class StrokesForWords extends Component<Props, State> {
     })
   }
 
+  // createListOfStrokes = (phrase: string): Array<string> => {
   createListOfStrokes(phrase: string) {
     let listOfStrokesAndDicts = [];
+    let allEntries = Object.entries(this.state.dict);
     if (this.state.dict[phrase]) {
       listOfStrokesAndDicts = this.state.dict[phrase];
+    } else {
+      listOfStrokesAndDicts = allEntries;
     }
     return listOfStrokesAndDicts;
   }
