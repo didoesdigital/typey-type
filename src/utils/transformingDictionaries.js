@@ -115,7 +115,7 @@ const punctuationSplittingRegex = /[!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~�
 const punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
 const strokeLookupAttemptsLimit = 12;
 
-function chooseOutlineForPhrase (wordOrPhrase, sourceWordsAndStrokes, chosenStroke, strokeLookupAttempts) {
+function chooseOutlineForPhrase(wordOrPhrase, sourceWordsAndStrokes, chosenStroke, strokeLookupAttempts) {
   chosenStroke = sourceWordsAndStrokes[wordOrPhrase];
 
   let strokeForOneCharacterWord = FINGERSPELLED_LETTERS[wordOrPhrase];
