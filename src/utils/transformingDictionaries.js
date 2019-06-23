@@ -155,6 +155,40 @@ function chooseStrokesForPhrase (wordOrPhrase, sourceWordsAndStrokes, chosenStro
   return [chosenStroke, strokeLookupAttempts];
 }
 
+function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts) {
+  // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
+    if (remainingWordOrPhrase.match(punctuationSplittingWholeMatchRegex)) { // exactly matches punctuation e.g. "!", "?", "'"
+      [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts);
+      strokes = strokes === "" ? stroke : strokes + " " + stroke;
+      stroke = "xxx";
+
+      remainingWordOrPhrase = ''; // prevents infinite loop
+    }
+    else {
+      let matchingPunctuation = remainingWordOrPhrase.match(punctuationSplittingRegex)[0].charAt(0); // given "man?" => ["?", index: 3, input: "man?", groups: undefined] => "?" => "?"
+      let index = remainingWordOrPhrase.indexOf(matchingPunctuation);
+      let firstWord = '';
+
+      if (index === 0) { // starts with ! e.g. !foo
+        firstWord = remainingWordOrPhrase.slice(0, 1); // "!"
+        remainingWordOrPhrase = remainingWordOrPhrase.slice(index + 1, remainingWordOrPhrase.length); // "foo"
+      }
+      else { // contains ! e.g. foo!
+        firstWord = remainingWordOrPhrase.slice(0, index); // "foo"
+        remainingWordOrPhrase = remainingWordOrPhrase.slice(index, remainingWordOrPhrase.length); // "!"
+      }
+
+      [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseStrokesForPhrase("man", sourceWordsAndStrokes, "", 0)
+
+      strokes = strokes === "" ? stroke : strokes + " " + stroke;
+      stroke = "xxx";
+    }
+
+  if (strokeLookupAttempts > strokeLookupAttemptsLimit) { return ['', strokes, stroke]; }
+
+  return [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts];
+}
+
 function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T"}) {
   let sourceAndPresentedMaterial = [];
   // wordList = [ 'bed,', 'man!', "'sinatra'", 'and again', 'media query', 'push origin master', 'diff --cached', 'diff -- cached' ]
@@ -179,40 +213,6 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     let strokeLookupAttempts = 0;
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
     // if (remainingWordOrPhrase === "and! and") { debugger; }
-
-    function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts) {
-      // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
-        if (remainingWordOrPhrase.match(punctuationSplittingWholeMatchRegex)) { // exactly matches punctuation e.g. "!", "?", "'"
-          [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts);
-          strokes = strokes === "" ? stroke : strokes + " " + stroke;
-          stroke = "xxx";
-
-          remainingWordOrPhrase = ''; // prevents infinite loop
-        }
-        else {
-          let matchingPunctuation = remainingWordOrPhrase.match(punctuationSplittingRegex)[0].charAt(0); // given "man?" => ["?", index: 3, input: "man?", groups: undefined] => "?" => "?"
-          let index = remainingWordOrPhrase.indexOf(matchingPunctuation);
-          let firstWord = '';
-
-          if (index === 0) { // starts with ! e.g. !foo
-            firstWord = remainingWordOrPhrase.slice(0, 1); // "!"
-            remainingWordOrPhrase = remainingWordOrPhrase.slice(index + 1, remainingWordOrPhrase.length); // "foo"
-          }
-          else { // contains ! e.g. foo!
-            firstWord = remainingWordOrPhrase.slice(0, index); // "foo"
-            remainingWordOrPhrase = remainingWordOrPhrase.slice(index, remainingWordOrPhrase.length); // "!"
-          }
-
-          [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseStrokesForPhrase("man", sourceWordsAndStrokes, "", 0)
-
-          strokes = strokes === "" ? stroke : strokes + " " + stroke;
-          stroke = "xxx";
-        }
-
-      if (strokeLookupAttempts > strokeLookupAttemptsLimit) { return ['', strokes, stroke]; }
-
-      return [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts];
-    }
 
     [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
 
