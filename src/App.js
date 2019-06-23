@@ -741,11 +741,11 @@ class App extends Component {
         // let result = parseWordList(myWords);
       if (result && result.length > 0) {
         // look up strokes for each word
-        let dictionary = generateDictionaryEntries(result, processedSourceWordsAndStrokes);
-        if (dictionary && dictionary.length > 0) {
-          lesson.sourceMaterial = dictionary;
-          lesson.presentedMaterial = dictionary;
-          lesson.newPresentedMaterial = new Zipper([dictionary]);
+        let lessonWordsAndStrokes = generateDictionaryEntries(result, processedSourceWordsAndStrokes);
+        if (lessonWordsAndStrokes && lessonWordsAndStrokes.length > 0) {
+          lesson.sourceMaterial = lessonWordsAndStrokes;
+          lesson.presentedMaterial = lessonWordsAndStrokes;
+          lesson.newPresentedMaterial = new Zipper([lessonWordsAndStrokes]);
           lesson.settings = {
             ignoredChars: '',
             customMessage: ''
