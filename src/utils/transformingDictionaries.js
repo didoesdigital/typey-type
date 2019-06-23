@@ -103,7 +103,7 @@ const punctuationSplittingRegex = /[!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~�
 const punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
 const strokeLookupAttemptsLimit = 12;
 
-function chooseStrokesForPhrase (wordOrPhrase, sourceWordsAndStrokes, chosenStroke, strokeLookupAttempts) {
+function chooseOutlineForPhrase (wordOrPhrase, sourceWordsAndStrokes, chosenStroke, strokeLookupAttempts) {
   chosenStroke = sourceWordsAndStrokes[wordOrPhrase];
 
   let strokeForOneCharacterWord = FINGERSPELLED_LETTERS[wordOrPhrase];
@@ -158,7 +158,7 @@ function chooseStrokesForPhrase (wordOrPhrase, sourceWordsAndStrokes, chosenStro
 function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts) {
   // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
     if (remainingWordOrPhrase.match(punctuationSplittingWholeMatchRegex)) { // exactly matches punctuation e.g. "!", "?", "'"
-      [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts);
+      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts);
       strokes = strokes === "" ? stroke : strokes + " " + stroke;
       stroke = "xxx";
 
@@ -178,7 +178,7 @@ function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndSt
         remainingWordOrPhrase = remainingWordOrPhrase.slice(index, remainingWordOrPhrase.length); // "!"
       }
 
-      [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseStrokesForPhrase("man", sourceWordsAndStrokes, "", 0)
+      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", sourceWordsAndStrokes, "", 0)
 
       strokes = strokes === "" ? stroke : strokes + " " + stroke;
       stroke = "xxx";
@@ -214,7 +214,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
     // if (remainingWordOrPhrase === "and! and") { debugger; }
 
-    [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
+    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
 
     // First check for exact matching stroke:
     if (stroke && stroke.length > 0 && !stroke === "xxx") {
@@ -247,7 +247,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
           let firstWord = remainingWordOrPhrase.slice(0, remainingWordOrPhrase.indexOf(" ")); // "off"
           remainingWordOrPhrase = remainingWordOrPhrase.slice(remainingWordOrPhrase.indexOf(" ") + 1, remainingWordOrPhrase.length); // "went the man!"
 
-          [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // "off"
+          [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // "off"
 
           // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
           if (stroke === "xxx" && (firstWord.match(punctuationSplittingRegex) !== null)) { // "man!"
@@ -269,7 +269,7 @@ function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T
         }
         else {
           if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
-            [stroke, strokeLookupAttempts] = chooseStrokesForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseStrokesForPhrase("man", sourceWordsAndStrokes, "", 0)
+            [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", sourceWordsAndStrokes, "", 0)
 
             // if all else fails, try fingerspelling
             if (stroke === "xxx") {
