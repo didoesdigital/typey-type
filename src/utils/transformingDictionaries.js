@@ -201,99 +201,99 @@ function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndSt
   return [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts];
 }
 
+function createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes) {
+  // if (remainingWordOrPhrase === "and! and") { debugger; }
+  let remainingWordOrPhrase = wordOrPhraseMaterial;
+  let stroke = "";
+  let strokes = "";
+  let strokeLookupAttempts = 0;
+  [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
+
+  // First check for exact matching stroke:
+  if (stroke && stroke.length > 0 && !stroke === "xxx") {
+    strokes = stroke;
+  }
+
+  while (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
+    // Arbitrary limit to prevent making Typey Type slow from excess look ups and
+    // avoid possible infinite loops
+    if (strokeLookupAttempts > strokeLookupAttemptsLimit) {
+      remainingWordOrPhrase = '';
+      strokes = strokes + ' xxx';
+      stroke = 'xxx';
+    } else {
+
+      // Check for whitespace on remaining words
+      if (remainingWordOrPhrase.startsWith(" ") || remainingWordOrPhrase.endsWith(" ")) {
+        remainingWordOrPhrase = remainingWordOrPhrase.trim();
+      }
+
+      // If we've found a matching stroke for the last remaining word, add the stroke to the hint and remove the word
+      if (stroke && stroke.length > 0 && !(stroke === "xxx")) {
+        strokes = strokes === "" ? stroke : strokes + " " + stroke;
+        remainingWordOrPhrase = '';
+        stroke = "xxx";
+      }
+
+      // Break up phrase on whitespace
+      else if (stroke === "xxx" && remainingWordOrPhrase.includes(" ")) { // "off went the man!"
+        let firstWord = remainingWordOrPhrase.slice(0, remainingWordOrPhrase.indexOf(" ")); // "off"
+        remainingWordOrPhrase = remainingWordOrPhrase.slice(remainingWordOrPhrase.indexOf(" ") + 1, remainingWordOrPhrase.length); // "went the man!"
+
+        [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // "off"
+
+        // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
+        if (stroke === "xxx" && (firstWord.match(punctuationSplittingRegex) !== null)) { // "man!"
+          let tmpRemainingWordOrPhrase = '';
+          [tmpRemainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(firstWord, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts); // "and!"
+
+          remainingWordOrPhrase = tmpRemainingWordOrPhrase + " " + remainingWordOrPhrase; // This will cause its own bugs by re-introducing spaces where they don't belong in phrases
+          stroke = "xxx";
+        }
+        else {
+          strokes = strokes === "" ? stroke : strokes + " " + stroke;
+          stroke = "xxx";
+        }
+      }
+
+      // Break up phrase on punctuation
+      else if (stroke === "xxx" && (remainingWordOrPhrase.match(punctuationSplittingRegex) !== null)) { // "man!"
+        [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts);
+      }
+      else {
+        if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
+          [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", sourceWordsAndStrokes, "", 0)
+
+          // if all else fails, try fingerspelling
+          if (stroke === "xxx") {
+            stroke = [...remainingWordOrPhrase].map(char => {
+              let fingerspelledStroke = '';
+              fingerspelledStroke = FINGERSPELLED_LETTERS[char];
+              if (!fingerspelledStroke) {
+                fingerspelledStroke = "xxx";
+              }
+              return fingerspelledStroke;
+            }).join('/');
+          }
+
+          remainingWordOrPhrase = '';
+
+          strokes = strokes === "" ? stroke : strokes + " " + stroke;
+        }
+        remainingWordOrPhrase = '';
+      }
+    }
+  }
+  return strokes;
+}
+
 function generateDictionaryEntries(wordList, sourceWordsAndStrokes = {"the": "-T"}) {
-  let sourceAndPresentedMaterial = [];
   // wordList = [ 'bed,', 'man!', "'sinatra'", 'and again', 'media query', 'push origin master', 'diff --cached', 'diff -- cached' ]
+  let sourceAndPresentedMaterial = [];
 
   for (let i = 0; i < wordList.length; i++) {
     let wordOrPhraseMaterial = wordList[i];
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
-    // if (remainingWordOrPhrase === "and! and") { debugger; }
-
-    function createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes) {
-      let remainingWordOrPhrase = wordOrPhraseMaterial;
-      let stroke = "";
-      let strokes = "";
-      let strokeLookupAttempts = 0;
-      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
-
-      // First check for exact matching stroke:
-      if (stroke && stroke.length > 0 && !stroke === "xxx") {
-        strokes = stroke;
-      }
-
-      while (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
-        // Arbitrary limit to prevent making Typey Type slow from excess look ups and
-        // avoid possible infinite loops
-        if (strokeLookupAttempts > strokeLookupAttemptsLimit) {
-          remainingWordOrPhrase = '';
-          strokes = strokes + ' xxx';
-          stroke = 'xxx';
-        } else {
-
-          // Check for whitespace on remaining words
-          if (remainingWordOrPhrase.startsWith(" ") || remainingWordOrPhrase.endsWith(" ")) {
-            remainingWordOrPhrase = remainingWordOrPhrase.trim();
-          }
-
-          // If we've found a matching stroke for the last remaining word, add the stroke to the hint and remove the word
-          if (stroke && stroke.length > 0 && !(stroke === "xxx")) {
-            strokes = strokes === "" ? stroke : strokes + " " + stroke;
-            remainingWordOrPhrase = '';
-            stroke = "xxx";
-          }
-
-          // Break up phrase on whitespace
-          else if (stroke === "xxx" && remainingWordOrPhrase.includes(" ")) { // "off went the man!"
-            let firstWord = remainingWordOrPhrase.slice(0, remainingWordOrPhrase.indexOf(" ")); // "off"
-            remainingWordOrPhrase = remainingWordOrPhrase.slice(remainingWordOrPhrase.indexOf(" ") + 1, remainingWordOrPhrase.length); // "went the man!"
-
-            [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // "off"
-
-            // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
-            if (stroke === "xxx" && (firstWord.match(punctuationSplittingRegex) !== null)) { // "man!"
-              let tmpRemainingWordOrPhrase = '';
-              [tmpRemainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(firstWord, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts); // "and!"
-
-              remainingWordOrPhrase = tmpRemainingWordOrPhrase + " " + remainingWordOrPhrase; // This will cause its own bugs by re-introducing spaces where they don't belong in phrases
-              stroke = "xxx";
-            }
-            else {
-              strokes = strokes === "" ? stroke : strokes + " " + stroke;
-              stroke = "xxx";
-            }
-          }
-
-          // Break up phrase on punctuation
-          else if (stroke === "xxx" && (remainingWordOrPhrase.match(punctuationSplittingRegex) !== null)) { // "man!"
-            [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts);
-          }
-          else {
-            if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
-              [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", sourceWordsAndStrokes, "", 0)
-
-              // if all else fails, try fingerspelling
-              if (stroke === "xxx") {
-                stroke = [...remainingWordOrPhrase].map(char => {
-                  let fingerspelledStroke = '';
-                  fingerspelledStroke = FINGERSPELLED_LETTERS[char];
-                  if (!fingerspelledStroke) {
-                    fingerspelledStroke = "xxx";
-                  }
-                  return fingerspelledStroke;
-                }).join('/');
-              }
-
-              remainingWordOrPhrase = '';
-
-              strokes = strokes === "" ? stroke : strokes + " " + stroke;
-            }
-            remainingWordOrPhrase = '';
-          }
-        }
-      }
-      return strokes;
-    }
 
     let strokes = createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes);
 
