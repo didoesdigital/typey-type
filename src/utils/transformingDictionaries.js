@@ -292,8 +292,8 @@ function generateListOfWordsAndStrokes(wordList, sourceWordsAndStrokes = {"the":
   let sourceAndPresentedMaterial = [];
 
   for (let i = 0; i < wordList.length; i++) {
-    let wordOrPhraseMaterial = wordList[i];
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
+    let wordOrPhraseMaterial = wordList[i];
 
     let strokes = createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes);
 
