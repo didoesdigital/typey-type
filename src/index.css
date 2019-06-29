@@ -289,6 +289,9 @@ input:focus::placeholder {
 .flex-wrap {
   flex-wrap: wrap; }
 
+.flex-grow {
+  flex-grow: 1; }
+
 .justify-between {
   justify-content: space-between; }
 
@@ -891,7 +894,7 @@ input:focus::placeholder {
   overflow: hidden;
   white-space: nowrap; }
 
-.input-textarea, .successfully-typed-text {
+.input-textarea, .input-file, .successfully-typed-text {
   border: 2px solid #8242a8;
   display: block;
   font-size: 1rem;
@@ -901,6 +904,10 @@ input:focus::placeholder {
 
 .input-textarea {
   background-color: transparent; }
+
+.input-file {
+  background-color: transparent;
+  height: 40px; }
 
 .successfully-typed-text {
   border: 2px solid transparent;

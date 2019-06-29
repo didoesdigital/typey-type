@@ -375,6 +375,7 @@ input:focus::placeholder {
 .table-cell       { display: table-cell; }
 .flex             { display: flex; }
 .flex-wrap        { flex-wrap: wrap; }
+.flex-grow        { flex-grow: 1; }
 .justify-between  { justify-content: space-between; }
 .justify-around   { justify-content: space-around; }
 .justify-end      { justify-content: flex-end; }
@@ -859,6 +860,12 @@ $textarea-padding-x: 8px;
 .input-textarea {
   @extend %input-textarea-styles;
   background-color: transparent;
+}
+
+.input-file {
+  @extend %input-textarea-styles;
+  background-color: transparent;
+  height: 40px;
 }
 
 .successfully-typed-text {

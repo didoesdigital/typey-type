@@ -10,6 +10,12 @@ const AsyncDictionary = Loadable({
   delay: 300
 });
 
+const AsyncDictionaryImport = Loadable({
+  loader: () => import("./DictionaryImport"),
+  loading: PageLoading,
+  delay: 300
+});
+
 const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, ...dictionaryProps}) => {
   return(
     <div>
@@ -70,8 +76,8 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, ...dictionary
             {...props}
           />
         } />
-        <Route exact={true} path={`${match.url}/custom`} render={ (props) =>
-          <AsyncDictionary
+        <Route exact={true} path={`${match.url}/import`} render={ (props) =>
+          <AsyncDictionaryImport
             dictionaryIndex={dictionaryIndex}
             setDictionaryIndex={setDictionaryIndex}
             {...dictionaryProps}
