@@ -235,6 +235,28 @@ describe('rank outlines', () => {
     });
   });
 
+  describe('with outlines with and without slashes', () => {
+    it('returns sorted list of outlines for "grasshopper", penalising slashes', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["TKPWHRFRPBLG", "user.json"],
+        ["TKPWHR*FRPBLG", "user.json"],
+        ["TKPWRASZ/HOP", "user.json"],
+        ["TKPWRASZ/HOP/ER", "user.json"],
+        ["TKPWRASZ/HORP", "user.json"],
+        ["TKPWRASZ/HOP/*ER", "user.json"],
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+        ["TKPWHRFRPBLG", "user.json"],
+        ["TKPWRASZ/HOP", "user.json"],
+        ["TKPWHR*FRPBLG", "user.json"],
+        ["TKPWRASZ/HORP", "user.json"],
+        ["TKPWRASZ/HOP/ER", "user.json"],
+        ["TKPWRASZ/HOP/*ER", "user.json"],
+      ]);
+    });
+  });
+
   // describe('with prefix and suffix strokes', () => {
   //   it('returns sorted list of outlines for "upstarted", penalising briefs without affix strokes', () => {
   //     let arrayOfStrokesAndTheirSourceDictNames = [

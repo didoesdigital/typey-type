@@ -309,6 +309,15 @@ function chooseSEndingOverZEnding(outlineA, outlineB) {
   return (outlineA[outlineALength - 1] === "Z" && outlineB[outlineBLength - 1] === "S");
 }
 
+function penaliseSlashes(outline, translation) {
+  let penaltyForSlashes = 0;
+  let numberOfSlashes = outline.match(/\//g);
+
+  if (numberOfSlashes !== null) { penaltyForSlashes += numberOfSlashes.length; }
+
+  return penaltyForSlashes;
+}
+
 function penaliseStars(outline, translation) {
   let penaltyForStars = 0;
   let numberOfStars = outline.match(/\*/g);
@@ -327,6 +336,9 @@ function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
 
     outlineALengthWithAllPenalties += penaliseStars(outlineA, translation);
     outlineBLengthWithAllPenalties += penaliseStars(outlineB, translation);
+
+    outlineALengthWithAllPenalties += penaliseSlashes(outlineA, translation);
+    outlineBLengthWithAllPenalties += penaliseSlashes(outlineB, translation);
 
     if (outlineALengthWithAllPenalties === outlineBLengthWithAllPenalties) {
       if (chooseSEndingOverZEnding(outlineA, outlineB)) { return 1; }
