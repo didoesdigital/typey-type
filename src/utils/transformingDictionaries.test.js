@@ -1,4 +1,7 @@
-import { generateListOfWordsAndStrokes } from './transformingDictionaries';
+import {
+  generateListOfWordsAndStrokes,
+  rankOutlines
+} from './transformingDictionaries';
 
 describe('generate dictionary entries', () => {
   it('returns array of phrases and strokes for words', () => {
@@ -127,5 +130,72 @@ describe('generate dictionary entries', () => {
     //   ]
     );
   });
+});
+
+describe('rank outlines', () => {
+  describe('with duplicate outlines across dictionaries', () => {
+    it('returns sorted list of outlines for "GitHub", preserving dictionary order', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["TKPWEUT/HUB", "code.json"],
+        ["TKPWEUT/HUB", "typey-type.json"]
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+        ["TKPWEUT/HUB", "code.json"],
+        ["TKPWEUT/HUB", "typey-type.json"]
+      ]);
+    });
+  });
+
+  describe('with duplicate outlines across dictionaries', () => {
+    it('returns unsorted list of outlines for "GitHub", preserving dictionary order', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["TKPWEUT/HUB", "typey-type.json"],
+        ["TKPWEUT/HUB", "code.json"],
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+        ["TKPWEUT/HUB", "typey-type.json"],
+        ["TKPWEUT/HUB", "code.json"]
+      ]);
+    });
+  });
+
+  describe('with different outlines across dictionaries', () => {
+    it('returns shortest stroke', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["TKPWEUT/HUB", "typey-type.json"],
+        ["TKWEUT/HUB", "code.json"],
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+        ["TKWEUT/HUB", "code.json"],
+        ["TKPWEUT/HUB", "typey-type.json"]
+      ]);
+    });
+  });
+
+  describe('with different outlines across dictionaries', () => {
+    it('returns sorted list of outlines for "exercises", prioritising S endings over Z', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["KPER/SAOEUZ/-Z", "plover.json"],
+        ["KPERZ/-T", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["KPERZ/-S", "briefs.json"],
+        ["ERBGS/SAOEUSZ", "plover.json"],
+        ["KPERSZ", "typey-type.json"],
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+        ["KPERSZ", "typey-type.json"],
+        ["KPERZ/-T", "briefs.json"],
+        ["KPERZ/-S", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["ERBGS/SAOEUSZ", "plover.json"],
+        ["KPER/SAOEUZ/-Z", "plover.json"]
+      ]);
+    });
+  });
+
 });
 

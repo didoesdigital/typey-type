@@ -303,9 +303,25 @@ function generateListOfWordsAndStrokes(wordList, sourceWordsAndStrokes = {"the":
   return sourceAndPresentedMaterial;
 }
 
+function chooseSEndingOverZEnding(outlineA, outlineB) {
+  let outlineALength = outlineA.length;
+  let outlineBLength = outlineB.length;
+  return (outlineA[outlineALength - 1] === "Z" && outlineB[outlineBLength - 1] === "S");
+}
+
 function rankOutlines(arrayOfStrokesAndTheirSourceDictNames) {
   arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
-    return a - b;
+    let outlineA = a[0];
+    let outlineB = b[0];
+    let outlineALength = outlineA.length;
+    let outlineBLength = outlineB.length;
+    let penalty = 0;
+
+    if (outlineALength === outlineBLength) {
+      if (chooseSEndingOverZEnding(outlineA, outlineB)) { return 1; }
+    }
+
+    return outlineA.length - outlineB.length;
   });
   return arrayOfStrokesAndTheirSourceDictNames;
 }
