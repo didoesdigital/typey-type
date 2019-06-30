@@ -309,15 +309,6 @@ function chooseSEndingOverZEnding(outlineA, outlineB) {
   return (outlineA[outlineALength - 1] === "Z" && outlineB[outlineBLength - 1] === "S");
 }
 
-function penaliseSlashes(outline, translation) {
-  let penaltyForSlashes = 0;
-  let numberOfSlashes = outline.match(/\//g);
-
-  if (numberOfSlashes !== null) { penaltyForSlashes += numberOfSlashes.length; }
-
-  return penaltyForSlashes;
-}
-
 function penaliseStars(outline, translation) {
   let penaltyForStars = 0;
   let numberOfStars = outline.match(/\*/g);
@@ -325,6 +316,50 @@ function penaliseStars(outline, translation) {
   if (numberOfStars !== null) { penaltyForStars += numberOfStars.length; }
 
   return penaltyForStars;
+}
+
+function penaliseSlashes(outline, translation) {
+  let penaltyForSlashes = 0;
+  let numberOfSlashes = outline.match(/\//g);
+
+  if (numberOfSlashes !== null) { penaltyForSlashes += numberOfSlashes.length * 2; }
+
+  return penaltyForSlashes;
+}
+
+function hasPrefix (outline, translation) {
+  let hasPrefix = false;
+  if (outline.startsWith("AUP")) {
+    return true;
+  }
+  return hasPrefix;
+}
+
+function hasSuffix (outline, translation) {
+  let hasPrefix = false;
+  if (outline.endsWith("*ER")) {
+    return true;
+  }
+  return hasPrefix;
+}
+
+function penaliseSlashesWithoutPrefixesOrSuffixes(outline, translation) {
+  let penaltyForSlashesWithoutPrefixesOrSuffixes = 0;
+  let numberOfSlashes = outline.match(/\//g);
+
+  if (numberOfSlashes !== null) {
+    if (hasPrefix(outline, translation)) {
+      return 0;
+    }
+    else if (hasSuffix(outline, translation)) {
+      return 0;
+    }
+    else {
+      penaltyForSlashesWithoutPrefixesOrSuffixes = 2;
+    }
+  }
+
+  return penaltyForSlashesWithoutPrefixesOrSuffixes;
 }
 
 function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
@@ -339,6 +374,9 @@ function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
 
     outlineALengthWithAllPenalties += penaliseSlashes(outlineA, translation);
     outlineBLengthWithAllPenalties += penaliseSlashes(outlineB, translation);
+
+    outlineALengthWithAllPenalties += penaliseSlashesWithoutPrefixesOrSuffixes(outlineA, translation);
+    outlineBLengthWithAllPenalties += penaliseSlashesWithoutPrefixesOrSuffixes(outlineB, translation);
 
     if (outlineALengthWithAllPenalties === outlineBLengthWithAllPenalties) {
       if (chooseSEndingOverZEnding(outlineA, outlineB)) { return 1; }

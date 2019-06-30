@@ -248,8 +248,8 @@ describe('rank outlines', () => {
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
         ["TKPWHRFRPBLG", "user.json"],
-        ["TKPWRASZ/HOP", "user.json"],
         ["TKPWHR*FRPBLG", "user.json"],
+        ["TKPWRASZ/HOP", "user.json"],
         ["TKPWRASZ/HORP", "user.json"],
         ["TKPWRASZ/HOP/ER", "user.json"],
         ["TKPWRASZ/HOP/*ER", "user.json"],
@@ -257,27 +257,25 @@ describe('rank outlines', () => {
     });
   });
 
-  // describe('with prefix and suffix strokes', () => {
-  //   it('returns sorted list of outlines for "upstarted", penalising briefs without affix strokes', () => {
-  //     let arrayOfStrokesAndTheirSourceDictNames = [
-  //       ["UP/START/-D", "plover.json"],
-  //       ["AUP/STARTD", "user.json"],
-  //       ["UP/STARTD", "user.json"],
-  //       ["AUP/START/*D", "plover.json"],
-  //       ["AUP/START/-D", "plover.json"],
-  //       ["AUP/START/-D", "typey-type.json"],
-  //     ];
+  describe('with prefix and suffix strokes', () => {
+    it('returns sorted list of outlines for "upstarted", penalising briefs without affix strokes', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["UP/START/-D", "user.json"],
+        ["UP/STARTD", "user.json"],
+        ["AUP/START/*D", "user.json"],
+        ["AUP/START/-D", "user.json"],
+        ["AUP/STARTD", "user.json"],
+      ];
 
-  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
-  //       ["AUP/STARTD", "user.json"],
-  //       ["UP/STARTD", "user.json"],
-  //       ["AUP/START/-D", "typey-type.json"],
-  //       ["AUP/START/-D", "plover.json"],
-  //       ["AUP/START/*D", "plover.json"],
-  //       ["UP/START/-D", "plover.json"]
-  //     ]);
-  //   });
-  // });
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+        ["AUP/STARTD", "user.json"],
+        ["UP/STARTD", "user.json"],
+        ["AUP/START/-D", "user.json"],
+        ["UP/START/-D", "user.json"],
+        ["AUP/START/*D", "user.json"],
+      ]);
+    });
+  });
 
   // describe('with different outlines across dictionaries', () => {
   //   it('returns sorted list of outlines for "upholstery", showing user dictionaries before typey-type.json', () => {
