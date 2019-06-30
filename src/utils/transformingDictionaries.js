@@ -327,20 +327,30 @@ function penaliseSlashes(outline, translation) {
   return penaltyForSlashes;
 }
 
+const PREFIXES = [
+  ["*EBGS/TRA/", "extra"],
+  ["AUP", "up"]
+];
+const PREFIXES_LENGTH = PREFIXES.length;
+
 function hasPrefix (outline, translation) {
   let hasPrefix = false;
-  if (outline.startsWith("AUP")) {
-    return true;
+
+  for (let i = 0; i < PREFIXES_LENGTH; i++) {
+    if (outline.startsWith(PREFIXES[i][0]) && translation.startsWith(PREFIXES[i][1])) {
+      return true;
+    }
   }
+
   return hasPrefix;
 }
 
 function hasSuffix (outline, translation) {
-  let hasPrefix = false;
+  let hasSuffix = false;
   if (outline.endsWith("*ER")) {
     return true;
   }
-  return hasPrefix;
+  return hasSuffix;
 }
 
 function penaliseSlashesWithoutPrefixesOrSuffixes(outline, translation) {

@@ -140,7 +140,7 @@ describe('rank outlines', () => {
         ["TKPWEUT/HUB", "typey-type.json"]
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "GitHub")).toEqual([
         ["TKPWEUT/HUB", "code.json"],
         ["TKPWEUT/HUB", "typey-type.json"]
       ]);
@@ -154,7 +154,7 @@ describe('rank outlines', () => {
         ["TKPWEUT/HUB", "code.json"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "GitHub")).toEqual([
         ["TKPWEUT/HUB", "typey-type.json"],
         ["TKPWEUT/HUB", "code.json"]
       ]);
@@ -168,7 +168,7 @@ describe('rank outlines', () => {
         ["TKWEUT/HUB", "code.json"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "GitHub")).toEqual([
         ["TKWEUT/HUB", "code.json"],
         ["TKPWEUT/HUB", "typey-type.json"]
       ]);
@@ -186,7 +186,7 @@ describe('rank outlines', () => {
         ["KPERSZ", "typey-type.json"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "exercises")).toEqual([
         ["KPERSZ", "typey-type.json"],
         ["KPERZ/-T", "briefs.json"],
         ["KPERZ/-S", "briefs.json"],
@@ -204,7 +204,7 @@ describe('rank outlines', () => {
         ["TAEFT", "user.json"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "test")).toEqual([
         ["TAEFT", "user.json"],
         ["T*EFT", "user.json"]
       ]);
@@ -216,7 +216,7 @@ describe('rank outlines', () => {
         ["TAEFT/TAEFTS", "user.json"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "test")).toEqual([
         ["TAEFT/TAEFTS", "user.json"],
         ["T*EFT/T*EFT", "user.json"],
       ]);
@@ -228,7 +228,7 @@ describe('rank outlines', () => {
         ["TAEFTS/TAEFTS", "user.json"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "test")).toEqual([
         ["T*EFT/T*EFT", "user.json"],
         ["TAEFTS/TAEFTS", "user.json"],
       ]);
@@ -246,7 +246,7 @@ describe('rank outlines', () => {
         ["TKPWRASZ/HOP/*ER", "user.json"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "grasshopper")).toEqual([
         ["TKPWHRFRPBLG", "user.json"],
         ["TKPWHR*FRPBLG", "user.json"],
         ["TKPWRASZ/HOP", "user.json"],
@@ -267,7 +267,7 @@ describe('rank outlines', () => {
         ["AUP/STARTD", "user.json"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "upstarted")).toEqual([
         ["AUP/STARTD", "user.json"],
         ["UP/STARTD", "user.json"],
         ["AUP/START/-D", "user.json"],
