@@ -230,7 +230,7 @@ plover"
               </div>
             </div>
           </div>
-          <div className="bg-white landing-page-section">
+          <div className="bg-white landing-page-section mb3">
             <div className="p3 mx-auto mw-1024">
               <div className="text-center">
                 <h3>Share your lessons</h3>
