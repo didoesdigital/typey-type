@@ -302,7 +302,7 @@ describe('rank outlines', () => {
   //       ["AUP/HOELS/TREU", "condensed-strokes.json"],
   //     ];
 
-  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "upholstery")).toEqual([
   //       ["AUP/HOELT/REU", "personal.json"],
   //       ["AUP/HOFLT/REU", "personal.json"],
   //       ["AUP/HOL/STREU", "personal.json"],
@@ -338,7 +338,7 @@ describe('rank outlines', () => {
   //       ["SAEBGS", "typey-type.json"],
   //     ];
 
-  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "upholstery")).toEqual([
   //       ["SA*EF", "user.json"],
   //       ["SAEBGS", "typey-type.json"],
   //       ["SAEBGS", "dict.json"],
