@@ -309,19 +309,30 @@ function chooseSEndingOverZEnding(outlineA, outlineB) {
   return (outlineA[outlineALength - 1] === "Z" && outlineB[outlineBLength - 1] === "S");
 }
 
-function rankOutlines(arrayOfStrokesAndTheirSourceDictNames) {
+function penaliseStars(outline, translation) {
+  let penaltyForStars = 0;
+  let numberOfStars = outline.match(/\*/g);
+
+  if (numberOfStars !== null) { penaltyForStars += numberOfStars.length; }
+
+  return penaltyForStars;
+}
+
+function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
   arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
     let outlineA = a[0];
     let outlineB = b[0];
-    let outlineALength = outlineA.length;
-    let outlineBLength = outlineB.length;
-    let penalty = 0;
+    let outlineALengthWithAllPenalties = outlineA.length;
+    let outlineBLengthWithAllPenalties = outlineB.length;
 
-    if (outlineALength === outlineBLength) {
+    outlineALengthWithAllPenalties += penaliseStars(outlineA, translation);
+    outlineBLengthWithAllPenalties += penaliseStars(outlineB, translation);
+
+    if (outlineALengthWithAllPenalties === outlineBLengthWithAllPenalties) {
       if (chooseSEndingOverZEnding(outlineA, outlineB)) { return 1; }
     }
 
-    return outlineA.length - outlineB.length;
+    return outlineALengthWithAllPenalties - outlineBLengthWithAllPenalties;
   });
   return arrayOfStrokesAndTheirSourceDictNames;
 }

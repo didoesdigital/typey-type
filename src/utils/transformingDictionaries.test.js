@@ -197,5 +197,136 @@ describe('rank outlines', () => {
     });
   });
 
+  describe('with outlines with and without stars', () => {
+    it('returns sorted list of outlines for "test", penalising stars', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["T*EFT", "user.json"],
+        ["TAEFT", "user.json"],
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+        ["TAEFT", "user.json"],
+        ["T*EFT", "user.json"]
+      ]);
+    });
+
+    it('returns sorted list of outlines for "test", penalising stars', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["T*EFT/T*EFT", "user.json"],
+        ["TAEFT/TAEFTS", "user.json"],
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+        ["TAEFT/TAEFTS", "user.json"],
+        ["T*EFT/T*EFT", "user.json"],
+      ]);
+    });
+
+    it('returns sorted list of outlines for "test", penalising stars', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["T*EFT/T*EFT", "user.json"],
+        ["TAEFTS/TAEFTS", "user.json"],
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+        ["T*EFT/T*EFT", "user.json"],
+        ["TAEFTS/TAEFTS", "user.json"],
+      ]);
+    });
+  });
+
+  // describe('with prefix and suffix strokes', () => {
+  //   it('returns sorted list of outlines for "upstarted", penalising briefs without affix strokes', () => {
+  //     let arrayOfStrokesAndTheirSourceDictNames = [
+  //       ["UP/START/-D", "plover.json"],
+  //       ["AUP/STARTD", "user.json"],
+  //       ["UP/STARTD", "user.json"],
+  //       ["AUP/START/*D", "plover.json"],
+  //       ["AUP/START/-D", "plover.json"],
+  //       ["AUP/START/-D", "typey-type.json"],
+  //     ];
+
+  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+  //       ["AUP/STARTD", "user.json"],
+  //       ["UP/STARTD", "user.json"],
+  //       ["AUP/START/-D", "typey-type.json"],
+  //       ["AUP/START/-D", "plover.json"],
+  //       ["AUP/START/*D", "plover.json"],
+  //       ["UP/START/-D", "plover.json"]
+  //     ]);
+  //   });
+  // });
+
+  // describe('with different outlines across dictionaries', () => {
+  //   it('returns sorted list of outlines for "upholstery", showing user dictionaries before typey-type.json', () => {
+  //     let arrayOfStrokesAndTheirSourceDictNames = [
+  //       ["AUP/HO*ELS/REU", "personal.json"],
+  //       ["AUP/HO*LS/REU", "personal.json"],
+  //       ["AUP/HOEFLT/*ER/KWREU", "personal.json"],
+  //       ["AUP/HOEFLT/REU", "personal.json"],
+  //       ["AUP/HOEL/STREU", "personal.json"],
+  //       ["AUP/HOELT/REU", "personal.json"],
+  //       ["AUP/HOFLT/REU", "personal.json"],
+  //       ["AUP/HOL/STREU", "personal.json"],
+  //       ["UP/HOLS/TREU", "dict.json"],
+  //       ["UP/HOL/STREU", "dict.json"],
+  //       ["UP/HOFLT/REU", "dict.json"],
+  //       ["UP/HOELT/REU", "dict.json"],
+  //       ["UP/HOELS/TREU", "dict.json"],
+  //       ["UP/HOEL/STREU", "dict.json"],
+  //       ["UP/HOEFLT/REU", "dict.json"],
+  //       ["UP/HOEFLT/*ER/KWREU", "dict.json"],
+  //       ["UP/HO*LS/REU", "dict.json"],
+  //       ["UP/HO*ELS/REU", "dict.json"],
+  //       ["AUP/HOFLT/REU", "dict.json"],
+  //       ["AUP/HOELS/TREU", "condensed-strokes.json"],
+  //     ];
+
+  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+  //       ["AUP/HOELT/REU", "personal.json"],
+  //       ["AUP/HOFLT/REU", "personal.json"],
+  //       ["AUP/HOL/STREU", "personal.json"],
+  //       ["AUP/HOEFLT/REU", "personal.json"],
+  //       ["AUP/HOEL/STREU", "personal.json"],
+  //       ["AUP/HO*LS/REU", "personal.json"],
+  //       ["AUP/HO*ELS/REU", "personal.json"],
+  //       ["AUP/HOEFLT/*ER/KWREU", "personal.json"],
+  //       ["AUP/HOELS/TREU", "typey-type.json"],
+  //       ["AUP/HOFLT/REU", "dict.json"],
+  //       ["UP/HOL/STREU", "dict.json"],
+  //       ["UP/HOLS/TREU", "dict.json"],
+  //       ["UP/HOELT/REU", "dict.json"],
+  //       ["UP/HOFLT/REU", "dict.json"],
+  //       ["UP/HOEFLT/REU", "dict.json"],
+  //       ["UP/HOEL/STREU", "dict.json"],
+  //       ["UP/HOELS/TREU", "dict.json"],
+  //       ["UP/HO*LS/REU", "dict.json"],
+  //       ["UP/HO*ELS/REU", "dict.json"],
+  //       ["UP/HOEFLT/*ER/KWREU", "dict.json"],
+  //     ]);
+  //   });
+  // });
+
+  // describe('with different outlines across dictionaries', () => {
+  //   it('returns sorted list of outlines for "satisfaction", showing user dictionaries before typey-type.json', () => {
+  //     let arrayOfStrokesAndTheirSourceDictNames = [
+  //       ["SAEFBGS", "dict.json"],
+  //       ["SA*EF", "user.json"],
+  //       ["SEF/SAEBGS", "dict.json"],
+  //       ["STPA*BGS", "dict.json"],
+  //       ["SAEBGS", "dict.json"],
+  //       ["SAEBGS", "typey-type.json"],
+  //     ];
+
+  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames)).toEqual([
+  //       ["SA*EF", "user.json"],
+  //       ["SAEBGS", "typey-type.json"],
+  //       ["SAEBGS", "dict.json"],
+  //       ["SAEFBGS", "dict.json"],
+  //       ["STPA*BGS", "dict.json"],
+  //       ["SEF/SAEBGS", "dict.json"]
+  //     ]);
+  //   });
+  // });
 });
 
