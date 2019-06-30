@@ -209,7 +209,9 @@ class DictionariesIndex extends Component {
             </div>
           </div>
           <div className="mt3">
-            <StrokesForWords />
+            <StrokesForWords
+              globalLookupDictionary={this.props.globalLookupDictionary}
+            />
           </div>
           </div>
         </div>

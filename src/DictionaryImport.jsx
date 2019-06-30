@@ -4,6 +4,7 @@ import DocumentTitle from 'react-document-title';
 // import DictionaryNotFound from './DictionaryNotFound';
 import GoogleAnalytics from 'react-ga';
 import { rankOutlines } from './utils/transformingDictionaries';
+import { fetchResource } from './typey-type';
 // import PseudoContentButton from './PseudoContentButton';
 // import { IconExternal } from './Icon';
 // import { Tooltip } from 'react-tippy';
@@ -12,6 +13,8 @@ import { rankOutlines } from './utils/transformingDictionaries';
 //   lookUpDictionaryInIndex,
 // } from './typey-type';
 // import CustomDictionarySetup from './CustomDictionarySetup';
+
+let dictTypeyType = null;
 
 class DictionaryImport extends Component {
   constructor(props) {
@@ -236,6 +239,25 @@ class DictionaryImport extends Component {
     this.validateConfig(files);
   }
 
+  addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName) {
+    for (let [outline, translation] of Object.entries(dictContent)) {
+      if (combinedLookupDictionary[translation]) {
+        let current = combinedLookupDictionary[translation];
+        if (translation === "constructor") {
+          // TODO: Look into changing the Object to Map so we can safely access the key with the string "constructor"
+        }
+        else {
+          current.push([outline, dictName]);
+        }
+        combinedLookupDictionary[translation] = current;
+      }
+      else {
+        combinedLookupDictionary[translation] = [[outline, dictName]];
+      }
+    }
+    return combinedLookupDictionary;
+  }
+
   handleOnSubmitApplyChanges(event) {
     event.preventDefault();
     let combinedMatchingDictionaries = this.combineMatchingDictionaries(this.state.validDictionariesListedInConfig, this.state.validDictionaries);
@@ -243,52 +265,36 @@ class DictionaryImport extends Component {
     let validDictionariesLength = this.state.validDictionaries.length;
     let combinedLookupDictionary = {};
 
-    for (let i = 0; i < combinedMatchingDictionariesLength; i++) {
-      let dictContent = {};
-      let dictName = combinedMatchingDictionaries[i];
-      if (dictName === "typey-type.json") {
-        dictContent = this.state.dict; // TODO actually get dict.json
-        for (let [outline, translation] of Object.entries(dictContent)) {
-          if (combinedLookupDictionary[translation]) {
-              let current = combinedLookupDictionary[translation]; // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
-              current.push([outline, dictName]); // current = [[PWAZ: dict.json], [PWA*Z: typey.json], [GIT/HUB, code.json]]
-              combinedLookupDictionary[translation] = current;
+    getTypeyTypeDict()
+      .then(dictTypeyType => {
+        for (let i = 0; i < combinedMatchingDictionariesLength; i++) {
+          let dictContent = {};
+          let dictName = combinedMatchingDictionaries[i];
+          if (dictName === "typey-type.json") {
+            dictContent = dictTypeyType;
+              combinedLookupDictionary = this.addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
           }
           else {
-            combinedLookupDictionary[translation] = [[outline, dictName]];
-          }
-        }
-      }
-      else {
-        for (let j = 0; j < validDictionariesLength; j++) {
-          if (this.state.validDictionaries[j][0] === dictName) {
-            dictContent = this.state.validDictionaries[j][1];
-
-            for (let [outline, translation] of Object.entries(dictContent)) {
-              if (combinedLookupDictionary[translation]) {
-                // { baz: [[PWAZ: dict.json], [PWA*Z: typey.json]] }
-                let current = combinedLookupDictionary[translation]; // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
-                current.push([outline, dictName]); // current = [[PWAZ: dict.json], [PWA*Z: typey.json], [GIT/HUB, code.json]]
-                combinedLookupDictionary[translation] = current;
-              }
-              else {
-                combinedLookupDictionary[translation] = [[outline, dictName]];
+            for (let j = 0; j < validDictionariesLength; j++) {
+              if (this.state.validDictionaries[j][0] === dictName) {
+                dictContent = this.state.validDictionaries[j][1];
+                combinedLookupDictionary = this.addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
               }
             }
           }
-
         }
-      }
-    }
 
-    // { baz: [[PWAZ: dict.json], [PWA*Z: typey.json]] }
-    for (let [translation, outlinesAndSourceDicts] of Object.entries(combinedLookupDictionary)) {
-      let rankedOutlinesAndSourceDicts = rankOutlines(outlinesAndSourceDicts, translation);
-      combinedLookupDictionary[translation] = rankedOutlinesAndSourceDicts;
-    }
+        for (let [translation, outlinesAndSourceDicts] of Object.entries(combinedLookupDictionary)) {
+          if (translation === "constructor") {
+            // FIXME
+          } else {
+            let rankedOutlinesAndSourceDicts = rankOutlines(outlinesAndSourceDicts, translation);
+            combinedLookupDictionary[translation] = rankedOutlinesAndSourceDicts;
+          }
+        }
 
-    this.setState({combinedLookupDictionary: combinedLookupDictionary});
-
+        this.props.updateGlobalLookupDictionary(combinedLookupDictionary);
+      })
   }
 
   combineMatchingDictionaries(validDictionariesListedInConfig, validDictionaries) {
@@ -445,5 +451,73 @@ class DictionaryImport extends Component {
     )
   }
 }
+
+function fetchDictTypeyType() {
+  return fetchResource(process.env.PUBLIC_URL + '/dictionaries/dict.json').then((json) => {
+    return json;
+  }).catch(function(e) {
+    return {
+      "-T": "The",
+      "PROEUS": "process",
+      "-F": "of",
+      "WREUG": "writing",
+      "SHORT/HA*PBD": "shorthand",
+      "S": "is",
+      "KAULD": "called",
+      "STEPB/TKPWRAEF TP-PL": "stenography.",
+      "T-S": "It's",
+      "TAOEUPD": "typed",
+      "WA*EU": "with a",
+      "STEPB/TAOEUP": "stenotype",
+      "OR": "or",
+      "TPAPB/SEU": "fancy",
+      "KAOEBD TP-PL": "keyboard.",
+      "KU": "You can",
+      "TREUB KW-BG": "transcribe,",
+      "KAPGS KW-BG": "caption,",
+      "TKEUBG/TAEUT KW-BG": "dictate,",
+      "KOED KW-BG": "code,",
+      "KHAT KW-BG": "chat,",
+      "WREU": "write",
+      "PROES": "prose",
+      "AT": "at",
+      "OEFR": "over",
+      "#T-Z": "200",
+      "WORDZ": "words",
+      "PER": "per",
+      "PHEUPB TP-PL": "minute.",
+      "TAOEUP/KWREU TAOEUP": "Typey type",
+      "AOUFS": "uses",
+      "SPAEUFD": "spaced",
+      "REP/TEUGS/-S": "repetitions",
+      "SKP": "and",
+      "HUPBS": "hundreds",
+      "HROEFPBS": "lessons",
+      "TO": "to",
+      "HEP": "help",
+      "U": "you",
+      "PHAFRT": "master",
+      "TAOEUPG": "typing",
+      "W": "with",
+    };
+  });
+}
+
+function getTypeyTypeDict() {
+  let dict;
+
+  if (dictTypeyType === null) {
+    dict = fetchDictTypeyType().then(data => {
+      dictTypeyType = data;
+      return data;
+    });
+  }
+  else {
+    dict = Promise.resolve(dictTypeyType);
+  }
+
+  return dict;
+}
+
 
 export default DictionaryImport;

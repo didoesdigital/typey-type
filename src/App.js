@@ -219,6 +219,7 @@ class App extends Component {
           rung: 0,
         },
       },
+      globalLookupDictionary: {},
       lessonNotFound: false,
       lessonsProgress: {
       },
@@ -1430,6 +1431,10 @@ class App extends Component {
     });
   }
 
+  updateGlobalLookupDictionary(combinedLookupDictionary) {
+    this.setState({globalLookupDictionary: combinedLookupDictionary});
+  }
+
   updateRecommendationHistory(prevRecommendationHistory, lessonIndex = this.state.lessonIndex) {
     let newRecommendationHistory = Object.assign({}, prevRecommendationHistory);
 
@@ -1903,6 +1908,8 @@ class App extends Component {
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         setDictionaryIndex={this.setDictionaryIndex.bind(this)}
+                        globalLookupDictionary={this.state.globalLookupDictionary}
+                        updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                         dictionaryIndex={this.state.dictionaryIndex}
                         {...props}
                       />

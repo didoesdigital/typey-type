@@ -32,13 +32,13 @@ class StrokesForWords extends Component {
   }
 
   componentDidMount() {
-    let sortedDict = Object.assign({}, this.state.dictionaryOfWordsStrokesAndSourceDictionary);
-    this.setState({dictionaryOfWordsStrokesAndSourceDictionary: sortedDict});
+    // let sortedDict = Object.assign({}, this.state.dictionaryOfWordsStrokesAndSourceDictionary);
+    // this.setState({dictionaryOfWordsStrokesAndSourceDictionary: sortedDict});
   }
 
   updateWordsForStrokes(event) {
     let phrase = event.target.value;
-    let listOfStrokesAndDicts = createListOfStrokes(phrase, this.state.dictionaryOfWordsStrokesAndSourceDictionary);
+    let listOfStrokesAndDicts = createListOfStrokes(phrase, this.props.globalLookupDictionary);
     this.setState({
       phrase: phrase,
       listOfStrokesAndDicts: listOfStrokesAndDicts
@@ -78,11 +78,8 @@ class StrokesForWords extends Component {
 
 function createListOfStrokes(phrase, dictionaryOfWordsStrokesAndSourceDictionary) {
   let listOfStrokesAndDicts = [];
-  let allEntries = Object.entries(dictionaryOfWordsStrokesAndSourceDictionary);
   if (dictionaryOfWordsStrokesAndSourceDictionary[phrase]) {
     listOfStrokesAndDicts = dictionaryOfWordsStrokesAndSourceDictionary[phrase];
-  } else {
-    listOfStrokesAndDicts = allEntries;
   }
   return listOfStrokesAndDicts;
 }
