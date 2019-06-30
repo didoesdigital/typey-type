@@ -298,7 +298,9 @@ class DictionaryImport extends Component {
 
   combineMatchingDictionaries(validDictionariesListedInConfig, validDictionaries) {
     let combinedMatchingDictionaries = [];
-    for (let i = 0; i < validDictionariesListedInConfig.length; i++) {
+    let validDictionariesListedInConfigLength = validDictionariesListedInConfig.length;
+
+    for (let i = 0; i < validDictionariesListedInConfigLength; i++) {
       if (this.state.namesOfValidImportedDictionaries.indexOf(validDictionariesListedInConfig[i]) > -1) {
         combinedMatchingDictionaries.push(validDictionariesListedInConfig[i]);
       }
