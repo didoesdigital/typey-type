@@ -17,12 +17,21 @@ class DictionaryImport extends Component {
     super(props);
     this.state = {
       selectedFiles: null,
-      loaded: false,
+      combinedMatchingDictionaries: ["typey-type.json"],
+      combinedLookupDictionary: {},
       validDictionaries: [],
       invalidDictionaries: [],
       validDictionariesListedInConfig: [],
       validConfig: '',
-      invalidConfig: []
+      invalidConfig: [],
+      dict: {
+        "*EBL": "eastbound lane",
+        "*EBT": "eastbound traffic",
+        "TKPEUT/HUB": "GitHub",
+        "*ED/WARD": "Edward",
+        "*EF/HRAOUGS": "evolution",
+        "*EF/HRAOUGS/AEUR": "evolutionary"
+      }
     }
   }
 
@@ -105,8 +114,15 @@ class DictionaryImport extends Component {
             invalidDictionaries.push([dictName, error.message]);
           }
 
+          const namesOfValidImportedDictionaries = validDictionaries.map( (dictionary) => {
+            return dictionary[0];
+          });
+
+          let combinedMatchingDictionaries = this.combineMatchingDictionaries(this.state.validDictionariesListedInConfig, validDictionaries);
+
           this.setState({
-            loaded: true,
+            combinedMatchingDictionaries: combinedMatchingDictionaries,
+            namesOfValidImportedDictionaries: namesOfValidImportedDictionaries,
             validDictionaries: validDictionaries,
             invalidDictionaries: invalidDictionaries
           })
@@ -126,7 +142,7 @@ class DictionaryImport extends Component {
     if (filesLength > 1) {
       this.setState({
         validConfig: validConfig,
-        invalidConfig: ["Too many files", "You cannot import multiple config files."]
+        invalidConfig: ["Too many files", "Choose one config file."]
       })
     }
     else if (filesLength !== 1) {
@@ -188,7 +204,10 @@ class DictionaryImport extends Component {
           invalidConfig = [configName, error.message];
         }
 
+        let combinedMatchingDictionaries = this.combineMatchingDictionaries(validDictionariesListedInConfig, this.state.validDictionaries);
+
         this.setState({
+          combinedMatchingDictionaries: combinedMatchingDictionaries,
           validConfig: validConfig,
           validDictionariesListedInConfig: validDictionariesListedInConfig,
           invalidConfig: invalidConfig
@@ -215,7 +234,84 @@ class DictionaryImport extends Component {
     this.validateConfig(files);
   }
 
+  handleOnSubmitApplyChanges(event) {
+    event.preventDefault();
+    let combinedMatchingDictionaries = this.combineMatchingDictionaries(this.state.validDictionariesListedInConfig, this.state.validDictionaries);
+    let combinedMatchingDictionariesLength = combinedMatchingDictionaries.length;
+    let validDictionariesLength = this.state.validDictionaries.length;
+    let combinedLookupDictionary = {};
+
+    for (let i = 0; i < combinedMatchingDictionariesLength; i++) {
+      let dictContent = {};
+      let dictName = combinedMatchingDictionaries[i];
+      if (dictName === "typey-type.json") {
+        dictContent = this.state.dict; // TODO actually get dict.json
+        for (let [outline, translation] of Object.entries(dictContent)) {
+          if (combinedLookupDictionary[translation]) {
+              let current = combinedLookupDictionary[translation]; // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
+              current.push([outline, dictName]); // current = [[PWAZ: dict.json], [PWA*Z: typey.json], [GIT/HUB, code.json]]
+              combinedLookupDictionary[translation] = current;
+          }
+          else {
+            combinedLookupDictionary[translation] = [[outline, dictName]];
+          }
+        }
+      }
+      else {
+        for (let j = 0; j < validDictionariesLength; j++) {
+          if (this.state.validDictionaries[j][0] === dictName) {
+            dictContent = this.state.validDictionaries[j][1];
+
+            for (let [outline, translation] of Object.entries(dictContent)) {
+              if (combinedLookupDictionary[translation]) {
+                // { baz: [[PWAZ: dict.json], [PWA*Z: typey.json]] }
+                let current = combinedLookupDictionary[translation]; // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
+                current.push([outline, dictName]); // current = [[PWAZ: dict.json], [PWA*Z: typey.json], [GIT/HUB, code.json]]
+                combinedLookupDictionary[translation] = current;
+              }
+              else {
+                combinedLookupDictionary[translation] = [[outline, dictName]];
+              }
+            }
+          }
+
+        }
+      }
+    }
+
+    // { baz: [[PWAZ: dict.json], [PWA*Z: typey.json]] }
+    for (let [translation, outlinesAndSourceDicts] of Object.entries(combinedLookupDictionary)) {
+      let rankedOutlinesAndSourceDicts = this.rankOutline(outlinesAndSourceDicts, translation);
+      combinedLookupDictionary[translation] = rankedOutlinesAndSourceDicts;
+    }
+
+    this.setState({combinedLookupDictionary: combinedLookupDictionary});
+  }
+
+  rankOutline(arrayOfStrokesAndTheirSourceDictNames) {
+    arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
+      return a - b;
+    });
+    return arrayOfStrokesAndTheirSourceDictNames;
+  }
+
+  combineMatchingDictionaries(validDictionariesListedInConfig, validDictionaries) {
+    let combinedMatchingDictionaries = [];
+    for (let i = 0; i < validDictionariesListedInConfig.length; i++) {
+      if (this.state.namesOfValidImportedDictionaries.indexOf(validDictionariesListedInConfig[i]) > -1) {
+        combinedMatchingDictionaries.push(validDictionariesListedInConfig[i]);
+      }
+    }
+    combinedMatchingDictionaries.push("typey-type.json");
+
+    return combinedMatchingDictionaries;
+  }
+
   render() {
+    let combinedMatchingDictionaries = this.state.combinedMatchingDictionaries.map ((dictionary, index) => {
+      return <li key={index}>{dictionary}</li>
+    });
+
     let showYourDictionaries = (
       <p>You can import your dictionaries and your dictionary config to look up briefs using your own dictionaries.</p>
     );
@@ -231,8 +327,16 @@ class DictionaryImport extends Component {
       return <li key={index}>{dictionary[0]}: {dictionary[1]}</li>
     });
 
+    const namesOfValidImportedDictionaries = this.state.namesOfValidImportedDictionaries;
     const validDictionariesListedInConfig = this.state.validDictionariesListedInConfig.map( (dictionary, index, array) => {
-      return <li key={index}>{dictionary}</li>
+      let className = '';
+      if (namesOfValidImportedDictionaries.indexOf(dictionary) > -1) {
+        className = 'unstyled-list-item';
+      }
+      else {
+        className = 'unstyled-list-item bg-danger';
+      }
+      return <li key={index} className={className}>{dictionary}</li>
     });
 
     if (this.state.validDictionaries && this.state.validDictionaries.length > 0) {
@@ -260,8 +364,8 @@ class DictionaryImport extends Component {
     if (this.state.validConfig && this.state.validConfig.length > 4) { // '.cfg' is 4 characters
       showYourConfig = (
         <React.Fragment>
-          <p className="wrap">Your imported dictionary config ({this.state.validConfig}) contains:</p>
-          <ul className="wrap">
+          <p className="wrap">Your imported dictionary config ({this.state.validConfig}) contains these dictionaries:</p>
+          <ul className="wrap unstyled-list">
             {validDictionariesListedInConfig}
           </ul>
         </React.Fragment>
@@ -276,6 +380,7 @@ class DictionaryImport extends Component {
         </React.Fragment>
       );
     }
+
     return (
       <DocumentTitle title={'Typey Type | Dictionary import'}>
         <main id="main">
@@ -291,33 +396,49 @@ class DictionaryImport extends Component {
           <div className="p3 mx-auto mw-1024">
             <div className="flex flex-wrap">
               <div className="mw-568 mr3 flex-grow">
-                <h3>Your dictionaries</h3>
-                {showYourDictionaries}
-                {showDictionaryErrors}
-                {showYourConfig}
-                {showConfigErrors}
+                <h3>Dictionaries used for lookup</h3>
+                <p>Typey&nbsp;Type uses these dictionaries for brief hints:</p>
+                <ul>
+                  {combinedMatchingDictionaries}
+                </ul>
+                <form className="mb3" onSubmit={this.handleOnSubmitApplyChanges.bind(this)}>
+                  <button type="submit" className="button mt1">Apply</button>
+                </form>
               </div>
-              <div className="mw-384 w-336">
-                <h3>Import</h3>
-                <form className="mb3" onSubmit={this.handleOnSubmit.bind(this)}>
-                  <div className="dib">
-                    <label htmlFor="dictionariesFileInput">Import dictionaries in JSON format</label>
-                    <input type="file" id="dictionariesFileInput" name="dictionary" className="form-control" multiple />
-                  </div>
-                  <div>
-                    <button type="submit" className="button mt1">Import dictionaries</button>
-                  </div>
-                </form>
+            </div>
+          </div>
+          <div className="bg-white landing-page-section mb3">
+            <div className="p3 mx-auto mw-1024">
+              <div className="flex flex-wrap">
+                <div className="mw-568 mr3 flex-grow">
+                  <h3>Your dictionaries</h3>
+                  {showYourDictionaries}
+                  {showDictionaryErrors}
+                  {showYourConfig}
+                  {showConfigErrors}
+                </div>
+                <div className="mw-384 w-336">
+                  <h3>Import</h3>
+                  <form className="mb3" onSubmit={this.handleOnSubmit.bind(this)}>
+                    <div className="dib">
+                      <label htmlFor="dictionariesFileInput">Import dictionaries in JSON format</label>
+                      <input type="file" id="dictionariesFileInput" name="dictionary" className="form-control" multiple />
+                    </div>
+                    <div>
+                      <button type="submit" className="button mt1">Import dictionaries</button>
+                    </div>
+                  </form>
 
-                <form className="mb3" onSubmit={this.handleOnSubmitConfig.bind(this)}>
-                  <div className="dib">
-                    <label htmlFor="dictionaryConfigFileInput">Import config</label>
-                    <input type="file" id="dictionaryConfigFileInput" name="dictionaryConfig" className="form-control" multiple />
-                  </div>
-                  <div>
-                    <button type="submit" className="button mt1">Import config</button>
-                  </div>
-                </form>
+                  <form className="mb3" onSubmit={this.handleOnSubmitConfig.bind(this)}>
+                    <div className="dib">
+                      <label htmlFor="dictionaryConfigFileInput">Import config</label>
+                      <input type="file" id="dictionaryConfigFileInput" name="dictionaryConfig" className="form-control" multiple />
+                    </div>
+                    <div>
+                      <button type="submit" className="button mt1">Import config</button>
+                    </div>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
