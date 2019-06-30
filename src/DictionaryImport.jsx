@@ -21,6 +21,7 @@ class DictionaryImport extends Component {
       combinedLookupDictionary: {},
       validDictionaries: [],
       invalidDictionaries: [],
+      namesOfValidImportedDictionaries: [],
       validDictionariesListedInConfig: [],
       validConfig: '',
       invalidConfig: [],
