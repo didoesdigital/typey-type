@@ -303,6 +303,15 @@ function generateListOfWordsAndStrokes(wordList, sourceWordsAndStrokes = {"the":
   return sourceAndPresentedMaterial;
 }
 
+function rankOutlines(arrayOfStrokesAndTheirSourceDictNames) {
+  arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
+    return a - b;
+  });
+  return arrayOfStrokesAndTheirSourceDictNames;
+}
+
+
 export {
   generateListOfWordsAndStrokes,
+  rankOutlines
 };

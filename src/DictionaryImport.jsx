@@ -3,6 +3,7 @@ import DocumentTitle from 'react-document-title';
 // import { Link } from 'react-router-dom';
 // import DictionaryNotFound from './DictionaryNotFound';
 import GoogleAnalytics from 'react-ga';
+import { rankOutlines } from './utils/transformingDictionaries';
 // import PseudoContentButton from './PseudoContentButton';
 // import { IconExternal } from './Icon';
 // import { Tooltip } from 'react-tippy';
@@ -282,18 +283,12 @@ class DictionaryImport extends Component {
 
     // { baz: [[PWAZ: dict.json], [PWA*Z: typey.json]] }
     for (let [translation, outlinesAndSourceDicts] of Object.entries(combinedLookupDictionary)) {
-      let rankedOutlinesAndSourceDicts = this.rankOutline(outlinesAndSourceDicts, translation);
+      let rankedOutlinesAndSourceDicts = rankOutlines(outlinesAndSourceDicts, translation);
       combinedLookupDictionary[translation] = rankedOutlinesAndSourceDicts;
     }
 
     this.setState({combinedLookupDictionary: combinedLookupDictionary});
-  }
 
-  rankOutline(arrayOfStrokesAndTheirSourceDictNames) {
-    arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
-      return a - b;
-    });
-    return arrayOfStrokesAndTheirSourceDictNames;
   }
 
   combineMatchingDictionaries(validDictionariesListedInConfig, validDictionaries) {
