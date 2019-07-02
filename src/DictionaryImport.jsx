@@ -5,7 +5,7 @@ import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
 import { rankOutlines } from './utils/transformingDictionaries';
 import { fetchResource } from './typey-type';
-// import PseudoContentButton from './PseudoContentButton';
+import PseudoContentButton from './PseudoContentButton';
 // import { IconExternal } from './Icon';
 // import { Tooltip } from 'react-tippy';
 // import {
@@ -406,7 +406,7 @@ class DictionaryImport extends Component {
                   {combinedMatchingDictionaries}
                 </ul>
                 <form className="mb3" onSubmit={this.handleOnSubmitApplyChanges.bind(this)}>
-                  <button type="submit" className="button mt1">Apply</button>
+                  <PseudoContentButton type="submit" className="pseudo-text--applied button mt1">Apply</PseudoContentButton>
                 </form>
               </div>
             </div>

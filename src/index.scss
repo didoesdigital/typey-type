@@ -1449,6 +1449,12 @@ label {
   animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
+.pseudo-text--applied::before {
+  position: absolute;
+  content: "Applied!";
+  opacity: 0;
+}
+
 .load-progress::before {
   position: absolute;
   content: "Loaded" attr(href) "!";
