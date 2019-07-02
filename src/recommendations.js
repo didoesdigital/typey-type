@@ -49,9 +49,12 @@ function fetchRecommendations() {
 }
 
 function getRecommendedCourses() {
-  let recommendedCourses = {};
+  let recommendedCourses;
   if (data === null) {
-    recommendedCourses = fetchRecommendations();
+    recommendedCourses = fetchRecommendations().then(courses => {
+      data = courses;
+      return courses;
+    });
   } else {
     recommendedCourses = Promise.resolve(data);
   }
