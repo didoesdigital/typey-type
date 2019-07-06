@@ -30,12 +30,7 @@ class DictionaryImport extends Component {
       validConfig: '',
       invalidConfig: [],
       dict: {
-        "*EBL": "eastbound lane",
-        "*EBT": "eastbound traffic",
-        "TKPEUT/HUB": "GitHub",
-        "*ED/WARD": "Edward",
-        "*EF/HRAOUGS": "evolution",
-        "*EF/HRAOUGS/AEUR": "evolutionary"
+        "-T": "the",
       }
     }
   }
