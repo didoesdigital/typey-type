@@ -267,7 +267,7 @@ class DictionaryImport extends Component {
           let dictName = combinedMatchingDictionaries[i];
           if (dictName === "typey-type.json") {
             dictContent = dictTypeyType;
-              combinedLookupDictionary = this.addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
+            combinedLookupDictionary = this.addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
           }
           else {
             for (let j = 0; j < validDictionariesLength; j++) {
