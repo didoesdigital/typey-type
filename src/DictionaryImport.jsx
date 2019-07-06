@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
-// import { Link } from 'react-router-dom';
-// import DictionaryNotFound from './DictionaryNotFound';
 import GoogleAnalytics from 'react-ga';
 import { rankOutlines } from './utils/transformingDictionaries';
 import { fetchResource } from './typey-type';
 import PseudoContentButton from './PseudoContentButton';
-// import { IconExternal } from './Icon';
-// import { Tooltip } from 'react-tippy';
-// import {
-//   fetchDictionaryIndex,
-//   lookUpDictionaryInIndex,
-// } from './typey-type';
-// import CustomDictionarySetup from './CustomDictionarySetup';
 
 let dictTypeyType = null;
 
