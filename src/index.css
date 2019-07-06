@@ -1784,3 +1784,10 @@ small .svg-icon-wrapper.svg-baseline svg {
 
 .responsive-writer svg {
   max-width: 100%; }
+
+.notification.notification--global {
+  min-height: 88px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1; }

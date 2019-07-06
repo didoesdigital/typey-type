@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
+import Notification from './Notification';
 import { rankOutlines } from './utils/transformingDictionaries';
 import { fetchResource } from './typey-type';
 import PseudoContentButton from './PseudoContentButton';
@@ -12,6 +13,7 @@ class DictionaryImport extends Component {
     super(props);
     this.state = {
       selectedFiles: null,
+      showDictionaryErrorNotification: false,
       combinedMatchingDictionaries: ["typey-type.json"],
       combinedLookupDictionary: {},
       validDictionaries: [],
@@ -281,6 +283,14 @@ class DictionaryImport extends Component {
 
         this.props.updateGlobalLookupDictionary(combinedLookupDictionary);
       })
+      .catch(error => {
+        this.showDictionaryErrorNotification();
+      });
+  }
+
+  showDictionaryErrorNotification() {
+    this.props.setAnnouncementMessageString('Unable to load Typey Type’s dictionary');
+    this.setState({showDictionaryErrorNotification: true});
   }
 
   combineMatchingDictionaries(validDictionariesListedInConfig, validDictionaries) {
@@ -374,6 +384,13 @@ class DictionaryImport extends Component {
     return (
       <DocumentTitle title={'Typey Type | Dictionary import'}>
         <main id="main">
+          { this.state.showDictionaryErrorNotification ?
+            <Notification>
+              Warning: Unable to load Typey&nbsp;Type’s dictionary
+            </Notification>
+              :
+            null
+          }
           <div className="subheader">
             <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
               <div className="flex mr1 self-center">
