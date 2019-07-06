@@ -286,6 +286,7 @@ class DictionaryImport extends Component {
       .catch(error => {
         this.showDictionaryErrorNotification();
       });
+    this.props.setAnnouncementMessageString('Applied!');
   }
 
   showDictionaryErrorNotification() {
