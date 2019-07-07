@@ -1896,14 +1896,14 @@ $lineAdjustment: 4px;
 
 
 
-.fade-appear {
+.dissolve-appear {
   color: desaturate($brand-primary, 5%);
   filter: blur(0);
   opacity: 1;
   // will-change: filter;
 }
 
-.fade-appear.fade-appear-active {
+.dissolve-appear.dissolve-appear-active {
   color: saturate(add-tint($brand-success, 20%), 10%);
   filter: blur(.5rem);
   opacity: 0.01;
@@ -1912,7 +1912,7 @@ $lineAdjustment: 4px;
               filter   .5s linear;
 }
 
-.fade-enter-done {
+.dissolve-enter-done {
   opacity: 0.0;
   transition: opacity .2s linear;
 }

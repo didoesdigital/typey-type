@@ -32,7 +32,7 @@ class TypedText extends Component {
           >
             <CSSTransition
               timeout={5000}
-              classNames='fade'
+              classNames='dissolve'
               appear={true}
             >
               <kbd className="successfully-typed-text typed-text-input-positioning pre relative" style={{"color": previousCompletedPhraseAccuracy ? '#23512C' : '#953159' }} aria-hidden="true">{this.props.previousCompletedPhraseAsTyped}</kbd>
