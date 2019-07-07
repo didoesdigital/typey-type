@@ -18,10 +18,11 @@ class Notification extends Component {
   }
 
   handleDismiss(event) {
-    if (this.props.onClickHandler) {
-      this.props.onClickHandler();
+    if (this.props.onDismiss) {
       this.setState({
         showNotification: false
+      }, () => {
+        this.props.onDismiss();
       });
     }
     else {

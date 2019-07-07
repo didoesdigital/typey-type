@@ -294,6 +294,11 @@ class DictionaryImport extends Component {
     this.setState({showDictionaryErrorNotification: true});
   }
 
+  dismissDictionaryErrorNotification() {
+    this.props.setAnnouncementMessageString('');
+    this.setState({showDictionaryErrorNotification: false});
+  }
+
   combineMatchingDictionaries(validDictionariesListedInConfig, validDictionaries) {
     let combinedMatchingDictionaries = [];
     let validDictionariesListedInConfigLength = validDictionariesListedInConfig.length;
@@ -386,7 +391,7 @@ class DictionaryImport extends Component {
       <DocumentTitle title={'Typey Type | Dictionary import'}>
         <main id="main">
           { this.state.showDictionaryErrorNotification ?
-            <Notification>
+            <Notification onDismiss={this.dismissDictionaryErrorNotification.bind(this)}>
               Warning: Unable to load Typey&nbsp;Type’s dictionary
             </Notification>
               :
