@@ -2201,8 +2201,28 @@ function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
   return arrayOfStrokesAndTheirSourceDictNames;
 }
 
+function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName) {
+  for (let [outline, translation] of Object.entries(dictContent)) {
+    if (combinedLookupDictionary[translation]) {
+      // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
+      let current = combinedLookupDictionary[translation];
+      if (translation === "constructor") {
+        // TODO: Look into changing the Object to Map so we can safely access the key with the string "constructor"
+      }
+      else {
+        current.push([outline, dictName]);
+      }
+      combinedLookupDictionary[translation] = current;
+    }
+    else {
+      combinedLookupDictionary[translation] = [[outline, dictName]];
+    }
+  }
+  return combinedLookupDictionary;
+}
 
 export {
+  addOutlinesToWordsInCombinedDict,
   generateListOfWordsAndStrokes,
   rankOutlines
 };

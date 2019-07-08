@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
 import Notification from './Notification';
-import { rankOutlines } from './utils/transformingDictionaries';
+import {
+  addOutlinesToWordsInCombinedDict,
+  rankOutlines
+} from './utils/transformingDictionaries';
 import { getTypeyTypeDict } from './utils/getData';
 import PseudoContentButton from './PseudoContentButton';
 
@@ -225,25 +228,6 @@ class DictionaryImport extends Component {
     this.validateConfig(files);
   }
 
-  addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName) {
-    for (let [outline, translation] of Object.entries(dictContent)) {
-      if (combinedLookupDictionary[translation]) {
-        let current = combinedLookupDictionary[translation];
-        if (translation === "constructor") {
-          // TODO: Look into changing the Object to Map so we can safely access the key with the string "constructor"
-        }
-        else {
-          current.push([outline, dictName]);
-        }
-        combinedLookupDictionary[translation] = current;
-      }
-      else {
-        combinedLookupDictionary[translation] = [[outline, dictName]];
-      }
-    }
-    return combinedLookupDictionary;
-  }
-
   handleOnSubmitApplyChanges(event) {
     event.preventDefault();
     let combinedMatchingDictionaries = this.combineMatchingDictionaries(this.state.validDictionariesListedInConfig, this.state.validDictionaries);
@@ -258,13 +242,13 @@ class DictionaryImport extends Component {
           let dictName = combinedMatchingDictionaries[i];
           if (dictName === "typey-type.json") {
             dictContent = dictTypeyType;
-            combinedLookupDictionary = this.addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
+            combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
           }
           else {
             for (let j = 0; j < validDictionariesLength; j++) {
               if (this.state.validDictionaries[j][0] === dictName) {
                 dictContent = this.state.validDictionaries[j][1];
-                combinedLookupDictionary = this.addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
+                combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
               }
             }
           }
