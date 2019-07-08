@@ -2221,8 +2221,21 @@ function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary,
   return combinedLookupDictionary;
 }
 
+function rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary) {
+  for (let [translation, outlinesAndSourceDicts] of Object.entries(combinedLookupDictionary)) {
+    if (translation === "constructor") {
+      // FIXME
+    } else {
+      let rankedOutlinesAndSourceDicts = rankOutlines(outlinesAndSourceDicts, translation);
+      combinedLookupDictionary[translation] = rankedOutlinesAndSourceDicts;
+    }
+  }
+  return combinedLookupDictionary;
+}
+
 export {
   addOutlinesToWordsInCombinedDict,
   generateListOfWordsAndStrokes,
+  rankAllOutlinesInCombinedLookupDictionary,
   rankOutlines
 };

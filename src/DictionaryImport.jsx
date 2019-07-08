@@ -4,7 +4,7 @@ import GoogleAnalytics from 'react-ga';
 import Notification from './Notification';
 import {
   addOutlinesToWordsInCombinedDict,
-  rankOutlines
+  rankAllOutlinesInCombinedLookupDictionary
 } from './utils/transformingDictionaries';
 import { getTypeyTypeDict } from './utils/getData';
 import PseudoContentButton from './PseudoContentButton';
@@ -254,14 +254,7 @@ class DictionaryImport extends Component {
           }
         }
 
-        for (let [translation, outlinesAndSourceDicts] of Object.entries(combinedLookupDictionary)) {
-          if (translation === "constructor") {
-            // FIXME
-          } else {
-            let rankedOutlinesAndSourceDicts = rankOutlines(outlinesAndSourceDicts, translation);
-            combinedLookupDictionary[translation] = rankedOutlinesAndSourceDicts;
-          }
-        }
+        combinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary);
 
         this.props.updateGlobalLookupDictionary(combinedLookupDictionary);
       })
