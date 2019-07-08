@@ -15,7 +15,7 @@ class DictionaryImport extends Component {
     this.state = {
       selectedFiles: null,
       showDictionaryErrorNotification: false,
-      combinedMatchingDictionaries: ["typey-type.json"],
+      listOfValidDictionariesImportedAndInConfig: ["typey-type.json"],
       combinedLookupDictionary: {},
       validDictionaries: [],
       invalidDictionaries: [],
@@ -113,10 +113,10 @@ class DictionaryImport extends Component {
             return dictionary[0];
           });
 
-          let combinedMatchingDictionaries = this.combineMatchingDictionaries(this.state.validDictionariesListedInConfig, validDictionaries);
+          let listOfValidDictionariesImportedAndInConfig = this.getListOfValidDictionariesImportedAndInConfig(this.state.validDictionariesListedInConfig, validDictionaries, this.state.namesOfValidImportedDictionaries);
 
           this.setState({
-            combinedMatchingDictionaries: combinedMatchingDictionaries,
+            listOfValidDictionariesImportedAndInConfig: listOfValidDictionariesImportedAndInConfig,
             namesOfValidImportedDictionaries: namesOfValidImportedDictionaries,
             validDictionaries: validDictionaries,
             invalidDictionaries: invalidDictionaries
@@ -200,10 +200,10 @@ class DictionaryImport extends Component {
           invalidConfig = [configName, error.message];
         }
 
-        let combinedMatchingDictionaries = this.combineMatchingDictionaries(validDictionariesListedInConfig, this.state.validDictionaries);
+        let listOfValidDictionariesImportedAndInConfig = this.getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries);
 
         this.setState({
-          combinedMatchingDictionaries: combinedMatchingDictionaries,
+          listOfValidDictionariesImportedAndInConfig: listOfValidDictionariesImportedAndInConfig,
           validConfig: validConfig,
           validDictionariesListedInConfig: validDictionariesListedInConfig,
           invalidConfig: invalidConfig
@@ -232,29 +232,11 @@ class DictionaryImport extends Component {
 
   handleOnSubmitApplyChanges(event) {
     event.preventDefault();
-    let combinedMatchingDictionaries = this.combineMatchingDictionaries(this.state.validDictionariesListedInConfig, this.state.validDictionaries);
-    let combinedMatchingDictionariesLength = combinedMatchingDictionaries.length;
-    let validDictionariesLength = this.state.validDictionaries.length;
-    let combinedLookupDictionary = {};
 
     getTypeyTypeDict()
       .then(dictTypeyType => {
-        for (let i = 0; i < combinedMatchingDictionariesLength; i++) {
-          let dictContent = {};
-          let dictName = combinedMatchingDictionaries[i];
-          if (dictName === "typey-type.json") {
-            dictContent = dictTypeyType;
-            combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
-          }
-          else {
-            for (let j = 0; j < validDictionariesLength; j++) {
-              if (this.state.validDictionaries[j][0] === dictName) {
-                dictContent = this.state.validDictionaries[j][1];
-                combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
-              }
-            }
-          }
-        }
+        let listOfValidDictionariesImportedAndInConfig = this.getListOfValidDictionariesImportedAndInConfig(this.state.validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries);
+        let combinedLookupDictionary = this.combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, this.state.validDictionaries, dictTypeyType);
 
         combinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary);
 
@@ -267,6 +249,31 @@ class DictionaryImport extends Component {
     this.props.setAnnouncementMessageString('Applied!');
   }
 
+  combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictTypeyType) {
+    let combinedLookupDictionary = {};
+    let listOfValidDictionariesImportedAndInConfigLength = listOfValidDictionariesImportedAndInConfig.length;
+    let validDictionariesLength = validDictionaries.length;
+
+    for (let i = 0; i < listOfValidDictionariesImportedAndInConfigLength; i++) {
+      let dictContent = {};
+      let dictName = listOfValidDictionariesImportedAndInConfig[i];
+      if (dictName === "typey-type.json") {
+        dictContent = dictTypeyType;
+        combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
+      }
+      else {
+        for (let j = 0; j < validDictionariesLength; j++) {
+          if (this.state.validDictionaries[j][0] === dictName) {
+            dictContent = this.state.validDictionaries[j][1];
+            combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
+          }
+        }
+      }
+    }
+
+    return combinedLookupDictionary;
+  }
+
   showDictionaryErrorNotification() {
     this.props.setAnnouncementMessageString('Unable to load Typey Type’s dictionary');
     this.setState({showDictionaryErrorNotification: true});
@@ -277,22 +284,22 @@ class DictionaryImport extends Component {
     this.setState({showDictionaryErrorNotification: false});
   }
 
-  combineMatchingDictionaries(validDictionariesListedInConfig, validDictionaries) {
-    let combinedMatchingDictionaries = [];
+  getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries) {
+    let listOfValidDictionariesImportedAndInConfig = [];
     let validDictionariesListedInConfigLength = validDictionariesListedInConfig.length;
 
     for (let i = 0; i < validDictionariesListedInConfigLength; i++) {
-      if (this.state.namesOfValidImportedDictionaries.indexOf(validDictionariesListedInConfig[i]) > -1) {
-        combinedMatchingDictionaries.push(validDictionariesListedInConfig[i]);
+      if (namesOfValidImportedDictionaries.indexOf(validDictionariesListedInConfig[i]) > -1) {
+        listOfValidDictionariesImportedAndInConfig.push(validDictionariesListedInConfig[i]);
       }
     }
-    combinedMatchingDictionaries.push("typey-type.json");
+    listOfValidDictionariesImportedAndInConfig.push("typey-type.json");
 
-    return combinedMatchingDictionaries;
+    return listOfValidDictionariesImportedAndInConfig;
   }
 
   render() {
-    let combinedMatchingDictionaries = this.state.combinedMatchingDictionaries.map ((dictionary, index) => {
+    let listOfValidDictionariesImportedAndInConfig = this.state.listOfValidDictionariesImportedAndInConfig.map ((dictionary, index) => {
       return <li key={index}>{dictionary}</li>
     });
 
@@ -390,7 +397,7 @@ class DictionaryImport extends Component {
                 <h3>Dictionaries used for lookup</h3>
                 <p>Typey&nbsp;Type uses these dictionaries for brief hints:</p>
                 <ul>
-                  {combinedMatchingDictionaries}
+                  {listOfValidDictionariesImportedAndInConfig}
                 </ul>
                 <form className="mb3" onSubmit={this.handleOnSubmitApplyChanges.bind(this)}>
                   <PseudoContentButton type="submit" className="pseudo-text--applied button mt1">Apply</PseudoContentButton>
