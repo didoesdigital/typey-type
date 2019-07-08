@@ -8,10 +8,8 @@ import {
 } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 import * as Utils from './utils/utils';
-import {
-  getLesson,
-  parseLesson
-} from './typey-type';
+import { parseLesson } from './typey-type';
+import { getLesson } from './utils/getData';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Link } from 'react-router-dom';

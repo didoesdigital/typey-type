@@ -7,12 +7,12 @@ import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 import {
   createWordListFromMetWords,
-  fetchResource,
   loadPersonalPreferences,
   parseWordList,
   processDictionary,
   swapKeyValueInDictionary,
 } from './typey-type';
+import { fetchResource } from './utils/getData';
 import { generateListOfWordsAndStrokes } from './utils/transformingDictionaries';
 
 class CustomLessonSetup extends Component {

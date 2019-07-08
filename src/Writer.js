@@ -8,7 +8,6 @@ import KoreanModernCStenoDiagram from './StenoLayout/KoreanModernCStenoDiagram';
 import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
 import Stroke from './stroke';
 import {
-  fetchResource,
   mapQWERTYKeysToStenoStroke,
   mapBriefToAmericanStenoKeys,
   mapBriefToDanishStenoKeys,
@@ -17,6 +16,7 @@ import {
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys
 } from './typey-type';
+import { fetchResource } from './utils/getData';
 import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';
 

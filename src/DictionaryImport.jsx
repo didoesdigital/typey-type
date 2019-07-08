@@ -3,7 +3,7 @@ import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
 import Notification from './Notification';
 import { rankOutlines } from './utils/transformingDictionaries';
-import { fetchResource } from './typey-type';
+import { fetchResource } from './utils/getData';
 import PseudoContentButton from './PseudoContentButton';
 
 let dictTypeyType = null;

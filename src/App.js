@@ -9,9 +9,6 @@ import {
   parseCustomMaterial,
   parseWordList,
   setupLessonProgress,
-  fetchResource,
-  fetchDictionaryIndex,
-  getLesson,
   loadPersonalPreferences,
   matchSplitText,
   parseLesson,
@@ -26,6 +23,9 @@ import {
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './typey-type';
+import { getLesson } from './utils/getData';
+import { fetchDictionaryIndex } from './utils/getData';
+import { fetchResource } from './utils/getData';
 import { generateListOfWordsAndStrokes } from './utils/transformingDictionaries';
 import {
   Route,

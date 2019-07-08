@@ -6,10 +6,8 @@ import GoogleAnalytics from 'react-ga';
 import PseudoContentButton from './PseudoContentButton';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
-import {
-  fetchDictionaryIndex,
-  lookUpDictionaryInIndex,
-} from './typey-type';
+import { lookUpDictionaryInIndex } from './typey-type';
+import { fetchDictionaryIndex } from './utils/getData';
 // import CustomDictionarySetup from './CustomDictionarySetup';
 
 class Dictionary extends Component {
