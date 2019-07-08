@@ -105,6 +105,7 @@ class DictionaryImport extends Component {
             }
           }
           catch (error) {
+            console.error(error);
             invalidDictionaries.push([dictName, error.message]);
           }
 
@@ -195,6 +196,7 @@ class DictionaryImport extends Component {
           validConfig = configName;
         }
         catch (error) {
+          console.error(error);
           invalidConfig = [configName, error.message];
         }
 
@@ -259,6 +261,7 @@ class DictionaryImport extends Component {
         this.props.updateGlobalLookupDictionary(combinedLookupDictionary);
       })
       .catch(error => {
+        console.error(error);
         this.showDictionaryErrorNotification();
       });
     this.props.setAnnouncementMessageString('Applied!');
