@@ -1,3 +1,72 @@
+let dictTypeyType = null;
+
+function fetchDictTypeyType() {
+  return fetchResource(process.env.PUBLIC_URL + '/dictionaries/dict.json').then((json) => {
+    return json;
+  }).catch(function(e) {
+    return {
+      "-T": "The",
+      "PROEUS": "process",
+      "-F": "of",
+      "WREUG": "writing",
+      "SHORT/HA*PBD": "shorthand",
+      "S": "is",
+      "KAULD": "called",
+      "STEPB/TKPWRAEF TP-PL": "stenography.",
+      "T-S": "It's",
+      "TAOEUPD": "typed",
+      "WA*EU": "with a",
+      "STEPB/TAOEUP": "stenotype",
+      "OR": "or",
+      "TPAPB/SEU": "fancy",
+      "KAOEBD TP-PL": "keyboard.",
+      "KU": "You can",
+      "TREUB KW-BG": "transcribe,",
+      "KAPGS KW-BG": "caption,",
+      "TKEUBG/TAEUT KW-BG": "dictate,",
+      "KOED KW-BG": "code,",
+      "KHAT KW-BG": "chat,",
+      "WREU": "write",
+      "PROES": "prose",
+      "AT": "at",
+      "OEFR": "over",
+      "#T-Z": "200",
+      "WORDZ": "words",
+      "PER": "per",
+      "PHEUPB TP-PL": "minute.",
+      "TAOEUP/KWREU TAOEUP": "Typey type",
+      "AOUFS": "uses",
+      "SPAEUFD": "spaced",
+      "REP/TEUGS/-S": "repetitions",
+      "SKP": "and",
+      "HUPBS": "hundreds",
+      "HROEFPBS": "lessons",
+      "TO": "to",
+      "HEP": "help",
+      "U": "you",
+      "PHAFRT": "master",
+      "TAOEUPG": "typing",
+      "W": "with",
+    };
+  });
+}
+
+function getTypeyTypeDict() {
+  let dict;
+
+  if (dictTypeyType === null) {
+    dict = fetchDictTypeyType().then(data => {
+      dictTypeyType = data;
+      return data;
+    });
+  }
+  else {
+    dict = Promise.resolve(dictTypeyType);
+  }
+
+  return dict;
+}
+
 function getLesson(lessonFile) {
   return fetch(lessonFile, {
     method: "GET",
@@ -50,5 +119,6 @@ function fetchResource(resource = process.env.PUBLIC_URL + '/dictionaries/dict.j
 export {
   fetchDictionaryIndex,
   fetchResource, // for custom lesson setup and more
-  getLesson
+  getLesson,
+  getTypeyTypeDict
 };
