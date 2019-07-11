@@ -235,12 +235,12 @@ class DictionaryImport extends Component {
 
     getTypeyTypeDict()
       .then(dictTypeyType => {
+        // throw new Error("fo");
         let listOfValidDictionariesImportedAndInConfig = this.getListOfValidDictionariesImportedAndInConfig(this.state.validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries);
         let combinedLookupDictionary = this.combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, this.state.validDictionaries, dictTypeyType);
+        let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary);
 
-        combinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary);
-
-        this.props.updateGlobalLookupDictionary(combinedLookupDictionary);
+        this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
       })
       .catch(error => {
         console.error(error);
