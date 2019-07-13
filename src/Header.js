@@ -48,12 +48,14 @@ class Header extends Component {
               <div className="nav-menu-xs">
                 <Link to="/progress" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>
                 <Link to="/writer" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--writer">Writer</Link>
+                <Link to="/lookup" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--lookup">Lookup</Link>
                 <Link to="/dictionaries" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--dictionaries">Dictionaries</Link>
                 <Link to="/lessons" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--lessons">Lessons</Link>
               </div>
               <div className="table search-container relative">
                 <Link to="/progress" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>
                 <Link to="/writer" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--writer">Writer</Link>
+                <Link to="/lookup" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--lookup">Lookup</Link>
                 <Link to="/dictionaries" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--dictionaries">Dictionaries</Link>
                 <Link to="/lessons" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--lessons">Lessons</Link>
                 <label htmlFor="lessons-autocomplete" className="visually-hidden">Search lessons</label>
