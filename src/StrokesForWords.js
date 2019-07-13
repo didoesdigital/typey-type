@@ -4,7 +4,10 @@ import {
   getLatestPloverDict,
   getTypeyTypeDict
 } from './utils/getData';
-import { createAGlobalLookupDictionary, } from './utils/transformingDictionaries';
+import {
+  createAGlobalLookupDictionary,
+  rankOutlines
+} from './utils/transformingDictionaries';
 
 class StrokesForWords extends Component {
   state = {
@@ -41,7 +44,7 @@ class StrokesForWords extends Component {
       .then(dictTypeyType => {
         getLatestPloverDict()
           .then(latestPloverDict => {
-            let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover.json"], [["plover.json", latestPloverDict]], ["plover.json"], dictTypeyType);
+            let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictTypeyType);
             this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
           });
       })
@@ -54,6 +57,7 @@ class StrokesForWords extends Component {
   updateWordsForStrokes(event) {
     let phrase = event.target.value;
     let listOfStrokesAndDicts = createListOfStrokes(phrase, this.props.globalLookupDictionary);
+    listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, phrase);
     this.setState({
       phrase: phrase,
       listOfStrokesAndDicts: listOfStrokesAndDicts
