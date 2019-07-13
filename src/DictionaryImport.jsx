@@ -264,8 +264,8 @@ class DictionaryImport extends Component {
       }
       else {
         for (let j = 0; j < validDictionariesLength; j++) {
-          if (this.state.validDictionaries[j][0] === dictName) {
-            dictContent = this.state.validDictionaries[j][1];
+          if (validDictionaries[j][0] === dictName) {
+            dictContent = validDictionaries[j][1];
             combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
           }
         }
