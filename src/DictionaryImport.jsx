@@ -250,7 +250,7 @@ class DictionaryImport extends Component {
   }
 
   combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictTypeyType) {
-    let combinedLookupDictionary = {};
+    let combinedLookupDictionary = new Map();
     let listOfValidDictionariesImportedAndInConfigLength = listOfValidDictionariesImportedAndInConfig.length;
     let validDictionariesLength = validDictionaries.length;
 

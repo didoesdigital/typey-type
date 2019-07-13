@@ -78,8 +78,8 @@ class StrokesForWords extends Component {
 
 function createListOfStrokes(phrase, dictionaryOfWordsStrokesAndSourceDictionary) {
   let listOfStrokesAndDicts = [];
-  if (dictionaryOfWordsStrokesAndSourceDictionary[phrase]) {
-    listOfStrokesAndDicts = dictionaryOfWordsStrokesAndSourceDictionary[phrase];
+  if (dictionaryOfWordsStrokesAndSourceDictionary.get(phrase)) {
+    listOfStrokesAndDicts = dictionaryOfWordsStrokesAndSourceDictionary.get(phrase);
   }
   return listOfStrokesAndDicts;
 }

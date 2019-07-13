@@ -2203,19 +2203,14 @@ function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
 
 function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName) {
   for (let [outline, translation] of Object.entries(dictContent)) {
-    if (combinedLookupDictionary[translation]) {
+    if (combinedLookupDictionary.get(translation)) {
       // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
-      let current = combinedLookupDictionary[translation];
-      if (translation === "constructor") {
-        // TODO: Look into changing the Object to Map so we can safely access the key with the string "constructor"
-      }
-      else {
-        current.push([outline, dictName]);
-      }
-      combinedLookupDictionary[translation] = current;
+      let current = combinedLookupDictionary.get(translation);
+      current.push([outline, dictName]);
+      combinedLookupDictionary.set(translation, current);
     }
     else {
-      combinedLookupDictionary[translation] = [[outline, dictName]];
+      combinedLookupDictionary.set(translation, [[outline, dictName]]);
     }
   }
   return combinedLookupDictionary;
@@ -2223,12 +2218,8 @@ function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary,
 
 function rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary) {
   for (let [translation, outlinesAndSourceDicts] of Object.entries(combinedLookupDictionary)) {
-    if (translation === "constructor") {
-      // FIXME
-    } else {
-      let rankedOutlinesAndSourceDicts = rankOutlines(outlinesAndSourceDicts, translation);
-      combinedLookupDictionary[translation] = rankedOutlinesAndSourceDicts;
-    }
+    let rankedOutlinesAndSourceDicts = rankOutlines(outlinesAndSourceDicts, translation);
+    combinedLookupDictionary[translation] = rankedOutlinesAndSourceDicts;
   }
   return combinedLookupDictionary;
 }

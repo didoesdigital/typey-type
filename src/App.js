@@ -219,7 +219,7 @@ class App extends Component {
           rung: 0,
         },
       },
-      globalLookupDictionary: {},
+      globalLookupDictionary: new Map(),
       lessonNotFound: false,
       lessonsProgress: {
       },
