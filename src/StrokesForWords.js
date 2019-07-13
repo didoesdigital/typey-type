@@ -83,7 +83,7 @@ class StrokesForWords extends Component {
               </span>
             </pre>
           </span>
-          <span className="text-small de-emphasized">{strokeAndDict[1]}</span>
+          <span className={ strokeAndDict[1] === "typey-type.json" ? "text-small" : "text-small de-emphasized"}>{strokeAndDict[1]}</span>
         </li>
       )
     });
