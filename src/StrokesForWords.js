@@ -40,18 +40,20 @@ class StrokesForWords extends Component {
   }
 
   componentDidMount() {
-    getTypeyTypeDict()
-      .then(dictTypeyType => {
-        getLatestPloverDict()
-          .then(latestPloverDict => {
-            let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictTypeyType);
-            this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
-          });
-      })
-      .catch(error => {
-        console.error(error);
-        // this.showDictionaryErrorNotification();
-      });
+    if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2) {
+      getTypeyTypeDict()
+        .then(dictTypeyType => {
+          getLatestPloverDict()
+            .then(latestPloverDict => {
+              let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictTypeyType);
+              this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
+            });
+        })
+        .catch(error => {
+          console.error(error);
+          // this.showDictionaryErrorNotification();
+        });
+    }
   }
 
   updateWordsForStrokes(event) {
