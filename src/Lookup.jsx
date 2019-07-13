@@ -26,7 +26,7 @@ class Lookup extends Component {
               <div className="mw-384 order-1">
                 <p className="panel p3 mt1">This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s suggested strokes.</p>
               </div>
-              <div className="mw-584">
+              <div className="mw-584 flex-grow mr3">
                 <StrokesForWords
                   globalLookupDictionary={this.props.globalLookupDictionary}
                   updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
