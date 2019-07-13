@@ -1,39 +1,54 @@
 import * as React from 'react'
 import { Component } from 'react';
+import {
+  getLatestPloverDict,
+  getTypeyTypeDict
+} from './utils/getData';
+import { createAGlobalLookupDictionary, } from './utils/transformingDictionaries';
 
 class StrokesForWords extends Component {
   state = {
     phrase: "",
     dictionaryOfWordsStrokesAndSourceDictionary: {
-      "silent": [
-        ["SAOEU/HREPBT", "dict.json"],
-        ["SHREPBT", "dict.json"],
-        ["SHRAOEUPBT", "dict.json"],
-        ["SHREPBT", "personal.json"]
-      ],
-      "sentiment": [
-        ["SEPB/TEUPLT", "sentiment"],
-        ["SEPBT/*PLT", "sentiment"]
-      ],
-      "foo": [
-        ["TPAO", "dict.json"],
-        ["TPAO*", "personal.json"]
-      ],
-      "bar": [
-        ["PWA*R", "personal.json"],
-        ["PWAR", "dict.json"]
-      ],
-      "baz": [
-        ["PWAZ", "personal.json"],
-        ["PWAZ", "code.json"]
-      ]
+      // "silent": [
+      //   ["SAOEU/HREPBT", "dict.json"],
+      //   ["SHREPBT", "dict.json"],
+      //   ["SHRAOEUPBT", "dict.json"],
+      //   ["SHREPBT", "personal.json"]
+      // ],
+      // "sentiment": [
+      //   ["SEPB/TEUPLT", "sentiment"],
+      //   ["SEPBT/*PLT", "sentiment"]
+      // ],
+      // "foo": [
+      //   ["TPAO", "dict.json"],
+      //   ["TPAO*", "personal.json"]
+      // ],
+      // "bar": [
+      //   ["PWA*R", "personal.json"],
+      //   ["PWAR", "dict.json"]
+      // ],
+      // "baz": [
+      //   ["PWAZ", "personal.json"],
+      //   ["PWAZ", "code.json"]
+      // ]
     },
     listOfStrokesAndDicts: []
   }
 
   componentDidMount() {
-    // let sortedDict = Object.assign({}, this.state.dictionaryOfWordsStrokesAndSourceDictionary);
-    // this.setState({dictionaryOfWordsStrokesAndSourceDictionary: sortedDict});
+    getTypeyTypeDict()
+      .then(dictTypeyType => {
+        getLatestPloverDict()
+          .then(latestPloverDict => {
+            let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover.json"], [["plover.json", latestPloverDict]], ["plover.json"], dictTypeyType);
+            this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
+          });
+      })
+      .catch(error => {
+        console.error(error);
+        // this.showDictionaryErrorNotification();
+      });
   }
 
   updateWordsForStrokes(event) {

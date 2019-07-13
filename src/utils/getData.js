@@ -1,4 +1,13 @@
 let dictTypeyType = null;
+let latestPloverDict = null;
+
+function fetchLatestPloverDict() {
+  return fetchResource(process.env.PUBLIC_URL + '/dictionaries/plover/main-3-jun-2018.json').then((json) => {
+    return json;
+  }).catch(function(e) {
+    return {};
+  });
+}
 
 function fetchDictTypeyType() {
   return fetchResource(process.env.PUBLIC_URL + '/dictionaries/dict.json').then((json) => {
@@ -49,6 +58,22 @@ function fetchDictTypeyType() {
       "W": "with",
     };
   });
+}
+
+function getLatestPloverDict() {
+  let dict;
+
+  if (latestPloverDict === null) {
+    dict = fetchLatestPloverDict().then(data => {
+      latestPloverDict = data;
+      return data;
+    });
+  }
+  else {
+    dict = Promise.resolve(latestPloverDict);
+  }
+
+  return dict;
 }
 
 function getTypeyTypeDict() {
@@ -120,5 +145,6 @@ export {
   fetchDictionaryIndex,
   fetchResource, // for custom lesson setup and more
   getLesson,
+  getLatestPloverDict,
   getTypeyTypeDict
 };

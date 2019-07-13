@@ -91,6 +91,7 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, globalLookupD
             dictionaryIndex={dictionaryIndex}
             setDictionaryIndex={setDictionaryIndex}
             globalLookupDictionary={globalLookupDictionary}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
             match={match}
             {...dictionaryProps}
             {...props}
