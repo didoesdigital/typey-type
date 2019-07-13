@@ -25,8 +25,14 @@ import {
 } from './typey-type';
 import { getLesson } from './utils/getData';
 import { fetchDictionaryIndex } from './utils/getData';
-import { fetchResource } from './utils/getData';
-import { generateListOfWordsAndStrokes } from './utils/transformingDictionaries';
+import {
+  fetchResource,
+  getTypeyTypeDict
+} from './utils/getData';
+import {
+  createAGlobalLookupDictionary,
+  generateListOfWordsAndStrokes
+} from './utils/transformingDictionaries';
 import {
   Route,
   Switch
@@ -309,6 +315,17 @@ class App extends Component {
         setupLessonProgress(json);
       });
     });
+
+    getTypeyTypeDict()
+      .then(dictTypeyType => {
+        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary([], [], [], dictTypeyType);
+        this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
+      })
+      .catch(error => {
+        console.error(error);
+        // this.showDictionaryErrorNotification();
+      });
+    this.setAnnouncementMessageString('Applied!');
   }
 
   handleStopLesson(event) {
