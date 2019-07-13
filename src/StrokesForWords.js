@@ -74,7 +74,7 @@ class StrokesForWords extends Component {
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
-          className="input-textarea typed-text-input-textarea mb3"
+          className="input-textarea typed-text-input-textarea mb3 w-100"
           id="words-for-strokes"
           onChange={this.updateWordsForStrokes.bind(this)}
           rows="1"
@@ -83,7 +83,7 @@ class StrokesForWords extends Component {
           wrap="off"
           >
         </textarea>
-        <ul className="unstyled-list mw-240 wrap">
+        <ul className="unstyled-list wrap">
           {strokeListItems}
         </ul>
       </React.Fragment>
