@@ -2217,10 +2217,11 @@ function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary,
 }
 
 function rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary) {
-  for (let [translation, outlinesAndSourceDicts] of Object.entries(combinedLookupDictionary)) {
-    let rankedOutlinesAndSourceDicts = rankOutlines(outlinesAndSourceDicts, translation);
-    combinedLookupDictionary[translation] = rankedOutlinesAndSourceDicts;
-  }
+  // This code causes the browser to hang
+  // for (let [translation, outlinesAndSourceDicts] of combinedLookupDictionary) {
+  //   let rankedOutlinesAndSourceDicts = rankOutlines(outlinesAndSourceDicts, translation);
+  //   combinedLookupDictionary.set(translation, rankedOutlinesAndSourceDicts);
+  // }
   return combinedLookupDictionary;
 }
 
@@ -2252,7 +2253,8 @@ function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, va
 function createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictTypeyType) {
   let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries);
   let combinedLookupDictionary = combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictTypeyType);
-  let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary);
+  // let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary); // has a bug
+  let sortedAndCombinedLookupDictionary = combinedLookupDictionary;
 
   return sortedAndCombinedLookupDictionary;
 }
