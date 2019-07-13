@@ -4,6 +4,7 @@ import GoogleAnalytics from 'react-ga';
 import Notification from './Notification';
 import {
   addOutlinesToWordsInCombinedDict,
+  getListOfValidDictionariesImportedAndInConfig,
   rankAllOutlinesInCombinedLookupDictionary
 } from './utils/transformingDictionaries';
 import { getTypeyTypeDict } from './utils/getData';
@@ -113,7 +114,7 @@ class DictionaryImport extends Component {
             return dictionary[0];
           });
 
-          let listOfValidDictionariesImportedAndInConfig = this.getListOfValidDictionariesImportedAndInConfig(this.state.validDictionariesListedInConfig, validDictionaries, this.state.namesOfValidImportedDictionaries);
+          let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(this.state.validDictionariesListedInConfig, validDictionaries, this.state.namesOfValidImportedDictionaries);
 
           this.setState({
             listOfValidDictionariesImportedAndInConfig: listOfValidDictionariesImportedAndInConfig,
@@ -200,7 +201,7 @@ class DictionaryImport extends Component {
           invalidConfig = [configName, error.message];
         }
 
-        let listOfValidDictionariesImportedAndInConfig = this.getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries);
+        let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries);
 
         this.setState({
           listOfValidDictionariesImportedAndInConfig: listOfValidDictionariesImportedAndInConfig,
@@ -236,7 +237,7 @@ class DictionaryImport extends Component {
     getTypeyTypeDict()
       .then(dictTypeyType => {
         // throw new Error("fo");
-        let listOfValidDictionariesImportedAndInConfig = this.getListOfValidDictionariesImportedAndInConfig(this.state.validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries);
+        let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(this.state.validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries);
         let combinedLookupDictionary = this.combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, this.state.validDictionaries, dictTypeyType);
         let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary);
 
@@ -282,20 +283,6 @@ class DictionaryImport extends Component {
   dismissDictionaryErrorNotification() {
     this.props.setAnnouncementMessageString('');
     this.setState({showDictionaryErrorNotification: false});
-  }
-
-  getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries) {
-    let listOfValidDictionariesImportedAndInConfig = [];
-    let validDictionariesListedInConfigLength = validDictionariesListedInConfig.length;
-
-    for (let i = 0; i < validDictionariesListedInConfigLength; i++) {
-      if (namesOfValidImportedDictionaries.indexOf(validDictionariesListedInConfig[i]) > -1) {
-        listOfValidDictionariesImportedAndInConfig.push(validDictionariesListedInConfig[i]);
-      }
-    }
-    listOfValidDictionariesImportedAndInConfig.push("typey-type.json");
-
-    return listOfValidDictionariesImportedAndInConfig;
   }
 
   render() {

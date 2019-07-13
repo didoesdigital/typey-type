@@ -2224,9 +2224,24 @@ function rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary) {
   return combinedLookupDictionary;
 }
 
+function getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries) {
+  let listOfValidDictionariesImportedAndInConfig = [];
+  let validDictionariesListedInConfigLength = validDictionariesListedInConfig.length;
+
+  for (let i = 0; i < validDictionariesListedInConfigLength; i++) {
+    if (namesOfValidImportedDictionaries.indexOf(validDictionariesListedInConfig[i]) > -1) {
+      listOfValidDictionariesImportedAndInConfig.push(validDictionariesListedInConfig[i]);
+    }
+  }
+  listOfValidDictionariesImportedAndInConfig.push("typey-type.json");
+
+  return listOfValidDictionariesImportedAndInConfig;
+}
+
 export {
   addOutlinesToWordsInCombinedDict,
   generateListOfWordsAndStrokes,
+  getListOfValidDictionariesImportedAndInConfig,
   rankAllOutlinesInCombinedLookupDictionary,
   rankOutlines
 };
