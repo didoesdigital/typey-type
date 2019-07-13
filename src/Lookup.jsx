@@ -24,7 +24,7 @@ class Lookup extends Component {
           <div className="mh-page">
             <div className="mw-584">
               <h3 id="lookup">Typey&nbsp;Type lookup</h3>
-              <p>Typey&nbsp;Type’s lookup uses Plover’s latest dictionary and Typey Type’s suggested strokes to show you possible ways to write different words.</p>
+              <p>This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s suggested strokes.</p>
               <StrokesForWords
                 globalLookupDictionary={this.props.globalLookupDictionary}
                 updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
