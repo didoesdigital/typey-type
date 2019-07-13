@@ -196,6 +196,22 @@ describe('rank outlines', () => {
       ]);
     });
   });
+// T-FPB: plover.json
+// TEFL: plover.json
+
+  describe('with outlines with and without dashes', () => {
+    it('returns sorted list of outlines for "test", including dashes', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["T-FPB", "plover.json"],
+        ["TEFL", "plover.json"],
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "test")).toEqual([
+        ["TEFL", "plover.json"],
+        ["T-FPB", "plover.json"]
+      ]);
+    });
+  });
 
   describe('with outlines with and without stars', () => {
     it('returns sorted list of outlines for "test", penalising stars', () => {
