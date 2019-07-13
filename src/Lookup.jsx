@@ -22,13 +22,16 @@ class Lookup extends Component {
         </div>
         <div className="p3 mx-auto mw-1024">
           <div className="mh-page">
-            <div className="mw-584">
-              <h3 id="lookup">Typey&nbsp;Type lookup</h3>
-              <p>This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s suggested strokes.</p>
-              <StrokesForWords
-                globalLookupDictionary={this.props.globalLookupDictionary}
-                updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
-              />
+            <div className="flex flex-wrap justify-between">
+              <div className="mw-384 order-1">
+                <p className="panel p3 mt1">This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s suggested strokes.</p>
+              </div>
+              <div className="mw-584">
+                <StrokesForWords
+                  globalLookupDictionary={this.props.globalLookupDictionary}
+                  updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
+                />
+              </div>
             </div>
           </div>
         </div>
