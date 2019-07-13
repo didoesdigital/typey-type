@@ -3,7 +3,7 @@ import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
 import Notification from './Notification';
 import {
-  addOutlinesToWordsInCombinedDict,
+  combineValidDictionaries,
   getListOfValidDictionariesImportedAndInConfig,
   rankAllOutlinesInCombinedLookupDictionary
 } from './utils/transformingDictionaries';
@@ -238,7 +238,7 @@ class DictionaryImport extends Component {
       .then(dictTypeyType => {
         // throw new Error("fo");
         let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(this.state.validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries);
-        let combinedLookupDictionary = this.combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, this.state.validDictionaries, dictTypeyType);
+        let combinedLookupDictionary = combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, this.state.validDictionaries, dictTypeyType);
         let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary);
 
         this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
@@ -248,31 +248,6 @@ class DictionaryImport extends Component {
         this.showDictionaryErrorNotification();
       });
     this.props.setAnnouncementMessageString('Applied!');
-  }
-
-  combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictTypeyType) {
-    let combinedLookupDictionary = new Map();
-    let listOfValidDictionariesImportedAndInConfigLength = listOfValidDictionariesImportedAndInConfig.length;
-    let validDictionariesLength = validDictionaries.length;
-
-    for (let i = 0; i < listOfValidDictionariesImportedAndInConfigLength; i++) {
-      let dictContent = {};
-      let dictName = listOfValidDictionariesImportedAndInConfig[i];
-      if (dictName === "typey-type.json") {
-        dictContent = dictTypeyType;
-        combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
-      }
-      else {
-        for (let j = 0; j < validDictionariesLength; j++) {
-          if (validDictionaries[j][0] === dictName) {
-            dictContent = validDictionaries[j][1];
-            combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
-          }
-        }
-      }
-    }
-
-    return combinedLookupDictionary;
   }
 
   showDictionaryErrorNotification() {

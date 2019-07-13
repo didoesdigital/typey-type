@@ -2224,6 +2224,31 @@ function rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary) {
   return combinedLookupDictionary;
 }
 
+function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictTypeyType) {
+  let combinedLookupDictionary = new Map();
+  let listOfValidDictionariesImportedAndInConfigLength = listOfValidDictionariesImportedAndInConfig.length;
+  let validDictionariesLength = validDictionaries.length;
+
+  for (let i = 0; i < listOfValidDictionariesImportedAndInConfigLength; i++) {
+    let dictContent = {};
+    let dictName = listOfValidDictionariesImportedAndInConfig[i];
+    if (dictName === "typey-type.json") {
+      dictContent = dictTypeyType;
+      combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
+    }
+    else {
+      for (let j = 0; j < validDictionariesLength; j++) {
+        if (validDictionaries[j][0] === dictName) {
+          dictContent = validDictionaries[j][1];
+          combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
+        }
+      }
+    }
+  }
+
+  return combinedLookupDictionary;
+}
+
 function getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries) {
   let listOfValidDictionariesImportedAndInConfig = [];
   let validDictionariesListedInConfigLength = validDictionariesListedInConfig.length;
@@ -2240,6 +2265,7 @@ function getListOfValidDictionariesImportedAndInConfig(validDictionariesListedIn
 
 export {
   addOutlinesToWordsInCombinedDict,
+  combineValidDictionaries,
   generateListOfWordsAndStrokes,
   getListOfValidDictionariesImportedAndInConfig,
   rankAllOutlinesInCombinedLookupDictionary,
