@@ -236,18 +236,23 @@ class DictionaryImport extends Component {
 
     getTypeyTypeDict()
       .then(dictTypeyType => {
-        // throw new Error("fo");
-        let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(this.state.validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries);
-        let combinedLookupDictionary = combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, this.state.validDictionaries, dictTypeyType);
-        let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary);
-
-        this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
+        this.createAGlobalLookupDictionary(this.state.validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries, dictTypeyType);
       })
       .catch(error => {
         console.error(error);
         this.showDictionaryErrorNotification();
       });
     this.props.setAnnouncementMessageString('Applied!');
+  }
+
+  createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictTypeyType) {
+    let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries);
+    let combinedLookupDictionary = combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictTypeyType);
+    let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary);
+
+    this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
+
+    return sortedAndCombinedLookupDictionary;
   }
 
   showDictionaryErrorNotification() {
