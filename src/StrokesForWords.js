@@ -74,9 +74,10 @@ class StrokesForWords extends Component {
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
-          className="input-textarea typed-text-input-textarea mb3 w-100"
+          className="input-textarea mb3 w-100"
           id="words-for-strokes"
           onChange={this.updateWordsForStrokes.bind(this)}
+          placeholder="e.g. surprise"
           rows="1"
           spellCheck="false"
           value={this.state.phrase}
