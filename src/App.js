@@ -1920,6 +1920,25 @@ class App extends Component {
                 </div>
                 }
               />
+              <Route path="/lookup" render={ (props) =>
+                <div>
+                  {header}
+                  <DocumentTitle title={'Typey Type | Lookup'}>
+                    <ErrorBoundary>
+                      <AsyncDictionaries
+                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                        setDictionaryIndex={this.setDictionaryIndex.bind(this)}
+                        globalLookupDictionary={this.state.globalLookupDictionary}
+                        updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                        dictionaryIndex={this.state.dictionaryIndex}
+                        {...props}
+                      />
+                    </ErrorBoundary>
+                  </DocumentTitle>
+                </div>
+                }
+              />
               <Route path="/dictionaries" render={ (props) =>
                 <div>
                   {header}
