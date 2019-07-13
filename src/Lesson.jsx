@@ -234,7 +234,7 @@ class Lesson extends Component {
         }
 
 
-        let layoutTypeStyle;
+        let layoutTypeStyle = '';
         if (this.props.userSettings.stenoLayout === 'stenoLayoutKoreanModernCSteno') { layoutTypeStyle = ' heavy-type-face--korean'; }
         if (this.props.userSettings.stenoLayout === 'stenoLayoutJapaneseSteno') { layoutTypeStyle = ' type-face--japanese'; }
 
