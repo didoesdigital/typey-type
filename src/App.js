@@ -318,7 +318,11 @@ class App extends Component {
 
     getTypeyTypeDict()
       .then(dictTypeyType => {
+        // let t0 = performance.now();
         let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary([], [], [], dictTypeyType);
+        // let t1 = performance.now();
+        // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
+
         this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
       })
       .catch(error => {
