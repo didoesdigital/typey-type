@@ -3,9 +3,8 @@ import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
 import Notification from './Notification';
 import {
-  combineValidDictionaries,
+  createAGlobalLookupDictionary,
   getListOfValidDictionariesImportedAndInConfig,
-  rankAllOutlinesInCombinedLookupDictionary
 } from './utils/transformingDictionaries';
 import { getTypeyTypeDict } from './utils/getData';
 import PseudoContentButton from './PseudoContentButton';
@@ -236,23 +235,14 @@ class DictionaryImport extends Component {
 
     getTypeyTypeDict()
       .then(dictTypeyType => {
-        this.createAGlobalLookupDictionary(this.state.validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries, dictTypeyType);
+        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(this.state.validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries, dictTypeyType);
+        this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
       })
       .catch(error => {
         console.error(error);
         this.showDictionaryErrorNotification();
       });
     this.props.setAnnouncementMessageString('Applied!');
-  }
-
-  createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictTypeyType) {
-    let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries);
-    let combinedLookupDictionary = combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictTypeyType);
-    let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary);
-
-    this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
-
-    return sortedAndCombinedLookupDictionary;
   }
 
   showDictionaryErrorNotification() {

@@ -2249,6 +2249,14 @@ function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, va
   return combinedLookupDictionary;
 }
 
+function createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictTypeyType) {
+  let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries);
+  let combinedLookupDictionary = combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictTypeyType);
+  let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary);
+
+  return sortedAndCombinedLookupDictionary;
+}
+
 function getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries) {
   let listOfValidDictionariesImportedAndInConfig = [];
   let validDictionariesListedInConfigLength = validDictionariesListedInConfig.length;
@@ -2266,6 +2274,7 @@ function getListOfValidDictionariesImportedAndInConfig(validDictionariesListedIn
 export {
   addOutlinesToWordsInCombinedDict,
   combineValidDictionaries,
+  createAGlobalLookupDictionary,
   generateListOfWordsAndStrokes,
   getListOfValidDictionariesImportedAndInConfig,
   rankAllOutlinesInCombinedLookupDictionary,
