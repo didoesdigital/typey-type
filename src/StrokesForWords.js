@@ -61,11 +61,25 @@ class StrokesForWords extends Component {
   }
 
   render () {
+    let layoutTypeStyle = '';
+    if (this.props.userSettings.stenoLayout === 'stenoLayoutKoreanModernCSteno') { layoutTypeStyle = ' heavy-type-face--korean'; }
+    if (this.props.userSettings.stenoLayout === 'stenoLayoutJapaneseSteno') { layoutTypeStyle = ' type-face--japanese'; }
+
     let strokeListItems = this.state.listOfStrokesAndDicts.map( (strokeAndDict, i) => {
       return(
-        <li className="unstyled-list-item mb1" key={ i }>
-          <div className="">{"" + strokeAndDict[0]}</div>
-          <div className="text-small de-emphasized">{strokeAndDict[1]}</div>
+        <li className="unstyled-list-item mb1 flex flex-wrap items-baseline" key={ i }>
+          <span className={"" + layoutTypeStyle}>
+            <pre className="overflow-auto di mw-408 mr1 text-small">
+              <span className="steno-stroke steno-stroke--subtle px05 inline-flex flex-wrap">
+                {strokeAndDict[0].split('').map((item, i) =>
+                  <kbd className="raw-steno-key raw-steno-key--subtle text-small" key={i}>
+                    {item}
+                  </kbd>
+                )}
+              </span>
+            </pre>
+          </span>
+          <span className="text-small de-emphasized">{strokeAndDict[1]}</span>
         </li>
       )
     });

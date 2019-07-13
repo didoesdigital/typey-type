@@ -1936,6 +1936,7 @@ class App extends Component {
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         globalLookupDictionary={this.state.globalLookupDictionary}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                        userSettings={this.state.userSettings}
                         {...props}
                       />
                     </ErrorBoundary>
@@ -1954,6 +1955,7 @@ class App extends Component {
                         setDictionaryIndex={this.setDictionaryIndex.bind(this)}
                         globalLookupDictionary={this.state.globalLookupDictionary}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                        userSettings={this.state.userSettings}
                         dictionaryIndex={this.state.dictionaryIndex}
                         {...props}
                       />

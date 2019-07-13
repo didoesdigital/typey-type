@@ -374,6 +374,7 @@ input:focus::placeholder {
 .table            { display: table; }
 .table-cell       { display: table-cell; }
 .flex             { display: flex; }
+.inline-flex      { display: inline-flex; }
 .flex-wrap        { flex-wrap: wrap; }
 .flex-grow        { flex-grow: 1; }
 .justify-between  { justify-content: space-between; }
@@ -540,6 +541,16 @@ input:focus::placeholder {
 .pt3     { padding-top: 24px; }
 .pt6     { padding-top: 48px; }
 .pt24    { padding-top: 192px; }
+
+.pa05 {
+  padding: 4px;
+  padding: 4px;
+}
+
+.px05 {
+  padding-left: 4px;
+  padding-right: 4px;
+}
 
 .py05 {
   padding-top: 4px;
@@ -1274,7 +1285,6 @@ label {
   background-color: desaturate(add-tint($brand-primary, 5%), 40%);
   color: add-tint($brand-primary, 90%);
   letter-spacing: 0.1em;
-  padding: 4px;
   speak: spell-out;
 
   .raw-steno-key {

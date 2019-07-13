@@ -251,7 +251,7 @@ class Lesson extends Component {
             {!this.props.userSettings.showStrokesAsDiagrams ?
               <div className={"db" + layoutTypeStyle}>
                 <pre className="overflow-auto mw-408 text-small">
-                  <span className="steno-stroke">
+                  <span className="steno-stroke pa05">
                     {this.props.currentStroke.split('').map((item, i) =>
                       <kbd className="raw-steno-key text-small" key={i}>
                         {item}

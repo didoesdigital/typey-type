@@ -30,6 +30,7 @@ class Lookup extends Component {
                 <StrokesForWords
                   globalLookupDictionary={this.props.globalLookupDictionary}
                   updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
+                  userSettings={this.props.userSettings}
                 />
               </div>
             </div>
