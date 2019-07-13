@@ -208,7 +208,7 @@ class DictionariesIndex extends Component {
             </p>
             </div>
           </div>
-          <div className="mt3 mw-336">
+          <div className="mt3 mw-336 flex-grow">
             <StrokesForWords
               globalLookupDictionary={this.props.globalLookupDictionary}
               updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
