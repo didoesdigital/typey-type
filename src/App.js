@@ -68,11 +68,11 @@ const AsyncWriter = Loadable({
   delay: 300
 });
 
-// const AsyncLookup = Loadable({
-//   loader: () => import("./Lookup"),
-//   loading: PageLoading,
-//   delay: 300
-// });
+const AsyncLookup = Loadable({
+  loader: () => import("./Lookup"),
+  loading: PageLoading,
+  delay: 300
+});
 
 const AsyncDictionaries = Loadable({
   loader: () => import("./Dictionaries"),
@@ -1931,13 +1931,11 @@ class App extends Component {
                   {header}
                   <DocumentTitle title={'Typey Type | Lookup'}>
                     <ErrorBoundary>
-                      <AsyncDictionaries
+                      <AsyncLookup
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
-                        setDictionaryIndex={this.setDictionaryIndex.bind(this)}
                         globalLookupDictionary={this.state.globalLookupDictionary}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
-                        dictionaryIndex={this.state.dictionaryIndex}
                         {...props}
                       />
                     </ErrorBoundary>
