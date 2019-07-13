@@ -68,6 +68,12 @@ const AsyncWriter = Loadable({
   delay: 300
 });
 
+// const AsyncLookup = Loadable({
+//   loader: () => import("./Lookup"),
+//   loading: PageLoading,
+//   delay: 300
+// });
+
 const AsyncDictionaries = Loadable({
   loader: () => import("./Dictionaries"),
   loading: PageLoading,
