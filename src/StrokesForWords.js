@@ -63,7 +63,10 @@ class StrokesForWords extends Component {
   render () {
     let strokeListItems = this.state.listOfStrokesAndDicts.map( (strokeAndDict, i) => {
       return(
-        <li className="unstyled-list-item mb1" key={ i }>{"" + strokeAndDict[0] + ": " + strokeAndDict[1]}</li>
+        <li className="unstyled-list-item mb1" key={ i }>
+          <div className="">{"" + strokeAndDict[0]}</div>
+          <div className="text-small de-emphasized">{strokeAndDict[1]}</div>
+        </li>
       )
     });
 
