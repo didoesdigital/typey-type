@@ -669,7 +669,7 @@ input:focus::placeholder {
     }
   }
   .search-container {
-    max-width: 725px; // arbitrary to fit nav buttons, search placeholder, button
+    max-width: 768px; // arbitrary to fit nav buttons, search placeholder, button
     @media (max-width: 959px) {
       margin-left: -16px;
       margin-top: 24px;

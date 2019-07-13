@@ -769,7 +769,7 @@ input:focus::placeholder {
     .header nav .link-button.link-button-ghost {
       text-decoration: none; }
   .header .search-container {
-    max-width: 725px; }
+    max-width: 768px; }
     @media (max-width: 959px) {
       .header .search-container {
         margin-left: -16px;
