@@ -233,9 +233,13 @@ class DictionaryImport extends Component {
   handleOnSubmitApplyChanges(event) {
     event.preventDefault();
 
+    let validDictionariesListedInConfig = this.state.validDictionariesListedInConfig;
+    let validDictionaries = this.state.validDictionaries;
+    let namesOfValidImportedDictionaries = this.state.namesOfValidImportedDictionaries;
+
     getTypeyTypeDict()
       .then(dictTypeyType => {
-        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(this.state.validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries, dictTypeyType);
+        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictTypeyType);
         this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
       })
       .catch(error => {
