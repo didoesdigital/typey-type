@@ -58,7 +58,61 @@ class StrokesForWords extends Component {
 
   updateWordsForStrokes(event) {
     let phrase = event.target.value;
-    let listOfStrokesAndDicts = createListOfStrokes(phrase, this.props.globalLookupDictionary);
+    let lookupText = phrase;
+
+    if (phrase === "{") { lookupText = "\\{{^}"; }
+    if (phrase === "}") { lookupText = "{^}\\}"; }
+    if (phrase === "{ ") { lookupText = "\\{"; }
+    if (phrase === "} ") { lookupText = "\\}"; }
+    if (phrase === "[") { lookupText = "{^[^}"; }
+    if (phrase === "]") { lookupText = "{^]^}"; }
+    if (phrase === "[ ") { lookupText = "{[}"; }
+    if (phrase === "] ") { lookupText = "{]}"; }
+    if (phrase === "?") { lookupText = "{?}"; }
+    if (phrase === ".") { lookupText = "{^.^}"; }
+    if (phrase === ". ") { lookupText = "{.}"; }
+    if (phrase === ", ") { lookupText = "{,}"; }
+    if (phrase === `" `) { lookupText = "{^~|\"}"; }
+    if (phrase === `"`) { lookupText = "{~|\"^}"; }
+    if (phrase === ` "`) { lookupText = "{~|\"^}"; }
+    if (phrase === ` '`) { lookupText = "{~|'^}"; }
+    if (phrase === `' `) { lookupText = "{^~|'}"; }
+
+    let listOfStrokesAndDicts = createListOfStrokes(lookupText, this.props.globalLookupDictionary);
+
+    if (phrase === "{") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes("{^}" + lookupText, this.props.globalLookupDictionary)); }
+    if (phrase === "}") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes(lookupText + "{^}", this.props.globalLookupDictionary)); }
+    // if (phrase === "[") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes("{^}" + lookupText, this.props.globalLookupDictionary)); }
+    // if (phrase === "]") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes(lookupText + "{^}", this.props.globalLookupDictionary)); }
+
+    if (listOfStrokesAndDicts.length === 0) {
+      let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{^}" + lookupText + "{^}", this.props.globalLookupDictionary);
+      listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
+    }
+    if (listOfStrokesAndDicts.length === 0) {
+      let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{^}" + lookupText, this.props.globalLookupDictionary);
+      listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
+    }
+    if (listOfStrokesAndDicts.length === 0) {
+      let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(lookupText + "{^}", this.props.globalLookupDictionary);
+      listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
+    }
+    if (listOfStrokesAndDicts.length === 0) {
+      let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{^" + lookupText + "^}", this.props.globalLookupDictionary);
+      listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
+    }
+    if (listOfStrokesAndDicts.length === 0) {
+      let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{^" + lookupText + "}", this.props.globalLookupDictionary);
+      listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
+    }
+    if (listOfStrokesAndDicts.length === 0) {
+      let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{" + lookupText + "^}", this.props.globalLookupDictionary);
+      listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
+    }
+    if (listOfStrokesAndDicts.length === 0) {
+      let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{" + lookupText + "}", this.props.globalLookupDictionary);
+      listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
+    }
     listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, phrase);
     this.setState({
       phrase: phrase,
