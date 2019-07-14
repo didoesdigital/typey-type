@@ -69,6 +69,7 @@ class LessonsIndex extends Component {
                 </Tooltip>
               </GoogleAnalytics.OutboundLink>.
             </p>
+            <p>The community lessons include extra topics like spacing, capitalisation, quotations, and using <span className="steno-stroke steno-stroke--subtle">SPWER</span> for “inter-”/“enter-” words.</p>
             <p>
               <Link to={`${this.props.match.url}/custom/setup`.replace(/\/{2,}/g,'/')} className="link-button dib"  style={{lineHeight: 2}} id="ga--lesson-index--create-a-custom-lesson">Create a custom lesson</Link>
               { this.props.customLesson.title !== "Steno" ? <Link to={`${this.props.match.url}/custom?study=discover&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1`.replace(/\/{2,}/g,'/')} onClick={this.props.stopLesson} className="dib ml2">Start custom lesson</Link> : null }
