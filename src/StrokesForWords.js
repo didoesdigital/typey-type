@@ -78,6 +78,17 @@ class StrokesForWords extends Component {
     if (phrase === ` '`) { lookupText = "{~|'^}"; }
     if (phrase === `' `) { lookupText = "{^~|'}"; }
 
+    if (phrase === "1") { lookupText = "{&1}"; }
+    if (phrase === "2") { lookupText = "{&2}"; }
+    if (phrase === "3") { lookupText = "{&3}"; }
+    if (phrase === "4") { lookupText = "{&4}"; }
+    if (phrase === "5") { lookupText = "{&5}"; }
+    if (phrase === "6") { lookupText = "{&6}"; }
+    if (phrase === "7") { lookupText = "{&7}"; }
+    if (phrase === "8") { lookupText = "{&8}"; }
+    if (phrase === "9") { lookupText = "{&9}"; }
+    if (phrase === "0") { lookupText = "{&0}"; }
+
     let listOfStrokesAndDicts = createListOfStrokes(lookupText, this.props.globalLookupDictionary);
 
     if (phrase === "{") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes("{^}" + lookupText, this.props.globalLookupDictionary)); }
