@@ -141,11 +141,11 @@ class StrokesForWords extends Component {
         <li className="unstyled-list-item mb1 flex flex-wrap items-baseline" key={ i }>
           <span className={"" + layoutTypeStyle}>
             <pre className="overflow-auto di mw-408 mr1 text-small">
-              <span className="steno-stroke steno-stroke--subtle px05 inline-flex flex-wrap">
+              <span className="steno-stroke steno-stroke--subtle px05 inline-flex flex-wrap" aria-label={[...strokeAndDict[0]].join(" ").replace("-","dash")}>
                 {strokeAndDict[0].split('').map((item, i) =>
-                  <kbd className="raw-steno-key raw-steno-key--subtle text-small" key={i}>
+                  <React.Fragment key={i}>
                     {item}
-                  </kbd>
+                  </React.Fragment>
                 )}
               </span>
             </pre>
