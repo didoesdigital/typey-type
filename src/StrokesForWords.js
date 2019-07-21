@@ -77,6 +77,7 @@ class StrokesForWords extends Component {
     if (phrase === ` "`) { lookupText = "{~|\"^}"; }
     if (phrase === ` '`) { lookupText = "{~|'^}"; }
     if (phrase === `' `) { lookupText = "{^~|'}"; }
+    if (phrase === ` `) { lookupText = "{^ ^}"; }
 
     if (phrase === "1") { lookupText = "{&1}"; }
     if (phrase === "2") { lookupText = "{&2}"; }
