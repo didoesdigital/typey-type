@@ -2268,7 +2268,7 @@ function getListOfValidDictionariesImportedAndInConfig(validDictionariesListedIn
       listOfValidDictionariesImportedAndInConfig.push(validDictionariesListedInConfig[i]);
     }
   }
-  listOfValidDictionariesImportedAndInConfig.push("typey-type.json");
+  listOfValidDictionariesImportedAndInConfig.unshift("typey-type.json");
 
   return listOfValidDictionariesImportedAndInConfig;
 }
