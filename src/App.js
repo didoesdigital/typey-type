@@ -769,7 +769,7 @@ class App extends Component {
         // let result = parseWordList(myWords);
       if (result && result.length > 0) {
         // look up strokes for each word
-        let lessonWordsAndStrokes = generateListOfWordsAndStrokes(result, processedSourceWordsAndStrokes);
+        let lessonWordsAndStrokes = generateListOfWordsAndStrokes(result, this.state.globalLookupDictionary);
         if (lessonWordsAndStrokes && lessonWordsAndStrokes.length > 0) {
           lesson.sourceMaterial = lessonWordsAndStrokes;
           lesson.presentedMaterial = lessonWordsAndStrokes;
@@ -1978,6 +1978,8 @@ class App extends Component {
                         updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
                         flashcardsMetWords={this.state.flashcardsMetWords}
                         flashcardsProgress={this.state.flashcardsProgress}
+                        globalLookupDictionary={this.state.globalLookupDictionary}
+                        updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                         lessonsProgress={this.state.lessonsProgress}
                         lessonNotFound={this.state.lessonNotFound}
                         fullscreen={this.state.fullscreen}

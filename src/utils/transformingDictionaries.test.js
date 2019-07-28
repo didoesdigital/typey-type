@@ -8,43 +8,43 @@ describe('generate dictionary entries', () => {
     let wordList = ['a', 'A', 'i', 'I', ' ', '?', 'address', 'tom', 'Heather', 'TUESDAY', 'FIRST', '3D', 'bed,', 'man,', 'man!', 'man?', "'bed'", "'address'", "'Sinatra'", "'sinatra'", "'confuzzled'", 'and! and', 'andx and', 'andx andx and', 'and ', ' and', ' and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff -- cached', 'bed, man, and address' ];
     // let wordList = [' ', '?', 'tom', 'Heather', 'TUESDAY', 'FIRST', 'bed,', 'man!', 'man?', "'sinatra'", 'and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff --cached', 'diff -- cached', '<title>Learn!</title>' ];
 
-    let sourceWordsAndStrokes = {
-      "a": "AEU",
-      "I": "EU",
-      " ": "S-P",
-      "?": "H-F",
-      ",": "KW-BG",
-      "Tom": "TOPL",
-      "heather": "H*ET/*ER",
-      "Tuesday": "TAOUZ",
-      "first": "TPEUFRT",
-      "3D": "30*EUD",
-      "address": "A/TKRES",
-      "bed": "PWED",
-      "bed,": "PWED KW-BG",
-      "man": "PHAPB",
-      "!": "SKHRAPL",
-      "and again": "STKPWEPBG",
-      "and": "SKP",
-      "again": "TKPWEPB",
-      "media": "PHO*EUD",
-      "query": "KWAOER/REU",
-      "Sinatra": "STPHAT/RA",
-      "'": "AE",
-      "push": "PURB",
-      "origin": "O*RPBLG",
-      "master": "PHAFRT",
-      "diff": "TKEUF",
-      "--": "TK*RB",
-      "cached": "KAERBD",
-      ">": "A*EPBG",
-      "<": "AEPBG",
-      "/": "OEU",
-      "title": "TAOEULT",
-      "learn": "HRERPB"
-    };
+    let globalLookupDictionary = new Map([
+      ["a", [["AEU", "typey-type.json"]]],
+      ["I", [["EU", "typey-type.json"]]],
+      [" ", [["S-P", "typey-type.json"]]],
+      ["?", [["H-F", "typey-type.json"]]],
+      [",", [["KW-BG", "typey-type.json"]]],
+      ["Tom", [["TOPL", "typey-type.json"]]],
+      ["heather", [["H*ET/*ER", "typey-type.json"]]],
+      ["Tuesday", [["TAOUZ", "typey-type.json"]]],
+      ["first", [["TPEUFRT", "typey-type.json"]]],
+      ["3D", [["30*EUD", "typey-type.json"]]],
+      ["address", [["A/TKRES", "typey-type.json"]]],
+      ["bed", [["PWED", "typey-type.json"]]],
+      ["bed,", [["PWED KW-BG", "typey-type.json"]]],
+      ["man", [["PHAPB", "typey-type.json"]]],
+      ["!", [["SKHRAPL", "typey-type.json"]]],
+      ["and again", [["STKPWEPBG", "typey-type.json"]]],
+      ["and", [["SKP", "typey-type.json"], ["APBD", "plover.json"]]],
+      ["again", [["TKPWEPB", "typey-type.json"]]],
+      ["media", [["PHO*EUD", "typey-type.json"]]],
+      ["query", [["KWAOER/REU", "typey-type.json"]]],
+      ["Sinatra", [["STPHAT/RA", "typey-type.json"]]],
+      ["'", [["AE", "typey-type.json"]]],
+      ["push", [["PURB", "typey-type.json"]]],
+      ["origin", [["O*RPBLG", "typey-type.json"]]],
+      ["master", [["PHAFRT", "typey-type.json"]]],
+      ["diff", [["TKEUF", "typey-type.json"]]],
+      ["--", [["TK*RB", "typey-type.json"]]],
+      ["cached", [["KAERBD", "typey-type.json"]]],
+      [">", [["A*EPBG", "typey-type.json"]]],
+      ["<", [["AEPBG", "typey-type.json"]]],
+      ["/", [["OEU", "typey-type.json"]]],
+      ["title", [["TAOEULT", "typey-type.json"]]],
+      ["learn", [["HRERPB", "typey-type.json"]]]
+    ]);
 
-    expect(generateListOfWordsAndStrokes(wordList, sourceWordsAndStrokes)).toEqual(
+    expect(generateListOfWordsAndStrokes(wordList, globalLookupDictionary)).toEqual(
       [
         {phrase: "a", stroke: "A*"},
         {phrase: "A", stroke: "A*P"},
@@ -90,7 +90,7 @@ describe('generate dictionary entries', () => {
         // {phrase: "diff --cached", stroke: "TKEUF TK*RB TK-LS KAERBD"},
         // {phrase: "<title>Learn!</title>", stroke: "AEPBG/TAOEULT/A*EPBG/KPA*/HRERPB/SKHRAPL/AEPBG/OEU/TAOEULT/A*EPBG"}
       ]
-    // expect(generateListOfWordsAndStrokes(wordList, sourceWordsAndStrokes)).toEqual(
+    // expect(generateListOfWordsAndStrokes(wordList, globalLookupDictionary)).toEqual(
     //   [
     //     {phrase: " ", stroke: "S-P", lookups: 1},
     //     {phrase: "?", stroke: "H-F", lookups: 1},

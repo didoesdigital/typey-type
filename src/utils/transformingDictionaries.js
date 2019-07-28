@@ -1921,8 +1921,19 @@ const punctuationSplittingRegex = /[!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~�
 const punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
 const strokeLookupAttemptsLimit = 12;
 
-function chooseOutlineForPhrase(wordOrPhrase, sourceWordsAndStrokes, chosenStroke, strokeLookupAttempts) {
-  chosenStroke = sourceWordsAndStrokes[wordOrPhrase];
+function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts) {
+  let lookupEntry = globalLookupDictionary.get(wordOrPhrase); // "example": [["KP-PL", "plover.json"],["KP-P", "plover.json"]]
+  if (lookupEntry && lookupEntry.length > 0) {
+    // Instead of discarding non-Typey entries, let's assume the first entry is Best.
+    // This could be achieved removing misstrokes before we get here.
+    // for (let i = 0; i < lookupEntry.length; i++) {
+    //   if (lookupEntry[i][1] === "typey-type.json") {
+    //     chosenStroke = lookupEntry[i][0];
+    //   }
+    // }
+    chosenStroke = lookupEntry[0][0];
+  }
+  else { chosenStroke = undefined; }
 
   let strokeForOneCharacterWord = FINGERSPELLED_LETTERS[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWord) {
@@ -1931,7 +1942,9 @@ function chooseOutlineForPhrase(wordOrPhrase, sourceWordsAndStrokes, chosenStrok
 
   // FIRST => first
   if (!chosenStroke) {
-    let uppercasedStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase()];
+    let lookupEntry = globalLookupDictionary.get(wordOrPhrase.toLowerCase());
+    if (lookupEntry) { lookupEntry = lookupEntry[0][0]; }
+    let uppercasedStroke = lookupEntry;
 
     if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
       chosenStroke = '*URP/' + uppercasedStroke;
@@ -1940,7 +1953,9 @@ function chooseOutlineForPhrase(wordOrPhrase, sourceWordsAndStrokes, chosenStrok
 
   // TUESDAY => Tuesday
   if (!chosenStroke) {
-    let uppercasedStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase())];
+    let lookupEntry = globalLookupDictionary.get(wordOrPhrase.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase()));
+    if (lookupEntry) { lookupEntry = lookupEntry[0][0]; }
+    let uppercasedStroke = lookupEntry;
 
     if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
       chosenStroke = '*URP/' + uppercasedStroke;
@@ -1949,7 +1964,9 @@ function chooseOutlineForPhrase(wordOrPhrase, sourceWordsAndStrokes, chosenStrok
 
   // tom => Tom
   if (!chosenStroke) {
-    let capitalisedStroke = sourceWordsAndStrokes[wordOrPhrase.replace(/(^|\s)\S/g, l => l.toUpperCase())];
+    let lookupEntry = globalLookupDictionary.get(wordOrPhrase.replace(/(^|\s)\S/g, l => l.toUpperCase()));
+    if (lookupEntry) { lookupEntry = lookupEntry[0][0]; }
+    let capitalisedStroke = lookupEntry;
 
     if (capitalisedStroke) {
       chosenStroke = 'HRO*ER/' + capitalisedStroke;
@@ -1958,9 +1975,12 @@ function chooseOutlineForPhrase(wordOrPhrase, sourceWordsAndStrokes, chosenStrok
 
   // Heather => heather
   if (!chosenStroke) {
-    let lowercaseStroke = sourceWordsAndStrokes[wordOrPhrase.toLowerCase()];
-    if (lowercaseStroke) {
-      chosenStroke = 'KPA/' + lowercaseStroke;
+    let lookupEntry = globalLookupDictionary.get(wordOrPhrase.toLowerCase());
+    if (lookupEntry) { lookupEntry = lookupEntry[0][0]; }
+    let lowercasedStroke = lookupEntry;
+
+    if (lowercasedStroke) {
+      chosenStroke = 'KPA/' + lowercasedStroke;
     }
   }
 
@@ -1973,10 +1993,10 @@ function chooseOutlineForPhrase(wordOrPhrase, sourceWordsAndStrokes, chosenStrok
   return [chosenStroke, strokeLookupAttempts];
 }
 
-function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts) {
+function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, globalLookupDictionary, strokes, stroke, strokeLookupAttempts) {
   // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
     if (remainingWordOrPhrase.match(punctuationSplittingWholeMatchRegex)) { // exactly matches punctuation e.g. "!", "?", "'"
-      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts);
+      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(remainingWordOrPhrase, globalLookupDictionary, stroke, strokeLookupAttempts);
       strokes = strokes === "" ? stroke : strokes + " " + stroke;
       stroke = "xxx";
 
@@ -1996,7 +2016,7 @@ function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndSt
         remainingWordOrPhrase = remainingWordOrPhrase.slice(index, remainingWordOrPhrase.length); // "!"
       }
 
-      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", sourceWordsAndStrokes, "", 0)
+      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", globalLookupDictionary, "", 0)
 
       strokes = strokes === "" ? stroke : strokes + " " + stroke;
       stroke = "xxx";
@@ -2007,13 +2027,13 @@ function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndSt
   return [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts];
 }
 
-function createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes) {
+function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary) {
   // if (remainingWordOrPhrase === "and! and") { debugger; }
   let remainingWordOrPhrase = wordOrPhraseMaterial;
   let stroke = "";
   let strokes = "";
   let strokeLookupAttempts = 0;
-  [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
+  [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(wordOrPhraseMaterial, globalLookupDictionary, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
 
   // First check for exact matching stroke:
   if (stroke && stroke.length > 0 && !stroke === "xxx") {
@@ -2046,12 +2066,12 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes) 
         let firstWord = remainingWordOrPhrase.slice(0, remainingWordOrPhrase.indexOf(" ")); // "off"
         remainingWordOrPhrase = remainingWordOrPhrase.slice(remainingWordOrPhrase.indexOf(" ") + 1, remainingWordOrPhrase.length); // "went the man!"
 
-        [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // "off"
+        [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // "off"
 
         // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
         if (stroke === "xxx" && (firstWord.match(punctuationSplittingRegex) !== null)) { // "man!"
           let tmpRemainingWordOrPhrase = '';
-          [tmpRemainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(firstWord, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts); // "and!"
+          [tmpRemainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(firstWord, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "and!"
 
           remainingWordOrPhrase = tmpRemainingWordOrPhrase + " " + remainingWordOrPhrase; // This will cause its own bugs by re-introducing spaces where they don't belong in phrases
           stroke = "xxx";
@@ -2064,11 +2084,11 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes) 
 
       // Break up phrase on punctuation
       else if (stroke === "xxx" && (remainingWordOrPhrase.match(punctuationSplittingRegex) !== null)) { // "man!"
-        [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(remainingWordOrPhrase, sourceWordsAndStrokes, strokes, stroke, strokeLookupAttempts);
+        [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(remainingWordOrPhrase, globalLookupDictionary, strokes, stroke, strokeLookupAttempts);
       }
       else {
         if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
-          [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(remainingWordOrPhrase, sourceWordsAndStrokes, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", sourceWordsAndStrokes, "", 0)
+          [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(remainingWordOrPhrase, globalLookupDictionary, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", globalLookupDictionary, "", 0)
 
           // if all else fails, try fingerspelling
           if (stroke === "xxx") {
@@ -2093,7 +2113,7 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes) 
   return strokes;
 }
 
-function generateListOfWordsAndStrokes(wordList, sourceWordsAndStrokes = {"the": "-T"}) {
+function generateListOfWordsAndStrokes(wordList, globalLookupDictionary) {
   // wordList = [ 'bed,', 'man!', "'sinatra'", 'and again', 'media query', 'push origin master', 'diff --cached', 'diff -- cached' ]
   let sourceAndPresentedMaterial = [];
 
@@ -2101,7 +2121,7 @@ function generateListOfWordsAndStrokes(wordList, sourceWordsAndStrokes = {"the":
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
     let wordOrPhraseMaterial = wordList[i];
 
-    let strokes = createStrokeHintForPhrase(wordOrPhraseMaterial, sourceWordsAndStrokes);
+    let strokes = createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary);
 
     sourceAndPresentedMaterial.push({phrase: wordOrPhraseMaterial, stroke: strokes});
   }

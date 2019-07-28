@@ -9,19 +9,21 @@ import {
   createWordListFromMetWords,
   loadPersonalPreferences,
   parseWordList,
-  processDictionary,
-  swapKeyValueInDictionary,
 } from './typey-type';
-import { fetchResource } from './utils/getData';
-import { generateListOfWordsAndStrokes } from './utils/transformingDictionaries';
+import {
+  getLatestPloverDict,
+  getTypeyTypeDict
+} from './utils/getData';
+import {
+  createAGlobalLookupDictionary,
+  generateListOfWordsAndStrokes
+} from './utils/transformingDictionaries';
 
 class CustomLessonSetup extends Component {
   constructor(props) {
     super(props);
     this.state = {
       customLessonWordsAndStrokes: [],
-      sourceWordsAndStrokes: {"the": "-T"},
-      processedSourceWordsAndStrokes: {"the": "-T"},
       customWordList: '',
       myWords: ''
     }
@@ -32,30 +34,33 @@ class CustomLessonSetup extends Component {
       this.mainHeading.focus();
     }
 
-    let stenoLayout = this.props.stenoLayout;
-    fetchResource(process.env.PUBLIC_URL + '/dictionaries/dict.json').then((json) => {
-      let sourceWordsAndStrokes = swapKeyValueInDictionary(json);
-      let processedSourceWordsAndStrokes = Object.assign({}, processDictionary(sourceWordsAndStrokes, stenoLayout));
-      this.setState({
-        // sourceWordsAndStrokes: sourceWordsAndStrokes,
-        processedSourceWordsAndStrokes: processedSourceWordsAndStrokes
-      });
-    }).catch((e) => {
-      console.log('Unable to load Typey Type dictionary', e)
-    });
+    if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2) {
+      getTypeyTypeDict()
+        .then(dictTypeyType => {
+          getLatestPloverDict()
+            .then(latestPloverDict => {
+              let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictTypeyType);
+              this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
+            });
+        })
+        .catch(error => {
+          console.error(error);
+          // this.showDictionaryErrorNotification();
+        });
+    }
 
     let metWords = loadPersonalPreferences()[0];
+    this.addWordListToPage(metWords, this.props.globalLookupDictionary);
 
-    this.addWordListToPage(metWords);
     this.setState({
       customLessonWordsAndStrokes: []
     });
   }
 
-  handleWordsForDictionaryEntries(value) {
+  handleWordsForDictionaryEntries(value, globalLookupDictionary = this.props.globalLookupDictionary) {
     let result = parseWordList(value);
     if (result && result.length > 0) {
-      let customLessonWordsAndStrokes = generateListOfWordsAndStrokes(result, this.state.processedSourceWordsAndStrokes);
+      let customLessonWordsAndStrokes = generateListOfWordsAndStrokes(result, globalLookupDictionary);
       if (customLessonWordsAndStrokes && customLessonWordsAndStrokes.length > 0) {
         this.setState({
           customLessonWordsAndStrokes: customLessonWordsAndStrokes,
@@ -72,9 +77,9 @@ class CustomLessonSetup extends Component {
     return event;
   }
 
-  addWordListToPage(metWords) {
+  addWordListToPage(metWords, globalLookupDictionary) {
     let myWords = createWordListFromMetWords(metWords).join("\n");
-    this.handleWordsForDictionaryEntries(myWords);
+    this.handleWordsForDictionaryEntries(myWords, globalLookupDictionary);
     this.setState({myWords: myWords});
   }
 
