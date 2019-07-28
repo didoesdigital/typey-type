@@ -1984,6 +1984,48 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     }
   }
 
+  // xxx => {^}xxx{^}
+  if (!chosenStroke) {
+    let lookupEntry = globalLookupDictionary.get("{^}" + wordOrPhrase + "{^}");
+    if (lookupEntry) { chosenStroke = lookupEntry[0][0]; }
+  }
+
+  // xxx => {^}xxx
+  if (!chosenStroke) {
+    let lookupEntry = globalLookupDictionary.get("{^}" + wordOrPhrase);
+    if (lookupEntry) { chosenStroke = lookupEntry[0][0]; }
+  }
+
+  // xxx => xxx{^}
+  if (!chosenStroke) {
+    let lookupEntry = globalLookupDictionary.get(wordOrPhrase + "{^}");
+    if (lookupEntry) { chosenStroke = lookupEntry[0][0]; }
+  }
+
+  // xxx => {^xxx^}
+  if (!chosenStroke) {
+    let lookupEntry = globalLookupDictionary.get("{^" + wordOrPhrase + "^}");
+    if (lookupEntry) { chosenStroke = lookupEntry[0][0]; }
+  }
+
+  // ' => {^'}
+  if (!chosenStroke) {
+    let lookupEntry = globalLookupDictionary.get("{^" + wordOrPhrase + "}");
+    if (lookupEntry) { chosenStroke = lookupEntry[0][0]; }
+  }
+
+  // xxx => {xxx^}
+  if (!chosenStroke) {
+    let lookupEntry = globalLookupDictionary.get("{" + wordOrPhrase + "^}");
+    if (lookupEntry) { chosenStroke = lookupEntry[0][0]; }
+  }
+
+  // xxx => {xxx}
+  if (!chosenStroke) {
+    let lookupEntry = globalLookupDictionary.get("{" + wordOrPhrase + "}");
+    if (lookupEntry) { chosenStroke = lookupEntry[0][0]; }
+  }
+
   if (!chosenStroke) {
     chosenStroke = "xxx";
   }
