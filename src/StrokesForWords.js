@@ -90,6 +90,33 @@ class StrokesForWords extends Component {
     if (phrase === "9") { lookupText = "{&9}"; }
     if (phrase === "0") { lookupText = "{&0}"; }
 
+    if (phrase === "A") { lookupText = "{&A}"; }
+    if (phrase === "B") { lookupText = "{&B}"; }
+    if (phrase === "C") { lookupText = "{&C}"; }
+    if (phrase === "D") { lookupText = "{&D}"; }
+    if (phrase === "E") { lookupText = "{&E}"; }
+    if (phrase === "F") { lookupText = "{&F}"; }
+    if (phrase === "G") { lookupText = "{&G}"; }
+    if (phrase === "H") { lookupText = "{&H}"; }
+    if (phrase === "I") { lookupText = "{&I}"; }
+    if (phrase === "J") { lookupText = "{&J}"; }
+    if (phrase === "K") { lookupText = "{&K}"; }
+    if (phrase === "L") { lookupText = "{&L}"; }
+    if (phrase === "M") { lookupText = "{&M}"; }
+    if (phrase === "N") { lookupText = "{&N}"; }
+    if (phrase === "O") { lookupText = "{&O}"; }
+    if (phrase === "P") { lookupText = "{&P}"; }
+    if (phrase === "Q") { lookupText = "{&Q}"; }
+    if (phrase === "R") { lookupText = "{&R}"; }
+    if (phrase === "S") { lookupText = "{&S}"; }
+    if (phrase === "T") { lookupText = "{&T}"; }
+    if (phrase === "U") { lookupText = "{&U}"; }
+    if (phrase === "V") { lookupText = "{&V}"; }
+    if (phrase === "W") { lookupText = "{&W}"; }
+    if (phrase === "X") { lookupText = "{&X}"; }
+    if (phrase === "Y") { lookupText = "{&Y}"; }
+    if (phrase === "Z") { lookupText = "{&Z}"; }
+
     let listOfStrokesAndDicts = createListOfStrokes(lookupText, this.props.globalLookupDictionary);
 
     if (phrase === "{") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes("{^}" + lookupText, this.props.globalLookupDictionary)); }
