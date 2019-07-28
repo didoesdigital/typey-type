@@ -856,6 +856,9 @@ input:focus::placeholder {
   background-color: #fff;
   border: thin solid #c6bdcb;
   border-radius: 4px; }
+  .panel.panel--warning {
+    background-color: #ffe5b3;
+    border: thin solid #e6ac3a; }
 
 .stat__number {
   font-size: 25px;

@@ -790,7 +790,12 @@ input:focus::placeholder {
   background-color: #fff;
   border: thin solid add-tint($brand-primary, 70%);
   border-radius: 4px;
+  &.panel--warning {
+    background-color: add-tint($brand-warning, 60%);
+    border: thin solid add-shade($brand-warning, 10%);
+  }
 }
+
 
 .stat__number {
   font-size: $h3-size;

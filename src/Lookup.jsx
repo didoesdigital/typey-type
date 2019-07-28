@@ -24,7 +24,8 @@ class Lookup extends Component {
           <div className="mh-page">
             <div className="flex flex-wrap justify-between">
               <div className="mw-384 order-1">
-                <p className="panel p3 mt1">This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s suggested strokes.</p>
+                <div className="panel panel--warning p3 mt1"><p className="mb0">This feature is evolving. Improvements coming&nbsp;soon.</p></div>
+                <p className="panel p3 mt3">This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s suggested strokes.</p>
               </div>
               <div className="mw-584 flex-grow mr3">
                 <StrokesForWords
