@@ -209,6 +209,9 @@ class DictionariesIndex extends Component {
             </div>
           </div>
           <div className="mt3 mw-336 flex-grow">
+              { /* NOT passing this prop is a hack to show misstrokes …
+                … in one place and not in another. */}
+              { /* globalUserSettings={this.props.globalUserSettings} */}
             <StrokesForWords
               globalLookupDictionary={this.props.globalLookupDictionary}
               updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}

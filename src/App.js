@@ -247,7 +247,8 @@ class App extends Component {
       fullscreen: false,
       globalUserSettings: {
         flashcardsCourseLevel: "noviceCourse", // noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
-        writerInput: "qwerty" // qwerty || raw
+        writerInput: "qwerty", // qwerty || raw
+        showMisstrokesInLookup: false
       },
       hideOtherSettings: false,
       recommendationHistory: { currentStep: null },
@@ -325,6 +326,9 @@ class App extends Component {
     getTypeyTypeDict()
       .then(dictAndMisstrokes => {
         // let t0 = performance.now();
+        if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
+          dictAndMisstrokes[1] = {};
+        }
         let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary([], [], [], dictAndMisstrokes);
         // let t1 = performance.now();
         // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
@@ -1935,6 +1939,7 @@ class App extends Component {
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         globalLookupDictionary={this.state.globalLookupDictionary}
+                        globalUserSettings={this.state.globalUserSettings}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                         userSettings={this.state.userSettings}
                         {...props}

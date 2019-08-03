@@ -866,7 +866,8 @@ function loadPersonalPreferences() {
   let flashcardsProgress = {};
   let globalUserSettings = {
     flashcardsCourseLevel: "noviceCourse",
-    writerInput: "qwerty"
+    writerInput: "qwerty",
+    showMisstrokesInLookup: true
   };
   let flashcardsMetWords = {
     "the": {

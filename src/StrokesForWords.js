@@ -45,6 +45,9 @@ class StrokesForWords extends Component {
         .then(dictAndMisstrokes => {
           getLatestPloverDict()
             .then(latestPloverDict => {
+              if (this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup) {
+                dictAndMisstrokes[1] = {};
+              }
               let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictAndMisstrokes);
               this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
             });
@@ -203,6 +206,11 @@ class StrokesForWords extends Component {
         <ul className="unstyled-list wrap">
           {strokeListItems}
         </ul>
+        {this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup
+          ?
+          <p className="text-small"><span className="bg-danger">(Plover misstrokes included.)</span></p> :
+          <p className="text-small"><span className="de-emphasized">(Plover misstrokes hidden.)</span></p>
+        }
       </React.Fragment>
     );
   }
