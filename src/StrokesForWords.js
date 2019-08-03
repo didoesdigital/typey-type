@@ -75,6 +75,15 @@ class StrokesForWords extends Component {
     if (phrase === ".") { lookupText = "{^.^}"; }
     if (phrase === ". ") { lookupText = "{.}"; }
     if (phrase === ", ") { lookupText = "{,}"; }
+    if (phrase === `” `) { lookupText = "{^~|”}"; }
+    if (phrase === `”`) { lookupText = "{^~|”}"; }
+    if (phrase === `“`) { lookupText = "{~|“^}"; }
+    if (phrase === ` “`) { lookupText = "{~|“^}"; }
+    if (phrase === `“`) { lookupText = "{~|“^}"; }
+    if (phrase === ` ‘`) { lookupText = "{~|‘^}"; }
+    if (phrase === `‘`) { lookupText = "{~|‘^}"; }
+    if (phrase === `’ `) { lookupText = "{^~|’}"; }
+    if (phrase === `’`) { lookupText = "{^~|’}"; }
     if (phrase === `" `) { lookupText = "{^~|\"}"; }
     if (phrase === `"`) { lookupText = "{~|\"^}"; }
     if (phrase === ` "`) { lookupText = "{~|\"^}"; }

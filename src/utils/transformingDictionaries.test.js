@@ -28,6 +28,10 @@ describe('choose outline for phrase', () => {
       ["{^}:{^}", [["KHR-PB", "typey-type.json"]]],
       ["{^}^{^}", [["KR-RT", "typey-type.json"]]],
       ["{^}({^}", [["P*PB", "typey-type.json"]]],
+      ["{~|‘^}", [["TP-P/TP-P", "typey-type.json"]]],
+      ["{^~|’}", [["TP-L/TP-L", "typey-type.json"]]],
+      ["{~|“^}", [["KW-GS/KW-GS", "typey-type.json"]]],
+      ["{^~|”}", [["KR-GS/KR-GS", "typey-type.json"]]],
       ["a", [["AEU", "typey-type.json"]]],
       ["I", [["EU", "typey-type.json"]]],
       ["{^ ^}", [["S-P", "typey-type.json"]]],
@@ -86,6 +90,14 @@ describe('choose outline for phrase', () => {
 
     //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "1-BGS", 1 ]);
     // });
+
+    it('single closing curly quote ’ should match TP-L/TP-L', () => {
+      let wordOrPhrase = "’";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TP-L/TP-L", 1 ]);
+    });
 
     it('{^}:{^} with "KHR-PB" for colon with suppressed spaces like clock time', () => {
       let wordOrPhrase = ":";
