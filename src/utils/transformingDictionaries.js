@@ -2263,16 +2263,22 @@ function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
   return arrayOfStrokesAndTheirSourceDictNames;
 }
 
-function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName) {
+function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes) {
+  let misstrokesMap = new Map(Object.entries(misstrokes));
+
   for (let [outline, translation] of Object.entries(dictContent)) {
-    if (combinedLookupDictionary.get(translation)) {
-      // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
-      let current = combinedLookupDictionary.get(translation);
-      current.push([outline, dictName]);
-      combinedLookupDictionary.set(translation, current);
-    }
-    else {
-      combinedLookupDictionary.set(translation, [[outline, dictName]]);
+    let misstroke = misstrokesMap.get(outline);
+
+    if (!misstroke) {
+      if (combinedLookupDictionary.get(translation)) {
+        // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
+        let current = combinedLookupDictionary.get(translation);
+        current.push([outline, dictName]);
+        combinedLookupDictionary.set(translation, current);
+      }
+      else {
+        combinedLookupDictionary.set(translation, [[outline, dictName]]);
+      }
     }
   }
   return combinedLookupDictionary;
@@ -2287,7 +2293,7 @@ function rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary) {
   return combinedLookupDictionary;
 }
 
-function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictTypeyType) {
+function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictAndMisstrokes) {
   let combinedLookupDictionary = new Map();
   let listOfValidDictionariesImportedAndInConfigLength = listOfValidDictionariesImportedAndInConfig.length;
   let validDictionariesLength = validDictionaries.length;
@@ -2295,15 +2301,16 @@ function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, va
   for (let i = 0; i < listOfValidDictionariesImportedAndInConfigLength; i++) {
     let dictContent = {};
     let dictName = listOfValidDictionariesImportedAndInConfig[i];
+    let [dictTypeyType, misstrokes] = dictAndMisstrokes;
     if (dictName === "typey-type.json") {
       dictContent = dictTypeyType;
-      combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
+      combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, {});
     }
     else {
       for (let j = 0; j < validDictionariesLength; j++) {
         if (validDictionaries[j][0] === dictName) {
           dictContent = validDictionaries[j][1];
-          combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName);
+          combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes);
         }
       }
     }
@@ -2312,9 +2319,9 @@ function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, va
   return combinedLookupDictionary;
 }
 
-function createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictTypeyType) {
+function createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictAndMisstrokes) {
   let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries);
-  let combinedLookupDictionary = combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictTypeyType);
+  let combinedLookupDictionary = combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictAndMisstrokes);
   // let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary); // has a bug
   let sortedAndCombinedLookupDictionary = combinedLookupDictionary;
 

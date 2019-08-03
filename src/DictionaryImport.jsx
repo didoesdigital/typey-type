@@ -238,8 +238,8 @@ class DictionaryImport extends Component {
     let namesOfValidImportedDictionaries = this.state.namesOfValidImportedDictionaries;
 
     getTypeyTypeDict()
-      .then(dictTypeyType => {
-        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictTypeyType);
+      .then(dictAndMisstrokes => {
+        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictAndMisstrokes);
         this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
       })
       .catch(error => {

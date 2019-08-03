@@ -36,10 +36,10 @@ class CustomLessonSetup extends Component {
 
     if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2) {
       getTypeyTypeDict()
-        .then(dictTypeyType => {
+        .then(dictAndMisstrokes => {
           getLatestPloverDict()
             .then(latestPloverDict => {
-              let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictTypeyType);
+              let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictAndMisstrokes);
               this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
             });
         })
