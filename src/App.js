@@ -14,10 +14,8 @@ import {
   parseLesson,
   removeWhitespaceAndSumUniqMetWords,
   repetitionsRemaining,
-  processDictionary,
   shouldShowStroke,
   strokeAccuracy,
-  swapKeyValueInDictionary,
   trimAndSumUniqMetWords,
   targetStrokeCount,
   updateCapitalisationStrokesInNextItem,
@@ -757,13 +755,10 @@ class App extends Component {
     }
 
     let lesson = {};
-    let stenoLayout = "stenoLayoutAmericanSteno";
-    if (this.state.userSettings) { stenoLayout = this.state.userSettings.stenoLayout; }
+    // let stenoLayout = "stenoLayoutAmericanSteno";
+    // if (this.state.userSettings) { stenoLayout = this.state.userSettings.stenoLayout; }
 
     fetchResource(process.env.PUBLIC_URL + '/dictionaries/dict.json').then((json) => {
-      let sourceWordsAndStrokes = swapKeyValueInDictionary(json);
-      // remove garbage like {^}
-      let processedSourceWordsAndStrokes = Object.assign({}, processDictionary(sourceWordsAndStrokes, stenoLayout));
       // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWords).join("\n");
       // parseWordList appears to remove empty lines and other garbage, we might not need it here

@@ -2344,6 +2344,7 @@ function getListOfValidDictionariesImportedAndInConfig(validDictionariesListedIn
 
 export {
   addOutlinesToWordsInCombinedDict,
+  chooseOutlineForPhrase,
   combineValidDictionaries,
   createAGlobalLookupDictionary,
   generateListOfWordsAndStrokes,

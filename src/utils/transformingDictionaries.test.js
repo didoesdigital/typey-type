@@ -1,7 +1,175 @@
 import {
+  chooseOutlineForPhrase,
   generateListOfWordsAndStrokes,
   rankOutlines
 } from './transformingDictionaries';
+
+describe('choose outline for phrase', () => {
+  describe('returns array of chosen outline and number of lookup attempts', () => {
+
+    let globalLookupDictionary = new Map([
+      ["example", [["KP-PL", "typey-type.json"]]],
+      ["{^}™", [["TR*PL", "typey-type.json"], ["SPWO*L/TRAEUD/PHARBG", "typey-type.json"]]],
+      ["™", [["PHOEPBLG/T*/PH*", "emoji.json"]]],
+      ["<{^}", [["PWRABG", "typey-type.json"]]],
+      ["<", [["HR*PB", "typey-type.json"]]],
+      ["#{^}", [["HAERB", "typey-type.json"]]],
+      // ["${^}", [["TK-PL", "typey-type.json"]]],
+      ["$", [["TPHRORB", "typey-type.json"]]],
+      ["--{^}", [["H-PBZ", "typey-type.json"]]],
+      ["-{^}", [["H-PBS", "typey-type.json"]]],
+      ["<a href=\"{^}", [["A/HREF", "plover.json"]]],
+      ["Object.{^}", [["O*B/P-P", "react.json"]]],
+      ["\\{{^}", [["TPR-BGT", "typey-type.json"]]],
+      ["flash[:{^}", [["TPHRARB/PWR-BGT", "ruby.json"]]],
+      ["{>}http://{^}", [["HAOEPT", "typey-type.json"]]],
+      ["{&%}", [["P*ERS", "typey-type.json"]]],
+      ["{^}{#F1}{^}", [["1-BGS", "typey-type.json"]]],
+      ["{^}:{^}", [["KHR-PB", "typey-type.json"]]],
+      ["{^}^{^}", [["KR-RT", "typey-type.json"]]],
+      ["{^}({^}", [["P*PB", "typey-type.json"]]],
+      ["a", [["AEU", "typey-type.json"]]],
+      ["I", [["EU", "typey-type.json"]]],
+      ["{^ ^}", [["S-P", "typey-type.json"]]],
+      ["{?}", [["H-F", "typey-type.json"]]],
+      ["{,}", [["KW-BG", "typey-type.json"]]],
+      ["Tom", [["TOPL", "typey-type.json"]]],
+      ["heather", [["H*ET/*ER", "typey-type.json"]]],
+      ["Tuesday", [["TAOUZ", "typey-type.json"]]],
+      ["first", [["TPEUFRT", "typey-type.json"]]],
+      ["3D", [["30*EUD", "typey-type.json"]]],
+      ["address", [["A/TKRES", "typey-type.json"]]],
+      ["bed", [["PWED", "typey-type.json"]]],
+      ["bed,", [["PWED KW-BG", "typey-type.json"]]],
+      ["man", [["PHAPB", "typey-type.json"]]],
+      ["{!}", [["SKHRAPL", "typey-type.json"]]],
+      ["and again", [["STKPWEPBG", "typey-type.json"]]],
+      ["and", [["SKP", "typey-type.json"], ["APBD", "plover.json"]]],
+      ["again", [["TKPWEPB", "typey-type.json"]]],
+      ["media", [["PHO*EUD", "typey-type.json"]]],
+      ["query", [["KWAOER/REU", "typey-type.json"]]],
+      ["Sinatra", [["STPHAT/RA", "typey-type.json"]]],
+      ["{^'}", [["AE", "typey-type.json"]]],
+      ["push", [["PURB", "typey-type.json"]]],
+      ["origin", [["O*RPBLG", "typey-type.json"]]],
+      ["master", [["PHAFRT", "typey-type.json"]]],
+      ["diff", [["TKEUF", "typey-type.json"]]],
+      ["{--}", [["TK*RB", "typey-type.json"]]],
+      ["cached", [["KAERBD", "typey-type.json"]]],
+      ["{^>^}", [["A*EPBG", "typey-type.json"]]],
+      ["{^<^}", [["AEPBG", "typey-type.json"]]],
+      ["{^/^}", [["OEU", "typey-type.json"]]],
+      ["title", [["TAOEULT", "typey-type.json"]]],
+      ["learn", [["HRERPB", "typey-type.json"]]]
+    ]);
+
+    it('simple example returns 1 attempt for KP-PL', () => {
+      let wordOrPhrase = "example";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KP-PL", 1 ]);
+    });
+
+    it('P*ERS for {&%} percent', () => {
+      let wordOrPhrase = "%";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "P*ERS", 0 ]);
+    });
+
+    // it('1-BGS for {^}{#F1}{^}', () => {
+    //   let wordOrPhrase = "#F1";
+    //   let chosenStroke = "";
+    //   let strokeLookupAttempts = 0;
+
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "1-BGS", 1 ]);
+    // });
+
+    it('{^}:{^} with "KHR-PB" for colon with suppressed spaces like clock time', () => {
+      let wordOrPhrase = ":";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KHR-PB", 0 ]);
+    });
+
+    it('{^}^{^} with "KR-RT" for caret with suppressed spaces', () => {
+      let wordOrPhrase = "^";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KR-RT", 0 ]);
+    });
+
+    it('{^}({^} with "PREPB" for opening parenthesis', () => {
+      let wordOrPhrase = "(";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PREPB", 0 ]);
+    });
+
+    // THIS is what it ought to do with the strokes above but we're brute forcing single-letter
+    // … lookups to use a fixed dictionary
+    // it('{^}({^} with "P*PB" for opening parenthesis', () => {
+    //   let wordOrPhrase = "(";
+    //   let chosenStroke = "";
+    //   let strokeLookupAttempts = 0;
+
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "P*PB", 0 ]);
+    // });
+
+    // it('for trademark symbol', () => {
+    //   let wordOrPhrase = "™";
+    //   let chosenStroke = "";
+    //   let strokeLookupAttempts = 0;
+
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TR*PL", 1 ]);
+    // });
+
+    // it('for dollar with space, not suppressed should match "$"', () => {
+    //   let wordOrPhrase = "$";
+    //   let chosenStroke = "";
+    //   let strokeLookupAttempts = 0;
+
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHRORB", 0 ]);
+    // });
+
+    it('for dollar with suppressed trailing space should match ${^}', () => {
+      let wordOrPhrase = "$";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TK-PL", 0 ]);
+    });
+
+    it('for hash with suppressed trailing space', () => {
+      let wordOrPhrase = "#";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HAERB", 0 ]);
+    });
+
+    it('for left angle bracket with suppressed space', () => {
+      let wordOrPhrase = "<";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PWRABG", 0 ]);
+    });
+
+    // describe('for left angle bracket with space, not suppressed', () => {
+    //   let wordOrPhrase = "< ";
+    //   let chosenStroke = "";
+    //   let strokeLookupAttempts = 0;
+
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HR*PB", 1 ]);
+    // });
+  });
+});
 
 describe('generate dictionary entries', () => {
   it('returns array of phrases and strokes for words', () => {

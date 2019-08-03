@@ -723,134 +723,125 @@ function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
   return dictionaryMetadata;
 }
 
-function swapKeyValueInDictionary(sourceDictionaryFile) {
-  let sourceWordsAndStrokes = {};
-  for (let stroke in sourceDictionaryFile) {
-    let word = sourceDictionaryFile[stroke];
-    sourceWordsAndStrokes[word] = stroke;
-  }
-  return sourceWordsAndStrokes;
-}
+// function processDictionary(swappedDictionaryFile, stenoLayout) {
+//   let processedDictionary = {};
+//   let charsToRemove = [
+//     [/({\^)(.*)(\^})/, '$2'], // Replace "{^ ^}" with " "
+//     [/({\^})(.*)/, '$2'], // Replace "{^}™" with "™"
+//     [/(.*)(\^})/, '$1'], // Replace "words{^}" with "words"
+//     [/(^})(.*)({$)/, '$2'], // Replace "}words{" leftover from prev regex with "words"
+//     [/({)(.)(})/, '$2'], // Replace "{;}" with ";"
+//     [/({&)([0-9])(})/, '$2'], // Replace "{&1}" with "1"
+//   ];
+//   let charsToRemoveFromPunctuation = [
+//     [/({\^)(.*)(})/, '$2'], // Replace "{^x}" with "x"
+//     [/^\\(.*)({|})$/, '$2'], // Replace "\}" with "}" or "\{" with "{"
+//     [/^({)?~\|(.*)$/, '$2'], // Replace "~|’" with "’" or "{~|‘" with "‘"
+//     ['{-|}', ''], // Remove string "{-|}"
+//   ];
+//   // let punctuationUnescapedString = "[!"#$%&'()*,./:;<=>?@[\]^`{|}~]-";
+//   let punctuationRegex = /[!"#$%&'()*,./:;<=>?@[\\\]^`{|}~-]/;
 
-function processDictionary(swappedDictionaryFile, stenoLayout) {
-  let processedDictionary = {};
-  let charsToRemove = [
-    [/({\^)(.*)(\^})/, '$2'], // Replace "{^ ^}" with " "
-    [/({\^})(.*)/, '$2'], // Replace "{^}™" with "™"
-    [/(.*)(\^})/, '$1'], // Replace "words{^}" with "words"
-    [/(^})(.*)({$)/, '$2'], // Replace "}words{" leftover from prev regex with "words"
-    [/({)(.)(})/, '$2'], // Replace "{;}" with ";"
-    [/({&)([0-9])(})/, '$2'], // Replace "{&1}" with "1"
-  ];
-  let charsToRemoveFromPunctuation = [
-    [/({\^)(.*)(})/, '$2'], // Replace "{^x}" with "x"
-    [/^\\(.*)({|})$/, '$2'], // Replace "\}" with "}" or "\{" with "{"
-    [/^({)?~\|(.*)$/, '$2'], // Replace "~|’" with "’" or "{~|‘" with "‘"
-    ['{-|}', ''], // Remove string "{-|}"
-  ];
-  // let punctuationUnescapedString = "[!"#$%&'()*,./:;<=>?@[\]^`{|}~]-";
-  let punctuationRegex = /[!"#$%&'()*,./:;<=>?@[\\\]^`{|}~-]/;
+//   for (let property in swappedDictionaryFile) {
+//     let value = swappedDictionaryFile[property];
 
-  for (let property in swappedDictionaryFile) {
-    let value = swappedDictionaryFile[property];
+//     for (let i = 0; i < charsToRemove.length; i++) {
+//       property = property.replace(charsToRemove[i][0], charsToRemove[i][1]);
 
-    for (let i = 0; i < charsToRemove.length; i++) {
-      property = property.replace(charsToRemove[i][0], charsToRemove[i][1]);
+//       if (property.match(punctuationRegex) && !property.match(/[A-Za-z0-9 ]/)) {
+//         // console.log("BEFORE: " + property);
+//         for (let i = 0; i < charsToRemoveFromPunctuation.length; i++) {
+//           property = property.replace(charsToRemoveFromPunctuation[i][0], charsToRemoveFromPunctuation[i][1]);
+//         }
+//         // console.log("AFTER: " + property);
+//       }
+//     }
+//     // TODO: generalise these hard coded fixes
+//     if (property === "{}" && value === "WUZ/WUZ") {
+//       processedDictionary[property] = "TPR-BGT/TK-LS/TPR*BGT";
+//     } else if (property.match(/^[0-9]$/)) {
+//       // don't use `0RBGS` for 0
+//     } else if (property === "'" && (value === "TP-L" || value === "TP-P")) {
+//       // don't override AE with TP-L
+//     } else if (property === "," && value === "W-B") {
+//       value = "KW-BG"; // hack for preferring spaced comma brief
+//       processedDictionary[property] = value;
+//     } else {
+//       processedDictionary[property] = value;
+//     }
+//   }
 
-      if (property.match(punctuationRegex) && !property.match(/[A-Za-z0-9 ]/)) {
-        // console.log("BEFORE: " + property);
-        for (let i = 0; i < charsToRemoveFromPunctuation.length; i++) {
-          property = property.replace(charsToRemoveFromPunctuation[i][0], charsToRemoveFromPunctuation[i][1]);
-        }
-        // console.log("AFTER: " + property);
-      }
-    }
-    // TODO: generalise these hard coded fixes
-    if (property === "{}" && value === "WUZ/WUZ") {
-      processedDictionary[property] = "TPR-BGT/TK-LS/TPR*BGT";
-    } else if (property.match(/^[0-9]$/)) {
-      // don't use `0RBGS` for 0
-    } else if (property === "'" && (value === "TP-L" || value === "TP-P")) {
-      // don't override AE with TP-L
-    } else if (property === "," && value === "W-B") {
-      value = "KW-BG"; // hack for preferring spaced comma brief
-      processedDictionary[property] = value;
-    } else {
-      processedDictionary[property] = value;
-    }
-  }
+//   // TODO: don't hard code these, it probably breaks steno layouts other than Ward Stone Ireland
+//   processedDictionary['0'] = "#O";
+//   processedDictionary['1'] = "#S";
+//   processedDictionary['2'] = "#T-";
+//   processedDictionary['3'] = "#P-";
+//   processedDictionary['4'] = "#H";
+//   processedDictionary['5'] = "#A";
+//   processedDictionary['6'] = "#F";
+//   processedDictionary['7'] = "#-P";
+//   processedDictionary['8'] = "#L";
+//   processedDictionary['9'] = "#-T";
 
-  // TODO: don't hard code these, it probably breaks steno layouts other than Ward Stone Ireland
-  processedDictionary['0'] = "#O";
-  processedDictionary['1'] = "#S";
-  processedDictionary['2'] = "#T-";
-  processedDictionary['3'] = "#P-";
-  processedDictionary['4'] = "#H";
-  processedDictionary['5'] = "#A";
-  processedDictionary['6'] = "#F";
-  processedDictionary['7'] = "#-P";
-  processedDictionary['8'] = "#L";
-  processedDictionary['9'] = "#-T";
-
-  if (stenoLayout === "stenoLayoutAmericanSteno") {
-    // TODO: don't hard code these; it probably breaks steno layouts other than Ward Stone Ireland
-    processedDictionary["a"] = "A*";
-    processedDictionary["b"] = "PW*";
-    processedDictionary["c"] = "KR*";
-    processedDictionary["d"] = "TK*";
-    processedDictionary["e"] = "*E";
-    processedDictionary["f"] = "TP*";
-    processedDictionary["g"] = "TKPW*";
-    processedDictionary["h"] = "H*";
-    processedDictionary["i"] = "*EU";
-    processedDictionary["j"] = "SKWR*";
-    processedDictionary["k"] = "K*";
-    processedDictionary["l"] = "HR*";
-    processedDictionary["m"] = "PH*";
-    processedDictionary["n"] = "TPH*";
-    processedDictionary["o"] = "O*";
-    processedDictionary["p"] = "P*";
-    processedDictionary["q"] = "KW*";
-    processedDictionary["r"] = "R*";
-    processedDictionary["s"] = "S*";
-    processedDictionary["t"] = "T*";
-    processedDictionary["u"] = "*U";
-    processedDictionary["v"] = "SR*";
-    processedDictionary["w"] = "W*";
-    processedDictionary["x"] = "KP*";
-    processedDictionary["y"] = "KWR*";
-    processedDictionary["z"] = "STKPW*";
-    processedDictionary["A"] = "A*P";
-    processedDictionary["B"] = "PW*P";
-    processedDictionary["C"] = "KR*P";
-    processedDictionary["D"] = "TK*P";
-    processedDictionary["E"] = "*EP";
-    processedDictionary["F"] = "TP*P";
-    processedDictionary["G"] = "TKPW*P";
-    processedDictionary["H"] = "H*P";
-    processedDictionary["I"] = "*EUP";
-    processedDictionary["J"] = "SKWR*P";
-    processedDictionary["K"] = "K*P";
-    processedDictionary["L"] = "HR*P";
-    processedDictionary["M"] = "PH*P";
-    processedDictionary["N"] = "TPH*P";
-    processedDictionary["O"] = "O*P";
-    processedDictionary["P"] = "P*P";
-    processedDictionary["Q"] = "KW*P";
-    processedDictionary["R"] = "R*P";
-    processedDictionary["S"] = "S*P";
-    processedDictionary["T"] = "T*P";
-    processedDictionary["U"] = "*UP";
-    processedDictionary["V"] = "SR*P";
-    processedDictionary["W"] = "W*P";
-    processedDictionary["X"] = "KP*P";
-    processedDictionary["Y"] = "KWR*P";
-    processedDictionary["Z"] = "STKPW*P";
-    // TODO: don't hard code these; it probably breaks steno layouts other than Ward Stone Ireland
-    processedDictionary["?"] = "H-F";
-  }
-  return processedDictionary;
-}
+//   if (stenoLayout === "stenoLayoutAmericanSteno") {
+//     // TODO: don't hard code these; it probably breaks steno layouts other than Ward Stone Ireland
+//     processedDictionary["a"] = "A*";
+//     processedDictionary["b"] = "PW*";
+//     processedDictionary["c"] = "KR*";
+//     processedDictionary["d"] = "TK*";
+//     processedDictionary["e"] = "*E";
+//     processedDictionary["f"] = "TP*";
+//     processedDictionary["g"] = "TKPW*";
+//     processedDictionary["h"] = "H*";
+//     processedDictionary["i"] = "*EU";
+//     processedDictionary["j"] = "SKWR*";
+//     processedDictionary["k"] = "K*";
+//     processedDictionary["l"] = "HR*";
+//     processedDictionary["m"] = "PH*";
+//     processedDictionary["n"] = "TPH*";
+//     processedDictionary["o"] = "O*";
+//     processedDictionary["p"] = "P*";
+//     processedDictionary["q"] = "KW*";
+//     processedDictionary["r"] = "R*";
+//     processedDictionary["s"] = "S*";
+//     processedDictionary["t"] = "T*";
+//     processedDictionary["u"] = "*U";
+//     processedDictionary["v"] = "SR*";
+//     processedDictionary["w"] = "W*";
+//     processedDictionary["x"] = "KP*";
+//     processedDictionary["y"] = "KWR*";
+//     processedDictionary["z"] = "STKPW*";
+//     processedDictionary["A"] = "A*P";
+//     processedDictionary["B"] = "PW*P";
+//     processedDictionary["C"] = "KR*P";
+//     processedDictionary["D"] = "TK*P";
+//     processedDictionary["E"] = "*EP";
+//     processedDictionary["F"] = "TP*P";
+//     processedDictionary["G"] = "TKPW*P";
+//     processedDictionary["H"] = "H*P";
+//     processedDictionary["I"] = "*EUP";
+//     processedDictionary["J"] = "SKWR*P";
+//     processedDictionary["K"] = "K*P";
+//     processedDictionary["L"] = "HR*P";
+//     processedDictionary["M"] = "PH*P";
+//     processedDictionary["N"] = "TPH*P";
+//     processedDictionary["O"] = "O*P";
+//     processedDictionary["P"] = "P*P";
+//     processedDictionary["Q"] = "KW*P";
+//     processedDictionary["R"] = "R*P";
+//     processedDictionary["S"] = "S*P";
+//     processedDictionary["T"] = "T*P";
+//     processedDictionary["U"] = "*UP";
+//     processedDictionary["V"] = "SR*P";
+//     processedDictionary["W"] = "W*P";
+//     processedDictionary["X"] = "KP*P";
+//     processedDictionary["Y"] = "KWR*P";
+//     processedDictionary["Z"] = "STKPW*P";
+//     // TODO: don't hard code these; it probably breaks steno layouts other than Ward Stone Ireland
+//     processedDictionary["?"] = "H-F";
+//   }
+//   return processedDictionary;
+// }
 
 // function isFirstVisit() {
 //   // metWords should at least contain `{'.':0}` so it should be length 7 or greater
@@ -1013,8 +1004,6 @@ export {
   parseCustomMaterial,
   parseLesson,
   parseWordList,
-  processDictionary,
-  swapKeyValueInDictionary,
   removeWhitespaceAndSumUniqMetWords,
   repetitionsRemaining,
   setupLessonProgress,

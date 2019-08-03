@@ -5,11 +5,9 @@ import {
   loadPersonalPreferences,
   lookUpDictionaryInIndex,
   mapQWERTYKeysToStenoStroke,
-  processDictionary,
   strokeAccuracy,
   splitBriefsIntoStrokes,
   trimAndSumUniqMetWords,
-  swapKeyValueInDictionary,
   writePersonalPreferences,
   mapBriefToAmericanStenoKeys,
   mapBriefToItalianMichelaStenoKeys,
@@ -1662,30 +1660,6 @@ describe('mapQWERTYKeysToStenoStroke', () => {
       let stenoBrief = '#-Z';
       expect(mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout).toString()).toEqual(stenoBrief);
     });
-  });
-});
-
-describe('processDictionary', () => {
-  describe('without dictionary commands', () => {
-    it('should return as it was', () => {
-      let dictionary = { "design": "STKAOEUPB" };
-      // expect(processDictionary(dictionary)).toEqual({ "design": "STKAOEUPB" });
-      expect(processDictionary(dictionary)).toEqual({ "design": "STKAOEUPB", "0": "#O", "1": "#S", "2": "#T-", "3": "#P-", "4": "#H", "5": "#A", "6": "#F", "7": "#-P", "8": "#L", "9": "#-T", });
-    });
-  });
-  describe('with dictionary commands', () => {
-    it('should return with command characters stripped', () => {
-      let dictionary = { "{^ ^}": "S-P" };
-      // expect(processDictionary(dictionary)).toEqual({ " ": "S-P" });
-      expect(processDictionary(dictionary)).toEqual({ " ": "S-P", "0": "#O", "1": "#S", "2": "#T-", "3": "#P-", "4": "#H", "5": "#A", "6": "#F", "7": "#-P", "8": "#L", "9": "#-T",  });
-    });
-  });
-});
-
-describe('swapKeyValueInDictionary', () => {
-  it('should log error', () => {
-    let dictionary = { "hi": "HEU", "HAEU": "hey" };
-    expect(swapKeyValueInDictionary(dictionary)).toEqual({ "HEU": "hi", "hey": "HAEU" });
   });
 });
 
