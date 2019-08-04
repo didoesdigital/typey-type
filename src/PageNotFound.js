@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
 import * as Sentry from '@sentry/browser';
 import { Link } from 'react-router-dom';
-import { IconExternal } from './Icon';
+import { IconTypeyType, IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 
 class PageNotFound extends Component {
@@ -30,7 +30,12 @@ class PageNotFound extends Component {
           <div className="mx-auto mw-1024 p3">
             <nav>
               <div className="site-heading-banner">
-                <Link to="/" className="heading-link dib"><h1>Typey&nbsp;Type</h1></Link>
+                <Link to="/" className="heading-link dib" aria-label="Typey Type" id="ga--header--logo">
+                  <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" className="flex items-end">
+                    <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" className="h4 mr1 svg-icon-wrapper svg-baseline" />
+                    <span className="h5">Typey&nbsp;Type</span>
+                  </h1>
+                </Link>
               </div>
             </nav>
           </div>
@@ -40,12 +45,15 @@ class PageNotFound extends Component {
           <p>Try one of these instead:</p>
           <ul>
             <li><Link to="/">Home</Link></li>
+            <li><Link to="/progress">Your progress</Link></li>
+            <li><Link to="/writer">Writer</Link></li>
+            <li><Link to="/lookup">Lookup</Link></li>
+            <li><Link to="/dictionaries">Dictionaries</Link></li>
             <li><Link to="/lessons">Lessons</Link></li>
             <li><Link to="/lessons/drills/top-100-words/">Top 100 Words</Link></li>
-            <li><Link to="/dictionaries">Dictionaries</Link></li>
             <li><Link to="/support">Help and about</Link></li>
             <li><Link to="/contribute">Contribute to Typey&nbsp;Type</Link></li>
-            <li><Link to="/progress">Your progress</Link></li>
+            <li><Link to="/break">Take a 5-minute break</Link></li>
           </ul>
           <p>
             <GoogleAnalytics.OutboundLink
