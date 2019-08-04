@@ -219,6 +219,22 @@ class DictionaryImport extends Component {
     const filesInput = document.querySelector("#dictionariesFileInput");
     const files = filesInput.files;
 
+    let labelString = 'No files for dictionaries';
+
+    if (files && files.length > 0) {
+      let fileNames = [];
+      for (let i = 0; i < files.length; i++) {
+        fileNames.push(files[i].name);
+      }
+      labelString = fileNames.join(", ");
+    }
+
+    GoogleAnalytics.event({
+      category: 'Dictionary import',
+      action: 'Submit dictionaries',
+      label: labelString
+    });
+
     this.validateDictionaries(files);
   }
 
@@ -226,6 +242,22 @@ class DictionaryImport extends Component {
     event.preventDefault();
     const filesInput = document.querySelector("#dictionaryConfigFileInput");
     const files = filesInput.files;
+
+    let labelString = 'No files for config';
+
+    if (files && files.length > 0) {
+      let fileNames = [];
+      for (let i = 0; i < files.length; i++) {
+        fileNames.push(files[i].name);
+      }
+      labelString = fileNames.join(", ");
+    }
+
+    GoogleAnalytics.event({
+      category: 'Dictionary config import',
+      action: 'Submit config',
+      label: labelString
+    });
 
     this.validateConfig(files);
   }
@@ -236,6 +268,14 @@ class DictionaryImport extends Component {
     let validDictionariesListedInConfig = this.state.validDictionariesListedInConfig;
     let validDictionaries = this.state.validDictionaries;
     let namesOfValidImportedDictionaries = this.state.namesOfValidImportedDictionaries;
+
+    let labelString = namesOfValidImportedDictionaries || 'No files for config';
+
+    GoogleAnalytics.event({
+      category: 'Apply dictionary changes',
+      action: 'Click apply button',
+      label: labelString
+    });
 
     getTypeyTypeDict()
       .then(dictAndMisstrokes => {
