@@ -858,7 +858,7 @@ function loadPersonalPreferences() {
   let globalUserSettings = {
     flashcardsCourseLevel: "noviceCourse",
     writerInput: "qwerty",
-    showMisstrokesInLookup: true
+    showMisstrokesInLookup: false
   };
   let flashcardsMetWords = {
     "the": {

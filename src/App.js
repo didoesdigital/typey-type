@@ -324,9 +324,9 @@ class App extends Component {
     getTypeyTypeDict()
       .then(dictAndMisstrokes => {
         // let t0 = performance.now();
-        if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
-          dictAndMisstrokes[1] = {};
-        }
+        // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
+        //   dictAndMisstrokes[1] = {};
+        // }
         let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary([], [], [], dictAndMisstrokes);
         // let t1 = performance.now();
         // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
