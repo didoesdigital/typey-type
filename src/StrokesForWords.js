@@ -161,7 +161,7 @@ class StrokesForWords extends Component {
       return(
         <li className="unstyled-list-item mb1 flex flex-wrap items-baseline" key={ i }>
           <span className={"" + layoutTypeStyle}>
-            <pre className="overflow-auto di mw-408 mr1 text-small">
+            <pre className="overflow-auto di mw-408 mr1">
               <span className="steno-stroke steno-stroke--subtle px05 inline-flex flex-wrap" aria-label={[...strokeAndDict[0]].join(" ").replace("-","dash")}>
                 {strokeAndDict[0].split('').map((item, i) =>
                   <React.Fragment key={i}>
@@ -171,7 +171,7 @@ class StrokesForWords extends Component {
               </span>
             </pre>
           </span>
-          <span className={ strokeAndDict[1] === "typey-type.json" ? "text-small" : "text-small de-emphasized"}>{strokeAndDict[1]}</span>
+          <span className={ strokeAndDict[1] === "typey-type.json" ? "" : "de-emphasized"}>{strokeAndDict[1]}</span>
         </li>
       )
     });
@@ -179,12 +179,12 @@ class StrokesForWords extends Component {
     return (
       this.props.globalLookupDictionaryLoaded ?
         <React.Fragment>
-          <label htmlFor="words-for-strokes">Enter words to see strokes</label>
+          <label htmlFor="words-for-strokes" className="input-textarea-label input-textarea-label--large">Enter words to see strokes</label>
           <textarea
             autoCapitalize="off"
             autoComplete="off"
             autoCorrect="off"
-            className="input-textarea mb3 w-100"
+            className="input-textarea input-textarea--large mb3 w-100"
             id="words-for-strokes"
             onChange={this.updateWordsForStrokes.bind(this)}
             placeholder="e.g. surprise"
@@ -199,8 +199,8 @@ class StrokesForWords extends Component {
           </ul>
           {this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup
             ?
-            <p className="text-small"><span className="bg-danger">(Plover misstrokes included.)</span></p> :
-            <p className="text-small"><span className="de-emphasized">(3000 Plover misstrokes hidden.)</span></p>
+            <p><span className="bg-danger">(Plover misstrokes included.)</span></p> :
+            <p><span className="de-emphasized">(3000 Plover misstrokes hidden.)</span></p>
           }
         </React.Fragment>
       :

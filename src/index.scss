@@ -874,10 +874,19 @@ $textarea-padding-x: 8px;
   overflow: hidden;
 }
 
+.input-textarea-label.input-textarea-label--large {
+  font-size: $h4-size;
+}
+
 .input-textarea {
   @extend %input-textarea-styles;
   background-color: transparent;
+
+  &.input-textarea--large {
+    font-size: $h4-size;
+  }
 }
+
 
 .input-file {
   @extend %input-textarea-styles;

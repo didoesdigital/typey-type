@@ -919,8 +919,13 @@ input:focus::placeholder {
   padding: 4px 8px;
   overflow: hidden; }
 
+.input-textarea-label.input-textarea-label--large {
+  font-size: 20px; }
+
 .input-textarea {
   background-color: transparent; }
+  .input-textarea.input-textarea--large {
+    font-size: 20px; }
 
 .input-file {
   background-color: transparent;
