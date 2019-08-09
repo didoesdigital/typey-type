@@ -332,25 +332,22 @@ class App extends Component {
   fetchAndSetupGlobalDict() {
     if (!globalDictionaryLoaded) {
       globalDictionaryLoaded = true;
-      getTypeyTypeDict()
-        .then(dictAndMisstrokes => {
-          getLatestPloverDict()
-            .then(latestPloverDict => {
-              // let t0 = performance.now();
-              // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
-              //   dictAndMisstrokes[1] = {};
-              // }
-              let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictAndMisstrokes);
-              // let t1 = performance.now();
-              // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
+      Promise.all([getTypeyTypeDict(), getLatestPloverDict()]).then(data => {
+        let [dictAndMisstrokes, latestPloverDict] = data;
+        // let t0 = performance.now();
+        // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
+        //   dictAndMisstrokes[1] = {};
+        // }
+        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictAndMisstrokes);
+        // let t1 = performance.now();
+        // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
 
-              this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
-            })
-        })
-        .catch(error => {
-          console.error(error);
-          // this.showDictionaryErrorNotification();
-        });
+        this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
+      })
+      .catch(error => {
+        console.error(error);
+        // this.showDictionaryErrorNotification();
+      });
     }
   };
 
