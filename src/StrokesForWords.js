@@ -41,21 +41,7 @@ class StrokesForWords extends Component {
 
   componentDidMount() {
     if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2) {
-      getTypeyTypeDict()
-        .then(dictAndMisstrokes => {
-          getLatestPloverDict()
-            .then(latestPloverDict => {
-              // if (this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup) {
-              //   dictAndMisstrokes[1] = {};
-              // }
-              let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictAndMisstrokes);
-              this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
-            });
-        })
-        .catch(error => {
-          console.error(error);
-          // this.showDictionaryErrorNotification();
-        });
+      this.props.fetchAndSetupGlobalDict();
     }
   }
 

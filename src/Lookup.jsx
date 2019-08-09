@@ -29,6 +29,7 @@ class Lookup extends Component {
               </div>
               <div className="mw-584 flex-grow mr3">
                 <StrokesForWords
+                  fetchAndSetupGlobalDict={this.props.fetchAndSetupGlobalDict}
                   globalLookupDictionary={this.props.globalLookupDictionary}
                   globalUserSettings={this.props.globalUserSettings}
                   updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}

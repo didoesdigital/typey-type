@@ -21,7 +21,10 @@ import {
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './typey-type';
-import { getLesson } from './utils/getData';
+import {
+  getLatestPloverDict,
+  getLesson
+} from './utils/getData';
 import { fetchDictionaryIndex } from './utils/getData';
 import {
   fetchResource,
@@ -196,6 +199,8 @@ const fallbackLesson = {
   path: ''
 };
 
+let globalDictionaryLoaded = false;
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -321,24 +326,33 @@ class App extends Component {
       });
     });
 
-    getTypeyTypeDict()
-      .then(dictAndMisstrokes => {
-        // let t0 = performance.now();
-        // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
-        //   dictAndMisstrokes[1] = {};
-        // }
-        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary([], [], [], dictAndMisstrokes);
-        // let t1 = performance.now();
-        // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
-
-        this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
-      })
-      .catch(error => {
-        console.error(error);
-        // this.showDictionaryErrorNotification();
-      });
-    this.setAnnouncementMessageString('Applied!');
+    this.fetchAndSetupGlobalDict();
   }
+
+  fetchAndSetupGlobalDict() {
+    if (!globalDictionaryLoaded) {
+      globalDictionaryLoaded = true;
+      getTypeyTypeDict()
+        .then(dictAndMisstrokes => {
+          getLatestPloverDict()
+            .then(latestPloverDict => {
+              // let t0 = performance.now();
+              // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
+              //   dictAndMisstrokes[1] = {};
+              // }
+              let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictAndMisstrokes);
+              // let t1 = performance.now();
+              // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
+
+              this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
+            })
+        })
+        .catch(error => {
+          console.error(error);
+          // this.showDictionaryErrorNotification();
+        });
+    }
+  };
 
   handleStopLesson(event) {
     event.preventDefault();
@@ -1933,6 +1947,7 @@ class App extends Component {
                       <AsyncLookup
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                        fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                         globalLookupDictionary={this.state.globalLookupDictionary}
                         globalUserSettings={this.state.globalUserSettings}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
@@ -1953,6 +1968,7 @@ class App extends Component {
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         setDictionaryIndex={this.setDictionaryIndex.bind(this)}
+                        fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                         globalLookupDictionary={this.state.globalLookupDictionary}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                         userSettings={this.state.userSettings}
