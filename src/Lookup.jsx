@@ -31,6 +31,7 @@ class Lookup extends Component {
                 <StrokesForWords
                   fetchAndSetupGlobalDict={this.props.fetchAndSetupGlobalDict}
                   globalLookupDictionary={this.props.globalLookupDictionary}
+                  globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
                   globalUserSettings={this.props.globalUserSettings}
                   updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
                   userSettings={this.props.userSettings}

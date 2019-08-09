@@ -199,7 +199,7 @@ const fallbackLesson = {
   path: ''
 };
 
-let globalDictionaryLoaded = false;
+let globalDictionaryLoading = false;
 
 class App extends Component {
   constructor(props) {
@@ -235,6 +235,7 @@ class App extends Component {
         },
       },
       globalLookupDictionary: new Map(),
+      globalLookupDictionaryLoaded: false,
       lessonNotFound: false,
       lessonsProgress: {
       },
@@ -330,8 +331,8 @@ class App extends Component {
   }
 
   fetchAndSetupGlobalDict() {
-    if (!globalDictionaryLoaded) {
-      globalDictionaryLoaded = true;
+    if (!globalDictionaryLoading) {
+      globalDictionaryLoading = true;
       Promise.all([getTypeyTypeDict(), getLatestPloverDict()]).then(data => {
         let [dictAndMisstrokes, latestPloverDict] = data;
         // let t0 = performance.now();
@@ -343,6 +344,7 @@ class App extends Component {
         // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
 
         this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
+        this.setState({ globalLookupDictionaryLoaded: true });
       })
       .catch(error => {
         console.error(error);
@@ -1946,6 +1948,7 @@ class App extends Component {
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                         globalLookupDictionary={this.state.globalLookupDictionary}
+                        globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                         globalUserSettings={this.state.globalUserSettings}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                         userSettings={this.state.userSettings}
@@ -1967,6 +1970,7 @@ class App extends Component {
                         setDictionaryIndex={this.setDictionaryIndex.bind(this)}
                         fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                         globalLookupDictionary={this.state.globalLookupDictionary}
+                        globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                         userSettings={this.state.userSettings}
                         dictionaryIndex={this.state.dictionaryIndex}

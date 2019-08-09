@@ -35,7 +35,7 @@ class StrokesForWords extends Component {
   }
 
   componentDidMount() {
-    if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2) {
+    if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
       this.props.fetchAndSetupGlobalDict();
     }
   }
@@ -177,31 +177,36 @@ class StrokesForWords extends Component {
     });
 
     return (
-      <React.Fragment>
-        <label htmlFor="words-for-strokes">Enter words to see strokes</label>
-        <textarea
-          autoCapitalize="off"
-          autoComplete="off"
-          autoCorrect="off"
-          className="input-textarea mb3 w-100"
-          id="words-for-strokes"
-          onChange={this.updateWordsForStrokes.bind(this)}
-          placeholder="e.g. surprise"
-          rows="1"
-          spellCheck="false"
-          value={this.state.phrase}
-          wrap="off"
-          >
-        </textarea>
-        <ul className="unstyled-list wrap">
-          {strokeListItems}
-        </ul>
-        {this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup
-          ?
-          <p className="text-small"><span className="bg-danger">(Plover misstrokes included.)</span></p> :
-          <p className="text-small"><span className="de-emphasized">(3000 Plover misstrokes hidden.)</span></p>
-        }
-      </React.Fragment>
+      this.props.globalLookupDictionaryLoaded ?
+        <React.Fragment>
+          <label htmlFor="words-for-strokes">Enter words to see strokes</label>
+          <textarea
+            autoCapitalize="off"
+            autoComplete="off"
+            autoCorrect="off"
+            className="input-textarea mb3 w-100"
+            id="words-for-strokes"
+            onChange={this.updateWordsForStrokes.bind(this)}
+            placeholder="e.g. surprise"
+            rows="1"
+            spellCheck="false"
+            value={this.state.phrase}
+            wrap="off"
+            >
+          </textarea>
+          <ul className="unstyled-list wrap">
+            {strokeListItems}
+          </ul>
+          {this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup
+            ?
+            <p className="text-small"><span className="bg-danger">(Plover misstrokes included.)</span></p> :
+            <p className="text-small"><span className="de-emphasized">(3000 Plover misstrokes hidden.)</span></p>
+          }
+        </React.Fragment>
+      :
+        <React.Fragment>
+          Loading…
+        </React.Fragment>
     );
   }
 }

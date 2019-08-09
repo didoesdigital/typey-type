@@ -215,6 +215,7 @@ class DictionariesIndex extends Component {
             <StrokesForWords
               fetchAndSetupGlobalDict={this.props.fetchAndSetupGlobalDict}
               globalLookupDictionary={this.props.globalLookupDictionary}
+              globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
               updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
               userSettings={this.props.userSettings}
             />

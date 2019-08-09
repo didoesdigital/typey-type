@@ -16,7 +16,7 @@ const AsyncDictionaryImport = Loadable({
   delay: 300
 });
 
-const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, globalLookupDictionary, updateGlobalLookupDictionary, ...dictionaryProps}) => {
+const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, globalLookupDictionaryLoaded, globalLookupDictionary, updateGlobalLookupDictionary, ...dictionaryProps}) => {
   return(
     <div>
       <Switch>
@@ -91,6 +91,7 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, globalLookupD
             dictionaryIndex={dictionaryIndex}
             setDictionaryIndex={setDictionaryIndex}
             globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             updateGlobalLookupDictionary={updateGlobalLookupDictionary}
             match={match}
             {...dictionaryProps}
