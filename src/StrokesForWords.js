@@ -1,11 +1,6 @@
 import * as React from 'react'
 import { Component } from 'react';
 import {
-  getLatestPloverDict,
-  getTypeyTypeDict
-} from './utils/getData';
-import {
-  createAGlobalLookupDictionary,
   rankOutlines
 } from './utils/transformingDictionaries';
 
