@@ -11,11 +11,6 @@ import {
   parseWordList,
 } from './typey-type';
 import {
-  getLatestPloverDict,
-  getTypeyTypeDict
-} from './utils/getData';
-import {
-  createAGlobalLookupDictionary,
   generateListOfWordsAndStrokes
 } from './utils/transformingDictionaries';
 
@@ -34,19 +29,8 @@ class CustomLessonSetup extends Component {
       this.mainHeading.focus();
     }
 
-    if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2) {
-      getTypeyTypeDict()
-        .then(dictAndMisstrokes => {
-          getLatestPloverDict()
-            .then(latestPloverDict => {
-              let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictAndMisstrokes);
-              this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
-            });
-        })
-        .catch(error => {
-          console.error(error);
-          // this.showDictionaryErrorNotification();
-        });
+    if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
+      this.props.fetchAndSetupGlobalDict();
     }
 
     let metWords = loadPersonalPreferences()[0];

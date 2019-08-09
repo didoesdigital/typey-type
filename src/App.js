@@ -1995,7 +1995,9 @@ class App extends Component {
                         updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
                         flashcardsMetWords={this.state.flashcardsMetWords}
                         flashcardsProgress={this.state.flashcardsProgress}
+                        fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                         globalLookupDictionary={this.state.globalLookupDictionary}
+                        globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                         lessonsProgress={this.state.lessonsProgress}
                         lessonNotFound={this.state.lessonNotFound}
