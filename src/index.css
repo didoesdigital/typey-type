@@ -1589,7 +1589,6 @@ small .svg-icon-wrapper.svg-baseline svg {
   @media (min-width: 1024px) {
     .strapline {
       left: 8px;
-      top: 208px;
       top: 240px;
       transform-origin: center;
       transform: rotate(180deg);
