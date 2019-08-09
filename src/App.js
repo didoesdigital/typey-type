@@ -326,8 +326,6 @@ class App extends Component {
         setupLessonProgress(json);
       });
     });
-
-    this.fetchAndSetupGlobalDict();
   }
 
   fetchAndSetupGlobalDict() {
