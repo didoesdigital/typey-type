@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import StrokesForWords from './StrokesForWords';
 import GoogleAnalytics from 'react-ga';
+import PseudoContentButton from './PseudoContentButton';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 
@@ -32,13 +33,20 @@ class Lookup extends Component {
                 <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Lookup</h2>
               </header>
             </div>
+            <div className="flex mxn2">
+              <PseudoContentButton className="js-clipboard-button link-button link-button-ghost table-cell mr1 copy-to-clipboard" dataClipboardTarget="#js-bookmark-url">Copy to clipboard</PseudoContentButton>
+            </div>
           </div>
         </div>
         <div className="p3 mx-auto mw-1024">
           <div className="mh-page">
             <div className="flex flex-wrap justify-between">
               <div className="mw-368 order-1">
-                <div className="panel p3 mt1">
+                <div className="mt0">
+                  <h4>Share link</h4>
+                  <p className="mb0 truncate"><a id="js-bookmark-url" href={this.state.bookmarkURL}>{this.state.bookmarkURL}</a></p>
+                </div>
+                <div className="panel p3 mt3">
                   <p>This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s suggestions.</p>
                   <p className="mb0">If you notice any odd strokes,{" "}
                     <GoogleAnalytics.OutboundLink

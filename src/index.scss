@@ -638,6 +638,12 @@ input:focus::placeholder {
   margin-left: 0;
 }
 
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .wrap {
   overflow-wrap: break-word;
   word-break: break-word;
@@ -879,6 +885,10 @@ $textarea-padding-x: 8px;
 
 .input-textarea-label.input-textarea-label--large {
   font-size: $h4-size;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-top: $h4-size * $font-scale;
+  margin-bottom: 11.5px;
 }
 
 .input-textarea {

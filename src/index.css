@@ -758,6 +758,11 @@ input:focus::placeholder {
 .unstyled-list-item {
   margin-left: 0; }
 
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
 .wrap {
   overflow-wrap: break-word;
   word-break: break-word;
@@ -926,7 +931,11 @@ input:focus::placeholder {
   overflow: hidden; }
 
 .input-textarea-label.input-textarea-label--large {
-  font-size: 20px; }
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-top: 25px;
+  margin-bottom: 11.5px; }
 
 .input-textarea {
   background-color: transparent; }
