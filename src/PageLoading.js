@@ -10,7 +10,7 @@ class PageLoading extends Component {
       return <PageLoadingFailed />;
     } else if (this.props.timedOut) {
       // When the loader has taken longer than the timeout
-      return <div>Taking a long time... <button onClick={ this.props.retry }>Retry</button></div>;
+      return <div>Taking a long time… <button onClick={ this.props.retry }>Retry</button></div>;
     } else if (this.props.pastDelay) {
       // When the loader has taken longer than the delay
       return <PageLoadingPastDelay />;
