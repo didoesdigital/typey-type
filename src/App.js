@@ -1147,7 +1147,7 @@ class App extends Component {
     const parsedParams = queryString.parse(this.props.location.search);
 
     let newSettings = Object.assign({}, this.state.userSettings);
-    let lookupTerm = parsedParams['lookup'];
+    let lookupTerm = parsedParams['q'];
 
     for (const [param, paramVal] of Object.entries(parsedParams)) {
       if (param in this.state.userSettings) {
