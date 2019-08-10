@@ -156,6 +156,46 @@ class StrokesForWords extends Component {
       emptyState = (<div className="mb2"></div>);
     }
 
+    let lookupResults;
+
+    if (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts.length > 0) {
+      lookupResults = (
+        <ul className="unstyled-list wrap">
+          {strokeListItems}
+        </ul>
+      );
+    } else {
+      lookupResults = emptyState;
+    }
+
+    let ploverMisstrokesDetail;
+
+    if (this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup) {
+      ploverMisstrokesDetail = <p><span className="bg-danger">(Plover misstrokes included.)</span></p>
+    }
+    else {
+      ploverMisstrokesDetail = <p><span className="de-emphasized">(3000 Plover misstrokes hidden.)</span></p>
+    }
+
+    let loadingOrError;
+    let hasError = false; // TODO: move this into state and actually set if errors are hit
+
+    if (!this.props.globalLookupDictionaryLoaded) {
+      loadingOrError = (
+        <React.Fragment>
+          Loading…
+        </React.Fragment>
+      );
+    }
+
+    if (hasError) {
+      loadingOrError = (
+        <React.Fragment>
+          Sorry, there was an error loading strokes. Try <a href=".">refresh the page</a>.
+        </React.Fragment>
+      );
+    }
+
     return (
       this.props.globalLookupDictionaryLoaded ?
         <React.Fragment>
@@ -174,23 +214,11 @@ class StrokesForWords extends Component {
             wrap="off"
             >
           </textarea>
-          {this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts.length > 0 ?
-            <ul className="unstyled-list wrap">
-              {strokeListItems}
-            </ul>
-          :
-            emptyState
-          }
-          {this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup
-            ?
-            <p><span className="bg-danger">(Plover misstrokes included.)</span></p> :
-            <p><span className="de-emphasized">(3000 Plover misstrokes hidden.)</span></p>
-          }
+          {lookupResults}
+          {ploverMisstrokesDetail}
         </React.Fragment>
       :
-        <React.Fragment>
-          Loading…
-        </React.Fragment>
+        loadingOrError
     );
   }
 }
