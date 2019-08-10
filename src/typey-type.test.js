@@ -1487,6 +1487,7 @@ describe('loadPersonalPreferences', () => {
       let flashcardsProgress = {};
       let globalUserSettings = {
         flashcardsCourseLevel: "noviceCourse",
+        showMisstrokesInLookup: false,
         writerInput: "qwerty"
       };
       let lessonsProgress = {};
