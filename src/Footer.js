@@ -26,7 +26,7 @@ class Footer extends Component {
             target="_blank"
             rel="noopener noreferrer"
           >
-            sign up to steno news
+            sign up to steno&nbsp;news
             <Tooltip
               title="(external link opens in new tab)"
               animation="shift"
