@@ -301,7 +301,6 @@ class DictionaryImport extends Component {
         let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictAndMisstrokes);
         this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
         this.props.setGlobalDictionaryLoaded(true);
-        console.log("we made it!");
         this.setState({
           importedDictionariesLoaded: true,
           importedDictionariesLoading: false
