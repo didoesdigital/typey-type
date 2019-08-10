@@ -13,7 +13,7 @@ class PageLoadingPastDelay extends Component {
             </div>
           </div>
         </div>
-        <div className="p3 mx-auto mw-1024">Loading…</div>;
+        <div className="p3 mx-auto mw-1024">Loading…</div>
       </main>
     );
   }
