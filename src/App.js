@@ -351,6 +351,13 @@ class App extends Component {
     }
   };
 
+  setGlobalDictionaryLoaded(done) {
+    if (!globalDictionaryLoading) {
+      globalDictionaryLoading = done;
+    }
+    this.setState({ globalLookupDictionaryLoaded: done });
+  }
+
   handleStopLesson(event) {
     event.preventDefault();
     this.stopLesson();
@@ -1966,6 +1973,7 @@ class App extends Component {
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         setDictionaryIndex={this.setDictionaryIndex.bind(this)}
+                        setGlobalDictionaryLoaded={this.setGlobalDictionaryLoaded.bind(this)}
                         fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                         globalLookupDictionary={this.state.globalLookupDictionary}
                         globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}

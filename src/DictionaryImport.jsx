@@ -14,6 +14,8 @@ class DictionaryImport extends Component {
     super(props);
     this.state = {
       selectedFiles: null,
+      importedDictionariesLoaded: false,
+      importedDictionariesLoading: false,
       showDictionaryErrorNotification: false,
       listOfValidDictionariesImportedAndInConfig: ["typey-type.json"],
       combinedLookupDictionary: {},
@@ -216,6 +218,12 @@ class DictionaryImport extends Component {
 
   handleOnSubmit(event) {
     event.preventDefault();
+
+    this.setState({
+      importedDictionariesLoaded: false,
+      importedDictionariesLoading: false
+    });
+
     const filesInput = document.querySelector("#dictionariesFileInput");
     const files = filesInput.files;
 
@@ -240,6 +248,12 @@ class DictionaryImport extends Component {
 
   handleOnSubmitConfig(event) {
     event.preventDefault();
+
+    this.setState({
+      importedDictionariesLoaded: false,
+      importedDictionariesLoading: false
+    });
+
     const filesInput = document.querySelector("#dictionaryConfigFileInput");
     const files = filesInput.files;
 
@@ -265,6 +279,11 @@ class DictionaryImport extends Component {
   handleOnSubmitApplyChanges(event) {
     event.preventDefault();
 
+    this.setState({
+      importedDictionariesLoaded: false,
+      importedDictionariesLoading: true
+    });
+
     let validDictionariesListedInConfig = this.state.validDictionariesListedInConfig;
     let validDictionaries = this.state.validDictionaries;
     let namesOfValidImportedDictionaries = this.state.namesOfValidImportedDictionaries;
@@ -281,10 +300,20 @@ class DictionaryImport extends Component {
       .then(dictAndMisstrokes => {
         let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictAndMisstrokes);
         this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
+        this.props.setGlobalDictionaryLoaded(true);
+        console.log("we made it!");
+        this.setState({
+          importedDictionariesLoaded: true,
+          importedDictionariesLoading: false
+        });
       })
       .catch(error => {
         console.error(error);
         this.showDictionaryErrorNotification();
+        this.setState({
+          importedDictionariesLoaded: false,
+          importedDictionariesLoading: false
+        });
       });
     this.props.setAnnouncementMessageString('Applied!');
   }
@@ -401,7 +430,11 @@ class DictionaryImport extends Component {
                   {listOfValidDictionariesImportedAndInConfig}
                 </ul>
                 <form className="mb3" onSubmit={this.handleOnSubmitApplyChanges.bind(this)}>
-                  <PseudoContentButton type="submit" className="pseudo-text--applied button mt1">Apply</PseudoContentButton>
+                  <p>
+                    <PseudoContentButton type="submit" className="pseudo-text--applied button mt1">Apply</PseudoContentButton>
+                    {this.state.importedDictionariesLoading ? <span className="dib ml2">Applying</span> : null}
+                    {this.state.importedDictionariesLoaded ? <span className="dib ml2">Applied!</span> : null}
+                  </p>
                 </form>
               </div>
             </div>
