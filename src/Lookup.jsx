@@ -23,11 +23,11 @@ class Lookup extends Component {
         <div className="p3 mx-auto mw-1024">
           <div className="mh-page">
             <div className="flex flex-wrap justify-between">
-              <div className="mw-384 order-1">
+              <div className="mw-368 order-1">
                 <p className="panel p3 mt1">This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s suggested strokes.</p>
                 <div className="panel panel--warning p3 mt3"><p className="mb0">This feature is evolving. Improvements yet to&nbsp;come.</p></div>
               </div>
-              <div className="mw-584 flex-grow mr3">
+              <div className="mw-584 w-100 flex-grow mr3 mh-144">
                 <StrokesForWords
                   fetchAndSetupGlobalDict={this.props.fetchAndSetupGlobalDict}
                   globalLookupDictionary={this.props.globalLookupDictionary}

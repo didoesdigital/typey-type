@@ -160,17 +160,15 @@ class StrokesForWords extends Component {
     let strokeListItems = this.state.listOfStrokesAndDicts.map( (strokeAndDict, i) => {
       return(
         <li className="unstyled-list-item mb1 flex flex-wrap items-baseline" key={ i }>
-          <span className={"" + layoutTypeStyle}>
-            <pre className="overflow-auto di mw-408 mr1">
-              <span className="steno-stroke steno-stroke--subtle px05 inline-flex flex-wrap" aria-label={[...strokeAndDict[0]].join(" ").replace("-","dash")}>
-                {strokeAndDict[0].split('').map((item, i) =>
-                  <React.Fragment key={i}>
-                    {item}
-                  </React.Fragment>
-                )}
-              </span>
-            </pre>
-          </span>
+          <div className={"overflow-auto di mw-408 mr1" + layoutTypeStyle}>
+            <span className={strokeAndDict[1] === "typey-type.json" ? "steno-stroke px05 db" : "steno-stroke px05 db steno-stroke--subtle"} aria-label={[...strokeAndDict[0]].join(" ").replace("-","dash")}>
+              {strokeAndDict[0].split('').map((item, i) =>
+                <React.Fragment key={i}>
+                  {item}
+                </React.Fragment>
+              )}
+            </span>
+          </div>
           <span className={ strokeAndDict[1] === "typey-type.json" ? "" : "de-emphasized"}>{strokeAndDict[1]}</span>
         </li>
       )
