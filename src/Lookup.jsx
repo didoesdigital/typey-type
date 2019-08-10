@@ -62,6 +62,7 @@ class Lookup extends Component {
                   globalLookupDictionary={this.props.globalLookupDictionary}
                   globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
                   globalUserSettings={this.props.globalUserSettings}
+                  lookupTerm={this.props.lookupTerm}
                   updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
                   userSettings={this.props.userSettings}
                 />

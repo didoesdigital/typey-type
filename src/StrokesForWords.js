@@ -11,13 +11,26 @@ class StrokesForWords extends Component {
   }
 
   componentDidMount() {
-    if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
-      this.props.fetchAndSetupGlobalDict();
-    }
+    // if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
+      this.props.fetchAndSetupGlobalDict().then(() => {
+        if (this.props.lookupTerm && this.props.lookupTerm !== undefined && this.props.lookupTerm.length > 0) {
+          this.setState({phrase: this.props.lookupTerm});
+          this.updateWordsForStrokes(this.props.lookupTerm);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+        // this.showDictionaryErrorNotification();
+      });
+    // }
   }
 
-  updateWordsForStrokes(event) {
+  handleWordsOnChange(event) {
     let phrase = event.target.value;
+    this.updateWordsForStrokes(phrase);
+  }
+
+  updateWordsForStrokes(phrase) {
     let lookupText = phrase;
 
     if (phrase === "{") { lookupText = "\\{{^}"; }
@@ -233,7 +246,7 @@ class StrokesForWords extends Component {
             autoCorrect="off"
             className="input-textarea input-textarea--large mb3 w-100"
             id="words-for-strokes"
-            onChange={this.updateWordsForStrokes.bind(this)}
+            onChange={this.handleWordsOnChange.bind(this)}
             placeholder="e.g. quadruplicate"
             rows="1"
             spellCheck="false"

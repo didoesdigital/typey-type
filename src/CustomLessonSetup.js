@@ -30,7 +30,11 @@ class CustomLessonSetup extends Component {
     }
 
     if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
-      this.props.fetchAndSetupGlobalDict();
+      this.props.fetchAndSetupGlobalDict()
+        .catch(error => {
+          console.error(error);
+          // this.showDictionaryErrorNotification();
+        });
     }
 
     let metWords = loadPersonalPreferences()[0];

@@ -200,6 +200,7 @@ const fallbackLesson = {
 };
 
 let globalDictionaryLoading = false;
+let loadingPromise = null;
 
 class App extends Component {
   constructor(props) {
@@ -255,6 +256,7 @@ class App extends Component {
         showMisstrokesInLookup: false
       },
       hideOtherSettings: false,
+      lookupTerm: '',
       recommendationHistory: { currentStep: null },
       recommendedLessonInProgress: false,
       nextLessonPath: '',
@@ -329,9 +331,12 @@ class App extends Component {
   }
 
   fetchAndSetupGlobalDict() {
-    if (!globalDictionaryLoading) {
+    if (loadingPromise) {
+      return loadingPromise;
+    }
+    else {
       globalDictionaryLoading = true;
-      Promise.all([getTypeyTypeDict(), getLatestPloverDict()]).then(data => {
+      loadingPromise = Promise.all([getTypeyTypeDict(), getLatestPloverDict()]).then(data => {
         let [dictAndMisstrokes, latestPloverDict] = data;
         // let t0 = performance.now();
         // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
@@ -343,11 +348,9 @@ class App extends Component {
 
         this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
         this.setState({ globalLookupDictionaryLoaded: true });
-      })
-      .catch(error => {
-        console.error(error);
-        // this.showDictionaryErrorNotification();
       });
+
+      return loadingPromise;
     }
   };
 
@@ -1144,6 +1147,8 @@ class App extends Component {
     const parsedParams = queryString.parse(this.props.location.search);
 
     let newSettings = Object.assign({}, this.state.userSettings);
+    let lookupTerm = parsedParams['lookup'];
+
     for (const [param, paramVal] of Object.entries(parsedParams)) {
       if (param in this.state.userSettings) {
         const booleanParams = [
@@ -1220,7 +1225,10 @@ class App extends Component {
       }
     }
 
-    this.setState({userSettings: newSettings}, () => {
+    this.setState({
+      lookupTerm: lookupTerm,
+      userSettings: newSettings
+    }, () => {
       writePersonalPreferences('userSettings', this.state.userSettings);
 
       this.props.history.replace({
@@ -1955,6 +1963,7 @@ class App extends Component {
                         globalLookupDictionary={this.state.globalLookupDictionary}
                         globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                         globalUserSettings={this.state.globalUserSettings}
+                        lookupTerm={this.state.lookupTerm}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                         userSettings={this.state.userSettings}
                         {...props}
