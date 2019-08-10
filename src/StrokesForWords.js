@@ -234,7 +234,7 @@ class StrokesForWords extends Component {
             className="input-textarea input-textarea--large mb3 w-100"
             id="words-for-strokes"
             onChange={this.updateWordsForStrokes.bind(this)}
-            placeholder="e.g. surprise"
+            placeholder="e.g. quadruplicate"
             rows="1"
             spellCheck="false"
             value={this.state.phrase}
