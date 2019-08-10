@@ -174,6 +174,12 @@ class StrokesForWords extends Component {
       )
     });
 
+    let emptyState = (<div className="mb2">No results found</div>);
+
+    if (this.state.phrase === "") {
+      emptyState = (<div className="mb2"></div>);
+    }
+
     return (
       this.props.globalLookupDictionaryLoaded ?
         <React.Fragment>
@@ -192,9 +198,13 @@ class StrokesForWords extends Component {
             wrap="off"
             >
           </textarea>
-          <ul className="unstyled-list wrap">
-            {strokeListItems}
-          </ul>
+          {this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts.length > 0 ?
+            <ul className="unstyled-list wrap">
+              {strokeListItems}
+            </ul>
+          :
+            emptyState
+          }
           {this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup
             ?
             <p><span className="bg-danger">(Plover misstrokes included.)</span></p> :
