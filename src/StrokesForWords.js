@@ -31,6 +31,10 @@ class StrokesForWords extends Component {
   }
 
   updateWordsForStrokes(phrase) {
+    if (this.props.onChange) {
+      this.props.onChange(phrase);
+    }
+
     let lookupText = phrase;
 
     if (phrase === "{") { lookupText = "\\{{^}"; }

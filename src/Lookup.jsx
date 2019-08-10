@@ -5,10 +5,21 @@ import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 
 class Lookup extends Component {
+  state = {
+    bookmarkURL: process.env.PUBLIC_URL + "/lookup"
+  }
+
   componentDidMount() {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
+  }
+
+  strokesForWordsChange(phrase) {
+    let encodedPhrase = encodeURIComponent(phrase);
+    this.setState({
+      bookmarkURL: process.env.PUBLIC_URL + "/lookup?q=" + encodedPhrase
+    });
   }
 
   render() {
@@ -63,6 +74,7 @@ class Lookup extends Component {
                   globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
                   globalUserSettings={this.props.globalUserSettings}
                   lookupTerm={this.props.lookupTerm}
+                  onChange={this.strokesForWordsChange.bind(this)}
                   updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
                   userSettings={this.props.userSettings}
                 />
