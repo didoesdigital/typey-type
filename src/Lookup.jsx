@@ -28,7 +28,7 @@ class Lookup extends Component {
             <div className="flex flex-wrap justify-between">
               <div className="mw-368 order-1">
                 <div className="panel p3 mt1">
-                  <p>This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s suggested strokes.</p>
+                  <p>This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s suggestions.</p>
                   <p className="mb0">If you notice any odd strokes,{" "}
                     <GoogleAnalytics.OutboundLink
                       eventLabel="post to the feedback form"
@@ -37,7 +37,7 @@ class Lookup extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      use the feedback <span className="nowrap">form
+                      use the <span className="nowrap">feedback form
                       <Tooltip
                         title="Opens in new tab"
                         className=""

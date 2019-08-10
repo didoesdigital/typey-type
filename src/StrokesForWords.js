@@ -201,7 +201,7 @@ class StrokesForWords extends Component {
       ploverMisstrokesDetail = <p><span className="bg-danger">(Plover misstrokes included.)</span></p>
     }
     else {
-      ploverMisstrokesDetail = <p><span className="de-emphasized">(3000 Plover misstrokes hidden.)</span></p>
+      ploverMisstrokesDetail = <p><span className="de-emphasized">(3000 misstrokes hidden.)</span></p>
     }
 
     let loadingOrError;
@@ -226,7 +226,7 @@ class StrokesForWords extends Component {
     return (
       this.props.globalLookupDictionaryLoaded ?
         <React.Fragment>
-          <label htmlFor="words-for-strokes" className="input-textarea-label input-textarea-label--large">Enter words to see strokes</label>
+          <label htmlFor="words-for-strokes" className="input-textarea-label input-textarea-label--large">Enter words to look up</label>
           <textarea
             autoCapitalize="off"
             autoComplete="off"
