@@ -44,7 +44,7 @@ class Lookup extends Component {
               <div className="mw-368 order-1">
                 <div className="mt0">
                   <h4>Share link</h4>
-                  <p className="mb0 truncate"><a id="js-bookmark-url" href={this.state.bookmarkURL}>{this.state.bookmarkURL}</a></p>
+                  <p className="mb0 truncate"><a className="py05 dib" id="js-bookmark-url" href={this.state.bookmarkURL}>https://didoesdigital.com{this.state.bookmarkURL}</a></p>
                 </div>
                 <div className="panel p3 mt3">
                   <p>This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s suggestions.</p>
