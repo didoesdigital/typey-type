@@ -3,6 +3,21 @@ import { Component } from 'react';
 import {
   rankOutlines
 } from './utils/transformingDictionaries';
+import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
+import DanishStenoDiagram from './StenoLayout/DanishStenoDiagram';
+import ItalianMichelaStenoDiagram from './StenoLayout/ItalianMichelaStenoDiagram';
+import JapaneseStenoDiagram from './StenoLayout/JapaneseStenoDiagram';
+import KoreanModernCStenoDiagram from './StenoLayout/KoreanModernCStenoDiagram';
+import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
+import {
+  mapBriefToAmericanStenoKeys,
+  mapBriefToDanishStenoKeys,
+  mapBriefToItalianMichelaStenoKeys,
+  mapBriefToJapaneseStenoKeys,
+  mapBriefToKoreanModernCStenoKeys,
+  mapBriefToPalantypeKeys,
+  splitBriefsIntoStrokes
+} from './typey-type';
 
 class StrokesForWords extends Component {
   state = {
@@ -177,17 +192,30 @@ class StrokesForWords extends Component {
     if (this.props.userSettings.stenoLayout === 'stenoLayoutKoreanModernCSteno') { layoutTypeStyle = ' heavy-type-face--korean'; }
     if (this.props.userSettings.stenoLayout === 'stenoLayoutJapaneseSteno') { layoutTypeStyle = ' type-face--japanese'; }
 
-    let strokeListItems = this.state.listOfStrokesAndDicts.map( (strokeAndDict, i) => {
-      return(
-        <li className="unstyled-list-item mb1 flex flex-wrap items-baseline" key={ i }>
+    let strokeListItems = this.state.listOfStrokesAndDicts.map( (strokeAndDict, indexInListOfStrokesAndDicts) => {
+      let classes = strokeAndDict[1] === "typey-type.json" ? "steno-stroke px05 db fw4" : "steno-stroke px05 db steno-stroke--subtle";
+      let briefWithSpacesBetweenLetters = [...strokeAndDict[0]].join(" ").replace("-","dash");
+
+      let stenoBriefKeys = (
+        <span className={classes} aria-label={briefWithSpacesBetweenLetters}>
+          {strokeAndDict[0].split('').map((stenoKey, stenoKeyIndex) =>
+            <React.Fragment key={stenoKeyIndex}>
+              {stenoKey}
+            </React.Fragment>
+          )}
+        </span>
+      );
+
+      let stenoBriefKeysWithOrWithoutStrongTag = stenoBriefKeys;
+
+      if (strokeAndDict[1] === "typey-type.json") {
+        stenoBriefKeysWithOrWithoutStrongTag = <strong>{stenoBriefKeys}</strong>;
+      }
+
+      return (
+        <li className="unstyled-list-item mb1 flex flex-wrap items-baseline" key={ indexInListOfStrokesAndDicts }>
           <div className={"overflow-auto di mw-408 mr1" + layoutTypeStyle}>
-            <span className={strokeAndDict[1] === "typey-type.json" ? "steno-stroke px05 db" : "steno-stroke px05 db steno-stroke--subtle"} aria-label={[...strokeAndDict[0]].join(" ").replace("-","dash")}>
-              {strokeAndDict[0].split('').map((item, i) =>
-                <React.Fragment key={i}>
-                  {item}
-                </React.Fragment>
-              )}
-            </span>
+            {stenoBriefKeysWithOrWithoutStrongTag}
           </div>
           <span className={ strokeAndDict[1] === "typey-type.json" ? "" : "de-emphasized"}>{strokeAndDict[1]}</span>
         </li>
@@ -240,6 +268,69 @@ class StrokesForWords extends Component {
       );
     }
 
+    let mapBriefsFunction = mapBriefToAmericanStenoKeys;
+    let StenoLayoutDiagram = AmericanStenoDiagram;
+    switch (this.props.userSettings.stenoLayout) {
+      case 'stenoLayoutAmericanSteno':
+        mapBriefsFunction = mapBriefToAmericanStenoKeys;
+        StenoLayoutDiagram = AmericanStenoDiagram;
+        break;
+      case 'stenoLayoutDanishSteno':
+        mapBriefsFunction = mapBriefToDanishStenoKeys;
+        StenoLayoutDiagram = DanishStenoDiagram;
+        break;
+      case 'stenoLayoutItalianMichelaSteno':
+        mapBriefsFunction = mapBriefToItalianMichelaStenoKeys;
+        StenoLayoutDiagram = ItalianMichelaStenoDiagram;
+        break;
+      case 'stenoLayoutJapaneseSteno':
+        mapBriefsFunction = mapBriefToJapaneseStenoKeys;
+        StenoLayoutDiagram = JapaneseStenoDiagram;
+        break;
+      case 'stenoLayoutKoreanModernCSteno':
+        mapBriefsFunction = mapBriefToKoreanModernCStenoKeys;
+        StenoLayoutDiagram = KoreanModernCStenoDiagram;
+        break;
+      case 'stenoLayoutPalantype':
+        mapBriefsFunction = mapBriefToPalantypeKeys;
+        StenoLayoutDiagram = PalantypeDiagram;
+        break;
+      default:
+        mapBriefsFunction = mapBriefToAmericanStenoKeys;
+        StenoLayoutDiagram = AmericanStenoDiagram;
+        break;
+    }
+
+    let brief = ''
+    if (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts[0] && this.state.listOfStrokesAndDicts[0][0]) {
+      brief = this.state.listOfStrokesAndDicts[0][0];
+      let suggestedTypeyTypeBrief = this.state.listOfStrokesAndDicts.find((item) => {
+        return item[1] === "typey-type.json";
+      });
+
+      if (suggestedTypeyTypeBrief) {
+        brief = suggestedTypeyTypeBrief[0];
+      }
+    }
+
+    let strokes = splitBriefsIntoStrokes(brief);
+    let diagrams = (
+      <div className="flex overflow-auto mr05">
+        {this.props.userSettings.showStrokesAsDiagrams && this.state.listOfStrokesAndDicts.length > 0 && strokes.map((strokeToDraw, index) =>
+          <React.Fragment key={index}>
+            {(Object.values(mapBriefsFunction(strokeToDraw)).some(item => item)) && <div className="mt1 mr2 mb2"><StenoLayoutDiagram id={"diagramID-"+ index + '-' + strokeToDraw} {...mapBriefsFunction(strokeToDraw)} brief="steno-diagram-group" diagramWidth="192" /></div> }
+          </React.Fragment>
+        )}
+        {this.props.userSettings.showStrokesAsDiagrams && this.state.listOfStrokesAndDicts.length === 0 ?
+          <React.Fragment>
+            <div className="mt1 mr2 mb2"><StenoLayoutDiagram id={"diagramID-"+ 0} {...mapBriefsFunction('')} brief="steno-diagram-group" diagramWidth="192" /></div>
+          </React.Fragment>
+            :
+            null
+        }
+      </div>
+    );
+
     return (
       this.props.globalLookupDictionaryLoaded ?
         <React.Fragment>
@@ -258,6 +349,9 @@ class StrokesForWords extends Component {
             wrap="off"
             >
           </textarea>
+          <div className="mb1">
+            {diagrams}
+          </div>
           {lookupResults}
           {ploverMisstrokesDetail}
         </React.Fragment>

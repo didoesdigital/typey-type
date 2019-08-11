@@ -408,6 +408,9 @@ input:focus::placeholder {
 .b--brand-primary {
   border-color: #402351; }
 
+.fw4 {
+  font-weight: 400; }
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto; }
