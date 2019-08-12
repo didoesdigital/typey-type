@@ -99,7 +99,7 @@ class Support extends Component {
             </p>
 
             <h4 id="steno-terms">Steno terms</h4>
-            <dl className="inline-flex">
+            <dl className="inline-flex flex-wrap">
               <dt>Briefs</dt>
               <dd>Loosely, a brief or outline is the specified combination of keys pressed together to produce a specific word or phrase. Strictly, a brief or abbreviation is a shortened outline form with fewer strokes than the phonetic outline.</dd>
               <dt>Strokes</dt>
@@ -215,7 +215,7 @@ class Support extends Component {
             <p>To manually show a brief hint in a lesson that otherwise hides briefs, press <kbd>Tab</kbd> to focus on the stroke hint and <kbd>Space</kbd> activate it. This will automatically move your focus back to typing. To avoid losing time doing this, you can create a brief to press <kbd>Tab</kbd> and <kbd>Space</kbd> for you, such as <code className="tag-missing-full-stop">{dictionaryEntryForTabSpace}</code></p>
 
             <h4 id="typey-type-terms">Typey&nbsp;Type terms</h4>
-            <dl className="inline-flex">
+            <dl className="inline-flex flex-wrap">
               <dt>Spacing</dt>
               <dd>Typey&nbsp;Type lets you choose where spaces should appear in a phrase for checking if you typed it correctly. This is because steno software can be used to automatically insert spaces before or after words, depending on the specific software and its settings. For example, Plover inserts spaces before words by default, and has a setting to insert spaces after words. Plover also provides extra spacing and capitalisation modes that can be set on the fly to suppress spaces or insert other punctuation (like dashes). A QWERTYist may feel more comfortable drilling words without any spaces, or sentences with spaces as the end.</dd>
               <dt>Seen words</dt>
