@@ -970,6 +970,7 @@ input:focus::placeholder {
       margin-left: 0; } }
 
 .typed-text-input-textarea {
+  caret-color: #8242a8;
   text-decoration: underline; }
   .typed-text-input-textarea:focus {
     outline: #FFD073 auto 5px;

@@ -932,6 +932,7 @@ $textarea-padding-x: 8px;
   }
 }
 .typed-text-input-textarea {
+  caret-color: saturate(add-tint($brand-primary, 30%), 30%);
   text-decoration: underline;
 
   &:focus {
