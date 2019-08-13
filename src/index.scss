@@ -933,7 +933,7 @@ $textarea-padding-x: 8px;
 }
 .typed-text-input-textarea {
   text-decoration: underline;
-  text-underline-position: under;
+
   &:focus {
     outline: $outline-shorthand;
     border-radius: 0;

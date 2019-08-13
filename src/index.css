@@ -970,8 +970,7 @@ input:focus::placeholder {
       margin-left: 0; } }
 
 .typed-text-input-textarea {
-  text-decoration: underline;
-  text-underline-position: under; }
+  text-decoration: underline; }
   .typed-text-input-textarea:focus {
     outline: #FFD073 auto 5px;
     border-radius: 0; }
