@@ -5,7 +5,7 @@ import GoogleAnalytics from 'react-ga';
 import ErrorBoundary from './ErrorBoundary'
 import PseudoContentButton from './PseudoContentButton';
 import FlashcardsBox from './FlashcardsBox';
-import RecommendationBox from './../RecommendationBox';
+import RecommendationBox from './RecommendationBox';
 import { getLessonIndexData } from './../lessonIndexData';
 import { IconCheckmark, IconTriangleRight, IconExternal } from './Icon';
 import { Link, Redirect } from 'react-router-dom';
