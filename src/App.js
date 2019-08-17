@@ -53,7 +53,7 @@ import Contribute from './components/Contribute';
 import Progress from './Progress';
 import Flashcards from './Flashcards';
 import PageNotFound from './PageNotFound';
-import Footer from './Footer';
+import Footer from './components/Footer';
 import Zipper from './utils/zipper';
 import './App.css';
 
