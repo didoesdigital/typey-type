@@ -47,7 +47,7 @@ import Announcements from './components/Announcements';
 import ErrorBoundary from './components/ErrorBoundary'
 import Lessons from './Lessons';
 import Home from './components/Home';
-import Header from './Header';
+import Header from './components/Header';
 import Support from './components/Support';
 import Contribute from './components/Contribute';
 import Progress from './Progress';

@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Autocomplete from 'react-autocomplete';
 import GoogleAnalytics from 'react-ga';
-import { IconTypeyType, IconSearch } from './components/Icon';
-import { matchLessonToTerm, sortLessons } from './utils/utils';
-import './App.css';
+import { IconTypeyType, IconSearch } from './Icon';
+import { matchLessonToTerm, sortLessons } from './../utils/utils';
 
 class Header extends Component {
   componentDidMount() {
