@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Scores from './components/Scores';
-import UserSettings from './UserSettings';
+import UserSettings from './components/UserSettings';
 import { IconRestart } from './components/Icon';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';

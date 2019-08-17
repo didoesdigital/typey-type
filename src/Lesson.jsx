@@ -16,7 +16,7 @@ import ItalianMichelaStenoDiagram from './StenoLayout/ItalianMichelaStenoDiagram
 import JapaneseStenoDiagram from './StenoLayout/JapaneseStenoDiagram';
 import KoreanModernCStenoDiagram from './StenoLayout/KoreanModernCStenoDiagram';
 import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
-import UserSettings from './UserSettings';
+import UserSettings from './components/UserSettings';
 import Finished from './Finished';
 import Flashcards from './components/Flashcards';
 import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToItalianMichelaStenoKeys, mapBriefToJapaneseStenoKeys, mapBriefToKoreanModernCStenoKeys, mapBriefToPalantypeKeys } from './typey-type';
