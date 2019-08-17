@@ -2,13 +2,13 @@ import * as React from 'react'
 import { Component } from 'react';
 import {
   rankOutlines
-} from './utils/transformingDictionaries';
-import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
-import DanishStenoDiagram from './StenoLayout/DanishStenoDiagram';
-import ItalianMichelaStenoDiagram from './StenoLayout/ItalianMichelaStenoDiagram';
-import JapaneseStenoDiagram from './StenoLayout/JapaneseStenoDiagram';
-import KoreanModernCStenoDiagram from './StenoLayout/KoreanModernCStenoDiagram';
-import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
+} from './../utils/transformingDictionaries';
+import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
+import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
+import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiagram';
+import JapaneseStenoDiagram from './../StenoLayout/JapaneseStenoDiagram';
+import KoreanModernCStenoDiagram from './../StenoLayout/KoreanModernCStenoDiagram';
+import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
 import {
   mapBriefToAmericanStenoKeys,
   mapBriefToDanishStenoKeys,
@@ -17,7 +17,7 @@ import {
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
   splitBriefsIntoStrokes
-} from './typey-type';
+} from './../typey-type';
 
 class StrokesForWords extends Component {
   state = {

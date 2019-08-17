@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
-import StrokesForWords from './../StrokesForWords';
+import StrokesForWords from './StrokesForWords';
 import PseudoContentButton from './PseudoContentButton';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
