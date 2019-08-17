@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { IconClosingCross } from './components/Icon';
+import { IconClosingCross } from './Icon';
 // import GoogleAnalytics from 'react-ga';
 
 class Notification extends Component {

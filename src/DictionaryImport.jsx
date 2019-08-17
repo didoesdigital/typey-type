@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
-import Notification from './Notification';
+import Notification from './components/Notification';
 import {
   createAGlobalLookupDictionary,
   getListOfValidDictionariesImportedAndInConfig,
