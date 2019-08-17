@@ -3,7 +3,7 @@ import { Route, Switch } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import Lesson from './Lesson';
 import LessonsIndex from './LessonsIndex';
-import CustomLessonSetup from './CustomLessonSetup';
+import CustomLessonSetup from './components/CustomLessonSetup';
 
 const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => {
   return(
