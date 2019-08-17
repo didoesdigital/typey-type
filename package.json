@@ -23,8 +23,7 @@
     "react-router-dom": "^4.2.2",
     "react-scripts": "2.1.1",
     "react-tippy": "git+ssh://git@github.com:dimonster/react-tippy.git#custom-tag-element-for-tooltip-trigger",
-    "react-transition-group": "^2.4.0",
-    "why-did-you-update": "^0.1.1"
+    "react-transition-group": "^2.4.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
@@ -39,7 +38,8 @@
   "devDependencies": {
     "@sentry/cli": "^1.35.1",
     "jest-fetch-mock": "^2.1.0",
-    "jest-mock-random": "^1.0.2"
+    "jest-mock-random": "^1.0.2",
+    "why-did-you-update": "^0.1.1"
   },
   "browserslist": [
     ">0.2%",
