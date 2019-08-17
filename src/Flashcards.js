@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { IconFullscreen } from './Icon';
 import GoogleAnalytics from 'react-ga';
 import FlashcardsCarouselActionButtons from './FlashcardsCarouselActionButtons';
-import { IconExternal } from './Icon';
 import {
-  Tooltip,
-} from 'react-tippy';
+  IconExternal,
+  IconFullscreen
+} from './components/Icon';
+import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 import * as Utils from './utils/utils';
 import { parseLesson } from './typey-type';

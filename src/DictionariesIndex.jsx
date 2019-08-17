@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
 import StrokesForWords from './StrokesForWords';
-import { IconExternal } from './Icon';
+import { IconExternal } from './components/Icon';
 import { Tooltip } from 'react-tippy';
 
 class DictionariesIndex extends Component {

@@ -7,7 +7,7 @@ import PseudoContentButton from './PseudoContentButton';
 import FlashcardsBox from './FlashcardsBox';
 import RecommendationBox from './RecommendationBox';
 import { getLessonIndexData } from './lessonIndexData';
-import { IconCheckmark, IconTriangleRight, IconExternal } from './Icon';
+import { IconCheckmark, IconTriangleRight, IconExternal } from './components/Icon';
 import { Link, Redirect } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'

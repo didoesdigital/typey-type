@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { IconClosingCross } from './Icon';
+import { IconClosingCross } from './components/Icon';
 import { Link, Route, Switch } from 'react-router-dom';
 import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';

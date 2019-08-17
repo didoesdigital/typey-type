@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import Scores from './Scores';
 import UserSettings from './UserSettings';
 import { Link } from 'react-router-dom';
-import {
-  Tooltip,
-} from 'react-tippy';
+import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
-import { IconRestart } from './Icon';
+import { IconRestart } from './components/Icon';
 import './App.css';
 
 class Finished extends Component {
