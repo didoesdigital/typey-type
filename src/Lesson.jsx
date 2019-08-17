@@ -8,7 +8,7 @@ import ErrorBoundary from './ErrorBoundary'
 import LessonOverview from './LessonOverview';
 import LessonNotFound from './LessonNotFound';
 import Material from './Material';
-import TypedText from './TypedText';
+import TypedText from './components/TypedText';
 import Scores from './components/Scores';
 import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
 import DanishStenoDiagram from './StenoLayout/DanishStenoDiagram';

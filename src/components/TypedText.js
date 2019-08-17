@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { matchSplitText } from './typey-type';
-import './App.css';
+import { matchSplitText } from './../typey-type';
 
 class TypedText extends Component {
 
