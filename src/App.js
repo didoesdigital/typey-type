@@ -43,7 +43,7 @@ import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
 import Loadable from 'react-loadable';
 import PageLoading from './PageLoading';
-import Announcements from './Announcements';
+import Announcements from './components/Announcements';
 import ErrorBoundary from './ErrorBoundary'
 import Lessons from './Lessons';
 import Home from './Home';
@@ -2112,6 +2112,7 @@ class App extends Component {
           </div>
           <Footer
             fullscreen={this.state.fullscreen}
+            setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
           />
         </div>
       );
