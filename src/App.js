@@ -49,7 +49,7 @@ import Lessons from './Lessons';
 import Home from './Home';
 import Header from './Header';
 import Support from './Support';
-import Contribute from './Contribute';
+import Contribute from './components/Contribute';
 import Progress from './Progress';
 import Flashcards from './Flashcards';
 import PageNotFound from './PageNotFound';
@@ -1898,7 +1898,10 @@ class App extends Component {
                   {header}
                   <DocumentTitle title={'Typey Type | Contribute'}>
                     <ErrorBoundary>
-                      <Contribute />
+                      <Contribute
+                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                      />
                     </ErrorBoundary>
                   </DocumentTitle>
                 </div>
