@@ -4,7 +4,7 @@ import AnimateHeight from 'react-animate-height';
 import GoogleAnalytics from 'react-ga';
 import ErrorBoundary from './ErrorBoundary'
 import PseudoContentButton from './components/PseudoContentButton';
-import FlashcardsBox from './FlashcardsBox';
+import FlashcardsBox from './components/FlashcardsBox';
 import RecommendationBox from './RecommendationBox';
 import { getLessonIndexData } from './lessonIndexData';
 import { IconCheckmark, IconTriangleRight, IconExternal } from './components/Icon';

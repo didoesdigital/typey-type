@@ -4,12 +4,12 @@ import FlashcardsCarouselActionButtons from './FlashcardsCarouselActionButtons';
 import {
   IconExternal,
   IconFullscreen
-} from './components/Icon';
+} from './Icon';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
-import * as Utils from './utils/utils';
-import { parseLesson } from './typey-type';
-import { getLesson } from './utils/getData';
+import * as Utils from './../utils/utils';
+import { parseLesson } from './../typey-type';
+import { getLesson } from './../utils/getData';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Link } from 'react-router-dom';

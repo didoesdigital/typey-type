@@ -51,7 +51,7 @@ import Header from './Header';
 import Support from './components/Support';
 import Contribute from './components/Contribute';
 import Progress from './Progress';
-import Flashcards from './Flashcards';
+import Flashcards from './components/Flashcards';
 import PageNotFound from './PageNotFound';
 import Footer from './components/Footer';
 import Zipper from './utils/zipper';
