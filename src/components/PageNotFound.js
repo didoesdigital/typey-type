@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
 import * as Sentry from '@sentry/browser';
 import { Link } from 'react-router-dom';
-import { IconTypeyType, IconExternal } from './components/Icon';
+import { IconTypeyType, IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 
 class PageNotFound extends Component {

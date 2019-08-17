@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Loadable from 'react-loadable';
 import DictionariesIndex from './DictionariesIndex';
-import PageLoading from './PageLoading';
+import PageLoading from './components/PageLoading';
 
 const AsyncDictionary = Loadable({
   loader: () => import("./Dictionary"),

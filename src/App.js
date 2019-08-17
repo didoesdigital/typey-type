@@ -42,7 +42,7 @@ import queryString from 'query-string';
 import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
 import Loadable from 'react-loadable';
-import PageLoading from './PageLoading';
+import PageLoading from './components/PageLoading';
 import Announcements from './components/Announcements';
 import ErrorBoundary from './components/ErrorBoundary'
 import Lessons from './Lessons';
@@ -52,7 +52,7 @@ import Support from './components/Support';
 import Contribute from './components/Contribute';
 import Progress from './components/Progress';
 import Flashcards from './components/Flashcards';
-import PageNotFound from './PageNotFound';
+import PageNotFound from './components/PageNotFound';
 import Footer from './components/Footer';
 import Zipper from './utils/zipper';
 import './App.css';
@@ -83,16 +83,16 @@ const AsyncDictionaries = Loadable({
 
 
 // Test PageLoadingPastDelay at Dictionaries route:
-// import PageLoadingPastDelay from './PageLoadingPastDelay';
+// import PageLoadingPastDelay from './components/PageLoadingPastDelay';
 // const AsyncDictionaries = Loadable({
-//   loader: () => import('./PageLoadingPastDelay'), // oh no!
+//   loader: () => import('./components/PageLoadingPastDelay'), // oh no!
 //   loading: PageLoading,
 // });
 
 // Test PageLoadingFailed at Dictionaries route:
-// import PageLoadingFailed from './PageLoadingFailed';
+// import PageLoadingFailed from './components/PageLoadingFailed';
 // const AsyncDictionaries = Loadable({
-//   loader: () => import('./PageLoadingFailed'), // oh no!
+//   loader: () => import('./components/PageLoadingFailed'), // oh no!
 //   loading: PageLoading,
 // });
 
