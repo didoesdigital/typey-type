@@ -4,7 +4,7 @@ import { Link, Route, Switch } from 'react-router-dom';
 import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
-import ErrorBoundary from './ErrorBoundary'
+import ErrorBoundary from './components/ErrorBoundary'
 import LessonOverview from './LessonOverview';
 import LessonNotFound from './LessonNotFound';
 import Material from './Material';

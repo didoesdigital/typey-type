@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import * as PARAMS from './params.js';
 import AnimateHeight from 'react-animate-height';
 import GoogleAnalytics from 'react-ga';
-import ErrorBoundary from './ErrorBoundary'
+import ErrorBoundary from './components/ErrorBoundary'
 import PseudoContentButton from './components/PseudoContentButton';
 import FlashcardsBox from './components/FlashcardsBox';
 import RecommendationBox from './RecommendationBox';

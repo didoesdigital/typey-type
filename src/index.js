@@ -2,7 +2,7 @@ import { init } from '@sentry/browser';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DocumentTitle from 'react-document-title';
-import ErrorBoundary from './ErrorBoundary'
+import ErrorBoundary from './components/ErrorBoundary'
 import App from './App';
 import withTracker from './withTracker';
 import {
