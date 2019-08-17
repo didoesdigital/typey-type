@@ -58,7 +58,7 @@ import Zipper from './utils/zipper';
 import './App.css';
 
 const AsyncBreak = Loadable({
-  loader: () => import("./Break"),
+  loader: () => import("./components/Break"),
   loading: PageLoading,
   delay: 300
 });
