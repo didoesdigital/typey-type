@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
 import { Link } from 'react-router-dom';
-import { IconExternal } from './components/Icon';
+import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
-import typeyTypeyDemoGIF from './images/typey-type-for-stenographers-demo.gif';
+import typeyTypeyDemoGIF from './../images/typey-type-for-stenographers-demo.gif';
 
 class Home extends Component {
   componentDidMount() {

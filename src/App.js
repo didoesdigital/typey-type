@@ -46,7 +46,7 @@ import PageLoading from './PageLoading';
 import Announcements from './components/Announcements';
 import ErrorBoundary from './ErrorBoundary'
 import Lessons from './Lessons';
-import Home from './Home';
+import Home from './components/Home';
 import Header from './Header';
 import Support from './Support';
 import Contribute from './components/Contribute';
