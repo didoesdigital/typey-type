@@ -9,7 +9,7 @@ import LessonOverview from './LessonOverview';
 import LessonNotFound from './LessonNotFound';
 import Material from './Material';
 import TypedText from './TypedText';
-import Scores from './Scores';
+import Scores from './components/Scores';
 import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
 import DanishStenoDiagram from './StenoLayout/DanishStenoDiagram';
 import ItalianMichelaStenoDiagram from './StenoLayout/ItalianMichelaStenoDiagram';
