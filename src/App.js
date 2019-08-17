@@ -50,7 +50,7 @@ import Home from './components/Home';
 import Header from './components/Header';
 import Support from './components/Support';
 import Contribute from './components/Contribute';
-import Progress from './Progress';
+import Progress from './components/Progress';
 import Flashcards from './components/Flashcards';
 import PageNotFound from './PageNotFound';
 import Footer from './components/Footer';
