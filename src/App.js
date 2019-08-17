@@ -70,7 +70,7 @@ const AsyncWriter = Loadable({
 });
 
 const AsyncLookup = Loadable({
-  loader: () => import("./Lookup"),
+  loader: () => import("./components/Lookup"),
   loading: PageLoading,
   delay: 300
 });

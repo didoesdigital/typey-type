@@ -7,7 +7,7 @@ import {
   getListOfValidDictionariesImportedAndInConfig,
 } from './utils/transformingDictionaries';
 import { getTypeyTypeDict } from './utils/getData';
-import PseudoContentButton from './PseudoContentButton';
+import PseudoContentButton from './components/PseudoContentButton';
 
 class DictionaryImport extends Component {
   constructor(props) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
-import PseudoContentButton from './PseudoContentButton';
+import PseudoContentButton from './components/PseudoContentButton';
 import './App.css';
 import { IconExternal } from './components/Icon';
 import { Tooltip } from 'react-tippy';

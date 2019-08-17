@@ -3,7 +3,7 @@ import DocumentTitle from 'react-document-title';
 import { Link } from 'react-router-dom';
 import DictionaryNotFound from './DictionaryNotFound';
 import GoogleAnalytics from 'react-ga';
-import PseudoContentButton from './PseudoContentButton';
+import PseudoContentButton from './components/PseudoContentButton';
 import { IconExternal } from './components/Icon';
 import { Tooltip } from 'react-tippy';
 import { lookUpDictionaryInIndex } from './typey-type';

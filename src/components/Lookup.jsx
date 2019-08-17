@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import StrokesForWords from './StrokesForWords';
 import GoogleAnalytics from 'react-ga';
+import StrokesForWords from './../StrokesForWords';
 import PseudoContentButton from './PseudoContentButton';
-import { IconExternal } from './components/Icon';
+import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 
 class Lookup extends Component {
