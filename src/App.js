@@ -64,7 +64,7 @@ const AsyncBreak = Loadable({
 });
 
 const AsyncWriter = Loadable({
-  loader: () => import("./Writer"),
+  loader: () => import("./components/Writer"),
   loading: PageLoading,
   delay: 300
 });

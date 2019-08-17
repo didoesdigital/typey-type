@@ -1,12 +1,12 @@
 // @flow
 import React, { Component } from 'react';
-import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
-import DanishStenoDiagram from './StenoLayout/DanishStenoDiagram';
-import ItalianMichelaStenoDiagram from './StenoLayout/ItalianMichelaStenoDiagram';
-import JapaneseStenoDiagram from './StenoLayout/JapaneseStenoDiagram';
-import KoreanModernCStenoDiagram from './StenoLayout/KoreanModernCStenoDiagram';
-import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
-import Stroke from './stroke';
+import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
+import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
+import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiagram';
+import JapaneseStenoDiagram from './../StenoLayout/JapaneseStenoDiagram';
+import KoreanModernCStenoDiagram from './../StenoLayout/KoreanModernCStenoDiagram';
+import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
+import Stroke from './../stroke';
 import {
   mapQWERTYKeysToStenoStroke,
   mapBriefToAmericanStenoKeys,
@@ -15,8 +15,8 @@ import {
   mapBriefToJapaneseStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys
-} from './typey-type';
-import { fetchResource } from './utils/getData';
+} from './../typey-type';
+import { fetchResource } from './../utils/getData';
 import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';
 
