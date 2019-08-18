@@ -1,6 +1,24 @@
-@import 'global.scss';
 @import url('https://fonts.googleapis.com/css?family=Overpass+Mono:400,700|Overpass:300,700');
 // <link href="https://fonts.googleapis.com/css?family=M+PLUS+1p:400,700&amp;subset=japanese,latin-ext" rel="stylesheet">
+
+// Colors
+$brand-primary: #402351;
+$brand-warning: #FFBF40;
+$brand-highlight: #FFD073;
+$brand-success: #23512C;
+$brand-danger: #953159;
+
+@function add-tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+@function add-shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+@function add-alpha($color, $percentage) {
+  $decimal: $percentage / 100%;
+  $inverse: 1 - $decimal;
+  @return transparentize($color, $inverse);
+}
 
 // Variables
 $type: 400 16px/1.6 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
