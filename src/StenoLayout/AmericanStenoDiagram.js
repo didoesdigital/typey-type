@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as stroke from '../stroke';
+import * as stroke from '../utils/stroke';
 
 let hidden = true;
 

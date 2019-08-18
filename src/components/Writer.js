@@ -6,7 +6,7 @@ import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiag
 import JapaneseStenoDiagram from './../StenoLayout/JapaneseStenoDiagram';
 import KoreanModernCStenoDiagram from './../StenoLayout/KoreanModernCStenoDiagram';
 import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
-import Stroke from './../stroke';
+import Stroke from './../utils/stroke';
 import {
   mapQWERTYKeysToStenoStroke,
   mapBriefToAmericanStenoKeys,

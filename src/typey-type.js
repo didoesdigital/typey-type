@@ -1,6 +1,6 @@
 import Zipper from './utils/zipper';
-import Stroke from './stroke';
-import * as stroke from './stroke';
+import Stroke from './utils/stroke';
+import * as stroke from './utils/stroke';
 import { isPeak } from './utils/utils.js';
 
 function createWordListFromMetWords (metWords) {
