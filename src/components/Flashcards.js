@@ -8,7 +8,7 @@ import {
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 import * as Utils from './../utils/utils';
-import { parseLesson } from './../typey-type';
+import { parseLesson } from './../utils/typey-type';
 import { getLesson } from './../utils/getData';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';

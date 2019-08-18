@@ -20,7 +20,7 @@ import {
   targetStrokeCount,
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
-} from './typey-type';
+} from './utils/typey-type';
 import {
   getLatestPloverDict,
   getLesson

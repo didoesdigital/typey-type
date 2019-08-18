@@ -19,7 +19,7 @@ import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
 import UserSettings from './UserSettings';
 import Finished from './Finished';
 import Flashcards from './Flashcards';
-import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToItalianMichelaStenoKeys, mapBriefToJapaneseStenoKeys, mapBriefToKoreanModernCStenoKeys, mapBriefToPalantypeKeys } from './../typey-type';
+import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToItalianMichelaStenoKeys, mapBriefToJapaneseStenoKeys, mapBriefToKoreanModernCStenoKeys, mapBriefToPalantypeKeys } from './../utils/typey-type';
 
 class Lesson extends Component {
   componentDidMount() {

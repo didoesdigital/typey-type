@@ -17,7 +17,7 @@ import {
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
   splitBriefsIntoStrokes
-} from './../typey-type';
+} from './../utils/typey-type';
 
 class StrokesForWords extends Component {
   state = {

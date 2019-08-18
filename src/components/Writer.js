@@ -15,7 +15,7 @@ import {
   mapBriefToJapaneseStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys
-} from './../typey-type';
+} from './../utils/typey-type';
 import { fetchResource } from './../utils/getData';
 import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';

@@ -8,7 +8,7 @@ import {
   createWordListFromMetWords,
   loadPersonalPreferences,
   parseWordList,
-} from './../typey-type';
+} from './../utils/typey-type';
 import {
   generateListOfWordsAndStrokes
 } from './../utils/transformingDictionaries';
