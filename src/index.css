@@ -752,7 +752,7 @@ input:focus::placeholder {
   text-transform: uppercase; }
 
 .de-emphasized {
-  color: #757575; }
+  color: #6f6f6f; }
 
 .clearfix {
   display: flow-root; }

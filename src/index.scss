@@ -630,7 +630,7 @@ input:focus::placeholder {
   text-transform: uppercase;
 }
 
-.de-emphasized { color: desaturate(add-tint($brand-primary, 30%), 40%); }
+.de-emphasized { color: desaturate(add-tint($brand-primary, 27%), 40%); }
 
 .clearfix { display: flow-root; }
 
