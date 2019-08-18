@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import * as PARAMS from './params.js';
+import * as PARAMS from './utils/params.js';
 import { randomise, isLessonTextValid } from './utils/utils';
-import { getLessonIndexData } from './lessonIndexData';
-import { getRecommendedNextLesson } from './recommendations';
-import { getFlashcardsNextLesson } from './flashcardsRecommendations';
+import { getLessonIndexData } from './utils/lessonIndexData';
+import { getRecommendedNextLesson } from './utils/recommendations';
+import { getFlashcardsNextLesson } from './utils/flashcardsRecommendations';
 import {
   createWordListFromMetWords,
   parseCustomMaterial,

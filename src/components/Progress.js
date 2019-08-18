@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import * as PARAMS from './../params.js';
+import * as PARAMS from './../utils/params.js';
 import AnimateHeight from 'react-animate-height';
 import GoogleAnalytics from 'react-ga';
 import ErrorBoundary from './ErrorBoundary'
 import PseudoContentButton from './PseudoContentButton';
 import FlashcardsBox from './FlashcardsBox';
 import RecommendationBox from './RecommendationBox';
-import { getLessonIndexData } from './../lessonIndexData';
+import { getLessonIndexData } from './../utils/lessonIndexData';
 import { IconCheckmark, IconTriangleRight, IconExternal } from './Icon';
 import { Link, Redirect } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';

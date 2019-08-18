@@ -1,16 +1,16 @@
 import { getRecommendedNextLesson } from './recommendations';
 import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
-import recommendationsJSON from '../../steno-lessons/lessons/recommendations.json'
-import lessonIndexJSON from '../../steno-lessons/lessons/lessonIndex.json'
+import recommendationsJSON from '../../../steno-lessons/lessons/recommendations.json'
+import lessonIndexJSON from '../../../steno-lessons/lessons/lessonIndex.json'
 
-import lessonsProgressNovice from './fixtures/lessonsProgressNovice.json'
-import lessonsProgressBeginner from './fixtures/lessonsProgressBeginner.json'
-import lessonsProgressCompetent from './fixtures/lessonsProgressCompetent.json'
-import lessonsProgressProficient from './fixtures/lessonsProgressProficient.json'
-import lessonsProgressExpert from './fixtures/lessonsProgressExpert.json'
+import lessonsProgressNovice from './../fixtures/lessonsProgressNovice.json'
+import lessonsProgressBeginner from './../fixtures/lessonsProgressBeginner.json'
+import lessonsProgressCompetent from './../fixtures/lessonsProgressCompetent.json'
+import lessonsProgressProficient from './../fixtures/lessonsProgressProficient.json'
+import lessonsProgressExpert from './../fixtures/lessonsProgressExpert.json'
 
-import metWordsCompetent from './fixtures/metWordsCompetent.json'
+import metWordsCompetent from './../fixtures/metWordsCompetent.json'
 
 
 describe('recommended next lesson for novice stenographer', () => {
