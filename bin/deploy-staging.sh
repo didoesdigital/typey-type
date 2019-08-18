@@ -47,10 +47,10 @@ REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build
 if [ "$a_flag" = true ] ;
   then
     echo "Rsync without lessons or dictionaries:"
-    rsync --archive --verbose --delete --exclude=".DS_Store" --exclude=/lessons --exclude=/dictionaries -e "ssh -p 2222" ~/projects/typey-type/build/ di@localhost:www/typey-type/
+    rsync --archive --verbose --exclude=".DS_Store" --exclude=/lessons --exclude=/dictionaries -e "ssh -p 2222" ~/projects/typey-type/build/ di@localhost:www/typey-type/
   else
     echo "Full rsync:"
-    rsync --archive --verbose --delete --exclude=".DS_Store" -e "ssh -p 2222" ~/projects/typey-type/build/ di@localhost:www/typey-type/
+    rsync --archive --verbose --exclude=".DS_Store" -e "ssh -p 2222" ~/projects/typey-type/build/ di@localhost:www/typey-type/
 fi
 
 # git tag -n
