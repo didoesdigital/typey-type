@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
-import { IconExternal } from './components/Icon';
+import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 
 class LessonsIndex extends Component {

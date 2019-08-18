@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
-import { IconClosingCross } from './components/Icon';
+import { IconClosingCross } from './Icon';
 import { Link, Route, Switch } from 'react-router-dom';
 import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
-import ErrorBoundary from './components/ErrorBoundary'
+import ErrorBoundary from './ErrorBoundary'
 import LessonOverview from './LessonOverview';
 import LessonNotFound from './LessonNotFound';
-import Material from './components/Material';
-import TypedText from './components/TypedText';
-import Scores from './components/Scores';
-import AmericanStenoDiagram from './StenoLayout/AmericanStenoDiagram';
-import DanishStenoDiagram from './StenoLayout/DanishStenoDiagram';
-import ItalianMichelaStenoDiagram from './StenoLayout/ItalianMichelaStenoDiagram';
-import JapaneseStenoDiagram from './StenoLayout/JapaneseStenoDiagram';
-import KoreanModernCStenoDiagram from './StenoLayout/KoreanModernCStenoDiagram';
-import PalantypeDiagram from './StenoLayout/PalantypeDiagram';
-import UserSettings from './components/UserSettings';
+import Material from './Material';
+import TypedText from './TypedText';
+import Scores from './Scores';
+import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
+import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
+import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiagram';
+import JapaneseStenoDiagram from './../StenoLayout/JapaneseStenoDiagram';
+import KoreanModernCStenoDiagram from './../StenoLayout/KoreanModernCStenoDiagram';
+import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
+import UserSettings from './UserSettings';
 import Finished from './Finished';
-import Flashcards from './components/Flashcards';
-import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToItalianMichelaStenoKeys, mapBriefToJapaneseStenoKeys, mapBriefToKoreanModernCStenoKeys, mapBriefToPalantypeKeys } from './typey-type';
+import Flashcards from './Flashcards';
+import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToItalianMichelaStenoKeys, mapBriefToJapaneseStenoKeys, mapBriefToKoreanModernCStenoKeys, mapBriefToPalantypeKeys } from './../typey-type';
 
 class Lesson extends Component {
   componentDidMount() {

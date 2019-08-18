@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import { Link } from 'react-router-dom';
-import { getLessonIndexData } from './lessonIndexData';
+import { getLessonIndexData } from './../lessonIndexData';
 
 class LessonOverview extends Component {
   constructor(props) {

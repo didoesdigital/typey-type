@@ -45,7 +45,7 @@ import Loadable from 'react-loadable';
 import PageLoading from './components/PageLoading';
 import Announcements from './components/Announcements';
 import ErrorBoundary from './components/ErrorBoundary'
-import Lessons from './Lessons';
+import Lessons from './components/Lessons';
 import Home from './components/Home';
 import Header from './components/Header';
 import Support from './components/Support';
