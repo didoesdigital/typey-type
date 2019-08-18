@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import DocumentTitle from 'react-document-title';
 import ErrorBoundary from './components/ErrorBoundary'
 import App from './App';
-import withTracker from './withTracker';
+import withTracker from './utils/withTracker';
 import {
   BrowserRouter as Router,
   Route
