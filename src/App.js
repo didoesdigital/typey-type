@@ -55,7 +55,6 @@ import Flashcards from './components/Flashcards';
 import PageNotFound from './components/PageNotFound';
 import Footer from './components/Footer';
 import Zipper from './utils/zipper';
-import './App.css';
 
 const AsyncBreak = Loadable({
   loader: () => import("./components/Break"),
