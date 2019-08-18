@@ -3,11 +3,11 @@ import DocumentTitle from 'react-document-title';
 import { Link } from 'react-router-dom';
 import DictionaryNotFound from './DictionaryNotFound';
 import GoogleAnalytics from 'react-ga';
-import PseudoContentButton from './components/PseudoContentButton';
-import { IconExternal } from './components/Icon';
+import PseudoContentButton from './PseudoContentButton';
+import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
-import { lookUpDictionaryInIndex } from './typey-type';
-import { fetchDictionaryIndex } from './utils/getData';
+import { lookUpDictionaryInIndex } from './../typey-type';
+import { fetchDictionaryIndex } from './../utils/getData';
 // import CustomDictionarySetup from './CustomDictionarySetup';
 
 class Dictionary extends Component {

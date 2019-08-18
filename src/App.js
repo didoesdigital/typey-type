@@ -76,7 +76,7 @@ const AsyncLookup = Loadable({
 });
 
 const AsyncDictionaries = Loadable({
-  loader: () => import("./Dictionaries"),
+  loader: () => import("./components/Dictionaries"),
   loading: PageLoading,
   delay: 300
 });

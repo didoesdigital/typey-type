@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
-import Notification from './components/Notification';
+import Notification from './Notification';
 import {
   createAGlobalLookupDictionary,
   getListOfValidDictionariesImportedAndInConfig,
-} from './utils/transformingDictionaries';
-import { getTypeyTypeDict } from './utils/getData';
-import PseudoContentButton from './components/PseudoContentButton';
+} from './../utils/transformingDictionaries';
+import { getTypeyTypeDict } from './../utils/getData';
+import PseudoContentButton from './PseudoContentButton';
 
 class DictionaryImport extends Component {
   constructor(props) {
