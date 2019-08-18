@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import DocumentTitle from 'react-document-title';
 import ErrorBoundary from './components/ErrorBoundary'
 import App from './App';
-import withTracker from './utils/withTracker';
+import withAnalyticsTracker from './utils/withAnalyticsTracker';
 import {
   BrowserRouter as Router,
   Route
@@ -22,7 +22,7 @@ ReactDOM.render(
   <DocumentTitle title='Typey Type for Stenographers'>
     <Router basename="/typey-type">
       <ErrorBoundary>
-        <Route component={withTracker(App)} />
+        <Route component={withAnalyticsTracker(App)} />
       </ErrorBoundary>
     </Router>
   </DocumentTitle>,

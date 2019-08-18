@@ -9,7 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 
-const withTracker = (WrappedComponent, options = { anonymizeIp: true }) => {
+const withAnalyticsTracker = (WrappedComponent, options = { anonymizeIp: true }) => {
   const trackPage = page => {
     GoogleAnalytics.set({
       page,
@@ -41,4 +41,4 @@ const withTracker = (WrappedComponent, options = { anonymizeIp: true }) => {
   return HOC;
 };
 
-export default withTracker;
+export default withAnalyticsTracker;
