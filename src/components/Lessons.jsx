@@ -106,6 +106,15 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
             {...props}
           />
         } />
+      <Route exact={true} path={`${match.url}/:notFound`} render={ (props) =>
+          <Lesson
+            lessonIndex={lessonIndex}
+            handleLesson={handleLesson}
+            lesson={lesson}
+            {...lessonProps}
+            {...props}
+          />
+        } />
         <Route exact={true} path={match.url} render={ (props) =>
           <LessonsIndex match={match}
             lessonIndex={lessonIndex}
@@ -118,7 +127,6 @@ const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => 
       </Switch>
     </div>
   )
-
 };
 
 export default Lessons;
