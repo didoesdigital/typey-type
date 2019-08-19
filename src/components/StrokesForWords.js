@@ -193,7 +193,7 @@ class StrokesForWords extends Component {
     if (this.props.userSettings.stenoLayout === 'stenoLayoutJapaneseSteno') { layoutTypeStyle = ' type-face--japanese'; }
 
     let strokeListItems = this.state.listOfStrokesAndDicts.map( (strokeAndDict, indexInListOfStrokesAndDicts) => {
-      let classes = strokeAndDict[1] === "typey-type.json" ? "steno-stroke px05 db fw4" : "steno-stroke px05 db steno-stroke--subtle";
+      let classes = strokeAndDict[1] === "typey-type.json" ? "steno-stroke px05 db fw7" : "steno-stroke px05 db steno-stroke--subtle";
       let briefWithSpacesBetweenLetters = [...strokeAndDict[0]].join(" ").replace("-","dash");
 
       let stenoBriefKeys = (
