@@ -50,8 +50,8 @@ $z-index-revision-mode-button: 2;
 $z-index-show-scores-control: 2;
 $z-index-fill-fade-edges: 1;
 $z-index-successfully-typed-text: -1;
-$link-button-height: 40px;
-$link-button-width: 40px;
+$link-button-height: 2.5rem;
+$link-button-width: 2.5rem;
 $header-plus-footer-height: 208px;
 
 // Element styles
@@ -930,7 +930,7 @@ $textarea-padding-x: 8px;
 .input-file {
   @extend %input-textarea-styles;
   background-color: transparent;
-  height: 40px;
+  height: 2.5rem;
 }
 
 .successfully-typed-text {
@@ -1105,12 +1105,12 @@ label {
   border: 1px solid add-tint($brand-primary, 70%);
   display: inline-block;
   font-size: $h6-size;
-  height: 32px;
+  height: 2rem;
   line-height: 1.4;
   padding: 4px 8px;
   &.form-control--large {
     font-size: $h5-size;
-    height: 40px;
+    height: 2.5rem;
   }
 }
 .inline-form-control {
@@ -1120,7 +1120,7 @@ label {
   color: #fff;
   font-size: 1rem;
   line-height: 1.5;
-  height: 40px;
+  height: 2.5rem;
   padding: 4px 8px;
   width: 100%;
 
@@ -1604,8 +1604,8 @@ label {
 }
 
 .carousel--flashcards {
-  margin-left: $link-button-width + 8px;
-  margin-right: $link-button-width + 8px;
+  margin-left: calc(#{$link-button-width} + 8px);
+  margin-right: calc(#{$link-button-width} + 8px);
 
   & .fullscreen {
     margin-left: -16px;
@@ -1648,10 +1648,10 @@ label {
 .pagination-nav-button {
   top: calc(50% - #{$link-button-height / 2});
   &.pagination-nav-button--prev {
-    left: -$link-button-width - 16px;
+    left: calc(-#{$link-button-width} - 16px);
   }
   &.pagination-nav-button--next {
-    right: -$link-button-width - 16px;
+    right: calc(-#{$link-button-width} - 16px);
   }
 }
 

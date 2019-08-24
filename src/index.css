@@ -950,7 +950,7 @@ input:focus::placeholder {
 
 .input-file {
   background-color: transparent;
-  height: 40px; }
+  height: 2.5rem; }
 
 .successfully-typed-text {
   border: 2px solid transparent;
@@ -1096,12 +1096,12 @@ label {
   border: 1px solid #c6bdcb;
   display: inline-block;
   font-size: 0.8rem;
-  height: 32px;
+  height: 2rem;
   line-height: 1.4;
   padding: 4px 8px; }
   .form-control.form-control--large {
     font-size: 1rem;
-    height: 40px; }
+    height: 2.5rem; }
 
 .inline-form-control {
   background-color: #533962;
@@ -1110,7 +1110,7 @@ label {
   color: #fff;
   font-size: 1rem;
   line-height: 1.5;
-  height: 40px;
+  height: 2.5rem;
   padding: 4px 8px;
   width: 100%; }
   .inline-form-control:hover {
@@ -1142,7 +1142,7 @@ label {
   border: 1px solid transparent;
   color: #c6bdcb;
   font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
-  height: 40px;
+  height: 2.5rem;
   padding: 4px 16px;
   text-align: center;
   text-decoration: none;
@@ -1433,8 +1433,8 @@ label {
   z-index: 1; }
 
 .carousel--flashcards {
-  margin-left: 48px;
-  margin-right: 48px; }
+  margin-left: calc(2.5rem + 8px);
+  margin-right: calc(2.5rem + 8px); }
   .carousel--flashcards .fullscreen {
     margin-left: -16px;
     margin-right: -16px; }
@@ -1470,11 +1470,11 @@ label {
   transform: translateY(40px); }
 
 .pagination-nav-button {
-  top: calc(50% - 20px); }
+  top: calc(50% - 1.25rem); }
   .pagination-nav-button.pagination-nav-button--prev {
-    left: -56px; }
+    left: calc(-2.5rem - 16px); }
   .pagination-nav-button.pagination-nav-button--next {
-    right: -56px; }
+    right: calc(-2.5rem - 16px); }
 
 .pagination-nav-button--prev__icon {
   visibility: hidden; }
@@ -1514,8 +1514,8 @@ label {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
   top: 16px;
   right: 24px; }
   @media (min-width: 1024px) {
@@ -1534,8 +1534,8 @@ label {
     .fullscreen-button.fullscreen-button-ghost:active, .fullscreen-button.fullscreen-button-ghost:focus {
       color: #a091a8; }
   .fullscreen-button label {
-    width: 40px;
-    height: 40px; }
+    width: 2.5rem;
+    height: 2.5rem; }
   .fullscreen-button input {
     visibility: hidden;
     touch-action: manipulation; }
