@@ -5,12 +5,29 @@ import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 import typeyTypeyDemoGIF from './../images/typey-type-for-stenographers-demo.gif';
+import typeyTypeyDemoCoverImage from './../images/typey-type-for-stenographers-demo-cover-image.png';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      typeyTypeDemoSrc: typeyTypeyDemoGIF
+    }
+  }
+
   componentDidMount() {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
+  }
+
+  toggleDemoGIF (event) {
+    let newDemoSrc = typeyTypeyDemoCoverImage;
+    if (this.state.typeyTypeDemoSrc === typeyTypeyDemoCoverImage) {
+      newDemoSrc = typeyTypeyDemoGIF;
+    }
+
+    this.setState({typeyTypeDemoSrc: newDemoSrc});
   }
 
   render () {
@@ -30,7 +47,7 @@ class Home extends Component {
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
-                <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-lg" alt='Demo of Typey Type for Stenographers in action' /></Link></div>
+                <div className="relative"><img src={this.state.typeyTypeDemoSrc} className="homepage-demo-lg" alt='Demo of Typey Type for Stenographers in action' onClick={this.toggleDemoGIF.bind(this)}/></div>
                 <h3 className="tiny-rule">What is stenography?</h3>
                 <p>The process of writing shorthand is called <strong>stenography</strong>. Want to write over 100 words per minute? Grab yourself a fancy keyboard and start learning stenography!</p>
                 <p>Typey&nbsp;Type for Stenographers is a free typing app designed to help{" "}
@@ -49,7 +66,7 @@ class Home extends Component {
                     steno
                   </Tooltip>{" "}
                   students practise and master stenography.</p>
-                <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-xs" alt='Demo of Typey Type for Stenographers in action' /></Link></div>
+                <div className="relative"><img src={this.state.typeyTypeDemoSrc} className="homepage-demo-xs" alt='Demo of Typey Type for Stenographers in action' onClick={this.toggleDemoGIF.bind(this)} /></div>
                 <Link to='/support' className="link-button dib" style={{lineHeight: 2}}>Learn more</Link>
               </div>
             </div>
