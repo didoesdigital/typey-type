@@ -1532,6 +1532,7 @@ class App extends Component {
             this.updateRecommendationHistory(newRecommendationHistory, lessonIndex);
           }
         });
+        this.setAnnouncementMessageString(nextRecommendedLesson.linkText);
       })
       .catch( error => {
         console.log(error);
@@ -1559,6 +1560,8 @@ class App extends Component {
           flashcardsCourseIndex: currentFlashcardsCourseIndex,
           flashcardsNextLesson: nextFlashcardsLesson
         });
+
+        this.setAnnouncementMessageString(nextFlashcardsLesson.linkTitle);
       })
       .catch( error => {
         console.log(error);
