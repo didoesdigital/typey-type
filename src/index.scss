@@ -552,6 +552,8 @@ input:focus::placeholder {
 .mw-320  { max-width: 320px; }
 .mw-240  { max-width: 240px; }
 
+.mh-40  { min-height: 40px; }
+.mh-88  { min-height: 88px; }
 .mh-384  { min-height: 384px; }
 
 .min-width-70 {min-width: 70%; }
@@ -1571,6 +1573,7 @@ label {
   }
 }
 .skip-to-main-link {
+  // background-color: $brand-primary;
   position: absolute !important;
   height: 1px;
   width: 1px;

@@ -603,6 +603,12 @@ input:focus::placeholder {
 .mw-240 {
   max-width: 240px; }
 
+.mh-40 {
+  min-height: 40px; }
+
+.mh-88 {
+  min-height: 88px; }
+
 .mh-384 {
   min-height: 384px; }
 
