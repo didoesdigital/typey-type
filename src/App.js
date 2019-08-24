@@ -26,10 +26,7 @@ import {
   getLesson
 } from './utils/getData';
 import { fetchDictionaryIndex } from './utils/getData';
-import {
-  fetchResource,
-  getTypeyTypeDict
-} from './utils/getData';
+import { getTypeyTypeDict } from './utils/getData';
 import {
   createAGlobalLookupDictionary,
   generateListOfWordsAndStrokes
@@ -778,7 +775,7 @@ class App extends Component {
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.state.userSettings) { stenoLayout = this.state.userSettings.stenoLayout; }
 
-    fetchResource(process.env.PUBLIC_URL + '/dictionaries/dict.json').then((json) => {
+    this.fetchAndSetupGlobalDict().then(() => {
       // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWords).join("\n");
       // parseWordList appears to remove empty lines and other garbage, we might not need it here
@@ -821,8 +818,10 @@ class App extends Component {
           if (element) { element.focus(); }
         }
       });
-    }).catch((e) => {
-      console.log('Unable to load Typey Type dictionary', e)
+    })
+    .catch(error => {
+      console.error(error);
+      // this.showDictionaryErrorNotification();
     });
   }
 
