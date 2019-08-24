@@ -23,14 +23,14 @@ let slideNodes = (flashcards) => {
   flashcards.forEach((item, i) => {
     slides.push(
       <React.Fragment key={i}>
-        <Slide index={i + "-phrase"} key={i + "-phrase"} innerClassName={"carousel__slider__slide__slideInner"}>
+        <Slide role="option" index={i + "-phrase"} key={i + "-phrase"} innerClassName={"carousel__slider__slide__slideInner"}>
           <div className="carousel__slider__slide flex items-center justify-center">
             <div className="flex items-center justify-center p3 wrap">
               {item.phrase}
             </div>
           </div>
         </Slide>
-        <Slide index={i + "-stroke"} key={i + "-stroke"} innerClassName={"carousel__slider__slide__slideInner"}>
+        <Slide role="option" index={i + "-stroke"} key={i + "-stroke"} innerClassName={"carousel__slider__slide__slideInner"}>
           <div className="carousel__slider__slide flex items-center justify-center">
             <div className="flex items-center justify-center p3 wrap">
               {item.stroke}
@@ -428,7 +428,7 @@ currentSlide: currentSlide
             <div>
 
               {/* Screenreader flashcard heading for context */}
-              <div className="visually-hidden"><h3>Carousel of lesson words and their strokes</h3></div>
+              <div className="visually-hidden"><h3 id="flashcards-listbox-label">Carousel of lesson words and their strokes</h3></div>
 
               <div className={ this.props.fullscreen ? "" : "ml4 mr4"}>
                 <CarouselProvider
@@ -444,6 +444,7 @@ currentSlide: currentSlide
                     key={this.state.flashcards.length + this.props.fullscreen}
                     ref={flashcardsCarousel => this.flashcardsCarousel = flashcardsCarousel}
                     callback={this.onChangeCurrentSlide.bind(this)}
+                    aria-labelledby="flashcards-listbox-label"
                   >
                     {slideNodes(this.state.flashcards)}
                   </Slider>
