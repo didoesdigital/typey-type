@@ -6,45 +6,45 @@
   padding: 0; }
 
 body {
-  font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
   margin: 0 auto;
   color: #3f264e;
   background-color: #f5f4f6; }
 
 h1 {
-  font-size: 39.0625px;
+  font-size: 2.44141rem;
   font-weight: normal;
   line-height: 1.4;
   margin-bottom: 22px; }
 
 h2 {
-  font-size: 31.25px;
+  font-size: 1.95312rem;
   font-weight: normal;
   line-height: 1.4;
   margin-bottom: 18.5px; }
 
 h3 {
-  font-size: 25px;
+  font-size: 1.5625rem;
   font-weight: normal;
   line-height: 1.4;
-  margin-top: 31.25px;
+  margin-top: 1.95312rem;
   margin-bottom: 13.5px; }
 
 h4 {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: normal;
   line-height: 1.4;
-  margin-top: 25px;
+  margin-top: 1.5625rem;
   margin-bottom: 11.5px; }
 
 h5 {
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: normal;
   line-height: 1.4;
   margin-bottom: 9px; }
 
 h6 {
-  font-size: 12.8px;
+  font-size: 0.8rem;
   font-weight: normal;
   line-height: 1.4;
   margin-bottom: 8px; }
@@ -69,7 +69,7 @@ a {
     color: #202549; }
 
 pre {
-  font: 700 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
+  font: 700 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
 
 abbr[data-original-title],
 abbr[title] {
@@ -109,7 +109,7 @@ fieldset {
   border: none; }
 
 tt, code, kbd, samp {
-  font: 700 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
+  font: 700 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
 
 .type-face--japanese tt,
 .type-face--japanese code,
@@ -126,7 +126,7 @@ tt, code, kbd, samp {
   font-weight: 700; }
 
 input, textarea {
-  font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
+  font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
 
 textarea {
   border-radius: 4px;
@@ -143,7 +143,7 @@ select {
   cursor: pointer;
   display: inline-block;
   font-size: 1rem;
-  font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
   line-height: 1.5;
   max-width: 100%;
   padding: 4px 32px 4px 8px !important;
@@ -158,7 +158,7 @@ select::-ms-expand {
   display: none; }
 
 small, .text-small {
-  font-size: 12.8px;
+  font-size: 0.8rem;
   line-height: 1.6; }
 
 :focus {
@@ -250,7 +250,7 @@ input:focus::placeholder {
   font-family: "NanumGothicCoding", "Nanum Gothic Coding", "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
 
 .lede {
-  font-size: 20px; }
+  font-size: 1.25rem; }
 
 .visually-hidden {
   position: absolute !important;
@@ -508,10 +508,10 @@ input:focus::placeholder {
   margin-top: 32px; }
 
 .mt-h2 {
-  margin-top: 39.0625px; }
+  margin-top: 2.44141rem; }
 
 .mt-h3 {
-  margin-top: 31.25px; }
+  margin-top: 1.95312rem; }
 
 .mt10 {
   margin-top: 80px; }
@@ -775,13 +775,13 @@ input:focus::placeholder {
   word-wrap: break-word; }
 
 .h3 {
-  font-size: 25px; }
+  font-size: 1.5625rem; }
 
 .h4 {
-  font-size: 20px; }
+  font-size: 1.25rem; }
 
 .h5 {
-  font-size: 16px; }
+  font-size: 1rem; }
 
 .divider {
   border-top: 1px solid #d9d3dc; }
@@ -851,7 +851,7 @@ input:focus::placeholder {
   color: #c6bdcb;
   position: relative; }
   .subheader h2 {
-    font-size: 25px;
+    font-size: 1.5625rem;
     line-height: 1.52;
     margin-bottom: 2px; }
   .subheader .link-button {
@@ -878,11 +878,11 @@ input:focus::placeholder {
     border: thin solid #e6ac3a; }
 
 .stat__number {
-  font-size: 25px;
+  font-size: 1.5625rem;
   min-width: 48px; }
 
 .stat__label {
-  font-size: 12.8px; }
+  font-size: 0.8rem; }
 
 .material {
   margin-left: auto;
@@ -937,16 +937,16 @@ input:focus::placeholder {
   overflow: hidden; }
 
 .input-textarea-label.input-textarea-label--large {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: normal;
   line-height: 1.4;
-  margin-top: 25px;
+  margin-top: 1.5625rem;
   margin-bottom: 11.5px; }
 
 .input-textarea {
   background-color: transparent; }
   .input-textarea.input-textarea--large {
-    font-size: 20px; }
+    font-size: 1.25rem; }
 
 .input-file {
   background-color: transparent;
@@ -1095,12 +1095,12 @@ label {
   border-radius: 4px;
   border: 1px solid #c6bdcb;
   display: inline-block;
-  font-size: 12.8px;
+  font-size: 0.8rem;
   height: 32px;
   line-height: 1.4;
   padding: 4px 8px; }
   .form-control.form-control--large {
-    font-size: 16px;
+    font-size: 1rem;
     height: 40px; }
 
 .inline-form-control {
@@ -1141,7 +1141,7 @@ label {
   border-radius: 4px;
   border: 1px solid transparent;
   color: #c6bdcb;
-  font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
   height: 40px;
   padding: 4px 16px;
   text-align: center;
@@ -1164,7 +1164,7 @@ label {
   .button.link-button-ghost,
   .link-button.link-button-ghost {
     background-color: transparent;
-    font-size: 16px;
+    font-size: 1rem;
     text-decoration: underline; }
     .button.link-button-ghost:hover,
     .link-button.link-button-ghost:hover {
@@ -1183,7 +1183,7 @@ label {
   background-color: transparent;
   border: none;
   color: #596091;
-  font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
   text-decoration: underline; }
   .de-emphasized-button:hover {
     color: #9193a8; }
@@ -1192,7 +1192,7 @@ label {
 
 .revision-mode-button {
   color: #3f264e;
-  font-size: 12.8px;
+  font-size: 0.8rem;
   letter-spacing: 0.05em;
   padding-right: 24px;
   text-transform: uppercase;
@@ -1206,8 +1206,8 @@ label {
   background-color: transparent;
   border: 0;
   color: #596091;
-  font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
-  font-size: 12.8px;
+  font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-size: 0.8rem;
   letter-spacing: .05em;
   margin-right: 12px;
   margin-top: -12px;
@@ -1397,7 +1397,7 @@ label {
 
 .quote {
   border-left: 8px solid #8242a8;
-  font-size: 20px;
+  font-size: 1.25rem;
   padding-left: 1em; }
   .quote:empty {
     border-left: none;
@@ -1449,7 +1449,7 @@ label {
 
 .carousel__slider__slide {
   font-weight: bold;
-  font-size: 20px;
+  font-size: 1.25rem;
   text-align: center;
   box-shadow: 0 1px #EBEBEB;
   background: #fff;
@@ -1507,7 +1507,7 @@ label {
   border-radius: 4px;
   border: 1px solid transparent;
   color: #796585;
-  font: 400 16px/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
   padding: 0;
   text-align: center;
   text-decoration: none;
@@ -1527,7 +1527,7 @@ label {
   .fullscreen-button.fullscreen-button-ghost {
     background-color: transparent;
     border: 1px solid #ece9ee;
-    font-size: 16px;
+    font-size: 1rem;
     text-decoration: underline; }
     .fullscreen-button.fullscreen-button-ghost:hover {
       color: #ece9ee; }
@@ -1568,7 +1568,7 @@ small .svg-icon-wrapper.svg-baseline svg {
 
 .icon-button {
   position: absolute;
-  font-size: 24px;
+  font-size: 1.5625rem;
   top: 0;
   right: 0;
   left: 0;
@@ -1757,7 +1757,7 @@ small .svg-icon-wrapper.svg-baseline svg {
 
 .show-scores-control {
   color: #3f264e;
-  font-size: 12.8px;
+  font-size: 0.8rem;
   letter-spacing: 0.05em;
   margin: 16px;
   text-transform: uppercase;
@@ -1812,7 +1812,7 @@ small .svg-icon-wrapper.svg-baseline svg {
       content: counter(li);
       counter-increment: li;
       color: #AD66D5;
-      font-size: 61.03516px;
+      font-size: 3.8147rem;
       font-weight: 700;
       position: absolute;
       left: .75em;
