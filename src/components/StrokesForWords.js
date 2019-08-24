@@ -189,8 +189,8 @@ class StrokesForWords extends Component {
 
   render () {
     let layoutTypeStyle = '';
-    if (this.props.userSettings.stenoLayout === 'stenoLayoutKoreanModernCSteno') { layoutTypeStyle = ' heavy-type-face--korean'; }
-    if (this.props.userSettings.stenoLayout === 'stenoLayoutJapaneseSteno') { layoutTypeStyle = ' type-face--japanese'; }
+    if (this.props.userSettings && this.props.userSettings.stenoLayout === 'stenoLayoutKoreanModernCSteno') { layoutTypeStyle = ' heavy-type-face--korean'; }
+    if (this.props.userSettings && this.props.userSettings.stenoLayout === 'stenoLayoutJapaneseSteno') { layoutTypeStyle = ' type-face--japanese'; }
 
     let strokeListItems = this.state.listOfStrokesAndDicts.map( (strokeAndDict, indexInListOfStrokesAndDicts) => {
       let classes = strokeAndDict[1] === "typey-type.json" ? "steno-stroke px05 db fw7" : "steno-stroke px05 db steno-stroke--subtle";
@@ -270,7 +270,9 @@ class StrokesForWords extends Component {
 
     let mapBriefsFunction = mapBriefToAmericanStenoKeys;
     let StenoLayoutDiagram = AmericanStenoDiagram;
-    switch (this.props.userSettings.stenoLayout) {
+    let stenoLayout = (this.props.userSettings && this.props.userSettings.stenoLayout) ? this.props.userSettings.stenoLayout : 'stenoLayoutAmericanSteno';
+
+    switch (stenoLayout) {
       case 'stenoLayoutAmericanSteno':
         mapBriefsFunction = mapBriefToAmericanStenoKeys;
         StenoLayoutDiagram = AmericanStenoDiagram;
@@ -316,12 +318,12 @@ class StrokesForWords extends Component {
     let strokes = splitBriefsIntoStrokes(brief);
     let diagrams = (
       <div className="flex overflow-auto mr05">
-        {this.props.userSettings.showStrokesAsDiagrams && this.state.listOfStrokesAndDicts.length > 0 && strokes.map((strokeToDraw, index) =>
+        {this.props.userSettings && this.props.userSettings.showStrokesAsDiagrams && this.state.listOfStrokesAndDicts.length > 0 && strokes.map((strokeToDraw, index) =>
           <React.Fragment key={index}>
             {(Object.values(mapBriefsFunction(strokeToDraw)).some(item => item)) && <div className="mt1 mr2 mb2"><StenoLayoutDiagram id={"diagramID-"+ index + '-' + strokeToDraw} {...mapBriefsFunction(strokeToDraw)} brief="steno-diagram-group" diagramWidth="192" /></div> }
           </React.Fragment>
         )}
-        {this.props.userSettings.showStrokesAsDiagrams && this.state.listOfStrokesAndDicts.length === 0 ?
+        {this.props.userSettings && this.props.userSettings.showStrokesAsDiagrams && this.state.listOfStrokesAndDicts.length === 0 ?
           <React.Fragment>
             <div className="mt1 mr2 mb2"><StenoLayoutDiagram id={"diagramID-"+ 0} {...mapBriefsFunction('')} brief="steno-diagram-group" diagramWidth="192" /></div>
           </React.Fragment>
