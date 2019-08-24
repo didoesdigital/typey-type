@@ -110,9 +110,9 @@ class Home extends Component {
           <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
-                <h3 className="overline">Practice</h3>
-                <p>Finally, practice longer lessons to mimic real usage as closely as possible. Write as fast as you can without causing misstrokes. Explore classic stories that use simple sentences and common words.</p>
-                <Link to='/lessons/stories/fables/belling-the-cat/' className="link-button dib" style={{lineHeight: 2}}>Practice</Link>
+                <h3 className="overline">Practise</h3>
+                <p>Finally, practise longer lessons to mimic real usage as closely as possible. Write as fast as you can without causing misstrokes. Explore classic stories that use simple sentences and common words.</p>
+                <Link to='/lessons/stories/fables/belling-the-cat/' className="link-button dib" style={{lineHeight: 2}}>Practise</Link>
               </div>
             </div>
           </div>
@@ -120,7 +120,7 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
                 <h3>Track your progress</h3>
-                <p>Typey&nbsp;Type tracks your progress automatically without signing in. To keep your progress safe, however, you need to save it out of Typey&nbsp;Type after practice.</p>
+                <p>Typey&nbsp;Type tracks your progress automatically without signing in. To keep your progress safe, however, you need to save it out of Typey&nbsp;Type after practise.</p>
                 <Link to='/progress/' className="link-button dib" style={{lineHeight: 2}}>Your progress</Link>
               </div>
             </div>
@@ -191,6 +191,15 @@ class Home extends Component {
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
+                <h3>Lookup</h3>
+                <p>You can see a variety of strokes for words, numbers, punctuation, letters, and symbols.</p>
+                <Link to='/lookup/' className="link-button dib" style={{lineHeight: 2}}>Lookup</Link>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white landing-page-section">
+            <div className="p3 mx-auto mw-1024">
+              <div className="mw-584 ml-auto text-right">
                 <h3>Want to get involved?</h3>
                 <p>Support DiDoesDigital, create lessons, or share your feedback. Every bit helps.</p>
                 <Link to='/contribute/' className="link-button dib" style={{lineHeight: 2}}>Contribute</Link>
