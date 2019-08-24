@@ -307,24 +307,24 @@ select:focus {
 // Cross-browser placeholder styling
 // Reference: https://stackoverflow.com/questions/2610497/change-an-html5-inputs-placeholder-color-with-css
 ::-webkit-input-placeholder { // WebKit, Blink, Edge
-  color:   #949494;
+  color: add-tint($brand-primary, 30%);
 }
 :-moz-placeholder { // Mozilla Firefox 4 to 18
-  color:    #949494;
+  color: add-tint($brand-primary, 30%);
   opacity:  1;
 }
 ::-moz-placeholder { // Mozilla Firefox 19+
-  color:    #949494;
+  color: add-tint($brand-primary, 30%);
   opacity:  1;
 }
 :-ms-input-placeholder { // Internet Explorer 10-11
-  color:    #949494;
+  color: add-tint($brand-primary, 30%);
 }
 ::-ms-input-placeholder { // Microsoft Edge
-  color:    #949494;
+  color: add-tint($brand-primary, 30%);
 }
 ::placeholder {
-  color:    #949494;
+  color: add-tint($brand-primary, 30%);
 }
 
 .inline-form-control::placeholder {
@@ -1141,6 +1141,28 @@ label {
 
   &.inline-form-control--with-right-icon {
     padding: 4px 40px 4px 8px;
+  }
+  &.inline-form-control--reverse {
+    &::-webkit-input-placeholder { // WebKit, Blink, Edge
+      color: add-tint($brand-primary, 70%);
+    }
+    &:-moz-placeholder { // Mozilla Firefox 4 to 18
+      color: add-tint($brand-primary, 70%);
+      opacity: 1;
+    }
+    &::-moz-placeholder { // Mozilla Firefox 19+
+      color: add-tint($brand-primary, 70%);
+      opacity: 1;
+    }
+    &:-ms-input-placeholder { // Internet Explorer 10-11
+      color: add-tint($brand-primary, 70%);
+    }
+    &::-ms-input-placeholder { // Microsoft Edge
+      color: add-tint($brand-primary, 70%);
+    }
+    &::placeholder {
+      color: add-tint($brand-primary, 70%);
+    }
   }
 }
 
