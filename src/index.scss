@@ -52,6 +52,8 @@ $z-index-fill-fade-edges: 1;
 $z-index-successfully-typed-text: -1;
 $link-button-height: 2.5rem;
 $link-button-width: 2.5rem;
+$link-button-large-width: 3rem;
+$link-button-large-height: 3rem;
 $header-plus-footer-height: 208px;
 
 // Element styles
@@ -1161,6 +1163,7 @@ label {
   color: add-tint($brand-primary, 70%);
   font: $type;
   height: $link-button-height;
+  min-width: $link-button-width;
   padding: 4px 16px;
   text-align: center;
   text-decoration: none;
@@ -1195,6 +1198,10 @@ label {
     color: add-tint($brand-primary, 90%);
     background-color: add-tint(desaturate($brand-primary, 90%), 60%);
     cursor: default;
+  }
+  &.link-button--large {
+    width: $link-button-large-height;
+    height: $link-button-large-width;
   }
 }
 
@@ -1641,17 +1648,22 @@ label {
 }
 
 .carousel__button {
-  margin-top: -40px;
-  transform: translateY(40px);
+  margin-top: -#{$link-button-large-height};
+  transform: translateY($link-button-large-height);
 }
 
 .pagination-nav-button {
-  top: calc(50% - #{$link-button-height / 2});
+  top: calc(50% - #{$link-button-large-height / 2});
   &.pagination-nav-button--prev {
     left: calc(-#{$link-button-width} - 16px);
   }
   &.pagination-nav-button--next {
     right: calc(-#{$link-button-width} - 16px);
+  }
+
+  & button {
+    min-width: $link-button-large-width;
+    min-height: $link-button-large-height;
   }
 }
 
@@ -1699,16 +1711,16 @@ label {
   user-select: none;
   vertical-align: middle;
   white-space: nowrap;
-  width: $link-button-width;
-  height: $link-button-height;
-  top: 16px;
-  right: 24px;
+  width: $link-button-large-height;
+  height: $link-button-large-width;
+  top: 1rem;
+  right: 2rem;
   @media (min-width: $large-breakpoint) {
     display: none;
   }
   &.fullscreen {
-    top: 16px;
-    right: 24px;
+    top: 1rem;
+    right: 2rem;
   }
   &.fullscreen-button-ghost {
     background-color: transparent;
@@ -1724,8 +1736,8 @@ label {
     }
   }
   label {
-    width: $link-button-width;
-    height: $link-button-height;
+    width: $link-button-large-height;
+    height: $link-button-large-width;
   }
   input {
     visibility: hidden;
