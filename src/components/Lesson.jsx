@@ -375,10 +375,16 @@ class Lesson extends Component {
               <div>
                 <DocumentTitle title={'Typey Type | Flashcards'}>
                   <Flashcards
+                    fetchAndSetupGlobalDict={this.props.fetchAndSetupGlobalDict}
                     flashcardsMetWords={this.props.flashcardsMetWords}
                     flashcardsProgress={this.props.flashcardsProgress}
+                    globalLookupDictionary={this.props.globalLookupDictionary}
+                    globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
+                    globalUserSettings={this.props.globalUserSettings}
                     updateFlashcardsMetWords={this.props.updateFlashcardsMetWords.bind(this)}
                     updateFlashcardsProgress={this.props.updateFlashcardsProgress.bind(this)}
+                    updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
+                    userSettings={this.props.userSettings}
                     fullscreen={this.props.fullscreen}
                     changeFullscreen={this.props.changeFullscreen.bind(this)}
                     lessonpath={process.env.PUBLIC_URL + this.props.location.pathname.replace(/flashcards/, '') + 'lesson.txt'}

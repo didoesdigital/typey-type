@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
 import FlashcardsCarouselActionButtons from './FlashcardsCarouselActionButtons';
-import {
-  IconExternal,
-  IconFullscreen
-} from './Icon';
-import { Tooltip } from 'react-tippy';
-import 'react-tippy/dist/tippy.css'
+import StrokesForWords from './StrokesForWords';
+import { IconFullscreen } from './Icon';
 import * as Utils from './../utils/utils';
 import { parseLesson } from './../utils/typey-type';
 import { getLesson } from './../utils/getData';
@@ -480,32 +476,18 @@ currentSlide: currentSlide
 
 
 
+              <div className={"pt6 mw-584 mx-auto text-center hide-in-fullscreen" + fullscreen}>
+                <StrokesForWords
+                  fetchAndSetupGlobalDict={this.props.fetchAndSetupGlobalDict}
+                  globalLookupDictionary={this.props.globalLookupDictionary}
+                  globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
+                  globalUserSettings={this.props.globalUserSettings}
+                  updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
+                  userSettings={this.props.userSettings}
+                />
+              </div>
+
               <p className={"text-small text-center mt1 pt6 hide-in-fullscreen" + fullscreen}><a href={this.prefillSurveyLink()} className="mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--flashcards--give-feedback">Give feedback on this flashcard (form opens in a new tab)</a>.</p>
-              <p className={"text-small text-center mb0 hide-in-fullscreen" + fullscreen}>
-                <GoogleAnalytics.OutboundLink
-                  eventLabel="Look up brief on StenoKnight’s Plover lookup"
-                  aria-label="Look up brief on StenoKnight’s Plover lookup (opens in new tab)"
-                  to="http://stenoknight.com/plover/ploverlookup/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Look up brief on StenoKnight’s Plover lookup
-                  <Tooltip
-                    title="(opens in new tab)"
-                    animation="shift"
-                    arrow="true"
-                    className=""
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={this.props.setAnnouncementMessage}
-                  >
-                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-                  </Tooltip>
-                </GoogleAnalytics.OutboundLink>.
-              </p>
 
             </div>
           </div>

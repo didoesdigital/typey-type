@@ -1940,14 +1940,20 @@ class App extends Component {
                   {header}
                   <DocumentTitle title={'Typey Type | Flashcards'}>
                     <Flashcards
-                      locationpathname={this.props.location.pathname}
+                      changeFullscreen={this.changeFullscreen.bind(this)}
+                      fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                       flashcardsMetWords={this.state.flashcardsMetWords}
                       flashcardsProgress={this.state.flashcardsProgress}
                       fullscreen={this.state.fullscreen}
+                      globalLookupDictionary={this.state.globalLookupDictionary}
+                      globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
+                      globalUserSettings={this.state.globalUserSettings}
                       lessonpath="flashcards"
+                      locationpathname={this.props.location.pathname}
                       updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
                       updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
-                      changeFullscreen={this.changeFullscreen.bind(this)}
+                      updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                      userSettings={this.state.userSettings}
                     />
                   </DocumentTitle>
                 </div>
