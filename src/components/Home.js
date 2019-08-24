@@ -33,7 +33,7 @@ class Home extends Component {
                 <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-lg" alt='Demo of Typey Type for Stenographers in action' /></Link></div>
                 <h3 className="tiny-rule">What is stenography?</h3>
                 <p>The process of writing shorthand is called <strong>stenography</strong>. Want to write over 100 words per minute? Grab yourself a fancy keyboard and start learning stenography!</p>
-                <p>Typey&nbsp;Type for Stenographers is a free typing app designed specifically to help{" "}
+                <p>Typey&nbsp;Type for Stenographers is a free typing app designed to help{" "}
                   <Tooltip
                     animation="shift"
                     arrow="true"
@@ -48,7 +48,7 @@ class Home extends Component {
                   >
                     steno
                   </Tooltip>{" "}
-                  students practice and rapidly master stenography.</p>
+                  students practise and master stenography.</p>
                 <div className="relative"><Link to="/lessons"><img src={typeyTypeyDemoGIF} className="homepage-demo-xs" alt='Demo of Typey Type for Stenographers in action' /></Link></div>
                 <Link to='/support' className="link-button dib" style={{lineHeight: 2}}>Learn more</Link>
               </div>
@@ -58,7 +58,7 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3>Steno students</h3>
-                <p>After learning a little bit of steno theory, check out Typey&nbsp;Type’s fundamental <Link to="/lessons/">lessons</Link>, starting with the <Link to="/lessons/fundamentals/introduction/">Introduction</Link> lesson. Before you start typing, customise “your settings” so spaces match your steno settings: spaces before words, spaces after words, or ignore spaces&nbsp;completely.</p>
+                <p>After learning a little bit of steno theory, check out Typey&nbsp;Type’s fundamental <Link to="/lessons/">lessons</Link>, starting with the <Link to="/lessons/fundamentals/introduction/">Introduction</Link> lesson. Before you start typing, customise “your settings”. Set spaces match your steno settings: spaces before words, spaces after words, or ignore spaces&nbsp;completely.</p>
                 <Link to='/lessons/fundamentals/introduction/' className="link-button dib" style={{lineHeight: 2}}>Start typing</Link>
               </div>
             </div>
@@ -76,7 +76,7 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3 className="overline">Revise</h3>
-                <p>Revise 50 briefs a day from a lesson with loads of words you want to memorise, like the top 10000 English words. Try to recall the briefs before revealing their strokes. Avoid fingerspelling or writing out the long forms of words, so you can memorise the best brief for every word. </p>
+                <p>Revise 50 briefs a day from a lesson with loads of words you want to memorise, like the top 10000 English words. Try to recall the briefs before revealing their strokes. Avoid fingerspelling or writing out the long forms of words. This helps you memorise the best brief for every word. </p>
                 <Link to='/lessons/drills/top-10000-project-gutenberg-words/' className="link-button dib" style={{lineHeight: 2}}>Revise</Link>
               </div>
             </div>
@@ -103,7 +103,7 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584">
                 <h3>Track your progress</h3>
-                <p>Typey&nbsp;Type tracks your progress automatically without signing in. To keep your progress safe, however, you need to save it out of Typey&nbsp;Type regularly.</p>
+                <p>Typey&nbsp;Type tracks your progress automatically without signing in. To keep your progress safe, however, you need to save it out of Typey&nbsp;Type after practice.</p>
                 <Link to='/progress/' className="link-button dib" style={{lineHeight: 2}}>Your progress</Link>
               </div>
             </div>
@@ -112,7 +112,7 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3 className="tiny-rule--adjacent">Custom material</h3>
-                <p>Practice any text you like. Add a list of words to create a custom lesson using Plover theory, or supply words and strokes using your own theory and material.</p>
+                <p>Practise any text you like. Add a list of words to create a custom lesson using Plover theory, or supply words and strokes using your own theory and material.</p>
                 <Link to='/lessons/custom' className="link-button dib" style={{lineHeight: 2}}>Custom lessons</Link>
               </div>
             </div>
@@ -130,7 +130,7 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3>Dictionaries</h3>
-                <p>In addition to Typey&nbsp;Type’s own dictionary, you can find recent Plover dictionaries, links to community dictionaries, and a dictionary for every lesson.</p>
+                <p>Besides Typey&nbsp;Type’s dictionary, you can find Plover, community, and lesson dictionaries.</p>
                 <Link to='/dictionaries/' className="link-button dib" style={{lineHeight: 2}}>Dictionaries</Link>
               </div>
             </div>

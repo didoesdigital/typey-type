@@ -123,7 +123,7 @@ class Contribute extends Component {
                 </Tooltip>
               </GoogleAnalytics.OutboundLink>.
             </p>
-            <p>If you notice anything unexpected in a dictionary, especially Typey&nbsp;Type’s own dictionary, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=" target="_blank" rel="noopener noreferrer" id="ga--contribute--give-feedback-on-dictionary">share your feedback on that dictionary
+            <p>If you notice anything unexpected, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=" target="_blank" rel="noopener noreferrer" id="ga--contribute--give-feedback-on-dictionary">share your feedback on that dictionary
                 <Tooltip
                   title="Opens in a new tab"
                   className=""
@@ -139,8 +139,7 @@ class Contribute extends Component {
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></a>.
             </p>
-            <p>If you want to contribute directly to the dictionaries powering Typey&nbsp;Type’s stroke suggestions and lessons, see{' '}
-              <GoogleAnalytics.OutboundLink
+            <p><GoogleAnalytics.OutboundLink
                 eventLabel="Di’s Steno Dictionaries repo"
                 aria-label="Di’s Steno Dictionaries repo (external link opens in new tab)"
                 to="https://github.com/didoesdigital/steno-dictionaries"
@@ -163,7 +162,8 @@ class Contribute extends Component {
                     <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                   </Tooltip>
                 </span>
-              </GoogleAnalytics.OutboundLink> and the{' '}
+              </GoogleAnalytics.OutboundLink> has many dictionaries. These power Typey&nbsp;Type’s stroke suggestions.
+              See the{' '}
               <GoogleAnalytics.OutboundLink
                 eventLabel="repo’s contributing section"
                 aria-label="repo’s contributing section (external link opens in new tab)"

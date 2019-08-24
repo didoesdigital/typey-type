@@ -54,7 +54,7 @@ class Support extends Component {
         </div>
         <div className="p3 mx-auto mw-1024 type-face--sans-serif">
           <div className="mw-568">
-            <p className="mt3">Typey&nbsp;Type is a typing app designed specifically to help <a href="#about-stenography">stenography</a> students learn{" "}
+            <p className="mt3">Typey&nbsp;Type is a typing app designed to help <a href="#about-stenography">stenography</a> students learn{" "}
               <Tooltip
                 animation="shift"
                 arrow="true"
@@ -69,10 +69,10 @@ class Support extends Component {
               >
                 steno
               </Tooltip>{" "}
-              faster. You can learn briefs and improve your stenographic speed and accuracy using tailored education options, including tight feedback loops so you learn to fix misstrokes immediately. You can effortlessly track progress in your brief vocabulary and rapidly increase in steno skill.</p>
+              faster. You can learn briefs and improve your stenographic speed and accuracy. Lessons evolve as you progress. They have tight feedback loops so you learn to fix misstrokes immediately. You can effortlessly track progress in your brief vocabulary and rapidly increase in steno skill.</p>
 
             <h3 id="about-stenography">Stenography</h3>
-            <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. When you press keys together on a stenotype machine—like playing a piano chord—the software translates the key combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the{" "}
+            <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. You press keys together on a stenotype machine like playing a piano chord. The software translates the combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="Open steno project"
                 aria-label="Open steno project (external link opens in new tab)"
@@ -103,7 +103,7 @@ class Support extends Component {
               <dt>Briefs</dt>
               <dd>Loosely, a brief or outline is the specified combination of keys pressed together to produce a specific word or phrase. Strictly, a brief or abbreviation is a shortened outline form with fewer strokes than the phonetic outline.</dd>
               <dt>Strokes</dt>
-              <dd>A stroke is a combination of keys held together and released to write a word or sound. A multi-stroke brief is a combination of strokes pressed in order to produce a word or phrase (usually of more syllables).</dd>
+              <dd>A stroke is a combination of keys held together and released to write a word or sound. A multi-stroke brief is a combination of strokes pressed to produce a word or phrase (usually of more syllables).</dd>
               <dt>Plover</dt>
               <dd>{" "}
               <GoogleAnalytics.OutboundLink
@@ -128,7 +128,7 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> is the world’s first free, open-source stenography program that works cross-platform on Windows, macOS, and Linux operating systems.</dd>
+              </GoogleAnalytics.OutboundLink> is the world’s first free, open-source stenography program. It works cross-platform on Windows, macOS, and Linux operating systems.</dd>
             </dl>
 
             <h3 id="typey-type-notes">Typey&nbsp;Type notes</h3>
@@ -181,11 +181,11 @@ class Support extends Component {
               </GoogleAnalytics.OutboundLink> to teach steno effectively.</p>
 
             <h4 id="typey-type-progress-tracking">Typey Type progress tracking</h4>
-            <p>When you stop a lesson before reaching the end or you complete a lesson, Typey&nbsp;Type will save <Link to="/progress">your progress</Link>, including all the new words you’ve successfully met. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress. Typey&nbsp;Type saves your brief progress in your browser’s local storage. You’ll lose your progress if you clear your browsing data (history, cookies, and cache). If you share this device with other people or use Typey&nbsp;Type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;Type.</p>
+            <p>When you “stop” a lesson before reaching the end or you complete a lesson, Typey&nbsp;Type will save <Link to="/progress">your progress</Link>. That’s when it saves all the new words you’ve successfully typed. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress. Typey&nbsp;Type saves your brief progress in your browser’s local storage. You’ll lose your progress if you clear your browsing data (history, cookies, and cache). If you share this device with other people or use Typey&nbsp;Type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;Type.</p>
 
             <h4 id="typey-type-dictionary">Typey&nbsp;Type dictionary</h4>
-            <p>Typey&nbsp;Type uses a version of the Plover dictionary that comes built into the Plover software. Typey&nbsp;Type’s version is based on a copy of Plover’s from a few years ago that <a href="https://didoesdigital.com/">DiDoesDigital</a> has since spent many hours meticulously amending so that Typey&nbsp;Type automatically suggests the best brief available. It chooses the “best” stroke by looking for the shortest stroke, where there are penalties for multi-stroke briefs and briefs that use the star (<code>*</code>) key. <a href="https://didoesdigital.com/">DiDoesDigital</a> has also removed thousands of misstrokes so that they are not suggested when learning Plover theory. Some manual adjustments are made from time to time to encourage strokes that are more consistent with similar words, more consistent with Plover’s theory, phonetic, or easier to stroke.</p>
-            <p>If you want to use a different dictionary or learn a different steno theory, you can upload your words and strokes to a <Link to="/lessons/custom">Typey&nbsp;Type custom lesson</Link> and the briefs shown will match the dictionary you’re using.</p>
+            <p>Typey&nbsp;Type uses a version of the Plover dictionary that comes built into the Plover software. Typey&nbsp;Type’s version is based on a copy of Plover’s from a few years ago. <a href="https://didoesdigital.com/">DiDoesDigital</a> has since spent many hours meticulously amending it. This helps Typey&nbsp;Type suggests the best brief available. It chooses the “best” stroke by looking for the shortest stroke, where there are penalties for multi-stroke briefs and briefs that use the star (<code>*</code>) key. <a href="https://didoesdigital.com/">DiDoesDigital</a> has also removed thousands of misstrokes to hide them when learning Plover theory. There are some manual adjustments too. These show strokes that are more consistent with similar words, more consistent with Plover’s theory, phonetic, or easier to stroke.</p>
+            <p><Link to="/lessons/custom">Typey&nbsp;Type custom lessons</Link> let you use your own briefs or steno theory.</p>
             <p>If you notice any odd strokes,{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="post to the feedback form"
@@ -217,15 +217,15 @@ class Support extends Component {
             <h4 id="typey-type-terms">Typey&nbsp;Type terms</h4>
             <dl className="inline-flex flex-wrap">
               <dt>Spacing</dt>
-              <dd>Typey&nbsp;Type lets you choose where spaces should appear in a phrase for checking if you typed it correctly. This is because steno software can be used to automatically insert spaces before or after words, depending on the specific software and its settings. For example, Plover inserts spaces before words by default, and has a setting to insert spaces after words. Plover also provides extra spacing and capitalisation modes that can be set on the fly to suppress spaces or insert other punctuation (like dashes). A QWERTYist may feel more comfortable drilling words without any spaces, or sentences with spaces as the end.</dd>
+              <dd>Typey&nbsp;Type lets you choose where spaces should appear in a phrase for checking if you typed it correctly. Steno software can insert spaces before or after words, depending on the specific software and its settings. For example, Plover inserts spaces before words by default, and has a setting to insert spaces after words. Plover also provides extra spacing and capitalisation modes that can be set on the fly. This might suppress spaces or insert other punctuation (like dashes). A QWERTYist may feel more comfortable drilling words without any spaces, or sentences with spaces as the end.</dd>
               <dt>Seen words</dt>
               <dd>Typey&nbsp;Type tracks words you’ve "seen" or "met". Each time you successfully type a new word, that’s logged as a successful meeting.</dd>
               <dt>Words per minute (WPM)</dt>
-              <dd>To track your typing speed, Typey&nbsp;Type displays the number of words you’ve typed per minute using the unit “words per minute (WPM)”, where a word is considered to be 5 letters long on average. This means you might type many short words and have a higher WPM score.</dd>
+              <dd>To track your typing speed, Typey&nbsp;Type displays the number of words you’ve typed per minute using the unit “words per minute (WPM)”. A word is considered to be 5 letters long on average. This means you might type many short words and have a higher WPM score.</dd>
               <dt>Discover</dt>
-              <dd>The first type of study session lets you discover new briefs by showing only a limited number of new words while revealing their strokes. Write these words slowly, concentrating on accuracy and forming good habits around how you stroke word parts. Focus on lessons with interesting words, especially top words for your needs (such as common English words for general usage or domain specific phrases for steno in particular industries).</dd>
+              <dd>The first type of study session lets you discover new briefs by showing only a limited number of new words while revealing their strokes. Write these words slowly, concentrating on accuracy and forming good habits around how you stroke word parts. Focus on lessons with interesting words, especially top words for your needs, such as common English words for general usage. You might also study domain specific phrases for particular industries.</dd>
               <dt>Revise</dt>
-              <dd>The next type of study session helps you revise recently learned briefs by showing only words you’ve seen. Apply effort in recalling these briefs before showing strokes, and avoid fingerspelling or stroking out long, phonetic forms of words so you can memorise and rehearse the best brief for every word. Choose a lesson with the majority of words you’re interested in nailing first like the top 10000 English words.</dd>
+              <dd>The next type of study session helps you revise recently learned briefs by showing only words you’ve seen. Apply effort to recall these briefs before showing strokes. Avoid fingerspelling or stroking out long, phonetic forms of words so you can memorise and rehearse the best brief for every word. Choose a lesson with the majority of words you’re interested in nailing first like the top 10000 English words.</dd>
               <dt>Drill</dt>
               <dd>The third type of study session is about building up your muscle memory and testing your skills. Write as fast and furiously as you can and aim for a high WPM score. Pick specific drills that focus on a certain kind of brief or many similar words so you can associate them together.</dd>
               <dt>Practice</dt>
@@ -233,7 +233,7 @@ class Support extends Component {
             </dl>
 
             <h4 id="flashcards" tabIndex="-1">Flashcards</h4>
-            <p>Flashcards are designed for mobile devices so you can memorise steno briefs on the go. When you’re unable to recall a brief, tap “Hard” to indicate it was hard to remember. When you can recall a brief without hesitation, tap “Easy”. While studying flashcards, imagine which fingers and the shape of the outline you’d use to stroke a word.</p>
+            <p>Flashcards are designed for mobile devices so you can memorise steno briefs on the go. When you’re unable to recall a brief, tap “Hard” to say it was hard to remember. When you can recall a brief without hesitation, tap “Easy”. While studying flashcards, imagine which fingers and the shape of the outline you’d use to stroke a word.</p>
             <p>If it’s been a while since you’ve studied, the “threshold” will be set quite high. You’ll see flashcards you’ve studied that are below the threshold. That is, if the threshold is 12, you’ll see flashcards for words you’ve marked “Easy” less than 12 times. If you’ve marked a word as “Easy” 15 times, it won’t shown again until more time has passed.</p>
 
             <h3 id="learn-steno">Learning stenography</h3>
@@ -346,7 +346,7 @@ class Support extends Component {
             <p>100–200.</p>
 
             <h4 id="palantype">What’s a “palantype”?</h4>
-            <p>Typey&nbsp;Type supports alternative steno key layouts such as “palantype”. A palantype is an alternative shorthand machine to a stenotype with more keys. That means palantype can have fewer theory conflicts and be easier to learn. Stenography, on the other hand, is more popular and more ergonomic.{' '}
+            <p>Typey&nbsp;Type supports alternative steno key layouts such as “palantype”. A palantype is an alternative shorthand machine to a stenotype with more keys. That means palantype can have fewer theory conflicts and be easier to learn. Meanwhile, stenography is more popular and more ergonomic.{' '}
               <GoogleAnalytics.OutboundLink
                 eventLabel="Learn palantype"
                 aria-label="Learn palantype (external link opens in new tab)"
