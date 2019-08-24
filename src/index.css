@@ -1248,8 +1248,8 @@ label {
   .steno-stroke .raw-steno-key {
     padding: 4px 0; }
   .steno-stroke.steno-stroke--subtle {
-    background-color: #757575;
-    color: #d9d3dc; }
+    background-color: #6c6c6c;
+    color: #f5f4f6; }
 
 .raw-steno-key {
   background-color: #444444;

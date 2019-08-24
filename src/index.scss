@@ -1356,8 +1356,8 @@ label {
   }
 
   &.steno-stroke--subtle {
-    background-color: desaturate(add-tint($brand-primary, 30%), 40%);
-    color: add-tint($brand-primary, 80%);
+    background-color: desaturate(add-tint($brand-primary, 25%), 40%);
+    color: add-tint($brand-primary, 95%);
   }
 }
 .raw-steno-key {
