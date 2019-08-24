@@ -50,6 +50,7 @@ $z-index-revision-mode-button: 2;
 $z-index-show-scores-control: 2;
 $z-index-fill-fade-edges: 1;
 $z-index-successfully-typed-text: -1;
+$z-index-skip-to-main-link: 1;
 $link-button-height: 2.5rem;
 $link-button-width: 2.5rem;
 $link-button-large-width: 3rem;
@@ -1575,6 +1576,7 @@ label {
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
+  z-index: $z-index-skip-to-main-link;
 
   &:focus,
   &:active {
