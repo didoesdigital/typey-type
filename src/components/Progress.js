@@ -180,20 +180,18 @@ class Progress extends Component {
     this.props.updateRecommendationHistory(this.props.recommendationHistory);
   }
 
-  moreFlashcards = (skipButtonPressed = true) => {
+  onSkipFlashcards (event) {
     let labelString = this.props.flashcardsNextLesson.link;
     if (!labelString) { labelString = "BAD_INPUT"; }
 
-    if (skipButtonPressed) {
-      GoogleAnalytics.event({
-        category: 'Flashcards',
-        action: 'Skip recommended flashcards',
-        label: labelString
-      });
-    }
+    GoogleAnalytics.event({
+      category: 'Flashcards',
+      action: 'Skip recommended flashcards',
+      label: labelString
+    });
 
-    if (skipButtonPressed) {
-      const element = document.getElementById('js-skip-flashcards-button');
+    if (event && event.target && event.target.id) {
+      const element = document.getElementById(event.target.id);
       if (element) { element.focus(); }
     }
 
@@ -218,6 +216,9 @@ class Progress extends Component {
     if (this.state.toFlashcardsNextLesson === true) {
       return <Redirect push to={this.props.flashcardsNextLesson.link} />
     }
+
+    let skipButtonId = "js-flashcards-skip-button";
+    let mobileSkipButtonId = "js-mobile-flashcards-skip-button";
 
     let lessonsProgressFromTypeyType = this.props.lessonsProgress;
     const linkList = this.props.lessonIndex.map( (lesson) => {
@@ -477,11 +478,12 @@ class Progress extends Component {
                     </select>
                   </div>
                   <FlashcardsBox
+                    skipButtonId={mobileSkipButtonId}
                     flashcardsNextLesson={this.props.flashcardsNextLesson}
                     setAnnouncementMessage={this.props.setAnnouncementMessage}
                     loadingLessonIndex={this.state.loadingLessonIndex}
                     startFlashcards={this.startFlashcards.bind(this)}
-                    moreFlashcards={this.moreFlashcards}
+                    onSkip={this.onSkipFlashcards.bind(this)}
                   />
                 </ErrorBoundary>
               </div>
@@ -567,11 +569,12 @@ class Progress extends Component {
                           </select>
                         </div>
                         <FlashcardsBox
+                          skipButtonId={skipButtonId}
                           flashcardsNextLesson={this.props.flashcardsNextLesson}
                           setAnnouncementMessage={this.props.setAnnouncementMessage}
                           loadingLessonIndex={this.state.loadingLessonIndex}
                           startFlashcards={this.startFlashcards.bind(this)}
-                          moreFlashcards={this.moreFlashcards}
+                          onSkip={this.onSkipFlashcards.bind(this)}
                         />
                       </ErrorBoundary>
                     </div>

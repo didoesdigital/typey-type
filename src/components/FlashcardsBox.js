@@ -3,7 +3,14 @@ import { Link } from 'react-router-dom';
 import * as Utils from './../utils/utils';
 import 'react-tippy/dist/tippy.css'
 
-class FlashcardBox extends Component {
+class FlashcardsBox extends Component {
+
+  moreFlashcards(event) {
+    if (this.props.onSkip) {
+      this.props.onSkip(event);
+    }
+  }
+
   render () {
     let flashcardsNextLesson = this.props.flashcardsNextLesson;
     let flashcardsLink;
@@ -38,7 +45,7 @@ class FlashcardBox extends Component {
             <p className="text-right"><strong>{flashcardsLinkTitle}</strong></p>
             <p className="text-right de-emphasized">{flashcardsTimeSeenText}</p>
             <div className="flex flex-wrap justify-end">
-              <button onClick={this.props.moreFlashcards} id="js-flashcards-skip-button" className="de-emphasized-button pl3 pr3">Skip</button>
+              <button onClick={this.moreFlashcards.bind(this)} id={this.props.skipButtonId || "js-flashcards-skip-button"} className="de-emphasized-button pl3 pr3">Skip</button>
               <div className="text-right">
                 {flashcardsLink}
               </div>
@@ -53,7 +60,7 @@ class FlashcardBox extends Component {
             <p className="text-right"><strong>Loading…</strong></p>
             <p className="text-right de-emphasized"></p>
             <div className="flex flex-wrap justify-end">
-              <button onClick={this.props.moreFlashcards} id="js-skip-flashcards-button" className="de-emphasized-button pl3 pr3">Skip</button>
+              <button onClick={this.moreFlashcards.bind(this)} id={this.props.skipButtonId || "js-flashcards-skip-button"} className="de-emphasized-button pl3 pr3">Skip</button>
               <div className="text-right">
                 <button disabled className="link-button dib" style={{lineHeight: 2}}>Loading…</button>
               </div>
@@ -71,4 +78,4 @@ class FlashcardBox extends Component {
   }
 }
 
-export default FlashcardBox;
+export default FlashcardsBox;
