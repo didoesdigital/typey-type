@@ -1861,3 +1861,8 @@ small .svg-icon-wrapper.svg-baseline svg {
   top: 0;
   width: 100%;
   z-index: 1; }
+
+.text-input-accessibility-setting {
+  opacity: 0; }
+  .text-input-accessibility-setting + span:focus, .text-input-accessibility-setting:focus, .text-input-accessibility-setting:focus-within, .text-input-accessibility-setting:active {
+    opacity: 1; }

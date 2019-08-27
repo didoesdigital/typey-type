@@ -2121,3 +2121,15 @@ $lineAdjustment: 4px;
   width: 100%;
   z-index: 1;
 }
+
+.text-input-accessibility-setting {
+  opacity: 0;
+
+  + span:focus,
+  &:focus,
+  &:focus-within,
+  &:active {
+    opacity: 1;
+  }
+}
+

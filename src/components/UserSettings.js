@@ -369,6 +369,33 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
+                  <div className="checkbox-group">
+                    <label className="checkbox-label text-input-accessibility-setting">
+                      <input
+                        className="checkbox-input text-input-accessibility-setting"
+                        type="checkbox"
+                        name="textInputAccessibility"
+                        id="textInputAccessibility"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.textInputAccessibility}
+                        onChange={this.props.changeUserSetting}
+                      />
+                      <Tooltip
+                        title="When unchecked, this hides the text input field from screen readers to mute echoes from typed words but might make it impossible to access for some devices"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Text input accessibility
+                      </Tooltip>
+                    </label>
+                  </div>
                 </div>
 
                 <div className="mt2">

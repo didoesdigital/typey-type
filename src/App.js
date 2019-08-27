@@ -203,7 +203,7 @@ class App extends Component {
     super(props);
     this.charsPerWord = 5;
     // When updating default state for anything stored in local storage,
-    // add the same default to personal preferences code.
+    // add the same default to personal preferences code and test.
     let metWords = loadPersonalPreferences()[0];
 
     this.state = {
@@ -287,6 +287,7 @@ class App extends Component {
         hideStrokesOnLastRepetition: true,
         spacePlacement: 'spaceOff',
         speakMaterial: false,
+        textInputAccessibility: true,
         sortOrder: 'sortOff',
         seenWords: true,
         startFromWord: 1,
@@ -1160,6 +1161,7 @@ class App extends Component {
           'showStrokesAsDiagrams',
           'hideStrokesOnLastRepetition',
           'speakMaterial',
+          'textInputAccessibility',
           'seenWords'
         ];
 

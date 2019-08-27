@@ -884,6 +884,7 @@ function loadPersonalPreferences() {
     hideStrokesOnLastRepetition: true,
     spacePlacement: 'spaceOff',
     speakMaterial: false,
+    textInputAccessibility: true,
     sortOrder: 'sortOff',
     seenWords: true,
     study: 'discover',

@@ -17,6 +17,7 @@ class TypedText extends Component {
     let previousCompletedPhraseAsTypedKey = this.props.completedPhrases ? this.props.completedPhrases.length : 0;
     let strokes = this.props.currentLessonStrokes;
     let previousCompletedPhraseAccuracy = strokes && strokes.length > 0 ? strokes[strokes.length - 1].accuracy : true;
+    let textInputAccessibilityAriaHidden = !this.props.userSettings.textInputAccessibility;
 
     return (
       <div className="typed-text-container">
@@ -38,7 +39,7 @@ class TypedText extends Component {
             </CSSTransition>
           </TransitionGroup>
           </samp>
-          <span aria-hidden="true">
+          <span aria-hidden={textInputAccessibilityAriaHidden}>
             <textarea
               autoCapitalize="off"
               autoComplete="off"
