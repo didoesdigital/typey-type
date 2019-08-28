@@ -224,6 +224,7 @@ class App extends Component {
         "link": "/support#typey-type-dictionary",
         "path": "/dictionaries/typey-type/typey-type.json"
       }],
+      finishedLessonsCount: 0,
       flashcardsMetWords: {
         "the": {
           phrase: "the",
@@ -261,6 +262,7 @@ class App extends Component {
       startTime: null,
       showStrokesInLesson: false,
       timer: null,
+      topSpeed: 0,
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
@@ -742,6 +744,14 @@ class App extends Component {
     });
     // debugger
     return flashcardsMetWords;
+  }
+
+  updateFinishedLessonsCount() {
+    this.setState({finishedLessonsCount: this.state.finishedLessonsCount + 1});
+  }
+
+  updateTopSpeed(wpm) {
+    this.setState({topSpeed: wpm});
   }
 
   setupRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
@@ -2067,6 +2077,7 @@ class App extends Component {
                         currentPhrase={presentedMaterialCurrentItem.phrase}
                         currentStroke={presentedMaterialCurrentItem.stroke}
                         disableUserSettings={this.state.disableUserSettings}
+                        finishedLessonsCount={this.state.finishedLessonsCount}
                         handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
                         handleStartFromWordChange={this.handleStartFromWordChange.bind(this)}
                         handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
@@ -2091,6 +2102,7 @@ class App extends Component {
                         targetStrokeCount={this.state.targetStrokeCount}
                         timer={this.state.timer}
                         toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
+                        topSpeed={this.state.topSpeed}
                         charsPerWord={this.charsPerWord}
                         totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
                         totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
@@ -2102,7 +2114,9 @@ class App extends Component {
                         upcomingPhrases={upcomingMaterial}
                         updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
                         updateMarkup={this.updateMarkup.bind(this)}
+                        updateTopSpeed={this.updateTopSpeed.bind(this)}
                         userSettings={this.state.userSettings}
+                        updateFinishedLessonsCount={this.updateFinishedLessonsCount.bind(this)}
                         {...props}
                       />
                     </ErrorBoundary>

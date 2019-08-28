@@ -7,8 +7,26 @@ import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 
 class Finished extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      newTopSpeed: false
+    }
+  }
 
   componentDidMount() {
+    let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
+
+    this.props.updateFinishedLessonsCount();
+
+    if (this.props.topSpeed < wpm) {
+      this.props.updateTopSpeed(wpm);
+      this.setState({ newTopSpeed: true });
+    }
+    else {
+      this.setState({ newTopSpeed: false });
+    }
+
     if (this.finishedHeading) {
       this.finishedHeading.focus();
     }
@@ -92,7 +110,7 @@ class Finished extends Component {
       misstrokesSummary = (
         <React.Fragment>
           <div>
-            <h4 className="mt0 nowrap">Possible stroke improvements</h4>
+            <h4 className="mt3 nowrap">Possible stroke improvements</h4>
             <p>
               <a href={this.props.path} onClick={this.props.reviseLesson} role="button">
                 Revise these words</a>
@@ -178,6 +196,16 @@ class Finished extends Component {
       wpmCommentary = 'Practice this lesson again';
     }
 
+    let newTopSpeedSection = null;
+
+    if (this.state.newTopSpeed && this.props.finishedLessonsCount > 1) {
+      newTopSpeedSection = (
+        <div>
+          <p className="text-center h3 flex items-center justify-center">New top speed for today!</p>
+        </div>
+      );
+    }
+
     let lessonSummary = (
       <div className="finished-lesson mr1 mw-1024 overflow-hidden">
         <div className="flex flex-wrap">
@@ -210,10 +238,11 @@ class Finished extends Component {
                 <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
                 Restart lesson</a>
             </p>
+            <div className="misstrokes-summary">
+              {misstrokesSummary}
+            </div>
           </div>
-          <div className="misstrokes-summary">
-            {misstrokesSummary}
-          </div>
+          {newTopSpeedSection}
         </div>
       </div>
     );

@@ -295,6 +295,9 @@ input:focus::placeholder {
 .flex-grow {
   flex-grow: 1; }
 
+.flex-column {
+  flex-direction: column; }
+
 .justify-between {
   justify-content: space-between; }
 

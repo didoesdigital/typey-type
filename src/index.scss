@@ -398,6 +398,7 @@ input:focus::placeholder {
 .inline-flex      { display: inline-flex; }
 .flex-wrap        { flex-wrap: wrap; }
 .flex-grow        { flex-grow: 1; }
+.flex-column      { flex-direction: column; }
 .justify-between  { justify-content: space-between; }
 .justify-around   { justify-content: space-around; }
 .justify-end      { justify-content: flex-end; }
