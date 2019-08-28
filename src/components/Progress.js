@@ -5,7 +5,6 @@ import ErrorBoundary from './ErrorBoundary'
 import PseudoContentButton from './PseudoContentButton';
 import FlashcardsBox from './FlashcardsBox';
 import RecommendationBox from './RecommendationBox';
-import SurveyLinkPanel from './SurveyLinkPanel';
 import { getLessonIndexData } from './../utils/lessonIndexData';
 import { IconCheckmark, IconTriangleRight } from './Icon';
 import { Link, Redirect } from 'react-router-dom';
@@ -506,7 +505,6 @@ class Progress extends Component {
             <div className="flex flex-wrap justify-between">
               <div className="mw-384 w-336 order-1">
                 <ErrorBoundary relative={true}>
-                  <SurveyLinkPanel setAnnouncementMessage={this.props.setAnnouncementMessage} />
                   <RecommendationBox
                     recommendedNextLesson={this.props.recommendedNextLesson}
                     setAnnouncementMessage={this.props.setAnnouncementMessage}
