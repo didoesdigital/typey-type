@@ -13,6 +13,7 @@ if [[ $REPLY =~ ^[Yy]$ ]];
     exit
 fi
 
+# branch-name is a git alias to `!git rev-parse --abbrev-ref HEAD`
 if [[ `git branch-name` != master ]];
   then
     echo "Not on master!"
