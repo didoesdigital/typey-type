@@ -462,6 +462,9 @@ input:focus::placeholder {
 .mb6 {
   margin-bottom: 48px; }
 
+.mb12 {
+  margin-bottom: 96px; }
+
 .mr05 {
   margin-right: 4px; }
 
@@ -482,6 +485,9 @@ input:focus::placeholder {
 
 .mr12 {
   margin-right: 96px; }
+
+.ml0 {
+  margin-left: 0; }
 
 .ml1 {
   margin-left: 8px; }
@@ -707,6 +713,9 @@ input:focus::placeholder {
 
 .w-336 {
   width: 336px; }
+
+.w-50 {
+  width: 50%; }
 
 .w-100 {
   width: 100%; }
@@ -1869,3 +1878,8 @@ small .svg-icon-wrapper.svg-baseline svg {
   opacity: 0; }
   .text-input-accessibility-setting + span:focus, .text-input-accessibility-setting:focus, .text-input-accessibility-setting:focus-within, .text-input-accessibility-setting:active {
     opacity: 1; }
+
+.middot-separator li:not(:first-child)::before {
+  content: "•";
+  padding-left: 16px;
+  padding-right: 16px; }

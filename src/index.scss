@@ -499,6 +499,7 @@ input:focus::placeholder {
 .mb2     { margin-bottom: 16px; }
 .mb3     { margin-bottom: 24px; }
 .mb6     { margin-bottom: 48px; }
+.mb12    { margin-bottom: 96px; }
 .mr05    { margin-right: 4px; }
 .mr1     { margin-right: 8px; }
 .mr2     { margin-right: 16px; }
@@ -506,6 +507,7 @@ input:focus::placeholder {
 .mr4     { margin-right: 48px; }
 .mr5     { margin-right: 56px; }
 .mr12    { margin-right: 96px; }
+.ml0     { margin-left: 0; }
 .ml1     { margin-left: 8px; }
 .ml2     { margin-left: 16px; }
 .ml3     { margin-left: 24px; }
@@ -627,6 +629,10 @@ input:focus::placeholder {
 }
 
 .w-336  { width: 336px; }
+
+.w-50 {
+  width: 50%;
+}
 
 .w-100 {
   width: 100%;
@@ -2132,5 +2138,11 @@ $lineAdjustment: 4px;
   &:active {
     opacity: 1;
   }
+}
+
+.middot-separator li:not(:first-child)::before {
+  content: "•";
+  padding-left: 16px;
+  padding-right: 16px;
 }
 

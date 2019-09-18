@@ -333,6 +333,7 @@ class Lesson extends Component {
                 setAnnouncementMessage={this.props.setAnnouncementMessage}
                 suggestedNext={this.nextLessonPath()}
                 lessonLength={propsLesson.presentedMaterial.length}
+                lessonTitle={this.props.lessonTitle}
                 path={this.props.path}
                 prefillSurveyLink={this.prefillSurveyLink}
                 restartLesson={this.props.restartLesson}

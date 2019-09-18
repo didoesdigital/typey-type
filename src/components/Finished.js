@@ -57,7 +57,7 @@ class Finished extends Component {
 
     let wordsTyped = '';
 
-    if (this.props.currentLessonStrokes && this.props.currentLessonStrokes.length > 0) {
+    if (this.props.currentLessonStrokes && this.props.currentLessonStrokes.length >= 0) {
       let pluralisedString = '' + this.props.currentLessonStrokes.length + ' words typed';
 
       if (this.props.currentLessonStrokes.length === 1) {
@@ -65,7 +65,7 @@ class Finished extends Component {
       }
 
       wordsTyped = (
-        <div><p className="mt0 nowrap">{pluralisedString}</p></div>
+        <span className="nowrap">{pluralisedString}</span>
       );
     }
 
@@ -126,8 +126,9 @@ class Finished extends Component {
     }
 
     if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
-      accuracy = ' 100%!';
-    } else if (this.props.totalNumberOfMistypedWords > 0) {
+      accuracy = '100% accurate!';
+    }
+    else if (this.props.totalNumberOfMistypedWords > 0) {
       // console.log("this.props.totalNumberOfNewWordsMet" + this.props.totalNumberOfNewWordsMet);
       // console.log("this.props.totalNumberOfLowExposuresSeen" + this.props.totalNumberOfLowExposuresSeen);
       // console.log("this.props.totalNumberOfRetainedWords" + this.props.totalNumberOfRetainedWords);
@@ -144,23 +145,31 @@ class Finished extends Component {
       // console.log("Accuracy percent: " + accuracyPercent);
       let accuracyPercentRoundedToTwoDecimalPlaces = (Math.floor(accuracyPercent * 100) / 100);
       // console.log("Accuracy percent rounded: " + accuracyPercentRoundedToTwoDecimalPlaces);
-      accuracy = ' ' + accuracyPercentRoundedToTwoDecimalPlaces + '% accuracy!';
-    } else if (this.props.totalNumberOfHintedWords > 1) {
-      accuracy = accuracy + ' 100%! ' + this.props.totalNumberOfHintedWords + ' hints'; // plural
-    } else if (this.props.totalNumberOfHintedWords === 1) {
-      accuracy = accuracy + ' 100%! ' + this.props.totalNumberOfHintedWords + ' hint'; // singular
-    } else {
+      accuracy = '' + accuracyPercentRoundedToTwoDecimalPlaces + '% accuracy';
+    }
+    else if (this.props.totalNumberOfHintedWords >= 1) {
+      accuracy = accuracy + '100% accurate! ';
+    }
+    else {
       accuracy = ' Keep it up!';
     }
 
+    let hints = "0 hints";
+    if (this.props.totalNumberOfHintedWords === 1) {
+      hints = this.props.totalNumberOfHintedWords + " hint";
+    }
+    else if (this.props.totalNumberOfHintedWords > 1) {
+      hints = this.props.totalNumberOfHintedWords + " hints";
+    }
+
     // When you have stroked nothing right, except hinted or misstroked words, show nothing instead of 0%
-    if (accuracy === ' 0% accuracy!') {
+    if (accuracy === '0% accuracy!') {
       accuracy = '';
     }
     let emptyAndZeroStateMessage = '';
     let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
     if (wpm === 0) {
-      accuracy = ' Keep trying!';
+      accuracy = 'Keep trying!';
     }
 
     let wpmCommentary = '';
@@ -187,35 +196,34 @@ class Finished extends Component {
     } else if (wpm > 40) {
       wpmCommentary = 'Faster than your average typist!';
     } else if (wpm > 27) {
-      wpmCommentary = 'Faster than hunt and peck typists!';
+      wpmCommentary = 'Faster than hunt and peck typists';
     } else if (wpm > 22) {
-      wpmCommentary = 'Faster than Morse code!';
+      wpmCommentary = 'Faster than Morse code';
     } else if (wpm > 20) {
-      wpmCommentary = 'Faster than handwriting!';
+      wpmCommentary = 'Faster than handwriting';
     } else {
       wpmCommentary = 'Practice this lesson again';
     }
 
-    let newTopSpeedSection = null;
+    let newTopSpeedSectionOrFinished = "Finished: " + this.props.lessonTitle;
 
     if (this.state.newTopSpeed && this.props.finishedLessonsCount > 1) {
-      newTopSpeedSection = (
-        <div>
-          <p className="text-center h3 flex items-center justify-center">New top speed for today!</p>
-        </div>
-      );
+      newTopSpeedSectionOrFinished = "New top speed for today!";
+      wpmCommentary = this.props.lessonTitle;
     }
 
     let lessonSummary = (
       <div className="finished-lesson mr1 mw-1024 overflow-hidden">
-        <div className="flex flex-wrap">
-          <div className="finished-summary mr12 mb3">
-            <h2
-              className="mb1 negative-outline-offset dib"
-              ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }} tabIndex="-1" id="finished-heading">
-              Finished
-            </h2>
-            <h3 className="mt0 nowrap">{wpm}&nbsp;
+        <div className="finished-summary mb3 text-center">
+          <h3
+            className="negative-outline-offset dib text-center mt3"
+            ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }} tabIndex="-1" id="finished-heading">
+            {newTopSpeedSectionOrFinished}
+          </h3>
+          <p>{wpmCommentary}</p>
+          <ul className="inline-flex flex-wrap middot-separator unstyled-list">
+            <li className="ml0 bg-warning pl1 pr1">
+              {wpm}&nbsp;
               <Tooltip
                 animation="shift"
                 arrow="true"
@@ -227,22 +235,29 @@ class Finished extends Component {
                 title="words per minute"
                 trigger="mouseenter focus click"
                 onShow={this.props.setAnnouncementMessage}
-              >WPM</Tooltip>!{accuracy}</h3>
-            <h4 className="mt0 nowrap">{wpmCommentary}</h4>
-            {wordsTyped}
-            <p>
-              <Link to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
-                Next lesson
-              </Link>
-              <a href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="ml1" role="button">
-                <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
-                Restart lesson</a>
-            </p>
-            <div className="misstrokes-summary">
-              {misstrokesSummary}
-            </div>
-          </div>
-          {newTopSpeedSection}
+              >WPM</Tooltip>
+            </li>
+            <li className="ml0">
+              <span className="nowrap">{accuracy}</span>
+            </li>
+            <li className="ml0">
+              <span className="nowrap">{hints}</span>
+            </li>
+            <li className="ml0">
+              <span className="nowrap">{wordsTyped}</span>
+            </li>
+          </ul>
+          <p className="mb12">
+            <a href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
+              <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
+              Restart lesson</a>
+            <Link to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
+              Next lesson
+            </Link>
+          </p>
+        </div>
+        <div className="misstrokes-summary">
+          {misstrokesSummary}
         </div>
       </div>
     );
@@ -281,7 +296,7 @@ class Finished extends Component {
             />
           </div>
           <div className="lesson-canvas lesson-canvas--finished panel p3 overflow-scroll mb3">
-            <div className={lessonEmpty ? 'dc' : ''}>
+            <div className={lessonEmpty ? 'dc' : 'w-100'}>
               {emptyAndZeroStateMessage}
               {lessonSummary}
             </div>
