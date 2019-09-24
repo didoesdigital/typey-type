@@ -13,22 +13,30 @@ function getRandomBetween(min, max) {
 let ConfettiParticle = function() {
   let confettiMinimumSize = 2; // pixels
   let confettiMaximumSize = 10; // pixels
-  // let confettiMinimumXVelocity = -10; // pixel distance per tick
-  // let confettiMaximumXVelocity = 10; // pixel distance per tick
-  // let confettiMinimumYVelocity = -10; // pixel distance per tick
-  // let confettiMaximumYVelocity = 10; // pixel distance per tick
-  // let gravity = 0;
-  // let confettiLife = 30; // ticks
-  let confettiMinimumXVelocity = -10; // pixel distance per tick
-  let confettiMaximumXVelocity = 10; // pixel distance per tick
-  let confettiMinimumYVelocity = -20; // pixel distance per tick
-  let confettiMaximumYVelocity = -10; // pixel distance per tick
-  let gravity = .981;
+  let confettiMinimumXVelocity = -30; // pixel distance per tick
+  let confettiMaximumXVelocity = 30; // pixel distance per tick
+  let confettiMinimumYVelocity = -30; // pixel distance per tick
+  let confettiMaximumYVelocity = 10; // pixel distance per tick
+  let gravity = 0.981;
   let confettiLife = 300; // ticks
+  let confettiShrinkSpeed = 0.25; // pixels per tick
   let confettiLifeVariation = 10; // ticks
   let confettiDecaySpeed = 1; // life per tick
 
-  let confettiShrinkSpeed = 0.025; // pixels per tick
+  // Bouncier, more upwards version:
+  // let confettiMinimumSize = 2; // pixels
+  // let confettiMaximumSize = 10; // pixels
+  // let confettiMinimumXVelocity = -15; // pixel distance per tick
+  // let confettiMaximumXVelocity = 15; // pixel distance per tick
+  // let confettiMinimumYVelocity = -25; // pixel distance per tick
+  // let confettiMaximumYVelocity = -15; // pixel distance per tick
+  // let gravity = .981;
+  // let confettiLife = 300; // ticks
+  // let confettiLifeVariation = 10; // ticks
+  // let confettiDecaySpeed = 1; // life per tick
+
+  // let confettiShrinkSpeed = 0.075; // pixels per tick
+  // let confettiShrinkSpeed = 0.025; // pixels per tick
   // let confettiShrinkSpeed = 0.25; // pixels per tick
 
   this.maximumAnimationDuration = 10000;
@@ -88,7 +96,6 @@ class Finished extends Component {
 
     this.props.updateFinishedLessonsCount(wpm);
 
-        // window.requestAnimationFrame(this.updateCanvas.bind(this));
     if (this.props.topSpeed < wpm) {
       this.props.updateTopSpeed(wpm);
       if (this.props.finishedLessonsCount > 1) {
@@ -120,7 +127,6 @@ class Finished extends Component {
   }
 
   setupCanvas() {
-
     // let heading = this.refs.finishedHeading;
     let heading = document.getElementById('finished-heading');
     if (heading) {
