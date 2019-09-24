@@ -13,22 +13,23 @@ function getRandomBetween(min, max) {
 let ConfettiParticle = function() {
   let confettiMinimumSize = 2; // pixels
   let confettiMaximumSize = 10; // pixels
-  let confettiMinimumXVelocity = -10; // pixel distance per tick
-  let confettiMaximumXVelocity = 10; // pixel distance per tick
-  let confettiMinimumYVelocity = -10; // pixel distance per tick
-  let confettiMaximumYVelocity = 10; // pixel distance per tick
   // let confettiMinimumXVelocity = -10; // pixel distance per tick
   // let confettiMaximumXVelocity = 10; // pixel distance per tick
-  // let confettiMinimumYVelocity = -20; // pixel distance per tick
-  // let confettiMaximumYVelocity = -10; // pixel distance per tick
-  let confettiShrinkSpeed = 0.25; // pixels per tick
-  // let confettiShrinkSpeed = 0.025; // pixels per tick
-  let confettiLife = 30; // ticks
-  // let confettiLife = 300; // ticks
+  // let confettiMinimumYVelocity = -10; // pixel distance per tick
+  // let confettiMaximumYVelocity = 10; // pixel distance per tick
+  // let gravity = 0;
+  // let confettiLife = 30; // ticks
+  let confettiMinimumXVelocity = -10; // pixel distance per tick
+  let confettiMaximumXVelocity = 10; // pixel distance per tick
+  let confettiMinimumYVelocity = -20; // pixel distance per tick
+  let confettiMaximumYVelocity = -10; // pixel distance per tick
+  let gravity = .981;
+  let confettiLife = 300; // ticks
   let confettiLifeVariation = 10; // ticks
   let confettiDecaySpeed = 1; // life per tick
-  // let gravity = .981;
-  let gravity = 0;
+
+  let confettiShrinkSpeed = 0.025; // pixels per tick
+  // let confettiShrinkSpeed = 0.25; // pixels per tick
 
   this.maximumAnimationDuration = 10000;
   this.velocity = {
@@ -141,7 +142,7 @@ class Finished extends Component {
       let height = heading.offsetHeight
 
       let count = 0;
-      let sparsity = 17;
+      let sparsity = 170;
 
       for(let localX = 0; localX < width; localX++) {
         for(let localY = 0; localY < height; localY++) {
@@ -175,7 +176,6 @@ class Finished extends Component {
         for (let i = 0; i < particlesLength; i++) {
           particles[i].draw(ctx);
           let lastParticle = i === particles.length - 1;
-
 
           if (lastParticle) {
             let percentCompleted = ((Date.now() - particles[i].startTime) / particles[i].maximumAnimationDuration[i]) * 100;
