@@ -86,7 +86,7 @@ class Finished extends Component {
 
     let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
 
-    this.props.updateFinishedLessonsCount();
+    this.props.updateFinishedLessonsCount(wpm);
 
         // window.requestAnimationFrame(this.updateCanvas.bind(this));
     if (this.props.topSpeed < wpm) {

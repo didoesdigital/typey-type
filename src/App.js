@@ -746,8 +746,10 @@ class App extends Component {
     return flashcardsMetWords;
   }
 
-  updateFinishedLessonsCount() {
-    this.setState({finishedLessonsCount: this.state.finishedLessonsCount + 1});
+  updateFinishedLessonsCount(wpm) {
+    if (wpm > 0) {
+      this.setState({finishedLessonsCount: this.state.finishedLessonsCount + 1});
+    }
   }
 
   updateTopSpeed(wpm) {
