@@ -43,7 +43,7 @@ class Scores extends Component {
   render() {
     return (
       <div>
-        <h5 className="mb1 visually-hidden">Scores</h5>
+        <h3 className="mb1 visually-hidden">Scores</h3>
         <div className="timer flex flex-wrap justify-around">
           <div className="stat">
             <div className="stat__number text-center">{this.state.wordsPerMinute}</div>
@@ -67,7 +67,7 @@ class Scores extends Component {
             <div className="stat__label text-center">Time (seconds)</div>
           </div>
 
-          <h6 className="visually-hidden">Words typed</h6>
+          <h4 className="visually-hidden">Words typed</h4>
           <div className="stat">
             <div className="stat__number text-center">{this.props.totalNumberOfNewWordsMet}</div>
             <div className="stat__label text-center">New</div>

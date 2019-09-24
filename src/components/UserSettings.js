@@ -9,9 +9,9 @@ class UserSettings extends Component {
     var grabStyle = function() {return false};
     let toggleClasses;
     if (this.props.hideOtherSettings) {
-      toggleClasses = "mt1 mb1 de-emphasized text-center subsection-header subsection-header-toggle collapsed";
+      toggleClasses = "h6 mt1 mb1 de-emphasized text-center subsection-header subsection-header-toggle collapsed";
     } else {
-      toggleClasses = "mt1 mb1 de-emphasized text-center subsection-header subsection-header-toggle";
+      toggleClasses = "h6 mt1 mb1 de-emphasized text-center subsection-header subsection-header-toggle";
     }
 
     let hideStrokesOnLastRepetitionTooltip = "Hide briefs during the last repetition";
@@ -22,7 +22,7 @@ class UserSettings extends Component {
     return (
       <div className="user-settings">
         <form>
-          <h5 className="mb1 visually-hidden">Settings</h5>
+          <h3 className="mb1 visually-hidden">Settings</h3>
           <div className="text-small">
             <div className="flex flex-wrap mw-1024 mx-auto justify-between mb2">
               <div className="flex flex-wrap">
@@ -173,7 +173,7 @@ class UserSettings extends Component {
               }
             </div>
 
-            <h6 className={toggleClasses} onClick={this.props.toggleHideOtherSettings} onKeyPress={this.props.toggleHideOtherSettings} role="button" tabIndex="0" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">Your settings{this.props.hideOtherSettings}</h6>
+            <p className={toggleClasses} onClick={this.props.toggleHideOtherSettings} onKeyPress={this.props.toggleHideOtherSettings} role="button" tabIndex="0" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">Your settings{this.props.hideOtherSettings}</p>
             <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'hide' : ''} aria-hidden={this.props.hideOtherSettings}>
 
               <div className="flex flex-wrap justify-between">

@@ -807,6 +807,9 @@ input:focus::placeholder {
 .h5 {
   font-size: 1rem; }
 
+.h6 {
+  font-size: 0.8rem; }
+
 .divider {
   border-top: 1px solid #d9d3dc; }
 
