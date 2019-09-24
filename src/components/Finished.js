@@ -135,6 +135,7 @@ class Finished extends Component {
 
       let count = 0;
       let sparsity = 170;
+      let bcr = heading.getBoundingClientRect();
 
       for(let localX = 0; localX < width; localX++) {
         for(let localY = 0; localY < height; localY++) {
@@ -142,7 +143,6 @@ class Finished extends Component {
             // $brand-highlight #ffd073 or $brand-primary #402351 confetti
             let rgbaColorArr = Math.random() <.5 ? [255, 208, 115, getRandomBetween(0.7, 1)] : [64, 35, 81, getRandomBetween(0.7, 1)];
 
-            let bcr = heading.getBoundingClientRect();
             let globalX =  bcr.x + localX;
             let globalY =  bcr.y + localY;
 
