@@ -353,6 +353,9 @@ input:focus::placeholder {
 .absolute {
   position: absolute; }
 
+.fixed {
+  position: fixed; }
+
 .lh-single {
   line-height: 1; }
 

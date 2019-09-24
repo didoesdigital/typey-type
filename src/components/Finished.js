@@ -75,8 +75,8 @@ class Finished extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      canvasWidth: 974,
-      canvasHeight: 250,
+      canvasWidth: Math.floor(window.innerWidth),
+      canvasHeight: Math.floor(window.innerHeight),
       newTopSpeed: false
     }
   }
@@ -120,20 +120,6 @@ class Finished extends Component {
   }
 
   setupCanvas() {
-    const canvas = this.refs.canvas;
-    const lessonCanvas = document.getElementById('js-lesson-canvas');
-
-    if (lessonCanvas) {
-      let lessonCanvasWidth = lessonCanvas.getBoundingClientRect().width;
-      let lessonCanvasHeight = lessonCanvas.getBoundingClientRect().height;
-      canvas.style.width = lessonCanvasWidth;
-      canvas.style.height = lessonCanvasHeight;
-
-      this.setState({
-        canvasWidth: Math.floor(lessonCanvasWidth),
-        canvasHeight: Math.floor(lessonCanvasHeight)
-      });
-    }
 
     // let heading = this.refs.finishedHeading;
     let heading = document.getElementById('finished-heading');
@@ -151,8 +137,8 @@ class Finished extends Component {
             let rgbaColorArr = Math.random() <.5 ? [255, 208, 115, getRandomBetween(0.7, 1)] : [64, 35, 81, getRandomBetween(0.7, 1)];
 
             let bcr = heading.getBoundingClientRect();
-            let globalX = (bcr.left/2) + localX;
-            let globalY = (bcr.top/4) + localY;
+            let globalX =  bcr.x + localX;
+            let globalY =  bcr.y + localY;
 
             createParticleAtPoint(globalX, globalY, rgbaColorArr);
           }
@@ -358,7 +344,7 @@ class Finished extends Component {
     }
 
     let lessonSummary = (
-      <div className="finished-lesson mr1 mw-1024 overflow-hidden">
+      <div className="finished-lesson mw-1024 overflow-hidden">
         <div className="finished-summary mb3 text-center">
           <h3
             className="negative-outline-offset dib text-center mt3"
@@ -424,6 +410,7 @@ class Finished extends Component {
     }
     return (
       <div>
+        <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
         <div className="mx-auto mw-1024">
           {customMessage}
         </div>
@@ -440,8 +427,7 @@ class Finished extends Component {
               totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
             />
           </div>
-          <div className="lesson-canvas lesson-canvas--finished panel p3 mb3" id="js-lesson-canvas">
-            <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="absolute celebration-canvas top-0 left-0 pointer-none" />
+          <div className="lesson-canvas lesson-canvas--finished panel p3 mb3">
             <div className={lessonEmpty ? 'dc' : 'w-100'}>
               {emptyAndZeroStateMessage}
               {lessonSummary}
