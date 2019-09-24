@@ -423,7 +423,7 @@ class Finished extends Component {
       customMessage = ''
     }
     return (
-      <main id="main">
+      <div>
         <div className="mx-auto mw-1024">
           {customMessage}
         </div>
@@ -469,7 +469,7 @@ class Finished extends Component {
             userSettings={this.props.userSettings}
           />
         </div>
-      </main>
+      </div>
     )
   }
 
