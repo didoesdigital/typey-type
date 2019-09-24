@@ -444,7 +444,7 @@ class Lesson extends Component {
                       </AnimateHeight>
                       <div role="article" className="lesson-canvas panel mw-1024 p2 fill-fade-parent mb3">
                         {revisionModeButton}
-                        <span className="fill-fade-edges"></span>
+                        <span className="fill-fade-edges pointer-none"></span>
                         <div className="mx-auto mw100 mt10 text-center min-width-70">
                           <Material
                             actualText={this.props.actualText}

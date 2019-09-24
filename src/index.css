@@ -782,6 +782,9 @@ input:focus::placeholder {
 .unstyled-list-item {
   margin-left: 0; }
 
+.pointer-none {
+  pointer-events: none; }
+
 .truncate {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1463,7 +1466,6 @@ label {
   background-image: linear-gradient(to right, #f9f8fa 0%, #f9f8fa 5%, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0) 90%, #f9f8fa 95%, #f9f8fa 100%);
   border-radius: 4px;
   position: absolute;
-  pointer-events: none;
   top: 0;
   right: 0;
   bottom: 0;
@@ -1604,8 +1606,7 @@ small .svg-icon-wrapper.svg-baseline svg {
 .search-icon {
   position: absolute;
   top: 50%;
-  transform: translate(-40px, -64%);
-  pointer-events: none; }
+  transform: translate(-40px, -64%); }
 
 .icon-button {
   position: absolute;
@@ -1883,3 +1884,6 @@ small .svg-icon-wrapper.svg-baseline svg {
   content: "•";
   padding-left: 16px;
   padding-right: 16px; }
+
+.celebration-canvas {
+  z-index: 5; }

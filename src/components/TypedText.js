@@ -24,7 +24,7 @@ class TypedText extends Component {
         <label className="visually-hidden" htmlFor="your-typed-text">Write {this.props.currentPhrase}</label>
         <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
         <p className="input-text">
-          <samp className="previous-completed-phrase-as-typed-wrapper absolute absolute--fill w-100">
+          <samp className="pointer-none absolute absolute--fill w-100">
           <TransitionGroup
             className="dib"
             component={"span"}

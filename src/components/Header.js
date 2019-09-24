@@ -86,7 +86,7 @@ class Header extends Component {
                   value={this.props.value}
                   wrapperStyle={{ position: 'relative', display: 'table-cell', paddingLeft: '0.5em', paddingRight: '0.5em', width: '100%' }}
                 />
-                <IconSearch role="presentation" iconWidth="24" iconHeight="24" className="mr1 svg-icon-wrapper svg-baseline search-icon" />
+                <IconSearch role="presentation" iconWidth="24" iconHeight="24" className="mr1 svg-icon-wrapper svg-baseline search-icon pointer-none" />
                 <div className="visually-hidden">Selected lesson to start next:
                   <div role="status" aria-live="assertive" aria-atomic="true">
                     {nextLesson}

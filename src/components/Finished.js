@@ -6,21 +6,93 @@ import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 
+function getRandomBetween(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+let ConfettiParticle = function() {
+  let confettiMinimumSize = 2; // pixels
+  let confettiMaximumSize = 10; // pixels
+  let confettiMinimumXVelocity = -10; // pixel distance per tick
+  let confettiMaximumXVelocity = 10; // pixel distance per tick
+  let confettiMinimumYVelocity = -10; // pixel distance per tick
+  let confettiMaximumYVelocity = 10; // pixel distance per tick
+  // let confettiMinimumXVelocity = -10; // pixel distance per tick
+  // let confettiMaximumXVelocity = 10; // pixel distance per tick
+  // let confettiMinimumYVelocity = -20; // pixel distance per tick
+  // let confettiMaximumYVelocity = -10; // pixel distance per tick
+  let confettiShrinkSpeed = 0.25; // pixels per tick
+  // let confettiShrinkSpeed = 0.025; // pixels per tick
+  let confettiLife = 30; // ticks
+  // let confettiLife = 300; // ticks
+  let confettiLifeVariation = 10; // ticks
+  let confettiDecaySpeed = 1; // life per tick
+  // let gravity = .981;
+  let gravity = 0;
+
+  this.maximumAnimationDuration = 10000;
+  this.velocity = {
+    x: getRandomBetween(confettiMinimumXVelocity, confettiMaximumXVelocity),
+    y: getRandomBetween(confettiMinimumYVelocity, confettiMaximumYVelocity)
+  };
+  this.radius = getRandomBetween(confettiMinimumSize, confettiMaximumSize);
+  this.life = confettiLife + getRandomBetween(0, confettiLifeVariation);
+  this.remainingLife = this.life;
+
+
+  this.draw = ctx => {
+    let p = this;
+
+    if (this.remainingLife > 0 && this.radius > 0) {
+      ctx.beginPath();
+      ctx.arc(p.startX, p.startY, p.radius, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(" + this.rgbArray[0] + ',' + this.rgbArray[1] + ',' + this.rgbArray[2] + "," + this.rgbArray[3] + ")";
+      ctx.fill();
+
+      p.remainingLife -= confettiDecaySpeed;
+      p.radius -= confettiShrinkSpeed;
+      p.startX += p.velocity.x;
+      p.startY += p.velocity.y;
+      p.velocity.y = p.velocity.y + gravity;
+    }
+  }
+}
+
+let particles = [];
+
+function createParticleAtPoint(x, y, colorData) {
+  let particle = new ConfettiParticle();
+  particle.rgbArray = colorData;
+  particle.startX = x;
+  particle.startY = y;
+  particle.startTime = Date.now();
+
+  particles.push(particle);
+}
+
 class Finished extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      canvasWidth: 974,
+      canvasHeight: 250,
       newTopSpeed: false
     }
   }
 
   componentDidMount() {
+    this.setupCanvas();
+
     let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
 
     this.props.updateFinishedLessonsCount();
 
+        // window.requestAnimationFrame(this.updateCanvas.bind(this));
     if (this.props.topSpeed < wpm) {
       this.props.updateTopSpeed(wpm);
+      if (this.props.finishedLessonsCount > 1) {
+        window.requestAnimationFrame(this.updateCanvas.bind(this));
+      }
       this.setState({ newTopSpeed: true });
     }
     else {
@@ -44,6 +116,79 @@ class Finished extends Component {
       wordsPerMinute = 0;
     }
     return wordsPerMinute;
+  }
+
+  setupCanvas() {
+    const canvas = this.refs.canvas;
+    const lessonCanvas = document.getElementById('js-lesson-canvas');
+
+    if (lessonCanvas) {
+      let lessonCanvasWidth = lessonCanvas.getBoundingClientRect().width;
+      let lessonCanvasHeight = lessonCanvas.getBoundingClientRect().height;
+      canvas.style.width = lessonCanvasWidth;
+      canvas.style.height = lessonCanvasHeight;
+
+      this.setState({
+        canvasWidth: Math.floor(lessonCanvasWidth),
+        canvasHeight: Math.floor(lessonCanvasHeight)
+      });
+    }
+
+    // let heading = this.refs.finishedHeading;
+    let heading = document.getElementById('finished-heading');
+    if (heading) {
+      let width = heading.offsetWidth;
+      let height = heading.offsetHeight
+
+      let count = 0;
+      let sparsity = 17;
+
+      for(let localX = 0; localX < width; localX++) {
+        for(let localY = 0; localY < height; localY++) {
+          if (count % sparsity === 0) {
+            // $brand-highlight #ffd073 or $brand-primary #402351 confetti
+            let rgbaColorArr = Math.random() <.5 ? [255, 208, 115, getRandomBetween(0.7, 1)] : [64, 35, 81, getRandomBetween(0.7, 1)];
+
+            let bcr = heading.getBoundingClientRect();
+            let globalX = (bcr.left/2) + localX;
+            let globalY = (bcr.top/4) + localY;
+
+            createParticleAtPoint(globalX, globalY, rgbaColorArr);
+          }
+
+          count++;
+        }
+      }
+    }
+  }
+
+  updateCanvas() {
+    const canvas = this.refs.canvas;
+
+    if (canvas) {
+      const ctx = this.refs.canvas.getContext('2d');
+
+      if (typeof ctx !== "undefined") {
+        ctx.clearRect(0, 0, this.state.canvasWidth, this.state.canvasHeight);
+
+        let particlesLength = particles.length;
+        for (let i = 0; i < particlesLength; i++) {
+          particles[i].draw(ctx);
+          let lastParticle = i === particles.length - 1;
+
+
+          if (lastParticle) {
+            let percentCompleted = ((Date.now() - particles[i].startTime) / particles[i].maximumAnimationDuration[i]) * 100;
+
+            if (percentCompleted > 100) {
+              particles = [];
+            }
+          }
+        }
+
+        window.requestAnimationFrame(this.updateCanvas.bind(this));
+      }
+    }
   }
 
   render() {
@@ -295,7 +440,8 @@ class Finished extends Component {
               totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
             />
           </div>
-          <div className="lesson-canvas lesson-canvas--finished panel p3 overflow-scroll mb3">
+          <div className="lesson-canvas lesson-canvas--finished panel p3 mb3" id="js-lesson-canvas">
+            <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="absolute celebration-canvas top-0 left-0 pointer-none" />
             <div className={lessonEmpty ? 'dc' : 'w-100'}>
               {emptyAndZeroStateMessage}
               {lessonSummary}
