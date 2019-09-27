@@ -96,7 +96,7 @@ class Finished extends Component {
 
     this.props.updateFinishedLessonsCount(wpm);
 
-    if (this.props.topSpeed < wpm) {
+    if (this.props.topSpeed < wpm && this.props.currentLessonStrokes.length > 3) {
       this.props.updateTopSpeed(wpm);
       if (this.props.finishedLessonsCount > 1) {
         window.requestAnimationFrame(this.updateCanvas.bind(this));
