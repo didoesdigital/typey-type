@@ -262,7 +262,7 @@ class App extends Component {
       startTime: null,
       showStrokesInLesson: false,
       timer: null,
-      topSpeed: 0,
+      topSpeedToday: 0,
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
@@ -753,7 +753,7 @@ class App extends Component {
   }
 
   updateTopSpeed(wpm) {
-    this.setState({topSpeed: wpm});
+    this.setState({topSpeedToday: wpm});
   }
 
   setupRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
@@ -2104,7 +2104,7 @@ class App extends Component {
                         targetStrokeCount={this.state.targetStrokeCount}
                         timer={this.state.timer}
                         toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
-                        topSpeed={this.state.topSpeed}
+                        topSpeedToday={this.state.topSpeedToday}
                         charsPerWord={this.charsPerWord}
                         totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
                         totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}

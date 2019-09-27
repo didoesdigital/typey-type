@@ -341,7 +341,7 @@ class Lesson extends Component {
                 settings={this.props.lesson.settings}
                 timer={this.props.timer}
                 toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-                topSpeed={this.props.topSpeed}
+                topSpeedToday={this.props.topSpeedToday}
                 charsPerWord={this.props.charsPerWord}
                 revisionMaterial={this.props.revisionMaterial}
                 updateFinishedLessonsCount={this.props.updateFinishedLessonsCount}
