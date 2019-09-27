@@ -263,6 +263,7 @@ class App extends Component {
       showStrokesInLesson: false,
       timer: null,
       topSpeedToday: 0,
+      topSpeedPersonalBest: 0,
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
@@ -427,6 +428,7 @@ class App extends Component {
     let flashcardsProgress = this.state.flashcardsProgress;
     let globalUserSettings = this.state.globalUserSettings;
     let lessonsProgress = this.state.lessonsProgress;
+    let topSpeedPersonalBest = { wpm: this.state.topSpeedPersonalBest };
     let userSettings = this.state.userSettings;
     if (source && source !== '') {
       try {
@@ -438,7 +440,7 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress] = loadPersonalPreferences();
+      [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest] = loadPersonalPreferences();
     }
 
     let yourSeenWordCount = calculateSeenWordCount(this.state.metWords);
@@ -449,6 +451,7 @@ class App extends Component {
       flashcardsProgress: flashcardsProgress,
       globalUserSettings: globalUserSettings,
       lessonsProgress: lessonsProgress,
+      topSpeedPersonalBest: topSpeedPersonalBest,
       metWords: metWords,
       userSettings: userSettings,
       yourSeenWordCount: yourSeenWordCount,
@@ -458,12 +461,13 @@ class App extends Component {
       writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
       writePersonalPreferences('globalUserSettings', this.state.globalUserSettings);
       writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
+      writePersonalPreferences('topSpeedPersonalBest', this.state.topSpeedPersonalBest);
       writePersonalPreferences('metWords', this.state.metWords);
       writePersonalPreferences('userSettings', this.state.userSettings);
       this.setupLesson();
     });
 
-    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress];
+    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest['wpm']];
   }
 
   handleLimitWordsChange(event) {
@@ -752,8 +756,13 @@ class App extends Component {
     }
   }
 
-  updateTopSpeed(wpm) {
+  updateTopSpeedToday(wpm) {
     this.setState({topSpeedToday: wpm});
+  }
+
+  updateTopSpeedPersonalBest(wpm) {
+    this.setState({topSpeedPersonalBest: wpm});
+    writePersonalPreferences('topSpeedPersonalBest', wpm);
   }
 
   setupRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
@@ -2105,6 +2114,7 @@ class App extends Component {
                         timer={this.state.timer}
                         toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
                         topSpeedToday={this.state.topSpeedToday}
+                        topSpeedPersonalBest={this.state.topSpeedPersonalBest}
                         charsPerWord={this.charsPerWord}
                         totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
                         totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
@@ -2116,7 +2126,8 @@ class App extends Component {
                         upcomingPhrases={upcomingMaterial}
                         updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
                         updateMarkup={this.updateMarkup.bind(this)}
-                        updateTopSpeed={this.updateTopSpeed.bind(this)}
+                        updateTopSpeedToday={this.updateTopSpeedToday.bind(this)}
+                        updateTopSpeedPersonalBest={this.updateTopSpeedPersonalBest.bind(this)}
                         userSettings={this.state.userSettings}
                         updateFinishedLessonsCount={this.updateFinishedLessonsCount.bind(this)}
                         {...props}

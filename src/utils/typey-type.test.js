@@ -1491,6 +1491,7 @@ describe('loadPersonalPreferences', () => {
         writerInput: "qwerty"
       };
       let lessonsProgress = {};
+      let topSpeedPersonalBest = {wpm: 0};
       let userSettings = {
         blurMaterial: false,
         caseSensitive: false,
@@ -1513,7 +1514,7 @@ describe('loadPersonalPreferences', () => {
         seenWords: true,
         study: 'discover'
       };
-      expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress]);
+      expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest]);
     });
   });
 });

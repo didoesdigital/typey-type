@@ -342,12 +342,14 @@ class Lesson extends Component {
                 timer={this.props.timer}
                 toggleHideOtherSettings={this.props.toggleHideOtherSettings}
                 topSpeedToday={this.props.topSpeedToday}
+                topSpeedPersonalBest={this.props.topSpeedPersonalBest}
                 charsPerWord={this.props.charsPerWord}
                 revisionMaterial={this.props.revisionMaterial}
                 updateFinishedLessonsCount={this.props.updateFinishedLessonsCount}
                 updateRecommendationHistory={this.props.updateRecommendationHistory}
                 updateRevisionMaterial={this.props.updateRevisionMaterial}
-                updateTopSpeed={this.props.updateTopSpeed}
+                updateTopSpeedToday={this.props.updateTopSpeedToday}
+                updateTopSpeedPersonalBest={this.props.updateTopSpeedPersonalBest}
                 totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
                 totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
                 totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}

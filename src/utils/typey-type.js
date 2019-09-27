@@ -868,6 +868,7 @@ function loadPersonalPreferences() {
     },
   };
   let lessonsProgress = {};
+  let topSpeedPersonalBest = { wpm: 0 };
   let userSettings = {
     blurMaterial: false,
     caseSensitive: false,
@@ -910,17 +911,26 @@ function loadPersonalPreferences() {
       if (window.localStorage.getItem('lessonsProgress')) {
         lessonsProgress = Object.assign(lessonsProgress, JSON.parse(window.localStorage.getItem('lessonsProgress')));
       }
-      return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress];
+      if (window.localStorage.getItem('topSpeedPersonalBest')) {
+        topSpeedPersonalBest = Object.assign(topSpeedPersonalBest, JSON.parse(window.localStorage.getItem('topSpeedPersonalBest')));
+      }
+      return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest['wpm']];
     }
   }
   catch(error) {
     console.log('Unable to read local storage.', error);
   }
-  return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress];
+  return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest['wpm']];
 }
 
 function writePersonalPreferences(itemToStore, JSONToStore) {
-  let stringToStore = JSON.stringify(JSONToStore);
+  let stringToStore;
+  if (itemToStore === 'topSpeedPersonalBest') {
+    stringToStore = JSON.stringify({wpm: JSONToStore});
+  }
+  else {
+    stringToStore = JSON.stringify(JSONToStore);
+  }
   try {
     if (window.localStorage) {
       window.localStorage.setItem(itemToStore, stringToStore);

@@ -85,7 +85,8 @@ class Finished extends Component {
     this.state = {
       canvasWidth: Math.floor(window.innerWidth),
       canvasHeight: Math.floor(window.innerHeight),
-      newTopSpeed: false
+      newTopSpeedPersonalBest: false,
+      newTopSpeedToday: false
     }
   }
 
@@ -96,15 +97,30 @@ class Finished extends Component {
 
     this.props.updateFinishedLessonsCount(wpm);
 
-    if (this.props.topSpeedToday < wpm && this.props.currentLessonStrokes.length > 3) {
-      this.props.updateTopSpeed(wpm);
+    if (wpm > this.props.topSpeedToday && wpm > this.props.topSpeedPersonalBest && this.props.currentLessonStrokes.length > 3) {
+      this.props.updateTopSpeedToday(wpm);
+      this.props.updateTopSpeedPersonalBest(wpm);
+      window.requestAnimationFrame(this.updateCanvas.bind(this));
+      this.setState({
+        newTopSpeedPersonalBest: true,
+        newTopSpeedToday: true
+      });
+    }
+    else if (wpm > this.props.topSpeedToday && this.props.currentLessonStrokes.length > 3) {
+      this.props.updateTopSpeedToday(wpm);
       if (this.props.finishedLessonsCount > 1) {
         window.requestAnimationFrame(this.updateCanvas.bind(this));
       }
-      this.setState({ newTopSpeed: true });
+      this.setState({
+        newTopSpeedPersonalBest: false,
+        newTopSpeedToday: true
+      });
     }
     else {
-      this.setState({ newTopSpeed: false });
+      this.setState({
+        newTopSpeedPersonalBest: false,
+        newTopSpeedToday: false
+      });
     }
 
     if (this.finishedHeading) {
@@ -344,7 +360,11 @@ class Finished extends Component {
 
     let newTopSpeedSectionOrFinished = "Finished: " + this.props.lessonTitle;
 
-    if (this.state.newTopSpeed && this.props.finishedLessonsCount > 1) {
+    if (this.state.newTopSpeedToday && this.state.newTopSpeedPersonalBest) {
+      newTopSpeedSectionOrFinished = "New personal best!";
+      wpmCommentary = this.props.lessonTitle;
+    }
+    else if (this.state.newTopSpeedToday && !this.state.newTopSpeedPersonalBest && this.props.finishedLessonsCount > 1) {
       newTopSpeedSectionOrFinished = "New top speed for today!";
       wpmCommentary = this.props.lessonTitle;
     }
