@@ -213,16 +213,18 @@ class Finished extends Component {
     }
   }
 
-  confetti() {
-    particles.splice(0);
-    window.cancelAnimationFrame(animationFrame);
-    if (this.state.newTopSpeedToday && this.state.newTopSpeedPersonalBest) {
-      this.setupCanvas({sparsity: 17, colors: 5});
+  confetti(event) {
+    if (event && ((event.keyCode && event.keyCode === 13) || event.type === "click")) {
+      particles.splice(0);
+      window.cancelAnimationFrame(animationFrame);
+      if (this.state.newTopSpeedToday && this.state.newTopSpeedPersonalBest) {
+        this.setupCanvas({sparsity: 17, colors: 5});
+      }
+      else if (this.state.newTopSpeedToday) {
+        this.setupCanvas({sparsity: 170, colors: 2});
+      }
+      window.requestAnimationFrame(this.updateCanvas.bind(this));
     }
-    else if (this.state.newTopSpeedToday) {
-      this.setupCanvas({sparsity: 170, colors: 2});
-    }
-    window.requestAnimationFrame(this.updateCanvas.bind(this));
   }
 
   render() {
@@ -404,6 +406,7 @@ class Finished extends Component {
             tabIndex="-1"
             id="finished-heading"
             onClick={this.confetti.bind(this)}
+            onKeyDown={this.confetti.bind(this)}
           >
             {newTopSpeedSectionOrFinished}
           </h3>
