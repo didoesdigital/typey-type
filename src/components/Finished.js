@@ -91,13 +91,13 @@ class Finished extends Component {
   }
 
   componentDidMount() {
-    this.setupCanvas();
 
     let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
 
     this.props.updateFinishedLessonsCount(wpm);
 
     if (wpm > this.props.topSpeedToday && wpm > this.props.topSpeedPersonalBest && this.props.currentLessonStrokes.length > 3) {
+      this.setupCanvas({sparsity: 17, colors: 2});
       this.props.updateTopSpeedToday(wpm);
       this.props.updateTopSpeedPersonalBest(wpm);
       window.requestAnimationFrame(this.updateCanvas.bind(this));
@@ -107,6 +107,7 @@ class Finished extends Component {
       });
     }
     else if (wpm > this.props.topSpeedToday && this.props.currentLessonStrokes.length > 3) {
+      this.setupCanvas({sparsity: 170, colors: 4});
       this.props.updateTopSpeedToday(wpm);
       if (this.props.finishedLessonsCount > 1) {
         window.requestAnimationFrame(this.updateCanvas.bind(this));
@@ -142,7 +143,10 @@ class Finished extends Component {
     return wordsPerMinute;
   }
 
-  setupCanvas() {
+  setupCanvas(config) {
+    if (!config['sparsity']) { throw new Error("Bad confetti config"); }
+    if (!config['colors']) { throw new Error("Bad confetti config"); }
+
     // let heading = this.refs.finishedHeading;
     let heading = document.getElementById('finished-heading');
     if (heading) {
@@ -150,12 +154,11 @@ class Finished extends Component {
       let height = heading.offsetHeight
 
       let count = 0;
-      let sparsity = 170;
       let bcr = heading.getBoundingClientRect();
 
       for(let localX = 0; localX < width; localX++) {
         for(let localY = 0; localY < height; localY++) {
-          if (count % sparsity === 0) {
+          if (count % config['sparsity'] === 0) {
             // $brand-highlight #ffd073 or $brand-primary #402351 confetti
             let rgbaColorArr = Math.random() <.5 ? [255, 208, 115, getRandomBetween(0.7, 1)] : [64, 35, 81, getRandomBetween(0.7, 1)];
 
