@@ -39,7 +39,7 @@ let ConfettiParticle = function() {
   // let confettiShrinkSpeed = 0.025; // pixels per tick
   // let confettiShrinkSpeed = 0.25; // pixels per tick
 
-  this.maximumAnimationDuration = 10000;
+  this.maximumAnimationDuration = 1000;
   this.velocity = {
     x: getRandomBetween(confettiMinimumXVelocity, confettiMaximumXVelocity),
     y: getRandomBetween(confettiMinimumYVelocity, confettiMaximumYVelocity)
@@ -68,6 +68,7 @@ let ConfettiParticle = function() {
 }
 
 let particles = [];
+let animationFrame;
 
 function createParticleAtPoint(x, y, colorData) {
   let particle = new ConfettiParticle();
@@ -96,8 +97,8 @@ class Finished extends Component {
 
     this.props.updateFinishedLessonsCount(wpm);
 
-    if (wpm > this.props.topSpeedToday && wpm > this.props.topSpeedPersonalBest && this.props.currentLessonStrokes.length > 3) {
-      this.setupCanvas({sparsity: 17, colors: 2});
+    if (wpm > this.props.topSpeedToday && wpm > this.props.topSpeedPersonalBest && this.props.currentLessonStrokes.length > 3 && wpm > 3) {
+      this.setupCanvas({sparsity: 17, colors: 5});
       this.props.updateTopSpeedToday(wpm);
       this.props.updateTopSpeedPersonalBest(wpm);
       window.requestAnimationFrame(this.updateCanvas.bind(this));
@@ -106,12 +107,10 @@ class Finished extends Component {
         newTopSpeedToday: true
       });
     }
-    else if (wpm > this.props.topSpeedToday && this.props.currentLessonStrokes.length > 3) {
-      this.setupCanvas({sparsity: 170, colors: 4});
+    else if (wpm > this.props.topSpeedToday && this.props.currentLessonStrokes.length > 3 && wpm > 3) {
+      this.setupCanvas({sparsity: 170, colors: 2});
       this.props.updateTopSpeedToday(wpm);
-      if (this.props.finishedLessonsCount > 1) {
-        window.requestAnimationFrame(this.updateCanvas.bind(this));
-      }
+      window.requestAnimationFrame(this.updateCanvas.bind(this));
       this.setState({
         newTopSpeedPersonalBest: false,
         newTopSpeedToday: true
@@ -160,12 +159,26 @@ class Finished extends Component {
         for(let localY = 0; localY < height; localY++) {
           if (count % config['sparsity'] === 0) {
             // $brand-highlight #ffd073 or $brand-primary #402351 confetti
-            let rgbaColorArr = Math.random() <.5 ? [255, 208, 115, getRandomBetween(0.7, 1)] : [64, 35, 81, getRandomBetween(0.7, 1)];
+            let colors;
+
+            colors = [
+              [255, 208, 115, getRandomBetween(0.7, 1)], // #FFD073
+              [130, 66, 168, getRandomBetween(0.7, 1)], // #8242A8
+              [255, 191, 64, getRandomBetween(0.7, 1)], // #FFBF40
+              [69, 126, 80, getRandomBetween(0.7, 1)], // #457e50
+              [149, 49, 89, getRandomBetween(0.7, 1)], // #953159
+              [64, 35, 81, getRandomBetween(0.7, 1)], // #402351
+              [35, 81, 44, getRandomBetween(0.7, 1)] // #23512C
+            ];
+
+            colors.splice(config['colors']);
+
+            let rgbaColor = colors[Math.floor(Math.random() * colors.length)];
 
             let globalX =  bcr.x + localX;
             let globalY =  bcr.y + localY;
 
-            createParticleAtPoint(globalX, globalY, rgbaColorArr);
+            createParticleAtPoint(globalX, globalY, rgbaColor);
           }
 
           count++;
@@ -189,7 +202,7 @@ class Finished extends Component {
           let lastParticle = i === particles.length - 1;
 
           if (lastParticle) {
-            let percentCompleted = ((Date.now() - particles[i].startTime) / particles[i].maximumAnimationDuration[i]) * 100;
+            let percentCompleted = ((Date.now() - particles[i].startTime) / particles[i].maximumAnimationDuration) * 100;
 
             if (percentCompleted > 100) {
               particles = [];
@@ -197,9 +210,21 @@ class Finished extends Component {
           }
         }
 
-        window.requestAnimationFrame(this.updateCanvas.bind(this));
+        animationFrame = window.requestAnimationFrame(this.updateCanvas.bind(this));
       }
     }
+  }
+
+  confetti() {
+    particles.splice(0);
+    window.cancelAnimationFrame(animationFrame);
+    if (this.state.newTopSpeedToday && this.state.newTopSpeedPersonalBest) {
+      this.setupCanvas({sparsity: 17, colors: 5});
+    }
+    else if (this.state.newTopSpeedToday) {
+      this.setupCanvas({sparsity: 170, colors: 2});
+    }
+    window.requestAnimationFrame(this.updateCanvas.bind(this));
   }
 
   render() {
@@ -363,11 +388,11 @@ class Finished extends Component {
 
     let newTopSpeedSectionOrFinished = "Finished: " + this.props.lessonTitle;
 
-    if (this.state.newTopSpeedToday && this.state.newTopSpeedPersonalBest) {
+    if (this.state.newTopSpeedToday && this.state.newTopSpeedPersonalBest && wpm > 3) {
       newTopSpeedSectionOrFinished = "New personal best!";
       wpmCommentary = this.props.lessonTitle;
     }
-    else if (this.state.newTopSpeedToday && !this.state.newTopSpeedPersonalBest && this.props.finishedLessonsCount > 1) {
+    else if (this.state.newTopSpeedToday && !this.state.newTopSpeedPersonalBest && wpm > 3) {
       newTopSpeedSectionOrFinished = "New top speed for today!";
       wpmCommentary = this.props.lessonTitle;
     }
@@ -377,7 +402,11 @@ class Finished extends Component {
         <div className="finished-summary mb3 text-center">
           <h3
             className="negative-outline-offset dib text-center mt3"
-            ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }} tabIndex="-1" id="finished-heading">
+            ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }}
+            tabIndex="-1"
+            id="finished-heading"
+            onClick={this.confetti.bind(this)}
+          >
             {newTopSpeedSectionOrFinished}
           </h3>
           <p>{wpmCommentary}</p>
