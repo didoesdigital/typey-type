@@ -224,7 +224,6 @@ class App extends Component {
         "link": "/support#typey-type-dictionary",
         "path": "/dictionaries/typey-type/typey-type.json"
       }],
-      finishedLessonsCount: 0,
       flashcardsMetWords: {
         "the": {
           phrase: "the",
@@ -748,12 +747,6 @@ class App extends Component {
     });
     // debugger
     return flashcardsMetWords;
-  }
-
-  updateFinishedLessonsCount(wpm) {
-    if (wpm > 0) {
-      this.setState({finishedLessonsCount: this.state.finishedLessonsCount + 1});
-    }
   }
 
   updateTopSpeedToday(wpm) {
@@ -2088,7 +2081,6 @@ class App extends Component {
                         currentPhrase={presentedMaterialCurrentItem.phrase}
                         currentStroke={presentedMaterialCurrentItem.stroke}
                         disableUserSettings={this.state.disableUserSettings}
-                        finishedLessonsCount={this.state.finishedLessonsCount}
                         handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
                         handleStartFromWordChange={this.handleStartFromWordChange.bind(this)}
                         handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
@@ -2129,7 +2121,6 @@ class App extends Component {
                         updateTopSpeedToday={this.updateTopSpeedToday.bind(this)}
                         updateTopSpeedPersonalBest={this.updateTopSpeedPersonalBest.bind(this)}
                         userSettings={this.state.userSettings}
-                        updateFinishedLessonsCount={this.updateFinishedLessonsCount.bind(this)}
                         {...props}
                       />
                     </ErrorBoundary>

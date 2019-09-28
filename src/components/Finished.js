@@ -95,8 +95,6 @@ class Finished extends Component {
 
     let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
 
-    this.props.updateFinishedLessonsCount(wpm);
-
     if (wpm > this.props.topSpeedToday && wpm > this.props.topSpeedPersonalBest && this.props.currentLessonStrokes.length > 3 && wpm > 3) {
       this.setupCanvas({sparsity: 17, colors: 5});
       this.props.updateTopSpeedToday(wpm);

@@ -324,7 +324,6 @@ class Lesson extends Component {
                 chooseStudy={this.props.chooseStudy}
                 currentLessonStrokes={this.props.currentLessonStrokes}
                 disableUserSettings={this.props.disableUserSettings}
-                finishedLessonsCount={this.props.finishedLessonsCount}
                 handleLimitWordsChange={this.props.handleLimitWordsChange}
                 handleStartFromWordChange={this.props.handleStartFromWordChange}
                 handleRepetitionsChange={this.props.handleRepetitionsChange}
@@ -345,7 +344,6 @@ class Lesson extends Component {
                 topSpeedPersonalBest={this.props.topSpeedPersonalBest}
                 charsPerWord={this.props.charsPerWord}
                 revisionMaterial={this.props.revisionMaterial}
-                updateFinishedLessonsCount={this.props.updateFinishedLessonsCount}
                 updateRecommendationHistory={this.props.updateRecommendationHistory}
                 updateRevisionMaterial={this.props.updateRevisionMaterial}
                 updateTopSpeedToday={this.props.updateTopSpeedToday}
