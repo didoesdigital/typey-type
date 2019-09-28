@@ -1491,7 +1491,7 @@ describe('loadPersonalPreferences', () => {
         writerInput: "qwerty"
       };
       let lessonsProgress = {};
-      let topSpeedPersonalBest = {wpm: 0};
+      let topSpeedPersonalBest = 0;
       let userSettings = {
         blurMaterial: false,
         caseSensitive: false,
