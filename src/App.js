@@ -314,13 +314,15 @@ class App extends Component {
       },
       revisionMaterial: [
       ],
+      startingMetWordsToday: {},
       yourSeenWordCount: calculateSeenWordCount(metWords),
       yourMemorisedWordCount: calculateMemorisedWordCount(metWords)
     };
   }
 
   componentDidMount() {
-    this.setPersonalPreferences();
+    let startingMetWords = Object.assign({}, this.setPersonalPreferences()[0]);
+    this.setState({ startingMetWordsToday: startingMetWords });
 
     getLessonIndexData().then((json) => {
       this.setState({ lessonIndex: json }, () => {
@@ -1930,6 +1932,8 @@ class App extends Component {
                   <DocumentTitle title={'Typey Type | Progress'}>
                     <ErrorBoundary>
                       <Progress
+                        calculateSeenWordCount={calculateSeenWordCount.bind(this)}
+                        calculateMemorisedWordCount={calculateMemorisedWordCount.bind(this)}
                         changeFlashcardCourseLevel={this.changeFlashcardCourseLevel.bind(this)}
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
@@ -1943,6 +1947,7 @@ class App extends Component {
                         recommendedNextLesson={this.state.recommendedNextLesson}
                         lessonsProgress={this.state.lessonsProgress}
                         lessonIndex={this.state.lessonIndex}
+                        startingMetWordsToday={this.state.startingMetWordsToday}
                         updateFlashcardsRecommendation={this.updateFlashcardsRecommendation.bind(this)}
                         updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
                         yourSeenWordCount={this.state.yourSeenWordCount}
