@@ -62,7 +62,7 @@ class Break extends Component<Props, State> {
     this.setState({
       breakTimeMinutes: 0,
       breakTimeSeconds: 0,
-      breakCountdown: null
+      breakCountdown: 0
     }, () => {
       this.stopCountdown();
     });
@@ -107,7 +107,7 @@ class Break extends Component<Props, State> {
     let timeToDisplay = this.state.timeToDisplay;
     let breakHeading = 'Your break starts now';
     let nextStep;
-    if (timeToDisplay === '0:00') {
+    if (timeToDisplay === '0:00' || !this.state.breakCountdown) {
       breakHeading = 'Your break is done';
       nextStep = (
         <p className='text-center'>
