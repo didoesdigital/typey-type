@@ -62,11 +62,16 @@ class Progress extends Component {
     let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
 
     let todaySeenWordCount = this.props.yourSeenWordCount - this.props.calculateSeenWordCount(this.props.startingMetWordsToday);
-    if (Object.keys(this.props.startingMetWordsToday).length === 0) { todaySeenWordCount = 0; }
+    let todayMemorisedWordCount = this.props.yourMemorisedWordCount - this.props.calculateMemorisedWordCount(this.props.startingMetWordsToday);
+    if (Object.keys(this.props.startingMetWordsToday).length === 0) {
+      todaySeenWordCount = 0;
+      todayMemorisedWordCount = 0;
+    }
 
     this.setState({
       progressPercent: progressPercent,
       todaySeenWordCount: todaySeenWordCount,
+      todayMemorisedWordCount: todayMemorisedWordCount,
       yourWordCount: yourWordCount,
       yourSeenWordCount: this.props.yourSeenWordCount,
       yourMemorisedWordCount: this.props.yourMemorisedWordCount
@@ -504,7 +509,7 @@ class Progress extends Component {
               <h2 className="mb0">Your progress</h2>
               {reducedSaveAndLoadForms}
             </div>
-            <p>Today you've seen: {this.state.todaySeenWordCount} words.</p>
+            <p>Today you've memorised: {this.state.todayMemorisedWordCount} words. Today you've seen: {this.state.todaySeenWordCount} words.</p>
             {progressSummaryAndLinks}
             <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
 
