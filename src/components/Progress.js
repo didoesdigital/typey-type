@@ -270,10 +270,21 @@ class Progress extends Component {
       label: 'true'
     });
 
+    let currentNewWords = this.state.userGoalInputNewWords;
+    let currentOldWords = this.state.userGoalInputOldWords;
+
     let userGoals = {
-      newWords: this.state.userGoalInputNewWords,
-      oldWords: this.state.userGoalInputOldWords
+      newWords: currentNewWords,
+      oldWords: currentOldWords
     }
+
+    if (isNaN(currentOldWords) || currentOldWords === null) {
+      userGoals['oldWords'] = this.props.userGoals.oldWords || 1;
+    }
+    if (isNaN(currentNewWords) || currentNewWords === null) {
+      userGoals['newWords'] = this.props.userGoals.newWords || 1;
+    }
+
     this.props.updateUserGoals(userGoals);
     this.setState({
       showSetGoalsForm: false
