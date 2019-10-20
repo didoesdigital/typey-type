@@ -205,6 +205,7 @@ class App extends Component {
     // When updating default state for anything stored in local storage,
     // add the same default to personal preferences code and test.
     let metWords = loadPersonalPreferences()[0];
+    let startingMetWordsToday = loadPersonalPreferences()[0];
 
     this.state = {
       announcementMessage: null,
@@ -314,15 +315,14 @@ class App extends Component {
       },
       revisionMaterial: [
       ],
-      startingMetWordsToday: {},
+      startingMetWordsToday: startingMetWordsToday,
       yourSeenWordCount: calculateSeenWordCount(metWords),
       yourMemorisedWordCount: calculateMemorisedWordCount(metWords)
     };
   }
 
   componentDidMount() {
-    let startingMetWords = Object.assign({}, this.setPersonalPreferences()[0]);
-    this.setState({ startingMetWordsToday: startingMetWords });
+    this.setPersonalPreferences();
 
     getLessonIndexData().then((json) => {
       this.setState({ lessonIndex: json }, () => {
