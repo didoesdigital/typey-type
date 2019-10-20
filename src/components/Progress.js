@@ -26,6 +26,7 @@ class Progress extends Component {
       yourWordCount: 0,
       yourSeenWordCount: 0,
       yourMemorisedWordCount: 0,
+      todayDiscoveredWordCount: 0,
       todaySeenWordCount: 0,
       todayMemorisedWordCount: 0,
       toRecommendedNextLesson: false,
@@ -83,9 +84,20 @@ class Progress extends Component {
       }
     }
 
+    let todayDiscoveredWords = {};
+    for (const [phrase, timesSeen] of Object.entries(this.props.metWords)) {
+      if (!this.props.startingMetWordsToday[phrase] && timesSeen > 0) {
+        todayDiscoveredWords[phrase] = timesSeen;
+      }
+    }
+
+    let todayDiscoveredWordCount = 0;
+    todayDiscoveredWordCount = Object.entries(todayDiscoveredWords).length;
+
     this.setState({
       todayProgress: todayProgress,
       progressPercent: progressPercent,
+      todayDiscoveredWordCount: todayDiscoveredWordCount,
       todaySeenWordCount: todaySeenWordCount,
       todayMemorisedWordCount: todayMemorisedWordCount,
       yourWordCount: yourWordCount,
@@ -537,6 +549,7 @@ class Progress extends Component {
               {reducedSaveAndLoadForms}
             </div>
             <p>Today you've memorised: {this.state.todayMemorisedWordCount} words. Today you've seen: {this.state.todaySeenWordCount} words.</p>
+            <p>Today you’ve discovered: {this.state.todayDiscoveredWordCount}/15 new words. </p>
             <p>Today you’ve revised: {Object.keys(this.state.todayProgress).length}/50 unique word(s) you've already typed before.</p>
             <p>All today's progress sorted by times seen:</p> <ul>{todayProgress}</ul>
             {progressSummaryAndLinks}
