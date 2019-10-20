@@ -548,9 +548,11 @@ class Progress extends Component {
               <h2 className="mb0">Your progress</h2>
               {reducedSaveAndLoadForms}
             </div>
-            <p>Today you've memorised: {this.state.todayMemorisedWordCount} words. Today you've seen: {this.state.todaySeenWordCount} words.</p>
+            {//<p>Today you’ve memorised: {this.state.todayMemorisedWordCount} words. Today you’ve seen: {this.state.todaySeenWordCount} words.</p>
+            }
             <p>Today you’ve discovered: {this.state.todayDiscoveredWordCount}/15 new words. </p>
             <p>Today you’ve revised: {Object.keys(this.state.todayProgress).length}/50 unique word(s) you've already typed before.</p>
+            <p>Today you’ve memorised: {this.state.todayMemorisedWordCount} unique word(s). That brings you to {this.state.yourMemorisedWordCount} memorised words. That is, you've memorised {Math.round(this.state.yourMemorisedWordCount / (this.state.yourSeenWordCount + this.state.yourMemorisedWordCount) * 100)}% of your typed words. Try to keep this above 30% by <Link to="/lessons/progress/?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOld&startFromWord=1">revising seen words</Link>.</p>
             <p>All today's progress sorted by times seen:</p> <ul>{todayProgress}</ul>
             {progressSummaryAndLinks}
             <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
