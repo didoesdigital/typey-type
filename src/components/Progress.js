@@ -15,6 +15,7 @@ class Progress extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      todayProgress: {},
       flashWarning: '',
       loadingLessonIndex: true,
       loadingLessonIndexError: false,
@@ -68,7 +69,22 @@ class Progress extends Component {
       todayMemorisedWordCount = 0;
     }
 
+    let todayProgress = {};
+    for (const [phrase, timesSeen] of Object.entries(this.props.metWords)) {
+      if (this.props.startingMetWordsToday[phrase]) {
+        if (this.props.startingMetWordsToday[phrase] < timesSeen) {
+          todayProgress[phrase] = timesSeen - this.props.startingMetWordsToday[phrase];
+        }
+      }
+      else {
+        if (Object.keys(this.props.startingMetWordsToday).length > 0) {
+          todayProgress[phrase] = timesSeen;
+        }
+      }
+    }
+
     this.setState({
+      todayProgress: todayProgress,
       progressPercent: progressPercent,
       todaySeenWordCount: todaySeenWordCount,
       todayMemorisedWordCount: todayMemorisedWordCount,
@@ -456,6 +472,17 @@ class Progress extends Component {
       downloadProgressHref = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.metWords));
     }
 
+    let todayProgressSorted = Object.entries(this.state.todayProgress)
+      .sort( (a, b) => {
+        return b[1] - a[1];
+      })
+
+    let todayProgress = todayProgressSorted.map( (entry) => {
+      return (
+        <li>{entry[0]}: {entry[1]}</li>
+      );
+    });
+
     return (
       <div>
         <main id="main">
@@ -510,6 +537,8 @@ class Progress extends Component {
               {reducedSaveAndLoadForms}
             </div>
             <p>Today you've memorised: {this.state.todayMemorisedWordCount} words. Today you've seen: {this.state.todaySeenWordCount} words.</p>
+            <p>Today you’ve revised: {Object.keys(this.state.todayProgress).length}/50 unique word(s) you've already typed before.</p>
+            <p>All today's progress sorted by times seen:</p> <ul>{todayProgress}</ul>
             {progressSummaryAndLinks}
             <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
 
