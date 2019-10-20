@@ -275,7 +275,12 @@ class Progress extends Component {
       oldWords: this.state.userGoalInputOldWords
     }
     this.props.updateUserGoals(userGoals);
-    this.setState({showSetGoalsForm: false});
+    this.setState({
+      showSetGoalsForm: false
+    }, () => {
+      const element = document.getElementById('js-set-goals-button');
+      if (element) { element.focus(); }
+    });
   }
 
   cancelSetGoals(event) {
@@ -285,7 +290,12 @@ class Progress extends Component {
       label: 'true'
     });
 
-    this.setState({showSetGoalsForm: false});
+    this.setState({
+      showSetGoalsForm: false
+    }, () => {
+      const element = document.getElementById('js-set-goals-button');
+      if (element) { element.focus(); }
+    });
   }
 
   showSetGoalsForm(event) {
@@ -299,6 +309,9 @@ class Progress extends Component {
       showSetGoalsForm: true,
       userGoalInputOldWords: this.props.userGoals.oldWords,
       userGoalInputNewWords: this.props.userGoals.newWords
+    }, () => {
+      const element = document.getElementById('js-first-interactive-form-field-element');
+      if (element) { element.focus(); }
     });
   }
 
@@ -674,7 +687,7 @@ class Progress extends Component {
               <React.Fragment>
                 <form onSubmit={this.saveGoals.bind(this)}>
                   <div className="mb2">
-                    <label htmlFor="userGoalInputOldWords">Old words goal</label>
+                    <label id="js-first-interactive-form-field-element" htmlFor="userGoalInputOldWords">Old words goal</label>
                     <NumericInput
                       autoCapitalize="off"
                       autoComplete="off"
@@ -727,7 +740,7 @@ class Progress extends Component {
               <React.Fragment>
                 <div>boredrobot <span className="stat__number">{this.state.todayOldWordCount}</span> Old words<br />Your goal: {this.props.userGoals.oldWords}{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? " Done!" : " not done" }</div>
                 <div>boredrobot <span className="stat__number">{this.state.todayNewWordCount}</span> New words<br />Your goal: {this.props.userGoals.newWords}{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? " Done!" : " not done" }</div>
-                <button onClick={this.showSetGoalsForm.bind(this)} className="button button--secondary mr2 dib">Set goals</button>
+                <button id="js-set-goals-button" onClick={this.showSetGoalsForm.bind(this)} className="button button--secondary mr2 dib">Set goals</button>
               </React.Fragment>
             }
 
