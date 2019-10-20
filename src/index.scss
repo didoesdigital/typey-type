@@ -1242,11 +1242,36 @@ label {
     background-color: add-tint(desaturate($brand-primary, 90%), 60%);
     cursor: default;
   }
+
   &.link-button--large {
     width: $link-button-large-height;
     height: $link-button-large-width;
   }
+
+  &.button--secondary {
+    background-color: #fff;
+    border: 1px solid saturate(adjust-hue(add-tint($brand-primary, 50%), -45deg), 10%);
+    color: desaturate($brand-primary, 5%);
+    &:visited {
+      color: desaturate($brand-primary, 15%);
+    }
+    &:hover {
+      color: desaturate($brand-primary, 10%);
+      background-color: add-tint($brand-primary, 95%);
+    }
+    &:active,
+    &:focus {
+      color: desaturate($brand-primary, 15%);
+      background-color: add-tint($brand-primary, 95%);
+    }
+    &:disabled {
+      color: add-tint($brand-primary, 90%);
+      background-color: add-tint(desaturate($brand-primary, 90%), 60%);
+      cursor: default;
+    }
+  }
 }
+
 
 .de-emphasized-button {
   background-color: transparent;
@@ -1484,11 +1509,11 @@ label {
 .matched.steno-material {
   border-bottom: 2px solid $brand-primary;
 }
-.timer-table {
-  width: 156px;
-  border-collapse: separate;
-  border-spacing: 0 4px;
-}
+// .timer-table {
+//   width: 156px;
+//   border-collapse: separate;
+//   border-spacing: 0 4px;
+// }
 .subsection-header {
   background: add-tint($brand-primary, 95%);
   border-top: 1px solid add-tint($brand-primary, 70%);

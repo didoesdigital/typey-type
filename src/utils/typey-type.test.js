@@ -1492,6 +1492,10 @@ describe('loadPersonalPreferences', () => {
       };
       let lessonsProgress = {};
       let topSpeedPersonalBest = 0;
+      let userGoals = {
+        newWords: 15,
+        oldWords: 50
+      }
       let userSettings = {
         blurMaterial: false,
         caseSensitive: false,
@@ -1514,7 +1518,7 @@ describe('loadPersonalPreferences', () => {
         seenWords: true,
         study: 'discover'
       };
-      expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest]);
+      expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest, userGoals]);
     });
   });
 });

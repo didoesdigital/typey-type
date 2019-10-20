@@ -203,7 +203,7 @@ class App extends Component {
     super(props);
     this.charsPerWord = 5;
     // When updating default state for anything stored in local storage,
-    // add the same default to personal preferences code and test.
+    // add the same default to load/set personal preferences code and test.
     let metWords = loadPersonalPreferences()[0];
     let startingMetWordsToday = loadPersonalPreferences()[0];
 
@@ -275,6 +275,10 @@ class App extends Component {
       disableUserSettings: false,
       metWords: metWords,
       revisionMode: false,
+      userGoals: {
+        newWords: 15,
+        oldWords: 50
+      },
       userSettings: {
         blurMaterial: false,
         caseSensitive: false,
@@ -430,6 +434,7 @@ class App extends Component {
     let globalUserSettings = this.state.globalUserSettings;
     let lessonsProgress = this.state.lessonsProgress;
     let topSpeedPersonalBest = { wpm: this.state.topSpeedPersonalBest };
+    let userGoals = this.state.userGoals;
     let userSettings = this.state.userSettings;
     if (source && source !== '') {
       try {
@@ -441,7 +446,7 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest] = loadPersonalPreferences();
+      [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest, userGoals] = loadPersonalPreferences();
     }
 
     let yourSeenWordCount = calculateSeenWordCount(this.state.metWords);
@@ -455,6 +460,7 @@ class App extends Component {
       topSpeedPersonalBest: topSpeedPersonalBest,
       metWords: metWords,
       userSettings: userSettings,
+      userGoals: userGoals,
       yourSeenWordCount: yourSeenWordCount,
       yourMemorisedWordCount: yourMemorisedWordCount,
     }, () => {
@@ -465,10 +471,11 @@ class App extends Component {
       writePersonalPreferences('topSpeedPersonalBest', this.state.topSpeedPersonalBest);
       writePersonalPreferences('metWords', this.state.metWords);
       writePersonalPreferences('userSettings', this.state.userSettings);
+      writePersonalPreferences('userGoals', this.state.userGoals);
       this.setupLesson();
     });
 
-    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest['wpm']];
+    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest['wpm'], userGoals];
   }
 
   handleLimitWordsChange(event) {
@@ -758,6 +765,11 @@ class App extends Component {
   updateTopSpeedPersonalBest(wpm) {
     this.setState({topSpeedPersonalBest: wpm});
     writePersonalPreferences('topSpeedPersonalBest', wpm);
+  }
+
+  updateUserGoals(userGoals) {
+    this.setState({userGoals: userGoals});
+    writePersonalPreferences('userGoals', userGoals);
   }
 
   setupRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
@@ -1950,6 +1962,8 @@ class App extends Component {
                         startingMetWordsToday={this.state.startingMetWordsToday}
                         updateFlashcardsRecommendation={this.updateFlashcardsRecommendation.bind(this)}
                         updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
+                        updateUserGoals={this.updateUserGoals.bind(this)}
+                        userGoals={this.state.userGoals}
                         yourSeenWordCount={this.state.yourSeenWordCount}
                         yourMemorisedWordCount={this.state.yourMemorisedWordCount}
                       />
@@ -2112,6 +2126,7 @@ class App extends Component {
                         toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
                         topSpeedToday={this.state.topSpeedToday}
                         topSpeedPersonalBest={this.state.topSpeedPersonalBest}
+                        updateUserGoals={this.state.updateUserGoals}
                         charsPerWord={this.charsPerWord}
                         totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
                         totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}

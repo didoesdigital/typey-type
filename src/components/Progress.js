@@ -4,6 +4,7 @@ import GoogleAnalytics from 'react-ga';
 import ErrorBoundary from './ErrorBoundary'
 import PseudoContentButton from './PseudoContentButton';
 import FlashcardsBox from './FlashcardsBox';
+import NumericInput from 'react-numeric-input';
 import RecommendationBox from './RecommendationBox';
 import { getLessonIndexData } from './../utils/lessonIndexData';
 import { IconCheckmark, IconTriangleRight } from './Icon';
@@ -22,15 +23,19 @@ class Progress extends Component {
       reducedSaveAndLoad: false,
       showLoadInput: false,
       showRecommendationsSurveyLink: true,
+      showSetGoalsForm: false,
       progressPercent: 0,
       yourWordCount: 0,
       yourSeenWordCount: 0,
       yourMemorisedWordCount: 0,
-      todayDiscoveredWordCount: 0,
+      todayNewWordCount: 0,
+      todayOldWordCount: 0,
       todaySeenWordCount: 0,
       todayMemorisedWordCount: 0,
       toRecommendedNextLesson: false,
-      toFlashcardsNextLesson: false
+      toFlashcardsNextLesson: false,
+      userGoalInputOldWords: 50,
+      userGoalInputNewWords: 15,
     }
   }
 
@@ -65,9 +70,11 @@ class Progress extends Component {
 
     let todaySeenWordCount = this.props.yourSeenWordCount - this.props.calculateSeenWordCount(this.props.startingMetWordsToday);
     let todayMemorisedWordCount = this.props.yourMemorisedWordCount - this.props.calculateMemorisedWordCount(this.props.startingMetWordsToday);
+    // let todayOldWordCount = Object.keys(this.props.metWords).length - this.props.calculateMemorisedWordCount(this.props.startingMetWordsToday) - this.props.calculateSeenWordCount(this.props.startingMetWordsToday);
     if (Object.keys(this.props.startingMetWordsToday).length === 0) {
       todaySeenWordCount = 0;
       todayMemorisedWordCount = 0;
+      // todayOldWordCount = 0;
     }
 
     let todayProgress = {};
@@ -84,22 +91,32 @@ class Progress extends Component {
       }
     }
 
-    let todayDiscoveredWords = {};
+    let todayOldWords = {};
     for (const [phrase, timesSeen] of Object.entries(this.props.metWords)) {
-      if (!this.props.startingMetWordsToday[phrase] && timesSeen > 0) {
-        todayDiscoveredWords[phrase] = timesSeen;
+      if (this.props.startingMetWordsToday[phrase] && (timesSeen - this.props.startingMetWordsToday[phrase] > 0)) {
+        todayOldWords[phrase] = timesSeen;
       }
     }
 
-    let todayDiscoveredWordCount = 0;
-    todayDiscoveredWordCount = Object.entries(todayDiscoveredWords).length;
+    let todayNewWords = {};
+    for (const [phrase, timesSeen] of Object.entries(this.props.metWords)) {
+      if (!this.props.startingMetWordsToday[phrase] && timesSeen > 0) {
+        todayNewWords[phrase] = timesSeen;
+      }
+    }
+
+    let todayNewWordCount = 0;
+    todayNewWordCount = Object.entries(todayNewWords).length;
+    let todayOldWordCount = 0;
+    todayOldWordCount = Object.entries(todayOldWords).length;
 
     this.setState({
       todayProgress: todayProgress,
       progressPercent: progressPercent,
-      todayDiscoveredWordCount: todayDiscoveredWordCount,
+      todayNewWordCount: todayNewWordCount,
       todaySeenWordCount: todaySeenWordCount,
       todayMemorisedWordCount: todayMemorisedWordCount,
+      todayOldWordCount: todayOldWordCount,
       yourWordCount: yourWordCount,
       yourSeenWordCount: this.props.yourSeenWordCount,
       yourMemorisedWordCount: this.props.yourMemorisedWordCount
@@ -246,7 +263,77 @@ class Progress extends Component {
     this.setState({showRecommendationsSurveyLink: false});
   }
 
+  saveGoals(event) {
+    GoogleAnalytics.event({
+      category: 'Progress',
+      action: 'Save goals',
+      label: 'true'
+    });
+
+    let userGoals = {
+      newWords: this.state.userGoalInputNewWords,
+      oldWords: this.state.userGoalInputOldWords
+    }
+    this.props.updateUserGoals(userGoals);
+    this.setState({showSetGoalsForm: false});
+  }
+
+  cancelSetGoals(event) {
+    GoogleAnalytics.event({
+      category: 'Progress',
+      action: 'Cancel set goals',
+      label: 'true'
+    });
+
+    this.setState({showSetGoalsForm: false});
+  }
+
+  showSetGoalsForm(event) {
+    GoogleAnalytics.event({
+      category: 'Progress',
+      action: 'Show set goals form',
+      label: 'true'
+    });
+
+    this.setState({
+      showSetGoalsForm: true,
+      userGoalInputOldWords: this.props.userGoals.oldWords,
+      userGoalInputNewWords: this.props.userGoals.newWords
+    });
+  }
+
+  handleOldWordsGoalInputChange(event) {
+    this.setState({userGoalInputOldWords: event});
+
+    let labelString = event;
+    if (!event) { labelString = "BAD_INPUT"; }
+
+    GoogleAnalytics.event({
+      category: 'Progress',
+      action: 'Change old words goal',
+      label: labelString
+    });
+
+    return event;
+  }
+
+  handleNewWordsGoalInputChange(event) {
+    this.setState({userGoalInputNewWords: event});
+
+    let labelString = event;
+    if (!event) { labelString = "BAD_INPUT"; }
+
+    GoogleAnalytics.event({
+      category: 'Progress',
+      action: 'Change new words goal',
+      label: labelString
+    });
+
+    return event;
+  }
+
   render () {
+    var grabStyle = function() {return false};
     if (this.state.toRecommendedNextLesson === true) {
       return <Redirect push to={this.props.recommendedNextLesson.link} />
     }
@@ -524,6 +611,11 @@ class Progress extends Component {
         )
       });
 
+//             <p>All today's progress sorted by times seen:</p> <ul>{todayProgress}</ul>
+//             <p>Seen 30 times:</p> <ul>{seen30Times}</ul>
+//             <p>Seen 29 times:</p> <ul>{seen29Times}</ul>
+//             <p>All:</p> <ul>{all}</ul>
+
     return (
       <div>
         <main id="main">
@@ -577,15 +669,69 @@ class Progress extends Component {
               <h2 className="mb0">Your progress</h2>
               {reducedSaveAndLoadForms}
             </div>
-            <p>Today you’ve discovered: {this.state.todayDiscoveredWordCount}/15 new words. </p>
-            <p>Today you’ve revised: {Object.keys(this.state.todayProgress).length}/50 unique word(s) you've already typed before.</p>
-            <p>Today you’ve memorised: {this.state.todayMemorisedWordCount} unique word(s). That brings you to {this.state.yourMemorisedWordCount} memorised words. That is, you've memorised {Math.round(this.state.yourMemorisedWordCount / (this.state.yourSeenWordCount + this.state.yourMemorisedWordCount) * 100)}% of your typed words. Try to keep this above 30% by <Link to="/lessons/progress/?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOld&startFromWord=1">revising seen words</Link>.</p>
+            <h3>Today’s efforts</h3>
+            { this.state.showSetGoalsForm ?
+              <React.Fragment>
+                <form onSubmit={this.saveGoals.bind(this)}>
+                  <div className="mb2">
+                    <label htmlFor="userGoalInputOldWords">Old words goal</label>
+                    <NumericInput
+                      autoCapitalize="off"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      autoFocus={false}
+                      className="form-control w6"
+                      disabled={!this.state.showSetGoalsForm}
+                      id="userGoalInputOldWords"
+                      max={10000}
+                      min={1}
+                      name="userGoalInputOldWords"
+                      onChange={this.handleOldWordsGoalInputChange.bind(this)}
+                      precision={0}
+                      spellCheck="false"
+                      step={1}
+                      style={grabStyle()}
+                      type="number"
+                      value={this.state.userGoalInputOldWords}
+                      snap
+                    />
+                  </div>
+                  <div className="mb2">
+                    <label htmlFor="userGoalInputNewWords">New words goal</label>
+                    <NumericInput
+                      autoCapitalize="off"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      autoFocus={false}
+                      className="form-control w6"
+                      disabled={!this.state.showSetGoalsForm}
+                      id="userGoalInputNewWords"
+                      max={10000}
+                      min={1}
+                      name="userGoalInputNewWords"
+                      onChange={this.handleNewWordsGoalInputChange.bind(this)}
+                      precision={0}
+                      spellCheck="false"
+                      step={1}
+                      style={grabStyle()}
+                      type="number"
+                      value={this.state.userGoalInputNewWords}
+                      snap
+                    />
+                  </div>
+                  <button onClick={this.saveGoals.bind(this)} className="button mr2 dib">Save goals</button>
+                  <button onClick={this.cancelSetGoals.bind(this)} className="button button--secondary mr2 dib">Cancel</button>
+                </form>
+              </React.Fragment>
+                :
+              <React.Fragment>
+                <div>boredrobot <span className="stat__number">{this.state.todayOldWordCount}</span> Old words<br />Your goal: {this.props.userGoals.oldWords}{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? " Done!" : " not done" }</div>
+                <div>boredrobot <span className="stat__number">{this.state.todayNewWordCount}</span> New words<br />Your goal: {this.props.userGoals.newWords}{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? " Done!" : " not done" }</div>
+                <button onClick={this.showSetGoalsForm.bind(this)} className="button button--secondary mr2 dib">Set goals</button>
+              </React.Fragment>
+            }
 
-            <p>All today's progress sorted by times seen:</p> <ul>{todayProgress}</ul>
-            <p>Seen 30 times:</p> <ul>{seen30Times}</ul>
-            <p>Seen 29 times:</p> <ul>{seen29Times}</ul>
-            <p>All:</p> <ul>{all}</ul>
-
+            <p>You've memorised {Math.round(this.state.yourMemorisedWordCount / (this.state.yourSeenWordCount + this.state.yourMemorisedWordCount) * 100)}% of your typed words. Try to keep this above 30% by <Link to="/lessons/progress/?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOld&startFromWord=1">revising seen words</Link>.</p>
             {progressSummaryAndLinks}
             <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
 

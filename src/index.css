@@ -1224,6 +1224,28 @@ label {
   .link-button.link-button--large {
     width: 3rem;
     height: 3rem; }
+  .button.button--secondary,
+  .link-button.button--secondary {
+    background-color: #fff;
+    border: 1px solid #878bb2;
+    color: #3f264e; }
+    .button.button--secondary:visited,
+    .link-button.button--secondary:visited {
+      color: #3e2c48; }
+    .button.button--secondary:hover,
+    .link-button.button--secondary:hover {
+      color: #3e294b;
+      background-color: #f5f4f6; }
+    .button.button--secondary:active, .button.button--secondary:focus,
+    .link-button.button--secondary:active,
+    .link-button.button--secondary:focus {
+      color: #3e2c48;
+      background-color: #f5f4f6; }
+    .button.button--secondary:disabled,
+    .link-button.button--secondary:disabled {
+      color: #ece9ee;
+      background-color: #b0b0b0;
+      cursor: default; }
 
 .de-emphasized-button {
   background-color: transparent;
@@ -1357,11 +1379,6 @@ label {
 
 .matched.steno-material {
   border-bottom: 2px solid #402351; }
-
-.timer-table {
-  width: 156px;
-  border-collapse: separate;
-  border-spacing: 0 4px; }
 
 .subsection-header {
   background: #f5f4f6;
