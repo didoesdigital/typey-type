@@ -16,7 +16,6 @@ class Progress extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      todayProgress: {},
       flashWarning: '',
       loadingLessonIndex: true,
       loadingLessonIndexError: false,
@@ -30,8 +29,6 @@ class Progress extends Component {
       yourMemorisedWordCount: 0,
       todayNewWordCount: 0,
       todayOldWordCount: 0,
-      todaySeenWordCount: 0,
-      todayMemorisedWordCount: 0,
       toRecommendedNextLesson: false,
       toFlashcardsNextLesson: false,
       userGoalInputOldWords: 50,
@@ -68,29 +65,6 @@ class Progress extends Component {
     let yourWordCount = Object.keys(this.props.metWords).length || 0;
     let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
 
-    let todaySeenWordCount = this.props.yourSeenWordCount - this.props.calculateSeenWordCount(this.props.startingMetWordsToday);
-    let todayMemorisedWordCount = this.props.yourMemorisedWordCount - this.props.calculateMemorisedWordCount(this.props.startingMetWordsToday);
-    // let todayOldWordCount = Object.keys(this.props.metWords).length - this.props.calculateMemorisedWordCount(this.props.startingMetWordsToday) - this.props.calculateSeenWordCount(this.props.startingMetWordsToday);
-    if (Object.keys(this.props.startingMetWordsToday).length === 0) {
-      todaySeenWordCount = 0;
-      todayMemorisedWordCount = 0;
-      // todayOldWordCount = 0;
-    }
-
-    let todayProgress = {};
-    for (const [phrase, timesSeen] of Object.entries(this.props.metWords)) {
-      if (this.props.startingMetWordsToday[phrase]) {
-        if (this.props.startingMetWordsToday[phrase] < timesSeen) {
-          todayProgress[phrase] = timesSeen - this.props.startingMetWordsToday[phrase];
-        }
-      }
-      else {
-        if (Object.keys(this.props.startingMetWordsToday).length > 0) {
-          todayProgress[phrase] = timesSeen;
-        }
-      }
-    }
-
     let todayOldWords = {};
     for (const [phrase, timesSeen] of Object.entries(this.props.metWords)) {
       if (this.props.startingMetWordsToday[phrase] && (timesSeen - this.props.startingMetWordsToday[phrase] > 0)) {
@@ -111,11 +85,8 @@ class Progress extends Component {
     todayOldWordCount = Object.entries(todayOldWords).length;
 
     this.setState({
-      todayProgress: todayProgress,
       progressPercent: progressPercent,
       todayNewWordCount: todayNewWordCount,
-      todaySeenWordCount: todaySeenWordCount,
-      todayMemorisedWordCount: todayMemorisedWordCount,
       todayOldWordCount: todayOldWordCount,
       yourWordCount: yourWordCount,
       yourSeenWordCount: this.props.yourSeenWordCount,
@@ -594,51 +565,6 @@ class Progress extends Component {
     else {
       downloadProgressHref = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.metWords));
     }
-
-    let sortedArray = Object.entries(this.props.metWords)
-      .sort( (a, b) => {
-        return b[1] - a[1];
-      })
-
-    let todayProgressSorted = Object.entries(this.state.todayProgress)
-      .sort( (a, b) => {
-        return b[1] - a[1];
-      })
-
-    let todayProgress = todayProgressSorted.map( (entry) => {
-      return (
-        <li>{entry[0]}: {entry[1]}</li>
-      );
-    });
-
-    let seen30Times = sortedArray
-      .filter(entry => entry[1] === 30)
-      .map( (entry) => {
-        return (
-          <li>{entry[0]}: {entry[1]}</li>
-        )
-      });
-
-    let seen29Times = sortedArray
-      .filter(entry => entry[1] === 29)
-      .map( (entry) => {
-        return (
-          <li>{entry[0]}: {entry[1]}</li>
-        )
-      });
-
-    let all = sortedArray
-      .filter(entry => entry[1] > 0)
-      .map( (entry) => {
-        return (
-          <li>{entry[0]}: {entry[1]}</li>
-        )
-      });
-
-//             <p>All today's progress sorted by times seen:</p> <ul>{todayProgress}</ul>
-//             <p>Seen 30 times:</p> <ul>{seen30Times}</ul>
-//             <p>Seen 29 times:</p> <ul>{seen29Times}</ul>
-//             <p>All:</p> <ul>{all}</ul>
 
     return (
       <div>
