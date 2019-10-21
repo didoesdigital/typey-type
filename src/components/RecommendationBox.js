@@ -15,6 +15,7 @@ class RecommendationBox extends Component {
     let metadataStats;
     let studyType;
     let recommendedNextLessonCallToActionButton;
+    let recommendedNextLessonHeadingClassNames = "mt0 pb1 bb b--brand-primary-tint mb3";
 
     if (this.props.recommendedNextLesson !== undefined && !this.props.loadingLessonIndex) {
       metadataStats = (
@@ -85,39 +86,39 @@ class RecommendationBox extends Component {
       switch (this.props.recommendedNextLesson.studyType) {
         case "error":
           recommendedNextLessonCallToActionButton = "Practice";
-          recommendedNextLessonHeading = <h3>Recommended: error</h3>;
+          recommendedNextLessonHeading = <h3 className={recommendedNextLessonHeadingClassNames}>Recommended: error</h3>;
           break;
         case "practice":
           recommendedNextLessonCallToActionButton = "Practice";
-          recommendedNextLessonHeading = <h3>Recommended: practice</h3>;
+          recommendedNextLessonHeading = <h3 className={recommendedNextLessonHeadingClassNames}>Recommended: practice</h3>;
           break;
         case "drill":
           recommendedNextLessonCallToActionButton = "Drill";
-          recommendedNextLessonHeading = <h3>Recommended: drill</h3>;
+          recommendedNextLessonHeading = <h3 className={recommendedNextLessonHeadingClassNames}>Recommended: drill</h3>;
           break;
         case "revise":
           recommendedNextLessonCallToActionButton = "Revise";
-          recommendedNextLessonHeading = <h3>Recommended: revise</h3>;
+          recommendedNextLessonHeading = <h3 className={recommendedNextLessonHeadingClassNames}>Recommended: revise</h3>;
           break;
         case "discover":
           recommendedNextLessonCallToActionButton = "Discover";
-          recommendedNextLessonHeading = <h3>Recommended: discover</h3>;
+          recommendedNextLessonHeading = <h3 className={recommendedNextLessonHeadingClassNames}>Recommended: discover</h3>;
           break;
         case "break":
           recommendedNextLessonCallToActionButton = "Take a break";
-          recommendedNextLessonHeading = <h3>Recommended: break</h3>;
+          recommendedNextLessonHeading = <h3 className={recommendedNextLessonHeadingClassNames}>Recommended: break</h3>;
           break;
         case "game":
           recommendedNextLessonCallToActionButton = "Play";
-          recommendedNextLessonHeading = <h3>Recommended: game</h3>;
+          recommendedNextLessonHeading = <h3 className={recommendedNextLessonHeadingClassNames}>Recommended: game</h3>;
           break;
         case "compete":
           recommendedNextLessonCallToActionButton = "Compete";
-          recommendedNextLessonHeading = <h3>Recommended: compete</h3>;
+          recommendedNextLessonHeading = <h3 className={recommendedNextLessonHeadingClassNames}>Recommended: compete</h3>;
           break;
         default:
           recommendedNextLessonCallToActionButton = "Start now";
-          recommendedNextLessonHeading = <h3>Recommended: practice</h3>;
+          recommendedNextLessonHeading = <h3 className={recommendedNextLessonHeadingClassNames}>Recommended: practice</h3>;
           break;
       }
 
@@ -165,22 +166,20 @@ class RecommendationBox extends Component {
 
       recommendedNextLesson = (
         <React.Fragment>
-          {recommendedNextLessonHeading}
-          <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
-            <p className="text-right"><strong>{recommendedLinkTitle}</strong></p>
-            <p className="text-right de-emphasized">{metadataStats}</p>
-            <div className="flex flex-wrap justify-end">
-              <button onClick={this.props.recommendAnotherLesson} id="js-skip-button" className="de-emphasized-button pl3 pr3">Skip</button>
-              <div className="text-right">
-                {recommendedLink}
-              </div>
+          <div className="panel p5 mb3">
+            {recommendedNextLessonHeading}
+            <p><strong>{recommendedLinkTitle}</strong></p>
+            <p className="de-emphasized">{metadataStats}</p>
+            <RecommendationDescription
+              studyType={this.props.recommendedNextLesson.studyType}
+            />
+            <div className="flex flex-wrap justify-end pt1 nt-1">
+              <button onClick={this.props.recommendAnotherLesson} id="js-skip-button" className="button button--secondary mr2 pl3 pr3">Skip</button>
+              <div>{recommendedLink}</div>
             </div>
           </div>
           <div className="flex flex-wrap content-start-ns">
             <div className="flex flex-wrap">
-              <RecommendationDescription
-                studyType={this.props.recommendedNextLesson.studyType}
-              />
             </div>
           </div>
         </React.Fragment>
@@ -188,15 +187,13 @@ class RecommendationBox extends Component {
     } else {
       recommendedNextLesson = (
         <React.Fragment>
-          <h3>Recommended…</h3>
-          <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
-            <p className="text-right"><strong>Loading…</strong></p>
-            <p className="text-right de-emphasized"></p>
+          <div className="panel p5 mb3">
+            <h3 className={recommendedNextLessonHeadingClassNames}>Recommended…</h3>
+            <p><strong>Loading…</strong></p>
+            <p className="de-emphasized"></p>
             <div className="flex flex-wrap justify-end">
-              <button onClick={this.props.recommendAnotherLesson} id="js-skip-button" className="de-emphasized-button pl3 pr3">Skip</button>
-              <div className="text-right">
-                <button disabled className="link-button dib" style={{lineHeight: 2}}>Loading…</button>
-              </div>
+              <button onClick={this.props.recommendAnotherLesson} id="js-skip-button" className="button button--secondary mr2 pl3 pr3">Skip</button>
+              <div><button disabled className="link-button dib" style={{lineHeight: 2}}>Loading…</button></div>
             </div>
           </div>
         </React.Fragment>

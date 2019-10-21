@@ -33,6 +33,7 @@ $heavy-type-face--japanese: 'MPLUS 1p', 'M PLUS 1p', 'Noto Sans JP', 'Overpass M
 $heavy-type-face--sans-serif: 'Overpass', 'Clear Sans', 'Source Sans Pro', 'Work Sans', 'Open Sans', 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $base-font-size: 1rem;
 $font-scale: 1.25; // Major third scale
+$display-size: $base-font-size * $font-scale * $font-scale * $font-scale * $font-scale * $font-scale; // 48.828px
 $h1-size: $base-font-size * $font-scale * $font-scale * $font-scale * $font-scale; // 39.056px
 $h2-size: $base-font-size * $font-scale * $font-scale * $font-scale; // 31.248px
 $h3-size: $base-font-size * $font-scale * $font-scale; // 25.008px
@@ -452,6 +453,9 @@ input:focus::placeholder {
 // .overflow-y-scroll { overflow-y: scroll; }
 // .overflow-y-auto { overflow-y: auto; }
 
+.bw-1 {
+  border-width: 1px;
+}
 .bw-12 {
   border-width: 12px;
 }
@@ -463,6 +467,13 @@ input:focus::placeholder {
 }
 .b--brand-primary {
   border-color: $brand-primary;
+}
+.b--brand-primary-tint {
+  border-color: add-tint($brand-primary, 70%);
+}
+.bb {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
 }
 
 // .fw4 {
@@ -526,6 +537,9 @@ input:focus::placeholder {
 // .mt8     { margin-top: 64px; }
 .mt10    { margin-top: 80px; }
 // .mt11    { margin-top: 88px; }
+
+.nt-1 { margin-top: -1px; }
+
 .mx1     { margin-left: 8px; margin-right: 8px; }
 
 .mxn1    { margin-left: -8px; margin-right: -8px; }
@@ -570,15 +584,20 @@ input:focus::placeholder {
 .p1      { padding: 8px; }
 .p2      { padding: 16px; }
 .p3      { padding: 24px; }
+.p5      { padding: 40px; }
 .px3     { padding-left: 24px; padding-right: 24px; }
 .pb0     { padding-bottom: 0; }
+.pb1     { padding-bottom: 8px; }
+.pb3     { padding-bottom: 24px; }
 .pb4     { padding-bottom: 32px; }
 .pb24    { padding-bottom: 192px; }
 .pl1     { padding-left: 8px; }
 .pl3     { padding-left: 24px; }
 .pr1     { padding-right: 8px; }
 .pr3     { padding-right: 24px; }
+.pt1     { padding-top: 8px; }
 .pt3     { padding-top: 24px; }
+.pt5     { padding-top: 40px; }
 .pt6     { padding-top: 48px; }
 .pt24    { padding-top: 192px; }
 
@@ -846,11 +865,11 @@ input:focus::placeholder {
 
 .panel {
   background-color: #fff;
-  border: thin solid add-tint($brand-primary, 70%);
+  border: 1px solid add-tint($brand-primary, 70%);
   border-radius: 4px;
   &.panel--warning {
     background-color: add-tint($brand-warning, 60%);
-    border: thin solid add-shade($brand-warning, 10%);
+    border: 1px solid add-shade($brand-warning, 10%);
   }
 }
 
@@ -858,6 +877,9 @@ input:focus::placeholder {
 .stat__number {
   font-size: $h3-size;
   min-width: 48px;
+}
+.stat__number--display {
+  font-size: $display-size;
 }
 
 .stat__label {

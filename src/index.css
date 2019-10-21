@@ -402,6 +402,9 @@ input:focus::placeholder {
 .overflow-auto {
   overflow: auto; }
 
+.bw-1 {
+  border-width: 1px; }
+
 .bw-12 {
   border-width: 12px; }
 
@@ -413,6 +416,13 @@ input:focus::placeholder {
 
 .b--brand-primary {
   border-color: #402351; }
+
+.b--brand-primary-tint {
+  border-color: #c6bdcb; }
+
+.bb {
+  border-bottom-style: solid;
+  border-bottom-width: 1px; }
 
 .fw7 {
   font-weight: 700; }
@@ -528,6 +538,9 @@ input:focus::placeholder {
 .mt10 {
   margin-top: 80px; }
 
+.nt-1 {
+  margin-top: -1px; }
+
 .mx1 {
   margin-left: 8px;
   margin-right: 8px; }
@@ -642,12 +655,21 @@ input:focus::placeholder {
 .p3 {
   padding: 24px; }
 
+.p5 {
+  padding: 40px; }
+
 .px3 {
   padding-left: 24px;
   padding-right: 24px; }
 
 .pb0 {
   padding-bottom: 0; }
+
+.pb1 {
+  padding-bottom: 8px; }
+
+.pb3 {
+  padding-bottom: 24px; }
 
 .pb4 {
   padding-bottom: 32px; }
@@ -667,8 +689,14 @@ input:focus::placeholder {
 .pr3 {
   padding-right: 24px; }
 
+.pt1 {
+  padding-top: 8px; }
+
 .pt3 {
   padding-top: 24px; }
+
+.pt5 {
+  padding-top: 40px; }
 
 .pt6 {
   padding-top: 48px; }
@@ -898,15 +926,18 @@ input:focus::placeholder {
 
 .panel {
   background-color: #fff;
-  border: thin solid #c6bdcb;
+  border: 1px solid #c6bdcb;
   border-radius: 4px; }
   .panel.panel--warning {
     background-color: #ffe5b3;
-    border: thin solid #e6ac3a; }
+    border: 1px solid #e6ac3a; }
 
 .stat__number {
   font-size: 1.5625rem;
   min-width: 48px; }
+
+.stat__number--display {
+  font-size: 3.05176rem; }
 
 .stat__label {
   font-size: 0.8rem; }

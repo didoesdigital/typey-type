@@ -10,6 +10,8 @@ import { getLessonIndexData } from './../utils/lessonIndexData';
 import { IconCheckmark, IconTriangleRight } from './Icon';
 import { Link, Redirect } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
+import { ReactComponent as HappyRobot } from '../images/HappyRobot.svg';
+import { ReactComponent as BoredRobot } from '../images/BoredRobot.svg';
 import 'react-tippy/dist/tippy.css'
 
 class Progress extends Component {
@@ -566,6 +568,52 @@ class Progress extends Component {
       downloadProgressHref = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.metWords));
     }
 
+    let oldWordsNumericInput = (
+      <NumericInput
+        autoCapitalize="off"
+        autoComplete="off"
+        autoCorrect="off"
+        autoFocus={false}
+        className="form-control w6"
+        disabled={!this.state.showSetGoalsForm}
+        id="userGoalInputOldWords"
+        max={10000}
+        min={1}
+        name="userGoalInputOldWords"
+        onChange={this.handleOldWordsGoalInputChange.bind(this)}
+        precision={0}
+        spellCheck="false"
+        step={1}
+        style={grabStyle()}
+        type="number"
+        value={this.state.userGoalInputOldWords}
+        snap
+      />
+    );
+
+    let newWordsNumericInput = (
+      <NumericInput
+        autoCapitalize="off"
+        autoComplete="off"
+        autoCorrect="off"
+        autoFocus={false}
+        className="form-control w6"
+        disabled={!this.state.showSetGoalsForm}
+        id="userGoalInputNewWords"
+        max={10000}
+        min={1}
+        name="userGoalInputNewWords"
+        onChange={this.handleNewWordsGoalInputChange.bind(this)}
+        precision={0}
+        spellCheck="false"
+        step={1}
+        style={grabStyle()}
+        type="number"
+        value={this.state.userGoalInputNewWords}
+        snap
+      />
+    );
+
     return (
       <div>
         <main id="main">
@@ -619,75 +667,12 @@ class Progress extends Component {
               <h2 className="mb0">Your progress</h2>
               {reducedSaveAndLoadForms}
             </div>
-            <h3>Today’s efforts</h3>
-            { this.state.showSetGoalsForm ?
-              <React.Fragment>
-                <form onSubmit={this.saveGoals.bind(this)}>
-                  <div className="mb2">
-                    <label id="js-first-interactive-form-field-element" htmlFor="userGoalInputOldWords">Old words goal</label>
-                    <NumericInput
-                      autoCapitalize="off"
-                      autoComplete="off"
-                      autoCorrect="off"
-                      autoFocus={false}
-                      className="form-control w6"
-                      disabled={!this.state.showSetGoalsForm}
-                      id="userGoalInputOldWords"
-                      max={10000}
-                      min={1}
-                      name="userGoalInputOldWords"
-                      onChange={this.handleOldWordsGoalInputChange.bind(this)}
-                      precision={0}
-                      spellCheck="false"
-                      step={1}
-                      style={grabStyle()}
-                      type="number"
-                      value={this.state.userGoalInputOldWords}
-                      snap
-                    />
-                  </div>
-                  <div className="mb2">
-                    <label htmlFor="userGoalInputNewWords">New words goal</label>
-                    <NumericInput
-                      autoCapitalize="off"
-                      autoComplete="off"
-                      autoCorrect="off"
-                      autoFocus={false}
-                      className="form-control w6"
-                      disabled={!this.state.showSetGoalsForm}
-                      id="userGoalInputNewWords"
-                      max={10000}
-                      min={1}
-                      name="userGoalInputNewWords"
-                      onChange={this.handleNewWordsGoalInputChange.bind(this)}
-                      precision={0}
-                      spellCheck="false"
-                      step={1}
-                      style={grabStyle()}
-                      type="number"
-                      value={this.state.userGoalInputNewWords}
-                      snap
-                    />
-                  </div>
-                  <button onClick={this.saveGoals.bind(this)} className="button mr2 dib">Save goals</button>
-                  <button onClick={this.cancelSetGoals.bind(this)} className="button button--secondary mr2 dib">Cancel</button>
-                </form>
-              </React.Fragment>
-                :
-              <React.Fragment>
-                <div>boredrobot <span className="stat__number">{this.state.todayOldWordCount}</span> Old words<br />Your goal: {this.props.userGoals.oldWords}{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? " Done!" : " not done" }</div>
-                <div>boredrobot <span className="stat__number">{this.state.todayNewWordCount}</span> New words<br />Your goal: {this.props.userGoals.newWords}{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? " Done!" : " not done" }</div>
-                <button id="js-set-goals-button" onClick={this.showSetGoalsForm.bind(this)} className="button button--secondary mr2 dib">Set goals</button>
-              </React.Fragment>
-            }
 
-            <p>You've memorised {Math.round(this.state.yourMemorisedWordCount / (this.state.yourSeenWordCount + this.state.yourMemorisedWordCount) * 100)}% of your typed words. Try to keep this above 30% by <Link to="/lessons/progress/?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOld&startFromWord=1">revising seen words</Link>.</p>
             {progressSummaryAndLinks}
-            <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
+            <p>You've memorised {Math.round(this.state.yourMemorisedWordCount / (this.state.yourSeenWordCount + this.state.yourMemorisedWordCount) * 100)}% of your typed words. Try to keep this above 30% by <Link to="/lessons/progress/?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOld&startFromWord=1">revising seen words</Link>.</p>
 
-
-            <div className="flex flex-wrap justify-between">
-              <div className="mw-384 w-336 order-1">
+            <div className="flex flex-wrap justify-between pt3">
+              <div className="mw-568 mr3 flex-grow nt-1">
                 <ErrorBoundary relative={true}>
                   <RecommendationBox
                     recommendedNextLesson={this.props.recommendedNextLesson}
@@ -697,10 +682,59 @@ class Progress extends Component {
                     recommendAnotherLesson={this.recommendAnotherLesson}
                   />
                 </ErrorBoundary>
+              </div>
 
+              <div className="mw-368 flex-grow">
+                <h3 className="mt0 mb0 pt5 pb1 bb b--brand-primary-tint">Today’s efforts</h3>
+                { this.state.showSetGoalsForm ?
+                  <React.Fragment>
+                    <form onSubmit={this.saveGoals.bind(this)}>
+                      <div className="mb2">
+                        <label id="js-first-interactive-form-field-element" htmlFor="userGoalInputOldWords">Old words goal</label>
+                        { oldWordsNumericInput }
+                      </div>
+                      <div className="mb2">
+                        <label htmlFor="userGoalInputNewWords">New words goal</label>
+                        { newWordsNumericInput }
+                      </div>
+                      <button onClick={this.saveGoals.bind(this)} className="button mr2 dib">Save goals</button>
+                      <button onClick={this.cancelSetGoals.bind(this)} className="button button--secondary mr2 dib">Cancel</button>
+                    </form>
+                  </React.Fragment>
+                    :
+                  <React.Fragment>
+                    <div className="inline-flex items-center pt3 pb3 bb b--brand-primary-tint w-100">
+                      <div>{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
+                      <div className="stat__number stat__number--display">{this.state.todayOldWordCount}</div>
+                      <div>
+                        Old words<br />
+                        <span className="text-small">Your goal: {this.props.userGoals.oldWords}{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? " • Done!" : null }</span>
+                      </div>
+                    </div>
+                    <div className="inline-flex items-center pt3 pb3 bb b--brand-primary-tint w-100">
+                      <div>{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
+                      <div className="stat__number stat__number--display">{this.state.todayNewWordCount}</div>
+                      <div>
+                        New words<br />
+                        <span className="text-small">Your goal: {this.props.userGoals.newWords}{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? " • Done!" : null }</span>
+                      </div>
+                    </div>
+                    <div className="text-right">
+                      <button id="js-set-goals-button" onClick={this.showSetGoalsForm.bind(this)} className="button button--secondary mt3 dib">Set goals</button>
+                    </div>
+                  </React.Fragment>
+                }
+              </div>
+            </div>
+
+            <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
+
+
+            <div className="flex flex-wrap justify-between">
+              <div className="mw-368 flex-grow order-1">
                 { showFlashcards ?
                   <div className="mx-auto hide-sm-only">
-                    <div className="mw100 w-336">
+                    <div className="mw100">
                       <h3>Flashcards</h3>
                       <ErrorBoundary relative={true}>
                         <div className="clearfix mb2 mt2">
