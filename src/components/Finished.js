@@ -4,12 +4,10 @@ import UserSettings from './UserSettings';
 import { IconRestart } from './Icon';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
-import { createParticleAtPoint } from './../utils/confetti';
-import { getRandomBetween } from './../utils/utils';
+import * as Confetti from './../utils/confetti';
 import 'react-tippy/dist/tippy.css'
 
 let particles = [];
-let animationFrame;
 
 class Finished extends Component {
   constructor(props) {
@@ -27,19 +25,21 @@ class Finished extends Component {
     let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
 
     if (wpm > this.props.topSpeedToday && wpm > this.props.topSpeedPersonalBest && this.props.currentLessonStrokes.length > 3 && wpm > 3) {
-      this.setupCanvas({sparsity: 17, colors: 5});
+      Confetti.setupCanvas({sparsity: 17, colors: 5}, 'finished-heading', particles);
       this.props.updateTopSpeedToday(wpm);
       this.props.updateTopSpeedPersonalBest(wpm);
-      window.requestAnimationFrame(this.updateCanvas.bind(this));
+      // window.requestAnimationFrame(Confetti.updateCanvas.bind(this, particles));
+      Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight );
       this.setState({
         newTopSpeedPersonalBest: true,
         newTopSpeedToday: true
       });
     }
     else if (wpm > this.props.topSpeedToday && this.props.currentLessonStrokes.length > 3 && wpm > 3) {
-      this.setupCanvas({sparsity: 170, colors: 2});
+      Confetti.setupCanvas({sparsity: 170, colors: 2}, 'finished-heading', particles);
       this.props.updateTopSpeedToday(wpm);
-      window.requestAnimationFrame(this.updateCanvas.bind(this));
+      // window.requestAnimationFrame(Confetti.updateCanvas.bind(this, particles));
+      Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight );
       this.setState({
         newTopSpeedPersonalBest: false,
         newTopSpeedToday: true
@@ -71,90 +71,17 @@ class Finished extends Component {
     return wordsPerMinute;
   }
 
-  setupCanvas(config) {
-    if (!config['sparsity']) { throw new Error("Bad confetti config"); }
-    if (!config['colors']) { throw new Error("Bad confetti config"); }
-
-    // let heading = this.refs.finishedHeading;
-    let heading = document.getElementById('finished-heading');
-    if (heading) {
-      let width = heading.offsetWidth;
-      let height = heading.offsetHeight
-
-      let count = 0;
-      let bcr = heading.getBoundingClientRect();
-
-      for(let localX = 0; localX < width; localX++) {
-        for(let localY = 0; localY < height; localY++) {
-          if (count % config['sparsity'] === 0) {
-            // $brand-highlight #ffd073 or $brand-primary #402351 confetti
-            let colors;
-
-            colors = [
-              [255, 208, 115, getRandomBetween(0.7, 1)], // #FFD073
-              [130, 66, 168, getRandomBetween(0.7, 1)], // #8242A8
-              [255, 191, 64, getRandomBetween(0.7, 1)], // #FFBF40
-              [69, 126, 80, getRandomBetween(0.7, 1)], // #457e50
-              [149, 49, 89, getRandomBetween(0.7, 1)], // #953159
-              [64, 35, 81, getRandomBetween(0.7, 1)], // #402351
-              [35, 81, 44, getRandomBetween(0.7, 1)] // #23512C
-            ];
-
-            colors.splice(config['colors']);
-
-            let rgbaColor = colors[Math.floor(Math.random() * colors.length)];
-
-            let globalX =  bcr.x + localX;
-            let globalY =  bcr.y + localY;
-
-            createParticleAtPoint(globalX, globalY, rgbaColor);
-          }
-
-          count++;
-        }
-      }
-    }
-  }
-
-  updateCanvas() {
-    const canvas = this.refs.canvas;
-
-    if (canvas) {
-      const ctx = this.refs.canvas.getContext('2d');
-
-      if (typeof ctx !== "undefined") {
-        ctx.clearRect(0, 0, this.state.canvasWidth, this.state.canvasHeight);
-
-        let particlesLength = particles.length;
-        for (let i = 0; i < particlesLength; i++) {
-          particles[i].draw(ctx);
-          let lastParticle = i === particles.length - 1;
-
-          if (lastParticle) {
-            let percentCompleted = ((Date.now() - particles[i].startTime) / particles[i].maximumAnimationDuration) * 100;
-
-            if (percentCompleted > 100) {
-              particles = [];
-            }
-          }
-        }
-
-        animationFrame = window.requestAnimationFrame(this.updateCanvas.bind(this));
-      }
-    }
-  }
-
-  confetti(event) {
+  restartConfetti(event) {
     if (event && ((event.keyCode && event.keyCode === 13) || event.type === "click")) {
       particles.splice(0);
-      window.cancelAnimationFrame(animationFrame);
+      Confetti.cancelAnimation();
       if (this.state.newTopSpeedToday && this.state.newTopSpeedPersonalBest) {
-        this.setupCanvas({sparsity: 17, colors: 5});
+        Confetti.setupCanvas({sparsity: 17, colors: 5}, 'finished-heading', particles);
       }
       else if (this.state.newTopSpeedToday) {
-        this.setupCanvas({sparsity: 170, colors: 2});
+        Confetti.setupCanvas({sparsity: 170, colors: 2}, 'finished-heading', particles);
       }
-      window.requestAnimationFrame(this.updateCanvas.bind(this));
+      Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight);
     }
   }
 
@@ -336,8 +263,8 @@ class Finished extends Component {
             ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }}
             tabIndex="-1"
             id="finished-heading"
-            onClick={this.confetti.bind(this)}
-            onKeyDown={this.confetti.bind(this)}
+            onClick={this.restartConfetti.bind(this)}
+            onKeyDown={this.restartConfetti.bind(this)}
           >
             {newTopSpeedSectionOrFinished}
           </h3>

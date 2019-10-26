@@ -1,5 +1,7 @@
 import { getRandomBetween } from './utils';
 
+let animationFrame;
+
 let ConfettiParticle = function() {
   let confettiMinimumSize = 2; // pixels
   let confettiMaximumSize = 10; // pixels
@@ -67,4 +69,83 @@ function createParticleAtPoint(x, y, colorData, particles) {
   particles.push(particle);
 }
 
-export { ConfettiParticle, createParticleAtPoint };
+function setupCanvas(config, confettiSourceID, particles) {
+  if (!config['sparsity']) { throw new Error("Bad confetti config"); }
+  if (!config['colors']) { throw new Error("Bad confetti config"); }
+
+  // let confettiSource = this.refs.finishedHeading;
+  let confettiSource = document.getElementById(confettiSourceID);
+  if (confettiSource) {
+    let width = confettiSource.offsetWidth;
+    let height = confettiSource.offsetHeight
+
+    let count = 0;
+    let bcr = confettiSource.getBoundingClientRect();
+
+    for(let localX = 0; localX < width; localX++) {
+      for(let localY = 0; localY < height; localY++) {
+        if (count % config['sparsity'] === 0) {
+          // $brand-highlight #ffd073 or $brand-primary #402351 confetti
+          let colors;
+
+          colors = [
+            [255, 208, 115, getRandomBetween(0.7, 1)], // #FFD073
+            [130, 66, 168, getRandomBetween(0.7, 1)], // #8242A8
+            [255, 191, 64, getRandomBetween(0.7, 1)], // #FFBF40
+            [69, 126, 80, getRandomBetween(0.7, 1)], // #457e50
+            [149, 49, 89, getRandomBetween(0.7, 1)], // #953159
+            [64, 35, 81, getRandomBetween(0.7, 1)], // #402351
+            [35, 81, 44, getRandomBetween(0.7, 1)] // #23512C
+          ];
+
+          colors.splice(config['colors']);
+
+          let rgbaColor = colors[Math.floor(Math.random() * colors.length)];
+
+          let globalX =  bcr.x + localX;
+          let globalY =  bcr.y + localY;
+
+          createParticleAtPoint(globalX, globalY, rgbaColor, particles);
+        }
+
+        count++;
+      }
+    }
+  }
+}
+
+function updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) {
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
+
+    if (typeof ctx !== "undefined") {
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+      let localParticlesLength = localParticles.length;
+      for (let i = 0; i < localParticlesLength; i++) {
+        localParticles[i].draw(ctx);
+        let lastParticle = i === localParticles.length - 1;
+
+        if (lastParticle) {
+          let percentCompleted = ((Date.now() - localParticles[i].startTime) / localParticles[i].maximumAnimationDuration) * 100;
+
+          if (percentCompleted > 100) {
+            localParticles = [];
+          }
+        }
+      }
+
+      animationFrame = window.requestAnimationFrame(this.updateCanvas.bind(this, localParticles, canvas, canvasWidth, canvasHeight));
+    }
+  }
+}
+
+function cancelAnimation() {
+  window.cancelAnimationFrame(animationFrame);
+}
+
+function restartAnimation(particles, canvas, canvasWidth, canvasHeight) {
+  window.requestAnimationFrame(this.updateCanvas.bind(this, particles, canvas, canvasWidth, canvasHeight));
+}
+
+export { ConfettiParticle, createParticleAtPoint, setupCanvas, updateCanvas, cancelAnimation, restartAnimation };
