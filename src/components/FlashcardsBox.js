@@ -45,7 +45,7 @@ class FlashcardsBox extends Component {
             <p className="text-right"><strong>{flashcardsLinkTitle}</strong></p>
             <p className="text-right de-emphasized">{flashcardsTimeSeenText}</p>
             <div className="flex flex-wrap justify-end">
-              <button onClick={this.moreFlashcards.bind(this)} id={this.props.skipButtonId || "js-flashcards-skip-button"} className="de-emphasized-button pl3 pr3">Skip</button>
+              <button onClick={this.moreFlashcards.bind(this)} id={this.props.skipButtonId || "js-flashcards-skip-button"} className="button button--secondary mr2 pl3 pr3">Skip</button>
               <div className="text-right">
                 {flashcardsLink}
               </div>
@@ -60,7 +60,7 @@ class FlashcardsBox extends Component {
             <p className="text-right"><strong>Loading…</strong></p>
             <p className="text-right de-emphasized"></p>
             <div className="flex flex-wrap justify-end">
-              <button onClick={this.moreFlashcards.bind(this)} id={this.props.skipButtonId || "js-flashcards-skip-button"} className="de-emphasized-button pl3 pr3">Skip</button>
+              <button onClick={this.moreFlashcards.bind(this)} id={this.props.skipButtonId || "js-flashcards-skip-button"} className="button button--secondary mr2 pl3 pr3">Skip</button>
               <div className="text-right">
                 <button disabled className="link-button dib" style={{lineHeight: 2}}>Loading…</button>
               </div>
