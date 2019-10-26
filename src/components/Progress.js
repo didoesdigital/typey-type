@@ -237,6 +237,8 @@ class Progress extends Component {
   }
 
   saveGoals(event) {
+    event.preventDefault();
+
     GoogleAnalytics.event({
       category: 'Progress',
       action: 'Save goals',
@@ -268,6 +270,8 @@ class Progress extends Component {
   }
 
   cancelSetGoals(event) {
+    event.preventDefault();
+
     GoogleAnalytics.event({
       category: 'Progress',
       action: 'Cancel set goals',
