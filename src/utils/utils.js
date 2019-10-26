@@ -100,4 +100,8 @@ function randomise(array : Array<PresentedMaterial>) {
   return array;
 }
 
-export { relativeTimeAgo, matchLessonToTerm, sortLessons, isPeak, randomise, isLessonTextValid};
+function getRandomBetween(min : number, max : number) {
+  return Math.random() * (max - min) + min;
+}
+
+export { relativeTimeAgo, matchLessonToTerm, sortLessons, isPeak, randomise, isLessonTextValid, getRandomBetween };
