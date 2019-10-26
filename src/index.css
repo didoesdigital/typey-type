@@ -637,6 +637,9 @@ input:focus::placeholder {
 .mh-384 {
   min-height: 384px; }
 
+.mh-424 {
+  min-height: 424px; }
+
 .min-width-70 {
   min-width: 70%; }
 
