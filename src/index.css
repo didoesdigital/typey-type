@@ -1941,3 +1941,9 @@ small .svg-icon-wrapper.svg-baseline svg {
 
 .celebration-canvas {
   z-index: 5; }
+
+.todays-effort-robot {
+  display: flex; }
+  .todays-effort-robot svg {
+    max-width: 25px;
+    margin-right: 1rem; }

@@ -703,16 +703,16 @@ class Progress extends Component {
                   </React.Fragment>
                     :
                   <React.Fragment>
-                    <div className="inline-flex items-center pt3 pb3 bb b--brand-primary-tint w-100">
-                      <div>{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
+                    <div className="inline-flex items-center pt1 pb1 bb b--brand-primary-tint w-100">
+                      <div className="todays-effort-robot">{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
                       <div className="stat__number stat__number--display">{this.state.todayOldWordCount}</div>
                       <div>
                         Old words<br />
                         <span className="text-small">Your goal: {this.props.userGoals.oldWords}{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? " • Done!" : null }</span>
                       </div>
                     </div>
-                    <div className="inline-flex items-center pt3 pb3 bb b--brand-primary-tint w-100">
-                      <div>{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
+                    <div className="inline-flex items-center pt1 pb1 bb b--brand-primary-tint w-100">
+                      <div className="todays-effort-robot">{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
                       <div className="stat__number stat__number--display">{this.state.todayNewWordCount}</div>
                       <div>
                         New words<br />

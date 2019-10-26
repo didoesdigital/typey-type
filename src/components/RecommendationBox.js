@@ -168,12 +168,12 @@ class RecommendationBox extends Component {
         <React.Fragment>
           <div className="panel p5 mb3">
             {recommendedNextLessonHeading}
-            <p><strong>{recommendedLinkTitle}</strong></p>
+            <p className="mb0 mt4"><strong>{recommendedLinkTitle}</strong></p>
             <p className="de-emphasized">{metadataStats}</p>
             <RecommendationDescription
               studyType={this.props.recommendedNextLesson.studyType}
             />
-            <div className="flex flex-wrap justify-end pt1 nt-1">
+            <div className="flex flex-wrap justify-end">
               <button onClick={this.props.recommendAnotherLesson} id="js-skip-button" className="button button--secondary mr2 pl3 pr3">Skip</button>
               <div>{recommendedLink}</div>
             </div>
@@ -189,7 +189,7 @@ class RecommendationBox extends Component {
         <React.Fragment>
           <div className="panel p5 mb3">
             <h3 className={recommendedNextLessonHeadingClassNames}>Recommended…</h3>
-            <p><strong>Loading…</strong></p>
+            <p className="mb0 mt4"><strong>Loading…</strong></p>
             <p className="de-emphasized"></p>
             <div className="flex flex-wrap justify-end">
               <button onClick={this.props.recommendAnotherLesson} id="js-skip-button" className="button button--secondary mr2 pl3 pr3">Skip</button>

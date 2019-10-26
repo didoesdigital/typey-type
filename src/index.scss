@@ -2206,3 +2206,18 @@ $lineAdjustment: 4px;
   z-index: $z-index-particles;
 }
 
+.todays-effort-robot {
+  display: flex;
+
+  svg {
+    max-width: 25px;
+    margin-right: 1rem;
+  }
+}
+
+
+
+
+
+
+

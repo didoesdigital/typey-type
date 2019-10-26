@@ -25,7 +25,7 @@ class RecommendationDescription extends Component {
       case "drill":
         description = (
           <p className={descriptionClassNames}>
-            Regularly drill common words to build up your muscle memory and test your skills. Write as fast and furiously as you can, aiming for a high speed score. Pick specific drills that focus on a certain kind of brief or many similar words so you can associate them together.
+            Regularly drill common words to build up your muscle memory. Write as fast as you can, aiming for a high speed score. Pick specific drills that focus on similar words.
           </p>
         );
         break;
@@ -33,7 +33,7 @@ class RecommendationDescription extends Component {
       case "revise":
         description = (
           <p className={descriptionClassNames}>
-            Revise 50 briefs a day from a lesson with loads of words you want to memorise, like the top 10000 English words. Try to recall the briefs before revealing their strokes. Avoid fingerspelling or writing out the long forms of words, so you can memorise the best brief for every word.
+            Revise lessons with lots of words you want to memorise, like the top 100 words. Try to recall briefs before revealing their strokes. Avoid fingerspelling or writing out words in long form.
           </p>
         );
         break;
@@ -41,7 +41,7 @@ class RecommendationDescription extends Component {
       case "discover":
         description = (
           <p className={descriptionClassNames}>
-            Discover 5–15 new briefs a day from various lessons, revealing their strokes as you learn to write them. Write them slowly, concentrating on accuracy and forming good habits around how you stroke word parts.
+            Discover new words without hiding their briefs while you learn to write them. Write slowly, concentrating on accuracy and forming good habits around how you stroke word parts.
           </p>
         );
         break;
@@ -49,7 +49,7 @@ class RecommendationDescription extends Component {
       case "compete":
         description = (
           <p className={descriptionClassNames}>
-            To really push your speed and vocabulary, you might add some competition. Try a race.
+            To really push your speed and vocabulary, you might add some competition. Try a race. Unexpected material can also teach you to how to adapt to unknown words under pressure.
           </p>
         );
         break;
@@ -57,7 +57,7 @@ class RecommendationDescription extends Component {
       case "game":
         description = (
           <p className={descriptionClassNames}>
-            You’ve been so diligent! You might take a break from drilling and try a game.
+            You’ve been so diligent! You might take a break from drilling and try a game. Steno games that apply time pressure and let you make mistakes can help you build speed.
           </p>
         );
         break;
