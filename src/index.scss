@@ -597,6 +597,7 @@ input:focus::placeholder {
 .pr3     { padding-right: 24px; }
 .pt1     { padding-top: 8px; }
 .pt3     { padding-top: 24px; }
+.pt4     { padding-top: 32px; }
 .pt5     { padding-top: 40px; }
 .pt6     { padding-top: 48px; }
 .pt24    { padding-top: 192px; }
@@ -2210,6 +2211,7 @@ $lineAdjustment: 4px;
   display: flex;
 
   svg {
+    width: 100%;
     max-width: 25px;
     margin-right: 1rem;
   }

@@ -695,6 +695,9 @@ input:focus::placeholder {
 .pt3 {
   padding-top: 24px; }
 
+.pt4 {
+  padding-top: 32px; }
+
 .pt5 {
   padding-top: 40px; }
 
@@ -1945,5 +1948,6 @@ small .svg-icon-wrapper.svg-baseline svg {
 .todays-effort-robot {
   display: flex; }
   .todays-effort-robot svg {
+    width: 100%;
     max-width: 25px;
     margin-right: 1rem; }

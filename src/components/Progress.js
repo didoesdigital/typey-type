@@ -689,21 +689,31 @@ class Progress extends Component {
                 { this.state.showSetGoalsForm ?
                   <React.Fragment>
                     <form onSubmit={this.saveGoals.bind(this)}>
-                      <div className="mb2">
-                        <label id="js-first-interactive-form-field-element" htmlFor="userGoalInputOldWords">Old words goal</label>
-                        { oldWordsNumericInput }
+                      <div className="pt4 pb4">
+                        <div className="mb3">
+                          <label id="js-first-interactive-form-field-element" htmlFor="userGoalInputOldWords">Old words goal</label>
+                          { oldWordsNumericInput }
+                          <div className="mt1 text-small de-emphasized">
+                            (50–200 recommended)
+                          </div>
+                        </div>
+                        <div className="mb3">
+                          <label htmlFor="userGoalInputNewWords">New words goal</label>
+                          { newWordsNumericInput }
+                          <div className="mt1 text-small de-emphasized">
+                            (5–40 recommended)
+                          </div>
+                        </div>
+                        <div className="flex flex-wrap justify-end">
+                          <button onClick={this.cancelSetGoals.bind(this)} className="button button--secondary mr2 dib">Cancel</button>
+                          <button onClick={this.saveGoals.bind(this)} className="button mr2 dib">Save goals</button>
+                        </div>
                       </div>
-                      <div className="mb2">
-                        <label htmlFor="userGoalInputNewWords">New words goal</label>
-                        { newWordsNumericInput }
-                      </div>
-                      <button onClick={this.saveGoals.bind(this)} className="button mr2 dib">Save goals</button>
-                      <button onClick={this.cancelSetGoals.bind(this)} className="button button--secondary mr2 dib">Cancel</button>
                     </form>
                   </React.Fragment>
                     :
                   <React.Fragment>
-                    <div className="inline-flex items-center pt1 pb1 bb b--brand-primary-tint w-100">
+                    <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
                       <div className="todays-effort-robot">{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
                       <div className="stat__number stat__number--display">{this.state.todayOldWordCount}</div>
                       <div>
@@ -711,7 +721,7 @@ class Progress extends Component {
                         <span className="text-small">Your goal: {this.props.userGoals.oldWords}{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? " • Done!" : null }</span>
                       </div>
                     </div>
-                    <div className="inline-flex items-center pt1 pb1 bb b--brand-primary-tint w-100">
+                    <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
                       <div className="todays-effort-robot">{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
                       <div className="stat__number stat__number--display">{this.state.todayNewWordCount}</div>
                       <div>

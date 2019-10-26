@@ -131,7 +131,7 @@ class RecommendationBox extends Component {
             target="_blank"
             rel="noopener noreferrer"
             onClick={this.props.startRecommendedStep}
-            className="link-button dib"
+            className="mr2 link-button dib"
             style={{lineHeight: 2}}
           >
             {recommendedNextLessonCallToActionButton}
@@ -153,13 +153,13 @@ class RecommendationBox extends Component {
         );
       } else {
         recommendedLink = (
-          <Link onClick={this.props.startRecommendedStep} to={this.props.recommendedNextLesson.link} className="link-button dib" style={{lineHeight: 2}}>{recommendedNextLessonCallToActionButton}</Link>
+          <Link onClick={this.props.startRecommendedStep} to={this.props.recommendedNextLesson.link} className="mr2 link-button dib" style={{lineHeight: 2}}>{recommendedNextLessonCallToActionButton}</Link>
         );
       }
 
       if (studyType === "error") {
         recommendedLinkTitle = "Unable to load recommendation";
-        recommendedLink = <a href="." className="link-button dib" style={{lineHeight: 2}}>Refresh</a>
+        recommendedLink = <a href="." className="mr2 link-button dib" style={{lineHeight: 2}}>Refresh</a>
       } else {
         recommendedLinkTitle = this.props.recommendedNextLesson.linkTitle;
       }
@@ -173,9 +173,9 @@ class RecommendationBox extends Component {
             <RecommendationDescription
               studyType={this.props.recommendedNextLesson.studyType}
             />
-            <div className="flex flex-wrap justify-end">
-              <button onClick={this.props.recommendAnotherLesson} id="js-skip-button" className="button button--secondary mr2 pl3 pr3">Skip</button>
+            <div className="flex flex-wrap">
               <div>{recommendedLink}</div>
+              <button onClick={this.props.recommendAnotherLesson} id="js-skip-button" className="button button--secondary pl3 pr3">Skip</button>
             </div>
           </div>
           <div className="flex flex-wrap content-start-ns">
@@ -191,9 +191,9 @@ class RecommendationBox extends Component {
             <h3 className={recommendedNextLessonHeadingClassNames}>Recommended…</h3>
             <p className="mb0 mt4"><strong>Loading…</strong></p>
             <p className="de-emphasized"></p>
-            <div className="flex flex-wrap justify-end">
-              <button onClick={this.props.recommendAnotherLesson} id="js-skip-button" className="button button--secondary mr2 pl3 pr3">Skip</button>
-              <div><button disabled className="link-button dib" style={{lineHeight: 2}}>Loading…</button></div>
+            <div className="flex flex-wrap">
+              <div><button disabled className="mr2 link-button dib" style={{lineHeight: 2}}>Loading…</button></div>
+              <button onClick={this.props.recommendAnotherLesson} id="js-skip-button" className="button button--secondary pl3 pr3">Skip</button>
             </div>
           </div>
         </React.Fragment>
