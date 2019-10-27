@@ -145,7 +145,9 @@ function cancelAnimation() {
 }
 
 function restartAnimation(particles, canvas, canvasWidth, canvasHeight) {
-  window.requestAnimationFrame(this.updateCanvas.bind(this, particles, canvas, canvasWidth, canvasHeight));
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    window.requestAnimationFrame(this.updateCanvas.bind(this, particles, canvas, canvasWidth, canvasHeight));
+  }
 }
 
 export { ConfettiParticle, createParticleAtPoint, setupCanvas, updateCanvas, cancelAnimation, restartAnimation };
