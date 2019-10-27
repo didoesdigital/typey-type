@@ -135,7 +135,7 @@ function updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) {
         }
       }
 
-      animationFrame = window.requestAnimationFrame(this.updateCanvas.bind(this, localParticles, canvas, canvasWidth, canvasHeight));
+      animationFrame = window.requestAnimationFrame(function () { updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) });
     }
   }
 }
@@ -146,7 +146,7 @@ function cancelAnimation() {
 
 function restartAnimation(particles, canvas, canvasWidth, canvasHeight) {
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    window.requestAnimationFrame(this.updateCanvas.bind(this, particles, canvas, canvasWidth, canvasHeight));
+    animationFrame = window.requestAnimationFrame(function () { updateCanvas(particles, canvas, canvasWidth, canvasHeight) });
   }
 }
 
