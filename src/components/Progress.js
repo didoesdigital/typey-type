@@ -771,7 +771,7 @@ class Progress extends Component {
             <div className="flex todays-effort-goal-robot">{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
             <div className="stat__number stat__number--display mr1">{this.state.todayOldWordCount}</div>
             <div>
-              Old words<br />
+              Old {this.state.todayOldWordCount !== 1 ? "words" : "word"}<br />
               <span className="text-small">Your goal: {yourOldWordsGoal}</span>
             </div>
           </div>
@@ -788,7 +788,7 @@ class Progress extends Component {
             <div className="flex todays-effort-goal-robot">{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
             <div className="stat__number stat__number--display mr1">{this.state.todayNewWordCount}</div>
             <div>
-              New words<br />
+              New {this.state.todayNewWordCount !== 1 ? "words" : "word"}<br />
               <span className="text-small">Your goal: {yourNewWordsGoal}</span>
             </div>
           </div>
