@@ -435,7 +435,7 @@ class App extends Component {
     let flashcardsProgress = this.state.flashcardsProgress;
     let globalUserSettings = this.state.globalUserSettings;
     let lessonsProgress = this.state.lessonsProgress;
-    let topSpeedPersonalBest = { wpm: this.state.topSpeedPersonalBest };
+    let topSpeedPersonalBest = this.state.topSpeedPersonalBest;
     let userGoals = this.state.userGoals;
     let userSettings = this.state.userSettings;
     if (source && source !== '') {
