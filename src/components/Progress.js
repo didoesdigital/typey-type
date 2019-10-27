@@ -560,7 +560,7 @@ class Progress extends Component {
 
     let reducedSaveAndLoadForms;
     let loadForm = (
-      <button onClick={this.showLoadInput.bind(this)} className="de-emphasized-button mr2">
+      <button onClick={this.showLoadInput.bind(this)} className="button button--secondary mr2">
         Load
       </button>
     );
@@ -580,7 +580,7 @@ class Progress extends Component {
               style={{maxWidth: '200px', maxHeight: '40px'}}
               rows="1"
             />
-            <PseudoContentButton className="link-button load-progress mr3" onClick={this.restoreButtonOnClickFunction.bind(this)}>Load</PseudoContentButton>
+            <PseudoContentButton className="link-button load-progress mr2" onClick={this.restoreButtonOnClickFunction.bind(this)}>Load</PseudoContentButton>
           </React.Fragment>
         );
       }
