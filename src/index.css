@@ -1949,11 +1949,13 @@ small .svg-icon-wrapper.svg-baseline svg {
   z-index: 5; }
 
 .todays-effort-goal-robot svg {
-  width: 100%;
+  height: 100%;
   max-width: 25px;
-  margin-right: 1rem; }
+  margin-right: 1rem;
+  width: 100%; }
 
 .todays-effort-reveal-robot svg {
+  height: 100%;
   width: 100%;
   max-width: 120px;
   margin-bottom: 24px; }
