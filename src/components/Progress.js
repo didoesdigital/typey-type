@@ -394,6 +394,27 @@ class Progress extends Component {
     return event;
   }
 
+  renderTodaysEffortsGoals(userGoalsWords, todayWordCount) {
+    return (
+      <React.Fragment>
+        {userGoalsWords}{this.renderTodaysEffortsDoneness(userGoalsWords, todayWordCount)}
+      </React.Fragment>
+    );
+  }
+
+  renderTodaysEffortsDoneness(userGoalsWords, todayWordCount) {
+    if (userGoalsWords <= todayWordCount) {
+      return (
+        <React.Fragment>
+          <span aria-hidden="true"> •</span> Done!
+        </React.Fragment>
+      );
+    }
+    else {
+      return null;
+    }
+  }
+
   render () {
     var grabStyle = function() {return false};
     if (this.state.toRecommendedNextLesson === true) {
@@ -725,6 +746,9 @@ class Progress extends Component {
       );
     }
     else {
+      let yourOldWordsGoal = this.renderTodaysEffortsGoals(this.props.userGoals.oldWords, this.state.todayOldWordCount);
+      let yourNewWordsGoal = this.renderTodaysEffortsGoals(this.props.userGoals.newWords, this.state.todayNewWordCount);
+
       todaysEffortsOrGoals = (
         <React.Fragment>
           <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
@@ -732,7 +756,7 @@ class Progress extends Component {
             <div className="stat__number stat__number--display">{this.state.todayOldWordCount}</div>
             <div>
               Old words<br />
-              <span className="text-small">Your goal: {this.props.userGoals.oldWords}{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? " • Done!" : null }</span>
+              <span className="text-small">Your goal: {yourOldWordsGoal}</span>
             </div>
           </div>
           <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
@@ -740,7 +764,7 @@ class Progress extends Component {
             <div className="stat__number stat__number--display">{this.state.todayNewWordCount}</div>
             <div>
               New words<br />
-              <span className="text-small">Your goal: {this.props.userGoals.newWords}{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? " • Done!" : null }</span>
+              <span className="text-small">Your goal: {yourNewWordsGoal}</span>
             </div>
           </div>
           <div className="text-right">
