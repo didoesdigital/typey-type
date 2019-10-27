@@ -753,7 +753,7 @@ class Progress extends Component {
       let todaysEffortsOldGoalsRow = (
           <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
             <div className="flex todays-effort-goal-robot">{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
-            <div className="stat__number stat__number--display">{this.state.todayOldWordCount}</div>
+            <div className="stat__number stat__number--display mr1">{this.state.todayOldWordCount}</div>
             <div>
               Old words<br />
               <span className="text-small">Your goal: {yourOldWordsGoal}</span>
@@ -770,7 +770,7 @@ class Progress extends Component {
           {todaysEffortsOldGoalsRow}
           <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
             <div className="flex todays-effort-goal-robot">{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
-            <div className="stat__number stat__number--display">{this.state.todayNewWordCount}</div>
+            <div className="stat__number stat__number--display mr1">{this.state.todayNewWordCount}</div>
             <div>
               New words<br />
               <span className="text-small">Your goal: {yourNewWordsGoal}</span>
@@ -839,7 +839,6 @@ class Progress extends Component {
             </div>
 
             {progressSummaryAndLinks}
-            <p>You've memorised {Math.round(this.state.yourMemorisedWordCount / (this.state.yourSeenWordCount + this.state.yourMemorisedWordCount) * 100)}% of your typed words. Try to keep this above 30% by <Link to="/lessons/progress/?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOld&startFromWord=1">revising seen words</Link>.</p>
 
             <div className="flex flex-wrap justify-between pt3">
               <div className="mw-568 mr3 flex-grow nt-1">

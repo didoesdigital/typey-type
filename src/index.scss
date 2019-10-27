@@ -878,6 +878,8 @@ input:focus::placeholder {
 
 .stat__number {
   font-size: $h3-size;
+}
+.stat__number--min-w {
   min-width: 48px;
 }
 .stat__number--display {

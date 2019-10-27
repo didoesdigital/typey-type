@@ -939,7 +939,9 @@ input:focus::placeholder {
     border: 1px solid #e6ac3a; }
 
 .stat__number {
-  font-size: 1.5625rem;
+  font-size: 1.5625rem; }
+
+.stat__number--min-w {
   min-width: 48px; }
 
 .stat__number--display {

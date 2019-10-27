@@ -131,7 +131,7 @@ class Break extends Component<Props, State> {
           <div className="mx-auto mw-568">
             <h2 className="text-center mt3" aria-hidden="true">{breakHeading}</h2>
             <p className="mt3 text-center mb3">Rest your hands and your mind. Take a 5-minute break and continue or come back in 4+&nbsp;hours for another session.</p>
-            <div className="text-center mb3 stat__number"><span aria-live="polite" aria-atomic="true">{timeToDisplay}</span></div>
+            <div className="text-center mb3 stat__number stat__number--min-w"><span aria-live="polite" aria-atomic="true">{timeToDisplay}</span></div>
             {nextStep}
           </div>
         </div>
