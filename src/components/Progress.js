@@ -875,8 +875,7 @@ class Progress extends Component {
               </div>
             </div>
 
-            <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" }>{this.state.flashWarning}</p>
-
+            <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" } aria-live="polite">{this.state.flashWarning}</p>
 
             <div className="flex flex-wrap justify-between">
               <div className="mw-368 flex-grow order-1">
