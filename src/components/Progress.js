@@ -177,6 +177,12 @@ class Progress extends Component {
 
   showLoadInput() {
     this.setState({showLoadInput: true});
+    window.setTimeout(function ()
+    {
+      const element = document.getElementById('js-metwords-from-personal-store--small');
+      console.log(element);
+      if (element) { element.focus(); }
+    }, 0);
   }
 
   restoreButtonOnClickFunction() {
@@ -569,9 +575,9 @@ class Progress extends Component {
       if (this.state.showLoadInput) {
         loadForm = (
           <React.Fragment>
-            <label htmlFor="metWords-from-personal-store--small" className="inline-block mb05 visually-hidden">Enter your progress here:</label>
+            <label htmlFor="js-metWords-from-personal-store--small" className="inline-block mb05 visually-hidden">Enter your progress here:</label>
             <textarea
-              id="metwords-from-personal-store--small"
+              id="js-metwords-from-personal-store--small"
               className="js-metwords-from-personal-store progress-textarea db w-100 mr1"
               autoCapitalize="off"
               autoComplete="off"
