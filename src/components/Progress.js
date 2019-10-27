@@ -750,9 +750,7 @@ class Progress extends Component {
     else {
       let yourOldWordsGoal = this.renderTodaysEffortsGoals(this.props.userGoals.oldWords, this.state.todayOldWordCount);
       let yourNewWordsGoal = this.renderTodaysEffortsGoals(this.props.userGoals.newWords, this.state.todayNewWordCount);
-
-      todaysEffortsOrGoals = (
-        <React.Fragment>
+      let todaysEffortsOldGoalsRow = (
           <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
             <div className="flex todays-effort-goal-robot">{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
             <div className="stat__number stat__number--display">{this.state.todayOldWordCount}</div>
@@ -761,6 +759,15 @@ class Progress extends Component {
               <span className="text-small">Your goal: {yourOldWordsGoal}</span>
             </div>
           </div>
+      );
+
+      if (!this.props.startingMetWordsToday || Object.keys(this.props.startingMetWordsToday).length < 15) {
+        todaysEffortsOldGoalsRow = null;
+      }
+
+      todaysEffortsOrGoals = (
+        <React.Fragment>
+          {todaysEffortsOldGoalsRow}
           <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
             <div className="flex todays-effort-goal-robot">{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
             <div className="stat__number stat__number--display">{this.state.todayNewWordCount}</div>
