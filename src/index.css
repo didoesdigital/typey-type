@@ -1266,7 +1266,8 @@ label {
   .button.button--secondary,
   .link-button.button--secondary {
     background-color: #fff;
-    border: 1px solid #878bb2;
+    border: 1px solid #c4c3c5;
+    box-shadow: 0px 1px 2px rgba(160, 145, 168, 0.1);
     color: #3f264e; }
     .button.button--secondary:visited,
     .link-button.button--secondary:visited {

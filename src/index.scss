@@ -1276,7 +1276,8 @@ label {
 
   &.button--secondary {
     background-color: #fff;
-    border: 1px solid saturate(adjust-hue(add-tint($brand-primary, 50%), -45deg), 10%);
+    border: 1px solid desaturate(add-tint($brand-primary, 70%), 10%);
+    box-shadow: 0px 1px 2px add-alpha(add-tint($brand-primary, 50%), 10%);
     color: desaturate($brand-primary, 5%);
     &:visited {
       color: desaturate($brand-primary, 15%);
