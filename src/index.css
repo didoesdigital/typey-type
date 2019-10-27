@@ -1948,9 +1948,12 @@ small .svg-icon-wrapper.svg-baseline svg {
 .celebration-canvas {
   z-index: 5; }
 
-.todays-effort-robot {
-  display: flex; }
-  .todays-effort-robot svg {
-    width: 100%;
-    max-width: 25px;
-    margin-right: 1rem; }
+.todays-effort-goal-robot svg {
+  width: 100%;
+  max-width: 25px;
+  margin-right: 1rem; }
+
+.todays-effort-reveal-robot svg {
+  width: 100%;
+  max-width: 120px;
+  margin-bottom: 24px; }

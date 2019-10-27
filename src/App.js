@@ -275,6 +275,8 @@ class App extends Component {
       disableUserSettings: false,
       metWords: metWords,
       revisionMode: false,
+      oldWordsGoalUnveiled: false,
+      newWordsGoalUnveiled: false,
       userGoals: {
         newWords: 15,
         oldWords: 50
@@ -770,6 +772,13 @@ class App extends Component {
   updateUserGoals(userGoals) {
     this.setState({userGoals: userGoals});
     writePersonalPreferences('userGoals', userGoals);
+  }
+
+  updateUserGoalsUnveiled(oldWordsGoalUnveiled, newWordsGoalUnveiled) {
+    this.setState({
+      oldWordsGoalUnveiled: oldWordsGoalUnveiled,
+      newWordsGoalUnveiled: newWordsGoalUnveiled
+    });
   }
 
   setupRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
@@ -1963,7 +1972,10 @@ class App extends Component {
                         updateFlashcardsRecommendation={this.updateFlashcardsRecommendation.bind(this)}
                         updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
                         updateUserGoals={this.updateUserGoals.bind(this)}
+                        updateUserGoalsUnveiled={this.updateUserGoalsUnveiled.bind(this)}
                         userGoals={this.state.userGoals}
+                        oldWordsGoalUnveiled={this.state.oldWordsGoalUnveiled}
+                        newWordsGoalUnveiled={this.state.newWordsGoalUnveiled}
                         yourSeenWordCount={this.state.yourSeenWordCount}
                         yourMemorisedWordCount={this.state.yourMemorisedWordCount}
                       />
