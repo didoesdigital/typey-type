@@ -28,7 +28,6 @@ class Finished extends Component {
       Confetti.setupCanvas({sparsity: 17, colors: 5}, 'finished-heading', particles);
       this.props.updateTopSpeedToday(wpm);
       this.props.updateTopSpeedPersonalBest(wpm);
-      // window.requestAnimationFrame(Confetti.updateCanvas.bind(this, particles));
       Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight );
       this.setState({
         newTopSpeedPersonalBest: true,
@@ -38,7 +37,6 @@ class Finished extends Component {
     else if (wpm > this.props.topSpeedToday && this.props.currentLessonStrokes.length > 3 && wpm > 3) {
       Confetti.setupCanvas({sparsity: 170, colors: 2}, 'finished-heading', particles);
       this.props.updateTopSpeedToday(wpm);
-      // window.requestAnimationFrame(Confetti.updateCanvas.bind(this, particles));
       Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight );
       this.setState({
         newTopSpeedPersonalBest: false,
