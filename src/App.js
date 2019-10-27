@@ -760,6 +760,14 @@ class App extends Component {
     return flashcardsMetWords;
   }
 
+  updateStartingMetWordsAndCounts(metWords) {
+    this.setState({
+      startingMetWordsToday: metWords,
+      yourSeenWordCount: calculateSeenWordCount(metWords),
+      yourMemorisedWordCount: calculateMemorisedWordCount(metWords)
+    });
+  }
+
   updateTopSpeedToday(wpm) {
     this.setState({topSpeedToday: wpm});
   }
@@ -1971,6 +1979,7 @@ class App extends Component {
                         startingMetWordsToday={this.state.startingMetWordsToday}
                         updateFlashcardsRecommendation={this.updateFlashcardsRecommendation.bind(this)}
                         updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
+                        updateStartingMetWordsAndCounts={this.updateStartingMetWordsAndCounts.bind(this)}
                         updateUserGoals={this.updateUserGoals.bind(this)}
                         updateUserGoalsUnveiled={this.updateUserGoalsUnveiled.bind(this)}
                         userGoals={this.state.userGoals}

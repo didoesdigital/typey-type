@@ -199,7 +199,18 @@ class Progress extends Component {
     let numberOfMetWords = '0';
     try {
       numberOfMetWords = Object.keys(JSON.parse(textareaContents.value)).length.toString();
-    } catch (error) {
+
+      this.props.updateStartingMetWordsAndCounts(JSON.parse(textareaContents.value));
+
+      this.props.updateUserGoalsUnveiled(false, false);
+      this.setState({
+        todayOldWordCount: 0,
+        todayNewWordCount: 0,
+        oldWordsGoalMet: false,
+        newWordsGoalMet: false,
+      });
+    }
+    catch (error) {
       numberOfMetWords = 'BAD_PROGRESS_INPUT'
     }
     if (textareaContents.value === '' || textareaContents.value === ' ') {
