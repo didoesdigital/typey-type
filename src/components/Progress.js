@@ -180,7 +180,6 @@ class Progress extends Component {
     window.setTimeout(function ()
     {
       const element = document.getElementById('js-metwords-from-personal-store--small');
-      console.log(element);
       if (element) { element.focus(); }
     }, 0);
   }
