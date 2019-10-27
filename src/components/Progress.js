@@ -362,6 +362,8 @@ class Progress extends Component {
       newWordsGoalUnveiled = true;
     }
     this.props.updateUserGoalsUnveiled(oldWordsGoalUnveiled, newWordsGoalUnveiled);
+    const element = document.getElementById('js-todays-efforts');
+    if (element) { element.focus(); }
   }
 
   handleOldWordsGoalInputChange(event) {
@@ -846,7 +848,7 @@ class Progress extends Component {
               </div>
 
               <div className="mw-368 flex-grow" id="js-confetti-target">
-                <h3 className="mt0 mb0 pt5 pb1 bb b--brand-primary-tint">Today’s efforts</h3>
+                <h3 className="mt0 mb0 pt5 pb1 bb b--brand-primary-tint" id="js-todays-efforts" tabIndex="-1">Today’s efforts</h3>
                 {todaysEffortsOrGoals}
               </div>
             </div>
