@@ -24,20 +24,26 @@ class Finished extends Component {
 
     let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
 
-    if (wpm > this.props.topSpeedToday && wpm > this.props.topSpeedPersonalBest && this.props.currentLessonStrokes.length > 3 && wpm > 3) {
+    let fasterSpeedToday = wpm > this.props.topSpeedToday;
+    let fasterPersonalBest = wpm > this.props.topSpeedPersonalBest;
+    let minimumStrokes = this.props.currentLessonStrokes.length > 3;
+    let minimumSpeed = wpm > 3;
+    let thirtyStrokesOrNotRevision = (!this.props.revisionMode || this.props.currentLessonStrokes.length >= 30);
+
+    if (fasterSpeedToday && minimumStrokes && minimumSpeed && thirtyStrokesOrNotRevision && fasterPersonalBest) {
       Confetti.setupCanvas({sparsity: 17, colors: 5}, 'finished-heading', particles);
       this.props.updateTopSpeedToday(wpm);
       this.props.updateTopSpeedPersonalBest(wpm);
-      Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight );
+      Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight);
       this.setState({
         newTopSpeedPersonalBest: true,
         newTopSpeedToday: true
       });
     }
-    else if (wpm > this.props.topSpeedToday && this.props.currentLessonStrokes.length > 3 && wpm > 3) {
+    else if (fasterSpeedToday && minimumStrokes && minimumSpeed && thirtyStrokesOrNotRevision) {
       Confetti.setupCanvas({sparsity: 170, colors: 2}, 'finished-heading', particles);
       this.props.updateTopSpeedToday(wpm);
-      Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight );
+      Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight);
       this.setState({
         newTopSpeedPersonalBest: false,
         newTopSpeedToday: true

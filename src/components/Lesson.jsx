@@ -344,6 +344,7 @@ class Lesson extends Component {
                 topSpeedPersonalBest={this.props.topSpeedPersonalBest}
                 charsPerWord={this.props.charsPerWord}
                 revisionMaterial={this.props.revisionMaterial}
+                revisionMode={this.props.revisionMode}
                 updateRecommendationHistory={this.props.updateRecommendationHistory}
                 updateRevisionMaterial={this.props.updateRevisionMaterial}
                 updateTopSpeedToday={this.props.updateTopSpeedToday}
