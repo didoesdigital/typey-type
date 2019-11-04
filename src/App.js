@@ -1876,7 +1876,7 @@ class App extends Component {
     let presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
     let app = this;
       return (
-        <div className="app">
+        <div id="js-app" className="app">
           <Announcements message={this.state.announcementMessage} />
           <div>
             <Switch>

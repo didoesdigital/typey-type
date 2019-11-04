@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
+import ReactModal from 'react-modal';
 import FlashcardsCarouselActionButtons from './FlashcardsCarouselActionButtons';
 import StrokesForWords from './StrokesForWords';
 import { IconFullscreen } from './Icon';
@@ -50,6 +51,7 @@ class Flashcards extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      showModal: false,
       slideNodes: [],
       flashcards: [
         {
@@ -77,9 +79,13 @@ class Flashcards extends Component {
       title: 'Steno',
       subtitle: '',
     }
+
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   componentDidMount() {
+    ReactModal.setAppElement('#js-app');
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
@@ -376,6 +382,16 @@ currentSlide: currentSlide
     }
   }
 
+  handleOpenModal (event) {
+    event.preventDefault();
+    this.setState({ showModal: true });
+  }
+
+  handleCloseModal (event) {
+    event.preventDefault();
+    this.setState({ showModal: false });
+  }
+
   render () {
     let fullscreen = "";
     if (this.props.fullscreen) {
@@ -418,8 +434,31 @@ currentSlide: currentSlide
 
           <div className="p3 mx-auto mw-1024">
             <div className="flex flex-wrap justify-between">
-              <p className={"text-small hide-in-fullscreen" + fullscreen}>Back to <Link to={lessonpath} className={"hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link>.</p>
-              <p className={"text-small hide-in-fullscreen" + fullscreen}>Learn more <Link to="/support#flashcards" className="mt0">about flashcards</Link>.</p>
+              <p className={"text-small self-center hide-in-fullscreen" + fullscreen}>Back to <Link to={lessonpath} className={"hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link>.</p>
+              <p className={"hide-in-fullscreen" + fullscreen}>
+                <button className="button button--secondary" onClick={this.handleOpenModal}>About flashcards</button>
+                <ReactModal
+                  isOpen={this.state.showModal}
+                  aria={{
+                    labelledby: "aria-modal-heading",
+                    describedby: "aria-modal-description"
+                  }}
+                  ariaHideApp={true}
+                  closeTimeoutMS={300}
+                  role="dialog"
+                  onRequestClose={this.handleCloseModal}
+                >
+                  <h3 id="aria-modal-heading">Flashcards</h3>
+                  <div id="aria-modal-description">
+                    <p>Flashcards are designed for mobile devices so you can memorise steno briefs on the go.</p>
+                    <p>When you’re unable to recall a brief, tap “Hard” to say it was hard to remember. When you can recall a brief without hesitation, tap “Easy”. While studying flashcards, imagine which fingers and the shape of the outline you’d use to stroke a word.</p>
+                    <p>If it’s been a while since you’ve studied, the “threshold” will be set quite high. You’ll see flashcards you’ve studied that are below the threshold. That is, if the threshold is 12, you’ll see flashcards for words you’ve marked “Easy” less than 12 times. If you’ve marked a word as “Easy” 15 times, it won’t shown again until more time has passed.</p>
+                  </div>
+                  <div className="text-right">
+                    <button className="button button--secondary" onClick={this.handleCloseModal}>OK</button>
+                  </div>
+                </ReactModal>
+              </p>
             </div>
             <div>
 

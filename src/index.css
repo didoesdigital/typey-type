@@ -1297,6 +1297,8 @@ label {
     color: #9193a8; }
   .de-emphasized-button:active, .de-emphasized-button:focus {
     color: #202549; }
+  .de-emphasized-button.text-small {
+    font-size: 0.8rem; }
 
 .revision-mode-button {
   color: #3f264e;
@@ -1962,3 +1964,13 @@ small .svg-icon-wrapper.svg-baseline svg {
   width: 100%;
   max-width: 120px;
   margin-bottom: 24px; }
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity .3s ease-in-out; }
+
+.ReactModal__Overlay--after-open {
+  opacity: 1; }
+
+.ReactModal__Overlay--before-close {
+  opacity: 0; }

@@ -1,10 +1,34 @@
 import React, { Component } from 'react';
+import ReactModal from 'react-modal';
 import { Tooltip } from 'react-tippy';
-import 'react-tippy/dist/tippy.css'
 import { Link } from 'react-router-dom';
 import NumericInput from 'react-numeric-input';
 
 class UserSettings extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showModal: false
+    }
+
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+  }
+
+  componentDidMount() {
+    ReactModal.setAppElement('#js-app');
+  }
+
+  handleOpenModal (event) {
+    event.preventDefault();
+    this.setState({ showModal: true });
+  }
+
+  handleCloseModal (event) {
+    event.preventDefault();
+    this.setState({ showModal: false });
+  }
+
   render() {
     var grabStyle = function() {return false};
     let toggleClasses;
@@ -368,6 +392,32 @@ class UserSettings extends Component {
                         Speak words (with sound!)
                       </Tooltip>
                     </label>
+                    <div>
+                      (<button className="de-emphasized-button text-small" onClick={this.handleOpenModal} aria-label="Help with speak words setting">Help</button>)
+                      <ReactModal
+                        isOpen={this.state.showModal}
+                        aria={{
+                          labelledby: "aria-modal-heading",
+                          describedby: "aria-modal-description"
+                        }}
+                        ariaHideApp={true}
+                        closeTimeoutMS={300}
+                        role="dialog"
+                        onRequestClose={this.handleCloseModal}
+                      >
+                        <h3 id="aria-modal-heading">Speak words setting</h3>
+                        <div id="aria-modal-description">
+                          <p>Typey Type’s setting to “speak words” will speak words aloud when you have the sound turned on.</p>
+                          <p>This setting uses fancy browser technology called the “Web Speech API”. You might need to turn on settings in your browser for it to work properly.</p>
+                          <p>For Windows, you’ll need to download a “language pack” from Microsoft.</p>
+                          <p>For Linux systems, you’ll need to install a speech engine. For Arch Linux, run <code>sudo pacman -S speech-dispatcher espeak-ng</code>.</p>
+                          <p>For Mac, it should just work!</p>
+                        </div>
+                        <div className="text-right">
+                          <button className="button button--secondary" onClick={this.handleCloseModal}>OK</button>
+                        </div>
+                      </ReactModal>
+                    </div>
                   </div>
                   <div className="checkbox-group">
                     <label className="checkbox-label text-input-accessibility-setting">

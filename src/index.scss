@@ -1313,6 +1313,9 @@ label {
   &:active, &:focus {
     color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
   }
+  &.text-small {
+    font-size: $base-font-size / $font-scale; // 12.8px
+  }
 }
 
 // see also: .show-scores-control
@@ -2229,7 +2232,18 @@ $lineAdjustment: 4px;
   }
 }
 
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity .3s ease-in-out; // needs to match `closeTimeoutMS={300}` in JS
+}
 
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+    opacity: 0;
+}
 
 
 
