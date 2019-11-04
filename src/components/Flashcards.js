@@ -447,6 +447,16 @@ currentSlide: currentSlide
                   closeTimeoutMS={300}
                   role="dialog"
                   onRequestClose={this.handleCloseModal}
+                  className={{
+                    "base": "modal",
+                    "afterOpen": "modal--after-open",
+                    "beforeClose": "modal--before-close"
+                  }}
+                  overlayClassName={{
+                    "base": "modal__overlay",
+                    "afterOpen": "modal__overlay--after-open",
+                    "beforeClose": "modal__overlay--before-close"
+                  }}
                 >
                   <h3 id="aria-modal-heading">Flashcards</h3>
                   <div id="aria-modal-description">

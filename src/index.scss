@@ -2232,16 +2232,54 @@ $lineAdjustment: 4px;
   }
 }
 
-.ReactModal__Overlay {
+.modal {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  bottom: 24px;
+  border: 1px solid add-tint($brand-primary, 70%);
+  background-color: add-tint($brand-primary, 95%);
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 24px;
+}
+
+.modal__overlay {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 1;
+}
+
+.modal {
+  transform: scale(.8);
+  transition: transform .3s ease-in-out; // needs to match `closeTimeoutMS={300}` in JS
+}
+
+.modal--after-open {
+  transform: scale(1);
+}
+
+.modal--before-close {
+  transform: scale(.8);
+}
+
+
+.modal__overlay {
     opacity: 0;
     transition: opacity .3s ease-in-out; // needs to match `closeTimeoutMS={300}` in JS
 }
 
-.ReactModal__Overlay--after-open {
+.modal__overlay--after-open {
     opacity: 1;
 }
 
-.ReactModal__Overlay--before-close {
+.modal__overlay--before-close {
     opacity: 0;
 }
 
