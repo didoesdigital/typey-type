@@ -1966,17 +1966,29 @@ small .svg-icon-wrapper.svg-baseline svg {
   margin-bottom: 24px; }
 
 .modal {
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  right: 24px;
-  bottom: 24px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  width: 792px;
+  max-width: 100%;
+  height: 568px;
+  max-height: 100%;
   border: 1px solid #c6bdcb;
   background-color: #f5f4f6;
   overflow: auto;
   border-radius: 4px;
   outline: none;
   padding: 24px; }
+
+.modal {
+  transition: transform .3s ease-in-out; }
+
+.modal--after-open {
+  transform: translate(-50%, -50%) scale(1); }
+
+.modal--before-close {
+  transform: translate(-50%, -50%) scale(0.8); }
 
 .modal__overlay {
   position: fixed;
@@ -1985,17 +1997,8 @@ small .svg-icon-wrapper.svg-baseline svg {
   right: 0px;
   bottom: 0px;
   background-color: rgba(0, 0, 0, 0.5);
-  opacity: 1; }
-
-.modal {
-  transform: scale(0.8);
-  transition: transform .3s ease-in-out; }
-
-.modal--after-open {
-  transform: scale(1); }
-
-.modal--before-close {
-  transform: scale(0.8); }
+  opacity: 1;
+  z-index: 6; }
 
 .modal__overlay {
   opacity: 0;
