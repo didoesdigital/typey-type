@@ -424,7 +424,7 @@ class UserSettings extends Component {
                           <p>For Mac, it should just work!</p>
                         </div>
                         <div className="text-right">
-                          <button className="button button--secondary" onClick={this.handleCloseModal}>OK</button>
+                          <button className="button" onClick={this.handleCloseModal}>OK</button>
                         </div>
                       </ReactModal>
                     </div>
