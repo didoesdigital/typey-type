@@ -297,7 +297,7 @@ class UserSettings extends Component {
                         onChange={this.props.changeUserSetting}
                       />
                       <Tooltip
-                        title="Show words you seen before"
+                        title="Show words you have seen before"
                         className="mw-240"
                         animation="shift"
                         arrow="true"
