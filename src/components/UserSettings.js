@@ -8,6 +8,11 @@ class UserSettings extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      webSpeechSupportResults: {
+        hasSpeechSynthesis: false,
+        hasSpeechSynthesisUtterance: false,
+        numberOfSpeechSynthesisVoices: 0
+      },
       showModal: false
     }
 
@@ -21,7 +26,30 @@ class UserSettings extends Component {
 
   handleOpenModal (event) {
     event.preventDefault();
-    this.setState({ showModal: true });
+    let webSpeechSupportResults = this.checkWebSpeechSupport();
+    this.setState({
+      webSpeechSupportResults,
+      showModal: true
+    });
+  }
+
+  checkWebSpeechSupport() {
+    let hasSpeechSynthesis = false;
+    let hasSpeechSynthesisUtterance = false;
+
+    if (window.speechSynthesis) {
+      hasSpeechSynthesis = true;
+    }
+    if (window.SpeechSynthesisUtterance) {
+      hasSpeechSynthesisUtterance = true;
+    }
+
+    let webSpeechSupportResults = {
+      hasSpeechSynthesis: hasSpeechSynthesis,
+      hasSpeechSynthesisUtterance: hasSpeechSynthesisUtterance,
+    };
+
+    return webSpeechSupportResults;
   }
 
   handleCloseModal (event) {
@@ -41,6 +69,30 @@ class UserSettings extends Component {
     let hideStrokesOnLastRepetitionTooltip = "Hide briefs during the last repetition";
     if (!this.props.userSettings.showStrokes) {
       hideStrokesOnLastRepetitionTooltip = "This does nothing while “Show briefs” is turned off";
+    }
+
+    let yourWebSpeechSupport = null;
+    if (this.state.showModal) {
+      if (this.state.webSpeechSupportResults['hasSpeechSynthesis'] && this.state.webSpeechSupportResults['hasSpeechSynthesisUtterance'] && false) {
+        yourWebSpeechSupport = (
+          <React.Fragment>
+            <p className="bg-slat quote mt1 mb3">Web Speech is available on your system.</p>
+            <p>If you cannot hear anything and otherwise have working sound, you might be missing a language pack or “voice”.</p>
+            <p>For Windows, you can download a “language pack” from Microsoft.</p>
+            <p>For Linux systems, you may need to install a speech engine with voices, such as <code>speech-dispatcher</code> and <code>espeak-ng</code>.</p>
+          </React.Fragment>
+        );
+      }
+      else {
+        yourWebSpeechSupport = (
+          <React.Fragment>
+            <p className="bg-danger quote mt1 mb3">Web Speech is unavailable on your system.</p>
+            <p><span className="bg-warning">You may need to update your browser or check that your device has a speech engine and language pack.</span></p>
+            <p>For Windows, you can download a “language pack” from Microsoft.</p>
+            <p>For Linux systems, you may need to install a speech engine with voices, such as <code>speech-dispatcher</code> and <code>espeak-ng</code>.</p>
+          </React.Fragment>
+        );
+      };
     }
 
     return (
@@ -408,9 +460,8 @@ class UserSettings extends Component {
                       <div id="aria-modal-description">
                         <p>Typey Type’s setting to “speak words” will speak words aloud when you have the sound turned on.</p>
                         <p>This setting uses fancy browser technology called the “Web Speech API”. You might need to turn on settings in your browser for it to work properly.</p>
-                        <p>For Windows, you’ll need to download a “language pack” from Microsoft.</p>
-                        <p>For Linux systems, you’ll need to install a speech engine. For Arch Linux, run <code>sudo pacman -S speech-dispatcher espeak-ng</code>.</p>
-                        <p>For Mac, it should just work!</p>
+
+                        { yourWebSpeechSupport }
                       </div>
                       <div className="text-right">
                         <button className="button" onClick={this.handleCloseModal}>OK</button>
