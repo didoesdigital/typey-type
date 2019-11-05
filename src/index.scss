@@ -2240,7 +2240,7 @@ $lineAdjustment: 4px;
   left: 50%;
   width: (744px + 24px + 24px);
   max-width: 90%;
-  height: 568px;
+  min-height: 272px;
   max-height: 90%;
 
   background-color: add-tint($brand-primary, 95%);
