@@ -1981,6 +1981,8 @@ small .svg-icon-wrapper.svg-baseline svg {
   background-color: #f5f4f6;
   border-radius: 4px;
   border: 1px solid #c6bdcb;
+  font-family: "Overpass", "Clear Sans", "Source Sans Pro", "Work Sans", "Open Sans", "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 300;
   outline: none;
   overflow: auto;
   padding: 24px;
