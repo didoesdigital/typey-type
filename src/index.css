@@ -1986,9 +1986,7 @@ small .svg-icon-wrapper.svg-baseline svg {
   outline: none;
   overflow: auto;
   padding: 24px;
-  transform: translate(-50%, -50%) scale(0.8); }
-
-.modal {
+  transform: translate(-50%, -50%) scale(0.8);
   transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1); }
 
 .modal--after-open {
@@ -2004,12 +2002,9 @@ small .svg-icon-wrapper.svg-baseline svg {
   right: 0px;
   bottom: 0px;
   background-color: rgba(0, 0, 0, 0.5);
-  opacity: 1;
-  z-index: 6; }
-
-.modal__overlay {
   opacity: 0;
-  transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1); }
+  transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  z-index: 6; }
 
 .modal__overlay--after-open {
   opacity: 1; }

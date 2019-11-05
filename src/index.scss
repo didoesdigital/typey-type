@@ -2259,8 +2259,6 @@ $lineAdjustment: 4px;
   padding: 24px;
   transform: translate(-50%, -50%)
              scale(.8);
-}
-.modal {
   transition: transform .3s cubic-bezier(0.645, 0.045, 0.355, 1); // needs to match `closeTimeoutMS={300}` in JS
 }
 .modal--after-open {
@@ -2279,12 +2277,9 @@ $lineAdjustment: 4px;
   right: 0px;
   bottom: 0px;
   background-color: rgba(0, 0, 0, 0.5);
-  opacity: 1;
-  z-index: $z-index-modal-overlay;
-}
-.modal__overlay {
   opacity: 0;
   transition: opacity .3s cubic-bezier(0.645, 0.045, 0.355, 1); // needs to match `closeTimeoutMS={300}` in JS
+  z-index: $z-index-modal-overlay;
 }
 .modal__overlay--after-open {
   opacity: 1;
