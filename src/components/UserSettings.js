@@ -377,60 +377,45 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.speakMaterial}
                         onChange={this.props.changeUserSetting}
                       />
-                      <Tooltip
-                        title="Speak words aloud when sound is turned on"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Speak words (with sound!)
-                      </Tooltip>
+                      Speak words with sound
                     </label>
-                    <div>
-                      (<button className="de-emphasized-button text-small" onClick={this.handleOpenModal} aria-label="Help with speak words setting">Help</button>)
-                      <ReactModal
-                        isOpen={this.state.showModal}
-                        aria={{
-                          labelledby: "aria-modal-heading",
-                          describedby: "aria-modal-description"
-                        }}
-                        ariaHideApp={true}
-                        closeTimeoutMS={300}
-                        role="dialog"
-                        onRequestClose={this.handleCloseModal}
-                        className={{
-                          "base": "modal",
-                          "afterOpen": "modal--after-open",
-                          "beforeClose": "modal--before-close"
-                        }}
-                        overlayClassName={{
-                          "base": "modal__overlay",
-                          "afterOpen": "modal__overlay--after-open",
-                          "beforeClose": "modal__overlay--before-close"
-                        }}
-                      >
-                        <div className="fr">
-                          <button className="de-emphasized-button hide-md" onClick={this.handleCloseModal}>Close</button>
-                        </div>
-                        <h3 id="aria-modal-heading">Speak words setting</h3>
-                        <div id="aria-modal-description">
-                          <p>Typey Type’s setting to “speak words” will speak words aloud when you have the sound turned on.</p>
-                          <p>This setting uses fancy browser technology called the “Web Speech API”. You might need to turn on settings in your browser for it to work properly.</p>
-                          <p>For Windows, you’ll need to download a “language pack” from Microsoft.</p>
-                          <p>For Linux systems, you’ll need to install a speech engine. For Arch Linux, run <code>sudo pacman -S speech-dispatcher espeak-ng</code>.</p>
-                          <p>For Mac, it should just work!</p>
-                        </div>
-                        <div className="text-right">
-                          <button className="button" onClick={this.handleCloseModal}>OK</button>
-                        </div>
-                      </ReactModal>
-                    </div>
+                    {" "}(<button className="de-emphasized-button text-small" onClick={this.handleOpenModal} aria-label="Help with speak words setting">help</button>
+                    <ReactModal
+                      isOpen={this.state.showModal}
+                      aria={{
+                        labelledby: "aria-modal-heading",
+                        describedby: "aria-modal-description"
+                      }}
+                      ariaHideApp={true}
+                      closeTimeoutMS={300}
+                      role="dialog"
+                      onRequestClose={this.handleCloseModal}
+                      className={{
+                        "base": "modal",
+                        "afterOpen": "modal--after-open",
+                        "beforeClose": "modal--before-close"
+                      }}
+                      overlayClassName={{
+                        "base": "modal__overlay",
+                        "afterOpen": "modal__overlay--after-open",
+                        "beforeClose": "modal__overlay--before-close"
+                      }}
+                    >
+                      <div className="fr">
+                        <button className="de-emphasized-button hide-md" onClick={this.handleCloseModal}>Close</button>
+                      </div>
+                      <h3 id="aria-modal-heading">Speak words setting</h3>
+                      <div id="aria-modal-description">
+                        <p>Typey Type’s setting to “speak words” will speak words aloud when you have the sound turned on.</p>
+                        <p>This setting uses fancy browser technology called the “Web Speech API”. You might need to turn on settings in your browser for it to work properly.</p>
+                        <p>For Windows, you’ll need to download a “language pack” from Microsoft.</p>
+                        <p>For Linux systems, you’ll need to install a speech engine. For Arch Linux, run <code>sudo pacman -S speech-dispatcher espeak-ng</code>.</p>
+                        <p>For Mac, it should just work!</p>
+                      </div>
+                      <div className="text-right">
+                        <button className="button" onClick={this.handleCloseModal}>OK</button>
+                      </div>
+                    </ReactModal>)
                   </div>
                   <div className="checkbox-group">
                     <label className="checkbox-label text-input-accessibility-setting">
