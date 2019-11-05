@@ -2261,7 +2261,7 @@ $lineAdjustment: 4px;
              scale(.8);
 }
 .modal {
-  transition: transform .3s ease-in-out; // needs to match `closeTimeoutMS={300}` in JS
+  transition: transform .3s cubic-bezier(0.645, 0.045, 0.355, 1); // needs to match `closeTimeoutMS={300}` in JS
 }
 .modal--after-open {
   transform: translate(-50%, -50%)
@@ -2284,7 +2284,7 @@ $lineAdjustment: 4px;
 }
 .modal__overlay {
   opacity: 0;
-  transition: opacity .3s ease-in-out; // needs to match `closeTimeoutMS={300}` in JS
+  transition: opacity .3s cubic-bezier(0.645, 0.045, 0.355, 1); // needs to match `closeTimeoutMS={300}` in JS
 }
 .modal__overlay--after-open {
   opacity: 1;

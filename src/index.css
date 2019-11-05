@@ -1989,7 +1989,7 @@ small .svg-icon-wrapper.svg-baseline svg {
   transform: translate(-50%, -50%) scale(0.8); }
 
 .modal {
-  transition: transform .3s ease-in-out; }
+  transition: transform 0.3s cubic-bezier(0.645, 0.045, 0.355, 1); }
 
 .modal--after-open {
   transform: translate(-50%, -50%) scale(1); }
@@ -2009,7 +2009,7 @@ small .svg-icon-wrapper.svg-baseline svg {
 
 .modal__overlay {
   opacity: 0;
-  transition: opacity .3s ease-in-out; }
+  transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1); }
 
 .modal__overlay--after-open {
   opacity: 1; }
