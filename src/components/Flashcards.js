@@ -458,14 +458,16 @@ currentSlide: currentSlide
                     "beforeClose": "modal__overlay--before-close"
                   }}
                 >
+                  <div className="fr">
+                    <button className="de-emphasized-button hide-md" onClick={this.handleCloseModal}>Close</button>
+                  </div>
                   <h3 id="aria-modal-heading">Flashcards</h3>
                   <div id="aria-modal-description">
-                    <p>Flashcards are designed for mobile devices so you can memorise steno briefs on the go.</p>
-                    <p>When you’re unable to recall a brief, tap “Hard” to say it was hard to remember. When you can recall a brief without hesitation, tap “Easy”. While studying flashcards, imagine which fingers and the shape of the outline you’d use to stroke a word.</p>
+                    <p>Flashcards are designed for mobile devices so you can memorise steno briefs on the go. When you’re unable to recall a brief, tap “Hard” to say it was hard to remember. When you can recall a brief without hesitation, tap “Easy”. While studying flashcards, imagine which fingers and the shape of the outline you’d use to stroke a word.</p>
                     <p>If it’s been a while since you’ve studied, the “threshold” will be set quite high. You’ll see flashcards you’ve studied that are below the threshold. That is, if the threshold is 12, you’ll see flashcards for words you’ve marked “Easy” less than 12 times. If you’ve marked a word as “Easy” 15 times, it won’t shown again until more time has passed.</p>
                   </div>
                   <div className="text-right">
-                    <button className="button button--secondary" onClick={this.handleCloseModal}>OK</button>
+                    <button className="button" onClick={this.handleCloseModal}>OK</button>
                   </div>
                 </ReactModal>
               </p>

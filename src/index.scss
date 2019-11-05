@@ -413,16 +413,16 @@ input:focus::placeholder {
 .self-center      { align-self: center; }
 .content-start-ns { align-content: flex-start; }
 .hide             { display: none; }
-.hide-md          { @media (max-width: 959px) { display: none; } }
-.hide-lg          { @media (min-width: 960px) { display: none; } }
 .show-sm-only     { @media (min-width: $small-breakpoint) { display: none; } }
 .hide-sm-only     { @media (max-width: $small-breakpoint - 1px) { display: none; } }
+.hide-md          { @media (min-width: $medium-breakpoint) { display: none; } }
 .v-hidden         { visibility: hidden; }
 .relative         { position: relative; }
 .absolute         { position: absolute; }
 .fixed            { position: fixed; }
 .lh-single        { line-height: 1; }
 .lh-double        { line-height: 2; }
+.fr               { float: right; display: inline; }
 
 .top-0    { top:    0; }
 .right-0  { right:  0; }

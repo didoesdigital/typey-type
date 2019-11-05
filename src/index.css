@@ -328,20 +328,16 @@ input:focus::placeholder {
 .hide {
   display: none; }
 
-@media (max-width: 959px) {
-  .hide-md {
-    display: none; } }
-
-@media (min-width: 960px) {
-  .hide-lg {
-    display: none; } }
-
 @media (min-width: 432px) {
   .show-sm-only {
     display: none; } }
 
 @media (max-width: 431px) {
   .hide-sm-only {
+    display: none; } }
+
+@media (min-width: 768px) {
+  .hide-md {
     display: none; } }
 
 .v-hidden {
@@ -361,6 +357,10 @@ input:focus::placeholder {
 
 .lh-double {
   line-height: 2; }
+
+.fr {
+  float: right;
+  display: inline; }
 
 .top-0 {
   top: 0; }

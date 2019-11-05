@@ -415,6 +415,9 @@ class UserSettings extends Component {
                           "beforeClose": "modal__overlay--before-close"
                         }}
                       >
+                        <div className="fr">
+                          <button className="de-emphasized-button hide-md" onClick={this.handleCloseModal}>Close</button>
+                        </div>
                         <h3 id="aria-modal-heading">Speak words setting</h3>
                         <div id="aria-modal-description">
                           <p>Typey Type’s setting to “speak words” will speak words aloud when you have the sound turned on.</p>
