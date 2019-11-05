@@ -1299,6 +1299,9 @@ label {
     color: #9193a8; }
   .de-emphasized-button:active, .de-emphasized-button:focus {
     color: #202549; }
+  .de-emphasized-button:disabled {
+    color: #b0b0b0;
+    cursor: default; }
   .de-emphasized-button.text-small {
     font-size: 0.8rem; }
 

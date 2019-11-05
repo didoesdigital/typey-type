@@ -1316,6 +1316,10 @@ label {
   &:active, &:focus {
     color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
   }
+  &:disabled {
+    color: add-tint(desaturate($brand-primary, 90%), 60%);
+    cursor: default;
+  }
   &.text-small {
     font-size: $base-font-size / $font-scale; // 12.8px
   }

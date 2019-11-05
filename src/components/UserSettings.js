@@ -379,7 +379,7 @@ class UserSettings extends Component {
                       />
                       Speak words with sound
                     </label>
-                    {" "}(<button className="de-emphasized-button text-small" onClick={this.handleOpenModal} aria-label="Help with speak words setting">help</button>
+                    {" "}(<button className="de-emphasized-button text-small" onClick={this.handleOpenModal} aria-label="Help with speak words setting" disabled={this.props.disableUserSettings}>help</button>
                     <ReactModal
                       isOpen={this.state.showModal}
                       aria={{
