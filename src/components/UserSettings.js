@@ -71,29 +71,7 @@ class UserSettings extends Component {
       hideStrokesOnLastRepetitionTooltip = "This does nothing while “Show briefs” is turned off";
     }
 
-    let yourWebSpeechSupport = null;
-    if (this.state.showModal) {
-      if (this.state.webSpeechSupportResults['hasSpeechSynthesis'] && this.state.webSpeechSupportResults['hasSpeechSynthesisUtterance'] && false) {
-        yourWebSpeechSupport = (
-          <React.Fragment>
-            <p className="bg-slat quote mt1 mb3">Web Speech is available on your system.</p>
-            <p>If you cannot hear anything and otherwise have working sound, you might be missing a language pack or “voice”.</p>
-            <p>For Windows, you can download a “language pack” from Microsoft.</p>
-            <p>For Linux systems, you may need to install a speech engine with voices, such as <code>speech-dispatcher</code> and <code>espeak-ng</code>.</p>
-          </React.Fragment>
-        );
-      }
-      else {
-        yourWebSpeechSupport = (
-          <React.Fragment>
-            <p className="bg-danger quote mt1 mb3">Web Speech is unavailable on your system.</p>
-            <p><span className="bg-warning">You may need to update your browser or check that your device has a speech engine and language pack.</span></p>
-            <p>For Windows, you can download a “language pack” from Microsoft.</p>
-            <p>For Linux systems, you may need to install a speech engine with voices, such as <code>speech-dispatcher</code> and <code>espeak-ng</code>.</p>
-          </React.Fragment>
-        );
-      };
-    }
+    let webSpeechAvailable = this.state.webSpeechSupportResults['hasSpeechSynthesis'] && this.state.webSpeechSupportResults['hasSpeechSynthesisUtterance'];
 
     return (
       <div className="user-settings">
@@ -459,9 +437,15 @@ class UserSettings extends Component {
                       <h3 id="aria-modal-heading">Speak words setting</h3>
                       <div id="aria-modal-description">
                         <p>Typey Type’s setting to “speak words” will speak words aloud when you have the sound turned on.</p>
-                        <p>This setting uses fancy browser technology called the “Web Speech API”. You might need to turn on settings in your browser for it to work properly.</p>
-
-                        { yourWebSpeechSupport }
+                        <p>This setting uses fancy browser technology called the “Web Speech API”.</p>
+                        <p className={webSpeechAvailable ? "quote mt1 mb3 bg-slat" : "quote mt1 mb3 bg-danger"}>Web Speech is {webSpeechAvailable ? " available" : " unavailable"} on your system.</p>
+                        { webSpeechAvailable ?
+                            <p>If you cannot hear anything and otherwise have working sound, your system might be missing a language pack or “voice”.</p>
+                            :
+                            <p><span className="bg-warning">You may need to update your browser or check that your device has a speech engine and language pack.</span></p>
+                        }
+                        <p>For Windows, you can download a “language pack” from Microsoft.</p>
+                        <p>For Linux systems, you may need to install a speech engine with voices, such as <code>speech-dispatcher</code> and <code>espeak-ng</code>.</p>
                       </div>
                       <div className="text-right">
                         <button className="button" onClick={this.handleCloseModal}>OK</button>
