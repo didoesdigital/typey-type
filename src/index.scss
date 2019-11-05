@@ -1231,6 +1231,7 @@ label {
   border-radius: 4px;
   border: 1px solid transparent;
   color: add-tint($brand-primary, 70%);
+  cursor: pointer;
   font: $type;
   height: $link-button-height;
   min-width: $link-button-width;
@@ -1305,6 +1306,7 @@ label {
   background-color: transparent;
   border: none;
   color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
+  cursor: pointer;
   font: $type;
   text-decoration: underline;
 
