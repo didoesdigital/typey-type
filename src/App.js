@@ -1299,10 +1299,8 @@ class App extends Component {
       ) {
         isRecommendedLesson = true;
       }
+      newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
 
-      if (isRecommendedLesson && this.state.userSettings && this.state.userSettings.sortOrder === "sortRandom") {
-        newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
-      }
       if (this.state.revisionMode && this.state.userSettings.limitNumberOfWords > 0) {
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
       }
@@ -1322,7 +1320,6 @@ class App extends Component {
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
       }
 
-      newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
 
       let reps = this.state.userSettings.repetitions;
       let repeatedLesson = newLesson.presentedMaterial;

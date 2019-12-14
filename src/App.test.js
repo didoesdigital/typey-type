@@ -78,8 +78,8 @@ describe('sortLesson', () => {
         expect(sortLesson(presentedMaterial, metWords, userSettings)).toEqual(
           [
             {phrase: 'her', stroke: 'HER'},
-            {phrase: 'sounds', stroke: 'SOUPBDZ'},
-            {phrase: 'at', stroke: 'AT'}
+            {phrase: 'at', stroke: 'AT'},
+            {phrase: 'sounds', stroke: 'SOUPBDZ'}
           ]
         );
       });
