@@ -2261,12 +2261,8 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
     presentedMaterial.sort(function(a, b) {
       let seenA = met[spaceBefore + a.phrase + spaceAfter] || 0;
       let seenB = met[spaceBefore + b.phrase + spaceAfter] || 0;
-      return seenB - seenA;
+      return userSettings.sortOrder === 'sortNew' ? seenA - seenB : seenB - seenA;
     });
-
-    if (userSettings.sortOrder === 'sortNew') {
-      presentedMaterial = presentedMaterial.reverse();
-    }
   }
   return presentedMaterial;
 }
