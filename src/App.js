@@ -255,7 +255,6 @@ class App extends Component {
       hideOtherSettings: false,
       lookupTerm: '',
       recommendationHistory: { currentStep: null },
-      recommendedLessonInProgress: false,
       nextLessonPath: '',
       previousCompletedPhraseAsTyped: '',
       repetitionsRemaining: 1,
@@ -871,10 +870,6 @@ class App extends Component {
     });
   }
 
-  setRecommendedLessonInProgress(isInProgress = false) {
-    this.setState({recommendedLessonInProgress: isInProgress});
-  }
-
   updateRevisionMaterial(event) {
     let newCurrentLessonStrokes = this.state.currentLessonStrokes.map(stroke => ({...stroke}));
     const target = event.target;
@@ -1287,18 +1282,6 @@ class App extends Component {
 
       newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings, this.state.revisionMode);
 
-      let isRecommendedLesson = false;
-      if (this.state.recommendedLessonInProgress &&
-        this.state.userSettings &&
-        this.state.userSettings.showStrokes === false &&
-        this.state.userSettings.newWords === false &&
-        this.state.userSettings.seenWords === true &&
-        this.state.userSettings.retainedWords === true &&
-        this.state.userSettings.repetitions === 3 &&
-        this.state.userSettings.sortOrder === 'sortRandom'
-      ) {
-        isRecommendedLesson = true;
-      }
       newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
 
       if (this.state.revisionMode && this.state.userSettings.limitNumberOfWords > 0) {
@@ -1319,7 +1302,6 @@ class App extends Component {
       else if (this.state.userSettings.limitNumberOfWords > 0) {
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
       }
-
 
       let reps = this.state.userSettings.repetitions;
       let repeatedLesson = newLesson.presentedMaterial;
@@ -2132,7 +2114,6 @@ class App extends Component {
                         sayCurrentPhraseAgain={this.sayCurrentPhraseAgain.bind(this)}
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
-                        setRecommendedLessonInProgress={this.setRecommendedLessonInProgress.bind(this)}
                         stopLesson={this.stopLesson.bind(this)}
                         startCustomLesson={this.startCustomLesson.bind(this)}
                         setupRevisionLesson={this.setupRevisionLesson.bind(this)}
