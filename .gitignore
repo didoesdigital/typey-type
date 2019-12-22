@@ -90,9 +90,3 @@ Thumbs.db
 # Ignore Vim NETwork Read/Write HISTory
 .netrwhist
 
-
-# Lessons
-public/lessons
-
-# Dictionaries
-public/dictionaries
