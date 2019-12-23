@@ -122,6 +122,32 @@ class DictionariesIndex extends Component {
                   </Tooltip></span>
                 </GoogleAnalytics.OutboundLink>.</p>
 
+            <p><GoogleAnalytics.OutboundLink
+                eventLabel="Di’s Steno Dictionaries repo"
+                aria-label="Di’s Steno Dictionaries repo (external link opens in new tab)"
+                to="https://github.com/didoesdigital/steno-dictionaries"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Di’s Steno Dictionaries <span className="nowrap">repo
+                  <Tooltip
+                    title="Opens in a new tab"
+                    animation="shift"
+                    arrow="true"
+                    className=""
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                  </Tooltip>
+                </span>
+              </GoogleAnalytics.OutboundLink> has many dictionaries. These power Typey&nbsp;Type’s stroke suggestions.
+            </p>
+
               <h3>Custom dictionaries</h3>
               <p>To use a different dictionary or steno theory, upload your words and strokes to a <Link to="/lessons/custom">custom lesson</Link>. The briefs shown will match your dictionary.</p>
 
