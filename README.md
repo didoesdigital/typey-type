@@ -19,25 +19,33 @@ The aim of Typey Type is to fast-track learning and mastering steno skills. Type
 
 ### Pre-requisites
 
-Install [yarn](https://yarnpkg.com/lang/en/docs/install/)
+Install [yarn](https://yarnpkg.com/lang/en/docs/install/).
 
 ### Installation
 
-Yarn install packages from `package.json`:
+This project includes a Git submodule for [Typey Type data](https://github.com/didoesdigital/typey-type-data), which includes a Git submodule for [steno dictionaries](https://github.com/didoesdigital/steno-dictionaries). If you want to clone this repository as well as its submodules, you can use the `--recursive` parameter:
 
+```sh
+git clone --recursive git@github.com:didoesdigital/typey-type.git
 ```
+
+Alternatively, if you've already cloned the repository without the `--recursive` parameter, you can load its submodules using `submodule update`:
+
+```sh
+git submodule update --init --recursive
+```
+
+Once you've cloned the repository and updated its submodules, yarn install packages from `package.json`:
+
+```sh
 yarn install
 ```
-
-### Create React App
-
-For reference, Typey Type is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Run the app in development mode
 
 Run the Typey Type app:
 
-```
+```sh
 yarn start
 ```
 
@@ -45,8 +53,17 @@ Open <http://localhost:3000> to view it in the browser.
 
 ### Testing
 
-`yarn run test`
+Run the test runner during development:
+
+```sh
+yarn run test
+```
+
+### Create React App
+
+For reference, Typey Type is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 # License
 
 See [LICENSE](./LICENSE).
+
