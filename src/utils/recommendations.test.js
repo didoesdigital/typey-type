@@ -1,8 +1,8 @@
 import { getRecommendedNextLesson } from './recommendations';
 import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
-import recommendationsJSON from '../../../typey-type-data/lessons/recommendations.json'
-import lessonIndexJSON from '../../../typey-type-data/lessons/lessonIndex.json'
+import recommendationsJSON from '../../typey-type-data/lessons/recommendations.json'
+import lessonIndexJSON from '../../typey-type-data/lessons/lessonIndex.json'
 
 import lessonsProgressNovice from './../fixtures/lessonsProgressNovice.json'
 import lessonsProgressBeginner from './../fixtures/lessonsProgressBeginner.json'
