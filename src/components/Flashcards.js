@@ -132,10 +132,10 @@ currentSlide: currentSlide
   }
 
   fetchAndSetupFlashCards() {
-    let path = process.env.PUBLIC_URL + '/lessons/drills/top-10000-english-words/lesson.txt';
+    let path = process.env.PUBLIC_URL + '/lessons/drills/top-1000-words/lesson.txt';
     if (this.props.lessonpath) {
       path = this.props.lessonpath;
-      if (path === 'flashcards') { path = process.env.PUBLIC_URL + '/lessons/drills/top-10000-english-words/lesson.txt'; }
+      if (path === 'flashcards') { path = process.env.PUBLIC_URL + '/lessons/drills/top-1000-words/lesson.txt'; }
     }
 
     getLesson(path).then((lessonText) => {
@@ -409,8 +409,8 @@ currentSlide: currentSlide
     }
 
     let lessonpath = this.props.locationpathname.replace('flashcards','');
-    if (this.state.title.includes("Top 10000 English words")) {
-      lessonpath = "/lessons/drills/top-10000-english-words/";
+    if (this.state.title.includes("Top 1000 words")) {
+      lessonpath = "/lessons/drills/top-1000-words/";
     }
 
     return (

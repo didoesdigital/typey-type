@@ -93,7 +93,7 @@ class Home extends Component {
             <div className="p3 mx-auto mw-1024">
               <div className="mw-584 ml-auto text-right">
                 <h3 className="overline">Revise</h3>
-                <p>Revise 50 briefs a day from a lesson with loads of words you want to memorise, like the top 10000 English words. Try to recall the briefs before revealing their strokes. Avoid fingerspelling or writing out the long forms of words. This helps you memorise the best brief for every word. </p>
+                <p>Revise 50 briefs a day from a lesson with loads of words you want to memorise, like the top 1000 words. Try to recall the briefs before revealing their strokes. Avoid fingerspelling or writing out the long forms of words. This helps you memorise the best brief for every word. </p>
                 <Link to='/lessons/drills/top-10000-project-gutenberg-words/' className="link-button dib" style={{lineHeight: 2}}>Revise</Link>
               </div>
             </div>
