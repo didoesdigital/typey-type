@@ -10,7 +10,7 @@
     "lodash": "^4.17.10",
     "node-sass-chokidar": "^0.0.3",
     "npm-run-all": "^4.1.1",
-    "pure-react-carousel": "git+ssh://git@github.com:dimonster/pure-react-carousel.git#add-slider-callback",
+    "pure-react-carousel": "git://github.com/didoesdigital/pure-react-carousel.git#add-slider-callback",
     "query-string": "^6.2.0",
     "react": "^16.2.0",
     "react-animate-height": "^2.0.5",
@@ -23,7 +23,7 @@
     "react-numeric-input": "^2.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "2.1.1",
-    "react-tippy": "git+ssh://git@github.com:dimonster/react-tippy.git#custom-tag-element-for-tooltip-trigger",
+    "react-tippy": "git://github.com/didoesdigital/react-tippy.git#custom-tag-element-for-tooltip-trigger",
     "react-transition-group": "^2.4.0"
   },
   "scripts": {
