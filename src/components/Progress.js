@@ -556,7 +556,7 @@ class Progress extends Component {
             Restore your progress from a previous session by entering your saved progress and loading it into Typey&nbsp;Type. You can also clear your progress by loading in empty curly braces, <code>{"{}"}</code>.
           </p>
           <p className="mt4 mb0">
-            <label htmlFor="metWords-from-personal-store" className="inline-block mb05">Enter your progress here:</label>
+            <label htmlFor="metwords-from-personal-store" className="inline-block mb05">Enter your progress here:</label>
             <textarea
               id="metwords-from-personal-store"
               className="js-metwords-from-personal-store progress-textarea db w-100"
@@ -585,7 +585,7 @@ class Progress extends Component {
       if (this.state.showLoadInput) {
         loadForm = (
           <React.Fragment>
-            <label htmlFor="js-metWords-from-personal-store--small" className="inline-block mb05 visually-hidden">Enter your progress here:</label>
+            <label htmlFor="js-metwords-from-personal-store--small" className="inline-block mb05 visually-hidden">Enter your progress here:</label>
             <textarea
               id="js-metwords-from-personal-store--small"
               className="js-metwords-from-personal-store progress-textarea db w-100 mr1"
