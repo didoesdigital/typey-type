@@ -540,8 +540,8 @@ class Progress extends Component {
     // let yourMemorisedWordCount = Math.round(Object.values(this.props.metWords).filter( timesSeen => timesSeen > 29).length) || 0;
     // let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
 
-    let saveAndLoadPanels = (
-      <div className={this.state.reducedSaveAndLoad ? "visually-hidden" : "progress-layout pl3 pr3 pt3 mx-auto mw-1024"}>
+    let saveAndLoadPanels = this.state.reducedSaveAndLoad ? null : (
+      <div className="progress-layout pl3 pr3 pt3 mx-auto mw-1024">
         <div className="panel p3 mb3">
           <h2>Save your progress</h2>
           <p>Typey&nbsp;Type saves your brief progress in your browser’s local storage.<strong className="bg-danger"> You’ll lose your progress if you clear your browsing data (history, cookies, and cache).</strong> If you share this device with other people or use Typey&nbsp;Type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;Type.</p>
