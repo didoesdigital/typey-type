@@ -576,7 +576,7 @@ class Progress extends Component {
 
     let reducedSaveAndLoadForms;
     let loadForm = (
-      <button onClick={this.showLoadInput.bind(this)} className="button button--secondary mr2">
+      <button onClick={this.showLoadInput.bind(this)} className="button button--secondary mr2" aria-label="Show progress loading form">
         Load
       </button>
     );
@@ -596,7 +596,7 @@ class Progress extends Component {
               style={{maxWidth: '200px', maxHeight: '40px'}}
               rows="1"
             />
-            <PseudoContentButton className="link-button load-progress mr2" onClick={this.restoreButtonOnClickFunction.bind(this)}>Load</PseudoContentButton>
+            <PseudoContentButton className="link-button load-progress mr2" onClick={this.restoreButtonOnClickFunction.bind(this)} aria-label="Load progress from text">Load</PseudoContentButton>
           </React.Fragment>
         );
       }
@@ -605,7 +605,7 @@ class Progress extends Component {
           <div className="flex">
             {loadForm}
           </div>
-          <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-metwords-from-typey-type">Copy</PseudoContentButton>
+          <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-metwords-from-typey-type" aria-label="Copy progress to clipboard">Copy</PseudoContentButton>
         </div>
       );
     }
