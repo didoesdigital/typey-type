@@ -832,17 +832,37 @@ input:focus::placeholder {
   word-break: break-word;
   word-wrap: break-word; }
 
+.h2 {
+  font-size: 1.95312rem;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-bottom: 18.5px; }
+
 .h3 {
-  font-size: 1.5625rem; }
+  font-size: 1.5625rem;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-top: 1.95312rem;
+  margin-bottom: 13.5px; }
 
 .h4 {
-  font-size: 1.25rem; }
+  font-size: 1.25rem;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-top: 1.5625rem;
+  margin-bottom: 11.5px; }
 
 .h5 {
-  font-size: 1rem; }
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-bottom: 9px; }
 
 .h6 {
-  font-size: 0.8rem; }
+  font-size: 0.8rem;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-bottom: 8px; }
 
 .divider {
   border-top: 1px solid #d9d3dc; }
@@ -881,6 +901,8 @@ input:focus::placeholder {
   .heading-link h1 {
     line-height: 1;
     margin-bottom: 0; }
+  .heading-link .heading-link__logo-text {
+    font-size: 1rem; }
 
 @media (max-width: 959px) {
   .site-heading-banner {
@@ -1659,6 +1681,8 @@ label {
   position: relative;
   height: 1em;
   width: 1em; }
+  .svg-icon-wrapper.svg-icon-wrapper--typey-type-logo {
+    font-size: 1.25rem; }
 
 .svg-icon-wrapper svg {
   height: 1em;

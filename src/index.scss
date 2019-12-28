@@ -717,20 +717,41 @@ input:focus::placeholder {
   word-wrap: break-word; // IE 11, alias for overflow-wrap
 }
 
+.h2 {
+  font-size: $h2-size;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-bottom: 18.5px;
+}
+
 .h3 {
   font-size: $h3-size;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-top: $h3-size * $font-scale;
+  margin-bottom: 13.5px;
 }
 
 .h4 {
   font-size: $h4-size;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-top: $h4-size * $font-scale;
+  margin-bottom: 11.5px;
 }
 
 .h5 {
   font-size: $h5-size;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-bottom: 9px;
 }
 
 .h6 {
   font-size: $h6-size;
+  font-weight: normal;
+  line-height: 1.4;
+  margin-bottom: 8px;
 }
 
 
@@ -786,6 +807,9 @@ input:focus::placeholder {
   h1 {
     line-height: 1;
     margin-bottom: 0;
+  }
+  .heading-link__logo-text {
+    font-size: $h5-size;
   }
 }
 
@@ -1857,6 +1881,9 @@ label {
   position: relative;
   height: 1em;
   width: 1em;
+  &.svg-icon-wrapper--typey-type-logo {
+    font-size: $h4-size;
+  }
 }
 .svg-icon-wrapper svg {
   height:1em;

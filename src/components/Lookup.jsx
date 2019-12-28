@@ -43,7 +43,7 @@ class Lookup extends Component {
             <div className="flex flex-wrap justify-between">
               <div className="mw-368 order-1">
                 <div className="mt0">
-                  <h4>Share link</h4>
+                  <h3 className="h4">Share link</h3>
                   <p className="mb0 mw-320 truncate"><a className="py05 dib" id="js-bookmark-url" href={this.state.bookmarkURL}>https://didoesdigital.com{this.state.bookmarkURL}</a></p>
                 </div>
                 <div className="panel p3 mt3">
