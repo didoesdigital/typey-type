@@ -214,6 +214,7 @@ plover"
                   <pre
                     id="js-your-words-for-dictionary-entries"
                     className="quote h-168 overflow-scroll mw-384 mt1 mb3"
+                    tabIndex="0"
                   ><code>{this.state.myWords}</code></pre>
                   <PseudoContentButton className="js-select-all-my-words link-button js-clipboard-button copy-to-clipboard" dataClipboardTarget="#js-your-words-for-dictionary-entries">Copy your words to clipboard</PseudoContentButton>
                 </div>
