@@ -264,6 +264,7 @@ class Dictionary extends Component {
                     <pre
                       className="quote h-168 overflow-scroll mw-384 mt1 mb3"
                       id="js-dictionary-json-pre"
+                      tabIndex="0"
                     ><code>{contents}</code></pre>
                   }
 
