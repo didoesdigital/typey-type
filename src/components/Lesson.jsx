@@ -143,7 +143,6 @@ class Lesson extends Component {
 
     let createNewCustomLesson = '';
     let customMessage;
-    let firstVisit;
     let overviewLink = '';
     let strokeTip;
     let lessonSubTitle = '';
@@ -166,16 +165,6 @@ class Lesson extends Component {
       customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
     } else {
       customMessage = ''
-    }
-
-    if (this.props.firstVisit) {
-      firstVisit = (
-        <div className='p3 pb0 mb0 mx-auto mw-1024'>
-          <p className="mb0">Welcome to Typey&nbsp;Type for Stenographers. Type the words shown, including the first space.</p>
-        </div>
-      );
-    } else {
-      firstVisit = '';
     }
 
     let strokeTarget = this.props.targetStrokeCount + ' strokes';
@@ -414,7 +403,6 @@ class Lesson extends Component {
                     </div>
                   </div>
                   <div>
-                    {firstVisit}
                     <div role="complementary" className="mx-auto mw-1024">
                       {customMessage}
                     </div>
