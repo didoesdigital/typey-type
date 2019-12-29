@@ -1,6 +1,10 @@
 # Typey Type for Stenographers
 
-**Typey Type** is a free typing app designed for steno students to practise and master stenography.
+[Typey Type](https://didoesdigital.com/typey-type/) is a free typing app designed for steno students to practise and master stenography.
+
+## Sponsor
+
+You can support [Di’s efforts on Patreon](https://www.patreon.com/didoesdigital). A monthly donation helps Di build more lessons and features to help you fast-track your steno progress.
 
 ## What's stenography?
 
@@ -15,11 +19,21 @@ The aim of Typey Type is to fast-track learning and mastering steno skills. Type
 - a course to follow, including material to type
 - links to more information
 
+Typey Type concentrates on practical skills, such as physical drilling and memorisation of briefs.
+
+## What Typey Type is not
+
+Typey Type is **not** a generic typing app. Plenty of typing apps already exist for regular text input without stenography.
+
+Instead, Typey Type concentrates on teaching people how to type using stenography. That means it includes features like steno diagrams showing steno briefs as hints for how to write words and using steno-specific data, such as lessons for “single-stroke briefs”.
+
+Typey Type avoids generic typing features, such as competing for speed and accuracy against other typists, which any typing app might do, such as [Typeracer](http://play.typeracer.com).
+
 ## Development
 
-### Pre-requisites
+### Requirements
 
-Install [yarn](https://yarnpkg.com/lang/en/docs/install/).
+Install [yarn](https://yarnpkg.com/lang/en/docs/install/). Note: the project is currently built with the version of Node shown in the `.tool-versions` file in the root of the project.
 
 ### Installation
 
@@ -39,6 +53,14 @@ Once you've cloned the repository and updated its submodules, yarn install packa
 
 ```sh
 yarn install
+```
+
+### Updates
+
+When you pull the latest code, you may need to update submodules too:
+
+```
+git submodule update
 ```
 
 ### Run the app in development mode
@@ -63,11 +85,15 @@ yarn run test
 
 For reference, Typey Type is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-# Code of Conduct
+## Contributing
+
+See the [CONTRIBUTING](./CONTRIBUTING.md) guidelines.
+
+## Code of Conduct
 
 This project and everyone participating in it is governed by the [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [typeytype@didoesdigital.com](mailto:typeytype@didoesdigital.com).
 
-# License
+## License
 
 See [LICENSE](./LICENSE).
 
