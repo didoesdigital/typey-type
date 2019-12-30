@@ -11,7 +11,7 @@ function fetchLatestPloverDict() {
 }
 
 function fetchDictTypeyType() {
-  return fetchResource(process.env.PUBLIC_URL + '/dictionaries/dict.json').then((json) => {
+  return fetchResource(process.env.PUBLIC_URL + '/dictionaries/typey-type/typey-type.json').then((json) => {
     return json;
   }).catch(function(e) {
     return {
@@ -130,7 +130,7 @@ function fetchDictionaryIndex() {
         "title": "Typey Type",
         "category": "Typey Type",
         "subcategory": "",
-        "path": process.env.PUBLIC_URL + "/typey-type/typey-type.json"
+        "path": process.env.PUBLIC_URL + "/dictionaries/typey-type/typey-type.json"
       },
       {
         "title": "Steno",
@@ -143,7 +143,7 @@ function fetchDictionaryIndex() {
 }
 
 // for custom lesson setup
-function fetchResource(resource = process.env.PUBLIC_URL + '/dictionaries/dict.json') {
+function fetchResource(resource = process.env.PUBLIC_URL + '/dictionaries/typey-type/typey-type.json') {
   return fetch(resource, {
     method: "GET",
     credentials: "same-origin"

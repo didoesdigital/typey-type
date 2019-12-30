@@ -55,7 +55,7 @@ class Writer extends Component<Props, State> {
   updateQWERTYSteno = this.updateQWERTYSteno.bind(this);
 
   componentDidMount() {
-    let dict:string = '' + (process.env.PUBLIC_URL || '') + '/dictionaries/dict.json';
+    let dict:string = '' + (process.env.PUBLIC_URL || '') + '/dictionaries/typey-type/typey-type.json';
     fetchResource(dict).then((json) => {
       this.setState({
         stenoDictionary: json
