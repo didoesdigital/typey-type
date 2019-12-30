@@ -450,13 +450,10 @@ class Lesson extends Component {
                             updateMarkup={this.props.updateMarkup.bind(this)}
                             userSettings={this.props.userSettings}
                           />
-                          <div aria-hidden="true">
+                          <div>
                             {strokeTip}
                           </div>
                         </div>
-                      </div>
-                      <div className="visually-hidden">
-                        {strokeTip}
                       </div>
                       <UserSettings
                         changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
