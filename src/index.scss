@@ -1726,8 +1726,8 @@ label {
 .fill-fade-edges {
   background-image: linear-gradient(to right,
     add-tint($brand-primary, 97%) 0%,
-    add-tint($brand-primary, 97%) 5%,
-    rgba(255,255,255,0) 10%,
+    add-tint($brand-primary, 97%) 0%,
+    rgba(255,255,255,0) 0%,
     rgba(255,255,255,0) 90%,
     add-tint($brand-primary, 97%) 95%,
     add-tint($brand-primary, 97%) 100%);
@@ -1738,6 +1738,16 @@ label {
   bottom: 0;
   left: 0;
   z-index: $z-index-fill-fade-edges;
+
+  @media (min-width: $medium-breakpoint) {
+    background-image: linear-gradient(to right,
+      add-tint($brand-primary, 97%) 0%,
+      add-tint($brand-primary, 97%) 5%,
+      rgba(255,255,255,0) 10%,
+      rgba(255,255,255,0) 90%,
+      add-tint($brand-primary, 97%) 95%,
+      add-tint($brand-primary, 97%) 100%);
+  }
 }
 
 .carousel--flashcards {

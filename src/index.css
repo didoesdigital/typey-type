@@ -1555,7 +1555,7 @@ label {
   z-index: 0; }
 
 .fill-fade-edges {
-  background-image: linear-gradient(to right, #f9f8fa 0%, #f9f8fa 5%, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0) 90%, #f9f8fa 95%, #f9f8fa 100%);
+  background-image: linear-gradient(to right, #f9f8fa 0%, #f9f8fa 0%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 90%, #f9f8fa 95%, #f9f8fa 100%);
   border-radius: 4px;
   position: absolute;
   top: 0;
@@ -1563,6 +1563,9 @@ label {
   bottom: 0;
   left: 0;
   z-index: 1; }
+  @media (min-width: 768px) {
+    .fill-fade-edges {
+      background-image: linear-gradient(to right, #f9f8fa 0%, #f9f8fa 5%, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0) 90%, #f9f8fa 95%, #f9f8fa 100%); } }
 
 .carousel--flashcards {
   margin-left: calc(2.5rem + 8px);
