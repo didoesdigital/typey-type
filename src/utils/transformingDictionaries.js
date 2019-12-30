@@ -2195,10 +2195,16 @@ function generateListOfWordsAndStrokes(wordList, globalLookupDictionary) {
   return sourceAndPresentedMaterial;
 }
 
-function chooseSEndingOverZEnding(outlineA, outlineB) {
-  let outlineALength = outlineA.length;
-  let outlineBLength = outlineB.length;
-  return (outlineA[outlineALength - 1] === "Z" && outlineB[outlineBLength - 1] === "S");
+function chooseSEndingOverZEnding(outlineALastLetter, outlineBLastLetter) {
+  if (outlineALastLetter === outlineBLastLetter) {
+    return 0;
+  }
+  else if (outlineALastLetter === "Z") {
+    return 1;
+  }
+  else if (outlineALastLetter === "S") {
+    return -1;
+  }
 }
 
 function penaliseStars(outline, translation) {
@@ -2279,7 +2285,13 @@ function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
     outlineBLengthWithAllPenalties += penaliseSlashesWithoutPrefixesOrSuffixes(outlineB, translation);
 
     if (outlineALengthWithAllPenalties === outlineBLengthWithAllPenalties) {
-      if (chooseSEndingOverZEnding(outlineA, outlineB)) { return 1; }
+      let outlineALastLetter = outlineA[outlineA.length - 1];
+      let outlineBLastLetter = outlineB[outlineB.length - 1];
+
+      if ("SZ".indexOf(outlineALastLetter) !== -1 && "SZ".indexOf(outlineBLastLetter) !== -1)
+      {
+        return chooseSEndingOverZEnding(outlineALastLetter, outlineBLastLetter);
+      }
     }
 
     return outlineALengthWithAllPenalties - outlineBLengthWithAllPenalties;

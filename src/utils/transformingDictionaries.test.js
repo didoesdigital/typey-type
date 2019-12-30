@@ -356,7 +356,27 @@ describe('rank outlines', () => {
   });
 
   describe('with different outlines across dictionaries', () => {
-    it('returns sorted list of outlines for "exercises", prioritising S endings over Z', () => {
+    it('returns sorted list of outlines for "exercises", prioritising S endings over Z, already in order', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["KPER/SAOEUZ/-Z", "plover.json"],
+        ["KPERZ/-T", "briefs.json"],
+        ["KPERZ/-S", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["ERBGS/SAOEUSZ", "plover.json"],
+        ["KPERSZ", "typey-type.json"],
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "exercises")).toEqual([
+        ["KPERSZ", "typey-type.json"],
+        ["KPERZ/-T", "briefs.json"],
+        ["KPERZ/-S", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["ERBGS/SAOEUSZ", "plover.json"],
+        ["KPER/SAOEUZ/-Z", "plover.json"]
+      ]);
+    });
+
+    it('returns sorted list of outlines for "exercises", prioritising S endings over Z, not in order', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
         ["KPER/SAOEUZ/-Z", "plover.json"],
         ["KPERZ/-T", "briefs.json"],
@@ -370,6 +390,36 @@ describe('rank outlines', () => {
         ["KPERSZ", "typey-type.json"],
         ["KPERZ/-T", "briefs.json"],
         ["KPERZ/-S", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["ERBGS/SAOEUSZ", "plover.json"],
+        ["KPER/SAOEUZ/-Z", "plover.json"]
+      ]);
+    });
+
+    it('returns sorted list of outlines for "exercises", prioritising S endings over Z, not in order, with more than 10 elements', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["KPER/SAOEUZ/-Z", "plover.json"],
+        ["KPERZ/-T", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["KPERZ/-S", "briefs.json"],
+        ["ERBGS/SAOEUSZ", "plover.json"],
+        ["KPERSZ", "typey-type.json"],
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "exercises")).toEqual([
+        ["KPERSZ", "typey-type.json"],
+        ["KPERZ/-T", "briefs.json"],
+        ["KPERZ/-S", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
+        ["KPERZ/-Z", "briefs.json"],
         ["KPERZ/-Z", "briefs.json"],
         ["ERBGS/SAOEUSZ", "plover.json"],
         ["KPER/SAOEUZ/-Z", "plover.json"]
