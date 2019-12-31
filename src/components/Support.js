@@ -479,53 +479,6 @@ class Support extends Component {
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
               </GoogleAnalytics.OutboundLink>.</li>
-              <li>{" "}
-              <GoogleAnalytics.OutboundLink
-                eventLabel="Josh Kaufman provides a typing word list"
-                aria-label="Josh Kaufman provides a typing word list (external link opens in new tab)"
-                to="https://github.com/first20hours/google-10000-english"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Josh Kaufman provides a typing word <span className="nowrap">list
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={this.props.setAnnouncementMessage}
-                >
-                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-              </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> from{" "}
-              <GoogleAnalytics.OutboundLink
-                eventLabel="Google’s Trillion Word Corpus"
-                aria-label="Google’s Trillion Word Corpus (external link opens in new tab)"
-                to="http://books.google.com/ngrams"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Google’s Trillion <span className="nowrap">Word Corpus
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={this.props.setAnnouncementMessage}
-                >
-                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-              </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.</li>
             </ul>
 
             <h3 id="support">Support</h3>
