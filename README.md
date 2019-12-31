@@ -4,7 +4,7 @@
 
 ## Sponsor
 
-You can support [Di’s efforts on Patreon](https://www.patreon.com/didoesdigital). A monthly donation helps Di build more lessons and features to help you fast-track your steno progress.
+You can support [Di’s efforts on Patreon](https://www.patreon.com/didoesdigital). A monthly donation helps [Di](https://didoesdigital.com) build more lessons and features to help you fast-track your steno progress.
 
 ## What's stenography?
 
@@ -96,4 +96,8 @@ This project and everyone participating in it is governed by the [Code of Conduc
 ## License
 
 See [LICENSE](./LICENSE).
+
+## Author
+
+Typey Type was created by [Di](https://didoesdigital.com).
 
