@@ -2195,6 +2195,27 @@ function generateListOfWordsAndStrokes(wordList, globalLookupDictionary) {
   return sourceAndPresentedMaterial;
 }
 
+function chooseTEndingOverDEnding(outlineALastLetter, outlineBLastLetter, translation) {
+  if (outlineALastLetter === outlineBLastLetter) {
+    return 0;
+  }
+  else if (outlineALastLetter === "D" && translation[translation.length - 1] === "d") {
+    return -1;
+  }
+  else if (outlineALastLetter === "D" && translation[translation.length - 1] !== "d") {
+    return 1;
+  }
+  else if (outlineALastLetter === "T" && translation[translation.length - 1] === "d") {
+    return 1;
+  }
+  else if (outlineALastLetter === "T" && translation[translation.length - 1] !== "d") {
+    return -1;
+  }
+  else {
+    return 0;
+  }
+}
+
 function chooseSEndingOverZEnding(outlineALastLetter, outlineBLastLetter) {
   if (outlineALastLetter === outlineBLastLetter) {
     return 0;
@@ -2204,6 +2225,9 @@ function chooseSEndingOverZEnding(outlineALastLetter, outlineBLastLetter) {
   }
   else if (outlineALastLetter === "S") {
     return -1;
+  }
+  else {
+    return 0;
   }
 }
 
@@ -2291,6 +2315,11 @@ function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
       if ("SZ".indexOf(outlineALastLetter) !== -1 && "SZ".indexOf(outlineBLastLetter) !== -1)
       {
         return chooseSEndingOverZEnding(outlineALastLetter, outlineBLastLetter);
+      }
+
+      if ("TD".indexOf(outlineALastLetter) !== -1 && "TD".indexOf(outlineBLastLetter) !== -1)
+      {
+        return chooseTEndingOverDEnding(outlineALastLetter, outlineBLastLetter, translation);
       }
     }
 

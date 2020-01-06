@@ -425,6 +425,44 @@ describe('rank outlines', () => {
         ["KPER/SAOEUZ/-Z", "plover.json"]
       ]);
     });
+
+    it('returns sorted list of outlines for "slept", prioritising T endings over D, already in order', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["SHREPT", "plover.json"],
+        ["SHREPD", "plover.json"],
+        ["SHREPT", "plover.json"],
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "slept")).toEqual([
+        ["SHREPT", "plover.json"],
+        ["SHREPT", "plover.json"],
+        ["SHREPD", "plover.json"]
+      ]);
+    });
+
+    it('returns sorted list of outlines for "intermediate", prioritising T endings over D, not in order', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["EUPBT/PHAOED", "plover.json"],
+        ["EUPBT/PHAOET", "plover.json"]
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "intermediate")).toEqual([
+        ["EUPBT/PHAOET", "plover.json"],
+        ["EUPBT/PHAOED", "plover.json"]
+      ]);
+    });
+
+    it('returns sorted list of outlines for "credit card", prioritising T endings over D, except when the word ends in "d"', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["KRED/EUT/KART", "plover.json"],
+        ["KRED/EUT/KARD", "plover.json"]
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "credit card")).toEqual([
+        ["KRED/EUT/KARD", "plover.json"],
+        ["KRED/EUT/KART", "plover.json"]
+      ]);
+    });
   });
 // T-FPB: plover.json
 // TEFL: plover.json
