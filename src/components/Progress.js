@@ -18,6 +18,25 @@ import 'react-tippy/dist/tippy.css'
 
 let particles = [];
 
+const ProgressTooltip = ({ title, onShow, children }) => {
+  return (
+    <Tooltip
+      title={title}
+      className=""
+      animation="shift"
+      arrow="true"
+      duration="200"
+      tabIndex="0"
+      tag="span"
+      theme="didoesdigital didoesdigital-sm"
+      trigger="mouseenter focus click"
+      onShow={onShow}
+    >
+      {children}
+    </Tooltip>
+  );
+};
+
 class Progress extends Component {
   constructor(props) {
     super(props);
@@ -433,6 +452,69 @@ class Progress extends Component {
     }
   }
 
+  progressIconClasses(color, opacity) {
+    return (
+      `color-${color}-bright ` +
+      `o-${opacity} ` +
+      "progress-circle " +
+      "svg-baseline " +
+      "svg-icon-wrapper"
+    );
+  }
+
+  unstarted() {
+    return (
+      <ProgressTooltip
+        title="Unstarted"
+        onShow={this.props.setAnnouncementMessage}
+      >
+        <div
+          aria-hidden="true"
+          className={this.progressIconClasses("purple", 30)}
+        />
+        <span className="visually-hidden">Unstarted</span>
+      </ProgressTooltip>
+    );
+  }
+
+  inProgress() {
+    return (
+      <ProgressTooltip
+        title="In progress"
+        onShow={this.props.setAnnouncementMessage}
+      >
+        <IconTriangleRight
+          ariaHidden="true"
+          role="presentation"
+          className={this.progressIconClasses("purple", 100)}
+          iconTitle=""
+        />
+        <span className="visually-hidden">In progress</span>
+      </ProgressTooltip>
+    );
+  }
+
+  lessonComplete() {
+    return (
+      <ProgressTooltip
+        title="100 words done or lesson complete"
+        onShow={this.props.setAnnouncementMessage}
+      >
+        <IconCheckmark
+          ariaHidden="true"
+          role="presentation"
+          className={this.progressIconClasses("green", 100)}
+          iconWidth="16"
+          iconHeight="16"
+          iconTitle=""
+        />
+        <span className="visually-hidden">
+          100 words done or lesson complete
+        </span>
+      </ProgressTooltip>
+    );
+  }
+
   render () {
     var grabStyle = function() {return false};
     if (this.state.toRecommendedNextLesson === true) {
@@ -466,64 +548,14 @@ class Progress extends Component {
         numberOfWordsSeenOrMemorised = seen + memorised;
         if ((numberOfWordsSeenOrMemorised >= lessonWordCountInIndex) || (numberOfWordsSeenOrMemorised > 100)) {
           if (numberOfWordsSeenOrMemorised >= lessonWordCountInIndex) { numberOfWordsSeenOrMemorised = lessonWordCountInIndex; }
-          lessonCompletion = (
-            <Tooltip
-              title="100 words done or lesson complete"
-              className=""
-              animation="shift"
-              arrow="true"
-              duration="200"
-              tabIndex="0"
-              tag="span"
-              theme="didoesdigital didoesdigital-sm"
-              trigger="mouseenter focus click"
-              onShow={this.props.setAnnouncementMessage}
-            >
-              <IconCheckmark ariaHidden="true" role="presentation" className="svg-icon-wrapper svg-baseline progress-circle color-green-bright" iconWidth="16" iconHeight="16" iconTitle="" />
-              <span className="visually-hidden">100 words done or lesson complete</span>
-            </Tooltip>
-          );
+          lessonCompletion = this.lessonComplete();
         } else if (numberOfWordsSeenOrMemorised > 0) {
-          lessonCompletion = (
-                <Tooltip
-                  title="In progress"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital didoesdigital-sm"
-                  trigger="mouseenter focus click"
-                  onShow={this.props.setAnnouncementMessage}
-                >
-                  <IconTriangleRight ariaHidden="true" role="presentation" className="svg-icon-wrapper svg-baseline progress-circle color-purple-bright" iconTitle="" />
-                  <span className="visually-hidden">In progress</span>
-                </Tooltip>
-          );
+          lessonCompletion = this.inProgress();
         } else {
-          lessonCompletion = (
-                <Tooltip
-                  title="Unstarted"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital didoesdigital-sm"
-                  trigger="mouseenter focus click"
-                  onShow={this.props.setAnnouncementMessage}
-                >
-                  <div aria-hidden="true" className="svg-icon-wrapper svg-baseline progress-circle color-purple-bright o-30" />
-                  <span className="visually-hidden">Unstarted</span>
-                </Tooltip>
-          );
+          lessonCompletion = this.unstarted();
         }
       } else {
-          lessonCompletion = (
-            <div aria-hidden="true" className="svg-icon-wrapper svg-baseline color-purple-bright o-30" />
-        );
+        lessonCompletion = this.unstarted();
       }
       if (lesson.category === "Fundamentals" || (lesson.category === "Drills" && lesson.title.startsWith("Top 100")) || (lesson.category === "Drills" && lesson.title.startsWith("Top 200"))) {
         return(
