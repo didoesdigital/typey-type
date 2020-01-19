@@ -317,8 +317,16 @@ class Finished extends Component {
     let lessonEmpty = false;
     if (this.isEmpty()) {
       lessonEmpty = true;
+      let startFromWordOneButton = null;
+      if (this.props.userSettings.startFromWord > 1) {
+        startFromWordOneButton = (
+          <div className="text-center">
+            <button className="button mt3 dib" onClick={this.props.startFromWordOne}>Start from word 1</button>
+          </div>
+        );
+      }
       emptyAndZeroStateMessage = (
-        <div className="text-center mt10 mx-auto">There are no words to write.</div>
+        <div className="text-center mt10 mx-auto"><span id="js-no-words-to-write" tabIndex="-1">There are no words to write.</span> {startFromWordOneButton}</div>
       );
       lessonSummary = '';
     } else {

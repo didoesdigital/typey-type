@@ -507,6 +507,39 @@ class App extends Component {
     return value;
   }
 
+  startFromWordOne() {
+    let currentState = this.state.userSettings;
+    let newState = Object.assign({}, currentState);
+
+    const name = "startFromWord"
+    const value = 1;
+
+    newState[name] = value;
+
+    this.setState({userSettings: newState}, () => {
+      if (!(name === 'caseSensitive')) {
+        this.setupLesson('There are no words to write.');
+      }
+      writePersonalPreferences('userSettings', this.state.userSettings);
+
+      // A hack for returning focus somewhere sensible
+      // https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
+      // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
+      window.setTimeout(function ()
+      {
+        let element = document.getElementById('your-typed-text') || document.getElementById('js-no-words-to-write');
+        if (element) { element.focus(); }
+      }, 0);
+
+    });
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Start from word 1',
+      label: 'true'
+    });
+  }
+
   handleStartFromWordChange(event) {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
@@ -1164,7 +1197,7 @@ class App extends Component {
     return value;
   }
 
-  setupLesson() {
+  setupLesson(optionalAnnouncementMessage) {
     if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom") && !this.state.lesson.path.endsWith("/lessons/custom/setup")) {
       let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
@@ -1315,9 +1348,14 @@ class App extends Component {
 
       let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
+      let announcementMessage = 'Navigated to: ' + newLesson.title;
+      if (optionalAnnouncementMessage) {
+        announcementMessage = optionalAnnouncementMessage;
+      }
+
       this.setState({
         actualText: ``,
-        announcementMessage: 'Navigated to: ' + newLesson.title,
+        announcementMessage: announcementMessage,
         currentPhraseAttempts: [],
         currentLessonStrokes: [],
         disableUserSettings: false,
@@ -2114,6 +2152,7 @@ class App extends Component {
                         sayCurrentPhraseAgain={this.sayCurrentPhraseAgain.bind(this)}
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                        startFromWordOne={this.startFromWordOne.bind(this)}
                         stopLesson={this.stopLesson.bind(this)}
                         startCustomLesson={this.startCustomLesson.bind(this)}
                         setupRevisionLesson={this.setupRevisionLesson.bind(this)}
