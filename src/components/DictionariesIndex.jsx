@@ -91,9 +91,33 @@ class DictionariesIndex extends Component {
               <h3 id="typey-type-dictionary">Typey&nbsp;Type dictionary</h3>
               <p><Link to="/dictionaries/typey-type/typey-type/">Typey&nbsp;Type’s dictionary</Link> follows the Plover (v4) dictionary with misstrokes removed from the top 10,000 words.</p>
 
-              <p>Typey&nbsp;Type’s stroke suggestions look for the shortest stroke in the cleaned dictionary with penalties for multi-stroke briefs and briefs using the star (<code>*</code>) key.</p>
+              <p>Typey&nbsp;Type’s stroke suggestions look for the shortest stroke in the cleaned dictionary with penalties for multi-stroke briefs, briefs using the star (<code>*</code>) key, and briefs using non-standard prefix or suffix strokes.</p>
 
-              <p>You can use <Link to="/dictionaries/typey-type/typey-type/">Typey&nbsp;Type’s dictionary</Link> instead of Plover’s.</p>
+              <p>You can use <Link to="/dictionaries/typey-type/typey-type/">Typey&nbsp;Type’s dictionary</Link> instead of Plover’s or the set of dictionaries used by Typey Type in <GoogleAnalytics.OutboundLink
+                eventLabel="Di’s Steno Dictionaries repo"
+                aria-label="Di’s Steno Dictionaries repo (external link opens in new tab)"
+                to="https://github.com/didoesdigital/steno-dictionaries"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Di’s Steno Dictionaries <span className="nowrap">repo
+                  <Tooltip
+                    title="Opens in a new tab"
+                    animation="shift"
+                    arrow="true"
+                    className=""
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                  </Tooltip>
+                </span>
+              </GoogleAnalytics.OutboundLink>. These power the stroke suggestions.
+            </p>
 
               <p>The stories lessons like Aesop’s Fables use British English spellings for words such as “neighbour”. For these you can use the <Link to="/dictionaries/didoesdigital/dict-en-AU-with-extra-stroke/">Australian English with extra strokes</Link> dictionary.</p>
 
@@ -121,32 +145,6 @@ class DictionariesIndex extends Component {
                     <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                   </Tooltip></span>
                 </GoogleAnalytics.OutboundLink>.</p>
-
-            <p><GoogleAnalytics.OutboundLink
-                eventLabel="Di’s Steno Dictionaries repo"
-                aria-label="Di’s Steno Dictionaries repo (external link opens in new tab)"
-                to="https://github.com/didoesdigital/steno-dictionaries"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Di’s Steno Dictionaries <span className="nowrap">repo
-                  <Tooltip
-                    title="Opens in a new tab"
-                    animation="shift"
-                    arrow="true"
-                    className=""
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={this.props.setAnnouncementMessage}
-                  >
-                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-                  </Tooltip>
-                </span>
-              </GoogleAnalytics.OutboundLink> has many dictionaries. These power Typey&nbsp;Type’s stroke suggestions.
-            </p>
 
               <h3>Custom dictionaries</h3>
               <p>To use a different dictionary or steno theory, upload your words and strokes to a <Link to="/lessons/custom">custom lesson</Link>. The briefs shown will match your dictionary.</p>
