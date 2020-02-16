@@ -235,6 +235,51 @@ class Support extends Component {
             <h4 id="flashcards" tabIndex="-1">Flashcards</h4>
             <p>Flashcards are designed for mobile devices so you can memorise steno briefs on the go. When you’re unable to recall a brief, tap “Hard” to say it was hard to remember. When you can recall a brief without hesitation, tap “Easy”. While studying flashcards, imagine which fingers and the shape of the outline you’d use to stroke a word.</p>
             <p>If it’s been a while since you’ve studied, the “threshold” will be set quite high. You’ll see flashcards you’ve studied that are below the threshold. That is, if the threshold is 12, you’ll see flashcards for words you’ve marked “Easy” less than 12 times. If you’ve marked a word as “Easy” 15 times, it won’t shown again until more time has passed.</p>
+            <p>Thanks to Jim Ladd, you can also use the{" "}<GoogleAnalytics.OutboundLink
+                eventLabel="Anki"
+                aria-label="Anki (external link opens in new tab)"
+                to="https://apps.ankiweb.net/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Anki<span className="nowrap">
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+            </GoogleAnalytics.OutboundLink> app to memorise briefs using the{" "}<GoogleAnalytics.OutboundLink
+                eventLabel="flashcard deck for the Top 1000 Words"
+                aria-label="flashcard deck for the Top 1000 Words (external link opens in new tab)"
+                to="https://github.com/jladdjr/anki-decks/blob/master/Plover%20-%20Top%201000%20Project%20Gutenberg%20Words%20by%20Frequency.apkg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                flashcard deck for the Top 1000 Words<span className="nowrap">
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+            </GoogleAnalytics.OutboundLink> from Project Gutenberg he built using Typey&nbsp;Type steno diagrams.</p>
 
             <h3 id="learn-steno">Learning stenography</h3>
             <h4 id="try-steno">How can you try out steno?</h4>
