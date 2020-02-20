@@ -490,13 +490,13 @@ currentSlide: currentSlide
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
             </GoogleAnalytics.OutboundLink> app to memorise briefs using the{" "}<GoogleAnalytics.OutboundLink
-                eventLabel="flashcard deck for the Top 1000 Words"
-                aria-label="flashcard deck for the Top 1000 Words (external link opens in new tab)"
-                to="https://github.com/jladdjr/anki-decks/blob/master/Plover%20-%20Top%201000%20Project%20Gutenberg%20Words%20by%20Frequency.apkg"
+                eventLabel="flashcard decks for the Top 2000 Words"
+                aria-label="flashcard decks for the Top 2000 Words (external link opens in new tab)"
+                to="https://github.com/jladdjr/anki-decks/tree/master/Plover%20-%20Project%20Gutenberg%20Top%2010k%20Words"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                flashcard deck for the Top 1000 Words<span className="nowrap">
+                flashcard decks for the Top 2000 Words<span className="nowrap">
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
