@@ -856,6 +856,7 @@ function loadPersonalPreferences() {
   let metWords = {};
   let flashcardsProgress = {};
   let globalUserSettings = {
+    experiments: {},
     flashcardsCourseLevel: "noviceCourse",
     showMisstrokesInLookup: false,
     writerInput: "qwerty"

@@ -248,6 +248,7 @@ class App extends Component {
       flashcardsCourseIndex: 0,
       fullscreen: false,
       globalUserSettings: {
+        experiments: {},
         flashcardsCourseLevel: "noviceCourse", // noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
         writerInput: "qwerty", // qwerty || raw
         showMisstrokesInLookup: false
