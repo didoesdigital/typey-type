@@ -1385,20 +1385,45 @@ class App extends Component {
       if (isLessonTextValid(lessonText)) {
         this.setState({lessonNotFound: false});
         let lesson = parseLesson(lessonText, path);
-        this.setState({
-          announcementMessage: 'Navigated to: ' + lesson.title,
-          lesson: lesson,
-          currentPhraseID: 0
-        }, () => {
-          this.setupLesson();
+        if (this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly) {
+          this.fetchAndSetupGlobalDict().then(() => {
+            let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
+              lesson.sourceMaterial = lessonWordsAndStrokes;
+              lesson.presentedMaterial = lessonWordsAndStrokes;
+              lesson.newPresentedMaterial = new Zipper([lessonWordsAndStrokes]);
 
-          if (this.mainHeading) {
-            this.mainHeading.focus();
-          } else {
-            const element = document.getElementById('your-typed-text');
-            if (element) { element.focus(); }
-          }
-        });
+            this.setState({
+              announcementMessage: 'Navigated to: ' + lesson.title,
+              lesson: lesson,
+              currentPhraseID: 0
+            }, () => {
+              this.setupLesson();
+
+              if (this.mainHeading) {
+                this.mainHeading.focus();
+              } else {
+                const element = document.getElementById('your-typed-text');
+                if (element) { element.focus(); }
+              }
+            });
+          });
+        }
+        else {
+          this.setState({
+            announcementMessage: 'Navigated to: ' + lesson.title,
+            lesson: lesson,
+            currentPhraseID: 0
+          }, () => {
+            this.setupLesson();
+
+            if (this.mainHeading) {
+              this.mainHeading.focus();
+            } else {
+              const element = document.getElementById('your-typed-text');
+              if (element) { element.focus(); }
+            }
+          });
+        }
       } else {
         this.setState({lessonNotFound: true});
       }
