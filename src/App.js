@@ -1385,7 +1385,14 @@ class App extends Component {
       if (isLessonTextValid(lessonText)) {
         this.setState({lessonNotFound: false});
         let lesson = parseLesson(lessonText, path);
-        if (this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly) {
+        if (
+          this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly &&
+          !path.includes("phrasing") &&
+          !path.includes("apostrophes") &&
+          !path.includes("prefixes") &&
+          !path.includes("suffixes") &&
+          !path.includes("steno-party-tricks")
+        ) {
           this.fetchAndSetupGlobalDict().then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
