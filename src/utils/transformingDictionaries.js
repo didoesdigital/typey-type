@@ -1917,6 +1917,14 @@ const FINGERSPELLED_LETTERS = {
   // "8": "#L",
   // "9": "#-T"
 
+const SINGLE_LETTER_WORDS = {
+  "a": "AEU",
+  "A": "KPA/AEU",
+  "I": "EU",
+  "X": "10R",
+  "V": "5R"
+}
+
 const punctuationSplittingRegex = /[!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~—–-]/; // includes en and em dashes, curly quotes
 const punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
 const strokeLookupAttemptsLimit = 12;
@@ -1935,9 +1943,14 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   }
   else { chosenStroke = undefined; }
 
-  let strokeForOneCharacterWord = FINGERSPELLED_LETTERS[wordOrPhrase];
+  let strokeForOneCharacterWord = SINGLE_LETTER_WORDS[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWord) {
     return [strokeForOneCharacterWord, strokeLookupAttempts + 1];
+  }
+
+  let strokeForOneCharacterWordPart = FINGERSPELLED_LETTERS[wordOrPhrase];
+  if (wordOrPhrase.length === 1 && strokeForOneCharacterWordPart) {
+    return [strokeForOneCharacterWordPart, strokeLookupAttempts + 1];
   }
 
   // FIRST => first
