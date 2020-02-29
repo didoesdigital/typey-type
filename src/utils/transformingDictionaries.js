@@ -1937,7 +1937,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
 
   let strokeForOneCharacterWord = FINGERSPELLED_LETTERS[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWord) {
-    return [strokeForOneCharacterWord, strokeLookupAttempts];
+    return [strokeForOneCharacterWord, strokeLookupAttempts + 1];
   }
 
   // FIRST => first
