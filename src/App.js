@@ -1389,6 +1389,7 @@ class App extends Component {
           this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly &&
           !path.includes("phrasing") &&
           !path.includes("apostrophes") &&
+          !path.includes("fingerspelling") &&
           !path.includes("prefixes") &&
           !path.includes("suffixes") &&
           !path.includes("steno-party-tricks")
