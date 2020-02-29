@@ -1984,6 +1984,20 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     }
   }
 
+  if (wordOrPhrase.includes(",")) {
+    // , xxx, => {,}xxx{,}
+    if (!chosenStroke) {
+      let lookupEntry = globalLookupDictionary.get(wordOrPhrase.replace(/, (.+),/, "{,}$1{,}"));
+      if (lookupEntry) { chosenStroke = lookupEntry[0][0]; }
+    }
+
+    // xxx, => xxx{,}
+    if (!chosenStroke) {
+      let lookupEntry = globalLookupDictionary.get(wordOrPhrase.replace(',', '{,}'));
+      if (lookupEntry) { chosenStroke = lookupEntry[0][0]; }
+    }
+  }
+
   // xxx => {^}xxx{^}
   if (!chosenStroke) {
     let lookupEntry = globalLookupDictionary.get("{^}" + wordOrPhrase + "{^}");

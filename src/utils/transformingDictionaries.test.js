@@ -64,7 +64,9 @@ describe('choose outline for phrase', () => {
       ["{^<^}", [["AEPBG", "typey-type.json"]]],
       ["{^/^}", [["OEU", "typey-type.json"]]],
       ["title", [["TAOEULT", "typey-type.json"]]],
-      ["learn", [["HRERPB", "typey-type.json"]]]
+      ["learn", [["HRERPB", "typey-type.json"]]],
+      ["oh{,}", [["OERBGS", "typey-type.json"]]],
+      ["{,}like{,}", [["HRAO*EUBG", "typey-type.json"]]]
     ]);
 
     it('simple example returns 1 attempt for KP-PL', () => {
@@ -180,6 +182,22 @@ describe('choose outline for phrase', () => {
 
     //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HR*PB", 1 ]);
     // });
+
+    it('with OERBGS for oh,', () => {
+      let wordOrPhrase = "oh,";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "OERBGS", 1 ]);
+    });
+
+    it('with HRAO*EUBG for , like,', () => {
+      let wordOrPhrase = ", like,";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HRAO*EUBG", 1 ]);
+    });
   });
 });
 
