@@ -2075,32 +2075,33 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
 
 function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, globalLookupDictionary, strokes, stroke, strokeLookupAttempts) {
   // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
-    if (remainingWordOrPhrase.match(punctuationSplittingWholeMatchRegex)) { // exactly matches punctuation e.g. "!", "?", "'"
-      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(remainingWordOrPhrase, globalLookupDictionary, stroke, strokeLookupAttempts);
-      strokes = strokes === "" ? stroke : strokes + " " + stroke;
-      stroke = "xxx";
 
-      remainingWordOrPhrase = ''; // prevents infinite loop
+  if (remainingWordOrPhrase.match(punctuationSplittingWholeMatchRegex)) { // exactly matches punctuation e.g. "!", "?", "'"
+    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(remainingWordOrPhrase, globalLookupDictionary, stroke, strokeLookupAttempts);
+    strokes = strokes === "" ? stroke : strokes + " " + stroke;
+    stroke = "xxx";
+
+    remainingWordOrPhrase = ''; // prevents infinite loop
+  }
+  else {
+    let matchingPunctuation = remainingWordOrPhrase.match(punctuationSplittingRegex)[0].charAt(0); // given "man?" => ["?", index: 3, input: "man?", groups: undefined] => "?" => "?"
+    let index = remainingWordOrPhrase.indexOf(matchingPunctuation);
+    let firstWord = '';
+
+    if (index === 0) { // starts with ! e.g. !foo
+      firstWord = remainingWordOrPhrase.slice(0, 1); // "!"
+      remainingWordOrPhrase = remainingWordOrPhrase.slice(index + 1, remainingWordOrPhrase.length); // "foo"
     }
-    else {
-      let matchingPunctuation = remainingWordOrPhrase.match(punctuationSplittingRegex)[0].charAt(0); // given "man?" => ["?", index: 3, input: "man?", groups: undefined] => "?" => "?"
-      let index = remainingWordOrPhrase.indexOf(matchingPunctuation);
-      let firstWord = '';
-
-      if (index === 0) { // starts with ! e.g. !foo
-        firstWord = remainingWordOrPhrase.slice(0, 1); // "!"
-        remainingWordOrPhrase = remainingWordOrPhrase.slice(index + 1, remainingWordOrPhrase.length); // "foo"
-      }
-      else { // contains ! e.g. foo!
-        firstWord = remainingWordOrPhrase.slice(0, index); // "foo"
-        remainingWordOrPhrase = remainingWordOrPhrase.slice(index, remainingWordOrPhrase.length); // "!"
-      }
-
-      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", globalLookupDictionary, "", 0)
-
-      strokes = strokes === "" ? stroke : strokes + " " + stroke;
-      stroke = "xxx";
+    else { // contains ! e.g. foo!
+      firstWord = remainingWordOrPhrase.slice(0, index); // "foo"
+      remainingWordOrPhrase = remainingWordOrPhrase.slice(index, remainingWordOrPhrase.length); // "!"
     }
+
+    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", globalLookupDictionary, "", 0)
+
+    strokes = strokes === "" ? stroke : strokes + " " + stroke;
+    stroke = "xxx";
+  }
 
   if (strokeLookupAttempts > strokeLookupAttemptsLimit) { return ['', strokes, stroke]; }
 
