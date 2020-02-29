@@ -1,5 +1,6 @@
 import {
   chooseOutlineForPhrase,
+  createStrokeHintForPhrase,
   generateListOfWordsAndStrokes,
   rankOutlines
 } from './transformingDictionaries';
@@ -63,8 +64,25 @@ let globalLookupDictionary = new Map([
   ["title", [["TAOEULT", "typey-type.json"]]],
   ["learn", [["HRERPB", "typey-type.json"]]],
   ["oh{,}", [["OERBGS", "typey-type.json"]]],
-  ["{,}like{,}", [["HRAO*EUBG", "typey-type.json"]]]
+  ["{,}like{,}", [["HRAO*EUBG", "typey-type.json"]]],
+  ["farmer", [["TPAR/PHER", "typey-type.json"]]]
 ]);
+
+describe('create stroke hint for phrase', () => {
+  describe('returns string showing all the space or slash separated strokes to write a whole phrase', () => {
+    it('showing "KPA/AEU KPA/TPAR/PHER" for "A Farmer"', () => {
+      let wordOrPhraseMaterial = "A Farmer";
+
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/AEU KPA/TPAR/PHER");
+    });
+
+    it('showing "*EU/TP*P/A*/R*/PH*/*E/R*" for "iFarmer"', () => {
+      let wordOrPhraseMaterial = "iFarmer";
+
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("*EU/TP*P/A*/R*/PH*/*E/R*");
+    });
+  });
+});
 
 describe('choose outline for phrase', () => {
   describe('returns array of chosen outline and number of lookup attempts', () => {
@@ -81,7 +99,7 @@ describe('choose outline for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "P*ERS", 0 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "P*ERS", 1 ]);
     });
 
     // it('1-BGS for {^}{#F1}{^}', () => {
@@ -105,7 +123,7 @@ describe('choose outline for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KHR-PB", 0 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KHR-PB", 1 ]);
     });
 
     it('{^}^{^} with "KR-RT" for caret with suppressed spaces', () => {
@@ -113,7 +131,7 @@ describe('choose outline for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KR-RT", 0 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KR-RT", 1 ]);
     });
 
     it('{^}({^} with "PREPB" for opening parenthesis', () => {
@@ -121,7 +139,7 @@ describe('choose outline for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PREPB", 0 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PREPB", 1 ]);
     });
 
     // THIS is what it ought to do with the strokes above but we're brute forcing single-letter
@@ -131,7 +149,7 @@ describe('choose outline for phrase', () => {
     //   let chosenStroke = "";
     //   let strokeLookupAttempts = 0;
 
-    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "P*PB", 0 ]);
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "P*PB", 1 ]);
     // });
 
     // it('for trademark symbol', () => {
@@ -147,7 +165,7 @@ describe('choose outline for phrase', () => {
     //   let chosenStroke = "";
     //   let strokeLookupAttempts = 0;
 
-    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHRORB", 0 ]);
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHRORB", 1 ]);
     // });
 
     it('for dollar with suppressed trailing space should match ${^}', () => {
@@ -155,7 +173,7 @@ describe('choose outline for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TK-PL", 0 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TK-PL", 1 ]);
     });
 
     it('for hash with suppressed trailing space', () => {
@@ -163,7 +181,7 @@ describe('choose outline for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HAERB", 0 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HAERB", 1 ]);
     });
 
     it('for left angle bracket with suppressed space', () => {
@@ -171,7 +189,7 @@ describe('choose outline for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PWRABG", 0 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PWRABG", 1 ]);
     });
 
     // describe('for left angle bracket with space, not suppressed', () => {
@@ -243,10 +261,10 @@ describe('generate dictionary entries', () => {
 
     expect(generateListOfWordsAndStrokes(wordList, globalLookupDictionary)).toEqual(
       [
-        {phrase: "a", stroke: "A*"},
-        {phrase: "A", stroke: "A*P"},
+        {phrase: "a", stroke: "AEU"},
+        {phrase: "A", stroke: "KPA/AEU"},
         {phrase: "i", stroke: "*EU"},
-        {phrase: "I", stroke: "*EUP"},
+        {phrase: "I", stroke: "EU"},
         {phrase: " ", stroke: "S-P"},
         {phrase: "?", stroke: "H-F"},
         {phrase: "address", stroke: "A/TKRES"},

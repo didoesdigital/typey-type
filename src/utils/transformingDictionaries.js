@@ -2439,6 +2439,7 @@ export {
   addOutlinesToWordsInCombinedDict,
   chooseOutlineForPhrase,
   combineValidDictionaries,
+  createStrokeHintForPhrase,
   createAGlobalLookupDictionary,
   generateListOfWordsAndStrokes,
   getListOfValidDictionariesImportedAndInConfig,
