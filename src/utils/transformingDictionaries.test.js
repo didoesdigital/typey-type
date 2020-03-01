@@ -96,6 +96,18 @@ describe('create stroke hint for phrase', () => {
 
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("T KPA/K-PBT");
     });
+
+    it('show full word hints for a phrase of 12 words', () => {
+      let wordOrPhraseMaterial = "a a a a a a a a a a a a";
+
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU");
+    });
+
+    it('show hints for first 12 words of longer phrase', () => {
+      let wordOrPhraseMaterial = "a a a a a a a a a a a a a a";
+
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU xxx");
+    });
   });
 });
 
