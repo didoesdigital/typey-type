@@ -65,7 +65,10 @@ let globalLookupDictionary = new Map([
   ["learn", [["HRERPB", "typey-type.json"]]],
   ["oh{,}", [["OERBGS", "typey-type.json"]]],
   ["{,}like{,}", [["HRAO*EUBG", "typey-type.json"]]],
-  ["farmer", [["TPAR/PHER", "typey-type.json"]]]
+  ["farmer", [["TPAR/PHER", "typey-type.json"]]],
+  ["it", [["T", "typey-type.json"]]],
+  ["can", [["K", "typey-type.json"]]],
+  ["can't", [["K-PBT", "typey-type.json"]]]
 ]);
 
 describe('create stroke hint for phrase', () => {
@@ -80,6 +83,12 @@ describe('create stroke hint for phrase', () => {
       let wordOrPhraseMaterial = "iFarmer";
 
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("*EU/TP*P/A*/R*/PH*/*E/R*");
+    });
+
+    it('show full word hints for a phrase containing a word with an apostrophe', () => {
+      let wordOrPhraseMaterial = "it can't";
+
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("T K-PBT");
     });
   });
 });
