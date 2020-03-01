@@ -2158,11 +2158,6 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
   let strokeLookupAttempts = 0;
   [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(wordOrPhraseMaterial, globalLookupDictionary, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
 
-  // First check for exact matching stroke:
-  if (stroke && stroke.length > 0 && !stroke === "xxx") {
-    strokes = stroke;
-  }
-
   while (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
     // Arbitrary limit to prevent making Typey Type slow from excess look ups and
     // avoid possible infinite loops
