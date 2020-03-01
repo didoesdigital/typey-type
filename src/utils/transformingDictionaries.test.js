@@ -68,7 +68,11 @@ let globalLookupDictionary = new Map([
   ["farmer", [["TPAR/PHER", "typey-type.json"]]],
   ["it", [["T", "typey-type.json"]]],
   ["can", [["K", "typey-type.json"]]],
-  ["can't", [["K-PBT", "typey-type.json"]]]
+  ["can't", [["K-PBT", "typey-type.json"]]],
+  ["long", [["HROPBG", "typey-type.json"]]],
+  // ["buffet", [["PWUF/ET", "typey-type.json"]]],
+  ["wandering", [["WAPBGD", "typey-type.json"],["WAPB/TKER/-G", "typey-type.json"]]], // currently pre-sorted to best stroke first
+  ["lodge", [["HROPBLG", "typey-type.json"]]]
 ]);
 
 describe('create stroke hint for phrase', () => {
@@ -242,6 +246,54 @@ describe('choose outline for phrase', () => {
 
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HRAO*EUBG", 1 ]);
     });
+
+    it('with long', () => {
+      let wordOrPhrase = "long";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBG", 1 ]);
+    });
+
+    it('with longing', () => {
+      let wordOrPhrase = "longing";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBG/-G", 1 ]);
+    });
+
+    // it('with multiple suffixes', () => {
+    //   let wordOrPhrase = "buffetings";
+    //   let chosenStroke = "";
+    //   let strokeLookupAttempts = 0;
+
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PWUF/ET/-G/-S", 1 ]);
+    // });
+
+    it('with WAPBGD/-S for wanderings', () => {
+      let wordOrPhrase = "wanderings";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "WAPBGD/-S", 1 ]);
+    });
+
+    // it('with orthography rule to replace e with ing', () => {
+    //   let wordOrPhrase = "lodging";
+    //   let chosenStroke = "";
+    //   let strokeLookupAttempts = 0;
+
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBLG/-G", 1 ]);
+    // });
+
+    // it('with orthography rule to replace e with ing and append an s', () => {
+    //   let wordOrPhrase = "lodgings";
+    //   let chosenStroke = "";
+    //   let strokeLookupAttempts = 0;
+
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBLG/-G/-S", 1 ]);
+    // });
   });
 });
 
