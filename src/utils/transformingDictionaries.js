@@ -2078,18 +2078,19 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   }
 
 
+  // rexxx => RE/xxx
   // xxxing => xxx/-G
   if (!chosenStroke) {
     let prefixTranslation = '';
-    for (let i = 0; i < PREFIXES.length; i++) {
+    let i = 0;
+    while (i < PREFIXES_LENGTH && !chosenStroke) {
       if (wordOrPhrase.startsWith(PREFIXES[i][1])) {
-        if (!chosenStroke) { // FIXME: we want to exit the loop early if we find a match
-          prefixTranslation = PREFIXES[i][1];
-          let regex = new RegExp('^' + prefixTranslation + '');
-          let lookupEntry = globalLookupDictionary.get(wordOrPhrase.replace(regex, ''));
-          if (lookupEntry) { chosenStroke = PREFIXES[i][0] + lookupEntry[0][0]; }
-        }
+        prefixTranslation = PREFIXES[i][1];
+        let regex = new RegExp('^' + prefixTranslation + '');
+        let lookupEntry = globalLookupDictionary.get(wordOrPhrase.replace(regex, ''));
+        if (lookupEntry) { chosenStroke = PREFIXES[i][0] + lookupEntry[0][0]; }
       }
+      i++;
     }
     if (wordOrPhrase.endsWith("ing")) {
       let suffix = "/-G";
