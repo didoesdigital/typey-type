@@ -2150,6 +2150,7 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
 
       // Check for exact matches for remaining words like "can't" in the phrase "it can't" to do an exact match check before breaking on whitespace or splitting on punctuation
       if (stroke === "xxx") {
+        // eslint-disable-next-line
         let _ = null; // this lookup attempt is a freebie
         [stroke, _] = chooseOutlineForPhrase(remainingWordOrPhrase, globalLookupDictionary, stroke, strokeLookupAttempts);
         let lookupEntry = globalLookupDictionary.get(remainingWordOrPhrase);
