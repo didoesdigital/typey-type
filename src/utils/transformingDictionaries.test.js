@@ -65,6 +65,7 @@ let globalLookupDictionary = new Map([
   ["learn", [["HRERPB", "typey-type.json"]]],
   ["oh{,}", [["OERBGS", "typey-type.json"]]],
   ["{,}like{,}", [["HRAO*EUBG", "typey-type.json"]]],
+  ["lent", [["HREPBT", "typey-type.json"]]],
   ["farmer", [["TPAR/PHER", "typey-type.json"]]],
   ["it", [["T", "typey-type.json"]]],
   ["can", [["K", "typey-type.json"]]],
@@ -245,6 +246,14 @@ describe('choose outline for phrase', () => {
       let strokeLookupAttempts = 0;
 
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HRAO*EUBG", 1 ]);
+    });
+
+    it('with a prefix', () => {
+      let wordOrPhrase = "relent";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "RE/HREPBT", 1 ]);
     });
 
     it('with long', () => {
