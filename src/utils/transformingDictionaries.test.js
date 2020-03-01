@@ -90,6 +90,12 @@ describe('create stroke hint for phrase', () => {
 
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("T K-PBT");
     });
+
+    it('show full word hints for a phrase containing a word with an apostrophe and capitalisation', () => {
+      let wordOrPhraseMaterial = "it Can't";
+
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("T KPA/K-PBT");
+    });
   });
 });
 
