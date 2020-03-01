@@ -2078,9 +2078,8 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   }
 
 
-  // rexxx => RE/xxx
-  // xxxing => xxx/-G
   if (!chosenStroke) {
+    // rexxx => RE/xxx
     let prefixTranslation = '';
     let i = 0;
     while (i < PREFIXES_LENGTH && !chosenStroke) {
@@ -2093,6 +2092,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
       i++;
     }
 
+    // xxxing => xxx/-G
     let suffixTranslation = '';
     let j = 0;
     while (j < SUFFIXES_LENGTH && !chosenStroke) {
@@ -2101,6 +2101,13 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
         let regex = new RegExp('' + suffixTranslation + '$');
         let lookupEntry = globalLookupDictionary.get(wordOrPhrase.replace(regex, ''));
         if (lookupEntry) { chosenStroke = lookupEntry[0][0] + SUFFIXES[j][0]; }
+
+        // xxxing => xxe/-G
+        if (!lookupEntry && wordOrPhrase.endsWith("ing")) {
+          suffixTranslation = ["/-G", "ing"];
+          lookupEntry = globalLookupDictionary.get(wordOrPhrase.replace(/ing$/, 'e'));
+          if (lookupEntry) { chosenStroke = lookupEntry[0][0] + SUFFIXES[j][0]; }
+        }
       }
       j++;
     }
