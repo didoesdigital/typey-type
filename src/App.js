@@ -197,6 +197,7 @@ const fallbackLesson = {
 
 let globalDictionaryLoading = false;
 let loadingPromise = null;
+let isGlobalDictionaryUpToDate = null;
 
 class App extends Component {
   constructor(props) {
@@ -337,13 +338,29 @@ class App extends Component {
     });
   }
 
-  fetchAndSetupGlobalDict() {
-    if (loadingPromise) {
+  fetchAndSetupGlobalDict(withPlover) {
+    // FIXME: This is a heuristic for checking if the Typey Type or Plover dictionaries have loaded.
+    // This approach is fragile and definitely won't work for personal dictionaries.
+    // TODO: Check if the latest global dictionary matches the latest dictionary config.
+    if (withPlover && this.state.globalLookupDictionary && this.state.globalLookupDictionary.size > 100000) {
+      isGlobalDictionaryUpToDate = true;
+    }
+    else if (withPlover) {
+      isGlobalDictionaryUpToDate = false;
+    }
+    else if (!withPlover && this.state.globalLookupDictionary && this.state.globalLookupDictionary.size > 70000) {
+      isGlobalDictionaryUpToDate = true;
+    }
+    else {
+      isGlobalDictionaryUpToDate = false;
+    }
+
+    if (loadingPromise && isGlobalDictionaryUpToDate) {
       return loadingPromise;
     }
     else {
       globalDictionaryLoading = true;
-      loadingPromise = Promise.all([getTypeyTypeDict(), getLatestPloverDict()]).then(data => {
+      loadingPromise = Promise.all([getTypeyTypeDict(), withPlover ? getLatestPloverDict() : {}]).then(data => {
         let [dictAndMisstrokes, latestPloverDict] = data;
         // let t0 = performance.now();
         // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
@@ -353,6 +370,7 @@ class App extends Component {
         // let t1 = performance.now();
         // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
 
+        isGlobalDictionaryUpToDate = true;
         this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
         this.setState({ globalLookupDictionaryLoaded: true });
       });
@@ -854,7 +872,7 @@ class App extends Component {
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.state.userSettings) { stenoLayout = this.state.userSettings.stenoLayout; }
 
-    this.fetchAndSetupGlobalDict().then(() => {
+    this.fetchAndSetupGlobalDict(false).then(() => {
       // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWords).join("\n");
       // parseWordList appears to remove empty lines and other garbage, we might not need it here
@@ -1394,7 +1412,7 @@ class App extends Component {
           !path.includes("suffixes") &&
           !path.includes("steno-party-tricks")
         ) {
-          this.fetchAndSetupGlobalDict().then(() => {
+          this.fetchAndSetupGlobalDict(false).then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
               lesson.presentedMaterial = lessonWordsAndStrokes;

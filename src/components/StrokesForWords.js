@@ -27,7 +27,7 @@ class StrokesForWords extends Component {
 
   componentDidMount() {
     // if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
-      this.props.fetchAndSetupGlobalDict().then(() => {
+      this.props.fetchAndSetupGlobalDict(true).then(() => {
         if (this.props.lookupTerm && this.props.lookupTerm !== undefined && this.props.lookupTerm.length > 0) {
           this.setState({phrase: this.props.lookupTerm});
           this.updateWordsForStrokes(this.props.lookupTerm);

@@ -29,7 +29,7 @@ class CustomLessonSetup extends Component {
     }
 
     if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
-      this.props.fetchAndSetupGlobalDict()
+      this.props.fetchAndSetupGlobalDict(false)
         .catch(error => {
           console.error(error);
           // this.showDictionaryErrorNotification();
