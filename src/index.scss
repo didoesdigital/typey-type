@@ -46,15 +46,16 @@ $small-breakpoint: 432px;
 // $extra-small-breakpoint: 336px;
 $outline-shorthand: $brand-highlight auto 5px;
 
-$z-index-modal-overlay: 6;
-$z-index-particles: 5;
-$z-index-autocomplete-menu: 4;
-$z-index-vertical-text: 3;
-$z-index-revision-mode-button: 2;
-$z-index-show-scores-control: 2;
-$z-index-fill-fade-edges: 1;
+$z-index-modal-overlay: 7;
+$z-index-particles: 6;
+$z-index-autocomplete-menu: 5;
+$z-index-vertical-text: 4;
+$z-index-revision-mode-button: 3;
+$z-index-show-scores-control: 3;
+$z-index-fill-fade-edges: 2;
 $z-index-successfully-typed-text: -1;
-$z-index-skip-to-main-link: 1;
+$z-index-skip-to-main-link: 2;
+$z-index-unknown-steno-diagram-text: 1;
 $link-button-height: 2.5rem;
 $link-button-width: 2.5rem;
 $link-button-large-width: 3rem;
@@ -1470,6 +1471,25 @@ label {
 //   // }
 // }
 
+.unknown-steno-diagram {
+  position: relative;
+
+  svg {
+    opacity: 0.3;
+  }
+
+  &::before {
+    content: '(unknown)';
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding-top: 16px;
+    text-align: center;
+    text-shadow: 0 0 4px white;
+    z-index: $z-index-unknown-steno-diagram-text;
+  }
+}
+
 .steno-stroke {
   font-family: $type-face--mono;
   background-color: desaturate(add-tint($brand-primary, 5%), 40%);
@@ -1534,14 +1554,6 @@ label {
 }
 
 .stroke-tip {
-  color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
-  &:hover {
-    color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
-  }
-  &:active, &:focus {
-    color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
-  }
-
   margin-bottom: 0.5em;
   margin-left: calc(50% - #{$left-offset-for-zipper + 0.55em});
   padding-right: calc(50% - 9.5em); // avoid fill-fade edge
@@ -1554,9 +1566,17 @@ label {
   @media (max-width: 736px) {
     margin-left: 0;
   }
-
 }
+
 .stroke-tip__label {
+  color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
+  &:hover {
+    color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
+  }
+  &:active, &:focus {
+    color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
+  }
+
   text-decoration: underline;
   &:focus-within {
     color: adjust-hue(add-shade($brand-primary, 10%), -45deg);

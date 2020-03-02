@@ -229,6 +229,7 @@ class Lesson extends Component {
               {this.props.userSettings.showStrokesAsDiagrams && strokes.map((strokeToDraw, index) =>
                 <React.Fragment key={index}>
                   {(Object.values(mapBriefsFunction(strokeToDraw)).some(item => item)) && <div className="mt1 mr2"><StenoLayoutDiagram id={'diagramID-' + index + '-' + strokeToDraw} {...mapBriefsFunction(strokeToDraw)} brief={strokeToDraw} /></div> }
+                  {(Object.values(mapBriefsFunction(strokeToDraw)).every(item => !item)) && <div className="mt1 mr2 unknown-steno-diagram" aria-hidden={true}><StenoLayoutDiagram id={'diagramID-' + index + '-' + strokeToDraw} {...mapBriefsFunction('')} brief='' /></div> }
                 </React.Fragment>
               )}
             </div>

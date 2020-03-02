@@ -1232,7 +1232,7 @@ label {
   overflow: auto;
   padding: 2px 0;
   position: fixed;
-  z-index: 4; }
+  z-index: 5; }
 
 .autocomplete-highlight {
   background-color: #FFD073; }
@@ -1333,7 +1333,7 @@ label {
   letter-spacing: 0.05em;
   padding-right: 24px;
   text-transform: uppercase;
-  z-index: 2; }
+  z-index: 3; }
   .revision-mode-button:visited {
     color: #3f264e; }
   .revision-mode-button:hover {
@@ -1364,6 +1364,20 @@ label {
 .hide-recommendation-link:focus {
   color: #202549;
   opacity: 1; }
+
+.unknown-steno-diagram {
+  position: relative; }
+  .unknown-steno-diagram svg {
+    opacity: 0.3; }
+  .unknown-steno-diagram::before {
+    content: '(unknown)';
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding-top: 16px;
+    text-align: center;
+    text-shadow: 0 0 4px white;
+    z-index: 1; }
 
 .steno-stroke {
   font-family: "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
@@ -1419,17 +1433,12 @@ label {
   pointer-events: none; }
 
 .stroke-tip {
-  color: #596091;
   margin-bottom: 0.5em;
   margin-left: calc(50% - 20.55em);
   padding-right: calc(50% - 9.5em);
   text-align: left;
   transform: translateX(10px);
   width: 100%; }
-  .stroke-tip:hover {
-    color: #9193a8; }
-  .stroke-tip:active, .stroke-tip:focus {
-    color: #202549; }
   @media (min-width: 1024px) {
     .stroke-tip {
       min-width: 960px; } }
@@ -1438,7 +1447,12 @@ label {
       margin-left: 0; } }
 
 .stroke-tip__label {
+  color: #596091;
   text-decoration: underline; }
+  .stroke-tip__label:hover {
+    color: #9193a8; }
+  .stroke-tip__label:active, .stroke-tip__label:focus {
+    color: #202549; }
   .stroke-tip__label:focus-within {
     color: #202549;
     outline: #FFD073 auto 5px; }
@@ -1541,7 +1555,7 @@ label {
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
-  z-index: 1; }
+  z-index: 2; }
   .skip-to-main-link:focus, .skip-to-main-link:active {
     position: absolute;
     height: initial;
@@ -1562,7 +1576,7 @@ label {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1; }
+  z-index: 2; }
   @media (min-width: 768px) {
     .fill-fade-edges {
       background-image: linear-gradient(to right, #f9f8fa 0%, #f9f8fa 5%, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0) 90%, #f9f8fa 95%, #f9f8fa 100%); } }
@@ -1742,7 +1756,7 @@ small .svg-icon-wrapper.svg-baseline svg {
 .text-vertical {
   position: absolute;
   writing-mode: vertical-rl;
-  z-index: 3; }
+  z-index: 4; }
 
 .strapline {
   display: none; }
@@ -1901,7 +1915,7 @@ small .svg-icon-wrapper.svg-baseline svg {
   margin: 16px;
   text-transform: uppercase;
   text-decoration: none;
-  z-index: 2; }
+  z-index: 3; }
   .show-scores-control:hover {
     color: #596091; }
 
@@ -1983,7 +1997,7 @@ small .svg-icon-wrapper.svg-baseline svg {
   padding-right: 16px; }
 
 .celebration-canvas {
-  z-index: 5; }
+  z-index: 6; }
 
 .todays-effort-goal-robot svg {
   height: 100%;
@@ -2031,7 +2045,7 @@ small .svg-icon-wrapper.svg-baseline svg {
   background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
   transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  z-index: 6; }
+  z-index: 7; }
 
 .modal__overlay--after-open {
   opacity: 1; }
