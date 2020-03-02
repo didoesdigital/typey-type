@@ -1066,7 +1066,6 @@ const SUFFIXES = [
   ["/EPBZ/PAOEUPB", "enzepine"],
   ["/ERPBLG/EUBG", "ergic"],
   ["/ERS", "ers"],
-  ["/ES", "es"],
   ["/ES/EPBT", "escent"],
   ["/ES/KEU", "eski"],
   ["/ET", "et"],
@@ -1778,7 +1777,8 @@ const SUFFIXES = [
   ["/W-RBGZ", "-W"],
   ["/WAO*EBG", "-week"],
   ["/WAO*EUD", "-wide"],
-  ["/WAO*EUS", "-wise"]
+  ["/WAO*EUS", "-wise"],
+  ["/ES", "es"]
   // ["/*PBS", "iness"],
   // ["/*S", "s"],
   // ["/-SZ", "s"],
