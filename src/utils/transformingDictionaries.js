@@ -1,4 +1,5 @@
 // Some prefix and suffix entries are commented out because they are alternative strokes for prefix/suffix translations and the preferred stroke already exists.
+// Keeping entries uncommented out improves the chances of finding a valid dictionary entry. To ensure "preferred" strokes are used where possible, sort the arrays.
 const PREFIXES = [
   ["*EBGS/TRA/", "extra"],
   ["*EFR/", "every"],
@@ -2101,13 +2102,6 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
         let regex = new RegExp('' + suffixTranslation + '$');
         let lookupEntry = globalLookupDictionary.get(wordOrPhrase.replace(regex, ''));
         if (lookupEntry) { chosenStroke = lookupEntry[0][0] + SUFFIXES[j][0]; }
-
-        // xxxing => xxe/-G
-        if (!lookupEntry && wordOrPhrase.endsWith("ing")) {
-          suffixTranslation = ["/-G", "ing"];
-          lookupEntry = globalLookupDictionary.get(wordOrPhrase.replace(/ing$/, 'e'));
-          if (lookupEntry) { chosenStroke = lookupEntry[0][0] + SUFFIXES[j][0]; }
-        }
       }
       j++;
     }

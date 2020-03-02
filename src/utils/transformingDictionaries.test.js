@@ -73,6 +73,7 @@ let globalLookupDictionary = new Map([
   ["can't", [["K-PBT", "typey-type.json"]]],
   ["long", [["HROPBG", "typey-type.json"]]],
   ["narrate", [["TPHAR/AEUT", "typey-type.json"]]],
+  ["seethe", [["SAO*ET", "typey-type.json"]]],
   // ["buffet", [["PWUF/ET", "typey-type.json"]]],
   ["wandering", [["WAPBGD", "typey-type.json"],["WAPB/TKER/-G", "typey-type.json"]]], // currently pre-sorted to best stroke first
   ["lodge", [["HROPBLG", "typey-type.json"]]]
@@ -298,28 +299,45 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "WAPBGD/-S", 1 ]);
     });
 
-    it('with orthography rule to replace e with ing', () => {
-      let wordOrPhrase = "narrating";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+    // it('with orthography rule to replace e with ing', () => {
+    //   let wordOrPhrase = "seething";
+    //   let chosenStroke = "";
+    //   let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHAR/AEUT/-G", 1 ]);
-    });
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "SAO*ET/-G", 1 ]);
+    // });
+
+    // it('with fingerspelling for a mistyped orthography rule to replace e with ing', () => {
+    //   let wordOrPhrase = "seetheing";
+    //   let chosenStroke = "";
+    //   let strokeLookupAttempts = 0;
+
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "S*/*E/*E/T*/H*/*E/*EU/TPH*/TKPW*", 1 ]);
+    // });
+
+    // it('with orthography rule to replace e with ing', () => {
+    //   let wordOrPhrase = "narrating";
+    //   let chosenStroke = "";
+    //   let strokeLookupAttempts = 0;
+
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHAR/AEUT/-G", 1 ]);
+    // });
+
+    // it('with orthography rule to replace e with ing', () => {
+    //   let wordOrPhrase = "lodging";
+    //   let chosenStroke = "";
+    //   let strokeLookupAttempts = 0;
+
+    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBLG/-G", 1 ]);
+    // });
 
     // it('with orthography rule to replace e with ing and append an s', () => {
     //   let wordOrPhrase = "lodgings";
     //   let chosenStroke = "";
     //   let strokeLookupAttempts = 0;
-    it('with orthography rule to replace e with ing', () => {
-      let wordOrPhrase = "lodging";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
 
     //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBLG/-G/-S", 1 ]);
     // });
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBLG/-G", 1 ]);
-    });
-
   });
 });
 
