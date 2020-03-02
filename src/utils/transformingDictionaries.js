@@ -1892,7 +1892,12 @@ const FINGERSPELLED_LETTERS = {
   "%": "P*ERS",
   "+": "PHR*US",
   "\\": "SPWHRAERB",
-  "\"": "KWR-GS",
+  "\"": "KR-GS",
+  // "\"": "KWR-GS",
+  // "{^\"}": "KR-GS",
+  // "{\"^}": "KW-GS",
+  // "{^~|\"}": "KR-GS",
+  // "{~|\"^}": "KW-GS",
   " ": "S-P",
   "1": "1",
   "2": "2",
@@ -2240,6 +2245,21 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
       }
     }
   }
+
+  // FIXME: this is a brute force approach that will have unintended consequences and fail to catch scenarios it should e.g. if you use personal dictionaries without H-F this will be confusing
+  if (strokes.startsWith("KR-GS KPA/")) {
+    strokes = strokes.replace("KR-GS KPA/", "KW-GS KPA*/");
+  }
+  if (strokes.includes(" KWEZ")) {
+    strokes = strokes.replace("KWEZ", "H-F");
+  }
+  if (strokes.includes(" PR-D")) {
+    strokes = strokes.replace(" PR-D", " TP-PL");
+  }
+  if (strokes.endsWith(" P-P")) {
+    strokes = strokes.replace(" P-P", " TP-PL");
+  }
+
   return strokes;
 }
 

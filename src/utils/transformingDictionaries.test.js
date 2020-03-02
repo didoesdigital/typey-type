@@ -34,7 +34,10 @@ let globalLookupDictionary = new Map([
   ["I", [["EU", "typey-type.json"]]],
   ["{^ ^}", [["S-P", "typey-type.json"]]],
   ["{?}", [["H-F", "typey-type.json"]]],
+  ["?", [["KWEZ", "typey-type.json"]]],
   ["{,}", [["KW-BG", "typey-type.json"]]],
+  ["{.}", [["TP-PL", "typey-type.json"]]],
+  [".", [["PR-D", "typey-type.json"]]],
   ["Tom", [["TOPL", "typey-type.json"]]],
   ["heather", [["H*ET/*ER", "typey-type.json"]]],
   ["Tuesday", [["TAOUZ", "typey-type.json"]]],
@@ -68,9 +71,13 @@ let globalLookupDictionary = new Map([
   ["lent", [["HREPBT", "typey-type.json"]]],
   ["scroll", [["SKROL", "typey-type.json"]]],
   ["farmer", [["TPAR/PHER", "typey-type.json"]]],
+  ['{^~|\"}', [["KR-GS", "typey-type.json"]]],
+  ['{~|\"^}', [["KW-GS", "typey-type.json"]]],
   ["it", [["T", "typey-type.json"]]],
   ["can", [["K", "typey-type.json"]]],
   ["can't", [["K-PBT", "typey-type.json"]]],
+  ["houses", [["HO*UFS", "typey-type.json"]]],
+  ["her", [["HER", "typey-type.json"]]],
   ["long", [["HROPBG", "typey-type.json"]]],
   ["narrate", [["TPHAR/AEUT", "typey-type.json"]]],
   ["seethe", [["SAO*ET", "typey-type.json"]]],
@@ -83,38 +90,52 @@ describe('create stroke hint for phrase', () => {
   describe('returns string showing all the space or slash separated strokes to write a whole phrase', () => {
     it('showing "KPA/AEU KPA/TPAR/PHER" for "A Farmer"', () => {
       let wordOrPhraseMaterial = "A Farmer";
-
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/AEU KPA/TPAR/PHER");
     });
 
     it('showing "*EU/TP*P/A*/R*/PH*/*E/R*" for "iFarmer"', () => {
       let wordOrPhraseMaterial = "iFarmer";
-
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("*EU/TP*P/A*/R*/PH*/*E/R*");
     });
 
     it('show full word hints for a phrase containing a word with an apostrophe', () => {
       let wordOrPhraseMaterial = "it can't";
-
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("T K-PBT");
     });
 
     it('show full word hints for a phrase containing a word with an apostrophe and capitalisation', () => {
       let wordOrPhraseMaterial = "it Can't";
-
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("T KPA/K-PBT");
     });
 
     it('show full word hints for a phrase of 12 words', () => {
       let wordOrPhraseMaterial = "a a a a a a a a a a a a";
-
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU");
     });
 
     it('show hints for first 12 words of longer phrase', () => {
       let wordOrPhraseMaterial = "a a a a a a a a a a a a a a";
-
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU xxx");
+    });
+
+    it('with preceding double quotes and capital letter', () => {
+      let wordOrPhraseMaterial = '"It';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KW-GS KPA*/T");
+    });
+
+    it('with preceding double quotes and capital letter', () => {
+      let wordOrPhraseMaterial = 'houses?" It';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HO*UFS H-F KR-GS KPA/T");
+    });
+
+    it('with trailing question mark', () => {
+      let wordOrPhraseMaterial = 'houses?';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HO*UFS H-F");
+    });
+
+    it('with trailing full stop', () => {
+      let wordOrPhraseMaterial = 'her.';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HER TP-PL");
     });
   });
 });
