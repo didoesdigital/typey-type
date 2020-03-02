@@ -74,6 +74,9 @@ let globalLookupDictionary = new Map([
   ['{^~|\"}', [["KR-GS", "typey-type.json"]]],
   ['{~|\"^}', [["KW-GS", "typey-type.json"]]],
   ["it", [["T", "typey-type.json"]]],
+  ["be", [["-B", "typey-type.json"]]],
+  ["{be^}", [["BE", "typey-type.json"]]],
+  ["kettle", [["KET/*L", "typey-type.json"]]],
   ["can", [["K", "typey-type.json"]]],
   ["can't", [["K-PBT", "typey-type.json"]]],
   ["houses", [["HO*UFS", "typey-type.json"]]],
@@ -131,6 +134,21 @@ describe('create stroke hint for phrase', () => {
     it('with trailing question mark', () => {
       let wordOrPhraseMaterial = 'houses?';
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HO*UFS H-F");
+    });
+
+    it('with word that is a prefix and a word as a word with trailing punctuation', () => {
+      let wordOrPhraseMaterial = 'be?';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("-B H-F");
+    });
+
+    it('with word that is a prefix and a word as a word with multiple trailing punctuation', () => {
+      let wordOrPhraseMaterial = "be?'";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("-B H-F AE");
+    });
+
+    it('with word that is a prefix and a word as a prefix to a word', () => {
+      let wordOrPhraseMaterial = "bekettle";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PWE/KET/*L");
     });
 
     it('with trailing full stop', () => {

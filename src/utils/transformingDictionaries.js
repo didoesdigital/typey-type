@@ -2093,7 +2093,8 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
         prefixTranslation = PREFIXES[i][1];
         let regex = new RegExp('^' + prefixTranslation + '');
         let lookupEntry = globalLookupDictionary.get(wordOrPhrase.replace(regex, ''));
-        if (lookupEntry) { chosenStroke = PREFIXES[i][0] + lookupEntry[0][0]; }
+        let hardCodedFixForQuestionMark = !(wordOrPhrase.replace(regex, '') === "?");
+        if (lookupEntry && hardCodedFixForQuestionMark) { chosenStroke = PREFIXES[i][0] + lookupEntry[0][0]; }
       }
       i++;
     }
