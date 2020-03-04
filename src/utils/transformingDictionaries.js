@@ -2122,6 +2122,28 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   return [chosenStroke, strokeLookupAttempts];
 }
 
+function tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts) {
+  let compoundWordFirstWord = compoundWordParts[0];
+  let compoundWordSecondWord = compoundWordParts[1];
+
+  [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordFirstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // "store" => ["STOR", 3]
+
+  if (stroke && stroke.length > 0 && stroke !== "xxx") {
+    strokes = strokes === "" ? stroke + " H-PB" : strokes + " " + stroke + " H-PB";
+    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordSecondWord, globalLookupDictionary, stroke, strokeLookupAttempts); // "room"
+
+    if (stroke && stroke.length > 0 && stroke !== "xxx") {
+      strokes = strokes + " " + stroke;
+      remainingWordOrPhrase = '';
+      stroke = "xxx";
+    }
+    else {
+      remainingWordOrPhrase = compoundWordSecondWord;
+    }
+  }
+  return [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts];
+}
+
 function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, globalLookupDictionary, strokes, stroke, strokeLookupAttempts) {
   // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
 
@@ -2190,6 +2212,8 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
         }
       }
 
+      let compoundWordParts = remainingWordOrPhrase.split("-");
+
       // If we've found a matching stroke for the last remaining word, add the stroke to the hint and remove the word
       if (stroke && stroke.length > 0 && !(stroke === "xxx")) {
         strokes = strokes === "" ? stroke : strokes + " " + stroke;
@@ -2204,6 +2228,15 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
 
         [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // "off"
 
+
+        // if whitespace broken phrase does not exactly match and there is exactly 1 hyphen, it's probably a compound word e.g. "store-room"
+        let compoundWordParts = firstWord.split("-");
+
+        if (stroke === "xxx" && compoundWordParts && compoundWordParts.length === 2) {
+          [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(firstWord, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
+          stroke = "xxx";
+        }
+
         // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
         if (stroke === "xxx" && (firstWord.match(punctuationSplittingRegex) !== null)) { // "man!"
           let tmpRemainingWordOrPhrase = '';
@@ -2216,6 +2249,11 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
           strokes = strokes === "" ? stroke : strokes + " " + stroke;
           stroke = "xxx";
         }
+      }
+      else if (stroke === "xxx" && compoundWordParts && compoundWordParts.length === 2) {
+        // if whitespace broken phrase does not exactly match and there is exactly 1 hyphen, it's probably a compound word e.g. "store-room"
+        [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
+        stroke = "xxx";
       }
 
       // Break up phrase on punctuation

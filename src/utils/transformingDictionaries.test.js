@@ -16,6 +16,8 @@ let globalLookupDictionary = new Map([
   ["$", [["TPHRORB", "typey-type.json"]]],
   ["--{^}", [["H-PBZ", "typey-type.json"]]],
   ["-{^}", [["H-PBS", "typey-type.json"]]],
+  ["-", [["H*B", "typey-type.json"]]],
+  ["{^-^}", [["H-PB", "typey-type.json"]]],
   ["<a href=\"{^}", [["A/HREF", "plover.json"]]],
   ["Object.{^}", [["O*B/P-P", "react.json"]]],
   ["\\{{^}", [["TPR-BGT", "typey-type.json"]]],
@@ -84,6 +86,13 @@ let globalLookupDictionary = new Map([
   ["long", [["HROPBG", "typey-type.json"]]],
   ["narrate", [["TPHAR/AEUT", "typey-type.json"]]],
   ["seethe", [["SAO*ET", "typey-type.json"]]],
+  ["you", [["U", "typey-type.json"]]],
+  ["store", [["STOR", "typey-type.json"]]],
+  ["room", [["RAOPL", "typey-type.json"]]],
+  ["{^room}", [["RAO*PL", "typey-type.json"]]],
+  ["hit", [["HEUT", "typey-type.json"]]],
+  ["miss", [["PHEUS", "typey-type.json"]]],
+  ["hit-and-miss", [["H-PLS", "typey-type.json"]]],
   // ["buffet", [["PWUF/ET", "typey-type.json"]]],
   ["wandering", [["WAPBGD", "typey-type.json"],["WAPB/TKER/-G", "typey-type.json"]]], // currently pre-sorted to best stroke first
   ["lodge", [["HROPBLG", "typey-type.json"]]]
@@ -149,6 +158,11 @@ describe('create stroke hint for phrase', () => {
     it('with word that is a prefix and a word as a prefix to a word', () => {
       let wordOrPhraseMaterial = "bekettle";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PWE/KET/*L");
+    });
+
+    it('with hyphenated compound word', () => {
+      let wordOrPhraseMaterial = 'store-room';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("STOR H-PB RAOPL");
     });
 
     it('with trailing full stop', () => {
@@ -288,6 +302,14 @@ describe('choose outline for phrase', () => {
       let strokeLookupAttempts = 0;
 
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HRAO*EUBG", 1 ]);
+    });
+
+    it('with a hyphenated phrase', () => {
+      let wordOrPhrase = "hit-and-miss";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "H-PLS", 1 ]);
     });
 
     it('with a prefix', () => {
