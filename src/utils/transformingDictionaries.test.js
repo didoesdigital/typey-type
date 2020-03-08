@@ -133,9 +133,29 @@ describe('create stroke hint for phrase', () => {
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU xxx");
     });
 
+    it('with only punctuation dash', () => {
+      let wordOrPhraseMaterial = '-';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("H-PB");
+    });
+
+    it('with only punctuation at symbol', () => {
+      let wordOrPhraseMaterial = '@';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKWRAT");
+    });
+
     it('with preceding double quotes and capital letter', () => {
       let wordOrPhraseMaterial = '"It';
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KW-GS KPA*/T");
+    });
+
+    it('with preceding exclamation mark and unknown word', () => {
+      let wordOrPhraseMaterial = '!foo';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKHRAPL TP*/O*/O*");
+    });
+
+    it('with and unknown word and trailing exclamation mark', () => {
+      let wordOrPhraseMaterial = 'foo!';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TP*/O*/O* SKHRAPL");
     });
 
     it('with preceding double quotes and capital letter', () => {
