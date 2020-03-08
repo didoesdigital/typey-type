@@ -2182,6 +2182,17 @@ function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, globalLookupDict
   return [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts];
 }
 
+function createFingerspellingStroke(remainingWordOrPhrase) {
+  return [...remainingWordOrPhrase].map(char => {
+    let fingerspelledStroke = '';
+    fingerspelledStroke = FINGERSPELLED_LETTERS[char];
+    if (!fingerspelledStroke) {
+      fingerspelledStroke = "xxx";
+    }
+    return fingerspelledStroke;
+  }).join('/');
+}
+
 function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary) {
   // if (remainingWordOrPhrase === "and! and") { debugger; }
   let remainingWordOrPhrase = wordOrPhraseMaterial;
@@ -2272,14 +2283,7 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
 
           // if all else fails, try fingerspelling
           if (stroke === "xxx") {
-            stroke = [...remainingWordOrPhrase].map(char => {
-              let fingerspelledStroke = '';
-              fingerspelledStroke = FINGERSPELLED_LETTERS[char];
-              if (!fingerspelledStroke) {
-                fingerspelledStroke = "xxx";
-              }
-              return fingerspelledStroke;
-            }).join('/');
+            stroke = createFingerspellingStroke(remainingWordOrPhrase);
           }
 
           remainingWordOrPhrase = '';
