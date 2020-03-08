@@ -2253,15 +2253,18 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
           stroke = "xxx";
         }
       }
-      else if (stroke === "xxx" && compoundWordParts && compoundWordParts.length === 2) {
-        // if whitespace broken phrase does not exactly match and there is exactly 1 hyphen, it's probably a compound word e.g. "store-room"
-        [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
-        stroke = "xxx";
-      }
-
       // Break up phrase on punctuation
       else if (stroke === "xxx" && (remainingWordOrPhrase.match(punctuationSplittingRegex) !== null)) { // "man!"
-        [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(remainingWordOrPhrase, globalLookupDictionary, strokes, stroke, strokeLookupAttempts);
+        if (compoundWordParts && compoundWordParts.length === 2) {
+          // if phrase broken on punctuation does not exactly match and there is exactly 1 hyphen, it's probably a compound word e.g. "store-room"
+          if (remainingWordOrPhrase === "store-room") { debugger; }
+          [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
+          stroke = "xxx";
+        }
+
+        if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0 && stroke === "xxx") {
+          [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(remainingWordOrPhrase, globalLookupDictionary, strokes, stroke, strokeLookupAttempts);
+        }
       }
       else {
         if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
