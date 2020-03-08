@@ -2187,8 +2187,6 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
   for (let i = 0; i < listOfWordsLength; i++) {
     let wordToLookUp = listOfWords[i];
     // 1. Try exact match
-    // eslint-disable-next-line
-    let _ = null; // this lookup attempt is a freebie
     precedingChar = i === 0 ? '' : ' ';
 
     [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(wordToLookUp, globalLookupDictionary, stroke, strokeLookupAttempts, precedingChar);
@@ -2204,8 +2202,6 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
         // 2.1 compound words
         // if there is exactly 1 hyphen in the middle of a word, it's probably a compound word e.g. "store-room"
         if (compoundWordParts && compoundWordParts.length === 2 && compoundWordParts[0] !== "" && compoundWordParts[1] !== "") {
-          // eslint-disable-next-line
-          let _ = null;
           [strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
           stroke = "xxx";
         }
