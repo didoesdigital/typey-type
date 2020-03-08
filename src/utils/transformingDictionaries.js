@@ -2256,6 +2256,9 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
   if (strokes.startsWith("KR-GS KPA/")) {
     strokes = strokes.replace("KR-GS KPA/", "KW-GS KPA*/");
   }
+  if (strokes.startsWith("KW-GS KPA/")) {
+    strokes = strokes.replace("KW-GS KPA/", "KW-GS KPA*/");
+  }
   if (strokes.endsWith("KWEZ")) {
     strokes = strokes.replace("KWEZ", "H-F");
   }

@@ -135,7 +135,7 @@ describe('create stroke hint for phrase', () => {
 
     it('with preceding double quotes and capital letter', () => {
       let wordOrPhraseMaterial = '"It';
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KW-GS KPA/T");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KW-GS KPA*/T");
     });
 
     it('with preceding double quotes and capital letter', () => {
