@@ -2125,7 +2125,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   return [chosenStroke, strokeLookupAttempts];
 }
 
-function tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts) {
+function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts) {
   let compoundWordFirstWord = compoundWordParts[0];
   let compoundWordSecondWord = compoundWordParts[1];
 
@@ -2137,7 +2137,6 @@ function tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, glob
 
     if (stroke && stroke.length > 0) {
       strokes = strokes + " " + stroke;
-      remainingWordOrPhrase = '';
       stroke = "xxx";
     }
   }
@@ -2146,11 +2145,10 @@ function tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, glob
     strokes = strokes === "" ? stroke + " H-PB" : strokes + " " + stroke + " H-PB";
     stroke = createFingerspellingStroke(compoundWordSecondWord);
     strokes = strokes + " " + stroke;
-    remainingWordOrPhrase = '';
     stroke = "xxx";
   }
 
-  return [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts];
+  return [strokes, stroke, strokeLookupAttempts];
 }
 
 function createFingerspellingStroke(remainingWordOrPhrase) {
@@ -2165,7 +2163,6 @@ function createFingerspellingStroke(remainingWordOrPhrase) {
 }
 
 function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary) {
-  let remainingWordOrPhrase = wordOrPhraseMaterial;
   let stroke = "";
   let strokes = "";
   let strokeLookupAttempts = 0;
@@ -2209,7 +2206,7 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
         if (compoundWordParts && compoundWordParts.length === 2 && compoundWordParts[0] !== "" && compoundWordParts[1] !== "") {
           // eslint-disable-next-line
           let _ = null;
-          [_, strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
+          [strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
           stroke = "xxx";
         }
         // 2.2 any punctuation, noting preceding char
