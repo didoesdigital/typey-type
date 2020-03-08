@@ -2246,7 +2246,7 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
         // if whitespace broken phrase does not exactly match and there is exactly 1 hyphen, it's probably a compound word e.g. "store-room"
         let compoundWordParts = firstWord.split("-");
 
-        if (stroke === "xxx" && compoundWordParts && compoundWordParts.length === 2) {
+        if (stroke === "xxx" && compoundWordParts && compoundWordParts.length === 2 && compoundWordParts[0] !== "" && compoundWordParts[1] !== "") {
           [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(firstWord, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
           stroke = "xxx";
         }
@@ -2266,7 +2266,7 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
       }
       // Break up phrase on punctuation
       else if (stroke === "xxx" && (remainingWordOrPhrase.match(punctuationSplittingRegex) !== null)) { // "man!"
-        if (compoundWordParts && compoundWordParts.length === 2) {
+        if (compoundWordParts && compoundWordParts.length === 2 && compoundWordParts[0] !== "" && compoundWordParts[1] !== "") {
           // if phrase broken on punctuation does not exactly match and there is exactly 1 hyphen, it's probably a compound word e.g. "store-room"
           if (remainingWordOrPhrase === "store-room") { debugger; }
           [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
