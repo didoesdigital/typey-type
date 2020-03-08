@@ -924,7 +924,6 @@ const PREFIXES = [
 const PREFIXES_LENGTH = PREFIXES.length;
 
 const SUFFIXES = [
-  ["/OG/RAF/ER", "ographer"],
   ["/*D", "'d"],
   ["/-EG", "eing"],
   ["/*LG", "ling"],
