@@ -2151,8 +2151,8 @@ function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, str
   return [strokes, stroke, strokeLookupAttempts];
 }
 
-function createFingerspellingStroke(remainingWordOrPhrase) {
-  return [...remainingWordOrPhrase].map(char => {
+function createFingerspellingStroke(inputText) {
+  return [...inputText].map(char => {
     let fingerspelledStroke = '';
     fingerspelledStroke = FINGERSPELLED_LETTERS[char];
     if (!fingerspelledStroke) {
