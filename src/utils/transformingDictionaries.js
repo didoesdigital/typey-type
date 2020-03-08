@@ -1949,6 +1949,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   }
   else { chosenStroke = undefined; }
 
+  // elsewhere, there is a relevant "FIXME: this is a brute force…"
   let strokeForOneCharacterWord = SINGLE_LETTER_WORDS[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWord) {
     return [strokeForOneCharacterWord, strokeLookupAttempts + 1];
@@ -2277,7 +2278,6 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
       else if (stroke === "xxx" && (remainingWordOrPhrase.match(punctuationSplittingRegex) !== null)) { // "man!"
         if (compoundWordParts && compoundWordParts.length === 2 && compoundWordParts[0] !== "" && compoundWordParts[1] !== "") {
           // if phrase broken on punctuation does not exactly match and there is exactly 1 hyphen, it's probably a compound word e.g. "store-room"
-          if (remainingWordOrPhrase === "store-room") { debugger; }
           [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
           stroke = "xxx";
         }
