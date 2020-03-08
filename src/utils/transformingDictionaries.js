@@ -1931,11 +1931,11 @@ const SINGLE_LETTER_WORDS = {
   "V": "5R"
 }
 
-const punctuationSplittingRegex = /[!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~—–-]/; // includes en and em dashes, curly quotes
-const punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
+const punctuationSplittingRegex = /([!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~—–-])/; // includes en and em dashes, curly quotes
+// const punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
 const strokeLookupAttemptsLimit = 12;
 
-function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts) {
+function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar) {
   let lookupEntry = globalLookupDictionary.get(wordOrPhrase); // "example": [["KP-PL", "plover.json"],["KP-P", "plover.json"]]
   if (lookupEntry && lookupEntry.length > 0) {
     // Instead of discarding non-Typey entries, let's assume the first entry is Best.
@@ -1957,6 +1957,9 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
 
   let strokeForOneCharacterWordPart = FINGERSPELLED_LETTERS[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWordPart) {
+    if (precedingChar === ' ' && wordOrPhrase === '"') {
+      strokeForOneCharacterWordPart = 'KW-GS';
+    }
     return [strokeForOneCharacterWordPart, strokeLookupAttempts + 1];
   }
 
@@ -2133,13 +2136,10 @@ function tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, glob
     strokes = strokes === "" ? stroke + " H-PB" : strokes + " " + stroke + " H-PB";
     [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordSecondWord, globalLookupDictionary, stroke, strokeLookupAttempts); // "room"
 
-    if (stroke && stroke.length > 0 && stroke !== "xxx") {
+    if (stroke && stroke.length > 0) {
       strokes = strokes + " " + stroke;
       remainingWordOrPhrase = '';
       stroke = "xxx";
-    }
-    else {
-      remainingWordOrPhrase = compoundWordSecondWord;
     }
   }
   else if (stroke === "xxx") {
@@ -2150,44 +2150,6 @@ function tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, glob
     remainingWordOrPhrase = '';
     stroke = "xxx";
   }
-  return [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts];
-}
-
-function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, globalLookupDictionary, strokes, stroke, strokeLookupAttempts) {
-  // let [newremainingWordOrPhrase, newstrokes, newstroke] = [remainingWordOrPhrase, strokes, stroke];
-
-  if (remainingWordOrPhrase.match(punctuationSplittingWholeMatchRegex)) { // exactly matches punctuation e.g. "!", "?", "'"
-    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(remainingWordOrPhrase, globalLookupDictionary, stroke, strokeLookupAttempts);
-    strokes = strokes === "" ? stroke : strokes + " " + stroke;
-    stroke = "xxx";
-
-    remainingWordOrPhrase = ''; // prevents infinite loop
-  }
-  else {
-    let matches = remainingWordOrPhrase.match(punctuationSplittingRegex);
-    let firstWord = '';
-    if (matches) {
-      let matchingPunctuation = remainingWordOrPhrase.match(punctuationSplittingRegex)[0].charAt(0); // given "man?" => ["?", index: 3, input: "man?", groups: undefined] => "?" => "?"
-      let index = remainingWordOrPhrase.indexOf(matchingPunctuation);
-
-      if (index === 0) { // starts with ! e.g. !foo
-        firstWord = remainingWordOrPhrase.slice(0, 1); // "!"
-        remainingWordOrPhrase = remainingWordOrPhrase.slice(index + 1, remainingWordOrPhrase.length); // "foo"
-      }
-      else { // contains ! e.g. foo!
-        firstWord = remainingWordOrPhrase.slice(0, index); // "foo"
-        remainingWordOrPhrase = remainingWordOrPhrase.slice(index, remainingWordOrPhrase.length); // "!"
-      }
-    }
-
-    if (firstWord) {
-      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", globalLookupDictionary, "", 0)
-      strokes = strokes === "" ? stroke : strokes + " " + stroke;
-      stroke = "xxx";
-    }
-  }
-
-  if (strokeLookupAttempts > strokeLookupAttemptsLimit) { return ['', strokes, stroke]; }
 
   return [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts];
 }
@@ -2204,105 +2166,91 @@ function createFingerspellingStroke(remainingWordOrPhrase) {
 }
 
 function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary) {
-  // if (remainingWordOrPhrase === "and! and") { debugger; }
   let remainingWordOrPhrase = wordOrPhraseMaterial;
   let stroke = "";
   let strokes = "";
   let strokeLookupAttempts = 0;
-  [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(wordOrPhraseMaterial, globalLookupDictionary, stroke, strokeLookupAttempts); // given "off went the man!" return "xxx"
+  let precedingChar = '';
+  let overLimit = false;
+  [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(wordOrPhraseMaterial, globalLookupDictionary, stroke, strokeLookupAttempts, precedingChar); // given "off went the man!" return "xxx"
 
-  while (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
-    // Arbitrary limit to prevent making Typey Type slow from excess look ups and
-    // avoid possible infinite loops
-    if (strokeLookupAttempts > strokeLookupAttemptsLimit) {
-      remainingWordOrPhrase = '';
-      strokes = strokes + ' xxx';
-      stroke = 'xxx';
-    } else {
+  if (stroke && stroke.length > 0 && !(stroke === "xxx")) {
+    return strokes = stroke;
+  }
 
-      // Check for whitespace on remaining words
-      if (remainingWordOrPhrase.startsWith(" ") || remainingWordOrPhrase.endsWith(" ")) {
-        remainingWordOrPhrase = remainingWordOrPhrase.trim();
-      }
+  let listOfWords = wordOrPhraseMaterial.split(" ").filter(nonEmptyItem => nonEmptyItem);
+  let listOfWordsLength = listOfWords.length;
 
-      // Check for exact matches for remaining words like "can't" in the phrase "it can't" to do an exact match check before breaking on whitespace or splitting on punctuation
-      if (stroke === "xxx") {
-        // eslint-disable-next-line
-        let _ = null; // this lookup attempt is a freebie
-        [stroke, _] = chooseOutlineForPhrase(remainingWordOrPhrase, globalLookupDictionary, stroke, strokeLookupAttempts);
-        let lookupEntry = globalLookupDictionary.get(remainingWordOrPhrase);
-        if (lookupEntry && lookupEntry.length > 0) {
-          stroke = lookupEntry[0][0];
-        }
-      }
+  // Arbitrary limit to prevent making Typey Type slow from excess look ups
+  if (listOfWordsLength > strokeLookupAttemptsLimit) {
+    listOfWords.length = strokeLookupAttemptsLimit;
+    listOfWordsLength = strokeLookupAttemptsLimit;
+    overLimit = true;
+  }
 
-      let compoundWordParts = remainingWordOrPhrase.split("-");
+  for (let i = 0; i < listOfWordsLength; i++) {
+    let wordToLookUp = listOfWords[i];
+    // 1. Try exact match
+    // eslint-disable-next-line
+    let _ = null; // this lookup attempt is a freebie
+    precedingChar = i === 0 ? '' : ' ';
 
-      // If we've found a matching stroke for the last remaining word, add the stroke to the hint and remove the word
-      if (stroke && stroke.length > 0 && !(stroke === "xxx")) {
-        strokes = strokes === "" ? stroke : strokes + " " + stroke;
-        remainingWordOrPhrase = '';
-        stroke = "xxx";
-      }
+    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(wordToLookUp, globalLookupDictionary, stroke, strokeLookupAttempts, precedingChar);
 
-      // Break up phrase on whitespace
-      else if (stroke === "xxx" && remainingWordOrPhrase.includes(" ")) { // "off went the man!"
-        let firstWord = remainingWordOrPhrase.slice(0, remainingWordOrPhrase.indexOf(" ")); // "off"
-        remainingWordOrPhrase = remainingWordOrPhrase.slice(remainingWordOrPhrase.indexOf(" ") + 1, remainingWordOrPhrase.length); // "went the man!"
-
-        [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // "off"
-
-
-        // if whitespace broken phrase does not exactly match and there is exactly 1 hyphen, it's probably a compound word e.g. "store-room"
-        let compoundWordParts = firstWord.split("-");
-
-        if (stroke === "xxx" && compoundWordParts && compoundWordParts.length === 2 && compoundWordParts[0] !== "" && compoundWordParts[1] !== "") {
-          [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(firstWord, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
-          stroke = "xxx";
-        }
-
-        // if whitespace broken phrase does not exactly match and there is punctuation, try split on that
-        if (stroke === "xxx" && (firstWord.match(punctuationSplittingRegex) !== null)) { // "man!"
-          let tmpRemainingWordOrPhrase = '';
-          [tmpRemainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(firstWord, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "and!"
-
-          remainingWordOrPhrase = tmpRemainingWordOrPhrase + " " + remainingWordOrPhrase; // This will cause its own bugs by re-introducing spaces where they don't belong in phrases
-          stroke = "xxx";
-        }
-        else {
-          strokes = strokes === "" ? stroke : strokes + " " + stroke;
-          stroke = "xxx";
-        }
-      }
-      // Break up phrase on punctuation
-      else if (stroke === "xxx" && (remainingWordOrPhrase.match(punctuationSplittingRegex) !== null)) { // "man!"
+    if (stroke && stroke.length > 0 && !(stroke === "xxx")) {
+      strokes = strokes === "" ? stroke : strokes + " " + stroke;
+      stroke = "xxx";
+    }
+    // 2. Try punctuation matching
+    else {
+      let compoundWordParts = wordToLookUp.split("-");
+      if (wordToLookUp.match(punctuationSplittingRegex) !== null) { // "man!"
+        // 2.1 compound words
+        // if there is exactly 1 hyphen in the middle of a word, it's probably a compound word e.g. "store-room"
         if (compoundWordParts && compoundWordParts.length === 2 && compoundWordParts[0] !== "" && compoundWordParts[1] !== "") {
-          // if phrase broken on punctuation does not exactly match and there is exactly 1 hyphen, it's probably a compound word e.g. "store-room"
-          [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
+          // eslint-disable-next-line
+          let _ = null;
+          [_, strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
           stroke = "xxx";
         }
+        // 2.2 any punctuation, noting preceding char
+        else {
+          let listOfPunctuationSeparatedWords = wordToLookUp.split(punctuationSplittingRegex).filter(nonEmptyItem => nonEmptyItem);
+          let len = listOfPunctuationSeparatedWords.length;
 
-        if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0 && stroke === "xxx") {
-          [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts] = tryMatchingWordsWithPunctuation(remainingWordOrPhrase, globalLookupDictionary, strokes, stroke, strokeLookupAttempts);
-        }
-      }
-      else {
-        if (remainingWordOrPhrase && remainingWordOrPhrase.length > 0) {
-          [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(remainingWordOrPhrase, globalLookupDictionary, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", globalLookupDictionary, "", 0)
-
-          // if all else fails, try fingerspelling
-          if (stroke === "xxx") {
-            stroke = createFingerspellingStroke(remainingWordOrPhrase);
+          // Arbitrary limit to prevent making Typey Type slow from excess look ups
+          if (len > strokeLookupAttemptsLimit) {
+            listOfPunctuationSeparatedWords.length = strokeLookupAttemptsLimit;
+            len = strokeLookupAttemptsLimit;
           }
 
-          remainingWordOrPhrase = '';
+          for (let j = 0; j < len; j++) {
 
-          strokes = strokes === "" ? stroke : strokes + " " + stroke;
+            // If it's the first char of a word and it's punctuation, pretend the preceding character was a space so that we recommend the right opening or closing punctuation
+            if (i !== 0 && j === 0) { precedingChar = ' '; } else { precedingChar = ''; }
+            if (i === 0 && j === 0) { precedingChar = ' '; }
+
+            [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(listOfPunctuationSeparatedWords[j], globalLookupDictionary, stroke, strokeLookupAttempts, precedingChar);
+            if (stroke && stroke.length > 0 && !(stroke === "xxx")) {
+              strokes = strokes === "" ? stroke : strokes + " " + stroke;
+              stroke = "xxx";
+            }
+            else {
+              // 2.3 resort to fingerspelling
+              stroke = createFingerspellingStroke(listOfPunctuationSeparatedWords[j]);
+              strokes = strokes === "" ? stroke : strokes + " " + stroke;
+            }
+          }
         }
-        remainingWordOrPhrase = '';
+      }
+      // 3. Resort to fingerspelling
+      else {
+        stroke = createFingerspellingStroke(wordToLookUp);
+        strokes = strokes === "" ? stroke : strokes + " " + stroke;
       }
     }
   }
+  precedingChar = '';
 
   // FIXME: this is a brute force approach that will have unintended consequences and fail to catch scenarios it should e.g. if you use personal dictionaries without H-F this will be confusing
   if (strokes.startsWith("KR-GS KPA/")) {
@@ -2317,6 +2265,8 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
   if (strokes.endsWith(" P-P")) {
     strokes = strokes.replace(" P-P", " TP-PL");
   }
+
+  if (overLimit) { strokes = strokes + " xxx"; }
 
   return strokes;
 }

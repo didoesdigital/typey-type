@@ -79,6 +79,7 @@ let globalLookupDictionary = new Map([
   ["it", [["T", "typey-type.json"]]],
   ["be", [["-B", "typey-type.json"]]],
   ["{be^}", [["BE", "typey-type.json"]]],
+  ["cat", [["KAT", "typey-type.json"]]],
   ["kettle", [["KET/*L", "typey-type.json"]]],
   ["can", [["K", "typey-type.json"]]],
   ["can't", [["K-PBT", "typey-type.json"]]],
@@ -134,7 +135,7 @@ describe('create stroke hint for phrase', () => {
 
     it('with preceding double quotes and capital letter', () => {
       let wordOrPhraseMaterial = '"It';
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KW-GS KPA*/T");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KW-GS KPA/T");
     });
 
     it('with preceding double quotes and capital letter', () => {
@@ -190,6 +191,22 @@ describe('create stroke hint for phrase', () => {
     it('with full stop, closing double quote, and capitalised word', () => {
       let wordOrPhraseMaterial = '." Outside';
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("P-P KR-GS KPA/OUDZ");
+    });
+
+
+    it('with preceding double quote', () => {
+      let wordOrPhraseMaterial = '"you';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KW-GS U");
+    });
+
+    it('with word, full stop, space, double quote, and capital letter', () => {
+      let wordOrPhraseMaterial = 'cat. "You';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KAT P-P KW-GS KPA/U"); // ideally it would be KAT TP-PL KW-GS U
+    });
+
+    it('with word, full stop, double quote, space, and capital letter', () => {
+      let wordOrPhraseMaterial = 'cat." You';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KAT P-P KR-GS KPA/U"); // ideally it would be KAT TP-PL KR-GS U
     });
 
     it('with trailing full stop', () => {
@@ -492,10 +509,10 @@ describe('generate dictionary entries', () => {
         {phrase: "'address'", stroke: "AE A/TKRES AE"},
         {phrase: "'Sinatra'", stroke: "AE STPHAT/RA AE"},
         {phrase: "'sinatra'", stroke: "AE HRO*ER/STPHAT/RA AE"},
-        {phrase: "'confuzzled'", stroke: "AE xxx AE"},
+        {phrase: "'confuzzled'", stroke: "AE KR*/O*/TPH*/TP*/*U/STKPW*/STKPW*/HR*/*E/TK* AE"},
         {phrase: "and! and", stroke: "SKP SKHRAPL SKP"},
-        {phrase: "andx and", stroke: "xxx SKP"},
-        {phrase: "andx andx and", stroke: "xxx xxx SKP"},
+        {phrase: "andx and", stroke: "A*/TPH*/TK*/KP* SKP"},
+        {phrase: "andx andx and", stroke: "A*/TPH*/TK*/KP* A*/TPH*/TK*/KP* SKP"}, // ideally this would include a space between fingerspelled words
         {phrase: "and ", stroke: "SKP"},
         {phrase: " and", stroke: "SKP"},
         {phrase: " and ", stroke: "SKP"},
