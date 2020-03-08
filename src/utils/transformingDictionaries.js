@@ -2219,8 +2219,7 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
           for (let j = 0; j < len; j++) {
 
             // If it's the first char of a word and it's punctuation, pretend the preceding character was a space so that we recommend the right opening or closing punctuation
-            if (i !== 0 && j === 0) { precedingChar = ' '; } else { precedingChar = ''; }
-            if (i === 0 && j === 0) { precedingChar = ' '; }
+            if (j === 0) { precedingChar = ' '; } else { precedingChar = ''; }
 
             [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(listOfPunctuationSeparatedWords[j], globalLookupDictionary, stroke, strokeLookupAttempts, precedingChar);
             if (stroke && stroke.length > 0 && !(stroke === "xxx")) {
