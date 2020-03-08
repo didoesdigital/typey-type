@@ -195,9 +195,21 @@ describe('create stroke hint for phrase', () => {
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KWAS/KWREU/SPAOERL");
     });
 
+    // TODO
+    xit('with prefix that is also a word that has trailing hyphen and a fake word', () => {
+      let wordOrPhraseMaterial = "quasi-confuzzled";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KWAS/KWREU KR*/O*/TPH*/TP*/*U/STKPW*/STKPW*/HR*/*E/TK*");
+    });
+
     it('with prefix that is not a word that has trailing hyphen and a word', () => {
       let wordOrPhraseMaterial = "gly-oxide";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TKPWHRAOEU/KPAOEUD");
+    });
+
+    // TODO
+    xit('with prefix that is not a word that has trailing hyphen and a fake word', () => {
+      let wordOrPhraseMaterial = "gly-confuzzled";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TKPWHRAOEU KR*/O*/TPH*/TP*/*U/STKPW*/STKPW*/HR*/*E/TK*");
     });
 
     it('with hyphenated compound word and suffix', () => {
@@ -245,6 +257,11 @@ describe('create stroke hint for phrase', () => {
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("P-P KR-GS KPA/OUDZ");
     });
 
+    // TODO:
+    xit('with hyphenated phrase and trailing full stop', () => {
+      let wordOrPhraseMaterial = 'a hit-and-miss.';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU H-PLS TP-PL");
+    });
 
     it('with preceding double quote', () => {
       let wordOrPhraseMaterial = '"you';
