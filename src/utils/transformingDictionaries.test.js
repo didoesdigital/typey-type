@@ -79,6 +79,13 @@ let globalLookupDictionary = new Map([
   ["it", [["T", "typey-type.json"]]],
   ["be", [["-B", "typey-type.json"]]],
   ["{be^}", [["BE", "typey-type.json"]]],
+  ["{quasi-^}", [["KWAS/KWREU", "typey-type.json"]]],
+  ["quasi", [["KWA/SEU", "typey-type.json"]]],
+  ["experimental", [["SPAOERL", "typey-type.json"]]],
+  ["{gly-^}", [["TKPWHRAOEU", "typey-type.json"]]],
+  ["oxide", [["KPAOEUD", "typey-type.json"]]],
+  ["{^ectomy}", [["EBGT/PHEU", "typey-type.json"]]],
+  ["computer", [["KPAOUR", "typey-type.json"]]],
   ["cat", [["KAT", "typey-type.json"]]],
   ["kettle", [["KET/*L", "typey-type.json"]]],
   ["can", [["K", "typey-type.json"]]],
@@ -183,9 +190,34 @@ describe('create stroke hint for phrase', () => {
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PWE/KET/*L");
     });
 
-    it('with hyphenated compound word', () => {
+    it('with prefix that is also a word that has trailing hyphen and a word', () => {
+      let wordOrPhraseMaterial = "quasi-experimental";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KWAS/KWREU/SPAOERL");
+    });
+
+    it('with prefix that is not a word that has trailing hyphen and a word', () => {
+      let wordOrPhraseMaterial = "gly-oxide";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TKPWHRAOEU/KPAOEUD");
+    });
+
+    it('with hyphenated compound word and suffix', () => {
+      let wordOrPhraseMaterial = "computer-ectomy";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPAOUR H-PB EBGT/PHEU");
+    });
+
+    it('with unhyphenated compound word and suffix', () => {
+      let wordOrPhraseMaterial = "computerectomy";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPAOUR/EBGT/PHEU");
+    });
+
+    it('with hyphenated compound word and existing words', () => {
       let wordOrPhraseMaterial = 'store-room';
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("STOR H-PB RAOPL");
+    });
+
+    it('with only a suffix', () => {
+      let wordOrPhraseMaterial = "ectomy";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("EBGT/PHEU");
     });
 
     it('with hyphenated phrase', () => {
