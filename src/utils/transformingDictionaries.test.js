@@ -6,6 +6,7 @@ import {
 } from './transformingDictionaries';
 
 let globalLookupDictionary = new Map([
+  ["{^^}", [["TK-LS", "typey-type.json"]]],
   ["example", [["KP-PL", "typey-type.json"]]],
   ["{^}™", [["TR*PL", "typey-type.json"], ["SPWO*L/TRAEUD/PHARBG", "typey-type.json"]]],
   ["™", [["PHOEPBLG/T*/PH*", "emoji.json"]]],
@@ -163,6 +164,26 @@ describe('create stroke hint for phrase', () => {
     it('with hyphenated compound word', () => {
       let wordOrPhraseMaterial = 'store-room';
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("STOR H-PB RAOPL");
+    });
+
+    it('with hyphenated phrase', () => {
+      let wordOrPhraseMaterial = 'a hit-and-miss';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU H-PLS");
+    });
+
+    it('with hyphenated gibberish', () => {
+      let wordOrPhraseMaterial = 'aaaa-aaaa';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("A*/A*/A*/A* H-PB A*/A*/A*/A*");
+    });
+
+    it('with hyphenated letters with some fingerspelling strokes', () => {
+      let wordOrPhraseMaterial = 'c-ç';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KR* H-PB xxx");
+    });
+
+    it('with hyphenated letters without fingerspelling strokes', () => {
+      let wordOrPhraseMaterial = 'ç-ç';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("xxx H-PB xxx");
     });
 
     it('with trailing full stop', () => {

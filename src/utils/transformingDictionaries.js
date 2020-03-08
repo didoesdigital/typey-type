@@ -2141,6 +2141,14 @@ function tryMatchingCompoundWords(remainingWordOrPhrase, compoundWordParts, glob
       remainingWordOrPhrase = compoundWordSecondWord;
     }
   }
+  else if (stroke === "xxx") {
+    stroke = createFingerspellingStroke(compoundWordFirstWord);
+    strokes = strokes === "" ? stroke + " H-PB" : strokes + " " + stroke + " H-PB";
+    stroke = createFingerspellingStroke(compoundWordSecondWord);
+    strokes = strokes + " " + stroke;
+    remainingWordOrPhrase = '';
+    stroke = "xxx";
+  }
   return [remainingWordOrPhrase, strokes, stroke, strokeLookupAttempts];
 }
 
@@ -2171,10 +2179,11 @@ function tryMatchingWordsWithPunctuation(remainingWordOrPhrase, globalLookupDict
       }
     }
 
-    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", globalLookupDictionary, "", 0)
-
-    strokes = strokes === "" ? stroke : strokes + " " + stroke;
-    stroke = "xxx";
+    if (firstWord) {
+      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(firstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // stroke = chooseOutlineForPhrase("man", globalLookupDictionary, "", 0)
+      strokes = strokes === "" ? stroke : strokes + " " + stroke;
+      stroke = "xxx";
+    }
   }
 
   if (strokeLookupAttempts > strokeLookupAttemptsLimit) { return ['', strokes, stroke]; }
