@@ -91,6 +91,7 @@ let globalLookupDictionary = new Map([
   ["store", [["STOR", "typey-type.json"]]],
   ["room", [["RAOPL", "typey-type.json"]]],
   ["{^room}", [["RAO*PL", "typey-type.json"]]],
+  ["outside", [["OUDZ", "typey-type.json"]]],
   ["hit", [["HEUT", "typey-type.json"]]],
   ["miss", [["PHEUS", "typey-type.json"]]],
   ["hit-and-miss", [["H-PLS", "typey-type.json"]]],
@@ -184,6 +185,11 @@ describe('create stroke hint for phrase', () => {
     it('with hyphenated letters without fingerspelling strokes', () => {
       let wordOrPhraseMaterial = 'ç-ç';
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("xxx H-PB xxx");
+    });
+
+    it('with full stop, closing double quote, and capitalised word', () => {
+      let wordOrPhraseMaterial = '." Outside';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("P-P KR-GS KPA/OUDZ");
     });
 
     it('with trailing full stop', () => {
