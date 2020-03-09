@@ -1410,7 +1410,8 @@ class App extends Component {
           !path.includes("fingerspelling") &&
           !path.includes("prefixes") &&
           !path.includes("suffixes") &&
-          !path.includes("steno-party-tricks")
+          !path.includes("steno-party-tricks") &&
+          !path.includes("collections/tech")
         ) {
           this.fetchAndSetupGlobalDict(false).then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
