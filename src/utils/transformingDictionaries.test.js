@@ -85,6 +85,7 @@ let globalLookupDictionary = new Map([
   ["{gly-^}", [["TKPWHRAOEU", "typey-type.json"]]],
   ["oxide", [["KPAOEUD", "typey-type.json"]]],
   ["{^ectomy}", [["EBGT/PHEU", "typey-type.json"]]],
+  ["said", [["SAEUD", "typey-type.json"]]],
   ["computer", [["KPAOUR", "typey-type.json"]]],
   ["cat", [["KAT", "typey-type.json"]]],
   ["kettle", [["KET/*L", "typey-type.json"]]],
@@ -193,6 +194,12 @@ describe('create stroke hint for phrase', () => {
     it('with prefix that is also a word that has trailing hyphen and a word', () => {
       let wordOrPhraseMaterial = "quasi-experimental";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KWAS/KWREU/SPAOERL");
+    });
+
+    // TODO
+    xit('with prefix that is also a word that has trailing hyphen and a fake word', () => {
+      let wordOrPhraseMaterial = 'and said: "You';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKP SAEUD STPH-FPLT KW-GS KPA*/U");
     });
 
     // TODO
