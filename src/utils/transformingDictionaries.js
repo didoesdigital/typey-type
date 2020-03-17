@@ -931,7 +931,7 @@ const SUFFIXES = [
   ["/O*UR", "our"],
   ["/KWRO*R", "iour"],
   ["/AES", "'s"],
-  ["/AOEUZ", "ise"],
+  ["/AOEUZ/A*U", "ise"],
   ["/AO*EUFG", "ising"],
   ["/AO*EUFD", "ised"],
   ["/*EPLT", "ement"],
