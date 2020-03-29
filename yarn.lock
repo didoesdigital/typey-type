@@ -8681,9 +8681,9 @@ react-side-effect@^1.0.2:
   dependencies:
     shallowequal "^1.0.1"
 
-"react-tippy@git://github.com/didoesdigital/react-tippy.git#custom-tag-element-for-tooltip-trigger":
-  version "1.2.2"
-  resolved "git://github.com/didoesdigital/react-tippy.git#b0b290506da59ba1d5768d240f3212a3dcd177ec"
+"react-tippy@git://github.com/tvkhoa/react-tippy.git":
+  version "1.3.4"
+  resolved "git://github.com/tvkhoa/react-tippy.git#36581085040ca6d71a0a1df3a181f5f779640237"
   dependencies:
     popper.js "^1.11.1"
 

@@ -23,7 +23,7 @@
     "react-numeric-input": "^2.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "3.0.1",
-    "react-tippy": "git://github.com/didoesdigital/react-tippy.git#custom-tag-element-for-tooltip-trigger",
+    "react-tippy": "git://github.com/tvkhoa/react-tippy.git",
     "react-transition-group": "^2.4.0"
   },
   "scripts": {
