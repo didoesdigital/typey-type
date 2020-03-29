@@ -26,6 +26,9 @@
     "react-tippy": "git://github.com/tvkhoa/react-tippy.git",
     "react-transition-group": "^2.4.0"
   },
+  "resolutions": {
+    "acorn": "^6.4.1"
+  },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
