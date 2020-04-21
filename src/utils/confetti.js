@@ -73,6 +73,11 @@ function setupCanvas(config, confettiSourceID, particles) {
   if (!config['sparsity']) { throw new Error("Bad confetti config"); }
   if (!config['colors']) { throw new Error("Bad confetti config"); }
 
+  let positioningRandomness = 0;
+  if (config['positioningRandomness'] && config['positioningRandomness'] > 0) {
+    positioningRandomness = config['positioningRandomness'];
+  }
+
   // let confettiSource = this.refs.finishedHeading;
   let confettiSource = document.getElementById(confettiSourceID);
   if (confettiSource) {
@@ -102,8 +107,8 @@ function setupCanvas(config, confettiSourceID, particles) {
 
           let rgbaColor = colors[Math.floor(Math.random() * colors.length)];
 
-          let globalX =  bcr.x + localX;
-          let globalY =  bcr.y + localY;
+          let globalX =  (bcr.x + getRandomBetween(-positioningRandomness, positioningRandomness)) + localX;
+          let globalY =  (bcr.y + getRandomBetween(-positioningRandomness, positioningRandomness)) + localY;
 
           createParticleAtPoint(globalX, globalY, rgbaColor, particles);
         }
