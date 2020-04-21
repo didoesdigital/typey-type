@@ -515,6 +515,15 @@ class Progress extends Component {
     );
   }
 
+  restartConfetti(event) {
+    if (event && ((event.keyCode && event.keyCode === 13) || event.type === "click")) {
+      particles.splice(0);
+      Confetti.cancelAnimation();
+      Confetti.setupCanvas({sparsity: 60, colors: 5, positioningRandomness: 600}, 'js-page-confetti-target', particles);
+      Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight);
+    }
+  }
+
   render () {
     var grabStyle = function() {return false};
     if (this.state.toRecommendedNextLesson === true) {
@@ -651,7 +660,7 @@ class Progress extends Component {
       if (this.state.yourMemorisedWordCount >= 10000) {
         progressSummaryAndLinks = (
           <React.Fragment>
-            <p>Woohoo! You rock! What a magnificent effort to memorise 10,000 words. You are an expert stenographer now! You’ve successfully typed {this.state.yourWordCount} words without misstrokes.</p>
+            <p>Woohoo! You rock! What a magnificent effort to memorise 10,000 words. You are an expert stenographer now! You’ve successfully typed {this.state.yourWordCount} words without misstrokes. It’s time to <button className="button-that-looks-like-a-link" ref={(celebrateButton) => { this.celebrateButton = celebrateButton; }} id="celebrate-button" onClick={this.restartConfetti.bind(this)} onKeyDown={this.restartConfetti.bind(this)}>celebrate!</button></p>
             <p><Link to='/lessons/progress/'>Practice&nbsp;your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>.</p>
           </React.Fragment>
         );
@@ -659,7 +668,7 @@ class Progress extends Component {
       else {
         progressSummaryAndLinks = (
           <React.Fragment>
-            <p>Woohoo! You rock! You’ve successfully typed {this.state.yourWordCount} words without misstrokes. You are an accomplished stenographer now! You’ve completed 100% of 10,000 words.</p>
+            <p>Woohoo! You rock! You’ve successfully typed {this.state.yourWordCount} words without misstrokes. You are an accomplished stenographer now! You’ve completed 100% of 10,000 words. It’s time to <button className="button-that-looks-like-a-link" ref={(celebrateButton) => { this.celebrateButton = celebrateButton; }} id="celebrate-button" onClick={this.restartConfetti.bind(this)} onKeyDown={this.restartConfetti.bind(this)}>celebrate!</button></p>
             <p><Link to='/lessons/progress/'>Practice&nbsp;your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen words</Link>.</p>
           </React.Fragment>
         );
@@ -852,7 +861,7 @@ class Progress extends Component {
     return (
       <div>
         <main id="main">
-          <div className="subheader">
+          <div className="subheader" id="js-page-confetti-target">
             <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
               <div className="flex mr1 self-center">
                 <header className="flex items-baseline">
