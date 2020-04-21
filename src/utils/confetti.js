@@ -140,7 +140,9 @@ function updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) {
         }
       }
 
-      animationFrame = window.requestAnimationFrame(function () { updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) });
+      if (localParticles && localParticles.length > 0) {
+        animationFrame = window.requestAnimationFrame(function () { updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) });
+      }
     }
   }
 }
