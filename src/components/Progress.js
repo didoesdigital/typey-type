@@ -647,6 +647,25 @@ class Progress extends Component {
       <p>You’ve successfully typed {this.state.yourWordCount} words without hints or misstrokes.</p>
     );
 
+    if (this.state.yourSeenWordCount >= 10000) {
+      if (this.state.yourMemorisedWordCount >= 10000) {
+        progressSummaryAndLinks = (
+          <React.Fragment>
+            <p>Woohoo! You rock! What a magnificent effort to memorise 10,000 words. You are an expert stenographer now! You’ve successfully typed {this.state.yourWordCount} words without misstrokes.</p>
+            <p><Link to='/lessons/progress/'>Practice&nbsp;your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>.</p>
+          </React.Fragment>
+        );
+      }
+      else {
+        progressSummaryAndLinks = (
+          <React.Fragment>
+            <p>Woohoo! You rock! You’ve successfully typed {this.state.yourWordCount} words without misstrokes. You are an accomplished stenographer now! You’ve completed 100% of 10,000 words.</p>
+            <p><Link to='/lessons/progress/'>Practice&nbsp;your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen words</Link>.</p>
+          </React.Fragment>
+        );
+      }
+    }
+    else {
       if (this.state.yourSeenWordCount === 1 && this.state.yourMemorisedWordCount === 0) {
         progressSummaryAndLinks = (
           <p>You’ve successfully typed {this.state.yourWordCount} word without misstrokes. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + PARAMS.discoverParams}>Discover new words</Link>.</p>
@@ -687,6 +706,7 @@ class Progress extends Component {
           <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. You’re {this.state.progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/' + PARAMS.discoverParams}>Discover new words</Link>.</p>
         );
       }
+    }
 
     let showFlashcards = true;
 
