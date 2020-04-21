@@ -1310,6 +1310,21 @@ label {
       background-color: #b0b0b0;
       cursor: default; }
 
+.button-that-looks-like-a-link {
+  background-color: transparent;
+  border: none;
+  display: inline;
+  color: #596091;
+  font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  line-height: 2;
+  text-decoration: underline; }
+  .button-that-looks-like-a-link:visited {
+    color: #796585; }
+  .button-that-looks-like-a-link:hover {
+    color: #9193a8; }
+  .button-that-looks-like-a-link:active, .button-that-looks-like-a-link:focus {
+    color: #202549; }
+
 .de-emphasized-button {
   background-color: transparent;
   border: none;
