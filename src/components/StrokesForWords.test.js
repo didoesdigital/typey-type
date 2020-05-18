@@ -31,6 +31,13 @@ describe('lookup list of strokes and dicts', () => {
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
   });
 
+  it('shows list of strokes and dictionary for word with preceding whitespace', () => {
+    let phrase = ' ago';
+    let listOfStrokesAndDicts = [ ["AG", "typey-type.json"] ];
+
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+  });
+
   it('shows list of strokes and dictionary for closing quote without whitespace', () => {
     let phrase = '"';
     let listOfStrokesAndDicts = [ ["KW-GS", "typey-type.json"] ];

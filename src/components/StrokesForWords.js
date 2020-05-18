@@ -311,6 +311,10 @@ function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary) {
     let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{" + lookupText + "}", globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
+  if (listOfStrokesAndDicts.length === 0) {
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(lookupText.trim(), globalLookupDictionary);
+    listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
+  }
   listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, phrase);
 
   if (phrase === "A") { listOfStrokesAndDicts = [["A*P", "fingerspelling"]]; }
