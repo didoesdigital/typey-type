@@ -379,5 +379,6 @@ function createListOfStrokes(phrase, dictionaryOfWordsStrokesAndSourceDictionary
 
 export default StrokesForWords;
 export {
-  createListOfStrokes
+  createListOfStrokes,
+  lookupListOfStrokesAndDicts
 };
