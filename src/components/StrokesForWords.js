@@ -126,6 +126,10 @@ class StrokesForWords extends Component {
       let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{" + lookupText + "}", this.props.globalLookupDictionary);
       listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
     }
+    if (listOfStrokesAndDicts.length === 0) {
+      let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(lookupText.trim(), this.props.globalLookupDictionary);
+      listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
+    }
     listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, phrase);
 
     if (phrase === "A") { listOfStrokesAndDicts = [["A*P", "fingerspelling"]]; }
