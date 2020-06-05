@@ -869,6 +869,7 @@ function loadPersonalPreferences() {
     },
   };
   let lessonsProgress = {};
+  let recentLessons = {history: []};
   let topSpeedPersonalBest = { wpm: 0 };
   let userGoals = {
     newWords: 15,
@@ -916,19 +917,22 @@ function loadPersonalPreferences() {
       if (window.localStorage.getItem('lessonsProgress')) {
         lessonsProgress = Object.assign(lessonsProgress, JSON.parse(window.localStorage.getItem('lessonsProgress')));
       }
+      if (window.localStorage.getItem('recentLessons')) {
+        recentLessons = Object.assign(recentLessons, JSON.parse(window.localStorage.getItem('recentLessons')));
+      }
       if (window.localStorage.getItem('topSpeedPersonalBest')) {
         topSpeedPersonalBest = Object.assign(topSpeedPersonalBest, JSON.parse(window.localStorage.getItem('topSpeedPersonalBest')));
       }
       if (window.localStorage.getItem('userGoals')) {
         userGoals = Object.assign(userGoals, JSON.parse(window.localStorage.getItem('userGoals')));
       }
-      return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest['wpm'], userGoals];
+      return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
     }
   }
   catch(error) {
     console.log('Unable to read local storage.', error);
   }
-  return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest['wpm'], userGoals];
+  return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
 }
 
 function writePersonalPreferences(itemToStore, JSONToStore) {

@@ -312,6 +312,9 @@ class App extends Component {
         "subcategory": "",
         "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
       }],
+      recentLessons: {
+        history: []
+      },
       recommendedNextLesson: {
         studyType: "practice",
         limitNumberOfWords: 50,
@@ -405,7 +408,9 @@ class App extends Component {
 
     if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
       let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
+      let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
+      writePersonalPreferences('recentLessons', recentLessons);
     }
 
     let currentLessonStrokes = this.state.currentLessonStrokes;
@@ -453,6 +458,7 @@ class App extends Component {
     let flashcardsProgress = this.state.flashcardsProgress;
     let globalUserSettings = this.state.globalUserSettings;
     let lessonsProgress = this.state.lessonsProgress;
+    let recentLessons = this.state.recentLessons;
     let topSpeedPersonalBest = this.state.topSpeedPersonalBest;
     let userGoals = this.state.userGoals;
     let userSettings = this.state.userSettings;
@@ -466,7 +472,7 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest, userGoals] = loadPersonalPreferences();
+      [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest, userGoals] = loadPersonalPreferences();
     }
 
     let yourSeenWordCount = calculateSeenWordCount(this.state.metWords);
@@ -477,6 +483,7 @@ class App extends Component {
       flashcardsProgress: flashcardsProgress,
       globalUserSettings: globalUserSettings,
       lessonsProgress: lessonsProgress,
+      recentLessons: recentLessons,
       topSpeedPersonalBest: topSpeedPersonalBest,
       metWords: metWords,
       userSettings: userSettings,
@@ -488,6 +495,7 @@ class App extends Component {
       writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
       writePersonalPreferences('globalUserSettings', this.state.globalUserSettings);
       writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
+      writePersonalPreferences('recentLessons', this.state.recentLessons);
       writePersonalPreferences('topSpeedPersonalBest', this.state.topSpeedPersonalBest);
       writePersonalPreferences('metWords', this.state.metWords);
       writePersonalPreferences('userSettings', this.state.userSettings);
@@ -495,7 +503,7 @@ class App extends Component {
       this.setupLesson();
     });
 
-    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest['wpm'], userGoals];
+    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
   }
 
   handleLimitWordsChange(event) {
@@ -760,6 +768,29 @@ class App extends Component {
       writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
     });
     return lessonsProgress;
+  }
+
+  updateRecentLessons(lessonpath, studyType) {
+    let recentLessons = Object.assign({}, this.state.recentLessons);
+
+    if (!lessonpath.includes("/lesson/custom") && recentLessons.history) {
+      let existingLessonIndex = recentLessons.history.findIndex(lesson => lesson.path === lessonpath);
+      if (existingLessonIndex >= 0) {
+        recentLessons.history.splice(existingLessonIndex, 1);
+      }
+      else {
+        if (recentLessons.history.length >=10) { recentLessons.history.shift(); }
+      }
+
+      recentLessons.history.push({path: lessonpath, studyType: studyType});
+    }
+
+    this.setState({
+      recentLessons: recentLessons,
+    }, () => {
+      writePersonalPreferences('recentLessons', this.state.recentLessons);
+    });
+    return recentLessons;
   }
 
   updateFlashcardsProgress(lessonpath) {
@@ -1219,7 +1250,9 @@ class App extends Component {
   setupLesson(optionalAnnouncementMessage) {
     if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom") && !this.state.lesson.path.endsWith("/lessons/custom/setup")) {
       let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
+      let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
+      writePersonalPreferences('recentLessons', recentLessons);
     }
 
     let newLesson = Object.assign({}, this.state.lesson);
@@ -2154,6 +2187,7 @@ class App extends Component {
                         lessonNotFound={this.state.lessonNotFound}
                         fullscreen={this.state.fullscreen}
                         changeFullscreen={this.changeFullscreen.bind(this)}
+                        recentLessonHistory={this.state.recentLessons.history}
                         restartLesson={this.restartLesson.bind(this)}
                         reviseLesson={this.reviseLesson.bind(this)}
                         items={this.state.lessonIndex}
