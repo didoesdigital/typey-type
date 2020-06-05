@@ -478,13 +478,37 @@ class Support extends Component {
             <ul>
               <li>{" "}
               <GoogleAnalytics.OutboundLink
-                eventLabel="Wikipedia provides words"
-                aria-label="Wikipedia provides words (external link opens in new tab)"
+                eventLabel="Wikipedia provides homophones"
+                aria-label="Wikipedia provides homophones (external link opens in new tab)"
                 to="https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/Homophones"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Wikipedia provides <span className="nowrap">words
+                Wikipedia provides <span className="nowrap">homophones
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.</li>
+              <li>{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Wikipedia provides proverbial phrases"
+                aria-label="Wikipedia provides proverbial phrases (external link opens in new tab)"
+                to="https://en.wikipedia.org/wiki/List_of_proverbial_phrases"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Wikipedia provides <span className="nowrap">proverbial phrases
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
