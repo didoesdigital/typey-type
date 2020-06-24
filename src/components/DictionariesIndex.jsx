@@ -89,7 +89,7 @@ class DictionariesIndex extends Component {
           <div>
             <div className="mw-584">
               <h3 id="typey-type-dictionary">Typey&nbsp;Type dictionary</h3>
-              <p><Link to="/dictionaries/typey-type/typey-type/">Typey&nbsp;Type’s dictionary</Link> follows the Plover (v4) dictionary with misstrokes removed from the top 10,000 words.</p>
+              <p><Link to="/dictionaries/typey-type/typey-type/">Typey&nbsp;Type’s dictionary</Link> follows the latest Plover dictionary from Plover version 4 with misstrokes removed from the top 10,000 words.</p>
 
               <p>Typey&nbsp;Type’s stroke suggestions look for the shortest stroke in the cleaned dictionary with penalties for multi-stroke briefs, briefs using the star (<code>*</code>) key, and briefs using non-standard prefix or suffix strokes.</p>
 
@@ -119,7 +119,7 @@ class DictionariesIndex extends Component {
               </GoogleAnalytics.OutboundLink>. These power the stroke suggestions.
             </p>
 
-              <p>The stories lessons like Aesop’s Fables use British English spellings for words such as “neighbour”. For these you can use the <Link to="/dictionaries/didoesdigital/dict-en-AU-with-extra-stroke/">Australian English with extra strokes</Link> dictionary.</p>
+              <p>The <Link to="/lessons/drills/top-10000-project-gutenberg-words/">Top 10000 Project Gutenberg words lesson</Link> and stories lessons like Aesop’s Fables use British English spellings for words such as “neighbour”. For these you can use the <Link to="/dictionaries/didoesdigital/dict-en-AU-with-extra-stroke/">Australian English with extra strokes</Link> dictionary. Typey&nbsp;Type’s dictionary uses these entries when Plover has no entry for a word. Otherwise, you can fingerspell.</p>
 
               <p>If you notice any odd strokes,{" "}
                 <GoogleAnalytics.OutboundLink
