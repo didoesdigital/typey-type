@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
-import { RecentLessons } from './RecentLessons';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 
@@ -82,12 +81,6 @@ class LessonsIndex extends Component {
 
               <h3>Typey&nbsp;Type lessons</h3>
               <ul className="unstyled-list">{linkList}</ul>
-            </div>
-            <div className="mt1 mw-120 flex-grow">
-              <RecentLessons
-                lessonIndex={this.props.lessonIndex}
-                recentLessonHistory={this.props.recentLessonHistory}
-              />
             </div>
           </div>
         </div>

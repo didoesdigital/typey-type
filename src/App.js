@@ -2079,6 +2079,7 @@ class App extends Component {
                         recommendedNextLesson={this.state.recommendedNextLesson}
                         lessonsProgress={this.state.lessonsProgress}
                         lessonIndex={this.state.lessonIndex}
+                        recentLessonHistory={this.state.recentLessons.history}
                         startingMetWordsToday={this.state.startingMetWordsToday}
                         updateFlashcardsRecommendation={this.updateFlashcardsRecommendation.bind(this)}
                         updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
@@ -2187,7 +2188,6 @@ class App extends Component {
                         lessonNotFound={this.state.lessonNotFound}
                         fullscreen={this.state.fullscreen}
                         changeFullscreen={this.changeFullscreen.bind(this)}
-                        recentLessonHistory={this.state.recentLessons.history}
                         restartLesson={this.restartLesson.bind(this)}
                         reviseLesson={this.reviseLesson.bind(this)}
                         items={this.state.lessonIndex}

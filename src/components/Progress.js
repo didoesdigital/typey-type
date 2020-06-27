@@ -6,6 +6,7 @@ import PseudoContentButton from './PseudoContentButton';
 import FlashcardsBox from './FlashcardsBox';
 import NumericInput from 'react-numeric-input';
 import RecommendationBox from './RecommendationBox';
+import { RecentLessons } from './RecentLessons';
 import * as Confetti from './../utils/confetti';
 import { getLessonIndexData } from './../utils/lessonIndexData';
 import { IconCheckmark, IconTriangleRight } from './Icon';
@@ -938,6 +939,12 @@ class Progress extends Component {
 
             <div className="flex flex-wrap justify-between">
               <div className="mw-368 flex-grow order-1">
+                <ErrorBoundary relative={true}>
+                  <RecentLessons
+                    lessonIndex={this.props.lessonIndex}
+                    recentLessonHistory={this.props.recentLessonHistory}
+                  />
+                </ErrorBoundary>
                 { showFlashcards ?
                   <div className="mx-auto hide-sm-only">
                     <div className="mw100">
