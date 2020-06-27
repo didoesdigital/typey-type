@@ -207,6 +207,7 @@ class App extends Component {
     // add the same default to load/set personal preferences code and test.
     let metWords = loadPersonalPreferences()[0];
     let startingMetWordsToday = loadPersonalPreferences()[0];
+    let recentLessons = loadPersonalPreferences()[6];
 
     this.state = {
       announcementMessage: null,
@@ -312,9 +313,7 @@ class App extends Component {
         "subcategory": "",
         "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
       }],
-      recentLessons: {
-        history: []
-      },
+      recentLessons: recentLessons,
       recommendedNextLesson: {
         studyType: "practice",
         limitNumberOfWords: 50,
