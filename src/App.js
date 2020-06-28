@@ -1086,44 +1086,44 @@ class App extends Component {
 
     switch (value) {
       case "discover":
-        newState.showStrokes = true;
-        newState.hideStrokesOnLastRepetition = true;
-        newState.newWords = true;
-        newState.seenWords = false;
-        newState.retainedWords = false;
-        newState.repetitions = 5;
-        newState.limitNumberOfWords = 15;
-        newState.sortOrder = 'sortOff';
+        newState.showStrokes = PARAMS.discover.showStrokes;
+        newState.hideStrokesOnLastRepetition = PARAMS.discover.hideStrokesOnLastRepetition;
+        newState.newWords = PARAMS.discover.newWords;
+        newState.seenWords = PARAMS.discover.seenWords;
+        newState.retainedWords = PARAMS.discover.retainedWords;
+        newState.repetitions = PARAMS.discover.repetitions;
+        newState.limitNumberOfWords = PARAMS.discover.limitNumberOfWords;
+        newState.sortOrder = PARAMS.discover.sortOrder;
         break;
       case "revise":
-        newState.showStrokes = false;
-        newState.hideStrokesOnLastRepetition = true;
-        newState.newWords = false;
-        newState.seenWords = true;
-        newState.retainedWords = false;
-        newState.repetitions = 3;
-        newState.limitNumberOfWords = 50;
-        newState.sortOrder = 'sortNew';
+        newState.showStrokes = PARAMS.revise.showStrokes;
+        newState.hideStrokesOnLastRepetition = PARAMS.revise.hideStrokesOnLastRepetition;
+        newState.newWords = PARAMS.revise.newWords;
+        newState.seenWords = PARAMS.revise.seenWords;
+        newState.retainedWords = PARAMS.revise.retainedWords;
+        newState.repetitions = PARAMS.revise.repetitions;
+        newState.limitNumberOfWords = PARAMS.revise.limitNumberOfWords;
+        newState.sortOrder = PARAMS.revise.sortOrder;
         break;
       case "drill":
-        newState.showStrokes = false;
-        newState.hideStrokesOnLastRepetition = true;
-        newState.newWords = false;
-        newState.seenWords = true;
-        newState.retainedWords = true;
-        newState.repetitions = 3;
-        newState.limitNumberOfWords = 100;
-        newState.sortOrder = 'sortRandom';
+        newState.showStrokes = PARAMS.drill.showStrokes;
+        newState.hideStrokesOnLastRepetition = PARAMS.drill.hideStrokesOnLastRepetition;
+        newState.newWords = PARAMS.drill.newWords;
+        newState.seenWords = PARAMS.drill.seenWords;
+        newState.retainedWords = PARAMS.drill.retainedWords;
+        newState.repetitions = PARAMS.drill.repetitions;
+        newState.limitNumberOfWords = PARAMS.drill.limitNumberOfWords;
+        newState.sortOrder = PARAMS.drill.sortOrder;
         break;
       case "practice":
-        newState.showStrokes = false;
-        newState.hideStrokesOnLastRepetition = true;
-        newState.newWords = true;
-        newState.seenWords = true;
-        newState.retainedWords = true;
-        newState.repetitions = 1;
-        newState.limitNumberOfWords = 0;
-        newState.sortOrder = 'sortOff';
+        newState.showStrokes = PARAMS.practice.showStrokes;
+        newState.hideStrokesOnLastRepetition = PARAMS.practice.hideStrokesOnLastRepetition;
+        newState.newWords = PARAMS.practice.newWords;
+        newState.seenWords = PARAMS.practice.seenWords;
+        newState.retainedWords = PARAMS.practice.retainedWords;
+        newState.repetitions = PARAMS.practice.repetitions;
+        newState.limitNumberOfWords = PARAMS.practice.limitNumberOfWords;
+        newState.sortOrder = PARAMS.practice.sortOrder;
         break;
       default:
         break;
