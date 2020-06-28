@@ -23,14 +23,10 @@ class RecentLessons extends Component {
     let recentLessons = null;
 
     if (this.state.hasRecentLessons) {
-      const linkList = this.props.lessonIndex
-        .filter( lesson => this.props.recentLessonHistory.find(i => i.path.replace("/lessons", "") + 'lesson.txt' === lesson.path))
-        .map( (lesson) => {
-          let lessonsubtitle = '';
-          if (lesson.subtitle && lesson.subtitle.length > 0) {
-            lessonsubtitle = ': '+lesson.subtitle;
-          }
-          const recentLesson = this.props.recentLessonHistory.find(i => i.path.replace("/lessons", "") + 'lesson.txt' === lesson.path);
+      const linkList = this.props.recentLessonHistory
+        .filter( recentLesson => this.props.lessonIndex.find(lesson => lesson.path === recentLesson.path.replace("/lessons", "") + 'lesson.txt'))
+        .map( recentLesson => {
+          let lesson = this.props.lessonIndex.find(lesson => lesson.path === recentLesson.path.replace("/lessons", "") + 'lesson.txt');
 
           let studyType = "practice";
           // NOTE: does not check if studyType is legit
@@ -45,10 +41,19 @@ class RecentLessons extends Component {
                   .replace(/\/{2,}/g,'/')
                   + "?recent=1"
                   + "&study=" + studyType
-                  } id={'ga--recent-lessons--'+lesson.path.replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link>
+                  // + "&limitNumberOfWords=300"
+                  // + "&repetitions=1"
+                  // + "&newWords=1"
+                  // + "&seenWords=1"
+                  // + "&retainedWords=1"
+                  // + "&showStrokes=0"
+                  // + "&hideStrokesOnLastRepetition=0"
+                  // + "&sortOrder=sortOff"
+                  // + "&startFromWord=1"
+                  } id={'ga--recent-lessons--' + lesson.path.replace(/[/.]/g,'-')}>{lesson.title}</Link>
             </li>
           )
-      }).reverse();
+        }).reverse();
 
       recentLessons = (
         <React.Fragment>
