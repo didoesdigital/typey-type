@@ -25,9 +25,21 @@ class RecentLessons extends Component {
 
     if (this.state.hasRecentLessons) {
       const linkList = this.props.recentLessonHistory
-        .filter( recentLesson => this.props.lessonIndex.find(lesson => lesson.path === recentLesson.path.replace("/lessons", "") + 'lesson.txt'))
+        .filter( recentLesson => this.props.lessonIndex.find(lesson => (recentLesson.path.includes("/lessons/progress") || lesson.path === recentLesson.path.replace("/lessons", "") + 'lesson.txt')))
         .map( recentLesson => {
           let lesson = this.props.lessonIndex.find(lesson => lesson.path === recentLesson.path.replace("/lessons", "") + 'lesson.txt');
+
+          if (recentLesson.path.includes("/lessons/progress")) {
+            let path = recentLesson.path.replace("/lessons", '');
+            let title = "Your words";
+            if (path.includes("memorised")) { title = "Your memorised words"; }
+            if (path.includes("seen")) { title = "Your revision words"; }
+
+            lesson = {
+              path: path,
+              title: title
+            }
+          }
 
           let studyType = "practice";
           // NOTE: does not check if studyType is legit
