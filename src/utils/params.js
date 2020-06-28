@@ -1,64 +1,49 @@
-const practice = {
-  study: 'practice',
+const discover = {
+  study: 'discover',
+  showStrokes: true,
+  hideStrokesOnLastRepetition: true,
+  newWords: true,
+  seenWords: false,
+  retainedWords: false,
+  repetitions: 5,
+  limitNumberOfWords: 15,
   sortOrder: 'sortOff',
-  limitNumberOfWords: 300,
-  repetitions: 1,
-  showStrokes: false,
-
-  newWords: 1,
-  seenWords: 1,
-  retainedWords: 1,
-  // showStrokes: 0,
-  // hideStrokesOnLastRepetition: 0,
-  // sortOrder: "sortOff",
-  // startFromWord: 1
-}
-
-const drill = {
-  study: 'drill',
-  sortOrder: 'sortRandom',
-  limitNumberOfWords: 100,
-  repetitions: 3,
-  showStrokes: false,
-
-  newWords: 1,
-  seenWords: 1,
-  retainedWords: 1,
-  // showStrokes: 0,
-  // hideStrokesOnLastRepetition: 0,
-  // sortOrder: "sortOff",
-  // startFromWord: 1
 }
 
 const revise = {
   study: 'revise',
-  sortOrder: 'sortNew',
-  limitNumberOfWords: 50,
-  repetitions: 3,
   showStrokes: false,
-
-  newWords: 1,
-  seenWords: 1,
-  retainedWords: 1,
-  // hideStrokesOnLastRepetition: 0,
-  // sortOrder: "sortOff",
-  // startFromWord: 1
+  hideStrokesOnLastRepetition: true,
+  newWords: false,
+  seenWords: true,
+  retainedWords: false,
+  repetitions: 3,
+  limitNumberOfWords: 50,
+  sortOrder: 'sortNew',
 }
 
-const discover = {
-  study: 'discover',
-  sortOrder: 'sortOff',
-  limitNumberOfWords: 15,
-  repetitions: 5,
-  showStrokes: true,
+const drill = {
+  study: 'drill',
+  showStrokes: false,
+  hideStrokesOnLastRepetition: true,
+  newWords: false,
+  seenWords: true,
+  retainedWords: true,
+  repetitions: 3,
+  limitNumberOfWords: 100,
+  sortOrder: 'sortRandom',
+}
 
-  newWords: 1,
-  seenWords: 1,
-  retainedWords: 1,
-  // showStrokes: 0,
-  // hideStrokesOnLastRepetition: 0,
-  // sortOrder: "sortOff",
-  // startFromWord: 1
+const practice = {
+  study: 'practice',
+  showStrokes: false,
+  hideStrokesOnLastRepetition: true,
+  newWords: true,
+  seenWords: true,
+  retainedWords: true,
+  repetitions: 1,
+  limitNumberOfWords: 0,
+  sortOrder: 'sortOff',
 }
 
 let practiceList = [];
