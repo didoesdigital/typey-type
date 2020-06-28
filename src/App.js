@@ -1880,21 +1880,6 @@ class App extends Component {
     // }
   }
 
-  studyType(userSettings) {
-    if (
-      userSettings.blurMaterial === false &&
-      userSettings.showStrokes === true &&
-      userSettings.newWords === true &&
-      userSettings.seenWords === false &&
-      userSettings.retainedWords === false &&
-      userSettings.repetitions === 3 &&
-      userSettings.limitNumberOfWords === 15 &&
-      userSettings.sortOrder === 'sortOff'
-    ) { return 'discover'; }
-
-    return 'custom';
-  }
-
   isFinished() {
     let presentedMaterialLength = (this.state.lesson && this.state.lesson.presentedMaterial) ? this.state.lesson.presentedMaterial.length : 0;
     return (this.state.currentPhraseID === presentedMaterialLength);
