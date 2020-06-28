@@ -32,7 +32,7 @@ class RecentLessons extends Component {
           }
           return(
             <li className="unstyled-list-item mb1" key={ lesson.path }>
-              <Link to={"/lessons" + lesson.path.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--recent-lessons--'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link>
+              <Link to={process.env.PUBLIC_URL + "/lessons" + lesson.path.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--recent-lessons--'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link>
             </li>
           )
       }).reverse();
