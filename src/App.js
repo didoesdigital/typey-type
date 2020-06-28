@@ -874,7 +874,7 @@ class App extends Component {
     });
   }
 
-  setupRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
+  setUpProgressRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
     let newUserSettings = Object.assign({}, userSettings);
     newUserSettings.newWords = newSeenOrMemorised[0];
     newUserSettings.seenWords = newSeenOrMemorised[1];
@@ -2245,7 +2245,7 @@ class App extends Component {
                         startFromWordOne={this.startFromWordOne.bind(this)}
                         stopLesson={this.stopLesson.bind(this)}
                         startCustomLesson={this.startCustomLesson.bind(this)}
-                        setupRevisionLesson={this.setupRevisionLesson.bind(this)}
+                        setUpProgressRevisionLesson={this.setUpProgressRevisionLesson.bind(this)}
                         setupLesson={this.setupLesson.bind(this)}
                         settings={this.state.lesson.settings}
                         showStrokesInLesson={this.state.showStrokesInLesson}
