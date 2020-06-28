@@ -769,11 +769,12 @@ class App extends Component {
     return lessonsProgress;
   }
 
-  updateRecentLessons(lessonpath, studyType) {
+  updateRecentLessons(recentLessonPath, studyType) {
+    let trimmedRecentLessonPath = recentLessonPath.replace(process.env.PUBLIC_URL,'').replace('lesson.txt','');
     let recentLessons = Object.assign({}, this.state.recentLessons);
 
-    if (!lessonpath.includes("/lesson/custom") && recentLessons.history) {
-      let existingLessonIndex = recentLessons.history.findIndex(lesson => lesson.path === lessonpath);
+    if (!trimmedRecentLessonPath.includes("/lesson/custom") && recentLessons.history) {
+      let existingLessonIndex = recentLessons.history.findIndex(historyRecentLesson => historyRecentLesson.path === trimmedRecentLessonPath);
       if (existingLessonIndex >= 0) {
         recentLessons.history.splice(existingLessonIndex, 1);
       }
@@ -781,7 +782,10 @@ class App extends Component {
         if (recentLessons.history.length >=10) { recentLessons.history.shift(); }
       }
 
-      recentLessons.history.push({path: lessonpath, studyType: studyType});
+      recentLessons.history.push({
+        path: trimmedRecentLessonPath,
+        studyType: studyType
+      });
     }
 
     this.setState({

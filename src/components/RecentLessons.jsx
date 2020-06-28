@@ -24,15 +24,28 @@ class RecentLessons extends Component {
 
     if (this.state.hasRecentLessons) {
       const linkList = this.props.lessonIndex
-        .filter( lesson => this.props.recentLessonHistory.find(i => i.path.replace("/lessons", "") === lesson.path))
+        .filter( lesson => this.props.recentLessonHistory.find(i => i.path.replace("/lessons", "") + 'lesson.txt' === lesson.path))
         .map( (lesson) => {
           let lessonsubtitle = '';
           if (lesson.subtitle && lesson.subtitle.length > 0) {
             lessonsubtitle = ': '+lesson.subtitle;
           }
+          const recentLesson = this.props.recentLessonHistory.find(i => i.path.replace("/lessons", "") + 'lesson.txt' === lesson.path);
+
+          let studyType = "practice";
+          // NOTE: does not check if studyType is legit
+          if (recentLesson && recentLesson.studyType) { studyType = recentLesson.studyType; }
+
           return(
             <li className="unstyled-list-item mb1" key={ lesson.path }>
-              <Link to={process.env.PUBLIC_URL + "/lessons" + lesson.path.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--recent-lessons--'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link>
+              <Link to={
+                "/lessons"
+                  + lesson.path
+                  .replace(/lesson\.txt$/,'')
+                  .replace(/\/{2,}/g,'/')
+                  + "?recent=1"
+                  + "&study=" + studyType
+                  } id={'ga--recent-lessons--'+lesson.path.replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link>
             </li>
           )
       }).reverse();
