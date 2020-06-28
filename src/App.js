@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as PARAMS from './utils/params.js';
+import PARAMS from './utils/params.js';
 import { randomise, isLessonTextValid } from './utils/utils';
 import { getLessonIndexData } from './utils/lessonIndexData';
 import { getRecommendedNextLesson } from './utils/recommendations';
@@ -245,7 +245,7 @@ class App extends Component {
         lastSeen: Date.now(), // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
         linkTitle: "Loading…",
         linkText: "Study",
-        link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + PARAMS.practiceParams
+        link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
       },
       flashcardsCourseIndex: 0,
       fullscreen: false,
@@ -320,7 +320,7 @@ class App extends Component {
         repetitions: 1,
         linkTitle: "Top 10000 Project Gutenberg words",
         linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
-        link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/" + PARAMS.practiceParams
+        link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&" + PARAMS.practiceParams
       },
       revisionMaterial: [
       ],
@@ -897,7 +897,7 @@ class App extends Component {
     } else {
       newUserSettings.study = 'practice';
       newUserSettings.sortOrder = 'sortOff';
-      newUserSettings.limitNumberOfWords = PARAMS.practiceLimitNumberOfWords;
+      newUserSettings.limitNumberOfWords = PARAMS.practice.limitNumberOfWords;
       newUserSettings.repetitions = 1;
       newUserSettings.showStrokes = false;
     }
@@ -1697,7 +1697,7 @@ class App extends Component {
             repetitions: 1,
             linkTitle: "Top 10000 Project Gutenberg words",
             linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
-            link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/" + PARAMS.practiceParams
+            link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&" + PARAMS.practiceParams
           }
         });
       });
@@ -1722,7 +1722,7 @@ class App extends Component {
             lastSeen: Date.now(), // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
             linkTitle: "Error",
             linkText: "Error",
-            link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + PARAMS.practiceParams
+            link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
           }
         });
       });

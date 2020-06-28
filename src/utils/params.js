@@ -1,35 +1,93 @@
-// TODO: Restructure this file as follows…
-//
-// // 1 const per studyType with all params:
-// const practice = {
-//   limitNumberOfWords: 300;
-// }
-//
-// // Function to map params to string, eg:
-// let paramsArray = [];
-// for (const [keyVar, valueVar] of Object.entries(practice)) {
-//   paramsArray.push("" + keyVar + "=" + valueVar);
-// };
-// const practiceParams = "?" + paramsArray.join("&");
-//
-// // Export as 1 object:
-// export default = {
-//   practice: practice,
-//   practiceParams: practiceParams
-// }
-//
+const practice = {
+  study: 'practice',
+  sortOrder: 'sortOff',
+  limitNumberOfWords: 300,
+  repetitions: 1,
+  showStrokes: false,
+
+  newWords: 1,
+  seenWords: 1,
+  retainedWords: 1,
+  // showStrokes: 0,
+  // hideStrokesOnLastRepetition: 0,
+  // sortOrder: "sortOff",
+  // startFromWord: 1
+}
+
+const drill = {
+  study: 'drill',
+  sortOrder: 'sortRandom',
+  limitNumberOfWords: 100,
+  repetitions: 3,
+  showStrokes: false,
+
+  newWords: 1,
+  seenWords: 1,
+  retainedWords: 1,
+  // showStrokes: 0,
+  // hideStrokesOnLastRepetition: 0,
+  // sortOrder: "sortOff",
+  // startFromWord: 1
+}
+
+const revise = {
+  study: 'revise',
+  sortOrder: 'sortNew',
+  limitNumberOfWords: 50,
+  repetitions: 3,
+  showStrokes: false,
+
+  newWords: 1,
+  seenWords: 1,
+  retainedWords: 1,
+  // hideStrokesOnLastRepetition: 0,
+  // sortOrder: "sortOff",
+  // startFromWord: 1
+}
+
+const discover = {
+  study: 'discover',
+  sortOrder: 'sortOff',
+  limitNumberOfWords: 15,
+  repetitions: 5,
+  showStrokes: true,
+
+  newWords: 1,
+  seenWords: 1,
+  retainedWords: 1,
+  // showStrokes: 0,
+  // hideStrokesOnLastRepetition: 0,
+  // sortOrder: "sortOff",
+  // startFromWord: 1
+}
+
+let practiceList = [];
+for (const [key, value] of Object.entries(practice)) { practiceList.push("" + key + "=" + value); };
+const practiceParams = practiceList.join("&");
+
+let drillList = [];
+for (const [key, value] of Object.entries(drill)) { drillList.push("" + key + "=" + value); };
+const drillParams = drillList.join("&");
+
+let reviseList = [];
+for (const [key, value] of Object.entries(revise)) { reviseList.push("" + key + "=" + value); };
+const reviseParams = reviseList.join("&");
+
+let discoverList = [];
+for (const [key, value] of Object.entries(discover)) { discoverList.push("" + key + "=" + value); };
+const discoverParams = discoverList.join("&");
+
+export default {
+  practice: practice,
+  practiceParams: practiceParams,
+  drill: drill,
+  drillParams: drillParams,
+  revise: revise,
+  reviseParams: reviseParams,
+  discover: discover,
+  discoverParams: discoverParams
+}
+
 // // Use in relevant file like this:
 // let example = PARAMS.practice.limitNumberOfWords;
 // let queryExample = path + PARAMS.practiceParams
-//
-// This approach would let us avoid `practice` as a global variable,
-// programmatically set param strings, and
-// provide easy access to variables via an object.
-
-export const practiceLimitNumberOfWords = 300;
-
-export const discoverParams = '?recommended=true&study=discover&limitNumberOfWords=15&repetitions=5&newWords=1&seenWords=0&retainedWords=0&showStrokes=1&hideStrokesOnLastRepetition=1&sortOrder=sortOff&startFromWord=1';
-export const revisionParams = '?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortNew&startFromWord=1';
-export const drillParams = '?recommended=true&study=drill&limitNumberOfWords=100&repetitions=3&newWords=0&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortRandom&startFromWord=1';
-export const practiceParams = '?recommended=true&study=practice&limitNumberOfWords=' + practiceLimitNumberOfWords + '&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1';
-

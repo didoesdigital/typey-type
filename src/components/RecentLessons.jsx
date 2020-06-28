@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PARAMS from '../utils/params.js';
 import { Link } from 'react-router-dom';
 
 class RecentLessons extends Component {
@@ -39,17 +40,8 @@ class RecentLessons extends Component {
                   + lesson.path
                   .replace(/lesson\.txt$/,'')
                   .replace(/\/{2,}/g,'/')
-                  + "?recent=1"
-                  + "&study=" + studyType
-                  // + "&limitNumberOfWords=300"
-                  // + "&repetitions=1"
-                  // + "&newWords=1"
-                  // + "&seenWords=1"
-                  // + "&retainedWords=1"
-                  // + "&showStrokes=0"
-                  // + "&hideStrokesOnLastRepetition=0"
-                  // + "&sortOrder=sortOff"
-                  // + "&startFromWord=1"
+                  + "?recent=1&"
+                  + PARAMS[studyType + "Params"]
                   } id={'ga--recent-lessons--' + lesson.path.replace(/[/.]/g,'-')}>{lesson.title}</Link>
             </li>
           )
