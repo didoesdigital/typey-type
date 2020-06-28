@@ -11,7 +11,7 @@ class RecentLessons extends Component {
 
   componentDidMount() {
     let hasRecentLessons = false;
-    if (this.props.recentLessonHistory && this.props.recentLessonHistory.length > 0 && this.props.recentLessonHistory[0] && this.props.recentLessonHistory[0].path) { // && this.props.find(lesson => lesson.path === this.props.recentLessonHistory[0].path)
+    if (this.props.recentLessonHistory && this.props.recentLessonHistory.length > 0 && this.props.recentLessonHistory[0] && this.props.recentLessonHistory[0].path) {
       hasRecentLessons = true;
     }
     this.setState({
