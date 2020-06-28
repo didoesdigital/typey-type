@@ -773,7 +773,7 @@ class App extends Component {
     let trimmedRecentLessonPath = recentLessonPath.replace(process.env.PUBLIC_URL,'').replace('lesson.txt','');
     let recentLessons = Object.assign({}, this.state.recentLessons);
 
-    if (!trimmedRecentLessonPath.includes("/lesson/custom") && recentLessons.history) {
+    if (!trimmedRecentLessonPath.includes("/lessons/custom") && recentLessons.history) {
       let existingLessonIndex = recentLessons.history.findIndex(historyRecentLesson => historyRecentLesson.path === trimmedRecentLessonPath);
       if (existingLessonIndex >= 0) {
         recentLessons.history.splice(existingLessonIndex, 1);
