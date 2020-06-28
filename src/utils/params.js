@@ -46,21 +46,23 @@ const practice = {
   sortOrder: 'sortOff',
 }
 
-let practiceList = [];
-for (const [key, value] of Object.entries(practice)) { practiceList.push("" + key + "=" + value); };
-const practiceParams = practiceList.join("&");
+function createParamString(studyTypeObject) {
+  let paramList = [];
+  for (const [key, value] of Object.entries(studyTypeObject)) {
+    let shortStringValue = value;
+    if (value === false) { shortStringValue = "0"; }
+    if (value === true) { shortStringValue = "1"; }
+    if (typeof value === "number") { shortStringValue = value.toString(); }
 
-let drillList = [];
-for (const [key, value] of Object.entries(drill)) { drillList.push("" + key + "=" + value); };
-const drillParams = drillList.join("&");
+    paramList.push("" + key + "=" + shortStringValue);
+  };
+  return paramList.join("&");
+}
 
-let reviseList = [];
-for (const [key, value] of Object.entries(revise)) { reviseList.push("" + key + "=" + value); };
-const reviseParams = reviseList.join("&");
-
-let discoverList = [];
-for (const [key, value] of Object.entries(discover)) { discoverList.push("" + key + "=" + value); };
-const discoverParams = discoverList.join("&");
+const practiceParams = createParamString(practice);
+const drillParams = createParamString(drill);
+const reviseParams = createParamString(revise);
+const discoverParams = createParamString(discover);
 
 export default {
   practice: practice,
