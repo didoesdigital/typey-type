@@ -115,6 +115,8 @@ describe('add outlines for words to combined lookup dict', () => {
     let dictContent = {
       "TO": "to",
       "O": "to",
+      "SED": "said",
+      "SAEUD": "said",
       "SOUPBD/-Z": "sounds",
       "SOUPBDZ": "sounds",
       "SOUPBSD": "sounds"
@@ -123,10 +125,12 @@ describe('add outlines for words to combined lookup dict', () => {
     let dictName = "typey-type.json";
     let misstrokes = {
       "O": "to",
+      "SED": "sed",
       "SOUPBSD": "sounds"
     };
     let expectedResult = new Map([
       ["to", [["TO", "typey-type.json"]]],
+      ["said", [["SED", "typey-type.json"], ["SAEUD", "typey-type.json"]]],
       ["sounds", [["SOUPBD/-Z", "typey-type.json"], ["SOUPBDZ", "typey-type.json"]]]
     ]);
     expect(addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes)).toEqual(expectedResult);
