@@ -1,4 +1,5 @@
 import {
+  addOutlinesToWordsInCombinedDict,
   chooseOutlineForPhrase,
   createStrokeHintForPhrase,
   generateListOfWordsAndStrokes,
@@ -108,6 +109,30 @@ let globalLookupDictionary = new Map([
   ["wandering", [["WAPBGD", "typey-type.json"],["WAPB/TKER/-G", "typey-type.json"]]], // currently pre-sorted to best stroke first
   ["lodge", [["HROPBLG", "typey-type.json"]]]
 ]);
+
+describe('add outlines for words to combined lookup dict', () => {
+  it('returns combined dict without misstrokes', () => {
+    let dictContent = {
+      "TO": "to",
+      "O": "to",
+      "SOUPBD/-Z": "sounds",
+      "SOUPBDZ": "sounds",
+      "SOUPBSD": "sounds"
+    };
+    let combinedLookupDictionary = new Map();
+    let dictName = "typey-type.json";
+    let misstrokes = {
+      "O": "to",
+      "SOUPBSD": "sounds"
+    };
+    let expectedResult = new Map([
+      ["to", [["TO", "typey-type.json"]]],
+      ["sounds", [["SOUPBD/-Z", "typey-type.json"], ["SOUPBDZ", "typey-type.json"]]]
+    ]);
+    expect(addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes)).toEqual(expectedResult);
+  })
+})
+
 
 describe('create stroke hint for phrase', () => {
   describe('returns string showing all the space or slash separated strokes to write a whole phrase', () => {
