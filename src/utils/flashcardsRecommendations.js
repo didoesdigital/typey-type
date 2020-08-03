@@ -41,7 +41,7 @@ function getFlashcardsNextLesson(flashcardsProgress = {}, courseLevel = "expertC
       lastSeen: 1558144862000, // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
       linkTitle: "Prefixes",
       linkText: "Study",
-      link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + PARAMS.practiceParams
+      link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
     };
 
     if (courses && courses[courseLevel]) {

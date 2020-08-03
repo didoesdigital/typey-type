@@ -29,7 +29,7 @@ describe('recommended next lesson for novice stenographer', () => {
         limitNumberOfWords: 15,
         linkTitle: 'Introduction',
         linkText: 'Discover 15 words from Introduction with 5 repetitions',
-        link: '/lessons/fundamentals/introduction/?recommended=true&study=discover&limitNumberOfWords=15&repetitions=5&newWords=1&seenWords=0&retainedWords=0&showStrokes=1&hideStrokesOnLastRepetition=1&sortOrder=sortOff&startFromWord=1',
+        link: '/lessons/fundamentals/introduction/?recommended=true&study=discover&showStrokes=1&hideStrokesOnLastRepetition=1&newWords=1&seenWords=0&retainedWords=0&repetitions=5&limitNumberOfWords=15&sortOrder=sortOff',
         repetitions: 5
       });
       resetMockRandom();
@@ -53,7 +53,7 @@ describe('recommended next lesson for beginner stenographer a few lessons in', (
         limitNumberOfWords: 50,
         linkTitle: 'Your revision words',
         linkText: 'Your revision words',
-        link: '/lessons/progress/seen/?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortNew&startFromWord=1',
+        link: '/lessons/progress/seen/?recommended=true&study=revise&showStrokes=0&hideStrokesOnLastRepetition=1&newWords=0&seenWords=1&retainedWords=0&repetitions=3&limitNumberOfWords=50&sortOrder=sortNew',
         repetitions: 3
       })
       resetMockRandom();
@@ -75,7 +75,7 @@ describe('recommended next lesson for beginner stenographer a few lessons in', (
         limitNumberOfWords: 50,
         linkTitle: 'Top 100 words',
         linkText: 'Revise 50 words from Top 100 words with 3 repetitions',
-        link: '/lessons/drills/top-100-words/?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortNew&startFromWord=1',
+        link: '/lessons/drills/top-100-words/?recommended=true&study=revise&showStrokes=0&hideStrokesOnLastRepetition=1&newWords=0&seenWords=1&retainedWords=0&repetitions=3&limitNumberOfWords=50&sortOrder=sortNew',
         repetitions: 3
       })
       resetMockRandom();
@@ -98,7 +98,7 @@ describe('recommended next lesson for competent stenographer', () => {
         limitNumberOfWords: 50,
         linkTitle: 'Top 1000 words',
         linkText: 'Revise 50 words from Top 1000 words with 3 repetitions',
-        link: '/lessons/drills/top-1000-words/?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortNew&startFromWord=1',
+        link: '/lessons/drills/top-1000-words/?recommended=true&study=revise&showStrokes=0&hideStrokesOnLastRepetition=1&newWords=0&seenWords=1&retainedWords=0&repetitions=3&limitNumberOfWords=50&sortOrder=sortNew',
         repetitions: 3
       });
       resetMockRandom();

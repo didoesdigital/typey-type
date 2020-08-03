@@ -120,9 +120,11 @@ class Finished extends Component {
           );
         });
         if (phrase.attempts.length > 0) {
+          // We use a "punctuation space" before "You wrote" to separate it from previous phrase.
+          // Test this by copying and pasting the material phrase and misstrokes text e.g. "stop You wrote: staph"
           strokeAttemptsPresentation = (
             <span>
-              <p className="visually-hidden di"><span className="visually-hidden">You wrote: </span></p>
+              <p className="visually-hidden di"><span className="visually-hidden">&#8200;You wrote: </span></p>
               <ol className="unstyled-list mb0 misstroke-list di">
                 {strokeAttempts}
               </ol>

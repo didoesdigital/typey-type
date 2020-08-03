@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as PARAMS from './utils/params.js';
+import PARAMS from './utils/params.js';
 import { randomise, isLessonTextValid } from './utils/utils';
 import { getLessonIndexData } from './utils/lessonIndexData';
 import { getRecommendedNextLesson } from './utils/recommendations';
@@ -207,6 +207,7 @@ class App extends Component {
     // add the same default to load/set personal preferences code and test.
     let metWords = loadPersonalPreferences()[0];
     let startingMetWordsToday = loadPersonalPreferences()[0];
+    let recentLessons = loadPersonalPreferences()[6];
 
     this.state = {
       announcementMessage: null,
@@ -244,7 +245,7 @@ class App extends Component {
         lastSeen: Date.now(), // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
         linkTitle: "Loading…",
         linkText: "Study",
-        link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + PARAMS.practiceParams
+        link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
       },
       flashcardsCourseIndex: 0,
       fullscreen: false,
@@ -312,13 +313,14 @@ class App extends Component {
         "subcategory": "",
         "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
       }],
+      recentLessons: recentLessons,
       recommendedNextLesson: {
         studyType: "practice",
         limitNumberOfWords: 50,
         repetitions: 1,
         linkTitle: "Top 10000 Project Gutenberg words",
         linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
-        link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/" + PARAMS.practiceParams
+        link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&" + PARAMS.practiceParams
       },
       revisionMaterial: [
       ],
@@ -405,7 +407,9 @@ class App extends Component {
 
     if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
       let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
+      let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
+      writePersonalPreferences('recentLessons', recentLessons);
     }
 
     let currentLessonStrokes = this.state.currentLessonStrokes;
@@ -453,6 +457,7 @@ class App extends Component {
     let flashcardsProgress = this.state.flashcardsProgress;
     let globalUserSettings = this.state.globalUserSettings;
     let lessonsProgress = this.state.lessonsProgress;
+    let recentLessons = this.state.recentLessons;
     let topSpeedPersonalBest = this.state.topSpeedPersonalBest;
     let userGoals = this.state.userGoals;
     let userSettings = this.state.userSettings;
@@ -466,7 +471,7 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest, userGoals] = loadPersonalPreferences();
+      [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest, userGoals] = loadPersonalPreferences();
     }
 
     let yourSeenWordCount = calculateSeenWordCount(this.state.metWords);
@@ -477,6 +482,7 @@ class App extends Component {
       flashcardsProgress: flashcardsProgress,
       globalUserSettings: globalUserSettings,
       lessonsProgress: lessonsProgress,
+      recentLessons: recentLessons,
       topSpeedPersonalBest: topSpeedPersonalBest,
       metWords: metWords,
       userSettings: userSettings,
@@ -488,6 +494,7 @@ class App extends Component {
       writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
       writePersonalPreferences('globalUserSettings', this.state.globalUserSettings);
       writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
+      writePersonalPreferences('recentLessons', this.state.recentLessons);
       writePersonalPreferences('topSpeedPersonalBest', this.state.topSpeedPersonalBest);
       writePersonalPreferences('metWords', this.state.metWords);
       writePersonalPreferences('userSettings', this.state.userSettings);
@@ -495,7 +502,7 @@ class App extends Component {
       this.setupLesson();
     });
 
-    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest['wpm'], userGoals];
+    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
   }
 
   handleLimitWordsChange(event) {
@@ -762,6 +769,33 @@ class App extends Component {
     return lessonsProgress;
   }
 
+  updateRecentLessons(recentLessonPath, studyType) {
+    let trimmedRecentLessonPath = recentLessonPath.replace(process.env.PUBLIC_URL,'').replace('lesson.txt','');
+    let recentLessons = Object.assign({}, this.state.recentLessons);
+
+    if (!trimmedRecentLessonPath.includes("/lessons/custom") && recentLessons.history) {
+      let existingLessonIndex = recentLessons.history.findIndex(historyRecentLesson => historyRecentLesson.path === trimmedRecentLessonPath);
+      if (existingLessonIndex >= 0) {
+        recentLessons.history.splice(existingLessonIndex, 1);
+      }
+      else {
+        if (recentLessons.history.length >=10) { recentLessons.history.shift(); }
+      }
+
+      recentLessons.history.push({
+        path: trimmedRecentLessonPath,
+        studyType: studyType
+      });
+    }
+
+    this.setState({
+      recentLessons: recentLessons,
+    }, () => {
+      writePersonalPreferences('recentLessons', this.state.recentLessons);
+    });
+    return recentLessons;
+  }
+
   updateFlashcardsProgress(lessonpath) {
     let flashcardsProgress = Object.assign({}, this.state.flashcardsProgress);
 
@@ -840,7 +874,7 @@ class App extends Component {
     });
   }
 
-  setupRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
+  setUpProgressRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
     let newUserSettings = Object.assign({}, userSettings);
     newUserSettings.newWords = newSeenOrMemorised[0];
     newUserSettings.seenWords = newSeenOrMemorised[1];
@@ -863,7 +897,7 @@ class App extends Component {
     } else {
       newUserSettings.study = 'practice';
       newUserSettings.sortOrder = 'sortOff';
-      newUserSettings.limitNumberOfWords = PARAMS.practiceLimitNumberOfWords;
+      newUserSettings.limitNumberOfWords = PARAMS.practice.limitNumberOfWords;
       newUserSettings.repetitions = 1;
       newUserSettings.showStrokes = false;
     }
@@ -1052,44 +1086,44 @@ class App extends Component {
 
     switch (value) {
       case "discover":
-        newState.showStrokes = true;
-        newState.hideStrokesOnLastRepetition = true;
-        newState.newWords = true;
-        newState.seenWords = false;
-        newState.retainedWords = false;
-        newState.repetitions = 5;
-        newState.limitNumberOfWords = 15;
-        newState.sortOrder = 'sortOff';
+        newState.showStrokes = PARAMS.discover.showStrokes;
+        newState.hideStrokesOnLastRepetition = PARAMS.discover.hideStrokesOnLastRepetition;
+        newState.newWords = PARAMS.discover.newWords;
+        newState.seenWords = PARAMS.discover.seenWords;
+        newState.retainedWords = PARAMS.discover.retainedWords;
+        newState.repetitions = PARAMS.discover.repetitions;
+        newState.limitNumberOfWords = PARAMS.discover.limitNumberOfWords;
+        newState.sortOrder = PARAMS.discover.sortOrder;
         break;
       case "revise":
-        newState.showStrokes = false;
-        newState.hideStrokesOnLastRepetition = true;
-        newState.newWords = false;
-        newState.seenWords = true;
-        newState.retainedWords = false;
-        newState.repetitions = 3;
-        newState.limitNumberOfWords = 50;
-        newState.sortOrder = 'sortNew';
+        newState.showStrokes = PARAMS.revise.showStrokes;
+        newState.hideStrokesOnLastRepetition = PARAMS.revise.hideStrokesOnLastRepetition;
+        newState.newWords = PARAMS.revise.newWords;
+        newState.seenWords = PARAMS.revise.seenWords;
+        newState.retainedWords = PARAMS.revise.retainedWords;
+        newState.repetitions = PARAMS.revise.repetitions;
+        newState.limitNumberOfWords = PARAMS.revise.limitNumberOfWords;
+        newState.sortOrder = PARAMS.revise.sortOrder;
         break;
       case "drill":
-        newState.showStrokes = false;
-        newState.hideStrokesOnLastRepetition = true;
-        newState.newWords = false;
-        newState.seenWords = true;
-        newState.retainedWords = true;
-        newState.repetitions = 3;
-        newState.limitNumberOfWords = 100;
-        newState.sortOrder = 'sortRandom';
+        newState.showStrokes = PARAMS.drill.showStrokes;
+        newState.hideStrokesOnLastRepetition = PARAMS.drill.hideStrokesOnLastRepetition;
+        newState.newWords = PARAMS.drill.newWords;
+        newState.seenWords = PARAMS.drill.seenWords;
+        newState.retainedWords = PARAMS.drill.retainedWords;
+        newState.repetitions = PARAMS.drill.repetitions;
+        newState.limitNumberOfWords = PARAMS.drill.limitNumberOfWords;
+        newState.sortOrder = PARAMS.drill.sortOrder;
         break;
       case "practice":
-        newState.showStrokes = false;
-        newState.hideStrokesOnLastRepetition = true;
-        newState.newWords = true;
-        newState.seenWords = true;
-        newState.retainedWords = true;
-        newState.repetitions = 1;
-        newState.limitNumberOfWords = 0;
-        newState.sortOrder = 'sortOff';
+        newState.showStrokes = PARAMS.practice.showStrokes;
+        newState.hideStrokesOnLastRepetition = PARAMS.practice.hideStrokesOnLastRepetition;
+        newState.newWords = PARAMS.practice.newWords;
+        newState.seenWords = PARAMS.practice.seenWords;
+        newState.retainedWords = PARAMS.practice.retainedWords;
+        newState.repetitions = PARAMS.practice.repetitions;
+        newState.limitNumberOfWords = PARAMS.practice.limitNumberOfWords;
+        newState.sortOrder = PARAMS.practice.sortOrder;
         break;
       default:
         break;
@@ -1219,7 +1253,9 @@ class App extends Component {
   setupLesson(optionalAnnouncementMessage) {
     if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom") && !this.state.lesson.path.endsWith("/lessons/custom/setup")) {
       let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
+      let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
+      writePersonalPreferences('recentLessons', recentLessons);
     }
 
     let newLesson = Object.assign({}, this.state.lesson);
@@ -1661,7 +1697,7 @@ class App extends Component {
             repetitions: 1,
             linkTitle: "Top 10000 Project Gutenberg words",
             linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
-            link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/" + PARAMS.practiceParams
+            link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&" + PARAMS.practiceParams
           }
         });
       });
@@ -1686,7 +1722,7 @@ class App extends Component {
             lastSeen: Date.now(), // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
             linkTitle: "Error",
             linkText: "Error",
-            link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + PARAMS.practiceParams
+            link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
           }
         });
       });
@@ -1842,21 +1878,6 @@ class App extends Component {
     //     this.say(currentPhrase.phrase);
     //   }
     // }
-  }
-
-  studyType(userSettings) {
-    if (
-      userSettings.blurMaterial === false &&
-      userSettings.showStrokes === true &&
-      userSettings.newWords === true &&
-      userSettings.seenWords === false &&
-      userSettings.retainedWords === false &&
-      userSettings.repetitions === 3 &&
-      userSettings.limitNumberOfWords === 15 &&
-      userSettings.sortOrder === 'sortOff'
-    ) { return 'discover'; }
-
-    return 'custom';
   }
 
   isFinished() {
@@ -2046,6 +2067,7 @@ class App extends Component {
                         recommendedNextLesson={this.state.recommendedNextLesson}
                         lessonsProgress={this.state.lessonsProgress}
                         lessonIndex={this.state.lessonIndex}
+                        recentLessonHistory={this.state.recentLessons.history}
                         startingMetWordsToday={this.state.startingMetWordsToday}
                         updateFlashcardsRecommendation={this.updateFlashcardsRecommendation.bind(this)}
                         updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
@@ -2208,7 +2230,7 @@ class App extends Component {
                         startFromWordOne={this.startFromWordOne.bind(this)}
                         stopLesson={this.stopLesson.bind(this)}
                         startCustomLesson={this.startCustomLesson.bind(this)}
-                        setupRevisionLesson={this.setupRevisionLesson.bind(this)}
+                        setUpProgressRevisionLesson={this.setUpProgressRevisionLesson.bind(this)}
                         setupLesson={this.setupLesson.bind(this)}
                         settings={this.state.lesson.settings}
                         showStrokesInLesson={this.state.showStrokesInLesson}

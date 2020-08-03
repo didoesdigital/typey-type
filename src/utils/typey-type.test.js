@@ -1492,6 +1492,7 @@ describe('loadPersonalPreferences', () => {
         writerInput: "qwerty"
       };
       let lessonsProgress = {};
+      let recentLessons = {history: []};
       let topSpeedPersonalBest = 0;
       let userGoals = {
         newWords: 15,
@@ -1519,7 +1520,7 @@ describe('loadPersonalPreferences', () => {
         seenWords: true,
         study: 'discover'
       };
-      expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, topSpeedPersonalBest, userGoals]);
+      expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest, userGoals]);
     });
   });
 });

@@ -2420,7 +2420,7 @@ function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary,
   for (let [outline, translation] of Object.entries(dictContent)) {
     let misstroke = misstrokesMap.get(outline);
 
-    if (!misstroke) {
+    if (!misstroke || (misstroke !== translation)) {
       if (combinedLookupDictionary.get(translation)) {
         // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
         let current = combinedLookupDictionary.get(translation);

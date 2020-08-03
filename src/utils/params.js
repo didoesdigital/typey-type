@@ -1,35 +1,80 @@
-// TODO: Restructure this file as follows…
-//
-// // 1 const per studyType with all params:
-// const practice = {
-//   limitNumberOfWords: 300;
-// }
-//
-// // Function to map params to string, eg:
-// let paramsArray = [];
-// for (const [keyVar, valueVar] of Object.entries(practice)) {
-//   paramsArray.push("" + keyVar + "=" + valueVar);
-// };
-// const practiceParams = "?" + paramsArray.join("&");
-//
-// // Export as 1 object:
-// export default = {
-//   practice: practice,
-//   practiceParams: practiceParams
-// }
-//
+const discover = {
+  study: 'discover',
+  showStrokes: true,
+  hideStrokesOnLastRepetition: true,
+  newWords: true,
+  seenWords: false,
+  retainedWords: false,
+  repetitions: 5,
+  limitNumberOfWords: 15,
+  sortOrder: 'sortOff',
+}
+
+const revise = {
+  study: 'revise',
+  showStrokes: false,
+  hideStrokesOnLastRepetition: true,
+  newWords: false,
+  seenWords: true,
+  retainedWords: false,
+  repetitions: 3,
+  limitNumberOfWords: 50,
+  sortOrder: 'sortNew',
+}
+
+const drill = {
+  study: 'drill',
+  showStrokes: false,
+  hideStrokesOnLastRepetition: true,
+  newWords: false,
+  seenWords: true,
+  retainedWords: true,
+  repetitions: 3,
+  limitNumberOfWords: 100,
+  sortOrder: 'sortRandom',
+}
+
+const practice = {
+  study: 'practice',
+  showStrokes: false,
+  hideStrokesOnLastRepetition: true,
+  newWords: true,
+  seenWords: true,
+  retainedWords: true,
+  repetitions: 1,
+  limitNumberOfWords: 0,
+  sortOrder: 'sortOff',
+}
+
+function createParamString(studyTypeObject) {
+  let paramList = [];
+  for (const [key, value] of Object.entries(studyTypeObject)) {
+    let shortStringValue = value;
+    if (value === false) { shortStringValue = "0"; }
+    if (value === true) { shortStringValue = "1"; }
+    if (typeof value === "number") { shortStringValue = value.toString(); }
+
+    paramList.push("" + key + "=" + shortStringValue);
+  };
+  return paramList.join("&");
+}
+
+const practiceParams = createParamString(practice);
+const drillParams = createParamString(drill);
+const reviseParams = createParamString(revise);
+const discoverParams = createParamString(discover);
+
+export default {
+  practice: practice,
+  practiceParams: practiceParams,
+  drill: drill,
+  drillParams: drillParams,
+  revise: revise,
+  reviseParams: reviseParams,
+  discover: discover,
+  discoverParams: discoverParams
+}
+
 // // Use in relevant file like this:
 // let example = PARAMS.practice.limitNumberOfWords;
 // let queryExample = path + PARAMS.practiceParams
-//
-// This approach would let us avoid `practice` as a global variable,
-// programmatically set param strings, and
-// provide easy access to variables via an object.
-
-export const practiceLimitNumberOfWords = 300;
-
-export const discoverParams = '?recommended=true&study=discover&limitNumberOfWords=15&repetitions=5&newWords=1&seenWords=0&retainedWords=0&showStrokes=1&hideStrokesOnLastRepetition=1&sortOrder=sortOff&startFromWord=1';
-export const revisionParams = '?recommended=true&study=revise&limitNumberOfWords=50&repetitions=3&newWords=0&seenWords=1&retainedWords=0&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortNew&startFromWord=1';
-export const drillParams = '?recommended=true&study=drill&limitNumberOfWords=100&repetitions=3&newWords=0&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortRandom&startFromWord=1';
-export const practiceParams = '?recommended=true&study=practice&limitNumberOfWords=' + practiceLimitNumberOfWords + '&repetitions=1&newWords=1&seenWords=1&retainedWords=1&showStrokes=0&hideStrokesOnLastRepetition=0&sortOrder=sortOff&startFromWord=1';
-
