@@ -412,7 +412,7 @@ class Lesson extends Component {
                       <button onClick={this.props.changeShowScoresWhileTyping} className={"de-emphasized-button show-scores-control absolute mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'show-scores-control--hidden' : 'show-scores-control--shown')}>Show scores</button>
                       <AnimateHeight
                         duration={ 300 }
-                        height={ this.props.userSettings.showScoresWhileTyping ? 'auto' : '0' }
+                        height={ this.props.userSettings.showScoresWhileTyping ? 'auto' : 0 }
                         ease={'cubic-bezier(0.645, 0.045, 0.355, 1)'}
                       >
                         <div className={"mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'scores--shown' : 'scores--hidden')} onClick={this.props.changeShowScoresWhileTyping}>
