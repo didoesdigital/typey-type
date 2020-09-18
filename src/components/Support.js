@@ -550,6 +550,30 @@ class Support extends Component {
               </GoogleAnalytics.OutboundLink>.</li>
               <li>{" "}
               <GoogleAnalytics.OutboundLink
+                eventLabel="Wikipedia provides Speech to the Troops at Tilbury"
+                aria-label="Wikipedia provides Speech to the Troops at Tilbury (external link opens in new tab)"
+                to="https://en.wikipedia.org/wiki/Speech_to_the_Troops_at_Tilbury"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Wikipedia provides Speech to the Troops <span className="nowrap">at Tilbury
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip></span>
+              </GoogleAnalytics.OutboundLink>.</li>
+              <li>{" "}
+              <GoogleAnalytics.OutboundLink
                 eventLabel="Wiktionary provides frequency lists"
                 aria-label="Wiktionary provides frequency lists (external link opens in new tab)"
                 to="https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists"
