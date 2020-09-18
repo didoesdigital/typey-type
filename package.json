@@ -27,9 +27,10 @@
     "react-transition-group": "^2.4.0"
   },
   "resolutions": {
+    "@hapi/hoek": "^9.0.3",
     "acorn": "^6.4.1",
-    "kind-of": "^6.0.3",
     "dot-prop": "^5.1.1",
+    "kind-of": "^6.0.3",
     "minimist": "^1.2.2"
   },
   "scripts": {
