@@ -31,7 +31,8 @@
     "acorn": "^6.4.1",
     "dot-prop": "^5.1.1",
     "kind-of": "^6.0.3",
-    "minimist": "^1.2.2"
+    "minimist": "^1.2.2",
+    "node-forge": "^0.10.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
