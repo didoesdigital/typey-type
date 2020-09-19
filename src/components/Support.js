@@ -526,6 +526,30 @@ class Support extends Component {
               </GoogleAnalytics.OutboundLink>.</li>
               <li>{" "}
               <GoogleAnalytics.OutboundLink
+                eventLabel="Wikipedia provides proverbs"
+                aria-label="Wikipedia provides proverbs (external link opens in new tab)"
+                to="https://en.wiktionary.org/wiki/Appendix:English_proverbs"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Wiktionary provides proverbs
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip>
+              </GoogleAnalytics.OutboundLink>.</li>
+              <li>{" "}
+              <GoogleAnalytics.OutboundLink
                 eventLabel="Wikipedia provides irreversible binomials"
                 aria-label="Wikipedia provides irreversible binomials (external link opens in new tab)"
                 to="https://en.wikipedia.org/wiki/Irreversible_binomial"
