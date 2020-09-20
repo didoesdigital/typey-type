@@ -129,7 +129,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
 
     if (recommendedStudySession[recommendedStudySessionIndex] === "practice") {
       let practiceParams = '?recommended=true&' + PARAMS.practiceParams;
-      let practiceChoice = Math.random() <.8 ? "practiceLessons" : "practiceAllYourWords";
+      let practiceChoice = Math.random() <.9 ? "practiceLessons" : "practiceAllYourWords";
 
       switch (practiceChoice) {
         case "practiceAllYourWords":
@@ -144,14 +144,6 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
 
         case "practiceLessons":
           let recommendedPracticeLesson = courses.practiceCourse.find((recommendable) => {
-            if (recommendable.path === "/lessons/drills/project-gutenberg-sentences-using-top-100-words/lesson.txt") {
-              if (!(metWords[" man"] > 2) && !(metWords["man "] > 2) && !(metWords["man"] > 2)) {
-                // Start from word 7 to skip past 'man'
-                practiceParams = practiceParams.replace('startFromWord=1', 'startFromWord=7');
-              }
-              return true;
-            }
-
             let entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
             let seenOrMemorisedChoice = Math.random() <.9 ? "numberOfWordsSeen" : "numberOfWordsMemorised";
 
@@ -166,7 +158,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
                   // We don't aim for 100% because we're tracking unique number of words seen.
                   // Practice lessons contains some word repetition so number of unique words so it
                   // will always fall short of the target.
-                  if (entryInLessonsProgress[seenOrMemorisedChoice] >= .7 * recommendable.target) {
+                  if (entryInLessonsProgress[seenOrMemorisedChoice] >= .6 * recommendable.target) {
                     return false;
                   }
                   else {
