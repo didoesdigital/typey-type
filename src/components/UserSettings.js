@@ -296,9 +296,9 @@ class UserSettings extends Component {
                     </ReactModal>)
                   </div>
                   <div className="checkbox-group">
-                    <label className="checkbox-label text-input-accessibility-setting">
+                    <label className="checkbox-label">
                       <input
-                        className="checkbox-input text-input-accessibility-setting"
+                        className="checkbox-input"
                         type="checkbox"
                         name="textInputAccessibility"
                         id="textInputAccessibility"
