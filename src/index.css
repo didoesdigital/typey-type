@@ -1484,28 +1484,9 @@ label {
 .matched.steno-material {
   border-bottom: 2px solid #402351; }
 
-.subsection-header {
-  background: #f5f4f6;
-  border-top: 1px solid #c6bdcb;
-  border-bottom: 1px solid #c6bdcb;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 16px;
-  padding-bottom: 16px; }
-
 .subsection-header-toggle {
   cursor: pointer;
-  border-color: #878bb2;
-  background-image: linear-gradient(135deg, transparent 60%, #796585 50%), linear-gradient(45deg, #796585 50%, transparent 50%);
-  background-position: calc(100% - 16px) calc(2em - 2px), calc(100% - 11px) calc(2em - 2px);
-  background-size: 5px 5px, 5px 5px;
-  background-repeat: no-repeat;
   color: #596091; }
-  .subsection-header-toggle.collapsed {
-    background-image: linear-gradient(45deg, transparent 50%, #796585 50%), linear-gradient(135deg, #796585 60%, transparent 50%);
-    background-position: calc(100% - 16px) calc(2em - 1px), calc(100% - 11px) calc(2em - 1px);
-    background-size: 5px 5px, 5px 5px;
-    background-repeat: no-repeat; }
   .subsection-header-toggle:hover {
     color: #9193a8; }
   .subsection-header-toggle:active, .subsection-header-toggle:focus {

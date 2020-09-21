@@ -1618,40 +1618,9 @@ label {
 //   border-collapse: separate;
 //   border-spacing: 0 4px;
 // }
-.subsection-header {
-  background: add-tint($brand-primary, 95%);
-  border-top: 1px solid add-tint($brand-primary, 70%);
-  border-bottom: 1px solid add-tint($brand-primary, 70%);
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-top: 16px;
-  padding-bottom: 16px;
-}
+
 .subsection-header-toggle {
   cursor: pointer;
-  border-color: saturate(adjust-hue(add-tint($brand-primary, 50%), -45deg), 10%);
-  background-image:
-    linear-gradient(135deg, transparent 60%, add-tint($brand-primary, 30%) 50%),
-    linear-gradient(45deg, add-tint($brand-primary, 30%) 50%, transparent 50%);
-  background-position:
-    calc(100% - 16px) calc(2em - 2px),
-    calc(100% - 11px) calc(2em - 2px);
-  background-size:
-    5px 5px,
-    5px 5px;
-  background-repeat: no-repeat;
-  &.collapsed {
-    background-image:
-      linear-gradient(45deg, transparent 50%, add-tint($brand-primary, 30%) 50%),
-      linear-gradient(135deg, add-tint($brand-primary, 30%) 60%, transparent 50%);
-    background-position:
-      calc(100% - 16px) calc(2em - 1px),
-      calc(100% - 11px) calc(2em - 1px);
-    background-size:
-      5px 5px,
-      5px 5px;
-    background-repeat: no-repeat;
-  }
   color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
   &:hover {
     color: adjust-hue(add-tint($brand-primary, 50%), -45deg);

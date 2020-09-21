@@ -61,9 +61,9 @@ class UserSettings extends Component {
     var grabStyle = function() {return false};
     let toggleClasses;
     if (this.props.hideOtherSettings) {
-      toggleClasses = "h6 mt1 mb1 de-emphasized text-center subsection-header subsection-header-toggle collapsed";
+      toggleClasses = "mb0 de-emphasized text-center subsection-header-toggle collapsed";
     } else {
-      toggleClasses = "h6 mt1 mb1 de-emphasized text-center subsection-header subsection-header-toggle";
+      toggleClasses = "mb0 de-emphasized text-center subsection-header-toggle";
     }
 
     let hideStrokesOnLastRepetitionTooltip = "Hide briefs during the last repetition";
@@ -79,6 +79,11 @@ class UserSettings extends Component {
           <h3 className="mb1 visually-hidden">Settings</h3>
           <div className="text-small">
             <div className="flex flex-wrap mw-1024 mx-auto justify-between mb2">
+              { !this.props.path.includes("custom") && !this.props.path.includes("progress") ?
+                  <p className="mb0">Study <Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="mb0">Flashcards</Link></p>
+                :
+                null
+              }
               <div className="flex flex-wrap">
                 <fieldset className="dc hide-sm">
                   <Tooltip
@@ -94,7 +99,7 @@ class UserSettings extends Component {
                     trigger="mouseenter focus click"
                     onShow={this.props.setAnnouncementMessage}
                   >
-                    <legend className="flex mr3">Choose study type:</legend>
+                    <legend className="flex mr3">Study type:</legend>
                   </Tooltip>
                   <div className="flex mb1">
                     <div className="flex flex-wrap justify-between">
@@ -220,14 +225,9 @@ class UserSettings extends Component {
                   </div>
                 </fieldset>
               </div>
-              { !this.props.path.includes("custom") && !this.props.path.includes("progress") ?
-                  <p className="mb0">Study <Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="mb0">Flashcards</Link></p>
-                :
-                null
-              }
+              <p className={toggleClasses} onClick={this.props.toggleHideOtherSettings} onKeyPress={this.props.toggleHideOtherSettings} role="button" tabIndex="0" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">{this.props.hideOtherSettings ? "Show settings" : "Hide settings"}</p>
             </div>
 
-            <p className={toggleClasses} onClick={this.props.toggleHideOtherSettings} onKeyPress={this.props.toggleHideOtherSettings} role="button" tabIndex="0" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">Your settings{this.props.hideOtherSettings}</p>
             <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'hide' : ''} aria-hidden={this.props.hideOtherSettings}>
 
               <div className="flex flex-wrap justify-between">
