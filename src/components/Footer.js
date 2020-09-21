@@ -14,13 +14,14 @@ class Footer extends Component {
       fullscreen = "";
     }
     return (
-      <div className="bg-slat">
+      <div className="bg-slat bt b--brand-primary-tint">
         <footer role="contentinfo" className={"footer mx-auto mw-1920 flex flex-wrap items-center justify-between pt1 pb1 pl3 pr3 hide-in-fullscreen" + fullscreen}>
-          <p className="text-center mb0"><small><Link to="/support">About</Link> and <Link to="/support#privacy">Privacy</Link></small></p>
-          <p className="text-center mb0"><small><Link to="/contribute">Contribute</Link></small></p>
-          <p className="text-center mb0"><small>Made with <span aria-label="love" role="img">❤️</span> by <a href="https://didoesdigital.com/">DiDoesDigital</a></small></p>
-          <p className="text-center mb0"><small><Link to="/break">Take a break</Link></small></p>
+          <p className="text-center mb0"><small><Link to="/support" className="no-underline">About</Link> and <Link to="/support#privacy" className="no-underline">Privacy</Link></small></p>
+          <p className="text-center mb0"><small><Link to="/contribute" className="no-underline">Contribute</Link></small></p>
+          <p className="text-center mb0"><small>Made with <span aria-label="love" role="img">❤️</span> by <a href="https://didoesdigital.com/" className="no-underline">DiDoesDigital</a></small></p>
+          <p className="text-center mb0"><small><Link to="/break" className="no-underline">Take a break</Link></small></p>
           <p className="text-center mb0"><small><GoogleAnalytics.OutboundLink
+              className="no-underline"
               eventLabel="DiDoesDigital: Typey Type updates and steno news (external link opens in new tab)"
               aria-label="Typey Type updates and steno news (external link opens in new tab)"
               to="https://didoesdigital.com/#newsletter"
