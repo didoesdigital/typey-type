@@ -262,7 +262,7 @@ class Finished extends Component {
     }
 
     let lessonSummary = (
-      <div className="finished-lesson mw-1024 overflow-hidden">
+      <div className="finished-lesson mx-auto mw-1440 overflow-hidden">
         <div className="finished-summary mb3 text-center">
           <h3
             className="negative-outline-offset dib text-center mt3"
@@ -342,49 +342,58 @@ class Finished extends Component {
     return (
       <div>
         <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
-        <div className="mx-auto mw-1024">
-          {customMessage}
-        </div>
-        <div className="mx-auto mw-1024 p3">
-          <div className="scores mb3">
-            <Scores
-              setAnnouncementMessage={this.props.setAnnouncementMessage}
-              timer={this.props.timer}
-              totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-              totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-              totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-              totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-              totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-              totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-            />
-          </div>
-          <div className="lesson-canvas lesson-canvas--finished panel p3 mb3">
-            <div className={lessonEmpty ? 'dc' : 'w-100'}>
-              {emptyAndZeroStateMessage}
-              {lessonSummary}
+        <div id="lesson-page" className="flex flex-wrap">
+          <div id="main-lesson-area" className="flex-grow mx-auto mw-1440">
+            <div className="mx-auto mw-1920">
+              {customMessage}
+            </div>
+            <div className="mx-auto mw-1920 p3">
+              <div className="scores mb3">
+                <Scores
+                  setAnnouncementMessage={this.props.setAnnouncementMessage}
+                  timer={this.props.timer}
+                  totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
+                  totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+                  totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
+                  totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
+                  totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
+                  totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
+                />
+              </div>
+              <div className="lesson-canvas lesson-canvas--finished panel p3 mb3">
+                <div className={lessonEmpty ? 'dc' : 'w-100'}>
+                  {emptyAndZeroStateMessage}
+                  {lessonSummary}
+                </div>
+              </div>
+              <UserSettings
+                changeUserSetting={this.props.changeUserSetting}
+                changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
+                changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+                changeShowStrokesAs={this.props.changeShowStrokesAs}
+                changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
+                changeStenoLayout={this.props.changeStenoLayout}
+                chooseStudy={this.props.chooseStudy}
+                disableUserSettings={this.props.disableUserSettings}
+                handleLimitWordsChange={this.props.handleLimitWordsChange}
+                handleStartFromWordChange={this.props.handleStartFromWordChange}
+                handleRepetitionsChange={this.props.handleRepetitionsChange}
+                hideOtherSettings={this.props.hideOtherSettings}
+                maxStartFromWord={this.props.lessonLength}
+                path={this.props.path}
+                revisionMode={this.props.revisionMode}
+                setAnnouncementMessage={this.props.setAnnouncementMessage}
+                toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+                totalWordCount={this.props.totalWordCount}
+                userSettings={this.props.userSettings}
+              />
             </div>
           </div>
-          <UserSettings
-            changeUserSetting={this.props.changeUserSetting}
-            changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
-            changeShowStrokesAs={this.props.changeShowStrokesAs}
-            changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
-            changeStenoLayout={this.props.changeStenoLayout}
-            chooseStudy={this.props.chooseStudy}
-            disableUserSettings={this.props.disableUserSettings}
-            handleLimitWordsChange={this.props.handleLimitWordsChange}
-            handleStartFromWordChange={this.props.handleStartFromWordChange}
-            handleRepetitionsChange={this.props.handleRepetitionsChange}
-            hideOtherSettings={this.props.hideOtherSettings}
-            maxStartFromWord={this.props.lessonLength}
-            path={this.props.path}
-            revisionMode={this.props.revisionMode}
-            setAnnouncementMessage={this.props.setAnnouncementMessage}
-            toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-            totalWordCount={this.props.totalWordCount}
-            userSettings={this.props.userSettings}
-          />
+          <div>
+            {
+              // settings panel to go here
+            }
+          </div>
         </div>
       </div>
     )
