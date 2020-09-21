@@ -15,7 +15,7 @@ class Footer extends Component {
     }
     return (
       <div className="bg-slat">
-        <footer role="contentinfo" className={"footer mx-auto mw-1920 flex flex-wrap items-center justify-between mt3 pt1 pb1 pl3 pr3 hide-in-fullscreen" + fullscreen}>
+        <footer role="contentinfo" className={"footer mx-auto mw-1920 flex flex-wrap items-center justify-between pt1 pb1 pl3 pr3 hide-in-fullscreen" + fullscreen}>
           <p className="text-center mb0"><small><Link to="/support">About</Link> and <Link to="/support#privacy">Privacy</Link></small></p>
           <p className="text-center mb0"><small><Link to="/contribute">Contribute</Link></small></p>
           <p className="text-center mb0"><small>Made with <span aria-label="love" role="img">❤️</span> by <a href="https://didoesdigital.com/">DiDoesDigital</a></small></p>

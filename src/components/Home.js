@@ -206,7 +206,7 @@ class Home extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-slat landing-page-section">
+          <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="text-center">
                 <h3 id="steno-news">Keep up with news</h3>
@@ -238,11 +238,6 @@ class Home extends Component {
                 {
                 }<a href='https://didoesdigital.com/#newsletter' className="link-button dib" style={{lineHeight: 2}} target="_blank" rel="noopener noreferrer" aria-label="Steno news (external link opens in new tab)">Steno news</a>
               </div>
-            </div>
-          </div>
-          <div className="bg-info">
-            <div className="p3 mx-auto mw-1024">
-              <span aria-hidden="true">&nbsp;</span>
             </div>
           </div>
         </main>

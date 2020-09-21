@@ -438,7 +438,7 @@ class DictionaryImport extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-white landing-page-section mb3">
+          <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="flex flex-wrap">
                 <div className="mw-568 mr3 flex-grow">
