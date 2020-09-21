@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import LessonCanvasFooter from './LessonCanvasFooter';
 import Scores from './Scores';
 import UserSettings from './UserSettings';
 import { IconRestart } from './Icon';
@@ -366,6 +367,16 @@ class Finished extends Component {
                   {lessonSummary}
                 </div>
               </div>
+              <LessonCanvasFooter
+                chooseStudy={this.props.chooseStudy}
+                disableUserSettings={this.props.disableUserSettings}
+                userSettings={this.props.userSettings}
+                setAnnouncementMessage={this.props.setAnnouncementMessage}
+                toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+                hideOtherSettings={this.props.hideOtherSettings}
+                path={this.props.path}
+                totalWordCount={this.props.totalWordCount}
+              />
               <UserSettings
                 changeUserSetting={this.props.changeUserSetting}
                 changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}

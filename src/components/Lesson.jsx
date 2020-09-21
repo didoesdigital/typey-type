@@ -5,6 +5,7 @@ import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
 import ErrorBoundary from './ErrorBoundary'
+import LessonCanvasFooter from './LessonCanvasFooter';
 import LessonOverview from './LessonOverview';
 import LessonNotFound from './LessonNotFound';
 import Material from './Material';
@@ -459,6 +460,16 @@ class Lesson extends Component {
                               </div>
                             </div>
                           </div>
+                          <LessonCanvasFooter
+                            chooseStudy={this.props.chooseStudy}
+                            disableUserSettings={this.props.disableUserSettings}
+                            userSettings={this.props.userSettings}
+                            setAnnouncementMessage={this.props.setAnnouncementMessage}
+                            toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+                            hideOtherSettings={this.props.hideOtherSettings}
+                            path={this.props.path}
+                            totalWordCount={this.props.totalWordCount}
+                          />
                           <UserSettings
                             changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
                             changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}

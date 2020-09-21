@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import { Tooltip } from 'react-tippy';
-import LessonCanvasFooter from './LessonCanvasFooter';
 import NumericInput from 'react-numeric-input';
 
 class UserSettings extends Component {
@@ -72,17 +71,6 @@ class UserSettings extends Component {
         <form>
           <h3 className="mb1 visually-hidden">Settings</h3>
           <div className="text-small">
-            <LessonCanvasFooter
-              chooseStudy={this.props.chooseStudy}
-              disableUserSettings={this.props.disableUserSettings}
-              userSettings={this.props.userSettings}
-              setAnnouncementMessage={this.props.setAnnouncementMessage}
-              toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-              hideOtherSettings={this.props.hideOtherSettings}
-              path={this.props.path}
-              totalWordCount={this.props.totalWordCount}
-            />
-
             <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'hide' : ''} aria-hidden={this.props.hideOtherSettings}>
 
               <div className="flex flex-wrap justify-between">
