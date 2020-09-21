@@ -653,10 +653,10 @@ class UserSettings extends Component {
 
                   </div>
                 </div>
+                <p className="mt1"><small>Total words: {this.props.totalWordCount}</small></p>
               </div>
             </div>
           </form>
-        <p className="mt1 text-right"><small>Total words: {this.props.totalWordCount}</small></p>
       </div>
     )
   }
