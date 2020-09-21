@@ -33,7 +33,7 @@ class Header extends Component {
     return (
       <div>
         <a href="#main" className="skip-to-main-link link-button" id="ga--header--skip-to-main-content">Skip to main content</a>
-        <div className={"header mh-88 hide-in-fullscreen" + fullscreen} role="banner">
+        <div className={"header min-h-88 hide-in-fullscreen" + fullscreen} role="banner">
           <div className="mx-auto mw-1920 p3">
             <nav>
               <div className="site-heading-banner">

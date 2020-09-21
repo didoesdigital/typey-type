@@ -60,7 +60,7 @@ $link-button-height: 2.5rem;
 $link-button-width: 2.5rem;
 $link-button-large-width: 3rem;
 $link-button-large-height: 3rem;
-$header-plus-footer-height: 208px;
+$header-plus-footer-height: 88 + 88 + 24 + 48px; // header + subheader + footer margin + footer
 
 // Element styles
 * {
@@ -575,14 +575,14 @@ input:focus::placeholder {
 .mw-320  { max-width: 320px; }
 .mw-240  { max-width: 240px; }
 
-.mh-40  { min-height: 40px; }
-.mh-88  { min-height: 88px; }
-.mh-384  { min-height: 384px; }
-.mh-424  { min-height: 424px; }
+.min-h-40  { min-height: 40px; }
+.min-h-88  { min-height: 88px; }
+.min-h-384  { min-height: 384px; }
+.min-h-424  { min-height: 424px; }
+.min-vh-100 { min-height:100vh; }
+.mh-page { min-height: calc(100vh - #{$header-plus-footer-height}); }
 
 .min-width-70 {min-width: 70%; }
-
-.mh-page { min-height: calc(100vh - #{$header-plus-footer-height}); }
 
 .p0      { padding: 0px; }
 .p1      { padding: 8px; }

@@ -631,23 +631,26 @@ input:focus::placeholder {
 .mw-240 {
   max-width: 240px; }
 
-.mh-40 {
+.min-h-40 {
   min-height: 40px; }
 
-.mh-88 {
+.min-h-88 {
   min-height: 88px; }
 
-.mh-384 {
+.min-h-384 {
   min-height: 384px; }
 
-.mh-424 {
+.min-h-424 {
   min-height: 424px; }
+
+.min-vh-100 {
+  min-height: 100vh; }
+
+.mh-page {
+  min-height: calc(100vh - 248px); }
 
 .min-width-70 {
   min-width: 70%; }
-
-.mh-page {
-  min-height: calc(100vh - 208px); }
 
 .p0 {
   padding: 0px; }
