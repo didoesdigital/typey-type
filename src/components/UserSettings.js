@@ -106,7 +106,7 @@ class UserSettings extends Component {
                       <p className="radio-group mr3">
                         <label className="radio-label">
                           <input
-                            className="radio-input mt05"
+                            className="radio-input"
                             type="radio"
                             name="study"
                             id="discover"
@@ -135,7 +135,7 @@ class UserSettings extends Component {
                       <p className="radio-group mr3">
                         <label className="radio-label">
                           <input
-                            className="radio-input mt05"
+                            className="radio-input"
                             type="radio"
                             name="study"
                             id="revise"
@@ -166,7 +166,7 @@ class UserSettings extends Component {
                       <p className="radio-group mr3">
                         <label className="radio-label">
                           <input
-                            className="radio-input mt05"
+                            className="radio-input"
                             type="radio"
                             name="study"
                             id="drill"
@@ -195,7 +195,7 @@ class UserSettings extends Component {
                       <p className="radio-group mr3">
                         <label className="radio-label">
                           <input
-                            className="radio-input mt05"
+                            className="radio-input"
                             type="radio"
                             name="study"
                             id="practice"

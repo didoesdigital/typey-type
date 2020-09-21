@@ -1161,14 +1161,14 @@ label {
   margin-bottom: 8px; }
 
 .checkbox-label {
-  padding-left: 24px;
   margin-bottom: 0; }
+  .checkbox-label span {
+    vertical-align: middle; }
 
 .checkbox-input {
-  position: absolute;
-  margin-top: 2px;
-  margin-left: -24px;
-  touch-action: manipulation; }
+  margin-right: 8px;
+  touch-action: manipulation;
+  vertical-align: middle; }
 
 .radio-group {
   position: relative;
@@ -1176,14 +1176,14 @@ label {
   margin-bottom: 8px; }
 
 .radio-label {
-  padding-left: 24px;
   margin-bottom: 0; }
+  .radio-label span {
+    vertical-align: middle; }
 
 .radio-input {
-  position: absolute;
-  margin-top: 2px;
-  margin-left: -24px;
-  touch-action: manipulation; }
+  margin-right: 8px;
+  touch-action: manipulation;
+  vertical-align: middle; }
 
 .form-control {
   border-radius: 4px;
