@@ -52,7 +52,6 @@ $z-index-autocomplete-menu: 5;
 $z-index-vertical-text: 4;
 $z-index-revision-mode-button: 3;
 $z-index-show-scores-control: 3;
-$z-index-fill-fade-edges: 2;
 $z-index-successfully-typed-text: -1;
 $z-index-skip-to-main-link: 2;
 $z-index-unknown-steno-diagram-text: 1;
@@ -576,6 +575,8 @@ input:focus::placeholder {
 .mw-320  { max-width: 320px; }
 .mw-240  { max-width: 240px; }
 
+.min-w-0 { min-width: 0; }
+
 .min-h-40  { min-height: 40px; }
 .min-h-88  { min-height: 88px; }
 .min-h-384  { min-height: 384px; }
@@ -918,13 +919,21 @@ input:focus::placeholder {
   font-size: $h6-size;
 }
 
+.material-typed-text-and-hint {
+  padding-left: 0;
+
+  @media (min-width: $large-breakpoint) {
+    padding-left: 120px;
+  }
+}
+
 .material {
   margin-left: auto;
   margin-right: auto;
 
-  @media (min-width: $large-breakpoint) {
-    min-width: 936px;
-  }
+  // @media (min-width: $large-breakpoint) {
+  //   min-width: 936px;
+  // }
 }
 .material-pre {
 }
@@ -939,16 +948,18 @@ $textarea-padding-x: 8px;
   margin-bottom: -1.5em;
   margin-right: calc(50% + #{$left-offset-for-zipper} - #{$textarea-padding-x});
   text-align: right;
-  transform: translateY(-1.575em - 0.5em); // line height minus margin bottom
+  transform: translateY(-2.575em - 0.5em); // line height minus margin bottom
+  // transform: translateY(-1.575em - 0.5em); // line height minus margin bottom
   font-weight: normal;
 }
 .current-and-upcoming-phrases {
-  margin-left: calc(50% - #{$left-offset-for-zipper});
+  // margin-left: calc(50% - #{$left-offset-for-zipper});
   margin-bottom: 0.5em;
   margin-top: 8px;
   text-align: left;
   width: 100%;
   transform: translateX(2px + 8px);
+
   @media (max-width: 736px) {
     margin-left: 0;
   }
@@ -1022,8 +1033,9 @@ $textarea-padding-x: 8px;
 }
 
 .typed-text-input-positioning {
-  margin-left: calc(50% - #{$left-offset-for-zipper});
-  width: calc(2 * #{$left-offset-for-zipper});
+  // margin-left: calc(50% - #{$left-offset-for-zipper});
+  // width: calc(2 * #{$left-offset-for-zipper});
+  width: 100%;
   @media (max-width: 736px) {
     width: 240px;
     margin-left: 0;
@@ -1559,18 +1571,18 @@ label {
   border: 1px solid $brand-primary;
   margin-left: auto;
   margin-right: auto;
-  @media (min-width: $large-breakpoint) {
-    min-width: 936px;
-  }
+  // @media (min-width: $large-breakpoint) {
+  //   min-width: 936px;
+  // }
 }
 .input-text {
   margin-left: auto;
   margin-right: auto;
   // opacity: 0;
   // position: absolute;
-  @media (min-width: $large-breakpoint) {
-    min-width: 936px;
-  }
+  // @media (min-width: $large-breakpoint) {
+  //   min-width: 936px;
+  // }
   top: 0;
   left: 0;
   right: 0;
@@ -1583,14 +1595,15 @@ label {
 
 .stroke-tip {
   margin-bottom: 0.5em;
-  margin-left: calc(50% - #{$left-offset-for-zipper + 0.55em});
-  padding-right: calc(50% - 9.5em); // avoid fill-fade edge
+  // margin-left: calc(50% - #{$left-offset-for-zipper + 0.55em});
+  // padding-right: calc(50% - 9.5em); // avoid fill-fade edge
+  padding-right: 50%;
   text-align: left;
   transform: translateX(2px + 8px);
   width: 100%;
-  @media (min-width: $large-breakpoint) {
-    min-width: 960px;
-  }
+  // @media (min-width: $large-breakpoint) {
+  //   min-width: 960px;
+  // }
   @media (max-width: 736px) {
     margin-left: 0;
   }
@@ -1732,38 +1745,6 @@ label {
     width: initial;
     overflow: initial;
     clip: initial;
-  }
-}
-
-// new-stacking-context
-.fill-fade-parent {
-  position: relative;
-  z-index: 0;
-}
-.fill-fade-edges {
-  background-image: linear-gradient(to right,
-    add-tint($brand-primary, 97%) 0%,
-    add-tint($brand-primary, 97%) 0%,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0) 90%,
-    add-tint($brand-primary, 97%) 95%,
-    add-tint($brand-primary, 97%) 100%);
-  border-radius: 4px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: $z-index-fill-fade-edges;
-
-  @media (min-width: $medium-breakpoint) {
-    background-image: linear-gradient(to right,
-      add-tint($brand-primary, 97%) 0%,
-      add-tint($brand-primary, 97%) 5%,
-      rgba(255,255,255,0) 10%,
-      rgba(255,255,255,0) 90%,
-      add-tint($brand-primary, 97%) 95%,
-      add-tint($brand-primary, 97%) 100%);
   }
 }
 

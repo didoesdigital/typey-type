@@ -634,6 +634,9 @@ input:focus::placeholder {
 .mw-240 {
   max-width: 240px; }
 
+.min-w-0 {
+  min-width: 0; }
+
 .min-h-40 {
   min-height: 40px; }
 
@@ -981,23 +984,25 @@ input:focus::placeholder {
 .stat__label {
   font-size: 0.8rem; }
 
+.material-typed-text-and-hint {
+  padding-left: 0; }
+  @media (min-width: 1024px) {
+    .material-typed-text-and-hint {
+      padding-left: 120px; } }
+
 .material {
   margin-left: auto;
   margin-right: auto; }
-  @media (min-width: 1024px) {
-    .material {
-      min-width: 936px; } }
 
 .completed-phrases {
   float: right;
   margin-bottom: -1.5em;
   margin-right: calc(50% + 20em - 8px);
   text-align: right;
-  transform: translateY(-2.075em);
+  transform: translateY(-3.075em);
   font-weight: normal; }
 
 .current-and-upcoming-phrases {
-  margin-left: calc(50% - 20em);
   margin-bottom: 0.5em;
   margin-top: 8px;
   text-align: left;
@@ -1059,8 +1064,7 @@ input:focus::placeholder {
   z-index: -1; }
 
 .typed-text-input-positioning {
-  margin-left: calc(50% - 20em);
-  width: calc(2 * 20em); }
+  width: 100%; }
   @media (max-width: 736px) {
     .typed-text-input-positioning {
       width: 240px;
@@ -1438,9 +1442,6 @@ label {
   border: 1px solid #402351;
   margin-left: auto;
   margin-right: auto; }
-  @media (min-width: 1024px) {
-    .typed-text {
-      min-width: 936px; } }
 
 .input-text {
   margin-left: auto;
@@ -1449,23 +1450,16 @@ label {
   left: 0;
   right: 0;
   bottom: 0; }
-  @media (min-width: 1024px) {
-    .input-text {
-      min-width: 936px; } }
 
 .previous-completed-phrase-as-typed-wrapper {
   pointer-events: none; }
 
 .stroke-tip {
   margin-bottom: 0.5em;
-  margin-left: calc(50% - 20.55em);
-  padding-right: calc(50% - 9.5em);
+  padding-right: 50%;
   text-align: left;
   transform: translateX(10px);
   width: 100%; }
-  @media (min-width: 1024px) {
-    .stroke-tip {
-      min-width: 960px; } }
   @media (max-width: 736px) {
     .stroke-tip {
       margin-left: 0; } }
@@ -1568,23 +1562,6 @@ label {
     width: initial;
     overflow: initial;
     clip: initial; }
-
-.fill-fade-parent {
-  position: relative;
-  z-index: 0; }
-
-.fill-fade-edges {
-  background-image: linear-gradient(to right, #f9f8fa 0%, #f9f8fa 0%, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 90%, #f9f8fa 95%, #f9f8fa 100%);
-  border-radius: 4px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 2; }
-  @media (min-width: 768px) {
-    .fill-fade-edges {
-      background-image: linear-gradient(to right, #f9f8fa 0%, #f9f8fa 5%, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0) 90%, #f9f8fa 95%, #f9f8fa 100%); } }
 
 .carousel--flashcards {
   margin-left: calc(2.5rem + 8px);

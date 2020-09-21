@@ -405,8 +405,8 @@ class Lesson extends Component {
                       </div>
                     </div>
                   </div>
-                  <div id="lesson-page" className="flex flex-wrap">
-                    <div id="main-lesson-area" className="flex-grow mx-auto mw-1440">
+                  <div id="lesson-page" className="flex mx-auto mw-1920">
+                    <div id="main-lesson-area" className="flex-grow mx-auto mw-1440 min-w-0">
                       <div>
                         <div role="complementary" className="mx-auto mw-1920">
                           {customMessage}
@@ -431,10 +431,9 @@ class Lesson extends Component {
                               />
                             </div>
                           </AnimateHeight>
-                          <div role="article" className="lesson-canvas panel mx-auto mw-1440 p2 fill-fade-parent mb3">
+                          <div role="article" className="lesson-canvas panel mx-auto mw-1440 p2 mb3">
                             {revisionModeButton}
-                            <span className="fill-fade-edges pointer-none"></span>
-                            <div className="mx-auto mw100 mt10 text-center min-width-70">
+                            <div className="mx-auto mw100 mt10 text-center min-width-70 material-typed-text-and-hint">
                               <Material
                                 actualText={this.props.actualText}
                                 currentPhrase={this.props.currentPhrase}
