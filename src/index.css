@@ -2070,3 +2070,9 @@ small .svg-icon-wrapper.svg-baseline svg {
 
 .modal__overlay--before-close {
   opacity: 0; }
+
+.footer {
+  flex-direction: column; }
+  @media (min-width: 768px) {
+    .footer {
+      flex-direction: row; } }

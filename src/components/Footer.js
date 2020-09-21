@@ -14,40 +14,38 @@ class Footer extends Component {
       fullscreen = "";
     }
     return (
-      <footer role="contentinfo" className={"ml3 mr3 hide-in-fullscreen" + fullscreen}>
-        <p className="text-center mt1 mb0"><small>Made with <span aria-label="love" role="img">❤️</span> by <a href="https://didoesdigital.com/">DiDoesDigital</a>.</small></p>
-        <p className="text-center mb0"><small><Link to="/support">Learn more about Typey&nbsp;Type</Link> and <Link to="/support#privacy">privacy</Link>.</small></p>
-        <p className="text-center mb0"><small><Link to="/contribute">Contribute to Typey&nbsp;Type</Link> and{" "}
-          <GoogleAnalytics.OutboundLink
-            eventLabel="DiDoesDigital: Typey Type updates and steno news (external link opens in new tab)"
-            aria-label="Typey Type updates and steno news (external link opens in new tab)"
-            to="https://didoesdigital.com/#newsletter"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            sign up to steno&nbsp;news
-            <Tooltip
-              title="(external link opens in new tab)"
-              animation="shift"
-              arrow="true"
-              className=""
-              duration="200"
-              tabIndex="0"
-              tag="span"
-              theme="didoesdigital"
-              trigger="mouseenter focus click"
-              onShow={this.props.setAnnouncementMessage}
+      <div className="bg-slat">
+        <footer role="contentinfo" className={"footer mx-auto mw-1920 flex flex-wrap items-center justify-between mt3 pt1 pb1 pl3 pr3 hide-in-fullscreen" + fullscreen}>
+          <p className="text-center mb0"><small><Link to="/support">About</Link> and <Link to="/support#privacy">Privacy</Link></small></p>
+          <p className="text-center mb0"><small><Link to="/contribute">Contribute</Link></small></p>
+          <p className="text-center mb0"><small>Made with <span aria-label="love" role="img">❤️</span> by <a href="https://didoesdigital.com/">DiDoesDigital</a></small></p>
+          <p className="text-center mb0"><small><Link to="/break">Take a break</Link></small></p>
+          <p className="text-center mb0"><small><GoogleAnalytics.OutboundLink
+              eventLabel="DiDoesDigital: Typey Type updates and steno news (external link opens in new tab)"
+              aria-label="Typey Type updates and steno news (external link opens in new tab)"
+              to="https://didoesdigital.com/#newsletter"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-            </Tooltip>
-        </GoogleAnalytics.OutboundLink>.</small>
-      </p>
-      <p className="text-center mb1">
-        <small>
-          <Link to="/break">Take a 5-minute break</Link>.
-        </small>
-      </p>
-      </footer>
+              Steno&nbsp;news
+              <Tooltip
+                title="(external link opens in new tab)"
+                animation="shift"
+                arrow="true"
+                className=""
+                duration="200"
+                tabIndex="0"
+                tag="span"
+                theme="didoesdigital"
+                trigger="mouseenter focus click"
+                onShow={this.props.setAnnouncementMessage}
+              >
+                <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+              </Tooltip>
+            </GoogleAnalytics.OutboundLink></small>
+          </p>
+        </footer>
+      </div>
     )
   }
 }

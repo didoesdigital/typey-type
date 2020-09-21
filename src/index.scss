@@ -2370,5 +2370,13 @@ $lineAdjustment: 4px;
 
 
 
+.footer {
+  flex-direction: column;
+
+  @media (min-width: $medium-breakpoint) {
+    flex-direction: row;
+  }
+}
+
 
 
