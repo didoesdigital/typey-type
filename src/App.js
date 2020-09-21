@@ -1969,314 +1969,316 @@ class App extends Component {
       return (
         <div id="js-app" className="app">
           <Announcements message={this.state.announcementMessage} />
-          <div>
-            <Switch>
-              <Route exact={true} path="/" render={(props) =>
-                <div>
-                  {header}
-                  <DocumentTitle title='Typey Type for Stenographers'>
-                    <Home
-                      setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-                      setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
-                      {...props}
-                    />
-                  </DocumentTitle>
-                </div>
-                }
-              />
-              <Route path="/support" render={ () =>
-                <div>
-                  {header}
-                  <DocumentTitle title={'Typey Type | About'}>
-                    <ErrorBoundary>
-                      <Support
-                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
-                      />
-                    </ErrorBoundary>
-                  </DocumentTitle>
-                </div>
-                }
-              />
-              <Route path="/writer" render={ (props) =>
-                <div>
-                  {header}
-                  <DocumentTitle title={'Typey Type | Writer'}>
-                    <ErrorBoundary>
-                      <AsyncWriter
-                        changeStenoLayout={this.changeStenoLayout.bind(this)}
-                        changeWriterInput={this.changeWriterInput.bind(this)}
-                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
-                        globalUserSettings={this.state.globalUserSettings}
-                        userSettings={this.state.userSettings}
-                        {...props}
-                      />
-                    </ErrorBoundary>
-                  </DocumentTitle>
-                </div>
-                }
-              />
-              <Route path="/break" render={ (props) =>
-                <div>
-                  {header}
-                  <DocumentTitle title={'Typey Type | Take a break'}>
-                    <ErrorBoundary>
-                      <AsyncBreak
+          <div className="flex flex-column justify-between min-vh-100">
+            <div>
+              <Switch>
+                <Route exact={true} path="/" render={(props) =>
+                  <div>
+                    {header}
+                    <DocumentTitle title='Typey Type for Stenographers'>
+                      <Home
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         {...props}
                       />
-                    </ErrorBoundary>
-                  </DocumentTitle>
-                </div>
-                }
-              />
-              <Route path="/contribute" render={ () =>
-                <div>
-                  {header}
-                  <DocumentTitle title={'Typey Type | Contribute'}>
-                    <ErrorBoundary>
-                      <Contribute
-                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
-                      />
-                    </ErrorBoundary>
-                  </DocumentTitle>
-                </div>
-                }
-              />
-              <Route path="/progress" render={ () =>
-                <div>
-                  {header}
-                  <DocumentTitle title={'Typey Type | Progress'}>
-                    <ErrorBoundary>
-                      <Progress
-                        calculateSeenWordCount={calculateSeenWordCount.bind(this)}
-                        calculateMemorisedWordCount={calculateMemorisedWordCount.bind(this)}
-                        changeFlashcardCourseLevel={this.changeFlashcardCourseLevel.bind(this)}
-                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
-                        setPersonalPreferences={this.setPersonalPreferences.bind(this)}
-                        metWords={this.state.metWords}
+                    </DocumentTitle>
+                  </div>
+                  }
+                />
+                <Route path="/support" render={ () =>
+                  <div>
+                    {header}
+                    <DocumentTitle title={'Typey Type | About'}>
+                      <ErrorBoundary>
+                        <Support
+                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                        />
+                      </ErrorBoundary>
+                    </DocumentTitle>
+                  </div>
+                  }
+                />
+                <Route path="/writer" render={ (props) =>
+                  <div>
+                    {header}
+                    <DocumentTitle title={'Typey Type | Writer'}>
+                      <ErrorBoundary>
+                        <AsyncWriter
+                          changeStenoLayout={this.changeStenoLayout.bind(this)}
+                          changeWriterInput={this.changeWriterInput.bind(this)}
+                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          globalUserSettings={this.state.globalUserSettings}
+                          userSettings={this.state.userSettings}
+                          {...props}
+                        />
+                      </ErrorBoundary>
+                    </DocumentTitle>
+                  </div>
+                  }
+                />
+                <Route path="/break" render={ (props) =>
+                  <div>
+                    {header}
+                    <DocumentTitle title={'Typey Type | Take a break'}>
+                      <ErrorBoundary>
+                        <AsyncBreak
+                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          {...props}
+                        />
+                      </ErrorBoundary>
+                    </DocumentTitle>
+                  </div>
+                  }
+                />
+                <Route path="/contribute" render={ () =>
+                  <div>
+                    {header}
+                    <DocumentTitle title={'Typey Type | Contribute'}>
+                      <ErrorBoundary>
+                        <Contribute
+                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                        />
+                      </ErrorBoundary>
+                    </DocumentTitle>
+                  </div>
+                  }
+                />
+                <Route path="/progress" render={ () =>
+                  <div>
+                    {header}
+                    <DocumentTitle title={'Typey Type | Progress'}>
+                      <ErrorBoundary>
+                        <Progress
+                          calculateSeenWordCount={calculateSeenWordCount.bind(this)}
+                          calculateMemorisedWordCount={calculateMemorisedWordCount.bind(this)}
+                          changeFlashcardCourseLevel={this.changeFlashcardCourseLevel.bind(this)}
+                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          setPersonalPreferences={this.setPersonalPreferences.bind(this)}
+                          metWords={this.state.metWords}
+                          flashcardsMetWords={this.state.flashcardsMetWords}
+                          flashcardsProgress={this.state.flashcardsProgress}
+                          flashcardsNextLesson={this.state.flashcardsNextLesson}
+                          globalUserSettings={this.state.globalUserSettings}
+                          recommendationHistory={this.state.recommendationHistory}
+                          recommendedNextLesson={this.state.recommendedNextLesson}
+                          lessonsProgress={this.state.lessonsProgress}
+                          lessonIndex={this.state.lessonIndex}
+                          recentLessonHistory={this.state.recentLessons.history}
+                          startingMetWordsToday={this.state.startingMetWordsToday}
+                          updateFlashcardsRecommendation={this.updateFlashcardsRecommendation.bind(this)}
+                          updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
+                          updateStartingMetWordsAndCounts={this.updateStartingMetWordsAndCounts.bind(this)}
+                          updateUserGoals={this.updateUserGoals.bind(this)}
+                          updateUserGoalsUnveiled={this.updateUserGoalsUnveiled.bind(this)}
+                          userGoals={this.state.userGoals}
+                          oldWordsGoalUnveiled={this.state.oldWordsGoalUnveiled}
+                          newWordsGoalUnveiled={this.state.newWordsGoalUnveiled}
+                          yourSeenWordCount={this.state.yourSeenWordCount}
+                          yourMemorisedWordCount={this.state.yourMemorisedWordCount}
+                        />
+                      </ErrorBoundary>
+                    </DocumentTitle>
+                  </div>
+                  }
+                />
+                <Route path="/flashcards" render={ () =>
+                  <div>
+                    {header}
+                    <DocumentTitle title={'Typey Type | Flashcards'}>
+                      <Flashcards
+                        changeFullscreen={this.changeFullscreen.bind(this)}
+                        fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                         flashcardsMetWords={this.state.flashcardsMetWords}
                         flashcardsProgress={this.state.flashcardsProgress}
-                        flashcardsNextLesson={this.state.flashcardsNextLesson}
-                        globalUserSettings={this.state.globalUserSettings}
-                        recommendationHistory={this.state.recommendationHistory}
-                        recommendedNextLesson={this.state.recommendedNextLesson}
-                        lessonsProgress={this.state.lessonsProgress}
-                        lessonIndex={this.state.lessonIndex}
-                        recentLessonHistory={this.state.recentLessons.history}
-                        startingMetWordsToday={this.state.startingMetWordsToday}
-                        updateFlashcardsRecommendation={this.updateFlashcardsRecommendation.bind(this)}
-                        updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
-                        updateStartingMetWordsAndCounts={this.updateStartingMetWordsAndCounts.bind(this)}
-                        updateUserGoals={this.updateUserGoals.bind(this)}
-                        updateUserGoalsUnveiled={this.updateUserGoalsUnveiled.bind(this)}
-                        userGoals={this.state.userGoals}
-                        oldWordsGoalUnveiled={this.state.oldWordsGoalUnveiled}
-                        newWordsGoalUnveiled={this.state.newWordsGoalUnveiled}
-                        yourSeenWordCount={this.state.yourSeenWordCount}
-                        yourMemorisedWordCount={this.state.yourMemorisedWordCount}
-                      />
-                    </ErrorBoundary>
-                  </DocumentTitle>
-                </div>
-                }
-              />
-              <Route path="/flashcards" render={ () =>
-                <div>
-                  {header}
-                  <DocumentTitle title={'Typey Type | Flashcards'}>
-                    <Flashcards
-                      changeFullscreen={this.changeFullscreen.bind(this)}
-                      fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
-                      flashcardsMetWords={this.state.flashcardsMetWords}
-                      flashcardsProgress={this.state.flashcardsProgress}
-                      fullscreen={this.state.fullscreen}
-                      globalLookupDictionary={this.state.globalLookupDictionary}
-                      globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
-                      globalUserSettings={this.state.globalUserSettings}
-                      lessonpath="flashcards"
-                      locationpathname={this.props.location.pathname}
-                      updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
-                      updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
-                      updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
-                      userSettings={this.state.userSettings}
-                    />
-                  </DocumentTitle>
-                </div>
-                }
-              />
-              <Route path="/lookup" render={ (props) =>
-                <div>
-                  {header}
-                  <DocumentTitle title={'Typey Type | Lookup'}>
-                    <ErrorBoundary>
-                      <AsyncLookup
-                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
-                        fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
+                        fullscreen={this.state.fullscreen}
                         globalLookupDictionary={this.state.globalLookupDictionary}
                         globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                         globalUserSettings={this.state.globalUserSettings}
-                        lookupTerm={this.state.lookupTerm}
-                        updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
-                        userSettings={this.state.userSettings}
-                        {...props}
-                      />
-                    </ErrorBoundary>
-                  </DocumentTitle>
-                </div>
-                }
-              />
-              <Route path="/dictionaries" render={ (props) =>
-                <div>
-                  {header}
-                  <DocumentTitle title={'Typey Type | Dictionaries'}>
-                    <ErrorBoundary>
-                      <AsyncDictionaries
-                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
-                        setDictionaryIndex={this.setDictionaryIndex.bind(this)}
-                        setGlobalDictionaryLoaded={this.setGlobalDictionaryLoaded.bind(this)}
-                        fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
-                        globalLookupDictionary={this.state.globalLookupDictionary}
-                        globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
-                        updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
-                        userSettings={this.state.userSettings}
-                        dictionaryIndex={this.state.dictionaryIndex}
-                        {...props}
-                      />
-                    </ErrorBoundary>
-                  </DocumentTitle>
-                </div>
-                }
-              />
-              <Route path="/lessons" render={ (props) =>
-                <div>
-                  {header}
-                  <DocumentTitle title={'Typey Type | Lessons'}>
-                    <ErrorBoundary>
-                      <Lessons
-                        customLesson={this.state.customLesson}
-                        customLessonMaterial={this.state.customLessonMaterial}
-                        customLessonMaterialValidationState={this.state.customLessonMaterialValidationState}
-                        customLessonMaterialValidationMessages={this.state.customLessonMaterialValidationMessages}
+                        lessonpath="flashcards"
+                        locationpathname={this.props.location.pathname}
                         updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
                         updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
-                        flashcardsMetWords={this.state.flashcardsMetWords}
-                        flashcardsProgress={this.state.flashcardsProgress}
-                        fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
-                        globalLookupDictionary={this.state.globalLookupDictionary}
-                        globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
-                        lessonsProgress={this.state.lessonsProgress}
-                        lessonNotFound={this.state.lessonNotFound}
-                        fullscreen={this.state.fullscreen}
-                        changeFullscreen={this.changeFullscreen.bind(this)}
-                        restartLesson={this.restartLesson.bind(this)}
-                        reviseLesson={this.reviseLesson.bind(this)}
-                        items={this.state.lessonIndex}
-                        lessonSubTitle={this.state.lesson.subtitle}
-                        lessonTitle={this.state.lesson.title}
-                        nextLessonPath={this.state.nextLessonPath}
-                        onChange={(ev, value) => {
-                        this.setState({
-                        value: ev.target.value
-                        })}}
-                        onSelect={(value, item) => this.setState({
-                        value: value,
-                        nextLessonPath: item.path
-                        })}
-                        path={this.state.lesson.path}
-                        handleStopLesson={this.handleStopLesson.bind(this)}
-                        value={this.state.value}
-                        lessonIndex={this.state.lessonIndex}
-                        lesson={this.state.lesson}
-                        handleLesson={this.handleLesson.bind(this)}
-                        actualText={this.state.actualText}
-                        changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
-                        changeShowStrokesOnMisstroke={this.changeShowStrokesOnMisstroke.bind(this)}
-                        changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
-                        changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
-                        changeStenoLayout={this.changeStenoLayout.bind(this)}
-                        changeShowScoresWhileTyping={this.changeShowScoresWhileTyping.bind(this)}
-                        changeShowStrokesAs={this.changeShowStrokesAs.bind(this)}
-                        changeUserSetting={this.changeUserSetting.bind(this)}
-                        chooseStudy={this.chooseStudy.bind(this)}
-                        completedPhrases={completedMaterial}
-                        createCustomLesson={this.createCustomLesson.bind(this)}
-                        currentLessonStrokes={this.state.currentLessonStrokes}
-                        currentPhraseID={this.state.currentPhraseID}
-                        currentPhrase={presentedMaterialCurrentItem.phrase}
-                        currentStroke={presentedMaterialCurrentItem.stroke}
-                        disableUserSettings={this.state.disableUserSettings}
-                        handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
-                        handleStartFromWordChange={this.handleStartFromWordChange.bind(this)}
-                        handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
-                        hideOtherSettings={this.state.hideOtherSettings}
-                        metWords={this.state.metWords}
-                        previousCompletedPhraseAsTyped={this.state.previousCompletedPhraseAsTyped}
-                        recommendationHistory={this.state.recommendationHistory}
-                        repetitionsRemaining={this.state.repetitionsRemaining}
-                        revisionMaterial={this.state.revisionMaterial}
-                        revisionMode={this.state.revisionMode}
-                        updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
-                        sayCurrentPhraseAgain={this.sayCurrentPhraseAgain.bind(this)}
-                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
-                        startFromWordOne={this.startFromWordOne.bind(this)}
-                        stopLesson={this.stopLesson.bind(this)}
-                        startCustomLesson={this.startCustomLesson.bind(this)}
-                        setUpProgressRevisionLesson={this.setUpProgressRevisionLesson.bind(this)}
-                        setupLesson={this.setupLesson.bind(this)}
-                        settings={this.state.lesson.settings}
-                        showStrokesInLesson={this.state.showStrokesInLesson}
-                        targetStrokeCount={this.state.targetStrokeCount}
-                        timer={this.state.timer}
-                        toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
-                        topSpeedToday={this.state.topSpeedToday}
-                        topSpeedPersonalBest={this.state.topSpeedPersonalBest}
-                        updateUserGoals={this.state.updateUserGoals}
-                        charsPerWord={this.charsPerWord}
-                        totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
-                        totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
-                        totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
-                        totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
-                        totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
-                        totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
-                        totalWordCount={stateLesson.presentedMaterial.length}
-                        upcomingPhrases={upcomingMaterial}
-                        updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
-                        updateMarkup={this.updateMarkup.bind(this)}
-                        updateTopSpeedToday={this.updateTopSpeedToday.bind(this)}
-                        updateTopSpeedPersonalBest={this.updateTopSpeedPersonalBest.bind(this)}
                         userSettings={this.state.userSettings}
-                        {...props}
                       />
-                    </ErrorBoundary>
-                  </DocumentTitle>
-                </div>
-                }
-              />
-              <Route render={ (props) =>
-                <div>
-                  <DocumentTitle title={'Typey Type | Page not found'}>
-                    <PageNotFound
-                      setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-                    />
-                  </DocumentTitle>
-                </div>
-                }
-              />
-            </Switch>
+                    </DocumentTitle>
+                  </div>
+                  }
+                />
+                <Route path="/lookup" render={ (props) =>
+                  <div>
+                    {header}
+                    <DocumentTitle title={'Typey Type | Lookup'}>
+                      <ErrorBoundary>
+                        <AsyncLookup
+                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
+                          globalLookupDictionary={this.state.globalLookupDictionary}
+                          globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
+                          globalUserSettings={this.state.globalUserSettings}
+                          lookupTerm={this.state.lookupTerm}
+                          updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                          userSettings={this.state.userSettings}
+                          {...props}
+                        />
+                      </ErrorBoundary>
+                    </DocumentTitle>
+                  </div>
+                  }
+                />
+                <Route path="/dictionaries" render={ (props) =>
+                  <div>
+                    {header}
+                    <DocumentTitle title={'Typey Type | Dictionaries'}>
+                      <ErrorBoundary>
+                        <AsyncDictionaries
+                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          setDictionaryIndex={this.setDictionaryIndex.bind(this)}
+                          setGlobalDictionaryLoaded={this.setGlobalDictionaryLoaded.bind(this)}
+                          fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
+                          globalLookupDictionary={this.state.globalLookupDictionary}
+                          globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
+                          updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                          userSettings={this.state.userSettings}
+                          dictionaryIndex={this.state.dictionaryIndex}
+                          {...props}
+                        />
+                      </ErrorBoundary>
+                    </DocumentTitle>
+                  </div>
+                  }
+                />
+                <Route path="/lessons" render={ (props) =>
+                  <div>
+                    {header}
+                    <DocumentTitle title={'Typey Type | Lessons'}>
+                      <ErrorBoundary>
+                        <Lessons
+                          customLesson={this.state.customLesson}
+                          customLessonMaterial={this.state.customLessonMaterial}
+                          customLessonMaterialValidationState={this.state.customLessonMaterialValidationState}
+                          customLessonMaterialValidationMessages={this.state.customLessonMaterialValidationMessages}
+                          updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
+                          updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
+                          flashcardsMetWords={this.state.flashcardsMetWords}
+                          flashcardsProgress={this.state.flashcardsProgress}
+                          fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
+                          globalLookupDictionary={this.state.globalLookupDictionary}
+                          globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
+                          updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                          lessonsProgress={this.state.lessonsProgress}
+                          lessonNotFound={this.state.lessonNotFound}
+                          fullscreen={this.state.fullscreen}
+                          changeFullscreen={this.changeFullscreen.bind(this)}
+                          restartLesson={this.restartLesson.bind(this)}
+                          reviseLesson={this.reviseLesson.bind(this)}
+                          items={this.state.lessonIndex}
+                          lessonSubTitle={this.state.lesson.subtitle}
+                          lessonTitle={this.state.lesson.title}
+                          nextLessonPath={this.state.nextLessonPath}
+                          onChange={(ev, value) => {
+                          this.setState({
+                          value: ev.target.value
+                          })}}
+                          onSelect={(value, item) => this.setState({
+                          value: value,
+                          nextLessonPath: item.path
+                          })}
+                          path={this.state.lesson.path}
+                          handleStopLesson={this.handleStopLesson.bind(this)}
+                          value={this.state.value}
+                          lessonIndex={this.state.lessonIndex}
+                          lesson={this.state.lesson}
+                          handleLesson={this.handleLesson.bind(this)}
+                          actualText={this.state.actualText}
+                          changeShowStrokesInLesson={this.changeShowStrokesInLesson.bind(this)}
+                          changeShowStrokesOnMisstroke={this.changeShowStrokesOnMisstroke.bind(this)}
+                          changeSortOrderUserSetting={this.changeSortOrderUserSetting.bind(this)}
+                          changeSpacePlacementUserSetting={this.changeSpacePlacementUserSetting.bind(this)}
+                          changeStenoLayout={this.changeStenoLayout.bind(this)}
+                          changeShowScoresWhileTyping={this.changeShowScoresWhileTyping.bind(this)}
+                          changeShowStrokesAs={this.changeShowStrokesAs.bind(this)}
+                          changeUserSetting={this.changeUserSetting.bind(this)}
+                          chooseStudy={this.chooseStudy.bind(this)}
+                          completedPhrases={completedMaterial}
+                          createCustomLesson={this.createCustomLesson.bind(this)}
+                          currentLessonStrokes={this.state.currentLessonStrokes}
+                          currentPhraseID={this.state.currentPhraseID}
+                          currentPhrase={presentedMaterialCurrentItem.phrase}
+                          currentStroke={presentedMaterialCurrentItem.stroke}
+                          disableUserSettings={this.state.disableUserSettings}
+                          handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
+                          handleStartFromWordChange={this.handleStartFromWordChange.bind(this)}
+                          handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
+                          hideOtherSettings={this.state.hideOtherSettings}
+                          metWords={this.state.metWords}
+                          previousCompletedPhraseAsTyped={this.state.previousCompletedPhraseAsTyped}
+                          recommendationHistory={this.state.recommendationHistory}
+                          repetitionsRemaining={this.state.repetitionsRemaining}
+                          revisionMaterial={this.state.revisionMaterial}
+                          revisionMode={this.state.revisionMode}
+                          updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
+                          sayCurrentPhraseAgain={this.sayCurrentPhraseAgain.bind(this)}
+                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          startFromWordOne={this.startFromWordOne.bind(this)}
+                          stopLesson={this.stopLesson.bind(this)}
+                          startCustomLesson={this.startCustomLesson.bind(this)}
+                          setUpProgressRevisionLesson={this.setUpProgressRevisionLesson.bind(this)}
+                          setupLesson={this.setupLesson.bind(this)}
+                          settings={this.state.lesson.settings}
+                          showStrokesInLesson={this.state.showStrokesInLesson}
+                          targetStrokeCount={this.state.targetStrokeCount}
+                          timer={this.state.timer}
+                          toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
+                          topSpeedToday={this.state.topSpeedToday}
+                          topSpeedPersonalBest={this.state.topSpeedPersonalBest}
+                          updateUserGoals={this.state.updateUserGoals}
+                          charsPerWord={this.charsPerWord}
+                          totalNumberOfMatchedWords={this.state.totalNumberOfMatchedWords}
+                          totalNumberOfNewWordsMet={this.state.totalNumberOfNewWordsMet}
+                          totalNumberOfLowExposuresSeen={this.state.totalNumberOfLowExposuresSeen}
+                          totalNumberOfRetainedWords={this.state.totalNumberOfRetainedWords}
+                          totalNumberOfMistypedWords={this.state.totalNumberOfMistypedWords}
+                          totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
+                          totalWordCount={stateLesson.presentedMaterial.length}
+                          upcomingPhrases={upcomingMaterial}
+                          updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
+                          updateMarkup={this.updateMarkup.bind(this)}
+                          updateTopSpeedToday={this.updateTopSpeedToday.bind(this)}
+                          updateTopSpeedPersonalBest={this.updateTopSpeedPersonalBest.bind(this)}
+                          userSettings={this.state.userSettings}
+                          {...props}
+                        />
+                      </ErrorBoundary>
+                    </DocumentTitle>
+                  </div>
+                  }
+                />
+                <Route render={ (props) =>
+                  <div>
+                    <DocumentTitle title={'Typey Type | Page not found'}>
+                      <PageNotFound
+                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                      />
+                    </DocumentTitle>
+                  </div>
+                  }
+                />
+              </Switch>
+            </div>
+            <Footer
+              fullscreen={this.state.fullscreen}
+              setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+            />
           </div>
-          <Footer
-            fullscreen={this.state.fullscreen}
-            setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
-          />
         </div>
       );
   }
