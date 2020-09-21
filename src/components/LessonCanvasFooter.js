@@ -12,7 +12,7 @@ class LessonCanvasFooter extends Component {
     }
 
     return (
-      <div className="flex flex-wrap mx-auto mw-1440 justify-between mb2">
+      <div className="flex flex-wrap mx-auto mw-1440 justify-between mb2 text-small">
         { !this.props.path.includes("custom") && !this.props.path.includes("progress") ?
             <p className="mb0">Study <Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="mb0">Flashcards</Link></p>
           :
