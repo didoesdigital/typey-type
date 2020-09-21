@@ -71,7 +71,7 @@ class UserSettings extends Component {
         <form>
           <h3 className="mb1 visually-hidden">Settings</h3>
           <div className="text-small">
-            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'hide' : ''} aria-hidden={this.props.hideOtherSettings}>
+            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'bg-slat pl3 bl b--brand-primary-tint hide' : 'bg-slat pl3 bl b--brand-primary-tint'} aria-hidden={this.props.hideOtherSettings}>
 
               <div className="flex flex-wrap justify-between">
                 <div>
@@ -653,7 +653,7 @@ class UserSettings extends Component {
 
                   </div>
                 </div>
-                <p className="mt1"><small>Total words: {this.props.totalWordCount}</small></p>
+                <p className="mt1 mb0 pb1"><small>Total words: {this.props.totalWordCount}</small></p>
               </div>
             </div>
           </form>
