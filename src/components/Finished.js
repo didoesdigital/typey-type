@@ -377,33 +377,30 @@ class Finished extends Component {
                 path={this.props.path}
                 totalWordCount={this.props.totalWordCount}
               />
-              <UserSettings
-                changeUserSetting={this.props.changeUserSetting}
-                changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
-                changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
-                changeShowStrokesAs={this.props.changeShowStrokesAs}
-                changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
-                changeStenoLayout={this.props.changeStenoLayout}
-                chooseStudy={this.props.chooseStudy}
-                disableUserSettings={this.props.disableUserSettings}
-                handleLimitWordsChange={this.props.handleLimitWordsChange}
-                handleStartFromWordChange={this.props.handleStartFromWordChange}
-                handleRepetitionsChange={this.props.handleRepetitionsChange}
-                hideOtherSettings={this.props.hideOtherSettings}
-                maxStartFromWord={this.props.lessonLength}
-                path={this.props.path}
-                revisionMode={this.props.revisionMode}
-                setAnnouncementMessage={this.props.setAnnouncementMessage}
-                toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-                totalWordCount={this.props.totalWordCount}
-                userSettings={this.props.userSettings}
-              />
             </div>
           </div>
           <div>
-            {
-              // settings panel to go here
-            }
+            <UserSettings
+              changeUserSetting={this.props.changeUserSetting}
+              changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
+              changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+              changeShowStrokesAs={this.props.changeShowStrokesAs}
+              changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
+              changeStenoLayout={this.props.changeStenoLayout}
+              chooseStudy={this.props.chooseStudy}
+              disableUserSettings={this.props.disableUserSettings}
+              handleLimitWordsChange={this.props.handleLimitWordsChange}
+              handleStartFromWordChange={this.props.handleStartFromWordChange}
+              handleRepetitionsChange={this.props.handleRepetitionsChange}
+              hideOtherSettings={this.props.hideOtherSettings}
+              maxStartFromWord={this.props.lessonLength}
+              path={this.props.path}
+              revisionMode={this.props.revisionMode}
+              setAnnouncementMessage={this.props.setAnnouncementMessage}
+              toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+              totalWordCount={this.props.totalWordCount}
+              userSettings={this.props.userSettings}
+            />
           </div>
         </div>
       </div>

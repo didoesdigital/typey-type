@@ -470,30 +470,32 @@ class Lesson extends Component {
                             path={this.props.path}
                             totalWordCount={this.props.totalWordCount}
                           />
-                          <UserSettings
-                            changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
-                            changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
-                            changeStenoLayout={this.props.changeStenoLayout}
-                            changeShowStrokesAs={this.props.changeShowStrokesAs}
-                            changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
-                            changeUserSetting={this.props.changeUserSetting}
-                            chooseStudy={this.props.chooseStudy}
-                            disableUserSettings={this.props.disableUserSettings}
-                            handleLimitWordsChange={this.props.handleLimitWordsChange}
-                            handleStartFromWordChange={this.props.handleStartFromWordChange}
-                            handleRepetitionsChange={this.props.handleRepetitionsChange}
-                            hideOtherSettings={this.props.hideOtherSettings}
-                            maxStartFromWord={this.props.lessonLength}
-                            path={this.props.path}
-                            revisionMode={this.props.revisionMode}
-                            setAnnouncementMessage={this.props.setAnnouncementMessage}
-                            toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-                            totalWordCount={this.props.totalWordCount}
-                            userSettings={this.props.userSettings}
-                          />
                         </div>
                         <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
                       </div>
+                    </div>
+                    <div>
+                      <UserSettings
+                        changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
+                        changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+                        changeStenoLayout={this.props.changeStenoLayout}
+                        changeShowStrokesAs={this.props.changeShowStrokesAs}
+                        changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
+                        changeUserSetting={this.props.changeUserSetting}
+                        chooseStudy={this.props.chooseStudy}
+                        disableUserSettings={this.props.disableUserSettings}
+                        handleLimitWordsChange={this.props.handleLimitWordsChange}
+                        handleStartFromWordChange={this.props.handleStartFromWordChange}
+                        handleRepetitionsChange={this.props.handleRepetitionsChange}
+                        hideOtherSettings={this.props.hideOtherSettings}
+                        maxStartFromWord={this.props.lessonLength}
+                        path={this.props.path}
+                        revisionMode={this.props.revisionMode}
+                        setAnnouncementMessage={this.props.setAnnouncementMessage}
+                        toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+                        totalWordCount={this.props.totalWordCount}
+                        userSettings={this.props.userSettings}
+                      />
                     </div>
                   </div>
                 </main>

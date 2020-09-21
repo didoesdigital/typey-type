@@ -67,7 +67,7 @@ class UserSettings extends Component {
     let webSpeechAvailable = this.state.webSpeechSupportResults['hasSpeechSynthesis'] && this.state.webSpeechSupportResults['hasSpeechSynthesisUtterance'];
 
     return (
-      <div className="user-settings">
+      <div className="user-settings mw-320">
         <form>
           <h3 className="mb1 visually-hidden">Settings</h3>
           <div className="text-small">
