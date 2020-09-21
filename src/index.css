@@ -592,6 +592,9 @@ input:focus::placeholder {
 .mw100 {
   max-width: 100%; }
 
+.mw-1920 {
+  max-width: 1920px; }
+
 .mw-1024 {
   max-width: 1024px; }
 

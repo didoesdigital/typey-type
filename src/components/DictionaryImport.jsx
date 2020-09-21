@@ -412,7 +412,7 @@ class DictionaryImport extends Component {
             null
           }
           <div className="subheader">
-            <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
+            <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between p3">
               <div className="flex mr1 self-center">
                 <header className="flex items-baseline">
                   <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Dictionary import</h2>

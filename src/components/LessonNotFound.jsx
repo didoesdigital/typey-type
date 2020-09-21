@@ -58,7 +58,7 @@ class LessonNotFound extends Component {
       <DocumentTitle title={'Typey Type | Missing Lesson'}>
         <main id="main">
           <div className="subheader">
-            <div className="flex flex-wrap items-baseline mx-auto mw-1024 justify-between p3">
+            <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between p3">
               <div className="flex mr1 self-center">
                 <header className="flex items-baseline">
                   <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
