@@ -418,7 +418,10 @@ input:focus::placeholder {
   border-color: #402351; }
 
 .b--brand-primary-tint {
-  border-color: #c6bdcb; }
+  border-color: #d9d3dc; }
+
+.b--brand-primary-tint--50 {
+  border-color: #a091a8; }
 
 .bb {
   border-bottom-style: solid;

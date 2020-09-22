@@ -470,7 +470,10 @@ input:focus::placeholder {
   border-color: $brand-primary;
 }
 .b--brand-primary-tint {
-  border-color: add-tint($brand-primary, 70%);
+  border-color: add-tint($brand-primary, 80%);
+}
+.b--brand-primary-tint--50 {
+  border-color: add-tint($brand-primary, 50%);
 }
 .bb {
   border-bottom-style: solid;

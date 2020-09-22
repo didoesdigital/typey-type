@@ -69,13 +69,13 @@ class UserSettings extends Component {
     return (
       <div className="user-settings mw-320">
         <form>
-          <h3 className="mb1 visually-hidden">Settings</h3>
           <div className="text-small">
-            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'mh-page bg-slat bl b--brand-primary-tint hide' : 'mh-page bg-slat bl b--brand-primary-tint'} aria-hidden={this.props.hideOtherSettings}>
+            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'mh-page bg-slat bl b--brand-primary-tint--50 hide' : 'mh-page bg-slat bl b--brand-primary-tint--50'} aria-hidden={this.props.hideOtherSettings}>
+              <h3 className="mb1 visually-hidden">Settings</h3>
 
               <p className="mb0 pt2 pb1 pb1 pl2"><small>Total words: {this.props.totalWordCount}</small></p>
               <ul className="unstyled-list mb0 pb1">
-                <li className="ml0 pl1 bt b--brand-primary-tint">
+                <li className="ml0 pl1 bt b--brand-primary-tint--50">
                   <div className="checkbox-group">
                     <label className="checkbox-label">
                       <input
@@ -136,7 +136,7 @@ class UserSettings extends Component {
                   </div>
 
                 </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <li className="ml0 pl1 bt b--brand-primary-tint--50">
 
                   <div className="checkbox-group">
                     <label className="checkbox-label">
@@ -227,7 +227,7 @@ class UserSettings extends Component {
                   </div>
 
                 </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <li className="ml0 pl1 bt b--brand-primary-tint--50">
                   <div className="checkbox-group">
                     <label className="checkbox-label">
                       <input
@@ -347,7 +347,7 @@ class UserSettings extends Component {
 
                 </li>
 
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <li className="ml0 pl1 bt b--brand-primary-tint--50">
                     <div className="checkbox-group">
                       <label className="checkbox-label">
                         <input
@@ -495,7 +495,7 @@ class UserSettings extends Component {
                     </div>
 
                   </li>
-                    <li className="ml0 pl1 bt b--brand-primary-tint">
+                    <li className="ml0 pl1 bt b--brand-primary-tint--50">
                     <div className="mb2 mt2 pl1 pr1">
                       <Tooltip
                         title="Set match spaces to suit your steno settings"
