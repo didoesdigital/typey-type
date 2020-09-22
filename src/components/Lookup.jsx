@@ -42,7 +42,7 @@ class Lookup extends Component {
           <div className="">
             <div className="mt0">
               <h3 className="h4">Share link</h3>
-              <p className="mb0 truncate"><a className="py05 dib" id="js-bookmark-url" href={this.state.bookmarkURL}>https://didoesdigital.com{this.state.bookmarkURL}</a></p>
+              <p className="mb0 truncate"><span className="py05 dib" id="js-bookmark-url" href={this.state.bookmarkURL}>https://didoesdigital.com{this.state.bookmarkURL}</span></p>
             </div>
           </div>
           <div className="w-100 flex-grow mr3 min-h-384">
