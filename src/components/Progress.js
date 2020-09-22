@@ -785,14 +785,14 @@ class Progress extends Component {
           <form onSubmit={this.saveGoals.bind(this)}>
             <div className="pt4 pb4">
               <div className="mb3">
-                <label id="js-first-interactive-form-field-element" htmlFor="userGoalInputOldWords">Old words goal</label>
+                <label className="pb1" id="js-first-interactive-form-field-element" htmlFor="userGoalInputOldWords">Old words goal</label>
                 { oldWordsNumericInput }
                 <div className="mt1 text-small de-emphasized">
                   (50–200 recommended)
                 </div>
               </div>
               <div className="mb3">
-                <label htmlFor="userGoalInputNewWords">New words goal</label>
+                <label className="pb1" htmlFor="userGoalInputNewWords">New words goal</label>
                 { newWordsNumericInput }
                 <div className="mt1 text-small de-emphasized">
                   (5–40 recommended)

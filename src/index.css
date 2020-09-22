@@ -1186,8 +1186,7 @@ label {
   display: block; }
 
 .checkbox-label {
-  margin-bottom: 0;
-  padding: 8px; }
+  margin-bottom: 0; }
   .checkbox-label span {
     vertical-align: middle; }
 
@@ -1201,8 +1200,7 @@ label {
   display: block; }
 
 .radio-label {
-  margin-bottom: 0;
-  padding: 8px; }
+  margin-bottom: 0; }
   .radio-label span {
     vertical-align: middle; }
 

@@ -6,15 +6,15 @@ class LessonCanvasFooter extends Component {
   render() {
     let toggleClasses;
     if (this.props.hideOtherSettings) {
-      toggleClasses = "pt1 mb0 de-emphasized text-center subsection-header-toggle collapsed";
+      toggleClasses = "mb0 de-emphasized text-center subsection-header-toggle collapsed";
     } else {
-      toggleClasses = "pt1 mb0 de-emphasized text-center subsection-header-toggle";
+      toggleClasses = "mb0 de-emphasized text-center subsection-header-toggle";
     }
 
     return (
       <div className="flex flex-wrap mx-auto mw-1440 justify-between mb2 text-small">
         { !this.props.path.includes("custom") && !this.props.path.includes("progress") ?
-          <p className="mb0 pt1"><Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="mb0">Flashcards</Link></p>
+          <p className="mb0"><Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="mb0">Flashcards</Link></p>
           :
           null
         }
@@ -22,7 +22,7 @@ class LessonCanvasFooter extends Component {
           <fieldset className="dc hide-sm">
             <Tooltip
               title="Study types are recommended presets for settings you can change"
-              className="mw-240 pt1"
+              className="mw-240"
               animation="shift"
               arrow="true"
               duration="200"
@@ -37,7 +37,7 @@ class LessonCanvasFooter extends Component {
             </Tooltip>
             <div className="flex mb1">
               <div className="flex flex-wrap justify-between">
-                <p className="radio-group mr3">
+                <p className="radio-group mr3 mb0">
                   <label className="radio-label">
                     <input
                       className="radio-input"
@@ -66,7 +66,7 @@ class LessonCanvasFooter extends Component {
                     </Tooltip>
                   </label>
                 </p>
-                <p className="radio-group mr3">
+                <p className="radio-group mr3 mb0">
                   <label className="radio-label">
                     <input
                       className="radio-input"
@@ -97,7 +97,7 @@ class LessonCanvasFooter extends Component {
                 </p>
               </div>
               <div className="flex flex-wrap justify-between">
-                <p className="radio-group mr3">
+                <p className="radio-group mr3 mb0">
                   <label className="radio-label">
                     <input
                       className="radio-input"
@@ -126,7 +126,7 @@ class LessonCanvasFooter extends Component {
                     </Tooltip>
                   </label>
                 </p>
-                <p className="radio-group mr3">
+                <p className="radio-group mr3 mb0">
                   <label className="radio-label">
                     <input
                       className="radio-input"
