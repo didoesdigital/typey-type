@@ -452,7 +452,7 @@ input:focus::placeholder {
 // .overflow-y-visible { overflow-y: visible; }
 // .overflow-y-hidden { overflow-y: hidden; }
 // .overflow-y-scroll { overflow-y: scroll; }
-// .overflow-y-auto { overflow-y: auto; }
+.overflow-y-auto { overflow-y: auto; }
 
 .bw-1 {
   border-width: 1px;
@@ -587,6 +587,8 @@ input:focus::placeholder {
 .mw-240  { max-width: 240px; }
 
 .min-w-0 { min-width: 0; }
+
+.max-h-240  { max-height: 240px; }
 
 .min-h-40  { min-height: 40px; }
 .min-h-88  { min-height: 88px; }

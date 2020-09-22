@@ -402,6 +402,9 @@ input:focus::placeholder {
 .overflow-auto {
   overflow: auto; }
 
+.overflow-y-auto {
+  overflow-y: auto; }
+
 .bw-1 {
   border-width: 1px; }
 
@@ -647,6 +650,9 @@ input:focus::placeholder {
 
 .min-w-0 {
   min-width: 0; }
+
+.max-h-240 {
+  max-height: 240px; }
 
 .min-h-40 {
   min-height: 40px; }

@@ -188,7 +188,7 @@ class StrokesForWords extends Component {
 
     let strokes = splitBriefsIntoStrokes(brief);
     let diagrams = (
-      <div className="flex overflow-auto mr05">
+      <div className="flex flex-wrap mr05 overflow-y-auto max-h-240">
         {this.props.userSettings && this.props.userSettings.showStrokesAsDiagrams && this.state.listOfStrokesAndDicts.length > 0 && strokes.map((strokeToDraw, index) =>
           <React.Fragment key={index}>
             {(Object.values(mapBriefsFunction(strokeToDraw)).some(item => item)) && <div className="mt1 mr2 mb2"><StenoLayoutDiagram id={"diagramID-"+ index + '-' + strokeToDraw} {...mapBriefsFunction(strokeToDraw)} brief="steno-diagram-group" diagramWidth="192" /></div> }
