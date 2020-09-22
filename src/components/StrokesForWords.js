@@ -117,7 +117,7 @@ class StrokesForWords extends Component {
       ploverMisstrokesDetail = <p><span className="bg-danger">(Plover misstrokes included.)</span></p>
     }
     else {
-      ploverMisstrokesDetail = <p><span className="de-emphasized">(3000 misstrokes hidden.)</span></p>
+      ploverMisstrokesDetail = <p><span className="de-emphasized">(4000 misstrokes hidden.)</span></p>
     }
 
     let loadingOrError;
