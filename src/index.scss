@@ -605,7 +605,6 @@ input:focus::placeholder {
 .p2      { padding: 16px; }
 .p3      { padding: 24px; }
 .p5      { padding: 40px; }
-.px3     { padding-left: 24px; padding-right: 24px; }
 .pb0     { padding-bottom: 0; }
 .pb1     { padding-bottom: 8px; }
 .pb3     { padding-bottom: 24px; }
@@ -630,14 +629,14 @@ input:focus::placeholder {
   padding: 4px;
 }
 
-.px05 {
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
 .py05 {
   padding-top: 4px;
   padding-bottom: 4px;
+}
+
+.py2 {
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 .py3 {
@@ -645,9 +644,19 @@ input:focus::placeholder {
   padding-bottom: 24px;
 }
 
+.px05 {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
 .px1 {
   padding-left: 8px;
   padding-right: 8px;
+}
+
+.px3 {
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .w1 {

@@ -863,7 +863,7 @@ class Progress extends Component {
       <div>
         <main id="main">
           <div className="subheader" id="js-page-confetti-target">
-            <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between p3">
+            <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
               <div className="flex mr1 self-center">
                 <header className="flex items-baseline">
                   <h2 id="progress" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Progress</h2>
