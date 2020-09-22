@@ -703,17 +703,26 @@ input:focus::placeholder {
 .pl1 {
   padding-left: 8px; }
 
+.pl2 {
+  padding-left: 16px; }
+
 .pl3 {
   padding-left: 24px; }
 
 .pr1 {
   padding-right: 8px; }
 
+.pr2 {
+  padding-right: 16px; }
+
 .pr3 {
   padding-right: 24px; }
 
 .pt1 {
   padding-top: 8px; }
+
+.pt2 {
+  padding-top: 16px; }
 
 .pt3 {
   padding-top: 24px; }
@@ -1170,11 +1179,11 @@ label {
 
 .checkbox-group {
   position: relative;
-  display: block;
-  margin-bottom: 8px; }
+  display: block; }
 
 .checkbox-label {
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  padding: 8px; }
   .checkbox-label span {
     vertical-align: middle; }
 
@@ -1185,11 +1194,11 @@ label {
 
 .radio-group {
   position: relative;
-  display: block;
-  margin-bottom: 8px; }
+  display: block; }
 
 .radio-label {
-  margin-bottom: 0; }
+  margin-bottom: 0;
+  padding: 8px; }
   .radio-label span {
     vertical-align: middle; }
 

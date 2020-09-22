@@ -71,11 +71,12 @@ class UserSettings extends Component {
         <form>
           <h3 className="mb1 visually-hidden">Settings</h3>
           <div className="text-small">
-            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'bg-slat pl3 bl b--brand-primary-tint hide' : 'bg-slat pl3 bl b--brand-primary-tint'} aria-hidden={this.props.hideOtherSettings}>
+            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'mh-page bg-slat bl b--brand-primary-tint hide' : 'mh-page bg-slat bl b--brand-primary-tint'} aria-hidden={this.props.hideOtherSettings}>
 
-              <div className="flex flex-wrap justify-between">
-                <div>
-                  <div className="checkbox-group mt2">
+              <p className="mb0 pt2 pb1 pb1 pl2"><small>Total words: {this.props.totalWordCount}</small></p>
+              <ul className="unstyled-list mb0 pb1">
+                <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <div className="checkbox-group">
                     <label className="checkbox-label">
                       <input
                         className="checkbox-input"
@@ -102,6 +103,9 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
+
+                </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint">
 
                   <div className="checkbox-group">
                     <label className="checkbox-label">
@@ -131,6 +135,9 @@ class UserSettings extends Component {
                     </label>
                   </div>
 
+                </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint">
+
                   <div className="checkbox-group">
                     <label className="checkbox-label">
                       <input
@@ -158,6 +165,9 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
+
+                </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint">
                   <div className="checkbox-group">
                     <label className="checkbox-label">
                       <input
@@ -185,6 +195,9 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
+
+                </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint">
                   <div className="checkbox-group">
                     <label className="checkbox-label">
                       <input
@@ -212,6 +225,9 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
+
+                </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint">
                   <div className="checkbox-group">
                     <label className="checkbox-label">
                       <input
@@ -239,6 +255,9 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
+
+                </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint">
                   <div className="checkbox-group">
                     <label className="checkbox-label">
                       <input
@@ -295,6 +314,9 @@ class UserSettings extends Component {
                       </div>
                     </ReactModal>)
                   </div>
+
+                </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint">
                   <div className="checkbox-group">
                     <label className="checkbox-label">
                       <input
@@ -322,11 +344,10 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
-                </div>
 
-                <div className="mt2">
-                  <fieldset>
-                    <legend className="mb1">Show briefs:</legend>
+                </li>
+
+                  <li className="ml0 pl1 bt b--brand-primary-tint">
                     <div className="checkbox-group">
                       <label className="checkbox-label">
                         <input
@@ -354,6 +375,8 @@ class UserSettings extends Component {
                         </Tooltip>
                       </label>
                     </div>
+                  </li>
+                    <li className="ml0 pl1 bt b--brand-primary-tint">
                     <div className="checkbox-group">
                       <label className="checkbox-label">
                         <input
@@ -381,6 +404,9 @@ class UserSettings extends Component {
                         </Tooltip>
                       </label>
                     </div>
+
+                  </li>
+                    <li className="ml0 pl1 bt b--brand-primary-tint">
                     <div className="checkbox-group">
                       <label className="checkbox-label">
                         <input
@@ -408,7 +434,10 @@ class UserSettings extends Component {
                         </Tooltip>
                       </label>
                     </div>
-                    <div className="mb2">
+
+                  </li>
+                    <li className="ml0 pl1 bt b--brand-primary-tint">
+                    <div className="pt1 pb1">
                       <div className="radio-group">
                         <label className="radio-label">
                           <input
@@ -464,11 +493,10 @@ class UserSettings extends Component {
                         </label>
                       </div>
                     </div>
-                  </fieldset>
-                </div>
 
-                <div>
-                    <div className="clearfix mb2 mt2">
+                  </li>
+                    <li className="ml0 pl1 bt b--brand-primary-tint">
+                    <div className="mb2 mt2 pl1 pr1">
                       <Tooltip
                         title="Set match spaces to suit your steno settings"
                         className="mw-240"
@@ -490,8 +518,10 @@ class UserSettings extends Component {
                         <option value="spaceOff">Ignore spaces</option>
                       </select>
                     </div>
+                  </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint">
 
-                    <div className="mb2">
+                    <div className="mb2 mt2 pl1 pr1">
                       <Tooltip
                         title="Show steno diagrams that suit your steno layout"
                         className="mw-240"
@@ -515,8 +545,10 @@ class UserSettings extends Component {
                         <option value="stenoLayoutKoreanModernCSteno">Korean Modern C steno</option>
                       </select>
                     </div>
+                  </li>
+                    <li className="ml0 pl1 bt b--brand-primary-tint">
 
-                    <div className="mb1">
+                    <div className="mb2 mt2 pl1 pr1">
                       <Tooltip
                         title="Sort the lesson (newest words need the most practice)"
                         className="mw-240"
@@ -538,9 +570,9 @@ class UserSettings extends Component {
                         <option value="sortOld">Oldest words first</option>
                       </select>
                     </div>
-                  </div>
-
-                  <div className="mt2">
+                  </li>
+                    <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <div className="mt2 mb2 pl1 pr2">
                     <Tooltip
                       title="Limit the number of words shown (0 for unlimited)"
                       className="mw-240"
@@ -576,6 +608,10 @@ class UserSettings extends Component {
                         snap
                       />
                     </div>
+                  </div>
+                  </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <div className="mt2 mb2 pl1 pr2">
 
                     <Tooltip
                       title="Start from this place in the lesson"
@@ -613,6 +649,10 @@ class UserSettings extends Component {
                         snap
                       />
                     </div>
+                  </div>
+                  </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <div className="mt2 pl1 pr2">
 
                     <Tooltip
                       title="Repeat the lesson up to 30 times"
@@ -652,8 +692,8 @@ class UserSettings extends Component {
                     </div>
 
                   </div>
-                </div>
-                <p className="mt1 mb0 pb1"><small>Total words: {this.props.totalWordCount}</small></p>
+                  </li>
+                </ul>
               </div>
             </div>
           </form>
