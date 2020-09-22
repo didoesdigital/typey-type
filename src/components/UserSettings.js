@@ -67,10 +67,10 @@ class UserSettings extends Component {
     let webSpeechAvailable = this.state.webSpeechSupportResults['hasSpeechSynthesis'] && this.state.webSpeechSupportResults['hasSpeechSynthesisUtterance'];
 
     return (
-      <div className="user-settings min-width-320">
+      <div className="user-settings">
         <form>
           <div className="text-small">
-            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'mh-page bg-slat bl b--brand-primary-tint--60 hide' : 'mh-page bg-slat bl b--brand-primary-tint--60'} aria-hidden={this.props.hideOtherSettings}>
+            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'mh-page bg-slat bl b--brand-primary-tint--60 min-width-320 hide' : 'mh-page bg-slat bl b--brand-primary-tint--60 min-width-320'} aria-hidden={this.props.hideOtherSettings}>
               <h3 className="mb1 visually-hidden">Settings</h3>
 
               <p className="mb0 pt2 pb1 pb1 pl2"><small>Total words: {this.props.totalWordCount}</small></p>
