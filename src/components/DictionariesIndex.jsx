@@ -43,7 +43,7 @@ class DictionariesIndex extends Component {
           }
         } else {
           learnMoreLink = (
-            <span> · <a href={dictionary.link} target='_blank' rel='noopener noreferrer'>Learn more
+            <span> · <a href={dictionary.link} aria-label={ariaLabel} target='_blank' rel='noopener noreferrer'>Learn more
               <Tooltip
                 title="Opens in a new tab"
                 animation="shift"
