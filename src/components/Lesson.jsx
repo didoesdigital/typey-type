@@ -319,6 +319,7 @@ class Lesson extends Component {
                 suggestedNext={this.nextLessonPath()}
                 lessonLength={propsLesson.presentedMaterial.length}
                 lessonTitle={this.props.lessonTitle}
+                location={this.props.location}
                 path={this.props.path}
                 prefillSurveyLink={this.prefillSurveyLink}
                 restartLesson={this.props.restartLesson}
