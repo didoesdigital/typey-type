@@ -678,7 +678,7 @@ class UserSettings extends Component {
                         tabIndex="0"
                         tag="span"
                         theme="didoesdigital didoesdigital-sm"
-                        trigger="focus click"
+                        trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
                         Text input accessibility
