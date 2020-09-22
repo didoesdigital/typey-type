@@ -76,260 +76,131 @@ class UserSettings extends Component {
               <p className="mb0 pt2 pb1 pb1 pl2"><small>Total words: {this.props.totalWordCount}</small></p>
               <ul className="unstyled-list mb0 pb1">
                 <li className="ml0 pl1 bt b--brand-primary-tint--60">
-                  <div className="checkbox-group">
-                    <label className="checkbox-label">
-                      <input
-                        className="checkbox-input"
-                        type="checkbox"
-                        name="caseSensitive"
-                        id="caseSensitive"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.caseSensitive}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      <Tooltip
-                        title="Capital letters in material won’t match typed lowercase letters"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Case sensitive
-                      </Tooltip>
-                    </label>
-                  </div>
-
-                </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
-
-                  <div className="checkbox-group">
-                    <label className="checkbox-label">
-                      <input
-                        className="checkbox-input"
-                        type="checkbox"
-                        name="simpleTypography"
-                        id="simpleTypography"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.simpleTypography}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      <Tooltip
-                        title='Simple typography replaces “curly quotes” in lesson material with "straight quotes"'
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Simple typography
-                      </Tooltip>
-                    </label>
-                  </div>
-
-                </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint--60">
-
-                  <div className="checkbox-group">
-                    <label className="checkbox-label">
-                      <input
-                        className="checkbox-input"
-                        type="checkbox"
-                        name="newWords"
-                        id="newWords"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.newWords}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      <Tooltip
-                        title="Show new words you haven’t yet typed correctly"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        New words
-                      </Tooltip>
-                    </label>
-                  </div>
-
-                </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
-                  <div className="checkbox-group">
-                    <label className="checkbox-label">
-                      <input
-                        className="checkbox-input"
-                        type="checkbox"
-                        name="seenWords"
-                        id="seenWords"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.seenWords}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      <Tooltip
-                        title="Show words you have seen before"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Seen words
-                      </Tooltip>
-                    </label>
-                  </div>
-
-                </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
-                  <div className="checkbox-group">
-                    <label className="checkbox-label">
-                      <input
-                        className="checkbox-input"
-                        type="checkbox"
-                        name="retainedWords"
-                        id="retainedWords"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.retainedWords}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      <Tooltip
-                        title="Show memorised words you’ve typed 30 times or more"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Memorised words
-                      </Tooltip>
-                    </label>
-                  </div>
-
-                </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint--60">
-                  <div className="checkbox-group">
-                    <label className="checkbox-label">
-                      <input
-                        className="checkbox-input"
-                        type="checkbox"
-                        name="blurMaterial"
-                        id="blurMaterial"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.blurMaterial}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      <Tooltip
-                        title="Blur words and use a screen reader or speak setting to practice transcription"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Blur words
-                      </Tooltip>
-                    </label>
-                  </div>
-
-                </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
-                  <div className="checkbox-group">
-                    <label className="checkbox-label">
-                      <input
-                        className="checkbox-input"
-                        type="checkbox"
-                        name="speakMaterial"
-                        id="speakMaterial"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.speakMaterial}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      Speak words with sound
-                    </label>
-                    {" "}(<button className="de-emphasized-button text-small" onClick={this.handleOpenModal} aria-label="Help with speak words setting" disabled={this.props.disableUserSettings}>help</button>
-                    <ReactModal
-                      isOpen={this.state.showModal}
-                      aria={{
-                        labelledby: "aria-modal-heading",
-                        describedby: "aria-modal-description"
-                      }}
-                      ariaHideApp={true}
-                      closeTimeoutMS={300}
-                      role="dialog"
-                      onRequestClose={this.handleCloseModal}
-                      className={{
-                        "base": "modal",
-                        "afterOpen": "modal--after-open",
-                        "beforeClose": "modal--before-close"
-                      }}
-                      overlayClassName={{
-                        "base": "modal__overlay",
-                        "afterOpen": "modal__overlay--after-open",
-                        "beforeClose": "modal__overlay--before-close"
-                      }}
+                  <div className="mt2 mb2 pl1 pr2">
+                    <Tooltip
+                      title="Limit the number of words shown (0 for unlimited)"
+                      className="mw-240"
+                      animation="shift"
+                      arrow="true"
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital didoesdigital-sm"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
                     >
-                      <div className="fr">
-                        <button className="de-emphasized-button hide-md" onClick={this.handleCloseModal}>Close</button>
-                      </div>
-                      <h3 id="aria-modal-heading">Speak words setting</h3>
-                      <div id="aria-modal-description">
-                        <p>Typey Type’s setting to “speak words” will speak words aloud when you have the sound turned on.</p>
-                        <p>This setting uses fancy browser technology called the “Web Speech API”.</p>
-                        <p className={webSpeechAvailable ? "quote mt1 mb3 bg-slat" : "quote mt1 mb3 bg-danger"}>Web Speech is {webSpeechAvailable ? " available" : " unavailable"} on your system.</p>
-                        { webSpeechAvailable ?
-                            <p>If you cannot hear anything and otherwise have working sound, your system might be missing a language pack or “voice”.</p>
-                            :
-                            <p><span className="bg-warning">You may need to update your browser or check that your device has a speech engine and language pack.</span></p>
-                        }
-                        <p>For Windows, you can download a “language pack” from Microsoft.</p>
-                        <p>For Linux systems, you may need to install a speech engine with voices, such as <code>speech-dispatcher</code> and <code>espeak-ng</code>.</p>
-                      </div>
-                      <div className="text-right">
-                        <button className="button" onClick={this.handleCloseModal}>OK</button>
-                      </div>
-                    </ReactModal>)
-                  </div>
-
-                </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
-                  <div className="checkbox-group">
-                    <label className="checkbox-label">
-                      <input
-                        className="checkbox-input"
-                        type="checkbox"
-                        name="textInputAccessibility"
-                        id="textInputAccessibility"
+                      <label htmlFor="limitNumberOfWords">Limit word count</label>
+                    </Tooltip>
+                    <div className="mb2">
+                      <NumericInput
+                        autoCapitalize="off"
+                        autoComplete="on"
+                        autoCorrect="on"
+                        autoFocus={false}
+                        className="form-control w6"
                         disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.textInputAccessibility}
-                        onChange={this.props.changeUserSetting}
+                        id="limitNumberOfWords"
+                        min={0}
+                        name="limitNumberOfWords"
+                        onChange={this.props.handleLimitWordsChange}
+                        precision={0}
+                        spellCheck="false"
+                        step={1}
+                        style={grabStyle()}
+                        type="number"
+                        value={this.props.userSettings.limitNumberOfWords}
+                        snap
                       />
+                    </div>
+                  </div>
+                </li>
+                <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <div className="mt2 mb2 pl1 pr2">
+
+                    <Tooltip
+                      title="Start from this place in the lesson"
+                      className="mw-240"
+                      animation="shift"
+                      arrow="true"
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital didoesdigital-sm"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
+                      <label htmlFor="startFromWord">Start from word</label>
+                    </Tooltip>
+                    <div className="mb2">
+                      <NumericInput
+                        autoCapitalize="off"
+                        autoComplete="on"
+                        autoCorrect="on"
+                        autoFocus={false}
+                        className="form-control w6"
+                        disabled={this.props.disableUserSettings || this.props.revisionMode}
+                        id="startFromWord"
+                        max={this.props.maxStartFromWord || 30000}
+                        min={1}
+                        name="startFromWord"
+                        onChange={this.props.handleStartFromWordChange}
+                        precision={0}
+                        spellCheck="false"
+                        step={1}
+                        style={grabStyle()}
+                        type="number"
+                        value={this.props.userSettings.startFromWord}
+                        snap
+                      />
+                    </div>
+                  </div>
+                </li>
+                <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <div className="mt2 pl1 pr2">
+
+                    <Tooltip
+                      title="Repeat the lesson up to 30 times"
+                      className="mw-240"
+                      animation="shift"
+                      arrow="true"
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital didoesdigital-sm"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
+                      <label htmlFor="repetitions">Repetitions</label>
+                    </Tooltip>
+                    <div className="mb2">
+                      <NumericInput
+                        autoCapitalize="off"
+                        autoComplete="on"
+                        autoCorrect="on"
+                        autoFocus={false}
+                        className="form-control w6"
+                        disabled={this.props.disableUserSettings}
+                        id="repetitions"
+                        max={30}
+                        min={1}
+                        name="repetitions"
+                        onChange={this.props.handleRepetitionsChange}
+                        precision={0}
+                        spellCheck="false"
+                        step={1}
+                        style={grabStyle()}
+                        type="number"
+                        value={this.props.userSettings.repetitions}
+                        snap
+                      />
+                    </div>
+
+                  </div>
+                </li>
+                <li className="ml0 pl1 bt b--brand-primary-tint">
+                    <div className="mb2 mt2 pl1 pr1">
                       <Tooltip
-                        title="When unchecked, this hides the text input field from screen readers to mute echoes from typed words but might make it impossible to access for some devices"
+                        title="Sort the lesson (newest words need the most practice)"
                         className="mw-240"
                         animation="shift"
                         arrow="true"
@@ -337,16 +208,19 @@ class UserSettings extends Component {
                         tabIndex="0"
                         tag="span"
                         theme="didoesdigital didoesdigital-sm"
-                        trigger="focus click"
+                        trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        Text input accessibility
+                        <label className="mb1 db" htmlFor="sortOrder">Sort</label>
                       </Tooltip>
-                    </label>
-                  </div>
-
-                </li>
-
+                      <select id="sortOrder" name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
+                        <option value="sortOff">Lesson default</option>
+                        <option value="sortRandom">Random</option>
+                        <option value="sortNew">Newest words first</option>
+                        <option value="sortOld">Oldest words first</option>
+                      </select>
+                    </div>
+                  </li>
                   <li className="ml0 pl1 bt b--brand-primary-tint--60">
                     <div className="checkbox-group">
                       <label className="checkbox-label">
@@ -493,9 +367,99 @@ class UserSettings extends Component {
                         </label>
                       </div>
                     </div>
-
                   </li>
-                    <li className="ml0 pl1 bt b--brand-primary-tint--60">
+                <li className="ml0 pl1 bt b--brand-primary-tint--60">
+
+                  <div className="checkbox-group">
+                    <label className="checkbox-label">
+                      <input
+                        className="checkbox-input"
+                        type="checkbox"
+                        name="newWords"
+                        id="newWords"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.newWords}
+                        onChange={this.props.changeUserSetting}
+                      />
+                      <Tooltip
+                        title="Show new words you haven’t yet typed correctly"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        New words
+                      </Tooltip>
+                    </label>
+                  </div>
+
+                </li>
+                <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <div className="checkbox-group">
+                    <label className="checkbox-label">
+                      <input
+                        className="checkbox-input"
+                        type="checkbox"
+                        name="seenWords"
+                        id="seenWords"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.seenWords}
+                        onChange={this.props.changeUserSetting}
+                      />
+                      <Tooltip
+                        title="Show words you have seen before"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Seen words
+                      </Tooltip>
+                    </label>
+                  </div>
+
+                </li>
+                <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <div className="checkbox-group">
+                    <label className="checkbox-label">
+                      <input
+                        className="checkbox-input"
+                        type="checkbox"
+                        name="retainedWords"
+                        id="retainedWords"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.retainedWords}
+                        onChange={this.props.changeUserSetting}
+                      />
+                      <Tooltip
+                        title="Show memorised words you’ve typed 30 times or more"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Memorised words
+                      </Tooltip>
+                    </label>
+                  </div>
+
+                </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint--60">
                     <div className="mb2 mt2 pl1 pr1">
                       <Tooltip
                         title="Set match spaces to suit your steno settings"
@@ -546,11 +510,20 @@ class UserSettings extends Component {
                       </select>
                     </div>
                   </li>
-                    <li className="ml0 pl1 bt b--brand-primary-tint">
-
-                    <div className="mb2 mt2 pl1 pr1">
+                <li className="ml0 pl1 bt b--brand-primary-tint--60">
+                  <div className="checkbox-group">
+                    <label className="checkbox-label">
+                      <input
+                        className="checkbox-input"
+                        type="checkbox"
+                        name="blurMaterial"
+                        id="blurMaterial"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.blurMaterial}
+                        onChange={this.props.changeUserSetting}
+                      />
                       <Tooltip
-                        title="Sort the lesson (newest words need the most practice)"
+                        title="Blur words and use a screen reader or speak setting to practice transcription"
                         className="mw-240"
                         animation="shift"
                         arrow="true"
@@ -561,138 +534,158 @@ class UserSettings extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        <label className="mb1 db" htmlFor="sortOrder">Sort</label>
+                        Blur words
                       </Tooltip>
-                      <select id="sortOrder" name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
-                        <option value="sortOff">Lesson default</option>
-                        <option value="sortRandom">Random</option>
-                        <option value="sortNew">Newest words first</option>
-                        <option value="sortOld">Oldest words first</option>
-                      </select>
-                    </div>
-                  </li>
-                    <li className="ml0 pl1 bt b--brand-primary-tint">
-                  <div className="mt2 mb2 pl1 pr2">
-                    <Tooltip
-                      title="Limit the number of words shown (0 for unlimited)"
-                      className="mw-240"
-                      animation="shift"
-                      arrow="true"
-                      duration="200"
-                      tabIndex="0"
-                      tag="span"
-                      theme="didoesdigital didoesdigital-sm"
-                      trigger="mouseenter focus click"
-                      onShow={this.props.setAnnouncementMessage}
-                    >
-                      <label htmlFor="limitNumberOfWords">Limit word count</label>
-                    </Tooltip>
-                    <div className="mb2">
-                      <NumericInput
-                        autoCapitalize="off"
-                        autoComplete="on"
-                        autoCorrect="on"
-                        autoFocus={false}
-                        className="form-control w6"
+                    </label>
+                  </div>
+
+                </li>
+                <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <div className="checkbox-group">
+                    <label className="checkbox-label">
+                      <input
+                        className="checkbox-input"
+                        type="checkbox"
+                        name="speakMaterial"
+                        id="speakMaterial"
                         disabled={this.props.disableUserSettings}
-                        id="limitNumberOfWords"
-                        min={0}
-                        name="limitNumberOfWords"
-                        onChange={this.props.handleLimitWordsChange}
-                        precision={0}
-                        spellCheck="false"
-                        step={1}
-                        style={grabStyle()}
-                        type="number"
-                        value={this.props.userSettings.limitNumberOfWords}
-                        snap
+                        checked={this.props.userSettings.speakMaterial}
+                        onChange={this.props.changeUserSetting}
                       />
-                    </div>
-                  </div>
-                  </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
-                  <div className="mt2 mb2 pl1 pr2">
-
-                    <Tooltip
-                      title="Start from this place in the lesson"
-                      className="mw-240"
-                      animation="shift"
-                      arrow="true"
-                      duration="200"
-                      tabIndex="0"
-                      tag="span"
-                      theme="didoesdigital didoesdigital-sm"
-                      trigger="mouseenter focus click"
-                      onShow={this.props.setAnnouncementMessage}
+                      Speak words with sound
+                    </label>
+                    {" "}(<button className="de-emphasized-button text-small" onClick={this.handleOpenModal} aria-label="Help with speak words setting" disabled={this.props.disableUserSettings}>help</button>
+                    <ReactModal
+                      isOpen={this.state.showModal}
+                      aria={{
+                        labelledby: "aria-modal-heading",
+                        describedby: "aria-modal-description"
+                      }}
+                      ariaHideApp={true}
+                      closeTimeoutMS={300}
+                      role="dialog"
+                      onRequestClose={this.handleCloseModal}
+                      className={{
+                        "base": "modal",
+                        "afterOpen": "modal--after-open",
+                        "beforeClose": "modal--before-close"
+                      }}
+                      overlayClassName={{
+                        "base": "modal__overlay",
+                        "afterOpen": "modal__overlay--after-open",
+                        "beforeClose": "modal__overlay--before-close"
+                      }}
                     >
-                      <label htmlFor="startFromWord">Start from word</label>
-                    </Tooltip>
-                    <div className="mb2">
-                      <NumericInput
-                        autoCapitalize="off"
-                        autoComplete="on"
-                        autoCorrect="on"
-                        autoFocus={false}
-                        className="form-control w6"
-                        disabled={this.props.disableUserSettings || this.props.revisionMode}
-                        id="startFromWord"
-                        max={this.props.maxStartFromWord || 30000}
-                        min={1}
-                        name="startFromWord"
-                        onChange={this.props.handleStartFromWordChange}
-                        precision={0}
-                        spellCheck="false"
-                        step={1}
-                        style={grabStyle()}
-                        type="number"
-                        value={this.props.userSettings.startFromWord}
-                        snap
-                      />
-                    </div>
+                      <div className="fr">
+                        <button className="de-emphasized-button hide-md" onClick={this.handleCloseModal}>Close</button>
+                      </div>
+                      <h3 id="aria-modal-heading">Speak words setting</h3>
+                      <div id="aria-modal-description">
+                        <p>Typey Type’s setting to “speak words” will speak words aloud when you have the sound turned on.</p>
+                        <p>This setting uses fancy browser technology called the “Web Speech API”.</p>
+                        <p className={webSpeechAvailable ? "quote mt1 mb3 bg-slat" : "quote mt1 mb3 bg-danger"}>Web Speech is {webSpeechAvailable ? " available" : " unavailable"} on your system.</p>
+                        { webSpeechAvailable ?
+                            <p>If you cannot hear anything and otherwise have working sound, your system might be missing a language pack or “voice”.</p>
+                            :
+                            <p><span className="bg-warning">You may need to update your browser or check that your device has a speech engine and language pack.</span></p>
+                        }
+                        <p>For Windows, you can download a “language pack” from Microsoft.</p>
+                        <p>For Linux systems, you may need to install a speech engine with voices, such as <code>speech-dispatcher</code> and <code>espeak-ng</code>.</p>
+                      </div>
+                      <div className="text-right">
+                        <button className="button" onClick={this.handleCloseModal}>OK</button>
+                      </div>
+                    </ReactModal>)
                   </div>
-                  </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
-                  <div className="mt2 pl1 pr2">
 
-                    <Tooltip
-                      title="Repeat the lesson up to 30 times"
-                      className="mw-240"
-                      animation="shift"
-                      arrow="true"
-                      duration="200"
-                      tabIndex="0"
-                      tag="span"
-                      theme="didoesdigital didoesdigital-sm"
-                      trigger="mouseenter focus click"
-                      onShow={this.props.setAnnouncementMessage}
-                    >
-                      <label htmlFor="repetitions">Repetitions</label>
-                    </Tooltip>
-                    <div className="mb1">
-                      <NumericInput
-                        autoCapitalize="off"
-                        autoComplete="on"
-                        autoCorrect="on"
-                        autoFocus={false}
-                        className="form-control w6"
+                </li>
+                <li className="ml0 pl1 bt b--brand-primary-tint--60">
+                  <div className="checkbox-group">
+                    <label className="checkbox-label">
+                      <input
+                        className="checkbox-input"
+                        type="checkbox"
+                        name="caseSensitive"
+                        id="caseSensitive"
                         disabled={this.props.disableUserSettings}
-                        id="repetitions"
-                        max={30}
-                        min={1}
-                        name="repetitions"
-                        onChange={this.props.handleRepetitionsChange}
-                        precision={0}
-                        spellCheck="false"
-                        step={1}
-                        style={grabStyle()}
-                        type="number"
-                        value={this.props.userSettings.repetitions}
-                        snap
+                        checked={this.props.userSettings.caseSensitive}
+                        onChange={this.props.changeUserSetting}
                       />
-                    </div>
-
+                      <Tooltip
+                        title="Capital letters in material won’t match typed lowercase letters"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Case sensitive
+                      </Tooltip>
+                    </label>
                   </div>
-                  </li>
+                </li>
+                <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <div className="checkbox-group">
+                    <label className="checkbox-label">
+                      <input
+                        className="checkbox-input"
+                        type="checkbox"
+                        name="simpleTypography"
+                        id="simpleTypography"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.simpleTypography}
+                        onChange={this.props.changeUserSetting}
+                      />
+                      <Tooltip
+                        title='Simple typography replaces “curly quotes” in lesson material with "straight quotes"'
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Simple typography
+                      </Tooltip>
+                    </label>
+                  </div>
+                </li>
+                <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <div className="checkbox-group">
+                    <label className="checkbox-label">
+                      <input
+                        className="checkbox-input"
+                        type="checkbox"
+                        name="textInputAccessibility"
+                        id="textInputAccessibility"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.textInputAccessibility}
+                        onChange={this.props.changeUserSetting}
+                      />
+                      <Tooltip
+                        title="When unchecked, this hides the text input field from screen readers to mute echoes from typed words but might make it impossible to access for some devices"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Text input accessibility
+                      </Tooltip>
+                    </label>
+                  </div>
+                </li>
                 </ul>
               </div>
             </div>
