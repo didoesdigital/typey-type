@@ -1003,7 +1003,8 @@ input:focus::placeholder {
   padding-left: 0; }
   @media (min-width: 1024px) {
     .material-typed-text-and-hint {
-      padding-left: 120px; } }
+      padding-left: 120px;
+      padding-right: 120px; } }
 
 .material {
   margin-left: auto;
