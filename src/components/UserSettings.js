@@ -67,7 +67,7 @@ class UserSettings extends Component {
     let webSpeechAvailable = this.state.webSpeechSupportResults['hasSpeechSynthesis'] && this.state.webSpeechSupportResults['hasSpeechSynthesisUtterance'];
 
     return (
-      <div className="user-settings mw-320">
+      <div className="user-settings min-width-320">
         <form>
           <div className="text-small">
             <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'mh-page bg-slat bl b--brand-primary-tint--60 hide' : 'mh-page bg-slat bl b--brand-primary-tint--60'} aria-hidden={this.props.hideOtherSettings}>
@@ -76,7 +76,7 @@ class UserSettings extends Component {
               <p className="mb0 pt2 pb1 pb1 pl2"><small>Total words: {this.props.totalWordCount}</small></p>
               <ul className="unstyled-list mb0 pb1">
                 <li className="ml0 pl1 bt b--brand-primary-tint--60">
-                  <div className="mt2 mb2 pl1 pr2">
+                  <div className="mt2 mb2 pl1 pr2 flex flex-wrap items-center justify-between">
                     <Tooltip
                       title="Limit the number of words shown (0 for unlimited)"
                       className="mw-240"
@@ -89,15 +89,15 @@ class UserSettings extends Component {
                       trigger="mouseenter focus click"
                       onShow={this.props.setAnnouncementMessage}
                     >
-                      <label htmlFor="limitNumberOfWords">Limit word count</label>
+                      <label className="mr1" htmlFor="limitNumberOfWords">Limit word count</label>
                     </Tooltip>
-                    <div className="mb2">
+                    <div>
                       <NumericInput
                         autoCapitalize="off"
                         autoComplete="on"
                         autoCorrect="on"
                         autoFocus={false}
-                        className="form-control w6"
+                        className="form-control w-100"
                         disabled={this.props.disableUserSettings}
                         id="limitNumberOfWords"
                         min={0}
@@ -115,7 +115,7 @@ class UserSettings extends Component {
                   </div>
                 </li>
                 <li className="ml0 pl1 bt b--brand-primary-tint">
-                  <div className="mt2 mb2 pl1 pr2">
+                  <div className="mt2 mb2 pl1 pr2 flex flex-wrap items-center justify-between">
 
                     <Tooltip
                       title="Start from this place in the lesson"
@@ -129,15 +129,15 @@ class UserSettings extends Component {
                       trigger="mouseenter focus click"
                       onShow={this.props.setAnnouncementMessage}
                     >
-                      <label htmlFor="startFromWord">Start from word</label>
+                      <label className="mr1" htmlFor="startFromWord">Start from word</label>
                     </Tooltip>
-                    <div className="mb2">
+                    <div>
                       <NumericInput
                         autoCapitalize="off"
                         autoComplete="on"
                         autoCorrect="on"
                         autoFocus={false}
-                        className="form-control w6"
+                        className="form-control w-100"
                         disabled={this.props.disableUserSettings || this.props.revisionMode}
                         id="startFromWord"
                         max={this.props.maxStartFromWord || 30000}
@@ -156,7 +156,7 @@ class UserSettings extends Component {
                   </div>
                 </li>
                 <li className="ml0 pl1 bt b--brand-primary-tint">
-                  <div className="mt2 pl1 pr2">
+                  <div className="mt2 mb2 pl1 pr2 flex flex-wrap items-center justify-between">
 
                     <Tooltip
                       title="Repeat the lesson up to 30 times"
@@ -170,15 +170,15 @@ class UserSettings extends Component {
                       trigger="mouseenter focus click"
                       onShow={this.props.setAnnouncementMessage}
                     >
-                      <label htmlFor="repetitions">Repetitions</label>
+                      <label className="mr1" htmlFor="repetitions">Repetitions</label>
                     </Tooltip>
-                    <div className="mb2">
+                    <div>
                       <NumericInput
                         autoCapitalize="off"
                         autoComplete="on"
                         autoCorrect="on"
                         autoFocus={false}
-                        className="form-control w6"
+                        className="form-control w-100"
                         disabled={this.props.disableUserSettings}
                         id="repetitions"
                         max={30}
@@ -198,7 +198,7 @@ class UserSettings extends Component {
                   </div>
                 </li>
                 <li className="ml0 pl1 bt b--brand-primary-tint">
-                    <div className="mb2 mt2 pl1 pr1">
+                    <div className="mb2 mt2 pl1 pr2 flex flex-wrap items-center justify-between">
                       <Tooltip
                         title="Sort the lesson (newest words need the most practice)"
                         className="mw-240"
@@ -211,9 +211,9 @@ class UserSettings extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        <label className="mb1 db" htmlFor="sortOrder">Sort</label>
+                        <label className="mr1 db" htmlFor="sortOrder">Sort</label>
                       </Tooltip>
-                      <select id="sortOrder" name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
+                      <select id="sortOrder" name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w-144">
                         <option value="sortOff">Lesson default</option>
                         <option value="sortRandom">Random</option>
                         <option value="sortNew">Newest words first</option>
@@ -223,7 +223,7 @@ class UserSettings extends Component {
                   </li>
                   <li className="ml0 pl1 bt b--brand-primary-tint--60">
                     <div className="checkbox-group">
-                      <label className="checkbox-label">
+                      <label className="checkbox-label mb1">
                         <input
                           className="checkbox-input"
                           type="checkbox"
@@ -252,7 +252,7 @@ class UserSettings extends Component {
                   </li>
                     <li className="ml0 pl1 bt b--brand-primary-tint">
                     <div className="checkbox-group">
-                      <label className="checkbox-label">
+                      <label className="checkbox-label mb1">
                         <input
                           className="checkbox-input"
                           type="checkbox"
@@ -282,7 +282,7 @@ class UserSettings extends Component {
                   </li>
                     <li className="ml0 pl1 bt b--brand-primary-tint">
                     <div className="checkbox-group">
-                      <label className="checkbox-label">
+                      <label className="checkbox-label mb1">
                         <input
                           className="checkbox-input"
                           type="checkbox"
@@ -313,7 +313,7 @@ class UserSettings extends Component {
                     <li className="ml0 pl1 bt b--brand-primary-tint">
                     <div className="pt1 pb1">
                       <div className="radio-group">
-                        <label className="radio-label">
+                        <label className="radio-label mb1">
                           <input
                             className="radio-input"
                             type="radio"
@@ -340,7 +340,7 @@ class UserSettings extends Component {
                         </label>
                       </div>
                       <div className="radio-group">
-                        <label className="radio-label">
+                        <label className="radio-label mb1">
                           <input
                             className="radio-input"
                             type="radio"
@@ -371,7 +371,7 @@ class UserSettings extends Component {
                 <li className="ml0 pl1 bt b--brand-primary-tint--60">
 
                   <div className="checkbox-group">
-                    <label className="checkbox-label">
+                    <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
                         type="checkbox"
@@ -401,7 +401,7 @@ class UserSettings extends Component {
                 </li>
                 <li className="ml0 pl1 bt b--brand-primary-tint">
                   <div className="checkbox-group">
-                    <label className="checkbox-label">
+                    <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
                         type="checkbox"
@@ -431,7 +431,7 @@ class UserSettings extends Component {
                 </li>
                 <li className="ml0 pl1 bt b--brand-primary-tint">
                   <div className="checkbox-group">
-                    <label className="checkbox-label">
+                    <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
                         type="checkbox"
@@ -460,7 +460,7 @@ class UserSettings extends Component {
 
                 </li>
                   <li className="ml0 pl1 bt b--brand-primary-tint--60">
-                    <div className="mb2 mt2 pl1 pr1">
+                    <div className="mb2 mt2 pl1 pr2 flex flex-wrap items-center justify-between">
                       <Tooltip
                         title="Set match spaces to suit your steno settings"
                         className="mw-240"
@@ -473,9 +473,9 @@ class UserSettings extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        <label className="mb1 db" htmlFor="spacePlacement">Match spaces</label>
+                        <label className="mr1 db" htmlFor="spacePlacement">Match spaces</label>
                       </Tooltip>
-                      <select id="spacePlacement" name="spacePlacement" value={this.props.userSettings.spacePlacement} onChange={this.props.changeSpacePlacementUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w6">
+                      <select id="spacePlacement" name="spacePlacement" value={this.props.userSettings.spacePlacement} onChange={this.props.changeSpacePlacementUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w-144">
                         <option value="spaceBeforeOutput">Space before output</option>
                         <option value="spaceAfterOutput">Space after output</option>
                         <option value="spaceExact">Exact spacing</option>
@@ -485,7 +485,7 @@ class UserSettings extends Component {
                   </li>
                   <li className="ml0 pl1 bt b--brand-primary-tint">
 
-                    <div className="mb2 mt2 pl1 pr1">
+                    <div className="mb2 mt2 pl1 pr2 flex flex-wrap items-center justify-between">
                       <Tooltip
                         title="Show steno diagrams that suit your steno layout"
                         className="mw-240"
@@ -498,9 +498,9 @@ class UserSettings extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        <label className="mb1 db" htmlFor="stenoLayout">Steno layout</label>
+                        <label className="mr1 db" htmlFor="stenoLayout">Steno layout</label>
                       </Tooltip>
-                      <select id="stenoLayout" name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control w6">
+                      <select id="stenoLayout" name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control w-144">
                         <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
                         <option value="stenoLayoutPalantype">Palantype</option>
                         <option value="stenoLayoutDanishSteno">Danish steno</option>
@@ -512,7 +512,7 @@ class UserSettings extends Component {
                   </li>
                 <li className="ml0 pl1 bt b--brand-primary-tint--60">
                   <div className="checkbox-group">
-                    <label className="checkbox-label">
+                    <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
                         type="checkbox"
@@ -542,7 +542,7 @@ class UserSettings extends Component {
                 </li>
                 <li className="ml0 pl1 bt b--brand-primary-tint">
                   <div className="checkbox-group">
-                    <label className="checkbox-label">
+                    <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
                         type="checkbox"
@@ -601,7 +601,7 @@ class UserSettings extends Component {
                 </li>
                 <li className="ml0 pl1 bt b--brand-primary-tint--60">
                   <div className="checkbox-group">
-                    <label className="checkbox-label">
+                    <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
                         type="checkbox"
@@ -630,7 +630,7 @@ class UserSettings extends Component {
                 </li>
                 <li className="ml0 pl1 bt b--brand-primary-tint">
                   <div className="checkbox-group">
-                    <label className="checkbox-label">
+                    <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
                         type="checkbox"
@@ -659,7 +659,7 @@ class UserSettings extends Component {
                 </li>
                 <li className="ml0 pl1 bt b--brand-primary-tint">
                   <div className="checkbox-group">
-                    <label className="checkbox-label">
+                    <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
                         type="checkbox"

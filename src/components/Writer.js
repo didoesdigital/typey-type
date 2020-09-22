@@ -297,7 +297,7 @@ class Writer extends Component<Props, State> {
               <div className="flex flex-wrap">
                 { this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno" && this.props.globalUserSettings.writerInput === "qwerty" ?
                   <p className="mt1 mb2 mr1">
-                    <label htmlFor="qwertyStenoInput" className="db">
+                    <label htmlFor="qwertyStenoInput" className="db mb1">
                       <Tooltip
                         title="Type a space to send the stroke"
                         className="mw-240"
@@ -330,7 +330,7 @@ class Writer extends Component<Props, State> {
                 }
                 { this.props.globalUserSettings.writerInput === "raw" || !(this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno") ?
                   <p className="mt1 mb2 mr1">
-                    <label htmlFor="rawStenoInput" className="db">
+                    <label htmlFor="rawStenoInput" className="db mb1">
                       <Tooltip
                         title="Type a space to send the stroke"
                         className="mw-240"
@@ -379,14 +379,14 @@ class Writer extends Component<Props, State> {
                   <div className="flex">
                     <div className="flex flex-wrap justify-between">
                       <p className="radio mr3">
-                        <label htmlFor="raw">
+                        <label htmlFor="raw" className="mb1">
                           <input type="radio" name="raw" id="raw" onChange={this.props.changeWriterInput} checked={this.props.globalUserSettings.writerInput === "raw"} /> Raw
                         </label>
                       </p>
                     </div>
                     <div className="flex flex-wrap justify-between">
                       <p className="radio mr3">
-                        <label htmlFor="qwerty">
+                        <label htmlFor="qwerty" className="mb1">
                           <input type="radio" name="qwerty" id="qwerty" onChange={this.props.changeWriterInput} checked={this.props.globalUserSettings.writerInput === "qwerty"} /> QWERTY
                         </label>
                       </p>

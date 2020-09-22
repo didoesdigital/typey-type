@@ -207,7 +207,7 @@ class StrokesForWords extends Component {
     return (
       this.props.globalLookupDictionaryLoaded ?
         <React.Fragment>
-          <label htmlFor="words-for-strokes" className="input-textarea-label input-textarea-label--large">Enter words to look up</label>
+          <label htmlFor="words-for-strokes" className="input-textarea-label input-textarea-label--large mb1">Enter words to look up</label>
           <textarea
             autoCapitalize="off"
             autoComplete="off"

@@ -738,7 +738,7 @@ class Progress extends Component {
         autoComplete="off"
         autoCorrect="off"
         autoFocus={false}
-        className="form-control w6"
+        className="form-control w-100"
         disabled={!this.state.showSetGoalsForm}
         id="userGoalInputOldWords"
         max={10000}
@@ -761,7 +761,7 @@ class Progress extends Component {
         autoComplete="off"
         autoCorrect="off"
         autoFocus={false}
-        className="form-control w6"
+        className="form-control w-100"
         disabled={!this.state.showSetGoalsForm}
         id="userGoalInputNewWords"
         max={10000}

@@ -452,7 +452,7 @@ class DictionaryImport extends Component {
                   <h3>Import</h3>
                   <form className="mb3" onSubmit={this.handleOnSubmit.bind(this)}>
                     <div className="dib">
-                      <label htmlFor="dictionariesFileInput">Import dictionaries in JSON format</label>
+                      <label className="mb1" htmlFor="dictionariesFileInput">Import dictionaries in JSON format</label>
                       <input type="file" id="dictionariesFileInput" name="dictionary" className="form-control" multiple />
                     </div>
                     <div>
@@ -462,7 +462,7 @@ class DictionaryImport extends Component {
 
                   <form className="mb3" onSubmit={this.handleOnSubmitConfig.bind(this)}>
                     <div className="dib">
-                      <label htmlFor="dictionaryConfigFileInput">Import config</label>
+                      <label className="mb1" htmlFor="dictionaryConfigFileInput">Import config</label>
                       <input type="file" id="dictionaryConfigFileInput" name="dictionaryConfig" className="form-control" multiple />
                     </div>
                     <div>

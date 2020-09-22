@@ -144,7 +144,7 @@ class CustomLessonSetup extends Component {
                     <li>Each word must be separated from its stroke by a "Tab" character.</li>
                     <li>If you skip strokes, multi-stroke words may count as misstrokes.</li>
                   </ul>
-                  <label htmlFor="your-material">Enter your material here:</label>
+                  <label className="mb1" htmlFor="your-material">Enter your material here:</label>
                   <textarea
                     id="your-material"
                     aria-describedby="customLessonMaterialValidationMessages"
@@ -180,7 +180,7 @@ examples.	KP-PLS TP-PL"
               <h3>Create Plover lesson using a word list</h3>
               <div className="gtc-4fr-3fr">
                 <div>
-                  <label htmlFor="your-words-for-dictionary-entries">Paste a word list without strokes here to create a custom lesson using Plover theory:</label>
+                  <label className="mb1" htmlFor="your-words-for-dictionary-entries">Paste a word list without strokes here to create a custom lesson using Plover theory:</label>
                   <textarea
                     id="your-words-for-dictionary-entries"
                     className="input-textarea mw100 w-100 mb1 overflow-scroll"

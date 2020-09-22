@@ -126,7 +126,7 @@ class Finished extends Component {
           strokeAttemptsPresentation = (
             <span>
               <p className="visually-hidden di"><span className="visually-hidden">&#8200;You wrote: </span></p>
-              <ol className="unstyled-list mb0 misstroke-list di">
+              <ol className="unstyled-list mb0 di">
                 {strokeAttempts}
               </ol>
             </span>
@@ -136,7 +136,7 @@ class Finished extends Component {
         }
         return(
           <li key={ i } className="unstyled-list-item bg-slat p1 mb1 overflow-scroll">
-            <label className="checkbox-label mt0">
+            <label className="checkbox-label mt0 mb1">
               <input
                 className="checkbox-input"
                 type="checkbox"

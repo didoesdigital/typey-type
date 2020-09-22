@@ -146,8 +146,8 @@ select {
   font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
   line-height: 1.5;
   max-width: 100%;
-  padding: 4px 32px 4px 8px !important;
-  -webkit-padding-end: 32px !important;
+  padding: 4px 24px 4px 8px !important;
+  -webkit-padding-end: 24px !important;
   -webkit-padding-start: 8px !important;
   background-image: linear-gradient(45deg, transparent 60%, #796585 50%), linear-gradient(135deg, #796585 50%, transparent 50%);
   background-position: calc(100% - 16px) calc(1em - 1px), calc(100% - 11px) calc(1em - 1px);
@@ -666,8 +666,11 @@ input:focus::placeholder {
 .mh-page {
   min-height: calc(100vh - 248px); }
 
-.min-width-70 {
+.min-width70 {
   min-width: 70%; }
+
+.min-width-320 {
+  min-width: 320px; }
 
 .p0 {
   padding: 0px; }
@@ -779,6 +782,9 @@ input:focus::placeholder {
 
 .w6 {
   width: 192px; }
+
+.w-144 {
+  width: 144px; }
 
 .w-336 {
   width: 336px; }
@@ -973,8 +979,9 @@ input:focus::placeholder {
 .lesson-canvas {
   display: flex;
   position: relative;
-  max-height: 320px;
-  min-height: 320px; }
+  max-height: 360px;
+  min-height: 320px;
+  overflow: hidden; }
   @media (min-width: 1024px) {
     .lesson-canvas {
       min-width: 544px; } }
@@ -1014,12 +1021,11 @@ input:focus::placeholder {
   margin-right: auto; }
 
 .completed-phrases {
-  float: right;
-  margin-bottom: -1.5em;
-  margin-right: calc(50% + 20em - 8px);
+  font-weight: normal;
+  left: 0;
+  position: absolute;
   text-align: right;
-  transform: translateY(-3.075em);
-  font-weight: normal; }
+  transform: translate(calc(-100% + 8px), 0.5em); }
 
 .current-and-upcoming-phrases {
   margin-bottom: 0.5em;
@@ -1044,10 +1050,6 @@ input:focus::placeholder {
 
 .material p {
   padding: 0.25em; }
-
-.expected {
-  overflow: hidden;
-  white-space: nowrap; }
 
 .input-textarea, .input-file, .successfully-typed-text {
   border: 2px solid #8242a8;
@@ -1110,26 +1112,24 @@ input:focus::placeholder {
   background-color: #ffdfa0; }
 
 label {
-  display: inline-block;
-  margin-bottom: 8px; }
+  display: inline-block; }
 
 .react-numeric-input {
   display: block;
-  position: relative; }
-  .react-numeric-input input {
-    width: 100%; }
-    .react-numeric-input input:disabled {
-      border: 1px solid #e2dee5;
-      background-color: #f9f8fa;
-      color: #c6bdcb; }
-      .react-numeric-input input:disabled ~ b {
-        cursor: default;
-        border-color: #e2dee5 !important;
-        background-color: #f5f4f6 !important; }
-      .react-numeric-input input:disabled ~ b i {
-        border-color: transparent transparent #cfc8d4 !important; }
-      .react-numeric-input input:disabled ~ b:last-child i {
-        border-color: #cfc8d4 transparent transparent !important; }
+  position: relative;
+  width: 144px; }
+  .react-numeric-input input:disabled {
+    border: 1px solid #e2dee5;
+    background-color: #f9f8fa;
+    color: #c6bdcb; }
+    .react-numeric-input input:disabled ~ b {
+      cursor: default;
+      border-color: #e2dee5 !important;
+      background-color: #f5f4f6 !important; }
+    .react-numeric-input input:disabled ~ b i {
+      border-color: transparent transparent #cfc8d4 !important; }
+    .react-numeric-input input:disabled ~ b:last-child i {
+      border-color: #cfc8d4 transparent transparent !important; }
   .react-numeric-input b {
     background-color: #f9f9f9;
     border-radius: 0px 0px 0px 0px;
@@ -1448,11 +1448,6 @@ label {
     background-color: #757575;
     color: #ece9ee; }
 
-.misstroke-list {
-  max-height: 124px;
-  overflow: scroll;
-  max-width: 528px; }
-
 .typed-text-container {
   position: relative; }
 
@@ -1475,7 +1470,6 @@ label {
 
 .stroke-tip {
   margin-bottom: 0.5em;
-  padding-right: 50%;
   text-align: left;
   transform: translateX(10px);
   width: 100%; }

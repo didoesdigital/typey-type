@@ -21,7 +21,7 @@ class TypedText extends Component {
 
     return (
       <div className="typed-text-container">
-        <label className="visually-hidden" htmlFor="your-typed-text">Write {this.props.currentPhrase}</label>
+        <label className="visually-hidden mb1" htmlFor="your-typed-text">Write {this.props.currentPhrase}</label>
         <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
         <p className="input-text">
           <samp className="pointer-none absolute absolute--fill w-100">

@@ -226,7 +226,7 @@ class Lesson extends Component {
         strokeTip = (
           <div className="stroke-tip" aria-live="polite" aria-atomic="true">
             <span className="visually-hidden" aria-hidden={this.props.userSettings.showStrokesAsDiagrams ? 'true' : 'false'}>Hint: </span>
-            <div className="flex overflow-auto mr05">
+            <div className="flex flex-wrap mr05">
               {this.props.userSettings.showStrokesAsDiagrams && strokes.map((strokeToDraw, index) =>
                 <React.Fragment key={index}>
                   {(Object.values(mapBriefsFunction(strokeToDraw)).some(item => item)) && <div className="mt1 mr2"><StenoLayoutDiagram id={'diagramID-' + index + '-' + strokeToDraw} {...mapBriefsFunction(strokeToDraw)} brief={strokeToDraw} /></div> }
@@ -431,9 +431,9 @@ class Lesson extends Component {
                               />
                             </div>
                           </AnimateHeight>
-                          <div role="article" className="lesson-canvas panel mx-auto mw-1440 p2 mb3">
+                          <div role="article" className="lesson-canvas panel mx-auto mw-1440 p2 mb3 flex">
                             {revisionModeButton}
-                            <div className="mx-auto mw100 mt10 text-center min-width-70 material-typed-text-and-hint">
+                            <div className="mx-auto mw100 mt10 text-center min-width70 material-typed-text-and-hint flex-grow">
                               <Material
                                 actualText={this.props.actualText}
                                 currentPhrase={this.props.currentPhrase}
