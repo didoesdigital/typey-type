@@ -14,7 +14,7 @@ class Footer extends Component {
       fullscreen = "";
     }
     return (
-      <div className="bg-slat bt b--brand-primary-tint--50">
+      <div className="bg-slat bt b--brand-primary-tint--60">
         <footer role="contentinfo" className={"footer mx-auto mw-1920 flex flex-wrap items-center justify-between pt1 pb1 pl3 pr3 hide-in-fullscreen" + fullscreen}>
           <p className="text-center mb0"><small><Link to="/support" className="no-underline">About</Link> and <Link to="/support#privacy" className="no-underline">Privacy</Link></small></p>
           <p className="text-center mb0"><small><Link to="/contribute" className="no-underline">Contribute</Link></small></p>

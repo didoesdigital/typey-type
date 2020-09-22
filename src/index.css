@@ -130,7 +130,7 @@ input, textarea {
 
 textarea {
   border-radius: 4px;
-  border: 1px solid #c6bdcb;
+  border: 1px solid #b3a7b9;
   padding: 4px 8px; }
 
 select {
@@ -139,7 +139,7 @@ select {
   appearance: none;
   background-color: #fff;
   border-radius: 4px;
-  border: 1px solid #c6bdcb;
+  border: 1px solid #b3a7b9;
   cursor: pointer;
   display: inline-block;
   font-size: 1rem;
@@ -420,8 +420,8 @@ input:focus::placeholder {
 .b--brand-primary-tint {
   border-color: #d9d3dc; }
 
-.b--brand-primary-tint--50 {
-  border-color: #a091a8; }
+.b--brand-primary-tint--60 {
+  border-color: #b3a7b9; }
 
 .bb {
   border-bottom-style: solid;
@@ -984,7 +984,7 @@ input:focus::placeholder {
 
 .panel {
   background-color: #fff;
-  border: 1px solid #c6bdcb;
+  border: 1px solid #b3a7b9;
   border-radius: 4px; }
   .panel.panel--warning {
     background-color: #ffe5b3;
@@ -1133,7 +1133,7 @@ label {
   .react-numeric-input b {
     background-color: #f9f9f9;
     border-radius: 0px 0px 0px 0px;
-    border: 1px solid #c6bdcb;
+    border: 1px solid #b3a7b9;
     bottom: 0px;
     cursor: pointer;
     position: absolute;
@@ -1158,7 +1158,7 @@ label {
   .react-numeric-input b:last-child {
     background-color: #f9f9f9;
     border-radius: 0px 3px 3px 0px;
-    border: 1px solid #c6bdcb;
+    border: 1px solid #b3a7b9;
     bottom: 0px;
     cursor: pointer;
     position: absolute;
@@ -1213,7 +1213,7 @@ label {
 
 .form-control {
   border-radius: 4px;
-  border: 1px solid #c6bdcb;
+  border: 1px solid #b3a7b9;
   display: inline-block;
   font-size: 0.8rem;
   height: 2rem;
@@ -1274,7 +1274,7 @@ label {
   background-color: #402351;
   border-radius: 4px;
   border: 1px solid transparent;
-  color: #c6bdcb;
+  color: #b3a7b9;
   cursor: pointer;
   font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
   height: 2.5rem;
@@ -1287,15 +1287,15 @@ label {
   white-space: nowrap; }
   .button:visited,
   .link-button:visited {
-    color: #c6bdcb; }
+    color: #b3a7b9; }
   .button:hover,
   .link-button:hover {
-    color: #c6bdcb;
+    color: #b3a7b9;
     background-color: #533962; }
   .button:active, .button:focus,
   .link-button:active,
   .link-button:focus {
-    color: #c6bdcb;
+    color: #b3a7b9;
     background-color: #664f74; }
   .button.link-button-ghost,
   .link-button.link-button-ghost {
@@ -1321,7 +1321,7 @@ label {
   .button.button--secondary,
   .link-button.button--secondary {
     background-color: #fff;
-    border: 1px solid #c4c3c5;
+    border: 1px solid #b0afb1;
     box-shadow: 0px 1px 2px rgba(160, 145, 168, 0.1);
     color: #3f264e; }
     .button.button--secondary:visited,
@@ -1951,7 +1951,7 @@ small .svg-icon-wrapper.svg-baseline svg {
   .list--feature li {
     align-items: center;
     background: #fff;
-    border: 1px solid #c6bdcb;
+    border: 1px solid #b3a7b9;
     border-radius: 2px;
     display: flex;
     flex-grow: 1;
@@ -2022,7 +2022,7 @@ small .svg-icon-wrapper.svg-baseline svg {
   max-height: 90%;
   background-color: #f5f4f6;
   border-radius: 4px;
-  border: 1px solid #c6bdcb;
+  border: 1px solid #b3a7b9;
   font-family: "Overpass", "Clear Sans", "Source Sans Pro", "Work Sans", "Open Sans", "Raleway", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 300;
   outline: none;

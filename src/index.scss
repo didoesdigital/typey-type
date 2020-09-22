@@ -226,7 +226,7 @@ input, textarea {
 
 textarea {
   border-radius: 4px;
-  border: 1px solid add-tint($brand-primary, 70%);
+  border: 1px solid add-tint($brand-primary, 60%);
   padding: 4px 8px;
 }
 
@@ -236,7 +236,7 @@ select {
   appearance: none;
   background-color: #fff;
   border-radius: 4px;
-  border: 1px solid add-tint($brand-primary, 70%);
+  border: 1px solid add-tint($brand-primary, 60%);
   cursor: pointer;
   display: inline-block;
   font-size: 1rem;
@@ -472,8 +472,8 @@ input:focus::placeholder {
 .b--brand-primary-tint {
   border-color: add-tint($brand-primary, 80%);
 }
-.b--brand-primary-tint--50 {
-  border-color: add-tint($brand-primary, 50%);
+.b--brand-primary-tint--60 {
+  border-color: add-tint($brand-primary, 60%);
 }
 .bb {
   border-bottom-style: solid;
@@ -908,7 +908,7 @@ input:focus::placeholder {
 
 .panel {
   background-color: #fff;
-  border: 1px solid add-tint($brand-primary, 70%);
+  border: 1px solid add-tint($brand-primary, 60%);
   border-radius: 4px;
   &.panel--warning {
     background-color: add-tint($brand-warning, 60%);
@@ -1114,7 +1114,7 @@ label {
   b {
     background-color: desaturate(add-tint($brand-primary, 97%), 50%);
     border-radius: 0px 0px 0px 0px;
-    border: 1px solid add-tint($brand-primary, 70%);
+    border: 1px solid add-tint($brand-primary, 60%);
     bottom: 0px;
     cursor: pointer;
     position: absolute;
@@ -1144,7 +1144,7 @@ label {
   b:last-child {
     background-color: desaturate(add-tint($brand-primary, 97%), 50%);
     border-radius: 0px 3px 3px 0px;
-    border: 1px solid add-tint($brand-primary, 70%);
+    border: 1px solid add-tint($brand-primary, 60%);
     bottom: 0px;
     cursor: pointer;
     position: absolute;
@@ -1208,7 +1208,7 @@ label {
 }
 .form-control {
   border-radius: 4px;
-  border: 1px solid add-tint($brand-primary, 70%);
+  border: 1px solid add-tint($brand-primary, 60%);
   display: inline-block;
   font-size: $h6-size;
   height: 2rem;
@@ -1286,7 +1286,7 @@ label {
   background-color: $brand-primary;
   border-radius: 4px;
   border: 1px solid transparent;
-  color: add-tint($brand-primary, 70%);
+  color: add-tint($brand-primary, 60%);
   cursor: pointer;
   font: $type;
   height: $link-button-height;
@@ -1298,15 +1298,15 @@ label {
   vertical-align: middle;
   white-space: nowrap;
   &:visited {
-    color: add-tint($brand-primary, 70%);
+    color: add-tint($brand-primary, 60%);
   }
   &:hover {
-    color: add-tint($brand-primary, 70%);
+    color: add-tint($brand-primary, 60%);
     background-color: add-tint($brand-primary, 10%);
   }
   &:active,
   &:focus {
-    color: add-tint($brand-primary, 70%);
+    color: add-tint($brand-primary, 60%);
     background-color: add-tint($brand-primary, 20%);
   }
   &.link-button-ghost {
@@ -1334,7 +1334,7 @@ label {
 
   &.button--secondary {
     background-color: #fff;
-    border: 1px solid desaturate(add-tint($brand-primary, 70%), 10%);
+    border: 1px solid desaturate(add-tint($brand-primary, 60%), 10%);
     box-shadow: 0px 1px 2px add-alpha(add-tint($brand-primary, 50%), 10%);
     color: desaturate($brand-primary, 5%);
     &:visited {
@@ -2201,7 +2201,7 @@ $lineAdjustment: 4px;
   li {
     align-items: center;
     background: #fff;
-    border: 1px solid add-tint($brand-primary, 70%);
+    border: 1px solid add-tint($brand-primary, 60%);
     border-radius: 2px;
     display: flex;
     flex-grow: 1;
@@ -2299,7 +2299,7 @@ $lineAdjustment: 4px;
 
   background-color: add-tint($brand-primary, 95%);
   border-radius: 4px;
-  border: 1px solid add-tint($brand-primary, 70%);
+  border: 1px solid add-tint($brand-primary, 60%);
   font-family: $type-face--sans-serif;
   font-weight: 300;
   outline: none;
