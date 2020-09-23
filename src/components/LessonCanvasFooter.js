@@ -6,9 +6,9 @@ class LessonCanvasFooter extends Component {
   render() {
     let toggleClasses;
     if (this.props.hideOtherSettings) {
-      toggleClasses = "mb0 de-emphasized text-center subsection-header-toggle collapsed";
+      toggleClasses = "button button--secondary mb0 text-center subsection-header-toggle collapsed";
     } else {
-      toggleClasses = "mb0 de-emphasized text-center subsection-header-toggle";
+      toggleClasses = "button button--secondary mb0 text-center subsection-header-toggle";
     }
 
     return (
@@ -159,7 +159,7 @@ class LessonCanvasFooter extends Component {
             </div>
           </fieldset>
         </div>
-        <p className={toggleClasses} onClick={this.props.toggleHideOtherSettings} onKeyPress={this.props.toggleHideOtherSettings} role="button" tabIndex="0" aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">{this.props.hideOtherSettings ? "Show settings" : "Hide settings"}</p>
+          <p><button className={toggleClasses} onClick={this.props.toggleHideOtherSettings} onKeyPress={this.props.toggleHideOtherSettings} aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">{this.props.hideOtherSettings ? "Show settings" : "Hide settings"}</button></p>
       </div>
     )
   }
