@@ -383,12 +383,12 @@ class Finished extends Component {
               <LessonCanvasFooter
                 chooseStudy={this.props.chooseStudy}
                 disableUserSettings={this.props.disableUserSettings}
-                userSettings={this.props.userSettings}
-                setAnnouncementMessage={this.props.setAnnouncementMessage}
-                toggleHideOtherSettings={this.props.toggleHideOtherSettings}
                 hideOtherSettings={this.props.hideOtherSettings}
                 path={this.props.path}
+                setAnnouncementMessage={this.props.setAnnouncementMessage}
+                toggleHideOtherSettings={this.props.toggleHideOtherSettings}
                 totalWordCount={this.props.totalWordCount}
+                userSettings={this.props.userSettings}
               />
             </div>
                         <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
