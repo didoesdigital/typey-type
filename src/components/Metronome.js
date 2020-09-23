@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Howl } from 'howler';
+import { IconMetronome } from './Icon';
 import plink from '../sounds/digi_plink-with-silence.mp3';
 
 function bpmBracketsSprite() {
@@ -53,8 +54,8 @@ class Metronome extends Component {
   render() {
     return (
       <p>
-        <button className="button button--secondary mr2" onClick={() => playMetronome({id: playId(this.props.userSettings.beatsPerMinute)})}>Start metronome</button>
-        <button className="button button--secondary" onClick={() => stopMetronome()}>Stop metronome</button>
+        <button aria-label="Start metronome" className="button button--secondary mr2" onClick={() => playMetronome({id: playId(this.props.userSettings.beatsPerMinute)})}><IconMetronome role="presentation" iconWidth="24" iconHeight="24" className="svg-icon-wrapper svg-baseline" title="Metronome" /> Start</button>
+        <button aria-label="Stop metronome" className="button button--secondary" onClick={() => stopMetronome()}><IconMetronome role="presentation" iconWidth="24" iconHeight="24" className="svg-icon-wrapper svg-baseline" title="Metronome" /> Stop</button>
       </p>
     );
   }

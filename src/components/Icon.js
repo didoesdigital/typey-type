@@ -164,6 +164,31 @@ class IconCheckmark extends Component {
   }
 }
 
+class IconMetronome extends Component {
+  constructor(props) {
+    super(props);
+    this.titleIdAndAriaLabelledBy = idForIcon("titleIdAndAriaLabelledBy");
+    this.maskId = idForIcon("metronomeMask");
+  }
+
+  render() {
+    const iconWidth = this.props.iconWidth || 24;
+    const iconHeight = this.props.iconHeight || 24;
+    let iconTitle = "";
+    if (this.props.iconTitle === "") { iconTitle = ""; }
+    else if (this.props.iconTitle) { iconTitle = this.props.iconTitle; }
+    else { iconTitle = 'Metronome'; }
+    const classes = this.props.className || '';
+    const role = this.props.role || 'img';
+    const ariaHidden = this.props.ariaHidden || 'false';
+    return (
+      <span className={classes}>
+        <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby={this.titleIdAndAriaLabelledBy} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title id={this.titleIdAndAriaLabelledBy}>{iconTitle}</title><path fillRule="evenodd" clipRule="evenodd" d="M9.388 3.346A.5.5 0 019.863 3h4.273a.5.5 0 01.476.346l1.66 5.133.803-.936A2.002 2.002 0 0119 5a2 2 0 11-.489 3.94l-1.517 1.77 2.794 8.636a.5.5 0 01-.476.654H16v1a1 1 0 11-2 0v-1h-4v1a1 1 0 11-2 0v-1H4.687a.5.5 0 01-.476-.654l5.177-16zM15 18h1.323a.5.5 0 00.478-.647l-.308-1a.5.5 0 00-.478-.353h-8.03a.5.5 0 00-.478.353l-.308 1a.5.5 0 00.478.647H15zm-.348-7.63L13.11 5.352A.5.5 0 0012.63 5h-1.262a.5.5 0 00-.478.353l-2.461 8a.5.5 0 00.478.647h2.632l3.112-3.63zM14.174 14l1.174-1.37.222.723a.5.5 0 01-.478.647h-.918zM13 8a1 1 0 11-2 0 1 1 0 012 0zm-1 4a1 1 0 100-2 1 1 0 000 2zM19 7.5a.5.5 0 100-1 .5.5 0 000 1z" fill="currentColor"/></svg>
+      </span>
+    )
+  }
+}
+
 class IconRestart extends Component {
   constructor(props) {
     super(props);
@@ -262,6 +287,7 @@ export {
   IconClosingCross,
   IconExternal,
   IconFullscreen,
+  IconMetronome,
   IconRestart,
   IconSearch,
   IconTriangleRight,
