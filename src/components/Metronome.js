@@ -18,7 +18,7 @@ const sound = new Howl({
   sprite: bpmBracketsSprite()
 });
 
-function playMetronome(options) {
+function playMetronome(options, withAnalytics) {
   let id = 'bpm60';
   if (options && options.id) {
     id = options.id;
@@ -27,21 +27,25 @@ function playMetronome(options) {
     sound.play(id);
   }
 
-  GoogleAnalytics.event({
-    category: 'Metronome',
-    action: 'Play',
-    label: this.props.userSettings.beatsPerMinute.toString()
-  });
+  if (withAnalytics) {
+    GoogleAnalytics.event({
+      category: 'Metronome',
+      action: 'Click button',
+      label: 'Start'
+    });
+  }
 }
 
-function stopMetronome() {
+function stopMetronome(withAnalytics) {
   sound.stop();
 
-  GoogleAnalytics.event({
-    category: 'Metronome',
-    action: 'Stop',
-    label: this.props.userSettings.beatsPerMinute.toString()
-  });
+  if (withAnalytics) {
+    GoogleAnalytics.event({
+      category: 'Metronome',
+      action: 'Click button',
+      label: 'Stop'
+    });
+  }
 }
 
 function playId(beatsPerMinute) {
@@ -67,8 +71,8 @@ class Metronome extends Component {
   render() {
     return (
       <p>
-        <button aria-label="Start metronome" className="button button--secondary mr2" onClick={() => playMetronome({id: playId(this.props.userSettings.beatsPerMinute)})}><IconMetronome role="presentation" iconWidth="24" iconHeight="24" className="svg-icon-wrapper svg-baseline" title="Metronome" /> Start</button>
-        <button aria-label="Stop metronome" className="button button--secondary" onClick={() => stopMetronome()}><IconMetronome role="presentation" iconWidth="24" iconHeight="24" className="svg-icon-wrapper svg-baseline" title="Metronome" /> Stop</button>
+        <button aria-label="Start metronome" className="button button--secondary mr2" onClick={() => playMetronome({id: playId(this.props.userSettings.beatsPerMinute)}, 'withAnalytics')}><IconMetronome role="presentation" iconWidth="24" iconHeight="24" className="svg-icon-wrapper svg-baseline" title="Metronome" /> Start</button>
+        <button aria-label="Stop metronome" className="button button--secondary" onClick={() => stopMetronome('withAnalytics')}><IconMetronome role="presentation" iconWidth="24" iconHeight="24" className="svg-icon-wrapper svg-baseline" title="Metronome" /> Stop</button>
       </p>
     );
   }
