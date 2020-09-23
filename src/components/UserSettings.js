@@ -224,7 +224,7 @@ class UserSettings extends Component {
                   <li className="ml0 pl1 bt b--brand-primary-tint--60">
                     <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
                       <Tooltip
-                        title="Metronome beats per minute (0 for silence)"
+                        title="Metronome beats per minute"
                         className="mw-240"
                         animation="shift"
                         arrow="true"
@@ -246,7 +246,7 @@ class UserSettings extends Component {
                           className="form-control w-100"
                           disabled={this.props.disableUserSettings}
                           id="beatsPerMinute"
-                          min={0}
+                          min={10}
                           max={360}
                           name="beatsPerMinute"
                           onChange={this.props.handleBeatsPerMinute}

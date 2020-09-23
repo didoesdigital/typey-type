@@ -1499,7 +1499,7 @@ describe('loadPersonalPreferences', () => {
         oldWords: 50
       }
       let userSettings = {
-        beatsPerMinute: 0,
+        beatsPerMinute: 10,
         blurMaterial: false,
         caseSensitive: false,
         simpleTypography: true,

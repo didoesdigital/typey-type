@@ -284,7 +284,7 @@ class App extends Component {
         oldWords: 50
       },
       userSettings: {
-        beatsPerMinute: 0,
+        beatsPerMinute: 10,
         blurMaterial: false,
         caseSensitive: false,
         simpleTypography: true,
