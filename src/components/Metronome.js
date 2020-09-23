@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Howl } from 'howler';
 import { IconMetronome } from './Icon';
+import GoogleAnalytics from 'react-ga';
 import plink from '../sounds/digi_plink-with-silence.mp3';
 
 function bpmBracketsSprite() {
@@ -25,10 +26,22 @@ function playMetronome(options) {
   if (!sound.playing()) {
     sound.play(id);
   }
+
+  GoogleAnalytics.event({
+    category: 'Metronome',
+    action: 'Play',
+    label: this.props.userSettings.beatsPerMinute.toString()
+  });
 }
 
 function stopMetronome() {
   sound.stop();
+
+  GoogleAnalytics.event({
+    category: 'Metronome',
+    action: 'Stop',
+    label: this.props.userSettings.beatsPerMinute.toString()
+  });
 }
 
 function playId(beatsPerMinute) {
