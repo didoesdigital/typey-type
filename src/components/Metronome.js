@@ -21,7 +21,9 @@ function playMetronome(options) {
   if (options && options.id) {
     id = options.id;
   }
-  sound.play(id);
+  if (!sound.playing()) {
+    sound.play(id);
+  }
 }
 
 function stopMetronome() {
