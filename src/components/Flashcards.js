@@ -567,7 +567,7 @@ currentSlide: currentSlide
                   <div className={"checkbox-group text-center fullscreen-button fullscreen-button-ghost" + fullscreen}>
                     <label className="absolute absolute--fill" aria-label="Fullscreen">
                       <input className="absolute" type="checkbox" name="fullscreen" id="fullscreen" checked={this.props.fullscreen} onChange={this.props.changeFullscreen.bind(this)} />
-                      <IconFullscreen iconWidth="24" iconHeight="24" className="icon-button" title="custom title for this context" />
+                      <IconFullscreen iconWidth="24" iconHeight="24" className="icon-button" title="Fullscreen" />
                     </label>
                   </div>
                 </CarouselProvider>
