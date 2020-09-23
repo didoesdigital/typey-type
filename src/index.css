@@ -980,9 +980,9 @@ input:focus::placeholder {
   background-color: #402351;
   color: #c6bdcb; }
   .subheader h2 {
-    font-size: 1.5625rem;
+    font-size: 1.25rem;
     line-height: 1.52;
-    margin-bottom: 2px; }
+    margin-bottom: 1px; }
   .subheader .link-button {
     line-height: 2.1; }
 
@@ -1308,8 +1308,7 @@ label {
   .button.link-button-ghost,
   .link-button.link-button-ghost {
     background-color: transparent;
-    font-size: 1rem;
-    text-decoration: underline; }
+    font-size: 1rem; }
     .button.link-button-ghost:hover,
     .link-button.link-button-ghost:hover {
       color: #ece9ee; }

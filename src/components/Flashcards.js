@@ -428,8 +428,9 @@ currentSlide: currentSlide
                 </header>
               </div>
               <div className="flex mxn2">
+                <Link to={lessonpath} className="link-button link-button-ghost table-cell mr1">Back to lesson</Link>
                 {/* Shuffle button */}
-                <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="link-button link-button-ghost table-cell" data-shuffle="true" role="button">Shuffle</a>
+                <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} data-shuffle="true" role="button">Shuffle</a>
               </div>
             </div>
           </div>

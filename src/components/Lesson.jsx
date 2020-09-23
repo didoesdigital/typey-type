@@ -160,7 +160,7 @@ class Lesson extends Component {
     // This logic is duplicated in LessonOverview.jsx
     let lessonMetadata;
     lessonMetadata = this.props.lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === this.props.lesson.path);
-    overviewLink = lessonMetadata && lessonMetadata['overview'] ? <Link to={this.props.location.pathname + 'overview'} className="link-button link-button-ghost table-cell" role="button">Overview</Link> : ''
+    overviewLink = lessonMetadata && lessonMetadata['overview'] ? <Link to={this.props.location.pathname + 'overview'} className="link-button link-button-ghost table-cell">Overview</Link> : ''
 
     if (this.props.settings && this.props.settings.customMessage) {
       customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
@@ -294,8 +294,13 @@ class Lesson extends Component {
                   </div>
                   <div className="flex flex-wrap mxn2">
                     {createNewCustomLesson ? createNewCustomLesson : overviewLink}
-                    <a href={this.props.path} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
-                    <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
+                    { !this.props.path.includes("custom") && !this.props.path.includes("progress") ?
+                      <Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="link-button link-button-ghost table-cell mr1">Flashcards</Link>
+                      :
+                      null
+                    }
+                    <a href={this.props.path} onClick={this.props.restartLesson} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} role="button">Restart</a>
+                    <a href={this.props.path} onClick={this.props.handleStopLesson} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} role="button">Stop</a>
                   </div>
                 </div>
               </div>
@@ -401,8 +406,13 @@ class Lesson extends Component {
                       </div>
                       <div className="flex flex-wrap mxn2">
                         {createNewCustomLesson ? createNewCustomLesson : overviewLink}
-                        <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="link-button link-button-ghost table-cell mr1" role="button">Restart</a>
-                        <a href={this.props.path} onClick={this.props.handleStopLesson} className="link-button link-button-ghost table-cell" role="button">Stop</a>
+                        { !this.props.path.includes("custom") && !this.props.path.includes("progress") ?
+                          <Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="link-button link-button-ghost table-cell mr1">Flashcards</Link>
+                          :
+                          null
+                        }
+                        <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} role="button">Restart</a>
+                        <a href={this.props.path} onClick={this.props.handleStopLesson} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} role="button">Stop</a>
                       </div>
                     </div>
                   </div>

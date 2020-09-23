@@ -881,9 +881,9 @@ input:focus::placeholder {
   background-color: $brand-primary;
   color: add-tint($brand-primary, 70%);
   h2 {
-    font-size: $h3-size;
+    font-size: $h4-size;
     line-height: 1.52;
-    margin-bottom: 2px;
+    margin-bottom: 1px;
   }
   .link-button {
     line-height: 2.1;
@@ -1318,7 +1318,6 @@ label {
   &.link-button-ghost {
     background-color: transparent;
     font-size: $h5-size;
-    text-decoration: underline;
     &:hover {
       color: add-tint($brand-primary, 90%);
     }

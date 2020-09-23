@@ -240,7 +240,7 @@ class Dictionary extends Component {
                   </div>
                   <div className="flex mxn2">
                     <a href={process.env.PUBLIC_URL + this.state.dictionary.path} download="" onClick={this.downloadDictionary.bind(this)} className="link-button link-button-ghost table-cell mr1">Download</a>
-                    <PseudoContentButton className="js-clipboard-button link-button link-button-ghost table-cell mr1 copy-to-clipboard" dataClipboardTarget="#js-dictionary-json-pre">Copy to clipboard</PseudoContentButton>
+                    <PseudoContentButton className="js-clipboard-button button button--secondary table-cell mr1 copy-to-clipboard" style={{lineHeight: 2}} dataClipboardTarget="#js-dictionary-json-pre">Copy to clipboard</PseudoContentButton>
                   </div>
                 </div>
               </div>
