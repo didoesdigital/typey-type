@@ -97,6 +97,8 @@ This project and everyone participating in it is governed by the [Code of Conduc
 
 See [LICENSE](./LICENSE).
 
+The metronome sound, “digi_plink”, comes from Dev_Tones by [RCP Tones](https://rcptones.com/dev_tones/) under a [Creative Commons license (CC BY 3.0 US)](https://creativecommons.org/licenses/by/3.0/us/legalcode) and was adapted to include silence at the end for a slower metronome tempo.
+
 ## Author
 
 Typey Type was created by [Di](https://didoesdigital.com).

@@ -222,6 +222,46 @@ class UserSettings extends Component {
                     </div>
                   </li>
                   <li className="ml0 pl1 bt b--brand-primary-tint--60">
+                    <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                      <Tooltip
+                        title="Metronome beats per minute (0 for silence)"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        <label className="mr1" htmlFor="beatsPerMinute">Metronome BPM</label>
+                      </Tooltip>
+                      <div>
+                        <NumericInput
+                          autoCapitalize="off"
+                          autoComplete="on"
+                          autoCorrect="on"
+                          autoFocus={false}
+                          className="form-control w-100"
+                          disabled={this.props.disableUserSettings}
+                          id="beatsPerMinute"
+                          min={0}
+                          max={360}
+                          name="beatsPerMinute"
+                          onChange={this.props.handleBeatsPerMinute}
+                          precision={0}
+                          spellCheck="false"
+                          step={10}
+                          style={grabStyle()}
+                          type="number"
+                          value={this.props.userSettings.beatsPerMinute}
+                          snap
+                        />
+                      </div>
+                    </div>
+                  </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint--60">
                     <div className="checkbox-group p1">
                       <label className="checkbox-label mb1">
                         <input

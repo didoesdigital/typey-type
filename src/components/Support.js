@@ -620,6 +620,52 @@ class Support extends Component {
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
               </GoogleAnalytics.OutboundLink>.</li>
+              <li>{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Metronome sounds come from Dev_Tones by RCP Tones"
+                aria-label="Metronome sounds come from Dev_Tones by RCP Tones (external link opens in new tab)"
+                to="https://rcptones.com/dev_tones/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                The metronome sound, “digi_plink”, comes from Dev_Tones by <span className="nowrap">RCP Tones
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+              </GoogleAnalytics.OutboundLink> under a{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Creative Commons license (CC BY 3.0 US)"
+                aria-label="Creative Commons license (CC BY 3.0 US) (external link opens in new tab)"
+                to="https://creativecommons.org/licenses/by/3.0/us/legalcode"
+                target="_blank"
+                rel="noopener noreferrer"
+              >Creative Commons license <span className="nowrap">(CC BY 3.0 US)
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+              </GoogleAnalytics.OutboundLink> and was adapted to include silence at the end for a slower metronome tempo.</li>
             </ul>
 
             <h3 id="support">Support</h3>

@@ -403,6 +403,7 @@ class Finished extends Component {
               changeStenoLayout={this.props.changeStenoLayout}
               chooseStudy={this.props.chooseStudy}
               disableUserSettings={this.props.disableUserSettings}
+              handleBeatsPerMinute={this.props.handleBeatsPerMinute}
               handleLimitWordsChange={this.props.handleLimitWordsChange}
               handleStartFromWordChange={this.props.handleStartFromWordChange}
               handleRepetitionsChange={this.props.handleRepetitionsChange}

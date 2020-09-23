@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
+import Metronome from './Metronome';
 import { Tooltip } from 'react-tippy';
-import { Link } from 'react-router-dom';
 
 class LessonCanvasFooter extends Component {
   render() {
@@ -12,12 +12,10 @@ class LessonCanvasFooter extends Component {
     }
 
     return (
-      <div className="flex flex-wrap mx-auto mw-1440 justify-between mb2 text-small">
-        { !this.props.path.includes("custom") && !this.props.path.includes("progress") ?
-          <p className="mb0"><Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="mb0">Flashcards</Link></p>
-          :
-          null
-        }
+      <div className="flex flex-wrap mx-auto mw-1440 justify-between text-small">
+        <Metronome
+          userSettings={this.props.userSettings}
+        />
         <div className="flex flex-wrap">
           <fieldset className="dc hide-sm">
             <Tooltip

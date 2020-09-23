@@ -315,6 +315,7 @@ class Lesson extends Component {
                 chooseStudy={this.props.chooseStudy}
                 currentLessonStrokes={this.props.currentLessonStrokes}
                 disableUserSettings={this.props.disableUserSettings}
+                handleBeatsPerMinute={this.props.handleBeatsPerMinute}
                 handleLimitWordsChange={this.props.handleLimitWordsChange}
                 handleStartFromWordChange={this.props.handleStartFromWordChange}
                 handleRepetitionsChange={this.props.handleRepetitionsChange}
@@ -473,12 +474,12 @@ class Lesson extends Component {
                           <LessonCanvasFooter
                             chooseStudy={this.props.chooseStudy}
                             disableUserSettings={this.props.disableUserSettings}
-                            userSettings={this.props.userSettings}
-                            setAnnouncementMessage={this.props.setAnnouncementMessage}
-                            toggleHideOtherSettings={this.props.toggleHideOtherSettings}
                             hideOtherSettings={this.props.hideOtherSettings}
                             path={this.props.path}
+                            setAnnouncementMessage={this.props.setAnnouncementMessage}
+                            toggleHideOtherSettings={this.props.toggleHideOtherSettings}
                             totalWordCount={this.props.totalWordCount}
+                            userSettings={this.props.userSettings}
                           />
                         </div>
                         <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
@@ -494,6 +495,7 @@ class Lesson extends Component {
                         changeUserSetting={this.props.changeUserSetting}
                         chooseStudy={this.props.chooseStudy}
                         disableUserSettings={this.props.disableUserSettings}
+                        handleBeatsPerMinute={this.props.handleBeatsPerMinute}
                         handleLimitWordsChange={this.props.handleLimitWordsChange}
                         handleStartFromWordChange={this.props.handleStartFromWordChange}
                         handleRepetitionsChange={this.props.handleRepetitionsChange}

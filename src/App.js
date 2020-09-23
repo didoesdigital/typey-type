@@ -284,6 +284,7 @@ class App extends Component {
         oldWords: 50
       },
       userSettings: {
+        beatsPerMinute: 0,
         blurMaterial: false,
         caseSensitive: false,
         simpleTypography: true,
@@ -503,6 +504,31 @@ class App extends Component {
     });
 
     return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
+  }
+
+  handleBeatsPerMinute(event) {
+    let currentState = this.state.userSettings;
+    let newState = Object.assign({}, currentState);
+
+    const name = "beatsPerMinute"
+    const value = event;
+
+    newState[name] = value;
+
+    this.setState({userSettings: newState}, () => {
+      writePersonalPreferences('userSettings', this.state.userSettings);
+    });
+
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change beats per minute',
+      label: labelString
+    });
+
+    return value;
   }
 
   handleLimitWordsChange(event) {
@@ -2214,6 +2240,7 @@ class App extends Component {
                           currentPhrase={presentedMaterialCurrentItem.phrase}
                           currentStroke={presentedMaterialCurrentItem.stroke}
                           disableUserSettings={this.state.disableUserSettings}
+                          handleBeatsPerMinute={this.handleBeatsPerMinute.bind(this)}
                           handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
                           handleStartFromWordChange={this.handleStartFromWordChange.bind(this)}
                           handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
