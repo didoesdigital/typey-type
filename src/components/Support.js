@@ -390,6 +390,9 @@ class Support extends Component {
             <h4 id="revision">How many briefs should you revise each day?</h4>
             <p>100–200.</p>
 
+            <h4 id="metronome">Why might you use the metronome?</h4>
+              <p>Using a metronome might help you improve your rhythm for each stroke in finger drills. By drilling difficult transitions between pairs of strokes that slow you down or cause you hesitation using a metronome, you may improve your slowest pairs.</p>
+
             <h4 id="palantype">What’s a “palantype”?</h4>
             <p>Typey&nbsp;Type supports alternative steno key layouts such as “palantype”. A palantype is an alternative shorthand machine to a stenotype with more keys. That means palantype can have fewer theory conflicts and be easier to learn. Meanwhile, stenography is more popular and more ergonomic.{' '}
               <GoogleAnalytics.OutboundLink
