@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Howl } from 'howler';
 import { IconMetronome } from './Icon';
+import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';
 import plink from '../sounds/digi_plink-with-silence.mp3';
 
@@ -71,8 +72,38 @@ class Metronome extends Component {
   render() {
     return (
       <p>
-        <button aria-label="Start metronome" className="button button--secondary mr2" onClick={() => playMetronome({id: playId(this.props.userSettings.beatsPerMinute)}, 'withAnalytics')}><IconMetronome role="presentation" iconWidth="24" iconHeight="24" className="svg-icon-wrapper svg-baseline" title="Metronome" /> Start</button>
-        <button aria-label="Stop metronome" className="button button--secondary" onClick={() => stopMetronome('withAnalytics')}><IconMetronome role="presentation" iconWidth="24" iconHeight="24" className="svg-icon-wrapper svg-baseline" title="Metronome" /> Stop</button>
+        <button aria-label="Start metronome" className="button button--secondary mr2" onClick={() => playMetronome({id: playId(this.props.userSettings.beatsPerMinute)}, 'withAnalytics')}>
+          <Tooltip
+            title="Start the metronome for finger drills and improving rhythm"
+            className="mw-240"
+            animation="shift"
+            arrow="true"
+            duration="200"
+            tabIndex="0"
+            tag="span"
+            theme="didoesdigital didoesdigital-sm"
+            trigger="mouseenter focus click"
+            onShow={this.props.setAnnouncementMessage}
+          >
+            <IconMetronome role="presentation" iconWidth="24" iconHeight="24" className="svg-icon-wrapper svg-baseline" title="Metronome" /> Start
+          </Tooltip>
+        </button>
+        <button aria-label="Stop metronome" className="button button--secondary" onClick={() => stopMetronome('withAnalytics')}>
+          <Tooltip
+            title="Stop the metronome"
+            className="mw-240"
+            animation="shift"
+            arrow="true"
+            duration="200"
+            tabIndex="0"
+            tag="span"
+            theme="didoesdigital didoesdigital-sm"
+            trigger="mouseenter focus click"
+            onShow={this.props.setAnnouncementMessage}
+          >
+            <IconMetronome role="presentation" iconWidth="24" iconHeight="24" className="svg-icon-wrapper svg-baseline" title="Metronome" /> Stop
+          </Tooltip>
+        </button>
       </p>
     );
   }
