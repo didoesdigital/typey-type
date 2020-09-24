@@ -670,7 +670,7 @@ input:focus::placeholder {
   min-height: 100vh; }
 
 .mh-page {
-  min-height: calc(100vh - 248px); }
+  min-height: calc(100vh - 232px); }
 
 .min-width70 {
   min-width: 70%; }
@@ -978,7 +978,8 @@ input:focus::placeholder {
 
 .subheader {
   background-color: #402351;
-  color: #c6bdcb; }
+  color: #c6bdcb;
+  min-height: 72px; }
   .subheader h2 {
     font-size: 1.25rem;
     line-height: 1.52;
