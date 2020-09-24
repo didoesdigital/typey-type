@@ -19,7 +19,7 @@ const sound = new Howl({
 });
 
 function playMetronome(options, withAnalytics) {
-  let id = 'bpm60';
+  let id = 'bpm10';
   if (options && options.id) {
     id = options.id;
   }
@@ -49,10 +49,10 @@ function stopMetronome(withAnalytics) {
 }
 
 function playId(beatsPerMinute) {
-  if (!(beatsPerMinute)) {
+  if (!(beatsPerMinute) || typeof beatsPerMinute === 'string') {
     beatsPerMinute = 10;
   }
-  let bpmBracket = (Math.min(Math.floor(Math.abs(beatsPerMinute) / 10), 36) + 1) * 10;
+  let bpmBracket = (Math.min(Math.ceil(Math.abs(beatsPerMinute) / 10), 36)) * 10;
   return `bpm${bpmBracket}`
 }
 
@@ -79,3 +79,7 @@ class Metronome extends Component {
 }
 
 export default Metronome;
+export {
+  bpmBracketsSprite,
+  playId
+};
