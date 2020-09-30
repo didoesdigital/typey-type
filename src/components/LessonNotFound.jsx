@@ -60,7 +60,7 @@ class LessonNotFound extends Component {
           <div className="subheader">
             <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
               <div className="flex mr1 self-center">
-                <header className="flex items-baseline">
+                <header className="flex items-center min-h-40">
                   <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
                     <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Lesson not found</h2>
                   </a>

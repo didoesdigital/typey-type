@@ -421,7 +421,7 @@ currentSlide: currentSlide
           <div className={"subheader hide-in-fullscreen" + fullscreen}>
             <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
               <div className="flex mr1 self-center">
-                <header className="flex items-baseline">
+                <header className="flex items-center min-h-40">
                   <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="heading-link table-cell mr2" role="button">
                     <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="flashcards">{flashcardsHeading}</h2>
                   </a>

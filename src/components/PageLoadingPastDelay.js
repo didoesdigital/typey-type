@@ -7,7 +7,7 @@ class PageLoadingPastDelay extends Component {
         <div className="subheader">
           <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
             <div className="flex mr1 self-center">
-              <header className="flex items-baseline">
+              <header className="flex items-center min-h-40">
                 <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Loading…</h2>
               </header>
             </div>
