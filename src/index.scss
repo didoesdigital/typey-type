@@ -55,6 +55,7 @@ $z-index-show-scores-control: 3;
 $z-index-successfully-typed-text: -1;
 $z-index-skip-to-main-link: 2;
 $z-index-unknown-steno-diagram-text: 1;
+$z-index-lesson-canvas: 0;
 $link-button-height: 2.5rem;
 $link-button-width: 2.5rem;
 $link-button-large-width: 3rem;
@@ -898,6 +899,7 @@ input:focus::placeholder {
   max-height: 360px;
   min-height: 320px;
   overflow: hidden;
+  z-index: $z-index-lesson-canvas;
 
   @media (min-width: $large-breakpoint) {
     min-width: 544px;

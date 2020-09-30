@@ -992,7 +992,8 @@ input:focus::placeholder {
   position: relative;
   max-height: 360px;
   min-height: 320px;
-  overflow: hidden; }
+  overflow: hidden;
+  z-index: 0; }
   @media (min-width: 1024px) {
     .lesson-canvas {
       min-width: 544px; } }
