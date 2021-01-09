@@ -258,7 +258,7 @@ plover"
                     autoCapitalize="off"
                     spellCheck="false"
                     placeholder='{
-"TEFT": "hello"
+"TEFT": "hello",
 "TEFTD": "world"
 }'
                     rows="8"
