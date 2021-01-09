@@ -423,9 +423,9 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           recommendedNextLesson.studyType = 'game';
           recommendedNextLesson.limitNumberOfWords = null;
           recommendedNextLesson.repetitions = null;
-          recommendedNextLesson.linkTitle = "Cargo Crisis";
-          recommendedNextLesson.linkText = "Play Cargo Crisis";
-          recommendedNextLesson.link = 'http://qwertysteno.com/Games/CargoCrisis.php';
+          recommendedNextLesson.linkTitle = "Typing game by Nikola Simovic";
+          recommendedNextLesson.linkText = "Play Nikola Simovic typing game";
+          recommendedNextLesson.link = 'https://codepen.io/nikola1970/full/oxXbmb';
           break;
         default:
           recommendedNextLesson.studyType = 'break';

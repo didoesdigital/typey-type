@@ -42,7 +42,7 @@ class RecommendationBox extends Component {
       else if (studyType === "game") {
         metadataStats = (
           <React.Fragment>
-            Increase your speed while breaking cargo
+            Increase your speed by racing against the clock
           </React.Fragment>
         );
       }

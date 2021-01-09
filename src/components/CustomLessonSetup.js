@@ -19,6 +19,7 @@ class CustomLessonSetup extends Component {
     this.state = {
       customLessonWordsAndStrokes: [],
       customWordList: '',
+      dictionaryConvertedToLesson: '',
       myWords: ''
     }
   }
@@ -64,6 +65,44 @@ class CustomLessonSetup extends Component {
     return event;
   }
 
+  handleConvertingDictionaryEntriesToLesson(text) {
+    let newLesson = '';
+
+    try {
+      let parsedJSON = JSON.parse(text);
+
+      if (parsedJSON.constructor !== {}.constructor) {
+        throw new Error("This JSON does not contain an object.");
+      }
+
+      let parsedJSONKeys = Object.keys(parsedJSON);
+
+      if (parsedJSONKeys.length < 1) {
+        throw new Error("This dictionary is empty.");
+      }
+
+      if (parsedJSON && typeof parsedJSON === "object") {
+        newLesson = Object.entries(parsedJSON).map(([outline, translation]) => {
+          return (`${translation}	${outline}`);
+        }).join('\n');
+      }
+    }
+    catch (error) {
+      // console.error(error);
+    }
+
+    this.setState({
+      dictionaryConvertedToLesson: newLesson
+    });
+  }
+
+  handleJSONTextAreaChange(event) {
+    if (event && event.target && event.target.value) {
+      this.handleConvertingDictionaryEntriesToLesson(event.target.value);
+    }
+    return event;
+  }
+
   addWordListToPage(metWords, globalLookupDictionary) {
     let myWords = createWordListFromMetWords(metWords).join("\n");
     this.handleWordsForDictionaryEntries(myWords, globalLookupDictionary);
@@ -95,7 +134,7 @@ class CustomLessonSetup extends Component {
         validationStateStyle = "";
     }
 
-    const dictionaryEntries = this.state.customLessonWordsAndStrokes.map( (entry, index) => {
+    const dictionaryEntries = this.state.customLessonWordsAndStrokes.map( (entry) => {
       return( `${entry.phrase}	${entry.stroke}`)
     }).join('\n');
 
@@ -207,6 +246,37 @@ plover"
 
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
+              <h3>Convert JSON to Typey Type lesson</h3>
+              <div className="gtc-4fr-3fr">
+                <div>
+                  <label className="mb1" htmlFor="your-dictionary-entries-to-convert">Paste a JSON dictionary here to create a custom lesson:</label>
+                  <textarea
+                    id="your-dictionary-entries-to-convert"
+                    className="input-textarea mw100 w-100 mb1 overflow-scroll"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    autoCapitalize="off"
+                    spellCheck="false"
+                    placeholder='{
+"TEFT": "hello"
+"TEFTD": "world"
+}'
+                    rows="8"
+                    wrap="off"
+                    onChange={this.handleJSONTextAreaChange.bind(this)}
+                    >
+                  </textarea>
+                </div>
+                <div>
+                  <pre id="js-converted-dictionary-entries" className={filledPre + "h-168 overflow-scroll mw-384 mt1 mb3"}><code>{this.state.dictionaryConvertedToLesson}</code></pre>
+                  <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-converted-dictionary-entries">Copy converted dictionary to clipboard</PseudoContentButton>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-white landing-page-section">
+            <div className="p3 mx-auto mw-1024">
               <h3>Revise words you have seen</h3>
               <div className="gtc-4fr-3fr">
                 <div>
@@ -223,7 +293,7 @@ plover"
               </div>
             </div>
           </div>
-          <div className="bg-white landing-page-section">
+          <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="text-center">
                 <h3>Share your lessons</h3>
