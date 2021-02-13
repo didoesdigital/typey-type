@@ -356,7 +356,7 @@ class Finished extends Component {
     return (
       <div>
         <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
-        <div id="lesson-page" className="flex mx-auto mw-1920">
+        <div id="lesson-page" className="flex-wrap-md flex mx-auto mw-1920">
           <div id="main-lesson-area" className="flex-grow mx-auto mw-1440 min-w-0">
             <div className="mx-auto mw-1920">
               {customMessage}

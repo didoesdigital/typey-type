@@ -402,6 +402,7 @@ input:focus::placeholder {
 .flex             { display: flex; }
 .inline-flex      { display: inline-flex; }
 .flex-wrap        { flex-wrap: wrap; }
+.flex-wrap-md     { @media (max-width: $medium-breakpoint) { flex-wrap: wrap; } }
 .flex-grow        { flex-grow: 1; }
 .flex-column      { flex-direction: column; }
 .justify-between  { justify-content: space-between; }

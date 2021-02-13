@@ -417,7 +417,7 @@ class Lesson extends Component {
                       </div>
                     </div>
                   </div>
-                  <div id="lesson-page" className="flex mx-auto mw-1920">
+                  <div id="lesson-page" className="flex-wrap-md flex mx-auto mw-1920">
                     <div id="main-lesson-area" className="flex-grow mx-auto mw-1440 min-w-0">
                       <div>
                         <div className="mx-auto mw-1920">

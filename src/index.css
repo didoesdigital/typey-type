@@ -292,6 +292,10 @@ input:focus::placeholder {
 .flex-wrap {
   flex-wrap: wrap; }
 
+@media (max-width: 768px) {
+  .flex-wrap-md {
+    flex-wrap: wrap; } }
+
 .flex-grow {
   flex-grow: 1; }
 
