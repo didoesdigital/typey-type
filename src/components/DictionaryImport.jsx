@@ -450,7 +450,7 @@ class DictionaryImport extends Component {
             <div className="flex flex-wrap">
               <div className="mw-568 mr3 flex-grow">
                 <h3>Dictionaries used for lookup</h3>
-                <p>Typey&nbsp;Type uses these dictionaries for brief hints:</p>
+                <p>Typey&nbsp;Type will use these dictionaries for brief hints:</p>
                 <ul>
                   {listOfValidDictionariesImportedAndInConfig}
                 </ul>
