@@ -314,15 +314,11 @@ class DictionaryImport extends Component {
       importedDictionariesLoading: true
     });
 
-    let validDictionariesListedInConfig = this.state.validDictionariesListedInConfig;
-    let validDictionaries = this.state.validDictionaries;
-    let namesOfValidImportedDictionaries = this.state.namesOfValidImportedDictionaries;
-
-    let labelString = namesOfValidImportedDictionaries || 'No files for config';
-
     writePersonalPreferences('personalDictionaries', this.state.validDictionaries);
     writePersonalPreferences('personalDictionariesInConfig', this.state.validDictionariesListedInConfig);
 
+    let namesOfValidImportedDictionaries = this.state.namesOfValidImportedDictionaries;
+    let labelString = namesOfValidImportedDictionaries || 'No files for config';
     GoogleAnalytics.event({
       category: 'Apply dictionary changes',
       action: 'Click apply button',
