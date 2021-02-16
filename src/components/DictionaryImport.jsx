@@ -50,7 +50,7 @@ class DictionaryImport extends Component {
   // }
 
   validateDictionaries(files) {
-    let validDictionaries = [];
+    let validDictionaries = this.state.validDictionaries.slice();
     let invalidDictionaries = [];
     let filesLength = files.length;
 
@@ -228,7 +228,6 @@ class DictionaryImport extends Component {
     const files = filesInput.files;
 
     let labelString = 'No files for dictionaries';
-
     if (files && files.length > 0) {
       let fileNames = [];
       for (let i = 0; i < files.length; i++) {
@@ -236,7 +235,6 @@ class DictionaryImport extends Component {
       }
       labelString = fileNames.join(", ");
     }
-
     GoogleAnalytics.event({
       category: 'Dictionary import',
       action: 'Submit dictionaries',
@@ -274,6 +272,32 @@ class DictionaryImport extends Component {
     });
 
     this.validateConfig(files);
+  }
+
+  handleOnSubmitClear(event) {
+    event.preventDefault();
+
+    this.setState({
+      importedDictionariesLoading: false,
+      showDictionaryErrorNotification: false,
+      listOfValidDictionariesImportedAndInConfig: ["typey-type.json"],
+      combinedLookupDictionary: {},
+      validDictionaries: [],
+      invalidDictionaries: [],
+      namesOfValidImportedDictionaries: [],
+      validDictionariesListedInConfig: [],
+      validConfig: '',
+      invalidConfig: [],
+      dict: {
+        "-T": "the",
+      }
+    });
+
+    GoogleAnalytics.event({
+      category: 'Dictionary management',
+      action: 'Clear dictionaries and config',
+      label: 'Clear all'
+    });
   }
 
   handleOnSubmitApplyChanges(event) {
@@ -467,6 +491,12 @@ class DictionaryImport extends Component {
                     </div>
                     <div>
                       <button type="submit" className="button mt1">Import config</button>
+                    </div>
+                  </form>
+
+                  <form className="mb3" onSubmit={this.handleOnSubmitClear.bind(this)}>
+                    <div>
+                      <button type="submit" className="button mt1">Clear dictionaries and config</button>
                     </div>
                   </form>
                 </div>
