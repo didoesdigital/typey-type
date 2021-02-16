@@ -852,6 +852,27 @@ function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
 //   }
 // }
 
+function loadPersonalDictionaries() {
+  let personalDictionaries = []; // [["name", {"OUTLINE": "translation}],[…]]
+  let personalDictionariesInConfig = []; // ["name.json", "name2.json"]
+
+  try {
+    if (window.localStorage) {
+      if (window.localStorage.getItem('personalDictionaries')) {
+        personalDictionaries = JSON.parse(window.localStorage.getItem('personalDictionaries'));
+      }
+      if (window.localStorage.getItem('personalDictionariesInConfig')) {
+        personalDictionariesInConfig = JSON.parse(window.localStorage.getItem('personalDictionariesInConfig'));
+      }
+      return [personalDictionaries, personalDictionariesInConfig];
+    }
+  }
+  catch(error) {
+    console.log('Unable to read local storage.', error);
+  }
+  return [personalDictionariesInConfig, personalDictionaries];
+}
+
 function loadPersonalPreferences() {
   let metWords = {};
   let flashcardsProgress = {};
@@ -1015,6 +1036,7 @@ function updateCapitalisationStrokesInNextItem(nextItem, lastWord) {
 export {
   createWordListFromMetWords,
   loadPersonalPreferences,
+  loadPersonalDictionaries,
   lookUpDictionaryInIndex,
   matchSplitText,
   mapQWERTYKeysToStenoStroke,

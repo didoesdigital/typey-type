@@ -8,6 +8,7 @@ import {
 } from './../utils/transformingDictionaries';
 import { getTypeyTypeDict } from './../utils/getData';
 import PseudoContentButton from './PseudoContentButton';
+import { writePersonalPreferences } from './../utils/typey-type';
 
 class DictionaryImport extends Component {
   constructor(props) {
@@ -281,6 +282,9 @@ class DictionaryImport extends Component {
   handleOnSubmitClear(event) {
     event.preventDefault();
 
+    writePersonalPreferences('personalDictionaries', []);
+    writePersonalPreferences('personalDictionariesInConfig', []);
+
     this.setState({
       importedDictionariesLoading: false,
       showDictionaryErrorNotification: false,
@@ -317,6 +321,9 @@ class DictionaryImport extends Component {
     let namesOfValidImportedDictionaries = this.state.namesOfValidImportedDictionaries;
 
     let labelString = namesOfValidImportedDictionaries || 'No files for config';
+
+    writePersonalPreferences('personalDictionaries', this.state.validDictionaries);
+    writePersonalPreferences('personalDictionariesInConfig', this.state.validDictionariesListedInConfig);
 
     GoogleAnalytics.event({
       category: 'Apply dictionary changes',
