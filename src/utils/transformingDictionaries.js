@@ -2438,27 +2438,6 @@ function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
   return arrayOfStrokesAndTheirSourceDictNames;
 }
 
-function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes) {
-  let misstrokesMap = new Map(Object.entries(misstrokes));
-
-  for (let [outline, translation] of Object.entries(dictContent)) {
-    let misstroke = misstrokesMap.get(outline);
-
-    if (!misstroke || (misstroke !== translation)) {
-      if (combinedLookupDictionary.get(translation)) {
-        // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
-        let current = combinedLookupDictionary.get(translation);
-        current.push([outline, dictName]);
-        combinedLookupDictionary.set(translation, current);
-      }
-      else {
-        combinedLookupDictionary.set(translation, [[outline, dictName]]);
-      }
-    }
-  }
-  return combinedLookupDictionary;
-}
-
 function rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary) {
   // This code causes the browser to hang
   // for (let [translation, outlinesAndSourceDicts] of combinedLookupDictionary) {
@@ -2468,10 +2447,37 @@ function rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary) {
   return combinedLookupDictionary;
 }
 
+function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, outlinesWeHaveSeen) {
+  let misstrokesMap = new Map(Object.entries(misstrokes));
+
+  for (let [outline, translation] of Object.entries(dictContent)) {
+    let misstroke = misstrokesMap.get(outline);
+
+    let seen = outlinesWeHaveSeen.has(outline);
+    if (!seen) {
+      if (!misstroke || (misstroke !== translation)) {
+        if (combinedLookupDictionary.get(translation)) {
+          // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
+          let current = combinedLookupDictionary.get(translation);
+          current.push([outline, dictName]);
+          combinedLookupDictionary.set(translation, current);
+          outlinesWeHaveSeen.add(outline);
+        }
+        else {
+          combinedLookupDictionary.set(translation, [[outline, dictName]]);
+          outlinesWeHaveSeen.add(outline);
+        }
+      }
+    }
+  }
+  return [combinedLookupDictionary, outlinesWeHaveSeen];
+}
+
 function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictAndMisstrokes) {
   let combinedLookupDictionary = new Map();
   let listOfValidDictionariesImportedAndInConfigLength = listOfValidDictionariesImportedAndInConfig.length;
   let validDictionariesLength = validDictionaries.length;
+  let outlinesWeHaveSeen = new Set();
 
   for (let i = 0; i < listOfValidDictionariesImportedAndInConfigLength; i++) {
     let dictContent = {};
@@ -2479,17 +2485,18 @@ function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, va
     let [dictTypeyType, misstrokes] = dictAndMisstrokes;
     if (dictName === "typey-type.json") {
       dictContent = dictTypeyType;
-      combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, {});
+      [combinedLookupDictionary, outlinesWeHaveSeen] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, {}, outlinesWeHaveSeen);
     }
     else {
       for (let j = 0; j < validDictionariesLength; j++) {
         if (validDictionaries[j][0] === dictName) {
           dictContent = validDictionaries[j][1];
-          combinedLookupDictionary = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes);
+          [combinedLookupDictionary, outlinesWeHaveSeen] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, outlinesWeHaveSeen);
         }
       }
     }
   }
+  outlinesWeHaveSeen = new Set();
 
   return combinedLookupDictionary;
 }

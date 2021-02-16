@@ -128,12 +128,19 @@ describe('add outlines for words to combined lookup dict', () => {
       "SED": "sed",
       "SOUPBSD": "sounds"
     };
+    let seenSet = new Set();
+    let expectedSet = new Set();
+    expectedSet.add("TO");
+    expectedSet.add("SED");
+    expectedSet.add("SAEUD");
+    expectedSet.add("SOUPBD/-Z");
+    expectedSet.add("SOUPBDZ");
     let expectedResult = new Map([
       ["to", [["TO", "typey-type.json"]]],
       ["said", [["SED", "typey-type.json"], ["SAEUD", "typey-type.json"]]],
       ["sounds", [["SOUPBD/-Z", "typey-type.json"], ["SOUPBDZ", "typey-type.json"]]]
     ]);
-    expect(addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes)).toEqual(expectedResult);
+    expect(addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, seenSet)).toEqual([expectedResult, expectedSet]);
   })
 })
 
