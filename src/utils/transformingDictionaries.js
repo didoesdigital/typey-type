@@ -2485,13 +2485,21 @@ function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, va
     let [dictTypeyType, misstrokes] = dictAndMisstrokes;
     if (dictName === "typey-type.json") {
       dictContent = dictTypeyType;
-      [combinedLookupDictionary, outlinesWeHaveSeen] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, {}, outlinesWeHaveSeen);
+      let _;
+      [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, {}, new Set());
     }
     else {
       for (let j = 0; j < validDictionariesLength; j++) {
         if (validDictionaries[j][0] === dictName) {
           dictContent = validDictionaries[j][1];
-          [combinedLookupDictionary, outlinesWeHaveSeen] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, outlinesWeHaveSeen);
+          if (dictName === "plover-main-3-jun-2018.json") {
+            console.log("plover!");
+            let _;
+            [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, new Set());
+          }
+          else {
+            [combinedLookupDictionary, outlinesWeHaveSeen] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, outlinesWeHaveSeen);
+          }
         }
       }
     }
