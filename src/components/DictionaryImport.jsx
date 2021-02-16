@@ -3,10 +3,8 @@ import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
 import Notification from './Notification';
 import {
-  createAGlobalLookupDictionary,
   getListOfValidDictionariesImportedAndInConfig,
 } from './../utils/transformingDictionaries';
-import { getTypeyTypeDict } from './../utils/getData';
 import PseudoContentButton from './PseudoContentButton';
 import { writePersonalPreferences } from './../utils/typey-type';
 
@@ -331,11 +329,8 @@ class DictionaryImport extends Component {
       label: labelString
     });
 
-    getTypeyTypeDict()
-      .then(dictAndMisstrokes => {
-        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictAndMisstrokes);
-        this.props.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
-        this.props.setGlobalDictionaryLoaded(true);
+    this.props.fetchAndSetupGlobalDict(true)
+      .then(() => {
         this.setState({
           importedDictionariesLoaded: true,
           importedDictionariesLoading: false
@@ -353,7 +348,7 @@ class DictionaryImport extends Component {
   }
 
   showDictionaryErrorNotification() {
-    this.props.setAnnouncementMessageString('Unable to load Typey Type’s dictionary');
+    this.props.setAnnouncementMessageString('Unable to load dictionary');
     this.setState({showDictionaryErrorNotification: true});
   }
 
@@ -441,7 +436,7 @@ class DictionaryImport extends Component {
         <main id="main">
           { this.state.showDictionaryErrorNotification ?
             <Notification onDismiss={this.dismissDictionaryErrorNotification.bind(this)}>
-              Warning: Unable to load Typey&nbsp;Type’s dictionary
+              Warning: Unable to load dictionary
             </Notification>
               :
             null
