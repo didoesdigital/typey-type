@@ -78,6 +78,10 @@ class DictionaryImport extends Component {
               throw new Error("This is not a JSON file.");
             }
 
+            if (this.state.validDictionaries.map(d => d[0]).includes(dictName)) {
+              throw new Error("This dictionary name conflicts with an existing dictionary. You may have imported it already.");
+            }
+
             let parsedDictionary = JSON.parse(text);
 
             if (parsedDictionary.constructor !== {}.constructor) {
