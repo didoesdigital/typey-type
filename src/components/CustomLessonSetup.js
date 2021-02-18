@@ -216,10 +216,10 @@ examples.	KP-PLS TP-PL"
 
           <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
-              <h3>Create Plover lesson using a word list</h3>
+              <h3>Create a lesson using a word list</h3>
               <div className="gtc-4fr-3fr">
                 <div>
-                  <label className="mb1" htmlFor="your-words-for-dictionary-entries">Paste a word list without strokes here to create a custom lesson using Plover theory:</label>
+                  <label className="mb1" htmlFor="your-words-for-dictionary-entries">Paste a word list without strokes here to create a custom lesson (using Plover theory by default):</label>
                   <textarea
                     id="your-words-for-dictionary-entries"
                     className="input-textarea mw100 w-100 mb1 overflow-scroll"
