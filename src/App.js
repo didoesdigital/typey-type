@@ -11,6 +11,7 @@ import {
   setupLessonProgress,
   loadPersonalPreferences,
   loadPersonalDictionaries,
+  loadAppliedDictionariesConfig,
   matchSplitText,
   parseLesson,
   removeWhitespaceAndSumUniqMetWords,
@@ -257,6 +258,8 @@ class App extends Component {
         showMisstrokesInLookup: false
       },
       hideOtherSettings: false,
+      isPloverDictionaryLoaded: false,
+      isGlobalLookupDictionaryLoaded: false,
       lookupTerm: '',
       recommendationHistory: { currentStep: null },
       nextLessonPath: '',
@@ -343,16 +346,30 @@ class App extends Component {
   }
 
   fetchAndSetupGlobalDict(withPlover) {
-    // FIXME: This is a heuristic for checking if the Typey Type or Plover dictionaries have loaded.
-    // This approach is fragile and definitely won't work for personal dictionaries.
-    // TODO: Check if the latest global dictionary matches the latest dictionary config.
-    if (withPlover && this.state.globalLookupDictionary && this.state.globalLookupDictionary.size > 100000) {
+    const [personalDictionaries, appliedDictionariesConfig] = loadPersonalDictionaries();
+    const namesOfValidImportedDictionaries = personalDictionaries.map(d => d[0]);
+    const localConfig = loadAppliedDictionariesConfig();
+    const previouslyAppliedConfig = this.state.globalLookupDictionary['configuration'];
+    const globalLookupDictionaryMatchesConfig =
+      this.state.globalLookupDictionary
+      && this.state.globalLookupDictionary['configuration']
+      && JSON.stringify(previouslyAppliedConfig) === JSON.stringify(localConfig);
+
+    let localConfigPlusPlover = localConfig.slice(0);
+    localConfigPlusPlover.push("plover-main-3-jun-2018.json"); // reminder: .push() returns length of array, not result
+    const globalLookupDictionaryMatchesConfigWithPlover =
+      this.state.globalLookupDictionary
+      && this.state.globalLookupDictionary['configuration']
+      && JSON.stringify(previouslyAppliedConfig) === JSON.stringify(localConfigPlusPlover);
+
+    let isPloverDictionaryLoaded = this.state.isPloverDictionaryLoaded;
+    if (withPlover && this.state.globalLookupDictionary && isPloverDictionaryLoaded && globalLookupDictionaryMatchesConfigWithPlover) {
       isGlobalDictionaryUpToDate = true;
     }
     else if (withPlover) {
       isGlobalDictionaryUpToDate = false;
     }
-    else if (!withPlover && this.state.globalLookupDictionary && this.state.globalLookupDictionary.size > 70000) {
+    else if (!withPlover && this.state.globalLookupDictionary && globalLookupDictionaryMatchesConfig) {
       isGlobalDictionaryUpToDate = true;
     }
     else {
@@ -370,14 +387,12 @@ class App extends Component {
         // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
         //   dictAndMisstrokes[1] = {};
         // }
-        let [personalDictionaries, personalDictionariesInConfig] = loadPersonalDictionaries();
-        let namesOfValidImportedDictionaries = personalDictionaries.map(d => d[0]);
         if (withPlover) {
-          personalDictionariesInConfig.push("plover-main-3-jun-2018.json");
+          appliedDictionariesConfig.push("plover-main-3-jun-2018.json");
           personalDictionaries.push(["plover-main-3-jun-2018.json", latestPloverDict])
           namesOfValidImportedDictionaries.push("plover-main-3-jun-2018.json");
         }
-        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionariesInConfig, personalDictionaries, namesOfValidImportedDictionaries, dictAndMisstrokes);
+        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(appliedDictionariesConfig, personalDictionaries, namesOfValidImportedDictionaries, dictAndMisstrokes);
         // let t1 = performance.now();
         // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
 
@@ -386,6 +401,9 @@ class App extends Component {
         this.setState({ globalLookupDictionaryLoaded: true });
       });
 
+      if (!isPloverDictionaryLoaded && withPlover) { // TODO: this might need updating
+        this.setState({isPloverDictionaryLoaded: true });
+      }
       return loadingPromise;
     }
   };

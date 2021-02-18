@@ -7,6 +7,7 @@ import {
 } from './../utils/transformingDictionaries';
 import PseudoContentButton from './PseudoContentButton';
 import { writePersonalPreferences } from './../utils/typey-type';
+import { loadAppliedDictionariesConfig } from './../utils/typey-type';
 
 class DictionaryImport extends Component {
   constructor(props) {
@@ -26,7 +27,7 @@ class DictionaryImport extends Component {
       invalidConfig: [],
       dict: {
         "-T": "the",
-      }
+      },
     }
   }
 
@@ -34,6 +35,8 @@ class DictionaryImport extends Component {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
+    const localConfig = loadAppliedDictionariesConfig();
+    this.setState({listOfValidDictionariesImportedAndInConfig: localConfig});
   }
 
   // maxSelectFile(event) {
@@ -281,7 +284,7 @@ class DictionaryImport extends Component {
     event.preventDefault();
 
     writePersonalPreferences('personalDictionaries', []);
-    writePersonalPreferences('personalDictionariesInConfig', []);
+    writePersonalPreferences('appliedDictionariesConfig', []);
 
     this.setState({
       importedDictionariesLoading: false,
@@ -314,11 +317,18 @@ class DictionaryImport extends Component {
       importedDictionariesLoading: true
     });
 
-    writePersonalPreferences('personalDictionaries', this.state.validDictionaries);
-    writePersonalPreferences('personalDictionariesInConfig', this.state.validDictionariesListedInConfig);
+    try {
+      writePersonalPreferences('personalDictionaries', this.state.validDictionaries);
+      writePersonalPreferences('appliedDictionariesConfig', this.state.listOfValidDictionariesImportedAndInConfig);
+    }
+    catch (error) {
+      console.log(error);
+      writePersonalPreferences('personalDictionaries', []);
+      writePersonalPreferences('appliedDictionariesConfig', []);
+    }
 
-    let namesOfValidImportedDictionaries = this.state.namesOfValidImportedDictionaries;
-    let labelString = namesOfValidImportedDictionaries || 'No files for config';
+    let listOfValidDictionariesImportedAndInConfig = this.state.listOfValidDictionariesImportedAndInConfig;
+    let labelString = listOfValidDictionariesImportedAndInConfig || 'No files for config';
     GoogleAnalytics.event({
       category: 'Apply dictionary changes',
       action: 'Click apply button',

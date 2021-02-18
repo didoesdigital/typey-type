@@ -2514,6 +2514,7 @@ function createAGlobalLookupDictionary(validDictionariesListedInConfig, validDic
   let combinedLookupDictionary = combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictAndMisstrokes);
   // let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary); // has a bug; instead of sorted entire dict, we sort per entry used within chooseOutlineForPhrase function
   let sortedAndCombinedLookupDictionary = combinedLookupDictionary;
+  sortedAndCombinedLookupDictionary['configuration'] = listOfValidDictionariesImportedAndInConfig;
 
   return sortedAndCombinedLookupDictionary;
 }

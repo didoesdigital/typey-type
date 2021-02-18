@@ -852,25 +852,40 @@ function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
 //   }
 // }
 
+function loadAppliedDictionariesConfig() {
+  let appliedDictionariesConfig = []; // ["name.json", "name2.json"]
+
+  try {
+    if (window.localStorage) {
+      if (window.localStorage.getItem('appliedDictionariesConfig')) {
+        appliedDictionariesConfig = JSON.parse(window.localStorage.getItem('appliedDictionariesConfig'));
+      }
+      return appliedDictionariesConfig;
+    }
+  }
+  catch(error) {
+    console.log('Unable to read local storage.', error);
+  }
+  return appliedDictionariesConfig;
+}
+
 function loadPersonalDictionaries() {
   let personalDictionaries = []; // [["name", {"OUTLINE": "translation}],[…]]
-  let personalDictionariesInConfig = []; // ["name.json", "name2.json"]
+  let appliedDictionariesConfig = []; // ["name.json", "name2.json"]
 
   try {
     if (window.localStorage) {
       if (window.localStorage.getItem('personalDictionaries')) {
         personalDictionaries = JSON.parse(window.localStorage.getItem('personalDictionaries'));
       }
-      if (window.localStorage.getItem('personalDictionariesInConfig')) {
-        personalDictionariesInConfig = JSON.parse(window.localStorage.getItem('personalDictionariesInConfig'));
-      }
-      return [personalDictionaries, personalDictionariesInConfig];
+      appliedDictionariesConfig = loadAppliedDictionariesConfig();
+      return [personalDictionaries, appliedDictionariesConfig];
     }
   }
   catch(error) {
     console.log('Unable to read local storage.', error);
   }
-  return [personalDictionariesInConfig, personalDictionaries];
+  return [appliedDictionariesConfig, personalDictionaries];
 }
 
 function loadPersonalPreferences() {
@@ -1037,6 +1052,7 @@ export {
   createWordListFromMetWords,
   loadPersonalPreferences,
   loadPersonalDictionaries,
+  loadAppliedDictionariesConfig,
   lookUpDictionaryInIndex,
   matchSplitText,
   mapQWERTYKeysToStenoStroke,
