@@ -369,7 +369,7 @@ class App extends Component {
     else if (withPlover) {
       isGlobalDictionaryUpToDate = false;
     }
-    else if (!withPlover && this.state.globalLookupDictionary && globalLookupDictionaryMatchesConfig) {
+    else if (!withPlover && this.state.globalLookupDictionary && (globalLookupDictionaryMatchesConfig || globalLookupDictionaryMatchesConfigWithPlover)) {
       isGlobalDictionaryUpToDate = true;
     }
     else {
