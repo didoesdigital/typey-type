@@ -345,6 +345,7 @@ class App extends Component {
     });
   }
 
+  // The withPlover flag here is just about whether or not to fetch the Plover dictionary file.
   fetchAndSetupGlobalDict(withPlover) {
     const [personalDictionaries, appliedDictionariesConfig] = loadPersonalDictionaries();
     const namesOfValidImportedDictionaries = personalDictionaries.map(d => d[0]);
@@ -396,6 +397,8 @@ class App extends Component {
         // let t1 = performance.now();
         // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
 
+        // For debugging:
+        // window.lookupDict = sortedAndCombinedLookupDictionary;
         isGlobalDictionaryUpToDate = true;
         this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
         this.setState({ globalLookupDictionaryLoaded: true });
