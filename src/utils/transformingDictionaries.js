@@ -2485,6 +2485,7 @@ function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, va
     let [dictTypeyType, misstrokes] = dictAndMisstrokes;
     if (dictName === "typey-type.json") {
       dictContent = dictTypeyType;
+      // eslint-disable-next-line
       let _;
       [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, {}, new Set());
     }
@@ -2493,7 +2494,7 @@ function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, va
         if (validDictionaries[j][0] === dictName) {
           dictContent = validDictionaries[j][1];
           if (dictName === "plover-main-3-jun-2018.json") {
-            console.log("plover!");
+            // eslint-disable-next-line
             let _;
             [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, new Set());
           }
