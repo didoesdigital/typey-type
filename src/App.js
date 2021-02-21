@@ -2076,6 +2076,8 @@ class App extends Component {
       };
     }
 
+    let stenohintsonthefly = this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly;
+
     let presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
     let app = this;
       return (
@@ -2121,6 +2123,7 @@ class App extends Component {
                           changeWriterInput={this.changeWriterInput.bind(this)}
                           setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          stenoHintsOnTheFly={stenohintsonthefly}
                           globalUserSettings={this.state.globalUserSettings}
                           userSettings={this.state.userSettings}
                           {...props}
@@ -2213,6 +2216,7 @@ class App extends Component {
                         globalUserSettings={this.state.globalUserSettings}
                         lessonpath="flashcards"
                         locationpathname={this.props.location.pathname}
+                        stenoHintsOnTheFly={stenohintsonthefly}
                         updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
                         updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
@@ -2235,6 +2239,7 @@ class App extends Component {
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                           globalUserSettings={this.state.globalUserSettings}
                           lookupTerm={this.state.lookupTerm}
+                          stenoHintsOnTheFly={stenohintsonthefly}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                           userSettings={this.state.userSettings}
                           {...props}
@@ -2257,6 +2262,7 @@ class App extends Component {
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
+                          stenoHintsOnTheFly={stenohintsonthefly}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                           userSettings={this.state.userSettings}
                           dictionaryIndex={this.state.dictionaryIndex}
@@ -2342,6 +2348,7 @@ class App extends Component {
                           setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                           startFromWordOne={this.startFromWordOne.bind(this)}
+                          stenoHintsOnTheFly={stenohintsonthefly}
                           stopLesson={this.stopLesson.bind(this)}
                           startCustomLesson={this.startCustomLesson.bind(this)}
                           setUpProgressRevisionLesson={this.setUpProgressRevisionLesson.bind(this)}

@@ -286,7 +286,7 @@ class Writer extends Component<Props, State> {
                 <span className="visually-hidden">Your written text: </span>{this.state.writtenText}&#8203;
               </p>
               <div className="responsive-writer mt4">
-                <StenoLayoutDiagram id="stenoDiagram" {...mapBriefsFunction(this.state.stenoBrief)} newOnClick={this.addKeyToStenoBrief.bind(this)} brief={this.state.stenoBrief} diagramWidth="440" />
+                <StenoLayoutDiagram stenoHintsOnTheFly={this.props.stenoHintsOnTheFly} id="stenoDiagram" {...mapBriefsFunction(this.state.stenoBrief)} newOnClick={this.addKeyToStenoBrief.bind(this)} brief={this.state.stenoBrief} diagramWidth="440" />
               </div>
               <p className="text-center mr4 mt1">
                 <button onClick={this.sendDiagramStroke.bind(this)} className="button text-center">Send stroke</button>
