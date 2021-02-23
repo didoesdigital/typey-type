@@ -104,7 +104,7 @@ class DictionaryImport extends Component {
                 let length = 50;
                 let invalidStenoOutlineString = parsedDictionaryKeys[i]
                 let trimmedInvalidStenoOutline = invalidStenoOutlineString.length > length ? invalidStenoOutlineString.substring(0, length - 3) + "…" : invalidStenoOutlineString.substring(0, length);
-                throw new Error('This dictionary contains invalid steno outlines, such as: "' + trimmedInvalidStenoOutline + '"');
+                throw new Error(`${dictName} contains invalid steno outlines, such as: ${trimmedInvalidStenoOutline}`);
               }
             }
 
