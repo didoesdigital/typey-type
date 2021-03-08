@@ -2355,6 +2355,9 @@ function replaceSmartTypographyInPresentedMaterial(presentedMaterial, userSettin
       // æ
       replaceSmartTypographyInPhraseAndStroke(presentedMaterial[i], /[æ]/g, 'ae', /^XXX$/, 'A*/*E');
 
+      // Æ
+      replaceSmartTypographyInPhraseAndStroke(presentedMaterial[i], /[Æ]/g, 'Ae', /^XXX$/, 'A*P/*E');
+
       // ë
       replaceSmartTypographyInPhraseAndStroke(presentedMaterial[i], /[ë]/g, 'e', /^XXX$/, '*E');
     }

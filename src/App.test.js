@@ -498,6 +498,7 @@ describe('replaceSmartTypographyInPresentedMaterial with typography', () => {
       {phrase: '‘', stroke: 'TP-P'},
       {phrase: '’', stroke: 'TP-L'},
       {phrase: 'æ', stroke: 'XXX'},
+      {phrase: 'Æ', stroke: 'XXX'},
       {phrase: 'ë', stroke: 'XXX'}
     ];
   });
@@ -522,6 +523,7 @@ describe('replaceSmartTypographyInPresentedMaterial with typography', () => {
           {phrase: '‘', stroke: 'TP-P'},
           {phrase: '’', stroke: 'TP-L'},
           {phrase: 'æ', stroke: 'XXX'},
+          {phrase: 'Æ', stroke: 'XXX'},
           {phrase: 'ë', stroke: 'XXX'}
         ]
       );
@@ -548,6 +550,7 @@ describe('replaceSmartTypographyInPresentedMaterial with typography', () => {
           {phrase: "'", stroke: 'AE'},
           {phrase: "'", stroke: 'AE'},
           {phrase: "ae", stroke: 'A*/*E'},
+          {phrase: "Ae", stroke: 'A*P/*E'},
           {phrase: "e", stroke: '*E'}
         ]
       );
