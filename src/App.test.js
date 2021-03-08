@@ -496,7 +496,8 @@ describe('replaceSmartTypographyInPresentedMaterial with typography', () => {
       {phrase: '“', stroke: 'KW-GS'},
       {phrase: '”', stroke: 'KR-GS'},
       {phrase: '‘', stroke: 'TP-P'},
-      {phrase: '’', stroke: 'TP-L'}
+      {phrase: '’', stroke: 'TP-L'},
+      {phrase: 'æ', stroke: 'XXX'}
     ];
   });
 
@@ -518,7 +519,8 @@ describe('replaceSmartTypographyInPresentedMaterial with typography', () => {
           {phrase: '“', stroke: 'KW-GS'},
           {phrase: '”', stroke: 'KR-GS'},
           {phrase: '‘', stroke: 'TP-P'},
-          {phrase: '’', stroke: 'TP-L'}
+          {phrase: '’', stroke: 'TP-L'},
+          {phrase: 'æ', stroke: 'XXX'}
         ]
       );
     });
@@ -542,7 +544,8 @@ describe('replaceSmartTypographyInPresentedMaterial with typography', () => {
           {phrase: '"', stroke: 'KW-GS'},
           {phrase: '"', stroke: 'KR-GS'},
           {phrase: "'", stroke: 'AE'},
-          {phrase: "'", stroke: 'AE'}
+          {phrase: "'", stroke: 'AE'},
+          {phrase: "ae", stroke: 'A*/*E'}
         ]
       );
     });

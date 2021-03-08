@@ -2351,6 +2351,9 @@ function replaceSmartTypographyInPresentedMaterial(presentedMaterial, userSettin
 
       // curly right double quote
       replaceSmartTypographyInPhraseAndStroke(presentedMaterial[i], /[”]/g, '"', /^KR-GS$/, 'KR-GS');
+
+      // æ
+      replaceSmartTypographyInPhraseAndStroke(presentedMaterial[i], /[æ]/g, 'ae', /^XXX$/, 'A*/*E');
     }
   }
   return presentedMaterial;
