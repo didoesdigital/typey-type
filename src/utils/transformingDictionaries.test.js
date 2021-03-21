@@ -107,7 +107,8 @@ let globalLookupDictionary = new Map([
   ["hit-and-miss", [["H-PLS", "typey-type.json"]]],
   // ["buffet", [["PWUF/ET", "typey-type.json"]]],
   ["wandering", [["WAPBGD", "typey-type.json"],["WAPB/TKER/-G", "typey-type.json"]]], // currently pre-sorted to best stroke first
-  ["lodge", [["HROPBLG", "typey-type.json"]]]
+  ["lodge", [["HROPBLG", "typey-type.json"]]],
+  ["isn't", [["S-PBT", "typey-type.json"]]]
 ]);
 
 describe('add outlines for words to combined lookup dict', () => {
@@ -155,6 +156,11 @@ describe('create stroke hint for phrase', () => {
     it('showing "*EU/TP*P/A*/R*/PH*/*E/R*" for "iFarmer"', () => {
       let wordOrPhraseMaterial = "iFarmer";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("*EU/TP*P/A*/R*/PH*/*E/R*");
+    });
+
+    it('show full word hints for a phrase containing a capitalised word with an apostrophe', () => {
+      let wordOrPhraseMaterial = "Isn't";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/S-PBT");
     });
 
     it('show full word hints for a phrase containing a word with an apostrophe', () => {
