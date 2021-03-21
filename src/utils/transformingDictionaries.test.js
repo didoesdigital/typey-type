@@ -357,6 +357,7 @@ let globalLookupDictionary = new Map([
   ["{^:55}", [["5*BGD", "typey-type.json"], ["5BGD", "typey-type.json"]]],
   ["2009 dollars", [["TWOUPB/9/TKHRAR/-S", "typey-type.json"]]],
   ["2000", [["TWOUPBD", "typey-type.json"], ["TWOUZ", "typey-type.json"]]],
+  ["©", [["KPR-T", "typey-type.json"]]],
 ]);
 
 describe('add outlines for words to combined lookup dict', () => {
@@ -588,8 +589,8 @@ describe('create stroke hint for phrase', () => {
     });
 
     it('other punctuation', () => {
-      let wordOrPhraseMaterial = "* ^ ` | ~ — – -";
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("STA*R KR-RT KH-FG PAO*EUP T*LD EPL/TKA*RB EPB/TKA*RB H-PB");
+      let wordOrPhraseMaterial = "* ^ ` | ~ — – - ©";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("STA*R KR-RT KH-FG PAO*EUP T*LD EPL/TKA*RB EPB/TKA*RB H-PB KPR-T");
     });
 
     it('brackets', () => {
