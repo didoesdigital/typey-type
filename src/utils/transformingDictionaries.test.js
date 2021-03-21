@@ -109,7 +109,254 @@ let globalLookupDictionary = new Map([
   ["wandering", [["WAPBGD", "typey-type.json"],["WAPB/TKER/-G", "typey-type.json"]]], // currently pre-sorted to best stroke first
   ["lodge", [["HROPBLG", "typey-type.json"]]],
   ["isn't", [["S-PBT", "typey-type.json"]]],
-  ["maiden", [["PHAEUD/*EPB", "typey-type.json"], ["PHAEUD/EPB", "typey-type.json"]]]
+  ["maiden", [["PHAEUD/*EPB", "typey-type.json"], ["PHAEUD/EPB", "typey-type.json"]]],
+
+  ["$100", [["1-9DZ", "typey-type.json"], ["1-DZ", "typey-type.json"]]],
+  ["$200", [["2-DZ", "typey-type.json"]]],
+  ["$300", [["3-DZ", "typey-type.json"]]],
+  ["$400", [["4-DZ", "typey-type.json"]]],
+  ["$45", [["#45/TK-PL", "typey-type.json"], ["45/TK-PL", "typey-type.json"]]],
+  ["$500", [["5DZ", "typey-type.json"]]],
+  ["$600", [["-6DZ", "typey-type.json"]]],
+  ["$700", [["-7DZ", "typey-type.json"]]],
+  ["0", [["0EU", "typey-type.json"]]],
+  ["00", [["#-Z", "typey-type.json"]]],
+  ["01", [["10*EU", "typey-type.json"], ["10EU", "typey-type.json"]]],
+  ["02", [["20EU", "typey-type.json"]]],
+  ["03", [["30EU", "typey-type.json"]]],
+  ["04", [["40EU", "typey-type.json"]]],
+  ["05", [["50EU", "typey-type.json"]]],
+  ["1 tablespoon", [["1/TPW-S", "typey-type.json"]]],
+  ["1,000", [["#S/W-B/THUZ", "typey-type.json"], ["1/THO*EUPB", "typey-type.json"], ["1/THOEUB", "typey-type.json"], ["TPHOUZ", "typey-type.json"]]],
+  ["1/2", [["HA*F", "typey-type.json"], ["TPHA*F", "typey-type.json"]]],
+  ["1/3", [["130EU", "typey-type.json"], ["TH*EURD", "typey-type.json"]]],
+  ["1/4", [["140EU", "typey-type.json"], ["KWA*RT", "typey-type.json"]]],
+  ["1/8", [["10EU8", "typey-type.json"]]],
+  ["10 percentage", [["10/PERS/APBLG", "typey-type.json"]]],
+  ["10", [["1/0", "typey-type.json"]]],
+  ["10%", [["10/P*ERS", "typey-type.json"]]],
+  ["10,000", [["#SO/W-B/THUZ", "typey-type.json"]]],
+  ["100", [["1-Z", "typey-type.json"], ["TPHUPBZ", "typey-type.json"]]],
+  ["1000", [["1/THOUZ", "typey-type.json"]]],
+  ["1001", [["1-DZ/1", "typey-type.json"]]],
+  ["101", [["10/1", "typey-type.json"]]],
+  ["10th", [["10/*PBT", "typey-type.json"], ["10/*T", "typey-type.json"]]],
+  ["11", [["1-D", "typey-type.json"]]],
+  ["11:00", [["1BGD", "typey-type.json"]]],
+  ["11th", [["1-D/*T", "typey-type.json"]]],
+  ["12", [["1/2", "typey-type.json"]]],
+  ["12-in-1", [["12/TPH/1", "typey-type.json"]]],
+  ["121", [["12/1", "typey-type.json"]]],
+  ["125", [["12R5", "typey-type.json"]]],
+  ["12:00", [["12-BG", "typey-type.json"]]],
+  ["12th", [["12/*T", "typey-type.json"]]],
+  ["13", [["1/3", "typey-type.json"]]],
+  ["14", [["14", "typey-type.json"], ["14*", "typey-type.json"]]],
+  ["15", [["1/5", "typey-type.json"]]],
+  ["16", [["1/6", "typey-type.json"]]],
+  ["17", [["1/7", "typey-type.json"]]],
+  ["18", [["1/8", "typey-type.json"]]],
+  ["1850s", [["18/50/-S", "typey-type.json"]]],
+  ["19", [["1-9", "typey-type.json"], ["1-9D", "typey-type.json"]]],
+  ["1930s", [["19/30/-S", "typey-type.json"]]],
+  ["1950", [["1-9/50", "typey-type.json"], ["1-9D/50", "typey-type.json"]]],
+  ["197", [["TPHEFPBT", "typey-type.json"]]],
+  ["1970", [["19/OEUP", "typey-type.json"], ["TPHEFPBD", "typey-type.json"]]],
+  ["198", [["TPHAEUPBT", "typey-type.json"]]],
+  ["1980", [["TPHAEUPBD", "typey-type.json"]]],
+  ["1986", [["19/8/6", "typey-type.json"]]],
+  ["1990", [["TPHEUPBD", "typey-type.json"]]],
+  ["1:00", [["1-BG", "typey-type.json"]]],
+  ["1b", [["1/PW*", "typey-type.json"]]],
+  ["1st", [["1/S*/T*", "typey-type.json"]]],
+  ["2 x 4", [["2/KP*/4", "typey-type.json"]]],
+  ["2,000", [["#T-/W-B/THUZ", "typey-type.json"]]],
+  ["2/3", [["230EU", "typey-type.json"]]],
+  ["20", [["2/0", "typey-type.json"]]],
+  ["200", [["2-Z", "typey-type.json"]]],
+  ["2001", [["KWRAOUPB/1", "typey-type.json"], ["STWOUPB/1", "typey-type.json"]]],
+  ["2007", [["TWOUPB/-P", "typey-type.json"],["TWOUPB/7", "typey-type.json"]]],
+  ["2010", [["TWOUPB/10", "typey-type.json"]]],
+  ["20s", [["20/-S", "typey-type.json"]]],
+  ["21", [["12EU", "typey-type.json"]]],
+  ["22", [["2-D", "typey-type.json"]]],
+  ["23", [["2/3", "typey-type.json"]]],
+  ["24", [["2/4", "typey-type.json"]]],
+  ["240", [["#240", "typey-type.json"]]],
+  ["25", [["2/5", "typey-type.json"]]],
+  ["26", [["2/6", "typey-type.json"]]],
+  ["260", [["2/6/0", "typey-type.json"]]],
+  ["27", [["2/7", "typey-type.json"]]],
+  ["28", [["2/8", "typey-type.json"]]],
+  ["29", [["2/9", "typey-type.json"]]],
+  ["2:00", [["2-BG", "typey-type.json"]]],
+  ["2d", [["2/TK*", "typey-type.json"]]],
+  ["2nd", [["2/*PBD", "typey-type.json"]]],
+  ["2s", [["2-S", "typey-type.json"]]],
+  ["3 tablespoon", [["3/T-BS", "typey-type.json"]]],
+  ["3 tablespoons", [["3/T-BS/-S", "typey-type.json"]]],
+  ["3 x 6", [["3/KP*/6", "typey-type.json"]]],
+  ["3,000", [["#P-/W-B/THUZ", "typey-type.json"]]],
+  ["3/4", [["340EU", "typey-type.json"]]],
+  ["3/8", [["30EU8", "typey-type.json"]]],
+  ["30", [["3/0", "typey-type.json"]]],
+  ["300", [["3-Z", "typey-type.json"]]],
+  ["30s", [["30*S", "typey-type.json"], ["30/-S", "typey-type.json"]]],
+  ["31", [["13EU", "typey-type.json"]]],
+  ["32", [["23EU", "typey-type.json"]]],
+  ["33", [["3-D", "typey-type.json"]]],
+  ["34", [["3/4", "typey-type.json"]]],
+  ["35", [["3/5", "typey-type.json"]]],
+  ["350 degree", [["PAO/TKEG", "typey-type.json"]]],
+  ["36", [["3/6", "typey-type.json"]]],
+  ["360 degrees", [["36/0/TKEG/-S", "typey-type.json"]]],
+  ["37", [["3/7", "typey-type.json"]]],
+  ["38", [["3/8", "typey-type.json"]]],
+  ["39", [["3/9", "typey-type.json"]]],
+  ["3:00", [["3-BG", "typey-type.json"]]],
+  ["3D", [["30*EUD", "typey-type.json"]]],
+  ["3rd", [["3/R*D", "typey-type.json"]]],
+  ["4 tablespoons", [["4/T-BS/-S", "typey-type.json"]]],
+  ["4,000", [["#H/W-B/THUZ", "typey-type.json"]]],
+  ["40", [["40", "typey-type.json"], ["40*", "typey-type.json"]]],
+  ["400", [["4-Z", "typey-type.json"]]],
+  ["40s", [["40ES", "typey-type.json"], ["40S", "typey-type.json"]]],
+  ["40{,}", [["40RBGS", "typey-type.json"]]],
+  ["41", [["14EU", "typey-type.json"]]],
+  ["42", [["24EU", "typey-type.json"]]],
+  ["43", [["34EU", "typey-type.json"]]],
+  ["44", [["4-D", "typey-type.json"]]],
+  ["45", [["4/5", "typey-type.json"]]],
+  ["46", [["4/6", "typey-type.json"]]],
+  ["47", [["4/7", "typey-type.json"]]],
+  ["48", [["4/8", "typey-type.json"]]],
+  ["49", [["4/9", "typey-type.json"]]],
+  ["4:00", [["4-BG", "typey-type.json"]]],
+  ["4s", [["4-S", "typey-type.json"]]],
+  ["4th", [["4/*T", "typey-type.json"]]],
+  ["5", [["R5", "typey-type.json"]]],
+  ["5%", [["TPEUF/P*ERS", "typey-type.json"]]],
+  ["5,000", [["#A/W-B/THUZ", "typey-type.json"]]],
+  ["5.4", [["5/-P/4", "typey-type.json"]]],
+  ["5/8", [["50EU8", "typey-type.json"]]],
+  ["50 cents", [["50/KREPBT/-S", "typey-type.json"]]],
+  ["50", [["5/0", "typey-type.json"]]],
+  ["500", [["5Z", "typey-type.json"]]],
+  ["50s", [["50S", "typey-type.json"]]],
+  ["51", [["15EU", "typey-type.json"]]],
+  ["52", [["25*EU", "typey-type.json"], ["25EU", "typey-type.json"]]],
+  ["53", [["35EU", "typey-type.json"]]],
+  ["54", [["45EU", "typey-type.json"]]],
+  ["55", [["5D", "typey-type.json"]]],
+  ["56", [["56", "typey-type.json"]]],
+  ["57", [["57", "typey-type.json"]]],
+  ["58", [["58", "typey-type.json"]]],
+  ["59", [["59", "typey-type.json"]]],
+  ["5:00", [["5BG", "typey-type.json"]]],
+  ["5th", [["5/*T", "typey-type.json"]]],
+  ["6,000", [["#F/W-B/THUZ", "typey-type.json"]]],
+  ["60", [["0EU6", "typey-type.json"]]],
+  ["600", [["-6Z", "typey-type.json"]]],
+  ["61", [["1EU6", "typey-type.json"]]],
+  ["62", [["2EU6", "typey-type.json"]]],
+  ["63", [["3EU6", "typey-type.json"]]],
+  ["64", [["4EU6", "typey-type.json"]]],
+  ["65", [["5EU6", "typey-type.json"]]],
+  ["66", [["-6D", "typey-type.json"]]],
+  ["67", [["67", "typey-type.json"]]],
+  ["68", [["68", "typey-type.json"]]],
+  ["69", [["69", "typey-type.json"]]],
+  ["6:00", [["K-6", "typey-type.json"]]],
+  ["6th", [["6/*T", "typey-type.json"]]],
+  ["7,000", [["#-P/W-B/THUZ", "typey-type.json"]]],
+  ["70", [["0EU7", "typey-type.json"]]],
+  ["700", [["-7Z", "typey-type.json"]]],
+  ["70s", [["0EU7S", "typey-type.json"]]],
+  ["71", [["1EU7", "typey-type.json"]]],
+  ["72", [["2EU7", "typey-type.json"]]],
+  ["73", [["3EU7", "typey-type.json"]]],
+  ["74", [["4EU7", "typey-type.json"]]],
+  ["75", [["5EU7", "typey-type.json"]]],
+  ["76", [["EU67", "typey-type.json"]]],
+  ["77", [["-7D", "typey-type.json"]]],
+  ["78", [["78", "typey-type.json"]]],
+  ["79", [["79", "typey-type.json"]]],
+  ["7:00", [["K-7", "typey-type.json"]]],
+  ["7th", [["7/*T", "typey-type.json"]]],
+  ["8,000", [["#L/W-B/THUZ", "typey-type.json"]]],
+  ["80 cents and", [["0EU8/KREPBT/SKP-S", "typey-type.json"]]],
+  ["80", [["0EU8", "typey-type.json"]]],
+  ["800", [["-8Z", "typey-type.json"]]],
+  ["80s", [["0EU8S", "typey-type.json"]]],
+  ["81", [["1EU8", "typey-type.json"]]],
+  ["82", [["2EU8", "typey-type.json"]]],
+  ["83", [["3EU8", "typey-type.json"]]],
+  ["84", [["4EU8", "typey-type.json"]]],
+  ["85 cents", [["8/5/KREPBT/-S", "typey-type.json"]]],
+  ["85", [["5EU8", "typey-type.json"]]],
+  ["86", [["EU68", "typey-type.json"]]],
+  ["87", [["EU78", "typey-type.json"]]],
+  ["88", [["-8D", "typey-type.json"]]],
+  ["89", [["89", "typey-type.json"]]],
+  ["8:00", [["K-8", "typey-type.json"]]],
+  ["8th", [["8/*T", "typey-type.json"]]],
+  ["8vo", [["8/SR*/O*", "typey-type.json"]]],
+  ["9,000", [["#-T/W-B/THUZ", "typey-type.json"]]],
+  ["90", [["0EU9", "typey-type.json"]]],
+  ["90%", [["0EU9/PERS", "typey-type.json"]]],
+  ["900", [["-9Z", "typey-type.json"], ["EU9", "typey-type.json"]]],
+  ["91", [["1EU9", "typey-type.json"]]],
+  ["92", [["2EU9", "typey-type.json"]]],
+  ["93", [["3EU9", "typey-type.json"]]],
+  ["94", [["4EU9", "typey-type.json"]]],
+  ["95", [["5EU9", "typey-type.json"]]],
+  ["96", [["EU69", "typey-type.json"]]],
+  ["97", [["EU79", "typey-type.json"]]],
+  ["98", [["EU89", "typey-type.json"]]],
+  ["99", [["-9D", "typey-type.json"]]],
+  ["9:00", [["K-9", "typey-type.json"]]],
+  ["9th", [["9/*T", "typey-type.json"]]],
+  ["I", [["1-R", "typey-type.json"]]],
+  ["II", [["2-R", "typey-type.json"]]],
+  ["III", [["3-R", "typey-type.json"]]],
+  ["IV", [["4-R", "typey-type.json"]]],
+  ["IX", [["R-9", "typey-type.json"]]],
+  ["VI", [["R-6", "typey-type.json"]]],
+  ["VII", [["R-7", "typey-type.json"]]],
+  ["VIII", [["R-8", "typey-type.json"]]],
+  ["X", [["10R", "typey-type.json"]]],
+  ["XI", [["1-RD", "typey-type.json"]]],
+  ["XII", [["12-R", "typey-type.json"]]],
+  ["{&00}", [["0Z", "typey-type.json"]]],
+  ["{&0}", [["#O", "typey-type.json"], ["0RBGS", "typey-type.json"]]],
+  ["{&1}", [["#S", "typey-type.json"], ["1-RBGS", "typey-type.json"]]],
+  ["{&2}", [["#T-", "typey-type.json"], ["2-RBGS", "typey-type.json"]]],
+  ["{&3}", [["#P-", "typey-type.json"], ["3-RBGS", "typey-type.json"]]],
+  ["{&4}", [["#H", "typey-type.json"], ["4-RBGS", "typey-type.json"]]],
+  ["{&5}", [["#A", "typey-type.json"], ["5RBGS", "typey-type.json"]]],
+  ["{&6}", [["#F", "typey-type.json"], ["1KWR-6", "typey-type.json"]]],
+  ["{&7}", [["#-P", "typey-type.json"], ["1KWR-7", "typey-type.json"]]],
+  ["{&8}", [["#L", "typey-type.json"], ["1KWR-8", "typey-type.json"]]],
+  ["{&9}", [["#-T", "typey-type.json"], ["1KWR-9", "typey-type.json"]]],
+  ["{200^}", [["TWOUPB", "typey-type.json"]]],
+  ["{:}30", [["30*U", "typey-type.json"]]],
+  ["{:}40", [["40U", "typey-type.json"]]],
+  ["{:}45", [["45*U", "typey-type.json"]]],
+  ["{>}{&t}", [["2*", "typey-type.json"]]],
+  ["{^0rz}", [["0RZ", "typey-type.json"]]],
+  ["{^:05}", [["50*EUBG", "typey-type.json"], ["50EUBG", "typey-type.json"]]],
+  ["{^:10}", [["10*BG", "typey-type.json"], ["10BG", "typey-type.json"]]],
+  ["{^:15}", [["15*BG", "typey-type.json"], ["15BG", "typey-type.json"]]],
+  ["{^:20}", [["20*BG", "typey-type.json"], ["20BG", "typey-type.json"]]],
+  ["{^:25}", [["25*BG", "typey-type.json"], ["25BG", "typey-type.json"]]],
+  ["{^:30}", [["30*BG", "typey-type.json"], ["30BG", "typey-type.json"]]],
+  ["{^:35}", [["35*BG", "typey-type.json"], ["35BG", "typey-type.json"]]],
+  ["{^:40}", [["40*BG", "typey-type.json"], ["40BG", "typey-type.json"]]],
+  ["{^:45}", [["45*BG", "typey-type.json"], ["45BG", "typey-type.json"]]],
+  ["{^:50}", [["50*BG", "typey-type.json"], ["50BG", "typey-type.json"]]],
+  ["{^:55}", [["5*BGD", "typey-type.json"], ["5BGD", "typey-type.json"]]],
+  ["2009 dollars", [["TWOUPB/9/TKHRAR/-S", "typey-type.json"]]],
+  ["2000", [["TWOUPBD", "typey-type.json"], ["TWOUZ", "typey-type.json"]]],
 ]);
 
 describe('add outlines for words to combined lookup dict', () => {
@@ -348,6 +595,40 @@ describe('create stroke hint for phrase', () => {
     it('brackets', () => {
       let wordOrPhraseMaterial = "( ) [ ] { }";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PREPB PR*EPB PWR-BGT PWR*BGT TPR-BGT TPR*BGT");
+    });
+  });
+
+  describe('returns string showing text with numbers', () => {
+    it('zero to ten', () => {
+      let wordOrPhraseMaterial = "0 1 2 3 4 5 6 7 8 9 10";
+      // FIXME: should probably show #O #S #T … #S/#O etc.
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("0 1 2 3 4 5 6 7 8 9 1/0");
+    });
+
+    it('returns strings with numbers containing zeroes and commas', () => {
+      let wordOrPhraseMaterial = "100 900 1000 1,000 10000 10,000";
+      // FIXME: should probably show #SZ #TZ #TPHOUZ #SO/W-B/THUZ 10/THUZ #SO/W-B/THUZ
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1/0/0 9/0/0 1/0/0/0 1 KW-BG 0/0/0 1/0/0/0/0 1/0 KW-BG 0/0/0");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-Z -9Z 1/THOUZ TPHOUZ 1-Z/HUPB/HUPB #SO/W-B/THUZ");
+    });
+
+    it('returns string with double numbers', () => {
+      let wordOrPhraseMaterial = "22 33";
+      // FIXME: should probably show #T-D or 2-D and #P-D
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("2-D 3-D");
+    });
+
+    it('returns string with currency', () => {
+      let wordOrPhraseMaterial = "$100 $900";
+      // FIXME: should probably show #SDZ #-TDZ
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-DZ TK-PL -9Z");
+    });
+
+    it('returns string with clock time', () => {
+      let wordOrPhraseMaterial = "1:00 9:00 10:00 19:00 20:00";
+      // FIXME: should probably show #SK or #SBG, #KT or #BGT, #SKO or #SOBG, #SKT or #SBGT, and #TKO or #TOBG
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1 KHR-PB 0/0 9 KHR-PB 0/0 1/0 KHR-PB 0/0 1/9 KHR-PB 0/0 2/0 KHR-PB 0/0");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-BG K-9 1/0 KHR-PB #-Z 1-9 KHR-PB #-Z 2/0 KHR-PB #-Z");
     });
   });
 });
@@ -590,6 +871,15 @@ describe('choose outline for phrase', () => {
       let strokeLookupAttempts = 0;
 
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PHAEUD/*EPB", 1 ]);
+    });
+
+    // TODO: decide on showing numbers or letters with #
+    xit('returns number strokes', () => {
+      let wordOrPhrase = "0";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "#O", 1 ]);
     });
   });
 });
