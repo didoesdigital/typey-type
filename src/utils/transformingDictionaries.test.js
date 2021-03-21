@@ -240,12 +240,6 @@ describe('create stroke hint for phrase', () => {
 
     // TODO
     xit('with prefix that is also a word that has trailing hyphen and a fake word', () => {
-      let wordOrPhraseMaterial = 'and said: "You';
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKP SAEUD STPH-FPLT KW-GS KPA*/U");
-    });
-
-    // TODO
-    xit('with prefix that is also a word that has trailing hyphen and a fake word', () => {
       let wordOrPhraseMaterial = "quasi-confuzzled";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KWAS/KWREU KR*/O*/TPH*/TP*/*U/STKPW*/STKPW*/HR*/*E/TK*");
     });
@@ -299,6 +293,12 @@ describe('create stroke hint for phrase', () => {
     it('with hyphenated letters without fingerspelling strokes', () => {
       let wordOrPhraseMaterial = 'ç-ç';
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("xxx H-PB xxx");
+    });
+
+    // TODO
+    xit('with a colon, space, opening quote, and capitalised word', () => {
+      let wordOrPhraseMaterial = 'and said: "You';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKP SAEUD STPH-FPLT KW-GS KPA*/U");
     });
 
     it('with full stop, closing double quote, and capitalised word', () => {
