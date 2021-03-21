@@ -23,7 +23,7 @@
     "react-modal": "^3.11.1",
     "react-numeric-input": "^2.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "3.4.1",
+    "react-scripts": "3.4.4",
     "react-tippy": "git://github.com/tvkhoa/react-tippy.git",
     "react-transition-group": "^2.4.0"
   },
