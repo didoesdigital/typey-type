@@ -882,6 +882,31 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "#O", 1 ]);
     });
   });
+
+  // FIXME: these probably shouldn't be so unstable
+  describe('dictionaries in different orders', () => {
+    it('returns outline for lovers, preferring O', () => {
+      let wordOrPhrase = "lovers";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+      let globalLookupDictionaryWithHROFRSfirst = new Map([
+        ["lovers", [["HROFRS", "typey-type.json"], ["HRUFRS", "typey-type.json"]]],
+      ]);
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryWithHROFRSfirst, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROFRS", 1 ]);
+    });
+
+    it('returns outline for lovers, preferring U', () => {
+      let wordOrPhrase = "lovers";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+      let globalLookupDictionaryWithHRUFRSfirst = new Map([
+        ["lovers", [["HRUFRS", "typey-type.json"], ["HROFRS", "typey-type.json"]]],
+      ]);
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryWithHRUFRSfirst, chosenStroke, strokeLookupAttempts)).toEqual( [ "HRUFRS", 1 ]);
+    });
+  });
 });
 
 describe('generate dictionary entries', () => {
