@@ -64,7 +64,7 @@ const drillParams = createParamString(drill);
 const reviseParams = createParamString(revise);
 const discoverParams = createParamString(discover);
 
-export default {
+const PARAMS = {
   practice: practice,
   practiceParams: practiceParams,
   drill: drill,
@@ -74,6 +74,8 @@ export default {
   discover: discover,
   discoverParams: discoverParams
 }
+
+export default PARAMS;
 
 // // Use in relevant file like this:
 // let example = PARAMS.practice.limitNumberOfWords;
