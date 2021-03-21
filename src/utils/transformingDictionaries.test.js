@@ -333,6 +333,23 @@ describe('create stroke hint for phrase', () => {
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HER TP-PL");
     });
   });
+
+  describe('returns string showing text with punctuation', () => {
+    it('common punctuation', () => {
+      let wordOrPhraseMaterial = "! # $ % & , . : ; = ? @";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKHRAPL HAERB TK-PL P*ERS SKP* KW-BG P-P KHR-PB SKHR-PB KW-L H-F SKWRAT");
+    });
+
+    it('other punctuation', () => {
+      let wordOrPhraseMaterial = "* ^ ` | ~ — – -";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("STA*R KR-RT KH-FG PAO*EUP T*LD EPL/TKA*RB EPB/TKA*RB H-PB");
+    });
+
+    it('brackets', () => {
+      let wordOrPhraseMaterial = "( ) [ ] { }";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PREPB PR*EPB PWR-BGT PWR*BGT TPR-BGT TPR*BGT");
+    });
+  });
 });
 
 describe('choose outline for phrase', () => {
