@@ -108,7 +108,8 @@ let globalLookupDictionary = new Map([
   // ["buffet", [["PWUF/ET", "typey-type.json"]]],
   ["wandering", [["WAPBGD", "typey-type.json"],["WAPB/TKER/-G", "typey-type.json"]]], // currently pre-sorted to best stroke first
   ["lodge", [["HROPBLG", "typey-type.json"]]],
-  ["isn't", [["S-PBT", "typey-type.json"]]]
+  ["isn't", [["S-PBT", "typey-type.json"]]],
+  ["maiden", [["PHAEUD/*EPB", "typey-type.json"], ["PHAEUD/EPB", "typey-type.json"]]]
 ]);
 
 describe('add outlines for words to combined lookup dict', () => {
@@ -330,6 +331,15 @@ describe('create stroke hint for phrase', () => {
     it('with trailing full stop', () => {
       let wordOrPhraseMaterial = 'her.';
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HER TP-PL");
+    });
+
+    // TODO:
+    // This one currently shows "PHAEUD/EPB" instead of "PHAEUD/*EPB" because "PHAEUD/*EPB" is
+    // penalised 3 times: once for being "longer", once for having a star, once for having a slash,
+    // while "PHAEUD/EPB" is penalised only for having a slash without being a suffix.
+    xit('shows actual suffix stroke for maiden', () => {
+      let wordOrPhraseMaterial = 'maiden';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PHAEUD/*EPB");
     });
   });
 });
