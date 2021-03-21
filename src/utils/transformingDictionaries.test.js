@@ -332,15 +332,6 @@ describe('create stroke hint for phrase', () => {
       let wordOrPhraseMaterial = 'her.';
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HER TP-PL");
     });
-
-    // TODO:
-    // This one currently shows "PHAEUD/EPB" instead of "PHAEUD/*EPB" because "PHAEUD/*EPB" is
-    // penalised 3 times: once for being "longer", once for having a star, once for having a slash,
-    // while "PHAEUD/EPB" is penalised only for having a slash without being a suffix.
-    xit('shows actual suffix stroke for maiden', () => {
-      let wordOrPhraseMaterial = 'maiden';
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PHAEUD/*EPB");
-    });
   });
 });
 
@@ -571,6 +562,18 @@ describe('choose outline for phrase', () => {
 
     //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBLG/-G/-S", 1 ]);
     // });
+
+    // TODO:
+    // This one currently shows "PHAEUD/EPB" instead of "PHAEUD/*EPB" because "PHAEUD/*EPB" is
+    // penalised 3 times: once for being "longer", once for having a star, once for having a slash,
+    // while "PHAEUD/EPB" is penalised only for having a slash without being a suffix.
+    xit('shows actual suffix stroke for maiden', () => {
+      let wordOrPhrase = "maiden";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PHAEUD/*EPB", 1 ]);
+    });
   });
 });
 
