@@ -33,6 +33,7 @@
     "dot-prop": "^5.1.1",
     "elliptic": "^6.5.4",
     "immer": "^8.0.1",
+    "is-svg": "^4.2.2",
     "kind-of": "^6.0.3",
     "minimist": "^1.2.2",
     "node-fetch": "^2.6.1",
