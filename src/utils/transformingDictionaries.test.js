@@ -903,6 +903,23 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForRest, chosenStroke, strokeLookupAttempts)).toEqual( [ "REFT", 1 ]);
     });
 
+    it('shows the outline for the word "into"', () => {
+      let wordOrPhrase = "into";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+      let globalLookupDictionaryForInto = new Map([
+        ["into", [
+          ["TPHAO", "typey-type.json"],
+          ["SPWAO", "typey-type.json"],
+          ["EUPB/TO", "typey-type.json"]
+          ["TPHAO*", "typey-type.json"],
+          ["TPHRAO", "typey-type.json"],
+        ]],
+      ]);
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForInto, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHAO", 1 ]);
+    });
+
     xit('shows actual suffix stroke for maiden', () => {
       let wordOrPhrase = "maiden";
       let chosenStroke = "";
