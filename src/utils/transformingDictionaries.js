@@ -2052,6 +2052,20 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
   }
 
+  // xxx => xxx {-|}
+  if (!chosenStroke) {
+    let modifiedWordOrPhrase = wordOrPhrase + " {-|}";
+    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+  }
+
+  // xxx => xxx{-|}
+  if (!chosenStroke) {
+    let modifiedWordOrPhrase = wordOrPhrase + "{-|}";
+    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+  }
+
   // xxx => {^xxx^}
   if (!chosenStroke) {
     let modifiedWordOrPhrase = "{^" + wordOrPhrase + "^}";
