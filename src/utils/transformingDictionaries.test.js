@@ -362,6 +362,11 @@ let globalLookupDictionary = new Map([
   ["your", [["KWROUR", "typey-type.json"]]],
   ["cross-petition", [["KR-PGS", "typey-type.json"], ["KR-PGS", "plover.json"]]],
   ["{^.com}", [["KROPL", "typey-type.json"]]],
+  ["Dr.", [["TKR-FPLT", "typey-type.json"]]],
+  ["Dr.{-|}", [["TKR*FPLT", "plover.json"]]],
+  ["Mx.{-|}", [["PH-BGS", "plover.json"]]],
+  ["chant", [["KHAPBT", "plover.json"]]],
+  ["Eldridge", [["EL/TKREUPBLG", "plover.json"]]],
 ]);
 
 describe('add outlines for words to combined lookup dict', () => {
@@ -656,6 +661,29 @@ describe('create stroke hint for phrase', () => {
     xit('shows outline for "didoesdigital.com"', () => {
       let wordOrPhraseMaterial = "didoesdigital.com";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TK*/*EU/TK*/O*/*E/S*/TK*/*EU/TKPW*/*EU/T*/A*/HR* KROPL");
+    });
+  });
+
+  describe('returns outline for string containing formal titles', () => {
+    it('shows outline for "Dr."', () => {
+      let wordOrPhraseMaterial = "Dr.";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TKR-FPLT");
+    });
+
+    it('shows outline for "Dr. Chant"', () => {
+      let wordOrPhraseMaterial = "Dr. Chant";
+      // Note: It would be amazing if it didn't choose KPA/ here but that seems really hard
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TKR-FPLT KPA/KHAPBT");
+    });
+
+    it('shows outline for "Mx."', () => {
+      let wordOrPhraseMaterial = "Mx.";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PH-BGS");
+    });
+
+    it('shows outline for "Mx. Eldridge"', () => {
+      let wordOrPhraseMaterial = "Mx. Eldridge";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PH-BGS EL/TKREUPBLG");
     });
   });
 
