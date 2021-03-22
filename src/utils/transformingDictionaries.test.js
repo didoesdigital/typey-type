@@ -365,6 +365,7 @@ let globalLookupDictionary = new Map([
   ["Dr.", [["TKR-FPLT", "typey-type.json"]]],
   ["Dr.{-|}", [["TKR*FPLT", "plover.json"]]],
   ["Mx.{-|}", [["PH-BGS", "plover.json"]]],
+  ["Mr. and Mrs.", [["PHRARPLS", "plover.json"]]],
   ["chant", [["KHAPBT", "plover.json"]]],
   ["Eldridge", [["EL/TKREUPBLG", "plover.json"]]],
 ]);
@@ -684,6 +685,16 @@ describe('create stroke hint for phrase', () => {
     it('shows outline for "Mx. Eldridge"', () => {
       let wordOrPhraseMaterial = "Mx. Eldridge";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PH-BGS EL/TKREUPBLG");
+    });
+
+    it('shows outline for "Mr. and Mrs."', () => {
+      let wordOrPhraseMaterial = "Mr. and Mrs.";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PHRARPLS");
+    });
+
+    xit('shows outline for "Mr. and Mrs. Long"', () => {
+      let wordOrPhraseMaterial = "Mr. and Mrs. Long";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PHRARPLS KPA/HROPBG");
     });
   });
 
