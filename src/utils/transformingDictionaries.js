@@ -2154,6 +2154,19 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     }
   }
 
+  // Orthography rules
+  if (!chosenStroke) {
+    // xxxing -> xxxe => xxx/-G
+    // ±'e': 'narrate' + 'ing' = 'narrating'
+    if (wordOrPhrase.endsWith("ing")) {
+      const ingSuffixEntry = SUFFIXES.find(suffixEntry => suffixEntry[1] === "ing");
+      const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : 'xxx';
+      let modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "e");
+      let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+      if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + ingSuffixOutlineWithSlash; }
+    }
+  }
+
   if (!chosenStroke) {
     chosenStroke = "xxx";
   }
