@@ -1223,6 +1223,7 @@ describe('rank outlines', () => {
       ]);
     });
 
+    // Note: this test will fail with node v10
     it('returns sorted list of outlines for "exercises", prioritising S endings over Z, not in order, with more than 10 elements', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
         ["KPER/SAOEUZ/-Z", "plover.json"],
