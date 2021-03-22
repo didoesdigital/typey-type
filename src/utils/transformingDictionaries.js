@@ -2123,6 +2123,20 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   }
 
 
+  const suppressSpaceStrokeWithSlash = "/TK-LS";
+
+  // Orthography rules
+  if (!chosenStroke) {
+    // bingeing <- binge -> /TK-LS/-G
+    if (wordOrPhrase.endsWith("eing")) {
+      const ingSuffixEntry = SUFFIXES.find(suffixEntry => suffixEntry[1] === "ing");
+      const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : 'xxx';
+      let modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "");
+      let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+      if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + suppressSpaceStrokeWithSlash + ingSuffixOutlineWithSlash; }
+    }
+  }
+
   if (!chosenStroke) {
     // rexxx => RE/xxx
     let prefixTranslation = '';
@@ -2140,6 +2154,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     }
 
     // xxxing => xxx/-G
+    // binging <- bing -> /-G
     let suffixTranslation = '';
     let j = 0;
     while (j < SUFFIXES_LENGTH && !chosenStroke) {
@@ -2156,9 +2171,9 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
 
   // Orthography rules
   if (!chosenStroke) {
-    // xxxing -> xxxe => xxx/-G
-    // ±'e': 'narrate' + 'ing' = 'narrating'
-    if (wordOrPhrase.endsWith("ing")) {
+    // seething <- seethe -> /-G
+    const ingRegex = new RegExp(".+[bcdfghjklmnpqrstuvwxz]ing$");
+    if (ingRegex.test(wordOrPhrase)) {
       const ingSuffixEntry = SUFFIXES.find(suffixEntry => suffixEntry[1] === "ing");
       const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : 'xxx';
       let modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "e");
