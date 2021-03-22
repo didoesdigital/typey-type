@@ -920,6 +920,20 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForInto, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHAO", 1 ]);
     });
 
+    xit('shows the outline for the word "get"', () => {
+      let wordOrPhrase = "get";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+      let globalLookupDictionaryForGet = new Map([
+        ["get", [
+          ["TKPW-T", "typey-type.json"],
+          ["TKPWET", "typey-type.json"],
+        ]],
+      ]);
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForGet, chosenStroke, strokeLookupAttempts)).toEqual( [ "TKPWET", 1 ]);
+    });
+
     xit('shows actual suffix stroke for maiden', () => {
       let wordOrPhrase = "maiden";
       let chosenStroke = "";
