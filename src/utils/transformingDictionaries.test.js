@@ -886,6 +886,23 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForAs, chosenStroke, strokeLookupAttempts)).toEqual( [ "AS", 1 ]);
     });
 
+    it('shows the outline for the word "rest"', () => {
+      let wordOrPhrase = "rest";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+      let globalLookupDictionaryForRest = new Map([
+        ["rest", [
+          ["REFT", "typey-type.json"],
+          ["R*ES", "typey-type.json"],
+        ]],
+        ["REST", [
+          ["R*EFT", "typey-type.json"],
+        ]],
+      ]);
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForRest, chosenStroke, strokeLookupAttempts)).toEqual( [ "REFT", 1 ]);
+    });
+
     xit('shows actual suffix stroke for maiden', () => {
       let wordOrPhrase = "maiden";
       let chosenStroke = "";
