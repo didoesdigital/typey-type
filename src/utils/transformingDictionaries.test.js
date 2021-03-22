@@ -950,6 +950,22 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KPA/AEU", 1 ]);
     });
 
+    it('shows the outline for the word "i"', () => {
+      let wordOrPhrase = "i";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "*EU", 1 ]);
+    });
+
+    it('shows the outline for the word "I"', () => {
+      let wordOrPhrase = "I";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "EU", 1 ]);
+    });
+
     xit('shows actual suffix stroke for maiden', () => {
       let wordOrPhrase = "maiden";
       let chosenStroke = "";
