@@ -966,6 +966,25 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "EU", 1 ]);
     });
 
+    it('shows the outline for the word "trust"', () => {
+      let wordOrPhrase = "trust";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+      let globalLookupDictionaryForSituation = new Map([
+        ["trust", [
+          ["TRUFT", "typey-type.json"],
+          ["TRUFT", "top-10000-project-gutenberg-words.json"],
+          ["TR*US", "plover.json"],
+          ["TRUF", "plover.json"],
+        ]],
+        ["Trust", [
+          ["TR*UFT", "plover.json"],
+        ]],
+      ]);
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForSituation, chosenStroke, strokeLookupAttempts)).toEqual( [ "TRUFT", 1 ]);
+    });
+
     xit('shows actual suffix stroke for maiden', () => {
       let wordOrPhrase = "maiden";
       let chosenStroke = "";
