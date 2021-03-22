@@ -361,6 +361,7 @@ let globalLookupDictionary = new Map([
   ["in", [["TPH", "typey-type.json"]]],
   ["your", [["KWROUR", "typey-type.json"]]],
   ["cross-petition", [["KR-PGS", "typey-type.json"], ["KR-PGS", "plover.json"]]],
+  ["{^.com}", [["KROPL", "typey-type.json"]]],
 ]);
 
 describe('add outlines for words to combined lookup dict', () => {
@@ -643,6 +644,18 @@ describe('create stroke hint for phrase', () => {
     it('brackets', () => {
       let wordOrPhraseMaterial = "( ) [ ] { }";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PREPB PR*EPB PWR-BGT PWR*BGT TPR-BGT TPR*BGT");
+    });
+  });
+
+  describe('returns string containing top-level domain', () => {
+    it('shows outline for ".com"', () => {
+      let wordOrPhraseMaterial = ".com";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KROPL");
+    });
+
+    xit('shows outline for "didoesdigital.com"', () => {
+      let wordOrPhraseMaterial = "didoesdigital.com";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TK*/*EU/TK*/O*/*E/S*/TK*/*EU/TKPW*/*EU/T*/A*/HR* KROPL");
     });
   });
 
