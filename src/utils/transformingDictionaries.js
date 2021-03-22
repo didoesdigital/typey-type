@@ -2404,6 +2404,12 @@ function penaliseSlashesWithoutPrefixesOrSuffixes(outline, translation) {
 
 function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
   arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
+    // Note: If compareFunction(a, b) returns less than 0, leave a and b unchanged.
+    if (a[1] === "top-10000-project-gutenberg-words.json") { return -1; }
+
+    // Note: If compareFunction(a, b) returns greater than 0, sort b before a.
+    if (b[1] === "top-10000-project-gutenberg-words.json") { return 1; }
+
     let outlineA = a[0];
     let outlineB = b[0];
     let outlineALengthWithAllPenalties = outlineA.length;

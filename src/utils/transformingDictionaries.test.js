@@ -920,14 +920,14 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForInto, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHAO", 1 ]);
     });
 
-    xit('shows the outline for the word "get"', () => {
+    it('shows the outline for the word "get"', () => {
       let wordOrPhrase = "get";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
       let globalLookupDictionaryForGet = new Map([
         ["get", [
           ["TKPW-T", "typey-type.json"],
-          ["TKPWET", "typey-type.json"],
+          ["TKPWET", "top-10000-project-gutenberg-words.json"],
         ]],
       ]);
 
@@ -1392,25 +1392,25 @@ describe('rank outlines', () => {
   describe('with gutenberg entries', () => {
     it('returns sorted list of outlines for "get" where the gutenberg entry comes first', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["TKWET", "misstrokes.json"],
-        ["TPWET", "misstrokes.json"],
-        ["TKPWHET", "misstrokes.json"],
-        ["TKPWETD", "misstrokes.json"],
+        // ["TKWET", "misstrokes.json"],
+        // ["TPWET", "misstrokes.json"],
+        // ["TKPWHET", "misstrokes.json"],
+        // ["TKPWETD", "misstrokes.json"],
         ["TKPWET", "top-10000-project-gutenberg-words.json"],
         ["TKPW-T", "typey-type.json"],
-        ["TKPWELT", "misstrokes.json"],
-        ["TKPET", "misstrokes.json"],
+        // ["TKPWELT", "misstrokes.json"],
+        // ["TKPET", "misstrokes.json"],
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "upstarted")).toEqual([
-        ["TKWET", "misstrokes.json"],
-        ["TPWET", "misstrokes.json"],
-        ["TKPET", "misstrokes.json"],
         ["TKPWET", "top-10000-project-gutenberg-words.json"],
         ["TKPW-T", "typey-type.json"],
-        ["TKPWETD", "misstrokes.json"],
-        ["TKPWHET", "misstrokes.json"],
-        ["TKPWELT", "misstrokes.json"],
+        // ["TKWET", "misstrokes.json"],
+        // ["TPWET", "misstrokes.json"],
+        // ["TKPET", "misstrokes.json"],
+        // ["TKPWETD", "misstrokes.json"],
+        // ["TKPWHET", "misstrokes.json"],
+        // ["TKPWELT", "misstrokes.json"],
       ]);
     });
   });
