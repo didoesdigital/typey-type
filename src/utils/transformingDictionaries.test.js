@@ -1015,7 +1015,7 @@ describe('generate dictionary entries', () => {
     let wordList = ['a', 'A', 'i', 'I', ' ', '?', 'address', 'tom', 'Heather', 'TUESDAY', 'FIRST', '3D', 'bed,', 'man,', 'man!', 'man?', "'bed'", "'address'", "'Sinatra'", "'sinatra'", "'confuzzled'", 'and! and', 'andx and', 'andx andx and', 'and ', ' and', ' and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff -- cached', 'bed, man, and address' ];
     // let wordList = [' ', '?', 'tom', 'Heather', 'TUESDAY', 'FIRST', 'bed,', 'man!', 'man?', "'sinatra'", 'and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff --cached', 'diff -- cached', '<title>Learn!</title>' ];
 
-    let globalLookupDictionary = new Map([
+    let globalLookupDictionaryForMatchingCapitalisationAndPunctuation = new Map([
       ["a", [["AEU", "typey-type.json"]]],
       ["I", [["EU", "typey-type.json"]]],
       ["{^ ^}", [["S-P", "typey-type.json"]]],
@@ -1051,7 +1051,7 @@ describe('generate dictionary entries', () => {
       ["learn", [["HRERPB", "typey-type.json"]]]
     ]);
 
-    expect(generateListOfWordsAndStrokes(wordList, globalLookupDictionary)).toEqual(
+    expect(generateListOfWordsAndStrokes(wordList, globalLookupDictionaryForMatchingCapitalisationAndPunctuation)).toEqual(
       [
         {phrase: "a", stroke: "AEU"},
         {phrase: "A", stroke: "KPA/AEU"},
@@ -1097,7 +1097,7 @@ describe('generate dictionary entries', () => {
         // {phrase: "diff --cached", stroke: "TKEUF TK*RB TK-LS KAERBD"},
         // {phrase: "<title>Learn!</title>", stroke: "AEPBG/TAOEULT/A*EPBG/KPA*/HRERPB/SKHRAPL/AEPBG/OEU/TAOEULT/A*EPBG"}
       ]
-    // expect(generateListOfWordsAndStrokes(wordList, globalLookupDictionary)).toEqual(
+    // expect(generateListOfWordsAndStrokes(wordList, globalLookupDictionaryForMatchingCapitalisationAndPunctuation)).toEqual(
     //   [
     //     {phrase: " ", stroke: "S-P", lookups: 1},
     //     {phrase: "?", stroke: "H-F", lookups: 1},
