@@ -2493,6 +2493,7 @@ function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, va
       dictContent = dictTypeyType;
       // eslint-disable-next-line
       let _;
+      // eslint-disable-next-line
       [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, {}, new Set());
     }
     else {
@@ -2502,6 +2503,7 @@ function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, va
           if (dictName === "plover-main-3-jun-2018.json") {
             // eslint-disable-next-line
             let _;
+            // eslint-disable-next-line
             [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, new Set());
           }
           else {
