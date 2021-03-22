@@ -961,11 +961,6 @@ describe('choose outline for phrase', () => {
     //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBLG/-G/-S", 1 ]);
     // });
 
-    // TODO:
-    // This one currently shows "PHAEUD/EPB" instead of "PHAEUD/*EPB" because "PHAEUD/*EPB" is
-    // penalised 3 times: once for being "longer", once for having a star, once for having a slash,
-    // while "PHAEUD/EPB" is penalised only for having a slash without being a suffix.
-
     it('shows the outline for the word "as"', () => {
       let wordOrPhrase = "as";
       let chosenStroke = "";
@@ -1084,6 +1079,11 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForSituation, chosenStroke, strokeLookupAttempts)).toEqual( [ "TRUFT", 1 ]);
     });
 
+
+    // TODO:
+    // This one currently shows "PHAEUD/EPB" instead of "PHAEUD/*EPB" because "PHAEUD/*EPB" is
+    // penalised 3 times: once for being "longer", once for having a star, once for having a slash,
+    // while "PHAEUD/EPB" is penalised only for having a slash without being a suffix.
     xit('shows actual suffix stroke for maiden', () => {
       let wordOrPhrase = "maiden";
       let chosenStroke = "";
