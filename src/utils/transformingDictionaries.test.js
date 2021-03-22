@@ -358,6 +358,9 @@ let globalLookupDictionary = new Map([
   ["2009 dollars", [["TWOUPB/9/TKHRAR/-S", "typey-type.json"]]],
   ["2000", [["TWOUPBD", "typey-type.json"], ["TWOUZ", "typey-type.json"]]],
   ["©", [["KPR-T", "typey-type.json"]]],
+  ["in", [["TPH", "typey-type.json"]]],
+  ["your", [["KWROUR", "typey-type.json"]]],
+  ["cross-petition", [["KR-PGS", "typey-type.json"], ["KR-PGS", "plover.json"]]],
 ]);
 
 describe('add outlines for words to combined lookup dict', () => {
@@ -579,6 +582,50 @@ describe('create stroke hint for phrase', () => {
     it('with trailing full stop', () => {
       let wordOrPhraseMaterial = 'her.';
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HER TP-PL");
+    });
+
+    it('with "cross-petition"', () => {
+      let wordOrPhraseMaterial = 'In your cross-petition';
+
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/TPH KWROUR KR-PGS");
+    });
+
+    xit('with "cross-petition" and a comma', () => {
+      let wordOrPhraseMaterial = 'In your cross-petition, you';
+
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/TPH KWROUR KR-PGS KW-BG U");
+    });
+  });
+
+  describe('returns fingerspelling results for single letters except for single-letter words', () => {
+    it('first third lowercase alphabet', () => {
+      let wordOrPhraseMaterial = "a b c d e f g h i";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU PW* KR* TK* *E TP* TKPW* H* *EU");
+    });
+
+    it('second third lowercase alphabet', () => {
+      let wordOrPhraseMaterial = "j k l m n o p q r";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKWR* K* HR* PH* TPH* O* P* KW* R*");
+    });
+
+    it('final third lowercase alphabet', () => {
+      let wordOrPhraseMaterial = "s t u v w x y z";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("S* T* *U SR* W* KP* KWR* STKPW*");
+    });
+
+    it('first third uppercase alphabet', () => {
+      let wordOrPhraseMaterial = "A B C D E F G H I";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/AEU PW*P KR*P TK*P *EP TP*P TKPW*P H*P EU");
+    });
+
+    it('second third uppercase alphabet', () => {
+      let wordOrPhraseMaterial = "J K L M N O P Q R";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKWR*P K*P HR*P PH*P TPH*P O*P P*P KW*P R*P");
+    });
+
+    it('final third uppercase alphabet', () => {
+      let wordOrPhraseMaterial = "S T U V W X Y Z";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("S*P T*P *UP 5R W*P 10R KWR*P STKPW*P");
     });
   });
 
