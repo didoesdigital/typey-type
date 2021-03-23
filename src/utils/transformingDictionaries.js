@@ -2196,6 +2196,29 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
       if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + ingSuffixOutlineWithSlash; }
     }
+
+  }
+
+  function escapeRegExp(string) {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  }
+
+  if (!chosenStroke) {
+    // lodgings <- lodge -> /-G/-S
+    let suffixTranslation = '';
+    for (let i = 0; i < SUFFIXES_LENGTH && !chosenStroke; i++) {
+      suffixTranslation = SUFFIXES[i][1];
+      const ingAndSuffixRegex = new RegExp(`.+[bcdfghjklmnpqrstuvwxz]ing${escapeRegExp(suffixTranslation)}$`);
+      if (ingAndSuffixRegex.test(wordOrPhrase)) {
+        const ingSuffixEntry = SUFFIXES.find(suffixEntry => suffixEntry[1] === "ing");
+        const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : '/xxx';
+        const otherSuffixOutlineWithSlash = SUFFIXES[i][0];
+        const regex = new RegExp(`ing${suffixTranslation}$`);
+        let modifiedWordOrPhrase = wordOrPhrase.replace(regex, "e");
+        let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+        if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + ingSuffixOutlineWithSlash + otherSuffixOutlineWithSlash; }
+      }
+    }
   }
 
   if (!chosenStroke) {
