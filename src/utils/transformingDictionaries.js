@@ -2148,7 +2148,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     while (i < PREFIXES_LENGTH && !chosenStroke) {
       if (wordOrPhrase.startsWith(PREFIXES[i][1])) {
         prefixTranslation = PREFIXES[i][1];
-        let regex = new RegExp('^' + prefixTranslation + '');
+        let regex = new RegExp('^' + escapeRegExp(prefixTranslation) + '');
         let modifiedWordOrPhrase = wordOrPhrase.replace(regex, '');
         let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
         let hardCodedFixForQuestionMark = !(wordOrPhrase.replace(regex, '') === "?");
@@ -2164,7 +2164,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     while (j < SUFFIXES_LENGTH && !chosenStroke) {
       if (wordOrPhrase.endsWith(SUFFIXES[j][1])) {
         suffixTranslation = SUFFIXES[j][1];
-        let regex = new RegExp('' + suffixTranslation + '$');
+        let regex = new RegExp('' + escapeRegExp(suffixTranslation) + '$');
         let modifiedWordOrPhrase = wordOrPhrase.replace(regex, '');
         let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
         if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + SUFFIXES[j][0]; }
@@ -2180,7 +2180,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
       for (let k = 0; k < SUFFIXES_LENGTH && !chosenStroke; k++) {
         if (wordOrPhrase.endsWith(SUFFIXES[j][1] + SUFFIXES[k][1])) {
           suffixesTranslation = SUFFIXES[j][1] + SUFFIXES[k][1];
-          let regex = new RegExp('' + suffixesTranslation + '$');
+          let regex = new RegExp('' + escapeRegExp(suffixesTranslation) + '$');
           let modifiedWordOrPhrase = wordOrPhrase.replace(regex, '');
           let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
           if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + SUFFIXES[j][0] + SUFFIXES[k][0]; }
@@ -2213,7 +2213,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
         const ingSuffixEntry = SUFFIXES.find(suffixEntry => suffixEntry[1] === "ing");
         const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : '/xxx';
         const otherSuffixOutlineWithSlash = SUFFIXES[i][0];
-        const regex = new RegExp(`ing${suffixTranslation}$`);
+        const regex = new RegExp(`ing${escapeRegExp(suffixTranslation)}$`);
         let modifiedWordOrPhrase = wordOrPhrase.replace(regex, "e");
         let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
         if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + ingSuffixOutlineWithSlash + otherSuffixOutlineWithSlash; }
