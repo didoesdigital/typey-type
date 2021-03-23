@@ -2169,6 +2169,22 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     }
   }
 
+  if (!chosenStroke) {
+    // xxxings => xxx/-G/-S
+    let suffixesTranslation = '';
+    for (let j = 0; j < SUFFIXES_LENGTH && !chosenStroke; j++) {
+      for (let k = 0; k < SUFFIXES_LENGTH && !chosenStroke; k++) {
+        if (wordOrPhrase.endsWith(SUFFIXES[j][1] + SUFFIXES[k][1])) {
+          suffixesTranslation = SUFFIXES[j][1] + SUFFIXES[k][1];
+          let regex = new RegExp('' + suffixesTranslation + '$');
+          let modifiedWordOrPhrase = wordOrPhrase.replace(regex, '');
+          let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+          if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + SUFFIXES[j][0] + SUFFIXES[k][0]; }
+        }
+      }
+    }
+  }
+
   // Orthography rules
   if (!chosenStroke) {
     // seething <- seethe -> /-G

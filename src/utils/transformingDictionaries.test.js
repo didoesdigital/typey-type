@@ -99,6 +99,7 @@ let globalLookupDictionary = new Map([
   ["seethe", [["SAO*ET", "typey-type.json"]]],
   ["bing", [["PWEUPBG", "typey-type.json"]]],
   ["binge", [["PWEUPB/-PBLG", "typey-type.json"]]],
+  ["cuff", [["KUF", "typey-type.json"]]],
   ["you", [["U", "typey-type.json"]]],
   ["store", [["STOR", "typey-type.json"]]],
   ["room", [["RAOPL", "typey-type.json"]]],
@@ -107,7 +108,7 @@ let globalLookupDictionary = new Map([
   ["hit", [["HEUT", "typey-type.json"]]],
   ["miss", [["PHEUS", "typey-type.json"]]],
   ["hit-and-miss", [["H-PLS", "typey-type.json"]]],
-  // ["buffet", [["PWUF/ET", "typey-type.json"]]],
+  ["buffet", [["PWUF/ET", "typey-type.json"]]],
   ["wandering", [["WAPBGD", "typey-type.json"],["WAPB/TKER/-G", "typey-type.json"]]], // currently pre-sorted to best stroke first
   ["lodge", [["HROPBLG", "typey-type.json"]]],
   ["isn't", [["S-PBT", "typey-type.json"]]],
@@ -974,13 +975,21 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBG/-G", 1 ]);
     });
 
-    // it('with multiple suffixes', () => {
-    //   let wordOrPhrase = "buffetings";
-    //   let chosenStroke = "";
-    //   let strokeLookupAttempts = 0;
+    it('with multiple suffixes', () => {
+      let wordOrPhrase = "cuffings";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
 
-    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PWUF/ET/-G/-S", 1 ]);
-    // });
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KUF/-G/-S", 1 ]);
+    });
+
+    it('with multi-syllable word with multiple suffixes', () => {
+      let wordOrPhrase = "buffetings";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PWUF/ET/-G/-S", 1 ]);
+    });
 
     it('with WAPBGD/-S for wanderings', () => {
       let wordOrPhrase = "wanderings";
