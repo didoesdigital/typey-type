@@ -2130,7 +2130,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     // bingeing <- binge -> /TK-LS/-G
     if (wordOrPhrase.endsWith("eing")) {
       const ingSuffixEntry = SUFFIXES.find(suffixEntry => suffixEntry[1] === "ing");
-      const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : 'xxx';
+      const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : '/xxx';
       let modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "");
       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
       if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + suppressSpaceStrokeWithSlash + ingSuffixOutlineWithSlash; }
@@ -2191,7 +2191,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     const ingRegex = new RegExp(".+[bcdfghjklmnpqrstuvwxz]ing$");
     if (ingRegex.test(wordOrPhrase)) {
       const ingSuffixEntry = SUFFIXES.find(suffixEntry => suffixEntry[1] === "ing");
-      const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : 'xxx';
+      const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : '/xxx';
       let modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "e");
       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
       if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + ingSuffixOutlineWithSlash; }
