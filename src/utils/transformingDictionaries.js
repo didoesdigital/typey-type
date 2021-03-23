@@ -1,3 +1,7 @@
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+}
+
 // Some prefix and suffix entries are commented out because they are alternative strokes for prefix/suffix translations and the preferred stroke already exists.
 // Keeping entries uncommented out improves the chances of finding a valid dictionary entry. To ensure "preferred" strokes are used where possible, sort the arrays.
 const PREFIXES = [
@@ -2197,10 +2201,6 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
       if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + ingSuffixOutlineWithSlash; }
     }
 
-  }
-
-  function escapeRegExp(string) {
-    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
   }
 
   if (!chosenStroke) {
