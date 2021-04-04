@@ -71,7 +71,7 @@ class PseudoContentButton extends Component {
 
   render () {
     return (
-      <button className={this.props.className + (this.state.clicked ? ' fade-out-up' : '')} data-clipboard-target={this.props.dataClipboardTarget} onClick={this.animatedPseudoContent.bind(this)}>
+      <button className={this.props.className + (this.state.clicked ? ' fade-out-up' : '')} data-clipboard-target={this.props.dataClipboardTarget} onClick={this.animatedPseudoContent.bind(this)} style={this.props.style || {}}>
         {this.props.children}
       </button>
     );

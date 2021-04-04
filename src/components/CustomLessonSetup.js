@@ -238,7 +238,7 @@ plover"
                 </div>
                 <div>
                   <pre id="js-custom-lesson-dictionary-entries" className={filledPre + "h-168 overflow-scroll mw-384 mt1 mb3"}><code>{dictionaryEntries}</code></pre>
-                  <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-custom-lesson-dictionary-entries">Copy custom lesson to clipboard</PseudoContentButton>
+                  <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-custom-lesson-dictionary-entries" style={{minHeight: "2.5rem", whiteSpace: "normal", height: "initial"}}>Copy custom lesson to clipboard</PseudoContentButton>
                 </div>
               </div>
             </div>
@@ -269,7 +269,7 @@ plover"
                 </div>
                 <div>
                   <pre id="js-converted-dictionary-entries" className={filledPre + "h-168 overflow-scroll mw-384 mt1 mb3"}><code>{this.state.dictionaryConvertedToLesson}</code></pre>
-                  <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-converted-dictionary-entries">Copy converted dictionary to clipboard</PseudoContentButton>
+                  <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" style={{minHeight: "2.5rem", whiteSpace: "normal", height: "initial"}} dataClipboardTarget="#js-converted-dictionary-entries">Copy converted dictionary to clipboard</PseudoContentButton>
                 </div>
               </div>
             </div>
@@ -286,7 +286,7 @@ plover"
                     className="quote h-168 overflow-scroll mw-384 mt1 mb3"
                     tabIndex="0"
                   ><code>{this.state.myWords}</code></pre>
-                  <PseudoContentButton className="js-select-all-my-words link-button js-clipboard-button copy-to-clipboard" dataClipboardTarget="#js-your-words-for-dictionary-entries">Copy your words to clipboard</PseudoContentButton>
+                  <PseudoContentButton className="js-select-all-my-words link-button js-clipboard-button copy-to-clipboard" style={{minHeight: "2.5rem", whiteSpace: "normal", height: "initial"}} dataClipboardTarget="#js-your-words-for-dictionary-entries">Copy your words to clipboard</PseudoContentButton>
                 </div>
                 <div>
                 </div>
