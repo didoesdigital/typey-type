@@ -507,6 +507,11 @@ describe('create stroke hint for phrase', () => {
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("R*E/KOFR");
     });
 
+    it('with prefix that includes a hyphen and a gibberish word', () => {
+      let wordOrPhraseMaterial = "self-dckx";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SEF/TK*/KR*/K*/KP*");
+    });
+
     // TODO
     xit('with prefix that is also a word that has trailing hyphen and a fake word', () => {
       let wordOrPhraseMaterial = "quasi-confuzzled";

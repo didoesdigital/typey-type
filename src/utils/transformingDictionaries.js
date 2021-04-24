@@ -2237,23 +2237,40 @@ function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, str
   let compoundWordFirstWord = compoundWordParts[0];
   let compoundWordSecondWord = compoundWordParts[1];
 
-  [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordFirstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // "store" => ["STOR", 3]
-
-  if (stroke && stroke.length > 0 && stroke !== "xxx") {
-    strokes = strokes === "" ? stroke + " H-PB" : strokes + " " + stroke + " H-PB";
-    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordSecondWord, globalLookupDictionary, stroke, strokeLookupAttempts); // "room"
-
-    if (stroke && stroke.length > 0) {
-      strokes = strokes + " " + stroke;
+  const matchingPrefixWithHyphenEntry = PREFIXES.find(prefixEntry => prefixEntry[1] === compoundWordFirstWord + "-");
+  if (matchingPrefixWithHyphenEntry) {
+    stroke = matchingPrefixWithHyphenEntry[0]; // self-
+    strokes = strokes === "" ? stroke : strokes + " " + stroke;
+    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordSecondWord, globalLookupDictionary, stroke, strokeLookupAttempts);
+    if (stroke && stroke.length > 0 && stroke !== "xxx") {
+      strokes = strokes + stroke;
+      stroke = "xxx";
+    }
+    else if (stroke === "xxx") {
+      stroke = createFingerspellingStroke(compoundWordSecondWord);
+      strokes = strokes + stroke;
       stroke = "xxx";
     }
   }
-  else if (stroke === "xxx") {
-    stroke = createFingerspellingStroke(compoundWordFirstWord);
-    strokes = strokes === "" ? stroke + " H-PB" : strokes + " " + stroke + " H-PB";
-    stroke = createFingerspellingStroke(compoundWordSecondWord);
-    strokes = strokes + " " + stroke;
-    stroke = "xxx";
+  else {
+    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordFirstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // "store" => ["STOR", 3]
+
+    if (stroke && stroke.length > 0 && stroke !== "xxx") {
+      strokes = strokes === "" ? stroke + " H-PB" : strokes + " " + stroke + " H-PB";
+      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordSecondWord, globalLookupDictionary, stroke, strokeLookupAttempts); // "room"
+
+      if (stroke && stroke.length > 0) {
+        strokes = strokes + " " + stroke;
+        stroke = "xxx";
+      }
+    }
+    else if (stroke === "xxx") {
+      stroke = createFingerspellingStroke(compoundWordFirstWord);
+      strokes = strokes === "" ? stroke + " H-PB" : strokes + " " + stroke + " H-PB";
+      stroke = createFingerspellingStroke(compoundWordSecondWord);
+      strokes = strokes + " " + stroke;
+      stroke = "xxx";
+    }
   }
 
   return [strokes, stroke, strokeLookupAttempts];
