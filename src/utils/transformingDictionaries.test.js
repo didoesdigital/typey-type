@@ -372,6 +372,7 @@ let globalLookupDictionary = new Map([
   ["chant", [["KHAPBT", "plover.json"]]],
   ["Eldridge", [["EL/TKREUPBLG", "plover.json"]]],
   ["nelly", [["TPHEL/KWREU", "typey-type.json"]]],
+  ["cover", [["KOFR", "typey-type.json"]]],
 ]);
 
 describe('add outlines for words to combined lookup dict', () => {
@@ -499,6 +500,11 @@ describe('create stroke hint for phrase', () => {
     it('with prefix that is also a word that has trailing hyphen and a word', () => {
       let wordOrPhraseMaterial = "quasi-experimental";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KWAS/KWREU/SPAOERL");
+    });
+
+    it('with prefix that includes a hyphen and a word', () => {
+      let wordOrPhraseMaterial = "re-cover";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("R*E/KOFR");
     });
 
     // TODO
