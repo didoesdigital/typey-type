@@ -2173,23 +2173,25 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     }
   }
 
-  if (!chosenStroke) {
-    // xxxings => xxx/-G/-S
-    let suffixesTranslation = '';
-    for (let j = 0; j < SUFFIXES_LENGTH && !chosenStroke; j++) {
-      for (let k = 0; k < SUFFIXES_LENGTH && !chosenStroke; k++) {
-        if (wordOrPhrase.endsWith(SUFFIXES[j][1] + SUFFIXES[k][1])) {
-          suffixesTranslation = SUFFIXES[j][1] + SUFFIXES[k][1];
-          let regex = new RegExp('' + escapeRegExp(suffixesTranslation) + '$');
-          let modifiedWordOrPhrase = wordOrPhrase.replace(regex, '');
-          let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-          if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + SUFFIXES[j][0] + SUFFIXES[k][0]; }
-        }
-      }
-    }
-  }
+  // FIXME: this contains a bug:
+  // // Complex orthography rules
+  // if (!chosenStroke) {
+  //   // xxxings => xxx/-G/-S
+  //   let suffixesTranslation = '';
+  //   for (let j = 0; j < SUFFIXES_LENGTH && !chosenStroke; j++) {
+  //     for (let k = 0; k < SUFFIXES_LENGTH && !chosenStroke; k++) {
+  //       if (wordOrPhrase.endsWith(SUFFIXES[j][1] + SUFFIXES[k][1])) {
+  //         suffixesTranslation = SUFFIXES[j][1] + SUFFIXES[k][1];
+  //         let regex = new RegExp('' + escapeRegExp(suffixesTranslation) + '$');
+  //         let modifiedWordOrPhrase = wordOrPhrase.replace(regex, '');
+  //         let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+  //         if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + SUFFIXES[j][0] + SUFFIXES[k][0]; }
+  //       }
+  //     }
+  //   }
+  // }
 
-  // Orthography rules
+  // Simple orthography rules
   if (!chosenStroke) {
     // seething <- seethe -> /-G
     const ingRegex = new RegExp(".+[bcdfghjklmnpqrstuvwxz]ing$");
@@ -2200,26 +2202,27 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
       if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + ingSuffixOutlineWithSlash; }
     }
-
   }
 
-  if (!chosenStroke) {
-    // lodgings <- lodge -> /-G/-S
-    let suffixTranslation = '';
-    for (let i = 0; i < SUFFIXES_LENGTH && !chosenStroke; i++) {
-      suffixTranslation = SUFFIXES[i][1];
-      const ingAndSuffixRegex = new RegExp(`.+[bcdfghjklmnpqrstuvwxz]ing${escapeRegExp(suffixTranslation)}$`);
-      if (ingAndSuffixRegex.test(wordOrPhrase)) {
-        const ingSuffixEntry = SUFFIXES.find(suffixEntry => suffixEntry[1] === "ing");
-        const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : '/xxx';
-        const otherSuffixOutlineWithSlash = SUFFIXES[i][0];
-        const regex = new RegExp(`ing${escapeRegExp(suffixTranslation)}$`);
-        let modifiedWordOrPhrase = wordOrPhrase.replace(regex, "e");
-        let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-        if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + ingSuffixOutlineWithSlash + otherSuffixOutlineWithSlash; }
-      }
-    }
-  }
+  // TODO: add better test coverage before uncommenting this
+  // // Complex orthography rules
+  // if (!chosenStroke) {
+  //   // lodgings <- lodge -> /-G/-S
+  //   let suffixTranslation = '';
+  //   for (let i = 0; i < SUFFIXES_LENGTH && !chosenStroke; i++) {
+  //     suffixTranslation = SUFFIXES[i][1];
+  //     const ingAndSuffixRegex = new RegExp(`.+[bcdfghjklmnpqrstuvwxz]ing${escapeRegExp(suffixTranslation)}$`);
+  //     if (ingAndSuffixRegex.test(wordOrPhrase)) {
+  //       const ingSuffixEntry = SUFFIXES.find(suffixEntry => suffixEntry[1] === "ing");
+  //       const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : '/xxx';
+  //       const otherSuffixOutlineWithSlash = SUFFIXES[i][0];
+  //       const regex = new RegExp(`ing${escapeRegExp(suffixTranslation)}$`);
+  //       let modifiedWordOrPhrase = wordOrPhrase.replace(regex, "e");
+  //       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+  //       if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + ingSuffixOutlineWithSlash + otherSuffixOutlineWithSlash; }
+  //     }
+  //   }
+  // }
 
   if (!chosenStroke) {
     chosenStroke = "xxx";

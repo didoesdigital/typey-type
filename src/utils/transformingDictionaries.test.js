@@ -662,7 +662,7 @@ describe('create stroke hint for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBLG/-G", 1 ]);
     });
 
-    it('with orthography rule to replace "e" with "ing" and append an "s" using multiple suffixes', () => {
+    xit('with orthography rule to replace "e" with "ing" and append an "s" using multiple suffixes', () => {
       let wordOrPhrase = "lodgings";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
@@ -973,7 +973,7 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBG/-G", 1 ]);
     });
 
-    it('with multiple suffixes', () => {
+    xit('with multiple suffixes', () => {
       let wordOrPhrase = "cuffings";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
@@ -981,7 +981,7 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KUF/-G/-S", 1 ]);
     });
 
-    it('with multi-syllable word with multiple suffixes', () => {
+    xit('with multi-syllable word with multiple suffixes', () => {
       let wordOrPhrase = "buffetings";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
