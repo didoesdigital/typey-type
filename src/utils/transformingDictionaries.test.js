@@ -375,6 +375,7 @@ let globalLookupDictionary = new Map([
   ["cover", [["KOFR", "typey-type.json"]]],
   ["mass", [["PHAS", "typey-type.json"]]],
   ["{~|'^}twas", [["TWA*S", "plover.json"]]],
+  ["gentlemen", [["SKWR*EPL", "plover.json"]]],
 ]);
 
 describe('add outlines for words to combined lookup dict', () => {
@@ -427,6 +428,11 @@ describe('create stroke hint for phrase', () => {
     it('showing hint word starting with apostrophe using dictionary formatting symbols', () => {
       let wordOrPhraseMaterial = "'twas";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TWA*S");
+    });
+
+    it('show full word hints for a phrase ending with apostrophe and ess', () => {
+      let wordOrPhraseMaterial = "gentlemen's";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKWR*EPL/AES");
     });
 
     it('show full word hints for a phrase containing a capitalised word with an apostrophe', () => {
