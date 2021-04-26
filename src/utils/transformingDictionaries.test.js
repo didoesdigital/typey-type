@@ -373,6 +373,7 @@ let globalLookupDictionary = new Map([
   ["Eldridge", [["EL/TKREUPBLG", "plover.json"]]],
   ["nelly", [["TPHEL/KWREU", "typey-type.json"]]],
   ["cover", [["KOFR", "typey-type.json"]]],
+  ["mass", [["PHAS", "typey-type.json"]]],
 ]);
 
 describe('add outlines for words to combined lookup dict', () => {
@@ -741,6 +742,13 @@ describe('create stroke hint for phrase', () => {
     xit('shows outline for "didoesdigital.com"', () => {
       let wordOrPhraseMaterial = "didoesdigital.com";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TK*/*EU/TK*/O*/*E/S*/TK*/*EU/TKPW*/*EU/T*/A*/HR* KROPL");
+    });
+  });
+
+  describe('returns outlines for capitalised word with trailing full stop', () => {
+    it('shows outline for "Mass."', () => {
+      let wordOrPhraseMaterial = "Mass.";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/PHAS TP-PL");
     });
   });
 
