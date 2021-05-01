@@ -1782,7 +1782,7 @@ class App extends Component {
     var newState = {
       currentPhraseAttempts: currentPhraseAttempts,
       numberOfMatchedChars: numberOfMatchedChars,
-      totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
+      totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars + 1) / this.charsPerWord,
       totalNumberOfNewWordsMet: this.state.totalNumberOfNewWordsMet,
       totalNumberOfLowExposuresSeen: this.state.totalNumberOfLowExposuresSeen,
       totalNumberOfRetainedWords: this.state.totalNumberOfRetainedWords,
