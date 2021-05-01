@@ -1857,7 +1857,7 @@ class App extends Component {
       this.state.lesson.newPresentedMaterial.visitNext();
 
       newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
-      newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
+      newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars + 1;
       newState.previousCompletedPhraseAsTyped = actualText;
       newState.actualText = '';
       newState.showStrokesInLesson = false;
