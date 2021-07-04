@@ -1945,6 +1945,13 @@ class App extends Component {
         synth.cancel();
       }
 
+      // TODO: scale the rate in proportion to:
+      // A) words per minute and
+      // B) length of word as a proxy for the time it takes to say a long word
+      // Note: this likely has floating point math rounding errors.
+      let wordsPerMinute = this.state.timer > 0 ? this.state.totalNumberOfMatchedWords/(this.state.timer/60/1000) : 0;
+      wordsPerMinute > 100 ? utterThis.rate = 2 : utterThis.rate = 1;
+
       synth.speak(utterThis);
     }
   }
