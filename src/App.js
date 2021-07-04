@@ -1675,6 +1675,15 @@ class App extends Component {
           yourTypedText.focus();
         }
       }, 0);
+      // Possible alternative approach:
+      // function focusAndSpeak() {
+      //   const yourTypedText = document.getElementById('your-typed-text');
+      //   if (yourTypedText) {
+      //     yourTypedText.focus();
+      //     // this.sayCurrentPhraseAgain();
+      //   }
+      // }
+      // window.setTimeout(focusAndSpeak.bind(this), 0);
     });
   }
 
@@ -1910,6 +1919,27 @@ class App extends Component {
           console.log('Unable to set language to speak material', e);
         }
       }
+
+      // No lang?
+      // if (!utterThis.lang) {
+      //   utterThis.lang = "en-US";
+      // }
+
+      // No voice?
+      // if (!utterThis.voice) {
+      //   let voices = synth.getVoices();
+      //   if (voices && voices.length > 0) {
+      //     utterThis.voice = voices[0];
+      //   }
+      // }
+
+      // Debugging:
+      // utterThis.onend = function (event) {
+      //   console.log('SpeechSynthesisUtterance.onend called because utterance has finished being spoken and end event fired');
+      // }
+      // utterThis.onerror = function (event) {
+      //   console.error('SpeechSynthesisUtterance.onerror called because utterance was prevented from being successfully spoken and error event fired');
+      // }
 
       if (synth.speaking) {
         synth.cancel();
