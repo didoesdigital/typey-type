@@ -3,6 +3,12 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { matchSplitText } from './../utils/typey-type';
 
 class TypedText extends Component {
+  componentWillUnmount() {
+    let synth = window.speechSynthesis;
+    if (synth.speaking) {
+      synth.cancel();
+    }
+  }
 
   // Show how much of what you've typed is correct
   markUpTypedText(currentPhrase, actualText, settings) {
