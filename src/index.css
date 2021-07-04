@@ -1425,6 +1425,13 @@ label {
   color: #202549;
   opacity: 1; }
 
+.say-word-button {
+  margin-bottom: 1em; }
+  @media (min-width: 1024px) {
+    .say-word-button {
+      position: absolute;
+      transform: translate(calc(-100% - 4px), -2px); } }
+
 .unknown-steno-diagram {
   position: relative; }
   .unknown-steno-diagram svg {

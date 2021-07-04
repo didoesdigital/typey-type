@@ -31,7 +31,7 @@ class TypedText extends Component {
     let sayCurrentPhraseButton = null;
     if (this.props.userSettings && this.props.userSettings.speakMaterial) {
       sayCurrentPhraseButton = (
-        <button className="absolute link-button button--secondary" style={{transform: "translate(calc(-100% - 4px), -2px)"}} onClick={this.speakAndFocus.bind(this)}>Say word</button>
+        <button className="link-button button--secondary say-word-button" onClick={this.speakAndFocus.bind(this)}>Say word</button>
       )
     };
 
