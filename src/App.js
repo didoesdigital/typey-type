@@ -1950,12 +1950,12 @@ class App extends Component {
   }
 
   sayCurrentPhraseAgain() {
-    // if (this.state.userSettings.speakMaterial) {
-    //   let currentPhrase = this.state.lesson.presentedMaterial[this.state.currentPhraseID];
-    //   if (currentPhrase && currentPhrase.hasOwnProperty('phrase')) {
-    //     this.say(currentPhrase.phrase);
-    //   }
-    // }
+    if (this.state.userSettings.speakMaterial) {
+      let currentPhrase = this.state.lesson.presentedMaterial[this.state.currentPhraseID];
+      if (currentPhrase && currentPhrase.hasOwnProperty('phrase')) {
+        this.say(currentPhrase.phrase);
+      }
+    }
   }
 
   isFinished() {
