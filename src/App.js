@@ -1911,6 +1911,10 @@ class App extends Component {
         }
       }
 
+      if (synth.speaking) {
+        synth.cancel();
+      }
+
       synth.speak(utterThis);
     }
   }
