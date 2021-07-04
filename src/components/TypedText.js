@@ -13,16 +13,33 @@ class TypedText extends Component {
     return {__html: matchedTypedTextMarkup};
   }
 
+  speakAndFocus() {
+    this.props.sayCurrentPhraseAgain();
+    // This makes it hard for screen readers to hear the word:
+    // const yourTypedText = document.getElementById('your-typed-text');
+    // if (yourTypedText) {
+    //   yourTypedText.focus();
+    // }
+  }
+
   render() {
     let previousCompletedPhraseAsTypedKey = this.props.completedPhrases ? this.props.completedPhrases.length : 0;
     let strokes = this.props.currentLessonStrokes;
     let previousCompletedPhraseAccuracy = strokes && strokes.length > 0 ? strokes[strokes.length - 1].accuracy : true;
     let textInputAccessibilityAriaHidden = !this.props.userSettings.textInputAccessibility;
 
+    let sayCurrentPhraseButton = null;
+    if (this.props.userSettings && this.props.userSettings.speakMaterial) {
+      sayCurrentPhraseButton = (
+        <button className="absolute link-button button--secondary" style={{transform: "translate(calc(-100% - 4px), -2px)"}} onClick={this.speakAndFocus.bind(this)}>Say word</button>
+      )
+    };
+
     return (
       <div className="typed-text-container">
         <label className="visually-hidden mb1" htmlFor="your-typed-text">Write {this.props.currentPhrase}</label>
         <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
+        {sayCurrentPhraseButton}
         <p className="input-text">
           <samp className="pointer-none absolute absolute--fill w-100">
           <TransitionGroup
