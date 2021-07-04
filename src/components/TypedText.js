@@ -47,7 +47,6 @@ class TypedText extends Component {
               className="input-textarea typed-text-input-positioning typed-text-input-textarea"
               id="your-typed-text"
               onChange={this.props.updateMarkup}
-              onFocus={this.props.sayCurrentPhraseAgain}
               rows="1"
               spellCheck="false"
               value={this.props.actualText}
