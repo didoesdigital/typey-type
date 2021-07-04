@@ -579,8 +579,14 @@ class App extends Component {
       // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
       window.setTimeout(function ()
       {
-        let element = document.getElementById('your-typed-text') || document.getElementById('js-no-words-to-write');
-        if (element) { element.focus(); }
+        let yourTypedText = document.getElementById('your-typed-text')
+        let noWordsToWrite = document.getElementById('js-no-words-to-write');
+        if (yourTypedText) {
+          yourTypedText.focus();
+        }
+        else if (noWordsToWrite) {
+          noWordsToWrite.focus(); // Note: not an interactive element
+        }
       }, 0);
 
     });
@@ -653,8 +659,10 @@ class App extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
 
     this.setState({showStrokesInLesson: value});
-    const element = document.getElementById('your-typed-text');
-    if (element) { element.focus(); }
+    const yourTypedText = document.getElementById('your-typed-text');
+    if (yourTypedText) {
+      yourTypedText.focus();
+    }
 
     if (this.props.location.pathname.includes('custom')) {
       GoogleAnalytics.event({
@@ -971,8 +979,11 @@ class App extends Component {
         if (this.mainHeading) {
           this.mainHeading.focus();
         } else {
-          const element = document.getElementById('your-typed-text');
-          if (element) { element.focus(); }
+          const yourTypedText = document.getElementById('your-typed-text');
+          if (yourTypedText) {
+            yourTypedText.focus();
+            // this.sayCurrentPhraseAgain(); // this is called too soon in progress revision lessons so it announces dummy text instead of actual material
+          }
         }
       });
     })
@@ -1491,8 +1502,11 @@ class App extends Component {
               if (this.mainHeading) {
                 this.mainHeading.focus();
               } else {
-                const element = document.getElementById('your-typed-text');
-                if (element) { element.focus(); }
+                const yourTypedText = document.getElementById('your-typed-text');
+                if (yourTypedText) {
+                  yourTypedText.focus();
+                  // this.sayCurrentPhraseAgain(); // this is called too soon, when setupLesson() hasn't finished updating material
+                }
               }
             });
           });
@@ -1508,8 +1522,10 @@ class App extends Component {
             if (this.mainHeading) {
               this.mainHeading.focus();
             } else {
-              const element = document.getElementById('your-typed-text');
-              if (element) { element.focus(); }
+              const yourTypedText = document.getElementById('your-typed-text');
+              if (yourTypedText) {
+                yourTypedText.focus();
+              }
             }
           });
         }
@@ -1654,8 +1670,10 @@ class App extends Component {
       // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
       window.setTimeout(function ()
       {
-        const element = document.getElementById('your-typed-text');
-        if (element) { element.focus(); }
+        const yourTypedText = document.getElementById('your-typed-text');
+        if (yourTypedText) {
+          yourTypedText.focus();
+        }
       }, 0);
     });
   }
