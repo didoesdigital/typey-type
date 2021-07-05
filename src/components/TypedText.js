@@ -5,7 +5,7 @@ import { matchSplitText } from './../utils/typey-type';
 class TypedText extends Component {
   componentWillUnmount() {
     let synth = window.speechSynthesis;
-    if (synth.speaking) {
+    if (synth && synth.speaking) {
       synth.cancel();
     }
   }
