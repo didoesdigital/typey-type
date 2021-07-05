@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import { matchSplitText } from './../utils/typey-type';
+import GoogleAnalytics from 'react-ga';
 
 class TypedText extends Component {
   componentWillUnmount() {
@@ -21,6 +22,12 @@ class TypedText extends Component {
 
   speak() {
     this.props.sayCurrentPhraseAgain();
+
+    GoogleAnalytics.event({
+      category: 'SpeakMaterial',
+      action: 'Single click Say word button',
+      label: '' // If not a custom lesson, it could be handy to specify this.props.currentPhrase here
+    });
   }
 
   // Double click in Safari will start to say the word on first click then…
@@ -32,6 +39,12 @@ class TypedText extends Component {
     if (yourTypedText) {
       yourTypedText.focus();
     }
+
+    GoogleAnalytics.event({
+      category: 'SpeakMaterial',
+      action: 'Double click Say word button',
+      label: '' // If not a custom lesson, it could be handy to specify this.props.currentPhrase here
+    });
   }
 
   keyPress(event) {
@@ -40,6 +53,11 @@ class TypedText extends Component {
       // sayCurrentPhraseAgain on ⇧+Enter:
       if (event.shiftKey) {
         this.speak();
+        GoogleAnalytics.event({
+          category: 'SpeakMaterial',
+          action: 'Shift Enter',
+          label: this.props.userSettings && this.props.userSettings.speakMaterial ? "Speak material on" : "Speak material off"
+        });
       }
       else {
         // TODO: this could be a good trigger to reveal stroke hints
