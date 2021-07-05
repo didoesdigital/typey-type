@@ -19,13 +19,19 @@ class TypedText extends Component {
     return {__html: matchedTypedTextMarkup};
   }
 
-  speakAndFocus() {
+  speak() {
+    this.props.sayCurrentPhraseAgain();
+  }
+
+  // Double click in Safari will start to say the word on first click then…
+  // interrupt it to say it again on double click
+  onDoubleClickSpeakAndFocus() {
     this.props.sayCurrentPhraseAgain();
     // This makes it hard for screen readers to hear the word:
-    // const yourTypedText = document.getElementById('your-typed-text');
-    // if (yourTypedText) {
-    //   yourTypedText.focus();
-    // }
+    const yourTypedText = document.getElementById('your-typed-text');
+    if (yourTypedText) {
+      yourTypedText.focus();
+    }
   }
 
   render() {
@@ -37,7 +43,7 @@ class TypedText extends Component {
     let sayCurrentPhraseButton = null;
     if (this.props.userSettings && this.props.userSettings.speakMaterial) {
       sayCurrentPhraseButton = (
-        <button className="link-button button--secondary say-word-button" onClick={this.speakAndFocus.bind(this)}>Say word</button>
+        <button className="link-button button--secondary say-word-button" onClick={this.speak.bind(this)} onDoubleClick={this.onDoubleClickSpeakAndFocus.bind(this)}>Say word</button>
       )
     };
 
