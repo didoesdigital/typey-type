@@ -34,6 +34,19 @@ class TypedText extends Component {
     }
   }
 
+  keyPress(event) {
+    if (event && (event.charCode && event.charCode === 13)) { // Enter key
+      event.preventDefault();
+      // sayCurrentPhraseAgain on ⇧+Enter:
+      if (event.shiftKey) {
+        this.speak();
+      }
+      else {
+        // TODO: this could be a good trigger to reveal stroke hints
+      }
+    }
+  }
+
   render() {
     let previousCompletedPhraseAsTypedKey = this.props.completedPhrases ? this.props.completedPhrases.length : 0;
     let strokes = this.props.currentLessonStrokes;
@@ -76,6 +89,7 @@ class TypedText extends Component {
               className="input-textarea typed-text-input-positioning typed-text-input-textarea"
               id="your-typed-text"
               onChange={this.props.updateMarkup}
+              onKeyPress={this.keyPress.bind(this)}
               rows="1"
               spellCheck="false"
               value={this.props.actualText}
