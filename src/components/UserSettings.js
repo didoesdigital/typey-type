@@ -631,6 +631,7 @@ class UserSettings extends Component {
                         }
                         <p>For Windows, you can download a “language pack” from Microsoft.</p>
                         <p>For Linux systems, you may need to install a speech engine with voices, such as <code>speech-dispatcher</code> and <code>espeak-ng</code>.</p>
+                        <p>The “speak words” setting is great with story lessons containing real sentences because the context can help you distinguish homophones.</p>
                       </div>
                       <div className="text-right">
                         <button className="button" onClick={this.handleCloseModal}>OK</button>
