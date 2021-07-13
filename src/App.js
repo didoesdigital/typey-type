@@ -1847,21 +1847,11 @@ class App extends Component {
       if (!accurateStroke) { newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1; }
 
       if (!strokeHintShown && accurateStroke) {
-
-        // for suffixes and prefixes, record material with ignored chars instead of actualText
-        let lesson = this.state.lesson;
-        if (lesson && lesson.settings && lesson.settings.ignoredChars && lesson.settings.ignoredChars.length > 0 ) {
-          actualText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
-          if (this.state.userSettings.spacePlacement === 'spaceBeforeOutput') {
-            actualText = ' ' + this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
-          } else if (this.state.userSettings.spacePlacement === 'spaceAfterOutput') {
-            actualText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase + ' ';
-          }
-        }
-
-        const meetingsCount = newState.metWords[actualText] || 0;
+        // Use the original text when recording to preserve case and spacing
+        let phraseText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
+        const meetingsCount = newState.metWords[phraseText] || 0;
         Object.assign(newState, increaseMetWords.call(this, meetingsCount));
-        newState.metWords[actualText] = meetingsCount + 1;
+        newState.metWords[phraseText] = meetingsCount + 1;
       }
 
       if (this.state.userSettings.speakMaterial) {
