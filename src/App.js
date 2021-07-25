@@ -1849,6 +1849,14 @@ class App extends Component {
       if (!strokeHintShown && accurateStroke) {
         // Use the original text when recording to preserve case and spacing
         let phraseText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
+
+        if (this.state.userSettings.spacePlacement === 'spaceBeforeOutput') {
+          phraseText = ' ' + this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
+        }
+        else if (this.state.userSettings.spacePlacement === 'spaceAfterOutput') {
+          phraseText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase + ' ';
+        }
+
         const meetingsCount = newState.metWords[phraseText] || 0;
         Object.assign(newState, increaseMetWords.call(this, meetingsCount));
         newState.metWords[phraseText] = meetingsCount + 1;
