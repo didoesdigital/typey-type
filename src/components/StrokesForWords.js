@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Component } from 'react';
+import { AffixList } from '../utils/affixList';
 import {
   rankOutlines
 } from './../utils/transformingDictionaries';
@@ -315,7 +316,7 @@ function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary) {
     let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(lookupText.trim(), globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
-  listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, phrase);
+  listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, phrase, AffixList.getSharedInstance());
 
   if (phrase === "A") { listOfStrokesAndDicts = [["A*P", "fingerspelling"]]; }
   if (phrase === "B") { listOfStrokesAndDicts = [["PW*P", "fingerspelling"]]; }

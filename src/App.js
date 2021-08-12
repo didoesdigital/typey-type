@@ -33,6 +33,7 @@ import {
   createAGlobalLookupDictionary,
   generateListOfWordsAndStrokes
 } from './utils/transformingDictionaries';
+import { AffixList } from './utils/affixList';
 import {
   Route,
   Switch
@@ -402,6 +403,8 @@ class App extends Component {
         isGlobalDictionaryUpToDate = true;
         this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
         this.setState({ globalLookupDictionaryLoaded: true });
+        const affixList = new AffixList(sortedAndCombinedLookupDictionary);
+        AffixList.setSharedInstance(affixList);
       });
 
       if (!isPloverDictionaryLoaded && withPlover) { // TODO: this might need updating

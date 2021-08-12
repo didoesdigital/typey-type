@@ -1,10 +1,12 @@
+import { AffixList } from './affixList';
+
 function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
 }
 
 // Some prefix and suffix entries are commented out because they are alternative strokes for prefix/suffix translations and the preferred stroke already exists.
 // Keeping entries uncommented out improves the chances of finding a valid dictionary entry. To ensure "preferred" strokes are used where possible, sort the arrays.
-const PREFIXES = [
+const PREFIXES_FALLBACK = [
   ["*EBGS/TRA/", "extra"],
   ["*EFR/", "every"],
   ["*ERBGS/", "extra"],
@@ -925,9 +927,8 @@ const PREFIXES = [
   // ["UPBDZ/", "under"],
   // ["KRO/", "co-"]
 ];
-const PREFIXES_LENGTH = PREFIXES.length;
 
-const SUFFIXES = [
+const SUFFIXES_FALLBACK = [
   ["/*D", "'d"],
   ["/-EG", "eing"],
   ["/*LG", "ling"],
@@ -1806,7 +1807,6 @@ const SUFFIXES = [
   // ["/TPHAER", "ary"],
   // ["/TPHALT", "ality"],
 ];
-const SUFFIXES_LENGTH = SUFFIXES.length;
 
 const FINGERSPELLED_LETTERS = {
   "a": "A*",
@@ -1939,11 +1939,15 @@ const punctuationSplittingRegex = /([!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~�
 const strokeLookupAttemptsLimit = 12;
 
 function getRankedOutlineFromLookupEntry(lookupEntry, translation) {
-  rankOutlines(lookupEntry, translation);
+  rankOutlines(lookupEntry, translation, AffixList.getSharedInstance());
   return lookupEntry[0][0];
 }
 
 function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar) {
+  let suffixes = AffixList.getSharedInstance().suffixes;
+  let suffixesLength = suffixes.length;
+  let prefixes = AffixList.getSharedInstance().prefixes;
+  let prefixesLength = prefixes.length;
   let lookupEntry = globalLookupDictionary.get(wordOrPhrase); // "example": [["KP-PL", "plover.json"],["KP-P", "plover.json"]]
   if (lookupEntry && lookupEntry.length > 0) {
     // Instead of discarding non-Typey entries, let's assume the first entry is Best.
@@ -2140,7 +2144,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   if (!chosenStroke) {
     // bingeing <- binge -> /TK-LS/-G
     if (wordOrPhrase.endsWith("eing")) {
-      const ingSuffixEntry = SUFFIXES.find(suffixEntry => suffixEntry[1] === "ing");
+      const ingSuffixEntry = suffixes.find(suffixEntry => suffixEntry[1] === "ing");
       const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : '/xxx';
       let modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "");
       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
@@ -2152,14 +2156,14 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     // rexxx => RE/xxx
     let prefixTranslation = '';
     let i = 0;
-    while (i < PREFIXES_LENGTH && !chosenStroke) {
-      if (wordOrPhrase.startsWith(PREFIXES[i][1])) {
-        prefixTranslation = PREFIXES[i][1];
+    while (i < prefixesLength && !chosenStroke) {
+      if (wordOrPhrase.startsWith(prefixes[i][1])) {
+        prefixTranslation = prefixes[i][1];
         let regex = new RegExp('^' + escapeRegExp(prefixTranslation) + '');
         let modifiedWordOrPhrase = wordOrPhrase.replace(regex, '');
         let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
         let hardCodedFixForQuestionMark = !(wordOrPhrase.replace(regex, '') === "?");
-        if (lookupEntry && hardCodedFixForQuestionMark) { chosenStroke = PREFIXES[i][0] + getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+        if (lookupEntry && hardCodedFixForQuestionMark) { chosenStroke = prefixes[i][0] + getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
       }
       i++;
     }
@@ -2168,13 +2172,13 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     // binging <- bing -> /-G
     let suffixTranslation = '';
     let j = 0;
-    while (j < SUFFIXES_LENGTH && !chosenStroke) {
-      if (wordOrPhrase.endsWith(SUFFIXES[j][1])) {
-        suffixTranslation = SUFFIXES[j][1];
+    while (j < suffixesLength && !chosenStroke) {
+      if (wordOrPhrase.endsWith(suffixes[j][1])) {
+        suffixTranslation = suffixes[j][1];
         let regex = new RegExp('' + escapeRegExp(suffixTranslation) + '$');
         let modifiedWordOrPhrase = wordOrPhrase.replace(regex, '');
         let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-        if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + SUFFIXES[j][0]; }
+        if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + suffixes[j][0]; }
       }
       j++;
     }
@@ -2185,14 +2189,14 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   // if (!chosenStroke) {
   //   // xxxings => xxx/-G/-S
   //   let suffixesTranslation = '';
-  //   for (let j = 0; j < SUFFIXES_LENGTH && !chosenStroke; j++) {
-  //     for (let k = 0; k < SUFFIXES_LENGTH && !chosenStroke; k++) {
-  //       if (wordOrPhrase.endsWith(SUFFIXES[j][1] + SUFFIXES[k][1])) {
-  //         suffixesTranslation = SUFFIXES[j][1] + SUFFIXES[k][1];
+  //   for (let j = 0; j < suffixesLength && !chosenStroke; j++) {
+  //     for (let k = 0; k < suffixesLength && !chosenStroke; k++) {
+  //       if (wordOrPhrase.endsWith(suffixes[j][1] + suffixes[k][1])) {
+  //         suffixesTranslation = suffixes[j][1] + suffixes[k][1];
   //         let regex = new RegExp('' + escapeRegExp(suffixesTranslation) + '$');
   //         let modifiedWordOrPhrase = wordOrPhrase.replace(regex, '');
   //         let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-  //         if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + SUFFIXES[j][0] + SUFFIXES[k][0]; }
+  //         if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + suffixes[j][0] + suffixes[k][0]; }
   //       }
   //     }
   //   }
@@ -2203,7 +2207,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     // seething <- seethe -> /-G
     const ingRegex = new RegExp(".+[bcdfghjklmnpqrstuvwxz]ing$");
     if (ingRegex.test(wordOrPhrase)) {
-      const ingSuffixEntry = SUFFIXES.find(suffixEntry => suffixEntry[1] === "ing");
+      const ingSuffixEntry = suffixes.find(suffixEntry => suffixEntry[1] === "ing");
       const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : '/xxx';
       let modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "e");
       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
@@ -2216,13 +2220,13 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   // if (!chosenStroke) {
   //   // lodgings <- lodge -> /-G/-S
   //   let suffixTranslation = '';
-  //   for (let i = 0; i < SUFFIXES_LENGTH && !chosenStroke; i++) {
-  //     suffixTranslation = SUFFIXES[i][1];
+  //   for (let i = 0; i < suffixesLength && !chosenStroke; i++) {
+  //     suffixTranslation = suffixes[i][1];
   //     const ingAndSuffixRegex = new RegExp(`.+[bcdfghjklmnpqrstuvwxz]ing${escapeRegExp(suffixTranslation)}$`);
   //     if (ingAndSuffixRegex.test(wordOrPhrase)) {
-  //       const ingSuffixEntry = SUFFIXES.find(suffixEntry => suffixEntry[1] === "ing");
+  //       const ingSuffixEntry = suffixes.find(suffixEntry => suffixEntry[1] === "ing");
   //       const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : '/xxx';
-  //       const otherSuffixOutlineWithSlash = SUFFIXES[i][0];
+  //       const otherSuffixOutlineWithSlash = suffixes[i][0];
   //       const regex = new RegExp(`ing${escapeRegExp(suffixTranslation)}$`);
   //       let modifiedWordOrPhrase = wordOrPhrase.replace(regex, "e");
   //       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
@@ -2240,11 +2244,12 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   return [chosenStroke, strokeLookupAttempts];
 }
 
-function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts) {
+function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts, affixes) {
   let compoundWordFirstWord = compoundWordParts[0];
   let compoundWordSecondWord = compoundWordParts[1];
+  let prefixes = affixes.prefixes;
 
-  const matchingPrefixWithHyphenEntry = PREFIXES.find(prefixEntry => prefixEntry[1] === compoundWordFirstWord + "-");
+  const matchingPrefixWithHyphenEntry = prefixes.find(prefixEntry => prefixEntry[1] === compoundWordFirstWord + "-");
   if (matchingPrefixWithHyphenEntry) {
     stroke = matchingPrefixWithHyphenEntry[0]; // self-
     strokes = strokes === "" ? stroke : strokes + " " + stroke;
@@ -2334,7 +2339,7 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
         // 2.1 compound words
         // if there is exactly 1 hyphen in the middle of a word, it's probably a compound word e.g. "store-room"
         if (compoundWordParts && compoundWordParts.length === 2 && compoundWordParts[0] !== "" && compoundWordParts[1] !== "") {
-          [strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts); // "store-room"
+          [strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts, AffixList.getSharedInstance()); // "store-room"
           stroke = "xxx";
         }
         // 2.2 any punctuation, noting preceding char
@@ -2467,11 +2472,12 @@ function penaliseSlashes(outline, translation) {
   return penaltyForSlashes;
 }
 
-function hasPrefix (outline, translation) {
+function hasPrefix (outline, translation, prefixes) {
   let hasPrefix = false;
+  let prefixesLength = prefixes.length;
 
-  for (let i = 0; i < PREFIXES_LENGTH; i++) {
-    if (outline.startsWith(PREFIXES[i][0]) && translation.startsWith(PREFIXES[i][1])) {
+  for (let i = 0; i < prefixesLength; i++) {
+    if (outline.startsWith(prefixes[i][0]) && translation.startsWith(prefixes[i][1])) {
       return true;
     }
   }
@@ -2479,11 +2485,12 @@ function hasPrefix (outline, translation) {
   return hasPrefix;
 }
 
-function hasSuffix (outline, translation) {
+function hasSuffix (outline, translation, suffixes) {
   let hasSuffix = false;
+  let suffixesLength = suffixes.length;
 
-  for (let i = 0; i < SUFFIXES_LENGTH; i++) {
-    if (outline.startsWith(SUFFIXES[i][0]) && translation.startsWith(SUFFIXES[i][1])) {
+  for (let i = 0; i < suffixesLength; i++) {
+    if (outline.startsWith(suffixes[i][0]) && translation.startsWith(suffixes[i][1])) {
       return true;
     }
   }
@@ -2491,15 +2498,17 @@ function hasSuffix (outline, translation) {
   return hasSuffix;
 }
 
-function penaliseSlashesWithoutPrefixesOrSuffixes(outline, translation) {
+function penaliseSlashesWithoutPrefixesOrSuffixes(outline, translation, affixes) {
+  let suffixes = affixes.suffixes;
+  let prefixes = affixes.prefixes;
   let penaltyForSlashesWithoutPrefixesOrSuffixes = 0;
   let numberOfSlashes = outline.match(/\//g);
 
   if (numberOfSlashes !== null) {
-    if (hasPrefix(outline, translation)) {
+    if (hasPrefix(outline, translation, prefixes)) {
       return 0;
     }
-    else if (hasSuffix(outline, translation)) {
+    else if (hasSuffix(outline, translation, suffixes)) {
       return 0;
     }
     else {
@@ -2510,7 +2519,7 @@ function penaliseSlashesWithoutPrefixesOrSuffixes(outline, translation) {
   return penaltyForSlashesWithoutPrefixesOrSuffixes;
 }
 
-function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
+function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation, affixes = {suffixes: SUFFIXES_FALLBACK, prefixes: PREFIXES_FALLBACK}) {
   arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
     // Note: If compareFunction(a, b) returns less than 0, leave a and b unchanged.
     if (a[1] === "top-10000-project-gutenberg-words.json") { return -1; }
@@ -2529,8 +2538,8 @@ function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation) {
     outlineALengthWithAllPenalties += penaliseSlashes(outlineA, translation);
     outlineBLengthWithAllPenalties += penaliseSlashes(outlineB, translation);
 
-    outlineALengthWithAllPenalties += penaliseSlashesWithoutPrefixesOrSuffixes(outlineA, translation);
-    outlineBLengthWithAllPenalties += penaliseSlashesWithoutPrefixesOrSuffixes(outlineB, translation);
+    outlineALengthWithAllPenalties += penaliseSlashesWithoutPrefixesOrSuffixes(outlineA, translation, affixes);
+    outlineBLengthWithAllPenalties += penaliseSlashesWithoutPrefixesOrSuffixes(outlineB, translation, affixes);
 
     if (outlineALengthWithAllPenalties === outlineBLengthWithAllPenalties) {
       let outlineALastLetter = outlineA[outlineA.length - 1];
