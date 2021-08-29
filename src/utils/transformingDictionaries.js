@@ -2473,29 +2473,11 @@ function penaliseSlashes(outline, translation) {
 }
 
 function hasPrefix (outline, translation, prefixes) {
-  let hasPrefix = false;
-  let prefixesLength = prefixes.length;
-
-  for (let i = 0; i < prefixesLength; i++) {
-    if (outline.startsWith(prefixes[i][0]) && translation.startsWith(prefixes[i][1])) {
-      return true;
-    }
-  }
-
-  return hasPrefix;
+  return prefixes.some(([prefixOutline, prefixTranslation]) => outline.startsWith(prefixOutline) && translation.startsWith(prefixTranslation));
 }
 
 function hasSuffix (outline, translation, suffixes) {
-  let hasSuffix = false;
-  let suffixesLength = suffixes.length;
-
-  for (let i = 0; i < suffixesLength; i++) {
-    if (outline.startsWith(suffixes[i][0]) && translation.startsWith(suffixes[i][1])) {
-      return true;
-    }
-  }
-
-  return hasSuffix;
+  return suffixes.some(([suffixOutline, suffixTranslation]) => outline.startsWith(suffixOutline) && translation.startsWith(suffixTranslation));
 }
 
 function penaliseSlashesWithoutPrefixesOrSuffixes(outline, translation, affixes) {
