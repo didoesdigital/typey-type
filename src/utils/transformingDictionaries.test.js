@@ -444,6 +444,9 @@ let testPloverDict = {
   "OP/TOPL/TREUFT": "optometrist",
   "POED/TREUFT": "podiatrist",
 };
+
+// Some prefix and suffix entries are commented out because they are alternative strokes for prefix/suffix translations and the preferred stroke already exists.
+// Keeping entries uncommented out improves the chances of finding a valid dictionary entry. Previously, we would sort the affix arrays to ensure "preferred" strokes were used where possible, but we won't have that control with personal dictionaries.
 let testPrefixesDict = {
   "*EBGS/TRA": "{extra^}",
   "*EFR": "{every^}",
@@ -1351,6 +1354,19 @@ let testPrefixesDict = {
   "KWRA*D": "{ad^}",
   "RAOE": "{re^}",
   "TPWOUPB": "{200^}",
+  // ["AO*UT/", "out"],
+  // ["AOPB/", "on"],
+  // ["APB/TAOEU/", "anti"],
+  // ["APB/TEU/", "anti"],
+  // ["KWROUT/", "out"],
+  // ["KWRUP/", "up"],
+  // ["KWRUPBD/", "under"],
+  // ["SAOUPS/", "super"],
+  // ["SPR/", "super"],
+  // ["SPWR/", "inter"],
+  // ["TKEUZ/", "dis"],
+  // ["UPBDZ/", "under"],
+  // ["KRO/", "co-"]
 };
 let testSuffixesDict = {
   "*D": "{^'d}",
@@ -2207,6 +2223,29 @@ let testSuffixesDict = {
   "WAO*EUD": "{^-wide}",
   "WAO*EUS": "{^-wise}",
   "ES": "{^es}",
+  // ["/*PBS", "iness"],
+  // ["/*S", "s"],
+  // ["/-SZ", "s"],
+  // ["/-Z", "s"],
+  // ["/AEUR/TEU", "arity"],
+  // ["/AL/TEU", "ality"],
+  // ["/EBG/HREU", "ically"],
+  // ["/EUL/TEU", "ility"],
+  // ["/HREUPBS", "liness"],
+  // ["/KAO*ERP", "keeper"],
+  // ["/KWRA*U", "ier"],
+  // ["/KWRUS", "us"],
+  // ["/O*US", "us"],
+  // ["/OPL/TER", "ometer"],
+  // ["/PHA*EUBG/-G", "making"],
+  // ["/PHAO*EUFG", "imizing"],
+  // ["/PHO*PBG/*ER", "monger"],
+  // ["/SAO*EUD/A*L", "cidal"],
+  // ["/SKWR*US", "us"],
+  // ["/SKWRAOED", "ed"],
+  // ["/TEUFT", "ticity"],
+  // ["/TPHAER", "ary"],
+  // ["/TPHALT", "ality"],
 };
 
 // let appliedDictionariesConfig = ["test-typey-type.json", "test-prefixes.json", "test-suffixes.json", "plover-main-3-jun-2018.json" ];
