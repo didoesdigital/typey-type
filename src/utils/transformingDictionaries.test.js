@@ -1368,17 +1368,25 @@ let testPrefixesDict = {
   // ["UPBDZ/", "under"],
   // ["KRO/", "co-"]
 };
+let testAussieDict = {
+  "AOEUZ/A*U": "{^ise}",
+  "AO*EUFD/A*U": "{^ised}",
+  "AO*EUFG/A*U": "{^ising}",
+  // "*LG": "{^ling}",
+  // "*LD": "{^led}",
+  "*LD/A*U": "{^led}",
+  "*LG/A*U": "{^ling}",
+  // "*EG": "{^eing}",
+  "*EG/A*U": "{^eing}",
+  "KWROR/A*U": "{^iour}",
+  "KWRO*R/A*U": "{^iour}",
+  "O*UR/A*U": "{^our}",
+}
 let testSuffixesDict = {
   "*D": "{^'d}",
-  "-EG": "{^eing}",
-  "*LG": "{^ling}",
-  "*LD": "{^led}",
-  "O*UR": "{^our}",
-  "KWRO*R": "{^iour}",
   "AES": "{^'s}",
-  "AOEUZ/A*U": "{^ise}",
-  "AO*EUFG": "{^ising}",
-  "AO*EUFD": "{^ised}",
+  "AO*EUFG": "{^izing}",
+  "AO*EUFD": "{^ized}",
   "*EPLT": "{^ement}",
   "*BG": "{^k}",
   "*EFBG": "{^esque}",
@@ -2249,7 +2257,7 @@ let testSuffixesDict = {
 };
 
 // let appliedDictionariesConfig = ["test-typey-type.json", "test-prefixes.json", "test-suffixes.json", "plover-main-3-jun-2018.json" ];
-let appliedDictionariesConfig = ["test-typey-type.json", "test-emoji.json", "test-ruby.json", "test-react.json", "test-plover.json", "test-prefixes.json", "test-suffixes.json"];
+let appliedDictionariesConfig = ["test-typey-type.json", "test-emoji.json", "test-ruby.json", "test-react.json", "test-plover.json", "test-prefixes.json", "test-suffixes.json", "test-aussie.json"];
 let personalDictionaries = [
   [ "test-typey-type.json", testTypeyTypeDict],
   [ "test-emoji.json", testEmojiDict],
@@ -2258,6 +2266,7 @@ let personalDictionaries = [
   [ "test-plover.json", testPloverDict],
   [ "test-prefixes.json", testPrefixesDict],
   [ "test-suffixes.json", testSuffixesDict],
+  [ "test-aussie.json", testAussieDict],
 ];
 // let namesOfValidImportedDictionaries = ["test-prefixes.json", "test-suffixes.json", "plover-main-3-jun-2018.json" ];
 let namesOfValidImportedDictionaries = ["test-typey-type.json", "test-emoji.json", "test-ruby.json", "test-react.json", "test-plover.json", "test-prefixes.json", "test-suffixes.json"];
