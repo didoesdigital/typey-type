@@ -53,8 +53,10 @@ class Lookup extends Component {
               globalUserSettings={this.props.globalUserSettings}
               lookupTerm={this.props.lookupTerm}
               onChange={this.strokesForWordsChange.bind(this)}
+              personalDictionaries={this.props.personalDictionaries}
               stenoHintsOnTheFly={this.props.stenohintsonthefly}
               updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
+              updatePersonalDictionaries={this.props.updatePersonalDictionaries}
               userSettings={this.props.userSettings}
             />
           </div>

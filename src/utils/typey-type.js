@@ -853,7 +853,7 @@ function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
 // }
 
 function loadAppliedDictionariesConfig() {
-  let appliedDictionariesConfig = []; // ["name.json", "name2.json"]
+  let appliedDictionariesConfig = null; // ["name.json", "name2.json"]
 
   try {
     if (window.localStorage) {
@@ -869,9 +869,9 @@ function loadAppliedDictionariesConfig() {
   return appliedDictionariesConfig;
 }
 
-function loadPersonalDictionaries() {
-  let personalDictionaries = []; // [["name", {"OUTLINE": "translation}],[…]]
-  let appliedDictionariesConfig = []; // ["name.json", "name2.json"]
+function loadPersonalDictionariesFromLocalStorage() {
+  let personalDictionaries = null; // [["name", {"OUTLINE": "translation}],[…]]
+  let appliedDictionariesConfig = null; // ["name.json", "name2.json"]
 
   try {
     if (window.localStorage) {
@@ -973,6 +973,11 @@ function loadPersonalPreferences() {
 }
 
 function writePersonalPreferences(itemToStore, JSONToStore) {
+  if (!window.localStorage) {
+    console.log('Unable to write to local storage. Progress data will be lost.');
+    return;
+  }
+
   let stringToStore;
   if (itemToStore === 'topSpeedPersonalBest') {
     stringToStore = JSON.stringify({wpm: JSONToStore});
@@ -981,14 +986,19 @@ function writePersonalPreferences(itemToStore, JSONToStore) {
     stringToStore = JSON.stringify(JSONToStore);
   }
   try {
-    if (window.localStorage) {
-      window.localStorage.setItem(itemToStore, stringToStore);
-    } else {
-      console.log('Unable to write to local storage. Changes to User Settings and Met Words will be lost.');
-    }
+    window.localStorage.setItem(itemToStore, stringToStore);
   }
   catch(error) {
-    console.log('Unable to write to local storage. Changes to User Settings and Met Words will be lost.', error);
+    try {
+      if (window.localStorage) {
+        window.localStorage.removeItem('personalDictionaries');
+        window.localStorage.removeItem('appliedDictionariesConfig');
+        console.log('Unable to write to local storage. It may be full. Any personal dictionaries imported have been removed.', error);
+      }
+    }
+    catch {
+      console.log('Unable to write to local storage. Changes to User Settings and Met Words will be lost.', error);
+    }
   }
 }
 
@@ -1051,7 +1061,7 @@ function updateCapitalisationStrokesInNextItem(nextItem, lastWord) {
 export {
   createWordListFromMetWords,
   loadPersonalPreferences,
-  loadPersonalDictionaries,
+  loadPersonalDictionariesFromLocalStorage,
   loadAppliedDictionariesConfig,
   lookUpDictionaryInIndex,
   matchSplitText,

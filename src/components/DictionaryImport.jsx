@@ -35,7 +35,7 @@ class DictionaryImport extends Component {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
-    const localConfig = loadAppliedDictionariesConfig();
+    const localConfig = loadAppliedDictionariesConfig() || [];
     this.setState({listOfValidDictionariesImportedAndInConfig: localConfig});
   }
 
@@ -316,15 +316,31 @@ class DictionaryImport extends Component {
       importedDictionariesLoaded: false,
       importedDictionariesLoading: true
     });
+    // First, update state
+    this.props.updatePersonalDictionaries({
+      appliedDictionariesConfig: this.state.listOfValidDictionariesImportedAndInConfig,
+      validDictionaries: this.state.validDictionaries
+    });
 
+    // Second, update local storage
     try {
-      writePersonalPreferences('personalDictionaries', this.state.validDictionaries);
+      // Order matters here because personalDictionaries is more likely to fill up local storage and fail
+      // and when we try to write appliedDictionariesConfig it deletes personalDictionaries then happily
+      // adds appliedDictionariesConfig so we would end up with one inaccurate config file
       writePersonalPreferences('appliedDictionariesConfig', this.state.listOfValidDictionariesImportedAndInConfig);
+      writePersonalPreferences('personalDictionaries', this.state.validDictionaries);
     }
     catch (error) {
-      console.log(error);
-      writePersonalPreferences('personalDictionaries', []);
-      writePersonalPreferences('appliedDictionariesConfig', []);
+      console.log("Import failed: " + error);
+      // This could be because local storage is full so let's try again
+      try {
+        writePersonalPreferences('appliedDictionariesConfig', []);
+        writePersonalPreferences('personalDictionaries', []);
+      }
+      catch (error) {
+        // This could be because local storage is inaccessible or size set to 0
+        console.log("Second import failed: " + error);
+      }
     }
 
     let listOfValidDictionariesImportedAndInConfig = this.state.listOfValidDictionariesImportedAndInConfig;
@@ -335,7 +351,12 @@ class DictionaryImport extends Component {
       label: labelString
     });
 
-    this.props.fetchAndSetupGlobalDict(true)
+    const personalDictionaries = {
+      validDictionaries: this.state.validDictionaries,
+      appliedDictionariesConfig: this.state.listOfValidDictionariesImportedAndInConfig,
+    }
+
+    this.props.fetchAndSetupGlobalDict(true, personalDictionaries)
       .then(() => {
         this.setState({
           importedDictionariesLoaded: true,

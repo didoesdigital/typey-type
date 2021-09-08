@@ -16,7 +16,7 @@ const AsyncDictionaryImport = Loadable({
   delay: 300
 });
 
-const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDictionaryLoaded, globalLookupDictionaryLoaded, globalLookupDictionary, updateGlobalLookupDictionary, fetchAndSetupGlobalDict, ...dictionaryProps}) => {
+const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDictionaryLoaded, globalLookupDictionaryLoaded, globalLookupDictionary, personalDictionaries, updateGlobalLookupDictionary, updatePersonalDictionaries, fetchAndSetupGlobalDict, ...dictionaryProps}) => {
   return(
     <div>
       <Switch>
@@ -81,9 +81,11 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDict
             dictionaryIndex={dictionaryIndex}
             setDictionaryIndex={setDictionaryIndex}
             setGlobalDictionaryLoaded={setGlobalDictionaryLoaded}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
+            personalDictionaries={personalDictionaries}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updatePersonalDictionaries={updatePersonalDictionaries}
             {...dictionaryProps}
             {...props}
           />
@@ -95,7 +97,9 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDict
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            personalDictionaries={personalDictionaries}
             updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updatePersonalDictionaries={updatePersonalDictionaries}
             match={match}
             {...dictionaryProps}
             {...props}

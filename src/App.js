@@ -10,8 +10,7 @@ import {
   parseWordList,
   setupLessonProgress,
   loadPersonalPreferences,
-  loadPersonalDictionaries,
-  loadAppliedDictionariesConfig,
+  loadPersonalDictionariesFromLocalStorage,
   matchSplitText,
   parseLesson,
   removeWhitespaceAndSumUniqMetWords,
@@ -264,6 +263,10 @@ class App extends Component {
       lookupTerm: '',
       recommendationHistory: { currentStep: null },
       nextLessonPath: '',
+      personalDictionaries: {
+        appliedDictionariesConfig: null,
+        validDictionaries: null,
+      },
       previousCompletedPhraseAsTyped: '',
       repetitionsRemaining: 1,
       startTime: null,
@@ -347,10 +350,23 @@ class App extends Component {
   }
 
   // The withPlover flag here is just about whether or not to fetch the Plover dictionary file.
-  fetchAndSetupGlobalDict(withPlover) {
-    const [personalDictionaries, appliedDictionariesConfig] = loadPersonalDictionaries();
+  fetchAndSetupGlobalDict(withPlover, importedPersonalDictionaries) {
+    let personalDictionaries = null;
+    let appliedDictionariesConfig = null;
+    if (importedPersonalDictionaries && importedPersonalDictionaries.validDictionaries && importedPersonalDictionaries.appliedDictionariesConfig) {
+      personalDictionaries = importedPersonalDictionaries.validDictionaries;
+      appliedDictionariesConfig = importedPersonalDictionaries.appliedDictionariesConfig;
+    }
+    if (personalDictionaries === null || appliedDictionariesConfig === null) {
+      [personalDictionaries, appliedDictionariesConfig] = loadPersonalDictionariesFromLocalStorage();
+    }
+    if (personalDictionaries === null || appliedDictionariesConfig === null) {
+      personalDictionaries = [];
+      appliedDictionariesConfig = [];
+    }
+
     const namesOfValidImportedDictionaries = personalDictionaries.map(d => d[0]);
-    const localConfig = loadAppliedDictionariesConfig();
+    const localConfig = appliedDictionariesConfig;
     const previouslyAppliedConfig = this.state.globalLookupDictionary['configuration'];
     const globalLookupDictionaryMatchesConfig =
       this.state.globalLookupDictionary
@@ -972,7 +988,12 @@ class App extends Component {
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.state.userSettings) { stenoLayout = this.state.userSettings.stenoLayout; }
 
-    this.fetchAndSetupGlobalDict(false).then(() => {
+    const shouldUsePersonalDictionaries = this.state.personalDictionaries
+      && Object.entries(this.state.personalDictionaries).length > 0
+      && this.state.personalDictionaries.appliedDictionariesConfig
+      && this.state.personalDictionaries.validDictionaries;
+
+    this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWords).join("\n");
       // parseWordList appears to remove empty lines and other garbage, we might not need it here
@@ -1518,7 +1539,13 @@ class App extends Component {
           !path.includes("steno-party-tricks") &&
           !path.includes("collections/tech")
         ) {
-          this.fetchAndSetupGlobalDict(false).then(() => {
+
+          const shouldUsePersonalDictionaries = this.state.personalDictionaries
+            && Object.entries(this.state.personalDictionaries).length > 0
+            && this.state.personalDictionaries.appliedDictionariesConfig
+            && this.state.personalDictionaries.validDictionaries;
+
+          this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.state.personalDictionaries : null).then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
               lesson.presentedMaterial = lessonWordsAndStrokes;
@@ -1717,6 +1744,10 @@ class App extends Component {
       // }
       // window.setTimeout(focusAndSpeak.bind(this), 0);
     });
+  }
+
+  updatePersonalDictionaries(personalDictionaries) {
+    this.setState({personalDictionaries: personalDictionaries});
   }
 
   updateGlobalLookupDictionary(combinedLookupDictionary) {
@@ -2219,10 +2250,12 @@ class App extends Component {
                         globalUserSettings={this.state.globalUserSettings}
                         lessonpath="flashcards"
                         locationpathname={this.props.location.pathname}
+                        personalDictionaries={this.state.personalDictionaries}
                         stenoHintsOnTheFly={stenohintsonthefly}
                         updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
                         updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                        updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
                         userSettings={this.state.userSettings}
                       />
                     </DocumentTitle>
@@ -2242,8 +2275,10 @@ class App extends Component {
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                           globalUserSettings={this.state.globalUserSettings}
                           lookupTerm={this.state.lookupTerm}
+                          personalDictionaries={this.state.personalDictionaries}
                           stenoHintsOnTheFly={stenohintsonthefly}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                          updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
                           userSettings={this.state.userSettings}
                           {...props}
                         />
@@ -2265,8 +2300,10 @@ class App extends Component {
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
+                          personalDictionaries={this.state.personalDictionaries}
                           stenoHintsOnTheFly={stenohintsonthefly}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                          updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
                           userSettings={this.state.userSettings}
                           dictionaryIndex={this.state.dictionaryIndex}
                           {...props}
@@ -2293,7 +2330,9 @@ class App extends Component {
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
+                          personalDictionaries={this.state.personalDictionaries}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                          updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
                           lessonsProgress={this.state.lessonsProgress}
                           lessonNotFound={this.state.lessonNotFound}
                           fullscreen={this.state.fullscreen}
