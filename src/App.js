@@ -370,14 +370,14 @@ class App extends Component {
     const previouslyAppliedConfig = this.state.globalLookupDictionary['configuration'];
     const globalLookupDictionaryMatchesConfig =
       this.state.globalLookupDictionary
-      && this.state.globalLookupDictionary['configuration']
+      && !!this.state.globalLookupDictionary['configuration']
       && JSON.stringify(previouslyAppliedConfig) === JSON.stringify(localConfig);
 
     let localConfigPlusPlover = localConfig.slice(0);
     localConfigPlusPlover.push("plover-main-3-jun-2018.json"); // reminder: .push() returns length of array, not result
     const globalLookupDictionaryMatchesConfigWithPlover =
       this.state.globalLookupDictionary
-      && this.state.globalLookupDictionary['configuration']
+      && !!this.state.globalLookupDictionary['configuration']
       && JSON.stringify(previouslyAppliedConfig) === JSON.stringify(localConfigPlusPlover);
 
     let isPloverDictionaryLoaded = this.state.isPloverDictionaryLoaded;
@@ -990,8 +990,8 @@ class App extends Component {
 
     const shouldUsePersonalDictionaries = this.state.personalDictionaries
       && Object.entries(this.state.personalDictionaries).length > 0
-      && this.state.personalDictionaries.appliedDictionariesConfig
-      && this.state.personalDictionaries.validDictionaries;
+      && !!this.state.personalDictionaries.appliedDictionariesConfig
+      && !!this.state.personalDictionaries.validDictionaries;
 
     this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
@@ -1542,8 +1542,8 @@ class App extends Component {
 
           const shouldUsePersonalDictionaries = this.state.personalDictionaries
             && Object.entries(this.state.personalDictionaries).length > 0
-            && this.state.personalDictionaries.appliedDictionariesConfig
-            && this.state.personalDictionaries.validDictionaries;
+            && !!this.state.personalDictionaries.appliedDictionariesConfig
+            && !!this.state.personalDictionaries.validDictionaries;
 
           this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.state.personalDictionaries : null).then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
