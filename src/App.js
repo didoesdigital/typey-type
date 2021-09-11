@@ -263,7 +263,7 @@ class App extends Component {
       lookupTerm: '',
       recommendationHistory: { currentStep: null },
       nextLessonPath: '',
-      personalDictionaries: {
+      personalDictionariesAndConfig: {
         appliedDictionariesConfig: null,
         validDictionaries: null,
       },
@@ -988,12 +988,12 @@ class App extends Component {
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.state.userSettings) { stenoLayout = this.state.userSettings.stenoLayout; }
 
-    const shouldUsePersonalDictionaries = this.state.personalDictionaries
-      && Object.entries(this.state.personalDictionaries).length > 0
-      && !!this.state.personalDictionaries.appliedDictionariesConfig
-      && !!this.state.personalDictionaries.validDictionaries;
+    const shouldUsePersonalDictionaries = this.state.personalDictionariesAndConfig
+      && Object.entries(this.state.personalDictionariesAndConfig).length > 0
+      && !!this.state.personalDictionariesAndConfig.appliedDictionariesConfig
+      && !!this.state.personalDictionariesAndConfig.validDictionaries;
 
-    this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null).then(() => {
+    this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.props.personalDictionariesAndConfig : null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWords).join("\n");
       // parseWordList appears to remove empty lines and other garbage, we might not need it here
@@ -1540,12 +1540,12 @@ class App extends Component {
           !path.includes("collections/tech")
         ) {
 
-          const shouldUsePersonalDictionaries = this.state.personalDictionaries
-            && Object.entries(this.state.personalDictionaries).length > 0
-            && !!this.state.personalDictionaries.appliedDictionariesConfig
-            && !!this.state.personalDictionaries.validDictionaries;
+          const shouldUsePersonalDictionaries = this.state.personalDictionariesAndConfig
+            && Object.entries(this.state.personalDictionariesAndConfig).length > 0
+            && !!this.state.personalDictionariesAndConfig.appliedDictionariesConfig
+            && !!this.state.personalDictionariesAndConfig.validDictionaries;
 
-          this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.state.personalDictionaries : null).then(() => {
+          this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.state.personalDictionariesAndConfig : null).then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
               lesson.presentedMaterial = lessonWordsAndStrokes;
@@ -1746,8 +1746,8 @@ class App extends Component {
     });
   }
 
-  updatePersonalDictionaries(personalDictionaries) {
-    this.setState({personalDictionaries: personalDictionaries});
+  updatePersonalDictionariesAndConfig(personalDictionariesAndConfig) {
+    this.setState({personalDictionariesAndConfig: personalDictionariesAndConfig});
   }
 
   updateGlobalLookupDictionary(combinedLookupDictionary) {
@@ -2250,12 +2250,12 @@ class App extends Component {
                         globalUserSettings={this.state.globalUserSettings}
                         lessonpath="flashcards"
                         locationpathname={this.props.location.pathname}
-                        personalDictionaries={this.state.personalDictionaries}
+                        personalDictionariesAndConfig={this.state.personalDictionariesAndConfig}
                         stenoHintsOnTheFly={stenohintsonthefly}
                         updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
                         updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
-                        updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
+                        updatePersonalDictionariesAndConfig={this.updatePersonalDictionariesAndConfig.bind(this)}
                         userSettings={this.state.userSettings}
                       />
                     </DocumentTitle>
@@ -2275,10 +2275,10 @@ class App extends Component {
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                           globalUserSettings={this.state.globalUserSettings}
                           lookupTerm={this.state.lookupTerm}
-                          personalDictionaries={this.state.personalDictionaries}
+                          personalDictionariesAndConfig={this.state.personalDictionariesAndConfig}
                           stenoHintsOnTheFly={stenohintsonthefly}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
-                          updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
+                          updatePersonalDictionariesAndConfig={this.updatePersonalDictionariesAndConfig.bind(this)}
                           userSettings={this.state.userSettings}
                           {...props}
                         />
@@ -2300,10 +2300,10 @@ class App extends Component {
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
-                          personalDictionaries={this.state.personalDictionaries}
+                          personalDictionariesAndConfig={this.state.personalDictionariesAndConfig}
                           stenoHintsOnTheFly={stenohintsonthefly}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
-                          updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
+                          updatePersonalDictionariesAndConfig={this.updatePersonalDictionariesAndConfig.bind(this)}
                           userSettings={this.state.userSettings}
                           dictionaryIndex={this.state.dictionaryIndex}
                           {...props}
@@ -2330,9 +2330,9 @@ class App extends Component {
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
-                          personalDictionaries={this.state.personalDictionaries}
+                          personalDictionariesAndConfig={this.state.personalDictionariesAndConfig}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
-                          updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
+                          updatePersonalDictionariesAndConfig={this.updatePersonalDictionariesAndConfig.bind(this)}
                           lessonsProgress={this.state.lessonsProgress}
                           lessonNotFound={this.state.lessonNotFound}
                           fullscreen={this.state.fullscreen}

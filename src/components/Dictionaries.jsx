@@ -16,7 +16,7 @@ const AsyncDictionaryImport = Loadable({
   delay: 300
 });
 
-const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDictionaryLoaded, globalLookupDictionaryLoaded, globalLookupDictionary, personalDictionaries, updateGlobalLookupDictionary, updatePersonalDictionaries, fetchAndSetupGlobalDict, ...dictionaryProps}) => {
+const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDictionaryLoaded, globalLookupDictionaryLoaded, globalLookupDictionary, personalDictionariesAndConfig, updateGlobalLookupDictionary, updatePersonalDictionariesAndConfig, fetchAndSetupGlobalDict, ...dictionaryProps}) => {
   return(
     <div>
       <Switch>
@@ -83,9 +83,9 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDict
             setGlobalDictionaryLoaded={setGlobalDictionaryLoaded}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
-            personalDictionaries={personalDictionaries}
+            personalDictionariesAndConfig={personalDictionariesAndConfig}
             updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePersonalDictionariesAndConfig={updatePersonalDictionariesAndConfig}
             {...dictionaryProps}
             {...props}
           />
@@ -97,9 +97,9 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDict
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-            personalDictionaries={personalDictionaries}
+            personalDictionariesAndConfig={personalDictionariesAndConfig}
             updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePersonalDictionariesAndConfig={updatePersonalDictionariesAndConfig}
             match={match}
             {...dictionaryProps}
             {...props}

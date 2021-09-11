@@ -317,7 +317,7 @@ class DictionaryImport extends Component {
       importedDictionariesLoading: true
     });
     // First, update state
-    this.props.updatePersonalDictionaries({
+    this.props.updatePersonalDictionariesAndConfig({
       appliedDictionariesConfig: this.state.listOfValidDictionariesImportedAndInConfig,
       validDictionaries: this.state.validDictionaries
     });
@@ -351,12 +351,12 @@ class DictionaryImport extends Component {
       label: labelString
     });
 
-    const personalDictionaries = {
+    const personalDictionariesAndConfig = {
       validDictionaries: this.state.validDictionaries,
       appliedDictionariesConfig: this.state.listOfValidDictionariesImportedAndInConfig,
     }
 
-    this.props.fetchAndSetupGlobalDict(true, personalDictionaries)
+    this.props.fetchAndSetupGlobalDict(true, personalDictionariesAndConfig)
       .then(() => {
         this.setState({
           importedDictionariesLoaded: true,
