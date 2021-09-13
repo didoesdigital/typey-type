@@ -527,9 +527,9 @@ class DictionaryImport extends Component {
               <ul>
                 <li>You cannot use duplicate dictionary names e.g. if you have <code>../good/dict.json</code> and <code>../bad/dict.json</code>, Typey&nbsp;Type will see them both as <code>dict.json</code> and panic.</li>
                 <li>This only works with JSON files. You cannot upload Python or RTF dictionaries.</li>
-                <li>This only works with Plover config files. This config file decides the order of dictionaries for overwriting entries.</li>
+                <li>This only works with Plover config files. This config file may decide the order of dictionaries for overwriting entries.</li>
                 <li>This assumes you're using a newer version of Plover where the config file is in a certain format and the most important dictionary appears first. Or is it last?</li>
-                <li>Local storage typically only holds about 5MB of data. If you have a bigger dictionary, you'll break Typey&nbsp;Type.</li>
+                <li>Local storage typically only holds about 5MB of data. If you have a bigger dictionary, you'll have to upload it again on every visit.</li>
                 <li>If you upload multiple dictionaries with the same steno outline (JSON key) with different translations (JSON values), Typey&nbsp;Type will happily show the same outline as a hint for each of the words (or phrases), even though your configuration would prevent using both.</li>
                 <li>The Writer feature will ignore your personal dictionaries entirely and show only Typey&nbsp;Type translations.</li>
               </ul>
