@@ -1364,6 +1364,11 @@ label {
       cursor: default;
     }
   }
+
+  &.button--danger {
+    background-color: $brand-danger;
+    color: add-tint($brand-danger, 90%);
+  }
 }
 
 .button-that-looks-like-a-link {

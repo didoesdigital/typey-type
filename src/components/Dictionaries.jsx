@@ -10,8 +10,8 @@ const AsyncDictionary = Loadable({
   delay: 300
 });
 
-const AsyncDictionaryImport = Loadable({
-  loader: () => import("./DictionaryImport"),
+const AsyncDictionaryManagement = Loadable({
+  loader: () => import("./DictionaryManagement"),
   loading: PageLoading,
   delay: 300
 });
@@ -76,8 +76,8 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDict
             {...props}
           />
         } />
-        <Route exact={true} path={`${match.url}/import`} render={ (props) =>
-          <AsyncDictionaryImport
+        <Route exact={true} path={`${match.url}/management`} render={ (props) =>
+          <AsyncDictionaryManagement
             dictionaryIndex={dictionaryIndex}
             setDictionaryIndex={setDictionaryIndex}
             setGlobalDictionaryLoaded={setGlobalDictionaryLoaded}

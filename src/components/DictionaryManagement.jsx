@@ -5,12 +5,12 @@ import GoogleAnalytics from 'react-ga';
 import Notification from './Notification';
 import {
   getListOfValidDictionariesImportedAndInConfig,
-} from './../utils/transformingDictionaries';
+} from '../utils/transformingDictionaries';
 import PseudoContentButton from './PseudoContentButton';
-import { writePersonalPreferences } from './../utils/typey-type';
-import { loadAppliedDictionariesConfig } from './../utils/typey-type';
+import { writePersonalPreferences } from '../utils/typey-type';
+import { loadAppliedDictionariesConfig } from '../utils/typey-type';
 
-class DictionaryImport extends Component {
+class DictionaryManagement extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -439,7 +439,7 @@ class DictionaryImport extends Component {
     if (this.state.validDictionaries && this.state.validDictionaries.length > 0) {
       showYourDictionaries = (
         <React.Fragment>
-          {this.state.validDictionaries.length === 1 ? <p>Your imported dictionary:</p> : <p>Your imported dictionaries:</p>}
+          {this.state.validDictionaries.length === 1 ? <p>Your added dictionary:</p> : <p>Your added dictionaries:</p>}
           <ul className="wrap">
             {validDictionaryList}
           </ul>
@@ -461,7 +461,7 @@ class DictionaryImport extends Component {
     if (this.state.validConfig && this.state.validConfig.length > 4) { // '.cfg' is 4 characters
       showYourConfig = (
         <React.Fragment>
-          <p className="wrap">Your imported dictionary config ({this.state.validConfig}) contains these dictionaries:</p>
+          <p className="wrap">Your added dictionary config ({this.state.validConfig}) contains these dictionaries:</p>
           <ul className="wrap unstyled-list">
             {validDictionariesListedInConfig}
           </ul>
@@ -481,7 +481,7 @@ class DictionaryImport extends Component {
     let notificationBody;
     switch (this.state.dictionaryErrorNotification) {
       case 'AddToStorageFailed':
-        notificationBody = <p>Your local storage is full so your dictionaries won't fit. Typey&nbsp;Type will still use them today but the next time you visit, you’ll have to upload your dictionaries again. For help, email <a href="mailto:typeytype@didoesdigital.com" target="_blank" rel="noopener noreferrer">typeytype@didoesdigital.com</a></p>;
+        notificationBody = <p>Your local storage is full so your dictionaries won't fit. Typey&nbsp;Type will still use them today but the next time you visit, you’ll have to add your dictionaries again. For help, email <a href="mailto:typeytype@didoesdigital.com" target="_blank" rel="noopener noreferrer">typeytype@didoesdigital.com</a></p>;
         break;
 
       case 'WriteToStorageFailed':
@@ -502,7 +502,7 @@ class DictionaryImport extends Component {
     }
 
     return (
-      <DocumentTitle title={'Typey Type | Dictionary import'}>
+      <DocumentTitle title={'Typey Type | Dictionary management'}>
         <main id="main">
           { this.state.dictionaryErrorNotification ?
             <Notification onDismiss={this.dismissDictionaryErrorNotification.bind(this)}>
@@ -515,22 +515,22 @@ class DictionaryImport extends Component {
             <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
               <div className="flex mr1 self-center">
                 <header className="flex items-center min-h-40">
-                  <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Dictionary import</h2>
+                  <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Dictionary management</h2>
                 </header>
               </div>
             </div>
           </div>
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
-              <h3>Dictionary management</h3>
+              <h3>Dictionary management experiment</h3>
               <p>This feature is experimental! There are some known limitations:</p>
               <ul>
                 <li>You cannot use duplicate dictionary names e.g. if you have <code>../good/dict.json</code> and <code>../bad/dict.json</code>, Typey&nbsp;Type will see them both as <code>dict.json</code> and panic.</li>
-                <li>This only works with JSON files. You cannot upload Python or RTF dictionaries.</li>
+                <li>This only works with JSON files. You cannot add Python or RTF dictionaries.</li>
                 <li>This only works with Plover config files. This config file may decide the order of dictionaries for overwriting entries.</li>
                 <li>This assumes you're using a newer version of Plover where the config file is in a certain format and the most important dictionary appears first. Or is it last?</li>
-                <li>Local storage typically only holds about 5MB of data. If you have a bigger dictionary, you'll have to upload it again on every visit.</li>
-                <li>If you upload multiple dictionaries with the same steno outline (JSON key) with different translations (JSON values), Typey&nbsp;Type will happily show the same outline as a hint for each of the words (or phrases), even though your configuration would prevent using both.</li>
+                <li>Local storage typically only holds about 5MB of data. If you have a bigger dictionary, you'll have to add it again on every visit.</li>
+                <li>If you add multiple dictionaries with the same steno outline (JSON key) with different translations (JSON values), Typey&nbsp;Type will happily show the same outline as a hint for each of the words (or phrases), even though your configuration would prevent using both.</li>
                 <li>The Writer feature will ignore your personal dictionaries entirely and show only Typey&nbsp;Type translations.</li>
               </ul>
             </div>
@@ -563,32 +563,32 @@ class DictionaryImport extends Component {
                   {showDictionaryErrors}
                   {showYourConfig}
                   {showConfigErrors}
+                  <form className="mt3 mb3" onSubmit={this.handleOnSubmitClear.bind(this)}>
+                    <div>
+                      <button type="submit" className="button button--danger mt1">Clear dictionaries and config</button>
+                    </div>
+                  </form>
                 </div>
                 <div className="mw-384 w-336">
-                  <h3>Import</h3>
+                  <h3>Add files</h3>
                   <form className="mb3" onSubmit={this.handleOnSubmit.bind(this)}>
                     <div className="dib">
-                      <label className="mb1" htmlFor="dictionariesFileInput">Import dictionaries in JSON format</label>
+                      <label className="mb1" htmlFor="dictionariesFileInput">Add dictionaries in JSON format</label>
+                      <p className="text-small mb1">You can add one dictionary after another using this form.</p>
                       <input type="file" id="dictionariesFileInput" name="dictionary" className="form-control" multiple />
                     </div>
                     <div>
-                      <button type="submit" className="button mt1">Import dictionaries</button>
+                      <button type="submit" className="button mt1">Add dictionaries</button>
                     </div>
                   </form>
 
                   <form className="mb3" onSubmit={this.handleOnSubmitConfig.bind(this)}>
                     <div className="dib">
-                      <label className="mb1" htmlFor="dictionaryConfigFileInput">Import config</label>
+                      <label className="mb1" htmlFor="dictionaryConfigFileInput">Add config</label>
                       <input type="file" id="dictionaryConfigFileInput" name="dictionaryConfig" className="form-control" multiple />
                     </div>
                     <div>
-                      <button type="submit" className="button mt1">Import config</button>
-                    </div>
-                  </form>
-
-                  <form className="mb3" onSubmit={this.handleOnSubmitClear.bind(this)}>
-                    <div>
-                      <button type="submit" className="button mt1">Clear dictionaries and config</button>
+                      <button type="submit" className="button mt1">Add config</button>
                     </div>
                   </form>
                 </div>
@@ -601,4 +601,4 @@ class DictionaryImport extends Component {
   }
 }
 
-export default DictionaryImport;
+export default DictionaryManagement;

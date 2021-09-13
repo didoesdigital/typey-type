@@ -1354,6 +1354,10 @@ label {
       color: #ece9ee;
       background-color: #b0b0b0;
       cursor: default; }
+  .button.button--danger,
+  .link-button.button--danger {
+    background-color: #953159;
+    color: #f4eaee; }
 
 .button-that-looks-like-a-link {
   background-color: transparent;

@@ -209,8 +209,8 @@ class DictionariesIndex extends Component {
             <h3 className="mt3">Custom dictionaries</h3>
             {this.props.globalUserSettings && this.props.globalUserSettings.experiments && !!this.props.globalUserSettings.experiments.stenohintsonthefly ?
               <>
-                <p>To see your own stroke hints in lessons and lookups, <Link to="/dictionaries/import">import your dictionaries</Link>.</p>
-                <p><Link to="/dictionaries/import" className="link-button dib mt2" style={{lineHeight: 2}} id="ga--dictionaries-index--import-dictionaries">Import your dictionaries</Link></p>
+                <p>To see your own stroke hints in lessons, <Link to="/dictionaries/management">add your dictionaries</Link>.</p>
+                <p><Link to="/dictionaries/management" className="link-button dib mt1" style={{lineHeight: 2}} id="ga--dictionaries-index--add-dictionaries">Add your dictionaries</Link></p>
               </>
               :
                 null
