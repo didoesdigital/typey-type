@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/browser';
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
@@ -16,7 +17,7 @@ class DictionaryImport extends Component {
       selectedFiles: null,
       importedDictionariesLoaded: false,
       importedDictionariesLoading: false,
-      showDictionaryErrorNotification: false,
+      dictionaryErrorNotification: null,
       listOfValidDictionariesImportedAndInConfig: ["typey-type.json"],
       combinedLookupDictionary: {},
       validDictionaries: [],
@@ -283,12 +284,24 @@ class DictionaryImport extends Component {
   handleOnSubmitClear(event) {
     event.preventDefault();
 
-    writePersonalPreferences('personalDictionaries', []);
-    writePersonalPreferences('appliedDictionariesConfig', []);
+    let writeConfigError = writePersonalPreferences('appliedDictionariesConfig', []);
+    if (writeConfigError) {
+      console.log(writeConfigError);
+      if (writeConfigError.error) {
+        Sentry.captureException(writeConfigError.error, { extra: writeConfigError.message });
+      }
+    }
+    let writeDictionariesError = writePersonalPreferences('personalDictionaries', []);
+    if (writeDictionariesError) {
+      console.log(writeDictionariesError);
+      if (writeDictionariesError.error) {
+        Sentry.captureException(writeDictionariesError.error, { extra: writeDictionariesError.message });
+      }
+    }
 
     this.setState({
       importedDictionariesLoading: false,
-      showDictionaryErrorNotification: false,
+      dictionaryErrorNotification: false,
       listOfValidDictionariesImportedAndInConfig: ["typey-type.json"],
       combinedLookupDictionary: {},
       validDictionaries: [],
@@ -316,6 +329,7 @@ class DictionaryImport extends Component {
       importedDictionariesLoaded: false,
       importedDictionariesLoading: true
     });
+
     // First, update state
     this.props.updatePersonalDictionariesAndConfig({
       appliedDictionariesConfig: this.state.listOfValidDictionariesImportedAndInConfig,
@@ -323,23 +337,25 @@ class DictionaryImport extends Component {
     });
 
     // Second, update local storage
-    try {
-      // Order matters here because personalDictionaries is more likely to fill up local storage and fail
-      // and when we try to write appliedDictionariesConfig it deletes personalDictionaries then happily
-      // adds appliedDictionariesConfig so we would end up with one inaccurate config file
-      writePersonalPreferences('appliedDictionariesConfig', this.state.listOfValidDictionariesImportedAndInConfig);
-      writePersonalPreferences('personalDictionaries', this.state.validDictionaries);
-    }
-    catch (error) {
-      console.log("Import failed: " + error);
-      // This could be because local storage is full so let's try again
-      try {
-        writePersonalPreferences('appliedDictionariesConfig', []);
-        writePersonalPreferences('personalDictionaries', []);
+    //
+    // Order matters here because personalDictionaries is more likely to fill up local storage and fail
+    // and when we try to write appliedDictionariesConfig it deletes personalDictionaries then happily
+    // adds appliedDictionariesConfig so we would end up with one inaccurate config file
+    let writeConfigError = writePersonalPreferences('appliedDictionariesConfig', this.state.listOfValidDictionariesImportedAndInConfig);
+    if (writeConfigError) {
+      this.showDictionaryErrorNotification(writeConfigError.name);
+      if (writeConfigError.error) {
+        Sentry.captureException(writeConfigError.error, { extra: writeConfigError.message });
       }
-      catch (error) {
-        // This could be because local storage is inaccessible or size set to 0
-        console.log("Second import failed: " + error);
+    }
+    else {
+      let writeDictionariesError = writePersonalPreferences('personalDictionaries', this.state.validDictionaries);
+      if (writeDictionariesError) {
+        this.showDictionaryErrorNotification(writeDictionariesError.name);
+
+        if (writeDictionariesError.error) {
+          Sentry.captureException(writeDictionariesError.error, { extra: writeDictionariesError.message });
+        }
       }
     }
 
@@ -365,7 +381,7 @@ class DictionaryImport extends Component {
       })
       .catch(error => {
         console.error(error);
-        this.showDictionaryErrorNotification();
+        this.showDictionaryErrorNotification('FetchAndSetupGlobalDictFailed');
         this.setState({
           importedDictionariesLoaded: false,
           importedDictionariesLoading: false
@@ -374,14 +390,18 @@ class DictionaryImport extends Component {
     this.props.setAnnouncementMessageString('Applied!');
   }
 
-  showDictionaryErrorNotification() {
-    this.props.setAnnouncementMessageString('Unable to load dictionary');
-    this.setState({showDictionaryErrorNotification: true});
+  showDictionaryErrorNotification(name) {
+    this.props.setAnnouncementMessageString('Unable to save dictionaries. See the message at the top of the page for more details.');
+    this.setState({
+      dictionaryErrorNotification: name || null
+    });
   }
 
   dismissDictionaryErrorNotification() {
     this.props.setAnnouncementMessageString('');
-    this.setState({showDictionaryErrorNotification: false});
+    this.setState({
+      dictionaryErrorNotification: null
+    });
   }
 
   render() {
@@ -458,12 +478,35 @@ class DictionaryImport extends Component {
       );
     }
 
+    let notificationBody;
+    switch (this.state.dictionaryErrorNotification) {
+      case 'AddToStorageFailed':
+        notificationBody = <p>Your local storage is full so your dictionaries won't fit. Typey&nbsp;Type will still use them today but the next time you visit, you’ll have to upload your dictionaries again. For help, email <a href="mailto:typeytype@didoesdigital.com" target="_blank" rel="noopener noreferrer">typeytype@didoesdigital.com</a></p>;
+        break;
+
+      case 'WriteToStorageFailed':
+        notificationBody = <p>Typey&nbsp;Type couldn’t update your local storage. Check your settings. It might also be full. Any changes to personal preferences and progress will be lost.</p>;
+        break;
+
+      case 'NoLocalStorage':
+        notificationBody = <p>Local storage is unavailable. Check your settings and permissions or try another browser. Changes to personal preferences and progress will be lost.</p>;
+        break;
+
+      case 'FetchAndSetupGlobalDictFailed':
+        notificationBody = <p>Typey&nbsp;Type couldn’t set up a global dictionary using your personal dictionaries. For help, email <a href="mailto:typeytype@didoesdigital.com" target="_blank" rel="noopener noreferrer">typeytype@didoesdigital.com</a></p>;
+        break;
+
+      default:
+        notificationBody = ''
+        break;
+    }
+
     return (
       <DocumentTitle title={'Typey Type | Dictionary import'}>
         <main id="main">
-          { this.state.showDictionaryErrorNotification ?
+          { this.state.dictionaryErrorNotification ?
             <Notification onDismiss={this.dismissDictionaryErrorNotification.bind(this)}>
-              Warning: Unable to load dictionary
+              {notificationBody}
             </Notification>
               :
             null

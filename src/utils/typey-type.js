@@ -975,7 +975,10 @@ function loadPersonalPreferences() {
 function writePersonalPreferences(itemToStore, JSONToStore) {
   if (!window.localStorage) {
     console.log('Unable to write to local storage. Progress data will be lost.');
-    return;
+    return {
+      name: "NoLocalStorage",
+      message: "Local storage is unavailable. Changes to personal preferences and progress will be lost.",
+    }
   }
 
   let stringToStore;
@@ -985,19 +988,30 @@ function writePersonalPreferences(itemToStore, JSONToStore) {
   else {
     stringToStore = JSON.stringify(JSONToStore);
   }
+
   try {
     window.localStorage.setItem(itemToStore, stringToStore);
   }
   catch(error) {
     try {
-      if (window.localStorage) {
-        window.localStorage.removeItem('personalDictionaries');
-        window.localStorage.removeItem('appliedDictionariesConfig');
-        console.log('Unable to write to local storage. It may be full. Any personal dictionaries imported have been removed.', error);
+      window.localStorage.removeItem('personalDictionaries');
+      window.localStorage.removeItem('appliedDictionariesConfig');
+      // TODO: instead of logging here, we could handle the returned error result everywhere that this is called
+      console.log('Unable to write to local storage. It may be full. Any personal dictionaries imported have been removed.', error);
+      return {
+        name: "AddToStorageFailed",
+        message: "Unable to set item in local storage. It may be full. Any personal dictionaries imported have been removed.",
+        error: error
       }
     }
     catch {
-      console.log('Unable to write to local storage. Changes to User Settings and Met Words will be lost.', error);
+      // TODO: instead of logging here, we could handle the returned error result everywhere that this is called
+      console.log('Unable to set or remove items from local storage. Changes to User Settings and Met Words will be lost.', error);
+      return {
+        name: "WriteToStorageFailed",
+        message: "Unable to set or remove items from local storage. Changes to User Settings and Met Words will be lost.",
+        error: error
+      }
     }
   }
 }
