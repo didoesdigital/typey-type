@@ -17,7 +17,7 @@ class Notification extends Component {
     });
   }
 
-  handleDismiss(event) {
+  handleDismiss() {
     if (this.props.onDismiss) {
       this.setState({
         showNotification: false
