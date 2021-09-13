@@ -36,7 +36,7 @@ class Notification extends Component {
     return (
       <div>
         { this.state.showNotification ?
-          <div className="notification notification--global flex flex-wrap justify-between pa1 p1 p3 pa3 items-center bg-danger">
+          <div className="notification notification--global flex wrap justify-between pa1 p1 p3 pa3 items-center bg-danger">
             <div className="notification__message">
               {this.props.children}
             </div>
