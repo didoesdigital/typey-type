@@ -233,6 +233,16 @@ class DictionariesIndex extends Component {
             </div>
           </div>
           <div className="mt1 mw-336 flex-grow">
+            <h3 className="mt3">Custom dictionaries</h3>
+            {this.props.globalUserSettings && this.props.globalUserSettings.experiments && !!this.props.globalUserSettings.experiments.stenohintsonthefly ?
+              <>
+                <p>To see your own stroke hints in lessons and lookups, <Link to="/dictionaries/import">import your dictionaries</Link>.</p>
+                <p><Link to="/dictionaries/import" className="link-button dib mt2" style={{lineHeight: 2}} id="ga--dictionaries-index--import-dictionaries">Import your dictionaries</Link></p>
+              </>
+              :
+                null
+            }
+
             <StrokesForWords
               fetchAndSetupGlobalDict={this.props.fetchAndSetupGlobalDict}
               globalLookupDictionary={this.props.globalLookupDictionary}

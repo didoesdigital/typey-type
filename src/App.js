@@ -2300,6 +2300,7 @@ class App extends Component {
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
+                          globalUserSettings={this.state.globalUserSettings}
                           personalDictionariesAndConfig={this.state.personalDictionariesAndConfig}
                           stenoHintsOnTheFly={stenohintsonthefly}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
