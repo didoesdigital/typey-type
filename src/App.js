@@ -361,8 +361,8 @@ class App extends Component {
       [personalDictionaries, appliedDictionariesConfig] = loadPersonalDictionariesFromLocalStorage();
     }
     if (personalDictionaries === null || appliedDictionariesConfig === null) {
-      personalDictionaries = [];
-      appliedDictionariesConfig = [];
+      personalDictionaries = ['typey-type.json'];
+      appliedDictionariesConfig = ['typey-type.json'];
     }
 
     const namesOfValidImportedDictionaries = personalDictionaries.map(d => d[0]);
