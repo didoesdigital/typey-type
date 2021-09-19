@@ -530,12 +530,18 @@ class DictionaryManagement extends Component {
               <div className="mw-568 mr3 flex-grow">
                 <h3>Dictionaries used for lookup</h3>
 
-                <p>Typey&nbsp;Type will use these dictionaries for brief hints:</p>
-                <ul>
-                  <li>Typey Type's dictionaries</li>
-                  {dictionariesTypeyTypeWillUse}
-                  <li>… and for Lookup, Plover's latest dictionary too</li>
-                </ul>
+                { this.props.globalLookupDictionary && this.props.globalLookupDictionary['configuration'] ?
+                  <>
+                    <p>Typey&nbsp;Type will use these dictionaries for brief hints:</p>
+                    <ul>
+                      <li>Typey Type's dictionaries</li>
+                      {dictionariesTypeyTypeWillUse}
+                      <li>… and for Lookup, Plover's latest dictionary too</li>
+                    </ul>
+                  </>
+                  :
+                  <p>No dictionaries have been loaded yet because this page doesn't need to show any strokes.</p>
+                }
                 <form className="mb3" onSubmit={this.handleOnSubmitApplyChanges.bind(this)}>
                   <p>
                     <PseudoContentButton type="submit" className="pseudo-text--applied button mt1">Apply</PseudoContentButton>
