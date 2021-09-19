@@ -85,6 +85,14 @@ class DictionaryManagement extends Component {
               throw new Error("This dictionary name conflicts with an existing dictionary. You may have imported it already.");
             }
 
+            if (dictName === "typey-type.json") {
+              throw new Error("This dictionary looks like a copy of Typey Type's so we'll exclude it for now.");
+            }
+
+            if (dictName === "plover-main-3-jun-2018.json") {
+              throw new Error("This dictionary looks like a copy of Plover's latest dictionary so we'll exclude it for now.");
+            }
+
             let parsedDictionary = JSON.parse(text);
 
             if (parsedDictionary.constructor !== {}.constructor) {
