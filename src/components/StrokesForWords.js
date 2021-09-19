@@ -31,7 +31,6 @@ class StrokesForWords extends Component {
 
     const shouldUsePersonalDictionaries = this.props.personalDictionariesAndConfig
       && Object.entries(this.props.personalDictionariesAndConfig).length > 0
-      && !!this.props.personalDictionariesAndConfig.appliedDictionariesConfig
       && !!this.props.personalDictionariesAndConfig.validDictionaries;
 
     this.props.fetchAndSetupGlobalDict(true, shouldUsePersonalDictionaries ? this.props.personalDictionariesAndConfig : null).then(() => {

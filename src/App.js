@@ -264,7 +264,6 @@ class App extends Component {
       recommendationHistory: { currentStep: null },
       nextLessonPath: '',
       personalDictionariesAndConfig: {
-        appliedDictionariesConfig: null,
         validDictionaries: null,
       },
       previousCompletedPhraseAsTyped: '',
@@ -352,20 +351,18 @@ class App extends Component {
   // The withPlover flag here is just about whether or not to fetch the Plover dictionary file.
   fetchAndSetupGlobalDict(withPlover, importedPersonalDictionaries) {
     let personalDictionaries = null;
-    let appliedDictionariesConfig = null;
-    if (importedPersonalDictionaries && importedPersonalDictionaries.validDictionaries && importedPersonalDictionaries.appliedDictionariesConfig) {
+    let _;
+    if (importedPersonalDictionaries && importedPersonalDictionaries.validDictionaries) {
       personalDictionaries = importedPersonalDictionaries.validDictionaries;
-      appliedDictionariesConfig = importedPersonalDictionaries.appliedDictionariesConfig;
     }
-    if (personalDictionaries === null || appliedDictionariesConfig === null) {
-      [personalDictionaries, appliedDictionariesConfig] = loadPersonalDictionariesFromLocalStorage();
+    if (personalDictionaries === null) {
+      [personalDictionaries, _] = loadPersonalDictionariesFromLocalStorage();
     }
-    if (personalDictionaries === null || appliedDictionariesConfig === null) {
+    if (personalDictionaries === null) {
       personalDictionaries = [];
-      appliedDictionariesConfig = [];
     }
 
-    const localConfig = appliedDictionariesConfig;
+    const localConfig = personalDictionaries.map(d => d[0]);
 
     // TODO: this will all need to change when we change how Typey Type is included or excluded in
     // personal dictionary usage…
@@ -412,8 +409,7 @@ class App extends Component {
         //   dictAndMisstrokes[1] = {};
         // }
 
-        const namesOfValidImportedDictionaries = personalDictionaries.map(d => d[0]);
-        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(appliedDictionariesConfig, personalDictionaries, namesOfValidImportedDictionaries, typeyDictAndMisstrokes, withPlover ? latestPloverDict : null);
+        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, typeyDictAndMisstrokes, withPlover ? latestPloverDict : null);
         // let t1 = performance.now();
         // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
 
@@ -993,7 +989,6 @@ class App extends Component {
 
     const shouldUsePersonalDictionaries = this.state.personalDictionariesAndConfig
       && Object.entries(this.state.personalDictionariesAndConfig).length > 0
-      && !!this.state.personalDictionariesAndConfig.appliedDictionariesConfig
       && !!this.state.personalDictionariesAndConfig.validDictionaries;
 
     this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.props.personalDictionariesAndConfig : null).then(() => {
@@ -1545,7 +1540,6 @@ class App extends Component {
 
           const shouldUsePersonalDictionaries = this.state.personalDictionariesAndConfig
             && Object.entries(this.state.personalDictionariesAndConfig).length > 0
-            && !!this.state.personalDictionariesAndConfig.appliedDictionariesConfig
             && !!this.state.personalDictionariesAndConfig.validDictionaries;
 
           this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.state.personalDictionariesAndConfig : null).then(() => {

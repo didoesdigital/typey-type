@@ -4,11 +4,10 @@ import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
 import Notification from './Notification';
 import {
-  getListOfValidDictionariesImportedAndInConfig,
+  getListOfValidDictionariesAddedAndInConfig,
 } from '../utils/transformingDictionaries';
 import PseudoContentButton from './PseudoContentButton';
 import { writePersonalPreferences } from '../utils/typey-type';
-import { loadAppliedDictionariesConfig } from '../utils/typey-type';
 
 class DictionaryManagement extends Component {
   constructor(props) {
@@ -18,7 +17,7 @@ class DictionaryManagement extends Component {
       importedDictionariesLoaded: false,
       importedDictionariesLoading: false,
       dictionaryErrorNotification: null,
-      listOfValidDictionariesImportedAndInConfig: [],
+      dictionariesTypeyTypeWillUse: [],
       combinedLookupDictionary: {},
       validDictionaries: [],
       invalidDictionaries: [],
@@ -36,8 +35,12 @@ class DictionaryManagement extends Component {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
-    const localConfig = loadAppliedDictionariesConfig() || [];
-    this.setState({listOfValidDictionariesImportedAndInConfig: localConfig});
+    let config = [];
+    if (this.props.globalLookupDictionary && this.props.globalLookupDictionary['configuration']) {
+      config = this.props.globalLookupDictionary['configuration'];
+      config = config.filter(dictName => dictName !== "typey-type.json" && dictName !== "plover-main-3-jun-2018.json");
+    }
+    this.setState({dictionariesTypeyTypeWillUse: config});
   }
 
   // maxSelectFile(event) {
@@ -130,10 +133,10 @@ class DictionaryManagement extends Component {
             return dictionary[0];
           });
 
-          let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(this.state.validDictionariesListedInConfig, validDictionaries, this.state.namesOfValidImportedDictionaries);
+          let dictionariesTypeyTypeWillUse = getListOfValidDictionariesAddedAndInConfig(this.state.validDictionariesListedInConfig, namesOfValidImportedDictionaries);
 
           this.setState({
-            listOfValidDictionariesImportedAndInConfig: listOfValidDictionariesImportedAndInConfig,
+            dictionariesTypeyTypeWillUse: dictionariesTypeyTypeWillUse,
             namesOfValidImportedDictionaries: namesOfValidImportedDictionaries,
             validDictionaries: validDictionaries,
             invalidDictionaries: invalidDictionaries
@@ -217,10 +220,10 @@ class DictionaryManagement extends Component {
           invalidConfig = [configName, error.message];
         }
 
-        let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, this.state.validDictionaries, this.state.namesOfValidImportedDictionaries);
+        let dictionariesTypeyTypeWillUse = getListOfValidDictionariesAddedAndInConfig(validDictionariesListedInConfig, this.state.namesOfValidImportedDictionaries);
 
         this.setState({
-          listOfValidDictionariesImportedAndInConfig: listOfValidDictionariesImportedAndInConfig,
+          dictionariesTypeyTypeWillUse: dictionariesTypeyTypeWillUse,
           validConfig: validConfig,
           validDictionariesListedInConfig: validDictionariesListedInConfig,
           invalidConfig: invalidConfig
@@ -292,13 +295,6 @@ class DictionaryManagement extends Component {
   handleOnSubmitClear(event) {
     event.preventDefault();
 
-    let writeConfigError = writePersonalPreferences('appliedDictionariesConfig', []);
-    if (writeConfigError) {
-      console.log(writeConfigError);
-      if (writeConfigError.error) {
-        Sentry.captureException(writeConfigError.error, { extra: writeConfigError.message });
-      }
-    }
     let writeDictionariesError = writePersonalPreferences('personalDictionaries', []);
     if (writeDictionariesError) {
       console.log(writeDictionariesError);
@@ -310,7 +306,7 @@ class DictionaryManagement extends Component {
     this.setState({
       importedDictionariesLoading: false,
       dictionaryErrorNotification: false,
-      listOfValidDictionariesImportedAndInConfig: [],
+      dictionariesTypeyTypeWillUse: [],
       combinedLookupDictionary: {},
       validDictionaries: [],
       invalidDictionaries: [],
@@ -340,35 +336,22 @@ class DictionaryManagement extends Component {
 
     // First, update state
     this.props.updatePersonalDictionariesAndConfig({
-      appliedDictionariesConfig: this.state.listOfValidDictionariesImportedAndInConfig,
       validDictionaries: this.state.validDictionaries
     });
 
     // Second, update local storage
-    //
-    // Order matters here because personalDictionaries is more likely to fill up local storage and fail
-    // and when we try to write appliedDictionariesConfig it deletes personalDictionaries then happily
-    // adds appliedDictionariesConfig so we would end up with one inaccurate config file
-    let writeConfigError = writePersonalPreferences('appliedDictionariesConfig', this.state.listOfValidDictionariesImportedAndInConfig);
-    if (writeConfigError) {
-      this.showDictionaryErrorNotification(writeConfigError.name);
-      if (writeConfigError.error) {
-        Sentry.captureException(writeConfigError.error, { extra: writeConfigError.message });
-      }
-    }
-    else {
-      let writeDictionariesError = writePersonalPreferences('personalDictionaries', this.state.validDictionaries);
-      if (writeDictionariesError) {
-        this.showDictionaryErrorNotification(writeDictionariesError.name);
+    let writeDictionariesError = writePersonalPreferences('personalDictionaries', this.state.validDictionaries);
+    if (writeDictionariesError) {
+      this.showDictionaryErrorNotification(writeDictionariesError.name);
 
-        if (writeDictionariesError.error) {
-          Sentry.captureException(writeDictionariesError.error, { extra: writeDictionariesError.message });
-        }
+      if (writeDictionariesError.error) {
+        Sentry.captureException(writeDictionariesError.error, { extra: writeDictionariesError.message });
       }
     }
 
-    let listOfValidDictionariesImportedAndInConfig = this.state.listOfValidDictionariesImportedAndInConfig;
-    let labelString = listOfValidDictionariesImportedAndInConfig || 'No files for config';
+    let dictionariesTypeyTypeWillUse = this.state.dictionariesTypeyTypeWillUse;
+
+    let labelString = dictionariesTypeyTypeWillUse || 'No files for config';
     GoogleAnalytics.event({
       category: 'Apply dictionary changes',
       action: 'Click apply button',
@@ -377,7 +360,6 @@ class DictionaryManagement extends Component {
 
     const personalDictionariesAndConfig = {
       validDictionaries: this.state.validDictionaries,
-      appliedDictionariesConfig: this.state.listOfValidDictionariesImportedAndInConfig,
     }
 
     this.props.fetchAndSetupGlobalDict(true, personalDictionariesAndConfig)
@@ -413,7 +395,7 @@ class DictionaryManagement extends Component {
   }
 
   render() {
-    let listOfValidDictionariesImportedAndInConfig = this.state.listOfValidDictionariesImportedAndInConfig.map ((dictionary, index) => {
+    let dictionariesTypeyTypeWillUse = this.state.dictionariesTypeyTypeWillUse.map ((dictionary, index) => {
       return <li key={index}>{dictionary}</li>
     });
 
@@ -551,7 +533,7 @@ class DictionaryManagement extends Component {
                 <p>Typey&nbsp;Type will use these dictionaries for brief hints:</p>
                 <ul>
                   <li>Typey Type's dictionaries</li>
-                  {listOfValidDictionariesImportedAndInConfig}
+                  {dictionariesTypeyTypeWillUse}
                   <li>… and for Lookup, Plover's latest dictionary too</li>
                 </ul>
                 <form className="mb3" onSubmit={this.handleOnSubmitApplyChanges.bind(this)}>

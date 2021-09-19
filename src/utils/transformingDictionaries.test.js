@@ -2268,14 +2268,12 @@ let personalDictionaries = [
   [ "test-suffixes.json", testSuffixesDict],
   [ "test-aussie.json", testAussieDict],
 ];
-// let namesOfValidImportedDictionaries = ["test-prefixes.json", "test-suffixes.json", "plover-main-3-jun-2018.json" ];
-let namesOfValidImportedDictionaries = ["test-typey-type.json", "test-emoji.json", "test-ruby.json", "test-react.json", "test-plover.json", "test-prefixes.json", "test-suffixes.json"];
 let dictAndMisstrokes = [
   testTypeyTypeDict,
   {"E": "he"}
 ];
 
-let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(appliedDictionariesConfig, personalDictionaries, namesOfValidImportedDictionaries, dictAndMisstrokes);
+let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, dictAndMisstrokes);
 
 const affixList = new AffixList(sortedAndCombinedLookupDictionary);
 AffixList.setSharedInstance(affixList);

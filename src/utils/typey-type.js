@@ -852,40 +852,21 @@ function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
 //   }
 // }
 
-function loadAppliedDictionariesConfig() {
-  let appliedDictionariesConfig = null; // ["name.json", "name2.json"]
-
-  try {
-    if (window.localStorage) {
-      if (window.localStorage.getItem('appliedDictionariesConfig')) {
-        appliedDictionariesConfig = JSON.parse(window.localStorage.getItem('appliedDictionariesConfig'));
-      }
-      return appliedDictionariesConfig;
-    }
-  }
-  catch(error) {
-    console.log('Unable to read local storage.', error);
-  }
-  return appliedDictionariesConfig;
-}
-
 function loadPersonalDictionariesFromLocalStorage() {
   let personalDictionaries = null; // [["name", {"OUTLINE": "translation}],[…]]
-  let appliedDictionariesConfig = null; // ["name.json", "name2.json"]
 
   try {
     if (window.localStorage) {
       if (window.localStorage.getItem('personalDictionaries')) {
         personalDictionaries = JSON.parse(window.localStorage.getItem('personalDictionaries'));
       }
-      appliedDictionariesConfig = loadAppliedDictionariesConfig();
-      return [personalDictionaries, appliedDictionariesConfig];
+      return [personalDictionaries, null];
     }
   }
   catch(error) {
     console.log('Unable to read local storage.', error);
   }
-  return [appliedDictionariesConfig, personalDictionaries];
+  return [null, personalDictionaries];
 }
 
 function loadPersonalPreferences() {
@@ -995,7 +976,6 @@ function writePersonalPreferences(itemToStore, JSONToStore) {
   catch(error) {
     try {
       window.localStorage.removeItem('personalDictionaries');
-      window.localStorage.removeItem('appliedDictionariesConfig');
       // TODO: instead of logging here, we could handle the returned error result everywhere that this is called
       console.log('Unable to write to local storage. It may be full. Any personal dictionaries imported have been removed.', error);
       return {
@@ -1076,7 +1056,6 @@ export {
   createWordListFromMetWords,
   loadPersonalPreferences,
   loadPersonalDictionariesFromLocalStorage,
-  loadAppliedDictionariesConfig,
   lookUpDictionaryInIndex,
   matchSplitText,
   mapQWERTYKeysToStenoStroke,
