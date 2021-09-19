@@ -550,7 +550,9 @@ class DictionaryManagement extends Component {
 
                 <p>Typey&nbsp;Type will use these dictionaries for brief hints:</p>
                 <ul>
+                  <li>Typey Type's dictionaries</li>
                   {listOfValidDictionariesImportedAndInConfig}
+                  <li>… and for Lookup, Plover's latest dictionary too</li>
                 </ul>
                 <form className="mb3" onSubmit={this.handleOnSubmitApplyChanges.bind(this)}>
                   <p>
