@@ -11,15 +11,14 @@ export class AffixList {
 
   constructor(dict) {
     let suffixes = [];
+    let prefixes = [];
     const suffixRegex = /^\{([A-Za-z0-9=<>\\:'"#-])+\^\}$/;
     const prefixRegex = /^\{\^([A-Za-z0-9=<>\\:'"#-])+\}$/;
     for (const [phrase, outlinesAndSourceDicts] of dict) {
       if (phrase.match(prefixRegex)) {
         suffixes.push(['/' + outlinesAndSourceDicts[0][0], phrase.replace('{^','').replace('}','')])
       }
-    }
-    let prefixes = [];
-    for (const [phrase, outlinesAndSourceDicts] of dict) {
+
       if (phrase.match(suffixRegex)) {
         prefixes.push([outlinesAndSourceDicts[0][0] + '/', phrase.replace('{','').replace('^}','')])
       }
