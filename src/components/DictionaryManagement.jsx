@@ -18,7 +18,7 @@ class DictionaryManagement extends Component {
       importedDictionariesLoaded: false,
       importedDictionariesLoading: false,
       dictionaryErrorNotification: null,
-      listOfValidDictionariesImportedAndInConfig: ["typey-type.json"],
+      listOfValidDictionariesImportedAndInConfig: [],
       combinedLookupDictionary: {},
       validDictionaries: [],
       invalidDictionaries: [],
@@ -310,7 +310,7 @@ class DictionaryManagement extends Component {
     this.setState({
       importedDictionariesLoading: false,
       dictionaryErrorNotification: false,
-      listOfValidDictionariesImportedAndInConfig: ["typey-type.json"],
+      listOfValidDictionariesImportedAndInConfig: [],
       combinedLookupDictionary: {},
       validDictionaries: [],
       invalidDictionaries: [],

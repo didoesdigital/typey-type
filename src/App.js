@@ -361,24 +361,32 @@ class App extends Component {
       [personalDictionaries, appliedDictionariesConfig] = loadPersonalDictionariesFromLocalStorage();
     }
     if (personalDictionaries === null || appliedDictionariesConfig === null) {
-      personalDictionaries = ['typey-type.json'];
-      appliedDictionariesConfig = ['typey-type.json'];
+      personalDictionaries = [];
+      appliedDictionariesConfig = [];
     }
 
     const namesOfValidImportedDictionaries = personalDictionaries.map(d => d[0]);
+
     const localConfig = appliedDictionariesConfig;
+
+    // TODO: this will all need to change when we change how Typey Type is included or excluded in
+    // personal dictionary usage…
+    let localConfigPlusTypeyType = localConfig.slice(0);
+    localConfigPlusTypeyType.unshift("typey-type.json");
     const previouslyAppliedConfig = this.state.globalLookupDictionary['configuration'];
     const globalLookupDictionaryMatchesConfig =
-      this.state.globalLookupDictionary
-      && !!this.state.globalLookupDictionary['configuration']
-      && JSON.stringify(previouslyAppliedConfig) === JSON.stringify(localConfig);
+      this.state.globalLookupDictionary &&
+      !!this.state.globalLookupDictionary['configuration'] &&
+      JSON.stringify(previouslyAppliedConfig) ===
+      JSON.stringify(localConfigPlusTypeyType);
 
-    let localConfigPlusPlover = localConfig.slice(0);
-    localConfigPlusPlover.push("plover-main-3-jun-2018.json"); // reminder: .push() returns length of array, not result
+    let localConfigPlusTypeyTypeAndPlover = localConfigPlusTypeyType.slice(0);
+    localConfigPlusTypeyTypeAndPlover.push("plover-main-3-jun-2018.json"); // reminder: .push() returns length of array, not result const
     const globalLookupDictionaryMatchesConfigWithPlover =
-      this.state.globalLookupDictionary
-      && !!this.state.globalLookupDictionary['configuration']
-      && JSON.stringify(previouslyAppliedConfig) === JSON.stringify(localConfigPlusPlover);
+      this.state.globalLookupDictionary &&
+      !!this.state.globalLookupDictionary['configuration'] &&
+      JSON.stringify(previouslyAppliedConfig) ===
+      JSON.stringify(localConfigPlusTypeyTypeAndPlover);
 
     let isPloverDictionaryLoaded = this.state.isPloverDictionaryLoaded;
     if (withPlover && this.state.globalLookupDictionary && isPloverDictionaryLoaded && globalLookupDictionaryMatchesConfigWithPlover) {
