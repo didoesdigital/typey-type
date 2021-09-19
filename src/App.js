@@ -422,7 +422,7 @@ class App extends Component {
         AffixList.setSharedInstance(affixList);
       });
 
-      if (!isPloverDictionaryLoaded && withPlover) { // TODO: this might need updating
+      if (!isPloverDictionaryLoaded && withPlover) {
         this.setState({isPloverDictionaryLoaded: true });
       }
       return loadingPromise;
