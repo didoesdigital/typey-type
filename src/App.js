@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PARAMS from './utils/params.js';
+import { LATEST_PLOVER_DICT_NAME } from './constant/index.js';
 import { randomise, isLessonTextValid } from './utils/utils';
 import { getLessonIndexData } from './utils/lessonIndexData';
 import { getRecommendedNextLesson } from './utils/recommendations';
@@ -376,7 +377,7 @@ class App extends Component {
       JSON.stringify(localConfigPlusTypeyType);
 
     let localConfigPlusTypeyTypeAndPlover = localConfigPlusTypeyType.slice(0);
-    localConfigPlusTypeyTypeAndPlover.push("plover-main-3-jun-2018.json"); // reminder: .push() returns length of array, not result const
+    localConfigPlusTypeyTypeAndPlover.push(LATEST_PLOVER_DICT_NAME); // reminder: .push() returns length of array, not result const
     const globalLookupDictionaryMatchesConfigWithPlover =
       this.state.globalLookupDictionary &&
       !!this.state.globalLookupDictionary['configuration'] &&

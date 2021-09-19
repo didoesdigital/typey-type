@@ -1,4 +1,5 @@
 import * as Sentry from '@sentry/browser';
+import { LATEST_PLOVER_DICT_NAME } from '../constant/index.js';
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
@@ -38,7 +39,7 @@ class DictionaryManagement extends Component {
     let config = [];
     if (this.props.globalLookupDictionary && this.props.globalLookupDictionary['configuration']) {
       config = this.props.globalLookupDictionary['configuration'];
-      config = config.filter(dictName => dictName !== "typey-type.json" && dictName !== "plover-main-3-jun-2018.json");
+      config = config.filter(dictName => dictName !== "typey-type.json" && dictName !== LATEST_PLOVER_DICT_NAME);
     }
     this.setState({dictionariesTypeyTypeWillUse: config});
   }
@@ -92,7 +93,7 @@ class DictionaryManagement extends Component {
               throw new Error("This dictionary looks like a copy of Typey Type's so we'll exclude it for now.");
             }
 
-            if (dictName === "plover-main-3-jun-2018.json" || (dictName === "main.json" && dictionary.size > 4000)) {
+            if (dictName === LATEST_PLOVER_DICT_NAME || (dictName === "main.json" && dictionary.size > 4000)) {
               throw new Error("This dictionary looks like a copy of Plover's latest dictionary so we'll exclude it for now.");
             }
 

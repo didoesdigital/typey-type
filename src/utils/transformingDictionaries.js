@@ -1,3 +1,4 @@
+import { LATEST_PLOVER_DICT_NAME } from '../constant/index.js';
 import { AffixList } from './affixList';
 
 function escapeRegExp(string) {
@@ -792,7 +793,7 @@ function combineValidDictionaries(personalDictionariesNamesAndContents, typeyDic
 
   // 3. Add Plover dictionary entries
   if (!!ploverDict) {
-    [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(ploverDict, combinedLookupDictionary,  "plover-main-3-jun-2018.json", misstrokes, new Set());
+    [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(ploverDict, combinedLookupDictionary,  LATEST_PLOVER_DICT_NAME, misstrokes, new Set());
   }
 
   outlinesWeHaveSeen = new Set();
@@ -807,7 +808,7 @@ function createAGlobalLookupDictionary(personalDictionariesNamesAndContents, typ
   // let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary); // has a bug; instead of sorted entire dict, we sort per entry used within chooseOutlineForPhrase function
   let sortedAndCombinedLookupDictionary = combinedLookupDictionary;
   let configuration = ['typey-type.json', ...personalDictionariesNamesAndContents.map(d => d[0])];
-  if (!!ploverDict) { configuration.push('plover-main-3-jun-2018.json'); }
+  if (!!ploverDict) { configuration.push(LATEST_PLOVER_DICT_NAME); }
   sortedAndCombinedLookupDictionary['configuration'] = configuration;
 
   return sortedAndCombinedLookupDictionary;
