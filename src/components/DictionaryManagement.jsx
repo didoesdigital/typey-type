@@ -336,7 +336,7 @@ class DictionaryManagement extends Component {
 
     // First, update state
     this.props.updatePersonalDictionaries({
-      validDictionaries: this.state.validDictionaries
+      dictionariesNamesAndContents: this.state.validDictionaries
     });
 
     // Second, update local storage
@@ -359,7 +359,7 @@ class DictionaryManagement extends Component {
     });
 
     const personalDictionaries = {
-      validDictionaries: this.state.validDictionaries,
+      dictionariesNamesAndContents: this.state.validDictionaries,
     }
 
     this.props.fetchAndSetupGlobalDict(true, personalDictionaries)

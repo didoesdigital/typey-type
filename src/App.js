@@ -264,7 +264,7 @@ class App extends Component {
       recommendationHistory: { currentStep: null },
       nextLessonPath: '',
       personalDictionaries: {
-        validDictionaries: null,
+        dictionariesNamesAndContents: null,
       },
       previousCompletedPhraseAsTyped: '',
       repetitionsRemaining: 1,
@@ -352,8 +352,8 @@ class App extends Component {
   fetchAndSetupGlobalDict(withPlover, importedPersonalDictionaries) {
     let personalDictionaries = null;
     let _;
-    if (importedPersonalDictionaries && importedPersonalDictionaries.validDictionaries) {
-      personalDictionaries = importedPersonalDictionaries.validDictionaries;
+    if (importedPersonalDictionaries && importedPersonalDictionaries.dictionariesNamesAndContents) {
+      personalDictionaries = importedPersonalDictionaries.dictionariesNamesAndContents;
     }
     if (personalDictionaries === null) {
       [personalDictionaries, _] = loadPersonalDictionariesFromLocalStorage();
@@ -989,7 +989,7 @@ class App extends Component {
 
     const shouldUsePersonalDictionaries = this.state.personalDictionaries
       && Object.entries(this.state.personalDictionaries).length > 0
-      && !!this.state.personalDictionaries.validDictionaries;
+      && !!this.state.personalDictionaries.dictionariesNamesAndContents;
 
     this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
@@ -1540,7 +1540,7 @@ class App extends Component {
 
           const shouldUsePersonalDictionaries = this.state.personalDictionaries
             && Object.entries(this.state.personalDictionaries).length > 0
-            && !!this.state.personalDictionaries.validDictionaries;
+            && !!this.state.personalDictionaries.dictionariesNamesAndContents;
 
           this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.state.personalDictionaries : null).then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
