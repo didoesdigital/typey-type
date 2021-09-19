@@ -752,22 +752,20 @@ function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary,
   let misstrokesMap = new Map(Object.entries(misstrokes));
 
   for (let [outline, translation] of Object.entries(dictContent)) {
-    let misstroke = misstrokesMap.get(outline);
-
     let seen = outlinesWeHaveSeen.has(outline);
     if (!seen) {
+      let misstroke = misstrokesMap.get(outline);
       if (!misstroke || (misstroke !== translation)) {
-        if (combinedLookupDictionary.get(translation)) {
-          // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
-          let current = combinedLookupDictionary.get(translation);
+        // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
+        let current = combinedLookupDictionary.get(translation);
+        if (current) {
           current.push([outline, dictName]);
           combinedLookupDictionary.set(translation, current);
-          outlinesWeHaveSeen.add(outline);
         }
         else {
           combinedLookupDictionary.set(translation, [[outline, dictName]]);
-          outlinesWeHaveSeen.add(outline);
         }
+        outlinesWeHaveSeen.add(outline);
       }
     }
   }
