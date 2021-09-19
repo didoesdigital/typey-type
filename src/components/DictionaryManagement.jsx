@@ -198,7 +198,7 @@ class DictionaryManagement extends Component {
               }
             }
             else {
-              throw new Error("The list of dictionaries has enabled dictionary paths.");
+              throw new Error("The list of dictionaries has no enabled dictionary paths.");
             }
           }
 
