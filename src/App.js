@@ -365,8 +365,6 @@ class App extends Component {
       appliedDictionariesConfig = [];
     }
 
-    const namesOfValidImportedDictionaries = personalDictionaries.map(d => d[0]);
-
     const localConfig = appliedDictionariesConfig;
 
     // TODO: this will all need to change when we change how Typey Type is included or excluded in
@@ -408,17 +406,14 @@ class App extends Component {
     else {
       globalDictionaryLoading = true;
       loadingPromise = Promise.all([getTypeyTypeDict(), withPlover ? getLatestPloverDict() : {}]).then(data => {
-        let [dictAndMisstrokes, latestPloverDict] = data;
+        let [typeyDictAndMisstrokes, latestPloverDict] = data;
         // let t0 = performance.now();
         // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
         //   dictAndMisstrokes[1] = {};
         // }
-        if (withPlover) {
-          appliedDictionariesConfig.push("plover-main-3-jun-2018.json");
-          personalDictionaries.push(["plover-main-3-jun-2018.json", latestPloverDict])
-          namesOfValidImportedDictionaries.push("plover-main-3-jun-2018.json");
-        }
-        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(appliedDictionariesConfig, personalDictionaries, namesOfValidImportedDictionaries, dictAndMisstrokes);
+
+        const namesOfValidImportedDictionaries = personalDictionaries.map(d => d[0]);
+        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(appliedDictionariesConfig, personalDictionaries, namesOfValidImportedDictionaries, typeyDictAndMisstrokes, withPlover ? latestPloverDict : null);
         // let t1 = performance.now();
         // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
 

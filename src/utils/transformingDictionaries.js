@@ -772,48 +772,43 @@ function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary,
   return [combinedLookupDictionary, outlinesWeHaveSeen];
 }
 
-function combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictAndMisstrokes) {
+function combineValidDictionaries(enabledPersonalDictionariesNames, dictionaryNamesAndContents, typeyDictAndMisstrokes, ploverDict = null) {
   let combinedLookupDictionary = new Map();
-  let listOfValidDictionariesImportedAndInConfigLength = listOfValidDictionariesImportedAndInConfig.length;
-  let validDictionariesLength = validDictionaries.length;
+  let numberOfPersonalDictionaries = enabledPersonalDictionariesNames.length;
+  let validDictionariesLength = dictionaryNamesAndContents.length;
   let outlinesWeHaveSeen = new Set();
+  let [dictTypeyType, misstrokes] = typeyDictAndMisstrokes;
+  // eslint-disable-next-line
+  let _;
 
-  for (let i = 0; i < listOfValidDictionariesImportedAndInConfigLength; i++) {
+  // 1. Add Typey Type entries
+  [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictTypeyType, combinedLookupDictionary, "typey-type.json", {}, new Set());
+
+  // 2. Add personal dictionaries entries
+  for (let i = 0; i < numberOfPersonalDictionaries; i++) {
     let dictContent = {};
-    let dictName = listOfValidDictionariesImportedAndInConfig[i];
-    let [dictTypeyType, misstrokes] = dictAndMisstrokes;
-    if (dictName === "typey-type.json") {
-      dictContent = dictTypeyType;
-      // eslint-disable-next-line
-      let _;
-      // eslint-disable-next-line
-      [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, {}, new Set());
-    }
-    else {
-      for (let j = 0; j < validDictionariesLength; j++) {
-        if (validDictionaries[j][0] === dictName) {
-          dictContent = validDictionaries[j][1];
-          if (dictName === "plover-main-3-jun-2018.json") {
-            // eslint-disable-next-line
-            let _;
-            // eslint-disable-next-line
-            [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, new Set());
-          }
-          else {
-            [combinedLookupDictionary, outlinesWeHaveSeen] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, outlinesWeHaveSeen);
-          }
-        }
+    let dictName = enabledPersonalDictionariesNames[i];
+    for (let j = 0; j < validDictionariesLength; j++) {
+      if (dictionaryNamesAndContents[j][0] === dictName) {
+        dictContent = dictionaryNamesAndContents[j][1];
+        [combinedLookupDictionary, outlinesWeHaveSeen] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, outlinesWeHaveSeen);
       }
     }
   }
+
+  // 3. Add Plover dictionary entries
+  if (!!ploverDict) {
+    [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(ploverDict, combinedLookupDictionary,  "plover-main-3-jun-2018.json", misstrokes, new Set());
+  }
+
   outlinesWeHaveSeen = new Set();
 
   return combinedLookupDictionary;
 }
 
-function createAGlobalLookupDictionary(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries, dictAndMisstrokes) {
-  let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries);
-  let combinedLookupDictionary = combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, validDictionaries, dictAndMisstrokes);
+function createAGlobalLookupDictionary(appliedDictionariesConfig, enabledDictionaries, namesOfValidImportedDictionaries, typeyDictAndMisstrokes, ploverDict = null) {
+  let listOfValidDictionariesImportedAndInConfig = getListOfValidDictionariesImportedAndInConfig(appliedDictionariesConfig, enabledDictionaries, namesOfValidImportedDictionaries);
+  let combinedLookupDictionary = combineValidDictionaries(listOfValidDictionariesImportedAndInConfig, enabledDictionaries, typeyDictAndMisstrokes, ploverDict);
   // let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary); // has a bug; instead of sorted entire dict, we sort per entry used within chooseOutlineForPhrase function
   let sortedAndCombinedLookupDictionary = combinedLookupDictionary;
   sortedAndCombinedLookupDictionary['configuration'] = listOfValidDictionariesImportedAndInConfig;
@@ -821,13 +816,14 @@ function createAGlobalLookupDictionary(validDictionariesListedInConfig, validDic
   return sortedAndCombinedLookupDictionary;
 }
 
-function getListOfValidDictionariesImportedAndInConfig(validDictionariesListedInConfig, validDictionaries, namesOfValidImportedDictionaries) {
+function getListOfValidDictionariesImportedAndInConfig(appliedDictionariesConfig, enabledDictionaries, namesOfValidImportedDictionaries) {
   let listOfValidDictionariesImportedAndInConfig = [];
-  let validDictionariesListedInConfigLength = validDictionariesListedInConfig.length;
+  const numberOfDictionariesInAppliedConfig = appliedDictionariesConfig.length;
+  const dictNames = namesOfValidImportedDictionaries; // TODO: const dictNames = enabledDictionaries.map(d => d[0]);
 
-  for (let i = 0; i < validDictionariesListedInConfigLength; i++) {
-    if (namesOfValidImportedDictionaries.indexOf(validDictionariesListedInConfig[i]) > -1) {
-      listOfValidDictionariesImportedAndInConfig.push(validDictionariesListedInConfig[i]);
+  for (let i = 0; i < numberOfDictionariesInAppliedConfig; i++) {
+    if (dictNames.indexOf(appliedDictionariesConfig[i]) > -1) {
+      listOfValidDictionariesImportedAndInConfig.push(appliedDictionariesConfig[i]);
     }
   }
   listOfValidDictionariesImportedAndInConfig.unshift("typey-type.json");
