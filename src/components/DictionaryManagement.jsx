@@ -92,7 +92,7 @@ class DictionaryManagement extends Component {
               throw new Error("This dictionary looks like a copy of Typey Type's so we'll exclude it for now.");
             }
 
-            if (dictName === "plover-main-3-jun-2018.json") {
+            if (dictName === "plover-main-3-jun-2018.json" || (dictName === "main.json" && dictionary.size > 4000)) {
               throw new Error("This dictionary looks like a copy of Plover's latest dictionary so we'll exclude it for now.");
             }
 
