@@ -30,11 +30,11 @@ class CustomLessonSetup extends Component {
     }
 
     if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
-      const shouldUsePersonalDictionaries = this.props.personalDictionariesAndConfig
-        && Object.entries(this.props.personalDictionariesAndConfig).length > 0
-        && !!this.props.personalDictionariesAndConfig.validDictionaries;
+      const shouldUsePersonalDictionaries = this.props.personalDictionaries
+        && Object.entries(this.props.personalDictionaries).length > 0
+        && !!this.props.personalDictionaries.validDictionaries;
 
-      this.props.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.props.personalDictionariesAndConfig : null)
+      this.props.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null)
         .catch(error => {
           console.error(error);
           // this.showDictionaryErrorNotification();

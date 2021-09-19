@@ -16,7 +16,7 @@ const AsyncDictionaryManagement = Loadable({
   delay: 300
 });
 
-const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDictionaryLoaded, globalLookupDictionaryLoaded, globalLookupDictionary, globalUserSettings, personalDictionariesAndConfig, updateGlobalLookupDictionary, updatePersonalDictionariesAndConfig, fetchAndSetupGlobalDict, ...dictionaryProps}) => {
+const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDictionaryLoaded, globalLookupDictionaryLoaded, globalLookupDictionary, globalUserSettings, personalDictionaries, updateGlobalLookupDictionary, updatePersonalDictionaries, fetchAndSetupGlobalDict, ...dictionaryProps}) => {
   return(
     <div>
       <Switch>
@@ -83,9 +83,9 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDict
             setGlobalDictionaryLoaded={setGlobalDictionaryLoaded}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
-            personalDictionariesAndConfig={personalDictionariesAndConfig}
+            personalDictionaries={personalDictionaries}
             updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updatePersonalDictionariesAndConfig={updatePersonalDictionariesAndConfig}
+            updatePersonalDictionaries={updatePersonalDictionaries}
             {...dictionaryProps}
             {...props}
           />
@@ -98,9 +98,9 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDict
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-            personalDictionariesAndConfig={personalDictionariesAndConfig}
+            personalDictionaries={personalDictionaries}
             updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updatePersonalDictionariesAndConfig={updatePersonalDictionariesAndConfig}
+            updatePersonalDictionaries={updatePersonalDictionaries}
             match={match}
             {...dictionaryProps}
             {...props}

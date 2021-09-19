@@ -29,11 +29,11 @@ class StrokesForWords extends Component {
   componentDidMount() {
     // if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
 
-    const shouldUsePersonalDictionaries = this.props.personalDictionariesAndConfig
-      && Object.entries(this.props.personalDictionariesAndConfig).length > 0
-      && !!this.props.personalDictionariesAndConfig.validDictionaries;
+    const shouldUsePersonalDictionaries = this.props.personalDictionaries
+      && Object.entries(this.props.personalDictionaries).length > 0
+      && !!this.props.personalDictionaries.validDictionaries;
 
-    this.props.fetchAndSetupGlobalDict(true, shouldUsePersonalDictionaries ? this.props.personalDictionariesAndConfig : null).then(() => {
+    this.props.fetchAndSetupGlobalDict(true, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null).then(() => {
       if (this.props.lookupTerm && this.props.lookupTerm !== undefined && this.props.lookupTerm.length > 0) {
         this.setState({phrase: this.props.lookupTerm});
         this.updateWordsForStrokes(this.props.lookupTerm);

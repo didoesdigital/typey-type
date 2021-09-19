@@ -250,10 +250,10 @@ class DictionariesIndex extends Component {
               globalLookupDictionary={this.props.globalLookupDictionary}
               globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
               globalUserSettings={this.props.globalUserSettings}
-              personalDictionariesAndConfig={this.props.personalDictionariesAndConfig}
+              personalDictionaries={this.props.personalDictionaries}
               stenoHintsOnTheFly={this.props.stenohintsonthefly}
               updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
-              updatePersonalDictionariesAndConfig={this.props.updatePersonalDictionariesAndConfig}
+              updatePersonalDictionaries={this.props.updatePersonalDictionaries}
               userSettings={this.props.userSettings}
             />
           </div>
