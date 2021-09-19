@@ -2256,8 +2256,6 @@ let testSuffixesDict = {
   // ["/TPHALT", "ality"],
 };
 
-// let appliedDictionariesConfig = ["test-typey-type.json", "test-prefixes.json", "test-suffixes.json", "plover-main-3-jun-2018.json" ];
-let appliedDictionariesConfig = ["test-typey-type.json", "test-emoji.json", "test-ruby.json", "test-react.json", "test-plover.json", "test-prefixes.json", "test-suffixes.json", "test-aussie.json"];
 let personalDictionaries = [
   [ "test-typey-type.json", testTypeyTypeDict],
   [ "test-emoji.json", testEmojiDict],
