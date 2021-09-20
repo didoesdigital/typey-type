@@ -333,9 +333,16 @@ class DictionaryManagement extends Component {
       importedDictionariesLoading: true
     });
 
+    let configOrder = this.state.validDictionariesListedInConfig;
+    let sortedValidDictionaries = this.state.validDictionaries.slice(0);
+    sortedValidDictionaries = sortedValidDictionaries.sort((a,b) => {
+      // dictionaries that don't appear in config will be before dictionaries that do
+      return configOrder.indexOf(a[0]) - configOrder.indexOf(b[0]);
+    });
+
     // First, update state
     this.props.updatePersonalDictionaries({
-      dictionariesNamesAndContents: this.state.validDictionaries
+      dictionariesNamesAndContents: sortedValidDictionaries
     });
 
     // Second, update local storage
