@@ -78,8 +78,8 @@ class DictionaryManagement extends Component {
           let text = event.target.result;
 
           try {
-            if (!dictionary.size > 5000) {
-              throw new Error("This file is too big (>5MB).");
+            if (dictionary.size > 20000000) {
+              throw new Error("This file is too big (>20MB).");
             }
             if (!dictionary.type.startsWith('application/json')) {
               throw new Error("This is not a JSON file.");
