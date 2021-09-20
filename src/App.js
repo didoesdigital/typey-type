@@ -46,13 +46,7 @@ import PageLoading from './components/PageLoading';
 import Announcements from './components/Announcements';
 import ErrorBoundary from './components/ErrorBoundary'
 import Lessons from './components/Lessons';
-import Home from './components/Home';
 import Header from './components/Header';
-import Support from './components/Support';
-import Contribute from './components/Contribute';
-import Progress from './components/Progress';
-import Flashcards from './components/Flashcards';
-import PageNotFound from './components/PageNotFound';
 import Footer from './components/Footer';
 import Zipper from './utils/zipper';
 
@@ -62,8 +56,44 @@ const AsyncBreak = Loadable({
   delay: 300
 });
 
+const AsyncContribute = Loadable({
+  loader: () => import("./components/Contribute"),
+  loading: PageLoading,
+  delay: 300
+});
+
+const AsyncPageNotFound = Loadable({
+  loader: () => import("./components/PageNotFound"),
+  loading: PageLoading,
+  delay: 300
+});
+
+const AsyncProgress = Loadable({
+  loader: () => import("./components/Progress"),
+  loading: PageLoading,
+  delay: 300
+});
+
 const AsyncWriter = Loadable({
   loader: () => import("./components/Writer"),
+  loading: PageLoading,
+  delay: 300
+});
+
+const AsyncFlashcards = Loadable({
+  loader: () => import("./components/Flashcards"),
+  loading: PageLoading,
+  delay: 300
+});
+
+const AsyncHome = Loadable({
+  loader: () => import("./components/Home"),
+  loading: PageLoading,
+  delay: 300
+});
+
+const AsyncSupport = Loadable({
+  loader: () => import("./components/Support"),
   loading: PageLoading,
   delay: 300
 });
@@ -2123,7 +2153,7 @@ class App extends Component {
                   <div>
                     {header}
                     <DocumentTitle title='Typey Type for Stenographers'>
-                      <Home
+                      <AsyncHome
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         {...props}
@@ -2137,7 +2167,7 @@ class App extends Component {
                     {header}
                     <DocumentTitle title={'Typey Type | About'}>
                       <ErrorBoundary>
-                        <Support
+                        <AsyncSupport
                           setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         />
@@ -2186,7 +2216,7 @@ class App extends Component {
                     {header}
                     <DocumentTitle title={'Typey Type | Contribute'}>
                       <ErrorBoundary>
-                        <Contribute
+                        <AsyncContribute
                           setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         />
@@ -2200,7 +2230,7 @@ class App extends Component {
                     {header}
                     <DocumentTitle title={'Typey Type | Progress'}>
                       <ErrorBoundary>
-                        <Progress
+                        <AsyncProgress
                           calculateSeenWordCount={calculateSeenWordCount.bind(this)}
                           calculateMemorisedWordCount={calculateMemorisedWordCount.bind(this)}
                           changeFlashcardCourseLevel={this.changeFlashcardCourseLevel.bind(this)}
@@ -2238,7 +2268,7 @@ class App extends Component {
                   <div>
                     {header}
                     <DocumentTitle title={'Typey Type | Flashcards'}>
-                      <Flashcards
+                      <AsyncFlashcards
                         changeFullscreen={this.changeFullscreen.bind(this)}
                         fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                         flashcardsMetWords={this.state.flashcardsMetWords}
@@ -2427,7 +2457,7 @@ class App extends Component {
                 <Route render={ (props) =>
                   <div>
                     <DocumentTitle title={'Typey Type | Page not found'}>
-                      <PageNotFound
+                      <AsyncPageNotFound
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                       />
                     </DocumentTitle>
