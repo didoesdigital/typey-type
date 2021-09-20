@@ -5,8 +5,6 @@ import PseudoContentButton from './PseudoContentButton';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 import {
-  createWordListFromMetWords,
-  loadPersonalPreferences,
   parseWordList,
 } from './../utils/typey-type';
 import {
@@ -20,7 +18,6 @@ class CustomLessonSetup extends Component {
       customLessonWordsAndStrokes: [],
       customWordList: '',
       dictionaryConvertedToLesson: '',
-      myWords: ''
     }
   }
 
@@ -40,9 +37,6 @@ class CustomLessonSetup extends Component {
           // this.showDictionaryErrorNotification();
         });
     }
-
-    let metWords = loadPersonalPreferences()[0];
-    this.addWordListToPage(metWords, this.props.globalLookupDictionary);
 
     this.setState({
       customLessonWordsAndStrokes: []
@@ -105,12 +99,6 @@ class CustomLessonSetup extends Component {
       this.handleConvertingDictionaryEntriesToLesson(event.target.value);
     }
     return event;
-  }
-
-  addWordListToPage(metWords, globalLookupDictionary) {
-    let myWords = createWordListFromMetWords(metWords).join("\n");
-    this.handleWordsForDictionaryEntries(myWords, globalLookupDictionary);
-    this.setState({myWords: myWords});
   }
 
   render() {
@@ -284,15 +272,7 @@ plover"
               <h3>Revise words you have seen</h3>
               <div className="gtc-4fr-3fr">
                 <div>
-                  <p>{this.state.myWords && this.state.myWords.length > 0 ? "Use your seen words to create a custom lesson:" : "Once you’ve made some progress, your words will appear here."}</p>
-                  <pre
-                    id="js-your-words-for-dictionary-entries"
-                    className="quote h-168 overflow-scroll mw-384 mt1 mb3"
-                    tabIndex="0"
-                  ><code>{this.state.myWords}</code></pre>
-                  <PseudoContentButton className="js-select-all-my-words link-button js-clipboard-button copy-to-clipboard" style={{minHeight: "2.5rem", whiteSpace: "normal", height: "initial"}} dataClipboardTarget="#js-your-words-for-dictionary-entries">Copy your words to clipboard</PseudoContentButton>
-                </div>
-                <div>
+                  <p><Link to="/lessons/progress/seen">Practise your seen words in a lesson</Link>.</p>
                 </div>
               </div>
             </div>
