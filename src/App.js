@@ -357,6 +357,7 @@ class App extends Component {
       personalDictionaries = importedPersonalDictionaries.dictionariesNamesAndContents;
     }
     if (personalDictionaries === null) {
+      // eslint-disable-next-line
       [personalDictionaries, _] = loadPersonalDictionariesFromLocalStorage();
     }
     if (personalDictionaries === null) {

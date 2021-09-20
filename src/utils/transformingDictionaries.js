@@ -793,6 +793,7 @@ function combineValidDictionaries(personalDictionariesNamesAndContents, typeyDic
 
   // 3. Add Plover dictionary entries
   if (!!ploverDict) {
+    // eslint-disable-next-line
     [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(ploverDict, combinedLookupDictionary,  LATEST_PLOVER_DICT_NAME, misstrokes, new Set());
   }
 
