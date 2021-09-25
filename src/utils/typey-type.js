@@ -861,11 +861,15 @@ const migratePersonalDictionariesV0ToV1 = function (personalDictionaries, dirtyF
   return [personalDictionaries, dirtyFlag];
 }
 
+const runAllPersonalDictionariesMigrations = function (personalDictionaries, dirtyFlag) {
+  [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV0ToV1(personalDictionaries);
+  return [personalDictionaries, dirtyFlag];
+}
+
 function migratePersonalDictionariesV(personalDictionaries) {
   let dirtyFlag = false;
-  // TODO: add a function like runAllMigrations that returns latest version that works with any version input and returns latest to be used by write function then returned again
 
-  [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV0ToV1(personalDictionaries);
+  [personalDictionaries, dirtyFlag] = runAllPersonalDictionariesMigrations(personalDictionaries, dirtyFlag);
 
   // TODO: make this a testable function e.g. migratePersonalDictionariesV1ToV2
   // if (personalDictionaries.v && personalDictionaries.v === '1') {
@@ -1108,6 +1112,7 @@ export {
   parseWordList,
   removeWhitespaceAndSumUniqMetWords,
   repetitionsRemaining,
+  runAllPersonalDictionariesMigrations,
   setupLessonProgress,
   shouldShowStroke,
   splitBriefsIntoStrokes,

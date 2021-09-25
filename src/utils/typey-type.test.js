@@ -14,6 +14,7 @@ import {
   mapBriefToJapaneseStenoKeys,
   migratePersonalDictionariesV0ToV1,
   repetitionsRemaining,
+  // runAllPersonalDictionariesMigrations,
   updateCapitalisationStrokesInNextItem
 } from './typey-type';
 import Zipper from './zipper';
