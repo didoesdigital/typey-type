@@ -8,10 +8,11 @@ import {
   strokeAccuracy,
   splitBriefsIntoStrokes,
   trimAndSumUniqMetWords,
-  writePersonalPreferences,
+  // writePersonalPreferences,
   mapBriefToAmericanStenoKeys,
   mapBriefToItalianMichelaStenoKeys,
   mapBriefToJapaneseStenoKeys,
+  migratePersonalDictionariesV0ToV1,
   repetitionsRemaining,
   updateCapitalisationStrokesInNextItem
 } from './typey-type';
@@ -2287,3 +2288,31 @@ describe('update capitalisation strokes in next item', () => {
     });
   });
 });
+
+describe('migratePersonalDictionariesV', () => {
+  describe('v0 to v1', () => {
+    let dirtyFlag = false;
+    let migratedV1Dictionaries = {"v":"1","dicts":[["personal.json",{"TAO*EUPT": "Typey Type"}]]};
+
+    describe('where local storage had v0 format', () => {
+      let v0PersonalDictionaries = [["personal.json",{"TAO*EUPT": "Typey Type"}]];
+      it('returns dictionary migrated to v1 and true dirty flag', () => {
+        expect(migratePersonalDictionariesV0ToV1(v0PersonalDictionaries, dirtyFlag)).toEqual([
+          migratedV1Dictionaries,
+          true
+        ])
+      });
+    });
+
+    describe('where local storage had v1 format', () => {
+      let v1PersonalDictionaries = {"v":"1","dicts":[["personal.json",{"TAO*EUPT": "Typey Type"}]]};
+      it('returns same v1 dictionary and false dirty flag', () => {
+        expect(migratePersonalDictionariesV0ToV1(v1PersonalDictionaries, dirtyFlag)).toEqual([
+          migratedV1Dictionaries,
+          false
+        ])
+      });
+    });
+  });
+});
+

@@ -852,21 +852,27 @@ function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
 //   }
 // }
 
-function migratePersonalDictionariesV(personalDictionaries) {
-  let dirtyFlag = false;
-  // TODO: add a function like runAllMigrations that returns latest version that works with any version input and returns latest to be used by write function then returned again
-
-  // TODO: make this a testable function e.g. migratePersonalDictionariesV0ToV1
+const migratePersonalDictionariesV0ToV1 = function (personalDictionaries, dirtyFlag) {
   if (!personalDictionaries.v) {
     personalDictionaries = {v:'1',dicts:personalDictionaries};
     dirtyFlag = true;
   }
 
+  return [personalDictionaries, dirtyFlag];
+}
+
+function migratePersonalDictionariesV(personalDictionaries) {
+  let dirtyFlag = false;
+  // TODO: add a function like runAllMigrations that returns latest version that works with any version input and returns latest to be used by write function then returned again
+
+  [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV0ToV1(personalDictionaries);
+
   // TODO: make this a testable function e.g. migratePersonalDictionariesV1ToV2
   // if (personalDictionaries.v && personalDictionaries.v === '1') {
-  //   let opts = {};
-  //   let dictsWithMetadata = personalDictionaries.dicts.map(dict => [dict[0],dict[1],opts]);
-  //   personalDictionaries = {v:'2',dicts:dictsWithMetadata};
+  //   // let opts = {};
+  //   // let dictsWithMetadata = personalDictionaries.dicts.map(dict => [dict[0],dict[1],opts]);
+  //   // personalDictionaries = {v:'2',dicts:dictsWithMetadata};
+  //   personalDictionaries = {v:'2',dicts:personalDictionaries.dicts};
   //   dirtyFlag = true;
   // }
 
@@ -1095,6 +1101,7 @@ export {
   mapBriefToJapaneseStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
+  migratePersonalDictionariesV0ToV1,
   trimAndSumUniqMetWords,
   parseCustomMaterial,
   parseLesson,
