@@ -852,14 +852,44 @@ function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
 //   }
 // }
 
+function migratePersonalDictionariesV(personalDictionaries) {
+  let dirtyFlag = false;
+  // TODO: add a function like runAllMigrations that returns latest version that works with any version input and returns latest to be used by write function then returned again
+
+  // TODO: make this a testable function e.g. migratePersonalDictionariesV0ToV1
+  if (!personalDictionaries.v) {
+    personalDictionaries = {v:'1',dicts:personalDictionaries};
+    dirtyFlag = true;
+  }
+
+  // TODO: make this a testable function e.g. migratePersonalDictionariesV1ToV2
+  // if (personalDictionaries.v && personalDictionaries.v === '1') {
+  //   let opts = {};
+  //   let dictsWithMetadata = personalDictionaries.dicts.map(dict => [dict[0],dict[1],opts]);
+  //   personalDictionaries = {v:'2',dicts:dictsWithMetadata};
+  //   dirtyFlag = true;
+  // }
+
+  if (dirtyFlag) {
+    writePersonalPreferences('personalDictionaries', personalDictionaries);
+  }
+
+  return personalDictionaries;
+}
+
 function loadPersonalDictionariesFromLocalStorage() {
   let personalDictionaries = null; // [["name", {"OUTLINE": "translation}],[…]]
 
   try {
     if (window.localStorage) {
+      let versionedDictionaries = null;
       if (window.localStorage.getItem('personalDictionaries')) {
-        personalDictionaries = JSON.parse(window.localStorage.getItem('personalDictionaries'));
+        versionedDictionaries = JSON.parse(window.localStorage.getItem('personalDictionaries'));
       }
+
+      versionedDictionaries = migratePersonalDictionariesV(versionedDictionaries);
+      personalDictionaries = versionedDictionaries['dicts'];
+
       return personalDictionaries;
     }
   }

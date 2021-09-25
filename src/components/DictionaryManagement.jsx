@@ -345,8 +345,10 @@ class DictionaryManagement extends Component {
       dictionariesNamesAndContents: sortedValidDictionaries
     });
 
+    let personalDictionariesToStoreInV1Format = {v:"1",dicts:this.state.validDictionaries};
+
     // Second, update local storage
-    let writeDictionariesError = writePersonalPreferences('personalDictionaries', this.state.validDictionaries);
+    let writeDictionariesError = writePersonalPreferences('personalDictionaries', personalDictionariesToStoreInV1Format);
     if (writeDictionariesError) {
       this.showDictionaryErrorNotification(writeDictionariesError.name);
 
