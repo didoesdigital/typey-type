@@ -382,13 +382,11 @@ class App extends Component {
   // The withPlover flag here is just about whether or not to fetch the Plover dictionary file.
   fetchAndSetupGlobalDict(withPlover, importedPersonalDictionaries) {
     let personalDictionaries = null;
-    let _;
     if (importedPersonalDictionaries && importedPersonalDictionaries.dictionariesNamesAndContents) {
       personalDictionaries = importedPersonalDictionaries.dictionariesNamesAndContents;
     }
     if (personalDictionaries === null) {
-      // eslint-disable-next-line
-      [personalDictionaries, _] = loadPersonalDictionariesFromLocalStorage();
+      personalDictionaries = loadPersonalDictionariesFromLocalStorage();
     }
     if (personalDictionaries === null) {
       personalDictionaries = [];

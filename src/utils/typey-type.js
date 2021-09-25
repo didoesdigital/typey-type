@@ -860,13 +860,13 @@ function loadPersonalDictionariesFromLocalStorage() {
       if (window.localStorage.getItem('personalDictionaries')) {
         personalDictionaries = JSON.parse(window.localStorage.getItem('personalDictionaries'));
       }
-      return [personalDictionaries, null];
+      return personalDictionaries;
     }
   }
   catch(error) {
     console.log('Unable to read local storage.', error);
   }
-  return [null, personalDictionaries];
+  return null;
 }
 
 function loadPersonalPreferences() {
