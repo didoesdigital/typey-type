@@ -861,8 +861,20 @@ const migratePersonalDictionariesV0ToV1 = function (personalDictionaries, dirtyF
   return [personalDictionaries, dirtyFlag];
 }
 
+const migratePersonalDictionariesV1ToV2 = function (personalDictionaries, dirtyFlag) {
+  if (personalDictionaries.v && personalDictionaries.v === '1') {
+    let opts = {};
+    let dictsWithMetadata = personalDictionaries.dicts.map(dict => [dict[0],dict[1],opts]);
+    personalDictionaries = {v:'2',dicts:dictsWithMetadata};
+    dirtyFlag = true;
+  }
+
+  return [personalDictionaries, dirtyFlag];
+}
+
 const runAllPersonalDictionariesMigrations = function (personalDictionaries, dirtyFlag) {
   [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV0ToV1(personalDictionaries, dirtyFlag);
+  [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV1ToV2(personalDictionaries, dirtyFlag);
   return [personalDictionaries, dirtyFlag];
 }
 
@@ -870,15 +882,6 @@ function migratePersonalDictionariesV(personalDictionaries) {
   let dirtyFlag = false;
 
   [personalDictionaries, dirtyFlag] = runAllPersonalDictionariesMigrations(personalDictionaries, dirtyFlag);
-
-  // TODO: make this a testable function e.g. migratePersonalDictionariesV1ToV2
-  // if (personalDictionaries.v && personalDictionaries.v === '1') {
-  //   // let opts = {};
-  //   // let dictsWithMetadata = personalDictionaries.dicts.map(dict => [dict[0],dict[1],opts]);
-  //   // personalDictionaries = {v:'2',dicts:dictsWithMetadata};
-  //   personalDictionaries = {v:'2',dicts:personalDictionaries.dicts};
-  //   dirtyFlag = true;
-  // }
 
   if (dirtyFlag) {
     writePersonalPreferences('personalDictionaries', personalDictionaries);
@@ -1106,6 +1109,7 @@ export {
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
   migratePersonalDictionariesV0ToV1,
+  migratePersonalDictionariesV1ToV2,
   trimAndSumUniqMetWords,
   parseCustomMaterial,
   parseLesson,
