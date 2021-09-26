@@ -14,7 +14,7 @@ import {
   mapBriefToJapaneseStenoKeys,
   migratePersonalDictionariesV0ToV1,
   repetitionsRemaining,
-  // runAllPersonalDictionariesMigrations,
+  runAllPersonalDictionariesMigrations,
   updateCapitalisationStrokesInNextItem
 } from './typey-type';
 import Zipper from './zipper';
@@ -2291,14 +2291,16 @@ describe('update capitalisation strokes in next item', () => {
 });
 
 describe('migratePersonalDictionariesV', () => {
-  describe('v0 to v1', () => {
+  let startingV0Dictionaries = [["personal.json",{"TAO*EUPT": "Typey Type"}]];
+  let startingV1Dictionaries = {"v":"1","dicts":[["personal.json",{"TAO*EUPT": "Typey Type"}]]};
+  let migratedV1Dictionaries = Object.assign({}, startingV1Dictionaries);
+
+  describe('runAllPersonalDictionariesMigrations', () => {
     let dirtyFlag = false;
-    let migratedV1Dictionaries = {"v":"1","dicts":[["personal.json",{"TAO*EUPT": "Typey Type"}]]};
 
     describe('where local storage had v0 format', () => {
-      let v0PersonalDictionaries = [["personal.json",{"TAO*EUPT": "Typey Type"}]];
-      it('returns dictionary migrated to v1 and true dirty flag', () => {
-        expect(migratePersonalDictionariesV0ToV1(v0PersonalDictionaries, dirtyFlag)).toEqual([
+      it('returns true dirty flag', () => {
+        expect(runAllPersonalDictionariesMigrations(startingV0Dictionaries, dirtyFlag)).toEqual([
           migratedV1Dictionaries,
           true
         ])
@@ -2306,9 +2308,30 @@ describe('migratePersonalDictionariesV', () => {
     });
 
     describe('where local storage had v1 format', () => {
-      let v1PersonalDictionaries = {"v":"1","dicts":[["personal.json",{"TAO*EUPT": "Typey Type"}]]};
+      it('returns false dirty flag', () => {
+        expect(runAllPersonalDictionariesMigrations(startingV1Dictionaries, dirtyFlag)).toEqual([
+          migratedV1Dictionaries,
+          false
+        ])
+      });
+    });
+  });
+
+  describe('v0 to v1', () => {
+    let dirtyFlag = false;
+
+    describe('where local storage had v0 format', () => {
+      it('returns dictionary migrated to v1 and true dirty flag', () => {
+        expect(migratePersonalDictionariesV0ToV1(startingV0Dictionaries, dirtyFlag)).toEqual([
+          migratedV1Dictionaries,
+          true
+        ])
+      });
+    });
+
+    describe('where local storage had v1 format', () => {
       it('returns same v1 dictionary and false dirty flag', () => {
-        expect(migratePersonalDictionariesV0ToV1(v1PersonalDictionaries, dirtyFlag)).toEqual([
+        expect(migratePersonalDictionariesV0ToV1(startingV1Dictionaries, dirtyFlag)).toEqual([
           migratedV1Dictionaries,
           false
         ])

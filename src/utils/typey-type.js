@@ -862,7 +862,7 @@ const migratePersonalDictionariesV0ToV1 = function (personalDictionaries, dirtyF
 }
 
 const runAllPersonalDictionariesMigrations = function (personalDictionaries, dirtyFlag) {
-  [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV0ToV1(personalDictionaries);
+  [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV0ToV1(personalDictionaries, dirtyFlag);
   return [personalDictionaries, dirtyFlag];
 }
 
