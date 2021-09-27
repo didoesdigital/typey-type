@@ -1,4 +1,4 @@
-import { LATEST_PLOVER_DICT_NAME } from '../constant/index.js';
+import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from '../constant/index.js';
 import { AffixList } from './affixList';
 
 function escapeRegExp(string) {
@@ -782,19 +782,19 @@ function combineValidDictionaries(personalDictionariesNamesAndContents, typeyDic
   let _;
 
   // 1. Add Typey Type entries
-  [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictTypeyType, combinedLookupDictionary, "typey:typey-type.json", {}, new Set());
+  [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictTypeyType, combinedLookupDictionary, `${SOURCE_NAMESPACES.get('typey')}:typey-type.json`, {}, new Set());
 
   // 2. Add personal dictionaries entries
   for (let i = 0; i < numberOfPersonalDictionaries; i++) {
     let dictName = personalDictionariesNamesAndContents[i][0];
     let dictContent = personalDictionariesNamesAndContents[i][1];
-    [combinedLookupDictionary, outlinesWeHaveSeen] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, "user:" + dictName, misstrokes, outlinesWeHaveSeen);
+    [combinedLookupDictionary, outlinesWeHaveSeen] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, `${SOURCE_NAMESPACES.get('user')}:${dictName}`, misstrokes, outlinesWeHaveSeen);
   }
 
   // 3. Add Plover dictionary entries
   if (!!ploverDict) {
     // eslint-disable-next-line
-    [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(ploverDict, combinedLookupDictionary, "plover:" + LATEST_PLOVER_DICT_NAME, misstrokes, new Set());
+    [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(ploverDict, combinedLookupDictionary, `${SOURCE_NAMESPACES.get('plover')}:${LATEST_PLOVER_DICT_NAME}`, misstrokes, new Set());
   }
 
   outlinesWeHaveSeen = new Set();
@@ -808,8 +808,8 @@ function createAGlobalLookupDictionary(personalDictionariesNamesAndContents, typ
   let combinedLookupDictionary = combineValidDictionaries(personalDictionariesNamesAndContents, typeyDictAndMisstrokes, ploverDict);
   // let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary); // has a bug; instead of sorted entire dict, we sort per entry used within chooseOutlineForPhrase function
   let sortedAndCombinedLookupDictionary = combinedLookupDictionary;
-  let configuration = ['typey:typey-type.json', ...personalDictionariesNamesAndContents.map(d => "user:" + d[0])];
-  if (!!ploverDict) { configuration.push('plover:'+LATEST_PLOVER_DICT_NAME); }
+  let configuration = [`${SOURCE_NAMESPACES.get('typey')}:typey-type.json`, ...personalDictionariesNamesAndContents.map(d => `${SOURCE_NAMESPACES.get('user')}:${d[0]}`)];
+  if (!!ploverDict) { configuration.push(`${SOURCE_NAMESPACES.get('plover')}:${LATEST_PLOVER_DICT_NAME}`); }
   sortedAndCombinedLookupDictionary['configuration'] = configuration;
 
   return sortedAndCombinedLookupDictionary;

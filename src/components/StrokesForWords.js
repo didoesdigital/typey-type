@@ -19,6 +19,7 @@ import {
   mapBriefToPalantypeKeys,
   splitBriefsIntoStrokes
 } from './../utils/typey-type';
+import { SOURCE_NAMESPACES } from '../constant/index.js';
 
 class StrokesForWords extends Component {
   state = {
@@ -390,7 +391,9 @@ function createListOfStrokes(phrase, dictionaryOfWordsStrokesAndSourceDictionary
 
     let sourceDictName;
     let sourceNamespace;
-    let match = strokesAndSource[1].match(/^(?<Source>(user|typey|plover|individual)):(?<Name>.+)$/);
+    let namespaces = Array.from(SOURCE_NAMESPACES.values()).join('|');
+    let regex = new RegExp(`^(?<Source>(${namespaces})):(?<Name>.+)$`);
+    let match = strokesAndSource[1].match(regex);
     if (match !== null) {
       sourceDictName = match.groups.Name
       sourceNamespace = match.groups.Source

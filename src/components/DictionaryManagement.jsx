@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/browser';
-import { LATEST_PLOVER_DICT_NAME } from '../constant/index.js';
+import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from '../constant/index.js';
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
@@ -38,7 +38,7 @@ class DictionaryManagement extends Component {
     let config = [];
     if (this.props.globalLookupDictionary && this.props.globalLookupDictionary['configuration']) {
       config = this.props.globalLookupDictionary['configuration']
-        .filter(dictName => dictName.startsWith("user:"))
+        .filter(dictName => dictName.startsWith(SOURCE_NAMESPACES.get('user') + ":"))
         .map(dictName => dictName.replace(/^.+:/, ''));
     }
     this.setState({dictionariesTypeyTypeWillUse: config});
