@@ -136,8 +136,29 @@ const punctuationSplittingRegex = /([!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~�
 const strokeLookupAttemptsLimit = 12;
 
 function getRankedOutlineFromLookupEntry(lookupEntry, translation) {
-  rankOutlines(lookupEntry, translation, AffixList.getSharedInstance());
-  return lookupEntry[0][0];
+  let affixes = AffixList.getSharedInstance();
+
+  let namespacedStrokesAndDicts = lookupEntry.map(strokesAndSource => {
+    let outline = strokesAndSource[0];
+
+    let sourceDictName;
+    let sourceNamespace;
+    let namespaces = Array.from(SOURCE_NAMESPACES.values()).join('|');
+    let regex = new RegExp(`^(?<Source>(${namespaces})):(?<Name>.+)$`);
+    let match = strokesAndSource[1].match(regex);
+    if (match !== null) {
+      sourceDictName = match.groups.Name
+      sourceNamespace = match.groups.Source
+    }
+    else {
+      sourceDictName = strokesAndSource[1];
+      sourceNamespace = "";
+    }
+
+    return [outline, sourceDictName, sourceNamespace]
+  })
+
+  return rankOutlines(namespacedStrokesAndDicts, translation, affixes)[0][0];
 }
 
 function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar) {
