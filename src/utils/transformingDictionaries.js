@@ -700,10 +700,12 @@ function penaliseSlashesWithoutPrefixesOrSuffixes(outline, translation, affixes)
 
 function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation, affixes = {suffixes: [], prefixes: []}) {
   arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
-    // Note: If compareFunction(a, b) returns less than 0, leave a and b unchanged.
+    if (a[2] === "user" && b[2] !== "user") { return -1; }
+
+    if (a[2] === "plover" && b[2] !== "plover") { return 1; }
+
     if (a[1] === "top-10000-project-gutenberg-words.json") { return -1; }
 
-    // Note: If compareFunction(a, b) returns greater than 0, sort b before a.
     if (b[1] === "top-10000-project-gutenberg-words.json") { return 1; }
 
     let outlineA = a[0];
