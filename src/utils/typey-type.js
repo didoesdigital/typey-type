@@ -906,6 +906,9 @@ function loadPersonalDictionariesFromLocalStorage() {
       if (window.localStorage.getItem('personalDictionaries')) {
         versionedDictionaries = JSON.parse(window.localStorage.getItem('personalDictionaries'));
       }
+      if (versionedDictionaries === null) {
+        return null;
+      }
 
       let errorMessage = null;
       [versionedDictionaries, errorMessage] = migratePersonalDictionariesV(versionedDictionaries);
