@@ -2303,7 +2303,8 @@ describe('migratePersonalDictionariesV', () => {
       it('returns true dirty flag', () => {
         expect(runAllPersonalDictionariesMigrations(startingV0Dictionaries, dirtyFlag)).toEqual([
           migratedV1Dictionaries,
-          true
+          true,
+          null
         ])
       });
     });
@@ -2312,7 +2313,8 @@ describe('migratePersonalDictionariesV', () => {
       it('returns false dirty flag', () => {
         expect(runAllPersonalDictionariesMigrations(startingV1Dictionaries, dirtyFlag)).toEqual([
           migratedV1Dictionaries,
-          false
+          false,
+          null
         ])
       });
     });

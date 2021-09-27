@@ -873,26 +873,33 @@ const migratePersonalDictionariesV0ToV1 = function (personalDictionaries, dirtyF
 // }
 
 const runAllPersonalDictionariesMigrations = function (personalDictionaries, dirtyFlag) {
-  [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV0ToV1(personalDictionaries, dirtyFlag);
-  // [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV1ToV2(personalDictionaries, dirtyFlag);
-  return [personalDictionaries, dirtyFlag];
+  let error = null;
+  try {
+    [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV0ToV1(personalDictionaries, dirtyFlag);
+    // [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV1ToV2(personalDictionaries, dirtyFlag);
+  }
+  catch (exception) {
+    personalDictionaries = null;
+    dirtyFlag = false;
+    error = "Personal dictionaries found in local storage are either missing a version number or are not in valid version 0 format for migrating to version 1.";
+  }
+  return [personalDictionaries, dirtyFlag, error];
 }
 
 function migratePersonalDictionariesV(personalDictionaries) {
   let dirtyFlag = false;
+  let error = null;
 
-  [personalDictionaries, dirtyFlag] = runAllPersonalDictionariesMigrations(personalDictionaries, dirtyFlag);
+  [personalDictionaries, dirtyFlag, error] = runAllPersonalDictionariesMigrations(personalDictionaries, dirtyFlag, error);
 
-  if (dirtyFlag) {
+  if (personalDictionaries !== null && dirtyFlag && error === null) {
     writePersonalPreferences('personalDictionaries', personalDictionaries);
   }
 
-  return personalDictionaries;
+  return [personalDictionaries, error];
 }
 
 function loadPersonalDictionariesFromLocalStorage() {
-  let personalDictionaries = null; // [["name", {"OUTLINE": "translation}],[…]]
-
   try {
     if (window.localStorage) {
       let versionedDictionaries = null;
@@ -900,14 +907,25 @@ function loadPersonalDictionariesFromLocalStorage() {
         versionedDictionaries = JSON.parse(window.localStorage.getItem('personalDictionaries'));
       }
 
-      versionedDictionaries = migratePersonalDictionariesV(versionedDictionaries);
-      personalDictionaries = versionedDictionaries['dicts'];
+      let errorMessage = null;
+      [versionedDictionaries, errorMessage] = migratePersonalDictionariesV(versionedDictionaries);
+      if (errorMessage) {
+        console.error(errorMessage);
+        return null;
+      }
 
-      return personalDictionaries;
+      let areDictsSomewhatValid = versionedDictionaries !== null && versionedDictionaries.v && versionedDictionaries.v === '1' && versionedDictionaries.dicts && versionedDictionaries.dicts[0] && versionedDictionaries.dicts[0][1];
+      if (areDictsSomewhatValid) {
+        return versionedDictionaries['dicts'];
+      }
+      else {
+        console.error("Dictionaries found in local storage are not valid. ");
+        return null;
+      }
     }
   }
   catch(error) {
-    console.log('Unable to read local storage.', error);
+    console.error('Unable to read local storage. ', error);
   }
   return null;
 }
