@@ -89,7 +89,7 @@ class DictionaryManagement extends Component {
               throw new Error("This dictionary name conflicts with an existing dictionary. You may have imported it already.");
             }
 
-            if (dictName === "typey-type.json") {
+            if (dictName === "typey-type.json" && dictionary.size >= 2144740) {
               throw new Error("This dictionary looks like a copy of Typey Type's so we'll exclude it for now.");
             }
 
