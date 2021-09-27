@@ -392,12 +392,12 @@ class App extends Component {
       personalDictionaries = [];
     }
 
-    const localConfig = personalDictionaries.map(d => d[0]);
+    const localConfig = personalDictionaries.map(d => 'user:' + d[0]);
 
     // TODO: this will all need to change when we change how Typey Type is included or excluded in
     // personal dictionary usage…
     let localConfigPlusTypeyType = localConfig.slice(0);
-    localConfigPlusTypeyType.unshift("typey-type.json");
+    localConfigPlusTypeyType.unshift("typey:typey-type.json");
     const previouslyAppliedConfig = this.state.globalLookupDictionary['configuration'];
     const globalLookupDictionaryMatchesConfig =
       this.state.globalLookupDictionary &&
@@ -406,7 +406,7 @@ class App extends Component {
       JSON.stringify(localConfigPlusTypeyType);
 
     let localConfigPlusTypeyTypeAndPlover = localConfigPlusTypeyType.slice(0);
-    localConfigPlusTypeyTypeAndPlover.push(LATEST_PLOVER_DICT_NAME); // reminder: .push() returns length of array, not result const
+    localConfigPlusTypeyTypeAndPlover.push('plover:' + LATEST_PLOVER_DICT_NAME); // reminder: .push() returns length of array, not result const
     const globalLookupDictionaryMatchesConfigWithPlover =
       this.state.globalLookupDictionary &&
       !!this.state.globalLookupDictionary['configuration'] &&

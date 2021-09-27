@@ -37,8 +37,9 @@ class DictionaryManagement extends Component {
     }
     let config = [];
     if (this.props.globalLookupDictionary && this.props.globalLookupDictionary['configuration']) {
-      config = this.props.globalLookupDictionary['configuration'];
-      config = config.filter(dictName => dictName !== "typey-type.json" && dictName !== LATEST_PLOVER_DICT_NAME);
+      config = this.props.globalLookupDictionary['configuration']
+        .filter(dictName => dictName.startsWith("user:"))
+        .map(dictName => dictName.replace(/^.+:/, ''));
     }
     this.setState({dictionariesTypeyTypeWillUse: config});
   }
@@ -369,7 +370,6 @@ class DictionaryManagement extends Component {
     const personalDictionaries = {
       dictionariesNamesAndContents: this.state.validDictionaries,
     }
-
     this.props.fetchAndSetupGlobalDict(true, personalDictionaries)
       .then(() => {
         this.setState({

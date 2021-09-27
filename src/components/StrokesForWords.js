@@ -70,7 +70,7 @@ class StrokesForWords extends Component {
     if (this.props.userSettings && this.props.userSettings.stenoLayout === 'stenoLayoutJapaneseSteno') { layoutTypeStyle = ' type-face--japanese'; }
 
     let strokeListItems = this.state.listOfStrokesAndDicts.map( (strokeAndDict, indexInListOfStrokesAndDicts) => {
-      let classes = strokeAndDict[1] === "typey-type.json" ? "steno-stroke px05 db fw7" : "steno-stroke px05 db steno-stroke--subtle";
+      let classes = strokeAndDict[2] === "typey" ? "steno-stroke px05 db fw7" : "steno-stroke px05 db steno-stroke--subtle";
       let briefWithSpacesBetweenLetters = [...strokeAndDict[0]].join(" ").replace("-","dash");
 
       let stenoBriefKeys = (
@@ -85,7 +85,7 @@ class StrokesForWords extends Component {
 
       let stenoBriefKeysWithOrWithoutStrongTag = stenoBriefKeys;
 
-      if (strokeAndDict[1] === "typey-type.json") {
+      if (strokeAndDict[2] === "typey") {
         stenoBriefKeysWithOrWithoutStrongTag = <strong>{stenoBriefKeys}</strong>;
       }
 
@@ -94,7 +94,7 @@ class StrokesForWords extends Component {
           <div className={"overflow-auto di mw-408 mr1" + layoutTypeStyle}>
             {stenoBriefKeysWithOrWithoutStrongTag}
           </div>
-          <span className={ strokeAndDict[1] === "typey-type.json" ? "" : "de-emphasized"}>{strokeAndDict[1]}</span>
+          <span className={ strokeAndDict[2] === "typey" ? "" : "de-emphasized"}>{strokeAndDict[1]}</span>
         </li>
       )
     });
@@ -384,6 +384,25 @@ function createListOfStrokes(phrase, dictionaryOfWordsStrokesAndSourceDictionary
   if (dictionaryOfWordsStrokesAndSourceDictionary.get(phrase)) {
     listOfStrokesAndDicts = dictionaryOfWordsStrokesAndSourceDictionary.get(phrase);
   }
+
+  listOfStrokesAndDicts = listOfStrokesAndDicts.map(strokesAndSource => {
+    let outline = strokesAndSource[0];
+
+    let sourceDictName;
+    let sourceNamespace;
+    let match = strokesAndSource[1].match(/^(?<Source>(user|typey|plover|individual)):(?<Name>.+)$/);
+    if (match !== null) {
+      sourceDictName = match.groups.Name
+      sourceNamespace = match.groups.Source
+    }
+    else {
+      sourceDictName = strokesAndSource[1];
+      sourceNamespace = "";
+    }
+
+    return [outline, sourceDictName, sourceNamespace]
+  })
+
   return listOfStrokesAndDicts;
 }
 
