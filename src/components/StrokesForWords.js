@@ -184,13 +184,6 @@ class StrokesForWords extends Component {
     let brief = ''
     if (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts[0] && this.state.listOfStrokesAndDicts[0][0]) {
       brief = this.state.listOfStrokesAndDicts[0][0];
-      let suggestedTypeyTypeBrief = this.state.listOfStrokesAndDicts.find((item) => {
-        return item[1] === "typey-type.json";
-      });
-
-      if (suggestedTypeyTypeBrief) {
-        brief = suggestedTypeyTypeBrief[0];
-      }
     }
 
     let strokes = splitBriefsIntoStrokes(brief);
