@@ -5,7 +5,7 @@ const SOURCE_NAMESPACES = new Map([
   ['user', 'user'],
   ['typey', 'typey'],
   ['plover', 'plover'],
-  ['individual', 'individual'],
+  ['individual', 'SREUD'],
 ]);
 
 export {
