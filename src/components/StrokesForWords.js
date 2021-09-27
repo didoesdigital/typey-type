@@ -2,7 +2,8 @@ import * as React from 'react'
 import { Component } from 'react';
 import { AffixList } from '../utils/affixList';
 import {
-  rankOutlines
+  rankOutlines,
+  splitIntoStrokesDictsAndNamespaces
 } from './../utils/transformingDictionaries';
 import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
 import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
@@ -19,7 +20,6 @@ import {
   mapBriefToPalantypeKeys,
   splitBriefsIntoStrokes
 } from './../utils/typey-type';
-import { SOURCE_NAMESPACES } from '../constant/index.js';
 
 class StrokesForWords extends Component {
   state = {
@@ -379,27 +379,7 @@ function createListOfStrokes(phrase, dictionaryOfWordsStrokesAndSourceDictionary
     listOfStrokesAndDicts = dictionaryOfWordsStrokesAndSourceDictionary.get(phrase);
   }
 
-  listOfStrokesAndDicts = listOfStrokesAndDicts.map(strokesAndSource => {
-    let outline = strokesAndSource[0];
-
-    let sourceDictName;
-    let sourceNamespace;
-    let namespaces = Array.from(SOURCE_NAMESPACES.values()).join('|');
-    let regex = new RegExp(`^(?<Source>(${namespaces})):(?<Name>.+)$`);
-    let match = strokesAndSource[1].match(regex);
-    if (match !== null) {
-      sourceDictName = match.groups.Name
-      sourceNamespace = match.groups.Source
-    }
-    else {
-      sourceDictName = strokesAndSource[1];
-      sourceNamespace = "";
-    }
-
-    return [outline, sourceDictName, sourceNamespace]
-  })
-
-  return listOfStrokesAndDicts;
+  return splitIntoStrokesDictsAndNamespaces(listOfStrokesAndDicts)
 }
 
 export default StrokesForWords;

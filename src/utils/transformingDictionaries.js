@@ -135,17 +135,15 @@ const punctuationSplittingRegex = /([!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~�
 // const punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
 const strokeLookupAttemptsLimit = 12;
 
-function getRankedOutlineFromLookupEntry(lookupEntry, translation) {
-  let affixes = AffixList.getSharedInstance();
+const namespaceRegex = new RegExp(`^(?<Source>(${Array.from(SOURCE_NAMESPACES.values()).join('|')})):(?<Name>.+)$`);
 
-  let namespacedStrokesAndDicts = lookupEntry.map(strokesAndSource => {
+function splitIntoStrokesDictsAndNamespaces(strokesAndSources) {
+  let namespacedStrokesAndDicts = strokesAndSources.map(strokesAndSource => {
     let outline = strokesAndSource[0];
 
     let sourceDictName;
     let sourceNamespace;
-    let namespaces = Array.from(SOURCE_NAMESPACES.values()).join('|');
-    let regex = new RegExp(`^(?<Source>(${namespaces})):(?<Name>.+)$`);
-    let match = strokesAndSource[1].match(regex);
+    let match = strokesAndSource[1].match(namespaceRegex);
     if (match !== null) {
       sourceDictName = match.groups.Name
       sourceNamespace = match.groups.Source
@@ -157,6 +155,13 @@ function getRankedOutlineFromLookupEntry(lookupEntry, translation) {
 
     return [outline, sourceDictName, sourceNamespace]
   })
+
+  return namespacedStrokesAndDicts;
+}
+
+function getRankedOutlineFromLookupEntry(lookupEntry, translation) {
+  let affixes = AffixList.getSharedInstance();
+  let namespacedStrokesAndDicts = splitIntoStrokesDictsAndNamespaces(lookupEntry);
 
   return rankOutlines(namespacedStrokesAndDicts, translation, affixes)[0][0];
 }
@@ -860,5 +865,6 @@ export {
   generateListOfWordsAndStrokes,
   getListOfValidDictionariesAddedAndInConfig,
   rankAllOutlinesInCombinedLookupDictionary,
-  rankOutlines
+  rankOutlines,
+  splitIntoStrokesDictsAndNamespaces
 };
