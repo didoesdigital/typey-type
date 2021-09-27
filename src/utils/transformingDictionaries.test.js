@@ -2661,7 +2661,7 @@ describe('add outlines for words to combined lookup dict', () => {
       "SOUPBSD": "sounds"
     };
     let combinedLookupDictionary = new Map();
-    let dictName = "typey-type.json";
+    let dictName = "typey:typey-type.json";
     let misstrokes = {
       "O": "to",
       "SED": "sed",
@@ -2675,9 +2675,9 @@ describe('add outlines for words to combined lookup dict', () => {
     expectedSet.add("SOUPBD/-Z");
     expectedSet.add("SOUPBDZ");
     let expectedResult = new Map([
-      ["to", [["TO", "typey-type.json"]]],
-      ["said", [["SED", "typey-type.json"], ["SAEUD", "typey-type.json"]]],
-      ["sounds", [["SOUPBD/-Z", "typey-type.json"], ["SOUPBDZ", "typey-type.json"]]]
+      ["to", [["TO", "typey:typey-type.json"]]],
+      ["said", [["SED", "typey:typey-type.json"], ["SAEUD", "typey:typey-type.json"]]],
+      ["sounds", [["SOUPBD/-Z", "typey:typey-type.json"], ["SOUPBDZ", "typey:typey-type.json"]]]
     ]);
     expect(addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, seenSet)).toEqual([expectedResult, expectedSet]);
   })
@@ -3431,10 +3431,10 @@ describe('choose outline for phrase', () => {
       let strokeLookupAttempts = 0;
       let globalLookupDictionaryForAs = new Map([
         ["as", [
-          ["A/AZ", "typey-type.json"],
-          ["AS", "typey-type.json"],
-          ["ASZ", "typey-type.json"]
-          ["AZ", "typey-type.json"],
+          ["A/AZ", "typey:typey-type.json"],
+          ["AS", "typey:typey-type.json"],
+          ["ASZ", "typey:typey-type.json"],
+          ["AZ", "typey:typey-type.json"],
         ]],
       ]);
 
@@ -3450,11 +3450,11 @@ describe('choose outline for phrase', () => {
       let strokeLookupAttempts = 0;
       let globalLookupDictionaryForRest = new Map([
         ["rest", [
-          ["REFT", "typey-type.json"],
-          ["R*ES", "typey-type.json"],
+          ["REFT", "typey:typey-type.json"],
+          ["R*ES", "typey:typey-type.json"],
         ]],
         ["REST", [
-          ["R*EFT", "typey-type.json"],
+          ["R*EFT", "typey:typey-type.json"],
         ]],
       ]);
 
@@ -3467,11 +3467,11 @@ describe('choose outline for phrase', () => {
       let strokeLookupAttempts = 0;
       let globalLookupDictionaryForInto = new Map([
         ["into", [
-          ["TPHAO", "typey-type.json"],
-          ["SPWAO", "typey-type.json"],
-          ["EUPB/TO", "typey-type.json"]
-          ["TPHAO*", "typey-type.json"],
-          ["TPHRAO", "typey-type.json"],
+          ["TPHAO", "typey:typey-type.json"],
+          ["SPWAO", "typey:typey-type.json"],
+          ["EUPB/TO", "typey:typey-type.json"],
+          ["TPHAO*", "typey:typey-type.json"],
+          ["TPHRAO", "typey:typey-type.json"],
         ]],
       ]);
 
@@ -3484,8 +3484,8 @@ describe('choose outline for phrase', () => {
       let strokeLookupAttempts = 0;
       let globalLookupDictionaryForGet = new Map([
         ["get", [
-          ["TKPW-T", "typey-type.json"],
-          ["TKPWET", "top-10000-project-gutenberg-words.json"],
+          ["TKPW-T", "typey:typey-type.json"],
+          ["TKPWET", "typey:top-10000-project-gutenberg-words.json"],
         ]],
       ]);
 
@@ -3530,13 +3530,13 @@ describe('choose outline for phrase', () => {
       let strokeLookupAttempts = 0;
       let globalLookupDictionaryForSituation = new Map([
         ["trust", [
-          ["TRUFT", "typey-type.json"],
-          ["TRUFT", "top-10000-project-gutenberg-words.json"],
-          ["TR*US", "plover.json"],
-          ["TRUF", "plover.json"],
+          ["TRUFT", "typey:typey-type.json"],
+          ["TRUFT", "typey:top-10000-project-gutenberg-words.json"],
+          ["TR*US", "plover:plover.json"],
+          ["TRUF", "plover:plover.json"],
         ]],
         ["Trust", [
-          ["TR*UFT", "plover.json"],
+          ["TR*UFT", "plover:plover.json"],
         ]],
       ]);
 
@@ -3573,7 +3573,7 @@ describe('choose outline for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
       let globalLookupDictionaryWithHROFRSfirst = new Map([
-        ["lovers", [["HROFRS", "typey-type.json"], ["HRUFRS", "typey-type.json"]]],
+        ["lovers", [["HROFRS", "typey:typey-type.json"], ["HRUFRS", "typey:typey-type.json"]]],
       ]);
 
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryWithHROFRSfirst, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROFRS", 1 ]);
@@ -3584,7 +3584,7 @@ describe('choose outline for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
       let globalLookupDictionaryWithHRUFRSfirst = new Map([
-        ["lovers", [["HRUFRS", "typey-type.json"], ["HROFRS", "typey-type.json"]]],
+        ["lovers", [["HRUFRS", "typey:typey-type.json"], ["HROFRS", "typey:typey-type.json"]]],
       ]);
 
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryWithHRUFRSfirst, chosenStroke, strokeLookupAttempts)).toEqual( [ "HRUFRS", 1 ]);
@@ -3598,39 +3598,39 @@ describe('generate dictionary entries', () => {
     // let wordList = [' ', '?', 'tom', 'Heather', 'TUESDAY', 'FIRST', 'bed,', 'man!', 'man?', "'sinatra'", 'and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff --cached', 'diff -- cached', '<title>Learn!</title>' ];
 
     let globalLookupDictionaryForMatchingCapitalisationAndPunctuation = new Map([
-      ["a", [["AEU", "typey-type.json"]]],
-      ["I", [["EU", "typey-type.json"]]],
-      ["{^ ^}", [["S-P", "typey-type.json"]]],
-      ["{?}", [["H-F", "typey-type.json"]]],
-      ["{,}", [["KW-BG", "typey-type.json"]]],
-      ["Tom", [["TOPL", "typey-type.json"]]],
-      ["heather", [["H*ET/*ER", "typey-type.json"]]],
-      ["Tuesday", [["TAOUZ", "typey-type.json"]]],
-      ["first", [["TPEUFRT", "typey-type.json"]]],
-      ["3D", [["30*EUD", "typey-type.json"]]],
-      ["address", [["A/TKRES", "typey-type.json"]]],
-      ["bed", [["PWED", "typey-type.json"]]],
-      ["bed,", [["PWED KW-BG", "typey-type.json"]]],
-      ["man", [["PHAPB", "typey-type.json"]]],
-      ["{!}", [["SKHRAPL", "typey-type.json"]]],
-      ["and again", [["STKPWEPBG", "typey-type.json"]]],
-      ["and", [["SKP", "typey-type.json"], ["APBD", "plover.json"]]],
-      ["again", [["TKPWEPB", "typey-type.json"]]],
-      ["media", [["PHO*EUD", "typey-type.json"]]],
-      ["query", [["KWAOER/REU", "typey-type.json"]]],
-      ["Sinatra", [["STPHAT/RA", "typey-type.json"]]],
-      ["{^'}", [["AE", "typey-type.json"]]],
-      ["push", [["PURB", "typey-type.json"]]],
-      ["origin", [["O*RPBLG", "typey-type.json"]]],
-      ["master", [["PHAFRT", "typey-type.json"]]],
-      ["diff", [["TKEUF", "typey-type.json"]]],
-      ["{--}", [["TK*RB", "typey-type.json"]]],
-      ["cached", [["KAERBD", "typey-type.json"]]],
-      ["{^>^}", [["A*EPBG", "typey-type.json"]]],
-      ["{^<^}", [["AEPBG", "typey-type.json"]]],
-      ["{^/^}", [["OEU", "typey-type.json"]]],
-      ["title", [["TAOEULT", "typey-type.json"]]],
-      ["learn", [["HRERPB", "typey-type.json"]]]
+      ["a", [["AEU", "typey:typey-type.json"]]],
+      ["I", [["EU", "typey:typey-type.json"]]],
+      ["{^ ^}", [["S-P", "typey:typey-type.json"]]],
+      ["{?}", [["H-F", "typey:typey-type.json"]]],
+      ["{,}", [["KW-BG", "typey:typey-type.json"]]],
+      ["Tom", [["TOPL", "typey:typey-type.json"]]],
+      ["heather", [["H*ET/*ER", "typey:typey-type.json"]]],
+      ["Tuesday", [["TAOUZ", "typey:typey-type.json"]]],
+      ["first", [["TPEUFRT", "typey:typey-type.json"]]],
+      ["3D", [["30*EUD", "typey:typey-type.json"]]],
+      ["address", [["A/TKRES", "typey:typey-type.json"]]],
+      ["bed", [["PWED", "typey:typey-type.json"]]],
+      ["bed,", [["PWED KW-BG", "typey:typey-type.json"]]],
+      ["man", [["PHAPB", "typey:typey-type.json"]]],
+      ["{!}", [["SKHRAPL", "typey:typey-type.json"]]],
+      ["and again", [["STKPWEPBG", "typey:typey-type.json"]]],
+      ["and", [["SKP", "typey:typey-type.json"], ["APBD", "plover:plover.json"]]],
+      ["again", [["TKPWEPB", "typey:typey-type.json"]]],
+      ["media", [["PHO*EUD", "typey:typey-type.json"]]],
+      ["query", [["KWAOER/REU", "typey:typey-type.json"]]],
+      ["Sinatra", [["STPHAT/RA", "typey:typey-type.json"]]],
+      ["{^'}", [["AE", "typey:typey-type.json"]]],
+      ["push", [["PURB", "typey:typey-type.json"]]],
+      ["origin", [["O*RPBLG", "typey:typey-type.json"]]],
+      ["master", [["PHAFRT", "typey:typey-type.json"]]],
+      ["diff", [["TKEUF", "typey:typey-type.json"]]],
+      ["{--}", [["TK*RB", "typey:typey-type.json"]]],
+      ["cached", [["KAERBD", "typey:typey-type.json"]]],
+      ["{^>^}", [["A*EPBG", "typey:typey-type.json"]]],
+      ["{^<^}", [["AEPBG", "typey:typey-type.json"]]],
+      ["{^/^}", [["OEU", "typey:typey-type.json"]]],
+      ["title", [["TAOEULT", "typey:typey-type.json"]]],
+      ["learn", [["HRERPB", "typey:typey-type.json"]]]
     ]);
 
     expect(generateListOfWordsAndStrokes(wordList, globalLookupDictionaryForMatchingCapitalisationAndPunctuation)).toEqual(
@@ -3725,13 +3725,13 @@ describe('rank outlines', () => {
   describe('with duplicate outlines across dictionaries', () => {
     it('returns sorted list of outlines for "GitHub", preserving dictionary order', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["TKPWEUT/HUB", "code.json"],
-        ["TKPWEUT/HUB", "typey-type.json"]
+        ["TKPWEUT/HUB", "typey:code.json"],
+        ["TKPWEUT/HUB", "typey:typey-type.json"]
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "GitHub", sharedAffixes)).toEqual([
-        ["TKPWEUT/HUB", "code.json"],
-        ["TKPWEUT/HUB", "typey-type.json"]
+        ["TKPWEUT/HUB", "typey:code.json"],
+        ["TKPWEUT/HUB", "typey:typey-type.json"]
       ]);
     });
   });
@@ -3739,13 +3739,13 @@ describe('rank outlines', () => {
   describe('with duplicate outlines across dictionaries', () => {
     it('returns unsorted list of outlines for "GitHub", preserving dictionary order', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["TKPWEUT/HUB", "typey-type.json"],
-        ["TKPWEUT/HUB", "code.json"],
+        ["TKPWEUT/HUB", "typey:typey-type.json"],
+        ["TKPWEUT/HUB", "typey:code.json"],
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "GitHub", sharedAffixes)).toEqual([
-        ["TKPWEUT/HUB", "typey-type.json"],
-        ["TKPWEUT/HUB", "code.json"]
+        ["TKPWEUT/HUB", "typey:typey-type.json"],
+        ["TKPWEUT/HUB", "typey:code.json"]
       ]);
     });
   });
@@ -3753,13 +3753,13 @@ describe('rank outlines', () => {
   describe('with different outlines across dictionaries', () => {
     it('returns shortest stroke', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["TKPWEUT/HUB", "typey-type.json"],
-        ["TKWEUT/HUB", "code.json"],
+        ["TKPWEUT/HUB", "typey:typey-type.json"],
+        ["TKWEUT/HUB", "typey:code.json"],
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "GitHub", sharedAffixes)).toEqual([
-        ["TKWEUT/HUB", "code.json"],
-        ["TKPWEUT/HUB", "typey-type.json"]
+        ["TKWEUT/HUB", "typey:code.json"],
+        ["TKPWEUT/HUB", "typey:typey-type.json"]
       ]);
     });
   });
@@ -3767,110 +3767,110 @@ describe('rank outlines', () => {
   describe('with different outlines across dictionaries', () => {
     it('returns sorted list of outlines for "exercises", prioritising S endings over Z, already in order', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["KPER/SAOEUZ/-Z", "plover.json"],
-        ["KPERZ/-T", "briefs.json"],
-        ["KPERZ/-S", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["ERBGS/SAOEUSZ", "plover.json"],
-        ["KPERSZ", "typey-type.json"],
+        ["KPER/SAOEUZ/-Z", "plover:plover.json"],
+        ["KPERZ/-T", "typey:briefs.json"],
+        ["KPERZ/-S", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["ERBGS/SAOEUSZ", "plover:plover.json"],
+        ["KPERSZ", "typey:typey-type.json"],
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "exercises", sharedAffixes)).toEqual([
-        ["KPERSZ", "typey-type.json"],
-        ["KPERZ/-T", "briefs.json"],
-        ["KPERZ/-S", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["ERBGS/SAOEUSZ", "plover.json"],
-        ["KPER/SAOEUZ/-Z", "plover.json"]
+        ["KPERSZ", "typey:typey-type.json"],
+        ["KPERZ/-T", "typey:briefs.json"],
+        ["KPERZ/-S", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["ERBGS/SAOEUSZ", "plover:plover.json"],
+        ["KPER/SAOEUZ/-Z", "plover:plover.json"]
       ]);
     });
 
     it('returns sorted list of outlines for "exercises", prioritising S endings over Z, not in order', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["KPER/SAOEUZ/-Z", "plover.json"],
-        ["KPERZ/-T", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["KPERZ/-S", "briefs.json"],
-        ["ERBGS/SAOEUSZ", "plover.json"],
-        ["KPERSZ", "typey-type.json"],
+        ["KPER/SAOEUZ/-Z", "plover:plover.json"],
+        ["KPERZ/-T", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["KPERZ/-S", "typey:briefs.json"],
+        ["ERBGS/SAOEUSZ", "plover:plover.json"],
+        ["KPERSZ", "typey:typey-type.json"],
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "exercises", sharedAffixes)).toEqual([
-        ["KPERSZ", "typey-type.json"],
-        ["KPERZ/-T", "briefs.json"],
-        ["KPERZ/-S", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["ERBGS/SAOEUSZ", "plover.json"],
-        ["KPER/SAOEUZ/-Z", "plover.json"]
+        ["KPERSZ", "typey:typey-type.json"],
+        ["KPERZ/-T", "typey:briefs.json"],
+        ["KPERZ/-S", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["ERBGS/SAOEUSZ", "plover:plover.json"],
+        ["KPER/SAOEUZ/-Z", "plover:plover.json"]
       ]);
     });
 
     // Note: this test will fail with node v10
     it('returns sorted list of outlines for "exercises", prioritising S endings over Z, not in order, with more than 10 elements', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["KPER/SAOEUZ/-Z", "plover.json"],
-        ["KPERZ/-T", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["KPERZ/-S", "briefs.json"],
-        ["ERBGS/SAOEUSZ", "plover.json"],
-        ["KPERSZ", "typey-type.json"],
+        ["KPER/SAOEUZ/-Z", "plover:plover.json"],
+        ["KPERZ/-T", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["KPERZ/-S", "typey:briefs.json"],
+        ["ERBGS/SAOEUSZ", "plover:plover.json"],
+        ["KPERSZ", "typey:typey-type.json"],
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "exercises", sharedAffixes)).toEqual([
-        ["KPERSZ", "typey-type.json"],
-        ["KPERZ/-T", "briefs.json"],
-        ["KPERZ/-S", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["KPERZ/-Z", "briefs.json"],
-        ["ERBGS/SAOEUSZ", "plover.json"],
-        ["KPER/SAOEUZ/-Z", "plover.json"]
+        ["KPERSZ", "typey:typey-type.json"],
+        ["KPERZ/-T", "typey:briefs.json"],
+        ["KPERZ/-S", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["KPERZ/-Z", "typey:briefs.json"],
+        ["ERBGS/SAOEUSZ", "plover:plover.json"],
+        ["KPER/SAOEUZ/-Z", "plover:plover.json"]
       ]);
     });
 
     it('returns sorted list of outlines for "slept", prioritising T endings over D, already in order', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["SHREPT", "plover.json"],
-        ["SHREPD", "plover.json"],
-        ["SHREPT", "plover.json"],
+        ["SHREPT", "plover:plover.json"],
+        ["SHREPD", "plover:plover.json"],
+        ["SHREPT", "plover:plover.json"],
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "slept", sharedAffixes)).toEqual([
-        ["SHREPT", "plover.json"],
-        ["SHREPT", "plover.json"],
-        ["SHREPD", "plover.json"]
+        ["SHREPT", "plover:plover.json"],
+        ["SHREPT", "plover:plover.json"],
+        ["SHREPD", "plover:plover.json"]
       ]);
     });
 
     it('returns sorted list of outlines for "intermediate", prioritising T endings over D, not in order', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["EUPBT/PHAOED", "plover.json"],
-        ["EUPBT/PHAOET", "plover.json"]
+        ["EUPBT/PHAOED", "plover:plover.json"],
+        ["EUPBT/PHAOET", "plover:plover.json"]
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "intermediate", sharedAffixes)).toEqual([
-        ["EUPBT/PHAOET", "plover.json"],
-        ["EUPBT/PHAOED", "plover.json"]
+        ["EUPBT/PHAOET", "plover:plover.json"],
+        ["EUPBT/PHAOED", "plover:plover.json"]
       ]);
     });
 
     it('returns sorted list of outlines for "credit card", prioritising T endings over D, except when the word ends in "d"', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["KRED/EUT/KART", "plover.json"],
-        ["KRED/EUT/KARD", "plover.json"]
+        ["KRED/EUT/KART", "plover:plover.json"],
+        ["KRED/EUT/KARD", "plover:plover.json"]
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "credit card", sharedAffixes)).toEqual([
-        ["KRED/EUT/KARD", "plover.json"],
-        ["KRED/EUT/KART", "plover.json"]
+        ["KRED/EUT/KARD", "plover:plover.json"],
+        ["KRED/EUT/KART", "plover:plover.json"]
       ]);
     });
   });
@@ -3880,13 +3880,13 @@ describe('rank outlines', () => {
   describe('with outlines with and without dashes', () => {
     it('returns sorted list of outlines for "test", including dashes', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["T-FPB", "plover.json"],
-        ["TEFL", "plover.json"],
+        ["T-FPB", "plover:plover.json"],
+        ["TEFL", "plover:plover.json"],
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "test", sharedAffixes)).toEqual([
-        ["TEFL", "plover.json"],
-        ["T-FPB", "plover.json"]
+        ["TEFL", "plover:plover.json"],
+        ["T-FPB", "plover:plover.json"]
       ]);
     });
   });
@@ -3978,15 +3978,15 @@ describe('rank outlines', () => {
         // ["TPWET", "misstrokes.json"],
         // ["TKPWHET", "misstrokes.json"],
         // ["TKPWETD", "misstrokes.json"],
-        ["TKPWET", "top-10000-project-gutenberg-words.json"],
-        ["TKPW-T", "typey-type.json"],
+        ["TKPWET", "typey:top-10000-project-gutenberg-words.json"],
+        ["TKPW-T", "typey:typey-type.json"],
         // ["TKPWELT", "misstrokes.json"],
         // ["TKPET", "misstrokes.json"],
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "upstarted", sharedAffixes)).toEqual([
-        ["TKPWET", "top-10000-project-gutenberg-words.json"],
-        ["TKPW-T", "typey-type.json"],
+        ["TKPWET", "typey:top-10000-project-gutenberg-words.json"],
+        ["TKPW-T", "typey:typey-type.json"],
         // ["TKWET", "misstrokes.json"],
         // ["TPWET", "misstrokes.json"],
         // ["TKPET", "misstrokes.json"],
