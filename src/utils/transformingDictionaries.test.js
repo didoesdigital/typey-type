@@ -530,13 +530,14 @@ let testReactDict = {
 };
 let testPloverDict = {
   "A/HREF": "<a href=\"{^}",
+  "APBD": "and",
+  "SKP": "and",
   "SP": "and",
   "P-R": "for",
   "PHO": "no",
   "WH": "when",
   "SPH": "some",
   "TPEURS": "first",
-  "APBD": "and",
   "KR-PGS": "cross-petition",
   "TKR*FPLT": "Dr.{-|}",
   "PH-BGS": "Mx.{-|}",
@@ -2358,11 +2359,11 @@ let testSuffixesDict = {
 };
 
 let personalDictionaries = [
-  [ "test-typey-type.json", testTypeyTypeDict],
+  // [ "test-typey-type.json", testTypeyTypeDict],
   [ "test-emoji.json", testEmojiDict],
   [ "test-ruby.json", testRubyDict],
   [ "test-react.json", testReactDict],
-  [ "test-plover.json", testPloverDict],
+  // [ "test-plover.json", testPloverDict],
   [ "test-prefixes.json", testPrefixesDict],
   [ "test-suffixes.json", testSuffixesDict],
   [ "test-aussie.json", testAussieDict],
@@ -2372,7 +2373,7 @@ let dictAndMisstrokes = [
   {"E": "he"}
 ];
 
-let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, dictAndMisstrokes);
+let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, dictAndMisstrokes, testPloverDict);
 
 const affixList = new AffixList(sortedAndCombinedLookupDictionary);
 AffixList.setSharedInstance(affixList);
@@ -2750,6 +2751,34 @@ let globalLookupDictionary = sortedAndCombinedLookupDictionary;
 //   ["{~|'^}twas", [["TWA*S", "plover.json"]]],
 //   ["gentlemen", [["SKWR*EPL", "plover.json"]]],
 // ]);
+
+describe('create a global lookup dictionary', () => {
+  it('returns combined lookup Map of words with strokes and their source dictionaries', () => {
+    let personalDicts = [["personal.json", {"TAO*EUPT": "Typey Type"}]];
+    let typeyAndMisstrokes = [
+      {"SKP": "and"},
+      {"E": "he"}
+    ];
+    let ploverDict = {
+      "APBD": "and",
+      "SKP": "and",
+      "SP": "and",
+    }
+    let expectedGlobalDict = new Map([
+      ['Typey Type', [
+        ['TAO*EUPT', 'user:personal.json'],
+      ]],
+      ['and', [
+        ['SKP', 'typey:typey-type.json'],
+        ['APBD', 'plover:plover-main-3-jun-2018.json'],
+        ['SKP', 'plover:plover-main-3-jun-2018.json'],
+        ['SP', 'plover:plover-main-3-jun-2018.json']
+      ]],
+    ]);
+    expect(createAGlobalLookupDictionary(personalDicts, typeyAndMisstrokes, ploverDict)).toEqual(expectedGlobalDict);
+  })
+});
+
 describe('add outlines for words to combined lookup dict', () => {
   it('returns combined dict without misstrokes', () => {
     let dictContent = {
