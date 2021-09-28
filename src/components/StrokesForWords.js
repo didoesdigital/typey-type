@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Component } from 'react';
+import { SOURCE_NAMESPACES } from '../constant/index.js';
 import { AffixList } from '../utils/affixList';
 import {
   rankOutlines,
@@ -71,7 +72,7 @@ class StrokesForWords extends Component {
     if (this.props.userSettings && this.props.userSettings.stenoLayout === 'stenoLayoutJapaneseSteno') { layoutTypeStyle = ' type-face--japanese'; }
 
     let strokeListItems = this.state.listOfStrokesAndDicts.map( (strokeAndDict, indexInListOfStrokesAndDicts) => {
-      let classes = strokeAndDict[2] === "typey" ? "steno-stroke px05 db fw7" : "steno-stroke px05 db steno-stroke--subtle";
+      let classes = strokeAndDict[2] === SOURCE_NAMESPACES.get("typey") ? "steno-stroke px05 db fw7" : "steno-stroke px05 db steno-stroke--subtle";
       let briefWithSpacesBetweenLetters = [...strokeAndDict[0]].join(" ").replace("-","dash");
 
       let stenoBriefKeys = (
@@ -86,7 +87,7 @@ class StrokesForWords extends Component {
 
       let stenoBriefKeysWithOrWithoutStrongTag = stenoBriefKeys;
 
-      if (strokeAndDict[2] === "typey") {
+      if (strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")) {
         stenoBriefKeysWithOrWithoutStrongTag = <strong>{stenoBriefKeys}</strong>;
       }
 
@@ -95,7 +96,7 @@ class StrokesForWords extends Component {
           <div className={"overflow-auto di mw-408 mr1" + layoutTypeStyle}>
             {stenoBriefKeysWithOrWithoutStrongTag}
           </div>
-          <span className={ strokeAndDict[2] === "typey" ? "" : "de-emphasized"}>{strokeAndDict[1]}</span>
+          <span className={ strokeAndDict[2] === SOURCE_NAMESPACES.get("typey") ? "" : "de-emphasized"}>{strokeAndDict[1]}</span>
         </li>
       )
     });
