@@ -778,8 +778,7 @@ function rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary) {
   return combinedLookupDictionary;
 }
 
-function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, outlinesWeHaveSeen) {
-  let misstrokesMap = new Map(Object.entries(misstrokes));
+function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokesMap, outlinesWeHaveSeen) {
 
   for (let [outline, translation] of Object.entries(dictContent)) {
     let seen = outlinesWeHaveSeen.has(outline);
@@ -809,21 +808,23 @@ function combineValidDictionaries(personalDictionariesNamesAndContents, typeyDic
   let [dictTypeyType, misstrokes] = typeyDictAndMisstrokes;
   // eslint-disable-next-line
   let _;
+  let sharedMisstrokesMap = new Map(Object.entries(misstrokes));
+  let emptyMap = new Map();
 
   // 1. Add Typey Type entries
-  [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictTypeyType, combinedLookupDictionary, `${SOURCE_NAMESPACES.get('typey')}:typey-type.json`, {}, new Set());
+  [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(dictTypeyType, combinedLookupDictionary, `${SOURCE_NAMESPACES.get('typey')}:typey-type.json`, emptyMap, new Set());
 
   // 2. Add personal dictionaries entries
   for (let i = 0; i < numberOfPersonalDictionaries; i++) {
     let dictName = personalDictionariesNamesAndContents[i][0];
     let dictContent = personalDictionariesNamesAndContents[i][1];
-    [combinedLookupDictionary, outlinesWeHaveSeen] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, `${SOURCE_NAMESPACES.get('user')}:${dictName}`, misstrokes, outlinesWeHaveSeen);
+    [combinedLookupDictionary, outlinesWeHaveSeen] = addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, `${SOURCE_NAMESPACES.get('user')}:${dictName}`, sharedMisstrokesMap, outlinesWeHaveSeen);
   }
 
   // 3. Add Plover dictionary entries
   if (!!ploverDict) {
     // eslint-disable-next-line
-    [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(ploverDict, combinedLookupDictionary, `${SOURCE_NAMESPACES.get('plover')}:${LATEST_PLOVER_DICT_NAME}`, misstrokes, new Set());
+    [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(ploverDict, combinedLookupDictionary, `${SOURCE_NAMESPACES.get('plover')}:${LATEST_PLOVER_DICT_NAME}`, sharedMisstrokesMap, new Set());
   }
 
   outlinesWeHaveSeen = new Set();

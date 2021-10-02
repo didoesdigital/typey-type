@@ -2421,11 +2421,11 @@ describe('add outlines for words to combined lookup dict', () => {
     };
     let combinedLookupDictionary = new Map();
     let dictName = "typey:typey-type.json";
-    let misstrokes = {
+    let misstrokes = new Map(Object.entries({
       "O": "to",
       "SED": "sed",
       "SOUPBSD": "sounds"
-    };
+    }));
     let seenSet = new Set();
     let expectedSet = new Set();
     expectedSet.add("TO");
