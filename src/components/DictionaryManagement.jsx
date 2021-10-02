@@ -126,9 +126,8 @@ class DictionaryManagement extends Component {
               let [outline, translation] = parsedDictionaryEntries[i];
               let invalidStenoOutline = outline.match(/[^#STKPWHRAO*-EUFRPBLGTSDZ/]/);
               if (invalidStenoOutline !== null) {
-                let length = 50;
-                let invalidStenoOutlineString = outline;
-                let trimmedInvalidStenoOutline = invalidStenoOutlineString.length > length ? invalidStenoOutlineString.substring(0, length - 3) + "…" : invalidStenoOutlineString.substring(0, length);
+                let maxLength = 50;
+                let trimmedInvalidStenoOutline = outline.length > maxLength ? outline.substring(0, maxLength - 3) + "…" : outline.substring(0, maxLength);
                 throw new Error(`${dictName} contains invalid steno outlines, such as: ${trimmedInvalidStenoOutline}`);
               }
 
