@@ -579,6 +579,7 @@ class DictionaryManagement extends Component {
                 <li>The Writer feature will ignore your personal dictionaries entirely and show only Typey&nbsp;Type translations.</li>
                 <li>This will probably do weird things with steno layouts other than the American (Ward Stone Ireland) layout and possibly with non-Plover theory punctuation.</li>
               </ul>
+              <p>Typey&nbsp;Type does not upload personal dictionaries anywhere. Your dictionaries stay on your device. Dictionary names (but not their contents) may be sent to Google Analytics.</p>
               <div className="checkbox-group p1">
                 <label className="checkbox-label mb1">
                   <input
