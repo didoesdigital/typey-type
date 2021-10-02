@@ -16,7 +16,7 @@ const AsyncDictionaryManagement = Loadable({
   delay: 300
 });
 
-const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDictionaryLoaded, globalLookupDictionaryLoaded, globalLookupDictionary, globalUserSettings, personalDictionaries, updateGlobalLookupDictionary, updatePersonalDictionaries, fetchAndSetupGlobalDict, ...dictionaryProps}) => {
+const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDictionaryLoaded, globalLookupDictionaryLoaded, globalLookupDictionary, globalUserSettings, personalDictionaries, toggleExperiment, updateGlobalLookupDictionary, updatePersonalDictionaries, fetchAndSetupGlobalDict, ...dictionaryProps}) => {
   return(
     <div>
       <Switch>
@@ -83,7 +83,9 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDict
             setGlobalDictionaryLoaded={setGlobalDictionaryLoaded}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
+            globalUserSettings={globalUserSettings}
             personalDictionaries={personalDictionaries}
+            toggleExperiment={toggleExperiment}
             updateGlobalLookupDictionary={updateGlobalLookupDictionary}
             updatePersonalDictionaries={updatePersonalDictionaries}
             {...dictionaryProps}

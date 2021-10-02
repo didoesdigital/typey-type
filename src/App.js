@@ -1087,6 +1087,31 @@ class App extends Component {
     return checked;
   }
 
+  toggleExperiment(event) {
+    let newState = Object.assign({}, this.state.globalUserSettings);
+
+    const target = event.target;
+    const value = target.checked;
+    const name = target.name;
+
+    newState.experiments[name] = value;
+
+    this.setState({globalUserSettings: newState}, () => {
+      writePersonalPreferences('globalUserSettings', this.state.globalUserSettings);
+    });
+
+    let labelString = value;
+    if (value === undefined) { labelString = "BAD_INPUT"; } else { labelString.toString(); }
+
+    GoogleAnalytics.event({
+      category: 'Global user settings',
+      action: 'Change ' + name,
+      label: labelString
+    });
+
+    return value;
+  }
+
   changeUserSetting(event) {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
@@ -2330,6 +2355,7 @@ class App extends Component {
                           globalUserSettings={this.state.globalUserSettings}
                           personalDictionaries={this.state.personalDictionaries}
                           stenoHintsOnTheFly={stenohintsonthefly}
+                          toggleExperiment={this.toggleExperiment.bind(this)}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                           updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
                           userSettings={this.state.userSettings}
