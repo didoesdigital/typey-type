@@ -274,8 +274,8 @@ class DictionaryManagement extends Component {
       labelString = fileNames.join(", ");
     }
     GoogleAnalytics.event({
-      category: 'Dictionary import',
-      action: 'Submit dictionaries',
+      category: 'Dictionary management',
+      action: 'Add dictionaries',
       label: labelString
     });
 
@@ -304,8 +304,8 @@ class DictionaryManagement extends Component {
     }
 
     GoogleAnalytics.event({
-      category: 'Dictionary config import',
-      action: 'Submit config',
+      category: 'Dictionary management',
+      action: 'Add config',
       label: labelString
     });
 
