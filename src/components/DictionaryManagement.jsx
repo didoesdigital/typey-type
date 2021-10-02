@@ -9,11 +9,14 @@ import {
 } from '../utils/transformingDictionaries';
 import PseudoContentButton from './PseudoContentButton';
 import { writePersonalPreferences } from '../utils/typey-type';
+import { getMisstrokes } from '../utils/getData';
 
 class DictionaryManagement extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      knownMisstrokes: null,
+      misstrokesInDictionaries: null,
       selectedFiles: null,
       importedDictionariesLoaded: false,
       importedDictionariesLoading: false,
@@ -35,6 +38,12 @@ class DictionaryManagement extends Component {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
+
+    Promise.resolve(getMisstrokes())
+      .then(knownMisstrokes => {
+        this.setState({knownMisstrokes: knownMisstrokes});
+      });
+
     let config = [];
     if (this.props.globalLookupDictionary && this.props.globalLookupDictionary['configuration']) {
       config = this.props.globalLookupDictionary['configuration']
@@ -68,6 +77,7 @@ class DictionaryManagement extends Component {
       })
     }
     else {
+      let misstrokesInDictionaries = [];
       for (let i = 0; i < filesLength; ++i) {
         let dictionary = files[i];
         let dictName = dictionary.name;
@@ -103,26 +113,36 @@ class DictionaryManagement extends Component {
               throw new Error("This JSON does not contain an object.");
             }
 
-            let parsedDictionaryKeys = Object.keys(parsedDictionary);
+            let parsedDictionaryEntries = Object.entries(parsedDictionary);
 
-            if (parsedDictionaryKeys.length < 1) {
+            if (parsedDictionaryEntries.length < 1) {
               throw new Error("This dictionary is empty.");
             }
 
-            let parsedDictionaryKeysLength = parsedDictionaryKeys.length;
+            let probableMisstrokes = [];
+            let parsedDictionaryEntriesLength = parsedDictionaryEntries.length;
 
-            for (let i = 0; i < parsedDictionaryKeysLength; ++i) {
-              let invalidStenoOutline = parsedDictionaryKeys[i].match(/[^#STKPWHRAO*-EUFRPBLGTSDZ/]/);
+            for (let i = 0; i < parsedDictionaryEntriesLength; ++i) {
+              let [outline, translation] = parsedDictionaryEntries[i];
+              let invalidStenoOutline = outline.match(/[^#STKPWHRAO*-EUFRPBLGTSDZ/]/);
               if (invalidStenoOutline !== null) {
                 let length = 50;
-                let invalidStenoOutlineString = parsedDictionaryKeys[i]
+                let invalidStenoOutlineString = outline;
                 let trimmedInvalidStenoOutline = invalidStenoOutlineString.length > length ? invalidStenoOutlineString.substring(0, length - 3) + "…" : invalidStenoOutlineString.substring(0, length);
                 throw new Error(`${dictName} contains invalid steno outlines, such as: ${trimmedInvalidStenoOutline}`);
+              }
+
+              if (this.state.knownMisstrokes[outline] && this.state.knownMisstrokes[outline] === translation) {
+                probableMisstrokes.push([outline, translation]);
               }
             }
 
             if (parsedDictionary && typeof parsedDictionary === "object") {
               validDictionaries.push([dictName, parsedDictionary]);
+            }
+
+            if (probableMisstrokes.length > 0) {
+              misstrokesInDictionaries.push({name: dictName, probableMisstrokes: probableMisstrokes});
             }
           }
           catch (error) {
@@ -146,6 +166,8 @@ class DictionaryManagement extends Component {
 
         reader.readAsText(dictionary);
       }
+
+      this.setState({misstrokesInDictionaries: misstrokesInDictionaries});
     }
   }
 
@@ -407,6 +429,33 @@ class DictionaryManagement extends Component {
       return <li key={index}>{dictionary}</li>
     });
 
+    const whyMisstrokes = (
+      <>
+        <details>
+          <summary>
+            <p>To see better stroke hints, you might move any misstrokes out of your main dictionaries into a separate misstroke dictionary and exclude it from Typey&nbsp;Type.</p>
+          </summary>
+          <p>Misstrokes are extra entries that use similar keys to produce the word you meant to write. If you regularly mistype a word, you might add a misstroke entry for the keys you are incorrectly pressing so that your dictionaries effectively auto-corrects your mistakes. This is great for increasing the accuracy of your output.</p>
+          <p>While you're learning steno theory, it can be difficult to recognise misstrokes. It might then take longer to learn the theory and develop intuition about what strokes to use for longer words and variations. For example, if you use the misstroke <span className="steno-stroke">SPHAOEU</span> to write “supply”, which is missing the left-hand <span className="steno-stroke">R</span> key from the usual outline <span className="steno-stroke">SPHRAOEU</span>, it might take you longer to work out the brief <span className="steno-stroke">SPHRAOEUG</span> for “supplying” or <span className="steno-stroke">SPWHRAOEU</span> for “blood&nbsp;supply”.</p>
+        </details>
+      </>
+    );
+
+    let misstrokesBlurb = this.state.knownMisstrokes === null ? (
+      <p>Loading misstrokes…</p>
+    ) : this.state.misstrokesInDictionaries?.length > 0 ? (
+      <>
+        <p>Your dictionaries contain entries that might be misstrokes or bad habits:</p>
+        <ul>
+          {this.state.misstrokesInDictionaries.map((dict, dictIndex) => {
+            const probableMisstrokes = dict.probableMisstrokes.map((entry, misstrokeIndex) => <li className="bg-warning wrap" key={misstrokeIndex}>"{entry[0]}": "{entry[1]}"</li>);
+            return <li key={dictIndex}>{dict.name}:<ul>{probableMisstrokes}</ul></li>
+          })}
+        </ul>
+        {whyMisstrokes}
+      </>
+    ) : whyMisstrokes;
+
     let showYourDictionaries = (
       <p>You can import your dictionaries and your dictionary config to look up briefs using your own dictionaries.</p>
     );
@@ -585,6 +634,7 @@ class DictionaryManagement extends Component {
                   <h3>Your dictionaries</h3>
                   {showYourDictionaries}
                   {showDictionaryErrors}
+                  {misstrokesBlurb}
                   {showYourConfig}
                   {showConfigErrors}
                   <form className="mt3 mb3" onSubmit={this.handleOnSubmitClear.bind(this)}>

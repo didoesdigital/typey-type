@@ -87,6 +87,17 @@ function getLatestPloverDict() {
   return dict;
 }
 
+async function getMisstrokes() {
+  if (misstrokes === null) {
+    const data = await fetchMisstrokesDict();
+    misstrokes = data;
+    return data;
+  }
+  else {
+    return Promise.resolve(misstrokes);
+  }
+}
+
 function getTypeyTypeDict() {
   let dict;
 
@@ -158,6 +169,7 @@ export {
   fetchDictionaryIndex,
   fetchResource, // for custom lesson setup and more
   getLesson,
+  getMisstrokes,
   getLatestPloverDict,
   getTypeyTypeDict
 };
