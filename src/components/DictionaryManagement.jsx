@@ -531,6 +531,7 @@ class DictionaryManagement extends Component {
                 <li>Local storage typically only holds about 5MB of data. If you have a bigger dictionary, you'll have to add it again on every visit.</li>
                 <li>If you add multiple dictionaries with the same steno outline (JSON key) with different translations (JSON values), Typey&nbsp;Type will happily show the same outline as a hint for each of the words (or phrases), even though your configuration would prevent using both.</li>
                 <li>The Writer feature will ignore your personal dictionaries entirely and show only Typey&nbsp;Type translations.</li>
+                <li>This will probably do weird things with steno layouts other than the American (Ward Stone Ireland) layout and possibly with non-Plover theory punctuation.</li>
               </ul>
             </div>
           </div>
