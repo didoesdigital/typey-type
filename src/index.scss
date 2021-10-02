@@ -124,6 +124,14 @@ li {
   margin-left: 1em;
 }
 
+details summary {
+  margin-bottom: 1em;
+}
+
+details summary > * {
+  display: inline;
+}
+
 p {
   line-height: 2;
   margin-bottom: 1em;
@@ -1572,6 +1580,10 @@ label {
   letter-spacing: 0.1em;
   speak: spell-out;
 
+  &::selection {
+    background-color: darken(desaturate(add-tint($brand-warning, 5%), 40%), 15%);
+  }
+
   .raw-steno-key {
     padding: 4px 0;
   }
@@ -1579,6 +1591,10 @@ label {
   &.steno-stroke--subtle {
     background-color: desaturate(add-tint($brand-primary, 25%), 40%);
     color: add-tint($brand-primary, 95%);
+
+    &::selection {
+      background-color: darken(desaturate(add-tint($brand-warning, 5%), 40%), 15%);
+    }
   }
 }
 .raw-steno-key {

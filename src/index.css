@@ -52,6 +52,12 @@ h6 {
 li {
   margin-left: 1em; }
 
+details summary {
+  margin-bottom: 1em; }
+
+details summary > * {
+  display: inline; }
+
 p {
   line-height: 2;
   margin-bottom: 1em; }
@@ -1456,11 +1462,15 @@ label {
   color: #ece9ee;
   letter-spacing: 0.1em;
   speak: spell-out; }
+  .steno-stroke::selection {
+    background-color: #ca9733; }
   .steno-stroke .raw-steno-key {
     padding: 4px 0; }
   .steno-stroke.steno-stroke--subtle {
     background-color: #6c6c6c;
     color: #f5f4f6; }
+    .steno-stroke.steno-stroke--subtle::selection {
+      background-color: #ca9733; }
 
 .raw-steno-key {
   background-color: #444444;
