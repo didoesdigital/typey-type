@@ -146,7 +146,6 @@ class DictionaryManagement extends Component {
             }
           }
           catch (error) {
-            console.error(error);
             invalidDictionaries.push([dictName, error.message]);
           }
 
@@ -239,7 +238,6 @@ class DictionaryManagement extends Component {
           validConfig = configName;
         }
         catch (error) {
-          console.error(error);
           invalidConfig = [configName, error.message];
         }
 
