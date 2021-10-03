@@ -8,6 +8,7 @@ import {
   rankOutlines,
 } from './transformingDictionaries';
 import { AffixList } from './affixList';
+import misstrokesJSON from '../json/misstrokes.json'
 
 let testTypeyTypeDict = {
   "TK-LS": "{^^}",
@@ -3289,17 +3290,17 @@ describe('choose outline for phrase', () => {
       let strokeLookupAttempts = 0;
       let globalLookupDictionaryForAs = new Map([
         ["as", [
-          ["A/AZ", "typey:typey-type.json"],
-          ["AS", "typey:typey-type.json"],
-          ["ASZ", "typey:typey-type.json"],
-          ["AZ", "typey:typey-type.json"],
+          ["TEFT/A/AZ", "typey:typey-type.json"],
+          ["TEFT/AS", "typey:typey-type.json"],
+          ["TEFT/ASZ", "typey:typey-type.json"],
+          ["TEFT/AZ", "typey:typey-type.json"],
         ]],
       ]);
 
       // maybe it would be nice to prioritise AZ over AS here…
       // not of prioritising S over Z endings…
       // instead reserving AS for {^s}{a^} per old dict:
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForAs, chosenStroke, strokeLookupAttempts)).toEqual( [ "AS", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForAs, chosenStroke, strokeLookupAttempts)).toEqual( [ "TEFT/AS", 1 ]);
     });
 
     it('shows the outline for the word "rest"', () => {
@@ -3325,15 +3326,15 @@ describe('choose outline for phrase', () => {
       let strokeLookupAttempts = 0;
       let globalLookupDictionaryForInto = new Map([
         ["into", [
-          ["TPHAO", "typey:typey-type.json"],
-          ["SPWAO", "typey:typey-type.json"],
-          ["EUPB/TO", "typey:typey-type.json"],
-          ["TPHAO*", "typey:typey-type.json"],
-          ["TPHRAO", "typey:typey-type.json"],
+          ["TEFT/TPHAO", "typey:typey-type.json"],
+          ["TEFT/SPWAO", "typey:typey-type.json"],
+          ["TEFT/EUPB/TO", "typey:typey-type.json"],
+          ["TEFT/TPHAO*", "typey:typey-type.json"],
+          ["TEFT/TPHRAO", "typey:typey-type.json"],
         ]],
       ]);
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForInto, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHAO", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForInto, chosenStroke, strokeLookupAttempts)).toEqual( [ "TEFT/TPHAO", 1 ]);
     });
 
     it('shows the outline for the word "get"', () => {
@@ -3696,7 +3697,7 @@ describe('rank outlines', () => {
         ["TKPWEUT/HUB", "typey-type.json", "typey"]
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "GitHub", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "GitHub", sharedAffixes)).toEqual([
         ["TKPWEUT/HUB", "code.json", "typey"],
         ["TKPWEUT/HUB", "typey-type.json", "typey"]
       ]);
@@ -3710,7 +3711,7 @@ describe('rank outlines', () => {
         ["TKPWEUT/HUB", "code.json", "typey"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "GitHub", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "GitHub", sharedAffixes)).toEqual([
         ["TKPWEUT/HUB", "typey-type.json", "typey"],
         ["TKPWEUT/HUB", "code.json", "typey"]
       ]);
@@ -3724,7 +3725,7 @@ describe('rank outlines', () => {
         ["TKWEUT/HUB", "code.json", "typey"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "GitHub", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "GitHub", sharedAffixes)).toEqual([
         ["TKWEUT/HUB", "code.json", "typey"],
         ["TKPWEUT/HUB", "typey-type.json", "typey"]
       ]);
@@ -3742,7 +3743,7 @@ describe('rank outlines', () => {
         ["KPERSZ", "typey-type.json", "typey"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "exercises", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "exercises", sharedAffixes)).toEqual([
         ["KPERSZ", "typey-type.json", "typey"],
         ["KPERZ/-T", "briefs.json", "typey"],
         ["KPERZ/-S", "briefs.json", "typey"],
@@ -3762,7 +3763,7 @@ describe('rank outlines', () => {
         ["KPERSZ", "typey-type.json", "typey"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "exercises", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "exercises", sharedAffixes)).toEqual([
         ["KPERSZ", "typey-type.json", "typey"],
         ["KPERZ/-T", "briefs.json", "typey"],
         ["KPERZ/-S", "briefs.json", "typey"],
@@ -3788,7 +3789,7 @@ describe('rank outlines', () => {
         ["KPERSZ", "typey-type.json", "typey"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "exercises", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "exercises", sharedAffixes)).toEqual([
         ["KPERSZ", "typey-type.json", "typey"],
         ["KPERZ/-T", "briefs.json", "typey"],
         ["KPERZ/-S", "briefs.json", "typey"],
@@ -3805,15 +3806,15 @@ describe('rank outlines', () => {
 
     it('returns sorted list of outlines for "slept", prioritising T endings over D, already in order', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["SHREPT", "plover.json", "plover"],
-        ["SHREPD", "plover.json", "plover"],
-        ["SHREPT", "plover.json", "plover"],
+        ["TEFT/SHREPT", "plover.json", "plover"],
+        ["TEFT/SHREPD", "plover.json", "plover"],
+        ["TEFT/SHREPT", "plover.json", "plover"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "slept", sharedAffixes)).toEqual([
-        ["SHREPT", "plover.json", "plover"],
-        ["SHREPT", "plover.json", "plover"],
-        ["SHREPD", "plover.json", "plover"]
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "slept", sharedAffixes)).toEqual([
+        ["TEFT/SHREPT", "plover.json", "plover"],
+        ["TEFT/SHREPT", "plover.json", "plover"],
+        ["TEFT/SHREPD", "plover.json", "plover"]
       ]);
     });
 
@@ -3823,7 +3824,7 @@ describe('rank outlines', () => {
         ["EUPBT/PHAOET", "plover.json", "plover"]
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "intermediate", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "intermediate", sharedAffixes)).toEqual([
         ["EUPBT/PHAOET", "plover.json", "plover"],
         ["EUPBT/PHAOED", "plover.json", "plover"]
       ]);
@@ -3835,7 +3836,7 @@ describe('rank outlines', () => {
         ["KRED/EUT/KARD", "plover.json", "plover"]
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "credit card", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "credit card", sharedAffixes)).toEqual([
         ["KRED/EUT/KARD", "plover.json", "plover"],
         ["KRED/EUT/KART", "plover.json", "plover"]
       ]);
@@ -3853,7 +3854,7 @@ describe('rank outlines', () => {
         ["SKP", "dict.json", "user"],
         ["SK", "briefs.json", "user"],
       ];
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "and", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "and", sharedAffixes)).toEqual([
         ["SK", "briefs.json", "user"],
         ["SKP", "dict.json", "user"],
         ["SKP", "dict.json", "typey"],
@@ -3877,15 +3878,25 @@ describe('rank outlines', () => {
         ["SAO*EUT", "briefs.json", "user"],
         ["SKRAOEUT", "briefs.json", "user"],
       ];
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "cite", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "cite", sharedAffixes)).toEqual([
         ["SAO*EUT", "briefs.json", "user"],
         ["SKRAOEUT", "briefs.json", "user"],
         ["KRAOEUT", "dict.json", "typey"],
         ["SKRAO*EUT", "dict.json", "typey"],
         ["KRAOEUR", "dict.json", "typey"],
         ["KRAOEUT", "plover.json", "plover"],
-        ["KRAOEUR", "plover.json", "plover"],
         ["SKRAO*EUT", "plover.json", "plover"],
+        ["KRAOEUR", "plover.json", "plover"],
+
+        // if S… entries were in misstrokes.json
+        // ["SAO*EUT", "briefs.json", "user"],
+        // ["SKRAOEUT", "briefs.json", "user"],
+        // ["KRAOEUT", "dict.json", "typey"],
+        // ["SKRAO*EUT", "dict.json", "typey"],
+        // ["KRAOEUR", "dict.json", "typey"],
+        // ["KRAOEUT", "plover.json", "plover"],
+        // ["KRAOEUR", "plover.json", "plover"],
+        // ["SKRAO*EUT", "plover.json", "plover"],
       ]);
     });
   });
@@ -3900,7 +3911,7 @@ describe('rank outlines', () => {
         ["TEFL", "plover.json", "plover"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "test", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "test", sharedAffixes)).toEqual([
         ["TEFL", "plover.json", "plover"],
         ["T-FPB", "plover.json", "plover"]
       ]);
@@ -3914,7 +3925,7 @@ describe('rank outlines', () => {
         ["TAEFT", "user.json", "user"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "test", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "test", sharedAffixes)).toEqual([
         ["TAEFT", "user.json", "user"],
         ["T*EFT", "user.json", "user"]
       ]);
@@ -3926,7 +3937,7 @@ describe('rank outlines', () => {
         ["TAEFT/TAEFTS", "user.json", "user"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "test", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "test", sharedAffixes)).toEqual([
         ["TAEFT/TAEFTS", "user.json", "user"],
         ["T*EFT/T*EFT", "user.json", "user"],
       ]);
@@ -3938,7 +3949,7 @@ describe('rank outlines', () => {
         ["TAEFTS/TAEFTS", "user.json", "user"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "test", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "test", sharedAffixes)).toEqual([
         ["T*EFT/T*EFT", "user.json", "user"],
         ["TAEFTS/TAEFTS", "user.json", "user"],
       ]);
@@ -3956,7 +3967,7 @@ describe('rank outlines', () => {
         ["TKPWRASZ/HOP/*ER", "user.json", "user"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "grasshopper", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "grasshopper", sharedAffixes)).toEqual([
         ["TKPWHRFRPBLG", "user.json", "user"],
         ["TKPWHR*FRPBLG", "user.json", "user"],
         ["TKPWRASZ/HOP", "user.json", "user"],
@@ -3977,7 +3988,7 @@ describe('rank outlines', () => {
         ["AUP/STARTD", "user.json", "user"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "upstarted", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upstarted", sharedAffixes)).toEqual([
         ["AUP/STARTD", "user.json", "user"],
         ["UP/STARTD", "user.json", "user"],
         ["AUP/START/-D", "user.json", "user"],
@@ -4000,7 +4011,7 @@ describe('rank outlines', () => {
         // ["TKPET", "misstrokes.json"],
       ];
 
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "upstarted", sharedAffixes)).toEqual([
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upstarted", sharedAffixes)).toEqual([
         ["TKPWET", "top-10000-project-gutenberg-words.json", "typey"],
         ["TKPW-T", "typey-type.json", "typey"],
         // ["TKWET", "misstrokes.json"],
@@ -4038,7 +4049,7 @@ describe('rank outlines', () => {
   //       ["AUP/HOELS/TREU", "condensed-strokes.json"],
   //     ];
 
-  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "upholstery", sharedAffixes)).toEqual([
+  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upholstery", sharedAffixes)).toEqual([
   //       ["AUP/HOELT/REU", "personal.json"],
   //       ["AUP/HOFLT/REU", "personal.json"],
   //       ["AUP/HOL/STREU", "personal.json"],
@@ -4074,7 +4085,7 @@ describe('rank outlines', () => {
   //       ["SAEBGS", "typey-type.json"],
   //     ];
 
-  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "upholstery", sharedAffixes)).toEqual([
+  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upholstery", sharedAffixes)).toEqual([
   //       ["SA*EF", "user.json"],
   //       ["SAEBGS", "typey-type.json"],
   //       ["SAEBGS", "dict.json"],

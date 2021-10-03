@@ -1,5 +1,6 @@
 import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from '../constant/index.js';
 import { AffixList } from './affixList';
+import misstrokesJSON from '../json/misstrokes.json'
 
 function escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
@@ -163,7 +164,7 @@ function getRankedOutlineFromLookupEntry(lookupEntry, translation) {
   let affixes = AffixList.getSharedInstance();
   let namespacedStrokesAndDicts = splitIntoStrokesDictsAndNamespaces(lookupEntry);
 
-  return rankOutlines(namespacedStrokesAndDicts, translation, affixes)[0][0];
+  return rankOutlines(namespacedStrokesAndDicts, misstrokesJSON, translation, affixes)[0][0];
 }
 
 function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar) {
@@ -724,7 +725,8 @@ function penaliseSlashesWithoutPrefixesOrSuffixes(outline, translation, affixes)
   return penaltyForSlashesWithoutPrefixesOrSuffixes;
 }
 
-function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation, affixes = {suffixes: [], prefixes: []}) {
+function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, translation, affixes = {suffixes: [], prefixes: []}) {
+  misstrokesJSON = misstrokesJSON || {};
   arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
     if (a[2] === "user" && b[2] !== "user") { return -1; }
     if (b[2] === "user" && a[2] !== "user") { return 1; }
@@ -734,6 +736,9 @@ function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, translation, affixe
 
     if (a[1] === "top-10000-project-gutenberg-words.json") { return -1; }
     if (b[1] === "top-10000-project-gutenberg-words.json") { return 1; }
+
+    if ((misstrokesJSON[a[0]] && misstrokesJSON[a[0]] === translation) && !(misstrokesJSON[b[0]] && misstrokesJSON[b[0]] === translation)) { return 1; }
+    if ((misstrokesJSON[b[0]] && misstrokesJSON[b[0]] === translation) && !(misstrokesJSON[a[0]] && misstrokesJSON[a[0]] === translation)) { return -1; }
 
     let outlineA = a[0];
     let outlineB = b[0];

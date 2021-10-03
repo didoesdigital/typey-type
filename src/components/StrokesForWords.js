@@ -21,9 +21,11 @@ import {
   mapBriefToPalantypeKeys,
   splitBriefsIntoStrokes
 } from './../utils/typey-type';
+import misstrokesJSON from '../json/misstrokes.json'
 
 class StrokesForWords extends Component {
   state = {
+    knownMisstrokes: misstrokesJSON,
     phrase: "",
     listOfStrokesAndDicts: []
   }
@@ -316,7 +318,8 @@ function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary) {
     let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(lookupText.trim(), globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
-  listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, phrase, AffixList.getSharedInstance());
+
+  listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, misstrokesJSON, phrase, AffixList.getSharedInstance());
 
   if (phrase === "A") { listOfStrokesAndDicts = [["A*P", "fingerspelling"]]; }
   if (phrase === "B") { listOfStrokesAndDicts = [["PW*P", "fingerspelling"]]; }
