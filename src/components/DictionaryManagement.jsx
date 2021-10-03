@@ -9,13 +9,12 @@ import {
 } from '../utils/transformingDictionaries';
 import PseudoContentButton from './PseudoContentButton';
 import { writePersonalPreferences } from '../utils/typey-type';
-import { getMisstrokes } from '../utils/getData';
+import misstrokesJSON from '../json/misstrokes.json'
 
 class DictionaryManagement extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      knownMisstrokes: null,
       misstrokesInDictionaries: null,
       selectedFiles: null,
       importedDictionariesLoaded: false,
@@ -38,11 +37,6 @@ class DictionaryManagement extends Component {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
-
-    Promise.resolve(getMisstrokes())
-      .then(knownMisstrokes => {
-        this.setState({knownMisstrokes: knownMisstrokes});
-      });
 
     let config = [];
     if (this.props.globalLookupDictionary && this.props.globalLookupDictionary['configuration']) {
@@ -131,7 +125,7 @@ class DictionaryManagement extends Component {
                 throw new Error(`${dictName} contains invalid steno outlines, such as: ${trimmedInvalidStenoOutline}`);
               }
 
-              if (this.state.knownMisstrokes !== null && this.state.knownMisstrokes[outline] && this.state.knownMisstrokes[outline] === translation) {
+              if (misstrokesJSON[outline] && misstrokesJSON[outline] === translation) {
                 probableMisstrokes.push([outline, translation]);
               }
             }
@@ -438,9 +432,7 @@ class DictionaryManagement extends Component {
       </>
     );
 
-    let misstrokesBlurb = this.state.knownMisstrokes === null ? (
-      <p>Loading misstrokes…</p>
-    ) : this.state.misstrokesInDictionaries?.length > 0 ? (
+    let misstrokesBlurb = this.state.misstrokesInDictionaries?.length > 0 ? (
       <>
         <p>Your dictionaries contain entries that might be misstrokes or bad habits:</p>
         <ul>
