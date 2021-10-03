@@ -737,8 +737,8 @@ function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, tra
     if (a[1] === "top-10000-project-gutenberg-words.json") { return -1; }
     if (b[1] === "top-10000-project-gutenberg-words.json") { return 1; }
 
-    if ((misstrokesJSON[a[0]] && misstrokesJSON[a[0]] === translation) && !(misstrokesJSON[b[0]] && misstrokesJSON[b[0]] === translation)) { return 1; }
-    if ((misstrokesJSON[b[0]] && misstrokesJSON[b[0]] === translation) && !(misstrokesJSON[a[0]] && misstrokesJSON[a[0]] === translation)) { return -1; }
+    if ((misstrokesJSON[a[0]] === translation) && !(misstrokesJSON[b[0]] === translation)) { return 1; }
+    if ((misstrokesJSON[b[0]] === translation) && !(misstrokesJSON[a[0]] === translation)) { return -1; }
 
     let outlineA = a[0];
     let outlineB = b[0];
