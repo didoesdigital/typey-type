@@ -3846,6 +3846,7 @@ describe('rank outlines', () => {
   describe('with different outlines including misstrokes across dictionaries', () => {
     it('returns sorted list of outlines for "and", prioritising user, typey, plover namespaces, and by length', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
+        ["-PBD", "plover.json", "plover"],
         ["SP", "plover.json", "plover"],
         ["SKP", "plover.json", "plover"],
         ["APBD", "plover.json", "plover"],
@@ -3862,6 +3863,7 @@ describe('rank outlines', () => {
         ["SP", "plover.json", "plover"],
         ["SKP", "plover.json", "plover"],
         ["APBD", "plover.json", "plover"],
+        ["-PBD", "plover.json", "plover"],
       ]);
     });
   });
@@ -3897,6 +3899,36 @@ describe('rank outlines', () => {
         // ["KRAOEUT", "plover.json", "plover"],
         // ["KRAOEUR", "plover.json", "plover"],
         // ["SKRAO*EUT", "plover.json", "plover"],
+      ]);
+    });
+  });
+
+  describe('with different outlines including misstrokes across dictionaries', () => {
+    it('returns sorted list of outlines for "quiz", prioritising good strokes over misstrokes that are shorter', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["KWUZ", "plover.json", "plover"],
+        ["KWEUZ", "plover.json", "plover"],
+      ];
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "quiz", sharedAffixes)).toEqual([
+        ["KWEUZ", "plover.json", "plover"],
+        ["KWUZ", "plover.json", "plover"],
+      ]);
+    });
+  });
+
+  describe('with different outlines including misstrokes across dictionaries', () => {
+    it('returns sorted list of outlines for "he", prioritising user, typey, plover namespaces, and good strokes over misstrokes that are shorter', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["E", "magnum.json", "user"],
+        ["HE", "plover.json", "plover"],
+        ["E", "plover.json", "plover"],
+        ["HE", "dict.json", "typey"],
+      ];
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "he", sharedAffixes)).toEqual([
+        ["E", "magnum.json", "user"],
+        ["HE", "dict.json", "typey"],
+        ["HE", "plover.json", "plover"],
+        ["E", "plover.json", "plover"],
       ]);
     });
   });
