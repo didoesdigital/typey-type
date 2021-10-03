@@ -101,16 +101,14 @@ async function getMisstrokes() {
 function getTypeyTypeDict() {
   let dict;
 
-  if (dictTypeyType === null || misstrokes === null) {
-    let misstrokesPromise = fetchMisstrokesDict();
-    let dictPromise = fetchDictTypeyType();
-    dict = Promise.all([dictPromise, misstrokesPromise]).then(data => {
-      [dictTypeyType, misstrokes] = data;
+  if (dictTypeyType === null) {
+    dict = fetchDictTypeyType().then(data => {
+      dictTypeyType = data;
       return data;
     });
   }
   else {
-    dict = Promise.resolve([dictTypeyType, misstrokes]);
+    dict = Promise.resolve(dictTypeyType);
   }
 
   return dict;

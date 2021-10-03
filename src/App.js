@@ -433,13 +433,13 @@ class App extends Component {
     else {
       globalDictionaryLoading = true;
       loadingPromise = Promise.all([getTypeyTypeDict(), withPlover ? getLatestPloverDict() : {}]).then(data => {
-        let [typeyDictAndMisstrokes, latestPloverDict] = data;
+        let [typeyDict, latestPloverDict] = data;
         // let t0 = performance.now();
         // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
         //   dictAndMisstrokes[1] = {};
         // }
 
-        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, typeyDictAndMisstrokes, withPlover ? latestPloverDict : null);
+        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, typeyDict, withPlover ? latestPloverDict : null);
         // let t1 = performance.now();
         // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
 

@@ -3,6 +3,7 @@ import {
   chooseOutlineForPhrase,
   createAGlobalLookupDictionary,
   createStrokeHintForPhrase,
+  combineValidDictionaries,
   generateListOfWordsAndStrokes,
   rankOutlines,
 } from './transformingDictionaries';
@@ -2368,12 +2369,8 @@ let personalDictionaries = [
   [ "test-suffixes.json", testSuffixesDict],
   [ "test-aussie.json", testAussieDict],
 ];
-let dictAndMisstrokes = [
-  testTypeyTypeDict,
-  {"E": "he"}
-];
 
-let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, dictAndMisstrokes, testPloverDict);
+let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, testTypeyTypeDict, testPloverDict);
 
 const affixList = new AffixList(sortedAndCombinedLookupDictionary);
 AffixList.setSharedInstance(affixList);
@@ -2384,10 +2381,7 @@ let globalLookupDictionary = sortedAndCombinedLookupDictionary;
 describe('create a global lookup dictionary', () => {
   it('returns combined lookup Map of words with strokes and their source dictionaries', () => {
     let personalDicts = [["personal.json", {"TAO*EUPT": "Typey Type"}]];
-    let typeyAndMisstrokes = [
-      {"SKP": "and"},
-      {"E": "he"}
-    ];
+    let typeyDict = {"SKP": "and"};
     let ploverDict = {
       "APBD": "and",
       "SKP": "and",
@@ -2404,12 +2398,12 @@ describe('create a global lookup dictionary', () => {
         ['SP', 'plover:plover-main-3-jun-2018.json']
       ]],
     ]);
-    expect(createAGlobalLookupDictionary(personalDicts, typeyAndMisstrokes, ploverDict)).toEqual(expectedGlobalDict);
+    expect(createAGlobalLookupDictionary(personalDicts, typeyDict, ploverDict)).toEqual(expectedGlobalDict);
   })
 });
 
 describe('add outlines for words to combined lookup dict', () => {
-  it('returns combined dict without misstrokes', () => {
+  it('returns combined dict including misstrokes', () => {
     let dictContent = {
       "TO": "to",
       "O": "to",
@@ -2421,27 +2415,132 @@ describe('add outlines for words to combined lookup dict', () => {
     };
     let combinedLookupDictionary = new Map();
     let dictName = "typey:typey-type.json";
-    let misstrokes = new Map(Object.entries({
-      "O": "to",
-      "SED": "sed",
-      "SOUPBSD": "sounds"
-    }));
+    // let misstrokes = new Map(Object.entries({
+    //   "O": "to",
+    //   "SED": "sed",
+    //   "SOUPBSD": "sounds"
+    // }));
     let seenSet = new Set();
     let expectedSet = new Set();
     expectedSet.add("TO");
+    expectedSet.add("O");
     expectedSet.add("SED");
     expectedSet.add("SAEUD");
     expectedSet.add("SOUPBD/-Z");
     expectedSet.add("SOUPBDZ");
+    expectedSet.add("SOUPBSD");
     let expectedResult = new Map([
-      ["to", [["TO", "typey:typey-type.json"]]],
+      ["to", [["TO", "typey:typey-type.json"],["O", "typey:typey-type.json"]]],
       ["said", [["SED", "typey:typey-type.json"], ["SAEUD", "typey:typey-type.json"]]],
-      ["sounds", [["SOUPBD/-Z", "typey:typey-type.json"], ["SOUPBDZ", "typey:typey-type.json"]]]
+      ["sounds", [["SOUPBD/-Z", "typey:typey-type.json"], ["SOUPBDZ", "typey:typey-type.json"], ["SOUPBSD", "typey:typey-type.json"]]]
     ]);
-    expect(addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, misstrokes, seenSet)).toEqual([expectedResult, expectedSet]);
+    expect(addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, seenSet)).toEqual([expectedResult, expectedSet]);
   })
 })
 
+describe('combinining valid dictionaries without sorting', () => {
+  it('returns a combined Map with strokes left unsorted which means dictionary insertion order and alphabetic where Typey Type is processed first', () => {
+    let personalDictionaries = [
+      [ "personal.json", {"TAO*EUPT": "Typey Type"}],
+      [ "overrides.json", {"SED": "sed"}],
+      [ "misstrokes.json", {"E": "he"}],
+    ];
+
+    let testTypeyTypeDict = {
+      "-F": "of",
+      "EU": "I",
+      "HE": "he",
+      "SAEUD": "said",
+      "SED": "said",
+      "SKP": "and",
+      "SOPL": "some",
+      "SOUPBDZ": "sounds",
+      "TO": "to",
+      "TPHO": "no",
+      "TPOR": "for",
+      "WHEPB": "when",
+    }
+
+    let testPloverDict = {
+      "*F": "of",
+      "-F": "of",
+      "1-R": "I",
+      "APBD": "and",
+      "E": "he",
+      "HE": "he",
+      "O": "to",
+      "P-R": "for",
+      "PHO": "no",
+      "SAEUD": "said",
+      "SED": "said",
+      "SKP": "and",
+      "SOUPBD/-Z": "sounds",
+      "SOUPBDZ": "sounds",
+      "SOUPBSD": "sounds",
+      "SP": "and",
+      "SPH": "some",
+      "WH": "when",
+    };
+
+    let expectedCombinedDict = new Map([
+      ['Typey Type', [
+        ['TAO*EUPT', 'user:personal.json'],
+      ]],
+      ['and', [
+        ['SKP', 'typey:typey-type.json'],
+        ['APBD', 'plover:plover-main-3-jun-2018.json'],
+        ['SKP', 'plover:plover-main-3-jun-2018.json'],
+        ['SP', 'plover:plover-main-3-jun-2018.json'],
+      ]],
+      ["to", [["TO", "typey:typey-type.json"], ["O", "plover:plover-main-3-jun-2018.json"]]],
+      ["said", [
+        ["SAEUD", "typey:typey-type.json"],
+        ["SED", "typey:typey-type.json"],
+        ["SAEUD", "plover:plover-main-3-jun-2018.json"],
+        ["SED", "plover:plover-main-3-jun-2018.json"],
+      ]],
+      ["sed", [["SED", "user:overrides.json"]]],
+      ["sounds", [
+        ["SOUPBDZ", "typey:typey-type.json"],
+        ["SOUPBD/-Z", "plover:plover-main-3-jun-2018.json"],
+        ["SOUPBDZ", "plover:plover-main-3-jun-2018.json"],
+        ["SOUPBSD", "plover:plover-main-3-jun-2018.json"],
+      ]],
+      ["he", [
+        ["HE", "typey:typey-type.json"],
+        ["E", "user:misstrokes.json"],
+        ["E", "plover:plover-main-3-jun-2018.json"],
+        ["HE", "plover:plover-main-3-jun-2018.json"],
+      ]],
+      ["of", [
+        ["-F", "typey:typey-type.json"],
+        ["*F", "plover:plover-main-3-jun-2018.json"],
+        ["-F", "plover:plover-main-3-jun-2018.json"],
+      ]],
+      ["I", [
+        ["EU", "typey:typey-type.json"],
+        ["1-R", "plover:plover-main-3-jun-2018.json"],
+      ]],
+      ["some", [
+        ["SOPL", "typey:typey-type.json"],
+        ["SPH", "plover:plover-main-3-jun-2018.json"],
+      ]],
+      ["no", [
+        ["TPHO", "typey:typey-type.json"],
+        ["PHO", "plover:plover-main-3-jun-2018.json"],
+      ]],
+      ["for", [
+        ["TPOR", "typey:typey-type.json"],
+        ["P-R", "plover:plover-main-3-jun-2018.json"],
+      ]],
+      ["when", [
+        ["WHEPB", "typey:typey-type.json"],
+        ["WH", "plover:plover-main-3-jun-2018.json"],
+      ]]
+    ]);
+    expect(combineValidDictionaries(personalDictionaries, testTypeyTypeDict, testPloverDict)).toEqual(expectedCombinedDict);
+  })
+})
 
 describe('create stroke hint for phrase', () => {
   describe('returns string showing all the space or slash separated strokes to write a whole phrase', () => {
@@ -3742,6 +3841,55 @@ describe('rank outlines', () => {
       ]);
     });
   });
+
+  describe('with different outlines including misstrokes across dictionaries', () => {
+    it('returns sorted list of outlines for "and", prioritising user, typey, plover namespaces, and by length', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["SP", "plover.json", "plover"],
+        ["SKP", "plover.json", "plover"],
+        ["APBD", "plover.json", "plover"],
+        ["APBD", "dict.json", "typey"],
+        ["SKP", "dict.json", "typey"],
+        ["SKP", "dict.json", "user"],
+        ["SK", "briefs.json", "user"],
+      ];
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "and", sharedAffixes)).toEqual([
+        ["SK", "briefs.json", "user"],
+        ["SKP", "dict.json", "user"],
+        ["SKP", "dict.json", "typey"],
+        ["APBD", "dict.json", "typey"],
+        ["SP", "plover.json", "plover"],
+        ["SKP", "plover.json", "plover"],
+        ["APBD", "plover.json", "plover"],
+      ]);
+    });
+  });
+
+  describe('with different outlines including misstrokes across dictionaries', () => {
+    it('returns sorted list of outlines for "cite", prioritising user, typey, plover namespaces, and good strokes over misstrokes of equal length', () => {
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["SKRAO*EUT", "plover.json", "plover"],
+        ["KRAOEUR", "plover.json", "plover"],
+        ["KRAOEUT", "plover.json", "plover"],
+        ["SKRAO*EUT", "dict.json", "typey"],
+        ["KRAOEUR", "dict.json", "typey"],
+        ["KRAOEUT", "dict.json", "typey"],
+        ["SAO*EUT", "briefs.json", "user"],
+        ["SKRAOEUT", "briefs.json", "user"],
+      ];
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, "cite", sharedAffixes)).toEqual([
+        ["SAO*EUT", "briefs.json", "user"],
+        ["SKRAOEUT", "briefs.json", "user"],
+        ["KRAOEUT", "dict.json", "typey"],
+        ["SKRAO*EUT", "dict.json", "typey"],
+        ["KRAOEUR", "dict.json", "typey"],
+        ["KRAOEUT", "plover.json", "plover"],
+        ["KRAOEUR", "plover.json", "plover"],
+        ["SKRAO*EUT", "plover.json", "plover"],
+      ]);
+    });
+  });
+
 // T-FPB: plover.json
 // TEFL: plover.json
 
