@@ -131,7 +131,7 @@ class DictionaryManagement extends Component {
                 throw new Error(`${dictName} contains invalid steno outlines, such as: ${trimmedInvalidStenoOutline}`);
               }
 
-              if (this.state.knownMisstrokes[outline] && this.state.knownMisstrokes[outline] === translation) {
+              if (this.state.knownMisstrokes !== null && this.state.knownMisstrokes[outline] && this.state.knownMisstrokes[outline] === translation) {
                 probableMisstrokes.push([outline, translation]);
               }
             }
