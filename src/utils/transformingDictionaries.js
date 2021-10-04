@@ -160,17 +160,16 @@ function splitIntoStrokesDictsAndNamespaces(strokesAndSources) {
   return namespacedStrokesAndDicts;
 }
 
-function getRankedOutlineFromLookupEntry(lookupEntry, translation) {
-  let affixes = AffixList.getSharedInstance();
+function getRankedOutlineFromLookupEntry(lookupEntry, translation, affixList = AffixList.getSharedInstance()) {
   let namespacedStrokesAndDicts = splitIntoStrokesDictsAndNamespaces(lookupEntry);
 
-  return rankOutlines(namespacedStrokesAndDicts, misstrokesJSON, translation, affixes)[0][0];
+  return rankOutlines(namespacedStrokesAndDicts, misstrokesJSON, translation, affixList)[0][0];
 }
 
-function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar) {
-  let suffixes = AffixList.getSharedInstance().suffixes;
+function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar, affixList = AffixList.getSharedInstance()) {
+  let suffixes = affixList.suffixes;
   let suffixesLength = suffixes.length;
-  let prefixes = AffixList.getSharedInstance().prefixes;
+  let prefixes = affixList.prefixes;
   let prefixesLength = prefixes.length;
   let lookupEntry = globalLookupDictionary.get(wordOrPhrase); // "example": [["KP-PL", "plover.json"],["KP-P", "plover.json"]]
   if (lookupEntry && lookupEntry.length > 0) {
@@ -181,7 +180,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     //     chosenStroke = lookupEntry[i][0];
     //   }
     // }
-    chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, wordOrPhrase);
+    chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, wordOrPhrase, affixList);
   }
   else { chosenStroke = undefined; }
 
@@ -203,7 +202,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   if (!chosenStroke) {
     let modifiedWordOrPhrase = wordOrPhrase.toLowerCase();
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { lookupEntry = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { lookupEntry = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
     let uppercasedStroke = lookupEntry;
 
     if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
@@ -215,7 +214,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   if (!chosenStroke) {
     let modifiedWordOrPhrase = wordOrPhrase.toLowerCase().replace(/(^|\s)\S/g, l => l.toUpperCase());
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { lookupEntry = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { lookupEntry = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
     let uppercasedStroke = lookupEntry;
 
     if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
@@ -227,7 +226,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   if (!chosenStroke) {
     let modifiedWordOrPhrase = wordOrPhrase.replace(/(^|\s)\S/g, l => l.toUpperCase());
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { lookupEntry = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { lookupEntry = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
     let capitalisedStroke = lookupEntry;
 
     if (capitalisedStroke) {
@@ -239,7 +238,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   if (!chosenStroke) {
     let modifiedWordOrPhrase = wordOrPhrase.toLowerCase();
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { lookupEntry = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { lookupEntry = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
     let lowercasedStroke = lookupEntry;
 
     if (lowercasedStroke) {
@@ -252,14 +251,14 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     if (!chosenStroke) {
       let modifiedWordOrPhrase = wordOrPhrase.replace(/, (.+),/, "{,}$1{,}");
       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-      if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+      if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
     }
 
     // xxx, => xxx{,}
     if (!chosenStroke) {
       let modifiedWordOrPhrase = wordOrPhrase.replace(',', '{,}');
       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-      if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+      if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
     }
   }
 
@@ -267,98 +266,98 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   if (!chosenStroke) {
     let modifiedWordOrPhrase = "{^}" + wordOrPhrase + "{^}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // xxx => {^}xxx
   if (!chosenStroke) {
     let modifiedWordOrPhrase = "{^}" + wordOrPhrase;
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // xxx => xxx{^}
   if (!chosenStroke) {
     let modifiedWordOrPhrase = wordOrPhrase + "{^}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // xxx => xxx {-|}
   if (!chosenStroke) {
     let modifiedWordOrPhrase = wordOrPhrase + " {-|}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // xxx => xxx{-|}
   if (!chosenStroke) {
     let modifiedWordOrPhrase = wordOrPhrase + "{-|}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // xxx => {^xxx^}
   if (!chosenStroke) {
     let modifiedWordOrPhrase = "{^" + wordOrPhrase + "^}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // ' => {^'}
   if (!chosenStroke) {
     let modifiedWordOrPhrase = "{^" + wordOrPhrase + "}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // xxx => {xxx^}
   if (!chosenStroke) {
     let modifiedWordOrPhrase = "{" + wordOrPhrase + "^}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // 'xxx => {~|'^}xxx
   if (!chosenStroke) {
     let modifiedWordOrPhrase = wordOrPhrase.replace(/^'(.+)$/,"{~|'^}$1");
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // xxx => {^~|xxx^}
   if (!chosenStroke) {
     let modifiedWordOrPhrase = "{^~|" + wordOrPhrase + "^}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // xxx => {^~|xxx}
   if (!chosenStroke) {
     let modifiedWordOrPhrase = "{^~|" + wordOrPhrase + "}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // xxx => {~|xxx^}
   if (!chosenStroke) {
     let modifiedWordOrPhrase = "{~|" + wordOrPhrase + "^}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // xxx => {~|xxx}
   if (!chosenStroke) {
     let modifiedWordOrPhrase = "{~|" + wordOrPhrase + "}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
   // xxx => {xxx}
   if (!chosenStroke) {
     let modifiedWordOrPhrase = "{" + wordOrPhrase + "}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+    if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
   }
 
 
@@ -372,7 +371,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
       const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : '/xxx';
       let modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "");
       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-      if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + suppressSpaceStrokeWithSlash + ingSuffixOutlineWithSlash; }
+      if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList) + suppressSpaceStrokeWithSlash + ingSuffixOutlineWithSlash; }
     }
   }
 
@@ -387,7 +386,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
         let modifiedWordOrPhrase = wordOrPhrase.replace(regex, '');
         let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
         let hardCodedFixForQuestionMark = !(wordOrPhrase.replace(regex, '') === "?");
-        if (lookupEntry && hardCodedFixForQuestionMark) { chosenStroke = prefixes[i][0] + getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase); }
+        if (lookupEntry && hardCodedFixForQuestionMark) { chosenStroke = prefixes[i][0] + getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
       }
       i++;
     }
@@ -402,7 +401,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
         let regex = new RegExp('' + escapeRegExp(suffixTranslation) + '$');
         let modifiedWordOrPhrase = wordOrPhrase.replace(regex, '');
         let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-        if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + suffixes[j][0]; }
+        if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList) + suffixes[j][0]; }
       }
       j++;
     }
@@ -420,7 +419,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   //         let regex = new RegExp('' + escapeRegExp(suffixesTranslation) + '$');
   //         let modifiedWordOrPhrase = wordOrPhrase.replace(regex, '');
   //         let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-  //         if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + suffixes[j][0] + suffixes[k][0]; }
+  //         if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList) + suffixes[j][0] + suffixes[k][0]; }
   //       }
   //     }
   //   }
@@ -435,7 +434,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
       const ingSuffixOutlineWithSlash = ingSuffixEntry ? ingSuffixEntry[0] : '/xxx';
       let modifiedWordOrPhrase = wordOrPhrase.replace(/ing$/, "e");
       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-      if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + ingSuffixOutlineWithSlash; }
+      if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList) + ingSuffixOutlineWithSlash; }
     }
   }
 
@@ -454,7 +453,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   //       const regex = new RegExp(`ing${escapeRegExp(suffixTranslation)}$`);
   //       let modifiedWordOrPhrase = wordOrPhrase.replace(regex, "e");
   //       let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-  //       if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase) + ingSuffixOutlineWithSlash + otherSuffixOutlineWithSlash; }
+  //       if (lookupEntry) { chosenStroke = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList) + ingSuffixOutlineWithSlash + otherSuffixOutlineWithSlash; }
   //     }
   //   }
   // }
@@ -523,7 +522,7 @@ function createFingerspellingStroke(inputText) {
   }).join('/');
 }
 
-function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary) {
+function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary, affixList = AffixList.getSharedInstance()) {
   let stroke = "";
   let strokes = "";
   let strokeLookupAttempts = 0;
@@ -563,7 +562,7 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
         // 2.1 compound words
         // if there is exactly 1 hyphen in the middle of a word, it's probably a compound word e.g. "store-room"
         if (compoundWordParts && compoundWordParts.length === 2 && compoundWordParts[0] !== "" && compoundWordParts[1] !== "") {
-          [strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts, AffixList.getSharedInstance()); // "store-room"
+          [strokes, stroke, strokeLookupAttempts] = tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts, affixList); // "store-room"
           stroke = "xxx";
         }
         // 2.2 any punctuation, noting preceding char

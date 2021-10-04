@@ -241,7 +241,7 @@ class StrokesForWords extends Component {
   }
 }
 
-function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary) {
+function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary, affixList = AffixList.getSharedInstance()) {
   let lookupText = phrase;
 
   if (phrase === "{") { lookupText = "\\{{^}"; }
@@ -323,7 +323,7 @@ function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary) {
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
 
-  listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, misstrokesJSON, phrase, AffixList.getSharedInstance());
+  listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, misstrokesJSON, phrase, affixList);
 
   if (phrase === "A") { listOfStrokesAndDicts = [["A*P", "fingerspelling"]]; }
   if (phrase === "B") { listOfStrokesAndDicts = [["PW*P", "fingerspelling"]]; }
