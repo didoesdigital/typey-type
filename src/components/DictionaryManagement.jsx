@@ -424,9 +424,9 @@ class DictionaryManagement extends Component {
       <>
         <details>
           <summary>
-            <p>To see better stroke hints, you might move any misstrokes out of your main dictionaries into a separate misstroke dictionary and exclude it from Typey&nbsp;Type.</p>
+            <p>To see better stroke hints, you might move any misstrokes out of your main dictionaries into a separate misstrokes autocorrect dictionary and exclude it from Typey&nbsp;Type.</p>
           </summary>
-          <p>Misstrokes are extra entries that use similar keys to produce the word you meant to write. If you regularly mistype a word, you might add a misstroke entry for the keys you are incorrectly pressing so that your dictionaries effectively auto-corrects your mistakes. This is great for increasing the accuracy of your output.</p>
+          <p>Misstrokes are extra entries that use similar keys to produce the word you meant to write. If you regularly mistype a word, you might add a misstroke entry for the keys you are incorrectly pressing so that your dictionaries effectively autocorrects your mistakes. This is great for increasing the accuracy of your output.</p>
           <p>While you're learning steno theory, it can be difficult to recognise misstrokes. It might then take longer to learn the theory and develop intuition about what strokes to use for longer words and variations. For example, if you use the misstroke <span className="steno-stroke">SPHAOEU</span> to write “supply”, which is missing the left-hand <span className="steno-stroke">R</span> key from the usual outline <span className="steno-stroke">SPHRAOEU</span>, it might take you longer to work out the brief <span className="steno-stroke">SPHRAOEUG</span> for “supplying” or <span className="steno-stroke">SPWHRAOEU</span> for “blood&nbsp;supply”.</p>
         </details>
       </>
