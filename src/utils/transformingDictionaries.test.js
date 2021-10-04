@@ -2439,8 +2439,8 @@ describe('add outlines for words to combined lookup dict', () => {
   })
 })
 
-describe('combinining valid dictionaries without sorting', () => {
-  it('returns a combined Map with strokes left unsorted which means dictionary insertion order and alphabetic where Typey Type is processed first', () => {
+describe('combining valid dictionaries without sorting', () => {
+  it('returns a combined Map with strokes left unsorted which means dictionary insertion order and alphabetic where personal dictionaries are processed first, then Typey Type, then Plover', () => {
     let personalDictionaries = [
       [ "personal.json", {"TAO*EUPT": "Typey Type"}],
       [ "overrides.json", {"SED": "sed"}],
@@ -2508,8 +2508,8 @@ describe('combinining valid dictionaries without sorting', () => {
         ["SOUPBSD", "plover:plover-main-3-jun-2018.json"],
       ]],
       ["he", [
-        ["HE", "typey:typey-type.json"],
         ["E", "user:misstrokes.json"],
+        ["HE", "typey:typey-type.json"],
         ["E", "plover:plover-main-3-jun-2018.json"],
         ["HE", "plover:plover-main-3-jun-2018.json"],
       ]],
