@@ -25,7 +25,6 @@ import misstrokesJSON from '../json/misstrokes.json'
 
 class StrokesForWords extends Component {
   state = {
-    knownMisstrokes: misstrokesJSON,
     phrase: "",
     listOfStrokesAndDicts: []
   }
