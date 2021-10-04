@@ -59,7 +59,12 @@ class StrokesForWords extends Component {
       this.props.onChange(phrase);
     }
 
-    const listOfStrokesAndDicts = lookupListOfStrokesAndDicts(phrase, this.props.globalLookupDictionary);
+    let listOfStrokesAndDicts = lookupListOfStrokesAndDicts(phrase, this.props.globalLookupDictionary);
+
+    if (!(this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup)) {
+      listOfStrokesAndDicts = listOfStrokesAndDicts
+        .filter(row => row[2] === SOURCE_NAMESPACES.get("user") || !misstrokesJSON[row[0]])
+    }
 
     this.setState({
       phrase: phrase,
