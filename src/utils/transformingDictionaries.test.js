@@ -2710,14 +2710,18 @@ describe('create stroke hint for phrase', () => {
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("A*/A*/A*/A* H-PB A*/A*/A*/A*");
     });
 
-    it('with hyphenated letters with some fingerspelling strokes', () => {
-      let wordOrPhraseMaterial = 'c-ç';
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KR* H-PB xxx");
+    describe('with hyphenated letters with some fingerspelling strokes', () => {
+      it('shows fingerspelling stroke and xxx', () => {
+        let wordOrPhraseMaterial = 'c-ç';
+        expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KR* H-PB xxx");
+      });
     });
 
-    it('with hyphenated letters without fingerspelling strokes', () => {
-      let wordOrPhraseMaterial = 'ç-ç';
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("xxx H-PB xxx");
+    describe('with hyphenated letters without fingerspelling strokes', () => {
+      it('shows xxx for all single letters with no strokes', () => {
+        let wordOrPhraseMaterial = 'ç-ç';
+        expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("xxx H-PB xxx");
+      });
     });
 
     // TODO
