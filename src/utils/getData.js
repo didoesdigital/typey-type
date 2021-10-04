@@ -1,5 +1,4 @@
 let dictTypeyType = null;
-let misstrokes = null;
 let latestPloverDict = null;
 
 function fetchLatestPloverDict() {
@@ -57,16 +56,6 @@ function fetchDictTypeyType() {
       "PHAFRT": "master",
       "TAOEUPG": "typing",
       "W": "with",
-    };
-  });
-}
-
-function fetchMisstrokesDict() {
-  return fetchResource(process.env.PUBLIC_URL + '/dictionaries/didoesdigital/misstrokes.json').then((json) => {
-    return json;
-  }).catch(function(e) {
-    return {
-      "O": "to"
     };
   });
 }
