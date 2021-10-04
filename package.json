@@ -8,7 +8,7 @@
     "clipboard": "^1.7.1",
     "flow-bin": "^0.59.0",
     "howler": "^2.2.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "node-sass-chokidar": "^1.4.0",
     "npm-run-all": "^4.1.1",
     "pure-react-carousel": "git://github.com/didoesdigital/pure-react-carousel.git#add-slider-callback",
