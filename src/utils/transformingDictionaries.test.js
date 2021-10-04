@@ -4015,21 +4015,48 @@ describe('rank outlines', () => {
   });
 
   describe('with prefix and suffix strokes', () => {
-    it('returns sorted list of outlines for "upstarted", penalising briefs without affix strokes', () => {
+    it('returns sorted list of outlines for "upstarted", penalising briefs without affix strokes, for default dicts', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
-        ["UP/START/-D", "user.json", "user"],
-        ["UP/STARTD", "user.json", "user"],
-        ["AUP/START/*D", "user.json", "user"],
-        ["AUP/START/-D", "user.json", "user"],
-        ["AUP/STARTD", "user.json", "user"],
+        ["UP/START/-D", "plover.json", "plover"],
+        ["UP/STARTD", "plover.json", "plover"],
+        ["AUP/START/*D", "plover.json", "plover"],
+        ["AUP/START/-D", "plover.json", "plover"],
+        ["AUP/STARTD", "plover.json", "plover"],
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upstarted", sharedAffixes)).toEqual([
-        ["AUP/STARTD", "user.json", "user"],
+        ["AUP/STARTD", "plover.json", "plover"],
+        ["UP/STARTD", "plover.json", "plover"],
+        ["AUP/START/-D", "plover.json", "plover"],
+        ["UP/START/-D", "plover.json", "plover"],
+        ["AUP/START/*D", "plover.json", "plover"],
+      ]);
+    });
+
+    it('returns sorted list of outlines for "upstarted", penalising briefs without personal affix stroke, with personal dicts', () => {
+      let sharedAffixes = {
+        suffixes: [],
+        prefixes: [
+          ["UP/", "up" ], // from user dictionary… AffixList chooses the first affix in first inserted dictionary
+        ]
+      };
+
+      let arrayOfStrokesAndTheirSourceDictNames = [
+        ["UP/START/-D", "user.json", "user"],
         ["UP/STARTD", "user.json", "user"],
         ["AUP/START/-D", "user.json", "user"],
+        ["AUP/START/*D", "typey.json", "typey"],
+        ["AUP/START/-D", "typey.json", "typey"],
+        ["AUP/STARTD", "typey.json", "typey"],
+      ];
+
+      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upstarted", sharedAffixes)).toEqual([
+        ["UP/STARTD", "user.json", "user"],
         ["UP/START/-D", "user.json", "user"],
-        ["AUP/START/*D", "user.json", "user"],
+        ["AUP/START/-D", "user.json", "user"],
+        ["AUP/STARTD", "typey.json", "typey"],
+        ["AUP/START/-D", "typey.json", "typey"],
+        ["AUP/START/*D", "typey.json", "typey"],
       ]);
     });
   });
