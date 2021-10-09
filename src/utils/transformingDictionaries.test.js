@@ -377,7 +377,6 @@ let testTypeyTypeDict = {
   "30*U": "{:}30",
   "40U": "{:}40",
   "45*U": "{:}45",
-  "2*": "{>}{&t}",
   "0RZ": "{^0rz}",
   "50*EUBG": "{^:05}",
   "50EUBG": "{^:05}",
@@ -2990,8 +2989,7 @@ describe('create stroke hint for phrase', () => {
   describe('returns string showing text with numbers', () => {
     it('zero to ten', () => {
       let wordOrPhraseMaterial = "0 1 2 3 4 5 6 7 8 9 10";
-      // FIXME: should probably show #O #S #T … #S/#O etc.
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("0 1 2 3 4 5 6 7 8 9 1/0");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O #S #T- #P- #H #A #F #-P #L #-T 1/0");
     });
 
     it('returns strings with numbers containing zeroes and commas', () => {

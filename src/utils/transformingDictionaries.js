@@ -166,6 +166,52 @@ function getRankedOutlineFromLookupEntry(lookupEntry, translation, affixList = A
   return rankOutlines(namespacedStrokesAndDicts, misstrokesJSON, translation, affixList)[0][0];
 }
 
+function findFingerspellingOutline(wordOrPhrase, globalLookupDictionary, strokeForOneCharacterWordPart, affixList) {
+  // try look up capital letters and numbers from personal dictionaries:
+  let modifiedWordOrPhrase = `{&${wordOrPhrase}}`;
+  let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+  if (lookupEntry) {
+    strokeForOneCharacterWordPart = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList);
+  }
+  else {
+    // try look up lowercase letters from personal dictionaries:
+    modifiedWordOrPhrase = `{>}{&${wordOrPhrase}}`;
+    lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    if (lookupEntry) { strokeForOneCharacterWordPart = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
+  }
+
+  return strokeForOneCharacterWordPart
+}
+
+function findSingleLetterWordOutline(wordOrPhrase, globalLookupDictionary, strokeForOneCharacterWord, affixList, precedingChar) {
+  // try look it up from personal dictionaries:
+  // single letter words, natural capitalisation
+  if (wordOrPhrase === "a" || wordOrPhrase === "I") {
+    let modifiedWordOrPhrase = `${wordOrPhrase}`;
+    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    if (lookupEntry) { strokeForOneCharacterWord = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
+  }
+  // single letter word, capitalised for start of sentence
+  else if (wordOrPhrase === "A") {
+    let letterAEntry = globalLookupDictionary.get("a");
+    let capitalisationTranslation = ["", ".", "?", "!"].includes(precedingChar) ? "{}{-|}" : "{^}{-|}";
+    let capitalisationEntry = globalLookupDictionary.get(capitalisationTranslation);
+    if (letterAEntry && capitalisationEntry) {
+      let letterAOutline = getRankedOutlineFromLookupEntry(letterAEntry, 'a', affixList);
+      let capitalisationOutline = getRankedOutlineFromLookupEntry(capitalisationEntry, capitalisationTranslation, affixList);
+      strokeForOneCharacterWord = capitalisationOutline + "/" + letterAOutline;
+    }
+  }
+  // roman numerals
+  else if (wordOrPhrase === "X" || wordOrPhrase === "V") {
+    let modifiedWordOrPhrase = `${wordOrPhrase}`;
+    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    if (lookupEntry) { strokeForOneCharacterWord = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
+  }
+
+  return strokeForOneCharacterWord
+}
+
 function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar, affixList = AffixList.getSharedInstance()) {
   let suffixes = affixList.suffixes;
   let suffixesLength = suffixes.length;
@@ -187,11 +233,17 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   // elsewhere, there is a relevant "FIXME: this is a brute force…"
   let strokeForOneCharacterWord = SINGLE_LETTER_WORDS[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWord) {
+
+    strokeForOneCharacterWord = findSingleLetterWordOutline(wordOrPhrase, globalLookupDictionary, strokeForOneCharacterWord, affixList, precedingChar)
+
     return [strokeForOneCharacterWord, strokeLookupAttempts + 1];
   }
 
   let strokeForOneCharacterWordPart = FINGERSPELLED_LETTERS[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWordPart) {
+
+    strokeForOneCharacterWordPart = findFingerspellingOutline(wordOrPhrase, globalLookupDictionary, strokeForOneCharacterWordPart, affixList)
+
     if (precedingChar === ' ' && wordOrPhrase === '"') {
       strokeForOneCharacterWordPart = 'KW-GS';
     }
@@ -467,10 +519,10 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   return [chosenStroke, strokeLookupAttempts];
 }
 
-function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts, affixes) {
+function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, strokes, stroke, strokeLookupAttempts, affixList) {
   let compoundWordFirstWord = compoundWordParts[0];
   let compoundWordSecondWord = compoundWordParts[1];
-  let prefixes = affixes.prefixes;
+  let prefixes = affixList.prefixes;
 
   const matchingPrefixWithHyphenEntry = prefixes.find(prefixEntry => prefixEntry[1] === compoundWordFirstWord + "-");
   if (matchingPrefixWithHyphenEntry) {
@@ -482,7 +534,7 @@ function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, str
       stroke = "xxx";
     }
     else if (stroke === "xxx") {
-      stroke = createFingerspellingStroke(compoundWordSecondWord);
+      stroke = createFingerspellingStroke(compoundWordSecondWord, globalLookupDictionary, affixList);
       strokes = strokes + stroke;
       stroke = "xxx";
     }
@@ -500,9 +552,9 @@ function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, str
       }
     }
     else if (stroke === "xxx") {
-      stroke = createFingerspellingStroke(compoundWordFirstWord);
+      stroke = createFingerspellingStroke(compoundWordFirstWord, globalLookupDictionary, affixList);
       strokes = strokes === "" ? stroke + " H-PB" : strokes + " " + stroke + " H-PB";
-      stroke = createFingerspellingStroke(compoundWordSecondWord);
+      stroke = createFingerspellingStroke(compoundWordSecondWord, globalLookupDictionary, affixList);
       strokes = strokes + " " + stroke;
       stroke = "xxx";
     }
@@ -511,10 +563,13 @@ function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, str
   return [strokes, stroke, strokeLookupAttempts];
 }
 
-function createFingerspellingStroke(inputText) {
+function createFingerspellingStroke(inputText, globalLookupDictionary, affixList) {
   return [...inputText].map(char => {
     let fingerspelledStroke = '';
     fingerspelledStroke = FINGERSPELLED_LETTERS[char];
+
+    fingerspelledStroke = findFingerspellingOutline(char, globalLookupDictionary, fingerspelledStroke, affixList)
+
     if (!fingerspelledStroke) {
       fingerspelledStroke = "xxx";
     }
@@ -588,7 +643,7 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary,
             }
             else {
               // 2.3 resort to fingerspelling
-              stroke = createFingerspellingStroke(listOfPunctuationSeparatedWords[j]);
+              stroke = createFingerspellingStroke(listOfPunctuationSeparatedWords[j], globalLookupDictionary, affixList);
               strokes = strokes === "" ? stroke : strokes + " " + stroke;
             }
           }
@@ -596,7 +651,7 @@ function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary,
       }
       // 3. Resort to fingerspelling
       else {
-        stroke = createFingerspellingStroke(wordToLookUp);
+        stroke = createFingerspellingStroke(wordToLookUp, globalLookupDictionary, affixList);
         strokes = strokes === "" ? stroke : strokes + " " + stroke;
       }
     }
