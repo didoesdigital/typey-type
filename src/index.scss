@@ -444,6 +444,7 @@ input:focus::placeholder {
 .o-0 { opacity: 0; }
 
 .order-1 { order: 1; }
+.order-2 { order: 2; }
 
 .collapse {
   border-collapse: collapse;
@@ -498,9 +499,9 @@ input:focus::placeholder {
   border-left-width: 1px;
 }
 
-// .fw4 {
-//   font-weight: 400;
-// }
+.fw4 {
+  font-weight: 400;
+}
 .fw7 {
   font-weight: 700;
 }

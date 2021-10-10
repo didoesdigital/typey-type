@@ -118,11 +118,15 @@ class StrokesForWords extends Component {
     let matchedTranslation = null
     let lookupResults;
 
-    let classes = this.state.modifiedWordOrPhrase === this.state.phrase ? "py05 bg-slat bw-1 b--solid b-info" : "py05 bg-slat bw-1 b--solid b-danger"
+    let classes = "wrap mr1 order-1 fw4 py05 bg-slat bw-1 b--solid";
+    classes += this.state.modifiedWordOrPhrase === this.state.phrase ? " b-info" : " b-danger";
 
     if (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts.length > 0) {
       matchedTranslation = this.state.modifiedWordOrPhrase ?
-        <p className="de-emphasized"><span className={classes}>{this.state.modifiedWordOrPhrase}</span> <span className="de-emphasized">matched translation</span></p>
+        <p className="de-emphasized flex flex-wrap items-center">
+          <span className="de-emphasized order-2">(text shown in dictionary)</span>
+          <samp className={classes}>{this.state.modifiedWordOrPhrase}</samp>
+        </p>
         :
         null
 
