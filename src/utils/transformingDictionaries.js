@@ -248,6 +248,34 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   }
   else { chosenStroke = undefined; }
 
+  let capitalisationOutline = 'KPA';
+  let capitalisationTranslation = "{ }{-|}"
+  let capitalisationEntry = globalLookupDictionary.get(capitalisationTranslation)
+  if (capitalisationEntry) {
+    capitalisationOutline = getRankedOutlineFromLookupEntry(capitalisationEntry, capitalisationTranslation, affixList);
+  }
+
+  let uppercaseOutline = '*URP';
+  let uppercaseTranslation = "{<}"
+  let uppercaseEntry = globalLookupDictionary.get(uppercaseTranslation)
+  if (uppercaseEntry) {
+    uppercaseOutline = getRankedOutlineFromLookupEntry(uppercaseEntry, uppercaseTranslation, affixList);
+  }
+
+  let lowercaseOutline = 'HRO*ER';
+  let lowercaseTranslation = "{>}"
+  let lowercaseEntry = globalLookupDictionary.get(lowercaseTranslation)
+  if (lowercaseEntry) {
+    lowercaseOutline = getRankedOutlineFromLookupEntry(lowercaseEntry, lowercaseTranslation, affixList);
+  }
+
+  let suppressSpaceOutline = 'TK-LS';
+  let suppressSpaceTranslation = "{^^}"
+  let suppressSpaceEntry = globalLookupDictionary.get(suppressSpaceTranslation)
+  if (suppressSpaceEntry) {
+    suppressSpaceOutline = getRankedOutlineFromLookupEntry(suppressSpaceEntry, suppressSpaceTranslation, affixList);
+  }
+
   // elsewhere, there is a relevant "FIXME: this is a brute force…"
   let strokeForOneCharacterWord = SINGLE_LETTER_WORDS[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWord) {
@@ -278,7 +306,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     let uppercasedStroke = lookupEntry;
 
     if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
-      chosenStroke = '*URP/' + uppercasedStroke;
+      chosenStroke = uppercaseOutline + '/' + uppercasedStroke;
     }
   }
 
@@ -290,7 +318,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     let uppercasedStroke = lookupEntry;
 
     if (wordOrPhrase.toUpperCase() === wordOrPhrase && uppercasedStroke) {
-      chosenStroke = '*URP/' + uppercasedStroke;
+      chosenStroke = uppercaseOutline + '/' + uppercasedStroke;
     }
   }
 
@@ -302,7 +330,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     let capitalisedStroke = lookupEntry;
 
     if (capitalisedStroke) {
-      chosenStroke = 'HRO*ER/' + capitalisedStroke;
+      chosenStroke = lowercaseOutline + '/' + capitalisedStroke;
     }
   }
 
@@ -314,7 +342,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     let lowercasedStroke = lookupEntry;
 
     if (lowercasedStroke) {
-      chosenStroke = 'KPA/' + lowercasedStroke;
+      chosenStroke = capitalisationOutline + '/' + lowercasedStroke;
     }
   }
 
@@ -433,7 +461,7 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
   }
 
 
-  const suppressSpaceStrokeWithSlash = "/TK-LS";
+  const suppressSpaceStrokeWithSlash = "/" + suppressSpaceOutline;
 
   // Orthography rules
   if (!chosenStroke) {
@@ -544,6 +572,13 @@ function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, str
   let compoundWordSecondWord = compoundWordParts[1];
   let prefixes = affixList.prefixes;
 
+  let hyphenOutline = 'H-PB';
+  let hyphenTranslation = "{^-^}"
+  let hyphenEntry = globalLookupDictionary.get(hyphenTranslation)
+  if (hyphenEntry) {
+    hyphenOutline = getRankedOutlineFromLookupEntry(hyphenEntry, hyphenTranslation, affixList);
+  }
+
   const matchingPrefixWithHyphenEntry = prefixes.find(prefixEntry => prefixEntry[1] === compoundWordFirstWord + "-");
   if (matchingPrefixWithHyphenEntry) {
     stroke = matchingPrefixWithHyphenEntry[0]; // self-
@@ -563,7 +598,7 @@ function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, str
     [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordFirstWord, globalLookupDictionary, stroke, strokeLookupAttempts, ''); // "store" => ["STOR", 3]
 
     if (stroke && stroke.length > 0 && stroke !== "xxx") {
-      strokes = strokes === "" ? stroke + " H-PB" : strokes + " " + stroke + " H-PB";
+      strokes = strokes === "" ? stroke + " " + hyphenOutline : strokes + " " + stroke + " " + hyphenOutline;
       [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordSecondWord, globalLookupDictionary, stroke, strokeLookupAttempts, '-'); // "room"
 
       if (stroke && stroke.length > 0) {
@@ -573,7 +608,7 @@ function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, str
     }
     else if (stroke === "xxx") {
       stroke = createFingerspellingStroke(compoundWordFirstWord, globalLookupDictionary, affixList);
-      strokes = strokes === "" ? stroke + " H-PB" : strokes + " " + stroke + " H-PB";
+      strokes = strokes === "" ? stroke + " " + hyphenOutline : strokes + " " + stroke + " " + hyphenOutline;
       stroke = createFingerspellingStroke(compoundWordSecondWord, globalLookupDictionary, affixList);
       strokes = strokes + " " + stroke;
       stroke = "xxx";
