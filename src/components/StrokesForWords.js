@@ -285,6 +285,10 @@ function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary, affixList =
   if (phrase === `' `) { modifiedWordOrPhrase = "{^~|'}"; }
   if (phrase === ` `) { modifiedWordOrPhrase = "{^ ^}"; }
 
+  if (phrase === `%`) { modifiedWordOrPhrase = "{^}%{^}"; }
+  if (phrase === `% `) { modifiedWordOrPhrase = "{^%}"; }
+  if (phrase === ` %`) { modifiedWordOrPhrase = "{&%}"; }
+
   if (phrase === "1") { modifiedWordOrPhrase = "{&1}"; }
   if (phrase === "2") { modifiedWordOrPhrase = "{&2}"; }
   if (phrase === "3") { modifiedWordOrPhrase = "{&3}"; }
