@@ -109,27 +109,31 @@ class StrokesForWords extends Component {
       )
     });
 
-    let emptyState = (<div className="mb2">No results found</div>);
+    let emptyState = (<p>No results found</p>);
 
     if (this.state.phrase === "") {
-      emptyState = (<div className="mb2"></div>);
+      emptyState = (<p></p>);
     }
 
+    let matchedTranslation = null
     let lookupResults;
 
-    let classes = this.state.modifiedWordOrPhrase === this.state.phrase ? "py05 bg-slat" : "py05 bg-warning"
+    let classes = this.state.modifiedWordOrPhrase === this.state.phrase ? "py05 bg-slat bw-1 b--solid b-info" : "py05 bg-slat bw-1 b--solid b-danger"
 
     if (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts.length > 0) {
+      matchedTranslation = this.state.modifiedWordOrPhrase ?
+        <p className="de-emphasized"><span className={classes}>{this.state.modifiedWordOrPhrase}</span> <span className="de-emphasized">matched translation</span></p>
+        :
+        null
+
       lookupResults = (
-        <>
-          {this.state.modifiedWordOrPhrase ? <p className="de-emphasized"><span className={classes}>{this.state.modifiedWordOrPhrase}</span> <span className="de-emphasized">matched translation</span></p> : null}
-          <ul className="unstyled-list wrap">
-            {strokeListItems}
-          </ul>
-        </>
+        <ul className="unstyled-list wrap">
+          {strokeListItems}
+        </ul>
       );
     } else {
-      lookupResults = emptyState;
+      matchedTranslation = emptyState;
+      lookupResults = null;
     }
 
     let ploverMisstrokesDetail;
@@ -236,6 +240,7 @@ class StrokesForWords extends Component {
             wrap="off"
             >
           </textarea>
+          {matchedTranslation}
           <div className="mb1">
             {diagrams}
           </div>
