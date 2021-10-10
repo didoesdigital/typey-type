@@ -718,7 +718,7 @@ input:focus::placeholder {
 .bg-white    { background-color: #fff; }
 .b-danger.b-danger   { border-color: saturate(add-tint($brand-danger, 30%), 30%); }
 .b-warning.b-warning { border-color: saturate(add-tint($brand-warning, 30%), 30%); }
-.b-info.b-info       { border-color: saturate(add-tint($brand-primary, 30%), 30%); }
+.b-info.b-info       { border-color: saturate(add-tint($brand-primary, 70%), 10%); }
 .b-slat.b-slat       { border-color: saturate(add-tint($brand-primary, 30%), 30%); }
 
 .color-purple-bright { color: saturate(add-tint($brand-primary, 30%), 30%); }
