@@ -25,6 +25,7 @@ import misstrokesJSON from '../json/misstrokes.json'
 
 class StrokesForWords extends Component {
   state = {
+    modifiedWordOrPhrase: "",
     phrase: "",
     listOfStrokesAndDicts: []
   }
@@ -59,7 +60,7 @@ class StrokesForWords extends Component {
       this.props.onChange(phrase);
     }
 
-    let listOfStrokesAndDicts = lookupListOfStrokesAndDicts(phrase, this.props.globalLookupDictionary);
+    let [listOfStrokesAndDicts, modifiedWordOrPhrase] = lookupListOfStrokesAndDicts(phrase, this.props.globalLookupDictionary);
 
     if (!(this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup)) {
       listOfStrokesAndDicts = listOfStrokesAndDicts
@@ -67,6 +68,7 @@ class StrokesForWords extends Component {
     }
 
     this.setState({
+      modifiedWordOrPhrase: modifiedWordOrPhrase,
       phrase: phrase,
       listOfStrokesAndDicts: listOfStrokesAndDicts
     })
@@ -115,11 +117,16 @@ class StrokesForWords extends Component {
 
     let lookupResults;
 
+    let classes = this.state.modifiedWordOrPhrase === this.state.phrase ? "py05 bg-slat" : "py05 bg-warning"
+
     if (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts.length > 0) {
       lookupResults = (
-        <ul className="unstyled-list wrap">
-          {strokeListItems}
-        </ul>
+        <>
+          {this.state.modifiedWordOrPhrase ? <p className="de-emphasized"><span className={classes}>{this.state.modifiedWordOrPhrase}</span> <span className="de-emphasized">matched translation</span></p> : null}
+          <ul className="unstyled-list wrap">
+            {strokeListItems}
+          </ul>
+        </>
       );
     } else {
       lookupResults = emptyState;
@@ -128,10 +135,10 @@ class StrokesForWords extends Component {
     let ploverMisstrokesDetail;
 
     if (this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup) {
-      ploverMisstrokesDetail = <p><span className="bg-danger">(Plover misstrokes included.)</span></p>
+      ploverMisstrokesDetail = <p><span className="py05 bg-danger">(Plover misstrokes included.)</span></p>
     }
     else {
-      ploverMisstrokesDetail = <p><span className="de-emphasized">(4000 misstrokes hidden.)</span></p>
+      ploverMisstrokesDetail = <p><span className="py05 de-emphasized">(4000 misstrokes hidden.)</span></p>
     }
 
     let loadingOrError;
@@ -243,142 +250,157 @@ class StrokesForWords extends Component {
 
 function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary, affixList = AffixList.getSharedInstance()) {
   let lookupText = phrase;
+  let modifiedWordOrPhrase = lookupText.slice();
 
-  if (phrase === "{") { lookupText = "\\{{^}"; }
-  if (phrase === "}") { lookupText = "{^}\\}"; }
-  if (phrase === "{ ") { lookupText = "\\{"; }
-  if (phrase === "} ") { lookupText = "\\}"; }
-  if (phrase === "[") { lookupText = "{^[^}"; }
-  if (phrase === "]") { lookupText = "{^]^}"; }
-  if (phrase === "[ ") { lookupText = "{[}"; }
-  if (phrase === "] ") { lookupText = "{]}"; }
-  if (phrase === "?") { lookupText = "{?}"; }
-  if (phrase === ".") { lookupText = "{^.^}"; }
-  if (phrase === ". ") { lookupText = "{.}"; }
-  if (phrase === ", ") { lookupText = "{,}"; }
-  if (phrase === `” `) { lookupText = "{^~|”}"; }
-  if (phrase === `”`) { lookupText = "{^~|”}"; }
-  if (phrase === `“`) { lookupText = "{~|“^}"; }
-  if (phrase === ` “`) { lookupText = "{~|“^}"; }
-  if (phrase === `“`) { lookupText = "{~|“^}"; }
-  if (phrase === ` ‘`) { lookupText = "{~|‘^}"; }
-  if (phrase === `‘`) { lookupText = "{~|‘^}"; }
-  if (phrase === `’ `) { lookupText = "{^~|’}"; }
-  if (phrase === `’`) { lookupText = "{^~|’}"; }
-  if (phrase === `" `) { lookupText = "{^~|\"}"; }
-  if (phrase === `"`) { lookupText = "{~|\"^}"; }
-  if (phrase === ` "`) { lookupText = "{~|\"^}"; }
-  if (phrase === ` '`) { lookupText = "{~|'^}"; }
-  if (phrase === `' `) { lookupText = "{^~|'}"; }
-  if (phrase === ` `) { lookupText = "{^ ^}"; }
+  if (phrase === "{") { modifiedWordOrPhrase = "\\{{^}"; }
+  if (phrase === "}") { modifiedWordOrPhrase = "{^}\\}"; }
+  if (phrase === "{ ") { modifiedWordOrPhrase = "\\{"; }
+  if (phrase === "} ") { modifiedWordOrPhrase = "\\}"; }
+  if (phrase === "[") { modifiedWordOrPhrase = "{^[^}"; }
+  if (phrase === "]") { modifiedWordOrPhrase = "{^]^}"; }
+  if (phrase === "[ ") { modifiedWordOrPhrase = "{[}"; }
+  if (phrase === "] ") { modifiedWordOrPhrase = "{]}"; }
+  if (phrase === "?") { modifiedWordOrPhrase = "{?}"; }
+  if (phrase === ".") { modifiedWordOrPhrase = "{^.^}"; }
+  if (phrase === ". ") { modifiedWordOrPhrase = "{.}"; }
+  if (phrase === ", ") { modifiedWordOrPhrase = "{,}"; }
+  if (phrase === `” `) { modifiedWordOrPhrase = "{^~|”}"; }
+  if (phrase === `”`) { modifiedWordOrPhrase = "{^~|”}"; }
+  if (phrase === `“`) { modifiedWordOrPhrase = "{~|“^}"; }
+  if (phrase === ` “`) { modifiedWordOrPhrase = "{~|“^}"; }
+  if (phrase === `“`) { modifiedWordOrPhrase = "{~|“^}"; }
+  if (phrase === ` ‘`) { modifiedWordOrPhrase = "{~|‘^}"; }
+  if (phrase === `‘`) { modifiedWordOrPhrase = "{~|‘^}"; }
+  if (phrase === `’ `) { modifiedWordOrPhrase = "{^~|’}"; }
+  if (phrase === `’`) { modifiedWordOrPhrase = "{^~|’}"; }
+  if (phrase === `" `) { modifiedWordOrPhrase = "{^~|\"}"; }
+  if (phrase === `"`) { modifiedWordOrPhrase = "{~|\"^}"; }
+  if (phrase === ` "`) { modifiedWordOrPhrase = "{~|\"^}"; }
+  if (phrase === ` '`) { modifiedWordOrPhrase = "{~|'^}"; }
+  if (phrase === `' `) { modifiedWordOrPhrase = "{^~|'}"; }
+  if (phrase === ` `) { modifiedWordOrPhrase = "{^ ^}"; }
 
-  if (phrase === "1") { lookupText = "{&1}"; }
-  if (phrase === "2") { lookupText = "{&2}"; }
-  if (phrase === "3") { lookupText = "{&3}"; }
-  if (phrase === "4") { lookupText = "{&4}"; }
-  if (phrase === "5") { lookupText = "{&5}"; }
-  if (phrase === "6") { lookupText = "{&6}"; }
-  if (phrase === "7") { lookupText = "{&7}"; }
-  if (phrase === "8") { lookupText = "{&8}"; }
-  if (phrase === "9") { lookupText = "{&9}"; }
-  if (phrase === "0") { lookupText = "{&0}"; }
+  if (phrase === "1") { modifiedWordOrPhrase = "{&1}"; }
+  if (phrase === "2") { modifiedWordOrPhrase = "{&2}"; }
+  if (phrase === "3") { modifiedWordOrPhrase = "{&3}"; }
+  if (phrase === "4") { modifiedWordOrPhrase = "{&4}"; }
+  if (phrase === "5") { modifiedWordOrPhrase = "{&5}"; }
+  if (phrase === "6") { modifiedWordOrPhrase = "{&6}"; }
+  if (phrase === "7") { modifiedWordOrPhrase = "{&7}"; }
+  if (phrase === "8") { modifiedWordOrPhrase = "{&8}"; }
+  if (phrase === "9") { modifiedWordOrPhrase = "{&9}"; }
+  if (phrase === "0") { modifiedWordOrPhrase = "{&0}"; }
 
-  if (phrase === "A") { lookupText = "{&A}"; }
-  if (phrase === "B") { lookupText = "{&B}"; }
-  if (phrase === "C") { lookupText = "{&C}"; }
-  if (phrase === "D") { lookupText = "{&D}"; }
-  if (phrase === "E") { lookupText = "{&E}"; }
-  if (phrase === "F") { lookupText = "{&F}"; }
-  if (phrase === "G") { lookupText = "{&G}"; }
-  if (phrase === "H") { lookupText = "{&H}"; }
-  if (phrase === "I") { lookupText = "{&I}"; }
-  if (phrase === "J") { lookupText = "{&J}"; }
-  if (phrase === "K") { lookupText = "{&K}"; }
-  if (phrase === "L") { lookupText = "{&L}"; }
-  if (phrase === "M") { lookupText = "{&M}"; }
-  if (phrase === "N") { lookupText = "{&N}"; }
-  if (phrase === "O") { lookupText = "{&O}"; }
-  if (phrase === "P") { lookupText = "{&P}"; }
-  if (phrase === "Q") { lookupText = "{&Q}"; }
-  if (phrase === "R") { lookupText = "{&R}"; }
-  if (phrase === "S") { lookupText = "{&S}"; }
-  if (phrase === "T") { lookupText = "{&T}"; }
-  if (phrase === "U") { lookupText = "{&U}"; }
-  if (phrase === "V") { lookupText = "{&V}"; }
-  if (phrase === "W") { lookupText = "{&W}"; }
-  if (phrase === "X") { lookupText = "{&X}"; }
-  if (phrase === "Y") { lookupText = "{&Y}"; }
-  if (phrase === "Z") { lookupText = "{&Z}"; }
-  if (phrase === "a") { lookupText = "{>}{&a}"; }
-  if (phrase === "b") { lookupText = "{>}{&b}"; }
-  if (phrase === "c") { lookupText = "{>}{&c}"; }
-  if (phrase === "d") { lookupText = "{>}{&d}"; }
-  if (phrase === "e") { lookupText = "{>}{&e}"; }
-  if (phrase === "f") { lookupText = "{>}{&f}"; }
-  if (phrase === "g") { lookupText = "{>}{&g}"; }
-  if (phrase === "h") { lookupText = "{>}{&h}"; }
-  if (phrase === "i") { lookupText = "{>}{&i}"; }
-  if (phrase === "j") { lookupText = "{>}{&j}"; }
-  if (phrase === "k") { lookupText = "{>}{&k}"; }
-  if (phrase === "l") { lookupText = "{>}{&l}"; }
-  if (phrase === "m") { lookupText = "{>}{&m}"; }
-  if (phrase === "n") { lookupText = "{>}{&n}"; }
-  if (phrase === "o") { lookupText = "{>}{&o}"; }
-  if (phrase === "p") { lookupText = "{>}{&p}"; }
-  if (phrase === "q") { lookupText = "{>}{&q}"; }
-  if (phrase === "r") { lookupText = "{>}{&r}"; }
-  if (phrase === "s") { lookupText = "{>}{&s}"; }
-  if (phrase === "t") { lookupText = "{>}{&t}"; }
-  if (phrase === "u") { lookupText = "{>}{&u}"; }
-  if (phrase === "v") { lookupText = "{>}{&v}"; }
-  if (phrase === "w") { lookupText = "{>}{&w}"; }
-  if (phrase === "x") { lookupText = "{>}{&x}"; }
-  if (phrase === "y") { lookupText = "{>}{&y}"; }
-  if (phrase === "z") { lookupText = "{>}{&z}"; }
+  if (phrase === "A") { modifiedWordOrPhrase = "{&A}"; }
+  if (phrase === "B") { modifiedWordOrPhrase = "{&B}"; }
+  if (phrase === "C") { modifiedWordOrPhrase = "{&C}"; }
+  if (phrase === "D") { modifiedWordOrPhrase = "{&D}"; }
+  if (phrase === "E") { modifiedWordOrPhrase = "{&E}"; }
+  if (phrase === "F") { modifiedWordOrPhrase = "{&F}"; }
+  if (phrase === "G") { modifiedWordOrPhrase = "{&G}"; }
+  if (phrase === "H") { modifiedWordOrPhrase = "{&H}"; }
+  if (phrase === "I") { modifiedWordOrPhrase = "{&I}"; }
+  if (phrase === "J") { modifiedWordOrPhrase = "{&J}"; }
+  if (phrase === "K") { modifiedWordOrPhrase = "{&K}"; }
+  if (phrase === "L") { modifiedWordOrPhrase = "{&L}"; }
+  if (phrase === "M") { modifiedWordOrPhrase = "{&M}"; }
+  if (phrase === "N") { modifiedWordOrPhrase = "{&N}"; }
+  if (phrase === "O") { modifiedWordOrPhrase = "{&O}"; }
+  if (phrase === "P") { modifiedWordOrPhrase = "{&P}"; }
+  if (phrase === "Q") { modifiedWordOrPhrase = "{&Q}"; }
+  if (phrase === "R") { modifiedWordOrPhrase = "{&R}"; }
+  if (phrase === "S") { modifiedWordOrPhrase = "{&S}"; }
+  if (phrase === "T") { modifiedWordOrPhrase = "{&T}"; }
+  if (phrase === "U") { modifiedWordOrPhrase = "{&U}"; }
+  if (phrase === "V") { modifiedWordOrPhrase = "{&V}"; }
+  if (phrase === "W") { modifiedWordOrPhrase = "{&W}"; }
+  if (phrase === "X") { modifiedWordOrPhrase = "{&X}"; }
+  if (phrase === "Y") { modifiedWordOrPhrase = "{&Y}"; }
+  if (phrase === "Z") { modifiedWordOrPhrase = "{&Z}"; }
+  if (phrase === "a") { modifiedWordOrPhrase = "{>}{&a}"; }
+  if (phrase === "b") { modifiedWordOrPhrase = "{>}{&b}"; }
+  if (phrase === "c") { modifiedWordOrPhrase = "{>}{&c}"; }
+  if (phrase === "d") { modifiedWordOrPhrase = "{>}{&d}"; }
+  if (phrase === "e") { modifiedWordOrPhrase = "{>}{&e}"; }
+  if (phrase === "f") { modifiedWordOrPhrase = "{>}{&f}"; }
+  if (phrase === "g") { modifiedWordOrPhrase = "{>}{&g}"; }
+  if (phrase === "h") { modifiedWordOrPhrase = "{>}{&h}"; }
+  if (phrase === "i") { modifiedWordOrPhrase = "{>}{&i}"; }
+  if (phrase === "j") { modifiedWordOrPhrase = "{>}{&j}"; }
+  if (phrase === "k") { modifiedWordOrPhrase = "{>}{&k}"; }
+  if (phrase === "l") { modifiedWordOrPhrase = "{>}{&l}"; }
+  if (phrase === "m") { modifiedWordOrPhrase = "{>}{&m}"; }
+  if (phrase === "n") { modifiedWordOrPhrase = "{>}{&n}"; }
+  if (phrase === "o") { modifiedWordOrPhrase = "{>}{&o}"; }
+  if (phrase === "p") { modifiedWordOrPhrase = "{>}{&p}"; }
+  if (phrase === "q") { modifiedWordOrPhrase = "{>}{&q}"; }
+  if (phrase === "r") { modifiedWordOrPhrase = "{>}{&r}"; }
+  if (phrase === "s") { modifiedWordOrPhrase = "{>}{&s}"; }
+  if (phrase === "t") { modifiedWordOrPhrase = "{>}{&t}"; }
+  if (phrase === "u") { modifiedWordOrPhrase = "{>}{&u}"; }
+  if (phrase === "v") { modifiedWordOrPhrase = "{>}{&v}"; }
+  if (phrase === "w") { modifiedWordOrPhrase = "{>}{&w}"; }
+  if (phrase === "x") { modifiedWordOrPhrase = "{>}{&x}"; }
+  if (phrase === "y") { modifiedWordOrPhrase = "{>}{&y}"; }
+  if (phrase === "z") { modifiedWordOrPhrase = "{>}{&z}"; }
 
-  let listOfStrokesAndDicts = createListOfStrokes(lookupText, globalLookupDictionary);
+  let listOfStrokesAndDicts = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
 
-  if (phrase === "{") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes("{^}" + lookupText, globalLookupDictionary)); }
-  if (phrase === "}") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes(lookupText + "{^}", globalLookupDictionary)); }
+  if (phrase === "{") {
+    modifiedWordOrPhrase = "{^}" + lookupText;
+    listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary));
+  }
+  if (phrase === "}") {
+    modifiedWordOrPhrase = lookupText + "{^}";
+    listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary));
+  }
   // if (phrase === "[") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes("{^}" + lookupText, globalLookupDictionary)); }
   // if (phrase === "]") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes(lookupText + "{^}", globalLookupDictionary)); }
 
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{^}" + lookupText + "{^}", globalLookupDictionary);
+    modifiedWordOrPhrase = "{^}" + lookupText + "{^}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{^}" + lookupText, globalLookupDictionary);
+    modifiedWordOrPhrase = "{^}" + lookupText;
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(lookupText + "{^}", globalLookupDictionary);
+    modifiedWordOrPhrase = lookupText + "{^}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{^" + lookupText + "^}", globalLookupDictionary);
+    modifiedWordOrPhrase = "{^" + lookupText + "^}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{^" + lookupText + "}", globalLookupDictionary);
+    modifiedWordOrPhrase = "{^" + lookupText + "}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{" + lookupText + "^}", globalLookupDictionary);
+    modifiedWordOrPhrase = "{" + lookupText + "^}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{" + lookupText + "}", globalLookupDictionary);
+    modifiedWordOrPhrase = "{" + lookupText + "}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(lookupText.trim(), globalLookupDictionary);
+    modifiedWordOrPhrase = lookupText.trim();
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
 
   listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, misstrokesJSON, phrase, affixList);
 
-  return listOfStrokesAndDicts;
+  return [listOfStrokesAndDicts, modifiedWordOrPhrase];
 }
 
 function createListOfStrokes(phrase, dictionaryOfWordsStrokesAndSourceDictionary) {

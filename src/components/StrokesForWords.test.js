@@ -28,28 +28,28 @@ describe('lookup list of strokes and dicts with punctuation with carry capitalis
     let phrase = 'ago';
     let listOfStrokesAndDicts = [ ["AG", "typey-type.json", "typey"] ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase]);
   });
 
   it('shows list of strokes and dictionary for word with preceding whitespace', () => {
     let phrase = ' ago';
     let listOfStrokesAndDicts = [ ["AG", "typey-type.json", "typey"] ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase.trimStart()]);
   });
 
   it('shows list of strokes and dictionary for closing quote without whitespace', () => {
     let phrase = '"';
     let listOfStrokesAndDicts = [ ["KW-GS", "typey-type.json", "typey"] ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, "{~|\"^}"]);
   });
 
   it('shows list of strokes and dictionary for closing quote with trailing whitespace', () => {
     let phrase = '" ';
     let listOfStrokesAndDicts = [ ["KR-GS", "typey-type.json", "typey"] ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, "{^~|\"}"]);
   });
 });
 
@@ -102,6 +102,22 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
         ["SKPWR*FPLT", "user:personal.json"],
         ["SKPWR*P", "typey:typey-type.json"]
       ],
+      "{&%}": [
+        ["P*ERS", "user:personal.json"],
+        ["P*ERS", "plover:plover.json"]
+      ],
+      "{&&}": [
+        ["SKP*", "plover:plover.json"]
+      ],
+      "&&": [
+        ["SPHAPBD/SPHAPBD", "plover:plover.json"]
+      ],
+      "{&}": [
+        ["SKP*", "user:personal.json"],
+      ],
+      "&": [
+        ["SP-PBD", "plover:plover.json"]
+      ],
     }
   ));
 
@@ -112,7 +128,7 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
       ["A*", "typey-type.json", "typey"]
     ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, "{>}{&a}"]);
   });
 
   it('shows list of strokes and dictionary for word “ a” with whitespace', () => {
@@ -122,7 +138,7 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
       ["AEU", "typey-type.json", "typey"]
     ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase.trimStart()]);
   });
 
   it('shows list of strokes and dictionary for word “a ” with trailing whitespace', () => {
@@ -132,7 +148,7 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
       ["AEU", "typey-type.json", "typey"]
     ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase.trimEnd()]);
   });
 
   it('shows list of strokes and dictionary for fingerspelled letter “A” without whitespace', () => {
@@ -142,9 +158,10 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
       ["A*P", "typey-type.json", "typey"]
     ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, "{&A}"]);
   });
 
+  // TODO: might be wrong expectation
   it('shows list of strokes and dictionary for word “ A” with whitespace', () => {
     let phrase = ' A';
     let listOfStrokesAndDicts = [];
@@ -154,7 +171,7 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
     //   ["KPA/AEU", "typey-type.json", "typey"]
     // ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase.trimStart()]);
   });
 
   it('shows list of strokes and dictionary for fingerspelled letter “i” without whitespace', () => {
@@ -164,7 +181,7 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
       ["EUP", "typey-type.json", "typey"]
     ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, "{>}{&i}"]);
   });
 
   it('shows list of strokes and dictionary for word “ i” with whitespace', () => {
@@ -176,7 +193,7 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
     //   ["*EU", "typey-type.json", "typey"]
     // ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase.trimStart()]);
   });
 
   it('shows list of strokes and dictionary for fingerspelled letter “I” without whitespace', () => {
@@ -186,7 +203,7 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
       ["*EUP", "typey-type.json", "typey"]
     ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, "{&I}"]);
   });
 
   it('shows list of strokes and dictionary for word “ I” with whitespace', () => {
@@ -196,7 +213,7 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
       ["EU", "typey-type.json", "typey"]
     ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase.trimStart()]);
   });
 
   it('shows list of strokes and dictionary for fingerspelled letter “x” without whitespace', () => {
@@ -207,7 +224,7 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
       ["KP*", "typey-type.json", "typey"]
     ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, "{>}{&x}"]);
   });
 
   it('shows list of strokes and dictionary for word “ x” with whitespace', () => {
@@ -219,6 +236,36 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
     //   [KP", "typey-type.json", "typey"]
     // ];
 
-    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(listOfStrokesAndDicts);
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase.trimStart()]);
+  });
+
+  // TODO: might be wrong expectation
+  it('shows list of strokes and dictionary for word “&” unspaced', () => {
+    let phrase = '&';
+    let listOfStrokesAndDicts = [["SP-PBD", "plover.json", "plover"]];
+
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase]);
+  });
+
+  // TODO: might be wrong expectation
+  it('shows list of strokes and dictionary for word “&&” unspaced', () => {
+    let phrase = '&&';
+    let listOfStrokesAndDicts = [["SPHAPBD/SPHAPBD", "plover.json", "plover"]];
+
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase]);
+  });
+
+  it('shows list of strokes and dictionary for word “ &” with leading whitespace', () => {
+    let phrase = ' &';
+    let listOfStrokesAndDicts = [["SP-PBD", "plover.json", "plover"]];
+
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase.trimStart()]);
+  });
+
+  it('shows list of strokes and dictionary for word “ &&” with leading whitespace', () => {
+    let phrase = ' &&';
+    let listOfStrokesAndDicts = [["SPHAPBD/SPHAPBD", "plover.json", "plover"]];
+
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase.trimStart()]);
   });
 });
