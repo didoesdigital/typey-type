@@ -64,7 +64,7 @@ class StrokesForWords extends Component {
 
     if (!(this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup)) {
       listOfStrokesAndDicts = listOfStrokesAndDicts
-        .filter(row => row[2] === SOURCE_NAMESPACES.get("user") || !misstrokesJSON[row[0]])
+        .filter(row => row[2] === SOURCE_NAMESPACES.get("user") || !(misstrokesJSON[row[0]] && modifiedWordOrPhrase === misstrokesJSON[row[0]]))
     }
 
     this.setState({
