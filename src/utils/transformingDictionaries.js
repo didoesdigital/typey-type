@@ -166,18 +166,36 @@ function getRankedOutlineFromLookupEntry(lookupEntry, translation, affixList = A
   return rankOutlines(namespacedStrokesAndDicts, misstrokesJSON, translation, affixList)[0][0];
 }
 
-function findFingerspellingOutline(wordOrPhrase, globalLookupDictionary, strokeForOneCharacterWordPart, affixList) {
-  // try look up capital letters and numbers from personal dictionaries:
-  let modifiedWordOrPhrase = `{&${wordOrPhrase}}`;
-  let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-  if (lookupEntry) {
-    strokeForOneCharacterWordPart = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList);
+function findFingerspellingOutline(wordOrPhrase, globalLookupDictionary, strokeForOneCharacterWordPart, affixList, precedingChar) {
+  if (precedingChar === ' ') {
+    let modifiedWordOrPhrase = `{${wordOrPhrase}}`; // for `houses?" It`
+    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    if (lookupEntry) {
+      strokeForOneCharacterWordPart = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList);
+    }
+    else {
+      modifiedWordOrPhrase = wordOrPhrase; // for ` B`
+      lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+      if (lookupEntry) {
+        strokeForOneCharacterWordPart = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList);
+      }
+    }
   }
   else {
-    // try look up lowercase letters from personal dictionaries:
-    modifiedWordOrPhrase = `{>}{&${wordOrPhrase}}`;
-    lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { strokeForOneCharacterWordPart = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
+    // try look up capital letters and numbers from personal dictionaries:
+    let modifiedWordOrPhrase = `{&${wordOrPhrase}}`; // for `B`
+    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+    if (lookupEntry) {
+      strokeForOneCharacterWordPart = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList);
+    }
+    else {
+      // try look up lowercase letters from personal dictionaries:
+      modifiedWordOrPhrase = `{>}{&${wordOrPhrase}}`; // for `b`
+      lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+      if (lookupEntry) {
+        strokeForOneCharacterWordPart = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList);
+      }
+    }
   }
 
   return strokeForOneCharacterWordPart
@@ -239,10 +257,12 @@ function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStro
     return [strokeForOneCharacterWord, strokeLookupAttempts + 1];
   }
 
+  // NOTE: we do this even if a chosenStroke was found so that we can prioritise
+  // glued translations e.g. "{&&}" or "{&b}" over non-glue entries e.g. "&" or "b"
   let strokeForOneCharacterWordPart = FINGERSPELLED_LETTERS[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWordPart) {
 
-    strokeForOneCharacterWordPart = findFingerspellingOutline(wordOrPhrase, globalLookupDictionary, strokeForOneCharacterWordPart, affixList)
+    strokeForOneCharacterWordPart = findFingerspellingOutline(wordOrPhrase, globalLookupDictionary, strokeForOneCharacterWordPart, affixList, precedingChar)
 
     if (precedingChar === ' ' && wordOrPhrase === '"') {
       strokeForOneCharacterWordPart = 'KW-GS';
@@ -528,7 +548,7 @@ function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, str
   if (matchingPrefixWithHyphenEntry) {
     stroke = matchingPrefixWithHyphenEntry[0]; // self-
     strokes = strokes === "" ? stroke : strokes + " " + stroke;
-    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordSecondWord, globalLookupDictionary, stroke, strokeLookupAttempts);
+    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordSecondWord, globalLookupDictionary, stroke, strokeLookupAttempts, '-');
     if (stroke && stroke.length > 0 && stroke !== "xxx") {
       strokes = strokes + stroke;
       stroke = "xxx";
@@ -540,11 +560,11 @@ function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, str
     }
   }
   else {
-    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordFirstWord, globalLookupDictionary, stroke, strokeLookupAttempts); // "store" => ["STOR", 3]
+    [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordFirstWord, globalLookupDictionary, stroke, strokeLookupAttempts, ''); // "store" => ["STOR", 3]
 
     if (stroke && stroke.length > 0 && stroke !== "xxx") {
       strokes = strokes === "" ? stroke + " H-PB" : strokes + " " + stroke + " H-PB";
-      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordSecondWord, globalLookupDictionary, stroke, strokeLookupAttempts); // "room"
+      [stroke, strokeLookupAttempts] = chooseOutlineForPhrase(compoundWordSecondWord, globalLookupDictionary, stroke, strokeLookupAttempts, '-'); // "room"
 
       if (stroke && stroke.length > 0) {
         strokes = strokes + " " + stroke;

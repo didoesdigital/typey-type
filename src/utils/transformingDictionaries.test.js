@@ -2731,7 +2731,8 @@ describe('create stroke hint for phrase', () => {
 
     it('with full stop, closing double quote, and capitalised word', () => {
       let wordOrPhraseMaterial = '." Outside';
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("P-P KR-GS KPA/OUDZ");
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("P-P KR-GS KPA/OUDZ");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TP-PL KR-GS KPA/OUDZ");
     });
 
     // TODO:
@@ -2917,15 +2918,15 @@ describe('create stroke hint for phrase', () => {
     });
   });
 
-  describe('returns string showing text with punctuation', () => {
+  describe('returns string showing text with spaced punctuation', () => {
     it('common punctuation', () => {
       let wordOrPhraseMaterial = "! # $ % & , . : ; = ? @";
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKHRAPL HAERB TK-PL P*ERS SKP* KW-BG P-P KHR-PB SKHR-PB KW-L H-F SKWRAT");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKHRAPL HAERB TPHRORB P*ERS SKP* KW-BG TP-PL KHR-PB SKHR-PB KW-L H-F SKWRAT");
     });
 
     it('other punctuation', () => {
       let wordOrPhraseMaterial = "* ^ ` | ~ — – - ©";
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("STA*R KR-RT KH-FG PAO*EUP T*LD EPL/TKA*RB EPB/TKA*RB H-PB KPR-T");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("STA*R KR-RT KH-FG PAO*EUP T*LD EPL/TKA*RB EPB/TKA*RB H*B KPR-T");
     });
 
     it('brackets', () => {
@@ -2987,9 +2988,25 @@ describe('create stroke hint for phrase', () => {
   });
 
   describe('returns string showing text with numbers', () => {
-    it('zero to ten', () => {
-      let wordOrPhraseMaterial = "0 1 2 3 4 5 6 7 8 9 10";
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O #S #T- #P- #H #A #F #-P #L #-T 1/0");
+    it('zero to five with dashes', () => {
+      // let wordOrPhraseMaterial = "0.1.2.3.4.5.6.7.8.9.10";
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O P-P #S P-P #T- P-P #P- P-P #H P-P #A P-P #F P-P #-P P-P #L P-P #-T 1/0");
+      let wordOrPhraseMaterial = "-0-1-2-3-4-5";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("H*B #O H-PB #S H-PB #T- H-PB #P- H-PB #H H-PB #A");
+    });
+
+    it('five to ten with dashes', () => {
+      // let wordOrPhraseMaterial = "0.1.2.3.4.5.6.7.8.9.10";
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O P-P #S P-P #T- P-P #P- P-P #H P-P #A P-P #F P-P #-P P-P #L P-P #-T 1/0");
+      let wordOrPhraseMaterial = "-5-6-7-8-9-10";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("H*B #A H-PB #F H-PB #-P H-PB #L H-PB #-T H-PB 1/0");
+    });
+
+    it('zero to ten with spaces', () => {
+      // let wordOrPhraseMaterial = "0 1 2 3 4 5 6 7 8 9 10";
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O #S #T- #P- #H #A #F #-P #L #-T 1/0");
+      let wordOrPhraseMaterial = "0 0 1 2 3 4 5 6 7 8 9 10";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O 0EU 1 2 3 4 R5 6 7 8 9 1/0");
     });
 
     it('returns strings with numbers containing zeroes and commas', () => {
@@ -3008,7 +3025,8 @@ describe('create stroke hint for phrase', () => {
     it('returns string with currency', () => {
       let wordOrPhraseMaterial = "$100 $900";
       // FIXME: should probably show #SDZ #-TDZ
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-DZ TK-PL -9Z");
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-DZ TK-PL -9Z");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-DZ TPHRORB -9Z");
     });
 
     it('returns string with clock time', () => {
