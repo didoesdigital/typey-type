@@ -398,7 +398,7 @@ function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary, affixList =
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
 
-  listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, misstrokesJSON, phrase, affixList);
+  listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, misstrokesJSON, modifiedWordOrPhrase, affixList);
 
   return [listOfStrokesAndDicts, modifiedWordOrPhrase];
 }
