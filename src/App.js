@@ -1585,7 +1585,6 @@ class App extends Component {
         if (
           this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly &&
           !path.includes("phrasing") &&
-          !path.includes("apostrophes") &&
           !path.includes("prefixes") &&
           !path.includes("suffixes") &&
           !path.includes("steno-party-tricks") &&

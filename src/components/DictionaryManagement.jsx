@@ -585,7 +585,7 @@ class DictionaryManagement extends Component {
                 </label>
                 <ul className="ml3">
                   <li>This setting means that instead of using Typey&nbsp;Type's static lesson files for words and stroke hints, Typey Type will use the lesson files only for the words and then generate stroke hints using your dictionaries' strokes when the lesson loads.</li>
-                  <li>Typey&nbsp;Type will still use its own stroke hints for lessons with “phrasing”, “apostrophes”, “fingerspelling”, “prefixes”, “suffixes”, “steno-party-tricks”, or “collections/tech” in the URL.</li>
+                  <li>Typey&nbsp;Type will still use its own stroke hints for lessons with “phrasing”, “prefixes”, “suffixes”, “steno-party-tricks”, or “collections/tech” in the URL.</li>
                 </ul>
               </div>
             </div>
