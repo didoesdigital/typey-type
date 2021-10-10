@@ -559,17 +559,21 @@ class DictionaryManagement extends Component {
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <h3>Dictionary management experiment</h3>
-              <p><span className="bg-danger">This feature is experimental!</span> There are some known limitations:</p>
-              <ul>
-                <li>Local storage typically only holds about 5MB of data. If you have a bigger dictionary, you'll have to add it again on every visit.</li>
-                <li>You cannot use duplicate dictionary names e.g. if you have <code>../good/dict.json</code> and <code>../bad/dict.json</code>, Typey&nbsp;Type will see them both as <code>dict.json</code> and panic.</li>
-                <li>This only works with JSON files. You cannot add Python or RTF dictionaries.</li>
-                <li>This only works with Plover config files. This config file may decide the order of dictionaries for overwriting entries.</li>
-                <li>This assumes you're using a newer version of Plover where the config file is in a certain format and the most important dictionary appears first.</li>
-                <li>If you add multiple dictionaries with the same steno outline (JSON key) with different translations (JSON values), Typey&nbsp;Type will happily show the same outline as a hint for each of the words (or phrases), even though your configuration would prevent using both.</li>
-                <li>The Writer feature will ignore your personal dictionaries entirely and show only Typey&nbsp;Type translations.</li>
-                <li>This will probably do weird things with steno layouts other than the American (Ward Stone Ireland) layout and possibly with non-Plover theory punctuation.</li>
-              </ul>
+              <details>
+                <summary>
+                  <p><span className="bg-danger">This feature is experimental!</span> There are some known limitations, such as the size limit. Expand to learn more…</p>
+                </summary>
+                <ul>
+                  <li>Local storage typically only holds about 5MB of data. If you have a bigger dictionary, you'll have to add it again on every visit.</li>
+                  <li>You cannot use duplicate dictionary names e.g. if you have <code>../good/dict.json</code> and <code>../bad/dict.json</code>, Typey&nbsp;Type will see them both as <code>dict.json</code> and panic.</li>
+                  <li>This only works with JSON files. You cannot add Python or RTF dictionaries.</li>
+                  <li>This only works with Plover config files. This config file may decide the order of dictionaries for overwriting entries.</li>
+                  <li>This assumes you're using a newer version of Plover where the config file is in a certain format and the most important dictionary appears first.</li>
+                  <li>If you add multiple dictionaries with the same steno outline (JSON key) with different translations (JSON values), Typey&nbsp;Type will happily show the same outline as a hint for each of the words (or phrases), even though your configuration would prevent using both.</li>
+                  <li>The Writer feature will ignore your personal dictionaries entirely and show only Typey&nbsp;Type translations.</li>
+                  <li>This will probably do weird things with steno layouts other than the American (Ward Stone Ireland) layout and possibly with non-Plover theory punctuation.</li>
+                </ul>
+              </details>
               <p>Typey&nbsp;Type does not upload personal dictionaries anywhere. Your dictionaries stay on your device. Dictionary names (but not their contents) may be sent to Google Analytics.</p>
               <div className="checkbox-group p1">
                 <label className="checkbox-label mb1">
@@ -581,10 +585,10 @@ class DictionaryManagement extends Component {
                     checked={!!this.props.globalUserSettings.experiments.stenohintsonthefly}
                     onChange={this.props.toggleExperiment}
                   />
-                  <strong>Show your dictionary entries in lesson hints <span className="bg-danger">(this is experimental with known issues!)</span></strong>
+                  <strong>Show your dictionary entries in lesson hints <span className="bg-danger">(this is experimental with known limitations!)</span></strong>
                 </label>
                 <ul className="ml3">
-                  <li>This setting means that instead of using Typey&nbsp;Type's static lesson files for words and stroke hints, Typey Type will use the lesson files only for the words and then generate stroke hints using your dictionaries' strokes when the lesson loads.</li>
+                  {/* <li>This setting means that instead of using Typey&nbsp;Type's static lesson files for words and stroke hints, Typey Type will use the lesson files only for the words and then generate stroke hints using your dictionaries' strokes when the lesson loads.</li> */}
                   <li>Typey&nbsp;Type will still use its own stroke hints for lessons with “phrasing”, “prefixes”, “suffixes”, “steno-party-tricks”, or “collections/tech” in the URL.</li>
                   <li>There are weird cases where Typey&nbsp;Type will show its own strokes for certain combinations of punctuation.</li>
                   <li>You may see <span className="steno-stroke steno-stroke--subtle">EU</span> or <span className="steno-stroke steno-stroke--subtle">*EUP</span> shown for “I” instead of <span className="steno-stroke steno-stroke--subtle">1-R</span> in the Roman Numerals lesson and similar quirks.</li>
