@@ -2087,6 +2087,3 @@ small .svg-icon-wrapper.svg-baseline svg {
   @media (min-width: 768px) {
     .footer {
       flex-direction: row; } }
-
-.hue-rotate-25 {
-  filter: hue-rotate(25deg); }
