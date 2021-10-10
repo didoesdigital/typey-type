@@ -586,6 +586,7 @@ class DictionaryManagement extends Component {
                 <ul className="ml3">
                   <li>This setting means that instead of using Typey&nbsp;Type's static lesson files for words and stroke hints, Typey Type will use the lesson files only for the words and then generate stroke hints using your dictionaries' strokes when the lesson loads.</li>
                   <li>Typey&nbsp;Type will still use its own stroke hints for lessons with “phrasing”, “prefixes”, “suffixes”, “steno-party-tricks”, or “collections/tech” in the URL.</li>
+                  <li>There are weird cases where Typey&nbsp;Type will show its own strokes for certain combinations of punctuation.</li>
                   <li>You may see <span className="steno-stroke steno-stroke--subtle">EU</span> or <span className="steno-stroke steno-stroke--subtle">*EUP</span> shown for “I” instead of <span className="steno-stroke steno-stroke--subtle">1-R</span> in the Roman Numerals lesson and similar quirks.</li>
                 </ul>
               </div>
