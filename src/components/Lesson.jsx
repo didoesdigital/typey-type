@@ -329,6 +329,7 @@ class Lesson extends Component {
                 chooseStudy={this.props.chooseStudy}
                 currentLessonStrokes={this.props.currentLessonStrokes}
                 disableUserSettings={this.props.disableUserSettings}
+                globalUserSettings={this.props.globalUserSettings}
                 handleBeatsPerMinute={this.props.handleBeatsPerMinute}
                 handleLimitWordsChange={this.props.handleLimitWordsChange}
                 handleStartFromWordChange={this.props.handleStartFromWordChange}
@@ -340,6 +341,7 @@ class Lesson extends Component {
                 lessonLength={propsLesson.presentedMaterial.length}
                 lessonTitle={this.props.lessonTitle}
                 location={this.props.location}
+                metWords={this.props.metWords}
                 path={this.props.path}
                 prefillSurveyLink={this.prefillSurveyLink}
                 restartLesson={this.props.restartLesson}

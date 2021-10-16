@@ -194,6 +194,18 @@ class Finished extends Component {
     }
   }
 
+  getWordWithSpacing(wordWithoutSpacing, spacePlacement = this.props.userSettings.spacePlacement) {
+    if (spacePlacement === "spaceBeforeOutput") {
+      return " " + wordWithoutSpacing
+    }
+    else if (spacePlacement === "spaceAfterOutput") {
+      return wordWithoutSpacing + " "
+    }
+    else {
+      return wordWithoutSpacing;
+    }
+  }
+
   render() {
     let customMessage;
     let numericAccuracy = 0;
@@ -225,6 +237,10 @@ class Finished extends Component {
         } else {
           strokeAttemptsPresentation = [];
         }
+
+        const showTimesSeen = this.props.globalUserSettings?.experiments && !!this.props.globalUserSettings.experiments.timesSeen;
+        const timesSeen = this.props.metWords[this.getWordWithSpacing(phrase.word, this.props.userSettings.spacePlacement)]
+
         return(
           <li key={ i } className="unstyled-list-item bg-slat p1 mb1 overflow-scroll">
             <label className="checkbox-label mt0 mb1">
@@ -236,7 +252,7 @@ class Finished extends Component {
                 checked={this.props.currentLessonStrokes[i].checked}
                 onChange={this.props.updateRevisionMaterial}
                 />
-                <span className="matched steno-material px1 nowrap">{phrase.word}</span>
+              <span className="matched steno-material px1 nowrap">{phrase.word}</span>{showTimesSeen && timesSeen && <><span className="visually-hidden">. Times seen: </span><span className="nowrap px1">{timesSeen}</span></>}
             </label>
             {strokeAttemptsPresentation}
             <p className="pl3 mb0"><span className="visually-hidden text-small">Hint: </span><span className="steno-stroke steno-stroke--subtle text-small px1 py05">{phrase.stroke.split('').map((item, i)=><kbd className="raw-steno-key raw-steno-key--subtle text-small" key={i}>{item}</kbd>)}</span></p>
