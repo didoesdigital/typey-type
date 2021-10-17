@@ -104,6 +104,8 @@ class Support extends Component {
               <dd>Loosely, a brief or outline is the specified combination of keys pressed together to produce a specific word or phrase. Strictly, a brief or abbreviation is a shortened outline form with fewer strokes than the phonetic outline.</dd>
               <dt>Strokes</dt>
               <dd>A stroke is a combination of keys held together and released to write a word or sound. A multi-stroke brief is a combination of strokes pressed to produce a word or phrase (usually of more syllables).</dd>
+              <dt>Misstrokes</dt>
+              <dd>Misstrokes are extra entries that use similar keys to produce the word you meant to write. If you regularly mistype a word, you might add a misstroke entry for the keys you are incorrectly pressing so that your dictionaries effectively autocorrects your mistakes. For example, the misstroke <span className="steno-stroke">SPHAOEU</span> to write “supply” is missing the left-hand <span className="steno-stroke">R</span> key from the usual outline <span className="steno-stroke">SPHRAOEU</span>.</dd>
               <dt>Plover</dt>
               <dd>{" "}
               <GoogleAnalytics.OutboundLink

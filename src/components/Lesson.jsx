@@ -383,9 +383,11 @@ class Lesson extends Component {
                     globalLookupDictionary={this.props.globalLookupDictionary}
                     globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
                     globalUserSettings={this.props.globalUserSettings}
+                    personalDictionaries={this.props.personalDictionaries}
                     updateFlashcardsMetWords={this.props.updateFlashcardsMetWords.bind(this)}
                     updateFlashcardsProgress={this.props.updateFlashcardsProgress.bind(this)}
                     updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
+                    updatePersonalDictionaries={this.props.updatePersonalDictionaries}
                     userSettings={this.props.userSettings}
                     fullscreen={this.props.fullscreen}
                     changeFullscreen={this.props.changeFullscreen.bind(this)}

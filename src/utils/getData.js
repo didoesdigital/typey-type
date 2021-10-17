@@ -1,5 +1,4 @@
 let dictTypeyType = null;
-let misstrokes = null;
 let latestPloverDict = null;
 
 function fetchLatestPloverDict() {
@@ -61,16 +60,6 @@ function fetchDictTypeyType() {
   });
 }
 
-function fetchMisstrokesDict() {
-  return fetchResource(process.env.PUBLIC_URL + '/dictionaries/didoesdigital/misstrokes.json').then((json) => {
-    return json;
-  }).catch(function(e) {
-    return {
-      "O": "to"
-    };
-  });
-}
-
 function getLatestPloverDict() {
   let dict;
 
@@ -90,16 +79,14 @@ function getLatestPloverDict() {
 function getTypeyTypeDict() {
   let dict;
 
-  if (dictTypeyType === null || misstrokes === null) {
-    let misstrokesPromise = fetchMisstrokesDict();
-    let dictPromise = fetchDictTypeyType();
-    dict = Promise.all([dictPromise, misstrokesPromise]).then(data => {
-      [dictTypeyType, misstrokes] = data;
+  if (dictTypeyType === null) {
+    dict = fetchDictTypeyType().then(data => {
+      dictTypeyType = data;
       return data;
     });
   }
   else {
-    dict = Promise.resolve([dictTypeyType, misstrokes]);
+    dict = Promise.resolve(dictTypeyType);
   }
 
   return dict;
