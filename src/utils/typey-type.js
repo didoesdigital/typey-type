@@ -852,21 +852,85 @@ function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
 //   }
 // }
 
-function loadPersonalDictionariesFromLocalStorage() {
-  let personalDictionaries = null; // [["name", {"OUTLINE": "translation}],[…]]
+const migratePersonalDictionariesV0ToV1 = function (personalDictionaries, dirtyFlag) {
+  if (!personalDictionaries.v) {
+    personalDictionaries = {v:'1',dicts:personalDictionaries};
+    dirtyFlag = true;
+  }
 
+  return [personalDictionaries, dirtyFlag];
+}
+
+// const migratePersonalDictionariesV1ToV2 = function (personalDictionaries, dirtyFlag) {
+//   if (personalDictionaries.v && personalDictionaries.v === '1') {
+//     let opts = {};
+//     let dictsWithMetadata = personalDictionaries.dicts.map(dict => [dict[0],dict[1],opts]);
+//     personalDictionaries = {v:'2',dicts:dictsWithMetadata};
+//     dirtyFlag = true;
+//   }
+
+//   return [personalDictionaries, dirtyFlag];
+// }
+
+const runAllPersonalDictionariesMigrations = function (personalDictionaries, dirtyFlag) {
+  let error = null;
+  try {
+    [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV0ToV1(personalDictionaries, dirtyFlag);
+    // [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV1ToV2(personalDictionaries, dirtyFlag);
+  }
+  catch (exception) {
+    personalDictionaries = null;
+    dirtyFlag = false;
+    error = "Personal dictionaries found in local storage are either missing a version number or are not in valid version 0 format for migrating to version 1.";
+  }
+  return [personalDictionaries, dirtyFlag, error];
+}
+
+function migratePersonalDictionariesV(personalDictionaries) {
+  let dirtyFlag = false;
+  let error = null;
+
+  [personalDictionaries, dirtyFlag, error] = runAllPersonalDictionariesMigrations(personalDictionaries, dirtyFlag, error);
+
+  if (personalDictionaries !== null && dirtyFlag && error === null) {
+    writePersonalPreferences('personalDictionaries', personalDictionaries);
+  }
+
+  return [personalDictionaries, error];
+}
+
+function loadPersonalDictionariesFromLocalStorage() {
   try {
     if (window.localStorage) {
+      let versionedDictionaries = null;
       if (window.localStorage.getItem('personalDictionaries')) {
-        personalDictionaries = JSON.parse(window.localStorage.getItem('personalDictionaries'));
+        versionedDictionaries = JSON.parse(window.localStorage.getItem('personalDictionaries'));
       }
-      return [personalDictionaries, null];
+      if (versionedDictionaries === null) {
+        return null;
+      }
+
+      let errorMessage = null;
+      [versionedDictionaries, errorMessage] = migratePersonalDictionariesV(versionedDictionaries);
+      if (errorMessage) {
+        console.error(errorMessage);
+        return null;
+      }
+
+      let areDictsSomewhatValid = versionedDictionaries !== null && versionedDictionaries.v && versionedDictionaries.v === '1' && versionedDictionaries.dicts && versionedDictionaries.dicts[0] && versionedDictionaries.dicts[0][1];
+      if (areDictsSomewhatValid) {
+        return versionedDictionaries['dicts'];
+      }
+      else {
+        console.error("Dictionaries found in local storage are not valid. ");
+        return null;
+      }
     }
   }
   catch(error) {
-    console.log('Unable to read local storage.', error);
+    console.error('Unable to read local storage. ', error);
   }
-  return [null, personalDictionaries];
+  return null;
 }
 
 function loadPersonalPreferences() {
@@ -1065,12 +1129,15 @@ export {
   mapBriefToJapaneseStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
+  migratePersonalDictionariesV0ToV1,
+  // migratePersonalDictionariesV1ToV2,
   trimAndSumUniqMetWords,
   parseCustomMaterial,
   parseLesson,
   parseWordList,
   removeWhitespaceAndSumUniqMetWords,
   repetitionsRemaining,
+  runAllPersonalDictionariesMigrations,
   setupLessonProgress,
   shouldShowStroke,
   splitBriefsIntoStrokes,
