@@ -10,13 +10,13 @@ const AsyncDictionary = Loadable({
   delay: 300
 });
 
-const AsyncDictionaryImport = Loadable({
-  loader: () => import("./DictionaryImport"),
+const AsyncDictionaryManagement = Loadable({
+  loader: () => import("./DictionaryManagement"),
   loading: PageLoading,
   delay: 300
 });
 
-const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDictionaryLoaded, globalLookupDictionaryLoaded, globalLookupDictionary, updateGlobalLookupDictionary, ...dictionaryProps}) => {
+const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDictionaryLoaded, globalLookupDictionaryLoaded, globalLookupDictionary, globalUserSettings, personalDictionaries, toggleExperiment, updateGlobalLookupDictionary, updatePersonalDictionaries, fetchAndSetupGlobalDict, ...dictionaryProps}) => {
   return(
     <div>
       <Switch>
@@ -76,13 +76,18 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDict
             {...props}
           />
         } />
-        <Route exact={true} path={`${match.url}/import`} render={ (props) =>
-          <AsyncDictionaryImport
+        <Route exact={true} path={`${match.url}/management`} render={ (props) =>
+          <AsyncDictionaryManagement
             dictionaryIndex={dictionaryIndex}
             setDictionaryIndex={setDictionaryIndex}
             setGlobalDictionaryLoaded={setGlobalDictionaryLoaded}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
+            globalUserSettings={globalUserSettings}
+            personalDictionaries={personalDictionaries}
+            toggleExperiment={toggleExperiment}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updatePersonalDictionaries={updatePersonalDictionaries}
             {...dictionaryProps}
             {...props}
           />
@@ -93,7 +98,11 @@ const Dictionaries = ({match, dictionaryIndex, setDictionaryIndex, setGlobalDict
             setDictionaryIndex={setDictionaryIndex}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            globalUserSettings={globalUserSettings}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            personalDictionaries={personalDictionaries}
             updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updatePersonalDictionaries={updatePersonalDictionaries}
             match={match}
             {...dictionaryProps}
             {...props}

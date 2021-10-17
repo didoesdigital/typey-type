@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PARAMS from './utils/params.js';
+import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from './constant/index.js';
 import { randomise, isLessonTextValid } from './utils/utils';
 import { getLessonIndexData } from './utils/lessonIndexData';
 import { getRecommendedNextLesson } from './utils/recommendations';
@@ -10,6 +11,7 @@ import {
   parseWordList,
   setupLessonProgress,
   loadPersonalPreferences,
+  loadPersonalDictionariesFromLocalStorage,
   matchSplitText,
   parseLesson,
   removeWhitespaceAndSumUniqMetWords,
@@ -31,6 +33,7 @@ import {
   createAGlobalLookupDictionary,
   generateListOfWordsAndStrokes
 } from './utils/transformingDictionaries';
+import { AffixList } from './utils/affixList';
 import {
   Route,
   Switch
@@ -43,13 +46,7 @@ import PageLoading from './components/PageLoading';
 import Announcements from './components/Announcements';
 import ErrorBoundary from './components/ErrorBoundary'
 import Lessons from './components/Lessons';
-import Home from './components/Home';
 import Header from './components/Header';
-import Support from './components/Support';
-import Contribute from './components/Contribute';
-import Progress from './components/Progress';
-import Flashcards from './components/Flashcards';
-import PageNotFound from './components/PageNotFound';
 import Footer from './components/Footer';
 import Zipper from './utils/zipper';
 
@@ -59,8 +56,44 @@ const AsyncBreak = Loadable({
   delay: 300
 });
 
+const AsyncContribute = Loadable({
+  loader: () => import("./components/Contribute"),
+  loading: PageLoading,
+  delay: 300
+});
+
+const AsyncPageNotFound = Loadable({
+  loader: () => import("./components/PageNotFound"),
+  loading: PageLoading,
+  delay: 300
+});
+
+const AsyncProgress = Loadable({
+  loader: () => import("./components/Progress"),
+  loading: PageLoading,
+  delay: 300
+});
+
 const AsyncWriter = Loadable({
   loader: () => import("./components/Writer"),
+  loading: PageLoading,
+  delay: 300
+});
+
+const AsyncFlashcards = Loadable({
+  loader: () => import("./components/Flashcards"),
+  loading: PageLoading,
+  delay: 300
+});
+
+const AsyncHome = Loadable({
+  loader: () => import("./components/Home"),
+  loading: PageLoading,
+  delay: 300
+});
+
+const AsyncSupport = Loadable({
+  loader: () => import("./components/Support"),
   loading: PageLoading,
   delay: 300
 });
@@ -256,9 +289,14 @@ class App extends Component {
         showMisstrokesInLookup: false
       },
       hideOtherSettings: false,
+      isPloverDictionaryLoaded: false,
+      isGlobalLookupDictionaryLoaded: false,
       lookupTerm: '',
       recommendationHistory: { currentStep: null },
       nextLessonPath: '',
+      personalDictionaries: {
+        dictionariesNamesAndContents: null,
+      },
       previousCompletedPhraseAsTyped: '',
       repetitionsRemaining: 1,
       startTime: null,
@@ -341,17 +379,48 @@ class App extends Component {
     });
   }
 
-  fetchAndSetupGlobalDict(withPlover) {
-    // FIXME: This is a heuristic for checking if the Typey Type or Plover dictionaries have loaded.
-    // This approach is fragile and definitely won't work for personal dictionaries.
-    // TODO: Check if the latest global dictionary matches the latest dictionary config.
-    if (withPlover && this.state.globalLookupDictionary && this.state.globalLookupDictionary.size > 100000) {
+  // The withPlover flag here is just about whether or not to fetch the Plover dictionary file.
+  fetchAndSetupGlobalDict(withPlover, importedPersonalDictionaries) {
+    let personalDictionaries = null;
+    if (importedPersonalDictionaries && importedPersonalDictionaries.dictionariesNamesAndContents) {
+      personalDictionaries = importedPersonalDictionaries.dictionariesNamesAndContents;
+    }
+    if (personalDictionaries === null) {
+      personalDictionaries = loadPersonalDictionariesFromLocalStorage();
+    }
+    if (personalDictionaries === null) {
+      personalDictionaries = [];
+    }
+
+    const localConfig = personalDictionaries.map(d => `${SOURCE_NAMESPACES.get('user')}:${d[0]}`);
+
+    // TODO: this will all need to change when we change how Typey Type is included or excluded in
+    // personal dictionary usage…
+    let localConfigPlusTypeyType = localConfig.slice(0);
+    localConfigPlusTypeyType.unshift(`${SOURCE_NAMESPACES.get('typey')}:typey-type.json`);
+    const previouslyAppliedConfig = this.state.globalLookupDictionary['configuration'];
+    const globalLookupDictionaryMatchesConfig =
+      this.state.globalLookupDictionary &&
+      !!this.state.globalLookupDictionary['configuration'] &&
+      JSON.stringify(previouslyAppliedConfig) ===
+      JSON.stringify(localConfigPlusTypeyType);
+
+    let localConfigPlusTypeyTypeAndPlover = localConfigPlusTypeyType.slice(0);
+    localConfigPlusTypeyTypeAndPlover.push(`${SOURCE_NAMESPACES.get('plover')}:${LATEST_PLOVER_DICT_NAME}`); // reminder: .push() returns length of array, not result const
+    const globalLookupDictionaryMatchesConfigWithPlover =
+      this.state.globalLookupDictionary &&
+      !!this.state.globalLookupDictionary['configuration'] &&
+      JSON.stringify(previouslyAppliedConfig) ===
+      JSON.stringify(localConfigPlusTypeyTypeAndPlover);
+
+    let isPloverDictionaryLoaded = this.state.isPloverDictionaryLoaded;
+    if (withPlover && this.state.globalLookupDictionary && isPloverDictionaryLoaded && globalLookupDictionaryMatchesConfigWithPlover) {
       isGlobalDictionaryUpToDate = true;
     }
     else if (withPlover) {
       isGlobalDictionaryUpToDate = false;
     }
-    else if (!withPlover && this.state.globalLookupDictionary && this.state.globalLookupDictionary.size > 70000) {
+    else if (!withPlover && this.state.globalLookupDictionary && (globalLookupDictionaryMatchesConfig || globalLookupDictionaryMatchesConfigWithPlover)) {
       isGlobalDictionaryUpToDate = true;
     }
     else {
@@ -364,20 +433,28 @@ class App extends Component {
     else {
       globalDictionaryLoading = true;
       loadingPromise = Promise.all([getTypeyTypeDict(), withPlover ? getLatestPloverDict() : {}]).then(data => {
-        let [dictAndMisstrokes, latestPloverDict] = data;
+        let [typeyDict, latestPloverDict] = data;
         // let t0 = performance.now();
         // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
         //   dictAndMisstrokes[1] = {};
         // }
-        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(["plover-main-3-jun-2018.json"], [["plover-main-3-jun-2018.json", latestPloverDict]], ["plover-main-3-jun-2018.json"], dictAndMisstrokes);
+
+        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, typeyDict, withPlover ? latestPloverDict : null);
         // let t1 = performance.now();
         // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
 
+        // For debugging:
+        // window.lookupDict = sortedAndCombinedLookupDictionary;
         isGlobalDictionaryUpToDate = true;
         this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
         this.setState({ globalLookupDictionaryLoaded: true });
+        const affixList = new AffixList(sortedAndCombinedLookupDictionary);
+        AffixList.setSharedInstance(affixList);
       });
 
+      if (!isPloverDictionaryLoaded && withPlover) {
+        this.setState({isPloverDictionaryLoaded: true });
+      }
       return loadingPromise;
     }
   };
@@ -579,8 +656,14 @@ class App extends Component {
       // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
       window.setTimeout(function ()
       {
-        let element = document.getElementById('your-typed-text') || document.getElementById('js-no-words-to-write');
-        if (element) { element.focus(); }
+        let yourTypedText = document.getElementById('your-typed-text')
+        let noWordsToWrite = document.getElementById('js-no-words-to-write');
+        if (yourTypedText) {
+          yourTypedText.focus();
+        }
+        else if (noWordsToWrite) {
+          noWordsToWrite.focus(); // Note: not an interactive element
+        }
       }, 0);
 
     });
@@ -653,8 +736,10 @@ class App extends Component {
     const value = target.type === 'checkbox' ? target.checked : target.value;
 
     this.setState({showStrokesInLesson: value});
-    const element = document.getElementById('your-typed-text');
-    if (element) { element.focus(); }
+    const yourTypedText = document.getElementById('your-typed-text');
+    if (yourTypedText) {
+      yourTypedText.focus();
+    }
 
     if (this.props.location.pathname.includes('custom')) {
       GoogleAnalytics.event({
@@ -932,7 +1017,11 @@ class App extends Component {
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.state.userSettings) { stenoLayout = this.state.userSettings.stenoLayout; }
 
-    this.fetchAndSetupGlobalDict(false).then(() => {
+    const shouldUsePersonalDictionaries = this.state.personalDictionaries
+      && Object.entries(this.state.personalDictionaries).length > 0
+      && !!this.state.personalDictionaries.dictionariesNamesAndContents;
+
+    this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWords).join("\n");
       // parseWordList appears to remove empty lines and other garbage, we might not need it here
@@ -971,8 +1060,11 @@ class App extends Component {
         if (this.mainHeading) {
           this.mainHeading.focus();
         } else {
-          const element = document.getElementById('your-typed-text');
-          if (element) { element.focus(); }
+          const yourTypedText = document.getElementById('your-typed-text');
+          if (yourTypedText) {
+            yourTypedText.focus();
+            // this.sayCurrentPhraseAgain(); // this is called too soon in progress revision lessons so it announces dummy text instead of actual material
+          }
         }
       });
     })
@@ -993,6 +1085,31 @@ class App extends Component {
 
     this.setState({currentLessonStrokes: newCurrentLessonStrokes});
     return checked;
+  }
+
+  toggleExperiment(event) {
+    let newState = Object.assign({}, this.state.globalUserSettings);
+
+    const target = event.target;
+    const value = target.checked;
+    const name = target.name;
+
+    newState.experiments[name] = value;
+
+    this.setState({globalUserSettings: newState}, () => {
+      writePersonalPreferences('globalUserSettings', this.state.globalUserSettings);
+    });
+
+    let labelString = value;
+    if (value === undefined) { labelString = "BAD_INPUT"; } else { labelString.toString(); }
+
+    GoogleAnalytics.event({
+      category: 'Global user settings',
+      action: 'Change ' + name,
+      label: labelString
+    });
+
+    return value;
   }
 
   changeUserSetting(event) {
@@ -1468,14 +1585,17 @@ class App extends Component {
         if (
           this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly &&
           !path.includes("phrasing") &&
-          !path.includes("apostrophes") &&
-          !path.includes("fingerspelling") &&
           !path.includes("prefixes") &&
           !path.includes("suffixes") &&
           !path.includes("steno-party-tricks") &&
           !path.includes("collections/tech")
         ) {
-          this.fetchAndSetupGlobalDict(false).then(() => {
+
+          const shouldUsePersonalDictionaries = this.state.personalDictionaries
+            && Object.entries(this.state.personalDictionaries).length > 0
+            && !!this.state.personalDictionaries.dictionariesNamesAndContents;
+
+          this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.state.personalDictionaries : null).then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
               lesson.presentedMaterial = lessonWordsAndStrokes;
@@ -1491,8 +1611,11 @@ class App extends Component {
               if (this.mainHeading) {
                 this.mainHeading.focus();
               } else {
-                const element = document.getElementById('your-typed-text');
-                if (element) { element.focus(); }
+                const yourTypedText = document.getElementById('your-typed-text');
+                if (yourTypedText) {
+                  yourTypedText.focus();
+                  // this.sayCurrentPhraseAgain(); // this is called too soon, when setupLesson() hasn't finished updating material
+                }
               }
             });
           });
@@ -1508,8 +1631,10 @@ class App extends Component {
             if (this.mainHeading) {
               this.mainHeading.focus();
             } else {
-              const element = document.getElementById('your-typed-text');
-              if (element) { element.focus(); }
+              const yourTypedText = document.getElementById('your-typed-text');
+              if (yourTypedText) {
+                yourTypedText.focus();
+              }
             }
           });
         }
@@ -1537,7 +1662,7 @@ class App extends Component {
     if (event && event.target) {
       let providedText = event.target.value || '';
       let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
-      let customLesson = this.state.customLesson;
+      let customLesson = Object.assign({}, this.state.customLesson);
       if (validationMessages && validationMessages.length < 1) { customLesson = lesson; }
       this.setState({
         lesson: lesson,
@@ -1654,10 +1779,25 @@ class App extends Component {
       // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
       window.setTimeout(function ()
       {
-        const element = document.getElementById('your-typed-text');
-        if (element) { element.focus(); }
+        const yourTypedText = document.getElementById('your-typed-text');
+        if (yourTypedText) {
+          yourTypedText.focus();
+        }
       }, 0);
+      // Possible alternative approach:
+      // function focusAndSpeak() {
+      //   const yourTypedText = document.getElementById('your-typed-text');
+      //   if (yourTypedText) {
+      //     yourTypedText.focus();
+      //     // this.sayCurrentPhraseAgain();
+      //   }
+      // }
+      // window.setTimeout(focusAndSpeak.bind(this), 0);
     });
+  }
+
+  updatePersonalDictionaries(personalDictionaries) {
+    this.setState({personalDictionaries: personalDictionaries});
   }
 
   updateGlobalLookupDictionary(combinedLookupDictionary) {
@@ -1820,21 +1960,19 @@ class App extends Component {
       if (!accurateStroke) { newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1; }
 
       if (!strokeHintShown && accurateStroke) {
+        // Use the original text when recording to preserve case and spacing
+        let phraseText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
 
-        // for suffixes and prefixes, record material with ignored chars instead of actualText
-        let lesson = this.state.lesson;
-        if (lesson && lesson.settings && lesson.settings.ignoredChars && lesson.settings.ignoredChars.length > 0 ) {
-          actualText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
-          if (this.state.userSettings.spacePlacement === 'spaceBeforeOutput') {
-            actualText = ' ' + this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
-          } else if (this.state.userSettings.spacePlacement === 'spaceAfterOutput') {
-            actualText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase + ' ';
-          }
+        if (this.state.userSettings.spacePlacement === 'spaceBeforeOutput') {
+          phraseText = ' ' + this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
+        }
+        else if (this.state.userSettings.spacePlacement === 'spaceAfterOutput') {
+          phraseText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase + ' ';
         }
 
-        const meetingsCount = newState.metWords[actualText] || 0;
+        const meetingsCount = newState.metWords[phraseText] || 0;
         Object.assign(newState, increaseMetWords.call(this, meetingsCount));
-        newState.metWords[actualText] = meetingsCount + 1;
+        newState.metWords[phraseText] = meetingsCount + 1;
       }
 
       if (this.state.userSettings.speakMaterial) {
@@ -1893,17 +2031,49 @@ class App extends Component {
         }
       }
 
+      // No lang?
+      // if (!utterThis.lang) {
+      //   utterThis.lang = "en-US";
+      // }
+
+      // No voice?
+      // if (!utterThis.voice) {
+      //   let voices = synth.getVoices();
+      //   if (voices && voices.length > 0) {
+      //     utterThis.voice = voices[0];
+      //   }
+      // }
+
+      // Debugging:
+      // utterThis.onend = function (event) {
+      //   console.log('SpeechSynthesisUtterance.onend called because utterance has finished being spoken and end event fired');
+      // }
+      // utterThis.onerror = function (event) {
+      //   console.error('SpeechSynthesisUtterance.onerror called because utterance was prevented from being successfully spoken and error event fired');
+      // }
+
+      if (synth.speaking) {
+        synth.cancel();
+      }
+
+      // TODO: scale the rate in proportion to:
+      // A) words per minute and
+      // B) length of word as a proxy for the time it takes to say a long word
+      // Note: this likely has floating point math rounding errors.
+      let wordsPerMinute = this.state.timer > 0 ? this.state.totalNumberOfMatchedWords/(this.state.timer/60/1000) : 0;
+      wordsPerMinute > 100 ? utterThis.rate = 2 : utterThis.rate = 1;
+
       synth.speak(utterThis);
     }
   }
 
   sayCurrentPhraseAgain() {
-    // if (this.state.userSettings.speakMaterial) {
-    //   let currentPhrase = this.state.lesson.presentedMaterial[this.state.currentPhraseID];
-    //   if (currentPhrase && currentPhrase.hasOwnProperty('phrase')) {
-    //     this.say(currentPhrase.phrase);
-    //   }
-    // }
+    if (this.state.userSettings.speakMaterial) {
+      let currentPhrase = this.state.lesson.presentedMaterial[this.state.currentPhraseID];
+      if (currentPhrase && currentPhrase.hasOwnProperty('phrase')) {
+        this.say(currentPhrase.phrase);
+      }
+    }
   }
 
   isFinished() {
@@ -1990,6 +2160,8 @@ class App extends Component {
       };
     }
 
+    let stenohintsonthefly = this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly;
+
     let presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
     let app = this;
       return (
@@ -2002,7 +2174,7 @@ class App extends Component {
                   <div>
                     {header}
                     <DocumentTitle title='Typey Type for Stenographers'>
-                      <Home
+                      <AsyncHome
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         {...props}
@@ -2016,7 +2188,7 @@ class App extends Component {
                     {header}
                     <DocumentTitle title={'Typey Type | About'}>
                       <ErrorBoundary>
-                        <Support
+                        <AsyncSupport
                           setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         />
@@ -2035,6 +2207,7 @@ class App extends Component {
                           changeWriterInput={this.changeWriterInput.bind(this)}
                           setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          stenoHintsOnTheFly={stenohintsonthefly}
                           globalUserSettings={this.state.globalUserSettings}
                           userSettings={this.state.userSettings}
                           {...props}
@@ -2064,7 +2237,7 @@ class App extends Component {
                     {header}
                     <DocumentTitle title={'Typey Type | Contribute'}>
                       <ErrorBoundary>
-                        <Contribute
+                        <AsyncContribute
                           setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         />
@@ -2078,7 +2251,7 @@ class App extends Component {
                     {header}
                     <DocumentTitle title={'Typey Type | Progress'}>
                       <ErrorBoundary>
-                        <Progress
+                        <AsyncProgress
                           calculateSeenWordCount={calculateSeenWordCount.bind(this)}
                           calculateMemorisedWordCount={calculateMemorisedWordCount.bind(this)}
                           changeFlashcardCourseLevel={this.changeFlashcardCourseLevel.bind(this)}
@@ -2116,7 +2289,7 @@ class App extends Component {
                   <div>
                     {header}
                     <DocumentTitle title={'Typey Type | Flashcards'}>
-                      <Flashcards
+                      <AsyncFlashcards
                         changeFullscreen={this.changeFullscreen.bind(this)}
                         fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                         flashcardsMetWords={this.state.flashcardsMetWords}
@@ -2127,9 +2300,12 @@ class App extends Component {
                         globalUserSettings={this.state.globalUserSettings}
                         lessonpath="flashcards"
                         locationpathname={this.props.location.pathname}
+                        personalDictionaries={this.state.personalDictionaries}
+                        stenoHintsOnTheFly={stenohintsonthefly}
                         updateFlashcardsMetWords={this.updateFlashcardsMetWords.bind(this)}
                         updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
                         updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                        updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
                         userSettings={this.state.userSettings}
                       />
                     </DocumentTitle>
@@ -2149,7 +2325,10 @@ class App extends Component {
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                           globalUserSettings={this.state.globalUserSettings}
                           lookupTerm={this.state.lookupTerm}
+                          personalDictionaries={this.state.personalDictionaries}
+                          stenoHintsOnTheFly={stenohintsonthefly}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                          updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
                           userSettings={this.state.userSettings}
                           {...props}
                         />
@@ -2171,7 +2350,12 @@ class App extends Component {
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
+                          globalUserSettings={this.state.globalUserSettings}
+                          personalDictionaries={this.state.personalDictionaries}
+                          stenoHintsOnTheFly={stenohintsonthefly}
+                          toggleExperiment={this.toggleExperiment.bind(this)}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                          updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
                           userSettings={this.state.userSettings}
                           dictionaryIndex={this.state.dictionaryIndex}
                           {...props}
@@ -2198,7 +2382,10 @@ class App extends Component {
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
+                          globalUserSettings={this.state.globalUserSettings}
+                          personalDictionaries={this.state.personalDictionaries}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
+                          updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
                           lessonsProgress={this.state.lessonsProgress}
                           lessonNotFound={this.state.lessonNotFound}
                           fullscreen={this.state.fullscreen}
@@ -2256,6 +2443,7 @@ class App extends Component {
                           setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                           startFromWordOne={this.startFromWordOne.bind(this)}
+                          stenoHintsOnTheFly={stenohintsonthefly}
                           stopLesson={this.stopLesson.bind(this)}
                           startCustomLesson={this.startCustomLesson.bind(this)}
                           setUpProgressRevisionLesson={this.setUpProgressRevisionLesson.bind(this)}
@@ -2292,7 +2480,7 @@ class App extends Component {
                 <Route render={ (props) =>
                   <div>
                     <DocumentTitle title={'Typey Type | Page not found'}>
-                      <PageNotFound
+                      <AsyncPageNotFound
                         setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                       />
                     </DocumentTitle>
