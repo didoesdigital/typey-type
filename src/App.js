@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PARAMS from './utils/params.js';
-import { LATEST_PLOVER_DICT_NAME } from './constant/index.js';
+import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from './constant/index.js';
 import { randomise, isLessonTextValid } from './utils/utils';
 import { getLessonIndexData } from './utils/lessonIndexData';
 import { getRecommendedNextLesson } from './utils/recommendations';
@@ -382,24 +382,22 @@ class App extends Component {
   // The withPlover flag here is just about whether or not to fetch the Plover dictionary file.
   fetchAndSetupGlobalDict(withPlover, importedPersonalDictionaries) {
     let personalDictionaries = null;
-    let _;
     if (importedPersonalDictionaries && importedPersonalDictionaries.dictionariesNamesAndContents) {
       personalDictionaries = importedPersonalDictionaries.dictionariesNamesAndContents;
     }
     if (personalDictionaries === null) {
-      // eslint-disable-next-line
-      [personalDictionaries, _] = loadPersonalDictionariesFromLocalStorage();
+      personalDictionaries = loadPersonalDictionariesFromLocalStorage();
     }
     if (personalDictionaries === null) {
       personalDictionaries = [];
     }
 
-    const localConfig = personalDictionaries.map(d => d[0]);
+    const localConfig = personalDictionaries.map(d => `${SOURCE_NAMESPACES.get('user')}:${d[0]}`);
 
     // TODO: this will all need to change when we change how Typey Type is included or excluded in
     // personal dictionary usage…
     let localConfigPlusTypeyType = localConfig.slice(0);
-    localConfigPlusTypeyType.unshift("typey-type.json");
+    localConfigPlusTypeyType.unshift(`${SOURCE_NAMESPACES.get('typey')}:typey-type.json`);
     const previouslyAppliedConfig = this.state.globalLookupDictionary['configuration'];
     const globalLookupDictionaryMatchesConfig =
       this.state.globalLookupDictionary &&
@@ -408,7 +406,7 @@ class App extends Component {
       JSON.stringify(localConfigPlusTypeyType);
 
     let localConfigPlusTypeyTypeAndPlover = localConfigPlusTypeyType.slice(0);
-    localConfigPlusTypeyTypeAndPlover.push(LATEST_PLOVER_DICT_NAME); // reminder: .push() returns length of array, not result const
+    localConfigPlusTypeyTypeAndPlover.push(`${SOURCE_NAMESPACES.get('plover')}:${LATEST_PLOVER_DICT_NAME}`); // reminder: .push() returns length of array, not result const
     const globalLookupDictionaryMatchesConfigWithPlover =
       this.state.globalLookupDictionary &&
       !!this.state.globalLookupDictionary['configuration'] &&
@@ -435,13 +433,13 @@ class App extends Component {
     else {
       globalDictionaryLoading = true;
       loadingPromise = Promise.all([getTypeyTypeDict(), withPlover ? getLatestPloverDict() : {}]).then(data => {
-        let [typeyDictAndMisstrokes, latestPloverDict] = data;
+        let [typeyDict, latestPloverDict] = data;
         // let t0 = performance.now();
         // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
         //   dictAndMisstrokes[1] = {};
         // }
 
-        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, typeyDictAndMisstrokes, withPlover ? latestPloverDict : null);
+        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, typeyDict, withPlover ? latestPloverDict : null);
         // let t1 = performance.now();
         // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
 
@@ -1089,6 +1087,31 @@ class App extends Component {
     return checked;
   }
 
+  toggleExperiment(event) {
+    let newState = Object.assign({}, this.state.globalUserSettings);
+
+    const target = event.target;
+    const value = target.checked;
+    const name = target.name;
+
+    newState.experiments[name] = value;
+
+    this.setState({globalUserSettings: newState}, () => {
+      writePersonalPreferences('globalUserSettings', this.state.globalUserSettings);
+    });
+
+    let labelString = value;
+    if (value === undefined) { labelString = "BAD_INPUT"; } else { labelString.toString(); }
+
+    GoogleAnalytics.event({
+      category: 'Global user settings',
+      action: 'Change ' + name,
+      label: labelString
+    });
+
+    return value;
+  }
+
   changeUserSetting(event) {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
@@ -1562,8 +1585,6 @@ class App extends Component {
         if (
           this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly &&
           !path.includes("phrasing") &&
-          !path.includes("apostrophes") &&
-          !path.includes("fingerspelling") &&
           !path.includes("prefixes") &&
           !path.includes("suffixes") &&
           !path.includes("steno-party-tricks") &&
@@ -1641,7 +1662,7 @@ class App extends Component {
     if (event && event.target) {
       let providedText = event.target.value || '';
       let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
-      let customLesson = this.state.customLesson;
+      let customLesson = Object.assign({}, this.state.customLesson);
       if (validationMessages && validationMessages.length < 1) { customLesson = lesson; }
       this.setState({
         lesson: lesson,
@@ -2332,6 +2353,7 @@ class App extends Component {
                           globalUserSettings={this.state.globalUserSettings}
                           personalDictionaries={this.state.personalDictionaries}
                           stenoHintsOnTheFly={stenohintsonthefly}
+                          toggleExperiment={this.toggleExperiment.bind(this)}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                           updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
                           userSettings={this.state.userSettings}
@@ -2360,6 +2382,7 @@ class App extends Component {
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
+                          globalUserSettings={this.state.globalUserSettings}
                           personalDictionaries={this.state.personalDictionaries}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                           updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
