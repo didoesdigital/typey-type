@@ -52,6 +52,12 @@ h6 {
 li {
   margin-left: 1em; }
 
+details summary {
+  margin-bottom: 1em; }
+
+details summary > * {
+  display: inline; }
+
 p {
   line-height: 2;
   margin-bottom: 1em; }
@@ -390,6 +396,9 @@ input:focus::placeholder {
 .order-1 {
   order: 1; }
 
+.order-2 {
+  order: 2; }
+
 .collapse {
   border-collapse: collapse;
   border-spacing: 0; }
@@ -441,6 +450,9 @@ input:focus::placeholder {
 .bl {
   border-left-style: solid;
   border-left-width: 1px; }
+
+.fw4 {
+  font-weight: 400; }
 
 .fw7 {
   font-weight: 700; }
@@ -843,7 +855,7 @@ input:focus::placeholder {
   border-color: #ffd279; }
 
 .b-info.b-info {
-  border-color: #8242a8; }
+  border-color: #c8b7d1; }
 
 .b-slat.b-slat {
   border-color: #8242a8; }
@@ -1354,6 +1366,10 @@ label {
       color: #ece9ee;
       background-color: #b0b0b0;
       cursor: default; }
+  .button.button--danger,
+  .link-button.button--danger {
+    background-color: #953159;
+    color: #f4eaee; }
 
 .button-that-looks-like-a-link {
   background-color: transparent;
@@ -1425,6 +1441,13 @@ label {
   color: #202549;
   opacity: 1; }
 
+.say-word-button {
+  margin-bottom: 1em; }
+  @media (min-width: 1024px) {
+    .say-word-button {
+      position: absolute;
+      transform: translate(calc(-100% - 4px), -2px); } }
+
 .unknown-steno-diagram {
   position: relative; }
   .unknown-steno-diagram svg {
@@ -1445,11 +1468,15 @@ label {
   color: #ece9ee;
   letter-spacing: 0.1em;
   speak: spell-out; }
+  .steno-stroke::selection {
+    background-color: #ca9733; }
   .steno-stroke .raw-steno-key {
     padding: 4px 0; }
   .steno-stroke.steno-stroke--subtle {
     background-color: #6c6c6c;
     color: #f5f4f6; }
+    .steno-stroke.steno-stroke--subtle::selection {
+      background-color: #ca9733; }
 
 .raw-steno-key {
   background-color: #444444;

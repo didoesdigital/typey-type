@@ -1,7 +1,10 @@
 import * as React from 'react'
 import { Component } from 'react';
+import { SOURCE_NAMESPACES } from '../constant/index.js';
+import { AffixList } from '../utils/affixList';
 import {
-  rankOutlines
+  rankOutlines,
+  splitIntoStrokesDictsAndNamespaces
 } from './../utils/transformingDictionaries';
 import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
 import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
@@ -18,21 +21,28 @@ import {
   mapBriefToPalantypeKeys,
   splitBriefsIntoStrokes
 } from './../utils/typey-type';
+import misstrokesJSON from '../json/misstrokes.json'
 
 class StrokesForWords extends Component {
   state = {
+    modifiedWordOrPhrase: "",
     phrase: "",
     listOfStrokesAndDicts: []
   }
 
   componentDidMount() {
     // if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
-      this.props.fetchAndSetupGlobalDict(true).then(() => {
-        if (this.props.lookupTerm && this.props.lookupTerm !== undefined && this.props.lookupTerm.length > 0) {
-          this.setState({phrase: this.props.lookupTerm});
-          this.updateWordsForStrokes(this.props.lookupTerm);
-        }
-      })
+
+    const shouldUsePersonalDictionaries = this.props.personalDictionaries
+      && Object.entries(this.props.personalDictionaries).length > 0
+      && !!this.props.personalDictionaries.dictionariesNamesAndContents;
+
+    this.props.fetchAndSetupGlobalDict(true, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null).then(() => {
+      if (this.props.lookupTerm && this.props.lookupTerm !== undefined && this.props.lookupTerm.length > 0) {
+        this.setState({phrase: this.props.lookupTerm});
+        this.updateWordsForStrokes(this.props.lookupTerm);
+      }
+    })
       .catch(error => {
         console.error(error);
         // this.showDictionaryErrorNotification();
@@ -50,9 +60,15 @@ class StrokesForWords extends Component {
       this.props.onChange(phrase);
     }
 
-    const listOfStrokesAndDicts = lookupListOfStrokesAndDicts(phrase, this.props.globalLookupDictionary);
+    let [listOfStrokesAndDicts, modifiedWordOrPhrase] = lookupListOfStrokesAndDicts(phrase, this.props.globalLookupDictionary);
+
+    if (!(this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup)) {
+      listOfStrokesAndDicts = listOfStrokesAndDicts
+        .filter(row => row[2] === SOURCE_NAMESPACES.get("user") || !(misstrokesJSON[row[0]] && modifiedWordOrPhrase === misstrokesJSON[row[0]]))
+    }
 
     this.setState({
+      modifiedWordOrPhrase: modifiedWordOrPhrase,
       phrase: phrase,
       listOfStrokesAndDicts: listOfStrokesAndDicts
     })
@@ -64,7 +80,7 @@ class StrokesForWords extends Component {
     if (this.props.userSettings && this.props.userSettings.stenoLayout === 'stenoLayoutJapaneseSteno') { layoutTypeStyle = ' type-face--japanese'; }
 
     let strokeListItems = this.state.listOfStrokesAndDicts.map( (strokeAndDict, indexInListOfStrokesAndDicts) => {
-      let classes = strokeAndDict[1] === "typey-type.json" ? "steno-stroke px05 db fw7" : "steno-stroke px05 db steno-stroke--subtle";
+      let classes = strokeAndDict[2] === SOURCE_NAMESPACES.get("typey") ? "steno-stroke px05 db fw7" : "steno-stroke px05 db steno-stroke--subtle";
       let briefWithSpacesBetweenLetters = [...strokeAndDict[0]].join(" ").replace("-","dash");
 
       let stenoBriefKeys = (
@@ -79,7 +95,7 @@ class StrokesForWords extends Component {
 
       let stenoBriefKeysWithOrWithoutStrongTag = stenoBriefKeys;
 
-      if (strokeAndDict[1] === "typey-type.json") {
+      if (strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")) {
         stenoBriefKeysWithOrWithoutStrongTag = <strong>{stenoBriefKeys}</strong>;
       }
 
@@ -88,36 +104,49 @@ class StrokesForWords extends Component {
           <div className={"overflow-auto di mw-408 mr1" + layoutTypeStyle}>
             {stenoBriefKeysWithOrWithoutStrongTag}
           </div>
-          <span className={ strokeAndDict[1] === "typey-type.json" ? "" : "de-emphasized"}>{strokeAndDict[1]}</span>
+          <span className={ strokeAndDict[2] === SOURCE_NAMESPACES.get("typey") ? "" : "de-emphasized"}>{strokeAndDict[1]}</span>
         </li>
       )
     });
 
-    let emptyState = (<div className="mb2">No results found</div>);
+    let emptyState = (<p>No results found</p>);
 
     if (this.state.phrase === "") {
-      emptyState = (<div className="mb2"></div>);
+      emptyState = (<p></p>);
     }
 
+    let matchedTranslation = null
     let lookupResults;
 
+    let classes = "wrap mr1 order-1 fw4 py05 bg-slat bw-1 b--solid";
+    classes += this.state.modifiedWordOrPhrase === this.state.phrase ? " b-info" : " b-danger";
+
     if (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts.length > 0) {
+      matchedTranslation = this.state.modifiedWordOrPhrase ?
+        <p className="de-emphasized flex flex-wrap items-center">
+          <span className="de-emphasized order-2">(text shown in dictionary)</span>
+          <samp className={classes}>{this.state.modifiedWordOrPhrase}</samp>
+        </p>
+        :
+        null
+
       lookupResults = (
         <ul className="unstyled-list wrap">
           {strokeListItems}
         </ul>
       );
     } else {
-      lookupResults = emptyState;
+      matchedTranslation = emptyState;
+      lookupResults = null;
     }
 
     let ploverMisstrokesDetail;
 
     if (this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup) {
-      ploverMisstrokesDetail = <p><span className="bg-danger">(Plover misstrokes included.)</span></p>
+      ploverMisstrokesDetail = <p><span className="py05 bg-danger">(Plover misstrokes included.)</span></p>
     }
     else {
-      ploverMisstrokesDetail = <p><span className="de-emphasized">(4000 misstrokes hidden.)</span></p>
+      ploverMisstrokesDetail = <p><span className="py05 de-emphasized">(4000 misstrokes hidden.)</span></p>
     }
 
     let loadingOrError;
@@ -177,13 +206,6 @@ class StrokesForWords extends Component {
     let brief = ''
     if (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts[0] && this.state.listOfStrokesAndDicts[0][0]) {
       brief = this.state.listOfStrokesAndDicts[0][0];
-      let suggestedTypeyTypeBrief = this.state.listOfStrokesAndDicts.find((item) => {
-        return item[1] === "typey-type.json";
-      });
-
-      if (suggestedTypeyTypeBrief) {
-        brief = suggestedTypeyTypeBrief[0];
-      }
     }
 
     let strokes = splitBriefsIntoStrokes(brief);
@@ -222,6 +244,7 @@ class StrokesForWords extends Component {
             wrap="off"
             >
           </textarea>
+          {matchedTranslation}
           <div className="mb1">
             {diagrams}
           </div>
@@ -234,143 +257,163 @@ class StrokesForWords extends Component {
   }
 }
 
-function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary) {
+function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary, affixList = AffixList.getSharedInstance()) {
   let lookupText = phrase;
+  let modifiedWordOrPhrase = lookupText.slice();
 
-  if (phrase === "{") { lookupText = "\\{{^}"; }
-  if (phrase === "}") { lookupText = "{^}\\}"; }
-  if (phrase === "{ ") { lookupText = "\\{"; }
-  if (phrase === "} ") { lookupText = "\\}"; }
-  if (phrase === "[") { lookupText = "{^[^}"; }
-  if (phrase === "]") { lookupText = "{^]^}"; }
-  if (phrase === "[ ") { lookupText = "{[}"; }
-  if (phrase === "] ") { lookupText = "{]}"; }
-  if (phrase === "?") { lookupText = "{?}"; }
-  if (phrase === ".") { lookupText = "{^.^}"; }
-  if (phrase === ". ") { lookupText = "{.}"; }
-  if (phrase === ", ") { lookupText = "{,}"; }
-  if (phrase === `” `) { lookupText = "{^~|”}"; }
-  if (phrase === `”`) { lookupText = "{^~|”}"; }
-  if (phrase === `“`) { lookupText = "{~|“^}"; }
-  if (phrase === ` “`) { lookupText = "{~|“^}"; }
-  if (phrase === `“`) { lookupText = "{~|“^}"; }
-  if (phrase === ` ‘`) { lookupText = "{~|‘^}"; }
-  if (phrase === `‘`) { lookupText = "{~|‘^}"; }
-  if (phrase === `’ `) { lookupText = "{^~|’}"; }
-  if (phrase === `’`) { lookupText = "{^~|’}"; }
-  if (phrase === `" `) { lookupText = "{^~|\"}"; }
-  if (phrase === `"`) { lookupText = "{~|\"^}"; }
-  if (phrase === ` "`) { lookupText = "{~|\"^}"; }
-  if (phrase === ` '`) { lookupText = "{~|'^}"; }
-  if (phrase === `' `) { lookupText = "{^~|'}"; }
-  if (phrase === ` `) { lookupText = "{^ ^}"; }
+  if (phrase === "{") { modifiedWordOrPhrase = "\\{{^}"; }
+  if (phrase === "}") { modifiedWordOrPhrase = "{^}\\}"; }
+  if (phrase === "{ ") { modifiedWordOrPhrase = "\\{"; }
+  if (phrase === "} ") { modifiedWordOrPhrase = "\\}"; }
+  if (phrase === "[") { modifiedWordOrPhrase = "{^[^}"; }
+  if (phrase === "]") { modifiedWordOrPhrase = "{^]^}"; }
+  if (phrase === "[ ") { modifiedWordOrPhrase = "{[}"; }
+  if (phrase === "] ") { modifiedWordOrPhrase = "{]}"; }
+  if (phrase === "?") { modifiedWordOrPhrase = "{?}"; }
+  if (phrase === ".") { modifiedWordOrPhrase = "{^.^}"; }
+  if (phrase === ". ") { modifiedWordOrPhrase = "{.}"; }
+  if (phrase === ", ") { modifiedWordOrPhrase = "{,}"; }
+  if (phrase === `” `) { modifiedWordOrPhrase = "{^~|”}"; }
+  if (phrase === `”`) { modifiedWordOrPhrase = "{^~|”}"; }
+  if (phrase === `“`) { modifiedWordOrPhrase = "{~|“^}"; }
+  if (phrase === ` “`) { modifiedWordOrPhrase = "{~|“^}"; }
+  if (phrase === `“`) { modifiedWordOrPhrase = "{~|“^}"; }
+  if (phrase === ` ‘`) { modifiedWordOrPhrase = "{~|‘^}"; }
+  if (phrase === `‘`) { modifiedWordOrPhrase = "{~|‘^}"; }
+  if (phrase === `’ `) { modifiedWordOrPhrase = "{^~|’}"; }
+  if (phrase === `’`) { modifiedWordOrPhrase = "{^~|’}"; }
+  if (phrase === `" `) { modifiedWordOrPhrase = "{^~|\"}"; }
+  if (phrase === `"`) { modifiedWordOrPhrase = "{~|\"^}"; }
+  if (phrase === ` "`) { modifiedWordOrPhrase = "{~|\"^}"; }
+  if (phrase === ` '`) { modifiedWordOrPhrase = "{~|'^}"; }
+  if (phrase === `' `) { modifiedWordOrPhrase = "{^~|'}"; }
+  if (phrase === ` `) { modifiedWordOrPhrase = "{^ ^}"; }
 
-  if (phrase === "1") { lookupText = "{&1}"; }
-  if (phrase === "2") { lookupText = "{&2}"; }
-  if (phrase === "3") { lookupText = "{&3}"; }
-  if (phrase === "4") { lookupText = "{&4}"; }
-  if (phrase === "5") { lookupText = "{&5}"; }
-  if (phrase === "6") { lookupText = "{&6}"; }
-  if (phrase === "7") { lookupText = "{&7}"; }
-  if (phrase === "8") { lookupText = "{&8}"; }
-  if (phrase === "9") { lookupText = "{&9}"; }
-  if (phrase === "0") { lookupText = "{&0}"; }
+  if (phrase === `%`) { modifiedWordOrPhrase = "{^}%{^}"; }
+  if (phrase === `% `) { modifiedWordOrPhrase = "{^%}"; }
+  if (phrase === ` %`) { modifiedWordOrPhrase = "{&%}"; }
 
-  let listOfStrokesAndDicts = createListOfStrokes(lookupText, globalLookupDictionary);
+  if (phrase === "1") { modifiedWordOrPhrase = "{&1}"; }
+  if (phrase === "2") { modifiedWordOrPhrase = "{&2}"; }
+  if (phrase === "3") { modifiedWordOrPhrase = "{&3}"; }
+  if (phrase === "4") { modifiedWordOrPhrase = "{&4}"; }
+  if (phrase === "5") { modifiedWordOrPhrase = "{&5}"; }
+  if (phrase === "6") { modifiedWordOrPhrase = "{&6}"; }
+  if (phrase === "7") { modifiedWordOrPhrase = "{&7}"; }
+  if (phrase === "8") { modifiedWordOrPhrase = "{&8}"; }
+  if (phrase === "9") { modifiedWordOrPhrase = "{&9}"; }
+  if (phrase === "0") { modifiedWordOrPhrase = "{&0}"; }
 
-  if (phrase === "{") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes("{^}" + lookupText, globalLookupDictionary)); }
-  if (phrase === "}") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes(lookupText + "{^}", globalLookupDictionary)); }
+  if (phrase === "A") { modifiedWordOrPhrase = "{&A}"; }
+  if (phrase === "B") { modifiedWordOrPhrase = "{&B}"; }
+  if (phrase === "C") { modifiedWordOrPhrase = "{&C}"; }
+  if (phrase === "D") { modifiedWordOrPhrase = "{&D}"; }
+  if (phrase === "E") { modifiedWordOrPhrase = "{&E}"; }
+  if (phrase === "F") { modifiedWordOrPhrase = "{&F}"; }
+  if (phrase === "G") { modifiedWordOrPhrase = "{&G}"; }
+  if (phrase === "H") { modifiedWordOrPhrase = "{&H}"; }
+  if (phrase === "I") { modifiedWordOrPhrase = "{&I}"; }
+  if (phrase === "J") { modifiedWordOrPhrase = "{&J}"; }
+  if (phrase === "K") { modifiedWordOrPhrase = "{&K}"; }
+  if (phrase === "L") { modifiedWordOrPhrase = "{&L}"; }
+  if (phrase === "M") { modifiedWordOrPhrase = "{&M}"; }
+  if (phrase === "N") { modifiedWordOrPhrase = "{&N}"; }
+  if (phrase === "O") { modifiedWordOrPhrase = "{&O}"; }
+  if (phrase === "P") { modifiedWordOrPhrase = "{&P}"; }
+  if (phrase === "Q") { modifiedWordOrPhrase = "{&Q}"; }
+  if (phrase === "R") { modifiedWordOrPhrase = "{&R}"; }
+  if (phrase === "S") { modifiedWordOrPhrase = "{&S}"; }
+  if (phrase === "T") { modifiedWordOrPhrase = "{&T}"; }
+  if (phrase === "U") { modifiedWordOrPhrase = "{&U}"; }
+  if (phrase === "V") { modifiedWordOrPhrase = "{&V}"; }
+  if (phrase === "W") { modifiedWordOrPhrase = "{&W}"; }
+  if (phrase === "X") { modifiedWordOrPhrase = "{&X}"; }
+  if (phrase === "Y") { modifiedWordOrPhrase = "{&Y}"; }
+  if (phrase === "Z") { modifiedWordOrPhrase = "{&Z}"; }
+  if (phrase === "a") { modifiedWordOrPhrase = "{>}{&a}"; }
+  if (phrase === "b") { modifiedWordOrPhrase = "{>}{&b}"; }
+  if (phrase === "c") { modifiedWordOrPhrase = "{>}{&c}"; }
+  if (phrase === "d") { modifiedWordOrPhrase = "{>}{&d}"; }
+  if (phrase === "e") { modifiedWordOrPhrase = "{>}{&e}"; }
+  if (phrase === "f") { modifiedWordOrPhrase = "{>}{&f}"; }
+  if (phrase === "g") { modifiedWordOrPhrase = "{>}{&g}"; }
+  if (phrase === "h") { modifiedWordOrPhrase = "{>}{&h}"; }
+  if (phrase === "i") { modifiedWordOrPhrase = "{>}{&i}"; }
+  if (phrase === "j") { modifiedWordOrPhrase = "{>}{&j}"; }
+  if (phrase === "k") { modifiedWordOrPhrase = "{>}{&k}"; }
+  if (phrase === "l") { modifiedWordOrPhrase = "{>}{&l}"; }
+  if (phrase === "m") { modifiedWordOrPhrase = "{>}{&m}"; }
+  if (phrase === "n") { modifiedWordOrPhrase = "{>}{&n}"; }
+  if (phrase === "o") { modifiedWordOrPhrase = "{>}{&o}"; }
+  if (phrase === "p") { modifiedWordOrPhrase = "{>}{&p}"; }
+  if (phrase === "q") { modifiedWordOrPhrase = "{>}{&q}"; }
+  if (phrase === "r") { modifiedWordOrPhrase = "{>}{&r}"; }
+  if (phrase === "s") { modifiedWordOrPhrase = "{>}{&s}"; }
+  if (phrase === "t") { modifiedWordOrPhrase = "{>}{&t}"; }
+  if (phrase === "u") { modifiedWordOrPhrase = "{>}{&u}"; }
+  if (phrase === "v") { modifiedWordOrPhrase = "{>}{&v}"; }
+  if (phrase === "w") { modifiedWordOrPhrase = "{>}{&w}"; }
+  if (phrase === "x") { modifiedWordOrPhrase = "{>}{&x}"; }
+  if (phrase === "y") { modifiedWordOrPhrase = "{>}{&y}"; }
+  if (phrase === "z") { modifiedWordOrPhrase = "{>}{&z}"; }
+
+  let listOfStrokesAndDicts = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
+
+  if (phrase === "{") {
+    modifiedWordOrPhrase = "{^}" + lookupText;
+    listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary));
+  }
+  if (phrase === "}") {
+    modifiedWordOrPhrase = lookupText + "{^}";
+    listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary));
+  }
   // if (phrase === "[") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes("{^}" + lookupText, globalLookupDictionary)); }
   // if (phrase === "]") { listOfStrokesAndDicts = listOfStrokesAndDicts.concat(createListOfStrokes(lookupText + "{^}", globalLookupDictionary)); }
 
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{^}" + lookupText + "{^}", globalLookupDictionary);
+    modifiedWordOrPhrase = "{^}" + lookupText + "{^}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{^}" + lookupText, globalLookupDictionary);
+    modifiedWordOrPhrase = "{^}" + lookupText;
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(lookupText + "{^}", globalLookupDictionary);
+    modifiedWordOrPhrase = lookupText + "{^}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{^" + lookupText + "^}", globalLookupDictionary);
+    modifiedWordOrPhrase = "{^" + lookupText + "^}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{^" + lookupText + "}", globalLookupDictionary);
+    modifiedWordOrPhrase = "{^" + lookupText + "}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{" + lookupText + "^}", globalLookupDictionary);
+    modifiedWordOrPhrase = "{" + lookupText + "^}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes("{" + lookupText + "}", globalLookupDictionary);
+    modifiedWordOrPhrase = "{" + lookupText + "}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
   if (listOfStrokesAndDicts.length === 0) {
-    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(lookupText.trim(), globalLookupDictionary);
+    modifiedWordOrPhrase = lookupText.trim();
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(listOfStrokesAndDictsWithSuppressedSpaces);
   }
-  listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, phrase);
 
-  if (phrase === "A") { listOfStrokesAndDicts = [["A*P", "fingerspelling"]]; }
-  if (phrase === "B") { listOfStrokesAndDicts = [["PW*P", "fingerspelling"]]; }
-  if (phrase === "C") { listOfStrokesAndDicts = [["KR*P", "fingerspelling"]]; }
-  if (phrase === "D") { listOfStrokesAndDicts = [["TK*P", "fingerspelling"]]; }
-  if (phrase === "E") { listOfStrokesAndDicts = [["*EP", "fingerspelling"]]; }
-  if (phrase === "F") { listOfStrokesAndDicts = [["TP*P", "fingerspelling"]]; }
-  if (phrase === "G") { listOfStrokesAndDicts = [["TKPW*P", "fingerspelling"]]; }
-  if (phrase === "H") { listOfStrokesAndDicts = [["H*P", "fingerspelling"]]; }
-  if (phrase === "I") { listOfStrokesAndDicts = [["*EUP", "fingerspelling"]]; }
-  if (phrase === "J") { listOfStrokesAndDicts = [["SKWR*P", "fingerspelling"]]; }
-  if (phrase === "K") { listOfStrokesAndDicts = [["K*P", "fingerspelling"]]; }
-  if (phrase === "L") { listOfStrokesAndDicts = [["HR*P", "fingerspelling"]]; }
-  if (phrase === "M") { listOfStrokesAndDicts = [["PH*P", "fingerspelling"]]; }
-  if (phrase === "N") { listOfStrokesAndDicts = [["TPH*P", "fingerspelling"]]; }
-  if (phrase === "O") { listOfStrokesAndDicts = [["O*P", "fingerspelling"]]; }
-  if (phrase === "P") { listOfStrokesAndDicts = [["P*P", "fingerspelling"]]; }
-  if (phrase === "Q") { listOfStrokesAndDicts = [["KW*P", "fingerspelling"]]; }
-  if (phrase === "R") { listOfStrokesAndDicts = [["R*P", "fingerspelling"]]; }
-  if (phrase === "S") { listOfStrokesAndDicts = [["S*P", "fingerspelling"]]; }
-  if (phrase === "T") { listOfStrokesAndDicts = [["T*P", "fingerspelling"]]; }
-  if (phrase === "U") { listOfStrokesAndDicts = [["*UP", "fingerspelling"]]; }
-  if (phrase === "V") { listOfStrokesAndDicts = [["SR*P", "fingerspelling"]]; }
-  if (phrase === "W") { listOfStrokesAndDicts = [["W*P", "fingerspelling"]]; }
-  if (phrase === "X") { listOfStrokesAndDicts = [["KP*P", "fingerspelling"]]; }
-  if (phrase === "Y") { listOfStrokesAndDicts = [["KWR*P", "fingerspelling"]]; }
-  if (phrase === "Z") { listOfStrokesAndDicts = [["STKPW*P", "fingerspelling"]]; }
-  if (phrase === "a") { listOfStrokesAndDicts = [["A*", "fingerspelling"]]; }
-  if (phrase === "b") { listOfStrokesAndDicts = [["PW*", "fingerspelling"]]; }
-  if (phrase === "c") { listOfStrokesAndDicts = [["KR*", "fingerspelling"]]; }
-  if (phrase === "d") { listOfStrokesAndDicts = [["TK*", "fingerspelling"]]; }
-  if (phrase === "e") { listOfStrokesAndDicts = [["*E", "fingerspelling"]]; }
-  if (phrase === "f") { listOfStrokesAndDicts = [["TP*", "fingerspelling"]]; }
-  if (phrase === "g") { listOfStrokesAndDicts = [["TKPW*", "fingerspelling"]]; }
-  if (phrase === "h") { listOfStrokesAndDicts = [["H*", "fingerspelling"]]; }
-  if (phrase === "i") { listOfStrokesAndDicts = [["*EU", "fingerspelling"]]; }
-  if (phrase === "j") { listOfStrokesAndDicts = [["SKWR*", "fingerspelling"]]; }
-  if (phrase === "k") { listOfStrokesAndDicts = [["K*", "fingerspelling"]]; }
-  if (phrase === "l") { listOfStrokesAndDicts = [["HR*", "fingerspelling"]]; }
-  if (phrase === "m") { listOfStrokesAndDicts = [["PH*", "fingerspelling"]]; }
-  if (phrase === "n") { listOfStrokesAndDicts = [["TPH*", "fingerspelling"]]; }
-  if (phrase === "o") { listOfStrokesAndDicts = [["O*", "fingerspelling"]]; }
-  if (phrase === "p") { listOfStrokesAndDicts = [["P*", "fingerspelling"]]; }
-  if (phrase === "q") { listOfStrokesAndDicts = [["KW*", "fingerspelling"]]; }
-  if (phrase === "r") { listOfStrokesAndDicts = [["R*", "fingerspelling"]]; }
-  if (phrase === "s") { listOfStrokesAndDicts = [["S*", "fingerspelling"]]; }
-  if (phrase === "t") { listOfStrokesAndDicts = [["T*", "fingerspelling"]]; }
-  if (phrase === "u") { listOfStrokesAndDicts = [["*U", "fingerspelling"]]; }
-  if (phrase === "v") { listOfStrokesAndDicts = [["SR*", "fingerspelling"]]; }
-  if (phrase === "w") { listOfStrokesAndDicts = [["W*", "fingerspelling"]]; }
-  if (phrase === "x") { listOfStrokesAndDicts = [["KP*", "fingerspelling"]]; }
-  if (phrase === "y") { listOfStrokesAndDicts = [["KWR*", "fingerspelling"]]; }
-  if (phrase === "z") { listOfStrokesAndDicts = [["STKPW*", "fingerspelling"]]; }
+  listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, misstrokesJSON, modifiedWordOrPhrase, affixList);
 
-  return listOfStrokesAndDicts;
+  return [listOfStrokesAndDicts, modifiedWordOrPhrase];
 }
 
 function createListOfStrokes(phrase, dictionaryOfWordsStrokesAndSourceDictionary) {
@@ -378,7 +421,8 @@ function createListOfStrokes(phrase, dictionaryOfWordsStrokesAndSourceDictionary
   if (dictionaryOfWordsStrokesAndSourceDictionary.get(phrase)) {
     listOfStrokesAndDicts = dictionaryOfWordsStrokesAndSourceDictionary.get(phrase);
   }
-  return listOfStrokesAndDicts;
+
+  return splitIntoStrokesDictsAndNamespaces(listOfStrokesAndDicts)
 }
 
 export default StrokesForWords;

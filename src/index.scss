@@ -124,6 +124,14 @@ li {
   margin-left: 1em;
 }
 
+details summary {
+  margin-bottom: 1em;
+}
+
+details summary > * {
+  display: inline;
+}
+
 p {
   line-height: 2;
   margin-bottom: 1em;
@@ -436,6 +444,7 @@ input:focus::placeholder {
 .o-0 { opacity: 0; }
 
 .order-1 { order: 1; }
+.order-2 { order: 2; }
 
 .collapse {
   border-collapse: collapse;
@@ -490,9 +499,9 @@ input:focus::placeholder {
   border-left-width: 1px;
 }
 
-// .fw4 {
-//   font-weight: 400;
-// }
+.fw4 {
+  font-weight: 400;
+}
 .fw7 {
   font-weight: 700;
 }
@@ -710,7 +719,7 @@ input:focus::placeholder {
 .bg-white    { background-color: #fff; }
 .b-danger.b-danger   { border-color: saturate(add-tint($brand-danger, 30%), 30%); }
 .b-warning.b-warning { border-color: saturate(add-tint($brand-warning, 30%), 30%); }
-.b-info.b-info       { border-color: saturate(add-tint($brand-primary, 30%), 30%); }
+.b-info.b-info       { border-color: saturate(add-tint($brand-primary, 70%), 10%); }
 .b-slat.b-slat       { border-color: saturate(add-tint($brand-primary, 30%), 30%); }
 
 .color-purple-bright { color: saturate(add-tint($brand-primary, 30%), 30%); }
@@ -1364,6 +1373,11 @@ label {
       cursor: default;
     }
   }
+
+  &.button--danger {
+    background-color: $brand-danger;
+    color: add-tint($brand-danger, 90%);
+  }
 }
 
 .button-that-looks-like-a-link {
@@ -1533,6 +1547,14 @@ label {
 //   // }
 // }
 
+.say-word-button {
+  margin-bottom: 1em;
+  @media (min-width: $large-breakpoint) {
+    position: absolute;
+    transform: translate(calc(-100% - 4px), -2px);
+  }
+}
+
 .unknown-steno-diagram {
   position: relative;
 
@@ -1559,6 +1581,10 @@ label {
   letter-spacing: 0.1em;
   speak: spell-out;
 
+  &::selection {
+    background-color: darken(desaturate(add-tint($brand-warning, 5%), 40%), 15%);
+  }
+
   .raw-steno-key {
     padding: 4px 0;
   }
@@ -1566,6 +1592,10 @@ label {
   &.steno-stroke--subtle {
     background-color: desaturate(add-tint($brand-primary, 25%), 40%);
     color: add-tint($brand-primary, 95%);
+
+    &::selection {
+      background-color: darken(desaturate(add-tint($brand-warning, 5%), 40%), 15%);
+    }
   }
 }
 .raw-steno-key {
@@ -2334,6 +2364,4 @@ $lineAdjustment: 4px;
     flex-direction: row;
   }
 }
-
-
 
