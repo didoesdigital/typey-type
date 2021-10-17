@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/browser';
-import { LATEST_PLOVER_DICT_NAME } from '../constant/index.js';
+import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from '../constant/index.js';
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
@@ -9,11 +9,13 @@ import {
 } from '../utils/transformingDictionaries';
 import PseudoContentButton from './PseudoContentButton';
 import { writePersonalPreferences } from '../utils/typey-type';
+import misstrokesJSON from '../json/misstrokes.json'
 
 class DictionaryManagement extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      misstrokesInDictionaries: null,
       selectedFiles: null,
       importedDictionariesLoaded: false,
       importedDictionariesLoading: false,
@@ -35,10 +37,12 @@ class DictionaryManagement extends Component {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
+
     let config = [];
     if (this.props.globalLookupDictionary && this.props.globalLookupDictionary['configuration']) {
-      config = this.props.globalLookupDictionary['configuration'];
-      config = config.filter(dictName => dictName !== "typey-type.json" && dictName !== LATEST_PLOVER_DICT_NAME);
+      config = this.props.globalLookupDictionary['configuration']
+        .filter(dictName => dictName.startsWith(SOURCE_NAMESPACES.get('user') + ":"))
+        .map(dictName => dictName.replace(/^.+:/, ''));
     }
     this.setState({dictionariesTypeyTypeWillUse: config});
   }
@@ -67,6 +71,7 @@ class DictionaryManagement extends Component {
       })
     }
     else {
+      let misstrokesInDictionaries = [];
       for (let i = 0; i < filesLength; ++i) {
         let dictionary = files[i];
         let dictName = dictionary.name;
@@ -88,7 +93,7 @@ class DictionaryManagement extends Component {
               throw new Error("This dictionary name conflicts with an existing dictionary. You may have imported it already.");
             }
 
-            if (dictName === "typey-type.json") {
+            if (dictName === "typey-type.json" && dictionary.size >= 2144740) {
               throw new Error("This dictionary looks like a copy of Typey Type's so we'll exclude it for now.");
             }
 
@@ -102,30 +107,38 @@ class DictionaryManagement extends Component {
               throw new Error("This JSON does not contain an object.");
             }
 
-            let parsedDictionaryKeys = Object.keys(parsedDictionary);
+            let parsedDictionaryEntries = Object.entries(parsedDictionary);
 
-            if (parsedDictionaryKeys.length < 1) {
+            if (parsedDictionaryEntries.length < 1) {
               throw new Error("This dictionary is empty.");
             }
 
-            let parsedDictionaryKeysLength = parsedDictionaryKeys.length;
+            let probableMisstrokes = [];
+            let parsedDictionaryEntriesLength = parsedDictionaryEntries.length;
 
-            for (let i = 0; i < parsedDictionaryKeysLength; ++i) {
-              let invalidStenoOutline = parsedDictionaryKeys[i].match(/[^#STKPWHRAO*-EUFRPBLGTSDZ/]/);
+            for (let i = 0; i < parsedDictionaryEntriesLength; ++i) {
+              let [outline, translation] = parsedDictionaryEntries[i];
+              let invalidStenoOutline = outline.match(/[^#STKPWHRAO*-EUFRPBLGTSDZ/]/);
               if (invalidStenoOutline !== null) {
-                let length = 50;
-                let invalidStenoOutlineString = parsedDictionaryKeys[i]
-                let trimmedInvalidStenoOutline = invalidStenoOutlineString.length > length ? invalidStenoOutlineString.substring(0, length - 3) + "…" : invalidStenoOutlineString.substring(0, length);
+                let maxLength = 50;
+                let trimmedInvalidStenoOutline = outline.length > maxLength ? outline.substring(0, maxLength - 3) + "…" : outline.substring(0, maxLength);
                 throw new Error(`${dictName} contains invalid steno outlines, such as: ${trimmedInvalidStenoOutline}`);
+              }
+
+              if (misstrokesJSON[outline] && misstrokesJSON[outline] === translation) {
+                probableMisstrokes.push([outline, translation]);
               }
             }
 
             if (parsedDictionary && typeof parsedDictionary === "object") {
               validDictionaries.push([dictName, parsedDictionary]);
             }
+
+            if (probableMisstrokes.length > 0) {
+              misstrokesInDictionaries.push({name: dictName, probableMisstrokes: probableMisstrokes});
+            }
           }
           catch (error) {
-            console.error(error);
             invalidDictionaries.push([dictName, error.message]);
           }
 
@@ -145,6 +158,8 @@ class DictionaryManagement extends Component {
 
         reader.readAsText(dictionary);
       }
+
+      this.setState({misstrokesInDictionaries: misstrokesInDictionaries});
     }
   }
 
@@ -216,7 +231,6 @@ class DictionaryManagement extends Component {
           validConfig = configName;
         }
         catch (error) {
-          console.error(error);
           invalidConfig = [configName, error.message];
         }
 
@@ -254,8 +268,8 @@ class DictionaryManagement extends Component {
       labelString = fileNames.join(", ");
     }
     GoogleAnalytics.event({
-      category: 'Dictionary import',
-      action: 'Submit dictionaries',
+      category: 'Dictionary management',
+      action: 'Add dictionaries',
       label: labelString
     });
 
@@ -284,8 +298,8 @@ class DictionaryManagement extends Component {
     }
 
     GoogleAnalytics.event({
-      category: 'Dictionary config import',
-      action: 'Submit config',
+      category: 'Dictionary management',
+      action: 'Add config',
       label: labelString
     });
 
@@ -345,8 +359,10 @@ class DictionaryManagement extends Component {
       dictionariesNamesAndContents: sortedValidDictionaries
     });
 
+    let personalDictionariesToStoreInV1Format = {v:"1",dicts:this.state.validDictionaries};
+
     // Second, update local storage
-    let writeDictionariesError = writePersonalPreferences('personalDictionaries', this.state.validDictionaries);
+    let writeDictionariesError = writePersonalPreferences('personalDictionaries', personalDictionariesToStoreInV1Format);
     if (writeDictionariesError) {
       this.showDictionaryErrorNotification(writeDictionariesError.name);
 
@@ -367,7 +383,6 @@ class DictionaryManagement extends Component {
     const personalDictionaries = {
       dictionariesNamesAndContents: this.state.validDictionaries,
     }
-
     this.props.fetchAndSetupGlobalDict(true, personalDictionaries)
       .then(() => {
         this.setState({
@@ -404,6 +419,31 @@ class DictionaryManagement extends Component {
     let dictionariesTypeyTypeWillUse = this.state.dictionariesTypeyTypeWillUse.map ((dictionary, index) => {
       return <li key={index}>{dictionary}</li>
     });
+
+    const whyMisstrokes = (
+      <>
+        <details>
+          <summary>
+            <p>To see better stroke hints, you might move any misstrokes out of your main dictionaries into a separate misstrokes autocorrect dictionary and exclude it from Typey&nbsp;Type.</p>
+          </summary>
+          <p>Misstrokes are extra entries that use similar keys to produce the word you meant to write. If you regularly mistype a word, you might add a misstroke entry for the keys you are incorrectly pressing so that your dictionaries effectively autocorrects your mistakes. This is great for increasing the accuracy of your output.</p>
+          <p>While you're learning steno theory, it can be difficult to recognise misstrokes. It might then take longer to learn the theory and develop intuition about what strokes to use for longer words and variations. For example, if you use the misstroke <span className="steno-stroke">SPHAOEU</span> to write “supply”, which is missing the left-hand <span className="steno-stroke">R</span> key from the usual outline <span className="steno-stroke">SPHRAOEU</span>, it might take you longer to work out the brief <span className="steno-stroke">SPHRAOEUG</span> for “supplying” or <span className="steno-stroke">SPWHRAOEU</span> for “blood&nbsp;supply”.</p>
+        </details>
+      </>
+    );
+
+    let misstrokesBlurb = this.state.misstrokesInDictionaries?.length > 0 ? (
+      <>
+        <p>Your dictionaries contain entries that might be misstrokes or bad habits:</p>
+        <ul>
+          {this.state.misstrokesInDictionaries.map((dict, dictIndex) => {
+            const probableMisstrokes = dict.probableMisstrokes.map((entry, misstrokeIndex) => <li className="bg-warning wrap" key={misstrokeIndex}>"{entry[0]}": "{entry[1]}"</li>);
+            return <li key={dictIndex}>{dict.name}:<ul>{probableMisstrokes}</ul></li>
+          })}
+        </ul>
+        {whyMisstrokes}
+      </>
+    ) : whyMisstrokes;
 
     let showYourDictionaries = (
       <p>You can import your dictionaries and your dictionary config to look up briefs using your own dictionaries.</p>
@@ -519,17 +559,41 @@ class DictionaryManagement extends Component {
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <h3>Dictionary management experiment</h3>
-              <p>This feature is experimental! There are some known limitations:</p>
-              <ul>
-                <li>You cannot use duplicate dictionary names e.g. if you have <code>../good/dict.json</code> and <code>../bad/dict.json</code>, Typey&nbsp;Type will see them both as <code>dict.json</code> and panic.</li>
-                <li>This only works with JSON files. You cannot add Python or RTF dictionaries.</li>
-                <li>This only works with Plover config files. This config file may decide the order of dictionaries for overwriting entries.</li>
-                <li>This assumes you're using a newer version of Plover where the config file is in a certain format and the most important dictionary appears first. Or is it last?</li>
-                <li>If you are using the experiment to show your own stroke hints on the fly, that won't work in certain lessons, such as fingerspelling, apostrophes, phrasing, and affix lessons.</li>
-                <li>Local storage typically only holds about 5MB of data. If you have a bigger dictionary, you'll have to add it again on every visit.</li>
-                <li>If you add multiple dictionaries with the same steno outline (JSON key) with different translations (JSON values), Typey&nbsp;Type will happily show the same outline as a hint for each of the words (or phrases), even though your configuration would prevent using both.</li>
-                <li>The Writer feature will ignore your personal dictionaries entirely and show only Typey&nbsp;Type translations.</li>
-              </ul>
+              <details>
+                <summary>
+                  <p><span className="bg-danger">This feature is experimental!</span> There are some known limitations, such as the size limit. Expand to learn more…</p>
+                </summary>
+                <ul>
+                  <li>Local storage typically only holds about 5MB of data. If you have a bigger dictionary, you'll have to add it again on every visit.</li>
+                  <li>You cannot use duplicate dictionary names e.g. if you have <code>../good/dict.json</code> and <code>../bad/dict.json</code>, Typey&nbsp;Type will see them both as <code>dict.json</code> and panic.</li>
+                  <li>This only works with JSON files. You cannot add Python or RTF dictionaries.</li>
+                  <li>This only works with Plover config files. This config file may decide the order of dictionaries for overwriting entries.</li>
+                  <li>This assumes you're using a newer version of Plover where the config file is in a certain format and the most important dictionary appears first.</li>
+                  <li>If you add multiple dictionaries with the same steno outline (JSON key) with different translations (JSON values), Typey&nbsp;Type will happily show the same outline as a hint for each of the words (or phrases), even though your configuration would prevent using both.</li>
+                  <li>The Writer feature will ignore your personal dictionaries entirely and show only Typey&nbsp;Type translations.</li>
+                  <li>This will probably do weird things with steno layouts other than the American (Ward Stone Ireland) layout and possibly with non-Plover theory punctuation.</li>
+                </ul>
+              </details>
+              <p>Typey&nbsp;Type does not upload personal dictionaries anywhere. Your dictionaries stay on your device. Dictionary names (but not their contents) may be sent to Google Analytics.</p>
+              <div className="checkbox-group p1">
+                <label className="checkbox-label mb1">
+                  <input
+                    className="checkbox-input"
+                    type="checkbox"
+                    name="stenohintsonthefly"
+                    id="stenohintsonthefly"
+                    checked={!!this.props.globalUserSettings.experiments.stenohintsonthefly}
+                    onChange={this.props.toggleExperiment}
+                  />
+                  <strong>Show your dictionary entries in lesson hints <span className="bg-danger">(this is experimental with known limitations!)</span></strong>
+                </label>
+                <ul className="ml3">
+                  {/* <li>This setting means that instead of using Typey&nbsp;Type's static lesson files for words and stroke hints, Typey Type will use the lesson files only for the words and then generate stroke hints using your dictionaries' strokes when the lesson loads.</li> */}
+                  <li>Typey&nbsp;Type will still use its own stroke hints for lessons with “phrasing”, “prefixes”, “suffixes”, “steno-party-tricks”, or “collections/tech” in the URL.</li>
+                  <li>There are weird cases where Typey&nbsp;Type will show its own strokes for certain combinations of punctuation.</li>
+                  <li>You may see <span className="steno-stroke steno-stroke--subtle">EU</span> or <span className="steno-stroke steno-stroke--subtle">*EUP</span> shown for “I” instead of <span className="steno-stroke steno-stroke--subtle">1-R</span> in the Roman Numerals lesson and similar quirks.</li>
+                </ul>
+              </div>
             </div>
           </div>
           <div className="bg-white landing-page-section">
@@ -566,6 +630,7 @@ class DictionaryManagement extends Component {
                   <h3>Your dictionaries</h3>
                   {showYourDictionaries}
                   {showDictionaryErrors}
+                  {misstrokesBlurb}
                   {showYourConfig}
                   {showConfigErrors}
                   <form className="mt3 mb3" onSubmit={this.handleOnSubmitClear.bind(this)}>
