@@ -5,8 +5,6 @@ import PseudoContentButton from './PseudoContentButton';
 import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 import {
-  createWordListFromMetWords,
-  loadPersonalPreferences,
   parseWordList,
 } from './../utils/typey-type';
 import {
@@ -20,7 +18,6 @@ class CustomLessonSetup extends Component {
       customLessonWordsAndStrokes: [],
       customWordList: '',
       dictionaryConvertedToLesson: '',
-      myWords: ''
     }
   }
 
@@ -30,15 +27,16 @@ class CustomLessonSetup extends Component {
     }
 
     if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
-      this.props.fetchAndSetupGlobalDict(false)
+      const shouldUsePersonalDictionaries = this.props.personalDictionaries
+        && Object.entries(this.props.personalDictionaries).length > 0
+        && !!this.props.personalDictionaries.dictionariesNamesAndContents;
+
+      this.props.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null)
         .catch(error => {
           console.error(error);
           // this.showDictionaryErrorNotification();
         });
     }
-
-    let metWords = loadPersonalPreferences()[0];
-    this.addWordListToPage(metWords, this.props.globalLookupDictionary);
 
     this.setState({
       customLessonWordsAndStrokes: []
@@ -101,12 +99,6 @@ class CustomLessonSetup extends Component {
       this.handleConvertingDictionaryEntriesToLesson(event.target.value);
     }
     return event;
-  }
-
-  addWordListToPage(metWords, globalLookupDictionary) {
-    let myWords = createWordListFromMetWords(metWords).join("\n");
-    this.handleWordsForDictionaryEntries(myWords, globalLookupDictionary);
-    this.setState({myWords: myWords});
   }
 
   render() {
@@ -216,10 +208,10 @@ examples.	KP-PLS TP-PL"
 
           <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
-              <h3>Create Plover lesson using a word list</h3>
+              <h3>Create a lesson using a word list</h3>
               <div className="gtc-4fr-3fr">
                 <div>
-                  <label className="mb1" htmlFor="your-words-for-dictionary-entries">Paste a word list without strokes here to create a custom lesson using Plover theory:</label>
+                  <label className="mb1" htmlFor="your-words-for-dictionary-entries">Paste a word list without strokes here to create a custom lesson (using Plover theory by default):</label>
                   <textarea
                     id="your-words-for-dictionary-entries"
                     className="input-textarea mw100 w-100 mb1 overflow-scroll"
@@ -280,15 +272,7 @@ plover"
               <h3>Revise words you have seen</h3>
               <div className="gtc-4fr-3fr">
                 <div>
-                  <p>{this.state.myWords && this.state.myWords.length > 0 ? "Use your seen words to create a custom lesson:" : "Once you’ve made some progress, your words will appear here."}</p>
-                  <pre
-                    id="js-your-words-for-dictionary-entries"
-                    className="quote h-168 overflow-scroll mw-384 mt1 mb3"
-                    tabIndex="0"
-                  ><code>{this.state.myWords}</code></pre>
-                  <PseudoContentButton className="js-select-all-my-words link-button js-clipboard-button copy-to-clipboard" style={{minHeight: "2.5rem", whiteSpace: "normal", height: "initial"}} dataClipboardTarget="#js-your-words-for-dictionary-entries">Copy your words to clipboard</PseudoContentButton>
-                </div>
-                <div>
+                  <p><Link to="/lessons/progress/seen">Practise your seen words in a lesson</Link>.</p>
                 </div>
               </div>
             </div>

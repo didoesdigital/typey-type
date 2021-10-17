@@ -581,7 +581,10 @@ currentSlide: currentSlide
                   globalLookupDictionary={this.props.globalLookupDictionary}
                   globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
                   globalUserSettings={this.props.globalUserSettings}
+                  personalDictionaries={this.props.personalDictionaries}
+                  stenoHintsOnTheFly={this.props.stenohintsonthefly}
                   updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
+                  updatePersonalDictionaries={this.props.updatePersonalDictionaries}
                   userSettings={this.props.userSettings}
                 />
               </div>
