@@ -21,6 +21,7 @@ import UserSettings from './UserSettings';
 import Finished from './Finished';
 import Flashcards from './Flashcards';
 import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToItalianMichelaStenoKeys, mapBriefToJapaneseStenoKeys, mapBriefToKoreanModernCStenoKeys, mapBriefToPalantypeKeys } from './../utils/typey-type';
+import SedSaidPrompt from './SedSaidPrompt';
 
 class Lesson extends Component {
   componentDidMount() {
@@ -469,6 +470,11 @@ class Lesson extends Component {
                                 settings={this.props.settings}
                                 updateMarkup={this.props.updateMarkup.bind(this)}
                                 userSettings={this.props.userSettings}
+                              />
+                              <SedSaidPrompt
+                                actualText={this.props.actualText}
+                                currentPhrase={this.props.currentPhrase}
+                                setAnnouncementMessage={this.props.setAnnouncementMessage}
                               />
                               <div>
                                 {strokeTip}
