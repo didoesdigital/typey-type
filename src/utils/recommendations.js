@@ -417,7 +417,7 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           recommendedNextLesson.repetitions = null;
           recommendedNextLesson.linkTitle = "Type Racer";
           recommendedNextLesson.linkText = "Play Type Racer";
-          recommendedNextLesson.link = 'http://play.typeracer.com';
+          recommendedNextLesson.link = 'http://play.typeracer.com?universe=steno';
           break;
         case "game":
           recommendedNextLesson.studyType = 'game';
