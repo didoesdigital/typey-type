@@ -818,12 +818,12 @@ class App extends Component {
     let memorisedAccumulator = 0;
 
     let normalisedMetWords = {};
-    Object.keys(metWords).forEach(function(key,index) {
-      if (normalisedMetWords[key.trim().toLowerCase()]) {
-        normalisedMetWords[key.trim().toLowerCase()] = metWords[key] + normalisedMetWords[key.trim().toLowerCase()];
+    Object.keys(metWords).forEach(function(key) {
+      if (normalisedMetWords[key.trim()]) {
+        normalisedMetWords[key.trim()] = metWords[key] + normalisedMetWords[key.trim()];
       }
       else {
-        normalisedMetWords[key.trim().toLowerCase()] = metWords[key];
+        normalisedMetWords[key.trim()] = metWords[key];
       }
     });
 
@@ -832,7 +832,6 @@ class App extends Component {
     for (let i = 0; i < len; ++i) {
       let sourceMaterialPhrase = sourceMaterial[i].phrase;
       sourceMaterialPhrase = sourceMaterialPhrase.trim();
-      sourceMaterialPhrase = sourceMaterialPhrase.toLowerCase();
 
       // have you seen this word?
       if (normalisedMetWords[sourceMaterialPhrase] && normalisedMetWords[sourceMaterialPhrase] > 0) {
