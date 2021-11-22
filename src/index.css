@@ -7,6 +7,7 @@
 
 body {
   font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-variant-ligatures: no-common-ligatures;
   margin: 0 auto;
   color: #3f264e;
   background-color: #f5f4f6; }
@@ -132,7 +133,8 @@ tt, code, kbd, samp {
   font-weight: 700; }
 
 input, textarea {
-  font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
+  font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-variant-ligatures: no-common-ligatures; }
 
 textarea {
   border-radius: 4px;
@@ -150,6 +152,7 @@ select {
   display: inline-block;
   font-size: 1rem;
   font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-variant-ligatures: no-common-ligatures;
   line-height: 1.5;
   max-width: 100%;
   padding: 4px 24px 4px 8px !important;
@@ -1316,6 +1319,7 @@ label {
   color: #b3a7b9;
   cursor: pointer;
   font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-variant-ligatures: no-common-ligatures;
   height: 2.5rem;
   min-width: 2.5rem;
   padding: 4px 16px;
@@ -1390,6 +1394,7 @@ label {
   display: inline;
   color: #596091;
   font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-variant-ligatures: no-common-ligatures;
   line-height: 2;
   text-decoration: underline; }
   .button-that-looks-like-a-link:visited {
@@ -1405,6 +1410,7 @@ label {
   color: #596091;
   cursor: pointer;
   font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-variant-ligatures: no-common-ligatures;
   text-decoration: underline; }
   .de-emphasized-button:hover {
     color: #9193a8; }
@@ -1433,6 +1439,7 @@ label {
   border: 0;
   color: #596091;
   font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-variant-ligatures: no-common-ligatures;
   font-size: 0.8rem;
   letter-spacing: .05em;
   margin-right: 12px;
@@ -1479,8 +1486,7 @@ label {
   font-family: "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
   background-color: #444444;
   color: #ece9ee;
-  letter-spacing: 0.1em;
-  speak: spell-out; }
+  letter-spacing: 0.1em; }
   .steno-stroke::selection {
     background-color: #ca9733; }
   .steno-stroke .raw-steno-key {
@@ -1495,8 +1501,7 @@ label {
   background-color: #444444;
   color: #ece9ee;
   padding-left: 4px;
-  padding-right: 4px;
-  speak: spell-out; }
+  padding-right: 4px; }
   .raw-steno-key.raw-steno-key--subtle {
     background-color: #757575;
     color: #ece9ee; }
@@ -1708,6 +1713,7 @@ label {
   border: 1px solid transparent;
   color: #796585;
   font: 400 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-variant-ligatures: no-common-ligatures;
   padding: 0;
   text-align: center;
   text-decoration: none;

@@ -72,6 +72,7 @@ $header-plus-footer-height: 88 + 72 + 24 + 48px; // header + subheader + footer 
 
 body {
   font: $type;
+  font-variant-ligatures: no-common-ligatures;
   margin: 0 auto;
   color: $type-color;
   background-color: add-tint($brand-primary, 95%);
@@ -232,6 +233,7 @@ tt, code, kbd, samp {
 
 input, textarea {
   font: $type;
+  font-variant-ligatures: no-common-ligatures;
 }
 
 textarea {
@@ -251,6 +253,7 @@ select {
   display: inline-block;
   font-size: 1rem;
   font: $type;
+  font-variant-ligatures: no-common-ligatures;
   line-height: 1.5;
   max-width: 100%;
   padding: 4px 24px 4px 8px !important;
@@ -1323,6 +1326,7 @@ label {
   color: add-tint($brand-primary, 60%);
   cursor: pointer;
   font: $type;
+  font-variant-ligatures: no-common-ligatures;
   height: $link-button-height;
   min-width: $link-button-width;
   padding: 4px 16px;
@@ -1401,6 +1405,7 @@ label {
   display: inline;
   color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
   font: $type;
+  font-variant-ligatures: no-common-ligatures;
   line-height: 2;
   text-decoration: underline;
 
@@ -1424,6 +1429,7 @@ label {
   color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
   cursor: pointer;
   font: $type;
+  font-variant-ligatures: no-common-ligatures;
   text-decoration: underline;
 
   &:hover {
@@ -1464,6 +1470,7 @@ label {
   border: 0;
   color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
   font: $type;
+  font-variant-ligatures: no-common-ligatures;
   font-size: $h6-size;
   letter-spacing: .05em;
   margin-right: 12px;
@@ -1594,7 +1601,6 @@ label {
   background-color: desaturate(add-tint($brand-primary, 5%), 40%);
   color: add-tint($brand-primary, 90%);
   letter-spacing: 0.1em;
-  speak: spell-out;
 
   &::selection {
     background-color: darken(desaturate(add-tint($brand-warning, 5%), 40%), 15%);
@@ -1618,7 +1624,6 @@ label {
   color: add-tint($brand-primary, 90%);
   padding-left: 4px;
   padding-right: 4px;
-  speak: spell-out;
   &.raw-steno-key--subtle {
     background-color: desaturate(add-tint($brand-primary, 30%), 40%);
     color: add-tint($brand-primary, 90%);
@@ -1890,6 +1895,7 @@ label {
   border: 1px solid transparent;
   color: add-tint($brand-primary, 30%);
   font: $type;
+  font-variant-ligatures: no-common-ligatures;
   padding: 0;
   text-align: center;
   text-decoration: none;
