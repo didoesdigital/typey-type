@@ -60,7 +60,7 @@ export default function LessonList({ lessonIndex, url }) {
               id={category.toLowerCase()}
               className="heading-link--content"
             >
-              <h4>{category}</h4>
+              <h4 className="h3">{category}</h4>
             </a>
             {subcategories.map(([subcategory, lessons]) => {
               if (subcategory) {
@@ -71,7 +71,7 @@ export default function LessonList({ lessonIndex, url }) {
                       id={subcategory.toLowerCase()}
                       className="heading-link--content"
                     >
-                      <h5>{subcategory}</h5>
+                      <h5 className="h4">{subcategory}</h5>
                     </a>
                     <InnerLessonList lessons={lessons} url={url} />
                   </div>
