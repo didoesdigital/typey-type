@@ -978,6 +978,7 @@ class Progress extends Component {
               <div className="mw-568">
                 <h3>Lessons progress</h3>
                 <ul className="unstyled-list">{linkList}</ul>
+                <p>There are more <Link to='/lessons'>Lessons</Link>.</p>
               </div>
             </div>
 
