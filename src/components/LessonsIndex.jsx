@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
 import { IconExternal } from './Icon';
+import LessonList from './LessonList';
 import { Tooltip } from 'react-tippy';
 
 class LessonsIndex extends Component {
@@ -13,24 +14,6 @@ class LessonsIndex extends Component {
   }
 
   render() {
-    const linkList = this.props.lessonIndex.map( (lesson) => {
-      let lessonsubtitle = '';
-      let wordCount = 0;
-      let wordCountInIndex = '';
-      if (lesson.subtitle && lesson.subtitle.length > 0) {
-        lessonsubtitle = ': '+lesson.subtitle;
-      }
-      if (lesson.wordCount && lesson.wordCount > 0) {
-        wordCount = lesson.wordCount;
-        wordCountInIndex = ' · ' + wordCount + ' words';
-      }
-      return(
-        <li className="unstyled-list-item mb1" key={ lesson.path }>
-          <Link to={`${this.props.match.url}${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link>{wordCountInIndex}
-        </li>
-      )
-    });
-
     return (
       <main id="main">
         <div className="subheader">
@@ -80,7 +63,7 @@ class LessonsIndex extends Component {
               </div>
 
               <h3>Typey&nbsp;Type lessons</h3>
-              <ul className="unstyled-list">{linkList}</ul>
+              <LessonList lessonIndex={this.props.lessonIndex} url={this.props.match.url} />
             </div>
           </div>
         </div>
