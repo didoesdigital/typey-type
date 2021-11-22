@@ -8,34 +8,7 @@ import { Tooltip } from 'react-tippy';
 class LessonsIndex extends Component {
 
   componentDidMount() {
-    window.location.hash = window.decodeURIComponent(window.location.hash);
-    const scrollToAnchor = () => {
-      const hash = window.location.hash;
-      if (hash && hash.length > 0) {
-        const el = document.querySelector(hash);
-        let top = 0;
-        if (el && el.getBoundingClientRect().top) {
-          top = el.getBoundingClientRect().top;
-        }
-        let scrollOptions = {
-          left: 0,
-          top: window.pageYOffset + top,
-          behavior: 'smooth'
-        }
-        if (el) {
-          window.scrollTo(scrollOptions);
-          window.setTimeout(function ()
-          {
-            el.focus();
-          }, 3000);
-        }
-      }
-    };
-    scrollToAnchor();
-
-    window.onhashchange = scrollToAnchor;
-
-    if (this.mainHeading && !window.location.hash) {
+    if (this.mainHeading) {
       this.mainHeading.focus();
     }
   }

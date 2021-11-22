@@ -1501,10 +1501,9 @@ class App extends Component {
     }, () => {
       writePersonalPreferences('userSettings', this.state.userSettings);
 
-      this.props.history.replace({
-        pathname: this.props.location.pathname,
-        search: ""
-      });
+      let newHistory = Object.assign({}, this.props.location)
+      newHistory.search = "";
+      this.props.history.replace(newHistory);
 
       if (this.state.userSettings.simpleTypography) {
         newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial);
