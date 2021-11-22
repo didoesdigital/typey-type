@@ -28,6 +28,9 @@ const InnerLessonList = ({ lessons, url }) => (
     ))}
   </ul>
 );
+const wrangleId = (id) => {
+  return id.toLowerCase().replace(/[ ,’()]/g, '-')
+}
 
 export default function LessonList({ lessonIndex, url }) {
   useEffect(() => {
@@ -70,11 +73,11 @@ export default function LessonList({ lessonIndex, url }) {
       <ul>
         {groupedLessons.map(([category, subcategories]) => (
           <li key={category}>
-            <a href={`#${category.toLowerCase()}`}>{category}</a>
+            <a href={`#${wrangleId(category)}`}>{category}</a>
             {subcategories[0][0] &&
               <ul>
               {subcategories.map(([subcategory, _]) => (
-                <li key={subcategory}><a href={`#${subcategory.toLowerCase()}`}>{subcategory}</a></li>
+                <li key={subcategory}><a href={`#${wrangleId(subcategory)}`}>{subcategory}</a></li>
               ))}
               </ul>
             }
@@ -85,8 +88,8 @@ export default function LessonList({ lessonIndex, url }) {
         return (
           <div key={category}>
             <a
-              href={`#${category.toLowerCase()}`}
-              id={category.toLowerCase()}
+              href={`#${wrangleId(category)}`}
+              id={wrangleId(category)}
               className="heading-link--content"
             >
               <h4 className="h3">{category}</h4>
@@ -96,8 +99,8 @@ export default function LessonList({ lessonIndex, url }) {
                 return (
                   <div key={subcategory}>
                     <a
-                      href={`#${subcategory.toLowerCase()}`}
-                      id={subcategory.toLowerCase()}
+                      href={`#${wrangleId(subcategory)}`}
+                      id={wrangleId(subcategory)}
                       className="heading-link--content"
                     >
                       <h5 className="h4">{subcategory}</h5>
