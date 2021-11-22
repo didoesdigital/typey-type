@@ -18,6 +18,16 @@ const LessonLink = ({ lesson, url }) => (
     {lesson.subtitle?.length > 0 && `: ${lesson.subtitle}`}
   </Link>
 );
+const InnerLessonList = ({ lessons, url }) => (
+  <ul className="unstyled-list">
+    {lessons.map((lesson) => (
+      <li className="unstyled-list-item mb1" key={lesson.path}>
+        <LessonLink lesson={lesson} url={url} />
+        <WordCount lesson={lesson} />
+      </li>
+    ))}
+  </ul>
+);
 
 export default function LessonList({ lessonIndex, url }) {
   const groupedLessons = groups(
@@ -63,29 +73,14 @@ export default function LessonList({ lessonIndex, url }) {
                     >
                       <h5>{subcategory}</h5>
                     </a>
-                    <ul className="unstyled-list">
-                      {lessons.map((lesson) => (
-                        <li
-                          className="unstyled-list-item mb1"
-                          key={lesson.path}
-                        >
-                          <LessonLink lesson={lesson} url={url} />
-                          <WordCount lesson={lesson} />
-                        </li>
-                      ))}
-                    </ul>
+                    <InnerLessonList lessons={lessons} url={url} />
                   </div>
                 );
               } else {
                 return (
-                  <ul className="unstyled-list" key={subcategory}>
-                    {lessons.map((lesson) => (
-                      <li className="unstyled-list-item mb1" key={lesson.path}>
-                        <LessonLink lesson={lesson} url={url} />
-                        <WordCount lesson={lesson} />
-                      </li>
-                    ))}
-                  </ul>
+                  <div key={subcategory}>
+                    <InnerLessonList lessons={lessons} url={url} />
+                  </div>
                 );
               }
             })}
