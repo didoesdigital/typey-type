@@ -35,7 +35,7 @@ export default function LessonList({ lessonIndex, url }) {
             {subcategories[0][0] &&
               <ul>
               {subcategories.map(([subcategory, _]) => (
-                <li><a href={`#${subcategory.toLowerCase()}`}>{subcategory}</a></li>
+                <li key={subcategory}><a href={`#${subcategory.toLowerCase()}`}>{subcategory}</a></li>
               ))}
               </ul>
             }
@@ -55,7 +55,7 @@ export default function LessonList({ lessonIndex, url }) {
             {subcategories.map(([subcategory, lessons]) => {
               if (subcategory) {
                 return (
-                  <div>
+                  <div key={subcategory}>
                     <a
                       href={`#${subcategory.toLowerCase()}`}
                       id={subcategory.toLowerCase()}
@@ -78,7 +78,7 @@ export default function LessonList({ lessonIndex, url }) {
                 );
               } else {
                 return (
-                  <ul className="unstyled-list">
+                  <ul className="unstyled-list" key={subcategory}>
                     {lessons.map((lesson) => (
                       <li className="unstyled-list-item mb1" key={lesson.path}>
                         <LessonLink lesson={lesson} url={url} />
