@@ -395,6 +395,14 @@ class Support extends Component {
             <h4 id="metronome">Why might you use the metronome?</h4>
               <p>Using a metronome might help you improve your rhythm for each stroke in finger drills. By drilling difficult transitions between pairs of strokes that slow you down or cause you hesitation using a metronome, you may improve your slowest pairs.</p>
 
+            <h4 id="lesson-categories">What kinds of lessons are there?</h4>
+            <ul>
+              <li><Link to='/lessons#fundamentals'>Fundamentals</Link> let you practise the main elements of stenographic theory so you get the gist of what keys connect to what sounds and what letters or syllables they produce.</li>
+              <li><Link to='/lessons#drills'>Drills</Link> are sets of common, randomly ordered words, such as names, dates, pronouns, and numbers.</li>
+              <li><Link to='/lessons#collections'>Collections</Link> are sets of lessons. They might be domain-specific, such as <Link to="/lessons#tech">tech</Link> lessons, or have stenographic or linguistic significance, such as <Link to='/lessons#irreversible-binomials'>irreversible&nbsp;binomials</Link>.</li>
+              <li><Link to='/lessons#stories'>Stories</Link> include any lessons with words in sentence order, such as <Link to="/lessons#virginia-woolf">Virginia Woolf stories</Link> or <Link to="/lessons#proverbial-phrases">proverbial&nbsp;phrases</Link>.</li>
+            </ul>
+
             <h4 id="palantype">What’s a “palantype”?</h4>
             <p>Typey&nbsp;Type supports alternative steno key layouts such as “palantype”. A palantype is an alternative shorthand machine to a stenotype with more keys. That means palantype can have fewer theory conflicts and be easier to learn. Meanwhile, stenography is more popular and more ergonomic.{' '}
               <GoogleAnalytics.OutboundLink
