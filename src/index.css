@@ -870,6 +870,9 @@ input:focus::placeholder {
   letter-spacing: .1em;
   text-transform: uppercase; }
 
+.color-text {
+  color: #3f264e; }
+
 .de-emphasized {
   color: #6f6f6f; }
 
@@ -967,6 +970,16 @@ input:focus::placeholder {
     margin-bottom: 0; }
   .heading-link .heading-link__logo-text {
     font-size: 1rem; }
+
+.heading-link--content {
+  color: #3f264e;
+  text-decoration: none; }
+  .heading-link--content:visited {
+    color: #3f264e; }
+  .heading-link--content:hover {
+    color: #523c60; }
+  .heading-link--content:active, .heading-link--content:focus {
+    color: #392246; }
 
 @media (max-width: 959px) {
   .site-heading-banner {

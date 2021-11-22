@@ -21,6 +21,7 @@ $brand-danger: #953159;
 }
 
 // Variables
+$type-color: desaturate($brand-primary, 5%);
 $type: 400 1rem/1.6 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $type-face--mono: 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $type-face--korean: 'NanumGothicCoding', 'Nanum Gothic Coding', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
@@ -72,7 +73,7 @@ $header-plus-footer-height: 88 + 72 + 24 + 48px; // header + subheader + footer 
 body {
   font: $type;
   margin: 0 auto;
-  color: desaturate($brand-primary, 5%);
+  color: $type-color;
   background-color: add-tint($brand-primary, 95%);
 }
 
@@ -731,6 +732,7 @@ input:focus::placeholder {
   text-transform: uppercase;
 }
 
+.color-text  { color: $type-color; }
 .de-emphasized { color: desaturate(add-tint($brand-primary, 27%), 40%); }
 
 .clearfix { display: flow-root; }
@@ -853,6 +855,19 @@ input:focus::placeholder {
   }
   .heading-link__logo-text {
     font-size: $h5-size;
+  }
+}
+.heading-link--content {
+  color: $type-color;
+  text-decoration: none;
+  &:visited {
+    color: $type-color;
+  }
+  &:hover {
+    color: add-tint($type-color, 10%);
+  }
+  &:active, &:focus {
+    color: add-shade($type-color, 10%);
   }
 }
 
