@@ -405,26 +405,26 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActua
   for (let i = 0; i < currentPhraseAttempts.length - 1; i++) {
     let isAPeak = false;
     if (currentPhraseAttempts[i-1] !== undefined && currentPhraseAttempts[i+1] !== undefined) {
-      if (isPeak(currentPhraseAttempts[i].length, currentPhraseAttempts[i-1].length, currentPhraseAttempts[i+1].length)) {
+      if (isPeak(currentPhraseAttempts[i].text.length, currentPhraseAttempts[i-1].text.length, currentPhraseAttempts[i+1].text.length)) {
         isAPeak = true;
         // console.log("IS A PEAK");
-      } else if (currentPhraseAttempts[i].length === currentPhraseAttempts[i-1].length || currentPhraseAttempts[i].length === currentPhraseAttempts[i+1].length) {
+      } else if (currentPhraseAttempts[i].text.length === currentPhraseAttempts[i-1].text.length || currentPhraseAttempts[i].text.length === currentPhraseAttempts[i+1].text.length) {
         isAPeak = true;
         // console.log("IS A PEAK");
       }
     } else if (currentPhraseAttempts[i+1] !== undefined) {
-      if (currentPhraseAttempts[i].length > currentPhraseAttempts[i+1].length) {
+      if (currentPhraseAttempts[i].text.length > currentPhraseAttempts[i+1].text.length) {
         isAPeak = true;
         // console.log("IS A PEAK");
-      } else if (currentPhraseAttempts[i].length === currentPhraseAttempts[i+1].length) {
+      } else if (currentPhraseAttempts[i].text.length === currentPhraseAttempts[i+1].text.length) {
         isAPeak = true;
         // console.log("IS A PEAK");
       }
     } else if (currentPhraseAttempts[i-1] !== undefined) {
-      if (currentPhraseAttempts[i].length > currentPhraseAttempts[i-1].length) {
+      if (currentPhraseAttempts[i].text.length > currentPhraseAttempts[i-1].text.length) {
         isAPeak = true;
         // console.log("IS A PEAK");
-      } else if (currentPhraseAttempts[i].length === currentPhraseAttempts[i-1].length) {
+      } else if (currentPhraseAttempts[i].text.length === currentPhraseAttempts[i-1].text.length) {
         isAPeak = true;
         // console.log("IS A PEAK");
       }
@@ -446,7 +446,7 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActua
   let isFinalStroke = nextAttempt >= targetStrokeCount;
   let hasUnmatchedChars = unmatchedActual.length > 0;
   let failedSingleStrokeBrief = currentPhraseAttempts.length === 1 && targetStrokeCount === 1;
-  let isTypedTextLongerThanPrevious = currentPhraseAttempts.length > 1 && currentPhraseAttempts[currentPhraseAttempts.length - 1].length > currentPhraseAttempts[currentPhraseAttempts.length - 2].length;
+  let isTypedTextLongerThanPrevious = currentPhraseAttempts.length > 1 && currentPhraseAttempts[currentPhraseAttempts.length - 1].text.length > currentPhraseAttempts[currentPhraseAttempts.length - 2].text.length;
 
   if (isFinalStroke && hasUnmatchedChars && (failedSingleStrokeBrief || isTypedTextLongerThanPrevious)) {
     attempts.push(currentPhraseAttempts[currentPhraseAttempts.length - 1]);

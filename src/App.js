@@ -1914,7 +1914,7 @@ class App extends Component {
     let [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
     let currentPhraseAttempts = this.state.currentPhraseAttempts;
-    currentPhraseAttempts.push(actualText);
+    currentPhraseAttempts.push({text: actualText, time: Date.now()});
     // console.log(this.state.currentPhraseAttempts);
 
     var newState = {
@@ -1947,7 +1947,8 @@ class App extends Component {
         attempts: attempts,
         stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke,
         checked: true,
-        accuracy: accurateStroke
+        accuracy: accurateStroke,
+        time: Date.now()
       });
       // can these newState assignments be moved down below the scores assignments?
 

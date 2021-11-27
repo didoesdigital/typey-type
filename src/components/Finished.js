@@ -128,9 +128,9 @@ class Finished extends Component {
 
     if (currentLessonStrokes.length > 0) {
       let listOfPossibleStrokeImprovements = currentLessonStrokes.map( (phrase, i) => {
-        let strokeAttempts = phrase.attempts.map( ( attempt, j ) => {
+        let strokeAttempts = phrase.attempts.map( ( {text, time}, j ) => {
           return(
-              <li key={ j } className="nowrap di ml1"><span className="bg-warning px1">{attempt}</span></li>
+              <li key={ j } className="nowrap di ml1"><span className="bg-warning px1">{text}</span></li>
           );
         });
         if (phrase.attempts.length > 0) {
