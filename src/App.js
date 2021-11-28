@@ -2442,6 +2442,7 @@ class App extends Component {
                           setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                           startFromWordOne={this.startFromWordOne.bind(this)}
+                          startTime={this.state.startTime}
                           stenoHintsOnTheFly={stenohintsonthefly}
                           stopLesson={this.stopLesson.bind(this)}
                           startCustomLesson={this.startCustomLesson.bind(this)}

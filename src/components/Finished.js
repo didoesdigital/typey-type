@@ -5,6 +5,7 @@ import UserSettings from './UserSettings';
 import { IconRestart } from './Icon';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
+import { stitchTogetherLessonData, transformLessonDataToChartData } from '../utils/transformingFinishedData'
 import * as Confetti from './../utils/confetti';
 import 'react-tippy/dist/tippy.css'
 
@@ -17,11 +18,15 @@ class Finished extends Component {
       canvasWidth: Math.floor(window.innerWidth),
       canvasHeight: Math.floor(window.innerHeight),
       newTopSpeedPersonalBest: false,
-      newTopSpeedToday: false
+      newTopSpeedToday: false,
+      chartData: null
     }
   }
 
   componentDidMount() {
+    const lessonData = stitchTogetherLessonData(this.props.currentLessonStrokes, this.props.startTime);
+    console.log(lessonData)
+    this.setState({chartData: transformLessonDataToChartData(lessonData)}, () => console.log(this.state.chartData))
 
     let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
 

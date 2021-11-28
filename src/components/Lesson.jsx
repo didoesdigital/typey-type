@@ -343,6 +343,7 @@ class Lesson extends Component {
                 reviseLesson={this.props.reviseLesson}
                 settings={this.props.lesson.settings}
                 startFromWordOne={this.props.startFromWordOne}
+                startTime={this.props.startTime}
                 timer={this.props.timer}
                 toggleHideOtherSettings={this.props.toggleHideOtherSettings}
                 topSpeedToday={this.props.topSpeedToday}
