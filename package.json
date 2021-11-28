@@ -29,6 +29,7 @@
   "resolutions": {
     "@hapi/hoek": "^9.0.3",
     "acorn": "^6.4.1",
+    "babel-loader": "8.1.0",
     "dot-prop": "^5.1.1",
     "elliptic": "^6.5.4",
     "immer": "^9.0.6",
@@ -50,10 +51,18 @@
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!d3-array)/\" --env=jsdom",
     "flow": "flow",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "devDependencies": {
     "@sentry/cli": "^1.35.1",
+    "@storybook/addon-actions": "^6.4.0",
+    "@storybook/addon-essentials": "^6.4.0",
+    "@storybook/addon-links": "^6.4.0",
+    "@storybook/node-logger": "^6.4.0",
+    "@storybook/preset-create-react-app": "^3.2.0",
+    "@storybook/react": "^6.4.0",
     "jest-fetch-mock": "^2.1.0",
     "jest-mock-random": "^1.0.2",
     "react-scripts": "4.0.3",
@@ -70,6 +79,18 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "eslintConfig": {
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   }
 }
