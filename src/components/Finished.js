@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
 import { stitchTogetherLessonData, transformLessonDataToChartData } from '../utils/transformingFinishedData'
 import DisplayMetric from './DisplayMetric'
+import FinishedSpeedChart from './FinishedSpeedChart'
 import * as Confetti from './../utils/confetti';
 import 'react-tippy/dist/tippy.css'
 
@@ -17,15 +18,6 @@ const FinishedHeroData = ({speed, accuracy}) => {
     <div className="flex flex-wrap justify-between mw-320 mx-auto">
       <DisplayMetric size={"L"} value={speed} label={"Words per minute"} />
       <DisplayMetric size={"L"} value={accuracy} valueSuffix={"%"} label={"Accuracy"} />
-    </div>
-  )
-}
-
-const FinishedChart = ({data, classes}) => {
-  let wrapperClasses = ' ' + classes
-  return (
-    <div className={wrapperClasses}>
-      {/* TODO: Chart here */}
     </div>
   )
 }
@@ -321,7 +313,7 @@ class Finished extends Component {
           </h3>
           <p>{wpmCommentary}</p>
           <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
-          <FinishedChart data={this.state.chartData} classes="mt3 mb3" />
+          <FinishedSpeedChart data={this.state.chartData} className="mt3 mb3" />
           <ul className="inline-flex flex-wrap middot-separator unstyled-list">
             <li className="ml0 bg-warning pl1 pr1">
               {wpm}&nbsp;
