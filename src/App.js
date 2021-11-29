@@ -1914,8 +1914,12 @@ class App extends Component {
     let [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
     let currentPhraseAttempts = this.state.currentPhraseAttempts;
-    currentPhraseAttempts.push({text: actualText, time: Date.now()});
-    // console.log(this.state.currentPhraseAttempts);
+
+    currentPhraseAttempts.push({
+      text: actualText,
+      time: Date.now(),
+      numberOfMatchedWordsSoFar: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars + unmatchedChars.length) / this.charsPerWord
+    });
 
     var newState = {
       currentPhraseAttempts: currentPhraseAttempts,
@@ -1943,7 +1947,9 @@ class App extends Component {
       newState.currentPhraseAttempts = []; // reset for next word
       newState.currentLessonStrokes = this.state.currentLessonStrokes; // [{word: "cat", attempts: ["cut"], stroke: "KAT"}, {word: "sciences", attempts ["sign", "ss"], stroke: "SAOEUPB/EPBC/-S"]
       newState.currentLessonStrokes.push({
+        numberOfMatchedWordsSoFar: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
         word: this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase,
+        typedText: actualText,
         attempts: attempts,
         stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke,
         checked: true,

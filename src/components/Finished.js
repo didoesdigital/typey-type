@@ -35,11 +35,11 @@ class Finished extends Component {
   }
 
   componentDidMount() {
-    const lessonData = stitchTogetherLessonData(this.props.currentLessonStrokes, this.props.startTime);
-    console.log(lessonData)
-    this.setState({chartData: transformLessonDataToChartData(lessonData)}, () => console.log(this.state.chartData))
-
     let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
+
+    const lessonData = stitchTogetherLessonData(this.props.currentLessonStrokes, this.props.startTime, wpm);
+    console.log(lessonData)
+    this.setState({chartData: transformLessonDataToChartData(lessonData)})
 
     let fasterSpeedToday = wpm > this.props.topSpeedToday;
     let fasterPersonalBest = wpm > this.props.topSpeedPersonalBest;
