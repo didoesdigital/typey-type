@@ -24,7 +24,7 @@ function transformLessonDataToChartData(lessonData) {
       typedMaterial.attempts.forEach((attempt, i) => {
         marks.push({
           elapsedTime: elapsedTime,
-          wordsPerMinute: elapsedTime / (attempt.numberOfMatchedWordsSoFar),
+          wordsPerMinute: attempt.numberOfMatchedWordsSoFar / (elapsedTime / 1000 / 60),
           typedText: attempt.text,
           material: typedMaterial.word,
           markedCorrect: typedMaterial.accuracy,
@@ -33,9 +33,10 @@ function transformLessonDataToChartData(lessonData) {
       })
     }
 
+    // debugger;
     marks.push({
       elapsedTime: elapsedTime,
-      wordsPerMinute: elapsedTime / numberOfWords,
+      wordsPerMinute: numberOfWords / (elapsedTime / 1000 / 60),
       typedText: typedMaterial.typedText,
       material: typedMaterial.word,
       markedCorrect: typedMaterial.accuracy,
