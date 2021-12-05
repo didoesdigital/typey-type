@@ -7,6 +7,8 @@
     "@sentry/browser": "^4.0.0-beta.12",
     "clipboard": "^1.7.1",
     "d3-array": "^3.1.1",
+    "d3-scale": "^4.0.2",
+    "d3-shape": "^3.0.1",
     "flow-bin": "^0.59.0",
     "howler": "^2.2.0",
     "node-sass-chokidar": "^1.4.0",
