@@ -1,6 +1,7 @@
 import React from 'react';
 
 import FinishedSpeedChart from '../components/FinishedSpeedChart';
+import practiceProverb from './fixtures/practiceProverb.json';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -12,61 +13,62 @@ const Template = (args) => <FinishedSpeedChart {...args} />;
 
 export const ShortLesson = Template.bind({});
 ShortLesson.args = {
-  // data: {}
+  data: practiceProverb,
+  type: 'area'
 };
 ShortLesson.storyName = "Short lesson"
 
 export const LongLesson = Template.bind({});
 LongLesson.args = {
-  // data: {}
+  data: practiceProverb,
 };
 LongLesson.storyName = "Long lesson"
 
 export const WPM5 = Template.bind({});
 WPM5.args = {
-  // data: {}
+  data: practiceProverb,
 };
 WPM5.storyName = "5 WPM lesson"
 
 export const WPM21 = Template.bind({});
 WPM21.args = {
-  // data: {}
+  data: practiceProverb,
 };
 WPM21.storyName = "21 WPM lesson"
 
 export const WPM23 = Template.bind({});
 WPM23.args = {
-  // data: {}
+  data: practiceProverb,
 };
 WPM23.storyName = "23 WPM lesson"
 
 export const WPM28 = Template.bind({});
 WPM28.args = {
-  // data: {}
+  data: practiceProverb,
 };
 WPM28.storyName = "28 WPM lesson"
 
 export const WPM41 = Template.bind({});
 WPM41.args = {
-  // data: {}
+  data: practiceProverb,
 };
 WPM41.storyName = "41 WPM lesson"
 
 export const WPM61 = Template.bind({});
 WPM61.args = {
-  // data: {}
+  data: practiceProverb,
 };
 WPM61.storyName = "61 WPM lesson"
 
 export const WPM151 = Template.bind({});
 WPM151.args = {
-  // data: {}
+  data: practiceProverb,
 };
 WPM151.storyName = "151 WPM lesson"
 
 export const WPM226 = Template.bind({});
 WPM226.args = {
-  // data: {}
+  data: practiceProverb,
 };
 WPM226.storyName = "226 WPM lesson"
 

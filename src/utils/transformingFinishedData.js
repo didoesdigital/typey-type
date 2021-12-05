@@ -45,7 +45,6 @@ function transformLessonDataToChartData(lessonData) {
   })
 
   transformedData.marks = marks;
-  console.log({ transformedData });
 
   return transformedData;
 }

@@ -38,7 +38,6 @@ class Finished extends Component {
     let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
 
     const lessonData = stitchTogetherLessonData(this.props.currentLessonStrokes, this.props.startTime, wpm);
-    console.log(lessonData)
     this.setState({chartData: transformLessonDataToChartData(lessonData)})
 
     let fasterSpeedToday = wpm > this.props.topSpeedToday;
@@ -313,7 +312,7 @@ class Finished extends Component {
           </h3>
           <p>{wpmCommentary}</p>
           <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
-          <FinishedSpeedChart data={this.state.chartData} className="mt3 mb3" />
+          <FinishedSpeedChart data={this.state.chartData} />
           <ul className="inline-flex flex-wrap middot-separator unstyled-list">
             <li className="ml0 bg-warning pl1 pr1">
               {wpm}&nbsp;

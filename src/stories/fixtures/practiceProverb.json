@@ -1,0 +1,373 @@
+{
+  "averageWPM": 66,
+  "marks": [
+    {
+      "elapsedTime": 84,
+      "wordsPerMinute": 714.2857142857143,
+      "typedText": " Once",
+      "material": "Once",
+      "markedCorrect": true,
+      "hint": "KPA/WUPBS"
+    },
+    {
+      "elapsedTime": 2450,
+      "wordsPerMinute": 63.67346938775509,
+      "typedText": " bit en,",
+      "material": "bitten,",
+      "markedCorrect": true,
+      "hint": "PWEUT/-PB KW-BG"
+    },
+    {
+      "elapsedTime": 2450,
+      "wordsPerMinute": 63.67346938775509,
+      "typedText": " bitten,",
+      "material": "bitten,",
+      "markedCorrect": true,
+      "hint": "PWEUT/-PB KW-BG"
+    },
+    {
+      "elapsedTime": 3641,
+      "wordsPerMinute": 62.62015929689645,
+      "typedText": " twice",
+      "material": "twice",
+      "markedCorrect": true,
+      "hint": "TWAOEUS"
+    },
+    {
+      "elapsedTime": 4647,
+      "wordsPerMinute": 61.97546804389928,
+      "typedText": " shy.",
+      "material": "shy.",
+      "markedCorrect": true,
+      "hint": "SHAOEU TP-PL"
+    },
+    {
+      "elapsedTime": 5218,
+      "wordsPerMinute": 64.39248754311997,
+      "typedText": " One",
+      "material": "One",
+      "markedCorrect": true,
+      "hint": "WUPB"
+    },
+    {
+      "elapsedTime": 6029,
+      "wordsPerMinute": 69.66329407862001,
+      "typedText": " doctor",
+      "material": "doctor",
+      "markedCorrect": true,
+      "hint": "TKR"
+    },
+    {
+      "elapsedTime": 7301,
+      "wordsPerMinute": 67.3880290371182,
+      "typedText": " makes",
+      "material": "makes",
+      "markedCorrect": true,
+      "hint": "PHAEUBGS"
+    },
+    {
+      "elapsedTime": 7848,
+      "wordsPerMinute": 70.33639143730886,
+      "typedText": " work",
+      "material": "work",
+      "markedCorrect": true,
+      "hint": "WORBG"
+    },
+    {
+      "elapsedTime": 8346,
+      "wordsPerMinute": 71.89072609633357,
+      "typedText": " for",
+      "material": "for",
+      "markedCorrect": true,
+      "hint": "TPOR"
+    },
+    {
+      "elapsedTime": 9099,
+      "wordsPerMinute": 77.81074843389383,
+      "typedText": " another.",
+      "material": "another.",
+      "markedCorrect": true,
+      "hint": "TPHOER TP-PL"
+    },
+    {
+      "elapsedTime": 9715,
+      "wordsPerMinute": 77.81780751415337,
+      "typedText": " One",
+      "material": "One",
+      "markedCorrect": true,
+      "hint": "WUPB"
+    },
+    {
+      "elapsedTime": 10176,
+      "wordsPerMinute": 80.18867924528301,
+      "typedText": " good",
+      "material": "good",
+      "markedCorrect": true,
+      "hint": "TKPWAOD"
+    },
+    {
+      "elapsedTime": 10637,
+      "wordsPerMinute": 82.35404719375762,
+      "typedText": " turn",
+      "material": "turn",
+      "markedCorrect": true,
+      "hint": "TURPB"
+    },
+    {
+      "elapsedTime": 12814,
+      "wordsPerMinute": 76.79100983299516,
+      "typedText": " deserves",
+      "material": "deserves",
+      "markedCorrect": true,
+      "hint": "TKEFRBS"
+    },
+    {
+      "elapsedTime": 14226,
+      "wordsPerMinute": 76.76086039645719,
+      "typedText": " another.",
+      "material": "another.",
+      "markedCorrect": true,
+      "hint": "TPHOER TP-PL"
+    },
+    {
+      "elapsedTime": 14764,
+      "wordsPerMinute": 77.2148469249526,
+      "typedText": " One",
+      "material": "One",
+      "markedCorrect": true,
+      "hint": "WUPB"
+    },
+    {
+      "elapsedTime": 15699,
+      "wordsPerMinute": 77.96674947448882,
+      "typedText": " hour's",
+      "material": "hour's",
+      "markedCorrect": true,
+      "hint": "HOUR/AES"
+    },
+    {
+      "elapsedTime": 16817,
+      "wordsPerMinute": 77.06487482904205,
+      "typedText": " sleep",
+      "material": "sleep",
+      "markedCorrect": true,
+      "hint": "SHRAOEP"
+    },
+    {
+      "elapsedTime": 17259,
+      "wordsPerMinute": 79.95828263514687,
+      "typedText": " before",
+      "material": "before",
+      "markedCorrect": true,
+      "hint": "PW-FR"
+    },
+    {
+      "elapsedTime": 21042,
+      "wordsPerMinute": 70.71571143427431,
+      "typedText": " PhD",
+      "material": "midnight",
+      "markedCorrect": false,
+      "hint": "PHAOEUPBT"
+    },
+    {
+      "elapsedTime": 21042,
+      "wordsPerMinute": 70.71571143427431,
+      "typedText": " midnight",
+      "material": "midnight",
+      "markedCorrect": false,
+      "hint": "PHAOEUPBT"
+    },
+    {
+      "elapsedTime": 21492,
+      "wordsPerMinute": 70.91010608598548,
+      "typedText": " is",
+      "material": "is",
+      "markedCorrect": true,
+      "hint": "S"
+    },
+    {
+      "elapsedTime": 22093,
+      "wordsPerMinute": 72.24007604218531,
+      "typedText": " worth",
+      "material": "worth",
+      "markedCorrect": true,
+      "hint": "WO*RT"
+    },
+    {
+      "elapsedTime": 22538,
+      "wordsPerMinute": 72.94347324518591,
+      "typedText": " two",
+      "material": "two",
+      "markedCorrect": true,
+      "hint": "TWO"
+    },
+    {
+      "elapsedTime": 23055,
+      "wordsPerMinute": 74.43070917371503,
+      "typedText": " hours",
+      "material": "hours",
+      "markedCorrect": true,
+      "hint": "HOURS"
+    },
+    {
+      "elapsedTime": 23877,
+      "wordsPerMinute": 75.38635506973239,
+      "typedText": " after.",
+      "material": "after.",
+      "markedCorrect": true,
+      "hint": "AF TP-PL"
+    },
+    {
+      "elapsedTime": 24474,
+      "wordsPerMinute": 75.50870311350822,
+      "typedText": " One",
+      "material": "One",
+      "markedCorrect": true,
+      "hint": "WUPB"
+    },
+    {
+      "elapsedTime": 25490,
+      "wordsPerMinute": 75.32365633581797,
+      "typedText": " man's",
+      "material": "man's",
+      "markedCorrect": true,
+      "hint": "PHAPB/AES"
+    },
+    {
+      "elapsedTime": 26169,
+      "wordsPerMinute": 75.66204287515764,
+      "typedText": " meat",
+      "material": "meat",
+      "markedCorrect": true,
+      "hint": "PHAET"
+    },
+    {
+      "elapsedTime": 26473,
+      "wordsPerMinute": 76.15306160994221,
+      "typedText": " is",
+      "material": "is",
+      "markedCorrect": true,
+      "hint": "S"
+    },
+    {
+      "elapsedTime": 27077,
+      "wordsPerMinute": 77.99977840972042,
+      "typedText": " another",
+      "material": "another",
+      "markedCorrect": true,
+      "hint": "TPHOER"
+    },
+    {
+      "elapsedTime": 27998,
+      "wordsPerMinute": 78.00557182655903,
+      "typedText": " man's",
+      "material": "man's",
+      "markedCorrect": true,
+      "hint": "PHAPB/AES"
+    },
+    {
+      "elapsedTime": 29461,
+      "wordsPerMinute": 77.39044838939616,
+      "typedText": " poison.",
+      "material": "poison.",
+      "markedCorrect": true,
+      "hint": "POEUGS TP-PL"
+    },
+    {
+      "elapsedTime": 30099,
+      "wordsPerMinute": 77.34476228446127,
+      "typedText": " One",
+      "material": "One",
+      "markedCorrect": true,
+      "hint": "WUPB"
+    },
+    {
+      "elapsedTime": 33246,
+      "wordsPerMinute": 72.91102689045297,
+      "typedText": " SKO*L",
+      "material": "swallow",
+      "markedCorrect": false,
+      "hint": "SWAL"
+    },
+    {
+      "elapsedTime": 33246,
+      "wordsPerMinute": 72.91102689045297,
+      "typedText": " SKAL",
+      "material": "swallow",
+      "markedCorrect": false,
+      "hint": "SWAL"
+    },
+    {
+      "elapsedTime": 33246,
+      "wordsPerMinute": 72.91102689045297,
+      "typedText": " swallow",
+      "material": "swallow",
+      "markedCorrect": false,
+      "hint": "SWAL"
+    },
+    {
+      "elapsedTime": 33973,
+      "wordsPerMinute": 74.17655196773909,
+      "typedText": " doesn't",
+      "material": "doesn't",
+      "markedCorrect": true,
+      "hint": "STKPWHRE"
+    },
+    {
+      "elapsedTime": 34642,
+      "wordsPerMinute": 74.4760695109982,
+      "typedText": " make",
+      "material": "make",
+      "markedCorrect": true,
+      "hint": "PHAEUBG"
+    },
+    {
+      "elapsedTime": 34840,
+      "wordsPerMinute": 74.74167623421353,
+      "typedText": " a",
+      "material": "a",
+      "markedCorrect": true,
+      "hint": "AEU"
+    },
+    {
+      "elapsedTime": 36017,
+      "wordsPerMinute": 74.9646000499764,
+      "typedText": " summer.",
+      "material": "summer.",
+      "markedCorrect": true,
+      "hint": "SAOURPL TP-PL"
+    },
+    {
+      "elapsedTime": 41503,
+      "wordsPerMinute": 67.94689540515144,
+      "typedText": " Ops",
+      "material": "Opposites",
+      "markedCorrect": true,
+      "hint": "OP/SEUTS"
+    },
+    {
+      "elapsedTime": 41503,
+      "wordsPerMinute": 67.94689540515144,
+      "typedText": " Opposites",
+      "material": "Opposites",
+      "markedCorrect": true,
+      "hint": "OP/SEUTS"
+    },
+    {
+      "elapsedTime": 44326,
+      "wordsPerMinute": 66.05603934485403,
+      "typedText": " attraction",
+      "material": "attract.",
+      "markedCorrect": true,
+      "hint": "A/TRABGT TP-PL"
+    },
+    {
+      "elapsedTime": 44326,
+      "wordsPerMinute": 66.05603934485403,
+      "typedText": " attract.",
+      "material": "attract.",
+      "markedCorrect": true,
+      "hint": "A/TRABGT TP-PL"
+    }
+  ]
+}
