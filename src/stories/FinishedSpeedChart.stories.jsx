@@ -18,11 +18,44 @@ ShortLesson.args = {
 };
 ShortLesson.storyName = "Short lesson"
 
-export const LongLesson = Template.bind({});
+
+
+const generateData = (numberOfWords) => {
+  let generatedData = {
+    averageWPM: 120,
+    "marks": []
+  }
+
+  let marks = [];
+
+  for (let i = 1; i < numberOfWords + 1; i++) {
+    let elapsedTime = (i * 1000) + (Math.random() * 1000); // [1200, 2900, 3100]
+    let wordsPerMinute = i / (elapsedTime / 1000 / 60);
+    let typedText = i % 2 === 0 ? "five." : "chars";
+    let material =  i % 2 === 0 ? "five." : "chars";
+    let markedCorrect = true;
+    let hint = "TPAOEUF/TP-PL";
+    marks.push({
+      elapsedTime: elapsedTime,
+      wordsPerMinute: wordsPerMinute,
+      material: material,
+      markedCorrect: markedCorrect,
+      hint: hint,
+    })
+  }
+
+  generatedData.marks = marks;
+
+  return generatedData;
+}
+
+export const LongLesson = (args) => <FinishedSpeedChart data={generateData(args.numberOfWords)} {...args} />
 LongLesson.args = {
-  data: practiceProverb,
+  numberOfWords: 1000,
 };
 LongLesson.storyName = "Long lesson"
+
+
 
 export const WPM5 = Template.bind({});
 WPM5.args = {
