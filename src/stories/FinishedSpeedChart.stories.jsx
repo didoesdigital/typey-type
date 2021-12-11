@@ -49,7 +49,11 @@ const generateData = (numberOfWords) => {
   return generatedData;
 }
 
-export const LongLesson = (args) => <FinishedSpeedChart data={generateData(args.numberOfWords)} {...args} />
+export const LongLesson = (args) => (
+  <div className="mt10 p3">
+    <FinishedSpeedChart data={generateData(args.numberOfWords)} {...args} />
+  </div>
+);
 LongLesson.args = {
   numberOfWords: 1000,
 };
