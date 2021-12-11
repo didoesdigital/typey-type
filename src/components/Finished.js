@@ -298,7 +298,7 @@ class Finished extends Component {
     }
 
     let lessonSummary = (
-      <div className="finished-lesson mx-auto mw-1440 overflow-hidden">
+      <div className="finished-lesson mx-auto mw-1440">
         <div className="finished-summary mb3 text-center">
           <h3
             className="negative-outline-offset dib text-center mt3"
