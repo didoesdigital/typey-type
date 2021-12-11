@@ -20,7 +20,7 @@ export default function FinishedSpeedChart({ data, ...props }) {
   const xAccessor = d => d.elapsedTime;
   const yAccessor = d => d.wordsPerMinute;
   const xScale = data === null ? null : scaleTime()
-    .domain(extent(data.marks, xAccessor))
+    .domain([0, max(data.marks, xAccessor)])
     .range([0, dimensions.boundedWidth])
 
   const yScale = data === null ? null : scaleLinear()
