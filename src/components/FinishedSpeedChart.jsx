@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { curveMonotoneX } from "d3-shape";
-import { extent } from "d3-array";
+import { bisector, extent, max } from "d3-array";
 import { scaleTime, scaleLinear } from "d3-scale";
+import { pointer } from "d3-selection";
 import { useChartDimensions } from "./Chart/utils"
 import Chart from "./Chart/Chart"
 import Line from "./Chart/Line"
+import Popover from "./Chart/Popover"
 
 export default function FinishedSpeedChart({ data, ...props }) {
+  const [popoverState, setPopoverState] = useState(null);
   const [ref, dimensions] = useChartDimensions({
     marginTop: 10,
     marginRight: 30,
@@ -29,9 +32,28 @@ export default function FinishedSpeedChart({ data, ...props }) {
   const yAccessorScaled = d => yScale(yAccessor(d))
   const y0AccessorScaled = data === null ? null : yScale(yScale.domain()[0])
 
+  const bisect = bisector((d) => xAccessor(d))
+
+  const onMove = (event) => {
+    const pointerX = pointer(event)[0] - dimensions.marginLeft
+    const pointerXValue = xScale.invert(pointerX)
+    const nearestXIndex = bisect.center(data.marks, pointerXValue)
+    setPopoverState(nearestXIndex)
+  }
+
   return (
-    <div className="mt3 mb1" style={{ height: '240px' }} ref={ref}>
-      <Chart dimensions={dimensions}>
+    <div className="mt3 mb1 relative" style={{ height: '240px' }} ref={ref}>
+      {popoverState === null ? null :
+      <Popover
+        dataIndex={popoverState}
+        dimensions={dimensions}
+        data={data.marks}
+        xAccessor={xAccessor}
+        yAccessor={yAccessor}
+        xAccessorScaled={xAccessorScaled}
+        yAccessorScaled={yAccessorScaled}
+      />}
+      <Chart dimensions={dimensions} onMouseMove={onMove} onTouchMove={onMove}>
         {data === null ? null :
           <>
             <Line type='line' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
