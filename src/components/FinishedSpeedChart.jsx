@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import { curveMonotoneX } from "d3-shape";
 import { bisector, extent, max } from "d3-array";
-import { scaleTime, scaleLinear } from "d3-scale";
+import { format } from "d3-format";
+import { scaleLinear } from "d3-scale";
 import { pointer } from "d3-selection";
+import { curveMonotoneX } from "d3-shape";
 import { useChartDimensions } from "./Chart/utils"
+import Axis from "./Chart/Axis"
 import Chart from "./Chart/Chart"
 import Line from "./Chart/Line"
 import Popover from "./Chart/Popover"
@@ -19,8 +21,12 @@ export default function FinishedSpeedChart({ data, ...props }) {
 
   const xAccessor = d => d.elapsedTime;
   const yAccessor = d => d.wordsPerMinute;
-  const xScale = data === null ? null : scaleTime()
-    .domain([0, max(data.marks, xAccessor)])
+  const xScale = data === null ? null : scaleLinear()
+    .domain([
+      0,
+      max(data.marks, xAccessor)
+    ]
+    )
     .range([0, dimensions.boundedWidth])
 
   const yScale = data === null ? null : scaleLinear()
@@ -41,6 +47,12 @@ export default function FinishedSpeedChart({ data, ...props }) {
     setPopoverState(nearestXIndex)
   }
 
+  const durationFormatter = (d) =>
+    (d === 0
+      ? () => "0:00"
+      : d => format('d')(d / 1000)
+    )(d);
+
   return (
     <div className="mt3 mb1 relative" style={{ height: '240px' }} ref={ref}>
       {popoverState === null ? null :
@@ -58,6 +70,12 @@ export default function FinishedSpeedChart({ data, ...props }) {
           <>
             <Line type='line' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Line type='area' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
+            <Axis
+              dimensions={dimensions}
+              scale={xScale}
+              numberOfTicks={4}
+              formatTick={durationFormatter}
+            />
           </>
         }
       </Chart>
