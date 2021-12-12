@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { bisector, extent, max } from "d3-array";
 import { format } from "d3-format";
+import { timeParse, timeFormat } from "d3-time-format";
+import { timeSecond } from "d3-time";
 import { scaleLinear } from "d3-scale";
 import { pointer } from "d3-selection";
 import { curveMonotoneX } from "d3-shape";
@@ -76,6 +78,20 @@ export default function FinishedSpeedChart({ data, ...props }) {
               numberOfTicks={4}
               formatTick={durationFormatter}
             />
+            <text
+              textAnchor="start"
+              transform={`translate(0, ${dimensions.boundedHeight})`}
+              dy="1.5em"
+            >
+              {format(',.2f')(timeFormat('%S')(timeParse('%Q')(xScale.domain()[0])))}
+            </text>
+            <text
+              textAnchor="end"
+              transform={`translate(${xAccessorScaled(data.marks[data.marks.length - 1])}, ${dimensions.boundedHeight})`}
+              dy="1.5em"
+            >
+              {timeFormat("%s")(timeSecond((xAccessor(data.marks[data.marks.length - 1]))))} ⏱
+            </text>
           </>
         }
       </Chart>
