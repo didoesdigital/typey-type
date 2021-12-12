@@ -73,6 +73,7 @@ export default function FinishedSpeedChart({ data, ...props }) {
             <Line type='line' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Line type='area' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Axis
+              dimension={"x"}
               dimensions={dimensions}
               scale={xScale}
               numberOfTicks={4}
