@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { format } from "d3-format";
 
-const Axis = ({ dimensions, scale, ...props }) => {
+const AxisHorizontal = ({ dimensions, scale, ...props }) => {
   const numberOfTicks = props.numberOfTicks || dimensions.boundedWidth / 80;
   const formatter = props.formatTick || format(",")
 
@@ -40,5 +40,22 @@ const Axis = ({ dimensions, scale, ...props }) => {
     </g>
   );
 };
+
+const axisComponentsByDimension = {
+  x: AxisHorizontal,
+  // y: AxisVertical,
+}
+
+const Axis = ({ dimension, dimensions, ...props }) => {
+  const AxisByDimension = axisComponentsByDimension[dimension]
+  if (!AxisByDimension) return null
+
+  return (
+    <AxisByDimension
+      dimensions={dimensions}
+      {...props}
+    />
+  )
+}
 
 export default Axis;
