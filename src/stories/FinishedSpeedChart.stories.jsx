@@ -14,7 +14,6 @@ const Template = (args) => <FinishedSpeedChart {...args} />;
 export const ShortLesson = Template.bind({});
 ShortLesson.args = {
   data: practiceProverb,
-  type: 'area'
 };
 ShortLesson.storyName = "Short lesson"
 
