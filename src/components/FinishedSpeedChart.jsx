@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { bisector, max } from "d3-array";
-import { format } from "d3-format";
-import { timeParse, timeFormat } from "d3-time-format";
-import { timeSecond } from "d3-time";
 import { scaleLinear } from "d3-scale";
 import { pointer } from "d3-selection";
 import { curveMonotoneX } from "d3-shape";
@@ -11,6 +8,7 @@ import Axis from "./Chart/Axis"
 import Chart from "./Chart/Chart"
 import Line from "./Chart/Line"
 import Popover from "./Chart/Popover"
+import { durationFormatter } from "./../utils/formatters";
 
 export default function FinishedSpeedChart({ data }) {
   const [popoverState, setPopoverState] = useState(null);
@@ -78,14 +76,14 @@ export default function FinishedSpeedChart({ data }) {
               transform={`translate(0, ${dimensions.boundedHeight})`}
               dy="1.5em"
             >
-              {format(',.2f')(timeFormat('%S')(timeParse('%Q')(xScale.domain()[0])))}
+              {durationFormatter(xScale.domain()[0])}
             </text>
             <text
               textAnchor="end"
               transform={`translate(${xAccessorScaled(data.marks[data.marks.length - 1])}, ${dimensions.boundedHeight})`}
               dy="1.5em"
             >
-              {timeFormat("%s")(timeSecond((xAccessor(data.marks[data.marks.length - 1]))))} ⏱
+              {durationFormatter(xScale.domain()[1])} ⏱
             </text>
           </>
         }
