@@ -70,8 +70,6 @@ export default function FinishedSpeedChart({ data, ...props }) {
       <Chart dimensions={dimensions} onMouseMove={onMove} onTouchMove={onMove}>
         {data === null ? null :
           <>
-            <Line type='line' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
-            <Line type='area' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Axis
               dimension={"x"}
               dimensions={dimensions}
@@ -79,6 +77,8 @@ export default function FinishedSpeedChart({ data, ...props }) {
               numberOfTicks={4}
               formatTick={durationFormatter}
             />
+            <Line type='line' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
+            <Line type='area' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <text
               textAnchor="start"
               transform={`translate(0, ${dimensions.boundedHeight})`}
