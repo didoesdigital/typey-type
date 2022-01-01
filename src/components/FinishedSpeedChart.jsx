@@ -49,12 +49,6 @@ export default function FinishedSpeedChart({ data, ...props }) {
     setPopoverState(nearestXIndex)
   }
 
-  const durationFormatter = (d) =>
-    (d === 0
-      ? () => "0:00"
-      : d => format('d')(d / 1000)
-    )(d);
-
   return (
     <div className="mt3 mb1 relative" style={{ height: '240px' }} ref={ref}>
       {popoverState === null ? null :
@@ -75,7 +69,6 @@ export default function FinishedSpeedChart({ data, ...props }) {
               dimensions={dimensions}
               scale={yScale}
               numberOfTicks={4}
-              formatTick={durationFormatter}
               gridLines={true}
             />
             <Line type='line' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
