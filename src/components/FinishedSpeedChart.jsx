@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { bisector, max } from "d3-array";
+import { bisector, max, min } from "d3-array";
 import { scaleLinear } from "d3-scale";
 import { pointer } from "d3-selection";
 import { curveMonotoneX } from "d3-shape";
@@ -23,7 +23,7 @@ export default function FinishedSpeedChart({ data }) {
   const yAccessor = d => d.wordsPerMinute;
   const xScale = data === null ? null : scaleLinear()
     .domain([
-      0,
+      Math.floor(min(data.marks, xAccessor) / 1000) * 1000,
       Math.ceil(max(data.marks, xAccessor) / 1000) * 1000
     ]
     )
@@ -76,7 +76,7 @@ export default function FinishedSpeedChart({ data }) {
               transform={`translate(0, ${dimensions.boundedHeight})`}
               dy="1.5em"
             >
-              {durationFormatter(xScale.domain()[0])}
+              ⏱ {durationFormatter(xScale.domain()[0])}
             </text>
             <text
               textAnchor="end"
