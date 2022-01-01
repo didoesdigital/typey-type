@@ -1,0 +1,61 @@
+{
+  "averageWPM": 21,
+  "marks": [
+    {
+      "elapsedTime": 89,
+      "wordsPerMinute": 674.1573033707865,
+      "typedText": " Zeal",
+      "material": "Zeal",
+      "markedCorrect": true,
+      "hint": "KPA/SAO*EL"
+    },
+    {
+      "elapsedTime": 4758,
+      "wordsPerMinute": 32.786885245901644,
+      "typedText": " without",
+      "material": "without",
+      "markedCorrect": true,
+      "hint": "WOUT"
+    },
+    {
+      "elapsedTime": 10471,
+      "wordsPerMinute": 26.35851399102282,
+      "typedText": " knowledge",
+      "material": "knowledge",
+      "markedCorrect": true,
+      "hint": "TPHOPBLG"
+    },
+    {
+      "elapsedTime": 12253,
+      "wordsPerMinute": 25.46315188117196,
+      "typedText": " is",
+      "material": "is",
+      "markedCorrect": true,
+      "hint": "S"
+    },
+    {
+      "elapsedTime": 14885,
+      "wordsPerMinute": 24.991602284178704,
+      "typedText": " fire",
+      "material": "fire",
+      "markedCorrect": true,
+      "hint": "TPAOEUR"
+    },
+    {
+      "elapsedTime": 18816,
+      "wordsPerMinute": 24.872448979591837,
+      "typedText": " without",
+      "material": "without",
+      "markedCorrect": true,
+      "hint": "WOUT"
+    },
+    {
+      "elapsedTime": 26161,
+      "wordsPerMinute": 21.100110852031648,
+      "typedText": " light.",
+      "material": "light.",
+      "markedCorrect": true,
+      "hint": "HRAOEUT TP-PL"
+    }
+  ]
+}

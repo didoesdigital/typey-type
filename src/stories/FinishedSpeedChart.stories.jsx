@@ -5,6 +5,7 @@ import discoverInversion from './fixtures/discoverInversion.json';
 import discoverInversionTwice from './fixtures/discoverInversionTwice.json';
 import discoverIntroduction from './fixtures/discoverIntroduction.json';
 import practiceProverb from './fixtures/practiceProverb.json';
+import practiceProverbZ from './fixtures/practiceProverbZ.json';
 
 /* NOTE:
  * To make more fixtures, add a console.log for the transformedData
@@ -96,7 +97,7 @@ WPM5.storyName = "5 WPM lesson"
 
 export const WPM21 = Template.bind({});
 WPM21.args = {
-  data: practiceProverb,
+  data: practiceProverbZ,
 };
 WPM21.storyName = "21 WPM lesson"
 
