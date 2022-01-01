@@ -47,6 +47,10 @@ export default function FinishedSpeedChart({ data }) {
     setPopoverState(nearestXIndex)
   }
 
+  const onOut = () => {
+    setPopoverState(null)
+  }
+
   return (
     <div className="mt3 mb1 relative" style={{ height: '240px' }} ref={ref}>
       {popoverState === null ? null :
@@ -59,7 +63,7 @@ export default function FinishedSpeedChart({ data }) {
         xAccessorScaled={xAccessorScaled}
         yAccessorScaled={yAccessorScaled}
       />}
-      <Chart dimensions={dimensions} onMouseMove={onMove} onTouchMove={onMove}>
+      <Chart dimensions={dimensions} onMouseMove={onMove} onTouchMove={onMove} onMouseOut={onOut} onTouchEnd={onOut}>
         {data === null ? null :
           <>
             <Axis

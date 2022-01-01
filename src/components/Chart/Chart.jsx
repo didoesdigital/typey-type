@@ -8,6 +8,8 @@ const Chart = ({
   dimensions,
   onMouseMove = null,
   onTouchMove = null,
+  onMouseOut = null,
+  onTouchEnd = null,
   children,
 }) => (
   <ChartContext.Provider value={dimensions}>
@@ -25,6 +27,8 @@ const Chart = ({
         fill="transparent"
         onMouseMove={onMouseMove}
         onTouchMove={onTouchMove}
+        onMouseOut={onMouseOut}
+        onTouchEnd={onTouchEnd}
       />
     </svg>
   </ChartContext.Provider>
