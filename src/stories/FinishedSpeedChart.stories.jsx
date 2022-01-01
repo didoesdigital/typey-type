@@ -1,23 +1,18 @@
 import React from 'react';
-
 import FinishedSpeedChart from '../components/FinishedSpeedChart';
 import practiceProverb from './fixtures/practiceProverb.json';
+import discoverIntroduction from './fixtures/discoverIntroduction.json';
+
+/* NOTE:
+ * To make more fixtures, add a console.log for the transformedData
+ * output of transformLessonDataToChartData and type out a lesson.
+ */
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: 'Speed chart',
   component: FinishedSpeedChart,
 };
-
-const Template = (args) => <FinishedSpeedChart {...args} />;
-
-export const ShortLesson = Template.bind({});
-ShortLesson.args = {
-  data: practiceProverb,
-};
-ShortLesson.storyName = "Short lesson"
-
-
 
 const generateData = (numberOfWords) => {
   let generatedData = {
@@ -48,6 +43,18 @@ const generateData = (numberOfWords) => {
   return generatedData;
 }
 
+
+
+const Template = (args) => <div className="mt10 p3"><FinishedSpeedChart {...args} /></div>;
+
+export const ShortLesson = Template.bind({});
+ShortLesson.args = {
+  data: practiceProverb,
+};
+ShortLesson.storyName = "Short lesson"
+
+
+
 export const LongLesson = (args) => (
   <div className="mt10 p3">
     <FinishedSpeedChart data={generateData(args.numberOfWords)} {...args} />
@@ -62,7 +69,7 @@ LongLesson.storyName = "Long lesson"
 
 export const WPM5 = Template.bind({});
 WPM5.args = {
-  data: practiceProverb,
+  data: discoverIntroduction,
 };
 WPM5.storyName = "5 WPM lesson"
 
