@@ -28,6 +28,10 @@ const Popover = ({
     )`,
   };
 
+  /* NOTE: useful debugging logs */
+  // console.log(`${xAccessor(data[dataIndex])} milliseconds`);
+  // console.log(`${format(",d")(xAccessor(data[dataIndex]) / 1000)} seconds`);
+
   const materialStyles = `truncate mw-240 mb0 steno-material dib px05 ${
     data[dataIndex].markedCorrect ? "matched" : "bg-warning"
   }`;
