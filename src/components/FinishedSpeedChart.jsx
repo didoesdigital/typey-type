@@ -71,11 +71,12 @@ export default function FinishedSpeedChart({ data, ...props }) {
         {data === null ? null :
           <>
             <Axis
-              dimension={"x"}
+              dimension={"y"}
               dimensions={dimensions}
-              scale={xScale}
+              scale={yScale}
               numberOfTicks={4}
               formatTick={durationFormatter}
+              gridLines={true}
             />
             <Line type='line' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Line type='area' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
