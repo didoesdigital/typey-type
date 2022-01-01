@@ -7,6 +7,7 @@ import { useChartDimensions } from "./Chart/utils";
 import { durationFormatter } from "./../utils/formatters";
 import Axis from "./Chart/Axis";
 import Chart from "./Chart/Chart";
+import Circles from "./Chart/Circles";
 import Line from "./Chart/Line";
 import Popover from "./Chart/Popover";
 
@@ -21,6 +22,7 @@ export default function FinishedSpeedChart({ data }) {
 
   const xAccessor = d => d.elapsedTime;
   const yAccessor = d => d.wordsPerMinute;
+  const keyAccessor = (d, i) => i;
   const xScale = data === null ? null : scaleLinear()
     .domain([
       Math.floor(min(data.marks, xAccessor) / 1000) * 1000,
@@ -75,6 +77,7 @@ export default function FinishedSpeedChart({ data }) {
             />
             <Line type='line' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Line type='area' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
+            <Circles data={data.marks} keyAccessor={keyAccessor} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} />
             <text
               textAnchor="start"
               transform={`translate(0, ${dimensions.boundedHeight})`}
