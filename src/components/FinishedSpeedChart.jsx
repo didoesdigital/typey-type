@@ -15,10 +15,10 @@ import Popover from "./Chart/Popover"
 export default function FinishedSpeedChart({ data, ...props }) {
   const [popoverState, setPopoverState] = useState(null);
   const [ref, dimensions] = useChartDimensions({
-    marginTop: 10,
-    marginRight: 30,
-    marginBottom: 20,
-    marginLeft: 15,
+    marginTop: 24,
+    marginRight: 96,
+    marginBottom: 36,
+    marginLeft: 4,
   })
 
   const xAccessor = d => d.elapsedTime;
