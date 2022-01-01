@@ -26,6 +26,7 @@ const Popover = ({
     padding: "8px 16px",
     pointerEvents: "none",
     position: "absolute",
+    textAlign: "center",
     transition: "transform 0.1s ease-in-out 0s",
     transform: `translate(
       calc(${leftEdge ? "0%" : rightEdge ? "-100%" : "-50%"} + ${translateX}px),
