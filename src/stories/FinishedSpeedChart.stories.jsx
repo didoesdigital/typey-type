@@ -1,5 +1,6 @@
 import React from 'react';
 import FinishedSpeedChart from '../components/FinishedSpeedChart';
+import customTestPhrases from './fixtures/customTestPhrases.json';
 import shortAndSlow from './fixtures/shortAndSlow.json';
 import discoverInversion from './fixtures/discoverInversion.json';
 import discoverInversionTwice from './fixtures/discoverInversionTwice.json';
@@ -70,6 +71,12 @@ LongLesson.args = {
 LongLesson.storyName = "Long lesson"
 
 
+
+export const TestPhrases = Template.bind({});
+TestPhrases.args = {
+  data: customTestPhrases,
+};
+TestPhrases.storyName = "Test phrases"
 
 export const WPM2 = Template.bind({});
 WPM2.args = {
