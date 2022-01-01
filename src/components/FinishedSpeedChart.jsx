@@ -32,7 +32,7 @@ export default function FinishedSpeedChart({ data, ...props }) {
     .range([0, dimensions.boundedWidth])
 
   const yScale = data === null ? null : scaleLinear()
-    .domain(extent(data.marks, yAccessor))
+    .domain([0, Math.max(10, max(data.marks, yAccessor) * 1.2)])
     .range([dimensions.boundedHeight, 0])
     .nice()
 
