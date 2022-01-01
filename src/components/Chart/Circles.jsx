@@ -1,9 +1,16 @@
 import React from "react";
 
 const Circles = ({ data, keyAccessor, xAccessor, yAccessor, ...props }) => {
-  const styles = {
-    fill: "#9880C2",
-    strokeWidth: 0,
+  const styles = (d) => {
+    return d.markedCorrect
+      ? {
+          fill: "#9880C2",
+          strokeWidth: 0,
+        }
+      : {
+          fill: "#E26F99",
+          strokeWidth: 0,
+        };
   };
 
   return (
@@ -15,7 +22,7 @@ const Circles = ({ data, keyAccessor, xAccessor, yAccessor, ...props }) => {
           cx={xAccessor(d)}
           cy={yAccessor(d)}
           r={4}
-          style={styles}
+          style={styles(d)}
         />
       ))}
     </g>
