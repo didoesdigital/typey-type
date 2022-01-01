@@ -44,7 +44,7 @@ describe("Transforming lesson data to chart data", () => {
       marks: [
         {
           elapsedTime: 329,
-          wordsPerMinute: 548.3333333333334,
+          wordsPerMinute: 109.42249240121579,
           typedText: " on",
           material: "on",
           markedCorrect: true,
@@ -52,7 +52,7 @@ describe("Transforming lesson data to chart data", () => {
         },
         {
           elapsedTime: 1544,
-          wordsPerMinute: 1102.857142857143,
+          wordsPerMinute: 54.4041450777202,
           typedText: " hix",
           material: "him",
           markedCorrect: false,
@@ -60,7 +60,7 @@ describe("Transforming lesson data to chart data", () => {
         },
         {
           elapsedTime: 1544,
-          wordsPerMinute: 1102.857142857143,
+          wordsPerMinute: 54.4041450777202,
           typedText: " him",
           material: "him",
           markedCorrect: false,
