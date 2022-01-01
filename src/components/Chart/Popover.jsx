@@ -12,7 +12,7 @@ const Popover = ({
   ...props
 }) => {
   const translateX = xAccessorScaled(data[dataIndex]) + dimensions.marginLeft;
-  const translateY = Math.max(dimensions.marginTop - 4, 0);
+  const translateY = yAccessorScaled(data[dataIndex]) + dimensions.marginTop - 2; // Math.max(dimensions.marginTop - 4, 0);
 
   const popoverStyles = {
     backgroundColor: "#fff",
