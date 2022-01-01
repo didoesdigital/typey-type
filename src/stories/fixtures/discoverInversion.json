@@ -1,0 +1,189 @@
+{
+  "averageWPM": 3,
+  "marks": [
+    {
+      "elapsedTime": 10006,
+      "wordsPerMinute": 5.996402158704777,
+      "typedText": " rust",
+      "material": "rest",
+      "markedCorrect": false,
+      "hint": "REFT"
+    },
+    {
+      "elapsedTime": 10006,
+      "wordsPerMinute": 5.996402158704777,
+      "typedText": " rest",
+      "material": "rest",
+      "markedCorrect": false,
+      "hint": "REFT"
+    },
+    {
+      "elapsedTime": 41167,
+      "wordsPerMinute": 2.9149561542011804,
+      "typedText": " rats of",
+      "material": "past",
+      "markedCorrect": false,
+      "hint": "PAFT"
+    },
+    {
+      "elapsedTime": 41167,
+      "wordsPerMinute": 2.9149561542011804,
+      "typedText": " raft",
+      "material": "past",
+      "markedCorrect": false,
+      "hint": "PAFT"
+    },
+    {
+      "elapsedTime": 41167,
+      "wordsPerMinute": 2.9149561542011804,
+      "typedText": " past",
+      "material": "past",
+      "markedCorrect": false,
+      "hint": "PAFT"
+    },
+    {
+      "elapsedTime": 49120,
+      "wordsPerMinute": 3.6644951140065145,
+      "typedText": " west",
+      "material": "west",
+      "markedCorrect": true,
+      "hint": "WEFT"
+    },
+    {
+      "elapsedTime": 70313,
+      "wordsPerMinute": 3.4133090609133445,
+      "typedText": "s",
+      "material": "cost",
+      "markedCorrect": false,
+      "hint": "KOFT"
+    },
+    {
+      "elapsedTime": 70313,
+      "wordsPerMinute": 3.4133090609133445,
+      "typedText": " covet",
+      "material": "cost",
+      "markedCorrect": false,
+      "hint": "KOFT"
+    },
+    {
+      "elapsedTime": 70313,
+      "wordsPerMinute": 3.4133090609133445,
+      "typedText": " cost",
+      "material": "cost",
+      "markedCorrect": false,
+      "hint": "KOFT"
+    },
+    {
+      "elapsedTime": 93168,
+      "wordsPerMinute": 3.219989696032972,
+      "typedText": " contest",
+      "material": "cast",
+      "markedCorrect": false,
+      "hint": "KAFT"
+    },
+    {
+      "elapsedTime": 93168,
+      "wordsPerMinute": 3.219989696032972,
+      "typedText": " cast",
+      "material": "cast",
+      "markedCorrect": false,
+      "hint": "KAFT"
+    },
+    {
+      "elapsedTime": 123160,
+      "wordsPerMinute": 3.020461188697629,
+      "typedText": " crest",
+      "material": "trust",
+      "markedCorrect": false,
+      "hint": "TRUFT"
+    },
+    {
+      "elapsedTime": 123160,
+      "wordsPerMinute": 3.020461188697629,
+      "typedText": " TREFT",
+      "material": "trust",
+      "markedCorrect": false,
+      "hint": "TRUFT"
+    },
+    {
+      "elapsedTime": 123160,
+      "wordsPerMinute": 3.020461188697629,
+      "typedText": " trust",
+      "material": "trust",
+      "markedCorrect": false,
+      "hint": "TRUFT"
+    },
+    {
+      "elapsedTime": 140506,
+      "wordsPerMinute": 3.1600074018191395,
+      "typedText": " PRUF",
+      "material": "prove",
+      "markedCorrect": false,
+      "hint": "PROF"
+    },
+    {
+      "elapsedTime": 140506,
+      "wordsPerMinute": 3.1600074018191395,
+      "typedText": " prove",
+      "material": "prove",
+      "markedCorrect": false,
+      "hint": "PROF"
+    },
+    {
+      "elapsedTime": 157376,
+      "wordsPerMinute": 3.278771858479056,
+      "typedText": " costs",
+      "material": "costs",
+      "markedCorrect": true,
+      "hint": "KOFTS"
+    },
+    {
+      "elapsedTime": 170114,
+      "wordsPerMinute": 3.385964706020668,
+      "typedText": " of",
+      "material": "test",
+      "markedCorrect": false,
+      "hint": "TEFT"
+    },
+    {
+      "elapsedTime": 170114,
+      "wordsPerMinute": 3.385964706020668,
+      "typedText": " contest",
+      "material": "test",
+      "markedCorrect": false,
+      "hint": "TEFT"
+    },
+    {
+      "elapsedTime": 170114,
+      "wordsPerMinute": 3.385964706020668,
+      "typedText": " test",
+      "material": "test",
+      "markedCorrect": false,
+      "hint": "TEFT"
+    },
+    {
+      "elapsedTime": 181584,
+      "wordsPerMinute": 3.568596352101507,
+      "typedText": " stove",
+      "material": "stove",
+      "markedCorrect": true,
+      "hint": "STOF"
+    },
+    {
+      "elapsedTime": 214832,
+      "wordsPerMinute": 3.3514560214493185,
+      "typedText": " rest",
+      "material": "rests",
+      "markedCorrect": false,
+      "hint": "REFTS"
+    },
+    {
+      "elapsedTime": 214832,
+      "wordsPerMinute": 3.3514560214493185,
+      "typedText": " rests",
+      "material": "rests",
+      "markedCorrect": false,
+      "hint": "REFTS"
+    }
+  ]
+}

@@ -1,0 +1,237 @@
+{
+  "averageWPM": 4,
+  "marks": [
+    {
+      "elapsedTime": 150,
+      "wordsPerMinute": 560,
+      "typedText": " twelve",
+      "material": "twelve",
+      "markedCorrect": true,
+      "hint": "TWEFL"
+    },
+    {
+      "elapsedTime": 4925,
+      "wordsPerMinute": 31.675126903553302,
+      "typedText": " worst",
+      "material": "worst",
+      "markedCorrect": true,
+      "hint": "WOFRT"
+    },
+    {
+      "elapsedTime": 13441,
+      "wordsPerMinute": 16.070232869578156,
+      "typedText": " wolf",
+      "material": "wolf",
+      "markedCorrect": true,
+      "hint": "WOFL"
+    },
+    {
+      "elapsedTime": 38414,
+      "wordsPerMinute": 7.809652730775238,
+      "typedText": " WOFLTS",
+      "material": "wolves",
+      "markedCorrect": false,
+      "hint": "WOFLS"
+    },
+    {
+      "elapsedTime": 38414,
+      "wordsPerMinute": 7.809652730775238,
+      "typedText": " WOLGTS",
+      "material": "wolves",
+      "markedCorrect": false,
+      "hint": "WOFLS"
+    },
+    {
+      "elapsedTime": 38414,
+      "wordsPerMinute": 7.809652730775238,
+      "typedText": " wolves",
+      "material": "wolves",
+      "markedCorrect": false,
+      "hint": "WOFLS"
+    },
+    {
+      "elapsedTime": 48732,
+      "wordsPerMinute": 7.633587786259542,
+      "typedText": " SO*FL",
+      "material": "solve",
+      "markedCorrect": false,
+      "hint": "SOFL"
+    },
+    {
+      "elapsedTime": 48732,
+      "wordsPerMinute": 7.633587786259542,
+      "typedText": " solve",
+      "material": "solve",
+      "markedCorrect": false,
+      "hint": "SOFL"
+    },
+    {
+      "elapsedTime": 69409,
+      "wordsPerMinute": 6.742641444193115,
+      "typedText": " TKWEFLT",
+      "material": "twelfth",
+      "markedCorrect": false,
+      "hint": "TWEFLT"
+    },
+    {
+      "elapsedTime": 69409,
+      "wordsPerMinute": 6.742641444193115,
+      "typedText": " TWEFPLT",
+      "material": "twelfth",
+      "markedCorrect": false,
+      "hint": "TWEFLT"
+    },
+    {
+      "elapsedTime": 69409,
+      "wordsPerMinute": 6.742641444193115,
+      "typedText": " twelfth",
+      "material": "twelfth",
+      "markedCorrect": false,
+      "hint": "TWEFLT"
+    },
+    {
+      "elapsedTime": 101897,
+      "wordsPerMinute": 5.4172350510809935,
+      "typedText": " twelfths E",
+      "material": "twelve",
+      "markedCorrect": false,
+      "hint": "TWEFL"
+    },
+    {
+      "elapsedTime": 101897,
+      "wordsPerMinute": 5.4172350510809935,
+      "typedText": " TWEFPL",
+      "material": "twelve",
+      "markedCorrect": false,
+      "hint": "TWEFL"
+    },
+    {
+      "elapsedTime": 101897,
+      "wordsPerMinute": 5.4172350510809935,
+      "typedText": " twelve",
+      "material": "twelve",
+      "markedCorrect": false,
+      "hint": "TWEFL"
+    },
+    {
+      "elapsedTime": 122750,
+      "wordsPerMinute": 5.083503054989817,
+      "typedText": " WOFT",
+      "material": "worst",
+      "markedCorrect": false,
+      "hint": "WOFRT"
+    },
+    {
+      "elapsedTime": 122750,
+      "wordsPerMinute": 5.083503054989817,
+      "typedText": " worst",
+      "material": "worst",
+      "markedCorrect": false,
+      "hint": "WOFRT"
+    },
+    {
+      "elapsedTime": 131808,
+      "wordsPerMinute": 5.189366351056082,
+      "typedText": " of",
+      "material": "wolf",
+      "markedCorrect": false,
+      "hint": "WOFL"
+    },
+    {
+      "elapsedTime": 131808,
+      "wordsPerMinute": 5.189366351056082,
+      "typedText": " wolf",
+      "material": "wolf",
+      "markedCorrect": false,
+      "hint": "WOFL"
+    },
+    {
+      "elapsedTime": 165860,
+      "wordsPerMinute": 4.630411190160376,
+      "typedText": " WO*FLSZ",
+      "material": "wolves",
+      "markedCorrect": false,
+      "hint": "WOFLS"
+    },
+    {
+      "elapsedTime": 165860,
+      "wordsPerMinute": 4.630411190160376,
+      "typedText": " Wolfe",
+      "material": "wolves",
+      "markedCorrect": false,
+      "hint": "WOFLS"
+    },
+    {
+      "elapsedTime": 165860,
+      "wordsPerMinute": 4.630411190160376,
+      "typedText": " Wolfes",
+      "material": "wolves",
+      "markedCorrect": false,
+      "hint": "WOFLS"
+    },
+    {
+      "elapsedTime": 165860,
+      "wordsPerMinute": 4.630411190160376,
+      "typedText": " WOFLTS",
+      "material": "wolves",
+      "markedCorrect": false,
+      "hint": "WOFLS"
+    },
+    {
+      "elapsedTime": 165860,
+      "wordsPerMinute": 4.630411190160376,
+      "typedText": " wolves",
+      "material": "wolves",
+      "markedCorrect": false,
+      "hint": "WOFLS"
+    },
+    {
+      "elapsedTime": 180332,
+      "wordsPerMinute": 4.6580751059157555,
+      "typedText": "es",
+      "material": "solve",
+      "markedCorrect": false,
+      "hint": "SOFL"
+    },
+    {
+      "elapsedTime": 180332,
+      "wordsPerMinute": 4.6580751059157555,
+      "typedText": " solve",
+      "material": "solve",
+      "markedCorrect": false,
+      "hint": "SOFL"
+    },
+    {
+      "elapsedTime": 225995,
+      "wordsPerMinute": 4.141684550543153,
+      "typedText": " TWELT",
+      "material": "twelfth",
+      "markedCorrect": false,
+      "hint": "TWEFLT"
+    },
+    {
+      "elapsedTime": 225995,
+      "wordsPerMinute": 4.141684550543153,
+      "typedText": " TW*EFLT",
+      "material": "twelfth",
+      "markedCorrect": false,
+      "hint": "TWEFLT"
+    },
+    {
+      "elapsedTime": 225995,
+      "wordsPerMinute": 4.141684550543153,
+      "typedText": " TWEFPT",
+      "material": "twelfth",
+      "markedCorrect": false,
+      "hint": "TWEFLT"
+    },
+    {
+      "elapsedTime": 225995,
+      "wordsPerMinute": 4.141684550543153,
+      "typedText": " twelfth",
+      "material": "twelfth",
+      "markedCorrect": false,
+      "hint": "TWEFLT"
+    }
+  ]
+}

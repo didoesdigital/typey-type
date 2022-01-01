@@ -1,7 +1,10 @@
 import React from 'react';
 import FinishedSpeedChart from '../components/FinishedSpeedChart';
-import practiceProverb from './fixtures/practiceProverb.json';
+import shortAndSlow from './fixtures/shortAndSlow.json';
+import discoverInversion from './fixtures/discoverInversion.json';
+import discoverInversionTwice from './fixtures/discoverInversionTwice.json';
 import discoverIntroduction from './fixtures/discoverIntroduction.json';
+import practiceProverb from './fixtures/practiceProverb.json';
 
 /* NOTE:
  * To make more fixtures, add a console.log for the transformedData
@@ -66,6 +69,24 @@ LongLesson.args = {
 LongLesson.storyName = "Long lesson"
 
 
+
+export const WPM2 = Template.bind({});
+WPM2.args = {
+  data: shortAndSlow,
+};
+WPM2.storyName = "2 WPM lesson"
+
+export const WPM3 = Template.bind({});
+WPM3.args = {
+  data: discoverInversion,
+};
+WPM3.storyName = "3 WPM lesson"
+
+export const WPM4 = Template.bind({});
+WPM4.args = {
+  data: discoverInversionTwice,
+};
+WPM4.storyName = "4 WPM lesson"
 
 export const WPM5 = Template.bind({});
 WPM5.args = {
