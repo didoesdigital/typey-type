@@ -15,7 +15,7 @@ let particles = [];
 
 const FinishedHeroData = ({speed, accuracy}) => {
   return (
-    <div className="flex flex-wrap justify-between mw-320 mx-auto">
+    <div className="flex flex-wrap justify-between mw-320 mx-auto mb3">
       <DisplayMetric size={"L"} value={speed} label={"Words per minute"} />
       <DisplayMetric size={"L"} value={accuracy} valueSuffix={"%"} label={"Accuracy"} />
     </div>
