@@ -24,7 +24,7 @@ export default function FinishedSpeedChart({ data }) {
   const xScale = data === null ? null : scaleLinear()
     .domain([
       0,
-      max(data.marks, xAccessor)
+      Math.ceil(max(data.marks, xAccessor) / 1000) * 1000
     ]
     )
     .range([0, dimensions.boundedWidth])
@@ -80,7 +80,7 @@ export default function FinishedSpeedChart({ data }) {
             </text>
             <text
               textAnchor="end"
-              transform={`translate(${xAccessorScaled(data.marks[data.marks.length - 1])}, ${dimensions.boundedHeight})`}
+              transform={`translate(${xScale.range()[1]}, ${dimensions.boundedHeight})`}
               dy="1.5em"
             >
               {durationFormatter(xScale.domain()[1])} ⏱
