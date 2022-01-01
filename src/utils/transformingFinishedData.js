@@ -46,6 +46,11 @@ function transformLessonDataToChartData(lessonData) {
 
   transformedData.marks = marks;
 
+  /* NOTE:
+   * To make more fixtures for stories, uncomment this console.log
+   * and type out a lesson.
+   */
+  // console.log(transformedData);
   return transformedData;
 }
 
