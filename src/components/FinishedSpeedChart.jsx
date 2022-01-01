@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { bisector, extent, max } from "d3-array";
+import { bisector, max } from "d3-array";
 import { format } from "d3-format";
 import { timeParse, timeFormat } from "d3-time-format";
 import { timeSecond } from "d3-time";
@@ -12,7 +12,7 @@ import Chart from "./Chart/Chart"
 import Line from "./Chart/Line"
 import Popover from "./Chart/Popover"
 
-export default function FinishedSpeedChart({ data, ...props }) {
+export default function FinishedSpeedChart({ data }) {
   const [popoverState, setPopoverState] = useState(null);
   const [ref, dimensions] = useChartDimensions({
     marginTop: 24,
