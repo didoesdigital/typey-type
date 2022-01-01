@@ -1,11 +1,10 @@
 import React, { useMemo } from "react";
 import { format } from "d3-format";
 
-const AxisHorizontal = ({ dimensions, scale, ...props }) => {
-  const numberOfTicks = props.numberOfTicks || dimensions.boundedWidth / 80;
-  const formatter = props.formatTick || format(",")
+// An ok default value: numberOfTicks = dimensions.boundedWidth / 80
+const AxisHorizontal = ({ dimensions, scale, gridLines, numberOfTicks, ...props }) => {
+  const formatter = format(",")
 
-  // const ticks = scale.ticks(numberOfTicks);
   const ticks = useMemo(() => {
     return scale.ticks(numberOfTicks).map((value) => ({
       value,
@@ -15,13 +14,13 @@ const AxisHorizontal = ({ dimensions, scale, ...props }) => {
 
   return (
     <g transform={`translate(0, ${dimensions.boundedHeight})`} {...props}>
-      {ticks.map(({ value, xOffset }, i) => {
+      {ticks.map(({ value, xOffset }) => {
         return (
           <g key={value} transform={`translate(${xOffset}, 0)`}>
             <line
               y2={4}
               style={{
-                stroke: "#868091",
+                stroke: "#E3E3E3",
               }}
             />
 
@@ -41,9 +40,51 @@ const AxisHorizontal = ({ dimensions, scale, ...props }) => {
   );
 };
 
+// An ok default value: numberOfTicks = dimensions.boundedHeight / 80
+const AxisVertical = ({ dimensions, scale, gridLines, numberOfTicks, ...props }) => {
+  const formatter = format(",")
+  const [x1, x2] = gridLines === true ? [-dimensions.boundedWidth, 4] : [0, 4]
+
+  const ticks = useMemo(() => {
+    return scale.ticks(numberOfTicks).map((value) => ({
+      value,
+      yOffset: scale(value),
+    }));
+  }, [scale, numberOfTicks]);
+
+  return (
+    <g transform={`translate(${dimensions.boundedWidth}, 0)`} {...props}>
+      {ticks.map(({ value, yOffset }, i) => {
+        return (
+          <g key={value} transform={`translate(0, ${yOffset})`}>
+            <line
+              x1={x1}
+              x2={x2}
+              style={{
+                stroke: "#E3E3E3",
+              }}
+            />
+
+            <text
+              key={value}
+              style={{
+                textAnchor: "start",
+                transform: "translateX(8px)",
+              }}
+              dy="0.32em"
+            >
+              {`${formatter(value)}${(i === ticks.length - 1) ? " WPM" : ""}`}
+            </text>
+          </g>
+        );
+      })}
+    </g>
+  );
+};
+
 const axisComponentsByDimension = {
   x: AxisHorizontal,
-  // y: AxisVertical,
+  y: AxisVertical,
 }
 
 const Axis = ({ dimension, dimensions, ...props }) => {
