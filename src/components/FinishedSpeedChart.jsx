@@ -3,12 +3,12 @@ import { bisector, max } from "d3-array";
 import { scaleLinear } from "d3-scale";
 import { pointer } from "d3-selection";
 import { curveMonotoneX } from "d3-shape";
-import { useChartDimensions } from "./Chart/utils"
-import Axis from "./Chart/Axis"
-import Chart from "./Chart/Chart"
-import Line from "./Chart/Line"
-import Popover from "./Chart/Popover"
+import { useChartDimensions } from "./Chart/utils";
 import { durationFormatter } from "./../utils/formatters";
+import Axis from "./Chart/Axis";
+import Chart from "./Chart/Chart";
+import Line from "./Chart/Line";
+import Popover from "./Chart/Popover";
 
 export default function FinishedSpeedChart({ data }) {
   const [popoverState, setPopoverState] = useState(null);
