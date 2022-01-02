@@ -37,6 +37,7 @@ const generateData = (numberOfWords) => {
     marks.push({
       elapsedTime: elapsedTime,
       wordsPerMinute: wordsPerMinute,
+      typedText: typedText,
       material: material,
       markedCorrect: markedCorrect,
       hint: hint,
