@@ -43,7 +43,7 @@ const AxisHorizontal = ({ dimensions, scale, gridLines, numberOfTicks, ...props 
 // An ok default value: numberOfTicks = dimensions.boundedHeight / 80
 const AxisVertical = ({ dimensions, scale, gridLines, numberOfTicks, ...props }) => {
   const formatter = format(",")
-  const [x1, x2] = gridLines === true ? [-dimensions.boundedWidth, 4] : [0, 4]
+  const [x1, x2] = gridLines === true ? [-dimensions.boundedWidth, 0] : [0, 4]
 
   const ticks = useMemo(() => {
     return scale.ticks(numberOfTicks).map((value) => ({
