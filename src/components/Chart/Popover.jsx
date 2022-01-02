@@ -38,13 +38,16 @@ const Popover = ({
   // console.log(`${xAccessor(data[dataIndex])} milliseconds`);
   // console.log(`${format(",d")(xAccessor(data[dataIndex]) / 1000)} seconds`);
 
-  const materialStyles = `truncate mw-240 mb0 steno-material dib px05 ${
+  const materialStyles = `truncate mw-240 mb1 steno-material db px05 ${
     data[dataIndex].markedCorrect ? "matched" : "bg-warning"
   }`;
+
+  const typedTextStyles = `truncate mw-240 mb0 steno-material db px05 bg-info`;
 
   return (
     <div style={popoverStyles}>
       <p className={materialStyles}>{data[dataIndex].material}</p>
+      <p className={typedTextStyles}>{data[dataIndex].typedText}</p>
       <p className="mb0">{format(",d")(yAccessor(data[dataIndex]))} WPM</p>
     </div>
   );
