@@ -13,7 +13,7 @@ import Line from "./Chart/Line";
 import Popover from "./Chart/Popover";
 
 export default function FinishedSpeedChart({ data }) {
-  const [popoverState, setPopoverState] = useState(null);
+  const [highlightedDatum, setHighlightedDatum] = useState(null);
   const [ref, dimensions] = useChartDimensions({
     marginTop: 24,
     marginRight: 96,
@@ -48,18 +48,18 @@ export default function FinishedSpeedChart({ data }) {
     const pointerX = pointer(event)[0] - dimensions.marginLeft
     const pointerXValue = xScale.invert(pointerX)
     const nearestXIndex = bisect.center(data.marks, pointerXValue)
-    setPopoverState(nearestXIndex)
+    setHighlightedDatum(nearestXIndex)
   }
 
   const onOut = () => {
-    setPopoverState(null)
+    setHighlightedDatum(null)
   }
 
   return (
     <div className="mt3 mb1 relative" style={{ height: '240px' }} ref={ref}>
-      {popoverState === null ? null :
+      {highlightedDatum === null ? null :
       <Popover
-        dataIndex={popoverState}
+        dataIndex={highlightedDatum}
         dimensions={dimensions}
         data={data.marks}
         xAccessor={xAccessor}
@@ -80,8 +80,8 @@ export default function FinishedSpeedChart({ data }) {
             <Line type='line' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Line type='area' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Circles data={data.marks} keyAccessor={keyAccessor} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
-            {popoverState === null ? null :
-            <HighlightCircle data={data.marks} dataIndex={popoverState} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
+            {highlightedDatum === null ? null :
+            <HighlightCircle data={data.marks} dataIndex={highlightedDatum} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
             }
             <text
               textAnchor="start"
