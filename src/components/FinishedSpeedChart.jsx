@@ -18,7 +18,7 @@ export default function FinishedSpeedChart({ data }) {
     marginTop: 24,
     marginRight: 96,
     marginBottom: 36,
-    marginLeft: 4,
+    marginLeft: 8,
   })
 
   const xAccessor = d => d.elapsedTime;
