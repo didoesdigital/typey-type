@@ -5,11 +5,9 @@ const Circles = ({ data, keyAccessor, xAccessor, yAccessor, ...props }) => {
     return d.markedCorrect
       ? {
           fill: "#9880C2",
-          strokeWidth: 0,
         }
       : {
           fill: "#E26F99",
-          strokeWidth: 0,
         };
   };
 
