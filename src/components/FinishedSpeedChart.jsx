@@ -8,6 +8,7 @@ import { durationFormatter } from "./../utils/formatters";
 import Axis from "./Chart/Axis";
 import Chart from "./Chart/Chart";
 import Circles from "./Chart/Circles";
+import HighlightCircle from "./Chart/HighlightCircle";
 import Line from "./Chart/Line";
 import Popover from "./Chart/Popover";
 
@@ -79,6 +80,9 @@ export default function FinishedSpeedChart({ data }) {
             <Line type='line' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Line type='area' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Circles data={data.marks} keyAccessor={keyAccessor} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
+            {popoverState === null ? null :
+            <HighlightCircle data={data.marks} dataIndex={popoverState} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
+            }
             <text
               textAnchor="start"
               transform={`translate(0, ${dimensions.boundedHeight})`}
