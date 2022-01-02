@@ -1,8 +1,8 @@
 import React from "react";
 
-const Circles = ({ data, keyAccessor, xAccessor, yAccessor, ...props }) => {
+const Circles = ({ data, keyAccessor, xAccessor, yAccessor, colorAccessor, ...props }) => {
   const styles = (d) => {
-    return d.markedCorrect
+    return colorAccessor(d)
       ? {
           fill: "#9880C2",
         }
