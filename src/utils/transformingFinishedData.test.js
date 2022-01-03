@@ -43,14 +43,16 @@ describe("Transforming lesson data to chart data", () => {
       averageWPM: 28,
       marks: [
         {
+          attemptPeak: false,
           elapsedTime: 329,
-          wordsPerMinute: 109.42249240121579,
+          wordsPerMinute: 0,
           typedText: " on",
           material: "on",
           markedCorrect: true,
           hint: "OPB",
         },
         {
+          attemptPeak: true,
           elapsedTime: 872,
           wordsPerMinute: 54.4041450777202,
           typedText: " hix",
@@ -59,6 +61,7 @@ describe("Transforming lesson data to chart data", () => {
           hint: "HEUPL",
         },
         {
+          attemptPeak: false,
           elapsedTime: 1544,
           wordsPerMinute: 54.4041450777202,
           typedText: " him",

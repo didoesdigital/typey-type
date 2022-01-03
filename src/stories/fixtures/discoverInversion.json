@@ -2,6 +2,7 @@
   "averageWPM": 3,
   "marks": [
     {
+      "attemptPeak": true,
       "elapsedTime": 10006,
       "wordsPerMinute": 5.996402158704777,
       "typedText": " rust",
@@ -10,6 +11,7 @@
       "hint": "REFT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 10006,
       "wordsPerMinute": 5.996402158704777,
       "typedText": " rest",
@@ -18,6 +20,7 @@
       "hint": "REFT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 41167,
       "wordsPerMinute": 2.9149561542011804,
       "typedText": " rats of",
@@ -26,6 +29,7 @@
       "hint": "PAFT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 41167,
       "wordsPerMinute": 2.9149561542011804,
       "typedText": " raft",
@@ -34,6 +38,7 @@
       "hint": "PAFT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 41167,
       "wordsPerMinute": 2.9149561542011804,
       "typedText": " past",
@@ -42,6 +47,7 @@
       "hint": "PAFT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 49120,
       "wordsPerMinute": 3.6644951140065145,
       "typedText": " west",
@@ -50,6 +56,7 @@
       "hint": "WEFT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 70313,
       "wordsPerMinute": 3.4133090609133445,
       "typedText": "s",
@@ -58,6 +65,7 @@
       "hint": "KOFT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 70313,
       "wordsPerMinute": 3.4133090609133445,
       "typedText": " covet",
@@ -66,6 +74,7 @@
       "hint": "KOFT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 70313,
       "wordsPerMinute": 3.4133090609133445,
       "typedText": " cost",
@@ -74,6 +83,7 @@
       "hint": "KOFT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 93168,
       "wordsPerMinute": 3.219989696032972,
       "typedText": " contest",
@@ -82,6 +92,7 @@
       "hint": "KAFT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 93168,
       "wordsPerMinute": 3.219989696032972,
       "typedText": " cast",
@@ -90,6 +101,7 @@
       "hint": "KAFT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 123160,
       "wordsPerMinute": 3.020461188697629,
       "typedText": " crest",
@@ -98,6 +110,7 @@
       "hint": "TRUFT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 123160,
       "wordsPerMinute": 3.020461188697629,
       "typedText": " TREFT",
@@ -106,6 +119,7 @@
       "hint": "TRUFT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 123160,
       "wordsPerMinute": 3.020461188697629,
       "typedText": " trust",
@@ -114,6 +128,7 @@
       "hint": "TRUFT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 140506,
       "wordsPerMinute": 3.1600074018191395,
       "typedText": " PRUF",
@@ -122,6 +137,7 @@
       "hint": "PROF"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 140506,
       "wordsPerMinute": 3.1600074018191395,
       "typedText": " prove",
@@ -130,6 +146,7 @@
       "hint": "PROF"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 157376,
       "wordsPerMinute": 3.278771858479056,
       "typedText": " costs",
@@ -138,6 +155,7 @@
       "hint": "KOFTS"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 170114,
       "wordsPerMinute": 3.385964706020668,
       "typedText": " of",
@@ -146,6 +164,7 @@
       "hint": "TEFT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 170114,
       "wordsPerMinute": 3.385964706020668,
       "typedText": " contest",
@@ -154,6 +173,7 @@
       "hint": "TEFT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 170114,
       "wordsPerMinute": 3.385964706020668,
       "typedText": " test",
@@ -162,6 +182,7 @@
       "hint": "TEFT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 181584,
       "wordsPerMinute": 3.568596352101507,
       "typedText": " stove",
@@ -170,6 +191,7 @@
       "hint": "STOF"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 214832,
       "wordsPerMinute": 3.3514560214493185,
       "typedText": " rest",
@@ -178,6 +200,7 @@
       "hint": "REFTS"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 214832,
       "wordsPerMinute": 3.3514560214493185,
       "typedText": " rests",

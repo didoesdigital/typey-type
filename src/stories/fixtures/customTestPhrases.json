@@ -2,6 +2,7 @@
   "averageWPM": 42,
   "marks": [
     {
+      "attemptPeak": false,
       "elapsedTime": 7857,
       "wordsPerMinute": 42.76441389843451,
       "typedText": "teenage mute",
@@ -10,6 +11,7 @@
       "hint": "TAOEPB/AEUPBLG/PHAOUT/APBT/TPHEUPB/SKWRA/TURT/*L"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 7857,
       "wordsPerMinute": 42.76441389843451,
       "typedText": "teenage mutant anyone",
@@ -18,6 +20,7 @@
       "hint": "TAOEPB/AEUPBLG/PHAOUT/APBT/TPHEUPB/SKWRA/TURT/*L"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 7857,
       "wordsPerMinute": 42.76441389843451,
       "typedText": "teenage mutant ninja turret",
@@ -26,6 +29,7 @@
       "hint": "TAOEPB/AEUPBLG/PHAOUT/APBT/TPHEUPB/SKWRA/TURT/*L"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 7857,
       "wordsPerMinute": 42.76441389843451,
       "typedText": " Teenage Mutant Ninja Turtle",
@@ -34,6 +38,7 @@
       "hint": "TAOEPB/AEUPBLG/PHAOUT/APBT/TPHEUPB/SKWRA/TURT/*L"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 13032,
       "wordsPerMinute": 58.011049723756905,
       "typedText": " supercalifragilisticexpialidocious",
@@ -42,6 +47,7 @@
       "hint": "STPRA*PBLG"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 24277,
       "wordsPerMinute": 57.33822136178275,
       "typedText": " national center for women and information",
@@ -50,6 +56,7 @@
       "hint": "TPHAT/STR/TPOR/WEUPL/SKP/TPH-FGS/TOPBLG"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 24277,
       "wordsPerMinute": 57.33822136178275,
       "typedText": " National Center For Women And Information Technology",
@@ -58,6 +65,7 @@
       "hint": "TPHAT/STR/TPOR/WEUPL/SKP/TPH-FGS/TOPBLG"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 27497,
       "wordsPerMinute": 56.73346183219988,
       "typedText": " quad RUP",
@@ -66,6 +74,7 @@
       "hint": "KWAD/RUP/KAT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 27497,
       "wordsPerMinute": 56.73346183219988,
       "typedText": " quadruplicate",
@@ -74,6 +83,7 @@
       "hint": "KWAD/RUP/KAT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 49647,
       "wordsPerMinute": 38.67303160311801,
       "typedText": " lose",
@@ -82,6 +92,7 @@
       "hint": "HRAOUS/KWREU/TPH/-T/SKAOEU/W/TKAOEU/PHOPBD/-S"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 49647,
       "wordsPerMinute": 38.67303160311801,
       "typedText": " Lucy in the sky with die",
@@ -90,6 +101,7 @@
       "hint": "HRAOUS/KWREU/TPH/-T/SKAOEU/W/TKAOEU/PHOPBD/-S"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 49647,
       "wordsPerMinute": 38.67303160311801,
       "typedText": " Lucy in the sky with diamonds",
@@ -98,6 +110,7 @@
       "hint": "HRAOUS/KWREU/TPH/-T/SKAOEU/W/TKAOEU/PHOPBD/-S"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 49647,
       "wordsPerMinute": 38.67303160311801,
       "typedText": " Lucy In the Sky with Diamonds",
@@ -106,6 +119,7 @@
       "hint": "HRAOUS/KWREU/TPH/-T/SKAOEU/W/TKAOEU/PHOPBD/-S"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 62543,
       "wordsPerMinute": 32.42569112450634,
       "typedText": " capybara",
@@ -114,6 +128,7 @@
       "hint": "KR-FPLT/A-FPLT/P-FPLT/KWR-FPLT/PW-FPLT/A-FPLT/R-FPLT/A-FPLT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 66448,
       "wordsPerMinute": 32.68721406212377,
       "typedText": " acidophilic",
@@ -122,6 +137,7 @@
       "hint": "SA*EUD/TP*EULG"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 75458,
       "wordsPerMinute": 34.98635002252909,
       "typedText": " the man who mistook his wife for a",
@@ -130,6 +146,7 @@
       "hint": "-T/PHAPB/WHO/PHEUZ/TAOBG/HEUS/WAOEUF/TPOR/AEU/HAT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 75458,
       "wordsPerMinute": 34.98635002252909,
       "typedText": " The Man Who Mistook His Wife For A Hat",
@@ -138,6 +155,7 @@
       "hint": "-T/PHAPB/WHO/PHEUZ/TAOBG/HEUS/WAOEUF/TPOR/AEU/HAT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 79613,
       "wordsPerMinute": 42.053433484481175,
       "typedText": " LAN",
@@ -146,6 +164,7 @@
       "hint": "HRA*PB/TPA*EUR"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 79613,
       "wordsPerMinute": 42.053433484481175,
       "typedText": " Llanfairpwllgwyngyllgogerychwyrndrobwllllantysiliogogogoch",

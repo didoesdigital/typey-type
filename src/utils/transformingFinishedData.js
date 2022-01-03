@@ -16,31 +16,35 @@ function transformLessonDataToChartData(lessonData) {
 
   let marks = [];
 
-  lessonData.lessonStrokes.forEach(typedMaterial => {
-    let elapsedTime = typedMaterial.time - lessonData.startTime;
-    let numberOfWords = typedMaterial.numberOfMatchedWordsSoFar
+  lessonData.lessonStrokes.forEach((typedMaterial, materialIndex) => {
+    const elapsedTime = typedMaterial.time - lessonData.startTime;
+    const numberOfWords = typedMaterial.numberOfMatchedWordsSoFar;
+    const firstPhrase = materialIndex === 0;
+    const nonZeroAttempts = typedMaterial.attempts?.length > 0;
 
-    if (typedMaterial.attempts?.length > 0) {
-      typedMaterial.attempts.forEach((attempt, i) => {
+    if (nonZeroAttempts) {
+      typedMaterial.attempts.forEach((attempt, attemptIndex) => {
+        const firstAttempt = firstPhrase && attemptIndex === 0;
         marks.push({
-          elapsedTime: elapsedTime,
-          wordsPerMinute: attempt.numberOfMatchedWordsSoFar / (elapsedTime / 1000 / 60),
+          elapsedTime: attempt.time - lessonData.startTime,
+          wordsPerMinute: firstAttempt ? 0 : attempt.numberOfMatchedWordsSoFar / (elapsedTime / 1000 / 60),
           typedText: attempt.text,
           material: typedMaterial.word,
           markedCorrect: typedMaterial.accuracy,
-          hint: typedMaterial.stroke
+          hint: typedMaterial.stroke,
+          attemptPeak: true,
         })
       })
     }
 
-    // debugger;
     marks.push({
+      attemptPeak: false,
       elapsedTime: elapsedTime,
-      wordsPerMinute: numberOfWords / (elapsedTime / 1000 / 60),
+      wordsPerMinute: firstPhrase ? 0 : numberOfWords / (elapsedTime / 1000 / 60),
       typedText: typedMaterial.typedText,
       material: typedMaterial.word,
       markedCorrect: typedMaterial.accuracy,
-      hint: typedMaterial.stroke
+      hint: typedMaterial.stroke,
     })
   })
 

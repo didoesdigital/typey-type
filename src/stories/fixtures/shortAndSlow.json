@@ -2,6 +2,7 @@
   "averageWPM": 2,
   "marks": [
     {
+      "attemptPeak": true,
       "elapsedTime": 37895,
       "wordsPerMinute": 2.2166512732550463,
       "typedText": " TPHEFRBLZ",
@@ -10,6 +11,7 @@
       "hint": "TPHEFRBZ"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 37895,
       "wordsPerMinute": 2.2166512732550463,
       "typedText": " nervous",
@@ -18,6 +20,7 @@
       "hint": "TPHEFRBZ"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 37895,
       "wordsPerMinute": 2.2166512732550463,
       "typedText": " nervous",
@@ -26,6 +29,7 @@
       "hint": "TPHEFRBZ"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 37895,
       "wordsPerMinute": 2.2166512732550463,
       "typedText": " nerves",
@@ -34,6 +38,7 @@
       "hint": "TPHEFRBZ"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 101737,
       "wordsPerMinute": 1.5333654422678082,
       "typedText": " tush",
@@ -42,6 +47,7 @@
       "hint": "TOFRPB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 101737,
       "wordsPerMinute": 1.5333654422678082,
       "typedText": " TORB",
@@ -50,6 +56,7 @@
       "hint": "TOFRPB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 101737,
       "wordsPerMinute": 1.5333654422678082,
       "typedText": " TOFP",
@@ -58,6 +65,7 @@
       "hint": "TOFRPB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 101737,
       "wordsPerMinute": 1.5333654422678082,
       "typedText": " TO*FRPB",
@@ -66,6 +74,7 @@
       "hint": "TOFRPB"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 101737,
       "wordsPerMinute": 1.5333654422678082,
       "typedText": " torch",
@@ -74,6 +83,7 @@
       "hint": "TOFRPB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 139249,
       "wordsPerMinute": 1.6373546668198695,
       "typedText": " purchase",
@@ -82,6 +92,7 @@
       "hint": "PUFRPB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 139249,
       "wordsPerMinute": 1.6373546668198695,
       "typedText": " punk",
@@ -90,6 +101,7 @@
       "hint": "PUFRPB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 139249,
       "wordsPerMinute": 1.6373546668198695,
       "typedText": " pinch",
@@ -98,6 +110,7 @@
       "hint": "PUFRPB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 139249,
       "wordsPerMinute": 1.6373546668198695,
       "typedText": " bunch",
@@ -106,6 +119,7 @@
       "hint": "PUFRPB"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 139249,
       "wordsPerMinute": 1.6373546668198695,
       "typedText": " punch",
@@ -114,6 +128,7 @@
       "hint": "PUFRPB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 186652,
       "wordsPerMinute": 1.6072691425754881,
       "typedText": " sever",
@@ -122,6 +137,7 @@
       "hint": "SEFRB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 186652,
       "wordsPerMinute": 1.6072691425754881,
       "typedText": " search",
@@ -130,6 +146,7 @@
       "hint": "SEFRB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 186652,
       "wordsPerMinute": 1.6072691425754881,
       "typedText": " certain",
@@ -138,6 +155,7 @@
       "hint": "SEFRB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 186652,
       "wordsPerMinute": 1.6072691425754881,
       "typedText": " serf",
@@ -146,6 +164,7 @@
       "hint": "SEFRB"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 186652,
       "wordsPerMinute": 1.6072691425754881,
       "typedText": " serve",
@@ -154,6 +173,7 @@
       "hint": "SEFRB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 217451,
       "wordsPerMinute": 1.8762847722015534,
       "typedText": " PWHRAFRB",
@@ -162,6 +182,7 @@
       "hint": "PWRAFRPBS"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 217451,
       "wordsPerMinute": 1.8762847722015534,
       "typedText": " PWRAFRB",
@@ -170,6 +191,7 @@
       "hint": "PWRAFRPBS"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 217451,
       "wordsPerMinute": 1.8762847722015534,
       "typedText": " PWRA*FRPBGSZ",
@@ -178,6 +200,7 @@
       "hint": "PWRAFRPBS"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 217451,
       "wordsPerMinute": 1.8762847722015534,
       "typedText": " branches",
@@ -186,6 +209,7 @@
       "hint": "PWRAFRPBS"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 240639,
       "wordsPerMinute": 2.0445563686684203,
       "typedText": "ing",
@@ -194,6 +218,7 @@
       "hint": "SKWR*UPLD"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 240639,
       "wordsPerMinute": 2.0445563686684203,
       "typedText": " judgment",
@@ -202,6 +227,7 @@
       "hint": "SKWR*UPLD"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 240639,
       "wordsPerMinute": 2.0445563686684203,
       "typedText": " SKWRUPLTDZ",
@@ -210,6 +236,7 @@
       "hint": "SKWR*UPLD"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 240639,
       "wordsPerMinute": 2.0445563686684203,
       "typedText": " jumped",
@@ -218,6 +245,7 @@
       "hint": "SKWR*UPLD"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 261601,
       "wordsPerMinute": 2.1559550613338634,
       "typedText": "s",
@@ -226,6 +254,7 @@
       "hint": "HRA*PLS"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 261601,
       "wordsPerMinute": 2.1559550613338634,
       "typedText": " L.A.s",
@@ -234,6 +263,7 @@
       "hint": "HRA*PLS"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 261601,
       "wordsPerMinute": 2.1559550613338634,
       "typedText": " lamps",
@@ -242,6 +272,7 @@
       "hint": "HRA*PLS"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 290465,
       "wordsPerMinute": 2.1482794828981118,
       "typedText": "es",
@@ -250,6 +281,7 @@
       "hint": "AFRPB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 290465,
       "wordsPerMinute": 2.1482794828981118,
       "typedText": " AFRB ever",
@@ -258,6 +290,7 @@
       "hint": "AFRPB"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 290465,
       "wordsPerMinute": 2.1482794828981118,
       "typedText": " African",
@@ -266,6 +299,7 @@
       "hint": "AFRPB"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 290465,
       "wordsPerMinute": 2.1482794828981118,
       "typedText": " arch",

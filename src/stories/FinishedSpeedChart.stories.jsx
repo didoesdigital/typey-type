@@ -35,6 +35,7 @@ const generateData = (numberOfWords) => {
     let markedCorrect = true;
     let hint = "TPAOEUF/TP-PL";
     marks.push({
+      attemptPeak: false,
       elapsedTime: elapsedTime,
       wordsPerMinute: wordsPerMinute,
       typedText: typedText,

@@ -2,6 +2,7 @@
   "averageWPM": 4,
   "marks": [
     {
+      "attemptPeak": false,
       "elapsedTime": 150,
       "wordsPerMinute": 560,
       "typedText": " twelve",
@@ -10,6 +11,7 @@
       "hint": "TWEFL"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 4925,
       "wordsPerMinute": 31.675126903553302,
       "typedText": " worst",
@@ -18,6 +20,7 @@
       "hint": "WOFRT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 13441,
       "wordsPerMinute": 16.070232869578156,
       "typedText": " wolf",
@@ -26,6 +29,7 @@
       "hint": "WOFL"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 38414,
       "wordsPerMinute": 7.809652730775238,
       "typedText": " WOFLTS",
@@ -34,6 +38,7 @@
       "hint": "WOFLS"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 38414,
       "wordsPerMinute": 7.809652730775238,
       "typedText": " WOLGTS",
@@ -42,6 +47,7 @@
       "hint": "WOFLS"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 38414,
       "wordsPerMinute": 7.809652730775238,
       "typedText": " wolves",
@@ -50,6 +56,7 @@
       "hint": "WOFLS"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 48732,
       "wordsPerMinute": 7.633587786259542,
       "typedText": " SO*FL",
@@ -58,6 +65,7 @@
       "hint": "SOFL"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 48732,
       "wordsPerMinute": 7.633587786259542,
       "typedText": " solve",
@@ -66,6 +74,7 @@
       "hint": "SOFL"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 69409,
       "wordsPerMinute": 6.742641444193115,
       "typedText": " TKWEFLT",
@@ -74,6 +83,7 @@
       "hint": "TWEFLT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 69409,
       "wordsPerMinute": 6.742641444193115,
       "typedText": " TWEFPLT",
@@ -82,6 +92,7 @@
       "hint": "TWEFLT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 69409,
       "wordsPerMinute": 6.742641444193115,
       "typedText": " twelfth",
@@ -90,6 +101,7 @@
       "hint": "TWEFLT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 101897,
       "wordsPerMinute": 5.4172350510809935,
       "typedText": " twelfths E",
@@ -98,6 +110,7 @@
       "hint": "TWEFL"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 101897,
       "wordsPerMinute": 5.4172350510809935,
       "typedText": " TWEFPL",
@@ -106,6 +119,7 @@
       "hint": "TWEFL"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 101897,
       "wordsPerMinute": 5.4172350510809935,
       "typedText": " twelve",
@@ -114,6 +128,7 @@
       "hint": "TWEFL"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 122750,
       "wordsPerMinute": 5.083503054989817,
       "typedText": " WOFT",
@@ -122,6 +137,7 @@
       "hint": "WOFRT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 122750,
       "wordsPerMinute": 5.083503054989817,
       "typedText": " worst",
@@ -130,6 +146,7 @@
       "hint": "WOFRT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 131808,
       "wordsPerMinute": 5.189366351056082,
       "typedText": " of",
@@ -138,6 +155,7 @@
       "hint": "WOFL"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 131808,
       "wordsPerMinute": 5.189366351056082,
       "typedText": " wolf",
@@ -146,6 +164,7 @@
       "hint": "WOFL"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 165860,
       "wordsPerMinute": 4.630411190160376,
       "typedText": " WO*FLSZ",
@@ -154,6 +173,7 @@
       "hint": "WOFLS"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 165860,
       "wordsPerMinute": 4.630411190160376,
       "typedText": " Wolfe",
@@ -162,6 +182,7 @@
       "hint": "WOFLS"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 165860,
       "wordsPerMinute": 4.630411190160376,
       "typedText": " Wolfes",
@@ -170,6 +191,7 @@
       "hint": "WOFLS"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 165860,
       "wordsPerMinute": 4.630411190160376,
       "typedText": " WOFLTS",
@@ -178,6 +200,7 @@
       "hint": "WOFLS"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 165860,
       "wordsPerMinute": 4.630411190160376,
       "typedText": " wolves",
@@ -186,6 +209,7 @@
       "hint": "WOFLS"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 180332,
       "wordsPerMinute": 4.6580751059157555,
       "typedText": "es",
@@ -194,6 +218,7 @@
       "hint": "SOFL"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 180332,
       "wordsPerMinute": 4.6580751059157555,
       "typedText": " solve",
@@ -202,6 +227,7 @@
       "hint": "SOFL"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 225995,
       "wordsPerMinute": 4.141684550543153,
       "typedText": " TWELT",
@@ -210,6 +236,7 @@
       "hint": "TWEFLT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 225995,
       "wordsPerMinute": 4.141684550543153,
       "typedText": " TW*EFLT",
@@ -218,6 +245,7 @@
       "hint": "TWEFLT"
     },
     {
+      "attemptPeak": true,
       "elapsedTime": 225995,
       "wordsPerMinute": 4.141684550543153,
       "typedText": " TWEFPT",
@@ -226,6 +254,7 @@
       "hint": "TWEFLT"
     },
     {
+      "attemptPeak": false,
       "elapsedTime": 225995,
       "wordsPerMinute": 4.141684550543153,
       "typedText": " twelfth",
