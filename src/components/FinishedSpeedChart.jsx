@@ -43,14 +43,14 @@ export default function FinishedSpeedChart({ data }) {
 
   const xScale = data === null ? null : scaleLinear()
     .domain([
-      Math.floor(min(data.marks, xAccessor) / 1000) * 1000,
-      Math.ceil(max(data.marks, xAccessor) / 1000) * 1000
+      Math.floor(min(data.dataPoints, xAccessor) / 1000) * 1000,
+      Math.ceil(max(data.dataPoints, xAccessor) / 1000) * 1000
     ]
     )
     .range([0, dimensions.boundedWidth])
 
   const yScale = data === null ? null : scaleLinear()
-    .domain([0, Math.max(10, max(data.marks, yAccessor) * 1.2)])
+    .domain([0, Math.max(10, max(data.dataPoints, yAccessor) * 1.2)])
     .range([dimensions.boundedHeight, 0])
     .nice()
 
@@ -63,7 +63,7 @@ export default function FinishedSpeedChart({ data }) {
   const onMove = (event) => {
     const pointerX = pointer(event)[0] - dimensions.marginLeft
     const pointerXValue = xScale.invert(pointerX)
-    const nearestXIndex = bisect.center(data.marks, pointerXValue)
+    const nearestXIndex = bisect.center(data.dataPoints, pointerXValue)
     setHighlightedDatum(nearestXIndex)
   }
 
@@ -77,7 +77,7 @@ export default function FinishedSpeedChart({ data }) {
       <Popover
         dataIndex={highlightedDatum}
         dimensions={dimensions}
-        data={data.marks}
+        data={data.dataPoints}
         xAccessor={xAccessor}
         yAccessor={yAccessor}
         xAccessorScaled={xAccessorScaled}
@@ -95,11 +95,11 @@ export default function FinishedSpeedChart({ data }) {
               numberOfTicks={4}
               gridLines={true}
             />
-            <Line type='line' data={data.marks.filter(d => !d.attemptPeak)} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
-            <Line type='area' data={data.marks.filter(d => !d.attemptPeak)} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
-            <Circles data={data.marks} keyAccessor={keyAccessor} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
+            <Line type='line' data={data.dataPoints.filter(d => !d.attemptPeak)} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
+            <Line type='area' data={data.dataPoints.filter(d => !d.attemptPeak)} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
+            <Circles data={data.dataPoints} keyAccessor={keyAccessor} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
             {highlightedDatum === null ? null :
-            <HighlightCircle data={data.marks} dataIndex={highlightedDatum} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
+            <HighlightCircle data={data.dataPoints} dataIndex={highlightedDatum} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
             }
             <text
               textAnchor="start"

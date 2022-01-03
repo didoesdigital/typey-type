@@ -312,7 +312,7 @@ class Finished extends Component {
           </h3>
           <p>{wpmCommentary}</p>
           <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
-          {this.state.chartData?.marks?.length > 1 && <FinishedSpeedChart data={this.state.chartData} />}
+          {this.state.chartData?.dataPoints?.length > 1 && <FinishedSpeedChart data={this.state.chartData} />}
           <ul className="inline-flex flex-wrap middot-separator unstyled-list">
             <li className="ml0 bg-warning pl1 pr1">
               {wpm}&nbsp;

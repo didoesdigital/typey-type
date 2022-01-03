@@ -41,7 +41,7 @@ describe("Transforming lesson data to chart data", () => {
   it("returns flat chart data", () => {
     const expectedChartData = {
       averageWPM: 28,
-      marks: [
+      dataPoints: [
         {
           attemptPeak: false,
           elapsedTime: 329,

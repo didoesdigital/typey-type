@@ -22,10 +22,10 @@ export default {
 const generateData = (numberOfWords) => {
   let generatedData = {
     averageWPM: 120,
-    "marks": []
+    "dataPoints": []
   }
 
-  let marks = [];
+  let dataPoints = [];
 
   for (let i = 1; i < numberOfWords + 1; i++) {
     let elapsedTime = (i * 1000) + (Math.random() * 1000); // [1200, 2900, 3100]
@@ -34,7 +34,7 @@ const generateData = (numberOfWords) => {
     let material =  i % 2 === 0 ? "five." : "chars";
     let markedCorrect = true;
     let hint = "TPAOEUF/TP-PL";
-    marks.push({
+    dataPoints.push({
       attemptPeak: false,
       elapsedTime: elapsedTime,
       wordsPerMinute: wordsPerMinute,
@@ -45,7 +45,7 @@ const generateData = (numberOfWords) => {
     })
   }
 
-  generatedData.marks = marks;
+  generatedData.dataPoints = dataPoints;
 
   return generatedData;
 }
