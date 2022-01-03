@@ -1914,7 +1914,7 @@ class App extends Component {
 
     let [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
-    let currentPhraseAttempts = this.state.currentPhraseAttempts;
+    let currentPhraseAttempts = this.state.currentPhraseAttempts.map(copy => ({...copy}));
 
     currentPhraseAttempts.push({
       text: actualText,
