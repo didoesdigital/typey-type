@@ -2,8 +2,14 @@ import React, { useMemo } from "react";
 import { format } from "d3-format";
 
 // An ok default value: numberOfTicks = dimensions.boundedWidth / 80
-const AxisHorizontal = ({ dimensions, scale, gridLines, numberOfTicks, ...props }) => {
-  const formatter = format(",")
+const AxisHorizontal = ({
+  dimensions,
+  scale,
+  gridLines,
+  numberOfTicks,
+  ...props
+}) => {
+  const formatter = format(",");
 
   const ticks = useMemo(() => {
     return scale.ticks(numberOfTicks).map((value) => ({
@@ -28,7 +34,7 @@ const AxisHorizontal = ({ dimensions, scale, gridLines, numberOfTicks, ...props 
               key={value}
               style={{
                 textAnchor: "middle",
-                transform: "translateY(24px)"
+                transform: "translateY(24px)",
               }}
             >
               {formatter(value)}
@@ -41,9 +47,15 @@ const AxisHorizontal = ({ dimensions, scale, gridLines, numberOfTicks, ...props 
 };
 
 // An ok default value: numberOfTicks = dimensions.boundedHeight / 80
-const AxisVertical = ({ dimensions, scale, gridLines, numberOfTicks, ...props }) => {
-  const formatter = format(",")
-  const [x1, x2] = gridLines === true ? [-dimensions.boundedWidth, 0] : [0, 4]
+const AxisVertical = ({
+  dimensions,
+  scale,
+  gridLines,
+  numberOfTicks,
+  ...props
+}) => {
+  const formatter = format(",");
+  const [x1, x2] = gridLines === true ? [-dimensions.boundedWidth, 0] : [0, 4];
 
   const ticks = useMemo(() => {
     return scale.ticks(numberOfTicks).map((value) => ({
@@ -73,7 +85,7 @@ const AxisVertical = ({ dimensions, scale, gridLines, numberOfTicks, ...props })
               }}
               dy="0.32em"
             >
-              {`${formatter(value)}${(i === ticks.length - 1) ? " WPM" : ""}`}
+              {`${formatter(value)}${i === ticks.length - 1 ? " WPM" : ""}`}
             </text>
           </g>
         );
@@ -85,18 +97,13 @@ const AxisVertical = ({ dimensions, scale, gridLines, numberOfTicks, ...props })
 const axisComponentsByDimension = {
   x: AxisHorizontal,
   y: AxisVertical,
-}
+};
 
 const Axis = ({ dimension, dimensions, ...props }) => {
-  const AxisByDimension = axisComponentsByDimension[dimension]
-  if (!AxisByDimension) return null
+  const AxisByDimension = axisComponentsByDimension[dimension];
+  if (!AxisByDimension) return null;
 
-  return (
-    <AxisByDimension
-      dimensions={dimensions}
-      {...props}
-    />
-  )
-}
+  return <AxisByDimension dimensions={dimensions} {...props} />;
+};
 
 export default Axis;

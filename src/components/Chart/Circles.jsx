@@ -1,6 +1,13 @@
 import React from "react";
 
-const Circles = ({ data, keyAccessor, xAccessor, yAccessor, colorAccessor, ...props }) => {
+const Circles = ({
+  data,
+  keyAccessor,
+  xAccessor,
+  yAccessor,
+  colorAccessor,
+  ...props
+}) => {
   return (
     <g>
       {data.map((d, i) => (
@@ -11,7 +18,7 @@ const Circles = ({ data, keyAccessor, xAccessor, yAccessor, colorAccessor, ...pr
           cy={yAccessor(d)}
           r={4}
           style={{
-            fill: colorAccessor(d)
+            fill: colorAccessor(d),
           }}
         />
       ))}

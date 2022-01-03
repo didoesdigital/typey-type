@@ -17,11 +17,12 @@ const Popover = ({
   backgroundColorAccessor,
   ...props
 }) => {
-  const datum = data[dataIndex]
+  const datum = data[dataIndex];
   const translateX = xAccessorScaled(datum) + dimensions.marginLeft;
-  const leftEdge = translateX - (halfPopoverMaxWidth) < 0;
-  const rightEdge = translateX + (halfPopoverMaxWidth) > dimensions.width;
-  const translateY = yAccessorScaled(datum) + dimensions.marginTop - highlightCircleRadius; // Math.max(dimensions.marginTop - 4, 0);
+  const leftEdge = translateX - halfPopoverMaxWidth < 0;
+  const rightEdge = translateX + halfPopoverMaxWidth > dimensions.width;
+  const translateY =
+    yAccessorScaled(datum) + dimensions.marginTop - highlightCircleRadius; // Math.max(dimensions.marginTop - 4, 0);
 
   const popoverStyles = {
     backgroundColor: "#fff",
@@ -42,20 +43,22 @@ const Popover = ({
   // console.log(`${xAccessor(data[dataIndex])} milliseconds`);
   // console.log(`${format(",d")(xAccessor(data[dataIndex]) / 1000)} seconds`);
 
-  const claps = datum.markedCorrect && !datum.attemptPeak &&
+  const claps = datum.markedCorrect && !datum.attemptPeak && (
     <span
       style={{
         backgroundColor: "transparent",
         borderBottom: "2px solid transparent",
       }}
-    >&nbsp;👏</span>
+    >
+      &nbsp;👏
+    </span>
+  );
 
   return (
     <div style={popoverStyles}>
       <p className="mw-240 mb0 mt1 flex">
-        <span
-          className="current-phrase-material truncate px05">
-        {datum.material}
+        <span className="current-phrase-material truncate px05">
+          {datum.material}
         </span>
         {claps}
       </p>
