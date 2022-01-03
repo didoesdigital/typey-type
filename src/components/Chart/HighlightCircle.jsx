@@ -17,7 +17,7 @@ const HighlightCircle = ({ data, dataIndex, xAccessor, yAccessor, colorAccessor,
   return (
     <circle
       {...props}
-      ariaHidden={true}
+      aria-hidden={true}
       cx={xAccessor(datum)}
       cy={yAccessor(datum)}
       r={8}
