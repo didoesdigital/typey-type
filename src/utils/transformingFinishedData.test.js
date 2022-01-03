@@ -51,7 +51,7 @@ describe("Transforming lesson data to chart data", () => {
           hint: "OPB",
         },
         {
-          elapsedTime: 1544,
+          elapsedTime: 872,
           wordsPerMinute: 54.4041450777202,
           typedText: " hix",
           material: "him",
