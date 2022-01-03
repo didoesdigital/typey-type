@@ -8,6 +8,7 @@ import { Tooltip } from 'react-tippy';
 import { stitchTogetherLessonData, transformLessonDataToChartData } from '../utils/transformingFinishedData'
 import DisplayMetric from './DisplayMetric'
 import FinishedSpeedChart from './FinishedSpeedChart'
+import ErrorBoundary from './ErrorBoundary'
 import * as Confetti from './../utils/confetti';
 import 'react-tippy/dist/tippy.css'
 
@@ -311,8 +312,10 @@ class Finished extends Component {
             {newTopSpeedSectionOrFinished}
           </h3>
           <p>{wpmCommentary}</p>
-          <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
-          {this.state.chartData?.dataPoints?.length > 1 && <FinishedSpeedChart data={this.state.chartData} />}
+          <ErrorBoundary relative={true} vanish={true}>
+            <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
+            {this.state.chartData?.dataPoints?.length > 1 && <FinishedSpeedChart data={this.state.chartData} />}
+          </ErrorBoundary>
           <ul className="inline-flex flex-wrap middot-separator unstyled-list">
             <li className="ml0 bg-warning pl1 pr1">
               {wpm}&nbsp;

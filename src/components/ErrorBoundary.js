@@ -43,6 +43,9 @@ class ErrorBoundary extends Component {
         </main>
       )
     }
+    else if (this.state.hasError && this.props.vanish) {
+      return null
+    }
     else if (this.state.hasError && this.props.relative) {
       return (
         <div className="mt3">
