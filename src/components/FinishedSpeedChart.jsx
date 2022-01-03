@@ -24,7 +24,23 @@ export default function FinishedSpeedChart({ data }) {
   const xAccessor = d => d.elapsedTime;
   const yAccessor = d => d.wordsPerMinute;
   const keyAccessor = (d, i) => i;
-  const colorAccessor = d => d.markedCorrect;
+  const colorAccessor = d => {
+    if (d.attemptPeak) {
+      return d.markedCorrect ? "#CD840E" : "#E17547";
+    }
+    else {
+      return d.markedCorrect ? "#9880C2" : "#E26F99";
+    }
+  }
+  const backgroundColorAccessor = d => {
+    if (d.attemptPeak) {
+      return d.markedCorrect ? "#FCF5E9" : "#FAEFEA";
+    }
+    else {
+      return d.markedCorrect ? "#F1EEF6" : "#FAEBF0";
+    }
+  }
+
   const xScale = data === null ? null : scaleLinear()
     .domain([
       Math.floor(min(data.marks, xAccessor) / 1000) * 1000,
@@ -66,6 +82,8 @@ export default function FinishedSpeedChart({ data }) {
         yAccessor={yAccessor}
         xAccessorScaled={xAccessorScaled}
         yAccessorScaled={yAccessorScaled}
+        colorAccessor={colorAccessor}
+        backgroundColorAccessor={backgroundColorAccessor}
       />}
       <Chart dimensions={dimensions} onMouseMove={onMove} onTouchMove={onMove} onMouseOut={onOut} onTouchEnd={onOut}>
         {data === null ? null :
