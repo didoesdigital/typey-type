@@ -490,7 +490,7 @@ class App extends Component {
       writePersonalPreferences('recentLessons', recentLessons);
     }
 
-    let currentLessonStrokes = this.state.currentLessonStrokes;
+    const currentLessonStrokes = this.state.currentLessonStrokes.map(copy => ({...copy}));
     for (let i = 0; i < currentLessonStrokes.length; i++) {
       if (currentLessonStrokes[i].accuracy === true) {
         currentLessonStrokes[i].checked = false;
@@ -499,6 +499,7 @@ class App extends Component {
 
     this.setState({
       actualText: '',
+      currentLessonStrokes: currentLessonStrokes,
       currentPhraseID: this.state.lesson.presentedMaterial.length,
       previousCompletedPhraseAsTyped: '',
       currentPhraseAttempts: [],
