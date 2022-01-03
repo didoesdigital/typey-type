@@ -1919,7 +1919,7 @@ class App extends Component {
     currentPhraseAttempts.push({
       text: actualText,
       time: Date.now(),
-      numberOfMatchedWordsSoFar: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars + unmatchedChars.length) / this.charsPerWord
+      numberOfMatchedWordsSoFar: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord
     });
 
     var newState = {
