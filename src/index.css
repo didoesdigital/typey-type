@@ -1753,7 +1753,8 @@ label {
   height: 1em;
   width: 1em; }
   .svg-icon-wrapper.svg-icon-wrapper--typey-type-logo {
-    font-size: 1.25rem; }
+    font-size: 1.25rem;
+    top: -2px; }
 
 .svg-icon-wrapper svg {
   height: 1em;
@@ -2112,3 +2113,10 @@ small .svg-icon-wrapper.svg-baseline svg {
   @media (min-width: 768px) {
     .footer {
       flex-direction: row; } }
+
+.chart-logo-lockup {
+  position: absolute;
+  background: #fff;
+  line-height: 1;
+  margin-bottom: 0;
+  font-size: 1rem; }

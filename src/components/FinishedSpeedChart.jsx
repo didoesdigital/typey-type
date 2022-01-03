@@ -5,6 +5,7 @@ import { pointer } from "d3-selection";
 import { curveMonotoneX } from "d3-shape";
 import { useChartDimensions } from "./Chart/utils";
 import { durationFormatter } from "./../utils/formatters";
+import { IconTypeyType } from './Icon';
 import Axis from "./Chart/Axis";
 import Chart from "./Chart/Chart";
 import Circles from "./Chart/Circles";
@@ -73,6 +74,14 @@ export default function FinishedSpeedChart({ data }) {
 
   return (
     <div className="mt3 mb1 relative" style={{ height: '240px' }} ref={ref}>
+      <div className="chart-logo-lockup"
+        // style={{ top: dimensions.marginTop}}
+      >
+        <p className="flex items-end pr1 mb0">
+          <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" className="mr1 svg-icon-wrapper svg-icon-wrapper--typey-type-logo svg-baseline" />
+          <span className="heading-link__logo-text">Typey&nbsp;Type</span>
+        </p>
+      </div>
       {highlightedDatum === null ? null :
       <Popover
         dataIndex={highlightedDatum}

@@ -1944,6 +1944,7 @@ label {
   width: 1em;
   &.svg-icon-wrapper--typey-type-logo {
     font-size: $h4-size;
+    top: -2px;
   }
 }
 .svg-icon-wrapper svg {
@@ -2384,5 +2385,13 @@ $lineAdjustment: 4px;
   @media (min-width: $medium-breakpoint) {
     flex-direction: row;
   }
+}
+
+.chart-logo-lockup {
+  position: absolute;
+  background: #fff;
+    line-height: 1;
+    margin-bottom: 0;
+    font-size: $h5-size;
 }
 
