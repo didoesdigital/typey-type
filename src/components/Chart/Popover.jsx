@@ -13,6 +13,8 @@ const Popover = ({
   yAccessor,
   xAccessorScaled,
   yAccessorScaled,
+  colorAccessor,
+  backgroundColorAccessor,
   ...props
 }) => {
   const datum = data[dataIndex]
@@ -40,16 +42,35 @@ const Popover = ({
   // console.log(`${xAccessor(data[dataIndex])} milliseconds`);
   // console.log(`${format(",d")(xAccessor(data[dataIndex]) / 1000)} seconds`);
 
-  const materialStyles = `truncate mw-240 mb1 steno-material db px05 ${
-    datum.markedCorrect ? "matched" : "bg-warning"
-  }`;
-
-  const typedTextStyles = `truncate mw-240 mb0 steno-material db px05 bg-info`;
+  const claps = datum.markedCorrect && !datum.attemptPeak &&
+    <span
+      style={{
+        backgroundColor: "transparent",
+        borderBottom: "2px solid transparent",
+      }}
+    >&nbsp;👏</span>
 
   return (
     <div style={popoverStyles}>
-      <p className={materialStyles}>{datum.material}</p>
-      <p className={typedTextStyles}>{datum.typedText}</p>
+      <p className="mw-240 mb0 mt1 flex">
+        <span
+          className="current-phrase-material truncate px05">
+        {datum.material}
+        </span>
+        {claps}
+      </p>
+      <p className="mw-240 mb0 flex">
+        <span
+          className="truncate px05 bg-info"
+          style={{
+            backgroundColor: backgroundColorAccessor(datum),
+            borderBottom: `2px solid ${colorAccessor(datum)}`,
+          }}
+        >
+          {datum.typedText}
+        </span>
+        {claps}
+      </p>
       <p className="mb0">{format(",d")(yAccessor(datum))} WPM</p>
     </div>
   );
