@@ -95,8 +95,8 @@ export default function FinishedSpeedChart({ data }) {
               numberOfTicks={4}
               gridLines={true}
             />
-            <Line type='line' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
-            <Line type='area' data={data.marks} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
+            <Line type='line' data={data.marks.filter(d => !d.attemptPeak)} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
+            <Line type='area' data={data.marks.filter(d => !d.attemptPeak)} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Circles data={data.marks} keyAccessor={keyAccessor} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
             {highlightedDatum === null ? null :
             <HighlightCircle data={data.marks} dataIndex={highlightedDatum} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
