@@ -5,7 +5,7 @@ export default function DisplayMetric({ value, label, valueSuffix, size }) {
     ? "stat__number stat__number--min-w text-center stat__number--display"
     : "stat__number stat__number--min-w text-center"
   return (
-    <div className="stat">
+    <div className="stat px05">
       <div className={classes}>
         {value}
         {valueSuffix && <span className="smaller">{ valueSuffix }</span>}
