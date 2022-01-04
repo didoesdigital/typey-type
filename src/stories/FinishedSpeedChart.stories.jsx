@@ -112,19 +112,19 @@ export const WPM23 = Template.bind({});
 WPM23.args = {
   data: practiceProverb,
 };
-WPM23.storyName = "23 WPM lesson"
+WPM23.storyName = "23 WPM lesson (TODO)";
 
 export const WPM28 = Template.bind({});
 WPM28.args = {
   data: practiceProverb,
 };
-WPM28.storyName = "28 WPM lesson"
+WPM28.storyName = "28 WPM lesson (TODO)";
 
 export const WPM41 = Template.bind({});
 WPM41.args = {
   data: practiceProverb,
 };
-WPM41.storyName = "41 WPM lesson"
+WPM41.storyName = "41 WPM lesson (TODO)";
 
 export const WPM61 = Template.bind({});
 WPM61.args = {
@@ -132,15 +132,54 @@ WPM61.args = {
 };
 WPM61.storyName = "61 WPM lesson";
 
-export const WPM151 = Template.bind({});
-WPM151.args = {
-  data: practiceProverb,
+export const WPM111 = Template.bind({});
+let WPM111Data = Object.assign({}, practiceProverb);
+WPM111Data.dataPoints = WPM111Data.dataPoints.map(
+  ({ wordsPerMinute, ...datumProps }, i) => ({
+    ...datumProps,
+    wordsPerMinute: i !== 0 ? wordsPerMinute + 30 : wordsPerMinute,
+  })
+);
+WPM111.args = {
+  data: WPM111Data,
 };
-WPM151.storyName = "151 WPM lesson"
+WPM111.storyName = "111 WPM lesson (FIXME)";
+
+export const WPM151 = Template.bind({});
+let WPM151Data = Object.assign({}, practiceProverb);
+WPM151Data.dataPoints = WPM151Data.dataPoints.map(
+  ({ wordsPerMinute, ...datumProps }, i) => ({
+    ...datumProps,
+    wordsPerMinute: i !== 0 ? wordsPerMinute + 120 : wordsPerMinute,
+  })
+);
+WPM151.args = {
+  data: WPM151Data,
+};
+WPM151.storyName = "151 WPM lesson (FIXME)";
 
 export const WPM226 = Template.bind({});
+let WPM226Data = Object.assign({}, practiceProverb);
+WPM226Data.dataPoints = WPM226Data.dataPoints.map(
+  ({ wordsPerMinute, ...datumProps }, i) => ({
+    ...datumProps,
+    wordsPerMinute: i !== 0 ? wordsPerMinute + 160 : wordsPerMinute,
+  })
+);
 WPM226.args = {
-  data: practiceProverb,
+  data: WPM226Data,
 };
-WPM226.storyName = "226 WPM lesson"
+WPM226.storyName = "226 WPM lesson (FIXME)";
 
+export const WPM320 = Template.bind({});
+let WPM320Data = Object.assign({}, practiceProverb);
+WPM320Data.dataPoints = WPM320Data.dataPoints.map(
+  ({ wordsPerMinute, ...datumProps }, i) => ({
+    ...datumProps,
+    wordsPerMinute: i !== 0 ? wordsPerMinute + 260 : wordsPerMinute,
+  })
+);
+WPM320.args = {
+  data: WPM320Data,
+};
+WPM320.storyName = "320 WPM lesson (FIXME)";
