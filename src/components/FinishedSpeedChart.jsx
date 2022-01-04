@@ -91,7 +91,7 @@ export default function FinishedSpeedChart({ data }) {
       >
         <p className="flex items-end pr1 mb0">
           <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" className="mr1 svg-icon-wrapper svg-icon-wrapper--typey-type-logo svg-baseline" />
-          <span className="heading-link__logo-text">Typey&nbsp;Type</span>
+          <span className="heading-link__logo-text" aria-hidden={true}>Typey&nbsp;Type</span>
         </p>
       </div>
       {highlightedDatum === null ? null :
