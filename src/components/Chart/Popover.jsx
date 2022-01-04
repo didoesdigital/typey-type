@@ -21,8 +21,10 @@ const Popover = ({
   const translateX = xAccessorScaled(datum) + dimensions.marginLeft;
   const leftEdge = translateX - halfPopoverMaxWidth < 0;
   const rightEdge = translateX + halfPopoverMaxWidth > dimensions.width;
-  const translateY =
-    yAccessorScaled(datum) + dimensions.marginTop - highlightCircleRadius; // Math.max(dimensions.marginTop - 4, 0);
+  const translateY = Math.max(
+    yAccessorScaled(datum) + dimensions.marginTop - highlightCircleRadius,
+    -highlightCircleRadius // prevents positioning higher than the chart
+  );
 
   const popoverStyles = {
     backgroundColor: "#fff",
