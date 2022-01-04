@@ -10,27 +10,31 @@ const Chart = ({
   onTouchMove = null,
   onMouseOut = null,
   onTouchEnd = null,
+  accessibleTitle,
   children,
 }) => (
   <ChartContext.Provider value={dimensions}>
-    <svg width={dimensions.width} height={dimensions.height}>
-      <g
-        transform={`translate(${dimensions.marginLeft}, ${dimensions.marginTop})`}
-      >
-        {children}
-      </g>
-      <rect
-        x={0}
-        y={0}
-        width={dimensions.width}
-        height={dimensions.height}
-        fill="transparent"
-        onMouseMove={onMouseMove}
-        onTouchMove={onTouchMove}
-        onMouseOut={onMouseOut}
-        onTouchEnd={onTouchEnd}
-      />
-    </svg>
+    <>
+      <h2 className="visually-hidden" id="chart-title">{accessibleTitle}</h2>
+      <svg width={dimensions.width} height={dimensions.height} aria-labelledby="chart-title">
+        <g
+          transform={`translate(${dimensions.marginLeft}, ${dimensions.marginTop})`}
+        >
+          {children}
+        </g>
+        <rect
+          x={0}
+          y={0}
+          width={dimensions.width}
+          height={dimensions.height}
+          fill="transparent"
+          onMouseMove={onMouseMove}
+          onTouchMove={onTouchMove}
+          onMouseOut={onMouseOut}
+          onTouchEnd={onTouchEnd}
+        />
+      </svg>
+    </>
   </ChartContext.Provider>
 );
 

@@ -106,7 +106,7 @@ export default function FinishedSpeedChart({ data }) {
         colorAccessor={colorAccessor}
         backgroundColorAccessor={backgroundColorAccessor}
       />}
-      <Chart dimensions={dimensions} onMouseMove={onMove} onTouchMove={onMove} onMouseOut={onOut} onTouchEnd={onOut}>
+      <Chart dimensions={dimensions} onMouseMove={onMove} onTouchMove={onMove} onMouseOut={onOut} onTouchEnd={onOut} accessibleTitle="Line chart of your typing speed over time">
         {data === null ? null :
           <>
             <Axis
