@@ -86,7 +86,7 @@ export default function FinishedSpeedChart({ data }) {
 
   return (
     <div className="mt3 mb1 relative" style={{ height: '240px' }} ref={ref}>
-      <div className="chart-logo-lockup"
+      <div className="chart-logo-lockup pointer-none"
         // style={{ top: dimensions.marginTop}}
       >
         <p className="flex items-end pr1 mb0">
