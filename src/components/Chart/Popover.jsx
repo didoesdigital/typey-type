@@ -57,7 +57,7 @@ const Popover = ({
   );
 
   return (
-    <div style={popoverStyles}>
+    <div style={popoverStyles} aria-hidden={true}>
       <p className="mw-240 mb0 mt1 flex">
         <span className="current-phrase-material truncate px05">
           {datum.material}
