@@ -50,10 +50,22 @@ export default function FinishedSpeedChart({ data }) {
     )
     .range([0, dimensions.boundedWidth])
 
-  const yScale = data === null ? null : scaleLinear()
-    .domain([0, Math.max(10, max(data.dataPoints, yAccessor) * 1.2)])
-    .range([dimensions.boundedHeight, 0])
-    .nice()
+  const maxY = max(data.dataPoints, yAccessor);
+  const maxYPlusBuffer = maxY * 1.2;
+  const yScaleDomainMax = (maxYPlusBuffer) => {
+    if (maxYPlusBuffer < 60) return 60;
+    if (maxYPlusBuffer < 100) return 100;
+    if (maxYPlusBuffer < 300) return 300;
+    return 400;
+  };
+
+  const yScale =
+    data === null
+      ? null
+      : scaleLinear()
+          .domain([0, yScaleDomainMax(maxYPlusBuffer)])
+          .range([dimensions.boundedHeight, 0])
+          .nice();
 
   const xAccessorScaled = d => xScale(xAccessor(d))
   const yAccessorScaled = d => yScale(yAccessor(d))
