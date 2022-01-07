@@ -202,7 +202,7 @@ export default function FinishedSpeedChart({ data }) {
               transform={`translate(0, ${dimensions.boundedHeight})`}
               dy="1.5em"
             >
-              ⏱ {durationFormatter(xScale.domain()[0])}
+              <tspan role="img" aria-label="Start time">⏱</tspan> {durationFormatter(xScale.domain()[0])}
             </text>
             <text
               textAnchor="end"
@@ -211,7 +211,7 @@ export default function FinishedSpeedChart({ data }) {
               })`}
               dy="1.5em"
             >
-              {durationFormatter(xScale.domain()[1])} ⏱
+              {durationFormatter(xScale.domain()[1])} <tspan role="img" aria-label="Finished time">⏱</tspan>
             </text>
           </>
         )}
