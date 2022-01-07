@@ -12,7 +12,7 @@ const Circles = ({
   ...props
 }) => {
   return (
-    <g tabIndex={0} role="list">
+    <g tabIndex={0} role="list" aria-label="Measurement points">
       {data?.map((d, i) => (
         <circle
           {...props}
