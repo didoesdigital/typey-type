@@ -14,14 +14,84 @@ import 'react-tippy/dist/tippy.css'
 
 let particles = [];
 
-const FinishedHeroData = ({speed, accuracy}) => {
+const FinishedHeroData = ({ speed, accuracy, setAnnouncementMessage }) => {
   return (
-    <div className="flex flex-wrap justify-between justify-center mw-320 mx-auto mb3">
-      <DisplayMetric size={"L"} value={speed} label={"Words per minute"} />
-      <DisplayMetric size={"L"} value={accuracy} valueSuffix={"%"} label={"Accuracy"} />
+    <div className="flex flex-wrap justify-between justify-center mx-auto mb3">
+      <DisplayMetric
+        setAnnouncementMessage={setAnnouncementMessage}
+        size={"L"}
+        value={speed}
+        label={"Words per minute"}
+        tooltipMessage={"Assuming a word is 5 characters"}
+      />
+      <DisplayMetric
+        setAnnouncementMessage={setAnnouncementMessage}
+        size={"L"}
+        value={accuracy}
+        valueSuffix={"%"}
+        label={"Accuracy"}
+        tooltipMessage={"Assuming accurate words are typed within stroke count targets"}
+      />
     </div>
-  )
-}
+  );
+};
+
+const SecondaryDisplayMetrics = ({
+  newWords,
+  seen,
+  memorised,
+  hinted,
+  misstrokes,
+  wordsTyped,
+  setAnnouncementMessage
+}) => {
+  return (
+    <div className="flex flex-wrap justify-between justify-center mx-auto mb3">
+      <DisplayMetric
+        setAnnouncementMessage={setAnnouncementMessage}
+        size={"M"}
+        value={newWords}
+        label={"New"}
+        tooltipMessage={"Words you’ve now typed correctly without a hint"}
+      />
+      <DisplayMetric
+        setAnnouncementMessage={setAnnouncementMessage}
+        size={"M"}
+        value={seen}
+        label={"Seen"}
+        tooltipMessage={"Words you’ve seen before"}
+      />
+      <DisplayMetric
+        setAnnouncementMessage={setAnnouncementMessage}
+        size={"M"}
+        value={memorised}
+        label={"From memory"}
+        tooltipMessage={"Words you’ve now typed 30 times or more"}
+      />
+      <DisplayMetric
+        setAnnouncementMessage={setAnnouncementMessage}
+        size={"M"}
+        value={hinted}
+        label={"Hinted"}
+        tooltipMessage={"Words you typed with the hint shown"}
+      />
+      <DisplayMetric
+        setAnnouncementMessage={setAnnouncementMessage}
+        size={"M"}
+        value={misstrokes}
+        label={"Misstrokes"}
+        tooltipMessage={"Words you mistyped or took more strokes than the target number"}
+      />
+      <DisplayMetric
+        setAnnouncementMessage={setAnnouncementMessage}
+        size={"M"}
+        value={wordsTyped}
+        label={"Typed"}
+        tooltipMessage={"Each Typey Type word or phrase typed"}
+      />
+    </div>
+  );
+};
 
 class Finished extends Component {
   constructor(props) {
@@ -315,6 +385,15 @@ class Finished extends Component {
           <ErrorBoundary relative={true} vanish={true}>
             <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
             {this.state.chartData?.dataPoints?.length > 1 && <FinishedSpeedChart data={this.state.chartData} />}
+            <SecondaryDisplayMetrics
+              newWords={this.props.totalNumberOfNewWordsMet}
+              seen={this.props.totalNumberOfLowExposuresSeen}
+              memorised={this.props.totalNumberOfRetainedWords}
+              hinted={this.props.totalNumberOfHintedWords}
+              misstrokes={this.props.totalNumberOfMistypedWords}
+              wordsTyped={this.props.currentLessonStrokes?.length || 0}
+              setAnnouncementMessage={this.props.setAnnouncementMessage}
+            />
           </ErrorBoundary>
           <ul className="inline-flex flex-wrap middot-separator unstyled-list">
             <li className="ml0 bg-warning pl1 pr1">
