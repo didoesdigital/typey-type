@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import LessonCanvasFooter from './LessonCanvasFooter';
-import Scores from './Scores';
 import UserSettings from './UserSettings';
 import { IconRestart } from './Icon';
 import { Link } from 'react-router-dom';
@@ -472,18 +471,6 @@ class Finished extends Component {
               {customMessage}
             </div>
             <div className="mx-auto mw-1920 p3">
-              <div className="scores mb3">
-                <Scores
-                  setAnnouncementMessage={this.props.setAnnouncementMessage}
-                  timer={this.props.timer}
-                  totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-                  totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-                  totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-                  totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-                  totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-                  totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-                />
-              </div>
               <div className="lesson-canvas lesson-canvas--finished panel p3 mb3">
                 <div className={lessonEmpty ? 'dc' : 'w-100'}>
                   {emptyAndZeroStateMessage}
