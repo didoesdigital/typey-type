@@ -7,11 +7,13 @@ const Circles = ({
   xAccessor,
   yAccessor,
   colorAccessor,
+  onFocus,
+  onBlur,
   ...props
 }) => {
   return (
     <g tabIndex={0} role="list">
-      {data.map((d, i) => (
+      {data?.map((d, i) => (
         <circle
           {...props}
           aria-label={accessibleLabel(d)}
@@ -24,6 +26,8 @@ const Circles = ({
             fill: colorAccessor(d),
           }}
           tabIndex={0}
+          onFocus={(e) => onFocus(e, d)}
+          onBlur={onBlur}
         />
       ))}
     </g>

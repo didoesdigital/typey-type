@@ -6,8 +6,7 @@ const halfPopoverMaxWidth = popoverMaxWidth / 2;
 const highlightCircleRadius = 8;
 
 const Popover = ({
-  dataIndex,
-  data,
+  datum,
   dimensions,
   xAccessor,
   yAccessor,
@@ -17,7 +16,6 @@ const Popover = ({
   backgroundColorAccessor,
   ...props
 }) => {
-  const datum = data[dataIndex];
   const translateX = xAccessorScaled(datum) + dimensions.marginLeft;
   const leftEdge = translateX - halfPopoverMaxWidth < 0;
   const rightEdge = translateX + halfPopoverMaxWidth > dimensions.width;

@@ -85,12 +85,17 @@ export default function FinishedSpeedChart({ data }) {
     const pointerX = pointer(event)[0] - dimensions.marginLeft;
     const pointerXValue = xScale.invert(pointerX);
     const nearestXIndex = bisect.center(data.dataPoints, pointerXValue);
-    setHighlightedDatum(nearestXIndex);
+    const datum = data.dataPoints[nearestXIndex];
+    setHighlightedDatum(datum);
   };
 
   const onOut = () => {
     setHighlightedDatum(null);
   };
+
+  const onCircleFocus = (_, d) => {
+    d ? setHighlightedDatum(d) : setHighlightedDatum(null)
+  }
 
   return (
     <div className="mt3 mb1 relative" style={{ height: "240px" }} ref={ref}>
@@ -112,9 +117,8 @@ export default function FinishedSpeedChart({ data }) {
       </div>
       {highlightedDatum === null ? null : (
         <Popover
-          dataIndex={highlightedDatum}
+          datum={highlightedDatum}
           dimensions={dimensions}
-          data={data.dataPoints}
           xAccessor={xAccessor}
           yAccessor={yAccessor}
           xAccessorScaled={xAccessorScaled}
@@ -181,12 +185,13 @@ export default function FinishedSpeedChart({ data }) {
                 xAccessor={xAccessorScaled}
                 yAccessor={yAccessorScaled}
                 colorAccessor={colorAccessor}
+                onFocus={onCircleFocus}
+                onBlur={onOut}
               />
             )}
             {highlightedDatum === null ? null : (
               <HighlightCircle
-                data={data.dataPoints}
-                dataIndex={highlightedDatum}
+                datum={highlightedDatum}
                 xAccessor={xAccessorScaled}
                 yAccessor={yAccessorScaled}
                 colorAccessor={colorAccessor}

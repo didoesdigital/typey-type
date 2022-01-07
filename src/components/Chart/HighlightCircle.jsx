@@ -1,15 +1,12 @@
 import React from "react";
 
 const HighlightCircle = ({
-  data,
-  dataIndex,
+  datum,
   xAccessor,
   yAccessor,
   colorAccessor,
   ...props
 }) => {
-  const datum = data[dataIndex];
-
   return (
     <circle
       {...props}
