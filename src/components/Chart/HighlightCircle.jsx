@@ -13,7 +13,7 @@ const HighlightCircle = ({
   return (
     <circle
       {...props}
-      aria-hidden={true}
+      role="presentation"
       cx={xAccessor(datum)}
       cy={yAccessor(datum)}
       r={8}

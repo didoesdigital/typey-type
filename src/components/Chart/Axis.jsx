@@ -1,6 +1,8 @@
 import React, { useMemo } from "react";
 import { format } from "d3-format";
 
+const formatter = format(",");
+
 // An ok default value: numberOfTicks = dimensions.boundedWidth / 80
 const AxisHorizontal = ({
   dimensions,
@@ -9,8 +11,6 @@ const AxisHorizontal = ({
   numberOfTicks,
   ...props
 }) => {
-  const formatter = format(",");
-
   const ticks = useMemo(() => {
     return scale.ticks(numberOfTicks).map((value) => ({
       value,
@@ -22,9 +22,14 @@ const AxisHorizontal = ({
     <g transform={`translate(0, ${dimensions.boundedHeight})`} {...props}>
       {ticks.map(({ value, xOffset }) => {
         return (
-          <g key={value} transform={`translate(${xOffset}, 0)`}>
+          <g
+            key={value}
+            transform={`translate(${xOffset}, 0)`}
+            role="presentation"
+          >
             <line
               y2={4}
+              role="presentation"
               style={{
                 stroke: "#E3E3E3",
               }}
@@ -32,6 +37,8 @@ const AxisHorizontal = ({
 
             <text
               key={value}
+              aria-hidden="true"
+              role="presentation"
               style={{
                 textAnchor: "middle",
                 transform: "translateY(24px)",
@@ -68,10 +75,15 @@ const AxisVertical = ({
     <g transform={`translate(${dimensions.boundedWidth}, 0)`} {...props}>
       {ticks.map(({ value, yOffset }, i) => {
         return (
-          <g key={value} transform={`translate(0, ${yOffset})`}>
+          <g
+            key={value}
+            transform={`translate(0, ${yOffset})`}
+            role="presentation"
+          >
             <line
               x1={x1}
               x2={x2}
+              role="presentation"
               style={{
                 stroke: "#E3E3E3",
               }}
@@ -79,6 +91,8 @@ const AxisVertical = ({
 
             <text
               key={value}
+              aria-hidden="true"
+              role="presentation"
               style={{
                 textAnchor: "start",
                 transform: "translateX(8px)",

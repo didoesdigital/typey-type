@@ -19,6 +19,7 @@ const Chart = ({
       <svg width={dimensions.width} height={dimensions.height} aria-labelledby="chart-title">
         <g
           transform={`translate(${dimensions.marginLeft}, ${dimensions.marginTop})`}
+          role="presentation"
         >
           {children}
         </g>
@@ -32,6 +33,7 @@ const Chart = ({
           onTouchMove={onTouchMove}
           onMouseOut={onMouseOut}
           onTouchEnd={onTouchEnd}
+          role="presentation"
         />
       </svg>
     </>
