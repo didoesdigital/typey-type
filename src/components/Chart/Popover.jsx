@@ -49,6 +49,8 @@ const Popover = ({
         backgroundColor: "transparent",
         borderBottom: "2px solid transparent",
       }}
+      role="img"
+      aria-label=" correct"
     >
       &nbsp;👏
     </span>
