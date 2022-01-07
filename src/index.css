@@ -81,7 +81,7 @@ pre {
 .abbr,
 abbr[data-original-title],
 abbr[title] {
-  border-bottom: thin dotted currentColor;
+  border-bottom: thin dotted #696969;
   border-radius: 1px;
   cursor: help;
   text-decoration: none; }
