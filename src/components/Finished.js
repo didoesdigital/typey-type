@@ -384,6 +384,8 @@ class Finished extends Component {
           <p>{wpmCommentary}</p>
           <ErrorBoundary relative={true} vanish={true}>
             <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
+          </ErrorBoundary>
+          <ErrorBoundary relative={true} vanish={true}>
             <a href="#chart-notes" className="skip-to-link skip-to-link--relative" id="ga--finished--skip-chart">Skip chart</a>
             {this.state.chartData?.dataPoints?.length > 1 && <FinishedSpeedChart data={this.state.chartData} />}
             <SecondaryDisplayMetrics
