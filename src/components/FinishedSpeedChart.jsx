@@ -13,6 +13,8 @@ import HighlightCircle from "./Chart/HighlightCircle";
 import Line from "./Chart/Line";
 import Popover from "./Chart/Popover";
 
+const tickSize = 4;
+
 export default function FinishedSpeedChart({ data }) {
   const [highlightedDatum, setHighlightedDatum] = useState(null);
   const [ref, dimensions] = useChartDimensions({
@@ -115,6 +117,11 @@ export default function FinishedSpeedChart({ data }) {
               scale={yScale}
               numberOfTicks={4}
               gridLines={true}
+            />
+            <path
+              d={['M', xScale.range()[0], dimensions.boundedHeight + tickSize, 'v', -tickSize, 'H', xScale.range()[1], 'v', tickSize].join(' ')}
+              fill="none"
+              stroke={"#A8A8A8"}
             />
             <Line type='line' data={data.dataPoints.filter(d => !d.attemptPeak)} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Line type='area' data={data.dataPoints.filter(d => !d.attemptPeak)} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
