@@ -1620,20 +1620,22 @@ label {
     border-left: none;
     padding-left: inherit; }
 
-.skip-to-main-link {
+.skip-to-link {
   position: absolute !important;
   height: 1px;
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
   z-index: 2; }
-  .skip-to-main-link:focus, .skip-to-main-link:active {
+  .skip-to-link:focus, .skip-to-link:active {
     position: absolute;
     height: initial;
     padding: 28px;
     width: initial;
     overflow: initial;
     clip: initial; }
+  .skip-to-link.skip-to-link--relative:focus, .skip-to-link.skip-to-link--relative:active {
+    position: relative !important; }
 
 .carousel--flashcards {
   margin-left: calc(2.5rem + 8px);

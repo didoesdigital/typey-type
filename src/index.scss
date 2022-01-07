@@ -54,7 +54,7 @@ $z-index-vertical-text: 4;
 $z-index-revision-mode-button: 3;
 $z-index-show-scores-control: 3;
 $z-index-successfully-typed-text: -1;
-$z-index-skip-to-main-link: 2;
+$z-index-skip-to-link: 2;
 $z-index-unknown-steno-diagram-text: 1;
 $z-index-lesson-canvas: 0;
 $link-button-height: 2.5rem;
@@ -1781,14 +1781,14 @@ label {
     padding-left: inherit;
   }
 }
-.skip-to-main-link {
+.skip-to-link {
   // background-color: $brand-primary;
   position: absolute !important;
   height: 1px;
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
-  z-index: $z-index-skip-to-main-link;
+  z-index: $z-index-skip-to-link;
 
   &:focus,
   &:active {
@@ -1798,6 +1798,11 @@ label {
     width: initial;
     overflow: initial;
     clip: initial;
+  }
+
+  &.skip-to-link--relative:focus,
+  &.skip-to-link--relative:active {
+    position: relative !important
   }
 }
 

@@ -384,6 +384,7 @@ class Finished extends Component {
           <p>{wpmCommentary}</p>
           <ErrorBoundary relative={true} vanish={true}>
             <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
+            <a href="#chart-notes" className="skip-to-link skip-to-link--relative" id="ga--finished--skip-chart">Skip chart</a>
             {this.state.chartData?.dataPoints?.length > 1 && <FinishedSpeedChart data={this.state.chartData} />}
             <SecondaryDisplayMetrics
               newWords={this.props.totalNumberOfNewWordsMet}
@@ -394,6 +395,7 @@ class Finished extends Component {
               wordsTyped={this.props.currentLessonStrokes?.length || 0}
               setAnnouncementMessage={this.props.setAnnouncementMessage}
             />
+            <p className="text-left de-emphasized" id="chart-notes">Note: Because Typey&nbsp;Type starts recording the instant you start typing, the first word is essentially written at infinity words per minute so it’s rounded down to zero&nbsp;here.</p>
           </ErrorBoundary>
           <ul className="inline-flex flex-wrap middot-separator unstyled-list">
             <li className="ml0 bg-warning pl1 pr1">
