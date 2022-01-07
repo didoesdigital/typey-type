@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { bisector, max, min } from "d3-array";
+import { format } from "d3-format";
 import { scaleLinear } from "d3-scale";
 import { pointer } from "d3-selection";
 import { curveMonotoneX } from "d3-shape";
@@ -27,6 +28,7 @@ export default function FinishedSpeedChart({ data }) {
   const xAccessor = d => d.elapsedTime;
   const yAccessor = d => d.wordsPerMinute;
   const keyAccessor = (d, i) => i;
+  const nominalAccessor = d => d.material;
   const colorAccessor = d => {
     if (d.attemptPeak) {
       return d.markedCorrect ? "#CD840E" : "#E17547";
@@ -72,6 +74,9 @@ export default function FinishedSpeedChart({ data }) {
   const xAccessorScaled = d => xScale(xAccessor(d))
   const yAccessorScaled = d => yScale(yAccessor(d))
   const y0AccessorScaled = data === null ? null : yScale(yScale.domain()[0])
+
+  const circleDiameter = 8;
+  const crowdedDataPoints = data.dataPoints.length * circleDiameter > dimensions.boundedWidth;
 
   const bisect = bisector((d) => xAccessor(d))
 
@@ -125,7 +130,9 @@ export default function FinishedSpeedChart({ data }) {
             />
             <Line type='line' data={data.dataPoints.filter(d => !d.attemptPeak)} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
             <Line type='area' data={data.dataPoints.filter(d => !d.attemptPeak)} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} y0Accessor={y0AccessorScaled} interpolation={curveMonotoneX} />
-            <Circles data={data.dataPoints} keyAccessor={keyAccessor} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
+            {crowdedDataPoints ? null :
+            <Circles data={data.dataPoints} accessibleLabel={d => `${nominalAccessor(d)}: ${format(",d")(yAccessor(d))} WPM`} keyAccessor={keyAccessor} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
+            }
             {highlightedDatum === null ? null :
             <HighlightCircle data={data.dataPoints} dataIndex={highlightedDatum} xAccessor={xAccessorScaled} yAccessor={yAccessorScaled} colorAccessor={colorAccessor} />
             }
