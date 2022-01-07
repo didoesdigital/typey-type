@@ -3,7 +3,6 @@ import LessonCanvasFooter from './LessonCanvasFooter';
 import UserSettings from './UserSettings';
 import { IconRestart } from './Icon';
 import { Link } from 'react-router-dom';
-import { Tooltip } from 'react-tippy';
 import { stitchTogetherLessonData, transformLessonDataToChartData } from '../utils/transformingFinishedData'
 import DisplayMetric from './DisplayMetric'
 import FinishedSpeedChart from './FinishedSpeedChart'
@@ -198,20 +197,6 @@ class Finished extends Component {
     let misstrokesSummary = '';
     let strokeAttemptsPresentation;
 
-    let wordsTyped = '';
-
-    if (this.props.currentLessonStrokes && this.props.currentLessonStrokes.length >= 0) {
-      let pluralisedString = '' + this.props.currentLessonStrokes.length + ' words typed';
-
-      if (this.props.currentLessonStrokes.length === 1) {
-        pluralisedString = '' + this.props.currentLessonStrokes.length + ' word typed';
-      }
-
-      wordsTyped = (
-        <span className="nowrap">{pluralisedString}</span>
-      );
-    }
-
     if (currentLessonStrokes.length > 0) {
       let listOfPossibleStrokeImprovements = currentLessonStrokes.map( (phrase, i) => {
         let strokeAttempts = phrase.attempts.map( ( {text, time}, j ) => {
@@ -303,14 +288,6 @@ class Finished extends Component {
       numericAccuracy = 0;
     }
 
-    let hints = "0 hints";
-    if (this.props.totalNumberOfHintedWords === 1) {
-      hints = this.props.totalNumberOfHintedWords + " hint";
-    }
-    else if (this.props.totalNumberOfHintedWords > 1) {
-      hints = this.props.totalNumberOfHintedWords + " hints";
-    }
-
     // When you have stroked nothing right, except hinted or misstroked words, show nothing instead of 0%
     if (accuracy === '0% accuracy!') {
       accuracy = '';
@@ -398,32 +375,6 @@ class Finished extends Component {
             />
             <p className="text-left de-emphasized" id="chart-notes">Note: Because Typey&nbsp;Type starts recording the instant you start typing, the first word is essentially written at infinity words per minute so it’s rounded down to zero&nbsp;here.</p>
           </ErrorBoundary>
-          <ul className="inline-flex flex-wrap middot-separator unstyled-list">
-            <li className="ml0 bg-warning pl1 pr1">
-              {wpm}&nbsp;
-              <Tooltip
-                animation="shift"
-                arrow="true"
-                className="abbr"
-                duration="200"
-                tabIndex="0"
-                tag="abbr"
-                theme="didoesdigital"
-                title="words per minute"
-                trigger="mouseenter focus click"
-                onShow={this.props.setAnnouncementMessage}
-              >WPM</Tooltip>
-            </li>
-            <li className="ml0">
-              <span className="nowrap">{accuracy}</span>
-            </li>
-            <li className="ml0">
-              <span className="nowrap">{hints}</span>
-            </li>
-            <li className="ml0">
-              <span className="nowrap">{wordsTyped}</span>
-            </li>
-          </ul>
           <p className="mb12">
             <a href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
               <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
