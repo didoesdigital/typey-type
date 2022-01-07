@@ -33,7 +33,14 @@ const Line = ({
           strokeLinecap: "round",
         };
 
-  return <path {...props} style={styles} d={lineGenerator(data)} role="presentation" />;
+  return (
+    <path
+      {...props}
+      style={styles}
+      d={lineGenerator(data)}
+      role="presentation"
+    />
+  );
 };
 
 export default Line;

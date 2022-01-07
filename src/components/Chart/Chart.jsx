@@ -15,8 +15,14 @@ const Chart = ({
 }) => (
   <ChartContext.Provider value={dimensions}>
     <>
-      <h2 className="visually-hidden" id="chart-title">{accessibleTitle}</h2>
-      <svg width={dimensions.width} height={dimensions.height} aria-labelledby="chart-title">
+      <h2 className="visually-hidden" id="chart-title">
+        {accessibleTitle}
+      </h2>
+      <svg
+        width={dimensions.width}
+        height={dimensions.height}
+        aria-labelledby="chart-title"
+      >
         <g
           transform={`translate(${dimensions.marginLeft}, ${dimensions.marginTop})`}
           role="presentation"
