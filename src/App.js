@@ -1919,7 +1919,8 @@ class App extends Component {
     currentPhraseAttempts.push({
       text: actualText,
       time: Date.now(),
-      numberOfMatchedWordsSoFar: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord
+      numberOfMatchedWordsSoFar: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
+      hintWasShown: shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)
     });
 
     var newState = {
@@ -1936,6 +1937,7 @@ class App extends Component {
       userSettings: this.state.userSettings
     };
 
+    // NOTE: here is where attempts are defined before being pushed with completed phrases
     let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount, unmatchedActual);
     let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
     let attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
@@ -1947,19 +1949,22 @@ class App extends Component {
     if (numberOfUnmatchedChars === 0) {
       newState.currentPhraseAttempts = []; // reset for next word
       newState.currentLessonStrokes = this.state.currentLessonStrokes; // [{word: "cat", attempts: ["cut"], stroke: "KAT"}, {word: "sciences", attempts ["sign", "ss"], stroke: "SAOEUPB/EPBC/-S"]
+
+      let strokeHintShown = shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition);
+
+      // NOTE: here is where completed phrases are pushed
       newState.currentLessonStrokes.push({
         numberOfMatchedWordsSoFar: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
         word: this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase,
         typedText: actualText,
         attempts: attempts,
+        hintWasShown: strokeHintShown,
         stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke,
         checked: true,
         accuracy: accurateStroke,
         time: Date.now()
       });
       // can these newState assignments be moved down below the scores assignments?
-
-      let strokeHintShown = shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition);
 
       if (strokeHintShown) { newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1; }
 

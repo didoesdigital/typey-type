@@ -32,6 +32,7 @@ function transformLessonDataToChartData(lessonData) {
           material: typedMaterial.word,
           markedCorrect: typedMaterial.accuracy,
           hint: typedMaterial.stroke,
+          hintWasShown: attempt.hintWasShown,
           attemptPeak: true,
         })
       })
@@ -45,6 +46,7 @@ function transformLessonDataToChartData(lessonData) {
       material: typedMaterial.word,
       markedCorrect: typedMaterial.accuracy,
       hint: typedMaterial.stroke,
+      hintWasShown: typedMaterial.hintWasShown,
     })
   })
 

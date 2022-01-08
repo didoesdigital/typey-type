@@ -119,15 +119,16 @@ export default function FinishedSpeedChart({ data }) {
 
   const accessibleLabel = (d) => {
     const wpmText = `${format(",d")(yAccessor(d))} WPM`;
+    const hinted = `${d.hintWasShown ? " (hinted). " : ""}`;
     if (d.markedCorrect) {
-      return `${d.material}: ${wpmText}${claps(d)} `;
+      return `${d.material}: ${wpmText}${claps(d)}${hinted}`;
     } else {
       if (d.material === d.typedText) {
-        return `${d.material}: ${wpmText}${claps(d)}. `;
+        return `${d.material}: ${wpmText}${claps(d)}. ${hinted}`;
       } else {
         return `${d.material}: ${wpmText}${claps(d)}; you typed: ${
           d.typedText
-        }. `;
+        }. ${hinted}`;
       }
     }
   };
@@ -168,7 +169,7 @@ export default function FinishedSpeedChart({ data }) {
               </span>
               {claps(highlightedDatum, true)}
             </p>
-            <p className="mw-240 mb0 flex">
+            <p className="mw-240 mb1 flex">
               <span
                 className="truncate px05 bg-info"
                 style={{
@@ -181,7 +182,7 @@ export default function FinishedSpeedChart({ data }) {
               {claps(highlightedDatum, true)}
             </p>
             <p className="mb0">
-              {format(",d")(yAccessor(highlightedDatum))} WPM
+              {format(",d")(yAccessor(highlightedDatum))} WPM{highlightedDatum.hintWasShown ? <span aria-label="(hinted)" role="img">&nbsp;ℹ️</span> : null}
             </p>
           </Popover>
         </ErrorBoundary>
