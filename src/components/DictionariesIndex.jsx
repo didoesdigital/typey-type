@@ -207,14 +207,8 @@ class DictionariesIndex extends Component {
           </div>
           <div className="mt1 mw-336 flex-grow">
             <h3 className="mt3">Custom dictionaries</h3>
-            {this.props.globalUserSettings && this.props.globalUserSettings.experiments && !!this.props.globalUserSettings.experiments.stenohintsonthefly ?
-              <>
-                <p>To see your own stroke hints in lessons, <Link to="/dictionaries/management">add your dictionaries</Link>.</p>
-                <p><Link to="/dictionaries/management" className="link-button dib mt1" style={{lineHeight: 2}} id="ga--dictionaries-index--add-dictionaries">Add your dictionaries</Link></p>
-              </>
-              :
-                null
-            }
+            <p>To see your own stroke hints in lessons, <Link to="/dictionaries/management">add your dictionaries</Link>.</p>
+            <p><Link to="/dictionaries/management" className="link-button dib mt1" style={{lineHeight: 2}} id="ga--dictionaries-index--add-dictionaries">Add your dictionaries</Link></p>
 
             <h4>Use custom lessons</h4>
             <p>To use a different dictionary or steno theory, upload your words and strokes to a <Link to="/lessons/custom">custom lesson</Link>. The briefs shown will match whatever strokes you provide.</p>
