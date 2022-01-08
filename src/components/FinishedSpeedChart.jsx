@@ -7,6 +7,7 @@ import { curveMonotoneX } from "d3-shape";
 import { useChartDimensions } from "./Chart/utils";
 import { durationFormatter } from "./../utils/formatters";
 import { IconTypeyType } from "./Icon";
+import ErrorBoundary from "./ErrorBoundary";
 import Axis from "./Chart/Axis";
 import Chart from "./Chart/Chart";
 import Circles from "./Chart/Circles";
@@ -15,6 +16,25 @@ import Line from "./Chart/Line";
 import Popover from "./Chart/Popover";
 
 const tickSize = 4;
+
+const claps = (datum, htmlOutput = false) => {
+  if (htmlOutput) {
+    return datum.markedCorrect && !datum.attemptPeak ? (
+      <span
+        style={{
+          backgroundColor: "transparent",
+          borderBottom: "2px solid transparent",
+        }}
+        role="img"
+        aria-label=" correct"
+      >
+        &nbsp;👏
+      </span>
+    ) : null;
+  } else {
+    return datum.markedCorrect && !datum.attemptPeak ? ", correct!" : "";
+  }
+};
 
 export default function FinishedSpeedChart({ data }) {
   const [highlightedDatum, setHighlightedDatum] = useState(null);
@@ -97,47 +117,26 @@ export default function FinishedSpeedChart({ data }) {
     d ? setHighlightedDatum(d) : setHighlightedDatum(null);
   };
 
-  const claps = (datum) => {
-    return (
-      datum.markedCorrect &&
-      !datum.attemptPeak && (
-        <span
-          style={{
-            backgroundColor: "transparent",
-            borderBottom: "2px solid transparent",
-          }}
-          role="img"
-          aria-label=" correct"
-        >
-          &nbsp;👏
-        </span>
-      )
-    );
+  const accessibleLabel = (d) => {
+    if (d.markedCorrect) {
+      return `${d.material}: ${format(",d")(yAccessor(d))} WPM${claps(
+        d,
+        false
+      )} `;
+    } else {
+      if (d.material === d.typedText) {
+        return `${d.material}: ${format(",d")(yAccessor(d))} WPM${claps(
+          d,
+          false
+        )}. `;
+      } else {
+        return `${d.material}: ${format(",d")(yAccessor(d))} WPM${claps(
+          d,
+          false
+        )}; you typed: ${d.typedText}. `;
+      }
+    }
   };
-
-  const popoverContents = (datum) => (
-    <>
-      <p className="mw-240 mb0 mt1 flex">
-        <span className="current-phrase-material truncate px05">
-          {datum.material}
-        </span>
-        {claps(datum)}
-      </p>
-      <p className="mw-240 mb0 flex">
-        <span
-          className="truncate px05 bg-info"
-          style={{
-            backgroundColor: backgroundColorAccessor(datum),
-            borderBottom: `2px solid ${colorAccessor(datum)}`,
-          }}
-        >
-          {datum.typedText}
-        </span>
-        {claps(datum)}
-      </p>
-      <p className="mb0">{format(",d")(yAccessor(datum))} WPM</p>
-    </>
-  );
 
   return (
     <div className="mt3 mb1 relative" style={{ height: "240px" }} ref={ref}>
@@ -158,18 +157,40 @@ export default function FinishedSpeedChart({ data }) {
         </p>
       </div>
       {highlightedDatum === null ? null : (
-        <Popover
-          datum={highlightedDatum}
-          dimensions={dimensions}
-          xAccessor={xAccessor}
-          yAccessor={yAccessor}
-          xAccessorScaled={xAccessorScaled}
-          yAccessorScaled={yAccessorScaled}
-          colorAccessor={colorAccessor}
-          backgroundColorAccessor={backgroundColorAccessor}
-        >
-          {popoverContents(highlightedDatum)}
-        </Popover>
+        <ErrorBoundary relative={true} vanish={true}>
+          <Popover
+            datum={highlightedDatum}
+            dimensions={dimensions}
+            xAccessor={xAccessor}
+            yAccessor={yAccessor}
+            xAccessorScaled={xAccessorScaled}
+            yAccessorScaled={yAccessorScaled}
+            colorAccessor={colorAccessor}
+            backgroundColorAccessor={backgroundColorAccessor}
+          >
+            <p className="mw-240 mb0 mt1 flex">
+              <span className="current-phrase-material truncate px05">
+                {nominalAccessor(highlightedDatum)}
+              </span>
+              {claps(highlightedDatum, true)}
+            </p>
+            <p className="mw-240 mb0 flex">
+              <span
+                className="truncate px05 bg-info"
+                style={{
+                  backgroundColor: backgroundColorAccessor(highlightedDatum),
+                  borderBottom: `2px solid ${colorAccessor(highlightedDatum)}`,
+                }}
+              >
+                {highlightedDatum.typedText}
+              </span>
+              {claps(highlightedDatum, true)}
+            </p>
+            <p className="mb0">
+              {format(",d")(yAccessor(highlightedDatum))} WPM
+            </p>
+          </Popover>
+        </ErrorBoundary>
       )}
       <Chart
         dimensions={dimensions}
@@ -222,9 +243,7 @@ export default function FinishedSpeedChart({ data }) {
             {crowdedDataPoints ? null : (
               <Circles
                 data={data.dataPoints}
-                accessibleLabel={(d) =>
-                  `${nominalAccessor(d)}: ${format(",d")(yAccessor(d))} WPM`
-                }
+                accessibleLabel={(d) => accessibleLabel(d)}
                 keyAccessor={keyAccessor}
                 xAccessor={xAccessorScaled}
                 yAccessor={yAccessorScaled}
