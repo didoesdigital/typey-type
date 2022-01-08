@@ -118,22 +118,16 @@ export default function FinishedSpeedChart({ data }) {
   };
 
   const accessibleLabel = (d) => {
+    const wpmText = `${format(",d")(yAccessor(d))} WPM`;
     if (d.markedCorrect) {
-      return `${d.material}: ${format(",d")(yAccessor(d))} WPM${claps(
-        d,
-        false
-      )} `;
+      return `${d.material}: ${wpmText}${claps(d)} `;
     } else {
       if (d.material === d.typedText) {
-        return `${d.material}: ${format(",d")(yAccessor(d))} WPM${claps(
-          d,
-          false
-        )}. `;
+        return `${d.material}: ${wpmText}${claps(d)}. `;
       } else {
-        return `${d.material}: ${format(",d")(yAccessor(d))} WPM${claps(
-          d,
-          false
-        )}; you typed: ${d.typedText}. `;
+        return `${d.material}: ${wpmText}${claps(d)}; you typed: ${
+          d.typedText
+        }. `;
       }
     }
   };
@@ -243,7 +237,7 @@ export default function FinishedSpeedChart({ data }) {
             {crowdedDataPoints ? null : (
               <Circles
                 data={data.dataPoints}
-                accessibleLabel={(d) => accessibleLabel(d)}
+                accessibleLabel={accessibleLabel}
                 keyAccessor={keyAccessor}
                 xAccessor={xAccessorScaled}
                 yAccessor={yAccessorScaled}
