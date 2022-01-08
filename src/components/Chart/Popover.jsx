@@ -1,5 +1,4 @@
 import React from "react";
-import { format } from "d3-format";
 
 const popoverMaxWidth = 240;
 const halfPopoverMaxWidth = popoverMaxWidth / 2;
@@ -14,6 +13,7 @@ const Popover = ({
   yAccessorScaled,
   colorAccessor,
   backgroundColorAccessor,
+  children,
   ...props
 }) => {
   const translateX = xAccessorScaled(datum) + dimensions.marginLeft;
@@ -43,40 +43,9 @@ const Popover = ({
   // console.log(`${xAccessor(data[dataIndex])} milliseconds`);
   // console.log(`${format(",d")(xAccessor(data[dataIndex]) / 1000)} seconds`);
 
-  const claps = datum.markedCorrect && !datum.attemptPeak && (
-    <span
-      style={{
-        backgroundColor: "transparent",
-        borderBottom: "2px solid transparent",
-      }}
-      role="img"
-      aria-label=" correct"
-    >
-      &nbsp;👏
-    </span>
-  );
-
   return (
     <div style={popoverStyles} aria-hidden={true}>
-      <p className="mw-240 mb0 mt1 flex">
-        <span className="current-phrase-material truncate px05">
-          {datum.material}
-        </span>
-        {claps}
-      </p>
-      <p className="mw-240 mb0 flex">
-        <span
-          className="truncate px05 bg-info"
-          style={{
-            backgroundColor: backgroundColorAccessor(datum),
-            borderBottom: `2px solid ${colorAccessor(datum)}`,
-          }}
-        >
-          {datum.typedText}
-        </span>
-        {claps}
-      </p>
-      <p className="mb0">{format(",d")(yAccessor(datum))} WPM</p>
+      {children}
     </div>
   );
 };

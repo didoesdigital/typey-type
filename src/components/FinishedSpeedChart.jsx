@@ -27,7 +27,7 @@ export default function FinishedSpeedChart({ data }) {
 
   const xAccessor = (d) => d.elapsedTime;
   const yAccessor = (d) => d.wordsPerMinute;
-  const keyAccessor = (d, i) => i;
+  const keyAccessor = (_, i) => i;
   const nominalAccessor = (d) => d.material;
   const colorAccessor = (d) => {
     if (d.attemptPeak) {
@@ -94,8 +94,50 @@ export default function FinishedSpeedChart({ data }) {
   };
 
   const onCircleFocus = (_, d) => {
-    d ? setHighlightedDatum(d) : setHighlightedDatum(null)
-  }
+    d ? setHighlightedDatum(d) : setHighlightedDatum(null);
+  };
+
+  const claps = (datum) => {
+    return (
+      datum.markedCorrect &&
+      !datum.attemptPeak && (
+        <span
+          style={{
+            backgroundColor: "transparent",
+            borderBottom: "2px solid transparent",
+          }}
+          role="img"
+          aria-label=" correct"
+        >
+          &nbsp;👏
+        </span>
+      )
+    );
+  };
+
+  const popoverContents = (datum) => (
+    <>
+      <p className="mw-240 mb0 mt1 flex">
+        <span className="current-phrase-material truncate px05">
+          {datum.material}
+        </span>
+        {claps(datum)}
+      </p>
+      <p className="mw-240 mb0 flex">
+        <span
+          className="truncate px05 bg-info"
+          style={{
+            backgroundColor: backgroundColorAccessor(datum),
+            borderBottom: `2px solid ${colorAccessor(datum)}`,
+          }}
+        >
+          {datum.typedText}
+        </span>
+        {claps(datum)}
+      </p>
+      <p className="mb0">{format(",d")(yAccessor(datum))} WPM</p>
+    </>
+  );
 
   return (
     <div className="mt3 mb1 relative" style={{ height: "240px" }} ref={ref}>
@@ -125,7 +167,9 @@ export default function FinishedSpeedChart({ data }) {
           yAccessorScaled={yAccessorScaled}
           colorAccessor={colorAccessor}
           backgroundColorAccessor={backgroundColorAccessor}
-        />
+        >
+          {popoverContents(highlightedDatum)}
+        </Popover>
       )}
       <Chart
         dimensions={dimensions}
@@ -202,7 +246,10 @@ export default function FinishedSpeedChart({ data }) {
               transform={`translate(0, ${dimensions.boundedHeight})`}
               dy="1.5em"
             >
-              <tspan role="img" aria-label="Start time">⏱</tspan> {durationFormatter(xScale.domain()[0])}
+              <tspan role="img" aria-label="Start time">
+                ⏱
+              </tspan>{" "}
+              {durationFormatter(xScale.domain()[0])}
             </text>
             <text
               textAnchor="end"
@@ -211,7 +258,10 @@ export default function FinishedSpeedChart({ data }) {
               })`}
               dy="1.5em"
             >
-              {durationFormatter(xScale.domain()[1])} <tspan role="img" aria-label="Finished time">⏱</tspan>
+              {durationFormatter(xScale.domain()[1])}{" "}
+              <tspan role="img" aria-label="Finished time">
+                ⏱
+              </tspan>
             </text>
           </>
         )}
