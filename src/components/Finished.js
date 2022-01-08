@@ -363,7 +363,7 @@ class Finished extends Component {
           </ErrorBoundary>
           <ErrorBoundary relative={true} vanish={true}>
             <a href="#chart-notes" className="skip-to-link skip-to-link--relative" id="ga--finished--skip-chart">Skip chart</a>
-            {this.state.chartData?.dataPoints?.length > 1 && <FinishedSpeedChart data={this.state.chartData} />}
+            {this.state.chartData?.dataPoints?.length > 1 && this.state.chartData?.dataPoints?.length < 10000 && <FinishedSpeedChart data={this.state.chartData} />}
             <SecondaryDisplayMetrics
               newWords={this.props.totalNumberOfNewWordsMet}
               seen={this.props.totalNumberOfLowExposuresSeen}
