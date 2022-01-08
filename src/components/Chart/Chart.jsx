@@ -15,9 +15,9 @@ const Chart = ({
 }) => (
   <ChartContext.Provider value={dimensions}>
     <>
-      <h2 className="visually-hidden" id="chart-title">
+      <h3 className="visually-hidden" id="chart-title">
         {accessibleTitle}
-      </h2>
+      </h3>
       <svg
         width={dimensions.width}
         height={dimensions.height}
