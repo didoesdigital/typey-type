@@ -21,7 +21,7 @@ const Circles = ({
           cx={xAccessor(d)}
           cy={yAccessor(d)}
           r={4}
-          role="list-item"
+          role="listitem"
           style={{
             fill: colorAccessor(d),
           }}
