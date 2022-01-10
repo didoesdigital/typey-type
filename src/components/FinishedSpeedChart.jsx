@@ -85,6 +85,7 @@ export default function FinishedSpeedChart({ data }) {
   const yScaleDomainMax = (maxYPlusBuffer) => {
     if (maxYPlusBuffer < 60) return 60;
     if (maxYPlusBuffer < 100) return 100;
+    if (maxYPlusBuffer < 200) return 200;
     if (maxYPlusBuffer < 300) return 300;
     return 400;
   };
