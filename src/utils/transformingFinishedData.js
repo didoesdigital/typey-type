@@ -50,8 +50,8 @@ function transformLessonDataToChartData(lessonData) {
           hint: typedMaterial.stroke,
           hintWasShown: attempt.hintWasShown,
           attemptPeak: true,
-        })
-      })
+        });
+      });
     }
 
     dataPoints.push({
@@ -68,8 +68,8 @@ function transformLessonDataToChartData(lessonData) {
       markedCorrect: typedMaterial.accuracy,
       hint: typedMaterial.stroke,
       hintWasShown: typedMaterial.hintWasShown,
-    })
-  })
+    });
+  });
 
   transformedData.dataPoints = dataPoints;
 
@@ -81,7 +81,4 @@ function transformLessonDataToChartData(lessonData) {
   return transformedData;
 }
 
-export {
-  stitchTogetherLessonData,
-  transformLessonDataToChartData,
-};
+export { stitchTogetherLessonData, transformLessonDataToChartData };
