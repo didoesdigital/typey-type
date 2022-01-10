@@ -49,7 +49,13 @@ export default function FinishedSpeedChart({ data }) {
   const yAccessor = (d) => d.wordsPerMinute;
   const keyAccessor = (_, i) => i;
   const nominalAccessor = (d) => d.material;
+
+  const minimumStrokes = 4;
   const colorAccessor = (d) => {
+    if ("materialIndex" in d && d.materialIndex < minimumStrokes) {
+      return "#676170";
+    }
+
     if (d.attemptPeak) {
       return d.markedCorrect ? "#CD840E" : "#E17547";
     } else {
