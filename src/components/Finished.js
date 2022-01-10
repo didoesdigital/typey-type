@@ -4,11 +4,18 @@ import UserSettings from './UserSettings';
 import { IconRestart } from './Icon';
 import { Link } from 'react-router-dom';
 import { stitchTogetherLessonData, transformLessonDataToChartData } from '../utils/transformingFinishedData'
+import ComponentLoading from './ComponentLoading';
+import Loadable from 'react-loadable';
 import DisplayMetric from './DisplayMetric'
-import FinishedSpeedChart from './FinishedSpeedChart'
 import ErrorBoundary from './ErrorBoundary'
 import * as Confetti from './../utils/confetti';
 import 'react-tippy/dist/tippy.css'
+
+const AsyncFinishedSpeedChart = Loadable({
+  loader: () => import("./FinishedSpeedChart"),
+  loading: ComponentLoading,
+  delay: 300
+});
 
 let particles = [];
 
@@ -363,7 +370,7 @@ class Finished extends Component {
           </ErrorBoundary>
           <ErrorBoundary relative={true} vanish={true}>
             <a href="#chart-notes" className="skip-to-link skip-to-link--relative" id="ga--finished--skip-chart">Skip chart</a>
-            {this.state.chartData?.dataPoints?.length > 1 && this.state.chartData?.dataPoints?.length < 10000 && <FinishedSpeedChart data={this.state.chartData} />}
+            {this.state.chartData?.dataPoints?.length > 1 && this.state.chartData?.dataPoints?.length < 10000 && <AsyncFinishedSpeedChart data={this.state.chartData} />}
             <SecondaryDisplayMetrics
               newWords={this.props.totalNumberOfNewWordsMet}
               seen={this.props.totalNumberOfLowExposuresSeen}
