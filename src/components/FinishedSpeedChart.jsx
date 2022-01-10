@@ -182,7 +182,12 @@ export default function FinishedSpeedChart({ data }) {
               {claps(highlightedDatum, true)}
             </p>
             <p className="mb0">
-              {format(",d")(yAccessor(highlightedDatum))} WPM{highlightedDatum.hintWasShown ? <span aria-label="(hinted)" role="img">&nbsp;ℹ️</span> : null}
+              {format(",d")(yAccessor(highlightedDatum))} WPM
+              {highlightedDatum.hintWasShown ? (
+                <span aria-label="(hinted)" role="img">
+                  &nbsp;ℹ️
+                </span>
+              ) : null}
             </p>
           </Popover>
         </ErrorBoundary>
