@@ -77,7 +77,7 @@ function transformLessonDataToChartData(lessonData) {
    * To make more fixtures for stories, uncomment this console.log
    * and type out a lesson.
    */
-  // console.log(transformedData);
+  console.log(transformedData);
   return transformedData;
 }
 
