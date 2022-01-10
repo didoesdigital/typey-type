@@ -12,6 +12,7 @@ function stitchTogetherLessonData(lessonStrokes, startTime, wpm) {
 function transformLessonDataToChartData(lessonData) {
   let transformedData = {
     averageWPM: lessonData.wpm,
+    version: lessonData.version,
   };
 
   let dataPoints = [];
