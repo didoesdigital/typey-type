@@ -7,6 +7,7 @@ const Line = ({
   xAccessor,
   yAccessor,
   y0Accessor,
+  colorAccessor = "#9880C2",
   interpolation,
   ...props
 }) => {
@@ -23,12 +24,12 @@ const Line = ({
   const styles =
     type === "area"
       ? {
-          fill: "rgb(60%, 50%, 76%, 0.2)",
+          fill: colorAccessor,
           strokeWidth: 0,
         }
       : {
           fill: "none",
-          stroke: "#9880C2",
+          stroke: colorAccessor,
           strokeWidth: "3px",
           strokeLinecap: "round",
         };

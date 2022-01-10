@@ -53,7 +53,7 @@ export default function FinishedSpeedChart({ data }) {
   const minimumStrokes = 4;
   const colorAccessor = (d) => {
     if ("materialIndex" in d && d.materialIndex < minimumStrokes) {
-      return "#676170";
+      return "#868091";
     }
 
     if (d.attemptPeak) {
@@ -188,6 +188,10 @@ export default function FinishedSpeedChart({ data }) {
               {claps(highlightedDatum, true)}
             </p>
             <p className="mb0">
+              {"materialIndex" in highlightedDatum &&
+              highlightedDatum.materialIndex < minimumStrokes
+                ? "~"
+                : ""}
               {format(",d")(yAccessor(highlightedDatum))} WPM
               {highlightedDatum.hintWasShown ? (
                 <span aria-label="(hinted)" role="img">
@@ -237,6 +241,7 @@ export default function FinishedSpeedChart({ data }) {
               yAccessor={yAccessorScaled}
               y0Accessor={y0AccessorScaled}
               interpolation={curveMonotoneX}
+              colorAccessor={"#9880C2"}
             />
             <Line
               type="area"
@@ -245,6 +250,21 @@ export default function FinishedSpeedChart({ data }) {
               yAccessor={yAccessorScaled}
               y0Accessor={y0AccessorScaled}
               interpolation={curveMonotoneX}
+              colorAccessor={"rgba(60%, 50%, 76%, 0.2)"}
+            />
+            <Line
+              type="line"
+              data={data.dataPoints.filter(
+                (d) =>
+                  !d.attemptPeak &&
+                  "materialIndex" in d &&
+                  d.materialIndex < minimumStrokes
+              )}
+              xAccessor={xAccessorScaled}
+              yAccessor={yAccessorScaled}
+              y0Accessor={y0AccessorScaled}
+              interpolation={curveMonotoneX}
+              colorAccessor={"#868091"}
             />
             {crowdedDataPoints ? null : (
               <Circles
