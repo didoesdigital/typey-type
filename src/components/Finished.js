@@ -351,6 +351,8 @@ class Finished extends Component {
       wpmCommentary = this.props.lessonTitle;
     }
 
+    const shouldShowChart = this.state.chartData?.dataPoints?.length > 1 && this.state.chartData?.dataPoints?.length < 10000;
+
     let lessonSummary = (
       <div className="finished-lesson mx-auto mw-1440">
         <div className="finished-summary mb3 text-center">
@@ -370,7 +372,7 @@ class Finished extends Component {
           </ErrorBoundary>
           <ErrorBoundary relative={true} vanish={true}>
             <a href="#chart-notes" className="skip-to-link skip-to-link--relative" id="ga--finished--skip-chart">Skip chart</a>
-            {this.state.chartData?.dataPoints?.length > 1 && this.state.chartData?.dataPoints?.length < 10000 && <AsyncFinishedSpeedChart data={this.state.chartData} />}
+            {shouldShowChart && <AsyncFinishedSpeedChart data={this.state.chartData} />}
             <SecondaryDisplayMetrics
               newWords={this.props.totalNumberOfNewWordsMet}
               seen={this.props.totalNumberOfLowExposuresSeen}
@@ -380,11 +382,15 @@ class Finished extends Component {
               wordsTyped={this.props.currentLessonStrokes?.length || 0}
               setAnnouncementMessage={this.props.setAnnouncementMessage}
             />
-            <div aria-hidden="true">
-              <p className="text-left de-emphasized mb0"><span style={{ backgroundColor: "transparent", borderBottom: "2px solid transparent", }} role="img" aria-label=" correct" >👏</span> means you typed the phrase within the target number of strokes</p>
-              <p className="text-left de-emphasized mb1"><span aria-label="(hinted)" role="img">ℹ️</span> means the hint was shown</p>
-            </div>
-            <p className="text-left de-emphasized" id="chart-notes">Note: The first 4 words are averaged to reduce the impact of early spikes. Typey&nbsp;Type starts recording the instant you start typing, so instead of recording the first word at infinity words per minute, it’s set to&nbsp;zero. </p>
+            {shouldShowChart &&
+            <>
+              <div aria-hidden="true">
+                <p className="text-left de-emphasized mb0"><span style={{ backgroundColor: "transparent", borderBottom: "2px solid transparent", }} role="img" aria-label=" correct" >👏</span> means you typed the phrase within the target number of strokes</p>
+                <p className="text-left de-emphasized mb1"><span aria-label="(hinted)" role="img">ℹ️</span> means the hint was shown</p>
+              </div>
+              <p className="text-left de-emphasized" id="chart-notes">Note: The first 4 words are averaged to reduce the impact of early spikes. Typey&nbsp;Type starts recording the instant you start typing, so instead of recording the first word at infinity words per minute, it’s set to&nbsp;zero. </p>
+            </>
+            }
           </ErrorBoundary>
           <p className="mb12">
             <a href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
