@@ -184,7 +184,7 @@ export default function FinishedSpeedChart({ data }) {
                   borderBottom: `2px solid ${colorAccessor(highlightedDatum)}`,
                 }}
               >
-                {highlightedDatum.typedText}
+                {highlightedDatum.typedText.replace(/^ $/, ' ')}
               </span>
               {claps(highlightedDatum, true)}
             </p>
