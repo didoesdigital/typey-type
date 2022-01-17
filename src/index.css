@@ -76,7 +76,8 @@ a {
     color: #202549; }
 
 pre {
-  font: 700 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace; }
+  font: 700 1rem/1.6 "Overpass Mono", Consolas, "Andale Mono", Monaco, "Courier New", Courier, monospace;
+  font-variant-ligatures: no-common-ligatures; }
 
 .abbr,
 abbr[data-original-title],

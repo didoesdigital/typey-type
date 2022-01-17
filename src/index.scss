@@ -162,6 +162,7 @@ a {
 
 pre {
   font: $heavy-type;
+  font-variant-ligatures: no-common-ligatures;
 }
 
 .abbr,
