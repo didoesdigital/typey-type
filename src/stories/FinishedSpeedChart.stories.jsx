@@ -7,6 +7,7 @@ import discoverInversionTwice from "./fixtures/discoverInversionTwice.json";
 import discoverIntroduction from "./fixtures/discoverIntroduction.json";
 import practiceProverb from "./fixtures/practiceProverb.json";
 import practiceProverbZ from "./fixtures/practiceProverbZ.json";
+import topProjectGutenbergWords from "./fixtures/topProjectGutenbergWords.json";
 
 /* NOTE:
  * To make more fixtures, add a console.log for the transformedData
@@ -125,6 +126,12 @@ WPM41.args = {
   data: practiceProverb,
 };
 WPM41.storyName = "41 WPM lesson (TODO)";
+
+export const WPM58 = Template.bind({});
+WPM58.args = {
+  data: topProjectGutenbergWords,
+};
+WPM58.storyName = "58 WPM lesson";
 
 export const WPM61 = Template.bind({});
 WPM61.args = {
