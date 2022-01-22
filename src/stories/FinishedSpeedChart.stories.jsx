@@ -1,5 +1,6 @@
 import React from "react";
 import FinishedSpeedChart from "../components/FinishedSpeedChart";
+import catHavoc from "./fixtures/catHavoc.json";
 import customTestPhrases from "./fixtures/customTestPhrases.json";
 import shortAndSlow from "./fixtures/shortAndSlow.json";
 import discoverInversion from "./fixtures/discoverInversion.json";
@@ -132,6 +133,12 @@ WPM58.args = {
   data: topProjectGutenbergWords,
 };
 WPM58.storyName = "58 WPM lesson";
+
+export const WPM60 = Template.bind({});
+WPM60.args = {
+  data: catHavoc,
+};
+WPM60.storyName = "60 WPM lesson (cat havoc)";
 
 export const WPM61 = Template.bind({});
 WPM61.args = {
