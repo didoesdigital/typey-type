@@ -1,5 +1,6 @@
 import React from "react";
 import FinishedSpeedChart from "../components/FinishedSpeedChart";
+import catHavoc from "./fixtures/catHavoc.json";
 import customTestPhrases from "./fixtures/customTestPhrases.json";
 import shortAndSlow from "./fixtures/shortAndSlow.json";
 import discoverInversion from "./fixtures/discoverInversion.json";
@@ -7,6 +8,7 @@ import discoverInversionTwice from "./fixtures/discoverInversionTwice.json";
 import discoverIntroduction from "./fixtures/discoverIntroduction.json";
 import practiceProverb from "./fixtures/practiceProverb.json";
 import practiceProverbZ from "./fixtures/practiceProverbZ.json";
+import topProjectGutenbergWords from "./fixtures/topProjectGutenbergWords.json";
 
 /* NOTE:
  * To make more fixtures, add a console.log for the transformedData
@@ -125,6 +127,18 @@ WPM41.args = {
   data: practiceProverb,
 };
 WPM41.storyName = "41 WPM lesson (TODO)";
+
+export const WPM58 = Template.bind({});
+WPM58.args = {
+  data: topProjectGutenbergWords,
+};
+WPM58.storyName = "58 WPM lesson";
+
+export const WPM60 = Template.bind({});
+WPM60.args = {
+  data: catHavoc,
+};
+WPM60.storyName = "60 WPM lesson (cat havoc)";
 
 export const WPM61 = Template.bind({});
 WPM61.args = {
