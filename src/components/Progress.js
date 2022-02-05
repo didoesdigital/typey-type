@@ -12,6 +12,7 @@ import { getLessonIndexData } from './../utils/lessonIndexData';
 import { IconCheckmark, IconTriangleRight } from './Icon';
 import { Link, Redirect } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
+import { trimAndSumUniqMetWords } from './../utils/typey-type';
 import { ReactComponent as AlertRobot } from '../images/AlertRobot.svg';
 import { ReactComponent as BoredRobot } from '../images/BoredRobot.svg';
 import { ReactComponent as HappyRobot } from '../images/HappyRobot.svg';
@@ -52,6 +53,7 @@ class Progress extends Component {
       showRecommendationsSurveyLink: true,
       showSetGoalsForm: false,
       progressPercent: 0,
+      reformattedProgress: {},
       yourWordCount: 0,
       yourSeenWordCount: 0,
       yourMemorisedWordCount: 0,
@@ -151,6 +153,25 @@ class Progress extends Component {
     });
   }
 
+  downloadReformattedProgress() {
+    let spacePlacement = this.props.userSettings.spacePlacement;
+    let reformattedProgress = trimAndSumUniqMetWords(this.props.metWords);
+
+    if (spacePlacement === "spaceBeforeOutput") {
+      reformattedProgress = Object.fromEntries(Object.entries(reformattedProgress).map(([word, count]) => [" " + word, count]));
+    }
+    else if (spacePlacement === "spaceAfterOutput") {
+      reformattedProgress = Object.fromEntries(Object.entries(reformattedProgress).map(([word, count]) => [word + " ", count]));
+    }
+
+    this.setState({reformattedProgress: reformattedProgress});
+
+    GoogleAnalytics.event({
+      category: 'Downloads',
+      action: 'Click',
+      label: 'typey-type-reformatted-progress.json',
+    });
+  }
 
   startRecommendedStep(e) {
 
@@ -525,6 +546,35 @@ class Progress extends Component {
     }
   }
 
+  formatSpacePlacementValue(userSettings) {
+    if (!userSettings?.spacePlacement) {
+      return "not set"
+    }
+
+    switch (userSettings.spacePlacement) {
+      case "spaceBeforeOutput":
+        return "Space before output"
+      case "spaceAfterOutput":
+        return "Space after output"
+      case "spaceOff":
+        return "Ignore spaces"
+      case "spaceExact":
+        return "Exact spacing"
+
+      default:
+        return "not set"
+    }
+  }
+
+  makeDownloadHref(json) {
+    if (Blob !== undefined) {
+      return URL.createObjectURL(new Blob([JSON.stringify(json)], {type: "text/json"}));
+    }
+    else {
+      return "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json));
+    }
+  }
+
   render () {
     var grabStyle = function() {return false};
     if (this.state.toRecommendedNextLesson === true) {
@@ -722,15 +772,9 @@ class Progress extends Component {
 
     let date = new Date();
     let dashifiedDate = date.toDateString().replace(/ /g,'-').toLowerCase();
-    let downloadProgressHref;
 
-    if (Blob !== undefined) {
-      let blob = new Blob([JSON.stringify(this.props.metWords)], {type: "text/json"});
-      downloadProgressHref = URL.createObjectURL(blob);
-    }
-    else {
-      downloadProgressHref = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.metWords));
-    }
+    const downloadProgressHref = this.makeDownloadHref(this.props.metWords);
+    const downloadReformattedProgressHref = this.makeDownloadHref(this.state.reformattedProgress);
 
     let oldWordsNumericInput = (
       <NumericInput
@@ -983,6 +1027,7 @@ class Progress extends Component {
             </div>
 
             <h3>Vocabulary progress</h3>
+            <p>If you’ve changed your spacing settings, you can download a reformatted “progress file” to match your new setting. After downloading it, if you're happy it looks good you can load it back into Typey Type. Then visit each lesson to update lesson progress. Your current spacing setting is: {this.formatSpacePlacementValue(this.props.userSettings)}: <a href={downloadReformattedProgressHref} download={"typey-type-reformatted-progress-" + dashifiedDate + ".json"} onClick={this.downloadReformattedProgress.bind(this)}>Download reformatted progress file</a></p>
             <p>Words you’ve seen and times you’ve typed them well:</p>
             <p id="js-metwords-from-typey-type" className="w-100 mt3 mb3 quote wrap"><small>{metWordsFromTypeyType}</small></p>
           </div>

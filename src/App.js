@@ -2322,6 +2322,7 @@ class App extends Component {
                           updateUserGoals={this.updateUserGoals.bind(this)}
                           updateUserGoalsUnveiled={this.updateUserGoalsUnveiled.bind(this)}
                           userGoals={this.state.userGoals}
+                          userSettings={this.state.userSettings}
                           oldWordsGoalUnveiled={this.state.oldWordsGoalUnveiled}
                           newWordsGoalUnveiled={this.state.newWordsGoalUnveiled}
                           yourSeenWordCount={this.state.yourSeenWordCount}
