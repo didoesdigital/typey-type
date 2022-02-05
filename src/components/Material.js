@@ -19,7 +19,7 @@ class Material extends Component {
 
     const [matched, unmatched] = matchSplitText(this.props.currentPhrase, this.props.actualText, this.props.settings, this.props.userSettings);
     const nextMaterial = this.props.upcomingPhrases.length > 0 ? this.props.upcomingPhrases[0] : '';
-    const nextUpcomingClasses = `de-emphasized upcoming-phrases bw-2 b--brand-primary-tint ${nextMaterial.includes(' ') ? 'bbs' : ''}`
+    const nextUpcomingClasses = `de-emphasized upcoming-phrases bw-2 b--brand-primary-tint--60 ${nextMaterial.includes(' ') ? 'bb-dotted' : ''}`
     const restUpcomingMaterial = this.props.upcomingPhrases.length > 1 ? this.props.upcomingPhrases.slice(1).join(' ') : '';
 
     return (

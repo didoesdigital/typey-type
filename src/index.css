@@ -451,8 +451,8 @@ input:focus::placeholder {
   border-bottom-style: solid;
   border-bottom-width: 1px; }
 
-.bbs {
-  border-bottom-style: solid; }
+.bb-dotted {
+  border-bottom-style: dotted; }
 
 .bt {
   border-top-style: solid;
