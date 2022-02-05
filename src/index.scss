@@ -474,6 +474,9 @@ input:focus::placeholder {
 .bw-1 {
   border-width: 1px;
 }
+.bw-2 {
+  border-width: 2px;
+}
 .bw-12 {
   border-width: 12px;
 }
@@ -495,6 +498,9 @@ input:focus::placeholder {
 .bb {
   border-bottom-style: solid;
   border-bottom-width: 1px;
+}
+.bbs {
+  border-bottom-style: solid;
 }
 .bt {
   border-top-style: solid;

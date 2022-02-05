@@ -2125,7 +2125,7 @@ class App extends Component {
   }
 
   presentUpcomingMaterial() {
-    return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getRemaining().slice(0,63).map(item => item.phrase).join(" ") : [];
+    return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getRemaining().slice(0,63).map(item => item.phrase) : [];
   }
 
   setDictionaryIndex() {
