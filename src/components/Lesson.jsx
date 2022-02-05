@@ -235,14 +235,16 @@ class Lesson extends Component {
         if (this.props.userSettings.stenoLayout === 'stenoLayoutKoreanModernCSteno') { layoutTypeStyle = ' heavy-type-face--korean'; }
         if (this.props.userSettings.stenoLayout === 'stenoLayoutJapaneseSteno') { layoutTypeStyle = ' type-face--japanese'; }
 
+        const diagramWidth = (this.props.userSettings.diagramSize || 1) * 140;
+
         strokeTip = (
           <div className="stroke-tip" aria-live="polite" aria-atomic="true">
             <span className="visually-hidden" aria-hidden={this.props.userSettings.showStrokesAsDiagrams ? 'true' : 'false'}>Hint: </span>
             <div className="flex flex-wrap mr05">
               {this.props.userSettings.showStrokesAsDiagrams && strokes.map((strokeToDraw, index) =>
                 <React.Fragment key={index}>
-                  {(Object.values(mapBriefsFunction(strokeToDraw)).some(item => item)) && <div className="mt1 mr2"><StenoLayoutDiagram id={'diagramID-' + index + '-' + strokeToDraw} {...mapBriefsFunction(strokeToDraw)} brief={strokeToDraw} /></div> }
-                  {(Object.values(mapBriefsFunction(strokeToDraw)).every(item => !item)) && <div className="mt1 mr2 unknown-steno-diagram" aria-hidden={true}><StenoLayoutDiagram id={'diagramID-' + index + '-' + strokeToDraw} {...mapBriefsFunction('')} brief='' /></div> }
+                  {(Object.values(mapBriefsFunction(strokeToDraw)).some(item => item)) && <div className="mt1 mr2"><StenoLayoutDiagram id={'diagramID-' + index + '-' + strokeToDraw} {...mapBriefsFunction(strokeToDraw)} brief={strokeToDraw} diagramWidth={diagramWidth} /></div> }
+                  {(Object.values(mapBriefsFunction(strokeToDraw)).every(item => !item)) && <div className="mt1 mr2 unknown-steno-diagram" aria-hidden={true}><StenoLayoutDiagram id={'diagramID-' + index + '-' + strokeToDraw} {...mapBriefsFunction('')} brief='' diagramWidth={diagramWidth} /></div> }
                 </React.Fragment>
               )}
             </div>
@@ -491,7 +493,7 @@ class Lesson extends Component {
                                 currentPhrase={this.props.currentPhrase}
                                 setAnnouncementMessage={this.props.setAnnouncementMessage}
                               />
-                              <div>
+                              <div className="mb6">
                                 {strokeTip}
                               </div>
                               <LessonLengthPreview
@@ -525,6 +527,7 @@ class Lesson extends Component {
                         changeUserSetting={this.props.changeUserSetting}
                         chooseStudy={this.props.chooseStudy}
                         disableUserSettings={this.props.disableUserSettings}
+                        handleDiagramSize={this.props.handleDiagramSize}
                         handleBeatsPerMinute={this.props.handleBeatsPerMinute}
                         handleLimitWordsChange={this.props.handleLimitWordsChange}
                         handleStartFromWordChange={this.props.handleStartFromWordChange}

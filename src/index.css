@@ -1033,7 +1033,7 @@ input:focus::placeholder {
 .lesson-canvas {
   display: flex;
   position: relative;
-  max-height: 360px;
+  max-height: 960px;
   min-height: 320px;
   overflow: hidden;
   z-index: 0; }

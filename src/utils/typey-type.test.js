@@ -1560,6 +1560,7 @@ describe('loadPersonalPreferences', () => {
         beatsPerMinute: 10,
         blurMaterial: false,
         caseSensitive: false,
+        diagramSize: 1.0,
         simpleTypography: true,
         retainedWords: true,
         limitNumberOfWords: 45,

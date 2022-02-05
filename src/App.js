@@ -325,6 +325,7 @@ class App extends Component {
         beatsPerMinute: 10,
         blurMaterial: false,
         caseSensitive: false,
+        diagramSize: 1.0,
         simpleTypography: true,
         retainedWords: true,
         limitNumberOfWords: 45,
@@ -582,6 +583,33 @@ class App extends Component {
     });
 
     return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
+  }
+
+  handleDiagramSize(event) {
+    let currentState = this.state.userSettings;
+    let newState = Object.assign({}, currentState);
+
+    const name = "diagramSize"
+    let value = typeof event === 'number' ? event.toFixed(1) : 1.0;
+    if (value > 2) { value = 2.0; }
+    if (value < 1) { value = 1.0; }
+
+    newState[name] = value;
+
+    this.setState({userSettings: newState}, () => {
+      writePersonalPreferences('userSettings', this.state.userSettings);
+    });
+
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change diagram size',
+      label: labelString
+    });
+
+    return value;
   }
 
   handleBeatsPerMinute(event) {
@@ -2439,6 +2467,7 @@ class App extends Component {
                           currentStroke={presentedMaterialCurrentItem.stroke}
                           disableUserSettings={this.state.disableUserSettings}
                           handleBeatsPerMinute={this.handleBeatsPerMinute.bind(this)}
+                          handleDiagramSize={this.handleDiagramSize.bind(this)}
                           handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
                           handleStartFromWordChange={this.handleStartFromWordChange.bind(this)}
                           handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}

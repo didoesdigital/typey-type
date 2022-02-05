@@ -408,6 +408,46 @@ class UserSettings extends Component {
                       </div>
                     </div>
                   </li>
+                  <li className="ml0 pl1 bt b--brand-primary-tint--60">
+                    <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                      <Tooltip
+                        title="Diagram size"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        <label className="mr1" htmlFor="diagramSize">Diagram size</label>
+                      </Tooltip>
+                      <div>
+                        <NumericInput
+                          autoCapitalize="off"
+                          autoComplete="on"
+                          autoCorrect="on"
+                          autoFocus={false}
+                          className="form-control w-100"
+                          disabled={this.props.disableUserSettings}
+                          id="diagramSize"
+                          min={1.0}
+                          max={2.0}
+                          name="diagramSize"
+                          onChange={this.props.handleDiagramSize}
+                          precision={1}
+                          spellCheck="false"
+                          step={0.1}
+                          style={grabStyle()}
+                          type="number"
+                          value={this.props.userSettings.diagramSize}
+                          snap
+                        />
+                      </div>
+                    </div>
+                  </li>
                 <li className="ml0 pl1 bt b--brand-primary-tint--60">
 
                   <div className="checkbox-group p1">
