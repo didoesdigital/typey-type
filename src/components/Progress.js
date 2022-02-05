@@ -541,23 +541,23 @@ class Progress extends Component {
     let lessonsProgressFromTypeyType = this.props.lessonsProgress;
     const linkList = this.props.lessonIndex.map( (lesson) => {
       let lessonsubtitle = '';
-      let lessonWordCount = 0;
-      let lessonWordCountInIndex = '';
+      let wordCountDenominator = 0;
       let numberOfWordsSeenOrMemorised = 0;
       let lessonCompletion;
       if (lesson.subtitle && lesson.subtitle.length > 0) {
         lessonsubtitle = ': '+lesson.subtitle;
       }
       if (lesson.wordCount && lesson.wordCount > 0) {
-        lessonWordCount = lesson.wordCount;
-        lessonWordCountInIndex = '' + lessonWordCount;
+        wordCountDenominator = lesson.wordCount;
       }
       if (lessonsProgressFromTypeyType && lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]) {
-        let seen = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path].numberOfWordsSeen || 0;
-        let memorised = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path].numberOfWordsMemorised || 0;
+        let toDiscover = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]?.numberOfWordsToDiscover || 0;
+        let seen = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]?.numberOfWordsSeen || 0;
+        let memorised = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]?.numberOfWordsMemorised || 0;
         numberOfWordsSeenOrMemorised = seen + memorised;
-        if ((numberOfWordsSeenOrMemorised >= lessonWordCountInIndex) || (numberOfWordsSeenOrMemorised > 100)) {
-          if (numberOfWordsSeenOrMemorised >= lessonWordCountInIndex) { numberOfWordsSeenOrMemorised = lessonWordCountInIndex; }
+        wordCountDenominator = seen + memorised + toDiscover;
+        if ((numberOfWordsSeenOrMemorised >= wordCountDenominator) || (numberOfWordsSeenOrMemorised > 100)) {
+          if (numberOfWordsSeenOrMemorised >= wordCountDenominator) { numberOfWordsSeenOrMemorised = wordCountDenominator; }
           lessonCompletion = this.lessonComplete();
         } else if (numberOfWordsSeenOrMemorised > 0) {
           lessonCompletion = this.inProgress();
@@ -569,7 +569,7 @@ class Progress extends Component {
       }
       if (lesson.category === "Fundamentals" || (lesson.category === "Drills" && lesson.title.startsWith("Top 100")) || (lesson.category === "Drills" && lesson.title.startsWith("Top 200"))) {
         return(
-          <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeenOrMemorised} of {lessonWordCountInIndex}</small></li>
+          <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeenOrMemorised} of {wordCountDenominator}</small></li>
         )
       } else {
         return "";
