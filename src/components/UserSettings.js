@@ -552,20 +552,7 @@ class UserSettings extends Component {
                   </li>
                   <li className="ml0 pl1 bt b--brand-primary-tint">
                     <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
-                      <Tooltip
-                        title="Diagram size"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        <label className="mr1" htmlFor="diagramSize">Diagram size</label>
-                      </Tooltip>
+                      <label className="mr1" htmlFor="diagramSize">Diagram size</label>
                       <div>
                         <NumericInput
                           autoCapitalize="off"
