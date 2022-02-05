@@ -1596,12 +1596,12 @@ class App extends Component {
         lesson: newLesson,
         currentPhraseID: 0
       }, () => {
-    if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom") && !this.state.lesson.path.endsWith("/lessons/custom/setup")) {
-      let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
-      let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
-      writePersonalPreferences('lessonsProgress', lessonsProgress);
-      writePersonalPreferences('recentLessons', recentLessons);
-    }
+        if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom") && !this.state.lesson.path.endsWith("/lessons/custom/setup")) {
+          let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
+          let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
+          writePersonalPreferences('lessonsProgress', lessonsProgress);
+          writePersonalPreferences('recentLessons', recentLessons);
+        }
       });
 
     });
