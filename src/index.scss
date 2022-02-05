@@ -535,6 +535,10 @@ input:focus::placeholder {
 
 .h-168 { height: 168px; }
 
+.right-0  { right:  0; }
+.left-0   { left:   0; }
+.b6       { bottom: 48px; }
+
 .mb0     { margin-bottom: 0; }
 .mb025   { margin-bottom: 2px; }
 .mb05    { margin-bottom: 4px; }
@@ -2216,6 +2220,9 @@ $lineAdjustment: 4px;
 .show-scores-control--hidden {
   opacity: 0;
   transition: opacity .1s linear;
+}
+.transition-opacity {
+  transition: opacity .5s linear;
 }
 
 .recommendation-survey-link--shown,
