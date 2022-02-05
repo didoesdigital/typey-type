@@ -887,12 +887,17 @@ class App extends Component {
       }
     }
 
+    console.log({ wordsLeftToDiscover })
+    console.log({ seenAccumulator })
+    console.log({ memorisedAccumulator })
+
     let uniqueLowerCasedWordsLeftToDiscover = [...new Set(wordsLeftToDiscover)];
 
     let numberOfWordsToDiscover = 0;
     if (uniqueLowerCasedWordsLeftToDiscover && uniqueLowerCasedWordsLeftToDiscover.length > 0) {
       numberOfWordsToDiscover = uniqueLowerCasedWordsLeftToDiscover.length;
     }
+    console.log({ numberOfWordsToDiscover })
 
     // See comment above
     // FIXME
