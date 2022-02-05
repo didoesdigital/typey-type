@@ -839,10 +839,13 @@ class App extends Component {
       numberOfWordsSeen = lessonsProgress[lessonpath].numberOfWordsSeen;
     }
 
+    let material = this.state.lesson?.sourceMaterial ? this.state.lesson.sourceMaterial.map(copy => ({...copy})) : [{phrase: "the", stroke: "-T"}];
+    if (this.state.userSettings.simpleTypography) {
+      material = replaceSmartTypographyInPresentedMaterial.call(this, material);
+    }
+
     let metWords = this.state.metWords;
-    let sourceMaterial;
-    sourceMaterial = (this.state.lesson && this.state.lesson.sourceMaterial) ? this.state.lesson.sourceMaterial : [{phrase: "the", stroke: "-T"}];
-    let len = sourceMaterial.length;
+    let len = material.length;
     let seenAccumulator = 0;
     let memorisedAccumulator = 0;
 
@@ -859,7 +862,7 @@ class App extends Component {
     let alreadyChecked = [];
     let wordsLeftToDiscover = [];
     for (let i = 0; i < len; ++i) {
-      let sourceMaterialPhrase = sourceMaterial[i].phrase;
+      let sourceMaterialPhrase = material[i].phrase;
       sourceMaterialPhrase = sourceMaterialPhrase.trim();
 
       // have you seen this word?
