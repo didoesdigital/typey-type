@@ -435,7 +435,15 @@ class Finished extends Component {
         );
       }
       emptyAndZeroStateMessage = (
-        <div className="text-center mt10 mx-auto"><span id="js-no-words-to-write" tabIndex="-1">There are no words to write.</span> {startFromWordOneButton}</div>
+        <div className="text-center mt10 mx-auto">
+          <span id="js-no-words-to-write" tabIndex="-1">There are no words to write.</span>
+          {startFromWordOneButton ||
+          (<div className="text-center">
+            <Link to={this.props.suggestedNext} className="button mt3 dib" style={{lineHeight: 2}} role="button">
+              Next lesson
+            </Link>
+          </div>) }
+        </div>
       );
       lessonSummary = '';
     } else {
