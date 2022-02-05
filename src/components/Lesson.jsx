@@ -12,6 +12,7 @@ import LessonNotFound from './LessonNotFound';
 import Loadable from 'react-loadable';
 import Material from './Material';
 import TypedText from './TypedText';
+import LessonLengthPreview from './LessonLengthPreview';
 import Scores from './Scores';
 import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
 import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
@@ -493,6 +494,11 @@ class Lesson extends Component {
                               <div>
                                 {strokeTip}
                               </div>
+                              <LessonLengthPreview
+                                lessonStarted={this.props.disableUserSettings}
+                                speed={this.props.userSettings?.beatsPerMinute || 10}
+                                totalWords={propsLesson.presentedMaterial.length}
+                              />
                             </div>
                           </div>
                           <LessonCanvasFooter
