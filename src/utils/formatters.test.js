@@ -63,37 +63,36 @@ describe('durationFormatter', () => {
 describe('humanDurationFormatter', () => {
   it('returns human friendly formatted string showing less than a second', () => {
     const duration = 0;
-    expect(humanDurationFormatter(duration)).toEqual("1 sec");
+    expect(humanDurationFormatter(duration)).toEqual("<1 min");
   });
 
   it('returns human friendly formatted string showing less than a minute', () => {
-    const duration = 3000;
-    expect(humanDurationFormatter(duration)).toEqual("0 min 3 sec");
+    const duration = 0.2;
+    expect(humanDurationFormatter(duration)).toEqual("<1 min");
   });
 
   it('returns human friendly formatted string showing between 1 and 2 minutes', () => {
-    const duration = 63000;
-    expect(humanDurationFormatter(duration)).toEqual("1 min 3 sec");
+    const duration = 1.7;
+    expect(humanDurationFormatter(duration)).toEqual("~1 min");
   });
 
   it('returns human friendly formatted string showing between 2 and 3 minutes', () => {
-    const duration = 123000;
-    expect(humanDurationFormatter(duration)).toEqual("2 min 3 sec");
+    const duration = 2.5;
+    expect(humanDurationFormatter(duration)).toEqual("~2 min");
   });
 
   it('returns human friendly formatted string showing between 1 and 2 hours', () => {
-    const duration = 3600000;
-    expect(humanDurationFormatter(duration)).toEqual("1 hr 0 min");
+    const duration = 61;
+    expect(humanDurationFormatter(duration)).toEqual("~1 hr 1 min");
   });
 
   it('returns human friendly formatted string showing between 2 and 10 hours', () => {
-    const duration = 7307000;
-    // NOTE: rounds down from 1 min 47 seconds to 1 min
-    expect(humanDurationFormatter(duration)).toEqual("2 hr 1 min");
+    const duration = 120;
+    expect(humanDurationFormatter(duration)).toEqual("~2 hr 0 min");
   });
 
   it('returns human friendly formatted string more than 10 hours', () => {
-    const duration = 36000000;
+    const duration = 600;
     expect(humanDurationFormatter(duration)).toEqual("10+ hours");
   });
 });
