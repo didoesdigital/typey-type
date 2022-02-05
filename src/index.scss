@@ -2314,6 +2314,14 @@ $lineAdjustment: 4px;
   }
 }
 
+.text-shadow-outline {
+  text-shadow: 0px 0px 2px #fff,
+  1px 1px 2px #fff,
+  1px -1px 2px #fff,
+  -1px -1px 2px #fff,
+  -1px 1px 2px #fff
+}
+
 .middot-separator li:not(:first-child)::before {
   content: "•";
   padding-left: 16px;

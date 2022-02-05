@@ -7,7 +7,7 @@ const LessonLengthPreview = ({ totalWords, speed, lessonStarted }) => (
       lessonStarted ? "o-0" : "o-100"
     }`}
   >
-    <p className="absolute left-0 right-0 de-emphasized">
+    <p className="absolute left-0 right-0 de-emphasized text-shadow-outline">
       {totalWords} word{totalWords === 1 ? "" : "s"} at {speed}&nbsp;WPM:{" "}
       {humanDurationFormatter(totalWords / speed)}
     </p>

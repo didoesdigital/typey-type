@@ -2062,6 +2062,9 @@ small .svg-icon-wrapper.svg-baseline svg {
   .text-input-accessibility-setting + span:focus, .text-input-accessibility-setting:focus, .text-input-accessibility-setting:focus-within, .text-input-accessibility-setting:active {
     opacity: 1; }
 
+.text-shadow-outline {
+  text-shadow: 0px 0px 2px #fff, 1px 1px 2px #fff, 1px -1px 2px #fff, -1px -1px 2px #fff, -1px 1px 2px #fff; }
+
 .middot-separator li:not(:first-child)::before {
   content: "•";
   padding-left: 16px;
