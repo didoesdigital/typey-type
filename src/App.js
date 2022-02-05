@@ -1422,13 +1422,6 @@ class App extends Component {
   }
 
   setupLesson(optionalAnnouncementMessage) {
-    if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom") && !this.state.lesson.path.endsWith("/lessons/custom/setup")) {
-      let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
-      let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
-      writePersonalPreferences('lessonsProgress', lessonsProgress);
-      writePersonalPreferences('recentLessons', recentLessons);
-    }
-
     let newLesson = Object.assign({}, this.state.lesson);
 
     if ((typeof newLesson === 'object' && Object.entries(newLesson).length === 0 && newLesson.constructor === Object) || newLesson === null ) {
@@ -1599,6 +1592,13 @@ class App extends Component {
         totalNumberOfHintedWords: 0,
         lesson: newLesson,
         currentPhraseID: 0
+      }, () => {
+    if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom") && !this.state.lesson.path.endsWith("/lessons/custom/setup")) {
+      let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
+      let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
+      writePersonalPreferences('lessonsProgress', lessonsProgress);
+      writePersonalPreferences('recentLessons', recentLessons);
+    }
       });
 
     });
