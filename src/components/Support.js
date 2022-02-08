@@ -5,28 +5,44 @@ import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 import { Link } from 'react-router-dom';
 
+function hashToQuery (hash) {
+  if (hash.includes(":~:text")) {
+    const trimmedHashText = hash.replace(":~:text=", "");
+    if (trimmedHashText.includes(encodeURIComponent("How long"))) {
+      return "#time-to-learn"
+    }
+  }
+
+  return hash
+}
+
 class Support extends Component {
   componentDidMount() {
     window.location.hash = window.decodeURIComponent(window.location.hash);
     const scrollToAnchor = () => {
       const hash = window.location.hash;
       if (hash && hash.length > 0) {
-        const el = document.querySelector(hash);
-        let top = 0;
-        if (el && el.getBoundingClientRect().top) {
-          top = el.getBoundingClientRect().top;
+        try {
+          const el = document.querySelector(hashToQuery(hash));
+          let top = 0;
+          if (el && el.getBoundingClientRect().top) {
+            top = el.getBoundingClientRect().top;
+          }
+          let scrollOptions = {
+            left: 0,
+            top: window.pageYOffset + top,
+            behavior: 'smooth'
+          }
+          if (el) {
+            window.scrollTo(scrollOptions);
+            window.setTimeout(function ()
+            {
+              el.focus();
+            }, 1000);
+          }
         }
-        let scrollOptions = {
-          left: 0,
-          top: window.pageYOffset + top,
-          behavior: 'smooth'
-        }
-        if (el) {
-          window.scrollTo(scrollOptions);
-          window.setTimeout(function ()
-          {
-            el.focus();
-          }, 1000);
+        catch (error) {
+          console.error(error);
         }
       }
     };
