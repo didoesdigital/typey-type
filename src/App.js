@@ -859,6 +859,10 @@ class App extends Component {
       }
     });
 
+    // NOTE: this calculation is more forgiving than lesson material filter by
+    // familiarity so when space before output is set and {"roused": 1} appears
+    // in metWords, " roused" will show in the lesson as a "new word" but
+    // already be counted as seen on the progress page.
     let alreadyChecked = [];
     let wordsLeftToDiscover = [];
     for (let i = 0; i < len; ++i) {
