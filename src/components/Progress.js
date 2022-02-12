@@ -1026,7 +1026,7 @@ class Progress extends Component {
               </div>
             </div>
 
-            <h3>Vocabulary progress</h3>
+            <h3 id="vocabulary-progress">Vocabulary progress</h3>
             <p className="bg-slat pl1 pr1">If you’ve changed your spacing settings, you can download a reformatted “progress file” to match your new setting. After downloading it, if you're happy it looks good you can load it back into Typey Type. Then visit each lesson to update lesson progress. Your current spacing setting is: {this.formatSpacePlacementValue(this.props.userSettings)}. <a href={downloadReformattedProgressHref} download={"typey-type-reformatted-progress-" + dashifiedDate + ".json"} onClick={this.downloadReformattedProgress.bind(this)}>Download reformatted progress file</a></p>
             <p>Words you’ve seen and times you’ve typed them well:</p>
             <p id="js-metwords-from-typey-type" className="w-100 mt3 mb3 quote wrap"><small>{metWordsFromTypeyType}</small></p>
