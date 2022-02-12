@@ -19,7 +19,7 @@ const AxisHorizontal = ({
   }, [scale, numberOfTicks]);
 
   return (
-    <g transform={`translate(0, ${dimensions.boundedHeight})`} {...props}>
+    <g transform={`translate(0, ${dimensions.boundedHeight})`} role="presentation" {...props}>
       {ticks.map(({ value, xOffset }) => {
         return (
           <g
@@ -31,6 +31,7 @@ const AxisHorizontal = ({
               y2={4}
               role="presentation"
               style={{
+                pointerEvents: "none",
                 stroke: "#E3E3E3",
               }}
             />
@@ -42,6 +43,7 @@ const AxisHorizontal = ({
               style={{
                 textAnchor: "middle",
                 transform: "translateY(24px)",
+                userSelect: "none",
               }}
             >
               {formatter(value)}
@@ -61,7 +63,6 @@ const AxisVertical = ({
   numberOfTicks,
   ...props
 }) => {
-  const formatter = format(",");
   const [x1, x2] = gridLines === true ? [-dimensions.boundedWidth, 0] : [0, 4];
 
   const ticks = useMemo(() => {
@@ -72,7 +73,7 @@ const AxisVertical = ({
   }, [scale, numberOfTicks]);
 
   return (
-    <g transform={`translate(${dimensions.boundedWidth}, 0)`} {...props}>
+    <g transform={`translate(${dimensions.boundedWidth}, 0)`} role="presentation" {...props}>
       {ticks.map(({ value, yOffset }, i) => {
         return (
           <g
@@ -85,6 +86,7 @@ const AxisVertical = ({
               x2={x2}
               role="presentation"
               style={{
+                pointerEvents: "none",
                 stroke: "#E3E3E3",
               }}
             />
@@ -96,6 +98,7 @@ const AxisVertical = ({
               style={{
                 textAnchor: "start",
                 transform: "translateX(8px)",
+                userSelect: "none",
               }}
               dy="0.32em"
             >
