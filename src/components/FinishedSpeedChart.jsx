@@ -46,8 +46,8 @@ export default function FinishedSpeedChart({ data }) {
     marginLeft: 8,
   });
 
-  const xAccessor = (d) => d.elapsedTime;
-  const yAccessor = (d) => d.wordsPerMinute;
+  const xAccessor = useCallback((d) => d.elapsedTime, []);
+  const yAccessor = useCallback((d) => d.wordsPerMinute, []);
   const keyAccessor = (_, i) => i;
   const nominalAccessor = (d) => d.material;
 
@@ -105,9 +105,19 @@ export default function FinishedSpeedChart({ data }) {
     [dimensions, maxYPlusBuffer]
   );
 
-  const xAccessorScaled = (d) => xScale(xAccessor(d));
-  const yAccessorScaled = (d) => yScale(yAccessor(d));
-  const y0AccessorScaled = data === null ? null : yScale(yScale.domain()[0]);
+  const xAccessorScaled = useCallback(
+    (d) => xScale(xAccessor(d)),
+    [xAccessor, xScale]
+  );
+  const yAccessorScaled = useCallback(
+    (d) => yScale(yAccessor(d)),
+    [yAccessor, yScale]
+  );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const y0AccessorScaled = useCallback(
+    data === null ? null : yScale(yScale.domain()[0]),
+    [data, yScale]
+  );
 
   const circleDiameter = 8;
   const crowdedDataPoints =
