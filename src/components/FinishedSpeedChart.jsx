@@ -191,7 +191,7 @@ export default function FinishedSpeedChart({ data }) {
                   borderBottom: `2px solid ${colorAccessor(highlightedDatum)}`,
                 }}
               >
-                {highlightedDatum.typedText.replace(/^ $/, ' ')}
+                {highlightedDatum.typedText.replace(/^ $/, " ")}
               </span>
               {claps(highlightedDatum, true)}
             </p>
@@ -227,11 +227,11 @@ export default function FinishedSpeedChart({ data }) {
               numberOfTicks={4}
               gridLines={true}
             />
-            <g role="presentation" transform={`translate(0, ${dimensions.boundedHeight})`}>
-              <Baseline
-                scaleRange={xScale.range()}
-                tickSize={tickSize}
-              />
+            <g
+              role="presentation"
+              transform={`translate(0, ${dimensions.boundedHeight})`}
+            >
+              <Baseline scaleRange={xScale.range()} tickSize={tickSize} />
             </g>
             <Line
               type="line"
