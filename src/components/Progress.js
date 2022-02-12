@@ -12,6 +12,7 @@ import { getLessonIndexData } from './../utils/lessonIndexData';
 import { IconCheckmark, IconTriangleRight } from './Icon';
 import { Link, Redirect } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
+import { trimAndSumUniqMetWords } from './../utils/typey-type';
 import { ReactComponent as AlertRobot } from '../images/AlertRobot.svg';
 import { ReactComponent as BoredRobot } from '../images/BoredRobot.svg';
 import { ReactComponent as HappyRobot } from '../images/HappyRobot.svg';
@@ -52,6 +53,7 @@ class Progress extends Component {
       showRecommendationsSurveyLink: true,
       showSetGoalsForm: false,
       progressPercent: 0,
+      reformattedProgress: {},
       yourWordCount: 0,
       yourSeenWordCount: 0,
       yourMemorisedWordCount: 0,
@@ -151,6 +153,25 @@ class Progress extends Component {
     });
   }
 
+  downloadReformattedProgress() {
+    let spacePlacement = this.props.userSettings.spacePlacement;
+    let reformattedProgress = trimAndSumUniqMetWords(this.props.metWords);
+
+    if (spacePlacement === "spaceBeforeOutput") {
+      reformattedProgress = Object.fromEntries(Object.entries(reformattedProgress).map(([word, count]) => [" " + word, count]));
+    }
+    else if (spacePlacement === "spaceAfterOutput") {
+      reformattedProgress = Object.fromEntries(Object.entries(reformattedProgress).map(([word, count]) => [word + " ", count]));
+    }
+
+    this.setState({reformattedProgress: reformattedProgress});
+
+    GoogleAnalytics.event({
+      category: 'Downloads',
+      action: 'Click',
+      label: 'typey-type-reformatted-progress.json',
+    });
+  }
 
   startRecommendedStep(e) {
 
@@ -525,6 +546,35 @@ class Progress extends Component {
     }
   }
 
+  formatSpacePlacementValue(userSettings) {
+    if (!userSettings?.spacePlacement) {
+      return "not set"
+    }
+
+    switch (userSettings.spacePlacement) {
+      case "spaceBeforeOutput":
+        return "Space before output"
+      case "spaceAfterOutput":
+        return "Space after output"
+      case "spaceOff":
+        return "Ignore spaces"
+      case "spaceExact":
+        return "Exact spacing"
+
+      default:
+        return "not set"
+    }
+  }
+
+  makeDownloadHref(json) {
+    if (Blob !== undefined) {
+      return URL.createObjectURL(new Blob([JSON.stringify(json)], {type: "text/json"}));
+    }
+    else {
+      return "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json));
+    }
+  }
+
   render () {
     var grabStyle = function() {return false};
     if (this.state.toRecommendedNextLesson === true) {
@@ -541,23 +591,23 @@ class Progress extends Component {
     let lessonsProgressFromTypeyType = this.props.lessonsProgress;
     const linkList = this.props.lessonIndex.map( (lesson) => {
       let lessonsubtitle = '';
-      let lessonWordCount = 0;
-      let lessonWordCountInIndex = '';
+      let wordCountDenominator = 0;
       let numberOfWordsSeenOrMemorised = 0;
       let lessonCompletion;
       if (lesson.subtitle && lesson.subtitle.length > 0) {
         lessonsubtitle = ': '+lesson.subtitle;
       }
       if (lesson.wordCount && lesson.wordCount > 0) {
-        lessonWordCount = lesson.wordCount;
-        lessonWordCountInIndex = '' + lessonWordCount;
+        wordCountDenominator = lesson.wordCount;
       }
       if (lessonsProgressFromTypeyType && lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]) {
-        let seen = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path].numberOfWordsSeen || 0;
-        let memorised = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path].numberOfWordsMemorised || 0;
+        let toDiscover = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]?.numberOfWordsToDiscover || 0;
+        let seen = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]?.numberOfWordsSeen || 0;
+        let memorised = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]?.numberOfWordsMemorised || 0;
         numberOfWordsSeenOrMemorised = seen + memorised;
-        if ((numberOfWordsSeenOrMemorised >= lessonWordCountInIndex) || (numberOfWordsSeenOrMemorised > 100)) {
-          if (numberOfWordsSeenOrMemorised >= lessonWordCountInIndex) { numberOfWordsSeenOrMemorised = lessonWordCountInIndex; }
+        wordCountDenominator = seen + memorised + toDiscover;
+        if ((numberOfWordsSeenOrMemorised >= wordCountDenominator) || (numberOfWordsSeenOrMemorised > 100)) {
+          if (numberOfWordsSeenOrMemorised >= wordCountDenominator) { numberOfWordsSeenOrMemorised = wordCountDenominator; }
           lessonCompletion = this.lessonComplete();
         } else if (numberOfWordsSeenOrMemorised > 0) {
           lessonCompletion = this.inProgress();
@@ -569,7 +619,7 @@ class Progress extends Component {
       }
       if (lesson.category === "Fundamentals" || (lesson.category === "Drills" && lesson.title.startsWith("Top 100")) || (lesson.category === "Drills" && lesson.title.startsWith("Top 200"))) {
         return(
-          <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeenOrMemorised} of {lessonWordCountInIndex}</small></li>
+          <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeenOrMemorised} of {wordCountDenominator}</small></li>
         )
       } else {
         return "";
@@ -722,15 +772,9 @@ class Progress extends Component {
 
     let date = new Date();
     let dashifiedDate = date.toDateString().replace(/ /g,'-').toLowerCase();
-    let downloadProgressHref;
 
-    if (Blob !== undefined) {
-      let blob = new Blob([JSON.stringify(this.props.metWords)], {type: "text/json"});
-      downloadProgressHref = URL.createObjectURL(blob);
-    }
-    else {
-      downloadProgressHref = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(this.props.metWords));
-    }
+    const downloadProgressHref = this.makeDownloadHref(this.props.metWords);
+    const downloadReformattedProgressHref = this.makeDownloadHref(this.state.reformattedProgress);
 
     let oldWordsNumericInput = (
       <NumericInput
@@ -983,6 +1027,7 @@ class Progress extends Component {
             </div>
 
             <h3>Vocabulary progress</h3>
+            <p className="bg-slat pl1 pr1">If you’ve changed your spacing settings, you can download a reformatted “progress file” to match your new setting. After downloading it, if you're happy it looks good you can load it back into Typey Type. Then visit each lesson to update lesson progress. Your current spacing setting is: {this.formatSpacePlacementValue(this.props.userSettings)}. <a href={downloadReformattedProgressHref} download={"typey-type-reformatted-progress-" + dashifiedDate + ".json"} onClick={this.downloadReformattedProgress.bind(this)}>Download reformatted progress file</a></p>
             <p>Words you’ve seen and times you’ve typed them well:</p>
             <p id="js-metwords-from-typey-type" className="w-100 mt3 mb3 quote wrap"><small>{metWordsFromTypeyType}</small></p>
           </div>

@@ -839,10 +839,13 @@ class App extends Component {
       numberOfWordsSeen = lessonsProgress[lessonpath].numberOfWordsSeen;
     }
 
+    let material = this.state.lesson?.sourceMaterial ? this.state.lesson.sourceMaterial.map(copy => ({...copy})) : [{phrase: "the", stroke: "-T"}];
+    if (this.state.userSettings.simpleTypography) {
+      material = replaceSmartTypographyInPresentedMaterial.call(this, material);
+    }
+
     let metWords = this.state.metWords;
-    let sourceMaterial;
-    sourceMaterial = (this.state.lesson && this.state.lesson.sourceMaterial) ? this.state.lesson.sourceMaterial : [{phrase: "the", stroke: "-T"}];
-    let len = sourceMaterial.length;
+    let len = material.length;
     let seenAccumulator = 0;
     let memorisedAccumulator = 0;
 
@@ -856,10 +859,14 @@ class App extends Component {
       }
     });
 
+    // NOTE: this calculation is more forgiving than lesson material filter by
+    // familiarity so when space before output is set and {"roused": 1} appears
+    // in metWords, " roused" will show in the lesson as a "new word" but
+    // already be counted as seen on the progress page.
     let alreadyChecked = [];
     let wordsLeftToDiscover = [];
     for (let i = 0; i < len; ++i) {
-      let sourceMaterialPhrase = sourceMaterial[i].phrase;
+      let sourceMaterialPhrase = material[i].phrase;
       sourceMaterialPhrase = sourceMaterialPhrase.trim();
 
       // have you seen this word?
@@ -1422,13 +1429,6 @@ class App extends Component {
   }
 
   setupLesson(optionalAnnouncementMessage) {
-    if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom") && !this.state.lesson.path.endsWith("/lessons/custom/setup")) {
-      let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
-      let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
-      writePersonalPreferences('lessonsProgress', lessonsProgress);
-      writePersonalPreferences('recentLessons', recentLessons);
-    }
-
     let newLesson = Object.assign({}, this.state.lesson);
 
     if ((typeof newLesson === 'object' && Object.entries(newLesson).length === 0 && newLesson.constructor === Object) || newLesson === null ) {
@@ -1599,6 +1599,13 @@ class App extends Component {
         totalNumberOfHintedWords: 0,
         lesson: newLesson,
         currentPhraseID: 0
+      }, () => {
+        if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom") && !this.state.lesson.path.endsWith("/lessons/custom/setup")) {
+          let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
+          let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
+          writePersonalPreferences('lessonsProgress', lessonsProgress);
+          writePersonalPreferences('recentLessons', recentLessons);
+        }
       });
 
     });
@@ -2314,6 +2321,7 @@ class App extends Component {
                           updateUserGoals={this.updateUserGoals.bind(this)}
                           updateUserGoalsUnveiled={this.updateUserGoalsUnveiled.bind(this)}
                           userGoals={this.state.userGoals}
+                          userSettings={this.state.userSettings}
                           oldWordsGoalUnveiled={this.state.oldWordsGoalUnveiled}
                           newWordsGoalUnveiled={this.state.newWordsGoalUnveiled}
                           yourSeenWordCount={this.state.yourSeenWordCount}
