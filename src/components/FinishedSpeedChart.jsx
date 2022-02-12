@@ -16,6 +16,7 @@ import HighlightCircle from "./Chart/HighlightCircle";
 import Line from "./Chart/Line";
 import Popover from "./Chart/Popover";
 
+const highlightCircleRadius = 8;
 const tickSize = 4;
 
 const claps = (datum, htmlOutput = false) => {
@@ -178,14 +179,16 @@ export default function FinishedSpeedChart({ data }) {
       {highlightedDatum === null ? null : (
         <ErrorBoundary relative={true} vanish={true}>
           <Popover
-            datum={highlightedDatum}
             dimensions={dimensions}
-            xAccessor={xAccessor}
-            yAccessor={yAccessor}
-            xAccessorScaled={xAccessorScaled}
-            yAccessorScaled={yAccessorScaled}
-            colorAccessor={colorAccessor}
-            backgroundColorAccessor={backgroundColorAccessor}
+            translateX={
+              xAccessorScaled(highlightedDatum) + dimensions.marginLeft
+            }
+            translateY={Math.max(
+              yAccessorScaled(highlightedDatum) +
+                dimensions.marginTop -
+                highlightCircleRadius,
+              -highlightCircleRadius // prevents positioning higher than the chart
+            )}
           >
             <p className="mw-240 mb0 mt1 flex">
               <span className="current-phrase-material truncate px05">

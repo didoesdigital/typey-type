@@ -2,27 +2,16 @@ import React from "react";
 
 const popoverMaxWidth = 240;
 const halfPopoverMaxWidth = popoverMaxWidth / 2;
-const highlightCircleRadius = 8;
 
 const Popover = ({
-  datum,
   dimensions,
-  xAccessor,
-  yAccessor,
-  xAccessorScaled,
-  yAccessorScaled,
-  colorAccessor,
-  backgroundColorAccessor,
+  translateX,
+  translateY,
   children,
   ...props
 }) => {
-  const translateX = xAccessorScaled(datum) + dimensions.marginLeft;
   const leftEdge = translateX - halfPopoverMaxWidth < 0;
   const rightEdge = translateX + halfPopoverMaxWidth > dimensions.width;
-  const translateY = Math.max(
-    yAccessorScaled(datum) + dimensions.marginTop - highlightCircleRadius,
-    -highlightCircleRadius // prevents positioning higher than the chart
-  );
 
   const popoverStyles = {
     backgroundColor: "#fff",
