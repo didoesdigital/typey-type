@@ -9,6 +9,7 @@ import { durationFormatter } from "./../utils/formatters";
 import { IconTypeyType } from "./Icon";
 import ErrorBoundary from "./ErrorBoundary";
 import Axis from "./Chart/Axis";
+import Baseline from "./Chart/Baseline";
 import Chart from "./Chart/Chart";
 import Circles from "./Chart/Circles";
 import HighlightCircle from "./Chart/HighlightCircle";
@@ -220,21 +221,12 @@ export default function FinishedSpeedChart({ data }) {
               numberOfTicks={4}
               gridLines={true}
             />
-            <path
-              d={[
-                "M",
-                xScale.range()[0],
-                dimensions.boundedHeight + tickSize,
-                "v",
-                -tickSize,
-                "H",
-                xScale.range()[1],
-                "v",
-                tickSize,
-              ].join(" ")}
-              fill="none"
-              stroke={"#A8A8A8"}
-            />
+            <g role="presentation" transform={`translate(0, ${dimensions.boundedHeight})`}>
+              <Baseline
+                scaleRange={xScale.range()}
+                tickSize={tickSize}
+              />
+            </g>
             <Line
               type="line"
               data={data.dataPoints.filter((d) => !d.attemptPeak)}
