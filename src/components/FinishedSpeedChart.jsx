@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { bisector, max, min } from "d3-array";
 import { format } from "d3-format";
 import { scaleLinear } from "d3-scale";
@@ -71,7 +71,8 @@ export default function FinishedSpeedChart({ data }) {
     }
   };
 
-  const xScale =
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const xScale = useCallback(
     data === null
       ? null
       : scaleLinear()
@@ -79,7 +80,9 @@ export default function FinishedSpeedChart({ data }) {
             Math.floor(min(data.dataPoints, xAccessor) / 1000) * 1000,
             Math.ceil(max(data.dataPoints, xAccessor) / 1000) * 1000,
           ])
-          .range([0, dimensions.boundedWidth]);
+          .range([0, dimensions.boundedWidth]),
+    [data.dataPoints, xAccessor, dimensions]
+  );
 
   const maxY = max(data.dataPoints, yAccessor);
   const maxYPlusBuffer = maxY * 1.2;
@@ -91,13 +94,16 @@ export default function FinishedSpeedChart({ data }) {
     return 400;
   };
 
-  const yScale =
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const yScale = useCallback(
     data === null
       ? null
       : scaleLinear()
           .domain([0, yScaleDomainMax(maxYPlusBuffer)])
           .range([dimensions.boundedHeight, 0])
-          .nice();
+          .nice(),
+    [dimensions, maxYPlusBuffer]
+  );
 
   const xAccessorScaled = (d) => xScale(xAccessor(d));
   const yAccessorScaled = (d) => yScale(yAccessor(d));
