@@ -19,6 +19,14 @@ const AsyncFinishedSpeedChart = Loadable({
 
 let particles = [];
 
+const skipToNextLessonButton = (event) => {
+  event.preventDefault();
+  const button = document.querySelector("#next-lesson-button");
+  if (button) {
+    button.focus();
+  }
+}
+
 const FinishedHeroData = ({ speed, accuracy, setAnnouncementMessage }) => {
   return (
     <div className="flex flex-wrap justify-between justify-center mx-auto mb3">
@@ -387,7 +395,7 @@ class Finished extends Component {
             <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
           </ErrorBoundary>
           <ErrorBoundary relative={true} vanish={true}>
-            <a href="#chart-notes" className="skip-to-link skip-to-link--relative" id="ga--finished--skip-chart">Skip chart</a>
+            <a href="#next-lesson-button" onClick={skipToNextLessonButton} className="skip-to-link skip-to-link--relative" id="ga--finished--skip-chart">Skip chart</a>
             {shouldShowChart && <AsyncFinishedSpeedChart data={this.state.chartData} />}
             <SecondaryDisplayMetrics
               newWords={this.props.totalNumberOfNewWordsMet}
@@ -398,21 +406,22 @@ class Finished extends Component {
               wordsTyped={this.props.currentLessonStrokes?.length || 0}
               setAnnouncementMessage={this.props.setAnnouncementMessage}
             />
-            {shouldShowChart &&
-            <>
-              <div aria-hidden="true">
-                <p className="text-left de-emphasized mb0"><span style={{ backgroundColor: "transparent", borderBottom: "2px solid transparent", }} role="img" aria-label=" correct" >👏</span> means you typed the phrase within the target number of strokes</p>
-                <p className="text-left de-emphasized mb1"><span aria-label="(hinted)" role="img">ℹ️</span> means the hint was shown</p>
-              </div>
-              <p className="text-left de-emphasized" id="chart-notes">Note: The first 4 words are averaged to reduce the impact of early spikes. Typey&nbsp;Type starts recording the instant you start typing, so instead of recording the first word at infinity words per minute, it’s set to&nbsp;zero. </p>
-            </>
-            }
+            {shouldShowChart && (
+              <details>
+                <summary className="de-emphasized">Chart notes</summary>
+                <div aria-hidden="true">
+                  <p className="text-left de-emphasized mb0"><span style={{ backgroundColor: "transparent", borderBottom: "2px solid transparent", }} role="img" aria-label=" correct" >👏</span> means you typed the phrase within the target number of strokes</p>
+                  <p className="text-left de-emphasized mb1"><span aria-label="(hinted)" role="img">ℹ️</span> means the hint was shown</p>
+                </div>
+                <p className="text-left de-emphasized" id="chart-notes">Note: The first 4 words are averaged to reduce the impact of early spikes. Typey&nbsp;Type starts recording the instant you start typing, so instead of recording the first word at infinity words per minute, it’s set to&nbsp;zero. </p>
+              </details>
+            )}
           </ErrorBoundary>
           <p className="mb12">
             <a href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
               <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
               Restart lesson</a>
-            <Link to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
+            <Link id="next-lesson-button" to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
               Next lesson
             </Link>
           </p>
