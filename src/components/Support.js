@@ -477,6 +477,33 @@ class Support extends Component {
             <h3 id="contribute">Want to contribute?</h3>
             <p>Learn how to <Link to="/contribute">contribute to Typey&nbsp;Type</Link>.</p>
 
+            <h3 id="donate">Donate</h3>
+            <p>You can support my efforts on{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="Patreon"
+                aria-label="Patreon (external link opens in new tab)"
+                to="https://www.patreon.com/didoesdigital"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Patreon
+                <Tooltip
+                  title="Opens in a new tab"
+                  animation="shift"
+                  arrow="true"
+                  className=""
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip>
+              </GoogleAnalytics.OutboundLink>. A monthly donation helps me build more lessons and features to help you fast-track your steno progress.
+            </p>
+
             <h3 id="news">Want news?</h3>
             <p>Sign up for{" "}
               <GoogleAnalytics.OutboundLink
