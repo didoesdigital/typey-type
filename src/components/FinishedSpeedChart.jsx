@@ -15,6 +15,7 @@ import Circles from "./Chart/Circles";
 import HighlightCircle from "./Chart/HighlightCircle";
 import Line from "./Chart/Line";
 import Popover from "./Chart/Popover";
+import Rule from "./Chart/Rule";
 
 const highlightCircleRadius = 8;
 const tickSize = 4;
@@ -278,7 +279,27 @@ export default function FinishedSpeedChart({ data }) {
               interpolation={curveMonotoneX}
               colorAccessor={"#868091"}
             />
-            {crowdedDataPoints ? null : (
+            {crowdedDataPoints ? (
+              data.dataPoints
+                .filter(
+                  (d) =>
+                    !d.attemptPeak &&
+                    !(
+                      "materialIndex" in d && d.materialIndex < minimumStrokes
+                    ) &&
+                    !d.markedCorrect
+                )
+                .map((d) => (
+                  <Rule
+                    key={d.materialIndex}
+                    x1={xAccessorScaled(d)}
+                    y1={yAccessorScaled(d) - 8}
+                    x2={xAccessorScaled(d)}
+                    y2={yAccessorScaled(d) + 8}
+                    stroke={colorAccessor(d)} //"#E8686A"
+                  />
+                ))
+            ) : (
               <Circles
                 data={data.dataPoints}
                 accessibleLabel={accessibleLabel}
