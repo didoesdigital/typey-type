@@ -103,3 +103,9 @@ The metronome sound, “digi_plink”, comes from Dev_Tones by [RCP Tones](https
 
 Typey Type was created by [Di](https://didoesdigital.com).
 
+## Related repos
+
+- [Typey Type data](https://github.com/didoesdigital/typey-type-data)
+- [Di's steno dictionaries](https://github.com/didoesdigital/steno-dictionaries)
+- [Stenoboard diagram SVG to React](https://github.com/didoesdigital/typey-type-stenoboard-diagram-svg-to-react)
+
