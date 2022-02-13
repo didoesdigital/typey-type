@@ -95,7 +95,7 @@ class Contribute extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.</p>
+              </GoogleAnalytics.OutboundLink>. You can also find Di on Discord.</p>
 
             <h3 id="dictionaries">Dictionaries</h3>
             <p>To help the open steno community and Typey&nbsp;Type grow even faster, add your custom dictionaries to the{' '}
