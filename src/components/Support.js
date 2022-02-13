@@ -504,6 +504,111 @@ class Support extends Component {
               </GoogleAnalytics.OutboundLink>. A monthly donation helps me build more lessons and features to help you fast-track your steno progress.
             </p>
 
+            <h3 id="code">Code on GitHub</h3>
+            <p>Here’s some of the code used by Typey&nbsp;Type available on GitHub:</p>
+            <ul>
+              <li>
+                <GoogleAnalytics.OutboundLink
+                  eventLabel="Typey Type repo"
+                  aria-label="Typey Type repo (external link opens in new tab)"
+                  to="https://github.com/didoesdigital/typey-type"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Typey&nbsp;Type <span className="nowrap">repo
+                  <Tooltip
+                    title="(external link opens in new tab)"
+                    className=""
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+                </GoogleAnalytics.OutboundLink>. This contains the application code that makes Typey&nbsp;Type do useful things.
+              </li>
+              <li>
+                <GoogleAnalytics.OutboundLink
+                  eventLabel="Typey Type data repo"
+                  aria-label="Typey Type data repo (external link opens in new tab)"
+                  to="https://github.com/didoesdigital/typey-type-data"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Typey&nbsp;Type data repo<span className="nowrap">
+                  <Tooltip
+                    title="(external link opens in new tab)"
+                    className=""
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+                </GoogleAnalytics.OutboundLink>. This project is the result of automated scripts that produce lesson data used by Typey&nbsp;Type. The scripts are not included.
+              </li>
+              <li>
+                <GoogleAnalytics.OutboundLink
+                  eventLabel="Steno dictionaries repo"
+                  aria-label="Steno dictionaries repo (external link opens in new tab)"
+                  to="https://github.com/didoesdigital/steno-dictionaries/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Steno dictionaries<span className="nowrap">
+                  <Tooltip
+                    title="(external link opens in new tab)"
+                    className=""
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+                </GoogleAnalytics.OutboundLink>. This repository contains Di’s stenography dictionaries that power Typey&nbsp;Type’s stroke suggestions, as well as extra dictionaries for day-to-day steno usage.
+              </li>
+              <li>
+                <GoogleAnalytics.OutboundLink
+                  eventLabel="Stenoboard diagram SVG to React repo"
+                  aria-label="Stenoboard diagram SVG to React repo (external link opens in new tab)"
+                  to="https://github.com/didoesdigital/typey-type-stenoboard-diagram-svg-to-react"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Stenoboard diagram SVG to React<span className="nowrap">
+                  <Tooltip
+                    title="(external link opens in new tab)"
+                    className=""
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+                </GoogleAnalytics.OutboundLink>. This project contains scripts used to manually convert SVG steno diagrams into React syntax to be used by the main Typey&nbsp;Type repo.
+              </li>
+            </ul>
+
             <h3 id="news">Want news?</h3>
             <p>Sign up for{" "}
               <GoogleAnalytics.OutboundLink
