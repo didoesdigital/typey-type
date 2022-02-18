@@ -15,7 +15,7 @@ $brand-danger: #953159;
   @return mix(black, $color, $percentage);
 }
 @function add-alpha($color, $percentage) {
-  $decimal: $percentage / 100%;
+  $decimal: calc($percentage / 100%);
   $inverse: 1 - $decimal;
   @return transparentize($color, $inverse);
 }
@@ -40,7 +40,7 @@ $h2-size: $base-font-size * $font-scale * $font-scale * $font-scale; // 31.248px
 $h3-size: $base-font-size * $font-scale * $font-scale; // 25.008px
 $h4-size: $base-font-size * $font-scale; // 20px
 $h5-size: $base-font-size; // 16px
-$h6-size: $base-font-size / $font-scale; // 12.8px
+$h6-size: calc($base-font-size / $font-scale); // 12.8px
 $large-breakpoint: 1024px;
 $medium-breakpoint: 768px;
 $small-breakpoint: 432px;
@@ -277,7 +277,7 @@ select::-ms-expand {
 }
 
 small, .text-small {
-  font-size: $base-font-size / $font-scale; // 12.8px
+  font-size: $h6-size; // 12.8px
   line-height: 1.6;
 }
 
@@ -1455,7 +1455,7 @@ label {
     cursor: default;
   }
   &.text-small {
-    font-size: $base-font-size / $font-scale; // 12.8px
+    font-size: $h6-size; // 12.8px
   }
 }
 
@@ -1860,7 +1860,7 @@ label {
 }
 
 .pagination-nav-button {
-  top: calc(50% - #{$link-button-large-height / 2});
+  top: calc(50% - #{$link-button-large-height} / 2);
   &.pagination-nav-button--prev {
     left: calc(-#{$link-button-width} - 16px);
   }

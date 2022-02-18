@@ -2158,7 +2158,7 @@ label {
 }
 
 .pagination-nav-button {
-  top: calc(50% - 1.5rem);
+  top: calc(50% - 3rem / 2);
 }
 .pagination-nav-button.pagination-nav-button--prev {
   left: calc(-2.5rem - 16px);
