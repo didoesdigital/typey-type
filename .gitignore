@@ -82,6 +82,8 @@ Thumbs.db
 # Ignore Sass cache files
 .sass-cache
 
+# Ignore css source map files
+*.css.map
 
 # Ignore tempfiles
 /tmp

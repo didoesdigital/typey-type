@@ -9,7 +9,7 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
-import './index.css';
+import './index.scss';
 
 if (process.env.NODE_ENV === 'production') {
   init({
