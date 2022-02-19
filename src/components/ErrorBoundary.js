@@ -24,9 +24,10 @@ class ErrorBoundary extends Component {
 
     if (disabledCookieError) {
       this.setState({ disabledCookieError: true });
-      Sentry.captureException(error, { extra: "Possibly disabled cookie error: " + info });
+      Sentry.captureException(error);
+      Sentry.captureMessage("Possibly disabled cookie error: " + info, "debug");
     } else {
-      Sentry.captureException(error, { extra: info });
+      Sentry.captureException(error);
     }
   }
 

@@ -52,7 +52,7 @@ rsync -avz --exclude=".DS_Store" ~/projects/typey-type/build/ di@167.99.9.71:www
 
 
 
-yarn run sentry-cli releases files "$VERSION" upload-sourcemaps --rewrite ~/projects/typey-type/build/static/js --url-prefix '~/typey-type/static/js'
+yarn run sentry-cli releases files "$VERSION" upload-sourcemaps --url-prefix '~/typey-type/static/js' ~/projects/typey-type/build/static/js
 yarn run sentry-cli releases finalize "$VERSION"
 yarn run sentry-cli releases deploys "$VERSION" new -e production
 

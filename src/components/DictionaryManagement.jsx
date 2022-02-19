@@ -313,7 +313,8 @@ class DictionaryManagement extends Component {
     if (writeDictionariesError) {
       console.log(writeDictionariesError);
       if (writeDictionariesError.error) {
-        Sentry.captureException(writeDictionariesError.error, { extra: writeDictionariesError.message });
+        Sentry.captureException(writeDictionariesError.error);
+        Sentry.captureMessage("Write dictiionaries error… " + writeDictionariesError.message, "debug");
       }
     }
 
@@ -367,7 +368,8 @@ class DictionaryManagement extends Component {
       this.showDictionaryErrorNotification(writeDictionariesError.name);
 
       if (writeDictionariesError.error) {
-        Sentry.captureException(writeDictionariesError.error, { extra: writeDictionariesError.message });
+        Sentry.captureException(writeDictionariesError.error);
+        Sentry.captureMessage("Write dictiionaries error… " + writeDictionariesError.message, "debug");
       }
     }
 

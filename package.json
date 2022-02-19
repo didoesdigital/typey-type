@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://didoesdigital.com/typey-type",
   "dependencies": {
-    "@sentry/browser": "^4.0.0-beta.12",
+    "@sentry/browser": "^6.17.9",
     "clipboard": "^1.7.1",
     "d3-array": "^3.1.1",
     "d3-format": "^3.1.0",
@@ -59,7 +59,7 @@
     "build-storybook": "build-storybook -s public"
   },
   "devDependencies": {
-    "@sentry/cli": "^1.35.1",
+    "@sentry/cli": "^1.72.2",
     "@storybook/addon-actions": "^6.4.0",
     "@storybook/addon-essentials": "^6.4.0",
     "@storybook/addon-links": "^6.4.0",

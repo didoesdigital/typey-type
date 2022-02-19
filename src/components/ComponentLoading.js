@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as Sentry from '@sentry/browser';
 import ComponentLoadingFailed from './ComponentLoadingFailed';
 import ComponentLoadingPastDelay from './ComponentLoadingPastDelay';
 
@@ -7,6 +8,7 @@ class ComponentLoading extends Component {
   render() {
     if (this.props.error) {
       // When the loader has errored
+      Sentry.captureException(this.props.error);
       return <ComponentLoadingFailed />;
     } else if (this.props.timedOut) {
       // When the loader has taken longer than the timeout
