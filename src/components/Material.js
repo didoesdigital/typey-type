@@ -1,10 +1,12 @@
 import React from "react";
 import { matchSplitText } from "./../utils/typey-type";
 
-function FormattedText({children}) {
-  return <pre className="relative">
-    {children}
-  </pre>
+function FormattedText({ children, userSettings }) {
+  return userSettings?.upcomingWordsLayout === "multiline" ? (
+    <div className="relative">{children}</div>
+  ) : (
+    <pre className="relative">{children}</pre>
+  );
 }
 
 export default function Material({
@@ -44,7 +46,7 @@ export default function Material({
           words:
         </div>
         <div className="material mx-auto">
-          <FormattedText>
+          <FormattedText userSettings={userSettings}>
             <div className={"dib current-and-upcoming-phrases" + blur}>
               <strong className="fw7" tabIndex="0">
                 {spaceAfterOutput}
