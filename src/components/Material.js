@@ -22,6 +22,8 @@ export default function Material({
   const spaceAfterOutput =
     userSettings.spacePlacement === "spaceBeforeOutput" ? "" : " ";
 
+  const currentAndUpcomingPhrasesClasses =
+    "dib break-spaces current-and-upcoming-phrases";
   const blur = userSettings.blurMaterial ? " blur" : "";
 
   const [matched, unmatched] = matchSplitText(
@@ -52,7 +54,7 @@ export default function Material({
               {completedPhrases}&#8203;
               {spaceAfterOutput}
             </span>
-            <div className={"dib break-spaces current-and-upcoming-phrases" + blur}>
+            <div className={currentAndUpcomingPhrasesClasses + blur}>
               <strong className="fw7" tabIndex="0">
                 <span className="matched steno-material">{matched}</span>
                 <span className="steno-material">{unmatched}</span>
