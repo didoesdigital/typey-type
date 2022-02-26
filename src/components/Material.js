@@ -38,7 +38,7 @@ export default function Material({
           words:
         </div>
         <div className="material">
-          <pre className="material-pre relative">
+          <pre className="relative">
             <div className={"dib current-and-upcoming-phrases" + blur}>
               <strong className="current-phrase-material" tabIndex="0">
                 {spaceAfterOutput}
