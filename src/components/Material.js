@@ -47,14 +47,17 @@ export default function Material({
         </div>
         <div className="material mx-auto">
           <FormattedText userSettings={userSettings}>
+            <span className="dib de-emphasized completed-phrases">
+              &#8203;{completedPhrases}
+              {spaceAfterOutput}
+            </span>
             <div className={"dib current-and-upcoming-phrases" + blur}>
               <strong className="fw7" tabIndex="0">
-                {spaceAfterOutput}
                 <span className="matched steno-material">{matched}</span>
                 <span className="steno-material">{unmatched}</span>
-                {spaceBeforeOutput}
               </strong>
               <span className={nextUpcomingClasses}>
+                {spaceBeforeOutput}
                 {nextUpcomingMaterial}
               </span>{" "}
               <span className="de-emphasized upcoming-phrases">
@@ -62,9 +65,6 @@ export default function Material({
                 {spaceAfterOutput}
               </span>
             </div>
-            <span className="dib de-emphasized completed-phrases">
-              &#8203;{completedPhrases}
-            </span>
           </FormattedText>
         </div>
       </div>
