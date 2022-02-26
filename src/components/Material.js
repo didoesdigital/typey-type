@@ -30,6 +30,7 @@ export default function Material({
     settings,
     userSettings
   );
+  const completedPhrasesClasses = "dib de-emphasized fw4 left-0 absolute text-right break-spaces completed-phrases-transform";
   const nextUpcomingMaterial =
     upcomingPhrases.length > 0 ? upcomingPhrases[0] : "";
   const nextUpcomingClasses = `de-emphasized upcoming-phrases bw-2 b--brand-primary-tint--60 ${
@@ -47,7 +48,7 @@ export default function Material({
         </div>
         <div className="material mx-auto">
           <FormattedText userSettings={userSettings}>
-            <span className="dib de-emphasized fw4 left-0 absolute text-right break-spaces completed-phrases">
+            <span className={completedPhrasesClasses}>
               {completedPhrases}&#8203;
               {spaceAfterOutput}
             </span>
