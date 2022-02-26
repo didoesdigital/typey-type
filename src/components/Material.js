@@ -47,7 +47,7 @@ export default function Material({
         </div>
         <div className="material mx-auto">
           <FormattedText userSettings={userSettings}>
-            <span className="dib de-emphasized completed-phrases">
+            <span className="dib de-emphasized fw4 left-0 absolute text-right completed-phrases">
               {completedPhrases}&#8203;
               {spaceAfterOutput}
             </span>

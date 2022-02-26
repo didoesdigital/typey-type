@@ -1004,10 +1004,6 @@ $textarea-padding-y: 4px;
 $textarea-padding-x: 8px;
 
 .completed-phrases {
-  font-weight: normal;
-  left: 0;
-  position: absolute;
-  text-align: right;
   transform: translate(calc(-100% + 8px), 0.5em);
 }
 .current-and-upcoming-phrases {
