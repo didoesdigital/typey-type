@@ -1,6 +1,12 @@
 import React from "react";
 import { matchSplitText } from "./../utils/typey-type";
 
+function FormattedText({children}) {
+  return <pre className="relative">
+    {children}
+  </pre>
+}
+
 export default function Material({
   actualText,
   completedPhrases,
@@ -37,8 +43,8 @@ export default function Material({
           Matching and unmatching material typed, upcoming words, and previous
           words:
         </div>
-          <pre className="relative">
         <div className="material mx-auto">
+          <FormattedText>
             <div className={"dib current-and-upcoming-phrases" + blur}>
               <strong className="fw7" tabIndex="0">
                 {spaceAfterOutput}
@@ -57,7 +63,7 @@ export default function Material({
             <span className="dib de-emphasized completed-phrases">
               &#8203;{completedPhrases}
             </span>
-          </pre>
+          </FormattedText>
         </div>
       </div>
     </div>
