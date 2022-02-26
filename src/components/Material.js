@@ -17,10 +17,10 @@ export default function Material({
   upcomingPhrases,
   userSettings,
 }) {
-  const spaceAfterOutput =
-    userSettings.spacePlacement === "spaceBeforeOutput" ? "" : " ";
   const spaceBeforeOutput =
     userSettings.spacePlacement === "spaceAfterOutput" ? "" : " ";
+  const spaceAfterOutput =
+    userSettings.spacePlacement === "spaceBeforeOutput" ? "" : " ";
 
   const blur = userSettings.blurMaterial ? " blur" : "";
 
