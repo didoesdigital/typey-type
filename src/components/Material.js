@@ -32,7 +32,12 @@ export default function Material({
     settings,
     userSettings
   );
-  const completedPhrasesClasses = "dib de-emphasized fw4 left-0 absolute text-right break-spaces completed-phrases-transform";
+  const completedPhrasesClasses = `dib de-emphasized fw4 left-0 text-right break-spaces ${
+    userSettings?.upcomingWordsLayout === "multiline"
+      ? ""
+      : "absolute completed-phrases-transform"
+  }`;
+
   const nextUpcomingMaterial =
     upcomingPhrases.length > 0 ? upcomingPhrases[0] : "";
   const nextUpcomingClasses = `de-emphasized upcoming-phrases bw-2 b--brand-primary-tint--60 ${
