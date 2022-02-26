@@ -37,10 +37,10 @@ export default function Material({
           Matching and unmatching material typed, upcoming words, and previous
           words:
         </div>
-        <div className="material">
           <pre className="relative">
+        <div className="material mx-auto">
             <div className={"dib current-and-upcoming-phrases" + blur}>
-              <strong className="current-phrase-material" tabIndex="0">
+              <strong className="fw7" tabIndex="0">
                 {spaceAfterOutput}
                 <span className="matched steno-material">{matched}</span>
                 <span className="steno-material">{unmatched}</span>

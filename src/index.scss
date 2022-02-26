@@ -999,15 +999,6 @@ $material-typed-text-and-hint-padding: 120px;
   }
 }
 
-.material {
-  margin-left: auto;
-  margin-right: auto;
-
-  // @media (min-width: $large-breakpoint) {
-  //   min-width: 936px;
-  // }
-}
-
 $textarea-border: 2px;
 $textarea-padding-y: 4px;
 $textarea-padding-x: 8px;
@@ -1039,10 +1030,6 @@ $textarea-padding-x: 8px;
 .upcoming-phrases {
   font-weight: normal;
   text-align: left;
-}
-
-.current-phrase-material {
-  font-weight: 700; // applied to strong tag
 }
 
 .expected {
