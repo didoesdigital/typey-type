@@ -47,11 +47,11 @@ export default function Material({
         </div>
         <div className="material mx-auto">
           <FormattedText userSettings={userSettings}>
-            <span className="dib de-emphasized fw4 left-0 absolute text-right completed-phrases">
+            <span className="dib de-emphasized fw4 left-0 absolute text-right break-spaces completed-phrases">
               {completedPhrases}&#8203;
               {spaceAfterOutput}
             </span>
-            <div className={"dib current-and-upcoming-phrases" + blur}>
+            <div className={"dib break-spaces current-and-upcoming-phrases" + blur}>
               <strong className="fw7" tabIndex="0">
                 <span className="matched steno-material">{matched}</span>
                 <span className="steno-material">{unmatched}</span>

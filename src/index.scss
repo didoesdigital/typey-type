@@ -402,9 +402,11 @@ input:focus::placeholder {
 .nowrap {
   white-space: nowrap;
 }
-
 .pre {
   white-space: pre;
+}
+.break-spaces {
+  white-space: break-spaces;
 }
 
 .db               { display: block; }
