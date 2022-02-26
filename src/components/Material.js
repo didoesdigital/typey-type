@@ -9,19 +9,12 @@ export default function Material({
   upcomingPhrases,
   userSettings,
 }) {
-  let spaceAfterOutput = " ";
-  if (userSettings.spacePlacement === "spaceBeforeOutput") {
-    spaceAfterOutput = "";
-  }
-  let spaceBeforeOutput = " ";
-  if (userSettings.spacePlacement === "spaceAfterOutput") {
-    spaceBeforeOutput = "";
-  }
+  const spaceAfterOutput =
+    userSettings.spacePlacement === "spaceBeforeOutput" ? "" : " ";
+  const spaceBeforeOutput =
+    userSettings.spacePlacement === "spaceAfterOutput" ? "" : " ";
 
-  let blur = "";
-  if (userSettings.blurMaterial) {
-    blur = " blur";
-  }
+  const blur = userSettings.blurMaterial ? " blur" : "";
 
   const [matched, unmatched] = matchSplitText(
     currentPhrase,
