@@ -327,6 +327,7 @@ class Lesson extends Component {
                 handleLimitWordsChange={this.props.handleLimitWordsChange}
                 handleStartFromWordChange={this.props.handleStartFromWordChange}
                 handleRepetitionsChange={this.props.handleRepetitionsChange}
+                handleUpcomingWordsLayout={this.props.handleUpcomingWordsLayout}
                 hideOtherSettings={this.props.hideOtherSettings}
                 recommendationHistory={this.props.recommendationHistory}
                 setAnnouncementMessage={this.props.setAnnouncementMessage}
@@ -527,6 +528,7 @@ class Lesson extends Component {
                         handleLimitWordsChange={this.props.handleLimitWordsChange}
                         handleStartFromWordChange={this.props.handleStartFromWordChange}
                         handleRepetitionsChange={this.props.handleRepetitionsChange}
+                        handleUpcomingWordsLayout={this.props.handleUpcomingWordsLayout}
                         hideOtherSettings={this.props.hideOtherSettings}
                         maxStartFromWord={this.props.lessonLength}
                         path={this.props.path}

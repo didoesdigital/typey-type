@@ -343,7 +343,8 @@ class App extends Component {
         seenWords: true,
         startFromWord: 1,
         study: 'discover',
-        stenoLayout: 'stenoLayoutAmericanSteno' // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianMichelaSteno' || 'stenoLayoutJapanese' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
+        stenoLayout: 'stenoLayoutAmericanSteno', // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianMichelaSteno' || 'stenoLayoutJapanese' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
+        upcomingWordsLayout: 'singleLine'
       },
       lesson: fallbackLesson,
       lessonIndex: [{
@@ -754,6 +755,32 @@ class App extends Component {
     GoogleAnalytics.event({
       category: 'UserSettings',
       action: 'Change repetitions',
+      label: labelString
+    });
+
+    return value;
+  }
+
+  handleUpcomingWordsLayout(event) {
+    let currentState = this.state.userSettings;
+    let newState = Object.assign({}, currentState);
+
+    const name = event.target.name;
+    const value = event.target.value;
+
+    newState[name] = value;
+
+    this.setState({userSettings: newState}, () => {
+      this.setupLesson();
+      writePersonalPreferences('userSettings', this.state.userSettings);
+    });
+
+    let labelString = value;
+    if (!value) { labelString = "BAD_INPUT"; }
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Change upcoming words layout',
       label: labelString
     });
 
@@ -2132,7 +2159,7 @@ class App extends Component {
   }
 
   presentUpcomingMaterial() {
-    return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getRemaining().slice(0,63).map(item => item.phrase) : [];
+    return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getRemaining().slice().map(item => item.phrase) : [];
   }
 
   setDictionaryIndex() {
@@ -2479,6 +2506,7 @@ class App extends Component {
                           handleLimitWordsChange={this.handleLimitWordsChange.bind(this)}
                           handleStartFromWordChange={this.handleStartFromWordChange.bind(this)}
                           handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
+                          handleUpcomingWordsLayout={this.handleUpcomingWordsLayout.bind(this)}
                           hideOtherSettings={this.state.hideOtherSettings}
                           metWords={this.state.metWords}
                           previousCompletedPhraseAsTyped={this.state.previousCompletedPhraseAsTyped}

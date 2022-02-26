@@ -978,7 +978,8 @@ function loadPersonalPreferences() {
     sortOrder: 'sortOff',
     seenWords: true,
     study: 'discover',
-    stenoLayout: 'stenoLayoutAmericanSteno'
+    stenoLayout: 'stenoLayoutAmericanSteno',
+    upcomingWordsLayout: 'singleLine',
   };
   try {
     if (window.localStorage) {
