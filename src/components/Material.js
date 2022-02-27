@@ -56,7 +56,7 @@ export default function Material({
         <div className="material mx-auto">
           <FormattedText userSettings={userSettings}>
             <span className={completedPhrasesClasses}>
-              {completedPhrases}&#8203;
+              {completedPhrases.slice().join(' ')}&#8203;
               {spaceAfterOutput}
             </span>
             <div className={currentAndUpcomingPhrasesClasses}>

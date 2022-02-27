@@ -2155,7 +2155,7 @@ class App extends Component {
   }
 
   presentCompletedMaterial() {
-    return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getCompleted().map(item => item.phrase).join(" ") : [];
+    return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getCompleted().map(item => item.phrase) : [];
   }
 
   presentUpcomingMaterial() {
