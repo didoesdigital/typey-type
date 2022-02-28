@@ -1011,34 +1011,27 @@ $textarea-padding-x: 8px;
 // }
 
 .completed-phrases-transform {
-  transform: translate(calc(-100% + 8px), 0.5em);
+  transform: translate(calc(-100%), 0);
+  // transform: translate(calc(-100% + 8px), 0.5em);
 }
-.current-and-upcoming-phrases {
-  margin-bottom: 0.5em;
-  margin-top: 8px;
-  text-align: left;
-  width: 100%;
-  transform: translateX(2px + 8px);
 
-  @media (max-width: 736px) {
-    margin-left: 0;
-  }
+.translateX-10px { transform: translateX(10px) }
 
-  &.blur {
-    color: transparent;
-    text-shadow: 0 0 8px add-alpha(desaturate($brand-primary, 5%), 50%);
-    filter: blur(4px);
-  }
+.blur-words {
+  color: transparent;
+  text-shadow: 0 0 8px add-alpha(desaturate($brand-primary, 5%), 50%);
+  filter: blur(4px);
 }
+
 .upcoming-phrases {
   font-weight: normal;
   text-align: left;
 }
 
-.expected {
+//.expected {
   // overflow: hidden;
   // white-space: nowrap;
-}
+//}
 
 %input-textarea-styles {
   border: $textarea-border solid saturate(add-tint($brand-primary, 30%), 30%);

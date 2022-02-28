@@ -2082,6 +2082,21 @@ class App extends Component {
       if (this.isFinished()) {
         this.stopLesson();
       }
+      else {
+        if (numberOfUnmatchedChars === 0 && this.state.userSettings?.upcomingWordsLayout === "multiline") {
+          const materialPanel = document.getElementById("js-material-panel");
+          const currentPhraseElement = document.getElementById("js-current-phrase");
+          if (materialPanel && currentPhraseElement) {
+            materialPanel.scrollTo(
+              {
+                left: 0,
+                top: currentPhraseElement.offsetTop - 2,
+                behavior: "smooth"
+              }
+            );
+          }
+        }
+      }
     });
   }
 

@@ -3,9 +3,9 @@ import { matchSplitText } from "./../utils/typey-type";
 
 function FormattedText({ children, userSettings }) {
   return userSettings?.upcomingWordsLayout === "multiline" ? (
-    <div className="relative">{children}</div>
+    <div id="js-material-panel" className="relative translateX-10px pr2 overflow-scroll" style={{ maxHeight: '80px' }}>{children}</div>
   ) : (
-    <pre className="relative">{children}</pre>
+    <pre className="relative translateX-10px">{children}</pre>
   );
 }
 
@@ -17,14 +17,49 @@ export default function Material({
   upcomingPhrases,
   userSettings,
 }) {
-  const spaceBeforeOutput =
-    userSettings.spacePlacement === "spaceAfterOutput" ? "" : " ";
-  const spaceAfterOutput =
-    userSettings.spacePlacement === "spaceBeforeOutput" ? "" : " ";
+  const isMultiline = userSettings?.upcomingWordsLayout === "multiline";
 
-  const currentAndUpcomingPhrasesClasses = `dib break-spaces current-and-upcoming-phrases${
-    userSettings.blurMaterial ? " blur" : ""
-  }`;
+  const addSpacing = (input, spacePlacement) =>
+    `${spacePlacement === "spaceBeforeOutput" ? " " : ""}${input}${
+      spacePlacement === "spaceAfterOutput" ? " " : ""
+    }`;
+
+  const separator =
+    userSettings.spacePlacement === "spaceBeforeOutput" ||
+    userSettings.spacePlacement === "spaceAfterOutput" ? (
+      <span className={`separator${isMultiline ? ' ' : ' dib'}`}></span>
+    ) : (
+      <span className={`separator${isMultiline ? ' pre' : ' dib'}`}> </span>
+    );
+
+  const formattedCompletedPhrases = (
+    <div
+      id="formattedCompletedPhrases"
+      className={`${
+        isMultiline
+          ? "di"
+          : "absolute completed-phrases-transform left-0 text-right"
+      }`}
+    >
+      {completedPhrases.map((phrase) => (
+        <>
+          <wbr />
+          <div className={`di${isMultiline ? ' pre' : ''}`}>
+            {separator}
+            <span
+              className={`de-emphasized fw4${
+                isMultiline
+                  ? " "
+                  : " text-right"
+              }`}
+            >
+              {addSpacing(phrase, userSettings.spacePlacement)}
+            </span>
+          </div>
+        </>
+      ))}
+    </div>
+  );
 
   const [matched, unmatched] = matchSplitText(
     currentPhrase,
@@ -32,50 +67,62 @@ export default function Material({
     settings,
     userSettings
   );
-  const completedPhrasesClasses = `dib de-emphasized fw4 left-0 text-right break-spaces ${
-    userSettings?.upcomingWordsLayout === "multiline"
-      ? ""
-      : "absolute completed-phrases-transform"
-  }`;
 
-  const nextUpcomingMaterial =
-    upcomingPhrases.length > 0 ? upcomingPhrases[0] : "";
-  const nextUpcomingClasses = `de-emphasized upcoming-phrases bw-2 b--brand-primary-tint--60 ${
-    nextUpcomingMaterial.includes(" ") ? "bb-dotted" : ""
-  }`;
-  const restUpcomingMaterial =
-    upcomingPhrases.length > 1 ? upcomingPhrases.slice(1).join(" ") : "";
+  const formattedCurrentPhrase = (
+    <>
+      <wbr />
+      <strong id="js-current-phrase" className={`fw7${userSettings.blurMaterial ? " blur-words" : ""}${isMultiline ? ' pre' : ' dib'}`} tabIndex={0}>
+        {separator}
+        <span className={`${isMultiline ? '' : 'dib break-spaces '}steno-material matched`}>{matched}</span>
+        <span className={`${isMultiline ? '' : 'dib break-spaces '}steno-material`}>{unmatched}</span>
+      </strong>
+    </>
+  );
+
+  const formattedNextPhrase = (
+    <>
+      <wbr />
+      <div className="di pre">
+        {separator}
+        <span
+          className={`${isMultiline ? "" : "dib fw4 "}${userSettings.blurMaterial ? "blur-words " : ""}de-emphasized bw-2 b--brand-primary-tint--60${
+            upcomingPhrases.length > 0 && upcomingPhrases[0].includes(" ")
+              ? " bb-dotted"
+              : ""
+          }`}
+        >
+          {upcomingPhrases.length > 0
+            ? addSpacing(upcomingPhrases[0], userSettings.spacePlacement)
+            : ""}
+        </span>
+      </div>
+    </>
+  );
+
+  const formattedUpcomingPhrases = upcomingPhrases.slice(1).map((phrase, id) => (
+    <React.Fragment key={`${id}-${phrase}`}>
+      <wbr />
+      <div className="di pre">
+        {separator}
+        <span className={`de-emphasized${userSettings.blurMaterial ? " blur-words" : ""}${isMultiline ? '' : ' break-spaces dib fw4'}`}>
+          {addSpacing(phrase, userSettings.spacePlacement)}
+        </span>
+      </div>
+    </React.Fragment>
+  ));
 
   return (
-    <div className="mb1 nt1">
-      <div className="expected">
-        <div className="visually-hidden">
-          Matching and unmatching material typed, upcoming words, and previous
-          words:
-        </div>
-        <div className="material mx-auto">
-          <FormattedText userSettings={userSettings}>
-            <span className={completedPhrasesClasses}>
-              {completedPhrases.slice().join(' ')}&#8203;
-              {spaceAfterOutput}
-            </span>
-            <div className={currentAndUpcomingPhrasesClasses}>
-              <strong className="fw7" tabIndex="0">
-                <span className="matched steno-material">{matched}</span>
-                <span className="steno-material">{unmatched}</span>
-              </strong>
-              <span className={nextUpcomingClasses}>
-                &#8203;{spaceBeforeOutput}
-                {nextUpcomingMaterial}
-              </span>{" "}
-              <span className="de-emphasized upcoming-phrases">
-                {restUpcomingMaterial}
-                {spaceAfterOutput}
-              </span>
-            </div>
-          </FormattedText>
-        </div>
+    <div className="mb1 nt1 mx-auto">
+      <div className="visually-hidden">
+        Matching and unmatching material typed, upcoming words, and previous
+        words:
       </div>
+      <FormattedText userSettings={userSettings}>
+        {formattedCompletedPhrases}
+        {formattedCurrentPhrase}
+        {formattedNextPhrase}
+        {formattedUpcomingPhrases}
+      </FormattedText>
     </div>
   );
 }
