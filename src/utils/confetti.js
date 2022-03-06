@@ -136,6 +136,9 @@ function updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) {
 
           if (percentCompleted > 100) {
             localParticles = [];
+            // If timing is off and we've reached percentCompleted before all particles have died,
+            // we need to clear the canvas so confetti does not get stuck:
+            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
           }
         }
       }
