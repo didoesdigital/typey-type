@@ -126,13 +126,13 @@ function updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) {
     if (typeof ctx !== "undefined") {
       ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
-      let localParticlesLength = localParticles.length;
+      const localParticlesLength = localParticles.length;
       for (let i = 0; i < localParticlesLength; i++) {
         localParticles[i].draw(ctx);
-        let lastParticle = i === localParticles.length - 1;
+        const lastParticle = i === localParticles.length - 1;
 
         if (lastParticle) {
-          let percentCompleted = ((Date.now() - localParticles[i].startTime) / localParticles[i].maximumAnimationDuration) * 100;
+          const percentCompleted = ((Date.now() - localParticles[i].startTime) / localParticles[i].maximumAnimationDuration) * 100;
 
           if (percentCompleted > 100) {
             localParticles = [];
