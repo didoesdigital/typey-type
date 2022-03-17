@@ -31,7 +31,7 @@ let ConfettiParticle = function() {
   // let confettiShrinkSpeed = 0.025; // pixels per tick
   // let confettiShrinkSpeed = 0.25; // pixels per tick
 
-  this.maximumAnimationDuration = 1000;
+  this.maximumAnimationDuration = 3000;
   this.velocity = {
     x: getRandomBetween(confettiMinimumXVelocity, confettiMaximumXVelocity),
     y: getRandomBetween(confettiMinimumYVelocity, confettiMaximumYVelocity)
