@@ -273,8 +273,9 @@ class Finished extends Component {
           <div>
             <h4 className="mt3 nowrap">Possible stroke improvements</h4>
             <p>
-              <a href={this.props.path} onClick={this.props.reviseLesson} role="button">
-                Revise these words</a>
+              {/* eslint-disable-next-line jsx-a11y/no-access-key */}
+              <a ariaLabel="Revise these words" accessKey={'r'} href={this.props.path} onClick={this.props.reviseLesson} role="button">
+                <u style={{textDecorationStyle: 'double' }}>R</u>evise these words</a>
             </p>
             <ol className="mb0 unstyled-list">{listOfPossibleStrokeImprovements}</ol>
           </div>

@@ -57,8 +57,10 @@ class Support extends Component {
 
   render() {
     const dictionaryEntryForTabSpace = '"STA*PB": "{#Tab}{#space}",';
-    const dictionaryEntryForWinAccessKey = '"STA*RT": "{#alt(shift(s))}",';
-    const dictionaryEntryForMacAccessKey = '"STA*RT": "{#control(option(s))}",';
+    const dictionaryEntryForWinRestartAccessKey = '"STA*RT": "{#alt(shift(s))}",';
+    const dictionaryEntryForMacRestartAccessKey = '"STA*RT": "{#control(option(s))}",';
+    const dictionaryEntryForWinReviseAccessKey = '"SRAO*EUZ": "{#alt(shift(r))}",';
+    const dictionaryEntryForMacReviseAccessKey = '"SRAO*EUZ": "{#control(option(r))}",';
     return (
       <main id="main">
         <div className="subheader">
@@ -240,7 +242,7 @@ class Support extends Component {
               <GoogleAnalytics.OutboundLink
                 eventLabel="accesskey"
                 aria-label="accesskey (external link opens in new tab)"
-                to="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey"
+                to="https://en.m.wikipedia.org/wiki/Access_key"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -267,17 +269,15 @@ class Support extends Component {
                   />
                 </Tooltip>
               </GoogleAnalytics.OutboundLink>{" "}
-              . This only works in some browsers. To
-              activate it, use the browser <code>accesskey</code> shortcut plus
-              the <kbd>s</kbd> key, such as <kbd>Ctrl</kbd>+<kbd>Option</kbd>+
-              <kbd>s</kbd> for most browsers on macOS or <kbd>Alt</kbd>+
-              <kbd>Shift</kbd>+<kbd>s</kbd> for most browsers on Windows and
-              other operating systems. You can create a steno brief for either
-              shortcut like this:
-            </p>
+              . This only works in some browsers. To activate it, use the browser <code>accesskey</code> shortcut plus the <kbd>s</kbd> key, such as <kbd>Ctrl</kbd>+<kbd>Option</kbd>+<kbd>s</kbd> for most browsers on macOS or <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>s</kbd> for most browsers on Windows and other operating systems. You can create a steno brief for either shortcut like this:</p>
             <ul>
-              <li><code>{dictionaryEntryForMacAccessKey}</code></li>
-              <li><code>{dictionaryEntryForWinAccessKey}</code></li>
+              <li><code>{dictionaryEntryForMacRestartAccessKey}</code></li>
+              <li><code>{dictionaryEntryForWinRestartAccessKey}</code></li>
+            </ul>
+            <p>You can also use the <kbd>r</kbd> <code>accesskey</code> in a similar way to revise the selected words to improve:</p>
+            <ul>
+              <li><code>{dictionaryEntryForMacReviseAccessKey}</code></li>
+              <li><code>{dictionaryEntryForWinReviseAccessKey}</code></li>
             </ul>
 
             <h4 id="typey-type-terms">Typey&nbsp;Type terms</h4>
