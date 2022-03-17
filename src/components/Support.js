@@ -57,6 +57,8 @@ class Support extends Component {
 
   render() {
     const dictionaryEntryForTabSpace = '"STA*PB": "{#Tab}{#space}",';
+    const dictionaryEntryForWinAccessKey = '"STA*RT": "{#alt(shift(s))}",';
+    const dictionaryEntryForMacAccessKey = '"STA*RT": "{#control(option(s))}",';
     return (
       <main id="main">
         <div className="subheader">
@@ -231,6 +233,52 @@ class Support extends Component {
 
             <h4 id="typey-type-hints">Typey&nbsp;Type hints</h4>
             <p>To manually show a brief hint in a lesson that otherwise hides briefs, press <kbd>Tab</kbd> to focus on the stroke hint and <kbd>Space</kbd> activate it. This will automatically move your focus back to typing. To avoid losing time doing this, you can create a brief to press <kbd>Tab</kbd> and <kbd>Space</kbd> for you, such as <code className="tag-missing-full-stop">{dictionaryEntryForTabSpace}</code></p>
+
+            <h4 id="typey-type-shortcuts">Typey&nbsp;Type shortcuts</h4>
+            <p>
+              To restart a lesson, you might be able to use the <kbd>s</kbd>{" "}
+              <GoogleAnalytics.OutboundLink
+                eventLabel="accesskey"
+                aria-label="accesskey (external link opens in new tab)"
+                to="https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/accesskey"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                accesskey
+                <Tooltip
+                  title="(external link opens in new tab)"
+                  className=""
+                  animation="shift"
+                  arrow="true"
+                  duration="200"
+                  tabIndex="0"
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal
+                    ariaHidden="true"
+                    role="presentation"
+                    iconWidth="24"
+                    iconHeight="24"
+                    className="ml1 svg-icon-wrapper svg-baseline"
+                    iconTitle=""
+                  />
+                </Tooltip>
+              </GoogleAnalytics.OutboundLink>{" "}
+              . This only works in some browsers. To
+              activate it, use the browser <code>accesskey</code> shortcut plus
+              the <kbd>s</kbd> key, such as <kbd>Ctrl</kbd>+<kbd>Option</kbd>+
+              <kbd>s</kbd> for most browsers on macOS or <kbd>Alt</kbd>+
+              <kbd>Shift</kbd>+<kbd>s</kbd> for most browsers on Windows and
+              other operating systems. You can create a steno brief for either
+              shortcut like this:
+            </p>
+            <ul>
+              <li><code>{dictionaryEntryForMacAccessKey}</code></li>
+              <li><code>{dictionaryEntryForWinAccessKey}</code></li>
+            </ul>
 
             <h4 id="typey-type-terms">Typey&nbsp;Type terms</h4>
             <dl className="inline-flex flex-wrap">

@@ -418,9 +418,10 @@ class Finished extends Component {
             )}
           </ErrorBoundary>
           <p className="mb12">
-            <a href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
+            {/* eslint-disable-next-line jsx-a11y/no-access-key */}
+            <a ariaLabel="Restart lesson" accessKey={'s'} href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
               <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
-              Restart lesson</a>
+              Re<u style={{textDecorationStyle: 'double' }}>s</u>tart lesson</a>
             <Link id="next-lesson-button" to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
               Next lesson
             </Link>
