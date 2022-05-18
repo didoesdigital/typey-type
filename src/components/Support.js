@@ -57,6 +57,8 @@ class Support extends Component {
 
   render() {
     const dictionaryEntryForTabSpace = '"STA*PB": "{#Tab}{#space}",';
+    const dictionaryEntryForWinNextLessonAccessKey = '"HR*FPB": "{#alt(shift(o))}",';
+    const dictionaryEntryForMacNextLessonAccessKey = '"HR*FPB": "{#control(option(o))}",';
     const dictionaryEntryForWinRestartAccessKey = '"STA*RT": "{#alt(shift(s))}",';
     const dictionaryEntryForMacRestartAccessKey = '"STA*RT": "{#control(option(s))}",';
     const dictionaryEntryForWinReviseAccessKey = '"SRAO*EUZ": "{#alt(shift(r))}",';
@@ -238,7 +240,7 @@ class Support extends Component {
 
             <h4 id="typey-type-shortcuts">Typey&nbsp;Type shortcuts</h4>
             <p>
-              To restart a lesson, you might be able to use the <kbd>s</kbd>{" "}
+              There are some keyboard shortcuts available when you finish a lesson that make use of the browser’s built in{' '}
               <GoogleAnalytics.OutboundLink
                 eventLabel="accesskey"
                 aria-label="accesskey (external link opens in new tab)"
@@ -269,15 +271,28 @@ class Support extends Component {
                   />
                 </Tooltip>
               </GoogleAnalytics.OutboundLink>{" "}
-              . This only works in some browsers. To activate it, use the browser <code>accesskey</code> shortcut plus the <kbd>s</kbd> key, such as <kbd>Ctrl</kbd>+<kbd>Option</kbd>+<kbd>s</kbd> for most browsers on macOS or <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>s</kbd> for most browsers on Windows and other operating systems. You can create a steno brief for either shortcut like this:</p>
+              functionality.</p>
+            <p>To jump to the <strong className="fw7">next lesson</strong>, use the <code>accesskey</code> shortcut plus the <kbd>o</kbd> key. You can create a steno brief for the shortcut like this:</p>
             <ul>
-              <li><code>{dictionaryEntryForMacRestartAccessKey}</code></li>
-              <li><code>{dictionaryEntryForWinRestartAccessKey}</code></li>
+              <li>For macOS: <code>{dictionaryEntryForMacNextLessonAccessKey}</code></li>
+              <li>For everything else: <code>{dictionaryEntryForWinNextLessonAccessKey}</code></li>
             </ul>
-            <p>You can also use the <kbd>r</kbd> <code>accesskey</code> in a similar way to revise the selected words to improve:</p>
+            <p>
+              To <strong className="fw7">restart a lesson</strong>, use the <code>accesskey</code> shortcut plus the <kbd>s</kbd> key. You can create a steno brief for the shortcut like this:</p>
             <ul>
-              <li><code>{dictionaryEntryForMacReviseAccessKey}</code></li>
-              <li><code>{dictionaryEntryForWinReviseAccessKey}</code></li>
+              <li>For macOS: <code>{dictionaryEntryForMacRestartAccessKey}</code></li>
+              <li>For everything else: <code>{dictionaryEntryForWinRestartAccessKey}</code></li>
+            </ul>
+            <p>To <strong className="fw7">revise selected words</strong>, use the <code>accesskey</code> shortcut plus the <kbd>r</kbd> key. You can create a steno brief for the shortcut like this:</p>
+            <ul>
+              <li>For macOS: <code>{dictionaryEntryForMacReviseAccessKey}</code></li>
+              <li>For everything else: <code>{dictionaryEntryForWinReviseAccessKey}</code></li>
+            </ul>
+            <p>
+              To activate accesskey shortcuts, use the browser <code>accesskey</code> shortcut plus the specific shortcut key, which is usually a letter, such as <kbd>s</kbd>. The <code>accesskey</code> shortcut for most browsers is:</p>
+            <ul>
+              <li><kbd>Ctrl</kbd>+<kbd>Option</kbd> on a Mac,</li>
+              <li><kbd>Alt</kbd>+<kbd>Shift</kbd> on Windows and other operating systems.</li>
             </ul>
 
             <h4 id="typey-type-terms">Typey&nbsp;Type terms</h4>
