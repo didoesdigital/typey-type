@@ -423,8 +423,9 @@ class Finished extends Component {
             <a ariaLabel="Restart lesson" accessKey={'s'} href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
               <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
               Re<u style={{textDecorationStyle: 'double' }}>s</u>tart lesson</a>
-            <Link id="next-lesson-button" to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
-              Next lesson
+            {/* eslint-disable-next-line jsx-a11y/no-access-key */}
+            <Link ariaLabel="Next lesson" accessKey={'o'} id="next-lesson-button" to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
+              Next less<u style={{textDecorationStyle: 'underline' }}>o</u>n
             </Link>
           </p>
         </div>
@@ -450,8 +451,9 @@ class Finished extends Component {
           <span id="js-no-words-to-write" tabIndex="-1">There are no words to write.</span>
           {startFromWordOneButton ||
           (<div className="text-center">
-            <Link to={this.props.suggestedNext} className="button mt3 dib" style={{lineHeight: 2}} role="button">
-              Next lesson
+            {/* eslint-disable-next-line jsx-a11y/no-access-key */}
+            <Link ariaLabel="Next lesson" accessKey={'o'} to={this.props.suggestedNext} className="button mt3 dib" style={{lineHeight: 2}} role="button">
+              Next less<u style={{textDecorationStyle: 'underline' }}>o</u>n
             </Link>
           </div>) }
         </div>
