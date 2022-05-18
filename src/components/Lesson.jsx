@@ -4,14 +4,13 @@ import { Link, Route, Switch } from 'react-router-dom';
 import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
-import ComponentLoading from './ComponentLoading';
 import ErrorBoundary from './ErrorBoundary'
 import LessonCanvasFooter from './LessonCanvasFooter';
 import LessonOverview from './LessonOverview';
 import LessonNotFound from './LessonNotFound';
-import Loadable from 'react-loadable';
 import Material from './Material';
 import TypedText from './TypedText';
+import Finished from './Finished';
 import LessonLengthPreview from './LessonLengthPreview';
 import Scores from './Scores';
 import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
@@ -25,12 +24,6 @@ import Flashcards from './Flashcards';
 import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToItalianMichelaStenoKeys, mapBriefToJapaneseStenoKeys, mapBriefToKoreanModernCStenoKeys, mapBriefToPalantypeKeys } from './../utils/typey-type';
 import AussieDictPrompt from './AussieDictPrompt';
 import SedSaidPrompt from './SedSaidPrompt';
-
-const AsyncFinished = Loadable({
-  loader: () => import("./Finished"),
-  loading: ComponentLoading,
-  delay: 300
-});
 
 class Lesson extends Component {
   componentDidMount() {
@@ -318,7 +311,7 @@ class Lesson extends Component {
                   </div>
                 </div>
               </div>
-              <AsyncFinished
+              <Finished
                 actualText={this.props.actualText}
                 changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
                 changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
