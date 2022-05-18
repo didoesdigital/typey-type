@@ -80,7 +80,7 @@ class Lesson extends Component {
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps) {
     if (this.props.location.pathname.startsWith('/lessons/custom') && !this.props.location.pathname.startsWith('/lessons/custom/setup') && this.props.lesson.title !== "Custom") {
       this.props.startCustomLesson();
     } else if(this.isOverview()) {
@@ -381,7 +381,7 @@ class Lesson extends Component {
                 </ErrorBoundary>
               </div>
             } />
-            <Route path={`/lessons/:category/:subcategory?/:lessonPath/flashcards`} render={(props) =>
+            <Route path={`/lessons/:category/:subcategory?/:lessonPath/flashcards`} render={() =>
               <div>
                 <DocumentTitle title={'Typey Type | Flashcards'}>
                   <Flashcards
@@ -405,7 +405,7 @@ class Lesson extends Component {
                 </DocumentTitle>
               </div>
             } />
-            <Route exact={true} path={`${this.props.match.url}`} render={(props) =>
+            <Route exact={true} path={`${this.props.match.url}`} render={() =>
               <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
                 <main id="main">
                   <div className="subheader">
