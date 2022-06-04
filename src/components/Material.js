@@ -3,7 +3,7 @@ import { matchSplitText } from "./../utils/typey-type";
 
 function FormattedText({ children, userSettings }) {
   return userSettings?.upcomingWordsLayout === "multiline" ? (
-    <div id="js-material-panel" className={`relative pr2 overflow-scroll${userSettings.spacePlacement === "spaceBeforeOutput" || userSettings.spacePlacement === "spaceAfterOutput" ? ' translateX-10px' : ''}`} style={{ maxHeight: '80px' }}>{children}</div>
+    <div id="js-material-panel" className={`relative pr2 pb2 overflow-scroll${userSettings.spacePlacement === "spaceBeforeOutput" || userSettings.spacePlacement === "spaceAfterOutput" ? ' translateX-10px' : ''}`} style={{ maxHeight: '88px' }}>{children}</div>
   ) : (
     <pre className="relative translateX-10px">{children}</pre>
   );
