@@ -274,7 +274,7 @@ class Finished extends Component {
             <h4 className="mt3 nowrap">Possible stroke improvements</h4>
             <p>
               {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-              <a ariaLabel="Revise these words" accessKey={'r'} href={this.props.path} onClick={this.props.reviseLesson} role="button">
+              <a aria-label="Revise these words" accessKey={'r'} href={this.props.path} onClick={this.props.reviseLesson} role="button">
                 <u style={{textDecorationStyle: 'double' }}>R</u>evise these words</a>
             </p>
             <ol className="mb0 unstyled-list">{listOfPossibleStrokeImprovements}</ol>
@@ -420,11 +420,11 @@ class Finished extends Component {
           </ErrorBoundary>
           <p className="mb12">
             {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-            <a ariaLabel="Restart lesson" accessKey={'s'} href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
+            <a aria-label="Restart lesson" accessKey={'s'} href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
               <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
               Re<u style={{textDecorationStyle: 'double' }}>s</u>tart lesson</a>
             {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-            <Link ariaLabel="Next lesson" accessKey={'o'} id="next-lesson-button" to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
+            <Link aria-label="Next lesson" accessKey={'o'} id="next-lesson-button" to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
               Next less<u style={{textDecorationStyle: 'underline' }}>o</u>n
             </Link>
           </p>
@@ -452,7 +452,7 @@ class Finished extends Component {
           {startFromWordOneButton ||
           (<div className="text-center">
             {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-            <Link ariaLabel="Next lesson" accessKey={'o'} to={this.props.suggestedNext} className="button mt3 dib" style={{lineHeight: 2}} role="button">
+            <Link aria-label="Next lesson" accessKey={'o'} to={this.props.suggestedNext} className="button mt3 dib" style={{lineHeight: 2}} role="button">
               Next less<u style={{textDecorationStyle: 'underline' }}>o</u>n
             </Link>
           </div>) }
