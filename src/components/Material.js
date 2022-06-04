@@ -52,8 +52,8 @@ export default function Material({
           : "absolute completed-phrases-transform left-0 text-right"
       }`}
     >
-      {completedPhrases.map((phrase) => (
-        <>
+      {completedPhrases.map((phrase, index) => (
+        <React.Fragment key={`${index}-${phrase}`}>
           <wbr />
           <div className={`di${isMultiline ? " pre" : ""}`}>
             {separator}
@@ -65,7 +65,7 @@ export default function Material({
               {addSpacing(phrase, userSettings.spacePlacement)}
             </span>
           </div>
-        </>
+        </React.Fragment>
       ))}
     </div>
   );
@@ -128,8 +128,8 @@ export default function Material({
 
   const formattedUpcomingPhrases = upcomingPhrases
     .slice(1)
-    .map((phrase, id) => (
-      <React.Fragment key={`${id}-${phrase}`}>
+    .map((phrase, index) => (
+      <React.Fragment key={`${index}-${phrase}`}>
         <wbr />
         <div className="di pre">
           {separator}
