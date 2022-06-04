@@ -1006,14 +1006,8 @@ $textarea-border: 2px;
 $textarea-padding-y: 4px;
 $textarea-padding-x: 8px;
 
-// .completed-phrases-transform {
-//   transform: translate(calc(-100% + 8px), 0.5em);
-//   // transform: translateX(2px + 8px);
-// }
-
 .completed-phrases-transform {
   transform: translate(calc(-100%), 0);
-  // transform: translate(calc(-100% + 8px), 0.5em);
 }
 
 .translateX-10px { transform: translateX(10px) }
