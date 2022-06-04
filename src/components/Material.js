@@ -5,13 +5,13 @@ function FormattedText({ children, userSettings }) {
   return userSettings?.upcomingWordsLayout === "multiline" ? (
     <div
       id="js-material-panel"
-      className={`relative pr2 pb2 overflow-scroll${
+      className={`relative pr2 pb3 overflow-y-scroll${
         userSettings.spacePlacement === "spaceBeforeOutput" ||
         userSettings.spacePlacement === "spaceAfterOutput"
           ? " translateX-10px"
           : ""
       }`}
-      style={{ maxHeight: "88px" }}
+      style={{ maxHeight: "80px" }}
     >
       {children}
     </div>
