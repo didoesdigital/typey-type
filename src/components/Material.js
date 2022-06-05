@@ -126,9 +126,8 @@ export default function Material({
     </>
   );
 
-  const formattedUpcomingPhrases = upcomingPhrases
-    .slice(1)
-    .map((phrase, index) => (
+  const formattedUpcomingPhrases = isMultiline ? (
+    upcomingPhrases.slice(1).map((phrase, index) => (
       <React.Fragment key={`${index}-${phrase}`}>
         {isMultiline && <wbr />}
         <div className="di pre">
@@ -136,13 +135,28 @@ export default function Material({
           <span
             className={`de-emphasized${
               userSettings.blurMaterial ? " blur-words" : ""
-            }${isMultiline ? "" : " break-spaces dib fw4"}`}
+            }`}
           >
             {addSpacing(phrase, userSettings.spacePlacement)}
           </span>
         </div>
       </React.Fragment>
-    ));
+    ))
+  ) : (
+    <div className="di pre">
+      {separator}
+      <span
+        className={`pre de-emphasized fw4${
+          userSettings.blurMaterial ? " blur-words" : ""
+        }`}
+      >
+        {addSpacing(
+          upcomingPhrases.slice(1).join(" "),
+          userSettings.spacePlacement
+        )}
+      </span>
+    </div>
+  );
 
   return (
     <div className="mb1 nt1 mx-auto">
