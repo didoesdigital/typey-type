@@ -54,7 +54,7 @@ export default function Material({
     >
       {completedPhrases.map((phrase, index) => (
         <React.Fragment key={`${index}-${phrase}`}>
-          <wbr />
+          {isMultiline && <wbr />}
           <div className={`di${isMultiline ? " pre" : ""}`}>
             {separator}
             <span
@@ -79,7 +79,7 @@ export default function Material({
 
   const formattedCurrentPhrase = (
     <>
-      <wbr />
+      {isMultiline && <wbr />}
       <strong
         id="js-current-phrase"
         className={`fw7${userSettings.blurMaterial ? " blur-words" : ""}${
@@ -106,7 +106,7 @@ export default function Material({
 
   const formattedNextPhrase = (
     <>
-      <wbr />
+      {isMultiline && <wbr />}
       <div className="di pre">
         {separator}
         <span
@@ -130,7 +130,7 @@ export default function Material({
     .slice(1)
     .map((phrase, index) => (
       <React.Fragment key={`${index}-${phrase}`}>
-        <wbr />
+        {isMultiline && <wbr />}
         <div className="di pre">
           {separator}
           <span
