@@ -43,19 +43,15 @@ export default function Material({
       <span className={`separator${isMultiline ? " pre" : " dib"}`}> </span>
     );
 
-  const formattedCompletedPhrases = (
+  const formattedCompletedPhrases = isMultiline ? (
     <div
       id="formattedCompletedPhrases"
-      className={`${
-        isMultiline
-          ? "di"
-          : "absolute completed-phrases-transform left-0 text-right"
-      }`}
+      className="di"
     >
       {completedPhrases.map((phrase, index) => (
         <React.Fragment key={`${index}-${phrase}`}>
-          {isMultiline && <wbr />}
-          <div className={`di${isMultiline ? " pre" : ""}`}>
+          <wbr />
+          <div className="di pre">
             {separator}
             <span
               className={`de-emphasized fw4${
@@ -67,6 +63,14 @@ export default function Material({
           </div>
         </React.Fragment>
       ))}
+    </div>
+  ) :
+  (
+    <div
+      id="formattedCompletedPhrases"
+      className="dib absolute completed-phrases-transform left-0 text-right de-emphasized fw4"
+    >
+      {addSpacing(completedPhrases.join(" "), userSettings.spacePlacement)}
     </div>
   );
 
