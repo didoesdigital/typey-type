@@ -1,8 +1,8 @@
 import React from "react";
 import { matchSplitText } from "./../utils/typey-type";
 
-function FormattedText({ children, userSettings }) {
-  return userSettings?.upcomingWordsLayout === "multiline" ? (
+function FormattedText({ children, userSettings, isMultiline }) {
+  return isMultiline ? (
     <div
       id="js-material-panel"
       className={`relative pr2 pb3 overflow-y-scroll${
@@ -25,10 +25,12 @@ export default function Material({
   completedPhrases,
   currentPhrase,
   settings,
+  totalWordCount,
   upcomingPhrases,
   userSettings,
 }) {
-  const isMultiline = userSettings?.upcomingWordsLayout === "multiline";
+  const isMultiline =
+    userSettings?.upcomingWordsLayout === "multiline" && totalWordCount < 1000;
 
   const addSpacing = (input, spacePlacement) =>
     `${spacePlacement === "spaceBeforeOutput" ? " " : ""}${input}${
@@ -164,7 +166,7 @@ export default function Material({
         Matching and unmatching material typed, upcoming words, and previous
         words:
       </div>
-      <FormattedText userSettings={userSettings}>
+      <FormattedText userSettings={userSettings} isMultiline={isMultiline}>
         {formattedCompletedPhrases}
         {formattedCurrentPhrase}
         {formattedNextPhrase}

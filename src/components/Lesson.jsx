@@ -467,6 +467,7 @@ class Lesson extends Component {
                                 userSettings={this.props.userSettings}
                                 completedPhrases={this.props.completedPhrases}
                                 upcomingPhrases={this.props.upcomingPhrases}
+                                totalWordCount={this.props.totalWordCount}
                               />
                               <TypedText
                                 actualText={this.props.actualText}
