@@ -44,10 +44,7 @@ export default function Material({
     );
 
   const formattedCompletedPhrases = isMultiline ? (
-    <div
-      id="formattedCompletedPhrases"
-      className="di"
-    >
+    <div id="formattedCompletedPhrases" className="di">
       {completedPhrases.map((phrase, index) => (
         <React.Fragment key={`${index}-${phrase}`}>
           <wbr />
@@ -64,8 +61,7 @@ export default function Material({
         </React.Fragment>
       ))}
     </div>
-  ) :
-  (
+  ) : (
     <div
       id="formattedCompletedPhrases"
       className="dib absolute completed-phrases-transform left-0 text-right de-emphasized fw4"
