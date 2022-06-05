@@ -1,5 +1,13 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { matchSplitText } from "./../utils/typey-type";
+
+const addSpacing = (input, spacePlacement) =>
+  `${spacePlacement === "spaceBeforeOutput" ? " " : ""}${input}${
+    spacePlacement === "spaceAfterOutput" ? " " : ""
+  }`;
+
+const keyId = (completedPhrasesLength, index) =>
+  `${completedPhrasesLength + index}`;
 
 function FormattedText({ children, userSettings, isMultiline }) {
   return isMultiline ? (
@@ -20,32 +28,13 @@ function FormattedText({ children, userSettings, isMultiline }) {
   );
 }
 
-export default function Material({
-  actualText,
+export function FormattedCompletedPhrases({
+  isMultiline,
   completedPhrases,
-  currentPhrase,
-  settings,
-  totalWordCount,
-  upcomingPhrases,
-  userSettings,
+  separator,
+  spacePlacement,
 }) {
-  const isMultiline =
-    userSettings?.upcomingWordsLayout === "multiline" && totalWordCount < 1000;
-
-  const addSpacing = (input, spacePlacement) =>
-    `${spacePlacement === "spaceBeforeOutput" ? " " : ""}${input}${
-      spacePlacement === "spaceAfterOutput" ? " " : ""
-    }`;
-
-  const separator =
-    userSettings.spacePlacement === "spaceBeforeOutput" ||
-    userSettings.spacePlacement === "spaceAfterOutput" ? (
-      <span className={`separator${isMultiline ? " " : " dib"}`}></span>
-    ) : (
-      <span className={`separator${isMultiline ? " pre" : " dib"}`}> </span>
-    );
-
-  const formattedCompletedPhrases = isMultiline ? (
+  return isMultiline ? (
     <div id="formattedCompletedPhrases" className="di">
       {completedPhrases.map((phrase, index) => (
         <React.Fragment key={`${index}-${phrase}`}>
@@ -57,7 +46,7 @@ export default function Material({
                 isMultiline ? " " : " text-right"
               }`}
             >
-              {addSpacing(phrase, userSettings.spacePlacement)}
+              {addSpacing(phrase, spacePlacement)}
             </span>
           </div>
         </React.Fragment>
@@ -68,23 +57,24 @@ export default function Material({
       id="formattedCompletedPhrases"
       className="dib absolute completed-phrases-transform left-0 text-right de-emphasized fw4"
     >
-      {addSpacing(completedPhrases.join(" "), userSettings.spacePlacement)}
+      {addSpacing(completedPhrases.join(" "), spacePlacement)}
     </div>
   );
+}
 
-  const [matched, unmatched] = matchSplitText(
-    currentPhrase,
-    actualText,
-    settings,
-    userSettings
-  );
-
-  const formattedCurrentPhrase = (
+export function FormattedCurrentPhrase({
+  isMultiline,
+  separator,
+  matched,
+  unmatched,
+  blurMaterial,
+}) {
+  return (
     <>
       {isMultiline && <wbr />}
       <strong
         id="js-current-phrase"
-        className={`fw7${userSettings.blurMaterial ? " blur-words" : ""}${
+        className={`fw7${blurMaterial ? " blur-words" : ""}${
           isMultiline ? " pre" : " dib"
         }`}
         tabIndex={0}
@@ -105,15 +95,24 @@ export default function Material({
       </strong>
     </>
   );
+}
 
-  const formattedNextPhrase = (
+export function FormattedNextPhrase({
+  isMultiline,
+  separator,
+  blurMaterial,
+  upcomingPhrases,
+  addSpacing,
+  spacePlacement,
+}) {
+  return (
     <>
       {isMultiline && <wbr />}
       <div className="di pre">
         {separator}
         <span
           className={`${isMultiline ? "" : "dib fw4 "}${
-            userSettings.blurMaterial ? "blur-words " : ""
+            blurMaterial ? "blur-words " : ""
           }de-emphasized bw-2 b--brand-primary-tint--60${
             upcomingPhrases.length > 0 && upcomingPhrases[0].includes(" ")
               ? " bb-dotted"
@@ -121,25 +120,31 @@ export default function Material({
           }`}
         >
           {upcomingPhrases.length > 0
-            ? addSpacing(upcomingPhrases[0], userSettings.spacePlacement)
+            ? addSpacing(upcomingPhrases[0], spacePlacement)
             : ""}
         </span>
       </div>
     </>
   );
+}
 
-  const formattedUpcomingPhrases = isMultiline ? (
+export function FormattedUpcomingPhrases({
+  isMultiline,
+  upcomingPhrases,
+  separator,
+  blurMaterial,
+  addSpacing,
+  spacePlacement,
+  completedPhrasesLength,
+}) {
+  return isMultiline ? (
     upcomingPhrases.slice(1).map((phrase, index) => (
-      <React.Fragment key={`${index}-${phrase}`}>
+      <React.Fragment key={keyId(completedPhrasesLength, index)}>
         {isMultiline && <wbr />}
         <div className="di pre">
           {separator}
-          <span
-            className={`de-emphasized${
-              userSettings.blurMaterial ? " blur-words" : ""
-            }`}
-          >
-            {addSpacing(phrase, userSettings.spacePlacement)}
+          <span className={`de-emphasized${blurMaterial ? " blur-words" : ""}`}>
+            {addSpacing(phrase, spacePlacement)}
           </span>
         </div>
       </React.Fragment>
@@ -148,16 +153,44 @@ export default function Material({
     <div className="di pre">
       {separator}
       <span
-        className={`pre de-emphasized fw4${
-          userSettings.blurMaterial ? " blur-words" : ""
-        }`}
+        className={`pre de-emphasized fw4${blurMaterial ? " blur-words" : ""}`}
       >
-        {addSpacing(
-          upcomingPhrases.slice(1).join(" "),
-          userSettings.spacePlacement
-        )}
+        {addSpacing(upcomingPhrases.slice(1).join(" "), spacePlacement)}
       </span>
     </div>
+  );
+}
+
+export default function Material({
+  actualText,
+  completedPhrases,
+  currentPhrase,
+  settings,
+  totalWordCount,
+  upcomingPhrases,
+  userSettings,
+}) {
+  const isMultiline = useMemo(
+    () =>
+      userSettings?.upcomingWordsLayout === "multiline" &&
+      totalWordCount < 1000,
+    [userSettings.upcomingWordsLayout, totalWordCount]
+  );
+
+  const separator = useMemo(
+    () =>
+      userSettings.spacePlacement === "spaceBeforeOutput" ||
+      userSettings.spacePlacement === "spaceAfterOutput" ? (
+        <span className={`separator${isMultiline ? " " : " dib"}`}></span>
+      ) : (
+        <span className={`separator${isMultiline ? " pre" : " dib"}`}> </span>
+      ),
+    [userSettings.spacePlacement, isMultiline]
+  );
+
+  const [matched, unmatched] = useMemo(
+    () => matchSplitText(currentPhrase, actualText, settings, userSettings),
+    [currentPhrase, actualText, userSettings, settings]
   );
 
   return (
@@ -167,10 +200,36 @@ export default function Material({
         words:
       </div>
       <FormattedText userSettings={userSettings} isMultiline={isMultiline}>
-        {formattedCompletedPhrases}
-        {formattedCurrentPhrase}
-        {formattedNextPhrase}
-        {formattedUpcomingPhrases}
+        <FormattedCompletedPhrases
+          isMultiline={isMultiline}
+          completedPhrases={completedPhrases}
+          separator={separator}
+          spacePlacement={userSettings.spacePlacement}
+        />
+        <FormattedCurrentPhrase
+          isMultiline={isMultiline}
+          separator={separator}
+          matched={matched}
+          unmatched={unmatched}
+          blurMaterial={userSettings.blurMaterial}
+        />
+        <FormattedNextPhrase
+          isMultiline={isMultiline}
+          separator={separator}
+          upcomingPhrases={upcomingPhrases}
+          addSpacing={addSpacing}
+          blurMaterial={userSettings.blurMaterial}
+          spacePlacement={userSettings.spacePlacement}
+        />
+        <FormattedUpcomingPhrases
+          isMultiline={isMultiline}
+          separator={separator}
+          upcomingPhrases={upcomingPhrases}
+          addSpacing={addSpacing}
+          blurMaterial={userSettings.blurMaterial}
+          spacePlacement={userSettings.spacePlacement}
+          completedPhrasesLength={completedPhrases.length}
+        />
       </FormattedText>
     </div>
   );
