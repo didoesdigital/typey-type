@@ -1,10 +1,18 @@
 import React from "react";
 import SingleLineMaterial from "./Material/SingleLineMaterial";
+import MultiLineMaterial from "./Material/MultiLineMaterial";
 
 export default function Material(props) {
   return props.userSettings.upcomingWordsLayout === "multiline" ? (
-    <SingleLineMaterial {...props} />
+    <MultiLineMaterial {...props} />
   ) : (
-    <SingleLineMaterial {...props} />
+    <SingleLineMaterial
+      actualText={props.actualText}
+      completedPhrases={props.completedPhrases}
+      currentPhrase={props.currentPhrase}
+      settings={props.settings}
+      upcomingPhrases={props.upcomingPhrases}
+      userSettings={props.userSettings}
+    />
   );
 }
