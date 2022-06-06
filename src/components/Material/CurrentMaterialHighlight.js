@@ -23,17 +23,17 @@ export default function CurrentMaterialHighlight({
       "#js-current-phrase-highlight"
     );
     const entireMaterial = document.querySelector("#js-entire-material-text");
-    const currentPhrase = document.querySelector(
+    const currentMaterialPhrase = document.querySelector(
       `#js-entire-material-text #presented-material-phrase-${currentPhraseID}`
     );
 
-    if (currentPhraseHighlight && entireMaterial && currentPhrase) {
+    if (currentPhraseHighlight && entireMaterial && currentMaterialPhrase) {
       setX(
-        currentPhrase.getBoundingClientRect().left -
+        currentMaterialPhrase.getBoundingClientRect().left -
           entireMaterial.getBoundingClientRect().left
       );
       const newY =
-        currentPhrase.getBoundingClientRect().top -
+        currentMaterialPhrase.getBoundingClientRect().top -
         entireMaterial.getBoundingClientRect().top;
       setY(newY);
 
