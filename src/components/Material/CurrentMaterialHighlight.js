@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { matchSplitText } from "./../../utils/typey-type";
 
 export default function CurrentMaterialHighlight({
@@ -18,24 +18,36 @@ export default function CurrentMaterialHighlight({
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
 
-  useLayoutEffect(() => {
-    const currentMaterialHighlight = document.querySelector(
-      "#js-current-material-highlight"
+  useEffect(() => {
+    const currentPhraseHighlight = document.querySelector(
+      "#js-current-phrase-highlight"
     );
-    const currentMaterialPhrase = document.querySelector(
+    const entireMaterial = document.querySelector("#js-entire-material-text");
+    const currentPhrase = document.querySelector(
       `#js-entire-material-text #presented-material-phrase-${currentPhraseID}`
     );
-    if (currentMaterialHighlight && currentMaterialPhrase) {
-      window.setTimeout(function () {
-        setX(currentMaterialPhrase.offsetLeft);
-        setY(currentMaterialPhrase.offsetTop);
-      }, 0);
+
+    if (currentPhraseHighlight && entireMaterial && currentPhrase) {
+      setX(
+        currentPhrase.getBoundingClientRect().left -
+          entireMaterial.getBoundingClientRect().left
+      );
+      const newY =
+        currentPhrase.getBoundingClientRect().top -
+        entireMaterial.getBoundingClientRect().top;
+      setY(newY);
+
+      document.querySelector("#js-material-panel").scrollTo({
+        left: 0,
+        top: newY,
+        behavior: "smooth",
+      });
     }
   }, [currentPhraseID]);
 
   return (
     <div
-      id="js-current-material-highlight"
+      id="js-current-phrase-highlight"
       className="dib absolute"
       style={{ transform: `translate(${x}px, ${y}px)` }}
     >

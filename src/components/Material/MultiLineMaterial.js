@@ -20,7 +20,8 @@ export default function MultiLineMaterial({
         </div>
         <div className="material mx-auto">
           <div
-            className="relative pr2 pb3 overflow-hidden translateX-10px"
+            id="js-material-panel"
+            className="relative pr2 pb3 overflow-y-scroll translateX-10px"
             style={{ maxHeight: "80px" }}
           >
             <CurrentMaterialHighlight
