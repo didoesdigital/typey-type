@@ -35,7 +35,7 @@ export default function CurrentMaterialHighlight({
       );
       const newY =
         currentMaterialPhrase.getBoundingClientRect().top -
-        entireMaterial.getBoundingClientRect().top;
+        entireMaterial.getBoundingClientRect().top - 2.5; // TODO: why is this slightly off?
       setY(newY);
 
       document.querySelector("#js-material-panel").scrollTo({
@@ -68,8 +68,10 @@ export default function CurrentMaterialHighlight({
       id="js-current-phrase-highlight"
       className="dib absolute"
       style={{
+        backgroundColor: '#fff',
         transform: `translate(${x}px, ${y}px)`,
-        width: width
+        width: width,
+        zIndex: 1
       }}
     >
       <strong className="fw7 pre" tabIndex="0">
