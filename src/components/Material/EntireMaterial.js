@@ -9,14 +9,15 @@ export default React.memo(function EntireMaterial({
 
   const spaceBeforeOutput = isSpaceBefore ? "​ " : "";
   const spaceAfterOutput = isSpaceAfter ? " ​" : "";
-  const useSeparator = spacePlacement === "spaceOff" || spacePlacement === "spaceExact"
+  const useSeparator =
+    spacePlacement === "spaceOff" || spacePlacement === "spaceExact";
 
   return presentedMaterial.map((phraseAndStroke, index) => (
     <span id={`presented-material-phrase-${index}`} key={index}>
       {spaceBeforeOutput}
-      {phraseAndStroke.phrase.replaceAll(' ', ' ')}
+      {phraseAndStroke.phrase.replaceAll(" ", " ")}
       {spaceAfterOutput}
-      {useSeparator && <span className='separator'> ​</span>}
+      {useSeparator && <span className="separator"> ​</span>}
     </span>
   ));
 });

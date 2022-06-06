@@ -17,7 +17,7 @@ export default function CurrentMaterialHighlight({
 
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
-  const [width, setWidth] = useState('auto');
+  const [width, setWidth] = useState("auto");
 
   useEffect(() => {
     const currentPhraseHighlight = document.querySelector(
@@ -35,7 +35,8 @@ export default function CurrentMaterialHighlight({
       );
       const newY =
         currentMaterialPhrase.getBoundingClientRect().top -
-        entireMaterial.getBoundingClientRect().top - 2.5; // TODO: why is this slightly off?
+        entireMaterial.getBoundingClientRect().top -
+        2.5; // TODO: why is this slightly off?
       setY(newY);
 
       document.querySelector("#js-material-panel").scrollTo({
@@ -55,10 +56,13 @@ export default function CurrentMaterialHighlight({
     );
 
     if (currentPhraseHighlight && currentMaterialPhrase) {
-      if (currentPhraseHighlight.getBoundingClientRect().width > currentMaterialPhrase.getBoundingClientRect().width) {
-        setWidth(`${currentMaterialPhrase.getBoundingClientRect().width}px`)
+      if (
+        currentPhraseHighlight.getBoundingClientRect().width >
+        currentMaterialPhrase.getBoundingClientRect().width
+      ) {
+        setWidth(`${currentMaterialPhrase.getBoundingClientRect().width}px`);
       } else {
-        setWidth('auto')
+        setWidth("auto");
       }
     }
   }, [currentPhraseID, currentPhrase]);
@@ -68,10 +72,10 @@ export default function CurrentMaterialHighlight({
       id="js-current-phrase-highlight"
       className="dib absolute"
       style={{
-        backgroundColor: '#fff',
+        backgroundColor: "#fff",
         transform: `translate(${x}px, ${y}px)`,
         width: width,
-        zIndex: 1
+        zIndex: 1,
       }}
     >
       <strong className="fw7 pre" tabIndex="0">
