@@ -1,6 +1,9 @@
 import React from "react";
 
-export default function EntireMaterial({ presentedMaterial, spacePlacement }) {
+export default React.memo(function EntireMaterial({
+  presentedMaterial,
+  spacePlacement,
+}) {
   const isSpaceBefore = spacePlacement === "spaceBeforeOutput";
   const isSpaceAfter = spacePlacement === "spaceAfterOutput";
 
@@ -14,4 +17,4 @@ export default function EntireMaterial({ presentedMaterial, spacePlacement }) {
       {spaceAfterOutput}
     </span>
   ));
-}
+});
