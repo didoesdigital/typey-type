@@ -17,6 +17,7 @@ export default function CurrentMaterialHighlight({
 
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
+  const [width, setWidth] = useState('auto');
 
   useEffect(() => {
     const currentPhraseHighlight = document.querySelector(
@@ -45,11 +46,31 @@ export default function CurrentMaterialHighlight({
     }
   }, [currentPhraseID]);
 
+  useEffect(() => {
+    const currentPhraseHighlight = document.querySelector(
+      "#js-current-phrase-highlight"
+    );
+    const currentMaterialPhrase = document.querySelector(
+      `#js-entire-material-text #presented-material-phrase-${currentPhraseID}`
+    );
+
+    if (currentPhraseHighlight && currentMaterialPhrase) {
+      if (currentPhraseHighlight.getBoundingClientRect().width > currentMaterialPhrase.getBoundingClientRect().width) {
+        setWidth(`${currentMaterialPhrase.getBoundingClientRect().width}px`)
+      } else {
+        setWidth('auto')
+      }
+    }
+  }, [currentPhraseID, currentPhrase]);
+
   return (
     <div
       id="js-current-phrase-highlight"
       className="dib absolute"
-      style={{ transform: `translate(${x}px, ${y}px)` }}
+      style={{
+        transform: `translate(${x}px, ${y}px)`,
+        width: width
+      }}
     >
       <strong className="fw7 pre" tabIndex="0">
         <span className="matched steno-material">{matched}</span>
