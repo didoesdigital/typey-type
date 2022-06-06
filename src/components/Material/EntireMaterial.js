@@ -13,7 +13,7 @@ export default React.memo(function EntireMaterial({
   return presentedMaterial.map((phraseAndStroke, index) => (
     <span id={`presented-material-phrase-${index}`} key={index}>
       {spaceBeforeOutput}
-      {phraseAndStroke.phrase}
+      {phraseAndStroke.phrase.replaceAll(' ', ' ')}
       {spaceAfterOutput}
     </span>
   ));
