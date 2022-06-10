@@ -13,15 +13,10 @@ import TypedText from './TypedText';
 import Finished from './Finished';
 import LessonLengthPreview from './LessonLengthPreview';
 import Scores from './Scores';
-import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
-import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
-import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiagram';
-import JapaneseStenoDiagram from './../StenoLayout/JapaneseStenoDiagram';
-import KoreanModernCStenoDiagram from './../StenoLayout/KoreanModernCStenoDiagram';
-import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
+import StrokeTip from './StrokeTip';
 import UserSettings from './UserSettings';
 import Flashcards from './Flashcards';
-import { loadPersonalPreferences, shouldShowStroke, splitBriefsIntoStrokes, mapBriefToAmericanStenoKeys, mapBriefToDanishStenoKeys, mapBriefToItalianMichelaStenoKeys, mapBriefToJapaneseStenoKeys, mapBriefToKoreanModernCStenoKeys, mapBriefToPalantypeKeys } from './../utils/typey-type';
+import { loadPersonalPreferences } from './../utils/typey-type';
 import AussieDictPrompt from './AussieDictPrompt';
 import SedSaidPrompt from './SedSaidPrompt';
 
@@ -150,7 +145,6 @@ class Lesson extends Component {
     let createNewCustomLesson = '';
     let customMessage;
     let overviewLink = '';
-    let strokeTip;
     let lessonSubTitle = '';
     if (this.props.lesson && this.props.lesson.subtitle && this.props.lesson.subtitle.length > 0) {
       lessonSubTitle = ': '+this.props.lessonSubTitle;
@@ -173,105 +167,12 @@ class Lesson extends Component {
       customMessage = ''
     }
 
-    let strokeTarget = this.props.targetStrokeCount + ' strokes';
-    if (this.props.targetStrokeCount === 1) {
-      strokeTarget = this.props.targetStrokeCount + ' stroke';
-    }
-
     let revisionModeButton;
     if (this.props.revisionMode) {
       revisionModeButton = (
         <div><Link to={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="revision-mode-button no-underline absolute right-0">Revision mode<IconClosingCross role="img" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="Exit revision mode" />
         </Link></div>
       );
-    }
-
-    if (shouldShowStroke(this.props.showStrokesInLesson, this.props.userSettings.showStrokes, this.props.repetitionsRemaining, this.props.userSettings.hideStrokesOnLastRepetition)) {
-      if (this.props.currentStroke) {
-        let strokes = splitBriefsIntoStrokes(this.props.currentStroke);
-
-        let mapBriefsFunction = mapBriefToAmericanStenoKeys;
-        let StenoLayoutDiagram = AmericanStenoDiagram;
-        switch (this.props.userSettings.stenoLayout) {
-          case 'stenoLayoutAmericanSteno':
-            mapBriefsFunction = mapBriefToAmericanStenoKeys;
-            StenoLayoutDiagram = AmericanStenoDiagram;
-            break;
-          case 'stenoLayoutDanishSteno':
-            mapBriefsFunction = mapBriefToDanishStenoKeys;
-            StenoLayoutDiagram = DanishStenoDiagram;
-            break;
-          case 'stenoLayoutItalianMichelaSteno':
-            mapBriefsFunction = mapBriefToItalianMichelaStenoKeys;
-            StenoLayoutDiagram = ItalianMichelaStenoDiagram;
-            break;
-          case 'stenoLayoutJapaneseSteno':
-            mapBriefsFunction = mapBriefToJapaneseStenoKeys;
-            StenoLayoutDiagram = JapaneseStenoDiagram;
-            break;
-          case 'stenoLayoutKoreanModernCSteno':
-            mapBriefsFunction = mapBriefToKoreanModernCStenoKeys;
-            StenoLayoutDiagram = KoreanModernCStenoDiagram;
-            break;
-          case 'stenoLayoutPalantype':
-            mapBriefsFunction = mapBriefToPalantypeKeys;
-            StenoLayoutDiagram = PalantypeDiagram;
-            break;
-          default:
-            mapBriefsFunction = mapBriefToAmericanStenoKeys;
-            StenoLayoutDiagram = AmericanStenoDiagram;
-            break;
-        }
-
-
-        let layoutTypeStyle = '';
-        if (this.props.userSettings.stenoLayout === 'stenoLayoutKoreanModernCSteno') { layoutTypeStyle = ' heavy-type-face--korean'; }
-        if (this.props.userSettings.stenoLayout === 'stenoLayoutJapaneseSteno') { layoutTypeStyle = ' type-face--japanese'; }
-
-        const diagramWidth = (this.props.userSettings.diagramSize || 1) * 140;
-
-        strokeTip = (
-          <div className="stroke-tip" aria-live="polite" aria-atomic="true">
-            <span className="visually-hidden" aria-hidden={this.props.userSettings.showStrokesAsDiagrams ? 'true' : 'false'}>Hint: </span>
-            <div className="flex flex-wrap mr05">
-              {this.props.userSettings.showStrokesAsDiagrams && strokes.map((strokeToDraw, index) =>
-                <React.Fragment key={index}>
-                  {(Object.values(mapBriefsFunction(strokeToDraw)).some(item => item)) && <div className="mt1 mr2"><StenoLayoutDiagram id={'diagramID-' + index + '-' + strokeToDraw} {...mapBriefsFunction(strokeToDraw)} brief={strokeToDraw} diagramWidth={diagramWidth} /></div> }
-                  {(Object.values(mapBriefsFunction(strokeToDraw)).every(item => !item)) && <div className="mt1 mr2 unknown-steno-diagram" aria-hidden={true}><StenoLayoutDiagram id={'diagramID-' + index + '-' + strokeToDraw} {...mapBriefsFunction('')} brief='' diagramWidth={diagramWidth} /></div> }
-                </React.Fragment>
-              )}
-            </div>
-            {!this.props.userSettings.showStrokesAsDiagrams ?
-              <div className={"db" + layoutTypeStyle}>
-                <pre className="overflow-auto mw-408 text-small">
-                  <span className="steno-stroke pa05 text-small" aria-label={[...this.props.currentStroke].join(" ").replace("-","dash")}>
-                    {this.props.currentStroke.split('').map((item, i) =>
-                      <React.Fragment key={i}>
-                        {item}
-                      </React.Fragment>
-                    )}
-                  </span>
-                </pre>
-              </div>
-              : undefined
-            }
-          </div>
-        );
-      }
-    } else {
-      strokeTip = <div className="stroke-tip">
-        <label className="mb0 text-small stroke-tip__label">
-          <input
-            className="checkbox-input visually-hidden"
-            type="checkbox"
-            name="showStrokesInLesson"
-            id="showStrokesInLesson"
-            checked={this.props.showStrokesInLesson}
-            onChange={this.props.changeShowStrokesInLesson}
-            />
-          {strokeTarget} (hint?)
-        </label>
-      </div>;
     }
 
     let propsLesson = this.props.lesson;
@@ -492,7 +393,14 @@ class Lesson extends Component {
                                 setAnnouncementMessage={this.props.setAnnouncementMessage}
                               />
                               <div className="mb6">
-                                {strokeTip}
+                                <StrokeTip
+                                  changeShowStrokesInLesson={this.props.changeShowStrokesInLesson}
+                                  currentStroke={this.props.currentStroke}
+                                  repetitionsRemaining={this.props.repetitionsRemaining}
+                                  showStrokesInLesson={this.props.showStrokesInLesson}
+                                  targetStrokeCount={this.props.targetStrokeCount}
+                                  userSettings={this.props.userSettings}
+                                />
                               </div>
                               <LessonLengthPreview
                                 lessonStarted={this.props.disableUserSettings}
