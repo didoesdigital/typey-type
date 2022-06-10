@@ -24,11 +24,6 @@ export default function StrokeTip({
   userSettings,
   repetitionsRemaining,
 }) {
-  let strokeTarget = targetStrokeCount + " strokes";
-  if (targetStrokeCount === 1) {
-    strokeTarget = targetStrokeCount + " stroke";
-  }
-
   let strokeTip;
   if (
     shouldShowStroke(
@@ -39,8 +34,6 @@ export default function StrokeTip({
     )
   ) {
     if (currentStroke) {
-      let strokes = splitBriefsIntoStrokes(currentStroke);
-
       let mapBriefsFunction = mapBriefToAmericanStenoKeys;
       let StenoLayoutDiagram = AmericanStenoDiagram;
       switch (userSettings.stenoLayout) {
@@ -94,7 +87,7 @@ export default function StrokeTip({
           </span>
           <div className="flex flex-wrap mr05">
             {userSettings.showStrokesAsDiagrams &&
-              strokes.map((strokeToDraw, index) => (
+              splitBriefsIntoStrokes(currentStroke).map((strokeToDraw, index) => (
                 <React.Fragment key={index}>
                   {Object.values(mapBriefsFunction(strokeToDraw)).some(
                     (item) => item
@@ -155,7 +148,7 @@ export default function StrokeTip({
             checked={showStrokesInLesson}
             onChange={changeShowStrokesInLesson}
           />
-          {strokeTarget} (hint?)
+          {`${targetStrokeCount} stroke${targetStrokeCount === 1 ? '' : 's' }` } (hint?)
         </label>
       </div>
     );
