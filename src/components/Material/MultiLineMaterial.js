@@ -21,7 +21,7 @@ export default function MultiLineMaterial({
         <div className="material mx-auto">
           <div
             id="js-material-panel"
-            className="relative pr2 pb3 overflow-y-scroll translateX-10px"
+            className="relative pr2 pb3 overflow-y-scroll"
             style={{ maxHeight: "80px" }}
           >
             <CurrentMaterialHighlight
