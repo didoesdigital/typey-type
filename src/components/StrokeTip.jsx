@@ -126,5 +126,9 @@ export default function StrokeTip({
       </div>
     );
   }
-  return strokeTip
+  return (
+    <div className="mb6">
+      {strokeTip}
+    </div>
+  )
 }

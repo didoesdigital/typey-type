@@ -392,16 +392,14 @@ class Lesson extends Component {
                                 currentPhrase={this.props.currentPhrase}
                                 setAnnouncementMessage={this.props.setAnnouncementMessage}
                               />
-                              <div className="mb6">
-                                <StrokeTip
-                                  changeShowStrokesInLesson={this.props.changeShowStrokesInLesson}
-                                  currentStroke={this.props.currentStroke}
-                                  repetitionsRemaining={this.props.repetitionsRemaining}
-                                  showStrokesInLesson={this.props.showStrokesInLesson}
-                                  targetStrokeCount={this.props.targetStrokeCount}
-                                  userSettings={this.props.userSettings}
-                                />
-                              </div>
+                              <StrokeTip
+                                changeShowStrokesInLesson={this.props.changeShowStrokesInLesson}
+                                currentStroke={this.props.currentStroke}
+                                repetitionsRemaining={this.props.repetitionsRemaining}
+                                showStrokesInLesson={this.props.showStrokesInLesson}
+                                targetStrokeCount={this.props.targetStrokeCount}
+                                userSettings={this.props.userSettings}
+                              />
                               <LessonLengthPreview
                                 lessonStarted={this.props.disableUserSettings}
                                 speed={this.props.userSettings?.beatsPerMinute || 10}
