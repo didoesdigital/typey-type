@@ -40,7 +40,7 @@ export default function SingleLineMaterial({
           Matching and unmatching material typed, upcoming words, and previous
           words:
         </div>
-        <div className="material mx-auto">
+        <div className="material mx-auto py1">
           <pre className="relative translateX-10px">
             <span className={completedPhrasesClasses}>
               {completedPhrases.join(" ")}&#8203;
