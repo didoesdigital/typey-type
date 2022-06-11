@@ -2,7 +2,7 @@ import React from "react";
 import CurrentMaterialHighlight from "./CurrentMaterialHighlight";
 import EntireMaterial from "./EntireMaterial";
 
-export default function MultiLineMaterial({
+export default React.memo(function MultiLineMaterial({
   actualText,
   currentPhrase,
   currentPhraseID,
@@ -44,4 +44,4 @@ export default function MultiLineMaterial({
       </div>
     </div>
   );
-}
+});
