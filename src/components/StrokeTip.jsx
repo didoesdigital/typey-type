@@ -116,7 +116,9 @@ export default function StrokeTip({
                       (item) => !item
                     ) && (
                       <div
-                        className="mt1 mr2 unknown-steno-diagram"
+                        className={`mt1 mr2 unknown-steno-diagram${
+                          isMultiline ? " flex flex-grow justify-center" : ""
+                        }`}
                         aria-hidden={true}
                       >
                         <StenoLayoutDiagram
@@ -150,7 +152,11 @@ export default function StrokeTip({
     }
   } else {
     strokeTip = (
-      <div className={`stroke-tip${isMultiline ? " flex justify-center min-h-88" : ""}`}>
+      <div
+        className={`stroke-tip${
+          isMultiline ? " flex justify-center min-h-88" : ""
+        }`}
+      >
         <label className="mb0 text-small stroke-tip__label">
           <input
             className="checkbox-input visually-hidden"
