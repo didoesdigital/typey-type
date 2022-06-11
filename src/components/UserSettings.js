@@ -580,7 +580,7 @@ class UserSettings extends Component {
                   <li className="ml0 pl1 bt b--brand-primary-tint">
                     <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
                       <Tooltip
-                        title="Show lesson material words as a single sliding line or multiple wrapping lines"
+                        title="Show lesson material words as a single, sliding line or multiple, wrapping lines"
                         className="mw-240"
                         animation="shift"
                         arrow="true"
@@ -591,7 +591,7 @@ class UserSettings extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        <label className="mr1 db" htmlFor="stenoLayout">Upcoming words</label>
+                        <label className="mr1 db" htmlFor="upcomingWordsLayout">Upcoming words</label>
                       </Tooltip>
                       <select id="upcomingWordsLayout" name="upcomingWordsLayout" value={this.props.userSettings.upcomingWordsLayout} onChange={this.props.handleUpcomingWordsLayout} disabled={this.props.disableUserSettings} className="text-small form-control w-144">
                         <option value="singleLine">Single line</option>
