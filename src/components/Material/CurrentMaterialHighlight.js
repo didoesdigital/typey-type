@@ -24,19 +24,27 @@ export default function CurrentMaterialHighlight({
       "#js-current-phrase-highlight"
     );
     const entireMaterial = document.querySelector("#js-entire-material-text");
+    const firstMaterialPhrase = document.querySelector(
+      `#js-entire-material-text #presented-material-phrase-0`
+    );
     const currentMaterialPhrase = document.querySelector(
       `#js-entire-material-text #presented-material-phrase-${currentPhraseID}`
     );
 
-    if (currentPhraseHighlight && entireMaterial && currentMaterialPhrase) {
+    if (
+      currentPhraseHighlight &&
+      entireMaterial &&
+      currentMaterialPhrase &&
+      firstMaterialPhrase
+    ) {
       setX(
         currentMaterialPhrase.getBoundingClientRect().left -
           entireMaterial.getBoundingClientRect().left
       );
+
       const newY =
         currentMaterialPhrase.getBoundingClientRect().top -
-        entireMaterial.getBoundingClientRect().top -
-        2.5; // TODO: why is this slightly off?
+        firstMaterialPhrase.getBoundingClientRect().top;
       setY(newY);
 
       document.querySelector("#js-material-panel").scrollTo({
