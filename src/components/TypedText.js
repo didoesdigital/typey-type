@@ -104,7 +104,7 @@ class TypedText extends Component {
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
-              className="input-textarea typed-text-input-positioning typed-text-input-textarea"
+              className={`input-textarea typed-text-input-positioning typed-text-input-textarea${this.props.userSettings.upcomingWordsLayout === 'multiline' ? ' text-center' : ''}`}
               id="your-typed-text"
               onChange={this.props.updateMarkup}
               onKeyPress={this.keyPress.bind(this)}
