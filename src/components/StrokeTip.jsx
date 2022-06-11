@@ -24,6 +24,8 @@ export default function StrokeTip({
   userSettings,
   repetitionsRemaining,
 }) {
+  const isMultiline = userSettings.upcomingWordsLayout === 'multiline'
+
   let strokeTip;
   if (
     shouldShowStroke(
@@ -78,7 +80,7 @@ export default function StrokeTip({
       const diagramWidth = (userSettings.diagramSize || 1) * 140;
 
       strokeTip = (
-        <div className="stroke-tip" aria-live="polite" aria-atomic="true">
+        <div className={`stroke-tip${isMultiline ? ' flex justify-center' : ''}`} aria-live="polite" aria-atomic="true">
           <span
             className="visually-hidden"
             aria-hidden={userSettings.showStrokesAsDiagrams ? "true" : "false"}
@@ -93,7 +95,7 @@ export default function StrokeTip({
                     {Object.values(mapBriefsFunction(strokeToDraw)).some(
                       (item) => item
                     ) && (
-                      <div className="mt1 mr2">
+                      <div className={`mt1 mr2${ isMultiline ? ' flex flex-grow justify-center' : ''}`}>
                         <StenoLayoutDiagram
                           id={"diagramID-" + index + "-" + strokeToDraw}
                           {...mapBriefsFunction(strokeToDraw)}
@@ -140,7 +142,7 @@ export default function StrokeTip({
     }
   } else {
     strokeTip = (
-      <div className="stroke-tip">
+      <div className={`stroke-tip${isMultiline ? ' flex justify-center' : ''}`}>
         <label className="mb0 text-small stroke-tip__label">
           <input
             className="checkbox-input visually-hidden"
