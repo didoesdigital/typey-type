@@ -1576,6 +1576,7 @@ describe('loadPersonalPreferences', () => {
         spacePlacement: 'spaceOff',
         speakMaterial: false,
         textInputAccessibility: true,
+        upcomingWordsLayout: "singleLine",
         sortOrder: 'sortOff',
         seenWords: true,
         study: 'discover'
