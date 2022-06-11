@@ -74,6 +74,8 @@ class TypedText extends Component {
   }
 
   render() {
+    const isMultiline =
+      this.props.userSettings.upcomingWordsLayout === "multiline";
     let previousCompletedPhraseAsTypedKey = this.props.completedPhrases
       ? this.props.completedPhrases.length
       : 0;
@@ -115,13 +117,15 @@ class TypedText extends Component {
         <p className="input-text">
           <samp className="pointer-none absolute absolute--fill w-100">
             <TransitionGroup
-              className="dib"
+              className={`dib${isMultiline ? " flex justify-center" : ""}`}
               component={"span"}
               key={previousCompletedPhraseAsTypedKey}
             >
               <CSSTransition timeout={5000} classNames="dissolve" appear={true}>
                 <kbd
-                  className="successfully-typed-text typed-text-input-positioning pre relative"
+                  className={`successfully-typed-text typed-text-input-positioning pre relative${
+                    isMultiline ? " text-center" : " text-left"
+                  }`}
                   style={{
                     color: previousCompletedPhraseAccuracy
                       ? "#23512C"
@@ -140,9 +144,7 @@ class TypedText extends Component {
               autoComplete="off"
               autoCorrect="off"
               className={`input-textarea typed-text-input-positioning typed-text-input-textarea${
-                this.props.userSettings.upcomingWordsLayout === "multiline"
-                  ? " text-center"
-                  : ""
+                isMultiline ? " text-center" : ""
               }`}
               id="your-typed-text"
               onChange={this.props.updateMarkup}
