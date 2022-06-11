@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { matchSplitText } from './../utils/typey-type';
-import GoogleAnalytics from 'react-ga';
+import React, { Component } from "react";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { matchSplitText } from "./../utils/typey-type";
+import GoogleAnalytics from "react-ga";
 
 class TypedText extends Component {
   componentWillUnmount() {
@@ -13,20 +13,25 @@ class TypedText extends Component {
 
   // Show how much of what you've typed is correct
   markUpTypedText(currentPhrase, actualText, settings) {
-    let array = matchSplitText(currentPhrase, actualText, settings, this.props.userSettings);
+    let array = matchSplitText(
+      currentPhrase,
+      actualText,
+      settings,
+      this.props.userSettings
+    );
     let matched = array[2];
     let unmatched = array[3];
     let matchedTypedTextMarkup = `<pre><span aria-hidden="true">&#8203;</span><span class="matched steno-typing">${matched}</span><span class="unmatched steno-typing">${unmatched}</span></pre>`;
-    return {__html: matchedTypedTextMarkup};
+    return { __html: matchedTypedTextMarkup };
   }
 
   speak() {
     this.props.sayCurrentPhraseAgain();
 
     GoogleAnalytics.event({
-      category: 'SpeakMaterial',
-      action: 'Single click Say word button',
-      label: '' // If not a custom lesson, it could be handy to specify this.props.currentPhrase here
+      category: "SpeakMaterial",
+      action: "Single click Say word button",
+      label: "", // If not a custom lesson, it could be handy to specify this.props.currentPhrase here
     });
   }
 
@@ -35,76 +40,110 @@ class TypedText extends Component {
   onDoubleClickSpeakAndFocus() {
     this.props.sayCurrentPhraseAgain();
     // This makes it hard for screen readers to hear the word:
-    const yourTypedText = document.getElementById('your-typed-text');
+    const yourTypedText = document.getElementById("your-typed-text");
     if (yourTypedText) {
       yourTypedText.focus();
     }
 
     GoogleAnalytics.event({
-      category: 'SpeakMaterial',
-      action: 'Double click Say word button',
-      label: '' // If not a custom lesson, it could be handy to specify this.props.currentPhrase here
+      category: "SpeakMaterial",
+      action: "Double click Say word button",
+      label: "", // If not a custom lesson, it could be handy to specify this.props.currentPhrase here
     });
   }
 
   keyPress(event) {
-    if (event && (event.charCode && event.charCode === 13)) { // Enter key
+    if (event && event.charCode && event.charCode === 13) {
+      // Enter key
       event.preventDefault();
       // sayCurrentPhraseAgain on ⇧+Enter:
       if (event.shiftKey) {
         this.speak();
         GoogleAnalytics.event({
-          category: 'SpeakMaterial',
-          action: 'Shift Enter',
-          label: this.props.userSettings && this.props.userSettings.speakMaterial ? "Speak material on" : "Speak material off"
+          category: "SpeakMaterial",
+          action: "Shift Enter",
+          label:
+            this.props.userSettings && this.props.userSettings.speakMaterial
+              ? "Speak material on"
+              : "Speak material off",
         });
-      }
-      else {
+      } else {
         // TODO: this could be a good trigger to reveal stroke hints
       }
     }
   }
 
   render() {
-    let previousCompletedPhraseAsTypedKey = this.props.completedPhrases ? this.props.completedPhrases.length : 0;
+    let previousCompletedPhraseAsTypedKey = this.props.completedPhrases
+      ? this.props.completedPhrases.length
+      : 0;
     let strokes = this.props.currentLessonStrokes;
-    let previousCompletedPhraseAccuracy = strokes && strokes.length > 0 ? strokes[strokes.length - 1].accuracy : true;
-    let textInputAccessibilityAriaHidden = !this.props.userSettings.textInputAccessibility;
+    let previousCompletedPhraseAccuracy =
+      strokes && strokes.length > 0
+        ? strokes[strokes.length - 1].accuracy
+        : true;
+    let textInputAccessibilityAriaHidden =
+      !this.props.userSettings.textInputAccessibility;
 
     let sayCurrentPhraseButton = null;
     if (this.props.userSettings && this.props.userSettings.speakMaterial) {
       sayCurrentPhraseButton = (
-        <button className="link-button button--secondary say-word-button" onClick={this.speak.bind(this)} onDoubleClick={this.onDoubleClickSpeakAndFocus.bind(this)}>Say word</button>
-      )
-    };
+        <button
+          className="link-button button--secondary say-word-button"
+          onClick={this.speak.bind(this)}
+          onDoubleClick={this.onDoubleClickSpeakAndFocus.bind(this)}
+        >
+          Say word
+        </button>
+      );
+    }
 
     return (
       <div className="typed-text-container">
-        <label className="visually-hidden mb1" htmlFor="your-typed-text">Write {this.props.currentPhrase}</label>
-        <div className="typed-text" dangerouslySetInnerHTML={this.markUpTypedText(this.props.currentPhrase, this.props.actualText, this.props.settings)} />
+        <label className="visually-hidden mb1" htmlFor="your-typed-text">
+          Write {this.props.currentPhrase}
+        </label>
+        <div
+          className="typed-text"
+          dangerouslySetInnerHTML={this.markUpTypedText(
+            this.props.currentPhrase,
+            this.props.actualText,
+            this.props.settings
+          )}
+        />
         {sayCurrentPhraseButton}
         <p className="input-text">
           <samp className="pointer-none absolute absolute--fill w-100">
-          <TransitionGroup
-            className="dib"
-            component={"span"}
-            key={previousCompletedPhraseAsTypedKey}
-          >
-            <CSSTransition
-              timeout={5000}
-              classNames='dissolve'
-              appear={true}
+            <TransitionGroup
+              className="dib"
+              component={"span"}
+              key={previousCompletedPhraseAsTypedKey}
             >
-              <kbd className="successfully-typed-text typed-text-input-positioning pre relative" style={{"color": previousCompletedPhraseAccuracy ? '#23512C' : '#953159' }} aria-hidden="true">{this.props.previousCompletedPhraseAsTyped}</kbd>
-            </CSSTransition>
-          </TransitionGroup>
+              <CSSTransition timeout={5000} classNames="dissolve" appear={true}>
+                <kbd
+                  className="successfully-typed-text typed-text-input-positioning pre relative"
+                  style={{
+                    color: previousCompletedPhraseAccuracy
+                      ? "#23512C"
+                      : "#953159",
+                  }}
+                  aria-hidden="true"
+                >
+                  {this.props.previousCompletedPhraseAsTyped}
+                </kbd>
+              </CSSTransition>
+            </TransitionGroup>
           </samp>
           <span aria-hidden={textInputAccessibilityAriaHidden}>
             <textarea
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
-              className={`input-textarea typed-text-input-positioning typed-text-input-textarea${this.props.userSettings.upcomingWordsLayout === 'multiline' ? ' text-center' : ''}`}
+              className={`input-textarea typed-text-input-positioning typed-text-input-textarea${
+                this.props.userSettings.upcomingWordsLayout === "multiline"
+                  ? " text-center"
+                  : ""
+              }`}
               id="your-typed-text"
               onChange={this.props.updateMarkup}
               onKeyPress={this.keyPress.bind(this)}
@@ -112,8 +151,7 @@ class TypedText extends Component {
               spellCheck="false"
               value={this.props.actualText}
               wrap="off"
-              >
-            </textarea>
+            ></textarea>
           </span>
         </p>
       </div>
