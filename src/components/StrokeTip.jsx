@@ -91,7 +91,7 @@ export default function StrokeTip({
           >
             Hint:{" "}
           </span>
-          <div className="flex flex-wrap mr05">
+          <div className={`flex flex-wrap mr05${isMultiline ? " ml1" : ""}`}>
             {userSettings.showStrokesAsDiagrams &&
               splitBriefsIntoStrokes(currentStroke).map(
                 (strokeToDraw, index) => (
