@@ -4,12 +4,11 @@ import EntireMaterial from "./EntireMaterial";
 
 export default function MultiLineMaterial({
   actualText,
-  completedPhrases,
   currentPhrase,
+  currentPhraseID,
+  presentedMaterial,
   settings,
-  upcomingPhrases,
   userSettings,
-  ...props
 }) {
   return (
     <div className="mb1 nt1">
@@ -29,7 +28,7 @@ export default function MultiLineMaterial({
               actualText={actualText}
               settings={settings}
               userSettings={userSettings}
-              currentPhraseID={props.currentPhraseID}
+              currentPhraseID={currentPhraseID}
             />
             <div
               id="js-entire-material-text"
@@ -37,7 +36,7 @@ export default function MultiLineMaterial({
             >
               <EntireMaterial
                 spacePlacement={userSettings.spacePlacement}
-                presentedMaterial={props.lesson.presentedMaterial}
+                presentedMaterial={presentedMaterial}
               />
             </div>
           </div>
