@@ -87,37 +87,39 @@ export default function StrokeTip({
           </span>
           <div className="flex flex-wrap mr05">
             {userSettings.showStrokesAsDiagrams &&
-              splitBriefsIntoStrokes(currentStroke).map((strokeToDraw, index) => (
-                <React.Fragment key={index}>
-                  {Object.values(mapBriefsFunction(strokeToDraw)).some(
-                    (item) => item
-                  ) && (
-                    <div className="mt1 mr2">
-                      <StenoLayoutDiagram
-                        id={"diagramID-" + index + "-" + strokeToDraw}
-                        {...mapBriefsFunction(strokeToDraw)}
-                        brief={strokeToDraw}
-                        diagramWidth={diagramWidth}
-                      />
-                    </div>
-                  )}
-                  {Object.values(mapBriefsFunction(strokeToDraw)).every(
-                    (item) => !item
-                  ) && (
-                    <div
-                      className="mt1 mr2 unknown-steno-diagram"
-                      aria-hidden={true}
-                    >
-                      <StenoLayoutDiagram
-                        id={"diagramID-" + index + "-" + strokeToDraw}
-                        {...mapBriefsFunction("")}
-                        brief=""
-                        diagramWidth={diagramWidth}
-                      />
-                    </div>
-                  )}
-                </React.Fragment>
-              ))}
+              splitBriefsIntoStrokes(currentStroke).map(
+                (strokeToDraw, index) => (
+                  <React.Fragment key={index}>
+                    {Object.values(mapBriefsFunction(strokeToDraw)).some(
+                      (item) => item
+                    ) && (
+                      <div className="mt1 mr2">
+                        <StenoLayoutDiagram
+                          id={"diagramID-" + index + "-" + strokeToDraw}
+                          {...mapBriefsFunction(strokeToDraw)}
+                          brief={strokeToDraw}
+                          diagramWidth={diagramWidth}
+                        />
+                      </div>
+                    )}
+                    {Object.values(mapBriefsFunction(strokeToDraw)).every(
+                      (item) => !item
+                    ) && (
+                      <div
+                        className="mt1 mr2 unknown-steno-diagram"
+                        aria-hidden={true}
+                      >
+                        <StenoLayoutDiagram
+                          id={"diagramID-" + index + "-" + strokeToDraw}
+                          {...mapBriefsFunction("")}
+                          brief=""
+                          diagramWidth={diagramWidth}
+                        />
+                      </div>
+                    )}
+                  </React.Fragment>
+                )
+              )}
           </div>
           {!userSettings.showStrokesAsDiagrams ? (
             <div className={"db" + layoutTypeStyle}>
@@ -148,7 +150,8 @@ export default function StrokeTip({
             checked={showStrokesInLesson}
             onChange={changeShowStrokesInLesson}
           />
-          {`${targetStrokeCount} stroke${targetStrokeCount === 1 ? '' : 's' }` } (hint?)
+          {`${targetStrokeCount} stroke${targetStrokeCount === 1 ? "" : "s"}`}{" "}
+          (hint?)
         </label>
       </div>
     );
