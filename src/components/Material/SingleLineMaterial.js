@@ -44,6 +44,7 @@ export default function SingleLineMaterial({
           <pre className="relative translateX-10px">
             <span className={completedPhrasesClasses}>
               {completedPhrases.join(" ")}&#8203;
+              {userSettings.spacePlacement === "spaceBeforeOutput" ? "" : " "}
             </span>
             <div className={currentAndUpcomingPhrasesClasses}>
               <strong className="fw7" tabIndex="0">
