@@ -86,9 +86,17 @@ export default function CurrentMaterialHighlight({
         zIndex: 1,
       }}
     >
-      <strong className="fw7 pre" tabIndex="0" aria-label="Current word feedback">
-        <span className="matched steno-material" aria-label="Matched letters">{matched}</span>
-        <span className="steno-material" aria-label="Unmatched letters">{unmatched}</span>
+      <strong
+        className="fw7 pre"
+        tabIndex="0"
+        aria-label="Current word feedback"
+      >
+        <span className="matched steno-material" aria-label="Matched letters">
+          {matched}
+        </span>
+        <span className="steno-material" aria-label="Unmatched letters">
+          {unmatched}
+        </span>
       </strong>
     </div>
   );
