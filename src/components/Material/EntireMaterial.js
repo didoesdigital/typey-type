@@ -24,7 +24,9 @@ export default React.memo(function EntireMaterial({
       {spaceBeforeOutput}
       {phraseAndStroke.phrase.replaceAll(" ", " ")}
       {spaceAfterOutput}
-      {useSeparator && <span className="separator">&nbsp;&#8203;&shy;</span>}
+      {useSeparator && (
+        <span className="separator o-0">&nbsp;&#8203;&shy;</span>
+      )}
     </span>
   ));
 });
