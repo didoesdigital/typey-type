@@ -8,7 +8,7 @@ export default React.memo(function EntireMaterial({
   const isSpaceAfter = spacePlacement === "spaceAfterOutput";
 
   const spaceBeforeOutput = isSpaceBefore ? "​ " : "";
-  const spaceAfterOutput = isSpaceAfter ? " ​" : "";
+  const spaceAfterOutput = isSpaceAfter ? " ​­​" : "";
   const useSeparator =
     spacePlacement === "spaceOff" || spacePlacement === "spaceExact";
 
@@ -17,7 +17,7 @@ export default React.memo(function EntireMaterial({
       {spaceBeforeOutput}
       {phraseAndStroke.phrase.replaceAll(" ", " ")}
       {spaceAfterOutput}
-      {useSeparator && <span className="separator"> ​</span>}
+      {useSeparator && <span className="separator">&nbsp;&#8203;&shy;</span>}
     </span>
   ));
 });
