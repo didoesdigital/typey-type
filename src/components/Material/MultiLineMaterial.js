@@ -32,7 +32,9 @@ export default React.memo(function MultiLineMaterial({
             />
             <div
               id="js-entire-material-text"
-              className="dib de-emphasized fw4 relative"
+              className={`dib de-emphasized fw4 relative${
+                userSettings.blurMaterial ? " blur-words" : ""
+              }`}
             >
               <EntireMaterial
                 spacePlacement={userSettings.spacePlacement}
