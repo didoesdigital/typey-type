@@ -16,7 +16,11 @@ export default React.memo(function EntireMaterial({
     spacePlacement === "spaceOff" || spacePlacement === "spaceExact";
 
   return presentedMaterial.map((phraseAndStroke, index) => (
-    <span id={`presented-material-phrase-${index}`} key={index}>
+    <span
+      id={`presented-material-phrase-${index}`}
+      key={index}
+      className="hide-soft-hyphen"
+    >
       {spaceBeforeOutput}
       {phraseAndStroke.phrase.replaceAll(" ", " ")}
       {spaceAfterOutput}
