@@ -91,9 +91,9 @@ export default function StrokeTip({
           >
             Hint:{" "}
           </span>
-          <div className={`flex flex-wrap mr05${isMultiline ? " ml1" : ""}`}>
-            {userSettings.showStrokesAsDiagrams &&
-              splitBriefsIntoStrokes(currentStroke).map(
+          {userSettings.showStrokesAsDiagrams ? (
+            <div className={`flex flex-wrap mr05${isMultiline ? " ml1" : ""}`}>
+              {splitBriefsIntoStrokes(currentStroke).map(
                 (strokeToDraw, index) => (
                   <React.Fragment key={index}>
                     {Object.values(mapBriefsFunction(strokeToDraw)).some(
@@ -132,10 +132,14 @@ export default function StrokeTip({
                   </React.Fragment>
                 )
               )}
-          </div>
-          {!userSettings.showStrokesAsDiagrams ? (
+            </div>
+          ) : (
             <div className={"db" + layoutTypeStyle}>
-              <pre className={`overflow-auto mw-408 text-small${isMultiline ? ' flex' : ''}`}>
+              <pre
+                className={`overflow-auto mw-408 text-small${
+                  isMultiline ? " flex" : ""
+                }`}
+              >
                 <span
                   className="steno-stroke pa05 text-small"
                   aria-label={[...currentStroke].join(" ").replace("-", "dash")}
@@ -146,7 +150,7 @@ export default function StrokeTip({
                 </span>
               </pre>
             </div>
-          ) : undefined}
+          )}
         </div>
       );
     }
