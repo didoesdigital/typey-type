@@ -101,61 +101,67 @@ class TypedText extends Component {
     }
 
     return (
-      <div className="typed-text-container">
-        <label className="visually-hidden mb1" htmlFor="your-typed-text">
-          Write {this.props.currentPhrase}
-        </label>
-        <div
-          className="typed-text"
-          dangerouslySetInnerHTML={this.markUpTypedText(
-            this.props.currentPhrase,
-            this.props.actualText,
-            this.props.settings
-          )}
-        />
-        {sayCurrentPhraseButton}
-        <p className="input-text">
-          <samp className="pointer-none absolute absolute--fill w-100">
-            <TransitionGroup
-              className={`dib${isMultiline ? " flex justify-center" : ""}`}
-              component={"span"}
-              key={previousCompletedPhraseAsTypedKey}
-            >
-              <CSSTransition timeout={5000} classNames="dissolve" appear={true}>
-                <kbd
-                  className={`successfully-typed-text typed-text-input-positioning pre relative${
-                    isMultiline ? " text-center" : " text-left"
-                  }`}
-                  style={{
-                    color: previousCompletedPhraseAccuracy
-                      ? "#23512C"
-                      : "#953159",
-                  }}
-                  aria-hidden="true"
+      <div>
+        <div className="typed-text-container">
+          <label className="visually-hidden mb1" htmlFor="your-typed-text">
+            Write {this.props.currentPhrase}
+          </label>
+          <div
+            className="typed-text"
+            dangerouslySetInnerHTML={this.markUpTypedText(
+              this.props.currentPhrase,
+              this.props.actualText,
+              this.props.settings
+            )}
+          />
+          {sayCurrentPhraseButton}
+          <p className="input-text">
+            <samp className="pointer-none absolute absolute--fill w-100">
+              <TransitionGroup
+                className={`dib${isMultiline ? " flex justify-center" : ""}`}
+                component={"span"}
+                key={previousCompletedPhraseAsTypedKey}
+              >
+                <CSSTransition
+                  timeout={5000}
+                  classNames="dissolve"
+                  appear={true}
                 >
-                  {this.props.previousCompletedPhraseAsTyped}
-                </kbd>
-              </CSSTransition>
-            </TransitionGroup>
-          </samp>
-          <span aria-hidden={textInputAccessibilityAriaHidden}>
-            <textarea
-              autoCapitalize="off"
-              autoComplete="off"
-              autoCorrect="off"
-              className={`input-textarea typed-text-input-positioning typed-text-input-textarea${
-                isMultiline ? " text-center" : ""
-              }`}
-              id="your-typed-text"
-              onChange={this.props.updateMarkup}
-              onKeyPress={this.keyPress.bind(this)}
-              rows="1"
-              spellCheck="false"
-              value={this.props.actualText}
-              wrap="off"
-            ></textarea>
-          </span>
-        </p>
+                  <kbd
+                    className={`successfully-typed-text typed-text-input-positioning pre relative${
+                      isMultiline ? " text-center" : " text-left"
+                    }`}
+                    style={{
+                      color: previousCompletedPhraseAccuracy
+                        ? "#23512C"
+                        : "#953159",
+                    }}
+                    aria-hidden="true"
+                  >
+                    {this.props.previousCompletedPhraseAsTyped}
+                  </kbd>
+                </CSSTransition>
+              </TransitionGroup>
+            </samp>
+            <span aria-hidden={textInputAccessibilityAriaHidden}>
+              <textarea
+                autoCapitalize="off"
+                autoComplete="off"
+                autoCorrect="off"
+                className={`input-textarea typed-text-input-positioning typed-text-input-textarea${
+                  isMultiline ? " text-center" : ""
+                }`}
+                id="your-typed-text"
+                onChange={this.props.updateMarkup}
+                onKeyPress={this.keyPress.bind(this)}
+                rows="1"
+                spellCheck="false"
+                value={this.props.actualText}
+                wrap="off"
+              ></textarea>
+            </span>
+          </p>
+        </div>
       </div>
     );
   }
