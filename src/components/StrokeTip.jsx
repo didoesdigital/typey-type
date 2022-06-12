@@ -135,7 +135,7 @@ export default function StrokeTip({
           </div>
           {!userSettings.showStrokesAsDiagrams ? (
             <div className={"db" + layoutTypeStyle}>
-              <pre className="overflow-auto mw-408 text-small">
+              <pre className={`overflow-auto mw-408 text-small${isMultiline ? ' flex' : ''}`}>
                 <span
                   className="steno-stroke pa05 text-small"
                   aria-label={[...currentStroke].join(" ").replace("-", "dash")}
