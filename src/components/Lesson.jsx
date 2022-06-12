@@ -359,7 +359,7 @@ class Lesson extends Component {
                           </AnimateHeight>
                           <div role="article" className="lesson-canvas panel mx-auto mw-1440 p2 mb3 flex">
                             {revisionModeButton}
-                            <div className={`mx-auto mw100 mt10 min-width70 material-typed-text-and-hint flex-grow${this.props.userSettings.upcomingWordsLayout === "multiline" ? ' mw-844 mx-auto' : ''}`}>
+                            <div className="mx-auto mw100 mt10 min-width70 material-typed-text-and-hint flex-grow">
                               <Material
                                 actualText={this.props.actualText}
                                 currentPhrase={this.props.currentPhrase}

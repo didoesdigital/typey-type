@@ -101,7 +101,7 @@ class TypedText extends Component {
     }
 
     return (
-      <div>
+      <div className={isMultiline ? "mx-auto mw-844" : ""}>
         <div className="typed-text-container">
           <label className="visually-hidden mb1" htmlFor="your-typed-text">
             Write {this.props.currentPhrase}
