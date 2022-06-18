@@ -110,8 +110,8 @@ const AsyncDictionaries = Loadable({
   delay: 300
 });
 
-const AsyncGamesIndex = Loadable({
-  loader: () => import("./pages/games/GamesIndex"),
+const AsyncGames = Loadable({
+  loader: () => import("./pages/games/Games"),
   loading: PageLoading,
   delay: 300
 });
@@ -2300,7 +2300,7 @@ class App extends Component {
                     {header}
                     <DocumentTitle title={'Typey Type | Games'}>
                       <ErrorBoundary>
-                        <AsyncGamesIndex />
+                        <AsyncGames {...props} />
                       </ErrorBoundary>
                     </DocumentTitle>
                   </div>
