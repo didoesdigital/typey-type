@@ -7,6 +7,7 @@ import SHUFLInput from "./SHUFLInput";
 import SHUFLPuzzle from "./SHUFLPuzzle";
 
 import {
+  hasFewerThan7Letters,
   hasMoreThan2Letters,
   hasNoRepeatLetters,
   hasOnlyLowercaseLetters,
@@ -15,10 +16,14 @@ import {
 const filterMetWords = (startingMetWordsToday) =>
   Object.keys(startingMetWordsToday).filter(
     (translation) =>
+      hasFewerThan7Letters(translation) &&
       hasMoreThan2Letters(translation) &&
       hasNoRepeatLetters(translation) &&
       hasOnlyLowercaseLetters(translation)
   );
+
+const pickAWord = (filteredMetWords) =>
+  shuffle(filteredMetWords).slice(0, 1)[0].trim();
 
 export default function SHUFLGame({ startingMetWordsToday }) {
   const [material, setMaterial] = useState(null);
@@ -35,14 +40,31 @@ export default function SHUFLGame({ startingMetWordsToday }) {
     }
 
     setMaterial(filteredMetWords);
-    setPuzzleText(shuffle(Array.from(filteredMetWords[0].trim())).join(""));
-    setRightAnswers([filteredMetWords[0].trim()]);
+    const pickedWord = pickAWord(filteredMetWords);
+    setPuzzleText(shuffle(Array.from(pickedWord)).join(""));
+    const newRightAnswers = filteredMetWords.reduce((prevArr, currentWord) => {
+      return [...currentWord.trim()].sort().join("") ===
+        [...pickedWord.trim()].sort().join("")
+        ? [currentWord.trim(), ...prevArr]
+        : prevArr;
+    }, []);
+    setRightAnswers(newRightAnswers);
   }, [startingMetWordsToday]);
 
   const onChangeSHUFLInput = (inputText) => {
     setTypedText(inputText);
     if (rightAnswers.includes(inputText)) {
       setTypedText("");
+      const pickedWord = pickAWord(material);
+      setPuzzleText(shuffle(Array.from(pickedWord)).join(""));
+      const newRightAnswers = material.reduce((prevArr, currentWord) => {
+        return [...currentWord.trim()].sort().join("") ===
+          [...pickedWord.trim()].sort().join("")
+          ? [currentWord.trim(), ...prevArr]
+          : prevArr;
+      }, []);
+      setRightAnswers(newRightAnswers);
+      // console.log("SUCCESS");
     }
   };
 
