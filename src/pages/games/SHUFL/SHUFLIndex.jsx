@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import SHUFLGame from "./SHUFLGame";
 
-export default function SHUFLIndex() {
+export default function SHUFLIndex({ metWords }) {
   const mainHeading = useRef(null);
   useEffect(() => {
     if (mainHeading) {
@@ -23,7 +23,7 @@ export default function SHUFLIndex() {
         </div>
       </div>
       <div className="p3 mx-auto mw-1024">
-        <SHUFLGame />
+        <SHUFLGame metWords={metWords} />
       </div>
     </main>
   );
