@@ -1,5 +1,5 @@
 export const hasMoreThan2Letters = (translation) => {
-  return translation.length > 2
+  return translation.trim().length > 2;
 };
 
 export const hasNoRepeatLetters = (translation) => {

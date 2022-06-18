@@ -12,6 +12,10 @@ describe("hasMoreThan2Letters", () => {
   it("returns false for short words", () => {
     expect(hasMoreThan2Letters("to")).toEqual(false);
   });
+
+  it("returns false for spaced short words", () => {
+    expect(hasMoreThan2Letters(" of")).toEqual(false);
+  });
 });
 
 describe("hasNoRepeatLetters", () => {
