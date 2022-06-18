@@ -7,7 +7,7 @@ export const hasNoRepeatLetters = (translation) => {
   return uniqLetters.size === translation.length;
 };
 
-export const hasOnlyLowercaseLettersOrSpaces = (translation) => {
-  const regexp = /^[a-z ]+$/;
+export const hasOnlyLowercaseLetters = (translation) => {
+  const regexp = /^[a-z]+$/;
   return regexp.test(translation);
 };
