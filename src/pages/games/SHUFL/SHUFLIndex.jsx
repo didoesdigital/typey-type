@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import SHUFLGame from "./SHUFLGame";
 
 export default function SHUFLIndex() {
   const mainHeading = useRef(null);
@@ -24,8 +25,7 @@ export default function SHUFLIndex() {
       <div className="p3 mx-auto mw-1024">
         <div className="flex flex-wrap justify-between">
           <div className="mw-584">
-            <h3 id="typey-type-games">SHUFL game</h3>
-            <p>Play!</p>
+            <SHUFLGame />
           </div>
         </div>
       </div>
