@@ -9,5 +9,5 @@ export const hasNoRepeatLetters = (translation) => {
 
 export const hasOnlyLowercaseLetters = (translation) => {
   const regexp = /^[a-z]+$/;
-  return regexp.test(translation);
+  return regexp.test(translation.trim());
 };
