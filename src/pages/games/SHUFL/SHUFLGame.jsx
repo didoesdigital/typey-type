@@ -6,6 +6,8 @@ import { shuffle } from "d3-array";
 import SHUFLInput from "./SHUFLInput";
 import SHUFLPuzzle from "./SHUFLPuzzle";
 
+import { getRightAnswers } from "./SHUFLUtilities";
+
 import {
   hasFewerThan7Letters,
   hasMoreThan2Letters,
@@ -42,13 +44,7 @@ export default function SHUFLGame({ startingMetWordsToday }) {
     setMaterial(filteredMetWords);
     const pickedWord = pickAWord(filteredMetWords);
     setPuzzleText(shuffle(Array.from(pickedWord)).join(""));
-    const newRightAnswers = filteredMetWords.reduce((prevArr, currentWord) => {
-      return [...currentWord.trim()].sort().join("") ===
-        [...pickedWord.trim()].sort().join("")
-        ? [currentWord.trim(), ...prevArr]
-        : prevArr;
-    }, []);
-    setRightAnswers(newRightAnswers);
+    setRightAnswers(getRightAnswers(filteredMetWords, pickedWord));
   }, [startingMetWordsToday]);
 
   const onChangeSHUFLInput = (inputText) => {
@@ -57,13 +53,7 @@ export default function SHUFLGame({ startingMetWordsToday }) {
       setTypedText("");
       const pickedWord = pickAWord(material);
       setPuzzleText(shuffle(Array.from(pickedWord)).join(""));
-      const newRightAnswers = material.reduce((prevArr, currentWord) => {
-        return [...currentWord.trim()].sort().join("") ===
-          [...pickedWord.trim()].sort().join("")
-          ? [currentWord.trim(), ...prevArr]
-          : prevArr;
-      }, []);
-      setRightAnswers(newRightAnswers);
+      setRightAnswers(getRightAnswers(material, pickedWord));
       // console.log("SUCCESS");
     }
   };
