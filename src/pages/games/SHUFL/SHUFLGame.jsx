@@ -1,32 +1,22 @@
 import React, { useEffect, useState } from "react";
 import PARAMS from "../../../utils/params.js";
 import { Link } from "react-router-dom";
-
-const hasNoRepeatLetters = (phrase) => {
-  const uniqLetters = new Set(Array.from(phrase));
-  return uniqLetters.size === phrase.length;
-};
-
-const hasOnlyLettersOrSpaces = (phrase) => {
-  const regexp = /^[A-Za-z ]+$/;
-  return regexp.test(phrase);
-};
+import {
+  hasNoRepeatLetters,
+  hasOnlyLettersOrSpaces,
+} from "../../../utils/dictEntryPredicates";
 
 export default function SHUFLGame({ metWords }) {
   const [material, setMaterial] = useState(null);
+
   useEffect(() => {
-    if (!metWords) {
-      return;
-    }
+    if (!metWords) return;
     const filteredMetWords = Object.keys(metWords).filter(
       (phrase) => hasNoRepeatLetters(phrase) && hasOnlyLettersOrSpaces(phrase)
     );
-    if (filteredMetWords.length < 1) {
-      setMaterial(null);
-    } else {
-      setMaterial(filteredMetWords);
-    }
+    setMaterial(filteredMetWords.length < 1 ? null : filteredMetWords);
   }, [metWords]);
+
   return (
     <div className="flex flex-wrap justify-between">
       <div className="mx-auto mw-1024 min-width-320">
