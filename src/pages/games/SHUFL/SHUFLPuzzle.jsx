@@ -1,9 +1,11 @@
 import React from "react";
 
 export default function SHUFLPuzzle({ puzzleText }) {
+  console.log("SHUFLPuzzle");
+
   return (
     <p className="text-center">
-      <strong>{puzzleText}</strong>
+      <strong>{[...puzzleText].join(" ")}</strong>
     </p>
   );
 }
