@@ -23,11 +23,7 @@ export default function SHUFLIndex() {
         </div>
       </div>
       <div className="p3 mx-auto mw-1024">
-        <div className="flex flex-wrap justify-between">
-          <div className="mw-584">
-            <SHUFLGame />
-          </div>
-        </div>
+        <SHUFLGame />
       </div>
     </main>
   );
