@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 
-export default function SHUFLInput() {
+export default function SHUFLInput({ puzzleText }) {
   const [typedText, setTypedText] = useState("");
 
   const onChangeTypedText = (event) => {
-    setTypedText(event?.target?.value || "");
+    const inputText = event?.target?.value || "";
+    setTypedText(inputText);
+    console.log(inputText);
+    console.log(puzzleText);
+    if (inputText === puzzleText) {
+      console.log("SUCCESS");
+    }
   };
 
   return (
