@@ -2,19 +2,26 @@ import React, { useEffect, useState } from "react";
 import PARAMS from "../../../utils/params.js";
 import { Link } from "react-router-dom";
 import {
+  hasMoreThan2Letters,
   hasNoRepeatLetters,
   hasOnlyLettersOrSpaces,
 } from "../../../utils/dictEntryPredicates";
+
+const filterMetWords = (metWords) =>
+  Object.keys(metWords).filter(
+    (translation) =>
+      hasMoreThan2Letters(translation) &&
+      hasNoRepeatLetters(translation) &&
+      hasOnlyLettersOrSpaces(translation)
+  );
 
 export default function SHUFLGame({ metWords }) {
   const [material, setMaterial] = useState(null);
 
   useEffect(() => {
     if (!metWords) return;
-    const filteredMetWords = Object.keys(metWords).filter(
-      (phrase) => hasNoRepeatLetters(phrase) && hasOnlyLettersOrSpaces(phrase)
-    );
-    setMaterial(filteredMetWords.length < 1 ? null : filteredMetWords);
+    const filteredMetWords = filterMetWords(metWords);
+    setMaterial(filteredMetWords.length < 3 ? null : filteredMetWords);
   }, [metWords]);
 
   return (

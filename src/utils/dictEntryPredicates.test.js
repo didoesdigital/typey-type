@@ -1,7 +1,18 @@
 import {
+  hasMoreThan2Letters,
   hasNoRepeatLetters,
   hasOnlyLettersOrSpaces,
 } from "./dictEntryPredicates";
+
+describe("hasMoreThan2Letters", () => {
+  it("returns true for word most words", () => {
+    expect(hasMoreThan2Letters("sat")).toEqual(true);
+  });
+
+  it("returns false for short words", () => {
+    expect(hasMoreThan2Letters("to")).toEqual(false);
+  });
+});
 
 describe("hasNoRepeatLetters", () => {
   it("returns true for word made of unique letters", () => {
