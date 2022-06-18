@@ -110,6 +110,11 @@ const AsyncDictionaries = Loadable({
   delay: 300
 });
 
+const AsyncGamesIndex = Loadable({
+  loader: () => import("./pages/games/GamesIndex"),
+  loading: PageLoading,
+  delay: 300
+});
 
 // Test PageLoadingPastDelay at Dictionaries route:
 // import PageLoadingPastDelay from './components/PageLoadingPastDelay';
@@ -2285,6 +2290,17 @@ class App extends Component {
                           userSettings={this.state.userSettings}
                           {...props}
                         />
+                      </ErrorBoundary>
+                    </DocumentTitle>
+                  </div>
+                  }
+                />
+                <Route path="/games" render={ (props) =>
+                  <div>
+                    {header}
+                    <DocumentTitle title={'Typey Type | Games'}>
+                      <ErrorBoundary>
+                        <AsyncGamesIndex />
                       </ErrorBoundary>
                     </DocumentTitle>
                   </div>
