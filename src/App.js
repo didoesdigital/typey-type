@@ -2300,7 +2300,10 @@ class App extends Component {
                     {header}
                     <DocumentTitle title={'Typey Type | Games'}>
                       <ErrorBoundary>
-                        <AsyncGames metWords={this.state.metWords} {...props} />
+                        <AsyncGames
+                          startingMetWordsToday={this.state.startingMetWordsToday}
+                          {...props}
+                        />
                       </ErrorBoundary>
                     </DocumentTitle>
                   </div>

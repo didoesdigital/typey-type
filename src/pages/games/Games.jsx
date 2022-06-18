@@ -15,13 +15,15 @@ const AsyncSHUFL = Loadable({
   delay: 300,
 });
 
-const Games = ({ match, metWords }) => {
+const Games = ({ match, startingMetWordsToday }) => {
   return (
     <Switch>
       <Route
         exact={true}
         path={`${match.url}/SHUFL`}
-        render={() => <AsyncSHUFL metWords={metWords} />}
+        render={() => (
+          <AsyncSHUFL startingMetWordsToday={startingMetWordsToday} />
+        )}
       />
       <Route
         exact={true}

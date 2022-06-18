@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PARAMS from "../../../utils/params.js";
 import { Link } from "react-router-dom";
+import { shuffle } from "d3-array";
 
 import SHUFLInput from "./SHUFLInput";
 import SHUFLPuzzle from "./SHUFLPuzzle";
@@ -11,28 +12,39 @@ import {
   hasOnlyLowercaseLetters,
 } from "../../../utils/dictEntryPredicates";
 
-const filterMetWords = (metWords) =>
-  Object.keys(metWords).filter(
+const filterMetWords = (startingMetWordsToday) =>
+  Object.keys(startingMetWordsToday).filter(
     (translation) =>
       hasMoreThan2Letters(translation) &&
       hasNoRepeatLetters(translation) &&
       hasOnlyLowercaseLetters(translation)
   );
 
-export default function SHUFLGame({ metWords }) {
+export default function SHUFLGame({ startingMetWordsToday }) {
   const [material, setMaterial] = useState(null);
-  const [puzzleText, setPuzzleText] = useState(null);
+  const [puzzleText, setPuzzleText] = useState(""); // e.g. "was"
+  const [rightAnswers, setRightAnswers] = useState([]); // e.g. "was"
+  const [typedText, setTypedText] = useState("");
 
   useEffect(() => {
-    if (!metWords) return;
-    const filteredMetWords = filterMetWords(metWords);
+    if (!startingMetWordsToday) return;
+    const filteredMetWords = filterMetWords(startingMetWordsToday);
     if (filteredMetWords.length < 3) {
       setMaterial(null);
       return;
     }
+
     setMaterial(filteredMetWords);
-    setPuzzleText(filteredMetWords[0].trim());
-  }, [metWords]);
+    setPuzzleText(shuffle(Array.from(filteredMetWords[0].trim())).join(""));
+    setRightAnswers([filteredMetWords[0].trim()]);
+  }, [startingMetWordsToday]);
+
+  const onChangeSHUFLInput = (inputText) => {
+    setTypedText(inputText);
+    if (rightAnswers.includes(inputText)) {
+      setTypedText("");
+    }
+  };
 
   return (
     <div className="flex flex-wrap justify-between">
@@ -46,7 +58,10 @@ export default function SHUFLGame({ metWords }) {
               them all back in order.
             </p>
             <SHUFLPuzzle puzzleText={puzzleText} />
-            <SHUFLInput puzzleText={puzzleText} />
+            <SHUFLInput
+              typedText={typedText}
+              onChangeSHUFLInput={onChangeSHUFLInput}
+            />
           </>
         ) : (
           <p>
