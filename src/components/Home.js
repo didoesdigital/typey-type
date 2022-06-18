@@ -208,6 +208,15 @@ class Home extends Component {
           </div>
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
+              <div className="mw-584">
+                <h3>Games</h3>
+                <p>Play games to mix it up, have fun, and increase your speed.</p>
+                <Link to='/games/' className="link-button dib" style={{lineHeight: 2}}>Play</Link>
+              </div>
+            </div>
+          </div>
+          <div className="bg-white landing-page-section">
+            <div className="p3 mx-auto mw-1024">
               <div className="text-center">
                 <h3 id="steno-news">Keep up with news</h3>
                 <p>Sign up for{" "}
