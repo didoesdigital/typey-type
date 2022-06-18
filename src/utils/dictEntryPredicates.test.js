@@ -1,7 +1,7 @@
 import {
   hasMoreThan2Letters,
   hasNoRepeatLetters,
-  hasOnlyLettersOrSpaces,
+  hasOnlyLowercaseLettersOrSpaces,
 } from "./dictEntryPredicates";
 
 describe("hasMoreThan2Letters", () => {
@@ -24,16 +24,16 @@ describe("hasNoRepeatLetters", () => {
   });
 });
 
-describe("hasOnlyLettersOrSpaces", () => {
+describe("hasOnlyLowercaseLettersOrSpaces", () => {
   it("returns true for phrasing brief", () => {
-    expect(hasOnlyLettersOrSpaces("of the")).toEqual(true);
+    expect(hasOnlyLowercaseLettersOrSpaces("of the")).toEqual(true);
   });
 
-  it("returns true for uppercase phrase", () => {
-    expect(hasOnlyLettersOrSpaces("FRIDAY")).toEqual(true);
+  it("returns false for any uppercase letters", () => {
+    expect(hasOnlyLowercaseLettersOrSpaces("The")).toEqual(false);
   });
 
   it("returns false for phrasing brief", () => {
-    expect(hasOnlyLettersOrSpaces("didn't")).toEqual(false);
+    expect(hasOnlyLowercaseLettersOrSpaces("didn't")).toEqual(false);
   });
 });

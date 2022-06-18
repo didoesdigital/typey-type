@@ -8,7 +8,7 @@ import SHUFLPuzzle from "./SHUFLPuzzle";
 import {
   hasMoreThan2Letters,
   hasNoRepeatLetters,
-  hasOnlyLettersOrSpaces,
+  hasOnlyLowercaseLettersOrSpaces,
 } from "../../../utils/dictEntryPredicates";
 
 const filterMetWords = (metWords) =>
@@ -16,7 +16,7 @@ const filterMetWords = (metWords) =>
     (translation) =>
       hasMoreThan2Letters(translation) &&
       hasNoRepeatLetters(translation) &&
-      hasOnlyLettersOrSpaces(translation)
+      hasOnlyLowercaseLettersOrSpaces(translation)
   );
 
 export default function SHUFLGame({ metWords }) {
