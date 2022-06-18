@@ -1,8 +1,19 @@
 import {
+  hasFewerThan7Letters,
   hasMoreThan2Letters,
   hasNoRepeatLetters,
   hasOnlyLowercaseLetters,
 } from "./dictEntryPredicates";
+
+describe("hasFewerThan7Letters", () => {
+  it("returns true for average words", () => {
+    expect(hasFewerThan7Letters("severe")).toEqual(true);
+  });
+
+  it("returns false for long words", () => {
+    expect(hasFewerThan7Letters("lecture")).toEqual(false);
+  });
+});
 
 describe("hasMoreThan2Letters", () => {
   it("returns true for word most words", () => {

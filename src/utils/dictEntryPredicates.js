@@ -1,3 +1,7 @@
+export const hasFewerThan7Letters = (translation) => {
+  return translation.trim().length < 7;
+};
+
 export const hasMoreThan2Letters = (translation) => {
   return translation.trim().length > 2;
 };
