@@ -93,6 +93,10 @@ class Lesson extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.props.stopLesson()
+  }
+
   isCustom() {
     return ((this.props.location.pathname === '/lessons/custom') || (this.props.location.pathname === '/lessons/custom/setup'));
   }
