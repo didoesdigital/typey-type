@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PARAMS from "../../../utils/params.js";
 import { Link } from "react-router-dom";
+
+import SHUFLInput from "./SHUFLInput";
+
 import {
   hasMoreThan2Letters,
   hasNoRepeatLetters,
@@ -33,6 +36,7 @@ export default function SHUFLGame({ metWords }) {
             The steno robots have been dancing too much and shuffled all the
             letters out of order! You need to type the correct word to get them
             all back in order.
+            <SHUFLInput />
           </p>
         ) : (
           <p>
