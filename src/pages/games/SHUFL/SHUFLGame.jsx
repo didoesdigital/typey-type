@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import PARAMS from "../../../utils/params.js";
-import { Link } from "react-router-dom";
 import { shuffle } from "d3-array";
 
 import SHUFLInput from "./SHUFLInput";
 import SHUFLPuzzle from "./SHUFLPuzzle";
+import EmptyState from "./EmptyState";
 
 import { getRightAnswers } from "./SHUFLUtilities";
 
@@ -78,19 +77,7 @@ export default function SHUFLGame({ startingMetWordsToday }) {
             />
           </>
         ) : (
-          <p>
-            The SHUFL game is more fun when there are words to shuffle. Either
-            restore your previous <Link to="/progress">progress</Link> or learn{" "}
-            <Link
-              to={
-                "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&" +
-                PARAMS.discoverParams
-              }
-            >
-              some new words
-            </Link>
-            .
-          </p>
+          <EmptyState />
         )}
       </div>
     </div>
