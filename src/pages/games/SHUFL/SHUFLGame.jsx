@@ -5,6 +5,7 @@ import { initConfig, gameReducer } from "./gameReducer";
 import SHUFLInput from "./SHUFLInput";
 import SHUFLPuzzle from "./SHUFLPuzzle";
 import EmptyState from "./EmptyState";
+import Completed from "./Completed";
 
 import {
   getRightAnswers,
@@ -12,6 +13,8 @@ import {
   selectMaterial,
   shuffleWord,
 } from "./SHUFLUtilities";
+
+export const SHUFLDispatch = React.createContext(null);
 
 export default function SHUFLGame({ startingMetWordsToday }) {
   const [material, setMaterial] = useState(null);
@@ -23,22 +26,8 @@ export default function SHUFLGame({ startingMetWordsToday }) {
     undefined, // init state
     initConfig
   );
-
   const progress = useMemo(() => {
-    return state.gameComplete ? (
-      <p>
-        You win!{" "}
-        <button
-          onClick={() => {
-            dispatch({ type: actions.restartGame });
-          }}
-        >
-          Restart
-        </button>
-      </p>
-    ) : (
-      <p>Round: {state.roundIndex + 1}</p>
-    );
+    return state.gameComplete ? null : <p>Round: {state.roundIndex + 1}</p>;
   }, [state]);
 
   useEffect(() => {
@@ -74,7 +63,11 @@ export default function SHUFLGame({ startingMetWordsToday }) {
 
         {progress}
 
-        {state.gameComplete ? null : material ? (
+        {state.gameComplete ? (
+          <SHUFLDispatch.Provider value={dispatch}>
+            <Completed />
+          </SHUFLDispatch.Provider>
+        ) : material ? (
           <>
             <p>
               The steno robots have been dancing too much and shuffled all the
