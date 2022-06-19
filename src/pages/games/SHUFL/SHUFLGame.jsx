@@ -50,9 +50,10 @@ export default function SHUFLGame({ startingMetWordsToday }) {
       const pickedWord = pickAWord(material);
       setPuzzleText(shuffleWord(pickedWord));
       setRightAnswers(getRightAnswers(material, pickedWord));
-      // console.log("SUCCESS");
       dispatch({ type: actions.moveToNextRound });
     }
+
+    if (process.env.NODE_ENV === "development") console.log(rightAnswers);
   };
 
   return (
@@ -80,7 +81,6 @@ export default function SHUFLGame({ startingMetWordsToday }) {
                   </p>
                 </div>
               </div>
-
               <RoundProgress round={state.roundIndex + 1} />
             </div>
 

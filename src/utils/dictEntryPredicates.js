@@ -1,4 +1,5 @@
 export const hasFewerThan7Letters = (translation) => {
+  if (process.env.NODE_ENV === 'development') {return translation.trim().length < 5;}
   return translation.trim().length < 7;
 };
 
