@@ -1,6 +1,13 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 export default function SHUFLInput({ typedText, onChangeSHUFLInput }) {
+  const SHUFLInput = useRef(null);
+  useEffect(() => {
+    if (SHUFLInput) {
+      SHUFLInput.current.focus();
+    }
+  }, []);
+
   const onChangeTypedText = (event) => {
     const inputText = event?.target?.value || "";
     onChangeSHUFLInput(inputText);
@@ -8,6 +15,7 @@ export default function SHUFLInput({ typedText, onChangeSHUFLInput }) {
 
   return (
     <textarea
+      ref={SHUFLInput}
       autoCapitalize="off"
       autoComplete="off"
       autoCorrect="off"
