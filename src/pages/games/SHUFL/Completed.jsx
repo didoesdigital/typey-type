@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useCallback, useContext, useEffect, useRef } from "react";
 import { actions } from "./gameActions";
 import { SHUFLDispatch } from "./SHUFLGame";
 import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";
@@ -34,22 +34,29 @@ export default function SHUFLPuzzle() {
     };
   }, [canvasRef, canvasWidth, canvasHeight]);
 
-  const restartConfetti = (event) => {
-    if (
-      event &&
-      ((event.keyCode && event.keyCode === 13) || event.type === "click")
-    ) {
-      particles.splice(0);
-      Confetti.cancelAnimation();
-      Confetti.setupCanvas({ sparsity: 170, colors: 4 }, "you-win", particles);
-      Confetti.restartAnimation(
-        particles,
-        canvasRef.current,
-        canvasWidth,
-        canvasHeight
-      );
-    }
-  };
+  const restartConfetti = useCallback(
+    (event) => {
+      if (
+        event &&
+        ((event.keyCode && event.keyCode === 13) || event.type === "click")
+      ) {
+        particles.splice(0);
+        Confetti.cancelAnimation();
+        Confetti.setupCanvas(
+          { sparsity: 170, colors: 4 },
+          "you-win",
+          particles
+        );
+        Confetti.restartAnimation(
+          particles,
+          canvasRef.current,
+          canvasWidth,
+          canvasHeight
+        );
+      }
+    },
+    [canvasRef, canvasWidth, canvasHeight]
+  );
 
   return (
     <>
