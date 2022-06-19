@@ -19,13 +19,15 @@ export const pickAWord = (filteredMetWords) =>
   shuffle(filteredMetWords.slice()).slice(0, 1)[0].trim();
 
 export const selectMaterial = (startingMetWordsToday) =>
-  Object.keys(startingMetWordsToday).filter(
-    (translation) =>
-      hasFewerThan7Letters(translation) &&
-      hasMoreThan2Letters(translation) &&
-      hasNoRepeatLetters(translation) &&
-      hasOnlyLowercaseLetters(translation)
-  );
+  Object.keys(startingMetWordsToday)
+    .map((word) => word.trim())
+    .filter(
+      (translation) =>
+        hasFewerThan7Letters(translation) &&
+        hasMoreThan2Letters(translation) &&
+        hasNoRepeatLetters(translation) &&
+        hasOnlyLowercaseLetters(translation)
+    );
 
 export const shuffleWord = (pickedWord) =>
   shuffle(Array.from(pickedWord)).join("");
