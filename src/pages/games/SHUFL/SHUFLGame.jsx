@@ -15,7 +15,7 @@ import {
   hasOnlyLowercaseLetters,
 } from "../../../utils/dictEntryPredicates";
 
-const filterMetWords = (startingMetWordsToday) =>
+const selectMaterial = (startingMetWordsToday) =>
   Object.keys(startingMetWordsToday).filter(
     (translation) =>
       hasFewerThan7Letters(translation) &&
@@ -25,7 +25,9 @@ const filterMetWords = (startingMetWordsToday) =>
   );
 
 const pickAWord = (filteredMetWords) =>
-  shuffle(filteredMetWords).slice(0, 1)[0].trim();
+  shuffle(filteredMetWords.slice()).slice(0, 1)[0].trim();
+
+const shuffleWord = (pickedWord) => shuffle(Array.from(pickedWord)).join("");
 
 export default function SHUFLGame({ startingMetWordsToday }) {
   const [material, setMaterial] = useState(null);
@@ -35,7 +37,7 @@ export default function SHUFLGame({ startingMetWordsToday }) {
 
   useEffect(() => {
     if (!startingMetWordsToday) return;
-    const filteredMetWords = filterMetWords(startingMetWordsToday);
+    const filteredMetWords = selectMaterial(startingMetWordsToday);
     if (filteredMetWords.length < 3) {
       setMaterial(null);
       return;
@@ -43,7 +45,7 @@ export default function SHUFLGame({ startingMetWordsToday }) {
 
     setMaterial(filteredMetWords);
     const pickedWord = pickAWord(filteredMetWords);
-    setPuzzleText(shuffle(Array.from(pickedWord)).join(""));
+    setPuzzleText(shuffleWord(pickedWord));
     setRightAnswers(getRightAnswers(filteredMetWords, pickedWord));
   }, [startingMetWordsToday]);
 
@@ -52,7 +54,7 @@ export default function SHUFLGame({ startingMetWordsToday }) {
     if (rightAnswers.includes(inputText)) {
       setTypedText("");
       const pickedWord = pickAWord(material);
-      setPuzzleText(shuffle(Array.from(pickedWord)).join(""));
+      setPuzzleText(shuffleWord(pickedWord));
       setRightAnswers(getRightAnswers(material, pickedWord));
       // console.log("SUCCESS");
     }
