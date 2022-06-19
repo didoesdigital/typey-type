@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useReducer, useState } from "react";
+import { actions } from "./gameActions";
+import { initConfig, gameReducer } from "./gameReducer";
 
 import SHUFLInput from "./SHUFLInput";
 import SHUFLPuzzle from "./SHUFLPuzzle";
@@ -16,6 +18,28 @@ export default function SHUFLGame({ startingMetWordsToday }) {
   const [puzzleText, setPuzzleText] = useState(""); // e.g. "was"
   const [rightAnswers, setRightAnswers] = useState([]); // e.g. "was"
   const [typedText, setTypedText] = useState("");
+  const [state, dispatch] = useReducer(
+    gameReducer,
+    undefined, // init state
+    initConfig
+  );
+
+  const progress = useMemo(() => {
+    return state.gameComplete ? (
+      <p>
+        You win!{" "}
+        <button
+          onClick={() => {
+            dispatch({ type: actions.restartGame });
+          }}
+        >
+          Restart
+        </button>
+      </p>
+    ) : (
+      <p>Round: {state.roundIndex + 1}</p>
+    );
+  }, [state]);
 
   useEffect(() => {
     if (!startingMetWordsToday) return;
@@ -39,6 +63,7 @@ export default function SHUFLGame({ startingMetWordsToday }) {
       setPuzzleText(shuffleWord(pickedWord));
       setRightAnswers(getRightAnswers(material, pickedWord));
       // console.log("SUCCESS");
+      dispatch({ type: actions.moveToNextRound });
     }
   };
 
@@ -46,7 +71,10 @@ export default function SHUFLGame({ startingMetWordsToday }) {
     <div className="flex flex-wrap justify-between">
       <div className="mx-auto mw-1024 min-width-320">
         <h3 id="typey-type-SHUFL-game">SHUFL game</h3>
-        {material ? (
+
+        {progress}
+
+        {state.gameComplete ? null : material ? (
           <>
             <p>
               The steno robots have been dancing too much and shuffled all the
