@@ -2437,3 +2437,14 @@ $lineAdjustment: 4px;
   }
 }
 
+.bloop-appear {
+  transform: scale(1);
+}
+.bloop-appear.bloop-appear-active {
+  transform: scale(2);
+  transition: transform 0.5s cubic-bezier(.61,0,.48,1);
+}
+.bloop-enter-done {
+  transform: scale(1);
+  transition: transform 0.5s cubic-bezier(.91,0,.28,1);
+}
