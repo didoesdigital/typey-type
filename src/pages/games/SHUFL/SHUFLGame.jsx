@@ -20,8 +20,8 @@ export const SHUFLDispatch = React.createContext(null);
 
 export default function SHUFLGame({ startingMetWordsToday }) {
   const [material, setMaterial] = useState(null);
-  const [puzzleText, setPuzzleText] = useState(""); // e.g. "was"
-  const [rightAnswers, setRightAnswers] = useState([]); // e.g. "was"
+  const [puzzleText, setPuzzleText] = useState("");
+  const [rightAnswers, setRightAnswers] = useState([]);
   const [typedText, setTypedText] = useState("");
   const [state, dispatch] = useReducer(
     gameReducer,
