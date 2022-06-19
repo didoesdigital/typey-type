@@ -1,13 +1,13 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { actions } from "./gameActions";
 import { initConfig, gameReducer } from "./gameReducer";
 import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
 
 import SHUFLInput from "./SHUFLInput";
 import SHUFLPuzzle from "./SHUFLPuzzle";
-import EmptyState from "./EmptyState";
 import Completed from "./Completed";
+import EmptyState from "./EmptyState";
+import RoundProgress from "./RoundProgress";
 
 import {
   getRightAnswers,
@@ -81,26 +81,7 @@ export default function SHUFLGame({ startingMetWordsToday }) {
                 </div>
               </div>
 
-              <div className="flex flex-grow">
-                <p className="text-right w-100">
-                  Round:{" "}
-                  <TransitionGroup
-                    className={"dib"}
-                    component={"span"}
-                    key={state.roundIndex}
-                  >
-                    <CSSTransition
-                      timeout={500}
-                      classNames="bloop"
-                      appear={true}
-                    >
-                      <strong className="dib">{state.roundIndex + 1}</strong>
-                    </CSSTransition>
-                  </TransitionGroup>
-                  <br />
-                  Level: 1
-                </p>
-              </div>
+              <RoundProgress round={state.roundIndex + 1} />
             </div>
 
             <SHUFLPuzzle puzzleText={puzzleText} />
