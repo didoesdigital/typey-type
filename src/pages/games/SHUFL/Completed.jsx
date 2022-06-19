@@ -1,9 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { actions } from "./gameActions";
 import { SHUFLDispatch } from "./SHUFLGame";
 import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";
 
 export default function SHUFLPuzzle() {
+  const playAgainButton = useRef(null);
+  useEffect(() => {
+    if (playAgainButton) {
+      playAgainButton.current.focus();
+    }
+  }, []);
+
   const dispatch = useContext(SHUFLDispatch);
   return (
     <>
@@ -13,12 +20,13 @@ export default function SHUFLPuzzle() {
       <p className="text-center">You win! </p>
       <p className="mx-auto text-center">
         <button
+          ref={playAgainButton}
           className="button"
           onClick={() => {
             dispatch({ type: actions.restartGame });
           }}
         >
-          Restart
+          Play again
         </button>
       </p>
     </>
