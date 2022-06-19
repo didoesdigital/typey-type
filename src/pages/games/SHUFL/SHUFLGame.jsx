@@ -57,7 +57,9 @@ export default function SHUFLGame({ startingMetWordsToday }) {
   return (
     <div className="flex flex-wrap justify-between">
       <div className="mx-auto mw-1024 min-width-320 w-100">
-        <h3 id="typey-type-SHUFL-game">SHUFL game</h3>
+        <h3 id="typey-type-SHUFL-game" className="text-center mb3">
+          SHUFL game
+        </h3>
         {state.gameComplete ? (
           <SHUFLDispatch.Provider value={dispatch}>
             <Completed />
