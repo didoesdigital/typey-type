@@ -70,7 +70,7 @@ export default function SHUFLGame({ startingMetWordsToday }) {
               <div className="mw-844 mr3 flex-grow">
                 <div className="flex">
                   <div className="w-100 mw-48 mr3">
-                    <RaverRobot />
+                    <RaverRobot id="raver-robot-SHUFL" />
                   </div>
                   <p>
                     The steno robots have been dancing too much and shuffled all
