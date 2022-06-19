@@ -6,7 +6,7 @@ import * as Confetti from "../../../utils/confetti.js";
 
 const particles = [];
 
-export default function SHUFLPuzzle() {
+export default function Completed() {
   const dispatch = useContext(SHUFLDispatch);
   const playAgainButton = useRef(null);
   const canvasRef = useRef(null);
