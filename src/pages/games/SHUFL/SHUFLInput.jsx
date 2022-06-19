@@ -14,7 +14,7 @@ export default function SHUFLInput({ typedText, onChangeSHUFLInput }) {
       className={
         "input-textarea typed-text-input-positioning typed-text-input-textarea text-center"
       }
-      id="your-typed-text"
+      id="SHUFL-input"
       onChange={onChangeTypedText}
       rows="1"
       spellCheck="false"
