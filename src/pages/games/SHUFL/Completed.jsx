@@ -7,6 +7,7 @@ import * as Confetti from "../../../utils/confetti.js";
 const particles = [];
 
 export default function SHUFLPuzzle() {
+  const dispatch = useContext(SHUFLDispatch);
   const playAgainButton = useRef(null);
   const canvasRef = useRef(null);
   const canvasWidth = Math.floor(window.innerWidth);
@@ -33,7 +34,23 @@ export default function SHUFLPuzzle() {
     };
   }, [canvasRef, canvasWidth, canvasHeight]);
 
-  const dispatch = useContext(SHUFLDispatch);
+  const restartConfetti = (event) => {
+    if (
+      event &&
+      ((event.keyCode && event.keyCode === 13) || event.type === "click")
+    ) {
+      particles.splice(0);
+      Confetti.cancelAnimation();
+      Confetti.setupCanvas({ sparsity: 170, colors: 4 }, "you-win", particles);
+      Confetti.restartAnimation(
+        particles,
+        canvasRef.current,
+        canvasWidth,
+        canvasHeight
+      );
+    }
+  };
+
   return (
     <>
       <canvas
@@ -42,12 +59,18 @@ export default function SHUFLPuzzle() {
         height={canvasHeight}
         className="fixed celebration-canvas top-0 left-0 pointer-none"
       />
-      <div className="w-100 mw-48 mx-auto">
-        <HappyRobot />
+      <div
+        id="you-win"
+        tabIndex="0"
+        onClick={restartConfetti.bind(this)}
+        onKeyDown={restartConfetti.bind(this)}
+        className="w-100 pt1"
+      >
+        <div className="w-100 mw-48 mx-auto">
+          <HappyRobot />
+        </div>
+        <p className="text-center w-100">You win!</p>
       </div>
-      <p id="you-win" className="text-center w-100">
-        You win!
-      </p>
       <p className="mx-auto text-center">
         <button
           ref={playAgainButton}
