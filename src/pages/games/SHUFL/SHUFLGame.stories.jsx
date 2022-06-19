@@ -21,10 +21,10 @@ const Template = (args) => (
 
 export const SHUFLGameStory = Template.bind({});
 SHUFLGameStory.args = {
-  metWords: metWordsBeginner,
+  startingMetWordsToday: metWordsBeginner,
 };
 
 export const SHUFLGameEmptyState = Template.bind({});
 SHUFLGameEmptyState.args = {
-  metWords: {},
+  startingMetWordsToday: {},
 };
