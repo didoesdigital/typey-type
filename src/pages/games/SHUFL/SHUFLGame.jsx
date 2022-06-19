@@ -1,6 +1,7 @@
-import React, { useEffect, useMemo, useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import { actions } from "./gameActions";
 import { initConfig, gameReducer } from "./gameReducer";
+import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
 
 import SHUFLInput from "./SHUFLInput";
 import SHUFLPuzzle from "./SHUFLPuzzle";
@@ -26,9 +27,6 @@ export default function SHUFLGame({ startingMetWordsToday }) {
     undefined, // init state
     initConfig
   );
-  const progress = useMemo(() => {
-    return state.gameComplete ? null : <p>Round: {state.roundIndex + 1}</p>;
-  }, [state]);
 
   useEffect(() => {
     if (!startingMetWordsToday) return;
@@ -60,20 +58,35 @@ export default function SHUFLGame({ startingMetWordsToday }) {
     <div className="flex flex-wrap justify-between">
       <div className="mx-auto mw-1024 min-width-320 w-100">
         <h3 id="typey-type-SHUFL-game">SHUFL game</h3>
-
-        {progress}
-
         {state.gameComplete ? (
           <SHUFLDispatch.Provider value={dispatch}>
             <Completed />
           </SHUFLDispatch.Provider>
         ) : material ? (
           <>
-            <p>
-              The steno robots have been dancing too much and shuffled all the
-              letters out of order! You need to type the correct word to get
-              them all back in order.
-            </p>
+            <div className="flex flex-wrap">
+              <div className="mw-844 mr3 flex-grow">
+                <div className="flex">
+                  <div className="w-100 mw-48 mr3">
+                    <RaverRobot />
+                  </div>
+                  <p>
+                    The steno robots have been dancing too much and shuffled all
+                    the letters out of order! You need to type the correct word
+                    to get them all back in order.
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex flex-grow">
+                <p className="text-right w-100">
+                  Round: {state.roundIndex + 1}
+                  <br />
+                  Level: 1
+                </p>
+              </div>
+            </div>
+
             <SHUFLPuzzle puzzleText={puzzleText} />
             <SHUFLInput
               typedText={typedText}
