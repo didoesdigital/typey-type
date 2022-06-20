@@ -6,7 +6,7 @@ import * as Confetti from "../../../utils/confetti.js";
 
 const particles = [];
 
-export default function Completed() {
+export default React.memo(function Completed() {
   const dispatch = useContext(SHUFLDispatch);
   const playAgainButton = useRef(null);
   const canvasRef = useRef(null);
@@ -91,4 +91,4 @@ export default function Completed() {
       </p>
     </>
   );
-}
+});
