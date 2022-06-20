@@ -1,11 +1,24 @@
 import React from "react";
 
+const handleHintClick = (event, setShowHint) => {
+  event.preventDefault();
+  const yourSHUFLinput = document.getElementById("SHUFL-input");
+  if (yourSHUFLinput) {
+    yourSHUFLinput.focus();
+  }
+  setShowHint(true);
+};
+
 export default function SHUFLHint({ currentStroke, setShowHint, showHint }) {
   return (
     <>
       {!showHint && (
         <p className="mt3 text-center">
-          <a href="#hint" className="dib" onClick={() => setShowHint(true)}>
+          <a
+            href="#hint"
+            className="dib"
+            onClick={(event) => handleHintClick(event, setShowHint)}
+          >
             Hint?
           </a>
         </p>
