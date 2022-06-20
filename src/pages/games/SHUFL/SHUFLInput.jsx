@@ -42,7 +42,7 @@ export default function SHUFLInput({
                 }
                 aria-hidden="true"
               >
-                {previousCompletedPhraseAsTyped}
+                {round > 1 ? previousCompletedPhraseAsTyped : ""}
               </kbd>
             </CSSTransition>
           </TransitionGroup>

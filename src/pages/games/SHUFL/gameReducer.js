@@ -19,6 +19,7 @@ export const gameReducer = (state, action) => {
         ? {
             ...state,
             gameComplete: true,
+            roundIndex: 0,
           }
         : {
             ...state,
