@@ -29,7 +29,6 @@ export default function SHUFLGame({ startingMetWordsToday, updateMetWords }) {
   );
 
   useEffect(() => {
-    if (!startingMetWordsToday) return;
     const filteredMetWords = selectMaterial(startingMetWordsToday);
     setMaterial(filteredMetWords);
     const pickedWord = pickAWord(filteredMetWords);

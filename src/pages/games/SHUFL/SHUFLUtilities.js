@@ -39,6 +39,7 @@ const defaultWords = [
 ];
 
 export const selectMaterial = (startingMetWordsToday) => {
+  if (!startingMetWordsToday) return defaultWords;
   const result = Object.keys(
     trimAndSumUniqMetWords(startingMetWordsToday)
   ).filter(
