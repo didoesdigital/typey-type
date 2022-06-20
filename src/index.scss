@@ -752,6 +752,15 @@ input:focus::placeholder {
 .b-info.b-info       { border-color: saturate(add-tint($brand-primary, 70%), 10%); }
 .b-slat.b-slat       { border-color: saturate(add-tint($brand-primary, 30%), 30%); }
 
+.color-interactive {
+  color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
+  &:hover {
+    color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
+  }
+  &:active, &:focus {
+    color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
+  }
+}
 .color-purple-bright { color: saturate(add-tint($brand-primary, 30%), 30%); }
 
 .color-green-bright { color: saturate(add-tint($brand-success, 20%), 10%); }
@@ -1653,14 +1662,6 @@ label {
 }
 
 .stroke-tip__label {
-  color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
-  &:hover {
-    color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
-  }
-  &:active, &:focus {
-    color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
-  }
-
   text-decoration: underline;
   &:focus-within {
     color: adjust-hue(add-shade($brand-primary, 10%), -45deg);

@@ -161,7 +161,7 @@ export default function StrokeTip({
           isMultiline ? " flex justify-center min-h-88" : ""
         }`}
       >
-        <label className="mb0 text-small stroke-tip__label">
+        <label className="mb0 text-small color-interactive stroke-tip__label">
           <input
             className="checkbox-input visually-hidden"
             type="checkbox"
