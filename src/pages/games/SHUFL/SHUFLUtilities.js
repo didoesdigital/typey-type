@@ -20,14 +20,41 @@ export const getRightAnswers = (material, pickedWord) =>
 export const pickAWord = (filteredMetWords) =>
   shuffle(filteredMetWords.slice()).slice(0, 1)[0].trim();
 
-export const selectMaterial = (startingMetWordsToday) =>
-  Object.keys(trimAndSumUniqMetWords(startingMetWordsToday)).filter(
+const defaultWords = [
+  "was",
+  "her",
+  "out",
+  "them",
+  "when",
+  "more",
+  "your",
+  "than",
+  "time",
+  "their",
+  "might",
+  "place",
+  "course",
+  "turned",
+  "friend",
+];
+
+export const selectMaterial = (startingMetWordsToday) => {
+  const result = Object.keys(
+    trimAndSumUniqMetWords(startingMetWordsToday)
+  ).filter(
     (translation) =>
       hasFewerThan7Letters(translation) &&
       hasMoreThan2Letters(translation) &&
       hasNoRepeatLetters(translation) &&
       hasOnlyLowercaseLetters(translation)
   );
+
+  if (result.length < 15) {
+    result.push(...defaultWords);
+  }
+
+  return result;
+};
 
 export const shuffleWord = (pickedWord) =>
   shuffle(Array.from(pickedWord)).join("");

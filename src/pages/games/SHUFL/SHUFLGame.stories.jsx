@@ -25,8 +25,3 @@ export const SHUFLGameStory = Template.bind({});
 SHUFLGameStory.args = {
   startingMetWordsToday: metWordsBeginner,
 };
-
-export const SHUFLGameEmptyState = Template.bind({});
-SHUFLGameEmptyState.args = {
-  startingMetWordsToday: {},
-};

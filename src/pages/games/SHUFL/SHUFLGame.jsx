@@ -6,7 +6,6 @@ import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
 import SHUFLInput from "./SHUFLInput";
 import SHUFLPuzzle from "./SHUFLPuzzle";
 import Completed from "./Completed";
-import EmptyState from "./EmptyState";
 import RoundProgress from "./RoundProgress";
 
 import {
@@ -19,7 +18,7 @@ import {
 export const SHUFLDispatch = React.createContext(null);
 
 export default function SHUFLGame({ startingMetWordsToday, updateMetWords }) {
-  const [material, setMaterial] = useState(null);
+  const [material, setMaterial] = useState([]);
   const [puzzleText, setPuzzleText] = useState("");
   const [rightAnswers, setRightAnswers] = useState([]);
   const [typedText, setTypedText] = useState("");
@@ -32,11 +31,6 @@ export default function SHUFLGame({ startingMetWordsToday, updateMetWords }) {
   useEffect(() => {
     if (!startingMetWordsToday) return;
     const filteredMetWords = selectMaterial(startingMetWordsToday);
-    if (filteredMetWords.length < 3) {
-      setMaterial(null);
-      return;
-    }
-
     setMaterial(filteredMetWords);
     const pickedWord = pickAWord(filteredMetWords);
     setPuzzleText(shuffleWord(pickedWord));
@@ -67,7 +61,7 @@ export default function SHUFLGame({ startingMetWordsToday, updateMetWords }) {
           <SHUFLDispatch.Provider value={dispatch}>
             <Completed />
           </SHUFLDispatch.Provider>
-        ) : material ? (
+        ) : (
           <>
             <div className="flex flex-wrap">
               <div className="mw-844 mr3 flex-grow">
@@ -91,8 +85,6 @@ export default function SHUFLGame({ startingMetWordsToday, updateMetWords }) {
               onChangeSHUFLInput={onChangeSHUFLInput}
             />
           </>
-        ) : (
-          <EmptyState />
         )}
       </div>
     </div>
