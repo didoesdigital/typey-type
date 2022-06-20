@@ -3,6 +3,7 @@ import { actions } from "./gameActions";
 import { initConfig, gameReducer } from "./gameReducer";
 import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
 import SHUFLInput from "./SHUFLInput";
+import SHUFLHint from "./SHUFLHint";
 import SHUFLPuzzle from "./SHUFLPuzzle";
 import Completed from "./Completed";
 import RoundProgress from "./RoundProgress";
@@ -96,39 +97,11 @@ export default function SHUFLGame({
               typedText={typedText}
               onChangeSHUFLInput={onChangeSHUFLInput}
             />
-            {!showHint && (
-              <p className="mt3 text-center">
-                <a
-                  href="#hint"
-                  className="dib"
-                  onClick={() => setShowHint(true)}
-                >
-                  Hint?
-                </a>
-              </p>
-            )}
-            <div
-              className={`flex justify-center${showHint ? " mt3" : ""}`}
-              id="hint"
-              tabIndex={-1}
-            >
-              <pre
-                className={`overflow-auto mw-408 text-small flex${
-                  showHint ? "" : " hide"
-                }`}
-                aria-hidden={!showHint}
-              >
-                <span
-                  className="steno-stroke pa05 text-small"
-                  role="note"
-                  aria-label={[...currentStroke].join(" ").replace("-", "dash")}
-                >
-                  {[...currentStroke].map((item, i) => (
-                    <React.Fragment key={i}>{item}</React.Fragment>
-                  ))}
-                </span>
-              </pre>
-            </div>
+            <SHUFLHint
+              currentStroke={currentStroke}
+              setShowHint={setShowHint}
+              showHint={showHint}
+            />
           </>
         )}
       </div>
