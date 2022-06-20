@@ -14,20 +14,28 @@ export default function SHUFLInput({ typedText, onChangeSHUFLInput }) {
   };
 
   return (
-    <textarea
-      ref={SHUFLInput}
-      autoCapitalize="off"
-      autoComplete="off"
-      autoCorrect="off"
-      className={
-        "input-textarea typed-text-input-positioning typed-text-input-textarea text-center"
-      }
-      id="SHUFL-input"
-      onChange={onChangeTypedText}
-      rows="1"
-      spellCheck="false"
-      value={typedText}
-      wrap="off"
-    ></textarea>
+    <>
+      <label
+        htmlFor="SHUFL-input"
+        className="inline-block mb05 visually-hidden"
+      >
+        Enter the correct word:
+      </label>
+      <textarea
+        ref={SHUFLInput}
+        autoCapitalize="off"
+        autoComplete="off"
+        autoCorrect="off"
+        className={
+          "input-textarea typed-text-input-positioning typed-text-input-textarea text-center"
+        }
+        id="SHUFL-input"
+        onChange={onChangeTypedText}
+        rows="1"
+        spellCheck="false"
+        value={typedText}
+        wrap="off"
+      ></textarea>
+    </>
   );
 }
