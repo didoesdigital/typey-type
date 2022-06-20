@@ -18,7 +18,7 @@ import {
 
 export const SHUFLDispatch = React.createContext(null);
 
-export default function SHUFLGame({ startingMetWordsToday }) {
+export default function SHUFLGame({ startingMetWordsToday, updateMetWords }) {
   const [material, setMaterial] = useState(null);
   const [puzzleText, setPuzzleText] = useState("");
   const [rightAnswers, setRightAnswers] = useState([]);
@@ -46,6 +46,7 @@ export default function SHUFLGame({ startingMetWordsToday }) {
   const onChangeSHUFLInput = (inputText) => {
     setTypedText(inputText);
     if (rightAnswers.includes(inputText)) {
+      updateMetWords(inputText);
       setTypedText("");
       const pickedWord = pickAWord(material);
       setPuzzleText(shuffleWord(pickedWord));

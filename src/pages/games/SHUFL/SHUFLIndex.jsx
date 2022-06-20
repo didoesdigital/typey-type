@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import SHUFLGame from "./SHUFLGame";
 
-export default function SHUFLIndex({ startingMetWordsToday }) {
+export default function SHUFLIndex({ startingMetWordsToday, updateMetWords }) {
   const mainHeading = useRef(null);
   useEffect(() => {
     if (mainHeading) {
@@ -23,7 +23,10 @@ export default function SHUFLIndex({ startingMetWordsToday }) {
         </div>
       </div>
       <div className="p3 mx-auto mw-1024">
-        <SHUFLGame startingMetWordsToday={startingMetWordsToday} />
+        <SHUFLGame
+          startingMetWordsToday={startingMetWordsToday}
+          updateMetWords={updateMetWords}
+        />
       </div>
     </main>
   );

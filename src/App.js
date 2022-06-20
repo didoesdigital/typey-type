@@ -537,6 +537,20 @@ class App extends Component {
     });
   }
 
+  updateMetWords(newMetWord) {
+    const newMetWordsState = Object.assign({}, this.state.metWords);
+    const phraseText =
+      this.state.userSettings.spacePlacement === "spaceBeforeOutput"
+        ? " " + newMetWord
+        : this.state.userSettings.spacePlacement === "spaceAfterOutput"
+        ? newMetWord + " "
+        : newMetWord;
+    const meetingsCount = newMetWordsState[phraseText] || 0;
+    newMetWordsState[phraseText] = meetingsCount + 1;
+    this.setState({ metWords: newMetWordsState });
+    writePersonalPreferences("metWords", newMetWordsState);
+  }
+
   setPersonalPreferences(source) {
     let metWords = this.state.metWords;
     let flashcardsMetWords = this.state.flashcardsMetWords;
@@ -2302,6 +2316,7 @@ class App extends Component {
                       <ErrorBoundary>
                         <AsyncGames
                           startingMetWordsToday={this.state.startingMetWordsToday}
+                          updateMetWords={this.updateMetWords.bind(this)}
                           {...props}
                         />
                       </ErrorBoundary>

@@ -9,11 +9,13 @@ export default {
   component: SHUFLGame,
 };
 
+const fauxUpdateMetWords = (metWord) => console.log(metWord);
+
 const Template = (args) => (
   <Router basename="/typey-type">
     <div className="p3">
       <Route>
-        <SHUFLGame {...args} />
+        <SHUFLGame updateMetWords={fauxUpdateMetWords} {...args} />
       </Route>
     </div>
   </Router>
