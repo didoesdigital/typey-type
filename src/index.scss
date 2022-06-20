@@ -764,6 +764,7 @@ input:focus::placeholder {
 .color-purple-bright { color: saturate(add-tint($brand-primary, 30%), 30%); }
 
 .color-green-bright { color: saturate(add-tint($brand-success, 20%), 10%); }
+.color-success      { color: $brand-success; }
 
 .text-uppercase {
   letter-spacing: .1em;
