@@ -45,7 +45,7 @@ export default function SHUFLGame({ startingMetWordsToday, updateMetWords }) {
 
   const onChangeSHUFLInput = (inputText) => {
     setTypedText(inputText);
-    if (rightAnswers.includes(inputText)) {
+    if (rightAnswers.includes(inputText.trim())) {
       updateMetWords(inputText);
       setTypedText("");
       const pickedWord = pickAWord(material);
