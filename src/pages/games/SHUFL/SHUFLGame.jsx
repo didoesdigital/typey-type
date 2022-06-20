@@ -28,6 +28,8 @@ export default function SHUFLGame({
   const [rightAnswers, setRightAnswers] = useState([]);
   const [typedText, setTypedText] = useState("");
   const [currentStroke, setCurrentStroke] = useState("");
+  const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
+    useState("");
   const [showHint, setShowHint] = useState(false);
   const [state, dispatch] = useReducer(
     gameReducer,
@@ -52,6 +54,7 @@ export default function SHUFLGame({
     if (rightAnswers.includes(inputText.trim())) {
       updateMetWords(inputText);
       setTypedText("");
+      setPreviousCompletedPhraseAsTyped(inputText);
       const pickedWord = pickAWord(material);
       setPuzzleText(shuffleWord(pickedWord));
       setCurrentStroke(
@@ -83,8 +86,10 @@ export default function SHUFLGame({
             </div>
             <SHUFLPuzzle puzzleText={puzzleText} />
             <SHUFLInput
-              typedText={typedText}
               onChangeSHUFLInput={onChangeSHUFLInput}
+              previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
+              round={state.roundIndex + 1}
+              typedText={typedText}
             />
             <SHUFLHint
               currentStroke={currentStroke}
