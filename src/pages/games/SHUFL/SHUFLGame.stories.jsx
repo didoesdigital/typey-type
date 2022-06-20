@@ -15,7 +15,7 @@ const Template = (args) => (
   <Router basename="/typey-type">
     <div className="p3">
       <Route>
-        <SHUFLGame updateMetWords={fauxUpdateMetWords} {...args} />
+        <SHUFLGame globalLookupDictionary={new Map()} updateMetWords={fauxUpdateMetWords} {...args} />
       </Route>
     </div>
   </Router>

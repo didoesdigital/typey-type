@@ -2315,6 +2315,7 @@ class App extends Component {
                     <DocumentTitle title={'Typey Type | Games'}>
                       <ErrorBoundary>
                         <AsyncGames
+                          globalLookupDictionary={this.state.globalLookupDictionary}
                           startingMetWordsToday={this.state.startingMetWordsToday}
                           updateMetWords={this.updateMetWords.bind(this)}
                           {...props}

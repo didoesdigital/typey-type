@@ -15,7 +15,12 @@ const AsyncSHUFL = Loadable({
   delay: 300,
 });
 
-const Games = ({ match, startingMetWordsToday, updateMetWords }) => {
+const Games = ({
+  match,
+  globalLookupDictionary,
+  startingMetWordsToday,
+  updateMetWords,
+}) => {
   return (
     <Switch>
       <Route
@@ -23,6 +28,7 @@ const Games = ({ match, startingMetWordsToday, updateMetWords }) => {
         path={`${match.url}/SHUFL`}
         render={() => (
           <AsyncSHUFL
+            globalLookupDictionary={globalLookupDictionary}
             startingMetWordsToday={startingMetWordsToday}
             updateMetWords={updateMetWords}
           />

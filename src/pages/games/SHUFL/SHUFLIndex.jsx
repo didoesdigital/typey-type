@@ -1,7 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import SHUFLGame from "./SHUFLGame";
 
-export default function SHUFLIndex({ startingMetWordsToday, updateMetWords }) {
+export default function SHUFLIndex({
+  globalLookupDictionary,
+  startingMetWordsToday,
+  updateMetWords,
+}) {
   const mainHeading = useRef(null);
   useEffect(() => {
     if (mainHeading) {
@@ -24,6 +28,7 @@ export default function SHUFLIndex({ startingMetWordsToday, updateMetWords }) {
       </div>
       <div className="p3 mx-auto mw-1024">
         <SHUFLGame
+          globalLookupDictionary={globalLookupDictionary}
           startingMetWordsToday={startingMetWordsToday}
           updateMetWords={updateMetWords}
         />
