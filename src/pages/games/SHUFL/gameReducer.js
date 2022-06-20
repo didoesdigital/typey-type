@@ -1,6 +1,6 @@
 import { actions } from "./gameActions";
 
-const roundToWin = 3;
+const roundToWin = 10;
 
 const defaultState = {
   roundIndex: 0,
