@@ -1,12 +1,21 @@
 import React from "react";
+import GoogleAnalytics from "react-ga";
 
 const handleHintClick = (event, setShowHint) => {
   event.preventDefault();
+
   const yourSHUFLinput = document.getElementById("SHUFL-input");
   if (yourSHUFLinput) {
     yourSHUFLinput.focus();
   }
+
   setShowHint(true);
+
+  GoogleAnalytics.event({
+    category: "SHUFL",
+    action: "Click",
+    label: "Hint",
+  });
 };
 
 export default function SHUFLHint({ currentStroke, setShowHint, showHint }) {
