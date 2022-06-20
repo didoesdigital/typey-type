@@ -1,10 +1,23 @@
 import React, { useCallback, useContext, useEffect, useRef } from "react";
+import GoogleAnalytics from "react-ga";
 import { actions } from "./gameActions";
 import { SHUFLDispatch } from "./SHUFLGame";
 import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";
 import * as Confetti from "../../../utils/confetti.js";
 
 const particles = [];
+
+const handlePlayAgainClick = (event, dispatch) => {
+  event.preventDefault();
+
+  dispatch({ type: actions.restartGame });
+
+  GoogleAnalytics.event({
+    category: "SHUFL",
+    action: "Click",
+    label: "Play again",
+  });
+};
 
 export default React.memo(function Completed() {
   const dispatch = useContext(SHUFLDispatch);
@@ -82,9 +95,7 @@ export default React.memo(function Completed() {
         <button
           ref={playAgainButton}
           className="button"
-          onClick={() => {
-            dispatch({ type: actions.restartGame });
-          }}
+          onClick={(event) => handlePlayAgainClick(event, dispatch)}
         >
           Play again
         </button>
