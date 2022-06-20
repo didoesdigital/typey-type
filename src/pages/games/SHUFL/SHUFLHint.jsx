@@ -27,6 +27,7 @@ export default function SHUFLHint({ currentStroke, setShowHint, showHint }) {
             href="#hint"
             className="dib"
             onClick={(event) => handleHintClick(event, setShowHint)}
+            onKeyPress={(event) => handleHintClick(event, setShowHint)}
           >
             Hint?
           </a>
