@@ -1,9 +1,9 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { actions } from "./gameActions";
 import { initConfig, gameReducer } from "./gameReducer";
-import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
-import SHUFLInput from "./SHUFLInput";
 import SHUFLHint from "./SHUFLHint";
+import SHUFLInput from "./SHUFLInput";
+import SHUFLIntro from "./SHUFLIntro";
 import SHUFLPuzzle from "./SHUFLPuzzle";
 import Completed from "./Completed";
 import RoundProgress from "./RoundProgress";
@@ -78,18 +78,7 @@ export default function SHUFLGame({
         ) : (
           <>
             <div className="flex flex-wrap">
-              <div className="mw-844 mr3 flex-grow">
-                <div className="flex">
-                  <div className="w-100 mw-48 mr3">
-                    <RaverRobot id="raver-robot-SHUFL" />
-                  </div>
-                  <p>
-                    The steno robots have been dancing too much and shuffled all
-                    the letters out of order! You need to type the correct word
-                    to get them all back in order.
-                  </p>
-                </div>
-              </div>
+              <SHUFLIntro />
               <RoundProgress round={state.roundIndex + 1} />
             </div>
             <SHUFLPuzzle puzzleText={puzzleText} />
