@@ -122,7 +122,7 @@ export default function SHUFLGame({
                   className="steno-stroke pa05 text-small"
                   aria-label={[...currentStroke].join(" ").replace("-", "dash")}
                 >
-                  {currentStroke.split("").map((item, i) => (
+                  {[...currentStroke].map((item, i) => (
                     <React.Fragment key={i}>{item}</React.Fragment>
                   ))}
                 </span>
