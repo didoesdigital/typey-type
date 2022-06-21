@@ -15,6 +15,12 @@ const AsyncSHUFL = Loadable({
   delay: 300,
 });
 
+const AsyncTPEUBGSZ = Loadable({
+  loader: () => import("./TPEUBGSZ/Index"),
+  loading: PageLoading,
+  delay: 300,
+});
+
 const Games = ({
   match,
   globalLookupDictionary,
@@ -33,6 +39,11 @@ const Games = ({
             updateMetWords={updateMetWords}
           />
         )}
+      />
+      <Route
+        exact={true}
+        path={`${match.url}/TPEUBGSZ`}
+        render={() => <AsyncTPEUBGSZ />}
       />
       <Route
         exact={true}

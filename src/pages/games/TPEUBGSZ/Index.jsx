@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import Game from "./Game";
 
-export default function GamesIndex() {
+export default function Index() {
   const mainHeading = useRef(null);
   useEffect(() => {
     if (mainHeading) {
@@ -16,26 +16,14 @@ export default function GamesIndex() {
           <div className="flex mr1 self-center">
             <header className="flex items-center min-h-40">
               <h2 ref={mainHeading} tabIndex="-1">
-                Games
+                TPEUBGSZ
               </h2>
             </header>
           </div>
         </div>
       </div>
       <div className="p3 mx-auto mw-1024">
-        <div className="flex flex-wrap justify-between">
-          <div>
-            <div className="mw-584">
-              <h3 id="typey-type-games">Typey&nbsp;Type games</h3>
-              <p>
-                Try out the new <Link to="/games/SHUFL">SHUFL game</Link>.
-              </p>
-              <p>
-                Try out the new <Link to="/games/TPEUBGSZ">TPEUBGSZ game</Link>.
-              </p>
-            </div>
-          </div>
-        </div>
+        <Game />
       </div>
     </main>
   );
