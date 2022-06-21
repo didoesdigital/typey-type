@@ -1,13 +1,7 @@
-import { getRightAnswers } from "./Utilities";
+import { makeUpAWordAndHint } from "./Utilities";
 
-const material = ["each", "bade", "bead", "deaf", "fade", "last", "salt"];
-
-describe("getRightAnswers", () => {
-  it("returns multiple options for many right answers", () => {
-    expect(getRightAnswers(material, "ebda")).toEqual(["bead", "bade"]);
-  });
-
-  it("returns one item for one right answer", () => {
-    expect(getRightAnswers(material, "ahec")).toEqual(["each"]);
+describe("makeUpAWordAndHint", () => {
+  it("returns an array containing a made up word and a hint", () => {
+    expect(makeUpAWordAndHint()).toEqual(["antipreamationing", "APBT/PRE/A/PHAEUGS/-G"]);
   });
 });

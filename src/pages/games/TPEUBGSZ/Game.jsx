@@ -8,23 +8,12 @@ import Puzzle from "./Puzzle";
 import Completed from "./Completed";
 import RoundProgress from "./RoundProgress";
 
-import {
-  getRightAnswers,
-  pickAWord,
-  selectMaterial,
-  shuffleWord,
-} from "./Utilities";
+import { makeUpAWordAndHint } from "./Utilities";
 
 export const TPEUBGSZDispatch = React.createContext(null);
 
-export default function Game({
-  globalLookupDictionary,
-  startingMetWordsToday,
-  updateMetWords,
-}) {
-  const [material, setMaterial] = useState([]);
+export default function Game() {
   const [puzzleText, setPuzzleText] = useState("");
-  const [rightAnswers, setRightAnswers] = useState([]);
   const [typedText, setTypedText] = useState("");
   const [currentStroke, setCurrentStroke] = useState("");
   const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
@@ -37,30 +26,25 @@ export default function Game({
   );
 
   useEffect(() => {
-    const filteredMetWords = selectMaterial(startingMetWordsToday);
-    setMaterial(filteredMetWords);
-    const pickedWord = pickAWord(filteredMetWords);
-    setPuzzleText(shuffleWord(pickedWord));
-    setCurrentStroke("antipreamationing");
+    const [madeUpWord, hint] = makeUpAWordAndHint();
+    setPuzzleText(madeUpWord);
+    setCurrentStroke(hint);
     setShowHint(false);
-    setRightAnswers(getRightAnswers(filteredMetWords, pickedWord));
-  }, [startingMetWordsToday, globalLookupDictionary]);
+  }, []);
 
   const onChangeInput = (inputText) => {
     setTypedText(inputText);
-    if (rightAnswers.includes(inputText.trim())) {
-      updateMetWords(inputText);
+    if (puzzleText === inputText.trim()) {
       setTypedText("");
       setPreviousCompletedPhraseAsTyped(inputText);
-      const pickedWord = pickAWord(material);
-      setPuzzleText(shuffleWord(pickedWord));
-      setCurrentStroke("antipreamationing");
+      const [madeUpWord, hint] = makeUpAWordAndHint();
+      setPuzzleText(madeUpWord);
+      setCurrentStroke(hint);
       setShowHint(false);
-      setRightAnswers(getRightAnswers(material, pickedWord));
       dispatch({ type: actions.moveToNextRound });
     }
 
-    if (process.env.NODE_ENV === "development") console.log(rightAnswers);
+    if (process.env.NODE_ENV === "development") console.log(puzzleText);
   };
 
   return (
