@@ -17,8 +17,8 @@ import StrokeTip from './StrokeTip';
 import UserSettings from './UserSettings';
 import Flashcards from './Flashcards';
 import { loadPersonalPreferences } from './../utils/typey-type';
-import AussieDictPrompt from './AussieDictPrompt';
-import SedSaidPrompt from './SedSaidPrompt';
+import AussieDictPrompt from './LessonPrompts/AussieDictPrompt';
+import SedSaidPrompt from './LessonPrompts/SedSaidPrompt';
 
 class Lesson extends Component {
   componentDidMount() {

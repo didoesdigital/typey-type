@@ -1,5 +1,5 @@
 import React from "react";
-import { IconExternal } from "./Icon";
+import { IconExternal } from "../Icon";
 import { Tooltip } from "react-tippy";
 
 // Test entry: "HO*RPB/A*U": "honour",
