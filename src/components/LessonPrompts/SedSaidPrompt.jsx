@@ -2,13 +2,20 @@ import React from "react";
 import { IconExternal } from "../Icon";
 import { Tooltip } from "react-tippy";
 
+export const hasSedSaid = (currentPhrase, actualText) => {
+  const sedRegex = new RegExp(/^\s*sed\s*$/);
+  // Note: doesn't bother checking for "said,", assuming this is more of an issue for early steno
+  // students that have not yet reached story lessons
+  return currentPhrase === "said" && actualText.match(sedRegex);
+};
+
 export default function SedSaidPrompt({
   currentPhrase,
   actualText,
   setAnnouncementMessage,
 }) {
-  const sedRegex = new RegExp(/^\s*sed\s*$/);
-  if (currentPhrase === "said" && actualText.match(sedRegex)) {
+  const showSedSaidPrompt = hasSedSaid(currentPhrase, actualText);
+  if (showSedSaidPrompt) {
     return (
       <p>
         It looks like you might be using an older Plover dictionary. Try{" "}
