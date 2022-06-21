@@ -10,5 +10,8 @@ module.exports = {
     interactionsDebugger: true,
   },
   framework: "@storybook/react",
+  core: {
+    disableTelemetry: true,
+    enableCrashReports: false,
+  },
 };
-
