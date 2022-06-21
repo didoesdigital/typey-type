@@ -2,20 +2,23 @@ import React from "react";
 import { IconExternal } from "../Icon";
 import { Tooltip } from "react-tippy";
 
-// Test entry: "HO*RPB/A*U": "honour",
-// Test entry with punctuation: "HAOURPL/A*U KW-BG": "humour,",
+export const missingAussieDict = (currentStroke, actualText) => {
+  const untranslatedAussieSuffixRegex = new RegExp(/(A\*U|aw)/);
+  return (
+    (currentStroke.includes("/A*U ") ||
+      currentStroke.includes("/A*U/") ||
+      currentStroke.endsWith("/A*U")) &&
+    actualText.match(untranslatedAussieSuffixRegex)
+  );
+};
+
 export default function AussieDictPrompt({
   currentStroke,
   actualText,
   setAnnouncementMessage,
 }) {
-  const untranslatedAussieSuffixRegex = new RegExp(/(A\*U|aw)/);
-  if (
-    (currentStroke.includes("/A*U ") ||
-      currentStroke.includes("/A*U/") ||
-      currentStroke.endsWith("/A*U")) &&
-    actualText.match(untranslatedAussieSuffixRegex)
-  ) {
+  const isMissingAussieDict = missingAussieDict(currentStroke, actualText);
+  if (isMissingAussieDict) {
     return (
       <p>
         To use <span className="steno-stroke steno-stroke--subtle">/A*U</span>{" "}
