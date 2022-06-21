@@ -19,6 +19,7 @@ import Flashcards from './Flashcards';
 import { loadPersonalPreferences } from './../utils/typey-type';
 import AussieDictPrompt from './LessonPrompts/AussieDictPrompt';
 import SedSaidPrompt from './LessonPrompts/SedSaidPrompt';
+import WordBoundaryErrorPrompt from './LessonPrompts/WordBoundaryErrorPrompt';
 
 class Lesson extends Component {
   componentDidMount() {
@@ -385,6 +386,11 @@ class Lesson extends Component {
                                 settings={this.props.settings}
                                 updateMarkup={this.props.updateMarkup.bind(this)}
                                 userSettings={this.props.userSettings}
+                              />
+                              <WordBoundaryErrorPrompt
+                                actualText={this.props.actualText}
+                                currentPhrase={this.props.currentPhrase}
+                                setAnnouncementMessage={this.props.setAnnouncementMessage}
                               />
                               <AussieDictPrompt
                                 actualText={this.props.actualText}
