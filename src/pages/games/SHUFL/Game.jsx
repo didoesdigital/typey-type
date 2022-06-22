@@ -3,7 +3,7 @@ import { actions } from "../utilities/gameActions";
 import { initConfig, gameReducer } from "./gameReducer";
 import Completed from "../components/Completed";
 import Hint from "../components/Hint";
-import Input from "./Input";
+import Input from "../components/Input";
 import Intro from "./Intro";
 import Puzzle from "./Puzzle";
 import RoundProgress from "./RoundProgress";
@@ -15,6 +15,8 @@ import {
   selectMaterial,
   shuffleWord,
 } from "./utilities";
+
+const gameName = "SHUFL";
 
 export default function Game({
   globalLookupDictionary,
@@ -73,7 +75,7 @@ export default function Game({
           SHUFL game
         </h3>
         {state.gameComplete ? (
-          <Completed gameName="SHUFL" dispatch={dispatch} />
+          <Completed gameName={gameName} dispatch={dispatch} />
         ) : (
           <>
             <div className="flex flex-wrap">
@@ -82,14 +84,15 @@ export default function Game({
             </div>
             <Puzzle puzzleText={puzzleText} />
             <Input
-              onChangeSHUFLInput={onChangeSHUFLInput}
+              onChangeInput={onChangeSHUFLInput}
               previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
               round={state.roundIndex + 1}
               typedText={typedText}
+              gameName={gameName}
             />
             <Hint
               currentStroke={currentStroke}
-              gameName="SHUFL"
+              gameName={gameName}
               setShowHint={setShowHint}
               showHint={showHint}
             />

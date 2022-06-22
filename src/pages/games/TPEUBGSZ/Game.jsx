@@ -3,12 +3,14 @@ import { actions } from "../utilities/gameActions";
 import { initConfig, gameReducer } from "./gameReducer";
 import Completed from "../components/Completed";
 import Hint from "../components/Hint";
-import Input from "./Input";
+import Input from "../components/Input";
 import Intro from "./Intro";
 import Puzzle from "./Puzzle";
 import RoundProgress from "./RoundProgress";
 
 import { makeUpAWordAndHint } from "./Utilities";
+
+const gameName = "TPEUBGSZ";
 
 export default function Game() {
   const [puzzleText, setPuzzleText] = useState("");
@@ -50,7 +52,7 @@ export default function Game() {
           TPEUBGSZ game
         </h3>
         {state.gameComplete ? (
-          <Completed gameName="TPEUBGSZ" dispatch={dispatch} />
+          <Completed gameName={gameName} dispatch={dispatch} />
         ) : (
           <>
             <div className="flex flex-wrap">
@@ -63,10 +65,11 @@ export default function Game() {
               previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
               round={state.roundIndex + 1}
               typedText={typedText}
+              gameName={gameName}
             />
             <Hint
               currentStroke={currentStroke}
-              gameName="TPEUBGSZ"
+              gameName={gameName}
               setShowHint={setShowHint}
               showHint={showHint}
             />
