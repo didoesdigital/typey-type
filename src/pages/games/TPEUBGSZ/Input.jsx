@@ -26,7 +26,7 @@ export default function Input({
         htmlFor="TPEUBGSZ-input"
         className="inline-block mb05 visually-hidden"
       >
-        Enter the correct word:
+        Enter the made up word:
       </label>
       <div className="relative">
         <samp className="pointer-none absolute absolute--fill w-100">
