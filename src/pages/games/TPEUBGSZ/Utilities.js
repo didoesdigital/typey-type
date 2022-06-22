@@ -1,3 +1,31 @@
+import { shuffle } from "d3-array";
+import affixList from "./affixesForTPEUBGSZ.json";
+
+const isSuffix = (affixType) => affixType === "suffixes";
+
+const addSomeAffixes = (
+  madeUpWordParts,
+  madeUpAffixParts,
+  affixType,
+  count
+) => {
+  const entries = shuffle(
+    affixList[isSuffix(affixType) ? "suffixes" : "prefixes"]
+  ).slice(0, count);
+  entries.forEach(([stroke, affixText]) => {
+    madeUpWordParts.push(affixText);
+    madeUpAffixParts.push(
+      stroke.replace(isSuffix(affixType) ? /^\// : /\/$/, "")
+    );
+  });
+  return [madeUpWordParts, madeUpAffixParts];
+};
+
 export const makeUpAWordAndHint = () => {
-  return ["antipreamationing", "APBT/PRE/A/PHAEUGS/-G"];
+  const madeUpWordParts = [];
+  const madeUpAffixParts = [];
+  addSomeAffixes(madeUpWordParts, madeUpAffixParts, "prefixes", 1);
+  addSomeAffixes(madeUpWordParts, madeUpAffixParts, "suffixes", 1);
+
+  return [madeUpWordParts.join(""), madeUpAffixParts.join("/")];
 };

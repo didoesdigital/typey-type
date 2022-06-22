@@ -43,8 +43,6 @@ export default function Game() {
       setShowHint(false);
       dispatch({ type: actions.moveToNextRound });
     }
-
-    if (process.env.NODE_ENV === "development") console.log(puzzleText);
   };
 
   return (

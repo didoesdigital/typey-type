@@ -1,0 +1,40 @@
+{
+  "prefixes": [
+    ["UPB/", "un"],
+    ["RE/", "re"],
+    ["EUPB/", "in"],
+    ["EUPL/", "im"],
+    ["EUR/", "ir"],
+    ["TKEUS/", "dis"],
+    ["EPB/", "en"],
+    ["EPL/", "em"],
+    ["TPHAUPB/", "non"],
+    ["AUFR/", "over"],
+    ["PHEUZ/", "mis"],
+    ["SAUB/", "sub"],
+    ["PRE/", "pre"],
+    ["EUPBT/", "inter"],
+    ["TPOER/", "fore"],
+    ["TKE/", "de"],
+    ["TRAPBZ/", "trans"],
+    ["SAOUP/", "super"],
+    ["SPHEU/", "semi"],
+    ["A*EUPBT/", "anti"],
+    ["PHEUD/", "mid"],
+    ["UPBD/", "under"]
+  ],
+  "suffixes": [
+    ["/-S", "s"],
+    ["/D", "ed"],
+    ["/G", "ing"],
+    ["/HREU", "ly"],
+    ["/*ER", "er"],
+    ["/O*R", "or"],
+    ["/AEUGS", "ation"],
+    ["/KWROPB", "ion"],
+    ["/-BL", "able"],
+    ["/A*L", "al"],
+    ["/KWRAL", "ial"],
+    ["/-PBS", "ness"]
+  ]
+}
