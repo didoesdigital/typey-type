@@ -1,7 +1,7 @@
 import React from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-export default function SHUFLPuzzle({ round }) {
+export default function RoundProgress({ round }) {
   return (
     <div className="flex flex-grow">
       <p className="text-right w-100">
