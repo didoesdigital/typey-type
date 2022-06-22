@@ -13,7 +13,7 @@ import { makeUpAWordAndHint } from "./Utilities";
 
 const gameName = "TPEUBGSZ";
 const introText =
-  "Oh no! The steno robots have broken English! They’ve destroyed all the useful words and the only pieces left are prefixes and suffixes. Let’s stick them together to make some new words for the robots.";
+  "Oh no! The steno robots have broken English! They’ve destroyed most of the useful words. The only bits left are prefixes and suffixes. And robot sounds. Let’s stick them together to make some new words for the robots.";
 
 export default function Game() {
   const [puzzleText, setPuzzleText] = useState("");

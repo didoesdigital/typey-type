@@ -25,6 +25,13 @@ export const makeUpAWordAndHint = () => {
   const madeUpWordParts = [];
   const madeUpAffixParts = [];
   addSomeAffixes(madeUpWordParts, madeUpAffixParts, "prefixes", 1);
+  if (Math.random() < 0.5) {
+    madeUpWordParts.push("beep");
+    madeUpAffixParts.push("PWAOEP");
+  } else {
+    madeUpWordParts.push("boop");
+    madeUpAffixParts.push("PWAOP");
+  }
   addSomeAffixes(madeUpWordParts, madeUpAffixParts, "suffixes", 1);
 
   return [madeUpWordParts.join(""), madeUpAffixParts.join("/")];
