@@ -37,7 +37,7 @@ class Header extends Component {
           <div className="mx-auto mw-1920 p3">
             <nav>
               <div className="site-heading-banner">
-                <Link to="/" className="heading-link dib" aria-label="Typey Type" id="ga--header--logo">
+                <Link to="/" className="heading-link dib" aria-label="Typey Type homepage" id="ga--header--logo">
                   <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" className="flex items-end">
                     <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" className="mr1 svg-icon-wrapper svg-icon-wrapper--typey-type-logo svg-baseline" />
                     <span className="heading-link__logo-text">Typey&nbsp;Type</span>
