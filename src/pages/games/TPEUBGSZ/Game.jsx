@@ -4,13 +4,16 @@ import { initConfig, gameReducer } from "./gameReducer";
 import Completed from "../components/Completed";
 import Hint from "../components/Hint";
 import Input from "../components/Input";
-import Intro from "./Intro";
+import Intro from "../components/Intro";
 import Puzzle from "./Puzzle";
 import RoundProgress from "./RoundProgress";
+import { ReactComponent as BoredRobot } from "../../../images/BoredRobot.svg";
 
 import { makeUpAWordAndHint } from "./Utilities";
 
 const gameName = "TPEUBGSZ";
+const introText =
+  "Oh no! The steno robots have broken English! They’ve destroyed all the nouns and verbs and the only pieces left are the prefixes and suffixes. Oh well. Let’s stick them together to make some new words for the robots.";
 
 export default function Game() {
   const [puzzleText, setPuzzleText] = useState("");
@@ -56,7 +59,10 @@ export default function Game() {
         ) : (
           <>
             <div className="flex flex-wrap">
-              <Intro />
+              <Intro
+                introText={introText}
+                robot={<BoredRobot id="bored-robot-TPEUBGSZ" />}
+              />
               <RoundProgress round={state.roundIndex + 1} />
             </div>
             <Puzzle puzzleText={puzzleText} />

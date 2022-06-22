@@ -4,9 +4,10 @@ import { initConfig, gameReducer } from "./gameReducer";
 import Completed from "../components/Completed";
 import Hint from "../components/Hint";
 import Input from "../components/Input";
-import Intro from "./Intro";
+import Intro from "../components/Intro";
 import Puzzle from "./Puzzle";
 import RoundProgress from "./RoundProgress";
+import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
 import { createStrokeHintForPhrase } from "../../../utils/transformingDictionaries";
 
 import {
@@ -17,6 +18,8 @@ import {
 } from "./utilities";
 
 const gameName = "SHUFL";
+const introText =
+  "The steno robots have been dancing too much and shuffled all the letters out of order! You need to type the correct word to get them all back in order.";
 
 export default function Game({
   globalLookupDictionary,
@@ -79,7 +82,10 @@ export default function Game({
         ) : (
           <>
             <div className="flex flex-wrap">
-              <Intro />
+              <Intro
+                introText={introText}
+                robot={<RaverRobot id="raver-robot-SHUFL" />}
+              />
               <RoundProgress round={state.roundIndex + 1} />
             </div>
             <Puzzle puzzleText={puzzleText} />
