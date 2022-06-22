@@ -31,6 +31,18 @@ export default function GamesIndex() {
           </h3>
           <div className="flex flex-wrap justify-center mx-auto">
             <GameBox
+              title="KAOES (keys)"
+              description="Learn where the keys are on a steno diagram."
+              linkTo="/games/KAOES"
+              linkText="Play KAOES"
+              robot={
+                <ThinkingRobot
+                  role="image"
+                  aria-labelledby="thinking-robot-title"
+                />
+              }
+            />
+            <GameBox
               title="SHUFL (shuffle)"
               description="Solve the puzzle to straighten out shuffled words."
               linkTo="/games/SHUFL"

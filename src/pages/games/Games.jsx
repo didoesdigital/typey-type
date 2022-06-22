@@ -9,6 +9,12 @@ const AsyncGamesIndex = Loadable({
   delay: 300,
 });
 
+const AsyncKAOES = Loadable({
+  loader: () => import("./KAOES/Index"),
+  loading: PageLoading,
+  delay: 300,
+});
+
 const AsyncSHUFL = Loadable({
   loader: () => import("./SHUFL/Index"),
   loading: PageLoading,
@@ -29,6 +35,11 @@ const Games = ({
 }) => {
   return (
     <Switch>
+      <Route
+        exact={true}
+        path={`${match.url}/KAOES`}
+        render={() => <AsyncKAOES />}
+      />
       <Route
         exact={true}
         path={`${match.url}/SHUFL`}
