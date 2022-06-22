@@ -6,7 +6,7 @@ import Hint from "../components/Hint";
 import Input from "../components/Input";
 import Intro from "../components/Intro";
 import Puzzle from "./Puzzle";
-import RoundProgress from "./RoundProgress";
+import RoundProgress from "../components/RoundProgress";
 import { ReactComponent as BoredRobot } from "../../../images/BoredRobot.svg";
 
 import { makeUpAWordAndHint } from "./Utilities";
