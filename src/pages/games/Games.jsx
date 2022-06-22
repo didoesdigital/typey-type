@@ -10,7 +10,7 @@ const AsyncGamesIndex = Loadable({
 });
 
 const AsyncSHUFL = Loadable({
-  loader: () => import("./SHUFL/SHUFLIndex"),
+  loader: () => import("./SHUFL/Index"),
   loading: PageLoading,
   delay: 300,
 });

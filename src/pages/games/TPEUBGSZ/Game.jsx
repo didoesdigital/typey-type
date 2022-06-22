@@ -1,16 +1,14 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { actions } from "./gameActions";
+import { actions } from "../utilities/gameActions";
 import { initConfig, gameReducer } from "./gameReducer";
 import Hint from "./Hint";
 import Input from "./Input";
 import Intro from "./Intro";
 import Puzzle from "./Puzzle";
-import Completed from "./Completed";
+import Completed from "../components/Completed";
 import RoundProgress from "./RoundProgress";
 
 import { makeUpAWordAndHint } from "./Utilities";
-
-export const TPEUBGSZDispatch = React.createContext(null);
 
 export default function Game() {
   const [puzzleText, setPuzzleText] = useState("");
@@ -52,9 +50,7 @@ export default function Game() {
           TPEUBGSZ game
         </h3>
         {state.gameComplete ? (
-          <TPEUBGSZDispatch.Provider value={dispatch}>
-            <Completed />
-          </TPEUBGSZDispatch.Provider>
+          <Completed gameName="TPEUBGSZ" dispatch={dispatch} />
         ) : (
           <>
             <div className="flex flex-wrap">

@@ -1,26 +1,26 @@
-import React, { useCallback, useContext, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import GoogleAnalytics from "react-ga";
-import { actions } from "./gameActions";
-import { SHUFLDispatch } from "./SHUFLGame";
+import { actions } from "../utilities/gameActions";
 import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";
 import * as Confetti from "../../../utils/confetti.js";
 
 const particles = [];
 
-const handlePlayAgainClick = (event, dispatch) => {
+const handlePlayAgainClick = (event, gameName, dispatch) => {
   event.preventDefault();
 
-  dispatch({ type: actions.restartGame });
+  if (dispatch) {
+    dispatch({ type: actions.restartGame });
+  }
 
   GoogleAnalytics.event({
-    category: "SHUFL",
+    category: gameName,
     action: "Click",
     label: "Play again",
   });
 };
 
-export default React.memo(function Completed() {
-  const dispatch = useContext(SHUFLDispatch);
+export default React.memo(function Completed({ gameName, dispatch }) {
   const playAgainButton = useRef(null);
   const canvasRef = useRef(null);
   const canvasWidth = Math.floor(window.innerWidth);
@@ -95,7 +95,7 @@ export default React.memo(function Completed() {
         <button
           ref={playAgainButton}
           className="button"
-          onClick={(event) => handlePlayAgainClick(event, dispatch)}
+          onClick={(event) => handlePlayAgainClick(event, gameName, dispatch)}
         >
           Play again
         </button>

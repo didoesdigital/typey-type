@@ -1,4 +1,4 @@
-import { getRightAnswers } from "./SHUFLUtilities";
+import { getRightAnswers } from "./utilities";
 
 const material = ["each", "bade", "bead", "deaf", "fade", "last", "salt"];
 

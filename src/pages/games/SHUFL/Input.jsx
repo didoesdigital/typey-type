@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-export default function SHUFLInput({
+export default function Input({
   onChangeSHUFLInput,
   previousCompletedPhraseAsTyped,
   round,

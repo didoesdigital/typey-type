@@ -18,7 +18,7 @@ const handleHintClick = (event, setShowHint) => {
   });
 };
 
-export default function SHUFLHint({ currentStroke, setShowHint, showHint }) {
+export default function Hint({ currentStroke, setShowHint, showHint }) {
   return (
     <>
       {!showHint && (

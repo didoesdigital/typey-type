@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
 
-export default function SHUFLIntro() {
+export default function Intro() {
   return (
     <div className="mw-844 mr3 flex-grow">
       <div className="flex">

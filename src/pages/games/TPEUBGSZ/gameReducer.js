@@ -1,4 +1,4 @@
-import { actions } from "./gameActions";
+import { actions } from "../utilities/gameActions";
 
 const roundToWin = 10;
 

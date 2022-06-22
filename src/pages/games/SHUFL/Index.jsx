@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import SHUFLGame from "./SHUFLGame";
+import Game from "./Game";
 
-export default function SHUFLIndex({
+export default function Index({
   globalLookupDictionary,
   startingMetWordsToday,
   updateMetWords,
@@ -27,7 +27,7 @@ export default function SHUFLIndex({
         </div>
       </div>
       <div className="p3 mx-auto mw-1024">
-        <SHUFLGame
+        <Game
           globalLookupDictionary={globalLookupDictionary}
           startingMetWordsToday={startingMetWordsToday}
           updateMetWords={updateMetWords}

@@ -1,11 +1,11 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { actions } from "./gameActions";
+import { actions } from "../utilities/gameActions";
 import { initConfig, gameReducer } from "./gameReducer";
-import SHUFLHint from "./SHUFLHint";
-import SHUFLInput from "./SHUFLInput";
-import SHUFLIntro from "./SHUFLIntro";
-import SHUFLPuzzle from "./SHUFLPuzzle";
-import Completed from "./Completed";
+import Hint from "./Hint";
+import Input from "./Input";
+import Intro from "./Intro";
+import Puzzle from "./Puzzle";
+import Completed from "../components/Completed";
 import RoundProgress from "./RoundProgress";
 import { createStrokeHintForPhrase } from "../../../utils/transformingDictionaries";
 
@@ -14,11 +14,9 @@ import {
   pickAWord,
   selectMaterial,
   shuffleWord,
-} from "./SHUFLUtilities";
+} from "./utilities";
 
-export const SHUFLDispatch = React.createContext(null);
-
-export default function SHUFLGame({
+export default function Game({
   globalLookupDictionary,
   startingMetWordsToday,
   updateMetWords,
@@ -75,23 +73,21 @@ export default function SHUFLGame({
           SHUFL game
         </h3>
         {state.gameComplete ? (
-          <SHUFLDispatch.Provider value={dispatch}>
-            <Completed />
-          </SHUFLDispatch.Provider>
+          <Completed gameName="SHUFL" dispatch={dispatch} />
         ) : (
           <>
             <div className="flex flex-wrap">
-              <SHUFLIntro />
+              <Intro />
               <RoundProgress round={state.roundIndex + 1} />
             </div>
-            <SHUFLPuzzle puzzleText={puzzleText} />
-            <SHUFLInput
+            <Puzzle puzzleText={puzzleText} />
+            <Input
               onChangeSHUFLInput={onChangeSHUFLInput}
               previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
               round={state.roundIndex + 1}
               typedText={typedText}
             />
-            <SHUFLHint
+            <Hint
               currentStroke={currentStroke}
               setShowHint={setShowHint}
               showHint={showHint}

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: "TPEUBGSZ game",
+  title: "Games/TPEUBGSZ game",
   component: Game,
 };
 

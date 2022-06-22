@@ -3,16 +3,16 @@ import Completed from "./Completed";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: "SHUFL game/Completed",
+  title: "Games/Completed",
   component: Completed,
 };
 
 const Template = (args) => {
   return (
     <div className="p3">
-      <Completed {...args} />
+      <Completed gameName="SHUFL" dispatch={undefined} {...args} />
     </div>
   );
 };
 
-export const SHUFLGameCompleted = Template.bind({});
+export const GameCompleted = Template.bind({});
