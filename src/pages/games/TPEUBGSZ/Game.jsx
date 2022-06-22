@@ -7,13 +7,13 @@ import Input from "../components/Input";
 import Intro from "../components/Intro";
 import Puzzle from "./Puzzle";
 import RoundProgress from "../components/RoundProgress";
-import { ReactComponent as BoredRobot } from "../../../images/BoredRobot.svg";
+import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
 
 import { makeUpAWordAndHint } from "./Utilities";
 
 const gameName = "TPEUBGSZ";
 const introText =
-  "Oh no! The steno robots have broken English! They’ve destroyed all the nouns and verbs and the only pieces left are the prefixes and suffixes. Oh well. Let’s stick them together to make some new words for the robots.";
+  "Oh no! The steno robots have broken English! They’ve destroyed all the useful words and the only pieces left are prefixes and suffixes. Let’s stick them together to make some new words for the robots.";
 
 export default function Game() {
   const [puzzleText, setPuzzleText] = useState("");
@@ -61,7 +61,7 @@ export default function Game() {
             <div className="flex flex-wrap">
               <Intro
                 introText={introText}
-                robot={<BoredRobot id="bored-robot-TPEUBGSZ" />}
+                robot={<ThinkingRobot id="bored-robot-TPEUBGSZ" />}
               />
               <RoundProgress round={state.roundIndex + 1} />
             </div>
