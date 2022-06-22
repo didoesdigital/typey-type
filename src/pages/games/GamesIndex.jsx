@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import GameBox from "./components/GameBox";
+import { ReactComponent as RaverRobot } from "../../images/RaverRobot.svg";
+import { ReactComponent as ThinkingRobot } from "../../images/ThinkingRobot.svg";
 
 export default function GamesIndex() {
   const mainHeading = useRef(null);
@@ -24,16 +26,31 @@ export default function GamesIndex() {
       </div>
       <div className="p3 mx-auto mw-1024">
         <div className="flex flex-wrap justify-between">
-          <div>
-            <div className="mw-584">
-              <h3 id="typey-type-games">Typey&nbsp;Type games</h3>
-              <p>
-                Try out the new <Link to="/games/SHUFL">SHUFL game</Link>.
-              </p>
-              <p>
-                Try out the new <Link to="/games/TPEUBGSZ">TPEUBGSZ game</Link>.
-              </p>
-            </div>
+          <h3 id="typey-type-games" className="mx-auto">
+            Typey&nbsp;Type games
+          </h3>
+          <div className="flex flex-wrap justify-center mx-auto">
+            <GameBox
+              title="SHUFL (shuffle)"
+              description="Solve the puzzle to straighten out shuffled words."
+              linkTo="/games/SHUFL"
+              linkText="Play SHUFL"
+              robot={
+                <RaverRobot role="image" aria-labelledby="raver-robot-title" />
+              }
+            />
+            <GameBox
+              title="TPEUBGSZ (fixes)"
+              description="Practise prefixes and suffixes by combining them together."
+              linkTo="/games/TPEUBGSZ"
+              linkText="Play TPEUBGSZ"
+              robot={
+                <ThinkingRobot
+                  role="image"
+                  aria-labelledby="thinking-robot-title"
+                />
+              }
+            />
           </div>
         </div>
       </div>

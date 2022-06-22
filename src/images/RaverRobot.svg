@@ -1,4 +1,5 @@
 <svg viewBox="0 0 77 124" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <title id="raver-robot-title">Raver robot</title>
   <path d="M0.999999 72.3913C1.00002 58 10.5002 54 24.1304 54L24.1304 58C6.50023 58.4873 6.21739 66.9873 6.21739 72.3913C6.21739 75.8696 0.999995 75.8696 0.999999 72.3913Z" fill="#202630" stroke="#202630" stroke-width="1.73913"/>
   <g id="RaverRobotLeftLeg" fill="#202630">
     <path d="M25 94H32V115H25z"/>

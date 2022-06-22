@@ -84,7 +84,13 @@ export default function Game({
             <div className="flex flex-wrap">
               <Intro
                 introText={introText}
-                robot={<RaverRobot id="raver-robot-SHUFL" />}
+                robot={
+                  <RaverRobot
+                    id="raver-robot-SHUFL"
+                    role="image"
+                    aria-labelledby="raver-robot-title"
+                  />
+                }
               />
               <RoundProgress round={state.roundIndex + 1} />
             </div>

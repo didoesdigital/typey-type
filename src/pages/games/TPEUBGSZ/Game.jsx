@@ -61,7 +61,13 @@ export default function Game() {
             <div className="flex flex-wrap">
               <Intro
                 introText={introText}
-                robot={<ThinkingRobot id="bored-robot-TPEUBGSZ" />}
+                robot={
+                  <ThinkingRobot
+                    id="thinking-robot-TPEUBGSZ"
+                    role="image"
+                    aria-labelledby="thinking-robot-title"
+                  />
+                }
               />
               <RoundProgress round={state.roundIndex + 1} />
             </div>
