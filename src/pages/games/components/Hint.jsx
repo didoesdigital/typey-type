@@ -1,24 +1,29 @@
 import React from "react";
 import GoogleAnalytics from "react-ga";
 
-const handleHintClick = (event, setShowHint) => {
+const handleHintClick = (event, setShowHint, gameName) => {
   event.preventDefault();
 
-  const yourSHUFLinput = document.getElementById("SHUFL-input");
-  if (yourSHUFLinput) {
-    yourSHUFLinput.focus();
+  const yourInput = document.getElementById(`${gameName}-input`);
+  if (yourInput) {
+    yourInput.focus();
   }
 
   setShowHint(true);
 
   GoogleAnalytics.event({
-    category: "SHUFL",
+    category: gameName,
     action: "Click",
     label: "Hint",
   });
 };
 
-export default function Hint({ currentStroke, setShowHint, showHint }) {
+export default function Hint({
+  currentStroke,
+  setShowHint,
+  showHint,
+  gameName,
+}) {
   return (
     <>
       {!showHint && (
@@ -26,8 +31,10 @@ export default function Hint({ currentStroke, setShowHint, showHint }) {
           <a
             href="#hint"
             className="dib"
-            onClick={(event) => handleHintClick(event, setShowHint)}
-            onKeyPress={(event) => handleHintClick(event, setShowHint)}
+            onClick={(event) => handleHintClick(event, setShowHint, gameName)}
+            onKeyPress={(event) =>
+              handleHintClick(event, setShowHint, gameName)
+            }
           >
             Hint?
           </a>

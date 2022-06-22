@@ -1,11 +1,11 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { actions } from "../utilities/gameActions";
 import { initConfig, gameReducer } from "./gameReducer";
-import Hint from "./Hint";
+import Completed from "../components/Completed";
+import Hint from "../components/Hint";
 import Input from "./Input";
 import Intro from "./Intro";
 import Puzzle from "./Puzzle";
-import Completed from "../components/Completed";
 import RoundProgress from "./RoundProgress";
 
 import { makeUpAWordAndHint } from "./Utilities";
@@ -66,6 +66,7 @@ export default function Game() {
             />
             <Hint
               currentStroke={currentStroke}
+              gameName="TPEUBGSZ"
               setShowHint={setShowHint}
               showHint={showHint}
             />
