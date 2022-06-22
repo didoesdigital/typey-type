@@ -111,14 +111,14 @@ let idKeyLookup = {
 class AmericanStenoDiagram extends Component {
 
   handleClick(event) {
-    if (this.props.newOnClick) {
+    if (this.props.handleOnClick) {
       let key = "";
       let clickedKeyID = event.target["id"];
       if (idKeyLookup[clickedKeyID]) {
         key = idKeyLookup[clickedKeyID];
       }
 
-      this.props.newOnClick(key);
+      this.props.handleOnClick(key);
     }
   }
 
