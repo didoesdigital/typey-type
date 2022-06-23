@@ -494,6 +494,9 @@ input:focus::placeholder {
 .b--solid {
   border-style: solid;
 }
+.b--transparent {
+  border-color: transparent;
+}
 .b--brand-primary {
   border-color: $brand-primary;
 }
@@ -773,6 +776,7 @@ input:focus::placeholder {
 }
 
 .color-text  { color: $type-color; }
+.color-white  { color: #fff; }
 .de-emphasized { color: desaturate(add-tint($brand-primary, 27%), 40%); }
 
 .clearfix { display: flow-root; }
@@ -2184,6 +2188,21 @@ $lineAdjustment: 4px;
 .dissolve-enter-done {
   opacity: 0.0;
   transition: opacity .2s linear;
+}
+
+.key-dissolve-appear {
+  filter: blur(0);
+  opacity: 1;
+}
+.key-dissolve-appear.key-dissolve-appear-active {
+  filter: blur(.5rem);
+  opacity: 0.01;
+  transition: opacity 1s linear,
+              filter  2s linear;
+}
+.key-dissolve-enter-done {
+  opacity: 0.0;
+  transition: opacity 1s linear;
 }
 
 // see also: revision-mode-button

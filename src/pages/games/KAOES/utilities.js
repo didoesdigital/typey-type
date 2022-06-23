@@ -26,5 +26,10 @@ const disambiguatedStenoKeys = [
   "-Z",
 ];
 
+const unambiguousRightHandKeysRegExp = new RegExp(/^-[FBLGDZ]$/);
+
+export const prettyKey = (key) =>
+  unambiguousRightHandKeysRegExp.test(key) ? key.replace("-", "") : key;
+
 export const choosePuzzleKey = (previousKey) =>
   shuffle(disambiguatedStenoKeys.filter((key) => key !== previousKey))[0];

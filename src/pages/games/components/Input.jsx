@@ -36,7 +36,7 @@ export default function Input({
             component={"span"}
             key={round}
           >
-            <CSSTransition timeout={50000} classNames="dissolve" appear={true}>
+            <CSSTransition timeout={5000} classNames="dissolve" appear={true}>
               <kbd
                 className={
                   "color-success successfully-typed-text typed-text-input-positioning pre relative text-center"

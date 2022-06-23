@@ -118,7 +118,7 @@ class AmericanStenoDiagram extends Component {
         key = idKeyLookup[clickedKeyID];
       }
 
-      this.props.handleOnClick(key);
+      this.props.handleOnClick(key, event);
     }
   }
 
