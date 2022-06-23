@@ -2,69 +2,53 @@ import React, { useEffect, useReducer, useState } from "react";
 import { actions } from "../utilities/gameActions";
 import { initConfig, gameReducer } from "./gameReducer";
 import Completed from "../components/Completed";
-import Hint from "../components/Hint";
-import Input from "../components/Input";
 import Intro from "../components/Intro";
 import RoundProgress from "../components/RoundProgress";
+import StenoLayoutDiagram from "../../../StenoLayout/AmericanStenoDiagram";
+import Stroke from "../../../utils/stroke";
+import { mapBriefToAmericanStenoKeys as mapBriefsFunction } from "../../../utils/typey-type";
 import Puzzle from "./Puzzle";
-import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
-import { createStrokeHintForPhrase } from "../../../utils/transformingDictionaries";
 import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
+import { choosePuzzleKey } from "./utilities";
 
-// import {
-//   getRightAnswers,
-//   pickAWord,
-//   selectMaterial,
-//   shuffleWord,
-// } from "./utilities";
+const unambiguousRightHandKeysRegExp = new RegExp(/^-[EUFBLGDZ]$/);
 
 const gameName = "KAOES";
 const introText =
   "The mischievous steno robots have hidden all the steno keys. You need to find where they belong on the steno diagram.";
 
 export default function Game() {
-  // const [material, setMaterial] = useState([]);
-  const [puzzleText, setPuzzleText] = useState("-P");
-  // const [rightAnswers, setRightAnswers] = useState([]);
-  // const [typedText, setTypedText] = useState("");
-  // const [currentStroke, setCurrentStroke] = useState("");
-  // const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
-  //   useState("");
-  // const [showHint, setShowHint] = useState(false);
+  const [puzzleText, setPuzzleText] = useState("");
+  const [stenoStroke, setStenoStroke] = useState(new Stroke());
   const [state, dispatch] = useReducer(
     gameReducer,
     undefined, // init state
     initConfig
   );
+  useEffect(() => {
+    setPuzzleText(choosePuzzleKey(""));
+  }, []);
 
-  // useEffect(() => {
-  //   const filteredMetWords = selectMaterial(startingMetWordsToday);
-  //   setMaterial(filteredMetWords);
-  //   const pickedWord = pickAWord(filteredMetWords);
-  //   setPuzzleText(shuffleWord(pickedWord));
-  //   setCurrentStroke(
-  //     createStrokeHintForPhrase(pickedWord.trim(), globalLookupDictionary)
-  //   );
-  //   setShowHint(false);
-  //   setRightAnswers(getRightAnswers(filteredMetWords, pickedWord));
-  // }, [startingMetWordsToday, globalLookupDictionary]);
+  const onClickHandler = (key) => {
+    const tmpBoard = new Stroke();
+    const clickedKey = tmpBoard.set(key).toString();
+    console.log("Puzzle text: ", puzzleText);
+    console.log("Clicked: ", clickedKey);
+    if (puzzleText === clickedKey) {
+      console.log("Setting a new puzzle and clearing the steno stroke…");
 
-  // const onChangeInput = (inputText) => {
-  //   // setTypedText(inputText);
-  //   // if (rightAnswers.includes(inputText.trim())) {
-  //   //   updateMetWords(inputText);
-  //   //   setTypedText("");
-  //   //   setPreviousCompletedPhraseAsTyped(inputText);
-  //   //   const pickedWord = pickAWord(material);
-  //   //   setPuzzleText(shuffleWord(pickedWord));
-  //   //   setCurrentStroke(
-  //   //     createStrokeHintForPhrase(pickedWord.trim(), globalLookupDictionary)
-  //   //   );
-  //   //   setShowHint(false);
-  //   //   setRightAnswers(getRightAnswers(material, pickedWord));
-  //     dispatch({ type: actions.moveToNextRound });
-  //   }
-  // };
+      const newPuzzleText = choosePuzzleKey(clickedKey);
+      console.log("newPuzzleText", newPuzzleText);
+      setPuzzleText(newPuzzleText);
+      // setPuzzleText(choosePuzzleKey(clickedKey));
+
+      setStenoStroke(new Stroke());
+      dispatch({ type: actions.moveToNextRound });
+    } else {
+      console.log("Adding the clicked key to the steno board diagram…");
+      setStenoStroke(stenoStroke.set(key));
+    }
+  };
 
   return (
     <div className="flex flex-wrap justify-between">
@@ -89,8 +73,23 @@ export default function Game() {
               />
               <RoundProgress round={state.roundIndex + 1} />
             </div>
-            <Puzzle puzzleText={puzzleText} />
-            Diagram goes here
+            <Puzzle
+              puzzleText={
+                unambiguousRightHandKeysRegExp.test(puzzleText)
+                  ? puzzleText.replace("-", "")
+                  : puzzleText
+              }
+            />
+            <div className="flex flex-wrap flex-grow justify-center">
+              <StenoLayoutDiagram
+                id="stenoDiagram"
+                {...mapBriefsFunction(stenoStroke.toString())}
+                handleOnClick={onClickHandler}
+                brief={puzzleText}
+                diagramWidth="440"
+                hideLetters={true}
+              />
+            </div>
           </>
         )}
       </div>
