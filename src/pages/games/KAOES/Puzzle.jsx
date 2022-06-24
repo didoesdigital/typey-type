@@ -3,7 +3,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 export default function Puzzle({ puzzleText }) {
   return (
-    <p className="text-center">
+    <p className="text-center lede">
       <strong>
         Where does the{" "}
         <TransitionGroup className={""} component={"span"} key={puzzleText}>

@@ -19,6 +19,7 @@ const rightColor = "#1F74D1";
 const wrongColor = "#953159";
 const neutralDarkColor = "#504C57";
 const neutralLightColor = "#F2F1F4";
+const diagramWidth = 568;
 
 export default function Game() {
   const [puzzleText, setPuzzleText] = useState("");
@@ -62,7 +63,7 @@ export default function Game() {
           <Completed gameName={gameName} dispatch={dispatch} />
         ) : (
           <>
-            <div className="flex flex-wrap pb3">
+            <div className="flex flex-wrap pb1">
               <Intro
                 introText={introText}
                 robot={
@@ -76,8 +77,8 @@ export default function Game() {
               <RoundProgress round={state.roundIndex + 1} />
             </div>
             <Puzzle puzzleText={prettyKey(puzzleText)} />
-            <div className="flex flex-wrap flex-grow justify-center py3">
-              <div className="inline-flex relative mx-auto">
+            <div className="flex flex-wrap flex-grow justify-center pt1 pb3">
+              <div className="inline-flex relative mx-auto mw100">
                 <TransitionGroup
                   className={"duplicate-steno-diagram absolute pointer-none"}
                   component={"div"}
@@ -93,7 +94,7 @@ export default function Game() {
                       {...mapBriefsFunction(previousStenoStroke.toString())}
                       handleOnClick={undefined}
                       brief={`duplicate-${puzzleText}`}
-                      diagramWidth="440"
+                      diagramWidth={diagramWidth}
                       onStrokeColor={rightWrongColor}
                       offStrokeColor="transparent"
                       onTextColor="#fff"
@@ -108,7 +109,7 @@ export default function Game() {
                   {...mapBriefsFunction(stenoStroke.toString())}
                   handleOnClick={onClickHandler}
                   brief={puzzleText}
-                  diagramWidth="440"
+                  diagramWidth={diagramWidth}
                   hideLetters={true}
                   onStrokeColor={neutralDarkColor}
                   offStrokeColor={neutralDarkColor}
