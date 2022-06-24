@@ -15,6 +15,10 @@ import { choosePuzzleKey, prettyKey } from "./utilities";
 const gameName = "KAOES";
 const introText =
   "The mischievous steno robots have hidden all the steno keys. You need to find where they belong on the steno diagram.";
+const rightColor = "#5598E2";
+const wrongColor = "#E26F99";
+const neutralDarkColor = "#868091";
+const neutralLightColor = "#F2F1F4";
 
 export default function Game() {
   const [puzzleText, setPuzzleText] = useState("");
@@ -44,12 +48,12 @@ export default function Game() {
       // setPuzzleText(choosePuzzleKey(clickedKey));
 
       setStenoStroke(new Stroke());
-      setRightWrongColor("#5598E2");
+      setRightWrongColor(rightColor);
       dispatch({ type: actions.moveToNextRound });
     } else {
       console.log("Adding the clicked key to the steno board diagram…");
       setStenoStroke(stenoStroke.set(key));
-      setRightWrongColor("#E17547");
+      setRightWrongColor(wrongColor);
     }
     setPreviousStenoStroke(tmpBoard.set(key));
     console.log("CLICKED");
@@ -102,7 +106,8 @@ export default function Game() {
                         handleOnClick={undefined}
                         brief={`duplicate-${puzzleText}`}
                         diagramWidth="440"
-                        strokeColor="transparent"
+                        onStrokeColor={rightWrongColor}
+                        offStrokeColor="transparent"
                         onTextColor="#fff"
                         offTextColor="transparent"
                         onKeyColor={rightWrongColor}
@@ -118,11 +123,12 @@ export default function Game() {
                   brief={puzzleText}
                   diagramWidth="440"
                   hideLetters={true}
-                  strokeColor="#898989"
+                  onStrokeColor={neutralDarkColor}
+                  offStrokeColor={neutralDarkColor}
                   onTextColor="#fff"
                   offTextColor="#fff"
-                  onKeyColor="#898989"
-                  offKeyColor="#F2F2F2"
+                  onKeyColor={neutralDarkColor}
+                  offKeyColor={neutralLightColor}
                 />
               </div>
             </div>

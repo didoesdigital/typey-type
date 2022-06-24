@@ -53,7 +53,8 @@ const idKeyLookup = {
 }
 
 export default function AmericanStenoDiagram(props) {
-  const strokeColor = props.strokeColor || '#7109AA';
+  const onStrokeColor = props.onStrokeColor || '#7109AA';
+  const offStrokeColor = props.offStrokeColor || '#7109AA';
   const onTextColor = props.onTextColor || '#fff';
   const offTextColor = props.offTextColor || '#fff';
   const onKeyColor = props.onKeyColor || '#7109AA';
@@ -71,30 +72,30 @@ export default function AmericanStenoDiagram(props) {
   return (
     <svg id={props.id || 'stenoDiagram'} viewBox="0 0 215 101" width={props.diagramWidth || 140} xmlns="http://www.w3.org/2000/svg" aria-hidden={true} onClick={handleClick}>
       <g id={"stenoboard-" + props.brief } transform="translate(1 1)" fill="none" fillRule="evenodd">
-        <rect id="rightZ" stroke={strokeColor} fill={props.rightZ ? onKeyColor : offKeyColor} x="195" y="48" width="18" height="23" rx="4"/>
-        <rect id="rightD" stroke={strokeColor} fill={props.rightD ? onKeyColor : offKeyColor} x="195" y="20" width="18" height="23" rx="4"/>
-        <rect id="rightS" stroke={strokeColor} fill={props.rightS ? onKeyColor : offKeyColor} x="174" y="48" width="18" height="23" rx="4"/>
-        <rect id="rightT" stroke={strokeColor} fill={props.rightT ? onKeyColor : offKeyColor} x="174" y="20" width="18" height="23" rx="4"/>
-        <rect id="rightG" stroke={strokeColor} fill={props.rightG ? onKeyColor : offKeyColor} x="153" y="48" width="18" height="23" rx="4"/>
-        <rect id="rightL" stroke={strokeColor} fill={props.rightL ? onKeyColor : offKeyColor} x="153" y="20" width="18" height="23" rx="4"/>
-        <rect id="rightB" stroke={strokeColor} fill={props.rightB ? onKeyColor : offKeyColor} x="132" y="48" width="18" height="23" rx="4"/>
-        <rect id="rightP" stroke={strokeColor} fill={props.rightP ? onKeyColor : offKeyColor} x="132" y="20" width="18" height="23" rx="4"/>
-        <rect id="rightR" stroke={strokeColor} fill={props.rightR ? onKeyColor : offKeyColor} x="111" y="48" width="18" height="23" rx="4"/>
-        <rect id="rightF" stroke={strokeColor} fill={props.rightF ? onKeyColor : offKeyColor} x="111" y="20" width="18" height="23" rx="4"/>
-        <rect id="rightU" stroke={strokeColor} fill={props.rightU ? onKeyColor : offKeyColor} x="122" y="76" width="18" height="23" rx="4"/>
-        <rect id="rightE" stroke={strokeColor} fill={props.rightE ? onKeyColor : offKeyColor} x="101" y="76" width="18" height="23" rx="4"/>
-        <rect id="star" stroke={strokeColor} fill={props.star ? onKeyColor : offKeyColor} x="86" y="20" width="20" height="51" rx="4"/>
-        <rect id="leftO" stroke={strokeColor} fill={props.leftO ? onKeyColor : offKeyColor} x="73" y="76" width="18" height="23" rx="4"/>
-        <rect id="leftA" stroke={strokeColor} fill={props.leftA ? onKeyColor : offKeyColor} x="52" y="76" width="18" height="23" rx="4"/>
-        <rect id="leftR" stroke={strokeColor} fill={props.leftR ? onKeyColor : offKeyColor} x="63" y="48" width="18" height="23" rx="4"/>
-        <rect id="leftH" stroke={strokeColor} fill={props.leftH ? onKeyColor : offKeyColor} x="63" y="20" width="18" height="23" rx="4"/>
-        <rect id="leftW" stroke={strokeColor} fill={props.leftW ? onKeyColor : offKeyColor} x="42" y="48" width="18" height="23" rx="4"/>
-        <rect id="leftP" stroke={strokeColor} fill={props.leftP ? onKeyColor : offKeyColor} x="42" y="20" width="18" height="23" rx="4"/>
-        <rect id="leftK" stroke={strokeColor} fill={props.leftK ? onKeyColor : offKeyColor} x="21" y="48" width="18" height="23" rx="4"/>
-        <rect id="leftT" stroke={strokeColor} fill={props.leftT ? onKeyColor : offKeyColor} x="21" y="20" width="18" height="23" rx="4"/>
-        <rect id="leftSLower" stroke={strokeColor} fill={props.leftSLower ? onKeyColor : offKeyColor} y="48" width="18" height="23" rx="4"/>
-        <rect id="leftSUpper" stroke={strokeColor} fill={props.leftSUpper ? onKeyColor : offKeyColor} y="20" width="18" height="23" rx="4"/>
-        <rect id="numberBar" stroke={strokeColor} fill={props.numberBar ? onKeyColor : offKeyColor} width="213" height="15" rx="4"/>
+        <rect id="rightZ" stroke={props.rightZ ? onStrokeColor : offStrokeColor} fill={props.rightZ ? onKeyColor : offKeyColor} x="195" y="48" width="18" height="23" rx="4"/>
+        <rect id="rightD" stroke={props.rightD ? onStrokeColor : offStrokeColor} fill={props.rightD ? onKeyColor : offKeyColor} x="195" y="20" width="18" height="23" rx="4"/>
+        <rect id="rightS" stroke={props.rightS ? onStrokeColor : offStrokeColor} fill={props.rightS ? onKeyColor : offKeyColor} x="174" y="48" width="18" height="23" rx="4"/>
+        <rect id="rightT" stroke={props.rightT ? onStrokeColor : offStrokeColor} fill={props.rightT ? onKeyColor : offKeyColor} x="174" y="20" width="18" height="23" rx="4"/>
+        <rect id="rightG" stroke={props.rightG ? onStrokeColor : offStrokeColor} fill={props.rightG ? onKeyColor : offKeyColor} x="153" y="48" width="18" height="23" rx="4"/>
+        <rect id="rightL" stroke={props.rightL ? onStrokeColor : offStrokeColor} fill={props.rightL ? onKeyColor : offKeyColor} x="153" y="20" width="18" height="23" rx="4"/>
+        <rect id="rightB" stroke={props.rightB ? onStrokeColor : offStrokeColor} fill={props.rightB ? onKeyColor : offKeyColor} x="132" y="48" width="18" height="23" rx="4"/>
+        <rect id="rightP" stroke={props.rightP ? onStrokeColor : offStrokeColor} fill={props.rightP ? onKeyColor : offKeyColor} x="132" y="20" width="18" height="23" rx="4"/>
+        <rect id="rightR" stroke={props.rightR ? onStrokeColor : offStrokeColor} fill={props.rightR ? onKeyColor : offKeyColor} x="111" y="48" width="18" height="23" rx="4"/>
+        <rect id="rightF" stroke={props.rightF ? onStrokeColor : offStrokeColor} fill={props.rightF ? onKeyColor : offKeyColor} x="111" y="20" width="18" height="23" rx="4"/>
+        <rect id="rightU" stroke={props.rightU ? onStrokeColor : offStrokeColor} fill={props.rightU ? onKeyColor : offKeyColor} x="122" y="76" width="18" height="23" rx="4"/>
+        <rect id="rightE" stroke={props.rightE ? onStrokeColor : offStrokeColor} fill={props.rightE ? onKeyColor : offKeyColor} x="101" y="76" width="18" height="23" rx="4"/>
+          <rect id="star" stroke={props.star ? onStrokeColor : offStrokeColor} fill={props.star ? onKeyColor : offKeyColor} x="86" y="20" width="20" height="51" rx="4"/>
+         <rect id="leftO" stroke={props.leftO ? onStrokeColor : offStrokeColor} fill={props.leftO ? onKeyColor : offKeyColor} x="73" y="76" width="18" height="23" rx="4"/>
+         <rect id="leftA" stroke={props.leftA ? onStrokeColor : offStrokeColor} fill={props.leftA ? onKeyColor : offKeyColor} x="52" y="76" width="18" height="23" rx="4"/>
+         <rect id="leftR" stroke={props.leftR ? onStrokeColor : offStrokeColor} fill={props.leftR ? onKeyColor : offKeyColor} x="63" y="48" width="18" height="23" rx="4"/>
+         <rect id="leftH" stroke={props.leftH ? onStrokeColor : offStrokeColor} fill={props.leftH ? onKeyColor : offKeyColor} x="63" y="20" width="18" height="23" rx="4"/>
+         <rect id="leftW" stroke={props.leftW ? onStrokeColor : offStrokeColor} fill={props.leftW ? onKeyColor : offKeyColor} x="42" y="48" width="18" height="23" rx="4"/>
+         <rect id="leftP" stroke={props.leftP ? onStrokeColor : offStrokeColor} fill={props.leftP ? onKeyColor : offKeyColor} x="42" y="20" width="18" height="23" rx="4"/>
+         <rect id="leftK" stroke={props.leftK ? onStrokeColor : offStrokeColor} fill={props.leftK ? onKeyColor : offKeyColor} x="21" y="48" width="18" height="23" rx="4"/>
+         <rect id="leftT" stroke={props.leftT ? onStrokeColor : offStrokeColor} fill={props.leftT ? onKeyColor : offKeyColor} x="21" y="20" width="18" height="23" rx="4"/>
+    <rect id="leftSLower" stroke={props.leftSLower ? onStrokeColor : offStrokeColor} fill={props.leftSLower ? onKeyColor : offKeyColor} y="48" width="18" height="23" rx="4"/>
+    <rect id="leftSUpper" stroke={props.leftSUpper ? onStrokeColor : offStrokeColor} fill={props.leftSUpper ? onKeyColor : offKeyColor} y="20" width="18" height="23" rx="4"/>
+     <rect id="numberBar" stroke={props.numberBar ? onStrokeColor : offStrokeColor} fill={props.numberBar ? onKeyColor : offKeyColor} width="213" height="15" rx="4"/>
         <g id="Outlines" transform="translate(5 2)" visibility={props.hideLetters ? 'hidden' : 'initial'}>
           <path d="M202.568 51v1.44l-5.104 7.952h5.088V62.2H195v-1.44l5.072-7.968h-4.72V51z" id="Z" fill={props.rightZ ? onTextColor : offTextColor}/>
           <path d="M195 34.2V23h2.816c3.744 0 5.152 2.816 5.152 5.6 0 2.56-1.28 5.6-5.216 5.6H195zm1.904-1.792h1.04c2.288 0 3.04-2.032 3.04-3.808 0-1.888-.832-3.808-2.864-3.808h-1.216v7.616z" id="D" fill={props.rightD ? onTextColor : offTextColor}/>
