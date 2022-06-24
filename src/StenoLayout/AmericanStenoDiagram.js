@@ -96,7 +96,7 @@ class AmericanStenoDiagram extends Component {
           <rect id="leftSLower" stroke={strokeColor} fill={this.props.leftSLower ? onKeyColor : offKeyColor} y="48" width="18" height="23" rx="4"/>
           <rect id="leftSUpper" stroke={strokeColor} fill={this.props.leftSUpper ? onKeyColor : offKeyColor} y="20" width="18" height="23" rx="4"/>
           <rect id="numberBar" stroke={strokeColor} fill={this.props.numberBar ? onKeyColor : offKeyColor} width="213" height="15" rx="4"/>
-          <g id="Outlines" transform="translate(5 2)" fill="#FFF" visibility={this.props.hideLetters ? 'hidden' : 'initial'}>
+          <g id="Outlines" transform="translate(5 2)" visibility={this.props.hideLetters ? 'hidden' : 'initial'}>
             <path d="M202.568 51v1.44l-5.104 7.952h5.088V62.2H195v-1.44l5.072-7.968h-4.72V51z" id="Z" fill={this.props.leftZ ? onTextColor : offTextColor}/>
             <path d="M195 34.2V23h2.816c3.744 0 5.152 2.816 5.152 5.6 0 2.56-1.28 5.6-5.216 5.6H195zm1.904-1.792h1.04c2.288 0 3.04-2.032 3.04-3.808 0-1.888-.832-3.808-2.864-3.808h-1.216v7.616z" id="D" fill={this.props.leftD ? onTextColor : offTextColor}/>
             <path d="M177.984 62.584c-1.824 0-3.392-1.136-3.984-2.88l1.728-.64c.48 1.024 1.408 1.728 2.416 1.728.96 0 1.632-.496 1.632-1.488 0-.88-1.072-1.488-2.304-2.032-1.424-.624-3.072-1.408-3.072-3.312 0-1.616 1.344-2.96 3.456-2.96 1.68 0 2.976 1.024 3.376 2.384l-1.712.576c-.32-.656-.928-1.168-1.776-1.168-.8 0-1.424.432-1.424 1.2 0 .784 1.008 1.152 2.144 1.68 1.392.64 3.232 1.584 3.232 3.584 0 2.128-1.728 3.328-3.712 3.328z" id="SRight" fill={this.props.rightS ? onTextColor : offTextColor}/>
