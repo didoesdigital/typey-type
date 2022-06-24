@@ -9,7 +9,7 @@ import StenoLayoutDiagram from "../../../StenoLayout/AmericanStenoDiagram";
 import Stroke from "../../../utils/stroke";
 import { mapBriefToAmericanStenoKeys as mapBriefsFunction } from "../../../utils/typey-type";
 import Puzzle from "./Puzzle";
-import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
+import { ReactComponent as HoarderRobot } from "../../../images/HoarderRobot.svg";
 import { choosePuzzleKey, prettyKey } from "./utilities";
 
 const gameName = "KAOES";
@@ -66,10 +66,10 @@ export default function Game() {
               <Intro
                 introText={introText}
                 robot={
-                  <ThinkingRobot
-                    id="thinking-robot-TPEUBGSZ"
+                  <HoarderRobot
+                    id="hoarder-robot-KAOES"
                     role="img"
-                    aria-labelledby="thinking-robot-title"
+                    aria-labelledby="hoarder-robot-title"
                   />
                 }
               />
