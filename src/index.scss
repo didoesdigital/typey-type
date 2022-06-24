@@ -2198,11 +2198,11 @@ $lineAdjustment: 4px;
   filter: blur(.5rem);
   opacity: 0.01;
   transition: opacity 1s linear,
-              filter  2s linear;
+              filter  1.5s ease-in;
 }
 .key-dissolve-enter-done {
   opacity: 0.0;
-  transition: opacity 1s linear;
+  transition: opacity 2s linear;
 }
 
 // see also: revision-mode-button

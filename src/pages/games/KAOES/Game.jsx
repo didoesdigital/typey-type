@@ -15,9 +15,9 @@ import { choosePuzzleKey, prettyKey } from "./utilities";
 const gameName = "KAOES";
 const introText =
   "The mischievous steno robots have hidden all the steno keys. You need to find where they belong on the steno diagram.";
-const rightColor = "#5598E2";
-const wrongColor = "#E26F99";
-const neutralDarkColor = "#868091";
+const rightColor = "#1F74D1";
+const wrongColor = "#953159";
+const neutralDarkColor = "#504C57";
 const neutralLightColor = "#F2F1F4";
 
 export default function Game() {
