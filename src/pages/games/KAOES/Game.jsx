@@ -35,6 +35,9 @@ export default function Game() {
   }, []);
 
   const onClickHandler = (key) => {
+    if (!key) {
+      return;
+    }
     const tmpBoard = new Stroke();
     const clickedKey = tmpBoard.set(key).toString();
     if (puzzleText === clickedKey) {
