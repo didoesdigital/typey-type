@@ -19,9 +19,7 @@ const introText =
 export default function Game() {
   const [puzzleText, setPuzzleText] = useState("");
   const [stenoStroke, setStenoStroke] = useState(new Stroke());
-  const [previousClickedKey, setPreviousClickedKey] = useState("");
-  const [keyX, setKeyX] = useState(0);
-  const [keyY, setKeyY] = useState(0);
+  const [previousStenoStroke, setPreviousStenoStroke] = useState(new Stroke());
   const [state, dispatch] = useReducer(
     gameReducer,
     undefined, // init state
@@ -31,7 +29,7 @@ export default function Game() {
     setPuzzleText(choosePuzzleKey(""));
   }, []);
 
-  const onClickHandler = (key, event) => {
+  const onClickHandler = (key) => {
     const tmpBoard = new Stroke();
     const clickedKey = tmpBoard.set(key).toString();
     console.log("Puzzle text: ", puzzleText);
@@ -50,22 +48,13 @@ export default function Game() {
       console.log("Adding the clicked key to the steno board diagram…");
       setStenoStroke(stenoStroke.set(key));
     }
+    setPreviousStenoStroke(tmpBoard.set(key));
     console.log("CLICKED");
-    // console.log(event.target.offsetLeft);
-    // console.log(event.target.offsetTop);
-    console.log(event.target);
-    setPreviousClickedKey(clickedKey);
-    console.log(document.getElementById(event.target.id));
-    // console.log(document.getElementById(event.target.id).getBBox().x);
-    console.log(document.getElementById(event.target.id).getBBox().x);
-    const keyElement = document.getElementById(event.target.id);
-    const keyBBox = keyElement ? keyElement.getBBox() : { x: 0, y: 0 };
-    const keyPosition = [keyBBox.x * 2.04651163, keyBBox.y * 2.03960396 + 5];
-    setKeyX(keyPosition[0]);
-    setKeyY(keyPosition[1]);
-    // setKeyX(document.getElementById(event.target.id).getBBox().x * 2.04651163);
-    // setKeyY(document.getElementById(event.target.id).getBBox().y * 2.03960396);
   };
+
+  console.log(previousStenoStroke);
+  const teft = { ...mapBriefsFunction(previousStenoStroke.toString()) };
+  console.log(teft);
 
   return (
     <div className="flex flex-wrap justify-between">
@@ -93,37 +82,32 @@ export default function Game() {
             <Puzzle puzzleText={prettyKey(puzzleText)} />
             <div className="flex flex-wrap flex-grow justify-center py3">
               <div className="inline-flex relative mx-auto">
-                <div
-                  id="duplicateKey"
-                  className="absolute flex items-center justify-center pointer-none"
-                  style={{
-                    transform: `translate(${keyX}px, ${keyY}px)`,
-                    width: "9.37%",
-                  }}
+                <TransitionGroup
+                  className={""}
+                  component={"div"}
+                  key={previousStenoStroke.toString()}
                 >
-                  <p
-                    className="lede text-center mb0 color-white"
-                    style={{
-                      fontSize: "47px",
-                      fontWeight: "700",
-                      lineHeight: 1,
-                    }}
+                  <CSSTransition
+                    timeout={5000}
+                    classNames="key-dissolve"
+                    appear={true}
                   >
-                    <TransitionGroup
-                      className={""}
-                      component={"span"}
-                      key={previousClickedKey}
-                    >
-                      <CSSTransition
-                        timeout={5000}
-                        classNames="key-dissolve"
-                        appear={true}
-                      >
-                        <span>{previousClickedKey.replace("-", "")}</span>
-                      </CSSTransition>
-                    </TransitionGroup>
-                  </p>
-                </div>
+                    <div className="absolute pointer-none">
+                      <StenoLayoutDiagram
+                        id="duplicateStenoDiagram"
+                        {...mapBriefsFunction(previousStenoStroke.toString())}
+                        handleOnClick={undefined}
+                        brief={`duplicate-${puzzleText}`}
+                        diagramWidth="440"
+                        strokeColor="transparent"
+                        onTextColor="#fff"
+                        offTextColor="transparent"
+                        onKeyColor="transparent"
+                        offKeyColor="transparent"
+                      />
+                    </div>
+                  </CSSTransition>
+                </TransitionGroup>
                 <StenoLayoutDiagram
                   id="stenoDiagram"
                   {...mapBriefsFunction(stenoStroke.toString())}

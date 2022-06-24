@@ -64,7 +64,7 @@ export default function AmericanStenoDiagram(props) {
       const clickedKeyID = event.target["id"];
       const key = (idKeyLookup[clickedKeyID]) ? idKeyLookup[clickedKeyID] : "";
 
-      props.handleOnClick(key, event);
+      props.handleOnClick(key);
     }
   }
 
