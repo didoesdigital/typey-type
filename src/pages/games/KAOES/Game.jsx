@@ -20,6 +20,7 @@ export default function Game() {
   const [puzzleText, setPuzzleText] = useState("");
   const [stenoStroke, setStenoStroke] = useState(new Stroke());
   const [previousStenoStroke, setPreviousStenoStroke] = useState(new Stroke());
+  const [rightWrongColor, setRightWrongColor] = useState("#898989");
   const [state, dispatch] = useReducer(
     gameReducer,
     undefined, // init state
@@ -43,10 +44,12 @@ export default function Game() {
       // setPuzzleText(choosePuzzleKey(clickedKey));
 
       setStenoStroke(new Stroke());
+      setRightWrongColor("#5598E2");
       dispatch({ type: actions.moveToNextRound });
     } else {
       console.log("Adding the clicked key to the steno board diagram…");
       setStenoStroke(stenoStroke.set(key));
+      setRightWrongColor("#E17547");
     }
     setPreviousStenoStroke(tmpBoard.set(key));
     console.log("CLICKED");
@@ -102,7 +105,7 @@ export default function Game() {
                         strokeColor="transparent"
                         onTextColor="#fff"
                         offTextColor="transparent"
-                        onKeyColor="transparent"
+                        onKeyColor={rightWrongColor}
                         offKeyColor="transparent"
                       />
                     </div>
@@ -115,6 +118,11 @@ export default function Game() {
                   brief={puzzleText}
                   diagramWidth="440"
                   hideLetters={true}
+                  strokeColor="#898989"
+                  onTextColor="#fff"
+                  offTextColor="#fff"
+                  onKeyColor="#898989"
+                  offKeyColor="#F2F2F2"
                 />
               </div>
             </div>
