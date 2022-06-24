@@ -1,12 +1,6 @@
 import React from 'react';
 import * as stroke from '../utils/stroke';
 
-const strokeColor = '#7109AA';
-const onTextColor = '#fff';
-const offTextColor = '#fff';
-const onKeyColor = '#7109AA';
-const offKeyColor = '#e9d9f2';
-
 const idKeyLookup = {
   "rightZ": stroke.Z,
   "rightD": stroke.D,
@@ -59,6 +53,12 @@ const idKeyLookup = {
 }
 
 export default function AmericanStenoDiagram(props) {
+  const strokeColor = props.strokeColor || '#7109AA';
+  const onTextColor = props.onTextColor || '#fff';
+  const offTextColor = props.offTextColor || '#fff';
+  const onKeyColor = props.onKeyColor || '#7109AA';
+  const offKeyColor = props.offKeyColor || '#e9d9f2';
+
   const handleClick = (event) => {
     if (props.handleOnClick) {
       const clickedKeyID = event.target["id"];
