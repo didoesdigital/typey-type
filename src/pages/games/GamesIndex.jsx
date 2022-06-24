@@ -37,7 +37,7 @@ export default function GamesIndex() {
               linkText="Play KAOES"
               robot={
                 <ThinkingRobot
-                  role="image"
+                  role="img"
                   aria-labelledby="thinking-robot-title"
                 />
               }
@@ -48,7 +48,7 @@ export default function GamesIndex() {
               linkTo="/games/SHUFL"
               linkText="Play SHUFL"
               robot={
-                <RaverRobot role="image" aria-labelledby="raver-robot-title" />
+                <RaverRobot role="img" aria-labelledby="raver-robot-title" />
               }
             />
             <GameBox
@@ -58,7 +58,7 @@ export default function GamesIndex() {
               linkText="Play TPEUBGSZ"
               robot={
                 <ThinkingRobot
-                  role="image"
+                  role="img"
                   aria-labelledby="thinking-robot-title"
                 />
               }

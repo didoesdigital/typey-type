@@ -68,7 +68,7 @@ export default function Game() {
                 robot={
                   <ThinkingRobot
                     id="thinking-robot-TPEUBGSZ"
-                    role="image"
+                    role="img"
                     aria-labelledby="thinking-robot-title"
                   />
                 }

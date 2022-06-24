@@ -87,7 +87,7 @@ export default function Game({
                 robot={
                   <RaverRobot
                     id="raver-robot-SHUFL"
-                    role="image"
+                    role="img"
                     aria-labelledby="raver-robot-title"
                   />
                 }
