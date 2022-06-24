@@ -24,7 +24,7 @@ export default function Game() {
   const [puzzleText, setPuzzleText] = useState("");
   const [stenoStroke, setStenoStroke] = useState(new Stroke());
   const [previousStenoStroke, setPreviousStenoStroke] = useState(new Stroke());
-  const [rightWrongColor, setRightWrongColor] = useState("#898989");
+  const [rightWrongColor, setRightWrongColor] = useState(neutralDarkColor);
   const [state, dispatch] = useReducer(
     gameReducer,
     undefined, // init state
@@ -37,31 +37,17 @@ export default function Game() {
   const onClickHandler = (key) => {
     const tmpBoard = new Stroke();
     const clickedKey = tmpBoard.set(key).toString();
-    console.log("Puzzle text: ", puzzleText);
-    console.log("Clicked: ", clickedKey);
     if (puzzleText === clickedKey) {
-      console.log("Setting a new puzzle and clearing the steno stroke…");
-
-      const newPuzzleText = choosePuzzleKey(clickedKey);
-      console.log("newPuzzleText", newPuzzleText);
-      setPuzzleText(newPuzzleText);
-      // setPuzzleText(choosePuzzleKey(clickedKey));
-
+      setPuzzleText(choosePuzzleKey(clickedKey));
       setStenoStroke(new Stroke());
       setRightWrongColor(rightColor);
       dispatch({ type: actions.moveToNextRound });
     } else {
-      console.log("Adding the clicked key to the steno board diagram…");
       setStenoStroke(stenoStroke.set(key));
       setRightWrongColor(wrongColor);
     }
     setPreviousStenoStroke(tmpBoard.set(key));
-    console.log("CLICKED");
   };
-
-  console.log(previousStenoStroke);
-  const teft = { ...mapBriefsFunction(previousStenoStroke.toString()) };
-  console.log(teft);
 
   return (
     <div className="flex flex-wrap justify-between">
@@ -90,7 +76,7 @@ export default function Game() {
             <div className="flex flex-wrap flex-grow justify-center py3">
               <div className="inline-flex relative mx-auto">
                 <TransitionGroup
-                  className={""}
+                  className={"duplicate-steno-diagram absolute pointer-none"}
                   component={"div"}
                   key={previousStenoStroke.toString()}
                 >
@@ -99,21 +85,19 @@ export default function Game() {
                     classNames="key-dissolve"
                     appear={true}
                   >
-                    <div className="absolute pointer-none">
-                      <StenoLayoutDiagram
-                        id="duplicateStenoDiagram"
-                        {...mapBriefsFunction(previousStenoStroke.toString())}
-                        handleOnClick={undefined}
-                        brief={`duplicate-${puzzleText}`}
-                        diagramWidth="440"
-                        onStrokeColor={rightWrongColor}
-                        offStrokeColor="transparent"
-                        onTextColor="#fff"
-                        offTextColor="transparent"
-                        onKeyColor={rightWrongColor}
-                        offKeyColor="transparent"
-                      />
-                    </div>
+                    <StenoLayoutDiagram
+                      id="duplicateStenoDiagram"
+                      {...mapBriefsFunction(previousStenoStroke.toString())}
+                      handleOnClick={undefined}
+                      brief={`duplicate-${puzzleText}`}
+                      diagramWidth="440"
+                      onStrokeColor={rightWrongColor}
+                      offStrokeColor="transparent"
+                      onTextColor="#fff"
+                      offTextColor="transparent"
+                      onKeyColor={rightWrongColor}
+                      offKeyColor="transparent"
+                    />
                   </CSSTransition>
                 </TransitionGroup>
                 <StenoLayoutDiagram
