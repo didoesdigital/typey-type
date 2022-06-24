@@ -82,8 +82,8 @@ export default React.memo(function Completed({ gameName, dispatch }) {
       <div
         id="you-win"
         tabIndex="0"
-        onClick={restartConfetti.bind(this)}
-        onKeyDown={restartConfetti.bind(this)}
+        onClick={restartConfetti}
+        onKeyDown={restartConfetti}
         className="w-100 pt1"
       >
         <div className="w-100 mw-48 mx-auto">
