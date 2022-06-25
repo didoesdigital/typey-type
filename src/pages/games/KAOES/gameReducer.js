@@ -3,8 +3,9 @@ import { actions } from "../utilities/gameActions";
 const roundToWin = 10;
 
 const defaultState = {
-  roundIndex: 0,
+  firstGuess: true,
   gameComplete: false,
+  roundIndex: 0,
 };
 
 export const initConfig = (state) => ({
@@ -14,6 +15,11 @@ export const initConfig = (state) => ({
 
 export const gameReducer = (state, action) => {
   switch (action?.type) {
+    case actions.makeGuess:
+      return {
+        ...state,
+        firstGuess: false,
+      };
     case actions.moveToNextRound:
       return state.roundIndex + 1 === roundToWin
         ? {
@@ -28,6 +34,7 @@ export const gameReducer = (state, action) => {
     case actions.restartGame:
       return {
         ...state,
+        firstGuess: true,
         gameComplete: false,
         roundIndex: 0,
       };

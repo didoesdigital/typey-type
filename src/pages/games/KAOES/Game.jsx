@@ -51,6 +51,7 @@ export default function Game() {
       setRightWrongColor(wrongColor);
     }
     setPreviousStenoStroke(tmpBoard.set(key));
+    dispatch({ type: actions.makeGuess });
   };
 
   return (
@@ -91,7 +92,9 @@ export default function Game() {
                   >
                     <StenoLayoutDiagram
                       id="duplicateStenoDiagram"
-                      {...mapBriefsFunction(previousStenoStroke.toString())}
+                      {...mapBriefsFunction(
+                        state.firstGuess ? "" : previousStenoStroke.toString()
+                      )}
                       handleOnClick={undefined}
                       brief={`duplicate-${puzzleText}`}
                       diagramWidth={diagramWidth}
