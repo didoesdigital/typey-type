@@ -1,6 +1,11 @@
 import React from "react";
 import Intro from "../components/Intro";
 import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
+import Chatbot from "react-chatbot-kit";
+import "react-chatbot-kit/build/main.css";
+import config from "./config.js";
+import MessageParser from "./MessageParser.js";
+import ActionProvider from "./ActionProvider.js";
 
 const gameName = "KHAERT";
 const introText =
@@ -24,6 +29,15 @@ export default function Game() {
               />
             }
           />
+        </div>
+        <div className="flex flex-wrap flex-grow justify-center pt1 pb3">
+          <div className="inline-flex relative mx-auto mw100">
+            <Chatbot
+              config={config}
+              messageParser={MessageParser}
+              actionProvider={ActionProvider}
+            />
+          </div>
         </div>
       </div>
     </div>
