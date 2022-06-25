@@ -2,7 +2,7 @@ import React from "react";
 import Intro from "../components/Intro";
 import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
 import Chatbot from "react-chatbot-kit";
-import "react-chatbot-kit/build/main.css";
+import "./styles.scss";
 import config, { botName } from "./config.js";
 import MessageParser from "./MessageParser.js";
 import ActionProvider from "./ActionProvider.js";
