@@ -15,43 +15,47 @@ export default function Game() {
   return (
     <div className="flex flex-wrap justify-between">
       <div className="mx-auto mw-1024 min-width-320 w-100">
-        <h3 id="typey-type-SHUFL-game" className="text-center mb3">
-          {gameName}
-        </h3>
-        <div className="flex flex-wrap pb1">
-          <Intro
-            introText={introText}
-            robot={
-              <ThinkingRobot
-                id="thinking-robot-KHAERT"
-                role="img"
-                aria-labelledby="thinking-robot-title"
+        <div className="flex flex-wrap justify-between">
+          <div className="mw-584">
+            <h3 id="typey-type-SHUFL-game" className="text-center mb3">
+              {gameName}
+            </h3>
+            <div className="flex flex-wrap pb1">
+              <Intro
+                introText={introText}
+                robot={
+                  <ThinkingRobot
+                    id="thinking-robot-KHAERT"
+                    role="img"
+                    aria-labelledby="thinking-robot-title"
+                  />
+                }
               />
-            }
-          />
-        </div>
-        <div className="flex flex-wrap flex-grow justify-center pt1 pb3">
-          <div className="inline-flex relative mx-auto mw100">
-            <Chatbot
-              config={config}
-              messageParser={MessageParser}
-              actionProvider={ActionProvider}
-              headerText={`Convo with ${botName}`}
-              placeholderText="Write here and hit return (R-R)"
-            />
+            </div>
+          </div>
+          <div className="mt1 mw-336 flex-grow">
+            <div className="flex flex-wrap flex-grow py3">
+              <Chatbot
+                config={config}
+                messageParser={MessageParser}
+                actionProvider={ActionProvider}
+                headerText={`Convo with ${botName}`}
+                placeholderText="Write here and hit return (R-R)"
+              />
+            </div>
+            <p className="">
+              <a
+                href="https://forms.gle/UigaX3vTFCzN5fzx8"
+                className="mt0"
+                target="_blank"
+                rel="noopener noreferrer"
+                id="ga--KHAERT--give-feedback"
+              >
+                Give feedback on the bot
+              </a>
+            </p>
           </div>
         </div>
-        <p className="text-center">
-          <a
-            href="https://forms.gle/UigaX3vTFCzN5fzx8"
-            className="mt0"
-            target="_blank"
-            rel="noopener noreferrer"
-            id="ga--KHAERT--give-feedback"
-          >
-            Give feedback on the bot
-          </a>
-        </p>
       </div>
     </div>
   );
