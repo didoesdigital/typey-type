@@ -18,10 +18,6 @@ const config = {
     ),
   ],
   botName: botName,
-  customStyles: {
-    botMessageBox: { backgroundColor: "#1F74D1" },
-    chatButton: { backgroundColor: "#067551" },
-  },
   customComponents: {
     botAvatar: (props) => (
       <div className="mw-48">
@@ -32,6 +28,10 @@ const config = {
         />
       </div>
     ),
+  },
+  customStyles: {
+    botMessageBox: { backgroundColor: "#1F74D1" },
+    chatButton: { backgroundColor: "#067551" },
   },
   widgets: [
     {
