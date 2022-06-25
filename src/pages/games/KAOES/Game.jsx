@@ -16,7 +16,7 @@ import StenoLayoutDiagram from "../../../StenoLayout/AmericanStenoDiagram";
 import Stroke from "../../../utils/stroke";
 import { mapBriefToAmericanStenoKeys as mapBriefsFunction } from "../../../utils/typey-type";
 import Puzzle from "./Puzzle";
-import { ReactComponent as HoarderRobot } from "../../../images/HoarderRobot.svg";
+import { ReactComponent as MischievousRobot } from "../../../images/MischievousRobot.svg";
 import { choosePuzzleKey, prettyKey } from "./utilities";
 
 const particles = [];
@@ -99,10 +99,10 @@ export default function Game() {
               <Intro
                 introText={introText}
                 robot={
-                  <HoarderRobot
-                    id="hoarder-robot-KAOES"
+                  <MischievousRobot
+                    id="mischievous-robot-KAOES"
                     role="img"
-                    aria-labelledby="hoarder-robot-title"
+                    aria-labelledby="mischievous-robot-title"
                   />
                 }
               />

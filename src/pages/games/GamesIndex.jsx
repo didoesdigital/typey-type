@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import GameBox from "./components/GameBox";
 import { ReactComponent as RaverRobot } from "../../images/RaverRobot.svg";
 import { ReactComponent as ThinkingRobot } from "../../images/ThinkingRobot.svg";
-import { ReactComponent as HoarderRobot } from "../../images/HoarderRobot.svg";
+import { ReactComponent as MischievousRobot } from "../../images/MischievousRobot.svg";
 
 export default function GamesIndex() {
   const mainHeading = useRef(null);
@@ -37,10 +37,10 @@ export default function GamesIndex() {
               linkTo="/games/KAOES"
               linkText="Play KAOES"
               robot={
-                <HoarderRobot
-                  id="hoarder-robot-KAOES"
+                <MischievousRobot
+                  id="mischievous-robot-KAOES"
                   role="img"
-                  aria-labelledby="hoarder-robot-title"
+                  aria-labelledby="mischievous-robot-title"
                 />
               }
             />
