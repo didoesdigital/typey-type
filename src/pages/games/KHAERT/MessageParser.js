@@ -9,7 +9,7 @@ class MessageParser {
   parse(message) {
     const lowerCaseMessage = message.toLowerCase();
     let foundSomething = false;
-    if (greetings.includes(lowerCaseMessage)) {
+    if (greetings.includes(lowerCaseMessage.replaceAll(/[^\w\s]/g,''))) {
       this.actionProvider.handleHello();
       foundSomething = true;
     }
