@@ -1,3 +1,5 @@
+import { greetings, goodbyes } from "./constants.js";
+
 class MessageParser {
   constructor(actionProvider, state) {
     this.actionProvider = actionProvider;
@@ -7,8 +9,13 @@ class MessageParser {
   parse(message) {
     const lowerCaseMessage = message.toLowerCase();
     let foundSomething = false;
-    if (lowerCaseMessage.includes("hello")) {
+    if (greetings.includes(lowerCaseMessage)) {
       this.actionProvider.handleHello();
+      foundSomething = true;
+    }
+
+    if (goodbyes.includes(lowerCaseMessage)) {
+      this.actionProvider.handleGoodbye();
       foundSomething = true;
     }
 
