@@ -2,7 +2,7 @@ import React from "react";
 import { createChatBotMessage } from "react-chatbot-kit";
 import DogPicture from "./DogPicture.jsx";
 
-const botName = "Shazza";
+export const botName = "Shazza";
 
 const config = {
   initialMessages: [createChatBotMessage(`Hi! I'm ${botName}`)],

@@ -3,7 +3,7 @@ import Intro from "../components/Intro";
 import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
 import Chatbot from "react-chatbot-kit";
 import "react-chatbot-kit/build/main.css";
-import config from "./config.js";
+import config, { botName } from "./config.js";
 import MessageParser from "./MessageParser.js";
 import ActionProvider from "./ActionProvider.js";
 
@@ -36,6 +36,8 @@ export default function Game() {
               config={config}
               messageParser={MessageParser}
               actionProvider={ActionProvider}
+              headerText={`Convo with ${botName}`}
+              placeholderText="Write here and hit return (R-R)"
             />
           </div>
         </div>
