@@ -33,7 +33,7 @@ export default React.memo(function Completed({ gameName, dispatch }) {
   }, []);
 
   useEffect(() => {
-    Confetti.setupCanvas({ sparsity: 170, colors: 4 }, "you-win", particles);
+    Confetti.setupCanvas({ sparsity: 960, colors: 5 }, "you-win", particles);
     if (canvasRef.current) {
       Confetti.restartAnimation(
         particles,

@@ -1,5 +1,12 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useReducer,
+  useRef,
+  useState,
+} from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import * as Confetti from "../../../utils/confetti.js";
 import { actions } from "../utilities/gameActions";
 import { initConfig, gameReducer } from "./gameReducer";
 import Completed from "../components/Completed";
@@ -12,6 +19,7 @@ import Puzzle from "./Puzzle";
 import { ReactComponent as HoarderRobot } from "../../../images/HoarderRobot.svg";
 import { choosePuzzleKey, prettyKey } from "./utilities";
 
+const particles = [];
 const gameName = "KAOES";
 const introText =
   "The mischievous steno robots have hidden all the steno keys. You need to find where they belong on the steno diagram.";
@@ -22,6 +30,10 @@ const neutralLightColor = "#F2F1F4";
 const diagramWidth = 568;
 
 export default function Game() {
+  const canvasRef = useRef(null);
+  const canvasWidth = Math.floor(window.innerWidth);
+  const canvasHeight = Math.floor(window.innerHeight);
+
   const [puzzleText, setPuzzleText] = useState("");
   const [stenoStroke, setStenoStroke] = useState(new Stroke());
   const [previousStenoStroke, setPreviousStenoStroke] = useState(new Stroke());
@@ -35,6 +47,18 @@ export default function Game() {
     setPuzzleText(choosePuzzleKey(""));
   }, []);
 
+  const restartConfetti = useCallback(() => {
+    particles.splice(0);
+    Confetti.cancelAnimation();
+    Confetti.setupCanvas({ sparsity: 240, colors: 4 }, "good-guess", particles);
+    Confetti.restartAnimation(
+      particles,
+      canvasRef.current,
+      canvasWidth,
+      canvasHeight
+    );
+  }, [canvasRef, canvasWidth, canvasHeight]);
+
   const onClickHandler = (key) => {
     if (!key) {
       return;
@@ -42,6 +66,7 @@ export default function Game() {
     const tmpBoard = new Stroke();
     const clickedKey = tmpBoard.set(key).toString();
     if (puzzleText === clickedKey) {
+      restartConfetti();
       setPuzzleText(choosePuzzleKey(clickedKey));
       setStenoStroke(new Stroke());
       setRightWrongColor(rightColor);
@@ -60,6 +85,12 @@ export default function Game() {
         <h3 id="typey-type-SHUFL-game" className="text-center mb3">
           KAOES game
         </h3>
+        <canvas
+          ref={canvasRef}
+          width={canvasWidth}
+          height={canvasHeight}
+          className="fixed top-0 left-0 celebration-canvas pointer-none"
+        />
         {state.gameComplete ? (
           <Completed gameName={gameName} dispatch={dispatch} />
         ) : (
@@ -75,7 +106,9 @@ export default function Game() {
                   />
                 }
               />
-              <RoundProgress round={state.roundIndex + 1} />
+              <div id={"good-guess"}>
+                <RoundProgress round={state.roundIndex + 1} />
+              </div>
             </div>
             <Puzzle puzzleText={prettyKey(puzzleText)} />
             <div className="flex flex-wrap flex-grow justify-center pt1 pb3">
