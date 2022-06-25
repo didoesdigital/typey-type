@@ -7,10 +7,7 @@ class ActionProvider {
 
   handleHello() {
     const botMessage = this.createChatBotMessage("Hello. Nice to meet you.");
-    this.setState((prev) => ({
-      ...prev,
-      messages: [...prev.messages, botMessage],
-    }));
+    this.updateChatbotState(botMessage);
   }
   handleDog() {
     const botMessage = this.createChatBotMessage(
@@ -20,9 +17,13 @@ class ActionProvider {
       }
     );
 
-    this.setState((prev) => ({
-      ...prev,
-      messages: [...prev.messages, botMessage],
+    this.updateChatbotState(botMessage);
+  }
+
+  updateChatbotState(message) {
+    this.setState((prevState) => ({
+      ...prevState,
+      messages: [...prevState.messages, message],
     }));
   }
 }
