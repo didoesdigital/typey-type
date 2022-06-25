@@ -19,6 +19,10 @@ class ActionProvider {
 
     this.updateChatbotState(botMessage);
   }
+  handleUnknownText() {
+    const botMessage = this.createChatBotMessage("Not sure what to say to that");
+    this.updateChatbotState(botMessage);
+  }
 
   updateChatbotState(message) {
     this.setState((prevState) => ({
