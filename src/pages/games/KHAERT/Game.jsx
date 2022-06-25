@@ -41,6 +41,17 @@ export default function Game() {
             />
           </div>
         </div>
+        <p className="text-center">
+          <a
+            href="https://forms.gle/UigaX3vTFCzN5fzx8"
+            className="mt0"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="ga--KHAERT--give-feedback"
+          >
+            Give feedback on the bot
+          </a>
+        </p>
       </div>
     </div>
   );

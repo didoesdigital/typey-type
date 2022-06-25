@@ -6,7 +6,17 @@ import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.s
 export const botName = "Shazza";
 
 const config = {
-  initialMessages: [createChatBotMessage(`Hi! I'm ${botName}`)],
+  initialMessages: [
+    createChatBotMessage(`Hi! I'm ${botName} and I love talking about steno`),
+    createChatBotMessage(
+      `I'm a newly built bot so I don't have much to say yet`,
+      { delay: 300 }
+    ),
+    createChatBotMessage(
+      `Send Di a message if you have ideas for useful things to teach me`,
+      { delay: 600 }
+    ),
+  ],
   botName: botName,
   customStyles: {
     botMessageBox: { backgroundColor: "#1F74D1" },
