@@ -114,7 +114,9 @@ export default function Game() {
             <div className="flex flex-wrap flex-grow justify-center pt1 pb3">
               <div className="inline-flex relative mx-auto mw100">
                 <TransitionGroup
-                  className={"duplicate-steno-diagram absolute pointer-none"}
+                  className={
+                    "duplicate-steno-diagram absolute pointer-none w-100"
+                  }
                   component={"div"}
                   key={previousStenoStroke.toString()}
                 >
@@ -123,21 +125,24 @@ export default function Game() {
                     classNames="key-dissolve"
                     appear={true}
                   >
-                    <StenoLayoutDiagram
-                      id="duplicateStenoDiagram"
-                      {...mapBriefsFunction(
-                        state.firstGuess ? "" : previousStenoStroke.toString()
-                      )}
-                      handleOnClick={undefined}
-                      brief={`duplicate-${puzzleText}`}
-                      diagramWidth={diagramWidth}
-                      onStrokeColor={rightWrongColor}
-                      offStrokeColor="transparent"
-                      onTextColor="#fff"
-                      offTextColor="transparent"
-                      onKeyColor={rightWrongColor}
-                      offKeyColor="transparent"
-                    />
+                    <div className="avoid-transition-classes-clashing-on-child-component">
+                      <StenoLayoutDiagram
+                        id="duplicateStenoDiagram"
+                        {...mapBriefsFunction(
+                          state.firstGuess ? "" : previousStenoStroke.toString()
+                        )}
+                        brief={`duplicate-${puzzleText}`}
+                        classes="w-100"
+                        diagramWidth={diagramWidth}
+                        handleOnClick={undefined}
+                        onStrokeColor={rightWrongColor}
+                        offStrokeColor="transparent"
+                        onTextColor="#fff"
+                        offTextColor="transparent"
+                        onKeyColor={rightWrongColor}
+                        offKeyColor="transparent"
+                      />
+                    </div>
                   </CSSTransition>
                 </TransitionGroup>
                 <StenoLayoutDiagram

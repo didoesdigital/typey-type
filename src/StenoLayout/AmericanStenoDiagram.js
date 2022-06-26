@@ -70,7 +70,7 @@ export default function AmericanStenoDiagram(props) {
   }
 
   return (
-    <svg id={props.id || 'stenoDiagram'} viewBox="0 0 215 101" width={props.diagramWidth || 140} xmlns="http://www.w3.org/2000/svg" aria-hidden={true} onClick={handleClick}>
+    <svg id={props.id || 'stenoDiagram'} viewBox="0 0 215 101" width={props.diagramWidth || 140} xmlns="http://www.w3.org/2000/svg" aria-hidden={true} onClick={handleClick} className={props.classes}>
       <g id={"stenoboard-" + props.brief } transform="translate(1 1)" fill="none" fillRule="evenodd">
         <rect id="rightZ" stroke={props.rightZ ? onStrokeColor : offStrokeColor} fill={props.rightZ ? onKeyColor : offKeyColor} x="195" y="48" width="18" height="23" rx="4"/>
         <rect id="rightD" stroke={props.rightD ? onStrokeColor : offStrokeColor} fill={props.rightD ? onKeyColor : offKeyColor} x="195" y="20" width="18" height="23" rx="4"/>
