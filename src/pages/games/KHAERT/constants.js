@@ -29,8 +29,23 @@ export const keyboardFunctions = [
   "undo",
 ];
 
-export const learningKeywords = ["learn", "theory", "practice", "drill", "community", "students", "help"];
+export const learningKeywords = [
+  "learn",
+  "theory",
+  "practice",
+  "drill",
+  "community",
+  "students",
+  "help",
+];
 
-export const lookupKeywords = ["brief", "lookup", "stroke", "type", "write"];
+export const lookupKeywords = [
+  "brief",
+  "look up",
+  "lookup",
+  "stroke",
+  "type",
+  "write",
+];
 
 export const whatQuestions = ["what is", "what does"];

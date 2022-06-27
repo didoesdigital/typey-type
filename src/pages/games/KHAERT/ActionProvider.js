@@ -63,6 +63,7 @@ class ActionProvider {
       .replace(/brief/i, "")
       .replace(/stroke/i, "")
       .replace(/lookup/i, "")
+      .replace(/look up/i, "")
       .replace(/type/i, "")
       .replace(/write/i, "")
       .trim();

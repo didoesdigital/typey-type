@@ -50,6 +50,15 @@ export default function Game({ globalLookupDictionary }) {
                 </a>
               </p>
             </div>
+            <div className="ml3">
+              <p className="ml4">Try:</p>
+              <ul className="ml4">
+                <li>“What is steno?”</li>
+                <li>“Look up accomplishment”</li>
+                <li>“How do I press Tab?”</li>
+                <li>“Where can I learn steno?”</li>
+              </ul>
+            </div>
           </div>
           <div className="mt1 mw-336 flex-grow">
             <div className="flex flex-wrap flex-grow py3">
@@ -61,7 +70,7 @@ export default function Game({ globalLookupDictionary }) {
                 placeholderText="Write here and hit return (R-R)"
               />
             </div>
-            <p className="">
+            <p>
               <a
                 href="https://forms.gle/UigaX3vTFCzN5fzx8"
                 className="mt0"
