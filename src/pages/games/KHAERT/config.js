@@ -3,6 +3,7 @@ import { createChatBotMessage } from "react-chatbot-kit";
 import DogPicture from "./DogPicture.jsx";
 import PhraseLookup from "./PhraseLookup.jsx";
 import { ReactComponent as AussieRobotAvatar } from "../../../images/AussieRobotAvatar.svg";
+import { ReactComponent as Stenographer } from "../../../images/Stenographer.svg";
 
 export const botName = "Shazza";
 
@@ -27,6 +28,15 @@ const makeConfig = (globalLookupDictionary = undefined) => ({
         <AussieRobotAvatar
           role="img"
           aria-labelledby="shazza-robot-title"
+          {...props}
+        />
+      </div>
+    ),
+    userAvatar: (props) => (
+      <div className="mw-40 react-chatbot-kit-user-avatar-container">
+        <Stenographer
+          role="img"
+          aria-labelledby="stenographer-title"
           {...props}
         />
       </div>
