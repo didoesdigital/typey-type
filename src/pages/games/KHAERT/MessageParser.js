@@ -1,6 +1,14 @@
 import { greetings, goodbyes } from "./constants.js";
 import { escapeRegExp } from "../../../utils/utils.js";
 
+const messageMatchesAKeyword = (message, keywords) => {
+  return keywords.some((keyword) => {
+    const regexp = new RegExp(`\\b${escapeRegExp(keyword)}\\b`, "g");
+    const result = regexp.test(message);
+    return result;
+  });
+};
+
 class MessageParser {
   constructor(actionProvider, state) {
     this.actionProvider = actionProvider;
@@ -10,13 +18,7 @@ class MessageParser {
   parse(message) {
     const lowerCaseMessage = message.toLowerCase();
     let foundSomething = false;
-    if (
-      greetings.some((greeting) => {
-        const regexp = new RegExp(`\\b${escapeRegExp(greeting)}\\b`, "g");
-        const result = regexp.test(lowerCaseMessage);
-        return result;
-      })
-    ) {
+    if (messageMatchesAKeyword(lowerCaseMessage, greetings)) {
       this.actionProvider.handleHello();
       foundSomething = true;
     }
@@ -48,13 +50,7 @@ class MessageParser {
       foundSomething = true;
     }
 
-    if (
-      goodbyes.some((goodbye) => {
-        const regexp = new RegExp(`\\b${escapeRegExp(goodbye)}\\b`, "g");
-        const result = regexp.test(lowerCaseMessage);
-        return result;
-      })
-    ) {
+    if (messageMatchesAKeyword(lowerCaseMessage, goodbyes)) {
       this.actionProvider.handleGoodbye();
       foundSomething = true;
     }
