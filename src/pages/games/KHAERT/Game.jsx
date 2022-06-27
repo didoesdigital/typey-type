@@ -9,7 +9,7 @@ import ActionProvider from "./ActionProvider.js";
 
 const gameName = "KHAERT";
 const introText =
-  "Meet Shazza, the Aussie steno bot who loves to have a yarn. Say hi (HEU).";
+  "Meet Shazza, the Aussie steno bot who loves to have a yarn. You can ask her how to write steno phrases and she'll do her best to look it up.";
 
 export default function Game({ globalLookupDictionary }) {
   const [config, setConfig] = useState(makeConfig());

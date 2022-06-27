@@ -62,6 +62,9 @@ class ActionProvider {
       .replaceAll(/[^A-Za-z0-9!#? ]/g, "")
       .replace(/brief/i, "")
       .replace(/stroke/i, "")
+      .replace(/lookup/i, "")
+      .replace(/type/i, "")
+      .replace(/write/i, "")
       .trim();
     const botMessage = this.createChatBotMessage(
       `You might be able to write “${strippedUserMessage}” like this:`,

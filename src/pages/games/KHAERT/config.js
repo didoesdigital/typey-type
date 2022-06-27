@@ -34,7 +34,7 @@ const makeConfig = (globalLookupDictionary = undefined) => ({
       </div>
     ),
     userAvatar: (props) => (
-      <div className="mw-40 react-chatbot-kit-user-avatar-container">
+      <div className="mw-40 min-w-40 react-chatbot-kit-user-avatar-container">
         <Stenographer
           role="img"
           aria-labelledby="stenographer-title"
