@@ -4,6 +4,7 @@ import {
   howQuestions,
   keyboardFunctions,
   lookupKeywords,
+  whatQuestions,
 } from "./constants.js";
 import { escapeRegExp } from "../../../utils/utils.js";
 
@@ -39,6 +40,11 @@ class MessageParser {
 
     if (messageMatchesAKeyword(lowerCaseMessage, lookupKeywords)) {
       this.actionProvider.handlePhraseLookup(message);
+      foundSomething = true;
+    }
+
+    if (messageMatchesAKeyword(lowerCaseMessage, whatQuestions)) {
+      this.actionProvider.handleWhatQuestions(message);
       foundSomething = true;
     }
 
