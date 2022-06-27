@@ -2,7 +2,7 @@ import React from "react";
 import { createChatBotMessage } from "react-chatbot-kit";
 import DogPicture from "./DogPicture.jsx";
 import PhraseLookup from "./PhraseLookup.jsx";
-import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
+import { ReactComponent as AussieRobotAvatar } from "../../../images/AussieRobotAvatar.svg";
 
 export const botName = "Shazza";
 
@@ -24,9 +24,9 @@ const makeConfig = (globalLookupDictionary = undefined) => ({
   customComponents: {
     botAvatar: (props) => (
       <div className="mw-48">
-        <ThinkingRobot
+        <AussieRobotAvatar
           role="img"
-          aria-labelledby="thinking-robot-title"
+          aria-labelledby="shazza-robot-title"
           {...props}
         />
       </div>

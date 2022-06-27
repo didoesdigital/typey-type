@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Intro from "../components/Intro";
-import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
+import { ReactComponent as AussieRobot } from "../../../images/AussieRobot.svg";
 import Chatbot from "react-chatbot-kit";
 import "./styles.scss";
 import makeConfig, { botName } from "./config.js";
@@ -31,10 +31,10 @@ export default function Game({ globalLookupDictionary }) {
               <Intro
                 introText={introText}
                 robot={
-                  <ThinkingRobot
-                    id="thinking-robot-KHAERT"
+                  <AussieRobot
+                    id="aussie-robot-KHAERT"
                     role="img"
-                    aria-labelledby="thinking-robot-title"
+                    aria-labelledby="aussie-robot-title"
                   />
                 }
               />

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import GameBox from "./components/GameBox";
 import { ReactComponent as RaverRobot } from "../../images/RaverRobot.svg";
+import { ReactComponent as AussieRobot } from "../../images/AussieRobot.svg";
 import { ReactComponent as ThinkingRobot } from "../../images/ThinkingRobot.svg";
 import { ReactComponent as MischievousRobot } from "../../images/MischievousRobot.svg";
 
@@ -50,9 +51,9 @@ export default function GamesIndex() {
               linkTo="/games/KHAERT"
               linkText="Start KHAERT"
               robot={
-                <ThinkingRobot
+                <AussieRobot
                   role="img"
-                  aria-labelledby="thinking-robot-title"
+                  aria-labelledby="aussie-robot-title"
                 />
               }
             />
