@@ -3,6 +3,7 @@ export const greetings = [
   "hi",
   "hey",
   "g'day",
+  "good day",
   "good morning",
   "good afternoon",
 ];

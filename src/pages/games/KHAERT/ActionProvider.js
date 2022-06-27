@@ -8,7 +8,8 @@ class ActionProvider {
   }
 
   handleHello() {
-    const botMessage = this.createChatBotMessage("Hello. Nice to meet you.");
+    const reply = shuffle(["G'day", "Hello", "Hi"]).slice(0, 1);
+    const botMessage = this.createChatBotMessage(reply);
     this.updateChatbotState(botMessage);
   }
 
@@ -69,9 +70,12 @@ class ActionProvider {
   }
 
   handleUnknownText() {
-    const botMessage = this.createChatBotMessage(
-      "Not sure what to say to that"
-    );
+    const reply = shuffle([
+      "😕 What can I say?",
+      "😕 Not sure what to say to that",
+      "😕 I'm still learning, maybe send some feedback about this",
+    ]).slice(0, 1);
+    const botMessage = this.createChatBotMessage(reply);
     this.updateChatbotState(botMessage);
   }
 
