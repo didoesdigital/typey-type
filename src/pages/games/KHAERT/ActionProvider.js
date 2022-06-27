@@ -23,6 +23,14 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
+  handleHowToKeyboard(userMessage) {
+    const reply = userMessage.includes("tab")
+      ? "You might be able to press Tab by writing TA*B"
+      : "You might be able to press Enter/Return by writing R-R";
+    const botMessage = this.createChatBotMessage(reply);
+    this.updateChatbotState(botMessage);
+  }
+
   handlePhraseLookup(userMessage) {
     const strippedUserMessage = userMessage
       .replaceAll(/[^A-Za-z0-9!#? ]/g, "")

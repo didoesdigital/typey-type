@@ -15,6 +15,17 @@ class MessageParser {
     }
 
     if (
+      (lowerCaseMessage.includes("how do i") ||
+        lowerCaseMessage.includes("how to")) &&
+      (lowerCaseMessage.includes("tab") ||
+        lowerCaseMessage.includes("enter") ||
+        lowerCaseMessage.includes("return"))
+    ) {
+      this.actionProvider.handleHowToKeyboard(lowerCaseMessage);
+      foundSomething = true;
+    }
+
+    if (
       lowerCaseMessage.includes("brief") ||
       lowerCaseMessage.includes("stroke")
     ) {
