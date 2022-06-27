@@ -26,6 +26,12 @@ class ActionProvider {
   handleHowToKeyboard(userMessage) {
     const reply = userMessage.includes("tab")
       ? "You might be able to press Tab by writing TA*B"
+      : userMessage.includes("delete")
+      ? "You might be able to delete a character by writing PW*FP"
+      : userMessage.includes("undo")
+      ? 'You might be able to undo a word by writing * or add a brief for "{#control(z)}" or "{#command(z)}"'
+      : userMessage.includes("escape")
+      ? "You might be able to press Escape by writing TPEFBG"
       : "You might be able to press Enter/Return by writing R-R";
     const botMessage = this.createChatBotMessage(reply);
     this.updateChatbotState(botMessage);

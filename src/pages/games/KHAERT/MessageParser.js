@@ -16,8 +16,14 @@ class MessageParser {
 
     if (
       (lowerCaseMessage.includes("how do i") ||
+        lowerCaseMessage.includes("how do you") ||
+        lowerCaseMessage.includes("how can i") ||
         lowerCaseMessage.includes("how to")) &&
       (lowerCaseMessage.includes("tab") ||
+        lowerCaseMessage.includes("backspace") ||
+        lowerCaseMessage.includes("delete") ||
+        lowerCaseMessage.includes("undo") ||
+        lowerCaseMessage.includes("escape") ||
         lowerCaseMessage.includes("enter") ||
         lowerCaseMessage.includes("return"))
     ) {
