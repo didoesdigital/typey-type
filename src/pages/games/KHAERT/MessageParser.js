@@ -9,13 +9,16 @@ class MessageParser {
   parse(message) {
     const lowerCaseMessage = message.toLowerCase();
     let foundSomething = false;
-    if (greetings.includes(lowerCaseMessage.replaceAll(/[^\w\s]/g,''))) {
+    if (greetings.includes(lowerCaseMessage.replaceAll(/[^\w\s]/g, ""))) {
       this.actionProvider.handleHello();
       foundSomething = true;
     }
 
-    if (lowerCaseMessage.includes("brief") || lowerCaseMessage.includes("stroke")) {
-      this.actionProvider.handleBriefLookup(lowerCaseMessage);
+    if (
+      lowerCaseMessage.includes("brief") ||
+      lowerCaseMessage.includes("stroke")
+    ) {
+      this.actionProvider.handlePhraseLookup(lowerCaseMessage);
       foundSomething = true;
     }
 

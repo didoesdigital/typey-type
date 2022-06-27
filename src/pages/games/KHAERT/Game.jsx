@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Intro from "../components/Intro";
 import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
 import Chatbot from "react-chatbot-kit";
 import "./styles.scss";
-import config, { botName } from "./config.js";
+import makeConfig, { botName } from "./config.js";
 import MessageParser from "./MessageParser.js";
 import ActionProvider from "./ActionProvider.js";
 
@@ -11,7 +11,14 @@ const gameName = "KHAERT";
 const introText =
   "Meet Shazza, the Aussie steno bot who loves to have a yarn. Say hi (HEU).";
 
-export default function Game() {
+export default function Game({ globalLookupDictionary }) {
+  const [config, setConfig] = useState(makeConfig());
+
+  useEffect(() => {
+    const newConfig = makeConfig(globalLookupDictionary);
+    setConfig(newConfig);
+  }, [globalLookupDictionary]);
+
   return (
     <div className="flex flex-wrap justify-between">
       <div className="mx-auto mw-1024 min-width-320 w-100">

@@ -1,5 +1,4 @@
 import { shuffle } from "d3-array";
-import { createStrokeHintForPhrase } from "../../../utils/transformingDictionaries";
 
 class ActionProvider {
   constructor(createChatBotMessage, setStateFunc, createClientMessage) {
@@ -24,16 +23,22 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
-  handleBriefLookup(userMessage) {
+  handlePhraseLookup(userMessage) {
     const strippedUserMessage = userMessage
       .replaceAll(/[^A-Za-z0-9!#? ]/g, "")
       .replace("brief", "")
       .replace("stroke", "")
       .trim();
-    const brief = createStrokeHintForPhrase(strippedUserMessage, new Map()); // globalLookupDictionary
     const botMessage = this.createChatBotMessage(
-      `You might be able to write “${strippedUserMessage}” like this: ${brief}`
+      `You might be able to write “${strippedUserMessage}” like this:`,
+      {
+        widget: "phraseLookup",
+      }
     );
+    this.setState((state) => ({
+      ...state,
+      phraseToLookup: strippedUserMessage,
+    }));
     this.updateChatbotState(botMessage);
   }
 

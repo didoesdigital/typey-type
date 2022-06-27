@@ -49,7 +49,9 @@ const Games = ({
       <Route
         exact={true}
         path={`${match.url}/KHAERT`}
-        render={() => <AsyncKHAERT />}
+        render={() => (
+          <AsyncKHAERT globalLookupDictionary={globalLookupDictionary} />
+        )}
       />
       <Route
         exact={true}
