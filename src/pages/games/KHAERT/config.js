@@ -2,6 +2,7 @@ import React from "react";
 import { createChatBotMessage } from "react-chatbot-kit";
 import DogPicture from "./DogPicture.jsx";
 import PhraseLookup from "./PhraseLookup.jsx";
+import ExternalLink from "./ExternalLink.jsx";
 import { ReactComponent as AussieRobotAvatar } from "../../../images/AussieRobotAvatar.svg";
 import { ReactComponent as Stenographer } from "../../../images/Stenographer.svg";
 
@@ -48,11 +49,18 @@ const makeConfig = (globalLookupDictionary = undefined) => ({
   },
   state: {
     phraseToLookup: "",
+    linkText: "",
+    linkUrl: "",
   },
   widgets: [
     {
       widgetName: "dogPicture",
       widgetFunc: (props) => <DogPicture {...props} />,
+    },
+    {
+      widgetName: "externalLink",
+      widgetFunc: (props) => <ExternalLink {...props} />,
+      mapStateToProps: ["linkText", "linkUrl"],
     },
     {
       widgetName: "phraseLookup",

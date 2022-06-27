@@ -38,6 +38,25 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
+  handleLearningQuestions(userMessage) {
+    const [linkText, linkUrl] =
+      userMessage.includes("learn") || userMessage.includes("theory")
+        ? ["Learn Plover", "https://sites.google.com/site/learnplover/home"]
+        : userMessage.includes("practice") || userMessage.includes("drill")
+        ? ["Stenojig", "https://joshuagrams.github.io/steno-jig/"]
+        : ["Plover Discord", "https://discord.gg/0lQde43a6dGmAMp2"];
+    const botMessage = this.createChatBotMessage(`One of my faves is:`, {
+      widget: "externalLink",
+    });
+
+    this.setState((prevState) => ({
+      ...prevState,
+      linkText,
+      linkUrl,
+      messages: [...prevState.messages, botMessage],
+    }));
+  }
+
   handlePhraseLookup(userMessage) {
     const strippedUserMessage = userMessage
       .replaceAll(/[^A-Za-z0-9!#? ]/g, "")

@@ -3,6 +3,7 @@ import {
   goodbyes,
   howQuestions,
   keyboardFunctions,
+  learningKeywords,
   lookupKeywords,
   whatQuestions,
 } from "./constants.js";
@@ -35,6 +36,11 @@ class MessageParser {
       messageMatchesAKeyword(lowerCaseMessage, keyboardFunctions)
     ) {
       this.actionProvider.handleHowToKeyboard(lowerCaseMessage);
+      foundSomething = true;
+    }
+
+    if (messageMatchesAKeyword(lowerCaseMessage, learningKeywords)) {
+      this.actionProvider.handleLearningQuestions(lowerCaseMessage);
       foundSomething = true;
     }
 
