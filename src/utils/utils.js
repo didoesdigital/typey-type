@@ -104,4 +104,17 @@ function getRandomBetween(min : number, max : number) {
   return Math.random() * (max - min) + min;
 }
 
-export { relativeTimeAgo, matchLessonToTerm, sortLessons, isPeak, randomise, isLessonTextValid, getRandomBetween };
+function escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+}
+
+export {
+  escapeRegExp,
+  getRandomBetween,
+  isLessonTextValid,
+  isPeak,
+  matchLessonToTerm,
+  randomise,
+  relativeTimeAgo,
+  sortLessons,
+};
