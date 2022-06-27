@@ -18,7 +18,7 @@ class MessageParser {
       lowerCaseMessage.includes("brief") ||
       lowerCaseMessage.includes("stroke")
     ) {
-      this.actionProvider.handlePhraseLookup(lowerCaseMessage);
+      this.actionProvider.handlePhraseLookup(message);
       foundSomething = true;
     }
 

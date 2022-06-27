@@ -26,8 +26,8 @@ class ActionProvider {
   handlePhraseLookup(userMessage) {
     const strippedUserMessage = userMessage
       .replaceAll(/[^A-Za-z0-9!#? ]/g, "")
-      .replace("brief", "")
-      .replace("stroke", "")
+      .replace(/brief/i, "")
+      .replace(/stroke/i, "")
       .trim();
     const botMessage = this.createChatBotMessage(
       `You might be able to write “${strippedUserMessage}” like this:`,
