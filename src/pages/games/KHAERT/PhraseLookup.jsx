@@ -14,7 +14,19 @@ const PhraseLookup = ({ phraseToLookup, globalLookupDictionary }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <p>{strokeHint}</p>;
+  return (
+    <p>
+      <span
+        className="steno-stroke pa05 text-small"
+        role="note"
+        aria-label={[...strokeHint].join(" ").replace("-", "dash")}
+      >
+        {[...strokeHint].map((item, i) => (
+          <React.Fragment key={i}>{item}</React.Fragment>
+        ))}
+      </span>
+    </p>
+  );
 };
 
 export default PhraseLookup;
