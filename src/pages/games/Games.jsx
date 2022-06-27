@@ -35,7 +35,9 @@ const AsyncTPEUBGSZ = Loadable({
 
 const Games = ({
   match,
+  fetchAndSetupGlobalDict,
   globalLookupDictionary,
+  personalDictionaries,
   startingMetWordsToday,
   updateMetWords,
 }) => {
@@ -50,7 +52,11 @@ const Games = ({
         exact={true}
         path={`${match.url}/KHAERT`}
         render={() => (
-          <AsyncKHAERT globalLookupDictionary={globalLookupDictionary} />
+          <AsyncKHAERT
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            globalLookupDictionary={globalLookupDictionary}
+            personalDictionaries={personalDictionaries}
+          />
         )}
       />
       <Route

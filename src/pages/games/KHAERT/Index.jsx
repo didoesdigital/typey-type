@@ -1,13 +1,29 @@
 import React, { useEffect, useRef } from "react";
 import Game from "./Game";
 
-export default function Index({ globalLookupDictionary }) {
+export default function Index({
+  fetchAndSetupGlobalDict,
+  globalLookupDictionary,
+  personalDictionaries,
+}) {
   const mainHeading = useRef(null);
   useEffect(() => {
+    const shouldUsePersonalDictionaries =
+      personalDictionaries &&
+      Object.entries(personalDictionaries).length > 0 &&
+      !!personalDictionaries.dictionariesNamesAndContents;
+
+    fetchAndSetupGlobalDict(
+      false,
+      shouldUsePersonalDictionaries ? personalDictionaries : null
+    ).catch((error) => {
+      console.error(error);
+    });
+
     if (mainHeading) {
       mainHeading.current.focus();
     }
-  }, []);
+  }, [fetchAndSetupGlobalDict, personalDictionaries]);
 
   return (
     <main id="main">
