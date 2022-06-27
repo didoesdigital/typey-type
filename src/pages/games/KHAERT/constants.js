@@ -16,3 +16,17 @@ export const goodbyes = [
   "later",
   "farewell",
 ];
+
+export const howQuestions = ["how can i", "how do i", "how do you", "how to"];
+
+export const keyboardFunctions = [
+  "backspace",
+  "delete",
+  "enter",
+  "escape",
+  "return",
+  "tab",
+  "undo",
+];
+
+export const lookupKeywords = ["brief", "lookup", "stroke", "type", "write"];

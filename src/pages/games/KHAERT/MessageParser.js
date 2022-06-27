@@ -1,4 +1,10 @@
-import { greetings, goodbyes } from "./constants.js";
+import {
+  greetings,
+  goodbyes,
+  howQuestions,
+  keyboardFunctions,
+  lookupKeywords,
+} from "./constants.js";
 import { escapeRegExp } from "../../../utils/utils.js";
 
 const messageMatchesAKeyword = (message, keywords) => {
@@ -24,28 +30,14 @@ class MessageParser {
     }
 
     if (
-      (lowerCaseMessage.includes("how do i") ||
-        lowerCaseMessage.includes("how do you") ||
-        lowerCaseMessage.includes("how can i") ||
-        lowerCaseMessage.includes("how to")) &&
-      (lowerCaseMessage.includes("tab") ||
-        lowerCaseMessage.includes("backspace") ||
-        lowerCaseMessage.includes("delete") ||
-        lowerCaseMessage.includes("undo") ||
-        lowerCaseMessage.includes("escape") ||
-        lowerCaseMessage.includes("enter") ||
-        lowerCaseMessage.includes("return"))
+      messageMatchesAKeyword(lowerCaseMessage, howQuestions) &&
+      messageMatchesAKeyword(lowerCaseMessage, keyboardFunctions)
     ) {
       this.actionProvider.handleHowToKeyboard(lowerCaseMessage);
       foundSomething = true;
     }
 
-    if (
-      lowerCaseMessage.includes("brief") ||
-      lowerCaseMessage.includes("write") ||
-      lowerCaseMessage.includes("type") ||
-      lowerCaseMessage.includes("stroke")
-    ) {
+    if (messageMatchesAKeyword(lowerCaseMessage, lookupKeywords)) {
       this.actionProvider.handlePhraseLookup(message);
       foundSomething = true;
     }
