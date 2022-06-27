@@ -33,6 +33,8 @@ class MessageParser {
 
     if (
       lowerCaseMessage.includes("brief") ||
+      lowerCaseMessage.includes("write") ||
+      lowerCaseMessage.includes("type") ||
       lowerCaseMessage.includes("stroke")
     ) {
       this.actionProvider.handlePhraseLookup(message);
