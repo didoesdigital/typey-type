@@ -35,11 +35,12 @@ class ActionProvider {
         widget: "phraseLookup",
       }
     );
-    this.setState((state) => ({
-      ...state,
+
+    this.setState((prevState) => ({
+      ...prevState,
       phraseToLookup: strippedUserMessage,
+      messages: [...prevState.messages, botMessage],
     }));
-    this.updateChatbotState(botMessage);
   }
 
   handleDog() {
