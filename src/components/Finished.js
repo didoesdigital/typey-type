@@ -168,7 +168,7 @@ class Finished extends Component {
   calculateScores(timer, totalNumberOfMatchedWords) {
     let wordsPerMinute;
     if (this.props.timer > 0) {
-      wordsPerMinute = Math.round(totalNumberOfMatchedWords/(timer/60/1000));
+      wordsPerMinute = Math.round(Math.max(totalNumberOfMatchedWords - 1, 0)/(timer/60/1000));
     } else {
       wordsPerMinute = 0;
     }
