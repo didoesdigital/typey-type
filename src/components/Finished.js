@@ -414,7 +414,7 @@ class Finished extends Component {
                   <p className="text-left de-emphasized mb0"><span style={{ backgroundColor: "transparent", borderBottom: "2px solid transparent", }} role="img" aria-label=" correct" >👏</span> means you typed the phrase within the target number of strokes</p>
                   <p className="text-left de-emphasized mb1"><span aria-label="(hinted)" role="img">ℹ️</span> means the hint was shown</p>
                 </div>
-                <p className="text-left de-emphasized" id="chart-notes">Note: The first 4 words are averaged to reduce the impact of early spikes. Typey&nbsp;Type starts recording the instant you start typing, so instead of recording the first word at infinity words per minute, it’s set to&nbsp;zero. </p>
+                <p className="text-left de-emphasized" id="chart-notes">Note: The first 4 words are averaged to reduce the impact of early instabilities. Typey&nbsp;Type starts recording the instant you start typing, so instead of recording the first word at infinity words per minute, it’s set to&nbsp;zero. </p>
               </details>
             )}
           </ErrorBoundary>
