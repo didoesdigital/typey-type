@@ -1,7 +1,7 @@
 import Zipper from './zipper';
 import Stroke from './stroke';
 import * as stroke from './stroke';
-import { isPeak } from './utils.js';
+import { isPeak } from './utils';
 
 function createWordListFromMetWords (metWords) {
   let munged = trimAndSumUniqMetWords(metWords);

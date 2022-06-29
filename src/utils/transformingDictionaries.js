@@ -1,7 +1,7 @@
 import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from '../constant/index.js';
 import { AffixList } from './affixList';
 import misstrokesJSON from '../json/misstrokes.json'
-import { escapeRegExp } from './utils.js';
+import { escapeRegExp } from './utils';
 
 const FINGERSPELLED_LETTERS = {
   "a": "A*",
