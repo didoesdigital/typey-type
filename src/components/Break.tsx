@@ -1,21 +1,20 @@
-// @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
 
 type Props = {
-  setAnnouncementMessageString: (string) => void
+  setAnnouncementMessageString: (announcement: string) => void
 };
 
 type State = {
-  breakCountdown: ?number,
+  breakCountdown?: number,
   breakTimeMinutes: number,
   breakTimeSeconds: number,
   timeToDisplay: string
 };
 
 class Break extends Component<Props, State> {
-  mainHeading: ?HTMLHeadingElement;
+  mainHeading?: HTMLHeadingElement | null;
   intervalID: any;
 
   state = {
@@ -48,7 +47,7 @@ class Break extends Component<Props, State> {
     this.intervalID = window.setInterval(this.updateBreakTime, 1000);
   }
 
-  stopCountdown(announce: bool = true) {
+  stopCountdown(announce = true) {
     if (this.intervalID) {
       clearInterval(this.intervalID);
       this.intervalID = null;
@@ -122,7 +121,7 @@ class Break extends Component<Props, State> {
           <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
             <div className="flex mr1 self-center">
               <header className="flex items-center min-h-40">
-                <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="take-a-break">Take a break</h2>
+                <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1} id="take-a-break">Take a break</h2>
               </header>
             </div>
           </div>
