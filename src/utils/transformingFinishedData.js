@@ -1,5 +1,7 @@
 import { mean } from "d3-array";
 
+const calculatedAdjustedWPM = (wordCount, duration) => Math.max(wordCount - 1, 0) / (duration / 1000 / 60);
+
 function stitchTogetherLessonData(lessonStrokes, startTime, wpm) {
   let lessonData = {
     version: 3,
@@ -26,8 +28,7 @@ function transformLessonDataToChartData(lessonData) {
   const avgMinimumStrokesData = mean(minimumStrokesData, (d, i) =>
     i === 0
       ? 0
-      : Math.max(d.numberOfMatchedWordsSoFar - 1, 0) /
-        ((d.time - lessonData.startTime) / 1000 / 60)
+      : calculatedAdjustedWPM(d.numberOfMatchedWordsSoFar, (d.time - lessonData.startTime))
   );
 
   lessonData.lessonStrokes.forEach((typedMaterial, materialIndex) => {
@@ -43,7 +44,7 @@ function transformLessonDataToChartData(lessonData) {
           elapsedTime: attempt.time - lessonData.startTime,
           wordsPerMinute: firstAttempt
             ? 0
-            : Math.max(attempt.numberOfMatchedWordsSoFar - 1, 0) / (elapsedTime / 1000 / 60),
+            : calculatedAdjustedWPM(attempt.numberOfMatchedWordsSoFar, elapsedTime),
           typedText: attempt.text,
           material: typedMaterial.word,
           markedCorrect: typedMaterial.accuracy,
@@ -61,7 +62,7 @@ function transformLessonDataToChartData(lessonData) {
         ? 0
         : materialIndex < minimumStrokes
         ? avgMinimumStrokesData
-        : Math.max(numberOfWords - 1, 0) / (elapsedTime / 1000 / 60),
+        : calculatedAdjustedWPM(numberOfWords, elapsedTime),
       typedText: typedMaterial.typedText,
       material: typedMaterial.word,
       materialIndex: materialIndex,
