@@ -2,7 +2,7 @@ import { mean } from "d3-array";
 
 function stitchTogetherLessonData(lessonStrokes, startTime, wpm) {
   let lessonData = {
-    version: 2,
+    version: 3,
     lessonStrokes,
     startTime,
     wpm,
@@ -26,7 +26,7 @@ function transformLessonDataToChartData(lessonData) {
   const avgMinimumStrokesData = mean(minimumStrokesData, (d, i) =>
     i === 0
       ? 0
-      : d.numberOfMatchedWordsSoFar /
+      : Math.max(d.numberOfMatchedWordsSoFar - 1, 0) /
         ((d.time - lessonData.startTime) / 1000 / 60)
   );
 
@@ -43,7 +43,7 @@ function transformLessonDataToChartData(lessonData) {
           elapsedTime: attempt.time - lessonData.startTime,
           wordsPerMinute: firstAttempt
             ? 0
-            : attempt.numberOfMatchedWordsSoFar / (elapsedTime / 1000 / 60),
+            : Math.max(attempt.numberOfMatchedWordsSoFar - 1, 0) / (elapsedTime / 1000 / 60),
           typedText: attempt.text,
           material: typedMaterial.word,
           markedCorrect: typedMaterial.accuracy,
@@ -61,7 +61,7 @@ function transformLessonDataToChartData(lessonData) {
         ? 0
         : materialIndex < minimumStrokes
         ? avgMinimumStrokesData
-        : numberOfWords / (elapsedTime / 1000 / 60),
+        : Math.max(numberOfWords - 1, 0) / (elapsedTime / 1000 / 60),
       typedText: typedMaterial.typedText,
       material: typedMaterial.word,
       materialIndex: materialIndex,
