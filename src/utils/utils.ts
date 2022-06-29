@@ -1,5 +1,3 @@
-// @flow
-
 type Lesson = {
   "title": "Test lesson",
   "subtitle": "Test",

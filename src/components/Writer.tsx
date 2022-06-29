@@ -1,12 +1,11 @@
-// @flow
 import React, { Component } from 'react';
-import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
-import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
-import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiagram';
-import JapaneseStenoDiagram from './../StenoLayout/JapaneseStenoDiagram';
-import KoreanModernCStenoDiagram from './../StenoLayout/KoreanModernCStenoDiagram';
-import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
-import Stroke from './../utils/stroke';
+import AmericanStenoDiagram from '../StenoLayout/AmericanStenoDiagram';
+import DanishStenoDiagram from '../StenoLayout/DanishStenoDiagram';
+import ItalianMichelaStenoDiagram from '../StenoLayout/ItalianMichelaStenoDiagram';
+import JapaneseStenoDiagram from '../StenoLayout/JapaneseStenoDiagram';
+import KoreanModernCStenoDiagram from '../StenoLayout/KoreanModernCStenoDiagram';
+import PalantypeDiagram from '../StenoLayout/PalantypeDiagram';
+import Stroke from '../utils/stroke';
 import {
   mapQWERTYKeysToStenoStroke,
   mapBriefToAmericanStenoKeys,
@@ -15,34 +14,37 @@ import {
   mapBriefToJapaneseStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys
-} from './../utils/typey-type';
-import { fetchResource } from './../utils/getData';
+} from '../utils/typey-type';
+import { fetchResource } from '../utils/getData';
 import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';
 
 type Props = {
-  changeStenoLayout: (event: SyntheticInputEvent<HTMLSelectElement>) => string,
-  changeWriterInput: (event: SyntheticInputEvent<HTMLInputElement>) => void,
-  userSettings: Object,
-  globalUserSettings: Object,
-  setAnnouncementMessageString: (string) => void,
-  setAnnouncementMessage: (Object, any) => void
+  changeStenoLayout: (event: any) => string,
+  changeWriterInput: (event: any) => void,
+  userSettings: any,
+  globalUserSettings: any,
+  setAnnouncementMessageString: (announcement: string) => void,
+  setAnnouncementMessage: (app: any, content: string | Object) => void
 };
 
 type State = {
   stenoBrief: string,
   stenoStroke: Stroke,
-  stenoDictionary: Object,
+  stenoDictionary: any,
   writtenText: string,
   valueRawSteno: string,
   valueQWERTYSteno: string
 };
 
-class Writer extends Component<Props, State> {
-  mainHeading: ?HTMLHeadingElement;
-  downloadLink: ?HTMLAnchorElement;
+type StenoLayout = {
+  [key: string]: any
+}
 
-  state = {
+type MapBriefToKeys = (brief: string) => StenoLayout
+
+class Writer extends Component<Props, State> {
+  state: State = {
     stenoBrief: '',
     stenoStroke: new Stroke(),
     stenoDictionary: {},
@@ -51,54 +53,7 @@ class Writer extends Component<Props, State> {
     valueQWERTYSteno: ''
   }
 
-  updateRawSteno = this.updateRawSteno.bind(this);
-  updateQWERTYSteno = this.updateQWERTYSteno.bind(this);
-
-  componentDidMount() {
-    let dict:string = '' + (process.env.PUBLIC_URL || '') + '/dictionaries/typey-type/typey-type.json';
-    fetchResource(dict).then((json) => {
-      this.setState({
-        stenoDictionary: json
-      });
-    });
-
-    if (this.mainHeading) {
-      this.mainHeading.focus();
-    }
-  }
-
-  downloadDiagramSVG(e: SyntheticInputEvent<HTMLElement>) {
-    // First version of this:
-    let svgFileName = "typey-type-" + this.props.userSettings.stenoLayout.replace('stenoLayout','') + '-' + (this.state.stenoBrief || 'no-brief') + ".svg";
-
-    GoogleAnalytics.event({
-      category: 'Downloads',
-      action: 'Click',
-      label: svgFileName || '',
-    });
-
-    let downloadDiagramSVG;
-    let svg:?HTMLElement = document.getElementById("stenoDiagram");
-    if (svg) {
-      let svgHTML = svg.outerHTML;
-      if (Blob !== undefined) {
-        let blob = new Blob([svgHTML], {type: "image/svg+xml"});
-        downloadDiagramSVG = URL.createObjectURL(blob);
-      }
-      else {
-        downloadDiagramSVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgHTML);
-      }
-    }
-    else {
-      downloadDiagramSVG = null;
-    }
-
-    if (this.downloadLink && downloadDiagramSVG) {
-      this.downloadLink.href = downloadDiagramSVG;
-    }
-  }
-
-  updateRawSteno(event: SyntheticInputEvent<HTMLInputElement>) {
+  updateRawSteno(event: any) {
     let currentValue: string;
 
     if (event && event.target && event.target.value) {
@@ -125,7 +80,7 @@ class Writer extends Component<Props, State> {
     });
   }
 
-  updateQWERTYSteno(event: SyntheticInputEvent<HTMLInputElement>) {
+  updateQWERTYSteno(event: any) {
     let currentValue: string;
 
     if (event && event.target && event.target.value) {
@@ -150,6 +105,54 @@ class Writer extends Component<Props, State> {
       this.updateBrief(currentValue);
     }
     this.setState({valueQWERTYSteno: currentValue});
+  }
+
+  componentDidMount() {
+    let dict:string = '' + (process.env.PUBLIC_URL || '') + '/dictionaries/typey-type/typey-type.json';
+    fetchResource(dict).then((json) => {
+      this.setState({
+        stenoDictionary: json
+      });
+    });
+
+    // @ts-ignore
+    if (this.mainHeading) {
+      // @ts-ignore
+      this.mainHeading.focus();
+    }
+  }
+
+  downloadDiagramSVG(e: any) {
+    // First version of this:
+    let svgFileName = "typey-type-" + this.props.userSettings.stenoLayout.replace('stenoLayout','') + '-' + (this.state.stenoBrief || 'no-brief') + ".svg";
+
+    GoogleAnalytics.event({
+      category: 'Downloads',
+      action: 'Click',
+      label: svgFileName || '',
+    });
+
+    let downloadDiagramSVG;
+    let svg:HTMLElement | null = document.getElementById("stenoDiagram");
+    if (svg) {
+      let svgHTML = svg.outerHTML;
+      if (Blob !== undefined) {
+        let blob = new Blob([svgHTML], {type: "image/svg+xml"});
+        downloadDiagramSVG = URL.createObjectURL(blob);
+      }
+      else {
+        downloadDiagramSVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svgHTML);
+      }
+    }
+    else {
+      downloadDiagramSVG = null;
+    }
+
+    // @ts-ignore
+    if (this.downloadLink && downloadDiagramSVG) {
+      // @ts-ignore
+      this.downloadLink.href = downloadDiagramSVG;
+    }
   }
 
   sendStroke(stenoBrief: string) {
@@ -197,7 +200,7 @@ class Writer extends Component<Props, State> {
   }
 
   addKeyToStenoBrief(key: string) {
-    let stenoStroke:Object = this.state.stenoStroke.set(key);
+    let stenoStroke = this.state.stenoStroke.set(key);
 
     this.setState({
       stenoBrief: stenoStroke.toString(),
@@ -209,8 +212,8 @@ class Writer extends Component<Props, State> {
 
   render() {
 
-    let mapBriefsFunction = mapBriefToAmericanStenoKeys;
-    let StenoLayoutDiagram = AmericanStenoDiagram;
+    let mapBriefsFunction: MapBriefToKeys = mapBriefToAmericanStenoKeys;
+    let StenoLayoutDiagram: any = AmericanStenoDiagram;
     let placeholderRawSteno = "e.g. HEU";
     switch (this.props.userSettings.stenoLayout) {
       case 'stenoLayoutAmericanSteno':
@@ -266,12 +269,13 @@ class Writer extends Component<Props, State> {
           <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
             <div className="flex mr1 self-center">
               <header className="flex items-center min-h-40">
-                <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="writer">Writer</h2>
+                {/* @ts-ignore */}
+                <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1} id="writer">Writer</h2>
               </header>
             </div>
             <div className="flex mxn2">
-              {downloadDiagramSVG ?
-                  <a href={downloadDiagramSVG} ref={(downloadLink) => { this.downloadLink = downloadLink; }} download={svgFileName} onClick={this.downloadDiagramSVG.bind(this)} className="link-button link-button-ghost table-cell mr1">Download diagram (SVG)</a>
+              {/* @ts-ignore */}
+              {downloadDiagramSVG ? <a href={downloadDiagramSVG} ref={(downloadLink) => { this.downloadLink = downloadLink; }} download={svgFileName} onClick={this.downloadDiagramSVG.bind(this)} className="link-button link-button-ghost table-cell mr1">Download diagram (SVG)</a>
                 :
                 null
               }
@@ -298,6 +302,7 @@ class Writer extends Component<Props, State> {
                 { this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno" && this.props.globalUserSettings.writerInput === "qwerty" ?
                   <p className="mt1 mb2 mr1">
                     <label htmlFor="qwertyStenoInput" className="db mb1">
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="Type a space to send the stroke"
                         className="mw-240"
@@ -320,7 +325,7 @@ class Writer extends Component<Props, State> {
                       autoComplete="off"
                       autoCorrect="off"
                       className="input-textarea"
-                      onChange={this.updateQWERTYSteno}
+                      onChange={this.updateQWERTYSteno.bind(this)}
                       placeholder="e.g. rnm"
                       value={this.state.valueQWERTYSteno}
                     />
@@ -331,6 +336,7 @@ class Writer extends Component<Props, State> {
                 { this.props.globalUserSettings.writerInput === "raw" || !(this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno") ?
                   <p className="mt1 mb2 mr1">
                     <label htmlFor="rawStenoInput" className="db mb1">
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="Type a space to send the stroke"
                         className="mw-240"
@@ -353,7 +359,7 @@ class Writer extends Component<Props, State> {
                       autoComplete="off"
                       autoCorrect="off"
                       className="input-textarea"
-                      onChange={this.updateRawSteno}
+                      onChange={this.updateRawSteno.bind(this)}
                       placeholder={placeholderRawSteno}
                       value={this.state.valueRawSteno}
                     />

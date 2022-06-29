@@ -7,7 +7,7 @@ import {
   lookupKeywords,
   whatQuestions,
 } from "./constants.js";
-import { escapeRegExp } from "../../../utils/utils.js";
+import { escapeRegExp } from "../../../utils/utils";
 
 const messageMatchesAKeyword = (message, keywords) => {
   return keywords.some((keyword) => {
