@@ -4,7 +4,7 @@ import {
 } from "./transformingFinishedData";
 
 const lessonData = {
-  version: 1,
+  version: 3,
   lessonStrokes: [
     {
       numberOfMatchedWordsSoFar: 0.6,
@@ -44,7 +44,7 @@ describe("Transforming lesson data to chart data", () => {
   it("returns flat chart data", () => {
     const expectedChartData = {
       averageWPM: 28,
-      version: 1,
+      version: 3,
       dataPoints: [
         {
           attemptPeak: false,
@@ -60,7 +60,7 @@ describe("Transforming lesson data to chart data", () => {
         {
           attemptPeak: true,
           elapsedTime: 872,
-          wordsPerMinute: 54.4041450777202,
+          wordsPerMinute: 15.544041450777199,
           typedText: " hix",
           material: "him",
           markedCorrect: false,
@@ -70,7 +70,7 @@ describe("Transforming lesson data to chart data", () => {
         {
           attemptPeak: false,
           elapsedTime: 1544,
-          wordsPerMinute: 27.2020725388601,
+          wordsPerMinute: 7.772020725388599,
           typedText: " him",
           material: "him",
           materialIndex: 1,
