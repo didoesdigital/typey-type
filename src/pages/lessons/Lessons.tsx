@@ -1,9 +1,9 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import DocumentTitle from "react-document-title";
-import Lesson from "./Lesson";
-import LessonsIndex from "../pages/lessons/LessonsIndex";
-import CustomLessonSetup from "./CustomLessonSetup";
+import Lesson from "../../components/Lesson";
+import LessonsIndex from "./LessonsIndex";
+import CustomLessonSetup from "../../components/CustomLessonSetup";
 
 type LessonsRoutingProps = {
   customLesson: any;
