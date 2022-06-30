@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import DocumentTitle from 'react-document-title';
 import Lesson from './Lesson';
-import LessonsIndex from './LessonsIndex';
+import LessonsIndex from '../pages/lessons/LessonsIndex';
 import CustomLessonSetup from './CustomLessonSetup';
 
 const Lessons = ({match, lessonIndex, handleLesson, lesson, ...lessonProps}) => {

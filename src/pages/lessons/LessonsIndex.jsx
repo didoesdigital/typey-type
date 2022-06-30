@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import GoogleAnalytics from "react-ga";
-import { IconExternal } from "./Icon";
+import { IconExternal } from "../../components/Icon";
 import LessonList from "./LessonList";
 import { Tooltip } from "react-tippy";
 
