@@ -49,7 +49,7 @@ class Lesson extends Component {
       else if (this.props.location.pathname.startsWith('/lessons/custom') && (!this.props.location.pathname.startsWith('/lessons/custom/setup'))) {
         this.props.startCustomLesson();
       }
-      else if(this.isOverview()) {
+      else if(this.isOverview(this.props.location.pathname)) {
         // do nothing
       }
       else if(this.isFlashcards()) {
@@ -82,7 +82,7 @@ class Lesson extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname.startsWith('/lessons/custom') && !this.props.location.pathname.startsWith('/lessons/custom/setup') && this.props.lesson.title !== "Custom") {
       this.props.startCustomLesson();
-    } else if(this.isOverview()) {
+    } else if(this.isOverview(this.props.location.pathname)) {
       // do nothing
     } else if (this.isFlashcards()) {
       // do nothing
@@ -101,8 +101,8 @@ class Lesson extends Component {
     this.props.stopLesson()
   }
 
-  isOverview() {
-    return (this.props.location.pathname.startsWith('/lessons/') && this.props.location.pathname.endsWith('/overview'));
+  isOverview(pathname) {
+    return (pathname.startsWith('/lessons/') && pathname.endsWith('/overview'));
   }
 
   isFlashcards() {
@@ -191,7 +191,7 @@ class Lesson extends Component {
     }
 
     if (this.props.lesson) {
-      if (this.isFinished() && !this.isOverview() && !this.isFlashcards()) {
+      if (this.isFinished() && !this.isOverview(this.props.location.pathname) && !this.isFlashcards()) {
         return (
           <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
             <main id="main">
