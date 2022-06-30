@@ -24,6 +24,9 @@ import WordBoundaryErrorPrompt from './LessonPrompts/WordBoundaryErrorPrompt';
 const isCustom = (pathname) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
 
+const isOverview = (pathname) =>
+  pathname.startsWith("/lessons/") && pathname.endsWith("/overview");
+
 class Lesson extends Component {
   componentDidMount() {
     // If cookies are disabled, attempting to access localStorage will cause an error.
@@ -49,7 +52,7 @@ class Lesson extends Component {
       else if (this.props.location.pathname.startsWith('/lessons/custom') && (!this.props.location.pathname.startsWith('/lessons/custom/setup'))) {
         this.props.startCustomLesson();
       }
-      else if(this.isOverview(this.props.location.pathname)) {
+      else if(isOverview(this.props.location.pathname)) {
         // do nothing
       }
       else if(this.isFlashcards()) {
@@ -82,7 +85,7 @@ class Lesson extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname.startsWith('/lessons/custom') && !this.props.location.pathname.startsWith('/lessons/custom/setup') && this.props.lesson.title !== "Custom") {
       this.props.startCustomLesson();
-    } else if(this.isOverview(this.props.location.pathname)) {
+    } else if(isOverview(this.props.location.pathname)) {
       // do nothing
     } else if (this.isFlashcards()) {
       // do nothing
@@ -99,10 +102,6 @@ class Lesson extends Component {
 
   componentWillUnmount() {
     this.props.stopLesson()
-  }
-
-  isOverview(pathname) {
-    return (pathname.startsWith('/lessons/') && pathname.endsWith('/overview'));
   }
 
   isFlashcards() {
@@ -191,7 +190,7 @@ class Lesson extends Component {
     }
 
     if (this.props.lesson) {
-      if (this.isFinished() && !this.isOverview(this.props.location.pathname) && !this.isFlashcards()) {
+      if (this.isFinished() && !isOverview(this.props.location.pathname) && !this.isFlashcards()) {
         return (
           <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
             <main id="main">
