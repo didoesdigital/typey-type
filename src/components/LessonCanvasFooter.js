@@ -4,15 +4,6 @@ import { Tooltip } from "react-tippy";
 
 class LessonCanvasFooter extends Component {
   render() {
-    let toggleClasses;
-    if (this.props.hideOtherSettings) {
-      toggleClasses =
-        "button button--secondary mb0 text-center subsection-header-toggle collapsed";
-    } else {
-      toggleClasses =
-        "button button--secondary mb0 text-center subsection-header-toggle";
-    }
-
     return (
       <div className="flex flex-wrap mx-auto mw-1440 justify-between text-small">
         <Metronome userSettings={this.props.userSettings} />
@@ -159,7 +150,7 @@ class LessonCanvasFooter extends Component {
         </div>
         <p>
           <button
-            className={toggleClasses}
+            className={`button button--secondary mb0 text-center subsection-header-toggle${this.props.hideOtherSettings ? ' collapsed' : ''}`}
             onClick={this.props.toggleHideOtherSettings}
             onKeyPress={this.props.toggleHideOtherSettings}
             aria-expanded={!this.props.hideOtherSettings}
