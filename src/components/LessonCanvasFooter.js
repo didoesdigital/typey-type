@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import Metronome from './Metronome';
-import { Tooltip } from 'react-tippy';
+import React, { Component } from "react";
+import Metronome from "./Metronome";
+import { Tooltip } from "react-tippy";
 
 class LessonCanvasFooter extends Component {
   render() {
     let toggleClasses;
     if (this.props.hideOtherSettings) {
-      toggleClasses = "button button--secondary mb0 text-center subsection-header-toggle collapsed";
+      toggleClasses =
+        "button button--secondary mb0 text-center subsection-header-toggle collapsed";
     } else {
-      toggleClasses = "button button--secondary mb0 text-center subsection-header-toggle";
+      toggleClasses =
+        "button button--secondary mb0 text-center subsection-header-toggle";
     }
 
     return (
       <div className="flex flex-wrap mx-auto mw-1440 justify-between text-small">
-        <Metronome
-          userSettings={this.props.userSettings}
-        />
+        <Metronome userSettings={this.props.userSettings} />
         <div className="flex flex-wrap">
           <fieldset className="dc hide-sm">
             <Tooltip
@@ -44,7 +44,7 @@ class LessonCanvasFooter extends Component {
                       id="discover"
                       value="discover"
                       disabled={this.props.disableUserSettings}
-                      checked={this.props.userSettings.study==="discover"}
+                      checked={this.props.userSettings.study === "discover"}
                       onChange={this.props.chooseStudy}
                     />
                     <Tooltip
@@ -73,7 +73,7 @@ class LessonCanvasFooter extends Component {
                       id="revise"
                       value="revise"
                       disabled={this.props.disableUserSettings}
-                      checked={this.props.userSettings.study==="revise"}
+                      checked={this.props.userSettings.study === "revise"}
                       onChange={this.props.chooseStudy}
                     />
                     <Tooltip
@@ -104,7 +104,7 @@ class LessonCanvasFooter extends Component {
                       id="drill"
                       value="drill"
                       disabled={this.props.disableUserSettings}
-                      checked={this.props.userSettings.study==="drill"}
+                      checked={this.props.userSettings.study === "drill"}
                       onChange={this.props.chooseStudy}
                     />
                     <Tooltip
@@ -133,7 +133,7 @@ class LessonCanvasFooter extends Component {
                       id="practice"
                       value="practice"
                       disabled={this.props.disableUserSettings}
-                      checked={this.props.userSettings.study==="practice"}
+                      checked={this.props.userSettings.study === "practice"}
                       onChange={this.props.chooseStudy}
                     />
                     <Tooltip
@@ -157,9 +157,19 @@ class LessonCanvasFooter extends Component {
             </div>
           </fieldset>
         </div>
-          <p><button className={toggleClasses} onClick={this.props.toggleHideOtherSettings} onKeyPress={this.props.toggleHideOtherSettings} aria-expanded={!this.props.hideOtherSettings} aria-controls="collapsible-settings">{this.props.hideOtherSettings ? "Show settings" : "Hide settings"}</button></p>
+        <p>
+          <button
+            className={toggleClasses}
+            onClick={this.props.toggleHideOtherSettings}
+            onKeyPress={this.props.toggleHideOtherSettings}
+            aria-expanded={!this.props.hideOtherSettings}
+            aria-controls="collapsible-settings"
+          >
+            {this.props.hideOtherSettings ? "Show settings" : "Hide settings"}
+          </button>
+        </p>
       </div>
-    )
+    );
   }
 }
 
