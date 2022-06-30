@@ -3,13 +3,12 @@ import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
 import { getLessonIndexData } from "./../utils/lessonIndexData";
 
-const getLessonOverview = (lessonFile) => {
-  return fetch(lessonFile, {
+const getLessonOverview = async (lessonFile) => {
+  const response = await fetch(lessonFile, {
     method: "GET",
     credentials: "same-origin",
-  }).then((response) => {
-    return response.text();
   });
+  return await response.text();
 };
 
 const LessonOverview = ({ lesson, location, handleLesson }) => {
