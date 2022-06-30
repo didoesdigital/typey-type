@@ -3,7 +3,7 @@ import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
 import { getLessonIndexData } from "./../utils/lessonIndexData";
 
-const getLessonOverview = async (lessonFile) => {
+const getLessonOverview = async (lessonFile: any) => {
   const response = await fetch(lessonFile, {
     method: "GET",
     credentials: "same-origin",
@@ -11,8 +11,18 @@ const getLessonOverview = async (lessonFile) => {
   return await response.text();
 };
 
-const LessonOverview = ({ lesson, location, handleLesson }) => {
-  const mainHeading = useRef(null);
+type LessonOverviewProps = {
+  lesson: any;
+  location: any;
+  handleLesson: any;
+};
+
+const LessonOverview = ({
+  lesson,
+  location,
+  handleLesson,
+}: LessonOverviewProps) => {
+  const mainHeading = useRef<HTMLHeadingElement>(null);
   const [content, setContent] = useState(`
 <div class="mx-auto mw100 pt24 pb24 de-emphasized text-center">
   <p>Loading…</p>
@@ -34,10 +44,10 @@ const LessonOverview = ({ lesson, location, handleLesson }) => {
     let lessonMetadata;
     // TODO: avoid fetching again if lessonIndex already contains all the lessons
     getLessonIndexData()
-      .then((lessonIndex) => {
+      .then((lessonIndex: any) => {
         // This logic to find lesson in index is duplicated in Lesson.jsx
         lessonMetadata = lessonIndex.find(
-          (metadataEntry) =>
+          (metadataEntry: any) =>
             process.env.PUBLIC_URL + "/lessons" + metadataEntry.path ===
             process.env.PUBLIC_URL +
               location.pathname.replace("overview", "lesson.txt")
@@ -59,14 +69,15 @@ const LessonOverview = ({ lesson, location, handleLesson }) => {
             })
             .catch((e) => {
               setError(true);
-              console.log(e);
+              console.error(e);
             });
         } else {
           setError(true);
         }
       })
-      .catch((e) => {
+      .catch((e: unknown) => {
         setError(true);
+        console.error(e);
       });
   }, [handleLesson, lesson, location.pathname]);
 
@@ -81,7 +92,7 @@ const LessonOverview = ({ lesson, location, handleLesson }) => {
           <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
             <div className="flex mr1 self-center">
               <header className="flex items-center min-h-40">
-                <h2 className="table-cell mr2" ref={mainHeading} tabIndex="-1">
+                <h2 className="table-cell mr2" ref={mainHeading} tabIndex={-1}>
                   {lesson.title} overview
                 </h2>
               </header>
