@@ -5,7 +5,7 @@ import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
 import ErrorBoundary from './ErrorBoundary'
-import LessonCanvasFooter from './LessonCanvasFooter';
+import LessonCanvasFooter from '../pages/lessons/LessonCanvasFooter';
 import LessonOverview from '../pages/lessons/LessonOverview';
 import LessonNotFound from '../pages/lessons/LessonNotFound';
 import Material from './Material';

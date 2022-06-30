@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LessonCanvasFooter from './LessonCanvasFooter';
+import LessonCanvasFooter from '../pages/lessons/LessonCanvasFooter';
 import UserSettings from './UserSettings';
 import { IconRestart } from './Icon';
 import { Link } from 'react-router-dom';
