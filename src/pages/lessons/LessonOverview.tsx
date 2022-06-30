@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
-import { getLessonIndexData } from "./../utils/lessonIndexData";
+import { getLessonIndexData } from "../../utils/lessonIndexData";
 
 const getLessonOverview = async (lessonFile: any) => {
   const response = await fetch(lessonFile, {
