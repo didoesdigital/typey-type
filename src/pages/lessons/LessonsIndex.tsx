@@ -5,17 +5,25 @@ import { IconExternal } from "../../components/Icon";
 import LessonList from "./LessonList";
 import { Tooltip } from "react-tippy";
 
+type LessonsIndexProps = {
+  customLesson: any;
+  lessonIndex: any;
+  match: any;
+  setAnnouncementMessage: any;
+  stopLesson: any;
+};
+
 const LessonsIndex = ({
   customLesson,
   lessonIndex,
   match,
   setAnnouncementMessage,
   stopLesson,
-}) => {
-  const mainHeading = useRef(null);
+}: LessonsIndexProps) => {
+  const mainHeading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    mainHeading.current.focus();
+    mainHeading.current?.focus();
   }, []);
 
   return (
@@ -24,7 +32,7 @@ const LessonsIndex = ({
         <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
           <div className="flex mr1 self-center">
             <header className="flex items-center min-h-40">
-              <h2 ref={mainHeading} tabIndex="-1">
+              <h2 ref={mainHeading} tabIndex={-1}>
                 Lessons
               </h2>
             </header>
@@ -46,6 +54,7 @@ const LessonsIndex = ({
                   rel="noopener noreferrer"
                 >
                   community’s lessons
+                  {/* @ts-ignore theme and trigger wrong: https://github.com/tvkhoa/react-tippy/blob/c6e6169e3f2cabe05f1bfbd7e0dea1ddef4debe8/index.d.ts */}
                   <Tooltip
                     title="Opens in a new tab"
                     animation="shift"
