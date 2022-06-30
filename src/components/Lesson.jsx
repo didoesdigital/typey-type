@@ -98,8 +98,8 @@ class Lesson extends Component {
     this.props.stopLesson()
   }
 
-  isCustom() {
-    return ((this.props.location.pathname === '/lessons/custom') || (this.props.location.pathname === '/lessons/custom/setup'));
+  isCustom(pathname) {
+    return ((pathname === '/lessons/custom') || (pathname === '/lessons/custom/setup'));
   }
 
   isOverview() {
@@ -155,7 +155,7 @@ class Lesson extends Component {
       lessonSubTitle = ': '+this.props.lessonSubTitle;
     }
 
-    if (this.isCustom()) {
+    if (this.isCustom(this.props.location.pathname)) {
       createNewCustomLesson = (<Link to='/lessons/custom/setup' onClick={this.props.stopLesson} className="link-button link-button-ghost table-cell mr1" role="button">Edit custom lesson</Link>);
     } else {
       createNewCustomLesson = '';
