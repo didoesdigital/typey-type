@@ -4,6 +4,7 @@ import { groups } from "d3-array";
 
 const WordCount = ({ lesson }) =>
   lesson?.wordCount > 0 && ` · ${lesson.wordCount} words`;
+
 const LessonLink = ({ lesson, url }) => (
   <Link
     to={`${url}${lesson.path}`
@@ -18,6 +19,7 @@ const LessonLink = ({ lesson, url }) => (
     {lesson.subtitle?.length > 0 && `: ${lesson.subtitle}`}
   </Link>
 );
+
 const InnerLessonList = ({ lessons, url }) => (
   <ul className="unstyled-list">
     {lessons.map((lesson) => (
@@ -28,9 +30,10 @@ const InnerLessonList = ({ lessons, url }) => (
     ))}
   </ul>
 );
+
 const wrangleId = (id) => {
-  return id.toLowerCase().replace(/[ ,’()]/g, '-')
-}
+  return id.toLowerCase().replace(/[ ,’()]/g, "-");
+};
 
 export default function LessonList({ lessonIndex, url }) {
   useEffect(() => {
@@ -46,12 +49,11 @@ export default function LessonList({ lessonIndex, url }) {
         let scrollOptions = {
           left: 0,
           top: window.pageYOffset + top,
-          behavior: 'smooth'
-        }
+          behavior: "smooth",
+        };
         if (el) {
           window.scrollTo(scrollOptions);
-          window.setTimeout(function ()
-          {
+          window.setTimeout(function () {
             el.focus();
           }, 300);
         }
@@ -67,6 +69,7 @@ export default function LessonList({ lessonIndex, url }) {
     (d) => d.category,
     (d) => d.subcategory
   );
+
   return (
     <div>
       <p className="mb0">Jump to:</p>
@@ -74,13 +77,15 @@ export default function LessonList({ lessonIndex, url }) {
         {groupedLessons.map(([category, subcategories]) => (
           <li key={category}>
             <a href={`#${wrangleId(category)}`}>{category}</a>
-            {subcategories[0][0] &&
+            {subcategories[0][0] && (
               <ul>
-              {subcategories.map(([subcategory, _]) => (
-                <li key={subcategory}><a href={`#${wrangleId(subcategory)}`}>{subcategory}</a></li>
-              ))}
+                {subcategories.map(([subcategory, _]) => (
+                  <li key={subcategory}>
+                    <a href={`#${wrangleId(subcategory)}`}>{subcategory}</a>
+                  </li>
+                ))}
               </ul>
-            }
+            )}
           </li>
         ))}
       </ul>
