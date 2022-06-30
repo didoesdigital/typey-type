@@ -3,6 +3,15 @@ import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
 import { getLessonIndexData } from "./../utils/lessonIndexData";
 
+const getLessonOverview = (lessonFile) => {
+  return fetch(lessonFile, {
+    method: "GET",
+    credentials: "same-origin",
+  }).then((response) => {
+    return response.text();
+  });
+};
+
 class LessonOverview extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +46,7 @@ class LessonOverview extends Component {
         );
 
         if (lessonMetadata && lessonMetadata["overview"]) {
-          this.getLessonOverview(
+          getLessonOverview(
             process.env.PUBLIC_URL + "/lessons" + lessonMetadata["overview"]
           )
             .then((text) => {
@@ -67,15 +76,6 @@ class LessonOverview extends Component {
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
-  }
-
-  getLessonOverview(lessonFile) {
-    return fetch(lessonFile, {
-      method: "GET",
-      credentials: "same-origin",
-    }).then((response) => {
-      return response.text();
-    });
   }
 
   showLessonOverview() {
