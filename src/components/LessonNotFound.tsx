@@ -4,9 +4,21 @@ import * as Sentry from "@sentry/browser";
 import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
 
-const LessonNotFound = ({ location, lessonIndex, path, restartLesson }) => {
-  const mainHeading = useRef(null);
-  const surveyLink = useRef(null);
+type LessonNotFoundProps = {
+  location: any;
+  lessonIndex: any;
+  path: any;
+  restartLesson: any;
+};
+
+const LessonNotFound = ({
+  location,
+  lessonIndex,
+  path,
+  restartLesson,
+}: LessonNotFoundProps) => {
+  const mainHeading = useRef<HTMLHeadingElement>(null);
+  const surveyLink = useRef<HTMLAnchorElement>(null);
 
   useEffect(() => {
     let labelString = "That lesson not found";
@@ -31,10 +43,11 @@ const LessonNotFound = ({ location, lessonIndex, path, restartLesson }) => {
       "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=";
     let param = "&entry.1202724812&entry.936119214";
     let prefillLesson = location.pathname;
+    const newHref = googleFormURL + encodeURIComponent(prefillLesson) + param;
     if (surveyLink.current) {
-      surveyLink.current.href =
-        googleFormURL + encodeURIComponent(prefillLesson) + param;
+      surveyLink.current.href = newHref;
     }
+    return newHref;
   };
 
   let possibleBetterPath = "";
