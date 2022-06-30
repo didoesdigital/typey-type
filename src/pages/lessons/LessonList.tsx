@@ -2,10 +2,33 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { groups } from "d3-array";
 
-const WordCount = ({ lesson }) =>
-  lesson?.wordCount > 0 && ` · ${lesson.wordCount} words`;
+type LessonIndexEntry = {
+  category: string;
+  overview: string;
+  path: string;
+  subcategory: string;
+  subtitle: string;
+  suggestedNext: string;
+  title: string;
+  wordCount: number;
+};
 
-const LessonLink = ({ lesson, url }) => (
+type LessonListProps = {
+  lessonIndex: LessonIndexEntry[];
+  url: string;
+};
+
+const WordCount = ({ lesson }: { lesson: LessonIndexEntry }) => (
+  <>({lesson.wordCount > 0 && ` · ${lesson.wordCount} words`})</>
+);
+
+const LessonLink = ({
+  lesson,
+  url,
+}: {
+  lesson: LessonIndexEntry;
+  url: string;
+}) => (
   <Link
     to={`${url}${lesson.path}`
       .replace(/lesson\.txt$/, "")
@@ -20,9 +43,9 @@ const LessonLink = ({ lesson, url }) => (
   </Link>
 );
 
-const InnerLessonList = ({ lessons, url }) => (
+const InnerLessonList = ({ lessonIndex, url }: LessonListProps) => (
   <ul className="unstyled-list">
-    {lessons.map((lesson) => (
+    {lessonIndex.map((lesson) => (
       <li className="unstyled-list-item mb1" key={lesson.path}>
         <LessonLink lesson={lesson} url={url} />
         <WordCount lesson={lesson} />
@@ -31,22 +54,22 @@ const InnerLessonList = ({ lessons, url }) => (
   </ul>
 );
 
-const wrangleId = (id) => {
+const wrangleId = (id: string) => {
   return id.toLowerCase().replace(/[ ,’()]/g, "-");
 };
 
-export default function LessonList({ lessonIndex, url }) {
+export default function LessonList({ lessonIndex, url }: LessonListProps) {
   useEffect(() => {
     window.location.hash = window.decodeURIComponent(window.location.hash);
     const scrollToAnchor = () => {
       const hash = window.location.hash;
       if (hash && hash.length > 0) {
-        const el = document.querySelector(hash);
+        const el = document.querySelector<HTMLAnchorElement>(hash);
         let top = 0;
         if (el && el.getBoundingClientRect().top) {
           top = el.getBoundingClientRect().top;
         }
-        let scrollOptions = {
+        const scrollOptions: ScrollToOptions = {
           left: 0,
           top: window.pageYOffset + top,
           behavior: "smooth",
@@ -110,13 +133,13 @@ export default function LessonList({ lessonIndex, url }) {
                     >
                       <h5 className="h4">{subcategory}</h5>
                     </a>
-                    <InnerLessonList lessons={lessons} url={url} />
+                    <InnerLessonList lessonIndex={lessons} url={url} />
                   </div>
                 );
               } else {
                 return (
                   <div key={subcategory}>
-                    <InnerLessonList lessons={lessons} url={url} />
+                    <InnerLessonList lessonIndex={lessons} url={url} />
                   </div>
                 );
               }
