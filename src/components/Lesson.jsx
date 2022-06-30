@@ -24,6 +24,9 @@ import WordBoundaryErrorPrompt from './LessonPrompts/WordBoundaryErrorPrompt';
 const isCustom = (pathname) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
 
+const isFinished = (lesson, currentPhraseID) =>
+  currentPhraseID === lesson?.presentedMaterial?.length || 0;
+
 const isFlashcards = (pathname) =>
   pathname.startsWith("/lessons/") && pathname.endsWith("/flashcards");
 
@@ -107,11 +110,6 @@ class Lesson extends Component {
     this.props.stopLesson()
   }
 
-  isFinished() {
-    let presentedMaterialLength = (this.props.lesson && this.props.lesson.presentedMaterial) ? this.props.lesson.presentedMaterial.length : 0;
-    return (this.props.currentPhraseID === presentedMaterialLength);
-  }
-
   nextLessonPath() {
     let thisLesson = this.props.lesson.path;
     let suggestedNext = "/";
@@ -189,7 +187,7 @@ class Lesson extends Component {
     }
 
     if (this.props.lesson) {
-      if (this.isFinished() && !isOverview(this.props.location.pathname) && !isFlashcards(this.props.location.pathname)) {
+      if (isFinished(this.props.lesson, this.props.currentPhraseID) && !isOverview(this.props.location.pathname) && !isFlashcards(this.props.location.pathname)) {
         return (
           <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
             <main id="main">
