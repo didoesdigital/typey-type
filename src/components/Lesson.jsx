@@ -7,7 +7,7 @@ import DocumentTitle from 'react-document-title';
 import ErrorBoundary from './ErrorBoundary'
 import LessonCanvasFooter from './LessonCanvasFooter';
 import LessonOverview from './LessonOverview';
-import LessonNotFound from './LessonNotFound';
+import LessonNotFound from '../pages/lessons/LessonNotFound';
 import Material from './Material';
 import TypedText from './TypedText';
 import Finished from './Finished';
