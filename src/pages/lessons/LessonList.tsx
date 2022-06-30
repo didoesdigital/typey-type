@@ -19,7 +19,7 @@ type LessonListProps = {
 };
 
 const WordCount = ({ lesson }: { lesson: LessonIndexEntry }) => (
-  <>({lesson.wordCount > 0 && ` · ${lesson.wordCount} words`})</>
+  <>{lesson.wordCount > 0 && ` · ${lesson.wordCount} words`}</>
 );
 
 const LessonLink = ({
