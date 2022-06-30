@@ -11,7 +11,7 @@ import LessonNotFound from '../pages/lessons/LessonNotFound';
 import Material from './Material';
 import TypedText from './TypedText';
 import Finished from './Finished';
-import LessonLengthPreview from './LessonLengthPreview';
+import LessonLengthPreview from '../pages/lessons/LessonLengthPreview';
 import Scores from './Scores';
 import StrokeTip from './StrokeTip';
 import UserSettings from './UserSettings';
