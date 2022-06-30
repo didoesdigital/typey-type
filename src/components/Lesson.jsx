@@ -21,6 +21,9 @@ import AussieDictPrompt from './LessonPrompts/AussieDictPrompt';
 import SedSaidPrompt from './LessonPrompts/SedSaidPrompt';
 import WordBoundaryErrorPrompt from './LessonPrompts/WordBoundaryErrorPrompt';
 
+const isCustom = (pathname) =>
+  pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
+
 class Lesson extends Component {
   componentDidMount() {
     // If cookies are disabled, attempting to access localStorage will cause an error.
@@ -98,10 +101,6 @@ class Lesson extends Component {
     this.props.stopLesson()
   }
 
-  isCustom(pathname) {
-    return ((pathname === '/lessons/custom') || (pathname === '/lessons/custom/setup'));
-  }
-
   isOverview() {
     return (this.props.location.pathname.startsWith('/lessons/') && this.props.location.pathname.endsWith('/overview'));
   }
@@ -155,7 +154,7 @@ class Lesson extends Component {
       lessonSubTitle = ': '+this.props.lessonSubTitle;
     }
 
-    if (this.isCustom(this.props.location.pathname)) {
+    if (isCustom(this.props.location.pathname)) {
       createNewCustomLesson = (<Link to='/lessons/custom/setup' onClick={this.props.stopLesson} className="link-button link-button-ghost table-cell mr1" role="button">Edit custom lesson</Link>);
     } else {
       createNewCustomLesson = '';
