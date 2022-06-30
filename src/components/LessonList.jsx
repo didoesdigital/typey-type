@@ -62,7 +62,7 @@ export default function LessonList({ lessonIndex, url }) {
     scrollToAnchor();
 
     window.onhashchange = scrollToAnchor;
-  }, [lessonIndex]);
+  }, []);
 
   const groupedLessons = groups(
     lessonIndex,
