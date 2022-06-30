@@ -24,6 +24,9 @@ import WordBoundaryErrorPrompt from './LessonPrompts/WordBoundaryErrorPrompt';
 const isCustom = (pathname) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
 
+const isFlashcards = (pathname) =>
+  pathname.startsWith("/lessons/") && pathname.endsWith("/flashcards");
+
 const isOverview = (pathname) =>
   pathname.startsWith("/lessons/") && pathname.endsWith("/overview");
 
@@ -55,7 +58,7 @@ class Lesson extends Component {
       else if(isOverview(this.props.location.pathname)) {
         // do nothing
       }
-      else if(this.isFlashcards(this.props.location.pathname)) {
+      else if(isFlashcards(this.props.location.pathname)) {
         // do nothing
       }
       else if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
@@ -87,7 +90,7 @@ class Lesson extends Component {
       this.props.startCustomLesson();
     } else if(isOverview(this.props.location.pathname)) {
       // do nothing
-    } else if (this.isFlashcards(this.props.location.pathname)) {
+    } else if (isFlashcards(this.props.location.pathname)) {
       // do nothing
     } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
@@ -102,10 +105,6 @@ class Lesson extends Component {
 
   componentWillUnmount() {
     this.props.stopLesson()
-  }
-
-  isFlashcards(pathname) {
-    return (pathname.startsWith('/lessons/') && pathname.endsWith('/flashcards'));
   }
 
   isFinished() {
@@ -190,7 +189,7 @@ class Lesson extends Component {
     }
 
     if (this.props.lesson) {
-      if (this.isFinished() && !isOverview(this.props.location.pathname) && !this.isFlashcards(this.props.location.pathname)) {
+      if (this.isFinished() && !isOverview(this.props.location.pathname) && !isFlashcards(this.props.location.pathname)) {
         return (
           <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
             <main id="main">
