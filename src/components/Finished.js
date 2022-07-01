@@ -188,16 +188,8 @@ class Finished extends Component {
     }
   }
 
-  getWordWithSpacing(wordWithoutSpacing, spacePlacement = this.props.userSettings.spacePlacement) {
-    if (spacePlacement === "spaceBeforeOutput") {
-      return " " + wordWithoutSpacing
-    }
-    else if (spacePlacement === "spaceAfterOutput") {
-      return wordWithoutSpacing + " "
-    }
-    else {
-      return wordWithoutSpacing;
-    }
+  getWordWithSpacing(wordWithoutSpacing, spacePlacement) {
+    return (spacePlacement === "spaceBeforeOutput") ? " " + wordWithoutSpacing : (spacePlacement === "spaceAfterOutput") ? wordWithoutSpacing + " " : wordWithoutSpacing;
   }
 
   render() {
