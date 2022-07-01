@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import FinishedNextLessonButton from "./FinishedNextLessonButton";
 
 type FinishedZeroAndEmptyStateProps = {
   startFromWordSetting: number;
@@ -28,18 +28,8 @@ const FinishedZeroAndEmptyState = ({
             </button>
           </div>
         ) : (
-          <div className="text-center">
-            {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-            <Link
-              aria-label="Next lesson"
-              accessKey={"o"}
-              to={suggestedNextUrl}
-              className="button mt3 dib"
-              style={{ lineHeight: 2 }}
-              role="button"
-            >
-              Next less<u style={{textDecorationLine: 'underline' }}>o</u>n
-            </Link>
+          <div className="text-center mt3">
+            <FinishedNextLessonButton suggestedNextUrl={suggestedNextUrl} />
           </div>
         )}
       </div>

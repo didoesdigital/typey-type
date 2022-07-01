@@ -15,7 +15,7 @@ const FinishedNextLessonButton = ({
       accessKey={"o"}
       id="next-lesson-button"
       to={suggestedNextUrl}
-      className="link-button dib negative-outline-offset"
+      className="link-button dib"
       style={{ lineHeight: 2 }}
       role="button"
     >
