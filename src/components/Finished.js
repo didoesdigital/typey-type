@@ -107,7 +107,26 @@ class Finished extends Component {
   render() {
     let numericAccuracy = 0;
     let accuracy = '';
-    let misstrokesSummary = () => undefined;
+    const misstrokesSummary = (path, reviseLesson, listOfPossibleStrokeImprovements, showMisstrokesSummary) => {
+      return showMisstrokesSummary ?
+      <div className="misstrokes-summary">
+        <div>
+          <h4 className="mt3 nowrap">Possible stroke improvements</h4>
+          <p>
+            {/* eslint-disable-next-line jsx-a11y/no-access-key */}
+            <a aria-label="Revise these words" accessKey={'r'} href={path} onClick={reviseLesson} role="button">
+              <u style={{textDecorationStyle: 'double' }}>R</u>evise these words</a>
+          </p>
+          <ol className="mb0 unstyled-list">{listOfPossibleStrokeImprovements}</ol>
+        </div>
+        <p>
+          <a href={path} onClick={reviseLesson} role="button">
+            Revise these words</a>
+        </p>
+      </div>
+      :
+      undefined
+    }
     let strokeAttemptsPresentation;
 
     let listOfPossibleStrokeImprovements = undefined;
@@ -154,27 +173,6 @@ class Finished extends Component {
           </li>
         );
       });
-
-      misstrokesSummary = (path, reviseLesson, listOfPossibleStrokeImprovements, showMisstrokesSummary) => {
-        return showMisstrokesSummary ?
-        <div className="misstrokes-summary">
-          <div>
-            <h4 className="mt3 nowrap">Possible stroke improvements</h4>
-            <p>
-              {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-              <a aria-label="Revise these words" accessKey={'r'} href={path} onClick={reviseLesson} role="button">
-                <u style={{textDecorationStyle: 'double' }}>R</u>evise these words</a>
-            </p>
-            <ol className="mb0 unstyled-list">{listOfPossibleStrokeImprovements}</ol>
-          </div>
-          <p>
-            <a href={path} onClick={reviseLesson} role="button">
-              Revise these words</a>
-          </p>
-        </div>
-        :
-        undefined
-      }
     }
 
     if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
