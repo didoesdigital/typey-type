@@ -193,13 +193,6 @@ class Finished extends Component {
     }
   }
 
-  prefillSurveyLink() {
-    const prefillLesson = this.props.location?.pathname || '';
-    if (this.surveyLink) {
-      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + googleFormParam;
-    }
-  }
-
   getWordWithSpacing(wordWithoutSpacing, spacePlacement = this.props.userSettings.spacePlacement) {
     if (spacePlacement === "spaceBeforeOutput") {
       return " " + wordWithoutSpacing
@@ -491,7 +484,7 @@ class Finished extends Component {
                 userSettings={this.props.userSettings}
               />
             </div>
-                        <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
+            <p className="text-center"><a href={googleFormURL + encodeURIComponent(this.props.location?.pathname || '') + googleFormParam} className="text-small mt0" target="_blank" rel="noopener noreferrer" id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
           </div>
           <div>
             <UserSettings
