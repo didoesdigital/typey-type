@@ -177,10 +177,6 @@ class Finished extends Component {
     }
   }
 
-  isEmpty() {
-    return (this.props.lessonLength === 0);
-  }
-
   restartConfetti(event) {
     if (event && ((event.keyCode && event.keyCode === 13) || event.type === "click")) {
       particles.splice(0);
@@ -413,7 +409,7 @@ class Finished extends Component {
     );
 
     let lessonEmpty = false;
-    if (this.isEmpty()) {
+    if (this.props.lessonLength === 0) {
       lessonEmpty = true;
       const startFromWordOneButton = (this.props.userSettings.startFromWord > 1) ? (
         <div className="text-center">
