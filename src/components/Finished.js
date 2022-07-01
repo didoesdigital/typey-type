@@ -352,22 +352,21 @@ class Finished extends Component {
     const shouldShowChart = this.state.chartData?.dataPoints?.length > 1 && this.state.chartData?.dataPoints?.length < 10000;
 
     if (this.props.lessonLength === 0) {
-      const startFromWordOneButton = (this.props.userSettings.startFromWord > 1) ? (
-        <div className="text-center">
-          <button className="button mt3 dib" onClick={this.props.startFromWordOne}>Start from word 1</button>
-        </div>
-      ) : null;
-
       emptyAndZeroStateMessage = (
         <div className="text-center mt10 mx-auto">
           <span id="js-no-words-to-write" tabIndex="-1">There are no words to write.</span>
-          {startFromWordOneButton ||
-          (<div className="text-center">
-            {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-            <Link aria-label="Next lesson" accessKey={'o'} to={this.props.suggestedNext} className="button mt3 dib" style={{lineHeight: 2}} role="button">
-              Next less<u style={{textDecorationStyle: 'underline' }}>o</u>n
-            </Link>
-          </div>) }
+          {this.props.userSettings.startFromWord > 1 ?
+            <div className="text-center">
+              <button className="button mt3 dib" onClick={this.props.startFromWordOne}>Start from word 1</button>
+            </div>
+            :
+            <div className="text-center">
+              {/* eslint-disable-next-line jsx-a11y/no-access-key */}
+              <Link aria-label="Next lesson" accessKey={'o'} to={this.props.suggestedNext} className="button mt3 dib" style={{lineHeight: 2}} role="button">
+                Next less<u style={{textDecorationStyle: 'underline' }}>o</u>n
+              </Link>
+            </div>
+          }
         </div>
       );
     }
