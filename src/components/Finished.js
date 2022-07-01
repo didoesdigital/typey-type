@@ -110,9 +110,8 @@ class Finished extends Component {
     let accuracy = '';
     let strokeAttemptsPresentation;
 
-    let listOfPossibleStrokeImprovements = undefined;
-    if (this.props.currentLessonStrokes.length > 0) {
-      listOfPossibleStrokeImprovements = this.props.currentLessonStrokes.map( (phrase, i) => {
+    const listOfPossibleStrokeImprovements = (this.props.currentLessonStrokes.length > 0) ?
+      this.props.currentLessonStrokes.map((phrase, i) => {
         let strokeAttempts = phrase.attempts.map( ( {text, time}, j ) => {
           return(
               <li key={ j } className="nowrap di ml1"><span className="bg-warning px1">{text}</span></li>
@@ -153,8 +152,9 @@ class Finished extends Component {
             <p className="pl3 mb0"><span className="visually-hidden text-small">Hint: </span><span className="steno-stroke steno-stroke--subtle text-small px1 py05">{phrase.stroke.split('').map((item, i)=><kbd className="raw-steno-key raw-steno-key--subtle text-small" key={i}>{item}</kbd>)}</span></p>
           </li>
         );
-      });
-    }
+      })
+      :
+      undefined;
 
     if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
       accuracy = '100% accurate!';
