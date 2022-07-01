@@ -111,17 +111,9 @@ class Lesson extends Component {
   }
 
   nextLessonPath(lesson, lessonIndex) {
-    let thisLesson = lesson.path;
-    let suggestedNext = "/";
-    let match = (el) => process.env.PUBLIC_URL + '/lessons' + el.path === thisLesson;
-    let lessonIndexItem = lessonIndex.find(match);
-    if (lessonIndexItem !== undefined) {
-      if (lessonIndexItem.hasOwnProperty("suggestedNext")){
-        suggestedNext = lessonIndexItem.suggestedNext;
-      }
-    }
-    let nextLessonPath = '/lessons'+suggestedNext.replace(/lesson\.txt$/,'');
-    return nextLessonPath;
+    const lessonIndexItem = lessonIndex.find((el) => process.env.PUBLIC_URL + '/lessons' + el.path === lesson.path);
+    const suggestedNext = lessonIndexItem?.suggestedNext ? lessonIndexItem.suggestedNext : '/';
+    return '/lessons' + suggestedNext.replace(/lesson\.txt$/, '');
   }
 
   prefillSurveyLink() {
