@@ -107,7 +107,7 @@ class Finished extends Component {
   render() {
     let numericAccuracy = 0;
     let accuracy = '';
-    let misstrokesSummary = '';
+    let misstrokesSummary = () => undefined;
     let strokeAttemptsPresentation;
 
     if (this.props.currentLessonStrokes.length > 0) {
@@ -154,7 +154,7 @@ class Finished extends Component {
         );
       });
 
-      misstrokesSummary = (
+      misstrokesSummary = () => (
         <React.Fragment>
           <div>
             <h4 className="mt3 nowrap">Possible stroke improvements</h4>
@@ -313,7 +313,7 @@ class Finished extends Component {
                         </p>
                       </div>
                       <div className="misstrokes-summary">
-                        {misstrokesSummary}
+                        {misstrokesSummary()}
                       </div>
                     </div>
                   </div>
