@@ -155,7 +155,8 @@ class Finished extends Component {
         );
       });
 
-      misstrokesSummary = (path, reviseLesson, listOfPossibleStrokeImprovements) => (
+      misstrokesSummary = (path, reviseLesson, listOfPossibleStrokeImprovements, showMisstrokesSummary) => {
+        return showMisstrokesSummary ?
         <div className="misstrokes-summary">
           <div>
             <h4 className="mt3 nowrap">Possible stroke improvements</h4>
@@ -171,7 +172,9 @@ class Finished extends Component {
               Revise these words</a>
           </p>
         </div>
-      );
+        :
+        undefined
+      }
     }
 
     if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
@@ -313,7 +316,7 @@ class Finished extends Component {
                           </Link>
                         </p>
                       </div>
-                      {misstrokesSummary(this.props.path, this.props.reviseLesson, listOfPossibleStrokeImprovements)}
+                      {misstrokesSummary(this.props.path, this.props.reviseLesson, listOfPossibleStrokeImprovements, this.props.currentLessonStrokes.length > 0)}
                     </div>
                   </div>
                 }
