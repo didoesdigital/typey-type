@@ -6,6 +6,7 @@ import { IconRestart } from './Icon';
 import { Link } from 'react-router-dom';
 import { stitchTogetherLessonData, transformLessonDataToChartData } from '../utils/transformingFinishedData'
 import FinishedDataViz from '../pages/lessons/FinishedDataViz';
+import FinishedMisstrokesSummary from '../pages/lessons/FinishedMisstrokesSummary';
 import * as Confetti from './../utils/confetti';
 import 'react-tippy/dist/tippy.css'
 
@@ -107,26 +108,6 @@ class Finished extends Component {
   render() {
     let numericAccuracy = 0;
     let accuracy = '';
-    const misstrokesSummary = (path, reviseLesson, listOfPossibleStrokeImprovements, showMisstrokesSummary) => {
-      return showMisstrokesSummary ?
-      <div className="misstrokes-summary">
-        <div>
-          <h4 className="mt3 nowrap">Possible stroke improvements</h4>
-          <p>
-            {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-            <a aria-label="Revise these words" accessKey={'r'} href={path} onClick={reviseLesson} role="button">
-              <u style={{textDecorationStyle: 'double' }}>R</u>evise these words</a>
-          </p>
-          <ol className="mb0 unstyled-list">{listOfPossibleStrokeImprovements}</ol>
-        </div>
-        <p>
-          <a href={path} onClick={reviseLesson} role="button">
-            Revise these words</a>
-        </p>
-      </div>
-      :
-      undefined
-    }
     let strokeAttemptsPresentation;
 
     let listOfPossibleStrokeImprovements = undefined;
@@ -314,7 +295,12 @@ class Finished extends Component {
                           </Link>
                         </p>
                       </div>
-                      {misstrokesSummary(this.props.path, this.props.reviseLesson, listOfPossibleStrokeImprovements, this.props.currentLessonStrokes.length > 0)}
+                      <FinishedMisstrokesSummary
+                        path={this.props.path}
+                        reviseLesson={this.props.reviseLesson}
+                        listOfPossibleStrokeImprovements={listOfPossibleStrokeImprovements}
+                        showMisstrokesSummary={this.props.currentLessonStrokes.length > 0}
+                      />
                     </div>
                   </div>
                 }
