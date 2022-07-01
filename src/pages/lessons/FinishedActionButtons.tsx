@@ -1,6 +1,6 @@
 import React from "react";
 import { IconRestart } from "../../components/Icon";
-import { Link } from "react-router-dom";
+import FinishedNextLessonButton from "./FinishedNextLessonButton";
 
 type FinishedActionButtonsProps = {
   restartPath: string;
@@ -31,18 +31,7 @@ const FinishedActionButtons = ({
       />
       Re<u style={{ textDecorationStyle: "double" }}>s</u>tart lesson
     </a>
-    {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-    <Link
-      aria-label="Next lesson"
-      accessKey={"o"}
-      id="next-lesson-button"
-      to={suggestedNextUrl}
-      className="link-button dib negative-outline-offset"
-      style={{ lineHeight: 2 }}
-      role="button"
-    >
-      Next less<u style={{ textDecorationLine: "underline" }}>o</u>n
-    </Link>
+    <FinishedNextLessonButton suggestedNextUrl={suggestedNextUrl} />
   </p>
 );
 
