@@ -201,7 +201,6 @@ class Finished extends Component {
   }
 
   render() {
-    let customMessage;
     let numericAccuracy = 0;
     let accuracy = '';
     let currentLessonStrokes = this.props.currentLessonStrokes;
@@ -448,18 +447,13 @@ class Finished extends Component {
     } else {
       lessonEmpty = false;
     }
-    if (this.props.settings && this.props.settings.customMessage) {
-      customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
-    } else {
-      customMessage = ''
-    }
     return (
       <div>
         <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
         <div id="lesson-page" className="flex-wrap-md flex mx-auto mw-1920">
           <div id="main-lesson-area" className="flex-grow mx-auto mw-1440 min-w-0">
             <div className="mx-auto mw-1920">
-              {customMessage}
+              {this.props.settings?.customMessage && <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>}
             </div>
             <div className="mx-auto mw-1920 p3">
               <div className="lesson-canvas lesson-canvas--finished panel p3 mb3">
