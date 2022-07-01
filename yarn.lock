@@ -4362,6 +4362,14 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-loadable@^5.5.6":
+  version "5.5.6"
+  resolved "https://registry.yarnpkg.com/@types/react-loadable/-/react-loadable-5.5.6.tgz#fcf6493d5015a4602672f3773a32032ce77fedea"
+  integrity sha512-2M7xH/wawZxNybbs/a76JkpUsMk4z6AxBh92cUtIBy2vK7EYYuitQbC4laY0hGz0e05R+mQ44YeHMtH2U+gMsw==
+  dependencies:
+    "@types/react" "*"
+    "@types/webpack" "^4"
+
 "@types/react-router-dom@^5.3.3":
   version "5.3.3"
   resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.3.3.tgz#e9d6b4a66fcdbd651a5f106c2656a30088cc1e83"
@@ -4468,7 +4476,7 @@
     "@types/source-list-map" "*"
     source-map "^0.7.3"
 
-"@types/webpack@^4.41.13", "@types/webpack@^4.41.26":
+"@types/webpack@^4", "@types/webpack@^4.41.13", "@types/webpack@^4.41.26":
   version "4.41.32"
   resolved "https://registry.yarnpkg.com/@types/webpack/-/webpack-4.41.32.tgz#a7bab03b72904070162b2f169415492209e94212"
   integrity sha512-cb+0ioil/7oz5//7tZUSwbrSAN/NWHrQylz5cW8G0dWTcF/g+/dSdMlKVZspBYuMAN1+WnwHrkxiRrLcwd0Heg==
