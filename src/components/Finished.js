@@ -115,6 +115,10 @@ const calculateScores = (duration, wordCount) =>
     ? Math.round(Math.max(wordCount - 1, 0) / (duration / 60 / 1000))
     : 0;
 
+const getWordWithSpacing = (wordWithoutSpacing, spacePlacement) => {
+    return (spacePlacement === "spaceBeforeOutput") ? " " + wordWithoutSpacing : (spacePlacement === "spaceAfterOutput") ? wordWithoutSpacing + " " : wordWithoutSpacing;
+  }
+
 class Finished extends Component {
   constructor(props) {
     super(props);
@@ -188,10 +192,6 @@ class Finished extends Component {
     }
   }
 
-  getWordWithSpacing(wordWithoutSpacing, spacePlacement) {
-    return (spacePlacement === "spaceBeforeOutput") ? " " + wordWithoutSpacing : (spacePlacement === "spaceAfterOutput") ? wordWithoutSpacing + " " : wordWithoutSpacing;
-  }
-
   render() {
     let numericAccuracy = 0;
     let accuracy = '';
@@ -221,7 +221,7 @@ class Finished extends Component {
         }
 
         const showTimesSeen = this.props.globalUserSettings?.experiments && !!this.props.globalUserSettings.experiments.timesSeen;
-        const timesSeen = this.props.metWords[this.getWordWithSpacing(phrase.word, this.props.userSettings.spacePlacement)]
+        const timesSeen = this.props.metWords[getWordWithSpacing(phrase.word, this.props.userSettings.spacePlacement)]
 
         return(
           <li key={ i } className="unstyled-list-item bg-slat p1 mb1 overflow-scroll">
