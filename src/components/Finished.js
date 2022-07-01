@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LessonCanvasFooter from '../pages/lessons/LessonCanvasFooter';
+import FinishedZeroAndEmptyStateMessage from '../pages/lessons/FinishedZeroAndEmptyState';
 import UserSettings from './UserSettings';
 import { IconRestart } from './Icon';
 import { Link } from 'react-router-dom';
@@ -350,26 +351,6 @@ class Finished extends Component {
 
     const shouldShowChart = this.state.chartData?.dataPoints?.length > 1 && this.state.chartData?.dataPoints?.length < 10000;
 
-    const getEmptyAndZeroStateMessage = (startFromWordSetting, startFromWordOneClickHandler, suggestedNextUrl) => (
-        <div className="dc">
-          <div className="text-center mt10 mx-auto">
-            <span id="js-no-words-to-write" tabIndex="-1">There are no words to write.</span>
-            {startFromWordSetting > 1 ?
-              <div className="text-center">
-                <button className="button mt3 dib" onClick={startFromWordOneClickHandler}>Start from word 1</button>
-              </div>
-              :
-              <div className="text-center">
-                {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-                <Link aria-label="Next lesson" accessKey={'o'} to={suggestedNextUrl} className="button mt3 dib" style={{lineHeight: 2}} role="button">
-                  Next less<u style={{textDecorationStyle: 'underline' }}>o</u>n
-                </Link>
-              </div>
-            }
-          </div>
-        </div>
-    );
-
     return (
       <div>
         <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
@@ -381,7 +362,7 @@ class Finished extends Component {
             <div className="mx-auto mw-1920 p3">
               <div className="lesson-canvas lesson-canvas--finished panel p3 mb3">
                 {(this.props.lessonLength === 0) ?
-                  getEmptyAndZeroStateMessage(this.props.userSettings.startFromWord, this.props.startFromWordOne, this.props.suggestedNext)
+                  <FinishedZeroAndEmptyStateMessage startFromWordSetting={this.props.userSettings.startFromWord} startFromWordOneClickHandler={this.props.startFromWordOne} suggestedNextUrl={this.props.suggestedNext} />
                   :
                   <div className="w-100">
                     <div className="finished-lesson mx-auto mw-1440">
