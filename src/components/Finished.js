@@ -295,10 +295,15 @@ class Finished extends Component {
                         </p>
                       </div>
                       <FinishedMisstrokesSummary
+                        currentLessonStrokes={this.props.currentLessonStrokes}
+                        globalUserSettings={this.props.globalUserSettings}
+                        listOfPossibleStrokeImprovements={listOfPossibleStrokeImprovements(this.props.currentLessonStrokes, this.props.globalUserSettings, this.props.metWords, this.props.userSettings, this.props.updateRevisionMaterial)}
+                        metWords={this.props.metWords}
                         path={this.props.path}
                         reviseLesson={this.props.reviseLesson}
-                        listOfPossibleStrokeImprovements={listOfPossibleStrokeImprovements(this.props.currentLessonStrokes, this.props.globalUserSettings, this.props.metWords, this.props.userSettings, this.props.updateRevisionMaterial)}
                         showMisstrokesSummary={this.props.currentLessonStrokes.length > 0}
+                        updateRevisionMaterial={this.props.updateRevisionMaterial}
+                        userSettings={this.props.userSettings}
                       />
                     </div>
                   </div>
