@@ -33,6 +33,12 @@ const isFlashcards = (pathname) =>
 const isOverview = (pathname) =>
   pathname.startsWith("/lessons/") && pathname.endsWith("/overview");
 
+const getNextLessonPath = (lesson, lessonIndex) => {
+  const lessonIndexItem = lessonIndex.find((el) => process.env.PUBLIC_URL + '/lessons' + el.path === lesson.path);
+  const suggestedNext = lessonIndexItem?.suggestedNext ? lessonIndexItem.suggestedNext : '/';
+  return '/lessons' + suggestedNext.replace(/lesson\.txt$/, '');
+}
+
 class Lesson extends Component {
   componentDidMount() {
     // If cookies are disabled, attempting to access localStorage will cause an error.
@@ -108,12 +114,6 @@ class Lesson extends Component {
 
   componentWillUnmount() {
     this.props.stopLesson()
-  }
-
-  nextLessonPath(lesson, lessonIndex) {
-    const lessonIndexItem = lessonIndex.find((el) => process.env.PUBLIC_URL + '/lessons' + el.path === lesson.path);
-    const suggestedNext = lessonIndexItem?.suggestedNext ? lessonIndexItem.suggestedNext : '/';
-    return '/lessons' + suggestedNext.replace(/lesson\.txt$/, '');
   }
 
   prefillSurveyLink() {
@@ -224,7 +224,7 @@ class Lesson extends Component {
                 hideOtherSettings={this.props.hideOtherSettings}
                 recommendationHistory={this.props.recommendationHistory}
                 setAnnouncementMessage={this.props.setAnnouncementMessage}
-                suggestedNext={this.nextLessonPath(this.props.lesson, this.props.lessonIndex)}
+                suggestedNext={getNextLessonPath(this.props.lesson, this.props.lessonIndex)}
                 lessonLength={propsLesson.presentedMaterial.length}
                 lessonTitle={this.props.lessonTitle}
                 location={this.props.location}
