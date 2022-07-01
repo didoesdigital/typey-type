@@ -6,14 +6,12 @@ import { stitchTogetherLessonData, transformLessonDataToChartData } from '../uti
 import FinishedActionButtons from '../pages/lessons/FinishedActionButtons';
 import FinishedDataViz from '../pages/lessons/FinishedDataViz';
 import FinishedMisstrokesSummary from '../pages/lessons/FinishedMisstrokesSummary';
-import * as Confetti from './../utils/confetti';
+import FinishedSummaryHeadings from '../pages/lessons/FinishedSummaryHeadings';
 import 'react-tippy/dist/tippy.css';
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
 const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
 const googleFormParam = "&entry.1202724812&entry.936119214";
-
-let particles = [];
 
 const calculateScores = (duration, wordCount) =>
   duration > 0
@@ -24,11 +22,10 @@ class Finished extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      canvasWidth: Math.floor(window.innerWidth),
-      canvasHeight: Math.floor(window.innerHeight),
       newTopSpeedPersonalBest: false,
       newTopSpeedToday: false,
-      chartData: null
+      chartData: null,
+      confettiConfig: null
     }
   }
 
@@ -45,19 +42,17 @@ class Finished extends Component {
     const thirtyStrokesOrNotRevision = (!this.props.revisionMode || this.props.currentLessonStrokes.length >= 30);
 
     if (fasterSpeedToday && minimumStrokes && minimumSpeed && thirtyStrokesOrNotRevision && fasterPersonalBest) {
-      Confetti.setupCanvas({sparsity: 17, colors: 5}, 'finished-heading', particles);
+      this.setState({confettiConfig: {sparsity: 17, colors: 5}});
       this.props.updateTopSpeedToday(wpm);
       this.props.updateTopSpeedPersonalBest(wpm);
-      Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight);
       this.setState({
         newTopSpeedPersonalBest: true,
         newTopSpeedToday: true
       });
     }
     else if (fasterSpeedToday && minimumStrokes && minimumSpeed && thirtyStrokesOrNotRevision) {
-      Confetti.setupCanvas({sparsity: 170, colors: 2}, 'finished-heading', particles);
+      this.setState({confettiConfig: {sparsity: 170, colors: 2}});
       this.props.updateTopSpeedToday(wpm);
-      Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight);
       this.setState({
         newTopSpeedPersonalBest: false,
         newTopSpeedToday: true
@@ -68,24 +63,6 @@ class Finished extends Component {
         newTopSpeedPersonalBest: false,
         newTopSpeedToday: false
       });
-    }
-
-    if (this.finishedHeading) {
-      this.finishedHeading.focus();
-    }
-  }
-
-  restartConfetti(event) {
-    if (event && ((event.keyCode && event.keyCode === 13) || event.type === "click")) {
-      particles.splice(0);
-      Confetti.cancelAnimation();
-      if (this.state.newTopSpeedToday && this.state.newTopSpeedPersonalBest) {
-        Confetti.setupCanvas({sparsity: 17, colors: 5}, 'finished-heading', particles);
-      }
-      else if (this.state.newTopSpeedToday) {
-        Confetti.setupCanvas({sparsity: 170, colors: 2}, 'finished-heading', particles);
-      }
-      Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight);
     }
   }
 
@@ -195,18 +172,11 @@ class Finished extends Component {
                   <div className="w-100">
                     <div className="finished-lesson mx-auto mw-1440">
                       <div className="finished-summary mb3 text-center">
-                        <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
-                        <h3
-                          className="negative-outline-offset dib text-center mt3"
-                          ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }}
-                          tabIndex="-1"
-                          id="finished-heading"
-                          onClick={this.restartConfetti.bind(this)}
-                          onKeyDown={this.restartConfetti.bind(this)}
-                        >
-                          {newTopSpeedSectionOrFinished}
-                        </h3>
-                        <p>{wpmCommentary}</p>
+                        <FinishedSummaryHeadings
+                          headingText={newTopSpeedSectionOrFinished}
+                          subHeadingText={wpmCommentary}
+                          confettiConfig={this.state.confettiConfig}
+                        />
                         <FinishedDataViz
                           wpm={wpm}
                           numericAccuracy={numericAccuracy}
