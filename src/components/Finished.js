@@ -351,63 +351,6 @@ class Finished extends Component {
 
     const shouldShowChart = this.state.chartData?.dataPoints?.length > 1 && this.state.chartData?.dataPoints?.length < 10000;
 
-    let lessonSummary = (
-      <div className="finished-lesson mx-auto mw-1440">
-        <div className="finished-summary mb3 text-center">
-          <h3
-            className="negative-outline-offset dib text-center mt3"
-            ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }}
-            tabIndex="-1"
-            id="finished-heading"
-            onClick={this.restartConfetti.bind(this)}
-            onKeyDown={this.restartConfetti.bind(this)}
-          >
-            {newTopSpeedSectionOrFinished}
-          </h3>
-          <p>{wpmCommentary}</p>
-          <ErrorBoundary relative={true} vanish={true}>
-            <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
-          </ErrorBoundary>
-          <ErrorBoundary relative={true} vanish={true}>
-            <a href="#next-lesson-button" onClick={skipToNextLessonButton} className="skip-to-link skip-to-link--relative" id="ga--finished--skip-chart">Skip chart</a>
-            {shouldShowChart && <AsyncFinishedSpeedChart data={this.state.chartData} />}
-            <SecondaryDisplayMetrics
-              newWords={this.props.totalNumberOfNewWordsMet}
-              seen={this.props.totalNumberOfLowExposuresSeen}
-              memorised={this.props.totalNumberOfRetainedWords}
-              hinted={this.props.totalNumberOfHintedWords}
-              misstrokes={this.props.totalNumberOfMistypedWords}
-              wordsTyped={this.props.currentLessonStrokes?.length || 0}
-              setAnnouncementMessage={this.props.setAnnouncementMessage}
-            />
-            {shouldShowChart && (
-              <details>
-                <summary className="de-emphasized">Chart notes</summary>
-                <div aria-hidden="true">
-                  <p className="text-left de-emphasized mb0"><span style={{ backgroundColor: "transparent", borderBottom: "2px solid transparent", }} role="img" aria-label=" correct" >👏</span> means you typed the phrase within the target number of strokes</p>
-                  <p className="text-left de-emphasized mb1"><span aria-label="(hinted)" role="img">ℹ️</span> means the hint was shown</p>
-                </div>
-                <p className="text-left de-emphasized" id="chart-notes">Note: The first 4 words are averaged to reduce the impact of early instabilities. Typey&nbsp;Type starts recording the instant you start typing, so instead of recording the first word at infinity words per minute, it’s set to&nbsp;zero. </p>
-              </details>
-            )}
-          </ErrorBoundary>
-          <p className="mb12">
-            {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-            <a aria-label="Restart lesson" accessKey={'s'} href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
-              <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
-              Re<u style={{textDecorationStyle: 'double' }}>s</u>tart lesson</a>
-            {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-            <Link aria-label="Next lesson" accessKey={'o'} id="next-lesson-button" to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
-              Next less<u style={{textDecorationStyle: 'underline' }}>o</u>n
-            </Link>
-          </p>
-        </div>
-        <div className="misstrokes-summary">
-          {misstrokesSummary}
-        </div>
-      </div>
-    );
-
     let lessonEmpty = false;
     if (this.props.lessonLength === 0) {
       lessonEmpty = true;
@@ -429,7 +372,6 @@ class Finished extends Component {
           </div>) }
         </div>
       );
-      lessonSummary = '';
     } else {
       lessonEmpty = false;
     }
@@ -445,7 +387,62 @@ class Finished extends Component {
               <div className="lesson-canvas lesson-canvas--finished panel p3 mb3">
                 <div className={lessonEmpty ? 'dc' : 'w-100'}>
                   {emptyAndZeroStateMessage}
-                  {lessonSummary}
+                  {!(this.props.lessonLength === 0) &&
+                    <div className="finished-lesson mx-auto mw-1440">
+                      <div className="finished-summary mb3 text-center">
+                        <h3
+                          className="negative-outline-offset dib text-center mt3"
+                          ref={(finishedHeading) => { this.finishedHeading = finishedHeading; }}
+                          tabIndex="-1"
+                          id="finished-heading"
+                          onClick={this.restartConfetti.bind(this)}
+                          onKeyDown={this.restartConfetti.bind(this)}
+                        >
+                          {newTopSpeedSectionOrFinished}
+                        </h3>
+                        <p>{wpmCommentary}</p>
+                        <ErrorBoundary relative={true} vanish={true}>
+                          <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
+                        </ErrorBoundary>
+                        <ErrorBoundary relative={true} vanish={true}>
+                          <a href="#next-lesson-button" onClick={skipToNextLessonButton} className="skip-to-link skip-to-link--relative" id="ga--finished--skip-chart">Skip chart</a>
+                          {shouldShowChart && <AsyncFinishedSpeedChart data={this.state.chartData} />}
+                          <SecondaryDisplayMetrics
+                            newWords={this.props.totalNumberOfNewWordsMet}
+                            seen={this.props.totalNumberOfLowExposuresSeen}
+                            memorised={this.props.totalNumberOfRetainedWords}
+                            hinted={this.props.totalNumberOfHintedWords}
+                            misstrokes={this.props.totalNumberOfMistypedWords}
+                            wordsTyped={this.props.currentLessonStrokes?.length || 0}
+                            setAnnouncementMessage={this.props.setAnnouncementMessage}
+                          />
+                          {shouldShowChart && (
+                            <details>
+                              <summary className="de-emphasized">Chart notes</summary>
+                              <div aria-hidden="true">
+                                <p className="text-left de-emphasized mb0"><span style={{ backgroundColor: "transparent", borderBottom: "2px solid transparent", }} role="img" aria-label=" correct" >👏</span> means you typed the phrase within the target number of strokes</p>
+                                <p className="text-left de-emphasized mb1"><span aria-label="(hinted)" role="img">ℹ️</span> means the hint was shown</p>
+                              </div>
+                              <p className="text-left de-emphasized" id="chart-notes">Note: The first 4 words are averaged to reduce the impact of early instabilities. Typey&nbsp;Type starts recording the instant you start typing, so instead of recording the first word at infinity words per minute, it’s set to&nbsp;zero. </p>
+                            </details>
+                          )}
+                        </ErrorBoundary>
+                        <p className="mb12">
+                          {/* eslint-disable-next-line jsx-a11y/no-access-key */}
+                          <a aria-label="Restart lesson" accessKey={'s'} href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
+                            <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
+                            Re<u style={{textDecorationStyle: 'double' }}>s</u>tart lesson</a>
+                          {/* eslint-disable-next-line jsx-a11y/no-access-key */}
+                          <Link aria-label="Next lesson" accessKey={'o'} id="next-lesson-button" to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
+                            Next less<u style={{textDecorationStyle: 'underline' }}>o</u>n
+                          </Link>
+                        </p>
+                      </div>
+                      <div className="misstrokes-summary">
+                        {misstrokesSummary}
+                      </div>
+                    </div>
+                  }
                 </div>
               </div>
               <LessonCanvasFooter
