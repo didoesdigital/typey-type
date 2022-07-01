@@ -7,7 +7,6 @@ import Loadable from "react-loadable";
 type FinishedDataVizProps = {
   wpm: number;
   numericAccuracy: number;
-  skipToNextLessonButton: () => void;
   chartData: any;
   totalNumberOfNewWordsMet: number;
   totalNumberOfLowExposuresSeen: number;
@@ -135,10 +134,16 @@ const SecondaryDisplayMetrics = ({
   );
 };
 
+const skipToNextLessonLinkButton = (): void => {
+  const link = document.querySelector<HTMLAnchorElement>("#next-lesson-button");
+  if (link) {
+    link.focus();
+  }
+};
+
 const FinishedDataViz = ({
   wpm,
   numericAccuracy,
-  skipToNextLessonButton,
   chartData,
   totalNumberOfNewWordsMet,
   totalNumberOfLowExposuresSeen,
@@ -148,7 +153,8 @@ const FinishedDataViz = ({
   wordsTyped,
   setAnnouncementMessage,
 }: FinishedDataVizProps) => {
-  const shouldShowChart = chartData?.dataPoints?.length > 1 && chartData?.dataPoints?.length < 10000;
+  const shouldShowChart =
+    chartData?.dataPoints?.length > 1 && chartData?.dataPoints?.length < 10000;
 
   return (
     <>
@@ -162,7 +168,7 @@ const FinishedDataViz = ({
       <ErrorBoundary relative={true} vanish={true}>
         <a
           href="#next-lesson-button"
-          onClick={skipToNextLessonButton}
+          onClick={skipToNextLessonLinkButton}
           className="skip-to-link skip-to-link--relative"
           id="ga--finished--skip-chart"
         >

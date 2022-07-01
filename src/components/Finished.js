@@ -15,14 +15,6 @@ const googleFormParam = "&entry.1202724812&entry.936119214";
 
 let particles = [];
 
-const skipToNextLessonButton = (event) => {
-  event.preventDefault();
-  const button = document.querySelector("#next-lesson-button");
-  if (button) {
-    button.focus();
-  }
-}
-
 const calculateScores = (duration, wordCount) =>
   duration > 0
     ? Math.round(Math.max(wordCount - 1, 0) / (duration / 60 / 1000))
@@ -218,7 +210,6 @@ class Finished extends Component {
                         <FinishedDataViz
                           wpm={wpm}
                           numericAccuracy={numericAccuracy}
-                          skipToNextLessonButton={skipToNextLessonButton}
                           chartData={this.state.chartData}
                           totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
                           totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
