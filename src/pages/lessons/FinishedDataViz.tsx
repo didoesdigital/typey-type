@@ -19,13 +19,33 @@ type FinishedDataVizProps = {
   setAnnouncementMessage: () => void;
 };
 
+type FinishedHeroDataProps = {
+  speed: number;
+  accuracy: number;
+  setAnnouncementMessage: () => void;
+};
+
+type SecondaryDisplayMetricsProps = {
+  newWords: number;
+  seen: number;
+  memorised: number;
+  hinted: number;
+  misstrokes: number;
+  wordsTyped: number;
+  setAnnouncementMessage: () => void;
+};
+
 const AsyncFinishedSpeedChart = Loadable({
   loader: () => import("../../components/FinishedSpeedChart"),
   loading: ComponentLoading,
   delay: 300,
 });
 
-const FinishedHeroData = ({ speed, accuracy, setAnnouncementMessage }) => {
+const FinishedHeroData = ({
+  speed,
+  accuracy,
+  setAnnouncementMessage,
+}: FinishedHeroDataProps) => {
   return (
     <div className="flex flex-wrap justify-between justify-center mx-auto mb3">
       <DisplayMetric
@@ -58,7 +78,7 @@ const SecondaryDisplayMetrics = ({
   misstrokes,
   wordsTyped,
   setAnnouncementMessage,
-}) => {
+}: SecondaryDisplayMetricsProps) => {
   return (
     <div className="flex flex-wrap justify-between justify-center mx-auto mb3">
       <DisplayMetric
