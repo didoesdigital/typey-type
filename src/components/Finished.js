@@ -23,15 +23,22 @@ class Finished extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      chartData: null,
+      confettiConfig: null,
       newTopSpeedPersonalBest: false,
       newTopSpeedToday: false,
-      chartData: null,
-      confettiConfig: null
+      numericAccuracy: 0,
+      wpm: 0
     }
   }
 
   componentDidMount() {
     const wpm = calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
+    const numericAccuracy = getNumericAccuracy(this.props.totalNumberOfMistypedWords, this.props.totalNumberOfHintedWords, this.props.currentLessonStrokes, wpm);
+    this.setState({
+      numericAccuracy,
+      wpm,
+    });
 
     const lessonData = stitchTogetherLessonData(this.props.currentLessonStrokes, this.props.startTime, wpm);
     this.setState({chartData: transformLessonDataToChartData(lessonData)})
@@ -68,9 +75,6 @@ class Finished extends Component {
   }
 
   render() {
-    const wpm = calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
-    const numericAccuracy = getNumericAccuracy(this.props.totalNumberOfMistypedWords, this.props.totalNumberOfHintedWords, this.props.currentLessonStrokes, wpm);
-
     return (
       <div>
         <div id="lesson-page" className="flex-wrap-md flex mx-auto mw-1920">
@@ -91,11 +95,11 @@ class Finished extends Component {
                           lessonTitle={this.props.lessonTitle}
                           newTopSpeedPersonalBest={this.state.newTopSpeedPersonalBest}
                           newTopSpeedToday={this.state.newTopSpeedToday}
-                          wpm={wpm}
+                          wpm={this.state.wpm}
                         />
                         <FinishedDataViz
-                          wpm={wpm}
-                          numericAccuracy={numericAccuracy}
+                          wpm={this.state.wpm}
+                          numericAccuracy={this.state.numericAccuracy}
                           chartData={this.state.chartData}
                           totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
                           totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
