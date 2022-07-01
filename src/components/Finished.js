@@ -203,14 +203,11 @@ class Finished extends Component {
   render() {
     let numericAccuracy = 0;
     let accuracy = '';
-    let currentLessonStrokes = this.props.currentLessonStrokes;
-    // console.log(currentLessonStrokes);
-
     let misstrokesSummary = '';
     let strokeAttemptsPresentation;
 
-    if (currentLessonStrokes.length > 0) {
-      let listOfPossibleStrokeImprovements = currentLessonStrokes.map( (phrase, i) => {
+    if (this.props.currentLessonStrokes.length > 0) {
+      let listOfPossibleStrokeImprovements = this.props.currentLessonStrokes.map( (phrase, i) => {
         let strokeAttempts = phrase.attempts.map( ( {text, time}, j ) => {
           return(
               <li key={ j } className="nowrap di ml1"><span className="bg-warning px1">{text}</span></li>
