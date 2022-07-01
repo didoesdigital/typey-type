@@ -298,7 +298,6 @@ class Finished extends Component {
       accuracy = '';
       numericAccuracy = 0;
     }
-    let emptyAndZeroStateMessage = '';
     const wpm = calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
     if (wpm === 0) {
       accuracy = 'Keep trying!';
@@ -371,12 +370,6 @@ class Finished extends Component {
         </div>
     );
 
-    if (this.props.lessonLength === 0) {
-      emptyAndZeroStateMessage = (
-        getEmptyAndZeroStateMessage(this.props.userSettings.startFromWord, this.props.startFromWordOne, this.props.suggestedNext)
-      );
-    }
-
     return (
       <div>
         <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
@@ -387,8 +380,9 @@ class Finished extends Component {
             </div>
             <div className="mx-auto mw-1920 p3">
               <div className="lesson-canvas lesson-canvas--finished panel p3 mb3">
-                {emptyAndZeroStateMessage}
-                {!(this.props.lessonLength === 0) &&
+                {(this.props.lessonLength === 0) ?
+                  getEmptyAndZeroStateMessage(this.props.userSettings.startFromWord, this.props.startFromWordOne, this.props.suggestedNext)
+                  :
                   <div className="w-100">
                     <div className="finished-lesson mx-auto mw-1440">
                       <div className="finished-summary mb3 text-center">
