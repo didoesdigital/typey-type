@@ -110,6 +110,11 @@ const SecondaryDisplayMetrics = ({
   );
 };
 
+const calculateScores = (duration, wordCount) =>
+  duration > 0
+    ? Math.round(Math.max(wordCount - 1, 0) / (duration / 60 / 1000))
+    : 0;
+
 class Finished extends Component {
   constructor(props) {
     super(props);
@@ -123,7 +128,7 @@ class Finished extends Component {
   }
 
   componentDidMount() {
-    const wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
+    const wpm = calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
 
     const lessonData = stitchTogetherLessonData(this.props.currentLessonStrokes, this.props.startTime, wpm);
     this.setState({chartData: transformLessonDataToChartData(lessonData)})
@@ -167,10 +172,6 @@ class Finished extends Component {
 
   isEmpty() {
     return (this.props.lessonLength === 0);
-  }
-
-  calculateScores(timer, totalNumberOfMatchedWords) {
-    return (timer > 0) ? Math.round(Math.max(totalNumberOfMatchedWords - 1, 0)/(timer/60/1000)) : 0;
   }
 
   restartConfetti(event) {
@@ -311,7 +312,7 @@ class Finished extends Component {
       numericAccuracy = 0;
     }
     let emptyAndZeroStateMessage = '';
-    const wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
+    const wpm = calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
     if (wpm === 0) {
       accuracy = 'Keep trying!';
       numericAccuracy = 0;
