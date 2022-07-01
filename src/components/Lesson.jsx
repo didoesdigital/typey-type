@@ -21,6 +21,10 @@ import AussieDictPrompt from './LessonPrompts/AussieDictPrompt';
 import SedSaidPrompt from './LessonPrompts/SedSaidPrompt';
 import WordBoundaryErrorPrompt from './LessonPrompts/WordBoundaryErrorPrompt';
 
+// fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
+const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
+const googleFormParam = "&entry.1202724812&entry.936119214";
+
 const isCustom = (pathname) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
 
@@ -114,16 +118,6 @@ class Lesson extends Component {
 
   componentWillUnmount() {
     this.props.stopLesson()
-  }
-
-  prefillSurveyLink() {
-    // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
-    const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
-    const param = "&entry.1202724812&entry.936119214";
-    const prefillLesson = this.props.location?.pathname || '';
-    if (this.surveyLink) {
-      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param;
-    }
   }
 
   render() {
@@ -411,7 +405,7 @@ class Lesson extends Component {
                             userSettings={this.props.userSettings}
                           />
                         </div>
-                        <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
+                        <p className="text-center"><a href={googleFormURL + encodeURIComponent(this.props.location?.pathname || '') + googleFormParam} className="text-small mt0" target="_blank" rel="noopener noreferrer" id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
                       </div>
                     </div>
                     <div>
