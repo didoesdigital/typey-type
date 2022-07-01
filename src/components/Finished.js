@@ -351,9 +351,7 @@ class Finished extends Component {
 
     const shouldShowChart = this.state.chartData?.dataPoints?.length > 1 && this.state.chartData?.dataPoints?.length < 10000;
 
-    let lessonEmpty = false;
     if (this.props.lessonLength === 0) {
-      lessonEmpty = true;
       const startFromWordOneButton = (this.props.userSettings.startFromWord > 1) ? (
         <div className="text-center">
           <button className="button mt3 dib" onClick={this.props.startFromWordOne}>Start from word 1</button>
@@ -384,7 +382,7 @@ class Finished extends Component {
             </div>
             <div className="mx-auto mw-1920 p3">
               <div className="lesson-canvas lesson-canvas--finished panel p3 mb3">
-                <div className={lessonEmpty ? 'dc' : 'w-100'}>
+                <div className={this.props.lessonLength === 0 ? 'dc' : 'w-100'}>
                   {emptyAndZeroStateMessage}
                   {!(this.props.lessonLength === 0) &&
                     <div className="finished-lesson mx-auto mw-1440">
