@@ -156,7 +156,7 @@ class Finished extends Component {
       });
 
       misstrokesSummary = (path, reviseLesson, listOfPossibleStrokeImprovements) => (
-        <React.Fragment>
+        <div className="misstrokes-summary">
           <div>
             <h4 className="mt3 nowrap">Possible stroke improvements</h4>
             <p>
@@ -170,7 +170,7 @@ class Finished extends Component {
             <a href={path} onClick={reviseLesson} role="button">
               Revise these words</a>
           </p>
-        </React.Fragment>
+        </div>
       );
     }
 
@@ -313,9 +313,7 @@ class Finished extends Component {
                           </Link>
                         </p>
                       </div>
-                      <div className="misstrokes-summary">
-                        {misstrokesSummary(this.props.path, this.props.reviseLesson, listOfPossibleStrokeImprovements)}
-                      </div>
+                      {misstrokesSummary(this.props.path, this.props.reviseLesson, listOfPossibleStrokeImprovements)}
                     </div>
                   </div>
                 }
