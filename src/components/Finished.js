@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import LessonCanvasFooter from '../pages/lessons/LessonCanvasFooter';
 import FinishedZeroAndEmptyStateMessage from '../pages/lessons/FinishedZeroAndEmptyState';
 import UserSettings from './UserSettings';
-import { IconRestart } from './Icon';
-import { Link } from 'react-router-dom';
-import { stitchTogetherLessonData, transformLessonDataToChartData } from '../utils/transformingFinishedData'
+import { stitchTogetherLessonData, transformLessonDataToChartData } from '../utils/transformingFinishedData';
+import FinishedActionButtons from '../pages/lessons/FinishedActionButtons';
 import FinishedDataViz from '../pages/lessons/FinishedDataViz';
 import FinishedMisstrokesSummary from '../pages/lessons/FinishedMisstrokesSummary';
 import * as Confetti from './../utils/confetti';
-import 'react-tippy/dist/tippy.css'
+import 'react-tippy/dist/tippy.css';
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
 const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
@@ -229,16 +228,11 @@ class Finished extends Component {
                           wordsTyped={this.props.currentLessonStrokes?.length || 0}
                           setAnnouncementMessage={this.props.setAnnouncementMessage}
                         />
-                        <p className="mb12">
-                          {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-                          <a aria-label="Restart lesson" accessKey={'s'} href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
-                            <IconRestart ariaHidden="true" role="presentation" iconFill="#596091" className="mr1 svg-icon-wrapper svg-baseline" />
-                            Re<u style={{textDecorationStyle: 'double' }}>s</u>tart lesson</a>
-                          {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-                          <Link aria-label="Next lesson" accessKey={'o'} id="next-lesson-button" to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
-                            Next less<u style={{textDecorationLine: 'underline' }}>o</u>n
-                          </Link>
-                        </p>
+                        <FinishedActionButtons
+                          restartPath={process.env.PUBLIC_URL + this.props.path}
+                          restartLesson={this.props.restartLesson}
+                          suggestedNextUrl={this.props.suggestedNext}
+                        />
                       </div>
                       <FinishedMisstrokesSummary
                         currentLessonStrokes={this.props.currentLessonStrokes}
