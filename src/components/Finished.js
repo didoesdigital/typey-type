@@ -7,6 +7,7 @@ import FinishedActionButtons from '../pages/lessons/FinishedActionButtons';
 import FinishedDataViz from '../pages/lessons/FinishedDataViz';
 import FinishedMisstrokesSummary from '../pages/lessons/FinishedMisstrokesSummary';
 import FinishedSummaryHeadings from '../pages/lessons/FinishedSummaryHeadings';
+import getNumericAccuracy from '../pages/lessons/getNumericAccuracy';
 import 'react-tippy/dist/tippy.css';
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
@@ -67,32 +68,8 @@ class Finished extends Component {
   }
 
   render() {
-    let numericAccuracy = 0;
-    if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
-      numericAccuracy = 100;
-    }
-    else if (this.props.totalNumberOfMistypedWords > 0) {
-      // Test for stopping the lesson before the end
-      let accuracyPercent;
-      if (this.props.currentLessonStrokes && this.props.currentLessonStrokes.length > 0) { // avoid division by zero
-        accuracyPercent = (1 - ((this.props.totalNumberOfMistypedWords) / this.props.currentLessonStrokes.length)) * 100;
-      } else { // this should never happen because first `if` code path handles zero state
-        accuracyPercent = 100.0;
-      }
-      let accuracyPercentRoundedToTwoDecimalPlaces = (Math.floor(accuracyPercent * 100) / 100);
-      numericAccuracy = accuracyPercentRoundedToTwoDecimalPlaces;
-    }
-    else if (this.props.totalNumberOfHintedWords >= 1) {
-      numericAccuracy = 100;
-    }
-    else {
-      numericAccuracy = 0;
-    }
-
     const wpm = calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
-    if (wpm === 0) {
-      numericAccuracy = 0;
-    }
+    const numericAccuracy = getNumericAccuracy(this.props.totalNumberOfMistypedWords, this.props.totalNumberOfHintedWords, this.props.currentLessonStrokes, wpm);
 
     return (
       <div>
