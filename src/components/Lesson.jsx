@@ -227,7 +227,6 @@ class Lesson extends Component {
                 location={this.props.location}
                 metWords={this.props.metWords}
                 path={this.props.path}
-                prefillSurveyLink={this.prefillSurveyLink}
                 restartLesson={this.props.restartLesson}
                 reviseLesson={this.props.reviseLesson}
                 settings={this.props.lesson.settings}
