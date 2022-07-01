@@ -118,12 +118,9 @@ class Lesson extends Component {
 
   prefillSurveyLink() {
     // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
-    let googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
-    let param = "&entry.1202724812&entry.936119214";
-    let prefillLesson = '';
-    if (this.props.location && this.props.location.pathname) {
-      prefillLesson = this.props.location.pathname;
-    }
+    const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
+    const param = "&entry.1202724812&entry.936119214";
+    const prefillLesson = this.props.location?.pathname || '';
     if (this.surveyLink) {
       this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param;
     }
