@@ -982,19 +982,6 @@ input:focus::placeholder {
   max-height: initial;
 }
 
-// .finished-lesson {
-  // display: grid;
-  // grid-gap: 24px;
-  // justify-content: space-between;
-  // margin: 0 auto;
-  // .finished-summary {
-  //   grid-column: 1;
-  // }
-  // .misstrokes-summary {
-  //   grid-column: 2;
-  // }
-// }
-
 .panel {
   background-color: #fff;
   border: 1px solid add-tint($brand-primary, 60%);
