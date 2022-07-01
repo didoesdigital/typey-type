@@ -309,9 +309,12 @@ class Lesson extends Component {
                   <div id="lesson-page" className="flex-wrap-md flex mx-auto mw-1920">
                     <div id="main-lesson-area" className="flex-grow mx-auto mw-1440 min-w-0">
                       <div>
-                        <div className="mx-auto mw-1920">
-                          {this.props.settings?.customMessage && <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>}
-                        </div>
+                        {this.props.settings?.customMessage && (
+                          <div className="mx-auto mw-1920">
+                            <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>
+                          </div>
+                          )
+                        }
                         <div className="mx-auto mw-1920 p3">
                           <button onClick={this.props.changeShowScoresWhileTyping} className={"de-emphasized-button show-scores-control absolute mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'show-scores-control--hidden' : 'show-scores-control--shown')}>Show scores</button>
                           <AnimateHeight
