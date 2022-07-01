@@ -353,6 +353,7 @@ class Finished extends Component {
 
     if (this.props.lessonLength === 0) {
       emptyAndZeroStateMessage = (
+      <div className="dc">
         <div className="text-center mt10 mx-auto">
           <span id="js-no-words-to-write" tabIndex="-1">There are no words to write.</span>
           {this.props.userSettings.startFromWord > 1 ?
@@ -368,6 +369,7 @@ class Finished extends Component {
             </div>
           }
         </div>
+      </div>
       );
     }
 
@@ -381,9 +383,9 @@ class Finished extends Component {
             </div>
             <div className="mx-auto mw-1920 p3">
               <div className="lesson-canvas lesson-canvas--finished panel p3 mb3">
-                <div className={this.props.lessonLength === 0 ? 'dc' : 'w-100'}>
-                  {emptyAndZeroStateMessage}
-                  {!(this.props.lessonLength === 0) &&
+                {emptyAndZeroStateMessage}
+                {!(this.props.lessonLength === 0) &&
+                  <div className="w-100">
                     <div className="finished-lesson mx-auto mw-1440">
                       <div className="finished-summary mb3 text-center">
                         <h3
@@ -438,8 +440,8 @@ class Finished extends Component {
                         {misstrokesSummary}
                       </div>
                     </div>
-                  }
-                </div>
+                  </div>
+                }
               </div>
               <LessonCanvasFooter
                 chooseStudy={this.props.chooseStudy}
