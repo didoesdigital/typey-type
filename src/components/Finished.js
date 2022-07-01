@@ -108,10 +108,9 @@ class Finished extends Component {
   render() {
     let numericAccuracy = 0;
     let accuracy = '';
-    let strokeAttemptsPresentation;
-
     const listOfPossibleStrokeImprovements = (currentLessonStrokes, globalUserSettings, metWords, userSettings, updateRevisionMaterial) => (currentLessonStrokes.length > 0) ?
       currentLessonStrokes.map((phrase, i) => {
+        let strokeAttemptsPresentation;
         let strokeAttempts = phrase.attempts.map( ( {text, time}, j ) => {
           return(
               <li key={ j } className="nowrap di ml1"><span className="bg-warning px1">{text}</span></li>
