@@ -123,16 +123,16 @@ class Finished extends Component {
   }
 
   componentDidMount() {
-    let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
+    const wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
 
     const lessonData = stitchTogetherLessonData(this.props.currentLessonStrokes, this.props.startTime, wpm);
     this.setState({chartData: transformLessonDataToChartData(lessonData)})
 
-    let fasterSpeedToday = wpm > this.props.topSpeedToday;
-    let fasterPersonalBest = wpm > this.props.topSpeedPersonalBest;
-    let minimumStrokes = this.props.currentLessonStrokes.length > 3;
-    let minimumSpeed = wpm > 3;
-    let thirtyStrokesOrNotRevision = (!this.props.revisionMode || this.props.currentLessonStrokes.length >= 30);
+    const fasterSpeedToday = wpm > this.props.topSpeedToday;
+    const fasterPersonalBest = wpm > this.props.topSpeedPersonalBest;
+    const minimumStrokes = this.props.currentLessonStrokes.length > 3;
+    const minimumSpeed = wpm > 3;
+    const thirtyStrokesOrNotRevision = (!this.props.revisionMode || this.props.currentLessonStrokes.length >= 30);
 
     if (fasterSpeedToday && minimumStrokes && minimumSpeed && thirtyStrokesOrNotRevision && fasterPersonalBest) {
       Confetti.setupCanvas({sparsity: 17, colors: 5}, 'finished-heading', particles);
@@ -170,13 +170,7 @@ class Finished extends Component {
   }
 
   calculateScores(timer, totalNumberOfMatchedWords) {
-    let wordsPerMinute;
-    if (this.props.timer > 0) {
-      wordsPerMinute = Math.round(Math.max(totalNumberOfMatchedWords - 1, 0)/(timer/60/1000));
-    } else {
-      wordsPerMinute = 0;
-    }
-    return wordsPerMinute;
+    return (this.props.timer > 0) ? Math.round(Math.max(totalNumberOfMatchedWords - 1, 0)/(timer/60/1000)) : 0;
   }
 
   restartConfetti(event) {
@@ -317,7 +311,7 @@ class Finished extends Component {
       numericAccuracy = 0;
     }
     let emptyAndZeroStateMessage = '';
-    let wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
+    const wpm = this.calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
     if (wpm === 0) {
       accuracy = 'Keep trying!';
       numericAccuracy = 0;
