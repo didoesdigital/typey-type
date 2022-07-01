@@ -140,14 +140,6 @@ class Lesson extends Component {
     lessonMetadata = this.props.lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === this.props.lesson.path);
     overviewLink = lessonMetadata && lessonMetadata['overview'] ? <Link to={this.props.location.pathname + 'overview'} className="link-button link-button-ghost table-cell">Overview</Link> : ''
 
-    let revisionModeButton;
-    if (this.props.revisionMode) {
-      revisionModeButton = (
-        <div><Link to={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="revision-mode-button no-underline absolute right-0">Revision mode<IconClosingCross role="img" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="Exit revision mode" />
-        </Link></div>
-      );
-    }
-
     let propsLesson = this.props.lesson;
     if ((Object.keys(propsLesson).length === 0 && propsLesson.constructor === Object) || !propsLesson) {
       propsLesson = {
@@ -333,7 +325,7 @@ class Lesson extends Component {
                             </div>
                           </AnimateHeight>
                           <div role="article" className="lesson-canvas panel mx-auto mw-1440 p2 mb3 flex">
-                            {revisionModeButton}
+                            {this.props.revisionMode && <div><Link to={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="revision-mode-button no-underline absolute right-0">Revision mode<IconClosingCross role="img" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="Exit revision mode" /></Link></div>}
                             <div className="mx-auto mw100 mt10 min-width70 material-typed-text-and-hint flex-grow">
                               <Material
                                 actualText={this.props.actualText}
