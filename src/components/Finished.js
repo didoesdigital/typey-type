@@ -115,9 +115,12 @@ const calculateScores = (duration, wordCount) =>
     ? Math.round(Math.max(wordCount - 1, 0) / (duration / 60 / 1000))
     : 0;
 
-const getWordWithSpacing = (wordWithoutSpacing, spacePlacement) => {
-    return (spacePlacement === "spaceBeforeOutput") ? " " + wordWithoutSpacing : (spacePlacement === "spaceAfterOutput") ? wordWithoutSpacing + " " : wordWithoutSpacing;
-  }
+const getWordWithSpacing = (wordWithoutSpacing, spacePlacement) =>
+  spacePlacement === "spaceBeforeOutput"
+    ? " " + wordWithoutSpacing
+    : spacePlacement === "spaceAfterOutput"
+    ? wordWithoutSpacing + " "
+    : wordWithoutSpacing;
 
 class Finished extends Component {
   constructor(props) {
