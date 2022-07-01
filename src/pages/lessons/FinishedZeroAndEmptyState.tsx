@@ -38,7 +38,7 @@ const FinishedZeroAndEmptyState = ({
               style={{ lineHeight: 2 }}
               role="button"
             >
-              Next less<u>o</u>n
+              Next less<u style={{textDecorationLine: 'underline' }}>o</u>n
             </Link>
           </div>
         )}

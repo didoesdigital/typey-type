@@ -411,7 +411,7 @@ class Finished extends Component {
                             Re<u style={{textDecorationStyle: 'double' }}>s</u>tart lesson</a>
                           {/* eslint-disable-next-line jsx-a11y/no-access-key */}
                           <Link aria-label="Next lesson" accessKey={'o'} id="next-lesson-button" to={this.props.suggestedNext} className="link-button dib negative-outline-offset" style={{lineHeight: 2}} role="button">
-                            Next less<u style={{textDecorationStyle: 'underline' }}>o</u>n
+                            Next less<u style={{textDecorationLine: 'underline' }}>o</u>n
                           </Link>
                         </p>
                       </div>
