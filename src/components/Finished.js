@@ -351,22 +351,22 @@ class Finished extends Component {
 
     const shouldShowChart = this.state.chartData?.dataPoints?.length > 1 && this.state.chartData?.dataPoints?.length < 10000;
 
-    const finishedDataViz = (
+    const finishedDataViz = (wpm, numericAccuracy, skipToNextLessonButton, chartData, totalNumberOfNewWordsMet, totalNumberOfLowExposuresSeen, totalNumberOfRetainedWords, totalNumberOfHintedWords, totalNumberOfMistypedWords, wordsTyped, shouldShowChart, setAnnouncementMessage) => (
       <>
         <ErrorBoundary relative={true} vanish={true}>
           <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
         </ErrorBoundary>
         <ErrorBoundary relative={true} vanish={true}>
           <a href="#next-lesson-button" onClick={skipToNextLessonButton} className="skip-to-link skip-to-link--relative" id="ga--finished--skip-chart">Skip chart</a>
-          {shouldShowChart && <AsyncFinishedSpeedChart data={this.state.chartData} />}
+          {shouldShowChart && <AsyncFinishedSpeedChart data={chartData} />}
           <SecondaryDisplayMetrics
-            newWords={this.props.totalNumberOfNewWordsMet}
-            seen={this.props.totalNumberOfLowExposuresSeen}
-            memorised={this.props.totalNumberOfRetainedWords}
-            hinted={this.props.totalNumberOfHintedWords}
-            misstrokes={this.props.totalNumberOfMistypedWords}
-            wordsTyped={this.props.currentLessonStrokes?.length || 0}
-            setAnnouncementMessage={this.props.setAnnouncementMessage}
+            newWords={totalNumberOfNewWordsMet}
+            seen={totalNumberOfLowExposuresSeen}
+            memorised={totalNumberOfRetainedWords}
+            hinted={totalNumberOfHintedWords}
+            misstrokes={totalNumberOfMistypedWords}
+            wordsTyped={wordsTyped}
+            setAnnouncementMessage={setAnnouncementMessage}
           />
           {shouldShowChart && (
             <details>
@@ -409,7 +409,7 @@ class Finished extends Component {
                           {newTopSpeedSectionOrFinished}
                         </h3>
                         <p>{wpmCommentary}</p>
-                        {finishedDataViz}
+                        {finishedDataViz(wpm, numericAccuracy, skipToNextLessonButton, this.state.chartData, this.props.totalNumberOfNewWordsMet, this.props.totalNumberOfLowExposuresSeen, this.props.totalNumberOfRetainedWords, this.props.totalNumberOfHintedWords, this.props.totalNumberOfMistypedWords, this.props.currentLessonStrokes?.length || 0, shouldShowChart, this.props.setAnnouncementMessage)}
                         <p className="mb12">
                           {/* eslint-disable-next-line jsx-a11y/no-access-key */}
                           <a aria-label="Restart lesson" accessKey={'s'} href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
