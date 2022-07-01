@@ -110,11 +110,11 @@ class Lesson extends Component {
     this.props.stopLesson()
   }
 
-  nextLessonPath() {
-    let thisLesson = this.props.lesson.path;
+  nextLessonPath(lesson, lessonIndex) {
+    let thisLesson = lesson.path;
     let suggestedNext = "/";
     let match = (el) => process.env.PUBLIC_URL + '/lessons' + el.path === thisLesson;
-    let lessonIndexItem = this.props.lessonIndex.find(match);
+    let lessonIndexItem = lessonIndex.find(match);
     if (lessonIndexItem !== undefined) {
       if (lessonIndexItem.hasOwnProperty("suggestedNext")){
         suggestedNext = lessonIndexItem.suggestedNext;
@@ -232,7 +232,7 @@ class Lesson extends Component {
                 hideOtherSettings={this.props.hideOtherSettings}
                 recommendationHistory={this.props.recommendationHistory}
                 setAnnouncementMessage={this.props.setAnnouncementMessage}
-                suggestedNext={this.nextLessonPath()}
+                suggestedNext={this.nextLessonPath(this.props.lesson, this.props.lessonIndex)}
                 lessonLength={propsLesson.presentedMaterial.length}
                 lessonTitle={this.props.lessonTitle}
                 location={this.props.location}
