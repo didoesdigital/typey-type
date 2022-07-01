@@ -170,7 +170,7 @@ class Finished extends Component {
   }
 
   calculateScores(timer, totalNumberOfMatchedWords) {
-    return (this.props.timer > 0) ? Math.round(Math.max(totalNumberOfMatchedWords - 1, 0)/(timer/60/1000)) : 0;
+    return (timer > 0) ? Math.round(Math.max(totalNumberOfMatchedWords - 1, 0)/(timer/60/1000)) : 0;
   }
 
   restartConfetti(event) {
