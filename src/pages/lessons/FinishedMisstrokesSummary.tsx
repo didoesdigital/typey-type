@@ -18,7 +18,7 @@ const getWordWithSpacing = (wordWithoutSpacing, spacePlacement) =>
     ? wordWithoutSpacing + " "
     : wordWithoutSpacing;
 
-const listOfPossibleStrokeImprovements = (currentLessonStrokes, globalUserSettings, metWords, userSettings, updateRevisionMaterial) => (currentLessonStrokes.length > 0) ?
+const ListOfPossibleStrokeImprovements = ({currentLessonStrokes, globalUserSettings, metWords, userSettings, updateRevisionMaterial}) => (currentLessonStrokes.length > 0) ?
   currentLessonStrokes.map((phrase, i) => {
     let strokeAttemptsPresentation;
     let strokeAttempts = phrase.attempts.map( ( {text, time}, j ) => {
@@ -92,7 +92,7 @@ const FinishedMisstrokesSummary = ({
           </a>
         </p>
         <ol className="mb0 unstyled-list">
-          {listOfPossibleStrokeImprovements(currentLessonStrokes, globalUserSettings, metWords, userSettings, updateRevisionMaterial)}
+          <ListOfPossibleStrokeImprovements currentLessonStrokes={currentLessonStrokes} globalUserSettings={globalUserSettings} metWords={metWords} userSettings={userSettings} updateRevisionMaterial={updateRevisionMaterial} />
         </ol>
       </div>
       <p>
