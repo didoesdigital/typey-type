@@ -110,8 +110,8 @@ class Finished extends Component {
     let accuracy = '';
     let strokeAttemptsPresentation;
 
-    const listOfPossibleStrokeImprovements = (this.props.currentLessonStrokes.length > 0) ?
-      this.props.currentLessonStrokes.map((phrase, i) => {
+    const listOfPossibleStrokeImprovements = (currentLessonStrokes, globalUserSettings, metWords, userSettings, updateRevisionMaterial) => (currentLessonStrokes.length > 0) ?
+      currentLessonStrokes.map((phrase, i) => {
         let strokeAttempts = phrase.attempts.map( ( {text, time}, j ) => {
           return(
               <li key={ j } className="nowrap di ml1"><span className="bg-warning px1">{text}</span></li>
@@ -132,8 +132,8 @@ class Finished extends Component {
           strokeAttemptsPresentation = [];
         }
 
-        const showTimesSeen = this.props.globalUserSettings?.experiments && !!this.props.globalUserSettings.experiments.timesSeen;
-        const timesSeen = this.props.metWords[getWordWithSpacing(phrase.word, this.props.userSettings.spacePlacement)]
+        const showTimesSeen = globalUserSettings?.experiments && !!globalUserSettings.experiments.timesSeen;
+        const timesSeen = metWords[getWordWithSpacing(phrase.word, userSettings.spacePlacement)]
 
         return(
           <li key={ i } className="unstyled-list-item bg-slat p1 mb1 overflow-scroll">
@@ -143,8 +143,8 @@ class Finished extends Component {
                 type="checkbox"
                 name={ i + "-checkbox" }
                 id={ i + "-checkbox" }
-                checked={this.props.currentLessonStrokes[i].checked}
-                onChange={this.props.updateRevisionMaterial}
+                checked={currentLessonStrokes[i].checked}
+                onChange={updateRevisionMaterial}
                 />
               <span className="matched steno-material px1 nowrap">{phrase.word}</span>{showTimesSeen && timesSeen && <><span className="visually-hidden">. Times seen: </span><span className="nowrap px1">{timesSeen}</span></>}
             </label>
@@ -154,7 +154,7 @@ class Finished extends Component {
         );
       })
       :
-      undefined;
+      () => null;
 
     if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
       accuracy = '100% accurate!';
@@ -298,7 +298,7 @@ class Finished extends Component {
                       <FinishedMisstrokesSummary
                         path={this.props.path}
                         reviseLesson={this.props.reviseLesson}
-                        listOfPossibleStrokeImprovements={listOfPossibleStrokeImprovements}
+                        listOfPossibleStrokeImprovements={listOfPossibleStrokeImprovements(this.props.currentLessonStrokes, this.props.globalUserSettings, this.props.metWords, this.props.userSettings, this.props.updateRevisionMaterial)}
                         showMisstrokesSummary={this.props.currentLessonStrokes.length > 0}
                       />
                     </div>
