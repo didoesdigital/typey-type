@@ -68,18 +68,10 @@ class Finished extends Component {
 
   render() {
     let numericAccuracy = 0;
-    let accuracy = '';
     if (this.props.totalNumberOfMistypedWords === 0 && this.props.totalNumberOfHintedWords === 0) {
-      accuracy = '100% accurate!';
       numericAccuracy = 100;
     }
     else if (this.props.totalNumberOfMistypedWords > 0) {
-      // console.log("this.props.totalNumberOfNewWordsMet" + this.props.totalNumberOfNewWordsMet);
-      // console.log("this.props.totalNumberOfLowExposuresSeen" + this.props.totalNumberOfLowExposuresSeen);
-      // console.log("this.props.totalNumberOfRetainedWords" + this.props.totalNumberOfRetainedWords);
-      // console.log("this.props.totalNumberOfHintedWords" + this.props.totalNumberOfHintedWords);
-      // console.log("this.props.totalNumberOfMistypedWords" + this.props.totalNumberOfMistypedWords);
-      //
       // Test for stopping the lesson before the end
       let accuracyPercent;
       if (this.props.currentLessonStrokes && this.props.currentLessonStrokes.length > 0) { // avoid division by zero
@@ -87,29 +79,18 @@ class Finished extends Component {
       } else { // this should never happen because first `if` code path handles zero state
         accuracyPercent = 100.0;
       }
-      // console.log("Accuracy percent: " + accuracyPercent);
       let accuracyPercentRoundedToTwoDecimalPlaces = (Math.floor(accuracyPercent * 100) / 100);
-      // console.log("Accuracy percent rounded: " + accuracyPercentRoundedToTwoDecimalPlaces);
-      accuracy = '' + accuracyPercentRoundedToTwoDecimalPlaces + '% accuracy';
       numericAccuracy = accuracyPercentRoundedToTwoDecimalPlaces;
     }
     else if (this.props.totalNumberOfHintedWords >= 1) {
-      accuracy = accuracy + '100% accurate! ';
       numericAccuracy = 100;
     }
     else {
-      accuracy = ' Keep it up!';
       numericAccuracy = 0;
     }
 
-    // When you have stroked nothing right, except hinted or misstroked words, show nothing instead of 0%
-    if (accuracy === '0% accuracy!') {
-      accuracy = '';
-      numericAccuracy = 0;
-    }
     const wpm = calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
     if (wpm === 0) {
-      accuracy = 'Keep trying!';
       numericAccuracy = 0;
     }
 
