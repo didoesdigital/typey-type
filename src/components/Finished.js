@@ -372,9 +372,8 @@ class Finished extends Component {
           </div>) }
         </div>
       );
-    } else {
-      lessonEmpty = false;
     }
+
     return (
       <div>
         <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
