@@ -110,8 +110,9 @@ class Finished extends Component {
     let misstrokesSummary = () => undefined;
     let strokeAttemptsPresentation;
 
+    let listOfPossibleStrokeImprovements = undefined;
     if (this.props.currentLessonStrokes.length > 0) {
-      let listOfPossibleStrokeImprovements = this.props.currentLessonStrokes.map( (phrase, i) => {
+      listOfPossibleStrokeImprovements = this.props.currentLessonStrokes.map( (phrase, i) => {
         let strokeAttempts = phrase.attempts.map( ( {text, time}, j ) => {
           return(
               <li key={ j } className="nowrap di ml1"><span className="bg-warning px1">{text}</span></li>
@@ -154,19 +155,19 @@ class Finished extends Component {
         );
       });
 
-      misstrokesSummary = () => (
+      misstrokesSummary = (path, reviseLesson, listOfPossibleStrokeImprovements) => (
         <React.Fragment>
           <div>
             <h4 className="mt3 nowrap">Possible stroke improvements</h4>
             <p>
               {/* eslint-disable-next-line jsx-a11y/no-access-key */}
-              <a aria-label="Revise these words" accessKey={'r'} href={this.props.path} onClick={this.props.reviseLesson} role="button">
+              <a aria-label="Revise these words" accessKey={'r'} href={path} onClick={reviseLesson} role="button">
                 <u style={{textDecorationStyle: 'double' }}>R</u>evise these words</a>
             </p>
             <ol className="mb0 unstyled-list">{listOfPossibleStrokeImprovements}</ol>
           </div>
           <p>
-            <a href={this.props.path} onClick={this.props.reviseLesson} role="button">
+            <a href={path} onClick={reviseLesson} role="button">
               Revise these words</a>
           </p>
         </React.Fragment>
@@ -313,7 +314,7 @@ class Finished extends Component {
                         </p>
                       </div>
                       <div className="misstrokes-summary">
-                        {misstrokesSummary()}
+                        {misstrokesSummary(this.props.path, this.props.reviseLesson, listOfPossibleStrokeImprovements)}
                       </div>
                     </div>
                   </div>
