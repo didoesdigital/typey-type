@@ -261,8 +261,6 @@ class Finished extends Component {
       wpmCommentary = this.props.lessonTitle;
     }
 
-    const shouldShowChart = this.state.chartData?.dataPoints?.length > 1 && this.state.chartData?.dataPoints?.length < 10000;
-
     return (
       <div>
         <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
@@ -301,7 +299,6 @@ class Finished extends Component {
                           totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
                           totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
                           wordsTyped={this.props.currentLessonStrokes?.length || 0}
-                          shouldShowChart={shouldShowChart}
                           setAnnouncementMessage={this.props.setAnnouncementMessage}
                         />
                         <p className="mb12">

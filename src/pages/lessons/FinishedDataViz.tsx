@@ -146,9 +146,10 @@ const FinishedDataViz = ({
   totalNumberOfHintedWords,
   totalNumberOfMistypedWords,
   wordsTyped,
-  shouldShowChart,
   setAnnouncementMessage,
 }: FinishedDataVizProps) => {
+  const shouldShowChart = chartData?.dataPoints?.length > 1 && chartData?.dataPoints?.length < 10000;
+
   return (
     <>
       <ErrorBoundary relative={true} vanish={true}>
