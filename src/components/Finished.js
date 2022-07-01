@@ -5,22 +5,13 @@ import UserSettings from './UserSettings';
 import { IconRestart } from './Icon';
 import { Link } from 'react-router-dom';
 import { stitchTogetherLessonData, transformLessonDataToChartData } from '../utils/transformingFinishedData'
-import ComponentLoading from './ComponentLoading';
-import Loadable from 'react-loadable';
-import DisplayMetric from './DisplayMetric'
-import ErrorBoundary from './ErrorBoundary'
+import FinishedDataViz from '../pages/lessons/FinishedDataViz';
 import * as Confetti from './../utils/confetti';
 import 'react-tippy/dist/tippy.css'
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
 const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
 const googleFormParam = "&entry.1202724812&entry.936119214";
-
-const AsyncFinishedSpeedChart = Loadable({
-  loader: () => import("./FinishedSpeedChart"),
-  loading: ComponentLoading,
-  delay: 300
-});
 
 let particles = [];
 
@@ -31,85 +22,6 @@ const skipToNextLessonButton = (event) => {
     button.focus();
   }
 }
-
-const FinishedHeroData = ({ speed, accuracy, setAnnouncementMessage }) => {
-  return (
-    <div className="flex flex-wrap justify-between justify-center mx-auto mb3">
-      <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
-        size={"L"}
-        value={speed}
-        label={"Words per minute"}
-        tooltipMessage={"Assuming a word is 5 characters"}
-      />
-      <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
-        size={"L"}
-        value={accuracy}
-        valueSuffix={"%"}
-        label={"Accuracy"}
-        tooltipMessage={"Assuming accurate words are typed within stroke count targets"}
-      />
-    </div>
-  );
-};
-
-const SecondaryDisplayMetrics = ({
-  newWords,
-  seen,
-  memorised,
-  hinted,
-  misstrokes,
-  wordsTyped,
-  setAnnouncementMessage
-}) => {
-  return (
-    <div className="flex flex-wrap justify-between justify-center mx-auto mb3">
-      <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
-        size={"M"}
-        value={newWords}
-        label={"New"}
-        tooltipMessage={"Words you’ve now typed correctly without a hint"}
-      />
-      <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
-        size={"M"}
-        value={seen}
-        label={"Seen"}
-        tooltipMessage={"Words you’ve seen before"}
-      />
-      <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
-        size={"M"}
-        value={memorised}
-        label={"From memory"}
-        tooltipMessage={"Words you’ve now typed 30 times or more"}
-      />
-      <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
-        size={"M"}
-        value={hinted}
-        label={"Hinted"}
-        tooltipMessage={"Words you typed with the hint shown"}
-      />
-      <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
-        size={"M"}
-        value={misstrokes}
-        label={"Misstrokes"}
-        tooltipMessage={"Words you mistyped or took more strokes than the target number"}
-      />
-      <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
-        size={"M"}
-        value={wordsTyped}
-        label={"Typed"}
-        tooltipMessage={"Each Typey Type word or phrase typed"}
-      />
-    </div>
-  );
-};
 
 const calculateScores = (duration, wordCount) =>
   duration > 0
@@ -351,37 +263,6 @@ class Finished extends Component {
 
     const shouldShowChart = this.state.chartData?.dataPoints?.length > 1 && this.state.chartData?.dataPoints?.length < 10000;
 
-    const finishedDataViz = (wpm, numericAccuracy, skipToNextLessonButton, chartData, totalNumberOfNewWordsMet, totalNumberOfLowExposuresSeen, totalNumberOfRetainedWords, totalNumberOfHintedWords, totalNumberOfMistypedWords, wordsTyped, shouldShowChart, setAnnouncementMessage) => (
-      <>
-        <ErrorBoundary relative={true} vanish={true}>
-          <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
-        </ErrorBoundary>
-        <ErrorBoundary relative={true} vanish={true}>
-          <a href="#next-lesson-button" onClick={skipToNextLessonButton} className="skip-to-link skip-to-link--relative" id="ga--finished--skip-chart">Skip chart</a>
-          {shouldShowChart && <AsyncFinishedSpeedChart data={chartData} />}
-          <SecondaryDisplayMetrics
-            newWords={totalNumberOfNewWordsMet}
-            seen={totalNumberOfLowExposuresSeen}
-            memorised={totalNumberOfRetainedWords}
-            hinted={totalNumberOfHintedWords}
-            misstrokes={totalNumberOfMistypedWords}
-            wordsTyped={wordsTyped}
-            setAnnouncementMessage={setAnnouncementMessage}
-          />
-          {shouldShowChart && (
-            <details>
-              <summary className="de-emphasized">Chart notes</summary>
-              <div aria-hidden="true">
-                <p className="text-left de-emphasized mb0"><span style={{ backgroundColor: "transparent", borderBottom: "2px solid transparent", }} role="img" aria-label=" correct" >👏</span> means you typed the phrase within the target number of strokes</p>
-                <p className="text-left de-emphasized mb1"><span aria-label="(hinted)" role="img">ℹ️</span> means the hint was shown</p>
-              </div>
-              <p className="text-left de-emphasized" id="chart-notes">Note: The first 4 words are averaged to reduce the impact of early instabilities. Typey&nbsp;Type starts recording the instant you start typing, so instead of recording the first word at infinity words per minute, it’s set to&nbsp;zero. </p>
-            </details>
-          )}
-        </ErrorBoundary>
-      </>
-    );
-
     return (
       <div>
         <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
@@ -409,7 +290,20 @@ class Finished extends Component {
                           {newTopSpeedSectionOrFinished}
                         </h3>
                         <p>{wpmCommentary}</p>
-                        {finishedDataViz(wpm, numericAccuracy, skipToNextLessonButton, this.state.chartData, this.props.totalNumberOfNewWordsMet, this.props.totalNumberOfLowExposuresSeen, this.props.totalNumberOfRetainedWords, this.props.totalNumberOfHintedWords, this.props.totalNumberOfMistypedWords, this.props.currentLessonStrokes?.length || 0, shouldShowChart, this.props.setAnnouncementMessage)}
+                        <FinishedDataViz
+                          wpm={wpm}
+                          numericAccuracy={numericAccuracy}
+                          skipToNextLessonButton={skipToNextLessonButton}
+                          chartData={this.state.chartData}
+                          totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+                          totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
+                          totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
+                          totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
+                          totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
+                          wordsTyped={this.props.currentLessonStrokes?.length || 0}
+                          shouldShowChart={shouldShowChart}
+                          setAnnouncementMessage={this.props.setAnnouncementMessage}
+                        />
                         <p className="mb12">
                           {/* eslint-disable-next-line jsx-a11y/no-access-key */}
                           <a aria-label="Restart lesson" accessKey={'s'} href={process.env.PUBLIC_URL + this.props.path} onClick={this.props.restartLesson} className="mr3" role="button">
