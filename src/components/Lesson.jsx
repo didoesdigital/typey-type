@@ -127,10 +127,7 @@ class Lesson extends Component {
 
     let createNewCustomLesson = '';
     let overviewLink = '';
-    let lessonSubTitle = '';
-    if (this.props.lesson && this.props.lesson.subtitle && this.props.lesson.subtitle.length > 0) {
-      lessonSubTitle = ': '+this.props.lessonSubTitle;
-    }
+    const lessonSubTitle = (this.props.lesson?.subtitle?.length > 0) ? `: ${this.props.lessonSubTitle}` : '';
 
     if (isCustom(this.props.location.pathname)) {
       createNewCustomLesson = (<Link to='/lessons/custom/setup' onClick={this.props.stopLesson} className="link-button link-button-ghost table-cell mr1" role="button">Edit custom lesson</Link>);
