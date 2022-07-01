@@ -126,7 +126,6 @@ class Lesson extends Component {
     }
 
     let createNewCustomLesson = '';
-    let customMessage;
     let overviewLink = '';
     let lessonSubTitle = '';
     if (this.props.lesson && this.props.lesson.subtitle && this.props.lesson.subtitle.length > 0) {
@@ -143,12 +142,6 @@ class Lesson extends Component {
     let lessonMetadata;
     lessonMetadata = this.props.lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === this.props.lesson.path);
     overviewLink = lessonMetadata && lessonMetadata['overview'] ? <Link to={this.props.location.pathname + 'overview'} className="link-button link-button-ghost table-cell">Overview</Link> : ''
-
-    if (this.props.settings && this.props.settings.customMessage) {
-      customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
-    } else {
-      customMessage = ''
-    }
 
     let revisionModeButton;
     if (this.props.revisionMode) {
@@ -317,7 +310,7 @@ class Lesson extends Component {
                     <div id="main-lesson-area" className="flex-grow mx-auto mw-1440 min-w-0">
                       <div>
                         <div className="mx-auto mw-1920">
-                          {customMessage}
+                          {this.props.settings?.customMessage && <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>}
                         </div>
                         <div className="mx-auto mw-1920 p3">
                           <button onClick={this.props.changeShowScoresWhileTyping} className={"de-emphasized-button show-scores-control absolute mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'show-scores-control--hidden' : 'show-scores-control--shown')}>Show scores</button>
