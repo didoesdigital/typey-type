@@ -307,7 +307,6 @@ class App extends Component {
       startTime: null,
       showStrokesInLesson: false,
       timer: null,
-      topSpeedToday: 0,
       topSpeedPersonalBest: 0,
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
@@ -1043,10 +1042,6 @@ class App extends Component {
       yourSeenWordCount: calculateSeenWordCount(metWords),
       yourMemorisedWordCount: calculateMemorisedWordCount(metWords)
     });
-  }
-
-  updateTopSpeedToday(wpm) {
-    this.setState({topSpeedToday: wpm});
   }
 
   updateTopSpeedPersonalBest(wpm) {
@@ -2567,7 +2562,6 @@ class App extends Component {
                           targetStrokeCount={this.state.targetStrokeCount}
                           timer={this.state.timer}
                           toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
-                          topSpeedToday={this.state.topSpeedToday}
                           topSpeedPersonalBest={this.state.topSpeedPersonalBest}
                           updateUserGoals={this.state.updateUserGoals}
                           charsPerWord={this.charsPerWord}
@@ -2581,7 +2575,6 @@ class App extends Component {
                           upcomingPhrases={upcomingMaterial}
                           updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
                           updateMarkup={this.updateMarkup.bind(this)}
-                          updateTopSpeedToday={this.updateTopSpeedToday.bind(this)}
                           updateTopSpeedPersonalBest={this.updateTopSpeedPersonalBest.bind(this)}
                           userSettings={this.state.userSettings}
                           {...props}

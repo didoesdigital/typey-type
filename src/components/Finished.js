@@ -19,6 +19,8 @@ const calculateScores = (duration, wordCount) =>
     ? Math.round(Math.max(wordCount - 1, 0) / (duration / 60 / 1000))
     : 0;
 
+let topSpeedToday = 0;
+
 const Finished = ({
   changeShowStrokesAs,
   changeShowStrokesOnMisstroke,
@@ -52,7 +54,6 @@ const Finished = ({
   timer,
   toggleHideOtherSettings,
   topSpeedPersonalBest,
-  topSpeedToday,
   totalNumberOfHintedWords,
   totalNumberOfLowExposuresSeen,
   totalNumberOfMatchedWords,
@@ -62,7 +63,6 @@ const Finished = ({
   totalWordCount,
   updateRevisionMaterial,
   updateTopSpeedPersonalBest,
-  updateTopSpeedToday,
   userSettings,
 }) => {
   const [chartData, setChartData] = useState(null);
@@ -99,14 +99,14 @@ const Finished = ({
 
     if (fasterSpeedToday && minimumStrokes && minimumSpeed && thirtyStrokesOrNotRevision && fasterPersonalBest) {
       setConfettiConfig({sparsity: 17, colors: 5});
-      updateTopSpeedToday(wpm);
+      topSpeedToday = wpm;
       updateTopSpeedPersonalBest(wpm);
       setNewTopSpeedPersonalBest(true);
       setNewTopSpeedToday(true);
     }
     else if (fasterSpeedToday && minimumStrokes && minimumSpeed && thirtyStrokesOrNotRevision) {
       setConfettiConfig({sparsity: 170, colors: 2});
-      updateTopSpeedToday(wpm);
+      topSpeedToday = wpm;
       setNewTopSpeedPersonalBest(false);
       setNewTopSpeedToday(true);
     }
