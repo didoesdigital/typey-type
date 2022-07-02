@@ -14,7 +14,6 @@ type FinishedDataVizProps = {
   totalNumberOfHintedWords: number;
   totalNumberOfMistypedWords: number;
   wordsTyped: number;
-  shouldShowChart: boolean;
   setAnnouncementMessage: () => void;
 };
 
