@@ -10,7 +10,7 @@ import LessonOverview from '../pages/lessons/LessonOverview';
 import LessonNotFound from '../pages/lessons/LessonNotFound';
 import Material from './Material';
 import TypedText from './TypedText';
-import Finished from './Finished';
+import Finished from '../pages/lessons/Finished';
 import LessonLengthPreview from '../pages/lessons/LessonLengthPreview';
 import Scores from './Scores';
 import StrokeTip from './StrokeTip';

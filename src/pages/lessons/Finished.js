@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import LessonCanvasFooter from "../pages/lessons/LessonCanvasFooter";
-import FinishedZeroAndEmptyStateMessage from "../pages/lessons/FinishedZeroAndEmptyState";
-import UserSettings from "./UserSettings";
+import LessonCanvasFooter from "./LessonCanvasFooter";
+import FinishedZeroAndEmptyStateMessage from "./FinishedZeroAndEmptyState";
+import UserSettings from "../../components/UserSettings";
 import {
   stitchTogetherLessonData,
   transformLessonDataToChartData,
-} from "../utils/transformingFinishedData";
-import FinishedActionButtons from "../pages/lessons/FinishedActionButtons";
-import FinishedDataViz from "../pages/lessons/FinishedDataViz";
-import FinishedMisstrokesSummary from "../pages/lessons/FinishedMisstrokesSummary";
-import FinishedSummaryHeadings from "../pages/lessons/FinishedSummaryHeadings";
-import getNumericAccuracy from "../pages/lessons/getNumericAccuracy";
+} from "../../utils/transformingFinishedData";
+import FinishedActionButtons from "./FinishedActionButtons";
+import FinishedDataViz from "./FinishedDataViz";
+import FinishedMisstrokesSummary from "./FinishedMisstrokesSummary";
+import FinishedSummaryHeadings from "./FinishedSummaryHeadings";
+import getNumericAccuracy from "./getNumericAccuracy";
 import "react-tippy/dist/tippy.css";
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
