@@ -4,10 +4,16 @@ import ErrorBoundary from "../../components/ErrorBoundary";
 import ComponentLoading from "../../components/ComponentLoading";
 import Loadable from "react-loadable";
 
+type ChartData = {
+  averageWPM: number;
+  version: number;
+  dataPoints?: any[];
+} | null
+
 type FinishedDataVizProps = {
   wpm: number;
   numericAccuracy: number;
-  chartData: any;
+  chartData: ChartData;
   totalNumberOfNewWordsMet: number;
   totalNumberOfLowExposuresSeen: number;
   totalNumberOfRetainedWords: number;
