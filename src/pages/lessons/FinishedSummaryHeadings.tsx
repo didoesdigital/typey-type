@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as Confetti from "../../utils/confetti";
 import getHeadingsText from "./getHeadingsText";
 
-type ConfettiConfig = {
+export type ConfettiConfig = {
   sparsity: number;
   colors: number;
 } | null;
