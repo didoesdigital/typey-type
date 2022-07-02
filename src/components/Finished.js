@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import LessonCanvasFooter from '../pages/lessons/LessonCanvasFooter';
 import FinishedZeroAndEmptyStateMessage from '../pages/lessons/FinishedZeroAndEmptyState';
 import UserSettings from './UserSettings';
@@ -19,159 +19,202 @@ const calculateScores = (duration, wordCount) =>
     ? Math.round(Math.max(wordCount - 1, 0) / (duration / 60 / 1000))
     : 0;
 
-class Finished extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      chartData: null,
-      confettiConfig: null,
-      newTopSpeedPersonalBest: false,
-      newTopSpeedToday: false,
-      numericAccuracy: 0,
-      wpm: 0
-    }
-  }
+const Finished = ({
+  changeShowStrokesAs,
+  changeShowStrokesOnMisstroke,
+  changeSortOrderUserSetting,
+  changeSpacePlacementUserSetting,
+  changeStenoLayout,
+  changeUserSetting,
+  chooseStudy,
+  currentLessonStrokes,
+  disableUserSettings,
+  globalUserSettings,
+  handleBeatsPerMinute,
+  handleLimitWordsChange,
+  handleRepetitionsChange,
+  handleStartFromWordChange,
+  handleUpcomingWordsLayout,
+  hideOtherSettings,
+  lessonLength,
+  lessonTitle,
+  location,
+  metWords,
+  path,
+  restartLesson,
+  reviseLesson,
+  revisionMode,
+  setAnnouncementMessage,
+  settings,
+  startFromWordOne,
+  startTime,
+  suggestedNext,
+  timer,
+  toggleHideOtherSettings,
+  topSpeedPersonalBest,
+  topSpeedToday,
+  totalNumberOfHintedWords,
+  totalNumberOfLowExposuresSeen,
+  totalNumberOfMatchedWords,
+  totalNumberOfMistypedWords,
+  totalNumberOfNewWordsMet,
+  totalNumberOfRetainedWords,
+  totalWordCount,
+  updateRevisionMaterial,
+  updateTopSpeedPersonalBest,
+  updateTopSpeedToday,
+  userSettings,
+}) => {
+  const [chartData, setChartData] = useState(null);
+  const [confettiConfig, setConfettiConfig] = useState(null);
+  const [newTopSpeedPersonalBest, setNewTopSpeedPersonalBest] = useState(false);
+  const [newTopSpeedToday, setNewTopSpeedToday] = useState(false);
+  const [numericAccuracy, setNumericAccuracy] = useState(0);
+  const [wpm, setWpm] = useState(0);
 
-  componentDidMount() {
-    const wpm = calculateScores(this.props.timer, this.props.totalNumberOfMatchedWords);
-    const numericAccuracy = getNumericAccuracy(this.props.totalNumberOfMistypedWords, this.props.totalNumberOfHintedWords, this.props.currentLessonStrokes, wpm);
-    this.setState({
-      numericAccuracy,
-      wpm,
-    });
+  // update WPM used by FinishedDataViz and headings and confetti
+  useEffect(() => {
+    const adjustedWPM = calculateScores(timer, totalNumberOfMatchedWords);
+    setWpm(adjustedWPM);
+  }, [timer, totalNumberOfMatchedWords])
 
-    const lessonData = stitchTogetherLessonData(this.props.currentLessonStrokes, this.props.startTime, wpm);
-    this.setState({chartData: transformLessonDataToChartData(lessonData)})
+  // update chart in FinishedDataViz
+  useEffect(() => {
+    const lessonData = stitchTogetherLessonData(currentLessonStrokes, startTime, wpm);
+    setChartData(transformLessonDataToChartData(lessonData));
+  }, [currentLessonStrokes, startTime, wpm])
 
-    const fasterSpeedToday = wpm > this.props.topSpeedToday;
-    const fasterPersonalBest = wpm > this.props.topSpeedPersonalBest;
-    const minimumStrokes = this.props.currentLessonStrokes.length > 3;
+  // update hero data in FinishedDataViz
+  useEffect(() => {
+    setNumericAccuracy(getNumericAccuracy(totalNumberOfMistypedWords, totalNumberOfHintedWords, currentLessonStrokes, wpm));
+  }, [currentLessonStrokes, totalNumberOfHintedWords, totalNumberOfMistypedWords, wpm])
+
+  // update top speed today or ever and headings and confetti
+  useEffect(() => {
+    const fasterSpeedToday = wpm > topSpeedToday;
+    const fasterPersonalBest = wpm > topSpeedPersonalBest;
+    const minimumStrokes = currentLessonStrokes.length > 3;
     const minimumSpeed = wpm > 3;
-    const thirtyStrokesOrNotRevision = (!this.props.revisionMode || this.props.currentLessonStrokes.length >= 30);
+    const thirtyStrokesOrNotRevision = (!revisionMode || currentLessonStrokes.length >= 30);
 
     if (fasterSpeedToday && minimumStrokes && minimumSpeed && thirtyStrokesOrNotRevision && fasterPersonalBest) {
-      this.setState({confettiConfig: {sparsity: 17, colors: 5}});
-      this.props.updateTopSpeedToday(wpm);
-      this.props.updateTopSpeedPersonalBest(wpm);
-      this.setState({
-        newTopSpeedPersonalBest: true,
-        newTopSpeedToday: true
-      });
+      setConfettiConfig({sparsity: 17, colors: 5});
+      updateTopSpeedToday(wpm);
+      updateTopSpeedPersonalBest(wpm);
+      setNewTopSpeedPersonalBest(true);
+      setNewTopSpeedToday(true);
     }
     else if (fasterSpeedToday && minimumStrokes && minimumSpeed && thirtyStrokesOrNotRevision) {
-      this.setState({confettiConfig: {sparsity: 170, colors: 2}});
-      this.props.updateTopSpeedToday(wpm);
-      this.setState({
-        newTopSpeedPersonalBest: false,
-        newTopSpeedToday: true
-      });
+      setConfettiConfig({sparsity: 170, colors: 2});
+      updateTopSpeedToday(wpm);
+      setNewTopSpeedPersonalBest(false);
+      setNewTopSpeedToday(true);
     }
     else {
-      this.setState({
-        newTopSpeedPersonalBest: false,
-        newTopSpeedToday: false
-      });
+      setNewTopSpeedPersonalBest(false);
+      setNewTopSpeedToday(false);
     }
-  }
 
-  render() {
-    return (
-      <div>
-        <div id="lesson-page" className="flex-wrap-md flex mx-auto mw-1920">
-          <div id="main-lesson-area" className="flex-grow mx-auto mw-1440 min-w-0">
-            <div className="mx-auto mw-1920">
-              {this.props.settings?.customMessage && <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>}
-            </div>
-            <div className="mx-auto mw-1920 p3">
-              <div className="lesson-canvas lesson-canvas--finished panel p3 mb3">
-                {(this.props.lessonLength === 0) ?
-                  <FinishedZeroAndEmptyStateMessage startFromWordSetting={this.props.userSettings.startFromWord} startFromWordOneClickHandler={this.props.startFromWordOne} suggestedNextUrl={this.props.suggestedNext} />
-                  :
-                  <div className="w-100">
-                    <div className="finished-lesson mx-auto mw-1440">
-                      <div className="finished-summary mb3 text-center">
-                        <FinishedSummaryHeadings
-                          confettiConfig={this.state.confettiConfig}
-                          lessonTitle={this.props.lessonTitle}
-                          newTopSpeedPersonalBest={this.state.newTopSpeedPersonalBest}
-                          newTopSpeedToday={this.state.newTopSpeedToday}
-                          wpm={this.state.wpm}
-                        />
-                        <FinishedDataViz
-                          wpm={this.state.wpm}
-                          numericAccuracy={this.state.numericAccuracy}
-                          chartData={this.state.chartData}
-                          totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-                          totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-                          totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-                          totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-                          totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-                          wordsTyped={this.props.currentLessonStrokes?.length || 0}
-                          setAnnouncementMessage={this.props.setAnnouncementMessage}
-                        />
-                        <FinishedActionButtons
-                          restartPath={process.env.PUBLIC_URL + this.props.path}
-                          restartLesson={this.props.restartLesson}
-                          suggestedNextUrl={this.props.suggestedNext}
-                        />
-                      </div>
-                      <FinishedMisstrokesSummary
-                        currentLessonStrokes={this.props.currentLessonStrokes}
-                        globalUserSettings={this.props.globalUserSettings}
-                        metWords={this.props.metWords}
-                        path={this.props.path}
-                        reviseLesson={this.props.reviseLesson}
-                        showMisstrokesSummary={this.props.currentLessonStrokes.length > 0}
-                        updateRevisionMaterial={this.props.updateRevisionMaterial}
-                        userSettings={this.props.userSettings}
+    // FIXME: updating the newTopSpeedToday too frequently causes the heading text to revert to
+    // lesson title instead of "New top speed for today!"
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentLessonStrokes.length, revisionMode, wpm])
+
+  return (
+    <div>
+      <div id="lesson-page" className="flex-wrap-md flex mx-auto mw-1920">
+        <div id="main-lesson-area" className="flex-grow mx-auto mw-1440 min-w-0">
+          <div className="mx-auto mw-1920">
+            {settings?.customMessage && <h3 className='px3 pb0 mb0'>{settings.customMessage}</h3>}
+          </div>
+          <div className="mx-auto mw-1920 p3">
+            <div className="lesson-canvas lesson-canvas--finished panel p3 mb3">
+              {(lessonLength === 0) ?
+                <FinishedZeroAndEmptyStateMessage startFromWordSetting={userSettings.startFromWord} startFromWordOneClickHandler={startFromWordOne} suggestedNextUrl={suggestedNext} />
+                :
+                <div className="w-100">
+                  <div className="finished-lesson mx-auto mw-1440">
+                    <div className="finished-summary mb3 text-center">
+                      <FinishedSummaryHeadings
+                        confettiConfig={confettiConfig}
+                        lessonTitle={lessonTitle}
+                        newTopSpeedPersonalBest={newTopSpeedPersonalBest}
+                        newTopSpeedToday={newTopSpeedToday}
+                        wpm={wpm}
+                      />
+                      <FinishedDataViz
+                        wpm={wpm}
+                        numericAccuracy={numericAccuracy}
+                        chartData={chartData}
+                        totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+                        totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+                        totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+                        totalNumberOfHintedWords={totalNumberOfHintedWords}
+                        totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+                        wordsTyped={currentLessonStrokes?.length || 0}
+                        setAnnouncementMessage={setAnnouncementMessage}
+                      />
+                      <FinishedActionButtons
+                        restartPath={process.env.PUBLIC_URL + path}
+                        restartLesson={restartLesson}
+                        suggestedNextUrl={suggestedNext}
                       />
                     </div>
+                    <FinishedMisstrokesSummary
+                      currentLessonStrokes={currentLessonStrokes}
+                      globalUserSettings={globalUserSettings}
+                      metWords={metWords}
+                      path={path}
+                      reviseLesson={reviseLesson}
+                      showMisstrokesSummary={currentLessonStrokes.length > 0}
+                      updateRevisionMaterial={updateRevisionMaterial}
+                      userSettings={userSettings}
+                    />
                   </div>
-                }
-              </div>
-              <LessonCanvasFooter
-                chooseStudy={this.props.chooseStudy}
-                disableUserSettings={this.props.disableUserSettings}
-                hideOtherSettings={this.props.hideOtherSettings}
-                path={this.props.path}
-                setAnnouncementMessage={this.props.setAnnouncementMessage}
-                toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-                totalWordCount={this.props.totalWordCount}
-                userSettings={this.props.userSettings}
-              />
+                </div>
+              }
             </div>
-            <p className="text-center"><a href={googleFormURL + encodeURIComponent(this.props.location?.pathname || '') + googleFormParam} className="text-small mt0" target="_blank" rel="noopener noreferrer" id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
-          </div>
-          <div>
-            <UserSettings
-              changeUserSetting={this.props.changeUserSetting}
-              changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
-              changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
-              changeShowStrokesAs={this.props.changeShowStrokesAs}
-              changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
-              changeStenoLayout={this.props.changeStenoLayout}
-              chooseStudy={this.props.chooseStudy}
-              disableUserSettings={this.props.disableUserSettings}
-              handleBeatsPerMinute={this.props.handleBeatsPerMinute}
-              handleLimitWordsChange={this.props.handleLimitWordsChange}
-              handleStartFromWordChange={this.props.handleStartFromWordChange}
-              handleRepetitionsChange={this.props.handleRepetitionsChange}
-              handleUpcomingWordsLayout={this.props.handleUpcomingWordsLayout}
-              hideOtherSettings={this.props.hideOtherSettings}
-              maxStartFromWord={this.props.lessonLength}
-              path={this.props.path}
-              revisionMode={this.props.revisionMode}
-              setAnnouncementMessage={this.props.setAnnouncementMessage}
-              toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-              totalWordCount={this.props.totalWordCount}
-              userSettings={this.props.userSettings}
+            <LessonCanvasFooter
+              chooseStudy={chooseStudy}
+              disableUserSettings={disableUserSettings}
+              hideOtherSettings={hideOtherSettings}
+              path={path}
+              setAnnouncementMessage={setAnnouncementMessage}
+              toggleHideOtherSettings={toggleHideOtherSettings}
+              totalWordCount={totalWordCount}
+              userSettings={userSettings}
             />
           </div>
+          <p className="text-center"><a href={googleFormURL + encodeURIComponent(location?.pathname || '') + googleFormParam} className="text-small mt0" target="_blank" rel="noopener noreferrer" id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
+        </div>
+        <div>
+          <UserSettings
+            changeUserSetting={changeUserSetting}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeStenoLayout={changeStenoLayout}
+            chooseStudy={chooseStudy}
+            disableUserSettings={disableUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
+            hideOtherSettings={hideOtherSettings}
+            maxStartFromWord={lessonLength}
+            path={path}
+            revisionMode={revisionMode}
+            setAnnouncementMessage={setAnnouncementMessage}
+            toggleHideOtherSettings={toggleHideOtherSettings}
+            totalWordCount={totalWordCount}
+            userSettings={userSettings}
+          />
         </div>
       </div>
-    )
-  }
-
+    </div>
+  );
 }
 
 export default Finished;
