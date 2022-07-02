@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as Confetti from "../../utils/confetti";
 import getHeadingsText from "./getHeadingsText";
 
@@ -87,12 +87,12 @@ const FinishedSummaryHeadings = ({
       canvasHeight
     );
 
-  const [headingText, subHeadingText] = getHeadingsText(
+  const [headingText, subHeadingText] = useMemo(() => getHeadingsText(
     wpm,
     lessonTitle,
     newTopSpeedToday,
     newTopSpeedPersonalBest
-  );
+  ), [lessonTitle, newTopSpeedPersonalBest, newTopSpeedToday, wpm]);
 
   return (
     <>
