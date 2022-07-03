@@ -238,6 +238,9 @@ class Lesson extends Component {
                   <DocumentTitle title={'Typey Type | Lesson overview'}>
                     <LessonOverview
                       lessonMetadata={lessonMetadata}
+                      lessonPath={this.props.location.pathname.replace("overview", "")}
+                      lessonTxtPath={this.props.location.pathname.replace("overview", "lesson.txt")}
+                      lessonTitle={this.props.lesson.title}
                       {...this.props}
                       {...props}
                     />

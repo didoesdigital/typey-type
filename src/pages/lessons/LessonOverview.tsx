@@ -12,17 +12,19 @@ const getLessonOverview = async (lessonFile: any) => {
 };
 
 type LessonOverviewProps = {
-  lesson: any;
-  location: any;
-  handleLesson: any;
+  lessonPath: string;
+  lessonTitle?: string;
+  lessonTxtPath: string;
 };
 
 const LessonOverview = ({
-  lesson,
-  location,
-  handleLesson,
-}: LessonOverviewProps) => {
+  lessonPath,
+  lessonTitle,
+  lessonTxtPath,
+}:
+LessonOverviewProps) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
+  const [title, setTitle] = useState(lessonTitle || "Steno");
   const [content, setContent] = useState(`
 <div class="mx-auto mw100 pt24 pb24 de-emphasized text-center">
   <p>Loading…</p>
@@ -34,13 +36,6 @@ const LessonOverview = ({
   }, []);
 
   useEffect(() => {
-    if (!lesson || lesson.title === "Steno") {
-      handleLesson(
-        process.env.PUBLIC_URL +
-          location.pathname.replace("overview", "lesson.txt")
-      );
-    }
-
     let lessonMetadata;
     // TODO: avoid fetching again if lessonIndex already contains all the lessons
     getLessonIndexData()
@@ -49,9 +44,12 @@ const LessonOverview = ({
         lessonMetadata = lessonIndex.find(
           (metadataEntry: any) =>
             process.env.PUBLIC_URL + "/lessons" + metadataEntry.path ===
-            process.env.PUBLIC_URL +
-              location.pathname.replace("overview", "lesson.txt")
+            process.env.PUBLIC_URL + lessonTxtPath
         );
+
+        if (lessonMetadata && lessonMetadata["title"]) {
+          setTitle(lessonMetadata["title"]);
+        }
 
         if (lessonMetadata && lessonMetadata["overview"]) {
           getLessonOverview(
@@ -79,27 +77,27 @@ const LessonOverview = ({
         setError(true);
         console.error(e);
       });
-  }, [handleLesson, lesson, location.pathname]);
+  }, [lessonTxtPath]);
 
   const showLessonOverview = () => {
     return { __html: content };
   };
 
   return (
-    <DocumentTitle title={"Typey Type | Lesson: " + lesson.title + " overview"}>
+    <DocumentTitle title={"Typey Type | Lesson: " + title + " overview"}>
       <main id="main">
         <div className="subheader">
           <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
             <div className="flex mr1 self-center">
               <header className="flex items-center min-h-40">
                 <h2 className="table-cell mr2" ref={mainHeading} tabIndex={-1}>
-                  {lesson.title} overview
+                  {title} overview
                 </h2>
               </header>
             </div>
             <div className="flex mxn2">
               <Link
-                to={location.pathname.replace("overview", "")}
+                to={lessonPath}
                 className="link-button link-button-ghost table-cell mr1"
                 role="button"
               >
@@ -114,10 +112,7 @@ const LessonOverview = ({
               <div role="article" className="mw-1024 mb3 mt3">
                 <div className="mx-auto mw100 mt3 mb3 text-center">
                   That overview couldn’t be found.{" "}
-                  <Link to={location.pathname.replace("overview", "")}>
-                    Back to lesson
-                  </Link>
-                  .
+                  <Link to={lessonPath}>Back to lesson</Link>.
                 </div>
               </div>
             </div>
