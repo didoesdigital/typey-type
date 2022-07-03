@@ -37,33 +37,27 @@ LessonOverviewProps) => {
 
   useEffect(() => {
     let metadata;
-    // TODO: avoid fetching again if lessonIndex already contains all the lessons
     getLessonIndexData()
       .then((lessonIndex: any) => {
-        // This logic to find lesson in index is duplicated in Lesson.jsx
         metadata = lessonIndex.find(
           (metadataEntry: any) =>
             process.env.PUBLIC_URL + "/lessons" + metadataEntry.path ===
             process.env.PUBLIC_URL + lessonTxtPath
         );
 
-        if (metadata && metadata["title"]) {
-          setTitle(metadata["title"]);
+        if (metadata?.title) {
+          setTitle(metadata.title);
         }
 
-        if (metadata && metadata["overview"]) {
+        if (metadata?.overview) {
           getLessonOverview(
-            process.env.PUBLIC_URL + "/lessons" + metadata["overview"]
+            process.env.PUBLIC_URL + "/lessons" + metadata.overview
           )
             .then((text) => {
-              let tmpError = false;
-
-              if (text.toLowerCase().startsWith("<!doctype html>")) {
-                tmpError = true;
-              }
-
               setContent(text);
-              setError(tmpError);
+              setError(
+                text.toLowerCase().startsWith("<!doctype html>") ? true : false
+              );
             })
             .catch((e) => {
               setError(true);
