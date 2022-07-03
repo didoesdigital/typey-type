@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { IconClosingCross } from './Icon';
 import { Link, Route, Switch } from 'react-router-dom';
+import GoogleAnalytics from 'react-ga';
 import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
@@ -49,6 +50,9 @@ class Lesson extends Component {
   constructor(props) {
     super(props);
     this.mainHeading = React.createRef();
+    this.state = {
+      hideOtherSettings: false
+    }
   }
 
   componentDidMount() {
@@ -127,6 +131,19 @@ class Lesson extends Component {
     this.props.stopLesson()
   }
 
+  toggleHideOtherSettings() {
+    let toggledHideOtherSettings = !this.state.hideOtherSettings;
+    this.setState({
+      hideOtherSettings: toggledHideOtherSettings
+    });
+
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Toggle hide other settings',
+      label: toggledHideOtherSettings.toString()
+    });
+  }
+
   render() {
     if (this.props.lessonNotFound) {
       return <LessonNotFound path={this.props.path} location={this.props.location} lessonIndex={this.props.lessonIndex} />
@@ -198,7 +215,7 @@ class Lesson extends Component {
                 handleStartFromWordChange={this.props.handleStartFromWordChange}
                 handleRepetitionsChange={this.props.handleRepetitionsChange}
                 handleUpcomingWordsLayout={this.props.handleUpcomingWordsLayout}
-                hideOtherSettings={this.props.hideOtherSettings}
+                hideOtherSettings={this.state.hideOtherSettings}
                 recommendationHistory={this.props.recommendationHistory}
                 setAnnouncementMessage={this.props.setAnnouncementMessage}
                 suggestedNext={getNextLessonPath(this.props.lesson, this.props.lessonIndex)}
@@ -213,7 +230,7 @@ class Lesson extends Component {
                 startFromWordOne={this.props.startFromWordOne}
                 startTime={this.props.startTime}
                 timer={this.props.timer}
-                toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+                toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
                 topSpeedPersonalBest={this.props.topSpeedPersonalBest}
                 charsPerWord={this.props.charsPerWord}
                 revisionMaterial={this.props.revisionMaterial}
@@ -376,10 +393,10 @@ class Lesson extends Component {
                           <LessonCanvasFooter
                             chooseStudy={this.props.chooseStudy}
                             disableUserSettings={this.props.disableUserSettings}
-                            hideOtherSettings={this.props.hideOtherSettings}
+                            hideOtherSettings={this.state.hideOtherSettings}
                             path={this.props.path}
                             setAnnouncementMessage={this.props.setAnnouncementMessage}
-                            toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+                            toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
                             totalWordCount={this.props.totalWordCount}
                             userSettings={this.props.userSettings}
                           />
@@ -403,12 +420,11 @@ class Lesson extends Component {
                         handleStartFromWordChange={this.props.handleStartFromWordChange}
                         handleRepetitionsChange={this.props.handleRepetitionsChange}
                         handleUpcomingWordsLayout={this.props.handleUpcomingWordsLayout}
-                        hideOtherSettings={this.props.hideOtherSettings}
+                        hideOtherSettings={this.state.hideOtherSettings}
                         maxStartFromWord={this.props.lessonLength}
                         path={this.props.path}
                         revisionMode={this.props.revisionMode}
                         setAnnouncementMessage={this.props.setAnnouncementMessage}
-                        toggleHideOtherSettings={this.props.toggleHideOtherSettings}
                         totalWordCount={this.props.totalWordCount}
                         userSettings={this.props.userSettings}
                       />

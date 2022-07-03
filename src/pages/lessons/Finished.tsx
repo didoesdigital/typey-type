@@ -262,7 +262,6 @@ const Finished = ({
             path={path}
             revisionMode={revisionMode}
             setAnnouncementMessage={setAnnouncementMessage}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             totalWordCount={totalWordCount}
             userSettings={userSettings}
           />

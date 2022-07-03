@@ -293,7 +293,6 @@ class App extends Component {
         writerInput: "qwerty", // qwerty || raw
         showMisstrokesInLookup: false
       },
-      hideOtherSettings: false,
       isPloverDictionaryLoaded: false,
       isGlobalLookupDictionaryLoaded: false,
       lookupTerm: '',
@@ -1766,19 +1765,6 @@ class App extends Component {
     return event;
   }
 
-  toggleHideOtherSettings() {
-    let newState = !this.state.hideOtherSettings;
-    this.setState({
-      hideOtherSettings: newState
-    });
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Toggle hide other settings',
-      label: newState.toString()
-    });
-  }
-
   setAnnouncementMessage(app, content) {
     let newAnnouncementMessage = "";
     if (content) {
@@ -2539,7 +2525,6 @@ class App extends Component {
                           handleStartFromWordChange={this.handleStartFromWordChange.bind(this)}
                           handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
                           handleUpcomingWordsLayout={this.handleUpcomingWordsLayout.bind(this)}
-                          hideOtherSettings={this.state.hideOtherSettings}
                           metWords={this.state.metWords}
                           previousCompletedPhraseAsTyped={this.state.previousCompletedPhraseAsTyped}
                           recommendationHistory={this.state.recommendationHistory}
@@ -2561,7 +2546,6 @@ class App extends Component {
                           showStrokesInLesson={this.state.showStrokesInLesson}
                           targetStrokeCount={this.state.targetStrokeCount}
                           timer={this.state.timer}
-                          toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
                           topSpeedPersonalBest={this.state.topSpeedPersonalBest}
                           updateUserGoals={this.state.updateUserGoals}
                           charsPerWord={this.charsPerWord}
