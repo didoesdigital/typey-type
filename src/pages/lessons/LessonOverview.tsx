@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
 import { getLessonIndexData } from "../../utils/lessonIndexData";
+import getLessonMetadata from "./getLessonMetadata";
 
 const getLessonOverview = async (lessonFile: any) => {
   const response = await fetch(lessonFile, {
@@ -17,12 +18,6 @@ type LessonOverviewProps = {
   lessonTitle?: string;
   lessonTxtPath: string;
 };
-
-const getLessonMetadata = (lessonIndex: any[], path: string) =>
-  lessonIndex.find(
-    (metadataEntry: any) =>
-      process.env.PUBLIC_URL + "/lessons" + metadataEntry.path === path
-  );
 
 const LessonOverview = ({
   lessonMetadata,
