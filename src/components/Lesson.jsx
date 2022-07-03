@@ -20,6 +20,7 @@ import { loadPersonalPreferences } from './../utils/typey-type';
 import AussieDictPrompt from './LessonPrompts/AussieDictPrompt';
 import SedSaidPrompt from './LessonPrompts/SedSaidPrompt';
 import WordBoundaryErrorPrompt from './LessonPrompts/WordBoundaryErrorPrompt';
+import getLessonMetadata from '../pages/lessons/getLessonMetadata';
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
 const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
@@ -135,10 +136,11 @@ class Lesson extends Component {
       createNewCustomLesson = '';
     }
 
-    // This logic is duplicated in LessonOverview.jsx
-    let lessonMetadata;
-    lessonMetadata = this.props.lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === this.props.lesson.path);
-    overviewLink = lessonMetadata && lessonMetadata['overview'] ? <Link to={this.props.location.pathname + 'overview'} className="link-button link-button-ghost table-cell">Overview</Link> : ''
+    const metadata = getLessonMetadata(
+      this.props.lessonIndex,
+      this.props.lesson.path
+    );
+    overviewLink = metadata?.overview ? <Link to={this.props.location.pathname + 'overview'} className="link-button link-button-ghost table-cell">Overview</Link> : ''
 
     let propsLesson = this.props.lesson;
     if ((Object.keys(propsLesson).length === 0 && propsLesson.constructor === Object) || !propsLesson) {
@@ -237,7 +239,7 @@ class Lesson extends Component {
                 <ErrorBoundary>
                   <DocumentTitle title={'Typey Type | Lesson overview'}>
                     <LessonOverview
-                      lessonMetadata={lessonMetadata}
+                      lessonMetadata={metadata}
                       lessonPath={this.props.location.pathname.replace("overview", "")}
                       lessonTxtPath={this.props.location.pathname.replace("overview", "lesson.txt")}
                       lessonTitle={this.props.lesson.title}
