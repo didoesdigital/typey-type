@@ -45,6 +45,11 @@ const getNextLessonPath = (lesson, lessonIndex) => {
 }
 
 class Lesson extends Component {
+  constructor(props) {
+    super(props);
+    this.mainHeading = React.createRef();
+  }
+
   componentDidMount() {
     // If cookies are disabled, attempting to access localStorage will cause an error.
     // The disabled cookie error will be handled in ErrorBoundary.
@@ -94,8 +99,8 @@ class Lesson extends Component {
       }
     }
 
-    if (this.mainHeading) {
-      this.mainHeading.focus();
+    if (this.mainHeading?.current) {
+      this.mainHeading?.current.focus();
     }
   }
 
@@ -170,7 +175,7 @@ class Lesson extends Component {
                   <div className="flex mr1 self-center">
                     <header className="flex items-center min-h-40">
                       <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                        <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
+                        <h2 ref={this.mainHeading} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
                       </a>
                     </header>
                   </div>
@@ -289,7 +294,7 @@ class Lesson extends Component {
                       <div className="flex mr1 self-center">
                         <header className="flex items-center min-h-40">
                           <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                            <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
+                            <h2 ref={this.mainHeading} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
                           </a>
                         </header>
                       </div>
@@ -437,7 +442,7 @@ class Lesson extends Component {
         )
       }
     } else {
-      return <div><h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">That lesson is missing.</h2></div>;
+      return <div><h2 ref={this.mainHeading} tabIndex="-1">That lesson is missing.</h2></div>;
     }
   }
 }
