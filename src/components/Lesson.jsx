@@ -40,11 +40,6 @@ const isFlashcards = (pathname) =>
 const isOverview = (pathname) =>
   pathname.startsWith("/lessons/") && pathname.endsWith("/overview");
 
-const getNextLessonPath = (metadata) => {
-  const suggestedNext = metadata?.suggestedNext ? metadata.suggestedNext : '/';
-  return '/lessons' + suggestedNext.replace(/lesson\.txt$/, '');
-}
-
 class Lesson extends Component {
   constructor(props) {
     super(props);
@@ -217,7 +212,7 @@ class Lesson extends Component {
                 hideOtherSettings={this.state.hideOtherSettings}
                 recommendationHistory={this.props.recommendationHistory}
                 setAnnouncementMessage={this.props.setAnnouncementMessage}
-                suggestedNext={getNextLessonPath(metadata)}
+                metadata={metadata}
                 lessonLength={propsLesson.presentedMaterial.length}
                 lessonTitle={this.props.lessonTitle}
                 location={this.props.location}

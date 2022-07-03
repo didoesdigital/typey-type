@@ -31,6 +31,7 @@ export type FinishedProps = {
   lessonLength: any;
   lessonTitle: any;
   location: any;
+  metadata: any;
   metWords: any;
   path: any;
   restartLesson: any;
@@ -40,7 +41,6 @@ export type FinishedProps = {
   settings: any;
   startFromWordOne: any;
   startTime: any;
-  suggestedNext: any;
   timer: any;
   toggleHideOtherSettings: any;
   topSpeedPersonalBest: any;

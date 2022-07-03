@@ -25,6 +25,11 @@ const calculateScores = (duration: number, wordCount: number) =>
     ? Math.round(Math.max(wordCount - 1, 0) / (duration / 60 / 1000))
     : 0;
 
+const getNextLessonPath = (metadata: any) => {
+  const suggestedNext = metadata?.suggestedNext ? metadata.suggestedNext : "/";
+  return "/lessons" + suggestedNext.replace(/lesson\.txt$/, "");
+};
+
 let topSpeedToday = 0;
 
 const Finished = ({
@@ -47,6 +52,7 @@ const Finished = ({
   lessonLength,
   lessonTitle,
   location,
+  metadata,
   metWords,
   path,
   restartLesson,
@@ -56,7 +62,6 @@ const Finished = ({
   settings,
   startFromWordOne,
   startTime,
-  suggestedNext,
   timer,
   toggleHideOtherSettings,
   topSpeedPersonalBest,
@@ -170,7 +175,7 @@ const Finished = ({
                 <FinishedZeroAndEmptyStateMessage
                   startFromWordSetting={userSettings.startFromWord}
                   startFromWordOneClickHandler={startFromWordOne}
-                  suggestedNextUrl={suggestedNext}
+                  suggestedNextUrl={getNextLessonPath(metadata)}
                 />
               ) : (
                 <div className="w-100">
@@ -200,7 +205,7 @@ const Finished = ({
                       <FinishedActionButtons
                         restartPath={process.env.PUBLIC_URL + path}
                         restartLesson={restartLesson}
-                        suggestedNextUrl={suggestedNext}
+                        suggestedNextUrl={getNextLessonPath(metadata)}
                       />
                     </div>
                     <FinishedMisstrokesSummary
