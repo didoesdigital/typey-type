@@ -127,7 +127,6 @@ class Lesson extends Component {
     }
 
     let createNewCustomLesson = '';
-    let overviewLink = '';
     const lessonSubTitle = (this.props.lesson?.subtitle?.length > 0) ? `: ${this.props.lessonSubTitle}` : '';
 
     if (isCustom(this.props.location.pathname)) {
@@ -140,7 +139,9 @@ class Lesson extends Component {
       this.props.lessonIndex,
       this.props.lesson.path
     );
-    overviewLink = metadata?.overview ? <Link to={this.props.location.pathname + 'overview'} className="link-button link-button-ghost table-cell">Overview</Link> : ''
+    const overviewLink = metadata?.overview ?
+      <Link to={this.props.location.pathname + 'overview'} className="link-button link-button-ghost table-cell">Overview</Link> :
+      '';
 
     let propsLesson = this.props.lesson;
     if ((Object.keys(propsLesson).length === 0 && propsLesson.constructor === Object) || !propsLesson) {
