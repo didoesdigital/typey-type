@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import DocumentTitle from "react-document-title";
-import Lesson from "../../components/Lesson";
+import Lesson from "./Lesson";
 import LessonsIndex from "./LessonsIndex";
 import CustomLessonSetup from "../../components/CustomLessonSetup";
 

@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
-import { IconClosingCross } from './Icon';
+import { IconClosingCross } from '../../components/Icon';
 import { Link, Route, Switch } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
 import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
-import ErrorBoundary from './ErrorBoundary'
-import LessonCanvasFooter from '../pages/lessons/LessonCanvasFooter';
-import LessonLengthPreview from '../pages/lessons/LessonLengthPreview';
-import LessonNotFound from '../pages/lessons/LessonNotFound';
-import LessonOverview from '../pages/lessons/LessonOverview';
-import LessonSubheader from '../pages/lessons/LessonSubheader';
-import Material from './Material';
-import TypedText from './TypedText';
-import Finished from '../pages/lessons/Finished';
-import Scores from './Scores';
-import StrokeTip from './StrokeTip';
-import UserSettings from './UserSettings';
-import Flashcards from './Flashcards';
-import { loadPersonalPreferences } from './../utils/typey-type';
-import AussieDictPrompt from './LessonPrompts/AussieDictPrompt';
-import SedSaidPrompt from './LessonPrompts/SedSaidPrompt';
-import WordBoundaryErrorPrompt from './LessonPrompts/WordBoundaryErrorPrompt';
-import getLessonMetadata from '../pages/lessons/getLessonMetadata';
+import ErrorBoundary from '../../components/ErrorBoundary'
+import LessonCanvasFooter from './LessonCanvasFooter';
+import LessonLengthPreview from './LessonLengthPreview';
+import LessonNotFound from './LessonNotFound';
+import LessonOverview from './LessonOverview';
+import LessonSubheader from './LessonSubheader';
+import Material from '../../components/Material';
+import TypedText from '../../components/TypedText';
+import Finished from './Finished';
+import Scores from '../../components/Scores';
+import StrokeTip from '../../components/StrokeTip';
+import UserSettings from '../../components/UserSettings';
+import Flashcards from '../../components/Flashcards';
+import { loadPersonalPreferences } from '../../utils/typey-type';
+import AussieDictPrompt from '../../components/LessonPrompts/AussieDictPrompt';
+import SedSaidPrompt from '../../components/LessonPrompts/SedSaidPrompt';
+import WordBoundaryErrorPrompt from '../../components/LessonPrompts/WordBoundaryErrorPrompt';
+import getLessonMetadata from './getLessonMetadata';
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
 const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
