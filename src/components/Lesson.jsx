@@ -126,14 +126,20 @@ class Lesson extends Component {
       return <LessonNotFound path={this.props.path} location={this.props.location} lessonIndex={this.props.lessonIndex} />
     }
 
-    let createNewCustomLesson = '';
     const lessonSubTitle = (this.props.lesson?.subtitle?.length > 0) ? `: ${this.props.lessonSubTitle}` : '';
 
-    if (isCustom(this.props.location.pathname)) {
-      createNewCustomLesson = (<Link to='/lessons/custom/setup' onClick={this.props.stopLesson} className="link-button link-button-ghost table-cell mr1" role="button">Edit custom lesson</Link>);
-    } else {
-      createNewCustomLesson = '';
-    }
+    const createNewCustomLesson = isCustom(this.props.location.pathname) ? (
+      <Link
+        to="/lessons/custom/setup"
+        onClick={this.props.stopLesson}
+        className="link-button link-button-ghost table-cell mr1"
+        role="button"
+      >
+        Edit custom lesson
+      </Link>
+    ) : (
+      ""
+    );
 
     const metadata = getLessonMetadata(
       this.props.lessonIndex,
