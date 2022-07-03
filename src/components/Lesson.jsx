@@ -6,12 +6,13 @@ import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
 import ErrorBoundary from './ErrorBoundary'
 import LessonCanvasFooter from '../pages/lessons/LessonCanvasFooter';
-import LessonOverview from '../pages/lessons/LessonOverview';
+import LessonLengthPreview from '../pages/lessons/LessonLengthPreview';
 import LessonNotFound from '../pages/lessons/LessonNotFound';
+import LessonOverview from '../pages/lessons/LessonOverview';
+import LessonSubheader from '../pages/lessons/LessonSubheader';
 import Material from './Material';
 import TypedText from './TypedText';
 import Finished from '../pages/lessons/Finished';
-import LessonLengthPreview from '../pages/lessons/LessonLengthPreview';
 import Scores from './Scores';
 import StrokeTip from './StrokeTip';
 import UserSettings from './UserSettings';
@@ -170,27 +171,16 @@ class Lesson extends Component {
         return (
           <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
             <main id="main">
-              <div className="subheader">
-                <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
-                  <div className="flex mr1 self-center">
-                    <header className="flex items-center min-h-40">
-                      <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                        <h2 ref={this.mainHeading} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
-                      </a>
-                    </header>
-                  </div>
-                  <div className="flex flex-wrap mxn2">
-                    {createNewCustomLesson ? createNewCustomLesson : overviewLink}
-                    { !this.props.path.includes("custom") && !this.props.path.includes("progress") ?
-                      <Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="link-button link-button-ghost table-cell mr1">Flashcards</Link>
-                      :
-                      null
-                    }
-                    <a href={this.props.path} onClick={this.props.restartLesson} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} role="button">Restart</a>
-                    <a href={this.props.path} onClick={this.props.handleStopLesson} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} role="button">Stop</a>
-                  </div>
-                </div>
-              </div>
+              <LessonSubheader
+                createNewCustomLesson={createNewCustomLesson}
+                handleStopLesson={this.props.handleStopLesson}
+                lessonSubTitle={lessonSubTitle}
+                lessonTitle={this.props.lessonTitle}
+                overviewLink={overviewLink}
+                path={this.props.path}
+                restartLesson={this.props.restartLesson}
+                ref={this.mainHeading}
+              />
               <Finished
                 actualText={this.props.actualText}
                 changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
@@ -289,27 +279,16 @@ class Lesson extends Component {
             <Route exact={true} path={`${this.props.match.url}`} render={() =>
               <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
                 <main id="main">
-                  <div className="subheader">
-                    <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
-                      <div className="flex mr1 self-center">
-                        <header className="flex items-center min-h-40">
-                          <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                            <h2 ref={this.mainHeading} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
-                          </a>
-                        </header>
-                      </div>
-                      <div className="flex flex-wrap mxn2">
-                        {createNewCustomLesson ? createNewCustomLesson : overviewLink}
-                        { !this.props.path.includes("custom") && !this.props.path.includes("progress") ?
-                          <Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="link-button link-button-ghost table-cell mr1">Flashcards</Link>
-                          :
-                          null
-                        }
-                        <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} role="button">Restart</a>
-                        <a href={this.props.path} onClick={this.props.handleStopLesson} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} role="button">Stop</a>
-                      </div>
-                    </div>
-                  </div>
+                  <LessonSubheader
+                    createNewCustomLesson={createNewCustomLesson}
+                    handleStopLesson={this.props.handleStopLesson}
+                    lessonSubTitle={lessonSubTitle}
+                    lessonTitle={this.props.lessonTitle}
+                    overviewLink={overviewLink}
+                    path={this.props.path}
+                    restartLesson={this.props.restartLesson}
+                    ref={this.mainHeading}
+                  />
                   <div id="lesson-page" className="flex-wrap-md flex mx-auto mw-1920">
                     <div id="main-lesson-area" className="flex-grow mx-auto mw-1440 min-w-0">
                       <div>
