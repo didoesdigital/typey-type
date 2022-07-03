@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
 import { getLessonIndexData } from "../../utils/lessonIndexData";
@@ -12,17 +12,24 @@ const getLessonOverview = async (lessonFile: any) => {
 };
 
 type LessonOverviewProps = {
+  lessonMetadata?: any;
   lessonPath: string;
   lessonTitle?: string;
   lessonTxtPath: string;
 };
 
+const getLessonMetadata = (lessonIndex: any[], path: string) =>
+  lessonIndex.find(
+    (metadataEntry: any) =>
+      process.env.PUBLIC_URL + "/lessons" + metadataEntry.path === path
+  );
+
 const LessonOverview = ({
+  lessonMetadata,
   lessonPath,
   lessonTitle,
   lessonTxtPath,
-}:
-LessonOverviewProps) => {
+}: LessonOverviewProps) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const [title, setTitle] = useState(lessonTitle || "Steno");
   const [content, setContent] = useState(`
@@ -31,47 +38,50 @@ LessonOverviewProps) => {
 </div>`);
   const [error, setError] = useState(false);
 
+  const updateLessonOverviewContent = useCallback((metadata) => {
+    if (metadata?.title) {
+      setTitle(metadata.title);
+    }
+
+    if (metadata?.overview) {
+      getLessonOverview(process.env.PUBLIC_URL + "/lessons" + metadata.overview)
+        .then((text) => {
+          setContent(text);
+          setError(
+            text.toLowerCase().startsWith("<!doctype html>") ? true : false
+          );
+        })
+        .catch((e) => {
+          setError(true);
+          console.error(e);
+        });
+    } else {
+      setError(true);
+    }
+  }, []);
+
   useEffect(() => {
     mainHeading.current?.focus();
   }, []);
 
   useEffect(() => {
-    let metadata;
-    getLessonIndexData()
-      .then((lessonIndex: any) => {
-        metadata = lessonIndex.find(
-          (metadataEntry: any) =>
-            process.env.PUBLIC_URL + "/lessons" + metadataEntry.path ===
+    if (lessonMetadata && lessonMetadata.title && lessonMetadata.overview) {
+      updateLessonOverviewContent(lessonMetadata);
+    } else {
+      getLessonIndexData()
+        .then((lessonIndex: any) => {
+          const metadata = getLessonMetadata(
+            lessonIndex,
             process.env.PUBLIC_URL + lessonTxtPath
-        );
-
-        if (metadata?.title) {
-          setTitle(metadata.title);
-        }
-
-        if (metadata?.overview) {
-          getLessonOverview(
-            process.env.PUBLIC_URL + "/lessons" + metadata.overview
-          )
-            .then((text) => {
-              setContent(text);
-              setError(
-                text.toLowerCase().startsWith("<!doctype html>") ? true : false
-              );
-            })
-            .catch((e) => {
-              setError(true);
-              console.error(e);
-            });
-        } else {
+          );
+          updateLessonOverviewContent(metadata);
+        })
+        .catch((e: unknown) => {
           setError(true);
-        }
-      })
-      .catch((e: unknown) => {
-        setError(true);
-        console.error(e);
-      });
-  }, [lessonTxtPath]);
+          console.error(e);
+        });
+    }
+  }, [lessonMetadata, lessonTxtPath, updateLessonOverviewContent]);
 
   const showLessonOverview = () => {
     return { __html: content };
