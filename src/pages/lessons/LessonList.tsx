@@ -2,9 +2,33 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { groups } from "d3-array";
 
-const WordCount = ({ lesson }) =>
-  lesson?.wordCount > 0 && ` · ${lesson.wordCount} words`;
-const LessonLink = ({ lesson, url }) => (
+type LessonIndexEntry = {
+  category: string;
+  overview: string;
+  path: string;
+  subcategory: string;
+  subtitle: string;
+  suggestedNext: string;
+  title: string;
+  wordCount: number;
+};
+
+type LessonListProps = {
+  lessonIndex: LessonIndexEntry[];
+  url: string;
+};
+
+const WordCount = ({ lesson }: { lesson: LessonIndexEntry }) => (
+  <>{lesson.wordCount > 0 && ` · ${lesson.wordCount} words`}</>
+);
+
+const LessonLink = ({
+  lesson,
+  url,
+}: {
+  lesson: LessonIndexEntry;
+  url: string;
+}) => (
   <Link
     to={`${url}${lesson.path}`
       .replace(/lesson\.txt$/, "")
@@ -18,9 +42,10 @@ const LessonLink = ({ lesson, url }) => (
     {lesson.subtitle?.length > 0 && `: ${lesson.subtitle}`}
   </Link>
 );
-const InnerLessonList = ({ lessons, url }) => (
+
+const InnerLessonList = ({ lessonIndex, url }: LessonListProps) => (
   <ul className="unstyled-list">
-    {lessons.map((lesson) => (
+    {lessonIndex.map((lesson) => (
       <li className="unstyled-list-item mb1" key={lesson.path}>
         <LessonLink lesson={lesson} url={url} />
         <WordCount lesson={lesson} />
@@ -28,30 +53,30 @@ const InnerLessonList = ({ lessons, url }) => (
     ))}
   </ul>
 );
-const wrangleId = (id) => {
-  return id.toLowerCase().replace(/[ ,’()]/g, '-')
-}
 
-export default function LessonList({ lessonIndex, url }) {
+const wrangleId = (id: string) => {
+  return id.toLowerCase().replace(/[ ,’()]/g, "-");
+};
+
+export default function LessonList({ lessonIndex, url }: LessonListProps) {
   useEffect(() => {
     window.location.hash = window.decodeURIComponent(window.location.hash);
     const scrollToAnchor = () => {
       const hash = window.location.hash;
       if (hash && hash.length > 0) {
-        const el = document.querySelector(hash);
+        const el = document.querySelector<HTMLAnchorElement>(hash);
         let top = 0;
         if (el && el.getBoundingClientRect().top) {
           top = el.getBoundingClientRect().top;
         }
-        let scrollOptions = {
+        const scrollOptions: ScrollToOptions = {
           left: 0,
           top: window.pageYOffset + top,
-          behavior: 'smooth'
-        }
+          behavior: "smooth",
+        };
         if (el) {
           window.scrollTo(scrollOptions);
-          window.setTimeout(function ()
-          {
+          window.setTimeout(function () {
             el.focus();
           }, 300);
         }
@@ -60,13 +85,14 @@ export default function LessonList({ lessonIndex, url }) {
     scrollToAnchor();
 
     window.onhashchange = scrollToAnchor;
-  }, [lessonIndex]);
+  }, []);
 
   const groupedLessons = groups(
     lessonIndex,
     (d) => d.category,
     (d) => d.subcategory
   );
+
   return (
     <div>
       <p className="mb0">Jump to:</p>
@@ -74,13 +100,15 @@ export default function LessonList({ lessonIndex, url }) {
         {groupedLessons.map(([category, subcategories]) => (
           <li key={category}>
             <a href={`#${wrangleId(category)}`}>{category}</a>
-            {subcategories[0][0] &&
+            {subcategories[0][0] && (
               <ul>
-              {subcategories.map(([subcategory, _]) => (
-                <li key={subcategory}><a href={`#${wrangleId(subcategory)}`}>{subcategory}</a></li>
-              ))}
+                {subcategories.map(([subcategory, _]) => (
+                  <li key={subcategory}>
+                    <a href={`#${wrangleId(subcategory)}`}>{subcategory}</a>
+                  </li>
+                ))}
               </ul>
-            }
+            )}
           </li>
         ))}
       </ul>
@@ -105,13 +133,13 @@ export default function LessonList({ lessonIndex, url }) {
                     >
                       <h5 className="h4">{subcategory}</h5>
                     </a>
-                    <InnerLessonList lessons={lessons} url={url} />
+                    <InnerLessonList lessonIndex={lessons} url={url} />
                   </div>
                 );
               } else {
                 return (
                   <div key={subcategory}>
-                    <InnerLessonList lessons={lessons} url={url} />
+                    <InnerLessonList lessonIndex={lessons} url={url} />
                   </div>
                 );
               }

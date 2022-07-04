@@ -45,7 +45,7 @@ import Loadable from 'react-loadable';
 import PageLoading from './components/PageLoading';
 import Announcements from './components/Announcements';
 import ErrorBoundary from './components/ErrorBoundary'
-import Lessons from './components/Lessons';
+import Lessons from './pages/lessons/Lessons';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Zipper from './utils/zipper';
@@ -293,7 +293,6 @@ class App extends Component {
         writerInput: "qwerty", // qwerty || raw
         showMisstrokesInLookup: false
       },
-      hideOtherSettings: false,
       isPloverDictionaryLoaded: false,
       isGlobalLookupDictionaryLoaded: false,
       lookupTerm: '',
@@ -307,7 +306,6 @@ class App extends Component {
       startTime: null,
       showStrokesInLesson: false,
       timer: null,
-      topSpeedToday: 0,
       topSpeedPersonalBest: 0,
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
@@ -1045,10 +1043,6 @@ class App extends Component {
     });
   }
 
-  updateTopSpeedToday(wpm) {
-    this.setState({topSpeedToday: wpm});
-  }
-
   updateTopSpeedPersonalBest(wpm) {
     this.setState({topSpeedPersonalBest: wpm});
     writePersonalPreferences('topSpeedPersonalBest', wpm);
@@ -1769,19 +1763,6 @@ class App extends Component {
       });
     }
     return event;
-  }
-
-  toggleHideOtherSettings() {
-    let newState = !this.state.hideOtherSettings;
-    this.setState({
-      hideOtherSettings: newState
-    });
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Toggle hide other settings',
-      label: newState.toString()
-    });
   }
 
   setAnnouncementMessage(app, content) {
@@ -2544,7 +2525,6 @@ class App extends Component {
                           handleStartFromWordChange={this.handleStartFromWordChange.bind(this)}
                           handleRepetitionsChange={this.handleRepetitionsChange.bind(this)}
                           handleUpcomingWordsLayout={this.handleUpcomingWordsLayout.bind(this)}
-                          hideOtherSettings={this.state.hideOtherSettings}
                           metWords={this.state.metWords}
                           previousCompletedPhraseAsTyped={this.state.previousCompletedPhraseAsTyped}
                           recommendationHistory={this.state.recommendationHistory}
@@ -2566,8 +2546,6 @@ class App extends Component {
                           showStrokesInLesson={this.state.showStrokesInLesson}
                           targetStrokeCount={this.state.targetStrokeCount}
                           timer={this.state.timer}
-                          toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
-                          topSpeedToday={this.state.topSpeedToday}
                           topSpeedPersonalBest={this.state.topSpeedPersonalBest}
                           updateUserGoals={this.state.updateUserGoals}
                           charsPerWord={this.charsPerWord}
@@ -2581,7 +2559,6 @@ class App extends Component {
                           upcomingPhrases={upcomingMaterial}
                           updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
                           updateMarkup={this.updateMarkup.bind(this)}
-                          updateTopSpeedToday={this.updateTopSpeedToday.bind(this)}
                           updateTopSpeedPersonalBest={this.updateTopSpeedPersonalBest.bind(this)}
                           userSettings={this.state.userSettings}
                           {...props}

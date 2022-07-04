@@ -1,7 +1,7 @@
 import React from "react";
-import { humanDurationFormatter } from "../utils/formatters";
+import { humanDurationFormatter } from "../../utils/formatters";
 
-const Warning = ({ duration }) => (
+const Warning = ({ duration }: { duration: number }) => (
   <span role="img" aria-label=" Warning ">
     {" "}
     {duration >= 60
@@ -14,7 +14,17 @@ const Warning = ({ duration }) => (
   </span>
 );
 
-const LessonLengthPreview = ({ totalWords, speed, lessonStarted }) => {
+type LessonLengthPreviewProps = {
+  lessonStarted: number;
+  speed: number;
+  totalWords: number;
+};
+
+const LessonLengthPreview = ({
+  totalWords,
+  speed,
+  lessonStarted,
+}: LessonLengthPreviewProps) => {
   const duration = totalWords / speed;
   return (
     <div

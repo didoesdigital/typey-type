@@ -1,27 +1,54 @@
 import React, { Component } from 'react';
-import { IconClosingCross } from './Icon';
+import { IconClosingCross } from '../../components/Icon';
 import { Link, Route, Switch } from 'react-router-dom';
+import GoogleAnalytics from 'react-ga';
 import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
-import ErrorBoundary from './ErrorBoundary'
+import ErrorBoundary from '../../components/ErrorBoundary'
 import LessonCanvasFooter from './LessonCanvasFooter';
-import LessonOverview from './LessonOverview';
-import LessonNotFound from './LessonNotFound';
-import Material from './Material';
-import TypedText from './TypedText';
-import Finished from './Finished';
 import LessonLengthPreview from './LessonLengthPreview';
-import Scores from './Scores';
-import StrokeTip from './StrokeTip';
-import UserSettings from './UserSettings';
-import Flashcards from './Flashcards';
-import { loadPersonalPreferences } from './../utils/typey-type';
-import AussieDictPrompt from './LessonPrompts/AussieDictPrompt';
-import SedSaidPrompt from './LessonPrompts/SedSaidPrompt';
-import WordBoundaryErrorPrompt from './LessonPrompts/WordBoundaryErrorPrompt';
+import LessonNotFound from './LessonNotFound';
+import LessonOverview from './LessonOverview';
+import LessonSubheader from './LessonSubheader';
+import Material from '../../components/Material';
+import TypedText from '../../components/TypedText';
+import Finished from './Finished';
+import Scores from '../../components/Scores';
+import StrokeTip from '../../components/StrokeTip';
+import UserSettings from '../../components/UserSettings';
+import Flashcards from '../../components/Flashcards';
+import { loadPersonalPreferences } from '../../utils/typey-type';
+import AussieDictPrompt from '../../components/LessonPrompts/AussieDictPrompt';
+import SedSaidPrompt from '../../components/LessonPrompts/SedSaidPrompt';
+import WordBoundaryErrorPrompt from '../../components/LessonPrompts/WordBoundaryErrorPrompt';
+import getLessonMetadata from './getLessonMetadata';
+
+// fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
+const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
+const googleFormParam = "&entry.1202724812&entry.936119214";
+
+const isCustom = (pathname) =>
+  pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
+
+const isFinished = (lesson, currentPhraseID) =>
+  currentPhraseID === lesson?.presentedMaterial?.length || 0;
+
+const isFlashcards = (pathname) =>
+  pathname.startsWith("/lessons/") && pathname.endsWith("/flashcards");
+
+const isOverview = (pathname) =>
+  pathname.startsWith("/lessons/") && pathname.endsWith("/overview");
 
 class Lesson extends Component {
+  constructor(props) {
+    super(props);
+    this.mainHeading = React.createRef();
+    this.state = {
+      hideOtherSettings: false
+    }
+  }
+
   componentDidMount() {
     // If cookies are disabled, attempting to access localStorage will cause an error.
     // The disabled cookie error will be handled in ErrorBoundary.
@@ -46,10 +73,10 @@ class Lesson extends Component {
       else if (this.props.location.pathname.startsWith('/lessons/custom') && (!this.props.location.pathname.startsWith('/lessons/custom/setup'))) {
         this.props.startCustomLesson();
       }
-      else if(this.isOverview()) {
+      else if(isOverview(this.props.location.pathname)) {
         // do nothing
       }
-      else if(this.isFlashcards()) {
+      else if(isFlashcards(this.props.location.pathname)) {
         // do nothing
       }
       else if((this.props.lesson.path!==this.props.location.pathname+'lesson.txt') && (this.props.location.pathname.startsWith('/lessons'))) {
@@ -71,17 +98,17 @@ class Lesson extends Component {
       }
     }
 
-    if (this.mainHeading) {
-      this.mainHeading.focus();
+    if (this.mainHeading?.current) {
+      this.mainHeading?.current.focus();
     }
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname.startsWith('/lessons/custom') && !this.props.location.pathname.startsWith('/lessons/custom/setup') && this.props.lesson.title !== "Custom") {
       this.props.startCustomLesson();
-    } else if(this.isOverview()) {
+    } else if(isOverview(this.props.location.pathname)) {
       // do nothing
-    } else if (this.isFlashcards()) {
+    } else if (isFlashcards(this.props.location.pathname)) {
       // do nothing
     } else if((prevProps.match.url!==this.props.match.url) && (this.props.location.pathname.startsWith('/lessons'))) {
       this.props.handleLesson(process.env.PUBLIC_URL + this.props.location.pathname+'lesson.txt');
@@ -98,48 +125,17 @@ class Lesson extends Component {
     this.props.stopLesson()
   }
 
-  isCustom() {
-    return ((this.props.location.pathname === '/lessons/custom') || (this.props.location.pathname === '/lessons/custom/setup'));
-  }
+  toggleHideOtherSettings() {
+    let toggledHideOtherSettings = !this.state.hideOtherSettings;
+    this.setState({
+      hideOtherSettings: toggledHideOtherSettings
+    });
 
-  isOverview() {
-    return (this.props.location.pathname.startsWith('/lessons/') && this.props.location.pathname.endsWith('/overview'));
-  }
-
-  isFlashcards() {
-    return (this.props.location.pathname.startsWith('/lessons/') && this.props.location.pathname.endsWith('/flashcards'));
-  }
-
-  isFinished() {
-    let presentedMaterialLength = (this.props.lesson && this.props.lesson.presentedMaterial) ? this.props.lesson.presentedMaterial.length : 0;
-    return (this.props.currentPhraseID === presentedMaterialLength);
-  }
-
-  nextLessonPath() {
-    let thisLesson = this.props.lesson.path;
-    let suggestedNext = "/";
-    let match = (el) => process.env.PUBLIC_URL + '/lessons' + el.path === thisLesson;
-    let lessonIndexItem = this.props.lessonIndex.find(match);
-    if (lessonIndexItem !== undefined) {
-      if (lessonIndexItem.hasOwnProperty("suggestedNext")){
-        suggestedNext = lessonIndexItem.suggestedNext;
-      }
-    }
-    let nextLessonPath = '/lessons'+suggestedNext.replace(/lesson\.txt$/,'');
-    return nextLessonPath;
-  }
-
-  prefillSurveyLink() {
-    // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
-    let googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
-    let param = "&entry.1202724812&entry.936119214";
-    let prefillLesson = '';
-    if (this.props.location && this.props.location.pathname) {
-      prefillLesson = this.props.location.pathname;
-    }
-    if (this.surveyLink) {
-      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillLesson) + param;
-    }
+    GoogleAnalytics.event({
+      category: 'UserSettings',
+      action: 'Toggle hide other settings',
+      label: toggledHideOtherSettings.toString()
+    });
   }
 
   render() {
@@ -147,38 +143,28 @@ class Lesson extends Component {
       return <LessonNotFound path={this.props.path} location={this.props.location} lessonIndex={this.props.lessonIndex} />
     }
 
-    let createNewCustomLesson = '';
-    let customMessage;
-    let overviewLink = '';
-    let lessonSubTitle = '';
-    if (this.props.lesson && this.props.lesson.subtitle && this.props.lesson.subtitle.length > 0) {
-      lessonSubTitle = ': '+this.props.lessonSubTitle;
-    }
+    const lessonSubTitle = (this.props.lesson?.subtitle?.length > 0) ? `: ${this.props.lessonSubTitle}` : '';
 
-    if (this.isCustom()) {
-      createNewCustomLesson = (<Link to='/lessons/custom/setup' onClick={this.props.stopLesson} className="link-button link-button-ghost table-cell mr1" role="button">Edit custom lesson</Link>);
-    } else {
-      createNewCustomLesson = '';
-    }
+    const createNewCustomLesson = isCustom(this.props.location.pathname) ? (
+      <Link
+        to="/lessons/custom/setup"
+        onClick={this.props.stopLesson}
+        className="link-button link-button-ghost table-cell mr1"
+        role="button"
+      >
+        Edit custom lesson
+      </Link>
+    ) : (
+      ""
+    );
 
-    // This logic is duplicated in LessonOverview.jsx
-    let lessonMetadata;
-    lessonMetadata = this.props.lessonIndex.find(metadataEntry => process.env.PUBLIC_URL + '/lessons' + metadataEntry.path === this.props.lesson.path);
-    overviewLink = lessonMetadata && lessonMetadata['overview'] ? <Link to={this.props.location.pathname + 'overview'} className="link-button link-button-ghost table-cell">Overview</Link> : ''
-
-    if (this.props.settings && this.props.settings.customMessage) {
-      customMessage = <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>;
-    } else {
-      customMessage = ''
-    }
-
-    let revisionModeButton;
-    if (this.props.revisionMode) {
-      revisionModeButton = (
-        <div><Link to={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="revision-mode-button no-underline absolute right-0">Revision mode<IconClosingCross role="img" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="Exit revision mode" />
-        </Link></div>
-      );
-    }
+    const metadata = getLessonMetadata(
+      this.props.lessonIndex,
+      this.props.lesson.path
+    );
+    const overviewLink = metadata?.overview ?
+      <Link to={this.props.location.pathname + 'overview'} className="link-button link-button-ghost table-cell">Overview</Link> :
+      '';
 
     let propsLesson = this.props.lesson;
     if ((Object.keys(propsLesson).length === 0 && propsLesson.constructor === Object) || !propsLesson) {
@@ -192,31 +178,20 @@ class Lesson extends Component {
     }
 
     if (this.props.lesson) {
-      if (this.isFinished() && !this.isOverview() && !this.isFlashcards()) {
+      if (isFinished(this.props.lesson, this.props.currentPhraseID) && !isOverview(this.props.location.pathname) && !isFlashcards(this.props.location.pathname)) {
         return (
           <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
             <main id="main">
-              <div className="subheader">
-                <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
-                  <div className="flex mr1 self-center">
-                    <header className="flex items-center min-h-40">
-                      <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                        <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
-                      </a>
-                    </header>
-                  </div>
-                  <div className="flex flex-wrap mxn2">
-                    {createNewCustomLesson ? createNewCustomLesson : overviewLink}
-                    { !this.props.path.includes("custom") && !this.props.path.includes("progress") ?
-                      <Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="link-button link-button-ghost table-cell mr1">Flashcards</Link>
-                      :
-                      null
-                    }
-                    <a href={this.props.path} onClick={this.props.restartLesson} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} role="button">Restart</a>
-                    <a href={this.props.path} onClick={this.props.handleStopLesson} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} role="button">Stop</a>
-                  </div>
-                </div>
-              </div>
+              <LessonSubheader
+                createNewCustomLesson={createNewCustomLesson}
+                handleStopLesson={this.props.handleStopLesson}
+                lessonSubTitle={lessonSubTitle}
+                lessonTitle={this.props.lessonTitle}
+                overviewLink={overviewLink}
+                path={this.props.path}
+                restartLesson={this.props.restartLesson}
+                ref={this.mainHeading}
+              />
               <Finished
                 actualText={this.props.actualText}
                 changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
@@ -234,31 +209,28 @@ class Lesson extends Component {
                 handleStartFromWordChange={this.props.handleStartFromWordChange}
                 handleRepetitionsChange={this.props.handleRepetitionsChange}
                 handleUpcomingWordsLayout={this.props.handleUpcomingWordsLayout}
-                hideOtherSettings={this.props.hideOtherSettings}
+                hideOtherSettings={this.state.hideOtherSettings}
                 recommendationHistory={this.props.recommendationHistory}
                 setAnnouncementMessage={this.props.setAnnouncementMessage}
-                suggestedNext={this.nextLessonPath()}
+                metadata={metadata}
                 lessonLength={propsLesson.presentedMaterial.length}
                 lessonTitle={this.props.lessonTitle}
                 location={this.props.location}
                 metWords={this.props.metWords}
                 path={this.props.path}
-                prefillSurveyLink={this.prefillSurveyLink}
                 restartLesson={this.props.restartLesson}
                 reviseLesson={this.props.reviseLesson}
                 settings={this.props.lesson.settings}
                 startFromWordOne={this.props.startFromWordOne}
                 startTime={this.props.startTime}
                 timer={this.props.timer}
-                toggleHideOtherSettings={this.props.toggleHideOtherSettings}
-                topSpeedToday={this.props.topSpeedToday}
+                toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
                 topSpeedPersonalBest={this.props.topSpeedPersonalBest}
                 charsPerWord={this.props.charsPerWord}
                 revisionMaterial={this.props.revisionMaterial}
                 revisionMode={this.props.revisionMode}
                 updateRecommendationHistory={this.props.updateRecommendationHistory}
                 updateRevisionMaterial={this.props.updateRevisionMaterial}
-                updateTopSpeedToday={this.props.updateTopSpeedToday}
                 updateTopSpeedPersonalBest={this.props.updateTopSpeedPersonalBest}
                 totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
                 totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
@@ -280,7 +252,10 @@ class Lesson extends Component {
                 <ErrorBoundary>
                   <DocumentTitle title={'Typey Type | Lesson overview'}>
                     <LessonOverview
-                      lessonMetadata={lessonMetadata}
+                      lessonMetadata={metadata}
+                      lessonPath={this.props.location.pathname.replace("overview", "")}
+                      lessonTxtPath={this.props.location.pathname.replace("overview", "lesson.txt")}
+                      lessonTitle={this.props.lesson.title}
                       {...this.props}
                       {...props}
                     />
@@ -315,33 +290,25 @@ class Lesson extends Component {
             <Route exact={true} path={`${this.props.match.url}`} render={() =>
               <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
                 <main id="main">
-                  <div className="subheader">
-                    <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
-                      <div className="flex mr1 self-center">
-                        <header className="flex items-center min-h-40">
-                          <a href={this.props.path} onClick={this.props.restartLesson} className="heading-link table-cell mr2" role="button">
-                            <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.props.lessonTitle}{lessonSubTitle}</h2>
-                          </a>
-                        </header>
-                      </div>
-                      <div className="flex flex-wrap mxn2">
-                        {createNewCustomLesson ? createNewCustomLesson : overviewLink}
-                        { !this.props.path.includes("custom") && !this.props.path.includes("progress") ?
-                          <Link to={this.props.path.replace("lesson.txt","flashcards").replace("/typey-type","")} className="link-button link-button-ghost table-cell mr1">Flashcards</Link>
-                          :
-                          null
-                        }
-                        <a href={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} role="button">Restart</a>
-                        <a href={this.props.path} onClick={this.props.handleStopLesson} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} role="button">Stop</a>
-                      </div>
-                    </div>
-                  </div>
+                  <LessonSubheader
+                    createNewCustomLesson={createNewCustomLesson}
+                    handleStopLesson={this.props.handleStopLesson}
+                    lessonSubTitle={lessonSubTitle}
+                    lessonTitle={this.props.lessonTitle}
+                    overviewLink={overviewLink}
+                    path={this.props.path}
+                    restartLesson={this.props.restartLesson}
+                    ref={this.mainHeading}
+                  />
                   <div id="lesson-page" className="flex-wrap-md flex mx-auto mw-1920">
                     <div id="main-lesson-area" className="flex-grow mx-auto mw-1440 min-w-0">
                       <div>
-                        <div className="mx-auto mw-1920">
-                          {customMessage}
-                        </div>
+                        {this.props.settings?.customMessage && (
+                          <div className="mx-auto mw-1920">
+                            <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>
+                          </div>
+                          )
+                        }
                         <div className="mx-auto mw-1920 p3">
                           <button onClick={this.props.changeShowScoresWhileTyping} className={"de-emphasized-button show-scores-control absolute mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'show-scores-control--hidden' : 'show-scores-control--shown')}>Show scores</button>
                           <AnimateHeight
@@ -363,7 +330,7 @@ class Lesson extends Component {
                             </div>
                           </AnimateHeight>
                           <div role="article" className="lesson-canvas panel mx-auto mw-1440 p2 mb3 flex">
-                            {revisionModeButton}
+                            {this.props.revisionMode && <div><Link to={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="revision-mode-button no-underline absolute right-0">Revision mode<IconClosingCross role="img" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="Exit revision mode" /></Link></div>}
                             <div className="mx-auto mw100 mt10 min-width70 material-typed-text-and-hint flex-grow">
                               <Material
                                 actualText={this.props.actualText}
@@ -420,15 +387,15 @@ class Lesson extends Component {
                           <LessonCanvasFooter
                             chooseStudy={this.props.chooseStudy}
                             disableUserSettings={this.props.disableUserSettings}
-                            hideOtherSettings={this.props.hideOtherSettings}
+                            hideOtherSettings={this.state.hideOtherSettings}
                             path={this.props.path}
                             setAnnouncementMessage={this.props.setAnnouncementMessage}
-                            toggleHideOtherSettings={this.props.toggleHideOtherSettings}
+                            toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
                             totalWordCount={this.props.totalWordCount}
                             userSettings={this.props.userSettings}
                           />
                         </div>
-                        <p className="text-center"><a href={this.prefillSurveyLink()} className="text-small mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
+                        <p className="text-center"><a href={googleFormURL + encodeURIComponent(this.props.location?.pathname || '') + googleFormParam} className="text-small mt0" target="_blank" rel="noopener noreferrer" id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
                       </div>
                     </div>
                     <div>
@@ -447,12 +414,11 @@ class Lesson extends Component {
                         handleStartFromWordChange={this.props.handleStartFromWordChange}
                         handleRepetitionsChange={this.props.handleRepetitionsChange}
                         handleUpcomingWordsLayout={this.props.handleUpcomingWordsLayout}
-                        hideOtherSettings={this.props.hideOtherSettings}
+                        hideOtherSettings={this.state.hideOtherSettings}
                         maxStartFromWord={this.props.lessonLength}
                         path={this.props.path}
                         revisionMode={this.props.revisionMode}
                         setAnnouncementMessage={this.props.setAnnouncementMessage}
-                        toggleHideOtherSettings={this.props.toggleHideOtherSettings}
                         totalWordCount={this.props.totalWordCount}
                         userSettings={this.props.userSettings}
                       />
@@ -465,7 +431,7 @@ class Lesson extends Component {
         )
       }
     } else {
-      return <div><h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">That lesson is missing.</h2></div>;
+      return <div><h2 ref={this.mainHeading} tabIndex="-1">That lesson is missing.</h2></div>;
     }
   }
 }
