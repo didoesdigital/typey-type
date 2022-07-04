@@ -362,7 +362,7 @@ class Finished extends Component {
     } else if (wpm > 20) {
       wpmCommentary = 'Faster than handwriting';
     } else {
-      wpmCommentary = 'Practice this lesson again';
+      wpmCommentary = 'Try this lesson again';
     }
 
     let newTopSpeedSectionOrFinished = "Finished: " + this.props.lessonTitle;
