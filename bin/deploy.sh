@@ -27,10 +27,6 @@ ruby ~/projects/plover-tools/typey-type-static-lesson-generator/run-build-dict-f
 
 
 git tag -n
-# cd ~/projects/thebakery/diidau-src/typey-type/
-# make
-# cd -
-# cd ~/projects/thebakery/di.id.au/
 tig status
 
 
