@@ -1,55 +1,43 @@
+const wpmCommentary = [
+  [5000, "Faster than you can think…"],
+  [1500, "Faster than a speed reader!"],
+  [300, "Faster than you can read!"],
+  [250, "As fast as an auctioneer!"],
+  [225, "Faster than a pro stenographer!"],
+  [160, "Faster than a stenographer!"],
+  [150, "Faster than you can talk!"],
+  [100, "Faster than a stenotype student!"],
+  [80, "Faster than a pro typist!"],
+  [60, "Faster than a good QWERTY typist!"],
+  [40, "Faster than your average typist!"],
+  [27, "Faster than hunt and peck typists"],
+  [22, "Faster than Morse code"],
+  [20, "Faster than handwriting"],
+];
+
 const getHeadingsText = (
   wpm: number,
   lessonTitle: string,
   newTopSpeedToday: boolean,
   newTopSpeedPersonalBest: boolean
 ) => {
-  let subHeadingText = "";
-  if (wpm > 5000) {
-    subHeadingText = "Faster than you can think…";
-  } else if (wpm > 1500) {
-    subHeadingText = "Faster than a speed reader!";
-  } else if (wpm > 300) {
-    subHeadingText = "Faster than you can read!";
-  } else if (wpm > 250) {
-    subHeadingText = "As fast as an auctioneer!";
-  } else if (wpm > 225) {
-    subHeadingText = "Faster than a pro stenographer!";
-  } else if (wpm > 160) {
-    subHeadingText = "Faster than a stenographer!";
-  } else if (wpm > 150) {
-    subHeadingText = "Faster than you can talk!";
-  } else if (wpm > 100) {
-    subHeadingText = "Faster than a stenotype student!";
-  } else if (wpm > 80) {
-    subHeadingText = "Faster than a pro typist!";
-  } else if (wpm > 60) {
-    subHeadingText = "Faster than a good QWERTY typist!";
-  } else if (wpm > 40) {
-    subHeadingText = "Faster than your average typist!";
-  } else if (wpm > 27) {
-    subHeadingText = "Faster than hunt and peck typists";
-  } else if (wpm > 22) {
-    subHeadingText = "Faster than Morse code";
-  } else if (wpm > 20) {
-    subHeadingText = "Faster than handwriting";
-  } else {
-    subHeadingText = "Try this lesson again";
-  }
-
   let headingText = "Finished: " + lessonTitle;
-
   if (newTopSpeedToday && newTopSpeedPersonalBest && wpm > 3) {
     headingText = "New personal best!";
   } else if (newTopSpeedToday && !newTopSpeedPersonalBest && wpm > 3) {
     headingText = "New top speed for today!";
   }
 
+  let subHeadingText = (wpmCommentary.find(([speed]) => wpm > speed) || [
+    -1,
+    "Try this lesson again",
+  ])[1];
   if (newTopSpeedToday && newTopSpeedPersonalBest && wpm > 3) {
     subHeadingText = lessonTitle;
   } else if (newTopSpeedToday && !newTopSpeedPersonalBest && wpm > 3) {
     subHeadingText = lessonTitle;
   }
+
   return [headingText, subHeadingText];
 };
 
