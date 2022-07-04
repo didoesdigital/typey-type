@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as Confetti from "../../utils/confetti";
+import getHeadingsText from "./getHeadingsText";
 
 type ConfettiConfig = {
   sparsity: number;
@@ -7,9 +8,11 @@ type ConfettiConfig = {
 } | null;
 
 type FinishedSummaryHeadingsProps = {
-  headingText: string;
-  subHeadingText: string;
   confettiConfig: ConfettiConfig;
+  lessonTitle: string;
+  newTopSpeedPersonalBest: boolean;
+  newTopSpeedToday: boolean;
+  wpm: number;
 };
 
 const particles: any = [];
@@ -39,9 +42,11 @@ const restartConfetti = (
 };
 
 const FinishedSummaryHeadings = ({
-  headingText,
-  subHeadingText,
   confettiConfig,
+  lessonTitle,
+  newTopSpeedPersonalBest,
+  newTopSpeedToday,
+  wpm,
 }: FinishedSummaryHeadingsProps) => {
   const finishedHeadingRef = useRef<HTMLHeadingElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -81,6 +86,13 @@ const FinishedSummaryHeadings = ({
       canvasWidth,
       canvasHeight
     );
+
+  const [headingText, subHeadingText] = getHeadingsText(
+    wpm,
+    lessonTitle,
+    newTopSpeedToday,
+    newTopSpeedPersonalBest
+  );
 
   return (
     <>

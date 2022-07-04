@@ -113,50 +113,6 @@ class Finished extends Component {
       numericAccuracy = 0;
     }
 
-    let wpmCommentary = '';
-    if (wpm > 5000) {
-      wpmCommentary = 'Faster than you can think…';
-    } else if (wpm > 1500) {
-      wpmCommentary = 'Faster than a speed reader!';
-    } else if (wpm > 300) {
-      wpmCommentary = 'Faster than you can read!';
-    } else if (wpm > 250) {
-      wpmCommentary = 'As fast as an auctioneer!';
-    } else if (wpm > 225) {
-      wpmCommentary = 'Faster than a pro stenographer!';
-    } else if (wpm > 160) {
-      wpmCommentary = 'Faster than a stenographer!';
-    } else if (wpm > 150) {
-      wpmCommentary = 'Faster than you can talk!';
-    } else if (wpm > 100) {
-      wpmCommentary = 'Faster than a stenotype student!';
-    } else if (wpm > 80) {
-      wpmCommentary = 'Faster than a pro typist!';
-    } else if (wpm > 60) {
-      wpmCommentary = 'Faster than a good QWERTY typist!';
-    } else if (wpm > 40) {
-      wpmCommentary = 'Faster than your average typist!';
-    } else if (wpm > 27) {
-      wpmCommentary = 'Faster than hunt and peck typists';
-    } else if (wpm > 22) {
-      wpmCommentary = 'Faster than Morse code';
-    } else if (wpm > 20) {
-      wpmCommentary = 'Faster than handwriting';
-    } else {
-      wpmCommentary = 'Try this lesson again';
-    }
-
-    let newTopSpeedSectionOrFinished = "Finished: " + this.props.lessonTitle;
-
-    if (this.state.newTopSpeedToday && this.state.newTopSpeedPersonalBest && wpm > 3) {
-      newTopSpeedSectionOrFinished = "New personal best!";
-      wpmCommentary = this.props.lessonTitle;
-    }
-    else if (this.state.newTopSpeedToday && !this.state.newTopSpeedPersonalBest && wpm > 3) {
-      newTopSpeedSectionOrFinished = "New top speed for today!";
-      wpmCommentary = this.props.lessonTitle;
-    }
-
     return (
       <div>
         <div id="lesson-page" className="flex-wrap-md flex mx-auto mw-1920">
@@ -173,9 +129,11 @@ class Finished extends Component {
                     <div className="finished-lesson mx-auto mw-1440">
                       <div className="finished-summary mb3 text-center">
                         <FinishedSummaryHeadings
-                          headingText={newTopSpeedSectionOrFinished}
-                          subHeadingText={wpmCommentary}
                           confettiConfig={this.state.confettiConfig}
+                          lessonTitle={this.props.lessonTitle}
+                          newTopSpeedPersonalBest={this.state.newTopSpeedPersonalBest}
+                          newTopSpeedToday={this.state.newTopSpeedToday}
+                          wpm={wpm}
                         />
                         <FinishedDataViz
                           wpm={wpm}
