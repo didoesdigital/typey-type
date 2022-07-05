@@ -809,6 +809,15 @@ input:focus::placeholder {
   word-wrap: break-word; // IE 11, alias for overflow-wrap
 }
 
+// Tailwind syntax
+.break-words {
+  overflow-wrap: break-word;
+}
+// Tailwind-ish syntax
+.whitespace-break-spaces {
+  white-space: break-spaces;
+}
+
 .h2 {
   font-size: $h2-size;
   font-weight: normal;
