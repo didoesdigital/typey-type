@@ -55,7 +55,7 @@ export default function Game({
   const onChangeSHUFLInput = (inputText) => {
     setTypedText(inputText);
     if (rightAnswers.includes(inputText.trim())) {
-      updateMetWords(inputText);
+      updateMetWords(inputText.trim());
       setTypedText("");
       setPreviousCompletedPhraseAsTyped(inputText);
       const pickedWord = pickAWord(material);
