@@ -10,7 +10,7 @@ const handlePlayAgainClick = (event, gameName, dispatch) => {
   event.preventDefault();
 
   if (dispatch) {
-    dispatch({ type: actions.restartGame });
+    dispatch({ type: actions.gameRestarted });
   }
 
   GoogleAnalytics.event({

@@ -1,7 +1,7 @@
 import React from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-export default function RoundProgress({ round }) {
+export default function RoundProgress({ round, level }) {
   return (
     <div className="flex flex-grow">
       <p className="text-right w-100">
@@ -12,7 +12,7 @@ export default function RoundProgress({ round }) {
           </CSSTransition>
         </TransitionGroup>
         <br />
-        Level: 1
+        Level: {level || 1}
       </p>
     </div>
   );

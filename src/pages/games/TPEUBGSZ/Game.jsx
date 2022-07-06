@@ -44,7 +44,7 @@ export default function Game() {
       setPuzzleText(madeUpWord);
       setCurrentStroke(hint);
       setShowHint(false);
-      dispatch({ type: actions.moveToNextRound });
+      dispatch({ type: actions.roundCompleted });
     }
   };
 

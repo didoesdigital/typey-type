@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { actions } from "../utilities/gameActions";
+import { actions } from "./gameActions";
 import { initConfig, gameReducer } from "./gameReducer";
 import Completed from "../components/Completed";
 import Hint from "../components/Hint";
@@ -8,14 +8,6 @@ import Intro from "../components/Intro";
 import RoundProgress from "../components/RoundProgress";
 import Puzzle from "./Puzzle";
 import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
-import { createStrokeHintForPhrase } from "../../../utils/transformingDictionaries";
-
-import {
-  getRightAnswers,
-  pickAWord,
-  selectMaterial,
-  shuffleWord,
-} from "./utilities";
 
 const gameName = "SHUFL";
 const introText =
@@ -26,49 +18,37 @@ export default function Game({
   startingMetWordsToday,
   updateMetWords,
 }) {
-  const [material, setMaterial] = useState([]);
-  const [puzzleText, setPuzzleText] = useState("");
-  const [rightAnswers, setRightAnswers] = useState([]);
   const [typedText, setTypedText] = useState("");
-  const [currentStroke, setCurrentStroke] = useState("");
   const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
     useState("");
   const [showHint, setShowHint] = useState(false);
-  const [state, dispatch] = useReducer(
+
+  const [gameState, dispatch] = useReducer(
     gameReducer,
     undefined, // init state
     initConfig
   );
 
   useEffect(() => {
-    const filteredMetWords = selectMaterial(startingMetWordsToday);
-    setMaterial(filteredMetWords);
-    const pickedWord = pickAWord(filteredMetWords);
-    setPuzzleText(shuffleWord(pickedWord));
-    setCurrentStroke(
-      createStrokeHintForPhrase(pickedWord.trim(), globalLookupDictionary)
-    );
+    dispatch({
+      type: actions.gameStarted,
+      payload: { startingMetWordsToday, globalLookupDictionary },
+    });
     setShowHint(false);
-    setRightAnswers(getRightAnswers(filteredMetWords, pickedWord));
   }, [startingMetWordsToday, globalLookupDictionary]);
 
   const onChangeSHUFLInput = (inputText) => {
     setTypedText(inputText);
-    if (rightAnswers.includes(inputText.trim())) {
+    if (gameState.rightAnswers.includes(inputText.trim())) {
       updateMetWords(inputText.trim());
       setTypedText("");
       setPreviousCompletedPhraseAsTyped(inputText);
-      const pickedWord = pickAWord(material);
-      setPuzzleText(shuffleWord(pickedWord));
-      setCurrentStroke(
-        createStrokeHintForPhrase(pickedWord.trim(), globalLookupDictionary)
-      );
       setShowHint(false);
-      setRightAnswers(getRightAnswers(material, pickedWord));
-      dispatch({ type: actions.moveToNextRound });
+      dispatch({ type: actions.roundCompleted });
     }
 
-    if (process.env.NODE_ENV === "development") console.log(rightAnswers);
+    if (process.env.NODE_ENV === "development")
+      console.log(gameState.rightAnswers);
   };
 
   return (
@@ -77,7 +57,7 @@ export default function Game({
         <h3 id="typey-type-SHUFL-game" className="text-center mb3">
           SHUFL game
         </h3>
-        {state.gameComplete ? (
+        {gameState.gameComplete ? (
           <Completed gameName={gameName} dispatch={dispatch} />
         ) : (
           <>
@@ -92,18 +72,21 @@ export default function Game({
                   />
                 }
               />
-              <RoundProgress round={state.roundIndex + 1} />
+              <RoundProgress
+                round={gameState.roundIndex + 1}
+                level={gameState.level}
+              />
             </div>
-            <Puzzle puzzleText={puzzleText} />
+            <Puzzle puzzleText={gameState.puzzleText} />
             <Input
               onChangeInput={onChangeSHUFLInput}
               previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-              round={state.roundIndex + 1}
+              round={gameState.roundIndex + 1}
               typedText={typedText}
               gameName={gameName}
             />
             <Hint
-              currentStroke={currentStroke}
+              currentStroke={gameState.currentHint}
               gameName={gameName}
               setShowHint={setShowHint}
               showHint={showHint}

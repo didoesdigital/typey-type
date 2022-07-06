@@ -70,7 +70,7 @@ export default function Game() {
       setPuzzleText(choosePuzzleKey(clickedKey));
       setStenoStroke(new Stroke());
       setRightWrongColor(rightColor);
-      dispatch({ type: actions.moveToNextRound });
+      dispatch({ type: actions.roundCompleted });
     } else {
       setStenoStroke(stenoStroke.set(key));
       setRightWrongColor(wrongColor);

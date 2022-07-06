@@ -14,7 +14,7 @@ export const initConfig = (state) => ({
 
 export const gameReducer = (state, action) => {
   switch (action?.type) {
-    case actions.moveToNextRound:
+    case actions.roundCompleted:
       return state.roundIndex + 1 === roundToWin
         ? {
             ...state,
@@ -25,7 +25,7 @@ export const gameReducer = (state, action) => {
             ...state,
             roundIndex: state.roundIndex + 1,
           };
-    case actions.restartGame:
+    case actions.gameRestarted:
       return {
         ...state,
         gameComplete: false,
