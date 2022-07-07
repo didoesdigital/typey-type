@@ -8,7 +8,7 @@ import React, {
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import * as Confetti from "../../../utils/confetti.js";
 import { actions } from "../utilities/gameActions";
-import { initConfig, gameReducer } from "./gameReducer";
+import { initConfig, gameReducer, roundToWin } from "./gameReducer";
 import Completed from "../components/Completed";
 import Intro from "../components/Intro";
 import RoundProgress from "../components/RoundProgress";
@@ -107,7 +107,10 @@ export default function Game() {
                 }
               />
               <div id={"good-guess"}>
-                <RoundProgress round={state.roundIndex + 1} />
+                <RoundProgress
+                  round={state.roundIndex + 1}
+                  roundToWin={roundToWin}
+                />
               </div>
             </div>
             <Puzzle puzzleText={prettyKey(puzzleText)} />

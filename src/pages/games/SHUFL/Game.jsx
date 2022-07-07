@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { actions } from "./gameActions";
-import { initConfig, gameReducer } from "./gameReducer";
+import { initConfig, gameReducer, roundToWin, levelToWin } from "./gameReducer";
 import Completed from "../components/Completed";
 import Hint from "../components/Hint";
 import Input from "../components/Input";
@@ -12,7 +12,7 @@ import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
 
 const gameName = "SHUFL";
 const introText =
-  "The steno robots have been dancing too much and shuffled all the letters out of order! You need to type the correct word to get them all back in order.";
+  "The steno robots have been dancing too much and shuffled all the letters! You need to type the correct word to get them all back in order.";
 
 export default function Game({
   globalLookupDictionary,
@@ -74,8 +74,10 @@ export default function Game({
                 }
               />
               <RoundProgress
-                round={gameState.roundIndex + 1}
                 level={gameState.level}
+                levelToWin={levelToWin}
+                round={gameState.roundIndex + 1}
+                roundToWin={roundToWin}
               />
             </div>
             {gameState.levelComplete ? (

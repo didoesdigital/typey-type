@@ -1,7 +1,12 @@
 import React from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-export default function RoundProgress({ round, level }) {
+export default function RoundProgress({
+  round,
+  level,
+  roundToWin,
+  levelToWin,
+}) {
   return (
     <div className="flex flex-grow">
       <p className="text-right w-100">
@@ -10,9 +15,14 @@ export default function RoundProgress({ round, level }) {
           <CSSTransition timeout={500} classNames="bloop" appear={true}>
             <strong className="dib">{round}</strong>
           </CSSTransition>
-        </TransitionGroup>
+        </TransitionGroup>{" "}
+        of {roundToWin}
         <br />
-        Level: {level || 1}
+        {level && (
+          <>
+            Level: <strong>{level || 1}</strong> of {levelToWin}
+          </>
+        )}
       </p>
     </div>
   );

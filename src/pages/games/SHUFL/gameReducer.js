@@ -8,8 +8,8 @@ import {
 } from "./utilities";
 import { createStrokeHintForPhrase } from "../../../utils/transformingDictionaries";
 
-const roundToWin = 3;
-const levelToWin = 4;
+export const roundToWin = 3;
+export const levelToWin = 4;
 
 const initialProgress = {
   gameComplete: false,

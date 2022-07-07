@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { actions } from "../utilities/gameActions";
-import { initConfig, gameReducer } from "./gameReducer";
+import { initConfig, gameReducer, roundToWin } from "./gameReducer";
 import Completed from "../components/Completed";
 import Hint from "../components/Hint";
 import Input from "../components/Input";
@@ -69,7 +69,7 @@ export default function Game() {
                   />
                 }
               />
-              <RoundProgress round={state.roundIndex + 1} />
+              <RoundProgress round={state.roundIndex + 1} roundToWin={roundToWin} />
             </div>
             <Puzzle puzzleText={puzzleText} />
             <Input

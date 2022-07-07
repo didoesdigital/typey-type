@@ -1,6 +1,6 @@
 import { actions } from "../utilities/gameActions";
 
-const roundToWin = 10;
+export const roundToWin = 8;
 
 const defaultState = {
   firstGuess: true,
