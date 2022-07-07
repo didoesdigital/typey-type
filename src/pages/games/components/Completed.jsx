@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import GoogleAnalytics from "react-ga";
+import { Link } from "react-router-dom";
 import { actions } from "../utilities/gameActions";
 import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";
 import * as Confetti from "../../../utils/confetti.js";
@@ -99,6 +100,9 @@ export default React.memo(function Completed({ gameName, dispatch }) {
         >
           Play again
         </button>
+      </p>
+      <p className="mx-auto text-center mt3">
+        <Link to="/games" className="text-center py1">Games</Link>
       </p>
     </>
   );
