@@ -1,6 +1,5 @@
 import React from "react";
 import Game from "./Game";
-import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -9,13 +8,9 @@ export default {
 };
 
 const Template = (args) => (
-  <Router basename="/typey-type">
-    <div className="p3">
-      <Route>
-        <Game {...args} />
-      </Route>
-    </div>
-  </Router>
+  <div className="p3">
+    <Game {...args} />
+  </div>
 );
 
 export const TPEUBGSZGameStory = Template.bind({});
