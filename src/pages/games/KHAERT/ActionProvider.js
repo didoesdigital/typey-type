@@ -92,8 +92,8 @@ class ActionProvider {
   handleAgeQuestions(userMessage) {
     const ageInMonths = timeMonth.count(new Date(2022, 5, 25), Date.now());
     const reply = userMessage.includes("age")
-      ? `My age? I'm ${ageInMonths} month${ageInMonths > 1 ? "s" : ""} old`
-      : `How old am I? I'm ${ageInMonths} month${
+      ? `My age? I'm nearly ${ageInMonths} month${ageInMonths > 1 ? "s" : ""} old`
+      : `How old am I? I am ${ageInMonths} month${
           ageInMonths > 1 ? "s" : ""
         } old`;
     const botMessage = this.createChatBotMessage(reply);
