@@ -1,5 +1,6 @@
 import { shuffle } from "d3-array";
 import { timeMonth } from "d3-time";
+import { botName } from "./config";
 
 class ActionProvider {
   constructor(createChatBotMessage, setStateFunc, createClientMessage) {
@@ -83,7 +84,7 @@ class ActionProvider {
   }
 
   handleNameQuestions() {
-    const reply = "I'm Shazza!";
+    const reply = `I'm ${botName}!`;
     const botMessage = this.createChatBotMessage(reply);
     this.updateChatbotState(botMessage);
   }
