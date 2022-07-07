@@ -46,18 +46,6 @@ export default function GamesIndex() {
               }
             />
             <GameBox
-              title="KHAERT (chatter)"
-              description="Have a yarn with the Aussie bot. Practise simple convo."
-              linkTo="/games/KHAERT"
-              linkText="Start KHAERT"
-              robot={
-                <AussieRobot
-                  role="img"
-                  aria-labelledby="aussie-robot-title"
-                />
-              }
-            />
-            <GameBox
               title="SHUFL (shuffle)"
               description="Solve the puzzle to straighten out shuffled words."
               linkTo="/games/SHUFL"
@@ -75,6 +63,18 @@ export default function GamesIndex() {
                 <ThinkingRobot
                   role="img"
                   aria-labelledby="thinking-robot-title"
+                />
+              }
+            />
+            <GameBox
+              title="KHAERT (chatter)"
+              description="Have a yarn with the Aussie bot. Practise simple convo."
+              linkTo="/games/KHAERT"
+              linkText="Start KHAERT"
+              robot={
+                <AussieRobot
+                  role="img"
+                  aria-labelledby="aussie-robot-title"
                 />
               }
             />
