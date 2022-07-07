@@ -113,7 +113,7 @@ export default function Game({
                 rel="noopener noreferrer"
                 id="ga--SHUFL--give-feedback"
               >
-                Give feedback
+                Give feedback (form opens in new tab)
               </a>
             </p>
           </>

@@ -170,7 +170,7 @@ export default function Game() {
                 rel="noopener noreferrer"
                 id="ga--KAOES--give-feedback"
               >
-                Give feedback
+                Give feedback (form opens in new tab)
               </a>
             </p>
           </>
