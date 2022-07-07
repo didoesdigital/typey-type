@@ -67,7 +67,7 @@ export default function Game({ globalLookupDictionary }) {
                 messageParser={MessageParser}
                 actionProvider={ActionProvider}
                 headerText={`Convo with ${botName}`}
-                placeholderText="Write here and hit return (R-R)"
+                placeholderText="Write here, hit enter (R-R)"
               />
             </div>
             <p>
