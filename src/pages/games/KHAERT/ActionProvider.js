@@ -1,4 +1,5 @@
 import { shuffle } from "d3-array";
+import { timeMonth } from "d3-time";
 
 class ActionProvider {
   constructor(createChatBotMessage, setStateFunc, createClientMessage) {
@@ -79,6 +80,17 @@ class ActionProvider {
       phraseToLookup: strippedUserMessage,
       messages: [...prevState.messages, botMessage],
     }));
+  }
+
+  handleAgeQuestions(userMessage) {
+    const ageInMonths = timeMonth.count(new Date(2022, 5, 25), Date.now());
+    const reply = userMessage.includes("age")
+      ? `My age? I'm ${ageInMonths} month${ageInMonths > 1 ? "s" : ""} old`
+      : `How old am I? I'm ${ageInMonths} month${
+          ageInMonths > 1 ? "s" : ""
+        } old`;
+    const botMessage = this.createChatBotMessage(reply);
+    this.updateChatbotState(botMessage);
   }
 
   handleWhatQuestions(userMessage) {

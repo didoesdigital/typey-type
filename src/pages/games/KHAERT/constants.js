@@ -1,3 +1,5 @@
+export const ageQuestions = ["how old", "age"];
+
 export const greetings = [
   "hello",
   "hi",
