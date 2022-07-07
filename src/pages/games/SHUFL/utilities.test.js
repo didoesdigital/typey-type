@@ -22,25 +22,20 @@ describe("selectMaterial", () => {
 
   it("returns grouped material by word length", () => {
     const result = selectMaterial(material);
-    expect(result.has3Letters.slice().sort()).toEqual([
-      "bye",
-      "gal",
-      "maw",
-      "mow",
-    ]);
-    expect(result.has4Letters.slice().sort()).toEqual([
+    expect(result[3].slice().sort()).toEqual(["bye", "gal", "maw", "mow"]);
+    expect(result[4].slice().sort()).toEqual([
       "duly",
       "face",
       "herb",
       "risk",
     ]);
-    expect(result.has5Letters.slice().sort()).toEqual([
+    expect(result[5].slice().sort()).toEqual([
       "brake",
       "gamed",
       "tidal",
       "winds",
     ]);
-    expect(result.has6Letters.slice().sort()).toEqual([
+    expect(result[6].slice().sort()).toEqual([
       "blamed",
       "coding",
       "hacked",

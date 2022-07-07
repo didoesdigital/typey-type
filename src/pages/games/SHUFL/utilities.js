@@ -9,20 +9,8 @@ import {
   hasOnlyLowercaseLetters,
 } from "../../../utils/dictEntryPredicates";
 
-export const getLevelMaterial = (material, level) => {
-  switch (level) {
-    case 1:
-      return material.has3Letters;
-    case 2:
-      return material.has4Letters;
-    case 3:
-      return material.has5Letters;
-    case 4:
-      return material.has6Letters;
-    default:
-      return material.has3Letters;
-  }
-};
+export const getLevelMaterial = (material, level) =>
+  material[level + 2] || material[3];
 
 export const getRightAnswers = (levelMaterial, pickedWord) =>
   levelMaterial.reduce((prevArr, currentWord) => {
@@ -36,10 +24,10 @@ export const pickAWord = (levelMaterial) =>
   shuffle(levelMaterial.slice()).slice(0, 1)[0].trim();
 
 const defaultWords = {
-  has3Letters: ["was", "her", "out"],
-  has4Letters: ["them", "when", "more", "your", "than", "time"],
-  has5Letters: ["their", "might", "place"],
-  has6Letters: ["course", "turned", "friend"],
+  3: ["was", "her", "out"],
+  4: ["them", "when", "more", "your", "than", "time"],
+  5: ["their", "might", "place"],
+  6: ["course", "turned", "friend"],
 };
 
 export const selectMaterial = (startingMetWordsToday) => {
@@ -54,40 +42,20 @@ export const selectMaterial = (startingMetWordsToday) => {
     )
     .reduce(
       (previous, currentWord) => {
-        switch (currentWord.length) {
-          case 3:
-            previous.has3Letters.push(currentWord);
-            break;
-          case 4:
-            previous.has4Letters.push(currentWord);
-            break;
-          case 5:
-            previous.has5Letters.push(currentWord);
-            break;
-          case 6:
-            previous.has6Letters.push(currentWord);
-            break;
-
-          default:
-            break;
+        if (currentWord.length >= 3 && currentWord.length <= 6) {
+          previous[currentWord.length].push(currentWord);
         }
+
         return previous;
       },
-      { has3Letters: [], has4Letters: [], has5Letters: [], has6Letters: [] }
+      { 3: [], 4: [], 5: [], 6: [] }
     );
 
-  if (result.has3Letters.length < 3) {
-    result.has3Letters.push(...defaultWords.has3Letters);
-  }
-  if (result.has4Letters.length < 3) {
-    result.has4Letters.push(...defaultWords.has4Letters);
-  }
-  if (result.has5Letters.length < 3) {
-    result.has5Letters.push(...defaultWords.has5Letters);
-  }
-  if (result.has6Letters.length < 3) {
-    result.has6Letters.push(...defaultWords.has6Letters);
-  }
+  [3, 4, 5, 6].forEach((wordLength) => {
+    if (result[wordLength].length < 3) {
+      result[wordLength].push(...defaultWords[wordLength]);
+    }
+  });
 
   return result;
 };
