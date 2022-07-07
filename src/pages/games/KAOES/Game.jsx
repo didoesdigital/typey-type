@@ -164,20 +164,24 @@ export default function Game() {
                 />
               </div>
             </div>
-            <p className="text-center mt10 text-small">
-              Got a suggestion?{" "}
-              <a
-                href="https://forms.gle/L8vGQTtLwKujLtFb7"
-                className="mt0"
-                target="_blank"
-                rel="noopener noreferrer"
-                id="ga--KAOES--give-feedback"
-              >
-                Give feedback (form opens in new tab)
-              </a>
-            </p>
           </>
         )}
+        <p
+          className={`text-center text-small ${
+            state.gameComplete ? "mt10" : "mt1"
+          }`}
+        >
+          Got a suggestion?{" "}
+          <a
+            href="https://forms.gle/L8vGQTtLwKujLtFb7"
+            className="mt0"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="ga--KAOES--give-feedback"
+          >
+            Give feedback (form opens in new tab)
+          </a>
+        </p>
       </div>
     </div>
   );
