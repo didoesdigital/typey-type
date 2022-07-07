@@ -64,7 +64,9 @@ const Games = ({
         path={`${match.url}/SHUFL`}
         render={() => (
           <AsyncSHUFL
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
+            personalDictionaries={personalDictionaries}
             startingMetWordsToday={startingMetWordsToday}
             updateMetWords={updateMetWords}
           />
