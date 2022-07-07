@@ -80,7 +80,7 @@ export default React.memo(function LevelCompleted({ gameName, level, dispatch })
         tabIndex="0"
         onClick={restartConfetti}
         onKeyDown={restartConfetti}
-        className="w-100 pt1"
+        className="w-100"
       >
         <div className="w-100 mw-48 mx-auto" id="level-completed">
           <AlertRobot />
