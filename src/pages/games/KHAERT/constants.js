@@ -54,4 +54,6 @@ export const lookupKeywords = [
 
 export const nameQuestions = ["name", botName];
 
+export const locationQuestions = ["where", "location", "live"];
+
 export const whatQuestions = ["what is", "what does"];

@@ -99,6 +99,16 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
+  handleLocationQuestions() {
+    const reply = shuffle([
+      "I come from a little town called Broome in Western Australia",
+      "I'm on holiday in South Australia",
+      "I live inside Typey Type!",
+    ]).slice(0, 1);
+    const botMessage = this.createChatBotMessage(reply);
+    this.updateChatbotState(botMessage);
+  }
+
   handleWhatQuestions(userMessage) {
     const reply = userMessage.includes("steno")
       ? "Stenography is the process of writing shorthand and with a stenotype machine or fancy keyboard you can write over 200 words per minute"

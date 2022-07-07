@@ -1,12 +1,13 @@
 import {
   ageQuestions,
-  nameQuestions,
-  greetings,
   goodbyes,
+  greetings,
   howQuestions,
   keyboardFunctions,
   learningKeywords,
+  locationQuestions,
   lookupKeywords,
+  nameQuestions,
   whatQuestions,
 } from "./constants.js";
 import { escapeRegExp } from "../../../utils/utils";
@@ -66,6 +67,14 @@ class MessageParser {
       lowerCaseMessage.includes("?")
     ) {
       this.actionProvider.handleAgeQuestions(message);
+      foundSomething = true;
+    }
+
+    if (
+      messageMatchesAKeyword(lowerCaseMessage, locationQuestions) &&
+      lowerCaseMessage.includes("?")
+    ) {
+      this.actionProvider.handleLocationQuestions(message);
       foundSomething = true;
     }
 
