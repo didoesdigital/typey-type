@@ -6,6 +6,7 @@ import Hint from "../components/Hint";
 import Input from "../components/Input";
 import Intro from "../components/Intro";
 import RoundProgress from "../components/RoundProgress";
+import LevelCompleted from "./LevelCompleted";
 import Puzzle from "./Puzzle";
 import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
 
@@ -77,20 +78,32 @@ export default function Game({
                 level={gameState.level}
               />
             </div>
-            <Puzzle puzzleText={gameState.puzzleText} />
-            <Input
-              onChangeInput={onChangeSHUFLInput}
-              previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-              round={gameState.roundIndex + 1}
-              typedText={typedText}
-              gameName={gameName}
-            />
-            <Hint
-              currentStroke={gameState.currentHint}
-              gameName={gameName}
-              setShowHint={setShowHint}
-              showHint={showHint}
-            />
+            {gameState.levelComplete ? (
+              <LevelCompleted
+                dispatch={dispatch}
+                gameName={gameName}
+                level={gameState.level}
+              />
+            ) : (
+              <>
+                <Puzzle puzzleText={gameState.puzzleText} />
+                <Input
+                  onChangeInput={onChangeSHUFLInput}
+                  previousCompletedPhraseAsTyped={
+                    previousCompletedPhraseAsTyped
+                  }
+                  round={gameState.roundIndex + 1}
+                  typedText={typedText}
+                  gameName={gameName}
+                />
+                <Hint
+                  currentStroke={gameState.currentHint}
+                  gameName={gameName}
+                  setShowHint={setShowHint}
+                  showHint={showHint}
+                />
+              </>
+            )}
           </>
         )}
       </div>

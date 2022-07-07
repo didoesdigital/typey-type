@@ -13,6 +13,7 @@ const levelToWin = 4;
 
 const initialProgress = {
   gameComplete: false,
+  levelComplete: false,
   level: 1,
   roundIndex: 0,
 };
@@ -103,6 +104,7 @@ const getEarlyLevelCompletedState = (state) => {
   return {
     ...state,
     level: increasedLevel,
+    levelComplete: true,
     roundIndex: 0,
     currentHint: createStrokeHintForPhrase(
       roundCompletedPickedWord.trim(),
@@ -140,6 +142,9 @@ export const gameReducer = (state, action) => {
 
     case actions.gameRestarted:
       return getGameRestartedState(state, action);
+
+    case actions.levelRestarted:
+      return { ...state, levelComplete: false };
 
     case actions.roundCompleted:
       return state.roundIndex + 1 === roundToWin && state.level === levelToWin
