@@ -1,6 +1,7 @@
 import {
   ageQuestions,
   goodbyes,
+  favouriteQuestions,
   greetings,
   howQuestions,
   keyboardFunctions,
@@ -83,6 +84,14 @@ class MessageParser {
       lowerCaseMessage.includes("?")
     ) {
       this.actionProvider.handleNameQuestions(message);
+      foundSomething = true;
+    }
+
+    if (
+      messageMatchesAKeyword(lowerCaseMessage, favouriteQuestions) &&
+      lowerCaseMessage.includes("?")
+    ) {
+      this.actionProvider.handleFavouriteQuestions(message);
       foundSomething = true;
     }
 

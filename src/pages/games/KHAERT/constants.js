@@ -52,6 +52,8 @@ export const lookupKeywords = [
   "write",
 ];
 
+export const favouriteQuestions = ["favourite", "fave", "favorite"];
+
 export const nameQuestions = ["name", botName];
 
 export const locationQuestions = ["where", "location", "live"];

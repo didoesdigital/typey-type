@@ -99,6 +99,16 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
+  handleFavouriteQuestions() {
+    const reply = shuffle([
+      "I like to go boop, boop, boop!",
+      "My fave thing about steno is going boop, boop!",
+      "Boop, boop!",
+    ]).slice(0, 1);
+    const botMessage = this.createChatBotMessage(reply);
+    this.updateChatbotState(botMessage);
+  }
+
   handleLocationQuestions() {
     const reply = shuffle([
       "I come from a little town called Broome in Western Australia",
