@@ -1,5 +1,6 @@
 import {
   ageQuestions,
+  nameQuestions,
   greetings,
   goodbyes,
   howQuestions,
@@ -60,8 +61,19 @@ class MessageParser {
       foundSomething = true;
     }
 
-    if (messageMatchesAKeyword(lowerCaseMessage, ageQuestions)) {
+    if (
+      messageMatchesAKeyword(lowerCaseMessage, ageQuestions) &&
+      lowerCaseMessage.includes("?")
+    ) {
       this.actionProvider.handleAgeQuestions(message);
+      foundSomething = true;
+    }
+
+    if (
+      messageMatchesAKeyword(lowerCaseMessage, nameQuestions) &&
+      lowerCaseMessage.includes("?")
+    ) {
+      this.actionProvider.handleNameQuestions(message);
       foundSomething = true;
     }
 

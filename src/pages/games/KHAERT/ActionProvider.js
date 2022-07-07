@@ -82,6 +82,12 @@ class ActionProvider {
     }));
   }
 
+  handleNameQuestions() {
+    const reply = "I'm Shazza!";
+    const botMessage = this.createChatBotMessage(reply);
+    this.updateChatbotState(botMessage);
+  }
+
   handleAgeQuestions(userMessage) {
     const ageInMonths = timeMonth.count(new Date(2022, 5, 25), Date.now());
     const reply = userMessage.includes("age")

@@ -1,3 +1,5 @@
+import { botName } from "./config";
+
 export const ageQuestions = ["how old", "age"];
 
 export const greetings = [
@@ -49,5 +51,7 @@ export const lookupKeywords = [
   "type",
   "write",
 ];
+
+export const nameQuestions = ["name", botName];
 
 export const whatQuestions = ["what is", "what does"];
