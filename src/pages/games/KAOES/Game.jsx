@@ -161,6 +161,18 @@ export default function Game() {
                 />
               </div>
             </div>
+            <p className="text-center mt10 text-small">
+              Got a suggestion?{" "}
+              <a
+                href="https://forms.gle/L8vGQTtLwKujLtFb7"
+                className="mt0"
+                target="_blank"
+                rel="noopener noreferrer"
+                id="ga--KAOES--give-feedback"
+              >
+                Give feedback
+              </a>
+            </p>
           </>
         )}
       </div>
