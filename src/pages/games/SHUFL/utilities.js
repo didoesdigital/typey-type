@@ -60,5 +60,12 @@ export const selectMaterial = (startingMetWordsToday) => {
   return result;
 };
 
-export const shuffleWord = (pickedWord) =>
-  shuffle(Array.from(pickedWord)).join("");
+const shuffleLetters = (word) => shuffle(Array.from(word)).join("");
+
+export const shuffleWord = (pickedWord, rightAnswers) => {
+  let shuffleWord = shuffleLetters(pickedWord);
+  if (rightAnswers.includes(shuffleWord)) {
+    shuffleWord = shuffleLetters(pickedWord);
+  }
+  return shuffleWord;
+};

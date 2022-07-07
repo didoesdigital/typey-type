@@ -34,6 +34,10 @@ export const initConfig = (state) => ({
 const getGameStartedState = (state, action) => {
   const material = selectMaterial(action.payload.startingMetWordsToday);
   const firstPickedWord = pickAWord(getLevelMaterial(material, 1));
+  const rightAnswers = getRightAnswers(
+    getLevelMaterial(material, 1),
+    firstPickedWord
+  );
   return {
     ...state,
     ...initialProgress,
@@ -43,16 +47,17 @@ const getGameStartedState = (state, action) => {
       firstPickedWord.trim(),
       state.globalLookupDictionary
     ),
-    rightAnswers: getRightAnswers(
-      getLevelMaterial(material, 1),
-      firstPickedWord
-    ),
-    puzzleText: shuffleWord(firstPickedWord),
+    puzzleText: shuffleWord(firstPickedWord, rightAnswers),
+    rightAnswers,
   };
 };
 
 const getGameRestartedState = (state) => {
   const pickedWord = pickAWord(getLevelMaterial(state.material, 1));
+  const rightAnswers = getRightAnswers(
+    getLevelMaterial(state.material, 1),
+    pickedWord
+  );
   return {
     ...state,
     ...initialProgress,
@@ -60,11 +65,8 @@ const getGameRestartedState = (state) => {
       pickedWord.trim(),
       state.globalLookupDictionary
     ),
-    rightAnswers: getRightAnswers(
-      getLevelMaterial(state.material, 1),
-      pickedWord
-    ),
-    puzzleText: shuffleWord(pickedWord),
+    puzzleText: shuffleWord(pickedWord, rightAnswers),
+    rightAnswers,
   };
 };
 
@@ -72,19 +74,20 @@ const getAllLevelsCompletedState = (state) => {
   const roundCompletedPickedWord = pickAWord(
     getLevelMaterial(state.material, 1)
   );
+  const rightAnswers = getRightAnswers(
+    getLevelMaterial(state.material, 1),
+    roundCompletedPickedWord
+  );
   return {
     ...state,
     ...initialProgress,
     gameComplete: true,
-    rightAnswers: getRightAnswers(
-      getLevelMaterial(state.material, 1),
-      roundCompletedPickedWord
-    ),
     currentHint: createStrokeHintForPhrase(
       roundCompletedPickedWord.trim(),
       state.globalLookupDictionary
     ),
-    puzzleText: shuffleWord(roundCompletedPickedWord),
+    rightAnswers,
+    puzzleText: shuffleWord(roundCompletedPickedWord, rightAnswers),
   };
 };
 
@@ -93,19 +96,20 @@ const getEarlyLevelCompletedState = (state) => {
   const roundCompletedPickedWord = pickAWord(
     getLevelMaterial(state.material, increasedLevel)
   );
+  const rightAnswers = getRightAnswers(
+    getLevelMaterial(state.material, increasedLevel),
+    roundCompletedPickedWord
+  );
   return {
     ...state,
     level: increasedLevel,
     roundIndex: 0,
-    rightAnswers: getRightAnswers(
-      getLevelMaterial(state.material, increasedLevel),
-      roundCompletedPickedWord
-    ),
     currentHint: createStrokeHintForPhrase(
       roundCompletedPickedWord.trim(),
       state.globalLookupDictionary
     ),
-    puzzleText: shuffleWord(roundCompletedPickedWord),
+    rightAnswers,
+    puzzleText: shuffleWord(roundCompletedPickedWord, rightAnswers),
   };
 };
 
@@ -113,18 +117,19 @@ const getEarlyRoundCompletedState = (state) => {
   const roundCompletedPickedWord = pickAWord(
     getLevelMaterial(state.material, state.level)
   );
+  const rightAnswers = getRightAnswers(
+    getLevelMaterial(state.material, state.level),
+    roundCompletedPickedWord
+  );
   return {
     ...state,
     roundIndex: state.roundIndex + 1,
-    rightAnswers: getRightAnswers(
-      getLevelMaterial(state.material, state.level),
-      roundCompletedPickedWord
-    ),
     currentHint: createStrokeHintForPhrase(
       roundCompletedPickedWord.trim(),
       state.globalLookupDictionary
     ),
-    puzzleText: shuffleWord(roundCompletedPickedWord),
+    rightAnswers,
+    puzzleText: shuffleWord(roundCompletedPickedWord, rightAnswers),
   };
 };
 
