@@ -104,6 +104,18 @@ export default function Game({
                 />
               </>
             )}
+            <p className="text-center mt10 text-small">
+              Got a suggestion?{" "}
+              <a
+                href="https://forms.gle/wtU8phNLPpDsGdCZ7"
+                className="mt0"
+                target="_blank"
+                rel="noopener noreferrer"
+                id="ga--SHUFL--give-feedback"
+              >
+                Give feedback
+              </a>
+            </p>
           </>
         )}
       </div>
