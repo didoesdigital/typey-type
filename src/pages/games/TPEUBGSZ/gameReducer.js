@@ -18,25 +18,39 @@ export const initConfig = (state) => ({
   ...state,
 });
 
+
+const getEarlyLevelCompletedState = (state) => {
+  return {
+    ...state,
+    gameComplete: true,
+    roundIndex: 0,
+  };
+};
+
+const getEarlyRoundCompletedState = (state) => {
+  return {
+    ...state,
+    roundIndex: state.roundIndex + 1,
+  };
+};
+
+const getGameRestartedState = (state) => {
+  return {
+    ...state,
+    gameComplete: false,
+    roundIndex: 0,
+  };
+};
+
 export const gameReducer = (state, action) => {
   switch (action?.type) {
     case actions.roundCompleted:
       return state.roundIndex + 1 === roundToWin
-        ? {
-            ...state,
-            gameComplete: true,
-            roundIndex: 0,
-          }
-        : {
-            ...state,
-            roundIndex: state.roundIndex + 1,
-          };
+        ? getEarlyLevelCompletedState(state)
+        : getEarlyRoundCompletedState(state);
+
     case actions.gameRestarted:
-      return {
-        ...state,
-        gameComplete: false,
-        roundIndex: 0,
-      };
+      return getGameRestartedState(state);
 
     default:
       return state;
