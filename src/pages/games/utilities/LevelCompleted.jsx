@@ -6,7 +6,7 @@ import { ReactComponent as AlertRobot } from "../../../images/AlertRobot.svg";
 import * as Confetti from "../../../utils/confetti.js";
 
 const particles = [];
-const ConfettiConfig = { sparsity: 240, colors: 5 };
+const ConfettiConfig = { sparsity: 480, colors: 2 };
 
 const handleActionClick = (event, gameName, dispatch) => {
   event.preventDefault();
