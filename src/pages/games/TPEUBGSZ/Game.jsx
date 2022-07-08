@@ -14,7 +14,7 @@ const gameName = "TPEUBGSZ";
 const introText =
   "Oh no! The steno robots have broken English! They’ve destroyed most of the useful words. The only bits left are prefixes and suffixes. And robot sounds. Let’s stick them together to make some new words for the robots.";
 
-export default function Game() {
+export default function Game({ startingMetWordsToday }) {
   const [typedText, setTypedText] = useState("");
   const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
     useState("");
@@ -27,8 +27,13 @@ export default function Game() {
 
   useEffect(() => {
     setShowHint(false);
-    dispatch({ type: actions.gameStarted });
-  }, []);
+    const numberOfMetWords = Object.keys(startingMetWordsToday).length;
+    dispatch({
+      type: actions.gameStarted,
+      payload: { numberOfMetWords },
+    });
+    setShowHint(false);
+  }, [startingMetWordsToday]);
 
   const onChangeInput = (inputText) => {
     setTypedText(inputText);

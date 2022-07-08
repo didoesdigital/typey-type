@@ -13,6 +13,7 @@ const initialProgress = {
 
 const defaultState = {
   ...initialProgress,
+  numberOfMetWords: 0,
   puzzleText: "",
   currentHint: "",
 };
@@ -22,18 +23,25 @@ export const initConfig = (state) => ({
   ...state,
 });
 
-const getGameStartedState = (state) => {
-  const [madeUpWord, hint] = makeUpAWordAndHint(state.level);
+const getGameStartedState = (state, action) => {
+  const [madeUpWord, hint] = makeUpAWordAndHint(
+    state.level,
+    action.payload.numberOfMetWords
+  );
   return {
     ...state,
     ...initialProgress,
+    numberOfMetWords: action.payload.numberOfMetWords,
     puzzleText: madeUpWord,
     currentHint: hint,
   };
 };
 
 const getGameRestartedState = (state) => {
-  const [madeUpWord, hint] = makeUpAWordAndHint(state.level);
+  const [madeUpWord, hint] = makeUpAWordAndHint(
+    state.level,
+    state.numberOfMetWords
+  );
   return {
     ...state,
     ...initialProgress,
@@ -43,7 +51,7 @@ const getGameRestartedState = (state) => {
 };
 
 const getAllLevelsCompletedState = (state) => {
-  const [madeUpWord, hint] = makeUpAWordAndHint(1);
+  const [madeUpWord, hint] = makeUpAWordAndHint(1, state.numberOfMetWords);
   return {
     ...state,
     ...initialProgress,
@@ -55,7 +63,10 @@ const getAllLevelsCompletedState = (state) => {
 
 const getEarlyLevelCompletedState = (state) => {
   const increasedLevel = state.level + 1;
-  const [madeUpWord, hint] = makeUpAWordAndHint(increasedLevel);
+  const [madeUpWord, hint] = makeUpAWordAndHint(
+    increasedLevel,
+    state.numberOfMetWords
+  );
   return {
     ...state,
     level: increasedLevel,
@@ -67,7 +78,10 @@ const getEarlyLevelCompletedState = (state) => {
 };
 
 const getEarlyRoundCompletedState = (state) => {
-  const [madeUpWord, hint] = makeUpAWordAndHint(state.level);
+  const [madeUpWord, hint] = makeUpAWordAndHint(
+    state.level,
+    state.numberOfMetWords
+  );
   return {
     ...state,
     roundIndex: state.roundIndex + 1,

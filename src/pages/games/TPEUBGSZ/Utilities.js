@@ -1,17 +1,26 @@
 import { shuffle } from "d3-array";
 import affixList from "./affixesForTPEUBGSZ.json";
+import advancedAffixList from "./advancedAffixesForTPEUBGSZ.json";
 
 const isSuffix = (affixType) => affixType === "suffixes";
+
+const baseAndAdvancedAffixList = {
+  prefixes: [...advancedAffixList.prefixes, ...affixList.prefixes],
+  suffixes: [...advancedAffixList.suffixes, ...affixList.suffixes],
+};
 
 const addSomeAffixes = (
   madeUpWordParts,
   madeUpAffixParts,
   affixType,
   count,
-  level
+  level,
+  numberOfMetWords
 ) => {
+  const affixSource =
+    numberOfMetWords < 1000 ? affixList : baseAndAdvancedAffixList;
   const entries = shuffle(
-    affixList[isSuffix(affixType) ? "suffixes" : "prefixes"]
+    affixSource[isSuffix(affixType) ? "suffixes" : "prefixes"]
   )
     .filter((affix) => {
       const affixLength = affix[1].length;
@@ -33,10 +42,17 @@ const addSomeAffixes = (
   return [madeUpWordParts, madeUpAffixParts];
 };
 
-export const makeUpAWordAndHint = (level) => {
+export const makeUpAWordAndHint = (level, numberOfMetWords) => {
   const madeUpWordParts = [];
   const madeUpAffixParts = [];
-  addSomeAffixes(madeUpWordParts, madeUpAffixParts, "prefixes", 1, level);
+  addSomeAffixes(
+    madeUpWordParts,
+    madeUpAffixParts,
+    "prefixes",
+    1,
+    level,
+    numberOfMetWords
+  );
   if (Math.random() < 0.5) {
     madeUpWordParts.push("beep");
     madeUpAffixParts.push("PWAOEP");
@@ -44,7 +60,14 @@ export const makeUpAWordAndHint = (level) => {
     madeUpWordParts.push("boop");
     madeUpAffixParts.push("PWAOP");
   }
-  addSomeAffixes(madeUpWordParts, madeUpAffixParts, "suffixes", 1, level);
+  addSomeAffixes(
+    madeUpWordParts,
+    madeUpAffixParts,
+    "suffixes",
+    1,
+    level,
+    numberOfMetWords
+  );
 
   return [madeUpWordParts.join(""), madeUpAffixParts.join("/")];
 };

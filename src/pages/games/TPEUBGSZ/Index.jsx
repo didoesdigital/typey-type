@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import Game from "./Game";
 
-export default function Index() {
+export default function Index({ startingMetWordsToday }) {
   const mainHeading = useRef(null);
   useEffect(() => {
     if (mainHeading) {
@@ -23,7 +23,7 @@ export default function Index() {
         </div>
       </div>
       <div className="p3 mx-auto mw-1024">
-        <Game />
+        <Game startingMetWordsToday={startingMetWordsToday} />
       </div>
     </main>
   );

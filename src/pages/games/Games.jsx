@@ -77,7 +77,9 @@ const Games = ({
       <Route
         exact={true}
         path={`${match.url}/TPEUBGSZ`}
-        render={() => <AsyncTPEUBGSZ />}
+        render={() => (
+          <AsyncTPEUBGSZ startingMetWordsToday={startingMetWordsToday} />
+        )}
       />
       <Route
         exact={true}
