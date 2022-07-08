@@ -1,10 +1,11 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { actions } from "./gameActions";
-import { initConfig, gameReducer, roundToWin } from "./gameReducer";
+import { initConfig, gameReducer, roundToWin, levelToWin } from "./gameReducer";
 import Completed from "../components/Completed";
 import Hint from "../components/Hint";
 import Input from "../components/Input";
 import Intro from "../components/Intro";
+import LevelCompleted from "../utilities/LevelCompleted";
 import Puzzle from "./Puzzle";
 import RoundProgress from "../components/RoundProgress";
 import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
@@ -60,22 +61,39 @@ export default function Game() {
                   />
                 }
               />
-              <RoundProgress round={gameState.roundIndex + 1} roundToWin={roundToWin} />
+              <RoundProgress
+                level={gameState.level}
+                levelToWin={levelToWin}
+                round={gameState.roundIndex + 1}
+                roundToWin={roundToWin}
+              />
             </div>
-            <Puzzle puzzleText={gameState.puzzleText} />
-            <Input
-              onChangeInput={onChangeInput}
-              previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-              round={gameState.roundIndex + 1}
-              typedText={typedText}
-              gameName={gameName}
-            />
-            <Hint
-              currentStroke={gameState.currentHint}
-              gameName={gameName}
-              setShowHint={setShowHint}
-              showHint={showHint}
-            />
+            {gameState.levelComplete ? (
+              <LevelCompleted
+                dispatch={dispatch}
+                gameName={gameName}
+                level={gameState.level}
+              />
+            ) : (
+              <>
+                <Puzzle puzzleText={gameState.puzzleText} />
+                <Input
+                  onChangeInput={onChangeInput}
+                  previousCompletedPhraseAsTyped={
+                    previousCompletedPhraseAsTyped
+                  }
+                  round={gameState.roundIndex + 1}
+                  typedText={typedText}
+                  gameName={gameName}
+                />
+                <Hint
+                  currentStroke={gameState.currentHint}
+                  gameName={gameName}
+                  setShowHint={setShowHint}
+                  showHint={showHint}
+                />
+              </>
+            )}
           </>
         )}
         <p className="text-center mt10 text-small">

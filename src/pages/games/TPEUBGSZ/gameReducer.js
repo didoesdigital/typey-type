@@ -1,10 +1,13 @@
 import { actions } from "./gameActions";
 import { makeUpAWordAndHint } from "./Utilities";
 
-export const roundToWin = 8;
+export const roundToWin = 3;
+export const levelToWin = 4;
 
 const initialProgress = {
   gameComplete: false,
+  levelComplete: false,
+  level: 1,
   roundIndex: 0,
 };
 
@@ -20,7 +23,7 @@ export const initConfig = (state) => ({
 });
 
 const getGameStartedState = (state) => {
-  const [madeUpWord, hint] = makeUpAWordAndHint();
+  const [madeUpWord, hint] = makeUpAWordAndHint(state.level);
   return {
     ...state,
     ...initialProgress,
@@ -30,21 +33,33 @@ const getGameStartedState = (state) => {
 };
 
 const getGameRestartedState = (state) => {
-  const [madeUpWord, hint] = makeUpAWordAndHint();
+  const [madeUpWord, hint] = makeUpAWordAndHint(state.level);
   return {
     ...state,
-    gameComplete: false,
-    roundIndex: 0,
+    ...initialProgress,
+    puzzleText: madeUpWord,
+    currentHint: hint,
+  };
+};
+
+const getAllLevelsCompletedState = (state) => {
+  const [madeUpWord, hint] = makeUpAWordAndHint(1);
+  return {
+    ...state,
+    ...initialProgress,
+    gameComplete: true,
     puzzleText: madeUpWord,
     currentHint: hint,
   };
 };
 
 const getEarlyLevelCompletedState = (state) => {
-  const [madeUpWord, hint] = makeUpAWordAndHint();
+  const increasedLevel = state.level + 1;
+  const [madeUpWord, hint] = makeUpAWordAndHint(increasedLevel);
   return {
     ...state,
-    gameComplete: true,
+    level: increasedLevel,
+    levelComplete: true,
     roundIndex: 0,
     puzzleText: madeUpWord,
     currentHint: hint,
@@ -52,7 +67,7 @@ const getEarlyLevelCompletedState = (state) => {
 };
 
 const getEarlyRoundCompletedState = (state) => {
-  const [madeUpWord, hint] = makeUpAWordAndHint();
+  const [madeUpWord, hint] = makeUpAWordAndHint(state.level);
   return {
     ...state,
     roundIndex: state.roundIndex + 1,
@@ -69,8 +84,13 @@ export const gameReducer = (state, action) => {
     case actions.gameRestarted:
       return getGameRestartedState(state);
 
+    case actions.levelRestarted:
+      return { ...state, levelComplete: false };
+
     case actions.roundCompleted:
-      return state.roundIndex + 1 === roundToWin
+      return state.roundIndex + 1 === roundToWin && state.level === levelToWin
+        ? getAllLevelsCompletedState(state)
+        : state.roundIndex + 1 === roundToWin
         ? getEarlyLevelCompletedState(state)
         : getEarlyRoundCompletedState(state);
 
