@@ -9,16 +9,12 @@ import Puzzle from "./Puzzle";
 import RoundProgress from "../components/RoundProgress";
 import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
 
-import { makeUpAWordAndHint } from "./Utilities";
-
 const gameName = "TPEUBGSZ";
 const introText =
   "Oh no! The steno robots have broken English! They’ve destroyed most of the useful words. The only bits left are prefixes and suffixes. And robot sounds. Let’s stick them together to make some new words for the robots.";
 
 export default function Game() {
-  const [puzzleText, setPuzzleText] = useState("");
   const [typedText, setTypedText] = useState("");
-  const [currentStroke, setCurrentStroke] = useState("");
   const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
     useState("");
   const [showHint, setShowHint] = useState(false);
@@ -29,21 +25,15 @@ export default function Game() {
   );
 
   useEffect(() => {
-    const [madeUpWord, hint] = makeUpAWordAndHint();
-    setPuzzleText(madeUpWord);
-    setCurrentStroke(hint);
     setShowHint(false);
     dispatch({ type: actions.gameStarted });
   }, []);
 
   const onChangeInput = (inputText) => {
     setTypedText(inputText);
-    if (puzzleText === inputText.trim()) {
+    if (gameState.puzzleText === inputText.trim()) {
       setTypedText("");
       setPreviousCompletedPhraseAsTyped(inputText);
-      const [madeUpWord, hint] = makeUpAWordAndHint();
-      setPuzzleText(madeUpWord);
-      setCurrentStroke(hint);
       setShowHint(false);
       dispatch({ type: actions.roundCompleted });
     }
@@ -72,7 +62,7 @@ export default function Game() {
               />
               <RoundProgress round={gameState.roundIndex + 1} roundToWin={roundToWin} />
             </div>
-            <Puzzle puzzleText={puzzleText} />
+            <Puzzle puzzleText={gameState.puzzleText} />
             <Input
               onChangeInput={onChangeInput}
               previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
@@ -81,7 +71,7 @@ export default function Game() {
               gameName={gameName}
             />
             <Hint
-              currentStroke={currentStroke}
+              currentStroke={gameState.currentStroke}
               gameName={gameName}
               setShowHint={setShowHint}
               showHint={showHint}
