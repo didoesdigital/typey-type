@@ -4,6 +4,7 @@ import Game from "./Game";
 export default function Index({
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
+  globalLookupDictionaryLoaded,
   startingMetWordsToday,
   personalDictionaries,
   updateMetWords,
@@ -45,6 +46,7 @@ export default function Index({
       <div className="p3 mx-auto mw-1024">
         <Game
           globalLookupDictionary={globalLookupDictionary}
+          globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
           startingMetWordsToday={startingMetWordsToday}
           updateMetWords={updateMetWords}
         />

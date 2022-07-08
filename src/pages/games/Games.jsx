@@ -37,6 +37,7 @@ const Games = ({
   match,
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
+  globalLookupDictionaryLoaded,
   personalDictionaries,
   startingMetWordsToday,
   updateMetWords,
@@ -66,6 +67,7 @@ const Games = ({
           <AsyncSHUFL
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             personalDictionaries={personalDictionaries}
             startingMetWordsToday={startingMetWordsToday}
             updateMetWords={updateMetWords}

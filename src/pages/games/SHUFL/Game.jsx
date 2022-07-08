@@ -16,6 +16,7 @@ const introText =
 
 export default function Game({
   globalLookupDictionary,
+  globalLookupDictionaryLoaded,
   startingMetWordsToday,
   updateMetWords,
 }) {
@@ -80,7 +81,11 @@ export default function Game({
                 roundToWin={roundToWin}
               />
             </div>
-            {gameState.levelComplete ? (
+            {!globalLookupDictionaryLoaded ? (
+              <p className="text-center de-emphasized pt6">
+                Loading dictionaries…
+              </p>
+            ) : gameState.levelComplete ? (
               <LevelCompleted
                 dispatch={dispatch}
                 gameName={gameName}

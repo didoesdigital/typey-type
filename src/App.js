@@ -2298,6 +2298,7 @@ class App extends Component {
                         <AsyncGames
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
+                          globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                           startingMetWordsToday={this.state.startingMetWordsToday}
                           personalDictionaries={this.state.personalDictionaries}
                           updateMetWords={this.updateMetWords.bind(this)}
