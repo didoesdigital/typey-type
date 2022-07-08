@@ -1,4 +1,5 @@
-import { actions } from "../utilities/gameActions";
+import { actions } from "./gameActions";
+import { makeUpAWordAndHint } from "./Utilities";
 
 export const roundToWin = 8;
 
@@ -18,6 +19,26 @@ export const initConfig = (state) => ({
   ...state,
 });
 
+const getGameStartedState = (state) => {
+  const [madeUpWord, hint] = makeUpAWordAndHint();
+  return {
+    ...state,
+    ...initialProgress,
+    puzzleText: madeUpWord,
+    currentStroke: hint,
+  };
+};
+
+const getGameRestartedState = (state) => {
+  const [madeUpWord, hint] = makeUpAWordAndHint();
+  return {
+    ...state,
+    gameComplete: false,
+    roundIndex: 0,
+    puzzleText: madeUpWord,
+    currentStroke: hint,
+  };
+};
 
 const getEarlyLevelCompletedState = (state) => {
   return {
@@ -34,23 +55,18 @@ const getEarlyRoundCompletedState = (state) => {
   };
 };
 
-const getGameRestartedState = (state) => {
-  return {
-    ...state,
-    gameComplete: false,
-    roundIndex: 0,
-  };
-};
-
 export const gameReducer = (state, action) => {
   switch (action?.type) {
+    case actions.gameStarted:
+      return getGameStartedState(state, action);
+
+    case actions.gameRestarted:
+      return getGameRestartedState(state);
+
     case actions.roundCompleted:
       return state.roundIndex + 1 === roundToWin
         ? getEarlyLevelCompletedState(state)
         : getEarlyRoundCompletedState(state);
-
-    case actions.gameRestarted:
-      return getGameRestartedState(state);
 
     default:
       return state;

@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useState } from "react";
-import { actions } from "../utilities/gameActions";
+import { actions } from "./gameActions";
 import { initConfig, gameReducer, roundToWin } from "./gameReducer";
 import Completed from "../components/Completed";
 import Hint from "../components/Hint";
@@ -33,6 +33,7 @@ export default function Game() {
     setPuzzleText(madeUpWord);
     setCurrentStroke(hint);
     setShowHint(false);
+    dispatch({ type: actions.gameStarted });
   }, []);
 
   const onChangeInput = (inputText) => {
