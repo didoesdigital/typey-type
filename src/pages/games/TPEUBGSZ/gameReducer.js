@@ -2,9 +2,15 @@ import { actions } from "../utilities/gameActions";
 
 export const roundToWin = 8;
 
-const defaultState = {
-  roundIndex: 0,
+const initialProgress = {
   gameComplete: false,
+  roundIndex: 0,
+};
+
+const defaultState = {
+  ...initialProgress,
+  puzzleText: "",
+  currentStroke: "",
 };
 
 export const initConfig = (state) => ({
