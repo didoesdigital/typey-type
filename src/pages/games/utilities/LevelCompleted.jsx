@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import GoogleAnalytics from "react-ga";
-import { actions } from "./gameActions";
+import { actions as SHUFLactions } from "../SHUFL/gameActions";
+import { actions as TPEUBGSZactions } from "../TPEUBGSZ/gameActions";
 import { ReactComponent as AlertRobot } from "../../../images/AlertRobot.svg";
 import * as Confetti from "../../../utils/confetti.js";
 
@@ -11,7 +12,12 @@ const handleActionClick = (event, gameName, dispatch) => {
   event.preventDefault();
 
   if (dispatch) {
-    dispatch({ type: actions.levelRestarted });
+    dispatch({
+      type:
+        gameName === "SHUFL"
+          ? SHUFLactions.levelRestarted
+          : TPEUBGSZactions.levelRestarted,
+    });
   }
 
   GoogleAnalytics.event({
@@ -21,7 +27,11 @@ const handleActionClick = (event, gameName, dispatch) => {
   });
 };
 
-export default React.memo(function LevelCompleted({ gameName, level, dispatch }) {
+export default React.memo(function LevelCompleted({
+  gameName,
+  level,
+  dispatch,
+}) {
   const actionbutton = useRef(null);
   const canvasRef = useRef(null);
   const canvasWidth = Math.floor(window.innerWidth);
@@ -85,7 +95,9 @@ export default React.memo(function LevelCompleted({ gameName, level, dispatch })
         <div className="w-100 mw-48 mx-auto" id="level-completed">
           <AlertRobot />
         </div>
-        <p className="text-center w-100"><strong>Level {level - 1} complete!</strong></p>
+        <p className="text-center w-100">
+          <strong>Level {level - 1} complete!</strong>
+        </p>
       </div>
       <p className="mx-auto text-center">
         <button
