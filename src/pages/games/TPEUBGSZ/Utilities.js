@@ -14,13 +14,14 @@ const addSomeAffixes = (
     affixList[isSuffix(affixType) ? "suffixes" : "prefixes"]
   )
     .filter((affix) => {
-      return level === 1
-        ? affix[1].length <= 2
-        : level === 2
-        ? affix[1].length >= 3 && affix[1].length <= 4
+      const affixLength = affix[1].length;
+      return level === 4
+        ? affixLength >= 4
         : level === 3
-        ? affix[1].length >= 4 && affix[1].length <= 5
-        : affix[1].length >= 5;
+        ? affixLength >= 3 && affixLength <= 4
+        : level === 2
+        ? affixLength >= 2 && affixLength <= 3
+        : affixLength >= 1 && affixLength <= 2;
     })
     .slice(0, count);
   entries.forEach(([stroke, affixText]) => {
