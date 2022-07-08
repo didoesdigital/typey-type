@@ -22,7 +22,7 @@ export default function Game() {
   const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
     useState("");
   const [showHint, setShowHint] = useState(false);
-  const [state, dispatch] = useReducer(
+  const [gameState, dispatch] = useReducer(
     gameReducer,
     undefined, // init state
     initConfig
@@ -54,7 +54,7 @@ export default function Game() {
         <h3 id="typey-type-TPEUBGSZ-game" className="text-center mb3">
           TPEUBGSZ game
         </h3>
-        {state.gameComplete ? (
+        {gameState.gameComplete ? (
           <Completed gameName={gameName} dispatch={dispatch} />
         ) : (
           <>
@@ -69,13 +69,13 @@ export default function Game() {
                   />
                 }
               />
-              <RoundProgress round={state.roundIndex + 1} roundToWin={roundToWin} />
+              <RoundProgress round={gameState.roundIndex + 1} roundToWin={roundToWin} />
             </div>
             <Puzzle puzzleText={puzzleText} />
             <Input
               onChangeInput={onChangeInput}
               previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-              round={state.roundIndex + 1}
+              round={gameState.roundIndex + 1}
               typedText={typedText}
               gameName={gameName}
             />
