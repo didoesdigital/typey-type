@@ -71,7 +71,7 @@ export default function Game() {
               gameName={gameName}
             />
             <Hint
-              currentStroke={gameState.currentStroke}
+              currentStroke={gameState.currentHint}
               gameName={gameName}
               setShowHint={setShowHint}
               showHint={showHint}

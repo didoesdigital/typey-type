@@ -11,7 +11,7 @@ const initialProgress = {
 const defaultState = {
   ...initialProgress,
   puzzleText: "",
-  currentStroke: "",
+  currentHint: "",
 };
 
 export const initConfig = (state) => ({
@@ -25,7 +25,7 @@ const getGameStartedState = (state) => {
     ...state,
     ...initialProgress,
     puzzleText: madeUpWord,
-    currentStroke: hint,
+    currentHint: hint,
   };
 };
 
@@ -36,7 +36,7 @@ const getGameRestartedState = (state) => {
     gameComplete: false,
     roundIndex: 0,
     puzzleText: madeUpWord,
-    currentStroke: hint,
+    currentHint: hint,
   };
 };
 
@@ -47,7 +47,7 @@ const getEarlyLevelCompletedState = (state) => {
     gameComplete: true,
     roundIndex: 0,
     puzzleText: madeUpWord,
-    currentStroke: hint,
+    currentHint: hint,
   };
 };
 
@@ -57,7 +57,7 @@ const getEarlyRoundCompletedState = (state) => {
     ...state,
     roundIndex: state.roundIndex + 1,
     puzzleText: madeUpWord,
-    currentStroke: hint,
+    currentHint: hint,
   };
 };
 
