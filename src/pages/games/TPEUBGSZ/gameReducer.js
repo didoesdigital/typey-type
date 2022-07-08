@@ -41,17 +41,23 @@ const getGameRestartedState = (state) => {
 };
 
 const getEarlyLevelCompletedState = (state) => {
+  const [madeUpWord, hint] = makeUpAWordAndHint();
   return {
     ...state,
     gameComplete: true,
     roundIndex: 0,
+    puzzleText: madeUpWord,
+    currentStroke: hint,
   };
 };
 
 const getEarlyRoundCompletedState = (state) => {
+  const [madeUpWord, hint] = makeUpAWordAndHint();
   return {
     ...state,
     roundIndex: state.roundIndex + 1,
+    puzzleText: madeUpWord,
+    currentStroke: hint,
   };
 };
 
