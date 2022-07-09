@@ -41,7 +41,7 @@ const LessonsIndex = ({
       </div>
       <div className="p3 mx-auto mw-1024">
         <div className="flex flex-wrap justify-between">
-          <div className="mw-584">
+          <div className="mw-584 flex-grow">
             <h3>Typey&nbsp;Type lessons</h3>
             <LessonList lessonIndex={lessonIndex} url={match.url} />
           </div>
