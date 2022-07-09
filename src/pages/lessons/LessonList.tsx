@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { groups } from "d3-array";
 
@@ -59,6 +59,11 @@ const wrangleId = (id: string) => {
 };
 
 export default function LessonList({ lessonIndex, url }: LessonListProps) {
+  const [searchFilter, setSearchFilter] = useState("");
+  const [filteredLessonIndex, setFilteredLessonIndex] = useState(lessonIndex);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
   useEffect(() => {
     window.location.hash = window.decodeURIComponent(window.location.hash);
     const scrollToAnchor = () => {
@@ -80,6 +85,8 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
             el.focus();
           }, 300);
         }
+      } else {
+        inputRef?.current?.focus();
       }
     };
     scrollToAnchor();
@@ -87,14 +94,41 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
     window.onhashchange = scrollToAnchor;
   }, []);
 
+  const changeSearchFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const searchTerm = event.target.value;
+    setSearchFilter(searchTerm);
+    const filteredLessons = lessonIndex.filter((lesson) => {
+      return searchTerm.trim() === lesson.title;
+    });
+    setFilteredLessonIndex(filteredLessons);
+  };
+
   const groupedLessons = groups(
-    lessonIndex,
+    filteredLessonIndex,
     (d) => d.category,
     (d) => d.subcategory
   );
 
   return (
     <div>
+      <label
+        htmlFor="lesson-search-filter"
+        className="db mb1 inline-block mb05"
+      >
+        Search lessons:
+      </label>
+      <input
+        ref={inputRef}
+        id="lesson-search-filter"
+        className="caret-color w-100 bg-white input-textarea mb3"
+        autoCapitalize="off"
+        autoComplete="off"
+        autoCorrect="off"
+        onChange={changeSearchFilter}
+        spellCheck={false}
+        type="search"
+        value={searchFilter}
+      ></input>
       <p className="mb0">Jump to:</p>
       <ul>
         {groupedLessons.map(([category, subcategories]) => (

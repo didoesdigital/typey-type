@@ -1108,6 +1108,10 @@ $textarea-padding-x: 8px;
   }
 }
 
+.caret-color {
+  caret-color: saturate(add-tint($brand-primary, 30%), 30%);
+}
+
 .progress-textarea {
   background-color: add-tint($brand-primary, 95%);
 
