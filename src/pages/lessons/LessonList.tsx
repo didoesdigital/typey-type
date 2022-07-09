@@ -198,6 +198,9 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
           </div>
         );
       })}
+      {filteredLessonIndex.length === 0 && (
+        <p>No results. Try changing your search.</p>
+      )}
     </div>
   );
 }
