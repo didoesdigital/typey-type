@@ -41,7 +41,7 @@ export default function Game({
 
   const onChangeSHUFLInput = (inputText) => {
     setTypedText(inputText);
-    if (gameState.rightAnswers.includes(inputText.trim())) {
+    if (gameState.rightAnswers.includes(inputText.trim().toLowerCase())) {
       updateMetWords(inputText.trim());
       setTypedText("");
       setPreviousCompletedPhraseAsTyped(inputText);
