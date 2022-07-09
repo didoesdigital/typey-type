@@ -113,15 +113,30 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
       .toLowerCase()
       .replaceAll(/[^ A-Za-z0-9’',*:-]/g, ""); // all characters that don't appear in lesson titles
 
-    const filteredLessons = lessonIndex.filter((lesson) => {
+    let filteredLessons = lessonIndex.filter((lesson) => {
       const cleanedLessonTitle = lesson.title.toLowerCase();
       const searchSnippets = cleanedSearchTerm.split(" ");
-      return searchSnippets.reduce(
+      const titleMatches = searchSnippets.reduce(
         (trueSoFar, searchSnippet) =>
           trueSoFar && cleanedLessonTitle.includes(searchSnippet),
         true
       );
+      return titleMatches;
     });
+
+    if (filteredLessons.length === 0) {
+      filteredLessons = lessonIndex.filter((lesson) => {
+        const searchSnippets = cleanedSearchTerm.split(" ");
+        const categoryMatches = searchSnippets.reduce(
+          (trueSoFar, searchSnippet) =>
+            trueSoFar &&
+            (lesson.category.toLowerCase().includes(searchSnippet) ||
+              lesson.subcategory.toLowerCase().includes(searchSnippet)),
+          true
+        );
+        return categoryMatches;
+      });
+    }
 
     if (searchTerm && searchTerm.toString()) {
       GoogleAnalytics.event({
