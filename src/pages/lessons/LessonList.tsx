@@ -124,24 +124,26 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
 
   return (
     <div>
-      <label
-        htmlFor="lesson-search-filter"
-        className="db mb1 inline-block mb05"
-      >
-        Search lessons:
-      </label>
-      <input
-        ref={inputRef}
-        id="lesson-search-filter"
-        className="caret-color w-100 bg-white input-textarea mb3"
-        autoCapitalize="off"
-        autoComplete="off"
-        autoCorrect="off"
-        onChange={changeSearchFilter}
-        spellCheck={false}
-        type="search"
-        value={searchFilter}
-      ></input>
+      <div className="mw-584 flex-grow">
+        <label
+          htmlFor="lesson-search-filter"
+          className="db mb1 inline-block mb05"
+        >
+          Search {lessonIndex.length} lessons:
+        </label>
+        <input
+          ref={inputRef}
+          id="lesson-search-filter"
+          className="caret-color w-100 bg-white input-textarea mb3"
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
+          onChange={changeSearchFilter}
+          spellCheck={false}
+          type="search"
+          value={searchFilter}
+        ></input>
+      </div>
       {searchFilter.length === 0 && (
         <>
           <p className="mb0">Jump to:</p>
