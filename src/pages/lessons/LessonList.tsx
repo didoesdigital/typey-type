@@ -94,6 +94,10 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
     window.onhashchange = scrollToAnchor;
   }, []);
 
+  useEffect(() => {
+    setFilteredLessonIndex(lessonIndex);
+  }, [lessonIndex]);
+
   const changeSearchFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value;
     const cleanedSearchTerm = searchTerm.trim().toLowerCase();
