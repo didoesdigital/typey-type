@@ -96,9 +96,17 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
 
   const changeSearchFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value;
-    const filteredLessons = lessonIndex.filter((lesson) =>
-      lesson.title.toLowerCase().includes(searchTerm.trim().toLowerCase())
-    );
+    const cleanedSearchTerm = searchTerm.trim().toLowerCase();
+
+    const filteredLessons = lessonIndex.filter((lesson) => {
+      const cleanedLessonTitle = lesson.title.toLowerCase();
+      const searchSnippets = cleanedSearchTerm.split(" ");
+      return searchSnippets.reduce(
+        (trueSoFar, searchSnippet) =>
+          trueSoFar && cleanedLessonTitle.includes(searchSnippet),
+        true
+      );
+    });
 
     setSearchFilter(searchTerm);
     setFilteredLessonIndex(filteredLessons);
