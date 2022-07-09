@@ -65,7 +65,7 @@ const LessonsIndex = ({
         <h3>Typey&nbsp;Type lessons</h3>
         <LessonList lessonIndex={lessonIndex} url={match.url} />
         <div className="mw-584">
-          <h3 className="mt3">Community lessons</h3>
+          <h3 className="mt3 pt6">Community lessons</h3>
           <p>
             The Typey&nbsp;Type community lessons cover topics like spacing,
             capitalisation, quotations, and using{" "}
