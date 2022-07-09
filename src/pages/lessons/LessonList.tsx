@@ -100,7 +100,10 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
 
   const changeSearchFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value;
-    const cleanedSearchTerm = searchTerm.trim().toLowerCase();
+    const cleanedSearchTerm = searchTerm
+      .trim()
+      .toLowerCase()
+      .replaceAll(/[^ A-Za-z0-9’',*:-]/g, ""); // all characters that don't appear in lesson titles
 
     const filteredLessons = lessonIndex.filter((lesson) => {
       const cleanedLessonTitle = lesson.title.toLowerCase();
