@@ -184,6 +184,16 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
           value={searchFilter}
         ></input>
       </div>
+      {searchFilter.trim().toLowerCase().includes("custom") && (
+        <p className="py05">
+        <Link
+          to={`/lessons/custom/setup`.replace(/\/{2,}/g, "/")}
+          id="ga--lesson-index--search--create-a-custom-lesson"
+        >
+          Create a custom lesson
+        </Link>
+        </p>
+      )}
       {filteredLessonIndex.length === 0 && (
         <p>No results. Try changing your search.</p>
       )}
