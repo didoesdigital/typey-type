@@ -144,16 +144,84 @@ class CustomLessonSetup extends Component {
 
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
-              <div className="mw-584 mt3">
-                <div>
-                  <p>To start a custom lesson, supply a list of words and their strokes. An easy way to create a lesson is to copy columns from a spreadsheet. See the&nbsp;&#8203;
+              <div className="flex flex-wrap justify-between">
+                <div className="mw-584 mt1">
+                  <h3 className="mt3">Start a custom lesson</h3>
+                  <div>
+                    <p>To start a custom lesson, supply a list of words and their strokes. An easy way to create a lesson is to copy columns from a spreadsheet. See the&nbsp;&#8203;
+                      <GoogleAnalytics.OutboundLink
+                        eventLabel="community’s lessons"
+                        to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        community’s lessons
+                        <Tooltip
+                          title="Opens in a new tab"
+                          animation="shift"
+                          arrow="true"
+                          className=""
+                          duration="200"
+                          tabIndex="0"
+                          tag="span"
+                          theme="didoesdigital"
+                          trigger="mouseenter focus click"
+                          onShow={this.props.setAnnouncementMessage}
+                        >
+                          <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                        </Tooltip>
+                      </GoogleAnalytics.OutboundLink>.
+                    </p>
+                    <ul id="custom-material-format" className="text-small ml1 mt0 mb3">
+                      <li>Each word must be on its own line.</li>
+                      <li>Each word must be separated from its hint by a “Tab” e.g. <span className="pre">“<kbd>{"\u0009"}</kbd>”</span>.</li>
+                      <li>If you skip strokes, multi-stroke words may count as misstrokes.</li>
+                    </ul>
+                    <label className="mb1" htmlFor="your-material">Enter your material here:</label>
+                    <textarea
+                      id="your-material"
+                      aria-describedby="customLessonMaterialValidationMessages"
+                      className={ "input-textarea mw100 w-100 mb3 h-168 overflow-scroll " + validationStateStyle }
+                      autoComplete="off"
+                      autoCorrect="off"
+                      autoCapitalize="off"
+                      spellCheck="false"
+                      placeholder="example	KP-PL
+  consisting of	KAOFG
+  examples.	KP-PLS TP-PL"
+                      rows="8"
+                      wrap="off"
+                      onChange={this.props.createCustomLesson}
+                      value={this.props.customLessonMaterial}
+                      >
+                    </textarea>
+                    {listOfValidationMessages}
+                    <div className="text-right">
+                      {this.props.customLessonMaterialValidationState === "fail" ?
+                        <button disabled={ true } className="link-button dib" style={{lineHeight: 2}}>Start custom lesson</button>
+                          :
+                        <Link to='/lessons/custom?study=practice&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1' className="link-button dib text-right" style={{lineHeight: 2}} >Start custom lesson</Link>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <div className="mt1 mw-336 flex-grow">
+                  <h3 className="mt3">Community lessons</h3>
+                  <p>
+                    Community lessons cover topics like spacing,
+                    capitalisation, quotations, and using{" "}
+                    <span className="steno-stroke steno-stroke--subtle px05">
+                      SPWER
+                    </span>{" "}
+                    for “inter-” and “enter-” words. To help Typey&nbsp;Type grow even faster, add your custom lessons
+                    to the{" "}
                     <GoogleAnalytics.OutboundLink
-                      eventLabel="community’s lessons"
+                      eventLabel="community's lessons"
                       to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      community’s lessons
+                      community’s <span className="nowrap">lessons
                       <Tooltip
                         title="Opens in a new tab"
                         animation="shift"
@@ -166,41 +234,18 @@ class CustomLessonSetup extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-                      </Tooltip>
-                    </GoogleAnalytics.OutboundLink>.
+                        <IconExternal
+                          ariaHidden="true"
+                          role="presentation"
+                          iconWidth="24"
+                          iconHeight="24"
+                          className="ml1 svg-icon-wrapper svg-baseline"
+                          iconTitle=""
+                        />
+                      </Tooltip></span>
+                    </GoogleAnalytics.OutboundLink>
+                    .
                   </p>
-                  <ul id="custom-material-format" className="text-small ml1 mt0 mb3">
-                    <li>Each word must be on its own line.</li>
-                    <li>Each word must be separated from its stroke by a "Tab" character.</li>
-                    <li>If you skip strokes, multi-stroke words may count as misstrokes.</li>
-                  </ul>
-                  <label className="mb1" htmlFor="your-material">Enter your material here:</label>
-                  <textarea
-                    id="your-material"
-                    aria-describedby="customLessonMaterialValidationMessages"
-                    className={ "input-textarea mw100 w-100 mb3 h-168 overflow-scroll " + validationStateStyle }
-                    autoComplete="off"
-                    autoCorrect="off"
-                    autoCapitalize="off"
-                    spellCheck="false"
-                    placeholder="example	KP-PL
-consisting of	KAOFG
-examples.	KP-PLS TP-PL"
-                    rows="8"
-                    wrap="off"
-                    onChange={this.props.createCustomLesson}
-                    value={this.props.customLessonMaterial}
-                    >
-                  </textarea>
-                  {listOfValidationMessages}
-                  <div className="text-right">
-                    {this.props.customLessonMaterialValidationState === "fail" ?
-                      <button disabled={ true } className="link-button dib" style={{lineHeight: 2}}>Start custom lesson</button>
-                        :
-                      <Link to='/lessons/custom?study=practice&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1' className="link-button dib text-right" style={{lineHeight: 2}} >Start custom lesson</Link>
-                    }
-                  </div>
                 </div>
               </div>
             </div>
