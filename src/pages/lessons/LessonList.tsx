@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import GoogleAnalytics from "react-ga";
 import { Link } from "react-router-dom";
 import { groups } from "d3-array";
 
@@ -121,6 +122,20 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
         true
       );
     });
+
+    if (searchTerm && searchTerm.toString()) {
+      GoogleAnalytics.event({
+        category: "Search filter lessons",
+        action: "Change",
+        label: searchTerm.toString(),
+      });
+    } else {
+      GoogleAnalytics.event({
+        category: "Search filter lessons",
+        action: "Change",
+        label: "EMPTY_SEARCH_TEXT",
+      });
+    }
 
     setSearchFilter(searchTerm);
     setFilteredLessonIndex(filteredLessons);
