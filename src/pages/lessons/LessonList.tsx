@@ -129,23 +129,27 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
         type="search"
         value={searchFilter}
       ></input>
-      <p className="mb0">Jump to:</p>
-      <ul>
-        {groupedLessons.map(([category, subcategories]) => (
-          <li key={category}>
-            <a href={`#${wrangleId(category)}`}>{category}</a>
-            {subcategories[0][0] && (
-              <ul>
-                {subcategories.map(([subcategory, _]) => (
-                  <li key={subcategory}>
-                    <a href={`#${wrangleId(subcategory)}`}>{subcategory}</a>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </li>
-        ))}
-      </ul>
+      {searchFilter.length === 0 && (
+        <>
+          <p className="mb0">Jump to:</p>
+          <ul>
+            {groupedLessons.map(([category, subcategories]) => (
+              <li key={category}>
+                <a href={`#${wrangleId(category)}`}>{category}</a>
+                {subcategories[0][0] && (
+                  <ul>
+                    {subcategories.map(([subcategory, _]) => (
+                      <li key={subcategory}>
+                        <a href={`#${wrangleId(subcategory)}`}>{subcategory}</a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
       {groupedLessons.map(([category, subcategories]) => {
         return (
           <div key={category}>
