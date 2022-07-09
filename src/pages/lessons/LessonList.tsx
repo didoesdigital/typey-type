@@ -144,6 +144,9 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
           value={searchFilter}
         ></input>
       </div>
+      {filteredLessonIndex.length === 0 && (
+        <p>No results. Try changing your search.</p>
+      )}
       {searchFilter.length === 0 && (
         <>
           <p className="mb0">Jump to:</p>
@@ -200,9 +203,6 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
           </div>
         );
       })}
-      {filteredLessonIndex.length === 0 && (
-        <p>No results. Try changing your search.</p>
-      )}
     </div>
   );
 }
