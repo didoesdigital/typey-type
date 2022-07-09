@@ -58,41 +58,48 @@ const wrangleId = (id: string) => {
   return id.toLowerCase().replace(/[ ,’()]/g, "-");
 };
 
+const scrollToHeading = (hash: string) => {
+  const el = document.querySelector<HTMLAnchorElement>(hash);
+  let top = 0;
+  if (el && el.getBoundingClientRect().top) {
+    top = el.getBoundingClientRect().top;
+  }
+  const scrollOptions: ScrollToOptions = {
+    left: 0,
+    top: window.pageYOffset + top,
+    behavior: "smooth",
+  };
+  if (el) {
+    window.scrollTo(scrollOptions);
+    window.setTimeout(function () {
+      el.focus();
+    }, 300);
+  }
+};
+
 export default function LessonList({ lessonIndex, url }: LessonListProps) {
   const [searchFilter, setSearchFilter] = useState("");
   const [filteredLessonIndex, setFilteredLessonIndex] = useState(lessonIndex);
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     window.location.hash = window.decodeURIComponent(window.location.hash);
     const scrollToAnchor = () => {
-      const hash = window.location.hash;
-      if (hash && hash.length > 0) {
-        const el = document.querySelector<HTMLAnchorElement>(hash);
-        let top = 0;
-        if (el && el.getBoundingClientRect().top) {
-          top = el.getBoundingClientRect().top;
+      // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
+      window.setTimeout(() => {
+        const hash = window.location.hash;
+        if (hash && hash.length > 0) {
+          scrollToHeading(hash);
+        } else {
+          searchInputRef?.current?.focus();
         }
-        const scrollOptions: ScrollToOptions = {
-          left: 0,
-          top: window.pageYOffset + top,
-          behavior: "smooth",
-        };
-        if (el) {
-          window.scrollTo(scrollOptions);
-          window.setTimeout(function () {
-            el.focus();
-          }, 300);
-        }
-      } else {
-        inputRef?.current?.focus();
-      }
+      }, 0);
     };
     scrollToAnchor();
 
     window.onhashchange = scrollToAnchor;
-  }, []);
+  }, [lessonIndex]);
 
   useEffect(() => {
     setFilteredLessonIndex(lessonIndex);
@@ -135,7 +142,7 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
           Search {lessonIndex.length} lessons:
         </label>
         <input
-          ref={inputRef}
+          ref={searchInputRef}
           id="lesson-search-filter"
           className="caret-color w-100 bg-white input-textarea mb3"
           autoCapitalize="off"
