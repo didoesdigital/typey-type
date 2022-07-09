@@ -147,6 +147,14 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
       {filteredLessonIndex.length === 0 && (
         <p>No results. Try changing your search.</p>
       )}
+      <p aria-live="polite" aria-atomic="true">
+        {searchFilter.length > 0 && filteredLessonIndex.length > 0 && (
+          <>
+            {filteredLessonIndex.length}{" "}
+            {`result${filteredLessonIndex.length === 1 ? "" : "s"}`}
+          </>
+        )}
+      </p>
       {searchFilter.length === 0 && (
         <>
           <p className="mb0">Jump to:</p>
