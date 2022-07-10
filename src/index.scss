@@ -49,7 +49,7 @@ $outline-shorthand: $brand-highlight auto 5px;
 
 $z-index-modal-overlay: 7;
 $z-index-particles: 6;
-$z-index-autocomplete-menu: 5;
+// $z-index-autocomplete-menu: 5;
 $z-index-vertical-text: 4;
 $z-index-revision-mode-button: 3;
 $z-index-show-scores-control: 3;
@@ -344,10 +344,6 @@ select:focus {
   color: add-tint($brand-primary, 30%);
 }
 ::placeholder {
-  color: add-tint($brand-primary, 30%);
-}
-
-.inline-form-control::placeholder {
   color: add-tint($brand-primary, 30%);
 }
 
@@ -1264,68 +1260,6 @@ label {
     font-size: $h5-size;
     height: 2.5rem;
   }
-}
-.inline-form-control {
-  background-color: add-tint($brand-primary, 10%);
-  border-radius: 4px;
-  border: 1px solid add-tint($brand-primary, 10%);
-  color: #fff;
-  font-size: 1rem;
-  line-height: 1.5;
-  height: 2.5rem;
-  padding: 4px 8px;
-  width: 100%;
-
-  &:hover {
-    background-color: add-tint($brand-primary, 15%);
-  }
-
-  &:active,
-  &:focus {
-    background-color: add-tint($brand-primary, 90%);
-    color: saturate(add-shade($brand-primary, 30%), 5%);
-  }
-
-  &.inline-form-control--with-right-icon {
-    padding: 4px 40px 4px 8px;
-  }
-  &.inline-form-control--reverse {
-    &::-webkit-input-placeholder { // WebKit, Blink, Edge
-      color: add-tint($brand-primary, 70%);
-    }
-    &:-moz-placeholder { // Mozilla Firefox 4 to 18
-      color: add-tint($brand-primary, 70%);
-      opacity: 1;
-    }
-    &::-moz-placeholder { // Mozilla Firefox 19+
-      color: add-tint($brand-primary, 70%);
-      opacity: 1;
-    }
-    &:-ms-input-placeholder { // Internet Explorer 10-11
-      color: add-tint($brand-primary, 70%);
-    }
-    &::-ms-input-placeholder { // Microsoft Edge
-      color: add-tint($brand-primary, 70%);
-    }
-    &::placeholder {
-      color: add-tint($brand-primary, 70%);
-    }
-  }
-}
-
-.autocomplete-menu {
-  background-color: add-tint($brand-primary, 97%);
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
-  color: saturate(add-shade($brand-primary, 60%), 20%);
-  max-height: calc(100% - 118px);
-  overflow: auto;
-  padding: 2px 0;
-  position: fixed;
-  z-index: $z-index-autocomplete-menu;
-}
-.autocomplete-highlight {
-  background-color: $brand-highlight;
 }
 .button,
 .link-button {

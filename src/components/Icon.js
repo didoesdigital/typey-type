@@ -209,28 +209,28 @@ class IconRestart extends Component {
   }
 }
 
-class IconSearch extends Component {
-  constructor(props) {
-    super(props);
-    this.titleIdAndAriaLabelledBy = idForIcon("iconSearchTitle");
-  }
+// class IconSearch extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.titleIdAndAriaLabelledBy = idForIcon("iconSearchTitle");
+//   }
 
-  render() {
-    const iconWidth = this.props.iconWidth || 24;
-    const iconHeight = this.props.iconHeight || 24;
-    let iconTitle = "";
-    if (this.props.iconTitle === "") { iconTitle = ""; }
-    else if (this.props.iconTitle) { iconTitle = this.props.iconTitle; }
-    else { iconTitle = 'Search'; }
-    const classes = this.props.className || '';
-    const role = this.props.role || 'img';
-    const ariaHidden = this.props.ariaHidden || 'false';
-    return (
-      <span className={classes}>
-        <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby={this.titleIdAndAriaLabelledBy} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title id={this.titleIdAndAriaLabelledBy}>{iconTitle}</title><mask id="mask-search" fill="white"><path d="M16.7567621,13.9283349 L22.4350288,19.6066017 C23.2160774,20.3876503 23.2160774,21.6539803 22.4350288,22.4350288 C21.6539803,23.2160774 20.3876503,23.2160774 19.6066017,22.4350288 L13.9283349,16.7567621 C12.6386564,17.5454533 11.1224107,18 9.5,18 C4.80557963,18 1,14.1944204 1,9.5 C1,4.80557963 4.80557963,1 9.5,1 C14.1944204,1 18,4.80557963 18,9.5 C18,11.1224107 17.5454533,12.6386564 16.7567621,13.9283349 Z M9.5,15 C12.5375661,15 15,12.5375661 15,9.5 C15,6.46243388 12.5375661,4 9.5,4 C6.46243388,4 4,6.46243388 4,9.5 C4,12.5375661 6.46243388,15 9.5,15 Z" id="path-search"></path></mask><rect id="heavy-primary-tint-1" mask="url(#mask-search)" fill="currentColor" x="0" y="0" width="24" height="24"></rect></svg></span>
-    )
-  }
-}
+//   render() {
+//     const iconWidth = this.props.iconWidth || 24;
+//     const iconHeight = this.props.iconHeight || 24;
+//     let iconTitle = "";
+//     if (this.props.iconTitle === "") { iconTitle = ""; }
+//     else if (this.props.iconTitle) { iconTitle = this.props.iconTitle; }
+//     else { iconTitle = 'Search'; }
+//     const classes = this.props.className || '';
+//     const role = this.props.role || 'img';
+//     const ariaHidden = this.props.ariaHidden || 'false';
+//     return (
+//       <span className={classes}>
+//         <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby={this.titleIdAndAriaLabelledBy} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title id={this.titleIdAndAriaLabelledBy}>{iconTitle}</title><mask id="mask-search" fill="white"><path d="M16.7567621,13.9283349 L22.4350288,19.6066017 C23.2160774,20.3876503 23.2160774,21.6539803 22.4350288,22.4350288 C21.6539803,23.2160774 20.3876503,23.2160774 19.6066017,22.4350288 L13.9283349,16.7567621 C12.6386564,17.5454533 11.1224107,18 9.5,18 C4.80557963,18 1,14.1944204 1,9.5 C1,4.80557963 4.80557963,1 9.5,1 C14.1944204,1 18,4.80557963 18,9.5 C18,11.1224107 17.5454533,12.6386564 16.7567621,13.9283349 Z M9.5,15 C12.5375661,15 15,12.5375661 15,9.5 C15,6.46243388 12.5375661,4 9.5,4 C6.46243388,4 4,6.46243388 4,9.5 C4,12.5375661 6.46243388,15 9.5,15 Z" id="path-search"></path></mask><rect id="heavy-primary-tint-1" mask="url(#mask-search)" fill="currentColor" x="0" y="0" width="24" height="24"></rect></svg></span>
+//     )
+//   }
+// }
 
 class IconExternal extends Component {
   constructor(props) {
@@ -289,7 +289,6 @@ export {
   IconFullscreen,
   IconMetronome,
   IconRestart,
-  IconSearch,
   IconTriangleRight,
   IconTypeyType
 };

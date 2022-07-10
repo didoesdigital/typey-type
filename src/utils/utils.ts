@@ -1,10 +1,3 @@
-type Lesson = {
-  "title": "Test lesson",
-  "subtitle": "Test",
-  "category": "Drills",
-  "subcategory": "Test drills",
-  "path": "./lessons/test-lesson.txt"
-};
 type PresentedMaterial = [{phrase: '', stroke: ''}];
 
 function relativeTimeAgo(timeNow : number, timeInThePast : number) {
@@ -56,28 +49,6 @@ function isLessonTextValid(lessonText : string) {
   return !(lessonText === '' || typeof lessonText !== 'string' || (typeof lessonText === 'string' && lessonText.toLowerCase().startsWith('<!doctype html>')));
 }
 
-function matchLessonToTerm(lesson : Lesson, value : string) {
-  let terms = value.toLowerCase().split(/\s+/);
-  if (terms.length === 1 && terms[0] === "") { return false; }
-  let text = [lesson.title, lesson.subtitle, lesson.category, lesson.subcategory].join(' ').toLowerCase();
-  return terms.every( term => text.indexOf(term) !== -1);
-}
-
-function sortLessons(a : Lesson, b : Lesson, value : string) {
-  if (value === '') {
-    return 0;
-  }
-  const aLower = a.title.toLowerCase()
-  const bLower = b.title.toLowerCase()
-  const valueLower = value.toLowerCase()
-  const queryPosA = aLower.indexOf(valueLower)
-  const queryPosB = bLower.indexOf(valueLower)
-  if (queryPosA !== queryPosB) {
-    return queryPosA - queryPosB
-  }
-  return aLower < bLower ? -1 : 1
-}
-
 function isPeak(currentItemLength : number, previousItemLength : number, nextItemLength : number) {
   let isPeak = false;
   if ((currentItemLength > previousItemLength) && (currentItemLength > nextItemLength)) { isPeak = true };
@@ -102,8 +73,8 @@ function getRandomBetween(min : number, max : number) {
   return Math.random() * (max - min) + min;
 }
 
-function escapeRegExp(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+function escapeRegExp(regexStr: string) {
+  return regexStr.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
 }
 
 export {
@@ -111,8 +82,6 @@ export {
   getRandomBetween,
   isLessonTextValid,
   isPeak,
-  matchLessonToTerm,
   randomise,
   relativeTimeAgo,
-  sortLessons,
 };

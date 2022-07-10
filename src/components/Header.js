@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Autocomplete from 'react-autocomplete';
-import GoogleAnalytics from 'react-ga';
-import { IconTypeyType, IconSearch } from './Icon';
-import { matchLessonToTerm, sortLessons } from './../utils/utils';
+import { IconTypeyType } from './Icon';
 
 class Header extends Component {
   componentDidMount() {
@@ -12,18 +9,7 @@ class Header extends Component {
     }
   }
 
-  onStart() {
-    if (this.props.nextLessonPath) {
-      GoogleAnalytics.event({
-        category: 'Search',
-        action: 'Start',
-        label: this.props.nextLessonPath
-      });
-    }
-  }
-
   render() {
-    const nextLesson = this.props.value || 'No lesson selected. See all lessons.';
     let fullscreen = '';
     if (this.props.fullscreen) {
       fullscreen = ' fullscreen';
@@ -50,6 +36,7 @@ class Header extends Component {
                 <Link to="/lookup" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--xs--lookup">Lookup</Link>
                 <Link to="/dictionaries" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--xs--dictionaries">Dictionaries</Link>
                 <Link to="/lessons" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--xs--lessons">Lessons</Link>
+                <Link to="/games" className="nav-button-xs link-button link-button-ghost mr1 table-cell" id="ga--header--xs--games">Games</Link>
               </div>
               <div className="table search-container relative">
                 <Link to="/progress" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--progress">Progress</Link>
@@ -57,42 +44,7 @@ class Header extends Component {
                 <Link to="/lookup" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--lookup">Lookup</Link>
                 <Link to="/dictionaries" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--dictionaries">Dictionaries</Link>
                 <Link to="/lessons" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--lessons">Lessons</Link>
-                <label htmlFor="lessons-autocomplete" className="visually-hidden">Search lessons</label>
-                <Autocomplete
-                  getItemValue={(item) => item.title}
-                  inputProps={{ id: 'lessons-autocomplete', spellCheck: 'false', autoCapitalize: "off", autoCorrect: "off", placeholder: "Search" }}
-                  items={this.props.items}
-                  menuStyle={{ }}
-                  onChange={this.props.onChange}
-                  onSelect={this.props.onSelect}
-                  renderInput={function(props) {
-                    return <input {...props} className="inline-form-control inline-form-control--with-right-icon inline-form-control--reverse" />
-                  }}
-                  renderItem={(item, highlighted) =>
-                    <div
-                      key={item.path}
-                      className={ highlighted ? "autocomplete-highlight py05 px1 text-small" : "py05 px1 text-small" }
-                    >
-                      <span className={ highlighted ? "text-uppercase text-small" : "text-uppercase text-small de-emphasized" }>{item.category} >&nbsp;{item.subcategory}</span><br />
-                      <span className="text-small">{item.title}</span> <span className="text-small">{item.subtitle}</span>
-                    </div>
-                  }
-                  renderMenu={function(items, value, style) {
-                    return <div style={{ ...style, ...this.menuStyle }} className="autocomplete-menu" children={items}/>
-                  }}
-                  role="search"
-                  shouldItemRender={matchLessonToTerm}
-                  sortItems={sortLessons}
-                  value={this.props.value}
-                  wrapperStyle={{ position: 'relative', display: 'table-cell', paddingLeft: '0.5em', paddingRight: '0.5em', width: '100%' }}
-                />
-                <IconSearch role="presentation" iconWidth="24" iconHeight="24" className="mr1 svg-icon-wrapper svg-baseline search-icon pointer-none" />
-                <div className="visually-hidden">Selected lesson to start next:
-                  <div role="status" aria-live="assertive" aria-atomic="true">
-                    {nextLesson}
-                  </div>
-                </div>
-                <Link to={'/lessons'+this.props.nextLessonPath.replace(/lesson\.txt$/,'')} className="link-button table-cell" role="button" id="ga--header--start" onClick={this.onStart.bind(this)}>Start</Link>
+                <Link to="/games" className="nav-button-lg link-button link-button-ghost mr1 table-cell" id="ga--header--games">Games</Link>
               </div>
             </nav>
           </div>
