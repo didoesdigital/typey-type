@@ -865,7 +865,7 @@ input:focus::placeholder {
 }
 
 .header {
-  background-color: saturate(add-shade($brand-primary, 30%), 5%);
+  background-color: $brand-primary;
   color: add-tint($brand-primary, 70%);
 
   nav {
@@ -956,7 +956,7 @@ input:focus::placeholder {
 }
 
 .subheader {
-  background-color: $brand-primary;
+  background-color: saturate(add-shade($brand-primary, 30%), 5%);
   color: add-tint($brand-primary, 70%);
   min-height: 72px; // fits buttons and margins
   h2 {
