@@ -867,15 +867,6 @@ input:focus::placeholder {
   border-left: 1px solid add-tint($brand-primary, 80%);
 }
 
-.header {
-  .search-container {
-    max-width: 768px; // arbitrary to fit nav buttons, search placeholder, button
-    @media (max-width: 959px) {
-      margin-left: -16px;
-      margin-top: 24px;
-    }
-  }
-}
 .heading-link {
   color: add-tint($brand-primary, 70%);
   text-decoration: none;

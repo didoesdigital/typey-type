@@ -26,7 +26,7 @@ class PageNotFound extends Component {
     return (
       <div>
         <a href="#main" className="skip-to-link link-button">Skip to main content</a>
-        <div className="header bg-primary color-text-reverse" role="banner">
+        <div className="bg-primary color-text-reverse" role="banner">
           <div className="mx-auto mw-1920 py2 px3">
             <nav className="flex flex-wrap items-center justify-between">
               <div className="site-heading-banner min-h-40 flex items-center">
