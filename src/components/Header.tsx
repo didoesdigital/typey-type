@@ -91,7 +91,7 @@ const Header = ({ fullscreen }: { fullscreen: string }) => {
                 Games
               </Link>
             </div>
-            <div className="table search-container relative">
+            <div className="table search-container relative nr2">
               <Link
                 to="/progress"
                 className="nav-button-lg link-button link-button-ghost mr1 flex items-center"
