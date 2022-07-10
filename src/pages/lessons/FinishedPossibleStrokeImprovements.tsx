@@ -8,7 +8,10 @@ type FinishedPossibleStrokeImprovementsProps = {
   updateRevisionMaterial: any;
 };
 
-const getWordWithSpacing = (wordWithoutSpacing, spacePlacement) =>
+const getWordWithSpacing = (
+  wordWithoutSpacing: string,
+  spacePlacement: string
+) =>
   spacePlacement === "spaceBeforeOutput"
     ? " " + wordWithoutSpacing
     : spacePlacement === "spaceAfterOutput"
@@ -23,15 +26,17 @@ const FinishedPossibleStrokeImprovements = ({
   updateRevisionMaterial,
 }: FinishedPossibleStrokeImprovementsProps) => {
   return currentLessonStrokes.length > 0
-    ? currentLessonStrokes.map((phrase, i) => {
+    ? currentLessonStrokes.map((phrase: any, i: number) => {
         let strokeAttemptsPresentation;
-        let strokeAttempts = phrase.attempts.map(({ text, time }, j) => {
-          return (
-            <li key={j} className="nowrap di ml1">
-              <span className="bg-warning px1">{text}</span>
-            </li>
-          );
-        });
+        let strokeAttempts = phrase.attempts.map(
+          ({ text }: { text: string }, j: any) => {
+            return (
+              <li key={j} className="nowrap di ml1">
+                <span className="bg-warning px1">{text}</span>
+              </li>
+            );
+          }
+        );
         if (phrase.attempts.length > 0) {
           // We use a "punctuation space" before "You wrote" to separate it from previous phrase.
           // Test this by copying and pasting the material phrase and misstrokes text e.g. "stop You wrote: staph"
@@ -83,7 +88,7 @@ const FinishedPossibleStrokeImprovements = ({
             <p className="pl3 mb0">
               <span className="visually-hidden text-small">Hint: </span>
               <span className="steno-stroke steno-stroke--subtle text-small px1 py05">
-                {phrase.stroke.split("").map((item, i) => (
+                {phrase.stroke.split("").map((item: any, i: any) => (
                   <kbd
                     className="raw-steno-key raw-steno-key--subtle text-small"
                     key={i}

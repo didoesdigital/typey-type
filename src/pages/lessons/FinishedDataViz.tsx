@@ -159,7 +159,7 @@ const FinishedDataViz = ({
   setAnnouncementMessage,
 }: FinishedDataVizProps) => {
   const shouldShowChart =
-    chartData?.dataPoints?.length > 1 && chartData?.dataPoints?.length < 10000;
+    (chartData?.dataPoints?.length || 0) > 1 && (chartData?.dataPoints?.length || 0) < 10000;
 
   return (
     <>
