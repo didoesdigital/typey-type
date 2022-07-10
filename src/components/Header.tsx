@@ -2,11 +2,11 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { IconTypeyType } from "./Icon";
 
-const Header = ({ fullscreen }) => {
-  const mainHeading = useRef(null);
+const Header = ({ fullscreen }: { fullscreen: string }) => {
+  const mainHeading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     if (mainHeading) {
-      mainHeading.current.focus();
+      mainHeading.current?.focus();
     }
   }, []);
 
@@ -34,7 +34,7 @@ const Header = ({ fullscreen }) => {
                 aria-label="Typey Type homepage"
                 id="ga--header--logo"
               >
-                <h1 ref={mainHeading} tabIndex="-1" className="flex items-end">
+                <h1 ref={mainHeading} tabIndex={-1} className="flex items-end">
                   <IconTypeyType
                     role="presentation"
                     iconWidth="64"
