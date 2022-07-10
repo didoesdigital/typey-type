@@ -10,16 +10,10 @@ class Header extends Component {
   }
 
   render() {
-    let fullscreen = '';
-    if (this.props.fullscreen) {
-      fullscreen = ' fullscreen';
-    } else {
-      fullscreen = '';
-    }
     return (
       <div>
         <a href="#main" className="skip-to-link link-button" id="ga--header--skip-to-content">Skip to main content</a>
-        <div className={"header min-h-88 hide-in-fullscreen" + fullscreen} role="banner">
+        <div className={`header min-h-88 hide-in-fullscreen${this.props.fullscreen ? ' fullscreen' :  ''}`} role="banner">
           <div className="mx-auto mw-1920 p3">
             <nav>
               <div className="site-heading-banner">
