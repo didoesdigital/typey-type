@@ -940,7 +940,7 @@ input:focus::placeholder {
 }
 
 .nav-button-xs {
-  display: inline-block;
+  display: inline-flex;
 
   @media (min-width: 960px) {
     display: none;

@@ -30,14 +30,14 @@ const LessonsIndex = ({
     <main id="main">
       <div className="subheader">
         <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
-          <div className="flex mr1 self-center">
+          <div className="flex flex-wrap mr1 self-center">
             <header className="flex items-center min-h-40">
               <h2 ref={mainHeading} tabIndex={-1}>
                 Lessons
               </h2>
             </header>
           </div>
-          <div className="flex mxn2">
+          <div className="flex flex-wrap mxn2">
             {customLesson.title !== "Steno" ? (
               <Link
                 to={`${match.url}/custom?study=discover&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1`.replace(
@@ -45,7 +45,7 @@ const LessonsIndex = ({
                   "/"
                 )}
                 onClick={stopLesson}
-                className="dib ml2 link-button link-button-ghost table-cell mr1"
+                className="dib ml1 link-button link-button-ghost table-cell mr1"
               >
                 Start custom lesson
               </Link>

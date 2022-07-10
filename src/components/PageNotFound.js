@@ -26,8 +26,8 @@ class PageNotFound extends Component {
     return (
       <div>
         <a href="#main" className="skip-to-link link-button">Skip to main content</a>
-        <div className="header min-h-88" role="banner">
-          <div className="mx-auto mw-1920 p3">
+        <div className="header" role="banner">
+          <div className="mx-auto mw-1920 py2 px3">
             <nav>
               <div className="site-heading-banner min-h-40 flex items-center">
                 <Link to="/" className="heading-link dib" aria-label="Typey Type" id="ga--header--logo">
@@ -51,6 +51,7 @@ class PageNotFound extends Component {
             <li><Link to="/dictionaries">Dictionaries</Link></li>
             <li><Link to="/lessons">Lessons</Link></li>
             <li><Link to="/lessons/drills/top-100-words/">Top 100 Words</Link></li>
+            <li><Link to="/games">Games</Link></li>
             <li><Link to="/support">Help and about</Link></li>
             <li><Link to="/contribute">Contribute to Typey&nbsp;Type</Link></li>
             <li><Link to="/break">Take a 5-minute break</Link></li>

@@ -20,14 +20,14 @@ const Header = ({ fullscreen }: { fullscreen: string }) => {
         Skip to main content
       </a>
       <div
-        className={`header min-h-88 hide-in-fullscreen${
+        className={`header hide-in-fullscreen${
           fullscreen ? " fullscreen" : ""
         }`}
         role="banner"
       >
-        <div className="mx-auto mw-1920 p3">
+        <div className="mx-auto mw-1920 py2 px3">
           <nav>
-            <div className="site-heading-banner">
+            <div className="site-heading-banner flex items-center">
               <Link
                 to="/"
                 className="heading-link dib"
@@ -50,42 +50,42 @@ const Header = ({ fullscreen }: { fullscreen: string }) => {
             <div className="nav-menu-xs">
               <Link
                 to="/progress"
-                className="nav-button-xs link-button link-button-ghost mr1 table-cell"
+                className="nav-button-xs link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--xs--progress"
               >
                 Progress
               </Link>
               <Link
                 to="/writer"
-                className="nav-button-xs link-button link-button-ghost mr1 table-cell"
+                className="nav-button-xs link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--xs--writer"
               >
                 Writer
               </Link>
               <Link
                 to="/lookup"
-                className="nav-button-xs link-button link-button-ghost mr1 table-cell"
+                className="nav-button-xs link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--xs--lookup"
               >
                 Lookup
               </Link>
               <Link
                 to="/dictionaries"
-                className="nav-button-xs link-button link-button-ghost mr1 table-cell"
+                className="nav-button-xs link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--xs--dictionaries"
               >
                 Dictionaries
               </Link>
               <Link
                 to="/lessons"
-                className="nav-button-xs link-button link-button-ghost mr1 table-cell"
+                className="nav-button-xs link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--xs--lessons"
               >
                 Lessons
               </Link>
               <Link
                 to="/games"
-                className="nav-button-xs link-button link-button-ghost mr1 table-cell"
+                className="nav-button-xs link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--xs--games"
               >
                 Games
@@ -94,42 +94,42 @@ const Header = ({ fullscreen }: { fullscreen: string }) => {
             <div className="table search-container relative">
               <Link
                 to="/progress"
-                className="nav-button-lg link-button link-button-ghost mr1 table-cell"
+                className="nav-button-lg link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--progress"
               >
                 Progress
               </Link>
               <Link
                 to="/writer"
-                className="nav-button-lg link-button link-button-ghost mr1 table-cell"
+                className="nav-button-lg link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--writer"
               >
                 Writer
               </Link>
               <Link
                 to="/lookup"
-                className="nav-button-lg link-button link-button-ghost mr1 table-cell"
+                className="nav-button-lg link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--lookup"
               >
                 Lookup
               </Link>
               <Link
                 to="/dictionaries"
-                className="nav-button-lg link-button link-button-ghost mr1 table-cell"
+                className="nav-button-lg link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--dictionaries"
               >
                 Dictionaries
               </Link>
               <Link
                 to="/lessons"
-                className="nav-button-lg link-button link-button-ghost mr1 table-cell"
+                className="nav-button-lg link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--lessons"
               >
                 Lessons
               </Link>
               <Link
                 to="/games"
-                className="nav-button-lg link-button link-button-ghost mr1 table-cell"
+                className="nav-button-lg link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--games"
               >
                 Games

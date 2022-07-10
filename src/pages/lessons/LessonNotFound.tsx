@@ -89,7 +89,7 @@ const LessonNotFound = ({
             </div>
           </div>
         </div>
-        <div className="mx-auto mw-1024 p3">
+        <div className="mx-auto mw-1024 py2 px3">
           <div className="mw-568">
             <p className="mt3">
               That lesson couldn’t be found. Try one of these instead:
