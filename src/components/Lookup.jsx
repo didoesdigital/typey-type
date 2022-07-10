@@ -34,7 +34,7 @@ class Lookup extends Component {
               </header>
             </div>
             <div className="flex mxn2">
-              <PseudoContentButton className="js-clipboard-button button button--secondary table-cell mr1 copy-to-clipboard" style={{lineHeight: 2}} dataClipboardTarget="#js-bookmark-url">Copy to clipboard</PseudoContentButton>
+              <PseudoContentButton className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard" style={{lineHeight: 2}} dataClipboardTarget="#js-bookmark-url">Copy to clipboard</PseudoContentButton>
             </div>
           </div>
         </div>
