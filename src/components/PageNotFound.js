@@ -26,9 +26,9 @@ class PageNotFound extends Component {
     return (
       <div>
         <a href="#main" className="skip-to-link link-button">Skip to main content</a>
-        <div className="header" role="banner">
+        <div className="header bg-primary color-text-reverse" role="banner">
           <div className="mx-auto mw-1920 py2 px3">
-            <nav>
+            <nav className="flex flex-wrap items-center justify-between">
               <div className="site-heading-banner min-h-40 flex items-center">
                 <Link to="/" className="heading-link dib" aria-label="Typey Type" id="ga--header--logo">
                   <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" className="flex items-end">

@@ -20,13 +20,13 @@ const Header = ({ fullscreen }: { fullscreen: string }) => {
         Skip to main content
       </a>
       <div
-        className={`header hide-in-fullscreen${
+        className={`header bg-primary color-text-reverse hide-in-fullscreen${
           fullscreen ? " fullscreen" : ""
         }`}
         role="banner"
       >
         <div className="mx-auto mw-1920 py2 px3">
-          <nav>
+          <nav className="flex flex-wrap items-center justify-between">
             <div className="site-heading-banner flex items-center">
               <Link
                 to="/"

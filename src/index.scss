@@ -22,6 +22,7 @@ $brand-danger: #953159;
 
 // Variables
 $type-color: desaturate($brand-primary, 5%);
+$type-color--reverse: add-tint($brand-primary, 70%);
 $type: 400 1rem/1.6 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $type-face--mono: 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
 $type-face--korean: 'NanumGothicCoding', 'Nanum Gothic Coding', 'Overpass Mono', Consolas, 'Andale Mono', Monaco, 'Courier New', Courier, monospace;
@@ -750,6 +751,7 @@ input:focus::placeholder {
 .bg-warning  { background-color: add-tint($brand-warning, 60%); }
 .bg-info     { background-color: add-tint($brand-primary, 95%); }
 .bg-slat     { background-color: add-tint($brand-primary, 90%); }
+.bg-primary  { background-color: $brand-primary; }
 .bg-white    { background-color: #fff; }
 .b-danger.b-danger   { border-color: saturate(add-tint($brand-danger, 30%), 30%); }
 .b-warning.b-warning { border-color: saturate(add-tint($brand-warning, 30%), 30%); }
@@ -775,9 +777,10 @@ input:focus::placeholder {
   text-transform: uppercase;
 }
 
-.color-text  { color: $type-color; }
-.color-white  { color: #fff; }
-.de-emphasized { color: desaturate(add-tint($brand-primary, 27%), 40%); }
+.color-text           { color: $type-color; }
+.color-text--reverse  { color: $type-color--reverse; }
+.color-white          { color: #fff; }
+.de-emphasized        { color: desaturate(add-tint($brand-primary, 27%), 40%); }
 
 .clearfix { display: flow-root; }
 
@@ -865,19 +868,6 @@ input:focus::placeholder {
 }
 
 .header {
-  background-color: $brand-primary;
-  color: add-tint($brand-primary, 70%);
-
-  nav {
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-
-    .link-button.link-button-ghost {
-      text-decoration: none;
-    }
-  }
   .search-container {
     max-width: 768px; // arbitrary to fit nav buttons, search placeholder, button
     @media (max-width: 959px) {
