@@ -13,6 +13,33 @@ let recommendedStudySession = [
   // repeat
 ];
 
+const games = [
+  {
+    studyType: 'game',
+    limitNumberOfWords: null,
+    repetitions: null,
+    linkTitle: "KAOES (keys) game",
+    linkText: "Play KAOES (keys) game",
+    link: '/games/KAOES',
+  },
+  {
+    studyType: 'game',
+    limitNumberOfWords: null,
+    repetitions: null,
+    linkTitle: "SHUFL (shuffle) game",
+    linkText: "Play SHUFL (shuffle) game",
+    link: '/games/SHUFL',
+  },
+  {
+    studyType: 'game',
+    limitNumberOfWords: null,
+    repetitions: null,
+    linkTitle: "TPEUBGSZ (fixes) game",
+    linkText: "Play TPEUBGSZ (fixes) game",
+    link: '/games/TPEUBGSZ',
+  }
+]
+
 function fetchRecommendations() {
   return fetch(process.env.PUBLIC_URL + '/lessons/recommendations.json', {
     method: "GET",
@@ -420,12 +447,17 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
           recommendedNextLesson.link = 'http://play.typeracer.com?universe=steno';
           break;
         case "game":
-          recommendedNextLesson.studyType = 'game';
-          recommendedNextLesson.limitNumberOfWords = null;
-          recommendedNextLesson.repetitions = null;
-          recommendedNextLesson.linkTitle = "Typing game by Nikola Simovic";
-          recommendedNextLesson.linkText = "Play Nikola Simovic typing game";
-          recommendedNextLesson.link = 'https://codepen.io/nikola1970/full/oxXbmb';
+          if ((numberOfWordsSeen + numberOfWordsMemorised) < 100) {
+            Object.assign(recommendedNextLesson, games[0])
+          }
+          else {
+            if (Math.random() < 0.5) {
+              Object.assign(recommendedNextLesson, games[1])
+            }
+            else {
+              Object.assign(recommendedNextLesson, games[2])
+            }
+          }
           break;
         default:
           recommendedNextLesson.studyType = 'break';

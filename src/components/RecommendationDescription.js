@@ -57,7 +57,7 @@ class RecommendationDescription extends Component {
       case "game":
         description = (
           <p className={descriptionClassNames}>
-            You’ve been so diligent! You might take a break from drilling and try a game. Steno games that apply time pressure and let you make mistakes can help you build speed.
+            You’ve been so diligent! You might take a break from drilling and try a game. Steno games let you make mistakes and think differently about what you’ve learned.
           </p>
         );
         break;
