@@ -27,7 +27,6 @@
     "query-string": "^6.2.0",
     "react": "^16.8.6",
     "react-animate-height": "^2.0.5",
-    "react-autocomplete": "^1.7.2",
     "react-chatbot-kit": "^2.0.1",
     "react-document-title": "^2.0.3",
     "react-dom": "^16.8.6",
