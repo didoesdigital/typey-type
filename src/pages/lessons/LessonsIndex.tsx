@@ -29,7 +29,7 @@ const LessonsIndex = ({
   return (
     <main id="main">
       <div className="subheader">
-        <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
+        <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
           <div className="flex flex-wrap mr1 self-center">
             <header className="flex items-center min-h-40">
               <h2 ref={mainHeading} tabIndex={-1}>
@@ -52,7 +52,7 @@ const LessonsIndex = ({
             ) : null}
             <Link
               to={`${match.url}/custom/setup`.replace(/\/{2,}/g, "/")}
-              className="link-button dib button button--secondary table-cell mr2"
+              className="link-button button button--secondary table-cell mr2 ml1"
               style={{ lineHeight: 2 }}
               id="ga--lesson-index--create-a-custom-lesson"
             >
