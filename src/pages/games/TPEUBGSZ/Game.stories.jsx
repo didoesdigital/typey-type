@@ -9,7 +9,7 @@ export default {
 
 const Template = (args) => (
   <div className="p3">
-    <Game {...args} />
+    <Game startingMetWordsToday={{'the': 2, 'of': 1}}  {...args} />
   </div>
 );
 

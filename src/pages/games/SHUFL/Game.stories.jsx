@@ -15,6 +15,8 @@ const Template = (args) => (
     <Game
       globalLookupDictionary={new Map()}
       updateMetWords={fauxUpdateMetWords}
+      globalLookupDictionaryLoaded={true}
+      startingMetWordsToday={{'the': 2}}
       {...args}
     />
   </div>
