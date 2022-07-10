@@ -168,7 +168,7 @@ export default function Game() {
         )}
         <p
           className={`text-center text-small ${
-            state.gameComplete ? "mt10" : "mt1"
+            state.gameComplete ? "mt10" : "mt1 mb0"
           }`}
         >
           Got a suggestion?{" "}
