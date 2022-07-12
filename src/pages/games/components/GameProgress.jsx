@@ -1,11 +1,11 @@
 import React from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-export default function RoundProgress({
-  round,
+export default function GameProgress({
   level,
-  roundToWin,
   levelToWin,
+  round,
+  roundToWin,
 }) {
   return (
     <div className="flex flex-grow">

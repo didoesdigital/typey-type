@@ -5,7 +5,7 @@ import Completed from "../components/Completed";
 import Hint from "../components/Hint";
 import Input from "../components/Input";
 import Intro from "../components/Intro";
-import RoundProgress from "../components/RoundProgress";
+import GameProgress from "../components/GameProgress";
 import LevelCompleted from "../utilities/LevelCompleted";
 import Puzzle from "./Puzzle";
 import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
@@ -74,7 +74,7 @@ export default function Game({
                   />
                 }
               />
-              <RoundProgress
+              <GameProgress
                 level={gameState.level}
                 levelToWin={levelToWin}
                 round={gameState.roundIndex + 1}

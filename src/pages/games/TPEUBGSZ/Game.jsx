@@ -7,7 +7,7 @@ import Input from "../components/Input";
 import Intro from "../components/Intro";
 import LevelCompleted from "../utilities/LevelCompleted";
 import Puzzle from "./Puzzle";
-import RoundProgress from "../components/RoundProgress";
+import GameProgress from "../components/GameProgress";
 import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
 
 const gameName = "TPEUBGSZ";
@@ -66,7 +66,7 @@ export default function Game({ startingMetWordsToday }) {
                   />
                 }
               />
-              <RoundProgress
+              <GameProgress
                 level={gameState.level}
                 levelToWin={levelToWin}
                 round={gameState.roundIndex + 1}

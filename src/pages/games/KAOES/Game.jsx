@@ -11,7 +11,7 @@ import { actions } from "../utilities/gameActions";
 import { initConfig, gameReducer, roundToWin } from "./gameReducer";
 import Completed from "../components/Completed";
 import Intro from "../components/Intro";
-import RoundProgress from "../components/RoundProgress";
+import GameProgress from "../components/GameProgress";
 import StenoLayoutDiagram from "../../../StenoLayout/AmericanStenoDiagram";
 import Stroke from "../../../utils/stroke";
 import { mapBriefToAmericanStenoKeys as mapBriefsFunction } from "../../../utils/typey-type";
@@ -107,7 +107,7 @@ export default function Game() {
                 }
               />
               <div id={"good-guess"} className="flex flex-grow">
-                <RoundProgress
+                <GameProgress
                   round={state.roundIndex + 1}
                   roundToWin={roundToWin}
                 />
