@@ -77,18 +77,18 @@ const Header = ({ fullscreen }: { fullscreen: string }) => {
                 Dictionaries
               </Link>
               <Link
-                to="/lessons"
-                className="nav-button-xs link-button link-button-ghost mr1 flex items-center"
-                id="ga--header--xs--lessons"
-              >
-                Lessons
-              </Link>
-              <Link
                 to="/games"
                 className="nav-button-xs link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--xs--games"
               >
                 Games
+              </Link>
+              <Link
+                to="/lessons"
+                className="nav-button-xs link-button link-button-ghost mr1 flex items-center"
+                id="ga--header--xs--lessons"
+              >
+                Lessons
               </Link>
             </div>
             <div className="table relative nr2">
@@ -121,18 +121,18 @@ const Header = ({ fullscreen }: { fullscreen: string }) => {
                 Dictionaries
               </Link>
               <Link
-                to="/lessons"
-                className="nav-button-lg link-button link-button-ghost mr1 flex items-center"
-                id="ga--header--lessons"
-              >
-                Lessons
-              </Link>
-              <Link
                 to="/games"
                 className="nav-button-lg link-button link-button-ghost mr1 flex items-center"
                 id="ga--header--games"
               >
                 Games
+              </Link>
+              <Link
+                to="/lessons"
+                className="nav-button-lg link-button link-button-ghost mr1 flex items-center"
+                id="ga--header--lessons"
+              >
+                Lessons
               </Link>
             </div>
           </nav>
