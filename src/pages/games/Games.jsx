@@ -1,5 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import DocumentTitle from "react-document-title";
+import ErrorBoundary from "../../components/ErrorBoundary";
 import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 
@@ -47,38 +49,56 @@ const Games = ({
       <Route
         exact={true}
         path={`${match.url}/KAOES`}
-        render={() => <AsyncKAOES />}
+        render={() => (
+          <DocumentTitle title={"Typey Type | KAOES game"}>
+            <ErrorBoundary>
+              <AsyncKAOES />
+            </ErrorBoundary>
+          </DocumentTitle>
+        )}
       />
       <Route
         exact={true}
         path={`${match.url}/KHAERT`}
         render={() => (
-          <AsyncKHAERT
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-            globalLookupDictionary={globalLookupDictionary}
-            personalDictionaries={personalDictionaries}
-          />
+          <DocumentTitle title={"Typey Type | KHAERT"}>
+            <ErrorBoundary>
+              <AsyncKHAERT
+                fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+                globalLookupDictionary={globalLookupDictionary}
+                personalDictionaries={personalDictionaries}
+              />
+            </ErrorBoundary>
+          </DocumentTitle>
         )}
       />
       <Route
         exact={true}
         path={`${match.url}/SHUFL`}
         render={() => (
-          <AsyncSHUFL
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            personalDictionaries={personalDictionaries}
-            startingMetWordsToday={startingMetWordsToday}
-            updateMetWords={updateMetWords}
-          />
+          <DocumentTitle title={"Typey Type | SHUFL game"}>
+            <ErrorBoundary>
+              <AsyncSHUFL
+                fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+                globalLookupDictionary={globalLookupDictionary}
+                globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+                personalDictionaries={personalDictionaries}
+                startingMetWordsToday={startingMetWordsToday}
+                updateMetWords={updateMetWords}
+              />
+            </ErrorBoundary>
+          </DocumentTitle>
         )}
       />
       <Route
         exact={true}
         path={`${match.url}/TPEUBGSZ`}
         render={() => (
-          <AsyncTPEUBGSZ startingMetWordsToday={startingMetWordsToday} />
+          <DocumentTitle title={"Typey Type | TPEUBGSZ game"}>
+            <ErrorBoundary>
+              <AsyncTPEUBGSZ startingMetWordsToday={startingMetWordsToday} />
+            </ErrorBoundary>
+          </DocumentTitle>
         )}
       />
       <Route
