@@ -54,7 +54,7 @@ export default function Input({
           autoComplete="off"
           autoCorrect="off"
           className={
-            "input-textarea typed-text-input-positioning typed-text-input-textarea text-center"
+            "input-textarea w-100 typed-text-input-textarea text-center mx-auto"
           }
           id={`${gameName}-input`}
           onChange={onChangeTypedText}
