@@ -106,7 +106,7 @@ export default function Game() {
                   />
                 }
               />
-              <div id={"good-guess"}>
+              <div id={"good-guess"} className="flex flex-grow">
                 <RoundProgress
                   round={state.roundIndex + 1}
                   roundToWin={roundToWin}

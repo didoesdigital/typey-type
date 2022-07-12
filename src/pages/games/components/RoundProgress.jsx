@@ -9,7 +9,7 @@ export default function RoundProgress({
 }) {
   return (
     <div className="flex flex-grow">
-      <p className="text-right w-100">
+      <p className="text-center w-100">
         Round:{" "}
         <TransitionGroup className={"dib"} component={"span"} key={round}>
           <CSSTransition timeout={500} classNames="bloop" appear={true}>
