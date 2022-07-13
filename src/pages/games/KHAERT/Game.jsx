@@ -59,6 +59,11 @@ export default function Game({ globalLookupDictionary }) {
                 <li>“Where can I learn steno?”</li>
               </ul>
             </div>
+            <div className="flex flex-wrap pt3 pb1 ml4">
+              <p className="ml3">
+                Note: Shazza is still in development and has a lot to learn! Please share feedback on what she should learn next.
+              </p>
+            </div>
           </div>
           <div className="mt1 mw-336 flex-grow">
             <div className="flex flex-wrap flex-grow py3">
