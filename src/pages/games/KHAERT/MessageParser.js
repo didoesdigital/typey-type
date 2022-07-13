@@ -35,6 +35,12 @@ class MessageParser {
   parse(message) {
     const lowerCaseMessage = message.toLowerCase();
     let foundSomething = false;
+
+    if (this.state.responseType && this.state.responseType === "HowAreYou") {
+      this.actionProvider.handleResponseToHowAreYou(lowerCaseMessage);
+      foundSomething = true;
+    }
+
     if (messageMatchesAKeyword(lowerCaseMessage, greetings)) {
       this.actionProvider.handleHello();
       foundSomething = true;

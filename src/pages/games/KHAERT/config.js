@@ -51,6 +51,7 @@ const makeConfig = (globalLookupDictionary = undefined) => ({
     phraseToLookup: "",
     linkText: "",
     linkUrl: "",
+    responseType: undefined,
   },
   widgets: [
     {

@@ -72,6 +72,7 @@ export const lessonKeywords = [
   "sentence",
   "sentences",
 ];
+
 export const lessonRepliesMap = new Map([
   [
     "fundamental",

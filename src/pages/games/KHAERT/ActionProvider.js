@@ -30,13 +30,13 @@ class ActionProvider {
   handleHowAreYou() {
     const reply = shuffle([
       "I'm doing well. How are you?",
-      "I've been a good bot today. What's new with you?",
+      "I've been a good bot today. How are you?",
       "How long is a piece of string?",
       "Not too shabby. How are you?",
       "Today is a good day. How's your day?",
     ]).slice(0, 1);
     const botMessage = this.createChatBotMessage(reply);
-    this.updateChatbotState(botMessage);
+    this.updateChatbotState(botMessage, "HowAreYou");
   }
 
   handleHowToKeyboard(userMessage) {
@@ -126,6 +126,59 @@ class ActionProvider {
         ]).slice(0, 1)
       : "I am a steno bot";
     const botMessage = this.createChatBotMessage(reply);
+    this.updateChatbotState(botMessage);
+  }
+
+  handleResponseToHowAreYou(userMessage) {
+    const sentiment =
+      (userMessage.includes("good") &&
+        !userMessage.includes("not so good") &&
+        !userMessage.includes("not good")) ||
+      userMessage.includes("i am awesome") ||
+      userMessage.includes("i am good") ||
+      userMessage.includes("i am great") ||
+      userMessage.includes("i am well") ||
+      userMessage.includes("i'm awesome") ||
+      userMessage.includes("i'm good") ||
+      userMessage.includes("i'm great") ||
+      userMessage.includes("i'm well")
+        ? "probablyGood"
+        : (userMessage.includes("bad") &&
+            !userMessage.includes("not bad") &&
+            !userMessage.includes("not so bad")) ||
+          userMessage.includes("not good") ||
+          userMessage.includes("not so good") ||
+          userMessage.includes("i'm unwell") ||
+          userMessage.includes("i'm sad") ||
+          userMessage.includes("i'm unhappy")
+        ? "probablyBad"
+        : "notSure";
+
+    const reply =
+      sentiment === "probablyGood"
+        ? shuffle(["Yay!", "That's nice to hear", "\\o/", "Wonderful!"]).slice(
+            0,
+            1
+          )
+        : sentiment === "probablyBad"
+        ? shuffle([
+            "I'm sorry to hear that",
+            "What would make your day better?",
+            "This too shall pass",
+          ]).slice(0, 1)
+        : shuffle([
+            "This has been nice conversation",
+            "How about that local sports team?",
+            "How about that weather?",
+          ]).slice(0, 1);
+    const botMessage = this.createChatBotMessage(
+      reply,
+      sentiment === "probablyBad"
+        ? {
+            widget: "dogPicture",
+          }
+        : undefined
+    );
     this.updateChatbotState(botMessage);
   }
 
@@ -225,10 +278,11 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
-  updateChatbotState(message) {
+  updateChatbotState(message, responseType) {
     this.setState((prevState) => ({
       ...prevState,
       messages: [...prevState.messages, message],
+      responseType,
     }));
   }
 }
