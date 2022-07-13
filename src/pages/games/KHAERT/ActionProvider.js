@@ -271,8 +271,9 @@ class ActionProvider {
   handleUnknownText() {
     const reply = shuffle([
       "😕 What can I say?",
-      "😕 Not sure what to say to that",
+      "😕 Sorry I don't have more to say",
       "😕 I'm still learning, maybe send some feedback about this",
+      "😕 If this seems like something I should know, please send feedback",
     ]).slice(0, 1);
     const botMessage = this.createChatBotMessage(reply);
     this.updateChatbotState(botMessage);
