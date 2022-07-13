@@ -1,11 +1,16 @@
 import {
   ageQuestions,
+  areYouQuestions,
   goodbyes,
   favouriteQuestions,
   greetings,
   howQuestions,
+  howAreYouQuestions,
+  howLongQuestions,
+  whoAreYouQuestions,
   keyboardFunctions,
   learningKeywords,
+  lessonKeywords,
   locationQuestions,
   lookupKeywords,
   nameQuestions,
@@ -32,6 +37,26 @@ class MessageParser {
     let foundSomething = false;
     if (messageMatchesAKeyword(lowerCaseMessage, greetings)) {
       this.actionProvider.handleHello();
+      foundSomething = true;
+    }
+
+    if (messageMatchesAKeyword(lowerCaseMessage, howAreYouQuestions)) {
+      this.actionProvider.handleHowAreYou(lowerCaseMessage);
+      foundSomething = true;
+    }
+
+    if (messageMatchesAKeyword(lowerCaseMessage, howLongQuestions)) {
+      this.actionProvider.handleHowLongQuestions(lowerCaseMessage);
+      foundSomething = true;
+    }
+
+    if (messageMatchesAKeyword(lowerCaseMessage, lessonKeywords)) {
+      this.actionProvider.handleLessonKeywords(lowerCaseMessage);
+      foundSomething = true;
+    }
+
+    if (messageMatchesAKeyword(lowerCaseMessage, ["metronome"])) {
+      this.actionProvider.handleMetronome(lowerCaseMessage);
       foundSomething = true;
     }
 
@@ -71,6 +96,19 @@ class MessageParser {
       foundSomething = true;
     }
 
+    if (messageMatchesAKeyword(lowerCaseMessage, ["i love you"])) {
+      this.actionProvider.handleILoveYou(message);
+      foundSomething = true;
+    }
+
+    if (
+      messageMatchesAKeyword(lowerCaseMessage, areYouQuestions) &&
+      lowerCaseMessage.includes("?")
+    ) {
+      this.actionProvider.handleAreYouQuestions(message);
+      foundSomething = true;
+    }
+
     if (
       messageMatchesAKeyword(lowerCaseMessage, locationQuestions) &&
       lowerCaseMessage.includes("?")
@@ -80,10 +118,11 @@ class MessageParser {
     }
 
     if (
-      messageMatchesAKeyword(lowerCaseMessage, nameQuestions) &&
-      lowerCaseMessage.includes("?")
+      messageMatchesAKeyword(lowerCaseMessage, whoAreYouQuestions) ||
+      (messageMatchesAKeyword(lowerCaseMessage, nameQuestions) &&
+        lowerCaseMessage.includes("?"))
     ) {
-      this.actionProvider.handleNameQuestions(message);
+      this.actionProvider.handleAboutYouQuestions(message);
       foundSomething = true;
     }
 

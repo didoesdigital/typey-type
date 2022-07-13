@@ -1,6 +1,7 @@
 import { shuffle } from "d3-array";
 import { timeMonth } from "d3-time";
 import { botName } from "./config";
+import { lessonRepliesMap } from "./constants";
 
 class ActionProvider {
   constructor(createChatBotMessage, setStateFunc, createClientMessage) {
@@ -21,6 +22,18 @@ class ActionProvider {
       "Farewell",
       "Take care",
       "Stay safe",
+    ]).slice(0, 1);
+    const botMessage = this.createChatBotMessage(reply);
+    this.updateChatbotState(botMessage);
+  }
+
+  handleHowAreYou() {
+    const reply = shuffle([
+      "I'm doing well. How are you?",
+      "I've been a good bot today. What's new with you?",
+      "How long is a piece of string?",
+      "Not too shabby. How are you?",
+      "Today is a good day. How's your day?",
     ]).slice(0, 1);
     const botMessage = this.createChatBotMessage(reply);
     this.updateChatbotState(botMessage);
@@ -83,8 +96,11 @@ class ActionProvider {
     }));
   }
 
-  handleNameQuestions() {
-    const reply = `I'm ${botName}!`;
+  handleAboutYouQuestions() {
+    const reply = shuffle([
+      `I'm ${botName}!`,
+      `I'm ${botName} and I like lollies!`,
+    ]).slice(0, 1);
     const botMessage = this.createChatBotMessage(reply);
     this.updateChatbotState(botMessage);
   }
@@ -92,10 +108,23 @@ class ActionProvider {
   handleAgeQuestions(userMessage) {
     const ageInMonths = timeMonth.count(new Date(2022, 5, 25), Date.now());
     const reply = userMessage.includes("age")
-      ? `My age? I'm nearly ${ageInMonths} month${ageInMonths > 1 ? "s" : ""} old`
+      ? `My age? I'm nearly ${ageInMonths} month${
+          ageInMonths > 1 ? "s" : ""
+        } old`
       : `How old am I? I am ${ageInMonths} month${
           ageInMonths > 1 ? "s" : ""
         } old`;
+    const botMessage = this.createChatBotMessage(reply);
+    this.updateChatbotState(botMessage);
+  }
+
+  handleAreYouQuestions(userMessage) {
+    const reply = userMessage.includes("stenographer")
+      ? shuffle([
+          `I'm learning stenography. Boop, boop!`,
+          `I like stenography.`,
+        ]).slice(0, 1)
+      : "I am a steno bot";
     const botMessage = this.createChatBotMessage(reply);
     this.updateChatbotState(botMessage);
   }
@@ -110,10 +139,36 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
+  handleHowLongQuestions() {
+    const reply =
+      "To write text for personal use, such as writing emails and instant messages, you could learn basic steno at ~40WPM within 3–6 months. To productively use steno to write most text at under 100WPM, it might take 6–18 months. For live dictation at 200WPM, it might take you 2 or more years. If you are learning stenography for ergonomic reasons and have injuries to manage, it could take longer.";
+
+    const botMessage = this.createChatBotMessage(reply);
+    this.updateChatbotState(botMessage);
+  }
+
+  handleLessonKeywords(userMessage) {
+    const reply =
+      Array.from(lessonRepliesMap.entries()).find(([userMessageFragment, _]) =>
+        userMessage.includes(userMessageFragment)
+      )?.[1] || "Typey Type's stories have lots of sentences to try.";
+
+    const botMessage = this.createChatBotMessage(reply);
+    this.updateChatbotState(botMessage);
+  }
+
+  handleMetronome() {
+    const reply =
+      "Using a metronome might help you improve your rhythm for each stroke in finger drills. By drilling difficult transitions between pairs of strokes that slow you down or cause you hesitation using a metronome, you may improve your slowest pairs.";
+    const botMessage = this.createChatBotMessage(reply);
+    this.updateChatbotState(botMessage);
+  }
+
   handleLocationQuestions() {
     const reply = shuffle([
       "I come from a little town called Broome in Western Australia",
       "I'm on holiday in South Australia",
+      "I'm from down under!",
       "I live inside Typey Type!",
     ]).slice(0, 1);
     const botMessage = this.createChatBotMessage(reply);
@@ -134,6 +189,17 @@ class ActionProvider {
       : userMessage.includes("outline")
       ? "An outline is the collection of keys and strokes to produce a word or phrase"
       : "Maybe you could share some feedback about that one";
+    const botMessage = this.createChatBotMessage(reply);
+    this.updateChatbotState(botMessage);
+  }
+
+  handleILoveYou() {
+    const reply = shuffle([
+      "Thank you",
+      "What is love?",
+      "I love steno!",
+      "Steno is a labour of love",
+    ]).slice(0, 1);
     const botMessage = this.createChatBotMessage(reply);
     this.updateChatbotState(botMessage);
   }
