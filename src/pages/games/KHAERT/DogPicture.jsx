@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 
 const DogPicture = () => {
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
-    fetch('https://dog.ceo/api/breeds/image/random')
+    fetch("https://dog.ceo/api/breeds/image/random")
       .then((res) => res.json())
       .then((data) => {
         setImageUrl(data.message);
@@ -12,8 +12,8 @@ const DogPicture = () => {
   }, []);
 
   return (
-    <div>
-      <img src={imageUrl} alt='a dog' />
+    <div className="mw-240">
+      <img src={imageUrl} alt="a dog" className="w-100" />
     </div>
   );
 };
