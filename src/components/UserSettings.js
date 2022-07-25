@@ -218,6 +218,8 @@ class UserSettings extends Component {
                         <option value="sortRandom">Random</option>
                         <option value="sortNew">Newest words first</option>
                         <option value="sortOld">Oldest words first</option>
+                        <option value="sortShortest">Shortest words first</option>
+                        <option value="sortLongest">Longest words first</option>
                       </select>
                     </div>
                   </li>

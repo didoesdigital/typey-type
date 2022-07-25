@@ -1522,7 +1522,9 @@ class App extends Component {
           'sortOff',
           'sortNew',
           'sortOld',
-          'sortRandom'
+          'sortRandom',
+          'sortLongest',
+          'sortShortest'
         ];
 
         if (param === 'sortOrder' && sortOrderValidValues.includes(paramVal)) {
@@ -2619,6 +2621,20 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
       let seenA = met[spaceBefore + a.phrase + spaceAfter] || 0;
       let seenB = met[spaceBefore + b.phrase + spaceAfter] || 0;
       return userSettings.sortOrder === 'sortNew' ? seenA - seenB : seenB - seenA;
+    });
+  }
+  else if (userSettings.sortOrder === 'sortShortest') {
+    presentedMaterial.sort((a, b) => {
+      const aLength = [...a.phrase].length;
+      const bLength = [...b.phrase].length;
+      return aLength < bLength ? -1 : aLength > bLength ? 1 : 0;
+    });
+  }
+  else if (userSettings.sortOrder === 'sortLongest') {
+    presentedMaterial.sort((a, b) => {
+      const aLength = [...a.phrase].length;
+      const bLength = [...b.phrase].length;
+      return bLength < aLength ? -1 : bLength > aLength ? 1 : 0;
     });
   }
   return presentedMaterial;
