@@ -88,7 +88,15 @@ To use Typey Type offline, you can follow the steps in this README to install an
 Run the test runner during development:
 
 ```sh
-yarn run test
+yarn test
+```
+
+### Storybook
+
+Run Storybook to develop and test components in isolation:
+
+```sh
+yarn storybook
 ```
 
 ### Create React App
