@@ -27,7 +27,7 @@ Typey Type is **not** a generic typing app. Plenty of typing apps already exist 
 
 Instead, Typey Type concentrates on teaching people how to type using stenography. That means it includes features like steno diagrams showing steno briefs as hints for how to write words and using steno-specific data, such as lessons for “single-stroke briefs”.
 
-Typey Type avoids generic typing features, such as competing for speed and accuracy against other typists, which any typing app might do, such as [Typeracer](http://play.typeracer.com).
+Typey Type avoids generic typing features, such as competing for speed and accuracy against other typists, which any typing app might do, such as [Typeracer](https://play.typeracer.com/?universe=steno).
 
 ## Development
 
