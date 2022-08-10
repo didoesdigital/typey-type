@@ -49,6 +49,12 @@ Alternatively, if you've already cloned the repository without the `--recursive`
 git submodule update --init --recursive
 ```
 
+Change directory into the cloned repository:
+
+```sh
+cd typey-type
+```
+
 Once you've cloned the repository and updated its submodules, yarn install packages from `package.json`:
 
 ```sh
