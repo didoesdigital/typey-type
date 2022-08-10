@@ -79,6 +79,10 @@ yarn start
 
 Open <http://localhost:3000> to view it in the browser.
 
+### Offline
+
+To use Typey Type offline, you can follow the steps in this README to install and start the app in development mode, and copy your progress words from [the Progress page online](https://didoesdigital.com/typey-type/progress) to your local progress page <http://localhost:3000/typey-type/progress> before going offline.
+
 ### Testing
 
 Run the test runner during development:
