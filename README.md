@@ -40,7 +40,7 @@ Install [yarn](https://yarnpkg.com/lang/en/docs/install/). Note: the project is 
 This project includes a Git submodule for [Typey Type data](https://github.com/didoesdigital/typey-type-data), which includes a Git submodule for [steno dictionaries](https://github.com/didoesdigital/steno-dictionaries). If you want to clone this repository as well as its submodules, you can use the `--recursive` parameter:
 
 ```sh
-git clone --recursive git@github.com:didoesdigital/typey-type.git
+git clone --recursive https://github.com/didoesdigital/typey-type.git
 ```
 
 Alternatively, if you've already cloned the repository without the `--recursive` parameter, you can load its submodules using `submodule update`:
