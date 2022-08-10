@@ -1020,11 +1020,22 @@ function loadPersonalPreferences() {
 }
 
 function writePersonalPreferences(itemToStore, JSONToStore) {
-  if (!window.localStorage) {
-    console.log('Unable to write to local storage. Progress data will be lost.');
+  const localStorageErrorMessage = "Local storage is unavailable. Changes to personal preferences and progress will be lost.";
+  try {
+    if (!window.localStorage) {
+      console.warn('Unable to write to local storage. Progress data will be lost.');
+      return {
+        name: "NoLocalStorage",
+        message: localStorageErrorMessage,
+      }
+    }
+  }
+  catch(error) {
+    console.warn(localStorageErrorMessage);
+    console.error(error);
     return {
       name: "NoLocalStorage",
-      message: "Local storage is unavailable. Changes to personal preferences and progress will be lost.",
+      message: localStorageErrorMessage,
     }
   }
 
