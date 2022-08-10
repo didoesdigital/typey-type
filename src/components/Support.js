@@ -362,6 +362,32 @@ class Support extends Component {
                 </Tooltip></span>
             </GoogleAnalytics.OutboundLink> from Project Gutenberg he built using Typey&nbsp;Type steno diagrams.</p>
 
+            <h4 id="offline" tabIndex="-1">Offline</h4>
+            <p>Typey&nbsp;Type does not yet officially support offline use through the website. Until then, it’s technically possible to make it work offline by running the code yourself. You can follow the steps from the <GoogleAnalytics.OutboundLink
+                  eventLabel="Typey Type repo README"
+                  aria-label="Typey Type repo README (external link opens in new tab)"
+                  to="https://github.com/didoesdigital/typey-type/blob/master/README.md"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Typey&nbsp;Type repo <span className="nowrap">README
+                  <Tooltip
+                    title="(external link opens in new tab)"
+                    className=""
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                </Tooltip></span>
+                </GoogleAnalytics.OutboundLink>.
+            </p>
+
             <h3 id="learn-steno">Learning stenography</h3>
             <h4 id="try-steno">How can you try out steno?</h4>
             <p>For an idea of how steno feels and works, you can{" "}
