@@ -598,6 +598,7 @@ class UserSettings extends Component {
                       <select id="upcomingWordsLayout" name="upcomingWordsLayout" value={this.props.userSettings.upcomingWordsLayout} onChange={this.props.handleUpcomingWordsLayout} disabled={this.props.disableUserSettings} className="text-small form-control w-144">
                         <option value="singleLine">Single line</option>
                         <option value="multiline">Multiline</option>
+                        <option value="hidden">Hidden</option>
                       </select>
                     </div>
                   </li>
