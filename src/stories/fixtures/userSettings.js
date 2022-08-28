@@ -1,0 +1,27 @@
+const userSettings = {
+  beatsPerMinute: 10,
+  blurMaterial: false,
+  caseSensitive: false,
+  diagramSize: 1.0,
+  simpleTypography: true,
+  retainedWords: true,
+  limitNumberOfWords: 45,
+  newWords: true,
+  repetitions: 3,
+  showScoresWhileTyping: true,
+  showStrokes: true,
+  showStrokesAsDiagrams: true,
+  showStrokesOnMisstroke: true,
+  hideStrokesOnLastRepetition: true,
+  spacePlacement: "spaceOff",
+  speakMaterial: false,
+  textInputAccessibility: true,
+  sortOrder: "sortOff",
+  seenWords: true,
+  startFromWord: 1,
+  study: "discover",
+  stenoLayout: "stenoLayoutAmericanSteno",
+  upcomingWordsLayout: "singleLine",
+};
+
+export default userSettings;
