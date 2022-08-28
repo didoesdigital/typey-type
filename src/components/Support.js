@@ -4,6 +4,9 @@ import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 import 'react-tippy/dist/tippy.css'
 import { Link } from 'react-router-dom';
+import DescriptionList from './DescriptionList';
+import DescriptionTerm from './DescriptionTerm';
+import DescriptionDetails from './DescriptionDetails';
 
 function hashToQuery (hash) {
   if (hash.includes(":~:text")) {
@@ -121,15 +124,15 @@ class Support extends Component {
             </p>
 
             <h4 id="steno-terms">Steno terms</h4>
-            <dl className="inline-flex flex-wrap">
-              <dt>Briefs</dt>
-              <dd>Loosely, a brief or outline is the specified combination of keys pressed together to produce a specific word or phrase. Strictly, a brief or abbreviation is a shortened outline form with fewer strokes than the phonetic outline.</dd>
-              <dt>Strokes</dt>
-              <dd>A stroke is a combination of keys held together and released to write a word or sound. A multi-stroke brief is a combination of strokes pressed to produce a word or phrase (usually of more syllables).</dd>
-              <dt>Misstrokes</dt>
-              <dd>Misstrokes are extra entries that use similar keys to produce the word you meant to write. If you regularly mistype a word, you might add a misstroke entry for the keys you are incorrectly pressing so that your dictionaries effectively autocorrects your mistakes. For example, the misstroke <span className="steno-stroke">SPHAOEU</span> to write “supply” is missing the left-hand <span className="steno-stroke">R</span> key from the usual outline <span className="steno-stroke">SPHRAOEU</span>.</dd>
-              <dt>Plover</dt>
-              <dd>{" "}
+            <DescriptionList>
+              <DescriptionTerm>Briefs</DescriptionTerm>
+              <DescriptionDetails>Loosely, a brief or outline is the specified combination of keys pressed together to produce a specific word or phrase. Strictly, a brief or abbreviation is a shortened outline form with fewer strokes than the phonetic outline.</DescriptionDetails>
+              <DescriptionTerm>Strokes</DescriptionTerm>
+              <DescriptionDetails>A stroke is a combination of keys held together and released to write a word or sound. A multi-stroke brief is a combination of strokes pressed to produce a word or phrase (usually of more syllables).</DescriptionDetails>
+              <DescriptionTerm>Misstrokes</DescriptionTerm>
+              <DescriptionDetails>Misstrokes are extra entries that use similar keys to produce the word you meant to write. If you regularly mistype a word, you might add a misstroke entry for the keys you are incorrectly pressing so that your dictionaries effectively autocorrects your mistakes. For example, the misstroke <span className="steno-stroke">SPHAOEU</span> to write “supply” is missing the left-hand <span className="steno-stroke">R</span> key from the usual outline <span className="steno-stroke">SPHRAOEU</span>.</DescriptionDetails>
+              <DescriptionTerm>Plover</DescriptionTerm>
+              <DescriptionDetails>{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="Plover"
                 aria-label="Plover (external link opens in new tab)"
@@ -152,8 +155,8 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> is the world’s first free, open-source stenography program. It works cross-platform on Windows, macOS, and Linux operating systems.</dd>
-            </dl>
+              </GoogleAnalytics.OutboundLink> is the world’s first free, open-source stenography program. It works cross-platform on Windows, macOS, and Linux operating systems.</DescriptionDetails>
+            </DescriptionList>
 
             <h3 id="typey-type-notes">Typey&nbsp;Type notes</h3>
             <p>Typey&nbsp;Type embraces ideas of{" "}
@@ -296,22 +299,22 @@ class Support extends Component {
             </ul>
 
             <h4 id="typey-type-terms">Typey&nbsp;Type terms</h4>
-            <dl className="inline-flex flex-wrap">
-              <dt>Spacing</dt>
-              <dd>Typey&nbsp;Type lets you choose where spaces should appear in a phrase for checking if you typed it correctly. Steno software can insert spaces before or after words, depending on the specific software and its settings. For example, Plover inserts spaces before words by default, and has a setting to insert spaces after words. Plover also provides extra spacing and capitalisation modes that can be set on the fly. This might suppress spaces or insert other punctuation (like dashes). A QWERTYist may feel more comfortable drilling words without any spaces, or sentences with spaces as the end.</dd>
-              <dt>Seen words</dt>
-              <dd>Typey&nbsp;Type tracks words you’ve "seen" or "met". Each time you successfully type a new word, that’s logged as a successful meeting.</dd>
-              <dt>Words per minute (WPM)</dt>
-              <dd>To track your typing speed, Typey&nbsp;Type displays the number of words you’ve typed per minute using the unit “words per minute (WPM)”. A word is considered to be 5 letters long on average. This means you might type many short words and have a higher WPM score.</dd>
-              <dt>Discover</dt>
-              <dd>The first type of study session lets you discover new briefs by showing only a limited number of new words while revealing their strokes. Write these words slowly, concentrating on accuracy and forming good habits around how you stroke word parts. Focus on lessons with interesting words, especially top words for your needs, such as common English words for general usage. You might also study domain specific phrases for particular industries.</dd>
-              <dt>Revise</dt>
-              <dd>The next type of study session helps you revise recently learned briefs by showing only words you’ve seen. Apply effort to recall these briefs before showing strokes. Avoid fingerspelling or stroking out long, phonetic forms of words so you can memorise and rehearse the best brief for every word. Choose a lesson with the majority of words you’re interested in nailing first like the top 1000 words.</dd>
-              <dt>Drill</dt>
-              <dd>The third type of study session is about building up your muscle memory and testing your skills. Write as fast and furiously as you can and aim for a high WPM score. Pick specific drills that focus on a certain kind of brief or many similar words so you can associate them together.</dd>
-              <dt>Practice</dt>
-              <dd>The final type of study session lets you mimic real usage as closely as possible. Write as fast as you can without causing misstrokes. Explore stories that use real sentences.</dd>
-            </dl>
+            <DescriptionList>
+              <DescriptionTerm>Spacing</DescriptionTerm>
+              <DescriptionDetails>Typey&nbsp;Type lets you choose where spaces should appear in a phrase for checking if you typed it correctly. Steno software can insert spaces before or after words, depending on the specific software and its settings. For example, Plover inserts spaces before words by default, and has a setting to insert spaces after words. Plover also provides extra spacing and capitalisation modes that can be set on the fly. This might suppress spaces or insert other punctuation (like dashes). A QWERTYist may feel more comfortable drilling words without any spaces, or sentences with spaces as the end.</DescriptionDetails>
+              <DescriptionTerm>Seen words</DescriptionTerm>
+              <DescriptionDetails>Typey&nbsp;Type tracks words you’ve "seen" or "met". Each time you successfully type a new word, that’s logged as a successful meeting.</DescriptionDetails>
+              <DescriptionTerm>Words per minute (WPM)</DescriptionTerm>
+              <DescriptionDetails>To track your typing speed, Typey&nbsp;Type displays the number of words you’ve typed per minute using the unit “words per minute (WPM)”. A word is considered to be 5 letters long on average. This means you might type many short words and have a higher WPM score.</DescriptionDetails>
+              <DescriptionTerm>Discover</DescriptionTerm>
+              <DescriptionDetails>The first type of study session lets you discover new briefs by showing only a limited number of new words while revealing their strokes. Write these words slowly, concentrating on accuracy and forming good habits around how you stroke word parts. Focus on lessons with interesting words, especially top words for your needs, such as common English words for general usage. You might also study domain specific phrases for particular industries.</DescriptionDetails>
+              <DescriptionTerm>Revise</DescriptionTerm>
+              <DescriptionDetails>The next type of study session helps you revise recently learned briefs by showing only words you’ve seen. Apply effort to recall these briefs before showing strokes. Avoid fingerspelling or stroking out long, phonetic forms of words so you can memorise and rehearse the best brief for every word. Choose a lesson with the majority of words you’re interested in nailing first like the top 1000 words.</DescriptionDetails>
+              <DescriptionTerm>Drill</DescriptionTerm>
+              <DescriptionDetails>The third type of study session is about building up your muscle memory and testing your skills. Write as fast and furiously as you can and aim for a high WPM score. Pick specific drills that focus on a certain kind of brief or many similar words so you can associate them together.</DescriptionDetails>
+              <DescriptionTerm>Practice</DescriptionTerm>
+              <DescriptionDetails>The final type of study session lets you mimic real usage as closely as possible. Write as fast as you can without causing misstrokes. Explore stories that use real sentences.</DescriptionDetails>
+            </DescriptionList>
 
             <h4 id="flashcards" tabIndex="-1">Flashcards</h4>
             <p>Flashcards are designed for mobile devices so you can memorise steno briefs on the go. When you’re unable to recall a brief, tap “Hard” to say it was hard to remember. When you can recall a brief without hesitation, tap “Easy”. While studying flashcards, imagine which fingers and the shape of the outline you’d use to stroke a word.</p>

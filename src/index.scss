@@ -180,33 +180,59 @@ th {
   font-weight: normal;
 }
 
-dt {
-  margin-bottom: 4px;
-}
-
-dl.inline-flex {
+.lg\:flex {
   @media (min-width: $large-breakpoint) {
     display: flex;
-    flex-flow: row;
+  }
+}
+.lg\:flex-row {
+  @media (min-width: $large-breakpoint) {
+    flex-direction: row;
+  }
+}
+.lg\:flex-wrap {
+  @media (min-width: $large-breakpoint) {
     flex-wrap: wrap;
+  }
+}
+.lg\:overflow-visible {
+  @media (min-width: $large-breakpoint) {
     overflow: visible;
   }
 }
-
-dl.inline-flex dt {
+.lg\:grow-0 {
   @media (min-width: $large-breakpoint) {
-    flex: 0 0 134px;
+    flex-grow: 0;
+  }
+}
+.lg\:shrink-0 {
+  @media (min-width: $large-breakpoint) {
+    flex-shrink: 0;
+  }
+}
+.lg\:basis-32 {
+  @media (min-width: $large-breakpoint) {
+    flex-basis: 8rem; /* 128px */
+  }
+}
+.lg\:basis-27rem { // FIXME: custom mess
+  @media (min-width: $large-breakpoint) {
+    flex-basis: 27rem;
+  }
+}
+.lg\:overflow-hidden {
+  @media (min-width: $large-breakpoint) {
     overflow: hidden;
+  }
+}
+.lg\:text-ellipsis {
+  @media (min-width: $large-breakpoint) {
     text-overflow: ellipsis;
   }
 }
-
-dl.inline-flex dd {
+.lg\:ml-auto {
   @media (min-width: $large-breakpoint) {
-    flex: 0 0 434px;
     margin-left: auto;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
 
@@ -553,6 +579,9 @@ input:focus::placeholder {
 .right-0  { right:  0; }
 .left-0   { left:   0; }
 .b6       { bottom: 48px; }
+
+// Tailwind:
+.mb-4    { margin-bottom: 1rem; /* 16px */ }
 
 .mb0     { margin-bottom: 0; }
 .mb025   { margin-bottom: 2px; }
