@@ -51,7 +51,7 @@ export default function AussieDictPrompt({
             />
           </Tooltip>
         </a>{" "}
-        or fingerspell <span className="nowrap">this entry</span>.
+        or fingerspell <span className="whitespace-nowrap">this entry</span>.
       </p>
     );
   } else {

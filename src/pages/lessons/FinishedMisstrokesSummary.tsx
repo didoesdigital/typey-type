@@ -25,7 +25,7 @@ const FinishedMisstrokesSummary = ({
   return showMisstrokesSummary ? (
     <div className="misstrokes-summary">
       <div>
-        <h4 className="mt3 nowrap">Possible stroke improvements</h4>
+        <h4 className="mt3 whitespace-nowrap">Possible stroke improvements</h4>
         <p>
           {/* eslint-disable-next-line jsx-a11y/no-access-key */}
           <a

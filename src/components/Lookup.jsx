@@ -70,7 +70,7 @@ class Lookup extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                use the <span className="nowrap">feedback form
+                use the <span className="whitespace-nowrap">feedback form
                 <Tooltip
                   title="Opens in new tab"
                   className=""

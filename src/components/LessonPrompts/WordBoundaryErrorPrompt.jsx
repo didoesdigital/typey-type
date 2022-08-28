@@ -25,7 +25,7 @@ export default function WordBoundaryErrorPrompt({
           rel="noopener noreferrer"
         >
           word boundary{" "}
-          <span className="nowrap">
+          <span className="whitespace-nowrap">
             error
             <Tooltip
               title="Opens in a new tab"

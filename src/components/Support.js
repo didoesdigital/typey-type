@@ -105,7 +105,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Open steno <span className="nowrap">project
+                Open steno <span className="whitespace-nowrap">project
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -140,7 +140,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span className="nowrap">Plover
+                <span className="whitespace-nowrap">Plover
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -167,7 +167,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                spaced <span className="nowrap">repetitions
+                spaced <span className="whitespace-nowrap">repetitions
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -190,7 +190,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                deliberate <span className="nowrap">practice
+                deliberate <span className="whitespace-nowrap">practice
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -221,7 +221,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                post to the feedback <span className="nowrap">form
+                post to the feedback <span className="whitespace-nowrap">form
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -326,7 +326,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Anki<span className="nowrap">
+                Anki<span className="whitespace-nowrap">
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -348,7 +348,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                flashcard decks for the Top 2000 Words<span className="nowrap">
+                flashcard decks for the Top 2000 Words<span className="whitespace-nowrap">
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -373,7 +373,7 @@ class Support extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Typey&nbsp;Type repo <span className="nowrap">README
+                  Typey&nbsp;Type repo <span className="whitespace-nowrap">README
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -401,7 +401,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                install Plover<span className="nowrap">
+                install Plover<span className="whitespace-nowrap">
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -427,7 +427,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                true NKRO (N-key roll over) supported <span className="nowrap">keyboard
+                true NKRO (N-key roll over) supported <span className="whitespace-nowrap">keyboard
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -450,7 +450,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                stenotype <span className="nowrap">machine
+                stenotype <span className="whitespace-nowrap">machine
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -473,7 +473,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Plover (free and <span className="nowrap">open)
+                Plover (free and <span className="whitespace-nowrap">open)
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -520,7 +520,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Learn <span className="nowrap">palantype
+                Learn <span className="whitespace-nowrap">palantype
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -544,7 +544,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Palan versus <span className="nowrap">Steno
+                Palan versus <span className="whitespace-nowrap">Steno
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -607,7 +607,7 @@ class Support extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Typey&nbsp;Type <span className="nowrap">repo
+                  Typey&nbsp;Type <span className="whitespace-nowrap">repo
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -632,7 +632,7 @@ class Support extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Typey&nbsp;Type data repo<span className="nowrap">
+                  Typey&nbsp;Type data repo<span className="whitespace-nowrap">
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -657,7 +657,7 @@ class Support extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Steno dictionaries<span className="nowrap">
+                  Steno dictionaries<span className="whitespace-nowrap">
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -682,7 +682,7 @@ class Support extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Stenoboard diagram SVG to React<span className="nowrap">
+                  Stenoboard diagram SVG to React<span className="whitespace-nowrap">
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -710,7 +710,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Typey&nbsp;Type updates and steno <span className="nowrap">news
+                Typey&nbsp;Type updates and steno <span className="whitespace-nowrap">news
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -737,7 +737,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Wikipedia provides <span className="nowrap">homophones
+                Wikipedia provides <span className="whitespace-nowrap">homophones
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -761,7 +761,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Wikipedia provides <span className="nowrap">proverbial phrases
+                Wikipedia provides <span className="whitespace-nowrap">proverbial phrases
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -809,7 +809,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Wikipedia provides <span className="nowrap">irreversible binomials
+                Wikipedia provides <span className="whitespace-nowrap">irreversible binomials
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -833,7 +833,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Wikipedia provides Speech to the Troops <span className="nowrap">at Tilbury
+                Wikipedia provides Speech to the Troops <span className="whitespace-nowrap">at Tilbury
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -857,7 +857,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Wiktionary provides frequency <span className="nowrap">lists
+                Wiktionary provides frequency <span className="whitespace-nowrap">lists
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -881,7 +881,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                The metronome sound, “digi_plink”, comes from Dev_Tones by <span className="nowrap">RCP Tones
+                The metronome sound, “digi_plink”, comes from Dev_Tones by <span className="whitespace-nowrap">RCP Tones
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -903,7 +903,7 @@ class Support extends Component {
                 to="https://creativecommons.org/licenses/by/3.0/us/legalcode"
                 target="_blank"
                 rel="noopener noreferrer"
-              >Creative Commons license <span className="nowrap">(CC BY 3.0 US)
+              >Creative Commons license <span className="whitespace-nowrap">(CC BY 3.0 US)
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -930,7 +930,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                post to the feedback <span className="nowrap">form
+                post to the feedback <span className="whitespace-nowrap">form
                 <Tooltip
                   title="(form opens in new tab)"
                   className=""
@@ -953,7 +953,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                tweet <span className="nowrap">@DiDoesDigital
+                tweet <span className="whitespace-nowrap">@DiDoesDigital
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -979,7 +979,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Google <span className="nowrap">Analytics
+                Google <span className="whitespace-nowrap">Analytics
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -1003,7 +1003,7 @@ class Support extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span className="nowrap">Sentry
+                <span className="whitespace-nowrap">Sentry
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""

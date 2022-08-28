@@ -97,7 +97,7 @@ class DictionariesIndex extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Di’s Steno Dictionaries <span className="nowrap">repo
+                Di’s Steno Dictionaries <span className="whitespace-nowrap">repo
                   <Tooltip
                     title="Opens in a new tab"
                     animation="shift"
@@ -130,7 +130,7 @@ class DictionariesIndex extends Component {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  use the feedback <span className="nowrap">form
+                  use the feedback <span className="whitespace-nowrap">form
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -222,7 +222,7 @@ class DictionariesIndex extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                community’s <span className="nowrap">dictionaries list
+                community’s <span className="whitespace-nowrap">dictionaries
                 <Tooltip
                   title="Opens in a new tab"
                   animation="shift"

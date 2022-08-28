@@ -81,7 +81,7 @@ const LessonsIndex = ({
               rel="noopener noreferrer"
             >
               community’s{" "}
-              <span className="nowrap">
+              <span className="whitespace-nowrap">
                 lessons
                 {/* @ts-ignore */}
                 <Tooltip

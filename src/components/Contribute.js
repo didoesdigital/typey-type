@@ -56,7 +56,7 @@ class Contribute extends Component {
             </p>
 
             <h3 id="lessons">Lessons</h3>
-            <p>You can create your own <Link to="/lessons/custom">custom lesson</Link> and add it to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span className="nowrap">community’s lessons
+            <p>You can create your own <Link to="/lessons/custom">custom lesson</Link> and add it to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span className="whitespace-nowrap">community’s lessons
                 <Tooltip
                   title="Opens in a new tab"
                   className=""
@@ -80,7 +80,7 @@ class Contribute extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span className="nowrap">tweet @DiDoesDigital
+                <span className="whitespace-nowrap">tweet @DiDoesDigital
                 <Tooltip
                   title="Opens in a new tab"
                   className=""
@@ -146,7 +146,7 @@ class Contribute extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Di’s Steno Dictionaries <span className="nowrap">repo
+                Di’s Steno Dictionaries <span className="whitespace-nowrap">repo
                   <Tooltip
                     title="Opens in a new tab"
                     animation="shift"

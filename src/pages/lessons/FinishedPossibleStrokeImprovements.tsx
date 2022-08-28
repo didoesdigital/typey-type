@@ -31,7 +31,7 @@ const FinishedPossibleStrokeImprovements = ({
         let strokeAttempts = phrase.attempts.map(
           ({ text }: { text: string }, j: any) => {
             return (
-              <li key={j} className="nowrap di ml1">
+              <li key={j} className="whitespace-nowrap di ml1">
                 <span className="bg-warning px1">{text}</span>
               </li>
             );
@@ -74,13 +74,13 @@ const FinishedPossibleStrokeImprovements = ({
                 checked={currentLessonStrokes[i].checked}
                 onChange={updateRevisionMaterial}
               />
-              <span className="matched steno-material px1 nowrap">
+              <span className="matched steno-material px1 whitespace-nowrap">
                 {phrase.word}
               </span>
               {showTimesSeen && timesSeen && (
                 <>
                   <span className="visually-hidden">. Times seen: </span>
-                  <span className="nowrap px1">{timesSeen}</span>
+                  <span className="whitespace-nowrap px1">{timesSeen}</span>
                 </>
               )}
             </label>

@@ -221,7 +221,7 @@ class CustomLessonSetup extends Component {
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      community’s <span className="nowrap">lessons
+                      community’s <span className="whitespace-nowrap">lessons
                       <Tooltip
                         title="Opens in a new tab"
                         animation="shift"

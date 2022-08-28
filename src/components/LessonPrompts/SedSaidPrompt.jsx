@@ -25,7 +25,7 @@ export default function SedSaidPrompt({
           rel="noopener noreferrer"
         >
           Upgrading{" "}
-          <span className="nowrap">
+          <span className="whitespace-nowrap">
             V3 Dictionaries
             <Tooltip
               title="Opens in a new tab"

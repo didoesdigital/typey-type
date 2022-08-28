@@ -475,7 +475,7 @@ currentSlide: currentSlide
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Anki<span className="nowrap">
+                Anki<span className="whitespace-nowrap">
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -497,7 +497,7 @@ currentSlide: currentSlide
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                flashcard decks for the Top 2000 Words<span className="nowrap">
+                flashcard decks for the Top 2000 Words<span className="whitespace-nowrap">
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
