@@ -1,7 +1,7 @@
 import React from "react";
 import { matchSplitText } from "../../utils/typey-type";
 
-export default function SingleLineMaterial({
+export default function OnePhraseMaterial({
   actualText,
   completedPhrases,
   currentPhrase,
