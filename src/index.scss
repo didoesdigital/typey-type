@@ -423,11 +423,11 @@ input:focus::placeholder {
   clip: rect(1px, 1px, 1px, 1px);
 }
 
-.whitespace-nowrap {
+.whitespace-nowrap { // TODO: replace with Tailwind
   white-space: nowrap;
 }
 .pre, // FIXME: deprecated
-.whitespace-pre {
+.whitespace-pre { // TODO: replace with Tailwind
   white-space: pre;
 }
 .break-spaces {
