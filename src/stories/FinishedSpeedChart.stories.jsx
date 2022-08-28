@@ -73,6 +73,9 @@ LongLesson.args = {
   numberOfWords: 1000,
 };
 LongLesson.storyName = "Long lesson";
+LongLesson.parameters = {
+  chromatic: { disableSnapshot: true },
+};
 
 export const TestPhrases = Template.bind({});
 TestPhrases.args = {

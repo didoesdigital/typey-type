@@ -16,3 +16,6 @@ const Template = (args) => {
 };
 
 export const GameCompleted = Template.bind({});
+GameCompleted.parameters = {
+  chromatic: { delay: 3001 },
+};

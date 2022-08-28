@@ -8,7 +8,7 @@ export default function Puzzle({ puzzleText }) {
         Where does the{" "}
         <TransitionGroup className={""} component={"span"} key={puzzleText}>
           <CSSTransition timeout={500} classNames="bloop" appear={true}>
-            <span className="dib">{puzzleText}</span>
+            <span className="dib" data-chromatic="ignore">{puzzleText}</span>
           </CSSTransition>
         </TransitionGroup>{" "}
         key belong?
