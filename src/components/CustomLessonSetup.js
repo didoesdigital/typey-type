@@ -174,7 +174,7 @@ class CustomLessonSetup extends Component {
                     </p>
                     <ul id="custom-material-format" className="text-small ml1 mt0 mb3">
                       <li>Each word must be on its own line.</li>
-                      <li>Each word must be separated from its hint by a “Tab” e.g. <span className="pre">“<kbd>{"\u0009"}</kbd>”</span>.</li>
+                      <li>Each word must be separated from its hint by a “Tab” e.g. <span className="whitespace-pre">“<kbd>{"\u0009"}</kbd>”</span>.</li>
                       <li>If you skip strokes, multi-stroke words may count as misstrokes.</li>
                     </ul>
                     <label className="mb1" htmlFor="your-material">Enter your material here:</label>

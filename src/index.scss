@@ -426,7 +426,8 @@ input:focus::placeholder {
 .whitespace-nowrap {
   white-space: nowrap;
 }
-.pre {
+.pre, // FIXME: deprecated
+.whitespace-pre {
   white-space: pre;
 }
 .break-spaces {

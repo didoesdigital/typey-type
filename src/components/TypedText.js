@@ -128,7 +128,7 @@ class TypedText extends Component {
                   appear={true}
                 >
                   <kbd
-                    className={`successfully-typed-text typed-text-input-positioning pre relative${
+                    className={`successfully-typed-text typed-text-input-positioning whitespace-pre relative${
                       isMultiline ? " text-center" : " text-left"
                     }`}
                     style={{

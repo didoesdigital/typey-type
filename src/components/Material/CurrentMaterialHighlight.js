@@ -89,7 +89,7 @@ export default function CurrentMaterialHighlight({
       }}
     >
       <strong
-        className="fw7 pre"
+        className="fw7 whitespace-pre"
         tabIndex="0"
         aria-label="Current word feedback"
         role="note"
