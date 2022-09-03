@@ -22,7 +22,7 @@ import { loadPersonalPreferences } from '../../utils/typey-type';
 import AussieDictPrompt from '../../components/LessonPrompts/AussieDictPrompt';
 import SedSaidPrompt from '../../components/LessonPrompts/SedSaidPrompt';
 import WordBoundaryErrorPrompt from '../../components/LessonPrompts/WordBoundaryErrorPrompt';
-import getLessonMetadata from './getLessonMetadata';
+import getLessonMetadata from './utilities/getLessonMetadata';
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
 const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="

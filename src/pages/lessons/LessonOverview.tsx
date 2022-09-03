@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
 import { getLessonIndexData } from "../../utils/lessonIndexData";
-import getLessonMetadata from "./getLessonMetadata";
+import getLessonMetadata from "./utilities/getLessonMetadata";
 
 const getLessonOverview = async (lessonFile: any) => {
   const response = await fetch(lessonFile, {
