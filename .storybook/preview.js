@@ -17,7 +17,9 @@ export const decorators = [
     return (
       <Router basename="/typey-type">
         <Route>
-          <Story />
+          <div id="js-app" className="app">
+            <Story />
+          </div>
         </Route>
       </Router>
     );
