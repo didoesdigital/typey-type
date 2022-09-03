@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
-import PseudoContentButton from './PseudoContentButton';
-import { IconExternal } from './Icon';
+import PseudoContentButton from '../../components/PseudoContentButton';
+import { IconExternal } from '../../components/Icon';
 import { Tooltip } from 'react-tippy';
 import {
   parseWordList,
-} from './../utils/typey-type';
+} from '../../utils/typey-type';
 import {
   generateListOfWordsAndStrokes
-} from './../utils/transformingDictionaries';
+} from '../../utils/transformingDictionaries';
 
 class CustomLessonSetup extends Component {
   constructor(props) {
