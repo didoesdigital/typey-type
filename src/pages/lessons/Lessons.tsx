@@ -17,11 +17,19 @@ type LessonsRoutingProps = {
 };
 
 const Lessons = ({
+  createCustomLesson,
   customLesson,
+  customLessonMaterial,
+  customLessonMaterialValidationMessages,
+  customLessonMaterialValidationState,
+  fetchAndSetupGlobalDict,
+  globalLookupDictionary,
+  globalLookupDictionaryLoaded,
   handleLesson,
   lesson,
   lessonIndex,
   match,
+  personalDictionaries,
   setAnnouncementMessage,
   stopLesson,
   ...lessonProps
@@ -171,7 +179,23 @@ const Lessons = ({
         path={`${match.url}/custom/setup`}
         render={(props) => (
           <DocumentTitle title="Typey Type | Create a custom lesson">
-            <CustomLessonSetup {...lessonProps} {...props} />
+            <CustomLessonSetup
+              createCustomLesson={createCustomLesson}
+              customLessonMaterial={customLessonMaterial}
+              customLessonMaterialValidationMessages={
+                customLessonMaterialValidationMessages
+              }
+              customLessonMaterialValidationState={
+                customLessonMaterialValidationState
+              }
+              fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+              globalLookupDictionary={globalLookupDictionary}
+              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+              personalDictionaries={personalDictionaries}
+              setAnnouncementMessage={setAnnouncementMessage}
+              {...lessonProps}
+              {...props}
+            />
           </DocumentTitle>
         )}
       />

@@ -4,19 +4,33 @@ import CustomLessonIntro from "./CustomLessonIntro";
 import CustomShareLessons from "./CustomShareLessons";
 import CustomWordListLesson from "./CustomWordListLesson";
 
-const CustomLessonSetup = (props) => {
-  const {
-    createCustomLesson,
-    customLessonMaterial,
-    customLessonMaterialValidationMessages,
-    customLessonMaterialValidationState,
-    fetchAndSetupGlobalDict,
-    globalLookupDictionary,
-    globalLookupDictionaryLoaded,
-    personalDictionaries,
-    setAnnouncementMessage,
-  } = props;
-  const mainHeading = useRef(null);
+type Props = {
+  createCustomLesson: () => void;
+  customLessonMaterial: any;
+  customLessonMaterialValidationMessages: any;
+  customLessonMaterialValidationState: any;
+  fetchAndSetupGlobalDict: (
+    withPlover: boolean,
+    importedPersonalDictionaries?: any
+  ) => Promise<any>;
+  globalLookupDictionary: any;
+  globalLookupDictionaryLoaded: boolean;
+  personalDictionaries: any;
+  setAnnouncementMessage: () => void;
+};
+
+const CustomLessonSetup = ({
+  createCustomLesson,
+  customLessonMaterial,
+  customLessonMaterialValidationMessages,
+  customLessonMaterialValidationState,
+  fetchAndSetupGlobalDict,
+  globalLookupDictionary,
+  globalLookupDictionaryLoaded,
+  personalDictionaries,
+  setAnnouncementMessage,
+}: Props) => {
+  const mainHeading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     mainHeading.current?.focus();
@@ -56,7 +70,7 @@ const CustomLessonSetup = (props) => {
             <header className="flex items-center min-h-40">
               <h2
                 ref={mainHeading}
-                tabIndex="-1"
+                tabIndex={-1}
                 id="about-typey-type-for-stenographers"
               >
                 Create a custom lesson
