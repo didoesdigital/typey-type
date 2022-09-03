@@ -90,4 +90,4 @@ const CustomJSONLesson = () => {
   );
 };
 
-export default CustomJSONLesson;
+export default React.memo(CustomJSONLesson);

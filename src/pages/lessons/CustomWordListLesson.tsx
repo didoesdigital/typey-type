@@ -100,4 +100,4 @@ plover"
   );
 };
 
-export default CustomWordListLesson;
+export default React.memo(CustomWordListLesson);
