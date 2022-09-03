@@ -64,40 +64,36 @@ class CustomLessonSetup extends Component {
     return event;
   }
 
-  handleConvertingDictionaryEntriesToLesson(text) {
-    let newLesson = '';
-
-    try {
-      const parsedJSON = JSON.parse(text);
-
-      if (parsedJSON.constructor !== {}.constructor) {
-        throw new Error("This JSON does not contain an object.");
-      }
-
-      const parsedJSONKeys = Object.keys(parsedJSON);
-
-      if (parsedJSONKeys.length < 1) {
-        throw new Error("This dictionary is empty.");
-      }
-
-      if (parsedJSON && typeof parsedJSON === "object") {
-        newLesson = Object.entries(parsedJSON)
-          .map(([outline, translation]) => (`${translation}	${outline}`))
-          .join('\n');
-      }
-    }
-    catch (error) {
-      // console.error(error);
-    }
-
-    this.setState({
-      dictionaryConvertedToLesson: newLesson
-    });
-  }
-
   handleJSONTextAreaChange(event) {
     if (event?.target?.value) {
-      this.handleConvertingDictionaryEntriesToLesson(event.target.value);
+      let newLesson = '';
+
+      try {
+        const parsedJSON = JSON.parse(event.target.value);
+
+        if (parsedJSON.constructor !== {}.constructor) {
+          throw new Error("This JSON does not contain an object.");
+        }
+
+        const parsedJSONKeys = Object.keys(parsedJSON);
+
+        if (parsedJSONKeys.length < 1) {
+          throw new Error("This dictionary is empty.");
+        }
+
+        if (parsedJSON && typeof parsedJSON === "object") {
+          newLesson = Object.entries(parsedJSON)
+            .map(([outline, translation]) => (`${translation}	${outline}`))
+            .join('\n');
+        }
+      }
+      catch (error) {
+        // console.error(error);
+      }
+
+      this.setState({
+        dictionaryConvertedToLesson: newLesson
+      });
     }
   }
 
