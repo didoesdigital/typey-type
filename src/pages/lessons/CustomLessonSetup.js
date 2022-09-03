@@ -3,22 +3,8 @@ import CustomJSONLesson from "./CustomJSONLesson";
 import CustomLessonIntro from "./CustomLessonIntro";
 import CustomShareLessons from "./CustomShareLessons";
 import CustomWordListLesson from './CustomWordListLesson';
-import {
-  parseWordList,
-} from '../../utils/typey-type';
-import {
-  generateListOfWordsAndStrokes
-} from '../../utils/transformingDictionaries';
 
 class CustomLessonSetup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      customLessonWordsAndStrokes: [],
-      customWordList: '',
-    }
-  }
-
   componentDidMount() {
     if (this.mainHeading) {
       this.mainHeading.focus();
@@ -35,30 +21,6 @@ class CustomLessonSetup extends Component {
           // this.showDictionaryErrorNotification();
         });
     }
-
-    this.setState({
-      customLessonWordsAndStrokes: []
-    });
-  }
-
-  handleWordsForDictionaryEntries(value, globalLookupDictionary = this.props.globalLookupDictionary) {
-    let result = parseWordList(value);
-    if (result && result.length > 0) {
-      let customLessonWordsAndStrokes = generateListOfWordsAndStrokes(result, globalLookupDictionary);
-      if (customLessonWordsAndStrokes && customLessonWordsAndStrokes.length > 0) {
-        this.setState({
-          customLessonWordsAndStrokes: customLessonWordsAndStrokes,
-          customWordList: value
-        });
-      }
-    }
-  }
-
-  handleWordListTextAreaChange(event) {
-    if (event && event.target && event.target.value) {
-      this.handleWordsForDictionaryEntries(event.target.value);
-    }
-    return event;
   }
 
   render() {
@@ -67,6 +29,7 @@ class CustomLessonSetup extends Component {
       customLessonMaterial,
       customLessonMaterialValidationState,
       customLessonMaterialValidationMessages,
+      globalLookupDictionary,
       setAnnouncementMessage
     } = this.props;
 
@@ -94,8 +57,7 @@ class CustomLessonSetup extends Component {
 
           <div className="bg-white landing-page-section">
             <CustomWordListLesson
-              customLessonWordsAndStrokes={this.state.customLessonWordsAndStrokes}
-              handleWordListTextAreaChange={this.handleWordListTextAreaChange.bind(this)}
+              globalLookupDictionary={globalLookupDictionary}
             />
           </div>
 

@@ -1,16 +1,19 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import CustomLessonFormattedCode from "./CustomLessonFormattedCode";
+import { parseWordList } from "../../utils/typey-type";
+import { generateListOfWordsAndStrokes } from "../../utils/transformingDictionaries";
+
+type PhraseAndStroke = { phrase: string; stroke: string };
 
 type Props = {
-  customLessonWordsAndStrokes: { phrase: string; stroke: string }[];
-  handleWordListTextAreaChange: any;
+  globalLookupDictionary: any;
 };
 
-const CustomWordListLesson = ({
-  customLessonWordsAndStrokes,
-  handleWordListTextAreaChange,
-}: Props) => {
+const CustomWordListLesson = ({ globalLookupDictionary }: Props) => {
+  const [customLessonWordsAndStrokes, setCustomLessonWordsAndStrokes] =
+    useState<PhraseAndStroke[]>([]);
+
   const dictionaryEntries = useMemo(
     () =>
       customLessonWordsAndStrokes
@@ -18,6 +21,33 @@ const CustomWordListLesson = ({
         .join("\n"),
     [customLessonWordsAndStrokes]
   );
+
+  const handleWordsForDictionaryEntries = (
+    value: any,
+    globalLookupDictionaryTmp = globalLookupDictionary
+  ) => {
+    let result = parseWordList(value);
+    if (result && result.length > 0) {
+      let customLessonWordsAndStrokesTmp = generateListOfWordsAndStrokes(
+        result,
+        globalLookupDictionaryTmp
+      );
+      if (
+        customLessonWordsAndStrokesTmp &&
+        customLessonWordsAndStrokesTmp.length > 0
+      ) {
+        setCustomLessonWordsAndStrokes(customLessonWordsAndStrokesTmp);
+      }
+    }
+  };
+
+  const handleWordListTextAreaChange: React.ChangeEventHandler<HTMLTextAreaElement> =
+    (event) => {
+      if (event && event.target && event.target.value) {
+        handleWordsForDictionaryEntries(event.target.value);
+      }
+      return event;
+    };
 
   return (
     <div className="p3 mx-auto mw-1024">
