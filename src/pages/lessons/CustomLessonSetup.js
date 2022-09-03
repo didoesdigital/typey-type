@@ -64,39 +64,6 @@ class CustomLessonSetup extends Component {
     return event;
   }
 
-  handleJSONTextAreaChange(event) {
-    if (event?.target?.value) {
-      let newLesson = '';
-
-      try {
-        const parsedJSON = JSON.parse(event.target.value);
-
-        if (parsedJSON.constructor !== {}.constructor) {
-          throw new Error("This JSON does not contain an object.");
-        }
-
-        const parsedJSONKeys = Object.keys(parsedJSON);
-
-        if (parsedJSONKeys.length < 1) {
-          throw new Error("This dictionary is empty.");
-        }
-
-        if (parsedJSON && typeof parsedJSON === "object") {
-          newLesson = Object.entries(parsedJSON)
-            .map(([outline, translation]) => (`${translation}	${outline}`))
-            .join('\n');
-        }
-      }
-      catch (error) {
-        // console.error(error);
-      }
-
-      this.setState({
-        dictionaryConvertedToLesson: newLesson
-      });
-    }
-  }
-
   render() {
     const { customLessonWordsAndStrokes } = this.state;
 
@@ -248,10 +215,7 @@ class CustomLessonSetup extends Component {
           </div>
 
           <div className="bg-info landing-page-section">
-            <CustomJSONLesson
-              dictionaryConvertedToLesson={this.state.dictionaryConvertedToLesson}
-              handleJSONTextAreaChange={this.handleJSONTextAreaChange.bind(this)}
-            />
+            <CustomJSONLesson />
           </div>
 
           <div className="bg-white landing-page-section">

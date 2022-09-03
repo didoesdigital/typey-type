@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import CustomLessonFormattedCode from "./CustomLessonFormattedCode";
 
-type Props = {
-  dictionaryConvertedToLesson: string;
-  handleJSONTextAreaChange: React.ChangeEventHandler<HTMLTextAreaElement>;
-};
+const CustomJSONLesson = () => {
+  const [dictionaryConvertedToLesson, setDictionaryConvertedToLesson] =
+    useState("");
 
-const CustomJSONLesson = ({
-  dictionaryConvertedToLesson,
-  handleJSONTextAreaChange,
-}: Props) => {
+  const handleJSONTextAreaChange: React.ChangeEventHandler<HTMLTextAreaElement> =
+    (event) => {
+      if (event?.target?.value) {
+        let newLesson = "";
+
+        try {
+          const parsedJSON = JSON.parse(event.target.value);
+
+          if (parsedJSON.constructor !== {}.constructor) {
+            throw new Error("This JSON does not contain an object.");
+          }
+
+          const parsedJSONKeys = Object.keys(parsedJSON);
+
+          if (parsedJSONKeys.length < 1) {
+            throw new Error("This dictionary is empty.");
+          }
+
+          if (parsedJSON && typeof parsedJSON === "object") {
+            newLesson = Object.entries(parsedJSON)
+              .map(([outline, translation]) => `${translation}	${outline}`)
+              .join("\n");
+          }
+        } catch (error) {
+          // console.error(error);
+        }
+
+        setDictionaryConvertedToLesson(newLesson);
+      }
+    };
+
   return (
     <div className="p3 mx-auto mw-1024">
       <h3>Convert JSON to Typey Type lesson</h3>
