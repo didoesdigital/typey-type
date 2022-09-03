@@ -1,7 +1,7 @@
 import React from "react";
-import DisplayMetric from "../../components/DisplayMetric";
-import ErrorBoundary from "../../components/ErrorBoundary";
-import ComponentLoading from "../../components/ComponentLoading";
+import DisplayMetric from "../../../components/DisplayMetric";
+import ErrorBoundary from "../../../components/ErrorBoundary";
+import ComponentLoading from "../../../components/ComponentLoading";
 import Loadable from "react-loadable";
 
 type ChartData = {
@@ -40,7 +40,7 @@ type SecondaryDisplayMetricsProps = {
 };
 
 const AsyncFinishedSpeedChart = Loadable({
-  loader: () => import("../../components/FinishedSpeedChart"),
+  loader: () => import("../../../components/FinishedSpeedChart"),
   loading: ComponentLoading,
   delay: 300,
 });

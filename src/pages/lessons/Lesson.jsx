@@ -13,7 +13,7 @@ import LessonOverview from './LessonOverview';
 import LessonSubheader from './LessonSubheader';
 import Material from '../../components/Material';
 import TypedText from '../../components/TypedText';
-import Finished from './Finished';
+import Finished from './components/Finished';
 import Scores from '../../components/Scores';
 import StrokeTip from '../../components/StrokeTip';
 import UserSettings from '../../components/UserSettings';

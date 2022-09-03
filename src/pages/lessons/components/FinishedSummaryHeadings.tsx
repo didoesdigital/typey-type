@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import * as Confetti from "../../utils/confetti";
-import getHeadingsText from "./utilities/getHeadingsText";
+import * as Confetti from "../../../utils/confetti";
+import getHeadingsText from "../utilities/getHeadingsText";
 
 export type ConfettiConfig = {
   sparsity: number;

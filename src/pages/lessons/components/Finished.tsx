@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import LessonCanvasFooter from "./LessonCanvasFooter";
+import LessonCanvasFooter from "../LessonCanvasFooter";
 import FinishedZeroAndEmptyStateMessage from "./FinishedZeroAndEmptyState";
-import UserSettings from "../../components/UserSettings";
+import UserSettings from "../../../components/UserSettings";
 import {
   stitchTogetherLessonData,
   transformLessonDataToChartData,
-} from "../../utils/transformingFinishedData";
+} from "../../../utils/transformingFinishedData";
 import FinishedActionButtons from "./FinishedActionButtons";
 import FinishedDataViz from "./FinishedDataViz";
 import FinishedMisstrokesSummary from "./FinishedMisstrokesSummary";
 import FinishedSummaryHeadings from "./FinishedSummaryHeadings";
-import getNumericAccuracy from "./utilities/getNumericAccuracy";
+import getNumericAccuracy from "../utilities/getNumericAccuracy";
 import "react-tippy/dist/tippy.css";
 import type { ConfettiConfig } from "./FinishedSummaryHeadings";
-import type { FinishedProps, LessonData, TransformedData } from "./types";
+import type { FinishedProps, LessonData, TransformedData } from "../types";
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
 const googleFormURL =

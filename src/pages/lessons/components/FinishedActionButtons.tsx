@@ -1,5 +1,5 @@
 import React from "react";
-import { IconRestart } from "../../components/Icon";
+import { IconRestart } from "../../../components/Icon";
 import FinishedNextLessonButton from "./FinishedNextLessonButton";
 
 type FinishedActionButtonsProps = {
