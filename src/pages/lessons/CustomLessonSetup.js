@@ -68,22 +68,22 @@ class CustomLessonSetup extends Component {
     let newLesson = '';
 
     try {
-      let parsedJSON = JSON.parse(text);
+      const parsedJSON = JSON.parse(text);
 
       if (parsedJSON.constructor !== {}.constructor) {
         throw new Error("This JSON does not contain an object.");
       }
 
-      let parsedJSONKeys = Object.keys(parsedJSON);
+      const parsedJSONKeys = Object.keys(parsedJSON);
 
       if (parsedJSONKeys.length < 1) {
         throw new Error("This dictionary is empty.");
       }
 
       if (parsedJSON && typeof parsedJSON === "object") {
-        newLesson = Object.entries(parsedJSON).map(([outline, translation]) => {
-          return (`${translation}	${outline}`);
-        }).join('\n');
+        newLesson = Object.entries(parsedJSON)
+          .map(([outline, translation]) => (`${translation}	${outline}`))
+          .join('\n');
       }
     }
     catch (error) {
@@ -96,10 +96,9 @@ class CustomLessonSetup extends Component {
   }
 
   handleJSONTextAreaChange(event) {
-    if (event && event.target && event.target.value) {
+    if (event?.target?.value) {
       this.handleConvertingDictionaryEntriesToLesson(event.target.value);
     }
-    return event;
   }
 
   render() {
