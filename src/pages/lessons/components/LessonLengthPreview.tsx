@@ -1,5 +1,5 @@
 import React from "react";
-import { humanDurationFormatter } from "../../utils/formatters";
+import { humanDurationFormatter } from "../../../utils/formatters";
 
 const Warning = ({ duration }: { duration: number }) => (
   <span role="img" aria-label=" Warning ">

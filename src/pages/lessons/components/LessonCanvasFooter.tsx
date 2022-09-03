@@ -1,5 +1,5 @@
 import React from "react";
-import Metronome from "../../components/Metronome";
+import Metronome from "../../../components/Metronome";
 import { Tooltip } from "react-tippy";
 
 type LessonCanvasFooterProps = {

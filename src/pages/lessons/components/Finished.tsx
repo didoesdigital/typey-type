@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import LessonCanvasFooter from "../LessonCanvasFooter";
+import LessonCanvasFooter from "./LessonCanvasFooter";
 import FinishedZeroAndEmptyStateMessage from "./FinishedZeroAndEmptyState";
 import UserSettings from "../../../components/UserSettings";
 import {

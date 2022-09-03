@@ -6,11 +6,11 @@ import queryString from 'query-string';
 import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
 import ErrorBoundary from '../../components/ErrorBoundary'
-import LessonCanvasFooter from './LessonCanvasFooter';
-import LessonLengthPreview from './LessonLengthPreview';
+import LessonCanvasFooter from './components/LessonCanvasFooter';
+import LessonLengthPreview from './components/LessonLengthPreview';
 import LessonNotFound from './LessonNotFound';
 import LessonOverview from './LessonOverview';
-import LessonSubheader from './LessonSubheader';
+import LessonSubheader from './components/LessonSubheader';
 import Material from '../../components/Material';
 import TypedText from '../../components/TypedText';
 import Finished from './components/Finished';
