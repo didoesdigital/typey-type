@@ -102,8 +102,10 @@ class CustomLessonSetup extends Component {
   }
 
   render() {
+    const { customLessonWordsAndStrokes, dictionaryConvertedToLesson } = this.state;
+
     let filledPre = '';
-    if (this.state.customLessonWordsAndStrokes.length > 0) {
+    if (customLessonWordsAndStrokes.length > 0) {
       filledPre = "quote ";
     }
 
@@ -126,7 +128,7 @@ class CustomLessonSetup extends Component {
         validationStateStyle = "";
     }
 
-    const dictionaryEntries = this.state.customLessonWordsAndStrokes.map( (entry) => {
+    const dictionaryEntries = customLessonWordsAndStrokes.map( (entry) => {
       return( `${entry.phrase}	${entry.stroke}`)
     }).join('\n');
 
@@ -305,7 +307,7 @@ plover"
                   </textarea>
                 </div>
                 <div>
-                  <pre id="js-converted-dictionary-entries" className={filledPre + "h-168 overflow-scroll mw-384 mt1 mb3"}><code>{this.state.dictionaryConvertedToLesson}</code></pre>
+                  <pre id="js-converted-dictionary-entries" className={filledPre + "h-168 overflow-scroll mw-384 mt1 mb3"}><code>{dictionaryConvertedToLesson}</code></pre>
                   <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" style={{minHeight: "2.5rem", whiteSpace: "normal", height: "initial"}} dataClipboardTarget="#js-converted-dictionary-entries">Copy converted dictionary to clipboard</PseudoContentButton>
                 </div>
               </div>
