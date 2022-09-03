@@ -6,16 +6,23 @@ import CustomWordListLesson from './CustomWordListLesson';
 
 class CustomLessonSetup extends Component {
   componentDidMount() {
+    const {
+      fetchAndSetupGlobalDict,
+      globalLookupDictionary,
+      globalLookupDictionaryLoaded,
+      personalDictionaries
+    } = this.props;
+
     if (this.mainHeading) {
       this.mainHeading.focus();
     }
 
-    if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
-      const shouldUsePersonalDictionaries = this.props.personalDictionaries
-        && Object.entries(this.props.personalDictionaries).length > 0
-        && !!this.props.personalDictionaries.dictionariesNamesAndContents;
+    if (globalLookupDictionary && globalLookupDictionary.size < 2 && !globalLookupDictionaryLoaded) {
+      const shouldUsePersonalDictionaries = personalDictionaries
+        && Object.entries(personalDictionaries).length > 0
+        && !!personalDictionaries.dictionariesNamesAndContents;
 
-      this.props.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null)
+      fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? personalDictionaries : null)
         .catch(error => {
           console.error(error);
           // this.showDictionaryErrorNotification();
