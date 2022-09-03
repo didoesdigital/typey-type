@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
 import PseudoContentButton from '../../components/PseudoContentButton';
+import CustomLessonFormattedCode from "./CustomLessonFormattedCode";
 import CustomWordListLesson from './CustomWordListLesson';
 import { IconExternal } from '../../components/Icon';
 import { Tooltip } from 'react-tippy';
@@ -104,11 +105,6 @@ class CustomLessonSetup extends Component {
 
   render() {
     const { customLessonWordsAndStrokes, dictionaryConvertedToLesson } = this.state;
-
-    let filledPre = '';
-    if (customLessonWordsAndStrokes.length > 0) {
-      filledPre = "quote ";
-    }
 
     let validationStateStyle = "";
     let listOfValidationMessages;
@@ -281,7 +277,12 @@ class CustomLessonSetup extends Component {
                   </textarea>
                 </div>
                 <div>
-                  <pre id="js-converted-dictionary-entries" className={filledPre + "h-168 overflow-scroll mw-384 mt1 mb3"}><code>{dictionaryConvertedToLesson}</code></pre>
+                  <CustomLessonFormattedCode
+                    id="js-converted-dictionary-entries"
+                    filled={dictionaryConvertedToLesson.length > 0}
+                  >
+                    {dictionaryConvertedToLesson}
+                  </CustomLessonFormattedCode>
                   <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" style={{minHeight: "2.5rem", whiteSpace: "normal", height: "initial"}} dataClipboardTarget="#js-converted-dictionary-entries">Copy converted dictionary to clipboard</PseudoContentButton>
                 </div>
               </div>
