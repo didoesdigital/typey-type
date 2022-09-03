@@ -1,6 +1,6 @@
 import React from "react";
 import GoogleAnalytics from "react-ga";
-import { IconExternal } from "../../components/Icon";
+import { IconExternal } from "../../../../components/Icon";
 import { Tooltip } from "react-tippy";
 
 type Props = {

@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
-import CustomJSONLesson from "./CustomJSONLesson";
-import CustomLessonIntro from "./CustomLessonIntro";
-import CustomShareLessons from "./CustomShareLessons";
-import CustomWordListLesson from "./CustomWordListLesson";
+import CustomJSONLesson from "./components/CustomJSONLesson";
+import CustomLessonIntro from "./components/CustomLessonIntro";
+import CustomShareLessons from "./components/CustomShareLessons";
+import CustomWordListLesson from "./components/CustomWordListLesson";
 
 type Props = {
   createCustomLesson: () => void;

@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import PseudoContentButton from "../../components/PseudoContentButton";
+import PseudoContentButton from "../../../../components/PseudoContentButton";
 import CustomLessonFormattedCode from "./CustomLessonFormattedCode";
 
 const convertDictionaryToLesson = (text: string) => {
