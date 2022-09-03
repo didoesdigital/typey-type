@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import CustomLessonFormattedCode from "./CustomLessonFormattedCode";
 import { parseWordList } from "../../utils/typey-type";
@@ -22,32 +22,35 @@ const CustomWordListLesson = ({ globalLookupDictionary }: Props) => {
     [customLessonWordsAndStrokes]
   );
 
-  const handleWordsForDictionaryEntries = (
-    value: any,
-    globalLookupDictionaryTmp = globalLookupDictionary
-  ) => {
-    let result = parseWordList(value);
-    if (result && result.length > 0) {
-      let customLessonWordsAndStrokesTmp = generateListOfWordsAndStrokes(
-        result,
-        globalLookupDictionaryTmp
-      );
-      if (
-        customLessonWordsAndStrokesTmp &&
-        customLessonWordsAndStrokesTmp.length > 0
-      ) {
-        setCustomLessonWordsAndStrokes(customLessonWordsAndStrokesTmp);
+  const handleWordsForDictionaryEntries = useCallback(
+    (value: any, globalLookupDictionaryTmp = globalLookupDictionary) => {
+      let result = parseWordList(value);
+      if (result && result.length > 0) {
+        let customLessonWordsAndStrokesTmp = generateListOfWordsAndStrokes(
+          result,
+          globalLookupDictionaryTmp
+        );
+        if (
+          customLessonWordsAndStrokesTmp &&
+          customLessonWordsAndStrokesTmp.length > 0
+        ) {
+          setCustomLessonWordsAndStrokes(customLessonWordsAndStrokesTmp);
+        }
       }
-    }
-  };
+    },
+    [globalLookupDictionary]
+  );
 
   const handleWordListTextAreaChange: React.ChangeEventHandler<HTMLTextAreaElement> =
-    (event) => {
-      if (event && event.target && event.target.value) {
-        handleWordsForDictionaryEntries(event.target.value);
-      }
-      return event;
-    };
+    useCallback(
+      (event) => {
+        if (event && event.target && event.target.value) {
+          handleWordsForDictionaryEntries(event.target.value);
+        }
+        return event;
+      },
+      [handleWordsForDictionaryEntries]
+    );
 
   return (
     <div className="p3 mx-auto mw-1024">
