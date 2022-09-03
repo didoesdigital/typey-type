@@ -1,5 +1,6 @@
 import React, { useMemo } from "react";
 import PseudoContentButton from "../../components/PseudoContentButton";
+import CustomLessonFormattedCode from "./CustomLessonFormattedCode";
 
 type Props = {
   customLessonWordsAndStrokes: { phrase: string; stroke: string }[];
@@ -43,14 +44,12 @@ plover"
           ></textarea>
         </div>
         <div>
-          <pre
+          <CustomLessonFormattedCode
             id="js-custom-lesson-dictionary-entries"
-            className={`${
-              customLessonWordsAndStrokes.length > 0 ? "quote " : ""
-            }h-168 overflow-scroll mw-384 mt1 mb3`}
+            filled={customLessonWordsAndStrokes.length > 0}
           >
-            <code>{dictionaryEntries}</code>
-          </pre>
+            {dictionaryEntries}
+          </CustomLessonFormattedCode>
           <PseudoContentButton
             className="js-clipboard-button link-button copy-to-clipboard"
             dataClipboardTarget="#js-custom-lesson-dictionary-entries"
