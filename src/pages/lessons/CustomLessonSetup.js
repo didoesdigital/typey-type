@@ -18,7 +18,6 @@ class CustomLessonSetup extends Component {
     this.state = {
       customLessonWordsAndStrokes: [],
       customWordList: '',
-      dictionaryConvertedToLesson: '',
     }
   }
 
