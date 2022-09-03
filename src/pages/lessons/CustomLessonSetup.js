@@ -219,16 +219,6 @@ class CustomLessonSetup extends Component {
 
           <div className="bg-white landing-page-section">
             <div className="p3 mx-auto mw-1024">
-              <h3>Revise words you have seen</h3>
-              <div className="gtc-4fr-3fr">
-                <div>
-                  <p><Link to="/lessons/progress/seen">Practise your seen words in a lesson</Link>.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="bg-info landing-page-section">
-            <div className="p3 mx-auto mw-1024">
               <div className="text-center">
                 <h3>Share your lessons</h3>
                 <p className="mb0">To help Typey Type grow even faster, add to the{' '}
