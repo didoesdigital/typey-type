@@ -41,21 +41,10 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
-            handleLesson={handleLesson}
-            lesson={lesson}
-            lessonIndex={lessonIndex}
-            setAnnouncementMessage={setAnnouncementMessage}
-            stopLesson={stopLesson}
-            {...lessonProps}
-            {...props}
-          />
-        )}
-      />
-      <Route
-        path={`${match.url}/:category/:subcategory/:lessonPath`}
-        render={(props) => (
-          <Lesson
-            customLesson={customLesson}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            personalDictionaries={personalDictionaries}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
@@ -71,21 +60,10 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
-            handleLesson={handleLesson}
-            lesson={lesson}
-            lessonIndex={lessonIndex}
-            setAnnouncementMessage={setAnnouncementMessage}
-            stopLesson={stopLesson}
-            {...lessonProps}
-            {...props}
-          />
-        )}
-      />
-      <Route
-        path={`${match.url}/fundamentals/:lessonPath`}
-        render={(props) => (
-          <Lesson
-            customLesson={customLesson}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            personalDictionaries={personalDictionaries}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
@@ -101,6 +79,48 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            personalDictionaries={personalDictionaries}
+            handleLesson={handleLesson}
+            lesson={lesson}
+            lessonIndex={lessonIndex}
+            setAnnouncementMessage={setAnnouncementMessage}
+            stopLesson={stopLesson}
+            {...lessonProps}
+            {...props}
+          />
+        )}
+      />
+      <Route
+        path={`${match.url}/:category/:subcategory/:lessonPath`}
+        render={(props) => (
+          <Lesson
+            customLesson={customLesson}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            personalDictionaries={personalDictionaries}
+            handleLesson={handleLesson}
+            lesson={lesson}
+            lessonIndex={lessonIndex}
+            setAnnouncementMessage={setAnnouncementMessage}
+            stopLesson={stopLesson}
+            {...lessonProps}
+            {...props}
+          />
+        )}
+      />
+      <Route
+        path={`${match.url}/fundamentals/:lessonPath`}
+        render={(props) => (
+          <Lesson
+            customLesson={customLesson}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            personalDictionaries={personalDictionaries}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
@@ -116,6 +136,10 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            personalDictionaries={personalDictionaries}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
@@ -221,6 +245,10 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            personalDictionaries={personalDictionaries}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
