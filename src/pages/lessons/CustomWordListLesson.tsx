@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useMemo } from "react";
 import PseudoContentButton from "../../components/PseudoContentButton";
 
 type Props = {
   customLessonWordsAndStrokes: { phrase: string; stroke: string }[];
-  dictionaryEntries: any;
   handleWordListTextAreaChange: any;
 };
 
 const CustomWordListLesson = ({
   customLessonWordsAndStrokes,
-  dictionaryEntries,
   handleWordListTextAreaChange,
 }: Props) => {
+  const dictionaryEntries = useMemo(
+    () =>
+      customLessonWordsAndStrokes
+        .map((entry) => `${entry.phrase}	${entry.stroke}`)
+        .join("\n"),
+    [customLessonWordsAndStrokes]
+  );
+
   return (
     <div className="p3 mx-auto mw-1024">
       <h3>Create a lesson using a word list</h3>

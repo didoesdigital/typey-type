@@ -129,10 +129,6 @@ class CustomLessonSetup extends Component {
         validationStateStyle = "";
     }
 
-    const dictionaryEntries = customLessonWordsAndStrokes.map( (entry) => {
-      return( `${entry.phrase}	${entry.stroke}`)
-    }).join('\n');
-
     return (
       <main id="main">
         <div className="subheader">
@@ -257,7 +253,6 @@ class CustomLessonSetup extends Component {
           <div className="bg-white landing-page-section">
             <CustomWordListLesson
               customLessonWordsAndStrokes={customLessonWordsAndStrokes}
-              dictionaryEntries={dictionaryEntries}
               handleWordListTextAreaChange={this.handleWordListTextAreaChange.bind(this)}
             />
           </div>
