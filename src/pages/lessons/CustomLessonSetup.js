@@ -86,6 +86,12 @@ class CustomLessonSetup extends Component {
         validationStateStyle = "";
     }
 
+    const {
+      createCustomLesson,
+      customLessonMaterial,
+      setAnnouncementMessage
+    } = this.props;
+
     return (
       <main id="main">
         <div className="subheader">
@@ -122,7 +128,7 @@ class CustomLessonSetup extends Component {
                           tag="span"
                           theme="didoesdigital"
                           trigger="mouseenter focus click"
-                          onShow={this.props.setAnnouncementMessage}
+                          onShow={setAnnouncementMessage}
                         >
                           <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                         </Tooltip>
@@ -147,8 +153,8 @@ class CustomLessonSetup extends Component {
   examples.	KP-PLS TP-PL"
                       rows="8"
                       wrap="off"
-                      onChange={this.props.createCustomLesson}
-                      value={this.props.customLessonMaterial}
+                      onChange={createCustomLesson}
+                      value={customLessonMaterial}
                       >
                     </textarea>
                     {listOfValidationMessages}
@@ -188,7 +194,7 @@ class CustomLessonSetup extends Component {
                         tag="span"
                         theme="didoesdigital"
                         trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
+                        onShow={setAnnouncementMessage}
                       >
                         <IconExternal
                           ariaHidden="true"
@@ -220,7 +226,7 @@ class CustomLessonSetup extends Component {
 
           <div className="bg-white landing-page-section">
             <CustomShareLessons
-              setAnnouncementMessage={this.props.setAnnouncementMessage}
+              setAnnouncementMessage={setAnnouncementMessage}
             />
           </div>
 
