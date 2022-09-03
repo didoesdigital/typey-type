@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import CustomLessonFormattedCode from "./CustomLessonFormattedCode";
 
@@ -33,15 +33,14 @@ const CustomJSONLesson = () => {
   const [dictionaryConvertedToLesson, setDictionaryConvertedToLesson] =
     useState("");
 
-  const handleTextChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
-    event
-  ) => {
-    if (event?.target?.value) {
-      setDictionaryConvertedToLesson(
-        convertDictionaryToLesson(event.target.value)
-      );
-    }
-  };
+  const handleTextChange: React.ChangeEventHandler<HTMLTextAreaElement> =
+    useCallback((event) => {
+      if (event?.target?.value) {
+        setDictionaryConvertedToLesson(
+          convertDictionaryToLesson(event.target.value)
+        );
+      }
+    }, []);
 
   return (
     <div className="p3 mx-auto mw-1024">
