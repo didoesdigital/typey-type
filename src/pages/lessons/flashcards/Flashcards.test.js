@@ -2,9 +2,12 @@ import {
   chooseFlashcardsToShow,
   getCurrentSlideContentAndType,
   getFlashcardsRungThreshold,
-  getStrokeForCurrentSlideContent,
   getWordForCurrentStrokeSlideIndex
 } from './Flashcards';
+
+import {
+  getStrokeForCurrentSlideContent,
+} from './utilities';
 
 describe('chooseFlashcardsToShow', () => {
   describe('for words you have never seen when revising recent mistakes', () => {

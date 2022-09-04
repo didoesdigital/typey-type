@@ -4,6 +4,7 @@ import ReactModal from 'react-modal';
 import FlashcardsCarouselActionButtons from './components/FlashcardsCarouselActionButtons';
 import FlashcardsModal from './components/FlashcardsModal';
 import StrokesForWords from '../../../components/StrokesForWords';
+import { getStrokeForCurrentSlideContent } from './utilities';
 import { IconFullscreen } from '../../../components/Icon';
 import * as Utils from '../../../utils/utils';
 import { parseLesson } from '../../../utils/typey-type';
@@ -554,24 +555,10 @@ function getWordForCurrentStrokeSlideIndex(flashcards, slideIndex) {
   return word;
 }
 
-function getStrokeForCurrentSlideContent(word, sourceMaterial) {
-  let stroke = "XXX";
-  let i = 0;
-  let length = sourceMaterial.length;
-
-  for (; i < length; i++) {
-    if (sourceMaterial[i].phrase === word) {
-      stroke = sourceMaterial[i].stroke;
-    }
-  }
-  return stroke;
-}
-
 export default Flashcards;
 export {
   chooseFlashcardsToShow,
   getCurrentSlideContentAndType,
   getFlashcardsRungThreshold,
-  getStrokeForCurrentSlideContent,
   getWordForCurrentStrokeSlideIndex
 };
