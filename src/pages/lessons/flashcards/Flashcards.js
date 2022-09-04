@@ -363,25 +363,10 @@ currentSlide: currentSlide
   }
 
   render () {
-    let fullscreen = "";
-    if (this.props.fullscreen) {
-      fullscreen = " fullscreen";
-    } else {
-      fullscreen = "";
-    }
-    let flashcardsHeading = 'Flashcards';
-    let flashcardsSubtitle = '';
-    if (this.state.subtitle) {
-      flashcardsSubtitle = ' ' + this.state.subtitle;
-    }
-    if (this.state.title) {
-      flashcardsHeading = this.state.title + flashcardsSubtitle + ' flashcards';
-    }
-
-    let lessonpath = this.props.locationpathname.replace('flashcards','');
-    if (this.state.title.includes("Top 1000 words")) {
-      lessonpath = "/lessons/drills/top-1000-words/";
-    }
+    const fullscreen = this.props.fullscreen ? " fullscreen" : "";
+    const flashcardsSubtitle = this.state.subtitle ? ` ${this.state.subtitle}` : "";
+    const flashcardsHeading = this.state.title ? `${this.state.title}${flashcardsSubtitle} flashcards` : 'Flashcards';
+    const lessonpath = this.state.title.includes("Top 1000 words") ? '/lessons/drills/top-1000-words/' : this.props.locationpathname.replace('flashcards','');
 
     return (
       <div>
