@@ -7,7 +7,8 @@ import { IconFullscreen } from '../../../components/Icon';
 import * as Utils from '../../../utils/utils';
 import { parseLesson } from '../../../utils/typey-type';
 import { getLesson } from '../../../utils/getData';
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import { CarouselProvider, Slider, ButtonBack, ButtonNext } from 'pure-react-carousel';
+import SlideNodes from './components/SlideNodes';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Link } from 'react-router-dom';
 import { IconExternal } from '../../../components/Icon';
@@ -15,39 +16,6 @@ import { Tooltip } from 'react-tippy';
 
 const shortestDimension = 3;
 const longestDimension = 4;
-
-let slideNodes = (flashcards) => {
-  let slides = [];
-
-  flashcards.forEach((item, i) => {
-    slides.push(
-      <React.Fragment key={i}>
-        <Slide role="option" index={i + "-phrase"} key={i + "-phrase"} innerClassName={"carousel__slider__slide__slideInner"}>
-          <div className="carousel__slider__slide flex items-center justify-center">
-            <div className="flex items-center justify-center p3 wrap">
-              {item.phrase}
-            </div>
-          </div>
-        </Slide>
-        <Slide role="option" index={i + "-stroke"} key={i + "-stroke"} innerClassName={"carousel__slider__slide__slideInner"}>
-          <div className="carousel__slider__slide flex items-center justify-center">
-            <div className="flex items-center justify-center p3 wrap">
-              {item.stroke}
-            </div>
-          </div>
-        </Slide>
-      </React.Fragment>
-    );
-  });
-
-  slides.push(
-    <Slide index={"finished"} key={"finished"} innerClassName={"carousel__slider__slide__slideInner"}>
-      <div className="carousel__slider__slide flex items-center justify-center">Finished!</div>
-    </Slide>
-  )
-
-  return slides;
-}
 
 class Flashcards extends Component {
   constructor(props) {
@@ -541,7 +509,7 @@ currentSlide: currentSlide
                     callback={this.onChangeCurrentSlide.bind(this)}
                     aria-labelledby="flashcards-listbox-label"
                   >
-                    {slideNodes(this.state.flashcards)}
+                    <SlideNodes flashcards={this.state.flashcards} />
                   </Slider>
 
                   {/* Page left, previous flashcard */}
