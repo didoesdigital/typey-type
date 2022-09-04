@@ -23,7 +23,7 @@ const withAnalyticsTracker = (WrappedComponent, options = { anonymizeIp: true })
       trackPage(page);
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
       const currentPage = process.env.PUBLIC_URL + this.props.location.pathname;
       const nextPage = process.env.PUBLIC_URL + nextProps.location.pathname;
 
