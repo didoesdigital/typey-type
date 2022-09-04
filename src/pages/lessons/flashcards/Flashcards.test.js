@@ -2,11 +2,8 @@ import {
   chooseFlashcardsToShow,
   getCurrentSlideContentAndType,
   getFlashcardsRungThreshold,
-  getWordForCurrentStrokeSlideIndex
-} from './Flashcards';
-
-import {
   getStrokeForCurrentSlideContent,
+  getWordForCurrentStrokeSlideIndex
 } from './utilities';
 
 describe('chooseFlashcardsToShow', () => {

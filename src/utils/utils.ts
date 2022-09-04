@@ -1,4 +1,5 @@
-type PresentedMaterial = [{phrase: '', stroke: ''}];
+type MaterialItem = {phrase: string, stroke: string};
+type Material = MaterialItem[];
 
 function relativeTimeAgo(timeNow : number, timeInThePast : number) {
   let timeInThePastUnit = " minutes";
@@ -55,7 +56,7 @@ function isPeak(currentItemLength : number, previousItemLength : number, nextIte
   return isPeak;
 }
 
-function randomise(array : Array<PresentedMaterial>) {
+function randomise(array : Material) {
   var currentIndex = array.length, temporaryValue, randomIndex;
 
   while (0 !== currentIndex) {
