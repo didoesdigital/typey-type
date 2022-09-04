@@ -1298,7 +1298,7 @@ label {
   }
   &:active,
   &:focus {
-    color: add-tint($brand-primary, 60%);
+    color: add-tint($brand-primary, 80%);
     background-color: add-tint($brand-primary, 20%);
   }
   &.link-button-ghost {
