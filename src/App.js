@@ -81,7 +81,7 @@ const AsyncWriter = Loadable({
 });
 
 const AsyncFlashcards = Loadable({
-  loader: () => import("./components/Flashcards"),
+  loader: () => import("./pages/lessons/flashcards/Flashcards"),
   loading: PageLoading,
   delay: 300
 });

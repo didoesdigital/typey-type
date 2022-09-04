@@ -17,7 +17,7 @@ import Finished from './components/Finished';
 import Scores from '../../components/Scores';
 import StrokeTip from '../../components/StrokeTip';
 import UserSettings from '../../components/UserSettings';
-import Flashcards from '../../components/Flashcards';
+import Flashcards from './flashcards/Flashcards';
 import { loadPersonalPreferences } from '../../utils/typey-type';
 import AussieDictPrompt from '../../components/LessonPrompts/AussieDictPrompt';
 import SedSaidPrompt from '../../components/LessonPrompts/SedSaidPrompt';

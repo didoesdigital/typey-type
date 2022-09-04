@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
 import ReactModal from 'react-modal';
-import FlashcardsCarouselActionButtons from './FlashcardsCarouselActionButtons';
-import StrokesForWords from './StrokesForWords';
-import { IconFullscreen } from './Icon';
-import * as Utils from './../utils/utils';
-import { parseLesson } from './../utils/typey-type';
-import { getLesson } from './../utils/getData';
+import FlashcardsCarouselActionButtons from './components/FlashcardsCarouselActionButtons';
+import StrokesForWords from '../../../components/StrokesForWords';
+import { IconFullscreen } from '../../../components/Icon';
+import * as Utils from '../../../utils/utils';
+import { parseLesson } from '../../../utils/typey-type';
+import { getLesson } from '../../../utils/getData';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Link } from 'react-router-dom';
-import { IconExternal } from './Icon';
+import { IconExternal } from '../../../components/Icon';
 import { Tooltip } from 'react-tippy';
 
 const shortestDimension = 3;
