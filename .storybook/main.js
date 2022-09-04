@@ -14,5 +14,7 @@ module.exports = {
   core: {
     disableTelemetry: true,
     enableCrashReports: false,
+    builder: "webpack5",
   },
 };
+
