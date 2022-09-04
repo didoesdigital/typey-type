@@ -41,21 +41,7 @@
     "typescript": "^4.7.4"
   },
   "resolutions": {
-    "@hapi/hoek": "^9.0.3",
-    "acorn": "^6.4.1",
-    "babel-loader": "8.1.0",
-    "dot-prop": "^5.1.1",
-    "elliptic": "^6.5.4",
-    "immer": "^9.0.6",
-    "is-svg": "^4.2.2",
-    "kind-of": "^6.0.3",
-    "minimist": "^1.2.2",
-    "node-fetch": "^2.6.1",
-    "node-forge": "^0.10.0",
-    "node-notifier": "^8.0.1",
-    "serialize-javascript": "^3.1.0",
-    "ws": ">=7.4.6",
-    "yargs-parser": "^18.1.1"
+    "babel-loader": "8.1.0"
   },
   "devDependencies": {
     "@sentry/cli": "^1.72.2",
