@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import GoogleAnalytics from "react-ga";
-// @ts-ignore
 import ReactModal from "react-modal";
 import { Tooltip } from "react-tippy";
 import { IconExternal } from "../../../../components/Icon";
@@ -16,12 +15,12 @@ const FlashcardsModal = ({ fullscreen, setAnnouncementMessage }: Props) => {
     ReactModal.setAppElement("#js-app");
   }, []);
 
-  const handleOpenModal: React.MouseEventHandler = (event) => {
+  const handleOpenModal = (event: any) => {
     event.preventDefault();
     setShowModal(true);
   };
 
-  const handleCloseModal: React.MouseEventHandler = (event) => {
+  const handleCloseModal = (event: any) => {
     event.preventDefault();
     setShowModal(false);
   };
