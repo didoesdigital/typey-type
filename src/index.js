@@ -12,16 +12,10 @@ if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
   init({
     dsn: "https://50e71fa7abea49288b136cb517fc55be@o180165.ingest.sentry.io/1268615",
     release: process.env.REACT_APP_TYPEY_TYPE_RELEASE || "development",
-    beforeSend(event) {
-      if (
-        event?.message?.match(
-          /(ResizeObserver loop limit exceeded|ResizeObserver loop completed with undelivered notifications.)/i
-        )
-      ) {
-        return null;
-      }
-      return event;
-    },
+    ignoreErrors: [
+      /ResizeObserver loop limit exceeded/i,
+      /ResizeObserver loop completed with undelivered notifications/i,
+    ],
   });
 }
 
