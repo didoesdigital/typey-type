@@ -37,6 +37,7 @@ export const howAreYouQuestions = [
   "how's it going",
   "how's your day",
   "how was your",
+  "what's up",
 ];
 
 export const whoAreYouQuestions = [
