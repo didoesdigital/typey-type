@@ -1,12 +1,4 @@
-const penaliseSlashes = (outline: string, _translation: string) => {
-  let penaltyForSlashes = 0;
-  let numberOfSlashes = outline.match(/\//g);
-
-  if (numberOfSlashes !== null) {
-    penaltyForSlashes += numberOfSlashes.length * 2;
-  }
-
-  return penaltyForSlashes;
-};
+const penaliseSlashes = (outline: string, _translation: string) =>
+  (outline.match(/\//g)?.length || 0) * 2;
 
 export default penaliseSlashes;
