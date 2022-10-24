@@ -1,4 +1,4 @@
-const penaliseStars = (outline, _translation) => {
+const penaliseStars = (outline: string, _translation: string) => {
   let penaltyForStars = 0;
   const numberOfStars = outline.match(/\*/g);
 
