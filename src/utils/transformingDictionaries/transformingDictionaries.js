@@ -4,6 +4,7 @@ import misstrokesJSON from '../../json/misstrokes.json'
 import { escapeRegExp } from '../utils';
 import penaliseSlashes from './penaliseSlashes';
 import penaliseStars from './penaliseStars';
+import chooseSEndingOverZEnding from './chooseSEndingOverZEnding';
 
 const FINGERSPELLED_LETTERS = {
   "a": "A*",
@@ -764,21 +765,6 @@ function chooseTEndingOverDEnding(outlineALastLetter, outlineBLastLetter, transl
     return 1;
   }
   else if (outlineALastLetter === "T" && translation[translation.length - 1] !== "d") {
-    return -1;
-  }
-  else {
-    return 0;
-  }
-}
-
-function chooseSEndingOverZEnding(outlineALastLetter, outlineBLastLetter) {
-  if (outlineALastLetter === outlineBLastLetter) {
-    return 0;
-  }
-  else if (outlineALastLetter === "Z") {
-    return 1;
-  }
-  else if (outlineALastLetter === "S") {
     return -1;
   }
   else {
