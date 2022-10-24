@@ -5,6 +5,7 @@ import { escapeRegExp } from '../utils';
 import penaliseSlashes from './penaliseSlashes';
 import penaliseStars from './penaliseStars';
 import chooseSEndingOverZEnding from './chooseSEndingOverZEnding';
+import chooseTEndingOverDEnding from './chooseTEndingOverDEnding';
 
 const FINGERSPELLED_LETTERS = {
   "a": "A*",
@@ -749,27 +750,6 @@ function generateListOfWordsAndStrokes(wordList, globalLookupDictionary) {
   }
 
   return sourceAndPresentedMaterial;
-}
-
-function chooseTEndingOverDEnding(outlineALastLetter, outlineBLastLetter, translation) {
-  if (outlineALastLetter === outlineBLastLetter) {
-    return 0;
-  }
-  else if (outlineALastLetter === "D" && translation[translation.length - 1] === "d") {
-    return -1;
-  }
-  else if (outlineALastLetter === "D" && translation[translation.length - 1] !== "d") {
-    return 1;
-  }
-  else if (outlineALastLetter === "T" && translation[translation.length - 1] === "d") {
-    return 1;
-  }
-  else if (outlineALastLetter === "T" && translation[translation.length - 1] !== "d") {
-    return -1;
-  }
-  else {
-    return 0;
-  }
 }
 
 function hasPrefix (outline, translation, prefixes) {
