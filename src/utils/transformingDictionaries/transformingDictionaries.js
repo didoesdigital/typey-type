@@ -2,6 +2,7 @@ import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from '../../constant/index
 import { AffixList } from '../affixList';
 import misstrokesJSON from '../../json/misstrokes.json'
 import { escapeRegExp } from '../utils';
+import penaliseSlashes from './penaliseSlashes';
 import penaliseStars from './penaliseStars';
 
 const FINGERSPELLED_LETTERS = {
@@ -783,15 +784,6 @@ function chooseSEndingOverZEnding(outlineALastLetter, outlineBLastLetter) {
   else {
     return 0;
   }
-}
-
-function penaliseSlashes(outline, translation) {
-  let penaltyForSlashes = 0;
-  let numberOfSlashes = outline.match(/\//g);
-
-  if (numberOfSlashes !== null) { penaltyForSlashes += numberOfSlashes.length * 2; }
-
-  return penaltyForSlashes;
 }
 
 function hasPrefix (outline, translation, prefixes) {
