@@ -5,7 +5,7 @@ import { AffixList } from '../utils/affixList';
 import {
   rankOutlines,
   splitIntoStrokesDictsAndNamespaces
-} from './../utils/transformingDictionaries';
+} from '../utils/transformingDictionaries/transformingDictionaries';
 import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
 import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
 import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiagram';

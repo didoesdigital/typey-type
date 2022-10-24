@@ -32,7 +32,7 @@ import { getTypeyTypeDict } from './utils/getData';
 import {
   createAGlobalLookupDictionary,
   generateListOfWordsAndStrokes
-} from './utils/transformingDictionaries';
+} from './utils/transformingDictionaries/transformingDictionaries';
 import { AffixList } from './utils/affixList';
 import {
   Route,

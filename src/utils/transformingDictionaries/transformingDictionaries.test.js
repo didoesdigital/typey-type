@@ -7,8 +7,8 @@ import {
   generateListOfWordsAndStrokes,
   rankOutlines,
 } from './transformingDictionaries';
-import { AffixList } from './affixList';
-import misstrokesJSON from '../json/misstrokes.json'
+import { AffixList } from '../affixList';
+import misstrokesJSON from '../../json/misstrokes.json'
 
 let testTypeyTypeDict = {
   "TK-LS": "{^^}",

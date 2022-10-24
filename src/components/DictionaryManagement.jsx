@@ -6,7 +6,7 @@ import GoogleAnalytics from 'react-ga';
 import Notification from './Notification';
 import {
   getListOfValidDictionariesAddedAndInConfig,
-} from '../utils/transformingDictionaries';
+} from '../utils/transformingDictionaries/transformingDictionaries';
 import PseudoContentButton from './PseudoContentButton';
 import { writePersonalPreferences } from '../utils/typey-type';
 import misstrokesJSON from '../json/misstrokes.json'
