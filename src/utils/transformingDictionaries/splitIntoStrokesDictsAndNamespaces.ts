@@ -6,26 +6,18 @@ const namespaceRegex = new RegExp(
   )})):(?<Name>.+)$`
 );
 
-function splitIntoStrokesDictsAndNamespaces(
+const splitIntoStrokesDictsAndNamespaces = (
   strokesAndSources: [string, string][]
-) {
-  let namespacedStrokesAndDicts = strokesAndSources.map((strokesAndSource) => {
-    let outline = strokesAndSource[0];
+) =>
+  strokesAndSources.map((strokesAndSource) => {
+    const outline = strokesAndSource[0];
 
-    let sourceDictName;
-    let sourceNamespace;
-    let match = strokesAndSource[1].match(namespaceRegex);
-    if (match !== null) {
-      sourceDictName = match.groups?.Name || "";
-      sourceNamespace = match.groups?.Source || "";
-    } else {
-      sourceDictName = strokesAndSource[1];
-      sourceNamespace = "";
-    }
+    const match = strokesAndSource[1].match(namespaceRegex);
+    const sourceDictNameAndNamespace = match
+      ? [match.groups?.Name || "", match.groups?.Source || ""]
+      : [strokesAndSource[1], ""];
 
-    return [outline, sourceDictName, sourceNamespace];
+    return [outline, ...sourceDictNameAndNamespace];
   });
 
-  return namespacedStrokesAndDicts;
-}
 export default splitIntoStrokesDictsAndNamespaces;
