@@ -817,5 +817,4 @@ export {
   generateListOfWordsAndStrokes,
   getListOfValidDictionariesAddedAndInConfig,
   rankAllOutlinesInCombinedLookupDictionary,
-  splitIntoStrokesDictsAndNamespaces
 };
