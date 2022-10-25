@@ -734,7 +734,7 @@ function hasPrefix (outline, translation, prefixes) {
 }
 
 function hasSuffix (outline, translation, suffixes) {
-  return suffixes.some(([suffixOutline, suffixTranslation]) => outline.startsWith(suffixOutline) && translation.startsWith(suffixTranslation));
+  return suffixes.some(([suffixOutline, suffixTranslation]) => outline.endsWith(suffixOutline) && translation.endsWith(suffixTranslation));
 }
 
 function penaliseSlashesWithoutPrefixesOrSuffixes(outline, translation, affixes) {

@@ -3756,8 +3756,8 @@ describe('rank outlines', () => {
     it('returns sorted list of outlines for "exercises", prioritising S endings over Z, already in order', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
         ["KPER/SAOEUZ/-Z", "plover.json", "plover"],
-        ["KPERZ/-T", "briefs.json", "typey"],
         ["KPERZ/-S", "briefs.json", "typey"],
+        ["KPERZ/-T", "briefs.json", "typey"],
         ["KPERZ/-Z", "briefs.json", "typey"],
         ["ERBGS/SAOEUSZ", "plover.json", "plover"],
         ["KPERSZ", "typey-type.json", "typey"],
@@ -3765,8 +3765,8 @@ describe('rank outlines', () => {
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "exercises", sharedAffixes)).toEqual([
         ["KPERSZ", "typey-type.json", "typey"],
-        ["KPERZ/-T", "briefs.json", "typey"],
         ["KPERZ/-S", "briefs.json", "typey"],
+        ["KPERZ/-T", "briefs.json", "typey"],
         ["KPERZ/-Z", "briefs.json", "typey"],
         ["ERBGS/SAOEUSZ", "plover.json", "plover"],
         ["KPER/SAOEUZ/-Z", "plover.json", "plover"]
@@ -3776,18 +3776,18 @@ describe('rank outlines', () => {
     it('returns sorted list of outlines for "exercises", prioritising S endings over Z, not in order', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
         ["KPER/SAOEUZ/-Z", "plover.json", "plover"],
-        ["KPERZ/-T", "briefs.json", "typey"],
         ["KPERZ/-Z", "briefs.json", "typey"],
         ["KPERZ/-S", "briefs.json", "typey"],
+        ["KPERZ/-T", "briefs.json", "typey"],
         ["ERBGS/SAOEUSZ", "plover.json", "plover"],
         ["KPERSZ", "typey-type.json", "typey"],
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "exercises", sharedAffixes)).toEqual([
         ["KPERSZ", "typey-type.json", "typey"],
-        ["KPERZ/-T", "briefs.json", "typey"],
         ["KPERZ/-S", "briefs.json", "typey"],
         ["KPERZ/-Z", "briefs.json", "typey"],
+        ["KPERZ/-T", "briefs.json", "typey"],
         ["ERBGS/SAOEUSZ", "plover.json", "plover"],
         ["KPER/SAOEUZ/-Z", "plover.json", "plover"]
       ]);
@@ -3797,7 +3797,6 @@ describe('rank outlines', () => {
     it('returns sorted list of outlines for "exercises", prioritising S endings over Z, not in order, with more than 10 elements', () => {
       let arrayOfStrokesAndTheirSourceDictNames = [
         ["KPER/SAOEUZ/-Z", "plover.json", "plover"],
-        ["KPERZ/-T", "briefs.json", "typey"],
         ["KPERZ/-Z", "briefs.json", "typey"],
         ["KPERZ/-Z", "briefs.json", "typey"],
         ["KPERZ/-Z", "briefs.json", "typey"],
@@ -3805,13 +3804,13 @@ describe('rank outlines', () => {
         ["KPERZ/-Z", "briefs.json", "typey"],
         ["KPERZ/-Z", "briefs.json", "typey"],
         ["KPERZ/-S", "briefs.json", "typey"],
+        ["KPERZ/-T", "briefs.json", "typey"],
         ["ERBGS/SAOEUSZ", "plover.json", "plover"],
         ["KPERSZ", "typey-type.json", "typey"],
       ];
 
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "exercises", sharedAffixes)).toEqual([
         ["KPERSZ", "typey-type.json", "typey"],
-        ["KPERZ/-T", "briefs.json", "typey"],
         ["KPERZ/-S", "briefs.json", "typey"],
         ["KPERZ/-Z", "briefs.json", "typey"],
         ["KPERZ/-Z", "briefs.json", "typey"],
@@ -3819,6 +3818,7 @@ describe('rank outlines', () => {
         ["KPERZ/-Z", "briefs.json", "typey"],
         ["KPERZ/-Z", "briefs.json", "typey"],
         ["KPERZ/-Z", "briefs.json", "typey"],
+        ["KPERZ/-T", "briefs.json", "typey"],
         ["ERBGS/SAOEUSZ", "plover.json", "plover"],
         ["KPER/SAOEUZ/-Z", "plover.json", "plover"]
       ]);
@@ -4043,8 +4043,8 @@ describe('rank outlines', () => {
       expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upstarted", sharedAffixes)).toEqual([
         ["AUP/STARTD", "plover.json", "plover"],
         ["UP/STARTD", "plover.json", "plover"],
-        ["AUP/START/-D", "plover.json", "plover"],
         ["UP/START/-D", "plover.json", "plover"],
+        ["AUP/START/-D", "plover.json", "plover"],
         ["AUP/START/*D", "plover.json", "plover"],
       ]);
     });
