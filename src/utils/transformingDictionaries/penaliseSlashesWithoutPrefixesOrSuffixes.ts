@@ -10,9 +10,9 @@ const penaliseSlashesWithoutPrefixesOrSuffixes = (
   const suffixes = affixes.suffixes;
   const prefixes = affixes.prefixes;
   let penaltyForSlashesWithoutPrefixesOrSuffixes = 0;
-  const numberOfSlashes = outline.match(/\//g);
+  const hasSlashes = outline.includes("/");
 
-  if (numberOfSlashes !== null) {
+  if (hasSlashes) {
     if (hasPrefix(outline, translation, prefixes)) {
       return 0;
     } else if (hasSuffix(outline, translation, suffixes)) {
