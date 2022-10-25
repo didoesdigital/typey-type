@@ -6,6 +6,7 @@ import penaliseSlashes from './penaliseSlashes';
 import penaliseStars from './penaliseStars';
 import chooseSEndingOverZEnding from './chooseSEndingOverZEnding';
 import chooseTEndingOverDEnding from './chooseTEndingOverDEnding';
+import splitIntoStrokesDictsAndNamespaces from './splitIntoStrokesDictsAndNamespaces';
 
 const FINGERSPELLED_LETTERS = {
   "a": "A*",
@@ -136,30 +137,6 @@ const SINGLE_LETTER_WORDS = {
 const punctuationSplittingRegex = /([!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~—–-])/; // includes en and em dashes, curly quotes
 // const punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
 const strokeLookupAttemptsLimit = 12;
-
-const namespaceRegex = new RegExp(`^(?<Source>(${Array.from(SOURCE_NAMESPACES.values()).join('|')})):(?<Name>.+)$`);
-
-function splitIntoStrokesDictsAndNamespaces(strokesAndSources) {
-  let namespacedStrokesAndDicts = strokesAndSources.map(strokesAndSource => {
-    let outline = strokesAndSource[0];
-
-    let sourceDictName;
-    let sourceNamespace;
-    let match = strokesAndSource[1].match(namespaceRegex);
-    if (match !== null) {
-      sourceDictName = match.groups.Name
-      sourceNamespace = match.groups.Source
-    }
-    else {
-      sourceDictName = strokesAndSource[1];
-      sourceNamespace = "";
-    }
-
-    return [outline, sourceDictName, sourceNamespace]
-  })
-
-  return namespacedStrokesAndDicts;
-}
 
 function getRankedOutlineFromLookupEntry(lookupEntry, translation, affixList = AffixList.getSharedInstance()) {
   let namespacedStrokesAndDicts = splitIntoStrokesDictsAndNamespaces(lookupEntry);
