@@ -7,15 +7,12 @@ const penaliseSlashesWithoutPrefixesOrSuffixes = (
   translation: string,
   affixes: AffixObject
 ) => {
-  const suffixes = affixes.suffixes;
-  const prefixes = affixes.prefixes;
   let penaltyForSlashesWithoutPrefixesOrSuffixes = 0;
-  const hasSlashes = outline.includes("/");
 
-  if (hasSlashes) {
-    if (hasPrefix(outline, translation, prefixes)) {
+  if (outline.includes("/")) {
+    if (hasPrefix(outline, translation, affixes.prefixes)) {
       return 0;
-    } else if (hasSuffix(outline, translation, suffixes)) {
+    } else if (hasSuffix(outline, translation, affixes.suffixes)) {
       return 0;
     } else {
       penaltyForSlashesWithoutPrefixesOrSuffixes = 2;
