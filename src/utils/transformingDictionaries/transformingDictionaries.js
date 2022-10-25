@@ -2,10 +2,7 @@ import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from '../../constant/index
 import { AffixList } from '../affixList';
 import misstrokesJSON from '../../json/misstrokes.json'
 import { escapeRegExp } from '../utils';
-import penaliseSlashes from './penaliseSlashes';
-import penaliseStars from './penaliseStars';
-import chooseSEndingOverZEnding from './chooseSEndingOverZEnding';
-import chooseTEndingOverDEnding from './chooseTEndingOverDEnding';
+import rankOutlines from './rankOutlines';
 import splitIntoStrokesDictsAndNamespaces from './splitIntoStrokesDictsAndNamespaces';
 
 const FINGERSPELLED_LETTERS = {
@@ -729,84 +726,6 @@ function generateListOfWordsAndStrokes(wordList, globalLookupDictionary) {
   return sourceAndPresentedMaterial;
 }
 
-function hasPrefix (outline, translation, prefixes) {
-  return prefixes.some(([prefixOutline, prefixTranslation]) => outline.startsWith(prefixOutline) && translation.startsWith(prefixTranslation));
-}
-
-function hasSuffix (outline, translation, suffixes) {
-  return suffixes.some(([suffixOutline, suffixTranslation]) => outline.endsWith(suffixOutline) && translation.endsWith(suffixTranslation));
-}
-
-function penaliseSlashesWithoutPrefixesOrSuffixes(outline, translation, affixes) {
-  let suffixes = affixes.suffixes;
-  let prefixes = affixes.prefixes;
-  let penaltyForSlashesWithoutPrefixesOrSuffixes = 0;
-  let numberOfSlashes = outline.match(/\//g);
-
-  if (numberOfSlashes !== null) {
-    if (hasPrefix(outline, translation, prefixes)) {
-      return 0;
-    }
-    else if (hasSuffix(outline, translation, suffixes)) {
-      return 0;
-    }
-    else {
-      penaltyForSlashesWithoutPrefixesOrSuffixes = 2;
-    }
-  }
-
-  return penaltyForSlashesWithoutPrefixesOrSuffixes;
-}
-
-function rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, translation, affixes = {suffixes: [], prefixes: []}) {
-  misstrokesJSON = misstrokesJSON || {};
-  arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
-    if (a[2] === "user" && b[2] !== "user") { return -1; }
-    if (b[2] === "user" && a[2] !== "user") { return 1; }
-
-    if (a[2] === "plover" && b[2] !== "plover") { return 1; }
-    if (b[2] === "plover" && a[2] !== "plover") { return -1; }
-
-    if (a[1] === "top-10000-project-gutenberg-words.json") { return -1; }
-    if (b[1] === "top-10000-project-gutenberg-words.json") { return 1; }
-
-    if ((misstrokesJSON[a[0]] === translation) && !(misstrokesJSON[b[0]] === translation)) { return 1; }
-    if ((misstrokesJSON[b[0]] === translation) && !(misstrokesJSON[a[0]] === translation)) { return -1; }
-
-    let outlineA = a[0];
-    let outlineB = b[0];
-    let outlineALengthWithAllPenalties = outlineA.length;
-    let outlineBLengthWithAllPenalties = outlineB.length;
-
-    outlineALengthWithAllPenalties += penaliseStars(outlineA, translation);
-    outlineBLengthWithAllPenalties += penaliseStars(outlineB, translation);
-
-    outlineALengthWithAllPenalties += penaliseSlashes(outlineA, translation);
-    outlineBLengthWithAllPenalties += penaliseSlashes(outlineB, translation);
-
-    outlineALengthWithAllPenalties += penaliseSlashesWithoutPrefixesOrSuffixes(outlineA, translation, affixes);
-    outlineBLengthWithAllPenalties += penaliseSlashesWithoutPrefixesOrSuffixes(outlineB, translation, affixes);
-
-    if (outlineALengthWithAllPenalties === outlineBLengthWithAllPenalties) {
-      let outlineALastLetter = outlineA[outlineA.length - 1];
-      let outlineBLastLetter = outlineB[outlineB.length - 1];
-
-      if ("SZ".indexOf(outlineALastLetter) !== -1 && "SZ".indexOf(outlineBLastLetter) !== -1)
-      {
-        return chooseSEndingOverZEnding(outlineALastLetter, outlineBLastLetter);
-      }
-
-      if ("TD".indexOf(outlineALastLetter) !== -1 && "TD".indexOf(outlineBLastLetter) !== -1)
-      {
-        return chooseTEndingOverDEnding(outlineALastLetter, outlineBLastLetter, translation);
-      }
-    }
-
-    return outlineALengthWithAllPenalties - outlineBLengthWithAllPenalties;
-  });
-  return arrayOfStrokesAndTheirSourceDictNames;
-}
-
 function rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary) {
   // This code causes the browser to hang
   // for (let [translation, outlinesAndSourceDicts] of combinedLookupDictionary) {
@@ -898,6 +817,5 @@ export {
   generateListOfWordsAndStrokes,
   getListOfValidDictionariesAddedAndInConfig,
   rankAllOutlinesInCombinedLookupDictionary,
-  rankOutlines,
   splitIntoStrokesDictsAndNamespaces
 };

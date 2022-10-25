@@ -3,9 +3,9 @@ import { Component } from 'react';
 import { SOURCE_NAMESPACES } from '../constant/index.js';
 import { AffixList } from '../utils/affixList';
 import {
-  rankOutlines,
   splitIntoStrokesDictsAndNamespaces
 } from '../utils/transformingDictionaries/transformingDictionaries';
+import rankOutlines from '../utils/transformingDictionaries/rankOutlines';
 import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
 import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
 import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiagram';

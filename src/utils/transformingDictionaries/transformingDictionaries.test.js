@@ -5,8 +5,8 @@ import {
   createStrokeHintForPhrase,
   combineValidDictionaries,
   generateListOfWordsAndStrokes,
-  rankOutlines,
 } from './transformingDictionaries';
+import rankOutlines from './rankOutlines';
 import { AffixList } from '../affixList';
 import misstrokesJSON from '../../json/misstrokes.json'
 
