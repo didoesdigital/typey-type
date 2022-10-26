@@ -8,16 +8,12 @@ const getRankedOutlineFromLookupEntry = (
   lookupEntry: LookupDictValues,
   translation: string,
   affixList = AffixList.getSharedInstance()
-) => {
-  let namespacedStrokesAndDicts =
-    splitIntoStrokesDictsAndNamespaces(lookupEntry);
-
-  return rankOutlines(
-    namespacedStrokesAndDicts,
+) =>
+  rankOutlines(
+    splitIntoStrokesDictsAndNamespaces(lookupEntry),
     misstrokesJSON,
     translation,
     affixList
   )[0][0];
-};
 
 export default getRankedOutlineFromLookupEntry;
