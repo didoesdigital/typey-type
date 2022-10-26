@@ -6,11 +6,8 @@ describe("getRankedOutlineFromLookupEntry", () => {
   beforeEach(() => {
     const affixList = new AffixList(
       new Map([
-        ["{^en}", [["*EPB", "typey:typey-type.json"]]],
-        ["{^ment}", [["*PLT", "typey:typey-type.json"]]],
-        ["{a^}", [["A", "typey:typey-type.json"]]],
-        ["{in^}", [["EUPB", "typey:typey-type.json"]]],
-        ["{^ly}", [["HREU", "typey:typey-type.json"]]],
+        ["{con^}", [["KAUPB", "typey:typey-type.json"]]],
+        ["{^ent}", [["EPBT", "typey:typey-type.json"]]],
       ])
     );
     AffixList.setSharedInstance(affixList);
