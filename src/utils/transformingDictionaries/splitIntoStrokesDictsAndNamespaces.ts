@@ -13,11 +13,12 @@ const splitIntoStrokesDictsAndNamespaces = (
     const outline = strokesAndSource[0];
 
     const match = strokesAndSource[1].match(namespaceRegex);
-    const sourceDictNameAndNamespace = match
+    const sourceDictNameAndNamespace: [string, string] = match
       ? [match.groups?.Name || "", match.groups?.Source || ""]
       : [strokesAndSource[1], ""];
 
-    return [outline, ...sourceDictNameAndNamespace];
+    const result: [string, string, string] = [outline, ...sourceDictNameAndNamespace];
+    return result;
   });
 
 export default splitIntoStrokesDictsAndNamespaces;
