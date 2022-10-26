@@ -1,9 +1,7 @@
 import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from '../../constant/index.js';
 import { AffixList } from '../affixList';
-import misstrokesJSON from '../../json/misstrokes.json'
 import { escapeRegExp } from '../utils';
-import rankOutlines from './rankOutlines';
-import splitIntoStrokesDictsAndNamespaces from './splitIntoStrokesDictsAndNamespaces';
+import getRankedOutlineFromLookupEntry from './getRankedOutlineFromLookupEntry';
 
 const FINGERSPELLED_LETTERS = {
   "a": "A*",
@@ -134,12 +132,6 @@ const SINGLE_LETTER_WORDS = {
 const punctuationSplittingRegex = /([!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~—–-])/; // includes en and em dashes, curly quotes
 // const punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
 const strokeLookupAttemptsLimit = 12;
-
-function getRankedOutlineFromLookupEntry(lookupEntry, translation, affixList = AffixList.getSharedInstance()) {
-  let namespacedStrokesAndDicts = splitIntoStrokesDictsAndNamespaces(lookupEntry);
-
-  return rankOutlines(namespacedStrokesAndDicts, misstrokesJSON, translation, affixList)[0][0];
-}
 
 function findFingerspellingOutline(wordOrPhrase, globalLookupDictionary, strokeForOneCharacterWordPart, affixList, precedingChar) {
   if (precedingChar === ' ') {
