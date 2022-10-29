@@ -116,7 +116,7 @@ describe("findFingerspellingOutline", () => {
     ]);
     expect(
       findFingerspellingOutline("0", lookupDict, "0", affixList, undefined)
-    ).toEqual("0");
+    ).toEqual("0"); // thanks to FINGERSPELLED_LETTERS
   });
 
   it("returns on-the-fly fingerspelled outline for 0 in “20/20.” with personal dicts with no available outline for phrase, and with alternative number fingerspelling outline", () => {
