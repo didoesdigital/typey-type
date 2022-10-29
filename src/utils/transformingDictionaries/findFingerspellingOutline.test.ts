@@ -240,4 +240,17 @@ describe("findFingerspellingOutline", () => {
       findFingerspellingOutline("—", lookupDict, "EPL/TKA*RB", affixList, " ")
     ).toEqual("EPL/TKA*RB"); // thanks to FINGERSPELLED_LETTERS
   });
+
+  it("returns on-the-fly fingerspelled outline for “t” in “t'other” with preceding space char", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      ["t", [["T*/SP-S", "typey:typey-type.json"]]],
+      ["other", [["OER", "typey:typey-type.json"]]],
+      ["{'^}", [["A*E", "typey:typey-type.json"]]],
+      ["{^'}", [["AE", "typey:typey-type.json"]]],
+    ]);
+    expect(
+      findFingerspellingOutline("t", lookupDict, "T*", affixList, " ")
+    ).toEqual("T*/SP-S");
+  });
 });
