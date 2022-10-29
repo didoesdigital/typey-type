@@ -13,6 +13,10 @@ describe("getRankedOutlineFromLookupEntry", () => {
     AffixList.setSharedInstance(affixList);
   });
 
+  afterEach(() => {
+    AffixList.setSharedInstance([]);
+  });
+
   it("splits the dict names into namespaces and returns the ranked outline with provided affixList", () => {
     const lookupEntry: LookupDictValues = [
       ["KOPB/S*EUS/TEPBT", "typey:typey-type.json"],

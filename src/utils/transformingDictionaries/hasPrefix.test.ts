@@ -15,6 +15,10 @@ describe("hasPrefix", () => {
     AffixList.setSharedInstance(affixList);
   });
 
+  afterEach(() => {
+    AffixList.setSharedInstance([]);
+  });
+
   it("returns true for outline with prefix", () => {
     const outline = "A/HROEPB";
     const translation = "along";

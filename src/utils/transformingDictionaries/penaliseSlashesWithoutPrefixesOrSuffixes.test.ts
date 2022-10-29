@@ -15,6 +15,10 @@ describe("penaliseSlashesWithoutPrefixesOrSuffixes", () => {
     AffixList.setSharedInstance(affixList);
   });
 
+  afterEach(() => {
+    AffixList.setSharedInstance([]);
+  });
+
   it("returns penalty of 2 for multi-stroke outlines without affix strokes", () => {
     const outline = "TKPWUT/*EPB/PWERG";
     const translation = "Gutenberg";

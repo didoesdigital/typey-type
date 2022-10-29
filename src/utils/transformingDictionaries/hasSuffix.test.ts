@@ -15,6 +15,10 @@ describe("hasSuffix", () => {
     AffixList.setSharedInstance(affixList);
   });
 
+  afterEach(() => {
+    AffixList.setSharedInstance([]);
+  });
+
   it("returns true for outline with suffix", () => {
     const outline = "SWEUFT/HREU";
     const translation = "swiftly";
