@@ -87,4 +87,15 @@ describe("findFingerspellingOutline", () => {
       findFingerspellingOutline("e", lookupDict, "*E", affixList, undefined)
     ).toEqual("*E");
   });
+
+  it("returns fingerspelled outline for letter e in grinned, which has no available outline, and no orthography magic yet", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      ["grin", [["TKPWREUPB", "typey-type.json"]]],
+      ["{^ed}", [["-D", "typey-type.json"]]],
+    ]);
+    expect(
+      findFingerspellingOutline("e", lookupDict, "*E", affixList, undefined)
+    ).toEqual("*E");
+  });
 });
