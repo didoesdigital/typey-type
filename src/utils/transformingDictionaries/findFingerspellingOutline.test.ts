@@ -114,4 +114,33 @@ describe("findFingerspellingOutline", () => {
       findFingerspellingOutline("e", lookupDict, "*E", affixList, undefined)
     ).toEqual("EFPLT");
   });
+
+  it("returns hard-coded number format for on-the-fly fingerspelled outline for 0 in “20/20.” with no personal dicts with available outline", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      // ["{&0}", [
+      //   ["#O", "typey:typey-type.json"],
+      // ]],
+    ]);
+    expect(
+      findFingerspellingOutline("0", lookupDict, "0", affixList, undefined)
+    ).toEqual("0");
+  });
+
+  it("returns on-the-fly fingerspelled outline for 0 in “20/20.” with personal dicts with no available outline, and with alternative number fingerspelling outline", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      [
+        "{&0}",
+        [
+          ["#O", "typey:typey-type.json"],
+          ["#O", "user:numbers.json"],
+          ["#0", "typey:typey-type.json"],
+        ],
+      ],
+    ]);
+    expect(
+      findFingerspellingOutline("0", lookupDict, "0", affixList, undefined)
+    ).toEqual("#O");
+  });
 });
