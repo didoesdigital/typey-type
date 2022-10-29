@@ -213,13 +213,31 @@ describe("findFingerspellingOutline", () => {
       ],
     ]);
     expect(
-      findFingerspellingOutline(
-        ",",
-        lookupDict,
-        "KW-BG",
-        affixList,
-        undefined
-      )
+      findFingerspellingOutline(",", lookupDict, "KW-BG", affixList, undefined)
     ).toEqual("KW-BG");
+  });
+
+  it("returns on-the-fly fingerspelled outline for — em dash in “—whack—”", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      // [
+      //   "—",
+      //   [
+      //     ["PH-RB", "user:dict.json" ],
+      //     ["PH-RB", "plover:plover.json"],
+      //   ],
+      // ],
+      [
+        "{^}—{^}",
+        [
+          ["PH-RB", "typey:typey-type.json"],
+          // ["EPL/TKA*RB", "user:punctuation-unspaced.json",],
+          // ["SPWO*L/EPL/TKARB", "user:symbols.json",]
+        ],
+      ],
+    ]);
+    expect(
+      findFingerspellingOutline("—", lookupDict, "EPL/TKA*RB", affixList, " ")
+    ).toEqual("EPL/TKA*RB"); // thanks to FINGERSPELLED_LETTERS
   });
 });
