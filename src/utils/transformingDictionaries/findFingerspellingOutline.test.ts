@@ -88,14 +88,30 @@ describe("findFingerspellingOutline", () => {
     ).toEqual("*E");
   });
 
-  it("returns fingerspelled outline for letter e in grinned, which has no available outline, and no orthography magic yet", () => {
+  it("returns fingerspelled outline for letter e in grinned with no personal dicts, which has no available outline, and no orthography magic yet", () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([
-      ["grin", [["TKPWREUPB", "typey-type.json"]]],
-      ["{^ed}", [["-D", "typey-type.json"]]],
+      ["grin", [["TKPWREUPB", "typey:typey-type.json"]]],
+      ["{^ed}", [["-D", "typey:typey-type.json"]]],
+      ["{>}{&e}", [["*E", "typey:typey-type.json"]]],
+      ["{&e}", [["*E", "typey:typey-type.json"]]],
     ]);
     expect(
       findFingerspellingOutline("e", lookupDict, "*E", affixList, undefined)
     ).toEqual("*E");
+  });
+
+  it("returns fingerspelled outline for letter e in grinned with personal dicts and alternative letter fingerspelling outline", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      ["grin", [["TKPWREUPB", "typey:typey-type.json"]]],
+      ["{^ed}", [["-D", "typey:typey-type.json"]]],
+      ["{&e}", [["EFPLT", "user:fingerspelling-FPLT.json"]]],
+      ["{>}{&e}", [["*E", "typey:typey-type.json"]]],
+      // ["{&e}", [["*E", "typey:typey-type.json"]]],
+    ]);
+    expect(
+      findFingerspellingOutline("e", lookupDict, "*E", affixList, undefined)
+    ).toEqual("EFPLT");
   });
 });
