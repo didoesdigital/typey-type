@@ -5,7 +5,7 @@ const findFingerspellingOutline = (
   globalLookupDictionary: any,
   strokeForOneCharacterWordPart: string,
   affixList: any,
-  precedingChar: string
+  precedingChar?: string
 ) => {
   if (precedingChar === " ") {
     let modifiedWordOrPhrase = `{${wordOrPhrase}}`; // for `houses?" It`
