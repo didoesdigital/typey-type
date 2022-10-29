@@ -267,4 +267,17 @@ describe("findFingerspellingOutline", () => {
       findFingerspellingOutline("s", lookupDict, "S*", affixList, undefined)
     ).toEqual("S*");
   });
+
+  it("returns on-the-fly fingerspelled outline for comma in “hand-bag,” with no preceding char", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      ["hand", [["HAPBD", "typey:typey-type.json"]]],
+      ["bag", [["PWAG", "typey:typey-type.json"]]],
+      ["{^-^}", [["H-PB", "typey:typey-type.json"]]],
+      ["{,}", [["KW-BG", "typey:typey-type.json"]]],
+    ]);
+    expect(
+      findFingerspellingOutline(",", lookupDict, "KW-BG", affixList, undefined)
+    ).toEqual("KW-BG");
+  });
 });
