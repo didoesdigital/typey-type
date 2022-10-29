@@ -17,6 +17,10 @@ describe("findFingerspellingOutline", () => {
     AffixList.setSharedInstance(affixList);
   });
 
+  afterEach(() => {
+    AffixList.setSharedInstance([]);
+  });
+
   const affixList = AffixList.getSharedInstance();
 
   it("returns fingerspelled outline for symbol", () => {
