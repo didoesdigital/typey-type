@@ -253,4 +253,18 @@ describe("findFingerspellingOutline", () => {
       findFingerspellingOutline("t", lookupDict, "T*", affixList, " ")
     ).toEqual("T*/SP-S");
   });
+
+  it("returns on-the-fly fingerspelled outline for “s” in “Carnations;” with no preceding char", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      ["carnation", [["KARPB/AEUGS", "typey:typey-type.json"]]],
+      ["{^s}", [["-S", "typey:typey-type.json"]]],
+      ["{^};{^}", [["SKHR-PB", "typey:typey-type.json"]]],
+      ["{ }{-|}", [["KPA", "typey:typey-type.json"]]],
+      ["{^}{-|}", [["KPA*", "typey:typey-type.json"]]],
+    ]);
+    expect(
+      findFingerspellingOutline("s", lookupDict, "S*", affixList, undefined)
+    ).toEqual("S*");
+  });
 });
