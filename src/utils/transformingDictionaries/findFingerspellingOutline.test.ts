@@ -160,4 +160,44 @@ describe("findFingerspellingOutline", () => {
       findFingerspellingOutline("&", lookupDict, "SKP*", affixList, "")
     ).toEqual("SP-PBD");
   });
+
+  it("returns on-the-fly fingerspelled outline for [ in “[1]” with preceding space character", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      ["[", [["PWR-BT", "plover:plover.json"]]],
+      ["{[}", [["PWR-BG", "typey:typey-type.json"]]],
+      [
+        "{^[^}",
+        [
+          ["PWR-BGT", "typey:typey-type.json"],
+          ["PWR-BG", "plover:plover.json"],
+          ["PWR*BGS", "plover:plover.json"],
+        ],
+      ],
+      ["{[^}", [["PWR-BGT", "plover:plover.json"]]],
+    ]);
+    expect(
+      findFingerspellingOutline("[", lookupDict, "PWR-BGT", affixList, " ")
+    ).toEqual("PWR-BG");
+  });
+
+  it("returns on-the-fly fingerspelled outline for [ in “.[” with no preceding character", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      ["[", [["PWR-BT", "plover:plover.json"]]],
+      ["{[}", [["PWR-BG", "typey:typey-type.json"]]],
+      [
+        "{^[^}",
+        [
+          ["PWR-BGT", "typey:typey-type.json"],
+          ["PWR-BG", "plover:plover.json"],
+          ["PWR*BGS", "plover:plover.json"],
+        ],
+      ],
+      ["{[^}", [["PWR-BGT", "plover:plover.json"]]],
+    ]);
+    expect(
+      findFingerspellingOutline("[", lookupDict, "PWR-BGT", affixList, "")
+    ).toEqual("PWR-BGT");
+  });
 });
