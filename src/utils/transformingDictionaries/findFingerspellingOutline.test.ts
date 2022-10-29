@@ -12,6 +12,7 @@ describe("findFingerspellingOutline", () => {
         ["{^ly}", [["HREU", "typey:typey-type.json"]]],
         ["{con^}", [["KAUPB", "typey:typey-type.json"]]],
         ["{^ent}", [["EPBT", "typey:typey-type.json"]]],
+        ["{^ed}", [["-D", "typey:typey-type.json"]]],
       ])
     );
     AffixList.setSharedInstance(affixList);
@@ -21,9 +22,8 @@ describe("findFingerspellingOutline", () => {
     AffixList.setSharedInstance([]);
   });
 
-  const affixList = AffixList.getSharedInstance();
-
   it("returns fingerspelled outline for symbol", () => {
+    const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([["&", [["SKP", "typey-type.json"]]]]);
     expect(
       findFingerspellingOutline("&", lookupDict, "SKP*", affixList, "")
@@ -31,6 +31,7 @@ describe("findFingerspellingOutline", () => {
   });
 
   it('returns fingerspelled outline for phrase `houses?" It`', () => {
+    const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([
       ["{?}", [["H-F", "typey-type.json"]]],
       ["it", [["EUT", "typey-type.json"]]],
@@ -43,6 +44,7 @@ describe("findFingerspellingOutline", () => {
   });
 
   it("returns fingerspelled outline from personal dict for glued B", () => {
+    const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([
       [
         "{&B}",
@@ -59,6 +61,7 @@ describe("findFingerspellingOutline", () => {
   });
 
   it("returns fingerspelled outline from personal dict for C", () => {
+    const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([
       [
         "{&B}",
@@ -72,5 +75,16 @@ describe("findFingerspellingOutline", () => {
     expect(
       findFingerspellingOutline("C", lookupDict, "KR*P", affixList, "")
     ).toEqual("KR*P");
+  });
+
+  it("returns fingerspelled outline for letter e in grinned, which has no available outline, and no orthography magic yet", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      ["grin", [["TKPWREUPB", "typey-type.json"]]],
+      ["{^ed}", [["-D", "typey-type.json"]]],
+    ]);
+    expect(
+      findFingerspellingOutline("e", lookupDict, "*E", affixList, undefined)
+    ).toEqual("*E");
   });
 });
