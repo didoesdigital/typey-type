@@ -259,6 +259,7 @@ describe("findFingerspellingOutline", () => {
     const lookupDict = new Map([
       ["carnation", [["KARPB/AEUGS", "typey:typey-type.json"]]],
       ["{^s}", [["-S", "typey:typey-type.json"]]],
+      ["{>}{&s}", [["S*", "typey:typey-type.json"]]],
       ["{^};{^}", [["SKHR-PB", "typey:typey-type.json"]]],
       ["{ }{-|}", [["KPA", "typey:typey-type.json"]]],
       ["{^}{-|}", [["KPA*", "typey:typey-type.json"]]],
