@@ -200,4 +200,26 @@ describe("findFingerspellingOutline", () => {
       findFingerspellingOutline("[", lookupDict, "PWR-BGT", affixList, "")
     ).toEqual("PWR-BGT");
   });
+
+  it("returns on-the-fly fingerspelled outline for comma in “krr,”", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      [
+        ",",
+        [
+          ["KW-BG", "typey:typey.json"],
+          ["KW-BG", "plover:plover.json"],
+        ],
+      ],
+    ]);
+    expect(
+      findFingerspellingOutline(
+        ",",
+        lookupDict,
+        "KW-BG",
+        affixList,
+        undefined
+      )
+    ).toEqual("KW-BG");
+  });
 });
