@@ -33,10 +33,10 @@ describe("findFingerspellingOutline", () => {
   it('returns fingerspelled outline for phrase `houses?" It`', () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([
-      ["{?}", [["H-F", "typey-type.json"]]],
-      ["it", [["EUT", "typey-type.json"]]],
-      ["houses", [["HOUSZ", "typey-type.json"]]],
-      ["{}{-|}", [["KPA", "typey-type.json"]]],
+      ["{?}", [["H-F", "typey:typey-type.json"]]],
+      ["it", [["EUT", "typey:typey-type.json"]]],
+      ["houses", [["HOUSZ", "typey:typey-type.json"]]],
+      ["{}{-|}", [["KPA", "typey:typey-type.json"]]],
     ]);
     expect(
       findFingerspellingOutline('"', lookupDict, "KR-GS", affixList, "?")
@@ -80,8 +80,8 @@ describe("findFingerspellingOutline", () => {
   it("returns fingerspelled outline for letter e in grinned, which has no available outline, and no orthography magic yet", () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([
-      ["grin", [["TKPWREUPB", "typey-type.json"]]],
-      ["{^ed}", [["-D", "typey-type.json"]]],
+      ["grin", [["TKPWREUPB", "typey:typey-type.json"]]],
+      ["{^ed}", [["-D", "typey:typey-type.json"]]],
     ]);
     expect(
       findFingerspellingOutline("e", lookupDict, "*E", affixList, undefined)
