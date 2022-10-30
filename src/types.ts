@@ -100,7 +100,10 @@ export type StenoDictionary = {
  *   "{}" => [["WUZ/WUZ, "typey:typey-type.json""]]
  * }
  */
-export type LookupDictWithNamespacedDicts = Map<Translation, StrokeAndNamespacedDict[]>;
+export type LookupDictWithNamespacedDicts = Map<
+  Translation,
+  StrokeAndNamespacedDict[]
+>;
 
 /**
  * Examples:
@@ -148,4 +151,7 @@ export type PrefixEntry = [PrefixOutlineWithSlash, PrefixTextWithNoTPRBGTS];
  * Example:
  * [ "/AOEUBL", "izable" ]
  */
-export type SuffixEntry = [SuffixOutlineWithLeadingSlash, SuffixTextWithNoTPRBGTS];
+export type SuffixEntry = [
+  SuffixOutlineWithLeadingSlash,
+  SuffixTextWithNoTPRBGTS
+];
