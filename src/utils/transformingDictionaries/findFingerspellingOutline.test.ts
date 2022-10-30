@@ -28,7 +28,7 @@ describe("findFingerspellingOutline", () => {
       ["{?}", [["H-F", "typey:typey-type.json"]]],
       ["it", [["EUT", "typey:typey-type.json"]]],
       ["houses", [["HOUSZ", "typey:typey-type.json"]]],
-      ["{}{-|}", [["KPA", "typey:typey-type.json"]]],
+      ["{ }{-|}", [["KPA", "typey:typey-type.json"]]],
     ]);
     expect(
       findFingerspellingOutline('"', lookupDict, "KR-GS", affixList, "?")
