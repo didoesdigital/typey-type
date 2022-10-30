@@ -1,6 +1,6 @@
 import getRankedOutlineFromLookupEntry from "./getRankedOutlineFromLookupEntry";
 import { AffixList } from "../affixList";
-import type { LookupDictValues } from "../../types";
+import type { StrokeAndNamespacedDict } from "../../types";
 
 describe("getRankedOutlineFromLookupEntry", () => {
   beforeEach(() => {
@@ -18,7 +18,7 @@ describe("getRankedOutlineFromLookupEntry", () => {
   });
 
   it("splits the dict names into namespaces and returns the ranked outline with provided affixList", () => {
-    const lookupEntry: LookupDictValues = [
+    const lookupEntry: StrokeAndNamespacedDict[] = [
       ["KOPB/S*EUS/TEPBT", "typey:typey-type.json"],
       ["KAUPB/SEUS/TEPBT", "typey:typey-type.json"],
       ["KOPB/SEUS/TEPBT", "typey:typey-type.json"],
@@ -39,7 +39,7 @@ describe("getRankedOutlineFromLookupEntry", () => {
   });
 
   it("splits the dict names into namespaces and returns the ranked outline without an affixList", () => {
-    const lookupEntry: LookupDictValues = [
+    const lookupEntry: StrokeAndNamespacedDict[] = [
       ["KOPB/S*EUS/TEPBT", "typey:typey-type.json"],
       ["KAUPB/SEUS/TEPBT", "typey:typey-type.json"],
       ["KOPB/SEUS/TEPBT", "typey:typey-type.json"],

@@ -1,8 +1,9 @@
 import getRankedOutlineFromLookupEntry from "./getRankedOutlineFromLookupEntry";
+import type { LookupDictWithNamespacedDicts } from "../../types";
 
 const findSingleLetterWordOutline = (
   wordOrPhrase: string,
-  globalLookupDictionary: any,
+  globalLookupDictionary: LookupDictWithNamespacedDicts,
   strokeForOneCharacterWord: string,
   affixList: any,
   precedingChar: string
