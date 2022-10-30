@@ -1,4 +1,4 @@
-import rankOutlines from "./rankOutlines/rankOutlines";
+import rankOutlines from "./rankOutlines";
 
 describe("rankOutlines", () => {
   it("returns A user entry before B non-user entry", () => {
