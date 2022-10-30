@@ -1,11 +1,11 @@
 import getRankedOutlineFromLookupEntry from "./getRankedOutlineFromLookupEntry";
-import type { LookupDictWithNamespacedDicts } from "../../types";
+import type { AffixObject, LookupDictWithNamespacedDicts } from "../../types";
 
 const findFingerspellingOutline = (
   wordOrPhrase: string,
   globalLookupDictionary: LookupDictWithNamespacedDicts,
   strokeForOneCharacterWordPart: string,
-  affixList: any,
+  affixList: AffixObject,
   precedingChar?: string // TODO: make this required and union undefined, and explicitly pass undefined where presently unused
 ) => {
   if (precedingChar === " ") {

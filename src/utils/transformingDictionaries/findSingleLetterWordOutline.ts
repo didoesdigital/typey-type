@@ -1,11 +1,11 @@
 import getRankedOutlineFromLookupEntry from "./getRankedOutlineFromLookupEntry";
-import type { LookupDictWithNamespacedDicts } from "../../types";
+import type { AffixObject, LookupDictWithNamespacedDicts } from "../../types";
 
 const findSingleLetterWordOutline = (
   wordOrPhrase: string,
   globalLookupDictionary: LookupDictWithNamespacedDicts,
   strokeForOneCharacterWord: string,
-  affixList: any,
+  affixList: AffixObject,
   precedingChar: string
 ) => {
   // try look it up from personal dictionaries:

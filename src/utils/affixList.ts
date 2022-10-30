@@ -1,5 +1,6 @@
 import type {
   LookupDictWithNamespacedDicts,
+  AffixObject,
   PrefixEntry,
   PrefixOutlineWithSlash,
   PrefixTextWithNoTPRBGTS,
@@ -8,7 +9,7 @@ import type {
   SuffixTextWithNoTPRBGTS,
 } from "../types";
 
-let SHARED_INSTANCE = { suffixes: [], prefixes: [] };
+let SHARED_INSTANCE: AffixObject = { suffixes: [], prefixes: [] };
 
 export class AffixList {
   suffixes: SuffixEntry[];

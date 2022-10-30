@@ -1,4 +1,4 @@
-import type { StenoDictionary } from "../../../types";
+import type { AffixObject, StenoDictionary } from "../../../types";
 import chooseSEndingOverZEnding from "./chooseSEndingOverZEnding";
 import chooseTEndingOverDEnding from "./chooseTEndingOverDEnding";
 import penaliseSlashes from "./penaliseSlashes";
@@ -9,7 +9,7 @@ function rankOutlines(
   arrayOfStrokesAndTheirSourceDictNames: [string, string, string][],
   misstrokesJSON: StenoDictionary,
   translation: string,
-  affixes = { suffixes: [], prefixes: [] }
+  affixes: AffixObject = { suffixes: [], prefixes: [] }
 ) {
   misstrokesJSON = misstrokesJSON || {};
   arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
