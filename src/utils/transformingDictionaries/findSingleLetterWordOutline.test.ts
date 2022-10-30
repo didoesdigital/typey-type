@@ -22,7 +22,7 @@ describe("findSingleLetterWordOutline", () => {
     AffixList.setSharedInstance([]);
   });
 
-  it("returns fingerspelled outline for word “a” in the middle of a sentence with no personal dictionary entry", () => {
+  it("returns outline for word “a” in the middle of a sentence with no personal dictionary entry", () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([["a", [["AEU", "typey:typey-type.json"]]]]);
     expect(
@@ -30,7 +30,7 @@ describe("findSingleLetterWordOutline", () => {
     ).toEqual("AEU");
   });
 
-  it("returns fingerspelled outline for word “a” in the middle of a sentence with personal dictionary entry for “a”", () => {
+  it("returns outline for word “a” in the middle of a sentence with personal dictionary entry for “a”", () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([
       [
@@ -46,7 +46,7 @@ describe("findSingleLetterWordOutline", () => {
     ).toEqual("AEUZ");
   });
 
-  it("returns fingerspelled outline for word “A” at the start of a lesson with no personal dictionary entry", () => {
+  it("returns outline for word “A” at the start of a lesson with no personal dictionary entry", () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([
       ["a", [["AEU", "typey:typey-type.json"]]],
@@ -58,7 +58,7 @@ describe("findSingleLetterWordOutline", () => {
     ).toEqual("KPA/AEU");
   });
 
-  it("returns fingerspelled outline for word “A” at the start of a lesson with personal dictionary entry for “a” and capitalisation strokes", () => {
+  it("returns outline for word “A” at the start of a lesson with personal dictionary entry for “a” and capitalisation strokes", () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([
       [
@@ -89,7 +89,7 @@ describe("findSingleLetterWordOutline", () => {
     ).toEqual("KPAZ/AEUZ");
   });
 
-  it("returns fingerspelled outline for word “I” in the middle of a sentence with no personal dictionary entry", () => {
+  it("returns outline for word “I” in the middle of a sentence with no personal dictionary entry", () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([["I", [["EU", "typey:typey-type.json"]]]]);
     expect(
@@ -97,7 +97,7 @@ describe("findSingleLetterWordOutline", () => {
     ).toEqual("EU");
   });
 
-  it("returns fingerspelled outline for word “I” in the middle of a sentence with personal dictionary entry for “I”", () => {
+  it("returns outline for word “I” in the middle of a sentence with personal dictionary entry for “I”", () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([
       [
