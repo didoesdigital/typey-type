@@ -106,21 +106,6 @@ export type LookupDictWithNamespacedDicts = Map<
 >;
 
 /**
- * Examples:
- * ["A*UT/", "auto"],
- * ["/WAL", "ual"],
- */
-export type AffixItem = [
-  PrefixOutlineWithSlash | SuffixOutlineWithLeadingSlash,
-  PrefixTextWithNoTPRBGTS | SuffixTextWithNoTPRBGTS
-];
-
-export type AffixObject = {
-  prefixes: AffixItem[];
-  suffixes: AffixItem[];
-};
-
-/**
  * Example:
  * "/AOUL/A*T"
  */
@@ -158,3 +143,25 @@ export type SuffixEntry = [
   SuffixOutlineWithLeadingSlash,
   SuffixTextWithNoTPRBGTS
 ];
+
+/**
+ * Examples:
+ * ["A*UT/", "auto"],
+ * ["/WAL", "ual"],
+ */
+export type AffixItem = [
+  PrefixOutlineWithSlash | SuffixOutlineWithLeadingSlash,
+  PrefixTextWithNoTPRBGTS | SuffixTextWithNoTPRBGTS
+];
+
+/**
+ * Example:
+ * {
+ *   prefixes: [["A*UT/", "auto"], ["TPHRAOUR/", "fluoro"]],
+ *   suffixes: [["/WAL", "ual"], ["/AOEUBL", "izable"]]
+ * }
+ */
+export type AffixObject = {
+  prefixes: AffixItem[];
+  suffixes: AffixItem[];
+};
