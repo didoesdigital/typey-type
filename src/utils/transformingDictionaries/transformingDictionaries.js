@@ -262,7 +262,6 @@ function getListOfValidDictionariesAddedAndInConfig(dictNamesFromAddedConfig, na
 
 export {
   addOutlinesToWordsInCombinedDict,
-  chooseOutlineForPhrase,
   combineValidDictionaries,
   createStrokeHintForPhrase,
   createAGlobalLookupDictionary,

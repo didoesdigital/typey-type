@@ -1,11 +1,11 @@
 import {
   addOutlinesToWordsInCombinedDict,
-  chooseOutlineForPhrase,
   createAGlobalLookupDictionary,
   createStrokeHintForPhrase,
   combineValidDictionaries,
   generateListOfWordsAndStrokes,
 } from './transformingDictionaries';
+import chooseOutlineForPhrase from "./chooseOutlineForPhrase";
 import rankOutlines from './rankOutlines/rankOutlines';
 import { AffixList } from '../affixList';
 import misstrokesJSON from '../../json/misstrokes.json'
