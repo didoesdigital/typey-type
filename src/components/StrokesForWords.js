@@ -3,7 +3,7 @@ import { Component } from 'react';
 import { SOURCE_NAMESPACES } from '../constant/index.js';
 import { AffixList } from '../utils/affixList';
 import splitIntoStrokesDictsAndNamespaces from "../utils/transformingDictionaries/splitIntoStrokesDictsAndNamespaces";
-import rankOutlines from '../utils/transformingDictionaries/rankOutlines';
+import rankOutlines from '../utils/transformingDictionaries/rankOutlines/rankOutlines';
 import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
 import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
 import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiagram';

@@ -6,7 +6,7 @@ import {
   combineValidDictionaries,
   generateListOfWordsAndStrokes,
 } from './transformingDictionaries';
-import rankOutlines from './rankOutlines';
+import rankOutlines from './rankOutlines/rankOutlines';
 import { AffixList } from '../affixList';
 import misstrokesJSON from '../../json/misstrokes.json'
 

@@ -1,4 +1,4 @@
-import rankOutlines from "./rankOutlines";
+import rankOutlines from "./rankOutlines/rankOutlines";
 import splitIntoStrokesDictsAndNamespaces from "./splitIntoStrokesDictsAndNamespaces";
 import misstrokesJSON from "../../json/misstrokes.json";
 import { AffixList } from "../affixList";
