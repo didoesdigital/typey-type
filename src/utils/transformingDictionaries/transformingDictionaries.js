@@ -4,6 +4,7 @@ import { escapeRegExp } from '../utils';
 import getRankedOutlineFromLookupEntry from './getRankedOutlineFromLookupEntry';
 import findFingerspellingOutline from './findFingerspellingOutline';
 import findSingleLetterWordOutline from './findSingleLetterWordOutline';
+import createFingerspellingStroke from './createFingerspellingStroke';
 
 const FINGERSPELLED_LETTERS = {
   "a": "A*",
@@ -521,20 +522,6 @@ function tryMatchingCompoundWords(compoundWordParts, globalLookupDictionary, str
   }
 
   return [strokes, stroke, strokeLookupAttempts];
-}
-
-function createFingerspellingStroke(inputText, globalLookupDictionary, affixList) {
-  return [...inputText].map(char => {
-    let fingerspelledStroke = '';
-    fingerspelledStroke = FINGERSPELLED_LETTERS[char];
-
-    fingerspelledStroke = findFingerspellingOutline(char, globalLookupDictionary, fingerspelledStroke, affixList)
-
-    if (!fingerspelledStroke) {
-      fingerspelledStroke = "xxx";
-    }
-    return fingerspelledStroke;
-  }).join('/');
 }
 
 function createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary, affixList = AffixList.getSharedInstance()) {
