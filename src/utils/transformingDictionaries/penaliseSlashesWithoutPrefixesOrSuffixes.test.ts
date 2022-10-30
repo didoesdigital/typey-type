@@ -1,4 +1,4 @@
-import penaliseSlashesWithoutPrefixesOrSuffixes from "./penaliseSlashesWithoutPrefixesOrSuffixes";
+import penaliseSlashesWithoutPrefixesOrSuffixes from "./rankOutlines/penaliseSlashesWithoutPrefixesOrSuffixes";
 import { AffixList } from "../affixList";
 
 describe("penaliseSlashesWithoutPrefixesOrSuffixes", () => {

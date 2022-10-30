@@ -1,6 +1,6 @@
-import hasPrefix from "./rankOutlines/hasPrefix";
-import hasSuffix from "./rankOutlines/hasSuffix";
-import type { AffixObject } from "../../types";
+import hasPrefix from "./hasPrefix";
+import hasSuffix from "./hasSuffix";
+import type { AffixObject } from "../../../types";
 
 const penaliseSlashesWithoutPrefixesOrSuffixes = (
   outline: string,

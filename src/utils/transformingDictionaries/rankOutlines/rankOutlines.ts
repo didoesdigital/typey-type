@@ -3,7 +3,7 @@ import chooseSEndingOverZEnding from "./chooseSEndingOverZEnding";
 import chooseTEndingOverDEnding from "./chooseTEndingOverDEnding";
 import penaliseSlashes from "./penaliseSlashes";
 import penaliseStars from "./penaliseStars";
-import penaliseSlashesWithoutPrefixesOrSuffixes from "../penaliseSlashesWithoutPrefixesOrSuffixes";
+import penaliseSlashesWithoutPrefixesOrSuffixes from "./penaliseSlashesWithoutPrefixesOrSuffixes";
 
 function rankOutlines(
   arrayOfStrokesAndTheirSourceDictNames: [string, string, string][],
