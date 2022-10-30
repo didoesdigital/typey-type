@@ -284,4 +284,17 @@ describe("findFingerspellingOutline", () => {
       findFingerspellingOutline(",", lookupDict, "KW-BG", affixList, undefined)
     ).toEqual("KW-BG");
   });
+
+  it("returns empty string for unknown character “€” in “€100” with no given stroke and no preceding char", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
+      ["hand", [["HAPBD", "typey:typey-type.json"]]],
+      ["bag", [["PWAG", "typey:typey-type.json"]]],
+      ["{^-^}", [["H-PB", "typey:typey-type.json"]]],
+      ["{,}", [["KW-BG", "typey:typey-type.json"]]],
+    ]);
+    expect(
+      findFingerspellingOutline(",", lookupDict, "", affixList, undefined)
+    ).toEqual("");
+  });
 });
