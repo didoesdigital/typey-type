@@ -68,18 +68,6 @@ export type StrokeAndNamespacedDict = [Outline, NamespacedDictionary];
 export type StrokeAndDictionaryAndNamespace = [Outline, DictName, Namespace];
 
 /**
- * Examples:
- * ["A*UT/", "auto"],
- * ["/WAL", "ual"],
- */
-export type AffixItem = [string, string];
-
-export type AffixObject = {
-  prefixes: AffixItem[];
-  suffixes: AffixItem[];
-};
-
-/**
  * An outline-first JSON-formatted steno dictionary that could be used by a steno engine, such as Plover
  *
  * Example:
@@ -114,3 +102,50 @@ export type StenoDictionary = {
  */
 export type LookupDictWithNamespacedDicts = Map<Translation, StrokeAndNamespacedDict[]>;
 
+/**
+ * Examples:
+ * ["A*UT/", "auto"],
+ * ["/WAL", "ual"],
+ */
+export type AffixItem = [string, string];
+
+export type AffixObject = {
+  prefixes: AffixItem[];
+  suffixes: AffixItem[];
+};
+
+/**
+ * Example:
+ * "/AOUL/A*T"
+ */
+export type SuffixOutlineWithLeadingSlash = string;
+
+/**
+ * Example:
+ * "KWAS/KWREU/"
+ */
+export type PrefixOutlineWithSlash = string;
+
+/**
+ * Example:
+ * "ulate"
+ */
+export type SuffixTextWithNoTPRBGTS = string;
+
+/**
+ * Example:
+ * "quasi-"
+ */
+export type PrefixTextWithNoTPRBGTS = string;
+
+/**
+ * Example:
+ * [ "TPHRAOUR/", "fluoro" ]
+ */
+export type PrefixEntry = [PrefixOutlineWithSlash, PrefixTextWithNoTPRBGTS];
+
+/**
+ * Example:
+ * [ "/AOEUBL", "izable" ]
+ */
+export type SuffixEntry = [SuffixOutlineWithLeadingSlash, SuffixTextWithNoTPRBGTS];
