@@ -1,5 +1,5 @@
 import hasPrefix from "./hasPrefix";
-import { AffixList } from "../affixList";
+import { AffixList } from "../../affixList";
 
 describe("hasPrefix", () => {
   beforeEach(() => {

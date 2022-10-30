@@ -1,4 +1,4 @@
-import hasPrefix from "./hasPrefix";
+import hasPrefix from "./rankOutlines/hasPrefix";
 import hasSuffix from "./rankOutlines/hasSuffix";
 import type { AffixObject } from "../../types";
 
