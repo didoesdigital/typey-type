@@ -110,7 +110,10 @@ export type LookupDictWithNamespacedDicts = Map<
  * ["A*UT/", "auto"],
  * ["/WAL", "ual"],
  */
-export type AffixItem = [string, string];
+export type AffixItem = [
+  PrefixOutlineWithSlash | SuffixOutlineWithLeadingSlash,
+  PrefixTextWithNoTPRBGTS | SuffixTextWithNoTPRBGTS
+];
 
 export type AffixObject = {
   prefixes: AffixItem[];
