@@ -1,6 +1,6 @@
 import findSingleLetterWordOutline from "./findSingleLetterWordOutline";
 import findFingerspellingOutline from "./findFingerspellingOutline";
-import fingerspelledLetters from "../../constant/fingerspelledLetters";
+import fingerspelledCharacters from "../../constant/fingerspelledCharacters";
 import singleLetterWords from "../../constant/singleLetterWords";
 import getRankedOutlineFromLookupEntry from "./getRankedOutlineFromLookupEntry";
 import { AffixList } from "../affixList";
@@ -71,7 +71,7 @@ const chooseOutlineForPhrase = (
 
   // NOTE: we do this even if a chosenStroke was found so that we can prioritise
   // glued translations e.g. "{&&}" or "{&b}" over non-glue entries e.g. "&" or "b"
-  let strokeForOneCharacterWordPart = fingerspelledLetters[wordOrPhrase];
+  let strokeForOneCharacterWordPart = fingerspelledCharacters[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWordPart) {
 
     strokeForOneCharacterWordPart = findFingerspellingOutline(wordOrPhrase, globalLookupDictionary, strokeForOneCharacterWordPart, affixList, precedingChar)

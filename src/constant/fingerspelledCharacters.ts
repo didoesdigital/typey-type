@@ -1,9 +1,9 @@
-type FingerspelledLetters = {
+type FingerspelledCharacters = {
   [singleCharacter: string]: string
 }
 
 // TODO: don't hardcode this
-const fingerspelledLetters: FingerspelledLetters = {
+const fingerspelledCharacters: FingerspelledCharacters = {
   "a": "A*",
   "b": "PW*",
   "c": "KR*",
@@ -120,4 +120,4 @@ const fingerspelledLetters: FingerspelledLetters = {
 // "8": "#L",
 // "9": "#-T"
 
-export default fingerspelledLetters;
+export default fingerspelledCharacters;

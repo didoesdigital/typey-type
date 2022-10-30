@@ -1,4 +1,4 @@
-import fingerspelledLetters from "../../constant/fingerspelledLetters";
+import fingerspelledCharacters from "../../constant/fingerspelledCharacters";
 import findFingerspellingOutline from "./findFingerspellingOutline";
 import type { AffixObject, LookupDictWithNamespacedDicts } from "../../types";
 
@@ -23,7 +23,7 @@ const createFingerspellingStroke = (
         findFingerspellingOutline(
           singleCharacter,
           globalLookupDictionary,
-          fingerspelledLetters[singleCharacter] || "",
+          fingerspelledCharacters[singleCharacter] || "",
           affixList
         ) || "xxx"
     )
