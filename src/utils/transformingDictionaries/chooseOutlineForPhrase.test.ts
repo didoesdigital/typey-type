@@ -21,6 +21,7 @@ describe("chooseOutlineForPhrase", () => {
     const wordOrPhrase = "FIRST";
     const globalLookupDictionary: LookupDictWithNamespacedDicts = new Map([
       ["first", [["TPEUFRT", "typey:typey-type.json"]]],
+      // ["{<}", [["*URP", "typey:typey-type.json"]]],
     ]);
     const chosenStroke = undefined;
     const strokeLookupAttempts = 0;
