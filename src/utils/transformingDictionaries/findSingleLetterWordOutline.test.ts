@@ -58,6 +58,18 @@ describe("findSingleLetterWordOutline", () => {
     ).toEqual("KPA/AEU");
   });
 
+  it("returns outline for word “A” after a dash with no personal dictionary entry", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      ["a", [["AEU", "typey:typey-type.json"]]],
+      ["{ }{-|}", [["KPA", "typey:typey-type.json"]]],
+      ["{^}{-|}", [["KPA*", "typey:typey-type.json"]]],
+    ]);
+    expect(
+      findSingleLetterWordOutline("A", lookupDict, "KPA/AEU", affixList, "-")
+    ).toEqual("KPA*/AEU");
+  });
+
   it("returns outline for word “A” at the start of a lesson with personal dictionary entry for “a” and capitalisation strokes", () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict = new Map([
@@ -87,6 +99,14 @@ describe("findSingleLetterWordOutline", () => {
     expect(
       findSingleLetterWordOutline("A", lookupDict, "KPA/AEU", affixList, "")
     ).toEqual("KPAZ/AEUZ");
+  });
+
+  it("returns outline for word “I” at the start of a sentence is missing from global lookup dict", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([]);
+    expect(
+      findSingleLetterWordOutline("I", lookupDict, "EU", affixList, "")
+    ).toEqual("EU");
   });
 
   it("returns outline for word “I” in the middle of a sentence with no personal dictionary entry", () => {
@@ -119,6 +139,22 @@ describe("findSingleLetterWordOutline", () => {
     expect(
       findSingleLetterWordOutline("X", lookupDict, "10R", affixList, "")
     ).toEqual("10R");
+  });
+
+  it("returns outline for word “P” which is not a real single-letter word", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([]);
+    expect(
+      findSingleLetterWordOutline("P", lookupDict, "xxx", affixList, "")
+    ).toEqual("xxx");
+  });
+
+  it("returns outline for word “V” with missing entry from global lookup dict", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([]);
+    expect(
+      findSingleLetterWordOutline("V", lookupDict, "5R", affixList, "")
+    ).toEqual("5R");
   });
 
   it("returns outline for word “X” with personal dictionary entry for “X”", () => {
