@@ -1,5 +1,5 @@
-import penaliseSlashesWithoutPrefixesOrSuffixes from "./rankOutlines/penaliseSlashesWithoutPrefixesOrSuffixes";
-import { AffixList } from "../affixList";
+import penaliseSlashesWithoutPrefixesOrSuffixes from "./penaliseSlashesWithoutPrefixesOrSuffixes";
+import { AffixList } from "../../affixList";
 
 describe("penaliseSlashesWithoutPrefixesOrSuffixes", () => {
   beforeEach(() => {
