@@ -1,5 +1,5 @@
 import type { StenoDictionary } from "../../../types";
-import chooseSEndingOverZEnding from "../chooseSEndingOverZEnding";
+import chooseSEndingOverZEnding from "./chooseSEndingOverZEnding";
 import chooseTEndingOverDEnding from "./chooseTEndingOverDEnding";
 import penaliseSlashes from "../penaliseSlashes";
 import penaliseStars from "../penaliseStars";
