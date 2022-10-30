@@ -1,5 +1,6 @@
 import findFingerspellingOutline from "./findFingerspellingOutline";
 import { AffixList } from "../affixList";
+import type { LookupDictWithNamespacedDicts } from "../../types";
 
 describe("findFingerspellingOutline", () => {
   beforeEach(() => {
@@ -24,7 +25,7 @@ describe("findFingerspellingOutline", () => {
 
   it('returns fingerspelled outline for phrase `houses?" It`', () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["{?}", [["H-F", "typey:typey-type.json"]]],
       ["it", [["EUT", "typey:typey-type.json"]]],
       ["houses", [["HOUSZ", "typey:typey-type.json"]]],
@@ -37,7 +38,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns fingerspelled outline from personal dict for glued B", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       [
         "{&B}",
         [
@@ -45,7 +46,7 @@ describe("findFingerspellingOutline", () => {
           ["PW*FPLT", "my-personal-dict.json"],
         ],
       ],
-      ["{&L}", ["-LZ", "my-personal-dict.json"]],
+      ["{&L}", [["-LZ", "my-personal-dict.json"]]],
     ]);
     expect(
       findFingerspellingOutline("B", lookupDict, "PW*P", affixList, "")
@@ -54,7 +55,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns fingerspelled outline from personal dict for C", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       [
         "{&B}",
         [
@@ -62,7 +63,7 @@ describe("findFingerspellingOutline", () => {
           ["PW*FPLT", "my-personal-dict.json"],
         ],
       ],
-      ["{&L}", ["-LZ", "my-personal-dict.json"]],
+      ["{&L}", [["-LZ", "my-personal-dict.json"]]],
     ]);
     expect(
       findFingerspellingOutline("C", lookupDict, "KR*P", affixList, "")
@@ -71,7 +72,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns fingerspelled outline for letter e in grinned, which has no available outline for phrase, and no orthography magic yet", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["grin", [["TKPWREUPB", "typey:typey-type.json"]]],
       ["{^ed}", [["-D", "typey:typey-type.json"]]],
     ]);
@@ -82,7 +83,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns on-the-fly fingerspelled outline for letter e in grinned with no personal dicts with available outline for phrase, and no orthography magic yet", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["grin", [["TKPWREUPB", "typey:typey-type.json"]]],
       ["{^ed}", [["-D", "typey:typey-type.json"]]],
       ["{>}{&e}", [["*E", "typey:typey-type.json"]]],
@@ -95,7 +96,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns on-the-fly fingerspelled outline for letter e in grinned with personal dicts with no available outline for phrase, and with alternative letter fingerspelling outline", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["grin", [["TKPWREUPB", "typey:typey-type.json"]]],
       ["{^ed}", [["-D", "typey:typey-type.json"]]],
       ["{&e}", [["EFPLT", "user:fingerspelling-FPLT.json"]]],
@@ -109,7 +110,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns hard-coded number format for on-the-fly fingerspelled outline for 0 in “20/20.” with no personal dicts with no available outline for phrase", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       // ["{&0}", [
       //   ["#O", "typey:typey-type.json"],
       // ]],
@@ -121,7 +122,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns on-the-fly fingerspelled outline for 0 in “20/20.” with personal dicts with no available outline for phrase, and with alternative number fingerspelling outline", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       [
         "{&0}",
         [
@@ -138,7 +139,9 @@ describe("findFingerspellingOutline", () => {
 
   it("returns on-the-fly fingerspelled outline for symbol with no personal dicts with available outline for phrase, and no orthography magic yet", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([["&", [["SKP", "typey:typey-type.json"]]]]);
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
+      ["&", [["SKP", "typey:typey-type.json"]]],
+    ]);
     expect(
       findFingerspellingOutline("&", lookupDict, "SKP*", affixList, "")
     ).toEqual("SKP*");
@@ -146,7 +149,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns on-the-fly fingerspelled outline for symbol with personal dicts, specifically ampersand in phrase “&c.”", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["{&&}", [["SP-PBD", "user:punctuation.json"]]],
       [
         "&",
@@ -163,7 +166,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns on-the-fly fingerspelled outline for [ in “[1]” with preceding space character", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["[", [["PWR-BT", "plover:plover.json"]]],
       ["{[}", [["PWR-BG", "typey:typey-type.json"]]],
       [
@@ -183,7 +186,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns on-the-fly fingerspelled outline for [ in “.[” with no preceding character", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["[", [["PWR-BT", "plover:plover.json"]]],
       ["{[}", [["PWR-BG", "typey:typey-type.json"]]],
       [
@@ -203,7 +206,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns on-the-fly fingerspelled outline for comma in “krr,”", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       [
         ",",
         [
@@ -219,7 +222,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns on-the-fly fingerspelled outline for — em dash in “—whack—”", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       // [
       //   "—",
       //   [
@@ -243,7 +246,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns on-the-fly fingerspelled outline for “t” in “t'other” with preceding space char", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["t", [["T*/SP-S", "typey:typey-type.json"]]],
       ["other", [["OER", "typey:typey-type.json"]]],
       ["{'^}", [["A*E", "typey:typey-type.json"]]],
@@ -256,7 +259,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns on-the-fly fingerspelled outline for “s” in “Carnations;” with no preceding char", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["carnation", [["KARPB/AEUGS", "typey:typey-type.json"]]],
       ["{^s}", [["-S", "typey:typey-type.json"]]],
       ["{>}{&s}", [["S*", "typey:typey-type.json"]]],
@@ -271,7 +274,7 @@ describe("findFingerspellingOutline", () => {
 
   it("returns on-the-fly fingerspelled outline for comma in “hand-bag,” with no preceding char", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict = new Map([
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["hand", [["HAPBD", "typey:typey-type.json"]]],
       ["bag", [["PWAG", "typey:typey-type.json"]]],
       ["{^-^}", [["H-PB", "typey:typey-type.json"]]],

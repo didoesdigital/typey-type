@@ -1,8 +1,9 @@
 import getRankedOutlineFromLookupEntry from "./getRankedOutlineFromLookupEntry";
+import type { LookupDictWithNamespacedDicts } from "../../types";
 
 const findFingerspellingOutline = (
   wordOrPhrase: string,
-  globalLookupDictionary: any,
+  globalLookupDictionary: LookupDictWithNamespacedDicts,
   strokeForOneCharacterWordPart: string,
   affixList: any,
   precedingChar?: string // TODO: make this required and union undefined, and explicitly pass undefined where presently unused
