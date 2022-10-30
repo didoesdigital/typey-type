@@ -1,4 +1,4 @@
-let SHARED_INSTANCE = {suffixes: [], prefixes: []};
+let SHARED_INSTANCE = { suffixes: [], prefixes: [] };
 
 export class AffixList {
   static getSharedInstance() {
@@ -16,11 +16,17 @@ export class AffixList {
     const suffixRegex = /^\{\^([A-Za-z0-9=<>\\:'"#-])+\}$/;
     for (const [phrase, outlinesAndSourceDicts] of dict) {
       if (phrase.match(suffixRegex)) {
-        suffixes.push(['/' + outlinesAndSourceDicts[0][0], phrase.replace('{^','').replace('}','')])
+        suffixes.push([
+          "/" + outlinesAndSourceDicts[0][0],
+          phrase.replace("{^", "").replace("}", ""),
+        ]);
       }
 
       if (phrase.match(prefixRegex)) {
-        prefixes.push([outlinesAndSourceDicts[0][0] + '/', phrase.replace('{','').replace('^}','')])
+        prefixes.push([
+          outlinesAndSourceDicts[0][0] + "/",
+          phrase.replace("{", "").replace("^}", ""),
+        ]);
       }
     }
     this.suffixes = suffixes;
