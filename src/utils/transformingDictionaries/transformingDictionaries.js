@@ -3,6 +3,7 @@ import { AffixList } from '../affixList';
 import { escapeRegExp } from '../utils';
 import getRankedOutlineFromLookupEntry from './getRankedOutlineFromLookupEntry';
 import findFingerspellingOutline from './findFingerspellingOutline';
+import findSingleLetterWordOutline from './findSingleLetterWordOutline';
 
 const FINGERSPELLED_LETTERS = {
   "a": "A*",
@@ -133,35 +134,6 @@ const SINGLE_LETTER_WORDS = {
 const punctuationSplittingRegex = /([!"“”#$%&'‘’()*,.:;<=>?@[\\\]^`{|}~—–-])/; // includes en and em dashes, curly quotes
 // const punctuationSplittingWholeMatchRegex = /^[!"“”#$%&'‘’()*,./:;<=>?@[\\\]^`{|}~—–-]?$/; // includes en and em dashes, curly quotes
 const strokeLookupAttemptsLimit = 12;
-
-function findSingleLetterWordOutline(wordOrPhrase, globalLookupDictionary, strokeForOneCharacterWord, affixList, precedingChar) {
-  // try look it up from personal dictionaries:
-  // single letter words, natural capitalisation
-  if (wordOrPhrase === "a" || wordOrPhrase === "I") {
-    let modifiedWordOrPhrase = `${wordOrPhrase}`;
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { strokeForOneCharacterWord = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
-  }
-  // single letter word, capitalised for start of sentence
-  else if (wordOrPhrase === "A") {
-    let letterAEntry = globalLookupDictionary.get("a");
-    let capitalisationTranslation = ["", ".", "?", "!"].includes(precedingChar) ? "{}{-|}" : "{^}{-|}";
-    let capitalisationEntry = globalLookupDictionary.get(capitalisationTranslation);
-    if (letterAEntry && capitalisationEntry) {
-      let letterAOutline = getRankedOutlineFromLookupEntry(letterAEntry, 'a', affixList);
-      let capitalisationOutline = getRankedOutlineFromLookupEntry(capitalisationEntry, capitalisationTranslation, affixList);
-      strokeForOneCharacterWord = capitalisationOutline + "/" + letterAOutline;
-    }
-  }
-  // roman numerals
-  else if (wordOrPhrase === "X" || wordOrPhrase === "V") {
-    let modifiedWordOrPhrase = `${wordOrPhrase}`;
-    let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
-    if (lookupEntry) { strokeForOneCharacterWord = getRankedOutlineFromLookupEntry(lookupEntry, modifiedWordOrPhrase, affixList); }
-  }
-
-  return strokeForOneCharacterWord
-}
 
 function chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar, affixList = AffixList.getSharedInstance()) {
   let suffixes = affixList.suffixes;
