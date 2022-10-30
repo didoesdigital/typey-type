@@ -108,5 +108,16 @@ const fingerspelledLetters: FingerspelledLetters = {
   "8": "8",
   "9": "9"
 } as const;
+// Maybe show numbers as letters?
+// "1": "#S",
+// "2": "#T-",
+// "3": "#P-",
+// "4": "#H",
+// "5": "#A",
+// "0": "#O",
+// "6": "#F",
+// "7": "#-P",
+// "8": "#L",
+// "9": "#-T"
 
 export default fingerspelledLetters;
