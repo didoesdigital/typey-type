@@ -112,4 +112,28 @@ describe("findSingleLetterWordOutline", () => {
       findSingleLetterWordOutline("I", lookupDict, "EU", affixList, " ")
     ).toEqual("EUZ");
   });
+
+  it("returns outline for word “X” with no personal dictionary entry", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([["X", [["10R", "typey:typey-type.json"]]]]);
+    expect(
+      findSingleLetterWordOutline("X", lookupDict, "10R", affixList, "")
+    ).toEqual("10R");
+  });
+
+  it("returns outline for word “X” with personal dictionary entry for “X”", () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict = new Map([
+      [
+        "X",
+        [
+          ["10RZ", "user:personal.json"],
+          ["10R", "typey:typey-type.json"],
+        ],
+      ],
+    ]);
+    expect(
+      findSingleLetterWordOutline("X", lookupDict, "10R", affixList, "")
+    ).toEqual("10RZ");
+  });
 });
