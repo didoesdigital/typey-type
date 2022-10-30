@@ -1,5 +1,5 @@
 import hasPrefix from "./hasPrefix";
-import hasSuffix from "./hasSuffix";
+import hasSuffix from "./rankOutlines/hasSuffix";
 import type { AffixObject } from "../../types";
 
 const penaliseSlashesWithoutPrefixesOrSuffixes = (

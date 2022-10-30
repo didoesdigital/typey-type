@@ -1,4 +1,4 @@
-import type { AffixItem } from "../../types";
+import type { AffixItem } from "../../../types";
 
 const hasSuffix = (
   outline: string,
