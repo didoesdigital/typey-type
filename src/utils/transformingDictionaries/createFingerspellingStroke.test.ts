@@ -42,4 +42,14 @@ describe("createFingerspellingStroke", () => {
       createFingerspellingStroke("€100", lookupDict, affixList)
     ).toEqual("xxx/1/0/0");
   });
+
+  // xit("returns number bar key and letter keys for numbers", () => {
+  //   const affixList = AffixList.getSharedInstance();
+  //   const lookupDict: LookupDictWithNamespacedDicts = new Map([
+  //     ["a", [["AEU", "typey:typey-type.json"]]],
+  //   ]);
+  //   expect(
+  //     createFingerspellingStroke("100", lookupDict, affixList)
+  //   ).toEqual("#S/#O/#O");
+  // });
 });
