@@ -16,14 +16,14 @@ function generateListOfWordsAndStrokes(wordList, globalLookupDictionary) {
   return sourceAndPresentedMaterial;
 }
 
-function rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary) {
-  // This code causes the browser to hang
-  // for (let [translation, outlinesAndSourceDicts] of combinedLookupDictionary) {
-  //   let rankedOutlinesAndSourceDicts = rankOutlines(outlinesAndSourceDicts, translation);
-  //   combinedLookupDictionary.set(translation, rankedOutlinesAndSourceDicts);
-  // }
-  return combinedLookupDictionary;
-}
+// function rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary) {
+//   // This code causes the browser to hang
+//   // for (let [translation, outlinesAndSourceDicts] of combinedLookupDictionary) {
+//   //   let rankedOutlinesAndSourceDicts = rankOutlines(outlinesAndSourceDicts, translation);
+//   //   combinedLookupDictionary.set(translation, rankedOutlinesAndSourceDicts);
+//   // }
+//   return combinedLookupDictionary;
+// }
 
 function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, outlinesWeHaveSeen) {
 
@@ -62,5 +62,5 @@ export {
   addOutlinesToWordsInCombinedDict,
   generateListOfWordsAndStrokes,
   getListOfValidDictionariesAddedAndInConfig,
-  rankAllOutlinesInCombinedLookupDictionary,
+  // rankAllOutlinesInCombinedLookupDictionary,
 };
