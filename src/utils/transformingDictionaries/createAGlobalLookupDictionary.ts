@@ -2,7 +2,7 @@ import {
   LATEST_PLOVER_DICT_NAME,
   SOURCE_NAMESPACES,
 } from "../../constant/index.js";
-import { combineValidDictionaries } from "./transformingDictionaries";
+import combineValidDictionaries from "./combineValidDictionaries";
 import {
   LookupDictWithNamespacedDicts,
   LookupDictWithNamespacedDictsAndConfig,
