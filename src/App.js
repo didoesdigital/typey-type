@@ -30,9 +30,9 @@ import {
 import { fetchDictionaryIndex } from './utils/getData';
 import { getTypeyTypeDict } from './utils/getData';
 import {
-  createAGlobalLookupDictionary,
   generateListOfWordsAndStrokes
 } from './utils/transformingDictionaries/transformingDictionaries';
+import createAGlobalLookupDictionary from "./utils/transformingDictionaries/createAGlobalLookupDictionary";
 import { AffixList } from './utils/affixList';
 import {
   Route,

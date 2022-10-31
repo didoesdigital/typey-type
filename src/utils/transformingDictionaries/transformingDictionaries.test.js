@@ -1,9 +1,9 @@
 import {
   addOutlinesToWordsInCombinedDict,
-  createAGlobalLookupDictionary,
   combineValidDictionaries,
   generateListOfWordsAndStrokes,
 } from './transformingDictionaries';
+import createAGlobalLookupDictionary from "./createAGlobalLookupDictionary";
 import chooseOutlineForPhrase from "./chooseOutlineForPhrase";
 import rankOutlines from './rankOutlines/rankOutlines';
 import { AffixList } from '../affixList';

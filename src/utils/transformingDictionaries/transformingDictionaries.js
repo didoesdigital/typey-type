@@ -74,18 +74,6 @@ function combineValidDictionaries(personalDictionariesNamesAndContents, dictType
   return combinedLookupDictionary;
 }
 
-function createAGlobalLookupDictionary(personalDictionariesNamesAndContents, dictTypeyType, ploverDict = null) {
-  // TODO: one day, this could be the place we check for whether Typey Type dictionaries or the Plover dictionary are enabled and if so combineValidDictionaries with them and add to 'configuration'
-
-  let combinedLookupDictionary = combineValidDictionaries(personalDictionariesNamesAndContents, dictTypeyType, ploverDict);
-  // let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary); // has a bug; instead of sorted entire dict, we sort per entry used within chooseOutlineForPhrase function
-  let configuration = [`${SOURCE_NAMESPACES.get('typey')}:typey-type.json`, ...personalDictionariesNamesAndContents.map(d => `${SOURCE_NAMESPACES.get('user')}:${d[0]}`)];
-  if (!!ploverDict) { configuration.push(`${SOURCE_NAMESPACES.get('plover')}:${LATEST_PLOVER_DICT_NAME}`); }
-  combinedLookupDictionary['configuration'] = configuration;
-
-  return combinedLookupDictionary;
-}
-
 function getListOfValidDictionariesAddedAndInConfig(dictNamesFromAddedConfig, namesOfValidAddedDictionaries) {
   let listOfValidDictionariesAddedAndInConfig = [];
   const numberOfDictionariesInAddedConfig = dictNamesFromAddedConfig.length;
@@ -102,7 +90,6 @@ function getListOfValidDictionariesAddedAndInConfig(dictNamesFromAddedConfig, na
 export {
   addOutlinesToWordsInCombinedDict,
   combineValidDictionaries,
-  createAGlobalLookupDictionary,
   generateListOfWordsAndStrokes,
   getListOfValidDictionariesAddedAndInConfig,
   rankAllOutlinesInCombinedLookupDictionary,
