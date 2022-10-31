@@ -2375,6 +2375,8 @@ AffixList.setSharedInstance(affixList);
 
 let globalLookupDictionary = sortedAndCombinedLookupDictionary;
 
+const precedingChar = '';
+
 describe('create stroke hint for phrase', () => {
   describe('returns string showing all the space or slash separated strokes to write a whole phrase', () => {
     it('showing "KPA/AEU KPA/TPAR/PHER" for "A Farmer"', () => {
@@ -2622,7 +2624,7 @@ describe('create stroke hint for phrase', () => {
       //   ]
       // };
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TRAFL/HREUPBG", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "TRAFL/HREUPBG", 1 ]);
     });
   });
 
@@ -2632,7 +2634,7 @@ describe('create stroke hint for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "OP/TOPL/TREUFT/AES", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "OP/TOPL/TREUFT/AES", 1 ]);
     });
   });
 
@@ -2651,7 +2653,7 @@ describe('create stroke hint for phrase', () => {
       //   ]
       // };
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TRAFL/*LG", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "TRAFL/*LG", 1 ]);
     });
   });
 
@@ -2666,7 +2668,7 @@ describe('create stroke hint for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHAR/AEUT/-G", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "TPHAR/AEUT/-G", 1 ]);
     });
 
     it('with orthography rule to find stroke after replacing "e" with "ing"', () => {
@@ -2674,7 +2676,7 @@ describe('create stroke hint for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "SAO*ET/-G", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "SAO*ET/-G", 1 ]);
     });
 
     it('with a mistyped orthography rule to find stroke by appending "ing" to word otherwise ending in "e"', () => {
@@ -2682,7 +2684,7 @@ describe('create stroke hint for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "SAO*ET/TK-LS/-G", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "SAO*ET/TK-LS/-G", 1 ]);
     });
 
     it('with orthography rule to replace "e" with "ing" where "eing" ending is also a word', () => {
@@ -2690,7 +2692,7 @@ describe('create stroke hint for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PWEUPBG/-G", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "PWEUPBG/-G", 1 ]);
     });
 
     it('with orthography rule to append "eing" where replacing "e" with "ing" is also a word', () => {
@@ -2698,7 +2700,7 @@ describe('create stroke hint for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PWEUPB/-PBLG/TK-LS/-G", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "PWEUPB/-PBLG/TK-LS/-G", 1 ]);
     });
 
     it('with orthography rule to replace "e" with "ing"', () => {
@@ -2706,7 +2708,7 @@ describe('create stroke hint for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBLG/-G", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "HROPBLG/-G", 1 ]);
     });
 
     xit('with orthography rule to replace "e" with "ing" and append an "s" using multiple suffixes', () => {
@@ -2714,7 +2716,7 @@ describe('create stroke hint for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBLG/-G/-S", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "HROPBLG/-G/-S", 1 ]);
     });
   });
 

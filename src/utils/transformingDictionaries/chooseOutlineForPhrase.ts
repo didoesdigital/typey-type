@@ -14,7 +14,7 @@ const chooseOutlineForPhrase = (
     globalLookupDictionary: LookupDictWithNamespacedDicts,
     chosenStroke: string | undefined,
     strokeLookupAttempts: number,
-    precedingChar?: string,
+    precedingChar: string,
     affixList = AffixList.getSharedInstance()
   ): ChooseOutlineForPhraseResult => {
   let suffixes = affixList.suffixes;
