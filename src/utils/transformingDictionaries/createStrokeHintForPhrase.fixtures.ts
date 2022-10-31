@@ -1,4 +1,4 @@
-import { PersonalDictionaryNameAndContents } from "../../types";
+import type { PersonalDictionaryNameAndContents } from "../../types";
 
 const testTypeyTypeDict = {
   "TK-LS": "{^^}",
