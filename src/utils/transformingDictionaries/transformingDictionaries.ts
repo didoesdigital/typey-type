@@ -1,6 +1,14 @@
 import createStrokeHintForPhrase from "./createStrokeHintForPhrase";
+import type {
+  DictName,
+  LookupDictWithNamespacedDicts,
+  StenoDictionary,
+} from "../../types";
 
-function generateListOfWordsAndStrokes(wordList, globalLookupDictionary) {
+function generateListOfWordsAndStrokes(
+  wordList: string[],
+  globalLookupDictionary: LookupDictWithNamespacedDicts
+) {
   // wordList = [ 'bed,', 'man!', "'sinatra'", 'and again', 'media query', 'push origin master', 'diff --cached', 'diff -- cached' ]
   let sourceAndPresentedMaterial = [];
 
@@ -32,10 +40,10 @@ function generateListOfWordsAndStrokes(wordList, globalLookupDictionary) {
 // }
 
 function addOutlinesToWordsInCombinedDict(
-  dictContent,
-  combinedLookupDictionary,
-  dictName,
-  outlinesWeHaveSeen
+  dictContent: StenoDictionary,
+  combinedLookupDictionary: LookupDictWithNamespacedDicts,
+  dictName: DictName,
+  outlinesWeHaveSeen: any //Set<string>
 ) {
   for (let [outline, translation] of Object.entries(dictContent)) {
     let seen = outlinesWeHaveSeen.has(outline);
@@ -55,8 +63,8 @@ function addOutlinesToWordsInCombinedDict(
 }
 
 function getListOfValidDictionariesAddedAndInConfig(
-  dictNamesFromAddedConfig,
-  namesOfValidAddedDictionaries
+  dictNamesFromAddedConfig: DictName[],
+  namesOfValidAddedDictionaries: DictName[]
 ) {
   let listOfValidDictionariesAddedAndInConfig = [];
   const numberOfDictionariesInAddedConfig = dictNamesFromAddedConfig.length;
