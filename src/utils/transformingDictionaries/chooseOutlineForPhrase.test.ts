@@ -383,4 +383,29 @@ describe('choose outline for phrase', () => {
       expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryWithHRUFRSfirst, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "HRUFRS", 1 ]);
     });
   });
+
+  describe('dictionaries in different orders', () => {
+    it("chooses an outline for a word or phrase", () => {
+      const wordOrPhrase = "FIRST";
+      const globalLookupDictionary: LookupDictWithNamespacedDicts = new Map([
+        ["first", [["TPEUFRT", "typey:typey-type.json"]]],
+        // ["{<}", [["*URP", "typey:typey-type.json"]]],
+      ]);
+      const chosenStroke = undefined;
+      const strokeLookupAttempts = 0;
+      const precedingChar = "";
+      const affixList = AffixList.getSharedInstance();
+
+      expect(
+        chooseOutlineForPhrase(
+          wordOrPhrase,
+          globalLookupDictionary,
+          chosenStroke,
+          strokeLookupAttempts,
+          precedingChar,
+          affixList
+        )
+      ).toEqual(["*URP/TPEUFRT", 1]);
+    });
+  });
 });
