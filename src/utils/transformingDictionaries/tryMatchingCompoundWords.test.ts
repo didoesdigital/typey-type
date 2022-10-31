@@ -10,6 +10,8 @@ const globalLookupDictionary = createAGlobalLookupDictionary(
     "H-PB": "{^-^}",
     "SEF": "{self-^}",
     "KROL": "control",
+    "HRA*ED": "lady",
+    "PWEURD": "bird",
   },
   {}
 );
@@ -77,5 +79,23 @@ describe("tryMatchingCompoundWords", () => {
         sharedAffixes
       )
     ).toEqual(["SEF/TPH*/O*/T*/A*/R*/*E/A*/HR*/W*/O*/R*/TK*", "xxx", 3]);
+  });
+
+  it('returns strokes, stroke, and number of attempts for “"Lady-bird,”', () => {
+    const compoundWordParts = ['"Lady', "bird,"];
+    const strokes = "";
+    const stroke = "xxx";
+    const strokeLookupAttempts = 2;
+
+    expect(
+      tryMatchingCompoundWords(
+        compoundWordParts,
+        globalLookupDictionary,
+        strokes,
+        stroke,
+        strokeLookupAttempts,
+        sharedAffixes
+      )
+    ).toEqual(["KR-GS/HR*P/A*/TK*/KWR* H-PB PW*/*EU/R*/TK*/KW-BG", "xxx", 3]);
   });
 });
