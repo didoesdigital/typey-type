@@ -90,14 +90,14 @@ export type StenoDictionary = {
  * Map (7) {
  *   "thought" => [
  *     ["THAUT", "plover:main.json"],
- *     ["THAUGT", "typey:typey-type.json"],
+ *     ["THAUGT", "typey:typey-type.json"]
  *   ],
  *   "people" => [["PAOEPL", "typey:typey-type.json"]],
- *   "found" => [["TPOUPBD, "typey:typey-type.json""]],
- *   "just" => [["SKWRUFT, "typey:typey-type.json""]],
- *   "{&A}" => [["A\*P, "typey:typey-type.json""]],
- *   "{>}{&a}" => [["A\*, "typey:typey-type.json""]],
- *   "{}" => [["WUZ/WUZ, "typey:typey-type.json""]]
+ *   "found" => [["TPOUPBD", "typey:typey-type.json"]],
+ *   "just" => [["SKWRUFT", "typey:typey-type.json"]],
+ *   "{&A}" => [["A\*P", "typey:typey-type.json"]],
+ *   "{>}{&a}" => [["A\*", "typey:typey-type.json"]],
+ *   "{}" => [["WUZ/WUZ", "typey:typey-type.json"]]
  * }
  */
 export type LookupDictWithNamespacedDicts = Map<
