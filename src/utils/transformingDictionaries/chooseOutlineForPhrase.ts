@@ -7,6 +7,8 @@ import { AffixList } from "../affixList";
 import { escapeRegExp } from '../utils';
 import type { LookupDictWithNamespacedDicts } from "../../types";
 
+type ChooseOutlineForPhraseResult = [string, number];
+
 const chooseOutlineForPhrase = (
     wordOrPhrase: string,
     globalLookupDictionary: LookupDictWithNamespacedDicts,
@@ -14,7 +16,7 @@ const chooseOutlineForPhrase = (
     strokeLookupAttempts: number,
     precedingChar: string,
     affixList = AffixList.getSharedInstance()
-  ) => {
+  ): ChooseOutlineForPhraseResult => {
   let suffixes = affixList.suffixes;
   let suffixesLength = suffixes.length;
   let prefixes = affixList.prefixes;
