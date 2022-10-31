@@ -2088,12 +2088,11 @@ class App extends Component {
   say(utterance) {
     let synth = window.speechSynthesis;
     utterance = utterance.replaceAll("—", "em dash");
-    if (utterance === "—") { utterance = "em dash"; }
     if (utterance === ",") { utterance = "comma"; }
-    if (utterance === ":") { utterance = "colon"; }
-    if (utterance === ".") { utterance = "full stop"; }
-    if (utterance === ")") { utterance = "closing bracket"; }
-    if (utterance === "!") { utterance = "exclamation mark"; }
+    else if (utterance === ":") { utterance = "colon"; }
+    else if (utterance === ".") { utterance = "full stop"; }
+    else if (utterance === ")") { utterance = "closing bracket"; }
+    else if (utterance === "!") { utterance = "exclamation mark"; }
     if (window.SpeechSynthesisUtterance) {
       let utterThis = new SpeechSynthesisUtterance(utterance);
 
