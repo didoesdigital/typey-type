@@ -1,4 +1,4 @@
-import createStrokeHintForPhrase from './createStrokeHintForPhrase';
+import createStrokeHintForPhrase from "./createStrokeHintForPhrase";
 
 function generateListOfWordsAndStrokes(wordList, globalLookupDictionary) {
   // wordList = [ 'bed,', 'man!', "'sinatra'", 'and again', 'media query', 'push origin master', 'diff --cached', 'diff -- cached' ]
@@ -8,9 +8,15 @@ function generateListOfWordsAndStrokes(wordList, globalLookupDictionary) {
     // if (wordOrPhraseMaterial === "and! and") { debugger; }
     let wordOrPhraseMaterial = wordList[i];
 
-    let strokes = createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary);
+    let strokes = createStrokeHintForPhrase(
+      wordOrPhraseMaterial,
+      globalLookupDictionary
+    );
 
-    sourceAndPresentedMaterial.push({phrase: wordOrPhraseMaterial, stroke: strokes});
+    sourceAndPresentedMaterial.push({
+      phrase: wordOrPhraseMaterial,
+      stroke: strokes,
+    });
   }
 
   return sourceAndPresentedMaterial;
@@ -25,8 +31,12 @@ function generateListOfWordsAndStrokes(wordList, globalLookupDictionary) {
 //   return combinedLookupDictionary;
 // }
 
-function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, outlinesWeHaveSeen) {
-
+function addOutlinesToWordsInCombinedDict(
+  dictContent,
+  combinedLookupDictionary,
+  dictName,
+  outlinesWeHaveSeen
+) {
   for (let [outline, translation] of Object.entries(dictContent)) {
     let seen = outlinesWeHaveSeen.has(outline);
     if (!seen) {
@@ -35,8 +45,7 @@ function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary,
       if (current) {
         current.push([outline, dictName]);
         combinedLookupDictionary.set(translation, current);
-      }
-      else {
+      } else {
         combinedLookupDictionary.set(translation, [[outline, dictName]]);
       }
       outlinesWeHaveSeen.add(outline);
@@ -45,12 +54,17 @@ function addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary,
   return [combinedLookupDictionary, outlinesWeHaveSeen];
 }
 
-function getListOfValidDictionariesAddedAndInConfig(dictNamesFromAddedConfig, namesOfValidAddedDictionaries) {
+function getListOfValidDictionariesAddedAndInConfig(
+  dictNamesFromAddedConfig,
+  namesOfValidAddedDictionaries
+) {
   let listOfValidDictionariesAddedAndInConfig = [];
   const numberOfDictionariesInAddedConfig = dictNamesFromAddedConfig.length;
 
   for (let i = 0; i < numberOfDictionariesInAddedConfig; i++) {
-    if (namesOfValidAddedDictionaries.indexOf(dictNamesFromAddedConfig[i]) > -1) {
+    if (
+      namesOfValidAddedDictionaries.indexOf(dictNamesFromAddedConfig[i]) > -1
+    ) {
       listOfValidDictionariesAddedAndInConfig.push(dictNamesFromAddedConfig[i]);
     }
   }
