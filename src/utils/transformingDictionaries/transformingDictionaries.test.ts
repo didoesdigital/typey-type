@@ -9,6 +9,7 @@ import {
   testPloverDict,
   personalDictionaries,
 } from "./transformingDictionaries.fixtures";
+import type { LookupDictWithNamespacedDicts } from "../../types";
 
 const globalLookupDictionary = createAGlobalLookupDictionary(
   personalDictionaries,
@@ -210,7 +211,7 @@ describe("generate dictionary entries", () => {
     let wordList = ['a', 'A', 'i', 'I', ' ', '?', 'address', 'tom', 'Heather', 'TUESDAY', 'FIRST', '3D', 'bed,', 'man,', 'man!', 'man?', "'bed'", "'address'", "'Sinatra'", "'sinatra'", "'confuzzled'", 'and! and', 'andx and', 'andx andx and', 'and ', ' and', ' and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff -- cached', 'bed, man, and address' ];
     // let wordList = [' ', '?', 'tom', 'Heather', 'TUESDAY', 'FIRST', 'bed,', 'man!', 'man?', "'sinatra'", 'and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff --cached', 'diff -- cached', '<title>Learn!</title>' ];
 
-    let globalLookupDictionaryForMatchingCapitalisationAndPunctuation = new Map(
+    let globalLookupDictionaryForMatchingCapitalisationAndPunctuation: LookupDictWithNamespacedDicts = new Map(
       [
         ["a", [["AEU", "typey:typey-type.json"]]],
         ["I", [["EU", "typey:typey-type.json"]]],
