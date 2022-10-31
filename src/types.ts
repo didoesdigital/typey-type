@@ -84,6 +84,19 @@ export type StenoDictionary = {
 };
 
 /**
+ * Examples:
+ * ["typey:typey-type.json", "user:nouns.json", "user:personal.json"]
+ * ["typey:typey-type.json", "user:nouns.json", "user:personal.json", "plover:plover-main-3-jun-2018.json"]
+ */
+export type DictionaryConfigurationList = string[];
+
+export type OptionalDictionaryConfig = {
+  configuration?: DictionaryConfigurationList
+}
+
+export type DictionaryConfig = Required<OptionalDictionaryConfig>
+
+/**
  * A word-first JavaScript Map lookup dictionary with source dictionary names for each outline
  *
  * Example:
@@ -103,7 +116,10 @@ export type StenoDictionary = {
 export type LookupDictWithNamespacedDicts = Map<
   Translation,
   StrokeAndNamespacedDict[]
->;
+> & OptionalDictionaryConfig
+
+export type LookupDictWithNamespacedDictsAndConfig =
+  Omit<LookupDictWithNamespacedDicts, "configuration"> & DictionaryConfig;
 
 /**
  * Example:
