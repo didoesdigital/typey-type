@@ -1,13 +1,9 @@
 import {
-  addOutlinesToWordsInCombinedDict,
   createAGlobalLookupDictionary,
-  combineValidDictionaries,
-  generateListOfWordsAndStrokes,
 } from './transformingDictionaries';
 import chooseOutlineForPhrase from "./chooseOutlineForPhrase";
-import rankOutlines from './rankOutlines/rankOutlines';
+import createStrokeHintForPhrase from "./createStrokeHintForPhrase";
 import { AffixList } from '../affixList';
-import misstrokesJSON from '../../json/misstrokes.json'
 
 let testTypeyTypeDict = {
   "TK-LS": "{^^}",
@@ -419,24 +415,24 @@ let testTypeyTypeDict = {
   "HRAOEUF": "life",
   "-T": "the",
   "-F": "of",
-  "SKP": "and",
+  // "SKP": "and",
   "TO": "to",
-  "TPH": "in",
-  "EU": "I",
+  // "TPH": "in",
+  // "EU": "I",
   "THA": "that",
   "WAS": "was",
   "HEUS": "his",
   "HE": "he",
-  "T": "it",
+  // "T": "it",
   "W": "with",
   "S": "is",
   "TPOR": "for",
   "AZ": "as",
   "H": "had",
-  "U": "you",
+  // "U": "you",
   "TPHOT": "not",
-  "-B": "be",
-  "HER": "her",
+  // "-B": "be",
+  // "HER": "her",
   "OPB": "on",
   "AT": "at",
   "PWEU": "by",
@@ -475,10 +471,10 @@ let testTypeyTypeDict = {
   "TPHAO": "into",
   "TKO": "do",
   "TPHEU": "any",
-  "KWROUR": "your",
+  // "KWROUR": "your",
   "WHA": "what",
   "HAS": "has",
-  "PHAPB": "man",
+  // "PHAPB": "man",
   "KO": "could",
   "OER": "other",
   "THAPB": "than",
@@ -495,13 +491,13 @@ let testTypeyTypeDict = {
   "HRAOEUBG": "like",
   "HREUL": "little",
   "THEPB": "then",
-  "K": "can",
+  // "K": "can",
   "SHO": "should",
   "PHAED": "made",
   "TK": "did",
   "US": "us",
   "SUFP": "such",
-  "AEU": "a",
+  // "AEU": "a",
   "TKPWRAET": "great",
   "PW-FR": "before",
   "PHUFT": "must",
@@ -513,21 +509,12 @@ let testTypeyTypeDict = {
   "PHUFP": "much",
   "TKOUPB": "down",
   "AF": "after",
-  "TPEUFRT": "first",
+  // "TPEUFRT": "first",
   "PHR-FPLT": "Mr.",
   "TKPWAOD": "good",
   "PHEPB": "men",
 };
 
-let testEmojiDict = {
-  "PHOEPBLG/T*/PH*": "™",
-};
-let testRubyDict = {
-  "TPHRARB/PWR-BGT": "flash[:{^}",
-};
-let testReactDict = {
-  "O*B/P-P": "Object.{^}",
-};
 let testPloverDict = {
   "A/HREF": "<a href=\"{^}",
   "APBD": "and",
@@ -548,6 +535,16 @@ let testPloverDict = {
   "SKWR*EPL": "gentlemen",
   "OP/TOPL/TREUFT": "optometrist",
   "POED/TREUFT": "podiatrist",
+};
+
+let testEmojiDict = {
+  "PHOEPBLG/T*/PH*": "™",
+};
+let testRubyDict = {
+  "TPHRARB/PWR-BGT": "flash[:{^}",
+};
+let testReactDict = {
+  "O*B/P-P": "Object.{^}",
 };
 
 // Some prefix and suffix entries are commented out because they are alternative strokes for prefix/suffix translations and the preferred stroke already exists.
@@ -2369,1243 +2366,577 @@ let personalDictionaries = [
   [ "test-aussie.json", testAussieDict],
 ];
 
+// @ts-ignore FIXME
 let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, testTypeyTypeDict, testPloverDict);
 
 const affixList = new AffixList(sortedAndCombinedLookupDictionary);
 AffixList.setSharedInstance(affixList);
-let sharedAffixes = AffixList.getSharedInstance();
+// let sharedAffixes = AffixList.getSharedInstance();
 
 let globalLookupDictionary = sortedAndCombinedLookupDictionary;
 
-describe('create a global lookup dictionary', () => {
-  it('returns combined lookup Map of words with strokes and their source dictionaries', () => {
-    let personalDicts = [["personal.json", {"TAO*EUPT": "Typey Type"}]];
-    let typeyDict = {"SKP": "and"};
-    let ploverDict = {
-      "APBD": "and",
-      "SKP": "and",
-      "SP": "and",
-    }
-    let expectedGlobalDict = new Map([
-      ['Typey Type', [
-        ['TAO*EUPT', 'user:personal.json'],
-      ]],
-      ['and', [
-        ['SKP', 'typey:typey-type.json'],
-        ['APBD', 'plover:plover-main-3-jun-2018.json'],
-        ['SKP', 'plover:plover-main-3-jun-2018.json'],
-        ['SP', 'plover:plover-main-3-jun-2018.json']
-      ]],
-    ]);
-    expect(createAGlobalLookupDictionary(personalDicts, typeyDict, ploverDict)).toEqual(expectedGlobalDict);
-  })
-});
-
-describe('add outlines for words to combined lookup dict', () => {
-  it('returns combined dict including misstrokes', () => {
-    let dictContent = {
-      "TO": "to",
-      "O": "to",
-      "SED": "said",
-      "SAEUD": "said",
-      "SOUPBD/-Z": "sounds",
-      "SOUPBDZ": "sounds",
-      "SOUPBSD": "sounds"
-    };
-    let combinedLookupDictionary = new Map();
-    let dictName = "typey:typey-type.json";
-    // let misstrokes = new Map(Object.entries({
-    //   "O": "to",
-    //   "SED": "sed",
-    //   "SOUPBSD": "sounds"
-    // }));
-    let seenSet = new Set();
-    let expectedSet = new Set();
-    expectedSet.add("TO");
-    expectedSet.add("O");
-    expectedSet.add("SED");
-    expectedSet.add("SAEUD");
-    expectedSet.add("SOUPBD/-Z");
-    expectedSet.add("SOUPBDZ");
-    expectedSet.add("SOUPBSD");
-    let expectedResult = new Map([
-      ["to", [["TO", "typey:typey-type.json"],["O", "typey:typey-type.json"]]],
-      ["said", [["SED", "typey:typey-type.json"], ["SAEUD", "typey:typey-type.json"]]],
-      ["sounds", [["SOUPBD/-Z", "typey:typey-type.json"], ["SOUPBDZ", "typey:typey-type.json"], ["SOUPBSD", "typey:typey-type.json"]]]
-    ]);
-    expect(addOutlinesToWordsInCombinedDict(dictContent, combinedLookupDictionary, dictName, seenSet)).toEqual([expectedResult, expectedSet]);
-  })
-})
-
-describe('combining valid dictionaries without sorting', () => {
-  it('returns a combined Map with strokes left unsorted which means dictionary insertion order and alphabetic where personal dictionaries are processed first, then Typey Type, then Plover', () => {
-    let personalDictionaries = [
-      [ "personal.json", {"TAO*EUPT": "Typey Type"}],
-      [ "overrides.json", {"SED": "sed"}],
-      [ "misstrokes.json", {"E": "he"}],
-    ];
-
-    let testTypeyTypeDict = {
-      "-F": "of",
-      "EU": "I",
-      "HE": "he",
-      "SAEUD": "said",
-      "SED": "said",
-      "SKP": "and",
-      "SOPL": "some",
-      "SOUPBDZ": "sounds",
-      "TO": "to",
-      "TPHO": "no",
-      "TPOR": "for",
-      "WHEPB": "when",
-    }
-
-    let testPloverDict = {
-      "*F": "of",
-      "-F": "of",
-      "1-R": "I",
-      "APBD": "and",
-      "E": "he",
-      "HE": "he",
-      "O": "to",
-      "P-R": "for",
-      "PHO": "no",
-      "SAEUD": "said",
-      "SED": "said",
-      "SKP": "and",
-      "SOUPBD/-Z": "sounds",
-      "SOUPBDZ": "sounds",
-      "SOUPBSD": "sounds",
-      "SP": "and",
-      "SPH": "some",
-      "WH": "when",
-    };
-
-    let expectedCombinedDict = new Map([
-      ['Typey Type', [
-        ['TAO*EUPT', 'user:personal.json'],
-      ]],
-      ['and', [
-        ['SKP', 'typey:typey-type.json'],
-        ['APBD', 'plover:plover-main-3-jun-2018.json'],
-        ['SKP', 'plover:plover-main-3-jun-2018.json'],
-        ['SP', 'plover:plover-main-3-jun-2018.json'],
-      ]],
-      ["to", [["TO", "typey:typey-type.json"], ["O", "plover:plover-main-3-jun-2018.json"]]],
-      ["said", [
-        ["SAEUD", "typey:typey-type.json"],
-        ["SED", "typey:typey-type.json"],
-        ["SAEUD", "plover:plover-main-3-jun-2018.json"],
-        ["SED", "plover:plover-main-3-jun-2018.json"],
-      ]],
-      ["sed", [["SED", "user:overrides.json"]]],
-      ["sounds", [
-        ["SOUPBDZ", "typey:typey-type.json"],
-        ["SOUPBD/-Z", "plover:plover-main-3-jun-2018.json"],
-        ["SOUPBDZ", "plover:plover-main-3-jun-2018.json"],
-        ["SOUPBSD", "plover:plover-main-3-jun-2018.json"],
-      ]],
-      ["he", [
-        ["E", "user:misstrokes.json"],
-        ["HE", "typey:typey-type.json"],
-        ["E", "plover:plover-main-3-jun-2018.json"],
-        ["HE", "plover:plover-main-3-jun-2018.json"],
-      ]],
-      ["of", [
-        ["-F", "typey:typey-type.json"],
-        ["*F", "plover:plover-main-3-jun-2018.json"],
-        ["-F", "plover:plover-main-3-jun-2018.json"],
-      ]],
-      ["I", [
-        ["EU", "typey:typey-type.json"],
-        ["1-R", "plover:plover-main-3-jun-2018.json"],
-      ]],
-      ["some", [
-        ["SOPL", "typey:typey-type.json"],
-        ["SPH", "plover:plover-main-3-jun-2018.json"],
-      ]],
-      ["no", [
-        ["TPHO", "typey:typey-type.json"],
-        ["PHO", "plover:plover-main-3-jun-2018.json"],
-      ]],
-      ["for", [
-        ["TPOR", "typey:typey-type.json"],
-        ["P-R", "plover:plover-main-3-jun-2018.json"],
-      ]],
-      ["when", [
-        ["WHEPB", "typey:typey-type.json"],
-        ["WH", "plover:plover-main-3-jun-2018.json"],
-      ]]
-    ]);
-    expect(combineValidDictionaries(personalDictionaries, testTypeyTypeDict, testPloverDict)).toEqual(expectedCombinedDict);
-  })
-})
-
-describe('choose outline for phrase', () => {
-  describe('returns array of chosen outline and number of lookup attempts', () => {
-    it('simple example returns 1 attempt for KP-PL', () => {
-      let wordOrPhrase = "example";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KP-PL", 1 ]);
+describe('create stroke hint for phrase', () => {
+  describe('returns string showing all the space or slash separated strokes to write a whole phrase', () => {
+    it('showing "KPA/AEU KPA/TPAR/PHER" for "A Farmer"', () => {
+      let wordOrPhraseMaterial = "A Farmer";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/AEU KPA/TPAR/PHER");
     });
 
-    it('P*ERS for {&%} percent', () => {
-      let wordOrPhrase = "%";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "P*ERS", 1 ]);
+    it('showing "*EU/TP*P/A*/R*/PH*/*E/R*" for "iFarmer"', () => {
+      let wordOrPhraseMaterial = "iFarmer";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("*EU/TP*P/A*/R*/PH*/*E/R*");
     });
 
-    // it('1-BGS for {^}{#F1}{^}', () => {
-    //   let wordOrPhrase = "#F1";
-    //   let chosenStroke = "";
-    //   let strokeLookupAttempts = 0;
-
-    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "1-BGS", 1 ]);
-    // });
-
-    it('single closing curly quote ’ should match TP-L/TP-L', () => {
-      let wordOrPhrase = "’";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TP-L/TP-L", 1 ]);
+    it('showing hint word starting with apostrophe using dictionary formatting symbols', () => {
+      let wordOrPhraseMaterial = "'twas";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TWA*S");
     });
 
-    it('{^}:{^} with "KHR-PB" for colon with suppressed spaces like clock time', () => {
-      let wordOrPhrase = ":";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KHR-PB", 1 ]);
+    it('show full word hints for a phrase ending with apostrophe and ess when the exact condensed stroke entry exists', () => {
+      let wordOrPhraseMaterial = "gentlemen's";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKWR*EPL/AES");
     });
 
-    it('{^}^{^} with "KR-RT" for caret with suppressed spaces', () => {
-      let wordOrPhrase = "^";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KR-RT", 1 ]);
+    it('show full word hints for a phrase ending with apostrophe and ess when there is no condensed stroke entry', () => {
+      let wordOrPhraseMaterial = "optometrist's";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("OP/TOPL/TREUFT/AES");
     });
 
-    it('{^}({^} with "PREPB" for opening parenthesis', () => {
-      let wordOrPhrase = "(";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PREPB", 1 ]);
+    it('show full word hints for a phrase containing two words ending with apostrophe and ess when there are no condensed stroke entries', () => {
+      let wordOrPhraseMaterial = "podiatrist's optometrist's";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("POED/TREUFT/AES OP/TOPL/TREUFT/AES");
     });
 
-    // THIS is what it ought to do with the strokes above but we're brute forcing single-letter
-    // … lookups to use a fixed dictionary
-    // it('{^}({^} with "P*PB" for opening parenthesis', () => {
-    //   let wordOrPhrase = "(";
-    //   let chosenStroke = "";
-    //   let strokeLookupAttempts = 0;
-
-    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "P*PB", 1 ]);
-    // });
-
-    // it('for trademark symbol', () => {
-    //   let wordOrPhrase = "™";
-    //   let chosenStroke = "";
-    //   let strokeLookupAttempts = 0;
-
-    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TR*PL", 1 ]);
-    // });
-
-    // it('for dollar with space, not suppressed should match "$"', () => {
-    //   let wordOrPhrase = "$";
-    //   let chosenStroke = "";
-    //   let strokeLookupAttempts = 0;
-
-    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHRORB", 1 ]);
-    // });
-
-    it('for dollar with suppressed trailing space should match ${^}', () => {
-      let wordOrPhrase = "$";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TK-PL", 1 ]);
+    it('show full word hints for a phrase containing a capitalised word with an apostrophe', () => {
+      let wordOrPhraseMaterial = "Isn't";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/S-PBT");
     });
 
-    it('for hash with suppressed trailing space', () => {
-      let wordOrPhrase = "#";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HAERB", 1 ]);
+    it('show full word hints for a phrase containing a word with an apostrophe', () => {
+      let wordOrPhraseMaterial = "it can't";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("T K-PBT");
     });
 
-    it('for left angle bracket with suppressed space', () => {
-      let wordOrPhrase = "<";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PWRABG", 1 ]);
+    it('show full word hints for a phrase containing a word with an apostrophe and capitalisation', () => {
+      let wordOrPhraseMaterial = "it Can't";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("T KPA/K-PBT");
     });
 
-    // describe('for left angle bracket with space, not suppressed', () => {
-    //   let wordOrPhrase = "< ";
-    //   let chosenStroke = "";
-    //   let strokeLookupAttempts = 0;
-
-    //   expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HR*PB", 1 ]);
-    // });
-
-    it('with OERBGS for oh,', () => {
-      let wordOrPhrase = "oh,";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "OERBGS", 1 ]);
+    it('show full word hints for a phrase of 12 words', () => {
+      let wordOrPhraseMaterial = "a a a a a a a a a a a a";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU");
     });
 
-    it('with HRAO*EUBG for , like,', () => {
-      let wordOrPhrase = ", like,";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HRAO*EUBG", 1 ]);
+    it('show hints for first 12 words of longer phrase', () => {
+      let wordOrPhraseMaterial = "a a a a a a a a a a a a a a";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU AEU xxx");
     });
 
-    it('with a hyphenated phrase', () => {
-      let wordOrPhrase = "hit-and-miss";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "H-PLS", 1 ]);
+    it('with only punctuation dash', () => {
+      let wordOrPhraseMaterial = '-';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("H-PB");
     });
 
-    it('with a prefix', () => {
-      let wordOrPhrase = "relent";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "RE/HREPBT", 1 ]);
+    it('with only punctuation at symbol', () => {
+      let wordOrPhraseMaterial = '@';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKWRAT");
     });
 
-    it('with a prefix', () => {
-      let wordOrPhrase = "autoscroll";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "A*UT/SKROL", 1 ]);
+    it('with preceding double quotes and capital letter', () => {
+      let wordOrPhraseMaterial = '"It';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KW-GS KPA*/T");
     });
 
-    it('with long', () => {
-      let wordOrPhrase = "long";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBG", 1 ]);
+    it('with preceding exclamation mark and unknown word', () => {
+      let wordOrPhraseMaterial = '!foo';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKHRAPL TP*/O*/O*");
     });
 
-    it('with longing', () => {
-      let wordOrPhrase = "longing";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBG/-G", 1 ]);
+    it('with and unknown word and trailing exclamation mark', () => {
+      let wordOrPhraseMaterial = 'foo!';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TP*/O*/O* SKHRAPL");
     });
 
-    xit('with multiple suffixes', () => {
-      let wordOrPhrase = "cuffings";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KUF/-G/-S", 1 ]);
+    it('with preceding double quotes and capital letter', () => {
+      let wordOrPhraseMaterial = 'houses?" It';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HO*UFS H-F KR-GS KPA/T");
     });
 
-    xit('with multi-syllable word with multiple suffixes', () => {
-      let wordOrPhrase = "buffetings";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PWUF/ET/-G/-S", 1 ]);
+    it('with trailing question mark', () => {
+      let wordOrPhraseMaterial = 'houses?';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HO*UFS H-F");
     });
 
-    it('with WAPBGD/-S for wanderings', () => {
-      let wordOrPhrase = "wanderings";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "WAPBGD/-S", 1 ]);
+    it('with word that is a prefix and a word as a word with trailing punctuation', () => {
+      let wordOrPhraseMaterial = 'be?';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("-B H-F");
     });
 
-    it('shows the outline for the word "as"', () => {
-      let wordOrPhrase = "as";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-      let globalLookupDictionaryForAs = new Map([
-        ["as", [
-          ["TEFT/A/AZ", "typey:typey-type.json"],
-          ["TEFT/AS", "typey:typey-type.json"],
-          ["TEFT/ASZ", "typey:typey-type.json"],
-          ["TEFT/AZ", "typey:typey-type.json"],
-        ]],
-      ]);
-
-      // maybe it would be nice to prioritise AZ over AS here…
-      // not of prioritising S over Z endings…
-      // instead reserving AS for {^s}{a^} per old dict:
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForAs, chosenStroke, strokeLookupAttempts)).toEqual( [ "TEFT/AS", 1 ]);
+    it('with word that is a prefix and a word as a word with multiple trailing punctuation', () => {
+      let wordOrPhraseMaterial = "be?'";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("-B H-F AE");
     });
 
-    it('shows the outline for the word "rest"', () => {
-      let wordOrPhrase = "rest";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-      let globalLookupDictionaryForRest = new Map([
-        ["rest", [
-          ["REFT", "typey:typey-type.json"],
-          ["R*ES", "typey:typey-type.json"],
-        ]],
-        ["REST", [
-          ["R*EFT", "typey:typey-type.json"],
-        ]],
-      ]);
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForRest, chosenStroke, strokeLookupAttempts)).toEqual( [ "REFT", 1 ]);
+    it('with word that is a prefix and a word as a prefix to a word', () => {
+      let wordOrPhraseMaterial = "bekettle";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PWE/KET/*L");
     });
 
-    it('shows the outline for the word "into"', () => {
-      let wordOrPhrase = "into";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-      let globalLookupDictionaryForInto = new Map([
-        ["into", [
-          ["TEFT/TPHAO", "typey:typey-type.json"],
-          ["TEFT/SPWAO", "typey:typey-type.json"],
-          ["TEFT/EUPB/TO", "typey:typey-type.json"],
-          ["TEFT/TPHAO*", "typey:typey-type.json"],
-          ["TEFT/TPHRAO", "typey:typey-type.json"],
-        ]],
-      ]);
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForInto, chosenStroke, strokeLookupAttempts)).toEqual( [ "TEFT/TPHAO", 1 ]);
+    it('with prefix that is also a word that has trailing hyphen and a word', () => {
+      let wordOrPhraseMaterial = "quasi-experimental";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KWAS/KWREU/SPAOERL");
     });
 
-    it('shows the outline for the word "get"', () => {
-      let wordOrPhrase = "get";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-      let globalLookupDictionaryForGet = new Map([
-        ["get", [
-          ["TKPW-T", "typey:typey-type.json"],
-          ["TKPWET", "typey:top-10000-project-gutenberg-words.json"],
-        ]],
-      ]);
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForGet, chosenStroke, strokeLookupAttempts)).toEqual( [ "TKPWET", 1 ]);
+    it('with prefix that includes a hyphen and a word', () => {
+      let wordOrPhraseMaterial = "re-cover";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("R*E/KOFR");
     });
 
-    it('shows the outline for the word "a"', () => {
-      let wordOrPhrase = "a";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "AEU", 1 ]);
+    it('with prefix that includes a hyphen and a gibberish word', () => {
+      let wordOrPhraseMaterial = "self-dckx";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SEF/TK*/KR*/K*/KP*");
     });
 
-    it('shows the outline for the word "A"', () => {
-      let wordOrPhrase = "A";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "KPA/AEU", 1 ]);
+    it('with prefix that is also a word that has trailing hyphen and a fake word', () => {
+      let wordOrPhraseMaterial = "quasi-confuzzled";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KWAS/KWREU/KR*/O*/TPH*/TP*/*U/STKPW*/STKPW*/HR*/*E/TK*");
     });
 
-    it('shows the outline for the word "i"', () => {
-      let wordOrPhrase = "i";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "*EU", 1 ]);
+    it('with prefix that is not a word that has trailing hyphen and a word', () => {
+      let wordOrPhraseMaterial = "gly-oxide";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TKPWHRAOEU/KPAOEUD");
     });
 
-    it('shows the outline for the word "I"', () => {
-      let wordOrPhrase = "I";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "EU", 1 ]);
+    it('with prefix that is not a word that has trailing hyphen and a fake word', () => {
+      let wordOrPhraseMaterial = "gly-confuzzled";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TKPWHRAOEU/KR*/O*/TPH*/TP*/*U/STKPW*/STKPW*/HR*/*E/TK*");
     });
 
-    it('shows the outline for the word "trust"', () => {
-      let wordOrPhrase = "trust";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-      let globalLookupDictionaryForSituation = new Map([
-        ["trust", [
-          ["TRUFT", "typey:typey-type.json"],
-          ["TRUFT", "typey:top-10000-project-gutenberg-words.json"],
-          ["TR*US", "plover:plover.json"],
-          ["TRUF", "plover:plover.json"],
-        ]],
-        ["Trust", [
-          ["TR*UFT", "plover:plover.json"],
-        ]],
-      ]);
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryForSituation, chosenStroke, strokeLookupAttempts)).toEqual( [ "TRUFT", 1 ]);
+    it('with hyphenated compound word and suffix', () => {
+      let wordOrPhraseMaterial = "computer-ectomy";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPAOUR H-PB EBGT/PHEU");
     });
 
+    it('with unhyphenated compound word and suffix', () => {
+      let wordOrPhraseMaterial = "computerectomy";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPAOUR/EBGT/PHEU");
+    });
+
+    it('with hyphenated compound word and existing words', () => {
+      let wordOrPhraseMaterial = 'store-room';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("STOR H-PB RAOPL");
+    });
+
+    it('with only a suffix', () => {
+      let wordOrPhraseMaterial = "ectomy";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("EBGT/PHEU");
+    });
+
+    it('with hyphenated phrase', () => {
+      let wordOrPhraseMaterial = 'a hit-and-miss';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU H-PLS");
+    });
+
+    it('with hyphenated gibberish', () => {
+      let wordOrPhraseMaterial = 'aaaa-aaaa';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("A*/A*/A*/A* H-PB A*/A*/A*/A*");
+    });
+
+    describe('with hyphenated letters with some fingerspelling strokes', () => {
+      it('shows fingerspelling stroke and xxx', () => {
+        let wordOrPhraseMaterial = 'c-ç';
+        expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KR* H-PB xxx");
+      });
+    });
+
+    describe('with hyphenated letters without fingerspelling strokes', () => {
+      it('shows xxx for all single letters with no strokes', () => {
+        let wordOrPhraseMaterial = 'ç-ç';
+        expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("xxx H-PB xxx");
+      });
+    });
+
+    // TODO
+    xit('with a colon, space, opening quote, and capitalised word', () => {
+      let wordOrPhraseMaterial = 'and said: "You';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKP SAEUD STPH-FPLT KW-GS KPA*/U");
+    });
+
+    it('with full stop, closing double quote, and capitalised word', () => {
+      let wordOrPhraseMaterial = '." Outside';
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("P-P KR-GS KPA/OUDZ");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TP-PL KR-GS KPA/OUDZ");
+    });
 
     // TODO:
-    // This one currently shows "PHAEUD/EPB" instead of "PHAEUD/*EPB" because "PHAEUD/*EPB" is
-    // penalised 3 times: once for being "longer", once for having a star, once for having a slash,
-    // while "PHAEUD/EPB" is penalised only for having a slash without being a suffix.
-    xit('shows actual suffix stroke for maiden', () => {
-      let wordOrPhrase = "maiden";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
-
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PHAEUD/*EPB", 1 ]);
+    xit('with hyphenated phrase and trailing full stop', () => {
+      let wordOrPhraseMaterial = 'a hit-and-miss.';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU H-PLS TP-PL");
     });
 
-    // TODO: decide on showing numbers or letters with #
-    xit('returns number strokes', () => {
-      let wordOrPhrase = "0";
-      let chosenStroke = "";
-      let strokeLookupAttempts = 0;
+    it('with preceding double quote', () => {
+      let wordOrPhraseMaterial = '"you';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KW-GS U");
+    });
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "#O", 1 ]);
+    it('with word, full stop, space, double quote, and capital letter', () => {
+      let wordOrPhraseMaterial = 'cat. "You';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KAT P-P KW-GS KPA/U"); // ideally it would be KAT TP-PL KW-GS U
+    });
+
+    it('with word, full stop, double quote, space, and capital letter', () => {
+      let wordOrPhraseMaterial = 'cat." You';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KAT P-P KR-GS KPA/U"); // ideally it would be KAT TP-PL KR-GS U
+    });
+
+    it('with trailing full stop', () => {
+      let wordOrPhraseMaterial = 'her.';
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HER TP-PL");
+    });
+
+    it('with "cross-petition"', () => {
+      let wordOrPhraseMaterial = 'In your cross-petition';
+
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/TPH KWROUR KR-PGS");
+    });
+
+    xit('with "cross-petition" and a comma', () => {
+      let wordOrPhraseMaterial = 'In your cross-petition, you';
+
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/TPH KWROUR KR-PGS KW-BG U");
     });
   });
 
-  // FIXME: these probably shouldn't be so unstable
-  describe('dictionaries in different orders', () => {
-    it('returns outline for lovers, preferring O', () => {
-      let wordOrPhrase = "lovers";
+  describe('returns outline string with standard affixes', () => {
+    xit('showing "TRAFL/HREUPBG" for "travelling" given "/HREUPBG": "ling"', () => {
+      let wordOrPhrase = "travelling";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
-      let globalLookupDictionaryWithHROFRSfirst = new Map([
-        ["lovers", [["HROFRS", "typey:typey-type.json"], ["HRUFRS", "typey:typey-type.json"]]],
-      ]);
+      // let globalLookupDictionary = new Map([
+      //   ["{^ling}", [["HREUPBG", "typey-type.json"]]],
+      //   ["travel", [["TRAFL", "typey-type.json"]]],
+      // ]);
+      // let affixes = {
+      //   suffixes: [
+      //     ["/HREUPBG", "ling"],
+      //   ]
+      // };
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryWithHROFRSfirst, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROFRS", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TRAFL/HREUPBG", 1 ]);
+    });
+  });
+
+  describe('returns outlines for words with apostrophes', () => {
+    it('showing "OP/TOPL/TREUFT/AES" for "optometrist\'s"', () => {
+      let wordOrPhrase = "optometrist's";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "OP/TOPL/TREUFT/AES", 1 ]);
+    });
+  });
+
+  describe('returns outline string with custom affixes', () => {
+    xit('showing "TRAFL/*LG" for "travelling" given "/*LG": "ling"', () => {
+      let wordOrPhrase = "travelling";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+      // let globalLookupDictionary = new Map([
+      //   ["{^ling}", [["*LG", "dict-en-AU-vocab.json"]]],
+      //   ["travel", [["TRAFL", "typey-type.json"]]],
+      // ]);
+      // let affixes = {
+      //   suffixes: [
+      //     ["/*LG", "ling"],
+      //   ]
+      // };
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TRAFL/*LG", 1 ]);
+    });
+  });
+
+  describe('returns outline string with words using orthography rules', () => {
+    // it('showing outline for "nellies"', () => {
+    //   let wordOrPhraseMaterial = "nellies";
+    //   expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TPHEL/KWREU/-S");
+    // });
+
+    it('with orthography rule to replace "e" with "ing"', () => {
+      let wordOrPhrase = "narrating";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "TPHAR/AEUT/-G", 1 ]);
     });
 
-    it('returns outline for lovers, preferring U', () => {
-      let wordOrPhrase = "lovers";
+    it('with orthography rule to find stroke after replacing "e" with "ing"', () => {
+      let wordOrPhrase = "seething";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
-      let globalLookupDictionaryWithHRUFRSfirst = new Map([
-        ["lovers", [["HRUFRS", "typey:typey-type.json"], ["HROFRS", "typey:typey-type.json"]]],
-      ]);
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionaryWithHRUFRSfirst, chosenStroke, strokeLookupAttempts)).toEqual( [ "HRUFRS", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "SAO*ET/-G", 1 ]);
+    });
+
+    it('with a mistyped orthography rule to find stroke by appending "ing" to word otherwise ending in "e"', () => {
+      let wordOrPhrase = "seetheing";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "SAO*ET/TK-LS/-G", 1 ]);
+    });
+
+    it('with orthography rule to replace "e" with "ing" where "eing" ending is also a word', () => {
+      let wordOrPhrase = "binging";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PWEUPBG/-G", 1 ]);
+    });
+
+    it('with orthography rule to append "eing" where replacing "e" with "ing" is also a word', () => {
+      let wordOrPhrase = "bingeing";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "PWEUPB/-PBLG/TK-LS/-G", 1 ]);
+    });
+
+    it('with orthography rule to replace "e" with "ing"', () => {
+      let wordOrPhrase = "lodging";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBLG/-G", 1 ]);
+    });
+
+    xit('with orthography rule to replace "e" with "ing" and append an "s" using multiple suffixes', () => {
+      let wordOrPhrase = "lodgings";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts)).toEqual( [ "HROPBLG/-G/-S", 1 ]);
+    });
+  });
+
+
+  describe('returns fingerspelling results for single letters except for single-letter words', () => {
+    it('first third lowercase alphabet', () => {
+      let wordOrPhraseMaterial = "a b c d e f g h i";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEU PW* KR* TK* *E TP* TKPW* H* *EU");
+    });
+
+    it('second third lowercase alphabet', () => {
+      let wordOrPhraseMaterial = "j k l m n o p q r";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKWR* K* HR* PH* TPH* O* P* KW* R*");
+    });
+
+    it('final third lowercase alphabet', () => {
+      let wordOrPhraseMaterial = "s t u v w x y z";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("S* T* *U SR* W* KP* KWR* STKPW*");
+    });
+
+    it('first third uppercase alphabet', () => {
+      let wordOrPhraseMaterial = "A B C D E F G H I";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/AEU PW*P KR*P TK*P *EP TP*P TKPW*P H*P EU");
+    });
+
+    it('second third uppercase alphabet', () => {
+      let wordOrPhraseMaterial = "J K L M N O P Q R";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKWR*P K*P HR*P PH*P TPH*P O*P P*P KW*P R*P");
+    });
+
+    it('final third uppercase alphabet', () => {
+      let wordOrPhraseMaterial = "S T U V W X Y Z";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("S*P T*P *UP 5R W*P 10R KWR*P STKPW*P");
+    });
+  });
+
+  describe('returns string showing text with spaced punctuation', () => {
+    it('common punctuation', () => {
+      let wordOrPhraseMaterial = "! # $ % & , . : ; = ? @";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("SKHRAPL HAERB TPHRORB P*ERS SKP* KW-BG TP-PL KHR-PB SKHR-PB KW-L H-F SKWRAT");
+    });
+
+    it('other punctuation', () => {
+      let wordOrPhraseMaterial = "* ^ ` | ~ — – - ©";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("STA*R KR-RT KH-FG PAO*EUP T*LD EPL/TKA*RB EPB/TKA*RB H*B KPR-T");
+    });
+
+    it('brackets', () => {
+      let wordOrPhraseMaterial = "( ) [ ] { }";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PREPB PR*EPB PWR-BGT PWR*BGT TPR-BGT TPR*BGT");
+    });
+  });
+
+  describe('returns string containing top-level domain', () => {
+    it('shows outline for ".com"', () => {
+      let wordOrPhraseMaterial = ".com";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KROPL");
+    });
+
+    xit('shows outline for "didoesdigital.com"', () => {
+      let wordOrPhraseMaterial = "didoesdigital.com";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TK*/*EU/TK*/O*/*E/S*/TK*/*EU/TKPW*/*EU/T*/A*/HR* KROPL");
+    });
+  });
+
+  describe('returns outlines for capitalised word with trailing full stop', () => {
+    it('shows outline for "Mass."', () => {
+      let wordOrPhraseMaterial = "Mass.";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/PHAS TP-PL");
+    });
+  });
+
+  describe('returns outline for string containing formal titles', () => {
+    it('shows outline for "Dr."', () => {
+      let wordOrPhraseMaterial = "Dr.";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TKR-FPLT");
+    });
+
+    it('shows outline for "Dr. Chant"', () => {
+      let wordOrPhraseMaterial = "Dr. Chant";
+      // Note: It would be amazing if it didn't choose KPA/ here but that seems really hard
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TKR-FPLT KPA/KHAPBT");
+    });
+
+    it('shows outline for "Mx."', () => {
+      let wordOrPhraseMaterial = "Mx.";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PH-BGS");
+    });
+
+    it('shows outline for "Mx. Eldridge"', () => {
+      let wordOrPhraseMaterial = "Mx. Eldridge";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PH-BGS EL/TKREUPBLG");
+    });
+
+    it('shows outline for "Mr. and Mrs."', () => {
+      let wordOrPhraseMaterial = "Mr. and Mrs.";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PHRARPLS");
+    });
+
+    xit('shows outline for "Mr. and Mrs. Long"', () => {
+      let wordOrPhraseMaterial = "Mr. and Mrs. Long";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PHRARPLS KPA/HROPBG");
+    });
+  });
+
+  describe('returns string showing text with numbers', () => {
+    it('zero to five with dashes', () => {
+      // let wordOrPhraseMaterial = "0.1.2.3.4.5.6.7.8.9.10";
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O P-P #S P-P #T- P-P #P- P-P #H P-P #A P-P #F P-P #-P P-P #L P-P #-T 1/0");
+      let wordOrPhraseMaterial = "-0-1-2-3-4-5";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("H*B #O H-PB #S H-PB #T- H-PB #P- H-PB #H H-PB #A");
+    });
+
+    it('five to ten with dashes', () => {
+      // let wordOrPhraseMaterial = "0.1.2.3.4.5.6.7.8.9.10";
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O P-P #S P-P #T- P-P #P- P-P #H P-P #A P-P #F P-P #-P P-P #L P-P #-T 1/0");
+      let wordOrPhraseMaterial = "-5-6-7-8-9-10";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("H*B #A H-PB #F H-PB #-P H-PB #L H-PB #-T H-PB 1/0");
+    });
+
+    it('zero to ten with spaces', () => {
+      // let wordOrPhraseMaterial = "0 1 2 3 4 5 6 7 8 9 10";
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O #S #T- #P- #H #A #F #-P #L #-T 1/0");
+      let wordOrPhraseMaterial = "0 0 1 2 3 4 5 6 7 8 9 10";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O 0EU 1 2 3 4 R5 6 7 8 9 1/0");
+    });
+
+    it('returns strings with numbers containing zeroes and commas', () => {
+      let wordOrPhraseMaterial = "100 900 1000 1,000 10000 10,000";
+      // FIXME: should probably show #SZ #TZ #TPHOUZ #SO/W-B/THUZ 10/THUZ #SO/W-B/THUZ
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1/0/0 9/0/0 1/0/0/0 1 KW-BG 0/0/0 1/0/0/0/0 1/0 KW-BG 0/0/0");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-Z -9Z 1/THOUZ TPHOUZ 1-Z/HUPB/HUPB #SO/W-B/THUZ");
+    });
+
+    it('returns string with double numbers', () => {
+      let wordOrPhraseMaterial = "22 33";
+      // FIXME: should probably show #T-D or 2-D and #P-D
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("2-D 3-D");
+    });
+
+    it('returns string with currency', () => {
+      let wordOrPhraseMaterial = "$100 $900";
+      // FIXME: should probably show #SDZ #-TDZ
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-DZ TK-PL -9Z");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-DZ TPHRORB -9Z");
+    });
+
+    it('returns string with clock time', () => {
+      let wordOrPhraseMaterial = "1:00 9:00 10:00 19:00 20:00";
+      // FIXME: should probably show #SK or #SBG, #KT or #BGT, #SKO or #SOBG, #SKT or #SBGT, and #TKO or #TOBG
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1 KHR-PB 0/0 9 KHR-PB 0/0 1/0 KHR-PB 0/0 1/9 KHR-PB 0/0 2/0 KHR-PB 0/0");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-BG K-9 1/0 KHR-PB #-Z 1-9 KHR-PB #-Z 2/0 KHR-PB #-Z");
+    });
+
+    it('showing good stroke hint for known word and suffix with one hyphen', () => {
+      let wordOrPhraseMaterial = "kettle-acre";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KET/*L/A*EURBG");
+    });
+
+    it('showing good stroke hint for known word and suffix with two hyphens', () => {
+      let wordOrPhraseMaterial = "kettle-in-law";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KET/*L/*EUPB/HRAU");
+    });
+
+    it('showing good stroke hint for known word and prefix with one hyphen', () => {
+      let wordOrPhraseMaterial = "ani-kettle";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEUPB/SKWREU/KET/*L");
+    });
+
+    it('showing good stroke hint for known word and prefix with two hyphens', () => {
+      let wordOrPhraseMaterial = "over-the-kettle";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AUFR/-T/KET/*L");
+    });
+
+    it('showing good stroke hint for known word and suffix containing a colon and numbers', () => {
+      let wordOrPhraseMaterial = "kettle:10";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KET/*L/10*BG");
+    });
+
+    xit('showing good stroke hint for gibberish word and suffix with one hyphen', () => {
+      let wordOrPhraseMaterial = "dckx-acre";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TK*/KR*/K*/KP*/A*EURBG");
+    });
+
+    xit('showing good stroke hint for gibberish word and suffix with two hyphens', () => {
+      let wordOrPhraseMaterial = "dckx-in-law";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TK*/KR*/K*/KP*/*EUPB/HRAU");
+    });
+
+    xit('showing good stroke hint for gibberish word and prefix with one hyphen', () => {
+      let wordOrPhraseMaterial = "ani-dckx";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AEUPB/SKWREU/TK*/KR*/K*/KP*");
+    });
+
+    xit('showing good stroke hint for gibberish word and prefix with two hyphens', () => {
+      let wordOrPhraseMaterial = "over-the-dckx";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("AUFR/-T/TK*/KR*/K*/KP*");
+    });
+
+    xit('showing good stroke hint for gibberish word and suffix containing a colon and numbers', () => {
+      let wordOrPhraseMaterial = "dckx:10";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TK*/KR*/K*/KP*/10*BG");
+    });
+
+    it('showing good stroke hint for one lowercase word hash tag', () => {
+      let wordOrPhraseMaterial = "#steno";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HAERB STOEUPB");
+    });
+
+    xit('showing good stroke hint for one capitalised word hash tag', () => {
+      let wordOrPhraseMaterial = "#Steno";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HAERB KPA*/STOEUPB");
+    });
+
+    xit('showing good stroke hint for camel case hash tags', () => {
+      let wordOrPhraseMaterial = "#StenoLife";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("HAERB KPA*/STOEUPB KPA*/HRAOEUF");
+    });
+
+    xit('showing good stroke hint for camel case hash tags in a sentence', () => {
+      let wordOrPhraseMaterial = "This is #StenoLife";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA*/TH S HAERB KPA*/STOEUPB KPA*/HRAOEUF");
     });
   });
 });
-
-describe('generate dictionary entries', () => {
-  it('returns array of phrases and strokes for top 100 words', () => {
-    let top100Words = ['the', 'of', 'and', 'to', 'in', 'I', 'that', 'was', 'his', 'he', 'it', 'with', 'is', 'for', 'as', 'had', 'you', 'not', 'be', 'her', 'on', 'at', 'by', 'which', 'have', 'or', 'from', 'this', 'him', 'but', 'all', 'she', 'they', 'were', 'my', 'are', 'me', 'one', 'their', 'so', 'an', 'said', 'them', 'we', 'who', 'would', 'been', 'will', 'no', 'when', 'there', 'if', 'more', 'out', 'up', 'into', 'do', 'any', 'your', 'what', 'has', 'man', 'could', 'other', 'than', 'our', 'some', 'very', 'time', 'upon', 'about', 'may', 'its', 'only', 'now', 'like', 'little', 'then', 'can', 'should', 'made', 'did', 'us', 'such', 'a', 'great', 'before', 'must', 'two', 'these', 'see', 'know', 'over', 'much', 'down', 'after', 'first', 'Mr.', 'good', 'men'];
-
-    expect(generateListOfWordsAndStrokes(top100Words, globalLookupDictionary)).toEqual(
-      [
-        {phrase: "the", stroke: "-T"},
-        {phrase: "of", stroke: "-F"},
-        {phrase: "and", stroke: "SKP"},
-        {phrase: "to", stroke: "TO"},
-        {phrase: "in", stroke: "TPH"},
-        {phrase: "I", stroke: "EU"},
-        {phrase: "that", stroke: "THA"},
-        {phrase: "was", stroke: "WAS"},
-        {phrase: "his", stroke: "HEUS"},
-        {phrase: "he", stroke: "HE"},
-        {phrase: "it", stroke: "T"},
-        {phrase: "with", stroke: "W"},
-        {phrase: "is", stroke: "S"},
-        {phrase: "for", stroke: "TPOR"},
-        {phrase: "as", stroke: "AZ"},
-        {phrase: "had", stroke: "H"},
-        {phrase: "you", stroke: "U"},
-        {phrase: "not", stroke: "TPHOT"},
-        {phrase: "be", stroke: "-B"},
-        {phrase: "her", stroke: "HER"},
-        {phrase: "on", stroke: "OPB"},
-        {phrase: "at", stroke: "AT"},
-        {phrase: "by", stroke: "PWEU"},
-        {phrase: "which", stroke: "WEU"},
-        {phrase: "have", stroke: "SR"},
-        {phrase: "or", stroke: "OR"},
-        {phrase: "from", stroke: "TPR"},
-        {phrase: "this", stroke: "TH"},
-        {phrase: "him", stroke: "HEUPL"},
-        {phrase: "but", stroke: "PWUT"},
-        {phrase: "all", stroke: "AUL"},
-        {phrase: "she", stroke: "SHE"},
-        {phrase: "they", stroke: "THE"},
-        {phrase: "were", stroke: "WR"},
-        {phrase: "my", stroke: "PHEU"},
-        {phrase: "are", stroke: "R"},
-        {phrase: "me", stroke: "PHE"},
-        {phrase: "one", stroke: "WUPB"},
-        {phrase: "their", stroke: "THAEUR"},
-        {phrase: "so", stroke: "SO"},
-        {phrase: "an", stroke: "APB"},
-        {phrase: "said", stroke: "SED"},
-        {phrase: "them", stroke: "THEPL"},
-        {phrase: "we", stroke: "WE"},
-        {phrase: "who", stroke: "WHO"},
-        {phrase: "would", stroke: "WO"},
-        {phrase: "been", stroke: "PW-PB"},
-        {phrase: "will", stroke: "HR"},
-        {phrase: "no", stroke: "TPHO"},
-        {phrase: "when", stroke: "WHEPB"},
-        {phrase: "there", stroke: "THR"},
-        {phrase: "if", stroke: "TP"},
-        {phrase: "more", stroke: "PHOR"},
-        {phrase: "out", stroke: "OUT"},
-        {phrase: "up", stroke: "UP"},
-        {phrase: "into", stroke: "TPHAO"},
-        {phrase: "do", stroke: "TKO"},
-        {phrase: "any", stroke: "TPHEU"},
-        {phrase: "your", stroke: "KWROUR"},
-        {phrase: "what", stroke: "WHA"},
-        {phrase: "has", stroke: "HAS"},
-        {phrase: "man", stroke: "PHAPB"},
-        {phrase: "could", stroke: "KO"},
-        {phrase: "other", stroke: "OER"},
-        {phrase: "than", stroke: "THAPB"},
-        {phrase: "our", stroke: "OUR"},
-        {phrase: "some", stroke: "SOPL"},
-        {phrase: "very", stroke: "SRE"},
-        {phrase: "time", stroke: "TAOEUPL"},
-        {phrase: "upon", stroke: "POPB"},
-        {phrase: "about", stroke: "PW"},
-        {phrase: "may", stroke: "PHAE"},
-        {phrase: "its", stroke: "EUTS"},
-        {phrase: "only", stroke: "OEPBL"},
-        {phrase: "now", stroke: "TPHOU"},
-        {phrase: "like", stroke: "HRAOEUBG"},
-        {phrase: "little", stroke: "HREUL"},
-        {phrase: "then", stroke: "THEPB"},
-        {phrase: "can", stroke: "K"},
-        {phrase: "should", stroke: "SHO"},
-        {phrase: "made", stroke: "PHAED"},
-        {phrase: "did", stroke: "TK"},
-        {phrase: "us", stroke: "US"},
-        {phrase: "such", stroke: "SUFP"},
-        {phrase: "a", stroke: "AEU"},
-        {phrase: "great", stroke: "TKPWRAET"},
-        {phrase: "before", stroke: "PW-FR"},
-        {phrase: "must", stroke: "PHUFT"},
-        {phrase: "two", stroke: "TWO"},
-        {phrase: "these", stroke: "THEZ"},
-        {phrase: "see", stroke: "SAOE"},
-        {phrase: "know", stroke: "TPHOE"},
-        {phrase: "over", stroke: "OEFR"},
-        {phrase: "much", stroke: "PHUFP"},
-        {phrase: "down", stroke: "TKOUPB"},
-        {phrase: "after", stroke: "AF"},
-        {phrase: "first", stroke: "TPEUFRT"},
-        {phrase: "Mr.", stroke: "PHR-FPLT"},
-        {phrase: "good", stroke: "TKPWAOD"},
-        {phrase: "men", stroke: "PHEPB"},
-      ]
-    );
-  });
-
-  it('returns array of phrases and strokes for troublesome words', () => {
-    let wordList = ['a', 'A', 'i', 'I', ' ', '?', 'address', 'tom', 'Heather', 'TUESDAY', 'FIRST', '3D', 'bed,', 'man,', 'man!', 'man?', "'bed'", "'address'", "'Sinatra'", "'sinatra'", "'confuzzled'", 'and! and', 'andx and', 'andx andx and', 'and ', ' and', ' and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff -- cached', 'bed, man, and address' ];
-    // let wordList = [' ', '?', 'tom', 'Heather', 'TUESDAY', 'FIRST', 'bed,', 'man!', 'man?', "'sinatra'", 'and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff --cached', 'diff -- cached', '<title>Learn!</title>' ];
-
-    let globalLookupDictionaryForMatchingCapitalisationAndPunctuation = new Map([
-      ["a", [["AEU", "typey:typey-type.json"]]],
-      ["I", [["EU", "typey:typey-type.json"]]],
-      ["{^ ^}", [["S-P", "typey:typey-type.json"]]],
-      ["{?}", [["H-F", "typey:typey-type.json"]]],
-      ["{,}", [["KW-BG", "typey:typey-type.json"]]],
-      ["Tom", [["TOPL", "typey:typey-type.json"]]],
-      ["heather", [["H*ET/*ER", "typey:typey-type.json"]]],
-      ["Tuesday", [["TAOUZ", "typey:typey-type.json"]]],
-      ["first", [["TPEUFRT", "typey:typey-type.json"]]],
-      ["3D", [["30*EUD", "typey:typey-type.json"]]],
-      ["address", [["A/TKRES", "typey:typey-type.json"]]],
-      ["bed", [["PWED", "typey:typey-type.json"]]],
-      ["bed,", [["PWED KW-BG", "typey:typey-type.json"]]],
-      ["man", [["PHAPB", "typey:typey-type.json"]]],
-      ["{!}", [["SKHRAPL", "typey:typey-type.json"]]],
-      ["and again", [["STKPWEPBG", "typey:typey-type.json"]]],
-      ["and", [["SKP", "typey:typey-type.json"], ["APBD", "plover:plover.json"]]],
-      ["again", [["TKPWEPB", "typey:typey-type.json"]]],
-      ["media", [["PHO*EUD", "typey:typey-type.json"]]],
-      ["query", [["KWAOER/REU", "typey:typey-type.json"]]],
-      ["Sinatra", [["STPHAT/RA", "typey:typey-type.json"]]],
-      ["{^'}", [["AE", "typey:typey-type.json"]]],
-      ["push", [["PURB", "typey:typey-type.json"]]],
-      ["origin", [["O*RPBLG", "typey:typey-type.json"]]],
-      ["master", [["PHAFRT", "typey:typey-type.json"]]],
-      ["diff", [["TKEUF", "typey:typey-type.json"]]],
-      ["{--}", [["TK*RB", "typey:typey-type.json"]]],
-      ["cached", [["KAERBD", "typey:typey-type.json"]]],
-      ["{^>^}", [["A*EPBG", "typey:typey-type.json"]]],
-      ["{^<^}", [["AEPBG", "typey:typey-type.json"]]],
-      ["{^/^}", [["OEU", "typey:typey-type.json"]]],
-      ["title", [["TAOEULT", "typey:typey-type.json"]]],
-      ["learn", [["HRERPB", "typey:typey-type.json"]]]
-    ]);
-
-    expect(generateListOfWordsAndStrokes(wordList, globalLookupDictionaryForMatchingCapitalisationAndPunctuation)).toEqual(
-      [
-        {phrase: "a", stroke: "AEU"},
-        {phrase: "A", stroke: "KPA/AEU"},
-        {phrase: "i", stroke: "*EU"},
-        {phrase: "I", stroke: "EU"},
-        {phrase: " ", stroke: "S-P"},
-        {phrase: "?", stroke: "H-F"},
-        {phrase: "address", stroke: "A/TKRES"},
-        {phrase: "tom", stroke: "HRO*ER/TOPL"},
-        {phrase: "Heather", stroke: "KPA/H*ET/*ER"},
-        {phrase: "TUESDAY", stroke: "*URP/TAOUZ"},
-        {phrase: "FIRST", stroke: "*URP/TPEUFRT"},
-        {phrase: "3D", stroke: "30*EUD"},
-        {phrase: "bed,", stroke: "PWED KW-BG"}, // has exact entry in this test file
-        {phrase: "man,", stroke: "PHAPB KW-BG"}, // does not have exact entry
-        {phrase: "man!", stroke: "PHAPB SKHRAPL"},
-        {phrase: "man?", stroke: "PHAPB H-F"},
-        {phrase: "'bed'", stroke: "AE PWED AE"},
-        {phrase: "'address'", stroke: "AE A/TKRES AE"},
-        {phrase: "'Sinatra'", stroke: "AE STPHAT/RA AE"},
-        {phrase: "'sinatra'", stroke: "AE HRO*ER/STPHAT/RA AE"},
-        {phrase: "'confuzzled'", stroke: "AE KR*/O*/TPH*/TP*/*U/STKPW*/STKPW*/HR*/*E/TK* AE"},
-        {phrase: "and! and", stroke: "SKP SKHRAPL SKP"},
-        {phrase: "andx and", stroke: "A*/TPH*/TK*/KP* SKP"},
-        {phrase: "andx andx and", stroke: "A*/TPH*/TK*/KP* A*/TPH*/TK*/KP* SKP"}, // ideally this would include a space between fingerspelled words
-        {phrase: "and ", stroke: "SKP"},
-        {phrase: " and", stroke: "SKP"},
-        {phrase: " and ", stroke: "SKP"},
-        {phrase: "and again", stroke: "STKPWEPBG"},
-        {phrase: "and man!", stroke: "SKP PHAPB SKHRAPL"},
-        {phrase: "and man?", stroke: "SKP PHAPB H-F"},
-        {phrase: "and again!", stroke: "SKP TKPWEPB SKHRAPL"}, // ideally this would produce "STKPWEPBG SKHRAPL"
-        {phrase: "!", stroke: "SKHRAPL"},
-        {phrase: "!!", stroke: "SKHRAPL SKHRAPL"},
-        {phrase: "!man", stroke: "SKHRAPL PHAPB"}, // ideally this would produce "SKHRAPL TK-LS PHAPB"
-        {phrase: "! man", stroke: "SKHRAPL PHAPB"},
-        {phrase: "media query", stroke: "PHO*EUD KWAOER/REU"},
-        {phrase: "push origin master", stroke: "PURB O*RPBLG PHAFRT"},
-        {phrase: "diff -- cached", stroke: "TKEUF TK*RB KAERBD"},
-        {phrase: "bed, man, and address", stroke: "PWED KW-BG PHAPB KW-BG SKP A/TKRES"},
-        // {phrase: "ef eff ge", stroke: "*EF *E/TP*/TP* TKPW*/*E"},
-        // {phrase: "ef eff eff ge", stroke: "*EF *E/TP*/TP*/S-P/*E/TP*/TP* TKPW*/*E"},
-        // {phrase: "diff --cached", stroke: "TKEUF TK*RB TK-LS KAERBD"},
-        // {phrase: "<title>Learn!</title>", stroke: "AEPBG/TAOEULT/A*EPBG/KPA*/HRERPB/SKHRAPL/AEPBG/OEU/TAOEULT/A*EPBG"}
-      ]
-    // expect(generateListOfWordsAndStrokes(wordList, globalLookupDictionaryForMatchingCapitalisationAndPunctuation)).toEqual(
-    //   [
-    //     {phrase: " ", stroke: "S-P", lookups: 1},
-    //     {phrase: "?", stroke: "H-F", lookups: 1},
-    //     {phrase: "address", stroke: "A/TKRES", lookups: 1},
-    //     {phrase: "tom", stroke: "HRO*ER/TOPL", lookups: 1},
-    //     {phrase: "Heather", stroke: "KPA/H*ET/*ER", lookups: 1},
-    //     {phrase: "TUESDAY", stroke: "*URP/TAOUZ", lookups: 1},
-    //     {phrase: "FIRST", stroke: "*URP/TPEUFRT", lookups: 1},
-    //     {phrase: "bed,", stroke: "PWED KW-BG", lookups: 1}, // has exact entry in this test file
-    //     {phrase: "man,", stroke: "PHAPB KW-BG", lookups: 3}, // does not have exact entry
-    //     {phrase: "man!", stroke: "PHAPB SKHRAPL", lookups: 3},
-    //     {phrase: "man?", stroke: "PHAPB H-F", lookups: 3},
-    //     {phrase: "'bed'", stroke: "AE PWED AE", lookups: 4},
-    //     {phrase: "'address'", stroke: "AE A/TKRES AE", lookups: 4},
-    //     {phrase: "'Sinatra'", stroke: "AE STPHAT/RA AE", lookups: 4},
-    //     {phrase: "'sinatra'", stroke: "AE HRO*ER/STPHAT/RA AE", lookups: 4},
-    //     {phrase: "'confuzzled'", stroke: "AE xxx AE", lookups: 4},
-    //     {phrase: "and! and", stroke: "SKP SKHRAPL SKP", lookups: 5},
-    //     {phrase: "andx and", stroke: "xxx SKP", lookups: 3},
-    //     {phrase: "andx andx and", stroke: "xxx xxx SKP", lookups: 4},
-    //     {phrase: "and ", stroke: "SKP", lookups: 2},
-    //     {phrase: " and", stroke: "SKP", lookups: 2},
-    //     {phrase: " and ", stroke: "SKP", lookups: 2},
-    //     {phrase: "and again", stroke: "STKPWEPBG", lookups: 1},
-    //     {phrase: "and man!", stroke: "SKP PHAPB SKHRAPL", lookups: 4},
-    //     {phrase: "and man?", stroke: "SKP PHAPB H-F", lookups: 4},
-    //     {phrase: "and again!", stroke: "SKP TKPWEPB SKHRAPL", lookups: 4}, // ideally this would produce "STKPWEPBG SKHRAPL"
-    //     {phrase: "!", stroke: "SKHRAPL", lookups: 1},
-    //     {phrase: "!!", stroke: "SKHRAPL SKHRAPL", lookups: 3},
-    //     {phrase: "!man", stroke: "SKHRAPL PHAPB", lookups: 3}, // ideally this would produce "SKHRAPL TK-LS PHAPB"
-    //     {phrase: "! man", stroke: "SKHRAPL PHAPB", lookups: 3},
-    //     {phrase: "media query", stroke: "PHO*EUD KWAOER/REU", lookups: 3},
-    //     {phrase: "push origin master", stroke: "PURB O*RPBLG PHAFRT", lookups: 4},
-    //     {phrase: "diff -- cached", stroke: "TKEUF TK*RB KAERBD", lookups: 4},
-    //     // {phrase: "diff --cached", stroke: "TKEUF TK*RB TK-LS KAERBD"},
-    //     // {phrase: "<title>Learn!</title>", stroke: "AEPBG/TAOEULT/A*EPBG/KPA*/HRERPB/SKHRAPL/AEPBG/OEU/TAOEULT/A*EPBG"}
-    //   ]
-    );
-  });
-});
-
-describe('rank outlines', () => {
-  describe('with duplicate outlines across dictionaries', () => {
-    it('returns sorted list of outlines for "GitHub", preserving dictionary order', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["TKPWEUT/HUB", "code.json", "typey"],
-        ["TKPWEUT/HUB", "typey-type.json", "typey"]
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "GitHub", sharedAffixes)).toEqual([
-        ["TKPWEUT/HUB", "code.json", "typey"],
-        ["TKPWEUT/HUB", "typey-type.json", "typey"]
-      ]);
-    });
-  });
-
-  describe('with duplicate outlines across dictionaries', () => {
-    it('returns unsorted list of outlines for "GitHub", preserving dictionary order', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["TKPWEUT/HUB", "typey-type.json", "typey"],
-        ["TKPWEUT/HUB", "code.json", "typey"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "GitHub", sharedAffixes)).toEqual([
-        ["TKPWEUT/HUB", "typey-type.json", "typey"],
-        ["TKPWEUT/HUB", "code.json", "typey"]
-      ]);
-    });
-  });
-
-  describe('with different outlines across dictionaries', () => {
-    it('returns shortest stroke', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["TKPWEUT/HUB", "typey-type.json", "typey"],
-        ["TKWEUT/HUB", "code.json", "typey"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "GitHub", sharedAffixes)).toEqual([
-        ["TKWEUT/HUB", "code.json", "typey"],
-        ["TKPWEUT/HUB", "typey-type.json", "typey"]
-      ]);
-    });
-  });
-
-  describe('with different outlines across dictionaries', () => {
-    it('returns sorted list of outlines for "exercises", prioritising S endings over Z, already in order', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["KPER/SAOEUZ/-Z", "plover.json", "plover"],
-        ["KPERZ/-S", "briefs.json", "typey"],
-        ["KPERZ/-T", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["ERBGS/SAOEUSZ", "plover.json", "plover"],
-        ["KPERSZ", "typey-type.json", "typey"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "exercises", sharedAffixes)).toEqual([
-        ["KPERSZ", "typey-type.json", "typey"],
-        ["KPERZ/-S", "briefs.json", "typey"],
-        ["KPERZ/-T", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["ERBGS/SAOEUSZ", "plover.json", "plover"],
-        ["KPER/SAOEUZ/-Z", "plover.json", "plover"]
-      ]);
-    });
-
-    it('returns sorted list of outlines for "exercises", prioritising S endings over Z, not in order', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["KPER/SAOEUZ/-Z", "plover.json", "plover"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-S", "briefs.json", "typey"],
-        ["KPERZ/-T", "briefs.json", "typey"],
-        ["ERBGS/SAOEUSZ", "plover.json", "plover"],
-        ["KPERSZ", "typey-type.json", "typey"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "exercises", sharedAffixes)).toEqual([
-        ["KPERSZ", "typey-type.json", "typey"],
-        ["KPERZ/-S", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-T", "briefs.json", "typey"],
-        ["ERBGS/SAOEUSZ", "plover.json", "plover"],
-        ["KPER/SAOEUZ/-Z", "plover.json", "plover"]
-      ]);
-    });
-
-    // Note: this test will fail with node v10
-    it('returns sorted list of outlines for "exercises", prioritising S endings over Z, not in order, with more than 10 elements', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["KPER/SAOEUZ/-Z", "plover.json", "plover"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-S", "briefs.json", "typey"],
-        ["KPERZ/-T", "briefs.json", "typey"],
-        ["ERBGS/SAOEUSZ", "plover.json", "plover"],
-        ["KPERSZ", "typey-type.json", "typey"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "exercises", sharedAffixes)).toEqual([
-        ["KPERSZ", "typey-type.json", "typey"],
-        ["KPERZ/-S", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-Z", "briefs.json", "typey"],
-        ["KPERZ/-T", "briefs.json", "typey"],
-        ["ERBGS/SAOEUSZ", "plover.json", "plover"],
-        ["KPER/SAOEUZ/-Z", "plover.json", "plover"]
-      ]);
-    });
-
-    it('returns sorted list of outlines for "slept", prioritising T endings over D, already in order', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["TEFT/SHREPT", "plover.json", "plover"],
-        ["TEFT/SHREPD", "plover.json", "plover"],
-        ["TEFT/SHREPT", "plover.json", "plover"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "slept", sharedAffixes)).toEqual([
-        ["TEFT/SHREPT", "plover.json", "plover"],
-        ["TEFT/SHREPT", "plover.json", "plover"],
-        ["TEFT/SHREPD", "plover.json", "plover"]
-      ]);
-    });
-
-    it('returns sorted list of outlines for "intermediate", prioritising T endings over D, not in order', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["EUPBT/PHAOED", "plover.json", "plover"],
-        ["EUPBT/PHAOET", "plover.json", "plover"]
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "intermediate", sharedAffixes)).toEqual([
-        ["EUPBT/PHAOET", "plover.json", "plover"],
-        ["EUPBT/PHAOED", "plover.json", "plover"]
-      ]);
-    });
-
-    it('returns sorted list of outlines for "credit card", prioritising T endings over D, except when the word ends in "d"', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["KRED/EUT/KART", "plover.json", "plover"],
-        ["KRED/EUT/KARD", "plover.json", "plover"]
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "credit card", sharedAffixes)).toEqual([
-        ["KRED/EUT/KARD", "plover.json", "plover"],
-        ["KRED/EUT/KART", "plover.json", "plover"]
-      ]);
-    });
-  });
-
-  describe('with different outlines including misstrokes across dictionaries', () => {
-    it('returns sorted list of outlines for "and", prioritising user, typey, plover namespaces, and by length', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["-PBD", "plover.json", "plover"],
-        ["SP", "plover.json", "plover"],
-        ["SKP", "plover.json", "plover"],
-        ["APBD", "plover.json", "plover"],
-        ["APBD", "dict.json", "typey"],
-        ["SKP", "dict.json", "typey"],
-        ["SKP", "dict.json", "user"],
-        ["SK", "briefs.json", "user"],
-      ];
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "and", sharedAffixes)).toEqual([
-        ["SK", "briefs.json", "user"],
-        ["SKP", "dict.json", "user"],
-        ["SKP", "dict.json", "typey"],
-        ["APBD", "dict.json", "typey"],
-        ["SP", "plover.json", "plover"],
-        ["SKP", "plover.json", "plover"],
-        ["APBD", "plover.json", "plover"],
-        ["-PBD", "plover.json", "plover"],
-      ]);
-    });
-  });
-
-  describe('with different outlines including misstrokes across dictionaries', () => {
-    it('returns sorted list of outlines for "cite", prioritising user, typey, plover namespaces, and good strokes over misstrokes of equal length', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["SKRAO*EUT", "plover.json", "plover"],
-        ["KRAOEUR", "plover.json", "plover"],
-        ["KRAOEUT", "plover.json", "plover"],
-        ["SKRAO*EUT", "dict.json", "typey"],
-        ["KRAOEUR", "dict.json", "typey"],
-        ["KRAOEUT", "dict.json", "typey"],
-        ["SAO*EUT", "briefs.json", "user"],
-        ["SKRAOEUT", "briefs.json", "user"],
-      ];
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "cite", sharedAffixes)).toEqual([
-        ["SAO*EUT", "briefs.json", "user"],
-        ["SKRAOEUT", "briefs.json", "user"],
-        ["KRAOEUT", "dict.json", "typey"],
-        ["SKRAO*EUT", "dict.json", "typey"],
-        ["KRAOEUR", "dict.json", "typey"],
-        ["KRAOEUT", "plover.json", "plover"],
-        ["SKRAO*EUT", "plover.json", "plover"],
-        ["KRAOEUR", "plover.json", "plover"],
-
-        // if S… entries were in misstrokes.json
-        // ["SAO*EUT", "briefs.json", "user"],
-        // ["SKRAOEUT", "briefs.json", "user"],
-        // ["KRAOEUT", "dict.json", "typey"],
-        // ["SKRAO*EUT", "dict.json", "typey"],
-        // ["KRAOEUR", "dict.json", "typey"],
-        // ["KRAOEUT", "plover.json", "plover"],
-        // ["KRAOEUR", "plover.json", "plover"],
-        // ["SKRAO*EUT", "plover.json", "plover"],
-      ]);
-    });
-  });
-
-  describe('with different outlines including misstrokes across dictionaries', () => {
-    it('returns sorted list of outlines for "quiz", prioritising good strokes over misstrokes that are shorter', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["KWUZ", "plover.json", "plover"],
-        ["KWEUZ", "plover.json", "plover"],
-      ];
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "quiz", sharedAffixes)).toEqual([
-        ["KWEUZ", "plover.json", "plover"],
-        ["KWUZ", "plover.json", "plover"],
-      ]);
-    });
-  });
-
-  describe('with different outlines including misstrokes across dictionaries', () => {
-    it('returns sorted list of outlines for "he", prioritising user, typey, plover namespaces, and good strokes over misstrokes that are shorter', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["E", "magnum.json", "user"],
-        ["HE", "plover.json", "plover"],
-        ["E", "plover.json", "plover"],
-        ["HE", "dict.json", "typey"],
-      ];
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "he", sharedAffixes)).toEqual([
-        ["E", "magnum.json", "user"],
-        ["HE", "dict.json", "typey"],
-        ["HE", "plover.json", "plover"],
-        ["E", "plover.json", "plover"],
-      ]);
-    });
-  });
-
-// T-FPB: plover.json
-// TEFL: plover.json
-
-  describe('with outlines with and without dashes', () => {
-    it('returns sorted list of outlines for "test", including dashes', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["T-FPB", "plover.json", "plover"],
-        ["TEFL", "plover.json", "plover"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "test", sharedAffixes)).toEqual([
-        ["TEFL", "plover.json", "plover"],
-        ["T-FPB", "plover.json", "plover"]
-      ]);
-    });
-  });
-
-  describe('with outlines with and without stars', () => {
-    it('returns sorted list of outlines for "test", penalising stars', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["T*EFT", "user.json", "user"],
-        ["TAEFT", "user.json", "user"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "test", sharedAffixes)).toEqual([
-        ["TAEFT", "user.json", "user"],
-        ["T*EFT", "user.json", "user"]
-      ]);
-    });
-
-    it('returns sorted list of outlines for "test", penalising stars', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["T*EFT/T*EFT", "user.json", "user"],
-        ["TAEFT/TAEFTS", "user.json", "user"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "test", sharedAffixes)).toEqual([
-        ["TAEFT/TAEFTS", "user.json", "user"],
-        ["T*EFT/T*EFT", "user.json", "user"],
-      ]);
-    });
-
-    it('returns sorted list of outlines for "test", penalising stars', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["T*EFT/T*EFT", "user.json", "user"],
-        ["TAEFTS/TAEFTS", "user.json", "user"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "test", sharedAffixes)).toEqual([
-        ["T*EFT/T*EFT", "user.json", "user"],
-        ["TAEFTS/TAEFTS", "user.json", "user"],
-      ]);
-    });
-  });
-
-  describe('with outlines with and without slashes', () => {
-    it('returns sorted list of outlines for "grasshopper", penalising slashes', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["TKPWHRFRPBLG", "user.json", "user"],
-        ["TKPWHR*FRPBLG", "user.json", "user"],
-        ["TKPWRASZ/HOP", "user.json", "user"],
-        ["TKPWRASZ/HOP/ER", "user.json", "user"],
-        ["TKPWRASZ/HORP", "user.json", "user"],
-        ["TKPWRASZ/HOP/*ER", "user.json", "user"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "grasshopper", sharedAffixes)).toEqual([
-        ["TKPWHRFRPBLG", "user.json", "user"],
-        ["TKPWHR*FRPBLG", "user.json", "user"],
-        ["TKPWRASZ/HOP", "user.json", "user"],
-        ["TKPWRASZ/HORP", "user.json", "user"],
-        ["TKPWRASZ/HOP/ER", "user.json", "user"],
-        ["TKPWRASZ/HOP/*ER", "user.json", "user"],
-      ]);
-    });
-  });
-
-  describe('with prefix and suffix strokes', () => {
-    it('returns sorted list of outlines for "upstarted", penalising briefs without affix strokes, for default dicts', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["UP/START/-D", "plover.json", "plover"],
-        ["UP/STARTD", "plover.json", "plover"],
-        ["AUP/START/*D", "plover.json", "plover"],
-        ["AUP/START/-D", "plover.json", "plover"],
-        ["AUP/STARTD", "plover.json", "plover"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upstarted", sharedAffixes)).toEqual([
-        ["AUP/STARTD", "plover.json", "plover"],
-        ["UP/STARTD", "plover.json", "plover"],
-        ["UP/START/-D", "plover.json", "plover"],
-        ["AUP/START/-D", "plover.json", "plover"],
-        ["AUP/START/*D", "plover.json", "plover"],
-      ]);
-    });
-
-    it('returns sorted list of outlines for "upstarted", penalising briefs without personal affix stroke, with personal dicts', () => {
-      let sharedAffixes = {
-        suffixes: [],
-        prefixes: [
-          ["UP/", "up" ], // from user dictionary… AffixList chooses the first affix in first inserted dictionary
-        ]
-      };
-
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        ["UP/START/-D", "user.json", "user"],
-        ["UP/STARTD", "user.json", "user"],
-        ["AUP/START/-D", "user.json", "user"],
-        ["AUP/START/*D", "typey.json", "typey"],
-        ["AUP/START/-D", "typey.json", "typey"],
-        ["AUP/STARTD", "typey.json", "typey"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upstarted", sharedAffixes)).toEqual([
-        ["UP/STARTD", "user.json", "user"],
-        ["UP/START/-D", "user.json", "user"],
-        ["AUP/START/-D", "user.json", "user"],
-        ["AUP/STARTD", "typey.json", "typey"],
-        ["AUP/START/-D", "typey.json", "typey"],
-        ["AUP/START/*D", "typey.json", "typey"],
-      ]);
-    });
-  });
-
-  describe('with gutenberg entries', () => {
-    it('returns sorted list of outlines for "get" where the gutenberg entry comes first', () => {
-      let arrayOfStrokesAndTheirSourceDictNames = [
-        // ["TKWET", "misstrokes.json"],
-        // ["TPWET", "misstrokes.json"],
-        // ["TKPWHET", "misstrokes.json"],
-        // ["TKPWETD", "misstrokes.json"],
-        ["TKPWET", "top-10000-project-gutenberg-words.json", "typey"],
-        ["TKPW-T", "typey-type.json", "typey"],
-        // ["TKPWELT", "misstrokes.json"],
-        // ["TKPET", "misstrokes.json"],
-      ];
-
-      expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upstarted", sharedAffixes)).toEqual([
-        ["TKPWET", "top-10000-project-gutenberg-words.json", "typey"],
-        ["TKPW-T", "typey-type.json", "typey"],
-        // ["TKWET", "misstrokes.json"],
-        // ["TPWET", "misstrokes.json"],
-        // ["TKPET", "misstrokes.json"],
-        // ["TKPWETD", "misstrokes.json"],
-        // ["TKPWHET", "misstrokes.json"],
-        // ["TKPWELT", "misstrokes.json"],
-      ]);
-    });
-  });
-
-  // describe('with different outlines across dictionaries', () => {
-  //   it('returns sorted list of outlines for "upholstery", showing user dictionaries before typey-type.json', () => {
-  //     let arrayOfStrokesAndTheirSourceDictNames = [
-  //       ["AUP/HO*ELS/REU", "personal.json"],
-  //       ["AUP/HO*LS/REU", "personal.json"],
-  //       ["AUP/HOEFLT/*ER/KWREU", "personal.json"],
-  //       ["AUP/HOEFLT/REU", "personal.json"],
-  //       ["AUP/HOEL/STREU", "personal.json"],
-  //       ["AUP/HOELT/REU", "personal.json"],
-  //       ["AUP/HOFLT/REU", "personal.json"],
-  //       ["AUP/HOL/STREU", "personal.json"],
-  //       ["UP/HOLS/TREU", "dict.json"],
-  //       ["UP/HOL/STREU", "dict.json"],
-  //       ["UP/HOFLT/REU", "dict.json"],
-  //       ["UP/HOELT/REU", "dict.json"],
-  //       ["UP/HOELS/TREU", "dict.json"],
-  //       ["UP/HOEL/STREU", "dict.json"],
-  //       ["UP/HOEFLT/REU", "dict.json"],
-  //       ["UP/HOEFLT/*ER/KWREU", "dict.json"],
-  //       ["UP/HO*LS/REU", "dict.json"],
-  //       ["UP/HO*ELS/REU", "dict.json"],
-  //       ["AUP/HOFLT/REU", "dict.json"],
-  //       ["AUP/HOELS/TREU", "condensed-strokes.json"],
-  //     ];
-
-  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upholstery", sharedAffixes)).toEqual([
-  //       ["AUP/HOELT/REU", "personal.json"],
-  //       ["AUP/HOFLT/REU", "personal.json"],
-  //       ["AUP/HOL/STREU", "personal.json"],
-  //       ["AUP/HOEFLT/REU", "personal.json"],
-  //       ["AUP/HOEL/STREU", "personal.json"],
-  //       ["AUP/HO*LS/REU", "personal.json"],
-  //       ["AUP/HO*ELS/REU", "personal.json"],
-  //       ["AUP/HOEFLT/*ER/KWREU", "personal.json"],
-  //       ["AUP/HOELS/TREU", "typey-type.json"],
-  //       ["AUP/HOFLT/REU", "dict.json"],
-  //       ["UP/HOL/STREU", "dict.json"],
-  //       ["UP/HOLS/TREU", "dict.json"],
-  //       ["UP/HOELT/REU", "dict.json"],
-  //       ["UP/HOFLT/REU", "dict.json"],
-  //       ["UP/HOEFLT/REU", "dict.json"],
-  //       ["UP/HOEL/STREU", "dict.json"],
-  //       ["UP/HOELS/TREU", "dict.json"],
-  //       ["UP/HO*LS/REU", "dict.json"],
-  //       ["UP/HO*ELS/REU", "dict.json"],
-  //       ["UP/HOEFLT/*ER/KWREU", "dict.json"],
-  //     ]);
-  //   });
-  // });
-
-  // describe('with different outlines across dictionaries', () => {
-  //   it('returns sorted list of outlines for "satisfaction", showing user dictionaries before typey-type.json', () => {
-  //     let arrayOfStrokesAndTheirSourceDictNames = [
-  //       ["SAEFBGS", "dict.json"],
-  //       ["SA*EF", "user.json"],
-  //       ["SEF/SAEBGS", "dict.json"],
-  //       ["STPA*BGS", "dict.json"],
-  //       ["SAEBGS", "dict.json"],
-  //       ["SAEBGS", "typey-type.json"],
-  //     ];
-
-  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upholstery", sharedAffixes)).toEqual([
-  //       ["SA*EF", "user.json"],
-  //       ["SAEBGS", "typey-type.json"],
-  //       ["SAEBGS", "dict.json"],
-  //       ["SAEFBGS", "dict.json"],
-  //       ["STPA*BGS", "dict.json"],
-  //       ["SEF/SAEBGS", "dict.json"]
-  //     ]);
-  //   });
-  // });
-});
-
