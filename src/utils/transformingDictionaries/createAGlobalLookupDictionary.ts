@@ -6,15 +6,21 @@ import { combineValidDictionaries } from "./transformingDictionaries";
 import {
   LookupDictWithNamespacedDicts,
   LookupDictWithNamespacedDictsAndConfig,
-  DictName,
+  PersonalDictionaryNameAndContents,
+  DictionaryConfigurationList,
   StenoDictionary,
 } from "../../types";
 
-type PersonalDictionaryNameAndContents = [DictName, StenoDictionary];
-type PersonalDictionariesNamesAndContents = PersonalDictionaryNameAndContents[];
+const addConfig = (
+  dict: LookupDictWithNamespacedDicts,
+  config: DictionaryConfigurationList
+): LookupDictWithNamespacedDictsAndConfig => {
+  dict.configuration = config;
+  return dict as LookupDictWithNamespacedDictsAndConfig;
+};
 
 const createAGlobalLookupDictionary = (
-  personalDictionariesNamesAndContents: PersonalDictionariesNamesAndContents,
+  personalDictionariesNamesAndContents: PersonalDictionaryNameAndContents[],
   dictTypeyType: StenoDictionary,
   ploverDict: any = null
 ): LookupDictWithNamespacedDictsAndConfig => {
@@ -39,9 +45,8 @@ const createAGlobalLookupDictionary = (
       `${SOURCE_NAMESPACES.get("plover")}:${LATEST_PLOVER_DICT_NAME}`
     );
   }
-  combinedLookupDictionary.configuration = configuration;
 
-  return combinedLookupDictionary as LookupDictWithNamespacedDictsAndConfig;
+  return addConfig(combinedLookupDictionary, configuration);
 };
 
 export default createAGlobalLookupDictionary;

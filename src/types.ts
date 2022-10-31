@@ -46,6 +46,12 @@ export type NamespacedDictionary = string;
 export type DictName = string;
 
 /**
+ * Example:
+ * ["personal.json", {"TEFT": "myBrief"}]
+ */
+export type PersonalDictionaryNameAndContents = [DictName, StenoDictionary];
+
+/**
  * Examples:
  * "user"
  * "typey"
@@ -88,13 +94,13 @@ export type StenoDictionary = {
  * ["typey:typey-type.json", "user:nouns.json", "user:personal.json"]
  * ["typey:typey-type.json", "user:nouns.json", "user:personal.json", "plover:plover-main-3-jun-2018.json"]
  */
-export type DictionaryConfigurationList = string[];
+export type DictionaryConfigurationList = DictName[];
 
 export type OptionalDictionaryConfig = {
-  configuration?: DictionaryConfigurationList
-}
+  configuration?: DictionaryConfigurationList;
+};
 
-export type DictionaryConfig = Required<OptionalDictionaryConfig>
+export type DictionaryConfig = Required<OptionalDictionaryConfig>;
 
 /**
  * A word-first JavaScript Map lookup dictionary with source dictionary names for each outline
@@ -116,10 +122,14 @@ export type DictionaryConfig = Required<OptionalDictionaryConfig>
 export type LookupDictWithNamespacedDicts = Map<
   Translation,
   StrokeAndNamespacedDict[]
-> & OptionalDictionaryConfig
+> &
+  OptionalDictionaryConfig;
 
-export type LookupDictWithNamespacedDictsAndConfig =
-  Omit<LookupDictWithNamespacedDicts, "configuration"> & DictionaryConfig;
+export type LookupDictWithNamespacedDictsAndConfig = Omit<
+  LookupDictWithNamespacedDicts,
+  "configuration"
+> &
+  DictionaryConfig;
 
 /**
  * Example:
