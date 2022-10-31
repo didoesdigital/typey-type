@@ -1,9 +1,8 @@
-import {
-  createAGlobalLookupDictionary,
-} from './transformingDictionaries';
 import chooseOutlineForPhrase from "./chooseOutlineForPhrase";
 import createStrokeHintForPhrase from "./createStrokeHintForPhrase";
-import { AffixList } from '../affixList';
+import createAGlobalLookupDictionary from "./createAGlobalLookupDictionary";
+import { AffixList } from "../affixList";
+import { PersonalDictionaryNameAndContents } from "../../types";
 
 let testTypeyTypeDict = {
   "TK-LS": "{^^}",
@@ -2355,7 +2354,7 @@ let testSuffixesDict = {
   // ["/TPHALT", "ality"],
 };
 
-let personalDictionaries = [
+let personalDictionaries: PersonalDictionaryNameAndContents[] = [
   // [ "test-typey-type.json", testTypeyTypeDict],
   [ "test-emoji.json", testEmojiDict],
   [ "test-ruby.json", testRubyDict],
@@ -2366,7 +2365,6 @@ let personalDictionaries = [
   [ "test-aussie.json", testAussieDict],
 ];
 
-// @ts-ignore FIXME
 let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, testTypeyTypeDict, testPloverDict);
 
 const affixList = new AffixList(sortedAndCombinedLookupDictionary);
