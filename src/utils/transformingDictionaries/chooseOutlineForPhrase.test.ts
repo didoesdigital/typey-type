@@ -5,7 +5,7 @@ import {
   testTypeyTypeDict,
   testPloverDict,
   personalDictionaries,
-} from "./createStrokeHintForPhrase.fixtures";
+} from "./transformingDictionaries.fixtures";
 import type {
   LookupDictWithNamespacedDicts,
 } from "../../types";

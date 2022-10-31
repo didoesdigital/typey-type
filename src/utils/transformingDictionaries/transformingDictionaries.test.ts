@@ -8,7 +8,7 @@ import {
   testTypeyTypeDict,
   testPloverDict,
   personalDictionaries,
-} from "./createStrokeHintForPhrase.fixtures";
+} from "./transformingDictionaries.fixtures";
 
 const globalLookupDictionary = createAGlobalLookupDictionary(
   personalDictionaries,

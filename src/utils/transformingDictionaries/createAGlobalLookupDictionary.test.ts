@@ -4,7 +4,7 @@ import {
   testTypeyTypeDict,
   testPloverDict,
   personalDictionaries,
-} from "./createStrokeHintForPhrase.fixtures";
+} from "./transformingDictionaries.fixtures";
 import type { PersonalDictionaryNameAndContents } from "../../types";
 
 const globalLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, testTypeyTypeDict, testPloverDict);

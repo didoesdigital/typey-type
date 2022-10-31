@@ -4,7 +4,7 @@ import {
   testTypeyTypeDict,
   testPloverDict,
   personalDictionaries,
-} from "./createStrokeHintForPhrase.fixtures";
+} from "./transformingDictionaries.fixtures";
 import { AffixList } from "../affixList";
 import type { PersonalDictionaryNameAndContents } from "../../types";
 
