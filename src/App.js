@@ -2087,6 +2087,8 @@ class App extends Component {
 
   say(utterance) {
     let synth = window.speechSynthesis;
+    utterance = utterance.replaceAll("—", "em dash");
+    if (utterance === "—") { utterance = "em dash"; }
     if (utterance === ",") { utterance = "comma"; }
     if (utterance === ":") { utterance = "colon"; }
     if (utterance === ".") { utterance = "full stop"; }
