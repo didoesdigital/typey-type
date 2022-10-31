@@ -94,6 +94,7 @@ const createStrokeHintForPhrase = (
   precedingChar = '';
 
   // FIXME: this is a brute force approach that will have unintended consequences and fail to catch scenarios it should e.g. if you use personal dictionaries without H-F this will be confusing
+  // 31 Oct 2022: these can possibly be removed now… e.g. we check for {?} before ? in `chooseOutlineForPhrase.ts` so it returns H-F not KWEZ and this hard-coded patch probably isn't needed
   if (strokes.startsWith("KR-GS KPA/")) {
     strokes = strokes.replace("KR-GS KPA/", "KW-GS KPA*/");
   }
