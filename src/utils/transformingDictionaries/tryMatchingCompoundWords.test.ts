@@ -8,6 +8,8 @@ const globalLookupDictionary = createAGlobalLookupDictionary(
     "PHAERPBLG": "marriage",
     "PORGS": "portion",
     "H-PB": "{^-^}",
+    "SEF": "{self-^}",
+    "KROL": "control",
   },
   {}
 );
@@ -39,5 +41,41 @@ describe("tryMatchingCompoundWords", () => {
         sharedAffixes
       )
     ).toEqual(["PHAERPBLG H-PB PORGS", "xxx", 4]);
+  });
+
+  it("returns strokes, stroke, and number of attempts for “self-control” using self-^ prefix not self word and hyphen", () => {
+    const compoundWordParts = ["self", "control"];
+    const strokes = "";
+    const stroke = "xxx";
+    const strokeLookupAttempts = 2;
+
+    expect(
+      tryMatchingCompoundWords(
+        compoundWordParts,
+        globalLookupDictionary,
+        strokes,
+        stroke,
+        strokeLookupAttempts,
+        sharedAffixes
+      )
+    ).toEqual(["SEF/KROL", "xxx", 3]);
+  });
+
+  it("returns strokes, stroke, and number of attempts for “self-notarealword” using self-^ prefix and fingerspelled word", () => {
+    const compoundWordParts = ["self", "notarealword"];
+    const strokes = "";
+    const stroke = "xxx";
+    const strokeLookupAttempts = 2;
+
+    expect(
+      tryMatchingCompoundWords(
+        compoundWordParts,
+        globalLookupDictionary,
+        strokes,
+        stroke,
+        strokeLookupAttempts,
+        sharedAffixes
+      )
+    ).toEqual(["SEF/TPH*/O*/T*/A*/R*/*E/A*/HR*/W*/O*/R*/TK*", "xxx", 3]);
   });
 });
