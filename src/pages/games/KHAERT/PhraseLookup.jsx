@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { createStrokeHintForPhrase } from "../../../utils/transformingDictionaries/transformingDictionaries";
+import createStrokeHintForPhrase from "../../../utils/transformingDictionaries/createStrokeHintForPhrase";
 
 const PhraseLookup = ({ phraseToLookup, globalLookupDictionary }) => {
   const [strokeHint, setStrokeHint] = useState("");

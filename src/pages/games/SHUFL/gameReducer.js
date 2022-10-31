@@ -6,7 +6,7 @@ import {
   selectMaterial,
   shuffleWord,
 } from "./utilities";
-import { createStrokeHintForPhrase } from "../../../utils/transformingDictionaries/transformingDictionaries";
+import createStrokeHintForPhrase from "../../../utils/transformingDictionaries/createStrokeHintForPhrase";
 
 export const roundToWin = 3;
 export const levelToWin = 4;
