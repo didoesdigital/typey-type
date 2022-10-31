@@ -165,4 +165,59 @@ describe("combining valid dictionaries without sorting", () => {
       )
     ).toEqual(expectedCombinedDict);
   });
+
+  it("returns a combined Map with no Plover dict", () => {
+    let personalDictionaries: PersonalDictionaryNameAndContents[] = [
+      ["personal.json", { "TAO*EUPT": "Typey Type" }],
+      ["overrides.json", { "SED": "sed" }],
+      ["misstrokes.json", { "E": "he" }],
+    ];
+
+    let testTypeyTypeDict = {
+      "-F": "of",
+      "EU": "I",
+      "HE": "he",
+      "SAEUD": "said",
+      "SED": "said",
+      "SKP": "and",
+      "SOPL": "some",
+      "SOUPBDZ": "sounds",
+      "TO": "to",
+      "TPHO": "no",
+      "TPOR": "for",
+      "WHEPB": "when",
+    };
+
+    let expectedCombinedDict = new Map([
+      ["Typey Type", [["TAO*EUPT", "user:personal.json"]]],
+      ["and", [["SKP", "typey:typey-type.json"]]],
+      ["to", [["TO", "typey:typey-type.json"]]],
+      [
+        "said",
+        [
+          ["SAEUD", "typey:typey-type.json"],
+          ["SED", "typey:typey-type.json"],
+        ],
+      ],
+      ["sed", [["SED", "user:overrides.json"]]],
+      ["sounds", [["SOUPBDZ", "typey:typey-type.json"]]],
+      [
+        "he",
+        [
+          ["E", "user:misstrokes.json"],
+          ["HE", "typey:typey-type.json"],
+        ],
+      ],
+      ["of", [["-F", "typey:typey-type.json"]]],
+      ["I", [["EU", "typey:typey-type.json"]]],
+      ["some", [["SOPL", "typey:typey-type.json"]]],
+      ["no", [["TPHO", "typey:typey-type.json"]]],
+      ["for", [["TPOR", "typey:typey-type.json"]]],
+      ["when", [["WHEPB", "typey:typey-type.json"]]],
+    ]);
+
+    expect(
+      combineValidDictionaries(personalDictionaries, testTypeyTypeDict)
+    ).toEqual(expectedCombinedDict);
+  });
 });
