@@ -8,17 +8,18 @@ import {
   personalDictionaries,
 } from "./createStrokeHintForPhrase.fixtures";
 
-let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, testTypeyTypeDict, testPloverDict);
-
-const affixList = new AffixList(sortedAndCombinedLookupDictionary);
-AffixList.setSharedInstance(affixList);
-// let sharedAffixes = AffixList.getSharedInstance();
-
-let globalLookupDictionary = sortedAndCombinedLookupDictionary;
-
+const globalLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, testTypeyTypeDict, testPloverDict);
 const precedingChar = '';
 
 describe('create stroke hint for phrase', () => {
+  beforeEach(() => {
+    AffixList.setSharedInstance(new AffixList(globalLookupDictionary));
+  });
+
+  afterEach(() => {
+    AffixList.setSharedInstance([]);
+  });
+
   describe('returns string showing all the space or slash separated strokes to write a whole phrase', () => {
     it('showing "KPA/AEU KPA/TPAR/PHER" for "A Farmer"', () => {
       let wordOrPhraseMaterial = "A Farmer";
