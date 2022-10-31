@@ -4,7 +4,7 @@ import createAGlobalLookupDictionary from "./createAGlobalLookupDictionary";
 import { AffixList } from "../affixList";
 import { PersonalDictionaryNameAndContents } from "../../types";
 
-let testTypeyTypeDict = {
+const testTypeyTypeDict = {
   "TK-LS": "{^^}",
   "KP-PL": "example",
   "TR*PL": "{^}™",
@@ -514,7 +514,7 @@ let testTypeyTypeDict = {
   "PHEPB": "men",
 };
 
-let testPloverDict = {
+const testPloverDict = {
   "A/HREF": "<a href=\"{^}",
   "APBD": "and",
   "SKP": "and",
@@ -536,19 +536,19 @@ let testPloverDict = {
   "POED/TREUFT": "podiatrist",
 };
 
-let testEmojiDict = {
+const testEmojiDict = {
   "PHOEPBLG/T*/PH*": "™",
 };
-let testRubyDict = {
+const testRubyDict = {
   "TPHRARB/PWR-BGT": "flash[:{^}",
 };
-let testReactDict = {
+const testReactDict = {
   "O*B/P-P": "Object.{^}",
 };
 
 // Some prefix and suffix entries are commented out because they are alternative strokes for prefix/suffix translations and the preferred stroke already exists.
 // Keeping entries uncommented out improves the chances of finding a valid dictionary entry. Previously, we would sort the affix arrays to ensure "preferred" strokes were used where possible, but we won't have that control with personal dictionaries.
-let testPrefixesDict = {
+const testPrefixesDict = {
   "*EBGS/TRA": "{extra^}",
   "*EFR": "{every^}",
   "*ERBGS": "{extra^}",
@@ -1468,7 +1468,7 @@ let testPrefixesDict = {
   // ["UPBDZ/", "under"],
   // ["KRO/", "co-"]
 };
-let testAussieDict = {
+const testAussieDict = {
   "AOEUZ/A*U": "{^ise}",
   "AO*EUFD/A*U": "{^ised}",
   "AO*EUFG/A*U": "{^ising}",
@@ -1482,7 +1482,7 @@ let testAussieDict = {
   "KWRO*R/A*U": "{^iour}",
   "O*UR/A*U": "{^our}",
 }
-let testSuffixesDict = {
+const testSuffixesDict = {
   "*D": "{^'d}",
   "AES": "{^'s}",
   "*EPLT": "{^ement}",
@@ -2354,7 +2354,7 @@ let testSuffixesDict = {
   // ["/TPHALT", "ality"],
 };
 
-let personalDictionaries: PersonalDictionaryNameAndContents[] = [
+const personalDictionaries: PersonalDictionaryNameAndContents[] = [
   // [ "test-typey-type.json", testTypeyTypeDict],
   [ "test-emoji.json", testEmojiDict],
   [ "test-ruby.json", testRubyDict],
