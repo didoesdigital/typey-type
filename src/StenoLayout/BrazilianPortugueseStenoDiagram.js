@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 
-let hidden = true;
-
 const strokeColor = "#7109AA";
 const onTextColor = "#fff";
 const offTextColor = "#fff";
@@ -63,7 +61,7 @@ class BrazilianPortugueseStenoDiagram extends Component {
         fill="none"
         viewBox="0 0 215 101"
         xmlns="http://www.w3.org/2000/svg"
-        aria-hidden={hidden}
+        aria-hidden={true}
       >
         <g id={"stenoboard-" + this.props.brief}>
           <rect
