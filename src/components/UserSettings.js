@@ -545,6 +545,7 @@ class UserSettings extends Component {
                       <select id="stenoLayout" name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control w-144">
                         <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
                         <option value="stenoLayoutPalantype">Palantype</option>
+                        <option value="stenoLayoutBrazilianPortugueseSteno">Brazilian Portuguese steno</option>
                         <option value="stenoLayoutDanishSteno">Danish steno</option>
                         <option value="stenoLayoutItalianMichelaSteno">Italian Michela steno</option>
                         <option value="stenoLayoutJapaneseSteno">Japanese steno</option>

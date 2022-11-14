@@ -344,7 +344,7 @@ class App extends Component {
         seenWords: true,
         startFromWord: 1,
         study: 'discover',
-        stenoLayout: 'stenoLayoutAmericanSteno', // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianMichelaSteno' || 'stenoLayoutJapanese' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
+        stenoLayout: 'stenoLayoutAmericanSteno', // 'stenoLayoutAmericanSteno' || 'stenoLayoutPalantype' || 'stenoLayoutBrazilianPortugueseSteno' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianMichelaSteno' || 'stenoLayoutJapanese' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
         upcomingWordsLayout: 'singleLine'
       },
       lesson: fallbackLesson,
@@ -1545,6 +1545,7 @@ class App extends Component {
         const stenoLayoutValidValues = [
           'stenoLayoutAmericanSteno',
           'stenoLayoutPalantype',
+          'stenoLayoutBrazilianPortugueseSteno',
           'stenoLayoutDanishSteno',
           'stenoLayoutItalianMichelaSteno',
           'stenoLayoutItalianMelaniSteno',

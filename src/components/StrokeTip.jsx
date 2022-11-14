@@ -1,5 +1,6 @@
 import React from "react";
 import AmericanStenoDiagram from "./../StenoLayout/AmericanStenoDiagram";
+import BrazilianPortugueseStenoDiagram from "./../StenoLayout/BrazilianPortugueseStenoDiagram";
 import DanishStenoDiagram from "./../StenoLayout/DanishStenoDiagram";
 import ItalianMichelaStenoDiagram from "./../StenoLayout/ItalianMichelaStenoDiagram";
 import JapaneseStenoDiagram from "./../StenoLayout/JapaneseStenoDiagram";
@@ -9,6 +10,7 @@ import {
   shouldShowStroke,
   splitBriefsIntoStrokes,
   mapBriefToAmericanStenoKeys,
+  mapBriefToBrazilianPortugueseStenoKeys,
   mapBriefToDanishStenoKeys,
   mapBriefToItalianMichelaStenoKeys,
   mapBriefToJapaneseStenoKeys,
@@ -42,6 +44,10 @@ export default function StrokeTip({
         case "stenoLayoutAmericanSteno":
           mapBriefsFunction = mapBriefToAmericanStenoKeys;
           StenoLayoutDiagram = AmericanStenoDiagram;
+          break;
+        case "stenoLayoutBrazilianPortugueseSteno":
+          mapBriefsFunction = mapBriefToBrazilianPortugueseStenoKeys;
+          StenoLayoutDiagram = BrazilianPortugueseStenoDiagram;
           break;
         case "stenoLayoutDanishSteno":
           mapBriefsFunction = mapBriefToDanishStenoKeys;

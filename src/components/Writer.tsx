@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AmericanStenoDiagram from '../StenoLayout/AmericanStenoDiagram';
+import BrazilianPortugueseStenoDiagram from '../StenoLayout/BrazilianPortugueseStenoDiagram';
 import DanishStenoDiagram from '../StenoLayout/DanishStenoDiagram';
 import ItalianMichelaStenoDiagram from '../StenoLayout/ItalianMichelaStenoDiagram';
 import JapaneseStenoDiagram from '../StenoLayout/JapaneseStenoDiagram';
@@ -9,6 +10,7 @@ import Stroke from '../utils/stroke';
 import {
   mapQWERTYKeysToStenoStroke,
   mapBriefToAmericanStenoKeys,
+  mapBriefToBrazilianPortugueseStenoKeys,
   mapBriefToDanishStenoKeys,
   mapBriefToItalianMichelaStenoKeys,
   mapBriefToJapaneseStenoKeys,
@@ -221,6 +223,11 @@ class Writer extends Component<Props, State> {
         StenoLayoutDiagram = AmericanStenoDiagram;
         placeholderRawSteno = "e.g. HEU";
         break;
+      case 'stenoLayoutBrazilianPortugueseSteno':
+        mapBriefsFunction = mapBriefToBrazilianPortugueseStenoKeys;
+        StenoLayoutDiagram = BrazilianPortugueseStenoDiagram;
+        placeholderRawSteno = "e.g. #SKTFPLRAO*EURWBPGHTSDZ";
+        break;
       case 'stenoLayoutDanishSteno':
         mapBriefsFunction = mapBriefToDanishStenoKeys;
         StenoLayoutDiagram = DanishStenoDiagram;
@@ -373,6 +380,7 @@ class Writer extends Component<Props, State> {
                 <select id="stenoLayout" name="writerStenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} className="text-small form-control w6">
                   <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
                   <option value="stenoLayoutPalantype">Palantype</option>
+                  <option value="stenoLayoutBrazilianPortugueseSteno">Brazilian Portuguese steno</option>
                   <option value="stenoLayoutDanishSteno">Danish steno</option>
                   <option value="stenoLayoutItalianMichelaSteno">Italian Michela steno</option>
                   <option value="stenoLayoutJapaneseSteno">Japanese steno</option>

@@ -5,6 +5,7 @@ import { AffixList } from '../utils/affixList';
 import splitIntoStrokesDictsAndNamespaces from "../utils/transformingDictionaries/splitIntoStrokesDictsAndNamespaces";
 import rankOutlines from '../utils/transformingDictionaries/rankOutlines/rankOutlines';
 import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
+import BrazilianPortugueseStenoDiagram from './../StenoLayout/BrazilianPortugueseStenoDiagram';
 import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
 import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiagram';
 import JapaneseStenoDiagram from './../StenoLayout/JapaneseStenoDiagram';
@@ -12,6 +13,7 @@ import KoreanModernCStenoDiagram from './../StenoLayout/KoreanModernCStenoDiagra
 import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
 import {
   mapBriefToAmericanStenoKeys,
+  mapBriefToBrazilianPortugueseStenoKeys,
   mapBriefToDanishStenoKeys,
   mapBriefToItalianMichelaStenoKeys,
   mapBriefToJapaneseStenoKeys,
@@ -174,6 +176,10 @@ class StrokesForWords extends Component {
       case 'stenoLayoutAmericanSteno':
         mapBriefsFunction = mapBriefToAmericanStenoKeys;
         StenoLayoutDiagram = AmericanStenoDiagram;
+        break;
+      case 'stenoLayoutBrazilianPortugueseSteno':
+        mapBriefsFunction = mapBriefToBrazilianPortugueseStenoKeys;
+        StenoLayoutDiagram = BrazilianPortugueseStenoDiagram;
         break;
       case 'stenoLayoutDanishSteno':
         mapBriefsFunction = mapBriefToDanishStenoKeys;
