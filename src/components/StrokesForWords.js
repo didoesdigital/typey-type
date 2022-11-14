@@ -16,11 +16,13 @@ import {
   mapBriefToBrazilianPortugueseStenoKeys,
   mapBriefToDanishStenoKeys,
   mapBriefToItalianMichelaStenoKeys,
-  mapBriefToJapaneseStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
   splitBriefsIntoStrokes
 } from './../utils/typey-type';
+import {
+  mapBriefToJapaneseStenoKeys,
+} from './../utils/stenoLayouts';
 import misstrokesJSON from '../json/misstrokes.json'
 
 class StrokesForWords extends Component {

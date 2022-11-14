@@ -13,10 +13,12 @@ import {
   mapBriefToBrazilianPortugueseStenoKeys,
   mapBriefToDanishStenoKeys,
   mapBriefToItalianMichelaStenoKeys,
-  mapBriefToJapaneseStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys
 } from '../utils/typey-type';
+import {
+  mapBriefToJapaneseStenoKeys,
+} from '../utils/stenoLayouts';
 import { fetchResource } from '../utils/getData';
 import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';

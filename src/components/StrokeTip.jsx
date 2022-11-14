@@ -13,10 +13,12 @@ import {
   mapBriefToBrazilianPortugueseStenoKeys,
   mapBriefToDanishStenoKeys,
   mapBriefToItalianMichelaStenoKeys,
-  mapBriefToJapaneseStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
 } from "./../utils/typey-type";
+import {
+  mapBriefToJapaneseStenoKeys,
+} from './../utils/stenoLayouts';
 
 export default function StrokeTip({
   changeShowStrokesInLesson,
