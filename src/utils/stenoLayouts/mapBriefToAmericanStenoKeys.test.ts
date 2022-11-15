@@ -1,7 +1,7 @@
-import mapBriefToAmericanStenoKeys from './mapBriefToAmericanStenoKeys';
+import mapBriefToAmericanStenoKeys from "./mapBriefToAmericanStenoKeys";
 
-describe('map stroke to keys', () => {
-  it('show no keys for empty brief', () => {
+describe("map stroke to keys", () => {
+  it("show no keys for empty brief", () => {
     let brief = "";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
@@ -63,7 +63,6 @@ describe('map stroke to keys', () => {
     });
   });
 
-
   it('shows right-hand -T for "the"', () => {
     let brief = "-T";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
@@ -122,7 +121,7 @@ describe('map stroke to keys', () => {
       rightT: false,
       rightS: true,
       rightD: false,
-      rightZ: false
+      rightZ: false,
     });
   });
 
@@ -153,7 +152,7 @@ describe('map stroke to keys', () => {
       rightT: false,
       rightS: false,
       rightD: false,
-      rightZ: false
+      rightZ: false,
     });
   });
 
@@ -184,7 +183,7 @@ describe('map stroke to keys', () => {
       rightT: false,
       rightS: false,
       rightD: false,
-      rightZ: false
+      rightZ: false,
     });
   });
 
@@ -215,7 +214,7 @@ describe('map stroke to keys', () => {
       rightT: false,
       rightS: false,
       rightD: false,
-      rightZ: false
+      rightZ: false,
     });
   });
 
@@ -246,7 +245,7 @@ describe('map stroke to keys', () => {
       rightT: false,
       rightS: false,
       rightD: false,
-      rightZ: false
+      rightZ: false,
     });
   });
 
@@ -277,11 +276,11 @@ describe('map stroke to keys', () => {
       rightT: false,
       rightS: false,
       rightD: false,
-      rightZ: false
+      rightZ: false,
     });
   });
 
-  it('show nothing when given non-steno letters', () => {
+  it("show nothing when given non-steno letters", () => {
     let brief = "⌘";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
@@ -308,11 +307,11 @@ describe('map stroke to keys', () => {
       rightT: false,
       rightS: false,
       rightD: false,
-      rightZ: false
+      rightZ: false,
     });
   });
 
-  it('show correct brief containing numbers and letters for 70s', () => {
+  it("show correct brief containing numbers and letters for 70s", () => {
     let brief = "0EU7S";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: true,
@@ -339,11 +338,11 @@ describe('map stroke to keys', () => {
       rightT: false,
       rightS: true,
       rightD: false,
-      rightZ: false
+      rightZ: false,
     });
   });
 
-  it('show correct brief containing numbers for 90', () => {
+  it("show correct brief containing numbers for 90", () => {
     let brief = "0EU9";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: true,
@@ -370,11 +369,11 @@ describe('map stroke to keys', () => {
       rightT: true,
       rightS: false,
       rightD: false,
-      rightZ: false
+      rightZ: false,
     });
   });
 
-  it('show correct brief containing duplicated numbers like 11', () => {
+  it("show correct brief containing duplicated numbers like 11", () => {
     let brief = "1-D";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: true,
@@ -401,8 +400,7 @@ describe('map stroke to keys', () => {
       rightT: false,
       rightS: false,
       rightD: true,
-      rightZ: false
+      rightZ: false,
     });
   });
 });
-
