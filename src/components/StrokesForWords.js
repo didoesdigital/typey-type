@@ -12,7 +12,6 @@ import JapaneseStenoDiagram from './../StenoLayout/JapaneseStenoDiagram';
 import KoreanModernCStenoDiagram from './../StenoLayout/KoreanModernCStenoDiagram';
 import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
 import {
-  mapBriefToPalantypeKeys,
   splitBriefsIntoStrokes
 } from './../utils/typey-type';
 
@@ -22,6 +21,7 @@ import mapBriefToDanishStenoKeys from '../utils/stenoLayouts/mapBriefToDanishSte
 import mapBriefToItalianMichelaStenoKeys from '../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
 import mapBriefToJapaneseStenoKeys from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
 import mapBriefToKoreanModernCStenoKeys from '../utils/stenoLayouts/mapBriefToKoreanModernCStenoKeys';
+import mapBriefToPalantypeKeys from '../utils/stenoLayouts/mapBriefToPalantypeKeys';
 import misstrokesJSON from '../json/misstrokes.json'
 
 class StrokesForWords extends Component {

@@ -9,7 +9,6 @@ import PalantypeDiagram from '../StenoLayout/PalantypeDiagram';
 import Stroke from '../utils/stroke';
 import {
   mapQWERTYKeysToStenoStroke,
-  mapBriefToPalantypeKeys
 } from '../utils/typey-type';
 import mapBriefToAmericanStenoKeys from '../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
 import mapBriefToBrazilianPortugueseStenoKeys from '../utils/stenoLayouts/mapBriefToBrazilianPortugueseStenoKeys';
@@ -17,6 +16,7 @@ import mapBriefToDanishStenoKeys from '../utils/stenoLayouts/mapBriefToDanishSte
 import mapBriefToItalianMichelaStenoKeys from '../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
 import mapBriefToJapaneseStenoKeys from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
 import mapBriefToKoreanModernCStenoKeys from '../utils/stenoLayouts/mapBriefToKoreanModernCStenoKeys';
+import mapBriefToPalantypeKeys from '../utils/stenoLayouts/mapBriefToPalantypeKeys';
 import { fetchResource } from '../utils/getData';
 import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';
