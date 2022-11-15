@@ -18,7 +18,7 @@ import {
 } from "./../utils/typey-type";
 import {
   mapBriefToJapaneseStenoKeys,
-} from './../utils/stenoLayouts';
+} from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
 
 export default function StrokeTip({
   changeShowStrokesInLesson,

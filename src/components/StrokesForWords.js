@@ -22,7 +22,7 @@ import {
 } from './../utils/typey-type';
 import {
   mapBriefToJapaneseStenoKeys,
-} from './../utils/stenoLayouts';
+} from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
 import misstrokesJSON from '../json/misstrokes.json'
 
 class StrokesForWords extends Component {

@@ -1,4 +1,4 @@
-// stenoOrder and stenos should always be updated together
+// stenoOrder and stenoKeys should always be updated together
 const stenoOrder = [
   "漢",
   "「",
@@ -31,6 +31,7 @@ const stenoOrder = [
   "」",
   "カ",
 ] as const;
+
 const stenoKeys = [
   "the漢",
   "theLeftKagikakko",
