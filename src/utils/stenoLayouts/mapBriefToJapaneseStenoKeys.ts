@@ -1,3 +1,5 @@
+import type { Outline } from "../../types";
+
 // stenoOrder and stenoKeys should always be updated together
 const stenoOrder = [
   "漢",
@@ -65,7 +67,7 @@ const stenoKeys = [
   "theカ",
 ] as const;
 
-function mapBriefToJapaneseStenoKeys(brief: string) {
+function mapBriefToJapaneseStenoKeys(brief: Outline) {
   let keys: { [keyName: string]: boolean } = {
     the漢: false,
     theLeftKagikakko: false,

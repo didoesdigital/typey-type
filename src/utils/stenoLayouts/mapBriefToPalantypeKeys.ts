@@ -1,3 +1,5 @@
+import type { Outline } from "../../types";
+
 // palantypeOrder and palantypeKeys should always be updated together
 const palantypeOrder = [
   "S",
@@ -69,7 +71,7 @@ const palantypeKeys = [
   "rightH",
 ];
 
-function mapBriefToPalantypeKeys(brief: string) {
+function mapBriefToPalantypeKeys(brief: Outline) {
   let keys: { [keyName: string]: boolean } = {
     leftS: false,
     leftC: false,

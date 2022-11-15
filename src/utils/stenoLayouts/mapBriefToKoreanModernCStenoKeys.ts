@@ -1,4 +1,6 @@
-function mapBriefToKoreanModernCStenoKeys(brief: string) {
+import type { Outline } from "../../types";
+
+function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
   let keys: { [keyName: string]: boolean } = {
     the1Key: false,
     the2Key: false,

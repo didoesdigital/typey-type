@@ -9,6 +9,9 @@
  * "WO\*RLD/WA\*R/2"
  * "#"
  * "#-P"
+ * "「か-か」"
+ * "PTVAt/TEOta"
+ * "LROT"
  */
 export type Outline = string;
 

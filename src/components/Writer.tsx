@@ -21,6 +21,8 @@ import { fetchResource } from '../utils/getData';
 import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';
 
+import type { Outline } from "../types";
+
 type Props = {
   changeStenoLayout: (event: any) => string,
   changeWriterInput: (event: any) => void,
@@ -31,7 +33,7 @@ type Props = {
 };
 
 type State = {
-  stenoBrief: string,
+  stenoBrief: Outline,
   stenoStroke: Stroke,
   stenoDictionary: any,
   writtenText: string,
@@ -40,10 +42,10 @@ type State = {
 };
 
 type StenoLayout = {
-  [key: string]: any
+  [keyName: string]: boolean
 }
 
-type MapBriefToKeys = (brief: string) => StenoLayout
+type MapBriefToKeys = (brief: Outline) => StenoLayout
 
 class Writer extends Component<Props, State> {
   state: State = {
@@ -157,7 +159,7 @@ class Writer extends Component<Props, State> {
     }
   }
 
-  sendStroke(stenoBrief: string) {
+  sendStroke(stenoBrief: Outline) {
     let writtenText = this.lookUpStrokeInDictionary(stenoBrief);
 
     let labelString = this.state.stenoBrief;
@@ -182,7 +184,7 @@ class Writer extends Component<Props, State> {
     this.sendStroke(this.state.stenoBrief);
   }
 
-  lookUpStrokeInDictionary(stenoBrief: string) {
+  lookUpStrokeInDictionary(stenoBrief: Outline) {
     let translation = stenoBrief;
     if (this.state.stenoDictionary[stenoBrief]) {
       translation = this.state.stenoDictionary[stenoBrief];

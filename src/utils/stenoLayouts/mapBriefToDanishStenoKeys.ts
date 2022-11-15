@@ -1,3 +1,5 @@
+import type { Outline } from "../../types";
+
 // stenoOrder and stenoKeys should always be updated together
 const stenoOrder = [
   "#",
@@ -74,7 +76,7 @@ const stenoKeys = [
   "leftN",
 ] as const;
 
-function mapBriefToDanishStenoKeys(brief: string) {
+function mapBriefToDanishStenoKeys(brief: Outline) {
   let keys = {
     numberBar: false,
     leftN: false,

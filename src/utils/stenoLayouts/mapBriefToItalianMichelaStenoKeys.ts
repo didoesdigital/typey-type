@@ -1,3 +1,5 @@
+import type { Outline } from "../../types";
+
 // stenoOrder and stenoKeys should always be updated together
 const stenoOrder = [
   "F",
@@ -45,7 +47,7 @@ const stenoKeys = [
   "fRightLowercase",
 ] as const;
 
-function mapBriefToItalianMichelaStenoKeys(brief: string) {
+function mapBriefToItalianMichelaStenoKeys(brief: Outline) {
   let keys: { [keyName: string]: boolean } = {
     leftCapitalF: false,
     leftCapitalS: false,
