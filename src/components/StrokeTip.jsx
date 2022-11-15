@@ -9,7 +9,6 @@ import PalantypeDiagram from "./../StenoLayout/PalantypeDiagram";
 import {
   shouldShowStroke,
   splitBriefsIntoStrokes,
-  mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
 } from "./../utils/typey-type";
 
@@ -18,6 +17,7 @@ import mapBriefToBrazilianPortugueseStenoKeys from '../utils/stenoLayouts/mapBri
 import mapBriefToDanishStenoKeys from '../utils/stenoLayouts/mapBriefToDanishStenoKeys';
 import mapBriefToItalianMichelaStenoKeys from '../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
 import mapBriefToJapaneseStenoKeys from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
+import mapBriefToKoreanModernCStenoKeys from '../utils/stenoLayouts/mapBriefToKoreanModernCStenoKeys';
 
 export default function StrokeTip({
   changeShowStrokesInLesson,
