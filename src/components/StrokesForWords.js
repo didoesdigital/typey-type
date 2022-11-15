@@ -12,13 +12,14 @@ import JapaneseStenoDiagram from './../StenoLayout/JapaneseStenoDiagram';
 import KoreanModernCStenoDiagram from './../StenoLayout/KoreanModernCStenoDiagram';
 import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
 import {
-  mapBriefToAmericanStenoKeys,
   mapBriefToBrazilianPortugueseStenoKeys,
   mapBriefToDanishStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
   splitBriefsIntoStrokes
 } from './../utils/typey-type';
+
+import mapBriefToAmericanStenoKeys from '../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
 import mapBriefToItalianMichelaStenoKeys from '../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
 import mapBriefToJapaneseStenoKeys from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
 import misstrokesJSON from '../json/misstrokes.json'

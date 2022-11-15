@@ -14,7 +14,7 @@ import Intro from "../components/Intro";
 import GameProgress from "../components/GameProgress";
 import StenoLayoutDiagram from "../../../StenoLayout/AmericanStenoDiagram";
 import Stroke from "../../../utils/stroke";
-import { mapBriefToAmericanStenoKeys as mapBriefsFunction } from "../../../utils/typey-type";
+import mapBriefsFunction from '../../../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
 import Puzzle from "./Puzzle";
 import { ReactComponent as MischievousRobot } from "../../../images/MischievousRobot.svg";
 import { choosePuzzleKey, prettyKey } from "./utilities";

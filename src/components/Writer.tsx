@@ -9,12 +9,12 @@ import PalantypeDiagram from '../StenoLayout/PalantypeDiagram';
 import Stroke from '../utils/stroke';
 import {
   mapQWERTYKeysToStenoStroke,
-  mapBriefToAmericanStenoKeys,
   mapBriefToBrazilianPortugueseStenoKeys,
   mapBriefToDanishStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys
 } from '../utils/typey-type';
+import mapBriefToAmericanStenoKeys from '../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
 import mapBriefToItalianMichelaStenoKeys from '../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
 import mapBriefToJapaneseStenoKeys from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
 import { fetchResource } from '../utils/getData';
