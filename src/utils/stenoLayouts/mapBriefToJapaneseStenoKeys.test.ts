@@ -1,8 +1,8 @@
-import mapBriefToJapaneseStenoKeys from './mapBriefToJapaneseStenoKeys';
+import mapBriefToJapaneseStenoKeys from "./mapBriefToJapaneseStenoKeys";
 
-describe('map Japanese stroke to Japanese keys', () => {
+describe("map Japanese stroke to Japanese keys", () => {
   // let japaneseOrder = '漢「4たな3かさ2いう1おっ*4たな3かさ2いう1おっ」カ';
-  it('show no keys for empty brief', () => {
+  it("show no keys for empty brief", () => {
     let brief = "";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: false,
@@ -34,11 +34,11 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: false,
       theRightっ: false,
       theRightKagikakko: false,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('show nothing when given non-steno letters', () => {
+  it("show nothing when given non-steno letters", () => {
     let brief = "⌘";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: false,
@@ -70,11 +70,11 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: false,
       theRightっ: false,
       theRightKagikakko: false,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('shows punctuation brief for 。', () => {
+  it("shows punctuation brief for 。", () => {
     let brief = "「か-か」";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: false,
@@ -106,11 +106,11 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: false,
       theRightっ: false,
       theRightKagikakko: true,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('shows punctuation brief for ？', () => {
+  it("shows punctuation brief for ？", () => {
     let brief = "「-たかいお」";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: false,
@@ -142,11 +142,11 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: true,
       theRightっ: false,
       theRightKagikakko: true,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('shows brief for number 50', () => {
+  it("shows brief for number 50", () => {
     let brief = "41-4321";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: false,
@@ -178,11 +178,11 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: false,
       theRightっ: false,
       theRightKagikakko: false,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('shows brief for number 89', () => {
+  it("shows brief for number 89", () => {
     let brief = "431-432";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: false,
@@ -214,11 +214,11 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: false,
       theRightっ: false,
       theRightKagikakko: false,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('shows brief for ambiguous kanji with dash 刊', () => {
+  it("shows brief for ambiguous kanji with dash 刊", () => {
     let brief = "漢432っ-た32おっ";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: true,
@@ -250,11 +250,11 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: true,
       theRightっ: true,
       theRightKagikakko: false,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('shows brief for ambiguous kanji with star 刑', () => {
+  it("shows brief for ambiguous kanji with star 刑", () => {
     let brief = "漢432っ*た32おっ";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: true,
@@ -286,11 +286,11 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: true,
       theRightっ: true,
       theRightKagikakko: false,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('shows brief for first stroke of multi-stroke word 食べる', () => {
+  it("shows brief for first stroke of multi-stroke word 食べる", () => {
     let brief = "漢たさうおっ";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: true,
@@ -322,11 +322,11 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: false,
       theRightっ: false,
       theRightKagikakko: false,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('shows brief for second stroke of multi-stroke word 食べる', () => {
+  it("shows brief for second stroke of multi-stroke word 食べる", () => {
     let brief = "たなさいうお-たなう";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: false,
@@ -358,11 +358,11 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: false,
       theRightっ: false,
       theRightKagikakko: false,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('shows brief with left keys for だ', () => {
+  it("shows brief with left keys for だ", () => {
     let brief = "たなか";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: false,
@@ -394,11 +394,11 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: false,
       theRightっ: false,
       theRightKagikakko: false,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('shows brief with right keys for だ', () => {
+  it("shows brief with right keys for だ", () => {
     let brief = "-たなか";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: false,
@@ -430,11 +430,11 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: false,
       theRightっ: false,
       theRightKagikakko: false,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('shows brief with left and right keys for です', () => {
+  it("shows brief with left and right keys for です", () => {
     let brief = "たなかいうお-さう";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: false,
@@ -466,12 +466,12 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: false,
       theRightっ: false,
       theRightKagikakko: false,
-      theカ: false
+      theカ: false,
     });
   });
 
-  it('shows all keys for full steno order ignoring dash', () => {
-    let brief = '漢「4たな3かさ2いう1おっ*4たな3かさ2いう1おっ」カ';
+  it("shows all keys for full steno order ignoring dash", () => {
+    let brief = "漢「4たな3かさ2いう1おっ*4たな3かさ2いう1おっ」カ";
     expect(mapBriefToJapaneseStenoKeys(brief)).toEqual({
       the漢: true,
       theLeftKagikakko: true,
@@ -502,8 +502,7 @@ describe('map Japanese stroke to Japanese keys', () => {
       theRightお: true,
       theRightっ: true,
       theRightKagikakko: true,
-      theカ: true
+      theカ: true,
     });
   });
 });
-
