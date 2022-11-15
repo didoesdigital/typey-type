@@ -12,13 +12,11 @@ import {
   mapBriefToAmericanStenoKeys,
   mapBriefToBrazilianPortugueseStenoKeys,
   mapBriefToDanishStenoKeys,
-  mapBriefToItalianMichelaStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys
 } from '../utils/typey-type';
-import {
-  mapBriefToJapaneseStenoKeys,
-} from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
+import mapBriefToItalianMichelaStenoKeys from '../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
+import mapBriefToJapaneseStenoKeys from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
 import { fetchResource } from '../utils/getData';
 import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';

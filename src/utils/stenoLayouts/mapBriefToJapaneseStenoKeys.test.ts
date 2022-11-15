@@ -1,6 +1,4 @@
-import {
-  mapBriefToJapaneseStenoKeys,
-} from './mapBriefToJapaneseStenoKeys';
+import mapBriefToJapaneseStenoKeys from './mapBriefToJapaneseStenoKeys';
 
 describe('map Japanese stroke to Japanese keys', () => {
   // let japaneseOrder = '漢「4たな3かさ2いう1おっ*4たな3かさ2いう1おっ」カ';

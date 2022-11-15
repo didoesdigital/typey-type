@@ -141,35 +141,6 @@ function mapBriefToAmericanStenoKeys (brief) {
   return keys;
 }
 
-function mapBriefToItalianMichelaStenoKeys (brief) {
-  let keys = { leftCapitalF: false, leftCapitalS: false, leftCapitalC: false, leftCapitalZ: false, leftCapitalP: false, leftCapitalN: false, leftCapitalR: false, leftCapitalX: false, leftCapitalI: false, leftCapitalU: false, uRightLowercase: false, iRightLowercase: false, eRightLowercase: false, aRightLowercase: false, nRightLowercase: false, pRightLowercase: false, zRightLowercase: false, cRightLowercase: false, sRightLowercase: false, fRightLowercase: false };
-
-  let briefLetters = brief.split("");
-
-  // stenoOrder and stenoKeys should always be updated together
-  let stenoOrder = ['F', 'S', 'C', 'Z', 'P', 'N', 'R', 'X', 'I', 'U', 'u', 'i', 'e', 'a', 'n', 'p', 'z', 'c', 's', 'f'];
-  let stenoKeys = ['leftCapitalF', 'leftCapitalS', 'leftCapitalC', 'leftCapitalZ', 'leftCapitalP', 'leftCapitalN', 'leftCapitalR', 'leftCapitalX', 'leftCapitalI', 'leftCapitalU', 'uRightLowercase', 'iRightLowercase', 'eRightLowercase', 'aRightLowercase', 'nRightLowercase', 'pRightLowercase', 'zRightLowercase', 'cRightLowercase', 'sRightLowercase', 'fRightLowercase'];
-
-  for (let i = 0; i < stenoOrder.length; i++) {
-    if (briefLetters.length > 0) {
-      if (briefLetters[0] === stenoOrder[i]) {
-        keys[stenoKeys[i]] = true;
-        briefLetters.shift();
-      }
-    }
-  }
-
-  if (brief.match(/[0-9]/)) {
-    keys["numberBar"] = true;
-  }
-
-  if (keys.rightDUpper === true && keys.rightDLower === false) {
-    keys.rightDLower = true;
-  }
-
-  return keys;
-}
-
 function mapBriefToBrazilianPortugueseStenoKeys (brief) {
   let keys = {
     numberBarKey: false,
@@ -1137,7 +1108,6 @@ export {
   mapBriefToAmericanStenoKeys,
   mapBriefToBrazilianPortugueseStenoKeys,
   mapBriefToDanishStenoKeys,
-  mapBriefToItalianMichelaStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
   migratePersonalDictionariesV0ToV1,

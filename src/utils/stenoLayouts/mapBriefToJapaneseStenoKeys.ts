@@ -113,4 +113,4 @@ function mapBriefToJapaneseStenoKeys(brief: string) {
   return keys;
 }
 
-export { mapBriefToJapaneseStenoKeys };
+export default mapBriefToJapaneseStenoKeys;

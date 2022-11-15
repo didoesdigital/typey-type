@@ -15,14 +15,12 @@ import {
   mapBriefToAmericanStenoKeys,
   mapBriefToBrazilianPortugueseStenoKeys,
   mapBriefToDanishStenoKeys,
-  mapBriefToItalianMichelaStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
   splitBriefsIntoStrokes
 } from './../utils/typey-type';
-import {
-  mapBriefToJapaneseStenoKeys,
-} from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
+import mapBriefToItalianMichelaStenoKeys from '../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
+import mapBriefToJapaneseStenoKeys from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
 import misstrokesJSON from '../json/misstrokes.json'
 
 class StrokesForWords extends Component {
