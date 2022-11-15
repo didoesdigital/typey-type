@@ -1,9 +1,71 @@
 // stenoOrder and stenos should always be updated together
-const stenoOrder = ["漢", "「", "4", "た", "な", "3", "か", "さ", "2", "い", "う", "1", "お", "っ", "*", "-", "4", "た", "な", "3", "か", "さ", "2", "い", "う", "1", "お", "っ", "」", "カ"] as const;
-const stenoKeys = ["the漢", "theLeftKagikakko", "theLeft4", "theLeftた", "theLeftな", "theLeft3", "theLeftか", "theLeftさ", "theLeft2", "theLeftい", "theLeftう", "theLeft1", "theLeftお", "theLeftっ", "theStar", "dash", "theRight4", "theRightた", "theRightな", "theRight3", "theRightか", "theRightさ", "theRight2", "theRightい", "theRightう", "theRight1", "theRightお", "theRightっ", "theRightKagikakko", "theカ"] as const;
+const stenoOrder = [
+  "漢",
+  "「",
+  "4",
+  "た",
+  "な",
+  "3",
+  "か",
+  "さ",
+  "2",
+  "い",
+  "う",
+  "1",
+  "お",
+  "っ",
+  "*",
+  "-",
+  "4",
+  "た",
+  "な",
+  "3",
+  "か",
+  "さ",
+  "2",
+  "い",
+  "う",
+  "1",
+  "お",
+  "っ",
+  "」",
+  "カ",
+] as const;
+const stenoKeys = [
+  "the漢",
+  "theLeftKagikakko",
+  "theLeft4",
+  "theLeftた",
+  "theLeftな",
+  "theLeft3",
+  "theLeftか",
+  "theLeftさ",
+  "theLeft2",
+  "theLeftい",
+  "theLeftう",
+  "theLeft1",
+  "theLeftお",
+  "theLeftっ",
+  "theStar",
+  "dash",
+  "theRight4",
+  "theRightた",
+  "theRightな",
+  "theRight3",
+  "theRightか",
+  "theRightさ",
+  "theRight2",
+  "theRightい",
+  "theRightう",
+  "theRight1",
+  "theRightお",
+  "theRightっ",
+  "theRightKagikakko",
+  "theカ",
+] as const;
 
 function mapBriefToJapaneseStenoKeys(brief: string) {
-  let keys: {[keyName: string]: boolean} = {
+  let keys: { [keyName: string]: boolean } = {
     the漢: false,
     theLeftKagikakko: false,
     theLeft4: false,
@@ -33,7 +95,7 @@ function mapBriefToJapaneseStenoKeys(brief: string) {
     theRightお: false,
     theRightっ: false,
     theRightKagikakko: false,
-    theカ: false
+    theカ: false,
   };
 
   let briefLetters = brief.split("");
@@ -50,6 +112,4 @@ function mapBriefToJapaneseStenoKeys(brief: string) {
   return keys;
 }
 
-export {
-  mapBriefToJapaneseStenoKeys,
-};
+export { mapBriefToJapaneseStenoKeys };
