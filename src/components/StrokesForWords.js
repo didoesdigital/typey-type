@@ -12,7 +12,6 @@ import JapaneseStenoDiagram from './../StenoLayout/JapaneseStenoDiagram';
 import KoreanModernCStenoDiagram from './../StenoLayout/KoreanModernCStenoDiagram';
 import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
 import {
-  mapBriefToDanishStenoKeys,
   mapBriefToKoreanModernCStenoKeys,
   mapBriefToPalantypeKeys,
   splitBriefsIntoStrokes
@@ -20,6 +19,7 @@ import {
 
 import mapBriefToAmericanStenoKeys from '../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
 import mapBriefToBrazilianPortugueseStenoKeys from '../utils/stenoLayouts/mapBriefToBrazilianPortugueseStenoKeys';
+import mapBriefToDanishStenoKeys from '../utils/stenoLayouts/mapBriefToDanishStenoKeys';
 import mapBriefToItalianMichelaStenoKeys from '../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
 import mapBriefToJapaneseStenoKeys from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
 import misstrokesJSON from '../json/misstrokes.json'
