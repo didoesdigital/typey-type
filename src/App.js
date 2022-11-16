@@ -49,6 +49,7 @@ import Footer from './components/Footer';
 import fallbackLesson from './constant/fallbackLesson';
 import calculateMemorisedWordCount from './utils/calculateMemorisedWordCount';
 import calculateSeenWordCount from './utils/calculateSeenWordCount';
+import increaseMetWords from './utils/increaseMetWords';
 import isElement from './utils/isElement';
 import isNormalInteger from './utils/isNormalInteger';
 import filterByFamiliarity from './utils/lessons/filterByFamiliarity';
@@ -2445,23 +2446,4 @@ class App extends Component {
   }
 }
 
-function increaseMetWords(meetingsCount, totalNumberOfNewWordsMet, totalNumberOfLowExposuresSeen, totalNumberOfRetainedWords) {
-  let newState = {};
-
-  if (meetingsCount === 0) {
-    // console.log("meetingsCount = 0;");
-    newState.totalNumberOfNewWordsMet = totalNumberOfNewWordsMet + 1;
-  }
-  else if (meetingsCount >= 1 && meetingsCount <= 29) {
-    // console.log("meetingsCount 1–29;");
-    newState.totalNumberOfLowExposuresSeen = totalNumberOfLowExposuresSeen + 1;
-  }
-  else if (meetingsCount >= 30) {
-    // console.log("meetingsCount&gt;30;");
-    newState.totalNumberOfRetainedWords = totalNumberOfRetainedWords + 1;
-  }
-  return newState;
-}
-
 export default App;
-export { increaseMetWords };
