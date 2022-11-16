@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import GoogleAnalytics from 'react-ga';
-import { Link } from 'react-router-dom';
-import { IconExternal } from './Icon';
-import { Tooltip } from 'react-tippy';
-import 'react-tippy/dist/tippy.css'
+import React, { Component } from "react";
+import GoogleAnalytics from "react-ga";
+import { Link } from "react-router-dom";
+import { IconExternal } from "./Icon";
+import { Tooltip } from "react-tippy";
+import "react-tippy/dist/tippy.css";
 
 class Contribute extends Component {
   componentDidMount() {
@@ -19,7 +19,15 @@ class Contribute extends Component {
           <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
             <div className="flex mr1 self-center">
               <header className="flex items-center min-h-40">
-                <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="contribute-to-typey-type">Contribute to Typey&nbsp;Type</h2>
+                <h2
+                  ref={(heading) => {
+                    this.mainHeading = heading;
+                  }}
+                  tabIndex="-1"
+                  id="contribute-to-typey-type"
+                >
+                  Contribute to Typey&nbsp;Type
+                </h2>
               </header>
             </div>
           </div>
@@ -29,7 +37,8 @@ class Contribute extends Component {
             <p className="mt3">Thanks for your interest in Typey&nbsp;Type!</p>
 
             <h3 id="patreon">Patreon</h3>
-            <p>You can support my efforts on{" "}
+            <p>
+              You can support my efforts on{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="Patreon"
                 aria-label="Patreon (external link opens in new tab)"
@@ -50,29 +59,63 @@ class Contribute extends Component {
                   trigger="mouseenter focus click"
                   onShow={this.props.setAnnouncementMessage}
                 >
-                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                  <IconExternal
+                    ariaHidden="true"
+                    role="presentation"
+                    iconWidth="24"
+                    iconHeight="24"
+                    className="ml1 svg-icon-wrapper svg-baseline"
+                    iconTitle=""
+                  />
                 </Tooltip>
-              </GoogleAnalytics.OutboundLink>. A monthly donation helps me build more lessons and features to help you fast-track your steno progress.
+              </GoogleAnalytics.OutboundLink>
+              . A monthly donation helps me build more lessons and features to
+              help you fast-track your steno progress.
             </p>
 
             <h3 id="lessons">Lessons</h3>
-            <p>You can create your own <Link to="/lessons/custom">custom lesson</Link> and add it to the <a className="" href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing" target="_blank" rel="noopener noreferrer"><span className="whitespace-nowrap">community’s lessons
-                <Tooltip
-                  title="Opens in a new tab"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={this.props.setAnnouncementMessage}
-                >
-                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-            </Tooltip></span></a>.
+            <p>
+              You can create your own{" "}
+              <Link to="/lessons/custom">custom lesson</Link> and add it to the{" "}
+              <a
+                className=""
+                href="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="whitespace-nowrap">
+                  community’s lessons
+                  <Tooltip
+                    title="Opens in a new tab"
+                    className=""
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    <IconExternal
+                      ariaHidden="true"
+                      role="presentation"
+                      iconWidth="24"
+                      iconHeight="24"
+                      className="ml1 svg-icon-wrapper svg-baseline"
+                      iconTitle=""
+                    />
+                  </Tooltip>
+                </span>
+              </a>
+              .
             </p>
-            <p>If you have an idea for a new lesson, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a> or{" "}
+            <p>
+              If you have an idea for a new lesson,{" "}
+              <a href="mailto:typeytype@didoesdigital.com">
+                email typeytype@didoesdigital.com
+              </a>{" "}
+              or{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="tweet @DiDoesDigital"
                 aria-label="tweet @DiDoesDigital (external link opens in new tab)"
@@ -80,25 +123,38 @@ class Contribute extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <span className="whitespace-nowrap">tweet @DiDoesDigital
-                <Tooltip
-                  title="Opens in a new tab"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={this.props.setAnnouncementMessage}
-                >
-                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-              </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>. You can also find Di on Discord.</p>
+                <span className="whitespace-nowrap">
+                  tweet @DiDoesDigital
+                  <Tooltip
+                    title="Opens in a new tab"
+                    className=""
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    <IconExternal
+                      ariaHidden="true"
+                      role="presentation"
+                      iconWidth="24"
+                      iconHeight="24"
+                      className="ml1 svg-icon-wrapper svg-baseline"
+                      iconTitle=""
+                    />
+                  </Tooltip>
+                </span>
+              </GoogleAnalytics.OutboundLink>
+              . You can also find Di on Discord.
+            </p>
 
             <h3 id="dictionaries">Dictionaries</h3>
-            <p>To help the open steno community and Typey&nbsp;Type grow even faster, add your custom dictionaries to the{' '}
+            <p>
+              To help the open steno community and Typey&nbsp;Type grow even
+              faster, add your custom dictionaries to the{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="community’s dictionaries"
                 aria-label="community’s dictionaries (external link opens in new tab)"
@@ -119,11 +175,27 @@ class Contribute extends Component {
                   trigger="mouseenter focus click"
                   onShow={this.props.setAnnouncementMessage}
                 >
-                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                  <IconExternal
+                    ariaHidden="true"
+                    role="presentation"
+                    iconWidth="24"
+                    iconHeight="24"
+                    className="ml1 svg-icon-wrapper svg-baseline"
+                    iconTitle=""
+                  />
                 </Tooltip>
-              </GoogleAnalytics.OutboundLink>.
+              </GoogleAnalytics.OutboundLink>
+              .
             </p>
-            <p>If you notice anything unexpected, <a href="https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=" target="_blank" rel="noopener noreferrer" id="ga--contribute--give-feedback-on-dictionary">share your feedback on that dictionary
+            <p>
+              If you notice anything unexpected,{" "}
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690="
+                target="_blank"
+                rel="noopener noreferrer"
+                id="ga--contribute--give-feedback-on-dictionary"
+              >
+                share your feedback on that dictionary
                 <Tooltip
                   title="Opens in a new tab"
                   className=""
@@ -136,17 +208,29 @@ class Contribute extends Component {
                   trigger="mouseenter focus click"
                   onShow={this.props.setAnnouncementMessage}
                 >
-                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-              </Tooltip></a>.
+                  <IconExternal
+                    ariaHidden="true"
+                    role="presentation"
+                    iconWidth="24"
+                    iconHeight="24"
+                    className="ml1 svg-icon-wrapper svg-baseline"
+                    iconTitle=""
+                  />
+                </Tooltip>
+              </a>
+              .
             </p>
-            <p><GoogleAnalytics.OutboundLink
+            <p>
+              <GoogleAnalytics.OutboundLink
                 eventLabel="Di’s Steno Dictionaries repo"
                 aria-label="Di’s Steno Dictionaries repo (external link opens in new tab)"
                 to="https://github.com/didoesdigital/steno-dictionaries"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Di’s Steno Dictionaries <span className="whitespace-nowrap">repo
+                Di’s Steno Dictionaries{" "}
+                <span className="whitespace-nowrap">
+                  repo
                   <Tooltip
                     title="Opens in a new tab"
                     animation="shift"
@@ -159,11 +243,19 @@ class Contribute extends Component {
                     trigger="mouseenter focus click"
                     onShow={this.props.setAnnouncementMessage}
                   >
-                    <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                    <IconExternal
+                      ariaHidden="true"
+                      role="presentation"
+                      iconWidth="24"
+                      iconHeight="24"
+                      className="ml1 svg-icon-wrapper svg-baseline"
+                      iconTitle=""
+                    />
                   </Tooltip>
                 </span>
-              </GoogleAnalytics.OutboundLink> has many dictionaries. These power Typey&nbsp;Type’s stroke suggestions.
-              See the{' '}
+              </GoogleAnalytics.OutboundLink>{" "}
+              has many dictionaries. These power Typey&nbsp;Type’s stroke
+              suggestions. See the{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="repo’s contributing section"
                 aria-label="repo’s contributing section (external link opens in new tab)"
@@ -184,9 +276,17 @@ class Contribute extends Component {
                   trigger="mouseenter focus click"
                   onShow={this.props.setAnnouncementMessage}
                 >
-                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                  <IconExternal
+                    ariaHidden="true"
+                    role="presentation"
+                    iconWidth="24"
+                    iconHeight="24"
+                    className="ml1 svg-icon-wrapper svg-baseline"
+                    iconTitle=""
+                  />
                 </Tooltip>
-              </GoogleAnalytics.OutboundLink>.
+              </GoogleAnalytics.OutboundLink>
+              .
             </p>
 
             <h3 id="feedback">Feedback</h3>
@@ -211,14 +311,22 @@ class Contribute extends Component {
                   trigger="mouseenter focus click"
                   onShow={this.props.setAnnouncementMessage}
                 >
-                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
+                  <IconExternal
+                    ariaHidden="true"
+                    role="presentation"
+                    iconWidth="24"
+                    iconHeight="24"
+                    className="ml1 svg-icon-wrapper svg-baseline"
+                    iconTitle=""
+                  />
                 </Tooltip>
-              </GoogleAnalytics.OutboundLink>.
+              </GoogleAnalytics.OutboundLink>
+              .
             </p>
           </div>
         </div>
       </main>
-    )
+    );
   }
 }
 
