@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PARAMS from './utils/params.js';
 import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from './constant/index.js';
-import { randomise, isLessonTextValid } from './utils/utils';
+import { isLessonTextValid } from './utils/utils';
 import { getLessonIndexData } from './utils/lessonIndexData';
 import { getRecommendedNextLesson } from './utils/recommendations';
 import { getFlashcardsNextLesson } from './utils/flashcardsRecommendations';
@@ -52,6 +52,7 @@ import calculateSeenWordCount from './utils/calculateSeenWordCount';
 import isElement from './utils/isElement';
 import isNormalInteger from './utils/isNormalInteger';
 import filterByFamiliarity from './utils/lessons/filterByFamiliarity';
+import sortLesson from './utils/lessons/sortLesson';
 import Zipper from './utils/zipper';
 
 const AsyncBreak = Loadable({
@@ -2509,39 +2510,5 @@ function replaceSmartTypographyInPhraseAndStroke(presentedMaterialItem, smartTyp
   }
 }
 
-function sortLesson(presentedMaterial, met, userSettings) {
-  if (userSettings.sortOrder === 'sortRandom') {
-    return randomise(presentedMaterial);
-  }
-  else if ((userSettings.sortOrder === 'sortNew') || (userSettings.sortOrder === 'sortOld')) {
-
-    let spaceBefore = "";
-    let spaceAfter = "";
-    if (userSettings && userSettings.spacePlacement && userSettings.spacePlacement === "spaceBeforeOutput" ) { spaceBefore = " "; }
-    if (userSettings && userSettings.spacePlacement && userSettings.spacePlacement === "spaceAfterOutput" ) { spaceAfter = " "; }
-
-    presentedMaterial.sort(function(a, b) {
-      let seenA = met[spaceBefore + a.phrase + spaceAfter] || 0;
-      let seenB = met[spaceBefore + b.phrase + spaceAfter] || 0;
-      return userSettings.sortOrder === 'sortNew' ? seenA - seenB : seenB - seenA;
-    });
-  }
-  else if (userSettings.sortOrder === 'sortShortest') {
-    presentedMaterial.sort((a, b) => {
-      const aLength = [...a.phrase].length;
-      const bLength = [...b.phrase].length;
-      return aLength < bLength ? -1 : aLength > bLength ? 1 : 0;
-    });
-  }
-  else if (userSettings.sortOrder === 'sortLongest') {
-    presentedMaterial.sort((a, b) => {
-      const aLength = [...a.phrase].length;
-      const bLength = [...b.phrase].length;
-      return bLength < aLength ? -1 : bLength > aLength ? 1 : 0;
-    });
-  }
-  return presentedMaterial;
-}
-
 export default App;
-export {increaseMetWords, sortLesson, replaceSmartTypographyInPresentedMaterial};
+export {increaseMetWords, replaceSmartTypographyInPresentedMaterial};

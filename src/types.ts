@@ -219,3 +219,57 @@ export type MetWords = {
 export type Material = string;
 
 export type PresentedMaterial = { phrase: Material; stroke: Outline }[];
+
+export type SpacePlacement =
+  | "spaceBeforeOutput"
+  | "spaceAfterOutput"
+  | "spaceExact"
+  | "spaceOff";
+
+export type SortOrder =
+  | "sortOff"
+  | "sortRandom"
+  | "sortNew"
+  | "sortOld"
+  | "sortShortest"
+  | "sortLongest";
+
+export type Study = "discover" | "revise" | "drill" | "practice";
+
+export type StenoLayout =
+  | "stenoLayoutAmericanSteno"
+  | "stenoLayoutPalantype"
+  | "stenoLayoutBrazilianPortugueseSteno"
+  | "stenoLayoutDanishSteno"
+  | "stenoLayoutItalianMichelaSteno"
+  | "stenoLayoutJapanese"
+  | "stenoLayoutKoreanModernC"
+  | "stenoLayoutKoreanModernS";
+
+export type UpcomingWordsLayout = "singleLine" | "multiline" | "hidden";
+
+export type UserSettings = {
+  beatsPerMinute: number;
+  blurMaterial: boolean;
+  caseSensitive: boolean;
+  diagramSize: number;
+  simpleTypography: boolean;
+  retainedWords: boolean;
+  limitNumberOfWords: number;
+  newWords: boolean;
+  repetitions: number;
+  showScoresWhileTyping: boolean;
+  showStrokes: boolean;
+  showStrokesAsDiagrams: boolean;
+  showStrokesOnMisstroke: boolean;
+  hideStrokesOnLastRepetition: boolean;
+  spacePlacement: SpacePlacement;
+  speakMaterial: boolean;
+  textInputAccessibility: boolean;
+  sortOrder: SortOrder;
+  seenWords: boolean;
+  startFromWord: number;
+  study: Study;
+  stenoLayout: StenoLayout;
+  upcomingWordsLayout: UpcomingWordsLayout;
+};
