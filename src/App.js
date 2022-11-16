@@ -64,7 +64,7 @@ const AsyncBreak = Loadable({
 });
 
 const AsyncContribute = Loadable({
-  loader: () => import("./components/Contribute"),
+  loader: () => import("./pages/contribute/Contribute"),
   loading: PageLoading,
   delay: 300
 });
