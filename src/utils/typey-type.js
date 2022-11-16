@@ -2,6 +2,7 @@ import Zipper from './zipper';
 import Stroke from './stroke';
 import * as stroke from './stroke';
 import { isPeak } from './utils';
+import trimAndSumUniqMetWords from './trimAndSumUniqMetWords';
 
 function createWordListFromMetWords (metWords) {
   let munged = trimAndSumUniqMetWords(metWords);
@@ -19,19 +20,6 @@ function createWordListFromMetWords (metWords) {
     return !containsCaret || isJustACaretCharacter || isJustACaretCharacterWithSpaceBefore || isJustACaretCharacterWithSpaceAfter;
   });
   return metWordsEntries.map(entry => entry[0].trim());
-}
-
-function trimAndSumUniqMetWords (metWords) {
-  let mungedUniqWords = {};
-  for (const [metWord, timesSeen] of Object.entries(metWords)) {
-    let trimmedWord = metWord.trim();
-    if (mungedUniqWords[trimmedWord]) {
-      mungedUniqWords[trimmedWord] += timesSeen;
-    } else {
-      mungedUniqWords[trimmedWord] = timesSeen;
-    }
-  }
-  return mungedUniqWords;
 }
 
 function removeWhitespaceAndSumUniqMetWords (metWords) {
@@ -852,7 +840,6 @@ export {
   mapQWERTYKeysToStenoStroke,
   migratePersonalDictionariesV0ToV1,
   // migratePersonalDictionariesV1ToV2,
-  trimAndSumUniqMetWords,
   parseCustomMaterial,
   parseLesson,
   parseWordList,

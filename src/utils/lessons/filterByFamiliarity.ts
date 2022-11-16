@@ -1,7 +1,5 @@
-import {
-  removeWhitespaceAndSumUniqMetWords,
-  trimAndSumUniqMetWords,
-} from "../typey-type";
+import { removeWhitespaceAndSumUniqMetWords } from "../typey-type";
+import trimAndSumUniqMetWords from '../trimAndSumUniqMetWords';
 
 import type { MetWords, PresentedMaterial } from "../../types";
 
@@ -14,8 +12,7 @@ function filterByFamiliarity(
   revisionMode: boolean
 ) {
   if (userSettings.spacePlacement === "spaceExact") {
-    // FIXME remove `as MetWords` after converting trimAndSumUniqMetWords to TS
-    met = trimAndSumUniqMetWords(met) as MetWords;
+    met = trimAndSumUniqMetWords(met);
   }
 
   if (userSettings.spacePlacement === "spaceOff") {

@@ -1,6 +1,6 @@
 import { shuffle } from "d3-array";
 
-import { trimAndSumUniqMetWords } from "../../../utils/typey-type";
+import trimAndSumUniqMetWords from '../../../utils/trimAndSumUniqMetWords';
 
 import {
   hasFewerThan7Letters,

@@ -12,7 +12,7 @@ import { getLessonIndexData } from './../utils/lessonIndexData';
 import { IconCheckmark, IconTriangleRight } from './Icon';
 import { Link, Redirect } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
-import { trimAndSumUniqMetWords } from './../utils/typey-type';
+import trimAndSumUniqMetWords from '../utils/trimAndSumUniqMetWords';
 import { ReactComponent as AlertRobot } from '../images/AlertRobot.svg';
 import { ReactComponent as BoredRobot } from '../images/BoredRobot.svg';
 import { ReactComponent as HappyRobot } from '../images/HappyRobot.svg';

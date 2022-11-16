@@ -7,7 +7,6 @@ import {
   mapQWERTYKeysToStenoStroke,
   strokeAccuracy,
   splitBriefsIntoStrokes,
-  trimAndSumUniqMetWords,
   // writePersonalPreferences,
   migratePersonalDictionariesV0ToV1,
   // migratePersonalDictionariesV1ToV2,
@@ -16,15 +15,6 @@ import {
   updateCapitalisationStrokesInNextItem
 } from './typey-type';
 import Zipper from './zipper';
-
-describe('sum uniq met words', () => {
-  it('returns met words without duplicate entries with different spacing', () => {
-    let metWords = {"the": 1, " the": 3, "the ": 2, "steno": 1};
-    expect(trimAndSumUniqMetWords(metWords)).toEqual(
-      {"the": 6, "steno": 1}
-    );
-  });
-});
 
 describe('create sorted word list from met words', () => {
   it('returns sorted word list', () => {
