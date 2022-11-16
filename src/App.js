@@ -51,6 +51,7 @@ import Footer from './components/Footer';
 import fallbackLesson from './constant/fallbackLesson';
 import calculateMemorisedWordCount from './utils/calculateMemorisedWordCount';
 import calculateSeenWordCount from './utils/calculateSeenWordCount';
+import isNormalInteger from './utils/isNormalInteger';
 import Zipper from './utils/zipper';
 
 const AsyncBreak = Loadable({
@@ -2625,11 +2626,6 @@ function isElement(obj) {
       (obj.nodeType===1) && (typeof obj.style === "object") &&
       (typeof obj.ownerDocument ==="object");
   }
-}
-
-function isNormalInteger(str) {
-  let n = Math.floor(Number(str));
-  return n !== Infinity && String(n) === str && n >= 0;
 }
 
 export default App;
