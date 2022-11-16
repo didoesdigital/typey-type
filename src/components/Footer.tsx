@@ -5,7 +5,12 @@ import { IconExternal } from "./Icon";
 import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
 
-class Footer extends Component {
+type Props = {
+  fullscreen: boolean;
+  setAnnouncementMessage: () => void;
+};
+
+class Footer extends Component<Props> {
   render() {
     let fullscreen = "";
     if (this.props.fullscreen) {
@@ -74,6 +79,7 @@ class Footer extends Component {
                 rel="noopener noreferrer"
               >
                 Steno&nbsp;news
+                {/* @ts-ignore */}
                 <Tooltip
                   title="(external link opens in new tab)"
                   animation="shift"
