@@ -1,5 +1,5 @@
-import { removeWhitespaceAndSumUniqMetWords } from "../typey-type";
-import trimAndSumUniqMetWords from '../trimAndSumUniqMetWords';
+import removeWhitespaceAndSumUniqMetWords from "../removeWhitespaceAndSumUniqMetWords";
+import trimAndSumUniqMetWords from "../trimAndSumUniqMetWords";
 
 import type { MetWords, PresentedMaterial } from "../../types";
 
@@ -16,8 +16,7 @@ function filterByFamiliarity(
   }
 
   if (userSettings.spacePlacement === "spaceOff") {
-    // FIXME remove `as MetWords` after converting removeWhitespaceAndSumUniqMetWords to TS
-    met = removeWhitespaceAndSumUniqMetWords(met) as MetWords;
+    met = removeWhitespaceAndSumUniqMetWords(met);
   }
 
   var localRevisionMode = revisionMode,
