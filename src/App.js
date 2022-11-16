@@ -51,6 +51,7 @@ import Footer from './components/Footer';
 import fallbackLesson from './constant/fallbackLesson';
 import calculateMemorisedWordCount from './utils/calculateMemorisedWordCount';
 import calculateSeenWordCount from './utils/calculateSeenWordCount';
+import isElement from './utils/isElement';
 import isNormalInteger from './utils/isNormalInteger';
 import Zipper from './utils/zipper';
 
@@ -2615,17 +2616,6 @@ function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userS
   }
 
   return presentedMaterial.filter(item => filterFunction(item.phrase) );
-}
-
-function isElement(obj) {
-  try {
-    return obj instanceof HTMLElement;
-  }
-  catch(e){
-    return (typeof obj==="object") &&
-      (obj.nodeType===1) && (typeof obj.style === "object") &&
-      (typeof obj.ownerDocument ==="object");
-  }
 }
 
 export default App;
