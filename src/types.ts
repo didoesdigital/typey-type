@@ -194,3 +194,20 @@ export type AffixObject = {
   prefixes: AffixItem[];
   suffixes: AffixItem[];
 };
+
+/**
+ * Examples:
+ * {
+ *   "0": 1,
+ *   "1": 1,
+ *   " The": 95,
+ *   " process": 7,
+ *   " of": 691,
+ *   " writing": 17,
+ *   " shorthand": 6,
+ * }
+ */
+export type MetWords = {
+  [spacedTypedWords: string]: number
+}
+
