@@ -1482,7 +1482,7 @@ class App extends Component {
 
       newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings, this.state.revisionMode);
 
-      newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial);
+      newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings);
 
       if (this.state.revisionMode && this.state.userSettings.limitNumberOfWords > 0) {
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
@@ -2509,7 +2509,7 @@ function replaceSmartTypographyInPhraseAndStroke(presentedMaterialItem, smartTyp
   }
 }
 
-function sortLesson(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings) {
+function sortLesson(presentedMaterial, met, userSettings) {
   if (userSettings.sortOrder === 'sortRandom') {
     return randomise(presentedMaterial);
   }
