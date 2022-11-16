@@ -1948,7 +1948,7 @@ class App extends Component {
         }
 
         const meetingsCount = newState.metWords[phraseText] || 0;
-        Object.assign(newState, increaseMetWords.call(this, meetingsCount));
+        Object.assign(newState, increaseMetWords(meetingsCount, this.state.totalNumberOfNewWordsMet, this.state.totalNumberOfLowExposuresSeen, this.state.totalNumberOfRetainedWords));
         newState.metWords[phraseText] = meetingsCount + 1;
       }
 
@@ -2445,20 +2445,20 @@ class App extends Component {
   }
 }
 
-function increaseMetWords(meetingsCount) {
+function increaseMetWords(meetingsCount, totalNumberOfNewWordsMet, totalNumberOfLowExposuresSeen, totalNumberOfRetainedWords) {
   let newState = {};
 
   if (meetingsCount === 0) {
     // console.log("meetingsCount = 0;");
-    newState.totalNumberOfNewWordsMet = this.state.totalNumberOfNewWordsMet + 1;
+    newState.totalNumberOfNewWordsMet = totalNumberOfNewWordsMet + 1;
   }
   else if (meetingsCount >= 1 && meetingsCount <= 29) {
     // console.log("meetingsCount 1–29;");
-    newState.totalNumberOfLowExposuresSeen = this.state.totalNumberOfLowExposuresSeen + 1;
+    newState.totalNumberOfLowExposuresSeen = totalNumberOfLowExposuresSeen + 1;
   }
   else if (meetingsCount >= 30) {
     // console.log("meetingsCount&gt;30;");
-    newState.totalNumberOfRetainedWords = this.state.totalNumberOfRetainedWords + 1;
+    newState.totalNumberOfRetainedWords = totalNumberOfRetainedWords + 1;
   }
   return newState;
 }
