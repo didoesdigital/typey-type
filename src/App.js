@@ -58,7 +58,7 @@ import sortLesson from './utils/lessons/sortLesson';
 import Zipper from './utils/zipper';
 
 const AsyncBreak = Loadable({
-  loader: () => import("./components/Break"),
+  loader: () => import("./pages/break/Break"),
   loading: PageLoading,
   delay: 300
 });
