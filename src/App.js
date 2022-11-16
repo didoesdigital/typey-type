@@ -14,11 +14,9 @@ import {
   loadPersonalDictionariesFromLocalStorage,
   matchSplitText,
   parseLesson,
-  removeWhitespaceAndSumUniqMetWords,
   repetitionsRemaining,
   shouldShowStroke,
   strokeAccuracy,
-  trimAndSumUniqMetWords,
   targetStrokeCount,
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
@@ -53,6 +51,7 @@ import calculateMemorisedWordCount from './utils/calculateMemorisedWordCount';
 import calculateSeenWordCount from './utils/calculateSeenWordCount';
 import isElement from './utils/isElement';
 import isNormalInteger from './utils/isNormalInteger';
+import filterByFamiliarity from './utils/lessons/filterByFamiliarity';
 import Zipper from './utils/zipper';
 
 const AsyncBreak = Loadable({
@@ -2544,79 +2543,5 @@ function sortLesson(presentedMaterial, met = this.state.metWords, userSettings =
   return presentedMaterial;
 }
 
-function filterByFamiliarity(presentedMaterial, met = this.state.metWords, userSettings = this.state.userSettings, revisionMode = this.state.revisionMode) {
-
-  if (userSettings.spacePlacement === 'spaceExact') {
-    met = trimAndSumUniqMetWords(met);
-  }
-
-  if (userSettings.spacePlacement === 'spaceOff') {
-    met = removeWhitespaceAndSumUniqMetWords(met);
-  }
-
-  var localRevisionMode = revisionMode,
-    newWords = userSettings.newWords,
-    seenWords = userSettings.seenWords,
-    retainedWords = userSettings.retainedWords,
-    spacePlacement = userSettings.spacePlacement;
-
-  var testNewWords = function(phrase) {
-    if (!(phrase in met)) {
-      return true;
-    } else {
-      return (met[phrase] < 1);
-    }
-  }
-  var testSeenWords = function(phrase) {
-    if (!(phrase in met)) {
-      return false;
-    } else {
-      return ((met[phrase] > 0) && (met[phrase] < 30));
-    }
-  }
-  var testRetainedWords = function(phrase) {
-    if (!(phrase in met)) {
-      return false;
-    } else {
-      return (met[phrase] > 29);
-    }
-  }
-
-  var tests = [];
-  if (localRevisionMode) {
-    tests.push(testNewWords);
-    tests.push(testSeenWords);
-    tests.push(testRetainedWords);
-  } else {
-    if (retainedWords) {
-      tests.push(testRetainedWords);
-    }
-    if (seenWords) {
-      tests.push(testSeenWords);
-    }
-    if (newWords) {
-      tests.push(testNewWords);
-    }
-  }
-
-  var filterFunction = function (phrase) {
-    if (spacePlacement === 'spaceBeforeOutput') {
-      phrase = ' '+phrase;
-    } else if (spacePlacement === 'spaceAfterOutput') {
-      phrase = phrase+' ';
-    } else if (spacePlacement === 'spaceOff') {
-      phrase = phrase.replace(/\s/g,'');
-    }
-    for (var i = 0; i < tests.length; i++) {
-      if (tests[i](phrase)) {
-        return true;
-      };
-    }
-    return false;
-  }
-
-  return presentedMaterial.filter(item => filterFunction(item.phrase) );
-}
-
 export default App;
-export {increaseMetWords, filterByFamiliarity, sortLesson, replaceSmartTypographyInPresentedMaterial};
+export {increaseMetWords, sortLesson, replaceSmartTypographyInPresentedMaterial};

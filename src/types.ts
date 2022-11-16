@@ -208,6 +208,14 @@ export type AffixObject = {
  * }
  */
 export type MetWords = {
-  [spacedTypedWords: string]: number
-}
+  [spacedTypedWords: string]: number;
+};
 
+/**
+ * Examples:
+ * "was"
+ * "her"
+ */
+export type Material = string;
+
+export type PresentedMaterial = { phrase: Material; stroke: Outline }[];
