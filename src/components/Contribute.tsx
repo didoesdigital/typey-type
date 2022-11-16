@@ -5,7 +5,13 @@ import { IconExternal } from "./Icon";
 import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
 
-class Contribute extends Component {
+type Props = {
+  setAnnouncementMessage: () => void;
+};
+
+class Contribute extends Component<Props> {
+  mainHeading?: HTMLHeadingElement | null;
+
   componentDidMount() {
     if (this.mainHeading) {
       this.mainHeading.focus();
@@ -23,7 +29,7 @@ class Contribute extends Component {
                   ref={(heading) => {
                     this.mainHeading = heading;
                   }}
-                  tabIndex="-1"
+                  tabIndex={-1}
                   id="contribute-to-typey-type"
                 >
                   Contribute to Typey&nbsp;Type
@@ -47,6 +53,7 @@ class Contribute extends Component {
                 rel="noopener noreferrer"
               >
                 Patreon
+                {/* @ts-ignore */}
                 <Tooltip
                   title="Opens in a new tab"
                   animation="shift"
@@ -85,6 +92,7 @@ class Contribute extends Component {
               >
                 <span className="whitespace-nowrap">
                   community’s lessons
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="Opens in a new tab"
                     className=""
@@ -125,6 +133,7 @@ class Contribute extends Component {
               >
                 <span className="whitespace-nowrap">
                   tweet @DiDoesDigital
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="Opens in a new tab"
                     className=""
@@ -163,6 +172,7 @@ class Contribute extends Component {
                 rel="noopener noreferrer"
               >
                 community’s&nbsp;dictionaries
+                {/* @ts-ignore */}
                 <Tooltip
                   title="Opens in a new tab"
                   animation="shift"
@@ -196,6 +206,7 @@ class Contribute extends Component {
                 id="ga--contribute--give-feedback-on-dictionary"
               >
                 share your feedback on that dictionary
+                {/* @ts-ignore */}
                 <Tooltip
                   title="Opens in a new tab"
                   className=""
@@ -231,6 +242,7 @@ class Contribute extends Component {
                 Di’s Steno Dictionaries{" "}
                 <span className="whitespace-nowrap">
                   repo
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="Opens in a new tab"
                     animation="shift"
@@ -264,6 +276,7 @@ class Contribute extends Component {
                 rel="noopener noreferrer"
               >
                 repo’s contributing section
+                {/* @ts-ignore */}
                 <Tooltip
                   title="Opens in a new tab"
                   animation="shift"
@@ -299,6 +312,7 @@ class Contribute extends Component {
                 rel="noopener noreferrer"
               >
                 Share your feedback
+                {/* @ts-ignore */}
                 <Tooltip
                   title="Form opens in a new tab"
                   animation="shift"
