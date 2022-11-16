@@ -52,6 +52,7 @@ import calculateSeenWordCount from './utils/calculateSeenWordCount';
 import isElement from './utils/isElement';
 import isNormalInteger from './utils/isNormalInteger';
 import filterByFamiliarity from './utils/lessons/filterByFamiliarity';
+import replaceSmartTypographyInPhraseAndStroke from './utils/lessons/replaceSmartTypographyInPhraseAndStroke';
 import sortLesson from './utils/lessons/sortLesson';
 import Zipper from './utils/zipper';
 
@@ -2496,18 +2497,6 @@ function replaceSmartTypographyInPresentedMaterial(presentedMaterial, userSettin
     }
   }
   return presentedMaterial;
-}
-
-function replaceSmartTypographyInPhraseAndStroke(presentedMaterialItem, smartTypographyRegex, dumbTypographyChar, smartTypographyStrokesRegex, dumbTypographyStroke) {
-  if (presentedMaterialItem.phrase.match(smartTypographyRegex)) {
-    presentedMaterialItem.phrase = presentedMaterialItem.phrase.replace(smartTypographyRegex, dumbTypographyChar);
-    presentedMaterialItem.stroke = presentedMaterialItem.stroke.split(' ').map(stroke => {
-      return stroke.replace(smartTypographyStrokesRegex, dumbTypographyStroke);
-    }).join(' ');
-
-    // by keeping this inside this function and only after matching on unusual hyphens or dashes, we don't replace people's preferred hyphen stroke for normal hyphens
-    if (presentedMaterialItem.phrase === '-' && presentedMaterialItem.stroke === 'XXX') { presentedMaterialItem.stroke = 'H-PB'; }
-  }
 }
 
 export default App;

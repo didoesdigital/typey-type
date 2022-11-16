@@ -218,7 +218,8 @@ export type MetWords = {
  */
 export type Material = string;
 
-export type PresentedMaterial = { phrase: Material; stroke: Outline }[];
+export type PresentedMaterialItem = { phrase: Material; stroke: Outline };
+export type PresentedMaterial = PresentedMaterialItem[];
 
 export type SpacePlacement =
   | "spaceBeforeOutput"
