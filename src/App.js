@@ -49,6 +49,7 @@ import Lessons from './pages/lessons/Lessons';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import fallbackLesson from './constant/fallbackLesson';
+import calculateMemorisedWordCount from './utils/calculateMemorisedWordCount';
 import Zipper from './utils/zipper';
 
 const AsyncBreak = Loadable({
@@ -2633,11 +2634,6 @@ function isNormalInteger(str) {
 function calculateSeenWordCount(metWords) {
   let yourSeenWordCount = Math.round(Object.values(metWords).filter( timesSeen => timesSeen > 0 && timesSeen < 30).length) || 0;
   return yourSeenWordCount;
-}
-
-function calculateMemorisedWordCount(metWords) {
-  let yourMemorisedWordCount = Math.round(Object.values(metWords).filter( timesSeen => timesSeen > 29).length) || 0;
-  return yourMemorisedWordCount;
 }
 
 export default App;
