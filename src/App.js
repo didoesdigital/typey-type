@@ -41,7 +41,7 @@ import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';
 import Loadable from 'react-loadable';
 import PageLoading from './components/PageLoading';
-import Announcements from './components/Announcements';
+import Announcements from './components/Announcements/Announcements';
 import ErrorBoundary from './components/ErrorBoundary'
 import Lessons from './pages/lessons/Lessons';
 import Header from './components/Header';
