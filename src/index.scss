@@ -534,6 +534,9 @@ input:focus::placeholder {
   border-bottom-style: solid;
   border-bottom-width: 1px;
 }
+.b-dashed {
+  border-style: dashed;
+}
 .bb-dotted {
   border-bottom-style: dotted;
 }
@@ -612,7 +615,7 @@ input:focus::placeholder {
 .mt-h2   { margin-top: $h2-size * $font-scale; }
 .mt-h3   { margin-top: $h3-size * $font-scale; }
 // .mt6     { margin-top: 48px; }
-.mt8     { margin-top: 64px; }
+// .mt8     { margin-top: 64px; }
 .mt10    { margin-top: 80px; }
 // .mt11    { margin-top: 88px; }
 
@@ -2419,5 +2422,5 @@ $lineAdjustment: 4px;
 }
 
 .punctuation-description-transform {
-  transform: translate(0px, -8px);
+  transform: translate(0px, -56px);
 }

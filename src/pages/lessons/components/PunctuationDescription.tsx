@@ -2,26 +2,30 @@ import React from "react";
 import describePunctuation from "../../../utils/describePunctuation";
 
 type Props = {
-  punctuationDescriptions: boolean;
   currentPhrase: string;
+  multiline: boolean;
+  punctuationDescriptions: boolean;
 };
 
 const PunctuationDescription = ({
-  punctuationDescriptions,
   currentPhrase,
+  multiline,
+  punctuationDescriptions,
 }: Props) => {
   const punctuationDescription = describePunctuation(currentPhrase);
   return (
-    <p
-      id="punctuation-description"
-      className={
-        punctuationDescriptions && punctuationDescription.length > 0
-          ? "mb0 px2 py05 dib b--solid b--brand-primary-tint bw-2 br-4 punctuation-description-transform text-shadow-outline"
-          : "mb0 px2 py05 b--solid b--transparent bw-2 br-4"
-      }
-    >
-      &#8203;{punctuationDescription}
-    </p>
+    <div className={multiline ? `flex justify-center` : ''}>
+      <p
+        id="punctuation-description"
+        className={
+          punctuationDescriptions && punctuationDescription.length > 0
+            ? "absolute mb0 px2 py05 b-dashed b--brand-primary-tint bw-2 br-4 dib punctuation-description-transform text-shadow-outline"
+            : "absolute mb0 px2 py05 b-dashed b--transparent bw-2 br-4"
+        }
+      >
+        &#8203;{punctuationDescription}
+      </p>
+    </div>
   );
 };
 

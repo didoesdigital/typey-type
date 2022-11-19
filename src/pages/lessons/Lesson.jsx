@@ -332,10 +332,11 @@ class Lesson extends Component {
                           </AnimateHeight>
                           <div role="article" className="lesson-canvas panel mx-auto mw-1440 p2 mb3 flex">
                             {this.props.revisionMode && <div><Link to={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="revision-mode-button no-underline absolute right-0">Revision mode<IconClosingCross role="img" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="Exit revision mode" /></Link></div>}
-                            <div className="mx-auto mw100 mt8 mb2 min-width70 material-typed-text-and-hint flex-grow">
+                            <div className="mx-auto mw100 mt10 min-width70 material-typed-text-and-hint flex-grow">
                               <PunctuationDescription
-                                punctuationDescriptions={this.props.userSettings.punctuationDescriptions}
                                 currentPhrase={this.props.currentPhrase}
+                                multiline={this.props.userSettings.upcomingWordsLayout === "multiline"}
+                                punctuationDescriptions={this.props.userSettings.punctuationDescriptions}
                               />
                               <Material
                                 actualText={this.props.actualText}
