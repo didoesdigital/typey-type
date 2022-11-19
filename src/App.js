@@ -95,7 +95,7 @@ const AsyncFlashcards = Loadable({
 });
 
 const AsyncHome = Loadable({
-  loader: () => import("./components/Home"),
+  loader: () => import("./pages/home/Home"),
   loading: PageLoading,
   delay: 300
 });
