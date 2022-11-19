@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { matchSplitText } from "./../utils/typey-type";
 import GoogleAnalytics from "react-ga";
+import describePunctuation from "../utils/describePunctuation";
 
 class TypedText extends Component {
   componentWillUnmount() {
@@ -115,6 +116,16 @@ class TypedText extends Component {
             )}
           />
           {sayCurrentPhraseButton}
+          <p
+            id="punctuation-description"
+            className={
+              this.props.userSettings.punctuationDescriptions
+                ? "absolute punctuation-description-transform text-shadow-outline"
+                : "hide"
+            }
+          >
+            {describePunctuation(this.props.currentPhrase)}
+          </p>
           <p className="input-text">
             <samp className="pointer-none absolute absolute--fill w-100">
               <TransitionGroup
@@ -152,6 +163,7 @@ class TypedText extends Component {
                   isMultiline ? " text-center" : ""
                 }`}
                 id="your-typed-text"
+                aria-describedby="punctuation-description"
                 onChange={this.props.updateMarkup}
                 onKeyPress={this.keyPress.bind(this)}
                 rows="1"

@@ -757,6 +757,35 @@ class UserSettings extends Component {
                       <input
                         className="checkbox-input"
                         type="checkbox"
+                        name="simpleTypography"
+                        id="simpleTypography"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.punctuationDescriptions}
+                        onChange={this.props.changeUserSetting}
+                      />
+                      <Tooltip
+                        title='Show descriptions for hard-to-distinguish symbols'
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Punctuation descriptions
+                      </Tooltip>
+                    </label>
+                  </div>
+                </li>
+                <li className="ml0 pl1 bt b--brand-primary-tint">
+                  <div className="checkbox-group p1">
+                    <label className="checkbox-label mb1">
+                      <input
+                        className="checkbox-input"
+                        type="checkbox"
                         name="textInputAccessibility"
                         id="textInputAccessibility"
                         disabled={this.props.disableUserSettings}

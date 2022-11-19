@@ -22,7 +22,7 @@ export default function OnePhraseMaterial({
   }`;
 
   return (
-    <div className="mb1 nt1">
+    <div className="mb3 nt1">
       <div className="expected">
         <div className="visually-hidden">
           Matching and unmatching material typed, upcoming words, and previous

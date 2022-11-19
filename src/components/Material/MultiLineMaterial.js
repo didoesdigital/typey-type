@@ -11,7 +11,7 @@ export default React.memo(function MultiLineMaterial({
   userSettings,
 }) {
   return (
-    <div className="mb1 nt1 mx-auto mw-844">
+    <div className="mb3 nt1 mx-auto mw-844">
       <div className="expected">
         <div className="visually-hidden">
           Matching and unmatching material typed, upcoming words, and previous

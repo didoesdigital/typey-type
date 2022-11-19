@@ -254,6 +254,7 @@ export type UserSettings = {
   caseSensitive: boolean;
   diagramSize: number;
   simpleTypography: boolean;
+  punctuationDescriptions: boolean;
   retainedWords: boolean;
   limitNumberOfWords: number;
   newWords: boolean;
