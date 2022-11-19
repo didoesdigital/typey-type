@@ -243,9 +243,8 @@ export type StenoLayout =
   | "stenoLayoutBrazilianPortugueseSteno"
   | "stenoLayoutDanishSteno"
   | "stenoLayoutItalianMichelaSteno"
-  | "stenoLayoutJapanese"
-  | "stenoLayoutKoreanModernC"
-  | "stenoLayoutKoreanModernS";
+  | "stenoLayoutJapaneseSteno"
+  | "stenoLayoutKoreanModernCSteno";
 
 export type UpcomingWordsLayout = "singleLine" | "multiline" | "hidden";
 
