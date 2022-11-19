@@ -10,6 +10,12 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  options: {
+    storySort: {
+      method: "alphabetical",
+      order: ["Pages", ["Home"], "Lessons", ["Custom", "Flashcards", "Speed chart"], "Games", ["Games index", "KAOES game", "SHUFL game", "TPEUBGSZ game", "KHAERT game", "Completed"], "Material"]
+    },
+  },
 };
 
 export const decorators = [
