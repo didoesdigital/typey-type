@@ -74,7 +74,7 @@ class Home extends Component {
                 </p>
                 <p>
                   Typey&nbsp;Type for Stenographers is a free typing app
-                  designed to help{" "}
+                  designed to help {/* @ts-ignore */}
                   <Tooltip
                     animation="shift"
                     arrow="true"
@@ -428,6 +428,7 @@ class Home extends Component {
                     aria-label="Typey Type updates and steno news (external link opens in new tab)"
                   >
                     Typey&nbsp;Type updates and steno news
+                    {/* @ts-ignore */}
                     <Tooltip
                       animation="shift"
                       arrow="true"
