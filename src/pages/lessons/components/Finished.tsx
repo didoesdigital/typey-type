@@ -11,7 +11,6 @@ import FinishedDataViz from "./FinishedDataViz";
 import FinishedMisstrokesSummary from "./FinishedMisstrokesSummary";
 import FinishedSummaryHeadings from "./FinishedSummaryHeadings";
 import getNumericAccuracy from "../utilities/getNumericAccuracy";
-import "react-tippy/dist/tippy.css";
 import type { ConfettiConfig } from "./FinishedSummaryHeadings";
 import type { FinishedProps, LessonData, TransformedData } from "../types";
 

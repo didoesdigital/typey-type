@@ -4,7 +4,6 @@ import RecommendationDescription from './RecommendationDescription';
 import { IconExternal } from './Icon';
 import { Link } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
-import 'react-tippy/dist/tippy.css'
 
 class RecommendationBox extends Component {
   render () {

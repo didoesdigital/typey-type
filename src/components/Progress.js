@@ -16,7 +16,6 @@ import trimAndSumUniqMetWords from '../utils/trimAndSumUniqMetWords';
 import { ReactComponent as AlertRobot } from '../images/AlertRobot.svg';
 import { ReactComponent as BoredRobot } from '../images/BoredRobot.svg';
 import { ReactComponent as HappyRobot } from '../images/HappyRobot.svg';
-import 'react-tippy/dist/tippy.css'
 
 let particles = [];
 

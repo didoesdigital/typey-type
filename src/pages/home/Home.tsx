@@ -3,7 +3,6 @@ import GoogleAnalytics from "react-ga";
 import { Link } from "react-router-dom";
 import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
-import "react-tippy/dist/tippy.css";
 import typeyTypeDemoGIF from "../../images/typey-type-for-stenographers-demo.gif";
 import typeyTypeyDemoCoverImage from "../../images/typey-type-for-stenographers-demo-cover-image.png";
 

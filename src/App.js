@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import "react-tippy/dist/tippy.css";
 import PARAMS from './utils/params.js';
 import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from './constant/index.js';
 import { isLessonTextValid } from './utils/utils';

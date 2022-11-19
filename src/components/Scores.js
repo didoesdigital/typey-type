@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Tooltip } from 'react-tippy';
-import 'react-tippy/dist/tippy.css'
 
 class Scores extends Component {
   constructor(props) {
