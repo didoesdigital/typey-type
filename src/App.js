@@ -102,7 +102,7 @@ const AsyncHome = Loadable({
 });
 
 const AsyncSupport = Loadable({
-  loader: () => import("./components/Support"),
+  loader: () => import("./pages/support/Support"),
   loading: PageLoading,
   delay: 300
 });

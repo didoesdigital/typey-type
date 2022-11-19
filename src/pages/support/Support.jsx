@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
-import { IconExternal } from './Icon';
+import { IconExternal } from '../../components/Icon';
 import { Tooltip } from 'react-tippy';
 import { Link } from 'react-router-dom';
-import DescriptionList from './DescriptionList';
-import DescriptionTerm from './DescriptionTerm';
-import DescriptionDetails from './DescriptionDetails';
+import DescriptionList from '../../components/DescriptionList';
+import DescriptionTerm from '../../components/DescriptionTerm';
+import DescriptionDetails from '../../components/DescriptionDetails';
 
 function hashToQuery (hash) {
   if (hash.includes(":~:text")) {
