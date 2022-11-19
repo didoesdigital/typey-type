@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 type Props = {
-  message: string
-}
+  message: string;
+};
 
 class Announcements extends Component<Props> {
   render() {
