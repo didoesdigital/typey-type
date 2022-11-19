@@ -17,7 +17,7 @@ import topProjectGutenbergWords from "./fixtures/topProjectGutenbergWords.json";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: "Speed chart",
+  title: "Lessons/Speed chart",
   component: FinishedSpeedChart,
 };
 
