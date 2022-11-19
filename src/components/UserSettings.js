@@ -757,8 +757,8 @@ class UserSettings extends Component {
                       <input
                         className="checkbox-input"
                         type="checkbox"
-                        name="simpleTypography"
-                        id="simpleTypography"
+                        name="punctuationDescriptions"
+                        id="punctuationDescriptions"
                         disabled={this.props.disableUserSettings}
                         checked={this.props.userSettings.punctuationDescriptions}
                         onChange={this.props.changeUserSetting}
