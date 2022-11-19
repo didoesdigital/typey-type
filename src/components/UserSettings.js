@@ -764,7 +764,7 @@ class UserSettings extends Component {
                         onChange={this.props.changeUserSetting}
                       />
                       <Tooltip
-                        title='Show descriptions for hard-to-distinguish symbols'
+                        title='Show text descriptions for punctuation symbols'
                         className="mw-240"
                         animation="shift"
                         arrow="true"
