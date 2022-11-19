@@ -21,12 +21,12 @@ import { fetchResource } from '../../utils/getData';
 import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';
 
-import type { Outline } from "../../types";
+import type { Outline, UserSettings } from "../../types";
 
 type Props = {
   changeStenoLayout: (event: any) => string,
   changeWriterInput: (event: any) => void,
-  userSettings: any,
+  userSettings: UserSettings,
   globalUserSettings: any,
   setAnnouncementMessageString: (announcement: string) => void,
   setAnnouncementMessage: (app: any, content: string | Object) => void
