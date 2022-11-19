@@ -503,7 +503,7 @@ describe('loadPersonalPreferences', () => {
         caseSensitive: false,
         diagramSize: 1.0,
         simpleTypography: true,
-        punctuationDescriptions: true,
+        punctuationDescriptions: false,
         retainedWords: true,
         limitNumberOfWords: 45,
         startFromWord: 1,
