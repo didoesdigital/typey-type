@@ -5,7 +5,7 @@ describe("describePunctuation", () => {
     expect(describePunctuation("example")).toEqual("");
   });
 
-  it("describes back tick", () => {
-    expect(describePunctuation("`")).toEqual("back tick");
+  it("describes backtick", () => {
+    expect(describePunctuation("`")).toEqual("backtick");
   });
 });
