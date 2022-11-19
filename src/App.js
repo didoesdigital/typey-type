@@ -2113,7 +2113,6 @@ class App extends Component {
                           changeWriterInput={this.changeWriterInput.bind(this)}
                           setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
-                          stenoHintsOnTheFly={stenohintsonthefly}
                           globalUserSettings={this.state.globalUserSettings}
                           userSettings={this.state.userSettings}
                           {...props}
