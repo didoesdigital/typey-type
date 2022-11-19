@@ -1,6 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
-class Announcements extends Component {
+type Props = {
+  message: string
+}
+
+class Announcements extends Component<Props> {
   render() {
     return (
       <div className="visually-hidden" aria-live="assertive" aria-atomic="true">
