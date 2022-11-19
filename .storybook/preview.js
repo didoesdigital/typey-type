@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "../src/index.scss";
+import "react-tippy/dist/tippy.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
