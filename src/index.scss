@@ -730,6 +730,11 @@ input:focus::placeholder {
   padding-right: 8px;
 }
 
+.px2 {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
 .px3 {
   padding-left: 24px;
   padding-right: 24px;
@@ -2414,5 +2419,5 @@ $lineAdjustment: 4px;
 }
 
 .punctuation-description-transform {
-  transform: translate(8px, -24px);
+  transform: translate(0px, -24px);
 }

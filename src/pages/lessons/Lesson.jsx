@@ -23,6 +23,7 @@ import AussieDictPrompt from '../../components/LessonPrompts/AussieDictPrompt';
 import SedSaidPrompt from '../../components/LessonPrompts/SedSaidPrompt';
 import WordBoundaryErrorPrompt from '../../components/LessonPrompts/WordBoundaryErrorPrompt';
 import getLessonMetadata from './utilities/getLessonMetadata';
+import PunctuationDescription from "./components/PunctuationDescription";
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
 const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
@@ -331,7 +332,11 @@ class Lesson extends Component {
                           </AnimateHeight>
                           <div role="article" className="lesson-canvas panel mx-auto mw-1440 p2 mb3 flex">
                             {this.props.revisionMode && <div><Link to={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="revision-mode-button no-underline absolute right-0">Revision mode<IconClosingCross role="img" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="Exit revision mode" /></Link></div>}
-                            <div className="mx-auto mw100 mt8 min-width70 material-typed-text-and-hint flex-grow">
+                            <div className="mx-auto mw100 mt8 mb2 min-width70 material-typed-text-and-hint flex-grow">
+                              <PunctuationDescription
+                                punctuationDescriptions={this.props.userSettings.punctuationDescriptions}
+                                currentPhrase={this.props.currentPhrase}
+                              />
                               <Material
                                 actualText={this.props.actualText}
                                 currentPhrase={this.props.currentPhrase}
