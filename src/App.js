@@ -54,6 +54,7 @@ import isNormalInteger from './utils/isNormalInteger';
 import filterByFamiliarity from './utils/lessons/filterByFamiliarity';
 import replaceSmartTypographyInPresentedMaterial from './utils/lessons/replaceSmartTypographyInPresentedMaterial';
 import setAnnouncementMessage from './components/Announcements/setAnnouncementMessage';
+import setAnnouncementMessageString from './components/Announcements/setAnnouncementMessageString';
 import sortLesson from './utils/lessons/sortLesson';
 import Zipper from './utils/zipper';
 
@@ -1670,10 +1671,6 @@ class App extends Component {
     return event;
   }
 
-  setAnnouncementMessageString(string) {
-    this.setState({ announcementMessage: string });
-  }
-
   reviseLesson(event) {
     event.preventDefault();
     let currentLessonStrokes = this.state.currentLessonStrokes;
@@ -1784,7 +1781,8 @@ class App extends Component {
             this.updateRecommendationHistory(newRecommendationHistory, lessonIndex);
           }
         });
-        this.setAnnouncementMessageString(nextRecommendedLesson.linkText);
+
+        setAnnouncementMessageString.call(this, nextRecommendedLesson.linkText);
       })
       .catch( error => {
         console.log(error);
@@ -1813,7 +1811,7 @@ class App extends Component {
           flashcardsNextLesson: nextFlashcardsLesson
         });
 
-        this.setAnnouncementMessageString(nextFlashcardsLesson.linkTitle);
+        setAnnouncementMessageString.call(this, nextFlashcardsLesson.linkTitle);
       })
       .catch( error => {
         console.log(error);
@@ -2083,7 +2081,7 @@ class App extends Component {
                     <DocumentTitle title='Typey Type for Stenographers'>
                       <AsyncHome
                         setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
-                        setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                        setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
                         {...props}
                       />
                     </DocumentTitle>
@@ -2097,7 +2095,7 @@ class App extends Component {
                       <ErrorBoundary>
                         <AsyncSupport
                           setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
-                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
                         />
                       </ErrorBoundary>
                     </DocumentTitle>
@@ -2113,7 +2111,7 @@ class App extends Component {
                           changeStenoLayout={this.changeStenoLayout.bind(this)}
                           changeWriterInput={this.changeWriterInput.bind(this)}
                           setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
-                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
                           stenoHintsOnTheFly={stenohintsonthefly}
                           globalUserSettings={this.state.globalUserSettings}
                           userSettings={this.state.userSettings}
@@ -2150,7 +2148,7 @@ class App extends Component {
                       <ErrorBoundary>
                         <AsyncBreak
                           setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
-                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
                           {...props}
                         />
                       </ErrorBoundary>
@@ -2165,7 +2163,7 @@ class App extends Component {
                       <ErrorBoundary>
                         <AsyncContribute
                           setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
-                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
                         />
                       </ErrorBoundary>
                     </DocumentTitle>
@@ -2182,7 +2180,7 @@ class App extends Component {
                           calculateMemorisedWordCount={calculateMemorisedWordCount.bind(this)}
                           changeFlashcardCourseLevel={this.changeFlashcardCourseLevel.bind(this)}
                           setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
-                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
                           setPersonalPreferences={this.setPersonalPreferences.bind(this)}
                           metWords={this.state.metWords}
                           flashcardsMetWords={this.state.flashcardsMetWords}
@@ -2246,7 +2244,7 @@ class App extends Component {
                       <ErrorBoundary>
                         <AsyncLookup
                           setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
-                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
@@ -2271,7 +2269,7 @@ class App extends Component {
                       <ErrorBoundary>
                         <AsyncDictionaries
                           setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
-                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
                           setDictionaryIndex={this.setDictionaryIndex.bind(this)}
                           setGlobalDictionaryLoaded={this.setGlobalDictionaryLoaded.bind(this)}
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
@@ -2358,7 +2356,7 @@ class App extends Component {
                           updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
                           sayCurrentPhraseAgain={this.sayCurrentPhraseAgain.bind(this)}
                           setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
-                          setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
+                          setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
                           startFromWordOne={this.startFromWordOne.bind(this)}
                           startTime={this.state.startTime}
                           stenoHintsOnTheFly={stenohintsonthefly}
