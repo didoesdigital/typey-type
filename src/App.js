@@ -1457,7 +1457,7 @@ class App extends Component {
           'stenoLayoutItalianMelaniSteno',
           'stenoLayoutJapanese',
           'stenoLayoutKoreanModernC',
-          'stenoLayoutKoreanModernS'
+          // 'stenoLayoutKoreanModernS'
         ];
 
         if (param === 'stenoLayout' && stenoLayoutValidValues.includes(paramVal)) {
