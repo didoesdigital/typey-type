@@ -30,6 +30,7 @@ type Props = {
   globalUserSettings: any,
   setAnnouncementMessageString: (announcement: string) => void,
   setAnnouncementMessage: (app: any, content: string | Object) => void
+  // stenoHintsOnTheFly: boolean
 };
 
 type State = {
