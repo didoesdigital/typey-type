@@ -84,7 +84,7 @@ const AsyncProgress = Loadable({
 });
 
 const AsyncWriter = Loadable({
-  loader: () => import("./components/Writer"),
+  loader: () => import("./pages/writer/Writer"),
   loading: PageLoading,
   delay: 300
 });

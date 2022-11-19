@@ -1,27 +1,27 @@
 import React, { Component } from 'react';
-import AmericanStenoDiagram from '../StenoLayout/AmericanStenoDiagram';
-import BrazilianPortugueseStenoDiagram from '../StenoLayout/BrazilianPortugueseStenoDiagram';
-import DanishStenoDiagram from '../StenoLayout/DanishStenoDiagram';
-import ItalianMichelaStenoDiagram from '../StenoLayout/ItalianMichelaStenoDiagram';
-import JapaneseStenoDiagram from '../StenoLayout/JapaneseStenoDiagram';
-import KoreanModernCStenoDiagram from '../StenoLayout/KoreanModernCStenoDiagram';
-import PalantypeDiagram from '../StenoLayout/PalantypeDiagram';
-import Stroke from '../utils/stroke';
+import AmericanStenoDiagram from '../../StenoLayout/AmericanStenoDiagram';
+import BrazilianPortugueseStenoDiagram from '../../StenoLayout/BrazilianPortugueseStenoDiagram';
+import DanishStenoDiagram from '../../StenoLayout/DanishStenoDiagram';
+import ItalianMichelaStenoDiagram from '../../StenoLayout/ItalianMichelaStenoDiagram';
+import JapaneseStenoDiagram from '../../StenoLayout/JapaneseStenoDiagram';
+import KoreanModernCStenoDiagram from '../../StenoLayout/KoreanModernCStenoDiagram';
+import PalantypeDiagram from '../../StenoLayout/PalantypeDiagram';
+import Stroke from '../../utils/stroke';
 import {
   mapQWERTYKeysToStenoStroke,
-} from '../utils/typey-type';
-import mapBriefToAmericanStenoKeys from '../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
-import mapBriefToBrazilianPortugueseStenoKeys from '../utils/stenoLayouts/mapBriefToBrazilianPortugueseStenoKeys';
-import mapBriefToDanishStenoKeys from '../utils/stenoLayouts/mapBriefToDanishStenoKeys';
-import mapBriefToItalianMichelaStenoKeys from '../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
-import mapBriefToJapaneseStenoKeys from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
-import mapBriefToKoreanModernCStenoKeys from '../utils/stenoLayouts/mapBriefToKoreanModernCStenoKeys';
-import mapBriefToPalantypeKeys from '../utils/stenoLayouts/mapBriefToPalantypeKeys';
-import { fetchResource } from '../utils/getData';
+} from '../../utils/typey-type';
+import mapBriefToAmericanStenoKeys from '../../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
+import mapBriefToBrazilianPortugueseStenoKeys from '../../utils/stenoLayouts/mapBriefToBrazilianPortugueseStenoKeys';
+import mapBriefToDanishStenoKeys from '../../utils/stenoLayouts/mapBriefToDanishStenoKeys';
+import mapBriefToItalianMichelaStenoKeys from '../../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
+import mapBriefToJapaneseStenoKeys from '../../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
+import mapBriefToKoreanModernCStenoKeys from '../../utils/stenoLayouts/mapBriefToKoreanModernCStenoKeys';
+import mapBriefToPalantypeKeys from '../../utils/stenoLayouts/mapBriefToPalantypeKeys';
+import { fetchResource } from '../../utils/getData';
 import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';
 
-import type { Outline } from "../types";
+import type { Outline } from "../../types";
 
 type Props = {
   changeStenoLayout: (event: any) => string,
