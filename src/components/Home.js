@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import { IconExternal } from "./Icon";
 import { Tooltip } from "react-tippy";
 import "react-tippy/dist/tippy.css";
-import typeyTypeyDemoGIF from "./../images/typey-type-for-stenographers-demo.gif";
+import typeyTypeDemoGIF from "./../images/typey-type-for-stenographers-demo.gif";
 import typeyTypeyDemoCoverImage from "./../images/typey-type-for-stenographers-demo-cover-image.png";
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      typeyTypeDemoSrc: typeyTypeyDemoGIF,
+      typeyTypeDemoSrc: typeyTypeDemoGIF,
     };
   }
 
@@ -24,7 +24,7 @@ class Home extends Component {
   toggleDemoGIF(event) {
     let newDemoSrc = typeyTypeyDemoCoverImage;
     if (this.state.typeyTypeDemoSrc === typeyTypeyDemoCoverImage) {
-      newDemoSrc = typeyTypeyDemoGIF;
+      newDemoSrc = typeyTypeDemoGIF;
     }
 
     this.setState({ typeyTypeDemoSrc: newDemoSrc });
