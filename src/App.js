@@ -50,10 +50,10 @@ import fallbackLesson from './constant/fallbackLesson';
 import calculateMemorisedWordCount from './utils/calculateMemorisedWordCount';
 import calculateSeenWordCount from './utils/calculateSeenWordCount';
 import increaseMetWords from './utils/increaseMetWords';
-import isElement from './utils/isElement';
 import isNormalInteger from './utils/isNormalInteger';
 import filterByFamiliarity from './utils/lessons/filterByFamiliarity';
 import replaceSmartTypographyInPresentedMaterial from './utils/lessons/replaceSmartTypographyInPresentedMaterial';
+import setAnnouncementMessage from './components/Announcements/setAnnouncementMessage';
 import sortLesson from './utils/lessons/sortLesson';
 import Zipper from './utils/zipper';
 
@@ -1670,40 +1670,8 @@ class App extends Component {
     return event;
   }
 
-  setAnnouncementMessage(app, content) {
-    let newAnnouncementMessage = "";
-    if (content) {
-      if (typeof content === "string") {
-        newAnnouncementMessage = content;
-      // TODO: if we want to make this function generic for other announcement objects, here is the
-      // start of a handler for that:
-      } else if (typeof content === "object") {
-        if (isElement(content)) {
-          newAnnouncementMessage = content.querySelector('.tippy-tooltip-content').innerText;
-        }
-      }
-      // newAnnouncementMessage = content.querySelector('.tippy-tooltip-content').innerText;
-    }
-    app.setState({announcementMessage: newAnnouncementMessage});
-
-    // TODO: figure out how to re-announce things if the announcement hasn't
-    // changed content but you've encountered a new instance of the same
-    // content that should be announced
-    // if (this.state.announcementMessage === newAnnouncementMessage) {
-    //   app.setState({
-    //     announcementSubsequentMessage: newAnnouncementMessage,
-    //     announcementMessage: "",
-    //   });
-    // } else {
-    //   app.setState({
-    //     announcementMessage: newAnnouncementMessage,
-    //     announcementSubsequentMessage: "",
-    //   });
-    // }
-  }
-
   setAnnouncementMessageString(string) {
-    this.setState({announcementMessage: string});
+    this.setState({ announcementMessage: string });
   }
 
   reviseLesson(event) {
@@ -2114,7 +2082,7 @@ class App extends Component {
                     {header}
                     <DocumentTitle title='Typey Type for Stenographers'>
                       <AsyncHome
-                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                        setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                         setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         {...props}
                       />
@@ -2128,7 +2096,7 @@ class App extends Component {
                     <DocumentTitle title={'Typey Type | About'}>
                       <ErrorBoundary>
                         <AsyncSupport
-                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         />
                       </ErrorBoundary>
@@ -2144,7 +2112,7 @@ class App extends Component {
                         <AsyncWriter
                           changeStenoLayout={this.changeStenoLayout.bind(this)}
                           changeWriterInput={this.changeWriterInput.bind(this)}
-                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                           stenoHintsOnTheFly={stenohintsonthefly}
                           globalUserSettings={this.state.globalUserSettings}
@@ -2181,7 +2149,7 @@ class App extends Component {
                     <DocumentTitle title={'Typey Type | Take a break'}>
                       <ErrorBoundary>
                         <AsyncBreak
-                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                           {...props}
                         />
@@ -2196,7 +2164,7 @@ class App extends Component {
                     <DocumentTitle title={'Typey Type | Contribute'}>
                       <ErrorBoundary>
                         <AsyncContribute
-                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                         />
                       </ErrorBoundary>
@@ -2213,7 +2181,7 @@ class App extends Component {
                           calculateSeenWordCount={calculateSeenWordCount.bind(this)}
                           calculateMemorisedWordCount={calculateMemorisedWordCount.bind(this)}
                           changeFlashcardCourseLevel={this.changeFlashcardCourseLevel.bind(this)}
-                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                           setPersonalPreferences={this.setPersonalPreferences.bind(this)}
                           metWords={this.state.metWords}
@@ -2277,7 +2245,7 @@ class App extends Component {
                     <DocumentTitle title={'Typey Type | Lookup'}>
                       <ErrorBoundary>
                         <AsyncLookup
-                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
@@ -2302,7 +2270,7 @@ class App extends Component {
                     <DocumentTitle title={'Typey Type | Dictionaries'}>
                       <ErrorBoundary>
                         <AsyncDictionaries
-                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                           setDictionaryIndex={this.setDictionaryIndex.bind(this)}
                           setGlobalDictionaryLoaded={this.setGlobalDictionaryLoaded.bind(this)}
@@ -2389,7 +2357,7 @@ class App extends Component {
                           revisionMode={this.state.revisionMode}
                           updateRevisionMaterial={this.updateRevisionMaterial.bind(this)}
                           sayCurrentPhraseAgain={this.sayCurrentPhraseAgain.bind(this)}
-                          setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                          setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={this.setAnnouncementMessageString.bind(this)}
                           startFromWordOne={this.startFromWordOne.bind(this)}
                           startTime={this.state.startTime}
@@ -2428,7 +2396,7 @@ class App extends Component {
                   <div>
                     <DocumentTitle title={'Typey Type | Page not found'}>
                       <AsyncPageNotFound
-                        setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+                        setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                       />
                     </DocumentTitle>
                   </div>
@@ -2438,7 +2406,7 @@ class App extends Component {
             </div>
             <Footer
               fullscreen={this.state.fullscreen}
-              setAnnouncementMessage={function () { app.setAnnouncementMessage(app, this) }}
+              setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
             />
           </div>
         </div>
