@@ -49,8 +49,8 @@ describe("playId", () => {
 });
 
 describe("playId", () => {
-  it("of any nonsense input like asdf should return bpm10", () => {
-    expect(playId("asdf")).toEqual("bpm10");
+  it("of any nonsense input like -1 should return bpm10", () => {
+    expect(playId(-1)).toEqual("bpm10");
   });
 });
 
