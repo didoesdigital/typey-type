@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Howl } from "howler";
-import { IconMetronome } from "./Icon";
+import { IconMetronome } from "../../../components/Icon";
 import { Tooltip } from "react-tippy";
 import GoogleAnalytics from "react-ga";
-import plink from "../sounds/digi_plink-with-silence.mp3";
+import plink from "../../../sounds/digi_plink-with-silence.mp3";
 
-import type { UserSettings } from "../types";
+import type { UserSettings } from "../../../types";
 
 type Props = {
   userSettings: UserSettings;

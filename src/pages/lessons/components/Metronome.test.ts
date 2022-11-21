@@ -1,4 +1,4 @@
-import { bpmBracketsSprite, playId } from "../../../components/Metronome";
+import { bpmBracketsSprite, playId } from "./Metronome";
 
 describe("playId", () => {
   it("for 0BPM should round up and return bpm10", () => {
