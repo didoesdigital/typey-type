@@ -48,12 +48,6 @@ describe("playId", () => {
   });
 });
 
-describe("playId", () => {
-  it("of any nonsense input like -1 should return bpm10", () => {
-    expect(playId(-1)).toEqual("bpm10");
-  });
-});
-
 describe("bpm brackets", () => {
   it("should include a minimum bracket of 10BPM with 6000 milliseconds of audio", () => {
     expect(Object.entries(bpmBracketsSprite())[0]).toEqual([
