@@ -17,7 +17,7 @@ type Options = {
 };
 
 function bpmBracketsSprite() {
-  let spriteObj: { [key: string]: [number, number] } = {};
+  const spriteObj: { [key: string]: [number, number] } = {};
   for (let bpm = 10; bpm <= 360; bpm += 10) {
     spriteObj[playId(bpm)] = [0, 60000 / bpm];
   }
@@ -64,7 +64,8 @@ function playId(beatsPerMinute: number) {
   if (!beatsPerMinute || typeof beatsPerMinute === "string") {
     beatsPerMinute = 10;
   }
-  let bpmBracket = Math.min(Math.ceil(Math.abs(beatsPerMinute) / 10), 36) * 10;
+  const bpmBracket =
+    Math.min(Math.ceil(Math.abs(beatsPerMinute) / 10), 36) * 10;
   return `bpm${bpmBracket}`;
 }
 
