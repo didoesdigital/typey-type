@@ -1,23 +1,23 @@
-import React, { Component } from 'react';
-import { Howl } from 'howler';
-import { IconMetronome } from './Icon';
-import { Tooltip } from 'react-tippy';
-import GoogleAnalytics from 'react-ga';
-import plink from '../sounds/digi_plink-with-silence.mp3';
+import React, { Component } from "react";
+import { Howl } from "howler";
+import { IconMetronome } from "./Icon";
+import { Tooltip } from "react-tippy";
+import GoogleAnalytics from "react-ga";
+import plink from "../sounds/digi_plink-with-silence.mp3";
 
 import type { UserSettings } from "../types";
 
 type Props = {
-  userSettings: UserSettings
-  setAnnouncementMessage: (app: any, content: string | Object) => void
-}
+  userSettings: UserSettings;
+  setAnnouncementMessage: (app: any, content: string | Object) => void;
+};
 
 type Options = {
-  id: string
-}
+  id: string;
+};
 
 function bpmBracketsSprite() {
-  let spriteObj: {[key: string]: [number, number]} = {};
+  let spriteObj: { [key: string]: [number, number] } = {};
   for (let bpm = 10; bpm <= 360; bpm += 10) {
     spriteObj[playId(bpm)] = [0, 60000 / bpm];
   }
@@ -27,11 +27,11 @@ function bpmBracketsSprite() {
 const sound = new Howl({
   src: plink,
   loop: true,
-  sprite: bpmBracketsSprite()
+  sprite: bpmBracketsSprite(),
 });
 
 function playMetronome(options: Options, withAnalytics?: string) {
-  let id = 'bpm10';
+  let id = "bpm10";
   if (options && options.id) {
     id = options.id;
   }
@@ -41,9 +41,9 @@ function playMetronome(options: Options, withAnalytics?: string) {
 
   if (withAnalytics) {
     GoogleAnalytics.event({
-      category: 'Metronome',
-      action: 'Click button',
-      label: 'Start'
+      category: "Metronome",
+      action: "Click button",
+      label: "Start",
     });
   }
 }
@@ -53,26 +53,31 @@ function stopMetronome(withAnalytics?: string) {
 
   if (withAnalytics) {
     GoogleAnalytics.event({
-      category: 'Metronome',
-      action: 'Click button',
-      label: 'Stop'
+      category: "Metronome",
+      action: "Click button",
+      label: "Stop",
     });
   }
 }
 
 function playId(beatsPerMinute: number) {
-  if (!(beatsPerMinute) || typeof beatsPerMinute === 'string') {
+  if (!beatsPerMinute || typeof beatsPerMinute === "string") {
     beatsPerMinute = 10;
   }
-  let bpmBracket = (Math.min(Math.ceil(Math.abs(beatsPerMinute) / 10), 36)) * 10;
-  return `bpm${bpmBracket}`
+  let bpmBracket = Math.min(Math.ceil(Math.abs(beatsPerMinute) / 10), 36) * 10;
+  return `bpm${bpmBracket}`;
 }
 
 class Metronome extends Component<Props> {
-  componentDidUpdate(prevProps: {[keyName: string]: any}) {
-    if (this.props.userSettings && prevProps.userSettings.beatsPerMinute !== this.props.userSettings.beatsPerMinute && sound.playing()) {
+  componentDidUpdate(prevProps: { [keyName: string]: any }) {
+    if (
+      this.props.userSettings &&
+      prevProps.userSettings.beatsPerMinute !==
+        this.props.userSettings.beatsPerMinute &&
+      sound.playing()
+    ) {
       stopMetronome();
-      playMetronome({id: playId(this.props.userSettings.beatsPerMinute)});
+      playMetronome({ id: playId(this.props.userSettings.beatsPerMinute) });
     }
   }
 
@@ -83,7 +88,16 @@ class Metronome extends Component<Props> {
   render() {
     return (
       <p>
-        <button aria-label="Start metronome" className="button button--secondary mr2" onClick={() => playMetronome({id: playId(this.props.userSettings.beatsPerMinute)}, 'withAnalytics')}>
+        <button
+          aria-label="Start metronome"
+          className="button button--secondary mr2"
+          onClick={() =>
+            playMetronome(
+              { id: playId(this.props.userSettings.beatsPerMinute) },
+              "withAnalytics"
+            )
+          }
+        >
           {/* @ts-ignore */}
           <Tooltip
             title="Start the metronome for finger drills and improving rhythm"
@@ -97,10 +111,21 @@ class Metronome extends Component<Props> {
             trigger="mouseenter focus click"
             onShow={this.props.setAnnouncementMessage}
           >
-            <IconMetronome role="presentation" iconWidth="24" iconHeight="24" className="svg-icon-wrapper svg-baseline" title="Metronome" /> Start
+            <IconMetronome
+              role="presentation"
+              iconWidth="24"
+              iconHeight="24"
+              className="svg-icon-wrapper svg-baseline"
+              title="Metronome"
+            />{" "}
+            Start
           </Tooltip>
         </button>
-        <button aria-label="Stop metronome" className="button button--secondary" onClick={() => stopMetronome('withAnalytics')}>
+        <button
+          aria-label="Stop metronome"
+          className="button button--secondary"
+          onClick={() => stopMetronome("withAnalytics")}
+        >
           {/* @ts-ignore */}
           <Tooltip
             title="Stop the metronome"
@@ -114,7 +139,14 @@ class Metronome extends Component<Props> {
             trigger="mouseenter focus click"
             onShow={this.props.setAnnouncementMessage}
           >
-            <IconMetronome role="presentation" iconWidth="24" iconHeight="24" className="svg-icon-wrapper svg-baseline" title="Metronome" /> Stop
+            <IconMetronome
+              role="presentation"
+              iconWidth="24"
+              iconHeight="24"
+              className="svg-icon-wrapper svg-baseline"
+              title="Metronome"
+            />{" "}
+            Stop
           </Tooltip>
         </button>
       </p>
@@ -123,7 +155,4 @@ class Metronome extends Component<Props> {
 }
 
 export default Metronome;
-export {
-  bpmBracketsSprite,
-  playId
-};
+export { bpmBracketsSprite, playId };
