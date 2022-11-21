@@ -21,7 +21,10 @@ const LessonCanvasFooter = ({
 }: LessonCanvasFooterProps) => {
   return (
     <div className="flex flex-wrap mx-auto mw-1440 justify-between text-small">
-      <Metronome userSettings={userSettings} />
+      <Metronome
+        setAnnouncementMessage={setAnnouncementMessage}
+        userSettings={userSettings}
+      />
       <div className="flex flex-wrap">
         <fieldset className="dc hide-sm">
           {/* @ts-ignore */}

@@ -5,8 +5,19 @@ import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';
 import plink from '../sounds/digi_plink-with-silence.mp3';
 
+import type { UserSettings } from "../types";
+
+type Props = {
+  userSettings: UserSettings
+  setAnnouncementMessage: (app: any, content: string | Object) => void
+}
+
+type Options = {
+  id: string
+}
+
 function bpmBracketsSprite() {
-  let spriteObj = {};
+  let spriteObj: {[key: string]: [number, number]} = {};
   for (let bpm = 10; bpm <= 360; bpm += 10) {
     spriteObj[playId(bpm)] = [0, 60000 / bpm];
   }
@@ -19,7 +30,7 @@ const sound = new Howl({
   sprite: bpmBracketsSprite()
 });
 
-function playMetronome(options, withAnalytics) {
+function playMetronome(options: Options, withAnalytics?: string) {
   let id = 'bpm10';
   if (options && options.id) {
     id = options.id;
@@ -37,7 +48,7 @@ function playMetronome(options, withAnalytics) {
   }
 }
 
-function stopMetronome(withAnalytics) {
+function stopMetronome(withAnalytics?: string) {
   sound.stop();
 
   if (withAnalytics) {
@@ -49,7 +60,7 @@ function stopMetronome(withAnalytics) {
   }
 }
 
-function playId(beatsPerMinute) {
+function playId(beatsPerMinute: number) {
   if (!(beatsPerMinute) || typeof beatsPerMinute === 'string') {
     beatsPerMinute = 10;
   }
@@ -57,8 +68,8 @@ function playId(beatsPerMinute) {
   return `bpm${bpmBracket}`
 }
 
-class Metronome extends Component {
-  componentDidUpdate(prevProps, prevState) {
+class Metronome extends Component<Props> {
+  componentDidUpdate(prevProps: {[keyName: string]: any}) {
     if (this.props.userSettings && prevProps.userSettings.beatsPerMinute !== this.props.userSettings.beatsPerMinute && sound.playing()) {
       stopMetronome();
       playMetronome({id: playId(this.props.userSettings.beatsPerMinute)});
@@ -73,6 +84,7 @@ class Metronome extends Component {
     return (
       <p>
         <button aria-label="Start metronome" className="button button--secondary mr2" onClick={() => playMetronome({id: playId(this.props.userSettings.beatsPerMinute)}, 'withAnalytics')}>
+          {/* @ts-ignore */}
           <Tooltip
             title="Start the metronome for finger drills and improving rhythm"
             className="mw-240"
@@ -89,6 +101,7 @@ class Metronome extends Component {
           </Tooltip>
         </button>
         <button aria-label="Stop metronome" className="button button--secondary" onClick={() => stopMetronome('withAnalytics')}>
+          {/* @ts-ignore */}
           <Tooltip
             title="Stop the metronome"
             className="mw-240"
