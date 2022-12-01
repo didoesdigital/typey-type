@@ -24,13 +24,16 @@ function bpmBracketsSprite() {
   return spriteObj;
 }
 
-const sound = new Howl({
-  src: plink,
-  loop: true,
-  sprite: bpmBracketsSprite(),
-});
-
 function playMetronome(options: Options, withAnalytics?: string) {
+  let sound = new Howl({
+    src: plink,
+    loop: true,
+    sprite: bpmBracketsSprite(),
+  });
+
+  // @ts-ignore 'this' implicitly has type 'any'
+  this.setState({ player: sound, userGestureToStartMetronome: true });
+
   let id = "bpm10";
   if (options && options.id) {
     id = options.id;
@@ -38,7 +41,6 @@ function playMetronome(options: Options, withAnalytics?: string) {
   if (!sound.playing()) {
     sound.play(id);
   }
-
   if (withAnalytics) {
     GoogleAnalytics.event({
       category: "Metronome",
@@ -49,7 +51,15 @@ function playMetronome(options: Options, withAnalytics?: string) {
 }
 
 function stopMetronome(withAnalytics?: string) {
-  sound.stop();
+  // @ts-ignore 'this' implicitly has type 'any'
+  const sound = this.state.player;
+  if (sound) {
+    sound.stop();
+    sound.off();
+    sound.unload();
+  }
+  // @ts-ignore
+  this.setState({ player: null });
 
   if (withAnalytics) {
     GoogleAnalytics.event({
@@ -70,20 +80,31 @@ function playId(beatsPerMinute: number) {
 }
 
 class Metronome extends Component<Props> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      player: null,
+      userGestureToStartMetronome: false,
+    };
+  }
+
   componentDidUpdate(prevProps: { [keyName: string]: any }) {
     if (
+      // @ts-ignore Property 'userGestureToStartMetronome' does not exist on type
+      this.state.userGestureToStartMetronome &&
       this.props.userSettings &&
       prevProps.userSettings.beatsPerMinute !==
-        this.props.userSettings.beatsPerMinute &&
-      sound.playing()
+        this.props.userSettings.beatsPerMinute
     ) {
-      stopMetronome();
-      playMetronome({ id: playId(this.props.userSettings.beatsPerMinute) });
+      stopMetronome.call(this);
+      playMetronome.call(this, {
+        id: playId(this.props.userSettings.beatsPerMinute),
+      });
     }
   }
 
   componentWillUnmount() {
-    stopMetronome();
+    stopMetronome.call(this);
   }
 
   render() {
@@ -93,7 +114,8 @@ class Metronome extends Component<Props> {
           aria-label="Start metronome"
           className="button button--secondary mr2"
           onClick={() =>
-            playMetronome(
+            playMetronome.call(
+              this,
               { id: playId(this.props.userSettings.beatsPerMinute) },
               "withAnalytics"
             )
@@ -125,7 +147,7 @@ class Metronome extends Component<Props> {
         <button
           aria-label="Stop metronome"
           className="button button--secondary"
-          onClick={() => stopMetronome("withAnalytics")}
+          onClick={() => stopMetronome.call(this, "withAnalytics")}
         >
           {/* @ts-ignore */}
           <Tooltip
