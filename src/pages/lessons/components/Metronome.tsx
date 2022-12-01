@@ -7,6 +7,11 @@ import plink from "../../../sounds/digi_plink-with-silence.mp3";
 
 import type { UserSettings } from "../../../types";
 
+type State = {
+  player: null | Howl;
+  userGestureToStartMetronome: boolean;
+};
+
 type Props = {
   userSettings: UserSettings;
   setAnnouncementMessage: (app: any, content: string | Object) => void;
@@ -79,7 +84,7 @@ function playId(beatsPerMinute: number) {
   return `bpm${bpmBracket}`;
 }
 
-class Metronome extends Component<Props> {
+class Metronome extends Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -90,7 +95,6 @@ class Metronome extends Component<Props> {
 
   componentDidUpdate(prevProps: { [keyName: string]: any }) {
     if (
-      // @ts-ignore Property 'userGestureToStartMetronome' does not exist on type
       this.state.userGestureToStartMetronome &&
       this.props.userSettings &&
       prevProps.userSettings.beatsPerMinute !==
