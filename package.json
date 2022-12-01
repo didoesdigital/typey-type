@@ -21,7 +21,7 @@
     "d3-shape": "^3.0.1",
     "d3-time": "^3.0.0",
     "d3-time-format": "^4.1.0",
-    "howler": "^2.2.0",
+    "howler": "^2.2.3",
     "npm-run-all": "^4.1.1",
     "pure-react-carousel": "https://github.com/didoesdigital/pure-react-carousel.git#add-slider-callback",
     "query-string": "^6.2.0",
