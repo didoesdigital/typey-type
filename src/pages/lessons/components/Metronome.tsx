@@ -53,10 +53,7 @@ function playMetronome(options: Options, withAnalytics?: string) {
   // @ts-ignore 'this' implicitly has type 'any'
   this.setState({ userGestureToStartMetronome: true });
 
-  let id = "bpm10";
-  if (options && options.id) {
-    id = options.id;
-  }
+  const id = options?.id ? options.id : "bpm10";
   if (!sound.playing()) {
     sound.play(id);
   }
