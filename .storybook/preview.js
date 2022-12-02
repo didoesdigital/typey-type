@@ -14,7 +14,7 @@ export const parameters = {
   options: {
     storySort: {
       method: "alphabetical",
-      order: ["Pages", ["Home"], "Lessons", ["Custom", "Flashcards", "Speed chart"], "Games", ["Games index", "KAOES game", "SHUFL game", "TPEUBGSZ game", "KHAERT game", "Completed"], "Material"]
+      order: ["Pages", ["Home"], "Lessons", ["Custom", "Flashcards", "Speed chart", "Metronome"], "Games", ["Games index", "KAOES game", "SHUFL game", "TPEUBGSZ game", "KHAERT game", "Completed"], "Material"]
     },
   },
 };
