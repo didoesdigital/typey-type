@@ -8,7 +8,6 @@ import plink from "../../../sounds/digi_plink-with-silence.mp3";
 import type { UserSettings } from "../../../types";
 
 type State = {
-  player: null | Howl;
   userGestureToStartMetronome: boolean;
 };
 
@@ -21,6 +20,8 @@ type Options = {
   id: string;
 };
 
+let sound: Howl | null = null;
+
 function bpmBracketsSprite() {
   const spriteObj: { [key: string]: [number, number] } = {};
   for (let bpm = 10; bpm <= 360; bpm += 10) {
@@ -30,14 +31,27 @@ function bpmBracketsSprite() {
 }
 
 function playMetronome(options: Options, withAnalytics?: string) {
-  let sound = new Howl({
+  if (sound) {
+    sound.loop(false);
+    sound = null;
+    Howler.stop();
+    Howler.unload();
+  }
+
+  sound = new Howl({
     src: plink,
     loop: true,
     sprite: bpmBracketsSprite(),
+    onstop: function () {
+      if (sound) {
+        sound.off();
+        sound.unload();
+      }
+    },
   });
 
   // @ts-ignore 'this' implicitly has type 'any'
-  this.setState({ player: sound, userGestureToStartMetronome: true });
+  this.setState({ userGestureToStartMetronome: true });
 
   let id = "bpm10";
   if (options && options.id) {
@@ -46,6 +60,7 @@ function playMetronome(options: Options, withAnalytics?: string) {
   if (!sound.playing()) {
     sound.play(id);
   }
+
   if (withAnalytics) {
     GoogleAnalytics.event({
       category: "Metronome",
@@ -56,15 +71,12 @@ function playMetronome(options: Options, withAnalytics?: string) {
 }
 
 function stopMetronome(withAnalytics?: string) {
-  // @ts-ignore 'this' implicitly has type 'any'
-  const sound = this.state.player;
   if (sound) {
-    sound.stop();
-    sound.off();
-    sound.unload();
+    sound.loop(false);
   }
-  // @ts-ignore
-  this.setState({ player: null });
+  Howler.stop();
+  Howler.unload();
+  sound = null;
 
   if (withAnalytics) {
     GoogleAnalytics.event({
@@ -88,7 +100,6 @@ class Metronome extends Component<Props, State> {
   constructor(props: any) {
     super(props);
     this.state = {
-      player: null,
       userGestureToStartMetronome: false,
     };
   }
