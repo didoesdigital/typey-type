@@ -3,7 +3,6 @@ import type { Outline } from "../../types";
 // stenoOrder and stenoKeys should always be updated together
 const stenoOrder = [
   "#",
-  "#",
   "1",
   "S",
   "S",
@@ -20,8 +19,6 @@ const stenoOrder = [
   "A",
   "0",
   "O",
-  "*",
-  "*",
   "*",
   "*",
   "-",
@@ -44,8 +41,7 @@ const stenoOrder = [
 ] as const;
 
 const stenoKeys = [
-  "leftNumberBarKey",
-  "rightNumberBarKey",
+  "numberBarKey",
   "leftSUpperKey",
   "leftSUpperKey",
   "leftSLowerKey",
@@ -62,10 +58,8 @@ const stenoKeys = [
   "leftAKey",
   "leftOKey",
   "leftOKey",
-  "leftStarUpperKey",
-  "leftStarLowerKey",
-  "rightStarUpperKey",
-  "rightStarLowerKey",
+  "starUpperKey",
+  "starLowerKey",
   "dashKey",
   "rightEKey",
   "rightUKey",
@@ -87,8 +81,7 @@ const stenoKeys = [
 
 function mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief: Outline) {
   let keys = {
-    leftNumberBarKey: false,
-    rightNumberBarKey: false,
+    numberBarKey: false,
     leftSUpperKey: false,
     leftSLowerKey: false,
     leftTKey: false,
@@ -99,10 +92,8 @@ function mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief: Outline) {
     leftRKey: false,
     leftAKey: false,
     leftOKey: false,
-    leftStarUpperKey: false,
-    leftStarLowerKey: false,
-    rightStarUpperKey: false,
-    rightStarLowerKey: false,
+    starUpperKey: false,
+    starLowerKey: false,
     dashKey: false,
     rightEKey: false,
     rightUKey: false,
@@ -130,92 +121,16 @@ function mapBriefToNoNumberBarInnerThumbNumbersStenoKeys(brief: Outline) {
   }
 
   if (brief.match(/[0-9]/)) {
-    keys["leftNumberBarKey"] = true;
-    keys["rightNumberBarKey"] = true;
-  }
-
-  // e.g. '05' is #AOEU in standard number-bar steno, but #AOE in inner-thumbers and #AOU in outer-thumbers
-  if (brief === "50EU" || brief === "#AOU" || brief === "#AOEU") {
-    keys["leftNumberBarKey"] = false;
-    keys["rightNumberBarKey"] = true;
-  }
-
-  // #A / 5
-  if (
-    brief.includes("#") &&
-    brief.includes("A") &&
-    !brief.includes("O") &&
-    !brief.includes("E") &&
-    !brief.includes("U")
-  ) {
-    keys["leftNumberBarKey"] = false;
-    keys["rightNumberBarKey"] = true;
-  }
-
-  // 23EU
-  if (brief.match(/[0-9]/) && !brief.includes("0")) {
-    keys["leftNumberBarKey"] = true;
-    keys["rightNumberBarKey"] = false;
-  }
-
-  // 40
-  if (brief.match(/[0-9]/) && !brief.includes("E")) {
-    keys["leftNumberBarKey"] = false;
-    keys["rightNumberBarKey"] = true;
-  }
-
-  // 4 / #H
-  if (
-    (brief.match(/[1-4]/) && !brief.includes("O") && !brief.includes("E")) ||
-    (brief.includes("#") &&
-      brief.match(/[STPH]/) &&
-      !brief.includes("O") &&
-      !brief.includes("E"))
-  ) {
-    keys["leftNumberBarKey"] = false;
-    keys["rightNumberBarKey"] = true;
-  }
-
-  // 7 / #-P
-  if (
-    (brief.match(/[6-9]/) && !brief.includes("O") && !brief.includes("E")) ||
-    (brief.includes("#") &&
-      !brief.includes("FPLT") &&
-      !brief.includes("O") &&
-      !brief.includes("E"))
-  ) {
-    keys["leftNumberBarKey"] = true;
-    keys["rightNumberBarKey"] = false;
-  }
-
-  // 0
-  if (brief === "0" || brief === "#O") {
-    keys["leftNumberBarKey"] = false;
-    keys["rightNumberBarKey"] = true;
-  }
-
-  // Exceptions: https://www.paulfioravanti.com/blog/steno-numbers-georgi/
-  if (
-    brief.match(/^(60|70|80|90)$/) ||
-    brief.match(/^(0EU6|0EU7|0EU8|0EU9)$/)
-  ) {
-    keys["leftNumberBarKey"] = true;
-    keys["rightNumberBarKey"] = false;
+    keys["numberBarKey"] = true;
   }
 
   if (keys.leftSUpperKey === true && keys.leftSLowerKey === false) {
     keys.leftSLowerKey = true;
   }
 
-  if (
-    keys.leftStarUpperKey === true &&
-    keys.leftStarLowerKey === false &&
-    keys.rightStarUpperKey === false &&
-    keys.rightStarLowerKey === false
-  ) {
-    keys.leftStarLowerKey = true;
-    keys.rightStarUpperKey = true;
-    keys.rightStarLowerKey = true;
+  if (keys.starUpperKey === true && keys.starLowerKey === false) {
+    keys.starLowerKey = true;
+    keys.starUpperKey = true;
   }
 
   return keys;
