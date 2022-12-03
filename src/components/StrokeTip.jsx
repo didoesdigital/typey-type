@@ -119,7 +119,7 @@ export default function StrokeTip({
                       (item) => item
                     ) && (
                       <div
-                        className={`mt1 mr2${
+                        className={`mt1 mr3${
                           isMultiline ? " flex flex-grow justify-center" : ""
                         }`}
                       >
@@ -135,7 +135,7 @@ export default function StrokeTip({
                       (item) => !item
                     ) && (
                       <div
-                        className={`mt1 mr2 unknown-steno-diagram${
+                        className={`mt1 mr3 unknown-steno-diagram${
                           isMultiline ? " flex flex-grow justify-center" : ""
                         }`}
                         aria-hidden={true}
