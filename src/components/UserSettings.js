@@ -543,13 +543,21 @@ class UserSettings extends Component {
                         <label className="mr1 db" htmlFor="stenoLayout">Steno layout</label>
                       </Tooltip>
                       <select id="stenoLayout" name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control w-144">
-                        <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
-                        <option value="stenoLayoutPalantype">Palantype</option>
-                        <option value="stenoLayoutBrazilianPortugueseSteno">Brazilian Portuguese steno</option>
-                        <option value="stenoLayoutDanishSteno">Danish steno</option>
-                        <option value="stenoLayoutItalianMichelaSteno">Italian Michela steno</option>
-                        <option value="stenoLayoutJapaneseSteno">Japanese steno</option>
-                        <option value="stenoLayoutKoreanModernCSteno">Korean Modern C steno</option>
+                        <optgroup label="English">
+                          <option value="stenoLayoutAmericanSteno">Ward Stone Ireland (Plover, EcoSteno, SOFT/HRUF etc.)</option>
+                          <option value="stenoLayoutAmericanSteno">Inner thumbers (TinyMod, Steko, etc.)</option>
+                          <option value="stenoLayoutAmericanSteno">Outer thumbers (Uni, Georgi, etc.)</option>
+                        </optgroup>
+                        <optgroup label="Palantype">
+                          <option value="stenoLayoutPalantype">Palantype</option>
+                        </optgroup>
+                        <optgroup label="Multilingual">
+                          <option value="stenoLayoutBrazilianPortugueseSteno">Brazilian Portuguese steno</option>
+                          <option value="stenoLayoutDanishSteno">Danish steno</option>
+                          <option value="stenoLayoutItalianMichelaSteno">Italian Michela steno</option>
+                          <option value="stenoLayoutJapaneseSteno">Japanese steno</option>
+                          <option value="stenoLayoutKoreanModernCSteno">Korean Modern C steno</option>
+                        </optgroup>
                       </select>
                     </div>
                   </li>
