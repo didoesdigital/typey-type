@@ -125,7 +125,7 @@ describe("map stroke to keys", () => {
     });
   });
 
-  it('show keys for dash only brief "welcome"', () => {
+  it('show keys for dash-only brief "welcome"', () => {
     let brief = "HR-BG";
     expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
       numberBar: false,
