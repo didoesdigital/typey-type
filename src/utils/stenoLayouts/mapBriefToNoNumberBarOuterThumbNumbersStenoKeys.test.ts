@@ -316,7 +316,7 @@ describe("map stroke to keys", () => {
     });
   });
 
-  xit("show left number key for numbers using right-hand vowel keys", () => {
+  it("show left number key for numbers using right-hand vowel keys", () => {
     let brief = "#TPEU"; // 32
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
       leftNumberBarKey: true,
