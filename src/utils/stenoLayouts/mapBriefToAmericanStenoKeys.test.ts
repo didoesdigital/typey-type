@@ -403,4 +403,66 @@ describe("map stroke to keys", () => {
       rightZ: false,
     });
   });
+
+  it("show # and EU for out-of-steno-order numbers using hash and letter keys", () => {
+    let brief = "#TPEU"; // 32
+    expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
+      numberBar: true,
+      leftSUpper: false,
+      leftSLower: false,
+      leftT: true,
+      leftK: false,
+      leftP: true,
+      leftW: false,
+      leftH: false,
+      leftR: false,
+      leftA: false,
+      leftO: false,
+      star: false,
+      dash: false,
+      rightE: true,
+      rightU: true,
+      rightF: false,
+      rightR: false,
+      rightP: false,
+      rightB: false,
+      rightL: false,
+      rightG: false,
+      rightT: false,
+      rightS: false,
+      rightD: false,
+      rightZ: false,
+    });
+  });
+
+  it("show number bar for #AOEU to write 05 using hash and letter keys", () => {
+    let brief = "#AOEU";
+    expect(mapBriefToAmericanStenoKeys(brief)).toEqual({
+      numberBar: true,
+      leftSUpper: false,
+      leftSLower: false,
+      leftT: false,
+      leftK: false,
+      leftP: false,
+      leftW: false,
+      leftH: false,
+      leftR: false,
+      leftA: true,
+      leftO: true,
+      star: false,
+      dash: false,
+      rightE: true,
+      rightU: true,
+      rightF: false,
+      rightR: false,
+      rightP: false,
+      rightB: false,
+      rightL: false,
+      rightG: false,
+      rightT: false,
+      rightS: false,
+      rightD: false,
+      rightZ: false,
+    });
+  });
 });
