@@ -6,6 +6,7 @@ const stenoOrder = [
   "#",
   "1",
   "S",
+  "S",
   "T",
   "2",
   "K",
@@ -45,6 +46,7 @@ const stenoOrder = [
 const stenoKeys = [
   "leftNumberBarKey",
   "rightNumberBarKey",
+  "leftSUpperKey",
   "leftSUpperKey",
   "leftSLowerKey",
   "leftTKey",
@@ -130,6 +132,21 @@ function mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief: Outline) {
   if (brief.match(/[0-9]/)) {
     keys["leftNumberBarKey"] = true;
     keys["rightNumberBarKey"] = true;
+  }
+
+  if (keys.leftSUpperKey === true && keys.leftSLowerKey === false) {
+    keys.leftSLowerKey = true;
+  }
+
+  if (
+    keys.leftStarUpperKey === true &&
+    keys.leftStarLowerKey === false &&
+    keys.rightStarUpperKey === false &&
+    keys.rightStarLowerKey === false
+  ) {
+    keys.leftStarLowerKey = true;
+    keys.rightStarUpperKey = true;
+    keys.rightStarLowerKey = true;
   }
 
   return keys;

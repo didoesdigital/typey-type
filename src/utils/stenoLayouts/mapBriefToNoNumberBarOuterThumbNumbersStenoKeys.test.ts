@@ -90,7 +90,7 @@ describe("map stroke to keys", () => {
       leftStarLowerKey: false,
       rightStarUpperKey: false,
       rightStarLowerKey: false,
-      dashKey: false,
+      dashKey: true,
       rightEKey: false,
       rightUKey: false,
       rightFKey: false,
@@ -109,10 +109,10 @@ describe("map stroke to keys", () => {
   it('shows both S keys for "is"', () => {
     let brief = "S";
     expect(mapBriefToNoNumberBarOuterThumbNumbersStenoKeys(brief)).toEqual({
-      leftNumberBarKey: true,
-      rightNumberBarKey: true,
-      leftSUpperKey: false,
-      leftSLowerKey: false,
+      leftNumberBarKey: false,
+      rightNumberBarKey: false,
+      leftSUpperKey: true,
+      leftSLowerKey: true,
       leftTKey: false,
       leftKKey: false,
       leftPKey: false,
@@ -134,7 +134,7 @@ describe("map stroke to keys", () => {
       rightBKey: false,
       rightLKey: false,
       rightGKey: false,
-      rightTKey: true,
+      rightTKey: false,
       rightSKey: false,
       rightDKey: false,
       rightZKey: false,
@@ -205,7 +205,7 @@ describe("map stroke to keys", () => {
       rightLKey: false,
       rightGKey: false,
       rightTKey: false,
-      rightSKey: false,
+      rightSKey: true,
       rightDKey: false,
       rightZKey: false,
     });
