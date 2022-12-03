@@ -546,7 +546,7 @@ class UserSettings extends Component {
                         <optgroup label="English">
                           <option value="stenoLayoutAmericanSteno">Ward Stone Ireland (Plover, EcoSteno, SOFT/HRUF etc.)</option>
                           <option value="stenoLayoutAmericanSteno">Inner thumbers (TinyMod, Steko, etc.)</option>
-                          <option value="stenoLayoutAmericanSteno">Outer thumbers (Uni, Georgi, etc.)</option>
+                          <option value="stenoLayoutNoNumberBarOuterThumbNumbers">Outer thumbers (Uni, Georgi, etc.)</option>
                         </optgroup>
                         <optgroup label="Palantype">
                           <option value="stenoLayoutPalantype">Palantype</option>

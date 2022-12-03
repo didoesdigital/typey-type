@@ -5,6 +5,7 @@ import { AffixList } from '../utils/affixList';
 import splitIntoStrokesDictsAndNamespaces from "../utils/transformingDictionaries/splitIntoStrokesDictsAndNamespaces";
 import rankOutlines from '../utils/transformingDictionaries/rankOutlines/rankOutlines';
 import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
+import NoNumberBarOuterThumbNumbersStenoDiagram from './../StenoLayout/NoNumberBarOuterThumbNumbersStenoDiagram';
 import BrazilianPortugueseStenoDiagram from './../StenoLayout/BrazilianPortugueseStenoDiagram';
 import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
 import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiagram';
@@ -16,6 +17,7 @@ import {
 } from './../utils/typey-type';
 
 import mapBriefToAmericanStenoKeys from '../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
+import mapBriefToNoNumberBarOuterThumbNumbersStenoKeys from '../utils/stenoLayouts/mapBriefToNoNumberBarOuterThumbNumbersStenoKeys';
 import mapBriefToBrazilianPortugueseStenoKeys from '../utils/stenoLayouts/mapBriefToBrazilianPortugueseStenoKeys';
 import mapBriefToDanishStenoKeys from '../utils/stenoLayouts/mapBriefToDanishStenoKeys';
 import mapBriefToItalianMichelaStenoKeys from '../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
@@ -177,6 +179,10 @@ class StrokesForWords extends Component {
       case 'stenoLayoutAmericanSteno':
         mapBriefsFunction = mapBriefToAmericanStenoKeys;
         StenoLayoutDiagram = AmericanStenoDiagram;
+        break;
+      case 'stenoLayoutNoNumberBarOuterThumbNumbers':
+        mapBriefsFunction = mapBriefToNoNumberBarOuterThumbNumbersStenoKeys;
+        StenoLayoutDiagram = NoNumberBarOuterThumbNumbersStenoDiagram;
         break;
       case 'stenoLayoutBrazilianPortugueseSteno':
         mapBriefsFunction = mapBriefToBrazilianPortugueseStenoKeys;
