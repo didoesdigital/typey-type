@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AmericanStenoDiagram from '../../StenoLayout/AmericanStenoDiagram';
+import NoNumberBarInnerThumbNumbersStenoDiagram from '../../StenoLayout/NoNumberBarInnerThumbNumbersStenoDiagram';
 import NoNumberBarOuterThumbNumbersStenoDiagram from '../../StenoLayout/NoNumberBarOuterThumbNumbersStenoDiagram';
 import BrazilianPortugueseStenoDiagram from '../../StenoLayout/BrazilianPortugueseStenoDiagram';
 import DanishStenoDiagram from '../../StenoLayout/DanishStenoDiagram';
@@ -12,6 +13,7 @@ import {
   mapQWERTYKeysToStenoStroke,
 } from '../../utils/typey-type';
 import mapBriefToAmericanStenoKeys from '../../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
+import mapBriefToNoNumberBarInnerThumbNumbersStenoKeys from '../../utils/stenoLayouts/mapBriefToNoNumberBarInnerThumbNumbersStenoKeys';
 import mapBriefToNoNumberBarOuterThumbNumbersStenoKeys from '../../utils/stenoLayouts/mapBriefToNoNumberBarOuterThumbNumbersStenoKeys';
 import mapBriefToBrazilianPortugueseStenoKeys from '../../utils/stenoLayouts/mapBriefToBrazilianPortugueseStenoKeys';
 import mapBriefToDanishStenoKeys from '../../utils/stenoLayouts/mapBriefToDanishStenoKeys';
@@ -228,6 +230,11 @@ class Writer extends Component<Props, State> {
         StenoLayoutDiagram = AmericanStenoDiagram;
         placeholderRawSteno = "e.g. HEU";
         break;
+      case 'stenoLayoutNoNumberBarInnerThumbNumbers':
+        mapBriefsFunction = mapBriefToNoNumberBarInnerThumbNumbersStenoKeys;
+        StenoLayoutDiagram = NoNumberBarInnerThumbNumbersStenoDiagram;
+        placeholderRawSteno = "e.g. HEU";
+        break;
       case 'stenoLayoutNoNumberBarOuterThumbNumbers':
         mapBriefsFunction = mapBriefToNoNumberBarOuterThumbNumbersStenoKeys;
         StenoLayoutDiagram = NoNumberBarOuterThumbNumbersStenoDiagram;
@@ -388,7 +395,8 @@ class Writer extends Component<Props, State> {
               <div className="mb2 mw-240">
                 <label className="mb1 db" htmlFor="stenoLayout">Steno layout</label>
                 <select id="stenoLayout" name="writerStenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} className="text-small form-control w6">
-                  <option value="stenoLayoutAmericanSteno">American steno (Ward Stone Ireland)</option>
+                  <option value="stenoLayoutAmericanSteno">Ward Stone Ireland (Plover, EcoSteno, SOFT/HRUF etc.)</option>
+                  <option value="stenoLayoutNoNumberBarInnerThumbNumbers">Inner thumbers (TinyMod, Steko, etc.)</option>
                   <option value="stenoLayoutNoNumberBarOuterThumbNumbers">Outer thumbers (Uni, Georgi, etc.)</option>
                   <option value="stenoLayoutPalantype">Palantype</option>
                   <option value="stenoLayoutBrazilianPortugueseSteno">Brazilian Portuguese steno</option>

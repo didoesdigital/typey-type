@@ -1452,6 +1452,7 @@ class App extends Component {
 
         const stenoLayoutValidValues = [
           'stenoLayoutAmericanSteno',
+          'stenoLayoutNoNumberBarInnerThumbNumbers',
           'stenoLayoutNoNumberBarOuterThumbNumbers',
           'stenoLayoutPalantype',
           'stenoLayoutBrazilianPortugueseSteno',

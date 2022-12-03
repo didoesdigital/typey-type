@@ -545,7 +545,7 @@ class UserSettings extends Component {
                       <select id="stenoLayout" name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control w-144">
                         <optgroup label="English">
                           <option value="stenoLayoutAmericanSteno">Ward Stone Ireland (Plover, EcoSteno, SOFT/HRUF etc.)</option>
-                          {/* <option value="stenoLayoutAmericanSteno">Inner thumbers (TinyMod, Steko, etc.)</option> */}
+                          <option value="stenoLayoutNoNumberBarInnerThumbNumbers">Inner thumbers (TinyMod, Steko, etc.)</option>
                           <option value="stenoLayoutNoNumberBarOuterThumbNumbers">Outer thumbers (Uni, Georgi, etc.)</option>
                         </optgroup>
                         <optgroup label="Palantype">

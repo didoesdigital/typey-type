@@ -1,5 +1,6 @@
 import React from "react";
 import AmericanStenoDiagram from "../StenoLayout/AmericanStenoDiagram";
+import NoNumberBarInnerThumbNumbersStenoDiagram from "../StenoLayout/NoNumberBarInnerThumbNumbersStenoDiagram";
 import NoNumberBarOuterThumbNumbersStenoDiagram from "../StenoLayout/NoNumberBarOuterThumbNumbersStenoDiagram";
 import BrazilianPortugueseStenoDiagram from "../StenoLayout/BrazilianPortugueseStenoDiagram";
 import DanishStenoDiagram from "../StenoLayout/DanishStenoDiagram";
@@ -13,6 +14,7 @@ import {
 } from "./../utils/typey-type";
 
 import mapBriefToAmericanStenoKeys from "../utils/stenoLayouts/mapBriefToAmericanStenoKeys";
+import mapBriefToNoNumberBarInnerThumbNumbersStenoKeys from "../utils/stenoLayouts/mapBriefToNoNumberBarInnerThumbNumbersStenoKeys";
 import mapBriefToNoNumberBarOuterThumbNumbersStenoKeys from "../utils/stenoLayouts/mapBriefToNoNumberBarOuterThumbNumbersStenoKeys";
 import mapBriefToBrazilianPortugueseStenoKeys from "../utils/stenoLayouts/mapBriefToBrazilianPortugueseStenoKeys";
 import mapBriefToDanishStenoKeys from "../utils/stenoLayouts/mapBriefToDanishStenoKeys";
@@ -47,6 +49,10 @@ export default function StrokeTip({
         case "stenoLayoutAmericanSteno":
           mapBriefsFunction = mapBriefToAmericanStenoKeys;
           StenoLayoutDiagram = AmericanStenoDiagram;
+          break;
+        case "stenoLayoutNoNumberBarInnerThumbNumbers":
+          mapBriefsFunction = mapBriefToNoNumberBarInnerThumbNumbersStenoKeys;
+          StenoLayoutDiagram = NoNumberBarInnerThumbNumbersStenoDiagram;
           break;
         case "stenoLayoutNoNumberBarOuterThumbNumbers":
           mapBriefsFunction = mapBriefToNoNumberBarOuterThumbNumbersStenoKeys;

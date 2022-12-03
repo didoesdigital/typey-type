@@ -239,6 +239,7 @@ export type Study = "discover" | "revise" | "drill" | "practice";
 
 export type StenoLayout =
   | "stenoLayoutAmericanSteno"
+  | "stenoLayoutNoNumberBarInnerThumbNumbers"
   | "stenoLayoutNoNumberBarOuterThumbNumbers"
   | "stenoLayoutPalantype"
   | "stenoLayoutBrazilianPortugueseSteno"
