@@ -90,7 +90,11 @@ export default function StrokeTip({
         layoutTypeStyle = " type-face--japanese";
       }
 
-      const diagramWidth = (userSettings.diagramSize || 1) * 140;
+      const diagramWidth =
+        (userSettings.diagramSize || 1) *
+        (userSettings.stenoLayout === "stenoLayoutNoNumberBarOuterThumbNumbers"
+          ? 160
+          : 140);
 
       strokeTip = (
         <div
