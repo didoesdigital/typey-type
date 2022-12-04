@@ -6,11 +6,11 @@ export const hasWordBoundaryError = (currentPhrase, actualText) => {
   return currentPhrase === "wars" && actualText.includes("Star Wars");
 };
 
-export default function WordBoundaryErrorPrompt({
+const WordBoundaryErrorPrompt = ({
   currentPhrase,
   actualText,
   setAnnouncementMessage,
-}) {
+}) => {
   const showWordBoundaryPrompt = hasWordBoundaryError(
     currentPhrase,
     actualText
@@ -57,4 +57,6 @@ export default function WordBoundaryErrorPrompt({
   } else {
     return null;
   }
-}
+};
+
+export default WordBoundaryErrorPrompt;
