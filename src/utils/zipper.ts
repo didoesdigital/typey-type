@@ -1,5 +1,9 @@
 class Zipper {
-  constructor(items) {
+  completed: any[];
+  current: any[];
+  remaining: any[];
+
+  constructor(items: any[]) {
     this.completed = [];
     this.current = items[0];
     this.remaining = items.slice(1);
@@ -15,7 +19,7 @@ class Zipper {
     return this.remaining;
   }
   visitNext() {
-    if(this.remaining.length !== 0) {
+    if (this.remaining.length !== 0) {
       this.completed.push(this.current);
       this.current = this.remaining.shift();
     }
