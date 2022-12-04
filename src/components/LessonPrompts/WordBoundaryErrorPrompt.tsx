@@ -2,15 +2,24 @@ import React from "react";
 import { IconExternal } from "../Icon";
 import { Tooltip } from "react-tippy";
 
-export const hasWordBoundaryError = (currentPhrase, actualText) => {
+export const hasWordBoundaryError = (
+  currentPhrase: string,
+  actualText: string
+) => {
   return currentPhrase === "wars" && actualText.includes("Star Wars");
+};
+
+type Props = {
+  currentPhrase: any;
+  actualText: string;
+  setAnnouncementMessage: () => void;
 };
 
 const WordBoundaryErrorPrompt = ({
   currentPhrase,
   actualText,
   setAnnouncementMessage,
-}) => {
+}: Props) => {
   const showWordBoundaryPrompt = hasWordBoundaryError(
     currentPhrase,
     actualText
@@ -27,6 +36,7 @@ const WordBoundaryErrorPrompt = ({
           word boundary{" "}
           <span className="whitespace-nowrap">
             error
+            {/* @ts-ignore */}
             <Tooltip
               title="Opens in a new tab"
               animation="shift"
