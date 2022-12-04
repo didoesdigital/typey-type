@@ -1,13 +1,23 @@
 import React from "react";
 import { matchSplitText } from "../../utils/typey-type";
 
+import type { UserSettings } from "../../types";
+
+type Props = {
+  actualText: any;
+  completedPhrases: any;
+  currentPhrase: string;
+  settings: any;
+  userSettings: UserSettings;
+};
+
 export default function OnePhraseMaterial({
   actualText,
   completedPhrases,
   currentPhrase,
   settings,
   userSettings,
-}) {
+}: Props) {
   const [matched, unmatched] = matchSplitText(
     currentPhrase,
     actualText,
@@ -34,7 +44,7 @@ export default function OnePhraseMaterial({
               {userSettings.spacePlacement === "spaceBeforeOutput" ? "" : " "}
             </span>
             <div className={currentAndUpcomingPhrasesClasses}>
-              <strong className="fw7" tabIndex="0">
+              <strong className="fw7" tabIndex={0}>
                 <span className="matched steno-material">{matched}</span>
                 <span className="steno-material">{unmatched}</span>
               </strong>
