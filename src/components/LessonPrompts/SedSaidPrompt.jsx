@@ -9,11 +9,11 @@ export const hasSedSaid = (currentPhrase, actualText) => {
   return currentPhrase === "said" && actualText.match(sedRegex);
 };
 
-export default function SedSaidPrompt({
+const SedSaidPrompt = ({
   currentPhrase,
   actualText,
   setAnnouncementMessage,
-}) {
+}) => {
   const showSedSaidPrompt = hasSedSaid(currentPhrase, actualText);
   if (showSedSaidPrompt) {
     return (
@@ -55,4 +55,6 @@ export default function SedSaidPrompt({
   } else {
     return null;
   }
-}
+};
+
+export default SedSaidPrompt;
