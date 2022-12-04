@@ -2,7 +2,7 @@ import React from "react";
 import { IconExternal } from "../Icon";
 import { Tooltip } from "react-tippy";
 
-export const missingAussieDict = (currentStroke, actualText) => {
+export const missingAussieDict = (currentStroke: string, actualText: string) => {
   const untranslatedAussieSuffixRegex = new RegExp(/(A\*U|aw)/);
   return (
     (currentStroke.includes("/A*U ") ||
@@ -12,11 +12,17 @@ export const missingAussieDict = (currentStroke, actualText) => {
   );
 };
 
-export default function AussieDictPrompt({
+type Props = {
+  currentStroke: string;
+  actualText: string;
+  setAnnouncementMessage: () => void;
+}
+
+const AussieDictPrompt = ({
   currentStroke,
   actualText,
   setAnnouncementMessage,
-}) {
+}: Props) => {
   const isMissingAussieDict = missingAussieDict(currentStroke, actualText);
   if (isMissingAussieDict) {
     return (
@@ -29,6 +35,7 @@ export default function AussieDictPrompt({
           rel="noopener noreferrer"
         >
           dict-en-AU-with-extra-stroke.json dictionary
+          {/* @ts-ignore */}
           <Tooltip
             title="Opens in a new tab"
             animation="shift"
@@ -57,4 +64,6 @@ export default function AussieDictPrompt({
   } else {
     return null;
   }
-}
+};
+
+export default AussieDictPrompt;
