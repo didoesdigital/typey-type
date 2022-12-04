@@ -340,14 +340,13 @@ class Lesson extends Component {
                               />
                               <Material
                                 actualText={this.props.actualText}
-                                currentPhrase={this.props.currentPhrase}
-                                currentStroke={this.props.currentStroke}
-                                settings={this.props.settings}
-                                userSettings={this.props.userSettings}
                                 completedPhrases={this.props.completedPhrases}
+                                currentPhrase={this.props.currentPhrase}
+                                currentPhraseID={this.props.currentPhraseID}
+                                lesson={this.props.lesson}
+                                settings={this.props.settings}
                                 upcomingPhrases={this.props.upcomingPhrases}
-                                totalWordCount={this.props.totalWordCount}
-                                {...this.props}
+                                userSettings={this.props.userSettings}
                               />
                               <TypedText
                                 actualText={this.props.actualText}
