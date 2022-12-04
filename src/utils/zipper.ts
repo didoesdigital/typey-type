@@ -1,9 +1,11 @@
-class Zipper {
-  completed: any[];
-  current: any[];
-  remaining: any[];
+import type { PresentedMaterial, PresentedMaterialItem } from "../types";
 
-  constructor(items: any[]) {
+class Zipper {
+  completed: (PresentedMaterialItem | undefined)[];
+  current: PresentedMaterialItem | undefined;
+  remaining: PresentedMaterial;
+
+  constructor(items: PresentedMaterial) {
     this.completed = [];
     this.current = items[0];
     this.remaining = items.slice(1);
