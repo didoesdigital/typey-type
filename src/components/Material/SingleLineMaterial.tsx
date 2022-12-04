@@ -1,6 +1,17 @@
 import React from "react";
 import { matchSplitText } from "./../../utils/typey-type";
 
+import type { UserSettings } from "../../types";
+
+type Props = {
+  actualText: any;
+  completedPhrases: any;
+  currentPhrase: string;
+  settings: any;
+  upcomingPhrases: any;
+  userSettings: UserSettings;
+};
+
 export default function SingleLineMaterial({
   actualText,
   completedPhrases,
@@ -8,7 +19,7 @@ export default function SingleLineMaterial({
   settings,
   upcomingPhrases,
   userSettings,
-}) {
+}: Props) {
   const spaceBeforeOutput =
     userSettings.spacePlacement === "spaceAfterOutput" ? "" : " ";
   const spaceAfterOutput =
@@ -47,7 +58,7 @@ export default function SingleLineMaterial({
               {userSettings.spacePlacement === "spaceBeforeOutput" ? "" : " "}
             </span>
             <div className={currentAndUpcomingPhrasesClasses}>
-              <strong className="fw7" tabIndex="0">
+              <strong className="fw7" tabIndex={0}>
                 <span className="matched steno-material">{matched}</span>
                 <span className="steno-material">{unmatched}</span>
               </strong>
