@@ -40,7 +40,6 @@ const Material = ({
       completedPhrases={completedPhrases}
       currentPhrase={currentPhrase}
       settings={settings}
-      upcomingPhrases={upcomingPhrases}
       userSettings={userSettings}
     />
   ) : (

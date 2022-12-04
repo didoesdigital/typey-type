@@ -6,7 +6,6 @@ export default function OnePhraseMaterial({
   completedPhrases,
   currentPhrase,
   settings,
-  upcomingPhrases,
   userSettings,
 }) {
   const [matched, unmatched] = matchSplitText(
