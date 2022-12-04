@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { matchSplitText } from "./../../utils/typey-type";
 
+type Props = {
+  actualText: any;
+  currentPhrase: any;
+  settings: any;
+  userSettings: any;
+  currentPhraseID: any;
+};
+
 export default function CurrentMaterialHighlight({
   actualText,
   currentPhrase,
   settings,
   userSettings,
   currentPhraseID,
-}) {
+}: Props) {
   const [matched, unmatched] = matchSplitText(
     currentPhrase,
     actualText,
@@ -47,7 +55,7 @@ export default function CurrentMaterialHighlight({
         firstMaterialPhrase.getBoundingClientRect().top;
       setY(newY);
 
-      document.querySelector("#js-material-panel").scrollTo({
+      document.querySelector("#js-material-panel")?.scrollTo({
         left: 0,
         top: newY,
         behavior: "smooth",
@@ -90,7 +98,7 @@ export default function CurrentMaterialHighlight({
     >
       <strong
         className="fw7 whitespace-pre"
-        tabIndex="0"
+        tabIndex={0}
         aria-label="Current word feedback"
         role="note"
       >
