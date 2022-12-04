@@ -32,6 +32,10 @@ const Lessons = ({
   personalDictionaries,
   setAnnouncementMessage,
   stopLesson,
+  updateFlashcardsMetWords,
+  updateFlashcardsProgress,
+  changeFullscreen,
+  flashcardsMetWords,
   ...lessonProps
 }: LessonsRoutingProps) => {
   return (
@@ -50,6 +54,10 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updateFlashcardsMetWords={updateFlashcardsMetWords}
+            updateFlashcardsProgress={updateFlashcardsProgress}
+            changeFullscreen={changeFullscreen}
+            flashcardsMetWords={flashcardsMetWords}
             {...lessonProps}
             {...props}
           />
@@ -69,7 +77,10 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
-            {...lessonProps}
+            updateFlashcardsMetWords={updateFlashcardsMetWords}
+            updateFlashcardsProgress={updateFlashcardsProgress}
+            changeFullscreen={changeFullscreen}
+            flashcardsMetWords={flashcardsMetWords}
             {...props}
           />
         )}
@@ -88,7 +99,10 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
-            {...lessonProps}
+            updateFlashcardsMetWords={updateFlashcardsMetWords}
+            updateFlashcardsProgress={updateFlashcardsProgress}
+            changeFullscreen={changeFullscreen}
+            flashcardsMetWords={flashcardsMetWords}
             {...props}
           />
         )}
@@ -107,6 +121,7 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
           />
@@ -126,6 +141,7 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
           />
@@ -145,6 +161,7 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
           />
@@ -161,6 +178,7 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
           />
@@ -177,6 +195,7 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
           />
@@ -193,6 +212,7 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
           />
@@ -234,6 +254,7 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
           />
@@ -254,7 +275,10 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
-            {...lessonProps}
+            updateFlashcardsMetWords={updateFlashcardsMetWords}
+            updateFlashcardsProgress={updateFlashcardsProgress}
+            changeFullscreen={changeFullscreen}
+            flashcardsMetWords={flashcardsMetWords}
             {...props}
           />
         )}
@@ -270,7 +294,6 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
-            {...lessonProps}
             {...props}
           />
         )}
