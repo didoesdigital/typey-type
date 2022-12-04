@@ -2,6 +2,17 @@ import React from "react";
 import CurrentMaterialHighlight from "./CurrentMaterialHighlight";
 import EntireMaterial from "./EntireMaterial";
 
+import type { UserSettings } from "../../types";
+
+type Props = {
+  actualText: any;
+  currentPhrase: string;
+  currentPhraseID: any;
+  presentedMaterial: any;
+  settings: any;
+  userSettings: UserSettings;
+};
+
 export default React.memo(function MultiLineMaterial({
   actualText,
   currentPhrase,
@@ -9,7 +20,7 @@ export default React.memo(function MultiLineMaterial({
   presentedMaterial,
   settings,
   userSettings,
-}) {
+}: Props) {
   return (
     <div className="mb1 nt1 mx-auto mw-844">
       <div className="expected">
