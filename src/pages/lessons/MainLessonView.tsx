@@ -16,10 +16,68 @@ import SedSaidPrompt from "../../components/LessonPrompts/SedSaidPrompt";
 import WordBoundaryErrorPrompt from "../../components/LessonPrompts/WordBoundaryErrorPrompt";
 import PunctuationDescription from "./components/PunctuationDescription";
 
+import type { UserSettings as UserSettingsType } from "../../types";
+
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
 const googleFormURL =
   "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=";
 const googleFormParam = "&entry.1202724812&entry.936119214";
+
+type Props = {
+  createNewCustomLesson: JSX.Element;
+  lessonSubTitle: string;
+  overviewLink: JSX.Element;
+  propsLesson: { [key: string]: any };
+  actualText: string;
+  changeShowScoresWhileTyping: any;
+  changeShowStrokesAs: any;
+  changeShowStrokesInLesson: any;
+  changeShowStrokesOnMisstroke: any;
+  changeSortOrderUserSetting: any;
+  changeSpacePlacementUserSetting: any;
+  changeStenoLayout: any;
+  changeUserSetting: any;
+  chooseStudy: any;
+  completedPhrases: any;
+  currentLessonStrokes: any;
+  currentPhrase: any;
+  currentStroke: any;
+  disableUserSettings: any;
+  handleBeatsPerMinute: any;
+  handleDiagramSize: any;
+  handleLimitWordsChange: any;
+  handleRepetitionsChange: any;
+  handleStartFromWordChange: any;
+  handleStopLesson: any;
+  handleUpcomingWordsLayout: any;
+  lesson: any;
+  lessonLength: number;
+  lessonTitle: string;
+  location: any;
+  path: string;
+  previousCompletedPhraseAsTyped: any;
+  repetitionsRemaining: number;
+  restartLesson: any;
+  revisionMode: any;
+  sayCurrentPhraseAgain: any;
+  setAnnouncementMessage: any;
+  settings: any;
+  showStrokesInLesson: boolean;
+  targetStrokeCount: number;
+  timer: number;
+  totalNumberOfHintedWords: number;
+  totalNumberOfLowExposuresSeen: number;
+  totalNumberOfMatchedWords: number;
+  totalNumberOfMistypedWords: number;
+  totalNumberOfNewWordsMet: number;
+  totalNumberOfRetainedWords: number;
+  totalWordCount: number;
+  upcomingPhrases: any[];
+  updateMarkup: any;
+  userSettings: UserSettingsType;
+  hideOtherSettings: boolean;
+  toggleHideOtherSettings: () => void;
+};
 
 const MainLessonView = ({
   createNewCustomLesson,
@@ -75,7 +133,7 @@ const MainLessonView = ({
   userSettings,
   hideOtherSettings,
   toggleHideOtherSettings,
-}) => {
+}: Props) => {
   const mainHeading = useRef(null);
 
   return (
@@ -117,6 +175,7 @@ const MainLessonView = ({
                 <AnimateHeight
                   duration={300}
                   height={userSettings.showScoresWhileTyping ? "auto" : 0}
+                  // @ts-ignore TODO see if this is a real issue
                   ease={"cubic-bezier(0.645, 0.045, 0.355, 1)"}
                 >
                   <div
@@ -231,10 +290,8 @@ const MainLessonView = ({
                   chooseStudy={chooseStudy}
                   disableUserSettings={disableUserSettings}
                   hideOtherSettings={hideOtherSettings}
-                  path={path}
                   setAnnouncementMessage={setAnnouncementMessage}
                   toggleHideOtherSettings={toggleHideOtherSettings}
-                  totalWordCount={totalWordCount}
                   userSettings={userSettings}
                 />
               </div>
