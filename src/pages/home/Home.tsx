@@ -56,6 +56,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
                   className="homepage-demo-lg"
                   alt="Demo of Typey Type for Stenographers in action"
                   onClick={toggleDemoGIF}
+                  data-chromatic="ignore"
                 />
               </div>
               <h3 className="tiny-rule">What is stenography?</h3>
