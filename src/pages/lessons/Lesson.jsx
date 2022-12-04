@@ -1,33 +1,17 @@
 import React, { Component } from 'react';
-import { IconClosingCross } from '../../components/Icon';
 import { Link, Route, Switch } from 'react-router-dom';
 import GoogleAnalytics from 'react-ga';
 import queryString from 'query-string';
-import AnimateHeight from 'react-animate-height';
 import DocumentTitle from 'react-document-title';
 import ErrorBoundary from '../../components/ErrorBoundary'
-import LessonCanvasFooter from './components/LessonCanvasFooter';
-import LessonLengthPreview from './components/LessonLengthPreview';
 import LessonNotFound from './LessonNotFound';
 import LessonOverview from './LessonOverview';
 import LessonSubheader from './components/LessonSubheader';
-import Material from '../../components/Material';
-import TypedText from '../../components/TypedText';
 import Finished from './components/Finished';
-import Scores from '../../components/Scores';
-import StrokeTip from '../../components/StrokeTip';
-import UserSettings from '../../components/UserSettings';
 import Flashcards from './flashcards/Flashcards';
 import { loadPersonalPreferences } from '../../utils/typey-type';
-import AussieDictPrompt from '../../components/LessonPrompts/AussieDictPrompt';
-import SedSaidPrompt from '../../components/LessonPrompts/SedSaidPrompt';
-import WordBoundaryErrorPrompt from '../../components/LessonPrompts/WordBoundaryErrorPrompt';
 import getLessonMetadata from './utilities/getLessonMetadata';
-import PunctuationDescription from "./components/PunctuationDescription";
-
-// fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
-const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690="
-const googleFormParam = "&entry.1202724812&entry.936119214";
+import MainLessonView from './MainLessonView';
 
 const isCustom = (pathname) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
@@ -289,148 +273,61 @@ class Lesson extends Component {
               </div>
             } />
             <Route exact={true} path={`${this.props.match.url}`} render={() =>
-              <DocumentTitle title={'Typey Type | Lesson: ' + this.props.lesson.title}>
-                <main id="main">
-                  <LessonSubheader
-                    createNewCustomLesson={createNewCustomLesson}
-                    handleStopLesson={this.props.handleStopLesson}
-                    lessonSubTitle={lessonSubTitle}
-                    lessonTitle={this.props.lessonTitle}
-                    overviewLink={overviewLink}
-                    path={this.props.path}
-                    restartLesson={this.props.restartLesson}
-                    ref={this.mainHeading}
-                  />
-                  <div id="lesson-page" className="flex-wrap-md flex mx-auto mw-1920">
-                    <div id="main-lesson-area" className="flex-grow mx-auto mw-1440 min-w-0">
-                      <div>
-                        {this.props.settings?.customMessage && (
-                          <div className="mx-auto mw-1920">
-                            <h3 className='px3 pb0 mb0'>{this.props.settings.customMessage}</h3>
-                          </div>
-                          )
-                        }
-                        <div className="mx-auto mw-1920 p3">
-                          <button onClick={this.props.changeShowScoresWhileTyping} className={"de-emphasized-button show-scores-control absolute mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'show-scores-control--hidden' : 'show-scores-control--shown')}>Show scores</button>
-                          <AnimateHeight
-                            duration={ 300 }
-                            height={ this.props.userSettings.showScoresWhileTyping ? 'auto' : 0 }
-                            ease={'cubic-bezier(0.645, 0.045, 0.355, 1)'}
-                          >
-                            <div className={"mb3 " + (this.props.userSettings.showScoresWhileTyping ? 'scores--shown' : 'scores--hidden')} onClick={this.props.changeShowScoresWhileTyping}>
-                              <Scores
-                                setAnnouncementMessage={this.props.setAnnouncementMessage}
-                                timer={this.props.timer}
-                                totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-                                totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-                                totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
-                                totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
-                                totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
-                                totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-                              />
-                            </div>
-                          </AnimateHeight>
-                          <div role="article" className="lesson-canvas panel mx-auto mw-1440 p2 mb3 flex">
-                            {this.props.revisionMode && <div><Link to={this.props.path.replace(/lesson\.txt$/,'')} onClick={this.props.restartLesson} className="revision-mode-button no-underline absolute right-0">Revision mode<IconClosingCross role="img" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="Exit revision mode" /></Link></div>}
-                            <div className="mx-auto mw100 mt10 min-width70 material-typed-text-and-hint flex-grow">
-                              <PunctuationDescription
-                                currentPhrase={this.props.currentPhrase}
-                                multiline={this.props.userSettings.upcomingWordsLayout === "multiline"}
-                                punctuationDescriptions={this.props.userSettings.punctuationDescriptions}
-                              />
-                              <Material
-                                actualText={this.props.actualText}
-                                completedPhrases={this.props.completedPhrases}
-                                currentPhrase={this.props.currentPhrase}
-                                currentPhraseID={this.props.currentPhraseID}
-                                lesson={this.props.lesson}
-                                settings={this.props.settings}
-                                upcomingPhrases={this.props.upcomingPhrases}
-                                userSettings={this.props.userSettings}
-                              />
-                              <TypedText
-                                actualText={this.props.actualText}
-                                currentLessonStrokes={this.props.currentLessonStrokes}
-                                currentPhrase={this.props.currentPhrase}
-                                completedPhrases={this.props.lesson.newPresentedMaterial.completed}
-                                previousCompletedPhraseAsTyped={this.props.previousCompletedPhraseAsTyped}
-                                sayCurrentPhraseAgain={this.props.sayCurrentPhraseAgain}
-                                settings={this.props.settings}
-                                updateMarkup={this.props.updateMarkup.bind(this)}
-                                userSettings={this.props.userSettings}
-                              />
-                              <WordBoundaryErrorPrompt
-                                actualText={this.props.actualText}
-                                currentPhrase={this.props.currentPhrase}
-                                setAnnouncementMessage={this.props.setAnnouncementMessage}
-                              />
-                              <AussieDictPrompt
-                                actualText={this.props.actualText}
-                                currentStroke={this.props.currentStroke}
-                                setAnnouncementMessage={this.props.setAnnouncementMessage}
-                              />
-                              <SedSaidPrompt
-                                actualText={this.props.actualText}
-                                currentPhrase={this.props.currentPhrase}
-                                setAnnouncementMessage={this.props.setAnnouncementMessage}
-                              />
-                              <StrokeTip
-                                changeShowStrokesInLesson={this.props.changeShowStrokesInLesson}
-                                currentStroke={this.props.currentStroke}
-                                repetitionsRemaining={this.props.repetitionsRemaining}
-                                showStrokesInLesson={this.props.showStrokesInLesson}
-                                targetStrokeCount={this.props.targetStrokeCount}
-                                userSettings={this.props.userSettings}
-                              />
-                              <LessonLengthPreview
-                                lessonStarted={this.props.disableUserSettings}
-                                speed={this.props.userSettings?.beatsPerMinute || 10}
-                                totalWords={propsLesson.presentedMaterial.length}
-                              />
-                            </div>
-                          </div>
-                          <LessonCanvasFooter
-                            chooseStudy={this.props.chooseStudy}
-                            disableUserSettings={this.props.disableUserSettings}
-                            hideOtherSettings={this.state.hideOtherSettings}
-                            path={this.props.path}
-                            setAnnouncementMessage={this.props.setAnnouncementMessage}
-                            toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
-                            totalWordCount={this.props.totalWordCount}
-                            userSettings={this.props.userSettings}
-                          />
-                        </div>
-                        <p className="text-center"><a href={googleFormURL + encodeURIComponent(this.props.location?.pathname || '') + googleFormParam} className="text-small mt0" target="_blank" rel="noopener noreferrer" id="ga--lesson--give-feedback">Give feedback on this lesson (form opens in a new tab)</a></p>
-                      </div>
-                    </div>
-                    <div>
-                      <UserSettings
-                        changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
-                        changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
-                        changeStenoLayout={this.props.changeStenoLayout}
-                        changeShowStrokesAs={this.props.changeShowStrokesAs}
-                        changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
-                        changeUserSetting={this.props.changeUserSetting}
-                        chooseStudy={this.props.chooseStudy}
-                        disableUserSettings={this.props.disableUserSettings}
-                        handleDiagramSize={this.props.handleDiagramSize}
-                        handleBeatsPerMinute={this.props.handleBeatsPerMinute}
-                        handleLimitWordsChange={this.props.handleLimitWordsChange}
-                        handleStartFromWordChange={this.props.handleStartFromWordChange}
-                        handleRepetitionsChange={this.props.handleRepetitionsChange}
-                        handleUpcomingWordsLayout={this.props.handleUpcomingWordsLayout}
-                        hideOtherSettings={this.state.hideOtherSettings}
-                        maxStartFromWord={this.props.lessonLength}
-                        path={this.props.path}
-                        revisionMode={this.props.revisionMode}
-                        setAnnouncementMessage={this.props.setAnnouncementMessage}
-                        totalWordCount={this.props.totalWordCount}
-                        userSettings={this.props.userSettings}
-                      />
-                    </div>
-                  </div>
-                </main>
-              </DocumentTitle>
+              <MainLessonView
+                createNewCustomLesson={createNewCustomLesson}
+                lessonSubTitle={lessonSubTitle}
+                overviewLink={overviewLink}
+                propsLesson={propsLesson}
+                actualText={this.props.actualText}
+                changeShowScoresWhileTyping={this.props.changeShowScoresWhileTyping}
+                changeShowStrokesAs={this.props.changeShowStrokesAs}
+                changeShowStrokesInLesson={this.props.changeShowStrokesInLesson}
+                changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
+                changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
+                changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
+                changeStenoLayout={this.props.changeStenoLayout}
+                changeUserSetting={this.props.changeUserSetting}
+                chooseStudy={this.props.chooseStudy}
+                completedPhrases={this.props.completedPhrases}
+                currentLessonStrokes={this.props.currentLessonStrokes}
+                currentPhrase={this.props.currentPhrase}
+                currentStroke={this.props.currentStroke}
+                disableUserSettings={this.props.disableUserSettings}
+                handleBeatsPerMinute={this.props.handleBeatsPerMinute}
+                handleDiagramSize={this.props.handleDiagramSize}
+                handleLimitWordsChange={this.props.handleLimitWordsChange}
+                handleRepetitionsChange={this.props.handleRepetitionsChange}
+                handleStartFromWordChange={this.props.handleStartFromWordChange}
+                handleStopLesson={this.props.handleStopLesson}
+                handleUpcomingWordsLayout={this.props.handleUpcomingWordsLayout}
+                lesson={this.props.lesson}
+                lessonLength={this.props.lessonLength}
+                lessonTitle={this.props.lessonTitle}
+                location={this.props.location}
+                path={this.props.path}
+                previousCompletedPhraseAsTyped={this.props.previousCompletedPhraseAsTyped}
+                repetitionsRemaining={this.props.repetitionsRemaining}
+                restartLesson={this.props.restartLesson}
+                revisionMode={this.props.revisionMode}
+                sayCurrentPhraseAgain={this.props.sayCurrentPhraseAgain}
+                setAnnouncementMessage={this.props.setAnnouncementMessage}
+                settings={this.props.settings}
+                showStrokesInLesson={this.props.showStrokesInLesson}
+                targetStrokeCount={this.props.targetStrokeCount}
+                timer={this.props.timer}
+                totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
+                totalNumberOfLowExposuresSeen={this.props.totalNumberOfLowExposuresSeen}
+                totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
+                totalNumberOfMistypedWords={this.props.totalNumberOfMistypedWords}
+                totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
+                totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
+                totalWordCount={this.props.totalWordCount}
+                upcomingPhrases={this.props.upcomingPhrases}
+                updateMarkup={this.props.updateMarkup.bind(this)}
+                userSettings={this.props.userSettings}
+                hideOtherSettings={this.state.hideOtherSettings}
+                toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
+              />
             } />
           </Switch>
         )
