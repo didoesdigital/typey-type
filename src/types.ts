@@ -211,15 +211,73 @@ export type MetWords = {
   [spacedTypedWords: string]: number;
 };
 
+export type Attempt = {
+  /**
+   * Examples
+   * "prince" while attempting to write " principal"
+   * " para", " ", "paralyse" while attempting to write "paralysis"
+   * */
+  text: string;
+  /** e.g. 1670211049535 */
+  time: 1670212079120;
+  /** e.g. 1.6 */
+  numberOfMatchedWordsSoFar: 1.6;
+  hintWasShown: boolean;
+};
+
+export type Attempts = Attempt[];
+
 /**
+ * Typed text as it was actually written, including multiple spaces and case-insensitive text
+ * Examples:
+ * "   was"
+ * " h er"
+ * " variety"
+ * "life. "
+ * "pre^"
+ */
+export type ActualTypedText = string;
+
+/**
+ * Typed text as recorded in met words, which is actually the correctly capitalised and simplified material text with desired spacing, such as 1 space before
+ * Examples:
+ * " was"
+ * " her"
+ * " Variety"
+ * "life. "
+ * "pre^"
+ */
+export type RecordedTypedText = string;
+
+/**
+ * Material text as shown in Typey Type without spacing
  * Examples:
  * "was"
  * "her"
+ * "Variety"
+ * "life."
+ * "pre^"
+ * "spell your full name, please"
  */
-export type Material = string;
+export type MaterialText = string;
 
-export type PresentedMaterialItem = { phrase: Material; stroke: Outline };
+export type MaterialItem = { phrase: MaterialText; stroke: Outline };
+export type PresentedMaterialItem = MaterialItem;
 export type PresentedMaterial = PresentedMaterialItem[];
+export type SourceMaterialItem = MaterialItem;
+export type SourceMaterial = SourceMaterialItem[];
+
+export type NewPresentedMaterial = {
+  // These should possibly be optionally undefined to match Zipper
+  completed: MaterialItem[]; // | undefined
+  current: MaterialItem; // | undefined
+  remaining: MaterialItem[];
+};
+
+export type LessonSettings = {
+  ignoredChars: string;
+  customMessage?: string;
+};
 
 export type SpacePlacement =
   | "spaceBeforeOutput"
@@ -275,4 +333,52 @@ export type UserSettings = {
   study: Study;
   stenoLayout: StenoLayout;
   upcomingWordsLayout: UpcomingWordsLayout;
+};
+
+/**
+ * Examples:
+ * "Proverbs starting with V"
+ */
+export type PrettyLessonTitle = string;
+
+export type Lesson = {
+  sourceMaterial: SourceMaterial;
+  presentedMaterial: PresentedMaterial;
+  settings: LessonSettings;
+  title: PrettyLessonTitle;
+  subtitle: string;
+  newPresentedMaterial: NewPresentedMaterial;
+  path: LessonPathWithBasenameAndFilename;
+};
+
+export type FallbackLesson = {
+  sourceMaterial: [{ phrase: "The"; stroke: "-T" }];
+  presentedMaterial: [{ phrase: "The"; stroke: "-T" }];
+  settings: { ignoredChars: "" };
+  title: "Steno";
+  subtitle: "";
+  // possibly missing `newPresentedMaterial`?
+  path: "";
+};
+
+/**
+ * Examples:
+ * "/typey-type/lessons/stories/proverbs/proverbs-starting-with-v/lesson.txt"
+ */
+export type LessonPathWithBasenameAndFilename = string;
+
+export type CurrentLessonStrokes = {
+  accuracy: boolean;
+  attempts: Attempts;
+  checked: boolean;
+  hintWasShown: boolean;
+  /** e.g. 1.6 */
+  numberOfMatchedWordsSoFar: number;
+  stroke: Outline;
+  /** e.g. 1670211049535 */
+  time: number;
+  /** e.g. " Variety" */
+  typedText: ActualTypedText;
+  /** e.g. "Variety" */
+  word: MaterialText;
 };
