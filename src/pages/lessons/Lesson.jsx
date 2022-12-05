@@ -291,6 +291,7 @@ class Lesson extends Component {
                 completedPhrases={this.props.completedPhrases}
                 currentLessonStrokes={this.props.currentLessonStrokes}
                 currentPhrase={this.props.currentPhrase}
+                currentPhraseID={this.props.currentPhraseID}
                 currentStroke={this.props.currentStroke}
                 disableUserSettings={this.props.disableUserSettings}
                 handleBeatsPerMinute={this.props.handleBeatsPerMinute}

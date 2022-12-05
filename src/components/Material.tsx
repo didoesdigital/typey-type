@@ -7,7 +7,7 @@ type Props = {
   actualText: any;
   completedPhrases: any;
   currentPhrase: any;
-  currentPhraseID: any;
+  currentPhraseID: number;
   lesson: any;
   settings: any;
   upcomingPhrases: any;

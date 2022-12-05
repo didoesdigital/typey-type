@@ -7,7 +7,7 @@ import type { UserSettings } from "../../types";
 type Props = {
   actualText: any;
   currentPhrase: string;
-  currentPhraseID: any;
+  currentPhraseID: number;
   presentedMaterial: any;
   settings: any;
   userSettings: UserSettings;

@@ -41,6 +41,7 @@ type Props = {
   completedPhrases: any;
   currentLessonStrokes: any;
   currentPhrase: any;
+  currentPhraseID: number;
   currentStroke: any;
   disableUserSettings: any;
   handleBeatsPerMinute: any;
@@ -97,6 +98,7 @@ const MainLessonView = ({
   completedPhrases,
   currentLessonStrokes,
   currentPhrase,
+  currentPhraseID,
   currentStroke,
   disableUserSettings,
   handleBeatsPerMinute,
@@ -237,7 +239,7 @@ const MainLessonView = ({
                       actualText={actualText}
                       completedPhrases={completedPhrases}
                       currentPhrase={currentPhrase}
-                      currentPhraseID={currentPhrase}
+                      currentPhraseID={currentPhraseID}
                       lesson={lesson}
                       settings={settings}
                       upcomingPhrases={upcomingPhrases}
