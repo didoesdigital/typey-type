@@ -2,11 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 type LessonSubheaderProps = {
-  createNewCustomLesson: any;
+  createNewCustomLesson: JSX.Element | undefined;
   handleStopLesson: () => void;
   lessonSubTitle: any;
   lessonTitle: any;
-  overviewLink: any;
+  overviewLink: JSX.Element | undefined;
   path: string;
   restartLesson: () => void;
 };

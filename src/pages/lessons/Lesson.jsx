@@ -140,7 +140,7 @@ class Lesson extends Component {
         Edit custom lesson
       </Link>
     ) : (
-      ""
+      undefined
     );
 
     const metadata = getLessonMetadata(
@@ -149,7 +149,7 @@ class Lesson extends Component {
     );
     const overviewLink = metadata?.overview ?
       <Link to={this.props.location.pathname + 'overview'} className="link-button link-button-ghost table-cell">Overview</Link> :
-      '';
+      undefined;
 
     let propsLesson = this.props.lesson;
     if ((Object.keys(propsLesson).length === 0 && propsLesson.constructor === Object) || !propsLesson) {
@@ -333,7 +333,7 @@ class Lesson extends Component {
         )
       }
     } else {
-      return <div><h2 ref={this.mainHeading} tabIndex="-1">That lesson is missing.</h2></div>;
+      return <div><h2 ref={this.mainHeading} tabIndex={-1}>That lesson is missing.</h2></div>;
     }
   }
 }

@@ -24,9 +24,9 @@ const googleFormURL =
 const googleFormParam = "&entry.1202724812&entry.936119214";
 
 type Props = {
-  createNewCustomLesson: JSX.Element;
+  createNewCustomLesson: JSX.Element | undefined;
   lessonSubTitle: string;
-  overviewLink: JSX.Element;
+  overviewLink: JSX.Element | undefined;
   propsLesson: { [key: string]: any };
   actualText: string;
   changeShowScoresWhileTyping: any;
