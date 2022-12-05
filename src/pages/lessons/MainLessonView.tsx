@@ -16,7 +16,15 @@ import SedSaidPrompt from "../../components/LessonPrompts/SedSaidPrompt";
 import WordBoundaryErrorPrompt from "../../components/LessonPrompts/WordBoundaryErrorPrompt";
 import PunctuationDescription from "./components/PunctuationDescription";
 
-import type { UserSettings as UserSettingsType } from "../../types";
+import type {
+  ActualTypedText,
+  CurrentLessonStrokes,
+  MaterialText,
+  Lesson,
+  LessonSettings,
+  Outline,
+  UserSettings as UserSettingsType,
+} from "../../types";
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
 const googleFormURL =
@@ -27,7 +35,7 @@ type Props = {
   createNewCustomLesson: JSX.Element | undefined;
   lessonSubTitle: string;
   overviewLink: JSX.Element | undefined;
-  propsLesson: { [key: string]: any };
+  propsLesson: Lesson;
   actualText: string;
   changeShowScoresWhileTyping: () => void;
   changeShowStrokesAs: () => void;
@@ -38,12 +46,12 @@ type Props = {
   changeStenoLayout: () => void;
   changeUserSetting: () => void;
   chooseStudy: () => void;
-  completedPhrases: any;
-  currentLessonStrokes: any;
+  completedPhrases: MaterialText[];
+  currentLessonStrokes: CurrentLessonStrokes;
   currentPhrase: string;
   currentPhraseID: number;
-  currentStroke: any;
-  disableUserSettings: any;
+  currentStroke: Outline;
+  disableUserSettings: boolean;
   handleBeatsPerMinute: () => void;
   handleDiagramSize: () => void;
   handleLimitWordsChange: () => void;
@@ -51,18 +59,27 @@ type Props = {
   handleStartFromWordChange: () => void;
   handleStopLesson: () => void;
   handleUpcomingWordsLayout: () => void;
-  lesson: any;
+  lesson: Lesson;
   lessonLength: number;
   lessonTitle: string;
-  location: any;
+  // TODO: get actual type
+  /**
+   * Examples:
+   * hash: ""
+   * key: string
+   * pathname: "/lessons/drills/steno-party-tricks/"
+   * search: ""
+   * state: undefined
+   * */
+  location: { [key: string]: any };
   path: string;
-  previousCompletedPhraseAsTyped: any;
+  previousCompletedPhraseAsTyped: ActualTypedText;
   repetitionsRemaining: number;
   restartLesson: () => void;
-  revisionMode: any;
+  revisionMode: boolean;
   sayCurrentPhraseAgain: () => void;
   setAnnouncementMessage: () => void;
-  settings: any;
+  settings: LessonSettings;
   showStrokesInLesson: boolean;
   targetStrokeCount: number;
   timer: number;
@@ -73,7 +90,7 @@ type Props = {
   totalNumberOfNewWordsMet: number;
   totalNumberOfRetainedWords: number;
   totalWordCount: number;
-  upcomingPhrases: any[];
+  upcomingPhrases: MaterialText[];
   updateMarkup: () => void;
   userSettings: UserSettingsType;
   hideOtherSettings: boolean;
