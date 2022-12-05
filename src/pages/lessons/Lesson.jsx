@@ -156,6 +156,7 @@ class Lesson extends Component {
       propsLesson = {
         sourceMaterial: [ {phrase: 'The', stroke: '-T'} ],
         presentedMaterial: [ {phrase: 'The', stroke: '-T'}, ],
+        // possibly missing `newPresentedMaterial`?
         settings: { ignoredChars: '' },
         title: 'Steno', subtitle: '',
         path: ''
