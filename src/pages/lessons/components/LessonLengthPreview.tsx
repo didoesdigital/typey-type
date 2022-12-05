@@ -15,7 +15,7 @@ const Warning = ({ duration }: { duration: number }) => (
 );
 
 type LessonLengthPreviewProps = {
-  lessonStarted: number;
+  lessonStarted: boolean;
   speed: number;
   totalWords: number;
 };
