@@ -3,10 +3,10 @@ import { matchSplitText } from "./../../utils/typey-type";
 
 type Props = {
   actualText: any;
-  currentPhrase: any;
+  currentPhrase: string;
   settings: any;
   userSettings: any;
-  currentPhraseID: any;
+  currentPhraseID: number;
 };
 
 export default function CurrentMaterialHighlight({

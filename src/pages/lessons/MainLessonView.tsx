@@ -40,7 +40,7 @@ type Props = {
   chooseStudy: any;
   completedPhrases: any;
   currentLessonStrokes: any;
-  currentPhrase: any;
+  currentPhrase: string;
   currentPhraseID: number;
   currentStroke: any;
   disableUserSettings: any;

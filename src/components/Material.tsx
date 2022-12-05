@@ -6,7 +6,7 @@ import OnePhraseMaterial from "./Material/OnePhraseMaterial";
 type Props = {
   actualText: any;
   completedPhrases: any;
-  currentPhrase: any;
+  currentPhrase: string;
   currentPhraseID: number;
   lesson: any;
   settings: any;
