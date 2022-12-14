@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { FullRecommendationsStudyType } from "../types";
+import type { FullRecommendationsStudyType } from "../../../types";
 
 type Props = {
   studyType: FullRecommendationsStudyType;
