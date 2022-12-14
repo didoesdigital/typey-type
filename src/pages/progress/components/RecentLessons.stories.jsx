@@ -9,15 +9,25 @@ export default {
 
 const testLessonIndex = [
   {
-    category: "Fundamentals",
-    overview: "/fundamentals/introduction/lesson-overview.html",
-    path: "/fundamentals/introduction/lesson.txt",
-    subcategory: "",
+    title: "Introduction",
     subtitle: "",
+    category: "Fundamentals",
+    subcategory: "",
+    path: "/fundamentals/introduction/lesson.txt",
+    wordCount: 52,
     suggestedNext:
       "/fundamentals/one-syllable-words-with-simple-keys/lesson.txt",
-    title: "Introduction",
-    wordCount: 52,
+    overview: "/fundamentals/introduction/lesson-overview.html",
+  },
+  {
+    title: "Proverbial phrases starting with E",
+    subtitle: "",
+    category: "Stories",
+    subcategory: "Proverbial phrases",
+    path: "/stories/proverbial-phrases/proverbial-phrases-starting-with-e/lesson.txt",
+    wordCount: 165,
+    suggestedNext:
+      "/stories/proverbial-phrases/proverbial-phrases-starting-with-f/lesson.txt",
   },
 ];
 
@@ -29,6 +39,10 @@ export const RecentLessonsIdeal = Template.bind({});
 RecentLessonsIdeal.args = {
   recentLessonHistory: [
     { path: "/lessons/fundamentals/introduction/", studyType: "practice" },
+    {
+      path: "/lessons/stories/proverbial-phrases/proverbial-phrases-starting-with-e/",
+      studyType: "practice",
+    },
   ],
   lessonIndex: testLessonIndex,
 };
