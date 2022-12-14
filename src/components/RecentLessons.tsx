@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PARAMS from "../utils/params.js";
 import { Link } from "react-router-dom";
 import type {
@@ -18,18 +18,11 @@ type Props = {
 };
 
 const RecentLessons = ({ recentLessonHistory, lessonIndex }: Props) => {
-  const [hasRecentLessons, setHasRecentLessons] = useState(false);
-
-  useEffect(() => {
-    if (
-      recentLessonHistory &&
-      recentLessonHistory.length > 0 &&
-      recentLessonHistory[0] &&
-      recentLessonHistory[0].path
-    ) {
-      setHasRecentLessons(true);
-    }
-  }, [recentLessonHistory]);
+  const hasRecentLessons =
+    recentLessonHistory &&
+    recentLessonHistory.length > 0 &&
+    recentLessonHistory[0] &&
+    recentLessonHistory[0].path;
 
   let recentLessons = null;
 
