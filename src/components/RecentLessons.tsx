@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import PARAMS from "../utils/params.js";
 import { Link } from "react-router-dom";
-import type { LessonIndexEntry, Study } from "../types";
+import type {
+  LessonIndexEntry,
+  LessonPathWithoutBasenameAndWithFilename,
+  Study,
+} from "../types";
 
 type RecentLessonIndex = Pick<LessonIndexEntry, "path" | "title">;
 
 type Props = {
-  recentLessonHistory: any;
+  recentLessonHistory: {
+    path: LessonPathWithoutBasenameAndWithFilename;
+    studyType: Study;
+  }[];
   lessonIndex: RecentLessonIndex[];
 };
 
