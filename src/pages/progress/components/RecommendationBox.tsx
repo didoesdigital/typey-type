@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import GoogleAnalytics from "react-ga";
-import RecommendationDescription from "./RecommendationDescription";
-import { IconExternal } from "./Icon";
+import RecommendationDescription from "../../../components/RecommendationDescription";
+import { IconExternal } from "../../../components/Icon";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 
-import type { Study } from "../types";
+import type { Study } from "../../../types";
 
 /**
  * Examples:

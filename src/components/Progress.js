@@ -5,7 +5,7 @@ import ErrorBoundary from './ErrorBoundary'
 import PseudoContentButton from './PseudoContentButton';
 import FlashcardsBox from './FlashcardsBox';
 import NumericInput from 'react-numeric-input';
-import RecommendationBox from './RecommendationBox';
+import RecommendationBox from '../pages/progress/components/RecommendationBox';
 import RecentLessons from '../pages/progress/components/RecentLessons';
 import * as Confetti from './../utils/confetti';
 import { getLessonIndexData } from './../utils/lessonIndexData';
