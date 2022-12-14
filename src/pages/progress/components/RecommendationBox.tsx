@@ -27,8 +27,8 @@ type RecommendedNextLesson = {
   link: RecommendationLink;
   /** Examples: "Proverbs starting with P" | "Play Type Racer" */
   linkTitle: string;
-  /** Examples: "Practice Proverbs starting with P" */
-  linkText: string;
+  /** Examples: "Practice Proverbs starting with P" | "Discover" */
+  linkText?: string; // FIXME: may not be used?
 };
 
 type Props = {
