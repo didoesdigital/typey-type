@@ -3,14 +3,14 @@ import PARAMS from "../../../utils/params.js";
 import { Link } from "react-router-dom";
 import type {
   LessonIndexEntry,
-  LessonPathWithoutBasenameAndWithFilename,
+  LessonPathWithoutBasenameOrFilename,
   Study,
 } from "../../../types";
 
 type RecentLessonIndex = Pick<LessonIndexEntry, "path" | "title">;
 
 type RecentLessonHistoryItem = {
-  path: LessonPathWithoutBasenameAndWithFilename;
+  path: LessonPathWithoutBasenameOrFilename;
   studyType: Study;
 };
 
@@ -92,7 +92,7 @@ const RecentLessons = ({ recentLessonHistory, lessonIndex }: Props) => {
       <h3>Recent lessons</h3>
       <ul className="unstyled-list">{linkList}</ul>
     </React.Fragment>
-  ) : undefined;
+  ) : null;
 
   return recentLessons;
 };

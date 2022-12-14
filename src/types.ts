@@ -374,6 +374,11 @@ export type LessonPathWithBasenameAndFilename = string;
 export type LessonPathWithoutBasenameAndWithFilename = string;
 
 /**
+ * Example: "/fundamentals/introduction/"
+ */
+export type LessonPathWithoutBasenameOrFilename = string;
+
+/**
  * Example: "/fundamentals/introduction/lesson-overview.html"
  */
 export type OverviewPathWithoutBasenameAndWithFilename = string;
