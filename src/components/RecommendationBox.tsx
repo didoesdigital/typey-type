@@ -5,7 +5,41 @@ import { IconExternal } from "./Icon";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 
-class RecommendationBox extends Component {
+import type { Study } from "../types";
+
+/**
+ * Examples:
+ * "https://play.typeracer.com/?universe=steno"
+ * "/lessons/stories/proverbs/proverbs-starting-with-p/?recommended=true&study=practice&showStrokes=0&hideStrokesOnLastRepetition=1&newWords=1&seenWords=1&retainedWords=1&repetitions=1&limitNumberOfWords=0&sortOrder=sortOff"
+ */
+type RecommendationLink = string;
+
+type RecommendationsStudyType = "compete" | "game" | "wildcard" | "break";
+
+type RecommendedNextLesson = {
+  /** Example: 15 */
+  limitNumberOfWords: number | null;
+  /** Example: 3 */
+  repetitions: number | null;
+  studyType: Study | RecommendationsStudyType | "error";
+  /** Example: "One-syllable words with simple keys" */
+  lessonTitle?: string; // FIXME: may not exist?
+  link: RecommendationLink;
+  /** Examples: "Proverbs starting with P" | "Play Type Racer" */
+  linkTitle: string;
+  /** Examples: "Practice Proverbs starting with P" */
+  linkText: string;
+};
+
+type Props = {
+  recommendedNextLesson: RecommendedNextLesson;
+  recommendAnotherLesson: () => void;
+  startRecommendedStep: () => void;
+  loadingLessonIndex: boolean;
+  setAnnouncementMessage: () => void;
+};
+
+class RecommendationBox extends Component<Props> {
   render() {
     let recommendedNextLesson;
     let recommendedNextLessonHeading;
