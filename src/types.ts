@@ -367,6 +367,17 @@ export type FallbackLesson = {
  */
 export type LessonPathWithBasenameAndFilename = string;
 
+/**
+ * Example: "/fundamentals/introduction/lesson-overview.html"
+ * Example: "/fundamentals/introduction/lesson.txt"
+ */
+export type LessonPathWithoutBasenameAndWithFilename = string;
+
+/**
+ * Example: "/fundamentals/introduction/lesson-overview.html"
+ */
+export type OverviewPathWithoutBasenameAndWithFilename = string;
+
 export type CurrentLessonStrokes = {
   accuracy: boolean;
   attempts: Attempts;
@@ -383,14 +394,39 @@ export type CurrentLessonStrokes = {
   word: MaterialText;
 };
 
+export type Category = "Fundamentals" | "Drills" | "Stories" | "Collections" // maybe custom?
+
+/**
+ * Examples:
+ *
+ * ""
+ * "Tech"
+ * "Proverbial phrases"
+ * "Aesop’s Fables"
+ * "Human resources (HR)"
+ * "Two-word briefs, same beginnings"
+ * "Queen Elizabeth I’s speeches"
+ */
+export type Subcategory = string;
+
+/**
+ * Examples:
+ * "Introduction"
+ * "One-syllable words with simple keys"
+ * "Longest Words with Single-Stroke Briefs"
+ * "JavaScript objects, properties, and methods"
+ * "The Man from Snowy River"
+ */
+export type LessonTitle = string;
+
 export type LessonIndexEntry = {
-  category: string;
-  overview: string;
-  path: string;
-  subcategory: string;
-  subtitle: string;
-  suggestedNext: string;
-  title: string;
+  category: Category;
+  overview: OverviewPathWithoutBasenameAndWithFilename;
+  path: LessonPathWithoutBasenameAndWithFilename;
+  subcategory: Subcategory;
+  subtitle: "";
+  suggestedNext: LessonPathWithoutBasenameAndWithFilename;
+  title: LessonTitle;
+  /** Example: 52 */
   wordCount: number;
 };
-
