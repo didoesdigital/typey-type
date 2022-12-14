@@ -295,6 +295,10 @@ export type SortOrder =
 
 export type Study = "discover" | "revise" | "drill" | "practice";
 
+export type OtherRecommendationsStudyType = "compete" | "game" | "wildcard" | "break";
+
+export type FullRecommendationsStudyType = Study | OtherRecommendationsStudyType | "error";
+
 export type StenoLayout =
   | "stenoLayoutAmericanSteno"
   | "stenoLayoutNoNumberBarInnerThumbNumbers"

@@ -5,7 +5,7 @@ import { IconExternal } from "../../../components/Icon";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 
-import type { Study } from "../../../types";
+import type { FullRecommendationsStudyType } from "../../../types";
 
 /**
  * Examples:
@@ -14,14 +14,12 @@ import type { Study } from "../../../types";
  */
 type RecommendationLink = string;
 
-type RecommendationsStudyType = "compete" | "game" | "wildcard" | "break";
-
 type RecommendedNextLesson = {
   /** Example: 15 */
   limitNumberOfWords: number | null;
   /** Example: 3 */
   repetitions: number | null;
-  studyType: Study | RecommendationsStudyType | "error";
+  studyType: FullRecommendationsStudyType;
   /** Example: "One-syllable words with simple keys" */
   lessonTitle?: string; // FIXME: may not exist?
   link: RecommendationLink;
