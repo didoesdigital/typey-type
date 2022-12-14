@@ -2,17 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga";
 import { Link } from "react-router-dom";
 import { groups } from "d3-array";
-
-type LessonIndexEntry = {
-  category: string;
-  overview: string;
-  path: string;
-  subcategory: string;
-  subtitle: string;
-  suggestedNext: string;
-  title: string;
-  wordCount: number;
-};
+import type { LessonIndexEntry } from "../../../types";
 
 type LessonListProps = {
   lessonIndex: LessonIndexEntry[];

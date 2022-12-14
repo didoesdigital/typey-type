@@ -382,3 +382,15 @@ export type CurrentLessonStrokes = {
   /** e.g. "Variety" */
   word: MaterialText;
 };
+
+export type LessonIndexEntry = {
+  category: string;
+  overview: string;
+  path: string;
+  subcategory: string;
+  subtitle: string;
+  suggestedNext: string;
+  title: string;
+  wordCount: number;
+};
+
