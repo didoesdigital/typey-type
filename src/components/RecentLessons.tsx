@@ -45,13 +45,11 @@ const RecentLessons = ({ recentLessonHistory, lessonIndex }: Props) => {
 
           if (recentLesson.path.includes("/lessons/progress")) {
             const path = recentLesson.path.replace("/lessons", "");
-            let title = "Your words";
-            if (path.includes("memorised")) {
-              title = "Your memorised words";
-            }
-            if (path.includes("seen")) {
-              title = "Your revision words";
-            }
+            const title = path.includes("memorised")
+              ? "Your memorised words"
+              : path.includes("seen")
+              ? "Your revision words"
+              : "Your words";
 
             lesson = {
               path,
