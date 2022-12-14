@@ -184,6 +184,7 @@ class RecommendationBox extends Component {
             style={{ lineHeight: 2 }}
           >
             {recommendedNextLessonCallToActionButton}
+            {/* @ts-ignore */}
             <Tooltip
               title="(external link opens in new tab)"
               className=""
