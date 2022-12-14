@@ -1,11 +1,11 @@
 import React from "react";
-import PARAMS from "../utils/params.js";
+import PARAMS from "../../../utils/params.js";
 import { Link } from "react-router-dom";
 import type {
   LessonIndexEntry,
   LessonPathWithoutBasenameAndWithFilename,
   Study,
-} from "../types";
+} from "../../../types";
 
 type RecentLessonIndex = Pick<LessonIndexEntry, "path" | "title">;
 
