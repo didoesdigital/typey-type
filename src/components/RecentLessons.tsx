@@ -28,7 +28,7 @@ const RecentLessons = ({ recentLessonHistory, lessonIndex }: Props) => {
 
   const linkList = hasRecentLessons
     ? recentLessonHistory
-        .filter((recentLesson: any) =>
+        .filter((recentLesson) =>
           lessonIndex.find(
             (lesson) =>
               recentLesson.path.includes("/lessons/progress") ||
@@ -36,7 +36,7 @@ const RecentLessons = ({ recentLessonHistory, lessonIndex }: Props) => {
                 recentLesson.path.replace("/lessons", "") + "lesson.txt"
           )
         )
-        .map((recentLesson: any) => {
+        .map((recentLesson) => {
           let lesson = lessonIndex.find(
             (lesson) =>
               lesson.path ===
