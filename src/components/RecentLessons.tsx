@@ -1,8 +1,16 @@
 import React, { useEffect, useState } from "react";
 import PARAMS from "../utils/params.js";
 import { Link } from "react-router-dom";
+import type { LessonIndexEntry, Study } from "../types";
 
-const RecentLessons = ({ recentLessonHistory, lessonIndex }) => {
+type RecentLessonIndex = Pick<LessonIndexEntry, "path" | "title">;
+
+type Props = {
+  recentLessonHistory: any;
+  lessonIndex: RecentLessonIndex[];
+};
+
+const RecentLessons = ({ recentLessonHistory, lessonIndex }: Props) => {
   const [hasRecentLessons, setHasRecentLessons] = useState(false);
 
   useEffect(() => {
@@ -20,7 +28,7 @@ const RecentLessons = ({ recentLessonHistory, lessonIndex }) => {
 
   if (hasRecentLessons) {
     const linkList = recentLessonHistory
-      .filter((recentLesson) =>
+      .filter((recentLesson: any) =>
         lessonIndex.find(
           (lesson) =>
             recentLesson.path.includes("/lessons/progress") ||
@@ -28,7 +36,7 @@ const RecentLessons = ({ recentLessonHistory, lessonIndex }) => {
               recentLesson.path.replace("/lessons", "") + "lesson.txt"
         )
       )
-      .map((recentLesson) => {
+      .map((recentLesson: any) => {
         let lesson = lessonIndex.find(
           (lesson) =>
             lesson.path ===
@@ -51,13 +59,15 @@ const RecentLessons = ({ recentLessonHistory, lessonIndex }) => {
           };
         }
 
-        let studyType = "practice";
+        let studyType: Study = "practice";
         // NOTE: does not check if studyType is legit
         if (recentLesson && recentLesson.studyType) {
           studyType = recentLesson.studyType;
         }
 
-        return (
+        const studyTypeKey: keyof typeof PARAMS = `${studyType}Params`;
+
+        return lesson ? (
           <li className="unstyled-list-item mb1" key={lesson.path}>
             <Link
               to={
@@ -66,15 +76,16 @@ const RecentLessons = ({ recentLessonHistory, lessonIndex }) => {
                   .replace(/lesson\.txt$/, "")
                   .replace(/\/{2,}/g, "/") +
                 "?recent=1&" +
-                PARAMS[studyType + "Params"]
+                PARAMS[studyTypeKey]
               }
               id={"ga--recent-lessons--" + lesson.path.replace(/[/.]/g, "-")}
             >
               {lesson.title}
             </Link>
           </li>
-        );
+        ) : undefined;
       })
+      .filter(Boolean) // guard against undefined result from find
       .reverse();
 
     recentLessons = (
