@@ -73,4 +73,4 @@ class RecentLessons extends Component {
   }
 }
 
-export { RecentLessons };
+export default RecentLessons;

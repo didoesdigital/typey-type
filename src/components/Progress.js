@@ -6,7 +6,7 @@ import PseudoContentButton from './PseudoContentButton';
 import FlashcardsBox from './FlashcardsBox';
 import NumericInput from 'react-numeric-input';
 import RecommendationBox from './RecommendationBox';
-import { RecentLessons } from './RecentLessons';
+import RecentLessons from './RecentLessons';
 import * as Confetti from './../utils/confetti';
 import { getLessonIndexData } from './../utils/lessonIndexData';
 import { IconCheckmark, IconTriangleRight } from './Icon';
