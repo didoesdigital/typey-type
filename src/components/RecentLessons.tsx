@@ -9,11 +9,13 @@ import type {
 
 type RecentLessonIndex = Pick<LessonIndexEntry, "path" | "title">;
 
+type RecentLessonHistoryItem = {
+  path: LessonPathWithoutBasenameAndWithFilename;
+  studyType: Study;
+};
+
 type Props = {
-  recentLessonHistory: {
-    path: LessonPathWithoutBasenameAndWithFilename;
-    studyType: Study;
-  }[];
+  recentLessonHistory: RecentLessonHistoryItem[];
   lessonIndex: RecentLessonIndex[];
 };
 
