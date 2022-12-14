@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 
-class RecommendationDescription extends Component {
+import type { FullRecommendationsStudyType } from "../types";
+
+type Props = {
+  studyType: FullRecommendationsStudyType;
+};
+
+class RecommendationDescription extends Component<Props> {
   render() {
     let description;
     let descriptionClassNames = "mb3";
