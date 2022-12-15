@@ -21,13 +21,14 @@ let particles = [];
 
 const ProgressTooltip = ({ title, onShow, children }) => {
   return (
+    // @ts-ignore
     <Tooltip
       title={title}
       className=""
       animation="shift"
       arrow="true"
       duration="200"
-      tabIndex="0"
+      tabIndex={0}
       tag="span"
       theme="didoesdigital didoesdigital-sm"
       trigger="mouseenter focus click"
@@ -909,7 +910,7 @@ class Progress extends Component {
             <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
               <div className="flex mr1 self-center">
                 <header className="flex items-center min-h-40">
-                  <h2 id="progress" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Progress</h2>
+                  <h2 id="progress" ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1}>Progress</h2>
                 </header>
               </div>
               <div className="flex mxn2">
@@ -972,7 +973,7 @@ class Progress extends Component {
               </div>
 
               <div className="mw-368 flex-grow" id="js-confetti-target">
-                <h3 className="mt0 mb0 pt5 pb1 bb b--brand-primary-tint" id="js-todays-efforts" tabIndex="-1">Today’s efforts</h3>
+                <h3 className="mt0 mb0 pt5 pb1 bb b--brand-primary-tint" id="js-todays-efforts" tabIndex={-1}>Today’s efforts</h3>
                 {todaysEffortsOrGoals}
               </div>
             </div>
