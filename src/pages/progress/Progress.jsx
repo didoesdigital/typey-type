@@ -707,7 +707,7 @@ class Progress extends Component {
       <p>You’ve successfully typed {this.state.yourWordCount} words without hints or misstrokes.</p>
     );
 
-    if (this.state.yourSeenWordCount >= 10000) {
+    if (this.state.yourWordCount >= 10000) {
       if (this.state.yourMemorisedWordCount >= 10000) {
         progressSummaryAndLinks = (
           <React.Fragment>
