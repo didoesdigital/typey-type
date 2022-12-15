@@ -13,7 +13,7 @@ class FlashcardsBox extends Component {
   }
 
   render() {
-    let {
+    const {
       flashcardsNextLesson,
       loadingLessonIndex,
       skipButtonId,
@@ -24,8 +24,10 @@ class FlashcardsBox extends Component {
       flashcardsNextLesson.lastSeen
     );
 
+    let flashcardsBoxContent;
+
     if (flashcardsNextLesson !== undefined && !loadingLessonIndex) {
-      flashcardsNextLesson = (
+      flashcardsBoxContent = (
         <React.Fragment>
           <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
             <p className="text-right">
@@ -73,7 +75,7 @@ class FlashcardsBox extends Component {
         </React.Fragment>
       );
     } else {
-      flashcardsNextLesson = (
+      flashcardsBoxContent = (
         <React.Fragment>
           <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
             <p className="text-right">
@@ -103,7 +105,7 @@ class FlashcardsBox extends Component {
       );
     }
 
-    return <React.Fragment>{flashcardsNextLesson}</React.Fragment>;
+    return flashcardsBoxContent;
   }
 }
 
