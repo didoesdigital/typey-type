@@ -12,13 +12,10 @@ class FlashcardsBox extends Component {
   render() {
     let {
       flashcardsNextLesson,
-      linkTitle,
       loadingLessonIndex,
       skipButtonId,
       startFlashcards,
     } = this.props;
-    let flashcardsLink;
-
     let flashcardsTimeAgo = Utils.relativeTimeAgo(
       Date.now(),
       flashcardsNextLesson.lastSeen
@@ -28,25 +25,6 @@ class FlashcardsBox extends Component {
     // This magic time stamp matches the fallback time used in flashcardsRecommendations.js
     if (flashcardsNextLesson.lastSeen === 1558144862000) {
       flashcardsTimeSeenText = "New flashcards";
-    }
-
-    flashcardsLink = (
-      <Link
-        onClick={startFlashcards}
-        to={flashcardsNextLesson.link}
-        className="link-button dib"
-        style={{ lineHeight: 2 }}
-      >
-        Study
-      </Link>
-    );
-
-    if (flashcardsNextLesson.linkTitle === "error") {
-      flashcardsLink = (
-        <a href="." className="link-button dib" style={{ lineHeight: 2 }}>
-          Refresh
-        </a>
-      );
     }
 
     if (flashcardsNextLesson !== undefined && !loadingLessonIndex) {
@@ -69,7 +47,26 @@ class FlashcardsBox extends Component {
               >
                 Skip
               </button>
-              <div className="text-right">{flashcardsLink}</div>
+              <div className="text-right">
+                {flashcardsNextLesson.linkTitle === "Error" ? (
+                  <a
+                    href="."
+                    className="link-button dib"
+                    style={{ lineHeight: 2 }}
+                  >
+                    Refresh
+                  </a>
+                ) : (
+                  <Link
+                    onClick={startFlashcards}
+                    to={flashcardsNextLesson.link}
+                    className="link-button dib"
+                    style={{ lineHeight: 2 }}
+                  >
+                    Study
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </React.Fragment>
