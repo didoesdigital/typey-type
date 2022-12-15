@@ -19,15 +19,10 @@ class FlashcardsBox extends Component {
       skipButtonId,
       startFlashcards,
     } = this.props;
-    let flashcardsTimeAgo = Utils.relativeTimeAgo(
+    const flashcardsTimeAgo = Utils.relativeTimeAgo(
       Date.now(),
       flashcardsNextLesson.lastSeen
     );
-    let flashcardsTimeSeenText = "Seen " + flashcardsTimeAgo + " ago";
-
-    if (flashcardsNextLesson.lastSeen === defaultTimestamp) {
-      flashcardsTimeSeenText = "New flashcards";
-    }
 
     if (flashcardsNextLesson !== undefined && !loadingLessonIndex) {
       flashcardsNextLesson = (
@@ -40,7 +35,11 @@ class FlashcardsBox extends Component {
                   : flashcardsNextLesson.linkTitle}
               </strong>
             </p>
-            <p className="text-right de-emphasized">{flashcardsTimeSeenText}</p>
+            <p className="text-right de-emphasized">
+              {flashcardsNextLesson.lastSeen === defaultTimestamp
+                ? "New flashcards"
+                : `Seen ${flashcardsTimeAgo} ago`}
+            </p>
             <div className="flex flex-wrap justify-end">
               <button
                 onClick={this.moreFlashcards.bind(this)}
