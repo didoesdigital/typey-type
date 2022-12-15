@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import * as Utils from "./../utils/utils";
+import * as Utils from "../../../utils/utils";
 
 type FlashcardsNextLesson = {
   /** Example: "Top 1000 words flashcards" */

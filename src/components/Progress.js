@@ -3,7 +3,7 @@ import PARAMS from './../utils/params.js';
 import GoogleAnalytics from 'react-ga';
 import ErrorBoundary from './ErrorBoundary'
 import PseudoContentButton from './PseudoContentButton';
-import FlashcardsBox from './FlashcardsBox';
+import FlashcardsBox from '../pages/progress/components/FlashcardsBox';
 import NumericInput from 'react-numeric-input';
 import RecommendationBox from '../pages/progress/components/RecommendationBox';
 import RecentLessons from '../pages/progress/components/RecentLessons';
