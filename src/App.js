@@ -78,7 +78,7 @@ const AsyncPageNotFound = Loadable({
 });
 
 const AsyncProgress = Loadable({
-  loader: () => import("./components/Progress"),
+  loader: () => import("./pages/progress/Progress"),
   loading: PageLoading,
   delay: 300
 });

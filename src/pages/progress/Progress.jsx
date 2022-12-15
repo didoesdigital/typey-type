@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
-import PARAMS from './../utils/params.js';
+import PARAMS from '../../utils/params.js';
 import GoogleAnalytics from 'react-ga';
-import ErrorBoundary from './ErrorBoundary'
-import PseudoContentButton from './PseudoContentButton';
-import FlashcardsBox from '../pages/progress/components/FlashcardsBox';
+import ErrorBoundary from '../../components/ErrorBoundary'
+import PseudoContentButton from '../../components/PseudoContentButton';
+import FlashcardsBox from './components/FlashcardsBox';
 import NumericInput from 'react-numeric-input';
-import RecommendationBox from '../pages/progress/components/RecommendationBox';
-import RecentLessons from '../pages/progress/components/RecentLessons';
-import * as Confetti from './../utils/confetti';
-import { getLessonIndexData } from './../utils/lessonIndexData';
-import { IconCheckmark, IconTriangleRight } from './Icon';
+import RecommendationBox from './components/RecommendationBox';
+import RecentLessons from './components/RecentLessons';
+import * as Confetti from '../../utils/confetti';
+import { getLessonIndexData } from '../../utils/lessonIndexData';
+import { IconCheckmark, IconTriangleRight } from '../../components/Icon';
 import { Link, Redirect } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
-import trimAndSumUniqMetWords from '../utils/trimAndSumUniqMetWords';
-import { ReactComponent as AlertRobot } from '../images/AlertRobot.svg';
-import { ReactComponent as BoredRobot } from '../images/BoredRobot.svg';
-import { ReactComponent as HappyRobot } from '../images/HappyRobot.svg';
+import trimAndSumUniqMetWords from '../../utils/trimAndSumUniqMetWords';
+import { ReactComponent as AlertRobot } from '../../images/AlertRobot.svg';
+import { ReactComponent as BoredRobot } from '../../images/BoredRobot.svg';
+import { ReactComponent as HappyRobot } from '../../images/HappyRobot.svg';
 
 let particles = [];
 
