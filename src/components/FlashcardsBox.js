@@ -19,10 +19,6 @@ class FlashcardsBox extends Component {
       skipButtonId,
       startFlashcards,
     } = this.props;
-    const flashcardsTimeAgo = Utils.relativeTimeAgo(
-      Date.now(),
-      flashcardsNextLesson.lastSeen
-    );
 
     return flashcardsNextLesson !== undefined && !loadingLessonIndex ? (
       <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
@@ -36,7 +32,10 @@ class FlashcardsBox extends Component {
         <p className="text-right de-emphasized">
           {flashcardsNextLesson.lastSeen === defaultTimestamp
             ? "New flashcards"
-            : `Seen ${flashcardsTimeAgo} ago`}
+            : `Seen ${Utils.relativeTimeAgo(
+                Date.now(),
+                flashcardsNextLesson.lastSeen
+              )} ago`}
         </p>
         <div className="flex flex-wrap justify-end">
           <button
