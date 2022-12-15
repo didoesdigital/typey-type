@@ -937,7 +937,6 @@ class Progress extends Component {
                   <FlashcardsBox
                     skipButtonId={mobileSkipButtonId}
                     flashcardsNextLesson={this.props.flashcardsNextLesson}
-                    setAnnouncementMessage={this.props.setAnnouncementMessage}
                     loadingLessonIndex={this.state.loadingLessonIndex}
                     startFlashcards={this.startFlashcards.bind(this)}
                     onSkip={this.onSkipFlashcards.bind(this)}
@@ -1006,7 +1005,6 @@ class Progress extends Component {
                         <FlashcardsBox
                           skipButtonId={skipButtonId}
                           flashcardsNextLesson={this.props.flashcardsNextLesson}
-                          setAnnouncementMessage={this.props.setAnnouncementMessage}
                           loadingLessonIndex={this.state.loadingLessonIndex}
                           startFlashcards={this.startFlashcards.bind(this)}
                           onSkip={this.onSkipFlashcards.bind(this)}

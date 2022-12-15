@@ -2,6 +2,23 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as Utils from "./../utils/utils";
 
+type FlashcardsNextLesson = {
+  /** Example: "Top 1000 words flashcards" */
+  linkTitle: string;
+  /** JavaScript timestamp e.g. 1558144862000 */
+  lastSeen: number;
+  /** A URL */
+  link: string;
+};
+
+type Props = {
+  flashcardsNextLesson: FlashcardsNextLesson;
+  loadingLessonIndex: boolean;
+  onSkip: () => void;
+  skipButtonId: string;
+  startFlashcards: () => void;
+};
+
 // This magic time stamp matches the default time used in flashcardsRecommendations
 const defaultTimestamp = 1558144862000;
 
@@ -11,7 +28,7 @@ const FlashcardsBox = ({
   onSkip,
   skipButtonId,
   startFlashcards,
-}) => {
+}: Props) => {
   return flashcardsNextLesson !== undefined && !loadingLessonIndex ? (
     <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
       <p className="text-right">
