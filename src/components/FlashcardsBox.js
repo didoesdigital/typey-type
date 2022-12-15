@@ -11,7 +11,12 @@ class FlashcardsBox extends Component {
   }
 
   render () {
-    let flashcardsNextLesson = this.props.flashcardsNextLesson;
+    let {
+      flashcardsNextLesson,
+      startFlashcards,
+      skipButtonId,
+      loadingLessonIndex
+    } = this.props;
     let flashcardsLink;
     let flashcardsLinkTitle;
     let studyType;
@@ -25,26 +30,26 @@ class FlashcardsBox extends Component {
     }
 
     flashcardsLink = (
-      <Link onClick={this.props.startFlashcards} to={this.props.flashcardsNextLesson.link} className="link-button dib" style={{lineHeight: 2}}>Study</Link>
+      <Link onClick={startFlashcards} to={flashcardsNextLesson.link} className="link-button dib" style={{lineHeight: 2}}>Study</Link>
     );
 
-    flashcardsLinkTitle = this.props.flashcardsNextLesson.linkTitle;
+    flashcardsLinkTitle = flashcardsNextLesson.linkTitle;
 
     if (studyType === "error") {
       flashcardsLinkTitle = "Unable to load flashcards";
       flashcardsLink = <a href="." className="link-button dib" style={{lineHeight: 2}}>Refresh</a>
     } else {
-      flashcardsLinkTitle = this.props.flashcardsNextLesson.linkTitle;
+      flashcardsLinkTitle = flashcardsNextLesson.linkTitle;
     }
 
-    if (this.props.flashcardsNextLesson !== undefined && !this.props.loadingLessonIndex) {
+    if (flashcardsNextLesson !== undefined && !loadingLessonIndex) {
       flashcardsNextLesson = (
         <React.Fragment>
           <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
             <p className="text-right"><strong>{flashcardsLinkTitle}</strong></p>
             <p className="text-right de-emphasized">{flashcardsTimeSeenText}</p>
             <div className="flex flex-wrap justify-end">
-              <button onClick={this.moreFlashcards.bind(this)} id={this.props.skipButtonId || "js-flashcards-skip-button"} className="button button--secondary mr2 pl3 pr3">Skip</button>
+              <button onClick={this.moreFlashcards.bind(this)} id={skipButtonId || "js-flashcards-skip-button"} className="button button--secondary mr2 pl3 pr3">Skip</button>
               <div className="text-right">
                 {flashcardsLink}
               </div>
@@ -59,7 +64,7 @@ class FlashcardsBox extends Component {
             <p className="text-right"><strong>Loading…</strong></p>
             <p className="text-right de-emphasized"></p>
             <div className="flex flex-wrap justify-end">
-              <button onClick={this.moreFlashcards.bind(this)} id={this.props.skipButtonId || "js-flashcards-skip-button"} className="button button--secondary mr2 pl3 pr3">Skip</button>
+              <button onClick={this.moreFlashcards.bind(this)} id={skipButtonId || "js-flashcards-skip-button"} className="button button--secondary mr2 pl3 pr3">Skip</button>
               <div className="text-right">
                 <button disabled className="link-button dib" style={{lineHeight: 2}}>Loading…</button>
               </div>
