@@ -1,27 +1,29 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import * as Utils from './../utils/utils';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import * as Utils from "./../utils/utils";
 
 class FlashcardsBox extends Component {
-
   moreFlashcards(event) {
     if (this.props.onSkip) {
       this.props.onSkip(event);
     }
   }
 
-  render () {
+  render() {
     let {
       flashcardsNextLesson,
       startFlashcards,
       skipButtonId,
-      loadingLessonIndex
+      loadingLessonIndex,
     } = this.props;
     let flashcardsLink;
     let flashcardsLinkTitle;
     let studyType;
 
-    let flashcardsTimeAgo = Utils.relativeTimeAgo(Date.now(), flashcardsNextLesson.lastSeen);
+    let flashcardsTimeAgo = Utils.relativeTimeAgo(
+      Date.now(),
+      flashcardsNextLesson.lastSeen
+    );
     let flashcardsTimeSeenText = "Seen " + flashcardsTimeAgo + " ago";
 
     // This magic time stamp matches the fallback time used in flashcardsRecommendations.js
@@ -30,14 +32,25 @@ class FlashcardsBox extends Component {
     }
 
     flashcardsLink = (
-      <Link onClick={startFlashcards} to={flashcardsNextLesson.link} className="link-button dib" style={{lineHeight: 2}}>Study</Link>
+      <Link
+        onClick={startFlashcards}
+        to={flashcardsNextLesson.link}
+        className="link-button dib"
+        style={{ lineHeight: 2 }}
+      >
+        Study
+      </Link>
     );
 
     flashcardsLinkTitle = flashcardsNextLesson.linkTitle;
 
     if (studyType === "error") {
       flashcardsLinkTitle = "Unable to load flashcards";
-      flashcardsLink = <a href="." className="link-button dib" style={{lineHeight: 2}}>Refresh</a>
+      flashcardsLink = (
+        <a href="." className="link-button dib" style={{ lineHeight: 2 }}>
+          Refresh
+        </a>
+      );
     } else {
       flashcardsLinkTitle = flashcardsNextLesson.linkTitle;
     }
@@ -46,13 +59,19 @@ class FlashcardsBox extends Component {
       flashcardsNextLesson = (
         <React.Fragment>
           <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
-            <p className="text-right"><strong>{flashcardsLinkTitle}</strong></p>
+            <p className="text-right">
+              <strong>{flashcardsLinkTitle}</strong>
+            </p>
             <p className="text-right de-emphasized">{flashcardsTimeSeenText}</p>
             <div className="flex flex-wrap justify-end">
-              <button onClick={this.moreFlashcards.bind(this)} id={skipButtonId || "js-flashcards-skip-button"} className="button button--secondary mr2 pl3 pr3">Skip</button>
-              <div className="text-right">
-                {flashcardsLink}
-              </div>
+              <button
+                onClick={this.moreFlashcards.bind(this)}
+                id={skipButtonId || "js-flashcards-skip-button"}
+                className="button button--secondary mr2 pl3 pr3"
+              >
+                Skip
+              </button>
+              <div className="text-right">{flashcardsLink}</div>
             </div>
           </div>
         </React.Fragment>
@@ -61,12 +80,26 @@ class FlashcardsBox extends Component {
       flashcardsNextLesson = (
         <React.Fragment>
           <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
-            <p className="text-right"><strong>Loading…</strong></p>
+            <p className="text-right">
+              <strong>Loading…</strong>
+            </p>
             <p className="text-right de-emphasized"></p>
             <div className="flex flex-wrap justify-end">
-              <button onClick={this.moreFlashcards.bind(this)} id={skipButtonId || "js-flashcards-skip-button"} className="button button--secondary mr2 pl3 pr3">Skip</button>
+              <button
+                onClick={this.moreFlashcards.bind(this)}
+                id={skipButtonId || "js-flashcards-skip-button"}
+                className="button button--secondary mr2 pl3 pr3"
+              >
+                Skip
+              </button>
               <div className="text-right">
-                <button disabled className="link-button dib" style={{lineHeight: 2}}>Loading…</button>
+                <button
+                  disabled
+                  className="link-button dib"
+                  style={{ lineHeight: 2 }}
+                >
+                  Loading…
+                </button>
               </div>
             </div>
           </div>
@@ -74,11 +107,7 @@ class FlashcardsBox extends Component {
       );
     }
 
-    return (
-      <React.Fragment>
-        {flashcardsNextLesson}
-      </React.Fragment>
-    );
+    return <React.Fragment>{flashcardsNextLesson}</React.Fragment>;
   }
 }
 
