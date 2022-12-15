@@ -16,28 +16,9 @@ import trimAndSumUniqMetWords from '../../utils/trimAndSumUniqMetWords';
 import { ReactComponent as AlertRobot } from '../../images/AlertRobot.svg';
 import { ReactComponent as BoredRobot } from '../../images/BoredRobot.svg';
 import { ReactComponent as HappyRobot } from '../../images/HappyRobot.svg';
+import formatSpacePlacementValue from './utils/formatSpacePlacementValue';
 
 let particles = [];
-
-const formatSpacePlacementValue = (userSettings) => {
-  if (!userSettings?.spacePlacement) {
-    return "not set"
-  }
-
-  switch (userSettings.spacePlacement) {
-    case "spaceBeforeOutput":
-      return "Space before output"
-    case "spaceAfterOutput":
-      return "Space after output"
-    case "spaceOff":
-      return "Ignore spaces"
-    case "spaceExact":
-      return "Exact spacing"
-
-    default:
-      return "not set"
-  }
-}
 
 const ProgressTooltip = ({ title, onShow, children }) => {
   return (
