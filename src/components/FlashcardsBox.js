@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import * as Utils from "./../utils/utils";
 
+// This magic time stamp matches the default time used in flashcardsRecommendations
+const defaultTimestamp = 1558144862000;
+
 class FlashcardsBox extends Component {
   moreFlashcards(event) {
     if (this.props.onSkip) {
@@ -22,8 +25,7 @@ class FlashcardsBox extends Component {
     );
     let flashcardsTimeSeenText = "Seen " + flashcardsTimeAgo + " ago";
 
-    // This magic time stamp matches the fallback time used in flashcardsRecommendations.js
-    if (flashcardsNextLesson.lastSeen === 1558144862000) {
+    if (flashcardsNextLesson.lastSeen === defaultTimestamp) {
       flashcardsTimeSeenText = "New flashcards";
     }
 
