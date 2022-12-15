@@ -19,6 +19,26 @@ import { ReactComponent as HappyRobot } from '../images/HappyRobot.svg';
 
 let particles = [];
 
+const formatSpacePlacementValue = (userSettings) => {
+  if (!userSettings?.spacePlacement) {
+    return "not set"
+  }
+
+  switch (userSettings.spacePlacement) {
+    case "spaceBeforeOutput":
+      return "Space before output"
+    case "spaceAfterOutput":
+      return "Space after output"
+    case "spaceOff":
+      return "Ignore spaces"
+    case "spaceExact":
+      return "Exact spacing"
+
+    default:
+      return "not set"
+  }
+}
+
 const ProgressTooltip = ({ title, onShow, children }) => {
   return (
     // @ts-ignore
@@ -546,26 +566,6 @@ class Progress extends Component {
     }
   }
 
-  formatSpacePlacementValue(userSettings) {
-    if (!userSettings?.spacePlacement) {
-      return "not set"
-    }
-
-    switch (userSettings.spacePlacement) {
-      case "spaceBeforeOutput":
-        return "Space before output"
-      case "spaceAfterOutput":
-        return "Space after output"
-      case "spaceOff":
-        return "Ignore spaces"
-      case "spaceExact":
-        return "Exact spacing"
-
-      default:
-        return "not set"
-    }
-  }
-
   makeDownloadHref(json) {
     if (Blob !== undefined) {
       return URL.createObjectURL(new Blob([JSON.stringify(json)], {type: "text/json"}));
@@ -1025,7 +1025,7 @@ class Progress extends Component {
             </div>
 
             <h3 id="vocabulary-progress">Vocabulary progress</h3>
-            <p className="bg-slat pl1 pr1">If you’ve changed your spacing settings, you can download a reformatted “progress file” to match your new setting. After downloading it, if you're happy it looks good you can load it back into Typey Type. Then visit each lesson to update lesson progress. Your current spacing setting is: {this.formatSpacePlacementValue(this.props.userSettings)}. <a href={downloadReformattedProgressHref} download={"typey-type-reformatted-progress-" + dashifiedDate + ".json"} onClick={this.downloadReformattedProgress.bind(this)}>Download reformatted progress file</a></p>
+            <p className="bg-slat pl1 pr1">If you’ve changed your spacing settings, you can download a reformatted “progress file” to match your new setting. After downloading it, if you're happy it looks good you can load it back into Typey Type. Then visit each lesson to update lesson progress. Your current spacing setting is: {formatSpacePlacementValue(this.props.userSettings)}. <a href={downloadReformattedProgressHref} download={"typey-type-reformatted-progress-" + dashifiedDate + ".json"} onClick={this.downloadReformattedProgress.bind(this)}>Download reformatted progress file</a></p>
             <p>Words you’ve seen and times you’ve typed them well:</p>
             <p id="js-metwords-from-typey-type" className="w-100 mt3 mb3 quote break-words whitespace-break-spaces"><small>{metWordsFromTypeyType}</small></p>
           </div>
