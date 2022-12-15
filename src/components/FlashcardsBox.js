@@ -12,13 +12,12 @@ class FlashcardsBox extends Component {
   render() {
     let {
       flashcardsNextLesson,
-      startFlashcards,
-      skipButtonId,
+      linkTitle,
       loadingLessonIndex,
+      skipButtonId,
+      startFlashcards,
     } = this.props;
     let flashcardsLink;
-    let flashcardsLinkTitle;
-    let studyType;
 
     let flashcardsTimeAgo = Utils.relativeTimeAgo(
       Date.now(),
@@ -42,17 +41,12 @@ class FlashcardsBox extends Component {
       </Link>
     );
 
-    flashcardsLinkTitle = flashcardsNextLesson.linkTitle;
-
-    if (studyType === "error") {
-      flashcardsLinkTitle = "Unable to load flashcards";
+    if (flashcardsNextLesson.linkTitle === "error") {
       flashcardsLink = (
         <a href="." className="link-button dib" style={{ lineHeight: 2 }}>
           Refresh
         </a>
       );
-    } else {
-      flashcardsLinkTitle = flashcardsNextLesson.linkTitle;
     }
 
     if (flashcardsNextLesson !== undefined && !loadingLessonIndex) {
@@ -60,7 +54,11 @@ class FlashcardsBox extends Component {
         <React.Fragment>
           <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
             <p className="text-right">
-              <strong>{flashcardsLinkTitle}</strong>
+              <strong>
+                {flashcardsNextLesson.linkTitle === "Error"
+                  ? "Unable to load flashcards"
+                  : flashcardsNextLesson.linkTitle}
+              </strong>
             </p>
             <p className="text-right de-emphasized">{flashcardsTimeSeenText}</p>
             <div className="flex flex-wrap justify-end">
