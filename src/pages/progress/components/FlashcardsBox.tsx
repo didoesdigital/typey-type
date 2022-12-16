@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import * as Utils from "../../../utils/utils";
 
-type FlashcardsNextLesson = {
+export type FlashcardsNextLesson = {
   /** Example: "Top 1000 words flashcards" */
   linkTitle: string;
   /** JavaScript timestamp e.g. 1558144862000 */
@@ -11,7 +11,7 @@ type FlashcardsNextLesson = {
   link: string;
 };
 
-type Props = {
+export type Props = {
   flashcardsNextLesson: FlashcardsNextLesson;
   loadingLessonIndex: boolean;
   onSkip: () => void;

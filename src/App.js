@@ -194,7 +194,7 @@ class App extends Component {
       fullscreen: false,
       globalUserSettings: {
         experiments: {},
-        flashcardsCourseLevel: "noviceCourse", // noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
+        flashcardsCourseLevel: "noviceCourse", // see types.ts noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
         writerInput: "qwerty", // qwerty || raw
         showMisstrokesInLookup: false
       },

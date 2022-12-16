@@ -295,9 +295,16 @@ export type SortOrder =
 
 export type Study = "discover" | "revise" | "drill" | "practice";
 
-export type OtherRecommendationsStudyType = "compete" | "game" | "wildcard" | "break";
+export type OtherRecommendationsStudyType =
+  | "compete"
+  | "game"
+  | "wildcard"
+  | "break";
 
-export type FullRecommendationsStudyType = Study | OtherRecommendationsStudyType | "error";
+export type FullRecommendationsStudyType =
+  | Study
+  | OtherRecommendationsStudyType
+  | "error";
 
 export type StenoLayout =
   | "stenoLayoutAmericanSteno"
@@ -403,7 +410,7 @@ export type CurrentLessonStrokes = {
   word: MaterialText;
 };
 
-export type Category = "Fundamentals" | "Drills" | "Stories" | "Collections" // maybe custom?
+export type Category = "Fundamentals" | "Drills" | "Stories" | "Collections"; // maybe custom?
 
 /**
  * Examples:
@@ -439,3 +446,10 @@ export type LessonIndexEntry = {
   /** Example: 52 */
   wordCount: number;
 };
+
+export type FlashcardsCourseLevel =
+  | "noviceCourse"
+  | "beginnerCourse"
+  | "competentCourse"
+  | "proficientCourse"
+  | "expertCourse";
