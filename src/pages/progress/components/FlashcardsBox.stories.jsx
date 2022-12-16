@@ -3,7 +3,7 @@ import FlashcardsBox from "./FlashcardsBox";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: "Progress/FlashcardsBox",
+  title: "Progress/FlashcardsSection/Box",
   component: FlashcardsBox,
 };
 
@@ -16,6 +16,7 @@ const Template = (args) => {
 };
 
 export const FlashcardsBoxStory = Template.bind({});
+FlashcardsBoxStory.storyName = "Box";
 FlashcardsBoxStory.args = {
   flashcardsNextLesson: {
     linkTitle: "Top 1000 words flashcards",
