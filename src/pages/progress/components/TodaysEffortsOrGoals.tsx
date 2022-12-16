@@ -20,6 +20,8 @@ type Props = {
   startingMetWordsToday: MetWords;
   todayNewWordCount: number;
   todayOldWordCount: number;
+  userGoalInputNewWords: number;
+  userGoalInputOldWords: number;
   userGoals: {
     oldWords: number;
     newWords: number;
@@ -62,6 +64,8 @@ const TodaysEffortsOrGoals = ({
   startingMetWordsToday,
   todayNewWordCount,
   todayOldWordCount,
+  userGoalInputNewWords,
+  userGoalInputOldWords,
   userGoals,
 }: Props) => {
   const grabStyle = function () {
@@ -99,7 +103,7 @@ const TodaysEffortsOrGoals = ({
                 step={1}
                 style={grabStyle()}
                 type="number"
-                value={userGoals.oldWords}
+                value={userGoalInputOldWords}
                 snap
               />
               <div className="mt1 text-small de-emphasized">
@@ -127,7 +131,7 @@ const TodaysEffortsOrGoals = ({
                 step={1}
                 style={grabStyle()}
                 type="number"
-                value={userGoals.newWords}
+                value={userGoalInputNewWords}
                 snap
               />
               <div className="mt1 text-small de-emphasized">
