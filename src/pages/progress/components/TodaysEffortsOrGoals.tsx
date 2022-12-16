@@ -20,18 +20,21 @@ type Props = {
   startingMetWordsToday: MetWords;
   todayNewWordCount: number;
   todayOldWordCount: number;
-  userGoalInputNewWords: number;
-  userGoalInputOldWords: number;
   userGoals: {
     oldWords: number;
     newWords: number;
   };
 };
 
-const renderTodaysEffortsGoals = (
-  userGoalsWords: number,
-  todayWordCount: number
-) => {
+type TodaysEffortsGoalsProps = {
+  userGoalsWords: number;
+  todayWordCount: number;
+};
+
+const TodaysEffortsGoals = ({
+  userGoalsWords,
+  todayWordCount,
+}: TodaysEffortsGoalsProps) => {
   return (
     <React.Fragment>
       {userGoalsWords}
@@ -59,8 +62,6 @@ const TodaysEffortsOrGoals = ({
   startingMetWordsToday,
   todayNewWordCount,
   todayOldWordCount,
-  userGoalInputNewWords,
-  userGoalInputOldWords,
   userGoals,
 }: Props) => {
   const grabStyle = function () {
@@ -98,7 +99,7 @@ const TodaysEffortsOrGoals = ({
                 step={1}
                 style={grabStyle()}
                 type="number"
-                value={userGoalInputOldWords}
+                value={userGoals.oldWords}
                 snap
               />
               <div className="mt1 text-small de-emphasized">
@@ -126,7 +127,7 @@ const TodaysEffortsOrGoals = ({
                 step={1}
                 style={grabStyle()}
                 type="number"
-                value={userGoalInputNewWords}
+                value={userGoals.newWords}
                 snap
               />
               <div className="mt1 text-small de-emphasized">
@@ -173,14 +174,6 @@ const TodaysEffortsOrGoals = ({
       </React.Fragment>
     );
   } else {
-    let yourOldWordsGoal = renderTodaysEffortsGoals(
-      userGoals.oldWords,
-      todayOldWordCount
-    );
-    let yourNewWordsGoal = renderTodaysEffortsGoals(
-      userGoals.newWords,
-      todayNewWordCount
-    );
     let todaysEffortsOldGoalsRow: JSX.Element | null = (
       <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
         <div className="flex todays-effort-goal-robot">
@@ -196,7 +189,13 @@ const TodaysEffortsOrGoals = ({
         <div>
           Old {todayOldWordCount !== 1 ? "words" : "word"}
           <br />
-          <span className="text-small">Your goal: {yourOldWordsGoal}</span>
+          <span className="text-small">
+            Your goal:{" "}
+            <TodaysEffortsGoals
+              userGoalsWords={userGoals.oldWords}
+              todayWordCount={todayOldWordCount}
+            />
+          </span>
         </div>
       </div>
     );
@@ -225,7 +224,13 @@ const TodaysEffortsOrGoals = ({
           <div>
             New {todayNewWordCount !== 1 ? "words" : "word"}
             <br />
-            <span className="text-small">Your goal: {yourNewWordsGoal}</span>
+            <span className="text-small">
+              Your goal:
+              <TodaysEffortsGoals
+                userGoalsWords={userGoals.newWords}
+                todayWordCount={todayNewWordCount}
+              />
+            </span>
           </div>
         </div>
         <div className="text-right">
