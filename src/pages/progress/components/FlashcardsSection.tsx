@@ -8,6 +8,7 @@ import type {
 import type { FlashcardsCourseLevel } from "../../../types";
 
 type Props = {
+  showOnSmallScreen: boolean;
   flashcardsCourseLevel: FlashcardsCourseLevel;
   changeFlashcardCourseLevel: () => void;
   flashcardsNextLesson: FlashcardsNextLesson;
@@ -18,6 +19,7 @@ type Props = {
 };
 
 const FlashcardsSection = ({
+  showOnSmallScreen,
   flashcardsCourseLevel,
   changeFlashcardCourseLevel,
   flashcardsNextLesson,
@@ -26,16 +28,29 @@ const FlashcardsSection = ({
   startFlashcards,
   onSkipFlashcards,
 }: Props) => (
-  <div className="p3 mx-auto mw-1024 show-sm-only">
-    <div className="mw100 w-336">
+  <div
+    className={`mx-auto${showOnSmallScreen ? " p3 mw-1024 show-sm-only" : ""}`}
+  >
+    <div className={`mw100${showOnSmallScreen ? " w-336" : ""}`}>
       <h3>Flashcards</h3>
       <ErrorBoundary relative={true}>
         <div className="clearfix mb2 mt2">
-          <label className="mb1 db" htmlFor="smFlashcardsCourseLevel">
+          <label
+            className="mb1 db"
+            htmlFor={
+              showOnSmallScreen
+                ? "smFlashcardsCourseLevel"
+                : "mdFlashcardsCourseLevel"
+            }
+          >
             Choose flashcard level
           </label>
           <select
-            id="smFlashcardsCourseLevel"
+            id={
+              showOnSmallScreen
+                ? "smFlashcardsCourseLevel"
+                : "mdFlashcardsCourseLevel"
+            }
             name="flashcardsCourseLevel"
             value={flashcardsCourseLevel}
             onChange={changeFlashcardCourseLevel}

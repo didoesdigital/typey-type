@@ -3,7 +3,6 @@ import PARAMS from '../../utils/params.js';
 import GoogleAnalytics from 'react-ga';
 import ErrorBoundary from '../../components/ErrorBoundary'
 import PseudoContentButton from '../../components/PseudoContentButton';
-import FlashcardsBox from './components/FlashcardsBox';
 import NumericInput from 'react-numeric-input';
 import RecommendationBox from './components/RecommendationBox';
 import RecentLessons from './components/RecentLessons';
@@ -17,6 +16,7 @@ import { ReactComponent as AlertRobot } from '../../images/AlertRobot.svg';
 import { ReactComponent as BoredRobot } from '../../images/BoredRobot.svg';
 import { ReactComponent as HappyRobot } from '../../images/HappyRobot.svg';
 import formatSpacePlacementValue from './utils/formatSpacePlacementValue';
+import FlashcardsSection from './components/FlashcardsSection';
 
 let particles = [];
 
@@ -901,34 +901,16 @@ class Progress extends Component {
           </div>
           <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
 
-          { showFlashcards ?
-            <div className="p3 mx-auto mw-1024 show-sm-only">
-              <div className="mw100 w-336">
-                <h3>Flashcards</h3>
-                <ErrorBoundary relative={true}>
-                  <div className="clearfix mb2 mt2">
-                    <label className="mb1 db" htmlFor="smFlashcardsCourseLevel">Choose flashcard level</label>
-                    <select id="smFlashcardsCourseLevel" name="flashcardsCourseLevel" value={this.props.globalUserSettings.flashcardsCourseLevel} onChange={this.props.changeFlashcardCourseLevel} className="form-control form-control--large mw100 w-336">
-                      <option value="noviceCourse">Novice</option>
-                      <option value="beginnerCourse">Beginner</option>
-                      <option value="competentCourse">Competent</option>
-                      <option value="proficientCourse">Proficient</option>
-                      <option value="expertCourse">Expert</option>
-                    </select>
-                  </div>
-                  <FlashcardsBox
-                    skipButtonId={mobileSkipButtonId}
-                    flashcardsNextLesson={this.props.flashcardsNextLesson}
-                    loadingLessonIndex={this.state.loadingLessonIndex}
-                    startFlashcards={this.startFlashcards.bind(this)}
-                    onSkip={this.onSkipFlashcards.bind(this)}
-                  />
-                </ErrorBoundary>
-              </div>
-            </div>
-            :
-            null
-          }
+          { showFlashcards && <FlashcardsSection
+            showOnSmallScreen={true}
+            changeFlashcardCourseLevel={this.props.changeFlashcardCourseLevel}
+            flashcardsCourseLevel={this.props.globalUserSettings.flashcardsCourseLevel}
+            flashcardsNextLesson={this.props.flashcardsNextLesson}
+            loadingLessonIndex={this.state.loadingLessonIndex}
+            onSkipFlashcards={this.onSkipFlashcards.bind(this)}
+            skipButtonId={mobileSkipButtonId}
+            startFlashcards={this.startFlashcards.bind(this)}
+          /> }
 
           {saveAndLoadPanels}
 
@@ -969,34 +951,16 @@ class Progress extends Component {
                     recentLessonHistory={this.props.recentLessonHistory}
                   />
                 </ErrorBoundary>
-                { showFlashcards ?
-                  <div className="mx-auto hide-sm-only">
-                    <div className="mw100">
-                      <h3>Flashcards</h3>
-                      <ErrorBoundary relative={true}>
-                        <div className="clearfix mb2 mt2">
-                          <label className="mb1 db" htmlFor="mdFlashcardsCourseLevel">Choose flashcard level</label>
-                          <select id="mdFlashcardsCourseLevel" name="flashcardsCourseLevel" value={this.props.globalUserSettings.flashcardsCourseLevel} onChange={this.props.changeFlashcardCourseLevel} className="form-control form-control--large mw100 w-336">
-                            <option value="noviceCourse">Novice</option>
-                            <option value="beginnerCourse">Beginner</option>
-                            <option value="competentCourse">Competent</option>
-                            <option value="proficientCourse">Proficient</option>
-                            <option value="expertCourse">Expert</option>
-                          </select>
-                        </div>
-                        <FlashcardsBox
-                          skipButtonId={skipButtonId}
-                          flashcardsNextLesson={this.props.flashcardsNextLesson}
-                          loadingLessonIndex={this.state.loadingLessonIndex}
-                          startFlashcards={this.startFlashcards.bind(this)}
-                          onSkip={this.onSkipFlashcards.bind(this)}
-                        />
-                      </ErrorBoundary>
-                    </div>
-                  </div>
-                  :
-                  null
-                }
+                { showFlashcards && <FlashcardsSection
+                  showOnSmallScreen={false}
+                  changeFlashcardCourseLevel={this.props.changeFlashcardCourseLevel}
+                  flashcardsCourseLevel={this.props.globalUserSettings.flashcardsCourseLevel}
+                  flashcardsNextLesson={this.props.flashcardsNextLesson}
+                  loadingLessonIndex={this.state.loadingLessonIndex}
+                  onSkipFlashcards={this.onSkipFlashcards.bind(this)}
+                  skipButtonId={skipButtonId}
+                  startFlashcards={this.startFlashcards.bind(this)}
+                /> }
               </div>
               <div className="mw-568">
                 <h3>Lessons progress</h3>
