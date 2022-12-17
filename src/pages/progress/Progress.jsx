@@ -399,7 +399,7 @@ class Progress extends Component {
     });
   }
 
-  revealCompletedGoals(oldGoal, newGoal) {
+  celebrateCompletedGoals(oldGoal, newGoal) {
     if (oldGoal && newGoal) {
       Confetti.setupCanvas({sparsity: 240, colors: 5}, 'js-confetti-target', particles);
     }
@@ -792,7 +792,7 @@ class Progress extends Component {
                   newWordsGoalUnveiled={this.props.newWordsGoalUnveiled}
                   oldWordsGoalMet={this.state.oldWordsGoalMet}
                   oldWordsGoalUnveiled={this.props.oldWordsGoalUnveiled}
-                  revealCompletedGoals={this.revealCompletedGoals.bind(this, this.state.oldWordsGoalMet && !this.props.oldWordsGoalUnveiled, this.state.newWordsGoalMet && !this.props.newWordsGoalUnveiled)}
+                  celebrateCompletedGoals={this.celebrateCompletedGoals.bind(this)}
                   saveGoals={this.saveGoals.bind(this)}
                   showSetGoalsForm={this.state.showSetGoalsForm}
                   showSetGoalsFormFn={this.showSetGoalsForm.bind(this)}

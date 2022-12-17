@@ -13,7 +13,7 @@ type Props = {
   newWordsGoalUnveiled: boolean;
   oldWordsGoalMet: boolean;
   oldWordsGoalUnveiled: boolean;
-  revealCompletedGoals: () => void;
+  celebrateCompletedGoals: (oldGoal: boolean, newGoal: boolean) => void;
   saveGoals: () => void;
   showSetGoalsForm: boolean;
   showSetGoalsFormFn: () => void;
@@ -57,7 +57,7 @@ const TodaysEffortsOrGoals = ({
   newWordsGoalUnveiled,
   oldWordsGoalMet,
   oldWordsGoalUnveiled,
-  revealCompletedGoals,
+  celebrateCompletedGoals,
   saveGoals,
   showSetGoalsForm,
   showSetGoalsFormFn,
@@ -71,6 +71,15 @@ const TodaysEffortsOrGoals = ({
   const grabStyle = function () {
     return false;
   };
+
+  function revealCompletedGoals() {
+    celebrateCompletedGoals(
+      oldWordsGoalMet && !oldWordsGoalUnveiled,
+      newWordsGoalMet && !newWordsGoalUnveiled
+    );
+
+    // update state for goalsness
+  }
 
   let todaysEffortsOrGoals;
   if (showSetGoalsForm) {
@@ -165,11 +174,7 @@ const TodaysEffortsOrGoals = ({
           </div>
           You completed a goal!
           <button
-            onClick={revealCompletedGoals.bind(
-              this,
-              oldWordsGoalMet && !oldWordsGoalUnveiled,
-              newWordsGoalMet && !newWordsGoalUnveiled
-            )}
+            onClick={revealCompletedGoals}
             className="button button--secondary mt3 dib"
           >
             Reveal
