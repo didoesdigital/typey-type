@@ -705,10 +705,6 @@ class Progress extends Component {
       }
     }
 
-    let showFlashcards = true;
-
-    const downloadProgressHref = makeDownloadHref(this.props.metWords);
-
     return (
       <div>
         <main id="main">
@@ -720,13 +716,13 @@ class Progress extends Component {
                 </header>
               </div>
               <div className="flex mxn2">
-                <a href={downloadProgressHref} download={formatProgressFileDownloadName("typey-type-progress-")} onClick={this.downloadProgress.bind(this)} className="link-button link-button-ghost table-cell mr1">Download progress file</a>
+                <a href={makeDownloadHref(this.props.metWords)} download={formatProgressFileDownloadName("typey-type-progress-")} onClick={this.downloadProgress.bind(this)} className="link-button link-button-ghost table-cell mr1">Download progress file</a>
               </div>
             </div>
           </div>
           <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
 
-          { showFlashcards && <FlashcardsSection
+          <FlashcardsSection
             showOnSmallScreen={true}
             changeFlashcardCourseLevel={this.props.changeFlashcardCourseLevel}
             flashcardsCourseLevel={this.props.globalUserSettings.flashcardsCourseLevel}
@@ -735,7 +731,7 @@ class Progress extends Component {
             onSkipFlashcards={this.onSkipFlashcards.bind(this)}
             skipButtonId={mobileSkipButtonId}
             startFlashcards={this.startFlashcards.bind(this)}
-          /> }
+          />
 
           {saveAndLoadPanels}
 
@@ -794,7 +790,7 @@ class Progress extends Component {
                     recentLessonHistory={this.props.recentLessonHistory}
                   />
                 </ErrorBoundary>
-                { showFlashcards && <FlashcardsSection
+                <FlashcardsSection
                   showOnSmallScreen={false}
                   changeFlashcardCourseLevel={this.props.changeFlashcardCourseLevel}
                   flashcardsCourseLevel={this.props.globalUserSettings.flashcardsCourseLevel}
@@ -803,7 +799,7 @@ class Progress extends Component {
                   onSkipFlashcards={this.onSkipFlashcards.bind(this)}
                   skipButtonId={skipButtonId}
                   startFlashcards={this.startFlashcards.bind(this)}
-                /> }
+                />
               </div>
               <div className="mw-568">
                 <h3>Lessons progress</h3>
