@@ -14,6 +14,7 @@ import trimAndSumUniqMetWords from '../../utils/trimAndSumUniqMetWords';
 import formatSpacePlacementValue from './utils/formatSpacePlacementValue';
 import FlashcardsSection from './components/FlashcardsSection';
 import TodaysEffortsOrGoals from './components/TodaysEffortsOrGoals';
+import makeDownloadHref from './utils/makeDownloadHref';
 
 let particles = [];
 
@@ -511,15 +512,6 @@ class Progress extends Component {
     }
   }
 
-  makeDownloadHref(json) {
-    if (Blob !== undefined) {
-      return URL.createObjectURL(new Blob([JSON.stringify(json)], {type: "text/json"}));
-    }
-    else {
-      return "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(json));
-    }
-  }
-
   render () {
     if (this.state.toRecommendedNextLesson === true) {
       return <Redirect push to={this.props.recommendedNextLesson.link} />
@@ -717,8 +709,8 @@ class Progress extends Component {
     let date = new Date();
     let dashifiedDate = date.toDateString().replace(/ /g,'-').toLowerCase();
 
-    const downloadProgressHref = this.makeDownloadHref(this.props.metWords);
-    const downloadReformattedProgressHref = this.makeDownloadHref(this.state.reformattedProgress);
+    const downloadProgressHref = makeDownloadHref(this.props.metWords);
+    const downloadReformattedProgressHref = makeDownloadHref(this.state.reformattedProgress);
 
     return (
       <div>

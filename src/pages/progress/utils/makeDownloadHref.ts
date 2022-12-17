@@ -1,4 +1,4 @@
-const makeDownloadHref = (json: JSON) =>
+const makeDownloadHref = (json: { [metWord: string]: number }) =>
   Blob !== undefined
     ? URL.createObjectURL(
         new Blob([JSON.stringify(json)], { type: "text/json" })
