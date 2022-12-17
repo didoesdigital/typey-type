@@ -11,10 +11,11 @@ import { IconCheckmark, IconTriangleRight } from '../../components/Icon';
 import { Link, Redirect } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
 import trimAndSumUniqMetWords from '../../utils/trimAndSumUniqMetWords';
-import formatSpacePlacementValue from './utils/formatSpacePlacementValue';
 import FlashcardsSection from './components/FlashcardsSection';
 import TodaysEffortsOrGoals from './components/TodaysEffortsOrGoals';
+import formatProgressFileDownloadName from "./utils/formatProgressFileDownloadName";
 import makeDownloadHref from './utils/makeDownloadHref';
+import ReformatProgress from './components/ReformatProgress';
 
 let particles = [];
 
@@ -706,11 +707,7 @@ class Progress extends Component {
 
     let showFlashcards = true;
 
-    let date = new Date();
-    let dashifiedDate = date.toDateString().replace(/ /g,'-').toLowerCase();
-
     const downloadProgressHref = makeDownloadHref(this.props.metWords);
-    const downloadReformattedProgressHref = makeDownloadHref(this.state.reformattedProgress);
 
     return (
       <div>
@@ -723,7 +720,7 @@ class Progress extends Component {
                 </header>
               </div>
               <div className="flex mxn2">
-                <a href={downloadProgressHref} download={"typey-type-progress-" + dashifiedDate + ".json"} onClick={this.downloadProgress.bind(this)} className="link-button link-button-ghost table-cell mr1">Download progress file</a>
+                <a href={downloadProgressHref} download={formatProgressFileDownloadName("typey-type-progress-")} onClick={this.downloadProgress.bind(this)} className="link-button link-button-ghost table-cell mr1">Download progress file</a>
               </div>
             </div>
           </div>
@@ -816,7 +813,11 @@ class Progress extends Component {
             </div>
 
             <h3 id="vocabulary-progress">Vocabulary progress</h3>
-            <p className="bg-slat pl1 pr1">If you’ve changed your spacing settings, you can download a reformatted “progress file” to match your new setting. After downloading it, if you're happy it looks good you can load it back into Typey Type. Then visit each lesson to update lesson progress. Your current spacing setting is: {formatSpacePlacementValue(this.props.userSettings)}. <a href={downloadReformattedProgressHref} download={"typey-type-reformatted-progress-" + dashifiedDate + ".json"} onClick={this.downloadReformattedProgress.bind(this)}>Download reformatted progress file</a></p>
+            <ReformatProgress
+              downloadReformattedProgress={this.downloadReformattedProgress.bind(this)}
+              reformattedProgress={this.state.reformattedProgress}
+              userSettings={this.props.userSettings}
+            />
             <p>Words you’ve seen and times you’ve typed them well:</p>
             <p id="js-metwords-from-typey-type" className="w-100 mt3 mb3 quote break-words whitespace-break-spaces"><small>{metWordsFromTypeyType}</small></p>
           </div>
