@@ -417,8 +417,6 @@ class Progress extends Component {
       newWordsGoalUnveiled = true;
     }
     this.props.updateUserGoalsUnveiled(oldWordsGoalUnveiled, newWordsGoalUnveiled);
-    const element = document.getElementById('js-todays-efforts');
-    if (element) { element.focus(); }
   }
 
   handleOldWordsGoalInputChange(event) {

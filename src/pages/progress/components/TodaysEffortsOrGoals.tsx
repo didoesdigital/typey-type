@@ -79,6 +79,11 @@ const TodaysEffortsOrGoals = ({
     );
 
     // update state for goalsness
+
+    const element = document.getElementById("js-todays-efforts");
+    if (element) {
+      element.focus();
+    }
   }
 
   let todaysEffortsOrGoals;
