@@ -3,7 +3,6 @@ import PARAMS from '../../utils/params.js';
 import GoogleAnalytics from 'react-ga';
 import ErrorBoundary from '../../components/ErrorBoundary'
 import PseudoContentButton from '../../components/PseudoContentButton';
-import NumericInput from 'react-numeric-input';
 import RecommendationBox from './components/RecommendationBox';
 import RecentLessons from './components/RecentLessons';
 import * as Confetti from '../../utils/confetti';
@@ -12,11 +11,9 @@ import { IconCheckmark, IconTriangleRight } from '../../components/Icon';
 import { Link, Redirect } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
 import trimAndSumUniqMetWords from '../../utils/trimAndSumUniqMetWords';
-import { ReactComponent as AlertRobot } from '../../images/AlertRobot.svg';
-import { ReactComponent as BoredRobot } from '../../images/BoredRobot.svg';
-import { ReactComponent as HappyRobot } from '../../images/HappyRobot.svg';
 import formatSpacePlacementValue from './utils/formatSpacePlacementValue';
 import FlashcardsSection from './components/FlashcardsSection';
+import TodaysEffortsOrGoals from './components/TodaysEffortsOrGoals';
 
 let particles = [];
 
@@ -454,27 +451,6 @@ class Progress extends Component {
     return event;
   }
 
-  renderTodaysEffortsGoals(userGoalsWords, todayWordCount) {
-    return (
-      <React.Fragment>
-        {userGoalsWords}{this.renderTodaysEffortsDoneness(userGoalsWords, todayWordCount)}
-      </React.Fragment>
-    );
-  }
-
-  renderTodaysEffortsDoneness(userGoalsWords, todayWordCount) {
-    if (userGoalsWords <= todayWordCount) {
-      return (
-        <React.Fragment>
-          <span aria-hidden="true"> •</span> Done!
-        </React.Fragment>
-      );
-    }
-    else {
-      return null;
-    }
-  }
-
   progressIconClasses(color, opacity) {
     return (
       `color-${color}-bright ` +
@@ -557,7 +533,6 @@ class Progress extends Component {
   }
 
   render () {
-    var grabStyle = function() {return false};
     if (this.state.toRecommendedNextLesson === true) {
       return <Redirect push to={this.props.recommendedNextLesson.link} />
     }
@@ -757,133 +732,6 @@ class Progress extends Component {
     const downloadProgressHref = this.makeDownloadHref(this.props.metWords);
     const downloadReformattedProgressHref = this.makeDownloadHref(this.state.reformattedProgress);
 
-    let oldWordsNumericInput = (
-      <NumericInput
-        autoCapitalize="off"
-        autoComplete="off"
-        autoCorrect="off"
-        autoFocus={false}
-        className="form-control w-100"
-        disabled={!this.state.showSetGoalsForm}
-        id="userGoalInputOldWords"
-        max={10000}
-        min={1}
-        name="userGoalInputOldWords"
-        onChange={this.handleOldWordsGoalInputChange.bind(this)}
-        precision={0}
-        spellCheck="false"
-        step={1}
-        style={grabStyle()}
-        type="number"
-        value={this.state.userGoalInputOldWords}
-        snap
-      />
-    );
-
-    let newWordsNumericInput = (
-      <NumericInput
-        autoCapitalize="off"
-        autoComplete="off"
-        autoCorrect="off"
-        autoFocus={false}
-        className="form-control w-100"
-        disabled={!this.state.showSetGoalsForm}
-        id="userGoalInputNewWords"
-        max={10000}
-        min={1}
-        name="userGoalInputNewWords"
-        onChange={this.handleNewWordsGoalInputChange.bind(this)}
-        precision={0}
-        spellCheck="false"
-        step={1}
-        style={grabStyle()}
-        type="number"
-        value={this.state.userGoalInputNewWords}
-        snap
-      />
-    );
-
-    let todaysEffortsOrGoals;
-    if (this.state.showSetGoalsForm) {
-      todaysEffortsOrGoals = (
-        <React.Fragment>
-          <form onSubmit={this.saveGoals.bind(this)}>
-            <div className="pt4 pb4">
-              <div className="mb3">
-                <label className="pb1" id="js-first-interactive-form-field-element" htmlFor="userGoalInputOldWords">Old words goal</label>
-                { oldWordsNumericInput }
-                <div className="mt1 text-small de-emphasized">
-                  (50–200 recommended)
-                </div>
-              </div>
-              <div className="mb3">
-                <label className="pb1" htmlFor="userGoalInputNewWords">New words goal</label>
-                { newWordsNumericInput }
-                <div className="mt1 text-small de-emphasized">
-                  (5–40 recommended)
-                </div>
-              </div>
-              <div className="flex flex-wrap justify-end">
-                <button onClick={this.cancelSetGoals.bind(this)} className="button button--secondary mr2 dib">Cancel</button>
-                <button onClick={this.saveGoals.bind(this)} className="button mr2 dib">Save goals</button>
-              </div>
-            </div>
-          </form>
-        </React.Fragment>
-      );
-    }
-    else if (
-      (this.state.oldWordsGoalMet && !this.props.oldWordsGoalUnveiled) ||
-      (this.state.newWordsGoalMet && !this.props.newWordsGoalUnveiled)
-    ) {
-      todaysEffortsOrGoals = (
-        <React.Fragment>
-          <div className="inline-flex flex-column items-center pt4 pb4 bb b--brand-primary-tint w-100">
-            <div className="todays-effort-reveal-robot">
-              <AlertRobot />
-            </div>
-            You completed a goal!
-            <button onClick={this.revealCompletedGoals.bind(this, this.state.oldWordsGoalMet && !this.props.oldWordsGoalUnveiled, this.state.newWordsGoalMet && !this.props.newWordsGoalUnveiled)} className="button button--secondary mt3 dib">Reveal</button>
-          </div>
-        </React.Fragment>
-      );
-    }
-    else {
-      let yourOldWordsGoal = this.renderTodaysEffortsGoals(this.props.userGoals.oldWords, this.state.todayOldWordCount);
-      let yourNewWordsGoal = this.renderTodaysEffortsGoals(this.props.userGoals.newWords, this.state.todayNewWordCount);
-      let todaysEffortsOldGoalsRow = (
-          <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
-            <div className="flex todays-effort-goal-robot">{ this.props.userGoals.oldWords <= this.state.todayOldWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
-            <div className="stat__number stat__number--display mr1">{this.state.todayOldWordCount}</div>
-            <div>
-              Old {this.state.todayOldWordCount !== 1 ? "words" : "word"}<br />
-              <span className="text-small">Your goal: {yourOldWordsGoal}</span>
-            </div>
-          </div>
-      );
-
-      if (!this.props.startingMetWordsToday || Object.keys(this.props.startingMetWordsToday).length < 15) {
-        todaysEffortsOldGoalsRow = null;
-      }
-
-      todaysEffortsOrGoals = (
-        <React.Fragment>
-          {todaysEffortsOldGoalsRow}
-          <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
-            <div className="flex todays-effort-goal-robot">{ this.props.userGoals.newWords <= this.state.todayNewWordCount ? <HappyRobot /> : <BoredRobot /> }</div>
-            <div className="stat__number stat__number--display mr1">{this.state.todayNewWordCount}</div>
-            <div>
-              New {this.state.todayNewWordCount !== 1 ? "words" : "word"}<br />
-              <span className="text-small">Your goal: {yourNewWordsGoal}</span>
-            </div>
-          </div>
-          <div className="text-right">
-            <button id="js-set-goals-button" onClick={this.showSetGoalsForm.bind(this)} className="button button--secondary mt3 dib">Set goals</button>
-          </div>
-        </React.Fragment>
-      );
-    }
-
     return (
       <div>
         <main id="main">
@@ -936,8 +784,25 @@ class Progress extends Component {
               </div>
 
               <div className="mw-368 flex-grow" id="js-confetti-target">
-                <h3 className="mt0 mb0 pt5 pb1 bb b--brand-primary-tint" id="js-todays-efforts" tabIndex={-1}>Today’s efforts</h3>
-                {todaysEffortsOrGoals}
+                <TodaysEffortsOrGoals
+                  cancelSetGoals={this.cancelSetGoals.bind(this)}
+                  handleNewWordsGoalInputChange={this.handleNewWordsGoalInputChange.bind(this)}
+                  handleOldWordsGoalInputChange={this.handleOldWordsGoalInputChange.bind(this)}
+                  newWordsGoalMet={this.state.newWordsGoalMet}
+                  newWordsGoalUnveiled={this.props.newWordsGoalUnveiled}
+                  oldWordsGoalMet={this.state.oldWordsGoalMet}
+                  oldWordsGoalUnveiled={this.props.oldWordsGoalUnveiled}
+                  revealCompletedGoals={this.revealCompletedGoals.bind(this, this.state.oldWordsGoalMet && !this.props.oldWordsGoalUnveiled, this.state.newWordsGoalMet && !this.props.newWordsGoalUnveiled)}
+                  saveGoals={this.saveGoals.bind(this)}
+                  showSetGoalsForm={this.state.showSetGoalsForm}
+                  showSetGoalsFormFn={this.showSetGoalsForm.bind(this)}
+                  startingMetWordsToday={this.props.startingMetWordsToday}
+                  todayNewWordCount={this.state.todayNewWordCount}
+                  todayOldWordCount={this.state.todayOldWordCount}
+                  userGoalInputOldWords={this.state.userGoalInputOldWords}
+                  userGoalInputNewWords={this.state.userGoalInputNewWords}
+                  userGoals={this.props.userGoals}
+                />
               </div>
             </div>
 
