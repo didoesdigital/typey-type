@@ -20,6 +20,10 @@ type Props = {
   startingMetWordsToday: MetWords;
   todayNewWordCount: number;
   todayOldWordCount: number;
+  updateUserGoalsUnveiled: (
+    oldWordsGoalUnveiled: boolean,
+    newWordsGoalUnveiled: boolean
+  ) => void;
   userGoalInputNewWords: number;
   userGoalInputOldWords: number;
   userGoals: {
@@ -64,6 +68,7 @@ const TodaysEffortsOrGoals = ({
   startingMetWordsToday,
   todayNewWordCount,
   todayOldWordCount,
+  updateUserGoalsUnveiled,
   userGoalInputNewWords,
   userGoalInputOldWords,
   userGoals,
@@ -78,7 +83,10 @@ const TodaysEffortsOrGoals = ({
       newWordsGoalMet && !newWordsGoalUnveiled
     );
 
-    // update state for goalsness
+    updateUserGoalsUnveiled(
+      oldWordsGoalMet ? true : oldWordsGoalUnveiled,
+      newWordsGoalMet ? true : newWordsGoalUnveiled,
+    );
 
     const element = document.getElementById("js-todays-efforts");
     if (element) {

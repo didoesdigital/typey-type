@@ -407,16 +407,6 @@ class Progress extends Component {
       Confetti.setupCanvas({sparsity: 960, colors: 2}, 'js-confetti-target', particles);
     }
     Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight );
-
-    let oldWordsGoalUnveiled = this.props.oldWordsGoalUnveiled;
-    let newWordsGoalUnveiled = this.props.newWordsGoalUnveiled;
-    if (this.state.oldWordsGoalMet) {
-      oldWordsGoalUnveiled = true;
-    }
-    if (this.state.newWordsGoalMet) {
-      newWordsGoalUnveiled = true;
-    }
-    this.props.updateUserGoalsUnveiled(oldWordsGoalUnveiled, newWordsGoalUnveiled);
   }
 
   handleOldWordsGoalInputChange(event) {
@@ -797,6 +787,7 @@ class Progress extends Component {
                   startingMetWordsToday={this.props.startingMetWordsToday}
                   todayNewWordCount={this.state.todayNewWordCount}
                   todayOldWordCount={this.state.todayOldWordCount}
+                  updateUserGoalsUnveiled={this.props.updateUserGoalsUnveiled}
                   userGoalInputOldWords={this.state.userGoalInputOldWords}
                   userGoalInputNewWords={this.state.userGoalInputNewWords}
                   userGoals={this.props.userGoals}
