@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import GoogleAnalytics from "react-ga";
 import formatSpacePlacementValue from "../utils/formatSpacePlacementValue";
 import makeDownloadHref from "../utils/makeDownloadHref";
@@ -19,7 +19,7 @@ const ReformatProgress = ({ metWords, userSettings }: Props) => {
     [reformattedProgress]
   );
 
-  const downloadReformattedProgress = () => {
+  const downloadReformattedProgress = useCallback(() => {
     const spacePlacement = userSettings.spacePlacement;
     let reformattedProgress = trimAndSumUniqMetWords(metWords);
 
@@ -46,7 +46,7 @@ const ReformatProgress = ({ metWords, userSettings }: Props) => {
       action: "Click",
       label: "typey-type-reformatted-progress.json",
     });
-  };
+  }, [metWords, userSettings.spacePlacement]);
 
   return (
     <p className="bg-slat pl1 pr1">
