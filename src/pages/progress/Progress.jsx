@@ -10,7 +10,6 @@ import { getLessonIndexData } from '../../utils/lessonIndexData';
 import { IconCheckmark, IconTriangleRight } from '../../components/Icon';
 import { Link, Redirect } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
-import trimAndSumUniqMetWords from '../../utils/trimAndSumUniqMetWords';
 import FlashcardsSection from './components/FlashcardsSection';
 import TodaysEffortsOrGoals from './components/TodaysEffortsOrGoals';
 import formatProgressFileDownloadName from "./utils/formatProgressFileDownloadName";
@@ -53,7 +52,6 @@ class Progress extends Component {
       showRecommendationsSurveyLink: true,
       showSetGoalsForm: false,
       progressPercent: 0,
-      reformattedProgress: {},
       yourWordCount: 0,
       yourSeenWordCount: 0,
       yourMemorisedWordCount: 0,
@@ -150,26 +148,6 @@ class Progress extends Component {
       category: 'Downloads',
       action: 'Click',
       label: 'typey-type-progress.json',
-    });
-  }
-
-  downloadReformattedProgress() {
-    let spacePlacement = this.props.userSettings.spacePlacement;
-    let reformattedProgress = trimAndSumUniqMetWords(this.props.metWords);
-
-    if (spacePlacement === "spaceBeforeOutput") {
-      reformattedProgress = Object.fromEntries(Object.entries(reformattedProgress).map(([word, count]) => [" " + word, count]));
-    }
-    else if (spacePlacement === "spaceAfterOutput") {
-      reformattedProgress = Object.fromEntries(Object.entries(reformattedProgress).map(([word, count]) => [word + " ", count]));
-    }
-
-    this.setState({reformattedProgress: reformattedProgress});
-
-    GoogleAnalytics.event({
-      category: 'Downloads',
-      action: 'Click',
-      label: 'typey-type-reformatted-progress.json',
     });
   }
 
@@ -810,8 +788,7 @@ class Progress extends Component {
 
             <h3 id="vocabulary-progress">Vocabulary progress</h3>
             <ReformatProgress
-              downloadReformattedProgress={this.downloadReformattedProgress.bind(this)}
-              reformattedProgress={this.state.reformattedProgress}
+              metWords={this.props.metWords}
               userSettings={this.props.userSettings}
             />
             <p>Words you’ve seen and times you’ve typed them well:</p>

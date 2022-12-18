@@ -1,24 +1,52 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
+import GoogleAnalytics from "react-ga";
 import formatSpacePlacementValue from "../utils/formatSpacePlacementValue";
 import makeDownloadHref from "../utils/makeDownloadHref";
+import trimAndSumUniqMetWords from "../../../utils/trimAndSumUniqMetWords";
 import formatProgressFileDownloadName from "../utils/formatProgressFileDownloadName";
 import type { MetWords, UserSettings } from "../../../types";
 
 type Props = {
-  downloadReformattedProgress: () => void;
-  reformattedProgress: MetWords;
+  metWords: MetWords;
   userSettings: UserSettings;
 };
 
-const ReformatProgress = ({
-  downloadReformattedProgress,
-  reformattedProgress,
-  userSettings,
-}: Props) => {
+const ReformatProgress = ({ metWords, userSettings }: Props) => {
+  const [reformattedProgress, setReformattedProgress] = useState({});
+
   const downloadReformattedProgressHref = useMemo(
     () => makeDownloadHref(reformattedProgress),
     [reformattedProgress]
   );
+
+  const downloadReformattedProgress = () => {
+    const spacePlacement = userSettings.spacePlacement;
+    let reformattedProgress = trimAndSumUniqMetWords(metWords);
+
+    if (spacePlacement === "spaceBeforeOutput") {
+      reformattedProgress = Object.fromEntries(
+        Object.entries(reformattedProgress).map(([word, count]) => [
+          " " + word,
+          count,
+        ])
+      );
+    } else if (spacePlacement === "spaceAfterOutput") {
+      reformattedProgress = Object.fromEntries(
+        Object.entries(reformattedProgress).map(([word, count]) => [
+          word + " ",
+          count,
+        ])
+      );
+    }
+
+    setReformattedProgress(reformattedProgress);
+
+    GoogleAnalytics.event({
+      category: "Downloads",
+      action: "Click",
+      label: "typey-type-reformatted-progress.json",
+    });
+  };
 
   return (
     <p className="bg-slat pl1 pr1">
