@@ -36,17 +36,22 @@ const ProgressSummaryAndLinks = ({
     );
   }
 
+  const IntroSentence = () => (
+    <>{`You’ve successfully typed ${yourWordCount} ${
+      yourWordCount === 1 ? "word" : "words"
+    } without misstrokes. `}</>
+  );
+
   let progressSummaryAndLinks = (
     <p>
-      You’ve successfully typed {yourWordCount} words without hints or
-      misstrokes.
+      <IntroSentence />
     </p>
   );
 
   if (yourSeenWordCount === 1 && yourMemorisedWordCount === 0) {
     progressSummaryAndLinks = (
       <p>
-        You’ve successfully typed {yourWordCount} word without misstrokes.{" "}
+        <IntroSentence />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
@@ -58,7 +63,7 @@ const ProgressSummaryAndLinks = ({
   if (yourSeenWordCount === 1 && yourMemorisedWordCount === 1) {
     progressSummaryAndLinks = (
       <p>
-        You’ve successfully typed {yourWordCount} words without misstrokes.{" "}
+        <IntroSentence />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
@@ -71,7 +76,7 @@ const ProgressSummaryAndLinks = ({
     // skipped, only pluralisation differs in links
     progressSummaryAndLinks = (
       <p>
-        You’ve successfully typed {yourWordCount} words without misstrokes.{" "}
+        <IntroSentence />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
@@ -83,7 +88,7 @@ const ProgressSummaryAndLinks = ({
   if (yourSeenWordCount === 0 && yourMemorisedWordCount === 1) {
     progressSummaryAndLinks = (
       <p>
-        You’ve successfully typed {yourWordCount} word without misstrokes.{" "}
+        <IntroSentence />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
@@ -96,7 +101,7 @@ const ProgressSummaryAndLinks = ({
     // skipped, only pluralisation differs in links
     progressSummaryAndLinks = (
       <p>
-        You’ve successfully typed {yourWordCount} words without misstrokes.{" "}
+        <IntroSentence />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
@@ -108,7 +113,7 @@ const ProgressSummaryAndLinks = ({
   if (yourSeenWordCount > 1 && yourMemorisedWordCount === 0) {
     progressSummaryAndLinks = (
       <p>
-        You’ve successfully typed {yourWordCount} words without misstrokes.
+        <IntroSentence />
         You’re {progressPercent}% of the way to 10,000 words.{" "}
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
@@ -121,7 +126,7 @@ const ProgressSummaryAndLinks = ({
   if (yourSeenWordCount > 1 && yourMemorisedWordCount === 1) {
     progressSummaryAndLinks = (
       <p>
-        You’ve successfully typed {yourWordCount} words without misstrokes.
+        <IntroSentence />
         You’re {progressPercent}% of the way to 10,000 words.{" "}
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
@@ -134,7 +139,7 @@ const ProgressSummaryAndLinks = ({
   if (yourSeenWordCount > 1 && yourMemorisedWordCount > 1) {
     progressSummaryAndLinks = (
       <p>
-        You’ve successfully typed {yourWordCount} words without misstrokes.
+        <IntroSentence />
         You’re {progressPercent}% of the way to 10,000 words.{" "}
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
