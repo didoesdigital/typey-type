@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { Link } from "react-router-dom";
+import ProgressLessonLinks from "./ProgressLessonLinks";
 
 type CompletedProps = {
   restartConfetti: (
@@ -37,11 +37,11 @@ const ProgressSummaryCompleted = ({
         </button>
       </p>
       <p>
-        <Link to="/lessons/progress/">Practice&nbsp;your words</Link>.{" "}
-        <Link to="/lessons/progress/memorised/">
-          Drill&nbsp;{yourMemorisedWordCount} memorised words
-        </Link>
-        .
+        <ProgressLessonLinks
+          yourWordCount={yourWordCount}
+          yourSeenWordCount={yourSeenWordCount}
+          yourMemorisedWordCount={yourMemorisedWordCount}
+        />
       </p>
     </React.Fragment>
   ) : (
@@ -61,15 +61,11 @@ const ProgressSummaryCompleted = ({
         </button>
       </p>
       <p>
-        <Link to="/lessons/progress/">Practice&nbsp;your words</Link>.{" "}
-        <Link to="/lessons/progress/memorised/">
-          Drill&nbsp;{yourMemorisedWordCount} memorised words
-        </Link>
-        .{" "}
-        <Link to="/lessons/progress/seen/">
-          Revise&nbsp;{yourSeenWordCount} seen words
-        </Link>
-        .
+        <ProgressLessonLinks
+          yourWordCount={yourWordCount}
+          yourSeenWordCount={yourSeenWordCount}
+          yourMemorisedWordCount={yourMemorisedWordCount}
+        />
       </p>
     </React.Fragment>
   );
