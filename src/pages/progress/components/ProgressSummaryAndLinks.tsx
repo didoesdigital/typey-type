@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import ProgressSummaryCompleted from "./ProgressSummaryCompleted";
 import ProgressLessonLinks from "./ProgressLessonLinks";
 
@@ -25,9 +25,15 @@ const ProgressSummaryAndLinks = ({
   yourSeenWordCount,
   yourMemorisedWordCount,
 }: Props) => {
-  const progressPercent =
-    Math.round((Object.keys(metWords).length / 10000) * 100) || 0;
-  const yourWordCount = Object.keys(metWords).length || 0;
+  const yourWordCount = useMemo(
+    () => Object.keys(metWords).length || 0,
+    [metWords]
+  );
+
+  const progressPercent = useMemo(
+    () => Math.round((yourWordCount / 10000) * 100) || 0,
+    [yourWordCount]
+  );
 
   const IntroSentence = () => (
     <>{`You’ve successfully typed ${yourWordCount} ${
