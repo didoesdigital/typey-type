@@ -1,4 +1,6 @@
 import { getRecommendedNextLesson } from './recommendations';
+import fetch from 'jest-fetch-mock';
+import { enableFetchMocks } from 'jest-fetch-mock'
 import { mockRandom, resetMockRandom } from 'jest-mock-random';
 
 import recommendationsJSON from '../../typey-type-data/lessons/recommendations.json'
@@ -12,6 +14,7 @@ import lessonsProgressExpert from './../fixtures/lessonsProgressExpert.json'
 
 import metWordsCompetent from './../fixtures/metWordsCompetent.json'
 
+enableFetchMocks()
 
 describe('recommended next lesson for novice stenographer', () => {
   it('returns recommended next lesson', () => {
