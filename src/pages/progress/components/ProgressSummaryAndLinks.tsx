@@ -3,24 +3,26 @@ import PARAMS from "../../../utils/params.js";
 import { Link } from "react-router-dom";
 
 type Props = {
-  yourWordCount: number;
-  yourMemorisedWordCount: number;
-  yourSeenWordCount: number;
+  /** Percent of 10,000 words typed, as number e.g. 10% is: `10` */
+  progressPercent: number;
   restartConfetti: (
     event:
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
       | React.KeyboardEvent<HTMLButtonElement>
   ) => void;
+  yourWordCount: number;
+  yourMemorisedWordCount: number;
+  yourSeenWordCount: number;
 };
 
 const ProgressSummaryAndLinks = ({
+  progressPercent,
+  restartConfetti,
   yourSeenWordCount,
   yourMemorisedWordCount,
   yourWordCount,
-  restartConfetti,
 }: Props) => {
   const celebrateButton = useRef<HTMLButtonElement>(null);
-  const progressPercent = 5;
 
   let progressSummaryAndLinks = (
     <p>

@@ -13,6 +13,7 @@ const Template = (args) => {
     <div className="p3 mx-auto mw-1024">
       <ProgressSummaryAndLinks
         {...args}
+        progressPercent={3}
         restartConfetti={() => {
           console.log("Restart confetti");
         }}
