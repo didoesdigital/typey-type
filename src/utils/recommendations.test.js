@@ -17,6 +17,10 @@ import metWordsCompetent from './../fixtures/metWordsCompetent.json'
 enableFetchMocks()
 
 describe('recommended next lesson for novice stenographer', () => {
+  beforeEach(() => {
+    fetch.resetMocks()
+  })
+
   it('returns recommended next lesson', () => {
     let metWords = {"was": 2, " has": 1, "the ": 8, "of": 5, "and": 3};
     let numberOfWordsSeen = 5;
