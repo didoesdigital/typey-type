@@ -56,4 +56,23 @@ describe("progress summary and links", () => {
       "Discover"
     );
   });
+
+  it("hides Drill link when there are no memorised words yet", () => {
+    render(
+      <Router basename="/typey-type">
+        <Route>
+          <div data-testid="test-wrapper">
+            <ProgressSummaryAndLinks
+              yourMemorisedWordCount={0}
+              yourSeenWordCount={10}
+              yourWordCount={10}
+            />
+          </div>
+        </Route>
+      </Router>
+    );
+
+    expect(screen.getByText(/Revise/i)).toBeInTheDocument();
+    expect(screen.getByTestId("test-wrapper")).not.toHaveTextContent("Drill");
+  });
 });
