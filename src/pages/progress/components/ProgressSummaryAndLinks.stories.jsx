@@ -26,8 +26,8 @@ ProgressSummaryAndLinksStory.storyName = "Summary and links";
 ProgressSummaryAndLinksStory.args = {
   metWords: metWordsNovice,
   restartConfetti: restartConfetti,
-  yourMemorisedWordCount: 1,
-  yourSeenWordCount: 1,
+  yourMemorisedWordCount: 0,
+  yourSeenWordCount: 128,
 };
 
 export const CompletedProgressSummaryAndLinksStory = (args) => (
