@@ -11,7 +11,12 @@ export default {
 const Template = (args) => {
   return (
     <div className="p3 mx-auto mw-1024">
-      <ProgressSummaryAndLinks {...args} />
+      <ProgressSummaryAndLinks
+        {...args}
+        restartConfetti={() => {
+          console.log("Restart confetti");
+        }}
+      />
     </div>
   );
 };

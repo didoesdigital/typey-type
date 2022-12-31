@@ -6,12 +6,18 @@ type Props = {
   yourWordCount: number;
   yourMemorisedWordCount: number;
   yourSeenWordCount: number;
+  restartConfetti: (
+    event:
+      | React.MouseEvent<HTMLButtonElement, MouseEvent>
+      | React.KeyboardEvent<HTMLButtonElement>
+  ) => void;
 };
 
 const ProgressSummaryAndLinks = ({
   yourSeenWordCount,
   yourMemorisedWordCount,
   yourWordCount,
+  restartConfetti,
 }: Props) => {
   const celebrateButton = useRef<HTMLButtonElement>(null);
   const progressPercent = 5;
@@ -35,8 +41,8 @@ const ProgressSummaryAndLinks = ({
               className="button-that-looks-like-a-link"
               ref={celebrateButton}
               id="celebrate-button"
-              onClick={() => console.log("TODO: CONFETTI")}
-              onKeyDown={() => console.log("TODO: CONFETTI")}
+              onClick={restartConfetti}
+              onKeyDown={restartConfetti}
             >
               celebrate!
             </button>
@@ -61,8 +67,8 @@ const ProgressSummaryAndLinks = ({
               className="button-that-looks-like-a-link"
               ref={celebrateButton}
               id="celebrate-button"
-              onClick={() => console.log("TODO: CONFETTI")}
-              onKeyDown={() => console.log("TODO: CONFETTI")}
+              onClick={restartConfetti}
+              onKeyDown={restartConfetti}
             >
               celebrate!
             </button>

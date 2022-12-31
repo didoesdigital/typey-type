@@ -12,6 +12,7 @@ describe("progress summary and links", () => {
             yourMemorisedWordCount={1}
             yourSeenWordCount={1}
             yourWordCount={2}
+            restartConfetti={() => undefined}
           />
         </Route>
       </Router>
@@ -28,6 +29,7 @@ describe("progress summary and links", () => {
             yourMemorisedWordCount={10000}
             yourSeenWordCount={10000}
             yourWordCount={20000}
+            restartConfetti={() => undefined}
           />
         </Route>
       </Router>
@@ -45,6 +47,7 @@ describe("progress summary and links", () => {
               yourMemorisedWordCount={10000}
               yourSeenWordCount={10000}
               yourWordCount={20000}
+              restartConfetti={() => undefined}
             />
           </div>
         </Route>
@@ -66,6 +69,7 @@ describe("progress summary and links", () => {
               yourMemorisedWordCount={0}
               yourSeenWordCount={10}
               yourWordCount={10}
+              restartConfetti={() => undefined}
             />
           </div>
         </Route>
