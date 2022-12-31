@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PARAMS from '../../utils/params.js';
 import GoogleAnalytics from 'react-ga';
 import ErrorBoundary from '../../components/ErrorBoundary'
 import PseudoContentButton from '../../components/PseudoContentButton';
@@ -15,6 +14,7 @@ import TodaysEffortsOrGoals from './components/TodaysEffortsOrGoals';
 import formatProgressFileDownloadName from "./utils/formatProgressFileDownloadName";
 import makeDownloadHref from './utils/makeDownloadHref';
 import ReformatProgress from './components/ReformatProgress';
+import ProgressSummaryAndLinks from "./components/ProgressSummaryAndLinks";
 
 let particles = [];
 
@@ -53,8 +53,6 @@ class Progress extends Component {
       showSetGoalsForm: false,
       progressPercent: 0,
       yourWordCount: 0,
-      yourSeenWordCount: 0,
-      yourMemorisedWordCount: 0,
       todayNewWordCount: 0,
       todayOldWordCount: 0,
       toRecommendedNextLesson: false,
@@ -131,8 +129,6 @@ class Progress extends Component {
       todayNewWordCount: todayNewWordCount,
       todayOldWordCount: todayOldWordCount,
       yourWordCount: yourWordCount,
-      yourSeenWordCount: this.props.yourSeenWordCount,
-      yourMemorisedWordCount: this.props.yourMemorisedWordCount
     });
   }
 
@@ -542,10 +538,6 @@ class Progress extends Component {
     });
 
     let metWordsFromTypeyType = JSON.stringify(this.props.metWords);
-    // let yourWordCount = Object.keys(this.props.metWords).length || 0;
-    // let yourSeenWordCount = Math.round(Object.values(this.props.metWords).filter( timesSeen => timesSeen > 0 && timesSeen < 30).length) || 0;
-    // let yourMemorisedWordCount = Math.round(Object.values(this.props.metWords).filter( timesSeen => timesSeen > 29).length) || 0;
-    // let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
 
     let saveAndLoadPanels = this.state.reducedSaveAndLoad ? null : (
       <div className="progress-layout pl3 pr3 pt3 mx-auto mw-1024">
@@ -617,71 +609,6 @@ class Progress extends Component {
       );
     }
 
-    // TODO: write a pluralisation function for this monstrosity and add tests
-    let progressSummaryAndLinks = (
-      <p>You’ve successfully typed {this.state.yourWordCount} words without hints or misstrokes.</p>
-    );
-
-    if (this.state.yourWordCount >= 10000) {
-      if (this.state.yourMemorisedWordCount >= 10000) {
-        progressSummaryAndLinks = (
-          <React.Fragment>
-            <p>Woohoo! You rock! What a magnificent effort to memorise 10,000 words. You are an expert stenographer now! You’ve successfully typed {this.state.yourWordCount} words without misstrokes. It’s time to <button className="button-that-looks-like-a-link" ref={(celebrateButton) => { this.celebrateButton = celebrateButton; }} id="celebrate-button" onClick={this.restartConfetti.bind(this)} onKeyDown={this.restartConfetti.bind(this)}>celebrate!</button></p>
-            <p><Link to='/lessons/progress/'>Practice&nbsp;your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>.</p>
-          </React.Fragment>
-        );
-      }
-      else {
-        progressSummaryAndLinks = (
-          <React.Fragment>
-            <p>Woohoo! You rock! You’ve successfully typed {this.state.yourWordCount} words without misstrokes. You are an accomplished stenographer now! You’ve completed 100% of 10,000 words. It’s time to <button className="button-that-looks-like-a-link" ref={(celebrateButton) => { this.celebrateButton = celebrateButton; }} id="celebrate-button" onClick={this.restartConfetti.bind(this)} onKeyDown={this.restartConfetti.bind(this)}>celebrate!</button></p>
-            <p><Link to='/lessons/progress/'>Practice&nbsp;your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen words</Link>.</p>
-          </React.Fragment>
-        );
-      }
-    }
-    else {
-      if (this.state.yourSeenWordCount === 1 && this.state.yourMemorisedWordCount === 0) {
-        progressSummaryAndLinks = (
-          <p>You’ve successfully typed {this.state.yourWordCount} word without misstrokes. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&' + PARAMS.discoverParams}>Discover new words</Link>.</p>
-        );
-      }
-      if (this.state.yourSeenWordCount === 1 && this.state.yourMemorisedWordCount === 1) {
-        progressSummaryAndLinks = (
-          <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&' + PARAMS.discoverParams}>Discover new words</Link>.</p>
-        );
-      }
-      if (this.state.yourSeenWordCount === 1 && this.state.yourMemorisedWordCount > 1) {
-        progressSummaryAndLinks = (
-          <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&' + PARAMS.discoverParams}>Discover new words</Link>.</p>
-        );
-      }
-      if (this.state.yourSeenWordCount === 0 && this.state.yourMemorisedWordCount === 1) {
-        progressSummaryAndLinks = (
-          <p>You’ve successfully typed {this.state.yourWordCount} word without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised word</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&' + PARAMS.discoverParams}>Discover new words</Link>.</p>
-        );
-      }
-      if (this.state.yourSeenWordCount === 0 && this.state.yourMemorisedWordCount > 1) {
-        progressSummaryAndLinks = (
-          <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&' + PARAMS.discoverParams}>Discover new words</Link>.</p>
-        );
-      }
-      if (this.state.yourSeenWordCount > 1 && this.state.yourMemorisedWordCount === 0) {
-        progressSummaryAndLinks = (
-          <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. You’re {this.state.progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&' + PARAMS.discoverParams}>Discover new words</Link>.</p>
-        );
-      }
-      if (this.state.yourSeenWordCount > 1 && this.state.yourMemorisedWordCount === 1) {
-        progressSummaryAndLinks = (
-          <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. You’re {this.state.progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised word</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&' + PARAMS.discoverParams}>Discover new words</Link>.</p>
-        );
-      }
-      if (this.state.yourSeenWordCount > 1 && this.state.yourMemorisedWordCount > 1) {
-        progressSummaryAndLinks = (
-          <p>You’ve successfully typed {this.state.yourWordCount} words without misstrokes. You’re {this.state.progressPercent}% of the way to 10,000 words. <Link to='/lessons/progress/'>Practice&nbsp;your words</Link>. <Link to='/lessons/progress/memorised/'>Drill&nbsp;{this.state.yourMemorisedWordCount} memorised words</Link>. <Link to='/lessons/progress/seen/'>Revise&nbsp;{this.state.yourSeenWordCount} seen words</Link>. <Link to={'/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&' + PARAMS.discoverParams}>Discover new words</Link>.</p>
-        );
-      }
-    }
 
     return (
       <div>
@@ -719,7 +646,12 @@ class Progress extends Component {
               {reducedSaveAndLoadForms}
             </div>
 
-            {progressSummaryAndLinks}
+            <ProgressSummaryAndLinks
+              metWords={this.props.metWords}
+              restartConfetti={this.restartConfetti.bind(this)}
+              yourMemorisedWordCount={this.props.yourMemorisedWordCount}
+              yourSeenWordCount={this.props.yourSeenWordCount}
+            />
 
             <div className="flex flex-wrap justify-between pt3">
               <div className="mw-568 mr3 flex-grow nt-1">
