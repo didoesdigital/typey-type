@@ -15,6 +15,10 @@ type Props = {
   yourSeenWordCount: number;
 };
 
+type MaybeProgressPercentSentenceProps = {
+  yourSeenWordCount: number;
+};
+
 const ProgressSummaryAndLinks = ({
   metWords,
   restartConfetti,
@@ -25,26 +29,11 @@ const ProgressSummaryAndLinks = ({
     Math.round((Object.keys(metWords).length / 10000) * 100) || 0;
   const yourWordCount = Object.keys(metWords).length || 0;
 
-  if (yourWordCount >= 10000) {
-    return (
-      <ProgressSummaryCompleted
-        restartConfetti={restartConfetti}
-        yourWordCount={yourWordCount}
-        yourMemorisedWordCount={yourMemorisedWordCount}
-        yourSeenWordCount={yourSeenWordCount}
-      />
-    );
-  }
-
   const IntroSentence = () => (
     <>{`You’ve successfully typed ${yourWordCount} ${
       yourWordCount === 1 ? "word" : "words"
     } without misstrokes. `}</>
   );
-
-  type MaybeProgressPercentSentenceProps = {
-    yourSeenWordCount: number;
-  };
 
   const MaybeProgressPercentSentence = ({
     yourSeenWordCount,
@@ -53,120 +42,24 @@ const ProgressSummaryAndLinks = ({
       <>{`You’re ${progressPercent}% of the way to 10,000 words. `}</>
     ) : null;
 
-  let progressSummaryAndLinks = (
+  return yourWordCount >= 10000 ? (
+    <ProgressSummaryCompleted
+      restartConfetti={restartConfetti}
+      yourWordCount={yourWordCount}
+      yourMemorisedWordCount={yourMemorisedWordCount}
+      yourSeenWordCount={yourSeenWordCount}
+    />
+  ) : (
     <p>
       <IntroSentence />
+      <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
+      <ProgressLessonLinks
+        yourWordCount={yourWordCount}
+        yourSeenWordCount={yourSeenWordCount}
+        yourMemorisedWordCount={yourMemorisedWordCount}
+      />
     </p>
   );
-
-  if (yourSeenWordCount === 1 && yourMemorisedWordCount === 0) {
-    progressSummaryAndLinks = (
-      <p>
-        <IntroSentence />
-        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
-        <ProgressLessonLinks
-          yourWordCount={yourWordCount}
-          yourSeenWordCount={yourSeenWordCount}
-          yourMemorisedWordCount={yourMemorisedWordCount}
-        />
-      </p>
-    );
-  }
-  if (yourSeenWordCount === 1 && yourMemorisedWordCount === 1) {
-    progressSummaryAndLinks = (
-      <p>
-        <IntroSentence />
-        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
-        <ProgressLessonLinks
-          yourWordCount={yourWordCount}
-          yourSeenWordCount={yourSeenWordCount}
-          yourMemorisedWordCount={yourMemorisedWordCount}
-        />
-      </p>
-    );
-  }
-  if (yourSeenWordCount === 1 && yourMemorisedWordCount > 1) {
-    // skipped, only pluralisation differs in links
-    progressSummaryAndLinks = (
-      <p>
-        <IntroSentence />
-        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
-        <ProgressLessonLinks
-          yourWordCount={yourWordCount}
-          yourSeenWordCount={yourSeenWordCount}
-          yourMemorisedWordCount={yourMemorisedWordCount}
-        />
-      </p>
-    );
-  }
-  if (yourSeenWordCount === 0 && yourMemorisedWordCount === 1) {
-    progressSummaryAndLinks = (
-      <p>
-        <IntroSentence />
-        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
-        <ProgressLessonLinks
-          yourWordCount={yourWordCount}
-          yourSeenWordCount={yourSeenWordCount}
-          yourMemorisedWordCount={yourMemorisedWordCount}
-        />
-      </p>
-    );
-  }
-  if (yourSeenWordCount === 0 && yourMemorisedWordCount > 1) {
-    // skipped, only pluralisation differs in links
-    progressSummaryAndLinks = (
-      <p>
-        <IntroSentence />
-        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
-        <ProgressLessonLinks
-          yourWordCount={yourWordCount}
-          yourSeenWordCount={yourSeenWordCount}
-          yourMemorisedWordCount={yourMemorisedWordCount}
-        />
-      </p>
-    );
-  }
-  if (yourSeenWordCount > 1 && yourMemorisedWordCount === 0) {
-    progressSummaryAndLinks = (
-      <p>
-        <IntroSentence />
-        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
-        <ProgressLessonLinks
-          yourWordCount={yourWordCount}
-          yourSeenWordCount={yourSeenWordCount}
-          yourMemorisedWordCount={yourMemorisedWordCount}
-        />
-      </p>
-    );
-  }
-  if (yourSeenWordCount > 1 && yourMemorisedWordCount === 1) {
-    progressSummaryAndLinks = (
-      <p>
-        <IntroSentence />
-        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
-        <ProgressLessonLinks
-          yourWordCount={yourWordCount}
-          yourSeenWordCount={yourSeenWordCount}
-          yourMemorisedWordCount={yourMemorisedWordCount}
-        />
-      </p>
-    );
-  }
-  if (yourSeenWordCount > 1 && yourMemorisedWordCount > 1) {
-    progressSummaryAndLinks = (
-      <p>
-        <IntroSentence />
-        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
-        <ProgressLessonLinks
-          yourWordCount={yourWordCount}
-          yourSeenWordCount={yourSeenWordCount}
-          yourMemorisedWordCount={yourMemorisedWordCount}
-        />
-      </p>
-    );
-  }
-
-  return progressSummaryAndLinks;
 };
 
 export default ProgressSummaryAndLinks;
