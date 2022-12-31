@@ -66,7 +66,7 @@ describe("sortLesson", () => {
         sortOrder: "sortRandom",
         spacePlacement: "spaceOff",
       };
-      mockRandomForEach(0.1);
+      mockRandomForEach([0.1]);
       it("should present material in a randomised order", () => {
         expect(
           sortLesson(presentedMaterial, metWords, userSettings)
