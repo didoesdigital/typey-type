@@ -42,6 +42,17 @@ const ProgressSummaryAndLinks = ({
     } without misstrokes. `}</>
   );
 
+  type MaybeProgressPercentSentenceProps = {
+    yourSeenWordCount: number;
+  };
+
+  const MaybeProgressPercentSentence = ({
+    yourSeenWordCount,
+  }: MaybeProgressPercentSentenceProps) =>
+    yourSeenWordCount > 1 ? (
+      <>{`You’re ${progressPercent}% of the way to 10,000 words. `}</>
+    ) : null;
+
   let progressSummaryAndLinks = (
     <p>
       <IntroSentence />
@@ -52,6 +63,7 @@ const ProgressSummaryAndLinks = ({
     progressSummaryAndLinks = (
       <p>
         <IntroSentence />
+        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
@@ -64,6 +76,7 @@ const ProgressSummaryAndLinks = ({
     progressSummaryAndLinks = (
       <p>
         <IntroSentence />
+        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
@@ -77,6 +90,7 @@ const ProgressSummaryAndLinks = ({
     progressSummaryAndLinks = (
       <p>
         <IntroSentence />
+        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
@@ -89,6 +103,7 @@ const ProgressSummaryAndLinks = ({
     progressSummaryAndLinks = (
       <p>
         <IntroSentence />
+        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
@@ -102,6 +117,7 @@ const ProgressSummaryAndLinks = ({
     progressSummaryAndLinks = (
       <p>
         <IntroSentence />
+        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
@@ -114,7 +130,7 @@ const ProgressSummaryAndLinks = ({
     progressSummaryAndLinks = (
       <p>
         <IntroSentence />
-        You’re {progressPercent}% of the way to 10,000 words.{" "}
+        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
@@ -127,7 +143,7 @@ const ProgressSummaryAndLinks = ({
     progressSummaryAndLinks = (
       <p>
         <IntroSentence />
-        You’re {progressPercent}% of the way to 10,000 words.{" "}
+        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
@@ -140,7 +156,7 @@ const ProgressSummaryAndLinks = ({
     progressSummaryAndLinks = (
       <p>
         <IntroSentence />
-        You’re {progressPercent}% of the way to 10,000 words.{" "}
+        <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
         <ProgressLessonLinks
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
