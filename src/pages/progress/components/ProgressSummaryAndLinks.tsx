@@ -2,9 +2,10 @@ import React, { useRef } from "react";
 import PARAMS from "../../../utils/params.js";
 import { Link } from "react-router-dom";
 
+import type { MetWords } from "../../../types";
+
 type Props = {
-  /** Percent of 10,000 words typed, as number e.g. 10% is: `10` */
-  progressPercent: number;
+  metWords: MetWords;
   restartConfetti: (
     event:
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -16,13 +17,15 @@ type Props = {
 };
 
 const ProgressSummaryAndLinks = ({
-  progressPercent,
+  metWords,
   restartConfetti,
   yourSeenWordCount,
   yourMemorisedWordCount,
   yourWordCount,
 }: Props) => {
   const celebrateButton = useRef<HTMLButtonElement>(null);
+  const progressPercent =
+    Math.round((Object.keys(metWords).length / 10000) * 100) || 0;
 
   let progressSummaryAndLinks = (
     <p>

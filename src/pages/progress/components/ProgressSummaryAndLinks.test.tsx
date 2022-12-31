@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 import ProgressSummaryAndLinks from "./ProgressSummaryAndLinks";
+import metWordsNovice from "../../../fixtures/metWordsNovice.json";
 
 describe("progress summary and links", () => {
   it("renders", () => {
@@ -9,7 +10,7 @@ describe("progress summary and links", () => {
       <Router basename="/typey-type">
         <Route>
           <ProgressSummaryAndLinks
-            progressPercent={3}
+            metWords={metWordsNovice}
             restartConfetti={() => undefined}
             yourMemorisedWordCount={1}
             yourSeenWordCount={1}
@@ -27,7 +28,7 @@ describe("progress summary and links", () => {
       <Router basename="/typey-type">
         <Route>
           <ProgressSummaryAndLinks
-            progressPercent={3}
+            metWords={metWordsNovice}
             restartConfetti={() => undefined}
             yourMemorisedWordCount={10000}
             yourSeenWordCount={10000}
@@ -46,7 +47,7 @@ describe("progress summary and links", () => {
         <Route>
           <div data-testid="test-wrapper">
             <ProgressSummaryAndLinks
-              progressPercent={3}
+              metWords={metWordsNovice}
               restartConfetti={() => undefined}
               yourMemorisedWordCount={10000}
               yourSeenWordCount={10000}
@@ -69,7 +70,7 @@ describe("progress summary and links", () => {
         <Route>
           <div data-testid="test-wrapper">
             <ProgressSummaryAndLinks
-              progressPercent={3}
+              metWords={metWordsNovice}
               restartConfetti={() => undefined}
               yourMemorisedWordCount={0}
               yourSeenWordCount={10}

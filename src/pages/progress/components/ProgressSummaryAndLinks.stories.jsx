@@ -1,5 +1,6 @@
 import React from "react";
 import ProgressSummaryAndLinks from "./ProgressSummaryAndLinks";
+import metWordsNovice from "../../../fixtures/metWordsNovice.json";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -13,7 +14,7 @@ const Template = (args) => {
     <div className="p3 mx-auto mw-1024">
       <ProgressSummaryAndLinks
         {...args}
-        progressPercent={3}
+        metWords={metWordsNovice}
         restartConfetti={() => {
           console.log("Restart confetti");
         }}
