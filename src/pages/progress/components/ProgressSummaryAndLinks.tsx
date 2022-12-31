@@ -11,7 +11,7 @@ const ProgressSummaryAndLinks = ({
   yourMemorisedWordCount,
   yourWordCount,
 }: Props) => {
-  return <></>;
+  return <>test progress summary and links</>;
 };
 
 export default ProgressSummaryAndLinks;
