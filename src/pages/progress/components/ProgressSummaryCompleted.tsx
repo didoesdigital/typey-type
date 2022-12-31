@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import ProgressLessonLinks from "./ProgressLessonLinks";
 
 type CompletedProps = {
@@ -18,8 +18,6 @@ const ProgressSummaryCompleted = ({
   yourMemorisedWordCount,
   yourSeenWordCount,
 }: CompletedProps) => {
-  const celebrateButton = useRef<HTMLButtonElement>(null);
-
   return (
     <>
       <p>
@@ -38,7 +36,6 @@ const ProgressSummaryCompleted = ({
         )}
         <button
           className="button-that-looks-like-a-link"
-          ref={celebrateButton}
           id="celebrate-button"
           onClick={restartConfetti}
           onKeyDown={restartConfetti}
