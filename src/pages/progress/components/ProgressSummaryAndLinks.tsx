@@ -11,7 +11,6 @@ type Props = {
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
       | React.KeyboardEvent<HTMLButtonElement>
   ) => void;
-  yourWordCount: number;
   yourMemorisedWordCount: number;
   yourSeenWordCount: number;
 };
@@ -21,11 +20,11 @@ const ProgressSummaryAndLinks = ({
   restartConfetti,
   yourSeenWordCount,
   yourMemorisedWordCount,
-  yourWordCount,
 }: Props) => {
   const celebrateButton = useRef<HTMLButtonElement>(null);
   const progressPercent =
     Math.round((Object.keys(metWords).length / 10000) * 100) || 0;
+  const yourWordCount = Object.keys(metWords).length || 0;
 
   let progressSummaryAndLinks = (
     <p>

@@ -28,5 +28,4 @@ ProgressSummaryAndLinksStory.storyName = "Summary and links";
 ProgressSummaryAndLinksStory.args = {
   yourMemorisedWordCount: 1,
   yourSeenWordCount: 1,
-  yourWordCount: 2,
 };
