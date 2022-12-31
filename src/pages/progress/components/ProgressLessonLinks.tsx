@@ -19,7 +19,7 @@ const getDrillMemorisedLink = (memorised: number) =>
   memorised > 0 ? (
     <>
       <Link to="/lessons/progress/memorised/">
-        Drill&nbsp;{memorised} memorised word
+        Drill&nbsp;{memorised} memorised word{memorised === 1 ? "" : "s"}
       </Link>
       .{" "}
     </>
@@ -28,7 +28,10 @@ const getDrillMemorisedLink = (memorised: number) =>
 const getReviseSeenLink = (seen: number) =>
   seen > 0 ? (
     <>
-      <Link to="/lessons/progress/seen/">Revise&nbsp;{seen} seen words</Link>.{" "}
+      <Link to="/lessons/progress/seen/">
+        Revise&nbsp;{seen} seen word{seen === 1 ? "" : "s"}
+      </Link>
+      .{" "}
     </>
   ) : null;
 
