@@ -36,7 +36,7 @@ const getReviseSeenLink = (seen: number) =>
   ) : null;
 
 const getDiscoverNewLink = (yourWordCount: number) =>
-  yourWordCount < 10000 ? (
+  yourWordCount < 10000 && yourWordCount > 0 ? (
     <>
       <Link
         to={
