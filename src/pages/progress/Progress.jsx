@@ -9,11 +9,10 @@ import { getLessonIndexData } from '../../utils/lessonIndexData';
 import { Link, Redirect } from 'react-router-dom';
 import FlashcardsSection from './components/FlashcardsSection';
 import TodaysEffortsOrGoals from './components/TodaysEffortsOrGoals';
-import formatProgressFileDownloadName from "./utils/formatProgressFileDownloadName";
-import makeDownloadHref from './utils/makeDownloadHref';
 import ReformatProgress from './components/ReformatProgress';
 import ProgressSummaryAndLinks from "./components/ProgressSummaryAndLinks";
 import LessonsProgress from "./components/LessonsProgress";
+import DownloadProgressButton from "./components/DownloadProgressButton";
 
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
@@ -116,14 +115,6 @@ class Progress extends Component {
     this.setState({
       loadingLessonIndex: false,
       loadingLessonIndexError: false
-    });
-  }
-
-  downloadProgress() {
-    GoogleAnalytics.event({
-      category: 'Downloads',
-      action: 'Click',
-      label: 'typey-type-progress.json',
     });
   }
 
@@ -426,7 +417,7 @@ class Progress extends Component {
                 </header>
               </div>
               <div className="flex mxn2">
-                <a href={makeDownloadHref(this.props.metWords)} download={formatProgressFileDownloadName("typey-type-progress-")} onClick={this.downloadProgress.bind(this)} className="link-button link-button-ghost table-cell mr1">Download progress file</a>
+                <DownloadProgressButton metWords={this.props.metWords} />
               </div>
             </div>
           </div>
