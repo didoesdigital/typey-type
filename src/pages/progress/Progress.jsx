@@ -6,37 +6,16 @@ import RecommendationBox from './components/RecommendationBox';
 import RecentLessons from './components/RecentLessons';
 import * as Confetti from '../../utils/confetti';
 import { getLessonIndexData } from '../../utils/lessonIndexData';
-import { IconCheckmark, IconTriangleRight } from '../../components/Icon';
 import { Link, Redirect } from 'react-router-dom';
-import { Tooltip } from 'react-tippy';
 import FlashcardsSection from './components/FlashcardsSection';
 import TodaysEffortsOrGoals from './components/TodaysEffortsOrGoals';
 import formatProgressFileDownloadName from "./utils/formatProgressFileDownloadName";
 import makeDownloadHref from './utils/makeDownloadHref';
 import ReformatProgress from './components/ReformatProgress';
 import ProgressSummaryAndLinks from "./components/ProgressSummaryAndLinks";
+import LessonsProgress from "./components/LessonsProgress";
 
 let particles = [];
-
-const ProgressTooltip = ({ title, onShow, children }) => {
-  return (
-    // @ts-ignore
-    <Tooltip
-      title={title}
-      className=""
-      animation="shift"
-      arrow="true"
-      duration="200"
-      tabIndex={0}
-      tag="span"
-      theme="didoesdigital didoesdigital-sm"
-      trigger="mouseenter focus click"
-      onShow={onShow}
-    >
-      {children}
-    </Tooltip>
-  );
-};
 
 class Progress extends Component {
   constructor(props) {
@@ -415,69 +394,6 @@ class Progress extends Component {
     return event;
   }
 
-  progressIconClasses(color, opacity) {
-    return (
-      `color-${color}-bright ` +
-      `o-${opacity} ` +
-      "progress-circle " +
-      "svg-baseline " +
-      "svg-icon-wrapper"
-    );
-  }
-
-  unstarted() {
-    return (
-      <ProgressTooltip
-        title="Unstarted"
-        onShow={this.props.setAnnouncementMessage}
-      >
-        <div
-          aria-hidden="true"
-          className={this.progressIconClasses("purple", 30)}
-        />
-        <span className="visually-hidden">Unstarted</span>
-      </ProgressTooltip>
-    );
-  }
-
-  inProgress() {
-    return (
-      <ProgressTooltip
-        title="In progress"
-        onShow={this.props.setAnnouncementMessage}
-      >
-        <IconTriangleRight
-          ariaHidden="true"
-          role="presentation"
-          className={this.progressIconClasses("purple", 100)}
-          iconTitle=""
-        />
-        <span className="visually-hidden">In progress</span>
-      </ProgressTooltip>
-    );
-  }
-
-  lessonComplete() {
-    return (
-      <ProgressTooltip
-        title="100 words done or lesson complete"
-        onShow={this.props.setAnnouncementMessage}
-      >
-        <IconCheckmark
-          ariaHidden="true"
-          role="presentation"
-          className={this.progressIconClasses("green", 100)}
-          iconWidth="16"
-          iconHeight="16"
-          iconTitle=""
-        />
-        <span className="visually-hidden">
-          100 words done or lesson complete
-        </span>
-      </ProgressTooltip>
-    );
-  }
-
   restartConfetti(event) {
     if (event && ((event.keyCode && event.keyCode === 13) || event.type === "click")) {
       particles.splice(0);
@@ -498,44 +414,6 @@ class Progress extends Component {
 
     let skipButtonId = "js-flashcards-skip-button";
     let mobileSkipButtonId = "js-mobile-flashcards-skip-button";
-
-    let lessonsProgressFromTypeyType = this.props.lessonsProgress;
-    const linkList = this.props.lessonIndex.map( (lesson) => {
-      let lessonsubtitle = '';
-      let wordCountDenominator = 0;
-      let numberOfWordsSeenOrMemorised = 0;
-      let lessonCompletion;
-      if (lesson.subtitle && lesson.subtitle.length > 0) {
-        lessonsubtitle = ': '+lesson.subtitle;
-      }
-      if (lesson.wordCount && lesson.wordCount > 0) {
-        wordCountDenominator = lesson.wordCount;
-      }
-      if (lessonsProgressFromTypeyType && lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]) {
-        let toDiscover = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]?.numberOfWordsToDiscover || 0;
-        let seen = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]?.numberOfWordsSeen || 0;
-        let memorised = lessonsProgressFromTypeyType[process.env.PUBLIC_URL + "/lessons" + lesson.path]?.numberOfWordsMemorised || 0;
-        numberOfWordsSeenOrMemorised = seen + memorised;
-        wordCountDenominator = seen + memorised + toDiscover;
-        if ((numberOfWordsSeenOrMemorised >= wordCountDenominator) || (numberOfWordsSeenOrMemorised > 100)) {
-          if (numberOfWordsSeenOrMemorised >= wordCountDenominator) { numberOfWordsSeenOrMemorised = wordCountDenominator; }
-          lessonCompletion = this.lessonComplete();
-        } else if (numberOfWordsSeenOrMemorised > 0) {
-          lessonCompletion = this.inProgress();
-        } else {
-          lessonCompletion = this.unstarted();
-        }
-      } else {
-        lessonCompletion = this.unstarted();
-      }
-      if (lesson.category === "Fundamentals" || (lesson.category === "Drills" && lesson.title.startsWith("Top 100")) || (lesson.category === "Drills" && lesson.title.startsWith("Top 200"))) {
-        return(
-          <li className="unstyled-list-item mb1" key={ lesson.path }>{lessonCompletion} <Link to={`/lessons${lesson.path}`.replace(/lesson\.txt$/,'').replace(/\/{2,}/g,'/')} id={'ga--lesson-index-'+lesson.path.replace(/\/lesson\.txt/g,'').replace(/[/.]/g,'-')}>{lesson.title}{lessonsubtitle}</Link> · <small>{numberOfWordsSeenOrMemorised} of {wordCountDenominator}</small></li>
-        )
-      } else {
-        return "";
-      }
-    });
 
     let metWordsFromTypeyType = JSON.stringify(this.props.metWords);
 
@@ -713,7 +591,13 @@ class Progress extends Component {
               </div>
               <div className="mw-568">
                 <h3>Lessons progress</h3>
-                <ul className="unstyled-list">{linkList}</ul>
+                <ul className="unstyled-list">
+                  <LessonsProgress
+                    lessonIndex={this.props.lessonIndex}
+                    lessonsProgress={this.props.lessonsProgress}
+                    setAnnouncementMessage={this.props.setAnnouncementMessage}
+                  />
+                </ul>
                 <p>There are more <Link to='/lessons'>Lessons</Link>, including lessons with sentences.</p>
               </div>
             </div>
