@@ -16,5 +16,8 @@ module.exports = {
     enableCrashReports: false,
     builder: "webpack5",
   },
+  env: (config) => ({
+    ...config,
+    PUBLIC_URL: "/typey-type",
+  }),
 };
-
