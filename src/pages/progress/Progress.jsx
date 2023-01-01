@@ -15,6 +15,9 @@ import ReformatProgress from './components/ReformatProgress';
 import ProgressSummaryAndLinks from "./components/ProgressSummaryAndLinks";
 import LessonsProgress from "./components/LessonsProgress";
 
+const skipButtonId = "js-flashcards-skip-button";
+const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
+
 let particles = [];
 
 class Progress extends Component {
@@ -400,9 +403,6 @@ class Progress extends Component {
     if (this.state.toFlashcardsNextLesson === true) {
       return <Redirect push to={this.props.flashcardsNextLesson.link} />
     }
-
-    let skipButtonId = "js-flashcards-skip-button";
-    let mobileSkipButtonId = "js-mobile-flashcards-skip-button";
 
     let metWordsFromTypeyType = JSON.stringify(this.props.metWords);
 
