@@ -32,9 +32,7 @@ const FlashcardsSection = ({
 }: Props) => {
   const [toFlashcardsNextLesson, setToFlashcardsNextLesson] = useState(false);
 
-  function startFlashcards(
-    e?: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) {
+  const startFlashcards: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
     GoogleAnalytics.event({
       category: "Flashcards",
       action: "Start recommended flashcards",
@@ -45,7 +43,7 @@ const FlashcardsSection = ({
     e?.preventDefault();
     setToFlashcardsNextLesson(true);
     updateFlashcardsRecommendation();
-  }
+  };
 
   return toFlashcardsNextLesson ? (
     <Redirect push to={flashcardsNextLesson.link} />
