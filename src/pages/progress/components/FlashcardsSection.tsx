@@ -15,7 +15,6 @@ type Props = {
   flashcardsNextLesson: FlashcardsNextLesson;
   skipButtonId: FlashcardsBoxProps["skipButtonId"];
   loadingLessonIndex: FlashcardsBoxProps["loadingLessonIndex"];
-  onSkipFlashcards: FlashcardsBoxProps["onSkip"];
   updateFlashcardsRecommendation: () => void;
 };
 
@@ -26,7 +25,6 @@ const FlashcardsSection = ({
   flashcardsNextLesson,
   skipButtonId,
   loadingLessonIndex,
-  onSkipFlashcards,
   updateFlashcardsRecommendation,
 }: Props) => {
   const startFlashcards = () => {
@@ -82,7 +80,7 @@ const FlashcardsSection = ({
             flashcardsNextLesson={flashcardsNextLesson}
             loadingLessonIndex={loadingLessonIndex}
             startFlashcards={startFlashcards}
-            onSkip={onSkipFlashcards}
+            updateFlashcardsRecommendation={updateFlashcardsRecommendation}
           />
         </ErrorBoundary>
       </div>

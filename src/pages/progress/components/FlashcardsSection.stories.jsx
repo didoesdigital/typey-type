@@ -20,7 +20,6 @@ export const FlashcardsSectionStory = () => {
           link: "http://localhost:3000/typey-type/lessons/drills/top-1000-words/flashcards",
         }}
         loadingLessonIndex={false}
-        onSkipFlashcards={() => undefined}
         skipButtonId={"js-test-flashcards-button-in-storybook"}
         updateFlashcardsRecommendation={() => undefined}
       />

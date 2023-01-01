@@ -1,4 +1,5 @@
 import React from "react";
+import GoogleAnalytics from "react-ga";
 import { Link } from "react-router-dom";
 import * as Utils from "../../../utils/utils";
 
@@ -14,9 +15,9 @@ export type FlashcardsNextLesson = {
 export type Props = {
   flashcardsNextLesson: FlashcardsNextLesson;
   loadingLessonIndex: boolean;
-  onSkip: () => void;
   skipButtonId: string;
   startFlashcards: () => void;
+  updateFlashcardsRecommendation: () => void;
 };
 
 // This magic time stamp matches the default time used in flashcardsRecommendations
@@ -25,10 +26,20 @@ const defaultTimestamp = 1558144862000;
 const FlashcardsBox = ({
   flashcardsNextLesson,
   loadingLessonIndex,
-  onSkip,
   skipButtonId,
   startFlashcards,
+  updateFlashcardsRecommendation,
 }: Props) => {
+  const onSkipFlashcards = () => {
+    GoogleAnalytics.event({
+      category: "Flashcards",
+      action: "Skip recommended flashcards",
+      label: flashcardsNextLesson?.link || "BAD_INPUT",
+    });
+
+    updateFlashcardsRecommendation();
+  };
+
   return flashcardsNextLesson !== undefined && !loadingLessonIndex ? (
     <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
       <p className="text-right">
@@ -48,7 +59,7 @@ const FlashcardsBox = ({
       </p>
       <div className="flex flex-wrap justify-end">
         <button
-          onClick={onSkip}
+          onClick={onSkipFlashcards}
           id={skipButtonId || "js-flashcards-skip-button"}
           className="button button--secondary mr2 pl3 pr3"
         >
@@ -80,7 +91,7 @@ const FlashcardsBox = ({
       <p className="text-right de-emphasized"></p>
       <div className="flex flex-wrap justify-end">
         <button
-          onClick={onSkip}
+          onClick={onSkipFlashcards}
           id={skipButtonId || "js-flashcards-skip-button"}
           className="button button--secondary mr2 pl3 pr3"
         >

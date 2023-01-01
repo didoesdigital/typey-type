@@ -220,24 +220,6 @@ class Progress extends Component {
     this.props.updateRecommendationHistory(this.props.recommendationHistory);
   }
 
-  onSkipFlashcards (event) {
-    let labelString = this.props.flashcardsNextLesson.link;
-    if (!labelString) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'Flashcards',
-      action: 'Skip recommended flashcards',
-      label: labelString
-    });
-
-    if (event && event.target && event.target.id) {
-      const element = document.getElementById(event.target.id);
-      if (element) { element.focus(); }
-    }
-
-    this.props.updateFlashcardsRecommendation();
-  }
-
   saveGoals(event) {
     event.preventDefault();
 
@@ -476,7 +458,6 @@ class Progress extends Component {
             flashcardsCourseLevel={this.props.globalUserSettings.flashcardsCourseLevel}
             flashcardsNextLesson={this.props.flashcardsNextLesson}
             loadingLessonIndex={this.state.loadingLessonIndex}
-            onSkipFlashcards={this.onSkipFlashcards.bind(this)}
             skipButtonId={mobileSkipButtonId}
             updateFlashcardsRecommendation={this.props.updateFlashcardsRecommendation}
           />
@@ -549,7 +530,6 @@ class Progress extends Component {
                   flashcardsCourseLevel={this.props.globalUserSettings.flashcardsCourseLevel}
                   flashcardsNextLesson={this.props.flashcardsNextLesson}
                   loadingLessonIndex={this.state.loadingLessonIndex}
-                  onSkipFlashcards={this.onSkipFlashcards.bind(this)}
                   skipButtonId={skipButtonId}
                   updateFlashcardsRecommendation={this.props.updateFlashcardsRecommendation}
                 />

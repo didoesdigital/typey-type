@@ -24,7 +24,7 @@ FlashcardsBoxStory.args = {
     link: "http://localhost:3000/typey-type/lessons/drills/top-1000-words/flashcards",
   },
   loadingLessonIndex: false,
-  onSkip: () => undefined,
   skipButtonId: "js-test-flashcards-button-in-storybook",
   startFlashcards: () => undefined,
+  updateFlashcardsRecommendation: () => undefined,
 };
