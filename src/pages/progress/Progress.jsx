@@ -151,7 +151,7 @@ class Progress extends Component {
     }
   }
 
-  showLoadInput() {
+  showLoadInputFn() {
     this.setState({showLoadInput: true});
     window.setTimeout(function ()
     {
@@ -380,7 +380,7 @@ class Progress extends Component {
 
     let reducedSaveAndLoadForms;
     let loadForm = (
-      <button onClick={this.showLoadInput.bind(this)} className="button button--secondary mr2" aria-label="Show progress loading form">
+      <button onClick={this.showLoadInputFn.bind(this)} className="button button--secondary mr2" aria-label="Show progress loading form">
         Load
       </button>
     );
