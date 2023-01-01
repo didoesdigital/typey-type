@@ -32,15 +32,13 @@ const FlashcardsSection = ({
 }: Props) => {
   const [toFlashcardsNextLesson, setToFlashcardsNextLesson] = useState(false);
 
-  const startFlashcards: React.MouseEventHandler<HTMLAnchorElement> = (e) => {
+  const startFlashcards = () => {
     GoogleAnalytics.event({
       category: "Flashcards",
       action: "Start recommended flashcards",
       label: flashcardsNextLesson?.link || "BAD_INPUT",
     });
 
-    // does not navigate using link but instead allows Router Redirect
-    e?.preventDefault();
     setToFlashcardsNextLesson(true);
     updateFlashcardsRecommendation();
   };
