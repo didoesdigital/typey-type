@@ -22,7 +22,7 @@ export const FlashcardsSectionStory = () => {
         loadingLessonIndex={false}
         onSkipFlashcards={() => undefined}
         skipButtonId={"js-test-flashcards-button-in-storybook"}
-        startFlashcards={() => undefined}
+        updateFlashcardsRecommendation={() => undefined}
       />
     </div>
   );
