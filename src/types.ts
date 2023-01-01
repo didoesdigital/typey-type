@@ -440,7 +440,7 @@ export type LessonIndexEntry = {
   overview: OverviewPathWithoutBasenameAndWithFilename;
   path: LessonPathWithoutBasenameAndWithFilename;
   subcategory: Subcategory;
-  subtitle: "";
+  subtitle: string; // could probably be "" because it's always empty, or remove it completely
   suggestedNext: LessonPathWithoutBasenameAndWithFilename;
   title: LessonTitle;
   /** Example: 52 */
