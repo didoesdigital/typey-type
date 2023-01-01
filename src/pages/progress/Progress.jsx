@@ -200,26 +200,6 @@ class Progress extends Component {
     });
   };
 
-  recommendAnotherLesson = (skipButtonPressed = true) => {
-    let labelString = this.props.recommendedNextLesson.link;
-    if (!labelString) { labelString = "BAD_INPUT"; }
-
-    if (skipButtonPressed) {
-      GoogleAnalytics.event({
-        category: 'Recommendations',
-        action: 'Skip recommended',
-        label: labelString
-      });
-    }
-
-    if (skipButtonPressed) {
-      const element = document.getElementById('js-skip-button');
-      if (element) { element.focus(); }
-    }
-
-    this.props.updateRecommendationHistory(this.props.recommendationHistory);
-  }
-
   saveGoals(event) {
     event.preventDefault();
 
@@ -485,7 +465,8 @@ class Progress extends Component {
                     setAnnouncementMessage={this.props.setAnnouncementMessage}
                     loadingLessonIndex={this.state.loadingLessonIndex}
                     startRecommendedStep={this.startRecommendedStep.bind(this)}
-                    recommendAnotherLesson={this.recommendAnotherLesson}
+                    recommendationHistory={this.props.recommendationHistory}
+                    updateRecommendationHistory={this.props.updateRecommendationHistory}
                   />
                 </ErrorBoundary>
               </div>

@@ -29,15 +29,37 @@ type RecommendedNextLesson = {
   linkText?: string; // FIXME: may not be used?
 };
 
+type RecommendationHistory = {
+  currentStep: FullRecommendationsStudyType;
+};
+
 type Props = {
   recommendedNextLesson: RecommendedNextLesson;
-  recommendAnotherLesson: () => void;
   startRecommendedStep: () => void;
   loadingLessonIndex: boolean;
   setAnnouncementMessage: () => void;
+  recommendationHistory: RecommendationHistory;
+  updateRecommendationHistory: (
+    previousRecommendationHistory: RecommendationHistory
+  ) => void;
 };
 
 class RecommendationBox extends Component<Props> {
+  recommendAnotherLesson = () => {
+    GoogleAnalytics.event({
+      category: "Recommendations",
+      action: "Skip recommended",
+      label: this.props.recommendedNextLesson?.link || "BAD_INPUT",
+    });
+
+    const element = document.getElementById("js-skip-button");
+    if (element) {
+      element.focus();
+    }
+
+    this.props.updateRecommendationHistory(this.props.recommendationHistory);
+  };
+
   render() {
     let recommendedNextLesson;
     let recommendedNextLessonHeading;
@@ -278,7 +300,7 @@ class RecommendationBox extends Component<Props> {
             <div className="flex flex-wrap">
               <div>{recommendedLink}</div>
               <button
-                onClick={this.props.recommendAnotherLesson}
+                onClick={this.recommendAnotherLesson}
                 id="js-skip-button"
                 className="button button--secondary pl3 pr3"
               >
@@ -313,7 +335,7 @@ class RecommendationBox extends Component<Props> {
                 </button>
               </div>
               <button
-                onClick={this.props.recommendAnotherLesson}
+                onClick={this.recommendAnotherLesson}
                 id="js-skip-button"
                 className="button button--secondary pl3 pr3"
               >
