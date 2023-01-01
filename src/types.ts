@@ -375,6 +375,7 @@ export type FallbackLesson = {
 /**
  * Examples:
  * "/typey-type/lessons/stories/proverbs/proverbs-starting-with-v/lesson.txt"
+ * "/typey-type/lessons/collections/tech/css-declarations/lesson.txt"
  */
 export type LessonPathWithBasenameAndFilename = string;
 
@@ -445,6 +446,16 @@ export type LessonIndexEntry = {
   title: LessonTitle;
   /** Example: 52 */
   wordCount: number;
+};
+
+export type LessonsProgressEntry = {
+  numberOfWordsMemorised: number;
+  numberOfWordsSeen: number;
+  numberOfWordsToDiscover: number;
+};
+
+export type LessonsProgressIndex = {
+  [lesson: LessonPathWithBasenameAndFilename]: LessonsProgressEntry;
 };
 
 export type FlashcardsCourseLevel =
