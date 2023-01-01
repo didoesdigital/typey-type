@@ -28,7 +28,6 @@ class Progress extends Component {
       loadingLessonIndexError: false,
       reducedSaveAndLoad: false,
       showLoadInput: false,
-      showRecommendationsSurveyLink: true,
       showSetGoalsForm: false,
       progressPercent: 0,
       yourWordCount: 0,
@@ -254,16 +253,6 @@ class Progress extends Component {
     }
 
     this.props.updateFlashcardsRecommendation();
-  }
-
-  hideRecommendationsSurveyLink(event) {
-    GoogleAnalytics.event({
-      category: 'Surveys',
-      action: 'Hide recommendations survey link',
-      label: 'Hidden'
-    });
-
-    this.setState({showRecommendationsSurveyLink: false});
   }
 
   saveGoals(event) {
