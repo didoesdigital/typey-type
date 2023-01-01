@@ -37,7 +37,6 @@ class Progress extends Component {
       todayNewWordCount: 0,
       todayOldWordCount: 0,
       toRecommendedNextLesson: false,
-      toFlashcardsNextLesson: false,
       oldWordsGoalMet: false,
       newWordsGoalMet: false,
       userGoalInputOldWords: 50,
@@ -151,25 +150,6 @@ class Progress extends Component {
       });
     }
   }
-
-  startFlashcards(e) {
-
-    let labelString = this.props.flashcardsNextLesson.link;
-    if (!labelString) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'Flashcards',
-      action: 'Start recommended flashcards',
-      label: labelString
-    });
-
-    // does not navigate using link but instead allows Router Redirect
-    e.preventDefault();
-    this.setState({ toFlashcardsNextLesson: true }, () => {
-      this.props.updateFlashcardsRecommendation();
-    });
-  }
-
 
   showLoadInput() {
     this.setState({showLoadInput: true});
@@ -400,10 +380,6 @@ class Progress extends Component {
       return <Redirect push to={this.props.recommendedNextLesson.link} />
     }
 
-    if (this.state.toFlashcardsNextLesson === true) {
-      return <Redirect push to={this.props.flashcardsNextLesson.link} />
-    }
-
     let metWordsFromTypeyType = JSON.stringify(this.props.metWords);
 
     let saveAndLoadPanels = this.state.reducedSaveAndLoad ? null : (
@@ -502,7 +478,7 @@ class Progress extends Component {
             loadingLessonIndex={this.state.loadingLessonIndex}
             onSkipFlashcards={this.onSkipFlashcards.bind(this)}
             skipButtonId={mobileSkipButtonId}
-            startFlashcards={this.startFlashcards.bind(this)}
+            updateFlashcardsRecommendation={this.props.updateFlashcardsRecommendation}
           />
 
           {saveAndLoadPanels}
@@ -575,7 +551,7 @@ class Progress extends Component {
                   loadingLessonIndex={this.state.loadingLessonIndex}
                   onSkipFlashcards={this.onSkipFlashcards.bind(this)}
                   skipButtonId={skipButtonId}
-                  startFlashcards={this.startFlashcards.bind(this)}
+                  updateFlashcardsRecommendation={this.props.updateFlashcardsRecommendation}
                 />
               </div>
               <div className="mw-568">

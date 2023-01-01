@@ -16,7 +16,7 @@ export type Props = {
   loadingLessonIndex: boolean;
   onSkip: () => void;
   skipButtonId: string;
-  startFlashcards: () => void;
+  startFlashcards: any;
 };
 
 // This magic time stamp matches the default time used in flashcardsRecommendations
