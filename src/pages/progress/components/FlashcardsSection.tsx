@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import GoogleAnalytics from "react-ga";
 import ErrorBoundary from "../../../components/ErrorBoundary";
 import FlashcardsBox from "./FlashcardsBox";
-import { Redirect } from "react-router-dom";
 import type {
   Props as FlashcardsBoxProps,
   FlashcardsNextLesson,
@@ -30,8 +29,6 @@ const FlashcardsSection = ({
   onSkipFlashcards,
   updateFlashcardsRecommendation,
 }: Props) => {
-  const [toFlashcardsNextLesson, setToFlashcardsNextLesson] = useState(false);
-
   const startFlashcards = () => {
     GoogleAnalytics.event({
       category: "Flashcards",
@@ -39,13 +36,10 @@ const FlashcardsSection = ({
       label: flashcardsNextLesson?.link || "BAD_INPUT",
     });
 
-    setToFlashcardsNextLesson(true);
     updateFlashcardsRecommendation();
   };
 
-  return toFlashcardsNextLesson ? (
-    <Redirect push to={flashcardsNextLesson.link} />
-  ) : (
+  return (
     <div
       className={`mx-auto${
         showOnSmallScreen ? " p3 mw-1024 show-sm-only" : ""
