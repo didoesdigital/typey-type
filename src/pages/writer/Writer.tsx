@@ -118,11 +118,13 @@ class Writer extends Component<Props, State> {
 
   componentDidMount() {
     let dict:string = '' + (process.env.PUBLIC_URL || '') + '/dictionaries/typey-type/typey-type.json';
-    fetchResource(dict).then((json) => {
-      this.setState({
-        stenoDictionary: json
-      });
-    });
+    fetchResource(dict)
+      .then((json) => {
+        this.setState({
+          stenoDictionary: json
+        });
+      })
+      .catch((e) => console.error(e));
 
     // @ts-ignore
     if (this.mainHeading) {
