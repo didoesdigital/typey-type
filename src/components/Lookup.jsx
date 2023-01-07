@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import GoogleAnalytics from 'react-ga';
-import StrokesForWords from './StrokesForWords';
-import PseudoContentButton from './PseudoContentButton';
-import { IconExternal } from './Icon';
-import { Tooltip } from 'react-tippy';
+import React, { Component } from "react";
+import GoogleAnalytics from "react-ga";
+import StrokesForWords from "./StrokesForWords";
+import PseudoContentButton from "./PseudoContentButton";
+import { IconExternal } from "./Icon";
+import { Tooltip } from "react-tippy";
 
 class Lookup extends Component {
   state = {
-    bookmarkURL: process.env.PUBLIC_URL + "/lookup"
-  }
+    bookmarkURL: process.env.PUBLIC_URL + "/lookup",
+  };
 
   componentDidMount() {
     if (this.mainHeading) {
@@ -19,7 +19,7 @@ class Lookup extends Component {
   strokesForWordsChange(phrase) {
     let encodedPhrase = encodeURIComponent(phrase);
     this.setState({
-      bookmarkURL: process.env.PUBLIC_URL + "/lookup?q=" + encodedPhrase
+      bookmarkURL: process.env.PUBLIC_URL + "/lookup?q=" + encodedPhrase,
     });
   }
 
@@ -30,11 +30,24 @@ class Lookup extends Component {
           <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
             <div className="flex mr1 self-center">
               <header className="flex items-center min-h-40">
-                <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Lookup</h2>
+                <h2
+                  ref={(heading) => {
+                    this.mainHeading = heading;
+                  }}
+                  tabIndex="-1"
+                >
+                  Lookup
+                </h2>
               </header>
             </div>
             <div className="flex mxn2">
-              <PseudoContentButton className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard" style={{lineHeight: 2}} dataClipboardTarget="#js-bookmark-url">Copy to clipboard</PseudoContentButton>
+              <PseudoContentButton
+                className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard"
+                style={{ lineHeight: 2 }}
+                dataClipboardTarget="#js-bookmark-url"
+              >
+                Copy to clipboard
+              </PseudoContentButton>
             </div>
           </div>
         </div>
@@ -42,27 +55,43 @@ class Lookup extends Component {
           <div className="">
             <div className="mt0">
               <h3 className="h4">Share link</h3>
-              <p className="mb0 truncate"><span className="py05 dib" id="js-bookmark-url" href={this.state.bookmarkURL}>https://didoesdigital.com{this.state.bookmarkURL}</span></p>
+              <p className="mb0 truncate">
+                <span
+                  className="py05 dib"
+                  id="js-bookmark-url"
+                  href={this.state.bookmarkURL}
+                >
+                  https://didoesdigital.com{this.state.bookmarkURL}
+                </span>
+              </p>
             </div>
           </div>
           <div className="w-100 flex-grow mr3 min-h-384">
             <StrokesForWords
               fetchAndSetupGlobalDict={this.props.fetchAndSetupGlobalDict}
               globalLookupDictionary={this.props.globalLookupDictionary}
-              globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
+              globalLookupDictionaryLoaded={
+                this.props.globalLookupDictionaryLoaded
+              }
               globalUserSettings={this.props.globalUserSettings}
               lookupTerm={this.props.lookupTerm}
               onChange={this.strokesForWordsChange.bind(this)}
               personalDictionaries={this.props.personalDictionaries}
               stenoHintsOnTheFly={this.props.stenohintsonthefly}
-              updateGlobalLookupDictionary={this.props.updateGlobalLookupDictionary}
+              updateGlobalLookupDictionary={
+                this.props.updateGlobalLookupDictionary
+              }
               updatePersonalDictionaries={this.props.updatePersonalDictionaries}
               userSettings={this.props.userSettings}
             />
           </div>
           <div className="panel p3 mt3">
-            <p>This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s suggestions.</p>
-            <p className="mb0">If you notice any odd strokes,{" "}
+            <p>
+              This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s
+              suggestions.
+            </p>
+            <p className="mb0">
+              If you notice any odd strokes,{" "}
               <GoogleAnalytics.OutboundLink
                 eventLabel="post to the feedback form"
                 aria-label="post to the feedback form (external link opens in new tab)"
@@ -70,26 +99,38 @@ class Lookup extends Component {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                use the <span className="whitespace-nowrap">feedback form
-                <Tooltip
-                  title="Opens in new tab"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={this.props.setAnnouncementMessage}
-                >
-                  <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
-                </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.</p>
+                use the{" "}
+                <span className="whitespace-nowrap">
+                  feedback form
+                  <Tooltip
+                    title="Opens in new tab"
+                    className=""
+                    animation="shift"
+                    arrow="true"
+                    duration="200"
+                    tabIndex="0"
+                    tag="span"
+                    theme="didoesdigital"
+                    trigger="mouseenter focus click"
+                    onShow={this.props.setAnnouncementMessage}
+                  >
+                    <IconExternal
+                      ariaHidden="true"
+                      role="presentation"
+                      iconWidth="24"
+                      iconHeight="24"
+                      className="ml1 svg-icon-wrapper svg-baseline"
+                      iconTitle=""
+                    />
+                  </Tooltip>
+                </span>
+              </GoogleAnalytics.OutboundLink>
+              .
+            </p>
           </div>
         </div>
       </main>
-    )
+    );
   }
 }
 
