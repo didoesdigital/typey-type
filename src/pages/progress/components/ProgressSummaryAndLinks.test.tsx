@@ -8,7 +8,7 @@ import metWords10000WordsSeen10000Memorised from "../../../fixtures/metWords1000
 describe("progress summary and links", () => {
   it("renders", () => {
     render(
-      <Router basename="/typey-type">
+      <Router basename="/">
         <Route>
           <ProgressSummaryAndLinks
             metWords={metWordsNovice}
@@ -25,7 +25,7 @@ describe("progress summary and links", () => {
 
   it("celebrates finishing Typey Type", () => {
     render(
-      <Router basename="/typey-type">
+      <Router basename="/">
         <Route>
           <ProgressSummaryAndLinks
             metWords={metWords10000WordsSeen10000Memorised}
@@ -42,7 +42,7 @@ describe("progress summary and links", () => {
 
   it("has 1 seen and 0 memorised", () => {
     render(
-      <Router basename="/typey-type">
+      <Router basename="/">
         <Route>
           <div data-testid="test-wrapper">
             <ProgressSummaryAndLinks
@@ -66,7 +66,7 @@ describe("progress summary and links", () => {
 
   it("has 1 seen and 1 memorised", () => {
     render(
-      <Router basename="/typey-type">
+      <Router basename="/">
         <Route>
           <div data-testid="test-wrapper">
             <ProgressSummaryAndLinks
@@ -90,7 +90,7 @@ describe("progress summary and links", () => {
 
   it("has 0 seen and 1 memorised", () => {
     render(
-      <Router basename="/typey-type">
+      <Router basename="/">
         <Route>
           <div data-testid="test-wrapper">
             <ProgressSummaryAndLinks
@@ -114,7 +114,7 @@ describe("progress summary and links", () => {
 
   it("has 10 seen and 0 memorised", () => {
     render(
-      <Router basename="/typey-type">
+      <Router basename="/">
         <Route>
           <div data-testid="test-wrapper">
             <ProgressSummaryAndLinks
@@ -149,7 +149,7 @@ describe("progress summary and links", () => {
 
   it("has 10 seen and 1 memorised", () => {
     render(
-      <Router basename="/typey-type">
+      <Router basename="/">
         <Route>
           <div data-testid="test-wrapper">
             <ProgressSummaryAndLinks
@@ -183,7 +183,7 @@ describe("progress summary and links", () => {
 
   it("has 10 seen and 2 memorised", () => {
     render(
-      <Router basename="/typey-type">
+      <Router basename="/">
         <Route>
           <div data-testid="test-wrapper">
             <ProgressSummaryAndLinks
@@ -218,7 +218,7 @@ describe("progress summary and links", () => {
 
   it("has 0 seen and 0 memorised", () => {
     render(
-      <Router basename="/typey-type">
+      <Router basename="/">
         <Route>
           <div data-testid="test-wrapper">
             <ProgressSummaryAndLinks
