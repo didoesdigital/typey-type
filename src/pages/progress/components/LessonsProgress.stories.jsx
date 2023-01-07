@@ -101,31 +101,33 @@ const testLessonIndex = [
   },
 ];
 
+const fakePUBLIC_URL = "."; // should be '/typey-type' but that requires setting the Storybook environment variable for PUBLIC_URL and that in turn breaks other stories
+
 const testLessonsProgress = {
-  "/typey-type/lessons/fundamentals/introduction/lesson.txt": {
+  [`${fakePUBLIC_URL}/lessons/fundamentals/introduction/lesson.txt`]: {
     numberOfWordsMemorised: 52,
     numberOfWordsSeen: 0,
     numberOfWordsToDiscover: 0,
   },
-  "/typey-type/lessons/fundamentals/one-syllable-words-with-simple-keys/lesson.txt":
+  [`${fakePUBLIC_URL}/lessons/fundamentals/one-syllable-words-with-simple-keys/lesson.txt`]:
     {
       numberOfWordsMemorised: 0,
       numberOfWordsSeen: 4,
       numberOfWordsToDiscover: 160,
     },
-  "/typey-type/lessons/fundamentals/one-syllable-words-with-more-consonants/lesson.txt":
+  [`${fakePUBLIC_URL}/lessons/fundamentals/one-syllable-words-with-more-consonants/lesson.txt`]:
     {
       numberOfWordsMemorised: 0,
       numberOfWordsSeen: 0,
       numberOfWordsToDiscover: 96,
     },
-  "/typey-type/lessons/fundamentals/multi-syllable-words-with-suffixes/lesson.txt":
+  [`${fakePUBLIC_URL}/lessons/fundamentals/multi-syllable-words-with-suffixes/lesson.txt`]:
     {
       numberOfWordsMemorised: 9,
       numberOfWordsSeen: 524,
       numberOfWordsToDiscover: 842,
     },
-  "/typey-type/lessons/stories/proverbial-phrases/proverbial-phrases-starting-with-e/lesson.txt":
+  [`${fakePUBLIC_URL}/lessons/stories/proverbial-phrases/proverbial-phrases-starting-with-e/lesson.txt`]:
     {
       numberOfWordsMemorised: 0,
       numberOfWordsSeen: 0,
@@ -145,5 +147,4 @@ LessonsProgressStory.args = {
   lessonIndex: testLessonIndex,
   lessonsProgress: testLessonsProgress,
   setAnnouncementMessage: () => undefined,
-  PUBLIC_URL: process.env.PUBLIC_URL,
 };
