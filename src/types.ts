@@ -346,6 +346,18 @@ export type UserSettings = {
   upcomingWordsLayout: UpcomingWordsLayout;
 };
 
+export type GlobalUserSettings = {
+  experiments?: Experiments;
+  flashcardsCourseLevel?: FlashcardsCourseLevel;
+  showMisstrokesInLookup?: boolean;
+  writerInput?: "raw" | "qwerty";
+};
+
+export type Experiments = {
+  stenohintsonthefly?: boolean;
+  timesSeen?: boolean;
+};
+
 /**
  * Examples:
  * "Proverbs starting with V"

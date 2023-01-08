@@ -5,18 +5,23 @@ import PseudoContentButton from "./PseudoContentButton";
 import { IconExternal } from "./Icon";
 import { Tooltip } from "react-tippy";
 
+import type { Experiments, GlobalUserSettings, UserSettings } from "../types";
+
 type Props = {
-  fetchAndSetupGlobalDict: any;
+  fetchAndSetupGlobalDict: (
+    withPlover: boolean,
+    importedPersonalDictionaries?: any
+  ) => Promise<any>;
   globalLookupDictionary: any;
-  globalLookupDictionaryLoaded: any;
-  globalUserSettings: any;
-  lookupTerm: any;
+  globalLookupDictionaryLoaded: boolean;
+  globalUserSettings: GlobalUserSettings;
+  lookupTerm?: string;
   personalDictionaries: any;
-  stenohintsonthefly: any;
+  stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
   updateGlobalLookupDictionary: any;
   updatePersonalDictionaries: any;
-  userSettings: any;
-  setAnnouncementMessage: any;
+  userSettings: UserSettings;
+  setAnnouncementMessage: () => void;
 };
 
 const Lookup = ({
@@ -41,8 +46,8 @@ const Lookup = ({
     mainHeading.current?.focus();
   }, []);
 
-  const strokesForWordsChange = (phrase: any) => {
-    let encodedPhrase = encodeURIComponent(phrase);
+  const strokesForWordsChange = (phrase: string) => {
+    const encodedPhrase = encodeURIComponent(phrase);
     setBookmarkURL(process.env.PUBLIC_URL + "/lookup?q=" + encodedPhrase);
   };
 
