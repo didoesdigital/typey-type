@@ -5,7 +5,11 @@ import PseudoContentButton from "../../components/PseudoContentButton";
 import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
 
-import type { Experiments, GlobalUserSettings, UserSettings } from "../../types";
+import type {
+  Experiments,
+  GlobalUserSettings,
+  UserSettings,
+} from "../../types";
 
 type Props = {
   fetchAndSetupGlobalDict: (
@@ -73,7 +77,10 @@ const Lookup = ({
           </div>
         </div>
       </div>
-      <div className="p3 mx-auto mw-1024 mh-page">
+      <div
+        className="p3 mx-auto mw-1024 mh-page"
+        data-testid="lookup-page-contents"
+      >
         <div className="">
           <div className="mt0">
             <h3 className="h4">Share link</h3>
