@@ -584,7 +584,7 @@ class DictionaryManagement extends Component {
                     type="checkbox"
                     name="stenohintsonthefly"
                     id="stenohintsonthefly"
-                    checked={!!this.props.globalUserSettings.experiments.stenohintsonthefly}
+                    checked={!!this.props.globalUserSettings.experiments?.stenohintsonthefly}
                     onChange={this.props.toggleExperiment}
                   />
                   <strong>Show your dictionary entries in lesson hints <span className="bg-danger">(this is experimental with known limitations!)</span></strong>
