@@ -13,6 +13,15 @@ export default {
 const globalLookupDictionary = new Map([
   ["huh", [["H*U", "typey:typey-type.json"]]],
   ["gonna", [["TKPW*G", "typey:typey-type.json"]]],
+  [
+    "{!}",
+    [
+      ["KPHR", "user:punctuation-di.json"],
+      ["SKHRAPL", "typey:typey-type.json"],
+      ["TP-BG", "plover:plover-main-3-jun-2018.json"],
+      ["STKPWHR-FPLT", "plover:plover-main-3-jun-2018.json"],
+    ],
+  ],
 ]);
 
 const Template = (args) => (
@@ -38,6 +47,13 @@ export const LookupFromURLStory = Template.bind({});
 LookupFromURLStory.args = {
   lookupTerm: "a phrase that is not in any dictionary",
 };
+LookupFromURLStory.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
+    "No results found"
+  );
+};
 
 export const LookupSearchStory = Template.bind({});
 LookupSearchStory.play = async ({ canvasElement }) => {
@@ -48,11 +64,33 @@ LookupSearchStory.play = async ({ canvasElement }) => {
     "huh"
   );
 
-  await expect(canvas.getByTestId("lookup-page-contents")).not.toHaveClass(
-    "No results found"
+  await expect(
+    canvas.getByTestId("lookup-page-contents")
+  ).not.toHaveTextContent("No results found");
+
+  await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
+    "typey-type.json"
+  );
+};
+
+export const LookupPersonalDictionariesStory = Template.bind({});
+LookupPersonalDictionariesStory.args = {
+  lookupTerm: "!",
+};
+LookupPersonalDictionariesStory.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
+    "text shown in dictionary"
   );
 
   await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
     "typey-type.json"
+  );
+  await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
+    "punctuation-di.json"
+  );
+  await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
+    "plover-main-3-jun-2018.json"
   );
 };
