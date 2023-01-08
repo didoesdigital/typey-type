@@ -30,7 +30,7 @@ MultiLineMaterial.args = {
   currentPhraseID: 1,
 };
 MultiLineMaterial.parameters = {
-  chromatic: { delay: 300 },
+  chromatic: { delay: 300, diffThreshold: 0.78 },
   // If the delay ☝️ doesn't work, try tweaking the diffThreshold:
   // Chromatic’s default threshold is .063, which balances high visual accuracy with low false
   // positives (for example, from artifacts like anti-aliasing).
