@@ -84,7 +84,7 @@ class DictionariesIndex extends Component {
                     arrow="true"
                     className=""
                     duration="200"
-                    tabIndex="0"
+                    tabIndex={0}
                     tag="span"
                     theme="didoesdigital"
                     trigger="mouseenter focus click"
@@ -137,7 +137,7 @@ class DictionariesIndex extends Component {
                   ref={(heading) => {
                     this.mainHeading = heading;
                   }}
-                  tabIndex="-1"
+                  tabIndex={-1}
                 >
                   Dictionaries
                 </h2>
@@ -176,7 +176,7 @@ class DictionariesIndex extends Component {
                         arrow="true"
                         className=""
                         duration="200"
-                        tabIndex="0"
+                        tabIndex={0}
                         tag="span"
                         theme="didoesdigital"
                         trigger="mouseenter focus click"
@@ -239,7 +239,7 @@ class DictionariesIndex extends Component {
                         animation="shift"
                         arrow="true"
                         duration="200"
-                        tabIndex="0"
+                        tabIndex={0}
                         tag="span"
                         theme="didoesdigital"
                         trigger="mouseenter focus click"
@@ -275,7 +275,7 @@ class DictionariesIndex extends Component {
                       arrow="true"
                       className=""
                       duration="200"
-                      tabIndex="0"
+                      tabIndex={0}
                       tag="span"
                       theme="didoesdigital"
                       trigger="mouseenter focus click"
@@ -315,7 +315,7 @@ class DictionariesIndex extends Component {
                       arrow="true"
                       className=""
                       duration="200"
-                      tabIndex="0"
+                      tabIndex={0}
                       tag="span"
                       theme="didoesdigital"
                       trigger="mouseenter focus click"
@@ -380,7 +380,7 @@ class DictionariesIndex extends Component {
                       arrow="true"
                       className=""
                       duration="200"
-                      tabIndex="0"
+                      tabIndex={0}
                       tag="span"
                       theme="didoesdigital"
                       trigger="mouseenter focus click"
