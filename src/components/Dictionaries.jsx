@@ -11,7 +11,7 @@ const AsyncDictionary = Loadable({
 });
 
 const AsyncDictionaryManagement = Loadable({
-  loader: () => import("./DictionaryManagement"),
+  loader: () => import("../pages/dictionaries/DictionaryManagement"),
   loading: PageLoading,
   delay: 300,
 });
