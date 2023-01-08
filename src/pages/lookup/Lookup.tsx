@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga";
-import StrokesForWords from "./StrokesForWords";
-import PseudoContentButton from "./PseudoContentButton";
-import { IconExternal } from "./Icon";
+import StrokesForWords from "../../components/StrokesForWords";
+import PseudoContentButton from "../../components/PseudoContentButton";
+import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
 
-import type { Experiments, GlobalUserSettings, UserSettings } from "../types";
+import type { Experiments, GlobalUserSettings, UserSettings } from "../../types";
 
 type Props = {
   fetchAndSetupGlobalDict: (

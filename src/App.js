@@ -108,7 +108,7 @@ const AsyncSupport = Loadable({
 });
 
 const AsyncLookup = Loadable({
-  loader: () => import("./components/Lookup"),
+  loader: () => import("./pages/lookup/Lookup"),
   loading: PageLoading,
   delay: 300
 });
