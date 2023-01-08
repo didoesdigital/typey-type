@@ -19,6 +19,32 @@ const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
 
 let particles = [];
 
+// type Props = {
+//   changeFlashcardCourseLevel: any,
+//   flashcardsNextLesson: any,
+//   globalUserSettings: any,
+//   lessonIndex: any,
+//   lessonsProgress: any,
+//   metWords: any,
+//   newWordsGoalUnveiled: any,
+//   oldWordsGoalUnveiled: any,
+//   recentLessonHistory: any,
+//   recommendationHistory: any,
+//   recommendedNextLesson: any,
+//   setAnnouncementMessage: any,
+//   setPersonalPreferences: any,
+//   startingMetWordsToday: any,
+//   updateFlashcardsRecommendation: any,
+//   updateRecommendationHistory: any,
+//   updateStartingMetWordsAndCounts: any,
+//   updateUserGoals: any,
+//   updateUserGoalsUnveiled: any,
+//   userGoals: any,
+//   userSetting: UserSettings,
+//   yourMemorisedWordCount: any,
+//   yourSeenWordCount: any,
+// }
+
 class Progress extends Component {
   constructor(props) {
     super(props);
