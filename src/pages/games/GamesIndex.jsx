@@ -19,7 +19,7 @@ export default function GamesIndex() {
       <Subheader>
         <div className="flex mr1 self-center">
           <header className="flex items-center min-h-40">
-            <h2 ref={mainHeading} tabIndex="-1">
+            <h2 ref={mainHeading} tabIndex={-1}>
               Games
             </h2>
           </header>
