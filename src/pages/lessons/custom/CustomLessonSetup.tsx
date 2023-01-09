@@ -3,6 +3,7 @@ import CustomJSONLesson from "./components/CustomJSONLesson";
 import CustomLessonIntro from "./components/CustomLessonIntro";
 import CustomShareLessons from "./components/CustomShareLessons";
 import CustomWordListLesson from "./components/CustomWordListLesson";
+import Subheader from "../../../components/Subheader";
 
 type Props = {
   createCustomLesson: () => void;
@@ -64,21 +65,19 @@ const CustomLessonSetup = ({
 
   return (
     <main id="main">
-      <div className="subheader">
-        <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
-          <div className="flex mr1 self-center">
-            <header className="flex items-center min-h-40">
-              <h2
-                ref={mainHeading}
-                tabIndex={-1}
-                id="about-typey-type-for-stenographers"
-              >
-                Create a custom lesson
-              </h2>
-            </header>
-          </div>
+      <Subheader>
+        <div className="flex mr1 self-center">
+          <header className="flex items-center min-h-40">
+            <h2
+              ref={mainHeading}
+              tabIndex={-1}
+              id="about-typey-type-for-stenographers"
+            >
+              Create a custom lesson
+            </h2>
+          </header>
         </div>
-      </div>
+      </Subheader>
 
       <div className="bg-info landing-page-section">
         <CustomLessonIntro
