@@ -72,10 +72,7 @@ export default function GamesIndex() {
               linkTo="/games/KHAERT"
               linkText="Start KHAERT"
               robot={
-                <AussieRobot
-                  role="img"
-                  aria-labelledby="aussie-robot-title"
-                />
+                <AussieRobot role="img" aria-labelledby="aussie-robot-title" />
               }
             />
           </div>
