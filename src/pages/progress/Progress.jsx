@@ -13,6 +13,7 @@ import ReformatProgress from './components/ReformatProgress';
 import ProgressSummaryAndLinks from "./components/ProgressSummaryAndLinks";
 import LessonsProgress from "./components/LessonsProgress";
 import DownloadProgressButton from "./components/DownloadProgressButton";
+import Subheader from "../../components/Subheader";
 
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
@@ -435,18 +436,16 @@ class Progress extends Component {
     return (
       <div>
         <main id="main">
-          <div className="subheader" id="js-page-confetti-target">
-            <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
-              <div className="flex mr1 self-center">
-                <header className="flex items-center min-h-40">
-                  <h2 id="progress" ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1}>Progress</h2>
-                </header>
-              </div>
-              <div className="flex mxn2">
-                <DownloadProgressButton metWords={this.props.metWords} />
-              </div>
+          <Subheader id="js-page-confetti-target">
+            <div className="flex mr1 self-center">
+              <header className="flex items-center min-h-40">
+                <h2 id="progress" ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1}>Progress</h2>
+              </header>
             </div>
-          </div>
+            <div className="flex mxn2">
+              <DownloadProgressButton metWords={this.props.metWords} />
+            </div>
+          </Subheader>
           <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
 
           <FlashcardsSection
