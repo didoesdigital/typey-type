@@ -3,6 +3,7 @@ import GoogleAnalytics from "react-ga";
 import * as Sentry from "@sentry/browser";
 import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
+import Subheader from "../../components/Subheader";
 
 type LessonNotFoundProps = {
   location: any;
@@ -71,24 +72,22 @@ const LessonNotFound = ({
   return (
     <DocumentTitle title={"Typey Type | Missing Lesson"}>
       <main id="main">
-        <div className="subheader">
-          <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
-            <div className="flex mr1 self-center">
-              <header className="flex items-center min-h-40">
-                <a
-                  href={path}
-                  onClick={restartLesson}
-                  className="heading-link table-cell mr2"
-                  role="button"
-                >
-                  <h2 ref={mainHeading} tabIndex={-1}>
-                    Lesson not found
-                  </h2>
-                </a>
-              </header>
-            </div>
+        <Subheader>
+          <div className="flex mr1 self-center">
+            <header className="flex items-center min-h-40">
+              <a
+                href={path}
+                onClick={restartLesson}
+                className="heading-link table-cell mr2"
+                role="button"
+              >
+                <h2 ref={mainHeading} tabIndex={-1}>
+                  Lesson not found
+                </h2>
+              </a>
+            </header>
           </div>
-        </div>
+        </Subheader>
         <div className="mx-auto mw-1024 py2 px3">
           <div className="mw-568">
             <p className="mt3">
