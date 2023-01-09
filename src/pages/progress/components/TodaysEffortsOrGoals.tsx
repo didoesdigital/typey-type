@@ -198,14 +198,14 @@ const TodaysEffortsOrGoals = ({
   } else {
     let todaysEffortsOldGoalsRow: JSX.Element | null = (
       <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
-        <div className="flex todays-effort-goal-robot">
+        <div className="flex todays-effort-goal-robot pl2">
           {userGoals.oldWords <= todayOldWordCount ? (
             <HappyRobot />
           ) : (
             <BoredRobot />
           )}
         </div>
-        <div className="stat__number stat__number--display mr1">
+        <div className="stat__number stat__number--display pl3 mr1">
           {todayOldWordCount}
         </div>
         <div>
@@ -233,14 +233,14 @@ const TodaysEffortsOrGoals = ({
       <React.Fragment>
         {todaysEffortsOldGoalsRow}
         <div className="inline-flex items-center pt4 pb4 bb b--brand-primary-tint w-100">
-          <div className="flex todays-effort-goal-robot">
+          <div className="flex todays-effort-goal-robot pl2">
             {userGoals.newWords <= todayNewWordCount ? (
               <HappyRobot />
             ) : (
               <BoredRobot />
             )}
           </div>
-          <div className="stat__number stat__number--display mr1">
+          <div className="stat__number stat__number--display pl3 mr1">
             {todayNewWordCount}
           </div>
           <div>
