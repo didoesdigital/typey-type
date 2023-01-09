@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import DescriptionList from '../../components/DescriptionList';
 import DescriptionTerm from '../../components/DescriptionTerm';
 import DescriptionDetails from '../../components/DescriptionDetails';
+import Subheader from "../../components/Subheader";
 
 function hashToQuery (hash) {
   if (hash.includes(":~:text")) {
@@ -67,15 +68,13 @@ class Support extends Component {
     const dictionaryEntryForMacReviseAccessKey = '"SRAO*EUZ": "{#control(option(r))}",';
     return (
       <main id="main">
-        <div className="subheader">
-          <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
-            <div className="flex mr1 self-center">
-              <header className="flex items-center min-h-40">
-                <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="about-typey-type-for-stenographers">About Typey&nbsp;Type for Stenographers</h2>
-              </header>
-            </div>
+        <Subheader>
+          <div className="flex mr1 self-center">
+            <header className="flex items-center min-h-40">
+              <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="about-typey-type-for-stenographers">About Typey&nbsp;Type for Stenographers</h2>
+            </header>
           </div>
-        </div>
+        </Subheader>
         <div className="p3 mx-auto mw-1024 type-face--sans-serif">
           <div className="mw-568">
             <p className="mt3">Typey&nbsp;Type is a typing app designed to help <a href="#about-stenography">stenography</a> students learn{" "}
