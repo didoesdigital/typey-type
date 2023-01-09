@@ -4,6 +4,7 @@ import GoogleAnalytics from "react-ga";
 import StrokesForWords from "../../components/StrokesForWords";
 import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
+import Subheader from "../../components/Subheader";
 
 class DictionariesIndex extends Component {
   componentDidMount() {
@@ -129,22 +130,20 @@ class DictionariesIndex extends Component {
 
     return (
       <main id="main">
-        <div className="subheader">
-          <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
-            <div className="flex mr1 self-center">
-              <header className="flex items-center min-h-40">
-                <h2
-                  ref={(heading) => {
-                    this.mainHeading = heading;
-                  }}
-                  tabIndex={-1}
-                >
-                  Dictionaries
-                </h2>
-              </header>
-            </div>
+        <Subheader>
+          <div className="flex mr1 self-center">
+            <header className="flex items-center min-h-40">
+              <h2
+                ref={(heading) => {
+                  this.mainHeading = heading;
+                }}
+                tabIndex={-1}
+              >
+                Dictionaries
+              </h2>
+            </header>
           </div>
-        </div>
+        </Subheader>
         <div className="p3 mx-auto mw-1024">
           <div className="flex flex-wrap justify-between">
             <div>
