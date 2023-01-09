@@ -63,7 +63,7 @@ const FinishedPossibleStrokeImprovements = ({
         return (
           <li
             key={i}
-            className="unstyled-list-item bg-slat p1 mb1 overflow-scroll"
+            className="unstyled-list-item bg-slat dark:bg-coolgrey-1100 p1 mb1 overflow-scroll"
           >
             <label className="checkbox-label mt0 mb1">
               <input

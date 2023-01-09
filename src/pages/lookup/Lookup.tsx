@@ -106,7 +106,7 @@ const Lookup = ({
             userSettings={userSettings}
           />
         </div>
-        <div className="panel p3 mt3">
+        <div className="panel bg-white p3 mt3">
           <p>
             This lookup uses Plover’s latest dictionary and Typey&nbsp;Type’s
             suggestions.

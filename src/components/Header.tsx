@@ -20,7 +20,7 @@ const Header = ({ fullscreen }: { fullscreen: string }) => {
         Skip to main content
       </a>
       <div
-        className={`bg-primary color-text-reverse hide-in-fullscreen${
+        className={`bg-violet-800 color-text-reverse hide-in-fullscreen${
           fullscreen ? " fullscreen" : ""
         }`}
         role="banner"

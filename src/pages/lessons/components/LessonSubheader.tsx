@@ -25,7 +25,7 @@ const LessonSubheader = React.forwardRef(
     ref: any
   ) => {
     return (
-      <div className="subheader">
+      <div className="subheader text-violet-200 bg-violet-900">
         <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
           <div className="flex mr1 self-center">
             <header className="flex items-center min-h-40">

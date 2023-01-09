@@ -267,8 +267,14 @@ body {
   font: $type;
   font-variant-ligatures: no-common-ligatures;
   margin: 0 auto;
-  color: $type-color;
-  background-color: add-tint($brand-primary, 95%);
+  color: var(--type-color);
+  background-color: var(--violet-100);
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    color: var(--coolgrey-500);
+    background-color: var(--coolgrey-1100);
+  }
 }
 
 h1 {
@@ -337,19 +343,16 @@ ol, ul, dd, dt {
 }
 
 a {
-  color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
-
+  color: var(--blue-600);
   &:visited {
-    color: add-tint($brand-primary, 20%);
+    color: var(--coolgrey-700);
   }
-
   &:hover {
-    color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
+    color: var(--blue-700);
   }
-
   &:active,
   &:focus {
-    color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
+    color: var(--blue-800);
   }
 }
 
@@ -494,6 +497,22 @@ select {
 }
 select::-ms-expand {
   display: none; // hide default arrows in IE10 & IE11
+}
+
+@media (prefers-color-scheme: dark) {
+  select {
+    background-color: var(--coolgrey-1000);
+    border-color: var(--coolgrey-1000);
+    background-image:
+      linear-gradient(45deg, transparent 60%, var(--coolgrey-800) 50%),
+      linear-gradient(135deg, var(--coolgrey-800) 50%, transparent 50%);
+    color: var(--coolgrey-400);
+
+    &:disabled {
+      background-color: var(--coolgrey-1000);
+      border-color: var(--coolgrey-1000);
+    }
+  }
 }
 
 small, .text-small {
@@ -721,6 +740,25 @@ input:focus::placeholder {
 }
 .b--brand-primary-tint--60 {
   border-color: add-tint($brand-primary, 60%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark\:border-coolgrey-600 {
+    border-color: var(--coolgrey-600);
+  }
+  // .b--brand-primary-tint--60.dark\:border-coolgrey-700,
+  .dark\:border-coolgrey-700 {
+    border-color: var(--coolgrey-700);
+  }
+  .dark\:border-coolgrey-800 {
+    border-color: var(--coolgrey-800);
+  }
+  .dark\:border-coolgrey-900 {
+    border-color: var(--coolgrey-900);
+  }
+  .dark\:border-coolgrey-1000 {
+    border-color: var(--coolgrey-1000);
+  }
 }
 .bb {
   border-bottom-style: solid;
@@ -982,14 +1020,18 @@ input:focus::placeholder {
 .bg-info     { background-color: add-tint($brand-primary, 95%); }
 .bg-slat     { background-color: add-tint($brand-primary, 90%); }
 .bg-primary  { background-color: $brand-primary; }
-.bg-white    { background-color: #fff; }
 .b-danger.b-danger   { border-color: saturate(add-tint($brand-danger, 30%), 30%); }
 .b-warning.b-warning { border-color: saturate(add-tint($brand-warning, 30%), 30%); }
 .b-info.b-info       { border-color: saturate(add-tint($brand-primary, 70%), 10%); }
 .b-slat.b-slat       { border-color: saturate(add-tint($brand-primary, 30%), 30%); }
 
+@media (prefers-color-scheme: dark) {
+  .bg-slat.dark\:bg-coolgrey-1100     { background-color: var(--coolgrey-1100); }
+}
+
 .color-interactive {
-  color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
+  color: var(--blue-500);
+
   &:hover {
     color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
   }
@@ -1167,8 +1209,6 @@ input:focus::placeholder {
 }
 
 .subheader {
-  background-color: saturate(add-shade($brand-primary, 30%), 5%);
-  color: add-tint($brand-primary, 70%);
   min-height: 72px; // fits buttons and margins
   h2 {
     font-size: $h4-size;
@@ -1199,7 +1239,6 @@ input:focus::placeholder {
 }
 
 .panel {
-  background-color: #fff;
   border: 1px solid add-tint($brand-primary, 60%);
   border-radius: 4px;
   &.panel--warning {
@@ -1207,7 +1246,11 @@ input:focus::placeholder {
     border: 1px solid add-shade($brand-warning, 10%);
   }
 }
-
+@media (prefers-color-scheme: dark) {
+  .panel {
+    border-color: var(--coolgrey-900)
+  }
+}
 
 .stat__number {
   font-size: $h3-size;
@@ -1350,7 +1393,7 @@ label {
 
   input {
     &:disabled {
-      border: 1px solid add-tint($brand-primary, 85);
+      border-color: add-tint($brand-primary, 85);
       background-color: add-tint($brand-primary, 97);
       color: add-tint($brand-primary, 70);
       & ~ b {
@@ -1397,36 +1440,58 @@ label {
     }
   }
   b:last-child {
-    background-color: desaturate(add-tint($brand-primary, 97%), 50%);
     border-radius: 0px 3px 3px 0px;
-    border: 1px solid add-tint($brand-primary, 60%);
-    bottom: 0px;
-    cursor: pointer;
-    position: absolute;
     right: 0px;
-    text-align: center;
-    top: 0px;
-    width: 32px;
-    &:hover {
-      background-color: desaturate(add-tint($brand-primary, 90%), 50%);
-    }
-    &:active,
-    &:focus {
-      background-color: desaturate(add-tint($brand-primary, 85%), 50%);
-    }
     i {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0px;
-      height: 0px;
       border-width: 0.6ex 0.6ex 0px;
       border-color: add-tint($brand-primary, 30%) transparent transparent;
-      border-style: solid;
-      margin: -0.3ex 0px 0px -0.56ex;
     }
   }
 }
+@media (prefers-color-scheme: dark) {
+  .react-numeric-input { // this class is added by component
+    input {
+      background-color: var(--coolgrey-1100);
+      color: var(--coolgrey-400);
+      &:disabled {
+        border-color: var(--coolgrey-900);
+        background-color: var(--coolgrey-1100);
+        color:  var(--coolgrey-900);
+        & ~ b {
+          cursor: default;
+          border-color: var(--coolgrey-900) !important;
+          background-color: var(--coolgrey-1000) !important;
+        }
+        & ~ b i {
+          border-color: transparent transparent var(--coolgrey-800) !important;
+        }
+        & ~ b:last-child i {
+          border-color: var(--coolgrey-800) transparent transparent !important;
+        }
+      }
+    }
+    b {
+      background-color: var(--coolgrey-1000);
+      border-color: var(--coolgrey-700);
+      &:hover {
+        background-color: var(--coolgrey-900);
+      }
+      &:active,
+      &:focus {
+        background-color: var(--coolgrey-800);
+      }
+      i {
+        border-color: transparent transparent var(--coolgrey-500);
+      }
+    }
+    b:last-child {
+      i {
+        border-color: var(--coolgrey-500) transparent transparent;
+      }
+    }
+  }
+}
+
 .checkbox-group {
   position: relative;
   display: block;
@@ -1480,7 +1545,7 @@ label {
 
 .button,
 .link-button {
-  background-color: $brand-primary;
+  background-color: var(--violet-800); //$brand-primary;
   border-radius: 4px;
   border: 1px solid transparent;
   color: add-tint($brand-primary, 60%);
@@ -1550,6 +1615,33 @@ label {
       color: add-tint($brand-primary, 90%);
       background-color: add-tint(desaturate($brand-primary, 90%), 60%);
       cursor: default;
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &.button--secondary {
+      background-color: var(--coolgrey-1000);
+      border-color: var(--coolgrey-800);
+      box-shadow: none;
+      color: var(--coolgrey-400);
+      opacity: 0.6;
+      &:visited {
+        color: var(--coolgrey-400);
+      }
+      &:hover {
+        color: var(--coolgrey-400);
+        background-color: var(--coolgrey-900);
+      }
+      &:active,
+      &:focus {
+        color: var(--coolgrey-400);
+        background-color: var(--coolgrey-900);
+      }
+      &:disabled {
+        color: var(--coolgrey-600);
+        background-color: var(--coolgrey-800);
+        cursor: default;
+      }
     }
   }
 
@@ -2475,6 +2567,16 @@ $lineAdjustment: 4px;
   1px -1px 2px #fff,
   -1px -1px 2px #fff,
   -1px 1px 2px #fff
+}
+
+@media (prefers-color-scheme: dark) {
+  .text-shadow-outline {
+    text-shadow: 0px 0px 2px var(--coolgrey-1000),
+    1px 1px 2px var(--coolgrey-1000),
+    1px -1px 2px var(--coolgrey-1000),
+    -1px -1px 2px var(--coolgrey-1000),
+    -1px 1px 2px var(--coolgrey-1000)
+  }
 }
 
 .middot-separator li:not(:first-child)::before {

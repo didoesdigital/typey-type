@@ -288,7 +288,7 @@ class RecommendationBox extends Component<Props> {
 
       recommendedNextLesson = (
         <React.Fragment>
-          <div className="panel min-h-424 p5 mb3">
+          <div className="panel bg-white min-h-424 p5 mb3">
             {recommendedNextLessonHeading}
             <p className="mb0 mt4">
               <strong>{recommendedLinkTitle}</strong>
@@ -316,7 +316,7 @@ class RecommendationBox extends Component<Props> {
     } else {
       recommendedNextLesson = (
         <React.Fragment>
-          <div className="panel min-h-424 p5 mb3">
+          <div className="panel bg-white min-h-424 p5 mb3">
             <h3 className={recommendedNextLessonHeadingClassNames}>
               Recommended…
             </h3>

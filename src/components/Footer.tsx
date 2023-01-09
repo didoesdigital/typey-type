@@ -20,7 +20,7 @@ class Footer extends Component<Props> {
     return (
       <div
         className={
-          "bg-slat bt b--brand-primary-tint--60 hide-in-fullscreen" + fullscreen
+          "bg-slat dark:bg-coolgrey-1100 bt b--brand-primary-tint--60 dark:border-coolgrey-800 hide-in-fullscreen" + fullscreen
         }
       >
         <footer

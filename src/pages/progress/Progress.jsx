@@ -363,7 +363,7 @@ class Progress extends Component {
 
     let saveAndLoadPanels = this.state.reducedSaveAndLoad ? null : (
       <div className="progress-layout pl3 pr3 pt3 mx-auto mw-1024">
-        <div className="panel p3 mb3">
+        <div className="panel bg-white p3 mb3">
           <h2>Save your progress</h2>
           <p>Typey&nbsp;Type saves your brief progress in your browser’s local storage.<strong className="bg-danger"> You’ll lose your progress if you clear your browsing data (history, cookies, and cache).</strong> If you share this device with other people or use Typey&nbsp;Type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;Type.</p>
           <p className="mb0">
@@ -371,7 +371,7 @@ class Progress extends Component {
           </p>
         </div>
 
-        <div className="panel p3 mb3">
+        <div className="panel bg-white p3 mb3">
           <h2 className="mt0">Load your progress</h2>
           <p className="mt2 mb3">
             Restore your progress from a previous session by entering your saved progress and loading it into Typey&nbsp;Type. You can also clear your progress by loading in empty curly braces, <code>{"{}"}</code>.
