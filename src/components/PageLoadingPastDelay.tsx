@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Subheader from "./Subheader";
 
 class PageLoadingPastDelay extends Component {
+  mainHeading?: HTMLHeadingElement | null;
+
   render() {
     return (
       <main id="main">
