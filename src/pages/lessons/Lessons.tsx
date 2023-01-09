@@ -69,6 +69,7 @@ const Lessons = ({
           <Lesson
             customLesson={customLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            fullscreen={lessonProps.fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             personalDictionaries={personalDictionaries}
@@ -91,6 +92,7 @@ const Lessons = ({
           <Lesson
             customLesson={customLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            fullscreen={lessonProps.fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             personalDictionaries={personalDictionaries}
@@ -267,6 +269,7 @@ const Lessons = ({
           <Lesson
             customLesson={customLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            fullscreen={lessonProps.fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             personalDictionaries={personalDictionaries}
