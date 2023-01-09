@@ -17,6 +17,7 @@ const Popover = ({
     backgroundColor: "#fff",
     border: "2px solid #E2E0E5",
     borderRadius: "4px",
+    color: 'var(--coolgrey-1000)',
     padding: "8px 16px",
     pointerEvents: "none",
     position: "absolute",
