@@ -3,6 +3,7 @@ import GoogleAnalytics from "react-ga";
 import { Link } from "react-router-dom";
 import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
+import Subheader from "../../components/Subheader";
 
 type Props = {
   setAnnouncementMessage: () => void;
@@ -20,23 +21,21 @@ class Contribute extends Component<Props> {
   render() {
     return (
       <main id="main">
-        <div className="subheader">
-          <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
-            <div className="flex mr1 self-center">
-              <header className="flex items-center min-h-40">
-                <h2
-                  ref={(heading) => {
-                    this.mainHeading = heading;
-                  }}
-                  tabIndex={-1}
-                  id="contribute-to-typey-type"
-                >
-                  Contribute to Typey&nbsp;Type
-                </h2>
-              </header>
-            </div>
+        <Subheader>
+          <div className="flex mr1 self-center">
+            <header className="flex items-center min-h-40">
+              <h2
+                ref={(heading) => {
+                  this.mainHeading = heading;
+                }}
+                tabIndex={-1}
+                id="contribute-to-typey-type"
+              >
+                Contribute to Typey&nbsp;Type
+              </h2>
+            </header>
           </div>
-        </div>
+        </Subheader>
         <div className="p3 mx-auto mw-1024 type-face--sans-serif">
           <div className="mw-568">
             <p className="mt3">Thanks for your interest in Typey&nbsp;Type!</p>
