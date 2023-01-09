@@ -4,6 +4,7 @@ import StrokesForWords from "../../components/StrokesForWords";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
+import Subheader from "../../components/Subheader";
 
 import type {
   Experiments,
@@ -57,26 +58,24 @@ const Lookup = ({
 
   return (
     <main id="main">
-      <div className="subheader">
-        <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
-          <div className="flex mr1 self-center">
-            <header className="flex items-center min-h-40">
-              <h2 ref={mainHeading} tabIndex={-1}>
-                Lookup
-              </h2>
-            </header>
-          </div>
-          <div className="flex mxn2">
-            <PseudoContentButton
-              className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard"
-              style={{ lineHeight: 2 }}
-              dataClipboardTarget="#js-bookmark-url"
-            >
-              Copy to clipboard
-            </PseudoContentButton>
-          </div>
+      <Subheader>
+        <div className="flex mr1 self-center">
+          <header className="flex items-center min-h-40">
+            <h2 ref={mainHeading} tabIndex={-1}>
+              Lookup
+            </h2>
+          </header>
         </div>
-      </div>
+        <div className="flex mxn2">
+          <PseudoContentButton
+            className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard"
+            style={{ lineHeight: 2 }}
+            dataClipboardTarget="#js-bookmark-url"
+          >
+            Copy to clipboard
+          </PseudoContentButton>
+        </div>
+      </Subheader>
       <div
         className="p3 mx-auto mw-1024 mh-page"
         data-testid="lookup-page-contents"
