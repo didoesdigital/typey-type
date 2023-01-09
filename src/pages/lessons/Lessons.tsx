@@ -271,22 +271,22 @@ const Lessons = ({
         path={`${match.url}/flashcards`}
         render={(props) => (
           <Lesson
+            changeFullscreen={changeFullscreen}
             customLesson={customLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            flashcardsMetWords={flashcardsMetWords}
             fullscreen={lessonProps.fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            personalDictionaries={personalDictionaries}
             globalUserSettings={lessonProps.globalUserSettings}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            personalDictionaries={personalDictionaries}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
-            changeFullscreen={changeFullscreen}
-            flashcardsMetWords={flashcardsMetWords}
             userSettings={lessonProps.userSettings}
             {...props}
           />
