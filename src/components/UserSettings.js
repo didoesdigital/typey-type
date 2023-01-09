@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import { Tooltip } from 'react-tippy';
 import NumericInput from 'react-numeric-input';
+import SettingListItem from './SettingListItem';
 
 class UserSettings extends Component {
   constructor(props) {
@@ -70,12 +71,12 @@ class UserSettings extends Component {
       <div className="user-settings">
         <form>
           <div className="text-small">
-            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'mh-page bg-slat bl b--brand-primary-tint--60 min-width-320 hide' : 'mh-page bg-slat bl b--brand-primary-tint--60 min-width-320'} aria-hidden={this.props.hideOtherSettings}>
+            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'mh-page bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 min-width-320 hide' : 'mh-page bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 min-width-320'} aria-hidden={this.props.hideOtherSettings}>
               <h3 className="mb1 visually-hidden">Settings</h3>
 
               <p className="mb0 pt2 pb1 pb1 pl2"><small>Total words: {this.props.totalWordCount}</small></p>
               <ul className="unstyled-list mb0 pb1">
-                <li className="ml0 pl1 bt b--brand-primary-tint--60">
+                <SettingListItem sectionHierachy='major'>
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
                     <Tooltip
                       title="Limit the number of words shown (0 for unlimited)"
@@ -113,8 +114,8 @@ class UserSettings extends Component {
                       />
                     </div>
                   </div>
-                </li>
-                <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
 
                     <Tooltip
@@ -154,8 +155,8 @@ class UserSettings extends Component {
                       />
                     </div>
                   </div>
-                </li>
-                <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
 
                     <Tooltip
@@ -196,8 +197,8 @@ class UserSettings extends Component {
                     </div>
 
                   </div>
-                </li>
-                <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                     <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
                       <Tooltip
                         title="Sort the lesson (newest words need the most practice)"
@@ -222,8 +223,8 @@ class UserSettings extends Component {
                         <option value="sortLongest">Longest words first</option>
                       </select>
                     </div>
-                  </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint--60">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='major'>
                     <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
                       <Tooltip
                         title="Metronome beats per minute"
@@ -262,8 +263,8 @@ class UserSettings extends Component {
                         />
                       </div>
                     </div>
-                  </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint--60">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='major'>
                     <div className="checkbox-group p1">
                       <label className="checkbox-label mb1">
                         <input
@@ -291,8 +292,8 @@ class UserSettings extends Component {
                         </Tooltip>
                       </label>
                     </div>
-                  </li>
-                    <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                     <div className="checkbox-group p1">
                       <label className="checkbox-label mb1">
                         <input
@@ -321,8 +322,8 @@ class UserSettings extends Component {
                       </label>
                     </div>
 
-                  </li>
-                    <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                     <div className="checkbox-group p1">
                       <label className="checkbox-label mb1">
                         <input
@@ -351,8 +352,8 @@ class UserSettings extends Component {
                       </label>
                     </div>
 
-                  </li>
-                    <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                     <div className="p1">
                       <div className="radio-group">
                         <label className="radio-label pb1">
@@ -409,8 +410,8 @@ class UserSettings extends Component {
                         </label>
                       </div>
                     </div>
-                  </li>
-                <li className="ml0 pl1 bt b--brand-primary-tint--60">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='major'>
 
                   <div className="checkbox-group p1">
                     <label className="checkbox-label mb1">
@@ -440,8 +441,8 @@ class UserSettings extends Component {
                     </label>
                   </div>
 
-                </li>
-                <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                   <div className="checkbox-group p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -470,8 +471,8 @@ class UserSettings extends Component {
                     </label>
                   </div>
 
-                </li>
-                <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                   <div className="checkbox-group p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -500,8 +501,8 @@ class UserSettings extends Component {
                     </label>
                   </div>
 
-                </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint--60">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='major'>
                     <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
                       <Tooltip
                         title="Set match spaces to suit your steno settings"
@@ -524,9 +525,8 @@ class UserSettings extends Component {
                         <option value="spaceOff">Ignore spaces</option>
                       </select>
                     </div>
-                  </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
-
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                     <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
                       <Tooltip
                         title="Show steno diagrams that suit your steno layout"
@@ -560,8 +560,8 @@ class UserSettings extends Component {
                         </optgroup>
                       </select>
                     </div>
-                  </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                     <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
                       <label className="mr1" htmlFor="diagramSize">Diagram size</label>
                       <div>
@@ -587,8 +587,8 @@ class UserSettings extends Component {
                         />
                       </div>
                     </div>
-                  </li>
-                  <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                     <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
                       <Tooltip
                         title="Show lesson material words as a single, sliding line or multiple, wrapping lines"
@@ -610,8 +610,8 @@ class UserSettings extends Component {
                         <option value="hidden">Hidden</option>
                       </select>
                     </div>
-                  </li>
-                <li className="ml0 pl1 bt b--brand-primary-tint--60">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='major'>
                   <div className="checkbox-group p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -640,8 +640,8 @@ class UserSettings extends Component {
                     </label>
                   </div>
 
-                </li>
-                <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                   <div className="checkbox-group p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -700,8 +700,8 @@ class UserSettings extends Component {
                     </ReactModal>)
                   </div>
 
-                </li>
-                <li className="ml0 pl1 bt b--brand-primary-tint--60">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='major'>
                   <div className="checkbox-group p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -729,8 +729,8 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
-                </li>
-                <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                   <div className="checkbox-group p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -758,8 +758,8 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
-                </li>
-                <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                   <div className="checkbox-group p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -787,8 +787,8 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
-                </li>
-                <li className="ml0 pl1 bt b--brand-primary-tint">
+                </SettingListItem>
+                <SettingListItem sectionHierachy='minor'>
                   <div className="checkbox-group p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -816,7 +816,7 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
-                </li>
+                </SettingListItem>
                 </ul>
               </div>
             </div>
