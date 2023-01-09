@@ -16,9 +16,9 @@
   --coolgrey-1000: #232027; //#232027;
   --coolgrey-100: #FAF9FB; //#FAF9FB;
   --coolgrey-1100: #0F0E11;
-  --coolgrey-200: #F2F1F4; //#F2F1F4;
-  --coolgrey-300: #EAE8ED; //#EAE8ED;
-  --coolgrey-400: #E2E0E5; //#E2E0E5;
+  --coolgrey-200: #F2F1F4; //#F2F1F4; // hsl(260, 12%, 95%)
+  --coolgrey-300: #ece9ee; //#EAE8ED; // hsl(264, 12%, 92%)
+  --coolgrey-400: #E2E0E5; //#E2E0E5; // hsl(264, 9%, 89%)
   --coolgrey-500: #A6A1AF; //#A6A1AF;
   --coolgrey-600: #868091; //#868091;
   --coolgrey-700: #676170; //#676170;
@@ -28,7 +28,7 @@
   // --gold-100: #; //#FDFBF6;
   // --gold-200: #; //#FCF5E9;
   // --gold-300: #; //#FAEAD1;
-  // --gold-400: #; //#F5D6A3;
+  --gold-400: #ffe5b3; //#F5D6A3;
   // --gold-500: #; //#ECB255;
   // --gold-600: #; //#CD840E;
   // --gold-700: #; //#A66907;
@@ -47,11 +47,11 @@
   // --magenta-1000: #; //#40081C;
   // --magenta-100: #; //#FCF8FA;
   // --magenta-200: #; //#FAEBF0;
-  // --magenta-300: #; //#F5D6E1;
+  --magenta-300: #ead6de; //#F5D6E1;
   // --magenta-400: #; //#F2C5D6;
   // --magenta-500: #; //#E89BB7;
   // --magenta-600: #; //#E26F99;
-  // --magenta-700: #; //#CC2E68;
+  --magenta-700: #d64e84; //#CC2E68;
   // --magenta-800: #; //#9A1D4B;
   // --magenta-900: #; //#6A1131;
   // --peach-1000: #; //#3C1606;
@@ -77,7 +77,7 @@
   // --truegrey-1000: #; //#242424;
   // --truegrey-100: #; //#FAF9FB;
   // --truegrey-200: #; //#F2F2F2;
-  // --truegrey-300: #; //#EBEBEB;
+  --truegrey-300: #ececec; //#EBEBEB;
   // --truegrey-400: #; //#E3E3E3;
   // --truegrey-500: #; //#A8A8A8;
   // --truegrey-600: #; //#898989;
@@ -88,7 +88,7 @@
   --violet-100: #f5f4f6; //#F9F8FB;
   --violet-200: #c6bdcb; //#F1EEF6;
   // --violet-300: #; //#E4DDEE;
-  // --violet-400: #; //#D5CBE6;
+  --violet-400: #c8b7d1; //#D5CBE6;
   // --violet-500: #; //#B19CD3;
   --violet-600: #9193a8; //#9880C2;
   --violet-700: #7109AA; //#5F428F; // on steno keys
@@ -559,7 +559,7 @@ select:focus {
 }
 
 ::selection {
-  background-color: add-tint($brand-warning, 60%);
+  background-color: var(--gold-400);
 }
 
 // Cross-browser placeholder styling
@@ -733,7 +733,7 @@ input:focus::placeholder {
   border-color: transparent;
 }
 .b--brand-primary {
-  border-color: $brand-primary;
+  border-color: var(--violet-800);
 }
 .b--brand-primary-tint {
   border-color: add-tint($brand-primary, 80%);
@@ -1015,15 +1015,13 @@ input:focus::placeholder {
 .text-left { text-align: left; }
 .text-center { text-align: center; }
 .text-right  { text-align: right; }
-.bg-danger   { background-color: add-tint($brand-danger, 80%); }
-.bg-warning  { background-color: add-tint($brand-warning, 60%); }
-.bg-info     { background-color: add-tint($brand-primary, 95%); }
-.bg-slat     { background-color: add-tint($brand-primary, 90%); }
-.bg-primary  { background-color: $brand-primary; }
-.b-danger.b-danger   { border-color: saturate(add-tint($brand-danger, 30%), 30%); }
-.b-warning.b-warning { border-color: saturate(add-tint($brand-warning, 30%), 30%); }
-.b-info.b-info       { border-color: saturate(add-tint($brand-primary, 70%), 10%); }
-.b-slat.b-slat       { border-color: saturate(add-tint($brand-primary, 30%), 30%); }
+.bg-danger   { background-color: var(--magenta-300); }
+.bg-warning  { background-color: var(--gold-400); }
+.bg-info     { background-color: var(--violet-100); }
+.bg-slat     { background-color: var(--coolgrey-300); }
+.bg-primary  { background-color: var(--violet-800); }
+.b-danger.b-danger   { border-color: var(--magenta-700); }
+.b-info.b-info       { border-color: var(--violet-400); }
 
 @media (prefers-color-scheme: dark) {
   .bg-slat.dark\:bg-coolgrey-1100     { background-color: var(--coolgrey-1100); }
@@ -1146,11 +1144,11 @@ input:focus::placeholder {
     color: add-tint($brand-primary, 70%);
   }
   &:hover {
-    color: add-tint($brand-primary, 90%);
+    color: var(--coolgrey-300);
     box-shadow: inset add-tint($brand-primary, 50%) 0px -8px 0px 0px;
   }
   &:active, &:focus {
-    color: add-tint($brand-primary, 90%);
+    color: var(--coolgrey-300);
     box-shadow: inset add-tint($brand-primary, 50%) 0px -8px 0px 0px;
   }
 
@@ -1242,7 +1240,7 @@ input:focus::placeholder {
   border: 1px solid add-tint($brand-primary, 60%);
   border-radius: 4px;
   &.panel--warning {
-    background-color: add-tint($brand-warning, 60%);
+    background-color: var(--gold-400);
     border: 1px solid add-shade($brand-warning, 10%);
   }
 }
@@ -1363,7 +1361,7 @@ $textarea-padding-x: 8px;
 }
 
 .progress-textarea {
-  background-color: add-tint($brand-primary, 95%);
+  background-color: var(--violet-100);
 
   &:hover {
     background-color: add-tint($brand-primary, 97%);
@@ -1421,7 +1419,7 @@ label {
     top: 0px;
     width: 32px;
     &:hover {
-      background-color: desaturate(add-tint($brand-primary, 90%), 50%);
+      background-color: var(--truegrey-300);
     }
     &:active,
     &:focus {
@@ -1545,7 +1543,7 @@ label {
 
 .button,
 .link-button {
-  background-color: var(--violet-800); //$brand-primary;
+  background-color: var(--violet-800);
   border-radius: 4px;
   border: 1px solid transparent;
   color: add-tint($brand-primary, 60%);
@@ -1576,7 +1574,7 @@ label {
     background-color: transparent;
     font-size: $h5-size;
     &:hover {
-      color: add-tint($brand-primary, 90%);
+      color: var(--coolgrey-300);
     }
     &:active,
     &:focus {
@@ -1584,7 +1582,7 @@ label {
     }
   }
   &:disabled {
-    color: add-tint($brand-primary, 90%);
+    color: var(--coolgrey-300);
     background-color: add-tint(desaturate($brand-primary, 90%), 60%);
     cursor: default;
   }
@@ -1604,15 +1602,15 @@ label {
     }
     &:hover {
       color: desaturate($brand-primary, 10%);
-      background-color: add-tint($brand-primary, 95%);
+      background-color: var(--violet-100);
     }
     &:active,
     &:focus {
       color: desaturate($brand-primary, 15%);
-      background-color: add-tint($brand-primary, 95%);
+      background-color: var(--violet-100);
     }
     &:disabled {
-      color: add-tint($brand-primary, 90%);
+      color: var(--coolgrey-300);
       background-color: add-tint(desaturate($brand-primary, 90%), 60%);
       cursor: default;
     }
@@ -1851,7 +1849,7 @@ label {
 .steno-stroke {
   font-family: $type-face--mono;
   background-color: desaturate(add-tint($brand-primary, 5%), 40%);
-  color: add-tint($brand-primary, 90%);
+  color: var(--coolgrey-300);
   letter-spacing: 0.1em;
 
   &::selection {
@@ -1864,7 +1862,7 @@ label {
 
   &.steno-stroke--subtle {
     background-color: desaturate(add-tint($brand-primary, 25%), 40%);
-    color: add-tint($brand-primary, 95%);
+    color: var(--violet-100);
 
     &::selection {
       background-color: darken(desaturate(add-tint($brand-warning, 5%), 40%), 15%);
@@ -1873,12 +1871,12 @@ label {
 }
 .raw-steno-key {
   background-color: desaturate(add-tint($brand-primary, 5%), 40%);
-  color: add-tint($brand-primary, 90%);
+  color: var(--coolgrey-300);
   padding-left: 4px;
   padding-right: 4px;
   &.raw-steno-key--subtle {
     background-color: desaturate(add-tint($brand-primary, 30%), 40%);
-    color: add-tint($brand-primary, 90%);
+    color: var(--coolgrey-300);
   }
 }
 .typed-text-container {
@@ -1886,7 +1884,7 @@ label {
 }
 .typed-text {
   display: none;
-  border: 1px solid $brand-primary;
+  border: 1px solid var(--violet-800);
   margin-left: auto;
   margin-right: auto;
 }
@@ -1925,7 +1923,7 @@ label {
   border-bottom: 2px solid $brand-highlight;
 }
 .matched.steno-material {
-  border-bottom: 2px solid $brand-primary;
+  border-bottom: 2px solid var(--violet-800);
 }
 // .timer-table {
 //   width: 156px;
@@ -2025,7 +2023,6 @@ label {
   }
 }
 .skip-to-link {
-  // background-color: $brand-primary;
   position: absolute !important;
   height: 1px;
   width: 1px;
@@ -2071,7 +2068,7 @@ label {
   font-weight: bold;
   font-size: $h4-size;
   text-align: center;
-  box-shadow: 0 1px #EBEBEB;
+  box-shadow: 0 1px var(--truegrey-300);
   background: #fff;
   border-radius: 4px;
   border: 1px solid;
@@ -2139,7 +2136,7 @@ label {
 
 .fullscreen-button {
   position: absolute;
-  background-color: $brand-primary;
+  background-color: var(--violet-800);
   border-radius: 4px;
   border: 1px solid transparent;
   color: add-tint($brand-primary, 30%);
@@ -2164,11 +2161,11 @@ label {
   }
   &.fullscreen-button-ghost {
     background-color: transparent;
-    border: 1px solid add-tint($brand-primary, 90%);
+    border: 1px solid var(--coolgrey-300);
     font-size: $h5-size;
     text-decoration: underline;
     &:hover {
-      color: add-tint($brand-primary, 90%);
+      color: var(--coolgrey-300);
     }
     &:active,
     &:focus {
@@ -2284,7 +2281,7 @@ small .svg-icon-wrapper.svg-baseline svg {
     content: '';
     height: 3px;
     width: 48px;
-    background-color: $brand-primary;
+    background-color: var(--violet-800);
     display: block;
     margin-bottom: 16px;
     margin-top: 8px;
@@ -2299,7 +2296,7 @@ small .svg-icon-wrapper.svg-baseline svg {
       content: '';
       height: 2px;
       width: 140px;
-      background-color: $brand-primary;
+      background-color: var(--violet-800);
       display: block;
       right: -144px;
       bottom: 4px;
@@ -2617,7 +2614,7 @@ $lineAdjustment: 4px;
   min-height: 272px;
   max-height: 90%;
 
-  background-color: add-tint($brand-primary, 95%);
+  background-color: var(--violet-100);
   border-radius: 4px;
   border: 1px solid add-tint($brand-primary, 60%);
   font-family: $type-face--sans-serif;
