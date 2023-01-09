@@ -135,7 +135,7 @@ export default function Game() {
                           state.firstGuess ? "" : previousStenoStroke.toString()
                         )}
                         brief={`duplicate-${puzzleText}`}
-                        classes="w-100"
+                        classes="w-100 steno-diagram-svg"
                         diagramWidth={diagramWidth}
                         handleOnClick={undefined}
                         onStrokeColor={rightWrongColor}
@@ -149,6 +149,7 @@ export default function Game() {
                   </CSSTransition>
                 </TransitionGroup>
                 <StenoLayoutDiagram
+                  classes="steno-diagram-svg"
                   id="stenoDiagram"
                   {...mapBriefsFunction(stenoStroke.toString())}
                   handleOnClick={onClickHandler}

@@ -139,6 +139,7 @@ class NoNumberBarInnerThumbNumbersStenoDiagram extends Component {
         viewBox="0 0 204 100"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden={true}
+        className={this.props.classes}
       >
         <g id={"stenoboard-" + this.props.brief}>
           <rect

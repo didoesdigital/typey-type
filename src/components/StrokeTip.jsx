@@ -124,6 +124,7 @@ export default function StrokeTip({
                         }`}
                       >
                         <StenoLayoutDiagram
+                          classes="steno-diagram-svg"
                           id={"diagramID-" + index + "-" + strokeToDraw}
                           {...mapBriefsFunction(strokeToDraw)}
                           brief={strokeToDraw}
@@ -141,6 +142,7 @@ export default function StrokeTip({
                         aria-hidden={true}
                       >
                         <StenoLayoutDiagram
+                          classes="steno-diagram-svg"
                           id={"diagramID-" + index + "-" + strokeToDraw}
                           {...mapBriefsFunction("")}
                           brief=""

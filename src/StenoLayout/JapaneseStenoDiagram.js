@@ -154,7 +154,7 @@ class JapaneseStenoDiagram extends Component {
     let svgDiagramID = this.props.id || 'stenoDiagram';
 
     return (
-      <svg id={svgDiagramID} width={diagramWidth} viewBox="0 0 202 108" xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
+      <svg id={svgDiagramID} width={diagramWidth} viewBox="0 0 202 108" xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden} className={this.props.classes}>
         <g id={"stenoboard-" + this.props.brief } fill="none" fillRule="evenodd" stroke="none" strokeWidth="1">
           <g fillRule="nonzero" transform="translate(1 2)">
             <rect height="24" id="theカ" width="20" fill={this.props.theカ ? theカOnColor : theカOffColor} rx="4" stroke={theカStrokeColor} x="126" y="81"/>

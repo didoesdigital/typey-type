@@ -87,7 +87,7 @@ class KoreanModernCStenoDiagram extends Component {
     let svgDiagramID = this.props.id || 'stenoDiagram';
 
     return (
-      <svg id={svgDiagramID} viewBox="0 0 240 112" width={diagramWidth} xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
+      <svg id={svgDiagramID} viewBox="0 0 240 112" width={diagramWidth} xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden} className={this.props.classes}>
         <g id={"stenoboard-" + this.props.brief } fill="none" fillRule="evenodd">
           <rect id="theRightㅁKey" stroke={strokeColor} fill={this.props.theRightㅁKey ? theRightㅁKeyOnColor : theRightㅁKeyOffColor} fillRule="nonzero" x="221" y="61" width="18" height="24" rx="4"/>
           <rect id="theRightㅈKey" stroke={strokeColor} fill={this.props.theRightㅈKey ? theRightㅈKeyOnColor : theRightㅈKeyOffColor} fillRule="nonzero" x="198" y="55" width="18" height="24" rx="4"/>

@@ -1820,6 +1820,13 @@ label {
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  .steno-diagram-svg {
+    fill-opacity: 0.8;
+    filter: hue-rotate(-8deg);
+  }
+}
+
 .unknown-steno-diagram {
   position: relative;
 

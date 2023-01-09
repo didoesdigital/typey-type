@@ -68,7 +68,7 @@ class DanishStenoDiagram extends Component {
     let svgDiagramID = this.props.id || 'stenoDiagram';
 
     return (
-      <svg id={svgDiagramID} viewBox="0 0 215 101" width={diagramWidth} xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
+      <svg id={svgDiagramID} viewBox="0 0 215 101" width={diagramWidth} xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden} className={this.props.classes}>
         <g id={"stenoboard-" + this.props.brief } transform="translate(1 1)" fill="none" fillRule="evenodd">
           <rect id="rightDLower" stroke={strokeColor} fill={this.props.rightDLower ? rightDLowerOnColor : rightDLowerOffColor} x="195" y="48" width="18" height="23" rx="4"/>
           <rect id="rightDUpper" stroke={strokeColor} fill={this.props.rightDUpper ? rightDUpperOnColor : rightDUpperOffColor} x="195" y="20" width="18" height="23" rx="4"/>
