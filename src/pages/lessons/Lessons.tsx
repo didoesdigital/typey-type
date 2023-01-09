@@ -74,6 +74,7 @@ const Lessons = ({
             fullscreen={lessonProps.fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            globalUserSettings={lessonProps.globalUserSettings}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
@@ -82,6 +83,7 @@ const Lessons = ({
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
+            userSettings={lessonProps.userSettings}
             {...props}
           />
         )}
@@ -97,6 +99,7 @@ const Lessons = ({
             fullscreen={lessonProps.fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            globalUserSettings={lessonProps.globalUserSettings}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
@@ -105,6 +108,7 @@ const Lessons = ({
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
+            userSettings={lessonProps.userSettings}
             {...props}
           />
         )}
@@ -273,6 +277,7 @@ const Lessons = ({
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             personalDictionaries={personalDictionaries}
+            globalUserSettings={lessonProps.globalUserSettings}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
@@ -282,6 +287,7 @@ const Lessons = ({
             updateFlashcardsProgress={updateFlashcardsProgress}
             changeFullscreen={changeFullscreen}
             flashcardsMetWords={flashcardsMetWords}
+            userSettings={lessonProps.userSettings}
             {...props}
           />
         )}
