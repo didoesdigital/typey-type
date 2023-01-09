@@ -19,6 +19,7 @@ import { CarouselProvider, Slider, ButtonBack, ButtonNext } from 'pure-react-car
 import SlideNodes from './components/SlideNodes';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Link } from 'react-router-dom';
+import Subheader from "../../../components/Subheader";
 
 const shortestDimension = 3;
 const longestDimension = 4;
@@ -377,22 +378,20 @@ currentSlide: currentSlide
     return (
       <div>
         <main id="main">
-          <div className={"subheader hide-in-fullscreen" + fullscreen}>
-            <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
-              <div className="flex mr1 self-center">
-                <header className="flex items-center min-h-40">
-                  <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="heading-link table-cell mr2" role="button">
-                    <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="flashcards">{flashcardsHeading}</h2>
-                  </a>
-                </header>
-              </div>
-              <div className="flex mxn2">
-                <Link to={lessonpath} className="link-button link-button-ghost table-cell mr1">Back to lesson</Link>
-                {/* Shuffle button */}
-                <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} data-shuffle="true" role="button">Shuffle</a>
-              </div>
+          <Subheader fullscreen={fullscreen}>
+            <div className="flex mr1 self-center">
+              <header className="flex items-center min-h-40">
+                <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="heading-link table-cell mr2" role="button">
+                  <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="flashcards">{flashcardsHeading}</h2>
+                </a>
+              </header>
             </div>
-          </div>
+            <div className="flex mxn2">
+              <Link to={lessonpath} className="link-button link-button-ghost table-cell mr1">Back to lesson</Link>
+              {/* Shuffle button */}
+              <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="button button--secondary table-cell mr2" style={{lineHeight: 2}} data-shuffle="true" role="button">Shuffle</a>
+            </div>
+          </Subheader>
 
           <div className="p3 mx-auto mw-1024">
             <div className="flex flex-wrap justify-between">
