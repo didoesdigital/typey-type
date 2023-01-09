@@ -24,6 +24,7 @@ import mapBriefToPalantypeKeys from '../../utils/stenoLayouts/mapBriefToPalantyp
 import { fetchResource } from '../../utils/getData';
 import { Tooltip } from 'react-tippy';
 import GoogleAnalytics from 'react-ga';
+import Subheader from "../../components/Subheader";
 
 import type { Outline, UserSettings } from "../../types";
 
@@ -291,23 +292,21 @@ class Writer extends Component<Props, State> {
 
     return (
       <main id="main">
-        <div className="subheader">
-          <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
-            <div className="flex mr1 self-center">
-              <header className="flex items-center min-h-40">
-                {/* @ts-ignore */}
-                <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1} id="writer">Writer</h2>
-              </header>
-            </div>
-            <div className="flex mxn2">
+        <Subheader>
+          <div className="flex mr1 self-center">
+            <header className="flex items-center min-h-40">
               {/* @ts-ignore */}
-              {downloadDiagramSVG ? <a href={downloadDiagramSVG} ref={(downloadLink) => { this.downloadLink = downloadLink; }} download={svgFileName} onClick={this.downloadDiagramSVG.bind(this)} className="link-button link-button-ghost table-cell mr1">Download diagram (SVG)</a>
-                :
-                null
-              }
-            </div>
+              <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1} id="writer">Writer</h2>
+            </header>
           </div>
-        </div>
+          <div className="flex mxn2">
+            {/* @ts-ignore */}
+            {downloadDiagramSVG ? <a href={downloadDiagramSVG} ref={(downloadLink) => { this.downloadLink = downloadLink; }} download={svgFileName} onClick={this.downloadDiagramSVG.bind(this)} className="link-button link-button-ghost table-cell mr1">Download diagram (SVG)</a>
+              :
+              null
+            }
+          </div>
+        </Subheader>
         <div className="p3 mx-auto mw-1024">
           <div className="flex flex-wrap justify-between">
             <div className="mw-568">
