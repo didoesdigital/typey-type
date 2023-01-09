@@ -499,9 +499,6 @@ select {
     5px 5px;
   background-repeat: no-repeat;
 }
-select::-ms-expand {
-  display: none; // hide default arrows in IE10 & IE11
-}
 
 @media (prefers-color-scheme: dark) {
   select {
@@ -595,16 +592,8 @@ textarea:focus::-webkit-input-placeholder,
 input:focus::-webkit-input-placeholder {
   color: transparent;
 }
-textarea:focus:-moz-placeholder,
-input:focus:-moz-placeholder { // FF 4-18
-  color: transparent;
-}
 textarea:focus::-moz-placeholder,
 input:focus::-moz-placeholder { // FF 19+
-  color: transparent;
-}
-textarea:focus:-ms-input-placeholder,
-input:focus:-ms-input-placeholder { // IE 10+
   color: transparent;
 }
 textarea:focus::placeholder,
@@ -2078,7 +2067,6 @@ label {
   border: 1px solid;
   border-color: #E5E5E5 #D3D3D3 #B9C1C6;
   overflow-wrap: break-word; // break long words if they won't naturally break anywhere on one line
-  word-wrap: break-word; // for IE 11
   width: 100%;
   height: 100%;
 }
