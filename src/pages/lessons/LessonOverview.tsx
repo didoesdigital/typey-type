@@ -3,6 +3,7 @@ import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
 import { getLessonIndexData } from "../../utils/lessonIndexData";
 import getLessonMetadata from "./utilities/getLessonMetadata";
+import Subheader from "../../components/Subheader";
 
 const getLessonOverview = async (lessonFile: any) => {
   const response = await fetch(lessonFile, {
@@ -85,26 +86,24 @@ const LessonOverview = ({
   return (
     <DocumentTitle title={"Typey Type | Lesson: " + title + " overview"}>
       <main id="main">
-        <div className="subheader">
-          <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
-            <div className="flex mr1 self-center">
-              <header className="flex items-center min-h-40">
-                <h2 className="table-cell mr2" ref={mainHeading} tabIndex={-1}>
-                  {title} overview
-                </h2>
-              </header>
-            </div>
-            <div className="flex mxn2">
-              <Link
-                to={lessonPath}
-                className="link-button link-button-ghost table-cell mr1"
-                role="button"
-              >
-                Back to lesson
-              </Link>
-            </div>
+        <Subheader>
+          <div className="flex mr1 self-center">
+            <header className="flex items-center min-h-40">
+              <h2 className="table-cell mr2" ref={mainHeading} tabIndex={-1}>
+                {title} overview
+              </h2>
+            </header>
           </div>
-        </div>
+          <div className="flex mxn2">
+            <Link
+              to={lessonPath}
+              className="link-button link-button-ghost table-cell mr1"
+              role="button"
+            >
+              Back to lesson
+            </Link>
+          </div>
+        </Subheader>
         <div>
           {error ? (
             <div className="mx-auto mw-1024 p3">
