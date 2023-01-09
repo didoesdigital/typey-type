@@ -192,7 +192,7 @@ class Dictionary extends Component {
         let contentsArrayLength = contentsArray.length;
         let truncationLimit = 1000;
         if (contentsArrayLength > truncationLimit) {
-          truncatedMessage = <p className="bg-danger">The dictionary is too large to display in full so this only shows the first {truncationLimit} entries.</p>
+          truncatedMessage = <p className="bg-danger dark:text-coolgrey-900">The dictionary is too large to display in full so this only shows the first {truncationLimit} entries.</p>
           let newContents = contentsArray.slice(0,truncationLimit);
           newContents[truncationLimit - 1] = newContents[truncationLimit - 1].slice(0, -1); // removing trailing comma
           newContents.push("}");

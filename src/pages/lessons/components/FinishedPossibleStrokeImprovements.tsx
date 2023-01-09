@@ -32,7 +32,7 @@ const FinishedPossibleStrokeImprovements = ({
           ({ text }: { text: string }, j: any) => {
             return (
               <li key={j} className="whitespace-nowrap di ml1">
-                <span className="bg-warning px1">{text}</span>
+                <span className="bg-warning px1 dark:text-coolgrey-900">{text}</span>
               </li>
             );
           }

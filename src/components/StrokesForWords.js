@@ -148,10 +148,10 @@ class StrokesForWords extends Component {
     let ploverMisstrokesDetail;
 
     if (this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup) {
-      ploverMisstrokesDetail = <p><span className="py05 bg-danger">(Plover misstrokes included.)</span></p>
+      ploverMisstrokesDetail = <p><span className="py05 bg-danger dark:text-coolgrey-900">(Plover misstrokes included.)</span></p>
     }
     else {
-      ploverMisstrokesDetail = <p><span className="py05 de-emphasized">(4000 misstrokes hidden.)</span></p>
+      ploverMisstrokesDetail = <p><span className="py05 de-emphasized dark:text-coolgrey-900">(4000 misstrokes hidden.)</span></p>
     }
 
     let loadingOrError;
