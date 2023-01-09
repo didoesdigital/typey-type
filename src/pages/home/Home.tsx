@@ -5,6 +5,7 @@ import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
 import typeyTypeDemoGIF from "../../images/typey-type-for-stenographers-demo.gif";
 import typeyTypeyDemoCoverImage from "../../images/typey-type-for-stenographers-demo-cover-image.png";
+import Subheader from "../../components/Subheader";
 
 type Props = {
   setAnnouncementMessage: () => void;
@@ -29,21 +30,19 @@ const Home = ({ setAnnouncementMessage }: Props) => {
   return (
     <div>
       <main id="main">
-        <div className="subheader">
-          <div className="flex items-baseline mx-auto mw-1920 justify-between px3 py2">
-            <div className="flex mr1 self-center">
-              <header className="flex items-center min-h-40">
-                <h2
-                  id="home-typey-type-for-stenographers"
-                  ref={mainHeading}
-                  tabIndex={-1}
-                >
-                  Typey Type for Stenographers
-                </h2>
-              </header>
-            </div>
+        <Subheader>
+          <div className="flex mr1 self-center">
+            <header className="flex items-center min-h-40">
+              <h2
+                id="home-typey-type-for-stenographers"
+                ref={mainHeading}
+                tabIndex={-1}
+              >
+                Typey Type for Stenographers
+              </h2>
+            </header>
           </div>
-        </div>
+        </Subheader>
         <div className="strapline text-vertical p0 m0 lh-single">
           Typey Type for Stenographers
         </div>
