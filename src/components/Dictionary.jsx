@@ -8,6 +8,7 @@ import { IconExternal } from './Icon';
 import { Tooltip } from 'react-tippy';
 import { lookUpDictionaryInIndex } from './../utils/typey-type';
 import { fetchDictionaryIndex } from './../utils/getData';
+import Subheader from "./Subheader";
 // import CustomDictionarySetup from './CustomDictionarySetup';
 
 class Dictionary extends Component {
@@ -231,19 +232,17 @@ class Dictionary extends Component {
         return (
           <DocumentTitle title={'Typey Type | Dictionary: ' + this.state.dictionary.title}>
             <main id="main">
-              <div className="subheader">
-                <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
-                  <div className="flex mr1 self-center">
-                    <header className="flex items-center min-h-40">
-                      <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.state.loadingDictionaryContents ? <span>Loading dictionary…</span> : this.state.dictionary.title}{this.state.loadingError && <span>Loading failed.</span>}</h2>
-                    </header>
-                  </div>
-                  <div className="flex mxn2">
-                    <a href={process.env.PUBLIC_URL + this.state.dictionary.path} download="" onClick={this.downloadDictionary.bind(this)} className="link-button link-button-ghost table-cell mr1">Download</a>
-                    <PseudoContentButton className="js-clipboard-button button button--secondary table-cell mr1 copy-to-clipboard" style={{lineHeight: 2}} dataClipboardTarget="#js-dictionary-json-pre">Copy to clipboard</PseudoContentButton>
-                  </div>
+              <Subheader>
+                <div className="flex mr1 self-center">
+                  <header className="flex items-center min-h-40">
+                    <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">{this.state.loadingDictionaryContents ? <span>Loading dictionary…</span> : this.state.dictionary.title}{this.state.loadingError && <span>Loading failed.</span>}</h2>
+                  </header>
                 </div>
-              </div>
+                <div className="flex mxn2">
+                  <a href={process.env.PUBLIC_URL + this.state.dictionary.path} download="" onClick={this.downloadDictionary.bind(this)} className="link-button link-button-ghost table-cell mr1">Download</a>
+                  <PseudoContentButton className="js-clipboard-button button button--secondary table-cell mr1 copy-to-clipboard" style={{lineHeight: 2}} dataClipboardTarget="#js-dictionary-json-pre">Copy to clipboard</PseudoContentButton>
+                </div>
+              </Subheader>
               <div className="p3 mx-auto mw-1024">
                 <div className="mw-568">
                   {this.state.dictionary.author && !this.state.dictionary.tagline.includes('Loading') && (
