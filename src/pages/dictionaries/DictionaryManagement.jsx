@@ -10,6 +10,7 @@ import {
 import PseudoContentButton from '../../components/PseudoContentButton';
 import { writePersonalPreferences } from '../../utils/typey-type';
 import misstrokesJSON from '../../json/misstrokes.json'
+import Subheader from "../../components/Subheader";
 
 class DictionaryManagement extends Component {
   constructor(props) {
@@ -549,15 +550,13 @@ class DictionaryManagement extends Component {
               :
             null
           }
-          <div className="subheader">
-            <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
-              <div className="flex mr1 self-center">
-                <header className="flex items-center min-h-40">
-                  <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Dictionary management</h2>
-                </header>
-              </div>
+          <Subheader>
+            <div className="flex mr1 self-center">
+              <header className="flex items-center min-h-40">
+                <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Dictionary management</h2>
+              </header>
             </div>
-          </div>
+          </Subheader>
           <div className="bg-info landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <h3>Dictionary management experiment</h3>
