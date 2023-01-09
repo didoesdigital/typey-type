@@ -104,7 +104,7 @@
   // --yellow-700: #; //#B29206;
   // --yellow-800: #; //#7C6603;
   // --yellow-900: #; //#504201;
-  --type-color: var(--coolgrey1000);
+  --type-color: var(--coolgrey-1000);
 }
 
 // This adjusts colors for dark mode beyond just inverting
@@ -118,6 +118,7 @@
     --blue-600: #5598E2;
     --blue-700: #1F74D1;
     --blue-800: #10549E;
+    --type-color: var(--coolgrey-400);
   }
 }
 
@@ -160,6 +161,9 @@
   }
 }
 
+.bg-coolgrey-300 {
+  background-color: var(--coolgrey-300);
+}
 .bg-coolgrey-800 {
   background-color: var(--coolgrey-800);
 }
@@ -1143,11 +1147,7 @@ input:focus::placeholder {
   &:visited {
     color: add-tint($brand-primary, 70%);
   }
-  &:hover {
-    color: var(--coolgrey-300);
-    box-shadow: inset add-tint($brand-primary, 50%) 0px -8px 0px 0px;
-  }
-  &:active, &:focus {
+  &:hover, &:active, &:focus  {
     color: var(--coolgrey-300);
     box-shadow: inset add-tint($brand-primary, 50%) 0px -8px 0px 0px;
   }
@@ -1161,16 +1161,20 @@ input:focus::placeholder {
   }
 }
 .heading-link--content {
-  color: $type-color;
+  color: var(--type-color);
   text-decoration: none;
   &:visited {
-    color: $type-color;
+    color: var(--type-color);
   }
-  &:hover {
-    color: add-tint($type-color, 10%);
+  &:hover, &:active, &:focus {
+    color: var(--coolgrey-900);
   }
-  &:active, &:focus {
-    color: add-shade($type-color, 10%);
+}
+@media (prefers-color-scheme: dark) {
+  .heading-link--content {
+    &:hover, &:active, &:focus {
+      color: var(--coolgrey-500);
+    }
   }
 }
 

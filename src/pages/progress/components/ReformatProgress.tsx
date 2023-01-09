@@ -49,7 +49,7 @@ const ReformatProgress = ({ metWords, userSettings }: Props) => {
   }, [metWords, userSettings.spacePlacement]);
 
   return (
-    <p className="bg-slat pl1 pr1">
+    <p className="bg-coolgrey-300 dark:bg-coolgrey-1000 pl1 pr1">
       If you’ve changed your spacing settings, you can download a reformatted
       “progress file” to match your new setting. After downloading it, if you're
       happy it looks good you can load it back into Typey Type. Then visit each
