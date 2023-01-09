@@ -553,7 +553,7 @@ class DictionaryManagement extends Component {
           <Subheader>
             <div className="flex mr1 self-center">
               <header className="flex items-center min-h-40">
-                <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">Dictionary management</h2>
+                <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1}>Dictionary management</h2>
               </header>
             </div>
           </Subheader>
