@@ -44,20 +44,20 @@ const Lessons = ({
         path={`${match.url}/:category/:subcategory/:lessonPath/flashcards`}
         render={(props) => (
           <Lesson
+            changeFullscreen={changeFullscreen}
             customLesson={customLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            flashcardsMetWords={flashcardsMetWords}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            personalDictionaries={personalDictionaries}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            personalDictionaries={personalDictionaries}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
-            changeFullscreen={changeFullscreen}
-            flashcardsMetWords={flashcardsMetWords}
             {...lessonProps}
             {...props}
           />
@@ -67,21 +67,21 @@ const Lessons = ({
         path={`${match.url}/fundamentals/:lessonPath/flashcards`}
         render={(props) => (
           <Lesson
+            changeFullscreen={changeFullscreen}
             customLesson={customLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            flashcardsMetWords={flashcardsMetWords}
             fullscreen={lessonProps.fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            personalDictionaries={personalDictionaries}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            personalDictionaries={personalDictionaries}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
-            changeFullscreen={changeFullscreen}
-            flashcardsMetWords={flashcardsMetWords}
             {...props}
           />
         )}
@@ -90,21 +90,21 @@ const Lessons = ({
         path={`${match.url}/drills/:lessonPath/flashcards`}
         render={(props) => (
           <Lesson
+            changeFullscreen={changeFullscreen}
             customLesson={customLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            flashcardsMetWords={flashcardsMetWords}
             fullscreen={lessonProps.fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            personalDictionaries={personalDictionaries}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            personalDictionaries={personalDictionaries}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
-            changeFullscreen={changeFullscreen}
-            flashcardsMetWords={flashcardsMetWords}
             {...props}
           />
         )}
