@@ -12,7 +12,7 @@ class PageLoadingPastDelay extends Component {
                 ref={(heading) => {
                   this.mainHeading = heading;
                 }}
-                tabIndex="-1"
+                tabIndex={-1}
               >
                 Loading…
               </h2>
