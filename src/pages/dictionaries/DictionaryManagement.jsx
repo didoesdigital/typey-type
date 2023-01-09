@@ -597,7 +597,7 @@ class DictionaryManagement extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-white landing-page-section">
+          <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
             <div className="p3 mx-auto mw-1024 flex flex-wrap">
               <div className="mw-568 mr3 flex-grow">
                 <h3>Dictionaries used for lookup</h3>

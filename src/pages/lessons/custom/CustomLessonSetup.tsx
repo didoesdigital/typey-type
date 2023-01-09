@@ -79,7 +79,7 @@ const CustomLessonSetup = ({
         </div>
       </Subheader>
 
-      <div className="bg-info landing-page-section">
+      <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
         <CustomLessonIntro
           createCustomLesson={createCustomLesson}
           customLessonMaterial={customLessonMaterial}
@@ -93,15 +93,15 @@ const CustomLessonSetup = ({
         />
       </div>
 
-      <div className="bg-white landing-page-section">
+      <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
         <CustomWordListLesson globalLookupDictionary={globalLookupDictionary} />
       </div>
 
-      <div className="bg-info landing-page-section">
+      <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
         <CustomJSONLesson />
       </div>
 
-      <div className="bg-white landing-page-section">
+      <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
         <CustomShareLessons setAnnouncementMessage={setAnnouncementMessage} />
       </div>
     </main>

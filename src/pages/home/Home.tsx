@@ -46,7 +46,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
         <div className="strapline text-vertical p0 m0 lh-single">
           Typey Type for Stenographers
         </div>
-        <div className="bg-info landing-page-section">
+        <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584">
               <div className="relative">
@@ -102,7 +102,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-white landing-page-section">
+        <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584 ml-auto text-right">
               <h3>Steno students</h3>
@@ -127,7 +127,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-info landing-page-section">
+        <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584">
               <h3 className="overline">Discover</h3>
@@ -147,7 +147,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-white landing-page-section">
+        <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584 ml-auto text-right">
               <h3 className="overline">Revise</h3>
@@ -168,7 +168,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-info landing-page-section">
+        <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584">
               <h3 className="overline">Drill</h3>
@@ -189,7 +189,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-white landing-page-section">
+        <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584 ml-auto text-right">
               <h3 className="overline">Practise</h3>
@@ -209,7 +209,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-info landing-page-section">
+        <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584">
               <h3>Track your progress</h3>
@@ -228,7 +228,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-white landing-page-section">
+        <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584 ml-auto text-right">
               <h3 className="tiny-rule--adjacent">Custom material</h3>
@@ -247,7 +247,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-info landing-page-section">
+        <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584">
               <h3>Flashcards</h3>
@@ -265,7 +265,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-white landing-page-section">
+        <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584 ml-auto text-right">
               <h3>Dictionaries</h3>
@@ -283,7 +283,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-info landing-page-section">
+        <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584">
               <h3>Your steno journey</h3>
@@ -301,7 +301,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-white landing-page-section">
+        <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584 ml-auto text-right">
               <h3>Rest</h3>
@@ -316,7 +316,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-info landing-page-section">
+        <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584">
               <h3>Your settings</h3>
@@ -334,7 +334,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-white landing-page-section">
+        <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584 ml-auto text-right">
               <h3>Writer</h3>
@@ -352,7 +352,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-info landing-page-section">
+        <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584">
               <h3>Lookup</h3>
@@ -370,7 +370,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-white landing-page-section">
+        <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584 ml-auto text-right">
               <h3>Games</h3>
@@ -385,7 +385,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-info landing-page-section">
+        <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584">
               <h3>Want to get involved?</h3>
@@ -403,7 +403,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </div>
           </div>
         </div>
-        <div className="bg-white landing-page-section">
+        <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="text-center">
               <h3 id="steno-news">Keep up with news</h3>
