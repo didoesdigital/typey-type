@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Subheader from "../../../components/Subheader";
 
 type LessonSubheaderProps = {
   createNewCustomLesson: JSX.Element | undefined;
@@ -25,56 +26,54 @@ const LessonSubheader = React.forwardRef(
     ref: any
   ) => {
     return (
-      <div className="subheader text-violet-200 bg-violet-900">
-        <div className="flex flex-wrap items-baseline mx-auto mw-1920 justify-between px3 py2">
-          <div className="flex mr1 self-center">
-            <header className="flex items-center min-h-40">
-              <a
-                href={path}
-                onClick={restartLesson}
-                className="heading-link table-cell mr2"
-                role="button"
-              >
-                <h2
-                  ref={ref}
-                  tabIndex={-1}
-                >{`${lessonTitle}${lessonSubTitle}`}</h2>
-              </a>
-            </header>
-          </div>
-          <div className="flex flex-wrap mxn2">
-            {createNewCustomLesson ? createNewCustomLesson : overviewLink}
-            {!path.includes("custom") && !path.includes("progress") ? (
-              <Link
-                to={path
-                  .replace("lesson.txt", "flashcards")
-                  .replace("/typey-type", "")}
-                className="link-button link-button-ghost table-cell mr1"
-              >
-                Flashcards
-              </Link>
-            ) : null}
-            <a
-              href={path.replace(/lesson\.txt$/, "")}
-              onClick={restartLesson}
-              className="button button--secondary table-cell mr2"
-              style={{ lineHeight: 2 }}
-              role="button"
-            >
-              Restart
-            </a>
+      <Subheader>
+        <div className="flex mr1 self-center">
+          <header className="flex items-center min-h-40">
             <a
               href={path}
-              onClick={handleStopLesson}
-              className="button button--secondary table-cell mr2"
-              style={{ lineHeight: 2 }}
+              onClick={restartLesson}
+              className="heading-link table-cell mr2"
               role="button"
             >
-              Stop
+              <h2
+                ref={ref}
+                tabIndex={-1}
+              >{`${lessonTitle}${lessonSubTitle}`}</h2>
             </a>
-          </div>
+          </header>
         </div>
-      </div>
+        <div className="flex flex-wrap mxn2">
+          {createNewCustomLesson ? createNewCustomLesson : overviewLink}
+          {!path.includes("custom") && !path.includes("progress") ? (
+            <Link
+              to={path
+                .replace("lesson.txt", "flashcards")
+                .replace("/typey-type", "")}
+              className="link-button link-button-ghost table-cell mr1"
+            >
+              Flashcards
+            </Link>
+          ) : null}
+          <a
+            href={path.replace(/lesson\.txt$/, "")}
+            onClick={restartLesson}
+            className="button button--secondary table-cell mr2"
+            style={{ lineHeight: 2 }}
+            role="button"
+          >
+            Restart
+          </a>
+          <a
+            href={path}
+            onClick={handleStopLesson}
+            className="button button--secondary table-cell mr2"
+            style={{ lineHeight: 2 }}
+            role="button"
+          >
+            Stop
+          </a>
+        </div>
+      </Subheader>
     );
   }
 );
