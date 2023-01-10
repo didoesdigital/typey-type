@@ -347,7 +347,6 @@ const MainLessonView = ({
               handleUpcomingWordsLayout={handleUpcomingWordsLayout}
               hideOtherSettings={hideOtherSettings}
               maxStartFromWord={lessonLength}
-              path={path}
               revisionMode={revisionMode}
               setAnnouncementMessage={setAnnouncementMessage}
               totalWordCount={totalWordCount}
