@@ -72,7 +72,6 @@ type Props = {
    * state: undefined
    * */
   location: { [key: string]: any };
-  path: string;
   previousCompletedPhraseAsTyped: ActualTypedText;
   repetitionsRemaining: number;
   restartLesson: () => void;
@@ -129,7 +128,6 @@ const MainLessonView = ({
   lessonLength,
   lessonTitle,
   location,
-  path,
   previousCompletedPhraseAsTyped,
   repetitionsRemaining,
   restartLesson,
@@ -164,7 +162,7 @@ const MainLessonView = ({
           lessonSubTitle={lessonSubTitle}
           lessonTitle={lessonTitle}
           overviewLink={overviewLink}
-          path={path}
+          path={lesson?.path}
           restartLesson={restartLesson}
           ref={mainHeading}
         />
@@ -227,7 +225,7 @@ const MainLessonView = ({
                   {revisionMode && (
                     <div>
                       <Link
-                        to={path.replace(/lesson\.txt$/, "")}
+                        to={lesson?.path.replace(/lesson\.txt$/, "")}
                         onClick={restartLesson}
                         className="revision-mode-button no-underline absolute right-0"
                       >

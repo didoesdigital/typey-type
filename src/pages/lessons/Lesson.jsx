@@ -174,7 +174,7 @@ class Lesson extends Component {
                 lessonSubTitle={lessonSubTitle}
                 lessonTitle={this.props.lessonTitle}
                 overviewLink={overviewLink}
-                path={this.props.path}
+                path={this.props.lesson?.path}
                 restartLesson={this.props.restartLesson}
                 ref={this.mainHeading}
               />
@@ -203,7 +203,7 @@ class Lesson extends Component {
                 lessonTitle={this.props.lessonTitle}
                 location={this.props.location}
                 metWords={this.props.metWords}
-                path={this.props.path}
+                path={this.props.lesson?.path}
                 restartLesson={this.props.restartLesson}
                 reviseLesson={this.props.reviseLesson}
                 settings={this.props.lesson.settings}
@@ -306,7 +306,6 @@ class Lesson extends Component {
                 lessonLength={this.props.lessonLength}
                 lessonTitle={this.props.lessonTitle}
                 location={this.props.location}
-                path={this.props.path}
                 previousCompletedPhraseAsTyped={this.props.previousCompletedPhraseAsTyped}
                 repetitionsRemaining={this.props.repetitionsRemaining}
                 restartLesson={this.props.restartLesson}
