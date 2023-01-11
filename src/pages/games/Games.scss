@@ -1,0 +1,34 @@
+#RaverRobotLeftLeg {
+  animation-name: SlowRaverRobotShuffle;
+  animation-duration: 5s;
+  animation-timing-function: cubic-bezier(.61,0,.48,1);
+  animation-delay: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: none;
+  animation-play-state: running;
+}
+
+#raver-robot-SHUFL:hover #RaverRobotLeftLeg {
+  animation-name: RaverRobotShuffle;
+  animation-duration: 0.5s;
+  animation-delay: -0.5s;
+}
+
+@keyframes SlowRaverRobotShuffle {
+  0%, 20%, 100% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes RaverRobotShuffle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}

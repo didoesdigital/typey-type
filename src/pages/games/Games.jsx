@@ -4,6 +4,7 @@ import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
+import "./Games.scss";
 
 const AsyncGamesIndex = Loadable({
   loader: () => import("./GamesIndex"),
