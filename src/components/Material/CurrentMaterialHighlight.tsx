@@ -86,11 +86,10 @@ export default function CurrentMaterialHighlight({
   return (
     <div
       id="js-current-phrase-highlight"
-      className={`dib absolute${
+      className={`dib absolute current-phrase-highlight-background${
         userSettings.blurMaterial ? " blur-words" : ""
       }`}
       style={{
-        backgroundColor: "#fff",
         transform: `translate(${x}px, ${y}px)`,
         width: width,
         zIndex: 1,
