@@ -684,7 +684,7 @@ class UserSettings extends Component {
                       <div id="aria-modal-description">
                         <p>Typey Type’s setting to “speak words” will speak words aloud when you have the sound turned on. It’s great with story lessons and real sentences where the context can help you distinguish homophones.</p>
                         <p>This setting uses fancy browser technology called the “Web Speech API”.</p>
-                        <p className={webSpeechAvailable ? "quote mt1 mb3 bg-slat" : "quote mt1 mb3 bg-danger"}>Web Speech is {webSpeechAvailable ? " available" : " unavailable"} on your system.</p>
+                        <p className={webSpeechAvailable ? "quote mt1 mb3 bg-slat dark:bg-coolgrey-900" : "quote mt1 mb3 bg-danger"}>Web Speech is {webSpeechAvailable ? " available" : " unavailable"} on your system.</p>
                         { webSpeechAvailable ?
                             <p>If you have working sound but hear no words, your system might be missing a language pack or “voice”.</p>
                             :

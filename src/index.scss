@@ -111,6 +111,7 @@
 // This adjusts colors for dark mode beyond just inverting
 @media (prefers-color-scheme: dark) {
   :root {
+    --violet-500: #B19CD3;
     --violet-600: #9880C2;
     --violet-700: #5F428F; //hsl(279, 95%, 45%);
     --violet-800: #452D6C; //hsl(278, 50%, 33%);
@@ -185,7 +186,7 @@
   .dark\:bg-coolgrey-800 {
     background-color: var(--coolgrey-800);
   }
-  .dark\:bg-coolgrey-900 {
+  .dark\:bg-coolgrey-900.dark\:bg-coolgrey-900 {
     background-color: var(--coolgrey-900);
   }
   .dark\:bg-coolgrey-1000 {
@@ -1358,7 +1359,7 @@ $textarea-padding-x: 8px;
   }
 }
 .typed-text-input-textarea {
-  caret-color: saturate(add-tint($brand-primary, 30%), 30%);
+  caret-color: var(--violet-700);
   text-decoration: underline;
 
   &:focus {
@@ -1369,6 +1370,12 @@ $textarea-padding-x: 8px;
 
 .caret-color {
   caret-color: saturate(add-tint($brand-primary, 30%), 30%);
+}
+
+@media (prefers-color-scheme: dark) {
+  .successfully-typed-text, .input-file, .input-textarea {
+    border-color: var(--violet-700);
+  }
 }
 
 .progress-textarea {
@@ -2063,6 +2070,11 @@ label {
     padding-left: inherit;
   }
 }
+@media (prefers-color-scheme: dark) {
+  .quote {
+    border-left-color: var(--violet-600);
+  }
+}
 .skip-to-link {
   position: absolute !important;
   height: 1px;
@@ -2512,6 +2524,12 @@ $lineAdjustment: 4px;
 }
 .transition-opacity {
   transition: opacity .5s linear;
+}
+@media (prefers-color-scheme: dark) {
+  .revision-mode-button,
+  .show-scores-control {
+    color: var(--violet-500);
+  }
 }
 
 .recommendation-survey-link--shown,
