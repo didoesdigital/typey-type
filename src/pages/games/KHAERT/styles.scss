@@ -142,6 +142,11 @@
   background-color: #fff;
   border-radius: 8px;
 }
+@media (prefers-color-scheme: dark) {
+  .react-chatbot-kit-chat-inner-container {
+    background-color: var(--coolgrey-1000);
+  }
+}
 
 .react-chatbot-kit-chat-header {
   border-top-right-radius: 8px;

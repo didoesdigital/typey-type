@@ -10,7 +10,7 @@ export default function GameBox({
 }) {
   return (
     <div className="bw-12 br-4 b--solid b--brand-primary p3 mt3 mr3 text-center">
-      <div className="w-100 mw-48 mx-auto">{robot}</div>
+      <div className="w-100 mw-48 mx-auto game-robot">{robot}</div>
       <p>
         <strong>{title}</strong>
       </p>

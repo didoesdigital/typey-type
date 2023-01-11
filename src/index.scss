@@ -2650,6 +2650,9 @@ $lineAdjustment: 4px;
   .todays-effort-goal-robot svg {
     filter: drop-shadow(0px 4px 16px #fff) drop-shadow(0px 4px 16px #fff);
   }
+  .game-robot svg {
+    filter: drop-shadow(0px 4px 16px #fff);
+  }
   .todays-effort-goal-robot svg#HappyRobot {
     filter: drop-shadow(0px 4px 16px var(--gold-400)) drop-shadow(0px 4px 16px var(--gold-400));
   }
