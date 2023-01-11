@@ -79,19 +79,20 @@
   // --truegrey-200: #; //#F2F2F2;
   --truegrey-300: #ececec; //#EBEBEB;
   // --truegrey-400: #; //#E3E3E3;
-  // --truegrey-500: #; //#A8A8A8;
+  --truegrey-500: #A8A8A8; //#A8A8A8; // add-tint(desaturate($brand-primary, 90%), 60%) should be #b0b0b0
   // --truegrey-600: #; //#898989;
-  // --truegrey-700: #; //#696969;
+  --truegrey-700: #696969; //#696969;
   // --truegrey-800: #; //#525252;
-  // --truegrey-900: #; //#3D3D3D;
-  // --violet-1000: #; //#1C0A39;
+  --truegrey-900: #3D3D3D; //#3D3D3D;
+  --violet-1000: #1C0A39; //#1C0A39;
   --violet-100: #f5f4f6; //#F9F8FB;
   --violet-200: #c6bdcb; //#F1EEF6;
-  // --violet-300: #; //#E4DDEE;
+  --violet-300: #C7BACE; //#E4DDEE; // add-tint($brand-primary, 80%) should be #d9d3dc
   --violet-400: #c8b7d1; //#D5CBE6;
-  // --violet-500: #; //#B19CD3;
-  --violet-600: #9193a8; //#9880C2;
-  --violet-700: #7109AA; //#5F428F; // on steno keys
+  --violet-500: #b3a7b9; //#B19CD3; // add-tint($brand-primary, 60%);
+  --violet-600: #664f74; //#9880C2;
+  // on steno keys: #7109AA
+  --violet-700: #533962; //#5F428F;
   --violet-800: #402351; //#452D6C; // .bg-primary
   --violet-900: #2e173b; // hsl(278, 44%, 16%) //#331A5B; // .subheader
   // --yellow-1000: #; //#332A00;
@@ -114,6 +115,7 @@
     --violet-700: #5F428F; //hsl(279, 95%, 45%);
     --violet-800: #452D6C; //hsl(278, 50%, 33%);
     --violet-900: #331A5B; //hsl(278, 64%, 19%); //#331A5B; // .subheader
+    --violet-1000: #1C0A39; //hsl(278, 64%, 19%); //#331A5B; // .subheader
     --blue-500: #7BB2EF;
     --blue-600: #5598E2;
     --blue-700: #1F74D1;
@@ -1560,7 +1562,7 @@ label {
   background-color: var(--violet-800);
   border-radius: 4px;
   border: 1px solid transparent;
-  color: add-tint($brand-primary, 60%);
+  color: var(--violet-500);
   cursor: pointer;
   font: $type;
   font-variant-ligatures: no-common-ligatures;
@@ -1573,16 +1575,16 @@ label {
   vertical-align: middle;
   white-space: nowrap;
   &:visited {
-    color: add-tint($brand-primary, 60%);
+    color: var(--violet-500);
   }
   &:hover {
-    color: add-tint($brand-primary, 60%);
-    background-color: add-tint($brand-primary, 10%);
+    color: var(--violet-500);
+    background-color: var(--violet-700);
   }
   &:active,
   &:focus {
-    color: add-tint($brand-primary, 80%);
-    background-color: add-tint($brand-primary, 20%);
+    color: var(--violet-300);
+    background-color: var(--violet-600);
   }
   &.link-button-ghost {
     background-color: transparent;
@@ -1592,12 +1594,12 @@ label {
     }
     &:active,
     &:focus {
-      color: add-tint($brand-primary, 50%);
+      color: var(--coolgrey-400);
     }
   }
   &:disabled {
     color: var(--coolgrey-300);
-    background-color: add-tint(desaturate($brand-primary, 90%), 60%);
+    background-color: var(--truegrey-500);
     cursor: default;
   }
 
@@ -1631,6 +1633,19 @@ label {
   }
 
   @media (prefers-color-scheme: dark) {
+    &:visited, &:hover {
+      color: var(--violet-300);
+      background-color: var(--violet-800);
+    }
+    &:active,
+    &:focus {
+      color: var(--violet-300);
+      background-color: var(--violet-900);
+    }
+    &:disabled {
+      color: var(--truegrey-700);
+      background-color: var(--truegrey-900);
+    }
     &.button--secondary {
       background-color: var(--coolgrey-1000);
       border-color: var(--coolgrey-800);
