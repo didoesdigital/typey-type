@@ -1,7 +1,7 @@
 import React from "react";
 
 interface Props {
-  children: JSX.Element;
+  children: JSX.Element[];
 }
 
 const DescriptionList = ({ children }: Props) => {
