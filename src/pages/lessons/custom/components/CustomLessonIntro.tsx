@@ -23,7 +23,7 @@ const CustomLessonIntro = ({
   let listOfValidationMessages;
   switch (customLessonMaterialValidationState) {
     case "success":
-      validationStateStyle = "b-success";
+      validationStateStyle = "";
       break;
     case "fail":
       validationStateStyle = "b-danger";
