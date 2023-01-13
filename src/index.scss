@@ -7,7 +7,7 @@
   // --blue-100: #; //#F7FAFD;
   // --blue-200: #; //#EAF2FA;
   // --blue-300: #; //#CADFF7;
-  // --blue-400: #; //#ADCFF5;
+  --blue-400: #9193a8; //#ADCFF5;
   --blue-500: #596091; //#7BB2EF;
   --blue-600: #596091; //#5598E2;
   --blue-700: #596091; //#1F74D1;
@@ -117,6 +117,7 @@
     --violet-800: #452D6C; //hsl(278, 50%, 33%);
     --violet-900: #331A5B; //hsl(278, 64%, 19%); //#331A5B; // .subheader
     --violet-1000: #1C0A39; //hsl(278, 64%, 19%); //#331A5B; // .subheader
+    --blue-400: #ADCFF5;
     --blue-500: #7BB2EF;
     --blue-600: #5598E2;
     --blue-700: #1F74D1;
@@ -1039,10 +1040,10 @@ input:focus::placeholder {
   color: var(--blue-500);
 
   &:hover {
-    color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
+    color: var(--blue-400);
   }
   &:active, &:focus {
-    color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
+    color: var(--blue-800);
   }
 }
 .color-purple-bright { color: saturate(add-tint($brand-primary, 30%), 30%); }
