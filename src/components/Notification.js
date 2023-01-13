@@ -6,7 +6,6 @@ class Notification extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      contextualVariant: "", // info, highlight, success, warning, danger
       showNotification: false
     }
   }
