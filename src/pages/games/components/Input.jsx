@@ -39,7 +39,7 @@ export default function Input({
             <CSSTransition timeout={5000} classNames="dissolve" appear={true}>
               <kbd
                 className={
-                  "color-success successfully-typed-text typed-text-input-positioning pre relative text-center"
+                  "text-green-700 successfully-typed-text typed-text-input-positioning pre relative text-center"
                 }
                 aria-hidden="true"
               >

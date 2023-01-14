@@ -40,8 +40,8 @@
   // --green-300: #; //#C1EBDE;
   // --green-400: #; //#84DCC0;
   // --green-500: #; //#24BC8C;
-  // --green-600: #; //#09A573;
-  // --green-700: #; //#067551;
+  --green-600: #457e50; //#09A573;
+  --green-700: #457e50; //#067551;
   // --green-800: #; //#045D40;
   // --green-900: #; //#024B32;
   // --magenta-1000: #; //#40081C;
@@ -122,6 +122,8 @@
     --blue-600: #5598E2;
     --blue-700: #1F74D1;
     --blue-800: #10549E;
+    --green-600: #09A573;
+    --green-700: #067551;
     --type-color: var(--coolgrey-400);
   }
 }
@@ -1046,10 +1048,9 @@ input:focus::placeholder {
     color: var(--blue-800);
   }
 }
-.color-purple-bright { color: saturate(add-tint($brand-primary, 30%), 30%); }
-
-.color-green-bright { color: saturate(add-tint($brand-success, 20%), 10%); }
-.color-success      { color: $brand-success; }
+.text-violet-600 { color: var(--violet-600); }
+.text-green-600 { color: var(--green-600) }
+.text-green-700 { color: var(--green-700); }
 
 .text-uppercase {
   letter-spacing: .1em;

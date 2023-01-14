@@ -42,10 +42,9 @@ const LessonsProgress = ({
   lessonsProgress,
   setAnnouncementMessage,
 }: Props) => {
-  function progressIconClasses(color: string, opacity: number) {
+  function progressIconClasses(color: string) {
     return (
-      `color-${color}-bright ` +
-      `o-${opacity} ` +
+      `text-${color}-600 ` +
       "progress-circle " +
       "svg-baseline " +
       "svg-icon-wrapper"
@@ -55,7 +54,7 @@ const LessonsProgress = ({
   function unstarted() {
     return (
       <ProgressTooltip title="Unstarted" onShow={setAnnouncementMessage}>
-        <div aria-hidden="true" className={progressIconClasses("purple", 30)} />
+        <div aria-hidden="true" className={progressIconClasses("violet")} />
         <span className="visually-hidden">Unstarted</span>
       </ProgressTooltip>
     );
@@ -67,7 +66,7 @@ const LessonsProgress = ({
         <IconTriangleRight
           ariaHidden="true"
           role="presentation"
-          className={progressIconClasses("purple", 100)}
+          className={progressIconClasses("violet")}
           iconTitle=""
         />
         <span className="visually-hidden">In progress</span>
@@ -84,7 +83,7 @@ const LessonsProgress = ({
         <IconCheckmark
           ariaHidden="true"
           role="presentation"
-          className={progressIconClasses("green", 100)}
+          className={progressIconClasses("green")}
           iconWidth="16"
           iconHeight="16"
           iconTitle=""
