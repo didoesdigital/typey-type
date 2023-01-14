@@ -1060,7 +1060,6 @@ input:focus::placeholder {
 
 .color-text           { color: $type-color; }
 .color-text--reverse  { color: $type-color--reverse; }
-.color-white          { color: #fff; }
 .de-emphasized        { color: var(--coolgrey-700); }
 
 @media (prefers-color-scheme: dark) {
