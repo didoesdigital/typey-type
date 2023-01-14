@@ -2769,13 +2769,3 @@ $lineAdjustment: 4px;
 .punctuation-description-transform {
   transform: translate(0px, -56px);
 }
-
-.current-phrase-highlight-background {
-  background-color: #fff;
-}
-
-@media (prefers-color-scheme: dark) {
-  .current-phrase-highlight-background {
-    background-color: var(--coolgrey-1000);
-  }
-}
