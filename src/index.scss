@@ -1987,16 +1987,6 @@ label {
 //   border-spacing: 0 4px;
 // }
 
-.subsection-header-toggle {
-  cursor: pointer;
-  color: saturate(adjust-hue(add-tint($brand-primary, 30%), -45deg), 10%);
-  &:hover {
-    color: adjust-hue(add-tint($brand-primary, 50%), -45deg);
-  }
-  &:active, &:focus {
-    color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
-  }
-}
 .tag-missing-full-stop:after {
   content: ".";
 }

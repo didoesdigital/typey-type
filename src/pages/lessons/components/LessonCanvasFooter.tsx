@@ -173,7 +173,7 @@ const LessonCanvasFooter = ({
       </div>
       <p>
         <button
-          className={`button button--secondary mb0 text-center subsection-header-toggle${
+          className={`button button--secondary mb0 text-center${
             hideOtherSettings ? " collapsed" : ""
           }`}
           onClick={toggleHideOtherSettings}
