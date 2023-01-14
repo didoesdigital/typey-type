@@ -1060,10 +1060,10 @@ input:focus::placeholder {
 .color-text           { color: $type-color; }
 .color-text--reverse  { color: $type-color--reverse; }
 .color-white          { color: #fff; }
-.de-emphasized        { color: desaturate(add-tint($brand-primary, 27%), 40%); }
+.de-emphasized        { color: var(--coolgrey-700); }
 
 @media (prefers-color-scheme: dark) {
-  .de-emphasized        { color: var(--coolgrey-500); }
+  .de-emphasized        { color: var(--coolgrey-600); }
 }
 
 .clearfix { display: flow-root; }

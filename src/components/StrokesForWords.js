@@ -123,7 +123,7 @@ class StrokesForWords extends Component {
     let matchedTranslation = null
     let lookupResults;
 
-    let classes = "wrap mr1 order-1 fw4 py05 bg-slat bw-1 b--solid";
+    let classes = "dark:text-coolgrey-900 wrap mr1 order-1 fw4 py05 bg-slat bw-1 b--solid";
     classes += this.state.modifiedWordOrPhrase === this.state.phrase ? " b-info" : " b-danger";
 
     if (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts.length > 0) {
