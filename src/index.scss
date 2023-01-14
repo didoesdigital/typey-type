@@ -1981,25 +1981,11 @@ label {
     border-bottom-color: var(--violet-700);
   }
 }
-// .timer-table {
-//   width: 156px;
-//   border-collapse: separate;
-//   border-spacing: 0 4px;
-// }
 
 .tag-missing-full-stop:after {
   content: ".";
 }
-// .external-link {
-//   margin-right: 1rem;
-// }
-// .external-link::after {
-//   content: "⇱";
-//   display: inline-block;
-//   margin-left: 0.328rem;
-//   position: absolute;
-//   transform: rotate(90deg);
-// }
+
 @keyframes fade-out-up {
   0% {
     transform: translateY(0rem);
