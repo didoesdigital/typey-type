@@ -2393,17 +2393,6 @@ small .svg-icon-wrapper.svg-baseline svg {
   z-index: 1;
 }
 
-.text-input-accessibility-setting {
-  opacity: 0;
-
-  + span:focus,
-  &:focus,
-  &:focus-within,
-  &:active {
-    opacity: 1;
-  }
-}
-
 .text-shadow-outline {
   text-shadow: 0px 0px 2px #fff,
   1px 1px 2px #fff,
