@@ -231,7 +231,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
         <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584 ml-auto text-right">
-              <h3 className="tiny-rule--adjacent">Custom material</h3>
+              <h3>Custom material</h3>
               <p>
                 Practise any text you like. Add a list of words to create a
                 custom lesson using Plover theory, or supply words and strokes

@@ -2142,23 +2142,7 @@ small .svg-icon-wrapper.svg-baseline svg {
     margin-top: 8px;
   }
 }
-.tiny-rule--adjacent {
-  position: relative;
-  margin-bottom: 24px;
-  @media (min-width: 1280px) {
-    &:after {
-      position: absolute;
-      content: '';
-      height: 2px;
-      width: 140px;
-      background-color: var(--violet-800);
-      display: block;
-      right: -144px;
-      bottom: 4px;
-    }
-  }
-}
-$lineAdjustment: 4px;
+
 .overline {
   border-top: 3px solid lighten($brand-success, 30%);
   display: inline-block;
