@@ -576,7 +576,7 @@ class DictionaryManagement extends Component {
                 </ul>
               </details>
               <p>Typey&nbsp;Type does not upload personal dictionaries anywhere. Your dictionaries stay on your device. Dictionary names (but not their contents) may be sent to Google Analytics.</p>
-              <div className="checkbox-group p1">
+              <div className="block relative p1">
                 <label className="checkbox-label mb1">
                   <input
                     className="checkbox-input"

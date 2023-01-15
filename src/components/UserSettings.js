@@ -265,7 +265,7 @@ class UserSettings extends Component {
                     </div>
                 </SettingListItem>
                 <SettingListItem sectionHierachy='major'>
-                    <div className="checkbox-group p1">
+                    <div className="block relative p1">
                       <label className="checkbox-label mb1">
                         <input
                           className="checkbox-input"
@@ -294,7 +294,7 @@ class UserSettings extends Component {
                     </div>
                 </SettingListItem>
                 <SettingListItem sectionHierachy='minor'>
-                    <div className="checkbox-group p1">
+                    <div className="block relative p1">
                       <label className="checkbox-label mb1">
                         <input
                           className="checkbox-input"
@@ -324,7 +324,7 @@ class UserSettings extends Component {
 
                 </SettingListItem>
                 <SettingListItem sectionHierachy='minor'>
-                    <div className="checkbox-group p1">
+                    <div className="block relative p1">
                       <label className="checkbox-label mb1">
                         <input
                           className="checkbox-input"
@@ -413,7 +413,7 @@ class UserSettings extends Component {
                 </SettingListItem>
                 <SettingListItem sectionHierachy='major'>
 
-                  <div className="checkbox-group p1">
+                  <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
@@ -443,7 +443,7 @@ class UserSettings extends Component {
 
                 </SettingListItem>
                 <SettingListItem sectionHierachy='minor'>
-                  <div className="checkbox-group p1">
+                  <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
@@ -473,7 +473,7 @@ class UserSettings extends Component {
 
                 </SettingListItem>
                 <SettingListItem sectionHierachy='minor'>
-                  <div className="checkbox-group p1">
+                  <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
@@ -612,7 +612,7 @@ class UserSettings extends Component {
                     </div>
                 </SettingListItem>
                 <SettingListItem sectionHierachy='major'>
-                  <div className="checkbox-group p1">
+                  <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
@@ -642,7 +642,7 @@ class UserSettings extends Component {
 
                 </SettingListItem>
                 <SettingListItem sectionHierachy='minor'>
-                  <div className="checkbox-group p1">
+                  <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
@@ -702,7 +702,7 @@ class UserSettings extends Component {
 
                 </SettingListItem>
                 <SettingListItem sectionHierachy='major'>
-                  <div className="checkbox-group p1">
+                  <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
@@ -731,7 +731,7 @@ class UserSettings extends Component {
                   </div>
                 </SettingListItem>
                 <SettingListItem sectionHierachy='minor'>
-                  <div className="checkbox-group p1">
+                  <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
@@ -760,7 +760,7 @@ class UserSettings extends Component {
                   </div>
                 </SettingListItem>
                 <SettingListItem sectionHierachy='minor'>
-                  <div className="checkbox-group p1">
+                  <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"
@@ -789,7 +789,7 @@ class UserSettings extends Component {
                   </div>
                 </SettingListItem>
                 <SettingListItem sectionHierachy='minor'>
-                  <div className="checkbox-group p1">
+                  <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
                         className="checkbox-input"

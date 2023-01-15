@@ -625,7 +625,7 @@ input:focus::placeholder {
   white-space: break-spaces;
 }
 
-.db               { display: block; }
+.db, .block       { display: block; }
 .di               { display: inline; }
 .dib              { display: inline-block; }
 .dc               { display: contents; }
@@ -1410,10 +1410,6 @@ $textarea-padding-x: 8px;
   }
 }
 
-.checkbox-group {
-  position: relative;
-  display: block;
-}
 .checkbox-label {
   margin-bottom: 0;
 
