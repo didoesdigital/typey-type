@@ -92,7 +92,7 @@ class TypedText extends Component {
             Write {this.props.currentPhrase}
           </label>
           {sayCurrentPhraseButton}
-          <p className="input-text">
+          <p className="input-text absolute--fill mx-auto">
             <samp className="pointer-none absolute absolute--fill w-100">
               <TransitionGroup
                 className={`dib${isMultiline ? " flex justify-center" : ""}`}
