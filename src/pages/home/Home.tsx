@@ -58,7 +58,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
                   data-chromatic="ignore"
                 />
               </div>
-              <h3 className="tiny-rule">What is stenography?</h3>
+              <h3 className="tiny-rule relative">What is stenography?</h3>
               <p>
                 The process of writing shorthand is called{" "}
                 <strong>stenography</strong>. Want to write over 100 words per
