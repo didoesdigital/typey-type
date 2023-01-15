@@ -12,3 +12,6 @@ const Template = (args) => {
 };
 
 export const HomeStory = Template.bind({});
+HomeStory.parameters = {
+  chromatic: { viewports: [320, 1200] },
+};
