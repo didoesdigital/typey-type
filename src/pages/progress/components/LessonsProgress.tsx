@@ -46,6 +46,7 @@ const LessonsProgress = ({
     return (
       `text-${color}-600 ` +
       "progress-circle " +
+      "relative " +
       "svg-baseline " +
       "svg-icon-wrapper"
     );

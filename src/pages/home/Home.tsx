@@ -43,7 +43,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
             </header>
           </div>
         </Subheader>
-        <div className="strapline text-vertical p0 m0 lh-single">
+        <div className="strapline absolute text-vertical p0 m0 lh-single">
           Typey Type for Stenographers
         </div>
         <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">

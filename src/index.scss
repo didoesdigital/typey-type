@@ -2085,7 +2085,6 @@ small .svg-icon-wrapper.svg-baseline svg {
 }
 
 .progress-circle {
-  position: relative;
   transform: scale(.6) translateY(1px);
 
   &::before {
@@ -2106,7 +2105,6 @@ small .svg-icon-wrapper.svg-baseline svg {
 
 
 .text-vertical {
-  position: absolute;
   writing-mode: vertical-rl;
   z-index: $z-index-vertical-text;
 }
