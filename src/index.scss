@@ -45,14 +45,14 @@
   // --green-800: #; //#045D40;
   // --green-900: #; //#024B32;
   // --magenta-1000: #; //#40081C;
-  // --magenta-100: #; //#FCF8FA;
+  --magenta-100: #FCF8FA; //#FCF8FA;
   // --magenta-200: #; //#FAEBF0;
   --magenta-300: #ead6de; //#F5D6E1;
   // --magenta-400: #; //#F2C5D6;
   // --magenta-500: #; //#E89BB7;
   // --magenta-600: #; //#E26F99;
   --magenta-700: #d64e84; //#CC2E68;
-  // --magenta-800: #; //#9A1D4B;
+  --magenta-800: #953159; //#9A1D4B;
   // --magenta-900: #; //#6A1131;
   // --peach-1000: #; //#3C1606;
   // --peach-100: #; //#FDF9F7;
@@ -1565,8 +1565,8 @@ $textarea-padding-x: 8px;
   }
 
   &.button--danger {
-    background-color: $brand-danger;
-    color: add-tint($brand-danger, 90%);
+    background-color: var(--magenta-800);
+    color: var(--magenta-100);
   }
 }
 
