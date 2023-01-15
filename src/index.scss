@@ -116,7 +116,7 @@
     --violet-700: #5F428F; //hsl(279, 95%, 45%);
     --violet-800: #452D6C; //hsl(278, 50%, 33%);
     --violet-900: #331A5B; //hsl(278, 64%, 19%); //#331A5B; // .subheader
-    --violet-1000: #1C0A39; //hsl(278, 64%, 19%); //#331A5B; // .subheader
+    --violet-1000: #1C0A39; //hsl(278, 64%, 19%);
     --blue-400: #ADCFF5;
     --blue-500: #7BB2EF;
     --blue-600: #5598E2;
@@ -129,7 +129,7 @@
   }
 }
 
-.bg-white    { background-color: #fff; }
+.bg-white { background-color: #fff; }
 
 .text-violet-200 {
   color: var(--violet-200);
