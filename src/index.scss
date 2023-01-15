@@ -299,14 +299,14 @@ h1 {
   margin-bottom: 22px;
 }
 
-h2 {
+h2, .h2 {
   font-size: $h2-size;
   font-weight: normal;
   line-height: 1.4;
   margin-bottom: 18.5px;
 }
 
-h3 {
+h3, .h3 {
   font-size: $h3-size;
   font-weight: normal;
   line-height: 1.4;
@@ -314,7 +314,7 @@ h3 {
   margin-bottom: 13.5px;
 }
 
-h4 {
+h4, .h4 {
   font-size: $h4-size;
   font-weight: normal;
   line-height: 1.4;
@@ -322,14 +322,14 @@ h4 {
   margin-bottom: 11.5px;
 }
 
-h5 {
+h5, .h5 {
   font-size: $h5-size;
   font-weight: normal;
   line-height: 1.4;
   margin-bottom: 9px;
 }
 
-h6 {
+h6, .h6 {
   font-size: $h6-size;
   font-weight: normal;
   line-height: 1.4;
@@ -1066,48 +1066,7 @@ input:focus::placeholder {
   white-space: break-spaces;
 }
 
-.h2 {
-  font-size: $h2-size;
-  font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 18.5px;
-}
-
-.h3 {
-  font-size: $h3-size;
-  font-weight: normal;
-  line-height: 1.4;
-  margin-top: $h3-size * $font-scale;
-  margin-bottom: 13.5px;
-}
-
-.h4 {
-  font-size: $h4-size;
-  font-weight: normal;
-  line-height: 1.4;
-  margin-top: $h4-size * $font-scale;
-  margin-bottom: 11.5px;
-}
-
-.h5 {
-  font-size: $h5-size;
-  font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 9px;
-}
-
-.h6 {
-  font-size: $h6-size;
-  font-weight: normal;
-  line-height: 1.4;
-  margin-bottom: 8px;
-}
-
-
-
-
 // Class styles
-
 .divider {
   border-top: 1px solid add-tint($brand-primary, 80%);
 }
