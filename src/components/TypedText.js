@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import { matchSplitText } from "./../utils/typey-type";
 import GoogleAnalytics from "react-ga";
 
 class TypedText extends Component {
@@ -9,20 +8,6 @@ class TypedText extends Component {
     if (synth && synth.speaking) {
       synth.cancel();
     }
-  }
-
-  // Show how much of what you've typed is correct
-  markUpTypedText(currentPhrase, actualText, settings) {
-    let array = matchSplitText(
-      currentPhrase,
-      actualText,
-      settings,
-      this.props.userSettings
-    );
-    let matched = array[2];
-    let unmatched = array[3];
-    let matchedTypedTextMarkup = `<pre><span aria-hidden="true">&#8203;</span><span class="matched steno-typing">${matched}</span><span class="unmatched steno-typing">${unmatched}</span></pre>`;
-    return { __html: matchedTypedTextMarkup };
   }
 
   speak() {
@@ -106,14 +91,6 @@ class TypedText extends Component {
           <label className="visually-hidden mb1" htmlFor="your-typed-text">
             Write {this.props.currentPhrase}
           </label>
-          <div
-            className="typed-text"
-            dangerouslySetInnerHTML={this.markUpTypedText(
-              this.props.currentPhrase,
-              this.props.actualText,
-              this.props.settings
-            )}
-          />
           {sayCurrentPhraseButton}
           <p className="input-text">
             <samp className="pointer-none absolute absolute--fill w-100">

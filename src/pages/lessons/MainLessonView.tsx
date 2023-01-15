@@ -269,7 +269,6 @@ const MainLessonView = ({
                         previousCompletedPhraseAsTyped
                       }
                       sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-                      settings={settings}
                       updateMarkup={updateMarkup}
                       userSettings={userSettings}
                     />
