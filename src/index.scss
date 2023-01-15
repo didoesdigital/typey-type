@@ -100,7 +100,7 @@
   // --yellow-200: #; //#FDF8E7;
   // --yellow-300: #; //#FBF0C2;
   // --yellow-400: #; //#F9E89D;
-  // --yellow-500: #; //#F6D43C;
+  --yellow-500: #FFD073; //#F6D43C;
   // --yellow-600: #; //#CFAA07;
   // --yellow-700: #; //#B29206;
   // --yellow-800: #; //#7C6603;
@@ -1800,7 +1800,7 @@ $textarea-padding-x: 8px;
 }
 
 .steno-material {
-  border-bottom: 2px solid $brand-highlight;
+  border-bottom: 2px solid var(--yellow-500);
 }
 .matched.steno-material {
   border-bottom: 2px solid var(--violet-800);
