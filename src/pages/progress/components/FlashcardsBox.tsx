@@ -49,7 +49,7 @@ const FlashcardsBox = ({
             : flashcardsNextLesson.linkTitle}
         </strong>
       </p>
-      <p className="text-right de-emphasized">
+      <p className="text-right de-emphasized" data-chromatic="ignore">
         {flashcardsNextLesson.lastSeen === defaultTimestamp
           ? "New flashcards"
           : `Seen ${Utils.relativeTimeAgo(
