@@ -381,7 +381,7 @@ class Progress extends Component {
             <label htmlFor="metwords-from-personal-store" className="inline-block mb05">Enter your progress here:</label>
             <textarea
               id="metwords-from-personal-store"
-              className="js-metwords-from-personal-store progress-textarea db w-100"
+              className="js-metwords-from-personal-store progress-textarea bg-info px1 py05 bw-1 b--solid br-4 db w-100"
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"

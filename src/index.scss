@@ -1284,10 +1284,10 @@ $textarea-padding-x: 8px;
 }
 
 .progress-textarea {
-  background-color: var(--violet-100);
+  border-color: var(--coolgrey-500);
 
   &:hover {
-    background-color: add-tint($brand-primary, 97%);
+    background-color:  var(--coolgrey-100);
   }
 
   &:active,
