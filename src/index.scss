@@ -1305,11 +1305,6 @@ $textarea-padding-x: 8px;
   filter: blur(4px);
 }
 
-//.expected {
-  // overflow: hidden;
-  // white-space: nowrap;
-//}
-
 %input-textarea-styles {
   border: $textarea-border solid saturate(add-tint($brand-primary, 30%), 30%);
   display: block;
@@ -1334,13 +1329,6 @@ $textarea-padding-x: 8px;
   &.input-textarea--large {
     font-size: $h4-size;
   }
-}
-
-
-.input-file {
-  @extend %input-textarea-styles;
-  background-color: transparent;
-  height: 2.5rem;
 }
 
 .successfully-typed-text {
