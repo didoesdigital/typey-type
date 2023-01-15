@@ -2411,12 +2411,6 @@ small .svg-icon-wrapper.svg-baseline svg {
   }
 }
 
-.middot-separator li:not(:first-child)::before {
-  content: "•";
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
 .celebration-canvas {
   z-index: $z-index-particles;
 }
