@@ -136,7 +136,7 @@ export default function StrokeTip({
                       (item) => !item
                     ) && (
                       <div
-                        className={`mt1 mr3 unknown-steno-diagram${
+                        className={`mt1 mr3 relative unknown-steno-diagram${
                           isMultiline ? " flex flex-grow justify-center" : ""
                         }`}
                         aria-hidden={true}

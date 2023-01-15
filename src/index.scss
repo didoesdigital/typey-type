@@ -1716,7 +1716,6 @@ $textarea-padding-x: 8px;
 // }
 
 .say-word-button {
-  margin-bottom: 1em;
   @media (min-width: $large-breakpoint) {
     position: absolute;
     transform: translate(calc(-100% - 4px), -2px);
@@ -1731,8 +1730,6 @@ $textarea-padding-x: 8px;
 }
 
 .unknown-steno-diagram {
-  position: relative;
-
   svg {
     opacity: 0.3;
   }

@@ -76,7 +76,7 @@ class TypedText extends Component {
     if (this.props.userSettings && this.props.userSettings.speakMaterial) {
       sayCurrentPhraseButton = (
         <button
-          className="link-button button--secondary say-word-button"
+          className="link-button button--secondary say-word-button mb-4"
           onClick={this.speak.bind(this)}
           onDoubleClick={this.onDoubleClickSpeakAndFocus.bind(this)}
         >
