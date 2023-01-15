@@ -2389,9 +2389,7 @@ small .svg-icon-wrapper.svg-baseline svg {
 
 .notification.notification--global {
   min-height: 88px; // match header height
-  position: fixed;
   top: 0;
-  width: 100%;
   z-index: 1;
 }
 
