@@ -575,39 +575,10 @@ select:focus {
   background-color: var(--gold-400);
 }
 
-// Cross-browser placeholder styling
-// Reference: https://stackoverflow.com/questions/2610497/change-an-html5-inputs-placeholder-color-with-css
-::-webkit-input-placeholder { // WebKit, Blink, Edge
-  color: add-tint($brand-primary, 30%);
-}
-:-moz-placeholder { // Mozilla Firefox 4 to 18
-  color: add-tint($brand-primary, 30%);
-  opacity:  1;
-}
-::-moz-placeholder { // Mozilla Firefox 19+
-  color: add-tint($brand-primary, 30%);
-  opacity:  1;
-}
-:-ms-input-placeholder { // Internet Explorer 10-11
-  color: add-tint($brand-primary, 30%);
-}
-::-ms-input-placeholder { // Microsoft Edge
-  color: add-tint($brand-primary, 30%);
-}
 ::placeholder {
   color: add-tint($brand-primary, 30%);
 }
 
-// Hide placeholder text on focus
-// Reference: https://coderwall.com/p/7rc0fa/hide-placeholder-text-on-focus
-textarea:focus::-webkit-input-placeholder,
-input:focus::-webkit-input-placeholder {
-  color: transparent;
-}
-textarea:focus::-moz-placeholder,
-input:focus::-moz-placeholder { // FF 19+
-  color: transparent;
-}
 textarea:focus::placeholder,
 input:focus::placeholder {
   color: transparent;
