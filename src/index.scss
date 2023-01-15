@@ -478,15 +478,9 @@ tt, code, kbd, samp {
   font-weight: 700;
 }
 
-input, textarea {
+input {
   font: $type;
   font-variant-ligatures: no-common-ligatures;
-}
-
-textarea {
-  border-radius: 4px;
-  border: 1px solid add-tint($brand-primary, 60%);
-  padding: 4px 8px;
 }
 
 select {
@@ -1325,6 +1319,10 @@ $textarea-padding-x: 8px;
 .input-textarea {
   @extend %input-textarea-styles;
   background-color: transparent;
+  border-radius: 4px;
+  font: $type;
+  font-variant-ligatures: no-common-ligatures;
+  padding: 4px 8px;
 
   &.input-textarea--large {
     font-size: $h4-size;
