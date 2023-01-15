@@ -1292,7 +1292,7 @@ $textarea-padding-x: 8px;
 }
 
 .matched {
-  background-color: saturate(add-tint($brand-primary, 70%), 30%);
+  background-color: #cbabdd; // saturate(add-tint($brand-primary, 70%), 30%);
 }
 @media (prefers-color-scheme: dark) {
   .matched {
@@ -1301,7 +1301,7 @@ $textarea-padding-x: 8px;
 }
 
 .unmatched {
-  background-color: add-tint($brand-warning, 50%);
+  background-color: var(--gold-400);
 }
 
 label {
