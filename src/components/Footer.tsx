@@ -26,7 +26,7 @@ class Footer extends Component<Props> {
         <footer
           role="contentinfo"
           className={
-            "footer mx-auto mw-1920 flex flex-wrap items-center justify-between pt1 pb1 pl3 pr3 hide-in-fullscreen" +
+            "footer flex-column mx-auto mw-1920 flex flex-wrap items-center justify-between pt1 pb1 pl3 pr3 hide-in-fullscreen" +
             fullscreen
           }
         >

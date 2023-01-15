@@ -2507,8 +2507,6 @@ small .svg-icon-wrapper.svg-baseline svg {
 
 
 .footer {
-  flex-direction: column;
-
   @media (min-width: $medium-breakpoint) {
     flex-direction: row;
   }
