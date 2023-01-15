@@ -478,6 +478,10 @@ tt, code, kbd, samp {
   font-weight: 700;
 }
 
+label {
+  display: inline-block;
+}
+
 input, textarea {
   font: $type;
   font-variant-ligatures: no-common-ligatures;
@@ -1300,9 +1304,6 @@ $textarea-padding-x: 8px;
   }
 }
 
-label {
-  display: inline-block;
-}
 .react-numeric-input { // this class is added by component
   display: block;
   position: relative;
