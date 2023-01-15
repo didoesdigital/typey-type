@@ -46,9 +46,9 @@ const LessonCanvasFooter = ({
           <div className="flex mb1">
             <div className="flex flex-wrap justify-between">
               <p className="block relative mr3 mb0">
-                <label className="radio-label">
+                <label className="radio-label mb0">
                   <input
-                    className="radio-input"
+                    className="radio-input mr1"
                     type="radio"
                     name="study"
                     id="discover"
@@ -76,9 +76,9 @@ const LessonCanvasFooter = ({
                 </label>
               </p>
               <p className="block relative mr3 mb0">
-                <label className="radio-label">
+                <label className="radio-label mb0">
                   <input
-                    className="radio-input"
+                    className="radio-input mr1"
                     type="radio"
                     name="study"
                     id="revise"
@@ -108,9 +108,9 @@ const LessonCanvasFooter = ({
             </div>
             <div className="flex flex-wrap justify-between">
               <p className="block relative mr3 mb0">
-                <label className="radio-label">
+                <label className="radio-label mb0">
                   <input
-                    className="radio-input"
+                    className="radio-input mr1"
                     type="radio"
                     name="study"
                     id="drill"
@@ -138,9 +138,9 @@ const LessonCanvasFooter = ({
                 </label>
               </p>
               <p className="block relative mr3 mb0">
-                <label className="radio-label">
+                <label className="radio-label mb0">
                   <input
-                    className="radio-input"
+                    className="radio-input mr1"
                     type="radio"
                     name="study"
                     id="practice"

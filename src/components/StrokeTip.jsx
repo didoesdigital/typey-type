@@ -184,7 +184,7 @@ export default function StrokeTip({
       >
         <label className="mb0 text-small color-interactive stroke-tip__label">
           <input
-            className="checkbox-input visually-hidden"
+            className="checkbox-input mr1 visually-hidden"
             type="checkbox"
             name="showStrokesInLesson"
             id="showStrokesInLesson"

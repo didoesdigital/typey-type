@@ -67,7 +67,7 @@ const FinishedPossibleStrokeImprovements = ({
           >
             <label className="checkbox-label mt0 mb1">
               <input
-                className="checkbox-input"
+                className="checkbox-input mr1"
                 type="checkbox"
                 name={i + "-checkbox"}
                 id={i + "-checkbox"}

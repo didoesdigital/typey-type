@@ -579,7 +579,7 @@ class DictionaryManagement extends Component {
               <div className="block relative p1">
                 <label className="checkbox-label mb1">
                   <input
-                    className="checkbox-input"
+                    className="checkbox-input mr1"
                     type="checkbox"
                     name="stenohintsonthefly"
                     id="stenohintsonthefly"

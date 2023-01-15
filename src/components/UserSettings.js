@@ -268,7 +268,7 @@ class UserSettings extends Component {
                     <div className="block relative p1">
                       <label className="checkbox-label mb1">
                         <input
-                          className="checkbox-input"
+                          className="checkbox-input mr1"
                           type="checkbox"
                           name="showStrokes"
                           id="showStrokes"
@@ -297,7 +297,7 @@ class UserSettings extends Component {
                     <div className="block relative p1">
                       <label className="checkbox-label mb1">
                         <input
-                          className="checkbox-input"
+                          className="checkbox-input mr1"
                           type="checkbox"
                           name="hideStrokesOnLastRepetition"
                           id="hideStrokesOnLastRepetition"
@@ -327,7 +327,7 @@ class UserSettings extends Component {
                     <div className="block relative p1">
                       <label className="checkbox-label mb1">
                         <input
-                          className="checkbox-input"
+                          className="checkbox-input mr1"
                           type="checkbox"
                           name="showStrokesOnMisstroke"
                           id="showStrokesOnMisstroke"
@@ -356,9 +356,9 @@ class UserSettings extends Component {
                 <SettingListItem sectionHierachy='minor'>
                     <div className="p1">
                       <div className="block relative">
-                        <label className="radio-label pb1">
+                        <label className="radio-label mb0 pb1">
                           <input
-                            className="radio-input"
+                            className="radio-input mr1"
                             type="radio"
                             name="showStrokesAs"
                             id="strokesAsDiagrams"
@@ -383,9 +383,9 @@ class UserSettings extends Component {
                         </label>
                       </div>
                       <div className="block relative">
-                        <label className="radio-label">
+                        <label className="radio-label mb0">
                           <input
-                            className="radio-input"
+                            className="radio-input mr1"
                             type="radio"
                             name="showStrokesAs"
                             id="strokesAsText"
@@ -416,7 +416,7 @@ class UserSettings extends Component {
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
-                        className="checkbox-input"
+                        className="checkbox-input mr1"
                         type="checkbox"
                         name="newWords"
                         id="newWords"
@@ -446,7 +446,7 @@ class UserSettings extends Component {
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
-                        className="checkbox-input"
+                        className="checkbox-input mr1"
                         type="checkbox"
                         name="seenWords"
                         id="seenWords"
@@ -476,7 +476,7 @@ class UserSettings extends Component {
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
-                        className="checkbox-input"
+                        className="checkbox-input mr1"
                         type="checkbox"
                         name="retainedWords"
                         id="retainedWords"
@@ -615,7 +615,7 @@ class UserSettings extends Component {
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
-                        className="checkbox-input"
+                        className="checkbox-input mr1"
                         type="checkbox"
                         name="blurMaterial"
                         id="blurMaterial"
@@ -645,7 +645,7 @@ class UserSettings extends Component {
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
-                        className="checkbox-input"
+                        className="checkbox-input mr1"
                         type="checkbox"
                         name="speakMaterial"
                         id="speakMaterial"
@@ -705,7 +705,7 @@ class UserSettings extends Component {
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
-                        className="checkbox-input"
+                        className="checkbox-input mr1"
                         type="checkbox"
                         name="caseSensitive"
                         id="caseSensitive"
@@ -734,7 +734,7 @@ class UserSettings extends Component {
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
-                        className="checkbox-input"
+                        className="checkbox-input mr1"
                         type="checkbox"
                         name="simpleTypography"
                         id="simpleTypography"
@@ -763,7 +763,7 @@ class UserSettings extends Component {
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
-                        className="checkbox-input"
+                        className="checkbox-input mr1"
                         type="checkbox"
                         name="punctuationDescriptions"
                         id="punctuationDescriptions"
@@ -792,7 +792,7 @@ class UserSettings extends Component {
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
-                        className="checkbox-input"
+                        className="checkbox-input mr1"
                         type="checkbox"
                         name="textInputAccessibility"
                         id="textInputAccessibility"
