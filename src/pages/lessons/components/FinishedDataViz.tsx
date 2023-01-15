@@ -174,7 +174,7 @@ const FinishedDataViz = ({
         <a
           href="#next-lesson-button"
           onClick={skipToNextLessonLinkButton}
-          className="skip-to-link skip-to-link--relative"
+          className="visually-hidden skip-to-link skip-to-link--relative"
           id="ga--finished--skip-chart"
         >
           Skip chart

@@ -14,7 +14,7 @@ const Header = ({ fullscreen }: { fullscreen: string }) => {
     <div>
       <a
         href="#main"
-        className="skip-to-link link-button"
+        className="visually-hidden skip-to-link link-button"
         id="ga--header--skip-to-content"
       >
         Skip to main content

@@ -1882,11 +1882,6 @@ $textarea-padding-x: 8px;
   }
 }
 .skip-to-link {
-  position: absolute !important;
-  height: 1px;
-  width: 1px;
-  overflow: hidden;
-  clip: rect(1px, 1px, 1px, 1px);
   z-index: $z-index-skip-to-link;
 
   &:focus,
