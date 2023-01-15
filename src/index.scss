@@ -29,7 +29,7 @@
   // --gold-200: #; //#FCF5E9;
   // --gold-300: #; //#FAEAD1;
   --gold-400: #ffe5b3; //#F5D6A3;
-  // --gold-500: #; //#ECB255;
+  --gold-500: #ca9733; //#ECB255;
   // --gold-600: #; //#CD840E;
   // --gold-700: #; //#A66907;
   // --gold-800: #; //#7F4E01;
@@ -122,6 +122,7 @@
     --blue-600: #5598E2;
     --blue-700: #1F74D1;
     --blue-800: #10549E;
+    --gold-500: #ECB255;
     --green-600: #09A573;
     --green-700: #067551;
     --magenta-300: #F5D6E1;
@@ -1761,11 +1762,11 @@ $textarea-padding-x: 8px;
   }
 
   &.steno-stroke--subtle {
-    background-color: desaturate(add-tint($brand-primary, 25%), 40%);
+    background-color: var(--coolgrey-700);
     color: var(--violet-100);
 
     &::selection {
-      background-color: darken(desaturate(add-tint($brand-warning, 5%), 40%), 15%);
+      background-color: var(--gold-500);
     }
   }
 }
