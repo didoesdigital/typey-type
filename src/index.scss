@@ -2313,7 +2313,6 @@ small .svg-icon-wrapper.svg-baseline svg {
   }
 }
 
-.recommendation-survey-link--shown,
 .scores--shown {
   filter: blur(0);
   opacity: 1;
@@ -2321,7 +2320,6 @@ small .svg-icon-wrapper.svg-baseline svg {
               opacity .2s linear !important;
 }
 
-.recommendation-survey-link--hidden,
 .scores--hidden {
   filter: blur(.5rem) !important;
   opacity: 0 !important;
