@@ -45,7 +45,7 @@ const LessonCanvasFooter = ({
           </Tooltip>
           <div className="flex mb1">
             <div className="flex flex-wrap justify-between">
-              <p className="radio-group mr3 mb0">
+              <p className="block relative mr3 mb0">
                 <label className="radio-label">
                   <input
                     className="radio-input"
@@ -75,7 +75,7 @@ const LessonCanvasFooter = ({
                   </Tooltip>
                 </label>
               </p>
-              <p className="radio-group mr3 mb0">
+              <p className="block relative mr3 mb0">
                 <label className="radio-label">
                   <input
                     className="radio-input"
@@ -107,7 +107,7 @@ const LessonCanvasFooter = ({
               </p>
             </div>
             <div className="flex flex-wrap justify-between">
-              <p className="radio-group mr3 mb0">
+              <p className="block relative mr3 mb0">
                 <label className="radio-label">
                   <input
                     className="radio-input"
@@ -137,7 +137,7 @@ const LessonCanvasFooter = ({
                   </Tooltip>
                 </label>
               </p>
-              <p className="radio-group mr3 mb0">
+              <p className="block relative mr3 mb0">
                 <label className="radio-label">
                   <input
                     className="radio-input"

@@ -355,7 +355,7 @@ class UserSettings extends Component {
                 </SettingListItem>
                 <SettingListItem sectionHierachy='minor'>
                     <div className="p1">
-                      <div className="radio-group">
+                      <div className="block relative">
                         <label className="radio-label pb1">
                           <input
                             className="radio-input"
@@ -382,7 +382,7 @@ class UserSettings extends Component {
                           </Tooltip>
                         </label>
                       </div>
-                      <div className="radio-group">
+                      <div className="block relative">
                         <label className="radio-label">
                           <input
                             className="radio-input"
