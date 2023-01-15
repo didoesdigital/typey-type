@@ -16,14 +16,18 @@ let userGoals = {
   oldWords: 15,
 };
 const presentedMaterialCurrentItem = {
-  phrase: "test",
-  stroke: "TEFT",
+  phrase: ".",
+  stroke: "TP-PL",
 };
 
 const sourceMaterial = [
   {
-    phrase: "test",
-    stroke: "TEFT",
+    phrase: ".",
+    stroke: "TP-PL",
+  },
+  {
+    phrase: "and the",
+    stroke: "SKP-T",
   },
 ];
 
@@ -47,8 +51,12 @@ const lesson = {
   sourceMaterial: sourceMaterial,
   presentedMaterial: [
     {
-      phrase: "test",
-      stroke: "TEFT",
+      phrase: ".",
+      stroke: "TP-PL",
+    },
+    {
+      phrase: "and the",
+      stroke: "SKP-T",
     },
   ],
   settings: {
@@ -169,7 +177,7 @@ const Template = (args) => {
               setupLesson={() => undefined}
               charsPerWord={() => undefined}
               totalWordCount={1}
-              upcomingPhrases={[]}
+              upcomingPhrases={["and the"]}
               updateRecommendationHistory={() => undefined}
               updateMarkup={() => undefined}
               updateTopSpeedPersonalBest={() => undefined}
