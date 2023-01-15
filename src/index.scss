@@ -1146,12 +1146,8 @@ input:focus::placeholder {
 }
 
 .lesson-canvas {
-  // align-items: center;
-  display: flex;
-  position: relative;
   max-height: 960px;
   min-height: 320px;
-  overflow: hidden;
   z-index: $z-index-lesson-canvas;
 
   @media (min-width: $large-breakpoint) {

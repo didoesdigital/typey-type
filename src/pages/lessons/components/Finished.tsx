@@ -169,9 +169,7 @@ const Finished = ({
             )}
           </div>
           <div className="mx-auto mw-1920 p3">
-            <div
-              className="lesson-canvas lesson-canvas--finished panel bg-white dark:bg-coolgrey-1000 p3 mb3"
-            >
+            <div className="lesson-canvas lesson-canvas--finished panel overflow-hidden flex relative bg-white dark:bg-coolgrey-1000 p3 mb3">
               {lessonLength === 0 ? (
                 <FinishedZeroAndEmptyStateMessage
                   startFromWordSetting={userSettings.startFromWord}
