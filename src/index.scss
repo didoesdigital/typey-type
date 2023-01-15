@@ -1064,14 +1064,6 @@ input:focus::placeholder {
 }
 
 // Class styles
-.divider {
-  border-top: 1px solid add-tint($brand-primary, 80%);
-}
-
-.divider--vertical {
-  border-left: 1px solid add-tint($brand-primary, 80%);
-}
-
 .heading-link {
   color: add-tint($brand-primary, 70%);
   text-decoration: none;
