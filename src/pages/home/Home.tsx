@@ -130,7 +130,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
         <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584">
-              <h3 className="overline">Discover</h3>
+              <h3 className="overline dib">Discover</h3>
               <p>
                 Discover 5–15 new briefs a day from various lessons, revealing
                 their strokes as you learn to write them. Write them slowly,
@@ -150,7 +150,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
         <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584 ml-auto text-right">
-              <h3 className="overline">Revise</h3>
+              <h3 className="overline dib">Revise</h3>
               <p>
                 Revise 50 briefs a day from a lesson with loads of words you
                 want to memorise, like the top 1000 words. Try to recall the
@@ -171,7 +171,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
         <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584">
-              <h3 className="overline">Drill</h3>
+              <h3 className="overline dib">Drill</h3>
               <p>
                 Regularly drill common words to build up your muscle memory and
                 test your skills. Write as fast and furiously as you can, aiming
@@ -192,7 +192,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
         <div className="bg-white dark:bg-coolgrey-1000 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584 ml-auto text-right">
-              <h3 className="overline">Practise</h3>
+              <h3 className="overline dib">Practise</h3>
               <p>
                 Finally, practise longer lessons to mimic real usage as closely
                 as possible. Write as fast as you can without causing
