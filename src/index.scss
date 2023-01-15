@@ -1374,8 +1374,6 @@ $textarea-padding-x: 8px;
   caret-color: saturate(add-tint($brand-primary, 30%), 30%);
 }
 @media (prefers-color-scheme: dark) {
-  .successfully-typed-text,
-  .input-file,
   .input-textarea {
     border-color: var(--violet-600);
   }
