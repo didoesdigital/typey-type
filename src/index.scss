@@ -1622,6 +1622,13 @@ $textarea-padding-x: 8px;
 @media (prefers-color-scheme: dark) {
   .de-emphasized-button {
     color: var(--coolgrey-600);
+
+    &:hover {
+      color: var(--coolgrey-700);
+    }
+    &:active, &:focus {
+      color:  var(--coolgrey-700);
+    }
   }
 }
 
