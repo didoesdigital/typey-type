@@ -34,7 +34,7 @@ const CustomLessonIntro = ({
       listOfValidationMessages = (
         <ul
           id="customLessonMaterialValidationMessages"
-          className="unstyled-list bg-danger"
+          className="unstyled-list bg-danger dark:text-coolgrey-900"
         >
           {listItemsOfValidationMessages}
         </ul>

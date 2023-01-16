@@ -470,7 +470,7 @@ class DictionaryManagement extends Component {
         className = 'unstyled-list-item';
       }
       else {
-        className = 'unstyled-list-item bg-danger';
+        className = 'unstyled-list-item bg-danger dark:text-coolgrey-900';
       }
       return <li key={index} className={className}>{dictionary}</li>
     });
@@ -490,7 +490,7 @@ class DictionaryManagement extends Component {
       showDictionaryErrors = (
         <React.Fragment>
           {this.state.invalidDictionaries.length === 1 ? <p>This dictionary is invalid:</p> : <p>These dictionaries are invalid:</p>}
-          <ul className="bg-danger pl1 pr3 wrap">
+          <ul className="bg-danger dark:text-coolgrey-900 pl1 pr3 wrap">
             {invalidDictionaryList}
           </ul>
         </React.Fragment>
@@ -512,7 +512,7 @@ class DictionaryManagement extends Component {
       showConfigErrors = (
         <React.Fragment>
           <p>This dictionary config is invalid:</p>
-          <p className="bg-danger pl1 pr3 wrap">{this.state.invalidConfig[0]}: {this.state.invalidConfig[1]}</p>
+          <p className="bg-danger dark:text-coolgrey-900 pl1 pr3 wrap">{this.state.invalidConfig[0]}: {this.state.invalidConfig[1]}</p>
         </React.Fragment>
       );
     }
@@ -562,7 +562,7 @@ class DictionaryManagement extends Component {
               <h3>Dictionary management experiment</h3>
               <details>
                 <summary>
-                  <p><span className="bg-danger">This feature is experimental!</span> There are some known limitations, such as the size limit. Expand to learn more…</p>
+                  <p><span className="bg-danger dark:text-coolgrey-900">This feature is experimental!</span> There are some known limitations, such as the size limit. Expand to learn more…</p>
                 </summary>
                 <ul>
                   <li>Local storage typically only holds about 5MB of data. If you have a bigger dictionary, you'll have to add it again on every visit.</li>

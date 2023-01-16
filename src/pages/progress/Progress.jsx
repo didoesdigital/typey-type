@@ -366,7 +366,7 @@ class Progress extends Component {
       <div className="progress-layout pl3 pr3 pt3 mx-auto mw-1024">
         <div className="panel bg-white dark:bg-coolgrey-1000 p3 mb3">
           <h2>Save your progress</h2>
-          <p>Typey&nbsp;Type saves your brief progress in your browser’s local storage.<strong className="bg-danger"> You’ll lose your progress if you clear your browsing data (history, cookies, and cache).</strong> If you share this device with other people or use Typey&nbsp;Type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;Type.</p>
+          <p>Typey&nbsp;Type saves your brief progress in your browser’s local storage.<strong className="bg-danger dark:text-coolgrey-900"> You’ll lose your progress if you clear your browsing data (history, cookies, and cache).</strong> If you share this device with other people or use Typey&nbsp;Type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;Type.</p>
           <p className="mb0">
             <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-metwords-from-typey-type">Copy progress to clipboard</PseudoContentButton>
           </p>
@@ -410,7 +410,7 @@ class Progress extends Component {
             <label htmlFor="js-metwords-from-personal-store--small" className="inline-block mb05 visually-hidden">Enter your progress here:</label>
             <textarea
               id="js-metwords-from-personal-store--small"
-              className="js-metwords-from-personal-store progress-textarea db w-100 mr1"
+              className="js-metwords-from-personal-store progress-textarea bg-info px1 py05 bw-1 b--solid br-4 db w-100 mr1"
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
