@@ -18,7 +18,7 @@ const FinishedActionButtons = ({
     <a
       aria-label="Restart lesson"
       accessKey={"s"}
-      href={restartPath}
+      href={restartPath.replace(/lesson.txt$/, "")}
       onClick={restartLesson}
       className="mr3"
       role="button"

@@ -31,7 +31,7 @@ const FinishedMisstrokesSummary = ({
           <a
             aria-label="Revise these words"
             accessKey={"r"}
-            href={path}
+            href={path.replace(/lesson.txt$/, "")}
             onClick={reviseLesson}
             role="button"
           >
@@ -49,7 +49,11 @@ const FinishedMisstrokesSummary = ({
         </ol>
       </div>
       <p>
-        <a href={path} onClick={reviseLesson} role="button">
+        <a
+          href={path.replace(/lesson.txt$/, "")}
+          onClick={reviseLesson}
+          role="button"
+        >
           Revise these words
         </a>
       </p>
