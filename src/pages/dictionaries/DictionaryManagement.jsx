@@ -557,7 +557,7 @@ class DictionaryManagement extends Component {
               </header>
             </div>
           </Subheader>
-          <div className="bg-info landing-page-section">
+          <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <h3>Dictionary management experiment</h3>
               <details>
@@ -586,7 +586,7 @@ class DictionaryManagement extends Component {
                     checked={!!this.props.globalUserSettings.experiments?.stenohintsonthefly}
                     onChange={this.props.toggleExperiment}
                   />
-                  <strong>Show your dictionary entries in lesson hints <span className="bg-danger">(this is experimental with known limitations!)</span></strong>
+                  <strong>Show your dictionary entries in lesson hints <span className="bg-danger dark:text-coolgrey-900">(this is experimental with known limitations!)</span></strong>
                 </label>
                 <ul className="ml3">
                   {/* <li>This setting means that instead of using Typey&nbsp;Type's static lesson files for words and stroke hints, Typey Type will use the lesson files only for the words and then generate stroke hints using your dictionaries' strokes when the lesson loads.</li> */}
@@ -624,7 +624,7 @@ class DictionaryManagement extends Component {
               </div>
             </div>
           </div>
-          <div className="bg-info landing-page-section">
+          <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
             <div className="p3 mx-auto mw-1024">
               <div className="flex flex-wrap">
                 <div className="mw-568 mr3 flex-grow">
