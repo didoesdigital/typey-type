@@ -579,6 +579,11 @@ select:focus {
 ::selection {
   background-color: var(--gold-400);
 }
+@media (prefers-color-scheme: dark) {
+  ::selection {
+    color: var(--coolgrey-1000);
+  }
+}
 
 ::placeholder {
   color: add-tint($brand-primary, 30%);
