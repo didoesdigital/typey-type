@@ -1197,6 +1197,11 @@ input:focus::placeholder {
 .stat__label {
   font-size: $h6-size;
 }
+@media (prefers-color-scheme: dark) {
+  .stat__number {
+    color: #fff;
+  }
+}
 
 $material-typed-text-and-hint-padding: 120px;
 
