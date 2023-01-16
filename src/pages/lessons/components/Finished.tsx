@@ -202,7 +202,7 @@ const Finished = ({
                         setAnnouncementMessage={setAnnouncementMessage}
                       />
                       <FinishedActionButtons
-                        restartPath={process.env.PUBLIC_URL + path}
+                        restartPath={path}
                         restartLesson={restartLesson}
                         suggestedNextUrl={getNextLessonPath(metadata)}
                       />
