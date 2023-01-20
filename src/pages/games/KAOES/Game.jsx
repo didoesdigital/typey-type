@@ -11,6 +11,7 @@ import { actions } from "../utilities/gameActions";
 import { initConfig, gameReducer, roundToWin } from "./gameReducer";
 import Completed from "../components/Completed";
 import Intro from "../components/Intro";
+import Input from "../components/Input";
 import GameProgress from "../components/GameProgress";
 import StenoLayoutDiagram from "../../../StenoLayout/AmericanStenoDiagram";
 import Stroke from "../../../utils/stroke";
@@ -18,6 +19,39 @@ import mapBriefsFunction from '../../../utils/stenoLayouts/mapBriefToAmericanSte
 import Puzzle from "./Puzzle";
 import { ReactComponent as MischievousRobot } from "../../../images/MischievousRobot.svg";
 import { choosePuzzleKey, prettyKey } from "./utilities";
+import * as stroke from "../../../utils/stroke";
+
+const stenoTypedTextToKeysMapping = {
+  "-Z": stroke.Z,
+  "-D": stroke.D,
+  "-S": stroke.RS,
+  "-T": stroke.RT,
+  "-G": stroke.G,
+  "-L": stroke.L,
+  "-B": stroke.B,
+  "-P": stroke.RP,
+  "-R": stroke.RR,
+  "-F": stroke.F,
+  "U": stroke.U,
+  "E": stroke.E,
+  "*": stroke.STAR,
+  "O": stroke.O,
+  "A": stroke.A,
+  "R": stroke.R,
+  "H": stroke.H,
+  "W": stroke.W,
+  "P": stroke.P,
+  "K": stroke.K,
+  "T": stroke.T,
+  "S": stroke.S,
+  "#": stroke.HASH,
+  "Z": stroke.Z,
+  "D": stroke.D,
+  "G": stroke.G,
+  "L": stroke.L,
+  "B": stroke.B,
+  "F": stroke.F,
+};
 
 const particles = [];
 const gameName = "KAOES";
@@ -33,6 +67,10 @@ export default function Game() {
   const canvasRef = useRef(null);
   const canvasWidth = Math.floor(window.innerWidth);
   const canvasHeight = Math.floor(window.innerHeight);
+
+  const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
+    useState("");
+  const [typedText, setTypedText] = useState("");
 
   const [puzzleText, setPuzzleText] = useState("");
   const [stenoStroke, setStenoStroke] = useState(new Stroke());
@@ -66,6 +104,33 @@ export default function Game() {
     const tmpBoard = new Stroke();
     const clickedKey = tmpBoard.set(key).toString();
     if (puzzleText === clickedKey) {
+      setPreviousCompletedPhraseAsTyped("");
+      restartConfetti();
+      setPuzzleText(choosePuzzleKey(clickedKey));
+      setStenoStroke(new Stroke());
+      setRightWrongColor(rightColor);
+      dispatch({ type: actions.roundCompleted });
+    } else {
+      setStenoStroke(stenoStroke.set(key));
+      setRightWrongColor(wrongColor);
+    }
+    setPreviousStenoStroke(tmpBoard.set(key));
+    dispatch({ type: actions.makeGuess });
+  };
+
+  const onChangeTextInput = (typedStenoKey) => {
+    setTypedText(typedStenoKey);
+    const trimmedTypedKey = typedStenoKey.trim().toUpperCase();
+    const key = stenoTypedTextToKeysMapping[trimmedTypedKey]
+      ? stenoTypedTextToKeysMapping[trimmedTypedKey]
+      : "";
+
+    const tmpBoard = new Stroke();
+    const clickedKey = tmpBoard.set(key).toString();
+
+    if (puzzleText === clickedKey) {
+      setTypedText("");
+      setPreviousCompletedPhraseAsTyped(typedStenoKey);
       restartConfetti();
       setPuzzleText(choosePuzzleKey(clickedKey));
       setStenoStroke(new Stroke());
@@ -167,6 +232,13 @@ export default function Game() {
             </div>
           </>
         )}
+        <Input
+          onChangeInput={onChangeTextInput}
+          previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
+          round={state.roundIndex + 1}
+          typedText={typedText}
+          gameName={gameName}
+        />
         <p
           className={`text-center text-small ${
             state.gameComplete ? "mt10" : "mt1 mb0"
