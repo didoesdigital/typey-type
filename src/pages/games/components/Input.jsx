@@ -27,7 +27,7 @@ export default function Input({
         htmlFor={`${gameName}-input`}
         className="inline-block mb05 visually-hidden"
       >
-        Enter the correct word:
+        Enter the correct text:
       </label>
       <div className="relative">
         <samp className="pointer-none absolute absolute--fill w-100">
