@@ -244,16 +244,18 @@ export default function Game() {
               </div>
             </div>
             <div className="mw-320 mx-auto">
-              <div className="flex flex-wrap items-center">
-                <Input
-                  onChangeInput={onChangeTextInput}
-                  previousCompletedPhraseAsTyped={
-                    previousCompletedPhraseAsTyped
-                  }
-                  round={state.roundIndex + 1}
-                  typedText={typedText}
-                  gameName={gameName}
-                />
+              <div className="flex flex-wrap items-center justify-center">
+                <div className="mw-240">
+                  <Input
+                    onChangeInput={onChangeTextInput}
+                    previousCompletedPhraseAsTyped={
+                      previousCompletedPhraseAsTyped
+                    }
+                    round={state.roundIndex + 1}
+                    typedText={typedText}
+                    gameName={gameName}
+                  />
+                </div>
                 <div className="ml1">
                   (
                   <button
