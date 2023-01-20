@@ -64,6 +64,21 @@ const neutralDarkColor = "#504C57";
 const neutralLightColor = "#F2F1F4";
 const diagramWidth = 568;
 
+const GiveKAOESfeedback = ({ idModifier = "" }) => (
+  <p className={"text-center text-small"}>
+    Got a suggestion?{" "}
+    <a
+      href="https://forms.gle/L8vGQTtLwKujLtFb7"
+      className="mt0"
+      target="_blank"
+      rel="noopener noreferrer"
+      id={`ga--KAOES--give-feedback${idModifier}`}
+    >
+      Give feedback (form opens in new tab)
+    </a>
+  </p>
+);
+
 export default function Game() {
   const canvasRef = useRef(null);
   const canvasWidth = Math.floor(window.innerWidth);
@@ -170,7 +185,12 @@ export default function Game() {
           className="fixed top-0 left-0 celebration-canvas pointer-none"
         />
         {state.gameComplete ? (
-          <Completed gameName={gameName} dispatch={dispatch} />
+          <>
+            <Completed gameName={gameName} dispatch={dispatch} />
+            <div className="mt10">
+              <GiveKAOESfeedback />
+            </div>
+          </>
         ) : (
           <>
             <div className="flex flex-wrap pb1">
@@ -311,6 +331,9 @@ export default function Game() {
                         key will output “-T” instead of “the”. The dash is
                         necessary for keys on the right-hand side of the board.
                       </p>
+                      <div className={"mt1 mb0"}>
+                        <GiveKAOESfeedback idModifier="--from-modal" />
+                      </div>
                     </div>
                     <div className="text-right">
                       <button className="button" onClick={handleCloseModal}>
@@ -324,22 +347,6 @@ export default function Game() {
             </div>
           </>
         )}
-        <p
-          className={`text-center text-small ${
-            state.gameComplete ? "mt10" : "mt1 mb0"
-          }`}
-        >
-          Got a suggestion?{" "}
-          <a
-            href="https://forms.gle/L8vGQTtLwKujLtFb7"
-            className="mt0"
-            target="_blank"
-            rel="noopener noreferrer"
-            id="ga--KAOES--give-feedback"
-          >
-            Give feedback (form opens in new tab)
-          </a>
-        </p>
       </div>
     </div>
   );
