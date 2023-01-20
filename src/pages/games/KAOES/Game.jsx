@@ -123,7 +123,7 @@ export default function Game() {
     const trimmedTypedKey = typedStenoKey.trim().toUpperCase();
     const key = stenoTypedTextToKeysMapping[trimmedTypedKey]
       ? stenoTypedTextToKeysMapping[trimmedTypedKey]
-      : "";
+      : 0;
 
     const tmpBoard = new Stroke();
     const clickedKey = tmpBoard.set(key).toString();

@@ -63,7 +63,7 @@ export default function AmericanStenoDiagram(props) {
   const handleClick = (event) => {
     if (props.handleOnClick) {
       const clickedKeyID = event.target["id"];
-      const key = (idKeyLookup[clickedKeyID]) ? idKeyLookup[clickedKeyID] : "";
+      const key = (idKeyLookup[clickedKeyID]) ? idKeyLookup[clickedKeyID] : 0;
 
       props.handleOnClick(key);
     }
