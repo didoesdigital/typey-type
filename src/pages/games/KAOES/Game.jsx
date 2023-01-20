@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import ReactModal from "react-modal";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import * as Confetti from "../../../utils/confetti.js";
 import { actions } from "../utilities/gameActions";
@@ -71,6 +72,7 @@ export default function Game() {
   const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
     useState("");
   const [typedText, setTypedText] = useState("");
+  const [modalVisibility, setModalVisibility] = useState(false);
 
   const [puzzleText, setPuzzleText] = useState("");
   const [stenoStroke, setStenoStroke] = useState(new Stroke());
@@ -83,7 +85,18 @@ export default function Game() {
   );
   useEffect(() => {
     setPuzzleText(choosePuzzleKey(""));
+    ReactModal.setAppElement("#js-app");
   }, []);
+
+  const handleOpenModal = (event) => {
+    event.preventDefault();
+    setModalVisibility(true);
+  };
+
+  const handleCloseModal = (event) => {
+    event.preventDefault();
+    setModalVisibility(false);
+  };
 
   const restartConfetti = useCallback(() => {
     particles.splice(0);
@@ -232,13 +245,78 @@ export default function Game() {
             </div>
           </>
         )}
-        <Input
-          onChangeInput={onChangeTextInput}
-          previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-          round={state.roundIndex + 1}
-          typedText={typedText}
-          gameName={gameName}
-        />
+        <div className="mw-320 mx-auto">
+          <div className="flex flex-wrap items-center">
+            <Input
+              onChangeInput={onChangeTextInput}
+              previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
+              round={state.roundIndex + 1}
+              typedText={typedText}
+              gameName={gameName}
+            />
+            <div className="ml1">
+              (
+              <button
+                className="de-emphasized-button text-small"
+                onClick={handleOpenModal}
+              >
+                help
+              </button>
+              <ReactModal
+                isOpen={modalVisibility}
+                aria={{
+                  labelledby: "aria-modal-heading",
+                  describedby: "aria-modal-description",
+                }}
+                ariaHideApp={true}
+                closeTimeoutMS={300}
+                role="dialog"
+                onRequestClose={handleCloseModal}
+                className={{
+                  "base": "modal",
+                  "afterOpen": "modal--after-open",
+                  "beforeClose": "modal--before-close",
+                }}
+                overlayClassName={{
+                  "base": "modal__overlay",
+                  "afterOpen": "modal__overlay--after-open",
+                  "beforeClose": "modal__overlay--before-close",
+                }}
+              >
+                <div className="fr">
+                  <button
+                    className="de-emphasized-button hide-md"
+                    onClick={handleCloseModal}
+                  >
+                    Close
+                  </button>
+                </div>
+                <h3 id="aria-modal-heading">Typed KAOES input</h3>
+                <div id="aria-modal-description">
+                  <p>
+                    To practice typing the keys instead of clicking on the
+                    diagram, you can turn off all of your steno dictionaries to
+                    produce raw steno output. That way, when you press the{" "}
+                    <kbd className="raw-steno-key raw-steno-key--subtle">S</kbd>{" "}
+                    key, the steno engine will output “S” instead of “is”.
+                    Likewise, pressing the{" "}
+                    <kbd className="raw-steno-key raw-steno-key--subtle">
+                      -T
+                    </kbd>{" "}
+                    key will output “-T” instead of “the”. The dash is necessary
+                    for keys on the right-hand side of the board.
+                  </p>
+                </div>
+                <div className="text-right">
+                  <button className="button" onClick={handleCloseModal}>
+                    OK
+                  </button>
+                </div>
+              </ReactModal>
+              )
+            </div>
+          </div>
+        </div>
         <p
           className={`text-center text-small ${
             state.gameComplete ? "mt10" : "mt1 mb0"
