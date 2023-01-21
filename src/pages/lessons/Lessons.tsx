@@ -4,9 +4,11 @@ import DocumentTitle from "react-document-title";
 import Lesson from "./Lesson";
 import LessonsIndex from "./LessonsIndex";
 import CustomLessonSetup from "./custom/CustomLessonSetup";
+import CustomLessonGenerator from "./custom/CustomLessonGenerator";
 
 type LessonsRoutingProps = {
   customLesson: any;
+  generateCustomLesson: any;
   handleLesson: any;
   lesson: any;
   lessonIndex: any;
@@ -23,6 +25,7 @@ const Lessons = ({
   customLessonMaterialValidationMessages,
   customLessonMaterialValidationState,
   fetchAndSetupGlobalDict,
+  generateCustomLesson,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   handleLesson,
@@ -245,6 +248,22 @@ const Lessons = ({
               setAnnouncementMessage={setAnnouncementMessage}
               {...lessonProps}
               {...props}
+            />
+          </DocumentTitle>
+        )}
+      />
+      <Route
+        exact={true}
+        path={`${match.url}/custom/generator`}
+        render={(props) => (
+          <DocumentTitle title="Typey Type | Lesson generator">
+            <CustomLessonGenerator
+              customLesson={customLesson}
+              fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+              generateCustomLesson={generateCustomLesson}
+              globalLookupDictionary={globalLookupDictionary}
+              personalDictionaries={personalDictionaries}
+              {...lessonProps}
             />
           </DocumentTitle>
         )}

@@ -374,6 +374,8 @@ export type Lesson = {
   path: LessonPathWithBasenameAndFilename;
 };
 
+export type CustomLesson = Lesson;
+
 export type FallbackLesson = {
   sourceMaterial: [{ phrase: "The"; stroke: "-T" }];
   presentedMaterial: [{ phrase: "The"; stroke: "-T" }];
