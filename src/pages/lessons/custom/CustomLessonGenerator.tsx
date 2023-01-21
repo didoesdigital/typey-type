@@ -122,7 +122,7 @@ const CustomLessonGenerator = ({
                   </button>
                   <Link
                     to="/lessons/custom?study=practice&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1"
-                    className="link-button dib text-right"
+                    className="link-button dib button button--secondary"
                     style={{ lineHeight: 2 }}
                   >
                     Start generated lesson
