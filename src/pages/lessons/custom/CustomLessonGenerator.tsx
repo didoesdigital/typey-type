@@ -1,10 +1,10 @@
 import React, { useEffect, useReducer, useRef } from "react";
-import { actions } from "./rulesActions";
+import { actions } from "./generator/rulesActions";
 import Subheader from "../../../components/Subheader";
-import { initConfig as initRulesConfig, rulesReducer } from "./rulesReducer";
+import { initConfig as initRulesConfig, rulesReducer } from "./generator/rulesReducer";
 import { Link } from "react-router-dom";
-import RuleCheckbox from "./components/RuleCheckbox";
-import rulesCheckboxes from "./utilities/rulesCheckboxes";
+import RuleCheckbox from "./generator/components/RuleCheckbox";
+import rulesCheckboxes from "./generator/utilities/rulesCheckboxes";
 import type {
   CustomLesson,
   LookupDictWithNamespacedDicts,

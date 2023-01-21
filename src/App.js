@@ -58,7 +58,7 @@ import setAnnouncementMessage from './components/Announcements/setAnnouncementMe
 import setAnnouncementMessageString from './components/Announcements/setAnnouncementMessageString';
 import sortLesson from './utils/lessons/sortLesson';
 import Zipper from './utils/zipper';
-import generateCustomLesson from './pages/lessons/custom/utilities/generateCustomLesson';
+import generateCustomLesson from './pages/lessons/custom/generator/utilities/generateCustomLesson';
 
 const AsyncBreak = Loadable({
   loader: () => import("./pages/break/Break"),

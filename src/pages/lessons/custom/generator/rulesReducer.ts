@@ -1,5 +1,5 @@
 import { actions } from "./rulesActions";
-import type { Rules } from "./generator/types";
+import type { Rules } from "./types";
 
 const defaultState: Rules = {
   isOneSyllable: true,

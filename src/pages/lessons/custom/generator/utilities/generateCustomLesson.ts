@@ -1,5 +1,5 @@
-import Zipper from "../../../../utils/zipper";
-import fallbackLesson from "../../../../constant/fallbackLesson";
+import Zipper from "../../../../../utils/zipper";
+import fallbackLesson from "../../../../../constant/fallbackLesson";
 import ruleFunctions from "./ruleFunctions";
 
 import type {
@@ -7,13 +7,13 @@ import type {
   LookupDictWithNamespacedDicts,
   Outline,
   Translation,
-} from "../../../../types";
+} from "../../../../../types";
 
 import type {
   FilterAndExpectation,
   Rules,
   RuleFunctionsTypes,
-} from "../generator/types";
+} from "../types";
 
 const translationExclusions = ["pos", "sol", "spas", "pros"];
 

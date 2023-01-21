@@ -1,7 +1,7 @@
-import isOneSyllable from "../generator/rules/isOneSyllable";
-import hasEfAsVeeOrEss from "../generator/rules/hasEfAsVeeOrEss";
+import isOneSyllable from "../rules/isOneSyllable";
+import hasEfAsVeeOrEss from "../rules/hasEfAsVeeOrEss";
 
-import type { RuleFunctionsTypes } from "../generator/types";
+import type { RuleFunctionsTypes } from "../types";
 
 const ruleFunctions: Required<RuleFunctionsTypes> = {
   isOneSyllable: isOneSyllable,
