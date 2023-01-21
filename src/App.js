@@ -1029,6 +1029,9 @@ class App extends Component {
           lesson.subtitle = ''
         }
       }
+      else {
+        lesson = fallbackLesson
+      }
       this.setState({
         announcementMessage: 'Navigated to: Your revision words',
         currentPhraseID: 0,
