@@ -71,7 +71,7 @@ const CustomLessonSetup = ({
             <h2
               ref={mainHeading}
               tabIndex={-1}
-              id="about-typey-type-for-stenographers"
+              id="typey-type-for-stenographers-custom-lesson-setup"
             >
               Create a custom lesson
             </h2>
