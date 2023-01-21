@@ -4,7 +4,8 @@ import DocumentTitle from "react-document-title";
 import Lesson from "./Lesson";
 import LessonsIndex from "./LessonsIndex";
 import CustomLessonSetup from "./custom/CustomLessonSetup";
-import CustomLessonGenerator from "./custom/CustomLessonGenerator";
+import Loadable from "react-loadable";
+import PageLoading from "../../components/PageLoading";
 
 type LessonsRoutingProps = {
   customLesson: any;
@@ -17,6 +18,12 @@ type LessonsRoutingProps = {
   stopLesson: any;
   [key: string]: any;
 };
+
+const AsyncCustomLessonGenerator = Loadable({
+  loader: () => import("./custom/CustomLessonGenerator"),
+  loading: PageLoading,
+  delay: 300,
+});
 
 const Lessons = ({
   createCustomLesson,
@@ -255,9 +262,9 @@ const Lessons = ({
       <Route
         exact={true}
         path={`${match.url}/custom/generator`}
-        render={(props) => (
+        render={() => (
           <DocumentTitle title="Typey Type | Lesson generator">
-            <CustomLessonGenerator
+            <AsyncCustomLessonGenerator
               customLesson={customLesson}
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               generateCustomLesson={generateCustomLesson}
