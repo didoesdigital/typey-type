@@ -1,7 +1,10 @@
 import React, { useEffect, useReducer, useRef } from "react";
 import { actions } from "./generator/rulesActions";
 import Subheader from "../../../components/Subheader";
-import { initConfig as initRulesConfig, rulesReducer } from "./generator/rulesReducer";
+import {
+  initConfig as initRulesConfig,
+  rulesReducer,
+} from "./generator/rulesReducer";
 import { Link } from "react-router-dom";
 import RuleCheckbox from "./generator/components/RuleCheckbox";
 import rulesCheckboxes from "./generator/utilities/rulesCheckboxes";
@@ -61,8 +64,12 @@ const CustomLessonGenerator = ({
     initRulesConfig
   );
 
+  const onRules = Object.fromEntries(
+    Object.entries(rulesState).filter(([_ruleName, value]) => value)
+  );
+
   const buildLesson = () => {
-    generateCustomLesson(globalLookupDictionary, rulesState);
+    generateCustomLesson(globalLookupDictionary, onRules);
   };
 
   const onChangeRuleStatus: React.ChangeEventHandler<HTMLInputElement> = (
