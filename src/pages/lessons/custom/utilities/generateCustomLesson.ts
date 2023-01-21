@@ -82,11 +82,16 @@ function generateCustomLesson(
   const newCustomLesson =
     customLesson.presentedMaterial.length > 0 ? customLesson : fallbackLesson;
 
+  const newCustomLessonMaterial = newCustomLesson.presentedMaterial
+    .map((materialItem) => `${materialItem.phrase}	${materialItem.stroke}`)
+    .join("\n");
+
   // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation.
   this.setState({
     lesson: newCustomLesson,
     currentPhraseID: 0,
     customLesson: newCustomLesson,
+    customLessonMaterial: newCustomLessonMaterial,
   });
 }
 
