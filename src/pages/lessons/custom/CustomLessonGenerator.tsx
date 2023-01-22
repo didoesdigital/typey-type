@@ -165,15 +165,15 @@ const CustomLessonGenerator = ({
                 <p>
                   {customLessonMaterialValidationState === "fail" ? (
                     <>
-                      That combination of settings results in no material. Try
-                      disabling some settings.
+                      That combination of rule settings results in no material.
+                      Try setting some rules to “ignored”.
                       {rulesState.isOneSyllable ===
                         rulesState.moreThanOneSyllable &&
-                      rulesState.isOneSyllable !== "disabled"
+                      rulesState.isOneSyllable !== "ignored"
                         ? " Change one of the syllable count settings."
                         : ""}
                       {rulesState.isSingleStroke === rulesState.isMultiStroke &&
-                      rulesState.isSingleStroke !== "disabled"
+                      rulesState.isSingleStroke !== "ignored"
                         ? " Change one of the stroke count settings."
                         : ""}
                     </>

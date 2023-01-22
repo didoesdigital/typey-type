@@ -24,7 +24,7 @@ const RuleOptions = ({
     >
       <option value="on">On</option>
       <option value="off">Off</option>
-      <option value="disabled">Ignored</option>
+      <option value="ignored">Ignored</option>
     </select>
     <label className="dib lh-single" htmlFor={ruleName}>
       {prettyName}

@@ -1,4 +1,4 @@
-export type RuleStatus = "on" | "off" | "disabled";
+export type RuleStatus = "on" | "off" | "ignored";
 
 export type Rules = {
   isOneSyllable?: RuleStatus; // one_syllable

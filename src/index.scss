@@ -2499,7 +2499,7 @@ small .svg-icon-wrapper.svg-baseline svg {
   transform: translate(0px, -56px);
 }
 
-.rule-select[data-rule-status="disabled"] {
+.rule-select[data-rule-status="ignored"] {
   & {
     color: var(--coolgrey-500);
     border-color: var(--coolgrey-300);
