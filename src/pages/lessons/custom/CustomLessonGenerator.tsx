@@ -171,7 +171,7 @@ const CustomLessonGenerator = ({
                   </Link>
                 </p>
                 <p>
-                  {customLessonMaterialValidationState === "fail" ? (
+                  {customLessonMaterialValidationState === "fail" && (
                     <>
                       That combination of rule settings results in no material.
                       Try setting some rules to “ignored”.
@@ -185,15 +185,17 @@ const CustomLessonGenerator = ({
                         ? " Change one of the stroke count settings."
                         : ""}
                     </>
-                  ) : (
+                  )}
+                  {customLessonMaterialValidationState === "unvalidated" &&
+                    "Preview generated lesson here after building."}
+                  {customLessonMaterialValidationState === "success" &&
                     `Preview generated lesson with ${
                       customLesson.presentedMaterial.length === 1000
                         ? "max "
                         : ""
                     }${customLesson.presentedMaterial.length} item${
                       customLesson.presentedMaterial.length === 1 ? "" : "s"
-                    }:`
-                  )}
+                    }:`}
                 </p>
                 <div>
                   <ul>
