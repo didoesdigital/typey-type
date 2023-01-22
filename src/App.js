@@ -160,6 +160,8 @@ class App extends Component {
       currentPhraseID: 0,
       currentLessonStrokes: [],
       customLessonMaterial: ``,
+      customLessonMaterialValidationMessages: [],
+      customLessonMaterialValidationState: null,
       customLesson: fallbackLesson,
       actualText: ``,
       dictionaryIndex: [{

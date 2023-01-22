@@ -266,6 +266,7 @@ const Lessons = ({
           <DocumentTitle title="Typey Type | Lesson generator">
             <AsyncCustomLessonGenerator
               customLesson={customLesson}
+              customLessonMaterialValidationState={customLessonMaterialValidationState}
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               generateCustomLesson={generateCustomLesson}
               globalLookupDictionary={globalLookupDictionary}

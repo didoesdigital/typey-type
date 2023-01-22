@@ -5,11 +5,13 @@ import CustomShareLessons from "./components/CustomShareLessons";
 import CustomWordListLesson from "./components/CustomWordListLesson";
 import Subheader from "../../../components/Subheader";
 
+import type { CustomLessonMaterialValidationState } from "./components/CustomLessonIntro";
+
 type Props = {
   createCustomLesson: () => void;
   customLessonMaterial: any;
-  customLessonMaterialValidationMessages: any;
-  customLessonMaterialValidationState: any;
+  customLessonMaterialValidationState: CustomLessonMaterialValidationState;
+  customLessonMaterialValidationMessages: string[];
   fetchAndSetupGlobalDict: (
     withPlover: boolean,
     importedPersonalDictionaries?: any
