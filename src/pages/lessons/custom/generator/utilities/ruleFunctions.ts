@@ -17,6 +17,7 @@ import isMultiStroke from "../rules/isMultiStroke";
 import hasForcedWordEnding from "../rules/hasForcedWordEnding";
 import hasOneConsonantOnEachSide from "../rules/hasOneConsonantOnEachSide";
 import hasMoreThanOneConsonant from "../rules/hasMoreThanOneConsonant";
+import hasOneSpace from "../rules/hasOneSpace";
 import hasLhsConsonantWithMultipleKeys from "../rules/hasLhsConsonantWithMultipleKeys";
 import hasRhsConsonantWithMultipleKeys from "../rules/hasRhsConsonantWithMultipleKeys";
 import hasDigraphs from "../rules/hasDigraphs";
@@ -73,6 +74,7 @@ const ruleFunctions: Required<RuleFunctionsTypes> = {
   hasForcedWordEnding: hasForcedWordEnding,
   hasOneConsonantOnEachSide: hasOneConsonantOnEachSide,
   hasMoreThanOneConsonant: hasMoreThanOneConsonant,
+  hasOneSpace: hasOneSpace,
   hasLhsConsonantWithMultipleKeys: hasLhsConsonantWithMultipleKeys,
   hasRhsConsonantWithMultipleKeys: hasRhsConsonantWithMultipleKeys,
   hasDigraphs: hasDigraphs,

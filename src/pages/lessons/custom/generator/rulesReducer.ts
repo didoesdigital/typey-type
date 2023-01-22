@@ -6,7 +6,7 @@ const defaultState: Rules = {
   outlineIsTranslation: "ignored",
   hasOneKeyPerFinger: "on",
   hasStretchKeys: "ignored",
-  fewerThanFiveCharacters: "on",
+  fewerThanFiveCharacters: "ignored",
   moreThanTwoCharacters: "on",
   moreThanOneSyllable: "ignored",
   hasOnlyOneVowelKey: "ignored",
@@ -54,6 +54,7 @@ const defaultState: Rules = {
   hasStar: "ignored",
   isRomanNumeral: "ignored",
   hasMoreThanOneConsonant: "ignored",
+  hasOneSpace: "ignored",
 };
 
 export const initConfig = (state: Rules) => ({
