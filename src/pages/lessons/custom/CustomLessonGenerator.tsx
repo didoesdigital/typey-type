@@ -178,7 +178,11 @@ const CustomLessonGenerator = ({
                         : ""}
                     </>
                   ) : (
-                    "Preview generated lesson:"
+                    `Preview generated lesson with ${
+                      customLesson.presentedMaterial.length
+                    } item${
+                      customLesson.presentedMaterial.length === 1 ? "" : "s"
+                    }:`
                   )}
                 </p>
                 <div>
