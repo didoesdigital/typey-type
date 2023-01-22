@@ -3,7 +3,7 @@ import type { Rules, RuleStatus } from "./types";
 
 export const defaultState: Rules = {
   endsWithSuffix: "ignored",
-  fewerThanFiveCharacters: "ignored",
+  fewerThanFiveCharacters: "off",
   hasAnyLongVowel: "ignored",
   hasAnyShortVowel: "ignored",
   hasAnyVowelKey: "ignored",
@@ -40,7 +40,7 @@ export const defaultState: Rules = {
   hasShortTranslations: "ignored",
   hasSimpleStenoKeys: "ignored",
   hasSomeConsonants: "ignored",
-  hasStar: "ignored",
+  hasStar: "off",
   hasStretchKeys: "ignored",
   hasSuppressedSpaceStroke: "off",
   hasUnstressedVowels: "ignored",
@@ -53,7 +53,7 @@ export const defaultState: Rules = {
   isSingleStroke: "ignored",
   isUppercase: "off",
   moreThanOneSyllable: "ignored",
-  moreThanTwoCharacters: "on",
+  moreThanTwoCharacters: "ignored",
   outlineIsTranslation: "ignored",
   startsWithPrefix: "ignored",
 };
