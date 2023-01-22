@@ -54,6 +54,7 @@ export type Rules = {
   isRomanNumeral?: RuleStatus;
   hasMoreThanOneConsonant?: RuleStatus; // one_consonant_on_each_side || some_consonants
   hasOneSpace?: RuleStatus;
+  hasOneOrMoreSpaces?: RuleStatus;
 };
 
 type Filter = (outline: string, translation: string) => boolean;

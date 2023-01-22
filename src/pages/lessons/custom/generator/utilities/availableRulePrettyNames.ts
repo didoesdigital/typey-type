@@ -37,6 +37,7 @@ const availableRulePrettyNames = [
   { ruleName: "endsWithSuffix", prettyName: "ends with a suffix" },
   { ruleName: "outlineIsTranslation", prettyName: "outline is the same as translation" },
   { ruleName: "hasOneSpace", prettyName: "has one space" },
+  { ruleName: "hasOneOrMoreSpaces", prettyName: "has one or more spaces" },
   { ruleName: "hasNumbers", prettyName: "has numbers" },
   { ruleName: "isRomanNumeral", prettyName: "is a Roman numeral" },
   { ruleName: "hasStretchKeys", prettyName: "has stretch keys like D and Z" },

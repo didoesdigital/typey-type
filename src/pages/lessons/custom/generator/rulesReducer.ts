@@ -55,6 +55,7 @@ const defaultState: Rules = {
   isRomanNumeral: "ignored",
   hasMoreThanOneConsonant: "ignored",
   hasOneSpace: "ignored",
+  hasOneOrMoreSpaces: "ignored",
 };
 
 export const initConfig = (state: Rules) => ({
