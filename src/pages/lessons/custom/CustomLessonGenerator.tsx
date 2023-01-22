@@ -107,7 +107,7 @@ const CustomLessonGenerator = ({
                   This page lets you generate custom lessons using
                   Typey&nbsp;Type dictionaries and personal dictionaries.
                 </p>
-                <div className="pb3">
+                <div className="pb3 columns-2 columns-xs gap-4">
                   {rulesCheckboxes.map((rule) => (
                     <RuleCheckbox
                       key={rule.ruleName}

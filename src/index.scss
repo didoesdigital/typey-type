@@ -1809,6 +1809,17 @@ $textarea-padding-x: 8px;
     grid-gap: 24px;
   }
 }
+
+.gap-4 {
+  gap: 1rem; /* 16px */
+}
+.columns-xs {
+  column-width: 20rem; /* 320px */
+}
+.columns-2 {
+  column-count: 2;
+}
+
 .quote {
   border-left: 8px solid saturate(add-tint($brand-primary, 30%), 30%);
   font-size: $h4-size;
