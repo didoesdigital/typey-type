@@ -1,6 +1,22 @@
 import endsWithSuffix from "./endsWithSuffix";
+import { AffixList } from "../../../../../utils/affixList";
 
 describe("endsWithSuffix", () => {
+  beforeEach(() => {
+    const affixList = new AffixList(
+      new Map([
+        ["{^ed}", [["-D", "typey:typey-type.json"]]],
+        ["{^ing}", [["-G", "typey:typey-type.json"]]],
+        ["{^licious}", [["HREURBS", "typey:typey-type.json"]]],
+      ])
+    );
+    AffixList.setSharedInstance(affixList);
+  });
+
+  afterEach(() => {
+    AffixList.setSharedInstance([]);
+  });
+
   it("returns true for word ending in suffix text and outline ending in suffix outline", async () => {
     expect(endsWithSuffix("AEPBS/-D", "answered")).toEqual(true);
   });
