@@ -1,8 +1,9 @@
 import React, { useEffect, useReducer, useRef } from "react";
 import { actions } from "./generator/rulesActions";
 import Subheader from "../../../components/Subheader";
+import { useLocalStorage } from "usehooks-ts";
 import {
-  initConfig as initRulesConfig,
+  defaultState as defaultRules,
   rulesReducer,
 } from "./generator/rulesReducer";
 import { Link } from "react-router-dom";
@@ -63,10 +64,15 @@ const CustomLessonGenerator = ({
     mainHeading.current?.focus();
   }, []);
 
+  const [rulesSettings, setRulesSettings] = useLocalStorage(
+    "rules",
+    defaultRules
+  );
+
   const [rulesState, dispatchRules] = useReducer(
     rulesReducer,
     {}, // init state
-    initRulesConfig
+    () => rulesSettings
   );
 
   const onRules = Object.fromEntries(
@@ -75,6 +81,7 @@ const CustomLessonGenerator = ({
 
   const buildLesson = () => {
     generateCustomLesson(globalLookupDictionary, onRules);
+    setRulesSettings(rulesState);
   };
 
   const onChangeRuleStatus: React.ChangeEventHandler<HTMLSelectElement> = (
@@ -84,6 +91,7 @@ const CustomLessonGenerator = ({
       type: actions.setRuleStatus,
       payload: { ruleName: event.target.name, ruleStatus: event.target.value },
     });
+    setRulesSettings(rulesState);
   };
 
   return (

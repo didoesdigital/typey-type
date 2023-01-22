@@ -1,11 +1,11 @@
 import { actions } from "./rulesActions";
 import type { Rules, RuleStatus } from "./types";
 
-const defaultState: Rules = {
   isOneSyllable: "on",
   outlineIsTranslation: "ignored",
   hasOneKeyPerFinger: "on",
   hasStretchKeys: "ignored",
+export const defaultState: Rules = {
   fewerThanFiveCharacters: "ignored",
   moreThanTwoCharacters: "on",
   moreThanOneSyllable: "ignored",
