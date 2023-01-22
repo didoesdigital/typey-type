@@ -1,59 +1,59 @@
 import { actions } from "./rulesActions";
-import type { Rules } from "./types";
+import type { Rules, RuleStatus } from "./types";
 
 const defaultState: Rules = {
-  isOneSyllable: true,
-  outlineIsTranslation: true,
-  hasOneKeyPerFinger: true,
-  hasStretchKeys: false,
-  fewerThanFiveCharacters: true,
-  moreThanTwoCharacters: false,
-  moreThanOneSyllable: false,
-  hasOnlyOneVowelKey: true,
-  hasOnlyShortIVowel: false,
-  hasAnyShortVowel: false,
-  hasAnyLongVowel: false,
-  hasDiphthong: false,
-  hasVowelDisambiguator: false,
-  hasAnyVowelKey: false,
-  isSingleStroke: true,
-  isMultiStroke: false,
-  hasForcedWordEnding: false,
-  hasOneConsonantOnEachSide: true,
-  hasLhsConsonantWithMultipleKeys: false,
-  hasRhsConsonantWithMultipleKeys: false,
-  hasDigraphs: false,
-  hasCompoundClusters: false,
-  hasSomeConsonants: false,
-  hasApostrophes: false,
-  hasDoubleLetters: false,
-  hasDoubleConsonants: false,
-  hasDoubleVowels: false,
-  hasContractionsPluralsOrPossessives: false,
-  hasSimpleStenoKeys: true,
-  hasUnstressedVowels: false,
-  hasInversion: false,
-  hasSuppressedSpaceStroke: false,
-  hasEfAsVeeOrEss: false,
-  isFingerspelled: false,
-  hasNumbers: false,
-  hasPunctuation: false,
-  hasCapitalLetter: false,
-  isUppercase: false,
-  hasDictionaryFormatting: false,
-  hasCoding: false,
-  hasMedical: false,
-  hasDisambiguatingBrief: false,
-  hasPhillyShift: false,
-  hasShortTranslations: false,
-  hasLongTranslations: false,
-  hasLongWords: false,
-  isBrief: false,
-  startsWithPrefix: false,
-  endsWithSuffix: false,
-  hasStar: false,
-  isRomanNumeral: false,
-  hasMoreThanOneConsonant: false,
+  isOneSyllable: "on",
+  outlineIsTranslation: "on",
+  hasOneKeyPerFinger: "on",
+  hasStretchKeys: "disabled",
+  fewerThanFiveCharacters: "on",
+  moreThanTwoCharacters: "disabled",
+  moreThanOneSyllable: "disabled",
+  hasOnlyOneVowelKey: "on",
+  hasOnlyShortIVowel: "disabled",
+  hasAnyShortVowel: "disabled",
+  hasAnyLongVowel: "disabled",
+  hasDiphthong: "disabled",
+  hasVowelDisambiguator: "disabled",
+  hasAnyVowelKey: "disabled",
+  isSingleStroke: "on",
+  isMultiStroke: "disabled",
+  hasForcedWordEnding: "disabled",
+  hasOneConsonantOnEachSide: "on",
+  hasLhsConsonantWithMultipleKeys: "disabled",
+  hasRhsConsonantWithMultipleKeys: "disabled",
+  hasDigraphs: "disabled",
+  hasCompoundClusters: "disabled",
+  hasSomeConsonants: "disabled",
+  hasApostrophes: "disabled",
+  hasDoubleLetters: "disabled",
+  hasDoubleConsonants: "disabled",
+  hasDoubleVowels: "disabled",
+  hasContractionsPluralsOrPossessives: "disabled",
+  hasSimpleStenoKeys: "on",
+  hasUnstressedVowels: "disabled",
+  hasInversion: "disabled",
+  hasSuppressedSpaceStroke: "disabled",
+  hasEfAsVeeOrEss: "disabled",
+  isFingerspelled: "disabled",
+  hasNumbers: "disabled",
+  hasPunctuation: "disabled",
+  hasCapitalLetter: "disabled",
+  isUppercase: "disabled",
+  hasDictionaryFormatting: "off",
+  hasCoding: "off",
+  hasMedical: "off",
+  hasDisambiguatingBrief: "disabled",
+  hasPhillyShift: "off",
+  hasShortTranslations: "disabled",
+  hasLongTranslations: "disabled",
+  hasLongWords: "disabled",
+  isBrief: "disabled",
+  startsWithPrefix: "disabled",
+  endsWithSuffix: "disabled",
+  hasStar: "disabled",
+  isRomanNumeral: "disabled",
+  hasMoreThanOneConsonant: "disabled",
 };
 
 export const initConfig = (state: Rules) => ({
@@ -61,17 +61,20 @@ export const initConfig = (state: Rules) => ({
   ...state,
 });
 
-const toggleRule = (state: Rules, payload: { ruleName: keyof Rules }) => {
+const setRuleStatus = (
+  state: Rules,
+  payload: { ruleName: keyof Rules; ruleStatus: RuleStatus }
+) => {
   return {
     ...state,
-    [payload.ruleName]: !state[payload.ruleName],
+    [payload.ruleName]: payload.ruleStatus,
   };
 };
 
 export const rulesReducer = (state: Rules, action: any) => {
   switch (action?.type) {
-    case actions.toggleRule:
-      return toggleRule(state, action.payload);
+    case actions.setRuleStatus:
+      return setRuleStatus(state, action.payload);
 
     default:
       return state;

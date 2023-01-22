@@ -1,4 +1,4 @@
-const rulesCheckboxes = [
+const availableRulePrettyNames = [
   { ruleName: "isOneSyllable", prettyName: "is one syllable" },
   { ruleName: "outlineIsTranslation", prettyName: "outline is the same as translation" },
   { ruleName: "hasOneKeyPerFinger", prettyName: "has one key per finger" },
@@ -15,8 +15,8 @@ const rulesCheckboxes = [
   { ruleName: "isSingleStroke", prettyName: "is single-stroke" },
   { ruleName: "isMultiStroke", prettyName: "is multi-stroke" },
   { ruleName: "hasOneConsonantOnEachSide", prettyName: "has one consonant on each side" },
-  { ruleName: "hasLhsConsonantWithMultipleKeys", prettyName: "has left-side consonant with multiple keys" },
-  { ruleName: "hasRhsConsonantWithMultipleKeys", prettyName: "has right-side consonant with multiple keys" },
+  { ruleName: "hasLhsConsonantWithMultipleKeys", prettyName: "has left-side, multi-key consonant" },
+  { ruleName: "hasRhsConsonantWithMultipleKeys", prettyName: "has right-side, multi-key consonant" },
   { ruleName: "hasDigraphs", prettyName: "has digraphs like “ch”, and “ng”" },
   { ruleName: "hasCompoundClusters", prettyName: "has components clusters like BGS" },
   { ruleName: "hasMoreThanOneConsonant", prettyName: "has more than one consonant" },
@@ -25,7 +25,7 @@ const rulesCheckboxes = [
   { ruleName: "hasDoubleLetters", prettyName: "has double letters" },
   { ruleName: "hasDoubleConsonants", prettyName: "has double consonants" },
   { ruleName: "hasDoubleVowels", prettyName: "has double vowels" },
-  { ruleName: "hasContractionsPluralsOrPossessives", prettyName: "has contractions, plurals, or possessives" },
+  { ruleName: "hasContractionsPluralsOrPossessives", prettyName: "has contractions or possessives" },
   { ruleName: "hasSimpleStenoKeys", prettyName: "has simple steno keys" },
   { ruleName: "hasUnstressedVowels", prettyName: "has unstressed vowels" },
   { ruleName: "hasInversion", prettyName: "has inversion" },
@@ -53,4 +53,4 @@ const rulesCheckboxes = [
   // { ruleName: "hasDictionaryFormatting", prettyName: "has dictionary formatting" },
 ];
 
-export default rulesCheckboxes;
+export default availableRulePrettyNames;

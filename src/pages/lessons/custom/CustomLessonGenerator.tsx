@@ -6,16 +6,18 @@ import {
   rulesReducer,
 } from "./generator/rulesReducer";
 import { Link } from "react-router-dom";
-import RuleCheckbox from "./generator/components/RuleCheckbox";
-import rulesCheckboxes from "./generator/utilities/rulesCheckboxes";
+import RuleOptions from "./generator/components/RuleOptions";
+import availableRulePrettyNames from "./generator/utilities/availableRulePrettyNames";
 import type {
   CustomLesson,
   LookupDictWithNamespacedDicts,
 } from "../../../types";
 import type { Rules } from "./generator/types";
+import type { CustomLessonMaterialValidationState } from "./components/CustomLessonIntro";
 
 type Props = {
   customLesson: CustomLesson;
+  customLessonMaterialValidationState: CustomLessonMaterialValidationState;
   generateCustomLesson: (
     globalLookupDictionary: LookupDictWithNamespacedDicts,
     rules: Rules
@@ -30,6 +32,7 @@ type Props = {
 
 const CustomLessonGenerator = ({
   customLesson,
+  customLessonMaterialValidationState,
   fetchAndSetupGlobalDict,
   generateCustomLesson,
   globalLookupDictionary,
@@ -76,8 +79,8 @@ const CustomLessonGenerator = ({
     event
   ) => {
     dispatchRules({
-      type: actions.toggleRule,
-      payload: { ruleName: event.target.name },
+      type: actions.setRuleStatus,
+      payload: { ruleName: event.target.name, ruleStatus: event.target.value },
     });
   };
 
@@ -108,8 +111,8 @@ const CustomLessonGenerator = ({
                   Typey&nbsp;Type dictionaries and personal dictionaries.
                 </p>
                 <div className="pb3 columns-2 columns-xs gap-4">
-                  {rulesCheckboxes.map((rule) => (
-                    <RuleCheckbox
+                  {availableRulePrettyNames.map((rule) => (
+                    <RuleOptions
                       key={rule.ruleName}
                       ruleName={rule.ruleName}
                       prettyName={rule.prettyName}
@@ -135,21 +138,27 @@ const CustomLessonGenerator = ({
                     Start generated lesson
                   </Link>
                 </p>
-                <p>Preview generated lesson:</p>
+                <p>
+                  {customLessonMaterialValidationState === "fail"
+                    ? "That combination of settings results in no material. Try disabling some settings."
+                    : "Preview generated lesson:"}
+                </p>
                 <div>
                   <ul>
-                    {customLesson.presentedMaterial.map(
-                      (materialItem, index: number) => (
-                        <li
-                          key={`${index}-${materialItem.phrase}-${materialItem.stroke}`}
-                        >
-                          {materialItem.phrase}{" "}
-                          <kbd className="raw-steno-key raw-steno-key--subtle">
-                            {materialItem.stroke}
-                          </kbd>
-                        </li>
-                      )
-                    )}
+                    {customLessonMaterialValidationState === "fail"
+                      ? undefined
+                      : customLesson.presentedMaterial.map(
+                          (materialItem, index: number) => (
+                            <li
+                              key={`${index}-${materialItem.phrase}-${materialItem.stroke}`}
+                            >
+                              {materialItem.phrase}{" "}
+                              <kbd className="raw-steno-key raw-steno-key--subtle">
+                                {materialItem.stroke}
+                              </kbd>
+                            </li>
+                          )
+                        )}
                   </ul>
                 </div>
               </div>

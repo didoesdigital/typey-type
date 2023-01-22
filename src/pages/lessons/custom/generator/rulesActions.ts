@@ -1,3 +1,3 @@
 export const actions = {
-  toggleRule: "toggleRule",
+  setRuleStatus: "setRuleStatus",
 };

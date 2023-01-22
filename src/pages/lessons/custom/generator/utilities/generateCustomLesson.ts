@@ -9,11 +9,7 @@ import type {
   Translation,
 } from "../../../../../types";
 
-import type {
-  FilterAndExpectation,
-  Rules,
-  RuleFunctionsTypes,
-} from "../types";
+import type { FilterAndExpectation, Rules, RuleFunctionsTypes } from "../types";
 
 const translationExclusions = ["pos", "sol", "spas", "pros"];
 
@@ -30,9 +26,9 @@ function generateCustomLesson(
   for (let i = 0; i < validRules.length; i++) {
     const rule = validRules[i] as keyof RuleFunctionsTypes;
     if (ruleFunctions[rule]) {
-      if (rules[rule] === true) {
+      if (rules[rule] === "on") {
         filters.push([ruleFunctions[rule], true]);
-      } else {
+      } else if (rules[rule] === "off") {
         filters.push([ruleFunctions[rule], false]);
       }
     } else {
@@ -79,8 +75,11 @@ function generateCustomLesson(
     path: process.env.PUBLIC_URL + "/lessons/custom",
   };
 
-  const newCustomLesson =
-    customLesson.presentedMaterial.length > 0 ? customLesson : fallbackLesson;
+  const validGeneratedLesson = customLesson.presentedMaterial.length > 0;
+
+  const newCustomLesson = validGeneratedLesson ? customLesson : fallbackLesson;
+
+  const validationState = validGeneratedLesson ? "success" : "fail";
 
   const newCustomLessonMaterial = newCustomLesson.presentedMaterial
     .map((materialItem) => `${materialItem.phrase}	${materialItem.stroke}`)
@@ -92,6 +91,7 @@ function generateCustomLesson(
     currentPhraseID: 0,
     customLesson: newCustomLesson,
     customLessonMaterial: newCustomLessonMaterial,
+    customLessonMaterialValidationState: validationState,
   });
 }
 
