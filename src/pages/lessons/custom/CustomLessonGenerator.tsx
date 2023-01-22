@@ -217,6 +217,15 @@ const CustomLessonGenerator = ({
                         )}
                   </ul>
                 </div>
+                {customLessonMaterialValidationState === "success" && (
+                  <Link
+                    to="/lessons/custom/setup"
+                    className="link-button dib button button--secondary"
+                    style={{ lineHeight: 2 }}
+                  >
+                    Edit generated lesson
+                  </Link>
+                )}
               </div>
             </div>
           </div>
