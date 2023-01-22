@@ -30,6 +30,8 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDicts;
 };
 
+const numberOfVisibleOptions = 18;
+
 const CustomLessonGenerator = ({
   customLesson,
   customLessonMaterialValidationState,
@@ -75,7 +77,7 @@ const CustomLessonGenerator = ({
     generateCustomLesson(globalLookupDictionary, onRules);
   };
 
-  const onChangeRuleStatus: React.ChangeEventHandler<HTMLInputElement> = (
+  const onChangeRuleStatus: React.ChangeEventHandler<HTMLSelectElement> = (
     event
   ) => {
     dispatchRules({
@@ -110,17 +112,39 @@ const CustomLessonGenerator = ({
                   This page lets you generate custom lessons using
                   Typey&nbsp;Type dictionaries and personal dictionaries.
                 </p>
-                <div className="pb3 columns-2 columns-xs gap-4">
-                  {availableRulePrettyNames.map((rule) => (
-                    <RuleOptions
-                      key={rule.ruleName}
-                      ruleName={rule.ruleName}
-                      prettyName={rule.prettyName}
-                      rulesState={rulesState}
-                      onChangeRuleStatus={onChangeRuleStatus}
-                    />
-                  ))}
+                <div className="pb1 columns-2 columns-xs gap-4">
+                  {availableRulePrettyNames
+                    .slice(0, numberOfVisibleOptions)
+                    .map((rule) => (
+                      <RuleOptions
+                        key={rule.ruleName}
+                        ruleName={rule.ruleName}
+                        prettyName={rule.prettyName}
+                        rulesState={rulesState}
+                        onChangeRuleStatus={onChangeRuleStatus}
+                      />
+                    ))}
                 </div>
+                <details>
+                  <summary>
+                    <p className="cursor-pointer color-interactive">
+                      More options…
+                    </p>
+                  </summary>
+                  <div className="pb3 columns-2 columns-xs gap-4">
+                    {availableRulePrettyNames
+                      .slice(numberOfVisibleOptions)
+                      .map((rule) => (
+                        <RuleOptions
+                          key={rule.ruleName}
+                          ruleName={rule.ruleName}
+                          prettyName={rule.prettyName}
+                          rulesState={rulesState}
+                          onChangeRuleStatus={onChangeRuleStatus}
+                        />
+                      ))}
+                  </div>
+                </details>
                 <p>
                   <button
                     className="link-button dib mr1"
@@ -139,9 +163,23 @@ const CustomLessonGenerator = ({
                   </Link>
                 </p>
                 <p>
-                  {customLessonMaterialValidationState === "fail"
-                    ? "That combination of settings results in no material. Try disabling some settings."
-                    : "Preview generated lesson:"}
+                  {customLessonMaterialValidationState === "fail" ? (
+                    <>
+                      That combination of settings results in no material. Try
+                      disabling some settings.
+                      {rulesState.isOneSyllable ===
+                        rulesState.moreThanOneSyllable &&
+                      rulesState.isOneSyllable !== "disabled"
+                        ? " Change one of the syllable count settings."
+                        : ""}
+                      {rulesState.isSingleStroke === rulesState.isMultiStroke &&
+                      rulesState.isSingleStroke !== "disabled"
+                        ? " Change one of the stroke count settings."
+                        : ""}
+                    </>
+                  ) : (
+                    "Preview generated lesson:"
+                  )}
                 </p>
                 <div>
                   <ul>
