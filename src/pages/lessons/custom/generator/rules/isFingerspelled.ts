@@ -53,8 +53,23 @@ const FINGERSPELLING_KEYS = [
   "STKPW*P",
 ];
 
+const FINGERSPELLED_PUNCTUATION = [
+  "AE",
+  "H-PB",
+  "KR-GS",
+  "KW-GS",
+  "SKHRAPL",
+  "TP-PL",
+];
+
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const isFingerspelled = (outline: string, _translation: string) =>
-  outline.split("/").every((stroke) => FINGERSPELLING_KEYS.includes(stroke));
+  outline
+    .split("/")
+    .every(
+      (stroke) =>
+        FINGERSPELLING_KEYS.includes(stroke) ||
+        FINGERSPELLED_PUNCTUATION.includes(stroke)
+    );
 
 export default isFingerspelled;
