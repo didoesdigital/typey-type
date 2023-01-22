@@ -5,6 +5,10 @@ describe("isOneSyllable", () => {
     expect(isOneSyllable("SKWREPB/ER", "genre")).toEqual(false);
   });
 
+  it("returns false for “is the”", async () => {
+    expect(isOneSyllable("S-T", "is the")).toEqual(false);
+  });
+
   it("returns false for kettle", async () => {
     expect(isOneSyllable("K*ELT", "kettle")).toEqual(false);
   });

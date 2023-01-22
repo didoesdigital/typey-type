@@ -1,6 +1,10 @@
 const isOneSyllable = (_outline: string, translation: string) => {
   const lowercaseTranslation = translation.toLowerCase();
 
+  if (translation.includes(' ')) {
+    return false;
+  }
+
   if (
     ["mysql", "genre", "genres", "startled", "mingled"].includes(
       lowercaseTranslation
