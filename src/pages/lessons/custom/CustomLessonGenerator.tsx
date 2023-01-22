@@ -179,8 +179,10 @@ const CustomLessonGenerator = ({
                     </>
                   ) : (
                     `Preview generated lesson with ${
-                      customLesson.presentedMaterial.length
-                    } item${
+                      customLesson.presentedMaterial.length === 1000
+                        ? "max "
+                        : ""
+                    }${customLesson.presentedMaterial.length} item${
                       customLesson.presentedMaterial.length === 1 ? "" : "s"
                     }:`
                   )}
