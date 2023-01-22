@@ -145,7 +145,8 @@ const CustomLessonGenerator = ({
                 </p>
                 <div>
                   <ul>
-                    {customLessonMaterialValidationState === "fail"
+                    {customLessonMaterialValidationState === "fail" ||
+                    customLessonMaterialValidationState === "unvalidated"
                       ? undefined
                       : customLesson.presentedMaterial.map(
                           (materialItem, index: number) => (

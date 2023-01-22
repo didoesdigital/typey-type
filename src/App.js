@@ -161,7 +161,7 @@ class App extends Component {
       currentLessonStrokes: [],
       customLessonMaterial: ``,
       customLessonMaterialValidationMessages: [],
-      customLessonMaterialValidationState: null,
+      customLessonMaterialValidationState: 'unvalidated',
       customLesson: fallbackLesson,
       actualText: ``,
       dictionaryIndex: [{
