@@ -9,6 +9,7 @@ import {
 import { Link } from "react-router-dom";
 import RuleOptions from "./generator/components/RuleOptions";
 import availableRulePrettyNames from "./generator/utilities/availableRulePrettyNames";
+import maxItems from "./generator/constants/maxItems";
 import type {
   CustomLesson,
   LookupDictWithNamespacedDicts,
@@ -190,7 +191,7 @@ const CustomLessonGenerator = ({
                     "Preview generated lesson here after building."}
                   {customLessonMaterialValidationState === "success" &&
                     `Preview generated lesson with ${
-                      customLesson.presentedMaterial.length === 1000
+                      customLesson.presentedMaterial.length === maxItems
                         ? "max "
                         : ""
                     }${customLesson.presentedMaterial.length} item${

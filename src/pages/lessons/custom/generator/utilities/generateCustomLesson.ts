@@ -1,6 +1,7 @@
 import Zipper from "../../../../../utils/zipper";
 import fallbackLesson from "../../../../../constant/fallbackLesson";
 import ruleFunctions from "./ruleFunctions";
+import maxItems from "../constants/maxItems";
 
 import type {
   CustomLesson,
@@ -56,7 +57,7 @@ function generateCustomLesson(
     }
   }
 
-  const rulesFilteredVocab = [...entriesList.slice(0, 1000)].filter(
+  const rulesFilteredVocab = [...entriesList.slice(0, maxItems)].filter(
     (materialItem) => ruleFilters(materialItem)
   );
 
