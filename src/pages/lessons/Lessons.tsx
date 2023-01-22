@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import DocumentTitle from "react-document-title";
+import ErrorBoundary from "../../components/ErrorBoundary";
 import Lesson from "./Lesson";
 import LessonsIndex from "./LessonsIndex";
 import CustomLessonSetup from "./custom/CustomLessonSetup";
@@ -264,15 +265,19 @@ const Lessons = ({
         path={`${match.url}/custom/generator`}
         render={() => (
           <DocumentTitle title="Typey Type | Lesson generator">
-            <AsyncCustomLessonGenerator
-              customLesson={customLesson}
-              customLessonMaterialValidationState={customLessonMaterialValidationState}
-              fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-              generateCustomLesson={generateCustomLesson}
-              globalLookupDictionary={globalLookupDictionary}
-              personalDictionaries={personalDictionaries}
-              {...lessonProps}
-            />
+            <ErrorBoundary>
+              <AsyncCustomLessonGenerator
+                customLesson={customLesson}
+                customLessonMaterialValidationState={
+                  customLessonMaterialValidationState
+                }
+                fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+                generateCustomLesson={generateCustomLesson}
+                globalLookupDictionary={globalLookupDictionary}
+                personalDictionaries={personalDictionaries}
+                {...lessonProps}
+              />
+            </ErrorBoundary>
           </DocumentTitle>
         )}
       />
