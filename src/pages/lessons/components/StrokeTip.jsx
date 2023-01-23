@@ -4,8 +4,6 @@ import {
   splitBriefsIntoStrokes,
 } from "../../../utils/typey-type";
 
-import getStenoDiagram from "../utilities/getStenoDiagram";
-import getMapBriefsFn from "../utilities/getMapBriefsFn";
 import StrokeTipHidden from "./StrokeTipHidden";
 import StrokeTipDiagram from "./StrokeTipDiagram";
 
@@ -24,9 +22,6 @@ export default function StrokeTip({
     repetitionsRemaining,
     userSettings.hideStrokesOnLastRepetition
   );
-
-  const StenoLayoutDiagram = getStenoDiagram(userSettings.stenoLayout);
-  const mapBriefsFunction = getMapBriefsFn(userSettings.stenoLayout);
 
   const layoutTypeStyle =
     userSettings.stenoLayout === "stenoLayoutKoreanModernCSteno"
@@ -54,8 +49,7 @@ export default function StrokeTip({
               isMultiline={isMultiline}
               splitBriefsIntoStrokes={splitBriefsIntoStrokes}
               currentStroke={currentStroke}
-              mapBriefsFunction={mapBriefsFunction}
-              StenoLayoutDiagram={StenoLayoutDiagram}
+              stenoLayout={userSettings.stenoLayout}
               diagramSize={userSettings.diagramSize}
             />
           ) : (

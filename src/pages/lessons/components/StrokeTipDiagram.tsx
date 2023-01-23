@@ -1,13 +1,14 @@
 import React from "react";
+import getStenoDiagram from "../utilities/getStenoDiagram";
+import getMapBriefsFn from "../utilities/getMapBriefsFn";
 
-import type { Outline } from "../../../types";
+import type { Outline, StenoLayout } from "../../../types";
 
 type Props = {
   isMultiline: boolean;
   splitBriefsIntoStrokes: (outline: Outline) => string[];
   currentStroke: Outline;
-  mapBriefsFunction: (outline: string) => { [key: string]: any };
-  StenoLayoutDiagram: React.ElementType;
+  stenoLayout: StenoLayout;
   diagramSize?: number;
 };
 
@@ -15,10 +16,11 @@ const StrokeTipDiagram = ({
   isMultiline,
   splitBriefsIntoStrokes,
   currentStroke,
-  mapBriefsFunction,
-  StenoLayoutDiagram,
+  stenoLayout,
   diagramSize,
 }: Props) => {
+  const StenoLayoutDiagram = getStenoDiagram(stenoLayout);
+  const mapBriefsFunction = getMapBriefsFn(stenoLayout);
   const diagramWidth = (diagramSize || 1) * 140;
 
   return (
