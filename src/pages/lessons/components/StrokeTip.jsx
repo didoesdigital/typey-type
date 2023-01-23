@@ -4,7 +4,8 @@ import {
   splitBriefsIntoStrokes,
 } from "../../../utils/typey-type";
 
-import getStenoDiagramAndMapBriefsFn from "../utilities/getStenoDiagramAndMapBriefsFn";
+import getStenoDiagram from "../utilities/getStenoDiagram";
+import getMapBriefsFn from "../utilities/getMapBriefsFn";
 import StrokeTipHidden from "./StrokeTipHidden";
 
 export default function StrokeTip({
@@ -23,9 +24,8 @@ export default function StrokeTip({
     userSettings.hideStrokesOnLastRepetition
   );
 
-  const [StenoLayoutDiagram, mapBriefsFunction] = getStenoDiagramAndMapBriefsFn(
-    userSettings.stenoLayout
-  );
+  const StenoLayoutDiagram = getStenoDiagram(userSettings.stenoLayout);
+  const mapBriefsFunction = getMapBriefsFn(userSettings.stenoLayout);
 
   const layoutTypeStyle =
     userSettings.stenoLayout === "stenoLayoutKoreanModernCSteno"
