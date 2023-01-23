@@ -2,7 +2,6 @@ import * as React from 'react'
 import { Component } from 'react';
 import { SOURCE_NAMESPACES } from '../constant/index.js';
 import { AffixList } from '../utils/affixList';
-import splitIntoStrokesDictsAndNamespaces from "../utils/transformingDictionaries/splitIntoStrokesDictsAndNamespaces";
 import rankOutlines from '../utils/transformingDictionaries/rankOutlines/rankOutlines';
 import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
 import NoNumberBarInnerThumbNumbersStenoDiagram from './../StenoLayout/NoNumberBarInnerThumbNumbersStenoDiagram';
@@ -26,6 +25,7 @@ import mapBriefToKoreanModernCStenoKeys from '../utils/stenoLayouts/mapBriefToKo
 import mapBriefToPalantypeKeys from '../utils/stenoLayouts/mapBriefToPalantypeKeys';
 import misstrokesJSON from '../json/misstrokes.json'
 import getModifiedWordOrPhraseForLookup from '../utils/getModifiedWordOrPhraseForLookup';
+import createListOfStrokes from '../utils/createListOfStrokes';
 
 class StrokesForWords extends Component {
   state = {
@@ -335,15 +335,6 @@ function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary, affixList =
   listOfStrokesAndDicts = rankOutlines(listOfStrokesAndDicts, misstrokesJSON, modifiedWordOrPhrase, affixList);
 
   return [listOfStrokesAndDicts, modifiedWordOrPhrase];
-}
-
-function createListOfStrokes(phrase, dictionaryOfWordsStrokesAndSourceDictionary) {
-  let listOfStrokesAndDicts = [];
-  if (dictionaryOfWordsStrokesAndSourceDictionary.get(phrase)) {
-    listOfStrokesAndDicts = dictionaryOfWordsStrokesAndSourceDictionary.get(phrase);
-  }
-
-  return splitIntoStrokesDictsAndNamespaces(listOfStrokesAndDicts)
 }
 
 export default StrokesForWords;
