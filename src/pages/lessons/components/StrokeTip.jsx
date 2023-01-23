@@ -23,21 +23,22 @@ export default function StrokeTip({
     userSettings.hideStrokesOnLastRepetition
   );
 
+  const [StenoLayoutDiagram, mapBriefsFunction] = getStenoDiagramAndMapBriefsFn(
+    userSettings.stenoLayout
+  );
+
+  let layoutTypeStyle = "";
+  if (userSettings.stenoLayout === "stenoLayoutKoreanModernCSteno") {
+    layoutTypeStyle = " heavy-type-face--korean";
+  }
+  if (userSettings.stenoLayout === "stenoLayoutJapaneseSteno") {
+    layoutTypeStyle = " type-face--japanese";
+  }
+
+  const diagramWidth = (userSettings.diagramSize || 1) * 140;
+
   let strokeTip;
   if (showStroke && currentStroke) {
-    const [StenoLayoutDiagram, mapBriefsFunction] =
-      getStenoDiagramAndMapBriefsFn(userSettings.stenoLayout);
-
-    let layoutTypeStyle = "";
-    if (userSettings.stenoLayout === "stenoLayoutKoreanModernCSteno") {
-      layoutTypeStyle = " heavy-type-face--korean";
-    }
-    if (userSettings.stenoLayout === "stenoLayoutJapaneseSteno") {
-      layoutTypeStyle = " type-face--japanese";
-    }
-
-    const diagramWidth = (userSettings.diagramSize || 1) * 140;
-
     strokeTip = (
       <div
         className={`stroke-tip${isMultiline ? " flex justify-center" : ""}`}
