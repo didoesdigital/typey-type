@@ -25,6 +25,7 @@ import mapBriefToJapaneseStenoKeys from '../utils/stenoLayouts/mapBriefToJapanes
 import mapBriefToKoreanModernCStenoKeys from '../utils/stenoLayouts/mapBriefToKoreanModernCStenoKeys';
 import mapBriefToPalantypeKeys from '../utils/stenoLayouts/mapBriefToPalantypeKeys';
 import misstrokesJSON from '../json/misstrokes.json'
+import getModifiedWordOrPhraseForLookup from '../utils/getModifiedWordOrPhraseForLookup';
 
 class StrokesForWords extends Component {
   state = {
@@ -275,102 +276,7 @@ class StrokesForWords extends Component {
 function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary, affixList = AffixList.getSharedInstance()) {
   let lookupText = phrase;
   let modifiedWordOrPhrase = lookupText.slice();
-
-  if (phrase === "{") { modifiedWordOrPhrase = "\\{{^}"; }
-  if (phrase === "}") { modifiedWordOrPhrase = "{^}\\}"; }
-  if (phrase === "{ ") { modifiedWordOrPhrase = "\\{"; }
-  if (phrase === "} ") { modifiedWordOrPhrase = "\\}"; }
-  if (phrase === "[") { modifiedWordOrPhrase = "{^[^}"; }
-  if (phrase === "]") { modifiedWordOrPhrase = "{^]^}"; }
-  if (phrase === "[ ") { modifiedWordOrPhrase = "{[}"; }
-  if (phrase === "] ") { modifiedWordOrPhrase = "{]}"; }
-  if (phrase === "?") { modifiedWordOrPhrase = "{?}"; }
-  if (phrase === ".") { modifiedWordOrPhrase = "{^.^}"; }
-  if (phrase === ". ") { modifiedWordOrPhrase = "{.}"; }
-  if (phrase === ", ") { modifiedWordOrPhrase = "{,}"; }
-  if (phrase === `” `) { modifiedWordOrPhrase = "{^~|”}"; }
-  if (phrase === `”`) { modifiedWordOrPhrase = "{^~|”}"; }
-  if (phrase === `“`) { modifiedWordOrPhrase = "{~|“^}"; }
-  if (phrase === ` “`) { modifiedWordOrPhrase = "{~|“^}"; }
-  if (phrase === `“`) { modifiedWordOrPhrase = "{~|“^}"; }
-  if (phrase === ` ‘`) { modifiedWordOrPhrase = "{~|‘^}"; }
-  if (phrase === `‘`) { modifiedWordOrPhrase = "{~|‘^}"; }
-  if (phrase === `’ `) { modifiedWordOrPhrase = "{^~|’}"; }
-  if (phrase === `’`) { modifiedWordOrPhrase = "{^~|’}"; }
-  if (phrase === `" `) { modifiedWordOrPhrase = "{^~|\"}"; }
-  if (phrase === `"`) { modifiedWordOrPhrase = "{~|\"^}"; }
-  if (phrase === ` "`) { modifiedWordOrPhrase = "{~|\"^}"; }
-  if (phrase === ` '`) { modifiedWordOrPhrase = "{~|'^}"; }
-  if (phrase === `' `) { modifiedWordOrPhrase = "{^~|'}"; }
-  if (phrase === ` `) { modifiedWordOrPhrase = "{^ ^}"; }
-
-  if (phrase === `%`) { modifiedWordOrPhrase = "{^}%{^}"; }
-  if (phrase === `% `) { modifiedWordOrPhrase = "{^%}"; }
-  if (phrase === ` %`) { modifiedWordOrPhrase = "{&%}"; }
-
-  if (phrase === "1") { modifiedWordOrPhrase = "{&1}"; }
-  if (phrase === "2") { modifiedWordOrPhrase = "{&2}"; }
-  if (phrase === "3") { modifiedWordOrPhrase = "{&3}"; }
-  if (phrase === "4") { modifiedWordOrPhrase = "{&4}"; }
-  if (phrase === "5") { modifiedWordOrPhrase = "{&5}"; }
-  if (phrase === "6") { modifiedWordOrPhrase = "{&6}"; }
-  if (phrase === "7") { modifiedWordOrPhrase = "{&7}"; }
-  if (phrase === "8") { modifiedWordOrPhrase = "{&8}"; }
-  if (phrase === "9") { modifiedWordOrPhrase = "{&9}"; }
-  if (phrase === "0") { modifiedWordOrPhrase = "{&0}"; }
-
-  if (phrase === "A") { modifiedWordOrPhrase = "{&A}"; }
-  if (phrase === "B") { modifiedWordOrPhrase = "{&B}"; }
-  if (phrase === "C") { modifiedWordOrPhrase = "{&C}"; }
-  if (phrase === "D") { modifiedWordOrPhrase = "{&D}"; }
-  if (phrase === "E") { modifiedWordOrPhrase = "{&E}"; }
-  if (phrase === "F") { modifiedWordOrPhrase = "{&F}"; }
-  if (phrase === "G") { modifiedWordOrPhrase = "{&G}"; }
-  if (phrase === "H") { modifiedWordOrPhrase = "{&H}"; }
-  if (phrase === "I") { modifiedWordOrPhrase = "{&I}"; }
-  if (phrase === "J") { modifiedWordOrPhrase = "{&J}"; }
-  if (phrase === "K") { modifiedWordOrPhrase = "{&K}"; }
-  if (phrase === "L") { modifiedWordOrPhrase = "{&L}"; }
-  if (phrase === "M") { modifiedWordOrPhrase = "{&M}"; }
-  if (phrase === "N") { modifiedWordOrPhrase = "{&N}"; }
-  if (phrase === "O") { modifiedWordOrPhrase = "{&O}"; }
-  if (phrase === "P") { modifiedWordOrPhrase = "{&P}"; }
-  if (phrase === "Q") { modifiedWordOrPhrase = "{&Q}"; }
-  if (phrase === "R") { modifiedWordOrPhrase = "{&R}"; }
-  if (phrase === "S") { modifiedWordOrPhrase = "{&S}"; }
-  if (phrase === "T") { modifiedWordOrPhrase = "{&T}"; }
-  if (phrase === "U") { modifiedWordOrPhrase = "{&U}"; }
-  if (phrase === "V") { modifiedWordOrPhrase = "{&V}"; }
-  if (phrase === "W") { modifiedWordOrPhrase = "{&W}"; }
-  if (phrase === "X") { modifiedWordOrPhrase = "{&X}"; }
-  if (phrase === "Y") { modifiedWordOrPhrase = "{&Y}"; }
-  if (phrase === "Z") { modifiedWordOrPhrase = "{&Z}"; }
-  if (phrase === "a") { modifiedWordOrPhrase = "{>}{&a}"; }
-  if (phrase === "b") { modifiedWordOrPhrase = "{>}{&b}"; }
-  if (phrase === "c") { modifiedWordOrPhrase = "{>}{&c}"; }
-  if (phrase === "d") { modifiedWordOrPhrase = "{>}{&d}"; }
-  if (phrase === "e") { modifiedWordOrPhrase = "{>}{&e}"; }
-  if (phrase === "f") { modifiedWordOrPhrase = "{>}{&f}"; }
-  if (phrase === "g") { modifiedWordOrPhrase = "{>}{&g}"; }
-  if (phrase === "h") { modifiedWordOrPhrase = "{>}{&h}"; }
-  if (phrase === "i") { modifiedWordOrPhrase = "{>}{&i}"; }
-  if (phrase === "j") { modifiedWordOrPhrase = "{>}{&j}"; }
-  if (phrase === "k") { modifiedWordOrPhrase = "{>}{&k}"; }
-  if (phrase === "l") { modifiedWordOrPhrase = "{>}{&l}"; }
-  if (phrase === "m") { modifiedWordOrPhrase = "{>}{&m}"; }
-  if (phrase === "n") { modifiedWordOrPhrase = "{>}{&n}"; }
-  if (phrase === "o") { modifiedWordOrPhrase = "{>}{&o}"; }
-  if (phrase === "p") { modifiedWordOrPhrase = "{>}{&p}"; }
-  if (phrase === "q") { modifiedWordOrPhrase = "{>}{&q}"; }
-  if (phrase === "r") { modifiedWordOrPhrase = "{>}{&r}"; }
-  if (phrase === "s") { modifiedWordOrPhrase = "{>}{&s}"; }
-  if (phrase === "t") { modifiedWordOrPhrase = "{>}{&t}"; }
-  if (phrase === "u") { modifiedWordOrPhrase = "{>}{&u}"; }
-  if (phrase === "v") { modifiedWordOrPhrase = "{>}{&v}"; }
-  if (phrase === "w") { modifiedWordOrPhrase = "{>}{&w}"; }
-  if (phrase === "x") { modifiedWordOrPhrase = "{>}{&x}"; }
-  if (phrase === "y") { modifiedWordOrPhrase = "{>}{&y}"; }
-  if (phrase === "z") { modifiedWordOrPhrase = "{>}{&z}"; }
+  modifiedWordOrPhrase = getModifiedWordOrPhraseForLookup(phrase);
 
   let listOfStrokesAndDicts = createListOfStrokes(modifiedWordOrPhrase, globalLookupDictionary);
 
