@@ -7,6 +7,7 @@ import lookupListOfStrokesAndDicts from "../utils/lookupListOfStrokesAndDicts";
 import misstrokesJSON from '../json/misstrokes.json'
 import PloverMisstrokesDetail from "./PloverMisstrokesDetail";
 import StrokesAsDiagrams from './StrokesAsDiagrams';
+import MatchedModifiedTranslation from './MatchedModifiedTranslation';
 
 class StrokesForWords extends Component {
   state = {
@@ -94,34 +95,15 @@ class StrokesForWords extends Component {
       )
     });
 
-    let emptyState = (<p>No results found</p>);
-
-    if (this.state.phrase === "") {
-      emptyState = (<p></p>);
-    }
-
-    let matchedTranslation = null
     let lookupResults;
 
-    let classes = "dark:text-coolgrey-900 wrap mr1 order-1 fw4 py05 bg-slat bw-1 b--solid";
-    classes += this.state.modifiedWordOrPhrase === this.state.phrase ? " b-info" : " b-danger";
-
     if (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts.length > 0) {
-      matchedTranslation = this.state.modifiedWordOrPhrase ?
-        <p className="de-emphasized flex flex-wrap items-center">
-          <span className="de-emphasized order-2">(text shown in dictionary)</span>
-          <samp className={classes}>{this.state.modifiedWordOrPhrase}</samp>
-        </p>
-        :
-        null
-
       lookupResults = (
         <ul className="unstyled-list wrap">
           {strokeListItems}
         </ul>
       );
     } else {
-      matchedTranslation = emptyState;
       lookupResults = null;
     }
 
@@ -149,7 +131,11 @@ class StrokesForWords extends Component {
             wrap="off"
             >
           </textarea>
-          {matchedTranslation}
+          <MatchedModifiedTranslation
+            listOfStrokesAndDicts={this.state.listOfStrokesAndDicts}
+            modifiedWordOrPhrase={this.state.modifiedWordOrPhrase}
+            phrase={this.state.phrase}
+          />
           <div className="mb1">
             <StrokesAsDiagrams
               listOfStrokesAndDicts={this.state.listOfStrokesAndDicts}
