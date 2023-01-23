@@ -26,7 +26,6 @@ export const defaultState: Rules = {
   hasLongTranslations: "ignored",
   hasLongWords: "ignored",
   hasMedical: "off",
-  hasMoreThanOneConsonant: "ignored",
   hasNumbers: "off",
   hasOneConsonantOnEachSide: "ignored",
   hasOneKeyPerFinger: "ignored",

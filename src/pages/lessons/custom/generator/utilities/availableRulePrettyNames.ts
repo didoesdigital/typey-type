@@ -29,7 +29,6 @@ const availableRulePrettyNames = [
   { ruleName: "hasVowelDisambiguator", prettyName: "has a vowel disambiguator like AE or AO" },
   { ruleName: "hasDigraphs", prettyName: "has digraphs like “ch”, and “ng”" },
   { ruleName: "hasCompoundClusters", prettyName: "has compound clusters like BGS" },
-  { ruleName: "hasMoreThanOneConsonant", prettyName: "has more than one consonant" },
   { ruleName: "hasSomeConsonants", prettyName: "has some consonants" },
   { ruleName: "hasDoubleLetters", prettyName: "has double letters" },
   { ruleName: "hasDoubleConsonants", prettyName: "has double consonants" },
