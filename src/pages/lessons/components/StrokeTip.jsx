@@ -1,7 +1,5 @@
 import React from "react";
-import {
-  shouldShowStroke,
-} from "../../../utils/typey-type";
+import { shouldShowStroke } from "../../../utils/typey-type";
 
 import StrokeTipHidden from "./StrokeTipHidden";
 import StrokeTipDiagram from "./StrokeTipDiagram";
