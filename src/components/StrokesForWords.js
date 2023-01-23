@@ -134,25 +134,6 @@ class StrokesForWords extends Component {
       ploverMisstrokesDetail = <p><span className="py05 de-emphasized dark:text-coolgrey-900">(4000 misstrokes hidden.)</span></p>
     }
 
-    let loadingOrError;
-    let hasError = false; // TODO: move this into state and actually set if errors are hit
-
-    if (!this.props.globalLookupDictionaryLoaded) {
-      loadingOrError = (
-        <React.Fragment>
-          Loading…
-        </React.Fragment>
-      );
-    }
-
-    if (hasError) {
-      loadingOrError = (
-        <React.Fragment>
-          Sorry, there was an error loading strokes. Try <a href=".">refresh the page</a>.
-        </React.Fragment>
-      );
-    }
-
     const stenoLayout = (this.props.userSettings && this.props.userSettings.stenoLayout) ? this.props.userSettings.stenoLayout : 'stenoLayoutAmericanSteno';
     const StenoLayoutDiagram = getStenoDiagram(stenoLayout);
     const mapBriefsFunction = getMapBriefsFn(stenoLayout);
@@ -202,8 +183,9 @@ class StrokesForWords extends Component {
           {lookupResults}
           {ploverMisstrokesDetail}
         </React.Fragment>
-      :
-        loadingOrError
+      : (
+        <>Loading…</>
+      )
     );
   }
 }
