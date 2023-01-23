@@ -125,14 +125,19 @@ class StrokesForWords extends Component {
       lookupResults = null;
     }
 
-    let ploverMisstrokesDetail;
-
-    if (this.props.globalUserSettings && this.props.globalUserSettings.showMisstrokesInLookup) {
-      ploverMisstrokesDetail = <p><span className="py05 bg-danger dark:text-coolgrey-900">(Plover misstrokes included.)</span></p>
-    }
-    else {
-      ploverMisstrokesDetail = <p><span className="py05 de-emphasized dark:text-coolgrey-900">(4000 misstrokes hidden.)</span></p>
-    }
+    const ploverMisstrokesDetail = this.props.globalUserSettings?.showMisstrokesInLookup ? (
+        <p>
+          <span className="py05 bg-danger dark:text-coolgrey-900">
+            (Plover misstrokes included.)
+          </span>
+        </p>
+      ) : (
+        <p>
+          <span className="py05 de-emphasized dark:text-coolgrey-900">
+            (4000 misstrokes hidden.)
+          </span>
+        </p>
+      );
 
     const stenoLayout = (this.props.userSettings && this.props.userSettings.stenoLayout) ? this.props.userSettings.stenoLayout : 'stenoLayoutAmericanSteno';
     const StenoLayoutDiagram = getStenoDiagram(stenoLayout);
