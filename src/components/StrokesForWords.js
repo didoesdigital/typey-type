@@ -3,29 +3,13 @@ import { Component } from 'react';
 import { SOURCE_NAMESPACES } from '../constant/index.js';
 import { AffixList } from '../utils/affixList';
 import rankOutlines from '../utils/transformingDictionaries/rankOutlines/rankOutlines';
-import AmericanStenoDiagram from './../StenoLayout/AmericanStenoDiagram';
-import NoNumberBarInnerThumbNumbersStenoDiagram from './../StenoLayout/NoNumberBarInnerThumbNumbersStenoDiagram';
-import NoNumberBarOuterThumbNumbersStenoDiagram from './../StenoLayout/NoNumberBarOuterThumbNumbersStenoDiagram';
-import BrazilianPortugueseStenoDiagram from './../StenoLayout/BrazilianPortugueseStenoDiagram';
-import DanishStenoDiagram from './../StenoLayout/DanishStenoDiagram';
-import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiagram';
-import JapaneseStenoDiagram from './../StenoLayout/JapaneseStenoDiagram';
-import KoreanModernCStenoDiagram from './../StenoLayout/KoreanModernCStenoDiagram';
-import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
 import splitBriefsIntoStrokes from './../utils/splitBriefsIntoStrokes';
 
-import mapBriefToAmericanStenoKeys from '../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
-import mapBriefToNoNumberBarInnerThumbNumbersStenoKeys from '../utils/stenoLayouts/mapBriefToNoNumberBarInnerThumbNumbersStenoKeys';
-import mapBriefToNoNumberBarOuterThumbNumbersStenoKeys from '../utils/stenoLayouts/mapBriefToNoNumberBarOuterThumbNumbersStenoKeys';
-import mapBriefToBrazilianPortugueseStenoKeys from '../utils/stenoLayouts/mapBriefToBrazilianPortugueseStenoKeys';
-import mapBriefToDanishStenoKeys from '../utils/stenoLayouts/mapBriefToDanishStenoKeys';
-import mapBriefToItalianMichelaStenoKeys from '../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
-import mapBriefToJapaneseStenoKeys from '../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
-import mapBriefToKoreanModernCStenoKeys from '../utils/stenoLayouts/mapBriefToKoreanModernCStenoKeys';
-import mapBriefToPalantypeKeys from '../utils/stenoLayouts/mapBriefToPalantypeKeys';
 import misstrokesJSON from '../json/misstrokes.json'
 import getModifiedWordOrPhraseForLookup from '../utils/getModifiedWordOrPhraseForLookup';
 import createListOfStrokes from '../utils/createListOfStrokes';
+import getStenoDiagram from "../pages/lessons/utilities/getStenoDiagram";
+import getMapBriefsFn from "../pages/lessons/utilities/getMapBriefsFn";
 
 class StrokesForWords extends Component {
   state = {
@@ -172,52 +156,9 @@ class StrokesForWords extends Component {
       );
     }
 
-    let mapBriefsFunction = mapBriefToAmericanStenoKeys;
-    let StenoLayoutDiagram = AmericanStenoDiagram;
-    let stenoLayout = (this.props.userSettings && this.props.userSettings.stenoLayout) ? this.props.userSettings.stenoLayout : 'stenoLayoutAmericanSteno';
-
-    switch (stenoLayout) {
-      case 'stenoLayoutAmericanSteno':
-        mapBriefsFunction = mapBriefToAmericanStenoKeys;
-        StenoLayoutDiagram = AmericanStenoDiagram;
-        break;
-      case 'stenoLayoutNoNumberBarInnerThumbNumbers':
-        mapBriefsFunction = mapBriefToNoNumberBarInnerThumbNumbersStenoKeys;
-        StenoLayoutDiagram = NoNumberBarInnerThumbNumbersStenoDiagram;
-        break;
-      case 'stenoLayoutNoNumberBarOuterThumbNumbers':
-        mapBriefsFunction = mapBriefToNoNumberBarOuterThumbNumbersStenoKeys;
-        StenoLayoutDiagram = NoNumberBarOuterThumbNumbersStenoDiagram;
-        break;
-      case 'stenoLayoutBrazilianPortugueseSteno':
-        mapBriefsFunction = mapBriefToBrazilianPortugueseStenoKeys;
-        StenoLayoutDiagram = BrazilianPortugueseStenoDiagram;
-        break;
-      case 'stenoLayoutDanishSteno':
-        mapBriefsFunction = mapBriefToDanishStenoKeys;
-        StenoLayoutDiagram = DanishStenoDiagram;
-        break;
-      case 'stenoLayoutItalianMichelaSteno':
-        mapBriefsFunction = mapBriefToItalianMichelaStenoKeys;
-        StenoLayoutDiagram = ItalianMichelaStenoDiagram;
-        break;
-      case 'stenoLayoutJapaneseSteno':
-        mapBriefsFunction = mapBriefToJapaneseStenoKeys;
-        StenoLayoutDiagram = JapaneseStenoDiagram;
-        break;
-      case 'stenoLayoutKoreanModernCSteno':
-        mapBriefsFunction = mapBriefToKoreanModernCStenoKeys;
-        StenoLayoutDiagram = KoreanModernCStenoDiagram;
-        break;
-      case 'stenoLayoutPalantype':
-        mapBriefsFunction = mapBriefToPalantypeKeys;
-        StenoLayoutDiagram = PalantypeDiagram;
-        break;
-      default:
-        mapBriefsFunction = mapBriefToAmericanStenoKeys;
-        StenoLayoutDiagram = AmericanStenoDiagram;
-        break;
-    }
+    const stenoLayout = (this.props.userSettings && this.props.userSettings.stenoLayout) ? this.props.userSettings.stenoLayout : 'stenoLayoutAmericanSteno';
+    const StenoLayoutDiagram = getStenoDiagram(stenoLayout);
+    const mapBriefsFunction = getMapBriefsFn(stenoLayout);
 
     let brief = ''
     if (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts[0] && this.state.listOfStrokesAndDicts[0][0]) {
