@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useRef } from "react";
+import GoogleAnalytics from "react-ga";
 import { actions } from "./generator/rulesActions";
 import Subheader from "../../../components/Subheader";
 import { useLocalStorage } from "usehooks-ts";
@@ -92,7 +93,14 @@ const CustomLessonGenerator = ({
       type: actions.setRuleStatus,
       payload: { ruleName: event.target.name, ruleStatus: event.target.value },
     });
+
     setRulesSettings(rulesState);
+
+    GoogleAnalytics.event({
+      category: "Lesson generator",
+      action: "Change rule setting",
+      label: `${event.target.name}: ${event.target.value}`,
+    });
   };
 
   return (
