@@ -295,6 +295,7 @@ class Lesson extends Component {
                 currentPhraseID={this.props.currentPhraseID}
                 currentStroke={this.props.currentStroke}
                 disableUserSettings={this.props.disableUserSettings}
+                globalLookupDictionary={this.props.globalLookupDictionary}
                 handleBeatsPerMinute={this.props.handleBeatsPerMinute}
                 handleDiagramSize={this.props.handleDiagramSize}
                 handleLimitWordsChange={this.props.handleLimitWordsChange}

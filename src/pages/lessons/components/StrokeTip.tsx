@@ -5,11 +5,18 @@ import StrokeTipHidden from "./StrokeTipHidden";
 import StrokeTipDiagram from "./StrokeTipDiagram";
 import StrokeTipText from "./StrokeTipText";
 
-import type { Outline, UserSettings } from "../../../types";
+import type {
+  LookupDictWithNamespacedDicts,
+  MaterialText,
+  Outline,
+  UserSettings,
+} from "../../../types";
 
 type Props = {
   changeShowStrokesInLesson: () => void;
+  currentPhrase: MaterialText;
   currentStroke: Outline;
+  globalLookupDictionary: LookupDictWithNamespacedDicts;
   showStrokesInLesson: boolean;
   targetStrokeCount: number;
   userSettings: UserSettings;
@@ -18,7 +25,9 @@ type Props = {
 
 export default function StrokeTip({
   changeShowStrokesInLesson,
+  currentPhrase,
   currentStroke,
+  globalLookupDictionary,
   showStrokesInLesson,
   targetStrokeCount,
   userSettings,
@@ -31,6 +40,9 @@ export default function StrokeTip({
     repetitionsRemaining,
     userSettings.hideStrokesOnLastRepetition
   );
+
+  const currentPhraseOutlines = globalLookupDictionary.get(currentPhrase);
+  console.log(currentPhraseOutlines);
 
   return (
     <div className="mb6">

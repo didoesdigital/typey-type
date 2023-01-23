@@ -287,6 +287,7 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            globalLookupDictionary={globalLookupDictionary}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}

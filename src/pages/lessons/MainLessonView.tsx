@@ -22,6 +22,7 @@ import type {
   MaterialText,
   Lesson,
   LessonSettings,
+  LookupDictWithNamespacedDicts,
   Outline,
   UserSettings as UserSettingsType,
 } from "../../types";
@@ -48,10 +49,11 @@ type Props = {
   chooseStudy: () => void;
   completedPhrases: MaterialText[];
   currentLessonStrokes: CurrentLessonStrokes;
-  currentPhrase: string;
+  currentPhrase: MaterialText;
   currentPhraseID: number;
   currentStroke: Outline;
   disableUserSettings: boolean;
+  globalLookupDictionary: LookupDictWithNamespacedDicts;
   handleBeatsPerMinute: () => void;
   handleDiagramSize: () => void;
   handleLimitWordsChange: () => void;
@@ -117,6 +119,7 @@ const MainLessonView = ({
   currentPhraseID,
   currentStroke,
   disableUserSettings,
+  globalLookupDictionary,
   handleBeatsPerMinute,
   handleDiagramSize,
   handleLimitWordsChange,
@@ -290,6 +293,8 @@ const MainLessonView = ({
                     <StrokeTip
                       changeShowStrokesInLesson={changeShowStrokesInLesson}
                       currentStroke={currentStroke}
+                      currentPhrase={currentPhrase}
+                      globalLookupDictionary={globalLookupDictionary}
                       repetitionsRemaining={repetitionsRemaining}
                       showStrokesInLesson={showStrokesInLesson}
                       targetStrokeCount={targetStrokeCount}
