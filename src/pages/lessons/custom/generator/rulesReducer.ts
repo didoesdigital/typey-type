@@ -50,6 +50,7 @@ export const defaultState: Rules = {
   isOneSyllable: "on",
   isRomanNumeral: "off",
   isSingleStroke: "ignored",
+  isSuperlative: "ignored",
   isUppercase: "off",
   moreThanOneSyllable: "ignored",
   moreThanTwoCharacters: "ignored",

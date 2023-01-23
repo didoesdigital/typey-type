@@ -51,6 +51,7 @@ export type Rules = {
   startsWithPrefix?: RuleStatus; // prefix
   endsWithSuffix?: RuleStatus; // suffix
   hasStar?: RuleStatus; // star
+  isSuperlative?: RuleStatus;
   isRomanNumeral?: RuleStatus;
   hasOneSpace?: RuleStatus;
   hasOneOrMoreSpaces?: RuleStatus;

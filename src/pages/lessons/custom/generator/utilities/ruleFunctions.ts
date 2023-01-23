@@ -49,6 +49,7 @@ import hasLongWords from "../rules/hasLongWords";
 import isBrief from "../rules/isBrief";
 import startsWithPrefix from "../rules/startsWithPrefix";
 import endsWithSuffix from "../rules/endsWithSuffix";
+import isSuperlative from "../rules/isSuperlative";
 import hasStar from "../rules/hasStar";
 import isRomanNumeral from "../rules/isRomanNumeral";
 
@@ -106,6 +107,7 @@ const ruleFunctions: Required<RuleFunctionsTypes> = {
   isBrief: isBrief,
   startsWithPrefix: startsWithPrefix,
   endsWithSuffix: endsWithSuffix,
+  isSuperlative: isSuperlative,
   hasStar: hasStar,
   isRomanNumeral: isRomanNumeral,
 };

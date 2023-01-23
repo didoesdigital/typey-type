@@ -42,6 +42,7 @@ const availableRulePrettyNames = [
   { ruleName: "hasLongWords", prettyName: "has long words (no spaces or dashes)" },
   { ruleName: "startsWithPrefix", prettyName: "starts with a prefix" },
   { ruleName: "endsWithSuffix", prettyName: "ends with a suffix" },
+  { ruleName: "isSuperlative", prettyName: "is superlative" },
   { ruleName: "outlineIsTranslation", prettyName: "outline is the same as translation" },
   { ruleName: "hasStretchKeys", prettyName: "has stretch keys D or Z" },
   { ruleName: "isFingerspelled", prettyName: "is fingerspelled" },
