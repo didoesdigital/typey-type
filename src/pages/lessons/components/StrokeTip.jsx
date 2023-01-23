@@ -16,16 +16,15 @@ export default function StrokeTip({
   repetitionsRemaining,
 }) {
   const isMultiline = userSettings.upcomingWordsLayout === "multiline";
+  const showStroke = shouldShowStroke(
+    showStrokesInLesson,
+    userSettings.showStrokes,
+    repetitionsRemaining,
+    userSettings.hideStrokesOnLastRepetition
+  );
 
   let strokeTip;
-  if (
-    shouldShowStroke(
-      showStrokesInLesson,
-      userSettings.showStrokes,
-      repetitionsRemaining,
-      userSettings.hideStrokesOnLastRepetition
-    )
-  ) {
+  if (showStroke) {
     if (currentStroke) {
       const [StenoLayoutDiagram, mapBriefsFunction] =
         getStenoDiagramAndMapBriefsFn(userSettings.stenoLayout);
