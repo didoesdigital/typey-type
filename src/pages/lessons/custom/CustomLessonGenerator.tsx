@@ -32,7 +32,7 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDicts;
 };
 
-const numberOfVisibleOptions = 18;
+const numberOfVisibleOptions = 16;
 
 const CustomLessonGenerator = ({
   customLesson,
@@ -120,6 +120,13 @@ const CustomLessonGenerator = ({
                 <p>
                   This page lets you generate custom lessons using
                   Typey&nbsp;Type dictionaries and personal dictionaries.
+                </p>
+                <p>
+                  <span role="img" aria-label="Warning!">
+                    ⚠️{" "}
+                  </span>
+                  Language is messy. These rules use heuristics and make
+                  imperfect guesses.
                 </p>
                 <div className="pb1 columns-2 columns-xs gap-4">
                   {availableRulePrettyNames
