@@ -33,6 +33,22 @@ describe("isSuperlative", () => {
     expect(isSuperlative("WEFT", "west")).toEqual(false);
   });
 
+  it("returns true for freest", async () => {
+    expect(isSuperlative("TPRAOE/*ES", "freest")).toEqual(true);
+  });
+
+  it("returns false for unrest", async () => {
+    expect(isSuperlative("UPB/REFT", "unrest")).toEqual(false);
+  });
+
+  it("returns false for wildebeest", async () => {
+    expect(isSuperlative("WEULD/PWAOEFT", "wildebeest")).toEqual(false);
+  });
+
+  it("returns false for blest", async () => {
+    expect(isSuperlative("PWRES/*T", "blest")).toEqual(false);
+  });
+
   it("returns false for conflict of interest", async () => {
     expect(isSuperlative("K*PBGS", "conflict of interest")).toEqual(false);
   });
