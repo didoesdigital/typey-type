@@ -1,7 +1,6 @@
 import React from "react";
 import {
   shouldShowStroke,
-  splitBriefsIntoStrokes,
 } from "../../../utils/typey-type";
 
 import StrokeTipHidden from "./StrokeTipHidden";
@@ -47,7 +46,6 @@ export default function StrokeTip({
           {userSettings.showStrokesAsDiagrams ? (
             <StrokeTipDiagram
               isMultiline={isMultiline}
-              splitBriefsIntoStrokes={splitBriefsIntoStrokes}
               currentStroke={currentStroke}
               stenoLayout={userSettings.stenoLayout}
               diagramSize={userSettings.diagramSize}
