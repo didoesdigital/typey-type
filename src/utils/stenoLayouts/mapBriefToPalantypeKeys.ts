@@ -118,10 +118,6 @@ function mapBriefToPalantypeKeys(brief: Outline) {
     }
   }
 
-  if (brief.match(/[0-9]/)) {
-    keys["numberBar"] = true;
-  }
-
   if (keys.leftPlusOne === true && keys.leftPlusTwo === false) {
     keys.leftPlusTwo = true;
   }
