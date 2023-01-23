@@ -160,10 +160,7 @@ class StrokesForWords extends Component {
     const StenoLayoutDiagram = getStenoDiagram(stenoLayout);
     const mapBriefsFunction = getMapBriefsFn(stenoLayout);
 
-    let brief = ''
-    if (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts[0] && this.state.listOfStrokesAndDicts[0][0]) {
-      brief = this.state.listOfStrokesAndDicts[0][0];
-    }
+    const brief = (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts[0] && this.state.listOfStrokesAndDicts[0][0]) ? this.state.listOfStrokesAndDicts[0][0] : '';
 
     let strokes = splitBriefsIntoStrokes(brief);
     let diagrams = (
