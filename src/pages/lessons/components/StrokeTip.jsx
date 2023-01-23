@@ -2,9 +2,9 @@ import React from "react";
 import {
   shouldShowStroke,
   splitBriefsIntoStrokes,
-} from "./../utils/typey-type";
+} from "../../../utils/typey-type";
 
-import getStenoDiagramAndMapBriefsFn from "../pages/lessons/utilities/getStenoDiagramAndMapBriefsFn";
+import getStenoDiagramAndMapBriefsFn from "../utilities/getStenoDiagramAndMapBriefsFn";
 
 export default function StrokeTip({
   changeShowStrokesInLesson,

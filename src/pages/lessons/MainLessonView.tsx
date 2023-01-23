@@ -9,7 +9,7 @@ import LessonSubheader from "./components/LessonSubheader";
 import Material from "../../components/Material";
 import TypedText from "../../components/TypedText";
 import Scores from "../../components/Scores";
-import StrokeTip from "../../components/StrokeTip";
+import StrokeTip from "./components/StrokeTip";
 import UserSettings from "../../components/UserSettings";
 import AussieDictPrompt from "../../components/LessonPrompts/AussieDictPrompt";
 import SedSaidPrompt from "../../components/LessonPrompts/SedSaidPrompt";
