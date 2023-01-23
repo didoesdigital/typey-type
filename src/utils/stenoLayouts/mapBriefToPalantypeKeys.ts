@@ -72,7 +72,7 @@ const palantypeKeys = [
 ];
 
 function mapBriefToPalantypeKeys(brief: Outline) {
-  let keys: { [keyName: string]: boolean } = {
+  let keys = {
     leftS: false,
     leftC: false,
     leftP: false,
@@ -112,6 +112,7 @@ function mapBriefToPalantypeKeys(brief: Outline) {
   for (let i = 0; i < palantypeOrder.length; i++) {
     if (briefLetters.length > 0) {
       if (briefLetters[0] === palantypeOrder[i]) {
+        // @ts-ignore Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{…}'
         keys[palantypeKeys[i]] = true;
         briefLetters.shift();
       }

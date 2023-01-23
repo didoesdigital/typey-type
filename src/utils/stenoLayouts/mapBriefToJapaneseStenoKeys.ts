@@ -68,7 +68,7 @@ const stenoKeys = [
 ] as const;
 
 function mapBriefToJapaneseStenoKeys(brief: Outline) {
-  let keys: { [keyName: string]: boolean } = {
+  let keys = {
     the漢: false,
     theLeftKagikakko: false,
     theLeft4: false,

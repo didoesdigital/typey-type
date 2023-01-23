@@ -1,7 +1,7 @@
 import type { Outline } from "../../types";
 
 function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
-  let keys: { [keyName: string]: boolean } = {
+  let keys = {
     the1Key: false,
     the2Key: false,
     the3Key: false,
@@ -70,6 +70,7 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
   for (let i = 0; i < numberslength; i++) {
     const keyName = "the" + numbers[i] + "Key";
     if (keys.hasOwnProperty(keyName)) {
+      // @ts-ignore Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{…}'
       keys[keyName] = true;
     }
   }
@@ -77,6 +78,7 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
   let vowelslength = vowels.length;
   for (let i = 0; i < vowelslength; i++) {
     if (keys.hasOwnProperty("the" + vowels[i] + "Key")) {
+      // @ts-ignore Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{…}'
       keys["the" + vowels[i] + "Key"] = true;
     } else if (vowels[i] === "*") {
       keys["theStarKey"] = true;
@@ -86,6 +88,7 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
   let leftSidelength = leftSide.length;
   for (let i = 0; i < leftSidelength; i++) {
     if (keys.hasOwnProperty("theLeft" + leftSide[i] + "Key")) {
+      // @ts-ignore Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{…}'
       keys["theLeft" + leftSide[i] + "Key"] = true;
     }
   }
@@ -93,6 +96,7 @@ function mapBriefToKoreanModernCStenoKeys(brief: Outline) {
   let rightSidelength = rightSide.length;
   for (let i = 0; i < rightSidelength; i++) {
     if (keys.hasOwnProperty("theRight" + rightSide[i] + "Key")) {
+      // @ts-ignore Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{…}'
       keys["theRight" + rightSide[i] + "Key"] = true;
     }
   }
