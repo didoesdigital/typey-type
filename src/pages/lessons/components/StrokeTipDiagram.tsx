@@ -1,7 +1,7 @@
 import React from "react";
 import getStenoDiagram from "../utilities/getStenoDiagram";
 import getMapBriefsFn from "../utilities/getMapBriefsFn";
-import { splitBriefsIntoStrokes } from "../../../utils/typey-type";
+import splitBriefsIntoStrokes from "../../../utils/splitBriefsIntoStrokes";
 
 import type { Outline, StenoLayout } from "../../../types";
 
@@ -24,7 +24,6 @@ const StrokeTipDiagram = ({
 
   return (
     <div className={`flex flex-wrap mr05${isMultiline ? " ml1" : ""}`}>
-      {/* @ts-ignore TODO */}
       {splitBriefsIntoStrokes(currentStroke).map((strokeToDraw, index) => (
         <React.Fragment key={index}>
           {Object.values(mapBriefsFunction(strokeToDraw)).some(

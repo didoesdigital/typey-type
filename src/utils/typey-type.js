@@ -22,13 +22,6 @@ function createWordListFromMetWords (metWords) {
   return metWordsEntries.map(entry => entry[0].trim());
 }
 
-function splitBriefsIntoStrokes (currentStroke) {
-  return currentStroke.split(/[/ ]/);
-}
-
-
-
-
 
 
 
@@ -835,7 +828,6 @@ export {
   runAllPersonalDictionariesMigrations,
   setupLessonProgress,
   shouldShowStroke,
-  splitBriefsIntoStrokes,
   strokeAccuracy,
   targetStrokeCount,
   updateCapitalisationStrokesInNextItem,

@@ -13,9 +13,7 @@ import ItalianMichelaStenoDiagram from './../StenoLayout/ItalianMichelaStenoDiag
 import JapaneseStenoDiagram from './../StenoLayout/JapaneseStenoDiagram';
 import KoreanModernCStenoDiagram from './../StenoLayout/KoreanModernCStenoDiagram';
 import PalantypeDiagram from './../StenoLayout/PalantypeDiagram';
-import {
-  splitBriefsIntoStrokes
-} from './../utils/typey-type';
+import splitBriefsIntoStrokes from './../utils/splitBriefsIntoStrokes';
 
 import mapBriefToAmericanStenoKeys from '../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
 import mapBriefToNoNumberBarInnerThumbNumbersStenoKeys from '../utils/stenoLayouts/mapBriefToNoNumberBarInnerThumbNumbersStenoKeys';
