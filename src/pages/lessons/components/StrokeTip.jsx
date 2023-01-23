@@ -27,13 +27,12 @@ export default function StrokeTip({
     userSettings.stenoLayout
   );
 
-  let layoutTypeStyle = "";
-  if (userSettings.stenoLayout === "stenoLayoutKoreanModernCSteno") {
-    layoutTypeStyle = " heavy-type-face--korean";
-  }
-  if (userSettings.stenoLayout === "stenoLayoutJapaneseSteno") {
-    layoutTypeStyle = " type-face--japanese";
-  }
+  const layoutTypeStyle =
+    userSettings.stenoLayout === "stenoLayoutKoreanModernCSteno"
+      ? " heavy-type-face--korean"
+      : userSettings.stenoLayout === "stenoLayoutJapaneseSteno"
+      ? " type-face--japanese"
+      : "";
 
   const diagramWidth = (userSettings.diagramSize || 1) * 140;
 
