@@ -277,6 +277,5 @@ function lookupListOfStrokesAndDicts(phrase, globalLookupDictionary, affixList =
 
 export default StrokesForWords;
 export {
-  createListOfStrokes,
   lookupListOfStrokesAndDicts
 };

@@ -1,14 +1,4 @@
-import { createListOfStrokes, lookupListOfStrokesAndDicts } from './StrokesForWords';
-
-describe('create list of strokes', () => {
-  it('list of strokes and which dictionary they came from', () => {
-    let phrase = 'baz';
-    let dictionaryOfWordsStrokesAndSourceDictionary = new Map( Object.entries({ "baz": [ ["PWAZ", "user:personal.json"], ["PWAZ", "user:code.json"] ] }));
-    let listOfStrokesAndDicts = [ ["PWAZ", "personal.json", "user"], ["PWAZ", "code.json", "user"] ];
-
-    expect(createListOfStrokes(phrase, dictionaryOfWordsStrokesAndSourceDictionary)).toEqual(listOfStrokesAndDicts);
-  });
-});
+import { lookupListOfStrokesAndDicts } from './StrokesForWords';
 
 describe('lookup list of strokes and dicts with punctuation with carry capitalisation', () => {
   let globalLookupDictionary = new Map(Object.entries(
