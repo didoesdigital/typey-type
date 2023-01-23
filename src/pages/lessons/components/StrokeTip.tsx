@@ -5,6 +5,17 @@ import StrokeTipHidden from "./StrokeTipHidden";
 import StrokeTipDiagram from "./StrokeTipDiagram";
 import StrokeTipText from "./StrokeTipText";
 
+import type { Outline, UserSettings } from "../../../types";
+
+type Props = {
+  changeShowStrokesInLesson: () => void;
+  currentStroke: Outline;
+  showStrokesInLesson: boolean;
+  targetStrokeCount: number;
+  userSettings: UserSettings;
+  repetitionsRemaining: number;
+};
+
 export default function StrokeTip({
   changeShowStrokesInLesson,
   currentStroke,
@@ -12,7 +23,7 @@ export default function StrokeTip({
   targetStrokeCount,
   userSettings,
   repetitionsRemaining,
-}) {
+}: Props) {
   const isMultiline = userSettings.upcomingWordsLayout === "multiline";
   const showStroke = shouldShowStroke(
     showStrokesInLesson,
