@@ -10,7 +10,7 @@ import mapBriefToPalantypeKeys from "../../../utils/stenoLayouts/mapBriefToPalan
 
 import type { StenoLayout } from "../../../types";
 
-const getStenoDiagramAndMapBriefsFn = (stenoLayout: StenoLayout) => {
+const getMapsBriefsFn = (stenoLayout: StenoLayout) => {
   switch (stenoLayout) {
     case "stenoLayoutAmericanSteno":
       return mapBriefToAmericanStenoKeys;
@@ -35,4 +35,4 @@ const getStenoDiagramAndMapBriefsFn = (stenoLayout: StenoLayout) => {
   }
 };
 
-export default getStenoDiagramAndMapBriefsFn;
+export default getMapsBriefsFn;
