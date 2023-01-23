@@ -7,6 +7,7 @@ import lookupListOfStrokesAndDicts from "../utils/lookupListOfStrokesAndDicts";
 import misstrokesJSON from '../json/misstrokes.json'
 import getStenoDiagram from "../pages/lessons/utilities/getStenoDiagram";
 import getMapBriefsFn from "../pages/lessons/utilities/getMapBriefsFn";
+import PloverMisstrokesDetail from "./PloverMisstrokesDetail";
 
 class StrokesForWords extends Component {
   state = {
@@ -125,20 +126,6 @@ class StrokesForWords extends Component {
       lookupResults = null;
     }
 
-    const ploverMisstrokesDetail = this.props.globalUserSettings?.showMisstrokesInLookup ? (
-        <p>
-          <span className="py05 bg-danger dark:text-coolgrey-900">
-            (Plover misstrokes included.)
-          </span>
-        </p>
-      ) : (
-        <p>
-          <span className="py05 de-emphasized dark:text-coolgrey-900">
-            (4000 misstrokes hidden.)
-          </span>
-        </p>
-      );
-
     const stenoLayout = (this.props.userSettings && this.props.userSettings.stenoLayout) ? this.props.userSettings.stenoLayout : 'stenoLayoutAmericanSteno';
     const StenoLayoutDiagram = getStenoDiagram(stenoLayout);
     const mapBriefsFunction = getMapBriefsFn(stenoLayout);
@@ -186,7 +173,9 @@ class StrokesForWords extends Component {
             {diagrams}
           </div>
           {lookupResults}
-          {ploverMisstrokesDetail}
+          <PloverMisstrokesDetail
+            showMisstrokesInLookup={this.props.globalUserSettings?.showMisstrokesInLookup}
+          />
         </React.Fragment>
       : (
         <>Loading…</>
