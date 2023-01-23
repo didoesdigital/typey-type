@@ -5,6 +5,7 @@ import {
 } from "../../../utils/typey-type";
 
 import getStenoDiagramAndMapBriefsFn from "../utilities/getStenoDiagramAndMapBriefsFn";
+import StrokeTipHidden from "./StrokeTipHidden";
 
 export default function StrokeTip({
   changeShowStrokesInLesson,
@@ -26,7 +27,8 @@ export default function StrokeTip({
     )
   ) {
     if (currentStroke) {
-      const [StenoLayoutDiagram, mapBriefsFunction] = getStenoDiagramAndMapBriefsFn(userSettings.stenoLayout);
+      const [StenoLayoutDiagram, mapBriefsFunction] =
+        getStenoDiagramAndMapBriefsFn(userSettings.stenoLayout);
 
       let layoutTypeStyle = "";
       if (userSettings.stenoLayout === "stenoLayoutKoreanModernCSteno") {
@@ -117,24 +119,12 @@ export default function StrokeTip({
     }
   } else {
     strokeTip = (
-      <div
-        className={`stroke-tip${
-          isMultiline ? " flex justify-center min-h-88" : ""
-        }`}
-      >
-        <label className="mb0 text-small color-interactive stroke-tip__label">
-          <input
-            className="checkbox-input mr1 visually-hidden"
-            type="checkbox"
-            name="showStrokesInLesson"
-            id="showStrokesInLesson"
-            checked={showStrokesInLesson}
-            onChange={changeShowStrokesInLesson}
-          />
-          {`${targetStrokeCount} stroke${targetStrokeCount === 1 ? "" : "s"}`}{" "}
-          (hint?)
-        </label>
-      </div>
+      <StrokeTipHidden
+        isMultiline={isMultiline}
+        showStrokesInLesson={showStrokesInLesson}
+        changeShowStrokesInLesson={changeShowStrokesInLesson}
+        targetStrokeCount={targetStrokeCount}
+      />
     );
   }
   return <div className="mb6">{strokeTip}</div>;
