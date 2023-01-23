@@ -48,7 +48,7 @@ const stenoKeys = [
 ] as const;
 
 function mapBriefToItalianMichelaStenoKeys(brief: Outline) {
-  let keys: { [keyName: string]: boolean } = {
+  let keys = {
     leftCapitalF: false,
     leftCapitalS: false,
     leftCapitalC: false,
