@@ -5,6 +5,7 @@ import {
 
 import StrokeTipHidden from "./StrokeTipHidden";
 import StrokeTipDiagram from "./StrokeTipDiagram";
+import StrokeTipText from "./StrokeTipText";
 
 export default function StrokeTip({
   changeShowStrokesInLesson,
@@ -22,13 +23,6 @@ export default function StrokeTip({
     userSettings.hideStrokesOnLastRepetition
   );
 
-  const layoutTypeStyle =
-    userSettings.stenoLayout === "stenoLayoutKoreanModernCSteno"
-      ? " heavy-type-face--korean"
-      : userSettings.stenoLayout === "stenoLayoutJapaneseSteno"
-      ? " type-face--japanese"
-      : "";
-
   return (
     <div className="mb6">
       {showStroke && currentStroke ? (
@@ -45,35 +39,24 @@ export default function StrokeTip({
           </span>
           {userSettings.showStrokesAsDiagrams ? (
             <StrokeTipDiagram
-              isMultiline={isMultiline}
               currentStroke={currentStroke}
-              stenoLayout={userSettings.stenoLayout}
               diagramSize={userSettings.diagramSize}
+              isMultiline={isMultiline}
+              stenoLayout={userSettings.stenoLayout}
             />
           ) : (
-            <div className={"db" + layoutTypeStyle}>
-              <pre
-                className={`overflow-auto mw-408 text-small${
-                  isMultiline ? " flex" : ""
-                }`}
-              >
-                <span
-                  className="steno-stroke pa05 text-small"
-                  aria-label={[...currentStroke].join(" ").replace("-", "dash")}
-                >
-                  {[...currentStroke].map((item, i) => (
-                    <React.Fragment key={i}>{item}</React.Fragment>
-                  ))}
-                </span>
-              </pre>
-            </div>
+            <StrokeTipText
+              currentStroke={currentStroke}
+              isMultiline={isMultiline}
+              stenoLayout={userSettings.stenoLayout}
+            />
           )}
         </div>
       ) : (
         <StrokeTipHidden
+          changeShowStrokesInLesson={changeShowStrokesInLesson}
           isMultiline={isMultiline}
           showStrokesInLesson={showStrokesInLesson}
-          changeShowStrokesInLesson={changeShowStrokesInLesson}
           targetStrokeCount={targetStrokeCount}
         />
       )}
