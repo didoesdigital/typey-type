@@ -170,8 +170,8 @@ class StrokesForWords extends Component {
             id="words-for-strokes"
             onChange={this.handleWordsOnChange.bind(this)}
             placeholder="e.g. quadruplicate"
-            rows="1"
-            spellCheck="false"
+            rows={1}
+            spellCheck={false}
             value={this.state.phrase}
             wrap="off"
             >
