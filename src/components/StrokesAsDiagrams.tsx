@@ -1,26 +1,29 @@
 import React from "react";
+import getStenoDiagram from "../pages/lessons/utilities/getStenoDiagram";
+import getMapBriefsFn from "../pages/lessons/utilities/getMapBriefsFn";
 
 import type {
   SingleStroke,
+  StenoLayout,
   StrokeAndDictionaryAndNamespace,
   UserSettings,
 } from "../types";
 
 type Props = {
-  StenoLayoutDiagram: any;
   listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[];
-  mapBriefsFunction: any;
+  stenoLayout: StenoLayout;
   strokes: SingleStroke[];
   userSettings: UserSettings;
 };
 
 const StrokesAsDiagrams = ({
-  StenoLayoutDiagram,
   listOfStrokesAndDicts,
-  mapBriefsFunction,
+  stenoLayout,
   strokes,
   userSettings,
 }: Props) => {
+  const StenoLayoutDiagram = getStenoDiagram(stenoLayout);
+  const mapBriefsFunction = getMapBriefsFn(stenoLayout);
   return (
     <div className="flex flex-wrap mr05 overflow-y-auto max-h-240">
       {userSettings?.showStrokesAsDiagrams &&

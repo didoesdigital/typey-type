@@ -5,8 +5,6 @@ import splitBriefsIntoStrokes from './../utils/splitBriefsIntoStrokes';
 import lookupListOfStrokesAndDicts from "../utils/lookupListOfStrokesAndDicts";
 
 import misstrokesJSON from '../json/misstrokes.json'
-import getStenoDiagram from "../pages/lessons/utilities/getStenoDiagram";
-import getMapBriefsFn from "../pages/lessons/utilities/getMapBriefsFn";
 import PloverMisstrokesDetail from "./PloverMisstrokesDetail";
 import StrokesAsDiagrams from './StrokesAsDiagrams';
 
@@ -128,8 +126,6 @@ class StrokesForWords extends Component {
     }
 
     const stenoLayout = (this.props.userSettings && this.props.userSettings.stenoLayout) ? this.props.userSettings.stenoLayout : 'stenoLayoutAmericanSteno';
-    const StenoLayoutDiagram = getStenoDiagram(stenoLayout);
-    const mapBriefsFunction = getMapBriefsFn(stenoLayout);
 
     const brief = (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts[0] && this.state.listOfStrokesAndDicts[0][0]) ? this.state.listOfStrokesAndDicts[0][0] : '';
 
@@ -156,9 +152,8 @@ class StrokesForWords extends Component {
           {matchedTranslation}
           <div className="mb1">
             <StrokesAsDiagrams
-              StenoLayoutDiagram={StenoLayoutDiagram}
               listOfStrokesAndDicts={this.state.listOfStrokesAndDicts}
-              mapBriefsFunction={mapBriefsFunction}
+              stenoLayout={stenoLayout}
               strokes={strokes}
               userSettings={this.props.userSettings}
             />
