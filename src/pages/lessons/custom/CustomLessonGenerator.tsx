@@ -214,6 +214,7 @@ const CustomLessonGenerator = ({
                           (materialItem, index: number) => (
                             <li
                               key={`${index}-${materialItem.phrase}-${materialItem.stroke}`}
+                              className="wrap"
                             >
                               {materialItem.phrase}{" "}
                               <kbd className="raw-steno-key raw-steno-key--subtle">
