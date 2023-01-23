@@ -82,14 +82,6 @@ function mapBriefToItalianMichelaStenoKeys(brief: Outline) {
     }
   }
 
-  if (brief.match(/[0-9]/)) {
-    keys["numberBar"] = true;
-  }
-
-  if (keys.rightDUpper === true && keys.rightDLower === false) {
-    keys.rightDLower = true;
-  }
-
   return keys;
 }
 
