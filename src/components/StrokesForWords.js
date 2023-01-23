@@ -8,6 +8,7 @@ import misstrokesJSON from '../json/misstrokes.json'
 import getStenoDiagram from "../pages/lessons/utilities/getStenoDiagram";
 import getMapBriefsFn from "../pages/lessons/utilities/getMapBriefsFn";
 import PloverMisstrokesDetail from "./PloverMisstrokesDetail";
+import StrokesAsDiagrams from './StrokesAsDiagrams';
 
 class StrokesForWords extends Component {
   state = {
@@ -133,22 +134,6 @@ class StrokesForWords extends Component {
     const brief = (this.state.listOfStrokesAndDicts && this.state.listOfStrokesAndDicts[0] && this.state.listOfStrokesAndDicts[0][0]) ? this.state.listOfStrokesAndDicts[0][0] : '';
 
     let strokes = splitBriefsIntoStrokes(brief);
-    let diagrams = (
-      <div className="flex flex-wrap mr05 overflow-y-auto max-h-240">
-        {this.props.userSettings && this.props.userSettings.showStrokesAsDiagrams && this.state.listOfStrokesAndDicts.length > 0 && strokes.map((strokeToDraw, index) =>
-          <React.Fragment key={index}>
-            {(Object.values(mapBriefsFunction(strokeToDraw)).some(item => item)) && <div className="mt1 mr2 mb2"><StenoLayoutDiagram classes="steno-diagram-svg" id={"diagramID-"+ index + '-' + strokeToDraw} {...mapBriefsFunction(strokeToDraw)} brief="steno-diagram-group" diagramWidth="192" /></div> }
-          </React.Fragment>
-        )}
-        {this.props.userSettings && this.props.userSettings.showStrokesAsDiagrams && this.state.listOfStrokesAndDicts.length === 0 ?
-          <React.Fragment>
-            <div className="mt1 mr2 mb2"><StenoLayoutDiagram classes="steno-diagram-svg" id={"diagramID-"+ 0} {...mapBriefsFunction('')} brief="steno-diagram-group" diagramWidth="192" /></div>
-          </React.Fragment>
-            :
-            null
-        }
-      </div>
-    );
 
     return (
       this.props.globalLookupDictionaryLoaded ?
@@ -170,7 +155,13 @@ class StrokesForWords extends Component {
           </textarea>
           {matchedTranslation}
           <div className="mb1">
-            {diagrams}
+            <StrokesAsDiagrams
+              StenoLayoutDiagram={StenoLayoutDiagram}
+              listOfStrokesAndDicts={this.state.listOfStrokesAndDicts}
+              mapBriefsFunction={mapBriefsFunction}
+              strokes={strokes}
+              userSettings={this.props.userSettings}
+            />
           </div>
           {lookupResults}
           <PloverMisstrokesDetail

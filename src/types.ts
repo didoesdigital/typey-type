@@ -31,6 +31,18 @@ export type Translation = string;
 
 /**
  * Examples:
+ * "H-L"
+ * "KPA"
+ * "TEFT"
+ * "WOB"
+ * "HREU"
+ * "PTVAt"
+ * "TEOta"
+ */
+export type SingleStroke = string;
+
+/**
+ * Examples:
  * "user:personal.json"
  * "typey:typey-type.json"
  * "plover:main-3-jun-2018.json"
