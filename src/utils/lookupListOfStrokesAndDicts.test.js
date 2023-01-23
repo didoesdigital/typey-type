@@ -1,4 +1,4 @@
-import { lookupListOfStrokesAndDicts } from './StrokesForWords';
+import lookupListOfStrokesAndDicts from './lookupListOfStrokesAndDicts';
 
 describe('lookup list of strokes and dicts with punctuation with carry capitalisation', () => {
   let globalLookupDictionary = new Map(Object.entries(
