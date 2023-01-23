@@ -9,7 +9,7 @@ type LessonNotFoundProps = {
   location: any;
   lessonIndex: any;
   path: any;
-  restartLesson: any;
+  restartLesson?: any;
 };
 
 const LessonNotFound = ({
