@@ -1,16 +1,21 @@
 import React from "react";
 import { shouldShowStroke } from "../../../utils/typey-type";
+import { SOURCE_NAMESPACES } from "../../../constant/index.js";
 
 import StrokeTipHidden from "./StrokeTipHidden";
 import StrokeTipDiagram from "./StrokeTipDiagram";
 import StrokeTipText from "./StrokeTipText";
 import LookupResultsOutlinesAndDicts from "../../../components/LookupResultsOutlinesAndDicts";
 import createListOfStrokes from "../../../utils/createListOfStrokes";
+import rankOutlines from "../../../utils/transformingDictionaries/rankOutlines/rankOutlines";
+import misstrokes from "../../../json/misstrokes.json";
+import { AffixList } from "../../../utils/affixList";
 
 import type {
   LookupDictWithNamespacedDictsAndConfig,
   MaterialText,
   Outline,
+  StenoDictionary,
   UserSettings,
 } from "../../../types";
 
@@ -45,9 +50,16 @@ export default function StrokeTip({
     userSettings.hideStrokesOnLastRepetition
   );
 
-  const currentPhraseOutlines = createListOfStrokes(
+  const misstrokesJSON = misstrokes as StenoDictionary;
+  const currentPhraseOutlines = rankOutlines(
+    createListOfStrokes(currentPhrase, globalLookupDictionary),
+    misstrokesJSON,
     currentPhrase,
-    globalLookupDictionary
+    AffixList.getSharedInstance()
+  ).filter(
+    (row) =>
+      row[2] === SOURCE_NAMESPACES.get("user") ||
+      !(misstrokesJSON[row[0]] && currentPhrase === misstrokesJSON[row[0]])
   );
 
   return (
