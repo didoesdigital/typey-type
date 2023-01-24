@@ -22,7 +22,7 @@ import type {
   MaterialText,
   Lesson,
   LessonSettings,
-  LookupDictWithNamespacedDicts,
+  LookupDictWithNamespacedDictsAndConfig,
   Outline,
   UserSettings as UserSettingsType,
 } from "../../types";
@@ -53,7 +53,7 @@ type Props = {
   currentPhraseID: number;
   currentStroke: Outline;
   disableUserSettings: boolean;
-  globalLookupDictionary: LookupDictWithNamespacedDicts;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   handleBeatsPerMinute: () => void;
   handleDiagramSize: () => void;
   handleLimitWordsChange: () => void;

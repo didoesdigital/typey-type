@@ -6,6 +6,7 @@ import penaliseStars from "./penaliseStars";
 import penaliseSlashesWithoutPrefixesOrSuffixes from "./penaliseSlashesWithoutPrefixesOrSuffixes";
 
 function rankOutlines(
+  // StrokeAndDictionaryAndNamespace[]
   arrayOfStrokesAndTheirSourceDictNames: [string, string, string][],
   misstrokesJSON: StenoDictionary,
   translation: string,

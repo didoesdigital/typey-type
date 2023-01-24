@@ -4,9 +4,11 @@ import { shouldShowStroke } from "../../../utils/typey-type";
 import StrokeTipHidden from "./StrokeTipHidden";
 import StrokeTipDiagram from "./StrokeTipDiagram";
 import StrokeTipText from "./StrokeTipText";
+import LookupResultsOutlinesAndDicts from "../../../components/LookupResultsOutlinesAndDicts";
+import createListOfStrokes from "../../../utils/createListOfStrokes";
 
 import type {
-  LookupDictWithNamespacedDicts,
+  LookupDictWithNamespacedDictsAndConfig,
   MaterialText,
   Outline,
   UserSettings,
@@ -16,12 +18,14 @@ type Props = {
   changeShowStrokesInLesson: () => void;
   currentPhrase: MaterialText;
   currentStroke: Outline;
-  globalLookupDictionary: LookupDictWithNamespacedDicts;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   showStrokesInLesson: boolean;
   targetStrokeCount: number;
   userSettings: UserSettings;
   repetitionsRemaining: number;
 };
+
+const maxOutlinesShown = 10;
 
 export default function StrokeTip({
   changeShowStrokesInLesson,
@@ -41,8 +45,10 @@ export default function StrokeTip({
     userSettings.hideStrokesOnLastRepetition
   );
 
-  const currentPhraseOutlines = globalLookupDictionary.get(currentPhrase);
-  console.log(currentPhraseOutlines);
+  const currentPhraseOutlines = createListOfStrokes(
+    currentPhrase,
+    globalLookupDictionary
+  );
 
   return (
     <div className="mb6">
@@ -69,6 +75,15 @@ export default function StrokeTip({
             <StrokeTipText
               currentStroke={currentStroke}
               isMultiline={isMultiline}
+              stenoLayout={userSettings.stenoLayout}
+            />
+          )}
+          {!!currentPhraseOutlines && (
+            <LookupResultsOutlinesAndDicts
+              listOfStrokesAndDicts={currentPhraseOutlines.slice(
+                0,
+                maxOutlinesShown
+              )}
               stenoLayout={userSettings.stenoLayout}
             />
           )}
