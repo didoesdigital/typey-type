@@ -5,7 +5,7 @@ const getModifiedWordOrPhraseForLookup = (phrase: MaterialText) => {
 
   if (phrase === "{") result = "\\{{^}";
   if (phrase === "}") result = "{^}\\}";
-  if (phrase === "") result = "\\{";
+  if (phrase === "{ ") result = "\\{";
   if (phrase === "} ") result = "\\}";
   if (phrase === "[") result = "{^[^}";
   if (phrase === "]") result = "{^]^}";
