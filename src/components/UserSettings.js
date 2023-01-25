@@ -410,6 +410,33 @@ class UserSettings extends Component {
                         </label>
                       </div>
                     </div>
+                    <div className="block relative pb1 px1">
+                      <label className="checkbox-label mb0">
+                        <input
+                          className="checkbox-input mr1"
+                          type="checkbox"
+                          name="showStrokesAsList"
+                          id="showStrokesAsList"
+                          disabled={this.props.disableUserSettings}
+                          checked={this.props.userSettings.showStrokesAsList}
+                          onChange={this.props.changeShowStrokesAsList}
+                        />
+                        <Tooltip
+                          title="Show a list of alternative briefs in a list"
+                          className="mw-240"
+                          animation="shift"
+                          arrow="true"
+                          duration="200"
+                          tabIndex="0"
+                          tag="span"
+                          theme="didoesdigital didoesdigital-sm"
+                          trigger="mouseenter focus click"
+                          onShow={this.props.setAnnouncementMessage}
+                        >
+                          Show other briefs in a list
+                        </Tooltip>
+                      </label>
+                    </div>
                 </SettingListItem>
                 <SettingListItem sectionHierachy='major'>
 

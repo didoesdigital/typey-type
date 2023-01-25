@@ -345,6 +345,7 @@ export type UserSettings = {
   showScoresWhileTyping: boolean;
   showStrokes: boolean;
   showStrokesAsDiagrams: boolean;
+  showStrokesAsList: boolean;
   showStrokesOnMisstroke: boolean;
   hideStrokesOnLastRepetition: boolean;
   spacePlacement: SpacePlacement;

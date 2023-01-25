@@ -245,6 +245,7 @@ class App extends Component {
         showScoresWhileTyping: true,
         showStrokes: true,
         showStrokesAsDiagrams: true,
+        showStrokesAsList: true,
         showStrokesOnMisstroke: true,
         hideStrokesOnLastRepetition: true,
         spacePlacement: 'spaceOff',
@@ -1159,6 +1160,45 @@ class App extends Component {
     return value;
   }
 
+  changeShowStrokesAsList(event) {
+    let newState = Object.assign({}, this.state.userSettings);
+
+    const name = "showStrokesAsList";
+    const value = event.target.checked;
+
+    const shouldUsePersonalDictionaries =
+      this.state.personalDictionaries &&
+      Object.entries(this.state.personalDictionaries).length > 0 &&
+      !!this.state.personalDictionaries.dictionariesNamesAndContents;
+
+    if (value) {
+      newState[name] = true;
+      this.fetchAndSetupGlobalDict(
+        true,
+        shouldUsePersonalDictionaries ? this.state.personalDictionaries : null
+      ).catch((error) => console.error(error));
+    } else {
+      newState[name] = false;
+    }
+
+    this.setState({ userSettings: newState }, () => {
+      writePersonalPreferences("userSettings", this.state.userSettings);
+    });
+
+    let labelString = value;
+    if (!value) {
+      labelString = "BAD_INPUT";
+    }
+
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change show strokes as list",
+      label: labelString,
+    });
+
+    return value;
+  }
+
   changeShowStrokesAs(event) {
     let newState = Object.assign({}, this.state.userSettings);
 
@@ -1410,6 +1450,7 @@ class App extends Component {
           'showScoresWhileTyping',
           'showStrokes',
           'showStrokesAsDiagrams',
+          'showStrokesAsList',
           'hideStrokesOnLastRepetition',
           'speakMaterial',
           'textInputAccessibility',
@@ -1586,7 +1627,9 @@ class App extends Component {
             && Object.entries(this.state.personalDictionaries).length > 0
             && !!this.state.personalDictionaries.dictionariesNamesAndContents;
 
-          this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.state.personalDictionaries : null).then(() => {
+          const loadPlover = this.state.userSettings.showStrokesAsList ? true : false;
+
+          this.fetchAndSetupGlobalDict(loadPlover, shouldUsePersonalDictionaries ? this.state.personalDictionaries : null).then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
               lesson.presentedMaterial = lessonWordsAndStrokes;
@@ -2343,6 +2386,7 @@ class App extends Component {
                           changeStenoLayout={this.changeStenoLayout.bind(this)}
                           changeShowScoresWhileTyping={this.changeShowScoresWhileTyping.bind(this)}
                           changeShowStrokesAs={this.changeShowStrokesAs.bind(this)}
+                          changeShowStrokesAsList={this.changeShowStrokesAsList.bind(this)}
                           changeUserSetting={this.changeUserSetting.bind(this)}
                           chooseStudy={this.chooseStudy.bind(this)}
                           completedPhrases={completedMaterial}

@@ -282,6 +282,7 @@ class Lesson extends Component {
                 actualText={this.props.actualText}
                 changeShowScoresWhileTyping={this.props.changeShowScoresWhileTyping}
                 changeShowStrokesAs={this.props.changeShowStrokesAs}
+                changeShowStrokesAsList={this.props.changeShowStrokesAsList}
                 changeShowStrokesInLesson={this.props.changeShowStrokesInLesson}
                 changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
                 changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}

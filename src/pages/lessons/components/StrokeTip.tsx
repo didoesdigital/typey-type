@@ -90,7 +90,7 @@ export default function StrokeTip({
               stenoLayout={userSettings.stenoLayout}
             />
           )}
-          {!!currentPhraseOutlines && (
+          {!!currentPhraseOutlines && userSettings.showStrokesAsList && (
             <LookupResultsOutlinesAndDicts
               listOfStrokesAndDicts={currentPhraseOutlines.slice(
                 0,

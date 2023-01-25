@@ -40,6 +40,7 @@ type Props = {
   actualText: string;
   changeShowScoresWhileTyping: () => void;
   changeShowStrokesAs: () => void;
+  changeShowStrokesAsList: () => void;
   changeShowStrokesInLesson: () => void;
   changeShowStrokesOnMisstroke: () => void;
   changeSortOrderUserSetting: () => void;
@@ -106,6 +107,7 @@ const MainLessonView = ({
   actualText,
   changeShowScoresWhileTyping,
   changeShowStrokesAs,
+  changeShowStrokesAsList,
   changeShowStrokesInLesson,
   changeShowStrokesOnMisstroke,
   changeSortOrderUserSetting,
@@ -339,6 +341,7 @@ const MainLessonView = ({
               changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
               changeStenoLayout={changeStenoLayout}
               changeShowStrokesAs={changeShowStrokesAs}
+              changeShowStrokesAsList={changeShowStrokesAsList}
               changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
               changeUserSetting={changeUserSetting}
               chooseStudy={chooseStudy}
