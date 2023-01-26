@@ -33,6 +33,7 @@ let topSpeedToday = 0;
 
 const Finished = ({
   changeShowStrokesAs,
+  changeShowStrokesAsList,
   changeShowStrokesOnMisstroke,
   changeSortOrderUserSetting,
   changeSpacePlacementUserSetting,
@@ -43,6 +44,7 @@ const Finished = ({
   disableUserSettings,
   globalUserSettings,
   handleBeatsPerMinute,
+  handleDiagramSize,
   handleLimitWordsChange,
   handleRepetitionsChange,
   handleStartFromWordChange,
@@ -252,9 +254,11 @@ const Finished = ({
             changeSortOrderUserSetting={changeSortOrderUserSetting}
             changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
             changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
             changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
             changeStenoLayout={changeStenoLayout}
             disableUserSettings={disableUserSettings}
+            handleDiagramSize={handleDiagramSize}
             handleBeatsPerMinute={handleBeatsPerMinute}
             handleLimitWordsChange={handleLimitWordsChange}
             handleStartFromWordChange={handleStartFromWordChange}

@@ -13,6 +13,7 @@ export type TransformedData = {
 
 export type FinishedProps = {
   changeShowStrokesAs: any;
+  changeShowStrokesAsList: any;
   changeShowStrokesOnMisstroke: any;
   changeSortOrderUserSetting: any;
   changeSpacePlacementUserSetting: any;
@@ -23,6 +24,7 @@ export type FinishedProps = {
   disableUserSettings: any;
   globalUserSettings: any;
   handleBeatsPerMinute: any;
+  handleDiagramSize: any;
   handleLimitWordsChange: any;
   handleRepetitionsChange: any;
   handleStartFromWordChange: any;
