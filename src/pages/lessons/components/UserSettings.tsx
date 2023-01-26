@@ -59,9 +59,6 @@ const UserSettings = ({
   const [hasSpeechSupport, setHasSpeechSupport] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  // this.handleOpenModal = this.handleOpenModal.bind(this);
-  // this.handleCloseModal = this.handleCloseModal.bind(this);
-
   useEffect(() => {
     ReactModal.setAppElement("#js-app");
   }, []);
