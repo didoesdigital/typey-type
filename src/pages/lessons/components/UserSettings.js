@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ReactModal from "react-modal";
 import { Tooltip } from "react-tippy";
 import NumericInput from "react-numeric-input";
+import SettingCheckbox from "../../../components/SettingCheckbox";
 import SettingListItem from "../../../components/SettingListItem";
 
 const grabStyle = function () {
@@ -38,6 +39,107 @@ class UserSettings extends Component {
   }
 
   render() {
+    const speakWordsHelpButton = (
+      <>
+        {" "}
+        (
+        <button
+          className="de-emphasized-button text-small"
+          onClick={this.handleOpenModal}
+          aria-label="Help with speak words setting"
+          disabled={this.props.disableUserSettings}
+        >
+          help
+        </button>
+        <ReactModal
+          isOpen={this.state.showModal}
+          aria={{
+            labelledby: "aria-modal-heading",
+            describedby: "aria-modal-description",
+          }}
+          ariaHideApp={true}
+          closeTimeoutMS={300}
+          role="dialog"
+          onRequestClose={this.handleCloseModal}
+          className={{
+            "base": "modal",
+            "afterOpen": "modal--after-open",
+            "beforeClose": "modal--before-close",
+          }}
+          overlayClassName={{
+            "base": "modal__overlay",
+            "afterOpen": "modal__overlay--after-open",
+            "beforeClose": "modal__overlay--before-close",
+          }}
+        >
+          <div className="fr">
+            <button
+              className="de-emphasized-button hide-md"
+              onClick={this.handleCloseModal}
+            >
+              Close
+            </button>
+          </div>
+          <h3 id="aria-modal-heading">Speak words setting</h3>
+          <div id="aria-modal-description">
+            <p>
+              Typey Type’s setting to “speak words” will speak words aloud when
+              you have the sound turned on. It’s great with story lessons and
+              real sentences where the context can help you distinguish
+              homophones.
+            </p>
+            <p>
+              This setting uses fancy browser technology called the “Web Speech
+              API”.
+            </p>
+            <p
+              className={
+                this.state.hasSpeechSupport
+                  ? "quote mt1 mb3 bg-slat dark:bg-coolgrey-900"
+                  : "quote mt1 mb3 bg-danger dark:text-coolgrey-900"
+              }
+            >
+              Web Speech is{" "}
+              {this.state.hasSpeechSupport ? " available" : " unavailable"} on
+              your system.
+            </p>
+            {this.state.hasSpeechSupport ? (
+              <p>
+                If you have working sound but hear no words, your system might
+                be missing a language pack or “voice”.
+              </p>
+            ) : (
+              <p>
+                <span className="bg-warning">
+                  You may need to update your browser or check that your device
+                  has a speech engine and language pack.
+                </span>
+              </p>
+            )}
+            <p>
+              For Windows, you can download a “language pack” from Microsoft.
+            </p>
+            <p>
+              For Linux systems, you may need to install a speech engine with
+              voices, such as <code>speech-dispatcher</code> and{" "}
+              <code>espeak-ng</code>.
+            </p>
+            <p>
+              Double-click the “Say word” button or type ⇧Enter (e.g.{" "}
+              <code>{`"STP*R": "{#Shift_L(Return)}",`}</code>) from the text
+              area to hear the word again and keep focus on the text area.
+            </p>
+          </div>
+          <div className="text-right">
+            <button className="button" onClick={this.handleCloseModal}>
+              OK
+            </button>
+          </div>
+        </ReactModal>
+        )
+      </>
+    );
+
     return (
       <div className="user-settings">
         <form>
@@ -266,104 +368,49 @@ class UserSettings extends Component {
                   </div>
                 </SettingListItem>
                 <SettingListItem sectionHierachy="major">
-                  <div className="block relative p1">
-                    <label className="checkbox-label mb1">
-                      <input
-                        className="checkbox-input mr1"
-                        type="checkbox"
-                        name="showStrokes"
-                        id="showStrokes"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.showStrokes}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      {/* @ts-ignore */}
-                      <Tooltip
-                        title={
-                          !this.props.userSettings.hideStrokesOnLastRepetition
-                            ? "Show stroke briefs for every word"
-                            : "Show briefs for each word except during the last repetition"
-                        }
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Show briefs for every word
-                      </Tooltip>
-                    </label>
-                  </div>
+                  <SettingCheckbox
+                    checked={this.props.userSettings.showStrokes}
+                    disabled={this.props.disableUserSettings}
+                    label={"Show briefs for every word"}
+                    nameAndId={"showStrokes"}
+                    onChange={this.props.changeUserSetting}
+                    onShow={this.props.setAnnouncementMessage}
+                    tooltipTitle={
+                      !this.props.userSettings.hideStrokesOnLastRepetition
+                        ? "Show stroke briefs for every word"
+                        : "Show briefs for each word except during the last repetition"
+                    }
+                  />
                 </SettingListItem>
                 <SettingListItem sectionHierachy="minor">
-                  <div className="block relative p1">
-                    <label className="checkbox-label mb1">
-                      <input
-                        className="checkbox-input mr1"
-                        type="checkbox"
-                        name="hideStrokesOnLastRepetition"
-                        id="hideStrokesOnLastRepetition"
-                        disabled={this.props.disableUserSettings}
-                        checked={
-                          this.props.userSettings.hideStrokesOnLastRepetition
-                        }
-                        onChange={this.props.changeUserSetting}
-                      />
-                      {/* @ts-ignore */}
-                      <Tooltip
-                        title={
-                          this.props.userSettings.showStrokes
-                            ? "Hide briefs during the last repetition"
-                            : "This does nothing while “Show briefs” is turned off"
-                        }
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Hide briefs on last repetition
-                      </Tooltip>
-                    </label>
-                  </div>
+                  <SettingCheckbox
+                    checked={
+                      this.props.userSettings.hideStrokesOnLastRepetition
+                    }
+                    disabled={this.props.disableUserSettings}
+                    label={"Hide briefs on last repetition"}
+                    nameAndId={"hideStrokesOnLastRepetition"}
+                    onChange={this.props.changeUserSetting}
+                    onShow={this.props.setAnnouncementMessage}
+                    tooltipTitle={
+                      this.props.userSettings.showStrokes
+                        ? "Hide briefs during the last repetition"
+                        : "This does nothing while “Show briefs” is turned off"
+                    }
+                  />
                 </SettingListItem>
                 <SettingListItem sectionHierachy="minor">
-                  <div className="block relative p1">
-                    <label className="checkbox-label mb1">
-                      <input
-                        className="checkbox-input mr1"
-                        type="checkbox"
-                        name="showStrokesOnMisstroke"
-                        id="showStrokesOnMisstroke"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.showStrokesOnMisstroke}
-                        onChange={this.props.changeShowStrokesOnMisstroke}
-                      />
-                      {/* @ts-ignore */}
-                      <Tooltip
-                        title="Show briefs for words when you misstroke them"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Show briefs on misstroke
-                      </Tooltip>
-                    </label>
-                  </div>
+                  <SettingCheckbox
+                    checked={this.props.userSettings.showStrokesOnMisstroke}
+                    disabled={this.props.disableUserSettings}
+                    label={"Show briefs on misstroke"}
+                    nameAndId={"showStrokesOnMisstroke"}
+                    onChange={this.props.changeShowStrokesOnMisstroke}
+                    onShow={this.props.setAnnouncementMessage}
+                    tooltipTitle={
+                      "Show briefs for words when you misstroke them"
+                    }
+                  />
                 </SettingListItem>
                 <SettingListItem sectionHierachy="minor">
                   <div className="p1">
@@ -428,34 +475,16 @@ class UserSettings extends Component {
                       </label>
                     </div>
                   </div>
-                  <div className="block relative pb1 px1">
-                    <label className="checkbox-label mb0">
-                      <input
-                        className="checkbox-input mr1"
-                        type="checkbox"
-                        name="showStrokesAsList"
-                        id="showStrokesAsList"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.showStrokesAsList}
-                        onChange={this.props.changeShowStrokesAsList}
-                      />
-                      {/* @ts-ignore */}
-                      <Tooltip
-                        title="Show a list of alternative briefs in a list"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Show other briefs in a list
-                      </Tooltip>
-                    </label>
-                  </div>
+                  <SettingCheckbox
+                    wrapperClasses="block relative pb1 px1"
+                    checked={this.props.userSettings.showStrokesAsList}
+                    disabled={this.props.disableUserSettings}
+                    label={"Show other briefs in a list"}
+                    nameAndId={"showStrokesAsList"}
+                    onChange={this.props.changeShowStrokesAsList}
+                    onShow={this.props.setAnnouncementMessage}
+                    tooltipTitle={"Show a list of alternative briefs in a list"}
+                  />
                 </SettingListItem>
                 <SettingListItem sectionHierachy="major">
                   <div className="block relative p1">
@@ -709,275 +738,81 @@ class UserSettings extends Component {
                   </div>
                 </SettingListItem>
                 <SettingListItem sectionHierachy="major">
-                  <div className="block relative p1">
-                    <label className="checkbox-label mb1">
-                      <input
-                        className="checkbox-input mr1"
-                        type="checkbox"
-                        name="blurMaterial"
-                        id="blurMaterial"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.blurMaterial}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      {/* @ts-ignore */}
-                      <Tooltip
-                        title="Blur words and use a screen reader or speak setting to practice transcription"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Blur words
-                      </Tooltip>
-                    </label>
-                  </div>
+                  <SettingCheckbox
+                    checked={this.props.userSettings.blurMaterial}
+                    disabled={this.props.disableUserSettings}
+                    label={"Blur words"}
+                    nameAndId={"blurMaterial"}
+                    onChange={this.props.changeUserSetting}
+                    onShow={this.props.setAnnouncementMessage}
+                    tooltipTitle={
+                      "Blur words and use a screen reader or speak setting to practice transcription"
+                    }
+                  />
                 </SettingListItem>
                 <SettingListItem sectionHierachy="minor">
-                  <div className="block relative p1">
-                    <label className="checkbox-label mb1">
-                      <input
-                        className="checkbox-input mr1"
-                        type="checkbox"
-                        name="speakMaterial"
-                        id="speakMaterial"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.speakMaterial}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      Speak words with sound
-                    </label>{" "}
-                    (
-                    <button
-                      className="de-emphasized-button text-small"
-                      onClick={this.handleOpenModal}
-                      aria-label="Help with speak words setting"
-                      disabled={this.props.disableUserSettings}
-                    >
-                      help
-                    </button>
-                    <ReactModal
-                      isOpen={this.state.showModal}
-                      aria={{
-                        labelledby: "aria-modal-heading",
-                        describedby: "aria-modal-description",
-                      }}
-                      ariaHideApp={true}
-                      closeTimeoutMS={300}
-                      role="dialog"
-                      onRequestClose={this.handleCloseModal}
-                      className={{
-                        "base": "modal",
-                        "afterOpen": "modal--after-open",
-                        "beforeClose": "modal--before-close",
-                      }}
-                      overlayClassName={{
-                        "base": "modal__overlay",
-                        "afterOpen": "modal__overlay--after-open",
-                        "beforeClose": "modal__overlay--before-close",
-                      }}
-                    >
-                      <div className="fr">
-                        <button
-                          className="de-emphasized-button hide-md"
-                          onClick={this.handleCloseModal}
-                        >
-                          Close
-                        </button>
-                      </div>
-                      <h3 id="aria-modal-heading">Speak words setting</h3>
-                      <div id="aria-modal-description">
-                        <p>
-                          Typey Type’s setting to “speak words” will speak words
-                          aloud when you have the sound turned on. It’s great
-                          with story lessons and real sentences where the
-                          context can help you distinguish homophones.
-                        </p>
-                        <p>
-                          This setting uses fancy browser technology called the
-                          “Web Speech API”.
-                        </p>
-                        <p
-                          className={
-                            this.state.hasSpeechSupport
-                              ? "quote mt1 mb3 bg-slat dark:bg-coolgrey-900"
-                              : "quote mt1 mb3 bg-danger dark:text-coolgrey-900"
-                          }
-                        >
-                          Web Speech is{" "}
-                          {this.state.hasSpeechSupport
-                            ? " available"
-                            : " unavailable"}{" "}
-                          on your system.
-                        </p>
-                        {this.state.hasSpeechSupport ? (
-                          <p>
-                            If you have working sound but hear no words, your
-                            system might be missing a language pack or “voice”.
-                          </p>
-                        ) : (
-                          <p>
-                            <span className="bg-warning">
-                              You may need to update your browser or check that
-                              your device has a speech engine and language pack.
-                            </span>
-                          </p>
-                        )}
-                        <p>
-                          For Windows, you can download a “language pack” from
-                          Microsoft.
-                        </p>
-                        <p>
-                          For Linux systems, you may need to install a speech
-                          engine with voices, such as{" "}
-                          <code>speech-dispatcher</code> and{" "}
-                          <code>espeak-ng</code>.
-                        </p>
-                        <p>
-                          Double-click the “Say word” button or type ⇧Enter
-                          (e.g. <code>{`"STP*R": "{#Shift_L(Return)}",`}</code>)
-                          from the text area to hear the word again and keep
-                          focus on the text area.
-                        </p>
-                      </div>
-                      <div className="text-right">
-                        <button
-                          className="button"
-                          onClick={this.handleCloseModal}
-                        >
-                          OK
-                        </button>
-                      </div>
-                    </ReactModal>
-                    )
-                  </div>
+                  <SettingCheckbox
+                    checked={this.props.userSettings.speakMaterial}
+                    disabled={this.props.disableUserSettings}
+                    label={"Speak words with sound"}
+                    nameAndId={"speakMaterial"}
+                    onChange={this.props.changeUserSetting}
+                    onShow={this.props.setAnnouncementMessage}
+                    tooltipTitle={"Speak words with sound"}
+                    modalAndButton={speakWordsHelpButton}
+                  />
                 </SettingListItem>
                 <SettingListItem sectionHierachy="major">
-                  <div className="block relative p1">
-                    <label className="checkbox-label mb1">
-                      <input
-                        className="checkbox-input mr1"
-                        type="checkbox"
-                        name="caseSensitive"
-                        id="caseSensitive"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.caseSensitive}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      {/* @ts-ignore */}
-                      <Tooltip
-                        title="Capital letters in material won’t match typed lowercase letters"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Case sensitive
-                      </Tooltip>
-                    </label>
-                  </div>
+                  <SettingCheckbox
+                    checked={this.props.userSettings.caseSensitive}
+                    disabled={this.props.disableUserSettings}
+                    label={"Case sensitive"}
+                    nameAndId={"caseSensitive"}
+                    onChange={this.props.changeUserSetting}
+                    onShow={this.props.setAnnouncementMessage}
+                    tooltipTitle={
+                      "Capital letters in material won’t match typed lowercase letters"
+                    }
+                  />
                 </SettingListItem>
                 <SettingListItem sectionHierachy="minor">
-                  <div className="block relative p1">
-                    <label className="checkbox-label mb1">
-                      <input
-                        className="checkbox-input mr1"
-                        type="checkbox"
-                        name="simpleTypography"
-                        id="simpleTypography"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.simpleTypography}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      {/* @ts-ignore */}
-                      <Tooltip
-                        title='Simple typography replaces “curly quotes” in lesson material with "straight quotes"'
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Simple typography
-                      </Tooltip>
-                    </label>
-                  </div>
+                  <SettingCheckbox
+                    checked={this.props.userSettings.simpleTypography}
+                    disabled={this.props.disableUserSettings}
+                    label={"Simple typography"}
+                    nameAndId={"simpleTypography"}
+                    onChange={this.props.changeUserSetting}
+                    onShow={this.props.setAnnouncementMessage}
+                    tooltipTitle={
+                      'Simple typography replaces “curly quotes” in lesson material with "straight quotes"'
+                    }
+                  />
                 </SettingListItem>
                 <SettingListItem sectionHierachy="minor">
-                  <div className="block relative p1">
-                    <label className="checkbox-label mb1">
-                      <input
-                        className="checkbox-input mr1"
-                        type="checkbox"
-                        name="punctuationDescriptions"
-                        id="punctuationDescriptions"
-                        disabled={this.props.disableUserSettings}
-                        checked={
-                          this.props.userSettings.punctuationDescriptions
-                        }
-                        onChange={this.props.changeUserSetting}
-                      />
-                      {/* @ts-ignore */}
-                      <Tooltip
-                        title="Show text descriptions for punctuation symbols"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Punctuation descriptions
-                      </Tooltip>
-                    </label>
-                  </div>
+                  <SettingCheckbox
+                    checked={this.props.userSettings.punctuationDescriptions}
+                    disabled={this.props.disableUserSettings}
+                    label={"Punctuation descriptions"}
+                    nameAndId={"punctuationDescriptions"}
+                    onChange={this.props.changeUserSetting}
+                    onShow={this.props.setAnnouncementMessage}
+                    tooltipTitle={
+                      "Show text descriptions for punctuation symbols"
+                    }
+                  />
                 </SettingListItem>
                 <SettingListItem sectionHierachy="minor">
-                  <div className="block relative p1">
-                    <label className="checkbox-label mb1">
-                      <input
-                        className="checkbox-input mr1"
-                        type="checkbox"
-                        name="textInputAccessibility"
-                        id="textInputAccessibility"
-                        disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.textInputAccessibility}
-                        onChange={this.props.changeUserSetting}
-                      />
-                      {/* @ts-ignore */}
-                      <Tooltip
-                        title="When unchecked, this hides the text input field from screen readers to mute echoes from typed words but might make it impossible to access for some devices"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Text input accessibility
-                      </Tooltip>
-                    </label>
-                  </div>
+                  <SettingCheckbox
+                    checked={this.props.userSettings.textInputAccessibility}
+                    disabled={this.props.disableUserSettings}
+                    label={"Text input accessibility"}
+                    nameAndId={"textInputAccessibility"}
+                    onChange={this.props.changeUserSetting}
+                    onShow={this.props.setAnnouncementMessage}
+                    tooltipTitle={
+                      "When unchecked, this hides the text input field from screen readers to mute echoes from typed words but might make it impossible to access for some devices"
+                    }
+                  />
                 </SettingListItem>
               </ul>
             </div>
