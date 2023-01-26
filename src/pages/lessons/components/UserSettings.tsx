@@ -12,24 +12,24 @@ const grabStyle = function () {
 };
 
 type Props = {
-  changeShowStrokesAs: () => void;
-  changeShowStrokesAsList: () => void;
-  changeShowStrokesOnMisstroke: () => void;
-  changeSortOrderUserSetting: () => void;
-  changeSpacePlacementUserSetting: () => void;
-  changeStenoLayout: () => void;
-  changeUserSetting: () => void;
+  changeShowStrokesAs: (event: any) => void;
+  changeShowStrokesAsList: (event: any) => void;
+  changeShowStrokesOnMisstroke: (event: any) => void;
+  changeSortOrderUserSetting: (event: any) => void;
+  changeSpacePlacementUserSetting: (event: any) => void;
+  changeStenoLayout: (event: any) => void;
+  changeUserSetting: (event: any) => void;
   disableUserSettings: boolean;
-  handleBeatsPerMinute: () => void;
-  handleDiagramSize: () => void;
-  handleLimitWordsChange: () => void;
-  handleRepetitionsChange: () => void;
-  handleStartFromWordChange: () => void;
-  handleUpcomingWordsLayout: () => void;
+  handleBeatsPerMinute: (event: any) => void;
+  handleDiagramSize: (event: any) => void;
+  handleLimitWordsChange: (event: any) => void;
+  handleRepetitionsChange: (event: any) => void;
+  handleStartFromWordChange: (event: any) => void;
+  handleUpcomingWordsLayout: (event: any) => void;
   hideOtherSettings: boolean;
   maxStartFromWord: number;
   revisionMode: boolean;
-  setAnnouncementMessage: () => void;
+  setAnnouncementMessage: any;
   totalWordCount: number;
   userSettings: UserSettingsObjectType;
 };
