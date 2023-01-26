@@ -22,25 +22,10 @@ class UserSettings extends Component {
 
   handleOpenModal(event) {
     event.preventDefault();
-    let hasSpeechSupport = this.checkWebSpeechSupport();
     this.setState({
-      hasSpeechSupport,
+      hasSpeechSupport: "speechSynthesis" in window,
       showModal: true,
     });
-  }
-
-  checkWebSpeechSupport() {
-    let hasSpeechSynthesis = false;
-    let hasSpeechSynthesisUtterance = false;
-
-    if (window.speechSynthesis) {
-      hasSpeechSynthesis = true;
-    }
-    if (window.SpeechSynthesisUtterance) {
-      hasSpeechSynthesisUtterance = true;
-    }
-
-    return hasSpeechSynthesis && hasSpeechSynthesisUtterance;
   }
 
   handleCloseModal(event) {
