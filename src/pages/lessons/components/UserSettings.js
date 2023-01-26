@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import ReactModal from 'react-modal';
-import { Tooltip } from 'react-tippy';
-import NumericInput from 'react-numeric-input';
-import SettingListItem from '../../../components/SettingListItem';
+import React, { Component } from "react";
+import ReactModal from "react-modal";
+import { Tooltip } from "react-tippy";
+import NumericInput from "react-numeric-input";
+import SettingListItem from "../../../components/SettingListItem";
 
 class UserSettings extends Component {
   constructor(props) {
@@ -11,25 +11,25 @@ class UserSettings extends Component {
       webSpeechSupportResults: {
         hasSpeechSynthesis: false,
         hasSpeechSynthesisUtterance: false,
-        numberOfSpeechSynthesisVoices: 0
+        numberOfSpeechSynthesisVoices: 0,
       },
-      showModal: false
-    }
+      showModal: false,
+    };
 
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   componentDidMount() {
-    ReactModal.setAppElement('#js-app');
+    ReactModal.setAppElement("#js-app");
   }
 
-  handleOpenModal (event) {
+  handleOpenModal(event) {
     event.preventDefault();
     let webSpeechSupportResults = this.checkWebSpeechSupport();
     this.setState({
       webSpeechSupportResults,
-      showModal: true
+      showModal: true,
     });
   }
 
@@ -52,31 +52,47 @@ class UserSettings extends Component {
     return webSpeechSupportResults;
   }
 
-  handleCloseModal (event) {
+  handleCloseModal(event) {
     event.preventDefault();
     this.setState({ showModal: false });
   }
 
   render() {
-    var grabStyle = function() {return false};
+    var grabStyle = function () {
+      return false;
+    };
 
-    let hideStrokesOnLastRepetitionTooltip = "Hide briefs during the last repetition";
+    let hideStrokesOnLastRepetitionTooltip =
+      "Hide briefs during the last repetition";
     if (!this.props.userSettings.showStrokes) {
-      hideStrokesOnLastRepetitionTooltip = "This does nothing while “Show briefs” is turned off";
+      hideStrokesOnLastRepetitionTooltip =
+        "This does nothing while “Show briefs” is turned off";
     }
 
-    let webSpeechAvailable = this.state.webSpeechSupportResults['hasSpeechSynthesis'] && this.state.webSpeechSupportResults['hasSpeechSynthesisUtterance'];
+    let webSpeechAvailable =
+      this.state.webSpeechSupportResults["hasSpeechSynthesis"] &&
+      this.state.webSpeechSupportResults["hasSpeechSynthesisUtterance"];
 
     return (
       <div className="user-settings">
         <form>
           <div className="text-small">
-            <div id="collapsible-settings" className={this.props.hideOtherSettings ? 'mh-page bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 min-width-320 hide' : 'mh-page bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 min-width-320'} aria-hidden={this.props.hideOtherSettings}>
+            <div
+              id="collapsible-settings"
+              className={
+                this.props.hideOtherSettings
+                  ? "mh-page bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 min-width-320 hide"
+                  : "mh-page bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 min-width-320"
+              }
+              aria-hidden={this.props.hideOtherSettings}
+            >
               <h3 className="mb1 visually-hidden">Settings</h3>
 
-              <p className="mb0 pt2 pb1 pb1 pl2"><small>Total words: {this.props.totalWordCount}</small></p>
+              <p className="mb0 pt2 pb1 pb1 pl2">
+                <small>Total words: {this.props.totalWordCount}</small>
+              </p>
               <ul className="unstyled-list mb0 pb1">
-                <SettingListItem sectionHierachy='major'>
+                <SettingListItem sectionHierachy="major">
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
                     <Tooltip
                       title="Limit the number of words shown (0 for unlimited)"
@@ -90,7 +106,9 @@ class UserSettings extends Component {
                       trigger="mouseenter focus click"
                       onShow={this.props.setAnnouncementMessage}
                     >
-                      <label className="mr1" htmlFor="limitNumberOfWords">Limit word count</label>
+                      <label className="mr1" htmlFor="limitNumberOfWords">
+                        Limit word count
+                      </label>
                     </Tooltip>
                     <div>
                       <NumericInput
@@ -115,9 +133,8 @@ class UserSettings extends Component {
                     </div>
                   </div>
                 </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
+                <SettingListItem sectionHierachy="minor">
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
-
                     <Tooltip
                       title="Start from this place in the lesson"
                       className="mw-240"
@@ -130,7 +147,9 @@ class UserSettings extends Component {
                       trigger="mouseenter focus click"
                       onShow={this.props.setAnnouncementMessage}
                     >
-                      <label className="mr1" htmlFor="startFromWord">Start from word</label>
+                      <label className="mr1" htmlFor="startFromWord">
+                        Start from word
+                      </label>
                     </Tooltip>
                     <div>
                       <NumericInput
@@ -139,7 +158,10 @@ class UserSettings extends Component {
                         autoCorrect="on"
                         autoFocus={false}
                         className="form-control w-100"
-                        disabled={this.props.disableUserSettings || this.props.revisionMode}
+                        disabled={
+                          this.props.disableUserSettings ||
+                          this.props.revisionMode
+                        }
                         id="startFromWord"
                         max={this.props.maxStartFromWord || 30000}
                         min={1}
@@ -156,9 +178,8 @@ class UserSettings extends Component {
                     </div>
                   </div>
                 </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
+                <SettingListItem sectionHierachy="minor">
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
-
                     <Tooltip
                       title="Repeat the lesson up to 30 times"
                       className="mw-240"
@@ -171,7 +192,9 @@ class UserSettings extends Component {
                       trigger="mouseenter focus click"
                       onShow={this.props.setAnnouncementMessage}
                     >
-                      <label className="mr1" htmlFor="repetitions">Repetitions</label>
+                      <label className="mr1" htmlFor="repetitions">
+                        Repetitions
+                      </label>
                     </Tooltip>
                     <div>
                       <NumericInput
@@ -195,13 +218,103 @@ class UserSettings extends Component {
                         snap
                       />
                     </div>
-
                   </div>
                 </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
-                    <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                <SettingListItem sectionHierachy="minor">
+                  <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    <Tooltip
+                      title="Sort the lesson (newest words need the most practice)"
+                      className="mw-240"
+                      animation="shift"
+                      arrow="true"
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital didoesdigital-sm"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
+                      <label className="mr1 db" htmlFor="sortOrder">
+                        Sort
+                      </label>
+                    </Tooltip>
+                    <select
+                      id="sortOrder"
+                      name="sortOrder"
+                      value={this.props.userSettings.sortOrder}
+                      onChange={this.props.changeSortOrderUserSetting}
+                      disabled={this.props.disableUserSettings}
+                      className="text-small form-control w-144"
+                    >
+                      <option value="sortOff">Lesson default</option>
+                      <option value="sortRandom">Random</option>
+                      <option value="sortNew">Newest words first</option>
+                      <option value="sortOld">Oldest words first</option>
+                      <option value="sortShortest">Shortest words first</option>
+                      <option value="sortLongest">Longest words first</option>
+                    </select>
+                  </div>
+                </SettingListItem>
+                <SettingListItem sectionHierachy="major">
+                  <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    <Tooltip
+                      title="Metronome beats per minute"
+                      className="mw-240"
+                      animation="shift"
+                      arrow="true"
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital didoesdigital-sm"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
+                      <label className="mr1" htmlFor="beatsPerMinute">
+                        Metronome BPM
+                      </label>
+                    </Tooltip>
+                    <div>
+                      <NumericInput
+                        autoCapitalize="off"
+                        autoComplete="on"
+                        autoCorrect="on"
+                        autoFocus={false}
+                        className="form-control w-100"
+                        disabled={this.props.disableUserSettings}
+                        id="beatsPerMinute"
+                        min={10}
+                        max={360}
+                        name="beatsPerMinute"
+                        onChange={this.props.handleBeatsPerMinute}
+                        precision={0}
+                        spellCheck="false"
+                        step={10}
+                        style={grabStyle()}
+                        type="number"
+                        value={this.props.userSettings.beatsPerMinute}
+                        snap
+                      />
+                    </div>
+                  </div>
+                </SettingListItem>
+                <SettingListItem sectionHierachy="major">
+                  <div className="block relative p1">
+                    <label className="checkbox-label mb1">
+                      <input
+                        className="checkbox-input mr1"
+                        type="checkbox"
+                        name="showStrokes"
+                        id="showStrokes"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.showStrokes}
+                        onChange={this.props.changeUserSetting}
+                      />
                       <Tooltip
-                        title="Sort the lesson (newest words need the most practice)"
+                        title={
+                          !this.props.userSettings.hideStrokesOnLastRepetition
+                            ? "Show stroke briefs for every word"
+                            : "Show briefs for each word except during the last repetition"
+                        }
                         className="mw-240"
                         animation="shift"
                         arrow="true"
@@ -212,22 +325,27 @@ class UserSettings extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        <label className="mr1 db" htmlFor="sortOrder">Sort</label>
+                        Show briefs for every word
                       </Tooltip>
-                      <select id="sortOrder" name="sortOrder" value={this.props.userSettings.sortOrder} onChange={this.props.changeSortOrderUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w-144">
-                        <option value="sortOff">Lesson default</option>
-                        <option value="sortRandom">Random</option>
-                        <option value="sortNew">Newest words first</option>
-                        <option value="sortOld">Oldest words first</option>
-                        <option value="sortShortest">Shortest words first</option>
-                        <option value="sortLongest">Longest words first</option>
-                      </select>
-                    </div>
+                    </label>
+                  </div>
                 </SettingListItem>
-                <SettingListItem sectionHierachy='major'>
-                    <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                <SettingListItem sectionHierachy="minor">
+                  <div className="block relative p1">
+                    <label className="checkbox-label mb1">
+                      <input
+                        className="checkbox-input mr1"
+                        type="checkbox"
+                        name="hideStrokesOnLastRepetition"
+                        id="hideStrokesOnLastRepetition"
+                        disabled={this.props.disableUserSettings}
+                        checked={
+                          this.props.userSettings.hideStrokesOnLastRepetition
+                        }
+                        onChange={this.props.changeUserSetting}
+                      />
                       <Tooltip
-                        title="Metronome beats per minute"
+                        title={hideStrokesOnLastRepetitionTooltip}
                         className="mw-240"
                         animation="shift"
                         arrow="true"
@@ -238,46 +356,57 @@ class UserSettings extends Component {
                         trigger="mouseenter focus click"
                         onShow={this.props.setAnnouncementMessage}
                       >
-                        <label className="mr1" htmlFor="beatsPerMinute">Metronome BPM</label>
+                        Hide briefs on last repetition
                       </Tooltip>
-                      <div>
-                        <NumericInput
-                          autoCapitalize="off"
-                          autoComplete="on"
-                          autoCorrect="on"
-                          autoFocus={false}
-                          className="form-control w-100"
-                          disabled={this.props.disableUserSettings}
-                          id="beatsPerMinute"
-                          min={10}
-                          max={360}
-                          name="beatsPerMinute"
-                          onChange={this.props.handleBeatsPerMinute}
-                          precision={0}
-                          spellCheck="false"
-                          step={10}
-                          style={grabStyle()}
-                          type="number"
-                          value={this.props.userSettings.beatsPerMinute}
-                          snap
-                        />
-                      </div>
-                    </div>
+                    </label>
+                  </div>
                 </SettingListItem>
-                <SettingListItem sectionHierachy='major'>
-                    <div className="block relative p1">
-                      <label className="checkbox-label mb1">
+                <SettingListItem sectionHierachy="minor">
+                  <div className="block relative p1">
+                    <label className="checkbox-label mb1">
+                      <input
+                        className="checkbox-input mr1"
+                        type="checkbox"
+                        name="showStrokesOnMisstroke"
+                        id="showStrokesOnMisstroke"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.showStrokesOnMisstroke}
+                        onChange={this.props.changeShowStrokesOnMisstroke}
+                      />
+                      <Tooltip
+                        title="Show briefs for words when you misstroke them"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Show briefs on misstroke
+                      </Tooltip>
+                    </label>
+                  </div>
+                </SettingListItem>
+                <SettingListItem sectionHierachy="minor">
+                  <div className="p1">
+                    <div className="block relative">
+                      <label className="radio-label mb0 pb1">
                         <input
-                          className="checkbox-input mr1"
-                          type="checkbox"
-                          name="showStrokes"
-                          id="showStrokes"
-                          disabled={this.props.disableUserSettings}
-                          checked={this.props.userSettings.showStrokes}
-                          onChange={this.props.changeUserSetting}
+                          className="radio-input mr1"
+                          type="radio"
+                          name="showStrokesAs"
+                          id="strokesAsDiagrams"
+                          value="showStrokesAsDiagrams"
+                          checked={
+                            this.props.userSettings.showStrokesAsDiagrams
+                          }
+                          onChange={this.props.changeShowStrokesAs}
                         />
                         <Tooltip
-                          title={!this.props.userSettings.hideStrokesOnLastRepetition ? "Show stroke briefs for every word" : "Show briefs for each word except during the last repetition" }
+                          title="Show briefs as diagrams for your steno layout"
                           className="mw-240"
                           animation="shift"
                           arrow="true"
@@ -288,25 +417,25 @@ class UserSettings extends Component {
                           trigger="mouseenter focus click"
                           onShow={this.props.setAnnouncementMessage}
                         >
-                          Show briefs for every word
+                          Show briefs as diagrams
                         </Tooltip>
                       </label>
                     </div>
-                </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
-                    <div className="block relative p1">
-                      <label className="checkbox-label mb1">
+                    <div className="block relative">
+                      <label className="radio-label mb0">
                         <input
-                          className="checkbox-input mr1"
-                          type="checkbox"
-                          name="hideStrokesOnLastRepetition"
-                          id="hideStrokesOnLastRepetition"
-                          disabled={this.props.disableUserSettings}
-                          checked={this.props.userSettings.hideStrokesOnLastRepetition}
-                          onChange={this.props.changeUserSetting}
+                          className="radio-input mr1"
+                          type="radio"
+                          name="showStrokesAs"
+                          id="strokesAsText"
+                          value="strokesAsText"
+                          checked={
+                            !this.props.userSettings.showStrokesAsDiagrams
+                          }
+                          onChange={this.props.changeShowStrokesAs}
                         />
                         <Tooltip
-                          title={hideStrokesOnLastRepetitionTooltip}
+                          title="Show briefs as text and read to screen readers"
                           className="mw-240"
                           animation="shift"
                           arrow="true"
@@ -317,129 +446,40 @@ class UserSettings extends Component {
                           trigger="mouseenter focus click"
                           onShow={this.props.setAnnouncementMessage}
                         >
-                          Hide briefs on last repetition
+                          Show briefs as text
                         </Tooltip>
                       </label>
                     </div>
-
+                  </div>
+                  <div className="block relative pb1 px1">
+                    <label className="checkbox-label mb0">
+                      <input
+                        className="checkbox-input mr1"
+                        type="checkbox"
+                        name="showStrokesAsList"
+                        id="showStrokesAsList"
+                        disabled={this.props.disableUserSettings}
+                        checked={this.props.userSettings.showStrokesAsList}
+                        onChange={this.props.changeShowStrokesAsList}
+                      />
+                      <Tooltip
+                        title="Show a list of alternative briefs in a list"
+                        className="mw-240"
+                        animation="shift"
+                        arrow="true"
+                        duration="200"
+                        tabIndex="0"
+                        tag="span"
+                        theme="didoesdigital didoesdigital-sm"
+                        trigger="mouseenter focus click"
+                        onShow={this.props.setAnnouncementMessage}
+                      >
+                        Show other briefs in a list
+                      </Tooltip>
+                    </label>
+                  </div>
                 </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
-                    <div className="block relative p1">
-                      <label className="checkbox-label mb1">
-                        <input
-                          className="checkbox-input mr1"
-                          type="checkbox"
-                          name="showStrokesOnMisstroke"
-                          id="showStrokesOnMisstroke"
-                          disabled={this.props.disableUserSettings}
-                          checked={this.props.userSettings.showStrokesOnMisstroke}
-                          onChange={this.props.changeShowStrokesOnMisstroke}
-                        />
-                        <Tooltip
-                          title="Show briefs for words when you misstroke them"
-                          className="mw-240"
-                          animation="shift"
-                          arrow="true"
-                          duration="200"
-                          tabIndex="0"
-                          tag="span"
-                          theme="didoesdigital didoesdigital-sm"
-                          trigger="mouseenter focus click"
-                          onShow={this.props.setAnnouncementMessage}
-                        >
-                          Show briefs on misstroke
-                        </Tooltip>
-                      </label>
-                    </div>
-
-                </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
-                    <div className="p1">
-                      <div className="block relative">
-                        <label className="radio-label mb0 pb1">
-                          <input
-                            className="radio-input mr1"
-                            type="radio"
-                            name="showStrokesAs"
-                            id="strokesAsDiagrams"
-                            value="showStrokesAsDiagrams"
-                            checked={this.props.userSettings.showStrokesAsDiagrams}
-                            onChange={this.props.changeShowStrokesAs}
-                          />
-                          <Tooltip
-                            title="Show briefs as diagrams for your steno layout"
-                            className="mw-240"
-                            animation="shift"
-                            arrow="true"
-                            duration="200"
-                            tabIndex="0"
-                            tag="span"
-                            theme="didoesdigital didoesdigital-sm"
-                            trigger="mouseenter focus click"
-                            onShow={this.props.setAnnouncementMessage}
-                          >
-                            Show briefs as diagrams
-                          </Tooltip>
-                        </label>
-                      </div>
-                      <div className="block relative">
-                        <label className="radio-label mb0">
-                          <input
-                            className="radio-input mr1"
-                            type="radio"
-                            name="showStrokesAs"
-                            id="strokesAsText"
-                            value="strokesAsText"
-                            checked={!this.props.userSettings.showStrokesAsDiagrams}
-                            onChange={this.props.changeShowStrokesAs}
-                          />
-                          <Tooltip
-                            title="Show briefs as text and read to screen readers"
-                            className="mw-240"
-                            animation="shift"
-                            arrow="true"
-                            duration="200"
-                            tabIndex="0"
-                            tag="span"
-                            theme="didoesdigital didoesdigital-sm"
-                            trigger="mouseenter focus click"
-                            onShow={this.props.setAnnouncementMessage}
-                          >
-                            Show briefs as text
-                          </Tooltip>
-                        </label>
-                      </div>
-                    </div>
-                    <div className="block relative pb1 px1">
-                      <label className="checkbox-label mb0">
-                        <input
-                          className="checkbox-input mr1"
-                          type="checkbox"
-                          name="showStrokesAsList"
-                          id="showStrokesAsList"
-                          disabled={this.props.disableUserSettings}
-                          checked={this.props.userSettings.showStrokesAsList}
-                          onChange={this.props.changeShowStrokesAsList}
-                        />
-                        <Tooltip
-                          title="Show a list of alternative briefs in a list"
-                          className="mw-240"
-                          animation="shift"
-                          arrow="true"
-                          duration="200"
-                          tabIndex="0"
-                          tag="span"
-                          theme="didoesdigital didoesdigital-sm"
-                          trigger="mouseenter focus click"
-                          onShow={this.props.setAnnouncementMessage}
-                        >
-                          Show other briefs in a list
-                        </Tooltip>
-                      </label>
-                    </div>
-                </SettingListItem>
-                <SettingListItem sectionHierachy='major'>
-
+                <SettingListItem sectionHierachy="major">
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -467,9 +507,8 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
-
                 </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
+                <SettingListItem sectionHierachy="minor">
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -497,9 +536,8 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
-
                 </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
+                <SettingListItem sectionHierachy="minor">
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -527,118 +565,166 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
-
                 </SettingListItem>
-                <SettingListItem sectionHierachy='major'>
-                    <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
-                      <Tooltip
-                        title="Set match spaces to suit your steno settings"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        <label className="mr1 db" htmlFor="spacePlacement">Match spaces</label>
-                      </Tooltip>
-                      <select id="spacePlacement" name="spacePlacement" value={this.props.userSettings.spacePlacement} onChange={this.props.changeSpacePlacementUserSetting} disabled={this.props.disableUserSettings} className="text-small form-control w-144">
-                        <option value="spaceBeforeOutput">Space before output</option>
-                        <option value="spaceAfterOutput">Space after output</option>
-                        <option value="spaceExact">Exact spacing</option>
-                        <option value="spaceOff">Ignore spaces</option>
-                      </select>
+                <SettingListItem sectionHierachy="major">
+                  <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    <Tooltip
+                      title="Set match spaces to suit your steno settings"
+                      className="mw-240"
+                      animation="shift"
+                      arrow="true"
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital didoesdigital-sm"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
+                      <label className="mr1 db" htmlFor="spacePlacement">
+                        Match spaces
+                      </label>
+                    </Tooltip>
+                    <select
+                      id="spacePlacement"
+                      name="spacePlacement"
+                      value={this.props.userSettings.spacePlacement}
+                      onChange={this.props.changeSpacePlacementUserSetting}
+                      disabled={this.props.disableUserSettings}
+                      className="text-small form-control w-144"
+                    >
+                      <option value="spaceBeforeOutput">
+                        Space before output
+                      </option>
+                      <option value="spaceAfterOutput">
+                        Space after output
+                      </option>
+                      <option value="spaceExact">Exact spacing</option>
+                      <option value="spaceOff">Ignore spaces</option>
+                    </select>
+                  </div>
+                </SettingListItem>
+                <SettingListItem sectionHierachy="minor">
+                  <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    <Tooltip
+                      title="Show steno diagrams that suit your steno layout"
+                      className="mw-240"
+                      animation="shift"
+                      arrow="true"
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital didoesdigital-sm"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
+                      <label className="mr1 db" htmlFor="stenoLayout">
+                        Steno layout
+                      </label>
+                    </Tooltip>
+                    <select
+                      id="stenoLayout"
+                      name="stenoLayout"
+                      value={this.props.userSettings.stenoLayout}
+                      onChange={this.props.changeStenoLayout}
+                      disabled={this.props.disableUserSettings}
+                      className="text-small form-control w-144"
+                    >
+                      <optgroup label="English">
+                        <option value="stenoLayoutAmericanSteno">
+                          Ward Stone Ireland (Plover, EcoSteno, SOFT/HRUF etc.)
+                        </option>
+                        <option value="stenoLayoutNoNumberBarInnerThumbNumbers">
+                          Inner thumbers (TinyMod, Steko, etc.)
+                        </option>
+                        <option value="stenoLayoutNoNumberBarOuterThumbNumbers">
+                          Outer thumbers (Uni, Georgi, etc.)
+                        </option>
+                      </optgroup>
+                      <optgroup label="Palantype">
+                        <option value="stenoLayoutPalantype">Palantype</option>
+                      </optgroup>
+                      <optgroup label="Multilingual">
+                        <option value="stenoLayoutBrazilianPortugueseSteno">
+                          Brazilian Portuguese steno
+                        </option>
+                        <option value="stenoLayoutDanishSteno">
+                          Danish steno
+                        </option>
+                        <option value="stenoLayoutItalianMichelaSteno">
+                          Italian Michela steno
+                        </option>
+                        <option value="stenoLayoutJapaneseSteno">
+                          Japanese steno
+                        </option>
+                        <option value="stenoLayoutKoreanModernCSteno">
+                          Korean Modern C steno
+                        </option>
+                      </optgroup>
+                    </select>
+                  </div>
+                </SettingListItem>
+                <SettingListItem sectionHierachy="minor">
+                  <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    <label className="mr1" htmlFor="diagramSize">
+                      Diagram size
+                    </label>
+                    <div>
+                      <NumericInput
+                        autoCapitalize="off"
+                        autoComplete="on"
+                        autoCorrect="on"
+                        autoFocus={false}
+                        className="form-control w-100"
+                        disabled={this.props.disableUserSettings}
+                        id="diagramSize"
+                        min={1.0}
+                        max={2.0}
+                        name="diagramSize"
+                        onChange={this.props.handleDiagramSize}
+                        precision={1}
+                        spellCheck="false"
+                        step={0.1}
+                        style={grabStyle()}
+                        type="number"
+                        value={this.props.userSettings.diagramSize}
+                        snap
+                      />
                     </div>
+                  </div>
                 </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
-                    <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
-                      <Tooltip
-                        title="Show steno diagrams that suit your steno layout"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        <label className="mr1 db" htmlFor="stenoLayout">Steno layout</label>
-                      </Tooltip>
-                      <select id="stenoLayout" name="stenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} disabled={this.props.disableUserSettings} className="text-small form-control w-144">
-                        <optgroup label="English">
-                          <option value="stenoLayoutAmericanSteno">Ward Stone Ireland (Plover, EcoSteno, SOFT/HRUF etc.)</option>
-                          <option value="stenoLayoutNoNumberBarInnerThumbNumbers">Inner thumbers (TinyMod, Steko, etc.)</option>
-                          <option value="stenoLayoutNoNumberBarOuterThumbNumbers">Outer thumbers (Uni, Georgi, etc.)</option>
-                        </optgroup>
-                        <optgroup label="Palantype">
-                          <option value="stenoLayoutPalantype">Palantype</option>
-                        </optgroup>
-                        <optgroup label="Multilingual">
-                          <option value="stenoLayoutBrazilianPortugueseSteno">Brazilian Portuguese steno</option>
-                          <option value="stenoLayoutDanishSteno">Danish steno</option>
-                          <option value="stenoLayoutItalianMichelaSteno">Italian Michela steno</option>
-                          <option value="stenoLayoutJapaneseSteno">Japanese steno</option>
-                          <option value="stenoLayoutKoreanModernCSteno">Korean Modern C steno</option>
-                        </optgroup>
-                      </select>
-                    </div>
+                <SettingListItem sectionHierachy="minor">
+                  <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    <Tooltip
+                      title="Show lesson material words as a single, sliding line or multiple, wrapping lines"
+                      className="mw-240"
+                      animation="shift"
+                      arrow="true"
+                      duration="200"
+                      tabIndex="0"
+                      tag="span"
+                      theme="didoesdigital didoesdigital-sm"
+                      trigger="mouseenter focus click"
+                      onShow={this.props.setAnnouncementMessage}
+                    >
+                      <label className="mr1 db" htmlFor="upcomingWordsLayout">
+                        Upcoming words
+                      </label>
+                    </Tooltip>
+                    <select
+                      id="upcomingWordsLayout"
+                      name="upcomingWordsLayout"
+                      value={this.props.userSettings.upcomingWordsLayout}
+                      onChange={this.props.handleUpcomingWordsLayout}
+                      disabled={this.props.disableUserSettings}
+                      className="text-small form-control w-144"
+                    >
+                      <option value="singleLine">Single line</option>
+                      <option value="multiline">Multiline</option>
+                      <option value="hidden">Hidden</option>
+                    </select>
+                  </div>
                 </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
-                    <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
-                      <label className="mr1" htmlFor="diagramSize">Diagram size</label>
-                      <div>
-                        <NumericInput
-                          autoCapitalize="off"
-                          autoComplete="on"
-                          autoCorrect="on"
-                          autoFocus={false}
-                          className="form-control w-100"
-                          disabled={this.props.disableUserSettings}
-                          id="diagramSize"
-                          min={1.0}
-                          max={2.0}
-                          name="diagramSize"
-                          onChange={this.props.handleDiagramSize}
-                          precision={1}
-                          spellCheck="false"
-                          step={0.1}
-                          style={grabStyle()}
-                          type="number"
-                          value={this.props.userSettings.diagramSize}
-                          snap
-                        />
-                      </div>
-                    </div>
-                </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
-                    <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
-                      <Tooltip
-                        title="Show lesson material words as a single, sliding line or multiple, wrapping lines"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        <label className="mr1 db" htmlFor="upcomingWordsLayout">Upcoming words</label>
-                      </Tooltip>
-                      <select id="upcomingWordsLayout" name="upcomingWordsLayout" value={this.props.userSettings.upcomingWordsLayout} onChange={this.props.handleUpcomingWordsLayout} disabled={this.props.disableUserSettings} className="text-small form-control w-144">
-                        <option value="singleLine">Single line</option>
-                        <option value="multiline">Multiline</option>
-                        <option value="hidden">Hidden</option>
-                      </select>
-                    </div>
-                </SettingListItem>
-                <SettingListItem sectionHierachy='major'>
+                <SettingListItem sectionHierachy="major">
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -666,9 +752,8 @@ class UserSettings extends Component {
                       </Tooltip>
                     </label>
                   </div>
-
                 </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
+                <SettingListItem sectionHierachy="minor">
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -681,13 +766,21 @@ class UserSettings extends Component {
                         onChange={this.props.changeUserSetting}
                       />
                       Speak words with sound
-                    </label>
-                    {" "}(<button className="de-emphasized-button text-small" onClick={this.handleOpenModal} aria-label="Help with speak words setting" disabled={this.props.disableUserSettings}>help</button>
+                    </label>{" "}
+                    (
+                    <button
+                      className="de-emphasized-button text-small"
+                      onClick={this.handleOpenModal}
+                      aria-label="Help with speak words setting"
+                      disabled={this.props.disableUserSettings}
+                    >
+                      help
+                    </button>
                     <ReactModal
                       isOpen={this.state.showModal}
                       aria={{
                         labelledby: "aria-modal-heading",
-                        describedby: "aria-modal-description"
+                        describedby: "aria-modal-description",
                       }}
                       ariaHideApp={true}
                       closeTimeoutMS={300}
@@ -696,39 +789,88 @@ class UserSettings extends Component {
                       className={{
                         "base": "modal",
                         "afterOpen": "modal--after-open",
-                        "beforeClose": "modal--before-close"
+                        "beforeClose": "modal--before-close",
                       }}
                       overlayClassName={{
                         "base": "modal__overlay",
                         "afterOpen": "modal__overlay--after-open",
-                        "beforeClose": "modal__overlay--before-close"
+                        "beforeClose": "modal__overlay--before-close",
                       }}
                     >
                       <div className="fr">
-                        <button className="de-emphasized-button hide-md" onClick={this.handleCloseModal}>Close</button>
+                        <button
+                          className="de-emphasized-button hide-md"
+                          onClick={this.handleCloseModal}
+                        >
+                          Close
+                        </button>
                       </div>
                       <h3 id="aria-modal-heading">Speak words setting</h3>
                       <div id="aria-modal-description">
-                        <p>Typey Type’s setting to “speak words” will speak words aloud when you have the sound turned on. It’s great with story lessons and real sentences where the context can help you distinguish homophones.</p>
-                        <p>This setting uses fancy browser technology called the “Web Speech API”.</p>
-                        <p className={webSpeechAvailable ? "quote mt1 mb3 bg-slat dark:bg-coolgrey-900" : "quote mt1 mb3 bg-danger dark:text-coolgrey-900"}>Web Speech is {webSpeechAvailable ? " available" : " unavailable"} on your system.</p>
-                        { webSpeechAvailable ?
-                            <p>If you have working sound but hear no words, your system might be missing a language pack or “voice”.</p>
-                            :
-                            <p><span className="bg-warning">You may need to update your browser or check that your device has a speech engine and language pack.</span></p>
-                        }
-                        <p>For Windows, you can download a “language pack” from Microsoft.</p>
-                        <p>For Linux systems, you may need to install a speech engine with voices, such as <code>speech-dispatcher</code> and <code>espeak-ng</code>.</p>
-                        <p>Double-click the “Say word” button or type ⇧Enter (e.g. <code>{`"STP*R": "{#Shift_L(Return)}",`}</code>) from the text area to hear the word again and keep focus on the text area.</p>
+                        <p>
+                          Typey Type’s setting to “speak words” will speak words
+                          aloud when you have the sound turned on. It’s great
+                          with story lessons and real sentences where the
+                          context can help you distinguish homophones.
+                        </p>
+                        <p>
+                          This setting uses fancy browser technology called the
+                          “Web Speech API”.
+                        </p>
+                        <p
+                          className={
+                            webSpeechAvailable
+                              ? "quote mt1 mb3 bg-slat dark:bg-coolgrey-900"
+                              : "quote mt1 mb3 bg-danger dark:text-coolgrey-900"
+                          }
+                        >
+                          Web Speech is{" "}
+                          {webSpeechAvailable ? " available" : " unavailable"}{" "}
+                          on your system.
+                        </p>
+                        {webSpeechAvailable ? (
+                          <p>
+                            If you have working sound but hear no words, your
+                            system might be missing a language pack or “voice”.
+                          </p>
+                        ) : (
+                          <p>
+                            <span className="bg-warning">
+                              You may need to update your browser or check that
+                              your device has a speech engine and language pack.
+                            </span>
+                          </p>
+                        )}
+                        <p>
+                          For Windows, you can download a “language pack” from
+                          Microsoft.
+                        </p>
+                        <p>
+                          For Linux systems, you may need to install a speech
+                          engine with voices, such as{" "}
+                          <code>speech-dispatcher</code> and{" "}
+                          <code>espeak-ng</code>.
+                        </p>
+                        <p>
+                          Double-click the “Say word” button or type ⇧Enter
+                          (e.g. <code>{`"STP*R": "{#Shift_L(Return)}",`}</code>)
+                          from the text area to hear the word again and keep
+                          focus on the text area.
+                        </p>
                       </div>
                       <div className="text-right">
-                        <button className="button" onClick={this.handleCloseModal}>OK</button>
+                        <button
+                          className="button"
+                          onClick={this.handleCloseModal}
+                        >
+                          OK
+                        </button>
                       </div>
-                    </ReactModal>)
+                    </ReactModal>
+                    )
                   </div>
-
                 </SettingListItem>
-                <SettingListItem sectionHierachy='major'>
+                <SettingListItem sectionHierachy="major">
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -757,7 +899,7 @@ class UserSettings extends Component {
                     </label>
                   </div>
                 </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
+                <SettingListItem sectionHierachy="minor">
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -786,7 +928,7 @@ class UserSettings extends Component {
                     </label>
                   </div>
                 </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
+                <SettingListItem sectionHierachy="minor">
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -795,11 +937,13 @@ class UserSettings extends Component {
                         name="punctuationDescriptions"
                         id="punctuationDescriptions"
                         disabled={this.props.disableUserSettings}
-                        checked={this.props.userSettings.punctuationDescriptions}
+                        checked={
+                          this.props.userSettings.punctuationDescriptions
+                        }
                         onChange={this.props.changeUserSetting}
                       />
                       <Tooltip
-                        title='Show text descriptions for punctuation symbols'
+                        title="Show text descriptions for punctuation symbols"
                         className="mw-240"
                         animation="shift"
                         arrow="true"
@@ -815,7 +959,7 @@ class UserSettings extends Component {
                     </label>
                   </div>
                 </SettingListItem>
-                <SettingListItem sectionHierachy='minor'>
+                <SettingListItem sectionHierachy="minor">
                   <div className="block relative p1">
                     <label className="checkbox-label mb1">
                       <input
@@ -844,12 +988,12 @@ class UserSettings extends Component {
                     </label>
                   </div>
                 </SettingListItem>
-                </ul>
-              </div>
+              </ul>
             </div>
-          </form>
+          </div>
+        </form>
       </div>
-    )
+    );
   }
 }
 
