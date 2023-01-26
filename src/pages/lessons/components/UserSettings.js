@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import { Tooltip } from 'react-tippy';
 import NumericInput from 'react-numeric-input';
-import SettingListItem from './SettingListItem';
+import SettingListItem from '../../../components/SettingListItem';
 
 class UserSettings extends Component {
   constructor(props) {
