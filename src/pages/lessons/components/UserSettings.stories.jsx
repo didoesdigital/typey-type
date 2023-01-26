@@ -8,6 +8,30 @@ export default {
   component: UserSettings,
 };
 
+const defaultArgs = {
+  changeSortOrderUserSetting: () => undefined,
+  changeSpacePlacementUserSetting: () => undefined,
+  changeStenoLayout: () => undefined,
+  changeShowStrokesAs: () => undefined,
+  changeShowStrokesAsList: () => undefined,
+  changeShowStrokesOnMisstroke: () => undefined,
+  changeUserSetting: () => undefined,
+  chooseStudy: () => undefined,
+  disableUserSettings: false,
+  handleDiagramSize: () => undefined,
+  handleBeatsPerMinute: () => undefined,
+  handleLimitWordsChange: () => undefined,
+  handleStartFromWordChange: () => undefined,
+  handleRepetitionsChange: () => undefined,
+  handleUpcomingWordsLayout: () => undefined,
+  hideOtherSettings: false,
+  maxStartFromWord: 100,
+  revisionMode: false,
+  setAnnouncementMessage: () => undefined,
+  totalWordCount: 50,
+  userSettings: userSettingsFixture,
+};
+
 const Template = (args) => {
   return (
     <div
@@ -15,32 +39,16 @@ const Template = (args) => {
       className="flex-wrap-md flex mx-auto mw-1920"
       style={{ justifyContent: "flex-end" }}
     >
-      <UserSettings
-        changeSortOrderUserSetting={() => undefined}
-        changeSpacePlacementUserSetting={() => undefined}
-        changeStenoLayout={() => undefined}
-        changeShowStrokesAs={() => undefined}
-        changeShowStrokesAsList={() => undefined}
-        changeShowStrokesOnMisstroke={() => undefined}
-        changeUserSetting={() => undefined}
-        chooseStudy={() => undefined}
-        disableUserSettings={false}
-        handleDiagramSize={() => undefined}
-        handleBeatsPerMinute={() => undefined}
-        handleLimitWordsChange={() => undefined}
-        handleStartFromWordChange={() => undefined}
-        handleRepetitionsChange={() => undefined}
-        handleUpcomingWordsLayout={() => undefined}
-        hideOtherSettings={false}
-        maxStartFromWord={100}
-        revisionMode={false}
-        setAnnouncementMessage={() => undefined}
-        totalWordCount={50}
-        userSettings={userSettingsFixture}
-        {...args}
-      />
+      <UserSettings {...args} />
     </div>
   );
 };
 
 export const UserSettingsStory = Template.bind({});
+UserSettingsStory.args = { ...defaultArgs };
+
+export const UserSettingsDisabled = Template.bind({});
+UserSettingsDisabled.args = {
+  ...defaultArgs,
+  disableUserSettings: true,
+};
