@@ -38,13 +38,6 @@ class UserSettings extends Component {
   }
 
   render() {
-    let hideStrokesOnLastRepetitionTooltip =
-      "Hide briefs during the last repetition";
-    if (!this.props.userSettings.showStrokes) {
-      hideStrokesOnLastRepetitionTooltip =
-        "This does nothing while “Show briefs” is turned off";
-    }
-
     return (
       <div className="user-settings">
         <form>
@@ -324,7 +317,11 @@ class UserSettings extends Component {
                       />
                       {/* @ts-ignore */}
                       <Tooltip
-                        title={hideStrokesOnLastRepetitionTooltip}
+                        title={
+                          this.props.userSettings.showStrokes
+                            ? "Hide briefs during the last repetition"
+                            : "This does nothing while “Show briefs” is turned off"
+                        }
                         className="mw-240"
                         animation="shift"
                         arrow="true"
