@@ -66,6 +66,7 @@ class UserSettings extends Component {
               <ul className="unstyled-list mb0 pb1">
                 <SettingListItem sectionHierachy="major">
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="Limit the number of words shown (0 for unlimited)"
                       className="mw-240"
@@ -107,6 +108,7 @@ class UserSettings extends Component {
                 </SettingListItem>
                 <SettingListItem sectionHierachy="minor">
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="Start from this place in the lesson"
                       className="mw-240"
@@ -152,6 +154,7 @@ class UserSettings extends Component {
                 </SettingListItem>
                 <SettingListItem sectionHierachy="minor">
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="Repeat the lesson up to 30 times"
                       className="mw-240"
@@ -194,6 +197,7 @@ class UserSettings extends Component {
                 </SettingListItem>
                 <SettingListItem sectionHierachy="minor">
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="Sort the lesson (newest words need the most practice)"
                       className="mw-240"
@@ -229,6 +233,7 @@ class UserSettings extends Component {
                 </SettingListItem>
                 <SettingListItem sectionHierachy="major">
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="Metronome beats per minute"
                       className="mw-240"
@@ -281,6 +286,7 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.showStrokes}
                         onChange={this.props.changeUserSetting}
                       />
+                      {/* @ts-ignore */}
                       <Tooltip
                         title={
                           !this.props.userSettings.hideStrokesOnLastRepetition
@@ -316,6 +322,7 @@ class UserSettings extends Component {
                         }
                         onChange={this.props.changeUserSetting}
                       />
+                      {/* @ts-ignore */}
                       <Tooltip
                         title={hideStrokesOnLastRepetitionTooltip}
                         className="mw-240"
@@ -345,6 +352,7 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.showStrokesOnMisstroke}
                         onChange={this.props.changeShowStrokesOnMisstroke}
                       />
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="Show briefs for words when you misstroke them"
                         className="mw-240"
@@ -377,6 +385,7 @@ class UserSettings extends Component {
                           }
                           onChange={this.props.changeShowStrokesAs}
                         />
+                        {/* @ts-ignore */}
                         <Tooltip
                           title="Show briefs as diagrams for your steno layout"
                           className="mw-240"
@@ -406,6 +415,7 @@ class UserSettings extends Component {
                           }
                           onChange={this.props.changeShowStrokesAs}
                         />
+                        {/* @ts-ignore */}
                         <Tooltip
                           title="Show briefs as text and read to screen readers"
                           className="mw-240"
@@ -434,6 +444,7 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.showStrokesAsList}
                         onChange={this.props.changeShowStrokesAsList}
                       />
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="Show a list of alternative briefs in a list"
                         className="mw-240"
@@ -463,6 +474,7 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.newWords}
                         onChange={this.props.changeUserSetting}
                       />
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="Show new words you haven’t yet typed correctly"
                         className="mw-240"
@@ -492,6 +504,7 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.seenWords}
                         onChange={this.props.changeUserSetting}
                       />
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="Show words you have seen before"
                         className="mw-240"
@@ -521,6 +534,7 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.retainedWords}
                         onChange={this.props.changeUserSetting}
                       />
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="Show memorised words you’ve typed 30 times or more"
                         className="mw-240"
@@ -540,6 +554,7 @@ class UserSettings extends Component {
                 </SettingListItem>
                 <SettingListItem sectionHierachy="major">
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="Set match spaces to suit your steno settings"
                       className="mw-240"
@@ -577,6 +592,7 @@ class UserSettings extends Component {
                 </SettingListItem>
                 <SettingListItem sectionHierachy="minor">
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="Show steno diagrams that suit your steno layout"
                       className="mw-240"
@@ -666,6 +682,7 @@ class UserSettings extends Component {
                 </SettingListItem>
                 <SettingListItem sectionHierachy="minor">
                   <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="Show lesson material words as a single, sliding line or multiple, wrapping lines"
                       className="mw-240"
@@ -708,6 +725,7 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.blurMaterial}
                         onChange={this.props.changeUserSetting}
                       />
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="Blur words and use a screen reader or speak setting to practice transcription"
                         className="mw-240"
@@ -856,6 +874,7 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.caseSensitive}
                         onChange={this.props.changeUserSetting}
                       />
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="Capital letters in material won’t match typed lowercase letters"
                         className="mw-240"
@@ -885,6 +904,7 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.simpleTypography}
                         onChange={this.props.changeUserSetting}
                       />
+                      {/* @ts-ignore */}
                       <Tooltip
                         title='Simple typography replaces “curly quotes” in lesson material with "straight quotes"'
                         className="mw-240"
@@ -916,6 +936,7 @@ class UserSettings extends Component {
                         }
                         onChange={this.props.changeUserSetting}
                       />
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="Show text descriptions for punctuation symbols"
                         className="mw-240"
@@ -945,6 +966,7 @@ class UserSettings extends Component {
                         checked={this.props.userSettings.textInputAccessibility}
                         onChange={this.props.changeUserSetting}
                       />
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="When unchecked, this hides the text input field from screen readers to mute echoes from typed words but might make it impossible to access for some devices"
                         className="mw-240"
