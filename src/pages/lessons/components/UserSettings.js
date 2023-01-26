@@ -4,6 +4,10 @@ import { Tooltip } from "react-tippy";
 import NumericInput from "react-numeric-input";
 import SettingListItem from "../../../components/SettingListItem";
 
+const grabStyle = function () {
+  return false;
+};
+
 class UserSettings extends Component {
   constructor(props) {
     super(props);
@@ -34,10 +38,6 @@ class UserSettings extends Component {
   }
 
   render() {
-    var grabStyle = function () {
-      return false;
-    };
-
     let hideStrokesOnLastRepetitionTooltip =
       "Hide briefs during the last repetition";
     if (!this.props.userSettings.showStrokes) {
