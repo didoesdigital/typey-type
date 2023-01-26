@@ -1,0 +1,13 @@
+[
+  ["huh", [["H*U", "typey:typey-type.json"]]],
+  ["gonna", [["TKPW*G", "typey:typey-type.json"]]],
+  [
+    "{!}",
+    [
+      ["KPHR", "user:punctuation-di.json"],
+      ["SKHRAPL", "typey:typey-type.json"],
+      ["TP-BG", "plover:plover-main-3-jun-2018.json"],
+      ["STKPWHR-FPLT", "plover:plover-main-3-jun-2018.json"]
+    ]
+  ]
+]
