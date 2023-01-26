@@ -11,7 +11,6 @@ class UserSettings extends Component {
       webSpeechSupportResults: {
         hasSpeechSynthesis: false,
         hasSpeechSynthesisUtterance: false,
-        numberOfSpeechSynthesisVoices: 0,
       },
       showModal: false,
     };
