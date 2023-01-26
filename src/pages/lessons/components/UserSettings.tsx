@@ -5,31 +5,33 @@ import NumericInput from "react-numeric-input";
 import SettingCheckbox from "../../../components/SettingCheckbox";
 import SettingListItem from "../../../components/SettingListItem";
 
+import type { UserSettings as UserSettingsObjectType } from "../../../types";
+
 const grabStyle = function () {
   return false;
 };
 
 type Props = {
-  changeShowStrokesAs: any;
-  changeShowStrokesAsList: any;
-  changeShowStrokesOnMisstroke: any;
-  changeSortOrderUserSetting: any;
-  changeSpacePlacementUserSetting: any;
-  changeStenoLayout: any;
-  changeUserSetting: any;
-  disableUserSettings: any;
-  handleBeatsPerMinute: any;
-  handleDiagramSize: any;
-  handleLimitWordsChange: any;
-  handleRepetitionsChange: any;
-  handleStartFromWordChange: any;
-  handleUpcomingWordsLayout: any;
-  hideOtherSettings: any;
-  maxStartFromWord: any;
-  revisionMode: any;
-  setAnnouncementMessage: any;
-  totalWordCount: any;
-  userSettings: any;
+  changeShowStrokesAs: () => void;
+  changeShowStrokesAsList: () => void;
+  changeShowStrokesOnMisstroke: () => void;
+  changeSortOrderUserSetting: () => void;
+  changeSpacePlacementUserSetting: () => void;
+  changeStenoLayout: () => void;
+  changeUserSetting: () => void;
+  disableUserSettings: boolean;
+  handleBeatsPerMinute: () => void;
+  handleDiagramSize: () => void;
+  handleLimitWordsChange: () => void;
+  handleRepetitionsChange: () => void;
+  handleStartFromWordChange: () => void;
+  handleUpcomingWordsLayout: () => void;
+  hideOtherSettings: boolean;
+  maxStartFromWord: number;
+  revisionMode: boolean;
+  setAnnouncementMessage: () => void;
+  totalWordCount: number;
+  userSettings: UserSettingsObjectType;
 };
 
 const UserSettings = ({
