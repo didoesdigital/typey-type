@@ -9,29 +9,29 @@ const grabStyle = function () {
   return false;
 };
 
-/**
- * @param {object} props
- * @param {any} props.changeShowStrokesAs,
- * @param {any} props.changeShowStrokesAsList,
- * @param {any} props.changeShowStrokesOnMisstroke,
- * @param {any} props.changeSortOrderUserSetting,
- * @param {any} props.changeSpacePlacementUserSetting,
- * @param {any} props.changeStenoLayout,
- * @param {any} props.changeUserSetting,
- * @param {any} props.disableUserSettings,
- * @param {any} props.handleBeatsPerMinute,
- * @param {any} props.handleDiagramSize,
- * @param {any} props.handleLimitWordsChange,
- * @param {any} props.handleRepetitionsChange,
- * @param {any} props.handleStartFromWordChange,
- * @param {any} props.handleUpcomingWordsLayout,
- * @param {any} props.hideOtherSettings,
- * @param {any} props.maxStartFromWord,
- * @param {any} props.revisionMode,
- * @param {any} props.setAnnouncementMessage,
- * @param {any} props.totalWordCount,
- * @param {any} props.userSettings,
- */
+type Props = {
+  changeShowStrokesAs: any;
+  changeShowStrokesAsList: any;
+  changeShowStrokesOnMisstroke: any;
+  changeSortOrderUserSetting: any;
+  changeSpacePlacementUserSetting: any;
+  changeStenoLayout: any;
+  changeUserSetting: any;
+  disableUserSettings: any;
+  handleBeatsPerMinute: any;
+  handleDiagramSize: any;
+  handleLimitWordsChange: any;
+  handleRepetitionsChange: any;
+  handleStartFromWordChange: any;
+  handleUpcomingWordsLayout: any;
+  hideOtherSettings: any;
+  maxStartFromWord: any;
+  revisionMode: any;
+  setAnnouncementMessage: any;
+  totalWordCount: any;
+  userSettings: any;
+};
+
 const UserSettings = ({
   changeShowStrokesAs,
   changeShowStrokesAsList,
@@ -53,7 +53,7 @@ const UserSettings = ({
   setAnnouncementMessage,
   totalWordCount,
   userSettings,
-}) => {
+}: Props) => {
   const [hasSpeechSupport, setHasSpeechSupport] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
@@ -64,15 +64,13 @@ const UserSettings = ({
     ReactModal.setAppElement("#js-app");
   }, []);
 
-  // @ts-ignore
-  function handleOpenModal(event) {
+  function handleOpenModal(event: any) {
     event.preventDefault();
     setHasSpeechSupport("speechSynthesis" in window);
     setShowModal(true);
   }
 
-  // @ts-ignore
-  function handleCloseModal(event) {
+  function handleCloseModal(event: any) {
     event.preventDefault();
     setShowModal(false);
   }
