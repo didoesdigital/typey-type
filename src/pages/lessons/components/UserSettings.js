@@ -90,9 +90,9 @@ class UserSettings extends Component {
                         autoFocus={false}
                         className="form-control w-100"
                         disabled={this.props.disableUserSettings}
-                        id="limitNumberOfWords"
                         min={0}
                         name="limitNumberOfWords"
+                        id="limitNumberOfWords"
                         onChange={this.props.handleLimitWordsChange}
                         precision={0}
                         spellCheck="false"
@@ -134,10 +134,10 @@ class UserSettings extends Component {
                           this.props.disableUserSettings ||
                           this.props.revisionMode
                         }
-                        id="startFromWord"
                         max={this.props.maxStartFromWord || 30000}
                         min={1}
                         name="startFromWord"
+                        id="startFromWord"
                         onChange={this.props.handleStartFromWordChange}
                         precision={0}
                         spellCheck="false"
@@ -176,10 +176,10 @@ class UserSettings extends Component {
                         autoFocus={false}
                         className="form-control w-100"
                         disabled={this.props.disableUserSettings}
-                        id="repetitions"
                         max={30}
                         min={1}
                         name="repetitions"
+                        id="repetitions"
                         onChange={this.props.handleRepetitionsChange}
                         precision={0}
                         spellCheck="false"
@@ -211,8 +211,8 @@ class UserSettings extends Component {
                       </label>
                     </Tooltip>
                     <select
-                      id="sortOrder"
                       name="sortOrder"
+                      id="sortOrder"
                       value={this.props.userSettings.sortOrder}
                       onChange={this.props.changeSortOrderUserSetting}
                       disabled={this.props.disableUserSettings}
@@ -253,10 +253,10 @@ class UserSettings extends Component {
                         autoFocus={false}
                         className="form-control w-100"
                         disabled={this.props.disableUserSettings}
-                        id="beatsPerMinute"
                         min={10}
                         max={360}
                         name="beatsPerMinute"
+                        id="beatsPerMinute"
                         onChange={this.props.handleBeatsPerMinute}
                         precision={0}
                         spellCheck="false"
@@ -557,8 +557,8 @@ class UserSettings extends Component {
                       </label>
                     </Tooltip>
                     <select
-                      id="spacePlacement"
                       name="spacePlacement"
+                      id="spacePlacement"
                       value={this.props.userSettings.spacePlacement}
                       onChange={this.props.changeSpacePlacementUserSetting}
                       disabled={this.props.disableUserSettings}
@@ -594,8 +594,8 @@ class UserSettings extends Component {
                       </label>
                     </Tooltip>
                     <select
-                      id="stenoLayout"
                       name="stenoLayout"
+                      id="stenoLayout"
                       value={this.props.userSettings.stenoLayout}
                       onChange={this.props.changeStenoLayout}
                       disabled={this.props.disableUserSettings}
@@ -648,10 +648,10 @@ class UserSettings extends Component {
                         autoFocus={false}
                         className="form-control w-100"
                         disabled={this.props.disableUserSettings}
-                        id="diagramSize"
                         min={1.0}
                         max={2.0}
                         name="diagramSize"
+                        id="diagramSize"
                         onChange={this.props.handleDiagramSize}
                         precision={1}
                         spellCheck="false"
@@ -683,8 +683,8 @@ class UserSettings extends Component {
                       </label>
                     </Tooltip>
                     <select
-                      id="upcomingWordsLayout"
                       name="upcomingWordsLayout"
+                      id="upcomingWordsLayout"
                       value={this.props.userSettings.upcomingWordsLayout}
                       onChange={this.props.handleUpcomingWordsLayout}
                       disabled={this.props.disableUserSettings}
