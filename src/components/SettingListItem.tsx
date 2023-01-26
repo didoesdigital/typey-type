@@ -2,7 +2,7 @@ import React from "react";
 
 type Props = {
   sectionHierachy: "major" | "minor";
-  children: JSX.Element;
+  children: JSX.Element | JSX.Element[];
 };
 
 const SettingListItem = ({ children, sectionHierachy }: Props) => (
