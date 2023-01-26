@@ -344,7 +344,6 @@ const MainLessonView = ({
               changeShowStrokesAsList={changeShowStrokesAsList}
               changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
               changeUserSetting={changeUserSetting}
-              chooseStudy={chooseStudy}
               disableUserSettings={disableUserSettings}
               handleDiagramSize={handleDiagramSize}
               handleBeatsPerMinute={handleBeatsPerMinute}
