@@ -44,11 +44,9 @@ class UserSettings extends Component {
           <div className="text-small">
             <div
               id="collapsible-settings"
-              className={
-                this.props.hideOtherSettings
-                  ? "mh-page bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 min-width-320 hide"
-                  : "mh-page bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 min-width-320"
-              }
+              className={`mh-page bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 min-width-320${
+                this.props.hideOtherSettings ? " hide" : ""
+              }`}
               aria-hidden={this.props.hideOtherSettings}
             >
               <h3 className="mb1 visually-hidden">Settings</h3>
