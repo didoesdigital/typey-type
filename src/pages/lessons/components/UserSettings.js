@@ -8,10 +8,7 @@ class UserSettings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      webSpeechSupportResults: {
-        hasSpeechSynthesis: false,
-        hasSpeechSynthesisUtterance: false,
-      },
+      hasSpeechSupport: false,
       showModal: false,
     };
 
@@ -25,9 +22,9 @@ class UserSettings extends Component {
 
   handleOpenModal(event) {
     event.preventDefault();
-    let webSpeechSupportResults = this.checkWebSpeechSupport();
+    let hasSpeechSupport = this.checkWebSpeechSupport();
     this.setState({
-      webSpeechSupportResults,
+      hasSpeechSupport,
       showModal: true,
     });
   }
@@ -43,12 +40,7 @@ class UserSettings extends Component {
       hasSpeechSynthesisUtterance = true;
     }
 
-    let webSpeechSupportResults = {
-      hasSpeechSynthesis: hasSpeechSynthesis,
-      hasSpeechSynthesisUtterance: hasSpeechSynthesisUtterance,
-    };
-
-    return webSpeechSupportResults;
+    return hasSpeechSynthesis && hasSpeechSynthesisUtterance;
   }
 
   handleCloseModal(event) {
@@ -67,10 +59,6 @@ class UserSettings extends Component {
       hideStrokesOnLastRepetitionTooltip =
         "This does nothing while “Show briefs” is turned off";
     }
-
-    let webSpeechAvailable =
-      this.state.webSpeechSupportResults["hasSpeechSynthesis"] &&
-      this.state.webSpeechSupportResults["hasSpeechSynthesisUtterance"];
 
     return (
       <div className="user-settings">
@@ -818,16 +806,18 @@ class UserSettings extends Component {
                         </p>
                         <p
                           className={
-                            webSpeechAvailable
+                            this.state.hasSpeechSupport
                               ? "quote mt1 mb3 bg-slat dark:bg-coolgrey-900"
                               : "quote mt1 mb3 bg-danger dark:text-coolgrey-900"
                           }
                         >
                           Web Speech is{" "}
-                          {webSpeechAvailable ? " available" : " unavailable"}{" "}
+                          {this.state.hasSpeechSupport
+                            ? " available"
+                            : " unavailable"}{" "}
                           on your system.
                         </p>
-                        {webSpeechAvailable ? (
+                        {this.state.hasSpeechSupport ? (
                           <p>
                             If you have working sound but hear no words, your
                             system might be missing a language pack or “voice”.
