@@ -4,8 +4,8 @@ import { SOURCE_NAMESPACES } from "../../../constant/index.js";
 
 import StrokeTipHidden from "./StrokeTipHidden";
 import StrokeTipDiagram from "./StrokeTipDiagram";
+import StrokeTipList from "./StrokeTipList";
 import StrokeTipText from "./StrokeTipText";
-import LookupResultsOutlinesAndDicts from "../../../components/LookupResultsOutlinesAndDicts";
 import createListOfStrokes from "../../../utils/createListOfStrokes";
 import rankOutlines from "../../../utils/transformingDictionaries/rankOutlines/rankOutlines";
 import misstrokes from "../../../json/misstrokes.json";
@@ -30,8 +30,6 @@ type Props = {
   repetitionsRemaining: number;
 };
 
-const maxOutlinesShown = 35; // number of outlines for "quadruplicate"
-
 export default function StrokeTip({
   changeShowStrokesInLesson,
   currentPhrase,
@@ -49,25 +47,6 @@ export default function StrokeTip({
     repetitionsRemaining,
     userSettings.hideStrokesOnLastRepetition
   );
-
-  const misstrokesJSON = misstrokes as StenoDictionary;
-
-  const currentPhraseOutlines = !(userSettings.showStrokesAsList && showStroke)
-    ? false
-    : rankOutlines(
-        createListOfStrokes(currentPhrase, globalLookupDictionary),
-        misstrokesJSON,
-        currentPhrase,
-        AffixList.getSharedInstance()
-      ).filter(
-        ([outline, _dictName, dictNamespace]) =>
-          (dictNamespace === SOURCE_NAMESPACES.get("user") ||
-            !(
-              misstrokesJSON[outline] &&
-              currentPhrase === misstrokesJSON[outline]
-            )) &&
-          outline !== currentStroke
-      );
 
   return (
     <div className="mb6">
@@ -101,34 +80,14 @@ export default function StrokeTip({
               />
             )}
           </div>
-          {!!currentPhraseOutlines && userSettings.showStrokesAsList && (
-            <div className={"stroke-tip min-h-160"}>
-              <div
-                className={`pt1 text-small max-h-120 overflow-y-scroll ${
-                  isMultiline ? " mw-408 mx-auto" : ""
-                }`}
-                style={{ marginRight: isMultiline ? "auto" : "10px" }}
-              >
-                {currentPhraseOutlines.length < 1 ? (
-                  <p
-                    className={`mb0 de-emphasized${
-                      isMultiline ? " text-center pl3" : ""
-                    }`}
-                  >
-                    No other briefs…
-                  </p>
-                ) : (
-                  <LookupResultsOutlinesAndDicts
-                    listOfStrokesAndDicts={currentPhraseOutlines.slice(
-                      0,
-                      maxOutlinesShown
-                    )}
-                    stenoLayout={userSettings.stenoLayout}
-                  />
-                )}
-              </div>
-            </div>
-          )}
+          <StrokeTipList
+            isMultiline={isMultiline}
+            currentPhrase={currentPhrase}
+            currentStroke={currentStroke}
+            globalLookupDictionary={globalLookupDictionary}
+            showStroke={showStroke}
+            userSettings={userSettings}
+          />
         </div>
       ) : (
         <StrokeTipHidden
