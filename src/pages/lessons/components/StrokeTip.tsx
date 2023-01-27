@@ -1,21 +1,14 @@
 import React from "react";
 import { shouldShowStroke } from "../../../utils/typey-type";
-import { SOURCE_NAMESPACES } from "../../../constant/index.js";
-
 import StrokeTipHidden from "./StrokeTipHidden";
 import StrokeTipDiagram from "./StrokeTipDiagram";
 import StrokeTipList from "./StrokeTipList";
 import StrokeTipText from "./StrokeTipText";
-import createListOfStrokes from "../../../utils/createListOfStrokes";
-import rankOutlines from "../../../utils/transformingDictionaries/rankOutlines/rankOutlines";
-import misstrokes from "../../../json/misstrokes.json";
-import { AffixList } from "../../../utils/affixList";
 
 import type {
   LookupDictWithNamespacedDictsAndConfig,
   MaterialText,
   Outline,
-  StenoDictionary,
   UserSettings,
 } from "../../../types";
 
