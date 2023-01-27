@@ -17,31 +17,33 @@ const Component = ({ listOfStrokesAndDicts, stenoLayout }: Props) => {
     layoutTypeStyle = " type-face--japanese";
   }
 
-  let strokeListItems = listOfStrokesAndDicts.map(
+  const strokeListItems = listOfStrokesAndDicts.map(
     (strokeAndDict, indexInListOfStrokesAndDicts) => {
-      let classes =
-        strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")
-          ? "steno-stroke px05 db fw7"
-          : "steno-stroke px05 db steno-stroke--subtle";
-      let briefWithSpacesBetweenLetters = [...strokeAndDict[0]]
+      const briefWithSpacesBetweenLetters = [...strokeAndDict[0]]
         .join(" ")
         .replace("-", "dash");
 
-      let stenoBriefKeys = (
-        <span className={classes} aria-label={briefWithSpacesBetweenLetters}>
+      const stenoBriefKeys = (
+        <span
+          className={
+            strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")
+              ? "steno-stroke px05 db fw7"
+              : "steno-stroke px05 db steno-stroke--subtle"
+          }
+          aria-label={briefWithSpacesBetweenLetters}
+        >
           {strokeAndDict[0].split("").map((stenoKey, stenoKeyIndex) => (
             <React.Fragment key={stenoKeyIndex}>{stenoKey}</React.Fragment>
           ))}
         </span>
       );
 
-      let stenoBriefKeysWithOrWithoutStrongTag = stenoBriefKeys;
-
-      if (strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")) {
-        stenoBriefKeysWithOrWithoutStrongTag = (
+      const stenoBriefKeysWithOrWithoutStrongTag =
+        strokeAndDict[2] === SOURCE_NAMESPACES.get("typey") ? (
           <strong>{stenoBriefKeys}</strong>
+        ) : (
+          stenoBriefKeys
         );
-      }
 
       return (
         <li
