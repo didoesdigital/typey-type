@@ -20,7 +20,6 @@ const Dictionaries = ({
   match,
   dictionaryIndex,
   setDictionaryIndex,
-  setGlobalDictionaryLoaded,
   globalLookupDictionaryLoaded,
   globalLookupDictionary,
   globalUserSettings,
@@ -118,7 +117,6 @@ const Dictionaries = ({
             <AsyncDictionaryManagement
               dictionaryIndex={dictionaryIndex}
               setDictionaryIndex={setDictionaryIndex}
-              setGlobalDictionaryLoaded={setGlobalDictionaryLoaded}
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
               globalUserSettings={globalUserSettings}

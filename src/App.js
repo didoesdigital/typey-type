@@ -140,7 +140,6 @@ const AsyncGames = Loadable({
 //   loading: PageLoading,
 // });
 
-let globalDictionaryLoading = false;
 let loadingPromise = null;
 let isGlobalDictionaryUpToDate = null;
 
@@ -345,7 +344,6 @@ class App extends Component {
       return loadingPromise;
     }
     else {
-      globalDictionaryLoading = true;
       loadingPromise = Promise.all([getTypeyTypeDict(), withPlover ? getLatestPloverDict() : {}]).then(data => {
         let [typeyDict, latestPloverDict] = data;
         // let t0 = performance.now();
@@ -372,13 +370,6 @@ class App extends Component {
       return loadingPromise;
     }
   };
-
-  setGlobalDictionaryLoaded(done) {
-    if (!globalDictionaryLoading) {
-      globalDictionaryLoading = done;
-    }
-    this.setState({ globalLookupDictionaryLoaded: done });
-  }
 
   handleStopLesson(event) {
     event.preventDefault();
@@ -2324,7 +2315,6 @@ class App extends Component {
                           setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
                           setDictionaryIndex={this.setDictionaryIndex.bind(this)}
-                          setGlobalDictionaryLoaded={this.setGlobalDictionaryLoaded.bind(this)}
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}

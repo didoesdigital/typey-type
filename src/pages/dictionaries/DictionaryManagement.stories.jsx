@@ -63,7 +63,6 @@ const Template = (args) => {
     <DictionaryManagement
       dictionaryIndex={dictionaryIndex}
       setDictionaryIndex={() => console.log("set dictionaryIndex")}
-      setGlobalDictionaryLoaded={() => console.log("set global dict loaded")}
       fetchAndSetupGlobalDict={() => Promise.resolve(true)}
       globalLookupDictionary={globalLookupDictionary}
       globalUserSettings={{}}
