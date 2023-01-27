@@ -46,7 +46,7 @@ export default function Hint({
         tabIndex={-1}
       >
         <pre
-          className={`overflow-auto mw-408 text-small flex${
+          className={`overflow-auto mw-408 my05 text-small flex${
             showHint ? "" : " hide"
           }`}
           aria-hidden={!showHint}
