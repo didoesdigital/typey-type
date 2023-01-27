@@ -36,7 +36,7 @@ const StrokeTipList = ({
 }: Props) => {
   const misstrokesJSON = misstrokes as StenoDictionary;
 
-  const currentPhraseOutlines = !(userSettings.showStrokesAsList && showStroke)
+  const currentPhraseOutlines = !(userSettings.showStrokesAsList && showStroke && globalLookupDictionary)
     ? false
     : rankOutlines(
         createListOfStrokes(currentPhrase, globalLookupDictionary),
