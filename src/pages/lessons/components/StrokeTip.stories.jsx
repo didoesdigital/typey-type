@@ -22,6 +22,7 @@ const Template = (args) => {
       currentPhrase={"test"}
       currentStroke={"TEFT"}
       globalLookupDictionary={globalLookupDictionaryMinimal}
+      globalLookupDictionaryLoaded={true}
       showStrokesInLesson={false}
       targetStrokeCount={1}
       userSettings={userSettings}
@@ -80,6 +81,7 @@ StrokeTipListStory.args = {
       ],
     ],
   ]),
+  globalLookupDictionaryLoaded: true,
   showStrokesInLesson: true,
   targetStrokeCount: 2,
   userSettings: {
@@ -96,6 +98,7 @@ StrokeTipListNoBriefsStory.args = {
   currentPhrase: "alone",
   currentStroke: "A/PHOEPB",
   globalLookupDictionary: globalLookupDictionaryMinimal,
+  globalLookupDictionaryLoaded: true,
   showStrokesInLesson: true,
   targetStrokeCount: 2,
   userSettings: {
@@ -112,6 +115,7 @@ StrokeTipDiagramStory.args = {
   currentPhrase: "alone",
   currentStroke: "A/PHOEPB",
   globalLookupDictionary: globalLookupDictionaryMinimal,
+  globalLookupDictionaryLoaded: true,
   showStrokesInLesson: true,
   targetStrokeCount: 1,
   userSettings: userSettings,
@@ -125,6 +129,7 @@ StrokeTipPalantypeStory.args = {
   currentPhrase: "alone",
   currentStroke: "SCPTH+MFRNLYOEAU-I^NLCMFRPT+SH",
   globalLookupDictionary: globalLookupDictionaryMinimal,
+  globalLookupDictionaryLoaded: true,
   showStrokesInLesson: true,
   targetStrokeCount: 1,
   userSettings: {
@@ -142,6 +147,7 @@ StrokeTipTextStory.args = {
   currentPhrase: "alone",
   currentStroke: "A/PHOEPB",
   globalLookupDictionary: globalLookupDictionaryMinimal,
+  globalLookupDictionaryLoaded: true,
   showStrokesInLesson: true,
   targetStrokeCount: 2,
   userSettings: { ...userSettings, showStrokesAsDiagrams: false },
@@ -155,6 +161,7 @@ StrokeTipHiddenStory.args = {
   currentPhrase: "alone",
   currentStroke: "A/PHOEPB",
   globalLookupDictionary: globalLookupDictionaryMinimal,
+  globalLookupDictionaryLoaded: true,
   showStrokesInLesson: false,
   targetStrokeCount: 2,
   userSettings: { ...userSettings, showStrokesAsDiagrams: false },
