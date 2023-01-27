@@ -996,7 +996,9 @@ class App extends Component {
       && Object.entries(this.state.personalDictionaries).length > 0
       && !!this.state.personalDictionaries.dictionariesNamesAndContents;
 
-    this.fetchAndSetupGlobalDict(false, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null).then(() => {
+    const loadPlover = this.state.userSettings.showStrokesAsList ? true : false;
+
+    this.fetchAndSetupGlobalDict(loadPlover, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWords).join("\n");
       // parseWordList appears to remove empty lines and other garbage, we might not need it here
