@@ -31,6 +31,80 @@ const Template = (args) => {
   );
 };
 
+export const StrokeTipListStory = Template.bind({});
+StrokeTipListStory.storyName = "Stroke tip list, lots of briefs";
+StrokeTipListStory.args = {
+  changeShowStrokesInLesson: () => undefined,
+  currentPhrase: "quadruplicate",
+  currentStroke: "KWAD/RUP/KAT",
+  globalLookupDictionary: new Map([
+    ["{^cate}", [["KAEUT", "typey:typey-type.json"]]],
+    [
+      "quadruplicate",
+      [
+        ["KWAD/RUP/KAT", "typey:typey-type.json"],
+        ["KWA/TKRAOU/PHREU/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWA/TKRAOU/PHREU/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWA/TKRAOUP/HREU/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWA/TKRAOUP/HREU/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWA/TKRAOUP/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWA/TKRAOUP/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWA/TKRUP/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWA/TKRUP/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAD/RAOU/PHREU/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAD/RAOU/PHREU/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAD/RAOUD/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAD/RAOUP/HREU/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAD/RAOUP/HREU/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAD/RAOUP/HREUBGT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAD/RAOUP/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAD/RAOUP/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAD/RUP/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAD/RUP/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAU/TKRAOU/PHREU/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAU/TKRAOU/PHREU/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAU/TKRAOUP/HREU/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAU/TKRAOUP/HREU/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAU/TKRAOUP/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAU/TKRAOUP/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAU/TKRUP/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAU/TKRUP/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAUD/RAOU/PHREU/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAUD/RAOU/PHREU/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAUD/RAOUP/HREU/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAUD/RAOUP/HREU/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAUD/RAOUP/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAUD/RAOUP/KAT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAUD/RUP/KAEUT", "plover:plover-main-3-jun-2018.json"],
+        ["KWAUD/RUP/KAT", "plover:plover-main-3-jun-2018.json"],
+      ],
+    ],
+  ]),
+  showStrokesInLesson: true,
+  targetStrokeCount: 2,
+  userSettings: {
+    ...userSettings,
+    showStrokesAsList: true,
+  },
+  repetitionsRemaining: 1,
+};
+
+export const StrokeTipListNoBriefsStory = Template.bind({});
+StrokeTipListNoBriefsStory.storyName = "Stroke tip list, no briefs";
+StrokeTipListNoBriefsStory.args = {
+  changeShowStrokesInLesson: () => undefined,
+  currentPhrase: "alone",
+  currentStroke: "A/PHOEPB",
+  globalLookupDictionary: globalLookupDictionaryMinimal,
+  showStrokesInLesson: true,
+  targetStrokeCount: 2,
+  userSettings: {
+    ...userSettings,
+    showStrokesAsList: true,
+  },
+  repetitionsRemaining: 1,
+};
+
 export const StrokeTipDiagramStory = Template.bind({});
 StrokeTipDiagramStory.storyName = "Stroke tip diagram";
 StrokeTipDiagramStory.args = {
