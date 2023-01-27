@@ -24,6 +24,7 @@ const StrokeTipText = ({ isMultiline, currentStroke, stenoLayout }: Props) => {
       >
         <span
           className="steno-stroke pa05 text-small"
+          role="note"
           aria-label={[...currentStroke].join(" ").replace("-", "dash")}
         >
           {[...currentStroke].map((item, i) => (

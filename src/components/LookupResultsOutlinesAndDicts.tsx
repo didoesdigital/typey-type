@@ -33,6 +33,7 @@ const LookupResultsOutlinesAndDicts = ({
               ? "steno-stroke px05 db fw7"
               : "steno-stroke px05 db steno-stroke--subtle"
           }
+          role="note"
           aria-label={briefWithSpacesBetweenLetters}
         >
           {strokeAndDict[0].split("").map((stenoKey, stenoKeyIndex) => (
