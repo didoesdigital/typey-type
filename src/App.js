@@ -1645,6 +1645,40 @@ class App extends Component {
             });
           });
         }
+        else if (this.state.userSettings.showStrokesAsList) {
+          const shouldUsePersonalDictionaries = this.state.personalDictionaries
+            && Object.entries(this.state.personalDictionaries).length > 0
+            && !!this.state.personalDictionaries.dictionariesNamesAndContents;
+
+          this.fetchAndSetupGlobalDict(
+            true,
+            shouldUsePersonalDictionaries ? this.state.personalDictionaries : null
+          )
+            .then(() => {
+              this.setState(
+                {
+                  announcementMessage: "Navigated to: " + lesson.title,
+                  lesson: lesson,
+                  currentPhraseID: 0,
+                },
+                () => {
+                  this.setupLesson();
+
+                  if (this.mainHeading) {
+                    this.mainHeading.focus();
+                  } else {
+                    const yourTypedText = document.getElementById("your-typed-text");
+                    if (yourTypedText) {
+                      yourTypedText.focus();
+                    }
+                  }
+                }
+              );
+            })
+            .catch((error) =>
+              console.error("failed to fetch and setup global dictionary", error)
+            );
+        }
         else {
           this.setState({
             announcementMessage: 'Navigated to: ' + lesson.title,
