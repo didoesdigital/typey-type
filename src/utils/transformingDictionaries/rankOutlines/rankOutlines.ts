@@ -16,37 +16,37 @@ function rankOutlines(
   misstrokesJSON = misstrokesJSON || {};
   arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
     if (a[2] === "user" && b[2] !== "user") {
-      return -1;
+      return -1; // sort a before b
     }
     if (b[2] === "user" && a[2] !== "user") {
-      return 1;
+      return 1; // sort a after b
     }
 
     if (a[2] === "plover" && b[2] !== "plover") {
-      return 1;
+      return 1; // sort a after b
     }
     if (b[2] === "plover" && a[2] !== "plover") {
-      return -1;
+      return -1; // sort a before b
     }
 
     if (a[1] === "top-10000-project-gutenberg-words.json") {
-      return -1;
+      return -1; // sort a before b
     }
     if (b[1] === "top-10000-project-gutenberg-words.json") {
-      return 1;
+      return 1; // sort a after b
     }
 
     if (
       misstrokesJSON[a[0]] === translation &&
       !(misstrokesJSON[b[0]] === translation)
     ) {
-      return 1;
+      return 1; // sort a after b
     }
     if (
       misstrokesJSON[b[0]] === translation &&
       !(misstrokesJSON[a[0]] === translation)
     ) {
-      return -1;
+      return -1; // sort a before b
     }
 
     let outlineA = a[0];
@@ -70,7 +70,6 @@ function rankOutlines(
       translation,
       affixes
     );
-
     if (outlineALengthWithAllPenalties === outlineBLengthWithAllPenalties) {
       let outlineALastLetter = outlineA[outlineA.length - 1];
       let outlineBLastLetter = outlineB[outlineB.length - 1];
