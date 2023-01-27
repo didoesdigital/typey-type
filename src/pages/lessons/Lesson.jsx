@@ -299,6 +299,7 @@ class Lesson extends Component {
                 currentStroke={this.props.currentStroke}
                 disableUserSettings={this.props.disableUserSettings}
                 globalLookupDictionary={this.props.globalLookupDictionary}
+                globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
                 handleBeatsPerMinute={this.props.handleBeatsPerMinute}
                 handleDiagramSize={this.props.handleDiagramSize}
                 handleLimitWordsChange={this.props.handleLimitWordsChange}

@@ -17,6 +17,7 @@ type Props = {
   currentPhrase: MaterialText;
   currentStroke: Outline;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+  globalLookupDictionaryLoaded: boolean;
   showStrokesInLesson: boolean;
   targetStrokeCount: number;
   userSettings: UserSettings;
@@ -28,6 +29,7 @@ export default function StrokeTip({
   currentPhrase,
   currentStroke,
   globalLookupDictionary,
+  globalLookupDictionaryLoaded,
   showStrokesInLesson,
   targetStrokeCount,
   userSettings,
@@ -78,6 +80,7 @@ export default function StrokeTip({
             currentPhrase={currentPhrase}
             currentStroke={currentStroke}
             globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             showStroke={showStroke}
             userSettings={userSettings}
           />

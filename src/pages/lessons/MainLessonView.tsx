@@ -55,6 +55,7 @@ type Props = {
   currentStroke: Outline;
   disableUserSettings: boolean;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+  globalLookupDictionaryLoaded: boolean;
   handleBeatsPerMinute: () => void;
   handleDiagramSize: () => void;
   handleLimitWordsChange: () => void;
@@ -122,6 +123,7 @@ const MainLessonView = ({
   currentStroke,
   disableUserSettings,
   globalLookupDictionary,
+  globalLookupDictionaryLoaded,
   handleBeatsPerMinute,
   handleDiagramSize,
   handleLimitWordsChange,
@@ -297,6 +299,7 @@ const MainLessonView = ({
                       currentStroke={currentStroke}
                       currentPhrase={currentPhrase}
                       globalLookupDictionary={globalLookupDictionary}
+                      globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
                       repetitionsRemaining={repetitionsRemaining}
                       showStrokesInLesson={showStrokesInLesson}
                       targetStrokeCount={targetStrokeCount}

@@ -20,6 +20,7 @@ type Props = {
   currentPhrase: MaterialText;
   currentStroke: Outline;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+  globalLookupDictionaryLoaded: boolean;
   showStroke: boolean;
   userSettings: UserSettings;
 };
@@ -31,12 +32,17 @@ const StrokeTipList = ({
   currentPhrase,
   currentStroke,
   globalLookupDictionary,
+  globalLookupDictionaryLoaded,
   showStroke,
   userSettings,
 }: Props) => {
   const misstrokesJSON = misstrokes as StenoDictionary;
 
-  const currentPhraseOutlines = !(userSettings.showStrokesAsList && showStroke && globalLookupDictionary)
+  const currentPhraseOutlines = !(
+    userSettings.showStrokesAsList &&
+    showStroke &&
+    globalLookupDictionaryLoaded
+  )
     ? false
     : rankOutlines(
         createListOfStrokes(currentPhrase, globalLookupDictionary),
