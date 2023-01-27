@@ -183,6 +183,7 @@ class Lesson extends Component {
                 changeSortOrderUserSetting={this.props.changeSortOrderUserSetting}
                 changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
                 changeShowStrokesAs={this.props.changeShowStrokesAs}
+                changeShowStrokesAsList={this.props.changeShowStrokesAsList}
                 changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
                 changeStenoLayout={this.props.changeStenoLayout}
                 changeUserSetting={this.props.changeUserSetting}
@@ -191,6 +192,7 @@ class Lesson extends Component {
                 disableUserSettings={this.props.disableUserSettings}
                 globalUserSettings={this.props.globalUserSettings}
                 handleBeatsPerMinute={this.props.handleBeatsPerMinute}
+                handleDiagramSize={this.props.handleDiagramSize}
                 handleLimitWordsChange={this.props.handleLimitWordsChange}
                 handleStartFromWordChange={this.props.handleStartFromWordChange}
                 handleRepetitionsChange={this.props.handleRepetitionsChange}
