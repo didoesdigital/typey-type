@@ -653,7 +653,7 @@ function loadPersonalPreferences() {
     showScoresWhileTyping: true,
     showStrokes: true,
     showStrokesAsDiagrams: true,
-    showStrokesAsList: true,
+    showStrokesAsList: false,
     showStrokesOnMisstroke: true,
     hideStrokesOnLastRepetition: true,
     spacePlacement: 'spaceOff',

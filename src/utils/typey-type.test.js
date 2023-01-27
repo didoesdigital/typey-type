@@ -481,7 +481,7 @@ describe('loadPersonalPreferences', () => {
         showScoresWhileTyping: true,
         showStrokes: true,
         showStrokesAsDiagrams: true,
-        showStrokesAsList: true,
+        showStrokesAsList: false,
         showStrokesOnMisstroke: true,
         stenoLayout: 'stenoLayoutAmericanSteno',
         hideStrokesOnLastRepetition: true,
