@@ -49,8 +49,9 @@ const Home = ({ setAnnouncementMessage }: Props) => {
         <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
           <div className="p3 mx-auto mw-1024">
             <div className="mw-584">
-              <div className="relative" data-chromatic="ignore">
+              <div className="relative">
                 <img
+                  data-chromatic="ignore"
                   src={typeyTypeDemoSrc}
                   className="homepage-demo-lg"
                   alt="Demo of Typey Type for Stenographers in action"
@@ -85,6 +86,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
               </p>
               <div className="relative">
                 <img
+                  data-chromatic="ignore"
                   src={typeyTypeDemoSrc}
                   className="homepage-demo-xs"
                   alt="Demo of Typey Type for Stenographers in action"
