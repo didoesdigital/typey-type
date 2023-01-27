@@ -190,9 +190,13 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            personalDictionaries={personalDictionaries}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
@@ -207,9 +211,13 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            personalDictionaries={personalDictionaries}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
@@ -224,9 +232,13 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            personalDictionaries={personalDictionaries}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
@@ -288,6 +300,7 @@ const Lessons = ({
           <Lesson
             customLesson={customLesson}
             globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
