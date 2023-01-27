@@ -5,9 +5,10 @@ import penaliseSlashes from "./penaliseSlashes";
 import penaliseStars from "./penaliseStars";
 import penaliseSlashesWithoutPrefixesOrSuffixes from "./penaliseSlashesWithoutPrefixesOrSuffixes";
 
+import type { StrokeAndDictionaryAndNamespace } from "../../../types";
+
 function rankOutlines(
-  // StrokeAndDictionaryAndNamespace[]
-  arrayOfStrokesAndTheirSourceDictNames: [string, string, string][],
+  arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[],
   misstrokesJSON: StenoDictionary,
   translation: string,
   affixes: AffixObject = { suffixes: [], prefixes: [] }
