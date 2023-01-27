@@ -18,7 +18,7 @@ const StrokeTipText = ({ isMultiline, currentStroke, stenoLayout }: Props) => {
   return (
     <div className={"db" + layoutTypeStyle}>
       <pre
-        className={`overflow-auto mw-408 text-small${
+        className={`overflow-auto mw-408 my05 text-small${
           isMultiline ? " flex" : ""
         }`}
       >

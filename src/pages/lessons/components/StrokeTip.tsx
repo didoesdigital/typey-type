@@ -95,13 +95,22 @@ export default function StrokeTip({
             />
           )}
           {!!currentPhraseOutlines && userSettings.showStrokesAsList && (
-            <LookupResultsOutlinesAndDicts
-              listOfStrokesAndDicts={currentPhraseOutlines.slice(
-                0,
-                maxOutlinesShown
+            <div
+              className="pt1 text-small max-h-240 overflow-y-scroll"
+              style={{ marginRight: "10px" }}
+            >
+              {currentPhraseOutlines.length < 1 ? (
+                <p className="de-emphasized">No other briefs…</p>
+              ) : (
+                <LookupResultsOutlinesAndDicts
+                  listOfStrokesAndDicts={currentPhraseOutlines.slice(
+                    0,
+                    maxOutlinesShown
+                  )}
+                  stenoLayout={userSettings.stenoLayout}
+                />
               )}
-              stenoLayout={userSettings.stenoLayout}
-            />
+            </div>
           )}
         </div>
       ) : (
