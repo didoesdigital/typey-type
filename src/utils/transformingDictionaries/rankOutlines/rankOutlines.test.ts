@@ -29,6 +29,135 @@ describe("rankOutlines", () => {
     AffixList.setSharedInstance([]);
   });
 
+  describe("sorts the many outlines for quadruplicate", () => {
+    it("returns sorted list of outlines", () => {
+      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+        [
+          ["KWAD/RUP/KAT", "typey-type.json", "typey"],
+          ["KWA/TKRAOU/PHREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRAOU/PHREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRAOUP/HREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRAOUP/HREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRAOUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRAOUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOU/PHREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOU/PHREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOUD/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOUP/HREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOUP/HREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOUP/HREUBGT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRAOU/PHREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRAOU/PHREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRAOUP/HREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRAOUP/HREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRAOUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRAOUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RAOU/PHREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RAOU/PHREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RAOUP/HREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RAOUP/HREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RAOUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RAOUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+        ];
+      expect(
+        rankOutlines(
+          arrayOfStrokesAndTheirSourceDictNames,
+          misstrokesJSON,
+          "quadruplicate",
+          sharedAffixes
+        )
+      ).toEqual(
+        // As we presently keep original order of a and b when penalties match but one uses a
+        // suffix outline and the other is slightly shorter, we get a ragged result:
+        [
+          ["KWAD/RUP/KAT", "typey-type.json", "typey"],
+          ["KWAD/RUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOUD/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRAOUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRAOUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RAOUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RAOUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRAOUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRAOUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOUP/HREUBGT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOU/PHREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOU/PHREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOUP/HREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAD/RAOUP/HREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRAOU/PHREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRAOU/PHREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRAOUP/HREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWA/TKRAOUP/HREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RAOU/PHREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RAOU/PHREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RAOUP/HREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAUD/RAOUP/HREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRAOU/PHREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRAOU/PHREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRAOUP/HREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+          ["KWAU/TKRAOUP/HREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+        ]
+        // If we sorted aesthetically by length in that scenario, we'd get this:
+        // [
+        //   ["KWAD/RUP/KAT", "typey-type.json", "typey"],
+        //   ["KWAD/RUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWA/TKRUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAUD/RUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAD/RAOUD/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAD/RAOUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAD/RUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAU/TKRUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWA/TKRAOUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWA/TKRUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAUD/RAOUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAUD/RUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAD/RAOUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAU/TKRAOUP/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAU/TKRUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWA/TKRAOUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAUD/RAOUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAD/RAOUP/HREUBGT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAU/TKRAOUP/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAD/RAOU/PHREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAD/RAOUP/HREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWA/TKRAOU/PHREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWA/TKRAOUP/HREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAUD/RAOU/PHREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAUD/RAOUP/HREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAD/RAOU/PHREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAD/RAOUP/HREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAU/TKRAOU/PHREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAU/TKRAOUP/HREU/KAT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWA/TKRAOU/PHREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWA/TKRAOUP/HREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAUD/RAOU/PHREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAUD/RAOUP/HREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAU/TKRAOU/PHREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        //   ["KWAU/TKRAOUP/HREU/KAEUT", "plover-main-3-jun-2018.json", "plover"],
+        // ]
+      );
+    });
+  });
+
   it("returns A user entry before B non-user entry", () => {
     const strokesAndSourceDicts: [string, string, string][] = [
       ["TO", "typey-type.json", "typey"],
