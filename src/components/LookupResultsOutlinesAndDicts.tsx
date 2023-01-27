@@ -8,7 +8,10 @@ type Props = {
   stenoLayout: StenoLayout;
 };
 
-const Component = ({ listOfStrokesAndDicts, stenoLayout }: Props) => {
+const LookupResultsOutlinesAndDicts = ({
+  listOfStrokesAndDicts,
+  stenoLayout,
+}: Props) => {
   let layoutTypeStyle = "";
   if (stenoLayout === "stenoLayoutKoreanModernCSteno") {
     layoutTypeStyle = " heavy-type-face--korean";
@@ -71,4 +74,4 @@ const Component = ({ listOfStrokesAndDicts, stenoLayout }: Props) => {
   ) : null;
 };
 
-export default Component;
+export default LookupResultsOutlinesAndDicts;
