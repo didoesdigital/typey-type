@@ -52,19 +52,22 @@ export default function StrokeTip({
 
   const misstrokesJSON = misstrokes as StenoDictionary;
 
-  const currentPhraseOutlines = rankOutlines(
-    createListOfStrokes(currentPhrase, globalLookupDictionary),
-    misstrokesJSON,
-    currentPhrase,
-    AffixList.getSharedInstance()
-  ).filter(
-    ([outline, _dictName, dictNamespace]) =>
-      (dictNamespace === SOURCE_NAMESPACES.get("user") ||
-        !(
-          misstrokesJSON[outline] && currentPhrase === misstrokesJSON[outline]
-        )) &&
-      outline !== currentStroke
-  );
+  const currentPhraseOutlines = !(userSettings.showStrokesAsList && showStroke)
+    ? false
+    : rankOutlines(
+        createListOfStrokes(currentPhrase, globalLookupDictionary),
+        misstrokesJSON,
+        currentPhrase,
+        AffixList.getSharedInstance()
+      ).filter(
+        ([outline, _dictName, dictNamespace]) =>
+          (dictNamespace === SOURCE_NAMESPACES.get("user") ||
+            !(
+              misstrokesJSON[outline] &&
+              currentPhrase === misstrokesJSON[outline]
+            )) &&
+          outline !== currentStroke
+      );
 
   return (
     <div className="mb6">
