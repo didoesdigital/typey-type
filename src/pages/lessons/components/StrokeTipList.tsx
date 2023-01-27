@@ -67,7 +67,7 @@ const StrokeTipList = ({
               isMultiline ? " text-center pl3" : ""
             }`}
           >
-            No other briefs…
+            No other hints…
           </p>
         ) : (
           <LookupResultsOutlinesAndDicts

@@ -237,7 +237,7 @@ class Support extends Component {
               </GoogleAnalytics.OutboundLink>.</p>
 
             <h4 id="typey-type-hints">Typey&nbsp;Type hints</h4>
-            <p>To manually show a brief hint in a lesson that otherwise hides briefs, press <kbd>Tab</kbd> to focus on the stroke hint and <kbd>Space</kbd> activate it. This will automatically move your focus back to typing. To avoid losing time doing this, you can create a brief to press <kbd>Tab</kbd> and <kbd>Space</kbd> for you, such as <code className="tag-missing-full-stop">{dictionaryEntryForTabSpace}</code></p>
+            <p>To manually show a stroke hint in a lesson that otherwise hides hints, press <kbd>Tab</kbd> to focus on the stroke hint and <kbd>Space</kbd> activate it. This will automatically move your focus back to typing. To avoid losing time doing this, you can create a brief to press <kbd>Tab</kbd> and <kbd>Space</kbd> for you, such as <code className="tag-missing-full-stop">{dictionaryEntryForTabSpace}</code></p>
 
             <h4 id="typey-type-shortcuts">Typey&nbsp;Type shortcuts</h4>
             <p>

@@ -399,14 +399,14 @@ const UserSettings = ({
                 <SettingCheckbox
                   checked={userSettings.showStrokes}
                   disabled={disableUserSettings}
-                  label={"Show briefs for every word"}
+                  label={"Show hint for every word"}
                   nameAndId={"showStrokes"}
                   onChange={changeUserSetting}
                   onShow={setAnnouncementMessage}
                   tooltipTitle={
                     !userSettings.hideStrokesOnLastRepetition
-                      ? "Show stroke briefs for every word"
-                      : "Show briefs for each word except during the last repetition"
+                      ? "Show stroke hint for every word"
+                      : "Show stroke hint for each word except during the last repetition"
                   }
                 />
               </SettingListItem>
@@ -414,14 +414,14 @@ const UserSettings = ({
                 <SettingCheckbox
                   checked={userSettings.hideStrokesOnLastRepetition}
                   disabled={disableUserSettings}
-                  label={"Hide briefs on last repetition"}
+                  label={"Hide hint on last repetition"}
                   nameAndId={"hideStrokesOnLastRepetition"}
                   onChange={changeUserSetting}
                   onShow={setAnnouncementMessage}
                   tooltipTitle={
                     userSettings.showStrokes
-                      ? "Hide briefs during the last repetition"
-                      : "This does nothing while “Show briefs” is turned off"
+                      ? "Hide stroke hint during the last repetition"
+                      : "This does nothing while “Show hint” is turned off"
                   }
                 />
               </SettingListItem>
@@ -429,11 +429,11 @@ const UserSettings = ({
                 <SettingCheckbox
                   checked={userSettings.showStrokesOnMisstroke}
                   disabled={disableUserSettings}
-                  label={"Show briefs on misstroke"}
+                  label={"Show hint on misstroke"}
                   nameAndId={"showStrokesOnMisstroke"}
                   onChange={changeShowStrokesOnMisstroke}
                   onShow={setAnnouncementMessage}
-                  tooltipTitle={"Show briefs for words when you misstroke them"}
+                  tooltipTitle={"Show stroke hints for words when you misstroke them"}
                 />
               </SettingListItem>
               <SettingListItem sectionHierachy="minor">
@@ -451,7 +451,7 @@ const UserSettings = ({
                       />
                       {/* @ts-ignore */}
                       <Tooltip
-                        title="Show briefs as diagrams for your steno layout"
+                        title="Show stroke hints as diagrams for your steno layout"
                         className="mw-240"
                         animation="shift"
                         arrow="true"
@@ -462,7 +462,7 @@ const UserSettings = ({
                         trigger="mouseenter focus click"
                         onShow={setAnnouncementMessage}
                       >
-                        Show briefs as diagrams
+                        Show hint diagram
                       </Tooltip>
                     </label>
                   </div>
@@ -479,7 +479,7 @@ const UserSettings = ({
                       />
                       {/* @ts-ignore */}
                       <Tooltip
-                        title="Show briefs as text and read to screen readers"
+                        title="Show hints as text and read to screen readers"
                         className="mw-240"
                         animation="shift"
                         arrow="true"
@@ -490,7 +490,7 @@ const UserSettings = ({
                         trigger="mouseenter focus click"
                         onShow={setAnnouncementMessage}
                       >
-                        Show briefs as text
+                        Show hint text
                       </Tooltip>
                     </label>
                   </div>
@@ -499,11 +499,11 @@ const UserSettings = ({
                   wrapperClasses="block relative pb1 px1"
                   checked={userSettings.showStrokesAsList}
                   disabled={disableUserSettings}
-                  label={"Show other briefs in a list"}
+                  label={"Show other stroke hints"}
                   nameAndId={"showStrokesAsList"}
                   onChange={changeShowStrokesAsList}
                   onShow={setAnnouncementMessage}
-                  tooltipTitle={"Show a list of alternative briefs in a list"}
+                  tooltipTitle={"Show alternative stroke hints from personal and Plover dictionaries"}
                 />
               </SettingListItem>
               <SettingListItem sectionHierachy="major">
