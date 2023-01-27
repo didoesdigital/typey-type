@@ -882,10 +882,12 @@ input:focus::placeholder {
 .min-w-0 { min-width: 0; }
 .min-w-40  { min-width: 40px; }
 
+.max-h-120  { max-height: 120px; }
 .max-h-240  { max-height: 240px; }
 
 .min-h-40  { min-height: 40px; }
 .min-h-88  { min-height: 88px; }
+.min-h-160  { min-height: 160px; }
 .min-h-384  { min-height: 384px; }
 .min-h-424  { min-height: 424px; }
 .min-vh-100 { min-height:100vh; }

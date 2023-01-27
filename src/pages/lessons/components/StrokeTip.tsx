@@ -30,7 +30,7 @@ type Props = {
   repetitionsRemaining: number;
 };
 
-const maxOutlinesShown = 10;
+const maxOutlinesShown = 35; // number of outlines for "quadruplicate"
 
 export default function StrokeTip({
   changeShowStrokesInLesson,
@@ -69,47 +69,61 @@ export default function StrokeTip({
   return (
     <div className="mb6">
       {showStroke && currentStroke ? (
-        <div
-          className={`stroke-tip${isMultiline ? " flex justify-center" : ""}`}
-          aria-live="polite"
-          aria-atomic="true"
-        >
-          <span
-            className="visually-hidden"
-            aria-hidden={userSettings.showStrokesAsDiagrams ? "true" : "false"}
+        <div>
+          <div
+            className={`stroke-tip${isMultiline ? " flex justify-center" : ""}`}
+            aria-live="polite"
+            aria-atomic="true"
           >
-            Hint:{" "}
-          </span>
-          {userSettings.showStrokesAsDiagrams ? (
-            <StrokeTipDiagram
-              currentStroke={currentStroke}
-              diagramSize={userSettings.diagramSize}
-              isMultiline={isMultiline}
-              stenoLayout={userSettings.stenoLayout}
-            />
-          ) : (
-            <StrokeTipText
-              currentStroke={currentStroke}
-              isMultiline={isMultiline}
-              stenoLayout={userSettings.stenoLayout}
-            />
-          )}
-          {!!currentPhraseOutlines && userSettings.showStrokesAsList && (
-            <div
-              className="pt1 text-small max-h-240 overflow-y-scroll"
-              style={{ marginRight: "10px" }}
+            <span
+              className="visually-hidden"
+              aria-hidden={
+                userSettings.showStrokesAsDiagrams ? "true" : "false"
+              }
             >
-              {currentPhraseOutlines.length < 1 ? (
-                <p className="de-emphasized">No other briefs…</p>
-              ) : (
-                <LookupResultsOutlinesAndDicts
-                  listOfStrokesAndDicts={currentPhraseOutlines.slice(
-                    0,
-                    maxOutlinesShown
-                  )}
-                  stenoLayout={userSettings.stenoLayout}
-                />
-              )}
+              Hint:{" "}
+            </span>
+            {userSettings.showStrokesAsDiagrams ? (
+              <StrokeTipDiagram
+                currentStroke={currentStroke}
+                diagramSize={userSettings.diagramSize}
+                isMultiline={isMultiline}
+                stenoLayout={userSettings.stenoLayout}
+              />
+            ) : (
+              <StrokeTipText
+                currentStroke={currentStroke}
+                isMultiline={isMultiline}
+                stenoLayout={userSettings.stenoLayout}
+              />
+            )}
+          </div>
+          {!!currentPhraseOutlines && userSettings.showStrokesAsList && (
+            <div className={"stroke-tip min-h-160"}>
+              <div
+                className={`pt1 text-small max-h-120 overflow-y-scroll ${
+                  isMultiline ? " mw-408 mx-auto" : ""
+                }`}
+                style={{ marginRight: isMultiline ? "auto" : "10px" }}
+              >
+                {currentPhraseOutlines.length < 1 ? (
+                  <p
+                    className={`mb0 de-emphasized${
+                      isMultiline ? " text-center pl3" : ""
+                    }`}
+                  >
+                    No other briefs…
+                  </p>
+                ) : (
+                  <LookupResultsOutlinesAndDicts
+                    listOfStrokesAndDicts={currentPhraseOutlines.slice(
+                      0,
+                      maxOutlinesShown
+                    )}
+                    stenoLayout={userSettings.stenoLayout}
+                  />
+                )}
+              </div>
             </div>
           )}
         </div>
