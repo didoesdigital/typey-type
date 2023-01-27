@@ -70,7 +70,7 @@ const StrokeTipList = ({
         {currentPhraseOutlines.length < 1 ? (
           <p
             className={`mb0 de-emphasized${
-              isMultiline ? " text-center pl3" : ""
+              isMultiline ? " text-center" : ""
             }`}
           >
             No other hints…
