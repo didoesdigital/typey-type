@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Component } from 'react';
-import { SOURCE_NAMESPACES } from '../constant/index.js';
+import SOURCE_NAMESPACES from '../constant/sourceNamespaces';
 import splitBriefsIntoStrokes from './../utils/splitBriefsIntoStrokes';
 import lookupListOfStrokesAndDicts from "../utils/lookupListOfStrokesAndDicts";
 

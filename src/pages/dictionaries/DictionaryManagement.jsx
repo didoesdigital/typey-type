@@ -1,5 +1,6 @@
 import * as Sentry from '@sentry/browser';
-import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from '../../constant/index.js';
+import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
+import SOURCE_NAMESPACES from '../../constant/sourceNamespaces';
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from 'react-ga';

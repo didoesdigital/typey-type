@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import "react-tippy/dist/tippy.css";
 import PARAMS from './utils/params.js';
-import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from './constant/index.js';
+import LATEST_PLOVER_DICT_NAME from "./constant/latestPloverDictName";
+import SOURCE_NAMESPACES from './constant/sourceNamespaces';
 import { isLessonTextValid } from './utils/utils';
 import { getLessonIndexData } from './utils/lessonIndexData';
 import { getRecommendedNextLesson } from './utils/recommendations';

@@ -1,4 +1,5 @@
-import { LATEST_PLOVER_DICT_NAME, SOURCE_NAMESPACES } from '../../constant/index.js';
+import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
+import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
 import { addOutlinesToWordsInCombinedDict } from './transformingDictionaries';
 import {
   PersonalDictionaryNameAndContents,

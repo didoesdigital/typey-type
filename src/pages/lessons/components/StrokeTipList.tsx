@@ -1,5 +1,5 @@
 import React from "react";
-import { SOURCE_NAMESPACES } from "../../../constant/index.js";
+import SOURCE_NAMESPACES from "../../../constant/sourceNamespaces";
 
 import LookupResultsOutlinesAndDicts from "../../../components/LookupResultsOutlinesAndDicts";
 import createListOfStrokes from "../../../utils/createListOfStrokes";
@@ -69,9 +69,7 @@ const StrokeTipList = ({
       >
         {currentPhraseOutlines.length < 1 ? (
           <p
-            className={`mb0 de-emphasized${
-              isMultiline ? " text-center" : ""
-            }`}
+            className={`mb0 de-emphasized${isMultiline ? " text-center" : ""}`}
           >
             No other hints…
           </p>

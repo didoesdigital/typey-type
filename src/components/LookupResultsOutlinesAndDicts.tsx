@@ -1,5 +1,5 @@
 import React from "react";
-import { SOURCE_NAMESPACES } from "../constant/index.js";
+import SOURCE_NAMESPACES from "../constant/sourceNamespaces";
 
 import type { StrokeAndDictionaryAndNamespace, StenoLayout } from "../types";
 
