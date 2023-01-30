@@ -508,6 +508,9 @@ const testTypeyTypeDict = {
   "PHR-FPLT": "Mr.",
   "TKPWAOD": "good",
   "PHEPB": "men",
+  "PHOUS": "mouse",
+  "HURPBT": "hunter",
+  "STAOUPBD": "stay tuned",
 };
 
 const testPloverDict = {

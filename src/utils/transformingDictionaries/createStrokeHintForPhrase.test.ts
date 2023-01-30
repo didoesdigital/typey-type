@@ -512,7 +512,9 @@ describe('create stroke hint for phrase', () => {
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1 KHR-PB 0/0 9 KHR-PB 0/0 1/0 KHR-PB 0/0 1/9 KHR-PB 0/0 2/0 KHR-PB 0/0");
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-BG K-9 1/0 KHR-PB #-Z 1-9 KHR-PB #-Z 2/0 KHR-PB #-Z");
     });
+  });
 
+  describe('returns hints for complex hyphenated phrases', () => {
     it('showing good stroke hint for known word and suffix with one hyphen', () => {
       let wordOrPhraseMaterial = "kettle-acre";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KET/*L/A*EURBG");
@@ -581,6 +583,18 @@ describe('create stroke hint for phrase', () => {
     xit('showing good stroke hint for camel case hash tags in a sentence', () => {
       let wordOrPhraseMaterial = "This is #StenoLife";
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA*/TH S HAERB KPA*/STOEUPB KPA*/HRAOEUF");
+    });
+
+    xit('showing good stroke hint for hyphenated compound word with trailing punctuation', () => {
+      let wordOrPhraseMaterial = "mouse-hunter,";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("PHOUS H-PB HUPB/TER KW-BG");
+    });
+  });
+
+  describe('returns hints for complex capitalised and punctuated phrases', () => {
+    xit('showing good stroke hint for known word with added capital letter and punctuation', () => {
+      let wordOrPhraseMaterial = "Stay tuned,";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/STAOUPBD/KW-BG");
     });
   });
 });
