@@ -107,6 +107,16 @@ function lookupListOfStrokesAndDicts(
     );
   }
   if (listOfStrokesAndDicts.length === 0) {
+    modifiedWordOrPhrase = "" + lookupText + "{-|}";
+    let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+      modifiedWordOrPhrase,
+      globalLookupDictionary
+    );
+    listOfStrokesAndDicts = listOfStrokesAndDicts.concat(
+      listOfStrokesAndDictsWithSuppressedSpaces
+    );
+  }
+  if (listOfStrokesAndDicts.length === 0) {
     modifiedWordOrPhrase = lookupText.trim();
     let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
       modifiedWordOrPhrase,

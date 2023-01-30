@@ -259,3 +259,22 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual([listOfStrokesAndDicts, phrase.trimStart()]);
   });
 });
+
+describe("lookup list of strokes and dicts with capitalization dictionary formatting", () => {
+  let globalLookupDictionary = new Map(
+    Object.entries({
+      "Mx.{-|}": [["PH-BGS", "plover:plover-main-3-jun-2018.json"]],
+    })
+  );
+
+  it("shows list of strokes and dictionary for “Mx.” that use capitalize next word dictionary formatting", () => {
+    let phrase = "Mx.";
+    let listOfStrokesAndDicts = [
+      ["PH-BGS", "plover-main-3-jun-2018.json", "plover"],
+    ];
+
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
+      [listOfStrokesAndDicts, "Mx.{-|}"]
+    );
+  });
+});
