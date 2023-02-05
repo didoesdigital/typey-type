@@ -97,27 +97,28 @@ const fingerspelledCharacters: FingerspelledCharacters = {
   // "{^~|\"}": "KR-GS",
   // "{~|\"^}": "KW-GS",
   " ": "S-P",
-  "1": "1",
-  "2": "2",
-  "3": "3",
-  "4": "4",
-  "5": "5",
-  "0": "0",
-  "6": "6",
-  "7": "7",
-  "8": "8",
-  "9": "9"
+  // Using numbers as letters matches keys on board
+  "1": "#S",
+  "2": "#T",
+  "3": "#P",
+  "4": "#H",
+  "5": "#A",
+  "0": "#O",
+  "6": "#F",
+  "7": "#-P",
+  "8": "#L",
+  "9": "#-T"
 } as const;
-// Maybe show numbers as letters?
-// "1": "#S",
-// "2": "#T-",
-// "3": "#P-",
-// "4": "#H",
-// "5": "#A",
-// "0": "#O",
-// "6": "#F",
-// "7": "#-P",
-// "8": "#L",
-// "9": "#-T"
+// Previously shown numbers as numbers matched Plover "add translation" behaviour
+// "1": "1",
+// "2": "2",
+// "3": "3",
+// "4": "4",
+// "5": "5",
+// "0": "0",
+// "6": "6",
+// "7": "7",
+// "8": "8",
+// "9": "9"
 
 export default fingerspelledCharacters;

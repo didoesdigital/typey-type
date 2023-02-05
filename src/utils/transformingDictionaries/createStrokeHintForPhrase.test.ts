@@ -481,9 +481,9 @@ describe('create stroke hint for phrase', () => {
 
     it('zero to ten with spaces', () => {
       // let wordOrPhraseMaterial = "0 1 2 3 4 5 6 7 8 9 10";
-      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O #S #T- #P- #H #A #F #-P #L #-T 1/0");
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O #S #T #P #H #A #F #-P #L #-T 1/0");
       let wordOrPhraseMaterial = "0 0 1 2 3 4 5 6 7 8 9 10";
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O 0EU 1 2 3 4 R5 6 7 8 9 1/0");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("#O 0EU #S #T #P #H R5 #F #-P #L #-T 1/0");
     });
 
     it('returns strings with numbers containing zeroes and commas', () => {

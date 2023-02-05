@@ -40,7 +40,7 @@ describe("createFingerspellingStroke", () => {
     ]);
     expect(
       createFingerspellingStroke("€100", lookupDict, affixList)
-    ).toEqual("xxx/1/0/0");
+    ).toEqual("xxx/#S/#O/#O");
   });
 
   // xit("returns number bar key and letter keys for numbers", () => {
