@@ -487,10 +487,10 @@ describe('create stroke hint for phrase', () => {
     });
 
     it('returns strings with numbers containing zeroes and commas', () => {
-      let wordOrPhraseMaterial = "100 900 1000 1,000 10000 10,000";
+      let wordOrPhraseMaterial = "100 800 900 1000 1,000 10000 10,000";
       // FIXME: should probably show #SZ #TZ #TPHOUZ #SO/W-B/THUZ 10/THUZ #SO/W-B/THUZ
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1/0/0 9/0/0 1/0/0/0 1 KW-BG 0/0/0 1/0/0/0/0 1/0 KW-BG 0/0/0");
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-Z -9Z 1/THOUZ TPHOUZ 1-Z/HUPB/HUPB #SO/W-B/THUZ");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-Z -8Z EU9 1/THOUZ TPHOUZ 1-Z/HUPB/HUPB #SO/W-B/THUZ");
     });
 
     it('returns string with double numbers', () => {
@@ -500,17 +500,17 @@ describe('create stroke hint for phrase', () => {
     });
 
     it('returns string with currency', () => {
-      let wordOrPhraseMaterial = "$100 $900";
+      let wordOrPhraseMaterial = "$100 $800 $900";
       // FIXME: should probably show #SDZ #-TDZ
-      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-DZ TK-PL -9Z");
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-DZ TPHRORB -9Z");
+      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-DZ TK-PL -8Z EU9");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-DZ TPHRORB -8Z TPHRORB EU9");
     });
 
     it('returns string with clock time', () => {
       let wordOrPhraseMaterial = "1:00 9:00 10:00 19:00 20:00";
       // FIXME: should probably show #SK or #SBG, #KT or #BGT, #SKO or #SOBG, #SKT or #SBGT, and #TKO or #TOBG
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1 KHR-PB 0/0 9 KHR-PB 0/0 1/0 KHR-PB 0/0 1/9 KHR-PB 0/0 2/0 KHR-PB 0/0");
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-BG K-9 1/0 KHR-PB #-Z 1-9 KHR-PB #-Z 2/0 KHR-PB #-Z");
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("1-BG K-9 1/0 KHR-PB #-Z 19 KHR-PB #-Z 2/0 KHR-PB #-Z");
     });
   });
 
