@@ -25,7 +25,7 @@ const LessonCanvasFooter = ({
         setAnnouncementMessage={setAnnouncementMessage}
         userSettings={userSettings}
       />
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap content-center">
         <fieldset className="dc hide-sm">
           {/* @ts-ignore */}
           <Tooltip

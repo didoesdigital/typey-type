@@ -664,6 +664,9 @@ input:focus::placeholder {
 .lh-double        { line-height: 2; }
 .fr               { float: right; display: inline; }
 
+// Tailwind:
+.content-center   { align-content: center; }
+
 .hide-soft-hyphen {
   -webkit-hyphenate-character: '';
   // hyphenate-character: '';
