@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import MainLessonView from "./MainLessonView";
 import userSettings from "../../stories/fixtures/userSettings";
 import Zipper from "../../utils/zipper";
@@ -86,6 +86,17 @@ const lessonIndex = [
 const handleLesson = (path) => undefined;
 const stopLesson = () => undefined;
 
+const createNewCustomLesson = (
+  <Link
+    to="/lessons/custom/setup"
+    onClick={() => console.log("Stop lesson and edit custom lesson")}
+    className="link-button link-button-ghost table-cell mr1"
+    role="button"
+  >
+    Edit custom lesson
+  </Link>
+);
+
 const Template = (args) => {
   return (
     <Switch>
@@ -93,6 +104,7 @@ const Template = (args) => {
         render={(props) => (
           <div>
             <MainLessonView
+              createNewCustomLesson={createNewCustomLesson}
               customLesson={customLesson}
               fetchAndSetupGlobalDict={() => Promise.resolve(true)}
               globalLookupDictionary={globalLookupDictionary}
