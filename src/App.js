@@ -60,6 +60,7 @@ import setAnnouncementMessageString from './components/Announcements/setAnnounce
 import sortLesson from './utils/lessons/sortLesson';
 import Zipper from './utils/zipper';
 import generateCustomLesson from './pages/lessons/custom/generator/utilities/generateCustomLesson';
+import customiseLesson from './pages/lessons/utilities/customiseLesson';
 
 const AsyncBreak = Loadable({
   loader: () => import("./pages/break/Break"),
@@ -2378,6 +2379,7 @@ class App extends Component {
                         <Lessons
                           generateCustomLesson={generateCustomLesson.bind(this)}
                           customLesson={this.state.customLesson}
+                          customiseLesson={customiseLesson.bind(this)}
                           customLessonMaterial={this.state.customLessonMaterial}
                           customLessonMaterialValidationState={this.state.customLessonMaterialValidationState}
                           customLessonMaterialValidationMessages={this.state.customLessonMaterialValidationMessages}

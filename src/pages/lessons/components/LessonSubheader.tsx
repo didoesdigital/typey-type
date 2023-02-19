@@ -43,7 +43,8 @@ const LessonSubheader = React.forwardRef(
           </header>
         </div>
         <div className="flex flex-wrap mxn2">
-          {createNewCustomLesson ? createNewCustomLesson : overviewLink}
+          {createNewCustomLesson ? createNewCustomLesson : undefined}
+          {overviewLink ? overviewLink : undefined}
           {!path.includes("custom") && !path.includes("progress") ? (
             <Link
               to={path

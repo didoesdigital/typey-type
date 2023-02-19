@@ -123,6 +123,11 @@ class Lesson extends Component {
     });
   }
 
+  stopAndCustomiseLesson() {
+    this.props.stopLesson();
+    this.props.customiseLesson();
+  }
+
   render() {
     if (this.props.lessonNotFound) {
       return <LessonNotFound path={this.props.path} location={this.props.location} lessonIndex={this.props.lessonIndex} />
@@ -140,7 +145,14 @@ class Lesson extends Component {
         Edit custom lesson
       </Link>
     ) : (
-      undefined
+      <Link
+        to="/lessons/custom/setup"
+        onClick={this.stopAndCustomiseLesson.bind(this)}
+        className="link-button link-button-ghost table-cell mr1"
+        role="button"
+      >
+        Customise lesson
+      </Link>
     );
 
     const metadata = getLessonMetadata(

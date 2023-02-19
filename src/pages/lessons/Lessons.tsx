@@ -10,6 +10,7 @@ import PageLoading from "../../components/PageLoading";
 
 type LessonsRoutingProps = {
   customLesson: any;
+  customiseLesson: () => void;
   generateCustomLesson: any;
   handleLesson: any;
   lesson: any;
@@ -32,6 +33,7 @@ const Lessons = ({
   customLessonMaterial,
   customLessonMaterialValidationMessages,
   customLessonMaterialValidationState,
+  customiseLesson,
   fetchAndSetupGlobalDict,
   generateCustomLesson,
   globalLookupDictionary,
@@ -129,6 +131,7 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            customiseLesson={customiseLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
@@ -149,6 +152,7 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            customiseLesson={customiseLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
@@ -169,6 +173,7 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            customiseLesson={customiseLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
@@ -190,6 +195,7 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            customiseLesson={customiseLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
@@ -211,6 +217,7 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            customiseLesson={customiseLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
@@ -232,6 +239,7 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             customLesson={customLesson}
+            customiseLesson={customiseLesson}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
