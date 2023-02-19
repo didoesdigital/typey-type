@@ -346,6 +346,7 @@ const Lessons = ({
             customLesson={customLesson}
             handleLesson={handleLesson}
             lesson={lesson}
+            lessonNotFound={true}
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
