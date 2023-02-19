@@ -349,7 +349,7 @@ class Writer extends Component<Props, State> {
                       autoCapitalize="off"
                       autoComplete="off"
                       autoCorrect="off"
-                      className="input-textarea"
+                      className="input-textarea overflow-hidden"
                       onChange={this.updateQWERTYSteno.bind(this)}
                       placeholder="e.g. rnm"
                       value={this.state.valueQWERTYSteno}
@@ -383,7 +383,7 @@ class Writer extends Component<Props, State> {
                       autoCapitalize="off"
                       autoComplete="off"
                       autoCorrect="off"
-                      className="input-textarea"
+                      className="input-textarea overflow-hidden"
                       onChange={this.updateRawSteno.bind(this)}
                       placeholder={placeholderRawSteno}
                       value={this.state.valueRawSteno}

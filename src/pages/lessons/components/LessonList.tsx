@@ -164,7 +164,7 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
         <input
           ref={searchInputRef}
           id="lesson-search-filter"
-          className="caret-color w-100 bg-white dark:bg-coolgrey-1000 input-textarea mb3"
+          className="caret-color w-100 bg-white dark:bg-coolgrey-1000 input-textarea mb3 overflow-hidden"
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"

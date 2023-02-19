@@ -1251,7 +1251,6 @@ $textarea-padding-x: 8px;
   font-size: 1rem;
   line-height: 1.5;
   padding: $textarea-padding-y $textarea-padding-x;
-  overflow: hidden;
 }
 
 .input-textarea-label.input-textarea-label--large {
@@ -1278,6 +1277,7 @@ $textarea-padding-x: 8px;
   border: $textarea-border solid transparent;
   font-weight: 400;
   line-height: 1.5;
+  overflow: hidden;
   transform: translateX(0);
   width: 640px;
   z-index: $z-index-successfully-typed-text;

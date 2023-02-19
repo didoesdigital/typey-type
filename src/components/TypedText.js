@@ -125,7 +125,7 @@ class TypedText extends Component {
                 autoCapitalize="off"
                 autoComplete="off"
                 autoCorrect="off"
-                className={`input-textarea typed-text-input-positioning typed-text-input-textarea${
+                className={`input-textarea typed-text-input-positioning typed-text-input-textarea overflow-hidden${
                   isMultiline ? " text-center" : ""
                 }`}
                 id="your-typed-text"
