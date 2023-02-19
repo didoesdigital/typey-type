@@ -132,8 +132,8 @@ class TypedText extends Component {
                 aria-describedby="punctuation-description"
                 onChange={this.props.updateMarkup}
                 onKeyPress={this.keyPress.bind(this)}
-                rows="1"
-                spellCheck="false"
+                rows={1}
+                spellCheck={false}
                 value={this.props.actualText}
                 wrap="off"
               ></textarea>

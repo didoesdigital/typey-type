@@ -56,8 +56,8 @@ export default function Input({
           className="input-textarea w-100 typed-text-input-textarea text-center mx-auto overflow-hidden"
           id={`${gameName}-input`}
           onChange={onChangeTypedText}
-          rows="1"
-          spellCheck="false"
+          rows={1}
+          spellCheck={false}
           value={typedText}
           wrap="off"
         ></textarea>
