@@ -34,6 +34,11 @@ const GeneratorHelp = ({ hideHelp, containerId }: Props) => (
       <p className="mb0 pt2 pb1 pl3">
         Here are some extra details about the options on this page.
       </p>
+
+      <p className="mb0 pt2 pb1 pl3">
+        Some rules don’t make sense to apply at the same time, such as “is one
+        syllable” and “has more than one syllable”, and will result in no words.
+      </p>
       <RuleHeading>“is one syllable”</RuleHeading>
       <RuleBlurb>
         <p>
