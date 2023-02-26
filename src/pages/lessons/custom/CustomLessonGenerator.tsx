@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import RuleOptions from "./generator/components/RuleOptions";
 import availableRulePrettyNames from "./generator/utilities/availableRulePrettyNames";
 import maxItems from "./generator/constants/maxItems";
+import GeneratorHelp from "./GeneratorHelp";
 import type {
   CustomLesson,
   LookupDictWithNamespacedDicts,
@@ -33,21 +34,9 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDicts;
 };
 
-type RuleHeadingProps = {
-  children: React.ReactNode;
-};
-const RuleHeading = ({ children }: RuleHeadingProps) => (
-  <h4 className="mb0 mt0 pt2 pb1 px3 h5 fw7">{children}</h4>
-);
-
-type RuleBlurbProps = {
-  children: React.ReactNode;
-};
-const RuleBlurb = ({ children }: RuleBlurbProps) => (
-  <div className="mb0 pt0 pb1 px3">{children}</div>
-);
-
 const numberOfVisibleOptions = 16;
+
+const containerId = "collapsible-help";
 
 const CustomLessonGenerator = ({
   customLesson,
@@ -154,7 +143,7 @@ const CustomLessonGenerator = ({
                       onClick={toggleHideHelp}
                       onKeyPress={toggleHideHelp}
                       aria-expanded={!hideHelp}
-                      aria-controls="collapsible-help"
+                      aria-controls={containerId}
                     >
                       {hideHelp ? "Show help" : "Hide help"}
                     </button>
@@ -281,44 +270,7 @@ const CustomLessonGenerator = ({
                   </div>
                 </div>
               </div>
-              <div
-                id="collapsible-help"
-                className={`mh-page mw-744 bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 ${
-                  hideHelp ? " hide" : ""
-                }`}
-                style={{ flexGrow: 100 }}
-                aria-hidden={hideHelp}
-              >
-                <div className="mw100">
-                  <h3 className="mb1 pl3 mt3 pt3">Help</h3>
-
-                  <p className="mb0 pt2 pb1 pl3">
-                    Here are some extra details about the options on this page.
-                  </p>
-                  <RuleHeading>“is one syllable”</RuleHeading>
-                  <RuleBlurb>
-                    <p>
-                      This rule guesses the syllable count and only includes
-                      words that are 1 syllable long. Anything with a space and
-                      some particular terms like “mysql” are automatically
-                      considered more than one syllable.
-                    </p>
-                    <p className="mb0">
-                      E.g. includes “one”, “course”, “through”, “branch”
-                    </p>
-                    <p>E.g. excludes “city”, “desire”, “something”</p>
-                  </RuleBlurb>
-                  <RuleHeading>“has more than one syllable”</RuleHeading>
-                  <RuleBlurb>
-                    <p>
-                      This rule guesses the syllable count and only includes
-                      words that are more than 1 syllable long. Some particular
-                      terms like “genre” are automatically considered more than
-                      one syllable.
-                    </p>
-                  </RuleBlurb>
-                </div>
-              </div>
+              <GeneratorHelp hideHelp={hideHelp} containerId={containerId} />
             </div>
           </div>
         </div>
