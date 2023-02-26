@@ -5,6 +5,10 @@ const isOneSyllable = (_outline: string, translation: string) => {
     return false;
   }
 
+  if (translation.match(/[^A-Za-z0-9]/)) {
+    return false;
+  }
+
   if (
     ["mysql", "genre", "genres", "startled", "mingled"].includes(
       lowercaseTranslation
