@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useRef } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga";
 import { actions } from "./generator/rulesActions";
 import Subheader from "../../../components/Subheader";
@@ -33,6 +33,20 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDicts;
 };
 
+type RuleHeadingProps = {
+  children: React.ReactNode;
+};
+const RuleHeading = ({ children }: RuleHeadingProps) => (
+  <h4 className="mb0 mt0 pt2 pb1 px3 h5 fw7">{children}</h4>
+);
+
+type RuleBlurbProps = {
+  children: React.ReactNode;
+};
+const RuleBlurb = ({ children }: RuleBlurbProps) => (
+  <div className="mb0 pt0 pb1 px3">{children}</div>
+);
+
 const numberOfVisibleOptions = 16;
 
 const CustomLessonGenerator = ({
@@ -44,6 +58,12 @@ const CustomLessonGenerator = ({
   personalDictionaries,
 }: Props) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
+
+  const [hideHelp, setHideHelp] = useState(true);
+
+  const toggleHideHelp = () => {
+    setHideHelp(!hideHelp);
+  };
 
   useEffect(() => {
     const shouldUsePersonalDictionaries =
@@ -119,129 +139,185 @@ const CustomLessonGenerator = ({
         </div>
       </Subheader>
 
-      <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
-        <div className="p3 mx-auto mw-1024">
-          <div className="flex flex-wrap justify-between">
-            <div className="mt1">
-              <h3 className="mt3">Lesson generator</h3>
-              <div>
-                <p>
-                  This page lets you generate custom lessons using
-                  Typey&nbsp;Type dictionaries and personal dictionaries.
-                </p>
-                <p>
-                  <span role="img" aria-label="Warning!">
-                    ⚠️{" "}
-                  </span>
-                  Language is messy. These rules use heuristics and make
-                  imperfect guesses.
-                </p>
-                <div className="pb1 columns-2 columns-xs gap-4">
-                  {availableRulePrettyNames
-                    .slice(0, numberOfVisibleOptions)
-                    .map((rule) => (
-                      <RuleOptions
-                        key={rule.ruleName}
-                        ruleName={rule.ruleName}
-                        prettyName={rule.prettyName}
-                        rulesState={rulesState}
-                        onChangeRuleStatus={onChangeRuleStatus}
-                      />
-                    ))}
-                </div>
-                <details>
-                  <summary>
-                    <p className="cursor-pointer color-interactive">
-                      More options…
+      <div className="bg-info dark:bg-coolgrey-1100">
+        <div className="mx-auto mw-1920">
+          <div className="flex-grow mx-auto mw-1440 min-w-0">
+            <div className="flex flex-wrap justify-between">
+              <div className="flex-grow" style={{ "flexBasis": "648px" }}>
+                <div className="p3 mx-auto mw-1024">
+                  <h3 className="mt3">Build lesson</h3>
+                  <p>
+                    <button
+                      className={`button button--secondary mb0 text-center${
+                        hideHelp ? " collapsed" : ""
+                      }`}
+                      onClick={toggleHideHelp}
+                      onKeyPress={toggleHideHelp}
+                      aria-expanded={!hideHelp}
+                      aria-controls="collapsible-help"
+                    >
+                      {hideHelp ? "Show help" : "Hide help"}
+                    </button>
+                  </p>
+                  <div>
+                    <p>
+                      This page lets you generate custom lessons using
+                      Typey&nbsp;Type dictionaries and personal dictionaries.
                     </p>
-                  </summary>
-                  <div className="pb3 columns-2 columns-xs gap-4">
-                    {availableRulePrettyNames
-                      .slice(numberOfVisibleOptions)
-                      .map((rule) => (
-                        <RuleOptions
-                          key={rule.ruleName}
-                          ruleName={rule.ruleName}
-                          prettyName={rule.prettyName}
-                          rulesState={rulesState}
-                          onChangeRuleStatus={onChangeRuleStatus}
-                        />
-                      ))}
+                    <p>
+                      <span role="img" aria-label="Warning!">
+                        ⚠️{" "}
+                      </span>
+                      Language is messy. These rules use heuristics and make
+                      imperfect guesses.
+                    </p>
+                    <div className="pb1 columns-2 columns-xs gap-4">
+                      {availableRulePrettyNames
+                        .slice(0, numberOfVisibleOptions)
+                        .map((rule) => (
+                          <RuleOptions
+                            key={rule.ruleName}
+                            ruleName={rule.ruleName}
+                            prettyName={rule.prettyName}
+                            rulesState={rulesState}
+                            onChangeRuleStatus={onChangeRuleStatus}
+                          />
+                        ))}
+                    </div>
+                    <details>
+                      <summary>
+                        <p className="cursor-pointer color-interactive">
+                          More options…
+                        </p>
+                      </summary>
+                      <div className="pb3 columns-2 columns-xs gap-4">
+                        {availableRulePrettyNames
+                          .slice(numberOfVisibleOptions)
+                          .map((rule) => (
+                            <RuleOptions
+                              key={rule.ruleName}
+                              ruleName={rule.ruleName}
+                              prettyName={rule.prettyName}
+                              rulesState={rulesState}
+                              onChangeRuleStatus={onChangeRuleStatus}
+                            />
+                          ))}
+                      </div>
+                    </details>
+                    <p>
+                      <button
+                        className="link-button dib mr1"
+                        style={{ lineHeight: 2 }}
+                        onClick={buildLesson}
+                        type="button"
+                      >
+                        Build lesson
+                      </button>
+                      <Link
+                        to="/lessons/custom?study=practice&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1"
+                        className="link-button dib button button--secondary"
+                        style={{ lineHeight: 2 }}
+                      >
+                        Start generated lesson
+                      </Link>
+                    </p>
+                    <p>
+                      {customLessonMaterialValidationState === "fail" && (
+                        <>
+                          That combination of rule settings results in no
+                          material. Try setting some rules to “ignored”.
+                          {rulesState.isOneSyllable ===
+                            rulesState.moreThanOneSyllable &&
+                          rulesState.isOneSyllable !== "ignored"
+                            ? " Change one of the syllable count settings."
+                            : ""}
+                          {rulesState.isSingleStroke ===
+                            rulesState.isMultiStroke &&
+                          rulesState.isSingleStroke !== "ignored"
+                            ? " Change one of the stroke count settings."
+                            : ""}
+                        </>
+                      )}
+                      {customLessonMaterialValidationState === "unvalidated" &&
+                        "Preview generated lesson here after building."}
+                      {customLessonMaterialValidationState === "success" &&
+                        `Preview generated lesson with ${
+                          customLesson.presentedMaterial.length === maxItems
+                            ? "max "
+                            : ""
+                        }${customLesson.presentedMaterial.length} item${
+                          customLesson.presentedMaterial.length === 1 ? "" : "s"
+                        }:`}
+                    </p>
+                    <div>
+                      <ul>
+                        {customLessonMaterialValidationState === "fail" ||
+                        customLessonMaterialValidationState === "unvalidated"
+                          ? undefined
+                          : customLesson.presentedMaterial.map(
+                              (materialItem, index: number) => (
+                                <li
+                                  key={`${index}-${materialItem.phrase}-${materialItem.stroke}`}
+                                  className="wrap"
+                                >
+                                  {materialItem.phrase}{" "}
+                                  <kbd className="raw-steno-key raw-steno-key--subtle">
+                                    {materialItem.stroke}
+                                  </kbd>
+                                </li>
+                              )
+                            )}
+                      </ul>
+                    </div>
+                    {customLessonMaterialValidationState === "success" && (
+                      <Link
+                        to="/lessons/custom/setup"
+                        className="link-button dib button button--secondary"
+                        style={{ lineHeight: 2 }}
+                      >
+                        Edit generated lesson
+                      </Link>
+                    )}
                   </div>
-                </details>
-                <p>
-                  <button
-                    className="link-button dib mr1"
-                    style={{ lineHeight: 2 }}
-                    onClick={buildLesson}
-                    type="button"
-                  >
-                    Build lesson
-                  </button>
-                  <Link
-                    to="/lessons/custom?study=practice&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1"
-                    className="link-button dib button button--secondary"
-                    style={{ lineHeight: 2 }}
-                  >
-                    Start generated lesson
-                  </Link>
-                </p>
-                <p>
-                  {customLessonMaterialValidationState === "fail" && (
-                    <>
-                      That combination of rule settings results in no material.
-                      Try setting some rules to “ignored”.
-                      {rulesState.isOneSyllable ===
-                        rulesState.moreThanOneSyllable &&
-                      rulesState.isOneSyllable !== "ignored"
-                        ? " Change one of the syllable count settings."
-                        : ""}
-                      {rulesState.isSingleStroke === rulesState.isMultiStroke &&
-                      rulesState.isSingleStroke !== "ignored"
-                        ? " Change one of the stroke count settings."
-                        : ""}
-                    </>
-                  )}
-                  {customLessonMaterialValidationState === "unvalidated" &&
-                    "Preview generated lesson here after building."}
-                  {customLessonMaterialValidationState === "success" &&
-                    `Preview generated lesson with ${
-                      customLesson.presentedMaterial.length === maxItems
-                        ? "max "
-                        : ""
-                    }${customLesson.presentedMaterial.length} item${
-                      customLesson.presentedMaterial.length === 1 ? "" : "s"
-                    }:`}
-                </p>
-                <div>
-                  <ul>
-                    {customLessonMaterialValidationState === "fail" ||
-                    customLessonMaterialValidationState === "unvalidated"
-                      ? undefined
-                      : customLesson.presentedMaterial.map(
-                          (materialItem, index: number) => (
-                            <li
-                              key={`${index}-${materialItem.phrase}-${materialItem.stroke}`}
-                              className="wrap"
-                            >
-                              {materialItem.phrase}{" "}
-                              <kbd className="raw-steno-key raw-steno-key--subtle">
-                                {materialItem.stroke}
-                              </kbd>
-                            </li>
-                          )
-                        )}
-                  </ul>
                 </div>
-                {customLessonMaterialValidationState === "success" && (
-                  <Link
-                    to="/lessons/custom/setup"
-                    className="link-button dib button button--secondary"
-                    style={{ lineHeight: 2 }}
-                  >
-                    Edit generated lesson
-                  </Link>
-                )}
+              </div>
+              <div
+                id="collapsible-help"
+                className={`mh-page mw-744 bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 ${
+                  hideHelp ? " hide" : ""
+                }`}
+                style={{ flexGrow: 100 }}
+                aria-hidden={hideHelp}
+              >
+                <div className="mw100">
+                  <h3 className="mb1 pl3 mt3 pt3">Help</h3>
+
+                  <p className="mb0 pt2 pb1 pl3">
+                    Here are some extra details about the options on this page.
+                  </p>
+                  <RuleHeading>“is one syllable”</RuleHeading>
+                  <RuleBlurb>
+                    <p>
+                      This rule guesses the syllable count and only includes
+                      words that are 1 syllable long. Anything with a space and
+                      some particular terms like “mysql” are automatically
+                      considered more than one syllable.
+                    </p>
+                    <p className="mb0">
+                      E.g. includes “one”, “course”, “through”, “branch”
+                    </p>
+                    <p>E.g. excludes “city”, “desire”, “something”</p>
+                  </RuleBlurb>
+                  <RuleHeading>“has more than one syllable”</RuleHeading>
+                  <RuleBlurb>
+                    <p>
+                      This rule guesses the syllable count and only includes
+                      words that are more than 1 syllable long. Some particular
+                      terms like “genre” are automatically considered more than
+                      one syllable.
+                    </p>
+                  </RuleBlurb>
+                </div>
               </div>
             </div>
           </div>
