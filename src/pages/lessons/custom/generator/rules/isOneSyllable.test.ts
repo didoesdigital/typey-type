@@ -36,4 +36,10 @@ describe("isOneSyllable", () => {
   it("returns false for initialisms", async () => {
     expect(isOneSyllable("HAOEPLT", "HTML")).toEqual(false);
   });
+
+  it("returns false for translations with new lines", async () => {
+    expect(
+      isOneSyllable("OEBL/KOED/TPEPBS/SKWR-S", "{^}~~~js\n\n{^~~~^}{#Up}{^}")
+    ).toEqual(false);
+  });
 });

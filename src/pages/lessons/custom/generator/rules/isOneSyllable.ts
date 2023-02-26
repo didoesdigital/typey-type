@@ -1,7 +1,7 @@
 const isOneSyllable = (_outline: string, translation: string) => {
   const lowercaseTranslation = translation.toLowerCase();
 
-  if (translation.includes(' ')) {
+  if (translation.includes(" ") || translation.includes("\n")) {
     return false;
   }
 
