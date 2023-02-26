@@ -134,20 +134,22 @@ const CustomLessonGenerator = ({
             <div className="flex flex-wrap justify-between">
               <div className="flex-grow" style={{ "flexBasis": "648px" }}>
                 <div className="p3 mx-auto mw-1024">
-                  <h3 className="mt3">Build lesson</h3>
-                  <p>
-                    <button
-                      className={`button button--secondary mb0 text-center${
-                        hideHelp ? " collapsed" : ""
-                      }`}
-                      onClick={toggleHideHelp}
-                      onKeyPress={toggleHideHelp}
-                      aria-expanded={!hideHelp}
-                      aria-controls={containerId}
-                    >
-                      {hideHelp ? "Show help" : "Hide help"}
-                    </button>
-                  </p>
+                  <div className="mt3 flex justify-between">
+                    <h3 className="mt0">Build lesson</h3>
+                    <p>
+                      <button
+                        className={`button button--secondary mb0 text-center${
+                          hideHelp ? " collapsed" : ""
+                        }`}
+                        onClick={toggleHideHelp}
+                        onKeyPress={toggleHideHelp}
+                        aria-expanded={!hideHelp}
+                        aria-controls={containerId}
+                      >
+                        {hideHelp ? "Show help" : "Hide help"}
+                      </button>
+                    </p>
+                  </div>
                   <div>
                     <p>
                       This page lets you generate custom lessons using
