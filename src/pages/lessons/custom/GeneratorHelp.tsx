@@ -32,7 +32,7 @@ const GeneratorHelp = ({ hideHelp, containerId }: Props) => (
     className={`mh-page mw-744 overflow-y-scroll bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 ${
       hideHelp ? " hide" : ""
     }`}
-    style={{ flexGrow: 100 }}
+    style={{ flexGrow: 100, maxHeight: "2632px" }}
     aria-hidden={hideHelp}
   >
     <div className="mw100 type-face--sans-serif">
