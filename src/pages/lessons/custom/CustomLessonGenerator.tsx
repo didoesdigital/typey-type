@@ -220,6 +220,13 @@ const CustomLessonGenerator = ({
                           rulesState.isOneSyllable !== "ignored"
                             ? " Change one of the syllable count settings."
                             : ""}
+                          {(rulesState.isOneSyllable ===
+                            rulesState.hasLongWords ||
+                            rulesState.isOneSyllable ===
+                              rulesState.hasLongTranslations) &&
+                          rulesState.isOneSyllable !== "ignored"
+                            ? " Change the one syllable or long words/translations settings."
+                            : ""}
                           {rulesState.isSingleStroke ===
                             rulesState.isMultiStroke &&
                           rulesState.isSingleStroke !== "ignored"
