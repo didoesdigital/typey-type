@@ -28,7 +28,7 @@ const GeneratorHelp = ({ hideHelp, containerId }: Props) => (
     style={{ flexGrow: 100 }}
     aria-hidden={hideHelp}
   >
-    <div className="mw100">
+    <div className="mw100 type-face--sans-serif">
       <h3 className="mb1 pl3 mt3 pt3">Help</h3>
 
       <p className="mb0 pt2 pb1 pl3">
