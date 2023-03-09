@@ -37,7 +37,7 @@ class DictionariesIndex extends Component {
       let learnMoreLink = [];
 
       if (dictionary.link && dictionary.link.length > 0) {
-        let ariaLabel = "Learn more about " + title;
+        const ariaLabel = "Learn more about " + title;
 
         if (
           dictionary.link.startsWith("/typey-type") ||
