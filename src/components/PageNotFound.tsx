@@ -6,13 +6,17 @@ import { Link } from "react-router-dom";
 import { IconTypeyType, IconExternal } from "./Icon";
 import { Tooltip } from "react-tippy";
 
-const PageNotFound = ({ location, setAnnouncementMessage }) => {
-  // const mainHeading = useRef<HTMLHeadingElement>(null);
-  const mainHeading = useRef(null);
+type Props = {
+  location: any;
+  setAnnouncementMessage: any;
+};
+
+const PageNotFound = ({ location, setAnnouncementMessage }: Props) => {
+  const mainHeading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
     if (mainHeading) {
-      // mainHeading.current?.focus();
+      mainHeading.current?.focus();
     }
   }, []);
 
