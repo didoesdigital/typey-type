@@ -46,63 +46,51 @@ class DictionariesIndex extends Component {
           dictionary.link.startsWith("/support")
         ) {
           learnMoreLink = (
-            <span>
-              {" "}
-              · 
-              <Link to={dictionary.link} aria-label={ariaLabel}>
-                Learn more
-              </Link>
-            </span>
+            <Link to={dictionary.link} aria-label={ariaLabel}>
+              Learn more
+            </Link>
           );
           if (dictionary.link.startsWith("/lessons")) {
             learnMoreLink = (
-              <span>
-                {" "}
-                · 
-                <Link
-                  to={dictionary.link}
-                  aria-label={"Lesson: " + dictionary.title}
-                >
-                  Lesson
-                </Link>
-              </span>
+              <Link
+                to={dictionary.link}
+                aria-label={"Lesson: " + dictionary.title}
+              >
+                Lesson
+              </Link>
             );
           }
         } else {
           learnMoreLink = (
-            <span>
-              {" "}
-              · 
-              <a
-                href={dictionary.link}
-                aria-label={ariaLabel}
-                target="_blank"
-                rel="noopener noreferrer"
+            <a
+              href={dictionary.link}
+              aria-label={ariaLabel}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Learn more
+              <Tooltip
+                title="Opens in a new tab"
+                animation="shift"
+                arrow="true"
+                className=""
+                duration="200"
+                tabIndex={0}
+                tag="span"
+                theme="didoesdigital"
+                trigger="mouseenter focus click"
+                onShow={this.props.setAnnouncementMessage}
               >
-                Learn more
-                <Tooltip
-                  title="Opens in a new tab"
-                  animation="shift"
-                  arrow="true"
-                  className=""
-                  duration="200"
-                  tabIndex={0}
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={this.props.setAnnouncementMessage}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </a>
-            </span>
+                <IconExternal
+                  ariaHidden="true"
+                  role="presentation"
+                  iconWidth="24"
+                  iconHeight="24"
+                  className="ml1 svg-icon-wrapper svg-baseline"
+                  iconTitle=""
+                />
+              </Tooltip>
+            </a>
           );
         }
       }
@@ -122,7 +110,11 @@ class DictionariesIndex extends Component {
             {author}’s {dictionary.title}
             {subtitle}
           </Link>
-          {learnMoreLink}
+          <span>
+            {" "}
+            · 
+            {learnMoreLink}
+          </span>
         </li>
       );
     });
