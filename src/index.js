@@ -15,6 +15,7 @@ if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
     ignoreErrors: [
       /ResizeObserver loop limit exceeded/i,
       /ResizeObserver loop completed with undelivered notifications/i,
+      /ChunkLoadError/i,
     ],
   });
 }
