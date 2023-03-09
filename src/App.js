@@ -75,7 +75,7 @@ const AsyncContribute = Loadable({
 });
 
 const AsyncPageNotFound = Loadable({
-  loader: () => import("./components/PageNotFound"),
+  loader: () => import("./pages/pagenotfound/PageNotFound"),
   loading: PageLoading,
   delay: 300
 });

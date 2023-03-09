@@ -1,9 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import GoogleAnalytics from "react-ga";
-import OutboundLink from "./OutboundLink";
+import OutboundLink from "../../components/OutboundLink";
 import * as Sentry from "@sentry/browser";
 import { Link } from "react-router-dom";
-import { IconTypeyType, IconExternal } from "./Icon";
+import { IconTypeyType, IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
 
 type Props = {
