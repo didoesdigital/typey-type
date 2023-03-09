@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from 'react-ga';
+import OutboundLink from "./OutboundLink";
 import * as Sentry from '@sentry/browser';
 import { Link } from 'react-router-dom';
 import { IconTypeyType, IconExternal } from './Icon';
@@ -57,12 +58,10 @@ class PageNotFound extends Component {
             <li><Link to="/break">Take a 5-minute break</Link></li>
           </ul>
           <p>
-            <GoogleAnalytics.OutboundLink
+            <OutboundLink
               eventLabel="Typey Type for Stenographers feedback form"
               aria-label="Share your feedback (form opens in new tab)"
               to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Share your feedback
               <Tooltip
@@ -79,7 +78,7 @@ class PageNotFound extends Component {
               >
                 <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip>
-            </GoogleAnalytics.OutboundLink>.
+            </OutboundLink>.
           </p>
         </main>
       </div>
