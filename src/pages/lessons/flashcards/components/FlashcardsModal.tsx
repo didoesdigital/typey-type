@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import GoogleAnalytics from "react-ga";
+import OutboundLink from "../../../../components/OutboundLink";
 import ReactModal from "react-modal";
 import { Tooltip } from "react-tippy";
 import { IconExternal } from "../../../../components/Icon";
@@ -78,12 +78,10 @@ const FlashcardsModal = ({ fullscreen, setAnnouncementMessage }: Props) => {
           </p>
           <p>
             Thanks to Jim Ladd, you can also use the{" "}
-            <GoogleAnalytics.OutboundLink
+            <OutboundLink
               eventLabel="Anki"
               aria-label="Anki (external link opens in new tab)"
               to="https://apps.ankiweb.net/"
-              target="_blank"
-              rel="noopener noreferrer"
             >
               Anki
               <span className="whitespace-nowrap">
@@ -110,14 +108,12 @@ const FlashcardsModal = ({ fullscreen, setAnnouncementMessage }: Props) => {
                   />
                 </Tooltip>
               </span>
-            </GoogleAnalytics.OutboundLink>{" "}
+            </OutboundLink>{" "}
             app to memorise briefs using the{" "}
-            <GoogleAnalytics.OutboundLink
+            <OutboundLink
               eventLabel="flashcard decks for the Top 2000 Words"
               aria-label="flashcard decks for the Top 2000 Words (external link opens in new tab)"
               to="https://github.com/jladdjr/anki-decks/tree/master/Plover%20-%20Project%20Gutenberg%20Top%2010k%20Words"
-              target="_blank"
-              rel="noopener noreferrer"
             >
               flashcard decks for the Top 2000 Words
               <span className="whitespace-nowrap">
@@ -144,7 +140,7 @@ const FlashcardsModal = ({ fullscreen, setAnnouncementMessage }: Props) => {
                   />
                 </Tooltip>
               </span>
-            </GoogleAnalytics.OutboundLink>{" "}
+            </OutboundLink>{" "}
             from Project Gutenberg he built using Typey&nbsp;Type steno
             diagrams.
           </p>
