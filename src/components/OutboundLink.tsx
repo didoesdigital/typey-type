@@ -5,6 +5,7 @@ type Props = {
   "aria-label"?: string;
   children: React.ReactNode;
   className?: string;
+  style?: React.CSSProperties;
   eventLabel: string;
   to: string;
 };
@@ -14,6 +15,7 @@ const OutboundLink = ({
   className,
   eventLabel,
   "aria-label": ariaLabel,
+  style,
   to,
 }: Props) => {
   return (
@@ -21,6 +23,7 @@ const OutboundLink = ({
       eventLabel={eventLabel}
       aria-label={ariaLabel}
       className={className}
+      style={style}
       to={to}
       target="_blank"
       rel="noopener noreferrer"
