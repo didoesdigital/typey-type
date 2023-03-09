@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import GoogleAnalytics from "react-ga";
+import OutboundLink from "../../components/OutboundLink";
 import StrokesForWords from "../../components/StrokesForWords";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import { IconExternal } from "../../components/Icon";
@@ -112,12 +112,10 @@ const Lookup = ({
           </p>
           <p className="mb0">
             If you notice any odd strokes,{" "}
-            <GoogleAnalytics.OutboundLink
+            <OutboundLink
               eventLabel="post to the feedback form"
               aria-label="post to the feedback form (external link opens in new tab)"
               to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
-              target="_blank"
-              rel="noopener noreferrer"
             >
               use the{" "}
               <span className="whitespace-nowrap">
@@ -145,7 +143,7 @@ const Lookup = ({
                   />
                 </Tooltip>
               </span>
-            </GoogleAnalytics.OutboundLink>
+            </OutboundLink>
             .
           </p>
         </div>
