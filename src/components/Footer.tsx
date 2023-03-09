@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import GoogleAnalytics from "react-ga";
+import OutboundLink from "./OutboundLink";
 import { IconExternal } from "./Icon";
 import { Tooltip } from "react-tippy";
 
@@ -69,13 +69,11 @@ class Footer extends Component<Props> {
           </p>
           <p className="text-center mb0">
             <small>
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 className="no-underline"
                 eventLabel="DiDoesDigital: Typey Type updates and steno news (external link opens in new tab)"
                 aria-label="Typey Type updates and steno news (external link opens in new tab)"
                 to="https://didoesdigital.com/#newsletter"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Steno&nbsp;news
                 {/* @ts-ignore */}
@@ -100,7 +98,7 @@ class Footer extends Component<Props> {
                     iconTitle=""
                   />
                 </Tooltip>
-              </GoogleAnalytics.OutboundLink>
+              </OutboundLink>
             </small>
           </p>
         </footer>
