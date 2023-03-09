@@ -106,9 +106,10 @@ class DictionariesIndex extends Component {
           );
         }
       }
-      let dictionarypath = dictionary.path;
-      dictionarypath = dictionarypath.replace(/lesson.txt/, "lesson/");
-      dictionarypath = dictionarypath.replace(/.json/, "/");
+
+      const dictionarypath = dictionary.path
+        .replace(/lesson.txt/, "lesson/")
+        .replace(/.json/, "/");
 
       return (
         <li className="unstyled-list-item mb1" key={dictionary.path}>
