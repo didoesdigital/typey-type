@@ -19,18 +19,20 @@ class DictionariesIndex extends Component {
 
   render() {
     const linkList = this.props.dictionaryIndex.map((dictionary) => {
-      let author = "Typey Type";
-      if (dictionary.author && dictionary.author.length > 0) {
-        author = dictionary.author;
-      }
-      let title = "dictionary";
-      if (dictionary.title && dictionary.title.length > 0) {
-        title = dictionary.title;
-      }
-      let subtitle = "";
-      if (dictionary.subtitle && dictionary.subtitle.length > 0) {
-        subtitle = ": " + dictionary.subtitle;
-      }
+      const author =
+        dictionary.author && dictionary.author.length > 0
+          ? dictionary.author
+          : "Typey Type";
+
+      const title =
+        dictionary.title && dictionary.title.length > 0
+          ? dictionary.title
+          : "dictionary";
+
+      const subtitle =
+        dictionary.subtitle && dictionary.subtitle.length > 0
+          ? ": " + dictionary.subtitle
+          : "";
 
       let learnMoreLink = [];
 
