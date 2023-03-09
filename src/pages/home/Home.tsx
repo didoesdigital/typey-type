@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import GoogleAnalytics from "react-ga";
+import OutboundLink from "../../components/OutboundLink";
 import { Link } from "react-router-dom";
 import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
@@ -410,11 +410,9 @@ const Home = ({ setAnnouncementMessage }: Props) => {
               <h3 id="steno-news">Keep up with news</h3>
               <p>
                 Sign up for{" "}
-                <GoogleAnalytics.OutboundLink
+                <OutboundLink
                   eventLabel="DiDoesDigital: Typey Type updates and steno news (external link opens in new tab)"
                   to="https://didoesdigital.com/#newsletter"
-                  target="_blank"
-                  rel="noopener noreferrer"
                   aria-label="Typey Type updates and steno news (external link opens in new tab)"
                 >
                   Typey&nbsp;Type updates and steno news
@@ -440,7 +438,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
                       iconTitle=""
                     />
                   </Tooltip>
-                </GoogleAnalytics.OutboundLink>
+                </OutboundLink>
                 .
               </p>
               {}
