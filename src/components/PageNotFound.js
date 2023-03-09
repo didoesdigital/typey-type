@@ -9,7 +9,7 @@ import { Tooltip } from "react-tippy";
 class PageNotFound extends Component {
   componentDidMount() {
     let labelString = "That page doesn’t exist";
-    if (this.props.location && this.props.location.pathname) {
+    if (this.props.location?.pathname) {
       labelString = this.props.location.pathname;
     }
 
