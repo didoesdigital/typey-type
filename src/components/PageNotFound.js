@@ -31,7 +31,7 @@ class PageNotFound extends Component {
             <nav className="flex flex-wrap items-center justify-between">
               <div className="site-heading-banner min-h-40 flex items-center">
                 <Link to="/" className="heading-link dib" aria-label="Typey Type" id="ga--header--logo">
-                  <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" className="flex items-end">
+                  <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1} className="flex items-end">
                     <IconTypeyType role="presentation" iconWidth="64" iconHeight="34" className="mr1 svg-icon-wrapper svg-icon-wrapper--typey-type-logo svg-baseline" />
                     <span className="heading-link__logo-text">Typey&nbsp;Type</span>
                   </h1>
@@ -41,7 +41,7 @@ class PageNotFound extends Component {
           </div>
         </div>
         <main id="main" className="p3 mx-auto mw-1024">
-          <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1">That page doesn’t exist</h1>
+          <h1 ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1}>That page doesn’t exist</h1>
           <p>Try one of these instead:</p>
           <ul>
             <li><Link to="/">Home</Link></li>
