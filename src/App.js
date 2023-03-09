@@ -2479,6 +2479,7 @@ class App extends Component {
                     <DocumentTitle title={'Typey Type | Page not found'}>
                       <AsyncPageNotFound
                         setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
+                        {...props}
                       />
                     </DocumentTitle>
                   </div>
