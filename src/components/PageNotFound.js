@@ -8,15 +8,12 @@ import { Tooltip } from "react-tippy";
 
 class PageNotFound extends Component {
   componentDidMount() {
-    let labelString = "That page doesn’t exist";
-    if (this.props.location?.pathname) {
-      labelString = this.props.location.pathname;
-    }
-
     GoogleAnalytics.event({
       category: "Page not found",
       action: "Visited",
-      label: labelString,
+      label: this.props.location?.pathname
+        ? this.props.location.pathname
+        : "That page doesn’t exist",
     });
 
     Sentry.captureException("Page not found");
