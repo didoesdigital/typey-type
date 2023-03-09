@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import GoogleAnalytics from "react-ga";
+import OutboundLink from "../../components/OutboundLink";
 import StrokesForWords from "../../components/StrokesForWords";
 import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
@@ -159,12 +159,10 @@ class DictionariesIndex extends Component {
                 <p>
                   You can use Plover’s dictionary or you can use use Di’s
                   dictionaries that power Typey Type’s stroke suggestions from{" "}
-                  <GoogleAnalytics.OutboundLink
+                  <OutboundLink
                     eventLabel="Di’s Steno Dictionaries repo"
                     aria-label="Di’s Steno Dictionaries repo (external link opens in new tab)"
                     to="https://github.com/didoesdigital/steno-dictionaries"
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     Di’s Steno Dictionaries{" "}
                     <span className="whitespace-nowrap">
@@ -191,7 +189,7 @@ class DictionariesIndex extends Component {
                         />
                       </Tooltip>
                     </span>
-                  </GoogleAnalytics.OutboundLink>
+                  </OutboundLink>
                   .
                 </p>
                 <h4>Stroke hints</h4>
@@ -222,12 +220,10 @@ class DictionariesIndex extends Component {
                 <h4>Corrections</h4>
                 <p>
                   If you notice any odd strokes,{" "}
-                  <GoogleAnalytics.OutboundLink
+                  <OutboundLink
                     eventLabel="post to the feedback form"
                     aria-label="post to the feedback form (external link opens in new tab)"
                     to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     use the feedback{" "}
                     <span className="whitespace-nowrap">
@@ -254,18 +250,16 @@ class DictionariesIndex extends Component {
                         />
                       </Tooltip>
                     </span>
-                  </GoogleAnalytics.OutboundLink>
+                  </OutboundLink>
                   .
                 </p>
 
                 <p className="text-small">
                   You might also be interested in{" "}
-                  <GoogleAnalytics.OutboundLink
+                  <OutboundLink
                     eventLabel="Stenodict"
                     aria-label="Stenodict (external link opens in new tab)"
                     to="http://www.openstenoproject.org/stenodict/"
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     Stenodict
                     <Tooltip
@@ -289,7 +283,7 @@ class DictionariesIndex extends Component {
                         iconTitle=""
                       />
                     </Tooltip>
-                  </GoogleAnalytics.OutboundLink>
+                  </OutboundLink>
                   .
                 </p>
               </div>
@@ -300,12 +294,10 @@ class DictionariesIndex extends Component {
 
                 <p>
                   Want to add another dictionary to this list?{" "}
-                  <GoogleAnalytics.OutboundLink
+                  <OutboundLink
                     eventLabel="Typey Type for Stenographers dictionary feedback form"
                     aria-label="Share your feedback (form opens in new tab)"
                     to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
-                    target="_blank"
-                    rel="noopener noreferrer"
                   >
                     Share your dictionary
                     <Tooltip
@@ -329,7 +321,7 @@ class DictionariesIndex extends Component {
                         iconTitle=""
                       />
                     </Tooltip>
-                  </GoogleAnalytics.OutboundLink>
+                  </OutboundLink>
                   .
                 </p>
               </div>
@@ -363,12 +355,10 @@ class DictionariesIndex extends Component {
               <p>
                 To help the open steno community and Typey&nbsp;Type grow even
                 faster, add your custom dictionaries to the{" "}
-                <GoogleAnalytics.OutboundLink
+                <OutboundLink
                   eventLabel="community’s dictionaries"
                   aria-label="community’s dictionaries (external link opens in new tab)"
                   to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   community’s{" "}
                   <span className="whitespace-nowrap">
@@ -395,7 +385,7 @@ class DictionariesIndex extends Component {
                       />
                     </Tooltip>
                   </span>
-                </GoogleAnalytics.OutboundLink>
+                </OutboundLink>
                 .
               </p>
               <StrokesForWords

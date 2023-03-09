@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleAnalytics from "react-ga";
+import OutboundLink from "../../../../components/OutboundLink";
 import { IconExternal } from "../../../../components/Icon";
 import { Tooltip } from "react-tippy";
 
@@ -14,12 +14,10 @@ const CustomShareLessons = ({ setAnnouncementMessage }: Props) => {
         <h3>Share your lessons</h3>
         <p className="mb0">
           To help Typey Type grow even faster, add to the{" "}
-          <GoogleAnalytics.OutboundLink
+          <OutboundLink
             aria-label="Community’s lessons (external link opens in new tab)"
             eventLabel="community’s lessons"
             to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
-            target="_blank"
-            rel="noopener noreferrer"
           >
             community’s lessons
             {/* @ts-ignore */}
@@ -44,15 +42,13 @@ const CustomShareLessons = ({ setAnnouncementMessage }: Props) => {
                 iconTitle=""
               />
             </Tooltip>
-          </GoogleAnalytics.OutboundLink>
+          </OutboundLink>
           .
         </p>
-        <GoogleAnalytics.OutboundLink
+        <OutboundLink
           aria-label="Community’s lessons (external link opens in new tab)"
           eventLabel="Community’s lessons"
           to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
-          target="_blank"
-          rel="noopener noreferrer"
           className="link-button dib mt3"
           style={{ lineHeight: 2 }}
         >
@@ -79,7 +75,7 @@ const CustomShareLessons = ({ setAnnouncementMessage }: Props) => {
               iconTitle=""
             />
           </Tooltip>
-        </GoogleAnalytics.OutboundLink>
+        </OutboundLink>
       </div>
     </div>
   );
