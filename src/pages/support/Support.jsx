@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GoogleAnalytics from 'react-ga';
+import OutboundLink from "../../components/OutboundLink";
 import { IconExternal } from '../../components/Icon';
 import { Tooltip } from 'react-tippy';
 import { Link } from 'react-router-dom';
@@ -96,12 +96,10 @@ class Support extends Component {
 
             <h3 id="about-stenography">Stenography</h3>
             <p>The process of writing shorthand is called <strong>stenography</strong>. Using a stenotype machine (or a fancy keyboard) and special software, you can type over 100 or even 200 words per minute. You press keys together on a stenotype machine like playing a piano chord. The software translates the combination into meaningful words according to their phonetic sounds. Plover is the world’s first free, open-source stenography program. You can learn more about Plover from the{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Open steno project"
                 aria-label="Open steno project (external link opens in new tab)"
                 to="http://openstenoproject.org/"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Open steno <span className="whitespace-nowrap">project
                 <Tooltip
@@ -118,7 +116,7 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.
+              </OutboundLink>.
             </p>
 
             <h4 id="steno-terms">Steno terms</h4>
@@ -131,12 +129,10 @@ class Support extends Component {
               <DescriptionDetails>Misstrokes are extra entries that use similar keys to produce the word you meant to write. If you regularly mistype a word, you might add a misstroke entry for the keys you are incorrectly pressing so that your dictionaries effectively autocorrects your mistakes. For example, the misstroke <span className="steno-stroke">SPHAOEU</span> to write “supply” is missing the left-hand <span className="steno-stroke">R</span> key from the usual outline <span className="steno-stroke">SPHRAOEU</span>.</DescriptionDetails>
               <DescriptionTerm>Plover</DescriptionTerm>
               <DescriptionDetails>{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Plover"
                 aria-label="Plover (external link opens in new tab)"
                 to="http://www.openstenoproject.org/plover/"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 <span className="whitespace-nowrap">Plover
                 <Tooltip
@@ -153,17 +149,15 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> is the world’s first free, open-source stenography program. It works cross-platform on Windows, macOS, and Linux operating systems.</DescriptionDetails>
+              </OutboundLink> is the world’s first free, open-source stenography program. It works cross-platform on Windows, macOS, and Linux operating systems.</DescriptionDetails>
             </DescriptionList>
 
             <h3 id="typey-type-notes">Typey&nbsp;Type notes</h3>
             <p>Typey&nbsp;Type embraces ideas of{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="spaced repetitions"
                 aria-label="spaced repetitions (external link opens in new tab)"
                 to="https://en.wikipedia.org/wiki/Spaced_repetition"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 spaced <span className="whitespace-nowrap">repetitions
                 <Tooltip
@@ -180,13 +174,11 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> and{" "}
-              <GoogleAnalytics.OutboundLink
+              </OutboundLink> and{" "}
+              <OutboundLink
                 eventLabel="deliberate practice"
                 aria-label="deliberate practice (external link opens in new tab)"
                 to="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 deliberate <span className="whitespace-nowrap">practice
                 <Tooltip
@@ -203,7 +195,7 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> to teach steno effectively.</p>
+              </OutboundLink> to teach steno effectively.</p>
 
             <h4 id="typey-type-progress-tracking">Typey Type progress tracking</h4>
             <p>When you “stop” a lesson before reaching the end or you complete a lesson, Typey&nbsp;Type will save <Link to="/progress">your progress</Link>. That’s when it saves all the new words you’ve successfully typed. If you leave a lesson without stopping it or finishing it, you’ll lose that lesson’s progress. Typey&nbsp;Type saves your brief progress in your browser’s local storage. You’ll lose your progress if you clear your browsing data (history, cookies, and cache). If you share this device with other people or use Typey&nbsp;Type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;Type.</p>
@@ -212,12 +204,10 @@ class Support extends Component {
             <p>Typey&nbsp;Type uses a version of the Plover dictionary that comes built into the Plover software. Typey&nbsp;Type’s version is based on a copy of Plover’s from a few years ago. <a href="https://didoesdigital.com/">DiDoesDigital</a> has since spent many hours meticulously amending it. This helps Typey&nbsp;Type suggests the best brief available. It chooses the “best” stroke by looking for the shortest stroke, where there are penalties for multi-stroke briefs and briefs that use the star (<code>*</code>) key. <a href="https://didoesdigital.com/">DiDoesDigital</a> has also removed thousands of misstrokes to hide them when learning Plover theory. There are some manual adjustments too. These show strokes that are more consistent with similar words, more consistent with Plover’s theory, phonetic, or easier to stroke.</p>
             <p><Link to="/lessons/custom">Typey&nbsp;Type custom lessons</Link> let you use your own briefs or steno theory.</p>
             <p>If you notice any odd strokes,{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="post to the feedback form"
                 aria-label="post to the feedback form (external link opens in new tab)"
                 to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 post to the feedback <span className="whitespace-nowrap">form
                 <Tooltip
@@ -234,7 +224,7 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.</p>
+              </OutboundLink>.</p>
 
             <h4 id="typey-type-hints">Typey&nbsp;Type hints</h4>
             <p>To manually show a stroke hint in a lesson that otherwise hides hints, press <kbd>Tab</kbd> to focus on the stroke hint and <kbd>Space</kbd> activate it. This will automatically move your focus back to typing. To avoid losing time doing this, you can create a brief to press <kbd>Tab</kbd> and <kbd>Space</kbd> for you, such as <code className="tag-missing-full-stop">{dictionaryEntryForTabSpace}</code></p>
@@ -242,12 +232,10 @@ class Support extends Component {
             <h4 id="typey-type-shortcuts">Typey&nbsp;Type shortcuts</h4>
             <p>
               There are some keyboard shortcuts available when you finish a lesson that make use of the browser’s built in{' '}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="accesskey"
                 aria-label="accesskey (external link opens in new tab)"
                 to="https://en.m.wikipedia.org/wiki/Access_key"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 accesskey
                 <Tooltip
@@ -271,7 +259,7 @@ class Support extends Component {
                     iconTitle=""
                   />
                 </Tooltip>
-              </GoogleAnalytics.OutboundLink>{" "}
+              </OutboundLink>{" "}
               functionality.</p>
             <p>To jump to the <strong className="fw7">next lesson</strong>, use the <code>accesskey</code> shortcut plus the <kbd>o</kbd> key. You can create a steno brief for the shortcut like this:</p>
             <ul>
@@ -317,12 +305,10 @@ class Support extends Component {
             <h4 id="flashcards" tabIndex="-1">Flashcards</h4>
             <p>Flashcards are designed for mobile devices so you can memorise steno briefs on the go. When you’re unable to recall a brief, tap “Hard” to say it was hard to remember. When you can recall a brief without hesitation, tap “Easy”. While studying flashcards, imagine which fingers and the shape of the outline you’d use to stroke a word.</p>
             <p>If it’s been a while since you’ve studied, the “threshold” will be set quite high. You’ll see flashcards you’ve studied that are below the threshold. That is, if the threshold is 12, you’ll see flashcards for words you’ve marked “Easy” less than 12 times. If you’ve marked a word as “Easy” 15 times, it won’t shown again until more time has passed.</p>
-            <p>Thanks to Jim Ladd, you can also use the{" "}<GoogleAnalytics.OutboundLink
+            <p>Thanks to Jim Ladd, you can also use the{" "}<OutboundLink
                 eventLabel="Anki"
                 aria-label="Anki (external link opens in new tab)"
                 to="https://apps.ankiweb.net/"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Anki<span className="whitespace-nowrap">
                 <Tooltip
@@ -339,12 +325,10 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-            </GoogleAnalytics.OutboundLink> app to memorise briefs using the{" "}<GoogleAnalytics.OutboundLink
+            </OutboundLink> app to memorise briefs using the{" "}<OutboundLink
                 eventLabel="flashcard decks for the Top 2000 Words"
                 aria-label="flashcard decks for the Top 2000 Words (external link opens in new tab)"
                 to="https://github.com/jladdjr/anki-decks/tree/master/Plover%20-%20Project%20Gutenberg%20Top%2010k%20Words"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 flashcard decks for the Top 2000 Words<span className="whitespace-nowrap">
                 <Tooltip
@@ -361,15 +345,13 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-            </GoogleAnalytics.OutboundLink> from Project Gutenberg he built using Typey&nbsp;Type steno diagrams.</p>
+            </OutboundLink> from Project Gutenberg he built using Typey&nbsp;Type steno diagrams.</p>
 
             <h4 id="offline" tabIndex="-1">Offline</h4>
-            <p>Typey&nbsp;Type does not yet officially support offline use through the website. Until then, it’s technically possible to make it work offline by running the code yourself. You can follow the steps from the <GoogleAnalytics.OutboundLink
+            <p>Typey&nbsp;Type does not yet officially support offline use through the website. Until then, it’s technically possible to make it work offline by running the code yourself. You can follow the steps from the <OutboundLink
                   eventLabel="Typey Type repo README"
                   aria-label="Typey Type repo README (external link opens in new tab)"
                   to="https://github.com/didoesdigital/typey-type/blob/master/README.md"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   Typey&nbsp;Type repo <span className="whitespace-nowrap">README
                   <Tooltip
@@ -386,18 +368,16 @@ class Support extends Component {
                   >
                     <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-                </GoogleAnalytics.OutboundLink>.
+                </OutboundLink>.
             </p>
 
             <h3 id="learn-steno">Learning stenography</h3>
             <h4 id="try-steno">How can you try out steno?</h4>
             <p>For an idea of how steno feels and works, you can{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="install Plover"
                 aria-label="install Plover (external link opens in new tab)"
                 to="http://openstenoproject.org/"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 install Plover<span className="whitespace-nowrap">
                 <Tooltip
@@ -414,16 +394,14 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> and use its “arpeggiate” setting. This setting lets you use a QWERTY keyboard to write stenography. The trick is that you press each key separately and then press space bar to send the stroke. Usually a stenographer will press all keys together and release them together. Most QWERTY keyboards, however, are non-NKRO (N-key roll over), meaning only the first 6 keys held together will be noticed; later keys are ignored. Arpeggiate will let you explore steno, but is unrealistic.</p>
+              </OutboundLink> and use its “arpeggiate” setting. This setting lets you use a QWERTY keyboard to write stenography. The trick is that you press each key separately and then press space bar to send the stroke. Usually a stenographer will press all keys together and release them together. Most QWERTY keyboards, however, are non-NKRO (N-key roll over), meaning only the first 6 keys held together will be noticed; later keys are ignored. Arpeggiate will let you explore steno, but is unrealistic.</p>
 
             <h4 id="requirements-for-steno">What do you need to learn steno?</h4>
             <p>You need a{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="true NKRO (N-key roll over) supported keyboard"
                 aria-label="true NKRO (N-key roll over) supported keyboard (external link opens in new tab)"
                 to="https://github.com/openstenoproject/plover/wiki/Supported-Hardware#known-supported-keyboards"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 true NKRO (N-key roll over) supported <span className="whitespace-nowrap">keyboard
                 <Tooltip
@@ -440,13 +418,11 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> with key caps or key toppers, or a{" "}
-              <GoogleAnalytics.OutboundLink
+              </OutboundLink> with key caps or key toppers, or a{" "}
+              <OutboundLink
                 eventLabel="stenotype machine"
                 aria-label="stenotype machine (external link opens in new tab)"
                 to="https://github.com/openstenoproject/plover/wiki/Supported-Hardware"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 stenotype <span className="whitespace-nowrap">machine
                 <Tooltip
@@ -463,13 +439,11 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> and software like{" "}
-              <GoogleAnalytics.OutboundLink
+              </OutboundLink> and software like{" "}
+              <OutboundLink
                 eventLabel="Plover (free and open)"
                 aria-label="Plover (free and open) (external link opens in new tab)"
                 to="http://www.openstenoproject.org/plover/"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Plover (free and <span className="whitespace-nowrap">open)
                 <Tooltip
@@ -486,7 +460,7 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.</p>
+              </OutboundLink>.</p>
 
             <h4 id="time-to-learn">How long does it take to learn steno?</h4>
             <p>To write text for personal use, such as writing emails and instant messages, you could learn basic steno at ~40WPM within 3–6 months. To productively use steno to write most text at under 100WPM, it might take 6–18&nbsp;months. For live dictation at 200WPM, it might take you 2&nbsp;or&nbsp;more years. If you are learning stenography for ergonomic reasons and have injuries to manage, it could take longer.</p>
@@ -511,12 +485,10 @@ class Support extends Component {
 
             <h4 id="palantype">What’s a “palantype”?</h4>
             <p>Typey&nbsp;Type supports alternative steno key layouts such as “palantype”. A palantype is an alternative shorthand machine to a stenotype with more keys. That means palantype can have fewer theory conflicts and be easier to learn. Meanwhile, stenography is more popular and more ergonomic.{' '}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Learn palantype"
                 aria-label="Learn palantype (external link opens in new tab)"
                 to="http://www.openstenoproject.org/palantype/tutorial/2016/08/21/learn-palantype.html"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Learn <span className="whitespace-nowrap">palantype
                 <Tooltip
@@ -533,14 +505,12 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>{' '}
+              </OutboundLink>{' '}
               and learn more about{' '}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Palan versus Steno"
                 aria-label="Palan versus Steno (external link opens in new tab)"
                 to="http://www.openstenoproject.org/palantype/palantype/2016/08/21/palan-versus-steno.html"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Palan versus <span className="whitespace-nowrap">Steno
                 <Tooltip
@@ -557,7 +527,7 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>{' '}
+              </OutboundLink>{' '}
               from the Open Steno Project.
             </p>
 
@@ -569,12 +539,10 @@ class Support extends Component {
 
             <h3 id="donate">Donate</h3>
             <p>You can support my efforts on{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Patreon"
                 aria-label="Patreon (external link opens in new tab)"
                 to="https://www.patreon.com/didoesdigital"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Patreon
                 <Tooltip
@@ -591,19 +559,17 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip>
-              </GoogleAnalytics.OutboundLink>. A monthly donation helps me build more lessons and features to help you fast-track your steno progress.
+              </OutboundLink>. A monthly donation helps me build more lessons and features to help you fast-track your steno progress.
             </p>
 
             <h3 id="code">Code on GitHub</h3>
             <p>Here’s some of the code used by Typey&nbsp;Type available on GitHub:</p>
             <ul>
               <li>
-                <GoogleAnalytics.OutboundLink
+                <OutboundLink
                   eventLabel="Typey Type repo"
                   aria-label="Typey Type repo (external link opens in new tab)"
                   to="https://github.com/didoesdigital/typey-type"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   Typey&nbsp;Type <span className="whitespace-nowrap">repo
                   <Tooltip
@@ -620,15 +586,13 @@ class Support extends Component {
                   >
                     <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-                </GoogleAnalytics.OutboundLink>. This contains the application code that makes Typey&nbsp;Type do useful things.
+                </OutboundLink>. This contains the application code that makes Typey&nbsp;Type do useful things.
               </li>
               <li>
-                <GoogleAnalytics.OutboundLink
+                <OutboundLink
                   eventLabel="Typey Type data repo"
                   aria-label="Typey Type data repo (external link opens in new tab)"
                   to="https://github.com/didoesdigital/typey-type-data"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   Typey&nbsp;Type data repo<span className="whitespace-nowrap">
                   <Tooltip
@@ -645,15 +609,13 @@ class Support extends Component {
                   >
                     <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-                </GoogleAnalytics.OutboundLink>. This project is the result of automated scripts that produce lesson data used by Typey&nbsp;Type. The scripts are not included.
+                </OutboundLink>. This project is the result of automated scripts that produce lesson data used by Typey&nbsp;Type. The scripts are not included.
               </li>
               <li>
-                <GoogleAnalytics.OutboundLink
+                <OutboundLink
                   eventLabel="Steno dictionaries repo"
                   aria-label="Steno dictionaries repo (external link opens in new tab)"
                   to="https://github.com/didoesdigital/steno-dictionaries/"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   Steno dictionaries<span className="whitespace-nowrap">
                   <Tooltip
@@ -670,15 +632,13 @@ class Support extends Component {
                   >
                     <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-                </GoogleAnalytics.OutboundLink>. This repository contains Di’s stenography dictionaries that power Typey&nbsp;Type’s stroke suggestions, as well as extra dictionaries for day-to-day steno usage.
+                </OutboundLink>. This repository contains Di’s stenography dictionaries that power Typey&nbsp;Type’s stroke suggestions, as well as extra dictionaries for day-to-day steno usage.
               </li>
               <li>
-                <GoogleAnalytics.OutboundLink
+                <OutboundLink
                   eventLabel="Stenoboard diagram SVG to React repo"
                   aria-label="Stenoboard diagram SVG to React repo (external link opens in new tab)"
                   to="https://github.com/didoesdigital/typey-type-stenoboard-diagram-svg-to-react"
-                  target="_blank"
-                  rel="noopener noreferrer"
                 >
                   Stenoboard diagram SVG to React<span className="whitespace-nowrap">
                   <Tooltip
@@ -695,18 +655,16 @@ class Support extends Component {
                   >
                     <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-                </GoogleAnalytics.OutboundLink>. This project contains scripts used to manually convert SVG steno diagrams into React syntax to be used by the main Typey&nbsp;Type repo.
+                </OutboundLink>. This project contains scripts used to manually convert SVG steno diagrams into React syntax to be used by the main Typey&nbsp;Type repo.
               </li>
             </ul>
 
             <h3 id="news">Want news?</h3>
             <p>Sign up for{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Typey Type updates and steno news"
                 aria-label="Typey Type updates and steno news (external link opens in new tab)"
                 to="https://didoesdigital.com/#newsletter"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Typey&nbsp;Type updates and steno <span className="whitespace-nowrap">news
                 <Tooltip
@@ -723,17 +681,15 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.</p>
+              </OutboundLink>.</p>
 
             <h3 id="credits">Credits</h3>
             <ul>
               <li>{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Wikipedia provides homophones"
                 aria-label="Wikipedia provides homophones (external link opens in new tab)"
                 to="https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/Homophones"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Wikipedia provides <span className="whitespace-nowrap">homophones
                 <Tooltip
@@ -750,14 +706,12 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.</li>
+              </OutboundLink>.</li>
               <li>{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Wikipedia provides proverbial phrases"
                 aria-label="Wikipedia provides proverbial phrases (external link opens in new tab)"
                 to="https://en.wikipedia.org/wiki/List_of_proverbial_phrases"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Wikipedia provides <span className="whitespace-nowrap">proverbial phrases
                 <Tooltip
@@ -774,14 +728,12 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.</li>
+              </OutboundLink>.</li>
               <li>{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Wikipedia provides proverbs"
                 aria-label="Wikipedia provides proverbs (external link opens in new tab)"
                 to="https://en.wiktionary.org/wiki/Appendix:English_proverbs"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Wiktionary provides proverbs
                 <Tooltip
@@ -798,14 +750,12 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip>
-              </GoogleAnalytics.OutboundLink>.</li>
+              </OutboundLink>.</li>
               <li>{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Wikipedia provides irreversible binomials"
                 aria-label="Wikipedia provides irreversible binomials (external link opens in new tab)"
                 to="https://en.wikipedia.org/wiki/Irreversible_binomial"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Wikipedia provides <span className="whitespace-nowrap">irreversible binomials
                 <Tooltip
@@ -822,14 +772,12 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.</li>
+              </OutboundLink>.</li>
               <li>{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Wikipedia provides Speech to the Troops at Tilbury"
                 aria-label="Wikipedia provides Speech to the Troops at Tilbury (external link opens in new tab)"
                 to="https://en.wikipedia.org/wiki/Speech_to_the_Troops_at_Tilbury"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Wikipedia provides Speech to the Troops <span className="whitespace-nowrap">at Tilbury
                 <Tooltip
@@ -846,14 +794,12 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.</li>
+              </OutboundLink>.</li>
               <li>{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Wiktionary provides frequency lists"
                 aria-label="Wiktionary provides frequency lists (external link opens in new tab)"
                 to="https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Wiktionary provides frequency <span className="whitespace-nowrap">lists
                 <Tooltip
@@ -870,14 +816,12 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.</li>
+              </OutboundLink>.</li>
               <li>{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Metronome sounds come from Dev_Tones by RCP Tones"
                 aria-label="Metronome sounds come from Dev_Tones by RCP Tones (external link opens in new tab)"
                 to="https://rcptones.com/dev_tones/"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 The metronome sound, “digi_plink”, comes from Dev_Tones by <span className="whitespace-nowrap">RCP Tones
                 <Tooltip
@@ -894,13 +838,11 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> under a{" "}
-              <GoogleAnalytics.OutboundLink
+              </OutboundLink> under a{" "}
+              <OutboundLink
                 eventLabel="Creative Commons license (CC BY 3.0 US)"
                 aria-label="Creative Commons license (CC BY 3.0 US) (external link opens in new tab)"
                 to="https://creativecommons.org/licenses/by/3.0/us/legalcode"
-                target="_blank"
-                rel="noopener noreferrer"
               >Creative Commons license <span className="whitespace-nowrap">(CC BY 3.0 US)
                 <Tooltip
                   title="(external link opens in new tab)"
@@ -916,17 +858,15 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
                 </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> and was adapted to include silence at the end for a slower metronome tempo.</li>
+              </OutboundLink> and was adapted to include silence at the end for a slower metronome tempo.</li>
             </ul>
 
             <h3 id="support">Support</h3>
             <p>For help with Typey&nbsp;Type, <a href="mailto:typeytype@didoesdigital.com">email typeytype@didoesdigital.com</a>,{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="post to the feedback form"
                 aria-label="post to the feedback form (form opens in new tab)"
                 to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 post to the feedback <span className="whitespace-nowrap">form
                 <Tooltip
@@ -943,13 +883,11 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>, or{" "}
-              <GoogleAnalytics.OutboundLink
+              </OutboundLink>, or{" "}
+              <OutboundLink
                 eventLabel="tweet @DiDoesDigital"
                 aria-label="tweet @DiDoesDigital (external link opens in new tab)"
                 to="https://twitter.com/didoesdigital"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 tweet <span className="whitespace-nowrap">@DiDoesDigital
                 <Tooltip
@@ -966,16 +904,14 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink>.</p>
+              </OutboundLink>.</p>
 
             <h3 id="privacy" tabIndex="-1">Privacy</h3>
             <p>This site uses{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Google Analytics"
                 aria-label="Google Analytics (external link opens in new tab)"
                 to="https://www.google.com/intl/en/policies/privacy/"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Google <span className="whitespace-nowrap">Analytics
                 <Tooltip
@@ -992,14 +928,12 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> to track usage data for improving the site using cookies. Typey&nbsp;Type anonymises IP addresses before sending them to Google and Google Analytics retains cookie data for 26 months.</p>
+              </OutboundLink> to track usage data for improving the site using cookies. Typey&nbsp;Type anonymises IP addresses before sending them to Google and Google Analytics retains cookie data for 26 months.</p>
             <p>This site uses{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Sentry"
                 aria-label="Sentry (external link opens in new tab)"
                 to="https://sentry.io/privacy/"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 <span className="whitespace-nowrap">Sentry
                 <Tooltip
@@ -1016,7 +950,7 @@ class Support extends Component {
                 >
                   <IconExternal ariaHidden="true" role="presentation" iconWidth="24" iconHeight="24" className="ml1 svg-icon-wrapper svg-baseline" iconTitle="" />
               </Tooltip></span>
-              </GoogleAnalytics.OutboundLink> for error reporting to improve the site.</p>
+              </OutboundLink> for error reporting to improve the site.</p>
           </div>
         </div>
       </main>
