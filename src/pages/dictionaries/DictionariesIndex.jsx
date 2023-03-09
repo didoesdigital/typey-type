@@ -18,115 +18,111 @@ class DictionariesIndex extends Component {
   }
 
   render() {
-    const linkList = this.props.dictionaryIndex.map(
-      (dictionary, index, array) => {
-        let author = "Typey Type";
-        if (dictionary.author && dictionary.author.length > 0) {
-          author = dictionary.author;
-        }
-        let title = "dictionary";
-        if (dictionary.title && dictionary.title.length > 0) {
-          title = dictionary.title;
-        }
-        let subtitle = "";
-        if (dictionary.subtitle && dictionary.subtitle.length > 0) {
-          subtitle = ": " + dictionary.subtitle;
-        }
+    const linkList = this.props.dictionaryIndex.map((dictionary) => {
+      let author = "Typey Type";
+      if (dictionary.author && dictionary.author.length > 0) {
+        author = dictionary.author;
+      }
+      let title = "dictionary";
+      if (dictionary.title && dictionary.title.length > 0) {
+        title = dictionary.title;
+      }
+      let subtitle = "";
+      if (dictionary.subtitle && dictionary.subtitle.length > 0) {
+        subtitle = ": " + dictionary.subtitle;
+      }
 
-        let learnMoreLink = [];
+      let learnMoreLink = [];
 
-        if (dictionary.link && dictionary.link.length > 0) {
-          let ariaLabel = "Learn more about " + title;
+      if (dictionary.link && dictionary.link.length > 0) {
+        let ariaLabel = "Learn more about " + title;
 
-          if (
-            dictionary.link.startsWith("/typey-type") ||
-            dictionary.link.startsWith("/dictionaries/") ||
-            dictionary.link.startsWith("/lessons/") ||
-            dictionary.link.startsWith("/support")
-          ) {
+        if (
+          dictionary.link.startsWith("/typey-type") ||
+          dictionary.link.startsWith("/dictionaries/") ||
+          dictionary.link.startsWith("/lessons/") ||
+          dictionary.link.startsWith("/support")
+        ) {
+          learnMoreLink = (
+            <span>
+              {" "}
+              · 
+              <Link to={dictionary.link} aria-label={ariaLabel}>
+                Learn more
+              </Link>
+            </span>
+          );
+          if (dictionary.link.startsWith("/lessons")) {
             learnMoreLink = (
               <span>
                 {" "}
                 · 
-                <Link to={dictionary.link} aria-label={ariaLabel}>
-                  Learn more
+                <Link
+                  to={dictionary.link}
+                  aria-label={"Lesson: " + dictionary.title}
+                >
+                  Lesson
                 </Link>
               </span>
             );
-            if (dictionary.link.startsWith("/lessons")) {
-              learnMoreLink = (
-                <span>
-                  {" "}
-                  · 
-                  <Link
-                    to={dictionary.link}
-                    aria-label={"Lesson: " + dictionary.title}
-                  >
-                    Lesson
-                  </Link>
-                </span>
-              );
-            }
-          } else {
-            learnMoreLink = (
-              <span>
-                {" "}
-                · 
-                <a
-                  href={dictionary.link}
-                  aria-label={ariaLabel}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn more
-                  <Tooltip
-                    title="Opens in a new tab"
-                    animation="shift"
-                    arrow="true"
-                    className=""
-                    duration="200"
-                    tabIndex={0}
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={this.props.setAnnouncementMessage}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </a>
-              </span>
-            );
           }
+        } else {
+          learnMoreLink = (
+            <span>
+              {" "}
+              · 
+              <a
+                href={dictionary.link}
+                aria-label={ariaLabel}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Learn more
+                <Tooltip
+                  title="Opens in a new tab"
+                  animation="shift"
+                  arrow="true"
+                  className=""
+                  duration="200"
+                  tabIndex={0}
+                  tag="span"
+                  theme="didoesdigital"
+                  trigger="mouseenter focus click"
+                  onShow={this.props.setAnnouncementMessage}
+                >
+                  <IconExternal
+                    ariaHidden="true"
+                    role="presentation"
+                    iconWidth="24"
+                    iconHeight="24"
+                    className="ml1 svg-icon-wrapper svg-baseline"
+                    iconTitle=""
+                  />
+                </Tooltip>
+              </a>
+            </span>
+          );
         }
-        let dictionarypath = dictionary.path;
-        dictionarypath = dictionarypath.replace(/lesson.txt/, "lesson/");
-        dictionarypath = dictionarypath.replace(/.json/, "/");
-
-        return (
-          <li className="unstyled-list-item mb1" key={dictionary.path}>
-            <Link
-              to={`${dictionarypath}`
-                .replace(/path\.txt$/, "")
-                .replace(/\/{2,}/g, "/")}
-              id={
-                "ga--dictionary-index-" + dictionarypath.replace(/[/.]/g, "-")
-              }
-            >
-              {author}’s {dictionary.title}
-              {subtitle}
-            </Link>
-            {learnMoreLink}
-          </li>
-        );
       }
-    );
+      let dictionarypath = dictionary.path;
+      dictionarypath = dictionarypath.replace(/lesson.txt/, "lesson/");
+      dictionarypath = dictionarypath.replace(/.json/, "/");
+
+      return (
+        <li className="unstyled-list-item mb1" key={dictionary.path}>
+          <Link
+            to={`${dictionarypath}`
+              .replace(/path\.txt$/, "")
+              .replace(/\/{2,}/g, "/")}
+            id={"ga--dictionary-index-" + dictionarypath.replace(/[/.]/g, "-")}
+          >
+            {author}’s {dictionary.title}
+            {subtitle}
+          </Link>
+          {learnMoreLink}
+        </li>
+      );
+    });
 
     return (
       <main id="main">
