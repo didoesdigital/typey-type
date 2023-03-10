@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import GoogleAnalytics from "react-ga";
+import OutboundLink from "../../../components/OutboundLink";
 import RecommendationDescription from "./RecommendationDescription";
 import { IconExternal } from "../../../components/Icon";
 import { Link } from "react-router-dom";
@@ -224,15 +225,13 @@ class RecommendationBox extends Component<Props> {
 
       if (this.props.recommendedNextLesson.link.startsWith("http")) {
         recommendedLink = (
-          <GoogleAnalytics.OutboundLink
+          <OutboundLink
             eventLabel={recommendedNextLessonCallToActionButton}
             aria-label={
               recommendedNextLessonCallToActionButton +
               " (external link opens in new tab)"
             }
             to={this.props.recommendedNextLesson.link}
-            target="_blank"
-            rel="noopener noreferrer"
             onClick={this.props.startRecommendedStep}
             className="mr2 link-button dib"
             style={{ lineHeight: 2 }}
@@ -260,7 +259,7 @@ class RecommendationBox extends Component<Props> {
                 iconTitle=""
               />
             </Tooltip>
-          </GoogleAnalytics.OutboundLink>
+          </OutboundLink>
         );
       } else {
         recommendedLink = (
