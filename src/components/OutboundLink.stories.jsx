@@ -8,16 +8,14 @@ export default {
 };
 
 const Template = (args) => {
-  const { children, newArgs } = args;
-  console.log(children);
+  const { children, ...propArgs } = args;
+
   return (
     <OutboundLink
+      aria-label="example"
       eventLabel="example"
-      className="no-underline"
       to="https://joshuagrams.github.io/steno-jig/"
-      target="_blank"
-      rel="noopener noreferrer"
-      {...newArgs}
+      {...propArgs}
     >
       {children}
     </OutboundLink>
@@ -26,10 +24,19 @@ const Template = (args) => {
 
 export const OutboundLinkStory = Template.bind({});
 OutboundLinkStory.args = {
-  children: <strong>Stenojig (external link opens in new tab)</strong>,
-  className: "no-underline",
+  children: "Stenojig (external link opens in new tab)",
+  "aria-label": "Stenojig (external link opens in new tab)",
   eventLabel: "Stenojig (external link opens in new tab)",
   to: "https://joshuagrams.github.io/steno-jig/",
-  target: "_blank",
-  rel: "noopener noreferrer",
+};
+
+export const OutboundLinkEverythingStory = Template.bind({});
+OutboundLinkEverythingStory.args = {
+  "aria-label": "Type Racer (external link opens in new tab)",
+  children: <strong>Type Racer</strong>,
+  className: "no-underline",
+  eventLabel: "Type Racer (external link opens in new tab)",
+  onClick: (event) => console.log(`Clicked: ${event.target}`),
+  style: { lineHeight: 2 },
+  to: "https://play.typeracer.com/?universe=steno",
 };
