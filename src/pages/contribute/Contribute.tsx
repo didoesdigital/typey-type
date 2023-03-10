@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GoogleAnalytics from "react-ga";
+import OutboundLink from "../../components/OutboundLink";
 import { Link } from "react-router-dom";
 import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
@@ -43,12 +43,10 @@ class Contribute extends Component<Props> {
             <h3 id="patreon">Patreon</h3>
             <p>
               You can support my efforts on{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Patreon"
                 aria-label="Patreon (external link opens in new tab)"
                 to="https://www.patreon.com/didoesdigital"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Patreon
                 {/* @ts-ignore */}
@@ -73,7 +71,7 @@ class Contribute extends Component<Props> {
                     iconTitle=""
                   />
                 </Tooltip>
-              </GoogleAnalytics.OutboundLink>
+              </OutboundLink>
               . A monthly donation helps me build more lessons and features to
               help you fast-track your steno progress.
             </p>
@@ -122,12 +120,10 @@ class Contribute extends Component<Props> {
                 email typeytype@didoesdigital.com
               </a>{" "}
               or{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="tweet @DiDoesDigital"
                 aria-label="tweet @DiDoesDigital (external link opens in new tab)"
                 to="https://twitter.com/didoesdigital"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 <span className="whitespace-nowrap">
                   tweet @DiDoesDigital
@@ -154,7 +150,7 @@ class Contribute extends Component<Props> {
                     />
                   </Tooltip>
                 </span>
-              </GoogleAnalytics.OutboundLink>
+              </OutboundLink>
               . You can also find Di on Discord.
             </p>
 
@@ -162,12 +158,10 @@ class Contribute extends Component<Props> {
             <p>
               To help the open steno community and Typey&nbsp;Type grow even
               faster, add your custom dictionaries to the{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="community’s dictionaries"
                 aria-label="community’s dictionaries (external link opens in new tab)"
                 to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 community’s&nbsp;dictionaries
                 {/* @ts-ignore */}
@@ -192,7 +186,7 @@ class Contribute extends Component<Props> {
                     iconTitle=""
                   />
                 </Tooltip>
-              </GoogleAnalytics.OutboundLink>
+              </OutboundLink>
               .
             </p>
             <p>
@@ -230,12 +224,10 @@ class Contribute extends Component<Props> {
               .
             </p>
             <p>
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Di’s Steno Dictionaries repo"
                 aria-label="Di’s Steno Dictionaries repo (external link opens in new tab)"
                 to="https://github.com/didoesdigital/steno-dictionaries"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Di’s Steno Dictionaries{" "}
                 <span className="whitespace-nowrap">
@@ -263,15 +255,13 @@ class Contribute extends Component<Props> {
                     />
                   </Tooltip>
                 </span>
-              </GoogleAnalytics.OutboundLink>{" "}
+              </OutboundLink>{" "}
               has many dictionaries. These power Typey&nbsp;Type’s stroke
               suggestions. See the{" "}
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="repo’s contributing section"
                 aria-label="repo’s contributing section (external link opens in new tab)"
                 to="https://github.com/didoesdigital/steno-dictionaries#contributing"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 repo’s contributing section
                 {/* @ts-ignore */}
@@ -296,18 +286,16 @@ class Contribute extends Component<Props> {
                     iconTitle=""
                   />
                 </Tooltip>
-              </GoogleAnalytics.OutboundLink>
+              </OutboundLink>
               .
             </p>
 
             <h3 id="feedback">Feedback</h3>
             <p>
-              <GoogleAnalytics.OutboundLink
+              <OutboundLink
                 eventLabel="Typey Type for Stenographers feedback form"
                 aria-label="Share your feedback (form opens in new tab)"
                 to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 Share your feedback
                 {/* @ts-ignore */}
@@ -332,7 +320,7 @@ class Contribute extends Component<Props> {
                     iconTitle=""
                   />
                 </Tooltip>
-              </GoogleAnalytics.OutboundLink>
+              </OutboundLink>
               .
             </p>
           </div>

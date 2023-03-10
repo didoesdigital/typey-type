@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import GoogleAnalytics from "react-ga";
+import OutboundLink from "../../../components/OutboundLink";
 
 const ExternalLink = ({ linkText, linkUrl }) => {
   const [text, setText] = useState("");
@@ -14,15 +14,13 @@ const ExternalLink = ({ linkText, linkUrl }) => {
 
   return (
     <p className="underline">
-      <GoogleAnalytics.OutboundLink
+      <OutboundLink
         className="no-underline"
         eventLabel={`${text} (external link opens in new tab)`}
         to={url}
-        target="_blank"
-        rel="noopener noreferrer"
       >
         <strong>{text}</strong> (external link opens in new tab)
-      </GoogleAnalytics.OutboundLink>
+      </OutboundLink>
     </p>
   );
 };
