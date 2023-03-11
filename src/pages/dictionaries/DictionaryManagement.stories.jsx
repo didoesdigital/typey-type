@@ -61,8 +61,6 @@ const globalLookupDictionary = new Map([
 const Template = (args) => {
   return (
     <DictionaryManagement
-      dictionaryIndex={dictionaryIndex}
-      setDictionaryIndex={() => console.log("set dictionaryIndex")}
       fetchAndSetupGlobalDict={() => Promise.resolve(true)}
       globalLookupDictionary={globalLookupDictionary}
       globalUserSettings={{}}
