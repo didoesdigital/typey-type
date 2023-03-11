@@ -6,6 +6,72 @@ import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
 import Subheader from "../../components/Subheader";
 
+/** Example: "/lessons/collections/tech/react/" */
+// type DictLink = string;
+
+// const isInternalDictLink = (dictLink: DictLink) =>
+const isInternalDictLink = (dictLink) =>
+  dictLink.startsWith("/typey-type") ||
+  dictLink.startsWith("/dictionaries/") ||
+  dictLink.startsWith("/lessons/") ||
+  dictLink.startsWith("/support");
+
+// const getInternalLink = (dictLink: DictLink, dictTitle: PrettyLessonTitle) =>
+const getInternalLink = (dictLink, dictTitle) =>
+  isInternalDictLink(dictLink) ? (
+    `${process.env.PUBLIC_URL}${dictLink}`.startsWith(
+      process.env.PUBLIC_URL + "/lessons"
+    ) ? (
+      <Link to={dictLink} aria-label={"Lesson: " + dictTitle}>
+        Lesson
+      </Link>
+    ) : (
+      <Link to={dictLink} aria-label={"Learn more about " + dictTitle}>
+        Learn more
+      </Link>
+    )
+  ) : null;
+
+const getExternalLink = (
+  // dictLink: DictLink,
+  dictLink,
+  dictTitle,
+  // setAnnouncementMessage: () => void
+  setAnnouncementMessage
+) =>
+  isInternalDictLink(dictLink) ? null : (
+    <a
+      href={dictLink}
+      aria-label={"Learn more about " + dictTitle}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Learn more
+      {/* @ts-ignore */}
+      <Tooltip
+        title="Opens in a new tab"
+        animation="shift"
+        arrow="true"
+        className=""
+        duration="200"
+        tabIndex={0}
+        tag="span"
+        theme="didoesdigital"
+        trigger="mouseenter focus click"
+        onShow={setAnnouncementMessage}
+      >
+        <IconExternal
+          ariaHidden="true"
+          role="presentation"
+          iconWidth="24"
+          iconHeight="24"
+          className="ml1 svg-icon-wrapper svg-baseline"
+          iconTitle=""
+        />
+      </Tooltip>
+    </a>
+  );
+
 class DictionariesIndex extends Component {
   componentDidMount() {
     if (this.props.dictionaryIndex && this.props.dictionaryIndex.length < 2) {
@@ -34,66 +100,15 @@ class DictionariesIndex extends Component {
           ? ": " + dictionary.subtitle
           : "";
 
-      let learnMoreLink = [];
-
-      if (dictionary.link && dictionary.link.length > 0) {
-        const ariaLabel = "Learn more about " + title;
-
-        if (
-          dictionary.link.startsWith("/typey-type") ||
-          dictionary.link.startsWith("/dictionaries/") ||
-          dictionary.link.startsWith("/lessons/") ||
-          dictionary.link.startsWith("/support")
-        ) {
-          learnMoreLink = (
-            <Link to={dictionary.link} aria-label={ariaLabel}>
-              Learn more
-            </Link>
-          );
-          if (dictionary.link.startsWith("/lessons")) {
-            learnMoreLink = (
-              <Link
-                to={dictionary.link}
-                aria-label={"Lesson: " + dictionary.title}
-              >
-                Lesson
-              </Link>
-            );
-          }
-        } else {
-          learnMoreLink = (
-            <a
-              href={dictionary.link}
-              aria-label={ariaLabel}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn more
-              <Tooltip
-                title="Opens in a new tab"
-                animation="shift"
-                arrow="true"
-                className=""
-                duration="200"
-                tabIndex={0}
-                tag="span"
-                theme="didoesdigital"
-                trigger="mouseenter focus click"
-                onShow={this.props.setAnnouncementMessage}
-              >
-                <IconExternal
-                  ariaHidden="true"
-                  role="presentation"
-                  iconWidth="24"
-                  iconHeight="24"
-                  className="ml1 svg-icon-wrapper svg-baseline"
-                  iconTitle=""
-                />
-              </Tooltip>
-            </a>
-          );
-        }
-      }
+      const learnMoreLink =
+        dictionary.link && dictionary.link.length > 0
+          ? getInternalLink(dictionary.link, title) ||
+            getExternalLink(
+              dictionary.link,
+              dictionary.title,
+              this.props.setAnnouncementMessage
+            )
+          : null;
 
       const dictionarypath = dictionary.path
         .replace(/lesson.txt/, "lesson/")
@@ -158,6 +173,7 @@ class DictionariesIndex extends Component {
                     Di’s Steno Dictionaries{" "}
                     <span className="whitespace-nowrap">
                       repo
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="Opens in a new tab"
                         animation="shift"
@@ -219,6 +235,7 @@ class DictionariesIndex extends Component {
                     use the feedback{" "}
                     <span className="whitespace-nowrap">
                       form
+                      {/* @ts-ignore */}
                       <Tooltip
                         title="(external link opens in new tab)"
                         className=""
@@ -253,6 +270,7 @@ class DictionariesIndex extends Component {
                     to="http://www.openstenoproject.org/stenodict/"
                   >
                     Stenodict
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="Opens in a new tab"
                       animation="shift"
@@ -291,6 +309,7 @@ class DictionariesIndex extends Component {
                     to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
                   >
                     Share your dictionary
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(form opens in new tab)"
                       animation="shift"
@@ -354,6 +373,7 @@ class DictionariesIndex extends Component {
                   community’s{" "}
                   <span className="whitespace-nowrap">
                     dictionaries
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="Opens in a new tab"
                       animation="shift"
