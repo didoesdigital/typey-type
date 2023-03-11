@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
 import DictionaryNotFound from "./DictionaryNotFound";
@@ -89,288 +89,223 @@ const getDictionaryContentsString = (dictContents) => {
   return [contents, contentsArrayLength];
 };
 
-class Dictionary extends Component {
-  constructor(props) {
-    super(props);
-    this.mainHeading = React.createRef();
-    this.state = {
-      loadingDictionaryContents: false,
-      loadingError: false,
-      dictionary: {
-        author: "Typey Type",
-        title: "Loading dictionary…",
-        subtitle: "",
-        category: "Typey Type",
-        subcategory: "",
-        tagline: "Loading…",
-        link: process.env.PUBLIC_URL + "/support#typey-type-dictionary",
-        path: "/dictionaries/typey-type/top-10.json",
-        contents: {
-          "-T": "the",
-          "-F": "of",
-          "SKP": "and",
-          "TO": "to",
-          "AEU": "a",
-          "TPH": "in",
-          "TPOR": "for",
-          "S": "is",
-          "OPB": "on",
-          "THA": "that",
-        },
-      },
-      dictionaryIndex: [
-        {
-          "title": "Typey Type",
-          "category": "Typey Type",
-          "subcategory": "",
-          "path":
-            process.env.PUBLIC_URL + "/dictionaries/typey-type/typey-type.json",
-        },
-        {
-          "title": "Steno",
-          "category": "Drills",
-          "subcategory": "",
-          "path":
-            process.env.PUBLIC_URL + "/dictionaries/drills/steno/steno.json",
-        },
-      ],
-    };
-  }
+const Dictionary = ({
+  location,
+  path,
+  setAnnouncementMessage,
+  setAnnouncementMessageString,
+}) => {
+  const mainHeading = useRef(null);
+  // const mainHeading = useRef<HTMLHeadingElement>(null);
 
-  componentDidMount() {
+  const [loadingDictionaryContents, setLoadingDictionaryContents] =
+    useState(true);
+  const [hasError, setHasError] = useState(false);
+  const [dictionary, setDictionary] = useState({
+    author: "Typey Type",
+    title: "Loading dictionary…",
+    subtitle: "",
+    category: "Typey Type",
+    subcategory: "",
+    tagline: "Loading…",
+    link: process.env.PUBLIC_URL + "/support#typey-type-dictionary",
+    path: "/dictionaries/typey-type/top-10.json",
+    contents: {
+      "-T": "the",
+      "-F": "of",
+      "SKP": "and",
+      "TO": "to",
+      "AEU": "a",
+      "TPH": "in",
+      "TPOR": "for",
+      "S": "is",
+      "OPB": "on",
+      "THA": "that",
+    },
+  });
+
+  useEffect(() => {
+    // mainHeading.current?.focus();
+  }, []);
+
+  useEffect(() => {
     if (
-      !this.props.location.pathname.startsWith("/dictionaries/custom") &&
-      this.state.dictionary.path !==
-        this.props.location.pathname.replace(/\/$/, ".json") &&
-      this.props.location.pathname.startsWith("/dictionaries")
+      !location.pathname.startsWith("/dictionaries/custom") &&
+      // dictionary.path !== location.pathname.replace(/\/$/, ".json") &&
+      location.pathname.startsWith("/dictionaries")
     ) {
-      this.setState({
-        loadingDictionaryContents: true,
-        loadingError: false,
-      });
-
       fetchDictionaryIndex()
-        .then((dictionaryIndex) => {
-          const newDictionary = Object.assign({}, this.state.dictionary);
-          for (const [metadataKey, metadataValue] of Object.entries(
-            lookUpDictionaryInIndex(
-              process.env.PUBLIC_URL + this.props.location.pathname,
-              dictionaryIndex
-            )
-          )) {
-            newDictionary[metadataKey] = metadataValue;
-          }
-          this.props.setAnnouncementMessageString(
-            "Navigated to: " + newDictionary.title
-          );
-          this.setState({
-            dictionary: newDictionary,
-            dictionaryIndex,
+        .then((dictIndexEntryJSON) => {
+          fetch(
+            process.env.PUBLIC_URL + location.pathname.replace(/\/$/, ".json"),
+            {
+              method: "GET",
+              credentials: "same-origin",
+            }
+          ).then((response) => {
+            const contentType = response.headers.get("content-type");
+
+            if (contentType && contentType.indexOf("application/json") !== -1) {
+              return response.json().then((dictionaryContents) => {
+                const dictIndexEntry = lookUpDictionaryInIndex(
+                  process.env.PUBLIC_URL + location.pathname,
+                  dictIndexEntryJSON
+                );
+                const dictionaryData = {
+                  ...dictIndexEntry,
+                  contents: dictionaryContents,
+                };
+
+                setDictionary(dictionaryData);
+                setAnnouncementMessageString(
+                  "Finished loading: " + dictionaryData.title
+                );
+                setLoadingDictionaryContents(false);
+              });
+            } else {
+              throw new Error("Unable to load dictionary");
+            }
           });
         })
         .catch((error) => {
-          console.log("Unable to load dictionary index", error);
-          this.props.setAnnouncementMessageString(
-            "Navigated to: missing dictionary index"
-          );
+          console.log("Unable to load dictionary", error);
+          setAnnouncementMessageString("Unable to load dictionary");
+          setHasError(true);
         });
-      this.loadDictionaryContents(
-        process.env.PUBLIC_URL + this.props.location.pathname
-      );
     }
+    // FIXME: setAnnouncementMessageString in dependency array
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
-    if (this.mainHeading?.current) {
-      this.mainHeading?.current.focus();
-    }
-  }
-
-  loadDictionaryContents(path) {
-    const dictionaryFile = path.replace(/\/$/, ".json");
-    fetch(dictionaryFile, {
-      method: "GET",
-      credentials: "same-origin",
-    })
-      .then((response) => {
-        const contentType = response.headers.get("content-type");
-
-        if (contentType && contentType.indexOf("application/json") !== -1) {
-          return response.json().then((dictionaryContents) => {
-            const newDictionary = Object.assign({}, this.state.dictionary);
-
-            newDictionary["contents"] = dictionaryContents;
-
-            this.props.setAnnouncementMessageString(
-              "Finished loading: " + newDictionary.title
-            );
-
-            this.setState({
-              dictionary: newDictionary,
-              loadingDictionaryContents: false,
-              loadingError: false,
-            });
-          });
-        } else {
-          throw new Error("Unable to load dictionary");
-        }
-      })
-      .catch((error) => {
-        console.log("Unable to load dictionary", error);
-        this.props.setAnnouncementMessageString("Unable to load dictionary");
-
-        this.setState({
-          loadingError: true,
-        });
-      });
-  }
-
-  trackDownloadDictionary() {
+  const trackDownloadDictionary = () => {
     GoogleAnalytics.event({
       category: "Downloads",
       action: "Click",
       label:
-        this.state.dictionary?.path &&
-        this.state.dictionary.path !== "/dictionaries/typey-type/top-10.json"
-          ? this.state.dictionary.path
+        dictionary?.path &&
+        dictionary.path !== "/dictionaries/typey-type/top-10.json"
+          ? dictionary.path
           : "No dictionary path",
     });
+  };
+
+  if (hasError) {
+    return <DictionaryNotFound path={path} location={location} />;
   }
 
-  render() {
-    if (this.state.loadingError) {
-      return (
-        <DictionaryNotFound
-          path={this.props.path}
-          location={this.props.location}
-          dictionaryIndex={this.props.dictionaryIndex}
-        />
-      );
-    }
+  if (dictionary) {
+    const [contents, contentsArrayLength] = getDictionaryContentsString(
+      dictionary.contents
+    );
 
-    if (this.state.dictionary) {
-      const [contents, contentsArrayLength] = getDictionaryContentsString(
-        this.state.dictionary.contents
-      );
-
-      const truncatedMessage =
-        contentsArrayLength > truncationLimit ? (
-          <p className="bg-danger dark:text-coolgrey-900">
-            The dictionary is too large to display in full so this only shows
-            the first {truncationLimit} entries.
-          </p>
-        ) : (
-          ""
-        );
-
-      const externalLink = getExternalLink(
-        this.state.dictionary.link,
-        this.props.setAnnouncementMessage
-      );
-      const internalLink = getInternalLink(
-        this.state.dictionary.link,
-        this.state.dictionary.title
+    const truncatedMessage =
+      contentsArrayLength > truncationLimit ? (
+        <p className="bg-danger dark:text-coolgrey-900">
+          The dictionary is too large to display in full so this only shows the
+          first {truncationLimit} entries.
+        </p>
+      ) : (
+        ""
       );
 
-      return (
-        <DocumentTitle
-          title={"Typey Type | Dictionary: " + this.state.dictionary.title}
-        >
-          <main id="main">
-            <Subheader>
-              <div className="flex mr1 self-center">
-                <header className="flex items-center min-h-40">
-                  <h2
-                    className="table-cell mr2"
-                    ref={this.mainHeading}
-                    tabIndex={-1}
-                  >
-                    {this.state.loadingDictionaryContents ? (
-                      <span>Loading dictionary…</span>
-                    ) : (
-                      this.state.dictionary.title
-                    )}
-                    {this.state.loadingError && <span>Loading failed.</span>}
-                  </h2>
-                </header>
-              </div>
-              <div className="flex mxn2">
-                <a
-                  href={process.env.PUBLIC_URL + this.state.dictionary.path}
-                  download=""
-                  onClick={this.trackDownloadDictionary.bind(this)}
-                  className="link-button link-button-ghost table-cell mr1"
-                >
-                  Download
-                </a>
-                <PseudoContentButton
-                  className="js-clipboard-button button button--secondary table-cell mr1 copy-to-clipboard"
-                  style={{ lineHeight: 2 }}
-                  dataClipboardTarget="#js-dictionary-json-pre"
-                >
-                  Copy to clipboard
-                </PseudoContentButton>
-              </div>
-            </Subheader>
-            <div className="p3 mx-auto mw-1024">
-              <div className="mw-568">
-                {this.state.dictionary.author &&
-                  !this.state.dictionary.tagline.includes("Loading") && (
-                    <p className="text-small text-uppercase de-emphasized mt3">
-                      Contributor: {this.state.dictionary.author}
-                    </p>
+    const externalLink = getExternalLink(
+      dictionary.link,
+      setAnnouncementMessage
+    );
+    const internalLink = getInternalLink(dictionary.link, dictionary.title);
+
+    return (
+      <DocumentTitle title={"Typey Type | Dictionary: " + dictionary.title}>
+        <main id="main">
+          <Subheader>
+            <div className="flex mr1 self-center">
+              <header className="flex items-center min-h-40">
+                <h2 className="table-cell mr2" ref={mainHeading} tabIndex={-1}>
+                  {loadingDictionaryContents ? (
+                    <span>Loading dictionary…</span>
+                  ) : (
+                    dictionary.title
                   )}
-
-                {this.state.dictionary.tagline &&
-                  !this.state.dictionary.tagline.includes("Loading") && (
-                    <p>{this.state.dictionary.tagline}</p>
-                  )}
-
-                {this.state.dictionary.link &&
-                  !this.state.dictionary.link.includes("/typey-type/support") &&
-                  internalLink}
-                {this.state.dictionary.link && externalLink}
-
-                <h3>The dictionary</h3>
-                {this.state.loadingError && <p>Loading failed.</p>}
-                {!this.state.loadingDictionaryContents && truncatedMessage}
-                {this.state.loadingDictionaryContents ? (
-                  <p>Loading…</p>
-                ) : (
-                  <pre
-                    className="quote h-168 overflow-scroll mw-384 mt1 mb3"
-                    id="js-dictionary-json-pre"
-                    tabIndex={0}
-                  >
-                    <code>{contents}</code>
-                  </pre>
-                )}
-              </div>
-              <p>
-                <a
-                  href={
-                    googleFormURL +
-                    encodeURIComponent(this.props.location?.pathname || "")
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  id="ga--dictionary--give-feedback"
-                >
-                  Give feedback on this dictionary (form opens in a new tab)
-                </a>
-              </p>
+                  {hasError && <span>Loading failed.</span>}
+                </h2>
+              </header>
             </div>
-          </main>
-        </DocumentTitle>
-      );
-    } else {
-      return (
-        <div>
-          <h2 ref={this.mainHeading} tabIndex={-1}>
-            That dictionary is missing.
-          </h2>
-        </div>
-      );
-    }
+            <div className="flex mxn2">
+              <a
+                href={process.env.PUBLIC_URL + dictionary.path}
+                download=""
+                onClick={trackDownloadDictionary}
+                className="link-button link-button-ghost table-cell mr1"
+              >
+                Download
+              </a>
+              <PseudoContentButton
+                className="js-clipboard-button button button--secondary table-cell mr1 copy-to-clipboard"
+                style={{ lineHeight: 2 }}
+                dataClipboardTarget="#js-dictionary-json-pre"
+              >
+                Copy to clipboard
+              </PseudoContentButton>
+            </div>
+          </Subheader>
+          <div className="p3 mx-auto mw-1024">
+            <div className="mw-568">
+              {dictionary.author && !dictionary.tagline.includes("Loading") && (
+                <p className="text-small text-uppercase de-emphasized mt3">
+                  Contributor: {dictionary.author}
+                </p>
+              )}
+
+              {dictionary.tagline &&
+                !dictionary.tagline.includes("Loading") && (
+                  <p>{dictionary.tagline}</p>
+                )}
+
+              {dictionary.link &&
+                !dictionary.link.includes("/typey-type/support") &&
+                internalLink}
+              {dictionary.link && externalLink}
+
+              <h3>The dictionary</h3>
+              {hasError && <p>Loading failed.</p>}
+              {!loadingDictionaryContents && truncatedMessage}
+              {loadingDictionaryContents ? (
+                <p>Loading…</p>
+              ) : (
+                <pre
+                  className="quote h-168 overflow-scroll mw-384 mt1 mb3"
+                  id="js-dictionary-json-pre"
+                  tabIndex={0}
+                >
+                  <code>{contents}</code>
+                </pre>
+              )}
+            </div>
+            <p>
+              <a
+                href={
+                  googleFormURL + encodeURIComponent(location?.pathname || "")
+                }
+                target="_blank"
+                rel="noopener noreferrer"
+                id="ga--dictionary--give-feedback"
+              >
+                Give feedback on this dictionary (form opens in a new tab)
+              </a>
+            </p>
+          </div>
+        </main>
+      </DocumentTitle>
+    );
+  } else {
+    return (
+      <div>
+        <h2 ref={mainHeading} tabIndex={-1}>
+          That dictionary is missing.
+        </h2>
+      </div>
+    );
   }
-}
+};
 
 export default Dictionary;
