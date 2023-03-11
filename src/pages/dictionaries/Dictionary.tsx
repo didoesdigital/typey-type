@@ -9,7 +9,8 @@ import { Tooltip } from "react-tippy";
 import { lookUpDictionaryInIndex } from "../../utils/typey-type";
 import { fetchDictionaryIndex } from "../../utils/getData";
 import Subheader from "../../components/Subheader";
-// import CustomDictionarySetup from './CustomDictionarySetup';
+
+import type { PrettyLessonTitle, StenoDictionary } from "../../types";
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=Example";
 const googleFormURL =
@@ -17,13 +18,28 @@ const googleFormURL =
 
 const truncationLimit = 1000;
 
-const isInternalDictLink = (dictLink) =>
+/** "/lessons/TODO" */
+type DictLink = string;
+
+type Props = {
+  location: {
+    pathname: string;
+  };
+  path: string;
+  setAnnouncementMessage: () => void;
+  setAnnouncementMessageString: (announcement: string) => void;
+};
+
+const isInternalDictLink = (dictLink: DictLink) =>
   dictLink.startsWith("/typey-type") ||
   dictLink.startsWith("/dictionaries/") ||
   dictLink.startsWith("/lessons/") ||
   dictLink.startsWith("/support");
 
-const getExternalLink = (dictLink, setAnnouncementMessage) =>
+const getExternalLink = (
+  dictLink: DictLink,
+  setAnnouncementMessage: () => void
+) =>
   isInternalDictLink(dictLink) ? null : (
     <p className="mt3">
       <a href={dictLink} target="_blank" rel="noopener noreferrer">
@@ -54,7 +70,7 @@ const getExternalLink = (dictLink, setAnnouncementMessage) =>
     </p>
   );
 
-const getInternalLink = (dictLink, dictTitle) =>
+const getInternalLink = (dictLink: DictLink, dictTitle: PrettyLessonTitle) =>
   isInternalDictLink(dictLink) ? (
     `${process.env.PUBLIC_URL}${dictLink}`.startsWith(
       process.env.PUBLIC_URL + "/lessons"
@@ -69,7 +85,7 @@ const getInternalLink = (dictLink, dictTitle) =>
     )
   ) : null;
 
-const getDictionaryContentsString = (dictContents) => {
+const getDictionaryContentsString = (dictContents: StenoDictionary) => {
   let contents = "";
   contents = JSON.stringify(dictContents).split('",').join('",\n');
   contents = "{\n" + contents.slice(1, contents.length); // split first line {"STROKE": "TRANSLATION", on {"
@@ -94,7 +110,7 @@ const Dictionary = ({
   path,
   setAnnouncementMessage,
   setAnnouncementMessageString,
-}) => {
+}: Props) => {
   const mainHeading = useRef(null);
   // const mainHeading = useRef<HTMLHeadingElement>(null);
 
