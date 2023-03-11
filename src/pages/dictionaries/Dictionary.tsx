@@ -18,7 +18,7 @@ const googleFormURL =
 
 const truncationLimit = 1000;
 
-/** "/lessons/TODO" */
+/** Example: "/lessons/collections/tech/react/" */
 type DictLink = string;
 
 type Props = {
