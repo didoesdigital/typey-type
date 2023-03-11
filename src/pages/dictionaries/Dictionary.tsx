@@ -107,8 +107,7 @@ const Dictionary = ({
   setAnnouncementMessage,
   setAnnouncementMessageString,
 }: Props) => {
-  const mainHeading = useRef(null);
-  // const mainHeading = useRef<HTMLHeadingElement>(null);
+  const mainHeading = useRef<HTMLHeadingElement>(null);
 
   const [loadingDictionaryContents, setLoadingDictionaryContents] =
     useState(true);
@@ -139,13 +138,14 @@ const Dictionary = ({
   const location = useLocation();
 
   useEffect(() => {
-    // mainHeading.current?.focus();
+    if (mainHeading) {
+      mainHeading.current?.focus();
+    }
   }, []);
 
   useEffect(() => {
     if (
       !location.pathname.startsWith("/dictionaries/custom") &&
-      // dictionary.path !== location.pathname.replace(/\/$/, ".json") &&
       location.pathname.startsWith("/dictionaries")
     ) {
       fetchDictionaryIndex()
