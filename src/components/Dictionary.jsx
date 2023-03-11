@@ -312,7 +312,7 @@ class Dictionary extends Component {
                       ref={(heading) => {
                         this.mainHeading = heading;
                       }}
-                      tabIndex="-1"
+                      tabIndex={-1}
                     >
                       {this.state.loadingDictionaryContents ? (
                         <span>Loading dictionary…</span>
@@ -371,7 +371,7 @@ class Dictionary extends Component {
                     <pre
                       className="quote h-168 overflow-scroll mw-384 mt1 mb3"
                       id="js-dictionary-json-pre"
-                      tabIndex="0"
+                      tabIndex={0}
                     >
                       <code>{contents}</code>
                     </pre>
@@ -404,7 +404,7 @@ class Dictionary extends Component {
             ref={(heading) => {
               this.mainHeading = heading;
             }}
-            tabIndex="-1"
+            tabIndex={-1}
           >
             That dictionary is missing.
           </h2>
