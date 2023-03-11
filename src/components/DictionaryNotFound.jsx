@@ -5,6 +5,10 @@ import DocumentTitle from 'react-document-title';
 import { Link } from 'react-router-dom';
 import Subheader from "./Subheader";
 
+// fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=Example";
+const googleFormURL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=";
+
 class DictionaryNotFound extends Component {
   componentDidMount() {
     let labelString = "Missing dictionary";
@@ -25,18 +29,6 @@ class DictionaryNotFound extends Component {
     }
   }
 
-  prefillSurveyLink() {
-    // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=Example";
-    let googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690="
-    let prefillDictionary = '';
-    if (this.props.location && this.props.location.pathname) {
-      prefillDictionary = this.props.location.pathname;
-    }
-    if (this.surveyLink) {
-      this.surveyLink.href = googleFormURL + encodeURIComponent(prefillDictionary);
-    }
-  }
-
   render() {
     return (
       <DocumentTitle title={'Typey Type | Missing dictionary'}>
@@ -54,7 +46,7 @@ class DictionaryNotFound extends Component {
               <ul>
                 <li><Link to="/dictionaries">All dictionaries</Link></li>
               </ul>
-              <p>Or <a href={this.prefillSurveyLink()} target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--dictionary--give-feedback">let me know (form opens in a new tab)</a></p>
+              <p>Or <a href={googleFormURL + encodeURIComponent(this.props.location?.pathname || "")} target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} id="ga--dictionary--give-feedback">let me know (form opens in a new tab)</a></p>
             </div>
           </div>
         </main>

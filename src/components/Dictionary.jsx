@@ -11,6 +11,10 @@ import { fetchDictionaryIndex } from "./../utils/getData";
 import Subheader from "./Subheader";
 // import CustomDictionarySetup from './CustomDictionarySetup';
 
+// fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=Example";
+const googleFormURL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=";
+
 class Dictionary extends Component {
   constructor(props) {
     super(props);
@@ -151,21 +155,6 @@ class Dictionary extends Component {
           loadingError: true,
         });
       });
-  }
-
-  prefillSurveyLink() {
-    // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=Example";
-    let googleFormURL =
-      "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=";
-    let prefillDictionary = "";
-    if (this.props.location && this.props.location.pathname) {
-      prefillDictionary = this.props.location.pathname;
-    }
-    if (this.surveyLink) {
-      this.surveyLink.href =
-        googleFormURL + encodeURIComponent(prefillDictionary);
-    }
-    return googleFormURL;
   }
 
   downloadDictionary() {
@@ -359,13 +348,12 @@ class Dictionary extends Component {
               </div>
               <p>
                 <a
-                  href={this.prefillSurveyLink()}
+                  href={
+                    googleFormURL +
+                    encodeURIComponent(this.props.location?.pathname || "")
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
-                  ref={(surveyLink) => {
-                    this.surveyLink = surveyLink;
-                  }}
-                  onClick={this.prefillSurveyLink.bind(this)}
                   id="ga--dictionary--give-feedback"
                 >
                   Give feedback on this dictionary (form opens in a new tab)
@@ -376,7 +364,6 @@ class Dictionary extends Component {
         </DocumentTitle>
       );
     } else {
-      console.log("no dictionary");
       return (
         <div>
           <h2
