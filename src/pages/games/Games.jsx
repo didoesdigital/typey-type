@@ -47,66 +47,48 @@ const Games = ({
 }) => {
   return (
     <Switch>
-      <Route
-        exact={true}
-        path={`${match.url}/KAOES`}
-        render={() => (
-          <DocumentTitle title={"Typey Type | KAOES game"}>
-            <ErrorBoundary>
-              <AsyncKAOES />
-            </ErrorBoundary>
-          </DocumentTitle>
-        )}
-      />
-      <Route
-        exact={true}
-        path={`${match.url}/KHAERT`}
-        render={() => (
-          <DocumentTitle title={"Typey Type | KHAERT"}>
-            <ErrorBoundary>
-              <AsyncKHAERT
-                fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-                globalLookupDictionary={globalLookupDictionary}
-                personalDictionaries={personalDictionaries}
-              />
-            </ErrorBoundary>
-          </DocumentTitle>
-        )}
-      />
-      <Route
-        exact={true}
-        path={`${match.url}/SHUFL`}
-        render={() => (
-          <DocumentTitle title={"Typey Type | SHUFL game"}>
-            <ErrorBoundary>
-              <AsyncSHUFL
-                fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-                globalLookupDictionary={globalLookupDictionary}
-                globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-                personalDictionaries={personalDictionaries}
-                startingMetWordsToday={startingMetWordsToday}
-                updateMetWords={updateMetWords}
-              />
-            </ErrorBoundary>
-          </DocumentTitle>
-        )}
-      />
-      <Route
-        exact={true}
-        path={`${match.url}/TPEUBGSZ`}
-        render={() => (
-          <DocumentTitle title={"Typey Type | TPEUBGSZ game"}>
-            <ErrorBoundary>
-              <AsyncTPEUBGSZ startingMetWordsToday={startingMetWordsToday} />
-            </ErrorBoundary>
-          </DocumentTitle>
-        )}
-      />
-      <Route
-        exact={true}
-        path={`${match.url}`}
-        render={() => <AsyncGamesIndex />}
-      />
+      <Route exact={true} path={`${match.url}/KAOES`}>
+        <DocumentTitle title={"Typey Type | KAOES game"}>
+          <ErrorBoundary>
+            <AsyncKAOES />
+          </ErrorBoundary>
+        </DocumentTitle>
+      </Route>
+      <Route exact={true} path={`${match.url}/KHAERT`}>
+        <DocumentTitle title={"Typey Type | KHAERT"}>
+          <ErrorBoundary>
+            <AsyncKHAERT
+              fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+              globalLookupDictionary={globalLookupDictionary}
+              personalDictionaries={personalDictionaries}
+            />
+          </ErrorBoundary>
+        </DocumentTitle>
+      </Route>
+      <Route exact={true} path={`${match.url}/SHUFL`}>
+        <DocumentTitle title={"Typey Type | SHUFL game"}>
+          <ErrorBoundary>
+            <AsyncSHUFL
+              fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+              globalLookupDictionary={globalLookupDictionary}
+              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+              personalDictionaries={personalDictionaries}
+              startingMetWordsToday={startingMetWordsToday}
+              updateMetWords={updateMetWords}
+            />
+          </ErrorBoundary>
+        </DocumentTitle>
+      </Route>
+      <Route exact={true} path={`${match.url}/TPEUBGSZ`}>
+        <DocumentTitle title={"Typey Type | TPEUBGSZ game"}>
+          <ErrorBoundary>
+            <AsyncTPEUBGSZ startingMetWordsToday={startingMetWordsToday} />
+          </ErrorBoundary>
+        </DocumentTitle>
+      </Route>
+      <Route exact={true} path={`${match.url}`}>
+        <AsyncGamesIndex />
+      </Route>
     </Switch>
   );
 };
