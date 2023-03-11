@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import OutboundLink from "../../components/OutboundLink";
 import StrokesForWords from "../../components/StrokesForWords";
@@ -6,18 +6,44 @@ import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
 import Subheader from "../../components/Subheader";
 
-/** Example: "/lessons/collections/tech/react/" */
-// type DictLink = string;
+import type {
+  Experiments,
+  GlobalUserSettings,
+  LookupDictWithNamespacedDicts,
+  PersonalDictionaryNameAndContents,
+  PrettyLessonTitle,
+  StenoDictionary,
+  UserSettings,
+} from "../../types";
 
-// const isInternalDictLink = (dictLink: DictLink) =>
-const isInternalDictLink = (dictLink) =>
+/** Example: "/lessons/collections/tech/react/" */
+type DictLink = string;
+
+type Props = {
+  dictionaryIndex: any;
+  fetchAndSetupGlobalDict: (
+    withPlover: boolean,
+    importedPersonalDictionaries?: any
+  ) => Promise<any>;
+  globalLookupDictionary: LookupDictWithNamespacedDicts;
+  globalLookupDictionaryLoaded: boolean;
+  globalUserSettings: GlobalUserSettings;
+  personalDictionaries: PersonalDictionaryNameAndContents[];
+  setAnnouncementMessage: () => void;
+  setDictionaryIndex: () => void;
+  stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
+  updateGlobalLookupDictionary: any;
+  updatePersonalDictionaries: any;
+  userSettings: UserSettings;
+};
+
+const isInternalDictLink = (dictLink: DictLink) =>
   dictLink.startsWith("/typey-type") ||
   dictLink.startsWith("/dictionaries/") ||
   dictLink.startsWith("/lessons/") ||
   dictLink.startsWith("/support");
 
-// const getInternalLink = (dictLink: DictLink, dictTitle: PrettyLessonTitle) =>
-const getInternalLink = (dictLink, dictTitle) =>
+const getInternalLink = (dictLink: DictLink, dictTitle: PrettyLessonTitle) =>
   isInternalDictLink(dictLink) ? (
     `${process.env.PUBLIC_URL}${dictLink}`.startsWith(
       process.env.PUBLIC_URL + "/lessons"
@@ -33,11 +59,9 @@ const getInternalLink = (dictLink, dictTitle) =>
   ) : null;
 
 const getExternalLink = (
-  // dictLink: DictLink,
-  dictLink,
-  dictTitle,
-  // setAnnouncementMessage: () => void
-  setAnnouncementMessage
+  dictLink: DictLink,
+  dictTitle: PrettyLessonTitle,
+  setAnnouncementMessage: () => void
 ) =>
   isInternalDictLink(dictLink) ? null : (
     <a
@@ -85,14 +109,14 @@ const DictionariesIndex = ({
   updateGlobalLookupDictionary,
   updatePersonalDictionaries,
   userSettings,
-}) => {
-  const mainHeading = React.createRef();
+}: Props) => {
+  const mainHeading = useRef<HTMLHeadingElement>(null);
 
-  // useEffect(() => {
-  //   if (mainHeading) {
-  //     mainHeading.current?.focus();
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (mainHeading) {
+      mainHeading.current?.focus();
+    }
+  }, []);
 
   useEffect(() => {
     if (dictionaryIndex && dictionaryIndex.length < 2) {
@@ -103,7 +127,7 @@ const DictionariesIndex = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dictionaryIndex]);
 
-  const linkList = dictionaryIndex.map((dictionary) => {
+  const linkList = dictionaryIndex.map((dictionary: StenoDictionary) => {
     const author =
       dictionary.author && dictionary.author.length > 0
         ? dictionary.author
