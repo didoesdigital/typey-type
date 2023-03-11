@@ -10,6 +10,8 @@ const googleFormURL =
   "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=";
 
 const DictionaryNotFound = ({ location }) => {
+  const mainHeading = useRef<HTMLHeadingElement>(null);
+
   useEffect(() => {
     let labelString = "Missing dictionary";
     if (location && location.pathname) {
@@ -23,10 +25,12 @@ const DictionaryNotFound = ({ location }) => {
     });
 
     Sentry.captureException("Dictionary not found");
+  }, []);
 
-    // if (mainHeading) {
-    //   mainHeading.focus();
-    // }
+  useEffect(() => {
+    if (mainHeading) {
+      mainHeading.current?.focus();
+    }
   }, []);
 
   return (
@@ -35,7 +39,7 @@ const DictionaryNotFound = ({ location }) => {
         <Subheader>
           <div className="flex mr1 self-center">
             <header className="flex items-center min-h-40">
-              <h2 className="table-cell mr2" tabIndex={-1}>
+              <h2 ref={mainHeading} className="table-cell mr2" tabIndex={-1}>
                 Missing dictionary
               </h2>
             </header>
