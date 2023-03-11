@@ -17,6 +17,26 @@ const googleFormURL =
 
 const truncationLimit = 1000;
 
+const getDictionaryContentsString = (dictContents) => {
+  let contents = "";
+  contents = JSON.stringify(dictContents).split('",').join('",\n');
+  contents = "{\n" + contents.slice(1, contents.length); // split first line {"STROKE": "TRANSLATION", on {"
+
+  const contentsArray = contents.split("\n");
+  const contentsArrayLength = contentsArray.length;
+  if (contentsArrayLength > truncationLimit) {
+    let newContents = contentsArray.slice(0, truncationLimit);
+    newContents[truncationLimit - 1] = newContents[truncationLimit - 1].slice(
+      0,
+      -1
+    ); // removing trailing comma
+    newContents.push("}");
+    contents = newContents.join("\n");
+  }
+
+  return [contents, contentsArrayLength];
+};
+
 class Dictionary extends Component {
   constructor(props) {
     super(props);
@@ -176,14 +196,10 @@ class Dictionary extends Component {
     }
 
     if (this.state.dictionary) {
-      let contents = "";
-      contents = JSON.stringify(this.state.dictionary.contents)
-        .split('",')
-        .join('",\n');
-      contents = "{\n" + contents.slice(1, contents.length); // split first line {"STROKE": "TRANSLATION", on {"
+      const [contents, contentsArrayLength] = getDictionaryContentsString(
+        this.state.dictionary.contents
+      );
 
-      const contentsArray = contents.split("\n");
-      const contentsArrayLength = contentsArray.length;
       const truncatedMessage =
         contentsArrayLength > truncationLimit ? (
           <p className="bg-danger dark:text-coolgrey-900">
@@ -193,15 +209,6 @@ class Dictionary extends Component {
         ) : (
           ""
         );
-
-      if (contentsArrayLength > truncationLimit) {
-        let newContents = contentsArray.slice(0, truncationLimit);
-        newContents[truncationLimit - 1] = newContents[
-          truncationLimit - 1
-        ].slice(0, -1); // removing trailing comma
-        newContents.push("}");
-        contents = newContents.join("\n");
-      }
 
       let externalLink = "";
       let internalLink = "";
