@@ -272,7 +272,7 @@ class Dictionary extends Component {
                   arrow="true"
                   className=""
                   duration="200"
-                  tabIndex="0"
+                  tabIndex={0}
                   tag="span"
                   theme="didoesdigital"
                   trigger="mouseenter focus click"
