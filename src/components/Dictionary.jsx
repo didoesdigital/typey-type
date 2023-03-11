@@ -54,6 +54,19 @@ const getExternalLink = (dictLink, setAnnouncementMessage) =>
     </p>
   );
 
+const getInternalLink = (dictLink, dictTitle) =>
+  isInternalDictLink(dictLink) ? (
+    dictLink.startsWith(process.env.PUBLIC_URL + "/lessons") ? (
+      <p>
+        <Link to={dictLink}>Lesson: {dictTitle}</Link>
+      </p>
+    ) : (
+      <p>
+        <Link to={dictLink}>Learn more</Link>
+      </p>
+    )
+  ) : null;
+
 const getDictionaryContentsString = (dictContents) => {
   let contents = "";
   contents = JSON.stringify(dictContents).split('",').join('",\n');
@@ -247,29 +260,14 @@ class Dictionary extends Component {
           ""
         );
 
-      const externalLink = getExternalLink(this.state.dictionary.link);
-      let internalLink = null;
-      let dictLink = this.state.dictionary.link;
-      if (
-        dictLink.startsWith("/typey-type") ||
-        dictLink.startsWith("/dictionaries/") ||
-        dictLink.startsWith("/lessons/") ||
-        dictLink.startsWith("/support")
-      ) {
-        internalLink = (
-          <p>
-            <Link to={dictLink}>Learn more</Link>
-          </p>
-        );
-        if (dictLink.startsWith(process.env.PUBLIC_URL + "/lessons")) {
-          internalLink = (
-            <p>
-              <Link to={dictLink}>Lesson: {this.state.dictionary.title}</Link>
-            </p>
-          );
-        }
-        // better check would be `//`, `http`
-      }
+      const externalLink = getExternalLink(
+        this.state.dictionary.link,
+        this.props.setAnnouncementMessage
+      );
+      const internalLink = getInternalLink(
+        this.state.dictionary.link,
+        this.state.dictionary.title
+      );
 
       return (
         <DocumentTitle
