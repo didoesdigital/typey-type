@@ -22,7 +22,6 @@ const truncationLimit = 1000;
 type DictLink = string;
 
 type Props = {
-  path: string;
   setAnnouncementMessage: () => void;
   setAnnouncementMessageString: (announcement: string) => void;
 };
@@ -103,7 +102,6 @@ const getDictionaryContentsString = (dictContents: StenoDictionary) => {
 };
 
 const Dictionary = ({
-  path,
   setAnnouncementMessage,
   setAnnouncementMessageString,
 }: Props) => {
@@ -204,7 +202,7 @@ const Dictionary = ({
   };
 
   if (hasError) {
-    return <DictionaryNotFound path={path} location={location} />;
+    return <DictionaryNotFound location={location} />;
   }
 
   if (dictionary) {
