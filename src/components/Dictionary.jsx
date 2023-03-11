@@ -56,7 +56,9 @@ const getExternalLink = (dictLink, setAnnouncementMessage) =>
 
 const getInternalLink = (dictLink, dictTitle) =>
   isInternalDictLink(dictLink) ? (
-    dictLink.startsWith(process.env.PUBLIC_URL + "/lessons") ? (
+    `${process.env.PUBLIC_URL}${dictLink}`.startsWith(
+      process.env.PUBLIC_URL + "/lessons"
+    ) ? (
       <p>
         <Link to={dictLink}>Lesson: {dictTitle}</Link>
       </p>
