@@ -210,8 +210,8 @@ class Dictionary extends Component {
           ""
         );
 
-      let externalLink = "";
-      let internalLink = "";
+      let externalLink = null;
+      let internalLink = null;
       let dictLink = this.state.dictionary.link;
       if (
         dictLink.startsWith("/typey-type") ||
