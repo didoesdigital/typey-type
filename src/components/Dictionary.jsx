@@ -157,7 +157,7 @@ class Dictionary extends Component {
       });
   }
 
-  downloadDictionary() {
+  trackDownloadDictionary() {
     let dictionaryPath;
     if (
       this.state.dictionary &&
@@ -244,6 +244,7 @@ class Dictionary extends Component {
               rel="noopener noreferrer"
             >
               Learn more
+              {/* @ts-ignore */}
               <Tooltip
                 title="Opens in a new tab"
                 animation="shift"
@@ -298,7 +299,7 @@ class Dictionary extends Component {
                 <a
                   href={process.env.PUBLIC_URL + this.state.dictionary.path}
                   download=""
-                  onClick={this.downloadDictionary.bind(this)}
+                  onClick={this.trackDownloadDictionary.bind(this)}
                   className="link-button link-button-ghost table-cell mr1"
                 >
                   Download
