@@ -64,14 +64,7 @@ class Dictionary extends Component {
 
   componentDidMount() {
     let locationpathname = this.props.location.pathname.replace(/\/$/, ".json");
-
-    // console.log(locationpathname);
-    // console.log("COMPONENT MOUNTS");
-    // console.log(this.state.dictionary.path);
-    // console.log(locationpathname);
-    // console.log(this.props.location.pathname);
     if (this.props.location.pathname.startsWith("/dictionaries/custom")) {
-      // this.props.setCustomDictionary();
     } else if (
       this.state.dictionary.path !== locationpathname &&
       this.props.location.pathname.startsWith("/dictionaries")
