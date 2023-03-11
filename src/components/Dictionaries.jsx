@@ -18,8 +18,6 @@ const AsyncDictionaryManagement = Loadable({
 
 const Dictionaries = ({
   match,
-  dictionaryIndex,
-  setDictionaryIndex,
   globalLookupDictionaryLoaded,
   globalLookupDictionary,
   globalUserSettings,
@@ -37,8 +35,6 @@ const Dictionaries = ({
           path={`${match.url}/lessons/:category/:subcategory/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
-              dictionaryIndex={dictionaryIndex}
-              setDictionaryIndex={setDictionaryIndex}
               {...dictionaryProps}
               {...props}
             />
@@ -48,8 +44,6 @@ const Dictionaries = ({
           path={`${match.url}/lessons/fundamentals/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
-              dictionaryIndex={dictionaryIndex}
-              setDictionaryIndex={setDictionaryIndex}
               {...dictionaryProps}
               {...props}
             />
@@ -59,8 +53,6 @@ const Dictionaries = ({
           path={`${match.url}/lessons/drills/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
-              dictionaryIndex={dictionaryIndex}
-              setDictionaryIndex={setDictionaryIndex}
               {...dictionaryProps}
               {...props}
             />
@@ -70,8 +62,6 @@ const Dictionaries = ({
           path={`${match.url}/typey-type/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
-              dictionaryIndex={dictionaryIndex}
-              setDictionaryIndex={setDictionaryIndex}
               {...dictionaryProps}
               {...props}
             />
@@ -81,8 +71,6 @@ const Dictionaries = ({
           path={`${match.url}/individual/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
-              dictionaryIndex={dictionaryIndex}
-              setDictionaryIndex={setDictionaryIndex}
               {...dictionaryProps}
               {...props}
             />
@@ -92,8 +80,6 @@ const Dictionaries = ({
           path={`${match.url}/didoesdigital/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
-              dictionaryIndex={dictionaryIndex}
-              setDictionaryIndex={setDictionaryIndex}
               {...dictionaryProps}
               {...props}
             />
@@ -103,8 +89,6 @@ const Dictionaries = ({
           path={`${match.url}/plover/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
-              dictionaryIndex={dictionaryIndex}
-              setDictionaryIndex={setDictionaryIndex}
               {...dictionaryProps}
               {...props}
             />
@@ -115,8 +99,6 @@ const Dictionaries = ({
           path={`${match.url}/management`}
           render={(props) => (
             <AsyncDictionaryManagement
-              dictionaryIndex={dictionaryIndex}
-              setDictionaryIndex={setDictionaryIndex}
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
               globalUserSettings={globalUserSettings}
@@ -134,8 +116,6 @@ const Dictionaries = ({
           path={match.url}
           render={(props) => (
             <DictionariesIndex
-              dictionaryIndex={dictionaryIndex}
-              setDictionaryIndex={setDictionaryIndex}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               globalUserSettings={globalUserSettings}
