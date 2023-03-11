@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import DocumentTitle from "react-document-title";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import DictionaryNotFound from "../../components/DictionaryNotFound";
 import GoogleAnalytics from "react-ga";
 import PseudoContentButton from "../../components/PseudoContentButton";
@@ -22,9 +22,6 @@ const truncationLimit = 1000;
 type DictLink = string;
 
 type Props = {
-  location: {
-    pathname: string;
-  };
   path: string;
   setAnnouncementMessage: () => void;
   setAnnouncementMessageString: (announcement: string) => void;
@@ -106,7 +103,6 @@ const getDictionaryContentsString = (dictContents: StenoDictionary) => {
 };
 
 const Dictionary = ({
-  location,
   path,
   setAnnouncementMessage,
   setAnnouncementMessageString,
@@ -139,6 +135,8 @@ const Dictionary = ({
       "THA": "that",
     },
   });
+
+  const location = useLocation();
 
   useEffect(() => {
     // mainHeading.current?.focus();
