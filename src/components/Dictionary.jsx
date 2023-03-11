@@ -114,13 +114,6 @@ class Dictionary extends Component {
     }
   }
 
-  componentWillUnmount() {
-    this.setState({
-      loadingDictionaryContents: false,
-      loadingError: false,
-    });
-  }
-
   loadDictionaryContents(path) {
     let dictionaryFile = path.replace(/\/$/, ".json");
     fetch(dictionaryFile, {
