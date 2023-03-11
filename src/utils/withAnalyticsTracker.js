@@ -26,12 +26,12 @@ const withAnalyticsTracker = (
       trackPage(page);
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps) {
       const currentPage = process.env.PUBLIC_URL + this.props.location.pathname;
-      const nextPage = process.env.PUBLIC_URL + nextProps.location.pathname;
+      const prevPage = process.env.PUBLIC_URL + prevProps.location.pathname;
 
-      if (currentPage !== nextPage) {
-        trackPage(nextPage);
+      if (currentPage !== prevPage) {
+        trackPage(currentPage);
       }
     }
 
