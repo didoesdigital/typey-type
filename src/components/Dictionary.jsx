@@ -177,21 +177,24 @@ class Dictionary extends Component {
 
     if (this.state.dictionary) {
       let contents = "";
-      let truncatedMessage = "";
       contents = JSON.stringify(this.state.dictionary.contents)
         .split('",')
         .join('",\n');
       contents = "{\n" + contents.slice(1, contents.length); // split first line {"STROKE": "TRANSLATION", on {"
 
-      let contentsArray = contents.split("\n");
-      let contentsArrayLength = contentsArray.length;
-      if (contentsArrayLength > truncationLimit) {
-        truncatedMessage = (
+      const contentsArray = contents.split("\n");
+      const contentsArrayLength = contentsArray.length;
+      const truncatedMessage =
+        contentsArrayLength > truncationLimit ? (
           <p className="bg-danger dark:text-coolgrey-900">
             The dictionary is too large to display in full so this only shows
             the first {truncationLimit} entries.
           </p>
+        ) : (
+          ""
         );
+
+      if (contentsArrayLength > truncationLimit) {
         let newContents = contentsArray.slice(0, truncationLimit);
         newContents[truncationLimit - 1] = newContents[
           truncationLimit - 1
