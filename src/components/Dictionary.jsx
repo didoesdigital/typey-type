@@ -15,6 +15,8 @@ import Subheader from "./Subheader";
 const googleFormURL =
   "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=";
 
+const truncationLimit = 1000;
+
 class Dictionary extends Component {
   constructor(props) {
     super(props);
@@ -112,7 +114,7 @@ class Dictionary extends Component {
   }
 
   loadDictionaryContents(path) {
-    let dictionaryFile = path.replace(/\/$/, ".json");
+    const dictionaryFile = path.replace(/\/$/, ".json");
     fetch(dictionaryFile, {
       method: "GET",
       credentials: "same-origin",
@@ -122,7 +124,7 @@ class Dictionary extends Component {
 
         if (contentType && contentType.indexOf("application/json") !== -1) {
           return response.json().then((dictionaryContents) => {
-            let newDictionary = Object.assign({}, this.state.dictionary);
+            const newDictionary = Object.assign({}, this.state.dictionary);
 
             newDictionary["contents"] = dictionaryContents;
 
@@ -175,7 +177,7 @@ class Dictionary extends Component {
 
     if (this.state.dictionary) {
       let contents = "";
-      let truncatedMessage = ``;
+      let truncatedMessage = "";
       contents = JSON.stringify(this.state.dictionary.contents)
         .split('",')
         .join('",\n');
@@ -183,7 +185,6 @@ class Dictionary extends Component {
 
       let contentsArray = contents.split("\n");
       let contentsArrayLength = contentsArray.length;
-      let truncationLimit = 1000;
       if (contentsArrayLength > truncationLimit) {
         truncatedMessage = (
           <p className="bg-danger dark:text-coolgrey-900">
