@@ -92,6 +92,7 @@ const getDictionaryContentsString = (dictContents) => {
 class Dictionary extends Component {
   constructor(props) {
     super(props);
+    this.mainHeading = React.createRef();
     this.state = {
       loadingDictionaryContents: false,
       loadingError: false,
@@ -178,8 +179,8 @@ class Dictionary extends Component {
       );
     }
 
-    if (this.mainHeading) {
-      this.mainHeading.focus();
+    if (this.mainHeading?.current) {
+      this.mainHeading?.current.focus();
     }
   }
 
@@ -279,9 +280,7 @@ class Dictionary extends Component {
                 <header className="flex items-center min-h-40">
                   <h2
                     className="table-cell mr2"
-                    ref={(heading) => {
-                      this.mainHeading = heading;
-                    }}
+                    ref={this.mainHeading}
                     tabIndex={-1}
                   >
                     {this.state.loadingDictionaryContents ? (
@@ -365,12 +364,7 @@ class Dictionary extends Component {
     } else {
       return (
         <div>
-          <h2
-            ref={(heading) => {
-              this.mainHeading = heading;
-            }}
-            tabIndex={-1}
-          >
+          <h2 ref={this.mainHeading} tabIndex={-1}>
             That dictionary is missing.
           </h2>
         </div>
