@@ -151,13 +151,12 @@ class Dictionary extends Component {
       fetchDictionaryIndex()
         .then((json) => {
           this.setState({ dictionaryIndex: json }, () => {
-            let dictionaryMetadata = lookUpDictionaryInIndex(
-              process.env.PUBLIC_URL + this.props.location.pathname,
-              this.state.dictionaryIndex
-            );
             let newDictionary = Object.assign({}, this.state.dictionary);
             for (const [metadataKey, metadataValue] of Object.entries(
-              dictionaryMetadata
+              lookUpDictionaryInIndex(
+                process.env.PUBLIC_URL + this.props.location.pathname,
+                this.state.dictionaryIndex
+              )
             )) {
               newDictionary[metadataKey] = metadataValue;
             }
