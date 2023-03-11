@@ -49,7 +49,6 @@ type Props = {
   ) => Promise<any>;
   globalLookupDictionary: LookupDictWithNamespacedDicts;
   globalLookupDictionaryLoaded: boolean;
-  // personalDictionaries: any;
   personalDictionaries: PersonalDictionaryNameAndContents[];
   startingMetWordsToday: MetWords;
   updateMetWords: any;
