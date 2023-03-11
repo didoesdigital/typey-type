@@ -17,6 +17,43 @@ const googleFormURL =
 
 const truncationLimit = 1000;
 
+const isInternalDictLink = (dictLink) =>
+  dictLink.startsWith("/typey-type") ||
+  dictLink.startsWith("/dictionaries/") ||
+  dictLink.startsWith("/lessons/") ||
+  dictLink.startsWith("/support");
+
+const getExternalLink = (dictLink, setAnnouncementMessage) =>
+  isInternalDictLink(dictLink) ? null : (
+    <p className="mt3">
+      <a href={dictLink} target="_blank" rel="noopener noreferrer">
+        Learn more
+        {/* @ts-ignore */}
+        <Tooltip
+          title="Opens in a new tab"
+          animation="shift"
+          arrow="true"
+          className=""
+          duration="200"
+          tabIndex={0}
+          tag="span"
+          theme="didoesdigital"
+          trigger="mouseenter focus click"
+          onShow={setAnnouncementMessage}
+        >
+          <IconExternal
+            ariaHidden="true"
+            role="presentation"
+            iconWidth="24"
+            iconHeight="24"
+            className="ml1 svg-icon-wrapper svg-baseline"
+            iconTitle=""
+          />
+        </Tooltip>
+      </a>
+    </p>
+  );
+
 const getDictionaryContentsString = (dictContents) => {
   let contents = "";
   contents = JSON.stringify(dictContents).split('",').join('",\n');
@@ -210,7 +247,7 @@ class Dictionary extends Component {
           ""
         );
 
-      let externalLink = null;
+      const externalLink = getExternalLink(this.state.dictionary.link);
       let internalLink = null;
       let dictLink = this.state.dictionary.link;
       if (
@@ -232,40 +269,6 @@ class Dictionary extends Component {
           );
         }
         // better check would be `//`, `http`
-      } else {
-        externalLink = (
-          <p className="mt3">
-            <a
-              href={this.state.dictionary.link}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn more
-              {/* @ts-ignore */}
-              <Tooltip
-                title="Opens in a new tab"
-                animation="shift"
-                arrow="true"
-                className=""
-                duration="200"
-                tabIndex={0}
-                tag="span"
-                theme="didoesdigital"
-                trigger="mouseenter focus click"
-                onShow={this.props.setAnnouncementMessage}
-              >
-                <IconExternal
-                  ariaHidden="true"
-                  role="presentation"
-                  iconWidth="24"
-                  iconHeight="24"
-                  className="ml1 svg-icon-wrapper svg-baseline"
-                  iconTitle=""
-                />
-              </Tooltip>
-            </a>
-          </p>
-        );
       }
 
       return (
