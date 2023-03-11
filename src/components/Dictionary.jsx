@@ -158,21 +158,14 @@ class Dictionary extends Component {
   }
 
   trackDownloadDictionary() {
-    let dictionaryPath;
-    if (
-      this.state.dictionary &&
-      this.state.dictionary.path &&
-      this.state.dictionary.path !== "/dictionaries/typey-type/top-10.json"
-    ) {
-      dictionaryPath = this.state.dictionary.path;
-    } else {
-      dictionaryPath = "No dictionary path";
-    }
-
     GoogleAnalytics.event({
       category: "Downloads",
       action: "Click",
-      label: dictionaryPath,
+      label:
+        this.state.dictionary?.path &&
+        this.state.dictionary.path !== "/dictionaries/typey-type/top-10.json"
+          ? this.state.dictionary.path
+          : "No dictionary path",
     });
   }
 
