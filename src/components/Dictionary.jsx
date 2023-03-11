@@ -169,6 +169,7 @@ class Dictionary extends Component {
       this.surveyLink.href =
         googleFormURL + encodeURIComponent(prefillDictionary);
     }
+    return googleFormURL;
   }
 
   downloadDictionary() {
