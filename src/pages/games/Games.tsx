@@ -5,6 +5,11 @@ import ErrorBoundary from "../../components/ErrorBoundary";
 import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 import "./Games.scss";
+import type {
+  LookupDictWithNamespacedDicts,
+  MetWords,
+  PersonalDictionaryNameAndContents,
+} from "../../types";
 
 const AsyncGamesIndex = Loadable({
   loader: () => import("./GamesIndex"),
@@ -36,6 +41,20 @@ const AsyncTPEUBGSZ = Loadable({
   delay: 300,
 });
 
+type Props = {
+  match: any;
+  fetchAndSetupGlobalDict: (
+    withPlover: boolean,
+    importedPersonalDictionaries?: any
+  ) => Promise<any>;
+  globalLookupDictionary: LookupDictWithNamespacedDicts;
+  globalLookupDictionaryLoaded: boolean;
+  // personalDictionaries: any;
+  personalDictionaries: PersonalDictionaryNameAndContents[];
+  startingMetWordsToday: MetWords;
+  updateMetWords: any;
+};
+
 const Games = ({
   match,
   fetchAndSetupGlobalDict,
@@ -44,7 +63,7 @@ const Games = ({
   personalDictionaries,
   startingMetWordsToday,
   updateMetWords,
-}) => {
+}: Props) => {
   return (
     <Switch>
       <Route exact={true} path={`${match.url}/KAOES`}>
