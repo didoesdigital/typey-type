@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
 import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
-import DictionaryNotFound from "./DictionaryNotFound";
+import DictionaryNotFound from "../../components/DictionaryNotFound";
 import GoogleAnalytics from "react-ga";
-import PseudoContentButton from "./PseudoContentButton";
-import { IconExternal } from "./Icon";
+import PseudoContentButton from "../../components/PseudoContentButton";
+import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
-import { lookUpDictionaryInIndex } from "./../utils/typey-type";
-import { fetchDictionaryIndex } from "./../utils/getData";
-import Subheader from "./Subheader";
+import { lookUpDictionaryInIndex } from "../../utils/typey-type";
+import { fetchDictionaryIndex } from "../../utils/getData";
+import Subheader from "../../components/Subheader";
 // import CustomDictionarySetup from './CustomDictionarySetup';
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=Example";

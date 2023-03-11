@@ -5,7 +5,7 @@ import DictionariesIndex from "../pages/dictionaries/DictionariesIndex";
 import PageLoading from "./PageLoading";
 
 const AsyncDictionary = Loadable({
-  loader: () => import("./Dictionary"),
+  loader: () => import("../pages/dictionaries/Dictionary"),
   loading: PageLoading,
   delay: 300,
 });
