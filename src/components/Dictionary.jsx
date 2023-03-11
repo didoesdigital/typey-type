@@ -149,23 +149,22 @@ class Dictionary extends Component {
       });
 
       fetchDictionaryIndex()
-        .then((json) => {
-          this.setState({ dictionaryIndex: json }, () => {
-            let newDictionary = Object.assign({}, this.state.dictionary);
-            for (const [metadataKey, metadataValue] of Object.entries(
-              lookUpDictionaryInIndex(
-                process.env.PUBLIC_URL + this.props.location.pathname,
-                this.state.dictionaryIndex
-              )
-            )) {
-              newDictionary[metadataKey] = metadataValue;
-            }
-            this.props.setAnnouncementMessageString(
-              "Navigated to: " + newDictionary.title
-            );
-            this.setState({
-              dictionary: newDictionary,
-            });
+        .then((dictionaryIndex) => {
+          const newDictionary = Object.assign({}, this.state.dictionary);
+          for (const [metadataKey, metadataValue] of Object.entries(
+            lookUpDictionaryInIndex(
+              process.env.PUBLIC_URL + this.props.location.pathname,
+              dictionaryIndex
+            )
+          )) {
+            newDictionary[metadataKey] = metadataValue;
+          }
+          this.props.setAnnouncementMessageString(
+            "Navigated to: " + newDictionary.title
+          );
+          this.setState({
+            dictionary: newDictionary,
+            dictionaryIndex,
           });
         })
         .catch((error) => {
