@@ -130,7 +130,7 @@ class Lesson extends Component {
 
   render() {
     if (this.props.lessonNotFound) {
-      return <LessonNotFound path={this.props.path} location={this.props.location} lessonIndex={this.props.lessonIndex} />
+      return <LessonNotFound path={this.props.path} lessonIndex={this.props.lessonIndex} />
     }
 
     const lessonSubTitle = (this.props.lesson?.subtitle?.length > 0) ? `: ${this.props.lessonSubTitle}` : '';

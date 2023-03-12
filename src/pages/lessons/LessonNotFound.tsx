@@ -2,11 +2,10 @@ import React, { useEffect, useRef } from "react";
 import GoogleAnalytics from "react-ga";
 import * as Sentry from "@sentry/browser";
 import DocumentTitle from "react-document-title";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Subheader from "../../components/Subheader";
 
 type LessonNotFoundProps = {
-  location: any;
   lessonIndex: any;
   path: any;
   restartLesson?: any;
@@ -18,13 +17,13 @@ const googleFormURL =
 const googleFormParam = "&entry.1202724812&entry.936119214";
 
 const LessonNotFound = ({
-  location,
   lessonIndex,
   path,
   restartLesson,
 }: LessonNotFoundProps) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const surveyLink = useRef<HTMLAnchorElement>(null);
+  const location = useLocation();
 
   useEffect(() => {
     let labelString = "That lesson not found";
