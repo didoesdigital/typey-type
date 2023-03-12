@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { IconClosingCross } from "../../components/Icon";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import AnimateHeight from "react-animate-height";
 import DocumentTitle from "react-document-title";
 import LessonCanvasFooter from "./components/LessonCanvasFooter";
@@ -66,16 +66,6 @@ type Props = {
   lesson: Lesson;
   lessonLength: number;
   lessonTitle: string;
-  // TODO: get actual type
-  /**
-   * Examples:
-   * hash: ""
-   * key: string
-   * pathname: "/lessons/drills/steno-party-tricks/"
-   * search: ""
-   * state: undefined
-   * */
-  location: { [key: string]: any };
   previousCompletedPhraseAsTyped: ActualTypedText;
   repetitionsRemaining: number;
   restartLesson: () => void;
@@ -134,7 +124,6 @@ const MainLessonView = ({
   lesson,
   lessonLength,
   lessonTitle,
-  location,
   previousCompletedPhraseAsTyped,
   repetitionsRemaining,
   restartLesson,
@@ -159,6 +148,7 @@ const MainLessonView = ({
   toggleHideOtherSettings,
 }: Props) => {
   const mainHeading = useRef(null);
+  const location = useLocation();
 
   return (
     <DocumentTitle title={"Typey Type | Lesson: " + lesson.title}>
@@ -299,7 +289,9 @@ const MainLessonView = ({
                       currentStroke={currentStroke}
                       currentPhrase={currentPhrase}
                       globalLookupDictionary={globalLookupDictionary}
-                      globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+                      globalLookupDictionaryLoaded={
+                        globalLookupDictionaryLoaded
+                      }
                       repetitionsRemaining={repetitionsRemaining}
                       showStrokesInLesson={showStrokesInLesson}
                       targetStrokeCount={targetStrokeCount}

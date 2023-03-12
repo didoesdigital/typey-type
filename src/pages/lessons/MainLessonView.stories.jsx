@@ -126,7 +126,6 @@ const Template = (args) => {
             personalDictionaries={{ dictionariesNamesAndContents: null }}
             lessonsProgress={{}}
             lessonNotFound={false}
-            location={{ pathname: "/lesson" }}
             fullscreen={false}
             lessonSubTitle={""}
             lessonTitle={"Test lesson"}
