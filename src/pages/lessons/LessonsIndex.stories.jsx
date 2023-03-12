@@ -49,12 +49,6 @@ const Template = (args) => {
       customLesson={customLesson}
       setAnnouncementMessage={() => console.log("announce")}
       stopLesson={() => console.log("stop lesson")}
-      match={{
-        isExact: true,
-        params: {},
-        path: "/dictionaries",
-        url: "/dictionaries/",
-      }}
       {...args}
     />
   );

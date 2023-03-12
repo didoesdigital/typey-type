@@ -369,7 +369,6 @@ const Lessons = ({
           <LessonsIndex
             lessonIndex={lessonIndex}
             customLesson={customLesson}
-            match={match}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
           />

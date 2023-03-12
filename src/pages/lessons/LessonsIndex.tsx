@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import OutboundLink from "../../components/OutboundLink";
 import { IconExternal } from "../../components/Icon";
 import LessonList from "./components/LessonList";
@@ -9,7 +9,6 @@ import Subheader from "../../components/Subheader";
 type LessonsIndexProps = {
   customLesson: any;
   lessonIndex: any;
-  match: any;
   setAnnouncementMessage: any;
   stopLesson: any;
 };
@@ -17,7 +16,6 @@ type LessonsIndexProps = {
 const LessonsIndex = ({
   customLesson,
   lessonIndex,
-  match,
   setAnnouncementMessage,
   stopLesson,
 }: LessonsIndexProps) => {
@@ -26,6 +24,13 @@ const LessonsIndex = ({
   useEffect(() => {
     mainHeading.current?.focus();
   }, []);
+
+  const match = useRouteMatch({
+    path: "/lessons",
+    strict: true,
+    sensitive: true,
+  });
+  const url = match?.url ?? "";
 
   return (
     <main id="main">
@@ -40,7 +45,7 @@ const LessonsIndex = ({
         <div className="flex flex-wrap mxn2">
           {customLesson.title !== "Steno" ? (
             <Link
-              to={`${match.url}/custom?study=discover&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1`.replace(
+              to={`${url}/custom?study=discover&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1`.replace(
                 /\/{2,}/g,
                 "/"
               )}
@@ -51,7 +56,7 @@ const LessonsIndex = ({
             </Link>
           ) : null}
           <Link
-            to={`${match.url}/custom/setup`.replace(/\/{2,}/g, "/")}
+            to={`${url}/custom/setup`.replace(/\/{2,}/g, "/")}
             className="link-button button button--secondary table-cell mr2 ml1"
             style={{ lineHeight: 2 }}
             id="ga--lesson-index--create-a-custom-lesson"
@@ -62,7 +67,7 @@ const LessonsIndex = ({
       </Subheader>
       <div className="p3 mx-auto mw-1024">
         <h3>Typey&nbsp;Type lessons</h3>
-        <LessonList lessonIndex={lessonIndex} url={match.url} />
+        <LessonList lessonIndex={lessonIndex} url={url} />
         <div className="mw-584">
           <h3 className="mt3 pt6">Community lessons</h3>
           <p>
