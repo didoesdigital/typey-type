@@ -148,7 +148,7 @@ const Dictionary = ({
     ) {
       fetchDictionaryIndex()
         .then((dictIndexEntryJSON) => {
-          fetch(
+          return fetch(
             process.env.PUBLIC_URL + location.pathname.replace(/\/$/, ".json"),
             {
               method: "GET",
