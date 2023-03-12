@@ -10,10 +10,10 @@ if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
 }
 
 const withAnalyticsTracker = (
-  WrappedComponent,
+  WrappedComponent: any,
   options = { anonymizeIp: true }
 ) => {
-  const trackPage = (page) => {
+  const trackPage = (page: Location["pathname"]) => {
     GoogleAnalytics.set({
       page,
       ...options,
@@ -27,7 +27,6 @@ const withAnalyticsTracker = (
 
     useEffect(() => {
       const page = process.env.PUBLIC_URL + location.pathname;
-      console.log(location.pathname);
       trackPage(page);
     }, [location.pathname]);
 
