@@ -101,7 +101,7 @@ const Template = (args) => {
   return (
     <Switch>
       <Route
-        render={(props) => (
+        render={() => (
           <div>
             <MainLessonView
               createNewCustomLesson={createNewCustomLesson}
@@ -127,6 +127,7 @@ const Template = (args) => {
               personalDictionaries={{ dictionariesNamesAndContents: null }}
               lessonsProgress={{}}
               lessonNotFound={false}
+              location={{ pathname: "/lesson" }}
               fullscreen={false}
               lessonSubTitle={""}
               lessonTitle={"Test lesson"}
@@ -193,7 +194,6 @@ const Template = (args) => {
               updateRecommendationHistory={() => undefined}
               updateMarkup={() => undefined}
               updateTopSpeedPersonalBest={() => undefined}
-              {...props}
               {...args}
             />
           </div>
