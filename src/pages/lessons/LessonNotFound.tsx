@@ -7,7 +7,6 @@ import Subheader from "../../components/Subheader";
 
 type LessonNotFoundProps = {
   lessonIndex: any;
-  path: any;
   restartLesson?: any;
 };
 
@@ -18,7 +17,6 @@ const googleFormParam = "&entry.1202724812&entry.936119214";
 
 const LessonNotFound = ({
   lessonIndex,
-  path,
   restartLesson,
 }: LessonNotFoundProps) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
@@ -67,7 +65,7 @@ const LessonNotFound = ({
           <div className="flex mr1 self-center">
             <header className="flex items-center min-h-40">
               <a
-                href={path}
+                href={location.pathname}
                 onClick={restartLesson}
                 className="heading-link table-cell mr2"
                 role="button"
