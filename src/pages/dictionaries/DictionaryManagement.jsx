@@ -13,6 +13,15 @@ import { writePersonalPreferences } from '../../utils/typey-type';
 import misstrokesJSON from '../../json/misstrokes.json'
 import Subheader from "../../components/Subheader";
 
+// type Props = {
+//   fetchAndSetupGlobalDict
+//   globalLookupDictionary
+//   globalUserSettings.experiments?.stenohintsonthefly
+//   setAnnouncementMessageString
+//   toggleExperiment
+//   updatePersonalDictionaries
+// }
+
 class DictionaryManagement extends Component {
   constructor(props) {
     super(props);
