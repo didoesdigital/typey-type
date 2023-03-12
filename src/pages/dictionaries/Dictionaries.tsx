@@ -74,85 +74,78 @@ const Dictionaries = ({
       <Switch>
         <Route
           path={`${url}/lessons/:category/:subcategory/:dictionaryPath`}
-          render={(props) => (
+          render={() => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
               setAnnouncementMessageString={setAnnouncementMessageString}
               {...dictionaryProps}
-              {...props}
             />
           )}
         />
         <Route
           path={`${url}/lessons/fundamentals/:dictionaryPath`}
-          render={(props) => (
+          render={() => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
               setAnnouncementMessageString={setAnnouncementMessageString}
               {...dictionaryProps}
-              {...props}
             />
           )}
         />
         <Route
           path={`${url}/lessons/drills/:dictionaryPath`}
-          render={(props) => (
+          render={() => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
               setAnnouncementMessageString={setAnnouncementMessageString}
               {...dictionaryProps}
-              {...props}
             />
           )}
         />
         <Route
           path={`${url}/typey-type/:dictionaryPath`}
-          render={(props) => (
+          render={() => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
               setAnnouncementMessageString={setAnnouncementMessageString}
               {...dictionaryProps}
-              {...props}
             />
           )}
         />
         <Route
           path={`${url}/individual/:dictionaryPath`}
-          render={(props) => (
+          render={() => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
               setAnnouncementMessageString={setAnnouncementMessageString}
               {...dictionaryProps}
-              {...props}
             />
           )}
         />
         <Route
           path={`${url}/didoesdigital/:dictionaryPath`}
-          render={(props) => (
+          render={() => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
               setAnnouncementMessageString={setAnnouncementMessageString}
               {...dictionaryProps}
-              {...props}
             />
           )}
         />
         <Route
           path={`${url}/plover/:dictionaryPath`}
-          render={(props) => (
+          render={() => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
               setAnnouncementMessageString={setAnnouncementMessageString}
               {...dictionaryProps}
-              {...props}
             />
           )}
         />
         <Route
           exact={true}
           path={`${url}/management`}
-          render={(props) => (
+          render={() => (
             <AsyncDictionaryManagement
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
@@ -161,14 +154,13 @@ const Dictionaries = ({
               toggleExperiment={toggleExperiment}
               updatePersonalDictionaries={updatePersonalDictionaries}
               {...dictionaryProps}
-              {...props}
             />
           )}
         />
         <Route
           exact={true}
           path={url}
-          render={(props) => (
+          render={() => (
             <DictionariesIndex
               dictionaryIndex={dictionaryIndex}
               setAnnouncementMessage={setAnnouncementMessage}
@@ -183,7 +175,6 @@ const Dictionaries = ({
               updateGlobalLookupDictionary={updateGlobalLookupDictionary}
               updatePersonalDictionaries={updatePersonalDictionaries}
               {...dictionaryProps}
-              {...props}
             />
           )}
         />
