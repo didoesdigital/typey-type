@@ -4,6 +4,14 @@ import Loadable from "react-loadable";
 import DictionariesIndex from "../pages/dictionaries/DictionariesIndex";
 import PageLoading from "./PageLoading";
 
+import type {
+  Experiments,
+  GlobalUserSettings,
+  LookupDictWithNamespacedDicts,
+  PersonalDictionaryNameAndContents,
+  UserSettings,
+} from "../types";
+
 const AsyncDictionary = Loadable({
   loader: () => import("../pages/dictionaries/Dictionary"),
   loading: PageLoading,
@@ -15,6 +23,28 @@ const AsyncDictionaryManagement = Loadable({
   loading: PageLoading,
   delay: 300,
 });
+
+type Props = {
+  match: any;
+  dictionaryIndex: any;
+  fetchAndSetupGlobalDict: (
+    withPlover: boolean,
+    importedPersonalDictionaries?: any
+  ) => Promise<any>;
+  globalLookupDictionary: LookupDictWithNamespacedDicts;
+  globalLookupDictionaryLoaded: boolean;
+  globalUserSettings: GlobalUserSettings;
+  personalDictionaries: PersonalDictionaryNameAndContents[];
+  setAnnouncementMessage: () => void;
+  setAnnouncementMessageString: (announcement: string) => void;
+  setDictionaryIndex: () => void;
+  stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
+  toggleExperiment: any;
+  updateGlobalLookupDictionary: any;
+  updatePersonalDictionaries: any;
+  userSettings: UserSettings;
+  [restProps: string]: any;
+};
 
 const Dictionaries = ({
   match,
@@ -33,7 +63,7 @@ const Dictionaries = ({
   userSettings,
   fetchAndSetupGlobalDict,
   ...dictionaryProps
-}) => {
+}: Props) => {
   return (
     <div>
       <Switch>
