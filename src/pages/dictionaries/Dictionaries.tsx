@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Loadable from "react-loadable";
-import DictionariesIndex from "../pages/dictionaries/DictionariesIndex";
-import PageLoading from "./PageLoading";
+import DictionariesIndex from "./DictionariesIndex";
+import PageLoading from "../../components/PageLoading";
 
 import type {
   Experiments,
@@ -10,16 +10,16 @@ import type {
   LookupDictWithNamespacedDicts,
   PersonalDictionaryNameAndContents,
   UserSettings,
-} from "../types";
+} from "../../types";
 
 const AsyncDictionary = Loadable({
-  loader: () => import("../pages/dictionaries/Dictionary"),
+  loader: () => import("./Dictionary"),
   loading: PageLoading,
   delay: 300,
 });
 
 const AsyncDictionaryManagement = Loadable({
-  loader: () => import("../pages/dictionaries/DictionaryManagement"),
+  loader: () => import("./DictionaryManagement"),
   loading: PageLoading,
   delay: 300,
 });
