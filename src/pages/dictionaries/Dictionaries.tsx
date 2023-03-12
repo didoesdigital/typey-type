@@ -72,112 +72,83 @@ const Dictionaries = ({
   return (
     <div>
       <Switch>
-        <Route
-          path={`${url}/lessons/:category/:subcategory/:dictionaryPath`}
-          render={() => (
-            <AsyncDictionary
-              setAnnouncementMessage={setAnnouncementMessage}
-              setAnnouncementMessageString={setAnnouncementMessageString}
-              {...dictionaryProps}
-            />
-          )}
-        />
-        <Route
-          path={`${url}/lessons/fundamentals/:dictionaryPath`}
-          render={() => (
-            <AsyncDictionary
-              setAnnouncementMessage={setAnnouncementMessage}
-              setAnnouncementMessageString={setAnnouncementMessageString}
-              {...dictionaryProps}
-            />
-          )}
-        />
-        <Route
-          path={`${url}/lessons/drills/:dictionaryPath`}
-          render={() => (
-            <AsyncDictionary
-              setAnnouncementMessage={setAnnouncementMessage}
-              setAnnouncementMessageString={setAnnouncementMessageString}
-              {...dictionaryProps}
-            />
-          )}
-        />
-        <Route
-          path={`${url}/typey-type/:dictionaryPath`}
-          render={() => (
-            <AsyncDictionary
-              setAnnouncementMessage={setAnnouncementMessage}
-              setAnnouncementMessageString={setAnnouncementMessageString}
-              {...dictionaryProps}
-            />
-          )}
-        />
-        <Route
-          path={`${url}/individual/:dictionaryPath`}
-          render={() => (
-            <AsyncDictionary
-              setAnnouncementMessage={setAnnouncementMessage}
-              setAnnouncementMessageString={setAnnouncementMessageString}
-              {...dictionaryProps}
-            />
-          )}
-        />
-        <Route
-          path={`${url}/didoesdigital/:dictionaryPath`}
-          render={() => (
-            <AsyncDictionary
-              setAnnouncementMessage={setAnnouncementMessage}
-              setAnnouncementMessageString={setAnnouncementMessageString}
-              {...dictionaryProps}
-            />
-          )}
-        />
-        <Route
-          path={`${url}/plover/:dictionaryPath`}
-          render={() => (
-            <AsyncDictionary
-              setAnnouncementMessage={setAnnouncementMessage}
-              setAnnouncementMessageString={setAnnouncementMessageString}
-              {...dictionaryProps}
-            />
-          )}
-        />
-        <Route
-          exact={true}
-          path={`${url}/management`}
-          render={() => (
-            <AsyncDictionaryManagement
-              fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-              globalLookupDictionary={globalLookupDictionary}
-              globalUserSettings={globalUserSettings}
-              setAnnouncementMessageString={setAnnouncementMessageString}
-              toggleExperiment={toggleExperiment}
-              updatePersonalDictionaries={updatePersonalDictionaries}
-              {...dictionaryProps}
-            />
-          )}
-        />
-        <Route
-          exact={true}
-          path={url}
-          render={() => (
-            <DictionariesIndex
-              dictionaryIndex={dictionaryIndex}
-              setAnnouncementMessage={setAnnouncementMessage}
-              setDictionaryIndex={setDictionaryIndex}
-              stenohintsonthefly={stenohintsonthefly}
-              userSettings={userSettings}
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              globalUserSettings={globalUserSettings}
-              fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-              personalDictionaries={personalDictionaries}
-              updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-              updatePersonalDictionaries={updatePersonalDictionaries}
-              {...dictionaryProps}
-            />
-          )}
-        />
+        <Route path={`${url}/lessons/:category/:subcategory/:dictionaryPath`}>
+          <AsyncDictionary
+            setAnnouncementMessage={setAnnouncementMessage}
+            setAnnouncementMessageString={setAnnouncementMessageString}
+            {...dictionaryProps}
+          />
+        </Route>
+        <Route path={`${url}/lessons/fundamentals/:dictionaryPath`}>
+          <AsyncDictionary
+            setAnnouncementMessage={setAnnouncementMessage}
+            setAnnouncementMessageString={setAnnouncementMessageString}
+            {...dictionaryProps}
+          />
+        </Route>
+        <Route path={`${url}/lessons/drills/:dictionaryPath`}>
+          <AsyncDictionary
+            setAnnouncementMessage={setAnnouncementMessage}
+            setAnnouncementMessageString={setAnnouncementMessageString}
+            {...dictionaryProps}
+          />
+        </Route>
+        <Route path={`${url}/typey-type/:dictionaryPath`}>
+          <AsyncDictionary
+            setAnnouncementMessage={setAnnouncementMessage}
+            setAnnouncementMessageString={setAnnouncementMessageString}
+            {...dictionaryProps}
+          />
+        </Route>
+        <Route path={`${url}/individual/:dictionaryPath`}>
+          <AsyncDictionary
+            setAnnouncementMessage={setAnnouncementMessage}
+            setAnnouncementMessageString={setAnnouncementMessageString}
+            {...dictionaryProps}
+          />
+        </Route>
+        <Route path={`${url}/didoesdigital/:dictionaryPath`}>
+          <AsyncDictionary
+            setAnnouncementMessage={setAnnouncementMessage}
+            setAnnouncementMessageString={setAnnouncementMessageString}
+            {...dictionaryProps}
+          />
+        </Route>
+        <Route path={`${url}/plover/:dictionaryPath`}>
+          <AsyncDictionary
+            setAnnouncementMessage={setAnnouncementMessage}
+            setAnnouncementMessageString={setAnnouncementMessageString}
+            {...dictionaryProps}
+          />
+        </Route>
+        <Route exact={true} path={`${url}/management`}>
+          <AsyncDictionaryManagement
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            globalLookupDictionary={globalLookupDictionary}
+            globalUserSettings={globalUserSettings}
+            setAnnouncementMessageString={setAnnouncementMessageString}
+            toggleExperiment={toggleExperiment}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            {...dictionaryProps}
+          />
+        </Route>
+        <Route exact={true} path={url}>
+          <DictionariesIndex
+            dictionaryIndex={dictionaryIndex}
+            setAnnouncementMessage={setAnnouncementMessage}
+            setDictionaryIndex={setDictionaryIndex}
+            stenohintsonthefly={stenohintsonthefly}
+            userSettings={userSettings}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            globalUserSettings={globalUserSettings}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            personalDictionaries={personalDictionaries}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            {...dictionaryProps}
+          />
+        </Route>
       </Switch>
     </div>
   );
