@@ -34,64 +34,43 @@ const Dictionaries = ({
         <Route
           path={`${match.url}/lessons/:category/:subcategory/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary
-              {...dictionaryProps}
-              {...props}
-            />
+            <AsyncDictionary {...dictionaryProps} {...props} />
           )}
         />
         <Route
           path={`${match.url}/lessons/fundamentals/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary
-              {...dictionaryProps}
-              {...props}
-            />
+            <AsyncDictionary {...dictionaryProps} {...props} />
           )}
         />
         <Route
           path={`${match.url}/lessons/drills/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary
-              {...dictionaryProps}
-              {...props}
-            />
+            <AsyncDictionary {...dictionaryProps} {...props} />
           )}
         />
         <Route
           path={`${match.url}/typey-type/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary
-              {...dictionaryProps}
-              {...props}
-            />
+            <AsyncDictionary {...dictionaryProps} {...props} />
           )}
         />
         <Route
           path={`${match.url}/individual/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary
-              {...dictionaryProps}
-              {...props}
-            />
+            <AsyncDictionary {...dictionaryProps} {...props} />
           )}
         />
         <Route
           path={`${match.url}/didoesdigital/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary
-              {...dictionaryProps}
-              {...props}
-            />
+            <AsyncDictionary {...dictionaryProps} {...props} />
           )}
         />
         <Route
           path={`${match.url}/plover/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary
-              {...dictionaryProps}
-              {...props}
-            />
+            <AsyncDictionary {...dictionaryProps} {...props} />
           )}
         />
         <Route
@@ -123,7 +102,6 @@ const Dictionaries = ({
               personalDictionaries={personalDictionaries}
               updateGlobalLookupDictionary={updateGlobalLookupDictionary}
               updatePersonalDictionaries={updatePersonalDictionaries}
-              match={match}
               {...dictionaryProps}
               {...props}
             />
