@@ -215,7 +215,6 @@ class Lesson extends Component {
                 metadata={metadata}
                 lessonLength={propsLesson.presentedMaterial.length}
                 lessonTitle={this.props.lessonTitle}
-                location={this.props.location}
                 metWords={this.props.metWords}
                 path={this.props.lesson?.path}
                 restartLesson={this.props.restartLesson}

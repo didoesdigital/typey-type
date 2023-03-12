@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import LessonCanvasFooter from "./LessonCanvasFooter";
 import FinishedZeroAndEmptyStateMessage from "./FinishedZeroAndEmptyState";
 import UserSettings from "./UserSettings";
@@ -52,7 +53,6 @@ const Finished = ({
   hideOtherSettings,
   lessonLength,
   lessonTitle,
-  location,
   metadata,
   metWords,
   path,
@@ -77,6 +77,8 @@ const Finished = ({
   updateTopSpeedPersonalBest,
   userSettings,
 }: FinishedProps) => {
+  const location = useLocation();
+
   const [chartData, setChartData] = useState<TransformedData>(null);
   const [confettiConfig, setConfettiConfig] = useState<ConfettiConfig>(null);
   const [newTopSpeedPersonalBest, setNewTopSpeedPersonalBest] = useState(false);

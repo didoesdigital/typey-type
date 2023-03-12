@@ -32,7 +32,6 @@ export type FinishedProps = {
   hideOtherSettings: any;
   lessonLength: any;
   lessonTitle: any;
-  location: any;
   metadata: any;
   metWords: any;
   path: any;
