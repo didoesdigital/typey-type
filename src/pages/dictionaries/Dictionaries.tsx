@@ -72,49 +72,17 @@ const Dictionaries = ({
   return (
     <div>
       <Switch>
-        <Route path={`${url}/lessons/:category/:subcategory/:dictionaryPath`}>
-          <AsyncDictionary
-            setAnnouncementMessage={setAnnouncementMessage}
-            setAnnouncementMessageString={setAnnouncementMessageString}
-            {...dictionaryProps}
-          />
-        </Route>
-        <Route path={`${url}/lessons/fundamentals/:dictionaryPath`}>
-          <AsyncDictionary
-            setAnnouncementMessage={setAnnouncementMessage}
-            setAnnouncementMessageString={setAnnouncementMessageString}
-            {...dictionaryProps}
-          />
-        </Route>
-        <Route path={`${url}/lessons/drills/:dictionaryPath`}>
-          <AsyncDictionary
-            setAnnouncementMessage={setAnnouncementMessage}
-            setAnnouncementMessageString={setAnnouncementMessageString}
-            {...dictionaryProps}
-          />
-        </Route>
-        <Route path={`${url}/typey-type/:dictionaryPath`}>
-          <AsyncDictionary
-            setAnnouncementMessage={setAnnouncementMessage}
-            setAnnouncementMessageString={setAnnouncementMessageString}
-            {...dictionaryProps}
-          />
-        </Route>
-        <Route path={`${url}/individual/:dictionaryPath`}>
-          <AsyncDictionary
-            setAnnouncementMessage={setAnnouncementMessage}
-            setAnnouncementMessageString={setAnnouncementMessageString}
-            {...dictionaryProps}
-          />
-        </Route>
-        <Route path={`${url}/didoesdigital/:dictionaryPath`}>
-          <AsyncDictionary
-            setAnnouncementMessage={setAnnouncementMessage}
-            setAnnouncementMessageString={setAnnouncementMessageString}
-            {...dictionaryProps}
-          />
-        </Route>
-        <Route path={`${url}/plover/:dictionaryPath`}>
+        <Route
+          path={[
+            `${url}/lessons/:category/:subcategory/:dictionaryPath`,
+            `${url}/lessons/fundamentals/:dictionaryPath`,
+            `${url}/lessons/drills/:dictionaryPath`,
+            `${url}/typey-type/:dictionaryPath`,
+            `${url}/individual/:dictionaryPath`,
+            `${url}/didoesdigital/:dictionaryPath`,
+            `${url}/plover/:dictionaryPath`,
+          ]}
+        >
           <AsyncDictionary
             setAnnouncementMessage={setAnnouncementMessage}
             setAnnouncementMessageString={setAnnouncementMessageString}
