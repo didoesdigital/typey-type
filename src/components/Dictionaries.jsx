@@ -18,13 +18,19 @@ const AsyncDictionaryManagement = Loadable({
 
 const Dictionaries = ({
   match,
+  dictionaryIndex,
   globalLookupDictionaryLoaded,
   globalLookupDictionary,
   globalUserSettings,
   personalDictionaries,
+  setAnnouncementMessage,
+  setAnnouncementMessageString,
+  setDictionaryIndex,
+  stenohintsonthefly,
   toggleExperiment,
   updateGlobalLookupDictionary,
   updatePersonalDictionaries,
+  userSettings,
   fetchAndSetupGlobalDict,
   ...dictionaryProps
 }) => {
@@ -34,43 +40,78 @@ const Dictionaries = ({
         <Route
           path={`${match.url}/lessons/:category/:subcategory/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary {...dictionaryProps} {...props} />
+            <AsyncDictionary
+              setAnnouncementMessage={setAnnouncementMessage}
+              setAnnouncementMessageString={setAnnouncementMessageString}
+              {...dictionaryProps}
+              {...props}
+            />
           )}
         />
         <Route
           path={`${match.url}/lessons/fundamentals/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary {...dictionaryProps} {...props} />
+            <AsyncDictionary
+              setAnnouncementMessage={setAnnouncementMessage}
+              setAnnouncementMessageString={setAnnouncementMessageString}
+              {...dictionaryProps}
+              {...props}
+            />
           )}
         />
         <Route
           path={`${match.url}/lessons/drills/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary {...dictionaryProps} {...props} />
+            <AsyncDictionary
+              setAnnouncementMessage={setAnnouncementMessage}
+              setAnnouncementMessageString={setAnnouncementMessageString}
+              {...dictionaryProps}
+              {...props}
+            />
           )}
         />
         <Route
           path={`${match.url}/typey-type/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary {...dictionaryProps} {...props} />
+            <AsyncDictionary
+              setAnnouncementMessage={setAnnouncementMessage}
+              setAnnouncementMessageString={setAnnouncementMessageString}
+              {...dictionaryProps}
+              {...props}
+            />
           )}
         />
         <Route
           path={`${match.url}/individual/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary {...dictionaryProps} {...props} />
+            <AsyncDictionary
+              setAnnouncementMessage={setAnnouncementMessage}
+              setAnnouncementMessageString={setAnnouncementMessageString}
+              {...dictionaryProps}
+              {...props}
+            />
           )}
         />
         <Route
           path={`${match.url}/didoesdigital/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary {...dictionaryProps} {...props} />
+            <AsyncDictionary
+              setAnnouncementMessage={setAnnouncementMessage}
+              setAnnouncementMessageString={setAnnouncementMessageString}
+              {...dictionaryProps}
+              {...props}
+            />
           )}
         />
         <Route
           path={`${match.url}/plover/:dictionaryPath`}
           render={(props) => (
-            <AsyncDictionary {...dictionaryProps} {...props} />
+            <AsyncDictionary
+              setAnnouncementMessage={setAnnouncementMessage}
+              setAnnouncementMessageString={setAnnouncementMessageString}
+              {...dictionaryProps}
+              {...props}
+            />
           )}
         />
         <Route
@@ -81,9 +122,8 @@ const Dictionaries = ({
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
               globalUserSettings={globalUserSettings}
-              personalDictionaries={personalDictionaries}
+              setAnnouncementMessageString={setAnnouncementMessageString}
               toggleExperiment={toggleExperiment}
-              updateGlobalLookupDictionary={updateGlobalLookupDictionary}
               updatePersonalDictionaries={updatePersonalDictionaries}
               {...dictionaryProps}
               {...props}
@@ -95,6 +135,11 @@ const Dictionaries = ({
           path={match.url}
           render={(props) => (
             <DictionariesIndex
+              dictionaryIndex={dictionaryIndex}
+              setAnnouncementMessage={setAnnouncementMessage}
+              setDictionaryIndex={setDictionaryIndex}
+              stenohintsonthefly={stenohintsonthefly}
+              userSettings={userSettings}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               globalUserSettings={globalUserSettings}
