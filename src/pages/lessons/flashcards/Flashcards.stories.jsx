@@ -24,35 +24,32 @@ const globalLookupDictionary = new Map([
 const Template = (args) => (
   <div className="p3">
     <Switch>
-      <Route
-        path={`/`}
-        render={() => (
-          <div>
-            <Flashcards
-              fetchAndSetupGlobalDict={() => Promise.resolve(true)}
-              flashcardsMetWords={{}}
-              flashcardsProgress={flashcardsProgress}
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={true}
-              globalUserSettings={{}}
-              personalDictionaries={{}}
-              updateFlashcardsMetWords={() => undefined}
-              updateFlashcardsProgress={() => flashcardsProgress}
-              updateGlobalLookupDictionary={() => undefined}
-              updatePersonalDictionaries={() => undefined}
-              userSettings={{}}
-              fullscreen={false}
-              changeFullscreen={() => undefined}
-              lessonpath={
-                process.env.PUBLIC_URL +
-                lessonPath.replace(/flashcards/, "") +
-                "lesson.txt"
-              }
-              locationpathname={lessonPath}
-            />
-          </div>
-        )}
-      />
+      <Route path={`/`}>
+        <div>
+          <Flashcards
+            fetchAndSetupGlobalDict={() => Promise.resolve(true)}
+            flashcardsMetWords={{}}
+            flashcardsProgress={flashcardsProgress}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={true}
+            globalUserSettings={{}}
+            personalDictionaries={{}}
+            updateFlashcardsMetWords={() => undefined}
+            updateFlashcardsProgress={() => flashcardsProgress}
+            updateGlobalLookupDictionary={() => undefined}
+            updatePersonalDictionaries={() => undefined}
+            userSettings={{}}
+            fullscreen={false}
+            changeFullscreen={() => undefined}
+            lessonpath={
+              process.env.PUBLIC_URL +
+              lessonPath.replace(/flashcards/, "") +
+              "lesson.txt"
+            }
+            locationpathname={lessonPath}
+          />
+        </div>
+      </Route>
     </Switch>
   </div>
 );

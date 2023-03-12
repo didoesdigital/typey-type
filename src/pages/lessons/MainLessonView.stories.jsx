@@ -100,105 +100,103 @@ const createNewCustomLesson = (
 const Template = (args) => {
   return (
     <Switch>
-      <Route
-        render={() => (
-          <div>
-            <MainLessonView
-              createNewCustomLesson={createNewCustomLesson}
-              customLesson={customLesson}
-              fetchAndSetupGlobalDict={() => Promise.resolve(true)}
-              globalLookupDictionary={globalLookupDictionary}
-              globalLookupDictionaryLoaded={true}
-              updateFlashcardsMetWords={() => undefined}
-              handleLesson={handleLesson}
-              lesson={lesson}
-              lessonIndex={lessonIndex}
-              stopLesson={stopLesson}
-              setAnnouncementMessage={() => console.log("announce")}
-              userSettings={userSettings}
-              updateFlashcardsProgress={() => undefined}
-              changeFullscreen={() => undefined}
-              flashcardsMetWords={{}}
-              customLessonMaterial={[]}
-              customLessonMaterialValidationState={[]}
-              customLessonMaterialValidationMessages={[]}
-              flashcardsProgress={{}}
-              globalUserSettings={{}}
-              personalDictionaries={{ dictionariesNamesAndContents: null }}
-              lessonsProgress={{}}
-              lessonNotFound={false}
-              location={{ pathname: "/lesson" }}
-              fullscreen={false}
-              lessonSubTitle={""}
-              lessonTitle={"Test lesson"}
-              path={"/lessons/fundamentals/test/"}
-              actualText={""}
-              currentLessonStrokes={[]}
-              currentPhraseID={0}
-              disableUserSettings={false}
-              metWords={{}}
-              previousCompletedPhraseAsTyped={[]}
-              recommendationHistory={[]}
-              repetitionsRemaining={1}
-              revisionMaterial={[]}
-              revisionMode={false}
-              startTime={0}
-              settings={{ ignoredChars: "" }}
-              showStrokesInLesson={false}
-              targetStrokeCount={1}
-              timer={1}
-              topSpeedPersonalBest={40}
-              updateUserGoals={userGoals}
-              totalNumberOfMatchedWords={0}
-              totalNumberOfNewWordsMet={0}
-              totalNumberOfLowExposuresSeen={0}
-              totalNumberOfRetainedWords={0}
-              totalNumberOfMistypedWords={0}
-              totalNumberOfHintedWords={0}
-              updateGlobalLookupDictionary={() => undefined}
-              updatePersonalDictionaries={() => undefined}
-              restartLesson={() => undefined}
-              reviseLesson={() => undefined}
-              handleStopLesson={() => undefined}
-              changeShowStrokesInLesson={() => undefined}
-              changeShowStrokesOnMisstroke={() => undefined}
-              changeSortOrderUserSetting={() => undefined}
-              changeSpacePlacementUserSetting={() => undefined}
-              changeStenoLayout={() => undefined}
-              changeShowScoresWhileTyping={() => undefined}
-              changeShowStrokesAs={() => undefined}
-              changeUserSetting={() => undefined}
-              chooseStudy={() => undefined}
-              completedPhrases={[]}
-              createCustomLesson={() => undefined}
-              propsLesson={lesson}
-              currentPhrase={presentedMaterialCurrentItem.phrase}
-              currentStroke={presentedMaterialCurrentItem.stroke}
-              handleBeatsPerMinute={() => undefined}
-              handleDiagramSize={() => undefined}
-              handleLimitWordsChange={() => undefined}
-              handleStartFromWordChange={() => undefined}
-              handleRepetitionsChange={() => undefined}
-              handleUpcomingWordsLayout={() => undefined}
-              updateRevisionMaterial={() => undefined}
-              sayCurrentPhraseAgain={() => undefined}
-              setAnnouncementMessageString={() => undefined}
-              startFromWordOne={() => undefined}
-              stenoHintsOnTheFly={true}
-              startCustomLesson={() => undefined}
-              setUpProgressRevisionLesson={() => undefined}
-              setupLesson={() => undefined}
-              charsPerWord={() => undefined}
-              totalWordCount={1}
-              upcomingPhrases={["and the"]}
-              updateRecommendationHistory={() => undefined}
-              updateMarkup={() => undefined}
-              updateTopSpeedPersonalBest={() => undefined}
-              {...args}
-            />
-          </div>
-        )}
-      />
+      <Route>
+        <div>
+          <MainLessonView
+            createNewCustomLesson={createNewCustomLesson}
+            customLesson={customLesson}
+            fetchAndSetupGlobalDict={() => Promise.resolve(true)}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={true}
+            updateFlashcardsMetWords={() => undefined}
+            handleLesson={handleLesson}
+            lesson={lesson}
+            lessonIndex={lessonIndex}
+            stopLesson={stopLesson}
+            setAnnouncementMessage={() => console.log("announce")}
+            userSettings={userSettings}
+            updateFlashcardsProgress={() => undefined}
+            changeFullscreen={() => undefined}
+            flashcardsMetWords={{}}
+            customLessonMaterial={[]}
+            customLessonMaterialValidationState={[]}
+            customLessonMaterialValidationMessages={[]}
+            flashcardsProgress={{}}
+            globalUserSettings={{}}
+            personalDictionaries={{ dictionariesNamesAndContents: null }}
+            lessonsProgress={{}}
+            lessonNotFound={false}
+            location={{ pathname: "/lesson" }}
+            fullscreen={false}
+            lessonSubTitle={""}
+            lessonTitle={"Test lesson"}
+            path={"/lessons/fundamentals/test/"}
+            actualText={""}
+            currentLessonStrokes={[]}
+            currentPhraseID={0}
+            disableUserSettings={false}
+            metWords={{}}
+            previousCompletedPhraseAsTyped={[]}
+            recommendationHistory={[]}
+            repetitionsRemaining={1}
+            revisionMaterial={[]}
+            revisionMode={false}
+            startTime={0}
+            settings={{ ignoredChars: "" }}
+            showStrokesInLesson={false}
+            targetStrokeCount={1}
+            timer={1}
+            topSpeedPersonalBest={40}
+            updateUserGoals={userGoals}
+            totalNumberOfMatchedWords={0}
+            totalNumberOfNewWordsMet={0}
+            totalNumberOfLowExposuresSeen={0}
+            totalNumberOfRetainedWords={0}
+            totalNumberOfMistypedWords={0}
+            totalNumberOfHintedWords={0}
+            updateGlobalLookupDictionary={() => undefined}
+            updatePersonalDictionaries={() => undefined}
+            restartLesson={() => undefined}
+            reviseLesson={() => undefined}
+            handleStopLesson={() => undefined}
+            changeShowStrokesInLesson={() => undefined}
+            changeShowStrokesOnMisstroke={() => undefined}
+            changeSortOrderUserSetting={() => undefined}
+            changeSpacePlacementUserSetting={() => undefined}
+            changeStenoLayout={() => undefined}
+            changeShowScoresWhileTyping={() => undefined}
+            changeShowStrokesAs={() => undefined}
+            changeUserSetting={() => undefined}
+            chooseStudy={() => undefined}
+            completedPhrases={[]}
+            createCustomLesson={() => undefined}
+            propsLesson={lesson}
+            currentPhrase={presentedMaterialCurrentItem.phrase}
+            currentStroke={presentedMaterialCurrentItem.stroke}
+            handleBeatsPerMinute={() => undefined}
+            handleDiagramSize={() => undefined}
+            handleLimitWordsChange={() => undefined}
+            handleStartFromWordChange={() => undefined}
+            handleRepetitionsChange={() => undefined}
+            handleUpcomingWordsLayout={() => undefined}
+            updateRevisionMaterial={() => undefined}
+            sayCurrentPhraseAgain={() => undefined}
+            setAnnouncementMessageString={() => undefined}
+            startFromWordOne={() => undefined}
+            stenoHintsOnTheFly={true}
+            startCustomLesson={() => undefined}
+            setUpProgressRevisionLesson={() => undefined}
+            setupLesson={() => undefined}
+            charsPerWord={() => undefined}
+            totalWordCount={1}
+            upcomingPhrases={["and the"]}
+            updateRecommendationHistory={() => undefined}
+            updateMarkup={() => undefined}
+            updateTopSpeedPersonalBest={() => undefined}
+            {...args}
+          />
+        </div>
+      </Route>
     </Switch>
   );
 };
