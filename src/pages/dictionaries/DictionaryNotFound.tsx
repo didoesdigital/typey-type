@@ -3,7 +3,7 @@ import GoogleAnalytics from "react-ga";
 import * as Sentry from "@sentry/browser";
 import DocumentTitle from "react-document-title";
 import { Link, useLocation } from "react-router-dom";
-import Subheader from "./Subheader";
+import Subheader from "../../components/Subheader";
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=Example";
 const googleFormURL =
