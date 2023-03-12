@@ -1,5 +1,6 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import GoogleAnalytics from "react-ga";
+import { useHistory, useLocation } from "react-router-dom";
 
 if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
   GoogleAnalytics.initialize("UA-113450929-1", { titleCase: false });
@@ -20,24 +21,17 @@ const withAnalyticsTracker = (
     GoogleAnalytics.pageview(page);
   };
 
-  const HOC = class extends Component {
-    componentDidMount() {
-      const page = process.env.PUBLIC_URL + this.props.location.pathname;
+  const HOC = () => {
+    const location = useLocation();
+    const history = useHistory();
+
+    useEffect(() => {
+      const page = process.env.PUBLIC_URL + location.pathname;
+      console.log(location.pathname);
       trackPage(page);
-    }
+    }, [location.pathname]);
 
-    componentDidUpdate(prevProps) {
-      const currentPage = process.env.PUBLIC_URL + this.props.location.pathname;
-      const prevPage = process.env.PUBLIC_URL + prevProps.location.pathname;
-
-      if (currentPage !== prevPage) {
-        trackPage(currentPage);
-      }
-    }
-
-    render() {
-      return <WrappedComponent {...this.props} />;
-    }
+    return <WrappedComponent location={location} history={history} />;
   };
 
   return HOC;
