@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Loadable from "react-loadable";
 import DictionariesIndex from "./DictionariesIndex";
 import PageLoading from "../../components/PageLoading";
@@ -25,7 +25,6 @@ const AsyncDictionaryManagement = Loadable({
 });
 
 type Props = {
-  match: any;
   dictionaryIndex: any;
   fetchAndSetupGlobalDict: (
     withPlover: boolean,
@@ -47,7 +46,6 @@ type Props = {
 };
 
 const Dictionaries = ({
-  match,
   dictionaryIndex,
   globalLookupDictionaryLoaded,
   globalLookupDictionary,
@@ -64,11 +62,18 @@ const Dictionaries = ({
   fetchAndSetupGlobalDict,
   ...dictionaryProps
 }: Props) => {
+  const match = useRouteMatch({
+    path: "/dictionaries",
+    strict: true,
+    sensitive: true,
+  });
+  const url = match?.url ?? "";
+
   return (
     <div>
       <Switch>
         <Route
-          path={`${match.url}/lessons/:category/:subcategory/:dictionaryPath`}
+          path={`${url}/lessons/:category/:subcategory/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
@@ -79,7 +84,7 @@ const Dictionaries = ({
           )}
         />
         <Route
-          path={`${match.url}/lessons/fundamentals/:dictionaryPath`}
+          path={`${url}/lessons/fundamentals/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
@@ -90,7 +95,7 @@ const Dictionaries = ({
           )}
         />
         <Route
-          path={`${match.url}/lessons/drills/:dictionaryPath`}
+          path={`${url}/lessons/drills/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
@@ -101,7 +106,7 @@ const Dictionaries = ({
           )}
         />
         <Route
-          path={`${match.url}/typey-type/:dictionaryPath`}
+          path={`${url}/typey-type/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
@@ -112,7 +117,7 @@ const Dictionaries = ({
           )}
         />
         <Route
-          path={`${match.url}/individual/:dictionaryPath`}
+          path={`${url}/individual/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
@@ -123,7 +128,7 @@ const Dictionaries = ({
           )}
         />
         <Route
-          path={`${match.url}/didoesdigital/:dictionaryPath`}
+          path={`${url}/didoesdigital/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
@@ -134,7 +139,7 @@ const Dictionaries = ({
           )}
         />
         <Route
-          path={`${match.url}/plover/:dictionaryPath`}
+          path={`${url}/plover/:dictionaryPath`}
           render={(props) => (
             <AsyncDictionary
               setAnnouncementMessage={setAnnouncementMessage}
@@ -146,7 +151,7 @@ const Dictionaries = ({
         />
         <Route
           exact={true}
-          path={`${match.url}/management`}
+          path={`${url}/management`}
           render={(props) => (
             <AsyncDictionaryManagement
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
@@ -162,7 +167,7 @@ const Dictionaries = ({
         />
         <Route
           exact={true}
-          path={match.url}
+          path={url}
           render={(props) => (
             <DictionariesIndex
               dictionaryIndex={dictionaryIndex}
