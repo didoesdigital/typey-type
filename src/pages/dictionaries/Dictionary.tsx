@@ -202,7 +202,7 @@ const Dictionary = ({
   };
 
   if (hasError) {
-    return <DictionaryNotFound location={location} />;
+    return <DictionaryNotFound />;
   }
 
   if (dictionary) {

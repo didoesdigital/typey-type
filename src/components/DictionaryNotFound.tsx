@@ -2,15 +2,16 @@ import React, { useEffect, useRef } from "react";
 import GoogleAnalytics from "react-ga";
 import * as Sentry from "@sentry/browser";
 import DocumentTitle from "react-document-title";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Subheader from "./Subheader";
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=Example";
 const googleFormURL =
   "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=";
 
-const DictionaryNotFound = ({ location }) => {
+const DictionaryNotFound = () => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
+  const location = useLocation();
 
   useEffect(() => {
     let labelString = "Missing dictionary";
@@ -25,7 +26,7 @@ const DictionaryNotFound = ({ location }) => {
     });
 
     Sentry.captureException("Dictionary not found");
-  }, []);
+  }, [location]);
 
   useEffect(() => {
     if (mainHeading) {
