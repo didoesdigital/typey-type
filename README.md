@@ -33,7 +33,7 @@ Typey Type avoids generic typing features, such as competing for speed and accur
 
 ### Requirements
 
-Install [yarn](https://yarnpkg.com/lang/en/docs/install/). Note: the project is currently built with Node version 14.
+Install [yarn](https://yarnpkg.com/lang/en/docs/install/). Note: the project is currently built with Node version 16.
 
 ### Installation
 
