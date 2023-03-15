@@ -5,8 +5,7 @@ import { useHistory, useLocation } from "react-router-dom";
 if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
   GoogleAnalytics.initialize("G-VMN1E6BYC2");
 } else {
-  // GoogleAnalytics.initialize("G-VMN1E6BYC2", { testMode: true });
-  GoogleAnalytics.initialize("G-VMN1E6BYC2");
+  GoogleAnalytics.initialize("G-45R7RGF4FZ");
 }
 
 const withAnalyticsTracker = (
