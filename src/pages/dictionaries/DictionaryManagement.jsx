@@ -3,7 +3,7 @@ import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
 import SOURCE_NAMESPACES from '../../constant/sourceNamespaces';
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
-import GoogleAnalytics from 'react-ga';
+import GoogleAnalytics from "react-ga4";
 import Notification from '../../components/Notification';
 import {
   getListOfValidDictionariesAddedAndInConfig,

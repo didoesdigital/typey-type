@@ -1,5 +1,5 @@
-import GoogleAnalytics from "react-ga";
 import React from "react";
+import GoogleAnalytics from "react-ga4";
 
 type Props = {
   "aria-label"?: string;
@@ -20,19 +20,30 @@ const OutboundLink = ({
   style,
   to,
 }: Props) => {
+  const clickHandler: React.MouseEventHandler = (e) => {
+    GoogleAnalytics.event({
+      category: "Outbound",
+      action: "Click",
+      label: eventLabel,
+    });
+
+    if (onClick) {
+      onClick(e);
+    }
+  };
+
   return (
-    <GoogleAnalytics.OutboundLink
-      eventLabel={eventLabel}
+    <a
+      href={to}
       aria-label={ariaLabel}
       className={className}
-      onClick={onClick}
+      onClick={clickHandler}
       style={style}
-      to={to}
       target="_blank"
       rel="noopener noreferrer"
     >
       {children}
-    </GoogleAnalytics.OutboundLink>
+    </a>
   );
 };
 

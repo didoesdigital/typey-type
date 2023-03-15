@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
-import GoogleAnalytics from 'react-ga';
+import GoogleAnalytics from "react-ga4";
 import queryString from 'query-string';
 import DocumentTitle from 'react-document-title';
 import ErrorBoundary from '../../components/ErrorBoundary'

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import DocumentTitle from "react-document-title";
 import { Link, useLocation } from "react-router-dom";
 import DictionaryNotFound from "./DictionaryNotFound";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";

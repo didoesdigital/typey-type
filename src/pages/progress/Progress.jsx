@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GoogleAnalytics from 'react-ga';
+import GoogleAnalytics from "react-ga4";
 import ErrorBoundary from '../../components/ErrorBoundary'
 import PseudoContentButton from '../../components/PseudoContentButton';
 import RecommendationBox from './components/RecommendationBox';

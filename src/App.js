@@ -40,7 +40,7 @@ import {
 } from 'react-router-dom';
 import queryString from 'query-string';
 import DocumentTitle from 'react-document-title';
-import GoogleAnalytics from 'react-ga';
+import GoogleAnalytics from "react-ga4";
 import Loadable from 'react-loadable';
 import PageLoading from './components/PageLoading';
 import Announcements from './components/Announcements/Announcements';

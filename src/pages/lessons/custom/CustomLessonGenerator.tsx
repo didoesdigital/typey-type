@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 import { actions } from "./generator/rulesActions";
 import Subheader from "../../../components/Subheader";
 import { useLocalStorage } from "usehooks-ts";

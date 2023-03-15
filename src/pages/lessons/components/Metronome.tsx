@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Howl } from "howler";
 import { IconMetronome } from "../../../components/Icon";
 import { Tooltip } from "react-tippy";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 import plink from "../../../sounds/digi_plink-with-silence.mp3";
 
 import type { UserSettings } from "../../../types";

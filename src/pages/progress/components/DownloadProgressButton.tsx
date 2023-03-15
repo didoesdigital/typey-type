@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 import formatProgressFileDownloadName from "../utils/formatProgressFileDownloadName";
 import makeDownloadHref from "../utils/makeDownloadHref";
 import type { MetWords } from "../../../types";

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 import { Link } from "react-router-dom";
 import { actions } from "../utilities/gameActions";
 import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../../components/OutboundLink";
 import RecommendationDescription from "./RecommendationDescription";
 import { IconExternal } from "../../../components/Icon";

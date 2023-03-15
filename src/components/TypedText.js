@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 
 class TypedText extends Component {
   componentWillUnmount() {

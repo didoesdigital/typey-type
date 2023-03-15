@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef } from "react";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 import { actions as SHUFLactions } from "../SHUFL/gameActions";
 import { actions as TPEUBGSZactions } from "../TPEUBGSZ/gameActions";
 import { ReactComponent as AlertRobot } from "../../../images/AlertRobot.svg";

@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 
 const handleHintClick = (event, setShowHint, gameName) => {
   event.preventDefault();

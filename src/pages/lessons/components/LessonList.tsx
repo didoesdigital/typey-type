@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 import { Link } from "react-router-dom";
 import { groups } from "d3-array";
 import type { LessonIndexEntry } from "../../../types";

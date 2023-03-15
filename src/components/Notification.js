@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { IconClosingCross } from './Icon';
-// import GoogleAnalytics from 'react-ga';
+// import GoogleAnalytics from "react-ga4";
 
 class Notification extends Component {
   constructor(props) {

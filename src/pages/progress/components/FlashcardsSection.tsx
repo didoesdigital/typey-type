@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 import ErrorBoundary from "../../../components/ErrorBoundary";
 import FlashcardsBox from "./FlashcardsBox";
 import type {

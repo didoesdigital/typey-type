@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 import formatSpacePlacementValue from "../utils/formatSpacePlacementValue";
 import makeDownloadHref from "../utils/makeDownloadHref";
 import trimAndSumUniqMetWords from "../../../utils/trimAndSumUniqMetWords";

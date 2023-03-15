@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Clipboard from 'clipboard';
-import GoogleAnalytics from 'react-ga';
+import GoogleAnalytics from "react-ga4";
 
 class PseudoContentButton extends Component {
   constructor(props) {

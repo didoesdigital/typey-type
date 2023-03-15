@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import GoogleAnalytics from "react-ga";
+import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../components/OutboundLink";
 import * as Sentry from "@sentry/browser";
 import { Link } from "react-router-dom";

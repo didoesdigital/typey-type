@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import GoogleAnalytics from "react-ga4";
 import AmericanStenoDiagram from '../../StenoLayout/AmericanStenoDiagram';
 import NoNumberBarInnerThumbNumbersStenoDiagram from '../../StenoLayout/NoNumberBarInnerThumbNumbersStenoDiagram';
 import NoNumberBarOuterThumbNumbersStenoDiagram from '../../StenoLayout/NoNumberBarOuterThumbNumbersStenoDiagram';
@@ -23,7 +24,6 @@ import mapBriefToKoreanModernCStenoKeys from '../../utils/stenoLayouts/mapBriefT
 import mapBriefToPalantypeKeys from '../../utils/stenoLayouts/mapBriefToPalantypeKeys';
 import { fetchResource } from '../../utils/getData';
 import { Tooltip } from 'react-tippy';
-import GoogleAnalytics from 'react-ga';
 import Subheader from "../../components/Subheader";
 
 import type { Outline, UserSettings } from "../../types";
@@ -174,9 +174,9 @@ class Writer extends Component<Props, State> {
     if (!labelString) { labelString = "BAD_INPUT"; }
 
     GoogleAnalytics.event({
-      category: 'Writer',
-      action: 'Send stroke',
-      label: labelString
+      category: "Writer",
+      action: "Send stroke",
+      label: labelString,
     });
 
     this.setState({
