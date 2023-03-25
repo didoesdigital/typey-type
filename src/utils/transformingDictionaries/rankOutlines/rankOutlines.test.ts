@@ -599,6 +599,16 @@ describe("rankOutlines", () => {
           sharedAffixes
         )
       ).toEqual([
+        // This is the order when prioritising phrasing brief starters:
+        // ["SKP", "dict.json", "user"],
+        // ["SK", "briefs.json", "user"],
+        // ["SKP", "dict.json", "typey"],
+        // ["APBD", "dict.json", "typey"],
+        // ["SKP", "plover.json", "plover"],
+        // ["SP", "plover.json", "plover"],
+        // ["APBD", "plover.json", "plover"],
+        // ["-PBD", "plover.json", "plover"],
+        // This is the order when NOT prioritising phrasing brief starters:
         ["SK", "briefs.json", "user"],
         ["SKP", "dict.json", "user"],
         ["SKP", "dict.json", "typey"],
