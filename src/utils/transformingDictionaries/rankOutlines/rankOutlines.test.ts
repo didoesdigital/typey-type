@@ -158,6 +158,42 @@ describe("rankOutlines", () => {
     });
   });
 
+  describe("divide signs", () => {
+    it("returns shorter divide sign brief for ÷", () => {
+      const strokesAndSourceDicts: [string, string, string][] = [
+        ["TKWAO*EUD", "symbols-briefs.json", "typey"],
+        ["TKW-D", "dict.json", "typey"],
+      ];
+      const misstrokesJSON = {};
+      const translation = "÷";
+      const affixes = { suffixes: [], prefixes: [] };
+
+      expect(
+        rankOutlines(strokesAndSourceDicts, misstrokesJSON, translation, affixes)
+      ).toEqual([
+        ["TKW-D", "dict.json", "typey"],
+        ["TKWAO*EUD", "symbols-briefs.json", "typey"],
+      ]);
+    });
+
+    it("returns shorter divide sign brief for unicode escape sequence", () => {
+      const strokesAndSourceDicts: [string, string, string][] = [
+        ["TKWAO*EUD", "symbols-briefs.json", "user"],
+        ["TKW-D", "symbols.json", "user"],
+      ];
+      const misstrokesJSON = {};
+      const translation = "\u00f7";
+      const affixes = { suffixes: [], prefixes: [] };
+
+      expect(
+        rankOutlines(strokesAndSourceDicts, misstrokesJSON, translation, affixes)
+      ).toEqual([
+        ["TKW-D", "symbols.json", "user"],
+        ["TKWAO*EUD", "symbols-briefs.json", "user"],
+      ]);
+    });
+  });
+
   it("returns A user entry before B non-user entry", () => {
     const strokesAndSourceDicts: [string, string, string][] = [
       ["TO", "typey-type.json", "typey"],
