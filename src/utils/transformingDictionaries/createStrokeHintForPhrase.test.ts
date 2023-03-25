@@ -597,4 +597,11 @@ describe('create stroke hint for phrase', () => {
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/STAOUPBD/KW-BG");
     });
   });
+
+  describe('returns hints for phrasing briefs prioritising phrasing brief starters', () => {
+    xit('returns T*D for "it\'d" instead of EUTD', () => {
+      let wordOrPhraseMaterial = "it'd";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("T*D");
+    });
+  });
 });

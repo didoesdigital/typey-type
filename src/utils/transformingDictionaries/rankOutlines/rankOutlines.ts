@@ -4,6 +4,7 @@ import chooseTEndingOverDEnding from "./chooseTEndingOverDEnding";
 import penaliseSlashes from "./penaliseSlashes";
 import penaliseStars from "./penaliseStars";
 import penaliseSlashesWithoutPrefixesOrSuffixes from "./penaliseSlashesWithoutPrefixesOrSuffixes";
+// import preferPhrasingBriefStarters from "./preferPhrasingBriefStarters";
 
 import type { StrokeAndDictionaryAndNamespace } from "../../../types";
 
@@ -70,6 +71,17 @@ function rankOutlines(
       translation,
       affixes
     );
+
+    // In the future, we'll add this to prioritise phrasing brief starters
+    // [outlineALengthWithAllPenalties, outlineBLengthWithAllPenalties] =
+    //   preferPhrasingBriefStarters(
+    //     translation,
+    //     outlineA,
+    //     outlineB,
+    //     outlineALengthWithAllPenalties,
+    //     outlineBLengthWithAllPenalties
+    //   );
+
     if (outlineALengthWithAllPenalties === outlineBLengthWithAllPenalties) {
       let outlineALastLetter = outlineA[outlineA.length - 1];
       let outlineBLastLetter = outlineB[outlineB.length - 1];

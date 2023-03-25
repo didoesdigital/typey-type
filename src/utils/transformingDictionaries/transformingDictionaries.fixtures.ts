@@ -512,6 +512,8 @@ const testTypeyTypeDict = {
   "PHOUS": "mouse",
   "HURPBT": "hunter",
   "STAOUPBD": "stay tuned",
+  "EUTD": "it'd",
+  "T*D": "it'd",
 };
 
 const testPloverDict = {
