@@ -604,4 +604,11 @@ describe('create stroke hint for phrase', () => {
       expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("T*D");
     });
   });
+
+  describe('returns hints for separate words separated by spaces instead of slashes', () => {
+    it("returns KWR T-S for \"why it's\" instead of KWR/T-S", () => {
+      let wordOrPhraseMaterial = "why it's";
+      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KWR T-S");
+    });
+  });
 });

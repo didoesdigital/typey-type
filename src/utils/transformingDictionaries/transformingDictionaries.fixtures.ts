@@ -514,6 +514,8 @@ const testTypeyTypeDict = {
   "STAOUPBD": "stay tuned",
   "EUTD": "it'd",
   "T*D": "it'd",
+  "KWR": "why",
+  "T-S": "it's",
 };
 
 const testPloverDict = {
