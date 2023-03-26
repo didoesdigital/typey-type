@@ -94,6 +94,7 @@ export type StrokeAndDictionaryAndNamespace = [Outline, DictName, Namespace];
  * Example:
  * {
  *   "TEFT": "test",
+ *   "TEFT/TEFT": "test",
  *   "H-L": "hello",
  *   "KPA": "{}{-|}",
  *   "WOB/HREU": "wobbly",
