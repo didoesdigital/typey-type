@@ -264,6 +264,7 @@ describe("lookup list of strokes and dicts with capitalization dictionary format
   let globalLookupDictionary = new Map(
     Object.entries({
       "Mx.{-|}": [["PH-BGS", "plover:plover-main-3-jun-2018.json"]],
+      "{~|'^}til": [["T*EUL", "plover:plover-main-3-jun-2018.json"]],
     })
   );
 
@@ -275,6 +276,17 @@ describe("lookup list of strokes and dicts with capitalization dictionary format
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
       [listOfStrokesAndDicts, "Mx.{-|}"]
+    );
+  });
+
+  it("shows list of strokes and dictionary for “'til” that use carry capitalization dictionary formatting", () => {
+    let phrase = "'til";
+    let listOfStrokesAndDicts = [
+      ["T*EUL", "plover-main-3-jun-2018.json", "plover"],
+    ];
+
+    expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
+      [listOfStrokesAndDicts, "{~|'^}til"]
     );
   });
 });
