@@ -113,18 +113,27 @@ function fetchDictionaryIndex() {
     console.log('Unable to load dictionary index', e)
     return(
       [
-      {
-        "title": "Typey Type",
-        "category": "Typey Type",
-        "subcategory": "",
-        "path": process.env.PUBLIC_URL + "/dictionaries/typey-type/typey-type.json"
-      },
-      {
-        "title": "Steno",
-        "category": "Drills",
-        "subcategory": "",
-        "path": process.env.PUBLIC_URL + "/drills/steno/steno.json"
-      }]
+        {
+          "author": "Typey Type",
+          "title": "Dictionary",
+          "subtitle": "",
+          "category": "Typey Type",
+          "subcategory": "",
+          "path": "/dictionaries/typey-type/typey-type.json",
+          "link": "/support#typey-type-dictionary",
+          "tagline": "Typey Type’s dictionary follows the Plover dictionary with misstrokes removed from the top 10,000 words."
+        },
+        {
+          "author": "Typey Type",
+          "title": "Steno",
+          "subtitle": "",
+          "category": "Drills",
+          "subcategory": "",
+          "path": "/dictionaries/lessons/drills/steno/steno/",
+          "link": "/support#typey-type-dictionary",
+          "tagline": "You found the magic steno lesson!",
+        }
+      ]
     );
   });
 }
