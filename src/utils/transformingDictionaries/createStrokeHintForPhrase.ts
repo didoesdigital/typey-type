@@ -62,7 +62,6 @@ const createStrokeHintForPhrase = (
 
           // Arbitrary limit to prevent making Typey Type slow from excess look ups
           if (len > strokeLookupAttemptsLimit) {
-            listOfPunctuationSeparatedWords.length = strokeLookupAttemptsLimit;
             len = strokeLookupAttemptsLimit;
           }
 
