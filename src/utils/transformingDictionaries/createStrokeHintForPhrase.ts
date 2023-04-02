@@ -25,16 +25,15 @@ const createStrokeHintForPhrase = (
   }
 
   let listOfWords = wordOrPhraseMaterial.split(" ").filter(nonEmptyItem => nonEmptyItem);
-  let listOfWordsLength = listOfWords.length;
+  let listOfWordsToLookUp = listOfWords.length;
 
   // Arbitrary limit to prevent making Typey Type slow from excess look ups
-  if (listOfWordsLength > strokeLookupAttemptsLimit) {
-    listOfWords.length = strokeLookupAttemptsLimit;
-    listOfWordsLength = strokeLookupAttemptsLimit;
+  if (listOfWordsToLookUp > strokeLookupAttemptsLimit) {
+    listOfWordsToLookUp = strokeLookupAttemptsLimit;
     overLimit = true;
   }
 
-  for (let i = 0; i < listOfWordsLength; i++) {
+  for (let i = 0; i < listOfWordsToLookUp; i++) {
     let wordToLookUp = listOfWords[i];
     // 1. Try exact match
     precedingChar = i === 0 ? '' : ' ';
