@@ -1865,4 +1865,83 @@ describe('create stroke hint for phrase', () => {
       expect(result).toEqual("S-P/TPRO*E");
     });
   });
+
+  describe("handles more compound words", () => {
+    it("returns strokes, stroke, and number of attempts for “marriage-portion”", () => {
+      const emptyPersonalDicts: PersonalDictionaryNameAndContents[] = [];
+      const wordOrPhraseMaterial = "marriage-portion";
+      const result = createStrokeHintForPhrase(
+        wordOrPhraseMaterial,
+        createAGlobalLookupDictionary(
+          emptyPersonalDicts,
+          {
+            "PHAERPBLG": "marriage",
+            "PORGS": "portion",
+            "H-PB": "{^-^}",
+          },
+          {}
+        ),
+        AffixList.getSharedInstance(),
+      );
+      // expect(result).toEqual("PHAERPBLG H-PB PORGS");
+      expect(result).toEqual("PHAERPBLG/H-PB/PORGS");
+    });
+
+    it("returns strokes, stroke, and number of attempts for “self-control” using self-^ prefix not self word and hyphen", () => {
+      const emptyPersonalDicts: PersonalDictionaryNameAndContents[] = [];
+      const wordOrPhraseMaterial = "self-control";
+      const result = createStrokeHintForPhrase(
+        wordOrPhraseMaterial,
+        createAGlobalLookupDictionary(
+          emptyPersonalDicts,
+          {
+            "H-PB": "{^-^}",
+            "SEF": "{self-^}",
+            "KROL": "control",
+          },
+          {}
+        ),
+        AffixList.getSharedInstance(),
+      );
+      expect(result).toEqual("SEF/KROL");
+    });
+
+    it("returns strokes, stroke, and number of attempts for “self-notarealword” using self-^ prefix and fingerspelled word", () => {
+      const emptyPersonalDicts: PersonalDictionaryNameAndContents[] = [];
+      const wordOrPhraseMaterial = "self-notarealword";
+      const result = createStrokeHintForPhrase(
+        wordOrPhraseMaterial,
+        createAGlobalLookupDictionary(
+          emptyPersonalDicts,
+          {
+            "H-PB": "{^-^}",
+            "SEF": "{self-^}",
+          },
+          {}
+        ),
+        AffixList.getSharedInstance(),
+      );
+      // expect(result).toEqual("SEF/TPH*/O*/T*/A*/R*/*E/A*/HR*/W*/O*/R*/TK*");
+      expect(result).toEqual("SEF/TPH*/O*/T*/A*/R*/*E/A*/HR*/W*/KWRO/R*D");
+    });
+
+    it('returns strokes, stroke, and number of attempts for “"Lady-bird,”', () => {
+      const emptyPersonalDicts: PersonalDictionaryNameAndContents[] = [];
+      const wordOrPhraseMaterial = '"Lady-bird,';
+      const result = createStrokeHintForPhrase(
+        wordOrPhraseMaterial,
+        createAGlobalLookupDictionary(
+          emptyPersonalDicts,
+          {
+            "H-PB": "{^-^}",
+            "HRA*ED": "lady",
+            "PWEURD": "bird",
+          },
+          {}
+        ),
+        AffixList.getSharedInstance(),
+      );
+      expect(result).toEqual("KW-GS/KPA*/HRA*ED/H-PB/PWEURD/KW-BG");
+    });
+  });
 });
