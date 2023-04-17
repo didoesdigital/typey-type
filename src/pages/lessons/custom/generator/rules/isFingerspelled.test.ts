@@ -10,7 +10,9 @@ describe("isFingerspelled", () => {
   });
 
   it("returns true for multi-stroke fingerspelled word with punctuation", async () => {
-    expect(isFingerspelled("S*/*E/AE/*E/TPH*/TPH*/*EU/TKPW*/H*/T*", "se'ennight")).toEqual(true);
+    expect(
+      isFingerspelled("S*/*E/AE/*E/TPH*/TPH*/*EU/TKPW*/H*/T*", "se'ennight")
+    ).toEqual(true);
   });
 
   it("returns false for partially fingerspelled entries", async () => {

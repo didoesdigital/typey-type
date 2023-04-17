@@ -54,7 +54,9 @@ const FINGERSPELLING_KEYS = [
 ];
 
 const FINGERSPELLED_PUNCTUATION = [
+  "A*E",
   "AE",
+  "H-F",
   "H-PB",
   "KR-GS",
   "KW-GS",
