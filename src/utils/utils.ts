@@ -1,7 +1,7 @@
-type MaterialItem = {phrase: string, stroke: string};
+type MaterialItem = { phrase: string; stroke: string };
 type Material = MaterialItem[];
 
-function relativeTimeAgo(timeNow : number, timeInThePast : number) {
+function relativeTimeAgo(timeNow: number, timeInThePast: number) {
   let timeInThePastUnit = " minutes";
   let timeInThePastHumanized = Math.round((timeNow - timeInThePast) / 60000);
   let relativeTimeAgo = "";
@@ -18,7 +18,6 @@ function relativeTimeAgo(timeNow : number, timeInThePast : number) {
       }
     }
   }
-
 
   if (timeInThePastHumanized === 1) {
     switch (timeInThePastUnit) {
@@ -40,24 +39,40 @@ function relativeTimeAgo(timeNow : number, timeInThePast : number) {
   }
 
   relativeTimeAgo = "" + timeInThePastHumanized + timeInThePastUnit;
-  if ((timeInThePastHumanized === 0) && (timeInThePastUnit === " minutes")) {
+  if (timeInThePastHumanized === 0 && timeInThePastUnit === " minutes") {
     relativeTimeAgo = "a moment";
   }
   return relativeTimeAgo;
 }
 
-function isLessonTextValid(lessonText : string) {
-  return !(lessonText === '' || typeof lessonText !== 'string' || (typeof lessonText === 'string' && lessonText.toLowerCase().startsWith('<!doctype html>')));
+function isLessonTextValid(lessonText: string) {
+  return !(
+    lessonText === "" ||
+    typeof lessonText !== "string" ||
+    (typeof lessonText === "string" &&
+      lessonText.toLowerCase().startsWith("<!doctype html>"))
+  );
 }
 
-function isPeak(currentItemLength : number, previousItemLength : number, nextItemLength : number) {
+function isPeak(
+  currentItemLength: number,
+  previousItemLength: number,
+  nextItemLength: number
+) {
   let isPeak = false;
-  if ((currentItemLength > previousItemLength) && (currentItemLength > nextItemLength)) { isPeak = true };
+  if (
+    currentItemLength > previousItemLength &&
+    currentItemLength > nextItemLength
+  ) {
+    isPeak = true;
+  }
   return isPeak;
 }
 
-function randomise(array : Material) {
-  var currentIndex = array.length, temporaryValue, randomIndex;
+function randomise(array: Material) {
+  var currentIndex = array.length,
+    temporaryValue,
+    randomIndex;
 
   while (0 !== currentIndex) {
     randomIndex = Math.floor(Math.random() * currentIndex);
@@ -70,7 +85,7 @@ function randomise(array : Material) {
   return array;
 }
 
-function getRandomBetween(min : number, max : number) {
+function getRandomBetween(min: number, max: number) {
   return Math.random() * (max - min) + min;
 }
 
