@@ -29,6 +29,8 @@ export type Outline = string;
  */
 export type Translation = string;
 
+export type UnknownStroke = "xxx";
+
 /**
  * Examples:
  * "H-L"
