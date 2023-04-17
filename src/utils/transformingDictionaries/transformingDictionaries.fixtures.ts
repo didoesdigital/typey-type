@@ -1,5 +1,6 @@
 import type { PersonalDictionaryNameAndContents } from "../../types";
 
+// One entry per phrase:
 const testTypeyTypeDict = {
   "TK-LS": "{^^}",
   "KP-PL": "example",
@@ -38,7 +39,9 @@ const testTypeyTypeDict = {
   "TPEUFRT": "first",
   "A/TKRES": "address",
   "PWED": "bed",
-  "PWED KW-BG": "bed,",
+  // FIXME: space or slash stroke separators
+  // "PWED KW-BG": "bed,",
+  "PWED/KW-BG": "bed,",
   "PHAPB": "man",
   "SKHRAPL": "{!}",
   "STKPWEPBG": "and again",
@@ -162,8 +165,7 @@ const testTypeyTypeDict = {
   "1/7": "17",
   "1/8": "18",
   "18/50/-S": "1850s",
-  // "1-9": "19",
-  "19": "19",
+  "1-9": "19",
   "1-9D": "19",
   "19/30/-S": "1930s",
   "1-9/50": "1950",
@@ -319,7 +321,7 @@ const testTypeyTypeDict = {
   "#-T/W-B/THUZ": "9,000",
   "0EU9": "90",
   "0EU9/PERS": "90%",
-  // "-9Z": "900",
+  "-9Z": "900",
   "EU9": "900",
   "1EU9": "91",
   "2EU9": "92",
@@ -509,15 +511,19 @@ const testTypeyTypeDict = {
   "PHR-FPLT": "Mr.",
   "TKPWAOD": "good",
   "PHEPB": "men",
-  "PHOUS": "mouse",
-  "HURPBT": "hunter",
   "STAOUPBD": "stay tuned",
   "EUTD": "it'd",
   "T*D": "it'd",
   "KWR": "why",
   "T-S": "it's",
+  "HOR/TKEFRBZ": "hors d'oeuvres",
+  "WEUS": "which is",
+  "WR-PT": "with respect",
+  "SOFR": "so far",
+  "TPAR": "far",
 };
 
+// multiple entries per phrase:
 const testPloverDict = {
   "A/HREF": "<a href=\"{^}",
   "APBD": "and",
@@ -538,6 +544,23 @@ const testPloverDict = {
   "SKWR*EPL": "gentlemen",
   "OP/TOPL/TREUFT": "optometrist",
   "POED/TREUFT": "podiatrist",
+  "HOR/TKEFRB/-S": "hors d'oeuvres",
+  "O*R/TK*EFRBS": "hors d'oeuvres",
+  "O*R/TK*EFRBZ": "hors d'oeuvres",
+  "O*R/TK*EFRS": "hors d'oeuvres",
+  "O*R/TK*EFRZ": "hors d'oeuvres",
+  "O*R/TKEFRBS": "hors d'oeuvres",
+  "O*R/TKEFRBZ": "hors d'oeuvres",
+  "O*R/TKER/*FS": "hors d'oeuvres",
+  "OR/TK*EFRS": "hors d'oeuvres",
+  "OR/TK*EFRZ": "hors d'oeuvres",
+  "OR/TKEFRB": "hors d'oeuvres",
+  "OR/TKER/*FS": "hors d'oeuvres",
+  "KH-S": "which is",
+  "SWEU": "which is",
+  "WEU/S": "which is",
+  "WR-PT": "with respect",
+  "W-RPT": "with respect",
 };
 
 const testEmojiDict = {
