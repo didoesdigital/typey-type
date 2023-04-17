@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 import { IconExternal } from "../../../../components/Icon";
 import { Tooltip } from "react-tippy";
 
-export type CustomLessonMaterialValidationState =  "unvalidated" | "success" | "fail" | null;
+export type CustomLessonMaterialValidationState =
+  | "unvalidated"
+  | "success"
+  | "fail"
+  | null;
 
 type Props = {
   createCustomLesson: any;
