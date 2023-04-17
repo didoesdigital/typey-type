@@ -1,12 +1,14 @@
-import type { AffixObject, StenoDictionary } from "../../../types";
-import chooseSEndingOverZEnding from "./chooseSEndingOverZEnding";
-import chooseTEndingOverDEnding from "./chooseTEndingOverDEnding";
 import penaliseSlashes from "./penaliseSlashes";
 import penaliseStars from "./penaliseStars";
 import penaliseSlashesWithoutPrefixesOrSuffixes from "./penaliseSlashesWithoutPrefixesOrSuffixes";
+import penaliseStretchKeys from "./penaliseStretchKeys";
 // import preferPhrasingBriefStarters from "./preferPhrasingBriefStarters";
 
-import type { StrokeAndDictionaryAndNamespace } from "../../../types";
+import type {
+  AffixObject,
+  StenoDictionary,
+  StrokeAndDictionaryAndNamespace,
+} from "../../../types";
 
 function rankOutlines(
   arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[],
@@ -83,26 +85,16 @@ function rankOutlines(
     //   );
 
     if (outlineALengthWithAllPenalties === outlineBLengthWithAllPenalties) {
-      let outlineALastLetter = outlineA[outlineA.length - 1];
-      let outlineBLastLetter = outlineB[outlineB.length - 1];
-
-      if (
-        "SZ".indexOf(outlineALastLetter) !== -1 &&
-        "SZ".indexOf(outlineBLastLetter) !== -1
-      ) {
-        return chooseSEndingOverZEnding(outlineALastLetter, outlineBLastLetter);
-      }
-
-      if (
-        "TD".indexOf(outlineALastLetter) !== -1 &&
-        "TD".indexOf(outlineBLastLetter) !== -1
-      ) {
-        return chooseTEndingOverDEnding(
-          outlineALastLetter,
-          outlineBLastLetter,
-          translation
-        );
-      }
+      outlineALengthWithAllPenalties += penaliseStretchKeys(
+        outlineA,
+        outlineB,
+        translation
+      );
+      outlineBLengthWithAllPenalties += penaliseStretchKeys(
+        outlineB,
+        outlineA,
+        translation
+      );
     }
 
     return outlineALengthWithAllPenalties - outlineBLengthWithAllPenalties;
