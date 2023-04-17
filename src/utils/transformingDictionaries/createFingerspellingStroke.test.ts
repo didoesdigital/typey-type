@@ -33,6 +33,17 @@ describe("createFingerspellingStroke", () => {
     ).toEqual("K*P/O*/S*/KR*/*EU/*U/S*/K*/O*");
   });
 
+  it('returns fingerspelled strokes for "es"', () => {
+    const affixList = AffixList.getSharedInstance();
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
+      ["{&e}", [["E*", "typey:typey-type.json"]]],
+      ["{&s}", [["S*", "typey:typey-type.json"]]],
+    ]);
+    expect(
+      createFingerspellingStroke("es", lookupDict, affixList)
+    ).toEqual("E*/S*");
+  });
+
   it("returns empty string in strokes for €100", () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict: LookupDictWithNamespacedDicts = new Map([
