@@ -1,6 +1,10 @@
 const moreThanOneSyllable = (_outline: string, translation: string) => {
   const lowercaseTranslation = translation.toLowerCase();
 
+  if (translation.includes(" ") || translation.includes("\n")) {
+    return true;
+  }
+
   if (
     ["mysql", "genre", "genres", "startled", "mingled"].includes(
       lowercaseTranslation
