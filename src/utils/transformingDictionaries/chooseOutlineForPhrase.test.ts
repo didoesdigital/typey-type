@@ -60,7 +60,15 @@ describe('choose outline for phrase', () => {
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
 
-      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "KHR-PB", 1 ]);
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, "3")).toEqual( [ "KHR-PB", 1 ]);
+    });
+
+    it(': with "STPH-FPLT" for colon with un-suppressed spaces like said:', () => {
+      let wordOrPhrase = ":";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, "d")).toEqual( [ "STPH-FPLT", 1 ]);
     });
 
     it('{^}^{^} with "KR-RT" for caret with suppressed spaces', () => {
@@ -406,6 +414,117 @@ describe('choose outline for phrase', () => {
           affixList
         )
       ).toEqual(["*URP/TPEUFRT", 1]);
+    });
+  });
+
+  describe('returns outline string with standard affixes', () => {
+    xit('showing "TRAFL/HREUPBG" for "travelling" given "/HREUPBG": "ling"', () => {
+      let wordOrPhrase = "travelling";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+      // let globalLookupDictionary = new Map([
+      //   ["{^ling}", [["HREUPBG", "typey-type.json"]]],
+      //   ["travel", [["TRAFL", "typey-type.json"]]],
+      // ]);
+      // let affixes = {
+      //   suffixes: [
+      //     ["/HREUPBG", "ling"],
+      //   ]
+      // };
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "TRAFL/HREUPBG", 1 ]);
+    });
+  });
+
+  describe('returns outlines for words with apostrophes', () => {
+    it('showing "OP/TOPL/TREUFT/AES" for "optometrist\'s"', () => {
+      let wordOrPhrase = "optometrist's";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "OP/TOPL/TREUFT/AES", 1 ]);
+    });
+  });
+
+  describe('returns outline string with custom affixes', () => {
+    xit('showing "TRAFL/*LG" for "travelling" given "/*LG": "ling"', () => {
+      let wordOrPhrase = "travelling";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+      // let globalLookupDictionary = new Map([
+      //   ["{^ling}", [["*LG", "dict-en-AU-vocab.json"]]],
+      //   ["travel", [["TRAFL", "typey-type.json"]]],
+      // ]);
+      // let affixes = {
+      //   suffixes: [
+      //     ["/*LG", "ling"],
+      //   ]
+      // };
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "TRAFL/*LG", 1 ]);
+    });
+  });
+
+  describe('returns outline string with words using orthography rules', () => {
+    // it('showing outline for "nellies"', () => {
+    //   let wordOrPhraseMaterial = "nellies";
+    //   expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TPHEL/KWREU/-S");
+    // });
+
+    it('with orthography rule to replace "e" with "ing"', () => {
+      let wordOrPhrase = "narrating";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "TPHAR/AEUT/-G", 1 ]);
+    });
+
+    it('with orthography rule to find stroke after replacing "e" with "ing"', () => {
+      let wordOrPhrase = "seething";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "SAO*ET/-G", 1 ]);
+    });
+
+    it('with a mistyped orthography rule to find stroke by appending "ing" to word otherwise ending in "e"', () => {
+      let wordOrPhrase = "seetheing";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "SAO*ET/TK-LS/-G", 1 ]);
+    });
+
+    it('with orthography rule to replace "e" with "ing" where "eing" ending is also a word', () => {
+      let wordOrPhrase = "binging";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "PWEUPBG/-G", 1 ]);
+    });
+
+    it('with orthography rule to append "eing" where replacing "e" with "ing" is also a word', () => {
+      let wordOrPhrase = "bingeing";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "PWEUPB/-PBLG/TK-LS/-G", 1 ]);
+    });
+
+    it('with orthography rule to replace "e" with "ing"', () => {
+      let wordOrPhrase = "lodging";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "HROPBLG/-G", 1 ]);
+    });
+
+    xit('with orthography rule to replace "e" with "ing" and append an "s" using multiple suffixes', () => {
+      let wordOrPhrase = "lodgings";
+      let chosenStroke = "";
+      let strokeLookupAttempts = 0;
+
+      expect(chooseOutlineForPhrase(wordOrPhrase, globalLookupDictionary, chosenStroke, strokeLookupAttempts, precedingChar)).toEqual( [ "HROPBLG/-G/-S", 1 ]);
     });
   });
 });

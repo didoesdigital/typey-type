@@ -1,6 +1,7 @@
 import findSingleLetterWordOutline from "./findSingleLetterWordOutline";
 import findFingerspellingOutline from "./findFingerspellingOutline";
 import fingerspelledCharacters from "../../constant/fingerspelledCharacters";
+import fingerspelledSpacedPunctuation from "../../constant/fingerspelledSpacedPunctuation";
 import singleLetterWords from "../../constant/singleLetterWords";
 import getRankedOutlineFromLookupEntry from "./getRankedOutlineFromLookupEntry";
 import { AffixList } from "../affixList";
@@ -39,15 +40,28 @@ const chooseOutlineForPhrase = (
     chosenStroke = undefined;
   }
 
-  let capitalisationOutline = "KPA";
-  let capitalisationTranslation = "{ }{-|}";
-  let capitalisationEntry = globalLookupDictionary.get(
-    capitalisationTranslation
+  let spacedCapitalisationOutline = "KPA";
+  let spacedCapitalisationTranslation = "{ }{-|}";
+  let spacedCapitalisationEntry = globalLookupDictionary.get(
+    spacedCapitalisationTranslation
   );
-  if (capitalisationEntry) {
-    capitalisationOutline = getRankedOutlineFromLookupEntry(
-      capitalisationEntry,
-      capitalisationTranslation,
+  if (spacedCapitalisationEntry) {
+    spacedCapitalisationOutline = getRankedOutlineFromLookupEntry(
+      spacedCapitalisationEntry,
+      spacedCapitalisationTranslation,
+      affixList
+    );
+  }
+
+  let unspacedCapitalisationOutline = "KPA*";
+  let unspacedCapitalisationTranslation = "{^}{-|}";
+  let unspacedCapitalisationEntry = globalLookupDictionary.get(
+    unspacedCapitalisationTranslation
+  );
+  if (unspacedCapitalisationEntry) {
+    unspacedCapitalisationOutline = getRankedOutlineFromLookupEntry(
+      unspacedCapitalisationEntry,
+      unspacedCapitalisationTranslation,
       affixList
     );
   }
@@ -101,7 +115,9 @@ const chooseOutlineForPhrase = (
 
   // NOTE: we do this even if a chosenStroke was found so that we can prioritise
   // glued translations e.g. "{&&}" or "{&b}" over non-glue entries e.g. "&" or "b"
-  let strokeForOneCharacterWordPart = fingerspelledCharacters[wordOrPhrase];
+  let strokeForOneCharacterWordPart = !precedingChar.match(/[0-9]/)
+    ? fingerspelledSpacedPunctuation[wordOrPhrase] || fingerspelledCharacters[wordOrPhrase]
+    : fingerspelledCharacters[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWordPart) {
     strokeForOneCharacterWordPart = findFingerspellingOutline(
       wordOrPhrase,
@@ -155,6 +171,39 @@ const chooseOutlineForPhrase = (
     }
   }
 
+  // apostrophe ess suffix for already capitalised entry
+  // To find "KO*EUPBG/AES" for "King's" where "King" already has an entry
+  // Must come before capitalisation step to avoid `"KEUPBG/AES": "king's"`
+  if (!chosenStroke && wordOrPhrase.endsWith("'s")) {
+    let apostropheEssIndex = wordOrPhrase.indexOf("'s");
+    let mainWord = wordOrPhrase.slice(0, apostropheEssIndex);
+
+    let i = 0;
+    let bestApostropheEssSuffixWithSlash;
+    while (i < suffixesLength && !chosenStroke) {
+      if (suffixes[i][1] === "'s") {
+        bestApostropheEssSuffixWithSlash = suffixes[i][0];
+      }
+      i++;
+    }
+
+    let modifiedWordOrPhrase = mainWord.toLowerCase();
+    let originalEntry: any = globalLookupDictionary.get(mainWord);
+    let modifiedEntry: any = globalLookupDictionary.get(modifiedWordOrPhrase);
+
+    if (originalEntry && modifiedEntry && modifiedWordOrPhrase !== mainWord && bestApostropheEssSuffixWithSlash) {
+      if (originalEntry) {
+        originalEntry = getRankedOutlineFromLookupEntry(
+          originalEntry,
+          mainWord,
+          affixList
+        );
+      }
+
+      chosenStroke =  originalEntry + bestApostropheEssSuffixWithSlash;
+    }
+  }
+
   // tom => Tom
   if (!chosenStroke) {
     let modifiedWordOrPhrase = wordOrPhrase.replace(/(^|\s)\S/g, (l) =>
@@ -189,7 +238,49 @@ const chooseOutlineForPhrase = (
     let lowercasedStroke = lookupEntry;
 
     if (lowercasedStroke) {
-      chosenStroke = capitalisationOutline + "/" + lowercasedStroke;
+      if (precedingChar === " " || precedingChar === "") {
+        chosenStroke = spacedCapitalisationOutline + "/" + lowercasedStroke;
+      }
+      else {
+        chosenStroke = unspacedCapitalisationOutline + "/" + lowercasedStroke;
+      }
+    }
+  }
+
+  // Capitalise AND apostrophe ess suffix
+  // To find "HEFPB/AES" for "Heaven's" where "Heaven" has no entry
+  // NOTE: don't use .includes("'s") because it may match `'safe'` and others
+  if (!chosenStroke && wordOrPhrase.endsWith("'s")) {
+    let apostropheEssIndex = wordOrPhrase.indexOf("'s");
+    let mainWord = wordOrPhrase.slice(0, apostropheEssIndex);
+
+    let i = 0;
+    let bestApostropheEssSuffixWithSlash;
+    while (i < suffixesLength && !chosenStroke) {
+      if (suffixes[i][1] === "'s") {
+        bestApostropheEssSuffixWithSlash = suffixes[i][0];
+      }
+      i++;
+    }
+
+    let modifiedWordOrPhrase = mainWord.toLowerCase();
+    let lookupEntry: any = globalLookupDictionary.get(modifiedWordOrPhrase);
+    if (lookupEntry) {
+      lookupEntry = getRankedOutlineFromLookupEntry(
+        lookupEntry,
+        modifiedWordOrPhrase,
+        affixList
+      );
+    }
+    let lowercasedStroke = lookupEntry;
+
+    if (lowercasedStroke && modifiedWordOrPhrase !== mainWord && bestApostropheEssSuffixWithSlash) {
+      if (precedingChar === " " || precedingChar === "") {
+        chosenStroke = spacedCapitalisationOutline + "/" + lowercasedStroke + bestApostropheEssSuffixWithSlash;
+      }
+      else {
+        chosenStroke = unspacedCapitalisationOutline + "/" + lowercasedStroke + bestApostropheEssSuffixWithSlash;
+      }
     }
   }
 
@@ -299,8 +390,9 @@ const chooseOutlineForPhrase = (
     }
   }
 
-  // ' => {^'}
-  if (!chosenStroke) {
+  // xxx => {^xxx}
+  // e.g. ' => {^'}
+  if (!chosenStroke && (precedingChar.length > 0 && precedingChar !== " ")) {
     let modifiedWordOrPhrase = "{^" + wordOrPhrase + "}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
@@ -405,7 +497,7 @@ const chooseOutlineForPhrase = (
 
   const suppressSpaceStrokeWithSlash = "/" + suppressSpaceOutline;
 
-  // Orthography rules
+  // Orthography rule
   if (!chosenStroke) {
     // bingeing <- binge -> /TK-LS/-G
     if (wordOrPhrase.endsWith("eing")) {
@@ -430,8 +522,13 @@ const chooseOutlineForPhrase = (
     }
   }
 
-  if (!chosenStroke) {
+  // Prefixes and Suffixes
+  // NOTE: this function handles phrases where the entire non-affix part of the string is an exact
+  // entry in the global lookup dictionary. If the case doesn't match or there are other
+  // modifications or splits to try, it will be handled by recursiveBuildStrokeHint instead.
+  if (!chosenStroke && (!!wordOrPhrase.match(/[-0-9A-Za-z]$/))) {
     // rexxx => RE/xxx
+    // anti-xxx => A*EUPBT/xxx
     let prefixTranslation = "";
     let i = 0;
     while (i < prefixesLength && !chosenStroke) {
@@ -476,6 +573,31 @@ const chooseOutlineForPhrase = (
         }
       }
       j++;
+    }
+  }
+
+  // Orthography rule
+  // Comes after direct suffix matching to avoid breaking "toed"
+  if (!chosenStroke) {
+    // impersonateed <- impersonate + ed -> /-D
+    if (wordOrPhrase.endsWith("ed")) {
+      const edSuffixEntry = suffixes.find(
+        (suffixEntry) => suffixEntry[1] === "ed"
+      );
+      const edSuffixOutlineWithSlash = edSuffixEntry
+        ? edSuffixEntry[0]
+        : "/xxx";
+      let modifiedWordOrPhrase = wordOrPhrase.replace(/d$/, "");
+      let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
+      if (lookupEntry) {
+        chosenStroke =
+          getRankedOutlineFromLookupEntry(
+            lookupEntry,
+            modifiedWordOrPhrase,
+            affixList
+          ) +
+          edSuffixOutlineWithSlash;
+      }
     }
   }
 
