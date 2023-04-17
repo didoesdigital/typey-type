@@ -1,6 +1,6 @@
 type FingerspelledCharacters = {
-  [singleCharacter: string]: string
-}
+  [singleCharacter: string]: string;
+};
 
 // TODO: don't hardcode this
 const fingerspelledCharacters: FingerspelledCharacters = {
@@ -90,7 +90,7 @@ const fingerspelledCharacters: FingerspelledCharacters = {
   "%": "P*ERS",
   "+": "PHR*US",
   "\\": "SPWHRAERB",
-  "\"": "KR-GS",
+  '"': "KR-GS",
   // "\"": "KWR-GS",
   // "{^\"}": "KR-GS",
   // "{\"^}": "KW-GS",
@@ -106,7 +106,7 @@ const fingerspelledCharacters: FingerspelledCharacters = {
   "6": "#F",
   "7": "#-P",
   "8": "#L",
-  "9": "#-T"
+  "9": "#-T",
 } as const;
 
 export default fingerspelledCharacters;

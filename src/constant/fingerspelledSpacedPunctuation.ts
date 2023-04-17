@@ -1,6 +1,6 @@
 type FingerspelledSpacedPunctuation = {
-  [spacedPunctuationSymbol: string]: string
-}
+  [spacedPunctuationSymbol: string]: string;
+};
 
 // TODO: don't hardcode this
 const fingerspelledSpacedPunctuation: FingerspelledSpacedPunctuation = {
