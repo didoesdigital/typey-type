@@ -31,6 +31,19 @@ describe("penaliseSlashesWithoutPrefixesOrSuffixes", () => {
     ).toEqual(2);
   });
 
+  // NOTE: one day, we might add an extra penalty to suffixes used as prefixes e.g. "O*R": "{^or}"
+  it("returns penalty greater than zero multi-stroke outline without prefix strokes at the start or suffix strokes at the end", () => {
+    const outline = "O*R/TK*EFRBZ";
+    const translation = "hors d'oeuvres";
+    const penalty = penaliseSlashesWithoutPrefixesOrSuffixes(
+      outline,
+      translation,
+      AffixList.getSharedInstance()
+    );
+
+    expect(penalty).toBeGreaterThan(0);
+  });
+
   it("returns no penalty for multi-stroke outlines with prefix strokes", () => {
     const outline = "EUPB/TKAOUFD";
     const translation = "induced";

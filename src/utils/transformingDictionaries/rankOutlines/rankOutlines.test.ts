@@ -924,6 +924,107 @@ describe("rankOutlines", () => {
     });
   });
 
+  describe("briefs starting with it, prioritising T over EUT", () => {
+    it('returns outlines starting with T* ranked first for "it" contractions', () => {
+      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+        [
+          ["EUTD", "plover.json", "plover"],
+          ["T*D", "plover.json", "plover"],
+        ];
+
+      expect(
+        rankOutlines(
+          arrayOfStrokesAndTheirSourceDictNames,
+          misstrokesJSON,
+          "it'd",
+          sharedAffixes
+        )
+      ).toEqual([
+        // This is the order when prioritising phrasing brief starters:
+        // ["T*D", "plover.json", "plover"],
+        // ["EUTD", "plover.json", "plover"],
+        // This is the order when NOT prioritising phrasing brief starters:
+        ["EUTD", "plover.json", "plover"],
+        ["T*D", "plover.json", "plover"],
+      ]);
+    });
+
+    it('returns outlines starting with T- ranked first for "it" phrasing briefs', () => {
+      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+        [
+          ["TWAS", "plover.json", "plover"],
+          ["TWUS", "plover.json", "plover"],
+          ["TWUZ", "plover.json", "plover"],
+          ["T/WAB", "plover.json", "plover"],
+          ["T-FS", "plover.json", "plover"],
+        ];
+
+      expect(
+        rankOutlines(
+          arrayOfStrokesAndTheirSourceDictNames,
+          misstrokesJSON,
+          "it was",
+          sharedAffixes
+        )
+      ).toEqual([
+        // This is the order when prioritising phrasing brief starters:
+        // ["T-FS", "plover.json", "plover"],
+        // ["TWAS", "plover.json", "plover"],
+        // ["TWUS", "plover.json", "plover"],
+        // ["TWUZ", "plover.json", "plover"],
+        // ["T/WAB", "plover.json", "plover"],
+        // This is the order when NOT prioritising phrasing brief starters:
+        ["TWAS", "plover.json", "plover"],
+        ["TWUS", "plover.json", "plover"],
+        ["TWUZ", "plover.json", "plover"],
+        ["T-FS", "plover.json", "plover"],
+        ["T/WAB", "plover.json", "plover"],
+      ]);
+    });
+  });
+
+  describe("complex case with stars, slashes, suffixes, misused suffixes, and outlines ending in S and Z", () => {
+    it("returns a sensible order with HOR/TKEFRBZ first", () => {
+      let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
+        [
+          ["HOR/TKEFRBZ", "condensed-strokes.json", "typey"],
+          ["HOR/TKEFRB/-S", "dict.json", "typey"],
+          ["O*R/TK*EFRBS", "dict.json", "typey"],
+          ["O*R/TK*EFRBZ", "dict.json", "typey"],
+          ["O*R/TK*EFRS", "dict.json", "typey"],
+          ["O*R/TK*EFRZ", "dict.json", "typey"],
+          ["O*R/TKEFRBS", "dict.json", "typey"],
+          ["O*R/TKEFRBZ", "dict.json", "typey"],
+          ["O*R/TKER/*FS", "dict.json", "typey"],
+          ["OR/TK*EFRS", "dict.json", "typey"],
+          ["OR/TK*EFRZ", "dict.json", "typey"],
+          ["OR/TKER/*FS", "dict.json", "typey"],
+        ];
+
+      expect(
+        rankOutlines(
+          arrayOfStrokesAndTheirSourceDictNames,
+          misstrokesJSON,
+          "hors d'oeuvres",
+          sharedAffixes
+        )
+      ).toEqual([
+        ["HOR/TKEFRBZ", "condensed-strokes.json", "typey"],
+        ["OR/TK*EFRS", "dict.json", "typey"],
+        ["OR/TK*EFRZ", "dict.json", "typey"],
+        ["O*R/TKEFRBS", "dict.json", "typey"],
+        ["O*R/TKEFRBZ", "dict.json", "typey"],
+        ["HOR/TKEFRB/-S", "dict.json", "typey"],
+        ["O*R/TK*EFRS", "dict.json", "typey"],
+        ["O*R/TK*EFRZ", "dict.json", "typey"],
+        ["O*R/TK*EFRBS", "dict.json", "typey"],
+        ["O*R/TK*EFRBZ", "dict.json", "typey"],
+        ["OR/TKER/*FS", "dict.json", "typey"],
+        ["O*R/TKER/*FS", "dict.json", "typey"],
+      ]);
+    });
+  });
+
   // describe('with different outlines across dictionaries', () => {
   //   it('returns sorted list of outlines for "upholstery", showing user dictionaries before typey-type.json', () => {
   //     let arrayOfStrokesAndTheirSourceDictNames = [
