@@ -861,13 +861,47 @@ describe('create stroke hint for phrase', () => {
     // large set of phrasing briefs starting with KH- for phrases starting with
     // "which "
     it("returns a phrasing brief from a set for “which is”", () => {
-      let wordOrPhraseMaterial = "which is";
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("WEUS");
+      const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] =
+        [];
+      const wordOrPhraseMaterial = "which is";
+      const result = createStrokeHintForPhrase(
+        wordOrPhraseMaterial,
+        createAGlobalLookupDictionary(
+          emptyPersonalDictionaries,
+          {
+            // "KH-S": "which is", // maybe after adding preferPhrasingBriefStarters
+            // "SWEU": "which is", // might be a bug?
+            "S": "is",
+            "WEU": "which",
+            "WEU/S": "which is",
+            "WEUS": "which is",
+          },
+          {}
+        ),
+        AffixList.getSharedInstance(),
+      );
+      expect(result).toEqual("WEUS");
     });
 
     it("returns a phrasing brief from a set for “with respect”", () => {
-      let wordOrPhraseMaterial = "with respect";
-      expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("WR-PT");
+      const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] =
+        [];
+      const wordOrPhraseMaterial = "with respect";
+      const result = createStrokeHintForPhrase(
+        wordOrPhraseMaterial,
+        createAGlobalLookupDictionary(
+          emptyPersonalDictionaries,
+          {
+            "R-PT": "respect",
+            "W": "with",
+            "WR-PT": "with respect", // Order matters here
+            "W-RPT": "with respect", // Order matters here
+          },
+          {}
+        ),
+        AffixList.getSharedInstance(),
+      );
+      expect(result).toEqual("WR-PT");
     });
   });
 
