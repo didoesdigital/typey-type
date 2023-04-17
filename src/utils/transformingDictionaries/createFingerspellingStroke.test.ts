@@ -39,9 +39,9 @@ describe("createFingerspellingStroke", () => {
       ["{&e}", [["E*", "typey:typey-type.json"]]],
       ["{&s}", [["S*", "typey:typey-type.json"]]],
     ]);
-    expect(
-      createFingerspellingStroke("es", lookupDict, affixList)
-    ).toEqual("E*/S*");
+    expect(createFingerspellingStroke("es", lookupDict, affixList)).toEqual(
+      "E*/S*"
+    );
   });
 
   it("returns empty string in strokes for €100", () => {
@@ -49,9 +49,9 @@ describe("createFingerspellingStroke", () => {
     const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["a", [["AEU", "typey:typey-type.json"]]],
     ]);
-    expect(
-      createFingerspellingStroke("€100", lookupDict, affixList)
-    ).toEqual("xxx/#S/#O/#O");
+    expect(createFingerspellingStroke("€100", lookupDict, affixList)).toEqual(
+      "xxx/#S/#O/#O"
+    );
   });
 
   // xit("returns number bar key and letter keys for numbers", () => {

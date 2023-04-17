@@ -44,7 +44,10 @@ const splitOnSuffix: SplitterFunction = (
     return null;
   }
 
-  const suffixAndRest = [wordOrPhraseMaterial.slice(0, -suffixTranslation.length), suffixTranslation];
+  const suffixAndRest = [
+    wordOrPhraseMaterial.slice(0, -suffixTranslation.length),
+    suffixTranslation,
+  ];
 
   return suffixAndRest
     .slice(0, getPhraseSplitLimit(depth))

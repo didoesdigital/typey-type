@@ -6,7 +6,7 @@ import type {
   AffixObject,
   LookupDictWithNamespacedDicts,
   Outline,
-  UnknownStroke
+  UnknownStroke,
 } from "../../types";
 
 /**
@@ -27,7 +27,7 @@ const createFingerspellingStroke = (
   [...inputText]
     .map(
       (singleCharacter: string) =>
-      // (singleCharacter: string, i) =>
+        // (singleCharacter: string, i) =>
         findFingerspellingOutline(
           singleCharacter,
           globalLookupDictionary,

@@ -211,8 +211,8 @@ describe("generate dictionary entries", () => {
     let wordList = ['a', 'A', 'i', 'I', ' ', '?', 'address', 'tom', 'Heather', 'TUESDAY', 'FIRST', '3D', 'bed,', 'man,', 'man!', 'man?', "'bed'", "'address'", "'Sinatra'", "'sinatra'", "'confuzzled'", 'and! and', 'andx and', 'andx andx and', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff -- cached', 'bed, man, and address' ];
     // let wordList = [' ', '?', 'tom', 'Heather', 'TUESDAY', 'FIRST', 'bed,', 'man!', 'man?', "'sinatra'", 'and ', 'and again', 'and man!', 'and man?', 'and again!', '!', '!!', '!man', '! man', 'media query', 'push origin master', 'diff --cached', 'diff -- cached', '<title>Learn!</title>' ];
 
-    let globalLookupDictionaryForMatchingCapitalisationAndPunctuation: LookupDictWithNamespacedDicts = new Map(
-      [
+    let globalLookupDictionaryForMatchingCapitalisationAndPunctuation: LookupDictWithNamespacedDicts =
+      new Map([
         ["a", [["AEU", "typey:typey-type.json"]]],
         ["I", [["EU", "typey:typey-type.json"]]],
         ["{^ ^}", [["S-P", "typey:typey-type.json"]]],
@@ -257,8 +257,7 @@ describe("generate dictionary entries", () => {
         ["{^/^}", [["OEU", "typey:typey-type.json"]]],
         ["title", [["TAOEULT", "typey:typey-type.json"]]],
         ["learn", [["HRERPB", "typey:typey-type.json"]]],
-      ]
-    );
+      ]);
 
     expect(
       generateListOfWordsAndStrokes(
@@ -320,8 +319,11 @@ describe("generate dictionary entries", () => {
         // {phrase: "diff --cached", stroke: "TKEUF TK*RB TK-LS KAERBD"},
         // {phrase: "<title>Learn!</title>", stroke: "AEPBG/TAOEULT/A*EPBG/KPA*/HRERPB/SKHRAPL/AEPBG/OEU/TAOEULT/A*EPBG"}
       ]
-      // FIXME: space or slash stroke separators: this should be removed after restoring space separator behaviour
-      .map(({phrase, stroke}) => ({phrase: phrase, stroke: stroke.replace(/ /g, '/')}))
+        // FIXME: space or slash stroke separators: this should be removed after restoring space separator behaviour
+        .map(({ phrase, stroke }) => ({
+          phrase: phrase,
+          stroke: stroke.replace(/ /g, "/"),
+        }))
       // expect(generateListOfWordsAndStrokes(wordList, globalLookupDictionaryForMatchingCapitalisationAndPunctuation)).toEqual(
       //   [
       //     {phrase: " ", stroke: "S-P", lookups: 1},

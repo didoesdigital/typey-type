@@ -116,7 +116,8 @@ const chooseOutlineForPhrase = (
   // NOTE: we do this even if a chosenStroke was found so that we can prioritise
   // glued translations e.g. "{&&}" or "{&b}" over non-glue entries e.g. "&" or "b"
   let strokeForOneCharacterWordPart = !precedingChar.match(/[0-9]/)
-    ? fingerspelledSpacedPunctuation[wordOrPhrase] || fingerspelledCharacters[wordOrPhrase]
+    ? fingerspelledSpacedPunctuation[wordOrPhrase] ||
+      fingerspelledCharacters[wordOrPhrase]
     : fingerspelledCharacters[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWordPart) {
     strokeForOneCharacterWordPart = findFingerspellingOutline(
@@ -191,7 +192,12 @@ const chooseOutlineForPhrase = (
     let originalEntry: any = globalLookupDictionary.get(mainWord);
     let modifiedEntry: any = globalLookupDictionary.get(modifiedWordOrPhrase);
 
-    if (originalEntry && modifiedEntry && modifiedWordOrPhrase !== mainWord && bestApostropheEssSuffixWithSlash) {
+    if (
+      originalEntry &&
+      modifiedEntry &&
+      modifiedWordOrPhrase !== mainWord &&
+      bestApostropheEssSuffixWithSlash
+    ) {
       if (originalEntry) {
         originalEntry = getRankedOutlineFromLookupEntry(
           originalEntry,
@@ -200,7 +206,7 @@ const chooseOutlineForPhrase = (
         );
       }
 
-      chosenStroke =  originalEntry + bestApostropheEssSuffixWithSlash;
+      chosenStroke = originalEntry + bestApostropheEssSuffixWithSlash;
     }
   }
 
@@ -240,8 +246,7 @@ const chooseOutlineForPhrase = (
     if (lowercasedStroke) {
       if (precedingChar === " " || precedingChar === "") {
         chosenStroke = spacedCapitalisationOutline + "/" + lowercasedStroke;
-      }
-      else {
+      } else {
         chosenStroke = unspacedCapitalisationOutline + "/" + lowercasedStroke;
       }
     }
@@ -274,12 +279,23 @@ const chooseOutlineForPhrase = (
     }
     let lowercasedStroke = lookupEntry;
 
-    if (lowercasedStroke && modifiedWordOrPhrase !== mainWord && bestApostropheEssSuffixWithSlash) {
+    if (
+      lowercasedStroke &&
+      modifiedWordOrPhrase !== mainWord &&
+      bestApostropheEssSuffixWithSlash
+    ) {
       if (precedingChar === " " || precedingChar === "") {
-        chosenStroke = spacedCapitalisationOutline + "/" + lowercasedStroke + bestApostropheEssSuffixWithSlash;
-      }
-      else {
-        chosenStroke = unspacedCapitalisationOutline + "/" + lowercasedStroke + bestApostropheEssSuffixWithSlash;
+        chosenStroke =
+          spacedCapitalisationOutline +
+          "/" +
+          lowercasedStroke +
+          bestApostropheEssSuffixWithSlash;
+      } else {
+        chosenStroke =
+          unspacedCapitalisationOutline +
+          "/" +
+          lowercasedStroke +
+          bestApostropheEssSuffixWithSlash;
       }
     }
   }
@@ -392,7 +408,7 @@ const chooseOutlineForPhrase = (
 
   // xxx => {^xxx}
   // e.g. ' => {^'}
-  if (!chosenStroke && (precedingChar.length > 0 && precedingChar !== " ")) {
+  if (!chosenStroke && precedingChar.length > 0 && precedingChar !== " ") {
     let modifiedWordOrPhrase = "{^" + wordOrPhrase + "}";
     let lookupEntry = globalLookupDictionary.get(modifiedWordOrPhrase);
     if (lookupEntry) {
@@ -526,7 +542,7 @@ const chooseOutlineForPhrase = (
   // NOTE: this function handles phrases where the entire non-affix part of the string is an exact
   // entry in the global lookup dictionary. If the case doesn't match or there are other
   // modifications or splits to try, it will be handled by recursiveBuildStrokeHint instead.
-  if (!chosenStroke && (!!wordOrPhrase.match(/[-0-9A-Za-z]$/))) {
+  if (!chosenStroke && !!wordOrPhrase.match(/[-0-9A-Za-z]$/)) {
     // rexxx => RE/xxx
     // anti-xxx => A*EUPBT/xxx
     let prefixTranslation = "";
@@ -595,8 +611,7 @@ const chooseOutlineForPhrase = (
             lookupEntry,
             modifiedWordOrPhrase,
             affixList
-          ) +
-          edSuffixOutlineWithSlash;
+          ) + edSuffixOutlineWithSlash;
       }
     }
   }

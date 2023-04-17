@@ -169,7 +169,12 @@ describe("rankOutlines", () => {
       const affixes = { suffixes: [], prefixes: [] };
 
       expect(
-        rankOutlines(strokesAndSourceDicts, misstrokesJSON, translation, affixes)
+        rankOutlines(
+          strokesAndSourceDicts,
+          misstrokesJSON,
+          translation,
+          affixes
+        )
       ).toEqual([
         ["TKW-D", "dict.json", "typey"],
         ["TKWAO*EUD", "symbols-briefs.json", "typey"],
@@ -186,7 +191,12 @@ describe("rankOutlines", () => {
       const affixes = { suffixes: [], prefixes: [] };
 
       expect(
-        rankOutlines(strokesAndSourceDicts, misstrokesJSON, translation, affixes)
+        rankOutlines(
+          strokesAndSourceDicts,
+          misstrokesJSON,
+          translation,
+          affixes
+        )
       ).toEqual([
         ["TKW-D", "symbols.json", "user"],
         ["TKWAO*EUD", "symbols-briefs.json", "user"],

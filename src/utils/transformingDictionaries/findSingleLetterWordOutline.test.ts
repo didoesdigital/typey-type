@@ -25,7 +25,9 @@ describe("findSingleLetterWordOutline", () => {
 
   it("returns outline for word “a” in the middle of a sentence with no personal dictionary entry", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict: LookupDictWithNamespacedDicts = new Map([["a", [["AEU", "typey:typey-type.json"]]]]);
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
+      ["a", [["AEU", "typey:typey-type.json"]]],
+    ]);
     expect(
       findSingleLetterWordOutline("a", lookupDict, "AEU", affixList, " ")
     ).toEqual("AEU");
@@ -112,7 +114,9 @@ describe("findSingleLetterWordOutline", () => {
 
   it("returns outline for word “I” in the middle of a sentence with no personal dictionary entry", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict: LookupDictWithNamespacedDicts = new Map([["I", [["EU", "typey:typey-type.json"]]]]);
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
+      ["I", [["EU", "typey:typey-type.json"]]],
+    ]);
     expect(
       findSingleLetterWordOutline("I", lookupDict, "EU", affixList, " ")
     ).toEqual("EU");
@@ -136,7 +140,9 @@ describe("findSingleLetterWordOutline", () => {
 
   it("returns outline for word “X” with no personal dictionary entry", () => {
     const affixList = AffixList.getSharedInstance();
-    const lookupDict: LookupDictWithNamespacedDicts = new Map([["X", [["10R", "typey:typey-type.json"]]]]);
+    const lookupDict: LookupDictWithNamespacedDicts = new Map([
+      ["X", [["10R", "typey:typey-type.json"]]],
+    ]);
     expect(
       findSingleLetterWordOutline("X", lookupDict, "10R", affixList, "")
     ).toEqual("10R");

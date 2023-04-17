@@ -46,7 +46,10 @@ const splitOnPrefix: SplitterFunction = (
     return null;
   }
 
-  const prefixAndRest = [prefixTranslation, wordOrPhraseMaterial.slice(prefixTranslation.length)];
+  const prefixAndRest = [
+    prefixTranslation,
+    wordOrPhraseMaterial.slice(prefixTranslation.length),
+  ];
 
   return prefixAndRest
     .slice(0, getPhraseSplitLimit(depth))
@@ -58,8 +61,8 @@ const splitOnPrefix: SplitterFunction = (
           globalLookupDictionary,
           fingerspelledCharacters[wordBit],
           affixList
-        )
-        if (fingerspelled) return fingerspelled
+        );
+        if (fingerspelled) return fingerspelled;
       }
 
       if (i === 0) {

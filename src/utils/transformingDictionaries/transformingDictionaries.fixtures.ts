@@ -67,8 +67,8 @@ const testTypeyTypeDict = {
   "HREPBT": "lent",
   "SKROL": "scroll",
   "TPAR/PHER": "farmer",
-  "KR-GS": "{^~|\"}",
-  "KW-GS": "{~|\"^}",
+  "KR-GS": '{^~|"}',
+  "KW-GS": '{~|"^}',
   "T": "it",
   "-B": "be",
   "PWE": "{be^}",
@@ -525,7 +525,7 @@ const testTypeyTypeDict = {
 
 // multiple entries per phrase:
 const testPloverDict = {
-  "A/HREF": "<a href=\"{^}",
+  "A/HREF": '<a href="{^}',
   "APBD": "and",
   "SKP": "and",
   "SP": "and",
@@ -1508,7 +1508,7 @@ const testAussieDict = {
   "KWROR/A*U": "{^iour}",
   "KWRO*R/A*U": "{^iour}",
   "O*UR/A*U": "{^our}",
-}
+};
 const testSuffixesDict = {
   "*D": "{^'d}",
   "AES": "{^'s}",
@@ -2383,17 +2383,13 @@ const testSuffixesDict = {
 
 const personalDictionaries: PersonalDictionaryNameAndContents[] = [
   // [ "test-typey-type.json", testTypeyTypeDict],
-  [ "test-emoji.json", testEmojiDict],
-  [ "test-ruby.json", testRubyDict],
-  [ "test-react.json", testReactDict],
+  ["test-emoji.json", testEmojiDict],
+  ["test-ruby.json", testRubyDict],
+  ["test-react.json", testReactDict],
   // [ "test-plover.json", testPloverDict],
-  [ "test-prefixes.json", testPrefixesDict],
-  [ "test-suffixes.json", testSuffixesDict],
-  [ "test-aussie.json", testAussieDict],
+  ["test-prefixes.json", testPrefixesDict],
+  ["test-suffixes.json", testSuffixesDict],
+  ["test-aussie.json", testAussieDict],
 ];
 
-export {
-  testTypeyTypeDict,
-  testPloverDict,
-  personalDictionaries,
-}
+export { testTypeyTypeDict, testPloverDict, personalDictionaries };
