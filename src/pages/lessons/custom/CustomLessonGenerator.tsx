@@ -7,7 +7,7 @@ import {
   defaultState as defaultRules,
   rulesReducer,
 } from "./generator/rulesReducer";
-import { Link } from "react-router-dom";
+import { Link, useRouteMatch } from "react-router-dom";
 import RuleOptions from "./generator/components/RuleOptions";
 import availableRulePrettyNames from "./generator/utilities/availableRulePrettyNames";
 import maxItems from "./generator/constants/maxItems";
@@ -112,6 +112,13 @@ const CustomLessonGenerator = ({
     });
   };
 
+  const match = useRouteMatch({
+    path: "/lessons",
+    strict: true,
+    sensitive: true,
+  });
+  const url = match?.url ?? "";
+
   return (
     <main id="main">
       <Subheader>
@@ -125,6 +132,16 @@ const CustomLessonGenerator = ({
               Lesson generator
             </h2>
           </header>
+        </div>
+        <div className="flex flex-wrap mxn2">
+          <Link
+            to={`${url}/custom/setup`.replace(/\/{2,}/g, "/")}
+            className="link-button link-button-ghost table-cell mr1"
+            style={{ lineHeight: 2 }}
+            id="ga--lesson-index--create-a-custom-lesson"
+          >
+            Create a custom lesson
+          </Link>
         </div>
       </Subheader>
 
