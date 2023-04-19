@@ -1,5 +1,4 @@
 import rankOutlines from "./rankOutlines";
-import misstrokesJSON from "../../../json/misstrokes.json";
 import createAGlobalLookupDictionary from "../createAGlobalLookupDictionary";
 import { AffixList } from "../../affixList";
 import {
@@ -30,7 +29,8 @@ describe("rankOutlines", () => {
   });
 
   describe("sorts the many outlines for quadruplicate", () => {
-    it("returns sorted list of outlines", () => {
+    it("returns sorted lconst misstrokesJSON = {};ist of outlines", () => {
+      const misstrokesJSON = {};
       let arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[] =
         [
           ["KWAD/RUP/KAT", "typey-type.json", "typey"],
@@ -370,6 +370,7 @@ describe("rankOutlines", () => {
           ["TKPWEUT/HUB", "code.json", "typey"],
           ["TKPWEUT/HUB", "typey-type.json", "typey"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -392,6 +393,7 @@ describe("rankOutlines", () => {
           ["TKPWEUT/HUB", "typey-type.json", "typey"],
           ["TKPWEUT/HUB", "code.json", "typey"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -414,6 +416,7 @@ describe("rankOutlines", () => {
           ["TKPWEUT/HUB", "typey-type.json", "typey"],
           ["TKWEUT/HUB", "code.json", "typey"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -440,6 +443,7 @@ describe("rankOutlines", () => {
           ["ERBGS/SAOEUSZ", "plover.json", "plover"],
           ["KPERSZ", "typey-type.json", "typey"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -468,6 +472,7 @@ describe("rankOutlines", () => {
           ["ERBGS/SAOEUSZ", "plover.json", "plover"],
           ["KPERSZ", "typey-type.json", "typey"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -502,6 +507,7 @@ describe("rankOutlines", () => {
           ["ERBGS/SAOEUSZ", "plover.json", "plover"],
           ["KPERSZ", "typey-type.json", "typey"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -532,6 +538,7 @@ describe("rankOutlines", () => {
           ["TEFT/SHREPD", "plover.json", "plover"],
           ["TEFT/SHREPT", "plover.json", "plover"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -553,6 +560,7 @@ describe("rankOutlines", () => {
           ["EUPBT/PHAOED", "plover.json", "plover"],
           ["EUPBT/PHAOET", "plover.json", "plover"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -573,6 +581,7 @@ describe("rankOutlines", () => {
           ["KRED/EUT/KART", "plover.json", "plover"],
           ["KRED/EUT/KARD", "plover.json", "plover"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -601,6 +610,26 @@ describe("rankOutlines", () => {
           ["SKP", "dict.json", "user"],
           ["SK", "briefs.json", "user"],
         ];
+      const misstrokesJSON = {
+        "-PBD": "and",
+        "-PBDZ": "and",
+        "57BD": "and",
+        "A/APBD": "and",
+        "ABD": "and",
+        "APBD/-DZ": "and",
+        "APBDZ": "and",
+        "APBGD": "and",
+        "APBLD": "and",
+        "APBLDZ": "and",
+        "APBTD": "and",
+        "APD": "and",
+        "SKP*": "and",
+        "SKPH": "and",
+        "SKPW": "and",
+        "STK": "and",
+        "STKP": "and",
+      };
+
       expect(
         rankOutlines(
           arrayOfStrokesAndTheirSourceDictNames,
@@ -644,6 +673,10 @@ describe("rankOutlines", () => {
           ["SAO*EUT", "briefs.json", "user"],
           ["SKRAOEUT", "briefs.json", "user"],
         ];
+      const misstrokesJSON = {
+        "KRAOEUR": "cite",
+      };
+
       expect(
         rankOutlines(
           arrayOfStrokesAndTheirSourceDictNames,
@@ -681,6 +714,10 @@ describe("rankOutlines", () => {
           ["KWUZ", "plover.json", "plover"],
           ["KWEUZ", "plover.json", "plover"],
         ];
+      const misstrokesJSON = {
+        "KWUZ": "quiz",
+      };
+
       expect(
         rankOutlines(
           arrayOfStrokesAndTheirSourceDictNames,
@@ -704,6 +741,10 @@ describe("rankOutlines", () => {
           ["E", "plover.json", "plover"],
           ["HE", "dict.json", "typey"],
         ];
+      const misstrokesJSON = {
+        "E": "he",
+      };
+
       expect(
         rankOutlines(
           arrayOfStrokesAndTheirSourceDictNames,
@@ -730,6 +771,7 @@ describe("rankOutlines", () => {
           ["T-FPB", "plover.json", "plover"],
           ["TEFL", "plover.json", "plover"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -752,6 +794,7 @@ describe("rankOutlines", () => {
           ["T*EFT", "user.json", "user"],
           ["TAEFT", "user.json", "user"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -772,6 +815,7 @@ describe("rankOutlines", () => {
           ["T*EFT/T*EFT", "user.json", "user"],
           ["TAEFT/TAEFTS", "user.json", "user"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -792,6 +836,7 @@ describe("rankOutlines", () => {
           ["T*EFT/T*EFT", "user.json", "user"],
           ["TAEFTS/TAEFTS", "user.json", "user"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -818,6 +863,7 @@ describe("rankOutlines", () => {
           ["TKPWRASZ/HORP", "user.json", "user"],
           ["TKPWRASZ/HOP/*ER", "user.json", "user"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -847,6 +893,7 @@ describe("rankOutlines", () => {
           ["AUP/START/-D", "plover.json", "plover"],
           ["AUP/STARTD", "plover.json", "plover"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -881,6 +928,7 @@ describe("rankOutlines", () => {
           ["AUP/START/-D", "typey.json", "typey"],
           ["AUP/STARTD", "typey.json", "typey"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -913,6 +961,7 @@ describe("rankOutlines", () => {
           // ["TKPWELT", "misstrokes.json"],
           // ["TKPET", "misstrokes.json"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -941,6 +990,7 @@ describe("rankOutlines", () => {
           ["EUTD", "plover.json", "plover"],
           ["T*D", "plover.json", "plover"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -968,6 +1018,7 @@ describe("rankOutlines", () => {
           ["T/WAB", "plover.json", "plover"],
           ["T-FS", "plover.json", "plover"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -1010,6 +1061,7 @@ describe("rankOutlines", () => {
           ["OR/TK*EFRZ", "dict.json", "typey"],
           ["OR/TKER/*FS", "dict.json", "typey"],
         ];
+      const misstrokesJSON = {};
 
       expect(
         rankOutlines(
@@ -1058,7 +1110,8 @@ describe("rankOutlines", () => {
   //       ["UP/HO*ELS/REU", "dict.json"],
   //       ["AUP/HOFLT/REU", "dict.json"],
   //       ["AUP/HOELS/TREU", "condensed-strokes.json"],
-  //     ];
+  //     ]
+  //     const misstrokesJSON = {};
 
   //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upholstery", sharedAffixes)).toEqual([
   //       ["AUP/HOELT/REU", "personal.json"],
@@ -1095,6 +1148,7 @@ describe("rankOutlines", () => {
   //       ["SAEBGS", "dict.json"],
   //       ["SAEBGS", "typey-type.json"],
   //     ];
+  //     const misstrokesJSON = {};
 
   //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upholstery", sharedAffixes)).toEqual([
   //       ["SA*EF", "user.json"],
