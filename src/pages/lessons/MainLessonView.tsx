@@ -1,6 +1,8 @@
-import React, { useRef } from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
+import GoogleAnalytics from "react-ga4";
 import { IconClosingCross } from "../../components/Icon";
 import { Link, useLocation } from "react-router-dom";
+import makeDownloadHref from "../../utils/makeDownloadHref";
 import AnimateHeight from "react-animate-height";
 import DocumentTitle from "react-document-title";
 import LessonCanvasFooter from "./components/LessonCanvasFooter";
@@ -23,6 +25,7 @@ import type {
   Lesson,
   LessonSettings,
   LookupDictWithNamespacedDictsAndConfig,
+  StenoDictionary,
   Outline,
   UserSettings as UserSettingsType,
 } from "../../types";
@@ -90,6 +93,8 @@ type Props = {
   toggleHideOtherSettings: () => void;
 };
 
+const initialLessonDict: StenoDictionary = {};
+
 const MainLessonView = ({
   createNewCustomLesson,
   lessonSubTitle,
@@ -149,6 +154,29 @@ const MainLessonView = ({
 }: Props) => {
   const mainHeading = useRef(null);
   const location = useLocation();
+
+  const [lessonHintsAsDict, setLessonHintsAsDict] = useState({});
+
+  const downloadLessonAsDictHref = useMemo(
+    () => makeDownloadHref(lessonHintsAsDict),
+    [lessonHintsAsDict]
+  );
+
+  const downloadLessonAsDict = useCallback(() => {
+    let lessonHintsAsDict = lesson.sourceMaterial.reduce((prev, curr) => {
+      const dict = Object.assign({}, prev);
+      dict[curr["stroke"]] = curr["phrase"];
+      return dict;
+    }, initialLessonDict);
+
+    setLessonHintsAsDict(lessonHintsAsDict);
+
+    GoogleAnalytics.event({
+      category: "Downloads",
+      action: "Click",
+      label: `Dictionary: ${lessonTitle}`,
+    });
+  }, [lessonTitle, lesson.sourceMaterial]);
 
   return (
     <DocumentTitle title={"Typey Type | Lesson: " + lesson.title}>
@@ -327,6 +355,21 @@ const MainLessonView = ({
                 >
                   Give feedback on this lesson (form opens in a new tab)
                 </a>
+              </p>
+              <p className="text-center">
+                {!!lesson.path && (
+                  <a
+                    className="text-small mt0"
+                    href={downloadLessonAsDictHref}
+                    download={`${lesson.path
+                      .replace("/typey-type/lessons/", "")
+                      .replace("/lesson.txt", "")
+                      .replaceAll("/", "--")}-dictionary.json`}
+                    onClick={downloadLessonAsDict}
+                  >
+                    Download lesson hints as dictionary
+                  </a>
+                )}
               </p>
             </div>
           </div>
