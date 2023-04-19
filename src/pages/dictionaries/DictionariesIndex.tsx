@@ -40,13 +40,13 @@ type Props = {
 const isInternalDictLink = (dictLink: DictLink) =>
   dictLink.startsWith("/typey-type") ||
   dictLink.startsWith("/dictionaries/") ||
-  dictLink.startsWith("/lessons/") ||
+  dictLink.startsWith("/lessons/") || // This is deprecated
   dictLink.startsWith("/support");
 
 const getInternalLink = (dictLink: DictLink, dictTitle: PrettyLessonTitle) =>
   isInternalDictLink(dictLink) ? (
     `${process.env.PUBLIC_URL}${dictLink}`.startsWith(
-      process.env.PUBLIC_URL + "/lessons"
+      process.env.PUBLIC_URL + "/lessons" // This is deprecated
     ) ? (
       <Link to={dictLink} aria-label={"Lesson: " + dictTitle}>
         Lesson
@@ -154,7 +154,7 @@ const DictionariesIndex = ({
         : null;
 
     const dictionarypath = dictionary.path
-      .replace(/lesson.txt/, "lesson/")
+      .replace(/lesson.txt/, "lesson/") // This is deprecated
       .replace(/.json/, "/");
 
     return (
