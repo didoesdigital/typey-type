@@ -213,6 +213,7 @@ class Lesson extends Component {
                 recommendationHistory={this.props.recommendationHistory}
                 setAnnouncementMessage={this.props.setAnnouncementMessage}
                 metadata={metadata}
+                lesson={this.props.lesson}
                 lessonLength={propsLesson.presentedMaterial.length}
                 lessonTitle={this.props.lessonTitle}
                 metWords={this.props.metWords}

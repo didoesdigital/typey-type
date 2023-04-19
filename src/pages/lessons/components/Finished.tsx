@@ -11,14 +11,10 @@ import FinishedActionButtons from "./FinishedActionButtons";
 import FinishedDataViz from "./FinishedDataViz";
 import FinishedMisstrokesSummary from "./FinishedMisstrokesSummary";
 import FinishedSummaryHeadings from "./FinishedSummaryHeadings";
+import LessonFinePrintFooter from "./LessonFinePrintFooter";
 import getNumericAccuracy from "../utilities/getNumericAccuracy";
 import type { ConfettiConfig } from "./FinishedSummaryHeadings";
 import type { FinishedProps, LessonData, TransformedData } from "../types";
-
-// fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
-const googleFormURL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=";
-const googleFormParam = "&entry.1202724812&entry.936119214";
 
 const calculateScores = (duration: number, wordCount: number) =>
   duration > 0
@@ -51,6 +47,7 @@ const Finished = ({
   handleStartFromWordChange,
   handleUpcomingWordsLayout,
   hideOtherSettings,
+  lesson,
   lessonLength,
   lessonTitle,
   metadata,
@@ -234,21 +231,11 @@ const Finished = ({
               userSettings={userSettings}
             />
           </div>
-          <p className="text-center">
-            <a
-              href={
-                googleFormURL +
-                encodeURIComponent(location?.pathname || "") +
-                googleFormParam
-              }
-              className="text-small mt0"
-              target="_blank"
-              rel="noopener noreferrer"
-              id="ga--lesson--give-feedback"
-            >
-              Give feedback on this lesson (form opens in a new tab)
-            </a>
-          </p>
+          <LessonFinePrintFooter
+            lesson={lesson}
+            lessonTitle={lessonTitle}
+            locationPathname={location?.pathname || ""}
+          />
         </div>
         <div>
           <UserSettings

@@ -1,3 +1,5 @@
+import type { Lesson } from "../../types";
+
 export type LessonData = {
   version: number;
   lessonStrokes: any[];
@@ -30,6 +32,7 @@ export type FinishedProps = {
   handleStartFromWordChange: any;
   handleUpcomingWordsLayout: any;
   hideOtherSettings: any;
+  lesson: Lesson;
   lessonLength: any;
   lessonTitle: any;
   metadata: any;
