@@ -1,4 +1,11 @@
-import type { Lesson } from "../../types";
+import type {
+  // CurrentLessonStrokes,
+  GlobalUserSettings,
+  Lesson,
+  MetWords,
+  PrettyLessonTitle,
+  UserSettings,
+} from "../../types";
 
 export type LessonData = {
   version: number;
@@ -14,29 +21,29 @@ export type TransformedData = {
 } | null;
 
 export type FinishedProps = {
-  changeShowStrokesAs: any;
-  changeShowStrokesAsList: any;
-  changeShowStrokesOnMisstroke: any;
-  changeSortOrderUserSetting: any;
-  changeSpacePlacementUserSetting: any;
-  changeStenoLayout: any;
-  changeUserSetting: any;
-  chooseStudy: any;
-  currentLessonStrokes: any;
-  disableUserSettings: any;
-  globalUserSettings: any;
-  handleBeatsPerMinute: any;
-  handleDiagramSize: any;
-  handleLimitWordsChange: any;
-  handleRepetitionsChange: any;
-  handleStartFromWordChange: any;
-  handleUpcomingWordsLayout: any;
-  hideOtherSettings: any;
+  changeShowStrokesAs: (event: any) => void;
+  changeShowStrokesAsList: (event: any) => void;
+  changeShowStrokesOnMisstroke: (event: any) => void;
+  changeSortOrderUserSetting: (event: any) => void;
+  changeSpacePlacementUserSetting: (event: any) => void;
+  changeStenoLayout: (event: any) => void;
+  changeUserSetting: (event: any) => void;
+  chooseStudy: () => void;
+  currentLessonStrokes: any; // CurrentLessonStrokes;
+  disableUserSettings: boolean;
+  globalUserSettings: GlobalUserSettings;
+  handleBeatsPerMinute: (event: any) => void;
+  handleDiagramSize: (event: any) => void;
+  handleLimitWordsChange: (event: any) => void;
+  handleRepetitionsChange: (event: any) => void;
+  handleStartFromWordChange: (event: any) => void;
+  handleUpcomingWordsLayout: (event: any) => void;
+  hideOtherSettings: boolean;
   lesson: Lesson;
-  lessonLength: any;
-  lessonTitle: any;
+  lessonLength: number;
+  lessonTitle: PrettyLessonTitle;
   metadata: any;
-  metWords: any;
+  metWords: MetWords;
   path: any;
   restartLesson: any;
   reviseLesson: any;
@@ -57,5 +64,5 @@ export type FinishedProps = {
   totalWordCount: any;
   updateRevisionMaterial: any;
   updateTopSpeedPersonalBest: any;
-  userSettings: any;
+  userSettings: UserSettings;
 };
