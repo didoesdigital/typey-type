@@ -370,6 +370,16 @@ const DictionariesIndex = ({
                 </OutboundLink>
                 .
               </p>
+
+              <p>
+                For lesson-specific dictionaries, you can now “Download lesson
+                hints as a dictionary” from individual lesson pages. For
+                example, see the bottom of the{" "}
+                <Link to="/lessons/drills/top-10000-project-gutenberg-words/">
+                  Top 10000 Project Gutenberg words lesson
+                </Link>
+                .
+              </p>
             </div>
           </div>
           <div className="mt1 mw-336 flex-grow">

@@ -72,7 +72,7 @@ const LessonFinePrintFooter = ({
               .replaceAll("/", "--")}-dictionary.json`}
             onClick={downloadLessonAsDict}
           >
-            Download lesson hints as dictionary
+            Download lesson hints as a dictionary
           </a>
         )}
       </p>
