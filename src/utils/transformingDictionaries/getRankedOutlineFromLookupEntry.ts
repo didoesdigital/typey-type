@@ -2,7 +2,15 @@ import rankOutlines from "./rankOutlines/rankOutlines";
 import splitIntoStrokesDictsAndNamespaces from "./splitIntoStrokesDictsAndNamespaces";
 import misstrokesJSON from "../../json/misstrokes.json";
 import { AffixList } from "../affixList";
-import type { StrokeAndNamespacedDict, Translation } from "../../types";
+import type {
+  StrokeAndNamespacedDict,
+  StenoDictionary,
+  Translation,
+} from "../../types";
+
+// NOTE: When we are only using Typey Type dictionaries without misstrokes, this can be an empty
+// object, otherwise we need to import or fetch a meaningful misstrokes.json file
+const misstrokes = misstrokesJSON as StenoDictionary;
 
 /**
  * Ranks outlines (and their source dictionaries) for a translation and returns the “best” outline and its source dictionary
@@ -19,7 +27,7 @@ const getRankedOutlineFromLookupEntry = (
 ) =>
   rankOutlines(
     splitIntoStrokesDictsAndNamespaces(lookupEntries),
-    misstrokesJSON,
+    misstrokes,
     translation,
     affixList
   )[0][0];
