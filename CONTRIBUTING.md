@@ -19,7 +19,7 @@ Before creating an issue, search existing [issues](https://github.com/didoesdigi
 
 See the [steno-dictionaries](https://github.com/didoesdigital/steno-dictionaries) project to learn more about fixing misstrokes in Typey Type dictionaries.
 
-See the [typey-type-data](https://github.com/didoesdigital/typey-type-data) project to learn more about contributing lesson ideas and linking to your dictionary.
+See the [Typey Type CLI](https://github.com/didoesdigital/typey-type-cli) project to learn more about contributing lessons and dictionaries.
 
 You can also add lessons directly to the community’s lessons spreadsheet. See [Typey Type lessons](https://didoesdigital.com/typey-type/lessons) to learn more.
 

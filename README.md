@@ -37,7 +37,7 @@ Install [yarn](https://yarnpkg.com/lang/en/docs/install/). Note: the project is 
 
 ### Installation
 
-This project includes a Git submodule for [Typey Type data](https://github.com/didoesdigital/typey-type-data), which includes a Git submodule for [steno dictionaries](https://github.com/didoesdigital/steno-dictionaries). If you want to clone this repository as well as its submodules, you can use the `--recursive` parameter:
+This project includes a Git submodule for [Typey Type data](https://github.com/didoesdigital/typey-type-data). If you want to clone this repository as well as its submodules, you can use the `--recursive` parameter:
 
 ```sh
 git clone --recursive https://github.com/didoesdigital/typey-type.git
@@ -60,6 +60,10 @@ Once you've cloned the repository and updated its submodules, yarn install packa
 ```sh
 yarn install
 ```
+
+### Steno dictionaries git submodule
+
+Historically the [Typey Type data](https://github.com/didoesdigital/typey-type-data) repo has contained the [steno-dictionaries](https://github.com/didoesdigital/steno-dictionaries) submodule but it is moving to [Typey Type CLI](https://github.com/didoesdigital/typey-type-cli). If you've been using the paths to these dictionaries in Plover, for example, you may need to update them to look in the CLI or somewhere standalone.
 
 ### Updates
 
@@ -124,6 +128,7 @@ Typey Type was created by [Di](https://didoesdigital.com).
 ## Related repos
 
 - [Typey Type data](https://github.com/didoesdigital/typey-type-data)
+- [Typey Type CLI](https://github.com/didoesdigital/typey-type-cli)
 - [Di's steno dictionaries](https://github.com/didoesdigital/steno-dictionaries)
 - [Stenoboard diagram SVG to React](https://github.com/didoesdigital/typey-type-stenoboard-diagram-svg-to-react)
 
