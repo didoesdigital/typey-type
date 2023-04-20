@@ -594,11 +594,7 @@ describe("choose outline for phrase", () => {
       ).toEqual(["TRUFT", 1]);
     });
 
-    // TODO:
-    // This one currently shows "PHAEUD/EPB" instead of "PHAEUD/*EPB" because "PHAEUD/*EPB" is
-    // penalised 3 times: once for being "longer", once for having a star, once for having a slash,
-    // while "PHAEUD/EPB" is penalised only for having a slash without being a suffix.
-    xit("shows actual suffix stroke for maiden", () => {
+    it("shows actual suffix stroke for maiden", () => {
       let wordOrPhrase = "maiden";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
@@ -614,8 +610,7 @@ describe("choose outline for phrase", () => {
       ).toEqual(["PHAEUD/*EPB", 1]);
     });
 
-    // TODO: decide on showing numbers or letters with #
-    xit("returns number strokes", () => {
+    it("returns number strokes", () => {
       let wordOrPhrase = "0";
       let chosenStroke = "";
       let strokeLookupAttempts = 0;
