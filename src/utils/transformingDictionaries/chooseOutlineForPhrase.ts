@@ -99,7 +99,6 @@ const chooseOutlineForPhrase = (
     );
   }
 
-  // elsewhere, there is a relevant "FIXME: this is a brute force…"
   let strokeForOneCharacterWord = singleLetterWords[wordOrPhrase];
   if (wordOrPhrase.length === 1 && strokeForOneCharacterWord) {
     strokeForOneCharacterWord = findSingleLetterWordOutline(
