@@ -62,14 +62,15 @@ const LessonFinePrintFooter = ({
         </a>
       </p>
       <p className="text-center">
-        {!!lesson.path && (
+        {!!lesson?.path && (
           <a
             className="text-small mt0"
             href={downloadLessonAsDictHref}
-            download={`${lesson.path
+            download={`${lesson?.path
               .replace("/typey-type/lessons/", "")
               .replace("/lesson.txt", "")
-              .replaceAll("/", "--")}-dictionary.json`}
+              .split("/")
+              .join("--")}-dictionary.json`}
             onClick={downloadLessonAsDict}
           >
             Download lesson hints as a dictionary
