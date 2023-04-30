@@ -1,12 +1,17 @@
 import React, { useEffect, useReducer, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga4";
 import { actions } from "./generator/rulesActions";
+import { actions as rulesWithDataActions } from "./generator/rulesWithDataActions";
 import Subheader from "../../../components/Subheader";
 import { useLocalStorage } from "usehooks-ts";
 import {
   defaultState as defaultRules,
   rulesReducer,
 } from "./generator/rulesReducer";
+import {
+  defaultState as defaultRulesWithData,
+  rulesWithDataReducer,
+} from "./generator/rulesWithDataReducer";
 import { Link, useRouteMatch } from "react-router-dom";
 import RuleOptions from "./generator/components/RuleOptions";
 import availableRulePrettyNames from "./generator/utilities/availableRulePrettyNames";
@@ -16,7 +21,7 @@ import type {
   CustomLesson,
   LookupDictWithNamespacedDicts,
 } from "../../../types";
-import type { Rules, RuleStatus } from "./generator/types";
+import type { Rules } from "./generator/types";
 import type { RegexRules } from "./generator/utilities/generateCustomLesson";
 import type { CustomLessonMaterialValidationState } from "./components/CustomLessonIntro";
 
@@ -52,11 +57,6 @@ const CustomLessonGenerator = ({
 
   const [hideHelp, setHideHelp] = useState(true);
 
-  const [outlineRule, setOutlineRule] = useState<RuleStatus>("ignored");
-  const [translationRule, setTranslationRule] = useState<RuleStatus>("ignored");
-  const [outlineRegexText, setOutlineRegexText] = useState("");
-  const [translationRegexText, setTranslationRegexText] = useState("");
-
   const toggleHideHelp = () => {
     setHideHelp(!hideHelp);
   };
@@ -85,46 +85,61 @@ const CustomLessonGenerator = ({
   const onChangeOutlineRule: React.ChangeEventHandler<HTMLSelectElement> = (
     event
   ) => {
-    switch (event.target.value) {
-      case "on":
-        setOutlineRule("on");
-        break;
-      case "off":
-        setOutlineRule("off");
-        break;
-      case "ignored":
-        setOutlineRule("ignored");
-        break;
-    }
+    dispatchRulesWithData({
+      type: rulesWithDataActions.setRuleWithDataStatus,
+      payload: {
+        ruleName: event.target.name,
+        ruleStatus: event.target.value,
+      },
+    });
   };
 
   const onChangeOutlineRegex: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    setOutlineRegexText(event.target.value);
+    dispatchRulesWithData({
+      type: rulesWithDataActions.setRegexRuleData,
+      payload: {
+        entryPart: event.target.id.replace("-regex", ""),
+        regexText: event.target.value,
+      },
+    });
   };
 
   const onChangeTranslationRule: React.ChangeEventHandler<HTMLSelectElement> = (
     event
   ) => {
-    switch (event.target.value) {
-      case "on":
-        setTranslationRule("on");
-        break;
-      case "off":
-        setTranslationRule("off");
-        break;
-      case "ignored":
-        setTranslationRule("ignored");
-        break;
-    }
+    dispatchRulesWithData({
+      type: rulesWithDataActions.setRuleWithDataStatus,
+      payload: {
+        ruleName: event.target.name,
+        ruleStatus: event.target.value,
+      },
+    });
   };
 
   const onChangeTranslationRegex: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    setTranslationRegexText(event.target.value);
+    dispatchRulesWithData({
+      type: rulesWithDataActions.setRegexRuleData,
+      payload: {
+        entryPart: event.target.id.replace("-regex", ""),
+        regexText: event.target.value,
+      },
+    });
   };
+
+  const [rulesWithDataSettings, setRulesWithDataSettings] = useLocalStorage(
+    "rules-with-data",
+    defaultRulesWithData
+  );
+
+  const [rulesWithDataState, dispatchRulesWithData] = useReducer(
+    rulesWithDataReducer,
+    {}, // init state
+    () => rulesWithDataSettings
+  );
 
   const [rulesSettings, setRulesSettings] = useLocalStorage(
     "rules",
@@ -142,15 +157,16 @@ const CustomLessonGenerator = ({
   );
 
   const regexRules: RegexRules = {
-    outlineRule,
-    outlineRegexText,
-    translationRule,
-    translationRegexText,
+    outlineRule: rulesWithDataState.outlineRule,
+    outlineRegexText: rulesWithDataState.outlineRegexText,
+    translationRule: rulesWithDataState.translationRule,
+    translationRegexText: rulesWithDataState.translationRegexText,
   };
 
   const buildLesson = () => {
     generateCustomLesson(globalLookupDictionary, onRules, regexRules);
     setRulesSettings(rulesState);
+    setRulesWithDataSettings(rulesWithDataState);
   };
 
   const onChangeRuleStatus: React.ChangeEventHandler<HTMLSelectElement> = (
@@ -162,6 +178,7 @@ const CustomLessonGenerator = ({
     });
 
     setRulesSettings(rulesState);
+    setRulesWithDataSettings(rulesWithDataState);
 
     GoogleAnalytics.event({
       category: "Lesson generator",
@@ -276,9 +293,9 @@ const CustomLessonGenerator = ({
                             <select
                               id={"outlineRule"}
                               name={"outlineRule"}
-                              value={outlineRule}
+                              value={rulesWithDataState.outlineRule}
                               onChange={onChangeOutlineRule}
-                              data-rule-status={outlineRule}
+                              data-rule-status={rulesWithDataState.outlineRule}
                               className="rule-select text-small form-control w-80 mr1"
                             >
                               <option value="on">On</option>
@@ -306,7 +323,7 @@ const CustomLessonGenerator = ({
                               placeholder=".*[DZ]$"
                               spellCheck={false}
                               type="text"
-                              value={outlineRegexText}
+                              value={rulesWithDataState.outlineRegexText}
                             ></input>
                           </p>
                         </div>
@@ -315,9 +332,11 @@ const CustomLessonGenerator = ({
                             <select
                               id={"translationRule"}
                               name={"translationRule"}
-                              value={translationRule}
+                              value={rulesWithDataState.translationRule}
                               onChange={onChangeTranslationRule}
-                              data-rule-status={translationRule}
+                              data-rule-status={
+                                rulesWithDataState.translationRule
+                              }
                               className="rule-select text-small form-control w-80 mr1"
                             >
                               <option value="on">On</option>
@@ -345,7 +364,7 @@ const CustomLessonGenerator = ({
                               placeholder=".*(ation|cean)$"
                               spellCheck={false}
                               type="text"
-                              value={translationRegexText}
+                              value={rulesWithDataState.translationRegexText}
                             ></input>
                           </p>
                         </div>
