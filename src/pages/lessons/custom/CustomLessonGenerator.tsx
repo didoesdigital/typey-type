@@ -82,19 +82,7 @@ const CustomLessonGenerator = ({
     mainHeading.current?.focus();
   }, []);
 
-  const onChangeOutlineRule: React.ChangeEventHandler<HTMLSelectElement> = (
-    event
-  ) => {
-    dispatchRulesWithData({
-      type: rulesWithDataActions.setRuleWithDataStatus,
-      payload: {
-        ruleName: event.target.name,
-        ruleStatus: event.target.value,
-      },
-    });
-  };
-
-  const onChangeTranslationRule: React.ChangeEventHandler<HTMLSelectElement> = (
+  const onChangeEntryRegexRule: React.ChangeEventHandler<HTMLSelectElement> = (
     event
   ) => {
     dispatchRulesWithData({
@@ -282,7 +270,7 @@ const CustomLessonGenerator = ({
                               id={"outlineRule"}
                               name={"outlineRule"}
                               value={rulesWithDataState.outlineRule}
-                              onChange={onChangeOutlineRule}
+                              onChange={onChangeEntryRegexRule}
                               data-rule-status={rulesWithDataState.outlineRule}
                               className="rule-select text-small form-control w-80 mr1"
                             >
@@ -321,7 +309,7 @@ const CustomLessonGenerator = ({
                               id={"translationRule"}
                               name={"translationRule"}
                               value={rulesWithDataState.translationRule}
-                              onChange={onChangeTranslationRule}
+                              onChange={onChangeEntryRegexRule}
                               data-rule-status={
                                 rulesWithDataState.translationRule
                               }
