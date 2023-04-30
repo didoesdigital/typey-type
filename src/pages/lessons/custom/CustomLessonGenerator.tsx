@@ -133,9 +133,9 @@ const CustomLessonGenerator = ({
   );
 
   const regexRules: RegexRules = {
-    outlineRule: rulesWithDataState.outlineRule,
+    outlineMatching: rulesWithDataState.outlineMatching,
     outlineRegexText: rulesWithDataState.outlineRegexText,
-    translationRule: rulesWithDataState.translationRule,
+    translationMatching: rulesWithDataState.translationMatching,
     translationRegexText: rulesWithDataState.translationRegexText,
   };
 
@@ -267,12 +267,12 @@ const CustomLessonGenerator = ({
                         <div className="flex flex-wrap gap-4">
                           <p className="mb1 flex items-center">
                             <select
-                              id={"translationRule"}
-                              name={"translationRule"}
-                              value={rulesWithDataState.translationRule}
+                              id={"translationMatching"}
+                              name={"translationMatching"}
+                              value={rulesWithDataState.translationMatching}
                               onChange={onChangeEntryRegexRule}
                               data-rule-status={
-                                rulesWithDataState.translationRule
+                                rulesWithDataState.translationMatching
                               }
                               className="rule-select text-small form-control w-80 mr1"
                             >
@@ -282,7 +282,7 @@ const CustomLessonGenerator = ({
                             </select>
                             <label
                               className="dib lh-single"
-                              htmlFor={"translationRule"}
+                              htmlFor={"translationMatching"}
                             >
                               has translation matching
                             </label>
@@ -308,11 +308,11 @@ const CustomLessonGenerator = ({
                         <div className="pb3 flex flex-wrap gap-4">
                           <p className="mb1 flex items-center">
                             <select
-                              id={"outlineRule"}
-                              name={"outlineRule"}
-                              value={rulesWithDataState.outlineRule}
+                              id={"outlineMatching"}
+                              name={"outlineMatching"}
+                              value={rulesWithDataState.outlineMatching}
                               onChange={onChangeEntryRegexRule}
-                              data-rule-status={rulesWithDataState.outlineRule}
+                              data-rule-status={rulesWithDataState.outlineMatching}
                               className="rule-select text-small form-control w-80 mr1"
                             >
                               <option value="on">On</option>
@@ -321,7 +321,7 @@ const CustomLessonGenerator = ({
                             </select>
                             <label
                               className="dib lh-single"
-                              htmlFor={"outlineRule"}
+                              htmlFor={"outlineMatching"}
                             >
                               has outline matching
                             </label>

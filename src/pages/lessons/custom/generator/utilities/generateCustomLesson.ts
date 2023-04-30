@@ -18,9 +18,9 @@ import type {
 } from "../types";
 
 export type RegexRules = {
-  outlineRule: RuleStatus;
+  outlineMatching: RuleStatus;
   outlineRegexText: string;
-  translationRule: RuleStatus;
+  translationMatching: RuleStatus;
   translationRegexText: string;
 };
 
@@ -74,7 +74,7 @@ function generateCustomLesson(
     .filter((materialItem) => ruleFilters(materialItem))
     .filter((materialItem) => {
       if (
-        regexRules?.outlineRule === "ignored" ||
+        regexRules?.outlineMatching === "ignored" ||
         !regexRules?.outlineRegexText
       ) {
         return true;
@@ -82,11 +82,11 @@ function generateCustomLesson(
 
       const regexp = new RegExp(regexRules.outlineRegexText, "g");
 
-      if (regexRules?.outlineRule === "on") {
+      if (regexRules?.outlineMatching === "on") {
         return materialItem[0].match(regexp);
       }
 
-      if (regexRules?.outlineRule === "off") {
+      if (regexRules?.outlineMatching === "off") {
         return !materialItem[0].match(regexp);
       }
 
@@ -94,7 +94,7 @@ function generateCustomLesson(
     })
     .filter((materialItem) => {
       if (
-        regexRules?.translationRule === "ignored" ||
+        regexRules?.translationMatching === "ignored" ||
         !regexRules?.translationRegexText
       ) {
         return true;
@@ -102,11 +102,11 @@ function generateCustomLesson(
 
       const regexp = new RegExp(regexRules.translationRegexText, "g");
 
-      if (regexRules?.translationRule === "on") {
+      if (regexRules?.translationMatching === "on") {
         return materialItem[1].match(regexp);
       }
 
-      if (regexRules?.translationRule === "off") {
+      if (regexRules?.translationMatching === "off") {
         return !materialItem[1].match(regexp);
       }
 

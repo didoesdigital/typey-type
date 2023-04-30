@@ -3,16 +3,16 @@ import type { RuleStatus } from "./types";
 
 export type RulesWithData = {
   outlineRegexText: string;
-  outlineRule: RuleStatus;
+  outlineMatching: RuleStatus;
   translationRegexText: string;
-  translationRule: RuleStatus;
+  translationMatching: RuleStatus;
 };
 
 export const defaultState: RulesWithData = {
   outlineRegexText: "",
-  outlineRule: "ignored",
+  outlineMatching: "ignored",
   translationRegexText: "",
-  translationRule: "ignored",
+  translationMatching: "ignored",
 };
 
 export const initConfig = (state: any) => ({
@@ -23,7 +23,7 @@ export const initConfig = (state: any) => ({
 const setRuleWithDataStatus = (
   state: RulesWithData,
   payload: {
-    ruleName: "outlineRule" | "translationRule";
+    ruleName: "outlineMatching" | "translationMatching";
     ruleStatus: RuleStatus;
   }
 ) => {
