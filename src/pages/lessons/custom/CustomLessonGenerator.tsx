@@ -14,9 +14,11 @@ import {
 } from "./generator/rulesWithDataReducer";
 import { Link, useRouteMatch } from "react-router-dom";
 import RuleOptions from "./generator/components/RuleOptions";
+import RegexRuleSetting from "./generator/components/RegexRuleSetting";
 import availableRulePrettyNames from "./generator/utilities/availableRulePrettyNames";
 import maxItems from "./generator/constants/maxItems";
 import GeneratorHelp from "./GeneratorHelp";
+
 import type {
   CustomLesson,
   LookupDictWithNamespacedDicts,
@@ -265,88 +267,30 @@ const CustomLessonGenerator = ({
                         </div>
                         <p className="mb1 flex items-center">Advanced:</p>
                         <div className="pb3">
-                          <div className="flex flex-wrap gap-4">
-                            <p className="mb1 flex items-center">
-                              <select
-                                id={"translationMatching"}
-                                name={"translationMatching"}
-                                value={rulesWithDataState.translationMatching}
-                                onChange={onChangeEntryRegexRule}
-                                data-rule-status={
-                                  rulesWithDataState.translationMatching
-                                }
-                                className="rule-select text-small form-control w-80 mr1"
-                              >
-                                <option value="on">On</option>
-                                <option value="off">Off</option>
-                                <option value="ignored">Ignored</option>
-                              </select>
-                              <label
-                                className="dib lh-single"
-                                htmlFor={"translationMatching"}
-                              >
-                                has translation matching
-                              </label>
-                            </p>
-                            <p className="flex flex-wrap items-center gap-4 mb1">
-                              <label htmlFor="translation-regex">
-                                translation regex:
-                              </label>
-                              <input
-                                id="translation-regex"
-                                className="caret-color bg-white dark:bg-coolgrey-1000 input-textarea underline overflow-hidden w-336"
-                                autoCapitalize="off"
-                                autoComplete="off"
-                                autoCorrect="off"
-                                onChange={onChangeEntryRegex}
-                                placeholder=".*(ation|cean)$"
-                                spellCheck={false}
-                                type="text"
-                                value={rulesWithDataState.translationRegexText}
-                              ></input>
-                            </p>
-                          </div>
-                          <div className="flex flex-wrap gap-4">
-                            <p className="mb1 flex items-center">
-                              <select
-                                id={"outlineMatching"}
-                                name={"outlineMatching"}
-                                value={rulesWithDataState.outlineMatching}
-                                onChange={onChangeEntryRegexRule}
-                                data-rule-status={
-                                  rulesWithDataState.outlineMatching
-                                }
-                                className="rule-select text-small form-control w-80 mr1"
-                              >
-                                <option value="on">On</option>
-                                <option value="off">Off</option>
-                                <option value="ignored">Ignored</option>
-                              </select>
-                              <label
-                                className="dib lh-single"
-                                htmlFor={"outlineMatching"}
-                              >
-                                has outline matching
-                              </label>
-                            </p>
-                            <p className="flex flex-wrap items-center gap-4 mb1">
-                              <label htmlFor="outline-regex">
-                                outline regex:
-                              </label>
-                              <input
-                                id="outline-regex"
-                                className="caret-color bg-white dark:bg-coolgrey-1000 input-textarea underline overflow-hidden w-336"
-                                autoCapitalize="off"
-                                autoComplete="off"
-                                autoCorrect="off"
-                                onChange={onChangeEntryRegex}
-                                placeholder=".*[DZ]$"
-                                spellCheck={false}
-                                type="text"
-                                value={rulesWithDataState.outlineRegexText}
-                              ></input>
-                            </p>
-                          </div>
+                          <RegexRuleSetting
+                            regexRuleName={"translationMatching"}
+                            regexRuleStatus={
+                              rulesWithDataState.translationMatching
+                            }
+                            regexRuleDataValue={
+                              rulesWithDataState.translationRegexText
+                            }
+                            entryPart={"translation"}
+                            onChangeEntryRegexStatus={onChangeEntryRegexRule}
+                            onChangeEntryRegexData={onChangeEntryRegex}
+                            placeholder={".*(ation|cean)$"}
+                          />
+                          <RegexRuleSetting
+                            regexRuleName={"outlineMatching"}
+                            regexRuleStatus={rulesWithDataState.outlineMatching}
+                            regexRuleDataValue={
+                              rulesWithDataState.outlineRegexText
+                            }
+                            entryPart={"outline"}
+                            onChangeEntryRegexStatus={onChangeEntryRegexRule}
+                            onChangeEntryRegexData={onChangeEntryRegex}
+                            placeholder={".*[DZ]$"}
+                          />
                         </div>
                       </div>
                     </details>
