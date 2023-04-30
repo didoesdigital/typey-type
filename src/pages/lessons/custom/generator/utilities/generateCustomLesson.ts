@@ -10,13 +10,24 @@ import type {
   Translation,
 } from "../../../../../types";
 
-import type { FilterAndExpectation, Rules, RuleFunctionsTypes } from "../types";
+import type {
+  FilterAndExpectation,
+  Rules,
+  RuleStatus,
+  RuleFunctionsTypes,
+} from "../types";
+
+export type RegexRules = {
+  outlineRule: RuleStatus;
+  outlineRegexText: string;
+};
 
 const translationExclusions = ["pos", "sol", "spas", "pros"];
 
 function generateCustomLesson(
   globalLookupDictionary: LookupDictWithNamespacedDicts,
-  rules: Rules
+  rules: Rules,
+  regexRules: RegexRules
 ) {
   const filters: FilterAndExpectation[] = [];
 
@@ -57,9 +68,28 @@ function generateCustomLesson(
     }
   }
 
-  const rulesFilteredVocab = [...entriesList.slice(0, maxItems)].filter(
-    (materialItem) => ruleFilters(materialItem)
-  );
+  const rulesFilteredVocab = [...entriesList.slice(0, maxItems)]
+    .filter((materialItem) => ruleFilters(materialItem))
+    .filter((materialItem) => {
+      if (
+        regexRules?.outlineRule === "ignored" ||
+        !regexRules?.outlineRegexText
+      ) {
+        return true;
+      }
+
+      const regexp = new RegExp(regexRules.outlineRegexText, "g");
+
+      if (regexRules?.outlineRule === "on") {
+        return materialItem[0].match(regexp);
+      }
+
+      if (regexRules?.outlineRule === "off") {
+        return !materialItem[0].match(regexp);
+      }
+
+      return true;
+    });
 
   const rulesFilteredMaterial = rulesFilteredVocab.map(
     ([outline, translation]) => ({ phrase: translation, stroke: outline })
