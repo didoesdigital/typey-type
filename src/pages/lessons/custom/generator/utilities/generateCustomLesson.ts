@@ -20,6 +20,8 @@ import type {
 export type RegexRules = {
   outlineRule: RuleStatus;
   outlineRegexText: string;
+  translationRule: RuleStatus;
+  translationRegexText: string;
 };
 
 const translationExclusions = ["pos", "sol", "spas", "pros"];
@@ -86,6 +88,26 @@ function generateCustomLesson(
 
       if (regexRules?.outlineRule === "off") {
         return !materialItem[0].match(regexp);
+      }
+
+      return true;
+    })
+    .filter((materialItem) => {
+      if (
+        regexRules?.translationRule === "ignored" ||
+        !regexRules?.translationRegexText
+      ) {
+        return true;
+      }
+
+      const regexp = new RegExp(regexRules.translationRegexText, "g");
+
+      if (regexRules?.translationRule === "on") {
+        return materialItem[1].match(regexp);
+      }
+
+      if (regexRules?.translationRule === "off") {
+        return !materialItem[1].match(regexp);
       }
 
       return true;

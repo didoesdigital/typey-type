@@ -53,7 +53,9 @@ const CustomLessonGenerator = ({
   const [hideHelp, setHideHelp] = useState(true);
 
   const [outlineRule, setOutlineRule] = useState<RuleStatus>("ignored");
+  const [translationRule, setTranslationRule] = useState<RuleStatus>("ignored");
   const [outlineRegexText, setOutlineRegexText] = useState("");
+  const [translationRegexText, setTranslationRegexText] = useState("");
 
   const toggleHideHelp = () => {
     setHideHelp(!hideHelp);
@@ -102,6 +104,28 @@ const CustomLessonGenerator = ({
     setOutlineRegexText(event.target.value);
   };
 
+  const onChangeTranslationRule: React.ChangeEventHandler<HTMLSelectElement> = (
+    event
+  ) => {
+    switch (event.target.value) {
+      case "on":
+        setTranslationRule("on");
+        break;
+      case "off":
+        setTranslationRule("off");
+        break;
+      case "ignored":
+        setTranslationRule("ignored");
+        break;
+    }
+  };
+
+  const onChangeTranslationRegex: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    setTranslationRegexText(event.target.value);
+  };
+
   const [rulesSettings, setRulesSettings] = useLocalStorage(
     "rules",
     defaultRules
@@ -120,6 +144,8 @@ const CustomLessonGenerator = ({
   const regexRules: RegexRules = {
     outlineRule,
     outlineRegexText,
+    translationRule,
+    translationRegexText,
   };
 
   const buildLesson = () => {
@@ -244,7 +270,8 @@ const CustomLessonGenerator = ({
                               />
                             ))}
                         </div>
-                        <div className="pb3 flex flex-wrap gap-4">
+                        <p className="mb1 flex items-center">Advanced:</p>
+                        <div className="flex flex-wrap gap-4">
                           <p className="mb1 flex items-center">
                             <select
                               id={"outlineRule"}
@@ -276,9 +303,49 @@ const CustomLessonGenerator = ({
                               autoComplete="off"
                               autoCorrect="off"
                               onChange={onChangeOutlineRegex}
+                              placeholder=".*[DZ]$"
                               spellCheck={false}
                               type="text"
                               value={outlineRegexText}
+                            ></input>
+                          </p>
+                        </div>
+                        <div className="pb3 flex flex-wrap gap-4">
+                          <p className="mb1 flex items-center">
+                            <select
+                              id={"translationRule"}
+                              name={"translationRule"}
+                              value={translationRule}
+                              onChange={onChangeTranslationRule}
+                              data-rule-status={translationRule}
+                              className="rule-select text-small form-control w-80 mr1"
+                            >
+                              <option value="on">On</option>
+                              <option value="off">Off</option>
+                              <option value="ignored">Ignored</option>
+                            </select>
+                            <label
+                              className="dib lh-single"
+                              htmlFor={"translationRule"}
+                            >
+                              has translation matching
+                            </label>
+                          </p>
+                          <p className="flex flex-wrap items-center gap-4 mb1">
+                            <label htmlFor="translation-regex">
+                              translation regex:
+                            </label>
+                            <input
+                              id="translation-regex"
+                              className="caret-color bg-white dark:bg-coolgrey-1000 input-textarea underline overflow-hidden w-336"
+                              autoCapitalize="off"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              onChange={onChangeTranslationRegex}
+                              placeholder=".*(ation|cean)$"
+                              spellCheck={false}
+                              type="text"
+                              value={translationRegexText}
                             ></input>
                           </p>
                         </div>
