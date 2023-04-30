@@ -2,7 +2,7 @@ import Zipper from "../../../utils/zipper";
 
 import type { CustomLesson } from "../../../types";
 
-function generateCustomLesson() {
+function customiseLesson() {
   // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation.
   const existingLesson = this.state.lesson;
 
@@ -33,4 +33,4 @@ function generateCustomLesson() {
   });
 }
 
-export default generateCustomLesson;
+export default customiseLesson;
