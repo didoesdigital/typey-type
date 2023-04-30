@@ -94,18 +94,6 @@ const CustomLessonGenerator = ({
     });
   };
 
-  const onChangeOutlineRegex: React.ChangeEventHandler<HTMLInputElement> = (
-    event
-  ) => {
-    dispatchRulesWithData({
-      type: rulesWithDataActions.setRegexRuleData,
-      payload: {
-        entryPart: event.target.id.replace("-regex", ""),
-        regexText: event.target.value,
-      },
-    });
-  };
-
   const onChangeTranslationRule: React.ChangeEventHandler<HTMLSelectElement> = (
     event
   ) => {
@@ -118,7 +106,7 @@ const CustomLessonGenerator = ({
     });
   };
 
-  const onChangeTranslationRegex: React.ChangeEventHandler<HTMLInputElement> = (
+  const onChangeEntryRegex: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
     dispatchRulesWithData({
@@ -319,7 +307,7 @@ const CustomLessonGenerator = ({
                               autoCapitalize="off"
                               autoComplete="off"
                               autoCorrect="off"
-                              onChange={onChangeOutlineRegex}
+                              onChange={onChangeEntryRegex}
                               placeholder=".*[DZ]$"
                               spellCheck={false}
                               type="text"
@@ -360,7 +348,7 @@ const CustomLessonGenerator = ({
                               autoCapitalize="off"
                               autoComplete="off"
                               autoCorrect="off"
-                              onChange={onChangeTranslationRegex}
+                              onChange={onChangeEntryRegex}
                               placeholder=".*(ation|cean)$"
                               spellCheck={false}
                               type="text"
