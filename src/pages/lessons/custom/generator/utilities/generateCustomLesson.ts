@@ -70,7 +70,7 @@ function generateCustomLesson(
     }
   }
 
-  const rulesFilteredVocab = [...entriesList.slice(0, maxItems)]
+  const rulesFilteredVocab = [...entriesList]
     .filter((materialItem) => ruleFilters(materialItem))
     .filter((materialItem) => {
       if (
@@ -111,7 +111,8 @@ function generateCustomLesson(
       }
 
       return true;
-    });
+    })
+    .slice(0, maxItems);
 
   const rulesFilteredMaterial = rulesFilteredVocab.map(
     ([outline, translation]) => ({ phrase: translation, stroke: outline })
