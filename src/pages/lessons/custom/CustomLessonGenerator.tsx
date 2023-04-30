@@ -211,44 +211,6 @@ const CustomLessonGenerator = ({
                       Language is messy. These rules use heuristics and make
                       imperfect guesses.
                     </p>
-                    <div className="flex flex-wrap gap-4">
-                      <p className="mb1 flex items-center">
-                        <select
-                          id={"outlineRule"}
-                          name={"outlineRule"}
-                          value={outlineRule}
-                          onChange={onChangeOutlineRule}
-                          data-rule-status={outlineRule}
-                          className="rule-select text-small form-control w-80 mr1"
-                        >
-                          <option value="on">On</option>
-                          <option value="off">Off</option>
-                          <option value="ignored">Ignored</option>
-                        </select>
-                        <label
-                          className="dib lh-single"
-                          htmlFor={"outlineRule"}
-                        >
-                          Outline
-                        </label>
-                      </p>
-                      <p className="flex flex-wrap items-center gap-4 mb1">
-                        <label htmlFor="outline-regex">
-                          Outline regex:
-                        </label>
-                        <input
-                          id="outline-regex"
-                          className="caret-color bg-white dark:bg-coolgrey-1000 input-textarea underline overflow-hidden"
-                          autoCapitalize="off"
-                          autoComplete="off"
-                          autoCorrect="off"
-                          onChange={onChangeOutlineRegex}
-                          spellCheck={false}
-                          type="text"
-                          value={outlineRegexText}
-                        ></input>
-                      </p>
-                    </div>
                     <div className="pb1 columns-2 columns-xs gap-4">
                       {availableRulePrettyNames
                         .slice(0, numberOfVisibleOptions)
@@ -268,18 +230,58 @@ const CustomLessonGenerator = ({
                           More options…
                         </p>
                       </summary>
-                      <div className="pb3 columns-2 columns-xs gap-4">
-                        {availableRulePrettyNames
-                          .slice(numberOfVisibleOptions)
-                          .map((rule) => (
-                            <RuleOptions
-                              key={rule.ruleName}
-                              ruleName={rule.ruleName}
-                              prettyName={rule.prettyName}
-                              rulesState={rulesState}
-                              onChangeRuleStatus={onChangeRuleStatus}
-                            />
-                          ))}
+                      <div>
+                        <div className="columns-2 columns-xs gap-4 pb1">
+                          {availableRulePrettyNames
+                            .slice(numberOfVisibleOptions)
+                            .map((rule) => (
+                              <RuleOptions
+                                key={rule.ruleName}
+                                ruleName={rule.ruleName}
+                                prettyName={rule.prettyName}
+                                rulesState={rulesState}
+                                onChangeRuleStatus={onChangeRuleStatus}
+                              />
+                            ))}
+                        </div>
+                        <div className="pb3 flex flex-wrap gap-4">
+                          <p className="mb1 flex items-center">
+                            <select
+                              id={"outlineRule"}
+                              name={"outlineRule"}
+                              value={outlineRule}
+                              onChange={onChangeOutlineRule}
+                              data-rule-status={outlineRule}
+                              className="rule-select text-small form-control w-80 mr1"
+                            >
+                              <option value="on">On</option>
+                              <option value="off">Off</option>
+                              <option value="ignored">Ignored</option>
+                            </select>
+                            <label
+                              className="dib lh-single"
+                              htmlFor={"outlineRule"}
+                            >
+                              has outline matching
+                            </label>
+                          </p>
+                          <p className="flex flex-wrap items-center gap-4 mb1">
+                            <label htmlFor="outline-regex">
+                              outline regex:
+                            </label>
+                            <input
+                              id="outline-regex"
+                              className="caret-color bg-white dark:bg-coolgrey-1000 input-textarea underline overflow-hidden w-336"
+                              autoCapitalize="off"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              onChange={onChangeOutlineRegex}
+                              spellCheck={false}
+                              type="text"
+                              value={outlineRegexText}
+                            ></input>
+                          </p>
+                        </div>
                       </div>
                     </details>
                     <p>
