@@ -589,6 +589,38 @@ const GeneratorHelp = ({ hideHelp, containerId }: Props) => (
           <code>&#123;MODE:SNAKE&#125;</code>.
         </p>
       </RuleBlurb>
+
+      <RuleHeading>“has outline matching”</RuleHeading>
+      <RuleBlurb>
+        <p className="mb0">
+          This rule looks for entries where the outline or strokes match the
+          regular expression provided. This{" "}
+          <a
+            href="https://www.sitepoint.com/learn-regex/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            external link to learn more regular expressions opens in a new tab
+          </a>
+          .
+        </p>
+      </RuleBlurb>
+
+      <RuleHeading>“has translation matching”</RuleHeading>
+      <RuleBlurb>
+        <p className="mb0">
+          This rule looks for entries where the translation or words match the
+          regular expression provided. This{" "}
+          <a
+            href="https://www.sitepoint.com/learn-regex/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            external link to learn more regular expressions opens in a new tab
+          </a>
+          .
+        </p>
+      </RuleBlurb>
     </div>
   </div>
 );
