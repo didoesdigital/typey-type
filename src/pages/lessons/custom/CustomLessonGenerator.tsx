@@ -58,6 +58,8 @@ const CustomLessonGenerator = ({
   const mainHeading = useRef<HTMLHeadingElement>(null);
 
   const [hideHelp, setHideHelp] = useState(true);
+  const [regexRuleIgnoredButHasText, setRegexRuleIgnoredButHasText] =
+    useState(false);
 
   const toggleHideHelp = () => {
     setHideHelp(!hideHelp);
@@ -87,6 +89,7 @@ const CustomLessonGenerator = ({
   const onChangeEntryRegexRule: React.ChangeEventHandler<HTMLSelectElement> = (
     event
   ) => {
+    setRegexRuleIgnoredButHasText(false);
     dispatchRulesWithData({
       type: rulesWithDataActions.setRuleWithDataStatus,
       payload: {
@@ -99,6 +102,7 @@ const CustomLessonGenerator = ({
   const onChangeEntryRegex: React.ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
+    setRegexRuleIgnoredButHasText(false);
     dispatchRulesWithData({
       type: rulesWithDataActions.setRegexRuleData,
       payload: {
@@ -143,6 +147,14 @@ const CustomLessonGenerator = ({
 
   const buildLesson = () => {
     generateCustomLesson(globalLookupDictionary, onRules, regexRules);
+    if (
+      (rulesWithDataState.translationRegexText.length > 0 &&
+        rulesWithDataState.translationMatching === "ignored") ||
+      (rulesWithDataState.outlineRegexText.length > 0 &&
+        rulesWithDataState.outlineMatching === "ignored")
+    ) {
+      setRegexRuleIgnoredButHasText(true);
+    }
     setRulesSettings(rulesState);
     setRulesWithDataSettings(rulesWithDataState);
   };
@@ -311,6 +323,13 @@ const CustomLessonGenerator = ({
                         Start generated lesson
                       </Link>
                     </p>
+                    {regexRuleIgnoredButHasText && (
+                      <p>
+                        Note: an advanced setting is set to “ignored” but has
+                        text. You can change the setting to “on” or “off” or
+                        delete the text to hide this message.
+                      </p>
+                    )}
                     <p>
                       {customLessonMaterialValidationState === "fail" && (
                         <>
