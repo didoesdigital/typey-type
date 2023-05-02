@@ -1,4 +1,7 @@
 import React from "react";
+import { screen, within, userEvent } from "@storybook/testing-library";
+import { expect } from "@storybook/jest";
+
 import CustomLessonGenerator from "./CustomLessonGenerator";
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -57,3 +60,15 @@ const Template = (args) => {
 };
 
 export const CustomLessonGeneratorStory = Template.bind({});
+
+export const CustomLessonGeneratorHelp = Template.bind({});
+CustomLessonGeneratorHelp.storyName = "Show generator help";
+CustomLessonGeneratorHelp.play = async ({ canvasElement }) => {
+  const canvas = await within(canvasElement);
+
+  const submitButton = canvas.getByRole("button", { name: "Show help" });
+  await userEvent.click(submitButton);
+
+  const textElement = screen.getByText(/To use the lesson generator/i);
+  await expect(textElement).toBeVisible();
+};
