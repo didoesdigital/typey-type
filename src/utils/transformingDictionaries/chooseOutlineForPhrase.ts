@@ -41,7 +41,7 @@ const chooseOutlineForPhrase = (
   }
 
   let spacedCapitalisationOutline = "KPA";
-  let spacedCapitalisationTranslation = "{ }{-|}";
+  let spacedCapitalisationTranslation = "{}{-|}";
   let spacedCapitalisationEntry = globalLookupDictionary.get(
     spacedCapitalisationTranslation
   );

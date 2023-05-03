@@ -25,7 +25,7 @@ export type Outline = string;
  * "{*+}"
  * "{^:55}"
  * "{~|()}"
- * "{ }\\{\\}{#Left}{^}"
+ * "{^ ^}\\{\\}{#Left}{^}"
  */
 export type Translation = string;
 

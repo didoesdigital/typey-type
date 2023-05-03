@@ -998,7 +998,7 @@ describe("create stroke hint for phrase", () => {
             {
               "A*E": "{'^}",
               "AE": "{^'}",
-              "KPA": "{ }{-|}",
+              "KPA": "{}{-|}",
               "KPA*": "{^}{-|}",
               "THA": "that",
             },
@@ -1019,7 +1019,7 @@ describe("create stroke hint for phrase", () => {
             {
               "A*E": "{~|'^}",
               "AE": "{^'}",
-              "KPA": "{ }{-|}",
+              "KPA": "{}{-|}",
               "KPA*": "{^}{-|}",
               "THA": "that",
             },
@@ -1296,7 +1296,7 @@ describe("create stroke hint for phrase", () => {
           "AES": "{^'s}",
           "-S": "{^s}",
           "S*": "{&s}",
-          "KPA": "{ }{-|}",
+          "KPA": "{}{-|}",
         },
         {}
       );
@@ -1323,7 +1323,7 @@ describe("create stroke hint for phrase", () => {
           "AES": "{^'s}",
           "-S": "{^s}",
           "S*": "{&s}",
-          "KPA": "{ }{-|}",
+          "KPA": "{}{-|}",
         },
         {}
       );
@@ -1344,7 +1344,7 @@ describe("create stroke hint for phrase", () => {
         {
           "*D": "{^'d}",
           "AE": "{^'}",
-          "KPA": "{ }{-|}",
+          "KPA": "{}{-|}",
           "TK*": "{&d}",
           "TPHOBG": "knock",
         },
@@ -1367,7 +1367,7 @@ describe("create stroke hint for phrase", () => {
         {
           "*D": "{^'d}",
           "AE": "{^'}",
-          "KPA": "{ }{-|}",
+          "KPA": "{}{-|}",
           "TK*": "{&d}",
           "K*": "{&k}",
           "*BG": "{^k}",
@@ -1393,7 +1393,7 @@ describe("create stroke hint for phrase", () => {
           "AE": "{^'}",
           "AES": "{^'s}",
           "HEFPB": "heaven",
-          "KPA": "{ }{-|}",
+          "KPA": "{}{-|}",
           "-S": "{^s}",
           "S*": "{&s}",
         },
@@ -1423,7 +1423,7 @@ describe("create stroke hint for phrase", () => {
             "KEUPBG": "king",
             "KO*EUPBG": "King",
             "KEUPBG/AES": "king's",
-            "KPA": "{ }{-|}",
+            "KPA": "{}{-|}",
             "-S": "{^s}",
             "S*": "{&s}",
           },
@@ -1916,7 +1916,7 @@ describe("create stroke hint for phrase", () => {
               "HR-PS": "{^…}",
               // TODO: add support for matching these
               // "SKWR*RBGS": "{^}…{-|}",
-              // "SKWR-RBGS": "{^…}{ }{-|}",
+              // "SKWR-RBGS": "{^…}{-|}",
               // "SKWR-RBGSZ": "{^}…{-|}",
             },
             {}

@@ -53,7 +53,7 @@ describe("findSingleLetterWordOutline", () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["a", [["AEU", "typey:typey-type.json"]]],
-      ["{ }{-|}", [["KPA", "typey:typey-type.json"]]],
+      ["{}{-|}", [["KPA", "typey:typey-type.json"]]],
       ["{^}{-|}", [["KPA*", "typey:typey-type.json"]]],
     ]);
     expect(
@@ -65,7 +65,7 @@ describe("findSingleLetterWordOutline", () => {
     const affixList = AffixList.getSharedInstance();
     const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["a", [["AEU", "typey:typey-type.json"]]],
-      ["{ }{-|}", [["KPA", "typey:typey-type.json"]]],
+      ["{}{-|}", [["KPA", "typey:typey-type.json"]]],
       ["{^}{-|}", [["KPA*", "typey:typey-type.json"]]],
     ]);
     expect(
@@ -83,7 +83,7 @@ describe("findSingleLetterWordOutline", () => {
           ["AEU", "typey:typey-type.json"],
         ],
       ],
-      ["{ }{-|}", [["KPA", "typey:typey-type.json"]]],
+      ["{}{-|}", [["KPA", "typey:typey-type.json"]]],
       [
         "{^}{-|}",
         [
