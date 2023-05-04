@@ -139,14 +139,14 @@ class StrokesForWords extends Component {
 
             </div>
             <div className="mt18 mw-336 flex-grow">
-              {!!this.state.wordFamilyGroup && (
+              {!!this.state.wordFamilyGroup ? (
                 <div>
                   <p className="mb1">Some related words:</p>
                   <pre id="js-word-family-group" className="fw4">
                     {this.state.wordFamilyGroup}
                   </pre>
                 </div>
-              )}
+              ) : <div id="js-word-family-group" className="avoid-clipboard-error-on-missing-target"></div>}
             </div>
           </div>
         </React.Fragment>
