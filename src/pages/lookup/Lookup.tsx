@@ -70,9 +70,9 @@ const Lookup = ({
           <PseudoContentButton
             className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard"
             style={{ lineHeight: 2 }}
-            dataClipboardTarget="#js-bookmark-url"
+            dataClipboardTarget="#js-word-family-group"
           >
-            Copy to clipboard
+            Copy words to clipboard
           </PseudoContentButton>
         </div>
       </Subheader>
@@ -80,16 +80,6 @@ const Lookup = ({
         className="p3 mx-auto mw-1024 mh-page"
         data-testid="lookup-page-contents"
       >
-        <div className="">
-          <div className="mt0">
-            <h3 className="h4">Share link</h3>
-            <p className="mb0 truncate">
-              <span className="py05 dib" id="js-bookmark-url">
-                https://didoesdigital.com{bookmarkURL}
-              </span>
-            </p>
-          </div>
-        </div>
         <div className="w-100 flex-grow mr3 min-h-384">
           <StrokesForWords
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
@@ -146,6 +136,23 @@ const Lookup = ({
             </OutboundLink>
             .
           </p>
+        </div>
+        <div className="">
+          <div className="mt0">
+            <h3 className="h4">Share link</h3>
+            <p className="mb0 truncate">
+              <span className="py05 dib" id="js-bookmark-url">
+                https://didoesdigital.com{bookmarkURL}
+              </span>
+            </p>
+          </div>
+          <PseudoContentButton
+            className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard"
+            style={{ lineHeight: 2 }}
+            dataClipboardTarget="#js-bookmark-url"
+          >
+            Copy link to clipboard
+          </PseudoContentButton>
         </div>
       </div>
     </main>
