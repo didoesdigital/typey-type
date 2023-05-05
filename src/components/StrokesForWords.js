@@ -13,7 +13,6 @@ import LookupResultsOutlinesAndDicts from './LookupResultsOutlinesAndDicts';
 class StrokesForWords extends Component {
   state = {
     modifiedWordOrPhrase: "",
-    wordFamilyGroup: "",
     phrase: "",
     listOfStrokesAndDicts: []
   }
@@ -43,30 +42,6 @@ class StrokesForWords extends Component {
     this.updateWordsForStrokes(phrase);
   }
 
-  getWordFamilyGroup(phrase, globalLookupDictionary) {
-    const commonFamilyGroupEndings = [
-      "ing",
-      "ed",
-      "ment",
-      "'s",
-      "ly",
-      "ion",
-      "s",
-      "er"
-    ];
-
-    const familyGroup = [];
-    commonFamilyGroupEndings.forEach((ending => {
-      const phrasePlusEnding = phrase + ending;
-      if (globalLookupDictionary.get(phrasePlusEnding)) {
-        familyGroup.push(phrasePlusEnding);
-      }
-    }))
-
-    const result = familyGroup.join("\n");
-    return result;
-  }
-
   updateWordsForStrokes(phrase) {
     if (this.props.onChange) {
       this.props.onChange(phrase);
@@ -86,11 +61,9 @@ class StrokesForWords extends Component {
     this.setState({
       modifiedWordOrPhrase: modifiedWordOrPhrase,
       phrase: phrase,
-      listOfStrokesAndDicts: listOfStrokesAndDicts,
-      wordFamilyGroup: this.getWordFamilyGroup(phrase, this.props.globalLookupDictionary),
+      listOfStrokesAndDicts: listOfStrokesAndDicts
     })
   }
-
 
   render () {
     const stenoLayout = (this.props.userSettings && this.props.userSettings.stenoLayout) ? this.props.userSettings.stenoLayout : 'stenoLayoutAmericanSteno';
@@ -102,9 +75,6 @@ class StrokesForWords extends Component {
     return (
       this.props.globalLookupDictionaryLoaded ?
         <React.Fragment>
-          <div className="flex flex-wrap justify-between">
-            <div className="mw-584 w-100 flex-grow mr3 min-h-384">
-
           <label htmlFor="words-for-strokes" className="input-textarea-label input-textarea-label--large mb1 overflow-hidden">Enter words to look up</label>
           <textarea
             autoCapitalize="off"
@@ -140,9 +110,6 @@ class StrokesForWords extends Component {
           <PloverMisstrokesDetail
             showMisstrokesInLookup={this.props.globalUserSettings?.showMisstrokesInLookup}
           />
-
-            </div>
-          </div>
         </React.Fragment>
       : (
         <>Loading…</>
