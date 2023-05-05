@@ -86,6 +86,8 @@ const Lookup = ({
     setCustomLessonContent(material);
   };
 
+  const enabledCustomLessonLink = trackedPhrase.length > 0;
+
   return (
     <main id="main">
       <Subheader>
@@ -98,10 +100,11 @@ const Lookup = ({
         </div>
         <div className="flex mxn2">
           <Link
-            to="/lessons/custom/setup"
-            onClick={setUpCustomLesson}
-            className="link-button link-button-ghost table-cell mr1"
-            role="button"
+            to={enabledCustomLessonLink ? "/lessons/custom/setup" : "#"}
+            onClick={enabledCustomLessonLink ? setUpCustomLesson : undefined}
+            className={`link-button link-button-ghost table-cell mr1${
+              enabledCustomLessonLink ? "" : " o-30"
+            }`}
           >
             Set up custom lesson
           </Link>
