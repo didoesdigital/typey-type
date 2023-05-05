@@ -79,6 +79,10 @@ class StrokesForWords extends Component {
         .filter(row => row[2] === SOURCE_NAMESPACES.get("user") || !(misstrokesJSON[row[0]] && modifiedWordOrPhrase === misstrokesJSON[row[0]]))
     }
 
+    if (this.props.trackPhrase) {
+      this.props.trackPhrase(phrase);
+    }
+
     this.setState({
       modifiedWordOrPhrase: modifiedWordOrPhrase,
       phrase: phrase,
@@ -137,16 +141,6 @@ class StrokesForWords extends Component {
             showMisstrokesInLookup={this.props.globalUserSettings?.showMisstrokesInLookup}
           />
 
-            </div>
-            <div className="mt18 mw-336 flex-grow">
-              {!!this.state.wordFamilyGroup ? (
-                <div>
-                  <p className="mb1">Some related words:</p>
-                  <pre id="js-word-family-group" className="fw4">
-                    {this.state.wordFamilyGroup}
-                  </pre>
-                </div>
-              ) : <div id="js-word-family-group" className="avoid-clipboard-error-on-missing-target"></div>}
             </div>
           </div>
         </React.Fragment>

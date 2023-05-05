@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from 'react-router-dom';
 import OutboundLink from "../../components/OutboundLink";
 import StrokesForWords from "../../components/StrokesForWords";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
 import Subheader from "../../components/Subheader";
+import getWordFamilyGroup from "./utilities/getWordFamilyGroup";
 
 import type {
   Experiments,
@@ -22,6 +24,7 @@ type Props = {
   globalUserSettings: GlobalUserSettings;
   lookupTerm?: string;
   personalDictionaries: any;
+  setCustomLessonContent: any;
   stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
   updateGlobalLookupDictionary: any;
   updatePersonalDictionaries: any;
@@ -40,21 +43,48 @@ const Lookup = ({
   updateGlobalLookupDictionary,
   updatePersonalDictionaries,
   userSettings,
+  setCustomLessonContent,
   setAnnouncementMessage,
 }: Props) => {
   const [bookmarkURL, setBookmarkURL] = useState(
     process.env.PUBLIC_URL + "/lookup"
   );
   const mainHeading = useRef<HTMLHeadingElement>(null);
+  const [trackedPhrase, setTrackPhrase] = useState("");
+  const [wordFamilyGroup, setWordFamilyGroup] = useState<string[]>([]);
 
   useEffect(() => {
     mainHeading.current?.focus();
   }, []);
 
+  useEffect(() => {
+    if (trackedPhrase.length > 0) {
+      setWordFamilyGroup(getWordFamilyGroup(trackedPhrase, globalLookupDictionary))
+    } else {
+      setWordFamilyGroup([])
+    }
+  }, [trackedPhrase, globalLookupDictionary]);
+
   const strokesForWordsChange = (phrase: string) => {
     const encodedPhrase = encodeURIComponent(phrase);
     setBookmarkURL(process.env.PUBLIC_URL + "/lookup?q=" + encodedPhrase);
   };
+
+  const setUpCustomLesson = () => {
+    const words = wordFamilyGroup.slice();
+    words.unshift(trackedPhrase);
+    const material = words.map(word => {
+      if (globalLookupDictionary.get(word)) {
+        return ({
+          phrase: word,
+          stroke: globalLookupDictionary.get(word)[0][0]
+        })
+      } else {
+        return undefined
+      }
+    }).filter(notUndefined => !!notUndefined);
+    setCustomLessonContent(material);
+  }
 
   return (
     <main id="main">
@@ -74,13 +104,23 @@ const Lookup = ({
           >
             Copy words to clipboard
           </PseudoContentButton>
+          <Link
+            to="/lessons/custom/setup"
+            onClick={setUpCustomLesson}
+            className="link-button link-button-ghost table-cell mr1"
+            role="button"
+          >
+            Set up custom lesson
+          </Link>
         </div>
       </Subheader>
       <div
         className="p3 mx-auto mw-1024 mh-page"
         data-testid="lookup-page-contents"
       >
-        <div className="w-100 flex-grow mr3 min-h-384">
+        <div className="flex flex-wrap justify-between">
+          <div className="mw-584 w-100 flex-grow mr3 min-h-384">
+          <div>
           <StrokesForWords
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
@@ -90,6 +130,7 @@ const Lookup = ({
             onChange={strokesForWordsChange}
             personalDictionaries={personalDictionaries}
             stenoHintsOnTheFly={stenohintsonthefly}
+            trackPhrase={setTrackPhrase}
             updateGlobalLookupDictionary={updateGlobalLookupDictionary}
             updatePersonalDictionaries={updatePersonalDictionaries}
             userSettings={userSettings}
@@ -153,6 +194,20 @@ const Lookup = ({
           >
             Copy link to clipboard
           </PseudoContentButton>
+        </div>
+          </div>
+          <div className="mt18 mw-336 flex-grow">
+            <div>
+              <p className="mb1">Some related words:</p>
+              {wordFamilyGroup.length > 0 ? (
+                <pre id="js-word-family-group" className="fw4">
+                  {wordFamilyGroup.join("\n")}
+                </pre>
+              )
+              : <div id="js-word-family-group" className="avoid-clipboard-error-on-missing-target"></div>
+              }
+            </div>
+          </div>
         </div>
       </div>
     </main>

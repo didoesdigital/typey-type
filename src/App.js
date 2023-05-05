@@ -61,6 +61,7 @@ import sortLesson from './utils/lessons/sortLesson';
 import Zipper from './utils/zipper';
 import generateCustomLesson from './pages/lessons/custom/generator/utilities/generateCustomLesson';
 import customiseLesson from './pages/lessons/utilities/customiseLesson';
+import setCustomLessonContent from './pages/lessons/utilities/setCustomLessonContent';
 
 const AsyncBreak = Loadable({
   loader: () => import("./pages/break/Break"),
@@ -2333,6 +2334,7 @@ class App extends Component {
                           globalUserSettings={this.state.globalUserSettings}
                           lookupTerm={this.state.lookupTerm}
                           personalDictionaries={this.state.personalDictionaries}
+                          setCustomLessonContent={setCustomLessonContent.bind(this)}
                           stenoHintsOnTheFly={stenohintsonthefly}
                           updateGlobalLookupDictionary={this.updateGlobalLookupDictionary.bind(this)}
                           updatePersonalDictionaries={this.updatePersonalDictionaries.bind(this)}
