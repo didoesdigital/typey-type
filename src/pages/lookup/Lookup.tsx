@@ -97,13 +97,6 @@ const Lookup = ({
           </header>
         </div>
         <div className="flex mxn2">
-          <PseudoContentButton
-            className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard"
-            style={{ lineHeight: 2 }}
-            dataClipboardTarget="#js-word-family-group"
-          >
-            Copy words to clipboard
-          </PseudoContentButton>
           <Link
             to="/lessons/custom/setup"
             onClick={setUpCustomLesson}
@@ -156,16 +149,9 @@ const Lookup = ({
           </div>
           <div className="mt18 mw-336 flex-grow">
             <div>
-              <p className="mb1">Some related words:</p>
-              {wordFamilyGroup.length > 0 ? (
-                <pre id="js-word-family-group" className="fw4">
-                  {wordFamilyGroup.join("\n")}
-                </pre>
-              ) : (
-                <div
-                  id="js-word-family-group"
-                  className="avoid-clipboard-error-on-missing-target"
-                ></div>
+              <p className="mb1 de-emphasized">Some related words:</p>
+              {wordFamilyGroup.length > 0 && (
+                <pre className="fw4">{wordFamilyGroup.join("\n")}</pre>
               )}
             </div>
           </div>
