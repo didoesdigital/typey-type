@@ -26,7 +26,6 @@ type Props = {
   updateGlobalLookupDictionary: any;
   updatePersonalDictionaries: any;
   userSettings: UserSettings;
-  setAnnouncementMessage: () => void;
 };
 
 const Lookup = ({
@@ -41,7 +40,6 @@ const Lookup = ({
   updatePersonalDictionaries,
   userSettings,
   setCustomLessonContent,
-  setAnnouncementMessage,
 }: Props) => {
   const [bookmarkURL, setBookmarkURL] = useState(
     process.env.PUBLIC_URL + "/lookup"

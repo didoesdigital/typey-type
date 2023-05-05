@@ -2326,8 +2326,6 @@ class App extends Component {
                     <DocumentTitle title={'Typey Type | Lookup'}>
                       <ErrorBoundary>
                         <AsyncLookup
-                          setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
-                          setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
