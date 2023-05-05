@@ -23,6 +23,12 @@ const getWordFamilyGroup = (
     }
   });
 
+  if (trimmedWord.endsWith("e")) {
+    if (globalLookupDictionary.get(trimmedWord.slice(0, -1) + "ing")) {
+      familyGroup.push(trimmedWord.slice(0, -1) + "ing");
+    }
+  }
+
   return familyGroup;
 };
 
