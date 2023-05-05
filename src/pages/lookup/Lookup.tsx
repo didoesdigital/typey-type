@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import StrokesForWords from "../../components/StrokesForWords";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import Subheader from "../../components/Subheader";
@@ -54,9 +54,11 @@ const Lookup = ({
 
   useEffect(() => {
     if (trackedPhrase.length > 0) {
-      setWordFamilyGroup(getWordFamilyGroup(trackedPhrase, globalLookupDictionary))
+      setWordFamilyGroup(
+        getWordFamilyGroup(trackedPhrase, globalLookupDictionary)
+      );
     } else {
-      setWordFamilyGroup([])
+      setWordFamilyGroup([]);
     }
   }, [trackedPhrase, globalLookupDictionary]);
 
@@ -69,18 +71,20 @@ const Lookup = ({
     const words = wordFamilyGroup.slice();
     words.unshift(trackedPhrase);
 
-    const material = words.map(word => {
-      if (globalLookupDictionary.get(word)) {
-        return ({
-          phrase: word,
-          stroke: globalLookupDictionary.get(word)[0][0]
-        })
-      } else {
-        return undefined
-      }
-    }).filter(notUndefined => !!notUndefined);
+    const material = words
+      .map((word) => {
+        if (globalLookupDictionary.get(word)) {
+          return {
+            phrase: word,
+            stroke: globalLookupDictionary.get(word)[0][0],
+          };
+        } else {
+          return undefined;
+        }
+      })
+      .filter((notUndefined) => !!notUndefined);
     setCustomLessonContent(material);
-  }
+  };
 
   return (
     <main id="main">
@@ -116,39 +120,39 @@ const Lookup = ({
       >
         <div className="flex flex-wrap justify-between">
           <div className="mw-584 w-100 flex-grow mr3 min-h-384">
-          <div>
-          <StrokesForWords
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
-            lookupTerm={lookupTerm}
-            onChange={strokesForWordsChange}
-            personalDictionaries={personalDictionaries}
-            stenoHintsOnTheFly={stenohintsonthefly}
-            trackPhrase={setTrackPhrase}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            userSettings={userSettings}
-          />
-        </div>
-        <div className="">
-          <div className="mt0">
-            <h3 className="h4">Share link</h3>
-            <p className="mb0 truncate">
-              <span className="py05 dib" id="js-bookmark-url">
-                https://didoesdigital.com{bookmarkURL}
-              </span>
-            </p>
-          </div>
-          <PseudoContentButton
-            className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard"
-            style={{ lineHeight: 2 }}
-            dataClipboardTarget="#js-bookmark-url"
-          >
-            Copy link to clipboard
-          </PseudoContentButton>
-        </div>
+            <div>
+              <StrokesForWords
+                fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+                globalLookupDictionary={globalLookupDictionary}
+                globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+                globalUserSettings={globalUserSettings}
+                lookupTerm={lookupTerm}
+                onChange={strokesForWordsChange}
+                personalDictionaries={personalDictionaries}
+                stenoHintsOnTheFly={stenohintsonthefly}
+                trackPhrase={setTrackPhrase}
+                updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+                updatePersonalDictionaries={updatePersonalDictionaries}
+                userSettings={userSettings}
+              />
+            </div>
+            <div className="">
+              <div className="mt0">
+                <h3 className="h4">Share link</h3>
+                <p className="mb0 truncate">
+                  <span className="py05 dib" id="js-bookmark-url">
+                    https://didoesdigital.com{bookmarkURL}
+                  </span>
+                </p>
+              </div>
+              <PseudoContentButton
+                className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard"
+                style={{ lineHeight: 2 }}
+                dataClipboardTarget="#js-bookmark-url"
+              >
+                Copy link to clipboard
+              </PseudoContentButton>
+            </div>
           </div>
           <div className="mt18 mw-336 flex-grow">
             <div>
@@ -157,9 +161,12 @@ const Lookup = ({
                 <pre id="js-word-family-group" className="fw4">
                   {wordFamilyGroup.join("\n")}
                 </pre>
-              )
-              : <div id="js-word-family-group" className="avoid-clipboard-error-on-missing-target"></div>
-              }
+              ) : (
+                <div
+                  id="js-word-family-group"
+                  className="avoid-clipboard-error-on-missing-target"
+                ></div>
+              )}
             </div>
           </div>
         </div>
