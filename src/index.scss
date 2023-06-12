@@ -2288,6 +2288,14 @@ small .svg-icon-wrapper.svg-baseline svg {
   opacity: 1;
   transition: filter .2s linear,
               opacity .2s linear !important;
+  &:hover {
+    color:  var(--blue-700);
+    cursor: pointer;
+  }
+  &:active, &:focus {
+    color:  var(--blue-800);
+    cursor: pointer;
+  }
 }
 
 .scores--hidden {
