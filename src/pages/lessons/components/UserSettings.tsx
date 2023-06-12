@@ -12,6 +12,7 @@ const grabStyle = function () {
 };
 
 type Props = {
+  changeShowScoresWhileTyping: (event: any) => void;
   changeShowStrokesAs: (event: any) => void;
   changeShowStrokesAsList: (event: any) => void;
   changeShowStrokesOnMisstroke: (event: any) => void;
@@ -35,6 +36,7 @@ type Props = {
 };
 
 const UserSettings = ({
+  changeShowScoresWhileTyping,
   changeShowStrokesAs,
   changeShowStrokesAsList,
   changeShowStrokesOnMisstroke,
@@ -816,6 +818,19 @@ const UserSettings = ({
                   onShow={setAnnouncementMessage}
                   tooltipTitle={
                     "Show text descriptions for punctuation symbols"
+                  }
+                />
+              </SettingListItem>
+              <SettingListItem sectionHierachy="minor">
+                <SettingCheckbox
+                  checked={userSettings.showScoresWhileTyping}
+                  disabled={disableUserSettings}
+                  label={"Show scores"}
+                  nameAndId={"showScoresWhileTyping"}
+                  onChange={changeShowScoresWhileTyping}
+                  onShow={setAnnouncementMessage}
+                  tooltipTitle={
+                    "Show scores while typing"
                   }
                 />
               </SettingListItem>

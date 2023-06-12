@@ -21,6 +21,7 @@ export type TransformedData = {
 } | null;
 
 export type FinishedProps = {
+  changeShowScoresWhileTyping: (event: any) => void;
   changeShowStrokesAs: (event: any) => void;
   changeShowStrokesAsList: (event: any) => void;
   changeShowStrokesOnMisstroke: (event: any) => void;

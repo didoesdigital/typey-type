@@ -321,6 +321,7 @@ const MainLessonView = ({
               changeSortOrderUserSetting={changeSortOrderUserSetting}
               changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
               changeStenoLayout={changeStenoLayout}
+              changeShowScoresWhileTyping={changeShowScoresWhileTyping}
               changeShowStrokesAs={changeShowStrokesAs}
               changeShowStrokesAsList={changeShowStrokesAsList}
               changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
