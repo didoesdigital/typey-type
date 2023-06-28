@@ -66,6 +66,18 @@ export default function GamesIndex() {
               }
             />
             <GameBox
+              title="KPOES (compose)"
+              description="Write what's in your head. Compose stories and reflect."
+              linkTo="/games/KPOES"
+              linkText="Play KPOES"
+              robot={
+                <ThinkingRobot
+                  role="img"
+                  aria-labelledby="thinking-robot-title"
+                />
+              }
+            />
+            <GameBox
               title="KHAERT (chatter)"
               description="Have a yarn with the Aussie bot. Practise simple convo."
               linkTo="/games/KHAERT"

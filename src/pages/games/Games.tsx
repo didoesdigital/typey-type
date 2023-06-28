@@ -41,6 +41,12 @@ const AsyncTPEUBGSZ = Loadable({
   delay: 300,
 });
 
+const AsyncKPOES = Loadable({
+  loader: () => import("./KPOES/Index"),
+  loading: PageLoading,
+  delay: 300,
+});
+
 type Props = {
   match: any;
   fetchAndSetupGlobalDict: (
@@ -101,6 +107,13 @@ const Games = ({
         <DocumentTitle title={"Typey Type | TPEUBGSZ game"}>
           <ErrorBoundary>
             <AsyncTPEUBGSZ startingMetWordsToday={startingMetWordsToday} />
+          </ErrorBoundary>
+        </DocumentTitle>
+      </Route>
+      <Route exact={true} path={`${match.url}/KPOES`}>
+        <DocumentTitle title={"Typey Type | KPOES game"}>
+          <ErrorBoundary>
+            <AsyncKPOES />
           </ErrorBoundary>
         </DocumentTitle>
       </Route>
