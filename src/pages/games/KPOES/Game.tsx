@@ -1,9 +1,11 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React from "react";
 import Intro from "../components/Intro";
+import Prompt from "./Prompt";
 import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
 
 const gameName = "KPOES";
-const introText = "Write what's in your head.";
+const introText =
+  "Write what's in your head. This is a creative space for you to compose new text at your leisure. It may test your vocabulary and help you spot gaps in it. You could make a habit of writing a target number of words each day.";
 
 export default function Game() {
   return (
@@ -22,6 +24,7 @@ export default function Game() {
             />
           }
         />
+        <Prompt />
         <p className="text-center mt10 text-small">
           Got a suggestion?{" "}
           <a

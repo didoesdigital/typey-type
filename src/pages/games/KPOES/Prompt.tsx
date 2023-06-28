@@ -1,0 +1,134 @@
+import React, { useState } from "react";
+// @ts-ignore TODO: install time format types
+import { utcFormat } from "d3-time-format";
+import prompts from "./prompts";
+
+type ComposePrompt =
+  | "creative-short-story"
+  | "steno-motivations"
+  | "open-ended";
+
+type ComposePrompts = {
+  [key: string]: ComposePrompt;
+};
+
+const defaultComposePrompt = "creative-short-story";
+
+const composePrompts: ComposePrompts = {
+  "creative-short-story": "creative-short-story",
+  "steno-motivations": "steno-motivations",
+  "open-ended": "open-ended",
+};
+
+const dayOfYear = +utcFormat("%j")(Date.now());
+const promptIndex = Math.min(Math.max(dayOfYear - 1, 0), 366);
+
+const getPrompt = (composePrompt: ComposePrompt) => {
+  switch (composePrompt) {
+    case "creative-short-story":
+      return (
+        prompts[composePrompt][promptIndex] ?? "Write a creative short story"
+      );
+
+    case "steno-motivations":
+      return (
+        prompts[composePrompt][promptIndex] ??
+        "Write about your steno motivations"
+      );
+
+    case "open-ended":
+      return prompts[composePrompt][promptIndex] ?? "Write anything you like";
+
+    default:
+      return "Write anything";
+  }
+};
+
+const Prompt = () => {
+  const [composePrompt, setComposePrompt] =
+    useState<ComposePrompt>(defaultComposePrompt);
+  const [wordCount, setWordCount] = useState(0);
+
+  const changePromptHandler: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
+    const newPrompt: ComposePrompt =
+      composePrompts[event.target.value] ?? defaultComposePrompt;
+    setComposePrompt(newPrompt);
+  };
+
+  const changeYourWordsHandler: React.ChangeEventHandler<HTMLTextAreaElement> =
+    (event) => {
+      setWordCount(event.target.value.trim().split(" ").filter(Boolean).length);
+    };
+
+  return (
+    <>
+      <div className="flex justify-center">
+        <fieldset>
+          <legend className="mx-auto">
+            <p className="fw-bold text-center">Choose a prompt</p>
+          </legend>
+          <div className="flex flex-wrap">
+            <div className="mr3">
+              <label htmlFor="creative-short-story">
+                <input
+                  onChange={changePromptHandler}
+                  type="radio"
+                  name="compose-prompt"
+                  id="creative-short-story"
+                  value="creative-short-story"
+                  defaultChecked
+                />{" "}
+                Creative short story
+              </label>
+            </div>
+            <div className="mr3">
+              <label htmlFor="steno-motivations">
+                <input
+                  onChange={changePromptHandler}
+                  type="radio"
+                  name="compose-prompt"
+                  id="steno-motivations"
+                  value="steno-motivations"
+                />{" "}
+                Steno motivation
+              </label>
+            </div>
+            <div className="mr3">
+              <label htmlFor="open-ended">
+                <input
+                  onChange={changePromptHandler}
+                  type="radio"
+                  name="compose-prompt"
+                  id="open-ended"
+                  value="open-ended"
+                />{" "}
+                Open-ended
+              </label>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <p className="mt3 b--solid bw-2 b--brand-primary-tint bg-coolgrey-300 dark:bg-coolgrey-900 text-center pr3">
+        {getPrompt(composePrompt)}
+      </p>
+      <label htmlFor="write-your-words">Write your words</label>
+      <textarea
+        id="write-your-words"
+        className="input-textarea bg-info dark:text-coolgrey-900 bw-1 b--solid br-4 db w-100 mw100"
+        autoCapitalize="off"
+        autoComplete="off"
+        autoCorrect="off"
+        spellCheck={false}
+        onChange={changeYourWordsHandler}
+        rows={6}
+      />
+      <p className="text-right">{`${wordCount} ${
+        wordCount === 1 ? "word" : "words"
+      }`}</p>
+    </>
+  );
+};
+
+export default Prompt;
