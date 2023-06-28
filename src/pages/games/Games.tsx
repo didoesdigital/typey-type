@@ -6,9 +6,11 @@ import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 import "./Games.scss";
 import type {
+  GlobalUserSettings,
   LookupDictWithNamespacedDicts,
   MetWords,
   PersonalDictionaryNameAndContents,
+  UserSettings,
 } from "../../types";
 
 const AsyncGamesIndex = Loadable({
@@ -57,6 +59,8 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   personalDictionaries: PersonalDictionaryNameAndContents[];
   startingMetWordsToday: MetWords;
+  globalUserSettings: GlobalUserSettings;
+  userSettings: UserSettings;
   updateMetWords: any;
 };
 
@@ -66,6 +70,8 @@ const Games = ({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   personalDictionaries,
+  globalUserSettings,
+  userSettings,
   startingMetWordsToday,
   updateMetWords,
 }: Props) => {
@@ -113,7 +119,16 @@ const Games = ({
       <Route exact={true} path={`${match.url}/KPOES`}>
         <DocumentTitle title={"Typey Type | KPOES game"}>
           <ErrorBoundary>
-            <AsyncKPOES />
+            <AsyncKPOES
+              fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+              globalLookupDictionary={globalLookupDictionary}
+              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+              personalDictionaries={personalDictionaries}
+              globalUserSettings={globalUserSettings}
+              userSettings={userSettings}
+              // startingMetWordsToday={startingMetWordsToday}
+              // updateMetWords={updateMetWords}
+            />
           </ErrorBoundary>
         </DocumentTitle>
       </Route>
