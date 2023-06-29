@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import PseudoContentButton from "../../../components/PseudoContentButton";
+import YourWordsHighlighted from "./YourWordsHighlighted";
 import WordCount from "./WordCount";
 
+import type { MetWords } from "../../../types";
+
 type Props = {
+  metWords: MetWords;
   updateMultipleMetWords: (newMetWords: string[]) => void;
 };
 
-const YourWords = ({ updateMultipleMetWords }: Props) => {
+const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
   const [wordCount, setWordCount] = useState(0);
   const [yourWords, setYourWords] = useState("");
   const [done, setDone] = useState(false);
@@ -40,7 +44,7 @@ const YourWords = ({ updateMultipleMetWords }: Props) => {
             id="your-words"
             className="db lh1-5 py05 px1 bg-info dark:text-coolgrey-900 bw-1 b--solid b--brand-primary-tint br-4 w-100 mw100"
           >
-            {yourWords}
+            <YourWordsHighlighted yourWords={yourWords} metWords={metWords} />
           </p>
           <WordCount wordCount={wordCount} />
           <PseudoContentButton

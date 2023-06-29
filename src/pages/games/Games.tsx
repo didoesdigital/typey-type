@@ -57,6 +57,7 @@ type Props = {
   ) => Promise<any>;
   globalLookupDictionary: LookupDictWithNamespacedDicts;
   globalLookupDictionaryLoaded: boolean;
+  metWords: MetWords;
   personalDictionaries: PersonalDictionaryNameAndContents[];
   startingMetWordsToday: MetWords;
   globalUserSettings: GlobalUserSettings;
@@ -70,6 +71,7 @@ const Games = ({
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
+  metWords,
   personalDictionaries,
   globalUserSettings,
   userSettings,
@@ -125,6 +127,7 @@ const Games = ({
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+              metWords={metWords}
               personalDictionaries={personalDictionaries}
               globalUserSettings={globalUserSettings}
               userSettings={userSettings}

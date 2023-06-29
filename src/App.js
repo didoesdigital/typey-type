@@ -2215,6 +2215,7 @@ class App extends Component {
                           fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
+                          metWords={this.state.metWords}
                           startingMetWordsToday={this.state.startingMetWordsToday}
                           personalDictionaries={this.state.personalDictionaries}
                           updateMetWords={this.updateMetWords.bind(this)}

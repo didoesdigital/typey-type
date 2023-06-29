@@ -7,7 +7,7 @@ import StrokesForWords from "../../../components/StrokesForWords";
 
 import type {
   LookupDictWithNamespacedDicts,
-  // MetWords,
+  MetWords,
   PersonalDictionaryNameAndContents,
 } from "../../../types";
 
@@ -18,6 +18,7 @@ type Props = {
   ) => Promise<any>;
   globalLookupDictionary: LookupDictWithNamespacedDicts;
   globalLookupDictionaryLoaded: boolean;
+  metWords: MetWords;
   personalDictionaries: PersonalDictionaryNameAndContents[];
   // startingMetWordsToday: MetWords;
   // updateMetWords: any;
@@ -34,6 +35,7 @@ export default function Game({
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
+  metWords,
   personalDictionaries,
   // startingMetWordsToday,
   // updateMetWords,
@@ -60,7 +62,10 @@ export default function Game({
               }
             />
             <Prompt />
-            <WriteYourWords updateMultipleMetWords={updateMultipleMetWords} />
+            <WriteYourWords
+              metWords={metWords}
+              updateMultipleMetWords={updateMultipleMetWords}
+            />
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import Subheader from "../../../components/Subheader";
 
 import type {
   LookupDictWithNamespacedDicts,
-  // MetWords,
+  MetWords,
   // PersonalDictionaryNameAndContents,
 } from "../../../types";
 
@@ -15,6 +15,7 @@ type Props = {
   ) => Promise<any>;
   globalLookupDictionary: LookupDictWithNamespacedDicts;
   globalLookupDictionaryLoaded: boolean;
+  metWords: MetWords;
   personalDictionaries: any; // PersonalDictionaryNameAndContents[];
   // startingMetWordsToday: MetWords;
   // updateMetWords: any;
@@ -27,6 +28,7 @@ export default function Index({
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
+  metWords,
   personalDictionaries,
   globalUserSettings,
   userSettings,
@@ -67,6 +69,7 @@ Props) {
       </Subheader>
       <Game
         fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+        metWords={metWords}
         personalDictionaries={personalDictionaries}
         globalLookupDictionary={globalLookupDictionary}
         globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
