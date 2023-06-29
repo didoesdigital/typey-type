@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// @ts-ignore TODO: install time format types
 import { utcFormat } from "d3-time-format";
 import prompts from "./prompts";
 
@@ -20,7 +19,7 @@ const composePrompts: ComposePrompts = {
   "open-ended": "open-ended",
 };
 
-const dayOfYear = +utcFormat("%j")(Date.now());
+const dayOfYear = +utcFormat("%j")(new Date());
 const promptIndex = Math.min(Math.max(dayOfYear - 1, 0), 366);
 
 const getPrompt = (composePrompt: ComposePrompt) => {
