@@ -62,6 +62,7 @@ import Zipper from './utils/zipper';
 import generateCustomLesson from './pages/lessons/custom/generator/utilities/generateCustomLesson';
 import customiseLesson from './pages/lessons/utilities/customiseLesson';
 import setCustomLessonContent from './pages/lessons/utilities/setCustomLessonContent';
+import updateMultipleMetWords from './pages/games/KPOES/updateMultipleMetWords';
 
 const AsyncBreak = Loadable({
   loader: () => import("./pages/break/Break"),
@@ -2217,6 +2218,7 @@ class App extends Component {
                           startingMetWordsToday={this.state.startingMetWordsToday}
                           personalDictionaries={this.state.personalDictionaries}
                           updateMetWords={this.updateMetWords.bind(this)}
+                          updateMultipleMetWords={updateMultipleMetWords.bind(this)}
                           {...props}
                         />
                       </ErrorBoundary>

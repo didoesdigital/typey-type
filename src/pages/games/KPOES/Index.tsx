@@ -20,6 +20,7 @@ type Props = {
   // updateMetWords: any;
   globalUserSettings: any;
   userSettings: any;
+  updateMultipleMetWords: (newMetWords: string[]) => void;
 };
 
 export default function Index({
@@ -29,6 +30,7 @@ export default function Index({
   personalDictionaries,
   globalUserSettings,
   userSettings,
+  updateMultipleMetWords,
 }: // startingMetWordsToday,
 // updateMetWords,
 Props) {
@@ -70,6 +72,7 @@ Props) {
         globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
         globalUserSettings={globalUserSettings}
         userSettings={userSettings}
+        updateMultipleMetWords={updateMultipleMetWords}
         // startingMetWordsToday={startingMetWordsToday}
         // updateMetWords={updateMetWords}
       />

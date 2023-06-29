@@ -62,6 +62,7 @@ type Props = {
   globalUserSettings: GlobalUserSettings;
   userSettings: UserSettings;
   updateMetWords: any;
+  updateMultipleMetWords: (newMetWords: string[]) => void;
 };
 
 const Games = ({
@@ -74,6 +75,7 @@ const Games = ({
   userSettings,
   startingMetWordsToday,
   updateMetWords,
+  updateMultipleMetWords,
 }: Props) => {
   return (
     <Switch>
@@ -126,6 +128,7 @@ const Games = ({
               personalDictionaries={personalDictionaries}
               globalUserSettings={globalUserSettings}
               userSettings={userSettings}
+              updateMultipleMetWords={updateMultipleMetWords}
               // startingMetWordsToday={startingMetWordsToday}
               // updateMetWords={updateMetWords}
             />

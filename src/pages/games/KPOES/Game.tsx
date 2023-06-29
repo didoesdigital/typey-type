@@ -23,6 +23,7 @@ type Props = {
   // updateMetWords: any;
   globalUserSettings: any;
   userSettings: any;
+  updateMultipleMetWords: (newMetWords: string[]) => void;
 };
 
 const gameName = "KPOES";
@@ -38,6 +39,7 @@ export default function Game({
   // updateMetWords,
   globalUserSettings,
   userSettings,
+  updateMultipleMetWords,
 }: Props) {
   return (
     <div>
@@ -58,17 +60,11 @@ export default function Game({
               }
             />
             <Prompt />
-            <WriteYourWords />
+            <WriteYourWords updateMultipleMetWords={updateMultipleMetWords} />
           </div>
         </div>
       </div>
       <div className="mx-auto min-width-320 w-100 landing-page-section bg-slat dark:bg-coolgrey-1100 ">
-        <div>
-          <p>
-            TODO: Done button, and then when done, show copy to clipboard button
-            (and maybe restart button?)
-          </p>
-        </div>
         <div className="pt6 mw-584 mx-auto text-center">
           <StrokesForWords
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}

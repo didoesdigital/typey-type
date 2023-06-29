@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import PseudoContentButton from "../../../components/PseudoContentButton";
+import WordCount from "./WordCount";
 
 type Props = {
-  wordCount: number;
+  updateMultipleMetWords: (newMetWords: string[]) => void;
 };
 
-const WordCount = ({ wordCount }: Props) => {
-  return <p>{`${wordCount} ${wordCount === 1 ? "word" : "words"}`}</p>;
-};
-
-const YourWords = () => {
+const YourWords = ({ updateMultipleMetWords }: Props) => {
   const [wordCount, setWordCount] = useState(0);
   const [yourWords, setYourWords] = useState("");
   const [done, setDone] = useState(false);
@@ -22,6 +19,9 @@ const YourWords = () => {
 
   const doneHandler: React.MouseEventHandler = () => {
     setDone(true);
+
+    updateMultipleMetWords(yourWords.split(/\s/));
+
     const copyButton = document.querySelector(
       ".js-clipboard-button"
     ) as HTMLButtonElement;
