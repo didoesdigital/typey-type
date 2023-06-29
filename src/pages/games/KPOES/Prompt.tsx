@@ -47,7 +47,6 @@ const getPrompt = (composePrompt: ComposePrompt) => {
 const Prompt = () => {
   const [composePrompt, setComposePrompt] =
     useState<ComposePrompt>(defaultComposePrompt);
-  const [wordCount, setWordCount] = useState(0);
 
   const changePromptHandler: React.ChangeEventHandler<HTMLInputElement> = (
     event
@@ -56,11 +55,6 @@ const Prompt = () => {
       composePrompts[event.target.value] ?? defaultComposePrompt;
     setComposePrompt(newPrompt);
   };
-
-  const changeYourWordsHandler: React.ChangeEventHandler<HTMLTextAreaElement> =
-    (event) => {
-      setWordCount(event.target.value.trim().split(" ").filter(Boolean).length);
-    };
 
   return (
     <>
@@ -113,20 +107,6 @@ const Prompt = () => {
       <p className="mt3 b--solid bw-2 b--brand-primary-tint bg-coolgrey-300 dark:bg-coolgrey-900 text-center pr3">
         {getPrompt(composePrompt)}
       </p>
-      <label htmlFor="write-your-words">Write your words</label>
-      <textarea
-        id="write-your-words"
-        className="input-textarea bg-info dark:text-coolgrey-900 bw-1 b--solid br-4 db w-100 mw100"
-        autoCapitalize="off"
-        autoComplete="off"
-        autoCorrect="off"
-        spellCheck={false}
-        onChange={changeYourWordsHandler}
-        rows={6}
-      />
-      <p className="text-right">{`${wordCount} ${
-        wordCount === 1 ? "word" : "words"
-      }`}</p>
     </>
   );
 };
