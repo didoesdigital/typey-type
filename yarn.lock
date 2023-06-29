@@ -5322,6 +5322,11 @@
   dependencies:
     "@types/d3-path" "*"
 
+"@types/d3-time-format@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/@types/d3-time-format/-/d3-time-format-4.0.0.tgz#ee7b6e798f8deb2d9640675f8811d0253aaa1946"
+  integrity sha512-yjfBUe6DJBsDin2BMIulhSHmr5qNR5Pxs17+oW4DoVPyVIXZ+m6bs7j1UVKP08Emv6jRmYrYqxYzO63mQxy1rw==
+
 "@types/d3-time@*":
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/@types/d3-time/-/d3-time-3.0.0.tgz#e1ac0f3e9e195135361fa1a1d62f795d87e6e819"
