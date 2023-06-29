@@ -1,6 +1,7 @@
 import React from "react";
 import Intro from "../components/Intro";
 import Prompt from "./Prompt";
+import PseudoContentButton from "../../../components/PseudoContentButton";
 import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
 import StrokesForWords from "../../../components/StrokesForWords";
 
@@ -57,10 +58,17 @@ export default function Game({
               }
             />
             <Prompt />
+            <PseudoContentButton
+              className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard"
+              style={{ lineHeight: 2 }}
+              dataClipboardTarget="#write-your-words"
+            >
+              Copy your words to clipboard
+            </PseudoContentButton>
           </div>
         </div>
       </div>
-      <div className="mx-auto mw-1024 min-width-320 w-100 landing-page-section bg-slat dark:bg-coolgrey-1100 ">
+      <div className="mx-auto min-width-320 w-100 landing-page-section bg-slat dark:bg-coolgrey-1100 ">
         <div>
           <p>
             TODO: Done button, and then when done, show copy to clipboard button
