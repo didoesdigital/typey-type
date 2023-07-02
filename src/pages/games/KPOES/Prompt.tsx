@@ -60,7 +60,7 @@ const Prompt = () => {
       <div className="flex justify-center">
         <fieldset>
           <legend className="mx-auto">
-            <p className="fw-bold text-center">Choose a prompt</p>
+            <p className="fw-bold text-center">Today's prompt</p>
           </legend>
           <div className="flex flex-wrap">
             <div className="mr3">
