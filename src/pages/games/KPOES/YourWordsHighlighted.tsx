@@ -32,8 +32,9 @@ const YourWordsHighlighted = ({ metWords, yourWords }: Props) => {
       ).length;
 
       if (
-        metWords[wordPunctuationOrWhitespace] &&
-        typedCount === metWords[wordPunctuationOrWhitespace]
+        !metWords[wordPunctuationOrWhitespace] ||
+        (metWords[wordPunctuationOrWhitespace] &&
+          typedCount === metWords[wordPunctuationOrWhitespace])
       )
         return (
           <span key={`${index}`} className="highlight-new-word">
