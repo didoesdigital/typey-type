@@ -17,7 +17,9 @@ const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
 
   const changeYourWordsHandler: React.ChangeEventHandler<HTMLTextAreaElement> =
     (event) => {
-      setWordCount(event.target.value.trim().split(" ").filter(Boolean).length);
+      setWordCount(
+        event.target.value.trim().split(/\s/).filter(Boolean).length
+      );
       setYourWords(event.target.value.trim());
     };
 
