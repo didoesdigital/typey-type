@@ -1772,6 +1772,13 @@ $textarea-padding-x: 8px;
   }
 }
 
+.highlight-new-word {
+  color: var(--green-700)
+}
+.highlight-memorised-word {
+  color: var(--peach-700)
+}
+
 .tag-missing-full-stop:after {
   content: ".";
 }

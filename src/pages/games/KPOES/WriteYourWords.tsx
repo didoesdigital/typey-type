@@ -40,12 +40,12 @@ const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
       {done ? (
         <>
           <p className="mb0">You wrote:</p>
-          <p
+          <div
             id="your-words"
             className="db lh1-5 py05 px1 bg-info dark:text-coolgrey-900 bw-1 b--solid b--brand-primary-tint br-4 w-100 mw100"
           >
             <YourWordsHighlighted yourWords={yourWords} metWords={metWords} />
-          </p>
+          </div>
           <WordCount wordCount={wordCount} />
           <PseudoContentButton
             className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard"
