@@ -736,6 +736,7 @@ function writePersonalPreferences(itemToStore, JSONToStore) {
   }
   catch(error) {
     try {
+      window.localStorage.removeItem('typey-KPOES');
       window.localStorage.removeItem('personalDictionaries');
       // TODO: instead of logging here, we could handle the returned error result everywhere that this is called
       console.log('Unable to write to local storage. It may be full. Any personal dictionaries imported have been removed.', error);

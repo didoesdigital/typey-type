@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PseudoContentButton from "../../../components/PseudoContentButton";
 import YourWordsHighlighted from "./YourWordsHighlighted";
 import Legend from "./Legend";
@@ -11,17 +11,40 @@ type Props = {
   updateMultipleMetWords: (newMetWords: string[]) => void;
 };
 
+const storageKey = "typey-KPOES";
+
 const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
   const [wordCount, setWordCount] = useState(0);
   const [yourWords, setYourWords] = useState("");
   const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    try {
+      if (window.localStorage) {
+        let yourKPOESwords = window.localStorage.getItem(storageKey);
+        if (yourKPOESwords) {
+          setYourWords(yourKPOESwords);
+        }
+      }
+    } catch (error) {
+      console.error("Unable to read local storage. ", error);
+    }
+  }, []);
 
   const changeYourWordsHandler: React.ChangeEventHandler<HTMLTextAreaElement> =
     (event) => {
       setWordCount(
         event.target.value.trim().split(/\s/).filter(Boolean).length
       );
-      setYourWords(event.target.value.slice(0, 10000));
+
+      const slicedYourWords = event.target.value.slice(0, 10000);
+      setYourWords(slicedYourWords);
+
+      try {
+        window.localStorage.setItem(storageKey, slicedYourWords);
+      } catch (error) {
+        console.error("Unable to write to local storage. ", error);
+      }
     };
 
   const doneHandler: React.MouseEventHandler = () => {
