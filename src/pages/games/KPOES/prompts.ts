@@ -751,7 +751,12 @@ const prompts = {
     "Options",
     "Approaches",
     "Action",
-    "Feelings", // End of original entries
+    "Feelings",
+    "Life story",
+    "Change",
+    "Reflection",
+    "Lessons",
+    "Wishes", // End of original entries
     "Gratitude",
     "Accomplishments",
     "What have you learned this week?",
@@ -1097,11 +1102,6 @@ const prompts = {
     "What will do you today?",
     "What will do you this week?",
     "What have you learned?",
-    "What have you achieved?",
-    "Thoughts",
-    "Ideas",
-    "Options",
-    "Approaches",
   ],
   "open-ended": [],
 };
