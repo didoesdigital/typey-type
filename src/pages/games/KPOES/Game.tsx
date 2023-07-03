@@ -84,7 +84,7 @@ export default function Game({
         <p className="text-center mt10 text-small">
           Got a suggestion?{" "}
           <a
-            href="https://forms.gle/P1tMjotG2w17CyyNA"
+            href="https://forms.gle/kkSZZJFrY4USohgq6"
             className="mt0"
             target="_blank"
             rel="noopener noreferrer"
