@@ -11,7 +11,9 @@ type Props = {
   updateMultipleMetWords: (newMetWords: string[]) => void;
 };
 
-const storageKey = "typey-KPOES";
+const wordsStorageKey = "typey-KPOES-words";
+const timeStorageKey = "typey-KPOES-time";
+const fourHours = 1000 * 60 * 60 * 4;
 
 const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
   const [wordCount, setWordCount] = useState(0);
@@ -21,8 +23,13 @@ const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
   useEffect(() => {
     try {
       if (window.localStorage) {
-        let yourKPOESwords = window.localStorage.getItem(storageKey);
-        if (yourKPOESwords) {
+        let yourKPOESwords = window.localStorage.getItem(wordsStorageKey);
+        let yourKPOEStime = window.localStorage.getItem(timeStorageKey);
+        if (
+          yourKPOESwords &&
+          yourKPOEStime &&
+          Date.now() - (+yourKPOEStime || 0) < fourHours
+        ) {
           setYourWords(yourKPOESwords);
         }
       }
@@ -41,7 +48,8 @@ const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
       setYourWords(slicedYourWords);
 
       try {
-        window.localStorage.setItem(storageKey, slicedYourWords);
+        window.localStorage.setItem(wordsStorageKey, slicedYourWords);
+        window.localStorage.setItem(timeStorageKey, `${Date.now()}`);
       } catch (error) {
         console.error("Unable to write to local storage. ", error);
       }
