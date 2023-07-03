@@ -4,8 +4,8 @@ type Props = {
   wordCount: number;
 };
 
-const WordCount = ({ wordCount }: Props) => {
-  return <p>{`${wordCount} ${wordCount === 1 ? "word" : "words"}`}</p>;
-};
+const WordCount = ({ wordCount }: Props) => (
+  <>{`${wordCount} ${wordCount === 1 ? "word" : "words"}`}</>
+);
 
 export default WordCount;

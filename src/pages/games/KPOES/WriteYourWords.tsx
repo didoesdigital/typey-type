@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PseudoContentButton from "../../../components/PseudoContentButton";
 import YourWordsHighlighted from "./YourWordsHighlighted";
+import Legend from "./Legend";
 import WordCount from "./WordCount";
 
 import type { MetWords } from "../../../types";
@@ -41,21 +42,23 @@ const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
     <div>
       {done ? (
         <>
-          <p className="mb0">You wrote:</p>
+          <p className="mb0">
+            You wrote <WordCount wordCount={wordCount} />:
+          </p>
           <div
             id="your-words"
             className="db lh1-5 py05 px1 bg-info dark:text-coolgrey-900 bw-1 b--solid b--brand-primary-tint br-4 w-100 mw100"
           >
             <YourWordsHighlighted yourWords={yourWords} metWords={metWords} />
           </div>
-          <WordCount wordCount={wordCount} />
           <PseudoContentButton
-            className="js-clipboard-button button button--secondary table-cell mr2 copy-to-clipboard"
+            className="js-clipboard-button button button--secondary table-cell mt3 mr2 copy-to-clipboard"
             style={{ lineHeight: 2 }}
             dataClipboardTarget="#your-words"
           >
             Copy your words to clipboard
           </PseudoContentButton>
+          <Legend />
         </>
       ) : (
         <>
@@ -70,7 +73,9 @@ const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
             onChange={changeYourWordsHandler}
             rows={6}
           />
-          <WordCount wordCount={wordCount} />
+          <p>
+            <WordCount wordCount={wordCount} />
+          </p>
           <button className="button mr2" onClick={doneHandler}>
             Done
           </button>
