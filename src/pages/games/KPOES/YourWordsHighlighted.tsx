@@ -1,16 +1,18 @@
 import React from "react";
 
-import type { MetWords } from "../../../types";
+import type { MetWords, UserSettings } from "../../../types";
 
 type Props = {
   metWords: MetWords;
   yourWords: string;
+  userSettings: UserSettings;
 };
 
 const whitespaceRegexWithCaptures = /(\s)/;
 
-const YourWordsHighlighted = ({ metWords, yourWords }: Props) => {
-  const result = yourWords.trim()
+const YourWordsHighlighted = ({ metWords, userSettings, yourWords }: Props) => {
+  const result = yourWords
+    .trim()
     .split(whitespaceRegexWithCaptures)
     .filter(Boolean)
     .map((wordPunctuationOrWhitespace, index, yourSplitWords) => {
@@ -31,10 +33,16 @@ const YourWordsHighlighted = ({ metWords, yourWords }: Props) => {
         (typed) => typed === wordPunctuationOrWhitespace
       ).length;
 
+      const spacedWord =
+        userSettings.spacePlacement === "spaceBeforeOutput"
+          ? ` ${wordPunctuationOrWhitespace}`
+          : userSettings.spacePlacement === "spaceAfterOutput"
+          ? `${wordPunctuationOrWhitespace} `
+          : wordPunctuationOrWhitespace;
+
       if (
-        !metWords[wordPunctuationOrWhitespace] ||
-        (metWords[wordPunctuationOrWhitespace] &&
-          typedCount === metWords[wordPunctuationOrWhitespace])
+        !metWords[spacedWord] ||
+        (metWords[spacedWord] && typedCount === metWords[spacedWord])
       )
         return (
           <span key={`${index}`} className="highlight-new-word">
@@ -43,10 +51,9 @@ const YourWordsHighlighted = ({ metWords, yourWords }: Props) => {
         );
 
       if (
-        metWords[wordPunctuationOrWhitespace] &&
-        (metWords[wordPunctuationOrWhitespace] === 30 ||
-          (metWords[wordPunctuationOrWhitespace] > 30 &&
-            metWords[wordPunctuationOrWhitespace] - typedCount < 30))
+        metWords[spacedWord] &&
+        (metWords[spacedWord] === 30 ||
+          (metWords[spacedWord] > 30 && metWords[spacedWord] - typedCount < 30))
       )
         return (
           <span key={`${index}`} className="highlight-memorised-word">

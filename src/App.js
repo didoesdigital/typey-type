@@ -2220,6 +2220,8 @@ class App extends Component {
                           personalDictionaries={this.state.personalDictionaries}
                           updateMetWords={this.updateMetWords.bind(this)}
                           updateMultipleMetWords={updateMultipleMetWords.bind(this)}
+                          globalUserSettings={this.state.globalUserSettings}
+                          userSettings={this.state.userSettings}
                           {...props}
                         />
                       </ErrorBoundary>

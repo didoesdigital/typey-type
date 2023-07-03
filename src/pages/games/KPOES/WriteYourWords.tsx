@@ -4,18 +4,23 @@ import YourWordsHighlighted from "./YourWordsHighlighted";
 import Legend from "./Legend";
 import WordCount from "./WordCount";
 
-import type { MetWords } from "../../../types";
+import type { MetWords, UserSettings } from "../../../types";
 
 type Props = {
   metWords: MetWords;
   updateMultipleMetWords: (newMetWords: string[]) => void;
+  userSettings: UserSettings;
 };
 
 const wordsStorageKey = "typey-KPOES-words";
 const timeStorageKey = "typey-KPOES-time";
 const fourHours = 1000 * 60 * 60 * 4;
 
-const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
+const YourWords = ({
+  metWords,
+  updateMultipleMetWords,
+  userSettings,
+}: Props) => {
   const [wordCount, setWordCount] = useState(0);
   const [yourWords, setYourWords] = useState("");
   const [done, setDone] = useState(false);
@@ -80,7 +85,11 @@ const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
             id="your-words"
             className="db lh1-5 py05 px1 bg-info dark:text-coolgrey-900 bw-1 b--solid b--brand-primary-tint br-4 w-100 mw100"
           >
-            <YourWordsHighlighted yourWords={yourWords} metWords={metWords} />
+            <YourWordsHighlighted
+              yourWords={yourWords}
+              metWords={metWords}
+              userSettings={userSettings}
+            />
           </div>
           <PseudoContentButton
             className="js-clipboard-button button button--secondary table-cell mt3 mr2 copy-to-clipboard"

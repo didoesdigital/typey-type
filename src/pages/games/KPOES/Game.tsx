@@ -62,6 +62,7 @@ export default function Game({
             <WriteYourWords
               metWords={metWords}
               updateMultipleMetWords={updateMultipleMetWords}
+              userSettings={userSettings}
             />
           </div>
         </div>
