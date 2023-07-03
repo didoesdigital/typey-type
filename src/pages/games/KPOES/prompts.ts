@@ -735,7 +735,7 @@ const prompts = {
     "What is an even smaller step you could take to improve your steno skill?",
     "What is the next smallest milestone on your steno journey?",
   ],
-  "open-ended": [
+  "journalling": [
     "Gratitude",
     "Accomplishments",
     "What have you learned this week?",
@@ -1103,6 +1103,7 @@ const prompts = {
     "Options",
     "Approaches",
   ],
+  "open-ended": [],
 };
 
 export default prompts;

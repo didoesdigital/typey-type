@@ -5,6 +5,7 @@ import prompts from "./prompts";
 type ComposePrompt =
   | "creative-short-story"
   | "steno-motivations"
+  | "journalling"
   | "open-ended";
 
 type ComposePrompts = {
@@ -16,6 +17,7 @@ const defaultComposePrompt = "creative-short-story";
 const composePrompts: ComposePrompts = {
   "creative-short-story": "creative-short-story",
   "steno-motivations": "steno-motivations",
+  "journalling": "journalling",
   "open-ended": "open-ended",
 };
 
@@ -34,6 +36,9 @@ const getPrompt = (composePrompt: ComposePrompt) => {
         prompts[composePrompt][promptIndex] ??
         "Write about your steno motivations"
       );
+
+    case "journalling":
+      return prompts[composePrompt][promptIndex] ?? "Write about your thoughts and feelings";
 
     case "open-ended":
       return prompts[composePrompt][promptIndex] ?? "Write anything you like";
@@ -60,7 +65,7 @@ const Prompt = () => {
       <div className="flex">
         <fieldset>
           <div className="flex flex-wrap items-center">
-            <legend className="mx-auto mr3">
+            <legend className="mr3">
               <p className="fw-bold text-center mb0">Today's prompt:</p>
             </legend>
             <div className="flex flex-wrap">
@@ -90,6 +95,18 @@ const Prompt = () => {
                 </label>
               </div>
               <div className="mr3">
+                <label htmlFor="journalling">
+                  <input
+                    onChange={changePromptHandler}
+                    type="radio"
+                    name="compose-prompt"
+                    id="journalling"
+                    value="journalling"
+                  />{" "}
+                  Journalling
+                </label>
+              </div>
+              <div className="mr3">
                 <label htmlFor="open-ended">
                   <input
                     onChange={changePromptHandler}
@@ -106,7 +123,7 @@ const Prompt = () => {
         </fieldset>
       </div>
       <p className="mt3 b--solid bw-2 b--brand-primary-tint bg-coolgrey-300 dark:bg-coolgrey-900 text-center pr3">
-        {getPrompt(composePrompt)}
+        “{getPrompt(composePrompt)}”
       </p>
     </>
   );
