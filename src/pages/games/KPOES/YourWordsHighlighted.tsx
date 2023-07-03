@@ -10,7 +10,7 @@ type Props = {
 const whitespaceRegexWithCaptures = /(\s)/;
 
 const YourWordsHighlighted = ({ metWords, yourWords }: Props) => {
-  const result = yourWords
+  const result = yourWords.trim()
     .split(whitespaceRegexWithCaptures)
     .filter(Boolean)
     .map((wordPunctuationOrWhitespace, index, yourSplitWords) => {

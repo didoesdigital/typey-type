@@ -21,7 +21,7 @@ const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
       setWordCount(
         event.target.value.trim().split(/\s/).filter(Boolean).length
       );
-      setYourWords(event.target.value.trim());
+      setYourWords(event.target.value.slice(0, 10000));
     };
 
   const doneHandler: React.MouseEventHandler = () => {
@@ -74,6 +74,7 @@ const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
             spellCheck={false}
             onChange={changeYourWordsHandler}
             rows={6}
+            value={yourWords}
           />
           <p>
             <WordCount wordCount={wordCount} />
