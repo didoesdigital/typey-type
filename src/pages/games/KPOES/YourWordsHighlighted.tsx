@@ -7,11 +7,11 @@ type Props = {
   yourWords: string;
 };
 
-const nonAlphaRegexWithCaptures = /([^A-Za-z])/;
+const whitespaceRegexWithCaptures = /(\s)/;
 
 const YourWordsHighlighted = ({ metWords, yourWords }: Props) => {
   const result = yourWords
-    .split(nonAlphaRegexWithCaptures)
+    .split(whitespaceRegexWithCaptures)
     .filter(Boolean)
     .map((wordPunctuationOrWhitespace, index, yourSplitWords) => {
       if (wordPunctuationOrWhitespace === " ")
