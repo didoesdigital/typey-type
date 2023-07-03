@@ -3,6 +3,7 @@ import GameBox from "./components/GameBox";
 import { ReactComponent as RaverRobot } from "../../images/RaverRobot.svg";
 import { ReactComponent as AussieRobot } from "../../images/AussieRobot.svg";
 import { ReactComponent as ThinkingRobot } from "../../images/ThinkingRobot.svg";
+import { ReactComponent as ComposingRobot } from "../../images/ComposingRobot.svg";
 import { ReactComponent as MischievousRobot } from "../../images/MischievousRobot.svg";
 import Subheader from "../../components/Subheader";
 
@@ -71,9 +72,9 @@ export default function GamesIndex() {
               linkTo="/games/KPOES"
               linkText="Play KPOES"
               robot={
-                <ThinkingRobot
+                <ComposingRobot
                   role="img"
-                  aria-labelledby="thinking-robot-title"
+                  aria-labelledby="composing-robot-title"
                 />
               }
             />

@@ -2,7 +2,7 @@ import React from "react";
 import Intro from "../components/Intro";
 import Prompt from "./Prompt";
 import WriteYourWords from "./WriteYourWords";
-import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
+import { ReactComponent as ComposingRobot } from "../../../images/ComposingRobot.svg";
 import StrokesForWords from "../../../components/StrokesForWords";
 import "./styles.scss";
 
@@ -55,10 +55,10 @@ export default function Game({
             <Intro
               introText={introText}
               robot={
-                <ThinkingRobot
-                  id="thinking-robot-KPOES"
+                <ComposingRobot
+                  id="composing-robot-KPOES"
                   role="img"
-                  aria-labelledby="thinking-robot-title"
+                  aria-labelledby="composing-robot-title"
                 />
               }
             />
