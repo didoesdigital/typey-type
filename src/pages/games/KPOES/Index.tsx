@@ -17,8 +17,6 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
   personalDictionaries: any; // PersonalDictionaryNameAndContents[];
-  // startingMetWordsToday: MetWords;
-  // updateMetWords: any;
   globalUserSettings: any;
   userSettings: any;
   updateMultipleMetWords: (newMetWords: string[]) => void;
@@ -33,9 +31,7 @@ export default function Index({
   globalUserSettings,
   userSettings,
   updateMultipleMetWords,
-}: // startingMetWordsToday,
-// updateMetWords,
-Props) {
+}: Props) {
   const mainHeading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -76,8 +72,6 @@ Props) {
         globalUserSettings={globalUserSettings}
         userSettings={userSettings}
         updateMultipleMetWords={updateMultipleMetWords}
-        // startingMetWordsToday={startingMetWordsToday}
-        // updateMetWords={updateMetWords}
       />
     </main>
   );

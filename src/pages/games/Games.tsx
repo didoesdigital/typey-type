@@ -132,8 +132,6 @@ const Games = ({
               globalUserSettings={globalUserSettings}
               userSettings={userSettings}
               updateMultipleMetWords={updateMultipleMetWords}
-              // startingMetWordsToday={startingMetWordsToday}
-              // updateMetWords={updateMetWords}
             />
           </ErrorBoundary>
         </DocumentTitle>

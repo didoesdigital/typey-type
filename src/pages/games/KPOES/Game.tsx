@@ -21,8 +21,6 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
   personalDictionaries: PersonalDictionaryNameAndContents[];
-  // startingMetWordsToday: MetWords;
-  // updateMetWords: any;
   globalUserSettings: any;
   userSettings: any;
   updateMultipleMetWords: (newMetWords: string[]) => void;
@@ -38,8 +36,6 @@ export default function Game({
   globalLookupDictionaryLoaded,
   metWords,
   personalDictionaries,
-  // startingMetWordsToday,
-  // updateMetWords,
   globalUserSettings,
   userSettings,
   updateMultipleMetWords,
