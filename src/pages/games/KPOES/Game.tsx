@@ -4,6 +4,7 @@ import Prompt from "./Prompt";
 import WriteYourWords from "./WriteYourWords";
 import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
 import StrokesForWords from "../../../components/StrokesForWords";
+import "./styles.scss";
 
 import type {
   LookupDictWithNamespacedDicts,
