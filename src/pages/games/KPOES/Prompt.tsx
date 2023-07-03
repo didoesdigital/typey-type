@@ -57,48 +57,50 @@ const Prompt = () => {
 
   return (
     <>
-      <div className="flex justify-center">
+      <div className="flex">
         <fieldset>
-          <legend className="mx-auto">
-            <p className="fw-bold text-center">Today's prompt</p>
-          </legend>
-          <div className="flex flex-wrap">
-            <div className="mr3">
-              <label htmlFor="creative-short-story">
-                <input
-                  onChange={changePromptHandler}
-                  type="radio"
-                  name="compose-prompt"
-                  id="creative-short-story"
-                  value="creative-short-story"
-                  defaultChecked
-                />{" "}
-                Creative short story
-              </label>
-            </div>
-            <div className="mr3">
-              <label htmlFor="steno-motivations">
-                <input
-                  onChange={changePromptHandler}
-                  type="radio"
-                  name="compose-prompt"
-                  id="steno-motivations"
-                  value="steno-motivations"
-                />{" "}
-                Steno motivation
-              </label>
-            </div>
-            <div className="mr3">
-              <label htmlFor="open-ended">
-                <input
-                  onChange={changePromptHandler}
-                  type="radio"
-                  name="compose-prompt"
-                  id="open-ended"
-                  value="open-ended"
-                />{" "}
-                Open-ended
-              </label>
+          <div className="flex flex-wrap items-center">
+            <legend className="mx-auto mr3">
+              <p className="fw-bold text-center mb0">Today's prompt:</p>
+            </legend>
+            <div className="flex flex-wrap">
+              <div className="mr3">
+                <label htmlFor="creative-short-story">
+                  <input
+                    onChange={changePromptHandler}
+                    type="radio"
+                    name="compose-prompt"
+                    id="creative-short-story"
+                    value="creative-short-story"
+                    defaultChecked
+                  />{" "}
+                  Creative short story
+                </label>
+              </div>
+              <div className="mr3">
+                <label htmlFor="steno-motivations">
+                  <input
+                    onChange={changePromptHandler}
+                    type="radio"
+                    name="compose-prompt"
+                    id="steno-motivations"
+                    value="steno-motivations"
+                  />{" "}
+                  Steno motivation
+                </label>
+              </div>
+              <div className="mr3">
+                <label htmlFor="open-ended">
+                  <input
+                    onChange={changePromptHandler}
+                    type="radio"
+                    name="compose-prompt"
+                    id="open-ended"
+                    value="open-ended"
+                  />{" "}
+                  Open-ended
+                </label>
+              </div>
             </div>
           </div>
         </fieldset>

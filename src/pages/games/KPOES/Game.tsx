@@ -70,7 +70,7 @@ export default function Game({
           </div>
         </div>
       </div>
-      <div className="mx-auto min-width-320 w-100 landing-page-section bg-slat dark:bg-coolgrey-1100 ">
+      <div className="mx-auto min-width-320 w-100 landing-page-section bg-slat dark:bg-coolgrey-1100 px3">
         <div className="pt6 mw-584 mx-auto text-center">
           <StrokesForWords
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
