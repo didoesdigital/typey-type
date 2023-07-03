@@ -62,7 +62,9 @@ const YourWords = ({ metWords, updateMultipleMetWords }: Props) => {
         </>
       ) : (
         <>
-          <label htmlFor="write-your-words">Write your words</label>
+          <p className="mb0">
+            <label htmlFor="write-your-words">Write your words</label>
+          </p>
           <textarea
             id="write-your-words"
             className="input-textarea bg-info dark:text-coolgrey-900 bw-1 b--solid br-4 db w-100 mw100"
