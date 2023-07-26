@@ -122,7 +122,7 @@ const Prompt = () => {
           </div>
         </fieldset>
       </div>
-      <p className="mt3 b--solid bw-2 b--brand-primary-tint bg-coolgrey-300 dark:bg-coolgrey-900 text-center pr3">
+      <p data-chromatic="ignore" className="mt3 b--solid bw-2 b--brand-primary-tint bg-coolgrey-300 dark:bg-coolgrey-900 text-center pr3">
         “{getPrompt(composePrompt)}”
       </p>
     </>
