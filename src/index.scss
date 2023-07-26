@@ -1309,6 +1309,7 @@ $textarea-padding-x: 8px;
 @media (prefers-color-scheme: dark) {
   .input-textarea {
     border-color: var(--violet-600);
+    color: var(--type-color);
   }
 }
 
