@@ -43,9 +43,11 @@ export default function StrokeTip({
     userSettings.hideStrokesOnLastRepetition
   );
 
+  // NOTE: in a custom lesson currentStroke may be "", so the hint behaviour might be weird
+
   return (
     <div className="mb6">
-      {showStroke && currentStroke ? (
+      {showStroke ? (
         <div>
           <div
             className={`stroke-tip${isMultiline ? " flex justify-center" : ""}`}
@@ -62,14 +64,14 @@ export default function StrokeTip({
             </span>
             {userSettings.showStrokesAsDiagrams ? (
               <StrokeTipDiagram
-                currentStroke={currentStroke}
+                currentStroke={currentStroke || ""}
                 diagramSize={userSettings.diagramSize}
                 isMultiline={isMultiline}
                 stenoLayout={userSettings.stenoLayout}
               />
             ) : (
               <StrokeTipText
-                currentStroke={currentStroke}
+                currentStroke={currentStroke || ""}
                 isMultiline={isMultiline}
                 stenoLayout={userSettings.stenoLayout}
               />
@@ -78,7 +80,7 @@ export default function StrokeTip({
           <StrokeTipList
             isMultiline={isMultiline}
             currentPhrase={currentPhrase}
-            currentStroke={currentStroke}
+            currentStroke={currentStroke || ""}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             showStroke={showStroke}
