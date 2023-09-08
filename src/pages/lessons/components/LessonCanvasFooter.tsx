@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import ReactModal from "react-modal";
 import Metronome from "./Metronome";
 import { Tooltip } from "react-tippy";
+import type { Study } from "../../../types";
 
 type LessonCanvasFooterProps = {
   chooseStudy: () => void;
@@ -9,6 +11,7 @@ type LessonCanvasFooterProps = {
   setAnnouncementMessage: () => void;
   toggleHideOtherSettings: () => void;
   userSettings: any;
+  updatePreset: (studyType: Study) => void;
 };
 
 const LessonCanvasFooter = ({
@@ -18,7 +21,38 @@ const LessonCanvasFooter = ({
   setAnnouncementMessage,
   toggleHideOtherSettings,
   userSettings,
+  updatePreset,
 }: LessonCanvasFooterProps) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const studyBlurb =
+    userSettings.study === "practice"
+      ? "The “Practice” study type lets you mimic real usage as closely as possible by showing new, seen, and memorised words."
+      : userSettings.study === "drill"
+      ? "The “Drill” study type helps you build up your muscle memory and test your skills by showing you words you’ve memorised."
+      : userSettings.study === "revise"
+      ? "The “Revise” study type helps you revise recently learned outlines by showing only words you’ve seen."
+      : "The “Discover” study type lets you discover new outlines by showing only a limited number of new words while revealing their strokes.";
+
+  useEffect(() => {
+    ReactModal.setAppElement("#js-app");
+  }, []);
+
+  function handleOpenStudyPresetsModal(event: any) {
+    event.preventDefault();
+    setShowModal(true);
+  }
+
+  function handleCloseStudyPresetsModal(event: any) {
+    event.preventDefault();
+    setShowModal(false);
+  }
+
+  function savePreset() {
+    updatePreset(userSettings.study);
+    setShowModal(false);
+  }
+
   return (
     <div className="flex flex-wrap mx-auto mw-1440 justify-between text-small">
       <Metronome
@@ -74,6 +108,18 @@ const LessonCanvasFooter = ({
                     Discover
                   </Tooltip>
                 </label>
+                <button
+                  className="de-emphasized-button text-small"
+                  style={{
+                    "marginLeft": "22px",
+                    "display":
+                      userSettings.study === "discover" ? "block" : "none",
+                  }}
+                  onClick={handleOpenStudyPresetsModal}
+                  disabled={disableUserSettings}
+                >
+                  Save…
+                </button>
               </p>
               <p className="block relative mr3 mb0">
                 <label className="radio-label mb0">
@@ -104,6 +150,18 @@ const LessonCanvasFooter = ({
                     Revise
                   </Tooltip>
                 </label>
+                <button
+                  className="de-emphasized-button text-small"
+                  style={{
+                    "marginLeft": "22px",
+                    "display":
+                      userSettings.study === "revise" ? "block" : "none",
+                  }}
+                  onClick={handleOpenStudyPresetsModal}
+                  disabled={disableUserSettings}
+                >
+                  Save…
+                </button>
               </p>
             </div>
             <div className="flex flex-wrap justify-between">
@@ -136,6 +194,18 @@ const LessonCanvasFooter = ({
                     Drill
                   </Tooltip>
                 </label>
+                <button
+                  className="de-emphasized-button text-small"
+                  style={{
+                    "marginLeft": "22px",
+                    "display":
+                      userSettings.study === "drill" ? "block" : "none",
+                  }}
+                  onClick={handleOpenStudyPresetsModal}
+                  disabled={disableUserSettings}
+                >
+                  Save…
+                </button>
               </p>
               <p className="block relative mr3 mb0">
                 <label className="radio-label mb0">
@@ -166,10 +236,85 @@ const LessonCanvasFooter = ({
                     Practice
                   </Tooltip>
                 </label>
+                <button
+                  className="de-emphasized-button text-small"
+                  style={{
+                    "marginLeft": "22px",
+                    "display":
+                      userSettings.study === "practice" ? "block" : "none",
+                  }}
+                  onClick={handleOpenStudyPresetsModal}
+                  disabled={disableUserSettings}
+                >
+                  Save…
+                </button>
               </p>
             </div>
           </div>
         </fieldset>
+        <ReactModal
+          isOpen={showModal}
+          aria={{
+            labelledby: "aria-study-presets-modal-heading",
+            describedby: "aria-study-presets-modal-description",
+          }}
+          ariaHideApp={true}
+          closeTimeoutMS={300}
+          role="dialog"
+          onRequestClose={handleCloseStudyPresetsModal}
+          className={{
+            "base": "modal",
+            "afterOpen": "modal--after-open",
+            "beforeClose": "modal--before-close",
+          }}
+          overlayClassName={{
+            "base": "modal__overlay",
+            "afterOpen": "modal__overlay--after-open",
+            "beforeClose": "modal__overlay--before-close",
+          }}
+        >
+          <div className="fr">
+            <button
+              className="de-emphasized-button hide-md"
+              onClick={handleCloseStudyPresetsModal}
+            >
+              Close
+            </button>
+          </div>
+          <h3 id="aria-study-presets-modal-heading">
+            {getPrettyStudy(userSettings.study)} study type preset
+          </h3>
+          <div id="aria-study-presets-modal-description">
+            <p>
+              {studyBlurb} Selecting this study type preset will update the
+              settings accordingly.
+            </p>
+            <p>
+              You can save your current word count and repetitions settings so
+              that the next time you select “
+              {getPrettyStudy(userSettings.study)}”, Typey&nbsp;Type will
+              remember to use them:
+            </p>
+            <ul>
+              <li>
+                Limit number of words:{" "}
+                {userSettings.limitNumberOfWords || "0 (show all)"}
+              </li>
+              <li>Repetitions: {userSettings.repetitions}</li>
+            </ul>
+            <button
+              className="button button--secondary"
+              onClick={() => savePreset()}
+            >
+              Save {getPrettyStudy(userSettings.study)} preset
+            </button>
+          </div>
+          <div className="text-right">
+            <button className="button" onClick={handleCloseStudyPresetsModal}>
+              Cancel
+            </button>
+          </div>
+        </ReactModal>
       </div>
       <p>
         <button
@@ -187,5 +332,24 @@ const LessonCanvasFooter = ({
     </div>
   );
 };
+
+function getPrettyStudy(studyType: Study) {
+  switch (studyType) {
+    case "discover":
+      return "Discover";
+
+    case "revise":
+      return "Revise";
+
+    case "drill":
+      return "Drill";
+
+    case "practice":
+      return "Practice";
+
+    default:
+      return studyType;
+  }
+}
 
 export default LessonCanvasFooter;

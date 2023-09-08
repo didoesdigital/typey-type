@@ -230,6 +230,7 @@ class Lesson extends Component {
                 charsPerWord={this.props.charsPerWord}
                 revisionMaterial={this.props.revisionMaterial}
                 revisionMode={this.props.revisionMode}
+                updatePreset={this.props.updatePreset}
                 updateRecommendationHistory={this.props.updateRecommendationHistory}
                 updateRevisionMaterial={this.props.updateRevisionMaterial}
                 updateTopSpeedPersonalBest={this.props.updateTopSpeedPersonalBest}
@@ -341,6 +342,7 @@ class Lesson extends Component {
                 totalNumberOfRetainedWords={this.props.totalNumberOfRetainedWords}
                 totalWordCount={this.props.totalWordCount}
                 upcomingPhrases={this.props.upcomingPhrases}
+                updatePreset={this.props.updatePreset}
                 updateMarkup={this.props.updateMarkup.bind(this)}
                 userSettings={this.props.userSettings}
                 hideOtherSettings={this.state.hideOtherSettings}

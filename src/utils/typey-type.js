@@ -664,6 +664,12 @@ function loadPersonalPreferences() {
     study: 'discover',
     stenoLayout: 'stenoLayoutAmericanSteno',
     upcomingWordsLayout: 'singleLine',
+    studyPresets: [
+      { limitNumberOfWords: 15, repetitions: 5, },
+      { limitNumberOfWords: 50, repetitions: 3, },
+      { limitNumberOfWords: 100, repetitions: 3, },
+      { limitNumberOfWords: 0, repetitions: 1, },
+    ]
   };
   try {
     if (window.localStorage) {

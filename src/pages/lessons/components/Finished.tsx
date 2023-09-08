@@ -71,6 +71,7 @@ const Finished = ({
   totalNumberOfNewWordsMet,
   totalNumberOfRetainedWords,
   totalWordCount,
+  updatePreset,
   updateRevisionMaterial,
   updateTopSpeedPersonalBest,
   userSettings,
@@ -230,6 +231,7 @@ const Finished = ({
               setAnnouncementMessage={setAnnouncementMessage}
               toggleHideOtherSettings={toggleHideOtherSettings}
               userSettings={userSettings}
+              updatePreset={updatePreset}
             />
           </div>
           <LessonFinePrintFooter

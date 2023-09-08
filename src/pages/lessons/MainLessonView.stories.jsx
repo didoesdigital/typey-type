@@ -189,6 +189,7 @@ const Template = (args) => {
             charsPerWord={() => undefined}
             totalWordCount={1}
             upcomingPhrases={["and the"]}
+            updatePreset={() => undefined}
             updateRecommendationHistory={() => undefined}
             updateMarkup={() => undefined}
             updateTopSpeedPersonalBest={() => undefined}

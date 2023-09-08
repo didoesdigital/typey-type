@@ -25,6 +25,7 @@ import type {
   LessonSettings,
   LookupDictWithNamespacedDictsAndConfig,
   Outline,
+  Study,
   UserSettings as UserSettingsType,
 } from "../../types";
 
@@ -81,6 +82,7 @@ type Props = {
   totalWordCount: number;
   upcomingPhrases: MaterialText[];
   updateMarkup: () => void;
+  updatePreset: (studyType: Study) => void;
   userSettings: UserSettingsType;
   hideOtherSettings: boolean;
   toggleHideOtherSettings: () => void;
@@ -139,6 +141,7 @@ const MainLessonView = ({
   totalWordCount,
   upcomingPhrases,
   updateMarkup,
+  updatePreset,
   userSettings,
   hideOtherSettings,
   toggleHideOtherSettings,
@@ -307,6 +310,7 @@ const MainLessonView = ({
                   setAnnouncementMessage={setAnnouncementMessage}
                   toggleHideOtherSettings={toggleHideOtherSettings}
                   userSettings={userSettings}
+                  updatePreset={updatePreset}
                 />
               </div>
               <LessonFinePrintFooter

@@ -5,6 +5,7 @@ import type {
   MetWords,
   PrettyLessonTitle,
   UserSettings,
+  Study,
 } from "../../types";
 
 export type LessonData = {
@@ -63,6 +64,7 @@ export type FinishedProps = {
   totalNumberOfNewWordsMet: any;
   totalNumberOfRetainedWords: any;
   totalWordCount: any;
+  updatePreset: (studyType: Study) => void;
   updateRevisionMaterial: any;
   updateTopSpeedPersonalBest: any;
   userSettings: UserSettings;

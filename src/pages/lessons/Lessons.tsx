@@ -47,6 +47,7 @@ const Lessons = ({
   stopLesson,
   updateFlashcardsMetWords,
   updateFlashcardsProgress,
+  updatePreset,
   changeFullscreen,
   flashcardsMetWords,
   ...lessonProps
@@ -141,6 +142,7 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updatePreset={updatePreset}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
@@ -162,6 +164,7 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updatePreset={updatePreset}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
@@ -183,6 +186,7 @@ const Lessons = ({
             lessonIndex={lessonIndex}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updatePreset={updatePreset}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
@@ -205,6 +209,7 @@ const Lessons = ({
             personalDictionaries={personalDictionaries}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updatePreset={updatePreset}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
@@ -227,6 +232,7 @@ const Lessons = ({
             personalDictionaries={personalDictionaries}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updatePreset={updatePreset}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
@@ -249,6 +255,7 @@ const Lessons = ({
             personalDictionaries={personalDictionaries}
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
+            updatePreset={updatePreset}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             {...lessonProps}
             {...props}
@@ -315,6 +322,7 @@ const Lessons = ({
             setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
+            updatePreset={updatePreset}
             {...lessonProps}
             {...props}
           />

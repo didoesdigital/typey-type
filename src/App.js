@@ -259,7 +259,13 @@ class App extends Component {
         startFromWord: 1,
         study: 'discover',
         stenoLayout: 'stenoLayoutAmericanSteno', // 'stenoLayoutAmericanSteno' || 'stenoLayoutNoNumberBarInnerThumbNumber' || 'stenoLayoutNoNumberBarOuterThumbNumbers' || 'stenoLayoutPalantype' || 'stenoLayoutBrazilianPortugueseSteno' || 'stenoLayoutDanishSteno' || 'stenoLayoutItalianMichelaSteno' || 'stenoLayoutJapanese' || 'stenoLayoutKoreanModernC' || 'stenoLayoutKoreanModernS'
-        upcomingWordsLayout: 'singleLine'
+        upcomingWordsLayout: 'singleLine',
+        studyPresets: [
+          { limitNumberOfWords: 15, repetitions: 5, },
+          { limitNumberOfWords: 50, repetitions: 3, },
+          { limitNumberOfWords: 100, repetitions: 3, },
+          { limitNumberOfWords: 0, repetitions: 1, },
+        ]
       },
       lesson: fallbackLesson,
       lessonIndex: [{
@@ -1257,8 +1263,8 @@ class App extends Component {
         newState.newWords = PARAMS.discover.newWords;
         newState.seenWords = PARAMS.discover.seenWords;
         newState.retainedWords = PARAMS.discover.retainedWords;
-        newState.repetitions = PARAMS.discover.repetitions;
-        newState.limitNumberOfWords = PARAMS.discover.limitNumberOfWords;
+        newState.repetitions = this.state.userSettings.studyPresets[0].repetitions || PARAMS.discover.repetitions;
+        newState.limitNumberOfWords = this.state.userSettings.studyPresets[0].limitNumberOfWords || PARAMS.discover.limitNumberOfWords;
         newState.sortOrder = PARAMS.discover.sortOrder;
         break;
       case "revise":
@@ -1267,8 +1273,8 @@ class App extends Component {
         newState.newWords = PARAMS.revise.newWords;
         newState.seenWords = PARAMS.revise.seenWords;
         newState.retainedWords = PARAMS.revise.retainedWords;
-        newState.repetitions = PARAMS.revise.repetitions;
-        newState.limitNumberOfWords = PARAMS.revise.limitNumberOfWords;
+        newState.repetitions = this.state.userSettings.studyPresets[1].repetitions || PARAMS.revise.repetitions;
+        newState.limitNumberOfWords = this.state.userSettings.studyPresets[1].limitNumberOfWords || PARAMS.revise.limitNumberOfWords;
         newState.sortOrder = PARAMS.revise.sortOrder;
         break;
       case "drill":
@@ -1277,8 +1283,8 @@ class App extends Component {
         newState.newWords = PARAMS.drill.newWords;
         newState.seenWords = PARAMS.drill.seenWords;
         newState.retainedWords = PARAMS.drill.retainedWords;
-        newState.repetitions = PARAMS.drill.repetitions;
-        newState.limitNumberOfWords = PARAMS.drill.limitNumberOfWords;
+        newState.repetitions = this.state.userSettings.studyPresets[2].repetitions || PARAMS.drill.repetitions;
+        newState.limitNumberOfWords = this.state.userSettings.studyPresets[2].limitNumberOfWords || PARAMS.drill.limitNumberOfWords;
         newState.sortOrder = PARAMS.drill.sortOrder;
         break;
       case "practice":
@@ -1287,8 +1293,8 @@ class App extends Component {
         newState.newWords = PARAMS.practice.newWords;
         newState.seenWords = PARAMS.practice.seenWords;
         newState.retainedWords = PARAMS.practice.retainedWords;
-        newState.repetitions = PARAMS.practice.repetitions;
-        newState.limitNumberOfWords = PARAMS.practice.limitNumberOfWords;
+        newState.repetitions = this.state.userSettings.studyPresets[3].repetitions || PARAMS.practice.repetitions;
+        newState.limitNumberOfWords = this.state.userSettings.studyPresets[3].limitNumberOfWords || PARAMS.practice.limitNumberOfWords;
         newState.sortOrder = PARAMS.practice.sortOrder;
         break;
       default:
@@ -1818,6 +1824,38 @@ class App extends Component {
 
   updateGlobalLookupDictionary(combinedLookupDictionary) {
     this.setState({globalLookupDictionary: combinedLookupDictionary});
+  }
+
+  // updatePreset(studyType: Study) {
+  updatePreset(studyType) {
+    const newUserSettings = Object.assign({}, this.state.userSettings);
+    const presetSettings = {
+      limitNumberOfWords: this.state.userSettings.limitNumberOfWords,
+      repetitions: this.state.userSettings.repetitions
+    }
+
+    switch (studyType) {
+      case "discover":
+        newUserSettings.studyPresets[0] = presetSettings;
+        break;
+
+      case "revise":
+        newUserSettings.studyPresets[1] = presetSettings;
+        break;
+
+      case "drill":
+        newUserSettings.studyPresets[2] = presetSettings;
+        break;
+
+      case "practice":
+        newUserSettings.studyPresets[3] = presetSettings;
+        break;
+
+      default:
+        break;
+    }
+
+    this.setState({userSettings: newUserSettings});
   }
 
   updateRecommendationHistory(prevRecommendationHistory, lessonIndex = this.state.lessonIndex) {
@@ -2468,6 +2506,7 @@ class App extends Component {
                           totalNumberOfHintedWords={this.state.totalNumberOfHintedWords}
                           totalWordCount={stateLesson.presentedMaterial.length}
                           upcomingPhrases={upcomingMaterial}
+                          updatePreset={this.updatePreset.bind(this)}
                           updateRecommendationHistory={this.updateRecommendationHistory.bind(this)}
                           updateMarkup={this.updateMarkup.bind(this)}
                           updateTopSpeedPersonalBest={this.updateTopSpeedPersonalBest.bind(this)}
