@@ -9,7 +9,8 @@
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!d3-array)/\" --env=jsdom",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "chromatic": "echo \"Chromatic is set up with a private token for use by Di. This script exists to stop Chromatic offering to add it for me.\""
   },
   "dependencies": {
     "@sentry/browser": "^6.17.9",
