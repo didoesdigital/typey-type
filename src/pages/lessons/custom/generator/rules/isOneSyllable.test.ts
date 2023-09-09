@@ -1,6 +1,34 @@
 import isOneSyllable from "./isOneSyllable";
 
 describe("isOneSyllable", () => {
+  it("returns false for startled", async () => {
+    expect(isOneSyllable("START/-LD", "startled")).toEqual(false);
+  });
+
+  it("returns false for mingled", async () => {
+    expect(isOneSyllable("PHEUPBG/-LD", "mingled")).toEqual(false);
+  });
+
+  it("returns false for shouted", async () => {
+    expect(isOneSyllable("SHOUTD", "shouted")).toEqual(false);
+  });
+
+  it("returns false for misled", async () => {
+    expect(isOneSyllable("PHEUZ/HRED", "misled")).toEqual(false);
+  });
+
+  it("returns false for icy", async () => {
+    expect(isOneSyllable("AOEU/SEU", "icy")).toEqual(false);
+  });
+
+  it("returns false for mysql", async () => {
+    expect(isOneSyllable("PHAOEU/SKW-L", "mysql")).toEqual(false);
+  });
+
+  it("returns false for startled", async () => {
+    expect(isOneSyllable("START/-LD", "startled")).toEqual(false);
+  });
+
   it("returns false for genre", async () => {
     expect(isOneSyllable("SKWREPB/ER", "genre")).toEqual(false);
   });
@@ -13,10 +41,6 @@ describe("isOneSyllable", () => {
     expect(isOneSyllable("K*ELT", "kettle")).toEqual(false);
   });
 
-  it("returns true for short words", async () => {
-    expect(isOneSyllable("AEU", "a")).toEqual(true);
-  });
-
   it("returns true for scored", async () => {
     expect(isOneSyllable("SKORD", "scored")).toEqual(true);
   });
@@ -27,6 +51,10 @@ describe("isOneSyllable", () => {
 
   it("returns true for queue", async () => {
     expect(isOneSyllable("KWAOU", "queue")).toEqual(true);
+  });
+
+  it("returns true for short words", async () => {
+    expect(isOneSyllable("AEU", "a")).toEqual(true);
   });
 
   it("returns true for word with no vowels", async () => {
