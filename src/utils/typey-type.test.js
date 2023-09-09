@@ -491,7 +491,13 @@ describe('loadPersonalPreferences', () => {
         upcomingWordsLayout: "singleLine",
         sortOrder: 'sortOff',
         seenWords: true,
-        study: 'discover'
+        study: 'discover',
+        studyPresets: [
+          { limitNumberOfWords: 15, repetitions: 5, },
+          { limitNumberOfWords: 50, repetitions: 3, },
+          { limitNumberOfWords: 100, repetitions: 3, },
+          { limitNumberOfWords: 0, repetitions: 1, },
+        ]
       };
       expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest, userGoals]);
     });
