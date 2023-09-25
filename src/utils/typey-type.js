@@ -343,10 +343,10 @@ function parseLesson(lessonText, path) {
       // Example: `warning_message=Hint: use exact spacing setting and don’t type ^`
       // Example: `warning_message=Hint: use TK-LS between strokes`
       // Example: `ignore_characters='^'`
-      let [settingName, settingValue] = line.split("=");
-      let value = settingValue.replace(/'/g, "");
+      const [settingName, settingValue] = line.split("=");
       if (settingName in SETTINGS_NAME_MAP) {
-        settings[SETTINGS_NAME_MAP[settingName]] = value;
+        settings[SETTINGS_NAME_MAP[settingName]] =
+          settingName === "ignore_characters" ? settingValue.replace(/'/g, "") : settingValue;
       }
     }
   }
