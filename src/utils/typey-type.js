@@ -330,15 +330,23 @@ function parseLesson(lessonText, path) {
     let line = lines[i];
     let firstChar = line.charAt(0);
 
+    // If it starts with a single quote, it's lesson material:
     if (firstChar === "'") {
       let phraseAndStroke = line.split("': ");
       let phrase = phraseAndStroke[0].substring(1, phraseAndStroke[0].length);
       let stroke = phraseAndStroke[1];
       sourceMaterial.push( {phrase: phrase, stroke: stroke} );
-    } else if (line.indexOf("=") !== -1) {
+    }
+    // If it doesn't start with a single quote and does include equals, it's a setting:
+    else if (line.indexOf("=") !== -1) {
+      // Example: `warning_message=Hint: use exact spacing setting`
+      // Example: `warning_message=Hint: use exact spacing setting and don’t type ^`
+      // Example: `warning_message=Hint: use TK-LS between strokes`
+      // Example: `ignore_characters='^'`
       let optionAndValue = line.split("=");
       let value = optionAndValue[1].replace(/'/g, "");
-      if (value === "true") { value = true; } else if (value === "false") { value = false; }
+      if (value === "true") { value = true; }
+      else if (value === "false") { value = false; }
       if (optionAndValue[0] in SETTINGS_NAME_MAP) {
         settings[SETTINGS_NAME_MAP[optionAndValue[0]]] = value;
       }
