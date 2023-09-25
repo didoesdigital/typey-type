@@ -1,4 +1,4 @@
-const punctuationDescriptions: { [punctuationSymbol: string]: string } = {
+export const punctuationDescriptions: { [punctuationSymbol: string]: string } = {
   "!": "exclamation mark",
   "#": "number sign",
   "$": "dollar sign",

@@ -27,6 +27,7 @@ import {
   getLatestPloverDict,
   getLesson
 } from './utils/getData';
+import describePunctuation, { punctuationDescriptions } from "./utils/describePunctuation";
 import { fetchDictionaryIndex } from './utils/getData';
 import { getTypeyTypeDict } from './utils/getData';
 import {
@@ -2082,11 +2083,10 @@ class App extends Component {
   say(utterance) {
     let synth = window.speechSynthesis;
     utterance = utterance.replaceAll("—", "em dash");
-    if (utterance === ",") { utterance = "comma"; }
-    else if (utterance === ":") { utterance = "colon"; }
-    else if (utterance === ".") { utterance = "full stop"; }
-    else if (utterance === ")") { utterance = "closing bracket"; }
-    else if (utterance === "!") { utterance = "exclamation mark"; }
+    if (utterance in punctuationDescriptions) {
+      utterance = describePunctuation(utterance);
+    }
+
     if (window.SpeechSynthesisUtterance) {
       let utterThis = new SpeechSynthesisUtterance(utterance);
 
