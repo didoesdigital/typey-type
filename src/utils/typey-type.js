@@ -343,12 +343,12 @@ function parseLesson(lessonText, path) {
       // Example: `warning_message=Hint: use exact spacing setting and don’t type ^`
       // Example: `warning_message=Hint: use TK-LS between strokes`
       // Example: `ignore_characters='^'`
-      let optionAndValue = line.split("=");
-      let value = optionAndValue[1].replace(/'/g, "");
+      let [settingName, settingValue] = line.split("=");
+      let value = settingValue.replace(/'/g, "");
       if (value === "true") { value = true; }
       else if (value === "false") { value = false; }
-      if (optionAndValue[0] in SETTINGS_NAME_MAP) {
-        settings[SETTINGS_NAME_MAP[optionAndValue[0]]] = value;
+      if (settingName in SETTINGS_NAME_MAP) {
+        settings[SETTINGS_NAME_MAP[settingName]] = value;
       }
     }
   }
