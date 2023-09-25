@@ -345,8 +345,6 @@ function parseLesson(lessonText, path) {
       // Example: `ignore_characters='^'`
       let [settingName, settingValue] = line.split("=");
       let value = settingValue.replace(/'/g, "");
-      if (value === "true") { value = true; }
-      else if (value === "false") { value = false; }
       if (settingName in SETTINGS_NAME_MAP) {
         settings[SETTINGS_NAME_MAP[settingName]] = value;
       }
