@@ -22,6 +22,18 @@ import Subheader from "../../components/Subheader";
 //   updatePersonalDictionaries
 // }
 
+// From an older version of Plover
+// https://github.com/openstenoproject/plover/commit/1bfc3b3eb04ad7bf8b74d8d236174255b5382925#diff-ec83a43e05da03d0e1df2dce12cad3ebb30e8fad3d0ddab6243951e15f6b102b
+const invalidEntries = {
+  "11/*T": "11th",
+  "E*/PHRAOUR/PWUS/KWRAOU/TPHUPL": "e pluribus unum",
+  "E*/PHRAOUR/PWUS/KWRAOUPB": "e pluribus unum",
+  "E*/PHRAOUR/PWUS/KWRAOUPB/UPL": "e pluribus unum",
+  "SEPB/*AT": "sensate",
+  "SWA/HAOEL/LAOE": "Swahili",
+  "WEUBG/*APB": "Wiccan"
+}
+
 class DictionaryManagement extends Component {
   constructor(props) {
     super(props);
@@ -137,6 +149,10 @@ class DictionaryManagement extends Component {
               }
 
               if (misstrokesJSON[outline] && misstrokesJSON[outline] === translation) {
+                probableMisstrokes.push([outline, translation]);
+              }
+
+              if (invalidEntries[outline] && invalidEntries[outline] === translation) {
                 probableMisstrokes.push([outline, translation]);
               }
             }
