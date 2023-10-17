@@ -7,6 +7,7 @@ import {
   stitchTogetherLessonData,
   transformLessonDataToChartData,
 } from "../../../utils/transformingFinishedData";
+import FinishedAccuracyNudge from "./FinishedAccuracyNudge";
 import FinishedActionButtons from "./FinishedActionButtons";
 import FinishedDataViz from "./FinishedDataViz";
 import FinishedMisstrokesSummary from "./FinishedMisstrokesSummary";
@@ -205,9 +206,13 @@ const Finished = ({
                         setAnnouncementMessage={setAnnouncementMessage}
                       />
                       <FinishedActionButtons
+                        numericAccuracy={numericAccuracy}
                         restartPath={path}
                         restartLesson={restartLesson}
                         suggestedNextUrl={getNextLessonPath(metadata)}
+                      />
+                      <FinishedAccuracyNudge
+                        numericAccuracy={numericAccuracy}
                       />
                     </div>
                     <FinishedMisstrokesSummary

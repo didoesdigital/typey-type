@@ -3,12 +3,18 @@ import { IconRestart } from "../../../components/Icon";
 import FinishedNextLessonButton from "./FinishedNextLessonButton";
 
 type FinishedActionButtonsProps = {
+  numericAccuracy: number;
   restartPath: string;
   restartLesson: () => void;
   suggestedNextUrl: string;
 };
 
+const passClasses = "mr3 px2 py1 br-4 b--solid bw-1 b--transparent";
+const failClasses =
+  "mr3 px2 py1 br-4 b--solid bw-1 b--brand-primary bg-warning no-underline";
+
 const FinishedActionButtons = ({
+  numericAccuracy,
   restartPath,
   restartLesson,
   suggestedNextUrl,
@@ -20,7 +26,7 @@ const FinishedActionButtons = ({
       accessKey={"s"}
       href={restartPath.replace(/lesson.txt$/, "")}
       onClick={restartLesson}
-      className="mr3"
+      className={numericAccuracy >= 90 ? passClasses : failClasses}
       role="button"
     >
       <IconRestart
