@@ -977,26 +977,34 @@ class App extends Component {
     newUserSettings.seenWords = newSeenOrMemorised[1];
     newUserSettings.retainedWords = newSeenOrMemorised[2];
 
-    // FIXME: These settings should all be using params set in params.js
+    // eslint-disable-next-line no-unused-vars
+    const [_, revisePreset, drillPreset, practicePreset] =
+      userSettings?.studyPresets ?? [
+        { limitNumberOfWords: 5, repetitions: 5 },
+        { limitNumberOfWords: 50, repetitions: 3 },
+        { limitNumberOfWords: 100, repetitions: 3 },
+        { limitNumberOfWords: 300, repetitions: 1 },
+      ];
+
     if (newSeenOrMemorised[1] && !newSeenOrMemorised[2]) {
       newUserSettings.study = 'revise';
-      newUserSettings.sortOrder = 'sortNew';
-      newUserSettings.limitNumberOfWords = 50;
-      newUserSettings.repetitions = 3;
-      newUserSettings.showStrokes = false;
+      newUserSettings.sortOrder = PARAMS.revise.sortOrder;
+      newUserSettings.limitNumberOfWords = revisePreset.limitNumberOfWords;
+      newUserSettings.repetitions = revisePreset.repetitions;
+      newUserSettings.showStrokes = PARAMS.revise.showStrokes;
     }
     else if (newSeenOrMemorised[2] && !newSeenOrMemorised[1]) {
       newUserSettings.study = 'drill';
-      newUserSettings.sortOrder = 'sortRandom';
-      newUserSettings.limitNumberOfWords = 100;
-      newUserSettings.repetitions = 3;
-      newUserSettings.showStrokes = false;
+      newUserSettings.sortOrder = PARAMS.drill.sortOrder;
+      newUserSettings.limitNumberOfWords = drillPreset.limitNumberOfWords;
+      newUserSettings.repetitions = drillPreset.repetitions;
+      newUserSettings.showStrokes = PARAMS.drill.showStrokes;
     } else {
       newUserSettings.study = 'practice';
-      newUserSettings.sortOrder = 'sortOff';
-      newUserSettings.limitNumberOfWords = PARAMS.practice.limitNumberOfWords;
-      newUserSettings.repetitions = 1;
-      newUserSettings.showStrokes = false;
+      newUserSettings.sortOrder = PARAMS.practice.sortOrder;
+      newUserSettings.limitNumberOfWords = practicePreset.limitNumberOfWords;
+      newUserSettings.repetitions = practicePreset.repetitions;
+      newUserSettings.showStrokes = PARAMS.practice.showStrokes;
     }
 
     let lesson = {};

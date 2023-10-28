@@ -2,12 +2,15 @@ import React from "react";
 import ProgressLessonLinks from "./ProgressLessonLinks";
 import { format } from "d3-format";
 
+import type { UserSettings } from "../../../types";
+
 type CompletedProps = {
   restartConfetti: (
     event:
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
       | React.KeyboardEvent<HTMLButtonElement>
   ) => void;
+  userSettings: UserSettings;
   yourWordCount: number;
   yourMemorisedWordCount: number;
   yourSeenWordCount: number;
@@ -15,6 +18,7 @@ type CompletedProps = {
 
 const ProgressSummaryCompleted = ({
   restartConfetti,
+  userSettings,
   yourWordCount,
   yourMemorisedWordCount,
   yourSeenWordCount,
@@ -47,6 +51,7 @@ const ProgressSummaryCompleted = ({
       </p>
       <p>
         <ProgressLessonLinks
+          userSettings={userSettings}
           yourWordCount={yourWordCount}
           yourSeenWordCount={yourSeenWordCount}
           yourMemorisedWordCount={yourMemorisedWordCount}

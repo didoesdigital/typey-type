@@ -471,6 +471,7 @@ class Progress extends Component {
               restartConfetti={this.restartConfetti.bind(this)}
               yourMemorisedWordCount={this.props.yourMemorisedWordCount}
               yourSeenWordCount={this.props.yourSeenWordCount}
+              userSettings={this.props.userSettings}
             />
 
             <div className="flex flex-wrap justify-between pt3">

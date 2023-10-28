@@ -21,6 +21,12 @@ const userSettings = {
   seenWords: true,
   startFromWord: 1,
   study: "discover",
+  studyPresets: [
+    { limitNumberOfWords: 15, repetitions: 5 },
+    { limitNumberOfWords: 50, repetitions: 3 },
+    { limitNumberOfWords: 100, repetitions: 3 },
+    { limitNumberOfWords: 0, repetitions: 1 },
+  ],
   stenoLayout: "stenoLayoutAmericanSteno",
   upcomingWordsLayout: "singleLine",
 };

@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import ProgressSummaryCompleted from "./ProgressSummaryCompleted";
 import ProgressLessonLinks from "./ProgressLessonLinks";
 
-import type { MetWords } from "../../../types";
+import type { MetWords, UserSettings } from "../../../types";
 
 type Props = {
   metWords: MetWords;
@@ -11,6 +11,7 @@ type Props = {
       | React.MouseEvent<HTMLButtonElement, MouseEvent>
       | React.KeyboardEvent<HTMLButtonElement>
   ) => void;
+  userSettings: UserSettings;
   yourMemorisedWordCount: number;
   yourSeenWordCount: number;
 };
@@ -22,6 +23,7 @@ type MaybeProgressPercentSentenceProps = {
 const ProgressSummaryAndLinks = ({
   metWords,
   restartConfetti,
+  userSettings,
   yourSeenWordCount,
   yourMemorisedWordCount,
 }: Props) => {
@@ -51,6 +53,7 @@ const ProgressSummaryAndLinks = ({
   return yourWordCount >= 10000 ? (
     <ProgressSummaryCompleted
       restartConfetti={restartConfetti}
+      userSettings={userSettings}
       yourWordCount={yourWordCount}
       yourMemorisedWordCount={yourMemorisedWordCount}
       yourSeenWordCount={yourSeenWordCount}
@@ -60,6 +63,7 @@ const ProgressSummaryAndLinks = ({
       <IntroSentence />
       <MaybeProgressPercentSentence yourSeenWordCount={yourSeenWordCount} />
       <ProgressLessonLinks
+        userSettings={userSettings}
         yourWordCount={yourWordCount}
         yourSeenWordCount={yourSeenWordCount}
         yourMemorisedWordCount={yourMemorisedWordCount}

@@ -1,8 +1,11 @@
 import React from "react";
-import PARAMS from "../../../utils/params.js";
+import PARAMS, { createParamString } from "../../../utils/params.js";
 import { Link } from "react-router-dom";
 
+import type { UserSettings } from "../../../types";
+
 type LessonLinkProps = {
+  userSettings: UserSettings;
   yourWordCount: number;
   yourMemorisedWordCount: number;
   yourSeenWordCount: number;
@@ -35,13 +38,27 @@ const getReviseSeenLink = (seen: number) =>
     </>
   ) : null;
 
-const getDiscoverNewLink = (yourWordCount: number) =>
-  yourWordCount < 10000 && yourWordCount > 0 ? (
+const getDiscoverNewLink = (
+  yourWordCount: number,
+  userSettings: UserSettings
+) => {
+  const defaultDiscoverParams = PARAMS.discover;
+  const userDiscoverParams = userSettings.studyPresets?.[0] ?? {
+    limitNumberOfWords: 5,
+    repetitions: 3,
+  };
+  const combinedDiscoverParams = {
+    ...defaultDiscoverParams,
+    ...userDiscoverParams,
+  };
+  const discoverParamsString = createParamString(combinedDiscoverParams);
+
+  return yourWordCount < 10000 && yourWordCount > 0 ? (
     <>
       <Link
         to={
           "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&" +
-          PARAMS.discoverParams
+          discoverParamsString
         }
       >
         Discover new words
@@ -49,8 +66,10 @@ const getDiscoverNewLink = (yourWordCount: number) =>
       .
     </>
   ) : null;
+};
 
 const ProgressLessonLinks = ({
+  userSettings,
   yourWordCount,
   yourSeenWordCount,
   yourMemorisedWordCount,
@@ -68,7 +87,7 @@ const ProgressLessonLinks = ({
           {getReviseSeenLink(yourSeenWordCount)}
         </React.Fragment>,
         <React.Fragment key="discover-new">
-          {getDiscoverNewLink(yourWordCount)}
+          {getDiscoverNewLink(yourWordCount, userSettings)}
         </React.Fragment>,
       ]}
     </>

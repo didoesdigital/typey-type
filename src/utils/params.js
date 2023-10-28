@@ -46,7 +46,7 @@ const practice = {
   sortOrder: 'sortOff',
 }
 
-function createParamString(studyTypeObject) {
+export function createParamString(studyTypeObject) {
   let paramList = [];
   for (const [key, value] of Object.entries(studyTypeObject)) {
     let shortStringValue = value;

@@ -310,6 +310,13 @@ export type SortOrder =
 
 export type Study = "discover" | "revise" | "drill" | "practice";
 
+export type StudyPreset = {
+  limitNumberOfWords: number;
+  repetitions: number;
+};
+
+export type StudyPresets = [StudyPreset, StudyPreset, StudyPreset, StudyPreset];
+
 export type OtherRecommendationsStudyType =
   | "compete"
   | "game"
@@ -358,6 +365,7 @@ export type UserSettings = {
   seenWords: boolean;
   startFromWord: number;
   study: Study;
+  studyPresets: StudyPresets;
   stenoLayout: StenoLayout;
   upcomingWordsLayout: UpcomingWordsLayout;
 };

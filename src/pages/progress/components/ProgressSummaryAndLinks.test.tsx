@@ -5,6 +5,42 @@ import ProgressSummaryAndLinks from "./ProgressSummaryAndLinks";
 import metWordsNovice from "../../../fixtures/metWordsNovice.json";
 import metWords10000WordsSeen10000Memorised from "../../../fixtures/metWords10000WordsSeen10000Memorised.json";
 
+import type { UserSettings } from "../../../types";
+
+const userSettings: UserSettings = {
+  beatsPerMinute: 10,
+  blurMaterial: false,
+  caseSensitive: false,
+  diagramSize: 1.0,
+  simpleTypography: true,
+  punctuationDescriptions: false,
+  retainedWords: true,
+  limitNumberOfWords: 45,
+  newWords: true,
+  repetitions: 3,
+  showScoresWhileTyping: true,
+  showStrokes: true,
+  showStrokesAsDiagrams: true,
+  showStrokesAsList: true,
+  showStrokesOnMisstroke: true,
+  hideStrokesOnLastRepetition: true,
+  spacePlacement: "spaceOff",
+  speakMaterial: false,
+  textInputAccessibility: true,
+  sortOrder: "sortOff",
+  seenWords: true,
+  startFromWord: 1,
+  study: "discover",
+  stenoLayout: "stenoLayoutAmericanSteno",
+  upcomingWordsLayout: "singleLine",
+  studyPresets: [
+    { limitNumberOfWords: 15, repetitions: 5 },
+    { limitNumberOfWords: 50, repetitions: 3 },
+    { limitNumberOfWords: 100, repetitions: 3 },
+    { limitNumberOfWords: 0, repetitions: 1 },
+  ],
+};
+
 describe("progress summary and links", () => {
   it("renders", () => {
     render(
@@ -13,6 +49,7 @@ describe("progress summary and links", () => {
           <ProgressSummaryAndLinks
             metWords={metWordsNovice}
             restartConfetti={() => undefined}
+            userSettings={userSettings}
             yourMemorisedWordCount={1}
             yourSeenWordCount={1}
           />
@@ -30,6 +67,7 @@ describe("progress summary and links", () => {
           <ProgressSummaryAndLinks
             metWords={metWords10000WordsSeen10000Memorised}
             restartConfetti={() => undefined}
+            userSettings={userSettings}
             yourMemorisedWordCount={10000}
             yourSeenWordCount={10000}
           />
@@ -48,6 +86,7 @@ describe("progress summary and links", () => {
             <ProgressSummaryAndLinks
               metWords={{ "one": 1 }}
               restartConfetti={() => undefined}
+              userSettings={userSettings}
               yourMemorisedWordCount={0}
               yourSeenWordCount={1}
             />
@@ -72,6 +111,7 @@ describe("progress summary and links", () => {
             <ProgressSummaryAndLinks
               metWords={{ "one": 1, "two": 30 }}
               restartConfetti={() => undefined}
+              userSettings={userSettings}
               yourMemorisedWordCount={1}
               yourSeenWordCount={1}
             />
@@ -96,6 +136,7 @@ describe("progress summary and links", () => {
             <ProgressSummaryAndLinks
               metWords={{ "memorised": 30 }}
               restartConfetti={() => undefined}
+              userSettings={userSettings}
               yourMemorisedWordCount={30}
               yourSeenWordCount={0}
             />
@@ -131,6 +172,7 @@ describe("progress summary and links", () => {
                 "seen10": 1,
               }}
               restartConfetti={() => undefined}
+              userSettings={userSettings}
               yourMemorisedWordCount={0}
               yourSeenWordCount={10}
             />
@@ -167,6 +209,7 @@ describe("progress summary and links", () => {
                 "memorised": 30,
               }}
               restartConfetti={() => undefined}
+              userSettings={userSettings}
               yourMemorisedWordCount={1}
               yourSeenWordCount={10}
             />
@@ -202,6 +245,7 @@ describe("progress summary and links", () => {
                 "memorised2": 30,
               }}
               restartConfetti={() => undefined}
+              userSettings={userSettings}
               yourMemorisedWordCount={2}
               yourSeenWordCount={10}
             />
@@ -224,6 +268,7 @@ describe("progress summary and links", () => {
             <ProgressSummaryAndLinks
               metWords={{}}
               restartConfetti={() => undefined}
+              userSettings={userSettings}
               yourMemorisedWordCount={0}
               yourSeenWordCount={0}
             />
