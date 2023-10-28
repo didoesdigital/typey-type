@@ -46,10 +46,11 @@ git clone --recursive https://github.com/didoesdigital/typey-type.git
 Alternatively, if you've already cloned the repository without the `--recursive` parameter, you can load its submodules using `submodule update`:
 
 ```sh
+cd typey-type
 git submodule update --init --recursive
 ```
 
-Change directory into the cloned repository:
+If you haven't already, change directory into the cloned repository:
 
 ```sh
 cd typey-type
@@ -60,10 +61,6 @@ Once you've cloned the repository and updated its submodules, yarn install packa
 ```sh
 yarn install
 ```
-
-### Steno dictionaries git submodule
-
-Historically the [Typey Type data](https://github.com/didoesdigital/typey-type-data) repo has contained the [steno-dictionaries](https://github.com/didoesdigital/steno-dictionaries) submodule but it is moving to [Typey Type CLI](https://github.com/didoesdigital/typey-type-cli). If you've been using the paths to these dictionaries in Plover, for example, you may need to update them to look in the CLI or somewhere standalone.
 
 ### Updates
 
@@ -106,6 +103,12 @@ yarn storybook
 ### Create React App
 
 For reference, Typey Type is bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Steno dictionaries
+
+For Typey Type’s dictionaries, see [Di's steno dictionaries](https://github.com/didoesdigital/steno-dictionaries) repo.
+
+Historically the [Typey Type data](https://github.com/didoesdigital/typey-type-data) repo has contained the [steno-dictionaries](https://github.com/didoesdigital/steno-dictionaries) submodule but it has moved to [Typey Type CLI](https://github.com/didoesdigital/typey-type-cli). If you've been using the paths to these dictionaries in Plover, for example, you may need to update them to look in the CLI or somewhere standalone.
 
 ## Contributing
 
