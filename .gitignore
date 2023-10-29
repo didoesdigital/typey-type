@@ -92,3 +92,11 @@ Thumbs.db
 # Ignore Vim NETwork Read/Write HISTory
 .netrwhist
 
+# Yarn v4 https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
