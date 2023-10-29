@@ -1,5 +1,6 @@
 module.exports = {
   stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
+
   addons: [
     "@storybook/addon-a11y",
     "@storybook/addon-links",
@@ -7,13 +8,22 @@ module.exports = {
     "@storybook/preset-create-react-app",
     "@storybook/addon-interactions",
   ],
+
   features: {
     interactionsDebugger: true,
   },
-  framework: "@storybook/react",
+
+  framework: {
+    name: "@storybook/react-webpack5",
+    options: {}
+  },
+
   core: {
     disableTelemetry: true,
-    enableCrashReports: false,
-    builder: "webpack5",
+    enableCrashReports: false
   },
+
+  docs: {
+    autodocs: true
+  }
 };
