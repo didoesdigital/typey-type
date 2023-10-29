@@ -12,6 +12,9 @@
     "build-storybook": "build-storybook -s public",
     "chromatic": "echo \"Chromatic is set up with a private token for use by Di. This script exists to stop Chromatic offering to add it for me.\""
   },
+  "resolutions": {
+    "loader-utils": "^2.0.1"
+  },
   "dependencies": {
     "@sentry/browser": "^6.17.9",
     "clipboard": "^1.7.1",
@@ -96,7 +99,7 @@
     ]
   },
   "engines": {
-    "node": ">=16.15.0"
+    "node": ">=18.8.0"
   },
   "eslintConfig": {
     "overrides": [
