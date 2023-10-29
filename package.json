@@ -8,8 +8,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!d3-array)/\" --env=jsdom",
     "eject": "react-scripts eject",
-    "storybook": "storybook dev -p 6006 -s public",
-    "build-storybook": "storybook build -s public",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
     "chromatic": "echo \"Chromatic is set up with a private token for use by Di. This script exists to stop Chromatic offering to add it for me.\""
   },
   "resolutions": {
