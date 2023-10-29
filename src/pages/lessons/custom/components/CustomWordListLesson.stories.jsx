@@ -33,8 +33,8 @@ CustomWordListLessonFilled.storyName = "Dictionary filled";
 CustomWordListLessonFilled.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
-  userEvent.type(
-    await within(canvasElement).getByLabelText(
+  await userEvent.type(
+    within(canvasElement).getByLabelText(
       "Paste a word list without strokes here to create a custom lesson (using Plover theory by default):"
     ),
     `hello

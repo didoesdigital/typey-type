@@ -5,11 +5,12 @@ import { expect } from "@storybook/jest";
 
 import CustomJSONLesson from "./CustomJSONLesson";
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+const meta = {
   title: "Lessons/Custom/CustomJSONLesson",
   component: CustomJSONLesson,
 };
+
+export default meta;
 
 const Template = (args) => (
   <div className="p3">
@@ -30,8 +31,7 @@ CustomJSONLessonFilled.storyName = "Dictionary filled";
 CustomJSONLessonFilled.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
-  userEvent.type(
-    await within(canvasElement).getByLabelText(
+  await userEvent.type(canvas.getByLabelText(
       "Paste a JSON dictionary here to create a custom lesson:"
     ),
     '{{"TEFT": "test"}'
