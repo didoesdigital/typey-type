@@ -2,11 +2,11 @@ import React from "react";
 import UserSettings from "./UserSettings";
 import userSettingsFixture from "../../../stories/fixtures/userSettings";
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+const meta = {
   title: "Pages/UserSettings",
   component: UserSettings,
 };
+export default meta;
 
 const defaultArgs = {
   changeSortOrderUserSetting: () => undefined,
