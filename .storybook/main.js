@@ -15,17 +15,17 @@ module.exports = {
 
   framework: {
     name: "@storybook/react-webpack5",
-    options: {}
+    options: {},
   },
 
   core: {
     disableTelemetry: true,
-    enableCrashReports: false
+    enableCrashReports: false,
   },
 
   staticDirs: ["../public"],
 
   docs: {
-    autodocs: 'tag'
-  }
+    autodocs: "tag",
+  },
 };
