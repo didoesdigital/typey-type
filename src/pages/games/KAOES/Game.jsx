@@ -320,12 +320,12 @@ export default function Game() {
                         diagram, you can turn off all of your steno dictionaries
                         to produce raw steno output. That way, when you press
                         the{" "}
-                        <kbd className="raw-steno-key raw-steno-key--subtle">
+                        <kbd className="steno-stroke steno-stroke--subtle">
                           S
                         </kbd>{" "}
                         key, the steno engine will output “S” instead of “is”.
                         Likewise, pressing the{" "}
-                        <kbd className="raw-steno-key raw-steno-key--subtle">
+                        <kbd className="steno-stroke steno-stroke--subtle">
                           -T
                         </kbd>{" "}
                         key will output “-T” instead of “the”. The dash is

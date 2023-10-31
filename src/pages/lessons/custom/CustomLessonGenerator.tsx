@@ -377,7 +377,7 @@ const CustomLessonGenerator = ({
                                   className="wrap"
                                 >
                                   {materialItem.phrase}{" "}
-                                  <kbd className="raw-steno-key raw-steno-key--subtle">
+                                  <kbd className="steno-stroke steno-stroke--subtle">
                                     {materialItem.stroke}
                                   </kbd>
                                 </li>
