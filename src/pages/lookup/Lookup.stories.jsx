@@ -59,7 +59,7 @@ export const LookupSearchStory = Template.bind({});
 LookupSearchStory.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
-  userEvent.type(
+  await userEvent.type(
     await within(canvasElement).getByLabelText("Enter words to look up"),
     "huh"
   );
