@@ -23,6 +23,8 @@ module.exports = {
     enableCrashReports: false
   },
 
+  staticDirs: ["../public"],
+
   docs: {
     autodocs: 'tag'
   }
