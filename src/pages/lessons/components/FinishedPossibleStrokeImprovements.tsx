@@ -90,7 +90,7 @@ const FinishedPossibleStrokeImprovements = ({
               <span className="steno-stroke steno-stroke--subtle text-small px1 py05">
                 {phrase.stroke.split("").map((item: any, i: any) => (
                   <kbd
-                    className="raw-steno-key raw-steno-key--subtle text-small"
+                    className="steno-stroke steno-stroke--subtle text-small"
                     key={i}
                   >
                     {item}

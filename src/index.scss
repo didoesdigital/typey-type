@@ -1718,10 +1718,6 @@ $textarea-padding-x: 8px;
     background-color: darken(desaturate(add-tint($brand-warning, 5%), 40%), 15%);
   }
 
-  .raw-steno-key {
-    padding: 4px 0;
-  }
-
   &.steno-stroke--subtle {
     background-color: var(--coolgrey-700);
     color: var(--violet-100);
@@ -1729,16 +1725,6 @@ $textarea-padding-x: 8px;
     &::selection {
       background-color: var(--gold-500);
     }
-  }
-}
-.raw-steno-key {
-  background-color: desaturate(add-tint($brand-primary, 5%), 40%);
-  color: var(--coolgrey-300);
-  padding-left: 4px;
-  padding-right: 4px;
-  &.raw-steno-key--subtle {
-    background-color: desaturate(add-tint($brand-primary, 30%), 40%);
-    color: var(--coolgrey-300);
   }
 }
 
