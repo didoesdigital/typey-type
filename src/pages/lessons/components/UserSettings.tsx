@@ -1,9 +1,11 @@
 import React from "react";
 import { Tooltip } from "react-tippy";
+import ErrorBoundary from "../../../components/ErrorBoundary";
 import NumericInput from "react-numeric-input";
 import SettingCheckbox from "../../../components/SettingCheckbox";
 import SettingListItem from "../../../components/SettingListItem";
 import SpeakWordsHelp from "./SpeakWordsHelp";
+import VoiceSetting from "./VoiceSetting";
 
 import type { UserSettings as UserSettingsObjectType } from "../../../types";
 
@@ -20,6 +22,7 @@ type Props = {
   changeSpacePlacementUserSetting: (event: any) => void;
   changeStenoLayout: (event: any) => void;
   changeUserSetting: (event: any) => void;
+  changeVoiceUserSetting: (voiceName: string) => void;
   disableUserSettings: boolean;
   handleBeatsPerMinute: (event: any) => void;
   handleDiagramSize: (event: any) => void;
@@ -44,6 +47,7 @@ const UserSettings = ({
   changeSpacePlacementUserSetting,
   changeStenoLayout,
   changeUserSetting,
+  changeVoiceUserSetting,
   disableUserSettings,
   handleBeatsPerMinute,
   handleDiagramSize,
@@ -672,6 +676,17 @@ const UserSettings = ({
                     <SpeakWordsHelp disabled={disableUserSettings} />
                   }
                 />
+                <ErrorBoundary relative={true} vanish={true}>
+                  <details style={{ maxWidth: "300px" }}>
+                    <summary>Voice settings</summary>
+                    <VoiceSetting
+                      disableUserSettings={disableUserSettings}
+                      setAnnouncementMessage={setAnnouncementMessage}
+                      changeVoiceUserSetting={changeVoiceUserSetting}
+                      speakMaterial={userSettings.speakMaterial}
+                    />
+                  </details>
+                </ErrorBoundary>
               </SettingListItem>
               <SettingListItem sectionHierachy="major">
                 <SettingCheckbox

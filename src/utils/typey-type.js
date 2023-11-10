@@ -675,7 +675,8 @@ function loadPersonalPreferences() {
       { limitNumberOfWords: 50, repetitions: 3, },
       { limitNumberOfWords: 100, repetitions: 3, },
       { limitNumberOfWords: 0, repetitions: 1, },
-    ]
+    ],
+    voiceName: ''
   };
   try {
     if (window.localStorage) {

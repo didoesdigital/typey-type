@@ -44,6 +44,7 @@ type Props = {
   changeSpacePlacementUserSetting: () => void;
   changeStenoLayout: () => void;
   changeUserSetting: () => void;
+  changeVoiceUserSetting: () => void;
   chooseStudy: () => void;
   completedPhrases: MaterialText[];
   currentLessonStrokes: CurrentLessonStrokes;
@@ -103,6 +104,7 @@ const MainLessonView = ({
   changeSpacePlacementUserSetting,
   changeStenoLayout,
   changeUserSetting,
+  changeVoiceUserSetting,
   chooseStudy,
   completedPhrases,
   currentLessonStrokes,
@@ -330,6 +332,7 @@ const MainLessonView = ({
               changeShowStrokesAsList={changeShowStrokesAsList}
               changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
               changeUserSetting={changeUserSetting}
+              changeVoiceUserSetting={changeVoiceUserSetting}
               disableUserSettings={disableUserSettings}
               handleDiagramSize={handleDiagramSize}
               handleBeatsPerMinute={handleBeatsPerMinute}

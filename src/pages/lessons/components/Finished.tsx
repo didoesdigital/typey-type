@@ -38,6 +38,7 @@ const Finished = ({
   changeSpacePlacementUserSetting,
   changeStenoLayout,
   changeUserSetting,
+  changeVoiceUserSetting,
   chooseStudy,
   currentLessonStrokes,
   disableUserSettings,
@@ -248,6 +249,7 @@ const Finished = ({
         <div>
           <UserSettings
             changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
             changeSortOrderUserSetting={changeSortOrderUserSetting}
             changeShowScoresWhileTyping={changeShowScoresWhileTyping}
             changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}

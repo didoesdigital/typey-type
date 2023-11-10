@@ -200,6 +200,7 @@ class Lesson extends Component {
                 changeShowStrokesOnMisstroke={this.props.changeShowStrokesOnMisstroke}
                 changeStenoLayout={this.props.changeStenoLayout}
                 changeUserSetting={this.props.changeUserSetting}
+                changeVoiceUserSetting={this.props.changeVoiceUserSetting}
                 chooseStudy={this.props.chooseStudy}
                 currentLessonStrokes={this.props.currentLessonStrokes}
                 disableUserSettings={this.props.disableUserSettings}
@@ -305,6 +306,7 @@ class Lesson extends Component {
                 changeSpacePlacementUserSetting={this.props.changeSpacePlacementUserSetting}
                 changeStenoLayout={this.props.changeStenoLayout}
                 changeUserSetting={this.props.changeUserSetting}
+                changeVoiceUserSetting={this.props.changeVoiceUserSetting}
                 chooseStudy={this.props.chooseStudy}
                 completedPhrases={this.props.completedPhrases}
                 currentLessonStrokes={this.props.currentLessonStrokes}

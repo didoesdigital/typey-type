@@ -368,6 +368,7 @@ export type UserSettings = {
   studyPresets: StudyPresets;
   stenoLayout: StenoLayout;
   upcomingWordsLayout: UpcomingWordsLayout;
+  voiceName: SpeechSynthesisVoice["name"]
 };
 
 export type GlobalUserSettings = {

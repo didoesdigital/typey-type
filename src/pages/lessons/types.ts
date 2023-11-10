@@ -30,6 +30,7 @@ export type FinishedProps = {
   changeSpacePlacementUserSetting: (event: any) => void;
   changeStenoLayout: (event: any) => void;
   changeUserSetting: (event: any) => void;
+  changeVoiceUserSetting: (voiceName: string) => void;
   chooseStudy: () => void;
   currentLessonStrokes: any; // CurrentLessonStrokes;
   disableUserSettings: boolean;
