@@ -4,8 +4,9 @@ import { Tooltip } from "react-tippy";
 type Props = {
   changeVoiceUserSetting: (voiceName: string) => void;
   disableUserSettings: boolean;
-  speakMaterial: boolean;
   setAnnouncementMessage: () => void;
+  speakMaterial: boolean;
+  voiceName: SpeechSynthesisVoice["name"];
 };
 
 const voiceSort = (a: SpeechSynthesisVoice, b: SpeechSynthesisVoice) => {
@@ -46,8 +47,9 @@ const voiceSort = (a: SpeechSynthesisVoice, b: SpeechSynthesisVoice) => {
 const VoiceSetting = ({
   changeVoiceUserSetting,
   disableUserSettings,
-  speakMaterial,
   setAnnouncementMessage,
+  speakMaterial,
+  voiceName,
 }: Props) => {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const synth = speakMaterial ? window.speechSynthesis : null;
@@ -92,7 +94,7 @@ const VoiceSetting = ({
         <select
           name="speak-words-voice"
           id="speak-words-voice"
-          // value={"en"} /*{userSettings.voiceName}*/
+          value={voiceName}
           onChange={(event) => {
             const voiceName = event.target.value;
             changeVoiceUserSetting(voiceName);

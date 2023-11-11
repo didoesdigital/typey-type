@@ -680,10 +680,11 @@ const UserSettings = ({
                   <details style={{ maxWidth: "300px" }}>
                     <summary>Voice settings</summary>
                     <VoiceSetting
+                      changeVoiceUserSetting={changeVoiceUserSetting}
                       disableUserSettings={disableUserSettings}
                       setAnnouncementMessage={setAnnouncementMessage}
-                      changeVoiceUserSetting={changeVoiceUserSetting}
                       speakMaterial={userSettings.speakMaterial}
+                      voiceName={userSettings.voiceName}
                     />
                   </details>
                 </ErrorBoundary>
