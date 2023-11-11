@@ -349,6 +349,22 @@ details summary > * {
   display: inline;
 }
 
+details summary.absolute-marker::-webkit-details-marker,
+details summary.absolute-marker::marker {
+ display: none;
+ content: "";
+}
+summary.absolute-marker::before {
+  content: " ▶︎";
+  color: var(--violet-700);
+  position: absolute;
+  transform: translate(-1rem, -0.1rem);
+}
+details[open] summary.absolute-marker:before {
+  content: " ▼";
+  position: absolute;
+}
+
 p {
   line-height: 2;
   margin-bottom: 1em;
@@ -1684,6 +1700,12 @@ $textarea-padding-x: 8px;
   }
 }
 
+.text-small-test-say-word-button.text-small-test-say-word-button {
+  font-size: $h6-size; // 12.8px
+  line-height: 1.6;
+  height: 2rem;
+}
+
 @media (prefers-color-scheme: dark) {
   .steno-diagram-svg {
     fill-opacity: 0.8;
@@ -1815,6 +1837,9 @@ $textarea-padding-x: 8px;
   }
 }
 
+.gap-1 {
+  gap: 0.25rem; /* 4px */
+}
 .gap-4 {
   gap: 1rem; /* 16px */
 }

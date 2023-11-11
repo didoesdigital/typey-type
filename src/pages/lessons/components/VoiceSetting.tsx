@@ -44,6 +44,32 @@ const voiceSort = (a: SpeechSynthesisVoice, b: SpeechSynthesisVoice) => {
   return a.lang.localeCompare(b.lang) || a.name.localeCompare(b.name);
 };
 
+const testSay = (voiceName: SpeechSynthesisVoice["name"]) => {
+  try {
+    const synth = window.speechSynthesis;
+    if (window.SpeechSynthesisUtterance) {
+      if (synth && synth.speaking) {
+        synth.cancel();
+      }
+      const utterThis = new SpeechSynthesisUtterance(
+        "The rain in Spain stays mainly in the plain"
+      );
+
+      const voices = speechSynthesis.getVoices();
+      const voiceInVoices = voices.find((voice) => voice.name === voiceName);
+
+      if (voiceInVoices) {
+        utterThis.lang = voiceInVoices.lang;
+        utterThis.voice = voiceInVoices;
+      }
+
+      synth?.speak(utterThis);
+    }
+  } catch (e) {
+    console.log("Unable to speak test material", e);
+  }
+};
+
 const VoiceSetting = ({
   changeVoiceUserSetting,
   disableUserSettings,
@@ -71,9 +97,15 @@ const VoiceSetting = ({
     }
   }, [loadVoices, speakMaterial]);
 
+  const handleTestVoice = () => {
+    if (!disableUserSettings && speakMaterial) {
+      testSay(voiceName);
+    }
+  };
+
   return (
-    <div>
-      <div className="mt1 mb1 pl1 pr2 flex flex-wrap items-center justify-between">
+    <div style={{ marginTop: "-0.5em" }}>
+      <div className="mt1 mb1 pl1 pr2 flex flex-column">
         {/* @ts-ignore */}
         <Tooltip
           title="Set your voice"
@@ -91,23 +123,32 @@ const VoiceSetting = ({
             Speak words: voice
           </label>
         </Tooltip>
-        <select
-          name="speak-words-voice"
-          id="speak-words-voice"
-          value={voiceName}
-          onChange={(event) => {
-            const voiceName = event.target.value;
-            changeVoiceUserSetting(voiceName);
-          }}
-          disabled={disableUserSettings}
-          className="text-small form-control w-144"
-        >
-          {voices.map((voice) => (
-            <option value={voice.name} key={voice.name}>
-              {voice.name} - {voice.lang}
-            </option>
-          ))}
-        </select>
+        <div className="flex flex-wrap items-center gap-1">
+          <select
+            name="speak-words-voice"
+            id="speak-words-voice"
+            value={voiceName}
+            onChange={(event) => {
+              const voiceName = event.target.value;
+              changeVoiceUserSetting(voiceName);
+            }}
+            disabled={disableUserSettings && !speakMaterial}
+            className="form-control w-144 mr-1"
+          >
+            {voices.map((voice) => (
+              <option value={voice.name} key={voice.name}>
+                {voice.name} - {voice.lang}
+              </option>
+            ))}
+          </select>
+          <button
+            className="button button--secondary text-small-test-say-word-button mr1"
+            onClick={handleTestVoice}
+            type="button"
+          >
+            Test
+          </button>
+        </div>
       </div>
     </div>
   );

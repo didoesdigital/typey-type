@@ -677,8 +677,10 @@ const UserSettings = ({
                   }
                 />
                 <ErrorBoundary relative={true} vanish={true}>
-                  <details style={{ maxWidth: "300px" }}>
-                    <summary>Voice settings</summary>
+                  <details style={{ maxWidth: "300px", paddingLeft: "22px" }}>
+                    <summary className="ml1 absolute-marker">
+                      Voice settings
+                    </summary>
                     <VoiceSetting
                       changeVoiceUserSetting={changeVoiceUserSetting}
                       disableUserSettings={disableUserSettings}
