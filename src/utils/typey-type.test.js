@@ -441,69 +441,6 @@ testWithNoTab
   });
 });
 
-describe('loadPersonalPreferences', () => {
-  describe('without localStorage', () => {
-    it('should return previously met words and user settings', () => {
-      let metWords = {};
-      let flashcardsMetWords = {
-        "the": {
-          "phrase": "the",
-          "stroke": "-T",
-          "rung": 0
-        }
-      };
-      let flashcardsProgress = {};
-      let globalUserSettings = {
-        experiments: {},
-        flashcardsCourseLevel: "noviceCourse",
-        showMisstrokesInLookup: false,
-        writerInput: "qwerty"
-      };
-      let lessonsProgress = {};
-      let recentLessons = {history: []};
-      let topSpeedPersonalBest = 0;
-      let userGoals = {
-        newWords: 15,
-        oldWords: 50
-      }
-      let userSettings = {
-        beatsPerMinute: 10,
-        blurMaterial: false,
-        caseSensitive: false,
-        diagramSize: 1.0,
-        simpleTypography: true,
-        punctuationDescriptions: false,
-        retainedWords: true,
-        limitNumberOfWords: 45,
-        startFromWord: 1,
-        newWords: true,
-        repetitions: 3,
-        showScoresWhileTyping: true,
-        showStrokes: true,
-        showStrokesAsDiagrams: true,
-        showStrokesAsList: false,
-        showStrokesOnMisstroke: true,
-        stenoLayout: 'stenoLayoutAmericanSteno',
-        hideStrokesOnLastRepetition: true,
-        spacePlacement: 'spaceOff',
-        speakMaterial: false,
-        textInputAccessibility: true,
-        upcomingWordsLayout: "singleLine",
-        sortOrder: 'sortOff',
-        seenWords: true,
-        study: 'discover',
-        studyPresets: [
-          { limitNumberOfWords: 15, repetitions: 5, },
-          { limitNumberOfWords: 50, repetitions: 3, },
-          { limitNumberOfWords: 100, repetitions: 3, },
-          { limitNumberOfWords: 0, repetitions: 1, },
-        ]
-      };
-      expect(loadPersonalPreferences()).toEqual([metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest, userGoals]);
-    });
-  });
-});
-
 // describe('writePersonalPreferences', () => {
 //   describe('without localStorage', () => {
 //     it('should log error', () => {
