@@ -677,19 +677,21 @@ const UserSettings = ({
                   }
                 />
                 <ErrorBoundary relative={true} vanish={true}>
-                  <details style={{ maxWidth: "300px", paddingLeft: "22px" }}>
-                    <summary className="ml1 absolute-marker">
-                      Voice settings
-                    </summary>
-                    <VoiceSetting
-                      changeVoiceUserSetting={changeVoiceUserSetting}
-                      disableUserSettings={disableUserSettings}
-                      setAnnouncementMessage={setAnnouncementMessage}
-                      speakMaterial={userSettings.speakMaterial}
-                      voiceName={userSettings.voiceName}
-                      voiceURI={userSettings.voiceURI}
-                    />
-                  </details>
+                  {userSettings.speakMaterial ? (
+                    <details style={{ maxWidth: "300px", paddingLeft: "22px" }}>
+                      <summary className="ml1 absolute-marker">
+                        Voice settings
+                      </summary>
+                      <VoiceSetting
+                        changeVoiceUserSetting={changeVoiceUserSetting}
+                        disableUserSettings={disableUserSettings}
+                        setAnnouncementMessage={setAnnouncementMessage}
+                        speakMaterial={userSettings.speakMaterial}
+                        voiceName={userSettings.voiceName}
+                        voiceURI={userSettings.voiceURI}
+                      />
+                    </details>
+                  ) : null}
                 </ErrorBoundary>
               </SettingListItem>
               <SettingListItem sectionHierachy="major">
