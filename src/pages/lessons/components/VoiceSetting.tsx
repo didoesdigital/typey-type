@@ -2,11 +2,11 @@ import React, { useCallback, useEffect, useState } from "react";
 import { Tooltip } from "react-tippy";
 
 type Props = {
-  changeVoiceUserSetting: (voiceName: string) => void;
+  changeVoiceUserSetting: (voiceName: string, voiceURI: string) => void;
   disableUserSettings: boolean;
   setAnnouncementMessage: () => void;
   speakMaterial: boolean;
-  voiceName: SpeechSynthesisVoice["name"];
+  voiceURI: SpeechSynthesisVoice["voiceURI"];
 };
 
 const voiceSort = (a: SpeechSynthesisVoice, b: SpeechSynthesisVoice) => {
@@ -44,7 +44,7 @@ const voiceSort = (a: SpeechSynthesisVoice, b: SpeechSynthesisVoice) => {
   return a.lang.localeCompare(b.lang) || a.name.localeCompare(b.name);
 };
 
-const testSay = (voiceName: SpeechSynthesisVoice["name"]) => {
+const testSay = (voiceURI: SpeechSynthesisVoice["voiceURI"]) => {
   try {
     const synth = window.speechSynthesis;
     if (window.SpeechSynthesisUtterance) {
@@ -56,7 +56,7 @@ const testSay = (voiceName: SpeechSynthesisVoice["name"]) => {
       );
 
       const voices = speechSynthesis.getVoices();
-      const voiceInVoices = voices.find((voice) => voice.name === voiceName);
+      const voiceInVoices = voices.find((voice) => voice.name === voiceURI);
 
       if (voiceInVoices) {
         utterThis.lang = voiceInVoices.lang;
@@ -75,7 +75,7 @@ const VoiceSetting = ({
   disableUserSettings,
   setAnnouncementMessage,
   speakMaterial,
-  voiceName,
+  voiceURI,
 }: Props) => {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
   const synth = speakMaterial ? window.speechSynthesis : null;
@@ -99,7 +99,7 @@ const VoiceSetting = ({
 
   const handleTestVoice = () => {
     if (!disableUserSettings && speakMaterial) {
-      testSay(voiceName);
+      testSay(voiceURI);
     }
   };
 
@@ -127,17 +127,29 @@ const VoiceSetting = ({
           <select
             name="speak-words-voice"
             id="speak-words-voice"
-            value={voiceName}
+            value={voiceURI}
             onChange={(event) => {
               const voiceName = event.target.value;
-              changeVoiceUserSetting(voiceName);
+              const voiceURI =
+                event.target[event.target.selectedIndex].getAttribute(
+                  "data-uri"
+                ) ?? "";
+              changeVoiceUserSetting(voiceName, voiceURI);
             }}
             disabled={disableUserSettings && !speakMaterial}
             className="form-control w-144 mr-1"
           >
             {voices.map((voice) => (
-              <option value={voice.name} key={voice.name}>
+              <option
+                value={voice.voiceURI}
+                data-name={voice.name}
+                data-uri={voice.voiceURI}
+                key={voice.voiceURI}
+              >
                 {voice.name} - {voice.lang}
+                {voice.voiceURI.includes("super-compact")
+                  ? " - super compact"
+                  : ""}
               </option>
             ))}
           </select>

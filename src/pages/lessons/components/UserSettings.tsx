@@ -22,7 +22,7 @@ type Props = {
   changeSpacePlacementUserSetting: (event: any) => void;
   changeStenoLayout: (event: any) => void;
   changeUserSetting: (event: any) => void;
-  changeVoiceUserSetting: (voiceName: string) => void;
+  changeVoiceUserSetting: (voiceName: string, voiceURI: string) => void;
   disableUserSettings: boolean;
   handleBeatsPerMinute: (event: any) => void;
   handleDiagramSize: (event: any) => void;
@@ -686,7 +686,7 @@ const UserSettings = ({
                       disableUserSettings={disableUserSettings}
                       setAnnouncementMessage={setAnnouncementMessage}
                       speakMaterial={userSettings.speakMaterial}
-                      voiceName={userSettings.voiceName}
+                      voiceURI={userSettings.voiceURI}
                     />
                   </details>
                 </ErrorBoundary>

@@ -369,6 +369,7 @@ export type UserSettings = {
   stenoLayout: StenoLayout;
   upcomingWordsLayout: UpcomingWordsLayout;
   voiceName: SpeechSynthesisVoice["name"]
+  voiceURI: SpeechSynthesisVoice["voiceURI"]
 };
 
 export type GlobalUserSettings = {

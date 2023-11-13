@@ -279,6 +279,7 @@ class App extends Component {
           { limitNumberOfWords: 0, repetitions: 1, },
         ],
         voiceName: '',
+        voiceURI: '',
       },
       lesson: fallbackLesson,
       lessonIndex: [{
@@ -1270,19 +1271,22 @@ class App extends Component {
 
   /**
    * @param {string} voiceName
+   * @param {string} voiceURI
    */
-  changeVoiceUserSetting(voiceName) {
+  changeVoiceUserSetting(voiceName, voiceURI) {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
 
     newState['voiceName'] = voiceName;
+    newState['voiceURI'] = voiceURI;
 
     this.setState({userSettings: newState}, () => {
       writePersonalPreferences('userSettings', this.state.userSettings);
     });
 
-    let labelString = voiceName;
-    if (!voiceName) { labelString = "BAD_INPUT"; }
+    // Let's not bother with tracking voice name. URI is enough.
+    let labelString = voiceURI;
+    if (!voiceURI) { labelString = "BAD_INPUT"; }
 
     GoogleAnalytics.event({
       category: 'UserSettings',
@@ -2146,10 +2150,12 @@ class App extends Component {
         //   console.warn(`${event.error}: ${this.text}`);
         // };
 
+        const preferredVoiceURI = this.state.userSettings.voiceURI;
         const preferredVoiceName = this.state.userSettings.voiceName;
-        const voiceInVoices = voices.find(
-          (voice) => voice.name === preferredVoiceName
-        );
+        const voiceInVoices =
+          voices.find((voice) => voice.voiceURI === preferredVoiceURI) ??
+          voices.find((voice) => voice.name === preferredVoiceName);
+
         if (voiceInVoices) {
           utterThis.lang = voiceInVoices.lang;
           utterThis.voice = voiceInVoices;
