@@ -686,6 +686,7 @@ const UserSettings = ({
                       disableUserSettings={disableUserSettings}
                       setAnnouncementMessage={setAnnouncementMessage}
                       speakMaterial={userSettings.speakMaterial}
+                      voiceName={userSettings.voiceName}
                       voiceURI={userSettings.voiceURI}
                     />
                   </details>

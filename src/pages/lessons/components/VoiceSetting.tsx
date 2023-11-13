@@ -6,6 +6,7 @@ type Props = {
   disableUserSettings: boolean;
   setAnnouncementMessage: () => void;
   speakMaterial: boolean;
+  voiceName: SpeechSynthesisVoice["name"];
   voiceURI: SpeechSynthesisVoice["voiceURI"];
 };
 
@@ -44,7 +45,10 @@ const voiceSort = (a: SpeechSynthesisVoice, b: SpeechSynthesisVoice) => {
   return a.lang.localeCompare(b.lang) || a.name.localeCompare(b.name);
 };
 
-const testSay = (voiceURI: SpeechSynthesisVoice["voiceURI"]) => {
+const testSay = (
+  voiceName: SpeechSynthesisVoice["name"],
+  voiceURI: SpeechSynthesisVoice["voiceURI"]
+) => {
   try {
     const synth = window.speechSynthesis;
     if (window.SpeechSynthesisUtterance) {
@@ -56,7 +60,9 @@ const testSay = (voiceURI: SpeechSynthesisVoice["voiceURI"]) => {
       );
 
       const voices = speechSynthesis.getVoices();
-      const voiceInVoices = voices.find((voice) => voice.name === voiceURI);
+      const voiceInVoices =
+        voices.find((voice) => voice.voiceURI === voiceURI) ??
+        voices.find((voice) => voice.name === voiceName);
 
       if (voiceInVoices) {
         utterThis.lang = voiceInVoices.lang;
@@ -80,6 +86,7 @@ const VoiceSetting = ({
   disableUserSettings,
   setAnnouncementMessage,
   speakMaterial,
+  voiceName,
   voiceURI,
 }: Props) => {
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
@@ -104,7 +111,7 @@ const VoiceSetting = ({
 
   const handleTestVoice = () => {
     if (!disableUserSettings && speakMaterial) {
-      testSay(voiceURI);
+      testSay(voiceName, voiceURI);
     }
   };
 
