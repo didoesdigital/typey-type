@@ -63,7 +63,12 @@ const testSay = (voiceURI: SpeechSynthesisVoice["voiceURI"]) => {
         utterThis.voice = voiceInVoices;
       }
 
-      synth?.speak(utterThis);
+      // @ts-ignore 'chrome' isn't on Window because it is browser specific and that's why we are using it to check for chromium browsers
+      const isChromium = !!window.chrome;
+      const timeoutDelay = isChromium ? 50 : 0;
+      setTimeout(function () {
+        synth?.speak(utterThis);
+      }, timeoutDelay);
     }
   } catch (e) {
     console.log("Unable to speak test material", e);
