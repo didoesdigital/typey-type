@@ -5,6 +5,8 @@ import createAGlobalLookupDictionary from "../transformingDictionaries/createAGl
 import { AffixList } from "../affixList";
 import { loadPersonalDictionariesFromLocalStorage } from "../typey-type";
 
+import type { PersonalDictionaryNameAndContents } from "../../types";
+
 // @ts-ignore TODO
 let loadingPromise = null;
 let isGlobalDictionaryUpToDate = null;
@@ -14,24 +16,12 @@ function fetchAndSetupGlobalDict(
   withPlover: boolean,
   importedPersonalDictionaries: any
 ) {
-  // @ts-ignore TODO
-  let personalDictionaries = null;
-  if (
-    importedPersonalDictionaries &&
-    importedPersonalDictionaries.dictionariesNamesAndContents
-  ) {
-    personalDictionaries =
-      importedPersonalDictionaries.dictionariesNamesAndContents;
-  }
-  if (personalDictionaries === null) {
-    personalDictionaries = loadPersonalDictionariesFromLocalStorage();
-  }
-  if (personalDictionaries === null) {
-    personalDictionaries = [];
-  }
+  const personalDictionaries: PersonalDictionaryNameAndContents[] =
+    importedPersonalDictionaries?.dictionariesNamesAndContents ??
+    loadPersonalDictionariesFromLocalStorage() ??
+    [];
 
   const localConfig = personalDictionaries.map(
-    // @ts-ignore TODO
     (d) => `${SOURCE_NAMESPACES.get("user")}:${d[0]}`
   );
 
@@ -104,7 +94,6 @@ function fetchAndSetupGlobalDict(
       // }
 
       let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(
-        // @ts-ignore TODO
         personalDictionaries,
         typeyDict,
         withPlover ? latestPloverDict : null
