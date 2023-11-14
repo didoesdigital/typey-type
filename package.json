@@ -60,6 +60,7 @@
     "@storybook/testing-library": "^0.2.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.5",
+    "@types/clipboard": "1.5.36",
     "@types/d3-array": "^3.0.3",
     "@types/d3-format": "^3.0.1",
     "@types/d3-scale": "^4.0.2",
