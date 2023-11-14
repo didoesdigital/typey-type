@@ -20,9 +20,8 @@ import {
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
-import { getLesson } from './utils/getData';
+import { fetchDictionaryIndex, getLesson } from './utils/getData';
 import describePunctuation, { punctuationDescriptions } from "./utils/describePunctuation";
-import { fetchDictionaryIndex } from './utils/getData';
 import {
   generateListOfWordsAndStrokes
 } from './utils/transformingDictionaries/transformingDictionaries';
