@@ -1,37 +1,31 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import Clipboard from "clipboard";
 import GoogleAnalytics from "react-ga4";
 
-class PseudoContentButton extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      clicked: false,
+const PseudoContentButton = (props) => {
+  const [clicked, setClicked] = useState(false);
+
+  useEffect(() => {
+    const clipboard = new Clipboard(".js-clipboard-button");
+    setClicked(false);
+    return () => {
+      clipboard.destroy();
     };
-  }
+  }, []);
 
-  componentDidMount() {
-    this.clipboard = new Clipboard(".js-clipboard-button");
-
-    this.setState({ clicked: false });
-  }
-
-  componentWillUnmount() {
-    this.clipboard.destroy();
-  }
-
-  animatedPseudoContent(event) {
-    if (this.props.onClick) {
-      this.props.onClick();
+  function animatedPseudoContent(event) {
+    if (props.onClick) {
+      props.onClick();
     }
-    this.setState({ clicked: true }, () => {
-      let timeoutID = window.setTimeout(() => {
-        this.setState({ clicked: false });
-        window.clearTimeout(timeoutID);
-      }, 1000);
-    });
 
-    let target = this.props.dataClipboardTarget;
+    setClicked(true);
+
+    const timeoutID = window.setTimeout(() => {
+      window.clearTimeout(timeoutID);
+      setClicked(false);
+    }, 1000);
+
+    let target = props.dataClipboardTarget;
     if (target === "#js-metwords-from-typey-type") {
       target = "Copied progress to clipboard";
     }
@@ -61,8 +55,8 @@ class PseudoContentButton extends Component {
         label: "Target: " + target,
       });
     } else if (
-      this.props.children === "Load progress from text" ||
-      this.props.children === "Load"
+      props.children === "Load progress from text" ||
+      props.children === "Load"
     ) {
       // already handled by Progress.js restoreButtonOnClickFunction() {}
     } else {
@@ -74,20 +68,16 @@ class PseudoContentButton extends Component {
     }
   }
 
-  render() {
-    return (
-      <button
-        className={
-          this.props.className + (this.state.clicked ? " fade-out-up" : "")
-        }
-        data-clipboard-target={this.props.dataClipboardTarget}
-        onClick={this.animatedPseudoContent.bind(this)}
-        style={this.props.style || {}}
-      >
-        {this.props.children}
-      </button>
-    );
-  }
-}
+  return (
+    <button
+      className={props.className + (clicked ? " fade-out-up" : "")}
+      data-clipboard-target={props.dataClipboardTarget}
+      onClick={animatedPseudoContent}
+      style={props.style || {}}
+    >
+      {props.children}
+    </button>
+  );
+};
 
 export default PseudoContentButton;
