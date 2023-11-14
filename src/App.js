@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import "react-tippy/dist/tippy.css";
 import PARAMS from './utils/params.js';
-import LATEST_PLOVER_DICT_NAME from "./constant/latestPloverDictName";
-import SOURCE_NAMESPACES from './constant/sourceNamespaces';
 import { isLessonTextValid } from './utils/utils';
 import { getLessonIndexData } from './utils/lessonIndexData';
 import { getRecommendedNextLesson } from './utils/recommendations';
@@ -13,7 +11,6 @@ import {
   parseWordList,
   setupLessonProgress,
   loadPersonalPreferences,
-  loadPersonalDictionariesFromLocalStorage,
   matchSplitText,
   parseLesson,
   repetitionsRemaining,
@@ -23,18 +20,12 @@ import {
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
-import {
-  getLatestPloverDict,
-  getLesson
-} from './utils/getData';
+import { getLesson } from './utils/getData';
 import describePunctuation, { punctuationDescriptions } from "./utils/describePunctuation";
 import { fetchDictionaryIndex } from './utils/getData';
-import { getTypeyTypeDict } from './utils/getData';
 import {
   generateListOfWordsAndStrokes
 } from './utils/transformingDictionaries/transformingDictionaries';
-import createAGlobalLookupDictionary from "./utils/transformingDictionaries/createAGlobalLookupDictionary";
-import { AffixList } from './utils/affixList';
 import {
   Route,
   Switch
@@ -50,6 +41,7 @@ import Lessons from './pages/lessons/Lessons';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import fallbackLesson from './constant/fallbackLesson';
+import fetchAndSetupGlobalDict from './utils/app/fetchAndSetupGlobalDict';
 import calculateMemorisedWordCount from './utils/calculateMemorisedWordCount';
 import calculateSeenWordCount from './utils/calculateSeenWordCount';
 import increaseMetWords from './utils/increaseMetWords';
@@ -145,9 +137,6 @@ const AsyncGames = Loadable({
 //   loading: PageLoading,
 // });
 
-let loadingPromise = null;
-let isGlobalDictionaryUpToDate = null;
-
 /** @type {SpeechSynthesis | null} */
 let synth = null;
 try {
@@ -168,6 +157,7 @@ class App extends Component {
     let metWords = loadPersonalPreferences()[0];
     let startingMetWordsToday = loadPersonalPreferences()[0];
     let recentLessons = loadPersonalPreferences()[6];
+    this.appFetchAndSetupGlobalDict = fetchAndSetupGlobalDict.bind(this);
 
     this.state = {
       announcementMessage: null,
@@ -315,85 +305,6 @@ class App extends Component {
       });
     });
   }
-
-  // The withPlover flag here is just about whether or not to fetch the Plover dictionary file.
-  fetchAndSetupGlobalDict(withPlover, importedPersonalDictionaries) {
-    let personalDictionaries = null;
-    if (importedPersonalDictionaries && importedPersonalDictionaries.dictionariesNamesAndContents) {
-      personalDictionaries = importedPersonalDictionaries.dictionariesNamesAndContents;
-    }
-    if (personalDictionaries === null) {
-      personalDictionaries = loadPersonalDictionariesFromLocalStorage();
-    }
-    if (personalDictionaries === null) {
-      personalDictionaries = [];
-    }
-
-    const localConfig = personalDictionaries.map(d => `${SOURCE_NAMESPACES.get('user')}:${d[0]}`);
-
-    // TODO: this will all need to change when we change how Typey Type is included or excluded in
-    // personal dictionary usage…
-    let localConfigPlusTypeyType = localConfig.slice(0);
-    localConfigPlusTypeyType.unshift(`${SOURCE_NAMESPACES.get('typey')}:typey-type.json`);
-    const previouslyAppliedConfig = this.state.globalLookupDictionary['configuration'];
-    const globalLookupDictionaryMatchesConfig =
-      this.state.globalLookupDictionary &&
-      !!this.state.globalLookupDictionary['configuration'] &&
-      JSON.stringify(previouslyAppliedConfig) ===
-      JSON.stringify(localConfigPlusTypeyType);
-
-    let localConfigPlusTypeyTypeAndPlover = localConfigPlusTypeyType.slice(0);
-    localConfigPlusTypeyTypeAndPlover.push(`${SOURCE_NAMESPACES.get('plover')}:${LATEST_PLOVER_DICT_NAME}`); // reminder: .push() returns length of array, not result const
-    const globalLookupDictionaryMatchesConfigWithPlover =
-      this.state.globalLookupDictionary &&
-      !!this.state.globalLookupDictionary['configuration'] &&
-      JSON.stringify(previouslyAppliedConfig) ===
-      JSON.stringify(localConfigPlusTypeyTypeAndPlover);
-
-    let isPloverDictionaryLoaded = this.state.isPloverDictionaryLoaded;
-    if (withPlover && this.state.globalLookupDictionary && isPloverDictionaryLoaded && globalLookupDictionaryMatchesConfigWithPlover) {
-      isGlobalDictionaryUpToDate = true;
-    }
-    else if (withPlover) {
-      isGlobalDictionaryUpToDate = false;
-    }
-    else if (!withPlover && this.state.globalLookupDictionary && (globalLookupDictionaryMatchesConfig || globalLookupDictionaryMatchesConfigWithPlover)) {
-      isGlobalDictionaryUpToDate = true;
-    }
-    else {
-      isGlobalDictionaryUpToDate = false;
-    }
-
-    if (loadingPromise && isGlobalDictionaryUpToDate) {
-      return loadingPromise;
-    }
-    else {
-      loadingPromise = Promise.all([getTypeyTypeDict(), withPlover ? getLatestPloverDict() : {}]).then(data => {
-        let [typeyDict, latestPloverDict] = data;
-        // let t0 = performance.now();
-        // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
-        //   dictAndMisstrokes[1] = {};
-        // }
-
-        let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(personalDictionaries, typeyDict, withPlover ? latestPloverDict : null);
-        // let t1 = performance.now();
-        // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
-
-        // For debugging:
-        // window.lookupDict = sortedAndCombinedLookupDictionary;
-        isGlobalDictionaryUpToDate = true;
-        this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
-        this.setState({ globalLookupDictionaryLoaded: true });
-        const affixList = new AffixList(sortedAndCombinedLookupDictionary);
-        AffixList.setSharedInstance(affixList);
-      });
-
-      if (!isPloverDictionaryLoaded && withPlover) {
-        this.setState({isPloverDictionaryLoaded: true });
-      }
-      return loadingPromise;
-    }
-  };
 
   handleStopLesson(event) {
     event.preventDefault();
@@ -1030,7 +941,7 @@ class App extends Component {
 
     const loadPlover = this.state.userSettings.showStrokesAsList ? true : false;
 
-    this.fetchAndSetupGlobalDict(loadPlover, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null).then(() => {
+    this.appFetchAndSetupGlobalDict(loadPlover, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWords).join("\n");
       // parseWordList appears to remove empty lines and other garbage, we might not need it here
@@ -1198,7 +1109,7 @@ class App extends Component {
 
     if (value) {
       newState[name] = true;
-      this.fetchAndSetupGlobalDict(
+      this.appFetchAndSetupGlobalDict(
         true,
         shouldUsePersonalDictionaries ? this.state.personalDictionaries : null
       ).catch((error) => console.error(error));
@@ -1680,7 +1591,7 @@ class App extends Component {
 
           const loadPlover = this.state.userSettings.showStrokesAsList ? true : false;
 
-          this.fetchAndSetupGlobalDict(loadPlover, shouldUsePersonalDictionaries ? this.state.personalDictionaries : null).then(() => {
+          this.appFetchAndSetupGlobalDict(loadPlover, shouldUsePersonalDictionaries ? this.state.personalDictionaries : null).then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
               lesson.presentedMaterial = lessonWordsAndStrokes;
@@ -1710,7 +1621,7 @@ class App extends Component {
             && Object.entries(this.state.personalDictionaries).length > 0
             && !!this.state.personalDictionaries.dictionariesNamesAndContents;
 
-          this.fetchAndSetupGlobalDict(
+          this.appFetchAndSetupGlobalDict(
             true,
             shouldUsePersonalDictionaries ? this.state.personalDictionaries : null
           )
@@ -2309,7 +2220,7 @@ class App extends Component {
                     <DocumentTitle title={'Typey Type | Games'}>
                       <ErrorBoundary>
                         <AsyncGames
-                          fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
+                          fetchAndSetupGlobalDict={this.appFetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                           metWords={this.state.metWords}
@@ -2401,7 +2312,7 @@ class App extends Component {
                     <DocumentTitle title={'Typey Type | Flashcards'}>
                       <AsyncFlashcards
                         changeFullscreen={this.changeFullscreen.bind(this)}
-                        fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
+                        fetchAndSetupGlobalDict={this.appFetchAndSetupGlobalDict.bind(this)}
                         flashcardsMetWords={this.state.flashcardsMetWords}
                         flashcardsProgress={this.state.flashcardsProgress}
                         fullscreen={this.state.fullscreen}
@@ -2428,7 +2339,7 @@ class App extends Component {
                     <DocumentTitle title={'Typey Type | Lookup'}>
                       <ErrorBoundary>
                         <AsyncLookup
-                          fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
+                          fetchAndSetupGlobalDict={this.appFetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                           globalUserSettings={this.state.globalUserSettings}
@@ -2455,7 +2366,7 @@ class App extends Component {
                           setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
                           setAnnouncementMessageString={setAnnouncementMessageString.bind(this)}
                           setDictionaryIndex={this.setDictionaryIndex.bind(this)}
-                          fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
+                          fetchAndSetupGlobalDict={this.appFetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                           globalUserSettings={this.state.globalUserSettings}
@@ -2489,7 +2400,7 @@ class App extends Component {
                           updateFlashcardsProgress={this.updateFlashcardsProgress.bind(this)}
                           flashcardsMetWords={this.state.flashcardsMetWords}
                           flashcardsProgress={this.state.flashcardsProgress}
-                          fetchAndSetupGlobalDict={this.fetchAndSetupGlobalDict.bind(this)}
+                          fetchAndSetupGlobalDict={this.appFetchAndSetupGlobalDict.bind(this)}
                           globalLookupDictionary={this.state.globalLookupDictionary}
                           globalLookupDictionaryLoaded={this.state.globalLookupDictionaryLoaded}
                           globalUserSettings={this.state.globalUserSettings}
