@@ -2,7 +2,15 @@ import React, { useEffect, useState } from "react";
 import Clipboard from "clipboard";
 import GoogleAnalytics from "react-ga4";
 
-const PseudoContentButton = (props) => {
+type Props = {
+  children: React.ReactNode;
+  className: string;
+  dataClipboardTarget?: string;
+  style?: any;
+  onClick?: () => void;
+};
+
+const PseudoContentButton = (props: Props) => {
   const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
@@ -13,7 +21,7 @@ const PseudoContentButton = (props) => {
     };
   }, []);
 
-  function animatedPseudoContent(event) {
+  function animatedPseudoContent() {
     if (props.onClick) {
       props.onClick();
     }
