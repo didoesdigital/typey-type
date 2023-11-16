@@ -33,7 +33,6 @@ type Props = {
   changeWriterInput: (event: any) => void,
   userSettings: UserSettings,
   globalUserSettings: any,
-  setAnnouncementMessageString: (announcement: string) => void,
   setAnnouncementMessage: (app: any, content: string | Object) => void
   // stenoHintsOnTheFly: boolean
 };

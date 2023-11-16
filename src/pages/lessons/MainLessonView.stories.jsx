@@ -180,7 +180,6 @@ const Template = (args) => {
             handleUpcomingWordsLayout={() => undefined}
             updateRevisionMaterial={() => undefined}
             sayCurrentPhraseAgain={() => undefined}
-            setAnnouncementMessageString={() => undefined}
             startFromWordOne={() => undefined}
             stenoHintsOnTheFly={true}
             startCustomLesson={() => undefined}

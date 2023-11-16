@@ -17,7 +17,6 @@ const Template = (args) => {
         console.log("Change writer input");
       }}
       setAnnouncementMessage={() => console.log("announce")}
-      setAnnouncementMessageString={() => console.log("announce string")}
       globalUserSettings={{}}
       userSettings={{ stenoLayout: "stenoLayoutAmericanSteno" }}
       {...args}
