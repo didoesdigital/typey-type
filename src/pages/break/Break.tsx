@@ -1,174 +1,113 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import GoogleAnalytics from "react-ga4";
 import Subheader from "../../components/Subheader";
 
-type Props = {
-  setAnnouncementMessageString: (announcement: string) => void;
+const addLeadingZeros = (value: number): string => {
+  let textWithLeadingZeros = String(value);
+  while (textWithLeadingZeros.length < 2) {
+    textWithLeadingZeros = "0" + textWithLeadingZeros;
+  }
+  return textWithLeadingZeros;
 };
 
-type State = {
-  breakCountdown?: number;
-  breakTimeMinutes: number;
-  breakTimeSeconds: number;
-  timeToDisplay: string;
+const timeToDisplay = (remainingSeconds: number) => {
+  const breakTimeMinutes = Math.floor(remainingSeconds / 60);
+  const breakTimeSeconds = Math.floor(remainingSeconds - breakTimeMinutes * 60);
+  return `${breakTimeMinutes}:${addLeadingZeros(breakTimeSeconds)}`;
 };
 
-class Break extends Component<Props, State> {
-  mainHeading?: HTMLHeadingElement | null;
-  intervalID: any;
+const durationSeconds = 5 * 60;
 
-  state = {
-    breakCountdown: 0,
-    breakTimeMinutes: 0,
-    breakTimeSeconds: 0,
-    timeToDisplay: "5:00",
-  };
+const Break = () => {
+  const [remainingSeconds, setRemainingSeconds] = useState(durationSeconds);
+  const intervalRef = useRef<any>(null);
+  const mainHeading = useRef<HTMLHeadingElement>(null);
+  const breakDoneHeading = useRef<HTMLHeadingElement>(null);
 
-  componentDidMount() {
-    this.setState(
-      {
-        breakCountdown: Date.now() + 5 * 60 * 1000 + 999, // (5 minutes * 60 seconds * 1000 milliseconds) + almost a second to avoid skipping 4:59
-        breakTimeMinutes: 0,
-        breakTimeSeconds: 0,
-        timeToDisplay: "5:00",
-      },
-      () => {
-        this.startCountdown();
+  const isBreakDone = remainingSeconds <= 0;
+
+  useEffect(() => {
+    const finishTime = Date.now() + durationSeconds * 1000;
+
+    intervalRef.current = setInterval(() => {
+      const now = Date.now();
+      const approxSecondsRemaining = (finishTime - now) / 1000;
+      const roundedSeconds = Math.round(approxSecondsRemaining);
+
+      if (approxSecondsRemaining <= 0 && intervalRef.current) {
+        clearInterval(intervalRef.current);
       }
-    );
 
-    if (this.mainHeading) {
-      this.mainHeading.focus();
-    }
-  }
+      setRemainingSeconds(roundedSeconds);
+    }, 500);
 
-  componentWillUnmount() {
-    this.stopCountdown(false);
-  }
-
-  startCountdown() {
-    this.intervalID = window.setInterval(this.updateBreakTime, 1000);
-  }
-
-  stopCountdown(announce = true) {
-    if (this.intervalID) {
-      clearInterval(this.intervalID);
-      this.intervalID = null;
-    }
-    if (announce) {
-      this.props.setAnnouncementMessageString("Your break is done");
-    }
-  }
-
-  stopBreak() {
-    this.setState(
-      {
-        breakTimeMinutes: 0,
-        breakTimeSeconds: 0,
-        breakCountdown: 0,
-      },
-      () => {
-        this.stopCountdown();
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
       }
-    );
-  }
+    };
+  }, []);
 
-  updateBreakTime = () => {
-    let breakCountdown = this.state.breakCountdown;
-    let secondsRemaining = Math.floor(
-      ((breakCountdown || 0) - Date.now()) / 1000
-    ); // time in milliseconds ÷ 1000 milliseconds per second
-    let breakTimeMinutes = Math.floor(secondsRemaining / 60);
-    let breakTimeSeconds = Math.floor(secondsRemaining - breakTimeMinutes * 60);
-    let timeToDisplay =
-      "" + breakTimeMinutes + ":" + this.addLeadingZeros(breakTimeSeconds);
+  useEffect(() => {
+    mainHeading.current?.focus();
+  }, []);
 
-    this.setState({
-      breakCountdown: breakCountdown,
-      breakTimeMinutes: breakTimeMinutes,
-      breakTimeSeconds: breakTimeSeconds,
-      timeToDisplay: timeToDisplay,
-    });
-
-    if (breakTimeMinutes <= 0 && breakTimeSeconds <= 0) {
-      this.stopBreak();
+  useEffect(() => {
+    if (isBreakDone) {
+      breakDoneHeading.current?.focus();
     }
-  };
+  }, [isBreakDone]);
 
-  addLeadingZeros = (value: number): string => {
-    let textWithLeadingZeros = String(value);
-    while (textWithLeadingZeros.length < 2) {
-      textWithLeadingZeros = "0" + textWithLeadingZeros;
-    }
-    return textWithLeadingZeros;
-  };
-
-  reviewProgress() {
+  const reviewProgress = () => {
     GoogleAnalytics.event({
       category: "Break",
       action: "Click",
       label: "Review progress",
     });
-  }
+  };
 
-  render() {
-    let timeToDisplay = this.state.timeToDisplay;
-    let breakHeading = "Your break starts now";
-    let nextStep;
-    if (timeToDisplay === "0:00" || !this.state.breakCountdown) {
-      breakHeading = "Your break is done";
-      nextStep = (
-        <p className="text-center">
-          <Link
-            to="/progress"
-            onClick={this.reviewProgress}
-            className="link-button dib"
-            style={{ lineHeight: 2 }}
-          >
-            Review progress
-          </Link>
-        </p>
-      );
-    }
-
-    return (
-      <main id="main">
-        <Subheader>
-          <div className="flex mr1 self-center">
-            <header className="flex items-center min-h-40">
-              <h2
-                ref={(heading) => {
-                  this.mainHeading = heading;
-                }}
-                tabIndex={-1}
-                id="take-a-break"
-              >
-                Take a break
-              </h2>
-            </header>
-          </div>
-        </Subheader>
-        <div className="p3 mx-auto mw-1024">
-          <div className="mx-auto mw-568">
-            <h2 className="text-center mt3" aria-hidden="true">
-              {breakHeading}
+  return (
+    <main id="main">
+      <Subheader>
+        <div className="flex mr1 self-center">
+          <header className="flex items-center min-h-40">
+            <h2 ref={mainHeading} tabIndex={-1} id="take-a-break">
+              Take a break
             </h2>
-            <p className="mt3 text-center mb3">
-              Rest your hands and your mind. Take a 5-minute break and continue
-              or come back in 4+&nbsp;hours for another session.
-            </p>
-            <div className="text-center mb3 stat__number stat__number--min-w">
-              <span aria-live="polite" aria-atomic="true">
-                {timeToDisplay}
-              </span>
-            </div>
-            {nextStep}
-          </div>
+          </header>
         </div>
-      </main>
-    );
-  }
-}
+      </Subheader>
+      <div className="p3 mx-auto mw-1024">
+        <div className="mx-auto mw-568">
+          <h2 ref={breakDoneHeading} tabIndex={-1} className="text-center mt3">
+            {isBreakDone ? "Your break is done" : "Your break starts now"}
+          </h2>
+          <p className="mt3 text-center mb3">
+            Rest your hands and your mind. Take a 5-minute break and continue or
+            come back in 4+&nbsp;hours for another session.
+          </p>
+          <div className="text-center mb3 stat__number stat__number--min-w">
+            <span aria-live="polite" aria-atomic="true">
+              {timeToDisplay(remainingSeconds)}
+            </span>
+          </div>
+          {isBreakDone && (
+            <p className="text-center">
+              <Link
+                to="/progress"
+                onClick={reviewProgress}
+                className="link-button dib"
+                style={{ lineHeight: 2 }}
+              >
+                Review progress
+              </Link>
+            </p>
+          )}
+        </div>
+      </div>
+    </main>
+  );
+};
 
 export default Break;

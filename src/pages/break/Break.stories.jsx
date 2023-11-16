@@ -1,12 +1,11 @@
+import React from "react";
 import Break from "./Break";
 
 const meta = { component: Break, title: "Pages/Break" };
 export default meta;
 
-export const BreakStory = {
-  args: {
-    setAnnouncementMessageString: () => {
-      console.log("announce: your break is done");
-    },
-  },
+const Template = () => {
+  return <Break />;
 };
+
+export const BreakStory = Template.bind({});
