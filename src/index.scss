@@ -254,7 +254,8 @@ $large-breakpoint: 1024px;
 $medium-breakpoint: 768px;
 $small-breakpoint: 432px;
 // $extra-small-breakpoint: 336px;
-$outline-shorthand: $brand-highlight auto 5px;
+$focus-outline: 9px double #000;
+$focus-shadow: 0 0 0 6px $brand-highlight;
 
 $z-index-modal-overlay: 7;
 $z-index-particles: 6;
@@ -554,42 +555,20 @@ small, .text-small {
   line-height: 1.6;
 }
 
+// Support for focus-visible is decent now:
+// https://caniuse.com/?search=focus-visible
 :focus {
-  outline: $outline-shorthand;
-  // :focus-visible using Chrome flag: Experimental Web Platform features
-  // https://twitter.com/leaverou/status/1045768279753666562?lang=en
-  &:not(:focus-visible) { outline: none; }
-}
-
-h1:focus,
-h2:focus,
-h3:focus {
   outline: none;
-  position: relative;
-
-  &::before {
-    border-bottom: $brand-highlight solid 2px;
-    content: '';
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-  }
-
-  // :focus-visible using Chrome flag: Experimental Web Platform features
-  // https://twitter.com/leaverou/status/1045768279753666562?lang=en
-  &:focus:not(:focus-visible) {
-    outline: none;
-
-    &::before {
-      width: 0 !important;
-    }
-  }
+}
+:focus-visible {
+  outline: $focus-outline;
+  box-shadow: $focus-shadow;
 }
 
 input:focus,
 textarea:focus,
 select:focus {
-  outline-offset: 0;
+  outline-offset: -2px;
 }
 
 ::selection {
@@ -1313,9 +1292,10 @@ $textarea-padding-x: 8px;
   caret-color: var(--violet-700);
   text-decoration: underline;
 
-  &:focus {
-    outline: $outline-shorthand;
-    border-radius: 0;
+  &:focus-visible {
+    outline-offset: -2px;
+    outline: $focus-outline;
+    box-shadow: $focus-shadow;
   }
 }
 
@@ -1550,7 +1530,6 @@ $textarea-padding-x: 8px;
   &.button--secondary {
     background-color: #fff;
     border: 1px solid desaturate(add-tint($brand-primary, 60%), 10%);
-    box-shadow: 0px 1px 2px add-alpha(add-tint($brand-primary, 50%), 10%);
     color: desaturate($brand-primary, 5%);
     &:visited {
       color: desaturate($brand-primary, 15%);
@@ -1763,8 +1742,8 @@ $textarea-padding-x: 8px;
 .stroke-tip__label {
   text-decoration: underline;
   &:focus-within {
-    color: adjust-hue(add-shade($brand-primary, 10%), -45deg);
-    outline: $outline-shorthand;
+    outline: $focus-outline;
+    box-shadow: $focus-shadow;
   }
 }
 
