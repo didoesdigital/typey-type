@@ -185,7 +185,6 @@ const Template = (args) => {
             startCustomLesson={() => undefined}
             setUpProgressRevisionLesson={() => undefined}
             setupLesson={() => undefined}
-            charsPerWord={() => undefined}
             totalWordCount={1}
             upcomingPhrases={["and the"]}
             updatePreset={() => undefined}

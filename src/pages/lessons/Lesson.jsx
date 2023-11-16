@@ -228,7 +228,6 @@ class Lesson extends Component {
                 timer={this.props.timer}
                 toggleHideOtherSettings={this.toggleHideOtherSettings.bind(this)}
                 topSpeedPersonalBest={this.props.topSpeedPersonalBest}
-                charsPerWord={this.props.charsPerWord}
                 revisionMaterial={this.props.revisionMaterial}
                 revisionMode={this.props.revisionMode}
                 updatePreset={this.props.updatePreset}
