@@ -104,9 +104,6 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
                 setAnnouncementMessage={function () {
                   setAnnouncementMessage(app, this);
                 }}
-                setAnnouncementMessageString={
-                  appMethods.setAnnouncementMessageString
-                }
                 {...props}
               />
             </DocumentTitle>
@@ -148,9 +145,6 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
                   setAnnouncementMessage={function () {
                     setAnnouncementMessage(app, this);
                   }}
-                  setAnnouncementMessageString={
-                    appMethods.setAnnouncementMessageString
-                  }
                   globalUserSettings={appState.globalUserSettings}
                   userSettings={appState.userSettings}
                   {...props}
