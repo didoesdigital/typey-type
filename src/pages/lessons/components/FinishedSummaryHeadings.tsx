@@ -103,7 +103,7 @@ const FinishedSummaryHeadings = ({
         className="fixed celebration-canvas top-0 left-0 pointer-none"
       />
       <h3
-        className="negative-outline-offset dib text-center mt3"
+        className="dib text-center mt3"
         ref={finishedHeadingRef}
         tabIndex={-1}
         id="finished-summary-heading"
