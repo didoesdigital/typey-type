@@ -28,7 +28,6 @@ const Template = (args) => {
       globalLookupDictionary={globalLookupDictionary}
       globalUserSettings={{}}
       personalDictionaries={{ dictionariesNamesAndContents: null }}
-      updateGlobalLookupDictionary={() => undefined}
       updatePersonalDictionaries={() => undefined}
       toggleExperiment={() => console.log("toggle experiment")}
       match={{
