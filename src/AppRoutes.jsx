@@ -324,7 +324,6 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
                   lookupTerm={appState.lookupTerm}
                   personalDictionaries={appState.personalDictionaries}
                   setCustomLessonContent={appMethods.setCustomLessonContent}
-                  stenoHintsOnTheFly={appProps.stenohintsonthefly}
                   updateGlobalLookupDictionary={
                     appMethods.updateGlobalLookupDictionary
                   }

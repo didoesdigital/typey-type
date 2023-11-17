@@ -6,7 +6,6 @@ import Subheader from "../../components/Subheader";
 import getWordFamilyGroup from "./utilities/getWordFamilyGroup";
 
 import type {
-  Experiments,
   GlobalUserSettings,
   UserSettings,
 } from "../../types";
@@ -22,7 +21,6 @@ type Props = {
   lookupTerm?: string;
   personalDictionaries: any;
   setCustomLessonContent: any;
-  stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
   updateGlobalLookupDictionary: any;
   updatePersonalDictionaries: any;
   userSettings: UserSettings;
@@ -35,7 +33,6 @@ const Lookup = ({
   globalUserSettings,
   lookupTerm,
   personalDictionaries,
-  stenohintsonthefly,
   updateGlobalLookupDictionary,
   updatePersonalDictionaries,
   userSettings,
@@ -125,7 +122,6 @@ const Lookup = ({
                 lookupTerm={lookupTerm}
                 onChange={strokesForWordsChange}
                 personalDictionaries={personalDictionaries}
-                stenoHintsOnTheFly={stenohintsonthefly}
                 trackPhrase={setTrackPhrase}
                 updateGlobalLookupDictionary={updateGlobalLookupDictionary}
                 updatePersonalDictionaries={updatePersonalDictionaries}
