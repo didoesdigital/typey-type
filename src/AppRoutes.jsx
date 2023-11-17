@@ -97,15 +97,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         path="/"
         render={(props) => (
           <div>
-            <Header
-              fullscreen={appState.fullscreen}
-              restartLesson={appMethods.restartLesson}
-              lessonSubTitle={appState.lesson.subtitle}
-              lessonTitle={appState.lesson.title}
-              path={appState.lesson.path}
-              settings={appState.lesson.settings}
-              handleStopLesson={appMethods.handleStopLesson}
-            />
+            <Header fullscreen={appState.fullscreen} />
 
             <DocumentTitle title="Typey Type for Stenographers">
               <AsyncHome
@@ -125,15 +117,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         path="/support"
         render={() => (
           <div>
-            <Header
-              fullscreen={appState.fullscreen}
-              restartLesson={appMethods.restartLesson}
-              lessonSubTitle={appState.lesson.subtitle}
-              lessonTitle={appState.lesson.title}
-              path={appState.lesson.path}
-              settings={appState.lesson.settings}
-              handleStopLesson={appMethods.handleStopLesson}
-            />
+            <Header fullscreen={appState.fullscreen} />
 
             <DocumentTitle title={"Typey Type | About"}>
               <ErrorBoundary>
@@ -154,15 +138,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         path="/writer"
         render={(props) => (
           <div>
-            <Header
-              fullscreen={appState.fullscreen}
-              restartLesson={appMethods.restartLesson}
-              lessonSubTitle={appState.lesson.subtitle}
-              lessonTitle={appState.lesson.title}
-              path={appState.lesson.path}
-              settings={appState.lesson.settings}
-              handleStopLesson={appMethods.handleStopLesson}
-            />
+            <Header fullscreen={appState.fullscreen} />
 
             <DocumentTitle title={"Typey Type | Writer"}>
               <ErrorBoundary>
@@ -188,16 +164,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         path="/games"
         render={(props) => (
           <div>
-            <Header
-              fullscreen={appState.fullscreen}
-              restartLesson={appMethods.restartLesson}
-              lessonSubTitle={appState.lesson.subtitle}
-              lessonTitle={appState.lesson.title}
-              path={appState.lesson.path}
-              settings={appState.lesson.settings}
-              handleStopLesson={appMethods.handleStopLesson}
-            />
-
+            <Header fullscreen={appState.fullscreen} />
             <DocumentTitle title={"Typey Type | Games"}>
               <ErrorBoundary>
                 <AsyncGames
@@ -226,16 +193,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         path="/break"
         render={(props) => (
           <div>
-            <Header
-              fullscreen={appState.fullscreen}
-              restartLesson={appMethods.restartLesson}
-              lessonSubTitle={appState.lesson.subtitle}
-              lessonTitle={appState.lesson.title}
-              path={appState.lesson.path}
-              settings={appState.lesson.settings}
-              handleStopLesson={appMethods.handleStopLesson}
-            />
-
+            <Header fullscreen={appState.fullscreen} />
             <DocumentTitle title={"Typey Type | Take a break"}>
               <ErrorBoundary>
                 <AsyncBreak
@@ -253,25 +211,13 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         path="/contribute"
         render={() => (
           <div>
-            <Header
-              fullscreen={appState.fullscreen}
-              restartLesson={appMethods.restartLesson}
-              lessonSubTitle={appState.lesson.subtitle}
-              lessonTitle={appState.lesson.title}
-              path={appState.lesson.path}
-              settings={appState.lesson.settings}
-              handleStopLesson={appMethods.handleStopLesson}
-            />
-
+            <Header fullscreen={appState.fullscreen} />
             <DocumentTitle title={"Typey Type | Contribute"}>
               <ErrorBoundary>
                 <AsyncContribute
                   setAnnouncementMessage={function () {
                     setAnnouncementMessage(app, this);
                   }}
-                  setAnnouncementMessageString={
-                    appMethods.setAnnouncementMessageString
-                  }
                 />
               </ErrorBoundary>
             </DocumentTitle>
@@ -282,16 +228,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         path="/progress"
         render={() => (
           <div>
-            <Header
-              fullscreen={appState.fullscreen}
-              restartLesson={appMethods.restartLesson}
-              lessonSubTitle={appState.lesson.subtitle}
-              lessonTitle={appState.lesson.title}
-              path={appState.lesson.path}
-              settings={appState.lesson.settings}
-              handleStopLesson={appMethods.handleStopLesson}
-            />
-
+            <Header fullscreen={appState.fullscreen} />
             <DocumentTitle title={"Typey Type | Progress"}>
               <ErrorBoundary>
                 <AsyncProgress
@@ -343,16 +280,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         path="/flashcards"
         render={() => (
           <div>
-            <Header
-              fullscreen={appState.fullscreen}
-              restartLesson={appMethods.restartLesson}
-              lessonSubTitle={appState.lesson.subtitle}
-              lessonTitle={appState.lesson.title}
-              path={appState.lesson.path}
-              settings={appState.lesson.settings}
-              handleStopLesson={appMethods.handleStopLesson}
-            />
-
+            <Header fullscreen={appState.fullscreen} />
             <DocumentTitle title={"Typey Type | Flashcards"}>
               <AsyncFlashcards
                 changeFullscreen={appMethods.changeFullscreen}
@@ -387,16 +315,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         path="/lookup"
         render={(props) => (
           <div>
-            <Header
-              fullscreen={appState.fullscreen}
-              restartLesson={appMethods.restartLesson}
-              lessonSubTitle={appState.lesson.subtitle}
-              lessonTitle={appState.lesson.title}
-              path={appState.lesson.path}
-              settings={appState.lesson.settings}
-              handleStopLesson={appMethods.handleStopLesson}
-            />
-
+            <Header fullscreen={appState.fullscreen} />
             <DocumentTitle title={"Typey Type | Lookup"}>
               <ErrorBoundary>
                 <AsyncLookup
@@ -430,16 +349,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         path="/dictionaries"
         render={(props) => (
           <div>
-            <Header
-              fullscreen={appState.fullscreen}
-              restartLesson={appMethods.restartLesson}
-              lessonSubTitle={appState.lesson.subtitle}
-              lessonTitle={appState.lesson.title}
-              path={appState.lesson.path}
-              settings={appState.lesson.settings}
-              handleStopLesson={appMethods.handleStopLesson}
-            />
-
+            <Header fullscreen={appState.fullscreen} />
             <DocumentTitle title={"Typey Type | Dictionaries"}>
               <ErrorBoundary>
                 <AsyncDictionaries
@@ -480,16 +390,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         path="/lessons"
         render={(props) => (
           <div>
-            <Header
-              fullscreen={appState.fullscreen}
-              restartLesson={appMethods.restartLesson}
-              lessonSubTitle={appState.lesson.subtitle}
-              lessonTitle={appState.lesson.title}
-              path={appState.lesson.path}
-              settings={appState.lesson.settings}
-              handleStopLesson={appMethods.handleStopLesson}
-            />
-
+            <Header fullscreen={appState.fullscreen} />
             <DocumentTitle title={"Typey Type | Lessons"}>
               <ErrorBoundary>
                 <Lessons
