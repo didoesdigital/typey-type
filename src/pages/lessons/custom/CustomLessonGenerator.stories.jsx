@@ -1,5 +1,5 @@
 import React from "react";
-import { screen, within, userEvent } from "@storybook/testing-library";
+import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 
 import CustomLessonGenerator from "./CustomLessonGenerator";
@@ -69,6 +69,6 @@ CustomLessonGeneratorHelp.play = async ({ canvasElement }) => {
   const submitButton = canvas.getByRole("button", { name: "Show help" });
   await userEvent.click(submitButton);
 
-  const textElement = screen.getByText(/To use the lesson generator/i);
+  const textElement = canvas.getByText(/To use the lesson generator/i);
   await expect(textElement).toBeVisible();
 };
