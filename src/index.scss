@@ -560,7 +560,7 @@ small, .text-small {
 :focus {
   outline: none;
 }
-:focus-visible {
+:focus-visible:not(h3[tabindex="-1"]) {
   outline: $focus-outline;
   box-shadow: $focus-shadow;
 }
