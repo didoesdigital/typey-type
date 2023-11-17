@@ -24,7 +24,7 @@ const convertDictionaryToLesson = (text: string) => {
         .join("\n");
     }
   } catch (error) {
-    // console.error(error);
+    console.warn(error);
   }
   return newLesson;
 };
