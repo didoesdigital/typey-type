@@ -1675,7 +1675,7 @@ $textarea-padding-x: 8px;
 .say-word-button {
   @media (min-width: $large-breakpoint) {
     position: absolute;
-    transform: translate(calc(-100% - 4px), -2px);
+    transform: translate(calc(-100% - 8px), -2px);
   }
 }
 
