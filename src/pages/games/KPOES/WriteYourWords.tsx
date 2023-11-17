@@ -102,7 +102,7 @@ const YourWords = ({
         </>
       ) : (
         <>
-          <p className="mb0">
+          <p className="mb1">
             <label htmlFor="write-your-words">Write your words</label>
           </p>
           <textarea
@@ -116,7 +116,7 @@ const YourWords = ({
             rows={6}
             value={yourWords}
           />
-          <p>
+          <p className="mt1">
             <WordCount wordCount={wordCount} />
           </p>
           <button className="button mr2" onClick={doneHandler}>
