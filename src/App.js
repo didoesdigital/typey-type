@@ -439,7 +439,7 @@ class App extends Component {
 
     this.setState({userSettings: newState}, () => {
       if (!(name === 'caseSensitive')) {
-        this.setupLesson('There are no words to write.');
+        this.setupLesson();
       }
       writePersonalPreferences('userSettings', this.state.userSettings);
 
@@ -1291,7 +1291,7 @@ class App extends Component {
     return value;
   }
 
-  setupLesson(optionalAnnouncementMessage) {
+  setupLesson() {
     let newLesson = Object.assign({}, this.state.lesson);
 
     if ((typeof newLesson === 'object' && Object.entries(newLesson).length === 0 && newLesson.constructor === Object) || newLesson === null ) {
@@ -1444,9 +1444,6 @@ class App extends Component {
       let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
       let announcementMessage = 'Navigated to: ' + newLesson.title;
-      if (optionalAnnouncementMessage) {
-        announcementMessage = optionalAnnouncementMessage;
-      }
 
       this.setState({
         actualText: ``,
