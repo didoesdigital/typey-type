@@ -190,12 +190,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
               <Header fullscreen={appState.fullscreen} />
               <DocumentTitle title={"Typey Type | Take a break"}>
                 <ErrorBoundary>
-                  <AsyncBreak
-                    setAnnouncementMessage={function () {
-                      setAnnouncementMessage(app, this);
-                    }}
-                    {...props}
-                  />
+                  <AsyncBreak />
                 </ErrorBoundary>
               </DocumentTitle>
             </div>
