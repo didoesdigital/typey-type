@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Tooltip } from "react-tippy";
+import useAnnounceTooltip from "./Announcer/useAnnounceTooltip";
 
 const Scores = (props) => {
   const prevTimer = useRef(null);
+
+  const announceTooltip = useAnnounceTooltip();
 
   const [wordCount, setWordCount] = useState(0);
   const [wordsPerMinute, setWordsPerMinute] = useState(0);
@@ -64,7 +67,7 @@ const Scores = (props) => {
               theme="didoesdigital"
               title="words per minute"
               trigger="mouseenter focus click"
-              onShow={props.setAnnouncementMessage}
+              onShow={announceTooltip}
             >
               WPM
             </Tooltip>
