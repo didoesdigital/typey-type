@@ -1,19 +1,22 @@
-import React, { Component } from "react";
+import React, {
+  FC,
+  useEffect,
+  useRef,
+  useState,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { Howl } from "howler";
 import { IconMetronome } from "../../../components/Icon";
 import { Tooltip } from "react-tippy";
 import GoogleAnalytics from "react-ga4";
 import plink from "../../../sounds/digi_plink-with-silence.mp3";
+import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 
 import type { UserSettings } from "../../../types";
 
-type State = {
-  userGestureToStartMetronome: boolean;
-};
-
 type Props = {
   userSettings: UserSettings;
-  setAnnouncementMessage: (app: any, content: string | Object) => void;
 };
 
 type Options = {
@@ -30,7 +33,11 @@ function bpmBracketsSprite() {
   return spriteObj;
 }
 
-function playMetronome(options: Options, withAnalytics?: string) {
+function playMetronome(
+  options: Options,
+  setUserGestureToStartMetronome: Dispatch<SetStateAction<boolean>>,
+  withAnalytics?: string
+) {
   if (sound) {
     sound.loop(false);
     sound = null;
@@ -50,8 +57,7 @@ function playMetronome(options: Options, withAnalytics?: string) {
     },
   });
 
-  // @ts-ignore 'this' implicitly has type 'any'
-  this.setState({ userGestureToStartMetronome: true });
+  setUserGestureToStartMetronome(true);
 
   const id = options?.id ? options.id : "bpm10";
   if (!sound.playing()) {
@@ -93,101 +99,109 @@ function playId(beatsPerMinute: number) {
   return `bpm${bpmBracket}`;
 }
 
-class Metronome extends Component<Props, State> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      userGestureToStartMetronome: false,
-    };
-  }
+const Metronome: FC<Props> = (props) => {
+  const prevBpmRef = useRef<number>(10);
+  const announceTooltip = useAnnounceTooltip();
 
-  componentDidUpdate(prevProps: { [keyName: string]: any }) {
-    if (
-      this.state.userGestureToStartMetronome &&
-      this.props.userSettings &&
-      prevProps.userSettings.beatsPerMinute !==
-        this.props.userSettings.beatsPerMinute
-    ) {
+  const [userGestureToStartMetronome, setUserGestureToStartMetronome] =
+    useState(false);
+
+  const beatsPerMinute = props.userSettings?.beatsPerMinute ?? null;
+
+  useEffect(() => {
+    if (userGestureToStartMetronome && prevBpmRef.current !== beatsPerMinute) {
       stopMetronome.call(this);
-      playMetronome.call(this, {
-        id: playId(this.props.userSettings.beatsPerMinute),
-      });
+
+      setTimeout(() => {
+        playMetronome.call(
+          this,
+          {
+            id: playId(beatsPerMinute),
+          },
+          setUserGestureToStartMetronome
+        );
+      }, 0);
     }
-  }
+  }, [beatsPerMinute, userGestureToStartMetronome]);
 
-  componentWillUnmount() {
-    stopMetronome.call(this);
-  }
+  useEffect(() => {
+    prevBpmRef.current = beatsPerMinute;
+  }, [beatsPerMinute]);
 
-  render() {
-    return (
-      <p>
-        <button
-          aria-label="Start metronome"
-          className="button button--secondary mr2"
-          onClick={() =>
-            playMetronome.call(
-              this,
-              { id: playId(this.props.userSettings.beatsPerMinute) },
-              "withAnalytics"
-            )
-          }
+  useEffect(() => {
+    return () => {
+      stopMetronome.call(this);
+    };
+  }, []);
+
+  return (
+    <p>
+      <button
+        aria-label="Start metronome"
+        className="button button--secondary mr2"
+        onClick={() =>
+          playMetronome.call(
+            this,
+            { id: playId(props.userSettings.beatsPerMinute) },
+            setUserGestureToStartMetronome,
+            "withAnalytics"
+          )
+        }
+      >
+        {/* @ts-ignore */}
+        <Tooltip
+          title="Start the metronome for finger drills and improving rhythm"
+          className="mw-240"
+          animation="shift"
+          arrow="true"
+          duration="200"
+          tabIndex="0"
+          tag="span"
+          theme="didoesdigital didoesdigital-sm"
+          trigger="mouseenter focus click"
+          onShow={announceTooltip}
         >
-          {/* @ts-ignore */}
-          <Tooltip
-            title="Start the metronome for finger drills and improving rhythm"
-            className="mw-240"
-            animation="shift"
-            arrow="true"
-            duration="200"
-            tabIndex="0"
-            tag="span"
-            theme="didoesdigital didoesdigital-sm"
-            trigger="mouseenter focus click"
-            onShow={this.props.setAnnouncementMessage}
-          >
-            <IconMetronome
-              role="presentation"
-              iconWidth="24"
-              iconHeight="24"
-              className="svg-icon-wrapper svg-baseline"
-              title="Metronome"
-            />{" "}
-            Start
-          </Tooltip>
-        </button>
-        <button
-          aria-label="Stop metronome"
-          className="button button--secondary"
-          onClick={() => stopMetronome.call(this, "withAnalytics")}
+          <IconMetronome
+            role="presentation"
+            iconWidth="24"
+            iconHeight="24"
+            className="svg-icon-wrapper svg-baseline"
+            title="Metronome"
+          />{" "}
+          Start
+        </Tooltip>
+      </button>
+      <button
+        aria-label="Stop metronome"
+        className="button button--secondary"
+        onClick={() => stopMetronome.call(this, "withAnalytics")}
+      >
+        {/* @ts-ignore */}
+        <Tooltip
+          title="Stop the metronome"
+          className="mw-240"
+          animation="shift"
+          arrow="true"
+          duration="200"
+          tabIndex="0"
+          tag="span"
+          theme="didoesdigital didoesdigital-sm"
+          trigger="mouseenter focus click"
+          onShow={announceTooltip}
         >
-          {/* @ts-ignore */}
-          <Tooltip
-            title="Stop the metronome"
-            className="mw-240"
-            animation="shift"
-            arrow="true"
-            duration="200"
-            tabIndex="0"
-            tag="span"
-            theme="didoesdigital didoesdigital-sm"
-            trigger="mouseenter focus click"
-            onShow={this.props.setAnnouncementMessage}
-          >
-            <IconMetronome
-              role="presentation"
-              iconWidth="24"
-              iconHeight="24"
-              className="svg-icon-wrapper svg-baseline"
-              title="Metronome"
-            />{" "}
-            Stop
-          </Tooltip>
-        </button>
-      </p>
-    );
-  }
-}
+          <IconMetronome
+            role="presentation"
+            iconWidth="24"
+            iconHeight="24"
+            className="svg-icon-wrapper svg-baseline"
+            title="Metronome"
+          />{" "}
+          Stop
+        </Tooltip>
+      </button>
+    </p>
+  );
+};
 
 export default Metronome;
 export { bpmBracketsSprite, playId };

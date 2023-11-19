@@ -234,7 +234,6 @@ const Finished = ({
               chooseStudy={chooseStudy}
               disableUserSettings={disableUserSettings}
               hideOtherSettings={hideOtherSettings}
-              setAnnouncementMessage={setAnnouncementMessage}
               toggleHideOtherSettings={toggleHideOtherSettings}
               userSettings={userSettings}
               updatePreset={updatePreset}

@@ -3,12 +3,12 @@ import ReactModal from "react-modal";
 import Metronome from "./Metronome";
 import { Tooltip } from "react-tippy";
 import type { Study } from "../../../types";
+import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 
 type LessonCanvasFooterProps = {
   chooseStudy: () => void;
   disableUserSettings: boolean;
   hideOtherSettings: boolean;
-  setAnnouncementMessage: () => void;
   toggleHideOtherSettings: () => void;
   userSettings: any;
   updatePreset: (studyType: Study) => void;
@@ -18,12 +18,12 @@ const LessonCanvasFooter = ({
   chooseStudy,
   disableUserSettings,
   hideOtherSettings,
-  setAnnouncementMessage,
   toggleHideOtherSettings,
   userSettings,
   updatePreset,
 }: LessonCanvasFooterProps) => {
   const [showModal, setShowModal] = useState(false);
+  const announceTooltip = useAnnounceTooltip();
 
   const studyBlurb =
     userSettings.study === "practice"
@@ -55,10 +55,7 @@ const LessonCanvasFooter = ({
 
   return (
     <div className="flex flex-wrap mx-auto mw-1440 justify-between text-small">
-      <Metronome
-        setAnnouncementMessage={setAnnouncementMessage}
-        userSettings={userSettings}
-      />
+      <Metronome userSettings={userSettings} />
       <div className="flex flex-wrap content-center">
         <fieldset className="dc hide-sm">
           {/* @ts-ignore */}
@@ -73,7 +70,7 @@ const LessonCanvasFooter = ({
             tag="p"
             theme="didoesdigital didoesdigital-sm"
             trigger="mouseenter focus click"
-            onShow={setAnnouncementMessage}
+            onShow={announceTooltip}
           >
             <legend className="flex mr3">Study type:</legend>
           </Tooltip>
@@ -103,7 +100,7 @@ const LessonCanvasFooter = ({
                     tag="span"
                     theme="didoesdigital didoesdigital-sm"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     Discover
                   </Tooltip>
@@ -145,7 +142,7 @@ const LessonCanvasFooter = ({
                     tag="span"
                     theme="didoesdigital didoesdigital-sm"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     Revise
                   </Tooltip>
@@ -189,7 +186,7 @@ const LessonCanvasFooter = ({
                     tag="span"
                     theme="didoesdigital didoesdigital-sm"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     Drill
                   </Tooltip>
@@ -231,7 +228,7 @@ const LessonCanvasFooter = ({
                     tag="span"
                     theme="didoesdigital didoesdigital-sm"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     Practice
                   </Tooltip>
