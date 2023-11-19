@@ -19,6 +19,14 @@ function hashToQuery (hash) {
   return hash
 }
 
+const dictionaryEntryForTabSpace = '"STA*PB": "{#Tab}{#space}",';
+const dictionaryEntryForWinNextLessonAccessKey = '"HR*FPB": "{#alt(shift(o))}",';
+const dictionaryEntryForMacNextLessonAccessKey = '"HR*FPB": "{#control(option(o))}",';
+const dictionaryEntryForWinRestartAccessKey = '"STA*RT": "{#alt(shift(s))}",';
+const dictionaryEntryForMacRestartAccessKey = '"STA*RT": "{#control(option(s))}",';
+const dictionaryEntryForWinReviseAccessKey = '"SRAO*EUZ": "{#alt(shift(r))}",';
+const dictionaryEntryForMacReviseAccessKey = '"SRAO*EUZ": "{#control(option(r))}",';
+
 class Support extends Component {
   componentDidMount() {
     window.location.hash = window.decodeURIComponent(window.location.hash);
@@ -59,13 +67,6 @@ class Support extends Component {
   }
 
   render() {
-    const dictionaryEntryForTabSpace = '"STA*PB": "{#Tab}{#space}",';
-    const dictionaryEntryForWinNextLessonAccessKey = '"HR*FPB": "{#alt(shift(o))}",';
-    const dictionaryEntryForMacNextLessonAccessKey = '"HR*FPB": "{#control(option(o))}",';
-    const dictionaryEntryForWinRestartAccessKey = '"STA*RT": "{#alt(shift(s))}",';
-    const dictionaryEntryForMacRestartAccessKey = '"STA*RT": "{#control(option(s))}",';
-    const dictionaryEntryForWinReviseAccessKey = '"SRAO*EUZ": "{#alt(shift(r))}",';
-    const dictionaryEntryForMacReviseAccessKey = '"SRAO*EUZ": "{#control(option(r))}",';
     return (
       <main id="main">
         <Subheader>
