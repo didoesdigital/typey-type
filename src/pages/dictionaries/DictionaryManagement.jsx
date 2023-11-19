@@ -10,6 +10,7 @@ import PseudoContentButton from "../../components/PseudoContentButton";
 import { writePersonalPreferences } from "../../utils/typey-type";
 import misstrokesJSON from "../../json/misstrokes.json";
 import Subheader from "../../components/Subheader";
+import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
 
 // type Props = {
 //   fetchAndSetupGlobalDict
@@ -35,6 +36,7 @@ const invalidEntries = {
 const DictionaryManagement = (props) => {
   const mainHeading = useRef(null);
   // const mainHeading = useRef<HTMLHeadingElement>(null);
+  const { updateMessage } = useAnnouncerApi();
 
   const [misstrokesInDictionaries, setMisstrokesInDictionaries] =
     useState(null);
@@ -387,6 +389,8 @@ const DictionaryManagement = (props) => {
           "debug"
         );
       }
+    } else {
+      updateMessage("Applied!");
     }
 
     setImportedDictionariesLoading(false);
@@ -470,18 +474,17 @@ const DictionaryManagement = (props) => {
         setImportedDictionariesLoaded(false);
         setImportedDictionariesLoading(false);
       });
-    props.setAnnouncementMessageString("Applied!");
   }
 
   function showDictionaryErrorNotification(name) {
-    props.setAnnouncementMessageString(
+    updateMessage(
       "Unable to save dictionaries. See the message at the top of the page for more details."
     );
     setDictionaryErrorNotification(name || null);
   }
 
   function dismissDictionaryErrorNotification() {
-    props.setAnnouncementMessageString("");
+    updateMessage("");
     setDictionaryErrorNotification(null);
   }
 
