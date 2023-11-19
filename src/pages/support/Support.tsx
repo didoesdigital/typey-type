@@ -9,7 +9,7 @@ import DescriptionDetails from "../../components/DescriptionDetails";
 import Subheader from "../../components/Subheader";
 import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
-function hashToQuery(hash) {
+function hashToQuery(hash: string) {
   if (hash.includes(":~:text")) {
     const trimmedHashText = hash.replace(":~:text=", "");
     if (trimmedHashText.includes(encodeURIComponent("How long"))) {
@@ -33,7 +33,7 @@ const dictionaryEntryForMacReviseAccessKey =
   '"SRAO*EUZ": "{#control(option(r))}",';
 
 const Support = () => {
-  const mainHeading = useRef(null);
+  const mainHeading = useRef<HTMLHeadingElement>(null);
   const announceTooltip = useAnnounceTooltip();
 
   useEffect(() => {
@@ -42,20 +42,22 @@ const Support = () => {
       const hash = window.location.hash;
       if (hash && hash.length > 0) {
         try {
-          const el = document.querySelector(hashToQuery(hash));
+          const el = document.querySelector<HTMLAnchorElement>(
+            hashToQuery(hash)
+          );
           let top = 0;
           if (el && el.getBoundingClientRect().top) {
             top = el.getBoundingClientRect().top;
           }
-          let scrollOptions = {
+          const scrollOptions: ScrollToOptions = {
             left: 0,
-            top: window.pageYOffset + top,
+            top: window.scrollY + top,
             behavior: "smooth",
           };
           if (el) {
             window.scrollTo(scrollOptions);
             window.setTimeout(function () {
-              el.focus();
+              el?.focus();
             }, 1000);
           }
         } catch (error) {
