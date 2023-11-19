@@ -546,7 +546,7 @@ class Support extends Component {
               </DescriptionDetails>
             </DescriptionList>
 
-            <h4 id="flashcards" tabIndex="-1">
+            <h4 id="flashcards" tabIndex={-1}>
               Flashcards
             </h4>
             <p>
@@ -634,7 +634,7 @@ class Support extends Component {
               diagrams.
             </p>
 
-            <h4 id="offline" tabIndex="-1">
+            <h4 id="offline" tabIndex={-1}>
               Offline
             </h4>
             <p>
@@ -1575,7 +1575,7 @@ class Support extends Component {
               .
             </p>
 
-            <h3 id="privacy" tabIndex="-1">
+            <h3 id="privacy" tabIndex={-1}>
               Privacy
             </h3>
             <p>
