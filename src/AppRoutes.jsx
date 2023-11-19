@@ -7,6 +7,9 @@ import PageLoading from "./components/PageLoading";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Lessons from "./pages/lessons/Lessons";
 import Header from "./components/Header";
+import AnnouncerController from "./components/Announcer/AnnouncerController";
+import Announcer from "./components/Announcer/Announcer";
+
 import setAnnouncementMessage from "./components/Announcements/setAnnouncementMessage";
 
 const AsyncBreak = Loadable({
@@ -91,6 +94,8 @@ const AsyncGames = Loadable({
 
 const AppRoutes = ({ appProps, appState, appMethods, app }) => {
   return (
+    <AnnouncerController>
+    <Announcer />
     <Switch>
       <Route
         exact={true}
@@ -544,6 +549,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         )}
       />
     </Switch>
+    </AnnouncerController>
   );
 };
 

@@ -4,13 +4,11 @@ import { Link } from "react-router-dom";
 import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
 import Subheader from "../../components/Subheader";
+import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
-type Props = {
-  setAnnouncementMessage: () => void;
-};
-
-const Contribute = ({ setAnnouncementMessage }: Props) => {
+const Contribute = () => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
+  const announceTooltip = useAnnounceTooltip();
 
   useEffect(() => {
     mainHeading.current?.focus();
@@ -51,7 +49,7 @@ const Contribute = ({ setAnnouncementMessage }: Props) => {
                 tag="span"
                 theme="didoesdigital"
                 trigger="mouseenter focus click"
-                onShow={setAnnouncementMessage}
+                onShow={announceTooltip}
               >
                 <IconExternal
                   ariaHidden="true"
@@ -90,7 +88,7 @@ const Contribute = ({ setAnnouncementMessage }: Props) => {
                   tag="span"
                   theme="didoesdigital"
                   trigger="mouseenter focus click"
-                  onShow={setAnnouncementMessage}
+                  onShow={announceTooltip}
                 >
                   <IconExternal
                     ariaHidden="true"
@@ -129,7 +127,7 @@ const Contribute = ({ setAnnouncementMessage }: Props) => {
                   tag="span"
                   theme="didoesdigital"
                   trigger="mouseenter focus click"
-                  onShow={setAnnouncementMessage}
+                  onShow={announceTooltip}
                 >
                   <IconExternal
                     ariaHidden="true"
@@ -166,7 +164,7 @@ const Contribute = ({ setAnnouncementMessage }: Props) => {
                 tag="span"
                 theme="didoesdigital"
                 trigger="mouseenter focus click"
-                onShow={setAnnouncementMessage}
+                onShow={announceTooltip}
               >
                 <IconExternal
                   ariaHidden="true"
@@ -200,7 +198,7 @@ const Contribute = ({ setAnnouncementMessage }: Props) => {
                 tag="span"
                 theme="didoesdigital"
                 trigger="mouseenter focus click"
-                onShow={setAnnouncementMessage}
+                onShow={announceTooltip}
               >
                 <IconExternal
                   ariaHidden="true"
@@ -234,7 +232,7 @@ const Contribute = ({ setAnnouncementMessage }: Props) => {
                   tag="span"
                   theme="didoesdigital"
                   trigger="mouseenter focus click"
-                  onShow={setAnnouncementMessage}
+                  onShow={announceTooltip}
                 >
                   <IconExternal
                     ariaHidden="true"
@@ -266,7 +264,7 @@ const Contribute = ({ setAnnouncementMessage }: Props) => {
                 tag="span"
                 theme="didoesdigital"
                 trigger="mouseenter focus click"
-                onShow={setAnnouncementMessage}
+                onShow={announceTooltip}
               >
                 <IconExternal
                   ariaHidden="true"
@@ -300,7 +298,7 @@ const Contribute = ({ setAnnouncementMessage }: Props) => {
                 tag="span"
                 theme="didoesdigital"
                 trigger="mouseenter focus click"
-                onShow={setAnnouncementMessage}
+                onShow={announceTooltip}
               >
                 <IconExternal
                   ariaHidden="true"
