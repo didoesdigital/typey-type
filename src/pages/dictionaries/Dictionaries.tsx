@@ -103,7 +103,6 @@ const Dictionaries = ({
         <Route exact={true} path={url}>
           <DictionariesIndex
             dictionaryIndex={dictionaryIndex}
-            setAnnouncementMessage={setAnnouncementMessage}
             setDictionaryIndex={setDictionaryIndex}
             stenohintsonthefly={stenohintsonthefly}
             userSettings={userSettings}

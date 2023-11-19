@@ -5,6 +5,7 @@ import StrokesForWords from "../../components/StrokesForWords";
 import { IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
 import Subheader from "../../components/Subheader";
+import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
 import type {
   Experiments,
@@ -29,7 +30,6 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
   personalDictionaries: PersonalDictionaryNameAndContents[];
-  setAnnouncementMessage: () => void;
   setDictionaryIndex: () => void;
   stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
   updateGlobalLookupDictionary: any;
@@ -61,7 +61,7 @@ const getInternalLink = (dictLink: DictLink, dictTitle: PrettyLessonTitle) =>
 const getExternalLink = (
   dictLink: DictLink,
   dictTitle: PrettyLessonTitle,
-  setAnnouncementMessage: () => void
+  announceTooltip: (this: HTMLElement) => void
 ) =>
   isInternalDictLink(dictLink) ? null : (
     <a
@@ -82,7 +82,7 @@ const getExternalLink = (
         tag="span"
         theme="didoesdigital"
         trigger="mouseenter focus click"
-        onShow={setAnnouncementMessage}
+        onShow={announceTooltip}
       >
         <IconExternal
           ariaHidden="true"
@@ -99,7 +99,6 @@ const getExternalLink = (
 const DictionariesIndex = ({
   dictionaryIndex,
   setDictionaryIndex,
-  setAnnouncementMessage,
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
@@ -111,6 +110,7 @@ const DictionariesIndex = ({
   userSettings,
 }: Props) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
+  const announceTooltip = useAnnounceTooltip();
 
   useEffect(() => {
     if (mainHeading) {
@@ -146,11 +146,7 @@ const DictionariesIndex = ({
     const learnMoreLink =
       dictionary.link && dictionary.link.length > 0
         ? getInternalLink(dictionary.link, title) ||
-          getExternalLink(
-            dictionary.link,
-            dictionary.title,
-            setAnnouncementMessage
-          )
+          getExternalLink(dictionary.link, dictionary.title, announceTooltip)
         : null;
 
     const dictionarypath = dictionary.path
@@ -222,7 +218,7 @@ const DictionariesIndex = ({
                       tag="span"
                       theme="didoesdigital"
                       trigger="mouseenter focus click"
-                      onShow={setAnnouncementMessage}
+                      onShow={announceTooltip}
                     >
                       <IconExternal
                         ariaHidden="true"
@@ -282,7 +278,7 @@ const DictionariesIndex = ({
                       tag="span"
                       theme="didoesdigital"
                       trigger="mouseenter focus click"
-                      onShow={setAnnouncementMessage}
+                      onShow={announceTooltip}
                     >
                       <IconExternal
                         ariaHidden="true"
@@ -317,7 +313,7 @@ const DictionariesIndex = ({
                     tag="span"
                     theme="didoesdigital"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     <IconExternal
                       ariaHidden="true"
@@ -356,7 +352,7 @@ const DictionariesIndex = ({
                     tag="span"
                     theme="didoesdigital"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     <IconExternal
                       ariaHidden="true"
@@ -429,7 +425,7 @@ const DictionariesIndex = ({
                     tag="span"
                     theme="didoesdigital"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     <IconExternal
                       ariaHidden="true"
