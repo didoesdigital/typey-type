@@ -23,7 +23,6 @@ import mapBriefToJapaneseStenoKeys from '../../utils/stenoLayouts/mapBriefToJapa
 import mapBriefToKoreanModernCStenoKeys from '../../utils/stenoLayouts/mapBriefToKoreanModernCStenoKeys';
 import mapBriefToPalantypeKeys from '../../utils/stenoLayouts/mapBriefToPalantypeKeys';
 import { fetchResource } from '../../utils/getData';
-import { Tooltip } from 'react-tippy';
 import Subheader from "../../components/Subheader";
 
 import type { Outline, UserSettings } from "../../types";
@@ -33,7 +32,6 @@ type Props = {
   changeWriterInput: (event: any) => void,
   userSettings: UserSettings,
   globalUserSettings: any,
-  setAnnouncementMessage: (app: any, content: string | Object) => void
   // stenoHintsOnTheFly: boolean
 };
 
@@ -326,25 +324,11 @@ class Writer extends Component<Props, State> {
                 { this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno" && this.props.globalUserSettings.writerInput === "qwerty" ?
                   <p className="mt1 mb2 mr1">
                     <label htmlFor="qwertyStenoInput" className="db mb1">
-                      {/* @ts-ignore */}
-                      <Tooltip
-                        title="Type a space to send the stroke"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        position="top"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        QWERTY steno input
-                      </Tooltip>
+                      QWERTY steno input
                     </label>
                     <input
                       id="qwertyStenoInput"
+                      aria-describedby="qwerty-type-space-to-send"
                       autoCapitalize="off"
                       autoComplete="off"
                       autoCorrect="off"
@@ -353,6 +337,7 @@ class Writer extends Component<Props, State> {
                       placeholder="e.g. rnm"
                       value={this.state.valueQWERTYSteno}
                     />
+                    <span id="qwerty-type-space-to-send" className="text-small">Type a space to send the stroke</span>
                   </p>
                   :
                   null
@@ -360,25 +345,11 @@ class Writer extends Component<Props, State> {
                 { this.props.globalUserSettings.writerInput === "raw" || !(this.props.userSettings.stenoLayout === "stenoLayoutAmericanSteno") ?
                   <p className="mt1 mb2 mr1">
                     <label htmlFor="rawStenoInput" className="db mb1">
-                      {/* @ts-ignore */}
-                      <Tooltip
-                        title="Type a space to send the stroke"
-                        className="mw-240"
-                        animation="shift"
-                        arrow="true"
-                        duration="200"
-                        position="top"
-                        tabIndex="0"
-                        tag="span"
-                        theme="didoesdigital didoesdigital-sm"
-                        trigger="mouseenter focus click"
-                        onShow={this.props.setAnnouncementMessage}
-                      >
-                        Raw steno input
-                      </Tooltip>
+                      Raw steno input
                     </label>
                     <input
                       id="rawStenoInput"
+                      aria-describedby="raw-type-space-to-send"
                       autoCapitalize="off"
                       autoComplete="off"
                       autoCorrect="off"
@@ -387,6 +358,7 @@ class Writer extends Component<Props, State> {
                       placeholder={placeholderRawSteno}
                       value={this.state.valueRawSteno}
                     />
+                    <span id="raw-type-space-to-send" className="text-small">Type a space to send the stroke</span>
                   </p>
                   :
                   null
