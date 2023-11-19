@@ -383,7 +383,7 @@ const DictionaryManagement = (props) => {
       if (writeDictionariesError.error) {
         Sentry.captureException(writeDictionariesError.error);
         Sentry.captureMessage(
-          "Write dictiionaries error… " + writeDictionariesError.message,
+          "Write dictionaries error… " + writeDictionariesError.message,
           "debug"
         );
       }
@@ -440,7 +440,7 @@ const DictionaryManagement = (props) => {
       if (writeDictionariesError.error) {
         Sentry.captureException(writeDictionariesError.error);
         Sentry.captureMessage(
-          "Write dictiionaries error… " + writeDictionariesError.message,
+          "Write dictionaries error… " + writeDictionariesError.message,
           "debug"
         );
       }
