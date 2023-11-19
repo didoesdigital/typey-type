@@ -203,11 +203,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
               <Header fullscreen={appState.fullscreen} />
               <DocumentTitle title={"Typey Type | Contribute"}>
                 <ErrorBoundary>
-                  <AsyncContribute
-                    setAnnouncementMessage={function () {
-                      setAnnouncementMessage(app, this);
-                    }}
-                  />
+                  <AsyncContribute />
                 </ErrorBoundary>
               </DocumentTitle>
             </div>
