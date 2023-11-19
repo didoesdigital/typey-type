@@ -5,6 +5,7 @@ import RecommendationDescription from "./RecommendationDescription";
 import { IconExternal } from "../../../components/Icon";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
+import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 
 import type { FullRecommendationsStudyType } from "../../../types";
 
@@ -38,7 +39,6 @@ type Props = {
   recommendedNextLesson: RecommendedNextLesson;
   startRecommendedStep: () => void;
   loadingLessonIndex: boolean;
-  setAnnouncementMessage: () => void;
   recommendationHistory: RecommendationHistory;
   updateRecommendationHistory: (
     previousRecommendationHistory: RecommendationHistory
@@ -49,10 +49,11 @@ const RecommendationBox = ({
   recommendedNextLesson,
   startRecommendedStep,
   loadingLessonIndex,
-  setAnnouncementMessage,
   recommendationHistory,
   updateRecommendationHistory,
 }: Props) => {
+  const announceTooltip = useAnnounceTooltip();
+
   const recommendAnotherLesson = () => {
     GoogleAnalytics.event({
       category: "Recommendations",
@@ -243,7 +244,7 @@ const RecommendationBox = ({
             tag="span"
             theme="didoesdigital"
             trigger="mouseenter focus click"
-            onShow={setAnnouncementMessage}
+            onShow={announceTooltip}
           >
             <IconExternal
               ariaHidden="true"
