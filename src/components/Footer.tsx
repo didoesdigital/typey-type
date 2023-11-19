@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 import OutboundLink from "./OutboundLink";
 import { IconExternal } from "./Icon";
 import { Tooltip } from "react-tippy";
+import useAnnounceTooltip from "./Announcer/useAnnounceTooltip";
 
 type Props = {
   fullscreen: boolean;
-  setAnnouncementMessage: () => void;
 };
 
-const Footer = ({ fullscreen, setAnnouncementMessage }: Props) => {
+const Footer = ({ fullscreen }: Props) => {
   const fullscreenClass = fullscreen ? " fullscreen" : "";
+  const announceTooltip = useAnnounceTooltip();
 
   return (
     <div
@@ -83,7 +84,7 @@ const Footer = ({ fullscreen, setAnnouncementMessage }: Props) => {
                 tag="span"
                 theme="didoesdigital"
                 trigger="mouseenter focus click"
-                onShow={setAnnouncementMessage}
+                onShow={announceTooltip}
               >
                 <IconExternal
                   ariaHidden="true"

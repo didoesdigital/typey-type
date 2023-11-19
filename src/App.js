@@ -28,7 +28,6 @@ import {
 import queryString from 'query-string';
 import GoogleAnalytics from "react-ga4";
 import Announcements from './components/Announcements/Announcements';
-import Footer from './components/Footer';
 import fallbackLesson from './constant/fallbackLesson';
 import fetchAndSetupGlobalDict from './utils/app/fetchAndSetupGlobalDict';
 import calculateMemorisedWordCount from './utils/calculateMemorisedWordCount';
@@ -37,7 +36,6 @@ import increaseMetWords from './utils/increaseMetWords';
 import isNormalInteger from './utils/isNormalInteger';
 import filterByFamiliarity from './utils/lessons/filterByFamiliarity';
 import replaceSmartTypographyInPresentedMaterial from './utils/lessons/replaceSmartTypographyInPresentedMaterial';
-import setAnnouncementMessage from './components/Announcements/setAnnouncementMessage';
 import setAnnouncementMessageString from './components/Announcements/setAnnouncementMessageString';
 import sortLesson from './utils/lessons/sortLesson';
 import Zipper from './utils/zipper';
@@ -2064,79 +2062,73 @@ class App extends Component {
         <div id="js-app" className="app">
           <Announcements message={this.state.announcementMessage} />
           <div className="flex flex-column justify-between min-vh-100">
-            <div>
-              <AppRoutes
-                appProps={{
-                  location: this.props.location,
-                  completedMaterial,
-                  presentedMaterialCurrentItem,
-                  stateLesson,
-                  stenohintsonthefly,
-                  upcomingMaterial
-                }}
-                appMethods={{
-                  appFetchAndSetupGlobalDict: this.appFetchAndSetupGlobalDict,
-                  setCustomLessonContent: setCustomLessonContent.bind(this),
-                  customiseLesson: customiseLesson.bind(this),
-                  generateCustomLesson: generateCustomLesson.bind(this),
-                  setAnnouncementMessageString: setAnnouncementMessageString.bind(this),
-                  updateMultipleMetWords: updateMultipleMetWords.bind(this),
-                  changeFlashcardCourseLevel: this.changeFlashcardCourseLevel.bind(this),
-                  changeFullscreen: this.changeFullscreen.bind(this),
-                  changeShowScoresWhileTyping: this.changeShowScoresWhileTyping.bind(this),
-                  changeShowStrokesAs: this.changeShowStrokesAs.bind(this),
-                  changeShowStrokesAsList: this.changeShowStrokesAsList.bind(this),
-                  changeShowStrokesInLesson: this.changeShowStrokesInLesson.bind(this),
-                  changeShowStrokesOnMisstroke: this.changeShowStrokesOnMisstroke.bind(this),
-                  changeSortOrderUserSetting: this.changeSortOrderUserSetting.bind(this),
-                  changeSpacePlacementUserSetting: this.changeSpacePlacementUserSetting.bind(this),
-                  changeStenoLayout: this.changeStenoLayout.bind(this),
-                  changeUserSetting: this.changeUserSetting.bind(this),
-                  changeVoiceUserSetting: this.changeVoiceUserSetting.bind(this),
-                  changeWriterInput: this.changeWriterInput.bind(this),
-                  chooseStudy: this.chooseStudy.bind(this),
-                  createCustomLesson: this.createCustomLesson.bind(this),
-                  handleBeatsPerMinute: this.handleBeatsPerMinute.bind(this),
-                  handleDiagramSize: this.handleDiagramSize.bind(this),
-                  handleLesson: this.handleLesson.bind(this),
-                  handleLimitWordsChange: this.handleLimitWordsChange.bind(this),
-                  handleRepetitionsChange: this.handleRepetitionsChange.bind(this),
-                  handleStartFromWordChange: this.handleStartFromWordChange.bind(this),
-                  handleStopLesson: this.handleStopLesson.bind(this),
-                  handleUpcomingWordsLayout: this.handleUpcomingWordsLayout.bind(this),
-                  restartLesson: this.restartLesson.bind(this),
-                  reviseLesson: this.reviseLesson.bind(this),
-                  sayCurrentPhraseAgain: this.sayCurrentPhraseAgain.bind(this),
-                  setDictionaryIndex: this.setDictionaryIndex.bind(this),
-                  setPersonalPreferences: this.setPersonalPreferences.bind(this),
-                  setUpProgressRevisionLesson: this.setUpProgressRevisionLesson.bind(this),
-                  setupLesson: this.setupLesson.bind(this),
-                  startCustomLesson: this.startCustomLesson.bind(this),
-                  startFromWordOne: this.startFromWordOne.bind(this),
-                  stopLesson: this.stopLesson.bind(this),
-                  toggleExperiment: this.toggleExperiment.bind(this),
-                  updateFlashcardsMetWords: this.updateFlashcardsMetWords.bind(this),
-                  updateFlashcardsProgress: this.updateFlashcardsProgress.bind(this),
-                  updateFlashcardsRecommendation: this.updateFlashcardsRecommendation.bind(this),
-                  updateGlobalLookupDictionary: this.updateGlobalLookupDictionary.bind(this),
-                  updateMarkup: this.updateMarkup.bind(this),
-                  updateMetWords: this.updateMetWords.bind(this),
-                  updatePersonalDictionaries: this.updatePersonalDictionaries.bind(this),
-                  updatePreset: this.updatePreset.bind(this),
-                  updateRecommendationHistory: this.updateRecommendationHistory.bind(this),
-                  updateRevisionMaterial: this.updateRevisionMaterial.bind(this),
-                  updateStartingMetWordsAndCounts: this.updateStartingMetWordsAndCounts.bind(this),
-                  updateTopSpeedPersonalBest: this.updateTopSpeedPersonalBest.bind(this),
-                  updateUserGoals: this.updateUserGoals.bind(this),
-                  updateUserGoalsUnveiled: this.updateUserGoalsUnveiled.bind(this),
-                }}
-                appState={this.state}
-                app={app}
-              />
-            </div>
-            <Footer
-              fullscreen={this.state.fullscreen}
-              setAnnouncementMessage={function () { setAnnouncementMessage(app, this) }}
+            <AppRoutes
+              appProps={{
+                location: this.props.location,
+                completedMaterial,
+                presentedMaterialCurrentItem,
+                stateLesson,
+                stenohintsonthefly,
+                upcomingMaterial
+              }}
+              appMethods={{
+                appFetchAndSetupGlobalDict: this.appFetchAndSetupGlobalDict,
+                setCustomLessonContent: setCustomLessonContent.bind(this),
+                customiseLesson: customiseLesson.bind(this),
+                generateCustomLesson: generateCustomLesson.bind(this),
+                setAnnouncementMessageString: setAnnouncementMessageString.bind(this),
+                updateMultipleMetWords: updateMultipleMetWords.bind(this),
+                changeFlashcardCourseLevel: this.changeFlashcardCourseLevel.bind(this),
+                changeFullscreen: this.changeFullscreen.bind(this),
+                changeShowScoresWhileTyping: this.changeShowScoresWhileTyping.bind(this),
+                changeShowStrokesAs: this.changeShowStrokesAs.bind(this),
+                changeShowStrokesAsList: this.changeShowStrokesAsList.bind(this),
+                changeShowStrokesInLesson: this.changeShowStrokesInLesson.bind(this),
+                changeShowStrokesOnMisstroke: this.changeShowStrokesOnMisstroke.bind(this),
+                changeSortOrderUserSetting: this.changeSortOrderUserSetting.bind(this),
+                changeSpacePlacementUserSetting: this.changeSpacePlacementUserSetting.bind(this),
+                changeStenoLayout: this.changeStenoLayout.bind(this),
+                changeUserSetting: this.changeUserSetting.bind(this),
+                changeVoiceUserSetting: this.changeVoiceUserSetting.bind(this),
+                changeWriterInput: this.changeWriterInput.bind(this),
+                chooseStudy: this.chooseStudy.bind(this),
+                createCustomLesson: this.createCustomLesson.bind(this),
+                handleBeatsPerMinute: this.handleBeatsPerMinute.bind(this),
+                handleDiagramSize: this.handleDiagramSize.bind(this),
+                handleLesson: this.handleLesson.bind(this),
+                handleLimitWordsChange: this.handleLimitWordsChange.bind(this),
+                handleRepetitionsChange: this.handleRepetitionsChange.bind(this),
+                handleStartFromWordChange: this.handleStartFromWordChange.bind(this),
+                handleStopLesson: this.handleStopLesson.bind(this),
+                handleUpcomingWordsLayout: this.handleUpcomingWordsLayout.bind(this),
+                restartLesson: this.restartLesson.bind(this),
+                reviseLesson: this.reviseLesson.bind(this),
+                sayCurrentPhraseAgain: this.sayCurrentPhraseAgain.bind(this),
+                setDictionaryIndex: this.setDictionaryIndex.bind(this),
+                setPersonalPreferences: this.setPersonalPreferences.bind(this),
+                setUpProgressRevisionLesson: this.setUpProgressRevisionLesson.bind(this),
+                setupLesson: this.setupLesson.bind(this),
+                startCustomLesson: this.startCustomLesson.bind(this),
+                startFromWordOne: this.startFromWordOne.bind(this),
+                stopLesson: this.stopLesson.bind(this),
+                toggleExperiment: this.toggleExperiment.bind(this),
+                updateFlashcardsMetWords: this.updateFlashcardsMetWords.bind(this),
+                updateFlashcardsProgress: this.updateFlashcardsProgress.bind(this),
+                updateFlashcardsRecommendation: this.updateFlashcardsRecommendation.bind(this),
+                updateGlobalLookupDictionary: this.updateGlobalLookupDictionary.bind(this),
+                updateMarkup: this.updateMarkup.bind(this),
+                updateMetWords: this.updateMetWords.bind(this),
+                updatePersonalDictionaries: this.updatePersonalDictionaries.bind(this),
+                updatePreset: this.updatePreset.bind(this),
+                updateRecommendationHistory: this.updateRecommendationHistory.bind(this),
+                updateRevisionMaterial: this.updateRevisionMaterial.bind(this),
+                updateStartingMetWordsAndCounts: this.updateStartingMetWordsAndCounts.bind(this),
+                updateTopSpeedPersonalBest: this.updateTopSpeedPersonalBest.bind(this),
+                updateUserGoals: this.updateUserGoals.bind(this),
+                updateUserGoalsUnveiled: this.updateUserGoalsUnveiled.bind(this),
+              }}
+              appState={this.state}
+              app={app}
             />
           </div>
         </div>
