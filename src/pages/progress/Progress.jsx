@@ -32,7 +32,6 @@ let particles = [];
 //   recentLessonHistory: any,
 //   recommendationHistory: any,
 //   recommendedNextLesson: any,
-//   setAnnouncementMessage: any,
 //   setPersonalPreferences: any,
 //   startingMetWordsToday: any,
 //   updateFlashcardsRecommendation: any,
@@ -187,7 +186,6 @@ class Progress extends Component {
       textareaContents = textareas[0];
     }
     this.props.setPersonalPreferences(textareaContents.value);
-    // this.props.setAnnouncementMessage(this, "teft");
     this.setState({flashWarning: "To update your lesson progress, visit the lessons."});
 
     let numberOfMetWords = '0';
@@ -479,7 +477,6 @@ class Progress extends Component {
                 <ErrorBoundary relative={true}>
                   <RecommendationBox
                     recommendedNextLesson={this.props.recommendedNextLesson}
-                    setAnnouncementMessage={this.props.setAnnouncementMessage}
                     loadingLessonIndex={this.state.loadingLessonIndex}
                     startRecommendedStep={this.startRecommendedStep.bind(this)}
                     recommendationHistory={this.props.recommendationHistory}

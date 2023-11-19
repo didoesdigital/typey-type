@@ -120,14 +120,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
 
                 <DocumentTitle title={"Typey Type | About"}>
                   <ErrorBoundary>
-                    <AsyncSupport
-                      setAnnouncementMessage={function () {
-                        setAnnouncementMessage(app, this);
-                      }}
-                      setAnnouncementMessageString={
-                        appMethods.setAnnouncementMessageString
-                      }
-                    />
+                    <AsyncSupport />
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -144,9 +137,6 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
                     <AsyncWriter
                       changeStenoLayout={appMethods.changeStenoLayout}
                       changeWriterInput={appMethods.changeWriterInput}
-                      setAnnouncementMessage={function () {
-                        setAnnouncementMessage(app, this);
-                      }}
                       globalUserSettings={appState.globalUserSettings}
                       userSettings={appState.userSettings}
                       {...props}
@@ -221,12 +211,6 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
                     <AsyncProgress
                       changeFlashcardCourseLevel={
                         appMethods.changeFlashcardCourseLevel
-                      }
-                      setAnnouncementMessage={function () {
-                        setAnnouncementMessage(app, this);
-                      }}
-                      setAnnouncementMessageString={
-                        appMethods.setAnnouncementMessageString
                       }
                       setPersonalPreferences={appMethods.setPersonalPreferences}
                       metWords={appState.metWords}
