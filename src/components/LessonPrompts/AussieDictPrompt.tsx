@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IconExternal } from "../Icon";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
+import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
 
 export const missingAussieDict = (
   currentStroke: string,
@@ -23,7 +24,18 @@ type Props = {
 
 const AussieDictPrompt = ({ currentStroke, actualText }: Props) => {
   const announceTooltip = useAnnounceTooltip();
+  const { updateMessage } = useAnnouncerApi();
+
   const isMissingAussieDict = missingAussieDict(currentStroke, actualText);
+
+  useEffect(() => {
+    if (isMissingAussieDict) {
+      updateMessage(
+        "To use /A*U for Aussie spelling, add the Australian dictionary or fingerspell this entry. See the message below for a link to the dictionary."
+      );
+    }
+  }, [isMissingAussieDict, updateMessage]);
+
   if (isMissingAussieDict) {
     return (
       <p>

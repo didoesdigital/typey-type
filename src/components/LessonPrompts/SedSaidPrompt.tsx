@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IconExternal } from "../Icon";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
+import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
 
 export const hasSedSaid = (currentPhrase: string, actualText: string) => {
   const sedRegex = new RegExp(/^\s*sed\s*$/);
@@ -18,6 +19,16 @@ type Props = {
 const SedSaidPrompt = ({ currentPhrase, actualText }: Props) => {
   const announceTooltip = useAnnounceTooltip();
   const showSedSaidPrompt = hasSedSaid(currentPhrase, actualText);
+  const { updateMessage } = useAnnouncerApi();
+
+  useEffect(() => {
+    if (showSedSaidPrompt) {
+      updateMessage(
+        "It looks like you might be using an older Plover dictionary. Try upgrading to V3 or newer dictionaries from the link in the message below."
+      );
+    }
+  }, [showSedSaidPrompt, updateMessage]);
+
   if (showSedSaidPrompt) {
     return (
       <p>

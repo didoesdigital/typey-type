@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { IconExternal } from "../Icon";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
+import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
 
 export const hasWordBoundaryError = (
   currentPhrase: string,
@@ -17,10 +18,20 @@ type Props = {
 
 const WordBoundaryErrorPrompt = ({ currentPhrase, actualText }: Props) => {
   const announceTooltip = useAnnounceTooltip();
+  const { updateMessage } = useAnnouncerApi();
   const showWordBoundaryPrompt = hasWordBoundaryError(
     currentPhrase,
     actualText
   );
+
+  useEffect(() => {
+    if (showWordBoundaryPrompt) {
+      updateMessage(
+        "It’s a trap! It looks like you hit a word boundary error. You might avoid this by manually inserting a space between the words star and wars e.g. using S-P. See the message below for a link to more info."
+      );
+    }
+  }, [showWordBoundaryPrompt, updateMessage]);
+
   if (showWordBoundaryPrompt) {
     return (
       <p>
