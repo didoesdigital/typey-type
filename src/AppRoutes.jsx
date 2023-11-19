@@ -554,12 +554,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
             render={(props) => (
               <div>
                 <DocumentTitle title={"Typey Type | Page not found"}>
-                  <AsyncPageNotFound
-                    location={props.location}
-                    setAnnouncementMessage={function () {
-                      setAnnouncementMessage(app, this);
-                    }}
-                  />
+                  <AsyncPageNotFound location={props.location} />
                 </DocumentTitle>
               </div>
             )}

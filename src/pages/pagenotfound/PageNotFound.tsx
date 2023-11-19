@@ -5,14 +5,15 @@ import * as Sentry from "@sentry/browser";
 import { Link } from "react-router-dom";
 import { IconTypeyType, IconExternal } from "../../components/Icon";
 import { Tooltip } from "react-tippy";
+import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
 type Props = {
   location: any;
-  setAnnouncementMessage: any;
 };
 
-const PageNotFound = ({ location, setAnnouncementMessage }: Props) => {
+const PageNotFound = ({ location }: Props) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
+  const announceTooltip = useAnnounceTooltip();
 
   useEffect(() => {
     if (mainHeading) {
@@ -119,7 +120,7 @@ const PageNotFound = ({ location, setAnnouncementMessage }: Props) => {
               tag="span"
               theme="didoesdigital"
               trigger="mouseenter focus click"
-              onShow={setAnnouncementMessage}
+              onShow={announceTooltip}
             >
               <IconExternal
                 ariaHidden="true"
