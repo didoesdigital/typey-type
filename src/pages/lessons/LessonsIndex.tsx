@@ -5,21 +5,21 @@ import { IconExternal } from "../../components/Icon";
 import LessonList from "./components/LessonList";
 import { Tooltip } from "react-tippy";
 import Subheader from "../../components/Subheader";
+import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
 type LessonsIndexProps = {
   customLesson: any;
   lessonIndex: any;
-  setAnnouncementMessage: any;
   stopLesson: any;
 };
 
 const LessonsIndex = ({
   customLesson,
   lessonIndex,
-  setAnnouncementMessage,
   stopLesson,
 }: LessonsIndexProps) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
+  const announceTooltip = useAnnounceTooltip();
 
   useEffect(() => {
     mainHeading.current?.focus();
@@ -97,7 +97,7 @@ const LessonsIndex = ({
                   tag="span"
                   theme="didoesdigital"
                   trigger="mouseenter focus click"
-                  onShow={setAnnouncementMessage}
+                  onShow={announceTooltip}
                 >
                   <IconExternal
                     ariaHidden="true"

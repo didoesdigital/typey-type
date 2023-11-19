@@ -377,7 +377,6 @@ const Lessons = ({
           <LessonsIndex
             lessonIndex={lessonIndex}
             customLesson={customLesson}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
           />
         )}

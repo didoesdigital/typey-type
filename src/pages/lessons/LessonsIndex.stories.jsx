@@ -47,7 +47,6 @@ const Template = (args) => {
     <LessonsIndex
       lessonIndex={lessonIndex}
       customLesson={customLesson}
-      setAnnouncementMessage={() => console.log("announce")}
       stopLesson={() => console.log("stop lesson")}
       {...args}
     />
