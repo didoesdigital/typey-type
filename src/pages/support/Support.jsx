@@ -91,6 +91,7 @@ class Support extends Component {
             <p className="mt3">
               Typey&nbsp;Type is a typing app designed to help{" "}
               <a href="#about-stenography">stenography</a> students learn{" "}
+              {/* @ts-ignore */}
               <Tooltip
                 animation="shift"
                 arrow="true"
@@ -130,6 +131,7 @@ class Support extends Component {
                 Open steno{" "}
                 <span className="whitespace-nowrap">
                   project
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -194,6 +196,7 @@ class Support extends Component {
                 >
                   <span className="whitespace-nowrap">
                     Plover
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(external link opens in new tab)"
                       className=""
@@ -234,6 +237,7 @@ class Support extends Component {
                 spaced{" "}
                 <span className="whitespace-nowrap">
                   repetitions
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -266,6 +270,7 @@ class Support extends Component {
                 deliberate{" "}
                 <span className="whitespace-nowrap">
                   practice
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -342,6 +347,7 @@ class Support extends Component {
                 post to the feedback{" "}
                 <span className="whitespace-nowrap">
                   form
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -391,6 +397,7 @@ class Support extends Component {
                 to="https://en.m.wikipedia.org/wiki/Access_key"
               >
                 accesskey
+                {/* @ts-ignore */}
                 <Tooltip
                   title="(external link opens in new tab)"
                   className=""
@@ -567,6 +574,7 @@ class Support extends Component {
               >
                 Anki
                 <span className="whitespace-nowrap">
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -598,6 +606,7 @@ class Support extends Component {
               >
                 flashcard decks for the Top 2000 Words
                 <span className="whitespace-nowrap">
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -641,6 +650,7 @@ class Support extends Component {
                 Typey&nbsp;Type repo{" "}
                 <span className="whitespace-nowrap">
                   README
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -678,6 +688,7 @@ class Support extends Component {
               >
                 install Plover
                 <span className="whitespace-nowrap">
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -724,6 +735,7 @@ class Support extends Component {
                 true NKRO (N-key roll over) supported{" "}
                 <span className="whitespace-nowrap">
                   keyboard
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -756,6 +768,7 @@ class Support extends Component {
                 stenotype{" "}
                 <span className="whitespace-nowrap">
                   machine
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -788,6 +801,7 @@ class Support extends Component {
                 Plover (free and{" "}
                 <span className="whitespace-nowrap">
                   open)
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -898,6 +912,7 @@ class Support extends Component {
                 Learn{" "}
                 <span className="whitespace-nowrap">
                   palantype
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -930,6 +945,7 @@ class Support extends Component {
                 Palan versus{" "}
                 <span className="whitespace-nowrap">
                   Steno
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -980,6 +996,7 @@ class Support extends Component {
                 to="https://www.patreon.com/didoesdigital"
               >
                 Patreon
+                {/* @ts-ignore */}
                 <Tooltip
                   title="Opens in a new tab"
                   animation="shift"
@@ -1021,6 +1038,7 @@ class Support extends Component {
                   Typey&nbsp;Type{" "}
                   <span className="whitespace-nowrap">
                     repo
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(external link opens in new tab)"
                       className=""
@@ -1055,6 +1073,7 @@ class Support extends Component {
                 >
                   Typey&nbsp;Type data repo
                   <span className="whitespace-nowrap">
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(external link opens in new tab)"
                       className=""
@@ -1090,6 +1109,7 @@ class Support extends Component {
                 >
                   Steno dictionaries
                   <span className="whitespace-nowrap">
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(external link opens in new tab)"
                       className=""
@@ -1125,6 +1145,7 @@ class Support extends Component {
                 >
                   Stenoboard diagram SVG to React
                   <span className="whitespace-nowrap">
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(external link opens in new tab)"
                       className=""
@@ -1165,6 +1186,7 @@ class Support extends Component {
                 Typey&nbsp;Type updates and steno{" "}
                 <span className="whitespace-nowrap">
                   news
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -1203,6 +1225,7 @@ class Support extends Component {
                   Wikipedia provides{" "}
                   <span className="whitespace-nowrap">
                     homophones
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(external link opens in new tab)"
                       className=""
@@ -1238,6 +1261,7 @@ class Support extends Component {
                   Wikipedia provides{" "}
                   <span className="whitespace-nowrap">
                     proverbial phrases
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(external link opens in new tab)"
                       className=""
@@ -1271,6 +1295,7 @@ class Support extends Component {
                   to="https://en.wiktionary.org/wiki/Appendix:English_proverbs"
                 >
                   Wiktionary provides proverbs
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -1305,6 +1330,7 @@ class Support extends Component {
                   Wikipedia provides{" "}
                   <span className="whitespace-nowrap">
                     irreversible binomials
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(external link opens in new tab)"
                       className=""
@@ -1340,6 +1366,7 @@ class Support extends Component {
                   Wikipedia provides Speech to the Troops{" "}
                   <span className="whitespace-nowrap">
                     at Tilbury
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(external link opens in new tab)"
                       className=""
@@ -1375,6 +1402,7 @@ class Support extends Component {
                   Wiktionary provides frequency{" "}
                   <span className="whitespace-nowrap">
                     lists
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(external link opens in new tab)"
                       className=""
@@ -1410,6 +1438,7 @@ class Support extends Component {
                   The metronome sound, “digi_plink”, comes from Dev_Tones by{" "}
                   <span className="whitespace-nowrap">
                     RCP Tones
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(external link opens in new tab)"
                       className=""
@@ -1442,6 +1471,7 @@ class Support extends Component {
                   Creative Commons license{" "}
                   <span className="whitespace-nowrap">
                     (CC BY 3.0 US)
+                    {/* @ts-ignore */}
                     <Tooltip
                       title="(external link opens in new tab)"
                       className=""
@@ -1485,6 +1515,7 @@ class Support extends Component {
                 post to the feedback{" "}
                 <span className="whitespace-nowrap">
                   form
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(form opens in new tab)"
                     className=""
@@ -1517,6 +1548,7 @@ class Support extends Component {
                 tweet{" "}
                 <span className="whitespace-nowrap">
                   @DiDoesDigital
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -1556,6 +1588,7 @@ class Support extends Component {
                 Google{" "}
                 <span className="whitespace-nowrap">
                   Analytics
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
@@ -1592,6 +1625,7 @@ class Support extends Component {
               >
                 <span className="whitespace-nowrap">
                   Sentry
+                  {/* @ts-ignore */}
                   <Tooltip
                     title="(external link opens in new tab)"
                     className=""
