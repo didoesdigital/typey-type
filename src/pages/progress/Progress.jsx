@@ -538,7 +538,6 @@ class Progress extends Component {
                   <LessonsProgress
                     lessonIndex={this.props.lessonIndex}
                     lessonsProgress={this.props.lessonsProgress}
-                    setAnnouncementMessage={this.props.setAnnouncementMessage}
                   />
                 </ul>
                 <p>There are more <Link to='/lessons'>Lessons</Link>, including lessons with sentences.</p>

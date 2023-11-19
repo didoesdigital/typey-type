@@ -2,13 +2,13 @@ import React from "react";
 import { IconCheckmark, IconTriangleRight } from "../../../components/Icon";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
+import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 
 import type { LessonIndexEntry, LessonsProgressIndex } from "../../../types";
 
 type Props = {
   lessonIndex: LessonIndexEntry[];
   lessonsProgress: LessonsProgressIndex;
-  setAnnouncementMessage: () => void;
 };
 
 type ProgressTooltipProps = {
@@ -37,11 +37,8 @@ const ProgressTooltip = ({ title, onShow, children }: ProgressTooltipProps) => {
   );
 };
 
-const LessonsProgress = ({
-  lessonIndex,
-  lessonsProgress,
-  setAnnouncementMessage,
-}: Props) => {
+const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
+  const announceTooltip = useAnnounceTooltip();
   function progressIconClasses(color: string) {
     return (
       `text-${color}-600 ` +
@@ -54,7 +51,7 @@ const LessonsProgress = ({
 
   function unstarted() {
     return (
-      <ProgressTooltip title="Unstarted" onShow={setAnnouncementMessage}>
+      <ProgressTooltip title="Unstarted" onShow={announceTooltip}>
         <div aria-hidden="true" className={progressIconClasses("violet")} />
         <span className="visually-hidden">Unstarted</span>
       </ProgressTooltip>
@@ -63,7 +60,7 @@ const LessonsProgress = ({
 
   function inProgress() {
     return (
-      <ProgressTooltip title="In progress" onShow={setAnnouncementMessage}>
+      <ProgressTooltip title="In progress" onShow={announceTooltip}>
         <IconTriangleRight
           ariaHidden="true"
           role="presentation"
@@ -79,7 +76,7 @@ const LessonsProgress = ({
     return (
       <ProgressTooltip
         title="100 words done or lesson complete"
-        onShow={setAnnouncementMessage}
+        onShow={announceTooltip}
       >
         <IconCheckmark
           ariaHidden="true"
