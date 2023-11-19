@@ -185,7 +185,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         />
         <Route
           path="/break"
-          render={(props) => (
+          render={() => (
             <div>
               <Header fullscreen={appState.fullscreen} />
               <DocumentTitle title={"Typey Type | Take a break"}>
