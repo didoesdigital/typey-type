@@ -1,6 +1,7 @@
 import React from "react";
 import { IconExternal } from "../Icon";
 import { Tooltip } from "react-tippy";
+import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
 export const hasSedSaid = (currentPhrase: string, actualText: string) => {
   const sedRegex = new RegExp(/^\s*sed\s*$/);
@@ -12,14 +13,10 @@ export const hasSedSaid = (currentPhrase: string, actualText: string) => {
 type Props = {
   currentPhrase: any;
   actualText: string;
-  setAnnouncementMessage: () => void;
 };
 
-const SedSaidPrompt = ({
-  currentPhrase,
-  actualText,
-  setAnnouncementMessage,
-}: Props) => {
+const SedSaidPrompt = ({ currentPhrase, actualText }: Props) => {
+  const announceTooltip = useAnnounceTooltip();
   const showSedSaidPrompt = hasSedSaid(currentPhrase, actualText);
   if (showSedSaidPrompt) {
     return (
@@ -44,7 +41,7 @@ const SedSaidPrompt = ({
               tag="span"
               theme="didoesdigital"
               trigger="mouseenter focus click"
-              onShow={setAnnouncementMessage}
+              onShow={announceTooltip}
             >
               <IconExternal
                 ariaHidden="true"

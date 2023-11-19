@@ -1,6 +1,7 @@
 import React from "react";
 import { IconExternal } from "../Icon";
 import { Tooltip } from "react-tippy";
+import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
 export const hasWordBoundaryError = (
   currentPhrase: string,
@@ -12,14 +13,10 @@ export const hasWordBoundaryError = (
 type Props = {
   currentPhrase: any;
   actualText: string;
-  setAnnouncementMessage: () => void;
 };
 
-const WordBoundaryErrorPrompt = ({
-  currentPhrase,
-  actualText,
-  setAnnouncementMessage,
-}: Props) => {
+const WordBoundaryErrorPrompt = ({ currentPhrase, actualText }: Props) => {
+  const announceTooltip = useAnnounceTooltip();
   const showWordBoundaryPrompt = hasWordBoundaryError(
     currentPhrase,
     actualText
@@ -47,7 +44,7 @@ const WordBoundaryErrorPrompt = ({
               tag="span"
               theme="didoesdigital"
               trigger="mouseenter focus click"
-              onShow={setAnnouncementMessage}
+              onShow={announceTooltip}
             >
               <IconExternal
                 ariaHidden="true"

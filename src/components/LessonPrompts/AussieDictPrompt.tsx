@@ -1,8 +1,12 @@
 import React from "react";
 import { IconExternal } from "../Icon";
 import { Tooltip } from "react-tippy";
+import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
-export const missingAussieDict = (currentStroke: string, actualText: string) => {
+export const missingAussieDict = (
+  currentStroke: string,
+  actualText: string
+) => {
   const untranslatedAussieSuffixRegex = new RegExp(/(A\*U|aw)/);
   return (
     (currentStroke.includes("/A*U ") ||
@@ -15,14 +19,10 @@ export const missingAussieDict = (currentStroke: string, actualText: string) => 
 type Props = {
   currentStroke: string;
   actualText: string;
-  setAnnouncementMessage: () => void;
-}
+};
 
-const AussieDictPrompt = ({
-  currentStroke,
-  actualText,
-  setAnnouncementMessage,
-}: Props) => {
+const AussieDictPrompt = ({ currentStroke, actualText }: Props) => {
+  const announceTooltip = useAnnounceTooltip();
   const isMissingAussieDict = missingAussieDict(currentStroke, actualText);
   if (isMissingAussieDict) {
     return (
@@ -46,7 +46,7 @@ const AussieDictPrompt = ({
             tag="span"
             theme="didoesdigital"
             trigger="mouseenter focus click"
-            onShow={setAnnouncementMessage}
+            onShow={announceTooltip}
           >
             <IconExternal
               ariaHidden="true"

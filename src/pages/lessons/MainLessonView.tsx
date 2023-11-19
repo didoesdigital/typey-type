@@ -273,17 +273,14 @@ const MainLessonView = ({
                     <WordBoundaryErrorPrompt
                       actualText={actualText}
                       currentPhrase={currentPhrase}
-                      setAnnouncementMessage={setAnnouncementMessage}
                     />
                     <AussieDictPrompt
                       actualText={actualText}
                       currentStroke={currentStroke}
-                      setAnnouncementMessage={setAnnouncementMessage}
                     />
                     <SedSaidPrompt
                       actualText={actualText}
                       currentPhrase={currentPhrase}
-                      setAnnouncementMessage={setAnnouncementMessage}
                     />
                     <StrokeTip
                       changeShowStrokesInLesson={changeShowStrokesInLesson}
