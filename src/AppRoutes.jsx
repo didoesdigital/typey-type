@@ -100,17 +100,12 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
         <Route
           exact={true}
           path="/"
-          render={(props) => (
+          render={() => (
             <div>
               <Header fullscreen={appState.fullscreen} />
 
               <DocumentTitle title="Typey Type for Stenographers">
-                <AsyncHome
-                  setAnnouncementMessage={function () {
-                    setAnnouncementMessage(app, this);
-                  }}
-                  {...props}
-                />
+                <AsyncHome />
               </DocumentTitle>
             </div>
           )}

@@ -6,13 +6,11 @@ import { Tooltip } from "react-tippy";
 import typeyTypeDemoGIF from "../../images/typey-type-for-stenographers-demo.gif";
 import typeyTypeyDemoCoverImage from "../../images/typey-type-for-stenographers-demo-cover-image.png";
 import Subheader from "../../components/Subheader";
+import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
-type Props = {
-  setAnnouncementMessage: () => void;
-};
-
-const Home = ({ setAnnouncementMessage }: Props) => {
+const Home = () => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
+  const announceTooltip = useAnnounceTooltip();
 
   const [typeyTypeDemoSrc, setTypeyTypeDemoSrc] = useState(typeyTypeDemoGIF);
 
@@ -78,7 +76,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
                   theme="didoesdigital"
                   title="stenography"
                   trigger="mouseenter focus click"
-                  onShow={setAnnouncementMessage}
+                  onShow={announceTooltip}
                 >
                   steno
                 </Tooltip>{" "}
@@ -427,7 +425,7 @@ const Home = ({ setAnnouncementMessage }: Props) => {
                     theme="didoesdigital"
                     title="External link opens in new tab"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     <IconExternal
                       ariaHidden="true"
