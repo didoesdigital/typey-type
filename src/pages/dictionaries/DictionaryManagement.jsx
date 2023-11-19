@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/browser';
 import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
 import SOURCE_NAMESPACES from '../../constant/sourceNamespaces';
-import React, { Component } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import DocumentTitle from 'react-document-title';
 import GoogleAnalytics from "react-ga4";
 import Notification from '../../components/Notification';
@@ -34,41 +34,35 @@ const invalidEntries = {
   "WEUBG/*APB": "Wiccan"
 }
 
-class DictionaryManagement extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      misstrokesInDictionaries: null,
-      selectedFiles: null,
-      importedDictionariesLoaded: false,
-      importedDictionariesLoading: false,
-      dictionaryErrorNotification: null,
-      dictionariesTypeyTypeWillUse: [],
-      validDictionaries: [],
-      invalidDictionaries: [],
-      namesOfValidImportedDictionaries: [],
-      validDictionariesListedInConfig: [],
-      validConfig: '',
-      invalidConfig: [],
-      dict: {
-        "-T": "the",
-      },
-    }
-  }
+const DictionaryManagement = (props) => {
+  const mainHeading = useRef(null);
+  // const mainHeading = useRef<HTMLHeadingElement>(null);
 
-  componentDidMount() {
-    if (this.mainHeading) {
-      this.mainHeading.focus();
-    }
+  const [misstrokesInDictionaries, setMisstrokesInDictionaries] = useState(null);
+  const [importedDictionariesLoaded, setImportedDictionariesLoaded] = useState(false);
+  const [importedDictionariesLoading, setImportedDictionariesLoading] = useState(false);
+  const [dictionaryErrorNotification, setDictionaryErrorNotification] = useState(null);
+  const [dictionariesTypeyTypeWillUseState, setDictionariesTypeyTypeWillUseState] = useState([]);
+  const [validDictionariesState, setValidDictionariesState] = useState([]);
+  const [invalidDictionariesState, setInvalidDictionariesState] = useState([]);
+  const [namesOfValidImportedDictionariesState, setNamesOfValidImportedDictionariesState] = useState([]);
+  const [validDictionariesListedInConfigState, setValidDictionariesListedInConfigState] = useState([]);
+  const [validConfig, setValidConfig] = useState('');
+  const [invalidConfig, setInvalidConfig] = useState([]);
+
+  const globalDict = props.globalLookupDictionary;
+  useEffect(() => {
+    // @ts-ignore FIXME: remove this in TSX
+    mainHeading.current?.focus();
 
     let config = [];
-    if (this.props.globalLookupDictionary && this.props.globalLookupDictionary['configuration']) {
-      config = this.props.globalLookupDictionary['configuration']
+    if (globalDict && globalDict['configuration']) {
+      config = globalDict['configuration']
         .filter(dictName => dictName.startsWith(SOURCE_NAMESPACES.get('user') + ":"))
         .map(dictName => dictName.replace(/^.+:/, ''));
     }
-    this.setState({dictionariesTypeyTypeWillUse: config});
-  }
+    setDictionariesTypeyTypeWillUseState(config);
+  }, [globalDict])
 
   // maxSelectFile(event) {
   //   let files = event.target.files // create file object
@@ -82,16 +76,14 @@ class DictionaryManagement extends Component {
   //   return true;
   // }
 
-  validateDictionaries(files) {
-    let validDictionaries = this.state.validDictionaries.slice();
+  function validateDictionaries(files) {
+    let validDictionaries = validDictionariesState.slice();
     let invalidDictionaries = [];
     let filesLength = files.length;
 
     if (filesLength === 0) {
-      this.setState({
-        validDictionaries: validDictionaries,
-        invalidDictionaries: [["No dictionary", "Choose a dictionary file to import."]]
-      })
+        setValidDictionariesState(validDictionaries);
+        setInvalidDictionariesState([["No dictionary", "Choose a dictionary file to import."]]);
     }
     else {
       let misstrokesInDictionaries = [];
@@ -112,7 +104,7 @@ class DictionaryManagement extends Component {
               throw new Error("This is not a JSON file.");
             }
 
-            if (this.state.validDictionaries.map(d => d[0]).includes(dictName)) {
+            if (validDictionariesState.map(d => d[0]).includes(dictName)) {
               throw new Error("This dictionary name conflicts with an existing dictionary. You may have imported it already.");
             }
 
@@ -173,46 +165,38 @@ class DictionaryManagement extends Component {
             return dictionary[0];
           });
 
-          let dictionariesTypeyTypeWillUse = getListOfValidDictionariesAddedAndInConfig(this.state.validDictionariesListedInConfig, namesOfValidImportedDictionaries);
+          let dictionariesTypeyTypeWillUse = getListOfValidDictionariesAddedAndInConfig(validDictionariesListedInConfigState, namesOfValidImportedDictionaries);
 
-          this.setState({
-            dictionariesTypeyTypeWillUse: dictionariesTypeyTypeWillUse,
-            namesOfValidImportedDictionaries: namesOfValidImportedDictionaries,
-            validDictionaries: validDictionaries,
-            invalidDictionaries: invalidDictionaries
-          })
+          setDictionariesTypeyTypeWillUseState(dictionariesTypeyTypeWillUse);
+          setNamesOfValidImportedDictionariesState(namesOfValidImportedDictionaries);
+          setValidDictionariesState(validDictionaries);
+          setInvalidDictionariesState(invalidDictionaries);
         };
 
         reader.readAsText(dictionary);
       }
 
-      this.setState({misstrokesInDictionaries: misstrokesInDictionaries});
+      setMisstrokesInDictionaries(misstrokesInDictionaries);
     }
   }
 
-  validateConfig(files) {
+  function validateConfig(files) {
     let validConfig = '';
     let validDictionariesListedInConfig = [];
     let invalidConfig = [];
     let filesLength = files.length;
 
     if (filesLength > 1) {
-      this.setState({
-        validConfig: validConfig,
-        invalidConfig: ["Too many files", "Choose one config file."]
-      })
-    }
+      setValidConfig(validConfig);
+      setInvalidConfig(["Too many files", "Choose one config file."]);
+  }
     else if (filesLength !== 1) {
-      this.setState({
-        validConfig: validConfig,
-        invalidConfig: ["No config file", "Choose a config file to import."]
-      })
+      setValidConfig(validConfig);
+      setInvalidConfig(["No config file", "Choose a config file to import."]);
     }
     else if (!files[0].name.endsWith('.cfg')) {
-      this.setState({
-        validConfig: validConfig,
-        invalidConfig: ["Incorrect file type", "The file name must end in “.cfg”."]
-      })
+      setValidConfig(validConfig);
+      setInvalidConfig(["Incorrect file type", "The file name must end in “.cfg”."]);
     }
     else {
       let dictionaryConfig = files[0];
@@ -261,27 +245,23 @@ class DictionaryManagement extends Component {
           invalidConfig = [configName, error.message];
         }
 
-        let dictionariesTypeyTypeWillUse = getListOfValidDictionariesAddedAndInConfig(validDictionariesListedInConfig, this.state.namesOfValidImportedDictionaries);
+        let dictionariesTypeyTypeWillUse = getListOfValidDictionariesAddedAndInConfig(validDictionariesListedInConfig, namesOfValidImportedDictionariesState);
 
-        this.setState({
-          dictionariesTypeyTypeWillUse: dictionariesTypeyTypeWillUse,
-          validConfig: validConfig,
-          validDictionariesListedInConfig: validDictionariesListedInConfig,
-          invalidConfig: invalidConfig
-        })
+        setDictionariesTypeyTypeWillUseState(dictionariesTypeyTypeWillUse);
+        setValidConfig(validConfig);
+        setValidDictionariesListedInConfigState(validDictionariesListedInConfig);
+        setInvalidConfig(invalidConfig);
       };
 
       reader.readAsText(dictionaryConfig);
     }
   }
 
-  handleOnSubmit(event) {
+  function handleOnSubmit(event) {
     event.preventDefault();
 
-    this.setState({
-      importedDictionariesLoaded: false,
-      importedDictionariesLoading: false
-    });
+    setImportedDictionariesLoaded(false);
+    setImportedDictionariesLoading(false);
 
     const filesInput = document.querySelector("#dictionariesFileInput");
     const files = filesInput.files;
@@ -300,16 +280,14 @@ class DictionaryManagement extends Component {
       label: labelString
     });
 
-    this.validateDictionaries(files);
+    validateDictionaries(files);
   }
 
-  handleOnSubmitConfig(event) {
+  function handleOnSubmitConfig(event) {
     event.preventDefault();
 
-    this.setState({
-      importedDictionariesLoaded: false,
-      importedDictionariesLoading: false
-    });
+    setImportedDictionariesLoaded(false);
+    setImportedDictionariesLoading(false);
 
     const filesInput = document.querySelector("#dictionaryConfigFileInput");
     const files = filesInput.files;
@@ -330,10 +308,10 @@ class DictionaryManagement extends Component {
       label: labelString
     });
 
-    this.validateConfig(files);
+    validateConfig(files);
   }
 
-  handleOnSubmitClear(event) {
+  function handleOnSubmitClear(event) {
     event.preventDefault();
 
     let writeDictionariesError = writePersonalPreferences('personalDictionaries', []);
@@ -345,20 +323,15 @@ class DictionaryManagement extends Component {
       }
     }
 
-    this.setState({
-      importedDictionariesLoading: false,
-      dictionaryErrorNotification: false,
-      dictionariesTypeyTypeWillUse: [],
-      validDictionaries: [],
-      invalidDictionaries: [],
-      namesOfValidImportedDictionaries: [],
-      validDictionariesListedInConfig: [],
-      validConfig: '',
-      invalidConfig: [],
-      dict: {
-        "-T": "the",
-      }
-    });
+    setImportedDictionariesLoading(false);
+    setDictionaryErrorNotification(false);
+    setDictionariesTypeyTypeWillUseState([]);
+    setValidDictionariesState([]);
+    setInvalidDictionariesState([]);
+    setNamesOfValidImportedDictionariesState([]);
+    setValidDictionariesListedInConfigState([]);
+    setValidConfig('');
+    setInvalidConfig([]);
 
     GoogleAnalytics.event({
       category: 'Dictionary management',
@@ -367,32 +340,30 @@ class DictionaryManagement extends Component {
     });
   }
 
-  handleOnSubmitApplyChanges(event) {
+  function handleOnSubmitApplyChanges(event) {
     event.preventDefault();
 
-    this.setState({
-      importedDictionariesLoaded: false,
-      importedDictionariesLoading: true
-    });
+    setImportedDictionariesLoaded(false);
+    setImportedDictionariesLoading(true);
 
-    let configOrder = this.state.validDictionariesListedInConfig;
-    let sortedValidDictionaries = this.state.validDictionaries.slice(0);
+    let configOrder = validDictionariesListedInConfigState;
+    let sortedValidDictionaries = validDictionariesState.slice(0);
     sortedValidDictionaries = sortedValidDictionaries.sort((a,b) => {
       // dictionaries that don't appear in config will be before dictionaries that do
       return configOrder.indexOf(a[0]) - configOrder.indexOf(b[0]);
     });
 
     // First, update state
-    this.props.updatePersonalDictionaries({
+    props.updatePersonalDictionaries({
       dictionariesNamesAndContents: sortedValidDictionaries
     });
 
-    let personalDictionariesToStoreInV1Format = {v:"1",dicts:this.state.validDictionaries};
+    let personalDictionariesToStoreInV1Format = {v:"1",dicts:validDictionariesState};
 
     // Second, update local storage
     let writeDictionariesError = writePersonalPreferences('personalDictionaries', personalDictionariesToStoreInV1Format);
     if (writeDictionariesError) {
-      this.showDictionaryErrorNotification(writeDictionariesError.name);
+      showDictionaryErrorNotification(writeDictionariesError.name);
 
       if (writeDictionariesError.error) {
         Sentry.captureException(writeDictionariesError.error);
@@ -400,7 +371,7 @@ class DictionaryManagement extends Component {
       }
     }
 
-    let dictionariesTypeyTypeWillUse = this.state.dictionariesTypeyTypeWillUse;
+    let dictionariesTypeyTypeWillUse = dictionariesTypeyTypeWillUseState;
 
     let labelString = dictionariesTypeyTypeWillUse || 'No files for config';
     GoogleAnalytics.event({
@@ -410,42 +381,33 @@ class DictionaryManagement extends Component {
     });
 
     const personalDictionaries = {
-      dictionariesNamesAndContents: this.state.validDictionaries,
+      dictionariesNamesAndContents: validDictionariesState,
     }
-    this.props.fetchAndSetupGlobalDict(true, personalDictionaries)
+    props.fetchAndSetupGlobalDict(true, personalDictionaries)
       .then(() => {
-        this.setState({
-          importedDictionariesLoaded: true,
-          importedDictionariesLoading: false
-        });
+        setImportedDictionariesLoaded(true);
+        setImportedDictionariesLoading(false);
       })
       .catch(error => {
         console.error(error);
-        this.showDictionaryErrorNotification('FetchAndSetupGlobalDictFailed');
-        this.setState({
-          importedDictionariesLoaded: false,
-          importedDictionariesLoading: false
-        });
+        showDictionaryErrorNotification('FetchAndSetupGlobalDictFailed');
+        setImportedDictionariesLoaded(false);
+        setImportedDictionariesLoading(false);
       });
-    this.props.setAnnouncementMessageString('Applied!');
+    props.setAnnouncementMessageString('Applied!');
   }
 
-  showDictionaryErrorNotification(name) {
-    this.props.setAnnouncementMessageString('Unable to save dictionaries. See the message at the top of the page for more details.');
-    this.setState({
-      dictionaryErrorNotification: name || null
-    });
+  function showDictionaryErrorNotification(name) {
+    props.setAnnouncementMessageString('Unable to save dictionaries. See the message at the top of the page for more details.');
+    setDictionaryErrorNotification(name || null);
   }
 
-  dismissDictionaryErrorNotification() {
-    this.props.setAnnouncementMessageString('');
-    this.setState({
-      dictionaryErrorNotification: null
-    });
+  function dismissDictionaryErrorNotification() {
+    props.setAnnouncementMessageString('');
+    setDictionaryErrorNotification(null);
   }
 
-  render() {
-    let dictionariesTypeyTypeWillUse = this.state.dictionariesTypeyTypeWillUse.map ((dictionary, index) => {
+    let dictionariesTypeyTypeWillUse = dictionariesTypeyTypeWillUseState.map ((dictionary, index) => {
       return <li key={index}>{dictionary}</li>
     });
 
@@ -461,11 +423,11 @@ class DictionaryManagement extends Component {
       </>
     );
 
-    let misstrokesBlurb = this.state.misstrokesInDictionaries?.length > 0 ? (
+    let misstrokesBlurb = misstrokesInDictionaries?.length > 0 ? (
       <>
         <p>Your dictionaries contain entries that might be misstrokes or bad habits:</p>
         <ul>
-          {this.state.misstrokesInDictionaries.map((dict, dictIndex) => {
+          {misstrokesInDictionaries.map((dict, dictIndex) => {
             const probableMisstrokes = dict.probableMisstrokes.map((entry, misstrokeIndex) => <li className="bg-warning wrap" key={misstrokeIndex}>"{entry[0]}": "{entry[1]}"</li>);
             return <li key={dictIndex}>{dict.name}:<ul>{probableMisstrokes}</ul></li>
           })}
@@ -481,16 +443,16 @@ class DictionaryManagement extends Component {
     let showDictionaryErrors = null;
     let showConfigErrors = null;
 
-    const validDictionaryList = this.state.validDictionaries.map( (dictionary, index, array) => {
+    const validDictionaryList = validDictionariesState.map( (dictionary, index, array) => {
       return <li key={index}>{dictionary[0]}</li>
     });
 
-    const invalidDictionaryList = this.state.invalidDictionaries.map( (dictionary, index, array) => {
+    const invalidDictionaryList = invalidDictionariesState.map( (dictionary, index, array) => {
       return <li key={index}>{dictionary[0]}: {dictionary[1]}</li>
     });
 
-    const namesOfValidImportedDictionaries = this.state.namesOfValidImportedDictionaries;
-    const validDictionariesListedInConfig = this.state.validDictionariesListedInConfig.map( (dictionary, index, array) => {
+    const namesOfValidImportedDictionaries = namesOfValidImportedDictionariesState;
+    const validDictionariesListedInConfig = validDictionariesListedInConfigState.map( (dictionary, index, array) => {
       let className = '';
       if (namesOfValidImportedDictionaries.indexOf(dictionary) > -1) {
         className = 'unstyled-list-item';
@@ -501,10 +463,10 @@ class DictionaryManagement extends Component {
       return <li key={index} className={className}>{dictionary}</li>
     });
 
-    if (this.state.validDictionaries && this.state.validDictionaries.length > 0) {
+    if (validDictionariesState && validDictionariesState.length > 0) {
       showYourDictionaries = (
         <React.Fragment>
-          {this.state.validDictionaries.length === 1 ? <p>Your added dictionary:</p> : <p>Your added dictionaries:</p>}
+          {validDictionariesState.length === 1 ? <p>Your added dictionary:</p> : <p>Your added dictionaries:</p>}
           <ul className="wrap">
             {validDictionaryList}
           </ul>
@@ -512,10 +474,10 @@ class DictionaryManagement extends Component {
       );
     }
 
-    if (this.state.invalidDictionaries && this.state.invalidDictionaries.length > 0) {
+    if (invalidDictionariesState && invalidDictionariesState.length > 0) {
       showDictionaryErrors = (
         <React.Fragment>
-          {this.state.invalidDictionaries.length === 1 ? <p>This dictionary is invalid:</p> : <p>These dictionaries are invalid:</p>}
+          {invalidDictionariesState.length === 1 ? <p>This dictionary is invalid:</p> : <p>These dictionaries are invalid:</p>}
           <ul className="bg-danger dark:text-coolgrey-900 pl1 pr3 wrap">
             {invalidDictionaryList}
           </ul>
@@ -523,10 +485,10 @@ class DictionaryManagement extends Component {
       );
     }
 
-    if (this.state.validConfig && this.state.validConfig.length > 4) { // '.cfg' is 4 characters
+    if (validConfig && validConfig.length > 4) { // '.cfg' is 4 characters
       showYourConfig = (
         <React.Fragment>
-          <p className="wrap">Your added dictionary config ({this.state.validConfig}) contains these dictionaries:</p>
+          <p className="wrap">Your added dictionary config ({validConfig}) contains these dictionaries:</p>
           <ul className="wrap unstyled-list">
             {validDictionariesListedInConfig}
           </ul>
@@ -534,17 +496,17 @@ class DictionaryManagement extends Component {
       );
     }
 
-    if (this.state.invalidConfig && this.state.invalidConfig.length === 2) {
+    if (invalidConfig && invalidConfig.length === 2) {
       showConfigErrors = (
         <React.Fragment>
           <p>This dictionary config is invalid:</p>
-          <p className="bg-danger dark:text-coolgrey-900 pl1 pr3 wrap">{this.state.invalidConfig[0]}: {this.state.invalidConfig[1]}</p>
+          <p className="bg-danger dark:text-coolgrey-900 pl1 pr3 wrap">{invalidConfig[0]}: {invalidConfig[1]}</p>
         </React.Fragment>
       );
     }
 
     let notificationBody;
-    switch (this.state.dictionaryErrorNotification) {
+    switch (dictionaryErrorNotification) {
       case 'AddToStorageFailed':
         notificationBody = <p>Your local storage is full so your dictionaries won't fit. Typey&nbsp;Type will still use them today but the next time you visit, you’ll have to add your dictionaries again. For help, email <a href="mailto:typeytype@didoesdigital.com" target="_blank" rel="noopener noreferrer">typeytype@didoesdigital.com</a></p>;
         break;
@@ -569,8 +531,8 @@ class DictionaryManagement extends Component {
     return (
       <DocumentTitle title={'Typey Type | Dictionary management'}>
         <main id="main">
-          { this.state.dictionaryErrorNotification ?
-            <Notification onDismiss={this.dismissDictionaryErrorNotification.bind(this)}>
+          { dictionaryErrorNotification ?
+            <Notification onDismiss={dismissDictionaryErrorNotification.bind(this)}>
               {notificationBody}
             </Notification>
               :
@@ -579,7 +541,7 @@ class DictionaryManagement extends Component {
           <Subheader>
             <div className="flex mr1 self-center">
               <header className="flex items-center min-h-40">
-                <h2 className="table-cell mr2" ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1}>Dictionary management</h2>
+                <h2 className="table-cell mr2" ref={mainHeading} tabIndex={-1}>Dictionary management</h2>
               </header>
             </div>
           </Subheader>
@@ -609,8 +571,8 @@ class DictionaryManagement extends Component {
                     type="checkbox"
                     name="stenohintsonthefly"
                     id="stenohintsonthefly"
-                    checked={!!this.props.globalUserSettings.experiments?.stenohintsonthefly}
-                    onChange={this.props.toggleExperiment}
+                    checked={!!props.globalUserSettings.experiments?.stenohintsonthefly}
+                    onChange={props.toggleExperiment}
                   />
                   <strong>Show your dictionary entries in lesson hints <span className="bg-danger dark:text-coolgrey-900">(this is experimental with known limitations!)</span></strong>
                 </label>
@@ -628,7 +590,7 @@ class DictionaryManagement extends Component {
               <div className="mw-568 mr3 flex-grow">
                 <h3>Dictionaries used for lookup</h3>
 
-                { this.props.globalLookupDictionary && this.props.globalLookupDictionary['configuration'] ?
+                { props.globalLookupDictionary && props.globalLookupDictionary['configuration'] ?
                   <>
                     <p>Typey&nbsp;Type will use these dictionaries for brief hints:</p>
                     <ul>
@@ -640,11 +602,11 @@ class DictionaryManagement extends Component {
                   :
                   <p>No dictionaries have been loaded yet because this page doesn't need to show any strokes.</p>
                 }
-                <form className="mb3" onSubmit={this.handleOnSubmitApplyChanges.bind(this)}>
+                <form className="mb3" onSubmit={handleOnSubmitApplyChanges.bind(this)}>
                   <p>
                     <PseudoContentButton type="submit" className="pseudo-text--applied button mt1">Apply</PseudoContentButton>
-                    {this.state.importedDictionariesLoading ? <span className="dib ml2">Applying</span> : null}
-                    {this.state.importedDictionariesLoaded ? <span className="dib ml2">Applied!</span> : null}
+                    {importedDictionariesLoading ? <span className="dib ml2">Applying</span> : null}
+                    {importedDictionariesLoaded ? <span className="dib ml2">Applied!</span> : null}
                   </p>
                 </form>
               </div>
@@ -660,7 +622,7 @@ class DictionaryManagement extends Component {
                   {misstrokesBlurb}
                   {showYourConfig}
                   {showConfigErrors}
-                  <form className="mt3 mb3" onSubmit={this.handleOnSubmitClear.bind(this)}>
+                  <form className="mt3 mb3" onSubmit={handleOnSubmitClear.bind(this)}>
                     <div>
                       <button type="submit" className="button button--danger mt1">Clear dictionaries and config</button>
                     </div>
@@ -668,7 +630,7 @@ class DictionaryManagement extends Component {
                 </div>
                 <div className="mw-384 w-336">
                   <h3>Add files</h3>
-                  <form className="mb3" onSubmit={this.handleOnSubmit.bind(this)}>
+                  <form className="mb3" onSubmit={handleOnSubmit.bind(this)}>
                     <div className="dib">
                       <label className="mb1" htmlFor="dictionariesFileInput">Add dictionaries in JSON format</label>
                       <p className="text-small mb1">You can add one dictionary after another using this form.</p>
@@ -679,7 +641,7 @@ class DictionaryManagement extends Component {
                     </div>
                   </form>
 
-                  <form className="mb3" onSubmit={this.handleOnSubmitConfig.bind(this)}>
+                  <form className="mb3" onSubmit={handleOnSubmitConfig.bind(this)}>
                     <div className="dib">
                       <label className="mb1" htmlFor="dictionaryConfigFileInput">Add config</label>
                       <input type="file" id="dictionaryConfigFileInput" name="dictionaryConfig" className="form-control" multiple />
@@ -695,7 +657,6 @@ class DictionaryManagement extends Component {
         </main>
       </DocumentTitle>
     )
-  }
 }
 
 export default DictionaryManagement;
