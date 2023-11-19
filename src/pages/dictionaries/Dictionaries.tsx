@@ -83,18 +83,13 @@ const Dictionaries = ({
             `${url}/plover/:dictionaryPath`,
           ]}
         >
-          <AsyncDictionary
-            setAnnouncementMessage={setAnnouncementMessage}
-            setAnnouncementMessageString={setAnnouncementMessageString}
-            {...dictionaryProps}
-          />
+          <AsyncDictionary />
         </Route>
         <Route exact={true} path={`${url}/management`}>
           <AsyncDictionaryManagement
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
             globalUserSettings={globalUserSettings}
-            setAnnouncementMessageString={setAnnouncementMessageString}
             toggleExperiment={toggleExperiment}
             updatePersonalDictionaries={updatePersonalDictionaries}
             {...dictionaryProps}

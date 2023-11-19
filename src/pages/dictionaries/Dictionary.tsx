@@ -9,6 +9,8 @@ import { Tooltip } from "react-tippy";
 import { lookUpDictionaryInIndex } from "../../utils/typey-type";
 import { fetchDictionaryIndex } from "../../utils/getData";
 import Subheader from "../../components/Subheader";
+import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
+import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
 
 import type { PrettyLessonTitle, StenoDictionary } from "../../types";
 
@@ -21,11 +23,6 @@ const truncationLimit = 1000;
 /** Example: "/lessons/collections/tech/react/" */
 type DictLink = string;
 
-type Props = {
-  setAnnouncementMessage: () => void;
-  setAnnouncementMessageString: (announcement: string) => void;
-};
-
 const isInternalDictLink = (dictLink: DictLink) =>
   dictLink.startsWith("/typey-type") ||
   dictLink.startsWith("/dictionaries/") ||
@@ -34,7 +31,7 @@ const isInternalDictLink = (dictLink: DictLink) =>
 
 const getExternalLink = (
   dictLink: DictLink,
-  setAnnouncementMessage: () => void
+  announceTooltip: (this: HTMLElement) => void
 ) =>
   isInternalDictLink(dictLink) ? null : (
     <p className="mt3">
@@ -51,7 +48,7 @@ const getExternalLink = (
           tag="span"
           theme="didoesdigital"
           trigger="mouseenter focus click"
-          onShow={setAnnouncementMessage}
+          onShow={announceTooltip}
         >
           <IconExternal
             ariaHidden="true"
@@ -101,11 +98,10 @@ const getDictionaryContentsString = (dictContents: StenoDictionary) => {
   return [contents, contentsArrayLength];
 };
 
-const Dictionary = ({
-  setAnnouncementMessage,
-  setAnnouncementMessageString,
-}: Props) => {
+const Dictionary = () => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
+  const announceTooltip = useAnnounceTooltip();
+  const { updateMessage } = useAnnouncerApi();
 
   const [loadingDictionaryContents, setLoadingDictionaryContents] =
     useState(true);
@@ -169,9 +165,7 @@ const Dictionary = ({
                 };
 
                 setDictionary(dictionaryData);
-                setAnnouncementMessageString(
-                  "Finished loading: " + dictionaryData.title
-                );
+                updateMessage("Finished loading: " + dictionaryData.title);
                 setLoadingDictionaryContents(false);
               });
             } else {
@@ -181,11 +175,11 @@ const Dictionary = ({
         })
         .catch((error) => {
           console.log("Unable to load dictionary", error);
-          setAnnouncementMessageString("Unable to load dictionary");
+          updateMessage("Unable to load dictionary");
           setHasError(true);
         });
     }
-    // FIXME: setAnnouncementMessageString in dependency array
+    // FIXME: updateMessage in dependency array
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
@@ -220,10 +214,7 @@ const Dictionary = ({
         ""
       );
 
-    const externalLink = getExternalLink(
-      dictionary.link,
-      setAnnouncementMessage
-    );
+    const externalLink = getExternalLink(dictionary.link, announceTooltip);
     const internalLink = getInternalLink(dictionary.link, dictionary.title);
 
     return (
