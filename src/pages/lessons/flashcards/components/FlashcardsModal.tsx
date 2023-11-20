@@ -3,13 +3,15 @@ import OutboundLink from "../../../../components/OutboundLink";
 import ReactModal from "react-modal";
 import { Tooltip } from "react-tippy";
 import { IconExternal } from "../../../../components/Icon";
+import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTooltip";
 
 type Props = {
   fullscreen: boolean;
-  setAnnouncementMessage: () => void;
 };
 
-const FlashcardsModal = ({ fullscreen, setAnnouncementMessage }: Props) => {
+const FlashcardsModal = ({ fullscreen,  }: Props) => {
+  const announceTooltip = useAnnounceTooltip();
+
   const [showModal, setShowModal] = useState(false);
   useEffect(() => {
     ReactModal.setAppElement("#js-app");
@@ -96,7 +98,7 @@ const FlashcardsModal = ({ fullscreen, setAnnouncementMessage }: Props) => {
                   tag="span"
                   theme="didoesdigital"
                   trigger="mouseenter focus click"
-                  onShow={setAnnouncementMessage}
+                  onShow={announceTooltip}
                 >
                   <IconExternal
                     ariaHidden="true"
@@ -128,7 +130,7 @@ const FlashcardsModal = ({ fullscreen, setAnnouncementMessage }: Props) => {
                   tag="span"
                   theme="didoesdigital"
                   trigger="mouseenter focus click"
-                  onShow={setAnnouncementMessage}
+                  onShow={announceTooltip}
                 >
                   <IconExternal
                     ariaHidden="true"

@@ -396,10 +396,7 @@ currentSlide: currentSlide
           <div className="p3 mx-auto mw-1024">
             <div className="flex flex-wrap justify-between">
               <p className={"text-small self-center hide-in-fullscreen" + fullscreen}>Back to <Link to={lessonpath} className={"hide-in-fullscreen" + fullscreen}>{this.state.title} lesson</Link>.</p>
-              <FlashcardsModal
-                fullscreen={this.props.fullscreen}
-                setAnnouncementMessage={this.props.setAnnouncementMessage}
-              />
+              <FlashcardsModal fullscreen={this.props.fullscreen} />
             </div>
             <div>
 
