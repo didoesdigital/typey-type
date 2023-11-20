@@ -51,7 +51,6 @@ export type FinishedProps = {
   restartLesson: any;
   reviseLesson: any;
   revisionMode: any;
-  setAnnouncementMessage: any;
   settings: any;
   startFromWordOne: any;
   startTime: any;

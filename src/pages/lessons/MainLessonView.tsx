@@ -69,7 +69,6 @@ type Props = {
   restartLesson: () => void;
   revisionMode: boolean;
   sayCurrentPhraseAgain: () => void;
-  setAnnouncementMessage: () => void;
   settings: LessonSettings;
   showStrokesInLesson: boolean;
   targetStrokeCount: number;
@@ -129,7 +128,6 @@ const MainLessonView = ({
   restartLesson,
   revisionMode,
   sayCurrentPhraseAgain,
-  setAnnouncementMessage,
   settings,
   showStrokesInLesson,
   targetStrokeCount,
@@ -338,7 +336,6 @@ const MainLessonView = ({
               hideOtherSettings={hideOtherSettings}
               maxStartFromWord={lessonLength}
               revisionMode={revisionMode}
-              setAnnouncementMessage={setAnnouncementMessage}
               totalWordCount={totalWordCount}
               userSettings={userSettings}
             />

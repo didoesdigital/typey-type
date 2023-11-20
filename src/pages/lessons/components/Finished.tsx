@@ -59,7 +59,6 @@ const Finished = ({
   restartLesson,
   reviseLesson,
   revisionMode,
-  setAnnouncementMessage,
   settings,
   startFromWordOne,
   startTime,
@@ -265,7 +264,6 @@ const Finished = ({
             hideOtherSettings={hideOtherSettings}
             maxStartFromWord={lessonLength}
             revisionMode={revisionMode}
-            setAnnouncementMessage={setAnnouncementMessage}
             totalWordCount={totalWordCount}
             userSettings={userSettings}
           />

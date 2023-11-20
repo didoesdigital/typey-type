@@ -6,6 +6,7 @@ import SettingCheckbox from "../../../components/SettingCheckbox";
 import SettingListItem from "../../../components/SettingListItem";
 import SpeakWordsHelp from "./SpeakWordsHelp";
 import VoiceSetting from "./VoiceSetting";
+import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 
 import type { UserSettings as UserSettingsObjectType } from "../../../types";
 
@@ -33,7 +34,6 @@ type Props = {
   hideOtherSettings: boolean;
   maxStartFromWord: number;
   revisionMode: boolean;
-  setAnnouncementMessage: any;
   totalWordCount: number;
   userSettings: UserSettingsObjectType;
 };
@@ -58,10 +58,11 @@ const UserSettings = ({
   hideOtherSettings,
   maxStartFromWord,
   revisionMode,
-  setAnnouncementMessage,
   totalWordCount,
   userSettings,
 }: Props) => {
+  const announceTooltip = useAnnounceTooltip();
+
   return (
     <div className="user-settings">
       <form>
@@ -92,7 +93,7 @@ const UserSettings = ({
                     tag="span"
                     theme="didoesdigital didoesdigital-sm"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     <label className="mr1" htmlFor="limitNumberOfWords">
                       Limit word count
@@ -134,7 +135,7 @@ const UserSettings = ({
                     tag="span"
                     theme="didoesdigital didoesdigital-sm"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     <label className="mr1" htmlFor="startFromWord">
                       Start from word
@@ -177,7 +178,7 @@ const UserSettings = ({
                     tag="span"
                     theme="didoesdigital didoesdigital-sm"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     <label className="mr1" htmlFor="repetitions">
                       Repetitions
@@ -220,7 +221,7 @@ const UserSettings = ({
                     tag="span"
                     theme="didoesdigital didoesdigital-sm"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     <label className="mr1 db" htmlFor="sortOrder">
                       Sort
@@ -256,7 +257,7 @@ const UserSettings = ({
                     tag="span"
                     theme="didoesdigital didoesdigital-sm"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     <label className="mr1" htmlFor="beatsPerMinute">
                       Metronome BPM
@@ -350,7 +351,7 @@ const UserSettings = ({
                         tag="span"
                         theme="didoesdigital didoesdigital-sm"
                         trigger="mouseenter focus click"
-                        onShow={setAnnouncementMessage}
+                        onShow={announceTooltip}
                       >
                         Show hint diagram
                       </Tooltip>
@@ -378,7 +379,7 @@ const UserSettings = ({
                         tag="span"
                         theme="didoesdigital didoesdigital-sm"
                         trigger="mouseenter focus click"
-                        onShow={setAnnouncementMessage}
+                        onShow={announceTooltip}
                       >
                         Show hint text
                       </Tooltip>
@@ -420,7 +421,7 @@ const UserSettings = ({
                       tag="span"
                       theme="didoesdigital didoesdigital-sm"
                       trigger="mouseenter focus click"
-                      onShow={setAnnouncementMessage}
+                      onShow={announceTooltip}
                     >
                       New words
                     </Tooltip>
@@ -450,7 +451,7 @@ const UserSettings = ({
                       tag="span"
                       theme="didoesdigital didoesdigital-sm"
                       trigger="mouseenter focus click"
-                      onShow={setAnnouncementMessage}
+                      onShow={announceTooltip}
                     >
                       Seen words
                     </Tooltip>
@@ -480,7 +481,7 @@ const UserSettings = ({
                       tag="span"
                       theme="didoesdigital didoesdigital-sm"
                       trigger="mouseenter focus click"
-                      onShow={setAnnouncementMessage}
+                      onShow={announceTooltip}
                     >
                       Memorised words
                     </Tooltip>
@@ -500,7 +501,7 @@ const UserSettings = ({
                     tag="span"
                     theme="didoesdigital didoesdigital-sm"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     <label className="mr1 db" htmlFor="spacePlacement">
                       Match spaces
@@ -536,7 +537,7 @@ const UserSettings = ({
                     tag="span"
                     theme="didoesdigital didoesdigital-sm"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     <label className="mr1 db" htmlFor="stenoLayout">
                       Steno layout
@@ -626,7 +627,7 @@ const UserSettings = ({
                     tag="span"
                     theme="didoesdigital didoesdigital-sm"
                     trigger="mouseenter focus click"
-                    onShow={setAnnouncementMessage}
+                    onShow={announceTooltip}
                   >
                     <label className="mr1 db" htmlFor="upcomingWordsLayout">
                       Upcoming words

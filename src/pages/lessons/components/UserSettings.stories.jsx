@@ -28,7 +28,6 @@ const defaultArgs = {
   hideOtherSettings: false,
   maxStartFromWord: 100,
   revisionMode: false,
-  setAnnouncementMessage: () => undefined,
   totalWordCount: 50,
   userSettings: userSettingsFixture,
 };
