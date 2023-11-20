@@ -293,7 +293,6 @@ const UserSettings = ({
                   label={"Show hint for every word"}
                   nameAndId={"showStrokes"}
                   onChange={changeUserSetting}
-                  onShow={setAnnouncementMessage}
                   tooltipTitle={
                     !userSettings.hideStrokesOnLastRepetition
                       ? "Show stroke hint for every word"
@@ -308,7 +307,6 @@ const UserSettings = ({
                   label={"Hide hint on last repetition"}
                   nameAndId={"hideStrokesOnLastRepetition"}
                   onChange={changeUserSetting}
-                  onShow={setAnnouncementMessage}
                   tooltipTitle={
                     userSettings.showStrokes
                       ? "Hide stroke hint during the last repetition"
@@ -323,7 +321,6 @@ const UserSettings = ({
                   label={"Show hint on misstroke"}
                   nameAndId={"showStrokesOnMisstroke"}
                   onChange={changeShowStrokesOnMisstroke}
-                  onShow={setAnnouncementMessage}
                   tooltipTitle={
                     "Show stroke hints for words when you misstroke them"
                   }
@@ -395,7 +392,6 @@ const UserSettings = ({
                   label={"Show other stroke hints"}
                   nameAndId={"showStrokesAsList"}
                   onChange={changeShowStrokesAsList}
-                  onShow={setAnnouncementMessage}
                   tooltipTitle={
                     "Show alternative stroke hints from personal and Plover dictionaries"
                   }
@@ -657,7 +653,6 @@ const UserSettings = ({
                   label={"Blur words"}
                   nameAndId={"blurMaterial"}
                   onChange={changeUserSetting}
-                  onShow={setAnnouncementMessage}
                   tooltipTitle={
                     "Blur words and use a screen reader or speak setting to practice transcription"
                   }
@@ -670,7 +665,6 @@ const UserSettings = ({
                   label={"Speak words with sound"}
                   nameAndId={"speakMaterial"}
                   onChange={changeUserSetting}
-                  onShow={setAnnouncementMessage}
                   tooltipTitle={"Speak words with sound"}
                   modalAndButton={
                     <SpeakWordsHelp disabled={disableUserSettings} />
@@ -701,7 +695,6 @@ const UserSettings = ({
                   label={"Case sensitive"}
                   nameAndId={"caseSensitive"}
                   onChange={changeUserSetting}
-                  onShow={setAnnouncementMessage}
                   tooltipTitle={
                     "Capital letters in material won’t match typed lowercase letters"
                   }
@@ -714,7 +707,6 @@ const UserSettings = ({
                   label={"Simple typography"}
                   nameAndId={"simpleTypography"}
                   onChange={changeUserSetting}
-                  onShow={setAnnouncementMessage}
                   tooltipTitle={
                     'Simple typography replaces “curly quotes” in lesson material with "straight quotes"'
                   }
@@ -727,7 +719,6 @@ const UserSettings = ({
                   label={"Punctuation descriptions"}
                   nameAndId={"punctuationDescriptions"}
                   onChange={changeUserSetting}
-                  onShow={setAnnouncementMessage}
                   tooltipTitle={
                     "Show text descriptions for punctuation symbols"
                   }
@@ -740,7 +731,6 @@ const UserSettings = ({
                   label={"Show scores"}
                   nameAndId={"showScoresWhileTyping"}
                   onChange={changeShowScoresWhileTyping}
-                  onShow={setAnnouncementMessage}
                   tooltipTitle={"Show scores while typing"}
                 />
               </SettingListItem>
@@ -751,7 +741,6 @@ const UserSettings = ({
                   label={"Text input accessibility"}
                   nameAndId={"textInputAccessibility"}
                   onChange={changeUserSetting}
-                  onShow={setAnnouncementMessage}
                   tooltipTitle={
                     "When unchecked, this hides the text input field from screen readers to mute echoes from typed words but might make it impossible to access for some devices"
                   }
