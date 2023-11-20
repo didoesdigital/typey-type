@@ -9,7 +9,7 @@ type Props = {
   fullscreen: boolean;
 };
 
-const FlashcardsModal = ({ fullscreen,  }: Props) => {
+const FlashcardsModal = ({ fullscreen }: Props) => {
   const announceTooltip = useAnnounceTooltip();
 
   const [showModal, setShowModal] = useState(false);
