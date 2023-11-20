@@ -139,8 +139,7 @@ const RecommendationBox = ({
     }
 
     if (
-      recommendedNextLesson &&
-      recommendedNextLesson.lessonTitle &&
+      recommendedNextLesson?.lessonTitle &&
       recommendedNextLesson.lessonTitle.length < 10
     ) {
       metadataStats = (
