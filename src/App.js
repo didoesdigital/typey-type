@@ -1768,8 +1768,6 @@ class App extends Component {
             this.updateRecommendationHistory(newRecommendationHistory, lessonIndex);
           }
         });
-
-        setAnnouncementMessageString.call(this, nextRecommendedLesson.linkText);
       })
       .catch( error => {
         console.log(error);

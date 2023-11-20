@@ -6,6 +6,7 @@ import { IconExternal } from "../../../components/Icon";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
+import { useAnnouncerApi } from "../../../components/Announcer/useAnnouncer";
 
 import type { FullRecommendationsStudyType } from "../../../types";
 
@@ -53,6 +54,7 @@ const RecommendationBox = ({
   updateRecommendationHistory,
 }: Props) => {
   const announceTooltip = useAnnounceTooltip();
+  const { updateMessage } = useAnnouncerApi();
 
   const recommendAnotherLesson = () => {
     GoogleAnalytics.event({
@@ -65,6 +67,21 @@ const RecommendationBox = ({
     if (element) {
       element.focus();
     }
+
+    // Note: This is a hacky hack. It would be better to clean up the mess of
+    // code handling recommendations and either have the code that gets the
+    // recommendation call the announcer with the new recommendation (but not
+    // when other actions fetch recommendations) or somehow get the *new*
+    // recommendation from state/props/refs and announce it here instead of
+    // relying on sketchy timeouts and querying the DOM.
+    setTimeout(() => {
+      const toAnnounce = document.getElementById(
+        "js-next-recommended-link-text"
+      );
+      if (toAnnounce && toAnnounce.textContent !== "Loading…") {
+        updateMessage(`Recommended: ${toAnnounce.textContent ?? ""}`);
+      }
+    }, 100);
 
     updateRecommendationHistory(recommendationHistory);
   };
@@ -302,6 +319,9 @@ const RecommendationBox = ({
               Skip
             </button>
           </div>
+          <div className="hide" id="js-next-recommended-link-text">
+            {recommendedNextLesson.linkText}
+          </div>
         </div>
         <div className="flex flex-wrap content-start-ns">
           <div className="flex flex-wrap"></div>
@@ -336,6 +356,9 @@ const RecommendationBox = ({
             >
               Skip
             </button>
+          </div>
+          <div className="hide" id="js-next-recommended-link-text">
+            Loading…
           </div>
         </div>
       </React.Fragment>
