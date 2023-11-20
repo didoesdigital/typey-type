@@ -2,12 +2,10 @@ import React from "react";
 import OutboundLink from "../../../../components/OutboundLink";
 import { IconExternal } from "../../../../components/Icon";
 import { Tooltip } from "react-tippy";
+import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTooltip";
 
-type Props = {
-  setAnnouncementMessage: () => void;
-};
-
-const CustomShareLessons = ({ setAnnouncementMessage }: Props) => {
+const CustomShareLessons = () => {
+  const announceTooltip = useAnnounceTooltip();
   return (
     <div className="p3 mx-auto mw-1024">
       <div className="text-center">
@@ -31,7 +29,7 @@ const CustomShareLessons = ({ setAnnouncementMessage }: Props) => {
               tag="span"
               theme="didoesdigital"
               trigger="mouseenter focus click"
-              onShow={setAnnouncementMessage}
+              onShow={announceTooltip}
             >
               <IconExternal
                 ariaHidden="true"
@@ -64,7 +62,7 @@ const CustomShareLessons = ({ setAnnouncementMessage }: Props) => {
             tag="span"
             theme="didoesdigital"
             trigger="mouseenter focus click"
-            onShow={setAnnouncementMessage}
+            onShow={announceTooltip}
           >
             <IconExternal
               ariaHidden="true"

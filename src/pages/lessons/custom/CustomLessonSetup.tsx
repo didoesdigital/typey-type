@@ -142,7 +142,7 @@ const CustomLessonSetup = ({
       </div>
 
       <div className="bg-info dark:bg-coolgrey-1100 landing-page-section">
-        <CustomShareLessons setAnnouncementMessage={setAnnouncementMessage} />
+        <CustomShareLessons />
       </div>
     </main>
   );

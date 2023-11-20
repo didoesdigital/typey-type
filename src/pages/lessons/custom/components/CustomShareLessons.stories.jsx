@@ -10,7 +10,7 @@ export default {
 
 const Template = (args) => (
   <div className="p3">
-    <CustomShareLessons setAnnouncementMessage={() => console.log("announce")} />
+    <CustomShareLessons />
   </div>
 );
 
