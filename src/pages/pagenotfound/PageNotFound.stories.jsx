@@ -12,13 +12,7 @@ const testLocation = {
 };
 
 const Template = (args) => {
-  return (
-    <PageNotFound
-      location={testLocation}
-      setAnnouncementMessage={() => console.log("announce")}
-      {...args}
-    />
-  );
+  return <PageNotFound location={testLocation} {...args} />;
 };
 
 export const PageNotFoundStory = Template.bind({});

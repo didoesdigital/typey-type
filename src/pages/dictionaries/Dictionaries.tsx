@@ -34,8 +34,6 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
   personalDictionaries: PersonalDictionaryNameAndContents[];
-  setAnnouncementMessage: () => void;
-  setAnnouncementMessageString: (announcement: string) => void;
   setDictionaryIndex: () => void;
   stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
   toggleExperiment: any;
@@ -51,8 +49,6 @@ const Dictionaries = ({
   globalLookupDictionary,
   globalUserSettings,
   personalDictionaries,
-  setAnnouncementMessage,
-  setAnnouncementMessageString,
   setDictionaryIndex,
   stenohintsonthefly,
   toggleExperiment,

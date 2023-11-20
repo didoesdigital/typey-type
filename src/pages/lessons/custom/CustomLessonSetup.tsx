@@ -20,7 +20,6 @@ type Props = {
   globalLookupDictionary: any;
   globalLookupDictionaryLoaded: boolean;
   personalDictionaries: any;
-  setAnnouncementMessage: () => void;
 };
 
 const CustomLessonSetup = ({
@@ -32,7 +31,6 @@ const CustomLessonSetup = ({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   personalDictionaries,
-  setAnnouncementMessage,
 }: Props) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
 

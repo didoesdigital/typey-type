@@ -27,7 +27,6 @@ RecommendationBoxIdeal.args = {
   recommendAnotherLesson: () => undefined,
   startRecommendedStep: () => undefined,
   loadingLessonIndex: false,
-  setAnnouncementMessage: () => undefined,
 };
 
 export const RecommendationBoxLoading = Template.bind({});

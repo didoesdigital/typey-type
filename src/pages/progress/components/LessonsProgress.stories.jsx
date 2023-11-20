@@ -66,5 +66,4 @@ LessonsProgressStory.storyName = "Lessons progress";
 LessonsProgressStory.args = {
   lessonIndex: lessonIndex,
   lessonsProgress: testLessonsProgress,
-  setAnnouncementMessage: () => undefined,
 };

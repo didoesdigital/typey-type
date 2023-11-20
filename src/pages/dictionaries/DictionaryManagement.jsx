@@ -16,7 +16,6 @@ import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
 //   fetchAndSetupGlobalDict
 //   globalLookupDictionary
 //   globalUserSettings.experiments?.stenohintsonthefly
-//   setAnnouncementMessageString
 //   toggleExperiment
 //   updatePersonalDictionaries
 // }

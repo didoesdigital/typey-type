@@ -11,8 +11,6 @@ import Footer from "./components/Footer";
 import AnnouncerController from "./components/Announcer/AnnouncerController";
 import Announcer from "./components/Announcer/Announcer";
 
-import setAnnouncementMessage from "./components/Announcements/setAnnouncementMessage";
-
 const AsyncBreak = Loadable({
   loader: () => import("./pages/break/Break"),
   loading: PageLoading,
@@ -331,12 +329,6 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
                 <DocumentTitle title={"Typey Type | Dictionaries"}>
                   <ErrorBoundary>
                     <AsyncDictionaries
-                      setAnnouncementMessage={function () {
-                        setAnnouncementMessage(app, this);
-                      }}
-                      setAnnouncementMessageString={
-                        appMethods.setAnnouncementMessageString
-                      }
                       setDictionaryIndex={appMethods.setDictionaryIndex}
                       fetchAndSetupGlobalDict={
                         appMethods.appFetchAndSetupGlobalDict
@@ -475,12 +467,6 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
                       revisionMode={appState.revisionMode}
                       updateRevisionMaterial={appMethods.updateRevisionMaterial}
                       sayCurrentPhraseAgain={appMethods.sayCurrentPhraseAgain}
-                      setAnnouncementMessage={function () {
-                        setAnnouncementMessage(app, this);
-                      }}
-                      setAnnouncementMessageString={
-                        appMethods.setAnnouncementMessageString
-                      }
                       startFromWordOne={appMethods.startFromWordOne}
                       startTime={appState.startTime}
                       stenoHintsOnTheFly={appProps.stenohintsonthefly}

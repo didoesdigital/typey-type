@@ -16,7 +16,6 @@ type LessonsRoutingProps = {
   lesson: any;
   lessonIndex: any;
   match: any;
-  setAnnouncementMessage: any;
   stopLesson: any;
   [key: string]: any;
 };
@@ -43,7 +42,6 @@ const Lessons = ({
   lessonIndex,
   match,
   personalDictionaries,
-  setAnnouncementMessage,
   stopLesson,
   updateFlashcardsMetWords,
   updateFlashcardsProgress,
@@ -68,7 +66,6 @@ const Lessons = ({
             lesson={lesson}
             lessonIndex={lessonIndex}
             personalDictionaries={personalDictionaries}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
@@ -93,7 +90,6 @@ const Lessons = ({
             lesson={lesson}
             lessonIndex={lessonIndex}
             personalDictionaries={personalDictionaries}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
@@ -118,7 +114,6 @@ const Lessons = ({
             lesson={lesson}
             lessonIndex={lessonIndex}
             personalDictionaries={personalDictionaries}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
@@ -140,7 +135,6 @@ const Lessons = ({
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updatePreset={updatePreset}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
@@ -162,7 +156,6 @@ const Lessons = ({
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updatePreset={updatePreset}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
@@ -184,7 +177,6 @@ const Lessons = ({
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updatePreset={updatePreset}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
@@ -207,7 +199,6 @@ const Lessons = ({
             lesson={lesson}
             lessonIndex={lessonIndex}
             personalDictionaries={personalDictionaries}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updatePreset={updatePreset}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
@@ -230,7 +221,6 @@ const Lessons = ({
             lesson={lesson}
             lessonIndex={lessonIndex}
             personalDictionaries={personalDictionaries}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updatePreset={updatePreset}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
@@ -253,7 +243,6 @@ const Lessons = ({
             lesson={lesson}
             lessonIndex={lessonIndex}
             personalDictionaries={personalDictionaries}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updatePreset={updatePreset}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
@@ -280,7 +269,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               personalDictionaries={personalDictionaries}
-              setAnnouncementMessage={setAnnouncementMessage}
               {...lessonProps}
               {...props}
             />
@@ -319,7 +307,6 @@ const Lessons = ({
             handleLesson={handleLesson}
             lesson={lesson}
             lessonIndex={lessonIndex}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updatePreset={updatePreset}
@@ -345,7 +332,6 @@ const Lessons = ({
             lesson={lesson}
             lessonIndex={lessonIndex}
             personalDictionaries={personalDictionaries}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
@@ -364,7 +350,6 @@ const Lessons = ({
             lesson={lesson}
             lessonNotFound={true}
             lessonIndex={lessonIndex}
-            setAnnouncementMessage={setAnnouncementMessage}
             stopLesson={stopLesson}
             {...props}
           />

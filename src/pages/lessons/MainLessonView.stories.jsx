@@ -113,7 +113,6 @@ const Template = (args) => {
             lesson={lesson}
             lessonIndex={lessonIndex}
             stopLesson={stopLesson}
-            setAnnouncementMessage={() => console.log("announce")}
             userSettings={userSettings}
             updateFlashcardsProgress={() => undefined}
             changeFullscreen={() => undefined}

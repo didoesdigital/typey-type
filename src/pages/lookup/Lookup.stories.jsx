@@ -29,7 +29,6 @@ const Template = (args) => (
     fetchAndSetupGlobalDict={() => Promise.resolve(true)}
     globalLookupDictionary={globalLookupDictionary}
     globalLookupDictionaryLoaded={true}
-    setAnnouncementMessage={() => console.log("announce")}
     lookupTerm={undefined}
     userSettings={userSettings}
     globalUserSettings={{}}

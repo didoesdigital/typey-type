@@ -10,13 +10,7 @@ export default {
 };
 
 const Template = (args) => {
-  return (
-    <Metronome
-      setAnnouncementMessage={() => console.log("announce")}
-      userSettings={userSettings}
-      {...args}
-    />
-  );
+  return <Metronome userSettings={userSettings} {...args} />;
 };
 
 export const MetronomeStory = Template.bind({});

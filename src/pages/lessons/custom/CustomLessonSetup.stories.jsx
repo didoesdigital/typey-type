@@ -32,7 +32,6 @@ const Template = (args) => {
       globalLookupDictionary={globalLookupDictionary}
       globalLookupDictionaryLoaded={true}
       personalDictionaries={{ dictionariesNamesAndContents: null }}
-      setAnnouncementMessage={() => console.log("announce")}
       {...args}
     />
   );

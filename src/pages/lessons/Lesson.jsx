@@ -213,7 +213,6 @@ class Lesson extends Component {
                 handleUpcomingWordsLayout={this.props.handleUpcomingWordsLayout}
                 hideOtherSettings={this.state.hideOtherSettings}
                 recommendationHistory={this.props.recommendationHistory}
-                setAnnouncementMessage={this.props.setAnnouncementMessage}
                 metadata={metadata}
                 lesson={this.props.lesson}
                 lessonLength={propsLesson.presentedMaterial.length}
@@ -330,7 +329,6 @@ class Lesson extends Component {
                 restartLesson={this.props.restartLesson}
                 revisionMode={this.props.revisionMode}
                 sayCurrentPhraseAgain={this.props.sayCurrentPhraseAgain}
-                setAnnouncementMessage={this.props.setAnnouncementMessage}
                 settings={this.props.settings}
                 showStrokesInLesson={this.props.showStrokesInLesson}
                 targetStrokeCount={this.props.targetStrokeCount}
