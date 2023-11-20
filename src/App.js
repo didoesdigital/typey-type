@@ -1795,8 +1795,6 @@ class App extends Component {
           flashcardsCourseIndex: currentFlashcardsCourseIndex,
           flashcardsNextLesson: nextFlashcardsLesson
         });
-
-        setAnnouncementMessageString.call(this, nextFlashcardsLesson.linkTitle);
       })
       .catch( error => {
         console.log(error);
