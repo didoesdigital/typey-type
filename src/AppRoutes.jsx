@@ -91,7 +91,7 @@ const AsyncGames = Loadable({
 //   loading: PageLoading,
 // });
 
-const AppRoutes = ({ appProps, appState, appMethods, app }) => {
+const AppRoutes = ({ appProps, appState, appMethods }) => {
   return (
     <AnnouncerController>
       <Announcer />

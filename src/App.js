@@ -2042,7 +2042,6 @@ class App extends Component {
     let stenohintsonthefly = this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly;
 
     let presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
-    let app = this;
       return (
         <div id="js-app" className="app">
           <div className="flex flex-column justify-between min-vh-100">
@@ -2111,7 +2110,6 @@ class App extends Component {
                 updateUserGoalsUnveiled: this.updateUserGoalsUnveiled.bind(this),
               }}
               appState={this.state}
-              app={app}
             />
           </div>
         </div>
