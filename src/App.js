@@ -2042,78 +2042,78 @@ class App extends Component {
     let stenohintsonthefly = this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly;
 
     let presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
-      return (
-        <div id="js-app" className="app">
-          <div className="flex flex-column justify-between min-vh-100">
-            <AppRoutes
-              appProps={{
-                location: this.props.location,
-                completedMaterial,
-                presentedMaterialCurrentItem,
-                stateLesson,
-                stenohintsonthefly,
-                upcomingMaterial
-              }}
-              appMethods={{
-                appFetchAndSetupGlobalDict: this.appFetchAndSetupGlobalDict,
-                setCustomLessonContent: setCustomLessonContent.bind(this),
-                customiseLesson: customiseLesson.bind(this),
-                generateCustomLesson: generateCustomLesson.bind(this),
-                updateMultipleMetWords: updateMultipleMetWords.bind(this),
-                changeFlashcardCourseLevel: this.changeFlashcardCourseLevel.bind(this),
-                changeFullscreen: this.changeFullscreen.bind(this),
-                changeShowScoresWhileTyping: this.changeShowScoresWhileTyping.bind(this),
-                changeShowStrokesAs: this.changeShowStrokesAs.bind(this),
-                changeShowStrokesAsList: this.changeShowStrokesAsList.bind(this),
-                changeShowStrokesInLesson: this.changeShowStrokesInLesson.bind(this),
-                changeShowStrokesOnMisstroke: this.changeShowStrokesOnMisstroke.bind(this),
-                changeSortOrderUserSetting: this.changeSortOrderUserSetting.bind(this),
-                changeSpacePlacementUserSetting: this.changeSpacePlacementUserSetting.bind(this),
-                changeStenoLayout: this.changeStenoLayout.bind(this),
-                changeUserSetting: this.changeUserSetting.bind(this),
-                changeVoiceUserSetting: this.changeVoiceUserSetting.bind(this),
-                changeWriterInput: this.changeWriterInput.bind(this),
-                chooseStudy: this.chooseStudy.bind(this),
-                createCustomLesson: this.createCustomLesson.bind(this),
-                handleBeatsPerMinute: this.handleBeatsPerMinute.bind(this),
-                handleDiagramSize: this.handleDiagramSize.bind(this),
-                handleLesson: this.handleLesson.bind(this),
-                handleLimitWordsChange: this.handleLimitWordsChange.bind(this),
-                handleRepetitionsChange: this.handleRepetitionsChange.bind(this),
-                handleStartFromWordChange: this.handleStartFromWordChange.bind(this),
-                handleStopLesson: this.handleStopLesson.bind(this),
-                handleUpcomingWordsLayout: this.handleUpcomingWordsLayout.bind(this),
-                restartLesson: this.restartLesson.bind(this),
-                reviseLesson: this.reviseLesson.bind(this),
-                sayCurrentPhraseAgain: this.sayCurrentPhraseAgain.bind(this),
-                setDictionaryIndex: this.setDictionaryIndex.bind(this),
-                setPersonalPreferences: this.setPersonalPreferences.bind(this),
-                setUpProgressRevisionLesson: this.setUpProgressRevisionLesson.bind(this),
-                setupLesson: this.setupLesson.bind(this),
-                startCustomLesson: this.startCustomLesson.bind(this),
-                startFromWordOne: this.startFromWordOne.bind(this),
-                stopLesson: this.stopLesson.bind(this),
-                toggleExperiment: this.toggleExperiment.bind(this),
-                updateFlashcardsMetWords: this.updateFlashcardsMetWords.bind(this),
-                updateFlashcardsProgress: this.updateFlashcardsProgress.bind(this),
-                updateFlashcardsRecommendation: this.updateFlashcardsRecommendation.bind(this),
-                updateGlobalLookupDictionary: this.updateGlobalLookupDictionary.bind(this),
-                updateMarkup: this.updateMarkup.bind(this),
-                updateMetWords: this.updateMetWords.bind(this),
-                updatePersonalDictionaries: this.updatePersonalDictionaries.bind(this),
-                updatePreset: this.updatePreset.bind(this),
-                updateRecommendationHistory: this.updateRecommendationHistory.bind(this),
-                updateRevisionMaterial: this.updateRevisionMaterial.bind(this),
-                updateStartingMetWordsAndCounts: this.updateStartingMetWordsAndCounts.bind(this),
-                updateTopSpeedPersonalBest: this.updateTopSpeedPersonalBest.bind(this),
-                updateUserGoals: this.updateUserGoals.bind(this),
-                updateUserGoalsUnveiled: this.updateUserGoalsUnveiled.bind(this),
-              }}
-              appState={this.state}
-            />
-          </div>
+    return (
+      <div id="js-app" className="app">
+        <div className="flex flex-column justify-between min-vh-100">
+          <AppRoutes
+            appProps={{
+              location: this.props.location,
+              completedMaterial,
+              presentedMaterialCurrentItem,
+              stateLesson,
+              stenohintsonthefly,
+              upcomingMaterial
+            }}
+            appMethods={{
+              appFetchAndSetupGlobalDict: this.appFetchAndSetupGlobalDict,
+              setCustomLessonContent: setCustomLessonContent.bind(this),
+              customiseLesson: customiseLesson.bind(this),
+              generateCustomLesson: generateCustomLesson.bind(this),
+              updateMultipleMetWords: updateMultipleMetWords.bind(this),
+              changeFlashcardCourseLevel: this.changeFlashcardCourseLevel.bind(this),
+              changeFullscreen: this.changeFullscreen.bind(this),
+              changeShowScoresWhileTyping: this.changeShowScoresWhileTyping.bind(this),
+              changeShowStrokesAs: this.changeShowStrokesAs.bind(this),
+              changeShowStrokesAsList: this.changeShowStrokesAsList.bind(this),
+              changeShowStrokesInLesson: this.changeShowStrokesInLesson.bind(this),
+              changeShowStrokesOnMisstroke: this.changeShowStrokesOnMisstroke.bind(this),
+              changeSortOrderUserSetting: this.changeSortOrderUserSetting.bind(this),
+              changeSpacePlacementUserSetting: this.changeSpacePlacementUserSetting.bind(this),
+              changeStenoLayout: this.changeStenoLayout.bind(this),
+              changeUserSetting: this.changeUserSetting.bind(this),
+              changeVoiceUserSetting: this.changeVoiceUserSetting.bind(this),
+              changeWriterInput: this.changeWriterInput.bind(this),
+              chooseStudy: this.chooseStudy.bind(this),
+              createCustomLesson: this.createCustomLesson.bind(this),
+              handleBeatsPerMinute: this.handleBeatsPerMinute.bind(this),
+              handleDiagramSize: this.handleDiagramSize.bind(this),
+              handleLesson: this.handleLesson.bind(this),
+              handleLimitWordsChange: this.handleLimitWordsChange.bind(this),
+              handleRepetitionsChange: this.handleRepetitionsChange.bind(this),
+              handleStartFromWordChange: this.handleStartFromWordChange.bind(this),
+              handleStopLesson: this.handleStopLesson.bind(this),
+              handleUpcomingWordsLayout: this.handleUpcomingWordsLayout.bind(this),
+              restartLesson: this.restartLesson.bind(this),
+              reviseLesson: this.reviseLesson.bind(this),
+              sayCurrentPhraseAgain: this.sayCurrentPhraseAgain.bind(this),
+              setDictionaryIndex: this.setDictionaryIndex.bind(this),
+              setPersonalPreferences: this.setPersonalPreferences.bind(this),
+              setUpProgressRevisionLesson: this.setUpProgressRevisionLesson.bind(this),
+              setupLesson: this.setupLesson.bind(this),
+              startCustomLesson: this.startCustomLesson.bind(this),
+              startFromWordOne: this.startFromWordOne.bind(this),
+              stopLesson: this.stopLesson.bind(this),
+              toggleExperiment: this.toggleExperiment.bind(this),
+              updateFlashcardsMetWords: this.updateFlashcardsMetWords.bind(this),
+              updateFlashcardsProgress: this.updateFlashcardsProgress.bind(this),
+              updateFlashcardsRecommendation: this.updateFlashcardsRecommendation.bind(this),
+              updateGlobalLookupDictionary: this.updateGlobalLookupDictionary.bind(this),
+              updateMarkup: this.updateMarkup.bind(this),
+              updateMetWords: this.updateMetWords.bind(this),
+              updatePersonalDictionaries: this.updatePersonalDictionaries.bind(this),
+              updatePreset: this.updatePreset.bind(this),
+              updateRecommendationHistory: this.updateRecommendationHistory.bind(this),
+              updateRevisionMaterial: this.updateRevisionMaterial.bind(this),
+              updateStartingMetWordsAndCounts: this.updateStartingMetWordsAndCounts.bind(this),
+              updateTopSpeedPersonalBest: this.updateTopSpeedPersonalBest.bind(this),
+              updateUserGoals: this.updateUserGoals.bind(this),
+              updateUserGoalsUnveiled: this.updateUserGoalsUnveiled.bind(this),
+            }}
+            appState={this.state}
+          />
         </div>
-      );
+      </div>
+    );
   }
 }
 
