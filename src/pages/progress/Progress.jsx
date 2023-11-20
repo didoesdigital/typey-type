@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import GoogleAnalytics from "react-ga4";
-import ErrorBoundary from '../../components/ErrorBoundary'
-import PseudoContentButton from '../../components/PseudoContentButton';
-import RecommendationBox from './components/RecommendationBox';
-import RecentLessons from './components/RecentLessons';
-import * as Confetti from '../../utils/confetti';
-import { getLessonIndexData } from '../../utils/lessonIndexData';
-import { Link, Redirect } from 'react-router-dom';
-import FlashcardsSection from './components/FlashcardsSection';
-import TodaysEffortsOrGoals from './components/TodaysEffortsOrGoals';
-import ReformatProgress from './components/ReformatProgress';
+import ErrorBoundary from "../../components/ErrorBoundary";
+import PseudoContentButton from "../../components/PseudoContentButton";
+import RecommendationBox from "./components/RecommendationBox";
+import RecentLessons from "./components/RecentLessons";
+import * as Confetti from "../../utils/confetti";
+import { getLessonIndexData } from "../../utils/lessonIndexData";
+import { Link, Redirect } from "react-router-dom";
+import FlashcardsSection from "./components/FlashcardsSection";
+import TodaysEffortsOrGoals from "./components/TodaysEffortsOrGoals";
+import ReformatProgress from "./components/ReformatProgress";
 import ProgressSummaryAndLinks from "./components/ProgressSummaryAndLinks";
 import LessonsProgress from "./components/LessonsProgress";
 import DownloadProgressButton from "./components/DownloadProgressButton";
@@ -51,7 +51,7 @@ class Progress extends Component {
     this.state = {
       canvasWidth: Math.floor(window.innerWidth),
       canvasHeight: Math.floor(window.innerHeight),
-      flashWarning: '',
+      flashWarning: "",
       loadingLessonIndex: true,
       loadingLessonIndexError: false,
       reducedSaveAndLoad: false,
@@ -66,7 +66,7 @@ class Progress extends Component {
       newWordsGoalMet: false,
       userGoalInputOldWords: 50,
       userGoalInputNewWords: 15,
-    }
+    };
   }
 
   componentDidMount() {
@@ -74,33 +74,45 @@ class Progress extends Component {
       this.mainHeading.focus();
     }
 
-    getLessonIndexData().then((lessonIndex) => {
-      if (this.props.recommendationHistory && this.props.recommendationHistory['currentStep'] === null) {
-        this.props.updateRecommendationHistory(this.props.recommendationHistory, lessonIndex);
-        this.props.updateFlashcardsRecommendation();
-      }
-      this.setState({ loadingLessonIndex: false });
-    }).catch((e) => {
-      this.setState({ loadingLessonIndexError: true });
-    });
+    getLessonIndexData()
+      .then((lessonIndex) => {
+        if (
+          this.props.recommendationHistory &&
+          this.props.recommendationHistory["currentStep"] === null
+        ) {
+          this.props.updateRecommendationHistory(
+            this.props.recommendationHistory,
+            lessonIndex
+          );
+          this.props.updateFlashcardsRecommendation();
+        }
+        this.setState({ loadingLessonIndex: false });
+      })
+      .catch((e) => {
+        this.setState({ loadingLessonIndexError: true });
+      });
 
     this.setState({ showLoadInput: false, toRecommendedNextLesson: false });
 
     if (Object.keys(this.props.metWords).length > 2000) {
-      this.setState({reducedSaveAndLoad: true});
+      this.setState({ reducedSaveAndLoad: true });
     } else {
       this.setState({
         reducedSaveAndLoad: false,
-        showLoadInput: false
+        showLoadInput: false,
       });
     }
 
     let yourWordCount = Object.keys(this.props.metWords).length || 0;
-    let progressPercent = Math.round(Object.keys(this.props.metWords).length / 10000 * 100) || 0;
+    let progressPercent =
+      Math.round((Object.keys(this.props.metWords).length / 10000) * 100) || 0;
 
     let todayOldWords = {};
     for (const [phrase, timesSeen] of Object.entries(this.props.metWords)) {
-      if (this.props.startingMetWordsToday[phrase] && (timesSeen - this.props.startingMetWordsToday[phrase] > 0)) {
+      if (
+        this.props.startingMetWordsToday[phrase] &&
+        timesSeen - this.props.startingMetWordsToday[phrase] > 0
+      ) {
         todayOldWords[phrase] = timesSeen;
       }
     }
@@ -140,45 +152,55 @@ class Progress extends Component {
   componentWillUnmount() {
     this.setState({
       loadingLessonIndex: false,
-      loadingLessonIndexError: false
+      loadingLessonIndexError: false,
     });
   }
 
   startRecommendedStep(e) {
-
     let labelString = this.props.recommendedNextLesson.link;
-    if (!labelString) { labelString = "BAD_INPUT"; }
+    if (!labelString) {
+      labelString = "BAD_INPUT";
+    }
 
     GoogleAnalytics.event({
-      category: 'Recommendations',
-      action: 'Start recommended step',
-      label: labelString
+      category: "Recommendations",
+      action: "Start recommended step",
+      label: labelString,
     });
 
-    if (this.props.recommendedNextLesson.link && this.props.recommendedNextLesson.link.startsWith("http")) {
+    if (
+      this.props.recommendedNextLesson.link &&
+      this.props.recommendedNextLesson.link.startsWith("http")
+    ) {
       // lets external link open in a new tab
       this.props.updateRecommendationHistory(this.props.recommendationHistory);
-    }
-    else {
+    } else {
       // does not navigate using link but instead allows Router Redirect
       e.preventDefault();
       this.setState({ toRecommendedNextLesson: true }, () => {
-        this.props.updateRecommendationHistory(this.props.recommendationHistory);
+        this.props.updateRecommendationHistory(
+          this.props.recommendationHistory
+        );
       });
     }
   }
 
   showLoadInputFn() {
-    this.setState({showLoadInput: true});
-    window.setTimeout(function ()
-    {
-      const element = document.getElementById('js-metwords-from-personal-store--small');
-      if (element) { element.focus(); }
+    this.setState({ showLoadInput: true });
+    window.setTimeout(function () {
+      const element = document.getElementById(
+        "js-metwords-from-personal-store--small"
+      );
+      if (element) {
+        element.focus();
+      }
     }, 0);
   }
 
   restoreButtonOnClickFunction() {
-    let textareas = document.querySelectorAll(".js-metwords-from-personal-store");
+    let textareas = document.querySelectorAll(
+      ".js-metwords-from-personal-store"
+    );
     let textareaContents;
     if (textareas.length > 1) {
       textareaContents = textareas[1];
@@ -186,13 +208,19 @@ class Progress extends Component {
       textareaContents = textareas[0];
     }
     this.props.setPersonalPreferences(textareaContents.value);
-    this.setState({flashWarning: "To update your lesson progress, visit the lessons."});
+    this.setState({
+      flashWarning: "To update your lesson progress, visit the lessons.",
+    });
 
-    let numberOfMetWords = '0';
+    let numberOfMetWords = "0";
     try {
-      numberOfMetWords = Object.keys(JSON.parse(textareaContents.value)).length.toString();
+      numberOfMetWords = Object.keys(
+        JSON.parse(textareaContents.value)
+      ).length.toString();
 
-      this.props.updateStartingMetWordsAndCounts(JSON.parse(textareaContents.value));
+      this.props.updateStartingMetWordsAndCounts(
+        JSON.parse(textareaContents.value)
+      );
 
       this.props.updateUserGoalsUnveiled(false, false);
       this.setState({
@@ -201,28 +229,27 @@ class Progress extends Component {
         oldWordsGoalMet: false,
         newWordsGoalMet: false,
       });
+    } catch (error) {
+      numberOfMetWords = "BAD_PROGRESS_INPUT";
     }
-    catch (error) {
-      numberOfMetWords = 'BAD_PROGRESS_INPUT'
-    }
-    if (textareaContents.value === '' || textareaContents.value === ' ') {
-      numberOfMetWords = 'EMPTY_PROGRESS_INPUT'
+    if (textareaContents.value === "" || textareaContents.value === " ") {
+      numberOfMetWords = "EMPTY_PROGRESS_INPUT";
     }
 
     GoogleAnalytics.event({
-      category: 'Progress',
-      action: 'Update progress',
-      label: 'Load met words: ' + numberOfMetWords
+      category: "Progress",
+      action: "Update progress",
+      label: "Load met words: " + numberOfMetWords,
     });
-  };
+  }
 
   saveGoals(event) {
     event.preventDefault();
 
     GoogleAnalytics.event({
-      category: 'Progress',
-      action: 'Save goals',
-      label: 'true'
+      category: "Progress",
+      action: "Save goals",
+      label: "true",
     });
 
     let currentNewWords = this.state.userGoalInputNewWords;
@@ -230,14 +257,14 @@ class Progress extends Component {
 
     let userGoals = {
       newWords: currentNewWords,
-      oldWords: currentOldWords
-    }
+      oldWords: currentOldWords,
+    };
 
     if (isNaN(currentOldWords) || currentOldWords === null) {
-      userGoals['oldWords'] = this.props.userGoals.oldWords || 1;
+      userGoals["oldWords"] = this.props.userGoals.oldWords || 1;
     }
     if (isNaN(currentNewWords) || currentNewWords === null) {
-      userGoals['newWords'] = this.props.userGoals.newWords || 1;
+      userGoals["newWords"] = this.props.userGoals.newWords || 1;
     }
 
     let oldWordsGoalUnveiled = this.props.oldWordsGoalUnveiled;
@@ -248,114 +275,162 @@ class Progress extends Component {
     if (currentNewWords > this.props.userGoals.newWords) {
       newWordsGoalUnveiled = false;
     }
-    this.props.updateUserGoalsUnveiled(oldWordsGoalUnveiled, newWordsGoalUnveiled);
+    this.props.updateUserGoalsUnveiled(
+      oldWordsGoalUnveiled,
+      newWordsGoalUnveiled
+    );
 
     let oldWordsGoalMet = this.state.oldWordsGoalMet;
     let newWordsGoalMet = this.state.newWordsGoalMet;
-    if (this.state.todayOldWordCount < userGoals['oldWords']) {
+    if (this.state.todayOldWordCount < userGoals["oldWords"]) {
       oldWordsGoalMet = false;
     }
-    if (this.state.todayNewWordCount < userGoals['newWords']) {
+    if (this.state.todayNewWordCount < userGoals["newWords"]) {
       newWordsGoalMet = false;
     }
 
     this.props.updateUserGoals(userGoals);
-    this.setState({
-      oldWordsGoalMet: oldWordsGoalMet,
-      newWordsGoalMet: newWordsGoalMet,
-      showSetGoalsForm: false
-    }, () => {
-      const element = document.getElementById('js-set-goals-button');
-      if (element) { element.focus(); }
-    });
+    this.setState(
+      {
+        oldWordsGoalMet: oldWordsGoalMet,
+        newWordsGoalMet: newWordsGoalMet,
+        showSetGoalsForm: false,
+      },
+      () => {
+        const element = document.getElementById("js-set-goals-button");
+        if (element) {
+          element.focus();
+        }
+      }
+    );
   }
 
   cancelSetGoals(event) {
     event.preventDefault();
 
     GoogleAnalytics.event({
-      category: 'Progress',
-      action: 'Cancel set goals',
-      label: 'true'
+      category: "Progress",
+      action: "Cancel set goals",
+      label: "true",
     });
 
-    this.setState({
-      showSetGoalsForm: false
-    }, () => {
-      const element = document.getElementById('js-set-goals-button');
-      if (element) { element.focus(); }
-    });
+    this.setState(
+      {
+        showSetGoalsForm: false,
+      },
+      () => {
+        const element = document.getElementById("js-set-goals-button");
+        if (element) {
+          element.focus();
+        }
+      }
+    );
   }
 
   showSetGoalsForm(event) {
     GoogleAnalytics.event({
-      category: 'Progress',
-      action: 'Show set goals form',
-      label: 'true'
+      category: "Progress",
+      action: "Show set goals form",
+      label: "true",
     });
 
-    this.setState({
-      showSetGoalsForm: true,
-      userGoalInputOldWords: this.props.userGoals.oldWords,
-      userGoalInputNewWords: this.props.userGoals.newWords
-    }, () => {
-      const element = document.getElementById('js-first-interactive-form-field-element');
-      if (element) { element.focus(); }
-    });
+    this.setState(
+      {
+        showSetGoalsForm: true,
+        userGoalInputOldWords: this.props.userGoals.oldWords,
+        userGoalInputNewWords: this.props.userGoals.newWords,
+      },
+      () => {
+        const element = document.getElementById(
+          "js-first-interactive-form-field-element"
+        );
+        if (element) {
+          element.focus();
+        }
+      }
+    );
   }
 
   celebrateCompletedGoals(oldGoal, newGoal) {
     if (oldGoal && newGoal) {
-      Confetti.setupCanvas({sparsity: 240, colors: 5}, 'js-confetti-target', particles);
+      Confetti.setupCanvas(
+        { sparsity: 240, colors: 5 },
+        "js-confetti-target",
+        particles
+      );
+    } else {
+      Confetti.setupCanvas(
+        { sparsity: 960, colors: 2 },
+        "js-confetti-target",
+        particles
+      );
     }
-    else {
-      Confetti.setupCanvas({sparsity: 960, colors: 2}, 'js-confetti-target', particles);
-    }
-    Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight );
+    Confetti.restartAnimation(
+      particles,
+      this.refs.canvas,
+      this.state.canvasWidth,
+      this.state.canvasHeight
+    );
   }
 
   handleOldWordsGoalInputChange(event) {
-    this.setState({userGoalInputOldWords: event});
+    this.setState({ userGoalInputOldWords: event });
 
     let labelString = event;
-    if (!event) { labelString = "BAD_INPUT"; }
+    if (!event) {
+      labelString = "BAD_INPUT";
+    }
 
     GoogleAnalytics.event({
-      category: 'Progress',
-      action: 'Change old words goal',
-      label: labelString
+      category: "Progress",
+      action: "Change old words goal",
+      label: labelString,
     });
 
     return event;
   }
 
   handleNewWordsGoalInputChange(event) {
-    this.setState({userGoalInputNewWords: event});
+    this.setState({ userGoalInputNewWords: event });
 
     let labelString = event;
-    if (!event) { labelString = "BAD_INPUT"; }
+    if (!event) {
+      labelString = "BAD_INPUT";
+    }
 
     GoogleAnalytics.event({
-      category: 'Progress',
-      action: 'Change new words goal',
-      label: labelString
+      category: "Progress",
+      action: "Change new words goal",
+      label: labelString,
     });
 
     return event;
   }
 
   restartConfetti(event) {
-    if (event && ((event.keyCode && event.keyCode === 13) || event.type === "click")) {
+    if (
+      event &&
+      ((event.keyCode && event.keyCode === 13) || event.type === "click")
+    ) {
       particles.splice(0);
       Confetti.cancelAnimation();
-      Confetti.setupCanvas({sparsity: 60, colors: 5, positioningRandomness: 600}, 'js-page-confetti-target', particles);
-      Confetti.restartAnimation(particles, this.refs.canvas, this.state.canvasWidth, this.state.canvasHeight);
+      Confetti.setupCanvas(
+        { sparsity: 60, colors: 5, positioningRandomness: 600 },
+        "js-page-confetti-target",
+        particles
+      );
+      Confetti.restartAnimation(
+        particles,
+        this.refs.canvas,
+        this.state.canvasWidth,
+        this.state.canvasHeight
+      );
     }
   }
 
-  render () {
+  render() {
     if (this.state.toRecommendedNextLesson === true) {
-      return <Redirect push to={this.props.recommendedNextLesson.link} />
+      return <Redirect push to={this.props.recommendedNextLesson.link} />;
     }
 
     let metWordsFromTypeyType = JSON.stringify(this.props.metWords);
@@ -364,19 +439,44 @@ class Progress extends Component {
       <div className="progress-layout pl3 pr3 pt3 mx-auto mw-1024">
         <div className="panel bg-white dark:bg-coolgrey-1000 p3 mb3">
           <h2>Save your progress</h2>
-          <p>Typey&nbsp;Type saves your brief progress in your browser’s local storage.<strong className="bg-danger dark:text-coolgrey-900"> You’ll lose your progress if you clear your browsing data (history, cookies, and cache).</strong> If you share this device with other people or use Typey&nbsp;Type across several devices and browsers, you should save your progress elsewhere. Copy your progress to your clipboard and save it in a text file somewhere safe. When you return, enter your progress to load it back into Typey&nbsp;Type.</p>
+          <p>
+            Typey&nbsp;Type saves your brief progress in your browser’s local
+            storage.
+            <strong className="bg-danger dark:text-coolgrey-900">
+              {" "}
+              You’ll lose your progress if you clear your browsing data
+              (history, cookies, and cache).
+            </strong>{" "}
+            If you share this device with other people or use Typey&nbsp;Type
+            across several devices and browsers, you should save your progress
+            elsewhere. Copy your progress to your clipboard and save it in a
+            text file somewhere safe. When you return, enter your progress to
+            load it back into Typey&nbsp;Type.
+          </p>
           <p className="mb0">
-            <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-metwords-from-typey-type">Copy progress to clipboard</PseudoContentButton>
+            <PseudoContentButton
+              className="js-clipboard-button link-button copy-to-clipboard"
+              dataClipboardTarget="#js-metwords-from-typey-type"
+            >
+              Copy progress to clipboard
+            </PseudoContentButton>
           </p>
         </div>
 
         <div className="panel bg-white dark:bg-coolgrey-1000 p3 mb3">
           <h2 className="mt0">Load your progress</h2>
           <p className="mt2 mb3">
-            Restore your progress from a previous session by entering your saved progress and loading it into Typey&nbsp;Type. You can also clear your progress by loading in empty curly braces, <code>{"{}"}</code>.
+            Restore your progress from a previous session by entering your saved
+            progress and loading it into Typey&nbsp;Type. You can also clear
+            your progress by loading in empty curly braces, <code>{"{}"}</code>.
           </p>
           <p className="mt4 mb0">
-            <label htmlFor="metwords-from-personal-store" className="inline-block mb05">Enter your progress here:</label>
+            <label
+              htmlFor="metwords-from-personal-store"
+              className="inline-block mb05"
+            >
+              Enter your progress here:
+            </label>
             <textarea
               id="metwords-from-personal-store"
               className="js-metwords-from-personal-store progress-textarea bg-info dark:text-coolgrey-900 px1 py05 bw-1 b--solid br-4 db w-100"
@@ -388,7 +488,12 @@ class Progress extends Component {
             />
           </p>
           <p className="mt2 mb0">
-            <PseudoContentButton className="link-button load-progress" onClick={this.restoreButtonOnClickFunction.bind(this)}>Load progress from text</PseudoContentButton>
+            <PseudoContentButton
+              className="link-button load-progress"
+              onClick={this.restoreButtonOnClickFunction.bind(this)}
+            >
+              Load progress from text
+            </PseudoContentButton>
           </p>
         </div>
       </div>
@@ -396,7 +501,11 @@ class Progress extends Component {
 
     let reducedSaveAndLoadForms;
     let loadForm = (
-      <button onClick={this.showLoadInputFn.bind(this)} className="button button--secondary mr2" aria-label="Show progress loading form">
+      <button
+        onClick={this.showLoadInputFn.bind(this)}
+        className="button button--secondary mr2"
+        aria-label="Show progress loading form"
+      >
         Load
       </button>
     );
@@ -405,7 +514,12 @@ class Progress extends Component {
       if (this.state.showLoadInput) {
         loadForm = (
           <React.Fragment>
-            <label htmlFor="js-metwords-from-personal-store--small" className="inline-block mb05 visually-hidden">Enter your progress here:</label>
+            <label
+              htmlFor="js-metwords-from-personal-store--small"
+              className="inline-block mb05 visually-hidden"
+            >
+              Enter your progress here:
+            </label>
             <textarea
               id="js-metwords-from-personal-store--small"
               className="js-metwords-from-personal-store progress-textarea bg-info dark:text-coolgrey-900 px1 py05 bw-1 b--solid br-4 db w-100 mr1"
@@ -413,23 +527,32 @@ class Progress extends Component {
               autoComplete="off"
               autoCorrect="off"
               spellCheck="false"
-              style={{maxWidth: '200px', maxHeight: '40px'}}
+              style={{ maxWidth: "200px", maxHeight: "40px" }}
               rows="1"
             />
-            <PseudoContentButton className="link-button load-progress mr2" onClick={this.restoreButtonOnClickFunction.bind(this)} aria-label="Load progress from text">Load</PseudoContentButton>
+            <PseudoContentButton
+              className="link-button load-progress mr2"
+              onClick={this.restoreButtonOnClickFunction.bind(this)}
+              aria-label="Load progress from text"
+            >
+              Load
+            </PseudoContentButton>
           </React.Fragment>
         );
       }
       reducedSaveAndLoadForms = (
         <div className="flex mb3">
-          <div className="flex">
-            {loadForm}
-          </div>
-          <PseudoContentButton className="js-clipboard-button link-button copy-to-clipboard" dataClipboardTarget="#js-metwords-from-typey-type" aria-label="Copy progress to clipboard">Copy</PseudoContentButton>
+          <div className="flex">{loadForm}</div>
+          <PseudoContentButton
+            className="js-clipboard-button link-button copy-to-clipboard"
+            dataClipboardTarget="#js-metwords-from-typey-type"
+            aria-label="Copy progress to clipboard"
+          >
+            Copy
+          </PseudoContentButton>
         </div>
       );
     }
-
 
     return (
       <div>
@@ -437,28 +560,51 @@ class Progress extends Component {
           <Subheader id="js-page-confetti-target">
             <div className="flex mr1 self-center">
               <header className="flex items-center min-h-40">
-                <h2 id="progress" ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1}>Progress</h2>
+                <h2
+                  id="progress"
+                  ref={(heading) => {
+                    this.mainHeading = heading;
+                  }}
+                  tabIndex={-1}
+                >
+                  Progress
+                </h2>
               </header>
             </div>
             <div className="flex mxn2">
               <DownloadProgressButton metWords={this.props.metWords} />
             </div>
           </Subheader>
-          <canvas ref="canvas" width={this.state.canvasWidth} height={this.state.canvasHeight} className="fixed celebration-canvas top-0 left-0 pointer-none" />
+          <canvas
+            ref="canvas"
+            width={this.state.canvasWidth}
+            height={this.state.canvasHeight}
+            className="fixed celebration-canvas top-0 left-0 pointer-none"
+          />
 
           <FlashcardsSection
             showOnSmallScreen={true}
             changeFlashcardCourseLevel={this.props.changeFlashcardCourseLevel}
-            flashcardsCourseLevel={this.props.globalUserSettings.flashcardsCourseLevel}
+            flashcardsCourseLevel={
+              this.props.globalUserSettings.flashcardsCourseLevel
+            }
             flashcardsNextLesson={this.props.flashcardsNextLesson}
             loadingLessonIndex={this.state.loadingLessonIndex}
             skipButtonId={mobileSkipButtonId}
-            updateFlashcardsRecommendation={this.props.updateFlashcardsRecommendation}
+            updateFlashcardsRecommendation={
+              this.props.updateFlashcardsRecommendation
+            }
           />
 
           {saveAndLoadPanels}
 
-          <div className={this.state.reducedSaveAndLoad ? "p3 mx-auto mw-1024 mt3" : "p3 mx-auto mw-1024"}>
+          <div
+            className={
+              this.state.reducedSaveAndLoad
+                ? "p3 mx-auto mw-1024 mt3"
+                : "p3 mx-auto mw-1024"
+            }
+          >
             <div className="flex justify-between">
               <h2 className="mb0">Your progress</h2>
               {reducedSaveAndLoadForms}
@@ -480,7 +626,9 @@ class Progress extends Component {
                     loadingLessonIndex={this.state.loadingLessonIndex}
                     startRecommendedStep={this.startRecommendedStep.bind(this)}
                     recommendationHistory={this.props.recommendationHistory}
-                    updateRecommendationHistory={this.props.updateRecommendationHistory}
+                    updateRecommendationHistory={
+                      this.props.updateRecommendationHistory
+                    }
                   />
                 </ErrorBoundary>
               </div>
@@ -488,13 +636,19 @@ class Progress extends Component {
               <div className="mw-368 flex-grow" id="js-confetti-target">
                 <TodaysEffortsOrGoals
                   cancelSetGoals={this.cancelSetGoals.bind(this)}
-                  handleNewWordsGoalInputChange={this.handleNewWordsGoalInputChange.bind(this)}
-                  handleOldWordsGoalInputChange={this.handleOldWordsGoalInputChange.bind(this)}
+                  handleNewWordsGoalInputChange={this.handleNewWordsGoalInputChange.bind(
+                    this
+                  )}
+                  handleOldWordsGoalInputChange={this.handleOldWordsGoalInputChange.bind(
+                    this
+                  )}
                   newWordsGoalMet={this.state.newWordsGoalMet}
                   newWordsGoalUnveiled={this.props.newWordsGoalUnveiled}
                   oldWordsGoalMet={this.state.oldWordsGoalMet}
                   oldWordsGoalUnveiled={this.props.oldWordsGoalUnveiled}
-                  celebrateCompletedGoals={this.celebrateCompletedGoals.bind(this)}
+                  celebrateCompletedGoals={this.celebrateCompletedGoals.bind(
+                    this
+                  )}
                   saveGoals={this.saveGoals.bind(this)}
                   showSetGoalsForm={this.state.showSetGoalsForm}
                   showSetGoalsFormFn={this.showSetGoalsForm.bind(this)}
@@ -509,7 +663,16 @@ class Progress extends Component {
               </div>
             </div>
 
-            <p className={ this.state.flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide" } aria-live="polite">{this.state.flashWarning}</p>
+            <p
+              className={
+                this.state.flashWarning.length > 0
+                  ? "bg-warning pl1 pr1"
+                  : "hide"
+              }
+              aria-live="polite"
+            >
+              {this.state.flashWarning}
+            </p>
 
             <div className="flex flex-wrap justify-between">
               <div className="mw-368 flex-grow order-1">
@@ -521,12 +684,18 @@ class Progress extends Component {
                 </ErrorBoundary>
                 <FlashcardsSection
                   showOnSmallScreen={false}
-                  changeFlashcardCourseLevel={this.props.changeFlashcardCourseLevel}
-                  flashcardsCourseLevel={this.props.globalUserSettings.flashcardsCourseLevel}
+                  changeFlashcardCourseLevel={
+                    this.props.changeFlashcardCourseLevel
+                  }
+                  flashcardsCourseLevel={
+                    this.props.globalUserSettings.flashcardsCourseLevel
+                  }
                   flashcardsNextLesson={this.props.flashcardsNextLesson}
                   loadingLessonIndex={this.state.loadingLessonIndex}
                   skipButtonId={skipButtonId}
-                  updateFlashcardsRecommendation={this.props.updateFlashcardsRecommendation}
+                  updateFlashcardsRecommendation={
+                    this.props.updateFlashcardsRecommendation
+                  }
                 />
               </div>
               <div className="mw-568">
@@ -537,7 +706,10 @@ class Progress extends Component {
                     lessonsProgress={this.props.lessonsProgress}
                   />
                 </ul>
-                <p>There are more <Link to='/lessons'>Lessons</Link>, including lessons with sentences.</p>
+                <p>
+                  There are more <Link to="/lessons">Lessons</Link>, including
+                  lessons with sentences.
+                </p>
               </div>
             </div>
 
@@ -547,11 +719,16 @@ class Progress extends Component {
               userSettings={this.props.userSettings}
             />
             <p>Words you’ve seen and times you’ve typed them well:</p>
-            <p id="js-metwords-from-typey-type" className="w-100 mt3 mb3 quote break-words whitespace-break-spaces"><small>{metWordsFromTypeyType}</small></p>
+            <p
+              id="js-metwords-from-typey-type"
+              className="w-100 mt3 mb3 quote break-words whitespace-break-spaces"
+            >
+              <small>{metWordsFromTypeyType}</small>
+            </p>
           </div>
         </main>
       </div>
-    )
+    );
   }
 }
 
