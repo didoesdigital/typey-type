@@ -483,8 +483,8 @@ class Progress extends Component {
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
-              spellCheck="false"
-              rows="2"
+              spellCheck={false}
+              rows={2}
             />
           </p>
           <p className="mt2 mb0">
@@ -526,9 +526,9 @@ class Progress extends Component {
               autoCapitalize="off"
               autoComplete="off"
               autoCorrect="off"
-              spellCheck="false"
+              spellCheck={false}
               style={{ maxWidth: "200px", maxHeight: "40px" }}
-              rows="1"
+              rows={1}
             />
             <PseudoContentButton
               className="link-button load-progress mr2"
