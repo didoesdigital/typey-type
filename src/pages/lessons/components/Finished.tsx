@@ -204,7 +204,6 @@ const Finished = ({
                         totalNumberOfHintedWords={totalNumberOfHintedWords}
                         totalNumberOfMistypedWords={totalNumberOfMistypedWords}
                         wordsTyped={currentLessonStrokes?.length || 0}
-                        setAnnouncementMessage={setAnnouncementMessage}
                       />
                       <FinishedActionButtons
                         numericAccuracy={numericAccuracy}

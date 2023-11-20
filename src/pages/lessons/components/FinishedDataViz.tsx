@@ -20,13 +20,11 @@ type FinishedDataVizProps = {
   totalNumberOfHintedWords: number;
   totalNumberOfMistypedWords: number;
   wordsTyped: number;
-  setAnnouncementMessage: () => void;
 };
 
 type FinishedHeroDataProps = {
   speed: number;
   accuracy: number;
-  setAnnouncementMessage: () => void;
 };
 
 type SecondaryDisplayMetricsProps = {
@@ -36,7 +34,6 @@ type SecondaryDisplayMetricsProps = {
   hinted: number;
   misstrokes: number;
   wordsTyped: number;
-  setAnnouncementMessage: () => void;
 };
 
 const AsyncFinishedSpeedChart = Loadable({
@@ -48,12 +45,10 @@ const AsyncFinishedSpeedChart = Loadable({
 const FinishedHeroData = ({
   speed,
   accuracy,
-  setAnnouncementMessage,
 }: FinishedHeroDataProps) => {
   return (
     <div className="flex flex-wrap justify-between justify-center mx-auto mb3">
       <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
         size={"L"}
         value={speed}
         valueSuffix={undefined}
@@ -61,7 +56,6 @@ const FinishedHeroData = ({
         tooltipMessage={"Assuming a word is 5 characters"}
       />
       <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
         size={"L"}
         value={accuracy}
         valueSuffix={"%"}
@@ -81,12 +75,10 @@ const SecondaryDisplayMetrics = ({
   hinted,
   misstrokes,
   wordsTyped,
-  setAnnouncementMessage,
 }: SecondaryDisplayMetricsProps) => {
   return (
     <div className="flex flex-wrap justify-between justify-center mx-auto mb3">
       <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
         size={"M"}
         value={newWords}
         valueSuffix={undefined}
@@ -94,7 +86,6 @@ const SecondaryDisplayMetrics = ({
         tooltipMessage={"Words you’ve now typed correctly without a hint"}
       />
       <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
         size={"M"}
         value={seen}
         valueSuffix={undefined}
@@ -102,7 +93,6 @@ const SecondaryDisplayMetrics = ({
         tooltipMessage={"Words you’ve seen before"}
       />
       <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
         size={"M"}
         value={memorised}
         valueSuffix={undefined}
@@ -110,7 +100,6 @@ const SecondaryDisplayMetrics = ({
         tooltipMessage={"Words you’ve now typed 30 times or more"}
       />
       <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
         size={"M"}
         value={hinted}
         valueSuffix={undefined}
@@ -118,7 +107,6 @@ const SecondaryDisplayMetrics = ({
         tooltipMessage={"Words you typed with the hint shown"}
       />
       <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
         size={"M"}
         value={misstrokes}
         valueSuffix={undefined}
@@ -128,7 +116,6 @@ const SecondaryDisplayMetrics = ({
         }
       />
       <DisplayMetric
-        setAnnouncementMessage={setAnnouncementMessage}
         size={"M"}
         value={wordsTyped}
         valueSuffix={undefined}
@@ -156,7 +143,6 @@ const FinishedDataViz = ({
   totalNumberOfHintedWords,
   totalNumberOfMistypedWords,
   wordsTyped,
-  setAnnouncementMessage,
 }: FinishedDataVizProps) => {
   const shouldShowChart =
     (chartData?.dataPoints?.length || 0) > 1 && (chartData?.dataPoints?.length || 0) < 10000;
@@ -167,7 +153,6 @@ const FinishedDataViz = ({
         <FinishedHeroData
           speed={wpm}
           accuracy={numericAccuracy}
-          setAnnouncementMessage={setAnnouncementMessage}
         />
       </ErrorBoundary>
       <ErrorBoundary relative={true} vanish={true}>
@@ -187,7 +172,6 @@ const FinishedDataViz = ({
           hinted={totalNumberOfHintedWords}
           misstrokes={totalNumberOfMistypedWords}
           wordsTyped={wordsTyped}
-          setAnnouncementMessage={setAnnouncementMessage}
         />
         {shouldShowChart && (
           <details>

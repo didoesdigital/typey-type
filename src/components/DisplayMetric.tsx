@@ -1,5 +1,6 @@
 import React from "react";
 import { Tooltip } from "react-tippy";
+import useAnnounceTooltip from "./Announcer/useAnnounceTooltip";
 
 type Props = {
   value: number;
@@ -7,7 +8,6 @@ type Props = {
   valueSuffix: string | undefined;
   size: "M" | "L";
   tooltipMessage: string;
-  setAnnouncementMessage: () => void;
 };
 
 export default function DisplayMetric({
@@ -16,8 +16,9 @@ export default function DisplayMetric({
   valueSuffix,
   size,
   tooltipMessage,
-  setAnnouncementMessage,
 }: Props) {
+  const announceTooltip = useAnnounceTooltip();
+
   const classes =
     size && size === "L"
       ? "stat__number stat__number--min-w lh-single text-center stat__number--display"
@@ -40,7 +41,7 @@ export default function DisplayMetric({
           theme="didoesdigital didoesdigital-sm"
           title={tooltipMessage}
           trigger="mouseenter focus click"
-          onShow={setAnnouncementMessage}
+          onShow={announceTooltip}
         >
           <div className="stat__label text-center dib">{label}</div>
         </Tooltip>
