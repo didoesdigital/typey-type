@@ -7,7 +7,7 @@ export default function DisplayMetric({
   valueSuffix,
   size,
   tooltipMessage,
-  setAnnouncementMessage
+  setAnnouncementMessage,
 }) {
   const classes =
     size && size === "L"
@@ -20,6 +20,7 @@ export default function DisplayMetric({
         {valueSuffix && <span className="smaller">{valueSuffix}</span>}
       </div>
       {tooltipMessage ? (
+        // @ts-ignore
         <Tooltip
           animation="shift"
           arrow="true"
