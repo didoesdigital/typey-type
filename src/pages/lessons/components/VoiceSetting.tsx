@@ -1,10 +1,8 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { Tooltip } from "react-tippy";
 
 type Props = {
   changeVoiceUserSetting: (voiceName: string, voiceURI: string) => void;
   disableUserSettings: boolean;
-  setAnnouncementMessage: () => void;
   speakMaterial: boolean;
   voiceName: SpeechSynthesisVoice["name"];
   voiceURI: SpeechSynthesisVoice["voiceURI"];
@@ -84,7 +82,6 @@ const testSay = (
 const VoiceSetting = ({
   changeVoiceUserSetting,
   disableUserSettings,
-  setAnnouncementMessage,
   speakMaterial,
   voiceName,
   voiceURI,
@@ -118,23 +115,9 @@ const VoiceSetting = ({
   return (
     <div style={{ marginTop: "-0.5em" }}>
       <div className="mt1 mb1 pl1 pr2 flex flex-column">
-        {/* @ts-ignore */}
-        <Tooltip
-          title="Set your voice"
-          className="mw-240"
-          animation="shift"
-          arrow="true"
-          duration="200"
-          tabIndex="0"
-          tag="span"
-          theme="didoesdigital didoesdigital-sm"
-          trigger="mouseenter focus click"
-          onShow={setAnnouncementMessage}
-        >
-          <label className="mr1 db" htmlFor="speak-words-voice">
-            Speak words: voice
-          </label>
-        </Tooltip>
+        <label className="mr1 db" htmlFor="speak-words-voice">
+          Speak words: voice
+        </label>
         <div className="flex flex-wrap items-center gap-1">
           <select
             name="speak-words-voice"
