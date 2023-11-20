@@ -1,6 +1,15 @@
 import React from "react";
 import { Tooltip } from "react-tippy";
 
+type Props = {
+  value: number;
+  label: string;
+  valueSuffix: string | undefined;
+  size: "M" | "L";
+  tooltipMessage: string;
+  setAnnouncementMessage: () => void;
+};
+
 export default function DisplayMetric({
   value,
   label,
@@ -8,7 +17,7 @@ export default function DisplayMetric({
   size,
   tooltipMessage,
   setAnnouncementMessage,
-}) {
+}: Props) {
   const classes =
     size && size === "L"
       ? "stat__number stat__number--min-w lh-single text-center stat__number--display"
