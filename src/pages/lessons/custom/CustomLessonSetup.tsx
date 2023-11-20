@@ -109,7 +109,6 @@ const CustomLessonSetup = ({
           customLessonMaterialValidationMessages={
             customLessonMaterialValidationMessages
           }
-          setAnnouncementMessage={setAnnouncementMessage}
         />
       </div>
 

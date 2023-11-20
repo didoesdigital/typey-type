@@ -3,6 +3,7 @@ import OutboundLink from "../../../../components/OutboundLink";
 import { Link } from "react-router-dom";
 import { IconExternal } from "../../../../components/Icon";
 import { Tooltip } from "react-tippy";
+import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTooltip";
 
 export type CustomLessonMaterialValidationState =
   | "unvalidated"
@@ -15,7 +16,6 @@ type Props = {
   customLessonMaterial: any;
   customLessonMaterialValidationState: CustomLessonMaterialValidationState;
   customLessonMaterialValidationMessages: string[];
-  setAnnouncementMessage: () => void;
 };
 
 const CustomLessonIntro = ({
@@ -23,8 +23,9 @@ const CustomLessonIntro = ({
   customLessonMaterial,
   customLessonMaterialValidationState,
   customLessonMaterialValidationMessages,
-  setAnnouncementMessage,
 }: Props) => {
+  const announceTooltip = useAnnounceTooltip();
+
   let validationStateStyle = "";
   let listOfValidationMessages;
   switch (customLessonMaterialValidationState) {
@@ -76,7 +77,7 @@ const CustomLessonIntro = ({
                   tag="span"
                   theme="didoesdigital"
                   trigger="mouseenter focus click"
-                  onShow={setAnnouncementMessage}
+                  onShow={announceTooltip}
                 >
                   <IconExternal
                     ariaHidden="true"
@@ -175,7 +176,7 @@ examples.	KP-PLS TP-PL"
                   tag="span"
                   theme="didoesdigital"
                   trigger="mouseenter focus click"
-                  onShow={setAnnouncementMessage}
+                  onShow={announceTooltip}
                 >
                   <IconExternal
                     ariaHidden="true"
