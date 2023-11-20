@@ -8,7 +8,7 @@ type ChartData = {
   averageWPM: number;
   version: number;
   dataPoints?: any[];
-} | null
+} | null;
 
 type FinishedDataVizProps = {
   wpm: number;
@@ -42,10 +42,7 @@ const AsyncFinishedSpeedChart = Loadable({
   delay: 300,
 });
 
-const FinishedHeroData = ({
-  speed,
-  accuracy,
-}: FinishedHeroDataProps) => {
+const FinishedHeroData = ({ speed, accuracy }: FinishedHeroDataProps) => {
   return (
     <div className="flex flex-wrap justify-between justify-center mx-auto mb3">
       <DisplayMetric
@@ -145,15 +142,13 @@ const FinishedDataViz = ({
   wordsTyped,
 }: FinishedDataVizProps) => {
   const shouldShowChart =
-    (chartData?.dataPoints?.length || 0) > 1 && (chartData?.dataPoints?.length || 0) < 10000;
+    (chartData?.dataPoints?.length || 0) > 1 &&
+    (chartData?.dataPoints?.length || 0) < 10000;
 
   return (
     <>
       <ErrorBoundary relative={true} vanish={true}>
-        <FinishedHeroData
-          speed={wpm}
-          accuracy={numericAccuracy}
-        />
+        <FinishedHeroData speed={wpm} accuracy={numericAccuracy} />
       </ErrorBoundary>
       <ErrorBoundary relative={true} vanish={true}>
         <a
