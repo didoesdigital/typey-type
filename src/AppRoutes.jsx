@@ -461,6 +461,7 @@ const AppRoutes = ({ appProps, appState, appMethods, app }) => {
                       previousCompletedPhraseAsTyped={
                         appState.previousCompletedPhraseAsTyped
                       }
+                      recentLessonHistory={appState.recentLessons.history}
                       recommendationHistory={appState.recommendationHistory}
                       repetitionsRemaining={appState.repetitionsRemaining}
                       revisionMaterial={appState.revisionMaterial}

@@ -27,7 +27,6 @@ import {
 } from './utils/transformingDictionaries/transformingDictionaries';
 import queryString from 'query-string';
 import GoogleAnalytics from "react-ga4";
-import Announcements from './components/Announcements/Announcements';
 import fallbackLesson from './constant/fallbackLesson';
 import fetchAndSetupGlobalDict from './utils/app/fetchAndSetupGlobalDict';
 import calculateMemorisedWordCount from './utils/calculateMemorisedWordCount';
@@ -67,7 +66,6 @@ class App extends Component {
     this.appFetchAndSetupGlobalDict = fetchAndSetupGlobalDict.bind(this);
 
     this.state = {
-      announcementMessage: null,
       currentPhraseAttempts: [],
       currentPhraseID: 0,
       currentLessonStrokes: [],
@@ -880,7 +878,6 @@ class App extends Component {
         lesson = fallbackLesson
       }
       this.setState({
-        announcementMessage: 'Navigated to: Your revision words',
         currentPhraseID: 0,
         lesson: lesson,
         userSettings: newUserSettings
@@ -1440,11 +1437,8 @@ class App extends Component {
 
       let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
-      let announcementMessage = 'Navigated to: ' + newLesson.title;
-
       this.setState({
         actualText: ``,
-        announcementMessage: announcementMessage,
         currentPhraseAttempts: [],
         currentLessonStrokes: [],
         disableUserSettings: false,
@@ -1502,7 +1496,6 @@ class App extends Component {
               lesson.newPresentedMaterial = new Zipper([lessonWordsAndStrokes]);
 
             this.setState({
-              announcementMessage: 'Navigated to: ' + lesson.title,
               lesson: lesson,
               currentPhraseID: 0
             }, () => {
@@ -1532,7 +1525,6 @@ class App extends Component {
             .then(() => {
               this.setState(
                 {
-                  announcementMessage: "Navigated to: " + lesson.title,
                   lesson: lesson,
                   currentPhraseID: 0,
                 },
@@ -1556,7 +1548,6 @@ class App extends Component {
         }
         else {
           this.setState({
-            announcementMessage: 'Navigated to: ' + lesson.title,
             lesson: lesson,
             currentPhraseID: 0
           }, () => {
@@ -1584,7 +1575,6 @@ class App extends Component {
     let lesson = Object.assign({}, this.state.customLesson);
     lesson.title = 'Custom'
     this.setState({
-      announcementMessage: 'Navigated to: Custom',
       currentPhraseID: 0,
       lesson: lesson
     }, () => {
@@ -2055,7 +2045,6 @@ class App extends Component {
     let app = this;
       return (
         <div id="js-app" className="app">
-          <Announcements message={this.state.announcementMessage} />
           <div className="flex flex-column justify-between min-vh-100">
             <AppRoutes
               appProps={{

@@ -325,6 +325,7 @@ class Lesson extends Component {
                 lessonLength={this.props.lessonLength}
                 lessonTitle={this.props.lessonTitle}
                 previousCompletedPhraseAsTyped={this.props.previousCompletedPhraseAsTyped}
+                recentLessonHistory={this.props.recentLessonHistory}
                 repetitionsRemaining={this.props.repetitionsRemaining}
                 restartLesson={this.props.restartLesson}
                 revisionMode={this.props.revisionMode}

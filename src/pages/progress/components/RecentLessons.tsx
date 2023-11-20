@@ -9,7 +9,7 @@ import type {
 
 type RecentLessonIndex = Pick<LessonIndexEntry, "path" | "title">;
 
-type RecentLessonHistoryItem = {
+export type RecentLessonHistoryItem = {
   path: LessonPathWithoutBasenameOrFilename;
   studyType: Study;
 };

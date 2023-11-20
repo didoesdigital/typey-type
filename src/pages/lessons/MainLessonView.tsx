@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { IconClosingCross } from "../../components/Icon";
 import { Link, useLocation } from "react-router-dom";
 import AnimateHeight from "react-animate-height";
@@ -16,6 +16,7 @@ import SedSaidPrompt from "../../components/LessonPrompts/SedSaidPrompt";
 import WordBoundaryErrorPrompt from "../../components/LessonPrompts/WordBoundaryErrorPrompt";
 import PunctuationDescription from "./components/PunctuationDescription";
 import LessonFinePrintFooter from "./components/LessonFinePrintFooter";
+import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
 
 import type {
   ActualTypedText,
@@ -28,6 +29,8 @@ import type {
   Study,
   UserSettings as UserSettingsType,
 } from "../../types";
+
+import type { RecentLessonHistoryItem } from "../progress/components/RecentLessons";
 
 type Props = {
   createNewCustomLesson: JSX.Element | undefined;
@@ -65,6 +68,7 @@ type Props = {
   lessonLength: number;
   lessonTitle: string;
   previousCompletedPhraseAsTyped: ActualTypedText;
+  recentLessonHistory: RecentLessonHistoryItem[];
   repetitionsRemaining: number;
   restartLesson: () => void;
   revisionMode: boolean;
@@ -124,6 +128,7 @@ const MainLessonView = ({
   lessonLength,
   lessonTitle,
   previousCompletedPhraseAsTyped,
+  recentLessonHistory,
   repetitionsRemaining,
   restartLesson,
   revisionMode,
@@ -146,8 +151,29 @@ const MainLessonView = ({
   hideOtherSettings,
   toggleHideOtherSettings,
 }: Props) => {
-  const mainHeading = useRef(null);
+  const previousLesson = useRef<string | null>(null);
+  const mainHeading = useRef<HTMLHeadingElement>(null);
   const location = useLocation();
+  const { updateMessage } = useAnnouncerApi();
+
+  // Note: This is a crude way of avoiding excess page title announcements due
+  // to excess re-renders. Ideally, we'd reduce re-renders and reliably
+  // announce lesson changes only when navigating to a new lesson
+  useEffect(() => {
+    const realLesson = lessonTitle !== "Steno";
+    const reRenderSameLesson = previousLesson.current === lessonTitle;
+    const reMountCurrentLesson =
+      recentLessonHistory?.[recentLessonHistory.length - 1]?.path ===
+      location.pathname;
+
+    if (realLesson && !reRenderSameLesson && !reMountCurrentLesson) {
+      updateMessage(`Navigated to: ${lessonTitle}`);
+    }
+  }, [lessonTitle, updateMessage, recentLessonHistory, location.pathname]);
+
+  useEffect(() => {
+    previousLesson.current = lessonTitle;
+  }, [lessonTitle]);
 
   return (
     <DocumentTitle title={"Typey Type | Lesson: " + lesson.title}>
