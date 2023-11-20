@@ -36,7 +36,6 @@ import increaseMetWords from './utils/increaseMetWords';
 import isNormalInteger from './utils/isNormalInteger';
 import filterByFamiliarity from './utils/lessons/filterByFamiliarity';
 import replaceSmartTypographyInPresentedMaterial from './utils/lessons/replaceSmartTypographyInPresentedMaterial';
-import setAnnouncementMessageString from './components/Announcements/setAnnouncementMessageString';
 import sortLesson from './utils/lessons/sortLesson';
 import Zipper from './utils/zipper';
 import generateCustomLesson from './pages/lessons/custom/generator/utilities/generateCustomLesson';
@@ -2072,7 +2071,6 @@ class App extends Component {
                 setCustomLessonContent: setCustomLessonContent.bind(this),
                 customiseLesson: customiseLesson.bind(this),
                 generateCustomLesson: generateCustomLesson.bind(this),
-                setAnnouncementMessageString: setAnnouncementMessageString.bind(this),
                 updateMultipleMetWords: updateMultipleMetWords.bind(this),
                 changeFlashcardCourseLevel: this.changeFlashcardCourseLevel.bind(this),
                 changeFullscreen: this.changeFullscreen.bind(this),
