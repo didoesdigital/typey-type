@@ -445,10 +445,10 @@ const DictionariesIndex = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               globalUserSettings={globalUserSettings}
+              lookupTerm={undefined} /* FIXME: should be optional */
+              onChange={undefined} /* FIXME: should this be optional? */
               personalDictionaries={personalDictionaries}
-              stenoHintsOnTheFly={stenohintsonthefly}
-              updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-              updatePersonalDictionaries={updatePersonalDictionaries}
+              trackPhrase={undefined} /* FIXME: should be optional */
               userSettings={userSettings}
             />
           </div>

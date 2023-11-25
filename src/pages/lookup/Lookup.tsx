@@ -123,8 +123,6 @@ const Lookup = ({
                 onChange={strokesForWordsChange}
                 personalDictionaries={personalDictionaries}
                 trackPhrase={setTrackPhrase}
-                updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-                updatePersonalDictionaries={updatePersonalDictionaries}
                 userSettings={userSettings}
               />
             </div>
