@@ -4,11 +4,35 @@ import SOURCE_NAMESPACES from "../constant/sourceNamespaces";
 import splitBriefsIntoStrokes from "./../utils/splitBriefsIntoStrokes";
 import lookupListOfStrokesAndDicts from "../utils/lookupListOfStrokesAndDicts";
 
-import misstrokesJSON from "../json/misstrokes.json";
+import misstrokes from "../json/misstrokes.json";
 import PloverMisstrokesDetail from "./PloverMisstrokesDetail";
 import StrokesAsDiagrams from "./StrokesAsDiagrams";
 import MatchedModifiedTranslation from "./MatchedModifiedTranslation";
 import LookupResultsOutlinesAndDicts from "./LookupResultsOutlinesAndDicts";
+
+import type {
+  GlobalUserSettings,
+  // LookupDictWithNamespacedDictsAndConfig,
+  PersonalDictionaryNameAndContents,
+  StenoDictionary,
+  UserSettings,
+} from "../types";
+
+type Props = {
+  personalDictionaries: PersonalDictionaryNameAndContents[];
+  fetchAndSetupGlobalDict: (
+    withPlover: boolean,
+    importedPersonalDictionaries?: any
+  ) => Promise<any>;
+  lookupTerm?: string;
+  onChange?: any;
+  globalLookupDictionary: any;
+  // globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+  globalLookupDictionaryLoaded: boolean;
+  globalUserSettings: GlobalUserSettings;
+  trackPhrase?: any;
+  userSettings: UserSettings;
+};
 
 const StrokesForWords = ({
   personalDictionaries,
@@ -20,7 +44,7 @@ const StrokesForWords = ({
   globalUserSettings,
   trackPhrase,
   userSettings,
-}) => {
+}: Props) => {
   const [modifiedWordOrPhraseState, setModifiedWordOrPhraseState] =
     useState("");
   const [phraseState, setPhraseState] = useState("");
@@ -28,12 +52,15 @@ const StrokesForWords = ({
     []
   );
 
+  const misstrokesJSON = misstrokes as StenoDictionary;
+
   useEffect(() => {
     // if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
 
     const shouldUsePersonalDictionaries =
       personalDictionaries &&
       Object.entries(personalDictionaries).length > 0 &&
+      // @ts-ignore FIXME: check if the types are wrong…
       !!personalDictionaries.dictionariesNamesAndContents;
 
     fetchAndSetupGlobalDict(
@@ -56,12 +83,14 @@ const StrokesForWords = ({
   }, []);
   // }, [fetchAndSetupGlobalDict, lookupTerm, personalDictionaries, updateWordsForStrokes]);
 
-  function handleWordsOnChange(event) {
+  const handleWordsOnChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
+    event
+  ) => {
     let phrase = event.target.value;
     updateWordsForStrokes(phrase);
-  }
+  };
 
-  function updateWordsForStrokes(phrase) {
+  function updateWordsForStrokes(phrase: string) {
     if (onChange) {
       onChange(phrase);
     }
@@ -86,6 +115,7 @@ const StrokesForWords = ({
 
     setModifiedWordOrPhraseState(modifiedWordOrPhrase);
     setPhraseState(phrase);
+    // @ts-ignore FIXME
     setListOfStrokesAndDictsState(listOfStrokesAndDicts);
   }
 
@@ -116,7 +146,7 @@ const StrokesForWords = ({
         autoCorrect="off"
         className="input-textarea input-textarea--large mb3 w-100 overflow-hidden"
         id="words-for-strokes"
-        onChange={handleWordsOnChange.bind(this)}
+        onChange={handleWordsOnChange}
         placeholder="e.g. quadruplicate"
         rows={1}
         spellCheck={false}
