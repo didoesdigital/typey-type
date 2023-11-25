@@ -3,8 +3,6 @@ import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "./Announcer/useAnnounceTooltip";
 
 type Props = {
-  lessonLength: number;
-  lessonTitle: string;
   timer: number;
   totalNumberOfMatchedWords: number;
   totalNumberOfNewWordsMet: number;
@@ -15,8 +13,6 @@ type Props = {
 };
 
 const Scores = ({
-  lessonLength,
-  lessonTitle,
   timer,
   totalNumberOfMatchedWords,
   totalNumberOfNewWordsMet,
@@ -32,13 +28,6 @@ const Scores = ({
   const [wordCount, setWordCount] = useState(0);
   const [wordsPerMinute, setWordsPerMinute] = useState(0);
   const [timeInSeconds, setTimeInSeconds] = useState(0);
-
-  // Note: reset scores to 0 when visiting a different lesson or custom lesson content changes:
-  useEffect(() => {
-    setWordCount(0);
-    setWordsPerMinute(0);
-    setTimeInSeconds(0);
-  }, [lessonTitle, lessonLength]);
 
   useEffect(() => {
     if (prevTimer.current !== null) {
