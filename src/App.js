@@ -122,7 +122,7 @@ class App extends Component {
       repetitionsRemaining: 1,
       startTime: null,
       showStrokesInLesson: false,
-      timer: null,
+      timer: 0,
       topSpeedPersonalBest: 0,
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
@@ -271,7 +271,7 @@ class App extends Component {
 
   updateWPM() {
     this.setState({
-      timer: new Date() - this.state.startTime
+      timer: new Date().getTime() - this.state.startTime
     });
   }
 
@@ -1446,7 +1446,7 @@ class App extends Component {
         previousCompletedPhraseAsTyped: '',
         repetitionsRemaining: reps,
         startTime: null,
-        timer: null,
+        timer: 0,
         targetStrokeCount: target,
         totalNumberOfMatchedChars: 0,
         totalNumberOfMatchedWords: 0,

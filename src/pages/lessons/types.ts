@@ -54,7 +54,7 @@ export type FinishedProps = {
   settings: any;
   startFromWordOne: any;
   startTime: any;
-  timer: any;
+  timer: number;
   toggleHideOtherSettings: any;
   topSpeedPersonalBest: any;
   totalNumberOfHintedWords: any;
