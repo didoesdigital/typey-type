@@ -95,7 +95,9 @@ class StrokesForWords extends Component {
 
     const strokes = splitBriefsIntoStrokes(brief);
 
-    return this.props.globalLookupDictionaryLoaded ? (
+    if (!this.props.globalLookupDictionaryLoaded) return <>Loading…</>;
+
+    return (
       <React.Fragment>
         <label
           htmlFor="words-for-strokes"
@@ -139,8 +141,6 @@ class StrokesForWords extends Component {
           }
         />
       </React.Fragment>
-    ) : (
-      <>Loading…</>
     );
   }
 }
