@@ -227,6 +227,8 @@ const MainLessonView = ({
                     onClick={changeShowScoresWhileTyping}
                   >
                     <Scores
+                      lessonLength={lessonLength}
+                      lessonTitle={lessonTitle}
                       timer={timer}
                       totalNumberOfMatchedWords={totalNumberOfMatchedWords}
                       totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
