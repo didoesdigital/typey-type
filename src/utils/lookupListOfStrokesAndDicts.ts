@@ -5,13 +5,16 @@ import misstrokesJSON from "../json/misstrokes.json";
 import getModifiedWordOrPhraseForLookup from "../utils/getModifiedWordOrPhraseForLookup";
 import createListOfStrokes from "../utils/createListOfStrokes";
 
-import type { LookupDictWithNamespacedDictsAndConfig } from "../types";
+import type {
+  LookupDictWithNamespacedDictsAndConfig,
+  StrokeAndDictionaryAndNamespace,
+} from "../types";
 
 function lookupListOfStrokesAndDicts(
   phrase: string,
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig,
   affixList = AffixList.getSharedInstance()
-) {
+): [StrokeAndDictionaryAndNamespace[], string] {
   let lookupText = phrase;
   let modifiedWordOrPhrase = lookupText.slice();
   modifiedWordOrPhrase = getModifiedWordOrPhraseForLookup(phrase);
