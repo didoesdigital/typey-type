@@ -265,9 +265,10 @@ const UserSettings = ({
                   </Tooltip>
                   <div>
                     <NumericInput
+                      data-1p-ignore
                       autoCapitalize="off"
-                      autoComplete="on"
-                      autoCorrect="on"
+                      autoComplete="off"
+                      autoCorrect="off"
                       autoFocus={false}
                       className="form-control w-100"
                       disabled={disableUserSettings}
