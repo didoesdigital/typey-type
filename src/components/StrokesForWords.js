@@ -60,12 +60,7 @@ class StrokesForWords extends Component {
     let [listOfStrokesAndDicts, modifiedWordOrPhrase] =
       lookupListOfStrokesAndDicts(phrase, this.props.globalLookupDictionary);
 
-    if (
-      !(
-        this.props.globalUserSettings &&
-        this.props.globalUserSettings.showMisstrokesInLookup
-      )
-    ) {
+    if (!this.props.globalUserSettings?.showMisstrokesInLookup) {
       listOfStrokesAndDicts = listOfStrokesAndDicts.filter(
         (row) =>
           row[2] === SOURCE_NAMESPACES.get("user") ||
@@ -81,17 +76,15 @@ class StrokesForWords extends Component {
     }
 
     this.setState({
-      modifiedWordOrPhrase: modifiedWordOrPhrase,
-      phrase: phrase,
-      listOfStrokesAndDicts: listOfStrokesAndDicts,
+      modifiedWordOrPhrase,
+      phrase,
+      listOfStrokesAndDicts,
     });
   }
 
   render() {
     const stenoLayout =
-      this.props.userSettings && this.props.userSettings.stenoLayout
-        ? this.props.userSettings.stenoLayout
-        : "stenoLayoutAmericanSteno";
+      this.props.userSettings?.stenoLayout ?? "stenoLayoutAmericanSteno";
 
     const brief =
       this.state.listOfStrokesAndDicts &&
@@ -100,7 +93,7 @@ class StrokesForWords extends Component {
         ? this.state.listOfStrokesAndDicts[0][0]
         : "";
 
-    let strokes = splitBriefsIntoStrokes(brief);
+    const strokes = splitBriefsIntoStrokes(brief);
 
     return this.props.globalLookupDictionaryLoaded ? (
       <React.Fragment>
