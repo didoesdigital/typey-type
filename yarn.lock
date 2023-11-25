@@ -4620,7 +4620,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@discoveryjs/json-ext@npm:^0.5.3, @discoveryjs/json-ext@npm:^0.5.7":
+"@discoveryjs/json-ext@npm:^0.5.3":
   version: 0.5.7
   resolution: "@discoveryjs/json-ext@npm:0.5.7"
   checksum: e10f1b02b78e4812646ddf289b7d9f2cb567d336c363b266bd50cd223cf3de7c2c74018d91cd2613041568397ef3a4a2b500aba588c6e5bd78c38374ba68f38c
@@ -8546,13 +8546,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/webpack-env@npm:^1.17.0":
-  version: 1.18.0
-  resolution: "@types/webpack-env@npm:1.18.0"
-  checksum: ac2e91b025ea31b98b0271ccb40da789c5b54693c1efb18265a54c03b303b750501f080a44e99d7ce0a5422d68d535e600e851df4b8f2240444eca7ac3159719
-  languageName: node
-  linkType: hard
-
 "@types/webpack-sources@npm:*":
   version: 2.1.0
   resolution: "@types/webpack-sources@npm:2.1.0"
@@ -10467,17 +10460,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:^6.8.0":
-  version: 6.8.0
-  resolution: "chromatic@npm:6.8.0"
-  dependencies:
-    "@discoveryjs/json-ext": "npm:^0.5.7"
-    "@types/webpack-env": "npm:^1.17.0"
+"chromatic@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "chromatic@npm:9.1.0"
   bin:
-    chroma: bin/main.cjs
-    chromatic: bin/main.cjs
-    chromatic-cli: bin/main.cjs
-  checksum: 9dfc0cebdec4fa50ab9570787cb1d07c570383f53334be0f8c05250b880a9128d2e180f13cd086ff055e5804c272118b079f9c89fa0998200e95e76b84840490
+    chroma: dist/bin.js
+    chromatic: dist/bin.js
+    chromatic-cli: dist/bin.js
+  checksum: 27d0ff5ef993024301f31d137e9774b051de908d48dcd461c33b51c92e5e7b57cd062eaddafcd02f1c2a98cfe5d5ef26b7fcdf77b76df94e357171074a23b950
   languageName: node
   linkType: hard
 
@@ -22523,7 +22513,7 @@ __metadata:
     "@types/react-numeric-input": "npm:^2.2.4"
     "@types/react-router-dom": "npm:^5.3.3"
     "@types/react-transition-group": "npm:^4.4.5"
-    chromatic: "npm:^6.8.0"
+    chromatic: "npm:^9.1.0"
     clipboard: "npm:^1.7.1"
     d3-array: "npm:^3.1.1"
     d3-format: "npm:^3.1.0"
