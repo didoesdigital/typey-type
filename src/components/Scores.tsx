@@ -2,8 +2,30 @@ import React, { useEffect, useRef, useState } from "react";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "./Announcer/useAnnounceTooltip";
 
-const Scores = (props) => {
-  const prevTimer = useRef(null);
+type Props = {
+  lessonLength: number;
+  lessonTitle: string;
+  timer: number;
+  totalNumberOfMatchedWords: number;
+  totalNumberOfNewWordsMet: number;
+  totalNumberOfLowExposuresSeen: number;
+  totalNumberOfRetainedWords: number;
+  totalNumberOfMistypedWords: number;
+  totalNumberOfHintedWords: number;
+};
+
+const Scores = ({
+  lessonLength,
+  lessonTitle,
+  timer,
+  totalNumberOfMatchedWords,
+  totalNumberOfNewWordsMet,
+  totalNumberOfLowExposuresSeen,
+  totalNumberOfRetainedWords,
+  totalNumberOfMistypedWords,
+  totalNumberOfHintedWords,
+}: Props) => {
+  const prevTimer = useRef<number | null>(null);
 
   const announceTooltip = useAnnounceTooltip();
 
@@ -16,21 +38,21 @@ const Scores = (props) => {
     setWordCount(0);
     setWordsPerMinute(0);
     setTimeInSeconds(0);
-  }, [props.lessonTitle, props.lessonLength]);
+  }, [lessonTitle, lessonLength]);
 
   useEffect(() => {
     if (prevTimer.current !== null) {
-      if (prevTimer.current < props.timer) {
-        calculateScores(props.timer, props.totalNumberOfMatchedWords);
+      if (prevTimer.current < timer) {
+        calculateScores(timer, totalNumberOfMatchedWords);
       }
     }
-  }, [props.timer, props.totalNumberOfMatchedWords]);
+  }, [timer, totalNumberOfMatchedWords]);
 
   useEffect(() => {
-    prevTimer.current = props.timer;
-  }, [props.timer]);
+    prevTimer.current = timer;
+  }, [timer]);
 
-  function calculateScores(timer, totalNumberOfMatchedWords) {
+  function calculateScores(timer: number, totalNumberOfMatchedWords: number) {
     let wordsPerMinute;
     if (timer > 0) {
       wordsPerMinute = Math.round(
@@ -83,31 +105,31 @@ const Scores = (props) => {
         <h4 className="visually-hidden">Words typed</h4>
         <div className="stat">
           <div className="stat__number stat__number--min-w text-center">
-            {props.totalNumberOfNewWordsMet}
+            {totalNumberOfNewWordsMet}
           </div>
           <div className="stat__label text-center">New</div>
         </div>
         <div className="stat">
           <div className="stat__number stat__number--min-w text-center">
-            {props.totalNumberOfLowExposuresSeen}
+            {totalNumberOfLowExposuresSeen}
           </div>
           <div className="stat__label text-center">Seen before</div>
         </div>
         <div className="stat">
           <div className="stat__number stat__number--min-w text-center">
-            {props.totalNumberOfRetainedWords}
+            {totalNumberOfRetainedWords}
           </div>
           <div className="stat__label text-center">From memory</div>
         </div>
         <div className="stat">
           <div className="stat__number stat__number--min-w text-center">
-            {props.totalNumberOfMistypedWords}
+            {totalNumberOfMistypedWords}
           </div>
           <div className="stat__label text-center">Misstroked</div>
         </div>
         <div className="stat">
           <div className="stat__number stat__number--min-w text-center">
-            {props.totalNumberOfHintedWords}
+            {totalNumberOfHintedWords}
           </div>
           <div className="stat__label text-center">Hinted</div>
         </div>
