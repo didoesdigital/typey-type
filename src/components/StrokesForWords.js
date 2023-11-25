@@ -12,9 +12,9 @@ import LookupResultsOutlinesAndDicts from "./LookupResultsOutlinesAndDicts";
 
 class StrokesForWords extends Component {
   state = {
-    modifiedWordOrPhrase: "",
-    phrase: "",
-    listOfStrokesAndDicts: [],
+    modifiedWordOrPhraseState: "",
+    phraseState: "",
+    listOfStrokesAndDictsState: [],
   };
 
   componentDidMount() {
@@ -36,7 +36,7 @@ class StrokesForWords extends Component {
           this.props.lookupTerm !== undefined &&
           this.props.lookupTerm.length > 0
         ) {
-          this.setState({ phrase: this.props.lookupTerm });
+          this.setState({ phraseState: this.props.lookupTerm });
           this.updateWordsForStrokes(this.props.lookupTerm);
         }
       })
@@ -76,9 +76,9 @@ class StrokesForWords extends Component {
     }
 
     this.setState({
-      modifiedWordOrPhrase,
-      phrase,
-      listOfStrokesAndDicts,
+      modifiedWordOrPhraseState: modifiedWordOrPhrase,
+      phraseState: phrase,
+      listOfStrokesAndDictsState: listOfStrokesAndDicts,
     });
   }
 
@@ -87,10 +87,10 @@ class StrokesForWords extends Component {
       this.props.userSettings?.stenoLayout ?? "stenoLayoutAmericanSteno";
 
     const brief =
-      this.state.listOfStrokesAndDicts &&
-      this.state.listOfStrokesAndDicts[0] &&
-      this.state.listOfStrokesAndDicts[0][0]
-        ? this.state.listOfStrokesAndDicts[0][0]
+      this.state.listOfStrokesAndDictsState &&
+      this.state.listOfStrokesAndDictsState[0] &&
+      this.state.listOfStrokesAndDictsState[0][0]
+        ? this.state.listOfStrokesAndDictsState[0][0]
         : "";
 
     const strokes = splitBriefsIntoStrokes(brief);
@@ -115,24 +115,24 @@ class StrokesForWords extends Component {
           placeholder="e.g. quadruplicate"
           rows={1}
           spellCheck={false}
-          value={this.state.phrase}
+          value={this.state.phraseState}
           wrap="off"
         ></textarea>
         <MatchedModifiedTranslation
-          listOfStrokesAndDicts={this.state.listOfStrokesAndDicts}
-          modifiedWordOrPhrase={this.state.modifiedWordOrPhrase}
-          phrase={this.state.phrase}
+          listOfStrokesAndDicts={this.state.listOfStrokesAndDictsState}
+          modifiedWordOrPhrase={this.state.modifiedWordOrPhraseState}
+          phrase={this.state.phraseState}
         />
         <div className="mb1">
           <StrokesAsDiagrams
-            listOfStrokesAndDicts={this.state.listOfStrokesAndDicts}
+            listOfStrokesAndDicts={this.state.listOfStrokesAndDictsState}
             stenoLayout={stenoLayout}
             strokes={strokes}
             userSettings={this.props.userSettings}
           />
         </div>
         <LookupResultsOutlinesAndDicts
-          listOfStrokesAndDicts={this.state.listOfStrokesAndDicts}
+          listOfStrokesAndDicts={this.state.listOfStrokesAndDictsState}
           stenoLayout={stenoLayout}
         />
         <PloverMisstrokesDetail
