@@ -29,18 +29,6 @@ const Scores = ({
   const [wordsPerMinute, setWordsPerMinute] = useState(0);
   const [timeInSeconds, setTimeInSeconds] = useState(0);
 
-  useEffect(() => {
-    if (prevTimer.current !== null) {
-      if (prevTimer.current < timer) {
-        calculateScores(timer, totalNumberOfMatchedWords);
-      }
-    }
-  }, [timer, totalNumberOfMatchedWords]);
-
-  useEffect(() => {
-    prevTimer.current = timer;
-  }, [timer]);
-
   function calculateScores(timer: number, totalNumberOfMatchedWords: number) {
     let wordsPerMinute;
     if (timer > 0) {
@@ -57,6 +45,20 @@ const Scores = ({
     setWordsPerMinute(wordsPerMinute);
     setTimeInSeconds(timeInSeconds);
   }
+
+  // Note: we only update the scores shown every second instead of every time
+  // the number of matched words changes because of a keystroke
+  useEffect(() => {
+    if (prevTimer.current !== null) {
+      if (prevTimer.current < timer) {
+        calculateScores(timer, totalNumberOfMatchedWords);
+      }
+    }
+  }, [timer, totalNumberOfMatchedWords]);
+
+  useEffect(() => {
+    prevTimer.current = timer;
+  }, [timer]);
 
   return (
     <div>
