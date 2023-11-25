@@ -30,20 +30,17 @@ const Scores = ({
   const [timeInSeconds, setTimeInSeconds] = useState(0);
 
   function calculateScores(timer: number, totalNumberOfMatchedWords: number) {
-    let wordsPerMinute;
-    if (timer > 0) {
-      wordsPerMinute = Math.round(
-        totalNumberOfMatchedWords / (timer / 60 / 1000)
-      );
-    } else {
-      wordsPerMinute = 0;
-    }
-    let timeInSeconds = Math.round(timer / 1000);
-    let wordCount = Math.round(totalNumberOfMatchedWords);
+    const newWPM =
+      timer > 0
+        ? Math.round(totalNumberOfMatchedWords / (timer / 60 / 1000))
+        : 0;
 
-    setWordCount(wordCount);
-    setWordsPerMinute(wordsPerMinute);
-    setTimeInSeconds(timeInSeconds);
+    const newTimeInSeconds = Math.round(timer / 1000);
+    const newWordCount = Math.round(totalNumberOfMatchedWords);
+
+    setWordCount(newWordCount);
+    setWordsPerMinute(newWPM);
+    setTimeInSeconds(newTimeInSeconds);
   }
 
   // Note: we only update the scores shown every second instead of every time
