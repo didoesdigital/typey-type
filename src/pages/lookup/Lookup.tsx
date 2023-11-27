@@ -5,10 +5,7 @@ import PseudoContentButton from "../../components/PseudoContentButton";
 import Subheader from "../../components/Subheader";
 import getWordFamilyGroup from "./utilities/getWordFamilyGroup";
 
-import type {
-  GlobalUserSettings,
-  UserSettings,
-} from "../../types";
+import type { GlobalUserSettings, UserSettings } from "../../types";
 
 type Props = {
   fetchAndSetupGlobalDict: (
