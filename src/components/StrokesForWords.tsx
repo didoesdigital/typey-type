@@ -68,8 +68,8 @@ const StrokesForWords = ({
     // }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  // }, [fetchAndSetupGlobalDict, lookupTerm, personalDictionaries, updateWordsForStrokes]);
+  }, [fetchAndSetupGlobalDict, lookupTerm]);
+  // }, [fetchAndSetupGlobalDict, lookupTerm, updateWordsForStrokes]);
 
   const handleWordsOnChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
     event
