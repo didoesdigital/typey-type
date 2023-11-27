@@ -1386,6 +1386,7 @@ class App extends Component {
 
       let newHistory = Object.assign({}, this.props.location)
       newHistory.search = "";
+      // Note: this affects StrokesForWords lookup ?q= behaviour:
       this.props.history.replace(newHistory);
 
       if (this.state.userSettings.simpleTypography) {
