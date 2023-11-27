@@ -39,7 +39,6 @@ type Props = {
     withPlover: boolean,
     importedPersonalDictionaries?: any
   ) => Promise<any>;
-  personalDictionaries: any;
   globalLookupDictionary: LookupDictWithNamespacedDicts;
 };
 
@@ -53,7 +52,6 @@ const CustomLessonGenerator = ({
   fetchAndSetupGlobalDict,
   generateCustomLesson,
   globalLookupDictionary,
-  personalDictionaries,
 }: Props) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
 
@@ -66,21 +64,13 @@ const CustomLessonGenerator = ({
   };
 
   useEffect(() => {
-    const shouldUsePersonalDictionaries =
-      personalDictionaries &&
-      Object.entries(personalDictionaries).length > 0 &&
-      !!personalDictionaries.dictionariesNamesAndContents;
-
-    fetchAndSetupGlobalDict(
-      false,
-      shouldUsePersonalDictionaries ? personalDictionaries : null
-    ).catch((error: Error) => {
+    fetchAndSetupGlobalDict(false, null).catch((error: Error) => {
       console.error(error);
     });
-    // }, [fetchAndSetupGlobalDict, personalDictionaries]);
+    // }, [fetchAndSetupGlobalDict]);
     // Excluding fetchAndSetupGlobalDict…
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [personalDictionaries]);
+  }, []);
 
   useEffect(() => {
     mainHeading.current?.focus();

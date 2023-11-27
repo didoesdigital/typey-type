@@ -19,7 +19,6 @@ type Props = {
   ) => Promise<any>;
   globalLookupDictionary: any;
   globalLookupDictionaryLoaded: boolean;
-  personalDictionaries: any;
 };
 
 const CustomLessonSetup = ({
@@ -30,7 +29,6 @@ const CustomLessonSetup = ({
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
-  personalDictionaries,
 }: Props) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
 
@@ -44,15 +42,7 @@ const CustomLessonSetup = ({
       globalLookupDictionary.size < 2 &&
       !globalLookupDictionaryLoaded
     ) {
-      const shouldUsePersonalDictionaries =
-        personalDictionaries &&
-        Object.entries(personalDictionaries).length > 0 &&
-        !!personalDictionaries.dictionariesNamesAndContents;
-
-      fetchAndSetupGlobalDict(
-        false,
-        shouldUsePersonalDictionaries ? personalDictionaries : null
-      ).catch((error) => {
+      fetchAndSetupGlobalDict(false).catch((error) => {
         console.error(error);
         // this.showDictionaryErrorNotification();
       });
@@ -61,7 +51,6 @@ const CustomLessonSetup = ({
     fetchAndSetupGlobalDict,
     globalLookupDictionary,
     globalLookupDictionaryLoaded,
-    personalDictionaries,
   ]);
 
   const match = useRouteMatch({

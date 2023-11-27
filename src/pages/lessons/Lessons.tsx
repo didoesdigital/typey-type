@@ -278,7 +278,6 @@ const Lessons = ({
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              personalDictionaries={personalDictionaries}
               {...lessonProps}
               {...props}
             />
@@ -299,7 +298,6 @@ const Lessons = ({
                 fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
                 generateCustomLesson={generateCustomLesson}
                 globalLookupDictionary={globalLookupDictionary}
-                personalDictionaries={personalDictionaries}
                 {...lessonProps}
               />
             </ErrorBoundary>

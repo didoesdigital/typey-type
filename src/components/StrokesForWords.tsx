@@ -13,13 +13,11 @@ import LookupResultsOutlinesAndDicts from "./LookupResultsOutlinesAndDicts";
 import type {
   GlobalUserSettings,
   // LookupDictWithNamespacedDictsAndConfig,
-  PersonalDictionaryNameAndContents,
   StenoDictionary,
   UserSettings,
 } from "../types";
 
 type Props = {
-  personalDictionaries: PersonalDictionaryNameAndContents[];
   fetchAndSetupGlobalDict: (
     withPlover: boolean,
     importedPersonalDictionaries?: any
@@ -35,7 +33,6 @@ type Props = {
 };
 
 const StrokesForWords = ({
-  personalDictionaries,
   fetchAndSetupGlobalDict,
   lookupTerm,
   onChange,
@@ -57,16 +54,7 @@ const StrokesForWords = ({
   useEffect(() => {
     // if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
 
-    const shouldUsePersonalDictionaries =
-      personalDictionaries &&
-      Object.entries(personalDictionaries).length > 0 &&
-      // @ts-ignore FIXME: check if the types are wrong…
-      !!personalDictionaries.dictionariesNamesAndContents;
-
-    fetchAndSetupGlobalDict(
-      true,
-      shouldUsePersonalDictionaries ? personalDictionaries : null
-    )
+    fetchAndSetupGlobalDict(true, null)
       .then(() => {
         if (lookupTerm && lookupTerm !== undefined && lookupTerm.length > 0) {
           setPhraseState(lookupTerm);

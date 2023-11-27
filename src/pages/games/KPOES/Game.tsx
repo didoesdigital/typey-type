@@ -6,11 +6,7 @@ import { ReactComponent as ComposingRobot } from "../../../images/ComposingRobot
 import StrokesForWords from "../../../components/StrokesForWords";
 import "./styles.scss";
 
-import type {
-  LookupDictWithNamespacedDicts,
-  MetWords,
-  PersonalDictionaryNameAndContents,
-} from "../../../types";
+import type { LookupDictWithNamespacedDicts, MetWords } from "../../../types";
 
 type Props = {
   fetchAndSetupGlobalDict: (
@@ -20,7 +16,6 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDicts;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
-  personalDictionaries: PersonalDictionaryNameAndContents[];
   globalUserSettings: any;
   userSettings: any;
   updateMultipleMetWords: (newMetWords: string[]) => void;
@@ -35,7 +30,6 @@ export default function Game({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   metWords,
-  personalDictionaries,
   globalUserSettings,
   userSettings,
   updateMultipleMetWords,
@@ -76,7 +70,6 @@ export default function Game({
             globalUserSettings={globalUserSettings}
             lookupTerm={undefined} /* FIXME: should be optional */
             onChange={undefined} /* FIXME: should be optional */
-            personalDictionaries={personalDictionaries}
             trackPhrase={undefined} /* FIXME: should be optional */
             userSettings={userSettings}
           />

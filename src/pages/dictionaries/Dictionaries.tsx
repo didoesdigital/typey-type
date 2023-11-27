@@ -8,7 +8,6 @@ import type {
   Experiments,
   GlobalUserSettings,
   LookupDictWithNamespacedDicts,
-  PersonalDictionaryNameAndContents,
   UserSettings,
 } from "../../types";
 
@@ -33,11 +32,9 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDicts;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
-  personalDictionaries: PersonalDictionaryNameAndContents[];
   setDictionaryIndex: () => void;
   stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
   toggleExperiment: any;
-  updateGlobalLookupDictionary: any;
   updatePersonalDictionaries: any;
   userSettings: UserSettings;
   [restProps: string]: any;
@@ -48,11 +45,9 @@ const Dictionaries = ({
   globalLookupDictionaryLoaded,
   globalLookupDictionary,
   globalUserSettings,
-  personalDictionaries,
   setDictionaryIndex,
   stenohintsonthefly,
   toggleExperiment,
-  updateGlobalLookupDictionary,
   updatePersonalDictionaries,
   userSettings,
   fetchAndSetupGlobalDict,
@@ -101,9 +96,6 @@ const Dictionaries = ({
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-            personalDictionaries={personalDictionaries}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updatePersonalDictionaries={updatePersonalDictionaries}
             {...dictionaryProps}
           />
         </Route>

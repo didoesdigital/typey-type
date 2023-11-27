@@ -19,10 +19,7 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
   lookupTerm?: string;
-  personalDictionaries: any;
   setCustomLessonContent: any;
-  updateGlobalLookupDictionary: any;
-  updatePersonalDictionaries: any;
   userSettings: UserSettings;
 };
 
@@ -32,9 +29,6 @@ const Lookup = ({
   globalLookupDictionaryLoaded,
   globalUserSettings,
   lookupTerm,
-  personalDictionaries,
-  updateGlobalLookupDictionary,
-  updatePersonalDictionaries,
   userSettings,
   setCustomLessonContent,
 }: Props) => {
@@ -121,7 +115,6 @@ const Lookup = ({
                 globalUserSettings={globalUserSettings}
                 lookupTerm={lookupTerm}
                 onChange={strokesForWordsChange}
-                personalDictionaries={personalDictionaries}
                 trackPhrase={setTrackPhrase}
                 userSettings={userSettings}
               />

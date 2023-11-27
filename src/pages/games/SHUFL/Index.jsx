@@ -7,7 +7,6 @@ export default function Index({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   startingMetWordsToday,
-  personalDictionaries,
   updateMetWords,
 }) {
   const mainHeading = useRef(null);
@@ -18,18 +17,10 @@ export default function Index({
   }, []);
 
   useEffect(() => {
-    const shouldUsePersonalDictionaries =
-      personalDictionaries &&
-      Object.entries(personalDictionaries).length > 0 &&
-      !!personalDictionaries.dictionariesNamesAndContents;
-
-    fetchAndSetupGlobalDict(
-      false,
-      shouldUsePersonalDictionaries ? personalDictionaries : null
-    ).catch((error) => {
+    fetchAndSetupGlobalDict(false, null).catch((error) => {
       console.error(error);
     });
-  }, [fetchAndSetupGlobalDict, personalDictionaries]);
+  }, [fetchAndSetupGlobalDict]);
 
   return (
     <main id="main">

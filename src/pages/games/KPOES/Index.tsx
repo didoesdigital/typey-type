@@ -12,7 +12,6 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDicts;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
-  personalDictionaries: any; // PersonalDictionaryNameAndContents[];
   globalUserSettings: any;
   userSettings: any;
   updateMultipleMetWords: (newMetWords: string[]) => void;
@@ -23,7 +22,6 @@ export default function Index({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   metWords,
-  personalDictionaries,
   globalUserSettings,
   userSettings,
   updateMultipleMetWords,
@@ -35,18 +33,10 @@ export default function Index({
   }, []);
 
   useEffect(() => {
-    const shouldUsePersonalDictionaries =
-      personalDictionaries &&
-      Object.entries(personalDictionaries).length > 0 &&
-      !!personalDictionaries.dictionariesNamesAndContents;
-
-    fetchAndSetupGlobalDict(
-      false,
-      shouldUsePersonalDictionaries ? personalDictionaries : null
-    ).catch((error) => {
+    fetchAndSetupGlobalDict(false, null).catch((error) => {
       console.error(error);
     });
-  }, [fetchAndSetupGlobalDict, personalDictionaries]);
+  }, [fetchAndSetupGlobalDict]);
 
   return (
     <main id="main">
@@ -62,7 +52,6 @@ export default function Index({
       <Game
         fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
         metWords={metWords}
-        personalDictionaries={personalDictionaries}
         globalLookupDictionary={globalLookupDictionary}
         globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
         globalUserSettings={globalUserSettings}

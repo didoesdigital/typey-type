@@ -461,7 +461,6 @@ currentSlide: currentSlide
                   globalUserSettings={this.props.globalUserSettings}
                   lookupTerm={undefined} /* FIXME: should be optional */
                   onChange={undefined} /* FIXME: should this be optional? */
-                  personalDictionaries={this.props.personalDictionaries}
                   trackPhrase={undefined} /* FIXME: should be optional */
                   userSettings={this.props.userSettings}
                 />

@@ -307,12 +307,6 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                       lookupTerm={appState.lookupTerm}
                       personalDictionaries={appState.personalDictionaries}
                       setCustomLessonContent={appMethods.setCustomLessonContent}
-                      updateGlobalLookupDictionary={
-                        appMethods.updateGlobalLookupDictionary
-                      }
-                      updatePersonalDictionaries={
-                        appMethods.updatePersonalDictionaries
-                      }
                       userSettings={appState.userSettings}
                       {...props}
                     />

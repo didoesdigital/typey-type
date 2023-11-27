@@ -840,13 +840,9 @@ class App extends Component {
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.state.userSettings) { stenoLayout = this.state.userSettings.stenoLayout; }
 
-    const shouldUsePersonalDictionaries = this.state.personalDictionaries
-      && Object.entries(this.state.personalDictionaries).length > 0
-      && !!this.state.personalDictionaries.dictionariesNamesAndContents;
-
     const loadPlover = this.state.userSettings.showStrokesAsList ? true : false;
 
-    this.appFetchAndSetupGlobalDict(loadPlover, shouldUsePersonalDictionaries ? this.props.personalDictionaries : null).then(() => {
+    this.appFetchAndSetupGlobalDict(loadPlover, null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWords).join("\n");
       // parseWordList appears to remove empty lines and other garbage, we might not need it here
@@ -1006,17 +1002,11 @@ class App extends Component {
     const name = "showStrokesAsList";
     const value = event.target.checked;
 
-    const shouldUsePersonalDictionaries =
-      this.state.personalDictionaries &&
-      Object.entries(this.state.personalDictionaries).length > 0 &&
-      !!this.state.personalDictionaries.dictionariesNamesAndContents;
-
     if (value) {
       newState[name] = true;
-      this.appFetchAndSetupGlobalDict(
-        true,
-        shouldUsePersonalDictionaries ? this.state.personalDictionaries : null
-      ).catch((error) => console.error(error));
+
+      this.appFetchAndSetupGlobalDict(true, null)
+        .catch((error) => console.error(error));
     } else {
       newState[name] = false;
     }
@@ -1483,13 +1473,9 @@ class App extends Component {
           !path.includes("collections/tech")
         ) {
 
-          const shouldUsePersonalDictionaries = this.state.personalDictionaries
-            && Object.entries(this.state.personalDictionaries).length > 0
-            && !!this.state.personalDictionaries.dictionariesNamesAndContents;
-
           const loadPlover = this.state.userSettings.showStrokesAsList ? true : false;
 
-          this.appFetchAndSetupGlobalDict(loadPlover, shouldUsePersonalDictionaries ? this.state.personalDictionaries : null).then(() => {
+          this.appFetchAndSetupGlobalDict(loadPlover, null).then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
               lesson.presentedMaterial = lessonWordsAndStrokes;

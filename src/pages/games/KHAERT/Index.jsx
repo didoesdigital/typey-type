@@ -5,26 +5,17 @@ import Subheader from "../../../components/Subheader";
 export default function Index({
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
-  personalDictionaries,
 }) {
   const mainHeading = useRef(null);
   useEffect(() => {
-    const shouldUsePersonalDictionaries =
-      personalDictionaries &&
-      Object.entries(personalDictionaries).length > 0 &&
-      !!personalDictionaries.dictionariesNamesAndContents;
-
-    fetchAndSetupGlobalDict(
-      false,
-      shouldUsePersonalDictionaries ? personalDictionaries : null
-    ).catch((error) => {
+    fetchAndSetupGlobalDict(false, null).catch((error) => {
       console.error(error);
     });
 
     if (mainHeading) {
       mainHeading.current.focus();
     }
-  }, [fetchAndSetupGlobalDict, personalDictionaries]);
+  }, [fetchAndSetupGlobalDict]);
 
   return (
     <main id="main">

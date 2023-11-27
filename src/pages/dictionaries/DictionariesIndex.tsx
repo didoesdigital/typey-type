@@ -11,7 +11,6 @@ import type {
   Experiments,
   GlobalUserSettings,
   LookupDictWithNamespacedDicts,
-  PersonalDictionaryNameAndContents,
   PrettyLessonTitle,
   StenoDictionary,
   UserSettings,
@@ -29,11 +28,8 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDicts;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
-  personalDictionaries: PersonalDictionaryNameAndContents[];
   setDictionaryIndex: () => void;
   stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
-  updateGlobalLookupDictionary: any;
-  updatePersonalDictionaries: any;
   userSettings: UserSettings;
 };
 
@@ -103,10 +99,7 @@ const DictionariesIndex = ({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   globalUserSettings,
-  personalDictionaries,
   stenohintsonthefly,
-  updateGlobalLookupDictionary,
-  updatePersonalDictionaries,
   userSettings,
 }: Props) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
@@ -447,7 +440,6 @@ const DictionariesIndex = ({
               globalUserSettings={globalUserSettings}
               lookupTerm={undefined} /* FIXME: should be optional */
               onChange={undefined} /* FIXME: should this be optional? */
-              personalDictionaries={personalDictionaries}
               trackPhrase={undefined} /* FIXME: should be optional */
               userSettings={userSettings}
             />

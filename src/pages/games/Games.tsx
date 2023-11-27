@@ -9,7 +9,6 @@ import type {
   GlobalUserSettings,
   LookupDictWithNamespacedDicts,
   MetWords,
-  PersonalDictionaryNameAndContents,
   UserSettings,
 } from "../../types";
 
@@ -58,7 +57,6 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDicts;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
-  personalDictionaries: PersonalDictionaryNameAndContents[];
   startingMetWordsToday: MetWords;
   globalUserSettings: GlobalUserSettings;
   userSettings: UserSettings;
@@ -72,7 +70,6 @@ const Games = ({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   metWords,
-  personalDictionaries,
   globalUserSettings,
   userSettings,
   startingMetWordsToday,
@@ -94,7 +91,6 @@ const Games = ({
             <AsyncKHAERT
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
-              personalDictionaries={personalDictionaries}
             />
           </ErrorBoundary>
         </DocumentTitle>
@@ -106,7 +102,6 @@ const Games = ({
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              personalDictionaries={personalDictionaries}
               startingMetWordsToday={startingMetWordsToday}
               updateMetWords={updateMetWords}
             />
@@ -128,7 +123,6 @@ const Games = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               metWords={metWords}
-              personalDictionaries={personalDictionaries}
               globalUserSettings={globalUserSettings}
               userSettings={userSettings}
               updateMultipleMetWords={updateMultipleMetWords}
