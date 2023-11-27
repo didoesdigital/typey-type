@@ -1,10 +1,8 @@
-import * as React from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import SOURCE_NAMESPACES from "../constant/sourceNamespaces";
+import misstrokes from "../json/misstrokes.json";
 import lookupListOfStrokesAndDicts from "../utils/lookupListOfStrokesAndDicts";
 import splitBriefsIntoStrokes from "./../utils/splitBriefsIntoStrokes";
-
-import misstrokes from "../json/misstrokes.json";
 import LookupResultsOutlinesAndDicts from "./LookupResultsOutlinesAndDicts";
 import MatchedModifiedTranslation from "./MatchedModifiedTranslation";
 import PloverMisstrokesDetail from "./PloverMisstrokesDetail";
