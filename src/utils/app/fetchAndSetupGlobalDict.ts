@@ -11,7 +11,12 @@ import type { PersonalDictionaryNameAndContents } from "../../types";
 let loadingPromise = null;
 let isGlobalDictionaryUpToDate = null;
 
-// The withPlover flag here is just about whether or not to fetch the Plover dictionary file.
+/**
+ *
+ * @param withPlover whether or not to fetch the Plover dictionary file. We don't need to load that extra 4.2MB for new users on first use in lessons until they turn on "Show other stroke hints". We don't need multiple outlines for entries in games like SHUFL.
+ * @param importedPersonalDictionaries recently imported personal dictionaries (on dictionary management page) OR personal dictionaries passed down from props or null.
+ * @returns a loading promise
+ */
 function fetchAndSetupGlobalDict(
   withPlover: boolean,
   importedPersonalDictionaries: any
