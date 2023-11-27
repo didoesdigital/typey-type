@@ -1,14 +1,14 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
 import SOURCE_NAMESPACES from "../constant/sourceNamespaces";
-import splitBriefsIntoStrokes from "./../utils/splitBriefsIntoStrokes";
 import lookupListOfStrokesAndDicts from "../utils/lookupListOfStrokesAndDicts";
+import splitBriefsIntoStrokes from "./../utils/splitBriefsIntoStrokes";
 
 import misstrokes from "../json/misstrokes.json";
+import LookupResultsOutlinesAndDicts from "./LookupResultsOutlinesAndDicts";
+import MatchedModifiedTranslation from "./MatchedModifiedTranslation";
 import PloverMisstrokesDetail from "./PloverMisstrokesDetail";
 import StrokesAsDiagrams from "./StrokesAsDiagrams";
-import MatchedModifiedTranslation from "./MatchedModifiedTranslation";
-import LookupResultsOutlinesAndDicts from "./LookupResultsOutlinesAndDicts";
 
 import type {
   GlobalUserSettings,
