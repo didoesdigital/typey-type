@@ -78,6 +78,9 @@ const StrokesForWords = ({
     updateWordsForStrokes(phrase);
   };
 
+  const showMisstrokesInLookup =
+    globalUserSettings?.showMisstrokesInLookup ?? false;
+
   function updateWordsForStrokes(phrase: string) {
     if (onChange) {
       onChange(phrase);
@@ -86,7 +89,7 @@ const StrokesForWords = ({
     let [listOfStrokesAndDicts, modifiedWordOrPhrase] =
       lookupListOfStrokesAndDicts(phrase, globalLookupDictionary);
 
-    if (!globalUserSettings?.showMisstrokesInLookup) {
+    if (!showMisstrokesInLookup) {
       listOfStrokesAndDicts = listOfStrokesAndDicts.filter(
         (row) =>
           row[2] === SOURCE_NAMESPACES.get("user") ||
