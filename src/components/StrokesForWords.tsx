@@ -12,6 +12,7 @@ import type {
   GlobalUserSettings,
   // LookupDictWithNamespacedDictsAndConfig,
   StenoDictionary,
+  StrokeAndDictionaryAndNamespace,
   UserSettings,
 } from "../types";
 
@@ -26,7 +27,7 @@ type Props = {
   // globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
-  trackPhrase?: any;
+  trackPhrase?: (value: React.SetStateAction<string>) => void;
   userSettings: UserSettings;
 };
 
@@ -43,9 +44,9 @@ const StrokesForWords = ({
   const [modifiedWordOrPhraseState, setModifiedWordOrPhraseState] =
     useState("");
   const [phraseState, setPhraseState] = useState("");
-  const [listOfStrokesAndDictsState, setListOfStrokesAndDictsState] = useState(
-    []
-  );
+  const [listOfStrokesAndDictsState, setListOfStrokesAndDictsState] = useState<
+    StrokeAndDictionaryAndNamespace[]
+  >([]);
 
   const misstrokesJSON = misstrokes as StenoDictionary;
 
@@ -104,7 +105,6 @@ const StrokesForWords = ({
 
     setModifiedWordOrPhraseState(modifiedWordOrPhrase);
     setPhraseState(phrase);
-    // @ts-ignore FIXME
     setListOfStrokesAndDictsState(listOfStrokesAndDicts);
   }
 
