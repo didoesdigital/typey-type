@@ -140,6 +140,36 @@ export function changeSortOrderUserSetting(event) {
   return value;
 }
 
+export function changeSpacePlacementUserSetting(event) {
+  let currentState = this.state.userSettings;
+  let newState = Object.assign({}, currentState);
+
+  const name = "spacePlacement";
+  const value = event.target.value;
+
+  newState[name] = value;
+
+  this.setState({ userSettings: newState }, () => {
+    if (!(name === "caseSensitive")) {
+      this.setupLesson();
+    }
+    writePersonalPreferences("userSettings", this.state.userSettings);
+  });
+
+  let labelString = value;
+  if (!value) {
+    labelString = "BAD_INPUT";
+  }
+
+  GoogleAnalytics.event({
+    category: "UserSettings",
+    action: "Change spacePlacement",
+    label: labelString,
+  });
+
+  return value;
+}
+
 /**
  * @param {string} voiceName
  * @param {string} voiceURI

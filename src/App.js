@@ -47,6 +47,7 @@ import {
   changeShowStrokesAsList,
   changeShowStrokesOnMisstroke,
   changeSortOrderUserSetting,
+  changeSpacePlacementUserSetting,
   changeVoiceUserSetting,
   handleBeatsPerMinute,
   handleDiagramSize,
@@ -863,34 +864,6 @@ class App extends Component {
     GoogleAnalytics.event({
       category: 'UserSettings',
       action: 'Choose Study Type',
-      label: labelString
-    });
-
-    return value;
-  }
-
-  changeSpacePlacementUserSetting(event) {
-    let currentState = this.state.userSettings;
-    let newState = Object.assign({}, currentState);
-
-    const name = 'spacePlacement'
-    const value = event.target.value;
-
-    newState[name] = value;
-
-    this.setState({userSettings: newState}, () => {
-      if (!(name === 'caseSensitive')) {
-        this.setupLesson();
-      }
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-
-    let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Change spacePlacement',
       label: labelString
     });
 
@@ -1751,7 +1724,7 @@ class App extends Component {
               changeShowStrokesInLesson: this.changeShowStrokesInLesson.bind(this),
               changeShowStrokesOnMisstroke: changeShowStrokesOnMisstroke.bind(this),
               changeSortOrderUserSetting: changeSortOrderUserSetting.bind(this),
-              changeSpacePlacementUserSetting: this.changeSpacePlacementUserSetting.bind(this),
+              changeSpacePlacementUserSetting: changeSpacePlacementUserSetting.bind(this),
               changeStenoLayout: this.changeStenoLayout.bind(this),
               changeUserSetting: this.changeUserSetting.bind(this),
               changeVoiceUserSetting: changeVoiceUserSetting,
