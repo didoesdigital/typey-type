@@ -224,3 +224,33 @@ export function handleLimitWordsChange(event) {
 
   return value;
 }
+
+export function handleRepetitionsChange(event) {
+  let currentState = this.state.userSettings;
+  let newState = Object.assign({}, currentState);
+
+  const name = "repetitions";
+  const value = event;
+
+  newState[name] = value;
+
+  this.setState({ userSettings: newState }, () => {
+    if (!(name === "caseSensitive")) {
+      this.setupLesson();
+    }
+    writePersonalPreferences("userSettings", this.state.userSettings);
+  });
+
+  let labelString = value;
+  if (!value) {
+    labelString = "BAD_INPUT";
+  }
+
+  GoogleAnalytics.event({
+    category: "UserSettings",
+    action: "Change repetitions",
+    label: labelString,
+  });
+
+  return value;
+}

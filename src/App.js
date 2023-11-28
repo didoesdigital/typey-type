@@ -50,6 +50,7 @@ import {
   handleBeatsPerMinute,
   handleDiagramSize,
   handleLimitWordsChange,
+  handleRepetitionsChange,
 } from './pages/lessons/components/UserSettings/updateUserSetting';
 import AppRoutes from './AppRoutes';
 
@@ -414,34 +415,6 @@ class App extends Component {
     GoogleAnalytics.event({
       category: 'UserSettings',
       action: 'Change start from word',
-      label: labelString
-    });
-
-    return value;
-  }
-
-  handleRepetitionsChange(event) {
-    let currentState = this.state.userSettings;
-    let newState = Object.assign({}, currentState);
-
-    const name = "repetitions"
-    const value = event;
-
-    newState[name] = value;
-
-    this.setState({userSettings: newState}, () => {
-      if (!(name === 'caseSensitive')) {
-        this.setupLesson();
-      }
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-
-    let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Change repetitions',
       label: labelString
     });
 
@@ -1868,7 +1841,7 @@ class App extends Component {
               handleDiagramSize: handleDiagramSize.bind(this),
               handleLesson: this.handleLesson.bind(this),
               handleLimitWordsChange: handleLimitWordsChange.bind(this),
-              handleRepetitionsChange: this.handleRepetitionsChange.bind(this),
+              handleRepetitionsChange: handleRepetitionsChange.bind(this),
               handleStartFromWordChange: this.handleStartFromWordChange.bind(this),
               handleStopLesson: this.handleStopLesson.bind(this),
               handleUpcomingWordsLayout: this.handleUpcomingWordsLayout.bind(this),
