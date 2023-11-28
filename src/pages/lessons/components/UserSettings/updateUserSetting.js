@@ -170,7 +170,7 @@ export function handleDiagramSize(event) {
   let newState = Object.assign({}, currentState);
 
   const name = "diagramSize";
-  let value = typeof event === "number" ? event.toFixed(1) : 1.0;
+  let value = typeof event === "number" ? +event.toFixed(1) : 1.0;
   if (value > 2) {
     value = 2.0;
   }
@@ -184,10 +184,7 @@ export function handleDiagramSize(event) {
     writePersonalPreferences("userSettings", this.state.userSettings);
   });
 
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
-  }
+  const labelString = !!value ? `${value}` : "BAD_INPUT";
 
   GoogleAnalytics.event({
     category: "UserSettings",
