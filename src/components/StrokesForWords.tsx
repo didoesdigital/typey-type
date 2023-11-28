@@ -22,7 +22,7 @@ type Props = {
     importedPersonalDictionaries?: any
   ) => Promise<any>;
   lookupTerm?: string;
-  onChange?: any;
+  onChange?: (phrase: string) => void;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
