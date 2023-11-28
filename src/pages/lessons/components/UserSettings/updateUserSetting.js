@@ -1,6 +1,14 @@
 import GoogleAnalytics from "react-ga4";
 import { writePersonalPreferences } from "../../../../utils/typey-type";
 
+/** @type {SpeechSynthesis | null} */
+let synth = null;
+try {
+  synth = window.speechSynthesis;
+} catch (e) {
+  console.log("This device doesn't support speechSynthesis", e);
+}
+
 export function changeShowScoresWhileTyping(event) {
   let newState = Object.assign({}, this.state.userSettings);
 
@@ -196,6 +204,43 @@ export function changeStenoLayout(event) {
   GoogleAnalytics.event({
     category: "UserSettings",
     action: actionString,
+    label: labelString,
+  });
+
+  return value;
+}
+
+export function changeUserSetting(event) {
+  let currentState = this.state.userSettings;
+  let newState = Object.assign({}, currentState);
+
+  const target = event.target;
+  const value = target.type === "checkbox" ? target.checked : target.value;
+  const name = target.name;
+
+  newState[name] = value;
+
+  if (!newState.speakMaterial && synth) {
+    synth.cancel();
+  }
+
+  this.setState({ userSettings: newState }, () => {
+    if (!(name === "caseSensitive")) {
+      this.setupLesson();
+    }
+    writePersonalPreferences("userSettings", this.state.userSettings);
+  });
+
+  let labelString = value;
+  if (!value) {
+    labelString = "BAD_INPUT";
+  } else {
+    labelString.toString();
+  }
+
+  GoogleAnalytics.event({
+    category: "UserSettings",
+    action: "Change " + name,
     label: labelString,
   });
 

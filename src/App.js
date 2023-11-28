@@ -49,6 +49,7 @@ import {
   changeSortOrderUserSetting,
   changeSpacePlacementUserSetting,
   changeStenoLayout,
+  changeUserSetting,
   changeVoiceUserSetting,
   handleBeatsPerMinute,
   handleDiagramSize,
@@ -758,39 +759,6 @@ class App extends Component {
 
     GoogleAnalytics.event({
       category: 'Global user settings',
-      action: 'Change ' + name,
-      label: labelString
-    });
-
-    return value;
-  }
-
-  changeUserSetting(event) {
-    let currentState = this.state.userSettings;
-    let newState = Object.assign({}, currentState);
-
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-
-    newState[name] = value;
-
-    if (!newState.speakMaterial && synth) {
-      synth.cancel();
-    }
-
-    this.setState({userSettings: newState}, () => {
-      if (!(name === 'caseSensitive')) {
-        this.setupLesson();
-      }
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-
-    let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; } else { labelString.toString(); }
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
       action: 'Change ' + name,
       label: labelString
     });
@@ -1699,7 +1667,7 @@ class App extends Component {
               changeSortOrderUserSetting: changeSortOrderUserSetting.bind(this),
               changeSpacePlacementUserSetting: changeSpacePlacementUserSetting.bind(this),
               changeStenoLayout: changeStenoLayout.bind(this),
-              changeUserSetting: this.changeUserSetting.bind(this),
+              changeUserSetting: changeUserSetting.bind(this),
               changeVoiceUserSetting: changeVoiceUserSetting,
               changeWriterInput: this.changeWriterInput.bind(this),
               chooseStudy: this.chooseStudy.bind(this),
