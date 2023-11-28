@@ -49,6 +49,7 @@ import {
   changeVoiceUserSetting,
   handleBeatsPerMinute,
   handleDiagramSize,
+  handleLimitWordsChange,
 } from './pages/lessons/components/UserSettings/updateUserSetting';
 import AppRoutes from './AppRoutes';
 
@@ -350,34 +351,6 @@ class App extends Component {
     });
 
     return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
-  }
-
-  handleLimitWordsChange(event) {
-    let currentState = this.state.userSettings;
-    let newState = Object.assign({}, currentState);
-
-    const name = "limitNumberOfWords"
-    const value = event;
-
-    newState[name] = value;
-
-    this.setState({userSettings: newState}, () => {
-      if (!(name === 'caseSensitive')) {
-        this.setupLesson();
-      }
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-
-    let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Change limit word count',
-      label: labelString
-    });
-
-    return value;
   }
 
   startFromWordOne() {
@@ -1894,7 +1867,7 @@ class App extends Component {
               handleBeatsPerMinute: handleBeatsPerMinute.bind(this),
               handleDiagramSize: handleDiagramSize.bind(this),
               handleLesson: this.handleLesson.bind(this),
-              handleLimitWordsChange: this.handleLimitWordsChange.bind(this),
+              handleLimitWordsChange: handleLimitWordsChange.bind(this),
               handleRepetitionsChange: this.handleRepetitionsChange.bind(this),
               handleStartFromWordChange: this.handleStartFromWordChange.bind(this),
               handleStopLesson: this.handleStopLesson.bind(this),
