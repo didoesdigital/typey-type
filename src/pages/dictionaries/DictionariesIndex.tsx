@@ -9,6 +9,7 @@ import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
 import type {
   Experiments,
+  FetchAndSetupGlobalDict,
   GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   PrettyLessonTitle,
@@ -21,10 +22,7 @@ type DictLink = string;
 
 type Props = {
   dictionaryIndex: any;
-  fetchAndSetupGlobalDict: (
-    withPlover: boolean,
-    importedPersonalDictionaries?: any
-  ) => Promise<any>;
+  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;

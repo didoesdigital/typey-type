@@ -21,6 +21,7 @@ import GeneratorHelp from "./GeneratorHelp";
 
 import type {
   CustomLesson,
+  FetchAndSetupGlobalDict,
   LookupDictWithNamespacedDicts,
 } from "../../../types";
 import type { Rules } from "./generator/types";
@@ -35,10 +36,7 @@ type Props = {
     rules: Rules,
     regexRules: RegexRules
   ) => void;
-  fetchAndSetupGlobalDict: (
-    withPlover: boolean,
-    importedPersonalDictionaries?: any
-  ) => Promise<any>;
+  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDicts;
 };
 

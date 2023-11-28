@@ -6,6 +6,7 @@ import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 import "./Games.scss";
 import type {
+  FetchAndSetupGlobalDict,
   GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
@@ -50,10 +51,7 @@ const AsyncKPOES = Loadable({
 
 type Props = {
   match: any;
-  fetchAndSetupGlobalDict: (
-    withPlover: boolean,
-    importedPersonalDictionaries?: any
-  ) => Promise<any>;
+  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;

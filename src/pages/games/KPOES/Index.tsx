@@ -3,15 +3,13 @@ import Game from "./Game";
 import Subheader from "../../../components/Subheader";
 
 import type {
+  FetchAndSetupGlobalDict,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
 } from "../../../types";
 
 type Props = {
-  fetchAndSetupGlobalDict: (
-    withPlover: boolean,
-    importedPersonalDictionaries?: any
-  ) => Promise<any>;
+  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;

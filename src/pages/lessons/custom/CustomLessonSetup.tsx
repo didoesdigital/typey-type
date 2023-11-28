@@ -7,16 +7,14 @@ import CustomWordListLesson from "./components/CustomWordListLesson";
 import Subheader from "../../../components/Subheader";
 
 import type { CustomLessonMaterialValidationState } from "./components/CustomLessonIntro";
+import { FetchAndSetupGlobalDict } from "../../../types";
 
 type Props = {
   createCustomLesson: () => void;
   customLessonMaterial: any;
   customLessonMaterialValidationState: CustomLessonMaterialValidationState;
   customLessonMaterialValidationMessages: string[];
-  fetchAndSetupGlobalDict: (
-    withPlover: boolean,
-    importedPersonalDictionaries?: any
-  ) => Promise<any>;
+  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: any;
   globalLookupDictionaryLoaded: boolean;
 };

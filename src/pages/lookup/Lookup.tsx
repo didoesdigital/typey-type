@@ -5,13 +5,14 @@ import PseudoContentButton from "../../components/PseudoContentButton";
 import Subheader from "../../components/Subheader";
 import getWordFamilyGroup from "./utilities/getWordFamilyGroup";
 
-import type { GlobalUserSettings, UserSettings } from "../../types";
+import type {
+  FetchAndSetupGlobalDict,
+  GlobalUserSettings,
+  UserSettings,
+} from "../../types";
 
 type Props = {
-  fetchAndSetupGlobalDict: (
-    withPlover: boolean,
-    importedPersonalDictionaries?: any
-  ) => Promise<any>;
+  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: any;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;

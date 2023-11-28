@@ -6,6 +6,7 @@ import PageLoading from "../../components/PageLoading";
 
 import type {
   Experiments,
+  FetchAndSetupGlobalDict,
   GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   UserSettings,
@@ -25,10 +26,7 @@ const AsyncDictionaryManagement = Loadable({
 
 type Props = {
   dictionaryIndex: any;
-  fetchAndSetupGlobalDict: (
-    withPlover: boolean,
-    importedPersonalDictionaries?: any
-  ) => Promise<any>;
+  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;

@@ -7,15 +7,13 @@ import StrokesForWords from "../../../components/StrokesForWords";
 import "./styles.scss";
 
 import type {
+  FetchAndSetupGlobalDict,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
 } from "../../../types";
 
 type Props = {
-  fetchAndSetupGlobalDict: (
-    withPlover: boolean,
-    importedPersonalDictionaries?: any
-  ) => Promise<any>;
+  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;

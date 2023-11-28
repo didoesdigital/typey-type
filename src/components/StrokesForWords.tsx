@@ -9,6 +9,7 @@ import PloverMisstrokesDetail from "./PloverMisstrokesDetail";
 import StrokesAsDiagrams from "./StrokesAsDiagrams";
 
 import type {
+  FetchAndSetupGlobalDict,
   GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   StenoDictionary,
@@ -17,10 +18,7 @@ import type {
 } from "../types";
 
 type Props = {
-  fetchAndSetupGlobalDict: (
-    withPlover: boolean,
-    importedPersonalDictionaries?: any
-  ) => Promise<any>;
+  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   lookupTerm?: string;
   onChange?: (phrase: string) => void;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;

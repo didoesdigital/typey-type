@@ -68,6 +68,15 @@ export type DictName = string;
  */
 export type PersonalDictionaryNameAndContents = [DictName, StenoDictionary];
 
+type ImportedPersonalDictionaries = {
+  dictionariesNamesAndContents: PersonalDictionaryNameAndContents[];
+};
+
+export type FetchAndSetupGlobalDict = (
+  withPlover: boolean,
+  importedPersonalDictionaries?: ImportedPersonalDictionaries | null
+) => Promise<any>;
+
 /**
  * Examples:
  * "user"
