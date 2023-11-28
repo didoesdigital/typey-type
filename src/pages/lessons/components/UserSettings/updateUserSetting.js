@@ -254,3 +254,31 @@ export function handleRepetitionsChange(event) {
 
   return value;
 }
+
+export function handleStartFromWordChange(event) {
+  let currentState = this.state.userSettings;
+  let newState = Object.assign({}, currentState);
+
+  const name = "startFromWord";
+  const value = event;
+
+  newState[name] = value;
+
+  this.setState({ userSettings: newState }, () => {
+    this.setupLesson();
+    writePersonalPreferences("userSettings", this.state.userSettings);
+  });
+
+  let labelString = value;
+  if (!value) {
+    labelString = "BAD_INPUT";
+  }
+
+  GoogleAnalytics.event({
+    category: "UserSettings",
+    action: "Change start from word",
+    label: labelString,
+  });
+
+  return value;
+}

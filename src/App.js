@@ -51,6 +51,7 @@ import {
   handleDiagramSize,
   handleLimitWordsChange,
   handleRepetitionsChange,
+  handleStartFromWordChange,
 } from './pages/lessons/components/UserSettings/updateUserSetting';
 import AppRoutes from './AppRoutes';
 
@@ -391,34 +392,6 @@ class App extends Component {
       action: 'Start from word 1',
       label: 'true'
     });
-  }
-
-  handleStartFromWordChange(event) {
-    let currentState = this.state.userSettings;
-    let newState = Object.assign({}, currentState);
-
-    const name = "startFromWord"
-    const value = event;
-
-    newState[name] = value;
-
-    this.setState({userSettings: newState}, () => {
-      if (!(name === 'caseSensitive')) {
-        this.setupLesson();
-      }
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-
-    let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Change start from word',
-      label: labelString
-    });
-
-    return value;
   }
 
   handleUpcomingWordsLayout(event) {
@@ -1842,7 +1815,7 @@ class App extends Component {
               handleLesson: this.handleLesson.bind(this),
               handleLimitWordsChange: handleLimitWordsChange.bind(this),
               handleRepetitionsChange: handleRepetitionsChange.bind(this),
-              handleStartFromWordChange: this.handleStartFromWordChange.bind(this),
+              handleStartFromWordChange: handleStartFromWordChange.bind(this),
               handleStopLesson: this.handleStopLesson.bind(this),
               handleUpcomingWordsLayout: this.handleUpcomingWordsLayout.bind(this),
               restartLesson: this.restartLesson.bind(this),
