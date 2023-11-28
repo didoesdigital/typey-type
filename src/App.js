@@ -48,6 +48,7 @@ import {
   changeShowStrokesOnMisstroke,
   changeSortOrderUserSetting,
   changeSpacePlacementUserSetting,
+  changeStenoLayout,
   changeVoiceUserSetting,
   handleBeatsPerMinute,
   handleDiagramSize,
@@ -916,34 +917,6 @@ class App extends Component {
     });
   }
 
-  changeStenoLayout(event) {
-    let currentState = this.state.userSettings;
-    let newState = Object.assign({}, currentState);
-
-    const name = event.target.name;
-    const value = event.target.value;
-
-    newState['stenoLayout'] = value;
-
-    this.setState({userSettings: newState}, () => {
-      this.setupLesson();
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-
-    let labelString = value;
-    let actionString = 'Change steno layout';
-    if (name === 'writerStenoLayout') { actionString = 'Change writer steno layout'; }
-    if (!value) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: actionString,
-      label: labelString
-    });
-
-    return value;
-  }
-
   setupLesson() {
     let newLesson = Object.assign({}, this.state.lesson);
 
@@ -1725,7 +1698,7 @@ class App extends Component {
               changeShowStrokesOnMisstroke: changeShowStrokesOnMisstroke.bind(this),
               changeSortOrderUserSetting: changeSortOrderUserSetting.bind(this),
               changeSpacePlacementUserSetting: changeSpacePlacementUserSetting.bind(this),
-              changeStenoLayout: this.changeStenoLayout.bind(this),
+              changeStenoLayout: changeStenoLayout.bind(this),
               changeUserSetting: this.changeUserSetting.bind(this),
               changeVoiceUserSetting: changeVoiceUserSetting,
               changeWriterInput: this.changeWriterInput.bind(this),

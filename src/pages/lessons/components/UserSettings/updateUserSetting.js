@@ -170,6 +170,38 @@ export function changeSpacePlacementUserSetting(event) {
   return value;
 }
 
+export function changeStenoLayout(event) {
+  let currentState = this.state.userSettings;
+  let newState = Object.assign({}, currentState);
+
+  const name = event.target.name;
+  const value = event.target.value;
+
+  newState["stenoLayout"] = value;
+
+  this.setState({ userSettings: newState }, () => {
+    this.setupLesson();
+    writePersonalPreferences("userSettings", this.state.userSettings);
+  });
+
+  let labelString = value;
+  let actionString = "Change steno layout";
+  if (name === "writerStenoLayout") {
+    actionString = "Change writer steno layout";
+  }
+  if (!value) {
+    labelString = "BAD_INPUT";
+  }
+
+  GoogleAnalytics.event({
+    category: "UserSettings",
+    action: actionString,
+    label: labelString,
+  });
+
+  return value;
+}
+
 /**
  * @param {string} voiceName
  * @param {string} voiceURI
