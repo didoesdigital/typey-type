@@ -333,7 +333,7 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                       }
                       globalUserSettings={appState.globalUserSettings}
                       personalDictionaries={appState.personalDictionaries}
-                      stenoHintsOnTheFly={appProps.stenohintsonthefly}
+                      stenohintsonthefly={appProps.stenohintsonthefly}
                       toggleExperiment={appMethods.toggleExperiment}
                       updateGlobalLookupDictionary={
                         appMethods.updateGlobalLookupDictionary
