@@ -1,5 +1,5 @@
 import React from "react";
-import UserSettings from "./UserSettings";
+import UserSettings from "./UserSettings/UserSettings";
 import userSettingsFixture from "../../../stories/fixtures/userSettings";
 
 const meta = {

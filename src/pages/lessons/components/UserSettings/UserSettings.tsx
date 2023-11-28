@@ -1,14 +1,14 @@
 import React from "react";
 import { Tooltip } from "react-tippy";
-import ErrorBoundary from "../../../components/ErrorBoundary";
+import ErrorBoundary from "../../../../components/ErrorBoundary";
 import NumericInput from "react-numeric-input";
-import SettingCheckbox from "../../../components/SettingCheckbox";
-import SettingListItem from "../../../components/SettingListItem";
-import SpeakWordsHelp from "./SpeakWordsHelp";
-import VoiceSetting from "./VoiceSetting";
-import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
+import SettingCheckbox from "../../../../components/SettingCheckbox";
+import SettingListItem from "../../../../components/SettingListItem";
+import SpeakWordsHelp from "../SpeakWordsHelp";
+import VoiceSetting from "../VoiceSetting";
+import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTooltip";
 
-import type { UserSettings as UserSettingsObjectType } from "../../../types";
+import type { UserSettings as UserSettingsObjectType } from "../../../../types";
 
 const grabStyle = function () {
   return false;

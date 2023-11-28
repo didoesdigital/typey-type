@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import LessonCanvasFooter from "./LessonCanvasFooter";
 import FinishedZeroAndEmptyStateMessage from "./FinishedZeroAndEmptyState";
-import UserSettings from "./UserSettings";
+import UserSettings from "./UserSettings/UserSettings";
 import {
   stitchTogetherLessonData,
   transformLessonDataToChartData,
