@@ -41,6 +41,15 @@ import generateCustomLesson from './pages/lessons/custom/generator/utilities/gen
 import customiseLesson from './pages/lessons/utilities/customiseLesson';
 import setCustomLessonContent from './pages/lessons/utilities/setCustomLessonContent';
 import updateMultipleMetWords from './pages/games/KPOES/updateMultipleMetWords';
+import {
+  changeShowScoresWhileTyping,
+  changeShowStrokesAs,
+  changeShowStrokesAsList,
+  changeShowStrokesOnMisstroke,
+  changeVoiceUserSetting,
+  handleBeatsPerMinute,
+  handleDiagramSize,
+} from './pages/lessons/components/UserSettings/updateUserSetting';
 import AppRoutes from './AppRoutes';
 
 /** @type {SpeechSynthesis | null} */
@@ -343,58 +352,6 @@ class App extends Component {
     return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
   }
 
-  handleDiagramSize(event) {
-    let currentState = this.state.userSettings;
-    let newState = Object.assign({}, currentState);
-
-    const name = "diagramSize"
-    let value = typeof event === 'number' ? event.toFixed(1) : 1.0;
-    if (value > 2) { value = 2.0; }
-    if (value < 1) { value = 1.0; }
-
-    newState[name] = value;
-
-    this.setState({userSettings: newState}, () => {
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-
-    let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Change diagram size',
-      label: labelString
-    });
-
-    return value;
-  }
-
-  handleBeatsPerMinute(event) {
-    let currentState = this.state.userSettings;
-    let newState = Object.assign({}, currentState);
-
-    const name = "beatsPerMinute"
-    const value = event;
-
-    newState[name] = value;
-
-    this.setState({userSettings: newState}, () => {
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-
-    let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Change beats per minute',
-      label: labelString
-    });
-
-    return value;
-  }
-
   handleLimitWordsChange(event) {
     let currentState = this.state.userSettings;
     let newState = Object.assign({}, currentState);
@@ -573,30 +530,6 @@ class App extends Component {
         label: labelShowStrokesInLesson
       });
     }
-
-    return value;
-  }
-
-  changeShowStrokesOnMisstroke(event) {
-    let newState = Object.assign({}, this.state.userSettings);
-
-    const name = 'showStrokesOnMisstroke'
-    const value = event.target.value;
-
-    newState[name] = !newState[name];
-
-    this.setState({userSettings: newState}, () => {
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-
-    let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; } else { labelString = value.toString(); }
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Change show strokes on misstroke',
-      label: labelString
-    });
 
     return value;
   }
@@ -994,110 +927,6 @@ class App extends Component {
     });
 
     return value;
-  }
-
-  changeShowStrokesAsList(event) {
-    let newState = Object.assign({}, this.state.userSettings);
-
-    const name = "showStrokesAsList";
-    const value = event.target.checked;
-
-    if (value) {
-      newState[name] = true;
-
-      this.appFetchAndSetupGlobalDict(true, null)
-        .catch((error) => console.error(error));
-    } else {
-      newState[name] = false;
-    }
-
-    this.setState({ userSettings: newState }, () => {
-      writePersonalPreferences("userSettings", this.state.userSettings);
-    });
-
-    let labelString = value;
-    if (!value) {
-      labelString = "BAD_INPUT";
-    }
-
-    GoogleAnalytics.event({
-      category: "UserSettings",
-      action: "Change show strokes as list",
-      label: labelString,
-    });
-
-    return value;
-  }
-
-  changeShowStrokesAs(event) {
-    let newState = Object.assign({}, this.state.userSettings);
-
-    const name = 'showStrokesAsDiagrams'
-    const value = event.target.value;
-
-    if (value === 'strokesAsText') {
-      newState[name] = false;
-    } else {
-      newState[name] = true;
-    }
-
-    this.setState({userSettings: newState}, () => {
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-
-    let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Change show strokes as',
-      label: labelString
-    });
-
-    return value;
-  }
-
-  changeShowScoresWhileTyping(event) {
-    let newState = Object.assign({}, this.state.userSettings);
-
-    newState['showScoresWhileTyping'] = !newState['showScoresWhileTyping'];
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Change show scores while typing',
-      label: newState['showScoresWhileTyping'].toString()
-    });
-
-    this.setState({userSettings: newState}, () => {
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-    return newState['showScoresWhileTyping'];
-  }
-
-  /**
-   * @param {string} voiceName
-   * @param {string} voiceURI
-   */
-  changeVoiceUserSetting(voiceName, voiceURI) {
-    let currentState = this.state.userSettings;
-    let newState = Object.assign({}, currentState);
-
-    newState['voiceName'] = voiceName;
-    newState['voiceURI'] = voiceURI;
-
-    this.setState({userSettings: newState}, () => {
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-
-    // Let's not bother with tracking voice name. URI is enough.
-    let labelString = voiceURI;
-    if (!voiceURI) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Change voice',
-      label: labelString
-    });
   }
 
   chooseStudy(event) {
@@ -2049,21 +1878,21 @@ class App extends Component {
               updateMultipleMetWords: updateMultipleMetWords.bind(this),
               changeFlashcardCourseLevel: this.changeFlashcardCourseLevel.bind(this),
               changeFullscreen: this.changeFullscreen.bind(this),
-              changeShowScoresWhileTyping: this.changeShowScoresWhileTyping.bind(this),
-              changeShowStrokesAs: this.changeShowStrokesAs.bind(this),
-              changeShowStrokesAsList: this.changeShowStrokesAsList.bind(this),
+              changeShowScoresWhileTyping: changeShowScoresWhileTyping.bind(this),
+              changeShowStrokesAs: changeShowStrokesAs.bind(this),
+              changeShowStrokesAsList: changeShowStrokesAsList.bind(this),
               changeShowStrokesInLesson: this.changeShowStrokesInLesson.bind(this),
-              changeShowStrokesOnMisstroke: this.changeShowStrokesOnMisstroke.bind(this),
+              changeShowStrokesOnMisstroke: changeShowStrokesOnMisstroke.bind(this),
               changeSortOrderUserSetting: this.changeSortOrderUserSetting.bind(this),
               changeSpacePlacementUserSetting: this.changeSpacePlacementUserSetting.bind(this),
               changeStenoLayout: this.changeStenoLayout.bind(this),
               changeUserSetting: this.changeUserSetting.bind(this),
-              changeVoiceUserSetting: this.changeVoiceUserSetting.bind(this),
+              changeVoiceUserSetting: changeVoiceUserSetting,
               changeWriterInput: this.changeWriterInput.bind(this),
               chooseStudy: this.chooseStudy.bind(this),
               createCustomLesson: this.createCustomLesson.bind(this),
-              handleBeatsPerMinute: this.handleBeatsPerMinute.bind(this),
-              handleDiagramSize: this.handleDiagramSize.bind(this),
+              handleBeatsPerMinute: handleBeatsPerMinute.bind(this),
+              handleDiagramSize: handleDiagramSize.bind(this),
               handleLesson: this.handleLesson.bind(this),
               handleLimitWordsChange: this.handleLimitWordsChange.bind(this),
               handleRepetitionsChange: this.handleRepetitionsChange.bind(this),
