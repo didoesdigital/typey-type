@@ -459,9 +459,6 @@ currentSlide: currentSlide
                   globalLookupDictionary={this.props.globalLookupDictionary}
                   globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
                   globalUserSettings={this.props.globalUserSettings}
-                  lookupTerm={undefined} /* FIXME: should be optional */
-                  onChange={undefined} /* FIXME: should this be optional? */
-                  trackPhrase={undefined} /* FIXME: should be optional */
                   userSettings={this.props.userSettings}
                 />
               </div>

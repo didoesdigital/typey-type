@@ -68,9 +68,6 @@ export default function Game({
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            lookupTerm={undefined} /* FIXME: should be optional */
-            onChange={undefined} /* FIXME: should be optional */
-            trackPhrase={undefined} /* FIXME: should be optional */
             userSettings={userSettings}
           />
         </div>
