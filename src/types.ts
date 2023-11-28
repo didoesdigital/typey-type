@@ -143,6 +143,14 @@ export type LookupDictWithNamespacedDicts = Map<
 > &
   OptionalDictionaryConfig;
 
+/**
+ * A lookup dictionary and configuration list
+ *
+ * Example:
+ * Map (74602)
+ * configuration: ['typey:typey-type.json', 'user:personal.json', 'plover:plover-main-3-jun-2018.json']
+ * 
+ */
 export type LookupDictWithNamespacedDictsAndConfig = Omit<
   LookupDictWithNamespacedDicts,
   "configuration"
