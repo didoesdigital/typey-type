@@ -52,6 +52,7 @@ import {
   handleLimitWordsChange,
   handleRepetitionsChange,
   handleStartFromWordChange,
+  handleUpcomingWordsLayout,
 } from './pages/lessons/components/UserSettings/updateUserSetting';
 import AppRoutes from './AppRoutes';
 
@@ -392,32 +393,6 @@ class App extends Component {
       action: 'Start from word 1',
       label: 'true'
     });
-  }
-
-  handleUpcomingWordsLayout(event) {
-    let currentState = this.state.userSettings;
-    let newState = Object.assign({}, currentState);
-
-    const name = event.target.name;
-    const value = event.target.value;
-
-    newState[name] = value;
-
-    this.setState({userSettings: newState}, () => {
-      this.setupLesson();
-      writePersonalPreferences('userSettings', this.state.userSettings);
-    });
-
-    let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Change upcoming words layout',
-      label: labelString
-    });
-
-    return value;
   }
 
   changeShowStrokesInLesson(event) {
@@ -1817,7 +1792,7 @@ class App extends Component {
               handleRepetitionsChange: handleRepetitionsChange.bind(this),
               handleStartFromWordChange: handleStartFromWordChange.bind(this),
               handleStopLesson: this.handleStopLesson.bind(this),
-              handleUpcomingWordsLayout: this.handleUpcomingWordsLayout.bind(this),
+              handleUpcomingWordsLayout: handleUpcomingWordsLayout.bind(this),
               restartLesson: this.restartLesson.bind(this),
               reviseLesson: this.reviseLesson.bind(this),
               sayCurrentPhraseAgain: this.sayCurrentPhraseAgain.bind(this),

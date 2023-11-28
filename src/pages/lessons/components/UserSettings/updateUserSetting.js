@@ -282,3 +282,31 @@ export function handleStartFromWordChange(event) {
 
   return value;
 }
+
+export function handleUpcomingWordsLayout(event) {
+  let currentState = this.state.userSettings;
+  let newState = Object.assign({}, currentState);
+
+  const name = event.target.name;
+  const value = event.target.value;
+
+  newState[name] = value;
+
+  this.setState({ userSettings: newState }, () => {
+    this.setupLesson();
+    writePersonalPreferences("userSettings", this.state.userSettings);
+  });
+
+  let labelString = value;
+  if (!value) {
+    labelString = "BAD_INPUT";
+  }
+
+  GoogleAnalytics.event({
+    category: "UserSettings",
+    action: "Change upcoming words layout",
+    label: labelString,
+  });
+
+  return value;
+}
