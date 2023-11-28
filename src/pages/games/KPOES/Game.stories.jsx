@@ -16,7 +16,6 @@ const Template = (args) => (
       globalLookupDictionary={new Map()}
       globalLookupDictionaryLoaded={true}
       metWords={{}}
-      personalDictionaries={{}}
       globalUserSettings={globalUserSettings}
       userSettings={userSettings}
       updateMultipleMetWords={() => {}}

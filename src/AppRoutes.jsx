@@ -161,7 +161,6 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                       }
                       metWords={appState.metWords}
                       startingMetWordsToday={appState.startingMetWordsToday}
-                      personalDictionaries={appState.personalDictionaries}
                       updateMetWords={appMethods.updateMetWords}
                       updateMultipleMetWords={appMethods.updateMultipleMetWords}
                       globalUserSettings={appState.globalUserSettings}
@@ -305,7 +304,6 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                       }
                       globalUserSettings={appState.globalUserSettings}
                       lookupTerm={appState.lookupTerm}
-                      personalDictionaries={appState.personalDictionaries}
                       setCustomLessonContent={appMethods.setCustomLessonContent}
                       userSettings={appState.userSettings}
                       {...props}
@@ -332,7 +330,6 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                         appState.globalLookupDictionaryLoaded
                       }
                       globalUserSettings={appState.globalUserSettings}
-                      personalDictionaries={appState.personalDictionaries}
                       stenohintsonthefly={appProps.stenohintsonthefly}
                       toggleExperiment={appMethods.toggleExperiment}
                       updateGlobalLookupDictionary={
