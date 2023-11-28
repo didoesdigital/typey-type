@@ -7,7 +7,7 @@ import PageLoading from "../../components/PageLoading";
 import "./Games.scss";
 import type {
   GlobalUserSettings,
-  LookupDictWithNamespacedDicts,
+  LookupDictWithNamespacedDictsAndConfig,
   MetWords,
   UserSettings,
 } from "../../types";
@@ -54,7 +54,7 @@ type Props = {
     withPlover: boolean,
     importedPersonalDictionaries?: any
   ) => Promise<any>;
-  globalLookupDictionary: LookupDictWithNamespacedDicts;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
   startingMetWordsToday: MetWords;

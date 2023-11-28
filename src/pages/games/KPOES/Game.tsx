@@ -6,14 +6,17 @@ import { ReactComponent as ComposingRobot } from "../../../images/ComposingRobot
 import StrokesForWords from "../../../components/StrokesForWords";
 import "./styles.scss";
 
-import type { LookupDictWithNamespacedDicts, MetWords } from "../../../types";
+import type {
+  LookupDictWithNamespacedDictsAndConfig,
+  MetWords,
+} from "../../../types";
 
 type Props = {
   fetchAndSetupGlobalDict: (
     withPlover: boolean,
     importedPersonalDictionaries?: any
   ) => Promise<any>;
-  globalLookupDictionary: LookupDictWithNamespacedDicts;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
   globalUserSettings: any;

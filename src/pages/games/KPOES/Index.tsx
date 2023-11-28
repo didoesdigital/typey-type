@@ -2,14 +2,17 @@ import React, { useEffect, useRef } from "react";
 import Game from "./Game";
 import Subheader from "../../../components/Subheader";
 
-import type { LookupDictWithNamespacedDicts, MetWords } from "../../../types";
+import type {
+  LookupDictWithNamespacedDictsAndConfig,
+  MetWords,
+} from "../../../types";
 
 type Props = {
   fetchAndSetupGlobalDict: (
     withPlover: boolean,
     importedPersonalDictionaries?: any
   ) => Promise<any>;
-  globalLookupDictionary: LookupDictWithNamespacedDicts;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
   globalUserSettings: any;

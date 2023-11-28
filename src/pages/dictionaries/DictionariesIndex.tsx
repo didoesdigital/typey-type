@@ -10,7 +10,7 @@ import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 import type {
   Experiments,
   GlobalUserSettings,
-  LookupDictWithNamespacedDicts,
+  LookupDictWithNamespacedDictsAndConfig,
   PrettyLessonTitle,
   StenoDictionary,
   UserSettings,
@@ -25,7 +25,7 @@ type Props = {
     withPlover: boolean,
     importedPersonalDictionaries?: any
   ) => Promise<any>;
-  globalLookupDictionary: LookupDictWithNamespacedDicts;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
   setDictionaryIndex: () => void;

@@ -10,7 +10,7 @@ import StrokesAsDiagrams from "./StrokesAsDiagrams";
 
 import type {
   GlobalUserSettings,
-  // LookupDictWithNamespacedDictsAndConfig,
+  LookupDictWithNamespacedDictsAndConfig,
   StenoDictionary,
   StrokeAndDictionaryAndNamespace,
   UserSettings,
@@ -23,8 +23,7 @@ type Props = {
   ) => Promise<any>;
   lookupTerm?: string;
   onChange?: any;
-  globalLookupDictionary: any;
-  // globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
   trackPhrase?: (value: React.SetStateAction<string>) => void;

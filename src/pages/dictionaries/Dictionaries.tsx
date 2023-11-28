@@ -7,7 +7,7 @@ import PageLoading from "../../components/PageLoading";
 import type {
   Experiments,
   GlobalUserSettings,
-  LookupDictWithNamespacedDicts,
+  LookupDictWithNamespacedDictsAndConfig,
   UserSettings,
 } from "../../types";
 
@@ -29,7 +29,7 @@ type Props = {
     withPlover: boolean,
     importedPersonalDictionaries?: any
   ) => Promise<any>;
-  globalLookupDictionary: LookupDictWithNamespacedDicts;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
   setDictionaryIndex: () => void;
