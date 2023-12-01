@@ -553,7 +553,7 @@ class App extends Component {
     this.setState({
       recentLessons: recentLessons,
     }, () => {
-      writePersonalPreferences('recentLessons', this.state.recentLessons);
+      writePersonalPreferences('recentLessons', recentLessons);
     });
     return recentLessons;
   }
