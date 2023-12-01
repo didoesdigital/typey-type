@@ -927,10 +927,6 @@ class App extends Component {
     // Update newSettings using URL search query parameters:
     applyQueryParamsToUserSettings(newSettings, parsedParams);
 
-    this.setState({
-      lookupTerm: lookupTerm,
-      userSettings: newSettings
-    }, () => {
       // Write updated user settings to local storage:
       writePersonalPreferences('userSettings', newSettings);
 
@@ -1006,7 +1002,9 @@ class App extends Component {
         totalNumberOfMistypedWords: 0,
         totalNumberOfHintedWords: 0,
         lesson: newLesson,
-        currentPhraseID: 0
+        currentPhraseID: 0,
+        lookupTerm,
+        userSettings: newSettings
       }, () => {
         // Update lesson progress and recent lesson history:
         if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
@@ -1016,8 +1014,6 @@ class App extends Component {
           writePersonalPreferences('recentLessons', recentLessons);
         }
       });
-
-    });
   }
 
   handleLesson(path) {
