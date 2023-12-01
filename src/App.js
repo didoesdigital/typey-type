@@ -928,93 +928,93 @@ class App extends Component {
     // Update newSettings using URL search query parameters:
     applyQueryParamsToUserSettings(newSettings, parsedParams);
 
-      // Write updated user settings to local storage:
-      writePersonalPreferences('userSettings', newSettings);
+    // Write updated user settings to local storage:
+    writePersonalPreferences('userSettings', newSettings);
 
-      // Clean up URL, remove parameters:
-      const newHistory = Object.assign({}, this.props.location)
-      newHistory.search = "";
-      // Note: this affects StrokesForWords lookup ?q= behaviour:
-      this.props.history.replace(newHistory);
+    // Clean up URL, remove parameters:
+    const newHistory = Object.assign({}, this.props.location)
+    newHistory.search = "";
+    // Note: this affects StrokesForWords lookup ?q= behaviour:
+    this.props.history.replace(newHistory);
 
-      // Replace smart typography in presented material:
-      if (simpleTypography) {
-        newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial, newSettings);
+    // Replace smart typography in presented material:
+    if (simpleTypography) {
+      newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial, newSettings);
+    }
+
+    // Filter lesson by familiarity:
+    newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, metWords, newSettings, revisionMode);
+
+    // Sort lesson:
+    newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, metWords, newSettings);
+
+    // Apply range (start from & limit) to lesson:
+    if (revisionMode && limitNumberOfWords > 0) {
+      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, limitNumberOfWords);
+    }
+    else if (revisionMode) {
+      // Don't do anything to limit material if it's a revision lesson without limitNumberOfWords set
+      // newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0);
+    }
+    else if (startFromWord > 0 && limitNumberOfWords > 0) {
+      let startFrom = startFromWord - 1;
+      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom, startFrom + limitNumberOfWords);
+    }
+    else if (startFromWord > 0) {
+      let startFrom = startFromWord - 1;
+      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom);
+    }
+    else if (limitNumberOfWords > 0) {
+      newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, limitNumberOfWords);
+    }
+
+    // Repeat words in lesson:
+    let repeatedLesson = newLesson.presentedMaterial;
+    if (reps > 0) {
+      for (let i = 1; i < reps && i < 30; i++) {
+        repeatedLesson = repeatedLesson.concat(newLesson.presentedMaterial);
       }
+    }
+    newLesson.presentedMaterial = repeatedLesson;
+    
+    // Zipper the lesson:
+    newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
-      // Filter lesson by familiarity:
-      newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, metWords, newSettings, revisionMode);
+    // Get target stroke count:
+    const target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
-      // Sort lesson:
-      newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, metWords, newSettings);
+    // Update lesson progress and recent lesson history:
+    if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
+      const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, newSettings);
+      const recentLessons = this.updateRecentLessons(lessonPath, study, this.state.recentLessons);
+      writePersonalPreferences('lessonsProgress', lessonsProgress);
+      writePersonalPreferences('recentLessons', recentLessons);
+    }
 
-      // Apply range (start from & limit) to lesson:
-      if (revisionMode && limitNumberOfWords > 0) {
-        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, limitNumberOfWords);
-      }
-      else if (revisionMode) {
-        // Don't do anything to limit material if it's a revision lesson without limitNumberOfWords set
-        // newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0);
-      }
-      else if (startFromWord > 0 && limitNumberOfWords > 0) {
-        let startFrom = startFromWord - 1;
-        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom, startFrom + limitNumberOfWords);
-      }
-      else if (startFromWord > 0) {
-        let startFrom = startFromWord - 1;
-        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom);
-      }
-      else if (limitNumberOfWords > 0) {
-        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, limitNumberOfWords);
-      }
-
-      // Repeat words in lesson:
-      let repeatedLesson = newLesson.presentedMaterial;
-      if (reps > 0) {
-        for (let i = 1; i < reps && i < 30; i++) {
-          repeatedLesson = repeatedLesson.concat(newLesson.presentedMaterial);
-        }
-      }
-      newLesson.presentedMaterial = repeatedLesson;
-      
-      // Zipper the lesson:
-      newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
-
-      // Get target stroke count:
-      const target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
-
-      // Update lesson progress and recent lesson history:
-      if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
-        const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, newSettings);
-        const recentLessons = this.updateRecentLessons(lessonPath, study, this.state.recentLessons);
-        writePersonalPreferences('lessonsProgress', lessonsProgress);
-        writePersonalPreferences('recentLessons', recentLessons);
-      }
-
-      // Reset lesson state for starting lesson:
-      this.setState({
-        actualText: ``,
-        currentPhraseAttempts: [],
-        currentLessonStrokes: [],
-        disableUserSettings: false,
-        numberOfMatchedChars: 0,
-        previousCompletedPhraseAsTyped: '',
-        repetitionsRemaining: reps,
-        startTime: null,
-        timer: 0,
-        targetStrokeCount: target,
-        totalNumberOfMatchedChars: 0,
-        totalNumberOfMatchedWords: 0,
-        totalNumberOfNewWordsMet: 0,
-        totalNumberOfLowExposuresSeen: 0,
-        totalNumberOfRetainedWords: 0,
-        totalNumberOfMistypedWords: 0,
-        totalNumberOfHintedWords: 0,
-        lesson: newLesson,
-        currentPhraseID: 0,
-        lookupTerm,
-        userSettings: newSettings
-      });
+    // Reset lesson state for starting lesson:
+    this.setState({
+      actualText: ``,
+      currentPhraseAttempts: [],
+      currentLessonStrokes: [],
+      disableUserSettings: false,
+      numberOfMatchedChars: 0,
+      previousCompletedPhraseAsTyped: '',
+      repetitionsRemaining: reps,
+      startTime: null,
+      timer: 0,
+      targetStrokeCount: target,
+      totalNumberOfMatchedChars: 0,
+      totalNumberOfMatchedWords: 0,
+      totalNumberOfNewWordsMet: 0,
+      totalNumberOfLowExposuresSeen: 0,
+      totalNumberOfRetainedWords: 0,
+      totalNumberOfMistypedWords: 0,
+      totalNumberOfHintedWords: 0,
+      lesson: newLesson,
+      currentPhraseID: 0,
+      lookupTerm,
+      userSettings: newSettings
+    });
   }
 
   handleLesson(path) {
