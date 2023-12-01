@@ -886,6 +886,10 @@ class App extends Component {
   }
 
   setupLesson() {
+    const revisionMode = this.state.revisionMode;
+    const revisionMaterial = this.state.revisionMaterial;
+    const search = this.props.location.search;
+    const userSettings = this.state.userSettings;
     let newLesson = Object.assign({}, this.state.lesson);
 
     if ((typeof newLesson === 'object' && Object.entries(newLesson).length === 0 && newLesson.constructor === Object) || newLesson === null ) {
@@ -893,19 +897,19 @@ class App extends Component {
     }
 
     newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
-    if (this.state.revisionMode) {
-      newLesson.presentedMaterial = this.state.revisionMaterial.map(line => ({...line}));
+    if (revisionMode) {
+      newLesson.presentedMaterial = revisionMaterial.map(line => ({...line}));
     }
 
     this.stopTimer();
 
-    const parsedParams = queryString.parse(this.props.location.search);
+    const parsedParams = queryString.parse(search);
 
-    let newSettings = Object.assign({}, this.state.userSettings);
+    let newSettings = Object.assign({}, userSettings);
     let lookupTerm = parsedParams['q'];
 
     for (const [param, paramVal] of Object.entries(parsedParams)) {
-      if (param in this.state.userSettings) {
+      if (param in userSettings) {
         const booleanParams = [
           'blurMaterial',
           'caseSensitive',
@@ -992,41 +996,49 @@ class App extends Component {
       lookupTerm: lookupTerm,
       userSettings: newSettings
     }, () => {
-      writePersonalPreferences('userSettings', this.state.userSettings);
+      const metWords = this.state.metWords;
+      const revisionMode = this.state.revisionMode;
+      const updatedUserSettings = this.state.userSettings;
+      const limitNumberOfWords = this.state.userSettings.limitNumberOfWords;
+      const startFromWord = this.state.userSettings.startFromWord;
+      const simpleTypography = this.state.userSettings.simpleTypography;
+      const reps = this.state.userSettings.repetitions;
+      const lessonPath = this.state.lesson.path;
+      const study = this.state.userSettings.study
+      writePersonalPreferences('userSettings', updatedUserSettings);
 
       let newHistory = Object.assign({}, this.props.location)
       newHistory.search = "";
       // Note: this affects StrokesForWords lookup ?q= behaviour:
       this.props.history.replace(newHistory);
 
-      if (this.state.userSettings.simpleTypography) {
-        newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial, this.state.userSettings);
+      if (simpleTypography) {
+        newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial, updatedUserSettings);
       }
 
-      newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings, this.state.revisionMode);
+      newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, metWords, updatedUserSettings, revisionMode);
 
-      newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, this.state.metWords, this.state.userSettings);
+      newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, metWords, updatedUserSettings);
 
-      if (this.state.revisionMode && this.state.userSettings.limitNumberOfWords > 0) {
-        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
+      if (revisionMode && limitNumberOfWords > 0) {
+        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, limitNumberOfWords);
       }
-      else if (this.state.revisionMode) {
+      else if (revisionMode) {
         // Don't do anything to limit material if it's a revision lesson without limitNumberOfWords set
         // newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0);
       }
-      else if (this.state.userSettings.startFromWord > 0 && this.state.userSettings.limitNumberOfWords > 0) {
-        let startFrom = this.state.userSettings.startFromWord - 1;
-        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom, startFrom + this.state.userSettings.limitNumberOfWords);
+      else if (startFromWord > 0 && limitNumberOfWords > 0) {
+        let startFrom = startFromWord - 1;
+        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom, startFrom + limitNumberOfWords);
       }
-      else if (this.state.userSettings.startFromWord > 0) {
-        let startFrom = this.state.userSettings.startFromWord - 1;
+      else if (startFromWord > 0) {
+        let startFrom = startFromWord - 1;
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom);
       }
-      else if (this.state.userSettings.limitNumberOfWords > 0) {
-        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, this.state.userSettings.limitNumberOfWords);
+      else if (limitNumberOfWords > 0) {
+        newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, limitNumberOfWords);
       }
 
-      let reps = this.state.userSettings.repetitions;
       let repeatedLesson = newLesson.presentedMaterial;
       if (reps > 0) {
         for (let i = 1; i < reps && i < 30; i++) {
@@ -1059,9 +1071,9 @@ class App extends Component {
         lesson: newLesson,
         currentPhraseID: 0
       }, () => {
-        if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom") && !this.state.lesson.path.endsWith("/lessons/custom/setup")) {
-          let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
-          let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
+        if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
+          let lessonsProgress = this.updateLessonsProgress(lessonPath);
+          let recentLessons = this.updateRecentLessons(lessonPath, study);
           writePersonalPreferences('lessonsProgress', lessonsProgress);
           writePersonalPreferences('recentLessons', recentLessons);
         }
