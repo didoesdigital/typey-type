@@ -1,9 +1,9 @@
 import isNormalInteger from "../../../../utils/isNormalInteger";
 
-const applyQueryParamsToUserSettings = (newSettings, parsedParams, userSettings) => {
+const applyQueryParamsToUserSettings = (newSettings, parsedParams) => {
     // Update newSettings using URL search query parameters:
     for (const [param, paramVal] of Object.entries(parsedParams)) {
-      if (param in userSettings) {
+      if (param in newSettings) {
         const booleanParams = [
           'blurMaterial',
           'caseSensitive',

@@ -918,7 +918,7 @@ class App extends Component {
     const lookupTerm = parsedParams['q'];
 
     // Update newSettings using URL search query parameters:
-    applyQueryParamsToUserSettings(newSettings, parsedParams, userSettings);
+    applyQueryParamsToUserSettings(newSettings, parsedParams);
 
     this.setState({
       lookupTerm: lookupTerm,
