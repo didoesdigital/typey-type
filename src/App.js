@@ -915,6 +915,11 @@ class App extends Component {
 
     // Copy userSettings before mutating:
     const newSettings = Object.assign({}, userSettings);
+    const limitNumberOfWords = newSettings.limitNumberOfWords;
+    const startFromWord = newSettings.startFromWord;
+    const simpleTypography = newSettings.simpleTypography;
+    const reps = newSettings.repetitions;
+    const study = newSettings.study
     
     // Get lookupTerm from URL:
     const lookupTerm = parsedParams['q'];
@@ -926,12 +931,6 @@ class App extends Component {
       lookupTerm: lookupTerm,
       userSettings: newSettings
     }, () => {
-      const limitNumberOfWords = newSettings.limitNumberOfWords;
-      const startFromWord = newSettings.startFromWord;
-      const simpleTypography = newSettings.simpleTypography;
-      const reps = newSettings.repetitions;
-      const study = newSettings.study
-      
       // Write updated user settings to local storage:
       writePersonalPreferences('userSettings', newSettings);
 
