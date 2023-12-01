@@ -128,9 +128,7 @@ export function changeSortOrderUserSetting(event) {
   newState[name] = value;
 
   this.setState({ userSettings: newState }, () => {
-    if (!(name === "caseSensitive")) {
-      this.setupLesson();
-    }
+    this.setupLesson();
     writePersonalPreferences("userSettings", this.state.userSettings);
   });
 
@@ -158,9 +156,7 @@ export function changeSpacePlacementUserSetting(event) {
   newState[name] = value;
 
   this.setState({ userSettings: newState }, () => {
-    if (!(name === "caseSensitive")) {
-      this.setupLesson();
-    }
+    this.setupLesson();
     writePersonalPreferences("userSettings", this.state.userSettings);
   });
 
@@ -342,9 +338,7 @@ export function handleLimitWordsChange(event) {
   newState[name] = value;
 
   this.setState({ userSettings: newState }, () => {
-    if (!(name === "caseSensitive")) {
-      this.setupLesson();
-    }
+    this.setupLesson();
     writePersonalPreferences("userSettings", this.state.userSettings);
   });
 
@@ -372,9 +366,7 @@ export function handleRepetitionsChange(event) {
   newState[name] = value;
 
   this.setState({ userSettings: newState }, () => {
-    if (!(name === "caseSensitive")) {
-      this.setupLesson();
-    }
+    this.setupLesson();
     writePersonalPreferences("userSettings", this.state.userSettings);
   });
 
