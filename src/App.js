@@ -983,6 +983,14 @@ class App extends Component {
       // Get target stroke count:
       const target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
+      // Update lesson progress and recent lesson history:
+      if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
+        const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, newSettings);
+        const recentLessons = this.updateRecentLessons(lessonPath, study, this.state.recentLessons);
+        writePersonalPreferences('lessonsProgress', lessonsProgress);
+        writePersonalPreferences('recentLessons', recentLessons);
+      }
+
       // Reset lesson state for starting lesson:
       this.setState({
         actualText: ``,
@@ -1006,14 +1014,6 @@ class App extends Component {
         currentPhraseID: 0,
         lookupTerm,
         userSettings: newSettings
-      }, () => {
-        // Update lesson progress and recent lesson history:
-        if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
-          const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, newSettings);
-          const recentLessons = this.updateRecentLessons(lessonPath, study, this.state.recentLessons);
-          writePersonalPreferences('lessonsProgress', lessonsProgress);
-          writePersonalPreferences('recentLessons', recentLessons);
-        }
       });
   }
 
