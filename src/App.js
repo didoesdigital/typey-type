@@ -890,6 +890,8 @@ class App extends Component {
     const revisionMaterial = this.state.revisionMaterial;
     const search = this.props.location.search;
     const userSettings = this.state.userSettings;
+    const metWords = this.state.metWords;
+    const lessonPath = this.state.lesson.path;
     let newLesson = Object.assign({}, this.state.lesson);
 
     // If there's no lesson data, use fallback lesson:
@@ -924,18 +926,14 @@ class App extends Component {
       lookupTerm: lookupTerm,
       userSettings: newSettings
     }, () => {
-      const metWords = this.state.metWords;
-      const revisionMode = this.state.revisionMode;
-      const updatedUserSettings = this.state.userSettings;
-      const limitNumberOfWords = this.state.userSettings.limitNumberOfWords;
-      const startFromWord = this.state.userSettings.startFromWord;
-      const simpleTypography = this.state.userSettings.simpleTypography;
-      const reps = this.state.userSettings.repetitions;
-      const lessonPath = this.state.lesson.path;
-      const study = this.state.userSettings.study
+      const limitNumberOfWords = newSettings.limitNumberOfWords;
+      const startFromWord = newSettings.startFromWord;
+      const simpleTypography = newSettings.simpleTypography;
+      const reps = newSettings.repetitions;
+      const study = newSettings.study
       
       // Write updated user settings to local storage:
-      writePersonalPreferences('userSettings', updatedUserSettings);
+      writePersonalPreferences('userSettings', newSettings);
 
       // Clean up URL, remove parameters:
       const newHistory = Object.assign({}, this.props.location)
@@ -945,14 +943,14 @@ class App extends Component {
 
       // Replace smart typography in presented material:
       if (simpleTypography) {
-        newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial, updatedUserSettings);
+        newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial, newSettings);
       }
 
       // Filter lesson by familiarity:
-      newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, metWords, updatedUserSettings, revisionMode);
+      newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, metWords, newSettings, revisionMode);
 
       // Sort lesson:
-      newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, metWords, updatedUserSettings);
+      newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, metWords, newSettings);
 
       // Apply range (start from & limit) to lesson:
       if (revisionMode && limitNumberOfWords > 0) {
