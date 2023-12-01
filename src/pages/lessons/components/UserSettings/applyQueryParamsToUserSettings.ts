@@ -1,9 +1,17 @@
+import queryString from "query-string";
+import type { UserSettings } from "../../../../types";
 import isNormalInteger from "../../../../utils/isNormalInteger";
 
-const applyQueryParamsToUserSettings = (newSettings, parsedParams) => {
-  // Update newSettings using URL search query parameters:
+const applyQueryParamsToUserSettings = (
+  newSettings: UserSettings,
+  parsedParams: queryString.ParsedQuery<string>
+) => {
+  function isKeyOfNewSettings(key: string): key is keyof UserSettings {
+    return key in newSettings;
+  }
+
   for (const [param, paramVal] of Object.entries(parsedParams)) {
-    if (param in newSettings) {
+    if (isKeyOfNewSettings(param)) {
       const booleanParams = [
         "blurMaterial",
         "caseSensitive",
@@ -23,9 +31,11 @@ const applyQueryParamsToUserSettings = (newSettings, parsedParams) => {
 
       if (booleanParams.includes(param)) {
         if (paramVal === "1") {
+          // @ts-ignore
           newSettings[param] = true;
         }
         if (paramVal === "0") {
+          // @ts-ignore
           newSettings[param] = false;
         }
       }
@@ -39,8 +49,10 @@ const applyQueryParamsToUserSettings = (newSettings, parsedParams) => {
 
       if (
         param === "spacePlacement" &&
-        spacePlacementValidValues.includes(paramVal)
+        // @ts-ignore
+        spacePlacementValidValues.includes(paramVal ?? "")
       ) {
+        // @ts-ignore
         newSettings[param] = paramVal;
       }
 
@@ -53,13 +65,17 @@ const applyQueryParamsToUserSettings = (newSettings, parsedParams) => {
         "sortShortest",
       ];
 
+      // @ts-ignore
       if (param === "sortOrder" && sortOrderValidValues.includes(paramVal)) {
+        // @ts-ignore
         newSettings[param] = paramVal;
       }
 
       const studyValidValues = ["discover", "revise", "drill", "practice"];
 
+      // @ts-ignore
       if (param === "study" && studyValidValues.includes(paramVal)) {
+        // @ts-ignore
         newSettings[param] = paramVal;
       }
 
@@ -79,8 +95,10 @@ const applyQueryParamsToUserSettings = (newSettings, parsedParams) => {
 
       if (
         param === "stenoLayout" &&
+        // @ts-ignore
         stenoLayoutValidValues.includes(paramVal)
       ) {
+        // @ts-ignore
         newSettings[param] = paramVal;
       }
 
@@ -88,7 +106,8 @@ const applyQueryParamsToUserSettings = (newSettings, parsedParams) => {
         (param === "repetitions" ||
           param === "limitNumberOfWords" ||
           param === "startFromWord") &&
-        isNormalInteger(paramVal)
+        // @ts-ignore
+        isNormalInteger(paramVal ?? "")
       ) {
         let paramValNumber = Number(paramVal);
         newSettings[param] = paramValNumber;

@@ -58,7 +58,7 @@ import {
   handleUpcomingWordsLayout,
 } from './pages/lessons/components/UserSettings/updateUserSetting';
 import AppRoutes from './AppRoutes';
-import applyQueryParamsToUserSettings from './pages/lessons/components/UserSettings/applyQueryParamsToUserSettings.js';
+import applyQueryParamsToUserSettings from './pages/lessons/components/UserSettings/applyQueryParamsToUserSettings';
 
 /** @type {SpeechSynthesis | null} */
 let synth = null;
