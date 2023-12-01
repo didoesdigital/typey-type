@@ -246,7 +246,7 @@ class App extends Component {
     writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
 
     if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
-      let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path);
+      let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path, this.state.lesson, this.state.userSettings);
       let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
       writePersonalPreferences('recentLessons', recentLessons);
@@ -439,12 +439,10 @@ class App extends Component {
     return value;
   }
 
-  updateLessonsProgress(lessonpath) {
+  updateLessonsProgress(lessonpath, lesson, userSettings) {
     const prevlessonsProgress = this.state.lessonsProgress;
-    const userSettings = this.state.userSettings;
     const metWords = this.state.metWords;
     const lessonsProgress = Object.assign({}, prevlessonsProgress);
-    const lesson = this.state.lesson;
 
     // This is actually UNIQUE numberOfWordsSeen.
     // It seems low value to update localStorage data to rename it only for readability.
@@ -1011,7 +1009,7 @@ class App extends Component {
       }, () => {
         // Update lesson progress and recent lesson history:
         if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
-          const lessonsProgress = this.updateLessonsProgress(lessonPath);
+          const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, newSettings);
           const recentLessons = this.updateRecentLessons(lessonPath, study);
           writePersonalPreferences('lessonsProgress', lessonsProgress);
           writePersonalPreferences('recentLessons', recentLessons);
