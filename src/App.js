@@ -247,7 +247,7 @@ class App extends Component {
 
     if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
       let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path, this.state.lesson, this.state.userSettings);
-      let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study);
+      let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study, this.state.recentLessons);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
       writePersonalPreferences('recentLessons', recentLessons);
     }
@@ -531,9 +531,9 @@ class App extends Component {
     return lessonsProgress;
   }
 
-  updateRecentLessons(recentLessonPath, studyType) {
+  updateRecentLessons(recentLessonPath, studyType, prevRecentLessons) {
     let trimmedRecentLessonPath = recentLessonPath.replace(process.env.PUBLIC_URL,'').replace('lesson.txt','');
-    let recentLessons = Object.assign({}, this.state.recentLessons);
+    const recentLessons = Object.assign({}, prevRecentLessons);
 
     if (!trimmedRecentLessonPath.includes("/lessons/custom") && recentLessons.history) {
       let existingLessonIndex = recentLessons.history.findIndex(historyRecentLesson => historyRecentLesson.path === trimmedRecentLessonPath);
@@ -1010,7 +1010,7 @@ class App extends Component {
         // Update lesson progress and recent lesson history:
         if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
           const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, newSettings);
-          const recentLessons = this.updateRecentLessons(lessonPath, study);
+          const recentLessons = this.updateRecentLessons(lessonPath, study, this.state.recentLessons);
           writePersonalPreferences('lessonsProgress', lessonsProgress);
           writePersonalPreferences('recentLessons', recentLessons);
         }
