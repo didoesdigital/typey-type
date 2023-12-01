@@ -892,22 +892,32 @@ class App extends Component {
     const userSettings = this.state.userSettings;
     let newLesson = Object.assign({}, this.state.lesson);
 
+    // If there's no lesson data, use fallback lesson:
     if ((typeof newLesson === 'object' && Object.entries(newLesson).length === 0 && newLesson.constructor === Object) || newLesson === null ) {
       newLesson = fallbackLesson;
     }
 
-    newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
+    // Copy source or revision material to presented material:
     if (revisionMode) {
       newLesson.presentedMaterial = revisionMaterial.map(line => ({...line}));
     }
+    else {
+      newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
+    }
 
+    // Stop existing lesson timer:
     this.stopTimer();
 
+    // Get URL search query parameters:
     const parsedParams = queryString.parse(search);
 
-    let newSettings = Object.assign({}, userSettings);
-    let lookupTerm = parsedParams['q'];
+    // Copy userSettings before mutating:
+    const newSettings = Object.assign({}, userSettings);
+    
+    // Get lookupTerm from URL:
+    const lookupTerm = parsedParams['q'];
 
+    // Update newSettings using URL search query parameters:
     for (const [param, paramVal] of Object.entries(parsedParams)) {
       if (param in userSettings) {
         const booleanParams = [
@@ -1005,21 +1015,28 @@ class App extends Component {
       const reps = this.state.userSettings.repetitions;
       const lessonPath = this.state.lesson.path;
       const study = this.state.userSettings.study
+      
+      // Write updated user settings to local storage:
       writePersonalPreferences('userSettings', updatedUserSettings);
 
-      let newHistory = Object.assign({}, this.props.location)
+      // Clean up URL, remove parameters:
+      const newHistory = Object.assign({}, this.props.location)
       newHistory.search = "";
       // Note: this affects StrokesForWords lookup ?q= behaviour:
       this.props.history.replace(newHistory);
 
+      // Replace smart typography in presented material:
       if (simpleTypography) {
         newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial, updatedUserSettings);
       }
 
+      // Filter lesson by familiarity:
       newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, metWords, updatedUserSettings, revisionMode);
 
+      // Sort lesson:
       newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, metWords, updatedUserSettings);
 
+      // Apply range (start from & limit) to lesson:
       if (revisionMode && limitNumberOfWords > 0) {
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, limitNumberOfWords);
       }
@@ -1039,6 +1056,7 @@ class App extends Component {
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, limitNumberOfWords);
       }
 
+      // Repeat words in lesson:
       let repeatedLesson = newLesson.presentedMaterial;
       if (reps > 0) {
         for (let i = 1; i < reps && i < 30; i++) {
@@ -1046,10 +1064,14 @@ class App extends Component {
         }
       }
       newLesson.presentedMaterial = repeatedLesson;
+      
+      // Zipper the lesson:
       newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
-      let target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
+      // Get target stroke count:
+      const target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
+      // Reset lesson state for starting lesson:
       this.setState({
         actualText: ``,
         currentPhraseAttempts: [],
@@ -1071,9 +1093,10 @@ class App extends Component {
         lesson: newLesson,
         currentPhraseID: 0
       }, () => {
+        // Update lesson progress and recent lesson history:
         if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
-          let lessonsProgress = this.updateLessonsProgress(lessonPath);
-          let recentLessons = this.updateRecentLessons(lessonPath, study);
+          const lessonsProgress = this.updateLessonsProgress(lessonPath);
+          const recentLessons = this.updateRecentLessons(lessonPath, study);
           writePersonalPreferences('lessonsProgress', lessonsProgress);
           writePersonalPreferences('recentLessons', recentLessons);
         }
