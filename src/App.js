@@ -440,7 +440,11 @@ class App extends Component {
   }
 
   updateLessonsProgress(lessonpath) {
-    let lessonsProgress = Object.assign({}, this.state.lessonsProgress);
+    const prevlessonsProgress = this.state.lessonsProgress;
+    const userSettings = this.state.userSettings;
+    const metWords = this.state.metWords;
+    const lessonsProgress = Object.assign({}, prevlessonsProgress);
+    const lesson = this.state.lesson;
 
     // This is actually UNIQUE numberOfWordsSeen.
     // It seems low value to update localStorage data to rename it only for readability.
@@ -454,12 +458,11 @@ class App extends Component {
       numberOfWordsSeen = lessonsProgress[lessonpath].numberOfWordsSeen;
     }
 
-    let material = this.state.lesson?.sourceMaterial ? this.state.lesson.sourceMaterial.map(copy => ({...copy})) : [{phrase: "the", stroke: "-T"}];
-    if (this.state.userSettings.simpleTypography) {
-      material = replaceSmartTypographyInPresentedMaterial.call(this, material, this.state.userSettings);
+    let material = lesson?.sourceMaterial ? lesson.sourceMaterial.map(copy => ({...copy})) : [{phrase: "the", stroke: "-T"}];
+    if (userSettings.simpleTypography) {
+      material = replaceSmartTypographyInPresentedMaterial.call(this, material, userSettings);
     }
 
-    let metWords = this.state.metWords;
     let len = material.length;
     let seenAccumulator = 0;
     let memorisedAccumulator = 0;
@@ -525,7 +528,7 @@ class App extends Component {
     this.setState({
       lessonsProgress: lessonsProgress,
     }, () => {
-      writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
+      writePersonalPreferences('lessonsProgress', lessonsProgress);
     });
     return lessonsProgress;
   }
