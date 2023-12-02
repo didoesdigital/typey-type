@@ -57,6 +57,7 @@ import {
   handleRepetitionsChange,
   handleStartFromWordChange,
   handleUpcomingWordsLayout,
+  updatePreset,
 } from './pages/lessons/components/UserSettings/updateUserSetting';
 import {
   changeShowStrokesInLesson,
@@ -1044,41 +1045,6 @@ class App extends Component {
     this.setState({globalLookupDictionary: combinedLookupDictionary});
   }
 
-  /**
-   * 
-   * @param {"discover" | "revise" | "drill" | "practice"} studyType should have type Study
-   */
-  updatePreset(studyType) {
-    const newUserSettings = Object.assign({}, this.state.userSettings);
-    const presetSettings = {
-      limitNumberOfWords: this.state.userSettings.limitNumberOfWords,
-      repetitions: this.state.userSettings.repetitions
-    }
-
-    switch (studyType) {
-      case "discover":
-        newUserSettings.studyPresets[0] = presetSettings;
-        break;
-
-      case "revise":
-        newUserSettings.studyPresets[1] = presetSettings;
-        break;
-
-      case "drill":
-        newUserSettings.studyPresets[2] = presetSettings;
-        break;
-
-      case "practice":
-        newUserSettings.studyPresets[3] = presetSettings;
-        break;
-
-      default:
-        break;
-    }
-
-    this.setState({userSettings: newUserSettings});
-  }
-
   updateRecommendationHistory(prevRecommendationHistory, lessonIndex = this.state.lessonIndex) {
     let newRecommendationHistory = Object.assign({}, prevRecommendationHistory);
 
@@ -1469,7 +1435,7 @@ class App extends Component {
               updateMarkup: this.updateMarkup.bind(this),
               updateMetWords: this.updateMetWords.bind(this),
               updatePersonalDictionaries: this.updatePersonalDictionaries.bind(this),
-              updatePreset: this.updatePreset.bind(this),
+              updatePreset: updatePreset.bind(this),
               updateRecommendationHistory: this.updateRecommendationHistory.bind(this),
               updateRevisionMaterial: updateRevisionMaterial.bind(this),
               updateStartingMetWordsAndCounts: this.updateStartingMetWordsAndCounts.bind(this),

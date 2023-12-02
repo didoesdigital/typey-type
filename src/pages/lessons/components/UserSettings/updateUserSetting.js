@@ -533,3 +533,38 @@ export function handleUpcomingWordsLayout(event) {
 
   return value;
 }
+
+/**
+ *
+ * @param {"discover" | "revise" | "drill" | "practice"} studyType should have type Study
+ */
+export function updatePreset(studyType) {
+  const newUserSettings = Object.assign({}, this.state.userSettings);
+  const presetSettings = {
+    limitNumberOfWords: this.state.userSettings.limitNumberOfWords,
+    repetitions: this.state.userSettings.repetitions,
+  };
+
+  switch (studyType) {
+    case "discover":
+      newUserSettings.studyPresets[0] = presetSettings;
+      break;
+
+    case "revise":
+      newUserSettings.studyPresets[1] = presetSettings;
+      break;
+
+    case "drill":
+      newUserSettings.studyPresets[2] = presetSettings;
+      break;
+
+    case "practice":
+      newUserSettings.studyPresets[3] = presetSettings;
+      break;
+
+    default:
+      break;
+  }
+
+  this.setState({ userSettings: newUserSettings });
+}
