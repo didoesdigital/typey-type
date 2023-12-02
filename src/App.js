@@ -893,6 +893,14 @@ class App extends Component {
     const lessonPath = this.state.lesson.path;
     let newLesson = Object.assign({}, this.state.lesson);
 
+    // Copy userSettings before mutating:
+    const newSettings = Object.assign({}, userSettings);
+    const limitNumberOfWords = newSettings.limitNumberOfWords;
+    const startFromWord = newSettings.startFromWord;
+    const simpleTypography = newSettings.simpleTypography;
+    const reps = newSettings.repetitions;
+    const study = newSettings.study
+
     // If there's no lesson data, use fallback lesson:
     if ((typeof newLesson === 'object' && Object.entries(newLesson).length === 0 && newLesson.constructor === Object) || newLesson === null ) {
       newLesson = fallbackLesson;
@@ -911,14 +919,6 @@ class App extends Component {
 
     // Get URL search query parameters:
     const parsedParams = queryString.parse(search);
-
-    // Copy userSettings before mutating:
-    const newSettings = Object.assign({}, userSettings);
-    const limitNumberOfWords = newSettings.limitNumberOfWords;
-    const startFromWord = newSettings.startFromWord;
-    const simpleTypography = newSettings.simpleTypography;
-    const reps = newSettings.repetitions;
-    const study = newSettings.study
     
     // Get lookupTerm from URL:
     const lookupTerm = parsedParams['q'];
