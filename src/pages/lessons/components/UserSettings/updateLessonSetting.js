@@ -34,3 +34,18 @@ export function changeShowStrokesInLesson(event) {
 
   return value;
 }
+
+export function updateRevisionMaterial(event) {
+  let newCurrentLessonStrokes = this.state.currentLessonStrokes.map(
+    (stroke) => ({ ...stroke })
+  );
+  const target = event.target;
+  const checked = target.type === "checkbox" ? target.checked : target.value;
+  const name = target.name.replace(/-checkbox/, "");
+  const index = name;
+
+  newCurrentLessonStrokes[index].checked = checked;
+
+  this.setState({ currentLessonStrokes: newCurrentLessonStrokes });
+  return checked;
+}

@@ -60,6 +60,7 @@ import {
 } from './pages/lessons/components/UserSettings/updateUserSetting';
 import {
   changeShowStrokesInLesson,
+  updateRevisionMaterial,
 } from './pages/lessons/components/UserSettings/updateLessonSetting';
 import {
   changeWriterInput
@@ -695,19 +696,6 @@ class App extends Component {
       console.error(error);
       // this.showDictionaryErrorNotification();
     });
-  }
-
-  updateRevisionMaterial(event) {
-    let newCurrentLessonStrokes = this.state.currentLessonStrokes.map(stroke => ({...stroke}));
-    const target = event.target;
-    const checked = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name.replace(/-checkbox/,'');
-    const index = name;
-
-    newCurrentLessonStrokes[index].checked = checked;
-
-    this.setState({currentLessonStrokes: newCurrentLessonStrokes});
-    return checked;
   }
 
   toggleExperiment(event) {
@@ -1528,7 +1516,7 @@ class App extends Component {
               updatePersonalDictionaries: this.updatePersonalDictionaries.bind(this),
               updatePreset: this.updatePreset.bind(this),
               updateRecommendationHistory: this.updateRecommendationHistory.bind(this),
-              updateRevisionMaterial: this.updateRevisionMaterial.bind(this),
+              updateRevisionMaterial: updateRevisionMaterial.bind(this),
               updateStartingMetWordsAndCounts: this.updateStartingMetWordsAndCounts.bind(this),
               updateTopSpeedPersonalBest: this.updateTopSpeedPersonalBest.bind(this),
               updateUserGoals: this.updateUserGoals.bind(this),
