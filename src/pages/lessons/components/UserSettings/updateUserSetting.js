@@ -1,4 +1,5 @@
 import GoogleAnalytics from "react-ga4";
+import PARAMS from "../../../../utils/params";
 import { writePersonalPreferences } from "../../../../utils/typey-type";
 
 /** @type {SpeechSynthesis | null} */
@@ -269,6 +270,99 @@ export function changeVoiceUserSetting(voiceName, voiceURI) {
     action: "Change voice",
     label: labelString,
   });
+}
+
+export function chooseStudy(event) {
+  let currentState = this.state.userSettings;
+  let newState = Object.assign({}, currentState);
+
+  const name = "study";
+  const value = event.target.value;
+
+  newState[name] = value;
+
+  switch (value) {
+    case "discover":
+      newState.showStrokes = PARAMS.discover.showStrokes;
+      newState.hideStrokesOnLastRepetition =
+        PARAMS.discover.hideStrokesOnLastRepetition;
+      newState.newWords = PARAMS.discover.newWords;
+      newState.seenWords = PARAMS.discover.seenWords;
+      newState.retainedWords = PARAMS.discover.retainedWords;
+      newState.repetitions =
+        this.state.userSettings.studyPresets[0].repetitions ||
+        PARAMS.discover.repetitions;
+      newState.limitNumberOfWords =
+        this.state.userSettings.studyPresets[0].limitNumberOfWords ||
+        PARAMS.discover.limitNumberOfWords;
+      newState.sortOrder = PARAMS.discover.sortOrder;
+      break;
+    case "revise":
+      newState.showStrokes = PARAMS.revise.showStrokes;
+      newState.hideStrokesOnLastRepetition =
+        PARAMS.revise.hideStrokesOnLastRepetition;
+      newState.newWords = PARAMS.revise.newWords;
+      newState.seenWords = PARAMS.revise.seenWords;
+      newState.retainedWords = PARAMS.revise.retainedWords;
+      newState.repetitions =
+        this.state.userSettings.studyPresets[1].repetitions ||
+        PARAMS.revise.repetitions;
+      newState.limitNumberOfWords =
+        this.state.userSettings.studyPresets[1].limitNumberOfWords ||
+        PARAMS.revise.limitNumberOfWords;
+      newState.sortOrder = PARAMS.revise.sortOrder;
+      break;
+    case "drill":
+      newState.showStrokes = PARAMS.drill.showStrokes;
+      newState.hideStrokesOnLastRepetition =
+        PARAMS.drill.hideStrokesOnLastRepetition;
+      newState.newWords = PARAMS.drill.newWords;
+      newState.seenWords = PARAMS.drill.seenWords;
+      newState.retainedWords = PARAMS.drill.retainedWords;
+      newState.repetitions =
+        this.state.userSettings.studyPresets[2].repetitions ||
+        PARAMS.drill.repetitions;
+      newState.limitNumberOfWords =
+        this.state.userSettings.studyPresets[2].limitNumberOfWords ||
+        PARAMS.drill.limitNumberOfWords;
+      newState.sortOrder = PARAMS.drill.sortOrder;
+      break;
+    case "practice":
+      newState.showStrokes = PARAMS.practice.showStrokes;
+      newState.hideStrokesOnLastRepetition =
+        PARAMS.practice.hideStrokesOnLastRepetition;
+      newState.newWords = PARAMS.practice.newWords;
+      newState.seenWords = PARAMS.practice.seenWords;
+      newState.retainedWords = PARAMS.practice.retainedWords;
+      newState.repetitions =
+        this.state.userSettings.studyPresets[3].repetitions ||
+        PARAMS.practice.repetitions;
+      newState.limitNumberOfWords =
+        this.state.userSettings.studyPresets[3].limitNumberOfWords ||
+        PARAMS.practice.limitNumberOfWords;
+      newState.sortOrder = PARAMS.practice.sortOrder;
+      break;
+    default:
+      break;
+  }
+
+  this.setState({ userSettings: newState }, () => {
+    this.setupLesson();
+    writePersonalPreferences("userSettings", this.state.userSettings);
+  });
+
+  let labelString = value;
+  if (!value) {
+    labelString = "BAD_INPUT";
+  }
+
+  GoogleAnalytics.event({
+    category: "UserSettings",
+    action: "Choose Study Type",
+    label: labelString,
+  });
+
+  return value;
 }
 
 export function handleBeatsPerMinute(event) {
