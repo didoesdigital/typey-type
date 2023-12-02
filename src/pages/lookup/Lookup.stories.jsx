@@ -4,11 +4,11 @@ import userSettings from "../../stories/fixtures/userSettings";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 
-// eslint-disable-next-line import/no-anonymous-default-export
-export default {
+const meta = {
   title: "Pages/Lookup",
   component: Lookup,
 };
+export default meta;
 
 const globalLookupDictionary = new Map([
   ["huh", [["H*U", "typey:typey-type.json"]]],
