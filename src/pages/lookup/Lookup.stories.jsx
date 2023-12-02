@@ -49,6 +49,7 @@ LookupFromURLStory.args = {
 LookupFromURLStory.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
+  await canvas.findByText("No results found");
   await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
     "No results found"
   );
