@@ -58,6 +58,9 @@ import {
   handleStartFromWordChange,
   handleUpcomingWordsLayout,
 } from './pages/lessons/components/UserSettings/updateUserSetting';
+import {
+  changeWriterInput
+} from './pages/lessons/components/UserSettings/updateGlobalUserSetting';
 import AppRoutes from './AppRoutes';
 import applyQueryParamsToUserSettings from './pages/lessons/components/UserSettings/applyQueryParamsToUserSettings';
 
@@ -786,30 +789,6 @@ class App extends Component {
     });
 
     return value;
-  }
-
-  // changeWriterInput(event: SyntheticInputEvent<HTMLInputElement>) {
-  changeWriterInput(event) {
-    let globalUserSettings = Object.assign({}, this.state.globalUserSettings);
-    let name = 'BAD_INPUT';
-
-    if (event && event.target && event.target.name) {
-      globalUserSettings['writerInput'] = event.target.name;
-      name = event.target.name;
-    }
-
-    this.setState({globalUserSettings: globalUserSettings}, () => {
-      writePersonalPreferences('globalUserSettings', globalUserSettings);
-    });
-
-    let labelString = name;
-    if (!name) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'Global user settings',
-      action: 'Change writer input',
-      label: labelString
-    });
   }
 
   setupLesson() {
@@ -1549,7 +1528,7 @@ class App extends Component {
               changeStenoLayout: changeStenoLayout.bind(this),
               changeUserSetting: changeUserSetting.bind(this),
               changeVoiceUserSetting: changeVoiceUserSetting,
-              changeWriterInput: this.changeWriterInput.bind(this),
+              changeWriterInput: changeWriterInput.bind(this),
               chooseStudy: chooseStudy.bind(this),
               createCustomLesson: this.createCustomLesson.bind(this),
               handleBeatsPerMinute: handleBeatsPerMinute.bind(this),
