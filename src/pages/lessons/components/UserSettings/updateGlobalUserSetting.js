@@ -26,3 +26,35 @@ export function changeWriterInput(event) {
     label: labelString,
   });
 }
+
+export function toggleExperiment(event) {
+  let newState = Object.assign({}, this.state.globalUserSettings);
+
+  const target = event.target;
+  const value = target.checked;
+  const name = target.name;
+
+  newState.experiments[name] = value;
+
+  this.setState({ globalUserSettings: newState }, () => {
+    writePersonalPreferences(
+      "globalUserSettings",
+      this.state.globalUserSettings
+    );
+  });
+
+  let labelString = value;
+  if (value === undefined) {
+    labelString = "BAD_INPUT";
+  } else {
+    labelString.toString();
+  }
+
+  GoogleAnalytics.event({
+    category: "Global user settings",
+    action: "Change " + name,
+    label: labelString,
+  });
+
+  return value;
+}
