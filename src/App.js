@@ -833,8 +833,6 @@ class App extends Component {
         totalNumberOfHintedWords: 0,
         lesson: newLesson,
         currentPhraseID: 0,
-        lookupTerm,
-        userSettings: newSettings
       });
     });
   }
