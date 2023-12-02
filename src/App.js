@@ -246,7 +246,7 @@ class App extends Component {
     writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
 
     if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
-      let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path, this.state.lesson, this.state.userSettings);
+      let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path, this.state.lesson, this.state.userSettings, this.state.lessonsProgress);
       let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.state.userSettings.study, this.state.recentLessons);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
       writePersonalPreferences('recentLessons', recentLessons);
@@ -437,8 +437,7 @@ class App extends Component {
     return value;
   }
 
-  updateLessonsProgress(lessonpath, lesson, userSettings) {
-    const prevlessonsProgress = this.state.lessonsProgress;
+  updateLessonsProgress(lessonpath, lesson, userSettings, prevlessonsProgress) {
     const metWords = this.state.metWords;
     const lessonsProgress = Object.assign({}, prevlessonsProgress);
 
@@ -893,6 +892,7 @@ class App extends Component {
     const lessonPath = this.state.lesson.path;
     let newLesson = Object.assign({}, this.state.lesson);
     const prevRecentLessons = this.state.recentLessons;
+    const prevLessonsProgress = this.state.lessonsProgress;
 
     // Copy userSettings before mutating:
     const newSettings = Object.assign({}, userSettings);
@@ -984,7 +984,7 @@ class App extends Component {
 
     // Update lesson progress and recent lesson history:
     if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
-      const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, newSettings);
+      const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, newSettings, prevLessonsProgress);
       const recentLessons = this.updateRecentLessons(lessonPath, study, prevRecentLessons);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
       writePersonalPreferences('recentLessons', recentLessons);
