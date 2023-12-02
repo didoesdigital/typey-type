@@ -8,7 +8,7 @@ type Props = {
   listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[];
 };
 
-const Component = ({
+const MatchedModifiedTranslation = ({
   modifiedWordOrPhrase,
   phrase,
   listOfStrokesAndDicts,
@@ -30,4 +30,4 @@ const Component = ({
   );
 };
 
-export default Component;
+export default MatchedModifiedTranslation;
