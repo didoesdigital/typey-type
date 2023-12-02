@@ -772,7 +772,7 @@ function writePersonalPreferences(itemToStore, JSONToStore) {
   }
 }
 
-function targetStrokeCount(currentOutline) {
+function getTargetStrokeCount(currentOutline) {
   // console.log(currentOutline.stroke.split(/[/ ]/).length);
   return currentOutline.stroke.split(/[/ ]/).length || 1;
 }
@@ -845,7 +845,7 @@ export {
   setupLessonProgress,
   shouldShowStroke,
   strokeAccuracy,
-  targetStrokeCount,
+  getTargetStrokeCount,
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 };

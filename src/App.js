@@ -16,7 +16,7 @@ import {
   repetitionsRemaining,
   shouldShowStroke,
   strokeAccuracy,
-  targetStrokeCount,
+  getTargetStrokeCount,
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
@@ -981,7 +981,7 @@ class App extends Component {
     newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
     // Get target stroke count:
-    const target = targetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
+    const target = getTargetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
     // Update lesson progress and recent lesson history:
     if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
@@ -1450,7 +1450,7 @@ class App extends Component {
         nextItem = updateCapitalisationStrokesInNextItem(nextItem, lastWord);
       }
 
-      let target = targetStrokeCount(nextItem || { phrase: '', stroke: 'TK-LS' });
+      let target = getTargetStrokeCount(nextItem || { phrase: '', stroke: 'TK-LS' });
       newState.targetStrokeCount = target;
       this.state.lesson.newPresentedMaterial.visitNext();
 
