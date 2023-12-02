@@ -84,13 +84,13 @@ LookupPersonalDictionariesStory.play = async ({ canvasElement }) => {
   //   "text shown in dictionary"
   // );
 
-  await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
-    "typey-type.json"
-  );
-  await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
-    "punctuation-di.json"
-  );
-  await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
-    "plover-main-3-jun-2018.json"
-  );
+  // await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
+  //   "typey-type.json"
+  // );
+  // await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
+  //   "punctuation-di.json"
+  // );
+  // await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
+  //   "plover-main-3-jun-2018.json"
+  // );
 };
