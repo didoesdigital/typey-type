@@ -1101,7 +1101,10 @@ class App extends Component {
     this.setState({globalLookupDictionary: combinedLookupDictionary});
   }
 
-  // updatePreset(studyType: Study) {
+  /**
+   * 
+   * @param {"discover" | "revise" | "drill" | "practice"} studyType should have type Study
+   */
   updatePreset(studyType) {
     const newUserSettings = Object.assign({}, this.state.userSettings);
     const presetSettings = {
