@@ -270,8 +270,6 @@ class App extends Component {
       totalNumberOfMatchedChars: 0,
       yourSeenWordCount: calculateSeenWordCount(this.state.metWords),
       yourMemorisedWordCount: calculateMemorisedWordCount(this.state.metWords)
-    }, () => {
-      this.stopTimer();
     });
   }
 
