@@ -139,6 +139,7 @@ class App extends Component {
       repetitionsRemaining: 1,
       startTime: null,
       showStrokesInLesson: false,
+      targetStrokeCount: 1,
       timer: 0,
       topSpeedPersonalBest: 0,
       totalNumberOfMatchedWords: 0,
