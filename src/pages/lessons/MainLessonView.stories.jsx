@@ -115,7 +115,6 @@ const Template = (args) => {
             stopLesson={stopLesson}
             userSettings={userSettings}
             updateFlashcardsProgress={() => undefined}
-            changeFullscreen={() => undefined}
             flashcardsMetWords={{}}
             customLessonMaterial={[]}
             customLessonMaterialValidationState={[]}
