@@ -67,7 +67,8 @@ import {
   toggleExperiment,
 } from './pages/lessons/components/UserSettings/updateGlobalUserSetting';
 import {
-  changeFullscreen
+  changeFlashcardCourseLevel,
+  changeFullscreen,
 } from './pages/lessons/components/UserSettings/updateFlashcardSetting';
 import AppRoutes from './AppRoutes';
 import applyQueryParamsToUserSettings from './pages/lessons/components/UserSettings/applyQueryParamsToUserSettings';
@@ -697,28 +698,6 @@ class App extends Component {
       console.error(error);
       // this.showDictionaryErrorNotification();
     });
-  }
-
-  changeFlashcardCourseLevel(event) {
-    const value = event.target.value;
-    let globalUserSettings = Object.assign({}, this.state.globalUserSettings);
-    globalUserSettings['flashcardsCourseLevel'] = value;
-
-    this.setState({globalUserSettings: globalUserSettings}, () => {
-      this.updateFlashcardsRecommendation();
-      writePersonalPreferences('globalUserSettings', globalUserSettings);
-    });
-
-    let labelString = value;
-    if (!value) { labelString = "BAD_INPUT"; }
-
-    GoogleAnalytics.event({
-      category: 'Flashcards',
-      action: 'Change course level',
-      label: labelString
-    });
-
-    return value;
   }
 
   setupLesson() {
@@ -1449,7 +1428,7 @@ class App extends Component {
               customiseLesson: customiseLesson.bind(this),
               generateCustomLesson: generateCustomLesson.bind(this),
               updateMultipleMetWords: updateMultipleMetWords.bind(this),
-              changeFlashcardCourseLevel: this.changeFlashcardCourseLevel.bind(this),
+              changeFlashcardCourseLevel: changeFlashcardCourseLevel.bind(this),
               changeFullscreen: changeFullscreen.bind(this),
               changeShowScoresWhileTyping: changeShowScoresWhileTyping.bind(this),
               changeShowStrokesAs: changeShowStrokesAs.bind(this),
