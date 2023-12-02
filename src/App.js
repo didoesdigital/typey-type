@@ -892,6 +892,7 @@ class App extends Component {
     const metWords = this.state.metWords;
     const lessonPath = this.state.lesson.path;
     let newLesson = Object.assign({}, this.state.lesson);
+    const prevRecentLessons = this.state.recentLessons;
 
     // Copy userSettings before mutating:
     const newSettings = Object.assign({}, userSettings);
@@ -984,7 +985,7 @@ class App extends Component {
     // Update lesson progress and recent lesson history:
     if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
       const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, newSettings);
-      const recentLessons = this.updateRecentLessons(lessonPath, study, this.state.recentLessons);
+      const recentLessons = this.updateRecentLessons(lessonPath, study, prevRecentLessons);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
       writePersonalPreferences('recentLessons', recentLessons);
     }
