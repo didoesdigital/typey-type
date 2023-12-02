@@ -64,6 +64,9 @@ import {
 import {
   changeWriterInput
 } from './pages/lessons/components/UserSettings/updateGlobalUserSetting';
+import {
+  changeFullscreen
+} from './pages/lessons/components/UserSettings/updateFlashcardSetting';
 import AppRoutes from './AppRoutes';
 import applyQueryParamsToUserSettings from './pages/lessons/components/UserSettings/applyQueryParamsToUserSettings';
 
@@ -403,13 +406,6 @@ class App extends Component {
       action: 'Start from word 1',
       label: 'true'
     });
-  }
-
-  changeFullscreen(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    this.setState({fullscreen: value});
-    return value;
   }
 
   updateLessonsProgress(lessonpath, lesson, userSettings, prevlessonsProgress) {
@@ -1487,7 +1483,7 @@ class App extends Component {
               generateCustomLesson: generateCustomLesson.bind(this),
               updateMultipleMetWords: updateMultipleMetWords.bind(this),
               changeFlashcardCourseLevel: this.changeFlashcardCourseLevel.bind(this),
-              changeFullscreen: this.changeFullscreen.bind(this),
+              changeFullscreen: changeFullscreen.bind(this),
               changeShowScoresWhileTyping: changeShowScoresWhileTyping.bind(this),
               changeShowStrokesAs: changeShowStrokesAs.bind(this),
               changeShowStrokesAsList: changeShowStrokesAsList.bind(this),
