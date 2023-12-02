@@ -59,6 +59,9 @@ import {
   handleUpcomingWordsLayout,
 } from './pages/lessons/components/UserSettings/updateUserSetting';
 import {
+  changeShowStrokesInLesson,
+} from './pages/lessons/components/UserSettings/updateLessonSetting';
+import {
   changeWriterInput
 } from './pages/lessons/components/UserSettings/updateGlobalUserSetting';
 import AppRoutes from './AppRoutes';
@@ -400,39 +403,6 @@ class App extends Component {
       action: 'Start from word 1',
       label: 'true'
     });
-  }
-
-  changeShowStrokesInLesson(event) {
-    const target = event.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-
-    this.setState({showStrokesInLesson: value});
-    const yourTypedText = document.getElementById('your-typed-text');
-    if (yourTypedText) {
-      yourTypedText.focus();
-    }
-
-    if (this.props.location.pathname.includes('custom')) {
-      GoogleAnalytics.event({
-        category: 'Stroke hint',
-        action: 'Reveal',
-        label: 'CUSTOM_LESSON'
-      });
-    }
-    else {
-      let labelShowStrokesInLesson = 'true';
-      try {
-        labelShowStrokesInLesson = this.state.lesson.newPresentedMaterial.current.phrase + ": " + this.state.lesson.newPresentedMaterial.current.stroke;
-      } catch { }
-
-      GoogleAnalytics.event({
-        category: 'Stroke hint',
-        action: 'Reveal',
-        label: labelShowStrokesInLesson
-      });
-    }
-
-    return value;
   }
 
   changeFullscreen(event) {
@@ -1521,7 +1491,7 @@ class App extends Component {
               changeShowScoresWhileTyping: changeShowScoresWhileTyping.bind(this),
               changeShowStrokesAs: changeShowStrokesAs.bind(this),
               changeShowStrokesAsList: changeShowStrokesAsList.bind(this),
-              changeShowStrokesInLesson: this.changeShowStrokesInLesson.bind(this),
+              changeShowStrokesInLesson: changeShowStrokesInLesson.bind(this),
               changeShowStrokesOnMisstroke: changeShowStrokesOnMisstroke.bind(this),
               changeSortOrderUserSetting: changeSortOrderUserSetting.bind(this),
               changeSpacePlacementUserSetting: changeSpacePlacementUserSetting.bind(this),
