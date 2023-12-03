@@ -1,4 +1,5 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import GoogleAnalytics from "react-ga4";
 import { bisector, max, min } from "d3-array";
 import { format } from "d3-format";
 import { scaleLinear } from "d3-scale";
@@ -47,6 +48,14 @@ export default function FinishedSpeedChart({ data }) {
     marginBottom: 36,
     marginLeft: 8,
   });
+
+  useEffect(() => {
+    GoogleAnalytics.event({
+      category: "CompletedLessonWithChart",
+      action: "CompletedLessonWithChart",
+      label: "CompletedLessonWithChart",
+    });
+  }, []);
 
   const xAccessor = useCallback((d) => d.elapsedTime, []);
   const yAccessor = useCallback((d) => d.wordsPerMinute, []);
