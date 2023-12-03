@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import GoogleAnalytics from "react-ga4";
 import queryString from "query-string";
@@ -25,134 +25,142 @@ const isFlashcards = (pathname) =>
 const isOverview = (pathname) =>
   pathname.startsWith("/lessons/") && pathname.endsWith("/overview");
 
-class Lesson extends Component {
-  constructor(props) {
-    super(props);
-    this.mainHeading = React.createRef();
-    this.state = {
-      hideOtherSettings: false,
-    };
-  }
+const Lesson = (props) => {
+  // const mainHeading = useRef<HTMLHeadingElement>(null);
+  const mainHeading = useRef(null);
+  useEffect(() => {
+    if (mainHeading) {
+      // @ts-ignore
+      mainHeading.current?.focus();
+    }
+  }, []);
 
-  componentDidMount() {
+  const [hideOtherSettings, setHideOtherSettings] = useState(false);
+
+  useEffect(() => {
     // If cookies are disabled, attempting to access localStorage will cause an error.
     // The disabled cookie error will be handled in ErrorBoundary.
     // Wrapping this in a try/catch or removing the conditional would fail silently.
     // By checking here, we let people use the rest of the app but not lessons.
     if (window.localStorage) {
       if (
-        this.props.location.pathname.startsWith("/lessons/progress/") &&
-        !this.props.location.pathname.includes("/lessons/progress/seen/") &&
-        !this.props.location.pathname.includes("/lessons/progress/memorised/")
+        props.location.pathname.startsWith("/lessons/progress/") &&
+        !props.location.pathname.includes("/lessons/progress/seen/") &&
+        !props.location.pathname.includes("/lessons/progress/memorised/")
       ) {
         let loadedPersonalPreferences = loadPersonalPreferences();
         let newSeenOrMemorised = [false, true, true];
-        this.props.setUpProgressRevisionLesson(
+        props.setUpProgressRevisionLesson(
           loadedPersonalPreferences[0],
           loadedPersonalPreferences[1],
           newSeenOrMemorised
         );
       } else if (
-        this.props.location.pathname.startsWith("/lessons/progress/seen/")
+        props.location.pathname.startsWith("/lessons/progress/seen/")
       ) {
         let loadedPersonalPreferences = loadPersonalPreferences();
         let newSeenOrMemorised = [false, true, false];
-        this.props.setUpProgressRevisionLesson(
+        props.setUpProgressRevisionLesson(
           loadedPersonalPreferences[0],
           loadedPersonalPreferences[1],
           newSeenOrMemorised
         );
       } else if (
-        this.props.location.pathname.startsWith("/lessons/progress/memorised/")
+        props.location.pathname.startsWith("/lessons/progress/memorised/")
       ) {
         let loadedPersonalPreferences = loadPersonalPreferences();
         let newSeenOrMemorised = [false, false, true];
-        this.props.setUpProgressRevisionLesson(
+        props.setUpProgressRevisionLesson(
           loadedPersonalPreferences[0],
           loadedPersonalPreferences[1],
           newSeenOrMemorised
         );
       } else if (
-        this.props.location.pathname.startsWith("/lessons/custom") &&
-        !this.props.location.pathname.startsWith("/lessons/custom/setup")
+        props.location.pathname.startsWith("/lessons/custom") &&
+        !props.location.pathname.startsWith("/lessons/custom/setup")
       ) {
-        this.props.startCustomLesson();
-      } else if (isOverview(this.props.location.pathname)) {
+        props.startCustomLesson();
+      } else if (isOverview(props.location.pathname)) {
         // do nothing
-      } else if (isFlashcards(this.props.location.pathname)) {
+      } else if (isFlashcards(props.location.pathname)) {
         // do nothing
       } else if (
-        this.props.lesson.path !==
-          this.props.location.pathname + "lesson.txt" &&
-        this.props.location.pathname.startsWith("/lessons")
+        props.lesson.path !== props.location.pathname + "lesson.txt" &&
+        props.location.pathname.startsWith("/lessons")
       ) {
-        this.props.handleLesson(
-          process.env.PUBLIC_URL + this.props.location.pathname + "lesson.txt"
+        props.handleLesson(
+          process.env.PUBLIC_URL + props.location.pathname + "lesson.txt"
         );
       }
 
-      const parsedParams = queryString.parse(this.props.location.search);
+      const parsedParams = queryString.parse(props.location.search);
       let hasSettingsParams = false;
 
       if (
         Object.keys(parsedParams).some((param) => {
-          return this.props.userSettings.hasOwnProperty(param);
+          return props.userSettings.hasOwnProperty(param);
         })
       ) {
         hasSettingsParams = true;
       }
 
       if (hasSettingsParams) {
-        this.props.setupLesson();
+        props.setupLesson();
         hasSettingsParams = false;
       }
     }
 
-    if (this.mainHeading?.current) {
-      this.mainHeading?.current.focus();
+    if (mainHeading?.current) {
+      mainHeading?.current.focus();
     }
-  }
+  }, []);
 
-  componentDidUpdate(prevProps) {
+  const hasNonZeroTotalWordCount = props.totalWordCount === 0;
+  const hasNonEmptyCurrentPhrase = props.currentPhrase === "";
+
+  useEffect(() => {
     if (
-      this.props.location.pathname.startsWith("/lessons/custom") &&
-      !this.props.location.pathname.startsWith("/lessons/custom/setup") &&
-      this.props.lesson.title !== "Custom"
+      props.location.pathname.startsWith("/lessons/custom") &&
+      !props.location.pathname.startsWith("/lessons/custom/setup") &&
+      props.lesson.title !== "Custom"
     ) {
-      this.props.startCustomLesson();
-    } else if (isOverview(this.props.location.pathname)) {
+      props.startCustomLesson();
+    } else if (isOverview(props.location.pathname)) {
       // do nothing
-    } else if (isFlashcards(this.props.location.pathname)) {
+    } else if (isFlashcards(props.location.pathname)) {
       // do nothing
     } else if (
-      prevProps.match.url !== this.props.match.url &&
-      this.props.location.pathname.startsWith("/lessons")
+      // prevProps.match.url !== props.match.url &&
+      props.location.pathname.startsWith("/lessons")
     ) {
-      this.props.handleLesson(
-        process.env.PUBLIC_URL + this.props.location.pathname + "lesson.txt"
+      props.handleLesson(
+        process.env.PUBLIC_URL + props.location.pathname + "lesson.txt"
       );
     }
+  }, [props.location.pathname, props.lesson.title]);
+
+  useEffect(() => {
     if (
-      this.props.location.pathname.startsWith("/lessons/custom") &&
-      (prevProps.totalWordCount === 0 || prevProps.currentPhrase === "") &&
-      (this.props.totalWordCount > 0 || this.props.currentPhrase.length > 0)
+      props.location.pathname.startsWith("/lessons/custom") &&
+      // (prevProps.totalWordCount === 0 || prevProps.currentPhrase === "") &&
+      (props.totalWordCount > 0 || props.currentPhrase.length > 0)
     ) {
       const yourTypedText = document.getElementById("your-typed-text");
       if (yourTypedText) {
         yourTypedText.focus();
       }
     }
-  }
+  }, [props.match.url, hasNonEmptyCurrentPhrase, hasNonZeroTotalWordCount]);
 
-  componentWillUnmount() {
-    this.props.stopLesson();
-  }
+  useEffect(() => {
+    return () => {
+      props.stopLesson();
+    };
+  }, []);
 
-  toggleHideOtherSettings() {
-    let toggledHideOtherSettings = !this.state.hideOtherSettings;
-    this.setState({
-      hideOtherSettings: toggledHideOtherSettings,
-    });
+  function toggleHideOtherSettings() {
+    let toggledHideOtherSettings = !hideOtherSettings;
+    setHideOtherSettings(toggledHideOtherSettings);
 
     GoogleAnalytics.event({
       category: "UserSettings",
@@ -161,345 +169,299 @@ class Lesson extends Component {
     });
   }
 
-  stopAndCustomiseLesson() {
-    this.props.stopLesson();
-    this.props.customiseLesson();
+  function stopAndCustomiseLesson() {
+    props.stopLesson();
+    props.customiseLesson();
   }
 
-  render() {
-    if (this.props.lessonNotFound) {
-      return <LessonNotFound lessonIndex={this.props.lessonIndex} />;
-    }
+  if (props.lessonNotFound) {
+    return <LessonNotFound lessonIndex={props.lessonIndex} />;
+  }
 
-    const lessonSubTitle =
-      this.props.lesson?.subtitle?.length > 0
-        ? `: ${this.props.lessonSubTitle}`
-        : "";
+  const lessonSubTitle =
+    props.lesson?.subtitle?.length > 0 ? `: ${props.lessonSubTitle}` : "";
 
-    const createNewCustomLesson = isCustom(this.props.location.pathname) ? (
-      <Link
-        to="/lessons/custom/setup"
-        onClick={this.props.stopLesson}
-        className="link-button link-button-ghost table-cell mr1"
-        role="button"
-      >
-        Edit custom lesson
-      </Link>
-    ) : (
-      <Link
-        to="/lessons/custom/setup"
-        onClick={this.stopAndCustomiseLesson.bind(this)}
-        className="link-button link-button-ghost table-cell mr1"
-        role="button"
-      >
-        Customise lesson
-      </Link>
-    );
+  const createNewCustomLesson = isCustom(props.location.pathname) ? (
+    <Link
+      to="/lessons/custom/setup"
+      onClick={props.stopLesson}
+      className="link-button link-button-ghost table-cell mr1"
+      role="button"
+    >
+      Edit custom lesson
+    </Link>
+  ) : (
+    <Link
+      to="/lessons/custom/setup"
+      onClick={stopAndCustomiseLesson.bind(this)}
+      className="link-button link-button-ghost table-cell mr1"
+      role="button"
+    >
+      Customise lesson
+    </Link>
+  );
 
-    const metadata = getLessonMetadata(
-      this.props.lessonIndex,
-      this.props.lesson.path
-    );
-    const overviewLink = metadata?.overview ? (
-      <Link
-        to={this.props.location.pathname + "overview"}
-        className="link-button link-button-ghost table-cell"
-      >
-        Overview
-      </Link>
-    ) : undefined;
+  const metadata = getLessonMetadata(props.lessonIndex, props.lesson.path);
+  const overviewLink = metadata?.overview ? (
+    <Link
+      to={props.location.pathname + "overview"}
+      className="link-button link-button-ghost table-cell"
+    >
+      Overview
+    </Link>
+  ) : undefined;
 
-    let propsLesson = this.props.lesson;
+  let propsLesson = props.lesson;
+  if (
+    (Object.keys(propsLesson).length === 0 &&
+      propsLesson.constructor === Object) ||
+    !propsLesson
+  ) {
+    propsLesson = {
+      sourceMaterial: [{ phrase: "The", stroke: "-T" }],
+      presentedMaterial: [{ phrase: "The", stroke: "-T" }],
+      // possibly missing `newPresentedMaterial`?
+      settings: { ignoredChars: "" },
+      title: "Steno",
+      subtitle: "",
+      path: "",
+    };
+  }
+
+  if (props.lesson) {
     if (
-      (Object.keys(propsLesson).length === 0 &&
-        propsLesson.constructor === Object) ||
-      !propsLesson
+      isFinished(props.lesson, props.currentPhraseID) &&
+      !isOverview(props.location.pathname) &&
+      !isFlashcards(props.location.pathname)
     ) {
-      propsLesson = {
-        sourceMaterial: [{ phrase: "The", stroke: "-T" }],
-        presentedMaterial: [{ phrase: "The", stroke: "-T" }],
-        // possibly missing `newPresentedMaterial`?
-        settings: { ignoredChars: "" },
-        title: "Steno",
-        subtitle: "",
-        path: "",
-      };
-    }
-
-    console.log(this.props.lesson);
-    if (this.props.lesson) {
-      if (
-        isFinished(this.props.lesson, this.props.currentPhraseID) &&
-        !isOverview(this.props.location.pathname) &&
-        !isFlashcards(this.props.location.pathname)
-      ) {
-        return (
-          <DocumentTitle
-            title={"Typey Type | Lesson: " + this.props.lesson.title}
-          >
-            <main id="main">
-              <LessonSubheader
-                createNewCustomLesson={createNewCustomLesson}
-                handleStopLesson={this.props.handleStopLesson}
-                lessonSubTitle={lessonSubTitle}
-                lessonTitle={this.props.lessonTitle}
-                overviewLink={overviewLink}
-                path={this.props.lesson?.path}
-                restartLesson={this.props.restartLesson}
-                ref={this.mainHeading}
-              />
-              <Finished
-                actualText={this.props.actualText}
-                changeSortOrderUserSetting={
-                  this.props.changeSortOrderUserSetting
-                }
-                changeSpacePlacementUserSetting={
-                  this.props.changeSpacePlacementUserSetting
-                }
-                changeShowScoresWhileTyping={
-                  this.props.changeShowScoresWhileTyping
-                }
-                changeShowStrokesAs={this.props.changeShowStrokesAs}
-                changeShowStrokesAsList={this.props.changeShowStrokesAsList}
-                changeShowStrokesOnMisstroke={
-                  this.props.changeShowStrokesOnMisstroke
-                }
-                changeStenoLayout={this.props.changeStenoLayout}
-                changeUserSetting={this.props.changeUserSetting}
-                changeVoiceUserSetting={this.props.changeVoiceUserSetting}
-                chooseStudy={this.props.chooseStudy}
-                currentLessonStrokes={this.props.currentLessonStrokes}
-                disableUserSettings={this.props.disableUserSettings}
-                globalUserSettings={this.props.globalUserSettings}
-                handleBeatsPerMinute={this.props.handleBeatsPerMinute}
-                handleDiagramSize={this.props.handleDiagramSize}
-                handleLimitWordsChange={this.props.handleLimitWordsChange}
-                handleStartFromWordChange={this.props.handleStartFromWordChange}
-                handleRepetitionsChange={this.props.handleRepetitionsChange}
-                handleUpcomingWordsLayout={this.props.handleUpcomingWordsLayout}
-                hideOtherSettings={this.state.hideOtherSettings}
-                recommendationHistory={this.props.recommendationHistory}
-                metadata={metadata}
-                lesson={this.props.lesson}
-                lessonLength={propsLesson.presentedMaterial.length}
-                lessonTitle={this.props.lessonTitle}
-                metWords={this.props.metWords}
-                path={this.props.lesson?.path}
-                restartLesson={this.props.restartLesson}
-                reviseLesson={this.props.reviseLesson}
-                settings={this.props.lesson.settings}
-                startFromWordOne={this.props.startFromWordOne}
-                startTime={this.props.startTime}
-                timer={this.props.timer}
-                toggleHideOtherSettings={this.toggleHideOtherSettings.bind(
-                  this
-                )}
-                topSpeedPersonalBest={this.props.topSpeedPersonalBest}
-                revisionMaterial={this.props.revisionMaterial}
-                revisionMode={this.props.revisionMode}
-                updatePreset={this.props.updatePreset}
-                updateRecommendationHistory={
-                  this.props.updateRecommendationHistory
-                }
-                updateRevisionMaterial={this.props.updateRevisionMaterial}
-                updateTopSpeedPersonalBest={
-                  this.props.updateTopSpeedPersonalBest
-                }
-                totalNumberOfMatchedWords={this.props.totalNumberOfMatchedWords}
-                totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-                totalNumberOfLowExposuresSeen={
-                  this.props.totalNumberOfLowExposuresSeen
-                }
-                totalNumberOfRetainedWords={
-                  this.props.totalNumberOfRetainedWords
-                }
-                totalNumberOfMistypedWords={
-                  this.props.totalNumberOfMistypedWords
-                }
-                totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-                totalWordCount={propsLesson.presentedMaterial.length}
-                userSettings={this.props.userSettings}
-              />
-            </main>
-          </DocumentTitle>
-        );
-      } else {
-        return (
-          <Switch>
-            <Route
-              path={`/lessons/:category/:subcategory?/:lessonPath/overview`}
-              render={(props) => (
-                <div>
-                  <ErrorBoundary>
-                    <DocumentTitle title={"Typey Type | Lesson overview"}>
-                      <LessonOverview
-                        lessonMetadata={metadata}
-                        lessonPath={this.props.location.pathname.replace(
-                          "overview",
-                          ""
-                        )}
-                        lessonTxtPath={this.props.location.pathname.replace(
-                          "overview",
-                          "lesson.txt"
-                        )}
-                        lessonTitle={this.props.lesson.title}
-                        {...this.props}
-                        {...props}
-                      />
-                    </DocumentTitle>
-                  </ErrorBoundary>
-                </div>
-              )}
+      return (
+        <DocumentTitle title={"Typey Type | Lesson: " + props.lesson.title}>
+          <main id="main">
+            <LessonSubheader
+              createNewCustomLesson={createNewCustomLesson}
+              handleStopLesson={props.handleStopLesson}
+              lessonSubTitle={lessonSubTitle}
+              lessonTitle={props.lessonTitle}
+              overviewLink={overviewLink}
+              path={props.lesson?.path}
+              restartLesson={props.restartLesson}
+              ref={mainHeading}
             />
-            <Route
-              path={`/lessons/:category/:subcategory?/:lessonPath/flashcards`}
-              render={() => (
-                <div>
-                  <DocumentTitle title={"Typey Type | Flashcards"}>
-                    <Flashcards
-                      fetchAndSetupGlobalDict={
-                        this.props.fetchAndSetupGlobalDict
-                      }
-                      flashcardsMetWords={this.props.flashcardsMetWords}
-                      flashcardsProgress={this.props.flashcardsProgress}
-                      globalLookupDictionary={this.props.globalLookupDictionary}
-                      globalLookupDictionaryLoaded={
-                        this.props.globalLookupDictionaryLoaded
-                      }
-                      globalUserSettings={this.props.globalUserSettings}
-                      personalDictionaries={this.props.personalDictionaries}
-                      updateFlashcardsMetWords={this.props.updateFlashcardsMetWords.bind(
-                        this
-                      )}
-                      updateFlashcardsProgress={this.props.updateFlashcardsProgress.bind(
-                        this
-                      )}
-                      updateGlobalLookupDictionary={
-                        this.props.updateGlobalLookupDictionary
-                      }
-                      updatePersonalDictionaries={
-                        this.props.updatePersonalDictionaries
-                      }
-                      userSettings={this.props.userSettings}
-                      fullscreen={this.props.fullscreen}
-                      changeFullscreen={this.props.changeFullscreen.bind(this)}
-                      lessonpath={
-                        process.env.PUBLIC_URL +
-                        this.props.location.pathname.replace(/flashcards/, "") +
-                        "lesson.txt"
-                      }
-                      locationpathname={this.props.location.pathname}
-                    />
-                  </DocumentTitle>
-                </div>
-              )}
+            <Finished
+              actualText={props.actualText}
+              changeSortOrderUserSetting={props.changeSortOrderUserSetting}
+              changeSpacePlacementUserSetting={
+                props.changeSpacePlacementUserSetting
+              }
+              changeShowScoresWhileTyping={props.changeShowScoresWhileTyping}
+              changeShowStrokesAs={props.changeShowStrokesAs}
+              changeShowStrokesAsList={props.changeShowStrokesAsList}
+              changeShowStrokesOnMisstroke={props.changeShowStrokesOnMisstroke}
+              changeStenoLayout={props.changeStenoLayout}
+              changeUserSetting={props.changeUserSetting}
+              changeVoiceUserSetting={props.changeVoiceUserSetting}
+              chooseStudy={props.chooseStudy}
+              currentLessonStrokes={props.currentLessonStrokes}
+              disableUserSettings={props.disableUserSettings}
+              globalUserSettings={props.globalUserSettings}
+              handleBeatsPerMinute={props.handleBeatsPerMinute}
+              handleDiagramSize={props.handleDiagramSize}
+              handleLimitWordsChange={props.handleLimitWordsChange}
+              handleStartFromWordChange={props.handleStartFromWordChange}
+              handleRepetitionsChange={props.handleRepetitionsChange}
+              handleUpcomingWordsLayout={props.handleUpcomingWordsLayout}
+              hideOtherSettings={hideOtherSettings}
+              recommendationHistory={props.recommendationHistory}
+              metadata={metadata}
+              lesson={props.lesson}
+              lessonLength={propsLesson.presentedMaterial.length}
+              lessonTitle={props.lessonTitle}
+              metWords={props.metWords}
+              path={props.lesson?.path}
+              restartLesson={props.restartLesson}
+              reviseLesson={props.reviseLesson}
+              settings={props.lesson.settings}
+              startFromWordOne={props.startFromWordOne}
+              startTime={props.startTime}
+              timer={props.timer}
+              toggleHideOtherSettings={toggleHideOtherSettings.bind(this)}
+              topSpeedPersonalBest={props.topSpeedPersonalBest}
+              revisionMaterial={props.revisionMaterial}
+              revisionMode={props.revisionMode}
+              updatePreset={props.updatePreset}
+              updateRecommendationHistory={props.updateRecommendationHistory}
+              updateRevisionMaterial={props.updateRevisionMaterial}
+              updateTopSpeedPersonalBest={props.updateTopSpeedPersonalBest}
+              totalNumberOfMatchedWords={props.totalNumberOfMatchedWords}
+              totalNumberOfNewWordsMet={props.totalNumberOfNewWordsMet}
+              totalNumberOfLowExposuresSeen={
+                props.totalNumberOfLowExposuresSeen
+              }
+              totalNumberOfRetainedWords={props.totalNumberOfRetainedWords}
+              totalNumberOfMistypedWords={props.totalNumberOfMistypedWords}
+              totalNumberOfHintedWords={props.totalNumberOfHintedWords}
+              totalWordCount={propsLesson.presentedMaterial.length}
+              userSettings={props.userSettings}
             />
-            <Route
-              exact={true}
-              path={`${this.props.match.url}`}
-              render={() => (
-                <MainLessonView
-                  createNewCustomLesson={createNewCustomLesson}
-                  lessonSubTitle={lessonSubTitle}
-                  overviewLink={overviewLink}
-                  propsLesson={propsLesson}
-                  actualText={this.props.actualText}
-                  changeShowScoresWhileTyping={
-                    this.props.changeShowScoresWhileTyping
-                  }
-                  changeShowStrokesAs={this.props.changeShowStrokesAs}
-                  changeShowStrokesAsList={this.props.changeShowStrokesAsList}
-                  changeShowStrokesInLesson={
-                    this.props.changeShowStrokesInLesson
-                  }
-                  changeShowStrokesOnMisstroke={
-                    this.props.changeShowStrokesOnMisstroke
-                  }
-                  changeSortOrderUserSetting={
-                    this.props.changeSortOrderUserSetting
-                  }
-                  changeSpacePlacementUserSetting={
-                    this.props.changeSpacePlacementUserSetting
-                  }
-                  changeStenoLayout={this.props.changeStenoLayout}
-                  changeUserSetting={this.props.changeUserSetting}
-                  changeVoiceUserSetting={this.props.changeVoiceUserSetting}
-                  chooseStudy={this.props.chooseStudy}
-                  completedPhrases={this.props.completedPhrases}
-                  currentLessonStrokes={this.props.currentLessonStrokes}
-                  currentPhrase={this.props.currentPhrase}
-                  currentPhraseID={this.props.currentPhraseID}
-                  currentStroke={this.props.currentStroke}
-                  disableUserSettings={this.props.disableUserSettings}
-                  globalLookupDictionary={this.props.globalLookupDictionary}
-                  globalLookupDictionaryLoaded={
-                    this.props.globalLookupDictionaryLoaded
-                  }
-                  handleBeatsPerMinute={this.props.handleBeatsPerMinute}
-                  handleDiagramSize={this.props.handleDiagramSize}
-                  handleLimitWordsChange={this.props.handleLimitWordsChange}
-                  handleRepetitionsChange={this.props.handleRepetitionsChange}
-                  handleStartFromWordChange={
-                    this.props.handleStartFromWordChange
-                  }
-                  handleStopLesson={this.props.handleStopLesson}
-                  handleUpcomingWordsLayout={
-                    this.props.handleUpcomingWordsLayout
-                  }
-                  lesson={this.props.lesson}
-                  lessonLength={this.props.lessonLength}
-                  lessonTitle={this.props.lessonTitle}
-                  previousCompletedPhraseAsTyped={
-                    this.props.previousCompletedPhraseAsTyped
-                  }
-                  recentLessonHistory={this.props.recentLessonHistory}
-                  repetitionsRemaining={this.props.repetitionsRemaining}
-                  restartLesson={this.props.restartLesson}
-                  revisionMode={this.props.revisionMode}
-                  sayCurrentPhraseAgain={this.props.sayCurrentPhraseAgain}
-                  settings={this.props.settings}
-                  showStrokesInLesson={this.props.showStrokesInLesson}
-                  targetStrokeCount={this.props.targetStrokeCount}
-                  timer={this.props.timer}
-                  totalNumberOfHintedWords={this.props.totalNumberOfHintedWords}
-                  totalNumberOfLowExposuresSeen={
-                    this.props.totalNumberOfLowExposuresSeen
-                  }
-                  totalNumberOfMatchedWords={
-                    this.props.totalNumberOfMatchedWords
-                  }
-                  totalNumberOfMistypedWords={
-                    this.props.totalNumberOfMistypedWords
-                  }
-                  totalNumberOfNewWordsMet={this.props.totalNumberOfNewWordsMet}
-                  totalNumberOfRetainedWords={
-                    this.props.totalNumberOfRetainedWords
-                  }
-                  totalWordCount={this.props.totalWordCount}
-                  upcomingPhrases={this.props.upcomingPhrases}
-                  updatePreset={this.props.updatePreset}
-                  updateMarkup={this.props.updateMarkup.bind(this)}
-                  userSettings={this.props.userSettings}
-                  hideOtherSettings={this.state.hideOtherSettings}
-                  toggleHideOtherSettings={this.toggleHideOtherSettings.bind(
-                    this
-                  )}
-                />
-              )}
-            />
-          </Switch>
-        );
-      }
+          </main>
+        </DocumentTitle>
+      );
     } else {
       return (
-        <div>
-          <h2 ref={this.mainHeading} tabIndex={-1}>
-            That lesson is missing.
-          </h2>
-        </div>
+        <Switch>
+          <Route
+            path={`/lessons/:category/:subcategory?/:lessonPath/overview`}
+            render={(routeProps) => (
+              <div>
+                <ErrorBoundary>
+                  <DocumentTitle title={"Typey Type | Lesson overview"}>
+                    <LessonOverview
+                      lessonMetadata={metadata}
+                      lessonPath={props.location.pathname.replace(
+                        "overview",
+                        ""
+                      )}
+                      lessonTxtPath={props.location.pathname.replace(
+                        "overview",
+                        "lesson.txt"
+                      )}
+                      lessonTitle={props.lesson.title}
+                      {...routeProps}
+                      {...props}
+                    />
+                  </DocumentTitle>
+                </ErrorBoundary>
+              </div>
+            )}
+          />
+          <Route
+            path={`/lessons/:category/:subcategory?/:lessonPath/flashcards`}
+            render={() => (
+              <div>
+                <DocumentTitle title={"Typey Type | Flashcards"}>
+                  <Flashcards
+                    fetchAndSetupGlobalDict={props.fetchAndSetupGlobalDict}
+                    flashcardsMetWords={props.flashcardsMetWords}
+                    flashcardsProgress={props.flashcardsProgress}
+                    globalLookupDictionary={props.globalLookupDictionary}
+                    globalLookupDictionaryLoaded={
+                      props.globalLookupDictionaryLoaded
+                    }
+                    globalUserSettings={props.globalUserSettings}
+                    personalDictionaries={props.personalDictionaries}
+                    updateFlashcardsMetWords={props.updateFlashcardsMetWords.bind(
+                      this
+                    )}
+                    updateFlashcardsProgress={props.updateFlashcardsProgress.bind(
+                      this
+                    )}
+                    updateGlobalLookupDictionary={
+                      props.updateGlobalLookupDictionary
+                    }
+                    updatePersonalDictionaries={
+                      props.updatePersonalDictionaries
+                    }
+                    userSettings={props.userSettings}
+                    fullscreen={props.fullscreen}
+                    changeFullscreen={props.changeFullscreen.bind(this)}
+                    lessonpath={
+                      process.env.PUBLIC_URL +
+                      props.location.pathname.replace(/flashcards/, "") +
+                      "lesson.txt"
+                    }
+                    locationpathname={props.location.pathname}
+                  />
+                </DocumentTitle>
+              </div>
+            )}
+          />
+          <Route
+            exact={true}
+            path={`${props.match.url}`}
+            render={() => (
+              <MainLessonView
+                createNewCustomLesson={createNewCustomLesson}
+                lessonSubTitle={lessonSubTitle}
+                overviewLink={overviewLink}
+                propsLesson={propsLesson}
+                actualText={props.actualText}
+                changeShowScoresWhileTyping={props.changeShowScoresWhileTyping}
+                changeShowStrokesAs={props.changeShowStrokesAs}
+                changeShowStrokesAsList={props.changeShowStrokesAsList}
+                changeShowStrokesInLesson={props.changeShowStrokesInLesson}
+                changeShowStrokesOnMisstroke={
+                  props.changeShowStrokesOnMisstroke
+                }
+                changeSortOrderUserSetting={props.changeSortOrderUserSetting}
+                changeSpacePlacementUserSetting={
+                  props.changeSpacePlacementUserSetting
+                }
+                changeStenoLayout={props.changeStenoLayout}
+                changeUserSetting={props.changeUserSetting}
+                changeVoiceUserSetting={props.changeVoiceUserSetting}
+                chooseStudy={props.chooseStudy}
+                completedPhrases={props.completedPhrases}
+                currentLessonStrokes={props.currentLessonStrokes}
+                currentPhrase={props.currentPhrase}
+                currentPhraseID={props.currentPhraseID}
+                currentStroke={props.currentStroke}
+                disableUserSettings={props.disableUserSettings}
+                globalLookupDictionary={props.globalLookupDictionary}
+                globalLookupDictionaryLoaded={
+                  props.globalLookupDictionaryLoaded
+                }
+                handleBeatsPerMinute={props.handleBeatsPerMinute}
+                handleDiagramSize={props.handleDiagramSize}
+                handleLimitWordsChange={props.handleLimitWordsChange}
+                handleRepetitionsChange={props.handleRepetitionsChange}
+                handleStartFromWordChange={props.handleStartFromWordChange}
+                handleStopLesson={props.handleStopLesson}
+                handleUpcomingWordsLayout={props.handleUpcomingWordsLayout}
+                lesson={props.lesson}
+                lessonLength={props.lessonLength}
+                lessonTitle={props.lessonTitle}
+                previousCompletedPhraseAsTyped={
+                  props.previousCompletedPhraseAsTyped
+                }
+                recentLessonHistory={props.recentLessonHistory}
+                repetitionsRemaining={props.repetitionsRemaining}
+                restartLesson={props.restartLesson}
+                revisionMode={props.revisionMode}
+                sayCurrentPhraseAgain={props.sayCurrentPhraseAgain}
+                settings={props.settings}
+                showStrokesInLesson={props.showStrokesInLesson}
+                targetStrokeCount={props.targetStrokeCount}
+                timer={props.timer}
+                totalNumberOfHintedWords={props.totalNumberOfHintedWords}
+                totalNumberOfLowExposuresSeen={
+                  props.totalNumberOfLowExposuresSeen
+                }
+                totalNumberOfMatchedWords={props.totalNumberOfMatchedWords}
+                totalNumberOfMistypedWords={props.totalNumberOfMistypedWords}
+                totalNumberOfNewWordsMet={props.totalNumberOfNewWordsMet}
+                totalNumberOfRetainedWords={props.totalNumberOfRetainedWords}
+                totalWordCount={props.totalWordCount}
+                upcomingPhrases={props.upcomingPhrases}
+                updatePreset={props.updatePreset}
+                updateMarkup={props.updateMarkup.bind(this)}
+                userSettings={props.userSettings}
+                hideOtherSettings={hideOtherSettings}
+                toggleHideOtherSettings={toggleHideOtherSettings.bind(this)}
+              />
+            )}
+          />
+        </Switch>
       );
     }
+  } else {
+    return (
+      <div>
+        <h2 ref={mainHeading} tabIndex={-1}>
+          That lesson is missing.
+        </h2>
+      </div>
+    );
   }
-}
+};
 
 export default Lesson;
