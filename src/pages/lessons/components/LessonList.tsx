@@ -131,13 +131,13 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
     if (searchTerm && searchTerm.toString()) {
       GoogleAnalytics.event({
         category: "Search filter lessons",
-        action: "Change",
+        action: "LessonIndexSearchFilterChange",
         label: searchTerm.toString(),
       });
     } else {
       GoogleAnalytics.event({
         category: "Search filter lessons",
-        action: "Change",
+        action: "LessonIndexSearchFilterEmpty",
         label: "EMPTY_SEARCH_TEXT",
       });
     }
