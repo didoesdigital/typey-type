@@ -9,8 +9,8 @@ import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 
 type LessonsRoutingProps = {
-  customLesson: any;
   customiseLesson: () => void;
+  customLesson: any;
   generateCustomLesson: any;
   handleLesson: any;
   lesson: any;
@@ -32,24 +32,90 @@ const Lessons = ({
   customLessonMaterial,
   customLessonMaterialValidationMessages,
   customLessonMaterialValidationState,
-  customiseLesson,
-  fetchAndSetupGlobalDict,
   generateCustomLesson,
+
+  actualText,
+  changeFullscreen,
+  changeShowScoresWhileTyping,
+  changeShowStrokesAs,
+  changeShowStrokesAsList,
+  changeShowStrokesInLesson,
+  changeShowStrokesOnMisstroke,
+  changeSortOrderUserSetting,
+  changeSpacePlacementUserSetting,
+  changeStenoLayout,
+  changeUserSetting,
+  changeVoiceUserSetting,
+  chooseStudy,
+  completedPhrases,
+  currentLessonStrokes,
+  currentPhrase,
+  currentPhraseID,
+  currentStroke,
+  customiseLesson,
+  disableUserSettings,
+  fetchAndSetupGlobalDict,
+  flashcardsMetWords,
+  flashcardsProgress,
+  fullscreen,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
+  globalUserSettings,
+  handleBeatsPerMinute,
+  handleDiagramSize,
   handleLesson,
+  handleLimitWordsChange,
+  handleRepetitionsChange,
+  handleStartFromWordChange,
+  handleStopLesson,
+  handleUpcomingWordsLayout,
   lesson,
   lessonIndex,
+  lessonLength,
+  lessonNotFound,
+  lessonSubTitle,
+  lessonTitle,
   match,
+  metWords,
   personalDictionaries,
+  previousCompletedPhraseAsTyped,
   recentLessonHistory,
+  recommendationHistory,
+  repetitionsRemaining,
+  restartLesson,
+  reviseLesson,
+  revisionMaterial,
+  revisionMode,
+  sayCurrentPhraseAgain,
+  setUpProgressRevisionLesson,
+  settings,
+  setupLesson,
+  showStrokesInLesson,
+  startCustomLesson,
+  startFromWordOne,
+  startTime,
   stopLesson,
+  targetStrokeCount,
+  timer,
+  topSpeedPersonalBest,
+  totalNumberOfHintedWords,
+  totalNumberOfLowExposuresSeen,
+  totalNumberOfMatchedWords,
+  totalNumberOfMistypedWords,
+  totalNumberOfNewWordsMet,
+  totalNumberOfRetainedWords,
+  totalWordCount,
+  upcomingPhrases,
   updateFlashcardsMetWords,
   updateFlashcardsProgress,
+  updateGlobalLookupDictionary,
+  updateMarkup,
+  updatePersonalDictionaries,
   updatePreset,
-  changeFullscreen,
-  flashcardsMetWords,
-  ...lessonProps
+  updateRecommendationHistory,
+  updateRevisionMaterial,
+  updateTopSpeedPersonalBest,
+  userSettings,
 }: LessonsRoutingProps) => {
   return (
     <Switch>
@@ -57,21 +123,87 @@ const Lessons = ({
         path={`${match.url}/:category/:subcategory/:lessonPath/flashcards`}
         render={(props) => (
           <Lesson
+            actualText={actualText}
             changeFullscreen={changeFullscreen}
-            customLesson={customLesson}
+            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
+            changeShowStrokesInLesson={changeShowStrokesInLesson}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeStenoLayout={changeStenoLayout}
+            changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
+            chooseStudy={chooseStudy}
+            completedPhrases={completedPhrases}
+            currentLessonStrokes={currentLessonStrokes}
+            currentPhrase={currentPhrase}
+            currentPhraseID={currentPhraseID}
+            currentStroke={currentStroke}
+            customiseLesson={customiseLesson}
+            disableUserSettings={disableUserSettings}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
+            flashcardsProgress={flashcardsProgress}
+            fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            globalUserSettings={globalUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleDiagramSize={handleDiagramSize}
             handleLesson={handleLesson}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleStopLesson={handleStopLesson}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            lessonLength={lessonLength}
+            lessonNotFound={lessonNotFound}
+            lessonSubTitle={lessonSubTitle}
+            lessonTitle={lessonTitle}
+            metWords={metWords}
             personalDictionaries={personalDictionaries}
+            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
+            recommendationHistory={recommendationHistory}
+            repetitionsRemaining={repetitionsRemaining}
+            restartLesson={restartLesson}
+            reviseLesson={reviseLesson}
+            revisionMaterial={revisionMaterial}
+            revisionMode={revisionMode}
+            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
+            settings={settings}
+            setupLesson={setupLesson}
+            showStrokesInLesson={showStrokesInLesson}
+            startCustomLesson={startCustomLesson}
+            startFromWordOne={startFromWordOne}
+            startTime={startTime}
             stopLesson={stopLesson}
+            targetStrokeCount={targetStrokeCount}
+            timer={timer}
+            topSpeedPersonalBest={topSpeedPersonalBest}
+            totalNumberOfHintedWords={totalNumberOfHintedWords}
+            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+            totalWordCount={totalWordCount}
+            upcomingPhrases={upcomingPhrases}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
-            {...lessonProps}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updateMarkup={updateMarkup}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePreset={updatePreset}
+            updateRecommendationHistory={updateRecommendationHistory}
+            updateRevisionMaterial={updateRevisionMaterial}
+            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
+            userSettings={userSettings}
             {...props}
           />
         )}
@@ -80,23 +212,87 @@ const Lessons = ({
         path={`${match.url}/fundamentals/:lessonPath/flashcards`}
         render={(props) => (
           <Lesson
+            actualText={actualText}
             changeFullscreen={changeFullscreen}
-            customLesson={customLesson}
+            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
+            changeShowStrokesInLesson={changeShowStrokesInLesson}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeStenoLayout={changeStenoLayout}
+            changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
+            chooseStudy={chooseStudy}
+            completedPhrases={completedPhrases}
+            currentLessonStrokes={currentLessonStrokes}
+            currentPhrase={currentPhrase}
+            currentPhraseID={currentPhraseID}
+            currentStroke={currentStroke}
+            customiseLesson={customiseLesson}
+            disableUserSettings={disableUserSettings}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
-            fullscreen={lessonProps.fullscreen}
+            flashcardsProgress={flashcardsProgress}
+            fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={lessonProps.globalUserSettings}
+            globalUserSettings={globalUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleDiagramSize={handleDiagramSize}
             handleLesson={handleLesson}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleStopLesson={handleStopLesson}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            lessonLength={lessonLength}
+            lessonNotFound={lessonNotFound}
+            lessonSubTitle={lessonSubTitle}
+            lessonTitle={lessonTitle}
+            metWords={metWords}
             personalDictionaries={personalDictionaries}
+            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
+            recommendationHistory={recommendationHistory}
+            repetitionsRemaining={repetitionsRemaining}
+            restartLesson={restartLesson}
+            reviseLesson={reviseLesson}
+            revisionMaterial={revisionMaterial}
+            revisionMode={revisionMode}
+            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
+            settings={settings}
+            setupLesson={setupLesson}
+            showStrokesInLesson={showStrokesInLesson}
+            startCustomLesson={startCustomLesson}
+            startFromWordOne={startFromWordOne}
+            startTime={startTime}
             stopLesson={stopLesson}
+            targetStrokeCount={targetStrokeCount}
+            timer={timer}
+            topSpeedPersonalBest={topSpeedPersonalBest}
+            totalNumberOfHintedWords={totalNumberOfHintedWords}
+            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+            totalWordCount={totalWordCount}
+            upcomingPhrases={upcomingPhrases}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
-            userSettings={lessonProps.userSettings}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updateMarkup={updateMarkup}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePreset={updatePreset}
+            updateRecommendationHistory={updateRecommendationHistory}
+            updateRevisionMaterial={updateRevisionMaterial}
+            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
+            userSettings={userSettings}
             {...props}
           />
         )}
@@ -105,23 +301,87 @@ const Lessons = ({
         path={`${match.url}/drills/:lessonPath/flashcards`}
         render={(props) => (
           <Lesson
+            actualText={actualText}
             changeFullscreen={changeFullscreen}
-            customLesson={customLesson}
+            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
+            changeShowStrokesInLesson={changeShowStrokesInLesson}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeStenoLayout={changeStenoLayout}
+            changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
+            chooseStudy={chooseStudy}
+            completedPhrases={completedPhrases}
+            currentLessonStrokes={currentLessonStrokes}
+            currentPhrase={currentPhrase}
+            currentPhraseID={currentPhraseID}
+            currentStroke={currentStroke}
+            customiseLesson={customiseLesson}
+            disableUserSettings={disableUserSettings}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
-            fullscreen={lessonProps.fullscreen}
+            flashcardsProgress={flashcardsProgress}
+            fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={lessonProps.globalUserSettings}
+            globalUserSettings={globalUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleDiagramSize={handleDiagramSize}
             handleLesson={handleLesson}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleStopLesson={handleStopLesson}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            lessonLength={lessonLength}
+            lessonNotFound={lessonNotFound}
+            lessonSubTitle={lessonSubTitle}
+            lessonTitle={lessonTitle}
+            metWords={metWords}
             personalDictionaries={personalDictionaries}
+            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
+            recommendationHistory={recommendationHistory}
+            repetitionsRemaining={repetitionsRemaining}
+            restartLesson={restartLesson}
+            reviseLesson={reviseLesson}
+            revisionMaterial={revisionMaterial}
+            revisionMode={revisionMode}
+            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
+            settings={settings}
+            setupLesson={setupLesson}
+            showStrokesInLesson={showStrokesInLesson}
+            startCustomLesson={startCustomLesson}
+            startFromWordOne={startFromWordOne}
+            startTime={startTime}
             stopLesson={stopLesson}
+            targetStrokeCount={targetStrokeCount}
+            timer={timer}
+            topSpeedPersonalBest={topSpeedPersonalBest}
+            totalNumberOfHintedWords={totalNumberOfHintedWords}
+            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+            totalWordCount={totalWordCount}
+            upcomingPhrases={upcomingPhrases}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
-            userSettings={lessonProps.userSettings}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updateMarkup={updateMarkup}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePreset={updatePreset}
+            updateRecommendationHistory={updateRecommendationHistory}
+            updateRevisionMaterial={updateRevisionMaterial}
+            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
+            userSettings={userSettings}
             {...props}
           />
         )}
@@ -130,20 +390,87 @@ const Lessons = ({
         path={`${match.url}/:category/:subcategory/:lessonPath`}
         render={(props) => (
           <Lesson
-            customLesson={customLesson}
+            actualText={actualText}
+            changeFullscreen={changeFullscreen}
+            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
+            changeShowStrokesInLesson={changeShowStrokesInLesson}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeStenoLayout={changeStenoLayout}
+            changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
+            chooseStudy={chooseStudy}
+            completedPhrases={completedPhrases}
+            currentLessonStrokes={currentLessonStrokes}
+            currentPhrase={currentPhrase}
+            currentPhraseID={currentPhraseID}
+            currentStroke={currentStroke}
             customiseLesson={customiseLesson}
+            disableUserSettings={disableUserSettings}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            flashcardsMetWords={flashcardsMetWords}
+            flashcardsProgress={flashcardsProgress}
+            fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            personalDictionaries={personalDictionaries}
+            globalUserSettings={globalUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleDiagramSize={handleDiagramSize}
             handleLesson={handleLesson}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleStopLesson={handleStopLesson}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            lessonLength={lessonLength}
+            lessonNotFound={lessonNotFound}
+            lessonSubTitle={lessonSubTitle}
+            lessonTitle={lessonTitle}
+            metWords={metWords}
+            personalDictionaries={personalDictionaries}
+            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
+            recommendationHistory={recommendationHistory}
+            repetitionsRemaining={repetitionsRemaining}
+            restartLesson={restartLesson}
+            reviseLesson={reviseLesson}
+            revisionMaterial={revisionMaterial}
+            revisionMode={revisionMode}
+            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
+            settings={settings}
+            setupLesson={setupLesson}
+            showStrokesInLesson={showStrokesInLesson}
+            startCustomLesson={startCustomLesson}
+            startFromWordOne={startFromWordOne}
+            startTime={startTime}
             stopLesson={stopLesson}
-            updatePreset={updatePreset}
+            targetStrokeCount={targetStrokeCount}
+            timer={timer}
+            topSpeedPersonalBest={topSpeedPersonalBest}
+            totalNumberOfHintedWords={totalNumberOfHintedWords}
+            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+            totalWordCount={totalWordCount}
+            upcomingPhrases={upcomingPhrases}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
-            {...lessonProps}
+            updateFlashcardsProgress={updateFlashcardsProgress}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updateMarkup={updateMarkup}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePreset={updatePreset}
+            updateRecommendationHistory={updateRecommendationHistory}
+            updateRevisionMaterial={updateRevisionMaterial}
+            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
+            userSettings={userSettings}
             {...props}
           />
         )}
@@ -152,20 +479,87 @@ const Lessons = ({
         path={`${match.url}/fundamentals/:lessonPath`}
         render={(props) => (
           <Lesson
-            customLesson={customLesson}
+            actualText={actualText}
+            changeFullscreen={changeFullscreen}
+            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
+            changeShowStrokesInLesson={changeShowStrokesInLesson}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeStenoLayout={changeStenoLayout}
+            changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
+            chooseStudy={chooseStudy}
+            completedPhrases={completedPhrases}
+            currentLessonStrokes={currentLessonStrokes}
+            currentPhrase={currentPhrase}
+            currentPhraseID={currentPhraseID}
+            currentStroke={currentStroke}
             customiseLesson={customiseLesson}
+            disableUserSettings={disableUserSettings}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            flashcardsMetWords={flashcardsMetWords}
+            flashcardsProgress={flashcardsProgress}
+            fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            personalDictionaries={personalDictionaries}
+            globalUserSettings={globalUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleDiagramSize={handleDiagramSize}
             handleLesson={handleLesson}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleStopLesson={handleStopLesson}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            lessonLength={lessonLength}
+            lessonNotFound={lessonNotFound}
+            lessonSubTitle={lessonSubTitle}
+            lessonTitle={lessonTitle}
+            metWords={metWords}
+            personalDictionaries={personalDictionaries}
+            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
+            recommendationHistory={recommendationHistory}
+            repetitionsRemaining={repetitionsRemaining}
+            restartLesson={restartLesson}
+            reviseLesson={reviseLesson}
+            revisionMaterial={revisionMaterial}
+            revisionMode={revisionMode}
+            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
+            settings={settings}
+            setupLesson={setupLesson}
+            showStrokesInLesson={showStrokesInLesson}
+            startCustomLesson={startCustomLesson}
+            startFromWordOne={startFromWordOne}
+            startTime={startTime}
             stopLesson={stopLesson}
-            updatePreset={updatePreset}
+            targetStrokeCount={targetStrokeCount}
+            timer={timer}
+            topSpeedPersonalBest={topSpeedPersonalBest}
+            totalNumberOfHintedWords={totalNumberOfHintedWords}
+            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+            totalWordCount={totalWordCount}
+            upcomingPhrases={upcomingPhrases}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
-            {...lessonProps}
+            updateFlashcardsProgress={updateFlashcardsProgress}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updateMarkup={updateMarkup}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePreset={updatePreset}
+            updateRecommendationHistory={updateRecommendationHistory}
+            updateRevisionMaterial={updateRevisionMaterial}
+            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
+            userSettings={userSettings}
             {...props}
           />
         )}
@@ -174,20 +568,87 @@ const Lessons = ({
         path={`${match.url}/drills/:lessonPath`}
         render={(props) => (
           <Lesson
-            customLesson={customLesson}
+            actualText={actualText}
+            changeFullscreen={changeFullscreen}
+            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
+            changeShowStrokesInLesson={changeShowStrokesInLesson}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeStenoLayout={changeStenoLayout}
+            changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
+            chooseStudy={chooseStudy}
+            completedPhrases={completedPhrases}
+            currentLessonStrokes={currentLessonStrokes}
+            currentPhrase={currentPhrase}
+            currentPhraseID={currentPhraseID}
+            currentStroke={currentStroke}
             customiseLesson={customiseLesson}
+            disableUserSettings={disableUserSettings}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            flashcardsMetWords={flashcardsMetWords}
+            flashcardsProgress={flashcardsProgress}
+            fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            personalDictionaries={personalDictionaries}
+            globalUserSettings={globalUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleDiagramSize={handleDiagramSize}
             handleLesson={handleLesson}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleStopLesson={handleStopLesson}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            lessonLength={lessonLength}
+            lessonNotFound={lessonNotFound}
+            lessonSubTitle={lessonSubTitle}
+            lessonTitle={lessonTitle}
+            metWords={metWords}
+            personalDictionaries={personalDictionaries}
+            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
+            recommendationHistory={recommendationHistory}
+            repetitionsRemaining={repetitionsRemaining}
+            restartLesson={restartLesson}
+            reviseLesson={reviseLesson}
+            revisionMaterial={revisionMaterial}
+            revisionMode={revisionMode}
+            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
+            settings={settings}
+            setupLesson={setupLesson}
+            showStrokesInLesson={showStrokesInLesson}
+            startCustomLesson={startCustomLesson}
+            startFromWordOne={startFromWordOne}
+            startTime={startTime}
             stopLesson={stopLesson}
-            updatePreset={updatePreset}
+            targetStrokeCount={targetStrokeCount}
+            timer={timer}
+            topSpeedPersonalBest={topSpeedPersonalBest}
+            totalNumberOfHintedWords={totalNumberOfHintedWords}
+            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+            totalWordCount={totalWordCount}
+            upcomingPhrases={upcomingPhrases}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
-            {...lessonProps}
+            updateFlashcardsProgress={updateFlashcardsProgress}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updateMarkup={updateMarkup}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePreset={updatePreset}
+            updateRecommendationHistory={updateRecommendationHistory}
+            updateRevisionMaterial={updateRevisionMaterial}
+            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
+            userSettings={userSettings}
             {...props}
           />
         )}
@@ -197,20 +658,87 @@ const Lessons = ({
         path={`${match.url}/progress/`}
         render={(props) => (
           <Lesson
-            customLesson={customLesson}
+            actualText={actualText}
+            changeFullscreen={changeFullscreen}
+            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
+            changeShowStrokesInLesson={changeShowStrokesInLesson}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeStenoLayout={changeStenoLayout}
+            changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
+            chooseStudy={chooseStudy}
+            completedPhrases={completedPhrases}
+            currentLessonStrokes={currentLessonStrokes}
+            currentPhrase={currentPhrase}
+            currentPhraseID={currentPhraseID}
+            currentStroke={currentStroke}
             customiseLesson={customiseLesson}
+            disableUserSettings={disableUserSettings}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            flashcardsMetWords={flashcardsMetWords}
+            flashcardsProgress={flashcardsProgress}
+            fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            globalUserSettings={globalUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleDiagramSize={handleDiagramSize}
             handleLesson={handleLesson}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleStopLesson={handleStopLesson}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            lessonLength={lessonLength}
+            lessonNotFound={lessonNotFound}
+            lessonSubTitle={lessonSubTitle}
+            lessonTitle={lessonTitle}
+            metWords={metWords}
             personalDictionaries={personalDictionaries}
+            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
+            recommendationHistory={recommendationHistory}
+            repetitionsRemaining={repetitionsRemaining}
+            restartLesson={restartLesson}
+            reviseLesson={reviseLesson}
+            revisionMaterial={revisionMaterial}
+            revisionMode={revisionMode}
+            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
+            settings={settings}
+            setupLesson={setupLesson}
+            showStrokesInLesson={showStrokesInLesson}
+            startCustomLesson={startCustomLesson}
+            startFromWordOne={startFromWordOne}
+            startTime={startTime}
             stopLesson={stopLesson}
-            updatePreset={updatePreset}
+            targetStrokeCount={targetStrokeCount}
+            timer={timer}
+            topSpeedPersonalBest={topSpeedPersonalBest}
+            totalNumberOfHintedWords={totalNumberOfHintedWords}
+            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+            totalWordCount={totalWordCount}
+            upcomingPhrases={upcomingPhrases}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
-            {...lessonProps}
+            updateFlashcardsProgress={updateFlashcardsProgress}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updateMarkup={updateMarkup}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePreset={updatePreset}
+            updateRecommendationHistory={updateRecommendationHistory}
+            updateRevisionMaterial={updateRevisionMaterial}
+            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
+            userSettings={userSettings}
             {...props}
           />
         )}
@@ -220,20 +748,87 @@ const Lessons = ({
         path={`${match.url}/progress/seen/`}
         render={(props) => (
           <Lesson
-            customLesson={customLesson}
+            actualText={actualText}
+            changeFullscreen={changeFullscreen}
+            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
+            changeShowStrokesInLesson={changeShowStrokesInLesson}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeStenoLayout={changeStenoLayout}
+            changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
+            chooseStudy={chooseStudy}
+            completedPhrases={completedPhrases}
+            currentLessonStrokes={currentLessonStrokes}
+            currentPhrase={currentPhrase}
+            currentPhraseID={currentPhraseID}
+            currentStroke={currentStroke}
             customiseLesson={customiseLesson}
+            disableUserSettings={disableUserSettings}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            flashcardsMetWords={flashcardsMetWords}
+            flashcardsProgress={flashcardsProgress}
+            fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            globalUserSettings={globalUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleDiagramSize={handleDiagramSize}
             handleLesson={handleLesson}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleStopLesson={handleStopLesson}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            lessonLength={lessonLength}
+            lessonNotFound={lessonNotFound}
+            lessonSubTitle={lessonSubTitle}
+            lessonTitle={lessonTitle}
+            metWords={metWords}
             personalDictionaries={personalDictionaries}
+            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
+            recommendationHistory={recommendationHistory}
+            repetitionsRemaining={repetitionsRemaining}
+            restartLesson={restartLesson}
+            reviseLesson={reviseLesson}
+            revisionMaterial={revisionMaterial}
+            revisionMode={revisionMode}
+            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
+            settings={settings}
+            setupLesson={setupLesson}
+            showStrokesInLesson={showStrokesInLesson}
+            startCustomLesson={startCustomLesson}
+            startFromWordOne={startFromWordOne}
+            startTime={startTime}
             stopLesson={stopLesson}
-            updatePreset={updatePreset}
+            targetStrokeCount={targetStrokeCount}
+            timer={timer}
+            topSpeedPersonalBest={topSpeedPersonalBest}
+            totalNumberOfHintedWords={totalNumberOfHintedWords}
+            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+            totalWordCount={totalWordCount}
+            upcomingPhrases={upcomingPhrases}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
-            {...lessonProps}
+            updateFlashcardsProgress={updateFlashcardsProgress}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updateMarkup={updateMarkup}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePreset={updatePreset}
+            updateRecommendationHistory={updateRecommendationHistory}
+            updateRevisionMaterial={updateRevisionMaterial}
+            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
+            userSettings={userSettings}
             {...props}
           />
         )}
@@ -243,20 +838,87 @@ const Lessons = ({
         path={`${match.url}/progress/memorised/`}
         render={(props) => (
           <Lesson
-            customLesson={customLesson}
+            actualText={actualText}
+            changeFullscreen={changeFullscreen}
+            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
+            changeShowStrokesInLesson={changeShowStrokesInLesson}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeStenoLayout={changeStenoLayout}
+            changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
+            chooseStudy={chooseStudy}
+            completedPhrases={completedPhrases}
+            currentLessonStrokes={currentLessonStrokes}
+            currentPhrase={currentPhrase}
+            currentPhraseID={currentPhraseID}
+            currentStroke={currentStroke}
             customiseLesson={customiseLesson}
+            disableUserSettings={disableUserSettings}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            flashcardsMetWords={flashcardsMetWords}
+            flashcardsProgress={flashcardsProgress}
+            fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            globalUserSettings={globalUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleDiagramSize={handleDiagramSize}
             handleLesson={handleLesson}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleStopLesson={handleStopLesson}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            lessonLength={lessonLength}
+            lessonNotFound={lessonNotFound}
+            lessonSubTitle={lessonSubTitle}
+            lessonTitle={lessonTitle}
+            metWords={metWords}
             personalDictionaries={personalDictionaries}
+            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
+            recommendationHistory={recommendationHistory}
+            repetitionsRemaining={repetitionsRemaining}
+            restartLesson={restartLesson}
+            reviseLesson={reviseLesson}
+            revisionMaterial={revisionMaterial}
+            revisionMode={revisionMode}
+            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
+            settings={settings}
+            setupLesson={setupLesson}
+            showStrokesInLesson={showStrokesInLesson}
+            startCustomLesson={startCustomLesson}
+            startFromWordOne={startFromWordOne}
+            startTime={startTime}
             stopLesson={stopLesson}
-            updatePreset={updatePreset}
+            targetStrokeCount={targetStrokeCount}
+            timer={timer}
+            topSpeedPersonalBest={topSpeedPersonalBest}
+            totalNumberOfHintedWords={totalNumberOfHintedWords}
+            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+            totalWordCount={totalWordCount}
+            upcomingPhrases={upcomingPhrases}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
-            {...lessonProps}
+            updateFlashcardsProgress={updateFlashcardsProgress}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updateMarkup={updateMarkup}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePreset={updatePreset}
+            updateRecommendationHistory={updateRecommendationHistory}
+            updateRevisionMaterial={updateRevisionMaterial}
+            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
+            userSettings={userSettings}
             {...props}
           />
         )}
@@ -278,7 +940,6 @@ const Lessons = ({
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              {...lessonProps}
               {...props}
             />
           </DocumentTitle>
@@ -298,7 +959,6 @@ const Lessons = ({
                 fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
                 generateCustomLesson={generateCustomLesson}
                 globalLookupDictionary={globalLookupDictionary}
-                {...lessonProps}
               />
             </ErrorBoundary>
           </DocumentTitle>
@@ -309,17 +969,87 @@ const Lessons = ({
         path={`${match.url}/custom`}
         render={(props) => (
           <Lesson
-            customLesson={customLesson}
+            actualText={actualText}
+            changeFullscreen={changeFullscreen}
+            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
+            changeShowStrokesInLesson={changeShowStrokesInLesson}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeStenoLayout={changeStenoLayout}
+            changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
+            chooseStudy={chooseStudy}
+            completedPhrases={completedPhrases}
+            currentLessonStrokes={currentLessonStrokes}
+            currentPhrase={currentPhrase}
+            currentPhraseID={currentPhraseID}
+            currentStroke={currentStroke}
+            customiseLesson={customiseLesson}
+            disableUserSettings={disableUserSettings}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            flashcardsMetWords={flashcardsMetWords}
+            flashcardsProgress={flashcardsProgress}
+            fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            globalUserSettings={globalUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleDiagramSize={handleDiagramSize}
             handleLesson={handleLesson}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleStopLesson={handleStopLesson}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            lessonLength={lessonLength}
+            lessonNotFound={lessonNotFound}
+            lessonSubTitle={lessonSubTitle}
+            lessonTitle={lessonTitle}
+            metWords={metWords}
+            personalDictionaries={personalDictionaries}
+            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
+            recommendationHistory={recommendationHistory}
+            repetitionsRemaining={repetitionsRemaining}
+            restartLesson={restartLesson}
+            reviseLesson={reviseLesson}
+            revisionMaterial={revisionMaterial}
+            revisionMode={revisionMode}
+            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
+            settings={settings}
+            setupLesson={setupLesson}
+            showStrokesInLesson={showStrokesInLesson}
+            startCustomLesson={startCustomLesson}
+            startFromWordOne={startFromWordOne}
+            startTime={startTime}
             stopLesson={stopLesson}
+            targetStrokeCount={targetStrokeCount}
+            timer={timer}
+            topSpeedPersonalBest={topSpeedPersonalBest}
+            totalNumberOfHintedWords={totalNumberOfHintedWords}
+            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+            totalWordCount={totalWordCount}
+            upcomingPhrases={upcomingPhrases}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
+            updateFlashcardsProgress={updateFlashcardsProgress}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updateMarkup={updateMarkup}
+            updatePersonalDictionaries={updatePersonalDictionaries}
             updatePreset={updatePreset}
-            {...lessonProps}
+            updateRecommendationHistory={updateRecommendationHistory}
+            updateRevisionMaterial={updateRevisionMaterial}
+            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
+            userSettings={userSettings}
             {...props}
           />
         )}
@@ -329,23 +1059,87 @@ const Lessons = ({
         path={`${match.url}/flashcards`}
         render={(props) => (
           <Lesson
+            actualText={actualText}
             changeFullscreen={changeFullscreen}
-            customLesson={customLesson}
+            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
+            changeShowStrokesInLesson={changeShowStrokesInLesson}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeStenoLayout={changeStenoLayout}
+            changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
+            chooseStudy={chooseStudy}
+            completedPhrases={completedPhrases}
+            currentLessonStrokes={currentLessonStrokes}
+            currentPhrase={currentPhrase}
+            currentPhraseID={currentPhraseID}
+            currentStroke={currentStroke}
+            customiseLesson={customiseLesson}
+            disableUserSettings={disableUserSettings}
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
-            fullscreen={lessonProps.fullscreen}
+            flashcardsProgress={flashcardsProgress}
+            fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={lessonProps.globalUserSettings}
+            globalUserSettings={globalUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleDiagramSize={handleDiagramSize}
             handleLesson={handleLesson}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleStopLesson={handleStopLesson}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            lessonLength={lessonLength}
+            lessonNotFound={lessonNotFound}
+            lessonSubTitle={lessonSubTitle}
+            lessonTitle={lessonTitle}
+            metWords={metWords}
             personalDictionaries={personalDictionaries}
+            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
+            recommendationHistory={recommendationHistory}
+            repetitionsRemaining={repetitionsRemaining}
+            restartLesson={restartLesson}
+            reviseLesson={reviseLesson}
+            revisionMaterial={revisionMaterial}
+            revisionMode={revisionMode}
+            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
+            settings={settings}
+            setupLesson={setupLesson}
+            showStrokesInLesson={showStrokesInLesson}
+            startCustomLesson={startCustomLesson}
+            startFromWordOne={startFromWordOne}
+            startTime={startTime}
             stopLesson={stopLesson}
+            targetStrokeCount={targetStrokeCount}
+            timer={timer}
+            topSpeedPersonalBest={topSpeedPersonalBest}
+            totalNumberOfHintedWords={totalNumberOfHintedWords}
+            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+            totalWordCount={totalWordCount}
+            upcomingPhrases={upcomingPhrases}
             updateFlashcardsMetWords={updateFlashcardsMetWords}
             updateFlashcardsProgress={updateFlashcardsProgress}
-            userSettings={lessonProps.userSettings}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updateMarkup={updateMarkup}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePreset={updatePreset}
+            updateRecommendationHistory={updateRecommendationHistory}
+            updateRevisionMaterial={updateRevisionMaterial}
+            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
+            userSettings={userSettings}
             {...props}
           />
         )}
@@ -355,13 +1149,87 @@ const Lessons = ({
         path={`${match.url}/:notFound`}
         render={(props) => (
           <Lesson
-            customLesson={customLesson}
+            actualText={actualText}
+            changeFullscreen={changeFullscreen}
+            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
+            changeShowStrokesAs={changeShowStrokesAs}
+            changeShowStrokesAsList={changeShowStrokesAsList}
+            changeShowStrokesInLesson={changeShowStrokesInLesson}
+            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
+            changeSortOrderUserSetting={changeSortOrderUserSetting}
+            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
+            changeStenoLayout={changeStenoLayout}
+            changeUserSetting={changeUserSetting}
+            changeVoiceUserSetting={changeVoiceUserSetting}
+            chooseStudy={chooseStudy}
+            completedPhrases={completedPhrases}
+            currentLessonStrokes={currentLessonStrokes}
+            currentPhrase={currentPhrase}
+            currentPhraseID={currentPhraseID}
+            currentStroke={currentStroke}
+            customiseLesson={customiseLesson}
+            disableUserSettings={disableUserSettings}
+            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            flashcardsMetWords={flashcardsMetWords}
+            flashcardsProgress={flashcardsProgress}
+            fullscreen={fullscreen}
+            globalLookupDictionary={globalLookupDictionary}
+            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            globalUserSettings={globalUserSettings}
+            handleBeatsPerMinute={handleBeatsPerMinute}
+            handleDiagramSize={handleDiagramSize}
             handleLesson={handleLesson}
+            handleLimitWordsChange={handleLimitWordsChange}
+            handleRepetitionsChange={handleRepetitionsChange}
+            handleStartFromWordChange={handleStartFromWordChange}
+            handleStopLesson={handleStopLesson}
+            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             lesson={lesson}
-            lessonNotFound={true}
             lessonIndex={lessonIndex}
+            lessonLength={lessonLength}
+            lessonNotFound={lessonNotFound}
+            lessonSubTitle={lessonSubTitle}
+            lessonTitle={lessonTitle}
+            metWords={metWords}
+            personalDictionaries={personalDictionaries}
+            previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
+            recommendationHistory={recommendationHistory}
+            repetitionsRemaining={repetitionsRemaining}
+            restartLesson={restartLesson}
+            reviseLesson={reviseLesson}
+            revisionMaterial={revisionMaterial}
+            revisionMode={revisionMode}
+            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
+            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
+            settings={settings}
+            setupLesson={setupLesson}
+            showStrokesInLesson={showStrokesInLesson}
+            startCustomLesson={startCustomLesson}
+            startFromWordOne={startFromWordOne}
+            startTime={startTime}
             stopLesson={stopLesson}
+            targetStrokeCount={targetStrokeCount}
+            timer={timer}
+            topSpeedPersonalBest={topSpeedPersonalBest}
+            totalNumberOfHintedWords={totalNumberOfHintedWords}
+            totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
+            totalNumberOfMatchedWords={totalNumberOfMatchedWords}
+            totalNumberOfMistypedWords={totalNumberOfMistypedWords}
+            totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+            totalNumberOfRetainedWords={totalNumberOfRetainedWords}
+            totalWordCount={totalWordCount}
+            upcomingPhrases={upcomingPhrases}
+            updateFlashcardsMetWords={updateFlashcardsMetWords}
+            updateFlashcardsProgress={updateFlashcardsProgress}
+            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+            updateMarkup={updateMarkup}
+            updatePersonalDictionaries={updatePersonalDictionaries}
+            updatePreset={updatePreset}
+            updateRecommendationHistory={updateRecommendationHistory}
+            updateRevisionMaterial={updateRevisionMaterial}
+            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
+            userSettings={userSettings}
             {...props}
           />
         )}
