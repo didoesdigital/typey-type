@@ -25,6 +25,9 @@ const isFlashcards = (pathname) =>
 const isOverview = (pathname) =>
   pathname.startsWith("/lessons/") && pathname.endsWith("/overview");
 
+const isProgressLesson = (pathname) =>
+  pathname.startsWith("/lessons/progress/");
+
 const Lesson = ({
   actualText,
   changeFullscreen,
@@ -110,6 +113,9 @@ const Lesson = ({
   updateTopSpeedPersonalBest,
   userSettings,
 }) => {
+  const loadedLessonPath = useRef("");
+  const [hideOtherSettings, setHideOtherSettings] = useState(false);
+
   // const mainHeading = useRef<HTMLHeadingElement>(null);
   const mainHeading = useRef(null);
   useEffect(() => {
@@ -119,14 +125,14 @@ const Lesson = ({
     }
   }, []);
 
-  const [hideOtherSettings, setHideOtherSettings] = useState(false);
-
   useEffect(() => {
     // If cookies are disabled, attempting to access localStorage will cause an error.
     // The disabled cookie error will be handled in ErrorBoundary.
     // Wrapping this in a try/catch or removing the conditional would fail silently.
     // By checking here, we let people use the rest of the app but not lessons.
     if (window.localStorage) {
+      loadedLessonPath.current = match.url;
+
       if (
         location.pathname.startsWith("/lessons/progress/") &&
         !location.pathname.includes("/lessons/progress/seen/") &&
@@ -187,47 +193,60 @@ const Lesson = ({
         hasSettingsParams = false;
       }
     }
-
-    if (mainHeading?.current) {
-      mainHeading?.current.focus();
-    }
   }, []);
+  // }, [handleLesson, lesson.path, location.pathname, location.search, match.url, setUpProgressRevisionLesson, setupLesson, startCustomLesson, userSettings]);
 
-  const hasNonZeroTotalWordCount = totalWordCount === 0;
-  const hasNonEmptyCurrentPhrase = currentPhrase === "";
+  const shouldStartCustomLesson =
+    location.pathname.startsWith("/lessons/custom") &&
+    !location.pathname.startsWith("/lessons/custom/setup") &&
+    lesson.title !== "Custom";
 
+  const hasLessonChanged = match.url !== loadedLessonPath.current;
+
+  // Start custom lesson!
+  useEffect(() => {
+    if (shouldStartCustomLesson && hasLessonChanged) {
+      loadedLessonPath.current = match.url;
+      startCustomLesson();
+    }
+  }, [shouldStartCustomLesson, hasLessonChanged]);
+  // }, [shouldStartCustomLesson, hasLessonChanged, startCustomLesson, match.url]);
+
+  // Load lesson file and start lesson!
   useEffect(() => {
     if (
-      location.pathname.startsWith("/lessons/custom") &&
-      !location.pathname.startsWith("/lessons/custom/setup") &&
-      lesson.title !== "Custom"
+      !shouldStartCustomLesson &&
+      !isCustom(location.pathname) &&
+      !isFlashcards(location.pathname) &&
+      !isOverview(location.pathname) &&
+      !isProgressLesson(location.pathname) &&
+      location.pathname.startsWith("/lessons") &&
+      hasLessonChanged
     ) {
-      startCustomLesson();
-    } else if (isOverview(location.pathname)) {
-      // do nothing
-    } else if (isFlashcards(location.pathname)) {
-      // do nothing
-    } else if (
-      // prevProps.match.url !== match.url &&
-      location.pathname.startsWith("/lessons")
-    ) {
+      loadedLessonPath.current = match.url;
       handleLesson(process.env.PUBLIC_URL + location.pathname + "lesson.txt");
     }
-  }, [location.pathname, lesson.title]);
+  }, [hasLessonChanged, location.pathname, shouldStartCustomLesson]);
+  // }, [hasLessonChanged, location.pathname, shouldStartCustomLesson, handleLesson, match.url]);
 
+  const hasZeroTotalWordCount = totalWordCount === 0;
+  const hasEmptyCurrentPhrase = currentPhrase === "";
+
+  // Focus on input when starting custom lesson
   useEffect(() => {
     if (
       location.pathname.startsWith("/lessons/custom") &&
-      // (prevProps.totalWordCount === 0 || prevProps.currentPhrase === "") &&
-      (totalWordCount > 0 || currentPhrase.length > 0)
+      (!hasEmptyCurrentPhrase || !hasZeroTotalWordCount)
     ) {
       const yourTypedText = document.getElementById("your-typed-text");
       if (yourTypedText) {
         yourTypedText.focus();
       }
     }
-  }, [match.url, hasNonEmptyCurrentPhrase, hasNonZeroTotalWordCount]);
+  }, [location.pathname, hasEmptyCurrentPhrase, hasZeroTotalWordCount]);
+  // }, [match.url, hasEmptyCurrentPhrase, hasZeroTotalWordCount, location.pathname]);
 
+  // Stop lesson (timer, etc. when lesson is unmounted)
   useEffect(() => {
     return () => {
       stopLesson();
