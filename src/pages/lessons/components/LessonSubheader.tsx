@@ -45,7 +45,7 @@ const LessonSubheader = React.forwardRef(
         <div className="flex flex-wrap mxn2">
           {createNewCustomLesson ? createNewCustomLesson : undefined}
           {overviewLink ? overviewLink : undefined}
-          {!path.includes("custom") && !path.includes("progress") ? (
+          {path && !path.includes("custom") && !path.includes("progress") ? (
             <Link
               to={path
                 .replace("lesson.txt", "flashcards")
