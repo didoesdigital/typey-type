@@ -193,6 +193,8 @@ const Lesson = ({
         hasSettingsParams = false;
       }
     }
+    // TODO: revisit this after reducing parent component re-renders and converting class component to function component
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // }, [handleLesson, lesson.path, location.pathname, location.search, match.url, setUpProgressRevisionLesson, setupLesson, startCustomLesson, userSettings]);
 
@@ -209,6 +211,8 @@ const Lesson = ({
       loadedLessonPath.current = match.url;
       startCustomLesson();
     }
+    // TODO: revisit this after reducing parent component re-renders and converting class component to function component
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [shouldStartCustomLesson, hasLessonChanged]);
   // }, [shouldStartCustomLesson, hasLessonChanged, startCustomLesson, match.url]);
 
@@ -226,6 +230,8 @@ const Lesson = ({
       loadedLessonPath.current = match.url;
       handleLesson(process.env.PUBLIC_URL + location.pathname + "lesson.txt");
     }
+    // TODO: revisit this after reducing parent component re-renders and converting class component to function component
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hasLessonChanged, location.pathname, shouldStartCustomLesson]);
   // }, [hasLessonChanged, location.pathname, shouldStartCustomLesson, handleLesson, match.url]);
 
@@ -244,13 +250,14 @@ const Lesson = ({
       }
     }
   }, [location.pathname, hasEmptyCurrentPhrase, hasZeroTotalWordCount]);
-  // }, [match.url, hasEmptyCurrentPhrase, hasZeroTotalWordCount, location.pathname]);
 
   // Stop lesson (timer, etc. when lesson is unmounted)
   useEffect(() => {
     return () => {
       stopLesson();
     };
+    // TODO: revisit this after reducing parent component re-renders and converting class component to function component
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function toggleHideOtherSettings() {
