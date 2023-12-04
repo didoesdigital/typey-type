@@ -1403,7 +1403,7 @@ class App extends Component {
               changeSpacePlacementUserSetting: changeSpacePlacementUserSetting.bind(this),
               changeStenoLayout: changeStenoLayout.bind(this),
               changeUserSetting: changeUserSetting.bind(this),
-              changeVoiceUserSetting: changeVoiceUserSetting,
+              changeVoiceUserSetting: changeVoiceUserSetting.bind(this),
               changeWriterInput: changeWriterInput.bind(this),
               chooseStudy: chooseStudy.bind(this),
               createCustomLesson: this.createCustomLesson.bind(this),
