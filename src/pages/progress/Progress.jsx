@@ -103,8 +103,8 @@ class Progress extends Component {
       });
     }
 
-    let yourWordCount = Object.keys(this.props.metWords).length || 0;
-    let progressPercent =
+    const yourWordCount = Object.keys(this.props.metWords).length || 0;
+    const progressPercent =
       Math.round((Object.keys(this.props.metWords).length / 10000) * 100) || 0;
 
     let todayOldWords = {};
@@ -124,20 +124,17 @@ class Progress extends Component {
       }
     }
 
-    let todayNewWordCount = 0;
-    todayNewWordCount = Object.entries(todayNewWords).length;
-    let todayOldWordCount = 0;
-    todayOldWordCount = Object.entries(todayOldWords).length;
+    const todayNewWordCount = Object.entries(todayNewWords).length;
+    const todayOldWordCount = Object.entries(todayOldWords).length;
 
-    let oldWordsGoalMet = this.state.oldWordsGoalMet;
-    let newWordsGoalMet = this.state.newWordsGoalMet;
-
-    if (this.props.userGoals.oldWords <= todayOldWordCount) {
-      oldWordsGoalMet = true;
-    }
-    if (this.props.userGoals.newWords <= todayNewWordCount) {
-      newWordsGoalMet = true;
-    }
+    const oldWordsGoalMet =
+      this.props.userGoals.oldWords <= todayOldWordCount
+        ? true
+        : this.state.oldWordsGoalMet;
+    const newWordsGoalMet =
+      this.props.userGoals.newWords <= todayNewWordCount
+        ? true
+        : this.state.newWordsGoalMet;
 
     this.setState({
       oldWordsGoalMet: oldWordsGoalMet,
@@ -245,10 +242,10 @@ class Progress extends Component {
       label: "true",
     });
 
-    let currentNewWords = this.state.userGoalInputNewWords;
-    let currentOldWords = this.state.userGoalInputOldWords;
+    const currentNewWords = this.state.userGoalInputNewWords;
+    const currentOldWords = this.state.userGoalInputOldWords;
 
-    let userGoals = {
+    const userGoals = {
       newWords: currentNewWords,
       oldWords: currentOldWords,
     };
