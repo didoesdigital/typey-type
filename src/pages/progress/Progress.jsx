@@ -239,12 +239,10 @@ class Progress extends Component {
     };
 
     if (isNaN(currentOldWords) || currentOldWords === null) {
-      userGoalsToUpdate["oldWords"] =
-        this.props.userGoalsToUpdate.oldWords || 1;
+      userGoalsToUpdate["oldWords"] = this.props.userGoals.oldWords || 1;
     }
     if (isNaN(currentNewWords) || currentNewWords === null) {
-      userGoalsToUpdate["newWords"] =
-        this.props.userGoalsToUpdate.newWords || 1;
+      userGoalsToUpdate["newWords"] = this.props.userGoals.newWords || 1;
     }
 
     const oldWordsGoalUnveiledToUpdate =
