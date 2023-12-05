@@ -245,41 +245,43 @@ class Progress extends Component {
     const currentNewWords = this.state.userGoalInputNewWords;
     const currentOldWords = this.state.userGoalInputOldWords;
 
-    const userGoals = {
+    const userGoalsToUpdate = {
       newWords: currentNewWords,
       oldWords: currentOldWords,
     };
 
     if (isNaN(currentOldWords) || currentOldWords === null) {
-      userGoals["oldWords"] = this.props.userGoals.oldWords || 1;
+      userGoalsToUpdate["oldWords"] =
+        this.props.userGoalsToUpdate.oldWords || 1;
     }
     if (isNaN(currentNewWords) || currentNewWords === null) {
-      userGoals["newWords"] = this.props.userGoals.newWords || 1;
+      userGoalsToUpdate["newWords"] =
+        this.props.userGoalsToUpdate.newWords || 1;
     }
 
-    let oldWordsGoalUnveiled = this.props.oldWordsGoalUnveiled;
-    let newWordsGoalUnveiled = this.props.newWordsGoalUnveiled;
+    let oldWordsGoalUnveiledToUpdate = this.props.oldWordsGoalUnveiled;
+    let newWordsGoalUnveiledToUpdate = this.props.newWordsGoalUnveiled;
     if (currentOldWords > this.props.userGoals.oldWords) {
-      oldWordsGoalUnveiled = false;
+      oldWordsGoalUnveiledToUpdate = false;
     }
     if (currentNewWords > this.props.userGoals.newWords) {
-      newWordsGoalUnveiled = false;
+      newWordsGoalUnveiledToUpdate = false;
     }
     this.props.updateUserGoalsUnveiled(
-      oldWordsGoalUnveiled,
-      newWordsGoalUnveiled
+      oldWordsGoalUnveiledToUpdate,
+      newWordsGoalUnveiledToUpdate
     );
 
     let oldWordsGoalMet = this.state.oldWordsGoalMet;
     let newWordsGoalMet = this.state.newWordsGoalMet;
-    if (this.state.todayOldWordCount < userGoals["oldWords"]) {
+    if (this.state.todayOldWordCount < userGoalsToUpdate["oldWords"]) {
       oldWordsGoalMet = false;
     }
-    if (this.state.todayNewWordCount < userGoals["newWords"]) {
+    if (this.state.todayNewWordCount < userGoalsToUpdate["newWords"]) {
       newWordsGoalMet = false;
     }
 
-    this.props.updateUserGoals(userGoals);
+    this.props.updateUserGoals(userGoalsToUpdate);
     this.setState(
       {
         oldWordsGoalMet: oldWordsGoalMet,
