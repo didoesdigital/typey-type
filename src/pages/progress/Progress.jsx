@@ -100,25 +100,22 @@ class Progress extends Component {
     const progressPercent =
       Math.round((Object.keys(this.props.metWords).length / 10000) * 100) || 0;
 
-    let todayOldWords = {};
-    for (const [phrase, timesSeen] of Object.entries(this.props.metWords)) {
-      if (
-        this.props.startingMetWordsToday[phrase] &&
-        timesSeen - this.props.startingMetWordsToday[phrase] > 0
-      ) {
-        todayOldWords[phrase] = timesSeen;
-      }
-    }
-
-    let todayNewWords = {};
-    for (const [phrase, timesSeen] of Object.entries(this.props.metWords)) {
-      if (!this.props.startingMetWordsToday[phrase] && timesSeen > 0) {
-        todayNewWords[phrase] = timesSeen;
-      }
-    }
-
-    const todayNewWordCount = Object.entries(todayNewWords).length;
-    const todayOldWordCount = Object.entries(todayOldWords).length;
+    const [todayOldWordCount, todayNewWordCount] = Object.entries(
+      this.props.metWords
+    ).reduce(
+      (accumulator, [phrase, timesSeen]) => {
+        if (
+          this.props.startingMetWordsToday[phrase] &&
+          timesSeen - this.props.startingMetWordsToday[phrase] > 0
+        ) {
+          accumulator[0] += 1;
+        } else if (!this.props.startingMetWordsToday[phrase] && timesSeen > 0) {
+          accumulator[1] += 1;
+        }
+        return accumulator;
+      },
+      [0, 0]
+    );
 
     const oldWordsGoalMetToUpdate =
       this.props.userGoals.oldWords <= todayOldWordCount
