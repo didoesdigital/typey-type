@@ -134,10 +134,7 @@ class Progress extends Component {
       label: this.props.recommendedNextLesson.link || "BAD_INPUT",
     });
 
-    if (
-      this.props.recommendedNextLesson.link &&
-      this.props.recommendedNextLesson.link.startsWith("http")
-    ) {
+    if (this.props.recommendedNextLesson.link?.startsWith("http")) {
       // lets external link open in a new tab
       this.props.updateRecommendationHistory(this.props.recommendationHistory);
     } else {
