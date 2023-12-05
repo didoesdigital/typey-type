@@ -326,15 +326,10 @@ class Progress extends Component {
   handleOldWordsGoalInputChange(event) {
     this.setState({ userGoalInputOldWords: event });
 
-    let labelString = event;
-    if (!event) {
-      labelString = "BAD_INPUT";
-    }
-
     GoogleAnalytics.event({
       category: "Progress",
       action: "Change old words goal",
-      label: labelString,
+      label: event || "BAD_INPUT",
     });
 
     return event;
@@ -343,15 +338,10 @@ class Progress extends Component {
   handleNewWordsGoalInputChange(event) {
     this.setState({ userGoalInputNewWords: event });
 
-    let labelString = event;
-    if (!event) {
-      labelString = "BAD_INPUT";
-    }
-
     GoogleAnalytics.event({
       category: "Progress",
       action: "Change new words goal",
-      label: labelString,
+      label: event || "BAD_INPUT",
     });
 
     return event;
