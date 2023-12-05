@@ -146,15 +146,10 @@ class Progress extends Component {
   }
 
   startRecommendedStep(e) {
-    let labelString = this.props.recommendedNextLesson.link;
-    if (!labelString) {
-      labelString = "BAD_INPUT";
-    }
-
     GoogleAnalytics.event({
       category: "Recommendations",
       action: "Start recommended step",
-      label: labelString,
+      label: this.props.recommendedNextLesson.link || "BAD_INPUT",
     });
 
     if (
