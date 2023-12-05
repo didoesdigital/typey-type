@@ -92,14 +92,13 @@ class Progress extends Component {
         this.setState({ loadingLessonIndexError: true });
       });
 
-    this.setState({ showLoadInput: false, toRecommendedNextLesson: false });
+    this.setState({ toRecommendedNextLesson: false });
 
     if (Object.keys(this.props.metWords).length > 2000) {
       this.setState({ reducedSaveAndLoad: true });
     } else {
       this.setState({
         reducedSaveAndLoad: false,
-        showLoadInput: false,
       });
     }
 
