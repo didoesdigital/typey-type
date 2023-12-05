@@ -373,8 +373,6 @@ class Progress extends Component {
       return <Redirect push to={this.props.recommendedNextLesson.link} />;
     }
 
-    const metWordsFromTypeyType = JSON.stringify(this.props.metWords);
-
     const loadForm =
       this.state.reducedSaveAndLoad && this.state.showLoadInput ? (
         <React.Fragment>
@@ -652,7 +650,7 @@ class Progress extends Component {
               id="js-metwords-from-typey-type"
               className="w-100 mt3 mb3 quote break-words whitespace-break-spaces"
             >
-              <small>{metWordsFromTypeyType}</small>
+              <small>{JSON.stringify(this.props.metWords)}</small>
             </p>
           </div>
         </main>
