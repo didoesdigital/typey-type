@@ -198,15 +198,11 @@ class Progress extends Component {
   }
 
   restoreButtonOnClickFunction() {
-    let textareas = document.querySelectorAll(
+    const textareas = document.querySelectorAll(
       ".js-metwords-from-personal-store"
     );
-    let textareaContents;
-    if (textareas.length > 1) {
-      textareaContents = textareas[1];
-    } else {
-      textareaContents = textareas[0];
-    }
+    const textareaContents = textareas.length > 1 ? textareas[1] : textareas[0];
+
     this.props.setPersonalPreferences(textareaContents.value);
     this.setState({
       flashWarning: "To update your lesson progress, visit the lessons.",
