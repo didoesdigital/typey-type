@@ -53,7 +53,8 @@ class Progress extends Component {
       canvasHeight: Math.floor(window.innerHeight),
       flashWarning: "",
       loadingLessonIndex: true,
-      reducedSaveAndLoad: false,
+      reducedSaveAndLoad:
+        Object.keys(this.props.metWords).length > 2000 ? true : false,
       showLoadInput: false,
       showSetGoalsForm: false,
       progressPercent: 0,
@@ -87,14 +88,6 @@ class Progress extends Component {
       .catch((e) => {
         console.error(e);
       });
-
-    if (Object.keys(this.props.metWords).length > 2000) {
-      this.setState({ reducedSaveAndLoad: true });
-    } else {
-      this.setState({
-        reducedSaveAndLoad: false,
-      });
-    }
 
     const yourWordCount = Object.keys(this.props.metWords).length || 0;
     const progressPercent =
