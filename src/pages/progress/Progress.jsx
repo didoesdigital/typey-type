@@ -375,70 +375,6 @@ class Progress extends Component {
 
     const metWordsFromTypeyType = JSON.stringify(this.props.metWords);
 
-    const saveAndLoadPanels = this.state.reducedSaveAndLoad ? null : (
-      <div className="progress-layout pl3 pr3 pt3 mx-auto mw-1024">
-        <div className="panel bg-white dark:bg-coolgrey-1000 p3 mb3">
-          <h2>Save your progress</h2>
-          <p>
-            Typey&nbsp;Type saves your brief progress in your browser’s local
-            storage.
-            <strong className="bg-danger dark:text-coolgrey-900">
-              {" "}
-              You’ll lose your progress if you clear your browsing data
-              (history, cookies, and cache).
-            </strong>{" "}
-            If you share this device with other people or use Typey&nbsp;Type
-            across several devices and browsers, you should save your progress
-            elsewhere. Copy your progress to your clipboard and save it in a
-            text file somewhere safe. When you return, enter your progress to
-            load it back into Typey&nbsp;Type.
-          </p>
-          <p className="mb0">
-            <PseudoContentButton
-              className="js-clipboard-button link-button copy-to-clipboard"
-              dataClipboardTarget="#js-metwords-from-typey-type"
-            >
-              Copy progress to clipboard
-            </PseudoContentButton>
-          </p>
-        </div>
-
-        <div className="panel bg-white dark:bg-coolgrey-1000 p3 mb3">
-          <h2 className="mt0">Load your progress</h2>
-          <p className="mt2 mb3">
-            Restore your progress from a previous session by entering your saved
-            progress and loading it into Typey&nbsp;Type. You can also clear
-            your progress by loading in empty curly braces, <code>{"{}"}</code>.
-          </p>
-          <p className="mt4 mb0">
-            <label
-              htmlFor="metwords-from-personal-store"
-              className="inline-block mb05"
-            >
-              Enter your progress here:
-            </label>
-            <textarea
-              id="metwords-from-personal-store"
-              className="js-metwords-from-personal-store progress-textarea bg-info dark:text-coolgrey-900 px1 py05 bw-1 b--solid br-4 db w-100"
-              autoCapitalize="off"
-              autoComplete="off"
-              autoCorrect="off"
-              spellCheck={false}
-              rows={2}
-            />
-          </p>
-          <p className="mt2 mb0">
-            <PseudoContentButton
-              className="link-button load-progress"
-              onClick={this.handleLoadProgress.bind(this)}
-            >
-              Load progress from text
-            </PseudoContentButton>
-          </p>
-        </div>
-      </div>
-    );
-
     let reducedSaveAndLoadForms;
     let loadForm = (
       <button
@@ -536,7 +472,71 @@ class Progress extends Component {
             }
           />
 
-          {saveAndLoadPanels}
+          {this.state.reducedSaveAndLoad ? null : (
+            <div className="progress-layout pl3 pr3 pt3 mx-auto mw-1024">
+              <div className="panel bg-white dark:bg-coolgrey-1000 p3 mb3">
+                <h2>Save your progress</h2>
+                <p>
+                  Typey&nbsp;Type saves your brief progress in your browser’s
+                  local storage.
+                  <strong className="bg-danger dark:text-coolgrey-900">
+                    {" "}
+                    You’ll lose your progress if you clear your browsing data
+                    (history, cookies, and cache).
+                  </strong>{" "}
+                  If you share this device with other people or use
+                  Typey&nbsp;Type across several devices and browsers, you
+                  should save your progress elsewhere. Copy your progress to
+                  your clipboard and save it in a text file somewhere safe. When
+                  you return, enter your progress to load it back into
+                  Typey&nbsp;Type.
+                </p>
+                <p className="mb0">
+                  <PseudoContentButton
+                    className="js-clipboard-button link-button copy-to-clipboard"
+                    dataClipboardTarget="#js-metwords-from-typey-type"
+                  >
+                    Copy progress to clipboard
+                  </PseudoContentButton>
+                </p>
+              </div>
+
+              <div className="panel bg-white dark:bg-coolgrey-1000 p3 mb3">
+                <h2 className="mt0">Load your progress</h2>
+                <p className="mt2 mb3">
+                  Restore your progress from a previous session by entering your
+                  saved progress and loading it into Typey&nbsp;Type. You can
+                  also clear your progress by loading in empty curly braces,{" "}
+                  <code>{"{}"}</code>.
+                </p>
+                <p className="mt4 mb0">
+                  <label
+                    htmlFor="metwords-from-personal-store"
+                    className="inline-block mb05"
+                  >
+                    Enter your progress here:
+                  </label>
+                  <textarea
+                    id="metwords-from-personal-store"
+                    className="js-metwords-from-personal-store progress-textarea bg-info dark:text-coolgrey-900 px1 py05 bw-1 b--solid br-4 db w-100"
+                    autoCapitalize="off"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    spellCheck={false}
+                    rows={2}
+                  />
+                </p>
+                <p className="mt2 mb0">
+                  <PseudoContentButton
+                    className="link-button load-progress"
+                    onClick={this.handleLoadProgress.bind(this)}
+                  >
+                    Load progress from text
+                  </PseudoContentButton>
+                </p>
+              </div>
+            </div>
+          )}
 
           <div
             className={`p3 mx-auto mw-1024${
