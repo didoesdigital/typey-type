@@ -57,8 +57,6 @@ class Progress extends Component {
         Object.keys(this.props.metWords).length > 2000 ? true : false,
       showLoadInput: false,
       showSetGoalsForm: false,
-      progressPercent: 0,
-      yourWordCount: 0,
       todayNewWordCount: 0,
       todayOldWordCount: 0,
       toRecommendedNextLesson: false,
@@ -89,10 +87,6 @@ class Progress extends Component {
         console.error(e);
       });
 
-    const yourWordCount = Object.keys(this.props.metWords).length || 0;
-    const progressPercent =
-      Math.round((Object.keys(this.props.metWords).length / 10000) * 100) || 0;
-
     const [todayOldWordCount, todayNewWordCount] = Object.entries(
       this.props.metWords
     ).reduce(
@@ -122,10 +116,8 @@ class Progress extends Component {
     this.setState({
       oldWordsGoalMet: oldWordsGoalMetToUpdate,
       newWordsGoalMet: newWordsGoalMetToUpdate,
-      progressPercent,
       todayNewWordCount,
       todayOldWordCount,
-      yourWordCount,
     });
   }
 
