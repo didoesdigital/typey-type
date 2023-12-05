@@ -226,33 +226,34 @@ class Progress extends Component {
         this.props.userGoalsToUpdate.newWords || 1;
     }
 
-    let oldWordsGoalUnveiledToUpdate = this.props.oldWordsGoalUnveiled;
-    let newWordsGoalUnveiledToUpdate = this.props.newWordsGoalUnveiled;
-    if (currentOldWords > this.props.userGoals.oldWords) {
-      oldWordsGoalUnveiledToUpdate = false;
-    }
-    if (currentNewWords > this.props.userGoals.newWords) {
-      newWordsGoalUnveiledToUpdate = false;
-    }
+    const oldWordsGoalUnveiledToUpdate =
+      currentOldWords > this.props.userGoals.oldWords
+        ? false
+        : this.props.oldWordsGoalUnveiled;
+    const newWordsGoalUnveiledToUpdate =
+      currentNewWords > this.props.userGoals.newWords
+        ? false
+        : this.props.newWordsGoalUnveiled;
+
     this.props.updateUserGoalsUnveiled(
       oldWordsGoalUnveiledToUpdate,
       newWordsGoalUnveiledToUpdate
     );
 
-    let oldWordsGoalMetToUpdate = this.state.oldWordsGoalMet;
-    let newWordsGoalMet = this.state.newWordsGoalMet;
-    if (this.state.todayOldWordCount < userGoalsToUpdate["oldWords"]) {
-      oldWordsGoalMetToUpdate = false;
-    }
-    if (this.state.todayNewWordCount < userGoalsToUpdate["newWords"]) {
-      newWordsGoalMet = false;
-    }
+    const oldWordsGoalMetToUpdate =
+      this.state.todayOldWordCount < userGoalsToUpdate["oldWords"]
+        ? false
+        : this.state.oldWordsGoalMet;
+    const newWordsGoalMetToUpdate =
+      this.state.todayNewWordCount < userGoalsToUpdate["newWords"]
+        ? false
+        : this.state.newWordsGoalMet;
 
     this.props.updateUserGoals(userGoalsToUpdate);
     this.setState(
       {
         oldWordsGoalMet: oldWordsGoalMetToUpdate,
-        newWordsGoalMet: newWordsGoalMet,
+        newWordsGoalMet: newWordsGoalMetToUpdate,
         showSetGoalsForm: false,
       },
       () => {
