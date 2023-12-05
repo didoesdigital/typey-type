@@ -121,6 +121,22 @@ class Progress extends Component {
     });
   }
 
+  componentDidUpdate(_prevProps, prevState) {
+    if (!prevState.showSetGoalsForm && this.state.showSetGoalsForm) {
+      const element = document.getElementById(
+        "js-first-interactive-form-field-element"
+      );
+      if (element) {
+        element.focus();
+      }
+    } else if (prevState.showSetGoalsForm && !this.state.showSetGoalsForm) {
+      const element = document.getElementById("js-set-goals-button");
+      if (element) {
+        element.focus();
+      }
+    }
+  }
+
   componentWillUnmount() {
     this.setState({
       loadingLessonIndex: false,
@@ -250,19 +266,11 @@ class Progress extends Component {
         : this.state.newWordsGoalMet;
 
     this.props.updateUserGoals(userGoalsToUpdate);
-    this.setState(
-      {
-        oldWordsGoalMet: oldWordsGoalMetToUpdate,
-        newWordsGoalMet: newWordsGoalMetToUpdate,
-        showSetGoalsForm: false,
-      },
-      () => {
-        const element = document.getElementById("js-set-goals-button");
-        if (element) {
-          element.focus();
-        }
-      }
-    );
+    this.setState({
+      oldWordsGoalMet: oldWordsGoalMetToUpdate,
+      newWordsGoalMet: newWordsGoalMetToUpdate,
+      showSetGoalsForm: false,
+    });
   }
 
   cancelSetGoals(event) {
@@ -274,17 +282,9 @@ class Progress extends Component {
       label: "true",
     });
 
-    this.setState(
-      {
-        showSetGoalsForm: false,
-      },
-      () => {
-        const element = document.getElementById("js-set-goals-button");
-        if (element) {
-          element.focus();
-        }
-      }
-    );
+    this.setState({
+      showSetGoalsForm: false,
+    });
   }
 
   showSetGoalsForm(event) {
@@ -294,21 +294,11 @@ class Progress extends Component {
       label: "true",
     });
 
-    this.setState(
-      {
-        showSetGoalsForm: true,
-        userGoalInputOldWords: this.props.userGoals.oldWords,
-        userGoalInputNewWords: this.props.userGoals.newWords,
-      },
-      () => {
-        const element = document.getElementById(
-          "js-first-interactive-form-field-element"
-        );
-        if (element) {
-          element.focus();
-        }
-      }
-    );
+    this.setState({
+      showSetGoalsForm: true,
+      userGoalInputOldWords: this.props.userGoals.oldWords,
+      userGoalInputNewWords: this.props.userGoals.newWords,
+    });
   }
 
   celebrateCompletedGoals(oldGoal, newGoal) {
