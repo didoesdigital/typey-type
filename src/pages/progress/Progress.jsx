@@ -120,18 +120,18 @@ class Progress extends Component {
     const todayNewWordCount = Object.entries(todayNewWords).length;
     const todayOldWordCount = Object.entries(todayOldWords).length;
 
-    const oldWordsGoalMet =
+    const oldWordsGoalMetToUpdate =
       this.props.userGoals.oldWords <= todayOldWordCount
         ? true
         : this.state.oldWordsGoalMet;
-    const newWordsGoalMet =
+    const newWordsGoalMetToUpdate =
       this.props.userGoals.newWords <= todayNewWordCount
         ? true
         : this.state.newWordsGoalMet;
 
     this.setState({
-      oldWordsGoalMet,
-      newWordsGoalMet,
+      oldWordsGoalMet: oldWordsGoalMetToUpdate,
+      newWordsGoalMet: newWordsGoalMetToUpdate,
       progressPercent,
       todayNewWordCount,
       todayOldWordCount,
@@ -209,6 +209,7 @@ class Progress extends Component {
     } catch (error) {
       numberOfMetWords = "BAD_PROGRESS_INPUT";
     }
+
     if (textareaContents.value === "" || textareaContents.value === " ") {
       numberOfMetWords = "EMPTY_PROGRESS_INPUT";
     }
@@ -259,10 +260,10 @@ class Progress extends Component {
       newWordsGoalUnveiledToUpdate
     );
 
-    let oldWordsGoalMet = this.state.oldWordsGoalMet;
+    let oldWordsGoalMetToUpdate = this.state.oldWordsGoalMet;
     let newWordsGoalMet = this.state.newWordsGoalMet;
     if (this.state.todayOldWordCount < userGoalsToUpdate["oldWords"]) {
-      oldWordsGoalMet = false;
+      oldWordsGoalMetToUpdate = false;
     }
     if (this.state.todayNewWordCount < userGoalsToUpdate["newWords"]) {
       newWordsGoalMet = false;
@@ -271,7 +272,7 @@ class Progress extends Component {
     this.props.updateUserGoals(userGoalsToUpdate);
     this.setState(
       {
-        oldWordsGoalMet: oldWordsGoalMet,
+        oldWordsGoalMet: oldWordsGoalMetToUpdate,
         newWordsGoalMet: newWordsGoalMet,
         showSetGoalsForm: false,
       },
