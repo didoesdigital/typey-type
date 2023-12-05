@@ -539,11 +539,9 @@ class Progress extends Component {
           {saveAndLoadPanels}
 
           <div
-            className={
-              this.state.reducedSaveAndLoad
-                ? "p3 mx-auto mw-1024 mt3"
-                : "p3 mx-auto mw-1024"
-            }
+            className={`p3 mx-auto mw-1024${
+              this.state.reducedSaveAndLoad ? " mt3" : ""
+            }`}
           >
             <div className="flex justify-between">
               <h2 className="mb0">Your progress</h2>
