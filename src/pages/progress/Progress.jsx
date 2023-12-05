@@ -210,13 +210,10 @@ class Progress extends Component {
 
     let numberOfMetWords = "0";
     try {
-      numberOfMetWords = Object.keys(
-        JSON.parse(textareaContents.value)
-      ).length.toString();
+      const parsedMetWords = JSON.parse(textareaContents.value);
+      numberOfMetWords = Object.keys(parsedMetWords).length.toString();
 
-      this.props.updateStartingMetWordsAndCounts(
-        JSON.parse(textareaContents.value)
-      );
+      this.props.updateStartingMetWordsAndCounts(parsedMetWords);
 
       this.props.updateUserGoalsUnveiled(false, false);
       this.setState({
