@@ -88,8 +88,6 @@ class Progress extends Component {
         console.error(e);
       });
 
-    this.setState({ toRecommendedNextLesson: false });
-
     if (Object.keys(this.props.metWords).length > 2000) {
       this.setState({ reducedSaveAndLoad: true });
     } else {
