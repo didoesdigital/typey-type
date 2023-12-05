@@ -181,7 +181,7 @@ class Progress extends Component {
     }, 0);
   }
 
-  restoreButtonOnClickFunction() {
+  handleLoadProgress() {
     const textareas = document.querySelectorAll(
       ".js-metwords-from-personal-store"
     );
@@ -469,7 +469,7 @@ class Progress extends Component {
           <p className="mt2 mb0">
             <PseudoContentButton
               className="link-button load-progress"
-              onClick={this.restoreButtonOnClickFunction.bind(this)}
+              onClick={this.handleLoadProgress.bind(this)}
             >
               Load progress from text
             </PseudoContentButton>
@@ -511,7 +511,7 @@ class Progress extends Component {
             />
             <PseudoContentButton
               className="link-button load-progress mr2"
-              onClick={this.restoreButtonOnClickFunction.bind(this)}
+              onClick={this.handleLoadProgress.bind(this)}
               aria-label="Load progress from text"
             >
               Load
