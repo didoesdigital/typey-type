@@ -53,7 +53,6 @@ class Progress extends Component {
       canvasHeight: Math.floor(window.innerHeight),
       flashWarning: "",
       loadingLessonIndex: true,
-      loadingLessonIndexError: false,
       reducedSaveAndLoad: false,
       showLoadInput: false,
       showSetGoalsForm: false,
@@ -86,7 +85,7 @@ class Progress extends Component {
         this.setState({ loadingLessonIndex: false });
       })
       .catch((e) => {
-        this.setState({ loadingLessonIndexError: true });
+        console.error(e);
       });
 
     this.setState({ toRecommendedNextLesson: false });
@@ -145,7 +144,6 @@ class Progress extends Component {
   componentWillUnmount() {
     this.setState({
       loadingLessonIndex: false,
-      loadingLessonIndexError: false,
     });
   }
 
