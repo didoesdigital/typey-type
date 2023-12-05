@@ -137,12 +137,12 @@ class Progress extends Component {
         : this.state.newWordsGoalMet;
 
     this.setState({
-      oldWordsGoalMet: oldWordsGoalMet,
-      newWordsGoalMet: newWordsGoalMet,
-      progressPercent: progressPercent,
-      todayNewWordCount: todayNewWordCount,
-      todayOldWordCount: todayOldWordCount,
-      yourWordCount: yourWordCount,
+      oldWordsGoalMet,
+      newWordsGoalMet,
+      progressPercent,
+      todayNewWordCount,
+      todayOldWordCount,
+      yourWordCount,
     });
   }
 
