@@ -135,6 +135,19 @@ class Progress extends Component {
         element.focus();
       }
     }
+
+    if (
+      this.state.reducedSaveAndLoad &&
+      !prevState.showLoadInput &&
+      this.state.showLoadInput
+    ) {
+      const element = document.getElementById(
+        "js-metwords-from-personal-store--small"
+      );
+      if (element) {
+        element.focus();
+      }
+    }
   }
 
   componentWillUnmount() {
@@ -166,14 +179,6 @@ class Progress extends Component {
 
   showLoadInputFn() {
     this.setState({ showLoadInput: true });
-    window.setTimeout(function () {
-      const element = document.getElementById(
-        "js-metwords-from-personal-store--small"
-      );
-      if (element) {
-        element.focus();
-      }
-    }, 0);
   }
 
   handleLoadProgress() {
@@ -266,6 +271,7 @@ class Progress extends Component {
         : this.state.newWordsGoalMet;
 
     this.props.updateUserGoals(userGoalsToUpdate);
+
     this.setState({
       oldWordsGoalMet: oldWordsGoalMetToUpdate,
       newWordsGoalMet: newWordsGoalMetToUpdate,
