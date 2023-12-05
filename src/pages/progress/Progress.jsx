@@ -375,7 +375,6 @@ class Progress extends Component {
 
     const metWordsFromTypeyType = JSON.stringify(this.props.metWords);
 
-    let reducedSaveAndLoadForms;
     let loadForm = (
       <button
         onClick={this.showLoadInputFn.bind(this)}
@@ -416,18 +415,6 @@ class Progress extends Component {
           </React.Fragment>
         );
       }
-      reducedSaveAndLoadForms = (
-        <div className="flex mb3">
-          <div className="flex">{loadForm}</div>
-          <PseudoContentButton
-            className="js-clipboard-button link-button copy-to-clipboard"
-            dataClipboardTarget="#js-metwords-from-typey-type"
-            aria-label="Copy progress to clipboard"
-          >
-            Copy
-          </PseudoContentButton>
-        </div>
-      );
     }
 
     return (
@@ -545,7 +532,16 @@ class Progress extends Component {
           >
             <div className="flex justify-between">
               <h2 className="mb0">Your progress</h2>
-              {reducedSaveAndLoadForms}
+              <div className="flex mb3">
+                <div className="flex">{loadForm}</div>
+                <PseudoContentButton
+                  className="js-clipboard-button link-button copy-to-clipboard"
+                  dataClipboardTarget="#js-metwords-from-typey-type"
+                  aria-label="Copy progress to clipboard"
+                >
+                  Copy
+                </PseudoContentButton>
+              </div>
             </div>
 
             <ProgressSummaryAndLinks
