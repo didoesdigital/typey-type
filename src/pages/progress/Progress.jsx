@@ -287,7 +287,7 @@ class Progress extends Component {
     });
   }
 
-  showSetGoalsForm(event) {
+  showSetGoalsFormFn(event) {
     GoogleAnalytics.event({
       category: "Progress",
       action: "Show set goals form",
@@ -601,7 +601,7 @@ class Progress extends Component {
                   )}
                   saveGoals={this.saveGoals.bind(this)}
                   showSetGoalsForm={this.state.showSetGoalsForm}
-                  showSetGoalsFormFn={this.showSetGoalsForm.bind(this)}
+                  showSetGoalsFormFn={this.showSetGoalsFormFn.bind(this)}
                   startingMetWordsToday={this.props.startingMetWordsToday}
                   todayNewWordCount={this.state.todayNewWordCount}
                   todayOldWordCount={this.state.todayOldWordCount}
