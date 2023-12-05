@@ -373,9 +373,9 @@ class Progress extends Component {
       return <Redirect push to={this.props.recommendedNextLesson.link} />;
     }
 
-    let metWordsFromTypeyType = JSON.stringify(this.props.metWords);
+    const metWordsFromTypeyType = JSON.stringify(this.props.metWords);
 
-    let saveAndLoadPanels = this.state.reducedSaveAndLoad ? null : (
+    const saveAndLoadPanels = this.state.reducedSaveAndLoad ? null : (
       <div className="progress-layout pl3 pr3 pt3 mx-auto mw-1024">
         <div className="panel bg-white dark:bg-coolgrey-1000 p3 mb3">
           <h2>Save your progress</h2>
