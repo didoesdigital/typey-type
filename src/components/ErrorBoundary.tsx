@@ -7,13 +7,23 @@ import React, { Component } from "react";
 // throw new Error('This is an error')
 // }
 
-class ErrorBoundary extends Component {
-  constructor(props) {
+type State = {
+  hasError: boolean;
+  disabledCookieError: boolean;
+};
+
+type Props = {
+  vanish?: boolean;
+  relative?: boolean;
+};
+
+class ErrorBoundary extends Component<Props, State> {
+  constructor(props: any) {
     super(props);
     this.state = { hasError: false, disabledCookieError: false };
   }
 
-  componentDidCatch(error, info) {
+  componentDidCatch(error: any, info: any) {
     this.setState({ hasError: true });
 
     let disabledCookieError = false;
@@ -30,7 +40,7 @@ class ErrorBoundary extends Component {
     if (disabledCookieError) {
       this.setState({ disabledCookieError: true });
       Sentry.captureException(error);
-      Sentry.captureMessage("Possibly disabled cookie error: " + info, "debug");
+      Sentry.captureMessage("Possibly disabled cookie error: " + info);
     } else {
       Sentry.captureException(error);
     }
