@@ -1,8 +1,20 @@
 import React, { useEffect } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import GoogleAnalytics from "react-ga4";
+import { UserSettings } from "../types";
 
-const TypedText = (props) => {
+type Props = {
+  actualText: string;
+  completedPhrases: any;
+  currentLessonStrokes: any;
+  currentPhrase: string;
+  previousCompletedPhraseAsTyped: string;
+  sayCurrentPhraseAgain: () => void;
+  updateMarkup: (event: any) => void;
+  userSettings: UserSettings;
+};
+
+const TypedText = (props: Props) => {
   useEffect(() => {
     return () => {
       let synth = window.speechSynthesis;
@@ -39,7 +51,7 @@ const TypedText = (props) => {
     });
   }
 
-  function keyPress(event) {
+  function keyPress(event: React.KeyboardEvent<HTMLTextAreaElement>) {
     if (event && event.charCode && event.charCode === 13) {
       // Enter key
       event.preventDefault();
