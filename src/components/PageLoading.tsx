@@ -3,7 +3,7 @@ import * as Sentry from "@sentry/browser";
 import PageLoadingFailed from "./PageLoadingFailed";
 import PageLoadingPastDelay from "./PageLoadingPastDelay";
 
-const PageLoading = (props) => {
+const PageLoading = (props: any): JSX.Element | null => {
   if (props.error) {
     // When the loader has errored
     Sentry.captureException(props.error);
