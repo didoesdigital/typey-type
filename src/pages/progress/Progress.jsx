@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga4";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import PseudoContentButton from "../../components/PseudoContentButton";
@@ -45,59 +45,58 @@ let particles = [];
 //   yourSeenWordCount: any,
 // }
 
-class Progress extends Component {
-  constructor(props) {
-    super(props);
-    this.canvas = React.createRef();
-    this.state = {
-      canvasWidth: Math.floor(window.innerWidth),
-      canvasHeight: Math.floor(window.innerHeight),
-      flashWarning: "",
-      loadingLessonIndex: true,
-      reducedSaveAndLoad:
-        Object.keys(this.props.metWords).length > 2000 ? true : false,
-      showLoadInput: false,
-      toRecommendedNextLesson: false,
-      showSetGoalsForm: false,
-      todayNewWordCount: 0,
-      todayOldWordCount: 0,
-      oldWordsGoalMet: false,
-      newWordsGoalMet: false,
-      userGoalInputOldWords: 50,
-      userGoalInputNewWords: 15,
-    };
-  }
+const Progress = (props) => {
+  const mainHeading = useRef(null);
+  const canvas = useRef(null);
+  const firstGoalsRender = useRef(true);
+  const firstRecommendationBoxRender = useRef(true);
 
-  componentDidMount() {
-    if (this.mainHeading) {
-      this.mainHeading.focus();
+  const [canvasWidth] = useState(Math.floor(window.innerWidth));
+  const [canvasHeight] = useState(Math.floor(window.innerHeight));
+  const [flashWarning, setFlashWarning] = useState("");
+  const [loadingLessonIndex, setLoadingLessonIndex] = useState(true);
+  const [reducedSaveAndLoad] = useState(
+    Object.keys(props.metWords).length > 2000 ? true : false)
+  const [showLoadInput, setShowLoadInput] = useState(false);
+  const [toRecommendedNextLesson, setToRecommendedNextLesson] = useState(false);
+  const [showSetGoalsForm, setShowSetGoalsForm] = useState(false);
+  const [todayNewWordCount, setTodayNewWordCount] = useState(0);
+  const [todayOldWordCount, setTodayOldWordCount] = useState(0);
+  const [oldWordsGoalMet, setOldWordsGoalMet] = useState(false);
+  const [newWordsGoalMet, setNewWordsGoalMet] = useState(false);
+  const [userGoalInputOldWords, setUserGoalInputOldWords] = useState(50);
+  const [userGoalInputNewWords, setUserGoalInputNewWords] = useState(15);
+
+  useEffect(() => {
+    if (mainHeading) {
+      mainHeading.current?.focus();
     }
 
     getLessonIndexData()
       .then((lessonIndex) => {
-        if (this.props.recommendationHistory?.["currentStep"] === null) {
-          this.props.updateRecommendationHistory(
-            this.props.recommendationHistory,
+        if (props.recommendationHistory?.["currentStep"] === null) {
+          props.updateRecommendationHistory(
+            props.recommendationHistory,
             lessonIndex
           );
-          this.props.updateFlashcardsRecommendation();
+          props.updateFlashcardsRecommendation();
         }
-        this.setState({ loadingLessonIndex: false });
+        setLoadingLessonIndex(false);
       })
       .catch((e) => {
         console.error(e);
       });
 
-    const [todayOldWordCount, todayNewWordCount] = Object.entries(
-      this.props.metWords
+    const [todayOldWordCountToUpdate, todayNewWordCountToUpdate] = Object.entries(
+      props.metWords
     ).reduce(
       (accumulator, [phrase, timesSeen]) => {
         if (
-          this.props.startingMetWordsToday[phrase] &&
-          timesSeen - this.props.startingMetWordsToday[phrase] > 0
+          props.startingMetWordsToday[phrase] &&
+          timesSeen - props.startingMetWordsToday[phrase] > 0
         ) {
           accumulator[0] += 1;
-        } else if (!this.props.startingMetWordsToday[phrase] && timesSeen > 0) {
+        } else if (!props.startingMetWordsToday[phrase] && timesSeen > 0) {
           accumulator[1] += 1;
         }
         return accumulator;
@@ -106,41 +105,46 @@ class Progress extends Component {
     );
 
     const oldWordsGoalMetToUpdate =
-      this.props.userGoals.oldWords <= todayOldWordCount
+      props.userGoals.oldWords <= todayOldWordCountToUpdate
         ? true
-        : this.state.oldWordsGoalMet;
+        : oldWordsGoalMet;
     const newWordsGoalMetToUpdate =
-      this.props.userGoals.newWords <= todayNewWordCount
+      props.userGoals.newWords <= todayNewWordCountToUpdate
         ? true
-        : this.state.newWordsGoalMet;
+        : newWordsGoalMet;
 
-    this.setState({
-      oldWordsGoalMet: oldWordsGoalMetToUpdate,
-      newWordsGoalMet: newWordsGoalMetToUpdate,
-      todayNewWordCount,
-      todayOldWordCount,
-    });
-  }
+      setOldWordsGoalMet(oldWordsGoalMetToUpdate);
+      setNewWordsGoalMet(newWordsGoalMetToUpdate);
+      setTodayNewWordCount(todayNewWordCountToUpdate);
+      setTodayOldWordCount(todayOldWordCountToUpdate);
+    // TODO: revisit this after reducing parent component re-renders and converting class component to function component
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  componentDidUpdate(_prevProps, prevState) {
-    if (!prevState.showSetGoalsForm && this.state.showSetGoalsForm) {
+  useEffect(() => {
+    if (firstGoalsRender.current) {
+      firstGoalsRender.current = false;
+    } else {
+    if (showSetGoalsForm) {
       const element = document.getElementById(
         "js-first-interactive-form-field-element"
       );
       if (element) {
         element.focus();
       }
-    } else if (prevState.showSetGoalsForm && !this.state.showSetGoalsForm) {
+    } else if (!showSetGoalsForm) {
       const element = document.getElementById("js-set-goals-button");
       if (element) {
         element.focus();
       }
     }
-
+    }
+  }, [showSetGoalsForm]);
+    
+  useEffect(() => {
     if (
-      this.state.reducedSaveAndLoad &&
-      !prevState.showLoadInput &&
-      this.state.showLoadInput
+      reducedSaveAndLoad &&
+      showLoadInput
     ) {
       const element = document.getElementById(
         "js-metwords-from-personal-store--small"
@@ -149,64 +153,68 @@ class Progress extends Component {
         element.focus();
       }
     }
-  }
+  }, [reducedSaveAndLoad, showLoadInput]);
 
-  componentWillUnmount() {
-    this.setState({
-      loadingLessonIndex: false,
-    });
-  }
+  useEffect(() => {
+    return () => {
+      setLoadingLessonIndex(false);
+    }
+  }, [])
 
-  startRecommendedStep(e) {
+  function startRecommendedStep(e) {
     GoogleAnalytics.event({
       category: "Recommendations",
       action: "Start recommended step",
-      label: this.props.recommendedNextLesson.link || "BAD_INPUT",
+      label: props.recommendedNextLesson.link || "BAD_INPUT",
     });
 
-    if (this.props.recommendedNextLesson.link?.startsWith("http")) {
+    if (props.recommendedNextLesson.link?.startsWith("http")) {
       // lets external link open in a new tab
-      this.props.updateRecommendationHistory(this.props.recommendationHistory);
+      props.updateRecommendationHistory(props.recommendationHistory);
     } else {
+      setToRecommendedNextLesson(true);
       // does not navigate using link but instead allows Router Redirect
       e.preventDefault();
-      this.setState({ toRecommendedNextLesson: true }, () => {
-        this.props.updateRecommendationHistory(
-          this.props.recommendationHistory
-        );
-      });
     }
   }
 
-  showLoadInputFn() {
-    this.setState({ showLoadInput: true });
+  useEffect(() => {
+    if (firstRecommendationBoxRender.current) {
+      firstRecommendationBoxRender.current = false;
+    } else {
+    props.updateRecommendationHistory(
+      props.recommendationHistory
+    );
+    }
+    // TODO: revisit this after reducing parent component re-renders and converting class component to function component
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toRecommendedNextLesson]);
+
+  function showLoadInputFn() {
+    setShowLoadInput( true );
   }
 
-  handleLoadProgress() {
+  function handleLoadProgress() {
     const textareas = document.querySelectorAll(
       ".js-metwords-from-personal-store"
     );
     const textareaContents = textareas.length > 1 ? textareas[1] : textareas[0];
 
-    this.props.setPersonalPreferences(textareaContents.value);
-    this.setState({
-      flashWarning: "To update your lesson progress, visit the lessons.",
-    });
+    props.setPersonalPreferences(textareaContents.value);
+    setFlashWarning("To update your lesson progress, visit the lessons.");
 
     let numberOfMetWords = "0";
     try {
       const parsedMetWords = JSON.parse(textareaContents.value);
       numberOfMetWords = Object.keys(parsedMetWords).length.toString();
 
-      this.props.updateStartingMetWordsAndCounts(parsedMetWords);
+      props.updateStartingMetWordsAndCounts(parsedMetWords);
 
-      this.props.updateUserGoalsUnveiled(false, false);
-      this.setState({
-        todayOldWordCount: 0,
-        todayNewWordCount: 0,
-        oldWordsGoalMet: false,
-        newWordsGoalMet: false,
-      });
+      props.updateUserGoalsUnveiled(false, false);
+      setTodayOldWordCount(0);
+      setTodayNewWordCount(0);
+      setOldWordsGoalMet(false);
+      setNewWordsGoalMet(false);
     } catch (error) {
       numberOfMetWords = "BAD_PROGRESS_INPUT";
     }
@@ -222,7 +230,7 @@ class Progress extends Component {
     });
   }
 
-  saveGoals(event) {
+  function saveGoals(event) {
     event.preventDefault();
 
     GoogleAnalytics.event({
@@ -231,8 +239,8 @@ class Progress extends Component {
       label: "true",
     });
 
-    const currentNewWords = this.state.userGoalInputNewWords;
-    const currentOldWords = this.state.userGoalInputOldWords;
+    const currentNewWords = userGoalInputNewWords;
+    const currentOldWords = userGoalInputOldWords;
 
     const userGoalsToUpdate = {
       newWords: currentNewWords,
@@ -240,45 +248,43 @@ class Progress extends Component {
     };
 
     if (isNaN(currentOldWords) || currentOldWords === null) {
-      userGoalsToUpdate["oldWords"] = this.props.userGoals.oldWords || 1;
+      userGoalsToUpdate["oldWords"] = props.userGoals.oldWords || 1;
     }
     if (isNaN(currentNewWords) || currentNewWords === null) {
-      userGoalsToUpdate["newWords"] = this.props.userGoals.newWords || 1;
+      userGoalsToUpdate["newWords"] = props.userGoals.newWords || 1;
     }
 
     const oldWordsGoalUnveiledToUpdate =
-      currentOldWords > this.props.userGoals.oldWords
+      currentOldWords > props.userGoals.oldWords
         ? false
-        : this.props.oldWordsGoalUnveiled;
+        : props.oldWordsGoalUnveiled;
     const newWordsGoalUnveiledToUpdate =
-      currentNewWords > this.props.userGoals.newWords
+      currentNewWords > props.userGoals.newWords
         ? false
-        : this.props.newWordsGoalUnveiled;
+        : props.newWordsGoalUnveiled;
 
-    this.props.updateUserGoalsUnveiled(
+    props.updateUserGoalsUnveiled(
       oldWordsGoalUnveiledToUpdate,
       newWordsGoalUnveiledToUpdate
     );
 
     const oldWordsGoalMetToUpdate =
-      this.state.todayOldWordCount < userGoalsToUpdate["oldWords"]
+      todayOldWordCount < userGoalsToUpdate["oldWords"]
         ? false
-        : this.state.oldWordsGoalMet;
+        : oldWordsGoalMet;
     const newWordsGoalMetToUpdate =
-      this.state.todayNewWordCount < userGoalsToUpdate["newWords"]
+      todayNewWordCount < userGoalsToUpdate["newWords"]
         ? false
-        : this.state.newWordsGoalMet;
+        : newWordsGoalMet;
 
-    this.props.updateUserGoals(userGoalsToUpdate);
+    props.updateUserGoals(userGoalsToUpdate);
 
-    this.setState({
-      oldWordsGoalMet: oldWordsGoalMetToUpdate,
-      newWordsGoalMet: newWordsGoalMetToUpdate,
-      showSetGoalsForm: false,
-    });
+    setOldWordsGoalMet(oldWordsGoalMetToUpdate);
+    setNewWordsGoalMet(newWordsGoalMetToUpdate);
+    setShowSetGoalsForm(false);
   }
 
-  cancelSetGoals(event) {
+  function cancelSetGoals(event) {
     event.preventDefault();
 
     GoogleAnalytics.event({
@@ -287,26 +293,22 @@ class Progress extends Component {
       label: "true",
     });
 
-    this.setState({
-      showSetGoalsForm: false,
-    });
+    setShowSetGoalsForm(false);
   }
 
-  showSetGoalsFormFn(event) {
+  function showSetGoalsFormFn(event) {
     GoogleAnalytics.event({
       category: "Progress",
       action: "Show set goals form",
       label: "true",
     });
 
-    this.setState({
-      showSetGoalsForm: true,
-      userGoalInputOldWords: this.props.userGoals.oldWords,
-      userGoalInputNewWords: this.props.userGoals.newWords,
-    });
+    setShowSetGoalsForm(true);
+    setUserGoalInputOldWords(props.userGoals.oldWords);
+    setUserGoalInputNewWords(props.userGoals.newWords);
   }
 
-  celebrateCompletedGoals(oldGoal, newGoal) {
+  function celebrateCompletedGoals(oldGoal, newGoal) {
     if (oldGoal && newGoal) {
       Confetti.setupCanvas(
         { sparsity: 240, colors: 5 },
@@ -322,14 +324,14 @@ class Progress extends Component {
     }
     Confetti.restartAnimation(
       particles,
-      this.canvas.current,
-      this.state.canvasWidth,
-      this.state.canvasHeight
+      canvas.current,
+      canvasWidth,
+      canvasHeight
     );
   }
 
-  handleOldWordsGoalInputChange(event) {
-    this.setState({ userGoalInputOldWords: event });
+  function handleOldWordsGoalInputChange(event) {
+    setUserGoalInputOldWords( event );
 
     GoogleAnalytics.event({
       category: "Progress",
@@ -340,8 +342,8 @@ class Progress extends Component {
     return event;
   }
 
-  handleNewWordsGoalInputChange(event) {
-    this.setState({ userGoalInputNewWords: event });
+  function handleNewWordsGoalInputChange(event) {
+    setUserGoalInputNewWords( event );
 
     GoogleAnalytics.event({
       category: "Progress",
@@ -352,7 +354,7 @@ class Progress extends Component {
     return event;
   }
 
-  restartConfetti(event) {
+  function restartConfetti(event) {
     if (
       event &&
       ((event.keyCode && event.keyCode === 13) || event.type === "click")
@@ -366,20 +368,19 @@ class Progress extends Component {
       );
       Confetti.restartAnimation(
         particles,
-        this.canvas.current,
-        this.state.canvasWidth,
-        this.state.canvasHeight
+        canvas.current,
+        canvasWidth,
+        canvasHeight
       );
     }
   }
 
-  render() {
-    if (this.state.toRecommendedNextLesson === true) {
-      return <Redirect push to={this.props.recommendedNextLesson.link} />;
+    if (toRecommendedNextLesson === true) {
+      return <Redirect push to={props.recommendedNextLesson.link} />;
     }
 
     const loadForm =
-      this.state.reducedSaveAndLoad && this.state.showLoadInput ? (
+      reducedSaveAndLoad && showLoadInput ? (
         <React.Fragment>
           <label
             htmlFor="js-metwords-from-personal-store--small"
@@ -399,7 +400,7 @@ class Progress extends Component {
           />
           <PseudoContentButton
             className="link-button load-progress mr2"
-            onClick={this.handleLoadProgress.bind(this)}
+            onClick={handleLoadProgress.bind(this)}
             aria-label="Load progress from text"
           >
             Load
@@ -407,7 +408,7 @@ class Progress extends Component {
         </React.Fragment>
       ) : (
         <button
-          onClick={this.showLoadInputFn.bind(this)}
+          onClick={showLoadInputFn.bind(this)}
           className="button button--secondary mr2"
           aria-label="Show progress loading form"
         >
@@ -423,9 +424,7 @@ class Progress extends Component {
               <header className="flex items-center min-h-40">
                 <h2
                   id="progress"
-                  ref={(heading) => {
-                    this.mainHeading = heading;
-                  }}
+                  ref={mainHeading}
                   tabIndex={-1}
                 >
                   Progress
@@ -433,31 +432,31 @@ class Progress extends Component {
               </header>
             </div>
             <div className="flex mxn2">
-              <DownloadProgressButton metWords={this.props.metWords} />
+              <DownloadProgressButton metWords={props.metWords} />
             </div>
           </Subheader>
           <canvas
-            ref={this.canvas}
-            width={this.state.canvasWidth}
-            height={this.state.canvasHeight}
+            ref={canvas}
+            width={canvasWidth}
+            height={canvasHeight}
             className="fixed celebration-canvas top-0 left-0 pointer-none"
           />
 
           <FlashcardsSection
             showOnSmallScreen={true}
-            changeFlashcardCourseLevel={this.props.changeFlashcardCourseLevel}
+            changeFlashcardCourseLevel={props.changeFlashcardCourseLevel}
             flashcardsCourseLevel={
-              this.props.globalUserSettings.flashcardsCourseLevel
+              props.globalUserSettings.flashcardsCourseLevel
             }
-            flashcardsNextLesson={this.props.flashcardsNextLesson}
-            loadingLessonIndex={this.state.loadingLessonIndex}
+            flashcardsNextLesson={props.flashcardsNextLesson}
+            loadingLessonIndex={loadingLessonIndex}
             skipButtonId={mobileSkipButtonId}
             updateFlashcardsRecommendation={
-              this.props.updateFlashcardsRecommendation
+              props.updateFlashcardsRecommendation
             }
           />
 
-          {this.state.reducedSaveAndLoad ? null : (
+          {reducedSaveAndLoad ? null : (
             <div className="progress-layout pl3 pr3 pt3 mx-auto mw-1024">
               <div className="panel bg-white dark:bg-coolgrey-1000 p3 mb3">
                 <h2>Save your progress</h2>
@@ -514,7 +513,7 @@ class Progress extends Component {
                 <p className="mt2 mb0">
                   <PseudoContentButton
                     className="link-button load-progress"
-                    onClick={this.handleLoadProgress.bind(this)}
+                    onClick={handleLoadProgress.bind(this)}
                   >
                     Load progress from text
                   </PseudoContentButton>
@@ -525,7 +524,7 @@ class Progress extends Component {
 
           <div
             className={`p3 mx-auto mw-1024${
-              this.state.reducedSaveAndLoad ? " mt3" : ""
+              reducedSaveAndLoad ? " mt3" : ""
             }`}
           >
             <div className="flex justify-between">
@@ -543,23 +542,23 @@ class Progress extends Component {
             </div>
 
             <ProgressSummaryAndLinks
-              metWords={this.props.metWords}
-              restartConfetti={this.restartConfetti.bind(this)}
-              yourMemorisedWordCount={this.props.yourMemorisedWordCount}
-              yourSeenWordCount={this.props.yourSeenWordCount}
-              userSettings={this.props.userSettings}
+              metWords={props.metWords}
+              restartConfetti={restartConfetti.bind(this)}
+              yourMemorisedWordCount={props.yourMemorisedWordCount}
+              yourSeenWordCount={props.yourSeenWordCount}
+              userSettings={props.userSettings}
             />
 
             <div className="flex flex-wrap justify-between pt3">
               <div className="mw-568 mr3 flex-grow nt-1">
                 <ErrorBoundary relative={true}>
                   <RecommendationBox
-                    recommendedNextLesson={this.props.recommendedNextLesson}
-                    loadingLessonIndex={this.state.loadingLessonIndex}
-                    startRecommendedStep={this.startRecommendedStep.bind(this)}
-                    recommendationHistory={this.props.recommendationHistory}
+                    recommendedNextLesson={props.recommendedNextLesson}
+                    loadingLessonIndex={loadingLessonIndex}
+                    startRecommendedStep={startRecommendedStep.bind(this)}
+                    recommendationHistory={props.recommendationHistory}
                     updateRecommendationHistory={
-                      this.props.updateRecommendationHistory
+                      props.updateRecommendationHistory
                     }
                   />
                 </ErrorBoundary>
@@ -567,66 +566,66 @@ class Progress extends Component {
 
               <div className="mw-368 flex-grow" id="js-confetti-target">
                 <TodaysEffortsOrGoals
-                  cancelSetGoals={this.cancelSetGoals.bind(this)}
-                  handleNewWordsGoalInputChange={this.handleNewWordsGoalInputChange.bind(
+                  cancelSetGoals={cancelSetGoals.bind(this)}
+                  handleNewWordsGoalInputChange={handleNewWordsGoalInputChange.bind(
                     this
                   )}
-                  handleOldWordsGoalInputChange={this.handleOldWordsGoalInputChange.bind(
+                  handleOldWordsGoalInputChange={handleOldWordsGoalInputChange.bind(
                     this
                   )}
-                  newWordsGoalMet={this.state.newWordsGoalMet}
-                  newWordsGoalUnveiled={this.props.newWordsGoalUnveiled}
-                  oldWordsGoalMet={this.state.oldWordsGoalMet}
-                  oldWordsGoalUnveiled={this.props.oldWordsGoalUnveiled}
-                  celebrateCompletedGoals={this.celebrateCompletedGoals.bind(
+                  newWordsGoalMet={newWordsGoalMet}
+                  newWordsGoalUnveiled={props.newWordsGoalUnveiled}
+                  oldWordsGoalMet={oldWordsGoalMet}
+                  oldWordsGoalUnveiled={props.oldWordsGoalUnveiled}
+                  celebrateCompletedGoals={celebrateCompletedGoals.bind(
                     this
                   )}
-                  saveGoals={this.saveGoals.bind(this)}
-                  showSetGoalsForm={this.state.showSetGoalsForm}
-                  showSetGoalsFormFn={this.showSetGoalsFormFn.bind(this)}
-                  startingMetWordsToday={this.props.startingMetWordsToday}
-                  todayNewWordCount={this.state.todayNewWordCount}
-                  todayOldWordCount={this.state.todayOldWordCount}
-                  updateUserGoalsUnveiled={this.props.updateUserGoalsUnveiled}
-                  userGoalInputOldWords={this.state.userGoalInputOldWords}
-                  userGoalInputNewWords={this.state.userGoalInputNewWords}
-                  userGoals={this.props.userGoals}
+                  saveGoals={saveGoals.bind(this)}
+                  showSetGoalsForm={showSetGoalsForm}
+                  showSetGoalsFormFn={showSetGoalsFormFn.bind(this)}
+                  startingMetWordsToday={props.startingMetWordsToday}
+                  todayNewWordCount={todayNewWordCount}
+                  todayOldWordCount={todayOldWordCount}
+                  updateUserGoalsUnveiled={props.updateUserGoalsUnveiled}
+                  userGoalInputOldWords={userGoalInputOldWords}
+                  userGoalInputNewWords={userGoalInputNewWords}
+                  userGoals={props.userGoals}
                 />
               </div>
             </div>
 
             <p
               className={
-                this.state.flashWarning.length > 0
+                flashWarning.length > 0
                   ? "bg-warning pl1 pr1"
                   : "hide"
               }
               aria-live="polite"
             >
-              {this.state.flashWarning}
+              {flashWarning}
             </p>
 
             <div className="flex flex-wrap justify-between">
               <div className="mw-368 flex-grow order-1">
                 <ErrorBoundary relative={true}>
                   <RecentLessons
-                    lessonIndex={this.props.lessonIndex}
-                    recentLessonHistory={this.props.recentLessonHistory}
+                    lessonIndex={props.lessonIndex}
+                    recentLessonHistory={props.recentLessonHistory}
                   />
                 </ErrorBoundary>
                 <FlashcardsSection
                   showOnSmallScreen={false}
                   changeFlashcardCourseLevel={
-                    this.props.changeFlashcardCourseLevel
+                    props.changeFlashcardCourseLevel
                   }
                   flashcardsCourseLevel={
-                    this.props.globalUserSettings.flashcardsCourseLevel
+                    props.globalUserSettings.flashcardsCourseLevel
                   }
-                  flashcardsNextLesson={this.props.flashcardsNextLesson}
-                  loadingLessonIndex={this.state.loadingLessonIndex}
+                  flashcardsNextLesson={props.flashcardsNextLesson}
+                  loadingLessonIndex={loadingLessonIndex}
                   skipButtonId={skipButtonId}
                   updateFlashcardsRecommendation={
-                    this.props.updateFlashcardsRecommendation
+                    props.updateFlashcardsRecommendation
                   }
                 />
               </div>
@@ -634,8 +633,8 @@ class Progress extends Component {
                 <h3>Lessons progress</h3>
                 <ul className="unstyled-list">
                   <LessonsProgress
-                    lessonIndex={this.props.lessonIndex}
-                    lessonsProgress={this.props.lessonsProgress}
+                    lessonIndex={props.lessonIndex}
+                    lessonsProgress={props.lessonsProgress}
                   />
                 </ul>
                 <p>
@@ -647,21 +646,20 @@ class Progress extends Component {
 
             <h3 id="vocabulary-progress">Vocabulary progress</h3>
             <ReformatProgress
-              metWords={this.props.metWords}
-              userSettings={this.props.userSettings}
+              metWords={props.metWords}
+              userSettings={props.userSettings}
             />
             <p>Words you’ve seen and times you’ve typed them well:</p>
             <p
               id="js-metwords-from-typey-type"
               className="w-100 mt3 mb3 quote break-words whitespace-break-spaces"
             >
-              <small>{JSON.stringify(this.props.metWords)}</small>
+              <small>{JSON.stringify(props.metWords)}</small>
             </p>
           </div>
         </main>
       </div>
     );
   }
-}
 
 export default Progress;
