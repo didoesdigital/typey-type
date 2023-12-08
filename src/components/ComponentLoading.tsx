@@ -3,7 +3,14 @@ import * as Sentry from "@sentry/browser";
 import ComponentLoadingFailed from "./ComponentLoadingFailed";
 import ComponentLoadingPastDelay from "./ComponentLoadingPastDelay";
 
-const ComponentLoading = (props) => {
+type Props = {
+  error: any;
+  timedOut: any;
+  retry: any;
+  pastDelay: any;
+};
+
+const ComponentLoading = (props: Props) => {
   if (props.error) {
     // When the loader has errored
     Sentry.captureException(props.error);
