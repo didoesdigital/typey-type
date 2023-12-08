@@ -10,7 +10,7 @@ import React, { Component } from "react";
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props);
-    this.state = { hasError: false };
+    this.state = { hasError: false, disabledCookieError: false };
   }
 
   componentDidCatch(error, info) {
