@@ -48,6 +48,7 @@ let particles = [];
 class Progress extends Component {
   constructor(props) {
     super(props);
+    this.canvas = React.createRef();
     this.state = {
       canvasWidth: Math.floor(window.innerWidth),
       canvasHeight: Math.floor(window.innerHeight),
@@ -321,7 +322,7 @@ class Progress extends Component {
     }
     Confetti.restartAnimation(
       particles,
-      this.refs.canvas,
+      this.canvas.current,
       this.state.canvasWidth,
       this.state.canvasHeight
     );
@@ -365,7 +366,7 @@ class Progress extends Component {
       );
       Confetti.restartAnimation(
         particles,
-        this.refs.canvas,
+        this.canvas.current,
         this.state.canvasWidth,
         this.state.canvasHeight
       );
@@ -436,7 +437,7 @@ class Progress extends Component {
             </div>
           </Subheader>
           <canvas
-            ref="canvas"
+            ref={this.canvas}
             width={this.state.canvasWidth}
             height={this.state.canvasHeight}
             className="fixed celebration-canvas top-0 left-0 pointer-none"
