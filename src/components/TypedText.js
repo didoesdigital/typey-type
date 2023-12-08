@@ -60,83 +60,83 @@ const TypedText = (props) => {
     }
   }
 
-    const isMultiline =
-      props.userSettings.upcomingWordsLayout === "multiline";
-    let previousCompletedPhraseAsTypedKey = props.completedPhrases
-      ? props.completedPhrases.length
-      : 0;
-    let strokes = props.currentLessonStrokes;
-    let previousCompletedPhraseAccuracy =
-      strokes && strokes.length > 0 ? strokes[strokes.length - 1].accuracy : true;
-    let textInputAccessibilityAriaHidden =
-      !props.userSettings.textInputAccessibility;
+  const isMultiline =
+    props.userSettings.upcomingWordsLayout === "multiline";
+  let previousCompletedPhraseAsTypedKey = props.completedPhrases
+    ? props.completedPhrases.length
+    : 0;
+  let strokes = props.currentLessonStrokes;
+  let previousCompletedPhraseAccuracy =
+    strokes && strokes.length > 0 ? strokes[strokes.length - 1].accuracy : true;
+  let textInputAccessibilityAriaHidden =
+    !props.userSettings.textInputAccessibility;
 
-    let sayCurrentPhraseButton = null;
-    if (props.userSettings && props.userSettings.speakMaterial) {
-      sayCurrentPhraseButton = (
-        <button
-          className="link-button button--secondary say-word-button mb-4"
-          onClick={speak.bind(this)}
-          onDoubleClick={onDoubleClickSpeakAndFocus.bind(this)}
-        >
-          Say word
-        </button>
-      );
-    }
-
-    return (
-      <div className={isMultiline ? "mx-auto mw-844" : ""}>
-        <div className="typed-text-container relative">
-          <label className="visually-hidden mb1" htmlFor="your-typed-text">
-            Write {props.currentPhrase}
-          </label>
-          {sayCurrentPhraseButton}
-          <p className="input-text mx-auto">
-            <samp className="pointer-none absolute absolute--fill w-100">
-              <TransitionGroup
-                className={`dib${isMultiline ? " flex justify-center" : ""}`}
-                component={"span"}
-                key={previousCompletedPhraseAsTypedKey}
-              >
-                <CSSTransition timeout={5000} classNames="dissolve" appear={true}>
-                  <kbd
-                    className={`successfully-typed-text typed-text-input-positioning whitespace-pre relative${
-                      isMultiline ? " text-center" : " text-left"
-                    }`}
-                    style={{
-                      color: previousCompletedPhraseAccuracy
-                        ? "#23512C"
-                        : "#953159",
-                    }}
-                    aria-hidden="true"
-                  >
-                    {props.previousCompletedPhraseAsTyped}
-                  </kbd>
-                </CSSTransition>
-              </TransitionGroup>
-            </samp>
-            <span aria-hidden={textInputAccessibilityAriaHidden}>
-              <textarea
-                autoCapitalize="off"
-                autoComplete="off"
-                autoCorrect="off"
-                className={`input-textarea typed-text-input-positioning typed-text-input-textarea overflow-hidden${
-                  isMultiline ? " text-center" : ""
-                }`}
-                id="your-typed-text"
-                aria-describedby="punctuation-description"
-                onChange={props.updateMarkup}
-                onKeyPress={keyPress.bind(this)}
-                rows={1}
-                spellCheck={false}
-                value={props.actualText}
-                wrap="off"
-              ></textarea>
-            </span>
-          </p>
-        </div>
-      </div>
+  let sayCurrentPhraseButton = null;
+  if (props.userSettings && props.userSettings.speakMaterial) {
+    sayCurrentPhraseButton = (
+      <button
+        className="link-button button--secondary say-word-button mb-4"
+        onClick={speak.bind(this)}
+        onDoubleClick={onDoubleClickSpeakAndFocus.bind(this)}
+      >
+        Say word
+      </button>
     );
+  }
+
+  return (
+    <div className={isMultiline ? "mx-auto mw-844" : ""}>
+      <div className="typed-text-container relative">
+        <label className="visually-hidden mb1" htmlFor="your-typed-text">
+          Write {props.currentPhrase}
+        </label>
+        {sayCurrentPhraseButton}
+        <p className="input-text mx-auto">
+          <samp className="pointer-none absolute absolute--fill w-100">
+            <TransitionGroup
+              className={`dib${isMultiline ? " flex justify-center" : ""}`}
+              component={"span"}
+              key={previousCompletedPhraseAsTypedKey}
+            >
+              <CSSTransition timeout={5000} classNames="dissolve" appear={true}>
+                <kbd
+                  className={`successfully-typed-text typed-text-input-positioning whitespace-pre relative${
+                    isMultiline ? " text-center" : " text-left"
+                  }`}
+                  style={{
+                    color: previousCompletedPhraseAccuracy
+                      ? "#23512C"
+                      : "#953159",
+                  }}
+                  aria-hidden="true"
+                >
+                  {props.previousCompletedPhraseAsTyped}
+                </kbd>
+              </CSSTransition>
+            </TransitionGroup>
+          </samp>
+          <span aria-hidden={textInputAccessibilityAriaHidden}>
+            <textarea
+              autoCapitalize="off"
+              autoComplete="off"
+              autoCorrect="off"
+              className={`input-textarea typed-text-input-positioning typed-text-input-textarea overflow-hidden${
+                isMultiline ? " text-center" : ""
+              }`}
+              id="your-typed-text"
+              aria-describedby="punctuation-description"
+              onChange={props.updateMarkup}
+              onKeyPress={keyPress.bind(this)}
+              rows={1}
+              spellCheck={false}
+              value={props.actualText}
+              wrap="off"
+            ></textarea>
+          </span>
+        </p>
+      </div>
+    </div>
+  );
 };
 
 export default TypedText;
