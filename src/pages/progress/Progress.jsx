@@ -56,7 +56,8 @@ const Progress = (props) => {
   const [flashWarning, setFlashWarning] = useState("");
   const [loadingLessonIndex, setLoadingLessonIndex] = useState(true);
   const [reducedSaveAndLoad] = useState(
-    Object.keys(props.metWords).length > 2000 ? true : false)
+    Object.keys(props.metWords).length > 2000 ? true : false
+  );
   const [showLoadInput, setShowLoadInput] = useState(false);
   const [toRecommendedNextLesson, setToRecommendedNextLesson] = useState(false);
   const [showSetGoalsForm, setShowSetGoalsForm] = useState(false);
@@ -87,22 +88,21 @@ const Progress = (props) => {
         console.error(e);
       });
 
-    const [todayOldWordCountToUpdate, todayNewWordCountToUpdate] = Object.entries(
-      props.metWords
-    ).reduce(
-      (accumulator, [phrase, timesSeen]) => {
-        if (
-          props.startingMetWordsToday[phrase] &&
-          timesSeen - props.startingMetWordsToday[phrase] > 0
-        ) {
-          accumulator[0] += 1;
-        } else if (!props.startingMetWordsToday[phrase] && timesSeen > 0) {
-          accumulator[1] += 1;
-        }
-        return accumulator;
-      },
-      [0, 0]
-    );
+    const [todayOldWordCountToUpdate, todayNewWordCountToUpdate] =
+      Object.entries(props.metWords).reduce(
+        (accumulator, [phrase, timesSeen]) => {
+          if (
+            props.startingMetWordsToday[phrase] &&
+            timesSeen - props.startingMetWordsToday[phrase] > 0
+          ) {
+            accumulator[0] += 1;
+          } else if (!props.startingMetWordsToday[phrase] && timesSeen > 0) {
+            accumulator[1] += 1;
+          }
+          return accumulator;
+        },
+        [0, 0]
+      );
 
     const oldWordsGoalMetToUpdate =
       props.userGoals.oldWords <= todayOldWordCountToUpdate
@@ -113,10 +113,10 @@ const Progress = (props) => {
         ? true
         : newWordsGoalMet;
 
-      setOldWordsGoalMet(oldWordsGoalMetToUpdate);
-      setNewWordsGoalMet(newWordsGoalMetToUpdate);
-      setTodayNewWordCount(todayNewWordCountToUpdate);
-      setTodayOldWordCount(todayOldWordCountToUpdate);
+    setOldWordsGoalMet(oldWordsGoalMetToUpdate);
+    setNewWordsGoalMet(newWordsGoalMetToUpdate);
+    setTodayNewWordCount(todayNewWordCountToUpdate);
+    setTodayOldWordCount(todayOldWordCountToUpdate);
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -125,27 +125,24 @@ const Progress = (props) => {
     if (firstGoalsRender.current) {
       firstGoalsRender.current = false;
     } else {
-    if (showSetGoalsForm) {
-      const element = document.getElementById(
-        "js-first-interactive-form-field-element"
-      );
-      if (element) {
-        element.focus();
+      if (showSetGoalsForm) {
+        const element = document.getElementById(
+          "js-first-interactive-form-field-element"
+        );
+        if (element) {
+          element.focus();
+        }
+      } else if (!showSetGoalsForm) {
+        const element = document.getElementById("js-set-goals-button");
+        if (element) {
+          element.focus();
+        }
       }
-    } else if (!showSetGoalsForm) {
-      const element = document.getElementById("js-set-goals-button");
-      if (element) {
-        element.focus();
-      }
-    }
     }
   }, [showSetGoalsForm]);
-    
+
   useEffect(() => {
-    if (
-      reducedSaveAndLoad &&
-      showLoadInput
-    ) {
+    if (reducedSaveAndLoad && showLoadInput) {
       const element = document.getElementById(
         "js-metwords-from-personal-store--small"
       );
@@ -158,8 +155,8 @@ const Progress = (props) => {
   useEffect(() => {
     return () => {
       setLoadingLessonIndex(false);
-    }
-  }, [])
+    };
+  }, []);
 
   function startRecommendedStep(e) {
     GoogleAnalytics.event({
@@ -182,16 +179,14 @@ const Progress = (props) => {
     if (firstRecommendationBoxRender.current) {
       firstRecommendationBoxRender.current = false;
     } else {
-    props.updateRecommendationHistory(
-      props.recommendationHistory
-    );
+      props.updateRecommendationHistory(props.recommendationHistory);
     }
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toRecommendedNextLesson]);
 
   function showLoadInputFn() {
-    setShowLoadInput( true );
+    setShowLoadInput(true);
   }
 
   function handleLoadProgress() {
@@ -331,7 +326,7 @@ const Progress = (props) => {
   }
 
   function handleOldWordsGoalInputChange(event) {
-    setUserGoalInputOldWords( event );
+    setUserGoalInputOldWords(event);
 
     GoogleAnalytics.event({
       category: "Progress",
@@ -343,7 +338,7 @@ const Progress = (props) => {
   }
 
   function handleNewWordsGoalInputChange(event) {
-    setUserGoalInputNewWords( event );
+    setUserGoalInputNewWords(event);
 
     GoogleAnalytics.event({
       category: "Progress",
@@ -422,11 +417,7 @@ const Progress = (props) => {
         <Subheader id="js-page-confetti-target">
           <div className="flex mr1 self-center">
             <header className="flex items-center min-h-40">
-              <h2
-                id="progress"
-                ref={mainHeading}
-                tabIndex={-1}
-              >
+              <h2 id="progress" ref={mainHeading} tabIndex={-1}>
                 Progress
               </h2>
             </header>
@@ -445,15 +436,11 @@ const Progress = (props) => {
         <FlashcardsSection
           showOnSmallScreen={true}
           changeFlashcardCourseLevel={props.changeFlashcardCourseLevel}
-          flashcardsCourseLevel={
-            props.globalUserSettings.flashcardsCourseLevel
-          }
+          flashcardsCourseLevel={props.globalUserSettings.flashcardsCourseLevel}
           flashcardsNextLesson={props.flashcardsNextLesson}
           loadingLessonIndex={loadingLessonIndex}
           skipButtonId={mobileSkipButtonId}
-          updateFlashcardsRecommendation={
-            props.updateFlashcardsRecommendation
-          }
+          updateFlashcardsRecommendation={props.updateFlashcardsRecommendation}
         />
 
         {reducedSaveAndLoad ? null : (
@@ -469,10 +456,10 @@ const Progress = (props) => {
                   (history, cookies, and cache).
                 </strong>{" "}
                 If you share this device with other people or use
-                Typey&nbsp;Type across several devices and browsers, you
-                should save your progress elsewhere. Copy your progress to
-                your clipboard and save it in a text file somewhere safe. When
-                you return, enter your progress to load it back into
+                Typey&nbsp;Type across several devices and browsers, you should
+                save your progress elsewhere. Copy your progress to your
+                clipboard and save it in a text file somewhere safe. When you
+                return, enter your progress to load it back into
                 Typey&nbsp;Type.
               </p>
               <p className="mb0">
@@ -489,8 +476,8 @@ const Progress = (props) => {
               <h2 className="mt0">Load your progress</h2>
               <p className="mt2 mb3">
                 Restore your progress from a previous session by entering your
-                saved progress and loading it into Typey&nbsp;Type. You can
-                also clear your progress by loading in empty curly braces,{" "}
+                saved progress and loading it into Typey&nbsp;Type. You can also
+                clear your progress by loading in empty curly braces,{" "}
                 <code>{"{}"}</code>.
               </p>
               <p className="mt4 mb0">
@@ -523,9 +510,7 @@ const Progress = (props) => {
         )}
 
         <div
-          className={`p3 mx-auto mw-1024${
-            reducedSaveAndLoad ? " mt3" : ""
-          }`}
+          className={`p3 mx-auto mw-1024${reducedSaveAndLoad ? " mt3" : ""}`}
         >
           <div className="flex justify-between">
             <h2 className="mb0">Your progress</h2>
@@ -577,9 +562,7 @@ const Progress = (props) => {
                 newWordsGoalUnveiled={props.newWordsGoalUnveiled}
                 oldWordsGoalMet={oldWordsGoalMet}
                 oldWordsGoalUnveiled={props.oldWordsGoalUnveiled}
-                celebrateCompletedGoals={celebrateCompletedGoals.bind(
-                  this
-                )}
+                celebrateCompletedGoals={celebrateCompletedGoals.bind(this)}
                 saveGoals={saveGoals.bind(this)}
                 showSetGoalsForm={showSetGoalsForm}
                 showSetGoalsFormFn={showSetGoalsFormFn.bind(this)}
@@ -595,11 +578,7 @@ const Progress = (props) => {
           </div>
 
           <p
-            className={
-              flashWarning.length > 0
-                ? "bg-warning pl1 pr1"
-                : "hide"
-            }
+            className={flashWarning.length > 0 ? "bg-warning pl1 pr1" : "hide"}
             aria-live="polite"
           >
             {flashWarning}
@@ -615,9 +594,7 @@ const Progress = (props) => {
               </ErrorBoundary>
               <FlashcardsSection
                 showOnSmallScreen={false}
-                changeFlashcardCourseLevel={
-                  props.changeFlashcardCourseLevel
-                }
+                changeFlashcardCourseLevel={props.changeFlashcardCourseLevel}
                 flashcardsCourseLevel={
                   props.globalUserSettings.flashcardsCourseLevel
                 }
@@ -660,6 +637,6 @@ const Progress = (props) => {
       </main>
     </div>
   );
-}
+};
 
 export default Progress;
