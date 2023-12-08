@@ -6,15 +6,15 @@ import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";
 import type { MetWords } from "../../../types";
 
 type Props = {
-  cancelSetGoals: () => void;
-  handleNewWordsGoalInputChange: () => void;
-  handleOldWordsGoalInputChange: () => void;
+  cancelSetGoals: (event: React.MouseEvent | React.KeyboardEvent) => void;
+  handleNewWordsGoalInputChange: (event: any) => void;
+  handleOldWordsGoalInputChange: (event: any) => void;
   newWordsGoalMet: boolean;
   newWordsGoalUnveiled: boolean;
   oldWordsGoalMet: boolean;
   oldWordsGoalUnveiled: boolean;
   celebrateCompletedGoals: (oldGoal: boolean, newGoal: boolean) => void;
-  saveGoals: () => void;
+  saveGoals: (event: any) => void;
   showSetGoalsForm: boolean;
   showSetGoalsFormFn: () => void;
   startingMetWordsToday: MetWords;
@@ -85,7 +85,7 @@ const TodaysEffortsOrGoals = ({
 
     updateUserGoalsUnveiled(
       oldWordsGoalMet ? true : oldWordsGoalUnveiled,
-      newWordsGoalMet ? true : newWordsGoalUnveiled,
+      newWordsGoalMet ? true : newWordsGoalUnveiled
     );
 
     const element = document.getElementById("js-todays-efforts");

@@ -14,39 +14,40 @@ import ProgressSummaryAndLinks from "./components/ProgressSummaryAndLinks";
 import LessonsProgress from "./components/LessonsProgress";
 import DownloadProgressButton from "./components/DownloadProgressButton";
 import Subheader from "../../components/Subheader";
+import { MetWords, UserSettings } from "../../types";
 
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
 
-let particles = [];
+let particles: any[] = [];
 
-// type Props = {
-//   changeFlashcardCourseLevel: any,
-//   flashcardsNextLesson: any,
-//   globalUserSettings: any,
-//   lessonIndex: any,
-//   lessonsProgress: any,
-//   metWords: any,
-//   newWordsGoalUnveiled: any,
-//   oldWordsGoalUnveiled: any,
-//   recentLessonHistory: any,
-//   recommendationHistory: any,
-//   recommendedNextLesson: any,
-//   setPersonalPreferences: any,
-//   startingMetWordsToday: any,
-//   updateFlashcardsRecommendation: any,
-//   updateRecommendationHistory: any,
-//   updateStartingMetWordsAndCounts: any,
-//   updateUserGoals: any,
-//   updateUserGoalsUnveiled: any,
-//   userGoals: any,
-//   userSetting: UserSettings,
-//   yourMemorisedWordCount: any,
-//   yourSeenWordCount: any,
-// }
+type Props = {
+  changeFlashcardCourseLevel: any;
+  flashcardsNextLesson: any;
+  globalUserSettings: any;
+  lessonIndex: any;
+  lessonsProgress: any;
+  metWords: MetWords;
+  newWordsGoalUnveiled: any;
+  oldWordsGoalUnveiled: any;
+  recentLessonHistory: any;
+  recommendationHistory: any;
+  recommendedNextLesson: any;
+  setPersonalPreferences: any;
+  startingMetWordsToday: any;
+  updateFlashcardsRecommendation: any;
+  updateRecommendationHistory: any;
+  updateStartingMetWordsAndCounts: any;
+  updateUserGoals: any;
+  updateUserGoalsUnveiled: any;
+  userGoals: any;
+  userSettings: UserSettings;
+  yourMemorisedWordCount: any;
+  yourSeenWordCount: any;
+};
 
-const Progress = (props) => {
-  const mainHeading = useRef(null);
+const Progress = (props: Props) => {
+  const mainHeading = useRef<HTMLHeadingElement>(null);
   const canvas = useRef(null);
   const firstGoalsRender = useRef(true);
   const firstRecommendationBoxRender = useRef(true);
@@ -74,7 +75,7 @@ const Progress = (props) => {
     }
 
     getLessonIndexData()
-      .then((lessonIndex) => {
+      .then((lessonIndex: any) => {
         if (props.recommendationHistory?.["currentStep"] === null) {
           props.updateRecommendationHistory(
             props.recommendationHistory,
@@ -84,7 +85,7 @@ const Progress = (props) => {
         }
         setLoadingLessonIndex(false);
       })
-      .catch((e) => {
+      .catch((e: any) => {
         console.error(e);
       });
 
@@ -158,7 +159,7 @@ const Progress = (props) => {
     };
   }, []);
 
-  function startRecommendedStep(e) {
+  function startRecommendedStep(e: any) {
     GoogleAnalytics.event({
       category: "Recommendations",
       action: "Start recommended step",
@@ -193,7 +194,9 @@ const Progress = (props) => {
     const textareas = document.querySelectorAll(
       ".js-metwords-from-personal-store"
     );
-    const textareaContents = textareas.length > 1 ? textareas[1] : textareas[0];
+    const textareaContents: HTMLTextAreaElement = (
+      textareas.length > 1 ? textareas[1] : textareas[0]
+    ) as HTMLTextAreaElement;
 
     props.setPersonalPreferences(textareaContents.value);
     setFlashWarning("To update your lesson progress, visit the lessons.");
@@ -225,7 +228,7 @@ const Progress = (props) => {
     });
   }
 
-  function saveGoals(event) {
+  function saveGoals(event: any) {
     event.preventDefault();
 
     GoogleAnalytics.event({
@@ -279,7 +282,7 @@ const Progress = (props) => {
     setShowSetGoalsForm(false);
   }
 
-  function cancelSetGoals(event) {
+  function cancelSetGoals(event: any) {
     event.preventDefault();
 
     GoogleAnalytics.event({
@@ -291,7 +294,7 @@ const Progress = (props) => {
     setShowSetGoalsForm(false);
   }
 
-  function showSetGoalsFormFn(event) {
+  function showSetGoalsFormFn() {
     GoogleAnalytics.event({
       category: "Progress",
       action: "Show set goals form",
@@ -303,7 +306,7 @@ const Progress = (props) => {
     setUserGoalInputNewWords(props.userGoals.newWords);
   }
 
-  function celebrateCompletedGoals(oldGoal, newGoal) {
+  function celebrateCompletedGoals(oldGoal: any, newGoal: any) {
     if (oldGoal && newGoal) {
       Confetti.setupCanvas(
         { sparsity: 240, colors: 5 },
@@ -325,7 +328,7 @@ const Progress = (props) => {
     );
   }
 
-  function handleOldWordsGoalInputChange(event) {
+  function handleOldWordsGoalInputChange(event: any) {
     setUserGoalInputOldWords(event);
 
     GoogleAnalytics.event({
@@ -337,7 +340,7 @@ const Progress = (props) => {
     return event;
   }
 
-  function handleNewWordsGoalInputChange(event) {
+  function handleNewWordsGoalInputChange(event: any) {
     setUserGoalInputNewWords(event);
 
     GoogleAnalytics.event({
@@ -349,7 +352,7 @@ const Progress = (props) => {
     return event;
   }
 
-  function restartConfetti(event) {
+  function restartConfetti(event: any) {
     if (
       event &&
       ((event.keyCode && event.keyCode === 13) || event.type === "click")

@@ -38,7 +38,7 @@ type RecommendationHistory = {
 
 type Props = {
   recommendedNextLesson: RecommendedNextLesson;
-  startRecommendedStep: () => void;
+  startRecommendedStep: (event: any) => void;
   loadingLessonIndex: boolean;
   recommendationHistory: RecommendationHistory;
   updateRecommendationHistory: (
