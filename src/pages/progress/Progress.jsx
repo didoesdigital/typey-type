@@ -57,10 +57,10 @@ class Progress extends Component {
       reducedSaveAndLoad:
         Object.keys(this.props.metWords).length > 2000 ? true : false,
       showLoadInput: false,
+      toRecommendedNextLesson: false,
       showSetGoalsForm: false,
       todayNewWordCount: 0,
       todayOldWordCount: 0,
-      toRecommendedNextLesson: false,
       oldWordsGoalMet: false,
       newWordsGoalMet: false,
       userGoalInputOldWords: 50,
