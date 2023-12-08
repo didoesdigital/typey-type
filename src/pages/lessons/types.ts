@@ -6,7 +6,12 @@ import type {
   PrettyLessonTitle,
   UserSettings,
   Study,
+  CurrentLessonStrokes,
+  FetchAndSetupGlobalDict,
+  LookupDictWithNamespacedDictsAndConfig,
+  PersonalDictionaryNameAndContents,
 } from "../../types";
+import { RecentLessonHistoryItem } from "../progress/components/RecentLessons";
 
 export type LessonData = {
   version: number;
@@ -22,7 +27,7 @@ export type TransformedData = {
 } | null;
 
 export type LessonProps = {
-  actualText: any;
+  actualText: string;
   changeFullscreen: any;
   changeShowScoresWhileTyping: (event: any) => void;
   changeShowStrokesAs: (event: any) => void;
@@ -36,17 +41,17 @@ export type LessonProps = {
   changeVoiceUserSetting: (voiceName: string, voiceURI: string) => void;
   chooseStudy: () => void;
   completedPhrases: any;
-  currentLessonStrokes: any; // CurrentLessonStrokes;
-  currentPhrase: any;
-  currentPhraseID: any;
-  currentStroke: any;
+  currentLessonStrokes: CurrentLessonStrokes;
+  currentPhrase: string;
+  currentPhraseID: number;
+  currentStroke: string;
   customiseLesson: any;
   disableUserSettings: boolean;
-  fetchAndSetupGlobalDict: any;
+  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   flashcardsMetWords: any;
   flashcardsProgress: any;
   fullscreen: any;
-  globalLookupDictionary: any;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: any;
   globalUserSettings: GlobalUserSettings;
   handleBeatsPerMinute: (event: any) => void;
@@ -66,10 +71,10 @@ export type LessonProps = {
   location: any;
   match: any;
   metWords: MetWords;
-  personalDictionaries: any;
-  previousCompletedPhraseAsTyped: any;
-  recentLessonHistory: any;
-  repetitionsRemaining: any;
+  personalDictionaries: PersonalDictionaryNameAndContents[];
+  previousCompletedPhraseAsTyped: string;
+  recentLessonHistory: RecentLessonHistoryItem[];
+  repetitionsRemaining: number;
   restartLesson: any;
   reviseLesson: any;
   revisionMode: any;
