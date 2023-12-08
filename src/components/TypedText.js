@@ -60,8 +60,7 @@ const TypedText = (props) => {
     }
   }
 
-  const isMultiline =
-    props.userSettings.upcomingWordsLayout === "multiline";
+  const isMultiline = props.userSettings.upcomingWordsLayout === "multiline";
   let previousCompletedPhraseAsTypedKey = props.completedPhrases
     ? props.completedPhrases.length
     : 0;
