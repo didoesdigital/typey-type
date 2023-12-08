@@ -375,46 +375,46 @@ const Progress = (props) => {
     }
   }
 
-    if (toRecommendedNextLesson === true) {
-      return <Redirect push to={props.recommendedNextLesson.link} />;
-    }
+  if (toRecommendedNextLesson === true) {
+    return <Redirect push to={props.recommendedNextLesson.link} />;
+  }
 
-    const loadForm =
-      reducedSaveAndLoad && showLoadInput ? (
-        <React.Fragment>
-          <label
-            htmlFor="js-metwords-from-personal-store--small"
-            className="inline-block mb05 visually-hidden"
-          >
-            Enter your progress here:
-          </label>
-          <textarea
-            id="js-metwords-from-personal-store--small"
-            className="js-metwords-from-personal-store progress-textarea bg-info dark:text-coolgrey-900 px1 py05 bw-1 b--solid br-4 db w-100 mr1"
-            autoCapitalize="off"
-            autoComplete="off"
-            autoCorrect="off"
-            spellCheck={false}
-            style={{ maxWidth: "200px", maxHeight: "40px" }}
-            rows={1}
-          />
-          <PseudoContentButton
-            className="link-button load-progress mr2"
-            onClick={handleLoadProgress.bind(this)}
-            aria-label="Load progress from text"
-          >
-            Load
-          </PseudoContentButton>
-        </React.Fragment>
-      ) : (
-        <button
-          onClick={showLoadInputFn.bind(this)}
-          className="button button--secondary mr2"
-          aria-label="Show progress loading form"
+  const loadForm =
+    reducedSaveAndLoad && showLoadInput ? (
+      <React.Fragment>
+        <label
+          htmlFor="js-metwords-from-personal-store--small"
+          className="inline-block mb05 visually-hidden"
+        >
+          Enter your progress here:
+        </label>
+        <textarea
+          id="js-metwords-from-personal-store--small"
+          className="js-metwords-from-personal-store progress-textarea bg-info dark:text-coolgrey-900 px1 py05 bw-1 b--solid br-4 db w-100 mr1"
+          autoCapitalize="off"
+          autoComplete="off"
+          autoCorrect="off"
+          spellCheck={false}
+          style={{ maxWidth: "200px", maxHeight: "40px" }}
+          rows={1}
+        />
+        <PseudoContentButton
+          className="link-button load-progress mr2"
+          onClick={handleLoadProgress.bind(this)}
+          aria-label="Load progress from text"
         >
           Load
-        </button>
-      );
+        </PseudoContentButton>
+      </React.Fragment>
+    ) : (
+      <button
+        onClick={showLoadInputFn.bind(this)}
+        className="button button--secondary mr2"
+        aria-label="Show progress loading form"
+      >
+        Load
+      </button>
+    );
 
   return (
     <div>
