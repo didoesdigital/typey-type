@@ -76,11 +76,9 @@ const Lesson = ({
   personalDictionaries,
   previousCompletedPhraseAsTyped,
   recentLessonHistory,
-  recommendationHistory,
   repetitionsRemaining,
   restartLesson,
   reviseLesson,
-  revisionMaterial,
   revisionMode,
   sayCurrentPhraseAgain,
   setUpProgressRevisionLesson,
@@ -108,7 +106,6 @@ const Lesson = ({
   updateMarkup,
   updatePersonalDictionaries,
   updatePreset,
-  updateRecommendationHistory,
   updateRevisionMaterial,
   updateTopSpeedPersonalBest,
   userSettings,
@@ -350,7 +347,6 @@ const Lesson = ({
               ref={mainHeading}
             />
             <Finished
-              actualText={actualText}
               changeSortOrderUserSetting={changeSortOrderUserSetting}
               changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
               changeShowScoresWhileTyping={changeShowScoresWhileTyping}
@@ -371,7 +367,6 @@ const Lesson = ({
               handleRepetitionsChange={handleRepetitionsChange}
               handleUpcomingWordsLayout={handleUpcomingWordsLayout}
               hideOtherSettings={hideOtherSettings}
-              recommendationHistory={recommendationHistory}
               metadata={metadata}
               lesson={lesson}
               lessonLength={propsLesson.presentedMaterial.length}
@@ -386,10 +381,8 @@ const Lesson = ({
               timer={timer}
               toggleHideOtherSettings={toggleHideOtherSettings.bind(this)}
               topSpeedPersonalBest={topSpeedPersonalBest}
-              revisionMaterial={revisionMaterial}
               revisionMode={revisionMode}
               updatePreset={updatePreset}
-              updateRecommendationHistory={updateRecommendationHistory}
               updateRevisionMaterial={updateRevisionMaterial}
               updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}

@@ -136,7 +136,6 @@ const Template = (args) => {
             previousCompletedPhraseAsTyped={[]}
             recommendationHistory={[]}
             repetitionsRemaining={1}
-            revisionMaterial={[]}
             revisionMode={false}
             startTime={0}
             settings={{ ignoredChars: "" }}
@@ -176,7 +175,6 @@ const Template = (args) => {
             handleStartFromWordChange={() => undefined}
             handleRepetitionsChange={() => undefined}
             handleUpcomingWordsLayout={() => undefined}
-            updateRevisionMaterial={() => undefined}
             sayCurrentPhraseAgain={() => undefined}
             startFromWordOne={() => undefined}
             stenoHintsOnTheFly={true}
@@ -186,7 +184,6 @@ const Template = (args) => {
             totalWordCount={1}
             upcomingPhrases={["and the"]}
             updatePreset={() => undefined}
-            updateRecommendationHistory={() => undefined}
             updateMarkup={() => undefined}
             updateTopSpeedPersonalBest={() => undefined}
             {...args}

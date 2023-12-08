@@ -453,9 +453,7 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                         appState.previousCompletedPhraseAsTyped
                       }
                       recentLessonHistory={appState.recentLessons.history}
-                      recommendationHistory={appState.recommendationHistory}
                       repetitionsRemaining={appState.repetitionsRemaining}
-                      revisionMaterial={appState.revisionMaterial}
                       revisionMode={appState.revisionMode}
                       updateRevisionMaterial={appMethods.updateRevisionMaterial}
                       sayCurrentPhraseAgain={appMethods.sayCurrentPhraseAgain}
@@ -497,9 +495,6 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                       }
                       upcomingPhrases={appProps.upcomingMaterial}
                       updatePreset={appMethods.updatePreset}
-                      updateRecommendationHistory={
-                        appMethods.updateRecommendationHistory
-                      }
                       updateMarkup={appMethods.updateMarkup}
                       updateTopSpeedPersonalBest={
                         appMethods.updateTopSpeedPersonalBest
