@@ -12,20 +12,23 @@ import Flashcards from "./flashcards/Flashcards";
 import { loadPersonalPreferences } from "../../utils/typey-type";
 import getLessonMetadata from "./utilities/getLessonMetadata";
 import MainLessonView from "./MainLessonView";
+import { LessonProps } from "./types";
+import type { Lesson as LessonType } from "../../types";
+import Zipper from "../../utils/zipper";
 
-const isCustom = (pathname) =>
+const isCustom = (pathname: string) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
 
-const isFinished = (lesson, currentPhraseID) =>
+const isFinished = (lesson: LessonType, currentPhraseID: number) =>
   currentPhraseID === lesson?.presentedMaterial?.length || 0;
 
-const isFlashcards = (pathname) =>
+const isFlashcards = (pathname: string) =>
   pathname.startsWith("/lessons/") && pathname.endsWith("/flashcards");
 
-const isOverview = (pathname) =>
+const isOverview = (pathname: string) =>
   pathname.startsWith("/lessons/") && pathname.endsWith("/overview");
 
-const isProgressLesson = (pathname) =>
+const isProgressLesson = (pathname: string) =>
   pathname.startsWith("/lessons/progress/");
 
 const Lesson = ({
@@ -109,7 +112,7 @@ const Lesson = ({
   updateRevisionMaterial,
   updateTopSpeedPersonalBest,
   userSettings,
-}) => {
+}: LessonProps) => {
   const loadedLessonPath = useRef("");
   const [hideOtherSettings, setHideOtherSettings] = useState(false);
 
@@ -319,7 +322,9 @@ const Lesson = ({
     propsLesson = {
       sourceMaterial: [{ phrase: "The", stroke: "-T" }],
       presentedMaterial: [{ phrase: "The", stroke: "-T" }],
-      // possibly missing `newPresentedMaterial`?
+      // possibly incorrect `newPresentedMaterial`?
+      // @ts-ignore
+      newPresentedMaterial: new Zipper([{ phrase: "The", stroke: "-T" }]),
       settings: { ignoredChars: "" },
       title: "Steno",
       subtitle: "",
