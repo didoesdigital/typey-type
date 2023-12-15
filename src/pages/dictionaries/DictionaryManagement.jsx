@@ -393,7 +393,7 @@ const DictionaryManagement = (props) => {
     }
 
     setImportedDictionariesLoading(false);
-    setDictionaryErrorNotification(false);
+    setDictionaryErrorNotification(null);
     setDictionariesTypeyTypeWillUseState([]);
     setValidDictionariesState([]);
     setInvalidDictionariesState([]);
