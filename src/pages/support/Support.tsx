@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import OutboundLink from "../../components/OutboundLink";
-import { IconExternal } from "../../components/Icon";
+import { IconExternal } from "../../components/Icons";
 import { Tooltip } from "react-tippy";
 import { Link } from "react-router-dom";
 import DescriptionList from "../../components/DescriptionList";

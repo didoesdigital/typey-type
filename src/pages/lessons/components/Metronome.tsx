@@ -7,7 +7,7 @@ import React, {
   SetStateAction,
 } from "react";
 import { Howl } from "howler";
-import { IconMetronome } from "../../../components/Icon";
+import { IconMetronome } from "../../../components/Icons";
 import { Tooltip } from "react-tippy";
 import GoogleAnalytics from "react-ga4";
 import plink from "../../../sounds/digi_plink-with-silence.mp3";

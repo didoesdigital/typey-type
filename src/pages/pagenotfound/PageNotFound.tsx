@@ -3,7 +3,7 @@ import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../components/OutboundLink";
 import * as Sentry from "@sentry/browser";
 import { Link } from "react-router-dom";
-import { IconTypeyType, IconExternal } from "../../components/Icon";
+import { IconTypeyType, IconExternal } from "../../components/Icons";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { IconCheckmark, IconTriangleRight } from "../../../components/Icon";
+import { IconCheckmark, IconTriangleRight } from "../../../components/Icons";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";

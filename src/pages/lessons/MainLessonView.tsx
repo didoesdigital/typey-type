@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { IconClosingCross } from "../../components/Icon";
+import { IconClosingCross } from "../../components/Icons";
 import { Link, useLocation } from "react-router-dom";
 import AnimateHeight from "react-animate-height";
 import DocumentTitle from "react-document-title";

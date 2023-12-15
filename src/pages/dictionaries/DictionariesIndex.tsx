@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import OutboundLink from "../../components/OutboundLink";
 import StrokesForWords from "../../components/StrokesForWords";
-import { IconExternal } from "../../components/Icon";
+import { IconExternal } from "../../components/Icons";
 import { Tooltip } from "react-tippy";
 import Subheader from "../../components/Subheader";
 import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";

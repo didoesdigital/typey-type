@@ -7,7 +7,7 @@ import { pointer } from "d3-selection";
 import { curveMonotoneX } from "d3-shape";
 import { useChartDimensions } from "./Chart/utils";
 import { durationFormatter } from "./../utils/formatters";
-import { IconTypeyType } from "./Icon";
+import { IconTypeyType } from "./Icons";
 import ErrorBoundary from "./ErrorBoundary";
 import Axis from "./Chart/Axis";
 import Baseline from "./Chart/Baseline";

@@ -11,7 +11,7 @@ import {
   getStrokeForCurrentSlideContent,
   getWordForCurrentStrokeSlideIndex,
 } from './utilities';
-import { IconFullscreen } from '../../../components/Icon';
+import { IconFullscreen } from '../../../components/Icons';
 import * as Utils from '../../../utils/utils';
 import { parseLesson } from '../../../utils/typey-type';
 import { getLesson } from '../../../utils/getData';

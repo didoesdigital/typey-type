@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import DictionaryNotFound from "./DictionaryNotFound";
 import GoogleAnalytics from "react-ga4";
 import PseudoContentButton from "../../components/PseudoContentButton";
-import { IconExternal } from "../../components/Icon";
+import { IconExternal } from "../../components/Icons";
 import { Tooltip } from "react-tippy";
 import { lookUpDictionaryInIndex } from "../../utils/typey-type";
 import { fetchDictionaryIndex } from "../../utils/getData";

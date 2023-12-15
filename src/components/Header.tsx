@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { IconTypeyType } from "./Icon";
+import { IconTypeyType } from "./Icons";
 
 const Header = ({ fullscreen }: { fullscreen: string }) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);

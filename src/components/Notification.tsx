@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IconClosingCross } from "./Icon";
+import { IconClosingCross } from "./Icons";
 
 type Props = {
   children: React.ReactNode;
