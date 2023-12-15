@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
-import { IconExternal } from "../Icon";
+import { IconExternal } from "../../../../components/Icon";
 import { Tooltip } from "react-tippy";
-import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
-import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
+import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTooltip";
+import { useAnnouncerApi } from "../../../../components/Announcer/useAnnouncer";
 
 export const missingAussieDict = (
   currentStroke: string,
