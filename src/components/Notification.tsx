@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { IconClosingCross } from "./Icon";
 
-const Notification = ({ onDismiss, children }) => {
+type Props = {
+  children: React.ReactNode;
+  onDismiss?: () => void;
+};
+
+const Notification = ({ onDismiss, children }: Props) => {
   const [showNotification, setShowNotification] = useState(true);
 
   useEffect(() => {
