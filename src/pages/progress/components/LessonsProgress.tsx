@@ -1,5 +1,7 @@
 import React from "react";
-import { IconCheckmark, IconTriangleRight } from "../../../components/Icons";
+import Checkmark from "../../../components/Icons/icon-images/Checkmark.svg";
+import TriangleRight from "../../../components/Icons/icon-images/TriangleRight.svg";
+import Icon from "../../../components/Icons/Icon";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
@@ -61,12 +63,14 @@ const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
   function inProgress() {
     return (
       <ProgressTooltip title="In progress" onShow={announceTooltip}>
-        <IconTriangleRight
-          ariaHidden="true"
-          role="presentation"
-          className={progressIconClasses("violet")}
-          iconTitle=""
-        />
+        <div className={progressIconClasses("violet")}>
+          <Icon
+            iconSVGImport={TriangleRight}
+            width="1em"
+            height="1em"
+            style={{ transform: "translateX(0.025em) scale(0.6)" }}
+          />
+        </div>
         <span className="visually-hidden">In progress</span>
       </ProgressTooltip>
     );
@@ -78,14 +82,14 @@ const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
         title="100 words done or lesson complete"
         onShow={announceTooltip}
       >
-        <IconCheckmark
-          ariaHidden="true"
-          role="presentation"
-          className={progressIconClasses("green")}
-          iconWidth="16"
-          iconHeight="16"
-          iconTitle=""
-        />
+        <div className={progressIconClasses("green")}>
+          <Icon
+            iconSVGImport={Checkmark}
+            width="1em"
+            height="1em"
+            style={{ transform: "scale(0.6)" }}
+          />
+        </div>
         <span className="visually-hidden">
           100 words done or lesson complete
         </span>

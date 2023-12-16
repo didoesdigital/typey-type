@@ -15,63 +15,6 @@ function idForIcon(prefix) {
   return prefix + "-" + Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString();
 }
 
-class IconTriangleRight extends Component {
-  constructor(props) {
-    super(props);
-    this.titleIdAndAriaLabelledBy = idForIcon("iconTriangleRightTitle");
-    this.maskId = idForIcon("iconTriangleRightMask");
-  }
-
-  render() {
-  const iconWidth = this.props.iconWidth || 24;
-  const iconHeight = this.props.iconHeight || 24;
-  let iconTitle = "";
-  if (this.props.iconTitle === "") { iconTitle = ""; }
-  else if (this.props.iconTitle) { iconTitle = this.props.iconTitle; }
-  else { iconTitle = 'Triangle right'; }
-  const classes = this.props.className || '';
-  const role = this.props.role || 'img';
-  const ariaHidden = this.props.ariaHidden || 'false';
-  return (
-    <span className={classes}>
-      <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby={this.titleIdAndAriaLabelledBy} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <title id={this.titleIdAndAriaLabelledBy}>{iconTitle}</title>
-        <mask id={this.maskId} fill="#fff">
-          <path d="M8.445 2.557l7.305 9.13a.5.5 0 0 1 0 .625l-7.305 9.131A.25.25 0 0 1 8 21.287V2.713a.25.25 0 0 1 .445-.156z" />
-        </mask>
-        <g mask={"url(#" + this.maskId + ")"} fill="currentColor">
-          <path d="M0 0h24v24H0z"/>
-        </g>
-      </svg>
-    </span>
-  )
-  }
-}
-
-class IconCheckmark extends Component {
-  constructor(props) {
-    super(props);
-    this.titleIdAndAriaLabelledBy = idForIcon("titleIdAndAriaLabelledBy");
-    this.maskId = idForIcon("checkmarkMask");
-  }
-
-  render() {
-    const iconWidth = this.props.iconWidth || 24;
-    const iconHeight = this.props.iconHeight || 24;
-    let iconTitle = "";
-    if (this.props.iconTitle === "") { iconTitle = ""; }
-    else if (this.props.iconTitle) { iconTitle = this.props.iconTitle; }
-    else { iconTitle = 'Checkmark'; }
-    const classes = this.props.className || '';
-    const role = this.props.role || 'img';
-    const ariaHidden = this.props.ariaHidden || 'false';
-    return (
-      <span className={classes}>
-        <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby={this.titleIdAndAriaLabelledBy} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title id={this.titleIdAndAriaLabelledBy}>{iconTitle}</title><defs><path d="M1.707 16.707l5.441 5.441a1 1 0 0 0 1.532-.142L20.251 5.094a1 1 0 0 0-.509-1.513l-1.041-.347a1 1 0 0 0-1.13.367L8 17l-3.293-3.293a1 1 0 0 0-1.414 0l-1.586 1.586a1 1 0 0 0 0 1.414z" /></defs><g fill="currentColor" fillRule="evenodd"><mask id={this.maskId} fill="currentColor"></mask><path stroke="currentColor" d="M2.06 16.354l5.442 5.44a.5.5 0 0 0 .766-.07l11.57-16.912a.5.5 0 0 0-.254-.757l-1.041-.347a.5.5 0 0 0-.565.184L8.064 17.77l-3.71-3.71a.5.5 0 0 0-.708 0l-1.585 1.585a.5.5 0 0 0 0 .708z"/><g mask={"url(#" + this.maskId + ")"} fill="currentColor"><path d="M0 0h24v24H0z"/></g></g></svg></span>
-    )
-  }
-}
-
 class IconMetronome extends Component {
   constructor(props) {
     super(props);
@@ -167,10 +110,8 @@ class IconFullscreen extends Component {
 }
 
 export {
-  IconCheckmark,
   IconExternal,
   IconFullscreen,
   IconMetronome,
   IconRestart,
-  IconTriangleRight,
 };

@@ -2073,7 +2073,8 @@ button:active .icon {
 }
 
 .progress-circle {
-  transform: scale(.6) translateY(1px);
+  align-items: center;
+  justify-items: center;
 
   &::before {
     content: '';
@@ -2083,11 +2084,9 @@ button:active .icon {
     bottom: 0;
     left: 0;
     border-radius: 50%;
-    border-style: solid;
-    border-width: 2px;
-    width: 24px;
-    height: 24px;
-    transform: translateX(-6px) translateY(-4px);
+    outline: 1px solid currentColor;
+    width: 1em;
+    height: 1em;
   }
 }
 
