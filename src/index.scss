@@ -393,6 +393,9 @@ a {
     &:visited {
       color: var(--violet-600);
     }
+    &.bg-warning:visited {
+      color: var(--violet-800);
+    }
   }
 }
 
