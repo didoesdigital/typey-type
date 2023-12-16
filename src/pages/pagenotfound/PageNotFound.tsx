@@ -3,8 +3,10 @@ import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../components/OutboundLink";
 import * as Sentry from "@sentry/browser";
 import { Link } from "react-router-dom";
-import { IconTypeyType, IconExternal } from "../../components/Icons";
 import { Tooltip } from "react-tippy";
+import { IconExternal } from "../../components/Icons";
+import TypeyTypeIcon from "../../components/Icons/icon-images/TypeyTypeIcon.svg";
+import Icon from "../../components/Icons/Icon";
 import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
 type Props = {
@@ -47,11 +49,12 @@ const PageNotFound = ({ location }: Props) => {
                 id="ga--header--logo"
               >
                 <h1 ref={mainHeading} tabIndex={-1} className="flex items-end">
-                  <IconTypeyType
-                    role="presentation"
-                    iconWidth="64"
-                    iconHeight="34"
-                    className="mr1 svg-icon-wrapper svg-icon-wrapper--typey-type-logo svg-baseline"
+                  <Icon
+                    iconSVGImport={TypeyTypeIcon}
+                    color="currentColor"
+                    width="0.5em"
+                    height="0.5em"
+                    className="icon mr1"
                   />
                   <span className="heading-link__logo-text">
                     Typey&nbsp;Type
