@@ -2059,8 +2059,7 @@ button:active .icon {
 }
 
 .progress-circle {
-  align-items: center;
-  justify-items: center;
+  transform: translateY(0.2em);
 
   &::before {
     content: '';
