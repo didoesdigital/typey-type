@@ -3,7 +3,9 @@ import React from "react";
 interface IconProps {
   /** e.g. `ExternalIcon` with `import ExternalIcon from "./icon-images/External.svg";` */
   iconSVGImport: string;
+  /** Use `em` unit to adjust icon with font size e.g. `1em` */
   width?: string;
+  /** Use `em` unit to adjust icon with font size e.g. `1em` */
   height?: string;
   color?: string;
   className?: string;
