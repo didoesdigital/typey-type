@@ -1659,6 +1659,8 @@ $textarea-padding-x: 8px;
 // see also: .show-scores-control
 .revision-mode-button {
   color: desaturate($brand-primary, 5%);
+  display: inline-flex;
+  align-items: center;
   font-size: $h6-size;
   letter-spacing: 0.05em;
   padding-right: 24px;

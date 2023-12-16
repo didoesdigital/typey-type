@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { IconClosingCross } from "../../components/Icons";
+import ClosingCross from "../../components/Icons/icon-images/ClosingCross.svg";
+import Icon from "../../components/Icons/Icon";
 import { Link, useLocation } from "react-router-dom";
 import AnimateHeight from "react-animate-height";
 import DocumentTitle from "react-document-title";
@@ -249,14 +250,15 @@ const MainLessonView = ({
                         to={lesson?.path.replace(/lesson\.txt$/, "")}
                         onClick={restartLesson}
                         className="revision-mode-button no-underline absolute right-0"
+                        aria-label="Exit revision mode"
                       >
                         Revision mode
-                        <IconClosingCross
-                          role="img"
-                          iconWidth="24"
-                          iconHeight="24"
-                          className="ml1 svg-icon-wrapper svg-baseline"
-                          iconTitle="Exit revision mode"
+                        <Icon
+                          iconSVGImport={ClosingCross}
+                          width="1em"
+                          height="1em"
+                          className="icon ml1"
+                          style={{transform: "translateY(-0.1em)"}}
                         />
                       </Link>
                     </div>
