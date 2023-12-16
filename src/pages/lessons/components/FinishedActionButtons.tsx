@@ -30,14 +30,14 @@ const FinishedActionButtons = ({
       className={numericAccuracy >= 90 ? passClasses : failClasses}
       role="button"
     >
-          <Icon
-            iconSVGImport={RestartIcon}
-            width="1em"
-            height="1em"
-            className="icon mr1"
-            color={"currentColor"}
-            style={{ transform: "translateY(0.125em)" }}
-          />
+      <Icon
+        iconSVGImport={RestartIcon}
+        width="1em"
+        height="1em"
+        className="icon mr1"
+        color={"currentColor"}
+        style={{ transform: "translateY(0.125em)" }}
+      />
       Re<u style={{ textDecorationStyle: "double" }}>s</u>tart lesson
     </a>
     <FinishedNextLessonButton suggestedNextUrl={suggestedNextUrl} />
