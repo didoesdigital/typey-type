@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Tooltip } from "react-tippy";
 import GoogleAnalytics from "react-ga4";
 import ReactModal from 'react-modal';
 import FlashcardsCarouselActionButtons from './components/FlashcardsCarouselActionButtons';
@@ -449,9 +450,21 @@ currentSlide: currentSlide
                       fullscreen
                     }
                   >
+                    {/* @ts-ignore */}
+                    <Tooltip
+                      title={fullscreen ? "Leave fullscreen" : "Enter fullscreen"}
+                      className=""
+                      animation="shift"
+                      arrow="true"
+                      duration="0"
+                      tabIndex={0}
+                      tag="span"
+                      theme="didoesdigital didoesdigital-sm"
+                      trigger="mouseenter focus click"
+                    >
                     <label
                       className="absolute absolute--fill flex items-center justify-center"
-                      aria-label="Fullscreen"
+                      aria-label={fullscreen ? "Leave fullscreen" : "Enter fullscreen"}
                       style={{
                         cursor: "pointer",
                       }}
@@ -471,6 +484,7 @@ currentSlide: currentSlide
                         color="currentColor"
                       />
                     </label>
+                    </Tooltip>
                   </div>
                 </CarouselProvider>
               </div>
