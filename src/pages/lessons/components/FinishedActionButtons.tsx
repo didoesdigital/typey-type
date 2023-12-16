@@ -1,5 +1,6 @@
 import React from "react";
-import { IconRestart } from "../../../components/Icons";
+import RestartIcon from "../../../components/Icons/icon-images/Restart.svg";
+import Icon from "../../../components/Icons/Icon";
 import FinishedNextLessonButton from "./FinishedNextLessonButton";
 
 type FinishedActionButtonsProps = {
@@ -29,12 +30,14 @@ const FinishedActionButtons = ({
       className={numericAccuracy >= 90 ? passClasses : failClasses}
       role="button"
     >
-      <IconRestart
-        ariaHidden="true"
-        role="presentation"
-        iconFill="#596091"
-        className="mr1 svg-icon-wrapper svg-baseline"
-      />
+          <Icon
+            iconSVGImport={RestartIcon}
+            width="1em"
+            height="1em"
+            className="icon mr1"
+            color={"currentColor"}
+            style={{ transform: "translateY(0.125em)" }}
+          />
       Re<u style={{ textDecorationStyle: "double" }}>s</u>tart lesson
     </a>
     <FinishedNextLessonButton suggestedNextUrl={suggestedNextUrl} />
