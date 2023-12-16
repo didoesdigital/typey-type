@@ -1,16 +1,10 @@
 import React from "react";
 
-// https://jakearchibald.github.io/svgomg/
-//
-// custom size, meaningful SVG image
-// <IconTypeyType iconWidth="300" iconHeight="300" className="m1" title="custom title for this icon" />
-//
-// SVG icon inline with text
-// <IconTypeyType className="mr1 svg-icon-wrapper svg-baseline" title="custom title for this icon" />
-//
-// Linked SVG icon, no text TEST THIS
-// <Link to="/" aria-label="Label"><IconTypeyType className="mr1 svg-icon-wrapper svg-baseline" /></Link>
+// NOTE: All uses of the IconExternal component should be updated to use
+// the new Icon component with External.svg, then this component should
+// be deleted. That's enough for one day though.
 
+/** this ensures multiple "external icons" on one page have separate IDs */
 function idForIcon(prefix) {
   return (
     prefix +
