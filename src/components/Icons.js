@@ -15,31 +15,6 @@ function idForIcon(prefix) {
   return prefix + "-" + Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString();
 }
 
-class IconMetronome extends Component {
-  constructor(props) {
-    super(props);
-    this.titleIdAndAriaLabelledBy = idForIcon("titleIdAndAriaLabelledBy");
-    this.maskId = idForIcon("metronomeMask");
-  }
-
-  render() {
-    const iconWidth = this.props.iconWidth || 24;
-    const iconHeight = this.props.iconHeight || 24;
-    let iconTitle = "";
-    if (this.props.iconTitle === "") { iconTitle = ""; }
-    else if (this.props.iconTitle) { iconTitle = this.props.iconTitle; }
-    else { iconTitle = 'Metronome'; }
-    const classes = this.props.className || '';
-    const role = this.props.role || 'img';
-    const ariaHidden = this.props.ariaHidden || 'false';
-    return (
-      <span className={classes}>
-        <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby={this.titleIdAndAriaLabelledBy} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title id={this.titleIdAndAriaLabelledBy}>{iconTitle}</title><path fillRule="evenodd" clipRule="evenodd" d="M9.395 1a.5.5 0 00-.486.384l-4.762 20a.5.5 0 00.486.616h14.734a.5.5 0 00.486-.616l-2.216-9.308 1.87-2.137a2 2 0 10-1.434-1.399L17.07 9.689l-1.977-8.305A.5.5 0 0014.604 1h-5.21zm6.102 10.485l-1.906-8.1A.5.5 0 0013.104 3h-2.208a.5.5 0 00-.486.385l-2.824 12a.5.5 0 00.487.615h3.473l3.95-4.515zM14.204 16h1.724a.5.5 0 00.487-.614l-.355-1.507L14.204 16zm-7.559 3.386a.5.5 0 00.487.614h9.737a.5.5 0 00.487-.614l-.236-1a.5.5 0 00-.486-.386H7.367a.5.5 0 00-.487.386l-.235 1zM12 7a1 1 0 100-2 1 1 0 000 2zm.999 2a1 1 0 11-2 0 1 1 0 012 0zM12 13a1 1 0 100-2 1 1 0 000 2zm8-4.5a.5.5 0 100-1 .5.5 0 000 1z" fill="currentColor"/></svg>
-      </span>
-    )
-  }
-}
-
 class IconRestart extends Component {
   constructor(props) {
     super(props);
@@ -86,6 +61,5 @@ class IconExternal extends Component {
 
 export {
   IconExternal,
-  IconMetronome,
   IconRestart,
 };

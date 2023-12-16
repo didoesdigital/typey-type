@@ -7,7 +7,8 @@ import React, {
   SetStateAction,
 } from "react";
 import { Howl } from "howler";
-import { IconMetronome } from "../../../components/Icons";
+import MetronomeIcon from "../../../components/Icons/icon-images/Metronome.svg";
+import Icon from "../../../components/Icons/Icon";
 import { Tooltip } from "react-tippy";
 import GoogleAnalytics from "react-ga4";
 import plink from "../../../sounds/digi_plink-with-silence.mp3";
@@ -161,12 +162,11 @@ const Metronome: FC<Props> = (props) => {
           trigger="mouseenter focus click"
           onShow={announceTooltip}
         >
-          <IconMetronome
-            role="presentation"
-            iconWidth="24"
-            iconHeight="24"
-            className="svg-icon-wrapper svg-baseline"
-            title="Metronome"
+          <Icon
+            iconSVGImport={MetronomeIcon}
+            width="1em"
+            height="1em"
+            style={{ transform: "translateY(0.125em)" }}
           />{" "}
           Start
         </Tooltip>
@@ -189,12 +189,11 @@ const Metronome: FC<Props> = (props) => {
           trigger="mouseenter focus click"
           onShow={announceTooltip}
         >
-          <IconMetronome
-            role="presentation"
-            iconWidth="24"
-            iconHeight="24"
-            className="svg-icon-wrapper svg-baseline"
-            title="Metronome"
+          <Icon
+            iconSVGImport={MetronomeIcon}
+            width="1em"
+            height="1em"
+            style={{ transform: "translateY(0.125em)" }}
           />{" "}
           Stop
         </Tooltip>
