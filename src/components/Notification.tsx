@@ -30,12 +30,7 @@ const Notification = ({ onDismiss, children }: Props) => {
             aria-label="Dismiss notification"
             onClick={handleDismiss.bind(this)}
           >
-            <Icon
-              iconSVGImport={ClosingCross}
-              width="1em"
-              height="1em"
-              className="icon"
-            />
+            <Icon iconSVGImport={ClosingCross} width="1em" height="1em" />
           </button>
         </div>
       ) : null}
