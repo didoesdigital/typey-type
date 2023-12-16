@@ -5,7 +5,7 @@ import React from "react";
 // be deleted. That's enough for one day though.
 
 /** this ensures multiple "external icons" on one page have separate IDs */
-function idForIcon(prefix) {
+function idForIcon(prefix: string) {
   return (
     prefix +
     "-" +
@@ -13,12 +13,21 @@ function idForIcon(prefix) {
   );
 }
 
-const IconExternal = (props) => {
+type Props = {
+  iconTitle?: string;
+  iconWidth: string;
+  iconHeight: string;
+  className?: string;
+  role?: "img" | "presentation";
+  ariaHidden?: "true" | "false";
+};
+
+const IconExternal = (props: Props) => {
   const titleIdAndAriaLabelledBy = idForIcon("iconExternalTitle");
   const maskId = idForIcon("mask-external");
 
-  const iconWidth = props.iconWidth || 24;
-  const iconHeight = props.iconHeight || 24;
+  const iconWidth = +props.iconWidth || 24;
+  const iconHeight = +props.iconHeight || 24;
   let iconTitle = "";
   if (props.iconTitle === "") {
     iconTitle = "";
