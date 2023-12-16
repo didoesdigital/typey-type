@@ -7,7 +7,8 @@ import { pointer } from "d3-selection";
 import { curveMonotoneX } from "d3-shape";
 import { useChartDimensions } from "./Chart/utils";
 import { durationFormatter } from "./../utils/formatters";
-import { IconTypeyType } from "./Icons";
+import TypeyTypeIcon from "./Icons/icon-images/TypeyTypeIcon.svg";
+import Icon from "./Icons/Icon";
 import ErrorBoundary from "./ErrorBoundary";
 import Axis from "./Chart/Axis";
 import Baseline from "./Chart/Baseline";
@@ -175,11 +176,13 @@ export default function FinishedSpeedChart({ data }) {
         // style={{ top: dimensions.marginTop}}
       >
         <p className="flex items-end pr1 mb0">
-          <IconTypeyType
-            role="presentation"
-            iconWidth="64"
-            iconHeight="34"
-            className="mr1 svg-icon-wrapper svg-icon-wrapper--typey-type-logo svg-baseline"
+          <Icon
+            iconSVGImport={TypeyTypeIcon}
+            color="currentColor"
+            width="1.25em"
+            height="1.25em"
+            className="icon mr1"
+            style={{ transform: "translateY(-0.333333em)" }}
           />
           <span className="heading-link__logo-text" aria-hidden={true}>
             Typey&nbsp;Type
