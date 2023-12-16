@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { IconClosingCross } from "./Icons";
+import ClosingCross from "./Icons/icon-images/ClosingCross.svg";
+import Icon from "./Icons/Icon";
 
 type Props = {
   children: React.ReactNode;
@@ -25,13 +26,17 @@ const Notification = ({ onDismiss, children }: Props) => {
         <div className="notification notification--global fixed w-100 flex wrap justify-between pa1 p1 p3 pa3 items-center bg-danger dark:text-coolgrey-900">
           <div className="notification__message">{children}</div>
           <div onClick={handleDismiss.bind(this)}>
-            <IconClosingCross
-              role="img"
-              iconWidth="24"
-              iconHeight="24"
-              className="ml1 svg-icon-wrapper svg-baseline"
-              iconTitle="Dismiss notification"
-            />
+            <button
+              className="de-emphasized-button flex items-center justify-center p1"
+              aria-label="Dismiss notification"
+            >
+              <Icon
+                iconSVGImport={ClosingCross}
+                width="1em"
+                height="1em"
+                className="icon"
+              />
+            </button>
           </div>
         </div>
       ) : null}
