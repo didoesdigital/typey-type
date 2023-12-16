@@ -2034,30 +2034,6 @@ small .svg-icon-wrapper.svg-baseline svg {
   background-color: currentColor;
 }
 
-a .icon,
-button .icon {
-  background-color: var(--blue-800);
-  @media (prefers-background-color-scheme: dark) {
-    background-color: var(--blue-200);
-  }
-}
-a:hover .icon,
-button:hover .icon {
-  background-color: var(--blue-700);
-  @media (prefers-background-color-scheme: dark) {
-    background-color: var(--blue-100);
-  }
-}
-a:focus .icon,
-a:active .icon,
-button:focus .icon,
-button:active .icon {
-  background-color: var(--blue-900);
-  @media (prefers-background-color-scheme: dark) {
-    background-color: var(--blue-300);
-  }
-}
-
 .progress-circle {
   transform: translateY(0.2em);
 
