@@ -15,38 +15,6 @@ function idForIcon(prefix) {
   return prefix + "-" + Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString();
 }
 
-class IconChevronRight extends Component {
-  constructor(props) {
-    super(props);
-    this.titleIdAndAriaLabelledBy = idForIcon("iconChevronRightTitle");
-  }
-
-  render() {
-  const iconWidth = this.props.iconWidth || 24;
-  const iconHeight = this.props.iconHeight || 24;
-  let iconTitle = "";
-  if (this.props.iconTitle === "") { iconTitle = ""; }
-  else if (this.props.iconTitle) { iconTitle = this.props.iconTitle; }
-  else { iconTitle = 'Chevron right'; }
-  const classes = this.props.className || '';
-  const role = this.props.role || 'img';
-  const ariaHidden = this.props.ariaHidden || 'false';
-  return (
-    <span className={classes}>
-      <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby={this.titleIdAndAriaLabelledBy} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <title id={this.titleIdAndAriaLabelledBy}>{iconTitle}</title>
-        <mask id="iconChevronRightMask" fill="#fff">
-          <path d="M15.812 11.813L8.595 4.596A1.835 1.835 0 1 1 11.19 2l8.319 8.319c.41.41.605.956.584 1.494a1.995 1.995 0 0 1-.584 1.494l-8.319 8.318a1.835 1.835 0 1 1-2.595-2.595l7.217-7.217z" id="iconChevronRightPath"/>
-        </mask>
-        <g mask="url(#iconChevronRightMask)" fill="currentColor">
-          <path d="M0 0h24v24H0z"/>
-        </g>
-      </svg>
-    </span>
-  )
-  }
-}
-
 class IconTriangleRight extends Component {
   constructor(props) {
     super(props);
@@ -200,7 +168,6 @@ class IconFullscreen extends Component {
 
 export {
   IconCheckmark,
-  IconChevronRight,
   IconExternal,
   IconFullscreen,
   IconMetronome,
