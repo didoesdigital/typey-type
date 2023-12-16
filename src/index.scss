@@ -1983,11 +1983,13 @@ $textarea-padding-x: 8px;
   }
   &.fullscreen-button-ghost {
     background-color: transparent;
-    border: 1px solid var(--coolgrey-300);
+    border: 1px solid var(--coolgrey-500);
+    color: var(--violet-600);
     font-size: $h5-size;
     text-decoration: underline;
     &:hover {
-      color: var(--coolgrey-300);
+      border-color: var(--coolgrey-600);
+      color: var(--violet-700);
     }
     &:active,
     &:focus {
@@ -2023,25 +2025,6 @@ $textarea-padding-x: 8px;
 small .svg-icon-wrapper.svg-baseline svg {
   bottom: -0.175em;
   position: absolute;
-}
-
-.icon-button {
-  position: absolute;
-  font-size: $h3-size;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  svg {
-    left: 50%;
-    margin-right: -50%;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
 }
 
 .icon {

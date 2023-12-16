@@ -84,34 +84,8 @@ class IconExternal extends Component {
   }
 }
 
-class IconFullscreen extends Component {
-  constructor(props) {
-    super(props);
-    this.titleIdAndAriaLabelledBy = idForIcon("iconFullscreenTitle");
-  }
-
-  render() {
-    const iconWidth = this.props.iconWidth || 24;
-    const iconHeight = this.props.iconHeight || 24;
-    let iconTitle = "";
-    if (this.props.iconTitle === "") { iconTitle = ""; }
-    else if (this.props.iconTitle) { iconTitle = this.props.iconTitle; }
-    else { iconTitle = 'Fullscreen'; }
-    const classes = this.props.className || '';
-    const role = this.props.role || 'img';
-    const ariaHidden = this.props.ariaHidden || 'false';
-    return (
-      <span className={classes}>
-        <svg aria-hidden={ariaHidden} role={role} width={iconWidth} height={iconHeight} aria-labelledby={this.titleIdAndAriaLabelledBy} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title id={this.titleIdAndAriaLabelledBy}>{iconTitle}</title>
-          <mask id="mask-fullscreen-a" fill="#fff"><path d="M2 14h2v5h5v2H2v-7zM9 3v2H4v5H2V3h7zm13 7h-2V5h-5V3h7v7zm-7 11v-2h5v-5h2v7h-7z"/></mask><path d="M2 14h2v5h5v2H2v-7zM9 3v2H4v5H2V3h7zm13 7h-2V5h-5V3h7v7zm-7 11v-2h5v-5h2v7h-7z"/><g mask="url(#mask-fullscreen-a)" fill="currentColor"><path d="M0 0h24v24H0z"/></g></svg>
-      </span>
-    )
-  }
-}
-
 export {
   IconExternal,
-  IconFullscreen,
   IconMetronome,
   IconRestart,
 };

@@ -11,7 +11,8 @@ import {
   getStrokeForCurrentSlideContent,
   getWordForCurrentStrokeSlideIndex,
 } from './utilities';
-import { IconFullscreen } from '../../../components/Icons';
+import FullscreenIcon from "../../../components/Icons/icon-images/Fullscreen.svg";
+import Icon from "../../../components/Icons/Icon";
 import * as Utils from '../../../utils/utils';
 import { parseLesson } from '../../../utils/typey-type';
 import { getLesson } from '../../../utils/getData';
@@ -442,10 +443,33 @@ currentSlide: currentSlide
                   />
 
                   {/* Fullscreen button */}
-                  <div className={"block relative text-center fullscreen-button fullscreen-button-ghost" + fullscreen}>
-                    <label className="absolute absolute--fill" aria-label="Fullscreen">
-                      <input className="absolute" type="checkbox" name="fullscreen" id="fullscreen" checked={this.props.fullscreen} onChange={this.props.changeFullscreen.bind(this)} />
-                      <IconFullscreen iconWidth="24" iconHeight="24" className="icon-button" title="Fullscreen" />
+                  <div
+                    className={
+                      "block relative text-center fullscreen-button fullscreen-button-ghost" +
+                      fullscreen
+                    }
+                  >
+                    <label
+                      className="absolute absolute--fill flex items-center justify-center"
+                      aria-label="Fullscreen"
+                      style={{
+                        cursor: "pointer",
+                      }}
+                    >
+                      <input
+                        className="absolute"
+                        type="checkbox"
+                        name="fullscreen"
+                        id="fullscreen"
+                        checked={this.props.fullscreen}
+                        onChange={this.props.changeFullscreen.bind(this)}
+                      />
+                      <Icon
+                        iconSVGImport={FullscreenIcon}
+                        width="1.5em"
+                        height="1.5em"
+                        color="currentColor"
+                      />
                     </label>
                   </div>
                 </CarouselProvider>
