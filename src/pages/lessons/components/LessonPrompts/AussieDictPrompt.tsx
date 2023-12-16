@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { IconExternal } from "../../../../components/Icons";
+import { IconExternal } from "../../../../components/IconExternal";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTooltip";
 import { useAnnouncerApi } from "../../../../components/Announcer/useAnnouncer";

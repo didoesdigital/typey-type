@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import OutboundLink from "../../components/OutboundLink";
 import { Link } from "react-router-dom";
-import { IconExternal } from "../../components/Icons";
+import { IconExternal } from "../../components/IconExternal";
 import { Tooltip } from "react-tippy";
 import typeyTypeDemoGIF from "../../images/typey-type-for-stenographers-demo.gif";
 import typeyTypeyDemoCoverImage from "../../images/typey-type-for-stenographers-demo-cover-image.png";

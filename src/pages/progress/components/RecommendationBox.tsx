@@ -2,7 +2,7 @@ import React from "react";
 import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../../components/OutboundLink";
 import RecommendationDescription from "./RecommendationDescription";
-import { IconExternal } from "../../../components/Icons";
+import { IconExternal } from "../../../components/IconExternal";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";

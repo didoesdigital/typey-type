@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import OutboundLink from "../../../../components/OutboundLink";
 import ReactModal from "react-modal";
 import { Tooltip } from "react-tippy";
-import { IconExternal } from "../../../../components/Icons";
+import { IconExternal } from "../../../../components/IconExternal";
 import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTooltip";
 
 type Props = {

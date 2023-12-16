@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import OutboundLink from "./OutboundLink";
-import { IconExternal } from "./Icons";
+import { IconExternal } from "./IconExternal";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "./Announcer/useAnnounceTooltip";
 

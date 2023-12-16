@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import OutboundLink from "../../components/OutboundLink";
-import { IconExternal } from "../../components/Icons";
+import { IconExternal } from "../../components/IconExternal";
 import LessonList from "./components/LessonList";
 import { Tooltip } from "react-tippy";
 import Subheader from "../../components/Subheader";

@@ -4,7 +4,7 @@ import OutboundLink from "../../components/OutboundLink";
 import * as Sentry from "@sentry/browser";
 import { Link } from "react-router-dom";
 import { Tooltip } from "react-tippy";
-import { IconExternal } from "../../components/Icons";
+import { IconExternal } from "../../components/IconExternal";
 import TypeyTypeIcon from "../../components/Icons/icon-images/TypeyTypeIcon.svg";
 import Icon from "../../components/Icons/Icon";
 import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
