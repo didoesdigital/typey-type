@@ -23,6 +23,10 @@ const Icon: React.FC<IconProps> = ({
   const iconStyle: React.CSSProperties = {
     backgroundColor: color,
     display: "inline-block",
+    WebkitMaskImage: `url(${iconSVGImport})`,
+    WebkitMaskRepeat: "no-repeat",
+    WebkitMaskPosition: "center center",
+    WebkitMaskSize: "contain",
     mask: `url(${iconSVGImport}) no-repeat center / contain`,
     width,
     height,
