@@ -517,16 +517,18 @@ const Progress = (props: Props) => {
         >
           <div className="flex justify-between">
             <h2 className="mb0">Your progress</h2>
-            <div className="flex mb3">
-              <div className="flex">{loadForm}</div>
-              <PseudoContentButton
-                className="js-clipboard-button link-button copy-to-clipboard"
-                dataClipboardTarget="#js-metwords-from-typey-type"
-                aria-label="Copy progress to clipboard"
-              >
-                Copy
-              </PseudoContentButton>
-            </div>
+            {reducedSaveAndLoad && (
+              <div className="flex mb3">
+                <div className="flex">{loadForm}</div>
+                <PseudoContentButton
+                  className="js-clipboard-button link-button copy-to-clipboard"
+                  dataClipboardTarget="#js-metwords-from-typey-type"
+                  aria-label="Copy progress to clipboard"
+                >
+                  Copy
+                </PseudoContentButton>
+              </div>
+            )}
           </div>
 
           <ProgressSummaryAndLinks
