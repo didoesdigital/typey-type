@@ -320,43 +320,43 @@ class App extends Component {
   }
 
   setPersonalPreferences(source) {
-    let metWords = this.state.metWords;
-    let flashcardsMetWords = this.state.flashcardsMetWords;
-    let flashcardsProgress = this.state.flashcardsProgress;
-    let globalUserSettings = this.state.globalUserSettings;
-    let lessonsProgress = this.state.lessonsProgress;
-    let recentLessons = this.state.recentLessons;
-    let topSpeedPersonalBest = this.state.topSpeedPersonalBest;
-    let userGoals = this.state.userGoals;
-    let userSettings = this.state.userSettings;
+    let metWordsFromStateOrArg = this.state.metWords;
+    let flashcardsMetWordsState = this.state.flashcardsMetWords;
+    let flashcardsProgressState = this.state.flashcardsProgress;
+    let globalUserSettingsState = this.state.globalUserSettings;
+    let lessonsProgressState = this.state.lessonsProgress;
+    let recentLessonsState = this.state.recentLessons;
+    let topSpeedPersonalBestState = this.state.topSpeedPersonalBest;
+    let userGoalsState = this.state.userGoals;
+    let userSettingsState = this.state.userSettings;
     if (source && source !== '') {
       try {
         let parsedSource = JSON.parse(source);
         if (parsedSource && typeof parsedSource === "object") {
-          metWords = parsedSource;
+          metWordsFromStateOrArg = parsedSource;
         }
       }
       catch (error) { }
     }
     else {
-      [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest, userGoals] = loadPersonalPreferences();
+      [metWordsFromStateOrArg, userSettingsState, flashcardsMetWordsState, flashcardsProgressState, globalUserSettingsState, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState, userGoalsState] = loadPersonalPreferences();
     }
 
-    let yourSeenWordCount = calculateSeenWordCount(this.state.metWords);
-    let yourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
+    let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
+    let calculatedYourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
 
     this.setState({
-      flashcardsMetWords: flashcardsMetWords,
-      flashcardsProgress: flashcardsProgress,
-      globalUserSettings: globalUserSettings,
-      lessonsProgress: lessonsProgress,
-      recentLessons: recentLessons,
-      topSpeedPersonalBest: topSpeedPersonalBest,
-      metWords: metWords,
-      userSettings: userSettings,
-      userGoals: userGoals,
-      yourSeenWordCount: yourSeenWordCount,
-      yourMemorisedWordCount: yourMemorisedWordCount,
+      flashcardsMetWords: flashcardsMetWordsState,
+      flashcardsProgress: flashcardsProgressState,
+      globalUserSettings: globalUserSettingsState,
+      lessonsProgress: lessonsProgressState,
+      recentLessons: recentLessonsState,
+      topSpeedPersonalBest: topSpeedPersonalBestState,
+      metWords: metWordsFromStateOrArg,
+      userSettings: userSettingsState,
+      userGoals: userGoalsState,
+      yourSeenWordCount: calculatedYourSeenWordCount,
+      yourMemorisedWordCount: calculatedYourMemorisedWordCount,
     }, () => {
       writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
       writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
@@ -370,7 +370,7 @@ class App extends Component {
       this.setupLesson();
     });
 
-    return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
+    return [metWordsFromStateOrArg, userSettingsState, flashcardsMetWordsState, flashcardsProgressState, globalUserSettingsState, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState['wpm'], userGoalsState];
   }
 
   startFromWordOne() {
