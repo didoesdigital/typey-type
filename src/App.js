@@ -1165,7 +1165,7 @@ class App extends Component {
       hintWasShown: shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)
     });
 
-    var newState = {
+    const newState = {
       currentPhraseAttempts: currentPhraseAttempts,
       numberOfMatchedChars: numberOfMatchedChars,
       totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
@@ -1180,9 +1180,9 @@ class App extends Component {
     };
 
     // NOTE: here is where attempts are defined before being pushed with completed phrases
-    let phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount, unmatchedActual);
-    let accurateStroke = phraseMisstrokes.strokeAccuracy; // false
-    let attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
+    const phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount, unmatchedActual);
+    const accurateStroke = phraseMisstrokes.strokeAccuracy; // false
+    const attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
 
     if (!accurateStroke && !this.state.showStrokesInLesson && this.state.userSettings.showStrokesOnMisstroke) {
       this.setState({showStrokesInLesson: true});
