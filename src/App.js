@@ -1235,8 +1235,8 @@ class App extends Component {
       const nextPhraseID = this.state.currentPhraseID + 1;
       let nextItem = this.state.lesson.presentedMaterial[nextPhraseID];
 
-      if (!!nextItem && this.state.lesson.presentedMaterial && this.state.lesson.presentedMaterial[this.state.currentPhraseID] && this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase) {
-        let lastWord = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
+      if (!!nextItem && this.state.lesson?.presentedMaterial?.[this.state.currentPhraseID]?.phrase) {
+        const lastWord = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
         nextItem = updateCapitalisationStrokesInNextItem(nextItem, lastWord);
       }
 
