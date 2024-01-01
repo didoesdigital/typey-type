@@ -1133,6 +1133,7 @@ class App extends Component {
   updateMarkup(event) {
     let actualText = event.target.value;
 
+    // Start timer on first key stroke
     if (this.state.startTime === null) {
       this.setState({
         startTime: new Date(),
@@ -1152,7 +1153,7 @@ class App extends Component {
       unmatchedChars = removeIgnoredCharsFromSplitText(unmatchedChars, this.state.lesson.settings.ignoredChars);
     }
 
-    let [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
+    const [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
     // @ts-ignore this should be ok when currentPhraseAttempts is typed correctly instead of never[]
     const currentPhraseAttempts = this.state.currentPhraseAttempts.map(copy => ({...copy}));
