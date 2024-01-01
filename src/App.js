@@ -91,7 +91,7 @@ class App extends Component {
     this.charsPerWord = 5;
     // When updating default state for anything stored in local storage,
     // add the same default to load/set personal preferences code and test.
-    let metWords = loadPersonalPreferences()[0];
+    let metWordsFromStorage = loadPersonalPreferences()[0];
     let startingMetWordsToday = loadPersonalPreferences()[0];
     let recentLessons = loadPersonalPreferences()[6];
     this.appFetchAndSetupGlobalDict = fetchAndSetupGlobalDict.bind(this);
@@ -165,7 +165,7 @@ class App extends Component {
       totalNumberOfMistypedWords: 0,
       totalNumberOfHintedWords: 0,
       disableUserSettings: false,
-      metWords: metWords,
+      metWords: metWordsFromStorage,
       revisionMode: false,
       oldWordsGoalUnveiled: false,
       newWordsGoalUnveiled: false,
@@ -228,8 +228,8 @@ class App extends Component {
       revisionMaterial: [
       ],
       startingMetWordsToday: startingMetWordsToday,
-      yourSeenWordCount: calculateSeenWordCount(metWords),
-      yourMemorisedWordCount: calculateMemorisedWordCount(metWords)
+      yourSeenWordCount: calculateSeenWordCount(metWordsFromStorage),
+      yourMemorisedWordCount: calculateMemorisedWordCount(metWordsFromStorage)
     };
   }
 
@@ -579,11 +579,11 @@ class App extends Component {
     return flashcardsMetWords;
   }
 
-  updateStartingMetWordsAndCounts(metWords) {
+  updateStartingMetWordsAndCounts(providedMetWords) {
     this.setState({
-      startingMetWordsToday: metWords,
-      yourSeenWordCount: calculateSeenWordCount(metWords),
-      yourMemorisedWordCount: calculateMemorisedWordCount(metWords)
+      startingMetWordsToday: providedMetWords,
+      yourSeenWordCount: calculateSeenWordCount(providedMetWords),
+      yourMemorisedWordCount: calculateMemorisedWordCount(providedMetWords)
     });
   }
 
@@ -604,7 +604,7 @@ class App extends Component {
     });
   }
 
-  setUpProgressRevisionLesson(metWords, userSettings, newSeenOrMemorised) {
+  setUpProgressRevisionLesson(metWordsFromStorage, userSettings, newSeenOrMemorised) {
     let newUserSettings = Object.assign({}, userSettings);
     newUserSettings.newWords = newSeenOrMemorised[0];
     newUserSettings.seenWords = newSeenOrMemorised[1];
@@ -648,7 +648,7 @@ class App extends Component {
 
     this.appFetchAndSetupGlobalDict(loadPlover, null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
-      let myWords = createWordListFromMetWords(metWords).join("\n");
+      let myWords = createWordListFromMetWords(metWordsFromStorage).join("\n");
       // parseWordList appears to remove empty lines and other garbage, we might not need it here
       let result = parseWordList(myWords);
         // perhaps we can replace these with result = createWordListFromMetWords?
@@ -706,7 +706,6 @@ class App extends Component {
     const revisionMaterial = this.state.revisionMaterial;
     const search = this.props.location.search;
     const userSettings = this.state.userSettings;
-    const metWords = this.state.metWords;
     const lessonPath = this.state.lesson.path;
     let newLesson = Object.assign({}, this.state.lesson);
     const prevRecentLessons = this.state.recentLessons;
@@ -764,10 +763,10 @@ class App extends Component {
       }
 
       // Filter lesson by familiarity:
-      newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, metWords, newSettings, revisionMode);
+      newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, newSettings, revisionMode);
 
       // Sort lesson:
-      newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, metWords, newSettings);
+      newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, this.state.metWords, newSettings);
 
       // Apply range (start from & limit) to lesson:
       if (revisionMode && limitNumberOfWords > 0) {
