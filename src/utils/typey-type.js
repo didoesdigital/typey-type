@@ -215,9 +215,6 @@ function matchSplitText(expected, actualText, settings={ignoredChars: ''}, userS
   let matchedActual = actualTextChars.slice(0,actualTextIndex).join('');
   let unmatchedActual = actualTextChars.slice(actualTextIndex).join('');
 
-  if ((unmatchedExpected.length === 1) && (ignoredChars.indexOf(unmatchedExpected) !== -1)) {
-    unmatchedExpected = '';
-  }
   // Alternative approach to matching trailing ignored character ^ … does not work?
   // if (ignoredChars.indexOf(expectedChars[expectedIndex]) !== -1) {
   //   unmatchedExpected = '';
