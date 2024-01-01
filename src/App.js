@@ -1150,6 +1150,7 @@ class App extends Component {
 
     let [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
+    // @ts-ignore this should be ok when currentPhraseAttempts is typed correctly instead of never[]
     const currentPhraseAttempts = this.state.currentPhraseAttempts.map(copy => ({...copy}));
 
     currentPhraseAttempts.push({
