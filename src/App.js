@@ -1145,8 +1145,17 @@ class App extends Component {
     // eslint-disable-next-line
     let [matchedChars, unmatchedChars, _, unmatchedActual] =
       matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings, this.state.userSettings);
-
-    matchedChars = matchedChars.replace(new RegExp(this.state.lesson.settings.ignoredChars,'g'), '');
+    
+    if (this.state.lesson.settings.ignoredChars) {
+      function removeIgnoredCharsFromSplitText(matchedChars, ignoredChars) {
+        let newMatchedChars = matchedChars;
+        for (let i = 0; i < ignoredChars.length; i++) {
+          newMatchedChars = [...newMatchedChars].filter(char => !ignoredChars.includes(char)).join('');
+        }
+        return newMatchedChars;
+      }
+      matchedChars = removeIgnoredCharsFromSplitText(matchedChars, this.state.lesson.settings.ignoredChars);
+    }
 
     let [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
