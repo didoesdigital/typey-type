@@ -1240,8 +1240,7 @@ class App extends Component {
         nextItem = updateCapitalisationStrokesInNextItem(nextItem, lastWord);
       }
 
-      let target = getTargetStrokeCount(nextItem || { phrase: '', stroke: 'TK-LS' });
-      newState.targetStrokeCount = target;
+      newState.targetStrokeCount = getTargetStrokeCount(nextItem || { phrase: '', stroke: 'TK-LS' });
       this.state.lesson.newPresentedMaterial.visitNext();
 
       newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
