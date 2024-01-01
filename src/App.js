@@ -1192,7 +1192,7 @@ class App extends Component {
       newState.currentPhraseAttempts = []; // reset for next word
       newState.currentLessonStrokes = this.state.currentLessonStrokes; // [{word: "cat", attempts: ["cut"], stroke: "KAT"}, {word: "sciences", attempts ["sign", "ss"], stroke: "SAOEUPB/EPBC/-S"]
 
-      let strokeHintShown = shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition);
+      const strokeHintShown = shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition);
 
       // NOTE: here is where completed phrases are pushed
       newState.currentLessonStrokes.push({
@@ -1214,14 +1214,11 @@ class App extends Component {
 
       if (!strokeHintShown && accurateStroke) {
         // Use the original text when recording to preserve case and spacing
-        let phraseText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
-
-        if (this.state.userSettings.spacePlacement === 'spaceBeforeOutput') {
-          phraseText = ' ' + this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
-        }
-        else if (this.state.userSettings.spacePlacement === 'spaceAfterOutput') {
-          phraseText = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase + ' ';
-        }
+        const phraseText = this.state.userSettings.spacePlacement === 'spaceBeforeOutput'
+          ? ' ' + this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase
+          : this.state.userSettings.spacePlacement === 'spaceAfterOutput'
+          ? this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase + ' '
+          : this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
 
         const meetingsCount = newState.metWords[phraseText] || 0;
         Object.assign(newState, increaseMetWords(meetingsCount, this.state.totalNumberOfNewWordsMet, this.state.totalNumberOfLowExposuresSeen, this.state.totalNumberOfRetainedWords));
@@ -1229,13 +1226,13 @@ class App extends Component {
       }
 
       if (this.state.userSettings.speakMaterial) {
-        let remaining = this.state.lesson.newPresentedMaterial.getRemaining();
+        const remaining = this.state.lesson.newPresentedMaterial.getRemaining();
         if (remaining && remaining.length > 0 && remaining[0].hasOwnProperty('phrase')) {
           this.say(remaining[0].phrase);
         }
       }
 
-      let nextPhraseID = this.state.currentPhraseID + 1;
+      const nextPhraseID = this.state.currentPhraseID + 1;
       let nextItem = this.state.lesson.presentedMaterial[nextPhraseID];
 
       if (!!nextItem && this.state.lesson.presentedMaterial && this.state.lesson.presentedMaterial[this.state.currentPhraseID] && this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase) {
