@@ -48,24 +48,23 @@ const StrokesForWords = ({
   const misstrokesJSON = misstrokes as StenoDictionary;
 
   useEffect(() => {
-    // if (this.props.globalLookupDictionary && this.props.globalLookupDictionary.size < 2 && !this.props.globalLookupDictionaryLoaded) {
-
-    fetchAndSetupGlobalDict(true, null)
-      .then(() => {
-        if (lookupTerm && lookupTerm !== undefined && lookupTerm.length > 0) {
-          setPhraseState(lookupTerm);
-          updateWordsForStrokes(lookupTerm);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        // this.showDictionaryErrorNotification();
-      });
-    // }
+    fetchAndSetupGlobalDict(true, null).catch((error) => {
+      console.error(error);
+      // this.showDictionaryErrorNotification();
+    });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchAndSetupGlobalDict, lookupTerm]);
   // }, [fetchAndSetupGlobalDict, lookupTerm, updateWordsForStrokes]);
+
+  useEffect(() => {
+    if (lookupTerm && lookupTerm !== undefined && lookupTerm.length > 0) {
+      setPhraseState(lookupTerm);
+      updateWordsForStrokes(lookupTerm);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lookupTerm, globalLookupDictionaryLoaded]);
+  // }, [lookupTerm, updateWordsForStrokes, globalLookupDictionaryLoaded]);
 
   const handleWordsOnChange: React.ChangeEventHandler<HTMLTextAreaElement> = (
     event
