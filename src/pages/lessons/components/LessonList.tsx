@@ -49,8 +49,12 @@ const wrangleId = (id: string) => {
   return id.toLowerCase().replace(/[ ,’()]/g, "-");
 };
 
+const mungeHash = (hash: string) => {
+  return decodeURIComponent(hash);
+}
+
 const scrollToHeading = (hash: string) => {
-  const el = document.querySelector<HTMLAnchorElement>(hash);
+  const el = document.querySelector<HTMLAnchorElement>(mungeHash(hash));
   let top = 0;
   if (el && el.getBoundingClientRect().top) {
     top = el.getBoundingClientRect().top;
@@ -81,7 +85,7 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
       window.setTimeout(() => {
         const hash = window.location.hash;
         if (hash && hash.length > 0) {
-          scrollToHeading(hash);
+          scrollToHeading(mungeHash(hash));
         } else {
           searchInputRef?.current?.focus();
         }
