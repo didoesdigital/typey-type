@@ -1,6 +1,6 @@
 import { actions } from "./gameActions";
 
-export const fallbackMaterial = "EGT ELS";
+export const fallbackMaterial = "PWAPB TPHA";
 
 export type UntrustedMultilineString = string;
 

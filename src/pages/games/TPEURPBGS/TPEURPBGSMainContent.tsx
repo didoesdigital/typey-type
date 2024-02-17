@@ -4,8 +4,6 @@ import GameProgress from "./GameProgress";
 import { ReactComponent as ComposingRobot } from "../../../images/ComposingRobot.svg";
 import GamePlay from "./GamePlay";
 
-const introText =
-  "The robots have gone bananas! Pick finger combos and a level then “Start”. Pro tip: turn off all your steno dictionaries to output “raw” steno.";
 
 type Props = {
   gameName: string;
@@ -30,10 +28,17 @@ const TPEURPBGSMainContent: FC<Props> = ({ gameName }) => {
                 aria-labelledby="composing-robot-title"
               />
             </div>
-            <p>{introText}</p>
+            <p>
+              The robots have gone bananas! They are only responding to pairs of
+              raw steno strokes like{" "}
+              <kbd className="steno-stroke steno-stroke--subtle">PWAPB</kbd>{" "}
+              <kbd className="steno-stroke steno-stroke--subtle">TPHA</kbd>.
+              Write the pairs back and forth smoothly to straighten out the
+              robots.
+            </p>
           </div>
         </div>
-        {isGameStarted && <GameProgress />}
+        {<GameProgress />}
       </div>
       {isGameStarted && <GamePlay gameName={gameName} />}
     </>

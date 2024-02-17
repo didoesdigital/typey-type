@@ -4,6 +4,12 @@ import { useTPEURPBGSData } from "./TPEURPBGSContext/useTPEURPBGS";
 
 const Section: FC = () => {
   const section = "custom";
+
+  // We can remove this early return once we have more than 1 section available:
+  if (section === "custom") {
+    return null;
+  }
+
   return (
     <div className="flex justify-between">
       <span>Section: </span>
@@ -13,12 +19,13 @@ const Section: FC = () => {
 };
 
 const Pair: FC = () => {
-  const { pairIndex, pairToWin } = useTPEURPBGSData();
+  const { pairIndex, pairToWin, isGameStarted } = useTPEURPBGSData();
   return (
     <div className="flex justify-between">
       <span>Pair: </span>
       <span>
-        <strong className="dib">{pairIndex + 1}</strong> of {pairToWin}
+        <strong className="dib">{pairIndex + 1}</strong> of{" "}
+        {isGameStarted ? pairToWin : "?"}
       </span>
     </div>
   );

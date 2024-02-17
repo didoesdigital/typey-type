@@ -23,7 +23,12 @@ const TPEURPBGSNotStarted: FC = () => {
   return (
     <>
       <CustomFingerDrills inputRef={inputRef} />
-      <button className="button mt1 mr2" onClick={clickStartHandler}>
+      <p className="de-emphasized mt1">
+        Enter some finger combos you want to alternate between smoothly without
+        hesitating. Pro tip: turn off all your steno dictionaries to output
+        “raw” steno.
+      </p>
+      <button className="button mr2" onClick={clickStartHandler}>
         Start
       </button>
     </>
