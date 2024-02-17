@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { useTPEURPBGSData } from "./TPEURPBGSContext/useTPEURPBGS";
 import GameProgress from "./GameProgress";
-import { ReactComponent as ComposingRobot } from "../../../images/ComposingRobot.svg";
+import { ReactComponent as BananasRobot } from "../../../images/BananasRobot.svg";
 import GamePlay from "./GamePlay";
 
 
@@ -22,10 +22,10 @@ const TPEURPBGSMainContent: FC<Props> = ({ gameName }) => {
         <div className="mw-800 mr3 flex-grow">
           <div className="flex">
             <div className="w-100 mw-48 mr3 game-robot">
-              <ComposingRobot
-                id="composing-robot-TPEURPBGS"
+              <BananasRobot
+                id="bananas-robot-TPEURPBGS"
                 role="img"
-                aria-labelledby="composing-robot-title"
+                aria-labelledby="bananas-robot-title"
               />
             </div>
             <p>
