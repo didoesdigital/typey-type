@@ -47,10 +47,20 @@ export const defaultState: Omit<GameState, "repeatToWin"> = {
   pairToWin: 1,
 };
 
+// These are arbitrary limits to prevent browsers from crashing and encourage good lesson design:
+const maxStringLimit = 1000;
+const maxPairsLimit = 24;
+const maxPairStringLimit = 54;
+
 const convertStringToMaterialAndCurrentPuzzleText = (
   untrustedString: string
 ) => {
-  const splitLines = untrustedString.split("\n").filter((line) => line !== "");
+  const splitLines = untrustedString
+    .slice(0, maxStringLimit)
+    .split("\n")
+    .filter((line) => line !== "")
+    .slice(0, maxPairsLimit)
+    .map((line) => line.slice(0, maxPairStringLimit));
 
   return {
     material: splitLines,
