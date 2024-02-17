@@ -67,18 +67,6 @@ export default function GamesIndex() {
               }
             />
             <GameBox
-              title="TPEURPBGS (fingers)"
-              description="Practise finger drills to write smoother and faster."
-              linkTo="/games/TPEURPBGS"
-              linkText="Play TPEURPBGS"
-              robot={
-                <ThinkingRobot
-                  role="img"
-                  aria-labelledby="thinking-robot-title"
-                />
-              }
-            />
-            <GameBox
               title="KPOES (compose)"
               description="Write what's in your head. Compose stories and reflect."
               linkTo="/games/KPOES"
@@ -87,6 +75,18 @@ export default function GamesIndex() {
                 <ComposingRobot
                   role="img"
                   aria-labelledby="composing-robot-title"
+                />
+              }
+            />
+            <GameBox
+              title="TPEURPBGS (fingers)"
+              description="Practise finger drills to write smoother and faster."
+              linkTo="/games/TPEURPBGS"
+              linkText="Play TPEURPBGS"
+              robot={
+                <ThinkingRobot
+                  role="img"
+                  aria-labelledby="thinking-robot-title"
                 />
               }
             />
