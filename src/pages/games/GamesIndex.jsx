@@ -26,7 +26,7 @@ export default function GamesIndex() {
           </header>
         </div>
       </Subheader>
-      <div className="p3 mx-auto mw-1024">
+      <div className="p3 mx-auto">
         <div className="flex flex-wrap justify-between">
           <h3 id="typey-type-games" className="mx-auto">
             Typey&nbsp;Type games
