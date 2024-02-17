@@ -10453,14 +10453,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:^10.2.0":
-  version: 10.2.0
-  resolution: "chromatic@npm:10.2.0"
+"chromatic@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "chromatic@npm:9.1.0"
   bin:
     chroma: dist/bin.js
     chromatic: dist/bin.js
     chromatic-cli: dist/bin.js
-  checksum: e7716fc7a7fbd33b525c48888ccd3ee75ec56c4f360eba2972eb7a9d42efff025fbb4a1877173eb0d916f0bc9cdab1a8e8dac615c5b35ac270cd5a8ab5f931eb
+  checksum: 27d0ff5ef993024301f31d137e9774b051de908d48dcd461c33b51c92e5e7b57cd062eaddafcd02f1c2a98cfe5d5ef26b7fcdf77b76df94e357171074a23b950
   languageName: node
   linkType: hard
 
@@ -22506,7 +22506,7 @@ __metadata:
     "@types/react-numeric-input": "npm:^2.2.4"
     "@types/react-router-dom": "npm:^5.3.3"
     "@types/react-transition-group": "npm:^4.4.5"
-    chromatic: "npm:^10.2.0"
+    chromatic: "npm:^9.1.0"
     clipboard: "npm:^1.7.1"
     d3-array: "npm:^3.1.1"
     d3-format: "npm:^3.1.0"
