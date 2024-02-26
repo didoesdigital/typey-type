@@ -822,6 +822,7 @@ class App extends Component {
         previousCompletedPhraseAsTyped: '',
         repetitionsRemaining: reps,
         startTime: null,
+        showStrokesInLesson: false,
         timer: 0,
         targetStrokeCount: target,
         totalNumberOfMatchedChars: 0,
