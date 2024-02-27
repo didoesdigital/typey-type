@@ -56,9 +56,7 @@ export default function Hint({
             role="note"
             aria-label={[...currentStroke].join(" ").replace("-", "dash")}
           >
-            {[...currentStroke].map((item, i) => (
-              <React.Fragment key={i}>{item}</React.Fragment>
-            ))}
+            {currentStroke}
           </span>
         </pre>
       </div>

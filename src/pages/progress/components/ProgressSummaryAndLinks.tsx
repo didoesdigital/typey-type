@@ -38,16 +38,17 @@ const ProgressSummaryAndLinks = ({
   );
 
   const IntroSentence = () => (
-    <>{`You’ve successfully typed ${yourWordCount} ${
-      yourWordCount === 1 ? "word" : "words"
-    } without misstrokes. `}</>
+    <span>
+      You’ve successfully typed {yourWordCount}{" "}
+      {yourWordCount === 1 ? "word" : "words"} without misstrokes.
+    </span>
   );
 
   const MaybeProgressPercentSentence = ({
     yourSeenWordCount,
   }: MaybeProgressPercentSentenceProps) =>
     yourSeenWordCount > 1 ? (
-      <>{`You’re ${progressPercent}% of the way to 10,000 words. `}</>
+      <span>{`You’re ${progressPercent}% of the way to 10,000 words. `}</span>
     ) : null;
 
   return yourWordCount >= 10000 ? (
