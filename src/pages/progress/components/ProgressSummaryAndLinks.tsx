@@ -40,7 +40,7 @@ const ProgressSummaryAndLinks = ({
   const IntroSentence = () => (
     <span>
       You’ve successfully typed {yourWordCount}{" "}
-      {yourWordCount === 1 ? "word" : "words"} without misstrokes.
+      {yourWordCount === 1 ? "word" : "words"} without misstrokes.{" "}
     </span>
   );
 
