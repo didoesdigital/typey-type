@@ -161,7 +161,57 @@ const Support = () => {
             .
           </p>
 
-          <h4 id="steno-terms">Steno terms</h4>
+          <h3 id="about-the-creator">About the creator, Di</h3>
+          <p>
+            Hi! I’m <a href="https://didoesdigital.com/">Di</a>. I created
+            Typey&nbsp;Type to help myself learn and practice stenography as an
+            ergonomic alternative for typing. I had sore wrists from the painful
+            contortions of keyboard shortcuts on a qwerty keyboard. Back in
+            2017, there weren't a lot of options for steno students to
+            interactively practice new words. So using my design and development
+            skills, I built Typey&nbsp;Type. I designed it to work on the web so
+            that it would be easy for people to access and start using straight
+            away without installing anything.
+          </p>
+          <p>
+            Since then it's been a labour of love. Inspired by the people that
+            use Typey&nbsp;Type and share their stories, I continue to make
+            changes and improvements to help students on their steno journeys.
+          </p>
+          <p>
+            If you want to help fund my efforts on this project, you can{" "}
+            <OutboundLink
+              eventLabel="Patreon"
+              aria-label="Patreon (external link opens in new tab)"
+              to="https://www.patreon.com/didoesdigital"
+            >
+              become a supporter on Patreon.
+              {/* @ts-ignore */}
+              <Tooltip
+                title="Opens in a new tab"
+                animation="shift"
+                arrow="true"
+                className=""
+                duration="200"
+                tabIndex="0"
+                tag="span"
+                theme="didoesdigital"
+                trigger="mouseenter focus click"
+                onShow={announceTooltip}
+              >
+                <IconExternal
+                  ariaHidden="true"
+                  role="presentation"
+                  iconWidth="24"
+                  iconHeight="24"
+                  className="ml1 svg-icon-wrapper svg-baseline"
+                  iconTitle=""
+                />
+              </Tooltip>
+            </OutboundLink>
+          </p>
+
+          <h3 id="steno-terms">Steno terms</h3>
           <DescriptionList>
             <DescriptionTerm>Briefs</DescriptionTerm>
             <DescriptionDetails>
@@ -323,18 +373,15 @@ const Support = () => {
           <p>
             Typey&nbsp;Type uses a version of the Plover dictionary that comes
             built into the Plover software. Typey&nbsp;Type’s version is based
-            on a copy of Plover’s from a few years ago.{" "}
-            <a href="https://didoesdigital.com/">DiDoesDigital</a> has since
-            spent many hours meticulously amending it. This helps
-            Typey&nbsp;Type suggests the best brief available. It chooses the
-            “best” stroke by looking for the shortest stroke, where there are
-            penalties for multi-stroke briefs and briefs that use the star (
-            <code>*</code>) key.{" "}
-            <a href="https://didoesdigital.com/">DiDoesDigital</a> has also
-            removed thousands of misstrokes to hide them when learning Plover
-            theory. There are some manual adjustments too. These show strokes
-            that are more consistent with similar words, more consistent with
-            Plover’s theory, phonetic, or easier to stroke.
+            on a copy of Plover’s from a few years ago. I have since spent many
+            hours meticulously amending it. This helps Typey&nbsp;Type suggests
+            the best brief available. It chooses the “best” stroke by looking
+            for the shortest stroke, where there are penalties for multi-stroke
+            briefs and briefs that use the star (<code>*</code>) key. I have
+            also removed thousands of misstrokes to hide them when learning
+            Plover theory. There are some manual adjustments too. These show
+            strokes that are more consistent with similar words, more consistent
+            with Plover’s theory, phonetic, or easier to stroke.
           </p>
           <p>
             <Link to="/lessons/custom">Typey&nbsp;Type custom lessons</Link> let
