@@ -1,6 +1,10 @@
 import React, { useCallback, useMemo, useState } from "react";
+import { IconExternal } from "../../../components/IconExternal";
+import { Tooltip } from "react-tippy";
 import GoogleAnalytics from "react-ga4";
+import OutboundLink from "../../../components/OutboundLink";
 import makeDownloadHref from "../../../utils/makeDownloadHref";
+import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 
 import type { Lesson, StenoDictionary } from "../../../types";
 
@@ -23,6 +27,7 @@ const LessonFinePrintFooter = ({
   locationPathname,
 }: Props) => {
   const [lessonHintsAsDict, setLessonHintsAsDict] = useState({});
+  const announceTooltip = useAnnounceTooltip();
 
   const downloadLessonAsDictHref = useMemo(
     () => makeDownloadHref(lessonHintsAsDict),
@@ -44,6 +49,7 @@ const LessonFinePrintFooter = ({
       label: `Dictionary: ${lessonTitle}`,
     });
   }, [lessonTitle, lesson.sourceMaterial]);
+
   return (
     <div>
       <p className="text-center">
@@ -60,6 +66,37 @@ const LessonFinePrintFooter = ({
         >
           Give feedback on this lesson (form opens in a new tab)
         </a>
+      </p>
+      <p className="text-center text-small mt0">
+        <OutboundLink
+          eventLabel="Patreon"
+          aria-label="Patreon (external link opens in new tab)"
+          to="https://www.patreon.com/didoesdigital"
+        >
+          Support Di building Typey&nbsp;Type on Patreon
+          {/* @ts-ignore */}
+          <Tooltip
+            title="Opens in a new tab"
+            animation="shift"
+            arrow="true"
+            className=""
+            duration="200"
+            tabIndex="0"
+            tag="span"
+            theme="didoesdigital"
+            trigger="mouseenter focus click"
+            onShow={announceTooltip}
+          >
+            <IconExternal
+              ariaHidden="true"
+              role="presentation"
+              iconWidth="24"
+              iconHeight="24"
+              className="ml1 svg-icon-wrapper svg-baseline"
+              iconTitle=""
+            />
+          </Tooltip>
+        </OutboundLink>
       </p>
       <p className="text-center">
         {!!lesson?.path && (
