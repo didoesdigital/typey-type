@@ -21,7 +21,7 @@ export default function Game() {
       <p className="text-center mt10 text-small">
         Got a suggestion?{" "}
         <a
-          href="https://forms.gle/kkSZZJFrY4USohgq6"
+          href="https://forms.gle/ANwtnh7aZ7LuCNUDA"
           className="mt0"
           target="_blank"
           rel="noopener noreferrer"
