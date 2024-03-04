@@ -20,7 +20,7 @@ const GamePlay: FC<Props> = ({ gameName }) => {
 
   const onChangeTPEURPBGSInput = (inputText: string) => {
     setTypedText(inputText);
-    const correct = inputText === puzzleText;
+    const correct = inputText.trim() === puzzleText;
     if (correct) {
       setTypedText("");
       setPreviousCompletedPhraseAsTyped(inputText);
