@@ -37,7 +37,7 @@ const WordBoundaryErrorPrompt = ({ currentPhrase, actualText }: Props) => {
       <p>
         It’s a trap! It looks like you hit a{" "}
         <a
-          href="https://sites.google.com/site/learnplover/lesson-6-prefix-suffix-alternatives"
+          href="https://www.openstenoproject.org/learn-plover/lesson-6-prefix-suffix-alternatives.html"
           target="_blank"
           rel="noopener noreferrer"
         >
