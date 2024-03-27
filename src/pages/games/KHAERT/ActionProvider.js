@@ -56,7 +56,7 @@ class ActionProvider {
   handleLearningQuestions(userMessage) {
     const [linkText, linkUrl] =
       userMessage.includes("learn") || userMessage.includes("theory")
-        ? ["Learn Plover", "https://sites.google.com/site/learnplover/home"]
+        ? ["Learn Plover", "https://www.openstenoproject.org/learn-plover/home.html"]
         : userMessage.includes("practice") || userMessage.includes("drill")
         ? ["Stenojig", "https://joshuagrams.github.io/steno-jig/"]
         : ["Plover Discord", "https://discord.gg/0lQde43a6dGmAMp2"];
