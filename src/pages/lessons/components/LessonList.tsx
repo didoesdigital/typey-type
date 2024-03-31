@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga4";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { groups } from "d3-array";
@@ -78,7 +78,7 @@ function filterLessons(searchTerm: string, lessonIndex: LessonIndexEntry[]) {
     .toLowerCase()
     .replaceAll(/[^ A-Za-z0-9’',*:-]/g, ""); // all characters that don't appear in lesson titles
 
-  if(cleanedSearchTerm.length === 0) return lessonIndex;
+  if (cleanedSearchTerm.length === 0) return lessonIndex;
 
   let filteredLessons = lessonIndex.filter((lesson) => {
     const cleanedLessonTitle = lesson.title.toLowerCase();
@@ -108,10 +108,29 @@ function filterLessons(searchTerm: string, lessonIndex: LessonIndexEntry[]) {
   return filteredLessons;
 }
 
+function debounce<T extends Function>(cb: T, wait = 20) {
+  let h = 0;
+  let callable = (...args: any) => {
+    clearTimeout(h);
+    h = window.setTimeout(() => cb(...args), wait);
+  };
+  return callable;
+}
+
 export default function LessonList({ lessonIndex, url }: LessonListProps) {
   const location = useLocation();
-  const searchFilter = new URLSearchParams(location.search).get("q") ?? "";
+  const [searchFilter, setSearchFilter] = useState(() => new URLSearchParams(location.search).get("q") ?? "");
   const filteredLessonIndex = filterLessons(searchFilter, lessonIndex);
+
+  const history = useHistory();
+  const updateSearchParams = useMemo(() =>
+    debounce((q: string) => {
+      history.replace({ search: `?q=${q}` });
+    }, 100), [history]);
+
+  useEffect(() => {
+    updateSearchParams(searchFilter);
+  }, [searchFilter]);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
@@ -133,11 +152,9 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
     window.onhashchange = scrollToAnchor;
   }, [lessonIndex]);
 
-  const history = useHistory()
-
   const changeSearchFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value;
-    history.replace({ search: `?q=${searchTerm}` })
+    setSearchFilter(searchTerm);
 
     if (searchTerm && searchTerm.toString()) {
       GoogleAnalytics.event({
