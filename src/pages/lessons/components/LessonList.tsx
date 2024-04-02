@@ -125,12 +125,13 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
   const history = useHistory();
   const updateSearchParams = useMemo(() =>
     debounce((q: string) => {
-      history.replace({ search: `?q=${q}` });
+      const search = q === "" ? undefined : `?q=${q}`;
+      history.replace({ search, hash: history.location.hash });
     }, 100), [history]);
 
   useEffect(() => {
     updateSearchParams(searchFilter);
-  }, [searchFilter]);
+  }, [searchFilter, updateSearchParams]);
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
