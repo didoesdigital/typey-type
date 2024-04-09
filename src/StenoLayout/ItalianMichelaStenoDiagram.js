@@ -110,7 +110,7 @@ class ItalianMichelaStenoDiagram extends Component {
 
     // NOTE: we have not handled dark mode for this diagram because there are overlapping elements
     return (
-      <svg id={svgDiagramID} width={diagramWidth} viewBox="0 0 258 99" xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden}>
+      <svg id={svgDiagramID} width={diagramWidth} viewBox="0 0 258 99" xmlns="http://www.w3.org/2000/svg" aria-hidden={hidden} className={this.props.classes}>
         <g id={"stenoboard-" + this.props.brief } fill="none" fillRule="evenodd" stroke="none" strokeWidth="1">
           <rect height="96" id="sRightLowercase" width="20" fill={this.props.sRightLowercase ? sRightLowercaseOnColor : sRightLowercaseOffColor} fillRule="nonzero" rx="2" stroke={sRightLowercaseStrokeColor} x="237" y="2"/>
           <rect height="96" id="cRightLowercase" width="20" fill={this.props.cRightLowercase ? cRightLowercaseOnColor : cRightLowercaseOffColor} fillRule="nonzero" rx="2" stroke={cRightLowercaseStrokeColor} x="217" y="2"/>
