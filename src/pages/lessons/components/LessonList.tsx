@@ -141,7 +141,10 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    window.location.hash = window.decodeURIComponent(window.location.hash);
+    if (window.location.hash.length > 0) {
+      window.location.hash = window.decodeURIComponent(window.location.hash);
+    }
+
     const scrollToAnchor = () => {
       // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
       window.setTimeout(() => {
