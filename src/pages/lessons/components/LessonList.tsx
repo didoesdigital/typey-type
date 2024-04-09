@@ -61,7 +61,7 @@ const scrollToHeading = (hash: string) => {
   }
   const scrollOptions: ScrollToOptions = {
     left: 0,
-    top: window.pageYOffset + top,
+    top: window.scrollY + top,
     behavior: "smooth",
   };
   if (el) {
