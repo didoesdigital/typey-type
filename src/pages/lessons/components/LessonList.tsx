@@ -51,7 +51,7 @@ const wrangleId = (id: string) => {
 
 const mungeHash = (hash: string) => {
   return decodeURIComponent(hash);
-}
+};
 
 const scrollToHeading = (hash: string) => {
   const el = document.querySelector<HTMLAnchorElement>(mungeHash(hash));
@@ -119,15 +119,20 @@ function debounce<T extends Function>(cb: T, wait = 20) {
 
 export default function LessonList({ lessonIndex, url }: LessonListProps) {
   const location = useLocation();
-  const [searchFilter, setSearchFilter] = useState(() => new URLSearchParams(location.search).get("q") ?? "");
+  const [searchFilter, setSearchFilter] = useState(
+    () => new URLSearchParams(location.search).get("q") ?? ""
+  );
   const filteredLessonIndex = filterLessons(searchFilter, lessonIndex);
 
   const history = useHistory();
-  const updateSearchParams = useMemo(() =>
-    debounce((q: string) => {
-      const search = q === "" ? undefined : `?q=${q}`;
-      history.replace({ search, hash: history.location.hash });
-    }, 100), [history]);
+  const updateSearchParams = useMemo(
+    () =>
+      debounce((q: string) => {
+        const search = q === "" ? undefined : `?q=${q}`;
+        history.replace({ search, hash: history.location.hash });
+      }, 100),
+    [history]
+  );
 
   useEffect(() => {
     updateSearchParams(searchFilter);
@@ -202,12 +207,12 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
       </div>
       {searchFilter.trim().toLowerCase().includes("custom") && (
         <p className="py05">
-        <Link
-          to={`/lessons/custom/setup`.replace(/\/{2,}/g, "/")}
-          id="ga--lesson-index--search--create-a-custom-lesson"
-        >
-          Create a custom lesson
-        </Link>
+          <Link
+            to={`/lessons/custom/setup`.replace(/\/{2,}/g, "/")}
+            id="ga--lesson-index--search--create-a-custom-lesson"
+          >
+            Create a custom lesson
+          </Link>
         </p>
       )}
       {filteredLessonIndex.length === 0 && (
