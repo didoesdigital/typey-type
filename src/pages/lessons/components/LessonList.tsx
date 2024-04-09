@@ -142,7 +142,10 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
 
   useEffect(() => {
     if (window.location.hash.length > 0) {
-      window.location.hash = window.decodeURIComponent(window.location.hash);
+      history.replace({
+        search: history.location.search,
+        hash: window.decodeURIComponent(window.location.hash),
+      });
     }
 
     const scrollToAnchor = () => {
@@ -159,7 +162,7 @@ export default function LessonList({ lessonIndex, url }: LessonListProps) {
     scrollToAnchor();
 
     window.onhashchange = scrollToAnchor;
-  }, [lessonIndex]);
+  }, [lessonIndex, history]);
 
   const changeSearchFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     const searchTerm = event.target.value;
