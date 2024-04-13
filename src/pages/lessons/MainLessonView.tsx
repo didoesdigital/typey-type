@@ -65,6 +65,7 @@ type Props = {
   handleStartFromWordChange: (event: any) => void;
   handleStopLesson: () => void;
   handleUpcomingWordsLayout: (event: any) => void;
+  toggleHideOtherSettings: () => void;
   lesson: Lesson;
   lessonLength: number;
   lessonTitle: string;
@@ -89,8 +90,6 @@ type Props = {
   updateMarkup: () => void;
   updatePreset: (studyType: Study) => void;
   userSettings: UserSettingsType;
-  hideOtherSettings: boolean;
-  toggleHideOtherSettings: () => void;
 };
 
 const MainLessonView = ({
@@ -125,6 +124,7 @@ const MainLessonView = ({
   handleStartFromWordChange,
   handleStopLesson,
   handleUpcomingWordsLayout,
+  toggleHideOtherSettings,
   lesson,
   lessonLength,
   lessonTitle,
@@ -149,8 +149,6 @@ const MainLessonView = ({
   updateMarkup,
   updatePreset,
   userSettings,
-  hideOtherSettings,
-  toggleHideOtherSettings,
 }: Props) => {
   const previousLesson = useRef<string | null>(null);
   const mainHeading = useRef<HTMLHeadingElement>(null);
@@ -330,7 +328,6 @@ const MainLessonView = ({
                 <LessonCanvasFooter
                   chooseStudy={chooseStudy}
                   disableUserSettings={disableUserSettings}
-                  hideOtherSettings={hideOtherSettings}
                   toggleHideOtherSettings={toggleHideOtherSettings}
                   userSettings={userSettings}
                   updatePreset={updatePreset}
@@ -361,7 +358,6 @@ const MainLessonView = ({
               handleStartFromWordChange={handleStartFromWordChange}
               handleRepetitionsChange={handleRepetitionsChange}
               handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-              hideOtherSettings={hideOtherSettings}
               maxStartFromWord={lessonLength}
               revisionMode={revisionMode}
               totalWordCount={totalWordCount}

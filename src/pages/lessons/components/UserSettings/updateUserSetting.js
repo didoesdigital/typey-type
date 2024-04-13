@@ -568,3 +568,31 @@ export function updatePreset(studyType) {
 
   this.setState({ userSettings: newUserSettings });
 }
+
+export function toggleHideOtherSettings(this_) {
+  let currentState = this_.state.userSettings;
+  let newState = Object.assign({}, currentState);
+
+  const name = "hideOtherSettings";
+  const value = !currentState[name];
+
+  newState[name] = value;
+
+  this_.setState({ userSettings: newState }, () => {
+    this_.setupLesson();
+    writePersonalPreferences("userSettings", this_.state.userSettings);
+  });
+
+  let labelString = value;
+  if (!value) {
+    labelString = "BAD_INPUT";
+  }
+
+  GoogleAnalytics.event({
+    category: "UserSettings",
+    action: "Toggle hide other settings",
+    label: labelString
+  });
+
+  return value;
+}

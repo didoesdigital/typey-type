@@ -62,6 +62,7 @@ export type LessonProps = {
   handleStartFromWordChange: (event: any) => void;
   handleStopLesson: any;
   handleUpcomingWordsLayout: (event: any) => void;
+  toggleHideOtherSettings: () => void;
   lesson: Lesson;
   lessonIndex: any;
   lessonLength: number;
@@ -129,7 +130,7 @@ export type FinishedProps = {
   handleRepetitionsChange: (event: any) => void;
   handleStartFromWordChange: (event: any) => void;
   handleUpcomingWordsLayout: (event: any) => void;
-  hideOtherSettings: boolean;
+  toggleHideOtherSettings: () => void;
   lesson: Lesson;
   lessonLength: number;
   lessonTitle: PrettyLessonTitle;
@@ -143,7 +144,6 @@ export type FinishedProps = {
   startFromWordOne: any;
   startTime: any;
   timer: number;
-  toggleHideOtherSettings: any;
   topSpeedPersonalBest: any;
   totalNumberOfHintedWords: any;
   totalNumberOfLowExposuresSeen: any;

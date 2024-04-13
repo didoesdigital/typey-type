@@ -1,6 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { Link, Route, Switch } from "react-router-dom";
-import GoogleAnalytics from "react-ga4";
 import queryString from "query-string";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
@@ -67,6 +66,7 @@ const Lesson = ({
   handleStartFromWordChange,
   handleStopLesson,
   handleUpcomingWordsLayout,
+  toggleHideOtherSettings,
   lesson,
   lessonIndex,
   lessonLength,
@@ -114,7 +114,6 @@ const Lesson = ({
   userSettings,
 }: LessonProps) => {
   const loadedLessonPath = useRef("");
-  const [hideOtherSettings, setHideOtherSettings] = useState(false);
 
   // const mainHeading = useRef<HTMLHeadingElement>(null);
   const mainHeading = useRef(null);
@@ -260,17 +259,6 @@ const Lesson = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function toggleHideOtherSettings() {
-    let toggledHideOtherSettings = !hideOtherSettings;
-    setHideOtherSettings(toggledHideOtherSettings);
-
-    GoogleAnalytics.event({
-      category: "UserSettings",
-      action: "Toggle hide other settings",
-      label: toggledHideOtherSettings.toString(),
-    });
-  }
-
   function stopAndCustomiseLesson() {
     stopLesson();
     customiseLesson();
@@ -371,7 +359,7 @@ const Lesson = ({
               handleStartFromWordChange={handleStartFromWordChange}
               handleRepetitionsChange={handleRepetitionsChange}
               handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-              hideOtherSettings={hideOtherSettings}
+              toggleHideOtherSettings={toggleHideOtherSettings}
               metadata={metadata}
               lesson={lesson}
               lessonLength={propsLesson.presentedMaterial.length}
@@ -384,7 +372,6 @@ const Lesson = ({
               startFromWordOne={startFromWordOne}
               startTime={startTime}
               timer={timer}
-              toggleHideOtherSettings={toggleHideOtherSettings.bind(this)}
               topSpeedPersonalBest={topSpeedPersonalBest}
               revisionMode={revisionMode}
               updatePreset={updatePreset}
@@ -499,6 +486,7 @@ const Lesson = ({
                 handleStartFromWordChange={handleStartFromWordChange}
                 handleStopLesson={handleStopLesson}
                 handleUpcomingWordsLayout={handleUpcomingWordsLayout}
+                toggleHideOtherSettings={toggleHideOtherSettings}
                 lesson={lesson}
                 lessonLength={lessonLength}
                 lessonTitle={lessonTitle}
@@ -523,8 +511,6 @@ const Lesson = ({
                 updatePreset={updatePreset}
                 updateMarkup={updateMarkup.bind(this)}
                 userSettings={userSettings}
-                hideOtherSettings={hideOtherSettings}
-                toggleHideOtherSettings={toggleHideOtherSettings.bind(this)}
               />
             )}
           />

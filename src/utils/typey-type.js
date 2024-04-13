@@ -666,7 +666,8 @@ function loadPersonalPreferences() {
       { limitNumberOfWords: 0, repetitions: 1, },
     ],
     voiceName: '',
-    voiceURI: ''
+    voiceURI: '',
+    hideOtherSettings: false,
   };
   try {
     if (window.localStorage) {

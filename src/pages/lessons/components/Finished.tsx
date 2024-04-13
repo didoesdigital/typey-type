@@ -49,7 +49,7 @@ const Finished = ({
   handleRepetitionsChange,
   handleStartFromWordChange,
   handleUpcomingWordsLayout,
-  hideOtherSettings,
+  toggleHideOtherSettings,
   lesson,
   lessonLength,
   lessonTitle,
@@ -63,7 +63,6 @@ const Finished = ({
   startFromWordOne,
   startTime,
   timer,
-  toggleHideOtherSettings,
   topSpeedPersonalBest,
   totalNumberOfHintedWords,
   totalNumberOfLowExposuresSeen,
@@ -231,7 +230,6 @@ const Finished = ({
             <LessonCanvasFooter
               chooseStudy={chooseStudy}
               disableUserSettings={disableUserSettings}
-              hideOtherSettings={hideOtherSettings}
               toggleHideOtherSettings={toggleHideOtherSettings}
               userSettings={userSettings}
               updatePreset={updatePreset}
@@ -261,7 +259,6 @@ const Finished = ({
             handleStartFromWordChange={handleStartFromWordChange}
             handleRepetitionsChange={handleRepetitionsChange}
             handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            hideOtherSettings={hideOtherSettings}
             maxStartFromWord={lessonLength}
             revisionMode={revisionMode}
             totalWordCount={totalWordCount}

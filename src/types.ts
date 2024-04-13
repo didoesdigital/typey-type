@@ -158,7 +158,7 @@ export type LookupDictWithNamespacedDicts = Map<
  * Example:
  * Map (74602)
  * configuration: ['typey:typey-type.json', 'user:personal.json', 'plover:plover-main-3-jun-2018.json']
- * 
+ *
  */
 export type LookupDictWithNamespacedDictsAndConfig = Omit<
   LookupDictWithNamespacedDicts,
@@ -387,6 +387,7 @@ export type UserSettings = {
   upcomingWordsLayout: UpcomingWordsLayout;
   voiceName: SpeechSynthesisVoice["name"];
   voiceURI: SpeechSynthesisVoice["voiceURI"];
+  hideOtherSettings: boolean;
 };
 
 export type GlobalUserSettings = {

@@ -40,7 +40,8 @@ const userSettings: UserSettings = {
     { limitNumberOfWords: 0, repetitions: 1 },
   ],
   voiceName: "",
-  voiceURI: ""
+  voiceURI: "",
+  hideOtherSettings: false,
 };
 
 describe("progress summary and links", () => {

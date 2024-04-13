@@ -57,7 +57,8 @@ import {
   handleRepetitionsChange,
   handleStartFromWordChange,
   handleUpcomingWordsLayout,
-  updatePreset,
+  toggleHideOtherSettings,
+  updatePreset
 } from './pages/lessons/components/UserSettings/updateUserSetting';
 import {
   changeShowStrokesInLesson,
@@ -208,6 +209,7 @@ class App extends Component {
         ],
         voiceName: '',
         voiceURI: '',
+        hideOtherSettings: false,
       },
       lesson: fallbackLesson,
       lessonIndex: [{
@@ -738,7 +740,7 @@ class App extends Component {
 
     // Get URL search query parameters:
     const parsedParams = queryString.parse(search);
-    
+
     // Get lookupTerm from URL:
     const lookupTerm = parsedParams['q'];
 
@@ -797,7 +799,7 @@ class App extends Component {
         }
       }
       newLesson.presentedMaterial = repeatedLesson;
-      
+
       // Zipper the lesson:
       newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
@@ -1148,7 +1150,7 @@ class App extends Component {
     // eslint-disable-next-line
     let [matchedChars, unmatchedChars, _, unmatchedActual] =
       matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings, this.state.userSettings);
-    
+
     if (this.state.lesson.settings.ignoredChars) {
       matchedChars = removeIgnoredCharsFromSplitText(matchedChars, this.state.lesson.settings.ignoredChars);
       unmatchedChars = removeIgnoredCharsFromSplitText(unmatchedChars, this.state.lesson.settings.ignoredChars);
@@ -1417,6 +1419,7 @@ class App extends Component {
               handleStartFromWordChange: handleStartFromWordChange.bind(this),
               handleStopLesson: this.handleStopLesson.bind(this),
               handleUpcomingWordsLayout: handleUpcomingWordsLayout.bind(this),
+              toggleHideOtherSettings: () => toggleHideOtherSettings(this),
               restartLesson: this.restartLesson.bind(this),
               reviseLesson: this.reviseLesson.bind(this),
               sayCurrentPhraseAgain: this.sayCurrentPhraseAgain.bind(this),

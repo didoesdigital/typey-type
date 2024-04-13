@@ -175,6 +175,7 @@ const Template = (args) => {
             handleStartFromWordChange={() => undefined}
             handleRepetitionsChange={() => undefined}
             handleUpcomingWordsLayout={() => undefined}
+            toggleHideOtherSettings={() => undefined}
             sayCurrentPhraseAgain={() => undefined}
             startFromWordOne={() => undefined}
             stenoHintsOnTheFly={true}

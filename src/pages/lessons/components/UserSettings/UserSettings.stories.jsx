@@ -25,7 +25,7 @@ const defaultArgs = {
   handleStartFromWordChange: () => undefined,
   handleRepetitionsChange: () => undefined,
   handleUpcomingWordsLayout: () => undefined,
-  hideOtherSettings: false,
+  toggleHideOtherSettings: () => undefined,
   maxStartFromWord: 100,
   revisionMode: false,
   totalWordCount: 50,

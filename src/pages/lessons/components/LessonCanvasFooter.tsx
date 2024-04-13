@@ -2,22 +2,20 @@ import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
 import Metronome from "./Metronome";
 import { Tooltip } from "react-tippy";
-import type { Study } from "../../../types";
+import type { Study, UserSettings } from "../../../types";
 import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 
 type LessonCanvasFooterProps = {
   chooseStudy: () => void;
   disableUserSettings: boolean;
-  hideOtherSettings: boolean;
   toggleHideOtherSettings: () => void;
-  userSettings: any;
+  userSettings: UserSettings;
   updatePreset: (studyType: Study) => void;
 };
 
 const LessonCanvasFooter = ({
   chooseStudy,
   disableUserSettings,
-  hideOtherSettings,
   toggleHideOtherSettings,
   userSettings,
   updatePreset,
@@ -316,14 +314,14 @@ const LessonCanvasFooter = ({
       <p>
         <button
           className={`button button--secondary mb0 text-center${
-            hideOtherSettings ? " collapsed" : ""
+            userSettings.hideOtherSettings ? " collapsed" : ""
           }`}
           onClick={toggleHideOtherSettings}
           onKeyPress={toggleHideOtherSettings}
-          aria-expanded={!hideOtherSettings}
+          aria-expanded={!userSettings.hideOtherSettings}
           aria-controls="collapsible-settings"
         >
-          {hideOtherSettings ? "Show settings" : "Hide settings"}
+          {userSettings.hideOtherSettings ? "Show settings" : "Hide settings"}
         </button>
       </p>
     </div>

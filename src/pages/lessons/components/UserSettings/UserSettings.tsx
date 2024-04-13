@@ -31,7 +31,6 @@ type Props = {
   handleRepetitionsChange: (event: any) => void;
   handleStartFromWordChange: (event: any) => void;
   handleUpcomingWordsLayout: (event: any) => void;
-  hideOtherSettings: boolean;
   maxStartFromWord: number;
   revisionMode: boolean;
   totalWordCount: number;
@@ -55,7 +54,6 @@ const UserSettings = ({
   handleRepetitionsChange,
   handleStartFromWordChange,
   handleUpcomingWordsLayout,
-  hideOtherSettings,
   maxStartFromWord,
   revisionMode,
   totalWordCount,
@@ -70,9 +68,9 @@ const UserSettings = ({
           <div
             id="collapsible-settings"
             className={`mh-page bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 min-width-320${
-              hideOtherSettings ? " hide" : ""
+              userSettings.hideOtherSettings ? " hide" : ""
             }`}
-            aria-hidden={hideOtherSettings}
+            aria-hidden={userSettings.hideOtherSettings}
           >
             <h3 className="mb1 visually-hidden">Settings</h3>
 
