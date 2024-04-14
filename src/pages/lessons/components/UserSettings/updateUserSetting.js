@@ -591,7 +591,7 @@ export function toggleHideOtherSettings(this_) {
   GoogleAnalytics.event({
     category: "UserSettings",
     action: "Toggle hide other settings",
-    label: labelString
+    label: labelString,
   });
 
   return value;

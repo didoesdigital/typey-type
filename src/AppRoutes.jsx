@@ -448,7 +448,9 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                       handleUpcomingWordsLayout={
                         appMethods.handleUpcomingWordsLayout
                       }
-                      toggleHideOtherSettings={appMethods.toggleHideOtherSettings}
+                      toggleHideOtherSettings={
+                        appMethods.toggleHideOtherSettings
+                      }
                       metWords={appState.metWords}
                       previousCompletedPhraseAsTyped={
                         appState.previousCompletedPhraseAsTyped

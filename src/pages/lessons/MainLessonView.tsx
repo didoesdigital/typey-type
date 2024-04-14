@@ -256,7 +256,7 @@ const MainLessonView = ({
                           width="1em"
                           height="1em"
                           className="icon ml1"
-                          style={{transform: "translateY(-0.1em)"}}
+                          style={{ transform: "translateY(-0.1em)" }}
                         />
                       </Link>
                     </div>
