@@ -1807,13 +1807,6 @@ $textarea-padding-x: 8px;
   opacity: 0;
 }
 
-.progress-layout {
-  @media (min-width: $large-breakpoint) {
-    display: grid;
-    grid-template-columns: 4fr 3fr;
-    grid-gap: 24px;
-  }
-}
 .gtc-4fr-3fr {
   @media (min-width: $large-breakpoint) {
     display: grid;

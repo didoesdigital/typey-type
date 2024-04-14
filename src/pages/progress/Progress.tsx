@@ -14,7 +14,9 @@ import ProgressSummaryAndLinks from "./components/ProgressSummaryAndLinks";
 import LessonsProgress from "./components/LessonsProgress";
 import DownloadProgressButton from "./components/DownloadProgressButton";
 import Subheader from "../../components/Subheader";
-import { MetWords, UserSettings } from "../../types";
+import { GlobalUserSettings, MetWords, UserSettings } from "../../types";
+import BackupBanner from "./components/BackupBanner";
+import BackupModal from "./components/BackupModal";
 
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
@@ -24,7 +26,7 @@ let particles: any[] = [];
 type Props = {
   changeFlashcardCourseLevel: any;
   flashcardsNextLesson: any;
-  globalUserSettings: any;
+  globalUserSettings: GlobalUserSettings;
   lessonIndex: any;
   lessonsProgress: any;
   metWords: MetWords;
@@ -40,6 +42,7 @@ type Props = {
   updateStartingMetWordsAndCounts: any;
   updateUserGoals: any;
   updateUserGoalsUnveiled: any;
+  dismissBackupBanner: () => void;
   userGoals: any;
   userSettings: UserSettings;
   yourMemorisedWordCount: any;
@@ -56,9 +59,6 @@ const Progress = (props: Props) => {
   const [canvasHeight] = useState(Math.floor(window.innerHeight));
   const [flashWarning, setFlashWarning] = useState("");
   const [loadingLessonIndex, setLoadingLessonIndex] = useState(true);
-  const [reducedSaveAndLoad] = useState(
-    Object.keys(props.metWords).length > 2000 ? true : false
-  );
   const [showLoadInput, setShowLoadInput] = useState(false);
   const [toRecommendedNextLesson, setToRecommendedNextLesson] = useState(false);
   const [showSetGoalsForm, setShowSetGoalsForm] = useState(false);
@@ -68,6 +68,7 @@ const Progress = (props: Props) => {
   const [newWordsGoalMet, setNewWordsGoalMet] = useState(false);
   const [userGoalInputOldWords, setUserGoalInputOldWords] = useState(50);
   const [userGoalInputNewWords, setUserGoalInputNewWords] = useState(15);
+  const [isBackupModalOpen, setBackupModalOpen] = useState(false);
 
   useEffect(() => {
     if (mainHeading) {
@@ -143,7 +144,7 @@ const Progress = (props: Props) => {
   }, [showSetGoalsForm]);
 
   useEffect(() => {
-    if (reducedSaveAndLoad && showLoadInput) {
+    if (showLoadInput) {
       const element = document.getElementById(
         "js-metwords-from-personal-store--small"
       );
@@ -151,7 +152,7 @@ const Progress = (props: Props) => {
         element.focus();
       }
     }
-  }, [reducedSaveAndLoad, showLoadInput]);
+  }, [showLoadInput]);
 
   useEffect(() => {
     return () => {
@@ -378,7 +379,7 @@ const Progress = (props: Props) => {
   }
 
   const loadForm =
-    reducedSaveAndLoad && showLoadInput ? (
+    showLoadInput ? (
       <React.Fragment>
         <label
           htmlFor="js-metwords-from-personal-store--small"
@@ -401,7 +402,7 @@ const Progress = (props: Props) => {
           onClick={handleLoadProgress.bind(this)}
           aria-label="Load progress from text"
         >
-          Load
+          Load progress
         </PseudoContentButton>
       </React.Fragment>
     ) : (
@@ -410,7 +411,7 @@ const Progress = (props: Props) => {
         className="button button--secondary mr2"
         aria-label="Show progress loading form"
       >
-        Load
+        Load progress
       </button>
     );
 
@@ -439,97 +440,31 @@ const Progress = (props: Props) => {
         <FlashcardsSection
           showOnSmallScreen={true}
           changeFlashcardCourseLevel={props.changeFlashcardCourseLevel}
-          flashcardsCourseLevel={props.globalUserSettings.flashcardsCourseLevel}
+          flashcardsCourseLevel={props.globalUserSettings.flashcardsCourseLevel!}
           flashcardsNextLesson={props.flashcardsNextLesson}
           loadingLessonIndex={loadingLessonIndex}
           skipButtonId={mobileSkipButtonId}
           updateFlashcardsRecommendation={props.updateFlashcardsRecommendation}
         />
 
-        {reducedSaveAndLoad ? null : (
-          <div className="progress-layout pl3 pr3 pt3 mx-auto mw-1024">
-            <div className="panel bg-white dark:bg-coolgrey-1000 p3 mb3">
-              <h2>Save your progress</h2>
-              <p>
-                Typey&nbsp;Type saves your brief progress in your browser’s
-                local storage.
-                <strong className="bg-danger dark:text-coolgrey-900">
-                  {" "}
-                  You’ll lose your progress if you clear your browsing data
-                  (history, cookies, and cache).
-                </strong>{" "}
-                If you share this device with other people or use
-                Typey&nbsp;Type across several devices and browsers, you should
-                save your progress elsewhere. Copy your progress to your
-                clipboard and save it in a text file somewhere safe. When you
-                return, enter your progress to load it back into
-                Typey&nbsp;Type.
-              </p>
-              <p className="mb0">
-                <PseudoContentButton
-                  className="js-clipboard-button link-button copy-to-clipboard"
-                  dataClipboardTarget="#js-metwords-from-typey-type"
-                >
-                  Copy progress to clipboard
-                </PseudoContentButton>
-              </p>
-            </div>
-
-            <div className="panel bg-white dark:bg-coolgrey-1000 p3 mb3">
-              <h2 className="mt0">Load your progress</h2>
-              <p className="mt2 mb3">
-                Restore your progress from a previous session by entering your
-                saved progress and loading it into Typey&nbsp;Type. You can also
-                clear your progress by loading in empty curly braces,{" "}
-                <code>{"{}"}</code>.
-              </p>
-              <p className="mt4 mb0">
-                <label
-                  htmlFor="metwords-from-personal-store"
-                  className="inline-block mb05"
-                >
-                  Enter your progress here:
-                </label>
-                <textarea
-                  id="metwords-from-personal-store"
-                  className="js-metwords-from-personal-store progress-textarea bg-info dark:text-coolgrey-900 px1 py05 bw-1 b--solid br-4 db w-100"
-                  autoCapitalize="off"
-                  autoComplete="off"
-                  autoCorrect="off"
-                  spellCheck={false}
-                  rows={2}
-                />
-              </p>
-              <p className="mt2 mb0">
-                <PseudoContentButton
-                  className="link-button load-progress"
-                  onClick={handleLoadProgress.bind(this)}
-                >
-                  Load progress from text
-                </PseudoContentButton>
-              </p>
-            </div>
-          </div>
-        )}
-
-        <div
-          className={`p3 mx-auto mw-1024${reducedSaveAndLoad ? " mt3" : ""}`}
-        >
+        <div className={`p3 mx-auto mw-1024 mt3`}>
           <div className="flex justify-between">
             <h2 className="mb0">Your progress</h2>
-            {reducedSaveAndLoad && (
-              <div className="flex mb3">
-                <div className="flex">{loadForm}</div>
-                <PseudoContentButton
-                  className="js-clipboard-button link-button copy-to-clipboard"
-                  dataClipboardTarget="#js-metwords-from-typey-type"
-                  aria-label="Copy progress to clipboard"
-                >
-                  Copy
-                </PseudoContentButton>
-              </div>
-            )}
+            <div className="flex mb3">
+              <button className="de-emphasized-button mr2 ml2" style={{textDecorationLine: "none"}} onClick={() => setBackupModalOpen(true)}>Learn more</button>
+              <BackupModal isOpen={isBackupModalOpen} handleCloseModal={() => setBackupModalOpen(false)} />
+              <div className="flex">{loadForm}</div>
+              <PseudoContentButton
+                className="js-clipboard-button link-button copy-to-clipboard"
+                dataClipboardTarget="#js-metwords-from-typey-type"
+                aria-label="Copy progress to clipboard"
+              >
+                Copy progress
+              </PseudoContentButton>
+            </div>
           </div>
+
+          <BackupBanner dismissedTime={props.globalUserSettings.backupBannerDismissedTime} dismiss={props.dismissBackupBanner}/>
 
           <ProgressSummaryAndLinks
             metWords={props.metWords}
@@ -601,7 +536,7 @@ const Progress = (props: Props) => {
                 showOnSmallScreen={false}
                 changeFlashcardCourseLevel={props.changeFlashcardCourseLevel}
                 flashcardsCourseLevel={
-                  props.globalUserSettings.flashcardsCourseLevel
+                  props.globalUserSettings.flashcardsCourseLevel!
                 }
                 flashcardsNextLesson={props.flashcardsNextLesson}
                 loadingLessonIndex={loadingLessonIndex}

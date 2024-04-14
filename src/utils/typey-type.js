@@ -617,7 +617,8 @@ function loadPersonalPreferences() {
     experiments: {},
     flashcardsCourseLevel: "noviceCourse",
     showMisstrokesInLookup: false,
-    writerInput: "qwerty"
+    writerInput: "qwerty",
+    backupBannerDismissedTime: null,
   };
   let flashcardsMetWords = {
     "the": {

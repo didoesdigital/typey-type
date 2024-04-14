@@ -66,7 +66,8 @@ import {
 } from './pages/lessons/components/UserSettings/updateLessonSetting';
 import {
   changeWriterInput,
-  toggleExperiment,
+  dismissBackupBanner,
+  toggleExperiment
 } from './pages/lessons/components/UserSettings/updateGlobalUserSetting';
 import {
   changeFlashcardCourseLevel,
@@ -142,7 +143,8 @@ class App extends Component {
         experiments: {},
         flashcardsCourseLevel: "noviceCourse", // see types.ts noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
         writerInput: "qwerty", // qwerty || raw
-        showMisstrokesInLookup: false
+        showMisstrokesInLookup: false,
+        backupBannerDismissedTime: null,
       },
       isPloverDictionaryLoaded: false,
       isGlobalLookupDictionaryLoaded: false,
@@ -1431,6 +1433,7 @@ class App extends Component {
               startFromWordOne: this.startFromWordOne.bind(this),
               stopLesson: this.stopLesson.bind(this),
               toggleExperiment: toggleExperiment.bind(this),
+              dismissBackupBanner: dismissBackupBanner.bind(this),
               updateFlashcardsMetWords: this.updateFlashcardsMetWords.bind(this),
               updateFlashcardsProgress: this.updateFlashcardsProgress.bind(this),
               updateFlashcardsRecommendation: this.updateFlashcardsRecommendation.bind(this),

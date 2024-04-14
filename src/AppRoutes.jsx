@@ -234,6 +234,7 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                       updateUserGoalsUnveiled={
                         appMethods.updateUserGoalsUnveiled
                       }
+                      dismissBackupBanner={appMethods.dismissBackupBanner}
                       userGoals={appState.userGoals}
                       userSettings={appState.userSettings}
                       oldWordsGoalUnveiled={appState.oldWordsGoalUnveiled}
