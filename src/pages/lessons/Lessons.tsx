@@ -382,7 +382,6 @@ const Lessons = ({
         path={`${match.url}/:category/:subcategory/:lessonPath`}
         render={(props) => (
           <Lesson
-            key={props.location.pathname}
             actualText={actualText}
             changeFullscreen={changeFullscreen}
             changeShowScoresWhileTyping={changeShowScoresWhileTyping}
