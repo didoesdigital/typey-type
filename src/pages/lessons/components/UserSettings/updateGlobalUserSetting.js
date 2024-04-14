@@ -58,3 +58,27 @@ export function toggleExperiment(event) {
 
   return value;
 }
+
+export function dismissBackupBanner(event) {
+  let newState = Object.assign({}, this.state.globalUserSettings);
+
+  const value = Date.now();
+  const name = "backupBannerDismissedTime";
+
+  newState[name] = value;
+
+  this.setState({ globalUserSettings: newState }, () => {
+    writePersonalPreferences(
+      "globalUserSettings",
+      this.state.globalUserSettings
+    );
+  });
+
+  let labelString = "Dismiss";
+
+  GoogleAnalytics.event({
+    category: "Global user settings",
+    action: "Dismiss backup banner",
+    label: labelString,
+  });
+}

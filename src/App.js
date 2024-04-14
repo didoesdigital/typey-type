@@ -65,7 +65,8 @@ import {
 } from './pages/lessons/components/UserSettings/updateLessonSetting';
 import {
   changeWriterInput,
-  toggleExperiment,
+  dismissBackupBanner,
+  toggleExperiment
 } from './pages/lessons/components/UserSettings/updateGlobalUserSetting';
 import {
   changeFlashcardCourseLevel,
@@ -141,7 +142,8 @@ class App extends Component {
         experiments: {},
         flashcardsCourseLevel: "noviceCourse", // see types.ts noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
         writerInput: "qwerty", // qwerty || raw
-        showMisstrokesInLookup: false
+        showMisstrokesInLookup: false,
+        backupBannerDismissedTime: null,
       },
       isPloverDictionaryLoaded: false,
       isGlobalLookupDictionaryLoaded: false,
@@ -738,7 +740,7 @@ class App extends Component {
 
     // Get URL search query parameters:
     const parsedParams = queryString.parse(search);
-    
+
     // Get lookupTerm from URL:
     const lookupTerm = parsedParams['q'];
 
@@ -797,7 +799,7 @@ class App extends Component {
         }
       }
       newLesson.presentedMaterial = repeatedLesson;
-      
+
       // Zipper the lesson:
       newLesson.newPresentedMaterial = new Zipper(repeatedLesson);
 
@@ -1148,7 +1150,7 @@ class App extends Component {
     // eslint-disable-next-line
     let [matchedChars, unmatchedChars, _, unmatchedActual] =
       matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings, this.state.userSettings);
-    
+
     if (this.state.lesson.settings.ignoredChars) {
       matchedChars = removeIgnoredCharsFromSplitText(matchedChars, this.state.lesson.settings.ignoredChars);
       unmatchedChars = removeIgnoredCharsFromSplitText(unmatchedChars, this.state.lesson.settings.ignoredChars);
@@ -1428,6 +1430,7 @@ class App extends Component {
               startFromWordOne: this.startFromWordOne.bind(this),
               stopLesson: this.stopLesson.bind(this),
               toggleExperiment: toggleExperiment.bind(this),
+              dismissBackupBanner: dismissBackupBanner.bind(this),
               updateFlashcardsMetWords: this.updateFlashcardsMetWords.bind(this),
               updateFlashcardsProgress: this.updateFlashcardsProgress.bind(this),
               updateFlashcardsRecommendation: this.updateFlashcardsRecommendation.bind(this),

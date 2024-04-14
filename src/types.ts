@@ -158,7 +158,7 @@ export type LookupDictWithNamespacedDicts = Map<
  * Example:
  * Map (74602)
  * configuration: ['typey:typey-type.json', 'user:personal.json', 'plover:plover-main-3-jun-2018.json']
- * 
+ *
  */
 export type LookupDictWithNamespacedDictsAndConfig = Omit<
   LookupDictWithNamespacedDicts,
@@ -394,6 +394,7 @@ export type GlobalUserSettings = {
   flashcardsCourseLevel?: FlashcardsCourseLevel;
   showMisstrokesInLookup?: boolean;
   writerInput?: "raw" | "qwerty";
+  backupBannerDismissedTime: number | null;
 };
 
 export type Experiments = {
