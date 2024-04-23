@@ -45,6 +45,11 @@ const BackupModal: React.FC<Props> = ({ isOpen, handleCloseModal }) => {
       <h3>Load progress</h3>
       <p>When you return, hit “Load progress” and enter your progress to load it back into Typey Type. You can also
         clear your progress by loading in empty curly braces, <code>{'{}'}</code></p>
+      <div className="text-right">
+        <button className="button" onClick={handleCloseModal}>
+          OK
+        </button>
+      </div>
     </ReactModal>
   );
 };
