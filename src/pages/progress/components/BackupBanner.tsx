@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import BackupModal from "./BackupModal";
+import ClosingCross from "../../../components/Icons/icon-images/ClosingCross.svg";
+import Icon from "../../../components/Icons/Icon";
 
 const BANNER_REAPPEAR_INTERVAL = 1000 * 60 * 60 * 24 * 7; // 1 week
 
@@ -23,12 +25,7 @@ const BackupBanner: React.FC<Props> = ({ dismissedTime, dismiss }) => {
         </div>
         <button className="de-emphasized-button flex items-center justify-center p1" aria-label="Dismiss notification"
                 onClick={dismiss}>
-          <span className="icon" style={{
-            display: "inline-block",
-            mask: "url('/typey-type/static/media/ClosingCross.e18cfc9be01581b8127611e43f8ea303.svg') center center / contain no-repeat",
-            width: "1em",
-            height: "1em"
-          }}></span>
+          <Icon iconSVGImport={ClosingCross} width="1em" height="1em" />
         </button>
       </div>
       <BackupModal isOpen={isModalOpen} handleCloseModal={() => setModalOpen(false)} />
