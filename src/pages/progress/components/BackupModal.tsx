@@ -35,7 +35,7 @@ const BackupModal: React.FC<Props> = ({ isOpen, handleCloseModal }) => {
       <h3 id="aria-modal-heading">Back up your progress</h3>
       <p>
         Typey Type saves your typing progress in your browser’s local storage.{" "}
-        <span className="bg-danger">
+        <span className="bg-danger dark:text-coolgrey-900">
           You’ll lose your progress if you clear your browsing data (history,
           cookies, and cache).
         </span>{" "}
