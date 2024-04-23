@@ -387,23 +387,25 @@ const Progress = (props: Props) => {
         >
           Enter your progress here:
         </label>
-        <textarea
-          id="js-metwords-from-personal-store--small"
-          className="js-metwords-from-personal-store progress-textarea bg-info dark:text-coolgrey-900 px1 py05 bw-1 b--solid br-4 db w-100 mr1"
-          autoCapitalize="off"
-          autoComplete="off"
-          autoCorrect="off"
-          spellCheck={false}
-          style={{ maxWidth: "200px", maxHeight: "40px" }}
-          rows={1}
-        />
-        <PseudoContentButton
-          className="link-button load-progress mr2"
-          onClick={handleLoadProgress.bind(this)}
-          aria-label="Load progress from text"
-        >
-          Load progress
-        </PseudoContentButton>
+        <div className="flex flex-wrap" style={{ rowGap: "16px" }}>
+          <textarea
+            id="js-metwords-from-personal-store--small"
+            className="js-metwords-from-personal-store progress-textarea bg-info dark:text-coolgrey-900 px1 py05 bw-1 b--solid br-4 db w-100 mr1"
+            autoCapitalize="off"
+            autoComplete="off"
+            autoCorrect="off"
+            spellCheck={false}
+            style={{ maxWidth: "200px", maxHeight: "40px" }}
+            rows={1}
+          />
+          <PseudoContentButton
+            className="link-button load-progress mr2"
+            onClick={handleLoadProgress.bind(this)}
+            aria-label="Load progress from text"
+          >
+            Load progress
+          </PseudoContentButton>
+        </div>
       </React.Fragment>
     ) : (
       <button
@@ -448,19 +450,21 @@ const Progress = (props: Props) => {
         />
 
         <div className={`p3 mx-auto mw-1024 mt3`}>
-          <div className="flex justify-between">
+          <div className="flex flex-wrap justify-between">
             <h2 className="mb0">Your progress</h2>
-            <div className="flex mb3">
-              <button className="de-emphasized-button mr2 ml2" style={{textDecorationLine: "none"}} onClick={() => setBackupModalOpen(true)}>Learn more</button>
+            <div className="flex flex-wrap mb3" style={{ columnGap: "16px", rowGap: "16px" }}>
+              <button className="de-emphasized-button" style={{textDecorationLine: "none"}} onClick={() => setBackupModalOpen(true)}>Learn more</button>
               <BackupModal isOpen={isBackupModalOpen} handleCloseModal={() => setBackupModalOpen(false)} />
-              <div className="flex">{loadForm}</div>
-              <PseudoContentButton
-                className="js-clipboard-button link-button copy-to-clipboard"
-                dataClipboardTarget="#js-metwords-from-typey-type"
-                aria-label="Copy progress to clipboard"
-              >
-                Copy progress
-              </PseudoContentButton>
+              <div className="flex flex-wrap" style={{ rowGap: "16px" }}>
+                <div className="flex">{loadForm}</div>
+                <PseudoContentButton
+                  className="js-clipboard-button link-button copy-to-clipboard"
+                  dataClipboardTarget="#js-metwords-from-typey-type"
+                  aria-label="Copy progress to clipboard"
+                >
+                  Copy progress
+                </PseudoContentButton>
+              </div>
             </div>
           </div>
 
