@@ -440,7 +440,7 @@ const Progress = (props: Props) => {
         <FlashcardsSection
           showOnSmallScreen={true}
           changeFlashcardCourseLevel={props.changeFlashcardCourseLevel}
-          flashcardsCourseLevel={props.globalUserSettings.flashcardsCourseLevel!}
+          flashcardsCourseLevel={props.globalUserSettings.flashcardsCourseLevel}
           flashcardsNextLesson={props.flashcardsNextLesson}
           loadingLessonIndex={loadingLessonIndex}
           skipButtonId={mobileSkipButtonId}
@@ -536,7 +536,7 @@ const Progress = (props: Props) => {
                 showOnSmallScreen={false}
                 changeFlashcardCourseLevel={props.changeFlashcardCourseLevel}
                 flashcardsCourseLevel={
-                  props.globalUserSettings.flashcardsCourseLevel!
+                  props.globalUserSettings.flashcardsCourseLevel
                 }
                 flashcardsNextLesson={props.flashcardsNextLesson}
                 loadingLessonIndex={loadingLessonIndex}

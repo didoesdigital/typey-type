@@ -391,10 +391,10 @@ export type UserSettings = {
 };
 
 export type GlobalUserSettings = {
-  experiments?: Experiments;
-  flashcardsCourseLevel?: FlashcardsCourseLevel;
-  showMisstrokesInLookup?: boolean;
-  writerInput?: "raw" | "qwerty";
+  experiments: Experiments;
+  flashcardsCourseLevel: FlashcardsCourseLevel;
+  showMisstrokesInLookup: boolean;
+  writerInput: "raw" | "qwerty";
   backupBannerDismissedTime: number | null;
 };
 
