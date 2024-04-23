@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactModal from "react-modal";
 
 type Props = {
@@ -6,6 +6,10 @@ type Props = {
   handleCloseModal: () => void;
 }
 const BackupModal: React.FC<Props> = ({ isOpen, handleCloseModal }) => {
+  useEffect(() => {
+    ReactModal.setAppElement("#js-app");
+  }, []);
+
   return (
     <ReactModal
       isOpen={isOpen}
