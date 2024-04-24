@@ -33,6 +33,7 @@ class Stroke {
     this.bits = bits;
   }
 
+  /** @param key { number } e.g. `2` or two in hex: `0b00000000000000000000010` for the left S key or `16384` for the right R key (`RR`) */
   set(key) {
     return new Stroke(this.bits | key);
   }

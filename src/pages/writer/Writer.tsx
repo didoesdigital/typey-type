@@ -208,7 +208,7 @@ class Writer extends Component<Props, State> {
     return stenoStroke.toString();
   }
 
-  addKeyToStenoBrief(key: string) {
+  addKeyToStenoBrief(key: number) {
     let stenoStroke = this.state.stenoStroke.set(key);
 
     this.setState({
