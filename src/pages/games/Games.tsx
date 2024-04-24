@@ -56,6 +56,7 @@ const AsyncTPEURPBGS = Loadable({
 });
 
 type Props = {
+  changeInputForKAOES: (input: string) => void;
   match: any;
   fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
@@ -69,6 +70,7 @@ type Props = {
 };
 
 const Games = ({
+  changeInputForKAOES,
   match,
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
@@ -85,7 +87,10 @@ const Games = ({
       <Route exact={true} path={`${match.url}/KAOES`}>
         <DocumentTitle title={"Typey Type | KAOES game"}>
           <ErrorBoundary>
-            <AsyncKAOES />
+            <AsyncKAOES
+              inputForKAOES={globalUserSettings.inputForKAOES}
+              changeInputForKAOES={changeInputForKAOES}
+            />
           </ErrorBoundary>
         </DocumentTitle>
       </Route>

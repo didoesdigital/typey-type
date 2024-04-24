@@ -395,6 +395,7 @@ export type GlobalUserSettings = {
   flashcardsCourseLevel: FlashcardsCourseLevel;
   showMisstrokesInLookup: boolean;
   writerInput: "raw" | "qwerty";
+  inputForKAOES: "raw" | "qwerty";
   backupBannerDismissedTime: number | null;
 };
 

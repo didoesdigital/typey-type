@@ -6,6 +6,7 @@ const globalUserSettings = {
   "flashcardsCourseLevel": "noviceCourse",
   "showMisstrokesInLookup": true,
   "writerInput": "raw",
+  "inputForKAOES": "raw",
 };
 
 export default globalUserSettings;

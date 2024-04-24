@@ -14,3 +14,9 @@ const Template = (args) => (
 );
 
 export const KAOESGameStory = Template.bind({});
+KAOESGameStory.args = {
+  inputForKAOES: "raw",
+  changeInputForKAOES: () => {
+    console.log("change input for KAOES game");
+  },
+};

@@ -57,6 +57,7 @@ export default function Input({
           id={`${gameName}-input`}
           onChange={onChangeTypedText}
           rows={1}
+          style={{ textDecoration: "none" }}
           spellCheck={false}
           value={typedText}
           wrap="off"

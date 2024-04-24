@@ -152,6 +152,7 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                 <DocumentTitle title={"Typey Type | Games"}>
                   <ErrorBoundary>
                     <AsyncGames
+                      changeInputForKAOES={appMethods.changeInputForKAOES}
                       fetchAndSetupGlobalDict={
                         appMethods.appFetchAndSetupGlobalDict
                       }

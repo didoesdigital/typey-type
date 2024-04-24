@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import Game from "./Game";
 import Subheader from "../../../components/Subheader";
 
-export default function Index() {
+export default function Index({ changeInputForKAOES, inputForKAOES }) {
   const mainHeading = useRef(null);
   useEffect(() => {
     if (mainHeading) {
@@ -22,7 +22,10 @@ export default function Index() {
         </div>
       </Subheader>
       <div className="p3 mx-auto mw-1024">
-        <Game />
+        <Game
+          inputForKAOES={inputForKAOES}
+          changeInputForKAOES={changeInputForKAOES}
+        />
       </div>
     </main>
   );

@@ -21,6 +21,7 @@ import Puzzle from "./Puzzle";
 import { ReactComponent as MischievousRobot } from "../../../images/MischievousRobot.svg";
 import { choosePuzzleKey, prettyKey } from "./utilities";
 import * as stroke from "../../../utils/stroke";
+import { mapQWERTYKeysToStenoStroke } from "../../../utils/typey-type";
 
 const stenoTypedTextToKeysMapping = {
   "-Z": stroke.Z,
@@ -79,7 +80,7 @@ const GiveKAOESfeedback = ({ idModifier = "" }) => (
   </p>
 );
 
-export default function Game() {
+export default function Game({ changeInputForKAOES, inputForKAOES }) {
   const canvasRef = useRef(null);
   const canvasWidth = Math.floor(window.innerWidth);
   const canvasHeight = Math.floor(window.innerHeight);
@@ -146,29 +147,41 @@ export default function Game() {
     dispatch({ type: actions.makeGuess });
   };
 
+  /** @param typedStenoKey { string } - string hopefully containing a raw steno or qwerty steno */
   const onChangeTextInput = (typedStenoKey) => {
     setTypedText(typedStenoKey);
-    const trimmedTypedKey = typedStenoKey.trim().toUpperCase();
-    const key = stenoTypedTextToKeysMapping[trimmedTypedKey]
-      ? stenoTypedTextToKeysMapping[trimmedTypedKey]
-      : 0;
+    const trimmedTypedKey = typedStenoKey.trim();
 
+    // Raw steno:
+    const upperTrimmedKey = trimmedTypedKey.toUpperCase();
+    const rawStenoKeyNumber = stenoTypedTextToKeysMapping[upperTrimmedKey] ?? 0;
     const tmpBoard = new Stroke();
-    const clickedKey = tmpBoard.set(key).toString();
+    const rawStenoKey = tmpBoard.set(rawStenoKeyNumber);
 
-    if (puzzleText === clickedKey) {
+    // QWERTY steno:
+    const qwertyStenoTypedKey = mapQWERTYKeysToStenoStroke(trimmedTypedKey);
+
+    const typedKeyStroke =
+      inputForKAOES === "qwerty" ? qwertyStenoTypedKey : rawStenoKey;
+    const comparableTypedKeyString = typedKeyStroke.toString();
+    const comparableTypedKeyNumber =
+      inputForKAOES === "qwerty"
+        ? stenoTypedTextToKeysMapping[comparableTypedKeyString] ?? 0
+        : rawStenoKeyNumber;
+
+    if (puzzleText === comparableTypedKeyString) {
       setTypedText("");
       setPreviousCompletedPhraseAsTyped(typedStenoKey);
       restartConfetti();
-      setPuzzleText(choosePuzzleKey(clickedKey));
+      setPuzzleText(choosePuzzleKey(comparableTypedKeyString));
       setStenoStroke(new Stroke());
       setRightWrongColor(rightColor);
       dispatch({ type: actions.roundCompleted });
     } else {
-      setStenoStroke(stenoStroke.set(key));
+      setStenoStroke(stenoStroke.set(comparableTypedKeyNumber));
       setRightWrongColor(wrongColor);
     }
-    setPreviousStenoStroke(tmpBoard.set(key));
+    setPreviousStenoStroke(tmpBoard.set(comparableTypedKeyNumber));
     dispatch({ type: actions.makeGuess });
   };
 
@@ -264,7 +277,7 @@ export default function Game() {
               </div>
             </div>
             <div className="mw-320 mx-auto">
-              <div className="flex flex-wrap items-center justify-center">
+              <div className="flex flex-wrap items-center ml2">
                 <div className="mw-240">
                   <Input
                     onChangeInput={onChangeTextInput}
@@ -276,72 +289,125 @@ export default function Game() {
                     gameName={gameName}
                   />
                 </div>
-                <div className="ml1">
-                  (
-                  <button
-                    className="de-emphasized-button text-small"
-                    onClick={handleOpenModal}
-                  >
-                    help
-                  </button>
-                  <ReactModal
-                    isOpen={modalVisibility}
-                    aria={{
-                      labelledby: "aria-modal-heading",
-                      describedby: "aria-modal-description",
-                    }}
-                    ariaHideApp={true}
-                    closeTimeoutMS={300}
-                    role="dialog"
-                    onRequestClose={handleCloseModal}
-                    className={{
-                      "base": "modal",
-                      "afterOpen": "modal--after-open",
-                      "beforeClose": "modal--before-close",
-                    }}
-                    overlayClassName={{
-                      "base": "modal__overlay",
-                      "afterOpen": "modal__overlay--after-open",
-                      "beforeClose": "modal__overlay--before-close",
-                    }}
-                  >
-                    <div className="fr">
-                      <button
-                        className="de-emphasized-button hide-md"
-                        onClick={handleCloseModal}
-                      >
-                        Close
-                      </button>
-                    </div>
-                    <h3 id="aria-modal-heading">Typed KAOES input</h3>
-                    <div id="aria-modal-description">
-                      <p>
-                        To practice typing the keys instead of clicking on the
-                        diagram, you can turn off all of your steno dictionaries
-                        to produce raw steno output. That way, when you press
-                        the{" "}
-                        <kbd className="steno-stroke steno-stroke--subtle">
-                          S
-                        </kbd>{" "}
-                        key, the steno engine will output “S” instead of “is”.
-                        Likewise, pressing the{" "}
-                        <kbd className="steno-stroke steno-stroke--subtle">
-                          -T
-                        </kbd>{" "}
-                        key will output “-T” instead of “the”. The dash is
-                        necessary for keys on the right-hand side of the board.
-                      </p>
-                      <div className={"mt1 mb0"}>
-                        <GiveKAOESfeedback idModifier="--from-modal" />
+                <div className="pt3">
+                  <fieldset>
+                    <legend>Raw or QWERTY steno input </legend>
+                    <div className="flex flex-wrap">
+                      <div className="flex justify-between">
+                        <p className="radio mr3 mb0">
+                          <label htmlFor="raw" className="">
+                            <input
+                              type="radio"
+                              name="raw"
+                              id="raw"
+                              onChange={changeInputForKAOES}
+                              checked={inputForKAOES === "raw"}
+                            />{" "}
+                            Raw (e.g.{" "}
+                            <kbd className="steno-stroke steno-stroke--subtle">
+                              -R
+                            </kbd>
+                            )
+                          </label>
+                        </p>
+                      </div>
+                      <div className="flex justify-between">
+                        <p className="radio mr3 mb0">
+                          <label htmlFor="qwerty" className="">
+                            <input
+                              type="radio"
+                              name="qwerty"
+                              id="qwerty"
+                              onChange={changeInputForKAOES}
+                              checked={inputForKAOES === "qwerty"}
+                            />{" "}
+                            QWERTY (e.g. "j")
+                          </label>
+                        </p>
                       </div>
                     </div>
-                    <div className="text-right">
-                      <button className="button" onClick={handleCloseModal}>
-                        OK
-                      </button>
-                    </div>
-                  </ReactModal>
-                  )
+                  </fieldset>
+                  <div>
+                    <button
+                      className="de-emphasized-button text-small"
+                      onClick={handleOpenModal}
+                    >
+                      Help with settings
+                    </button>
+                    <ReactModal
+                      isOpen={modalVisibility}
+                      aria={{
+                        labelledby: "aria-modal-heading",
+                        describedby: "aria-modal-description",
+                      }}
+                      ariaHideApp={true}
+                      closeTimeoutMS={300}
+                      role="dialog"
+                      onRequestClose={handleCloseModal}
+                      className={{
+                        "base": "modal",
+                        "afterOpen": "modal--after-open",
+                        "beforeClose": "modal--before-close",
+                      }}
+                      overlayClassName={{
+                        "base": "modal__overlay",
+                        "afterOpen": "modal__overlay--after-open",
+                        "beforeClose": "modal__overlay--before-close",
+                      }}
+                    >
+                      <div className="fr">
+                        <button
+                          className="de-emphasized-button hide-md"
+                          onClick={handleCloseModal}
+                        >
+                          Close
+                        </button>
+                      </div>
+                      <h3 id="aria-modal-heading">Typed KAOES input</h3>
+                      <div id="aria-modal-description">
+                        <p>
+                          You can practice memorising the keys by clicking on
+                          the diagram or typing.
+                        </p>
+                        <h4>Raw steno</h4>
+                        <p>
+                          When the “Raw steno” setting is on, you can turn off
+                          all of your steno dictionaries to produce raw steno
+                          output. That way, when you press the{" "}
+                          <kbd className="steno-stroke steno-stroke--subtle">
+                            S
+                          </kbd>{" "}
+                          key, the steno engine will output “S” instead of “is”.
+                          Likewise, pressing the{" "}
+                          <kbd className="steno-stroke steno-stroke--subtle">
+                            -T
+                          </kbd>{" "}
+                          key will output “-T” instead of “the”. The dash is
+                          necessary for keys on the right-hand side of the
+                          board.
+                        </p>
+                        <h4>QWERTY steno</h4>
+                        <p>
+                          When the “QWERTY steno” setting is on, type regular
+                          QWERTY letters in the equivalent position of where the
+                          matching steno key would be. For example, to press the
+                          right{" "}
+                          <kbd className="steno-stroke steno-stroke--subtle">
+                            -R
+                          </kbd>{" "}
+                          key, type “j” on the keyboard.
+                        </p>
+                        <div className={"mt1 mb0"}>
+                          <GiveKAOESfeedback idModifier="--from-modal" />
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <button className="button" onClick={handleCloseModal}>
+                          OK
+                        </button>
+                      </div>
+                    </ReactModal>
+                  </div>
                 </div>
               </div>
             </div>

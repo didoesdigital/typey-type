@@ -65,6 +65,7 @@ import {
   updateRevisionMaterial,
 } from './pages/lessons/components/UserSettings/updateLessonSetting';
 import {
+  changeInputForKAOES,
   changeWriterInput,
   dismissBackupBanner,
   toggleExperiment
@@ -143,6 +144,7 @@ class App extends Component {
         experiments: {},
         flashcardsCourseLevel: "noviceCourse", // see types.ts noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
         writerInput: "qwerty", // qwerty || raw
+        inputForKAOES: "qwerty", // qwerty || raw
         showMisstrokesInLookup: false,
         backupBannerDismissedTime: null,
       },
@@ -1410,6 +1412,7 @@ class App extends Component {
               changeStenoLayout: changeStenoLayout.bind(this),
               changeUserSetting: changeUserSetting.bind(this),
               changeVoiceUserSetting: changeVoiceUserSetting.bind(this),
+              changeInputForKAOES: changeInputForKAOES.bind(this),
               changeWriterInput: changeWriterInput.bind(this),
               chooseStudy: chooseStudy.bind(this),
               createCustomLesson: this.createCustomLesson.bind(this),

@@ -618,6 +618,7 @@ function loadPersonalPreferences() {
     flashcardsCourseLevel: "noviceCourse",
     showMisstrokesInLookup: false,
     writerInput: "qwerty",
+    inputForKAOES: "qwerty",
     backupBannerDismissedTime: null,
   };
   let flashcardsMetWords = {
