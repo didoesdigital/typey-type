@@ -1137,9 +1137,33 @@ class App extends Component {
       });
   }
 
+  markupBuffer = [];
+  updateBufferTimer = null;
+
   updateMarkup(event) {
     let actualText = event.target.value;
+    // TODO: remove cookie thing before merging
+    const batchUpdate = document.cookie.indexOf("batchUpdate=1")>=0;
+    if(!batchUpdate) {
+      this.updateBufferSingle(actualText, false);
+      return;
+    }
+    // Immediately update the text in the input field
+    this.setState({ actualText });
+    this.markupBuffer.push(actualText);
 
+    if (this.updateBufferTimer) {
+      clearTimeout(this.updateBufferTimer);
+    }
+    this.updateBufferTimer = setTimeout(() => {
+      // TODO: do we need char-level processing for stats? If not, only store latest
+      const latest = this.markupBuffer[this.markupBuffer.length - 1];
+      this.markupBuffer = [];
+      this.updateBufferSingle(latest, true);
+    }, 16); // 60fps
+  }
+
+  updateBufferSingle(actualText, batchUpdate) {
     // Start timer on first key stroke
     if (this.state.startTime === null) {
       this.setState({
@@ -1195,7 +1219,17 @@ class App extends Component {
       this.setState({showStrokesInLesson: true});
     }
 
-    if (numberOfUnmatchedChars === 0) {
+    let proceedToNextWord;
+    if (batchUpdate) {
+      // e.g. unmatchedActual is "es" if "Frenches" is typed for "French"
+      // In case of spaceAfterOutput, unmatchedChars is not empty and don't care here.
+      // In case of spaceExact, proceed without checking next actual chars.
+      const excessLookFine = this.state.userSettings.spacePlacement === "spaceAfterOutput" || this.state.userSettings.spacePlacement === "spaceExact" || unmatchedActual.length === 0 || unmatchedActual[0] === " ";
+      proceedToNextWord = numberOfUnmatchedChars === 0 && excessLookFine;
+    } else {
+      proceedToNextWord = numberOfUnmatchedChars === 0;
+    }
+    if (proceedToNextWord) {
       newState.currentPhraseAttempts = []; // reset for next word
       newState.currentLessonStrokes = this.state.currentLessonStrokes; // [{word: "cat", attempts: ["cut"], stroke: "KAT"}, {word: "sciences", attempts ["sign", "ss"], stroke: "SAOEUPB/EPBC/-S"]
 
@@ -1253,7 +1287,7 @@ class App extends Component {
       newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
       newState.previousCompletedPhraseAsTyped = actualText;
-      newState.actualText = '';
+      newState.actualText = batchUpdate ? unmatchedActual : '';
       newState.showStrokesInLesson = false;
       newState.currentPhraseID = nextPhraseID;
 
@@ -1264,6 +1298,8 @@ class App extends Component {
     this.setState(newState, () => {
       if (this.isFinished()) {
         this.stopLesson();
+      } else if(batchUpdate && proceedToNextWord && unmatchedActual.length>0) {
+        this.updateBufferSingle(unmatchedActual);
       }
     });
   }

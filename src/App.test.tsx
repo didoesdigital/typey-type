@@ -75,6 +75,7 @@ describe(App, () => {
       ).toMatchInlineSnapshot(
         `"You can lead a horse to water but you can't make it drink. You can't have it both ways. You can't have your cake and eat it too. You can't make an omelette without breaking eggs. You can't make a silk purse out of a You can lead a horse to water but you can't make it drink. You can't have it both ways. You can't have your cake and eat it too. You can't make an omelette without breaking eggs. You can't make a silk purse out of a You can lead a horse to water but you can't make it drink. You can't have it both ways. You can't have your cake and eat it too. You can't make an omelette without breaking eggs. You can't make a silk purse out of a"`
       );
+      document.cookie = "batchUpdate=1";
     });
 
     function getStatsState() {
@@ -157,6 +158,7 @@ describe(App, () => {
     });
     // Current behavior
     it("accepts excess chars", async () => {
+      document.cookie = "batchUpdate=0";
       // This user with spaceOff setting actually puts space after
       const spBefore = spacePlacement === "spaceBeforeOutput" ? " " : "";
       const spAfter = spacePlacement === "spaceAfterOutput" || spacePlacement === "spaceOff" ? " " : "";
@@ -210,7 +212,7 @@ describe(App, () => {
       );
     });
     // Future behavior
-    it.skip("doesn't accept excess chars", async () => {
+    it("doesn't accept excess chars", async () => {
       // This user with spaceOff setting actually puts space before
       const spBefore = spacePlacement === "spaceBeforeOutput" || spacePlacement === "spaceOff" ? " " : "";
       const spAfter = spacePlacement === "spaceAfterOutput" ? " " : "";
