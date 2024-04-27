@@ -744,6 +744,20 @@ describe('matchSplitText', () => {
       const expected = ["over-the-", "", "over-the-", ""];
       expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
     });
+
+    it("splits a word with excess chars", () => {
+      const expectedText = "French";
+      const actualText = "Frenches";
+      const expected = ["French", "", "French", "es"];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it("splits multiple words", () => {
+      const expectedText = "There";
+      const actualText = "There are";
+      const expected = ["There", "", "There", " are"];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
   });
 
   describe('case sensitive, no spacing', () => {
@@ -887,6 +901,20 @@ describe('matchSplitText', () => {
       const expected = [" over-the-", "", " over-the-", ""];
       expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
     });
+
+    it("splits a word with excess chars", () => {
+      const expectedText = " French";
+      const actualText = " Frenches";
+      const expected = [" French", "", " French", "es"];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it("splits multiple words", () => {
+      const expectedText = " There";
+      const actualText = " There are";
+      const expected = [" There", "", " There", " are"];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
   });
 
   describe('case sensitive, space before, ignoredChars', () => {
@@ -1015,6 +1043,20 @@ describe('matchSplitText', () => {
       const expectedText = "over-the-^ ";
       const actualText = "over-the- ";
       const expected = ["over-the- ", "", "over-the- ", ""];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it("splits a word with excess chars", () => {
+      const expectedText = "French ";
+      const actualText = "Frenches ";
+      const expected = ["French", " ", "French", "es "];
+      expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
+    });
+
+    it("splits multiple words", () => {
+      const expectedText = "There ";
+      const actualText = "There are ";
+      const expected = ["There ", "", "There ", "are "];
       expect(matchSplitText(expectedText, actualText, settings, userSettings)).toEqual(expect.arrayContaining(expected));
     });
   });

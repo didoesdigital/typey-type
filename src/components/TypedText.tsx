@@ -135,6 +135,7 @@ const TypedText = (props: Props) => {
                 isMultiline ? " text-center" : ""
               }`}
               id="your-typed-text"
+              data-testid="your-typed-text"
               aria-describedby="punctuation-description"
               onChange={props.updateMarkup}
               onKeyPress={keyPress.bind(this)}

@@ -43,8 +43,8 @@ export default function OnePhraseMaterial({
               {completedPhrases.join(" ")}&#8203;
               {userSettings.spacePlacement === "spaceBeforeOutput" ? "" : " "}
             </span>
-            <div className={currentAndUpcomingPhrasesClasses}>
-              <strong className="fw7" tabIndex={0}>
+            <div className={currentAndUpcomingPhrasesClasses} data-testid="current-and-upcoming-phrases">
+              <strong className="fw7" tabIndex={0} data-testid="current-phrase">
                 <span className="matched steno-material">{matched}</span>
                 <span className="steno-material">{unmatched}</span>
               </strong>
