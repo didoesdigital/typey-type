@@ -84,7 +84,6 @@ const Lesson = ({
     handleStopLesson,
     toggleHideOtherSettings,
     changeFullscreen,
-    changeShowScoresWhileTyping,
     changeShowStrokesInLesson,
     restartLesson,
     reviseLesson,
@@ -432,7 +431,6 @@ const Lesson = ({
                 overviewLink={overviewLink}
                 propsLesson={propsLesson}
                 actualText={actualText}
-                changeShowScoresWhileTyping={changeShowScoresWhileTyping}
                 changeShowStrokesInLesson={changeShowStrokesInLesson}
                 chooseStudy={chooseStudy}
                 completedPhrases={completedPhrases}

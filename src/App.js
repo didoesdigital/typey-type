@@ -42,7 +42,6 @@ import customiseLesson from './pages/lessons/utilities/customiseLesson';
 import setCustomLessonContent from './pages/lessons/utilities/setCustomLessonContent';
 import updateMultipleMetWords from './pages/games/KPOES/updateMultipleMetWords';
 import {
-  changeShowScoresWhileTyping,
   changeShowStrokesAs,
   changeShowStrokesAsList,
   changeShowStrokesOnMisstroke,
@@ -1414,7 +1413,6 @@ class App extends Component {
               updateMultipleMetWords: updateMultipleMetWords.bind(this),
               changeFlashcardCourseLevel: changeFlashcardCourseLevel.bind(this),
               changeFullscreen: changeFullscreen.bind(this),
-              changeShowScoresWhileTyping: changeShowScoresWhileTyping.bind(this),
               changeShowStrokesAs: changeShowStrokesAs.bind(this),
               changeShowStrokesAsList: changeShowStrokesAsList.bind(this),
               changeShowStrokesInLesson: changeShowStrokesInLesson.bind(this),

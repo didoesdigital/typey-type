@@ -33,6 +33,7 @@ import type {
 import type { RecentLessonHistoryItem } from "../progress/components/RecentLessons";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
+import { useChangeShowScoresWhileTyping } from "./components/UserSettings/updateUserSetting";
 
 type Props = {
   createNewCustomLesson: JSX.Element | undefined;
@@ -40,7 +41,6 @@ type Props = {
   overviewLink: JSX.Element | undefined;
   propsLesson: Lesson;
   actualText: string;
-  changeShowScoresWhileTyping: (event: any) => void;
   changeShowStrokesInLesson: () => void;
   chooseStudy: () => void;
   completedPhrases: MaterialText[];
@@ -84,7 +84,6 @@ const MainLessonView = ({
   overviewLink,
   propsLesson,
   actualText,
-  changeShowScoresWhileTyping,
   changeShowStrokesInLesson,
   chooseStudy,
   completedPhrases,
@@ -122,6 +121,7 @@ const MainLessonView = ({
   updatePreset,
 }: Props) => {
   const userSettings = useAtomValue(userSettingsState);
+  const changeShowScoresWhileTyping = useChangeShowScoresWhileTyping()
   const previousLesson = useRef<string | null>(null);
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const location = useLocation();

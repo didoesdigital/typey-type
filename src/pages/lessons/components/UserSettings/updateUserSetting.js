@@ -1,6 +1,8 @@
 import GoogleAnalytics from "react-ga4";
 import PARAMS from "../../../../utils/params";
 import { writePersonalPreferences } from "../../../../utils/typey-type";
+import { useAtom } from "jotai";
+import { showScoresWhileTypingState } from "../../../../states/userSettingsState";
 
 /** @type {SpeechSynthesis | null} */
 let synth = null;
@@ -10,23 +12,21 @@ try {
   console.log("This device doesn't support speechSynthesis", e);
 }
 
-export function changeShowScoresWhileTyping(event) {
-  let newState = Object.assign({}, this.state.userSettings);
+export function useChangeShowScoresWhileTyping() {
+  const [state, setState] = useAtom(showScoresWhileTypingState);
+  return (event) => {
+    const newState = !state;
 
-  newState["showScoresWhileTyping"] = !newState["showScoresWhileTyping"];
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change show scores while typing",
-    label: newState["showScoresWhileTyping"].toString(),
-  });
-
-  this.setState({ userSettings: newState }, () => {
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
-  return newState["showScoresWhileTyping"];
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change show scores while typing",
+      label: newState.toString()
+    });
+    setState(newState);
+  };
 }
 
+// TODO: continue like above in this file
 export function changeShowStrokesAs(event) {
   let newState = Object.assign({}, this.state.userSettings);
 

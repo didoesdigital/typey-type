@@ -45,3 +45,8 @@ export const spacePlacementState = atom((get)=>get(userSettingsState).spacePlace
 export const beatsPerMinuteState = atom((get)=>get(userSettingsState).beatsPerMinute);
 export const upcomingWordsLayoutState = atom((get)=>get(userSettingsState).upcomingWordsLayout);
 
+export const showScoresWhileTypingState = atom(
+  (get) => get(userSettingsState).showScoresWhileTyping,
+  (get, set, update: boolean) => {
+    set(userSettingsState, { ...get(userSettingsState), showScoresWhileTyping: update });
+  });

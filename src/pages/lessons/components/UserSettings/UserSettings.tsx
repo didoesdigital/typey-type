@@ -11,6 +11,7 @@ import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTool
 import { useAppMethods } from "../../../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../../../states/userSettingsState";
+import { useChangeShowScoresWhileTyping } from "./updateUserSetting";
 
 const grabStyle = function () {
   return false;
@@ -30,7 +31,6 @@ const UserSettings = ({
   totalWordCount,
 }: Props) => {
   const {
-    changeShowScoresWhileTyping,
     changeShowStrokesAs,
     changeShowStrokesAsList,
     changeShowStrokesOnMisstroke,
@@ -47,6 +47,7 @@ const UserSettings = ({
     handleUpcomingWordsLayout,
   } = useAppMethods();
   const userSettings = useAtomValue(userSettingsState);
+  const changeShowScoresWhileTyping = useChangeShowScoresWhileTyping()
   const announceTooltip = useAnnounceTooltip();
 
   return (

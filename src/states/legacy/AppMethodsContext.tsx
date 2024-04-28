@@ -9,7 +9,6 @@ import {
   changeFullscreen
 } from "../../pages/lessons/components/UserSettings/updateFlashcardSetting";
 import {
-  changeShowScoresWhileTyping,
   changeShowStrokesAs,
   changeShowStrokesAsList,
   changeShowStrokesOnMisstroke,
@@ -45,7 +44,6 @@ export type AppMethods = {
   updateMultipleMetWords: typeof updateMultipleMetWords,
   changeFlashcardCourseLevel: typeof changeFlashcardCourseLevel,
   changeFullscreen: typeof changeFullscreen,
-  changeShowScoresWhileTyping: typeof changeShowScoresWhileTyping,
   changeShowStrokesAs: typeof changeShowStrokesAs,
   changeShowStrokesAsList: typeof changeShowStrokesAsList,
   changeShowStrokesInLesson: typeof changeShowStrokesInLesson,
