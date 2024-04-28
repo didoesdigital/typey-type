@@ -14,10 +14,10 @@ import GoogleAnalytics from "react-ga4";
 import plink from "../../../sounds/digi_plink-with-silence.mp3";
 import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 
-import type { UserSettings } from "../../../types";
+import { useAtomValue } from "jotai";
+import { beatsPerMinuteState } from "../../../states/userSettingsState";
 
 type Props = {
-  userSettings: UserSettings;
 };
 
 type Options = {
@@ -101,13 +101,14 @@ function playId(beatsPerMinute: number) {
 }
 
 const Metronome: FC<Props> = (props) => {
+  const beatsPerMinuteSetting = useAtomValue(beatsPerMinuteState);
   const prevBpmRef = useRef<number>(10);
   const announceTooltip = useAnnounceTooltip();
 
   const [userGestureToStartMetronome, setUserGestureToStartMetronome] =
     useState(false);
 
-  const beatsPerMinute = props.userSettings?.beatsPerMinute ?? null;
+  const beatsPerMinute = beatsPerMinuteSetting ?? null;
 
   useEffect(() => {
     if (userGestureToStartMetronome && prevBpmRef.current !== beatsPerMinute) {
@@ -143,7 +144,7 @@ const Metronome: FC<Props> = (props) => {
         onClick={() =>
           playMetronome.call(
             this,
-            { id: playId(props.userSettings.beatsPerMinute) },
+            { id: playId(beatsPerMinuteSetting) },
             setUserGestureToStartMetronome,
             "withAnalytics"
           )

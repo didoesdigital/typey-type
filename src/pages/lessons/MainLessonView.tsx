@@ -28,10 +28,11 @@ import type {
   LookupDictWithNamespacedDictsAndConfig,
   Outline,
   Study,
-  UserSettings as UserSettingsType,
 } from "../../types";
 
 import type { RecentLessonHistoryItem } from "../progress/components/RecentLessons";
+import { useAtomValue } from "jotai";
+import { userSettingsState } from "../../states/userSettingsState";
 
 type Props = {
   createNewCustomLesson: JSX.Element | undefined;
@@ -75,7 +76,6 @@ type Props = {
   upcomingPhrases: MaterialText[];
   updateMarkup: () => void;
   updatePreset: (studyType: Study) => void;
-  userSettings: UserSettingsType;
 };
 
 const MainLessonView = ({
@@ -120,8 +120,8 @@ const MainLessonView = ({
   upcomingPhrases,
   updateMarkup,
   updatePreset,
-  userSettings,
 }: Props) => {
+  const userSettings = useAtomValue(userSettingsState);
   const previousLesson = useRef<string | null>(null);
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const location = useLocation();
@@ -251,7 +251,6 @@ const MainLessonView = ({
                       lesson={lesson}
                       settings={settings}
                       upcomingPhrases={upcomingPhrases}
-                      userSettings={userSettings}
                     />
                     <TypedText
                       actualText={actualText}
@@ -263,7 +262,6 @@ const MainLessonView = ({
                       }
                       sayCurrentPhraseAgain={sayCurrentPhraseAgain}
                       updateMarkup={updateMarkup}
-                      userSettings={userSettings}
                     />
                     <WordBoundaryErrorPrompt
                       actualText={actualText}
@@ -288,7 +286,6 @@ const MainLessonView = ({
                       repetitionsRemaining={repetitionsRemaining}
                       showStrokesInLesson={showStrokesInLesson}
                       targetStrokeCount={targetStrokeCount}
-                      userSettings={userSettings}
                     />
                     <LessonLengthPreview
                       lessonStarted={disableUserSettings}
@@ -301,7 +298,6 @@ const MainLessonView = ({
                   chooseStudy={chooseStudy}
                   disableUserSettings={disableUserSettings}
                   toggleHideOtherSettings={toggleHideOtherSettings}
-                  userSettings={userSettings}
                   updatePreset={updatePreset}
                 />
               </div>
@@ -318,7 +314,6 @@ const MainLessonView = ({
               maxStartFromWord={lessonLength}
               revisionMode={revisionMode}
               totalWordCount={totalWordCount}
-              userSettings={userSettings}
             />
           </div>
         </div>

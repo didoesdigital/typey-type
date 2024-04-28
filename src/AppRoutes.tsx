@@ -257,7 +257,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                   <ErrorBoundary>
                     <AsyncWriter
                       globalUserSettings={appState.globalUserSettings}
-                      userSettings={appState.userSettings}
                       {...props}
                     />
                   </ErrorBoundary>
@@ -491,7 +490,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                         appProps.stateLesson.presentedMaterial.length
                       }
                       upcomingPhrases={appProps.upcomingMaterial}
-                      userSettings={appState.userSettings}
                       {...props}
                     />
                   </ErrorBoundary>

@@ -643,49 +643,10 @@ function loadPersonalPreferences() {
     newWords: 15,
     oldWords: 50
   }
-  let userSettings = {
-    beatsPerMinute: 10,
-    blurMaterial: false,
-    caseSensitive: false,
-    diagramSize: 1.0,
-    simpleTypography: true,
-    punctuationDescriptions: false,
-    retainedWords: true,
-    limitNumberOfWords: 45,
-    startFromWord: 1,
-    newWords: true,
-    repetitions: 3,
-    showScoresWhileTyping: true,
-    showStrokes: true,
-    showStrokesAsDiagrams: true,
-    showStrokesAsList: false,
-    showStrokesOnMisstroke: true,
-    hideStrokesOnLastRepetition: true,
-    spacePlacement: 'spaceOff',
-    speakMaterial: false,
-    textInputAccessibility: true,
-    sortOrder: 'sortOff',
-    seenWords: true,
-    study: 'discover',
-    stenoLayout: 'stenoLayoutAmericanSteno',
-    upcomingWordsLayout: 'singleLine',
-    studyPresets: [
-      { limitNumberOfWords: 15, repetitions: 5, },
-      { limitNumberOfWords: 50, repetitions: 3, },
-      { limitNumberOfWords: 100, repetitions: 3, },
-      { limitNumberOfWords: 0, repetitions: 1, },
-    ],
-    voiceName: '',
-    voiceURI: '',
-    hideOtherSettings: false,
-  };
   try {
     if (window.localStorage) {
       if (window.localStorage.getItem('metWords')) {
         metWords = JSON.parse(window.localStorage.getItem('metWords'));
-      }
-      if (window.localStorage.getItem('userSettings')) {
-        userSettings = Object.assign(userSettings, JSON.parse(window.localStorage.getItem('userSettings')));
       }
       if (window.localStorage.getItem('flashcardsMetWords')) {
         flashcardsMetWords = Object.assign(flashcardsMetWords, JSON.parse(window.localStorage.getItem('flashcardsMetWords')));
@@ -708,13 +669,13 @@ function loadPersonalPreferences() {
       if (window.localStorage.getItem('userGoals')) {
         userGoals = Object.assign(userGoals, JSON.parse(window.localStorage.getItem('userGoals')));
       }
-      return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
+      return [metWords, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
     }
   }
   catch(error) {
     console.log('Unable to read local storage.', error);
   }
-  return [metWords, userSettings, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
+  return [metWords, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
 }
 
 function writePersonalPreferences(itemToStore, JSONToStore) {

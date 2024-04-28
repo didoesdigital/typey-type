@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import GoogleAnalytics from "react-ga4";
-import { CurrentLessonStrokes, UserSettings } from "../types";
+import { CurrentLessonStrokes } from "../types";
+import { useAtomValue } from "jotai";
+import { userSettingsState } from "../states/userSettingsState";
 
 type Props = {
   actualText: string;
@@ -11,10 +13,10 @@ type Props = {
   previousCompletedPhraseAsTyped: string;
   sayCurrentPhraseAgain: () => void;
   updateMarkup: (event: any) => void;
-  userSettings: UserSettings;
 };
 
 const TypedText = (props: Props) => {
+  const userSettings = useAtomValue(userSettingsState);
   useEffect(() => {
     return () => {
       let synth = window.speechSynthesis;
@@ -62,7 +64,7 @@ const TypedText = (props: Props) => {
           category: "SpeakMaterial",
           action: "Shift Enter",
           label:
-            props.userSettings && props.userSettings.speakMaterial
+            userSettings && userSettings.speakMaterial
               ? "Speak material on"
               : "Speak material off",
         });
@@ -72,7 +74,7 @@ const TypedText = (props: Props) => {
     }
   }
 
-  const isMultiline = props.userSettings.upcomingWordsLayout === "multiline";
+  const isMultiline = userSettings.upcomingWordsLayout === "multiline";
   let previousCompletedPhraseAsTypedKey = props.completedPhrases
     ? props.completedPhrases.length
     : 0;
@@ -80,10 +82,10 @@ const TypedText = (props: Props) => {
   let previousCompletedPhraseAccuracy =
     strokes && strokes.length > 0 ? strokes[strokes.length - 1].accuracy : true;
   let textInputAccessibilityAriaHidden =
-    !props.userSettings.textInputAccessibility;
+    !userSettings.textInputAccessibility;
 
   let sayCurrentPhraseButton = null;
-  if (props.userSettings && props.userSettings.speakMaterial) {
+  if (userSettings && userSettings.speakMaterial) {
     sayCurrentPhraseButton = (
       <button
         className="link-button button--secondary say-word-button mb-4"

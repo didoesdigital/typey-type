@@ -1,7 +1,8 @@
 import React from "react";
 import { matchSplitText } from "./../../utils/typey-type";
 
-import type { UserSettings } from "../../types";
+import { useAtomValue } from "jotai";
+import { userSettingsState } from "../../states/userSettingsState";
 
 type Props = {
   actualText: any;
@@ -9,7 +10,6 @@ type Props = {
   currentPhrase: string;
   settings: any;
   upcomingPhrases: any;
-  userSettings: UserSettings;
 };
 
 export default function SingleLineMaterial({
@@ -18,8 +18,8 @@ export default function SingleLineMaterial({
   currentPhrase,
   settings,
   upcomingPhrases,
-  userSettings,
 }: Props) {
+  const userSettings = useAtomValue(userSettingsState);
   const spaceBeforeOutput =
     userSettings.spacePlacement === "spaceAfterOutput" ? "" : " ";
   const spaceAfterOutput =

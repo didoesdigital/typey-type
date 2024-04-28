@@ -1,17 +1,18 @@
 import React from "react";
 import FinishedNextLessonButton from "./FinishedNextLessonButton";
+import { useAtomValue } from "jotai";
+import { startFromWordSettingState } from "../../../states/userSettingsState";
 
 type FinishedZeroAndEmptyStateProps = {
-  startFromWordSetting: number;
   startFromWordOneClickHandler: () => void;
   suggestedNextUrl: string;
 };
 
 const FinishedZeroAndEmptyState = ({
-  startFromWordSetting,
   startFromWordOneClickHandler,
   suggestedNextUrl,
 }: FinishedZeroAndEmptyStateProps) => {
+  const startFromWordSetting = useAtomValue(startFromWordSettingState);
   return (
     <div className="dc">
       <div className="text-center mt10 mx-auto">

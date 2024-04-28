@@ -2,6 +2,8 @@ import React from "react";
 import SingleLineMaterial from "./Material/SingleLineMaterial";
 import MultiLineMaterial from "./Material/MultiLineMaterial";
 import OnePhraseMaterial from "./Material/OnePhraseMaterial";
+import { useAtomValue } from "jotai";
+import { upcomingWordsLayoutState } from "../states/userSettingsState";
 
 type Props = {
   actualText: any;
@@ -11,7 +13,6 @@ type Props = {
   lesson: any;
   settings: any;
   upcomingPhrases: any;
-  userSettings: any;
 };
 
 const Material = ({
@@ -22,9 +23,9 @@ const Material = ({
   lesson,
   settings,
   upcomingPhrases,
-  userSettings,
 }: Props) => {
-  return userSettings.upcomingWordsLayout === "multiline" ? (
+  const upcomingWordsLayout = useAtomValue(upcomingWordsLayoutState);
+  return upcomingWordsLayout === "multiline" ? (
     <MultiLineMaterial
       // @ts-ignore TODO: work out what React.memo(function MultiLineMaterial({… needs here
       actualText={actualText}
@@ -32,15 +33,13 @@ const Material = ({
       currentPhraseID={currentPhraseID}
       presentedMaterial={lesson.presentedMaterial}
       settings={settings}
-      userSettings={userSettings}
     />
-  ) : userSettings.upcomingWordsLayout === "hidden" ? (
+  ) : upcomingWordsLayout === "hidden" ? (
     <OnePhraseMaterial
       actualText={actualText}
       completedPhrases={completedPhrases}
       currentPhrase={currentPhrase}
       settings={settings}
-      userSettings={userSettings}
     />
   ) : (
     <SingleLineMaterial
@@ -49,7 +48,6 @@ const Material = ({
       currentPhrase={currentPhrase}
       settings={settings}
       upcomingPhrases={upcomingPhrases}
-      userSettings={userSettings}
     />
   );
 };

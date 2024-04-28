@@ -69,7 +69,6 @@ const Lessons = ({
   totalNumberOfRetainedWords,
   totalWordCount,
   upcomingPhrases,
-  userSettings,
 }: LessonsRoutingProps) => {
   return (
     <Switch>
@@ -117,7 +116,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            userSettings={userSettings}
             {...props}
           />
         )}
@@ -166,7 +164,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            userSettings={userSettings}
             {...props}
           />
         )}
@@ -214,7 +211,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            userSettings={userSettings}
             {...props}
           />
         )}
@@ -263,7 +259,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            userSettings={userSettings}
             {...props}
           />
         )}
@@ -312,7 +307,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            userSettings={userSettings}
             {...props}
           />
         )}
@@ -361,7 +355,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            userSettings={userSettings}
             {...props}
           />
         )}
@@ -411,7 +404,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            userSettings={userSettings}
             {...props}
           />
         )}
@@ -461,7 +453,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            userSettings={userSettings}
             {...props}
           />
         )}
@@ -511,7 +502,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            userSettings={userSettings}
             {...props}
           />
         )}
@@ -598,7 +588,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            userSettings={userSettings}
             {...props}
           />
         )}
@@ -648,7 +637,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            userSettings={userSettings}
             {...props}
           />
         )}
@@ -698,7 +686,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            userSettings={userSettings}
             {...props}
           />
         )}

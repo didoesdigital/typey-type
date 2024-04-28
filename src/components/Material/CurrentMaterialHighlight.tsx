@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { matchSplitText } from "./../../utils/typey-type";
+import { useAtomValue } from "jotai";
+import { userSettingsState } from "../../states/userSettingsState";
 
 type Props = {
   actualText: any;
   currentPhrase: string;
   settings: any;
-  userSettings: any;
   currentPhraseID: number;
 };
 
@@ -13,9 +14,9 @@ export default function CurrentMaterialHighlight({
   actualText,
   currentPhrase,
   settings,
-  userSettings,
   currentPhraseID,
 }: Props) {
+  const userSettings = useAtomValue(userSettingsState);
   const [matched, unmatched] = matchSplitText(
     currentPhrase,
     actualText,

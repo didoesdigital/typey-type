@@ -1,14 +1,14 @@
 import React from "react";
 import { matchSplitText } from "../../utils/typey-type";
 
-import type { UserSettings } from "../../types";
+import { useAtomValue } from "jotai";
+import { userSettingsState } from "../../states/userSettingsState";
 
 type Props = {
   actualText: any;
   completedPhrases: any;
   currentPhrase: string;
   settings: any;
-  userSettings: UserSettings;
 };
 
 export default function OnePhraseMaterial({
@@ -16,8 +16,8 @@ export default function OnePhraseMaterial({
   completedPhrases,
   currentPhrase,
   settings,
-  userSettings,
 }: Props) {
+  const userSettings = useAtomValue(userSettingsState);
   const [matched, unmatched] = matchSplitText(
     currentPhrase,
     actualText,

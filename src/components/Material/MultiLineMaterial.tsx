@@ -2,7 +2,8 @@ import React from "react";
 import CurrentMaterialHighlight from "./CurrentMaterialHighlight";
 import EntireMaterial from "./EntireMaterial";
 
-import type { UserSettings } from "../../types";
+import { useAtomValue } from "jotai";
+import { userSettingsState } from "../../states/userSettingsState";
 
 type Props = {
   actualText: any;
@@ -10,7 +11,6 @@ type Props = {
   currentPhraseID: number;
   presentedMaterial: any;
   settings: any;
-  userSettings: UserSettings;
 };
 
 export default React.memo(function MultiLineMaterial({
@@ -19,8 +19,8 @@ export default React.memo(function MultiLineMaterial({
   currentPhraseID,
   presentedMaterial,
   settings,
-  userSettings,
 }: Props) {
+  const {spacePlacement, blurMaterial} = useAtomValue(userSettingsState);
   return (
     <div className="mb1 nt1 mx-auto mw-844">
       <div className="expected">
@@ -38,17 +38,16 @@ export default React.memo(function MultiLineMaterial({
               currentPhrase={currentPhrase}
               actualText={actualText}
               settings={settings}
-              userSettings={userSettings}
               currentPhraseID={currentPhraseID}
             />
             <div
               id="js-entire-material-text"
               className={`dib de-emphasized fw4 relative${
-                userSettings.blurMaterial ? " blur-words" : ""
+                blurMaterial ? " blur-words" : ""
               }`}
             >
               <EntireMaterial
-                spacePlacement={userSettings.spacePlacement}
+                spacePlacement={spacePlacement}
                 presentedMaterial={presentedMaterial}
               />
             </div>

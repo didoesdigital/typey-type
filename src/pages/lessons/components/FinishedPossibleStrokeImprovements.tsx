@@ -1,10 +1,11 @@
 import React from "react";
+import { useAtomValue } from "jotai";
+import { spacePlacementState } from "../../../states/userSettingsState";
 
 type FinishedPossibleStrokeImprovementsProps = {
   currentLessonStrokes: any;
   globalUserSettings: any;
   metWords: any;
-  userSettings: any;
   updateRevisionMaterial: any;
 };
 
@@ -22,9 +23,9 @@ const FinishedPossibleStrokeImprovements = ({
   currentLessonStrokes,
   globalUserSettings,
   metWords,
-  userSettings,
   updateRevisionMaterial,
 }: FinishedPossibleStrokeImprovementsProps) => {
+  const spacePlacement = useAtomValue(spacePlacementState);
   return currentLessonStrokes.length > 0
     ? currentLessonStrokes.map((phrase: any, i: number) => {
         let strokeAttemptsPresentation;
@@ -57,7 +58,7 @@ const FinishedPossibleStrokeImprovements = ({
           !!globalUserSettings.experiments.timesSeen;
         const timesSeen =
           metWords[
-            getWordWithSpacing(phrase.word, userSettings.spacePlacement)
+            getWordWithSpacing(phrase.word, spacePlacement)
           ];
 
         return (

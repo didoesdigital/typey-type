@@ -9,14 +9,14 @@ if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
 }
 
 const withAnalyticsTracker = (
-  WrappedComponent: any,
+  WrappedComponent: React.ComponentType<{location: ReturnType<typeof useLocation>, history: ReturnType<typeof useHistory>}>,
   options = { anonymizeIp: true }
-) => {
-  const HOC = () => {
+): React.FC<any> => {
+  const HOC = (props: {[prop:string]: unknown}) => {
     const location = useLocation();
     const history = useHistory();
 
-    return <WrappedComponent location={location} history={history} />;
+    return <WrappedComponent location={location} history={history} {...props} />;
   };
 
   return HOC;

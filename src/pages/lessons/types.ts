@@ -4,10 +4,8 @@ import type {
   Lesson,
   MetWords,
   PrettyLessonTitle,
-  UserSettings,
   Study,
   CurrentLessonStrokes,
-  FetchAndSetupGlobalDict,
   LookupDictWithNamespacedDictsAndConfig,
   PersonalDictionaryNameAndContents,
 } from "../../types";
@@ -68,7 +66,6 @@ export type LessonProps = {
   totalNumberOfRetainedWords: any;
   totalWordCount: any;
   upcomingPhrases: any;
-  userSettings: UserSettings;
 };
 
 export type FinishedProps = {
@@ -101,5 +98,4 @@ export type FinishedProps = {
   updatePreset: (studyType: Study) => void;
   updateRevisionMaterial: any;
   updateTopSpeedPersonalBest: any;
-  userSettings: UserSettings;
 };

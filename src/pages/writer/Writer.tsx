@@ -27,6 +27,8 @@ import Subheader from "../../components/Subheader";
 
 import type { Outline, UserSettings } from "../../types";
 import { WithAppMethods, withAppMethods } from "../../states/legacy/AppMethodsContext";
+import { userSettingsState } from "../../states/userSettingsState";
+import { withAtomCompat } from "../../states/atomUtils";
 
 type Props = {
   userSettings: UserSettings,
@@ -408,4 +410,4 @@ class Writer extends Component<WithAppMethods<Props>, State> {
   }
 }
 
-export default withAppMethods(Writer);
+export default withAppMethods(withAtomCompat(Writer, "userSettings", userSettingsState));

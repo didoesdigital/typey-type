@@ -9,7 +9,6 @@ type FinishedMisstrokesSummaryProps = {
   reviseLesson: () => void;
   showMisstrokesSummary: boolean;
   updateRevisionMaterial: any;
-  userSettings: any;
 };
 
 const FinishedMisstrokesSummary = ({
@@ -20,7 +19,6 @@ const FinishedMisstrokesSummary = ({
   reviseLesson,
   showMisstrokesSummary,
   updateRevisionMaterial,
-  userSettings,
 }: FinishedMisstrokesSummaryProps) => {
   return showMisstrokesSummary ? (
     <div className="misstrokes-summary">
@@ -43,7 +41,6 @@ const FinishedMisstrokesSummary = ({
             currentLessonStrokes={currentLessonStrokes}
             globalUserSettings={globalUserSettings}
             metWords={metWords}
-            userSettings={userSettings}
             updateRevisionMaterial={updateRevisionMaterial}
           />
         </ol>

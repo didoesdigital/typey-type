@@ -9,8 +9,9 @@ import type {
   LookupDictWithNamespacedDictsAndConfig,
   MaterialText,
   Outline,
-  UserSettings,
 } from "../../../types";
+import { useAtomValue } from "jotai";
+import { userSettingsState } from "../../../states/userSettingsState";
 
 type Props = {
   changeShowStrokesInLesson: () => void;
@@ -20,7 +21,6 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   showStrokesInLesson: boolean;
   targetStrokeCount: number;
-  userSettings: UserSettings;
   repetitionsRemaining: number;
 };
 
@@ -32,9 +32,9 @@ export default function StrokeTip({
   globalLookupDictionaryLoaded,
   showStrokesInLesson,
   targetStrokeCount,
-  userSettings,
   repetitionsRemaining,
 }: Props) {
+  const userSettings = useAtomValue(userSettingsState);
   const isMultiline = userSettings.upcomingWordsLayout === "multiline";
   const showStroke = shouldShowStroke(
     showStrokesInLesson,

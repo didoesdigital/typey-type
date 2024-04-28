@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
 import Metronome from "./Metronome";
 import { Tooltip } from "react-tippy";
-import type { Study, UserSettings } from "../../../types";
+import type { Study } from "../../../types";
 import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
+import { useAtomValue } from "jotai";
+import { userSettingsState } from "../../../states/userSettingsState";
 
 type LessonCanvasFooterProps = {
   chooseStudy: () => void;
   disableUserSettings: boolean;
   toggleHideOtherSettings: () => void;
-  userSettings: UserSettings;
   updatePreset: (studyType: Study) => void;
 };
 
@@ -17,9 +18,9 @@ const LessonCanvasFooter = ({
   chooseStudy,
   disableUserSettings,
   toggleHideOtherSettings,
-  userSettings,
   updatePreset,
 }: LessonCanvasFooterProps) => {
+  const userSettings = useAtomValue(userSettingsState);
   const [showModal, setShowModal] = useState(false);
   const announceTooltip = useAnnounceTooltip();
 
@@ -53,7 +54,7 @@ const LessonCanvasFooter = ({
 
   return (
     <div className="flex flex-wrap mx-auto mw-1440 justify-between text-small">
-      <Metronome userSettings={userSettings} />
+      <Metronome />
       <div className="flex flex-wrap content-center">
         <fieldset className="dc hide-sm">
           {/* @ts-ignore */}
