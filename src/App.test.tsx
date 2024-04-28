@@ -161,7 +161,7 @@ describe(App, () => {
         );
       });
       // Current behavior
-      it("accepts excess chars", async () => {
+      it("accepts excess chars except for spaceAfterOutput", async () => {
         document.cookie = "batchUpdate=0";
         // This user with spaceOff setting actually puts space after
         const spBefore = spacePlacement === "spaceBeforeOutput" ? " " : "";
@@ -171,6 +171,7 @@ describe(App, () => {
         await typeIn(spBefore + "yours" + spAfter);
         await timer(100);
         if (spacePlacement === "spaceAfterOutput") {
+          // spaceAfterOutput only rejects nicely currently
           await assertCurrentPhrase("You");
           await assertText("yours ");
           await typeIn("{backspace}{backspace}{backspace} ");
@@ -186,11 +187,16 @@ describe(App, () => {
         }
         await assertText("");
         await assertCurrentPhrase("can");
+        await typeIn(spBefore + "can" + spAfter);
+        await assertCurrentPhrase("lead");
+        // it was accepted ignoring extra spaces, but this user anyway input space after
+        await assertText(spacePlacement === "spaceOff" ? " " : "");
         expect(getStatsState()).toEqual({
             "currentLessonStrokes": [
               {
                 "accuracy": true,
                 "attempts": spacePlacement === "spaceAfterOutput" ?
+                  // rejects nicely
                   [{
                     "hintWasShown": true,
                     "numberOfMatchedWordsSoFar": 0.6,
@@ -204,12 +210,36 @@ describe(App, () => {
                 "stroke": "KPA/U",
                 "time": 1234567890123,
                 "word": "You"
+              },
+              {
+                ...(spacePlacement === "spaceAfterOutput" ? {
+                  accuracy: true,
+                  attempts: []
+                } : {
+                  "accuracy": false,
+                  "attempts": [
+                    // improperly attributes misstroke to the second word
+                    {
+                      "hintWasShown": true,
+                      "numberOfMatchedWordsSoFar": hasExtraSpaces ? 0.8 : 0.6,
+                      "text": spacePlacement === "spaceOff" ? "rs " : "rs",
+                      "time": 1234567890123
+                    }
+                  ]
+                }),
+                "checked": true,
+                "hintWasShown": true,
+                "numberOfMatchedWordsSoFar": hasExtraSpaces ? 1.6 : 1.2,
+                "stroke": "K",
+                "time": 1234567890123,
+                "word": "can"
               }
             ],
-            "totalNumberOfHintedWords": 1,
+            "totalNumberOfHintedWords": 2,
             "totalNumberOfLowExposuresSeen": 0,
-            "totalNumberOfMatchedChars": hasExtraSpaces ? 4 : 3,
-            "totalNumberOfMistypedWords": 0,
+            "totalNumberOfMatchedChars": hasExtraSpaces ? 8 : 6,
+            // Thanks to capitalization expected for first phrase and expectation is 2 strokes, `yours {bsp}{bsp}{bsp} ` is not counted as mistyped
+            "totalNumberOfMistypedWords": spacePlacement === "spaceAfterOutput" ? 0 : 1,
             "totalNumberOfNewWordsMet": 0,
             "totalNumberOfRetainedWords": 0
           }
@@ -238,10 +268,15 @@ describe(App, () => {
         }
         await assertText("");
         await assertCurrentPhrase("can");
+        await typeIn(spBefore + "can" + spAfter);
+        await assertText("");
+        await assertCurrentPhrase("lead");
         expect(getStatsState()).toEqual({
           "currentLessonStrokes": [
             {
               "accuracy": true,
+              // Considered no mistake because it requires two strokes, one for capitalization.
+              // spaceExact accepts "yours" immediately because next word can be "rsa".
               "attempts": [],
               "checked": true,
               "hintWasShown": true,
@@ -249,12 +284,32 @@ describe(App, () => {
               "stroke": "KPA/U",
               "time": 1234567890123,
               "word": "You"
+            },
+            {
+              ...spacePlacement === "spaceExact" ? {
+                "accuracy": false,
+                "attempts": [{
+                  text: "rs",
+                  time: 1234567890123,
+                  hintWasShown: true,
+                  numberOfMatchedWordsSoFar: 0.6
+                }]
+              } : {
+                "accuracy": true,
+                "attempts": []
+              },
+              "checked": true,
+              "hintWasShown": true,
+              "numberOfMatchedWordsSoFar": hasExtraSpaces ? 1.6 : 1.2,
+              "stroke": "K",
+              "time": 1234567890123,
+              "word": "can"
             }
           ],
-          "totalNumberOfHintedWords": 1,
+          "totalNumberOfHintedWords": 2,
           "totalNumberOfLowExposuresSeen": 0,
-          "totalNumberOfMatchedChars": hasExtraSpaces ? 4 : 3,
-          "totalNumberOfMistypedWords": 0,
+          "totalNumberOfMatchedChars": hasExtraSpaces ? 8 : 6,
+          "totalNumberOfMistypedWords": spacePlacement === "spaceExact" ? 1 : 0,
           "totalNumberOfNewWordsMet": 0,
           "totalNumberOfRetainedWords": 0
         });
@@ -302,6 +357,84 @@ describe(App, () => {
           }
         );
       });
+      it("accepts first word but detect misstroke in second word when input at once", async () => {
+        // This user with spaceOff setting actually puts space before
+        const spBefore = spacePlacement === "spaceBeforeOutput" || spacePlacement === "spaceOff" ? " " : "";
+        const spAfter = spacePlacement === "spaceAfterOutput" ? " " : "";
+        await assertText("");
+        // This is somewhat artificial for spaceExact. In practice, each word looks like "y" "o" and "u"
+        await typeIn(`${spBefore}you${spAfter}${spBefore}can't${spAfter}`);
+        if (spacePlacement == "spaceExact") {
+          await assertCurrentPhrase("lead");
+          await assertText("'t");
+          await typeIn("{backspace}{backspace}");
+        } else {
+          await assertCurrentPhrase("can");
+          await assertText(spBefore + "can't" + spAfter);
+          if (spacePlacement === "spaceAfterOutput") {
+            await typeIn("{backspace}{backspace}{backspace} ");
+          } else {
+            await typeIn("{backspace}{backspace}");
+          }
+          await assertCurrentPhrase("lead");
+        }
+        await assertText("");
+        await typeIn(spBefore + "lead" + spAfter);
+        await assertText("");
+        expect(getStatsState()).toEqual(
+          {
+            "currentLessonStrokes":
+              [
+                {
+                  "accuracy": true,
+                  "attempts": [],
+                  "checked": true,
+                  "hintWasShown": true,
+                  "numberOfMatchedWordsSoFar": hasExtraSpaces ? 0.8 : 0.6,
+                  "stroke": "KPA/U",
+                  "time": 1234567890123,
+                  "word": "You"
+                },
+                {
+                  accuracy: true,
+                  attempts: [],
+                  "checked": true,
+                  "hintWasShown": true,
+                  "numberOfMatchedWordsSoFar": hasExtraSpaces ? 1.6 : 1.2,
+                  "stroke": "K",
+                  "time": 1234567890123,
+                  "word": "can"
+                },
+                {
+                  ...spacePlacement === "spaceExact" ? {
+                    accuracy: false,
+                    attempts: [{
+                      "hintWasShown": true,
+                      "numberOfMatchedWordsSoFar": 1.2,
+                      "text": "'t",
+                      "time": 1234567890123
+                    }]
+                  } : {
+                    "accuracy": true,
+                    "attempts": []
+                  },
+                  "checked": true,
+                  "hintWasShown": true,
+                  "numberOfMatchedWordsSoFar": hasExtraSpaces ? 2.6 : 2,
+                  "stroke": "HRAED",
+                  "time": 1234567890123,
+                  "word": "lead"
+                }
+              ],
+            "totalNumberOfHintedWords": 3,
+            "totalNumberOfLowExposuresSeen": 0,
+            "totalNumberOfMatchedChars": hasExtraSpaces ? 13 : 10,
+            "totalNumberOfMistypedWords": spacePlacement === "spaceExact" ? 1 : 0,
+            "totalNumberOfNewWordsMet": 0,
+            "totalNumberOfRetainedWords": 0
+          }
+        );
+      });
     });
     describe("lesson with `too bad`", () => {
       beforeEach(async () => {
@@ -322,6 +455,8 @@ describe(App, () => {
           await typeIn("{backspace}");
         }
         await assertText("");
+        await typeIn(`${spBefore}too far${spAfter}`);
+        await assertText("");
 
         expect(getStatsState()).toEqual(
           {
@@ -336,12 +471,33 @@ describe(App, () => {
                   "stroke": "TAOBD",
                   "time": 1234567890123,
                   "word": "too bad"
+                },
+                {
+                  ...spacePlacement === "spaceExact" ? {
+                    // s was considered input to second
+                    accuracy: false,
+                    attempts: [{
+                      "hintWasShown": true,
+                      "numberOfMatchedWordsSoFar": 1.4,
+                      "text": "s",
+                      "time": 1234567890123
+                    }]
+                  } : {
+                    "accuracy": true,
+                    "attempts": []
+                  },
+                  "checked": true,
+                  "hintWasShown": true,
+                  "numberOfMatchedWordsSoFar": hasExtraSpaces ? 3.2 : 2.8,
+                  "stroke": "TAOFR",
+                  "time": 1234567890123,
+                  "word": "too far"
                 }
               ],
-            "totalNumberOfHintedWords": 1,
+            "totalNumberOfHintedWords": 2,
             "totalNumberOfLowExposuresSeen": 0,
-            "totalNumberOfMatchedChars": hasExtraSpaces ? 8 : 7,
-            "totalNumberOfMistypedWords": 0,
+            "totalNumberOfMatchedChars": hasExtraSpaces ? 16 : 14,
+            "totalNumberOfMistypedWords": spacePlacement === "spaceExact" ? 1 : 0,
             "totalNumberOfNewWordsMet": 0,
             "totalNumberOfRetainedWords": 0
           }

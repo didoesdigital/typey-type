@@ -203,6 +203,24 @@ describe('stroke accuracy for current phrase', () => {
 //       let targetStrokeCount = 1;
 //       expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount)).toEqual(false);
 //     });
+    it("should detect attempts with overrun", () => {
+      let currentPhraseAttempts = [
+        { text: " ", time: 1 },
+        { text: " y", time: 2 },
+        { text: " yo", time: 3 },
+        { text: " you", time: 4 },
+        { text: " your", time: 5 },
+        { text: " yours", time: 6 },
+        { text: " your", time: 7 },
+        { text: " you", time: 8 }
+      ];
+      let targetStrokeCount = 1;
+      let unmatchedActual = "";
+      expect(strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual)).toEqual({
+        strokeAccuracy: false,
+        attempts: [{ text: " yours", time: 6 }]
+      });
+    });
   });
 
   describe('should return true for real successful meetings', () => {

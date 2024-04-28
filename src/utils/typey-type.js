@@ -80,6 +80,12 @@ function mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout = "stenoLayoutAmer
   return stenoStroke;
 }
 
+/**
+ * @param {import('../types').Attempt[]} currentPhraseAttempts
+ * @param {number} targetStrokeCount
+ * @param {string} unmatchedActual
+ * @returns {{strokeAccuracy: boolean, attempts: import('../types').Attempt[]}}
+ */
 function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual) {
   let strokeAccuracy = true;
   let attempts = [];

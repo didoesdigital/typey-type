@@ -1145,25 +1145,30 @@ class App extends Component {
     // TODO: remove cookie thing before merging
     const batchUpdate = document.cookie.indexOf("batchUpdate=1")>=0;
     if(!batchUpdate) {
-      this.updateBufferSingle(actualText, false);
+      this.updateBufferSingle(actualText);
       return;
     }
     // Immediately update the text in the input field
     this.setState({ actualText });
-    this.markupBuffer.push(actualText);
+    this.markupBuffer.push({text: actualText, time: Date.now()});
 
     if (this.updateBufferTimer) {
       clearTimeout(this.updateBufferTimer);
     }
     this.updateBufferTimer = setTimeout(() => {
-      // TODO: do we need char-level processing for stats? If not, only store latest
-      const latest = this.markupBuffer[this.markupBuffer.length - 1];
+      const buffer = this.markupBuffer;
       this.markupBuffer = [];
-      this.updateBufferSingle(latest, true);
+      this.updateBufferSingle(null, buffer);
     }, 16); // 60fps
   }
 
-  updateBufferSingle(actualText, batchUpdate) {
+  updateBufferSingle(actualText, buffer) {
+    let time = Date.now();
+    if (buffer) {
+      const latest = buffer[buffer.length - 1];
+      actualText = latest.text;
+      time = latest.time;
+    }
     // Start timer on first key stroke
     if (this.state.startTime === null) {
       this.setState({
@@ -1176,7 +1181,7 @@ class App extends Component {
 
     // This informs word count, WPM, moving onto next phrase, ending lesson
     // eslint-disable-next-line
-    let [matchedChars, unmatchedChars, _, unmatchedActual] =
+    let [matchedChars, unmatchedChars, matchedActual, unmatchedActual] =
       matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings, this.state.userSettings);
 
     if (this.state.lesson.settings.ignoredChars) {
@@ -1189,9 +1194,13 @@ class App extends Component {
     // @ts-ignore this should be ok when currentPhraseAttempts is typed correctly instead of never[]
     const currentPhraseAttempts = this.state.currentPhraseAttempts.map(copy => ({...copy}));
 
+    if (buffer) {
+      // Assuming a single buffer contains inputs from one stroke, peaks are always at the end of buffer. (i.e. steno can either keep typing or backspace first and then keep typing) Since currentPhraseAttempts is only used to calculate attempts and its logic is to use peaks or the last strokes, it's safe to push elements that lacks `numberOfMatchedWordsSoFar` and `hintWasShown` into `currentPhraseAttempts`.
+      currentPhraseAttempts.push(...buffer.slice(0, -1));
+    }
     currentPhraseAttempts.push({
       text: actualText,
-      time: Date.now(),
+      time: time,
       numberOfMatchedWordsSoFar: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       hintWasShown: shouldShowStroke(this.state.showStrokesInLesson, this.state.userSettings.showStrokes, this.state.repetitionsRemaining, this.state.userSettings.hideStrokesOnLastRepetition)
     });
@@ -1220,7 +1229,7 @@ class App extends Component {
     }
 
     let proceedToNextWord;
-    if (batchUpdate) {
+    if (buffer) {
       // e.g. unmatchedActual is "es" if "Frenches" is typed for "French"
       // In case of spaceAfterOutput, unmatchedChars is not empty and don't care here.
       // In case of spaceExact, proceed without checking next actual chars.
@@ -1245,7 +1254,7 @@ class App extends Component {
         stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke,
         checked: true,
         accuracy: accurateStroke,
-        time: Date.now()
+        time: time
       });
       // can these newState assignments be moved down below the scores assignments?
 
@@ -1287,7 +1296,7 @@ class App extends Component {
       newState.repetitionsRemaining = repetitionsRemaining(this.state.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
       newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
       newState.previousCompletedPhraseAsTyped = actualText;
-      newState.actualText = batchUpdate ? unmatchedActual : '';
+      newState.actualText = buffer ? unmatchedActual : '';
       newState.showStrokesInLesson = false;
       newState.currentPhraseID = nextPhraseID;
 
@@ -1298,8 +1307,12 @@ class App extends Component {
     this.setState(newState, () => {
       if (this.isFinished()) {
         this.stopLesson();
-      } else if(batchUpdate && proceedToNextWord && unmatchedActual.length>0) {
-        this.updateBufferSingle(unmatchedActual);
+      } else if (buffer && proceedToNextWord && unmatchedActual.length > 0) {
+        // Repetitively apply buffer with already accepted phrases excluded
+        const newBuffer = buffer
+          .filter(stroke => stroke.text.length > matchedActual.length && stroke.text.startsWith(matchedActual))
+          .map(stroke => ({ text: stroke.text.slice(matchedActual.length), time: stroke.time }));
+        this.updateBufferSingle(null, newBuffer);
       }
     });
   }
