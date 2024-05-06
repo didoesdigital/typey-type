@@ -1220,7 +1220,10 @@ class App extends Component {
     };
 
     // NOTE: here is where attempts are defined before being pushed with completed phrases
-    const phraseMisstrokes = strokeAccuracy(this.state.currentPhraseAttempts, this.state.targetStrokeCount, unmatchedActual);
+    const phraseMisstrokes = strokeAccuracy(
+      buffer ? currentPhraseAttempts : this.state.currentPhraseAttempts,
+      this.state.targetStrokeCount,
+      unmatchedActual);
     const accurateStroke = phraseMisstrokes.strokeAccuracy; // false
     const attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
 

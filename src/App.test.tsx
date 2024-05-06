@@ -280,7 +280,7 @@ describe(App, () => {
           }
         );
       });
-      // Future behavior
+      // New behavior
       it("doesn't accept excess chars", async () => {
         const { spBefore, spAfter } = getSpacer(spacePlacement);
         await assertCurrentPhrase("You");
@@ -307,10 +307,16 @@ describe(App, () => {
         expect(getStatsState()).toEqual({
           "currentLessonStrokes": [
             {
+              // TODO(na2hiro): for non-exact spacing, it should be false with "yours{bs}{bs}", because one stroke is excepted. To achieve this, we should discount "KPA/" from words, otherwise we won't be able to distinguish accuracy between "yours{bs}{bs}" for "You" (KPA/U) vs "less{bs}" for "les" (HRE/S)
               "accuracy": true,
               // Considered no mistake because it requires two strokes, one for capitalization.
               // spaceExact accepts "yours" immediately because next word can be "rsa".
-              "attempts": [],
+              "attempts": spacePlacement === "spaceExact" ? [] : [{
+                "hintWasShown": true,
+                "numberOfMatchedWordsSoFar": spacePlacement === "spaceBeforeOutput" ? 0.8 : 0.6,
+                "text": spBefore+"yours"+spAfter,
+                "time": 1234567890123
+              }],
               "checked": true,
               "hintWasShown": true,
               "numberOfMatchedWordsSoFar": hasExtraSpaces ? 0.8 : 0.6,
@@ -425,8 +431,15 @@ describe(App, () => {
                   "word": "You"
                 },
                 {
-                  accuracy: true,
-                  attempts: [],
+                  // TODO(na2hiro): why inaccurate for space exact?
+                  // TODO(na2hiro): should this be inaccurate?
+                  accuracy: false,
+                  attempts: [{
+                    hintWasShown: true,
+                    numberOfMatchedWordsSoFar: spacePlacement === "spaceBeforeOutput" ? 1.6 : spacePlacement === "spaceAfterOutput" ? 1.4 : 1.2,
+                    text: spBefore + "can't" + spAfter,
+                    time: 1234567890123
+                  }],
                   "checked": true,
                   "hintWasShown": true,
                   "numberOfMatchedWordsSoFar": hasExtraSpaces ? 1.6 : 1.2,
@@ -458,7 +471,7 @@ describe(App, () => {
             "totalNumberOfHintedWords": 3,
             "totalNumberOfLowExposuresSeen": 0,
             "totalNumberOfMatchedChars": hasExtraSpaces ? 13 : 10,
-            "totalNumberOfMistypedWords": spacePlacement === "spaceExact" ? 1 : 0,
+            "totalNumberOfMistypedWords": spacePlacement === "spaceExact" ? 2 : 1,
             "totalNumberOfNewWordsMet": 0,
             "totalNumberOfRetainedWords": 0
           }
@@ -490,8 +503,14 @@ describe(App, () => {
             "currentLessonStrokes":
               [
                 {
-                  "accuracy": true,
-                  "attempts": [],
+                  // TODO(na2hiro): why inaccurate for exact?
+                  "accuracy": false,
+                  "attempts": [{
+                    "hintWasShown": true,
+                    "numberOfMatchedWordsSoFar": spacePlacement === "spaceBeforeOutput"? 1.6 :1.4,
+                    "text": spBefore+"too bads"+spAfter,
+                    "time": 1234567890123
+                  }],
                   "checked": true,
                   "hintWasShown": true,
                   "numberOfMatchedWordsSoFar": hasExtraSpaces ? 1.6 : 1.4,
@@ -524,7 +543,7 @@ describe(App, () => {
             "totalNumberOfHintedWords": 2,
             "totalNumberOfLowExposuresSeen": 0,
             "totalNumberOfMatchedChars": hasExtraSpaces ? 16 : 14,
-            "totalNumberOfMistypedWords": spacePlacement === "spaceExact" ? 1 : 0,
+            "totalNumberOfMistypedWords": spacePlacement === "spaceExact" ? 2 : 1,
             "totalNumberOfNewWordsMet": 0,
             "totalNumberOfRetainedWords": 0
           }
@@ -535,8 +554,7 @@ describe(App, () => {
       beforeEach(async () => {
         await loadPage(PAGES.partyTricks);
       });
-      // TODO: make 1 match with 0
-      it.each([/*1, */0])("records interim strokes for correct phrase (batchUpdate=%s)", async (batchUpdate) => {
+      it.each([1, 0])("records interim strokes for correct phrase (batchUpdate=%s)", async (batchUpdate) => {
         document.cookie = `batchUpdate=${batchUpdate}`;
         const { spBefore, spAfter } = getSpacer(spacePlacement);
         await typeIn(spBefore + "sigh" + spAfter);
