@@ -6,15 +6,30 @@ import { userEvent } from "@storybook/testing-library";
 import { promises as fs } from "node:fs";
 import { SpacePlacement } from "./types";
 
-type Page = { path: string, expectedFirstPhrase: string };
+type InputType = "dropdown" | "number";
+type UserSetting = [string, any, InputType];
+type Page = {
+  path: string;
+  expectedFirstPhrase: string;
+  settings?: UserSetting[];
+};
 const PAGES: { [name: string]: Page } = {
-  provebsStartingWithY: {
+  proverbsStartingWithY: {
     path: "/lessons/stories/proverbs/proverbs-starting-with-y/",
     expectedFirstPhrase: "You"
   },
   twoWordBriefsSameBeginningsToo: {
     path: "/lessons/collections/two-word-briefs-same-beginnings/too/",
     expectedFirstPhrase: "too bad"
+  },
+  partyTricks: {
+    path: "/lessons/drills/steno-party-tricks/",
+    expectedFirstPhrase: "silent",
+    settings: [
+      ["Limit word count", "1", "number"],
+      ["Repetitions", "3", "number"],
+      ["Sort", "Shortest words first", "dropdown"]
+    ]
   }
 };
 
@@ -35,6 +50,7 @@ describe(App, () => {
   }
 
   beforeEach(() => {
+    localStorage.clear();
     currentState = undefined;
     Date.now = jest.fn(() => 1234567890123);
     window.URL.createObjectURL = jest.fn();
@@ -56,7 +72,8 @@ describe(App, () => {
     "spaceExact"
   ] as SpacePlacement[])("a lesson page (spacePlacement=%s)", (spacePlacement) => {
     const input = () => screen.findByTestId("your-typed-text");
-    const typeIn = async (text: string) => userEvent.type(await input(), text);
+    const typeIn = async (text: string) =>
+      userEvent.type(await input(), text);
     const assertText = async (text: string) =>
       await waitFor(async () => expect(await input()).toHaveValue(text));
     const assertCurrentPhrase = async (text: string) =>
@@ -65,17 +82,37 @@ describe(App, () => {
           text
         )
       );
-    const loadPage = async ({ path, expectedFirstPhrase }: Page) => {
+    const loadPage = async ({ path, expectedFirstPhrase, settings }: Page) => {
       render(
         <MemoryRouter initialEntries={[path]}>
           <AppWithRouterInfo />
         </MemoryRouter>
       );
+      await userEvent.selectOptions(
+        screen.getByRole("combobox", { name: "Match spaces" }),
+        spacePlacement
+      );
+      for (let [name, value, type] of settings ?? []) {
+        if (type === "dropdown") {
+          await userEvent.selectOptions(
+            screen.getByRole("combobox", { name }),
+            value
+          );
+        } else if (type === "number") {
+          const input = screen.getByRole("textbox", { name });
+          await userEvent.clear(input);
+          await userEvent.type(input, value);
+        } else {
+          throw new Error("Unknown input type: " + type);
+        }
+      }
       // Wait for files to be loaded
       await waitFor(async () =>
-        expect(await input()).toHaveAccessibleName(`Write ${expectedFirstPhrase}`)
+        expect(await input()).toHaveAccessibleName(
+          `Write ${expectedFirstPhrase}`
+        )
       );
-      await userEvent.selectOptions(screen.getByRole("combobox", { name: "Match spaces" }), spacePlacement);
+
       document.cookie = "batchUpdate=1";
     };
 
@@ -100,12 +137,10 @@ describe(App, () => {
     const hasExtraSpaces = ["spaceBeforeOutput", "spaceAfterOutput"].includes(spacePlacement);
     describe("lesson with `you can`", () => {
       beforeEach(async () => {
-        await loadPage(PAGES.provebsStartingWithY);
+        await loadPage(PAGES.proverbsStartingWithY);
       });
       it("accepts inputs letter by letter", async () => {
-        // This user with spaceOff setting actually puts space before
-        const spBefore = spacePlacement === "spaceBeforeOutput" || spacePlacement === "spaceOff" ? " " : "";
-        const spAfter = spacePlacement === "spaceAfterOutput" ? " " : "";
+        const { spBefore, spAfter } = getSpacer(spacePlacement);
 
         await assertCurrentPhrase("You");
         await assertText("");
@@ -247,9 +282,7 @@ describe(App, () => {
       });
       // Future behavior
       it("doesn't accept excess chars", async () => {
-        // This user with spaceOff setting actually puts space before
-        const spBefore = spacePlacement === "spaceBeforeOutput" || spacePlacement === "spaceOff" ? " " : "";
-        const spAfter = spacePlacement === "spaceAfterOutput" ? " " : "";
+        const { spBefore, spAfter } = getSpacer(spacePlacement);
         await assertCurrentPhrase("You");
         await assertText("");
         await typeIn(spBefore + "yours" + spAfter);
@@ -315,9 +348,7 @@ describe(App, () => {
         });
       });
       it("accepts inputs at once", async () => {
-        // This user with spaceOff setting actually puts space before
-        const spBefore = spacePlacement === "spaceBeforeOutput" || spacePlacement === "spaceOff" ? " " : "";
-        const spAfter = spacePlacement === "spaceAfterOutput" ? " " : "";
+        const { spBefore, spAfter } = getSpacer(spacePlacement);
         await assertText("");
         // This is somewhat artificial for spaceExact. In practice, each word looks like "y" "o" and "u"
         await typeIn(`${spBefore}you${spAfter}${spBefore}can${spAfter}`);
@@ -358,9 +389,7 @@ describe(App, () => {
         );
       });
       it("accepts first word but detect misstroke in second word when input at once", async () => {
-        // This user with spaceOff setting actually puts space before
-        const spBefore = spacePlacement === "spaceBeforeOutput" || spacePlacement === "spaceOff" ? " " : "";
-        const spAfter = spacePlacement === "spaceAfterOutput" ? " " : "";
+        const { spBefore, spAfter } = getSpacer(spacePlacement);
         await assertText("");
         // This is somewhat artificial for spaceExact. In practice, each word looks like "y" "o" and "u"
         await typeIn(`${spBefore}you${spAfter}${spBefore}can't${spAfter}`);
@@ -441,9 +470,7 @@ describe(App, () => {
         await loadPage(PAGES.twoWordBriefsSameBeginningsToo);
       });
       it("accepts inputs at once", async () => {
-        // This user with spaceOff setting actually puts space before
-        const spBefore = spacePlacement === "spaceBeforeOutput" || spacePlacement === "spaceOff" ? " " : "";
-        const spAfter = spacePlacement === "spaceAfterOutput" ? " " : "";
+        const { spBefore, spAfter } = getSpacer(spacePlacement);
         await assertText("");
         // This is somewhat artificial for spaceExact. In practice, each word looks like "y" "o" and "u"
         await typeIn(`${spBefore}too bads${spAfter}`);
@@ -504,9 +531,94 @@ describe(App, () => {
         );
       });
     });
+    describe("lesson with `silent`", () => {
+      beforeEach(async () => {
+        await loadPage(PAGES.partyTricks);
+      });
+      // TODO: make 1 match with 0
+      it.each([/*1, */0])("records interim strokes for correct phrase (batchUpdate=%s)", async (batchUpdate) => {
+        document.cookie = `batchUpdate=${batchUpdate}`;
+        const { spBefore, spAfter } = getSpacer(spacePlacement);
+        await typeIn(spBefore + "sigh" + spAfter);
+        const leapt = spBefore + "leapt" + spAfter;
+        await typeIn(leapt);
+        await assertText(spBefore + "sigh" + spAfter + spBefore + "leapt" + spAfter);
+        await typeIn("{backspace}".repeat(leapt.length));
+        if (spacePlacement === "spaceAfterOutput") {
+          await typeIn("{backspace}{backspace}{backspace}lent" + spAfter);
+        } else {
+          await typeIn(`{backspace}{backspace}lent` + spAfter);
+        }
+
+        await assertText("");
+        await typeIn(`${spBefore}sigh${spAfter}`);
+        if (spacePlacement === "spaceAfterOutput") {
+          await typeIn("{backspace}{backspace}{backspace}lent" + spAfter);
+        } else {
+          await typeIn(`{backspace}{backspace}lent` + spAfter);
+        }
+        await assertText("");
+        expect(getStatsState()).toEqual(
+          {
+            "currentLessonStrokes": [
+              {
+                "accuracy": true,
+                "attempts": [
+                  {
+                    "hintWasShown": true,
+                    "numberOfMatchedWordsSoFar": spacePlacement === "spaceBeforeOutput" ? 0.6 : 0.4,
+                    "text": spBefore + "sigh" + spAfter + spBefore + "leapt" + spAfter,
+                    "time": 1234567890123
+                  }
+                ],
+                "checked": true,
+                "hintWasShown": true,
+                "numberOfMatchedWordsSoFar": hasExtraSpaces ? 1.4 : 1.2,
+                "stroke": "SAOEU/HREPBT",
+                "time": 1234567890123,
+                "word": "silent"
+              },
+              {
+                "accuracy": true,
+                "attempts": [
+                  {
+                    "hintWasShown": true,
+                    "numberOfMatchedWordsSoFar": spacePlacement === "spaceBeforeOutput" ? 2 : spacePlacement === "spaceAfterOutput" ? 1.8 : 1.6,
+                    "text": spBefore + "sigh" + spAfter,
+                    "time": 1234567890123
+                  }
+                ],
+                "checked": true,
+                "hintWasShown": true,
+                "numberOfMatchedWordsSoFar": hasExtraSpaces ? 2.8 : 2.4,
+                "stroke": "SAOEU/HREPBT",
+                "time": 1234567890123,
+                "word": "silent"
+              }
+            ],
+            "totalNumberOfHintedWords": 2,
+            "totalNumberOfLowExposuresSeen": 0,
+            "totalNumberOfMatchedChars": hasExtraSpaces ? 14 : 12,
+            "totalNumberOfMistypedWords": 0,
+            "totalNumberOfNewWordsMet": 0,
+            "totalNumberOfRetainedWords": 0
+          }
+        );
+      });
+    });
   });
 });
 
 async function timer(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function getSpacer(spacePlacement: SpacePlacement) {
+  // This user with spaceOff setting actually puts space before
+  return {
+    spBefore: spacePlacement === "spaceBeforeOutput" || spacePlacement === "spaceOff"
+      ? " "
+      : "",
+    spAfter: spacePlacement === "spaceAfterOutput" ? " " : ""
+  };
 }
