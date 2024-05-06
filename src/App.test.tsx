@@ -431,15 +431,19 @@ describe(App, () => {
                   "word": "You"
                 },
                 {
-                  // TODO(na2hiro): why inaccurate for space exact?
-                  // TODO(na2hiro): should this be inaccurate?
-                  accuracy: false,
-                  attempts: [{
-                    hintWasShown: true,
-                    numberOfMatchedWordsSoFar: spacePlacement === "spaceBeforeOutput" ? 1.6 : spacePlacement === "spaceAfterOutput" ? 1.4 : 1.2,
-                    text: spBefore + "can't" + spAfter,
-                    time: 1234567890123
-                  }],
+                  ...(spacePlacement === "spaceExact" ? {
+                    accuracy: true,
+                    attempts: [],
+                  } : {
+                    // TODO(na2hiro): should this be inaccurate?
+                    accuracy: false,
+                    attempts: [{
+                      hintWasShown: true,
+                      numberOfMatchedWordsSoFar: spacePlacement === "spaceBeforeOutput" ? 1.6 : spacePlacement === "spaceAfterOutput" ? 1.4 : 1.2,
+                      text: spBefore + "can't" + spAfter,
+                      time: 1234567890123
+                    }],
+                  }),
                   "checked": true,
                   "hintWasShown": true,
                   "numberOfMatchedWordsSoFar": hasExtraSpaces ? 1.6 : 1.2,
@@ -471,7 +475,7 @@ describe(App, () => {
             "totalNumberOfHintedWords": 3,
             "totalNumberOfLowExposuresSeen": 0,
             "totalNumberOfMatchedChars": hasExtraSpaces ? 13 : 10,
-            "totalNumberOfMistypedWords": spacePlacement === "spaceExact" ? 2 : 1,
+            "totalNumberOfMistypedWords": 1,
             "totalNumberOfNewWordsMet": 0,
             "totalNumberOfRetainedWords": 0
           }
@@ -503,7 +507,7 @@ describe(App, () => {
             "currentLessonStrokes":
               [
                 {
-                  // TODO(na2hiro): why inaccurate for exact?
+                ...(spacePlacement === "spaceExact" ? {accuracy: true, attempts: []} : {
                   "accuracy": false,
                   "attempts": [{
                     "hintWasShown": true,
@@ -511,6 +515,7 @@ describe(App, () => {
                     "text": spBefore+"too bads"+spAfter,
                     "time": 1234567890123
                   }],
+                }),
                   "checked": true,
                   "hintWasShown": true,
                   "numberOfMatchedWordsSoFar": hasExtraSpaces ? 1.6 : 1.4,
@@ -543,7 +548,7 @@ describe(App, () => {
             "totalNumberOfHintedWords": 2,
             "totalNumberOfLowExposuresSeen": 0,
             "totalNumberOfMatchedChars": hasExtraSpaces ? 16 : 14,
-            "totalNumberOfMistypedWords": spacePlacement === "spaceExact" ? 2 : 1,
+            "totalNumberOfMistypedWords": 1,
             "totalNumberOfNewWordsMet": 0,
             "totalNumberOfRetainedWords": 0
           }

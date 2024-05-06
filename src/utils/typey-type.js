@@ -84,9 +84,10 @@ function mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout = "stenoLayoutAmer
  * @param {import('../types').Attempt[]} currentPhraseAttempts
  * @param {number} targetStrokeCount
  * @param {string} unmatchedActual
+ * @param {boolean=} batchUpdate
  * @returns {{strokeAccuracy: boolean, attempts: import('../types').Attempt[]}}
  */
-function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual) {
+function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual, batchUpdate) {
   let strokeAccuracy = true;
   let attempts = [];
 
@@ -128,17 +129,18 @@ function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActua
     return {strokeAccuracy: false, attempts: attempts};
   }
 
-  // If it's the final stroke, fail any unmatched characters immediately
-  // (unless you're undoing a stroke and typed text is getting shorter)
-  let nextAttempt = attempts.length + 1;
-  let isFinalStroke = nextAttempt >= targetStrokeCount;
-  let hasUnmatchedChars = unmatchedActual.length > 0;
-  let failedSingleStrokeBrief = currentPhraseAttempts.length === 1 && targetStrokeCount === 1;
-  let isTypedTextLongerThanPrevious = currentPhraseAttempts.length > 1 && currentPhraseAttempts[currentPhraseAttempts.length - 1].text.length > currentPhraseAttempts[currentPhraseAttempts.length - 2].text.length;
-
-  if (isFinalStroke && hasUnmatchedChars && (failedSingleStrokeBrief || isTypedTextLongerThanPrevious)) {
-    attempts.push(currentPhraseAttempts[currentPhraseAttempts.length - 1]);
-    return {strokeAccuracy: false, attempts: attempts};
+  if (!batchUpdate) {
+    // If it's the final stroke, fail any unmatched characters immediately
+    // (unless you're undoing a stroke and typed text is getting shorter)
+    let nextAttempt = attempts.length + 1;
+    let isFinalStroke = nextAttempt >= targetStrokeCount;
+    let hasUnmatchedChars = unmatchedActual.length > 0;
+    let failedSingleStrokeBrief = currentPhraseAttempts.length === 1 && targetStrokeCount === 1;
+    let isTypedTextLongerThanPrevious = currentPhraseAttempts.length > 1 && currentPhraseAttempts[currentPhraseAttempts.length - 1].text.length > currentPhraseAttempts[currentPhraseAttempts.length - 2].text.length;
+    if (isFinalStroke && hasUnmatchedChars && (failedSingleStrokeBrief || isTypedTextLongerThanPrevious)) {
+      attempts.push(currentPhraseAttempts[currentPhraseAttempts.length - 1]);
+      return { strokeAccuracy: false, attempts: attempts };
+    }
   }
 
   return {strokeAccuracy: strokeAccuracy, attempts: attempts};

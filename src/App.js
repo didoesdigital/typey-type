@@ -1223,7 +1223,9 @@ class App extends Component {
     const phraseMisstrokes = strokeAccuracy(
       buffer ? currentPhraseAttempts : this.state.currentPhraseAttempts,
       this.state.targetStrokeCount,
-      unmatchedActual);
+      unmatchedActual,
+      !!buffer
+    );
     const accurateStroke = phraseMisstrokes.strokeAccuracy; // false
     const attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
 
