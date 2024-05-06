@@ -17,6 +17,7 @@ import {
   shouldShowStroke,
   strokeAccuracy,
   getTargetStrokeCount,
+  getTargetObservableStrokeCount,
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
@@ -1218,11 +1219,10 @@ class App extends Component {
       metWords: this.state.metWords,
       userSettings: this.state.userSettings
     };
-
     // NOTE: here is where attempts are defined before being pushed with completed phrases
     const phraseMisstrokes = strokeAccuracy(
       buffer ? currentPhraseAttempts : this.state.currentPhraseAttempts,
-      this.state.targetStrokeCount,
+      buffer ? getTargetObservableStrokeCount(this.state.lesson.presentedMaterial[this.state.currentPhraseID]) : this.state.targetStrokeCount,
       unmatchedActual,
       !!buffer
     );

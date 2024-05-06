@@ -772,9 +772,27 @@ function writePersonalPreferences(itemToStore, JSONToStore) {
   }
 }
 
+/**
+ * Real target count, used for display etc.
+ * @param {{stroke: string}} currentOutline
+ * @return {number}
+ */
 function getTargetStrokeCount(currentOutline) {
   // console.log(currentOutline.stroke.split(/[/ ]/).length);
   return currentOutline.stroke.split(/[/ ]/).length || 1;
+}
+
+/**
+ * Target count, used for calculating misstrokes
+ * @param {{stroke: string}} currentOutline
+ * @return {number}
+ */
+function getTargetObservableStrokeCount(currentOutline) {
+  const nonObservableStrokes = ["KPA", "KPA*", "TK-LS"];
+  const nonObservableStrokeCount = currentOutline.stroke.split(/[/ ]/)
+    .filter(stroke => nonObservableStrokes.includes(stroke))
+    .length;
+  return getTargetStrokeCount(currentOutline) - nonObservableStrokeCount;
 }
 
 function repetitionsRemaining(userSettings, presentedMaterial, currentPhraseID) {
@@ -846,6 +864,7 @@ export {
   shouldShowStroke,
   strokeAccuracy,
   getTargetStrokeCount,
+  getTargetObservableStrokeCount,
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 };

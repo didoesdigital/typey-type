@@ -30,6 +30,15 @@ const PAGES: { [name: string]: Page } = {
       ["Repetitions", "3", "number"],
       ["Sort", "Shortest words first", "dropdown"]
     ]
+  },
+  oneSyllableMultipleStrokes: {
+    path: "/lessons/fundamentals/one-syllable-words-with-multiple-strokes/",
+    expectedFirstPhrase: "les",
+    settings: [
+      ["Limit word count", "2", "number"],
+      ["Repetitions", "3", "number"],
+      ["Sort", "Shortest words first", "dropdown"]
+    ]
   }
 };
 
@@ -229,16 +238,19 @@ describe(App, () => {
         expect(getStatsState()).toEqual({
             "currentLessonStrokes": [
               {
-                "accuracy": true,
-                "attempts": spacePlacement === "spaceAfterOutput" ?
-                  // rejects nicely
-                  [{
+                ...(spacePlacement === "spaceAfterOutput" ? {
+                  accuracy: true, // No misstroke because you needed two strokes, "KPA/U". Fixed with batch update
+                  // rejects nicely today
+                  attempts: [{
                     "hintWasShown": true,
                     "numberOfMatchedWordsSoFar": 0.6,
                     "text": "yours ",
                     "time": 1234567890123
                   }]
-                  : [],
+                } : {
+                  "accuracy": true,
+                  "attempts": []
+                }),
                 "checked": true,
                 "hintWasShown": true,
                 "numberOfMatchedWordsSoFar": hasExtraSpaces ? 0.8 : 0.6,
@@ -307,16 +319,20 @@ describe(App, () => {
         expect(getStatsState()).toEqual({
           "currentLessonStrokes": [
             {
-              // TODO(na2hiro): for non-exact spacing, it should be false with "yours{bs}{bs}", because one stroke is excepted. To achieve this, we should discount "KPA/" from words, otherwise we won't be able to distinguish accuracy between "yours{bs}{bs}" for "You" (KPA/U) vs "less{bs}" for "les" (HRE/S)
-              "accuracy": true,
-              // Considered no mistake because it requires two strokes, one for capitalization.
-              // spaceExact accepts "yours" immediately because next word can be "rsa".
-              "attempts": spacePlacement === "spaceExact" ? [] : [{
-                "hintWasShown": true,
-                "numberOfMatchedWordsSoFar": spacePlacement === "spaceBeforeOutput" ? 0.8 : 0.6,
-                "text": spBefore+"yours"+spAfter,
-                "time": 1234567890123
-              }],
+              ...(spacePlacement === "spaceExact" ? {
+                accuracy: true,
+                attempts: []
+              } : {
+                "accuracy": false,
+                // Considered no mistake because it requires two strokes, one for capitalization.
+                // spaceExact accepts "yours" immediately because next word can be "rsa".
+                "attempts": [{
+                  "hintWasShown": true,
+                  "numberOfMatchedWordsSoFar": spacePlacement === "spaceBeforeOutput" ? 0.8 : 0.6,
+                  "text": spBefore + "yours" + spAfter,
+                  "time": 1234567890123
+                }]
+              }),
               "checked": true,
               "hintWasShown": true,
               "numberOfMatchedWordsSoFar": hasExtraSpaces ? 0.8 : 0.6,
@@ -348,7 +364,7 @@ describe(App, () => {
           "totalNumberOfHintedWords": 2,
           "totalNumberOfLowExposuresSeen": 0,
           "totalNumberOfMatchedChars": hasExtraSpaces ? 8 : 6,
-          "totalNumberOfMistypedWords": spacePlacement === "spaceExact" ? 1 : 0,
+          "totalNumberOfMistypedWords": 1,
           "totalNumberOfNewWordsMet": 0,
           "totalNumberOfRetainedWords": 0
         });
@@ -435,7 +451,6 @@ describe(App, () => {
                     accuracy: true,
                     attempts: [],
                   } : {
-                    // TODO(na2hiro): should this be inaccurate?
                     accuracy: false,
                     attempts: [{
                       hintWasShown: true,
@@ -627,6 +642,70 @@ describe(App, () => {
             "totalNumberOfRetainedWords": 0
           }
         );
+      });
+    });
+    describe("lesson with `silent`", () => {
+      beforeEach(async () => {
+        await loadPage(PAGES.oneSyllableMultipleStrokes);
+      });
+      it("doesn't count 'less{bs}' as misstroke", async () => {
+        const { spBefore, spAfter } = getSpacer(spacePlacement);
+        await assertCurrentPhrase("les");
+        await assertText("");
+        await typeIn(spBefore + "less" + spAfter);
+        await assertText(spBefore + "less" + spAfter);
+        if (spacePlacement === "spaceAfterOutput") {
+          await typeIn("{backspace}{backspace} ");
+        } else {
+          await typeIn("{backspace}");
+        }
+        await assertText("");
+        await typeIn(spBefore + "asp" + spAfter);
+        await assertText("");
+        expect(getStatsState()).toEqual({
+          currentLessonStrokes: [
+            {
+              accuracy: true,
+              attempts: spacePlacement === "spaceExact" ? [] : [
+                {
+                  text: spBefore + "less" + spAfter,
+                  time: 1234567890123,
+                  numberOfMatchedWordsSoFar: spacePlacement === "spaceBeforeOutput" ? 0.8 : 0.6,
+                  hintWasShown: true
+                }
+              ],
+              checked: true,
+              hintWasShown: true,
+              numberOfMatchedWordsSoFar: hasExtraSpaces ? 0.8 : 0.6,
+              stroke: "HRE/-S",
+              time: 1234567890123,
+              word: "les"
+            },
+            {
+              accuracy: true,
+              attempts: spacePlacement === "spaceExact" ? [
+                {
+                  text: "s",
+                  time: 1234567890123,
+                  numberOfMatchedWordsSoFar: 0.6,
+                  hintWasShown: true
+                }
+              ] : [],
+              checked: true,
+              hintWasShown: true,
+              numberOfMatchedWordsSoFar: hasExtraSpaces ? 1.6 : 1.2,
+              stroke: "AS/-P",
+              time: 1234567890123,
+              word: "asp"
+            }
+          ],
+          totalNumberOfHintedWords: 2,
+          totalNumberOfLowExposuresSeen: 0,
+          totalNumberOfMatchedChars: hasExtraSpaces ? 8 : 6,
+          totalNumberOfMistypedWords: 0,
+          totalNumberOfNewWordsMet: 0,
+          totalNumberOfRetainedWords: 0
+        });
       });
     });
   });
