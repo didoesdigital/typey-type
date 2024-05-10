@@ -42,7 +42,6 @@ import customiseLesson from './pages/lessons/utilities/customiseLesson';
 import setCustomLessonContent from './pages/lessons/utilities/setCustomLessonContent';
 import updateMultipleMetWords from './pages/games/KPOES/updateMultipleMetWords';
 import {
-  changeSortOrderUserSetting,
   changeSpacePlacementUserSetting,
   changeStenoLayout,
   changeUserSetting,
@@ -1411,7 +1410,6 @@ class App extends Component {
               changeFlashcardCourseLevel: changeFlashcardCourseLevel.bind(this),
               changeFullscreen: changeFullscreen.bind(this),
               changeShowStrokesInLesson: changeShowStrokesInLesson.bind(this),
-              changeSortOrderUserSetting: changeSortOrderUserSetting.bind(this),
               changeSpacePlacementUserSetting: changeSpacePlacementUserSetting.bind(this),
               changeStenoLayout: changeStenoLayout.bind(this),
               changeUserSetting: changeUserSetting.bind(this),

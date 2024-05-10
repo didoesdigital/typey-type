@@ -54,3 +54,4 @@ export const showScoresWhileTypingState = subFieldAtom('showScoresWhileTyping');
 export const showStrokesAsDiagramsState = subFieldAtom('showStrokesAsDiagrams');
 export const showStrokesAsListState = subFieldAtom('showStrokesAsList');
 export const showStrokesOnMisstrokeState = subFieldAtom('showStrokesOnMisstroke');
+export const sortOrderState = subFieldAtom('sortOrder');

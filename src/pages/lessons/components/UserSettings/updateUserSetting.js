@@ -5,7 +5,7 @@ import { useAtom, useSetAtom } from "jotai";
 import {
   showScoresWhileTypingState,
   showStrokesAsDiagramsState,
-  showStrokesAsListState, showStrokesOnMisstrokeState
+  showStrokesAsListState, showStrokesOnMisstrokeState, sortOrderState
 } from "../../../../states/userSettingsState";
 import { useAppMethods } from "../../../../states/legacy/AppMethodsContext";
 
@@ -92,32 +92,23 @@ export function useChangeShowStrokesOnMisstroke() {
   }
 }
 
-export function changeSortOrderUserSetting(event) {
-  let currentState = this.state.userSettings;
-  let newState = Object.assign({}, currentState);
+export function useChangeSortOrderUserSetting() {
+  const setState = useSetAtom(sortOrderState);
+  return (event) => {
+    const value = event.target.value;
+    setState(value);
 
-  const name = "sortOrder";
-  const value = event.target.value;
+    let labelString = value;
+    if (!value) {
+      labelString = "BAD_INPUT";
+    }
 
-  newState[name] = value;
-
-  this.setState({ userSettings: newState }, () => {
-    this.setupLesson();
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
-
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change sort order",
+      label: labelString,
+    });
   }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change sort order",
-    label: labelString,
-  });
-
-  return value;
 }
 
 export function changeSpacePlacementUserSetting(event) {

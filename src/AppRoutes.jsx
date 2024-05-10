@@ -408,9 +408,6 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                         changeShowStrokesInLesson={
                           appMethods.changeShowStrokesInLesson
                         }
-                        changeSortOrderUserSetting={
-                          appMethods.changeSortOrderUserSetting
-                        }
                         changeSpacePlacementUserSetting={
                           appMethods.changeSpacePlacementUserSetting
                         }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Tooltip } from "react-tippy";
 import ErrorBoundary from "../../../../components/ErrorBoundary";
 import NumericInput from "react-numeric-input";
@@ -14,7 +14,7 @@ import { userSettingsState } from "../../../../states/userSettingsState";
 import {
   useChangeShowScoresWhileTyping,
   useChangeShowStrokesAs,
-  useChangeShowStrokesAsList, useChangeShowStrokesOnMisstroke
+  useChangeShowStrokesAsList, useChangeShowStrokesOnMisstroke, useChangeSortOrderUserSetting
 } from "./updateUserSetting";
 
 const grabStyle = function () {
@@ -35,7 +35,6 @@ const UserSettings = ({
   totalWordCount,
 }: Props) => {
   const {
-    changeSortOrderUserSetting,
     changeSpacePlacementUserSetting,
     changeStenoLayout,
     changeUserSetting,
@@ -52,7 +51,21 @@ const UserSettings = ({
   const changeShowStrokesAs = useChangeShowStrokesAs();
   const changeShowStrokesAsList = useChangeShowStrokesAsList()
   const changeShowStrokesOnMisstroke = useChangeShowStrokesOnMisstroke();
+  const changeSortOrderUserSetting = useChangeSortOrderUserSetting();
   const announceTooltip = useAnnounceTooltip();
+
+  const {setupLesson} = useAppMethods();
+  const mounted = React.useRef(false);
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+      return;
+    }
+    // Call whenever settings change
+    setupLesson();
+
+    // eslint-disable-next-line
+  }, [userSettings.sortOrder]);
 
   return (
     <div className="user-settings">
