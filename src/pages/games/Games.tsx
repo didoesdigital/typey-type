@@ -6,7 +6,6 @@ import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 import "./Games.scss";
 import type {
-  FetchAndSetupGlobalDict,
   GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
@@ -56,31 +55,23 @@ const AsyncTPEURPBGS = Loadable({
 });
 
 type Props = {
-  changeInputForKAOES: (input: string) => void;
   match: any;
-  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
   startingMetWordsToday: MetWords;
   globalUserSettings: GlobalUserSettings;
   userSettings: UserSettings;
-  updateMetWords: any;
-  updateMultipleMetWords: (newMetWords: string[]) => void;
 };
 
 const Games = ({
-  changeInputForKAOES,
   match,
-  fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   metWords,
   globalUserSettings,
   userSettings,
   startingMetWordsToday,
-  updateMetWords,
-  updateMultipleMetWords,
 }: Props) => {
   return (
     <Switch>
@@ -89,7 +80,6 @@ const Games = ({
           <ErrorBoundary>
             <AsyncKAOES
               inputForKAOES={globalUserSettings.inputForKAOES}
-              changeInputForKAOES={changeInputForKAOES}
             />
           </ErrorBoundary>
         </DocumentTitle>
@@ -98,7 +88,6 @@ const Games = ({
         <DocumentTitle title={"Typey Type | KHAERT"}>
           <ErrorBoundary>
             <AsyncKHAERT
-              fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
             />
           </ErrorBoundary>
@@ -108,11 +97,9 @@ const Games = ({
         <DocumentTitle title={"Typey Type | SHUFL game"}>
           <ErrorBoundary>
             <AsyncSHUFL
-              fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               startingMetWordsToday={startingMetWordsToday}
-              updateMetWords={updateMetWords}
             />
           </ErrorBoundary>
         </DocumentTitle>
@@ -135,13 +122,11 @@ const Games = ({
         <DocumentTitle title={"Typey Type | KPOES game"}>
           <ErrorBoundary>
             <AsyncKPOES
-              fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               metWords={metWords}
               globalUserSettings={globalUserSettings}
               userSettings={userSettings}
-              updateMultipleMetWords={updateMultipleMetWords}
             />
           </ErrorBoundary>
         </DocumentTitle>

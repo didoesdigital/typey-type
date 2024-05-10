@@ -6,18 +6,18 @@ import LessonList from "./components/LessonList";
 import { Tooltip } from "react-tippy";
 import Subheader from "../../components/Subheader";
 import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
+import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 
 type LessonsIndexProps = {
   customLesson: any;
   lessonIndex: any;
-  stopLesson: any;
 };
 
 const LessonsIndex = ({
   customLesson,
   lessonIndex,
-  stopLesson,
 }: LessonsIndexProps) => {
+  const { stopLesson } = useAppMethods();
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const announceTooltip = useAnnounceTooltip();
 

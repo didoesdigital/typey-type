@@ -6,11 +6,11 @@ import PageLoading from "../../components/PageLoading";
 
 import type {
   Experiments,
-  FetchAndSetupGlobalDict,
   GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   UserSettings,
 } from "../../types";
+import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 
 const AsyncDictionary = Loadable({
   loader: () => import("./Dictionary"),
@@ -26,14 +26,10 @@ const AsyncDictionaryManagement = Loadable({
 
 type Props = {
   dictionaryIndex: any;
-  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
-  setDictionaryIndex: () => void;
   stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
-  toggleExperiment: any;
-  updatePersonalDictionaries: any;
   userSettings: UserSettings;
   [restProps: string]: any;
 };
@@ -43,14 +39,16 @@ const Dictionaries = ({
   globalLookupDictionaryLoaded,
   globalLookupDictionary,
   globalUserSettings,
-  setDictionaryIndex,
   stenohintsonthefly,
-  toggleExperiment,
-  updatePersonalDictionaries,
   userSettings,
-  fetchAndSetupGlobalDict,
   ...dictionaryProps
 }: Props) => {
+  const {
+    setDictionaryIndex,
+    toggleExperiment,
+    updatePersonalDictionaries,
+    appFetchAndSetupGlobalDict,
+  } = useAppMethods();
   const match = useRouteMatch({
     path: "/dictionaries",
     strict: true,
@@ -76,7 +74,7 @@ const Dictionaries = ({
         </Route>
         <Route exact={true} path={`${url}/management`}>
           <AsyncDictionaryManagement
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
             globalUserSettings={globalUserSettings}
             toggleExperiment={toggleExperiment}
@@ -93,7 +91,7 @@ const Dictionaries = ({
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+            fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
             {...dictionaryProps}
           />
         </Route>

@@ -21,22 +21,15 @@ import GeneratorHelp from "./GeneratorHelp";
 
 import type {
   CustomLesson,
-  FetchAndSetupGlobalDict,
   LookupDictWithNamespacedDicts,
 } from "../../../types";
-import type { Rules } from "./generator/types";
 import type { RegexRules } from "./generator/utilities/generateCustomLesson";
 import type { CustomLessonMaterialValidationState } from "./components/CustomLessonIntro";
+import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
 
 type Props = {
   customLesson: CustomLesson;
   customLessonMaterialValidationState: CustomLessonMaterialValidationState;
-  generateCustomLesson: (
-    globalLookupDictionary: LookupDictWithNamespacedDicts,
-    rules: Rules,
-    regexRules: RegexRules
-  ) => void;
-  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDicts;
 };
 
@@ -47,10 +40,12 @@ const containerId = "collapsible-help";
 const CustomLessonGenerator = ({
   customLesson,
   customLessonMaterialValidationState,
-  fetchAndSetupGlobalDict,
-  generateCustomLesson,
   globalLookupDictionary,
 }: Props) => {
+  const {
+    appFetchAndSetupGlobalDict,
+    generateCustomLesson,
+  } = useAppMethods();
   const mainHeading = useRef<HTMLHeadingElement>(null);
 
   const [hideHelp, setHideHelp] = useState(true);
@@ -62,10 +57,10 @@ const CustomLessonGenerator = ({
   };
 
   useEffect(() => {
-    fetchAndSetupGlobalDict(false, null).catch((error: Error) => {
+    appFetchAndSetupGlobalDict(false, null).catch((error: Error) => {
       console.error(error);
     });
-    // }, [fetchAndSetupGlobalDict]);
+    // }, [appFetchAndSetupGlobalDict]);
     // Excluding fetchAndSetupGlobalDict…
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

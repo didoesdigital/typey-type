@@ -24,49 +24,24 @@ const AsyncCustomLessonGenerator = Loadable({
 });
 
 const Lessons = ({
-  createCustomLesson,
   customLesson,
   customLessonMaterial,
   customLessonMaterialValidationMessages,
   customLessonMaterialValidationState,
-  generateCustomLesson,
 
   actualText,
-  changeFullscreen,
-  changeShowScoresWhileTyping,
-  changeShowStrokesAs,
-  changeShowStrokesAsList,
-  changeShowStrokesInLesson,
-  changeShowStrokesOnMisstroke,
-  changeSortOrderUserSetting,
-  changeSpacePlacementUserSetting,
-  changeStenoLayout,
-  changeUserSetting,
-  changeVoiceUserSetting,
-  chooseStudy,
   completedPhrases,
   currentLessonStrokes,
   currentPhrase,
   currentPhraseID,
   currentStroke,
-  customiseLesson,
   disableUserSettings,
-  fetchAndSetupGlobalDict,
   flashcardsMetWords,
   flashcardsProgress,
   fullscreen,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   globalUserSettings,
-  handleBeatsPerMinute,
-  handleDiagramSize,
-  handleLesson,
-  handleLimitWordsChange,
-  handleRepetitionsChange,
-  handleStartFromWordChange,
-  handleStopLesson,
-  handleUpcomingWordsLayout,
-  toggleHideOtherSettings,
   lesson,
   lessonIndex,
   lessonLength,
@@ -79,18 +54,10 @@ const Lessons = ({
   previousCompletedPhraseAsTyped,
   recentLessonHistory,
   repetitionsRemaining,
-  restartLesson,
-  reviseLesson,
   revisionMode,
-  sayCurrentPhraseAgain,
-  setUpProgressRevisionLesson,
   settings,
-  setupLesson,
   showStrokesInLesson,
-  startCustomLesson,
-  startFromWordOne,
   startTime,
-  stopLesson,
   targetStrokeCount,
   timer,
   topSpeedPersonalBest,
@@ -102,14 +69,6 @@ const Lessons = ({
   totalNumberOfRetainedWords,
   totalWordCount,
   upcomingPhrases,
-  updateFlashcardsMetWords,
-  updateFlashcardsProgress,
-  updateGlobalLookupDictionary,
-  updateMarkup,
-  updatePersonalDictionaries,
-  updatePreset,
-  updateRevisionMaterial,
-  updateTopSpeedPersonalBest,
   userSettings,
 }: LessonsRoutingProps) => {
   return (
@@ -119,41 +78,18 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             actualText={actualText}
-            changeFullscreen={changeFullscreen}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesInLesson={changeShowStrokesInLesson}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeStenoLayout={changeStenoLayout}
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            chooseStudy={chooseStudy}
             completedPhrases={completedPhrases}
             currentLessonStrokes={currentLessonStrokes}
             currentPhrase={currentPhrase}
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
-            customiseLesson={customiseLesson}
             disableUserSettings={disableUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleDiagramSize={handleDiagramSize}
-            handleLesson={handleLesson}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleStopLesson={handleStopLesson}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -166,18 +102,10 @@ const Lessons = ({
             previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
             repetitionsRemaining={repetitionsRemaining}
-            restartLesson={restartLesson}
-            reviseLesson={reviseLesson}
             revisionMode={revisionMode}
-            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
             settings={settings}
-            setupLesson={setupLesson}
             showStrokesInLesson={showStrokesInLesson}
-            startCustomLesson={startCustomLesson}
-            startFromWordOne={startFromWordOne}
             startTime={startTime}
-            stopLesson={stopLesson}
             targetStrokeCount={targetStrokeCount}
             timer={timer}
             topSpeedPersonalBest={topSpeedPersonalBest}
@@ -189,14 +117,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            updateFlashcardsMetWords={updateFlashcardsMetWords}
-            updateFlashcardsProgress={updateFlashcardsProgress}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updateMarkup={updateMarkup}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            updatePreset={updatePreset}
-            updateRevisionMaterial={updateRevisionMaterial}
-            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
             userSettings={userSettings}
             {...props}
           />
@@ -207,41 +127,18 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             actualText={actualText}
-            changeFullscreen={changeFullscreen}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesInLesson={changeShowStrokesInLesson}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeStenoLayout={changeStenoLayout}
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            chooseStudy={chooseStudy}
             completedPhrases={completedPhrases}
             currentLessonStrokes={currentLessonStrokes}
             currentPhrase={currentPhrase}
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
-            customiseLesson={customiseLesson}
             disableUserSettings={disableUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleDiagramSize={handleDiagramSize}
-            handleLesson={handleLesson}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleStopLesson={handleStopLesson}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -254,18 +151,10 @@ const Lessons = ({
             previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
             repetitionsRemaining={repetitionsRemaining}
-            restartLesson={restartLesson}
-            reviseLesson={reviseLesson}
             revisionMode={revisionMode}
-            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
             settings={settings}
-            setupLesson={setupLesson}
             showStrokesInLesson={showStrokesInLesson}
-            startCustomLesson={startCustomLesson}
-            startFromWordOne={startFromWordOne}
             startTime={startTime}
-            stopLesson={stopLesson}
             targetStrokeCount={targetStrokeCount}
             timer={timer}
             topSpeedPersonalBest={topSpeedPersonalBest}
@@ -277,14 +166,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            updateFlashcardsMetWords={updateFlashcardsMetWords}
-            updateFlashcardsProgress={updateFlashcardsProgress}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updateMarkup={updateMarkup}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            updatePreset={updatePreset}
-            updateRevisionMaterial={updateRevisionMaterial}
-            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
             userSettings={userSettings}
             {...props}
           />
@@ -295,41 +176,17 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             actualText={actualText}
-            changeFullscreen={changeFullscreen}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesInLesson={changeShowStrokesInLesson}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeStenoLayout={changeStenoLayout}
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            chooseStudy={chooseStudy}
             completedPhrases={completedPhrases}
             currentLessonStrokes={currentLessonStrokes}
             currentPhrase={currentPhrase}
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
-            customiseLesson={customiseLesson}
             disableUserSettings={disableUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-            flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleDiagramSize={handleDiagramSize}
-            handleLesson={handleLesson}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleStopLesson={handleStopLesson}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -342,18 +199,10 @@ const Lessons = ({
             previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
             repetitionsRemaining={repetitionsRemaining}
-            restartLesson={restartLesson}
-            reviseLesson={reviseLesson}
             revisionMode={revisionMode}
-            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
             settings={settings}
-            setupLesson={setupLesson}
             showStrokesInLesson={showStrokesInLesson}
-            startCustomLesson={startCustomLesson}
-            startFromWordOne={startFromWordOne}
             startTime={startTime}
-            stopLesson={stopLesson}
             targetStrokeCount={targetStrokeCount}
             timer={timer}
             topSpeedPersonalBest={topSpeedPersonalBest}
@@ -365,14 +214,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            updateFlashcardsMetWords={updateFlashcardsMetWords}
-            updateFlashcardsProgress={updateFlashcardsProgress}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updateMarkup={updateMarkup}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            updatePreset={updatePreset}
-            updateRevisionMaterial={updateRevisionMaterial}
-            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
             userSettings={userSettings}
             {...props}
           />
@@ -383,41 +224,18 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             actualText={actualText}
-            changeFullscreen={changeFullscreen}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesInLesson={changeShowStrokesInLesson}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeStenoLayout={changeStenoLayout}
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            chooseStudy={chooseStudy}
             completedPhrases={completedPhrases}
             currentLessonStrokes={currentLessonStrokes}
             currentPhrase={currentPhrase}
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
-            customiseLesson={customiseLesson}
             disableUserSettings={disableUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleDiagramSize={handleDiagramSize}
-            handleLesson={handleLesson}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleStopLesson={handleStopLesson}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -430,18 +248,10 @@ const Lessons = ({
             previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
             repetitionsRemaining={repetitionsRemaining}
-            restartLesson={restartLesson}
-            reviseLesson={reviseLesson}
             revisionMode={revisionMode}
-            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
             settings={settings}
-            setupLesson={setupLesson}
             showStrokesInLesson={showStrokesInLesson}
-            startCustomLesson={startCustomLesson}
-            startFromWordOne={startFromWordOne}
             startTime={startTime}
-            stopLesson={stopLesson}
             targetStrokeCount={targetStrokeCount}
             timer={timer}
             topSpeedPersonalBest={topSpeedPersonalBest}
@@ -453,14 +263,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            updateFlashcardsMetWords={updateFlashcardsMetWords}
-            updateFlashcardsProgress={updateFlashcardsProgress}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updateMarkup={updateMarkup}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            updatePreset={updatePreset}
-            updateRevisionMaterial={updateRevisionMaterial}
-            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
             userSettings={userSettings}
             {...props}
           />
@@ -471,41 +273,18 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             actualText={actualText}
-            changeFullscreen={changeFullscreen}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesInLesson={changeShowStrokesInLesson}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeStenoLayout={changeStenoLayout}
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            chooseStudy={chooseStudy}
             completedPhrases={completedPhrases}
             currentLessonStrokes={currentLessonStrokes}
             currentPhrase={currentPhrase}
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
-            customiseLesson={customiseLesson}
             disableUserSettings={disableUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleDiagramSize={handleDiagramSize}
-            handleLesson={handleLesson}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleStopLesson={handleStopLesson}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -518,18 +297,10 @@ const Lessons = ({
             previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
             repetitionsRemaining={repetitionsRemaining}
-            restartLesson={restartLesson}
-            reviseLesson={reviseLesson}
             revisionMode={revisionMode}
-            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
             settings={settings}
-            setupLesson={setupLesson}
             showStrokesInLesson={showStrokesInLesson}
-            startCustomLesson={startCustomLesson}
-            startFromWordOne={startFromWordOne}
             startTime={startTime}
-            stopLesson={stopLesson}
             targetStrokeCount={targetStrokeCount}
             timer={timer}
             topSpeedPersonalBest={topSpeedPersonalBest}
@@ -541,14 +312,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            updateFlashcardsMetWords={updateFlashcardsMetWords}
-            updateFlashcardsProgress={updateFlashcardsProgress}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updateMarkup={updateMarkup}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            updatePreset={updatePreset}
-            updateRevisionMaterial={updateRevisionMaterial}
-            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
             userSettings={userSettings}
             {...props}
           />
@@ -559,41 +322,18 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             actualText={actualText}
-            changeFullscreen={changeFullscreen}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesInLesson={changeShowStrokesInLesson}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeStenoLayout={changeStenoLayout}
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            chooseStudy={chooseStudy}
             completedPhrases={completedPhrases}
             currentLessonStrokes={currentLessonStrokes}
             currentPhrase={currentPhrase}
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
-            customiseLesson={customiseLesson}
             disableUserSettings={disableUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleDiagramSize={handleDiagramSize}
-            handleLesson={handleLesson}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleStopLesson={handleStopLesson}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -606,18 +346,10 @@ const Lessons = ({
             previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
             repetitionsRemaining={repetitionsRemaining}
-            restartLesson={restartLesson}
-            reviseLesson={reviseLesson}
             revisionMode={revisionMode}
-            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
             settings={settings}
-            setupLesson={setupLesson}
             showStrokesInLesson={showStrokesInLesson}
-            startCustomLesson={startCustomLesson}
-            startFromWordOne={startFromWordOne}
             startTime={startTime}
-            stopLesson={stopLesson}
             targetStrokeCount={targetStrokeCount}
             timer={timer}
             topSpeedPersonalBest={topSpeedPersonalBest}
@@ -629,14 +361,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            updateFlashcardsMetWords={updateFlashcardsMetWords}
-            updateFlashcardsProgress={updateFlashcardsProgress}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updateMarkup={updateMarkup}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            updatePreset={updatePreset}
-            updateRevisionMaterial={updateRevisionMaterial}
-            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
             userSettings={userSettings}
             {...props}
           />
@@ -648,41 +372,18 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             actualText={actualText}
-            changeFullscreen={changeFullscreen}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesInLesson={changeShowStrokesInLesson}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeStenoLayout={changeStenoLayout}
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            chooseStudy={chooseStudy}
             completedPhrases={completedPhrases}
             currentLessonStrokes={currentLessonStrokes}
             currentPhrase={currentPhrase}
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
-            customiseLesson={customiseLesson}
             disableUserSettings={disableUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleDiagramSize={handleDiagramSize}
-            handleLesson={handleLesson}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleStopLesson={handleStopLesson}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -695,18 +396,10 @@ const Lessons = ({
             previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
             repetitionsRemaining={repetitionsRemaining}
-            restartLesson={restartLesson}
-            reviseLesson={reviseLesson}
             revisionMode={revisionMode}
-            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
             settings={settings}
-            setupLesson={setupLesson}
             showStrokesInLesson={showStrokesInLesson}
-            startCustomLesson={startCustomLesson}
-            startFromWordOne={startFromWordOne}
             startTime={startTime}
-            stopLesson={stopLesson}
             targetStrokeCount={targetStrokeCount}
             timer={timer}
             topSpeedPersonalBest={topSpeedPersonalBest}
@@ -718,14 +411,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            updateFlashcardsMetWords={updateFlashcardsMetWords}
-            updateFlashcardsProgress={updateFlashcardsProgress}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updateMarkup={updateMarkup}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            updatePreset={updatePreset}
-            updateRevisionMaterial={updateRevisionMaterial}
-            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
             userSettings={userSettings}
             {...props}
           />
@@ -737,41 +422,18 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             actualText={actualText}
-            changeFullscreen={changeFullscreen}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesInLesson={changeShowStrokesInLesson}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeStenoLayout={changeStenoLayout}
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            chooseStudy={chooseStudy}
             completedPhrases={completedPhrases}
             currentLessonStrokes={currentLessonStrokes}
             currentPhrase={currentPhrase}
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
-            customiseLesson={customiseLesson}
             disableUserSettings={disableUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleDiagramSize={handleDiagramSize}
-            handleLesson={handleLesson}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleStopLesson={handleStopLesson}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -784,18 +446,10 @@ const Lessons = ({
             previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
             repetitionsRemaining={repetitionsRemaining}
-            restartLesson={restartLesson}
-            reviseLesson={reviseLesson}
             revisionMode={revisionMode}
-            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
             settings={settings}
-            setupLesson={setupLesson}
             showStrokesInLesson={showStrokesInLesson}
-            startCustomLesson={startCustomLesson}
-            startFromWordOne={startFromWordOne}
             startTime={startTime}
-            stopLesson={stopLesson}
             targetStrokeCount={targetStrokeCount}
             timer={timer}
             topSpeedPersonalBest={topSpeedPersonalBest}
@@ -807,14 +461,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            updateFlashcardsMetWords={updateFlashcardsMetWords}
-            updateFlashcardsProgress={updateFlashcardsProgress}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updateMarkup={updateMarkup}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            updatePreset={updatePreset}
-            updateRevisionMaterial={updateRevisionMaterial}
-            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
             userSettings={userSettings}
             {...props}
           />
@@ -826,41 +472,18 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             actualText={actualText}
-            changeFullscreen={changeFullscreen}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesInLesson={changeShowStrokesInLesson}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeStenoLayout={changeStenoLayout}
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            chooseStudy={chooseStudy}
             completedPhrases={completedPhrases}
             currentLessonStrokes={currentLessonStrokes}
             currentPhrase={currentPhrase}
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
-            customiseLesson={customiseLesson}
             disableUserSettings={disableUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleDiagramSize={handleDiagramSize}
-            handleLesson={handleLesson}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleStopLesson={handleStopLesson}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -873,18 +496,10 @@ const Lessons = ({
             previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
             repetitionsRemaining={repetitionsRemaining}
-            restartLesson={restartLesson}
-            reviseLesson={reviseLesson}
             revisionMode={revisionMode}
-            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
             settings={settings}
-            setupLesson={setupLesson}
             showStrokesInLesson={showStrokesInLesson}
-            startCustomLesson={startCustomLesson}
-            startFromWordOne={startFromWordOne}
             startTime={startTime}
-            stopLesson={stopLesson}
             targetStrokeCount={targetStrokeCount}
             timer={timer}
             topSpeedPersonalBest={topSpeedPersonalBest}
@@ -896,14 +511,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            updateFlashcardsMetWords={updateFlashcardsMetWords}
-            updateFlashcardsProgress={updateFlashcardsProgress}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updateMarkup={updateMarkup}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            updatePreset={updatePreset}
-            updateRevisionMaterial={updateRevisionMaterial}
-            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
             userSettings={userSettings}
             {...props}
           />
@@ -915,7 +522,6 @@ const Lessons = ({
         render={(props) => (
           <DocumentTitle title="Typey Type | Create a custom lesson">
             <CustomLessonSetup
-              createCustomLesson={createCustomLesson}
               customLessonMaterial={customLessonMaterial}
               customLessonMaterialValidationMessages={
                 customLessonMaterialValidationMessages
@@ -923,7 +529,6 @@ const Lessons = ({
               customLessonMaterialValidationState={
                 customLessonMaterialValidationState
               }
-              fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               {...props}
@@ -942,8 +547,6 @@ const Lessons = ({
                 customLessonMaterialValidationState={
                   customLessonMaterialValidationState
                 }
-                fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
-                generateCustomLesson={generateCustomLesson}
                 globalLookupDictionary={globalLookupDictionary}
               />
             </ErrorBoundary>
@@ -956,41 +559,18 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             actualText={actualText}
-            changeFullscreen={changeFullscreen}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesInLesson={changeShowStrokesInLesson}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeStenoLayout={changeStenoLayout}
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            chooseStudy={chooseStudy}
             completedPhrases={completedPhrases}
             currentLessonStrokes={currentLessonStrokes}
             currentPhrase={currentPhrase}
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
-            customiseLesson={customiseLesson}
             disableUserSettings={disableUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleDiagramSize={handleDiagramSize}
-            handleLesson={handleLesson}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleStopLesson={handleStopLesson}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -1003,18 +583,10 @@ const Lessons = ({
             previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
             repetitionsRemaining={repetitionsRemaining}
-            restartLesson={restartLesson}
-            reviseLesson={reviseLesson}
             revisionMode={revisionMode}
-            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
             settings={settings}
-            setupLesson={setupLesson}
             showStrokesInLesson={showStrokesInLesson}
-            startCustomLesson={startCustomLesson}
-            startFromWordOne={startFromWordOne}
             startTime={startTime}
-            stopLesson={stopLesson}
             targetStrokeCount={targetStrokeCount}
             timer={timer}
             topSpeedPersonalBest={topSpeedPersonalBest}
@@ -1026,14 +598,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            updateFlashcardsMetWords={updateFlashcardsMetWords}
-            updateFlashcardsProgress={updateFlashcardsProgress}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updateMarkup={updateMarkup}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            updatePreset={updatePreset}
-            updateRevisionMaterial={updateRevisionMaterial}
-            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
             userSettings={userSettings}
             {...props}
           />
@@ -1045,41 +609,18 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             actualText={actualText}
-            changeFullscreen={changeFullscreen}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesInLesson={changeShowStrokesInLesson}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeStenoLayout={changeStenoLayout}
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            chooseStudy={chooseStudy}
             completedPhrases={completedPhrases}
             currentLessonStrokes={currentLessonStrokes}
             currentPhrase={currentPhrase}
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
-            customiseLesson={customiseLesson}
             disableUserSettings={disableUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleDiagramSize={handleDiagramSize}
-            handleLesson={handleLesson}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleStopLesson={handleStopLesson}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -1092,18 +633,10 @@ const Lessons = ({
             previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
             repetitionsRemaining={repetitionsRemaining}
-            restartLesson={restartLesson}
-            reviseLesson={reviseLesson}
             revisionMode={revisionMode}
-            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
             settings={settings}
-            setupLesson={setupLesson}
             showStrokesInLesson={showStrokesInLesson}
-            startCustomLesson={startCustomLesson}
-            startFromWordOne={startFromWordOne}
             startTime={startTime}
-            stopLesson={stopLesson}
             targetStrokeCount={targetStrokeCount}
             timer={timer}
             topSpeedPersonalBest={topSpeedPersonalBest}
@@ -1115,14 +648,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            updateFlashcardsMetWords={updateFlashcardsMetWords}
-            updateFlashcardsProgress={updateFlashcardsProgress}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updateMarkup={updateMarkup}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            updatePreset={updatePreset}
-            updateRevisionMaterial={updateRevisionMaterial}
-            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
             userSettings={userSettings}
             {...props}
           />
@@ -1134,41 +659,18 @@ const Lessons = ({
         render={(props) => (
           <Lesson
             actualText={actualText}
-            changeFullscreen={changeFullscreen}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesInLesson={changeShowStrokesInLesson}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeStenoLayout={changeStenoLayout}
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            chooseStudy={chooseStudy}
             completedPhrases={completedPhrases}
             currentLessonStrokes={currentLessonStrokes}
             currentPhrase={currentPhrase}
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
-            customiseLesson={customiseLesson}
             disableUserSettings={disableUserSettings}
-            fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
             globalUserSettings={globalUserSettings}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleDiagramSize={handleDiagramSize}
-            handleLesson={handleLesson}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleStopLesson={handleStopLesson}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
-            toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -1181,18 +683,10 @@ const Lessons = ({
             previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
             recentLessonHistory={recentLessonHistory}
             repetitionsRemaining={repetitionsRemaining}
-            restartLesson={restartLesson}
-            reviseLesson={reviseLesson}
             revisionMode={revisionMode}
-            sayCurrentPhraseAgain={sayCurrentPhraseAgain}
-            setUpProgressRevisionLesson={setUpProgressRevisionLesson}
             settings={settings}
-            setupLesson={setupLesson}
             showStrokesInLesson={showStrokesInLesson}
-            startCustomLesson={startCustomLesson}
-            startFromWordOne={startFromWordOne}
             startTime={startTime}
-            stopLesson={stopLesson}
             targetStrokeCount={targetStrokeCount}
             timer={timer}
             topSpeedPersonalBest={topSpeedPersonalBest}
@@ -1204,14 +698,6 @@ const Lessons = ({
             totalNumberOfRetainedWords={totalNumberOfRetainedWords}
             totalWordCount={totalWordCount}
             upcomingPhrases={upcomingPhrases}
-            updateFlashcardsMetWords={updateFlashcardsMetWords}
-            updateFlashcardsProgress={updateFlashcardsProgress}
-            updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-            updateMarkup={updateMarkup}
-            updatePersonalDictionaries={updatePersonalDictionaries}
-            updatePreset={updatePreset}
-            updateRevisionMaterial={updateRevisionMaterial}
-            updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
             userSettings={userSettings}
             {...props}
           />
@@ -1224,7 +710,6 @@ const Lessons = ({
           <LessonsIndex
             lessonIndex={lessonIndex}
             customLesson={customLesson}
-            stopLesson={stopLesson}
           />
         )}
       />

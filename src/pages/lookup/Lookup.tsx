@@ -6,30 +6,30 @@ import Subheader from "../../components/Subheader";
 import getWordFamilyGroup from "./utilities/getWordFamilyGroup";
 
 import type {
-  FetchAndSetupGlobalDict,
-  GlobalUserSettings,
-  UserSettings,
+  GlobalUserSettings, MaterialItem,
+  UserSettings
 } from "../../types";
+import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 
 type Props = {
-  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: any;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
   lookupTerm?: string;
-  setCustomLessonContent: any;
   userSettings: UserSettings;
 };
 
 const Lookup = ({
-  fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   globalUserSettings,
   lookupTerm,
   userSettings,
-  setCustomLessonContent,
 }: Props) => {
+  const {
+    appFetchAndSetupGlobalDict,
+    setCustomLessonContent
+  } = useAppMethods();
   const [bookmarkURL, setBookmarkURL] = useState(
     process.env.PUBLIC_URL + "/lookup"
   );
@@ -71,7 +71,7 @@ const Lookup = ({
           return undefined;
         }
       })
-      .filter((notUndefined) => !!notUndefined);
+      .filter((notUndefined) => !!notUndefined) as MaterialItem[];
     setCustomLessonContent(material);
   };
 
@@ -107,7 +107,7 @@ const Lookup = ({
           <div className="mw-584 w-100 flex-grow mr3 min-h-384">
             <div>
               <StrokesForWords
-                fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+                fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
                 globalLookupDictionary={globalLookupDictionary}
                 globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
                 globalUserSettings={globalUserSettings}

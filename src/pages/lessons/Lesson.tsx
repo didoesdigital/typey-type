@@ -14,6 +14,7 @@ import MainLessonView from "./MainLessonView";
 import { LessonProps } from "./types";
 import type { Lesson as LessonType } from "../../types";
 import Zipper from "../../utils/zipper";
+import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 
 const isCustom = (pathname: string) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
@@ -32,41 +33,18 @@ const isProgressLesson = (pathname: string) =>
 
 const Lesson = ({
   actualText,
-  changeFullscreen,
-  changeShowScoresWhileTyping,
-  changeShowStrokesAs,
-  changeShowStrokesAsList,
-  changeShowStrokesInLesson,
-  changeShowStrokesOnMisstroke,
-  changeSortOrderUserSetting,
-  changeSpacePlacementUserSetting,
-  changeStenoLayout,
-  changeUserSetting,
-  changeVoiceUserSetting,
-  chooseStudy,
   completedPhrases,
   currentLessonStrokes,
   currentPhrase,
   currentPhraseID,
   currentStroke,
-  customiseLesson,
   disableUserSettings,
-  fetchAndSetupGlobalDict,
   flashcardsMetWords,
   flashcardsProgress,
   fullscreen,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   globalUserSettings,
-  handleBeatsPerMinute,
-  handleDiagramSize,
-  handleLesson,
-  handleLimitWordsChange,
-  handleRepetitionsChange,
-  handleStartFromWordChange,
-  handleStopLesson,
-  handleUpcomingWordsLayout,
-  toggleHideOtherSettings,
   lesson,
   lessonIndex,
   lessonLength,
@@ -80,18 +58,10 @@ const Lesson = ({
   previousCompletedPhraseAsTyped,
   recentLessonHistory,
   repetitionsRemaining,
-  restartLesson,
-  reviseLesson,
   revisionMode,
-  sayCurrentPhraseAgain,
-  setUpProgressRevisionLesson,
   settings,
-  setupLesson,
   showStrokesInLesson,
-  startCustomLesson,
-  startFromWordOne,
   startTime,
-  stopLesson,
   targetStrokeCount,
   timer,
   topSpeedPersonalBest,
@@ -103,16 +73,49 @@ const Lesson = ({
   totalNumberOfRetainedWords,
   totalWordCount,
   upcomingPhrases,
-  updateFlashcardsMetWords,
-  updateFlashcardsProgress,
-  updateGlobalLookupDictionary,
-  updateMarkup,
-  updatePersonalDictionaries,
-  updatePreset,
-  updateRevisionMaterial,
-  updateTopSpeedPersonalBest,
   userSettings,
 }: LessonProps) => {
+  const {
+    appFetchAndSetupGlobalDict,
+    chooseStudy,
+    customiseLesson,
+    handleBeatsPerMinute,
+    handleDiagramSize,
+    handleLesson,
+    handleLimitWordsChange,
+    handleRepetitionsChange,
+    handleStartFromWordChange,
+    handleStopLesson,
+    handleUpcomingWordsLayout,
+    toggleHideOtherSettings,
+    changeFullscreen,
+    changeShowScoresWhileTyping,
+    changeShowStrokesAs,
+    changeShowStrokesAsList,
+    changeShowStrokesInLesson,
+    changeShowStrokesOnMisstroke,
+    changeSortOrderUserSetting,
+    changeSpacePlacementUserSetting,
+    changeStenoLayout,
+    changeUserSetting,
+    changeVoiceUserSetting,
+    restartLesson,
+    reviseLesson,
+    sayCurrentPhraseAgain,
+    setUpProgressRevisionLesson,
+    setupLesson,
+    startCustomLesson,
+    startFromWordOne,
+    stopLesson,
+    updateFlashcardsMetWords,
+    updateFlashcardsProgress,
+    updateGlobalLookupDictionary,
+    updateMarkup,
+    updatePersonalDictionaries,
+    updatePreset,
+    updateRevisionMaterial,
+    updateTopSpeedPersonalBest,
+  } = useAppMethods();
   const loadedLessonPath = useRef("");
 
   // const mainHeading = useRef<HTMLHeadingElement>(null);
@@ -419,7 +422,7 @@ const Lesson = ({
               <div>
                 <DocumentTitle title={"Typey Type | Flashcards"}>
                   <Flashcards
-                    fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+                    fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
                     flashcardsMetWords={flashcardsMetWords}
                     flashcardsProgress={flashcardsProgress}
                     globalLookupDictionary={globalLookupDictionary}
