@@ -55,3 +55,8 @@ export const showStrokesAsDiagramsState = atom(
   (get, set, update: boolean) => {
       set(userSettingsState, { ...get(userSettingsState), showStrokesAsDiagrams: update });
   });
+export const showStrokesAsListState = atom(
+  (get) => get(userSettingsState).showStrokesAsList,
+  (get, set, update: boolean) => {
+    set(userSettingsState, { ...get(userSettingsState), showStrokesAsList: update });
+  });

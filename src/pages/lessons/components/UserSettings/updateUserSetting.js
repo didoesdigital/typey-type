@@ -2,7 +2,12 @@ import GoogleAnalytics from "react-ga4";
 import PARAMS from "../../../../utils/params";
 import { writePersonalPreferences } from "../../../../utils/typey-type";
 import { useAtom, useSetAtom } from "jotai";
-import { showScoresWhileTypingState, showStrokesAsDiagramsState } from "../../../../states/userSettingsState";
+import {
+  showScoresWhileTypingState,
+  showStrokesAsDiagramsState,
+  showStrokesAsListState
+} from "../../../../states/userSettingsState";
+import { useAppMethods } from "../../../../states/legacy/AppMethodsContext";
 
 /** @type {SpeechSynthesis | null} */
 let synth = null;
@@ -47,38 +52,30 @@ export function useChangeShowStrokesAs() {
   }
 }
 
-export function changeShowStrokesAsList(event) {
-  let newState = Object.assign({}, this.state.userSettings);
+export function useChangeShowStrokesAsList() {
+  const setState = useSetAtom(showStrokesAsListState);
+  const {appFetchAndSetupGlobalDict} = useAppMethods()
 
-  const name = "showStrokesAsList";
-  const value = event.target.checked;
+  return (event) => {
+    const value = event.target.checked;
+    setState(value);
 
-  if (value) {
-    newState[name] = true;
+    let labelString = value;
+    if (value) {
+      appFetchAndSetupGlobalDict(true, null).catch(error => {
+        console.error(error)
+      })
+    } else {
+      // TODO: is it correct?
+      labelString = "BAD_INPUT";
+    }
 
-    this.appFetchAndSetupGlobalDict(true, null).catch((error) =>
-      console.error(error)
-    );
-  } else {
-    newState[name] = false;
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change show strokes as list",
+      label: labelString,
+    });
   }
-
-  this.setState({ userSettings: newState }, () => {
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
-
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
-  }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change show strokes as list",
-    label: labelString,
-  });
-
-  return value;
 }
 
 export function changeShowStrokesOnMisstroke(event) {
