@@ -7,6 +7,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!d3-array)/\" --env=jsdom",
+    "test:unit": "yarn test --testMatch \"**/*.test.{js,ts}\"",
+    "test:ui": "yarn test --testMatch \"**/*.test.{jsx,tsx}\"",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",

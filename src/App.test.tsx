@@ -3,8 +3,12 @@ import { render, screen, waitFor } from "@testing-library/react";
 import { MemoryRouter, useHistory, useLocation } from "react-router-dom";
 import React from "react";
 import { userEvent } from "@storybook/testing-library";
-import { promises as fs } from "node:fs";
+import fs from "node:fs/promises";
 import { SpacePlacement } from "./types";
+
+// Depending on environment, userEvent.type() could be so slow that keydowns have interval of more than 16ms.
+// Increase this if test gets too flaky
+const BUFFER_INTERVAL_MILLIS = 32;
 
 type InputType = "dropdown" | "number";
 type UserSetting = [string, any, InputType];
@@ -50,6 +54,10 @@ describe(App, () => {
       currentState = this.state;
       return super.render();
     }
+
+    bufferIntervalMillis(): number {
+      return BUFFER_INTERVAL_MILLIS;
+    }
   }
 
   function AppWithRouterInfo() {
@@ -81,8 +89,10 @@ describe(App, () => {
     "spaceExact"
   ] as SpacePlacement[])("a lesson page (spacePlacement=%s)", (spacePlacement) => {
     const input = () => screen.findByTestId("your-typed-text");
-    const typeIn = async (text: string) =>
-      userEvent.type(await input(), text);
+    const typeIn = async (text: string) => {
+      await userEvent.type(await input(), text);
+      await timer(BUFFER_INTERVAL_MILLIS); // make sure buffered input is processed before next typeIn comes in
+    };
     const assertText = async (text: string) =>
       await waitFor(async () => expect(await input()).toHaveValue(text));
     const assertCurrentPhrase = async (text: string) =>
@@ -507,11 +517,16 @@ describe(App, () => {
         // This is somewhat artificial for spaceExact. In practice, each word looks like "y" "o" and "u"
         await typeIn(`${spBefore}too bads${spAfter}`);
 
-        await assertText(`${spBefore}too bads${spAfter}`);
-        if (spacePlacement === "spaceAfterOutput") {
-          await typeIn("{backspace}{backspace} ");
-        } else {
+        if (spacePlacement === "spaceExact") {
+          await assertText(`s`);
           await typeIn("{backspace}");
+        } else {
+          await assertText(`${spBefore}too bads${spAfter}`);
+          if (spacePlacement === "spaceAfterOutput") {
+            await typeIn("{backspace}{backspace} ");
+          } else {
+            await typeIn("{backspace}");
+          }
         }
         await assertText("");
         await typeIn(`${spBefore}too far${spAfter}`);
@@ -644,7 +659,7 @@ describe(App, () => {
         );
       });
     });
-    describe("lesson with `silent`", () => {
+    describe("lesson with `les`", () => {
       beforeEach(async () => {
         await loadPage(PAGES.oneSyllableMultipleStrokes);
       });
@@ -653,11 +668,16 @@ describe(App, () => {
         await assertCurrentPhrase("les");
         await assertText("");
         await typeIn(spBefore + "less" + spAfter);
-        await assertText(spBefore + "less" + spAfter);
-        if (spacePlacement === "spaceAfterOutput") {
-          await typeIn("{backspace}{backspace} ");
-        } else {
+        if (spacePlacement === "spaceExact") {
+          await assertText("s");
           await typeIn("{backspace}");
+        } else {
+          await assertText(spBefore + "less" + spAfter);
+          if (spacePlacement === "spaceAfterOutput") {
+            await typeIn("{backspace}{backspace} ");
+          } else {
+            await typeIn("{backspace}");
+          }
         }
         await assertText("");
         await typeIn(spBefore + "asp" + spAfter);

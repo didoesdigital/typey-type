@@ -1160,7 +1160,11 @@ class App extends Component {
       const buffer = this.markupBuffer;
       this.markupBuffer = [];
       this.updateBufferSingle(null, buffer);
-    }, 16); // 60fps
+    }, this.bufferIntervalMillis());
+  }
+
+  bufferIntervalMillis() {
+    return 16; // 60 fps
   }
 
   updateBufferSingle(actualText, buffer) {
