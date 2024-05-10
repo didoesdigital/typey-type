@@ -5,7 +5,6 @@ const appMethods: AppMethods = {
   changeFlashcardCourseLevel: () => console.log("change flashcard course level"),
   changeFullscreen: () => undefined,
   changeInputForKAOES: () => undefined,
-  changeShowStrokesAs: () => undefined,
   changeShowStrokesAsList: () => undefined,
   changeShowStrokesInLesson: () => undefined,
   changeShowStrokesOnMisstroke: () => undefined,

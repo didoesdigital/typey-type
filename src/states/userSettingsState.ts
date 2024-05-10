@@ -50,3 +50,8 @@ export const showScoresWhileTypingState = atom(
   (get, set, update: boolean) => {
     set(userSettingsState, { ...get(userSettingsState), showScoresWhileTyping: update });
   });
+export const showStrokesAsDiagramsState = atom(
+  (get) => get(userSettingsState).showStrokesAsDiagrams,
+  (get, set, update: boolean) => {
+      set(userSettingsState, { ...get(userSettingsState), showStrokesAsDiagrams: update });
+  });

@@ -1,8 +1,8 @@
 import GoogleAnalytics from "react-ga4";
 import PARAMS from "../../../../utils/params";
 import { writePersonalPreferences } from "../../../../utils/typey-type";
-import { useAtom } from "jotai";
-import { showScoresWhileTypingState } from "../../../../states/userSettingsState";
+import { useAtom, useSetAtom } from "jotai";
+import { showScoresWhileTypingState, showStrokesAsDiagramsState } from "../../../../states/userSettingsState";
 
 /** @type {SpeechSynthesis | null} */
 let synth = null;
@@ -27,34 +27,24 @@ export function useChangeShowScoresWhileTyping() {
 }
 
 // TODO: continue like above in this file
-export function changeShowStrokesAs(event) {
-  let newState = Object.assign({}, this.state.userSettings);
+export function useChangeShowStrokesAs() {
+  const setState = useSetAtom(showStrokesAsDiagramsState);
 
-  const name = "showStrokesAsDiagrams";
-  const value = event.target.value;
+  return (event) => {
+    const value = event.target.value;
+    setState(value !== "strokesAsText");
 
-  if (value === "strokesAsText") {
-    newState[name] = false;
-  } else {
-    newState[name] = true;
+    let labelString = value;
+    if (!value) {
+      labelString = "BAD_INPUT";
+    }
+
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change show strokes as",
+      label: labelString,
+    });
   }
-
-  this.setState({ userSettings: newState }, () => {
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
-
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
-  }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change show strokes as",
-    label: labelString,
-  });
-
-  return value;
 }
 
 export function changeShowStrokesAsList(event) {
