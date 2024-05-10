@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import TypeyTypeIcon from "./Icons/icon-images/TypeyTypeIcon.svg";
 import Icon from "./Icons/Icon";
 
-const Header = ({ fullscreen }: { fullscreen: string }) => {
+const Header = ({ fullscreen }: { fullscreen: boolean }) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     if (mainHeading) {
