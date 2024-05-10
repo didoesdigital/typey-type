@@ -3,30 +3,30 @@ import Game from "./Game";
 import Subheader from "../../../components/Subheader";
 
 import type {
-  FetchAndSetupGlobalDict,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
 } from "../../../types";
+import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
 
 type Props = {
-  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
   globalUserSettings: any;
   userSettings: any;
-  updateMultipleMetWords: (newMetWords: string[]) => void;
 };
 
 export default function Index({
-  fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   metWords,
   globalUserSettings,
   userSettings,
-  updateMultipleMetWords,
 }: Props) {
+  const {
+    appFetchAndSetupGlobalDict,
+    updateMultipleMetWords,
+  } = useAppMethods();
   const mainHeading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -34,10 +34,10 @@ export default function Index({
   }, []);
 
   useEffect(() => {
-    fetchAndSetupGlobalDict(false, null).catch((error) => {
+    appFetchAndSetupGlobalDict(false, null).catch((error: unknown) => {
       console.error(error);
     });
-  }, [fetchAndSetupGlobalDict]);
+  }, [appFetchAndSetupGlobalDict]);
 
   return (
     <main id="main">
@@ -51,7 +51,7 @@ export default function Index({
         </div>
       </Subheader>
       <Game
-        fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
+        fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
         metWords={metWords}
         globalLookupDictionary={globalLookupDictionary}
         globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}

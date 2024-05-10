@@ -10,42 +10,6 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AnnouncerController from "./components/Announcer/AnnouncerController";
 import Announcer from "./components/Announcer/Announcer";
-import setCustomLessonContent from "./pages/lessons/utilities/setCustomLessonContent";
-import customiseLesson from "./pages/lessons/utilities/customiseLesson";
-import generateCustomLesson from "./pages/lessons/custom/generator/utilities/generateCustomLesson";
-import updateMultipleMetWords from "./pages/games/KPOES/updateMultipleMetWords";
-import {
-  changeFlashcardCourseLevel,
-  changeFullscreen
-} from "./pages/lessons/components/UserSettings/updateFlashcardSetting";
-import {
-  changeShowScoresWhileTyping,
-  changeShowStrokesAs,
-  changeShowStrokesAsList,
-  changeShowStrokesOnMisstroke,
-  changeSortOrderUserSetting,
-  changeSpacePlacementUserSetting,
-  changeStenoLayout,
-  changeUserSetting,
-  changeVoiceUserSetting,
-  chooseStudy,
-  handleBeatsPerMinute,
-  handleDiagramSize,
-  handleLimitWordsChange,
-  handleRepetitionsChange,
-  handleStartFromWordChange,
-  handleUpcomingWordsLayout, toggleHideOtherSettings, updatePreset
-} from "./pages/lessons/components/UserSettings/updateUserSetting";
-import {
-  changeShowStrokesInLesson,
-  updateRevisionMaterial
-} from "./pages/lessons/components/UserSettings/updateLessonSetting";
-import {
-  changeInputForKAOES,
-  changeWriterInput, dismissBackupBanner, toggleExperiment
-} from "./pages/lessons/components/UserSettings/updateGlobalUserSetting";
-import fetchAndSetupGlobalDict from "./utils/app/fetchAndSetupGlobalDict";
-import App from "./App";
 import {
   Experiments,
   MaterialItem,
@@ -144,7 +108,6 @@ const AsyncGames = Loadable({
 type Props = {
   appProps: AppProps;
   appState: AppStateForDescendants;
-  appMethods: AppMethods;
 };
 
 type AppProps = {
@@ -251,65 +214,7 @@ type AppStateForDescendants = {
   yourSeenWordCount: number,
   yourMemorisedWordCount: number
 }
-type AppMethods = {
-  appFetchAndSetupGlobalDict: typeof fetchAndSetupGlobalDict,
-  setCustomLessonContent: typeof setCustomLessonContent,
-  customiseLesson: typeof customiseLesson,
-  generateCustomLesson: typeof generateCustomLesson,
-  updateMultipleMetWords: typeof updateMultipleMetWords,
-  changeFlashcardCourseLevel: typeof changeFlashcardCourseLevel,
-  changeFullscreen: typeof changeFullscreen,
-  changeShowScoresWhileTyping: typeof changeShowScoresWhileTyping,
-  changeShowStrokesAs: typeof changeShowStrokesAs,
-  changeShowStrokesAsList: typeof changeShowStrokesAsList,
-  changeShowStrokesInLesson: typeof changeShowStrokesInLesson,
-  changeShowStrokesOnMisstroke: typeof changeShowStrokesOnMisstroke,
-  changeSortOrderUserSetting: typeof changeSortOrderUserSetting,
-  changeSpacePlacementUserSetting: typeof changeSpacePlacementUserSetting,
-  changeStenoLayout: typeof changeStenoLayout,
-  changeUserSetting: typeof changeUserSetting,
-  changeVoiceUserSetting: typeof changeVoiceUserSetting,
-  changeInputForKAOES: typeof changeInputForKAOES,
-  changeWriterInput: typeof changeWriterInput,
-  chooseStudy: typeof chooseStudy,
-  createCustomLesson: typeof App.prototype.createCustomLesson,
-  handleBeatsPerMinute: typeof handleBeatsPerMinute,
-  handleDiagramSize: typeof handleDiagramSize,
-  handleLesson: typeof App.prototype.handleLesson,
-  handleLimitWordsChange: typeof handleLimitWordsChange,
-  handleRepetitionsChange: typeof handleRepetitionsChange,
-  handleStartFromWordChange: typeof handleStartFromWordChange,
-  handleStopLesson: typeof App.prototype.handleStopLesson,
-  handleUpcomingWordsLayout: typeof handleUpcomingWordsLayout,
-  toggleHideOtherSettings: typeof toggleHideOtherSettings,
-  restartLesson: typeof App.prototype.restartLesson,
-  reviseLesson: typeof App.prototype.reviseLesson,
-  sayCurrentPhraseAgain: typeof App.prototype.sayCurrentPhraseAgain,
-  setDictionaryIndex: typeof App.prototype.setDictionaryIndex,
-  setPersonalPreferences: typeof App.prototype.setPersonalPreferences,
-  setUpProgressRevisionLesson: typeof App.prototype.setUpProgressRevisionLesson,
-  setupLesson: typeof App.prototype.setupLesson,
-  startCustomLesson: typeof App.prototype.startCustomLesson,
-  startFromWordOne: typeof App.prototype.startFromWordOne,
-  stopLesson: typeof App.prototype.stopLesson,
-  toggleExperiment: typeof toggleExperiment,
-  dismissBackupBanner: typeof dismissBackupBanner,
-  updateFlashcardsMetWords: typeof App.prototype.updateFlashcardsMetWords,
-  updateFlashcardsProgress: typeof App.prototype.updateFlashcardsProgress,
-  updateFlashcardsRecommendation: typeof App.prototype.updateFlashcardsRecommendation,
-  updateGlobalLookupDictionary: typeof App.prototype.updateGlobalLookupDictionary,
-  updateMarkup: typeof App.prototype.updateMarkup,
-  updateMetWords: typeof App.prototype.updateMetWords,
-  updatePersonalDictionaries: typeof App.prototype.updatePersonalDictionaries,
-  updatePreset: typeof updatePreset,
-  updateRecommendationHistory: typeof App.prototype.updateRecommendationHistory,
-  updateRevisionMaterial: typeof updateRevisionMaterial,
-  updateStartingMetWordsAndCounts: typeof App.prototype.updateStartingMetWordsAndCounts,
-  updateTopSpeedPersonalBest: typeof App.prototype.updateTopSpeedPersonalBest,
-  updateUserGoals: typeof App.prototype.updateUserGoals,
-  updateUserGoalsUnveiled: typeof App.prototype.updateUserGoalsUnveiled,
-}
-const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
+const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
   return (
     <AnnouncerController>
       <Announcer />
@@ -351,8 +256,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                 <DocumentTitle title={"Typey Type | Writer"}>
                   <ErrorBoundary>
                     <AsyncWriter
-                      changeStenoLayout={appMethods.changeStenoLayout}
-                      changeWriterInput={appMethods.changeWriterInput}
                       globalUserSettings={appState.globalUserSettings}
                       userSettings={appState.userSettings}
                       {...props}
@@ -370,18 +273,12 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                 <DocumentTitle title={"Typey Type | Games"}>
                   <ErrorBoundary>
                     <AsyncGames
-                      changeInputForKAOES={appMethods.changeInputForKAOES}
-                      fetchAndSetupGlobalDict={
-                        appMethods.appFetchAndSetupGlobalDict
-                      }
                       globalLookupDictionary={appState.globalLookupDictionary}
                       globalLookupDictionaryLoaded={
                         appState.globalLookupDictionaryLoaded
                       }
                       metWords={appState.metWords}
                       startingMetWordsToday={appState.startingMetWordsToday}
-                      updateMetWords={appMethods.updateMetWords}
-                      updateMultipleMetWords={appMethods.updateMultipleMetWords}
                       globalUserSettings={appState.globalUserSettings}
                       userSettings={appState.userSettings}
                       {...props}
@@ -425,10 +322,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                 <DocumentTitle title={"Typey Type | Progress"}>
                   <ErrorBoundary>
                     <AsyncProgress
-                      changeFlashcardCourseLevel={
-                        appMethods.changeFlashcardCourseLevel
-                      }
-                      setPersonalPreferences={appMethods.setPersonalPreferences}
                       metWords={appState.metWords}
                       flashcardsNextLesson={appState.flashcardsNextLesson}
                       globalUserSettings={appState.globalUserSettings}
@@ -438,20 +331,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                       lessonIndex={appState.lessonIndex}
                       recentLessonHistory={appState.recentLessons.history}
                       startingMetWordsToday={appState.startingMetWordsToday}
-                      updateFlashcardsRecommendation={
-                        appMethods.updateFlashcardsRecommendation
-                      }
-                      updateRecommendationHistory={
-                        appMethods.updateRecommendationHistory
-                      }
-                      updateStartingMetWordsAndCounts={
-                        appMethods.updateStartingMetWordsAndCounts
-                      }
-                      updateUserGoals={appMethods.updateUserGoals}
-                      updateUserGoalsUnveiled={
-                        appMethods.updateUserGoalsUnveiled
-                      }
-                      dismissBackupBanner={appMethods.dismissBackupBanner}
                       userGoals={appState.userGoals}
                       userSettings={appState.userSettings}
                       oldWordsGoalUnveiled={appState.oldWordsGoalUnveiled}
@@ -471,10 +350,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                 <Header fullscreen={appState.fullscreen} />
                 <DocumentTitle title={"Typey Type | Flashcards"}>
                   <AsyncFlashcards
-                    changeFullscreen={appMethods.changeFullscreen}
-                    fetchAndSetupGlobalDict={
-                      appMethods.appFetchAndSetupGlobalDict
-                    }
                     flashcardsMetWords={appState.flashcardsMetWords}
                     flashcardsProgress={appState.flashcardsProgress}
                     fullscreen={appState.fullscreen}
@@ -487,18 +362,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                     locationpathname={appProps.location.pathname}
                     personalDictionaries={appState.personalDictionaries}
                     stenoHintsOnTheFly={appProps.stenohintsonthefly}
-                    updateFlashcardsMetWords={
-                      appMethods.updateFlashcardsMetWords
-                    }
-                    updateFlashcardsProgress={
-                      appMethods.updateFlashcardsProgress
-                    }
-                    updateGlobalLookupDictionary={
-                      appMethods.updateGlobalLookupDictionary
-                    }
-                    updatePersonalDictionaries={
-                      appMethods.updatePersonalDictionaries
-                    }
                     userSettings={appState.userSettings}
                   />
                 </DocumentTitle>
@@ -513,16 +376,12 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                 <DocumentTitle title={"Typey Type | Lookup"}>
                   <ErrorBoundary>
                     <AsyncLookup
-                      fetchAndSetupGlobalDict={
-                        appMethods.appFetchAndSetupGlobalDict
-                      }
                       globalLookupDictionary={appState.globalLookupDictionary}
                       globalLookupDictionaryLoaded={
                         appState.globalLookupDictionaryLoaded
                       }
                       globalUserSettings={appState.globalUserSettings}
                       lookupTerm={appState.lookupTerm}
-                      setCustomLessonContent={appMethods.setCustomLessonContent}
                       userSettings={appState.userSettings}
                       {...props}
                     />
@@ -539,23 +398,12 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                 <DocumentTitle title={"Typey Type | Dictionaries"}>
                   <ErrorBoundary>
                     <AsyncDictionaries
-                      setDictionaryIndex={appMethods.setDictionaryIndex}
-                      fetchAndSetupGlobalDict={
-                        appMethods.appFetchAndSetupGlobalDict
-                      }
                       globalLookupDictionary={appState.globalLookupDictionary}
                       globalLookupDictionaryLoaded={
                         appState.globalLookupDictionaryLoaded
                       }
                       globalUserSettings={appState.globalUserSettings}
                       stenohintsonthefly={appProps.stenohintsonthefly}
-                      toggleExperiment={appMethods.toggleExperiment}
-                      updateGlobalLookupDictionary={
-                        appMethods.updateGlobalLookupDictionary
-                      }
-                      updatePersonalDictionaries={
-                        appMethods.updatePersonalDictionaries
-                      }
                       userSettings={appState.userSettings}
                       dictionaryIndex={appState.dictionaryIndex}
                       {...props}
@@ -573,9 +421,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                 <DocumentTitle title={"Typey Type | Lessons"}>
                   <ErrorBoundary>
                     <Lessons
-                      generateCustomLesson={appMethods.generateCustomLesson}
                       customLesson={appState.customLesson}
-                      customiseLesson={appMethods.customiseLesson}
                       customLessonMaterial={appState.customLessonMaterial}
                       customLessonMaterialValidationState={
                         appState.customLessonMaterialValidationState
@@ -583,66 +429,22 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                       customLessonMaterialValidationMessages={
                         appState.customLessonMaterialValidationMessages
                       }
-                      updateFlashcardsMetWords={
-                        appMethods.updateFlashcardsMetWords
-                      }
-                      updateFlashcardsProgress={
-                        appMethods.updateFlashcardsProgress
-                      }
                       flashcardsMetWords={appState.flashcardsMetWords}
                       flashcardsProgress={appState.flashcardsProgress}
-                      fetchAndSetupGlobalDict={
-                        appMethods.appFetchAndSetupGlobalDict
-                      }
                       globalLookupDictionary={appState.globalLookupDictionary}
                       globalLookupDictionaryLoaded={
                         appState.globalLookupDictionaryLoaded
                       }
                       globalUserSettings={appState.globalUserSettings}
                       personalDictionaries={appState.personalDictionaries}
-                      updateGlobalLookupDictionary={
-                        appMethods.updateGlobalLookupDictionary
-                      }
-                      updatePersonalDictionaries={
-                        appMethods.updatePersonalDictionaries
-                      }
                       lessonNotFound={appState.lessonNotFound}
                       fullscreen={appState.fullscreen}
-                      changeFullscreen={appMethods.changeFullscreen}
-                      restartLesson={appMethods.restartLesson}
-                      reviseLesson={appMethods.reviseLesson}
                       lessonSubTitle={appState.lesson.subtitle}
                       lessonTitle={appState.lesson.title}
-                      handleStopLesson={appMethods.handleStopLesson}
                       lessonIndex={appState.lessonIndex}
                       lesson={appState.lesson}
-                      handleLesson={appMethods.handleLesson}
                       actualText={appState.actualText}
-                      changeShowStrokesInLesson={
-                        appMethods.changeShowStrokesInLesson
-                      }
-                      changeShowStrokesOnMisstroke={
-                        appMethods.changeShowStrokesOnMisstroke
-                      }
-                      changeSortOrderUserSetting={
-                        appMethods.changeSortOrderUserSetting
-                      }
-                      changeSpacePlacementUserSetting={
-                        appMethods.changeSpacePlacementUserSetting
-                      }
-                      changeStenoLayout={appMethods.changeStenoLayout}
-                      changeShowScoresWhileTyping={
-                        appMethods.changeShowScoresWhileTyping
-                      }
-                      changeShowStrokesAs={appMethods.changeShowStrokesAs}
-                      changeShowStrokesAsList={
-                        appMethods.changeShowStrokesAsList
-                      }
-                      changeUserSetting={appMethods.changeUserSetting}
-                      changeVoiceUserSetting={appMethods.changeVoiceUserSetting}
-                      chooseStudy={appMethods.chooseStudy}
                       completedPhrases={appProps.completedMaterial}
-                      createCustomLesson={appMethods.createCustomLesson}
                       currentLessonStrokes={appState.currentLessonStrokes}
                       currentPhraseID={appState.currentPhraseID}
                       currentPhrase={
@@ -652,21 +454,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                         appProps.presentedMaterialCurrentItem.stroke
                       }
                       disableUserSettings={appState.disableUserSettings}
-                      handleBeatsPerMinute={appMethods.handleBeatsPerMinute}
-                      handleDiagramSize={appMethods.handleDiagramSize}
-                      handleLimitWordsChange={appMethods.handleLimitWordsChange}
-                      handleStartFromWordChange={
-                        appMethods.handleStartFromWordChange
-                      }
-                      handleRepetitionsChange={
-                        appMethods.handleRepetitionsChange
-                      }
-                      handleUpcomingWordsLayout={
-                        appMethods.handleUpcomingWordsLayout
-                      }
-                      toggleHideOtherSettings={
-                        appMethods.toggleHideOtherSettings
-                      }
                       metWords={appState.metWords}
                       previousCompletedPhraseAsTyped={
                         appState.previousCompletedPhraseAsTyped
@@ -674,16 +461,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                       recentLessonHistory={appState.recentLessons.history}
                       repetitionsRemaining={appState.repetitionsRemaining}
                       revisionMode={appState.revisionMode}
-                      updateRevisionMaterial={appMethods.updateRevisionMaterial}
-                      sayCurrentPhraseAgain={appMethods.sayCurrentPhraseAgain}
-                      startFromWordOne={appMethods.startFromWordOne}
                       startTime={appState.startTime}
-                      stopLesson={appMethods.stopLesson}
-                      startCustomLesson={appMethods.startCustomLesson}
-                      setUpProgressRevisionLesson={
-                        appMethods.setUpProgressRevisionLesson
-                      }
-                      setupLesson={appMethods.setupLesson}
                       settings={appState.lesson.settings}
                       showStrokesInLesson={appState.showStrokesInLesson}
                       targetStrokeCount={appState.targetStrokeCount}
@@ -713,11 +491,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                         appProps.stateLesson.presentedMaterial.length
                       }
                       upcomingPhrases={appProps.upcomingMaterial}
-                      updatePreset={appMethods.updatePreset}
-                      updateMarkup={appMethods.updateMarkup}
-                      updateTopSpeedPersonalBest={
-                        appMethods.updateTopSpeedPersonalBest
-                      }
                       userSettings={appState.userSettings}
                       {...props}
                     />

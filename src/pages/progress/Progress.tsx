@@ -17,6 +17,7 @@ import Subheader from "../../components/Subheader";
 import { GlobalUserSettings, MetWords, UserSettings } from "../../types";
 import BackupBanner from "./components/BackupBanner";
 import BackupModal from "./components/BackupModal";
+import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
@@ -24,7 +25,6 @@ const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
 let particles: any[] = [];
 
 type Props = {
-  changeFlashcardCourseLevel: any;
   flashcardsNextLesson: any;
   globalUserSettings: GlobalUserSettings;
   lessonIndex: any;
@@ -35,14 +35,7 @@ type Props = {
   recentLessonHistory: any;
   recommendationHistory: any;
   recommendedNextLesson: any;
-  setPersonalPreferences: any;
   startingMetWordsToday: any;
-  updateFlashcardsRecommendation: any;
-  updateRecommendationHistory: any;
-  updateStartingMetWordsAndCounts: any;
-  updateUserGoals: any;
-  updateUserGoalsUnveiled: any;
-  dismissBackupBanner: () => void;
   userGoals: any;
   userSettings: UserSettings;
   yourMemorisedWordCount: any;
@@ -50,6 +43,16 @@ type Props = {
 };
 
 const Progress = (props: Props) => {
+  const {
+    changeFlashcardCourseLevel,
+    setPersonalPreferences,
+    updateFlashcardsRecommendation,
+    updateRecommendationHistory,
+    updateStartingMetWordsAndCounts,
+    updateUserGoals,
+    updateUserGoalsUnveiled,
+    dismissBackupBanner,
+  } = useAppMethods();
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const canvas = useRef(null);
   const firstGoalsRender = useRef(true);
@@ -78,11 +81,11 @@ const Progress = (props: Props) => {
     getLessonIndexData()
       .then((lessonIndex: any) => {
         if (props.recommendationHistory?.["currentStep"] === null) {
-          props.updateRecommendationHistory(
+          updateRecommendationHistory(
             props.recommendationHistory,
             lessonIndex
           );
-          props.updateFlashcardsRecommendation();
+          updateFlashcardsRecommendation();
         }
         setLoadingLessonIndex(false);
       })
@@ -169,7 +172,7 @@ const Progress = (props: Props) => {
 
     if (props.recommendedNextLesson.link?.startsWith("http")) {
       // lets external link open in a new tab
-      props.updateRecommendationHistory(props.recommendationHistory);
+      updateRecommendationHistory(props.recommendationHistory);
     } else {
       setToRecommendedNextLesson(true);
       // does not navigate using link but instead allows Router Redirect
@@ -181,7 +184,7 @@ const Progress = (props: Props) => {
     if (firstRecommendationBoxRender.current) {
       firstRecommendationBoxRender.current = false;
     } else {
-      props.updateRecommendationHistory(props.recommendationHistory);
+      updateRecommendationHistory(props.recommendationHistory);
     }
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -199,7 +202,7 @@ const Progress = (props: Props) => {
       textareas.length > 1 ? textareas[1] : textareas[0]
     ) as HTMLTextAreaElement;
 
-    props.setPersonalPreferences(textareaContents.value);
+    setPersonalPreferences(textareaContents.value);
     setFlashWarning("To update your lesson progress, visit the lessons.");
 
     let numberOfMetWords = "0";
@@ -207,9 +210,9 @@ const Progress = (props: Props) => {
       const parsedMetWords = JSON.parse(textareaContents.value);
       numberOfMetWords = Object.keys(parsedMetWords).length.toString();
 
-      props.updateStartingMetWordsAndCounts(parsedMetWords);
+      updateStartingMetWordsAndCounts(parsedMetWords);
 
-      props.updateUserGoalsUnveiled(false, false);
+      updateUserGoalsUnveiled(false, false);
       setTodayOldWordCount(0);
       setTodayNewWordCount(0);
       setOldWordsGoalMet(false);
@@ -262,7 +265,7 @@ const Progress = (props: Props) => {
         ? false
         : props.newWordsGoalUnveiled;
 
-    props.updateUserGoalsUnveiled(
+    updateUserGoalsUnveiled(
       oldWordsGoalUnveiledToUpdate,
       newWordsGoalUnveiledToUpdate
     );
@@ -276,7 +279,7 @@ const Progress = (props: Props) => {
         ? false
         : newWordsGoalMet;
 
-    props.updateUserGoals(userGoalsToUpdate);
+    updateUserGoals(userGoalsToUpdate);
 
     setOldWordsGoalMet(oldWordsGoalMetToUpdate);
     setNewWordsGoalMet(newWordsGoalMetToUpdate);
@@ -440,12 +443,12 @@ const Progress = (props: Props) => {
 
         <FlashcardsSection
           showOnSmallScreen={true}
-          changeFlashcardCourseLevel={props.changeFlashcardCourseLevel}
+          changeFlashcardCourseLevel={changeFlashcardCourseLevel}
           flashcardsCourseLevel={props.globalUserSettings.flashcardsCourseLevel}
           flashcardsNextLesson={props.flashcardsNextLesson}
           loadingLessonIndex={loadingLessonIndex}
           skipButtonId={mobileSkipButtonId}
-          updateFlashcardsRecommendation={props.updateFlashcardsRecommendation}
+          updateFlashcardsRecommendation={updateFlashcardsRecommendation}
         />
 
         <div className={`p3 mx-auto mw-1024 mt3`}>
@@ -481,7 +484,7 @@ const Progress = (props: Props) => {
 
           <BackupBanner
             dismissedTime={props.globalUserSettings.backupBannerDismissedTime}
-            dismiss={props.dismissBackupBanner}
+            dismiss={dismissBackupBanner}
           />
 
           <ProgressSummaryAndLinks
@@ -501,7 +504,7 @@ const Progress = (props: Props) => {
                   startRecommendedStep={startRecommendedStep.bind(this)}
                   recommendationHistory={props.recommendationHistory}
                   updateRecommendationHistory={
-                    props.updateRecommendationHistory
+                    updateRecommendationHistory
                   }
                 />
               </ErrorBoundary>
@@ -527,7 +530,7 @@ const Progress = (props: Props) => {
                 startingMetWordsToday={props.startingMetWordsToday}
                 todayNewWordCount={todayNewWordCount}
                 todayOldWordCount={todayOldWordCount}
-                updateUserGoalsUnveiled={props.updateUserGoalsUnveiled}
+                updateUserGoalsUnveiled={updateUserGoalsUnveiled}
                 userGoalInputOldWords={userGoalInputOldWords}
                 userGoalInputNewWords={userGoalInputNewWords}
                 userGoals={props.userGoals}
@@ -552,7 +555,7 @@ const Progress = (props: Props) => {
               </ErrorBoundary>
               <FlashcardsSection
                 showOnSmallScreen={false}
-                changeFlashcardCourseLevel={props.changeFlashcardCourseLevel}
+                changeFlashcardCourseLevel={changeFlashcardCourseLevel}
                 flashcardsCourseLevel={
                   props.globalUserSettings.flashcardsCourseLevel
                 }
@@ -560,7 +563,7 @@ const Progress = (props: Props) => {
                 loadingLessonIndex={loadingLessonIndex}
                 skipButtonId={skipButtonId}
                 updateFlashcardsRecommendation={
-                  props.updateFlashcardsRecommendation
+                  updateFlashcardsRecommendation
                 }
               />
             </div>

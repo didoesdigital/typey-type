@@ -1,14 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import Game from "./Game";
 import Subheader from "../../../components/Subheader";
+import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
 
 export default function Index({
-  fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   startingMetWordsToday,
-  updateMetWords,
 }) {
+  const {
+    appFetchAndSetupGlobalDict,
+    updateMetWords
+  } = useAppMethods();
   const mainHeading = useRef(null);
   useEffect(() => {
     if (mainHeading) {
@@ -17,10 +20,10 @@ export default function Index({
   }, []);
 
   useEffect(() => {
-    fetchAndSetupGlobalDict(false, null).catch((error) => {
+    appFetchAndSetupGlobalDict(false, null).catch((error) => {
       console.error(error);
     });
-  }, [fetchAndSetupGlobalDict]);
+  }, [appFetchAndSetupGlobalDict]);
 
   return (
     <main id="main">

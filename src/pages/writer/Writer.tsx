@@ -26,10 +26,9 @@ import { fetchResource } from '../../utils/getData';
 import Subheader from "../../components/Subheader";
 
 import type { Outline, UserSettings } from "../../types";
+import { WithAppMethods, withAppMethods } from "../../states/legacy/AppMethodsContext";
 
 type Props = {
-  changeStenoLayout: (event: any) => string,
-  changeWriterInput: (event: any) => void,
   userSettings: UserSettings,
   globalUserSettings: any,
   // stenoHintsOnTheFly: boolean
@@ -50,7 +49,7 @@ type StenoLayout = {
 
 type MapBriefToKeys = (brief: Outline) => StenoLayout
 
-class Writer extends Component<Props, State> {
+class Writer extends Component<WithAppMethods<Props>, State> {
   state: State = {
     stenoBrief: '',
     stenoStroke: new Stroke(),
@@ -366,7 +365,7 @@ class Writer extends Component<Props, State> {
               </div>
               <div className="mb2 mw-240">
                 <label className="mb1 db" htmlFor="stenoLayout">Steno layout</label>
-                <select id="stenoLayout" name="writerStenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} className="text-small form-control w6">
+                <select id="stenoLayout" name="writerStenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.appMethods.changeStenoLayout} className="text-small form-control w6">
                   <option value="stenoLayoutAmericanSteno">Ward Stone Ireland (Plover, EcoSteno, SOFT/HRUF etc.)</option>
                   <option value="stenoLayoutNoNumberBarInnerThumbNumbers">Inner thumbers (TinyMod, Steko, etc.)</option>
                   <option value="stenoLayoutNoNumberBarOuterThumbNumbers">Outer thumbers (Uni, Georgi, etc.)</option>
@@ -385,14 +384,14 @@ class Writer extends Component<Props, State> {
                     <div className="flex flex-wrap justify-between">
                       <p className="radio mr3">
                         <label htmlFor="raw" className="mb1">
-                          <input type="radio" name="raw" id="raw" onChange={this.props.changeWriterInput} checked={this.props.globalUserSettings.writerInput === "raw"} /> Raw
+                          <input type="radio" name="raw" id="raw" onChange={this.props.appMethods.changeWriterInput} checked={this.props.globalUserSettings.writerInput === "raw"} /> Raw
                         </label>
                       </p>
                     </div>
                     <div className="flex flex-wrap justify-between">
                       <p className="radio mr3">
                         <label htmlFor="qwerty" className="mb1">
-                          <input type="radio" name="qwerty" id="qwerty" onChange={this.props.changeWriterInput} checked={this.props.globalUserSettings.writerInput === "qwerty"} /> QWERTY
+                          <input type="radio" name="qwerty" id="qwerty" onChange={this.props.appMethods.changeWriterInput} checked={this.props.globalUserSettings.writerInput === "qwerty"} /> QWERTY
                         </label>
                       </p>
                     </div>
@@ -409,4 +408,4 @@ class Writer extends Component<Props, State> {
   }
 }
 
-export default Writer;
+export default withAppMethods(Writer);

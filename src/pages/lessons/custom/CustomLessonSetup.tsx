@@ -7,27 +7,27 @@ import CustomWordListLesson from "./components/CustomWordListLesson";
 import Subheader from "../../../components/Subheader";
 
 import type { CustomLessonMaterialValidationState } from "./components/CustomLessonIntro";
-import { FetchAndSetupGlobalDict } from "../../../types";
+import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
 
 type Props = {
-  createCustomLesson: () => void;
   customLessonMaterial: any;
   customLessonMaterialValidationState: CustomLessonMaterialValidationState;
   customLessonMaterialValidationMessages: string[];
-  fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: any;
   globalLookupDictionaryLoaded: boolean;
 };
 
 const CustomLessonSetup = ({
-  createCustomLesson,
   customLessonMaterial,
   customLessonMaterialValidationMessages,
   customLessonMaterialValidationState,
-  fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
 }: Props) => {
+  const {
+    createCustomLesson,
+    appFetchAndSetupGlobalDict,
+  } = useAppMethods()
   const mainHeading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -40,13 +40,13 @@ const CustomLessonSetup = ({
       globalLookupDictionary.size < 2 &&
       !globalLookupDictionaryLoaded
     ) {
-      fetchAndSetupGlobalDict(false).catch((error) => {
+      appFetchAndSetupGlobalDict(false).catch((error: unknown) => {
         console.error(error);
         // this.showDictionaryErrorNotification();
       });
     }
   }, [
-    fetchAndSetupGlobalDict,
+    appFetchAndSetupGlobalDict,
     globalLookupDictionary,
     globalLookupDictionaryLoaded,
   ]);

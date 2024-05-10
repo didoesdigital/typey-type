@@ -78,6 +78,7 @@ import {
 import AppRoutes from './AppRoutes';
 import applyQueryParamsToUserSettings from './pages/lessons/components/UserSettings/applyQueryParamsToUserSettings';
 import removeIgnoredCharsFromSplitText from './utils/app/removeIgnoredCharsFromSplitText';
+import AppMethodsContext from "./states/legacy/AppMethodsContext";
 
 /** @type {SpeechSynthesis | null} */
 let synth = null;
@@ -1443,16 +1444,8 @@ class App extends Component {
     return (
       <div id="js-app" className="app">
         <div className="flex flex-column justify-between min-vh-100">
-          <AppRoutes
-            appProps={{
-              location: this.props.location,
-              completedMaterial,
-              presentedMaterialCurrentItem,
-              stateLesson,
-              stenohintsonthefly,
-              upcomingMaterial
-            }}
-            appMethods={{
+          <AppMethodsContext.Provider value={
+            {
               appFetchAndSetupGlobalDict: this.appFetchAndSetupGlobalDict,
               setCustomLessonContent: setCustomLessonContent.bind(this),
               customiseLesson: customiseLesson.bind(this),
@@ -1509,9 +1502,20 @@ class App extends Component {
               updateTopSpeedPersonalBest: this.updateTopSpeedPersonalBest.bind(this),
               updateUserGoals: this.updateUserGoals.bind(this),
               updateUserGoalsUnveiled: this.updateUserGoalsUnveiled.bind(this),
-            }}
-            appState={this.state}
-          />
+            }
+          }>
+            <AppRoutes
+              appProps={{
+                location: this.props.location,
+                completedMaterial,
+                presentedMaterialCurrentItem,
+                stateLesson,
+                stenohintsonthefly,
+                upcomingMaterial
+              }}
+              appState={this.state}
+            />
+          </AppMethodsContext.Provider>
         </div>
       </div>
     );
