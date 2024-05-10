@@ -55,11 +55,11 @@ import {
   UserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
-  ImportedPersonalDictionaries,
-  CurrentLessonStrokes, ActualTypedText
+  CurrentLessonStrokes, ActualTypedText, PersonalDictionaryNameAndContents
 } from "./types";
 import { Location } from "history";
 import { CustomLessonMaterialValidationState } from "./pages/lessons/custom/components/CustomLessonIntro";
+import { RecentLessonHistoryItem } from "./pages/progress/components/RecentLessons";
 
 const AsyncBreak = Loadable({
   loader: () => import("./pages/break/Break"),
@@ -166,7 +166,7 @@ type AppStateForDescendants = {
   customLessonMaterial: string,
   customLessonMaterialValidationMessages: string[],
   customLessonMaterialValidationState: CustomLessonMaterialValidationState,
-  customLesson: unknown,
+  customLesson: Lesson,
   actualText: ActualTypedText,
   dictionaryIndex: unknown, // TODO: type like [{
 //   "title": "Dictionary",
@@ -202,7 +202,7 @@ type AppStateForDescendants = {
 // isGlobalLookupDictionaryLoaded: false,
   lookupTerm: string,
   recommendationHistory: unknown // TODO: type like { currentStep: null },
-  personalDictionaries: ImportedPersonalDictionaries,
+  personalDictionaries: PersonalDictionaryNameAndContents[],
   previousCompletedPhraseAsTyped: ActualTypedText,
   repetitionsRemaining: number,
   startTime: Date,
@@ -236,7 +236,7 @@ type AppStateForDescendants = {
 //   "subcategory": "",
 //   "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
 // }],
-  recentLessons: { history: unknown },
+  recentLessons: { history: RecentLessonHistoryItem[] },
   recommendedNextLesson: unknown, // TODO type like {
 //   studyType: "practice",
 //   limitNumberOfWords: 50,
@@ -606,7 +606,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                       updatePersonalDictionaries={
                         appMethods.updatePersonalDictionaries
                       }
-                      lessonsProgress={appState.lessonsProgress}
                       lessonNotFound={appState.lessonNotFound}
                       fullscreen={appState.fullscreen}
                       changeFullscreen={appMethods.changeFullscreen}
@@ -614,7 +613,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                       reviseLesson={appMethods.reviseLesson}
                       lessonSubTitle={appState.lesson.subtitle}
                       lessonTitle={appState.lesson.title}
-                      path={appState.lesson.path}
                       handleStopLesson={appMethods.handleStopLesson}
                       lessonIndex={appState.lessonIndex}
                       lesson={appState.lesson}
@@ -680,7 +678,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
                       sayCurrentPhraseAgain={appMethods.sayCurrentPhraseAgain}
                       startFromWordOne={appMethods.startFromWordOne}
                       startTime={appState.startTime}
-                      stenoHintsOnTheFly={appProps.stenohintsonthefly}
                       stopLesson={appMethods.stopLesson}
                       startCustomLesson={appMethods.startCustomLesson}
                       setUpProgressRevisionLesson={

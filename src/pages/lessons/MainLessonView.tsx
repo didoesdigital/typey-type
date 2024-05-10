@@ -51,7 +51,7 @@ type Props = {
   changeVoiceUserSetting: (voiceName: string, voiceURI: string) => void;
   chooseStudy: () => void;
   completedPhrases: MaterialText[];
-  currentLessonStrokes: CurrentLessonStrokes;
+  currentLessonStrokes: CurrentLessonStrokes[];
   currentPhrase: MaterialText;
   currentPhraseID: number;
   currentStroke: Outline;

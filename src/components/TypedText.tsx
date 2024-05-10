@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import GoogleAnalytics from "react-ga4";
-import { UserSettings } from "../types";
+import { CurrentLessonStrokes, UserSettings } from "../types";
 
 type Props = {
   actualText: string;
   completedPhrases: any;
-  currentLessonStrokes: any;
+  currentLessonStrokes: CurrentLessonStrokes[];
   currentPhrase: string;
   previousCompletedPhraseAsTyped: string;
   sayCurrentPhraseAgain: () => void;
