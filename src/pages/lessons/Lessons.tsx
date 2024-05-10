@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { ComponentProps } from "react";
+import { Route, RouteComponentProps, Switch } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import Lesson from "./Lesson";
@@ -8,17 +8,14 @@ import CustomLessonSetup from "./custom/CustomLessonSetup";
 import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 
-type LessonsRoutingProps = {
-  customiseLesson: () => void;
-  customLesson: any;
-  generateCustomLesson: any;
-  handleLesson: any;
-  lesson: any;
-  lessonIndex: any;
-  match: any;
-  stopLesson: any;
-  [key: string]: any;
-};
+type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
+type LessonsRoutingProps = Optional<
+  & RouteComponentProps
+  & ComponentProps<typeof Lesson>
+  & ComponentProps<typeof CustomLessonSetup>
+  & ComponentProps<typeof AsyncCustomLessonGenerator>
+  // TODO: check this. it's not passed from parent
+  , "lessonLength">
 
 const AsyncCustomLessonGenerator = Loadable({
   loader: () => import("./custom/CustomLessonGenerator"),
@@ -159,6 +156,7 @@ const Lessons = ({
             toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            // @ts-expect-error
             lessonLength={lessonLength}
             lessonNotFound={lessonNotFound}
             lessonSubTitle={lessonSubTitle}
@@ -246,6 +244,7 @@ const Lessons = ({
             toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            // @ts-expect-error
             lessonLength={lessonLength}
             lessonNotFound={lessonNotFound}
             lessonSubTitle={lessonSubTitle}
@@ -333,6 +332,7 @@ const Lessons = ({
             toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            // @ts-expect-error
             lessonLength={lessonLength}
             lessonNotFound={lessonNotFound}
             lessonSubTitle={lessonSubTitle}
@@ -420,6 +420,7 @@ const Lessons = ({
             toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            // @ts-expect-error
             lessonLength={lessonLength}
             lessonNotFound={lessonNotFound}
             lessonSubTitle={lessonSubTitle}
@@ -507,6 +508,7 @@ const Lessons = ({
             toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            // @ts-expect-error
             lessonLength={lessonLength}
             lessonNotFound={lessonNotFound}
             lessonSubTitle={lessonSubTitle}
@@ -594,6 +596,7 @@ const Lessons = ({
             toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            // @ts-expect-error
             lessonLength={lessonLength}
             lessonNotFound={lessonNotFound}
             lessonSubTitle={lessonSubTitle}
@@ -682,6 +685,7 @@ const Lessons = ({
             toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            // @ts-expect-error
             lessonLength={lessonLength}
             lessonNotFound={lessonNotFound}
             lessonSubTitle={lessonSubTitle}
@@ -770,6 +774,7 @@ const Lessons = ({
             toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            // @ts-expect-error
             lessonLength={lessonLength}
             lessonNotFound={lessonNotFound}
             lessonSubTitle={lessonSubTitle}
@@ -858,6 +863,7 @@ const Lessons = ({
             toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            // @ts-expect-error
             lessonLength={lessonLength}
             lessonNotFound={lessonNotFound}
             lessonSubTitle={lessonSubTitle}
@@ -987,6 +993,7 @@ const Lessons = ({
             toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            // @ts-expect-error
             lessonLength={lessonLength}
             lessonNotFound={lessonNotFound}
             lessonSubTitle={lessonSubTitle}
@@ -1075,6 +1082,7 @@ const Lessons = ({
             toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            // @ts-expect-error
             lessonLength={lessonLength}
             lessonNotFound={lessonNotFound}
             lessonSubTitle={lessonSubTitle}
@@ -1163,6 +1171,7 @@ const Lessons = ({
             toggleHideOtherSettings={toggleHideOtherSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
+            // @ts-expect-error
             lessonLength={lessonLength}
             lessonNotFound={lessonNotFound}
             lessonSubTitle={lessonSubTitle}

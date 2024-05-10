@@ -41,7 +41,7 @@ export type LessonProps = {
   changeVoiceUserSetting: (voiceName: string, voiceURI: string) => void;
   chooseStudy: () => void;
   completedPhrases: any;
-  currentLessonStrokes: CurrentLessonStrokes;
+  currentLessonStrokes: CurrentLessonStrokes[];
   currentPhrase: string;
   currentPhraseID: number;
   currentStroke: string;
