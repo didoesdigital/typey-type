@@ -10,6 +10,56 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AnnouncerController from "./components/Announcer/AnnouncerController";
 import Announcer from "./components/Announcer/Announcer";
+import setCustomLessonContent from "./pages/lessons/utilities/setCustomLessonContent";
+import customiseLesson from "./pages/lessons/utilities/customiseLesson";
+import generateCustomLesson from "./pages/lessons/custom/generator/utilities/generateCustomLesson";
+import updateMultipleMetWords from "./pages/games/KPOES/updateMultipleMetWords";
+import {
+  changeFlashcardCourseLevel,
+  changeFullscreen
+} from "./pages/lessons/components/UserSettings/updateFlashcardSetting";
+import {
+  changeShowScoresWhileTyping,
+  changeShowStrokesAs,
+  changeShowStrokesAsList,
+  changeShowStrokesOnMisstroke,
+  changeSortOrderUserSetting,
+  changeSpacePlacementUserSetting,
+  changeStenoLayout,
+  changeUserSetting,
+  changeVoiceUserSetting,
+  chooseStudy,
+  handleBeatsPerMinute,
+  handleDiagramSize,
+  handleLimitWordsChange,
+  handleRepetitionsChange,
+  handleStartFromWordChange,
+  handleUpcomingWordsLayout, toggleHideOtherSettings, updatePreset
+} from "./pages/lessons/components/UserSettings/updateUserSetting";
+import {
+  changeShowStrokesInLesson,
+  updateRevisionMaterial
+} from "./pages/lessons/components/UserSettings/updateLessonSetting";
+import {
+  changeInputForKAOES,
+  changeWriterInput, dismissBackupBanner, toggleExperiment
+} from "./pages/lessons/components/UserSettings/updateGlobalUserSetting";
+import fetchAndSetupGlobalDict from "./utils/app/fetchAndSetupGlobalDict";
+import App from "./App";
+import {
+  Experiments,
+  MaterialItem,
+  MaterialText,
+  Lesson,
+  GlobalUserSettings,
+  UserSettings,
+  LookupDictWithNamespacedDictsAndConfig,
+  MetWords,
+  ImportedPersonalDictionaries,
+  CurrentLessonStrokes, ActualTypedText
+} from "./types";
+import { Location } from "history";
+import { CustomLessonMaterialValidationState } from "./pages/lessons/custom/components/CustomLessonIntro";
 
 const AsyncBreak = Loadable({
   loader: () => import("./pages/break/Break"),
@@ -91,7 +141,175 @@ const AsyncGames = Loadable({
 //   loading: PageLoading,
 // });
 
-const AppRoutes = ({ appProps, appState, appMethods }) => {
+type Props = {
+  appProps: AppProps;
+  appState: AppStateForDescendants;
+  appMethods: AppMethods;
+};
+
+type AppProps = {
+  location: Location,
+  completedMaterial: MaterialText[],
+  presentedMaterialCurrentItem: MaterialItem,
+  stateLesson: Lesson,
+  stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">,
+  upcomingMaterial: unknown,
+}
+/**
+ * This is based on state initialization in App.tsx.
+ * This type only reflects App's state that is needed by descendants.
+ */
+type AppStateForDescendants = {
+// currentPhraseAttempts: [],
+  currentPhraseID: number,
+  currentLessonStrokes: CurrentLessonStrokes[],
+  customLessonMaterial: string,
+  customLessonMaterialValidationMessages: string[],
+  customLessonMaterialValidationState: CustomLessonMaterialValidationState,
+  customLesson: unknown,
+  actualText: ActualTypedText,
+  dictionaryIndex: unknown, // TODO: type like [{
+//   "title": "Dictionary",
+//   "author": "Typey Type",
+//   "category": "Typey Type",
+//   "tagline": "Typey Type’s dictionary is a version of the Plover di  ctionary with misstrokes removed for the top 10,000 words.",
+//   "subcategory": "",
+//   "link": "/support#typey-type-dictionary",
+//   "path": "/dictionaries/typey-type/typey-type.json"
+// }],
+  flashcardsMetWords: unknown, // TODO: type like {
+//   "the": {
+//     phrase: "the",
+//     stroke: "-T",
+//     rung: 0,
+//   },
+// },
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig,
+  globalLookupDictionaryLoaded: boolean,
+  lessonNotFound: boolean,
+  lessonsProgress: unknown,
+  flashcardsProgress: unknown,
+  flashcardsNextLesson: unknown, // TODO: type like {
+//   lastSeen: Date.now(), // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
+//   linkTitle: "Loading…",
+//   linkText: "Study",
+//   link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
+// },
+// flashcardsCourseIndex: 0,
+  fullscreen: boolean,
+  globalUserSettings: GlobalUserSettings,
+// isPloverDictionaryLoaded: false,
+// isGlobalLookupDictionaryLoaded: false,
+  lookupTerm: string,
+  recommendationHistory: unknown // TODO: type like { currentStep: null },
+  personalDictionaries: ImportedPersonalDictionaries,
+  previousCompletedPhraseAsTyped: ActualTypedText,
+  repetitionsRemaining: number,
+  startTime: Date,
+  showStrokesInLesson: boolean,
+  targetStrokeCount: number,
+  timer: number,
+  topSpeedPersonalBest: number,
+  totalNumberOfMatchedWords: number,
+// numberOfMatchedChars: 0,
+// totalNumberOfMatchedChars: 0,
+  totalNumberOfNewWordsMet: number,
+  totalNumberOfLowExposuresSeen: number,
+  totalNumberOfRetainedWords: number,
+  totalNumberOfMistypedWords: number,
+  totalNumberOfHintedWords: number,
+  disableUserSettings: boolean,
+  metWords: MetWords,
+  revisionMode: boolean,
+  oldWordsGoalUnveiled: boolean,
+  newWordsGoalUnveiled: boolean,
+  userGoals: unknown // TODO type like {
+//   newWords: 15,
+//   oldWords: 50
+// },
+  userSettings: UserSettings,
+  lesson: Lesson,
+  lessonIndex: unknown, // TODO type like {
+//   "title": "Steno",
+//   "subtitle": "",
+//   "category": "Drills",
+//   "subcategory": "",
+//   "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
+// }],
+  recentLessons: { history: unknown },
+  recommendedNextLesson: unknown, // TODO type like {
+//   studyType: "practice",
+//   limitNumberOfWords: 50,
+//   repetitions: 1,
+//   linkTitle: "Top 10000 Project Gutenberg words",
+//   linkText: "Practice 150 words from Top 10000 Project Gutenberg wo  rds",
+// link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&" + PARAMS.practiceParams
+// },
+// revisionMaterial: [
+// ],
+  startingMetWordsToday: MetWords,
+  yourSeenWordCount: number,
+  yourMemorisedWordCount: number
+}
+type AppMethods = {
+  appFetchAndSetupGlobalDict: typeof fetchAndSetupGlobalDict,
+  setCustomLessonContent: typeof setCustomLessonContent,
+  customiseLesson: typeof customiseLesson,
+  generateCustomLesson: typeof generateCustomLesson,
+  updateMultipleMetWords: typeof updateMultipleMetWords,
+  changeFlashcardCourseLevel: typeof changeFlashcardCourseLevel,
+  changeFullscreen: typeof changeFullscreen,
+  changeShowScoresWhileTyping: typeof changeShowScoresWhileTyping,
+  changeShowStrokesAs: typeof changeShowStrokesAs,
+  changeShowStrokesAsList: typeof changeShowStrokesAsList,
+  changeShowStrokesInLesson: typeof changeShowStrokesInLesson,
+  changeShowStrokesOnMisstroke: typeof changeShowStrokesOnMisstroke,
+  changeSortOrderUserSetting: typeof changeSortOrderUserSetting,
+  changeSpacePlacementUserSetting: typeof changeSpacePlacementUserSetting,
+  changeStenoLayout: typeof changeStenoLayout,
+  changeUserSetting: typeof changeUserSetting,
+  changeVoiceUserSetting: typeof changeVoiceUserSetting,
+  changeInputForKAOES: typeof changeInputForKAOES,
+  changeWriterInput: typeof changeWriterInput,
+  chooseStudy: typeof chooseStudy,
+  createCustomLesson: typeof App.prototype.createCustomLesson,
+  handleBeatsPerMinute: typeof handleBeatsPerMinute,
+  handleDiagramSize: typeof handleDiagramSize,
+  handleLesson: typeof App.prototype.handleLesson,
+  handleLimitWordsChange: typeof handleLimitWordsChange,
+  handleRepetitionsChange: typeof handleRepetitionsChange,
+  handleStartFromWordChange: typeof handleStartFromWordChange,
+  handleStopLesson: typeof App.prototype.handleStopLesson,
+  handleUpcomingWordsLayout: typeof handleUpcomingWordsLayout,
+  toggleHideOtherSettings: typeof toggleHideOtherSettings,
+  restartLesson: typeof App.prototype.restartLesson,
+  reviseLesson: typeof App.prototype.reviseLesson,
+  sayCurrentPhraseAgain: typeof App.prototype.sayCurrentPhraseAgain,
+  setDictionaryIndex: typeof App.prototype.setDictionaryIndex,
+  setPersonalPreferences: typeof App.prototype.setPersonalPreferences,
+  setUpProgressRevisionLesson: typeof App.prototype.setUpProgressRevisionLesson,
+  setupLesson: typeof App.prototype.setupLesson,
+  startCustomLesson: typeof App.prototype.startCustomLesson,
+  startFromWordOne: typeof App.prototype.startFromWordOne,
+  stopLesson: typeof App.prototype.stopLesson,
+  toggleExperiment: typeof toggleExperiment,
+  dismissBackupBanner: typeof dismissBackupBanner,
+  updateFlashcardsMetWords: typeof App.prototype.updateFlashcardsMetWords,
+  updateFlashcardsProgress: typeof App.prototype.updateFlashcardsProgress,
+  updateFlashcardsRecommendation: typeof App.prototype.updateFlashcardsRecommendation,
+  updateGlobalLookupDictionary: typeof App.prototype.updateGlobalLookupDictionary,
+  updateMarkup: typeof App.prototype.updateMarkup,
+  updateMetWords: typeof App.prototype.updateMetWords,
+  updatePersonalDictionaries: typeof App.prototype.updatePersonalDictionaries,
+  updatePreset: typeof updatePreset,
+  updateRecommendationHistory: typeof App.prototype.updateRecommendationHistory,
+  updateRevisionMaterial: typeof updateRevisionMaterial,
+  updateStartingMetWordsAndCounts: typeof App.prototype.updateStartingMetWordsAndCounts,
+  updateTopSpeedPersonalBest: typeof App.prototype.updateTopSpeedPersonalBest,
+  updateUserGoals: typeof App.prototype.updateUserGoals,
+  updateUserGoalsUnveiled: typeof App.prototype.updateUserGoalsUnveiled,
+}
+const AppRoutes: React.FC<Props> = ({ appProps, appState, appMethods }) => {
   return (
     <AnnouncerController>
       <Announcer />
@@ -212,8 +430,6 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                       }
                       setPersonalPreferences={appMethods.setPersonalPreferences}
                       metWords={appState.metWords}
-                      flashcardsMetWords={appState.flashcardsMetWords}
-                      flashcardsProgress={appState.flashcardsProgress}
                       flashcardsNextLesson={appState.flashcardsNextLesson}
                       globalUserSettings={appState.globalUserSettings}
                       recommendationHistory={appState.recommendationHistory}
@@ -476,7 +692,8 @@ const AppRoutes = ({ appProps, appState, appMethods }) => {
                       targetStrokeCount={appState.targetStrokeCount}
                       timer={appState.timer}
                       topSpeedPersonalBest={appState.topSpeedPersonalBest}
-                      updateUserGoals={appState.updateUserGoals}
+                      // TODO: typo of appMethods? Anyway Lesson seems to not use it. Remove?
+                      // updateUserGoals={appState.updateUserGoals}
                       totalNumberOfMatchedWords={
                         appState.totalNumberOfMatchedWords
                       }

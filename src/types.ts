@@ -68,7 +68,7 @@ export type DictName = string;
  */
 export type PersonalDictionaryNameAndContents = [DictName, StenoDictionary];
 
-type ImportedPersonalDictionaries = {
+export type ImportedPersonalDictionaries = {
   dictionariesNamesAndContents: PersonalDictionaryNameAndContents[];
 };
 
