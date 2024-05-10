@@ -9,7 +9,6 @@ import {
   changeFullscreen
 } from "../../pages/lessons/components/UserSettings/updateFlashcardSetting";
 import {
-  changeShowStrokesOnMisstroke,
   changeSortOrderUserSetting,
   changeSpacePlacementUserSetting,
   changeStenoLayout,
@@ -43,7 +42,6 @@ export type AppMethods = {
   changeFlashcardCourseLevel: typeof changeFlashcardCourseLevel,
   changeFullscreen: typeof changeFullscreen,
   changeShowStrokesInLesson: typeof changeShowStrokesInLesson,
-  changeShowStrokesOnMisstroke: typeof changeShowStrokesOnMisstroke,
   changeSortOrderUserSetting: typeof changeSortOrderUserSetting,
   changeSpacePlacementUserSetting: typeof changeSpacePlacementUserSetting,
   changeStenoLayout: typeof changeStenoLayout,

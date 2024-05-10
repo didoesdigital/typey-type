@@ -14,7 +14,7 @@ import { userSettingsState } from "../../../../states/userSettingsState";
 import {
   useChangeShowScoresWhileTyping,
   useChangeShowStrokesAs,
-  useChangeShowStrokesAsList
+  useChangeShowStrokesAsList, useChangeShowStrokesOnMisstroke
 } from "./updateUserSetting";
 
 const grabStyle = function () {
@@ -35,7 +35,6 @@ const UserSettings = ({
   totalWordCount,
 }: Props) => {
   const {
-    changeShowStrokesOnMisstroke,
     changeSortOrderUserSetting,
     changeSpacePlacementUserSetting,
     changeStenoLayout,
@@ -52,6 +51,7 @@ const UserSettings = ({
   const changeShowScoresWhileTyping = useChangeShowScoresWhileTyping()
   const changeShowStrokesAs = useChangeShowStrokesAs();
   const changeShowStrokesAsList = useChangeShowStrokesAsList()
+  const changeShowStrokesOnMisstroke = useChangeShowStrokesOnMisstroke();
   const announceTooltip = useAnnounceTooltip();
 
   return (

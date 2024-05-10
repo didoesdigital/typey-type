@@ -6,7 +6,6 @@ const appMethods: AppMethods = {
   changeFullscreen: () => undefined,
   changeInputForKAOES: () => undefined,
   changeShowStrokesInLesson: () => undefined,
-  changeShowStrokesOnMisstroke: () => undefined,
   changeSortOrderUserSetting: () => undefined,
   changeSpacePlacementUserSetting: () => undefined,
   changeStenoLayout: () => console.log("change steno layout"),

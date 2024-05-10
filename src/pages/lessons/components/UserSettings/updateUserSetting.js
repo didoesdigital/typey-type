@@ -5,7 +5,7 @@ import { useAtom, useSetAtom } from "jotai";
 import {
   showScoresWhileTypingState,
   showStrokesAsDiagramsState,
-  showStrokesAsListState
+  showStrokesAsListState, showStrokesOnMisstrokeState
 } from "../../../../states/userSettingsState";
 import { useAppMethods } from "../../../../states/legacy/AppMethodsContext";
 
@@ -78,32 +78,18 @@ export function useChangeShowStrokesAsList() {
   }
 }
 
-export function changeShowStrokesOnMisstroke(event) {
-  let newState = Object.assign({}, this.state.userSettings);
+export function useChangeShowStrokesOnMisstroke() {
+  const [state, setState] = useAtom(showStrokesOnMisstrokeState);
+  return (event) => {
+    const value = !state;
+    setState(value);
 
-  const name = "showStrokesOnMisstroke";
-  const value = event.target.value;
-
-  newState[name] = !newState[name];
-
-  this.setState({ userSettings: newState }, () => {
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
-
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
-  } else {
-    labelString = value.toString();
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change show strokes on misstroke",
+      label: value.toString(),
+    });
   }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change show strokes on misstroke",
-    label: labelString,
-  });
-
-  return value;
 }
 
 export function changeSortOrderUserSetting(event) {

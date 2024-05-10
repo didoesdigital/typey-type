@@ -39,24 +39,18 @@ export const userSettingsState = atomWithStorage<UserSettings>("userSettings", {
     hideOtherSettings: false,
   });
 
+const subFieldAtom = (field: keyof UserSettings) => atom(
+  (get) => get(userSettingsState)[field],
+  (get, set, update: any) => {
+    set(userSettingsState, { ...get(userSettingsState), [field]: update });
+  });
 
 export const startFromWordSettingState = atom((get)=>get(userSettingsState).startFromWord);
 export const spacePlacementState = atom((get)=>get(userSettingsState).spacePlacement);
 export const beatsPerMinuteState = atom((get)=>get(userSettingsState).beatsPerMinute);
 export const upcomingWordsLayoutState = atom((get)=>get(userSettingsState).upcomingWordsLayout);
 
-export const showScoresWhileTypingState = atom(
-  (get) => get(userSettingsState).showScoresWhileTyping,
-  (get, set, update: boolean) => {
-    set(userSettingsState, { ...get(userSettingsState), showScoresWhileTyping: update });
-  });
-export const showStrokesAsDiagramsState = atom(
-  (get) => get(userSettingsState).showStrokesAsDiagrams,
-  (get, set, update: boolean) => {
-      set(userSettingsState, { ...get(userSettingsState), showStrokesAsDiagrams: update });
-  });
-export const showStrokesAsListState = atom(
-  (get) => get(userSettingsState).showStrokesAsList,
-  (get, set, update: boolean) => {
-    set(userSettingsState, { ...get(userSettingsState), showStrokesAsList: update });
-  });
+export const showScoresWhileTypingState = subFieldAtom('showScoresWhileTyping');
+export const showStrokesAsDiagramsState = subFieldAtom('showStrokesAsDiagrams');
+export const showStrokesAsListState = subFieldAtom('showStrokesAsList');
+export const showStrokesOnMisstrokeState = subFieldAtom('showStrokesOnMisstroke');
