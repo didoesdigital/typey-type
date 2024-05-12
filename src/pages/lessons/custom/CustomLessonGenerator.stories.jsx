@@ -3,6 +3,8 @@ import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 
 import CustomLessonGenerator from "./CustomLessonGenerator";
+import AppMethodsContext from "../../../states/legacy/AppMethodsContext";
+import appMethods from "../../../stories/fixtures/appMethods";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -36,26 +38,26 @@ const sourceMaterial = [
 
 const Template = (args) => {
   return (
-    <CustomLessonGenerator
-      createCustomLesson={() => console.log("create custom lesson")}
-      customLesson={{
-        sourceMaterial,
-        presentedMaterial: sourceMaterial,
-        settings: { ignoredChars: "" },
-        title: "Test",
-        subtitle: "",
-        newPresentedMaterial: sourceMaterial,
-        path: "/lessons/fundamentals/test/",
-      }}
-      customLessonMaterial={""}
-      customLessonMaterialValidationMessages={[]}
-      customLessonMaterialValidationState={"success"}
-      fetchAndSetupGlobalDict={() => Promise.resolve(true)}
-      generateCustomLesson={() => console.log("generate custom lesson")}
-      globalLookupDictionary={globalLookupDictionary}
-      personalDictionaries={{ dictionariesNamesAndContents: null }}
-      {...args}
-    />
+    <AppMethodsContext.Provider value={appMethods}>
+      <CustomLessonGenerator
+        createCustomLesson={() => console.log("create custom lesson")}
+        customLesson={{
+          sourceMaterial,
+          presentedMaterial: sourceMaterial,
+          settings: { ignoredChars: "" },
+          title: "Test",
+          subtitle: "",
+          newPresentedMaterial: sourceMaterial,
+          path: "/lessons/fundamentals/test/",
+        }}
+        customLessonMaterial={""}
+        customLessonMaterialValidationMessages={[]}
+        customLessonMaterialValidationState={"success"}
+        globalLookupDictionary={globalLookupDictionary}
+        personalDictionaries={{ dictionariesNamesAndContents: null }}
+        {...args}
+      />
+    </AppMethodsContext.Provider>
   );
 };
 

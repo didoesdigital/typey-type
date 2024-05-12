@@ -1,5 +1,7 @@
 import React from "react";
 import CustomLessonSetup from "./CustomLessonSetup";
+import AppMethodsContext from "../../../states/legacy/AppMethodsContext";
+import appMethods from "../../../stories/fixtures/appMethods";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -23,17 +25,17 @@ const globalLookupDictionary = new Map([
 
 const Template = (args) => {
   return (
-    <CustomLessonSetup
-      createCustomLesson={() => console.log("create custom lesson")}
-      customLessonMaterial={""}
-      customLessonMaterialValidationMessages={[]}
-      customLessonMaterialValidationState={"success"}
-      fetchAndSetupGlobalDict={() => Promise.resolve(true)}
-      globalLookupDictionary={globalLookupDictionary}
-      globalLookupDictionaryLoaded={true}
-      personalDictionaries={{ dictionariesNamesAndContents: null }}
-      {...args}
-    />
+    <AppMethodsContext.Provider value={appMethods}>
+      <CustomLessonSetup
+        customLessonMaterial={""}
+        customLessonMaterialValidationMessages={[]}
+        customLessonMaterialValidationState={"success"}
+        globalLookupDictionary={globalLookupDictionary}
+        globalLookupDictionaryLoaded={true}
+        personalDictionaries={{ dictionariesNamesAndContents: null }}
+        {...args}
+      />
+    </AppMethodsContext.Provider>
   );
 };
 

@@ -3,6 +3,8 @@ import Lookup from "./Lookup";
 import userSettings from "../../stories/fixtures/userSettings";
 import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
+import AppMethodsContext from "../../states/legacy/AppMethodsContext";
+import appMethods from "../../stories/fixtures/appMethods";
 
 const meta = {
   title: "Pages/Lookup",
@@ -25,19 +27,18 @@ const globalLookupDictionary = new Map([
 ]);
 
 const Template = (args) => (
-  <Lookup
-    fetchAndSetupGlobalDict={() => Promise.resolve(true)}
-    globalLookupDictionary={globalLookupDictionary}
-    globalLookupDictionaryLoaded={true}
-    lookupTerm={undefined}
-    userSettings={userSettings}
-    globalUserSettings={{}}
-    personalDictionaries={{ dictionariesNamesAndContents: null }}
-    updateGlobalLookupDictionary={() => undefined}
-    updatePersonalDictionaries={() => undefined}
-    stenohintsonthefly={true}
-    {...args}
-  />
+  <AppMethodsContext.Provider value={appMethods}>
+    <Lookup
+      globalLookupDictionary={globalLookupDictionary}
+      globalLookupDictionaryLoaded={true}
+      lookupTerm={undefined}
+      userSettings={userSettings}
+      globalUserSettings={{}}
+      personalDictionaries={{ dictionariesNamesAndContents: null }}
+      stenohintsonthefly={true}
+      {...args}
+    />
+  </AppMethodsContext.Provider>
 );
 
 export const LookupStory = Template.bind({});

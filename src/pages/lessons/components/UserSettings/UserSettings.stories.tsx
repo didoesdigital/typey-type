@@ -1,6 +1,8 @@
 import React, { ComponentProps } from "react";
 import UserSettings from "./UserSettings";
 import userSettingsFixture from "../../../../stories/fixtures/userSettings";
+import AppMethodsContext from "../../../../states/legacy/AppMethodsContext";
+import appMethods from "../../../../stories/fixtures/appMethods";
 
 const meta = {
   title: "Pages/UserSettings",
@@ -9,22 +11,7 @@ const meta = {
 export default meta;
 
 const defaultArgs: ComponentProps<typeof UserSettings> = {
-  changeSortOrderUserSetting: () => undefined,
-  changeSpacePlacementUserSetting: () => undefined,
-  changeStenoLayout: () => undefined,
-  changeShowScoresWhileTyping: () => undefined,
-  changeShowStrokesAs: () => undefined,
-  changeShowStrokesAsList: () => undefined,
-  changeShowStrokesOnMisstroke: () => undefined,
-  changeUserSetting: () => undefined,
-  changeVoiceUserSetting: () => undefined,
   disableUserSettings: false,
-  handleDiagramSize: () => undefined,
-  handleBeatsPerMinute: () => undefined,
-  handleLimitWordsChange: () => undefined,
-  handleStartFromWordChange: () => undefined,
-  handleRepetitionsChange: () => undefined,
-  handleUpcomingWordsLayout: () => undefined,
   maxStartFromWord: 100,
   revisionMode: false,
   totalWordCount: 50,
@@ -38,7 +25,9 @@ const Template = (args: ComponentProps<typeof UserSettings>) => {
       className="flex-wrap-md flex mx-auto mw-1920"
       style={{ justifyContent: "flex-end" }}
     >
-      <UserSettings {...args} />
+      <AppMethodsContext.Provider value={appMethods}>
+        <UserSettings {...args} />
+      </AppMethodsContext.Provider>
     </div>
   );
 };

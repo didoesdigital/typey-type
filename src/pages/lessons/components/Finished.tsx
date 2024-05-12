@@ -30,25 +30,10 @@ const getNextLessonPath = (metadata: any) => {
 let topSpeedToday = 0;
 
 const Finished = ({
-  changeShowScoresWhileTyping,
-  changeShowStrokesAs,
-  changeShowStrokesAsList,
-  changeShowStrokesOnMisstroke,
-  changeSortOrderUserSetting,
-  changeSpacePlacementUserSetting,
-  changeStenoLayout,
-  changeUserSetting,
-  changeVoiceUserSetting,
   chooseStudy,
   currentLessonStrokes,
   disableUserSettings,
   globalUserSettings,
-  handleBeatsPerMinute,
-  handleDiagramSize,
-  handleLimitWordsChange,
-  handleRepetitionsChange,
-  handleStartFromWordChange,
-  handleUpcomingWordsLayout,
   toggleHideOtherSettings,
   lesson,
   lessonLength,
@@ -243,22 +228,7 @@ const Finished = ({
         </div>
         <div>
           <UserSettings
-            changeUserSetting={changeUserSetting}
-            changeVoiceUserSetting={changeVoiceUserSetting}
-            changeSortOrderUserSetting={changeSortOrderUserSetting}
-            changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-            changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-            changeShowStrokesAs={changeShowStrokesAs}
-            changeShowStrokesAsList={changeShowStrokesAsList}
-            changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-            changeStenoLayout={changeStenoLayout}
             disableUserSettings={disableUserSettings}
-            handleDiagramSize={handleDiagramSize}
-            handleBeatsPerMinute={handleBeatsPerMinute}
-            handleLimitWordsChange={handleLimitWordsChange}
-            handleStartFromWordChange={handleStartFromWordChange}
-            handleRepetitionsChange={handleRepetitionsChange}
-            handleUpcomingWordsLayout={handleUpcomingWordsLayout}
             maxStartFromWord={lessonLength}
             revisionMode={revisionMode}
             totalWordCount={totalWordCount}
