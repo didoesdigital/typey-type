@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ComponentProps } from "react";
 import UserSettings from "./UserSettings";
 import userSettingsFixture from "../../../../stories/fixtures/userSettings";
 
@@ -8,7 +8,7 @@ const meta = {
 };
 export default meta;
 
-const defaultArgs = {
+const defaultArgs: ComponentProps<typeof UserSettings> = {
   changeSortOrderUserSetting: () => undefined,
   changeSpacePlacementUserSetting: () => undefined,
   changeStenoLayout: () => undefined,
@@ -17,7 +17,7 @@ const defaultArgs = {
   changeShowStrokesAsList: () => undefined,
   changeShowStrokesOnMisstroke: () => undefined,
   changeUserSetting: () => undefined,
-  chooseStudy: () => undefined,
+  changeVoiceUserSetting: () => undefined,
   disableUserSettings: false,
   handleDiagramSize: () => undefined,
   handleBeatsPerMinute: () => undefined,
@@ -25,14 +25,13 @@ const defaultArgs = {
   handleStartFromWordChange: () => undefined,
   handleRepetitionsChange: () => undefined,
   handleUpcomingWordsLayout: () => undefined,
-  toggleHideOtherSettings: () => undefined,
   maxStartFromWord: 100,
   revisionMode: false,
   totalWordCount: 50,
   userSettings: userSettingsFixture,
 };
 
-const Template = (args) => {
+const Template = (args: ComponentProps<typeof UserSettings>) => {
   return (
     <div
       id="lesson-page"
@@ -45,9 +44,11 @@ const Template = (args) => {
 };
 
 export const UserSettingsStory = Template.bind({});
+// @ts-expect-error
 UserSettingsStory.args = { ...defaultArgs };
 
 export const UserSettingsDisabled = Template.bind({});
+// @ts-expect-error
 UserSettingsDisabled.args = {
   ...defaultArgs,
   disableUserSettings: true,
