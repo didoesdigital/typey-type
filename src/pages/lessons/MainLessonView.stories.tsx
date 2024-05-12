@@ -3,17 +3,13 @@ import { Link, Route, Switch } from "react-router-dom";
 import MainLessonView from "./MainLessonView";
 import userSettings from "../../stories/fixtures/userSettings";
 import Zipper from "../../utils/zipper";
+import { Lesson, LookupDictWithNamespacedDictsAndConfig } from "../../types";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Lessons/Main lesson view",
   component: MainLessonView,
   id: "main-lesson-view", // permalink
-};
-
-let userGoals = {
-  newWords: 5,
-  oldWords: 15,
 };
 const presentedMaterialCurrentItem = {
   phrase: ".",
@@ -31,23 +27,7 @@ const sourceMaterial = [
   },
 ];
 
-const customLesson = {
-  sourceMaterial: sourceMaterial,
-  presentedMaterial: [
-    {
-      phrase: "test",
-      stroke: "TEFT",
-    },
-  ],
-  settings: {
-    ignoredChars: "",
-  },
-  title: "Test lesson",
-  subtitle: "",
-  newPresentedMaterial: new Zipper(sourceMaterial),
-  path: "/lessons/fundamentals/test/",
-};
-const lesson = {
+const lesson: Lesson = {
   sourceMaterial: sourceMaterial,
   presentedMaterial: [
     {
@@ -64,27 +44,16 @@ const lesson = {
   },
   title: "Test lesson",
   subtitle: "",
+  // @ts-expect-error
   newPresentedMaterial: new Zipper(sourceMaterial),
   path: "/lessons/fundamentals/test/",
 };
 
-const globalLookupDictionary = new Map([
+// @ts-expect-error
+const globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig = new Map([
   ["huh", [["H*U", "typey:typey-type.json"]]],
   ["gonna", [["TKPW*G", "typey:typey-type.json"]]],
 ]);
-
-const lessonIndex = [
-  {
-    title: "Test lesson",
-    subtitle: "",
-    category: "Fundamentals",
-    subcategory: "",
-    path: "/lessons/fundamentals/test/",
-  },
-];
-
-const handleLesson = (path) => undefined;
-const stopLesson = () => undefined;
 
 const createNewCustomLesson = (
   <Link
@@ -97,64 +66,40 @@ const createNewCustomLesson = (
   </Link>
 );
 
-const Template = (args) => {
+const Template = (args: any) => {
   return (
     <Switch>
       <Route>
         <div>
           <MainLessonView
             createNewCustomLesson={createNewCustomLesson}
-            customLesson={customLesson}
-            fetchAndSetupGlobalDict={() => Promise.resolve(true)}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={true}
-            updateFlashcardsMetWords={() => undefined}
-            handleLesson={handleLesson}
             lesson={lesson}
-            lessonIndex={lessonIndex}
-            stopLesson={stopLesson}
             userSettings={userSettings}
-            updateFlashcardsProgress={() => undefined}
-            flashcardsMetWords={{}}
-            customLessonMaterial={[]}
-            customLessonMaterialValidationState={[]}
-            customLessonMaterialValidationMessages={[]}
-            flashcardsProgress={{}}
-            globalUserSettings={{}}
-            personalDictionaries={{ dictionariesNamesAndContents: null }}
-            lessonsProgress={{}}
-            lessonNotFound={false}
-            fullscreen={false}
+            lessonLength={1}
             lessonSubTitle={""}
             lessonTitle={"Test lesson"}
-            path={"/lessons/fundamentals/test/"}
             actualText={""}
             currentLessonStrokes={[]}
             currentPhraseID={0}
             disableUserSettings={false}
-            metWords={{}}
-            previousCompletedPhraseAsTyped={[]}
-            recommendationHistory={[]}
+            previousCompletedPhraseAsTyped={""}
             repetitionsRemaining={1}
             revisionMode={false}
-            startTime={0}
             settings={{ ignoredChars: "" }}
             showStrokesInLesson={false}
             targetStrokeCount={1}
             timer={1}
-            topSpeedPersonalBest={40}
-            updateUserGoals={userGoals}
             totalNumberOfMatchedWords={0}
             totalNumberOfNewWordsMet={0}
             totalNumberOfLowExposuresSeen={0}
             totalNumberOfRetainedWords={0}
             totalNumberOfMistypedWords={0}
             totalNumberOfHintedWords={0}
-            updateGlobalLookupDictionary={() => undefined}
-            updatePersonalDictionaries={() => undefined}
             restartLesson={() => undefined}
-            reviseLesson={() => undefined}
             handleStopLesson={() => undefined}
+            changeShowStrokesAsList={() => undefined}
             changeShowStrokesInLesson={() => undefined}
             changeShowStrokesOnMisstroke={() => undefined}
             changeSortOrderUserSetting={() => undefined}
@@ -163,9 +108,9 @@ const Template = (args) => {
             changeShowScoresWhileTyping={() => undefined}
             changeShowStrokesAs={() => undefined}
             changeUserSetting={() => undefined}
+            changeVoiceUserSetting={() => undefined}
             chooseStudy={() => undefined}
             completedPhrases={[]}
-            createCustomLesson={() => undefined}
             propsLesson={lesson}
             currentPhrase={presentedMaterialCurrentItem.phrase}
             currentStroke={presentedMaterialCurrentItem.stroke}
@@ -177,16 +122,12 @@ const Template = (args) => {
             handleUpcomingWordsLayout={() => undefined}
             toggleHideOtherSettings={() => undefined}
             sayCurrentPhraseAgain={() => undefined}
-            startFromWordOne={() => undefined}
-            stenoHintsOnTheFly={true}
-            startCustomLesson={() => undefined}
-            setUpProgressRevisionLesson={() => undefined}
-            setupLesson={() => undefined}
             totalWordCount={1}
             upcomingPhrases={["and the"]}
             updatePreset={() => undefined}
             updateMarkup={() => undefined}
-            updateTopSpeedPersonalBest={() => undefined}
+            overviewLink={undefined}
+            recentLessonHistory={[]}
             {...args}
           />
         </div>
@@ -196,4 +137,5 @@ const Template = (args) => {
 };
 
 export const MainLessonViewStory = Template.bind({});
+// @ts-expect-error
 MainLessonViewStory.storyName = "Main lesson view";
