@@ -3,6 +3,8 @@ import UserSettings from "./UserSettings";
 import userSettingsFixture from "../../../../stories/fixtures/userSettings";
 import AppMethodsContext from "../../../../states/legacy/AppMethodsContext";
 import appMethods from "../../../../stories/fixtures/appMethods";
+import { useHydrateAtoms } from "jotai/utils";
+import { userSettingsState } from "../../../../states/userSettingsState";
 
 const meta = {
   title: "Pages/UserSettings",
@@ -15,10 +17,10 @@ const defaultArgs: ComponentProps<typeof UserSettings> = {
   maxStartFromWord: 100,
   revisionMode: false,
   totalWordCount: 50,
-  userSettings: userSettingsFixture,
 };
 
 const Template = (args: ComponentProps<typeof UserSettings>) => {
+  useHydrateAtoms([[userSettingsState, userSettingsFixture]])
   return (
     <div
       id="lesson-page"

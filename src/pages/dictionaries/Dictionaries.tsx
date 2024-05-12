@@ -8,9 +8,10 @@ import type {
   Experiments,
   GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
-  UserSettings,
 } from "../../types";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
+import { useAtomValue } from "jotai";
+import { userSettingsState } from "../../states/userSettingsState";
 
 const AsyncDictionary = Loadable({
   loader: () => import("./Dictionary"),
@@ -30,7 +31,6 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
   stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
-  userSettings: UserSettings;
   [restProps: string]: any;
 };
 
@@ -40,9 +40,9 @@ const Dictionaries = ({
   globalLookupDictionary,
   globalUserSettings,
   stenohintsonthefly,
-  userSettings,
   ...dictionaryProps
 }: Props) => {
+  const userSettings = useAtomValue(userSettingsState);
   const {
     setDictionaryIndex,
     toggleExperiment,

@@ -5,6 +5,8 @@ import { within, userEvent } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import AppMethodsContext from "../../states/legacy/AppMethodsContext";
 import appMethods from "../../stories/fixtures/appMethods";
+import { useHydrateAtoms } from "jotai/utils";
+import { userSettingsState } from "../../states/userSettingsState";
 
 const meta = {
   title: "Pages/Lookup",
@@ -26,20 +28,23 @@ const globalLookupDictionary = new Map([
   ],
 ]);
 
-const Template = (args) => (
-  <AppMethodsContext.Provider value={appMethods}>
-    <Lookup
-      globalLookupDictionary={globalLookupDictionary}
-      globalLookupDictionaryLoaded={true}
-      lookupTerm={undefined}
-      userSettings={userSettings}
-      globalUserSettings={{}}
-      personalDictionaries={{ dictionariesNamesAndContents: null }}
-      stenohintsonthefly={true}
-      {...args}
-    />
-  </AppMethodsContext.Provider>
-);
+const Template = (args) => {
+  useHydrateAtoms([[userSettingsState, userSettings]])
+  return (
+    <AppMethodsContext.Provider value={appMethods}>
+      <Lookup
+        globalLookupDictionary={globalLookupDictionary}
+        globalLookupDictionaryLoaded={true}
+        lookupTerm={undefined}
+        userSettings={userSettings}
+        globalUserSettings={{}}
+        personalDictionaries={{ dictionariesNamesAndContents: null }}
+        stenohintsonthefly={true}
+        {...args}
+      />
+    </AppMethodsContext.Provider>
+  );
+};
 
 export const LookupStory = Template.bind({});
 

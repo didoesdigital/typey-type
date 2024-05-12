@@ -14,10 +14,12 @@ import ProgressSummaryAndLinks from "./components/ProgressSummaryAndLinks";
 import LessonsProgress from "./components/LessonsProgress";
 import DownloadProgressButton from "./components/DownloadProgressButton";
 import Subheader from "../../components/Subheader";
-import { GlobalUserSettings, MetWords, UserSettings } from "../../types";
+import { GlobalUserSettings, MetWords } from "../../types";
 import BackupBanner from "./components/BackupBanner";
 import BackupModal from "./components/BackupModal";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
+import { useAtomValue } from "jotai";
+import { userSettingsState } from "../../states/userSettingsState";
 
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
@@ -37,7 +39,6 @@ type Props = {
   recommendedNextLesson: any;
   startingMetWordsToday: any;
   userGoals: any;
-  userSettings: UserSettings;
   yourMemorisedWordCount: any;
   yourSeenWordCount: any;
 };
@@ -53,6 +54,7 @@ const Progress = (props: Props) => {
     updateUserGoalsUnveiled,
     dismissBackupBanner,
   } = useAppMethods();
+  const userSettings = useAtomValue(userSettingsState);
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const canvas = useRef(null);
   const firstGoalsRender = useRef(true);
@@ -492,7 +494,7 @@ const Progress = (props: Props) => {
             restartConfetti={restartConfetti.bind(this)}
             yourMemorisedWordCount={props.yourMemorisedWordCount}
             yourSeenWordCount={props.yourSeenWordCount}
-            userSettings={props.userSettings}
+            userSettings={userSettings}
           />
 
           <div className="flex flex-wrap justify-between pt3">
@@ -585,7 +587,7 @@ const Progress = (props: Props) => {
           <h3 id="vocabulary-progress">Vocabulary progress</h3>
           <ReformatProgress
             metWords={props.metWords}
-            userSettings={props.userSettings}
+            userSettings={userSettings}
           />
           <p>Words you’ve seen and times you’ve typed them well:</p>
           <p

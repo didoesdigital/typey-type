@@ -9,8 +9,9 @@ import type {
   GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
-  UserSettings,
 } from "../../types";
+import { useAtomValue } from "jotai";
+import { userSettingsState } from "../../states/userSettingsState";
 
 const AsyncGamesIndex = Loadable({
   loader: () => import("./GamesIndex"),
@@ -61,7 +62,6 @@ type Props = {
   metWords: MetWords;
   startingMetWordsToday: MetWords;
   globalUserSettings: GlobalUserSettings;
-  userSettings: UserSettings;
 };
 
 const Games = ({
@@ -70,9 +70,9 @@ const Games = ({
   globalLookupDictionaryLoaded,
   metWords,
   globalUserSettings,
-  userSettings,
   startingMetWordsToday,
 }: Props) => {
+  const userSettings = useAtomValue(userSettingsState);
   return (
     <Switch>
       <Route exact={true} path={`${match.url}/KAOES`}>

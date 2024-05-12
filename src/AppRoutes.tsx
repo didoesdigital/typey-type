@@ -16,7 +16,6 @@ import {
   MaterialText,
   Lesson,
   GlobalUserSettings,
-  UserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
   CurrentLessonStrokes, ActualTypedText, PersonalDictionaryNameAndContents
@@ -190,7 +189,6 @@ type AppStateForDescendants = {
 //   newWords: 15,
 //   oldWords: 50
 // },
-  userSettings: UserSettings,
   lesson: Lesson,
   lessonIndex: unknown, // TODO type like {
 //   "title": "Steno",
@@ -279,7 +277,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       metWords={appState.metWords}
                       startingMetWordsToday={appState.startingMetWordsToday}
                       globalUserSettings={appState.globalUserSettings}
-                      userSettings={appState.userSettings}
                       {...props}
                     />
                   </ErrorBoundary>
@@ -331,7 +328,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       recentLessonHistory={appState.recentLessons.history}
                       startingMetWordsToday={appState.startingMetWordsToday}
                       userGoals={appState.userGoals}
-                      userSettings={appState.userSettings}
                       oldWordsGoalUnveiled={appState.oldWordsGoalUnveiled}
                       newWordsGoalUnveiled={appState.newWordsGoalUnveiled}
                       yourSeenWordCount={appState.yourSeenWordCount}
@@ -361,7 +357,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                     locationpathname={appProps.location.pathname}
                     personalDictionaries={appState.personalDictionaries}
                     stenoHintsOnTheFly={appProps.stenohintsonthefly}
-                    userSettings={appState.userSettings}
                   />
                 </DocumentTitle>
               </div>
@@ -381,7 +376,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       }
                       globalUserSettings={appState.globalUserSettings}
                       lookupTerm={appState.lookupTerm}
-                      userSettings={appState.userSettings}
                       {...props}
                     />
                   </ErrorBoundary>
@@ -403,7 +397,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       }
                       globalUserSettings={appState.globalUserSettings}
                       stenohintsonthefly={appProps.stenohintsonthefly}
-                      userSettings={appState.userSettings}
                       dictionaryIndex={appState.dictionaryIndex}
                       {...props}
                     />

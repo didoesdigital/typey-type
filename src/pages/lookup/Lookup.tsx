@@ -7,16 +7,16 @@ import getWordFamilyGroup from "./utilities/getWordFamilyGroup";
 
 import type {
   GlobalUserSettings, MaterialItem,
-  UserSettings
 } from "../../types";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
+import { useAtomValue } from "jotai";
+import { userSettingsState } from "../../states/userSettingsState";
 
 type Props = {
   globalLookupDictionary: any;
   globalLookupDictionaryLoaded: boolean;
   globalUserSettings: GlobalUserSettings;
   lookupTerm?: string;
-  userSettings: UserSettings;
 };
 
 const Lookup = ({
@@ -24,8 +24,8 @@ const Lookup = ({
   globalLookupDictionaryLoaded,
   globalUserSettings,
   lookupTerm,
-  userSettings,
 }: Props) => {
+  const userSettings = useAtomValue(userSettingsState);
   const {
     appFetchAndSetupGlobalDict,
     setCustomLessonContent
