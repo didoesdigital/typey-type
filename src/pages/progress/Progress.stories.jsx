@@ -2,6 +2,8 @@ import React from "react";
 import Progress from "./Progress";
 import lessonIndex from "../../stories/fixtures/lessonIndex";
 import userSettings from "../../stories/fixtures/userSettings";
+import AppMethodsContext from "../../states/legacy/AppMethodsContext";
+import appMethods from "../../stories/fixtures/appMethods";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -95,31 +97,26 @@ const recommendedNextLesson = {
 
 const Template = (args) => {
   return (
-    <Progress
-      changeFlashcardCourseLevel={() => console.log("set value")}
-      flashcardsNextLesson={flashcardsNextLesson}
-      globalUserSettings={{}}
-      lessonIndex={lessonIndex}
-      lessonsProgress={testLessonsProgress}
-      metWords={{}}
-      newWordsGoalUnveiled={false}
-      oldWordsGoalUnveiled={false}
-      recentLessonHistory={recentLessonHistory}
-      recommendationHistory={{ currentStep: "practice" }}
-      recommendedNextLesson={recommendedNextLesson}
-      setPersonalPreferences={() => console.log("set value")}
-      startingMetWordsToday={{}}
-      updateFlashcardsRecommendation={() => console.log("set value")}
-      updateRecommendationHistory={() => console.log("set value")}
-      updateStartingMetWordsAndCounts={() => console.log("set value")}
-      updateUserGoals={() => console.log("set value")}
-      updateUserGoalsUnveiled={() => console.log("set value")}
-      userGoals={{ newWords: 2, oldWords: 1 }}
-      userSettings={userSettings}
-      yourMemorisedWordCount={878}
-      yourSeenWordCount={8750}
-      {...args}
-    />
+    <AppMethodsContext.Provider value={appMethods}>
+      <Progress
+        flashcardsNextLesson={flashcardsNextLesson}
+        globalUserSettings={{}}
+        lessonIndex={lessonIndex}
+        lessonsProgress={testLessonsProgress}
+        metWords={{}}
+        newWordsGoalUnveiled={false}
+        oldWordsGoalUnveiled={false}
+        recentLessonHistory={recentLessonHistory}
+        recommendationHistory={{ currentStep: "practice" }}
+        recommendedNextLesson={recommendedNextLesson}
+        startingMetWordsToday={{}}
+        userGoals={{ newWords: 2, oldWords: 1 }}
+        userSettings={userSettings}
+        yourMemorisedWordCount={878}
+        yourSeenWordCount={8750}
+        {...args}
+      />
+    </AppMethodsContext.Provider>
   );
 };
 

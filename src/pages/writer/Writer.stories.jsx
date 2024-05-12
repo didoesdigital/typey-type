@@ -1,5 +1,7 @@
 import React from "react";
 import Writer from "./Writer";
+import AppMethodsContext from "../../states/legacy/AppMethodsContext";
+import appMethods from "../../stories/fixtures/appMethods";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -9,17 +11,13 @@ export default {
 
 const Template = (args) => {
   return (
-    <Writer
-      changeStenoLayout={() => {
-        console.log("Change steno layout");
-      }}
-      changeWriterInput={() => {
-        console.log("Change writer input");
-      }}
-      globalUserSettings={{}}
-      userSettings={{ stenoLayout: "stenoLayoutAmericanSteno" }}
-      {...args}
-    />
+    <AppMethodsContext.Provider value={appMethods}>
+      <Writer
+        globalUserSettings={{}}
+        userSettings={{ stenoLayout: "stenoLayoutAmericanSteno" }}
+        {...args}
+      />
+    </AppMethodsContext.Provider>
   );
 };
 

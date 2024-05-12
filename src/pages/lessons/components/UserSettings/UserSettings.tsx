@@ -9,28 +9,14 @@ import VoiceSetting from "../VoiceSetting";
 import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTooltip";
 
 import type { UserSettings as UserSettingsObjectType } from "../../../../types";
+import { useAppMethods } from "../../../../states/legacy/AppMethodsContext";
 
 const grabStyle = function () {
   return false;
 };
 
 type Props = {
-  changeShowScoresWhileTyping: (event: any) => void;
-  changeShowStrokesAs: (event: any) => void;
-  changeShowStrokesAsList: (event: any) => void;
-  changeShowStrokesOnMisstroke: (event: any) => void;
-  changeSortOrderUserSetting: (event: any) => void;
-  changeSpacePlacementUserSetting: (event: any) => void;
-  changeStenoLayout: (event: any) => void;
-  changeUserSetting: (event: any) => void;
-  changeVoiceUserSetting: (voiceName: string, voiceURI: string) => void;
   disableUserSettings: boolean;
-  handleBeatsPerMinute: (event: any) => void;
-  handleDiagramSize: (event: any) => void;
-  handleLimitWordsChange: (event: any) => void;
-  handleRepetitionsChange: (event: any) => void;
-  handleStartFromWordChange: (event: any) => void;
-  handleUpcomingWordsLayout: (event: any) => void;
   maxStartFromWord: number;
   revisionMode: boolean;
   totalWordCount: number;
@@ -38,27 +24,31 @@ type Props = {
 };
 
 const UserSettings = ({
-  changeShowScoresWhileTyping,
-  changeShowStrokesAs,
-  changeShowStrokesAsList,
-  changeShowStrokesOnMisstroke,
-  changeSortOrderUserSetting,
-  changeSpacePlacementUserSetting,
-  changeStenoLayout,
-  changeUserSetting,
-  changeVoiceUserSetting,
   disableUserSettings,
-  handleBeatsPerMinute,
-  handleDiagramSize,
-  handleLimitWordsChange,
-  handleRepetitionsChange,
-  handleStartFromWordChange,
-  handleUpcomingWordsLayout,
   maxStartFromWord,
   revisionMode,
   totalWordCount,
   userSettings,
 }: Props) => {
+
+  const {
+    changeShowScoresWhileTyping,
+    changeShowStrokesAs,
+    changeShowStrokesAsList,
+    changeShowStrokesOnMisstroke,
+    changeSortOrderUserSetting,
+    changeSpacePlacementUserSetting,
+    changeStenoLayout,
+    changeUserSetting,
+    changeVoiceUserSetting,
+    handleBeatsPerMinute,
+    handleDiagramSize,
+    handleLimitWordsChange,
+    handleRepetitionsChange,
+    handleStartFromWordChange,
+    handleUpcomingWordsLayout,
+  } = useAppMethods();
+
   const announceTooltip = useAnnounceTooltip();
 
   return (

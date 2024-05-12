@@ -4,6 +4,8 @@ import MainLessonView from "./MainLessonView";
 import userSettings from "../../stories/fixtures/userSettings";
 import Zipper from "../../utils/zipper";
 import { Lesson, LookupDictWithNamespacedDictsAndConfig } from "../../types";
+import AppMethodsContext from "../../states/legacy/AppMethodsContext";
+import appMethods from "../../stories/fixtures/appMethods";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -68,71 +70,73 @@ const createNewCustomLesson = (
 
 const Template = (args: any) => {
   return (
-    <Switch>
-      <Route>
-        <div>
-          <MainLessonView
-            createNewCustomLesson={createNewCustomLesson}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={true}
-            lesson={lesson}
-            userSettings={userSettings}
-            lessonLength={1}
-            lessonSubTitle={""}
-            lessonTitle={"Test lesson"}
-            actualText={""}
-            currentLessonStrokes={[]}
-            currentPhraseID={0}
-            disableUserSettings={false}
-            previousCompletedPhraseAsTyped={""}
-            repetitionsRemaining={1}
-            revisionMode={false}
-            settings={{ ignoredChars: "" }}
-            showStrokesInLesson={false}
-            targetStrokeCount={1}
-            timer={1}
-            totalNumberOfMatchedWords={0}
-            totalNumberOfNewWordsMet={0}
-            totalNumberOfLowExposuresSeen={0}
-            totalNumberOfRetainedWords={0}
-            totalNumberOfMistypedWords={0}
-            totalNumberOfHintedWords={0}
-            restartLesson={() => undefined}
-            handleStopLesson={() => undefined}
-            changeShowStrokesAsList={() => undefined}
-            changeShowStrokesInLesson={() => undefined}
-            changeShowStrokesOnMisstroke={() => undefined}
-            changeSortOrderUserSetting={() => undefined}
-            changeSpacePlacementUserSetting={() => undefined}
-            changeStenoLayout={() => undefined}
-            changeShowScoresWhileTyping={() => undefined}
-            changeShowStrokesAs={() => undefined}
-            changeUserSetting={() => undefined}
-            changeVoiceUserSetting={() => undefined}
-            chooseStudy={() => undefined}
-            completedPhrases={[]}
-            propsLesson={lesson}
-            currentPhrase={presentedMaterialCurrentItem.phrase}
-            currentStroke={presentedMaterialCurrentItem.stroke}
-            handleBeatsPerMinute={() => undefined}
-            handleDiagramSize={() => undefined}
-            handleLimitWordsChange={() => undefined}
-            handleStartFromWordChange={() => undefined}
-            handleRepetitionsChange={() => undefined}
-            handleUpcomingWordsLayout={() => undefined}
-            toggleHideOtherSettings={() => undefined}
-            sayCurrentPhraseAgain={() => undefined}
-            totalWordCount={1}
-            upcomingPhrases={["and the"]}
-            updatePreset={() => undefined}
-            updateMarkup={() => undefined}
-            overviewLink={undefined}
-            recentLessonHistory={[]}
-            {...args}
-          />
-        </div>
-      </Route>
-    </Switch>
+    <AppMethodsContext.Provider value={appMethods}>
+      <Switch>
+        <Route>
+          <div>
+            <MainLessonView
+              createNewCustomLesson={createNewCustomLesson}
+              globalLookupDictionary={globalLookupDictionary}
+              globalLookupDictionaryLoaded={true}
+              lesson={lesson}
+              userSettings={userSettings}
+              lessonLength={1}
+              lessonSubTitle={""}
+              lessonTitle={"Test lesson"}
+              actualText={""}
+              currentLessonStrokes={[]}
+              currentPhraseID={0}
+              disableUserSettings={false}
+              previousCompletedPhraseAsTyped={""}
+              repetitionsRemaining={1}
+              revisionMode={false}
+              settings={{ ignoredChars: "" }}
+              showStrokesInLesson={false}
+              targetStrokeCount={1}
+              timer={1}
+              totalNumberOfMatchedWords={0}
+              totalNumberOfNewWordsMet={0}
+              totalNumberOfLowExposuresSeen={0}
+              totalNumberOfRetainedWords={0}
+              totalNumberOfMistypedWords={0}
+              totalNumberOfHintedWords={0}
+              restartLesson={() => undefined}
+              handleStopLesson={() => undefined}
+              changeShowStrokesAsList={() => undefined}
+              changeShowStrokesInLesson={() => undefined}
+              changeShowStrokesOnMisstroke={() => undefined}
+              changeSortOrderUserSetting={() => undefined}
+              changeSpacePlacementUserSetting={() => undefined}
+              changeStenoLayout={() => undefined}
+              changeShowScoresWhileTyping={() => undefined}
+              changeShowStrokesAs={() => undefined}
+              changeUserSetting={() => undefined}
+              changeVoiceUserSetting={() => undefined}
+              chooseStudy={() => undefined}
+              completedPhrases={[]}
+              propsLesson={lesson}
+              currentPhrase={presentedMaterialCurrentItem.phrase}
+              currentStroke={presentedMaterialCurrentItem.stroke}
+              handleBeatsPerMinute={() => undefined}
+              handleDiagramSize={() => undefined}
+              handleLimitWordsChange={() => undefined}
+              handleStartFromWordChange={() => undefined}
+              handleRepetitionsChange={() => undefined}
+              handleUpcomingWordsLayout={() => undefined}
+              toggleHideOtherSettings={() => undefined}
+              sayCurrentPhraseAgain={() => undefined}
+              totalWordCount={1}
+              upcomingPhrases={["and the"]}
+              updatePreset={() => undefined}
+              updateMarkup={() => undefined}
+              overviewLink={undefined}
+              recentLessonHistory={[]}
+              {...args}
+            />
+          </div>
+        </Route>
+      </Switch>
+    </AppMethodsContext.Provider>
   );
 };
 

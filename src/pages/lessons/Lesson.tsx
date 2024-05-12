@@ -79,26 +79,12 @@ const Lesson = ({
     appFetchAndSetupGlobalDict,
     chooseStudy,
     customiseLesson,
-    handleBeatsPerMinute,
-    handleDiagramSize,
     handleLesson,
-    handleLimitWordsChange,
-    handleRepetitionsChange,
-    handleStartFromWordChange,
     handleStopLesson,
-    handleUpcomingWordsLayout,
     toggleHideOtherSettings,
     changeFullscreen,
     changeShowScoresWhileTyping,
-    changeShowStrokesAs,
-    changeShowStrokesAsList,
     changeShowStrokesInLesson,
-    changeShowStrokesOnMisstroke,
-    changeSortOrderUserSetting,
-    changeSpacePlacementUserSetting,
-    changeStenoLayout,
-    changeUserSetting,
-    changeVoiceUserSetting,
     restartLesson,
     reviseLesson,
     sayCurrentPhraseAgain,
@@ -343,25 +329,10 @@ const Lesson = ({
               ref={mainHeading}
             />
             <Finished
-              changeSortOrderUserSetting={changeSortOrderUserSetting}
-              changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-              changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-              changeShowStrokesAs={changeShowStrokesAs}
-              changeShowStrokesAsList={changeShowStrokesAsList}
-              changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-              changeStenoLayout={changeStenoLayout}
-              changeUserSetting={changeUserSetting}
-              changeVoiceUserSetting={changeVoiceUserSetting}
               chooseStudy={chooseStudy}
               currentLessonStrokes={currentLessonStrokes}
               disableUserSettings={disableUserSettings}
               globalUserSettings={globalUserSettings}
-              handleBeatsPerMinute={handleBeatsPerMinute}
-              handleDiagramSize={handleDiagramSize}
-              handleLimitWordsChange={handleLimitWordsChange}
-              handleStartFromWordChange={handleStartFromWordChange}
-              handleRepetitionsChange={handleRepetitionsChange}
-              handleUpcomingWordsLayout={handleUpcomingWordsLayout}
               toggleHideOtherSettings={toggleHideOtherSettings}
               metadata={metadata}
               lesson={lesson}
@@ -462,17 +433,7 @@ const Lesson = ({
                 propsLesson={propsLesson}
                 actualText={actualText}
                 changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-                changeShowStrokesAs={changeShowStrokesAs}
-                changeShowStrokesAsList={changeShowStrokesAsList}
                 changeShowStrokesInLesson={changeShowStrokesInLesson}
-                changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-                changeSortOrderUserSetting={changeSortOrderUserSetting}
-                changeSpacePlacementUserSetting={
-                  changeSpacePlacementUserSetting
-                }
-                changeStenoLayout={changeStenoLayout}
-                changeUserSetting={changeUserSetting}
-                changeVoiceUserSetting={changeVoiceUserSetting}
                 chooseStudy={chooseStudy}
                 completedPhrases={completedPhrases}
                 currentLessonStrokes={currentLessonStrokes}
@@ -482,13 +443,7 @@ const Lesson = ({
                 disableUserSettings={disableUserSettings}
                 globalLookupDictionary={globalLookupDictionary}
                 globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-                handleBeatsPerMinute={handleBeatsPerMinute}
-                handleDiagramSize={handleDiagramSize}
-                handleLimitWordsChange={handleLimitWordsChange}
-                handleRepetitionsChange={handleRepetitionsChange}
-                handleStartFromWordChange={handleStartFromWordChange}
                 handleStopLesson={handleStopLesson}
-                handleUpcomingWordsLayout={handleUpcomingWordsLayout}
                 toggleHideOtherSettings={toggleHideOtherSettings}
                 lesson={lesson}
                 lessonLength={lessonLength}

@@ -1,6 +1,8 @@
 import React from "react";
 import LessonsIndex from "./LessonsIndex";
 import Zipper from "../../utils/zipper";
+import AppMethodsContext from "../../states/legacy/AppMethodsContext";
+import appMethods from "../../stories/fixtures/appMethods";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -44,12 +46,13 @@ const customLesson = {
 
 const Template = (args) => {
   return (
-    <LessonsIndex
-      lessonIndex={lessonIndex}
-      customLesson={customLesson}
-      stopLesson={() => console.log("stop lesson")}
-      {...args}
-    />
+    <AppMethodsContext.Provider value={appMethods}>
+      <LessonsIndex
+        lessonIndex={lessonIndex}
+        customLesson={customLesson}
+        {...args}
+      />
+    </AppMethodsContext.Provider>
   );
 };
 

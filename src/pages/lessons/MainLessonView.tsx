@@ -40,15 +40,7 @@ type Props = {
   propsLesson: Lesson;
   actualText: string;
   changeShowScoresWhileTyping: (event: any) => void;
-  changeShowStrokesAs: (event: any) => void;
-  changeShowStrokesAsList: (event: any) => void;
   changeShowStrokesInLesson: () => void;
-  changeShowStrokesOnMisstroke: (event: any) => void;
-  changeSortOrderUserSetting: (event: any) => void;
-  changeSpacePlacementUserSetting: (event: any) => void;
-  changeStenoLayout: (event: any) => void;
-  changeUserSetting: (event: any) => void;
-  changeVoiceUserSetting: (voiceName: string, voiceURI: string) => void;
   chooseStudy: () => void;
   completedPhrases: MaterialText[];
   currentLessonStrokes: CurrentLessonStrokes[];
@@ -58,13 +50,7 @@ type Props = {
   disableUserSettings: boolean;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
-  handleBeatsPerMinute: (event: any) => void;
-  handleDiagramSize: (event: any) => void;
-  handleLimitWordsChange: (event: any) => void;
-  handleRepetitionsChange: (event: any) => void;
-  handleStartFromWordChange: (event: any) => void;
   handleStopLesson: () => void;
-  handleUpcomingWordsLayout: (event: any) => void;
   toggleHideOtherSettings: () => void;
   lesson: Lesson;
   lessonLength: number;
@@ -99,15 +85,7 @@ const MainLessonView = ({
   propsLesson,
   actualText,
   changeShowScoresWhileTyping,
-  changeShowStrokesAs,
-  changeShowStrokesAsList,
   changeShowStrokesInLesson,
-  changeShowStrokesOnMisstroke,
-  changeSortOrderUserSetting,
-  changeSpacePlacementUserSetting,
-  changeStenoLayout,
-  changeUserSetting,
-  changeVoiceUserSetting,
   chooseStudy,
   completedPhrases,
   currentLessonStrokes,
@@ -117,13 +95,7 @@ const MainLessonView = ({
   disableUserSettings,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
-  handleBeatsPerMinute,
-  handleDiagramSize,
-  handleLimitWordsChange,
-  handleRepetitionsChange,
-  handleStartFromWordChange,
   handleStopLesson,
-  handleUpcomingWordsLayout,
   toggleHideOtherSettings,
   lesson,
   lessonLength,
@@ -342,22 +314,7 @@ const MainLessonView = ({
           </div>
           <div>
             <UserSettings
-              changeSortOrderUserSetting={changeSortOrderUserSetting}
-              changeSpacePlacementUserSetting={changeSpacePlacementUserSetting}
-              changeStenoLayout={changeStenoLayout}
-              changeShowScoresWhileTyping={changeShowScoresWhileTyping}
-              changeShowStrokesAs={changeShowStrokesAs}
-              changeShowStrokesAsList={changeShowStrokesAsList}
-              changeShowStrokesOnMisstroke={changeShowStrokesOnMisstroke}
-              changeUserSetting={changeUserSetting}
-              changeVoiceUserSetting={changeVoiceUserSetting}
               disableUserSettings={disableUserSettings}
-              handleDiagramSize={handleDiagramSize}
-              handleBeatsPerMinute={handleBeatsPerMinute}
-              handleLimitWordsChange={handleLimitWordsChange}
-              handleStartFromWordChange={handleStartFromWordChange}
-              handleRepetitionsChange={handleRepetitionsChange}
-              handleUpcomingWordsLayout={handleUpcomingWordsLayout}
               maxStartFromWord={lessonLength}
               revisionMode={revisionMode}
               totalWordCount={totalWordCount}
