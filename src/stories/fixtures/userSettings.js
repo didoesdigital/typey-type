@@ -1,3 +1,7 @@
+/**
+ *
+ * @type {import("../../types").UserSettings}
+ */
 const userSettings = {
   beatsPerMinute: 10,
   blurMaterial: false,
@@ -12,6 +16,7 @@ const userSettings = {
   showScoresWhileTyping: true,
   showStrokes: true,
   showStrokesAsDiagrams: true,
+  showStrokesAsList: false,
   showStrokesOnMisstroke: true,
   hideStrokesOnLastRepetition: true,
   spacePlacement: "spaceOff",
@@ -29,6 +34,9 @@ const userSettings = {
   ],
   stenoLayout: "stenoLayoutAmericanSteno",
   upcomingWordsLayout: "singleLine",
+  voiceName: "",
+  voiceURI: "",
+  hideOtherSettings: false,
 };
 
 export default userSettings;
