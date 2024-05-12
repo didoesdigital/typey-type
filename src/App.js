@@ -42,21 +42,6 @@ import customiseLesson from './pages/lessons/utilities/customiseLesson';
 import setCustomLessonContent from './pages/lessons/utilities/setCustomLessonContent';
 import updateMultipleMetWords from './pages/games/KPOES/updateMultipleMetWords';
 import {
-  changeSpacePlacementUserSetting,
-  changeStenoLayout,
-  changeUserSetting,
-  changeVoiceUserSetting,
-  chooseStudy,
-  handleBeatsPerMinute,
-  handleDiagramSize,
-  handleLimitWordsChange,
-  handleRepetitionsChange,
-  handleStartFromWordChange,
-  handleUpcomingWordsLayout,
-  toggleHideOtherSettings,
-  updatePreset
-} from './pages/lessons/components/UserSettings/updateUserSetting';
-import {
   changeShowStrokesInLesson,
   updateRevisionMaterial,
 } from './pages/lessons/components/UserSettings/updateLessonSetting';
@@ -1410,23 +1395,11 @@ class App extends Component {
               changeFlashcardCourseLevel: changeFlashcardCourseLevel.bind(this),
               changeFullscreen: changeFullscreen.bind(this),
               changeShowStrokesInLesson: changeShowStrokesInLesson.bind(this),
-              changeSpacePlacementUserSetting: changeSpacePlacementUserSetting.bind(this),
-              changeStenoLayout: changeStenoLayout.bind(this),
-              changeUserSetting: changeUserSetting.bind(this),
-              changeVoiceUserSetting: changeVoiceUserSetting.bind(this),
               changeInputForKAOES: changeInputForKAOES.bind(this),
               changeWriterInput: changeWriterInput.bind(this),
-              chooseStudy: chooseStudy.bind(this),
               createCustomLesson: this.createCustomLesson.bind(this),
-              handleBeatsPerMinute: handleBeatsPerMinute.bind(this),
-              handleDiagramSize: handleDiagramSize.bind(this),
               handleLesson: this.handleLesson.bind(this),
-              handleLimitWordsChange: handleLimitWordsChange.bind(this),
-              handleRepetitionsChange: handleRepetitionsChange.bind(this),
-              handleStartFromWordChange: handleStartFromWordChange.bind(this),
               handleStopLesson: this.handleStopLesson.bind(this),
-              handleUpcomingWordsLayout: handleUpcomingWordsLayout.bind(this),
-              toggleHideOtherSettings: () => toggleHideOtherSettings(this),
               restartLesson: this.restartLesson.bind(this),
               reviseLesson: this.reviseLesson.bind(this),
               sayCurrentPhraseAgain: this.sayCurrentPhraseAgain.bind(this),
@@ -1446,7 +1419,6 @@ class App extends Component {
               updateMarkup: this.updateMarkup.bind(this),
               updateMetWords: this.updateMetWords.bind(this),
               updatePersonalDictionaries: this.updatePersonalDictionaries.bind(this),
-              updatePreset: updatePreset.bind(this),
               updateRecommendationHistory: this.updateRecommendationHistory.bind(this),
               updateRevisionMaterial: updateRevisionMaterial.bind(this),
               updateStartingMetWordsAndCounts: this.updateStartingMetWordsAndCounts.bind(this),

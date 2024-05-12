@@ -9,19 +9,6 @@ import {
   changeFullscreen
 } from "../../pages/lessons/components/UserSettings/updateFlashcardSetting";
 import {
-  changeSpacePlacementUserSetting,
-  changeStenoLayout,
-  changeUserSetting,
-  changeVoiceUserSetting,
-  chooseStudy,
-  handleBeatsPerMinute,
-  handleDiagramSize,
-  handleLimitWordsChange,
-  handleRepetitionsChange,
-  handleStartFromWordChange,
-  handleUpcomingWordsLayout, toggleHideOtherSettings, updatePreset
-} from "../../pages/lessons/components/UserSettings/updateUserSetting";
-import {
   changeShowStrokesInLesson,
   updateRevisionMaterial
 } from "../../pages/lessons/components/UserSettings/updateLessonSetting";
@@ -41,23 +28,11 @@ export type AppMethods = {
   changeFlashcardCourseLevel: typeof changeFlashcardCourseLevel,
   changeFullscreen: typeof changeFullscreen,
   changeShowStrokesInLesson: typeof changeShowStrokesInLesson,
-  changeSpacePlacementUserSetting: typeof changeSpacePlacementUserSetting,
-  changeStenoLayout: typeof changeStenoLayout,
-  changeUserSetting: typeof changeUserSetting,
-  changeVoiceUserSetting: typeof changeVoiceUserSetting,
   changeInputForKAOES: typeof changeInputForKAOES,
   changeWriterInput: typeof changeWriterInput,
-  chooseStudy: typeof chooseStudy,
   createCustomLesson: typeof App.prototype.createCustomLesson,
-  handleBeatsPerMinute: typeof handleBeatsPerMinute,
-  handleDiagramSize: typeof handleDiagramSize,
   handleLesson: typeof App.prototype.handleLesson,
-  handleLimitWordsChange: typeof handleLimitWordsChange,
-  handleRepetitionsChange: typeof handleRepetitionsChange,
-  handleStartFromWordChange: typeof handleStartFromWordChange,
   handleStopLesson: typeof App.prototype.handleStopLesson,
-  handleUpcomingWordsLayout: typeof handleUpcomingWordsLayout,
-  toggleHideOtherSettings: typeof toggleHideOtherSettings,
   restartLesson: typeof App.prototype.restartLesson,
   reviseLesson: typeof App.prototype.reviseLesson,
   sayCurrentPhraseAgain: typeof App.prototype.sayCurrentPhraseAgain,
@@ -77,7 +52,6 @@ export type AppMethods = {
   updateMarkup: typeof App.prototype.updateMarkup,
   updateMetWords: typeof App.prototype.updateMetWords,
   updatePersonalDictionaries: typeof App.prototype.updatePersonalDictionaries,
-  updatePreset: typeof updatePreset,
   updateRecommendationHistory: typeof App.prototype.updateRecommendationHistory,
   updateRevisionMaterial: typeof updateRevisionMaterial,
   updateStartingMetWordsAndCounts: typeof App.prototype.updateStartingMetWordsAndCounts,

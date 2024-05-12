@@ -106,7 +106,6 @@ const Template = (args: any) => {
               changeShowStrokesInLesson={() => undefined}
               changeShowStrokesOnMisstroke={() => undefined}
               changeSortOrderUserSetting={() => undefined}
-              changeSpacePlacementUserSetting={() => undefined}
               changeStenoLayout={() => undefined}
               changeShowScoresWhileTyping={() => undefined}
               changeShowStrokesAs={() => undefined}

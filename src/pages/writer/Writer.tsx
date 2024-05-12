@@ -29,6 +29,7 @@ import type { Outline, UserSettings } from "../../types";
 import { WithAppMethods, withAppMethods } from "../../states/legacy/AppMethodsContext";
 import { userSettingsState } from "../../states/userSettingsState";
 import { withAtomCompat } from "../../states/atomUtils";
+import { useChangeStenoLayout } from "../lessons/components/UserSettings/updateUserSetting";
 
 type Props = {
   userSettings: UserSettings,
@@ -51,7 +52,7 @@ type StenoLayout = {
 
 type MapBriefToKeys = (brief: Outline) => StenoLayout
 
-class Writer extends Component<WithAppMethods<Props>, State> {
+class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: ReturnType<typeof useChangeStenoLayout>}>, State> {
   state: State = {
     stenoBrief: '',
     stenoStroke: new Stroke(),
@@ -367,7 +368,7 @@ class Writer extends Component<WithAppMethods<Props>, State> {
               </div>
               <div className="mb2 mw-240">
                 <label className="mb1 db" htmlFor="stenoLayout">Steno layout</label>
-                <select id="stenoLayout" name="writerStenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.appMethods.changeStenoLayout} className="text-small form-control w6">
+                <select id="stenoLayout" name="writerStenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} className="text-small form-control w6">
                   <option value="stenoLayoutAmericanSteno">Ward Stone Ireland (Plover, EcoSteno, SOFT/HRUF etc.)</option>
                   <option value="stenoLayoutNoNumberBarInnerThumbNumbers">Inner thumbers (TinyMod, Steko, etc.)</option>
                   <option value="stenoLayoutNoNumberBarOuterThumbNumbers">Outer thumbers (Uni, Georgi, etc.)</option>
@@ -410,4 +411,9 @@ class Writer extends Component<WithAppMethods<Props>, State> {
   }
 }
 
-export default withAppMethods(withAtomCompat(Writer, "userSettings", userSettingsState));
+function WriterWrapper(props: WithAppMethods<Props>) {
+  const changeStenoLayout = useChangeStenoLayout()
+  return <Writer {...props} {...{changeStenoLayout}} />;
+}
+
+export default withAppMethods(withAtomCompat(WriterWrapper, "userSettings", userSettingsState));

@@ -14,7 +14,15 @@ import { userSettingsState } from "../../../../states/userSettingsState";
 import {
   useChangeShowScoresWhileTyping,
   useChangeShowStrokesAs,
-  useChangeShowStrokesAsList, useChangeShowStrokesOnMisstroke, useChangeSortOrderUserSetting
+  useChangeShowStrokesAsList,
+  useChangeShowStrokesOnMisstroke,
+  useChangeSortOrderUserSetting, useChangeSpacePlacementUserSetting,
+  useChangeStenoLayout,
+  useChangeUserSetting,
+  useChangeVoiceUserSetting,
+  useHandleBeatsPerMinute,
+  useHandleDiagramSize,
+  useHandleLimitWordsChange, useHandleRepetitionsChange, useHandleStartFromWordChange, useHandleUpcomingWordsLayout
 } from "./updateUserSetting";
 
 const grabStyle = function () {
@@ -34,24 +42,22 @@ const UserSettings = ({
   revisionMode,
   totalWordCount,
 }: Props) => {
-  const {
-    changeSpacePlacementUserSetting,
-    changeStenoLayout,
-    changeUserSetting,
-    changeVoiceUserSetting,
-    handleBeatsPerMinute,
-    handleDiagramSize,
-    handleLimitWordsChange,
-    handleRepetitionsChange,
-    handleStartFromWordChange,
-    handleUpcomingWordsLayout,
-  } = useAppMethods();
   const userSettings = useAtomValue(userSettingsState);
   const changeShowScoresWhileTyping = useChangeShowScoresWhileTyping()
   const changeShowStrokesAs = useChangeShowStrokesAs();
   const changeShowStrokesAsList = useChangeShowStrokesAsList()
   const changeShowStrokesOnMisstroke = useChangeShowStrokesOnMisstroke();
   const changeSortOrderUserSetting = useChangeSortOrderUserSetting();
+  const changeSpacePlacementUserSetting = useChangeSpacePlacementUserSetting()
+  const changeStenoLayout = useChangeStenoLayout();
+  const changeUserSetting = useChangeUserSetting();
+  const changeVoiceUserSetting = useChangeVoiceUserSetting();
+  const handleBeatsPerMinute = useHandleBeatsPerMinute();
+  const handleDiagramSize = useHandleDiagramSize();
+  const handleLimitWordsChange = useHandleLimitWordsChange();
+  const handleRepetitionsChange = useHandleRepetitionsChange();
+  const handleStartFromWordChange = useHandleStartFromWordChange();
+  const handleUpcomingWordsLayout = useHandleUpcomingWordsLayout();
   const announceTooltip = useAnnounceTooltip();
 
   const {setupLesson} = useAppMethods();
@@ -65,7 +71,16 @@ const UserSettings = ({
     setupLesson();
 
     // eslint-disable-next-line
-  }, [userSettings.sortOrder]);
+  }, [
+    userSettings.sortOrder,
+    userSettings.spacePlacement,
+    userSettings.stenoLayout,
+    userSettings.study,
+    userSettings.limitNumberOfWords,
+    userSettings.repetitions,
+    userSettings.startFromWord,
+    userSettings.upcomingWordsLayout,
+  ]);
 
   return (
     <div className="user-settings">

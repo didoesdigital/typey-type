@@ -39,19 +39,23 @@ export const userSettingsState = atomWithStorage<UserSettings>("userSettings", {
     hideOtherSettings: false,
   });
 
-const subFieldAtom = (field: keyof UserSettings) => atom(
+const subFieldAtom = <T extends keyof UserSettings>(field: T) => atom(
   (get) => get(userSettingsState)[field],
   (get, set, update: any) => {
     set(userSettingsState, { ...get(userSettingsState), [field]: update });
   });
 
-export const startFromWordSettingState = atom((get)=>get(userSettingsState).startFromWord);
-export const spacePlacementState = atom((get)=>get(userSettingsState).spacePlacement);
-export const beatsPerMinuteState = atom((get)=>get(userSettingsState).beatsPerMinute);
-export const upcomingWordsLayoutState = atom((get)=>get(userSettingsState).upcomingWordsLayout);
-
+export const startFromWordSettingState = subFieldAtom('startFromWord');
+export const beatsPerMinuteState = subFieldAtom('beatsPerMinute');
+export const upcomingWordsLayoutState = subFieldAtom('upcomingWordsLayout');
 export const showScoresWhileTypingState = subFieldAtom('showScoresWhileTyping');
 export const showStrokesAsDiagramsState = subFieldAtom('showStrokesAsDiagrams');
 export const showStrokesAsListState = subFieldAtom('showStrokesAsList');
 export const showStrokesOnMisstrokeState = subFieldAtom('showStrokesOnMisstroke');
 export const sortOrderState = subFieldAtom('sortOrder');
+export const spacePlacementState = subFieldAtom('spacePlacement');
+export const stenoLayoutState = subFieldAtom('stenoLayout');
+export const diagramSizeState = subFieldAtom('diagramSize');
+export const limitNumberOfWordsState = subFieldAtom('limitNumberOfWords');
+export const repetitionsState = subFieldAtom('repetitions');
+export const hideOtherSettingsState = subFieldAtom('hideOtherSettings');

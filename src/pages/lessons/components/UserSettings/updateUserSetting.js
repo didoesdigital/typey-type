@@ -1,11 +1,16 @@
 import GoogleAnalytics from "react-ga4";
 import PARAMS from "../../../../utils/params";
-import { writePersonalPreferences } from "../../../../utils/typey-type";
 import { useAtom, useSetAtom } from "jotai";
 import {
+  beatsPerMinuteState, diagramSizeState, hideOtherSettingsState, limitNumberOfWordsState, repetitionsState,
   showScoresWhileTypingState,
   showStrokesAsDiagramsState,
-  showStrokesAsListState, showStrokesOnMisstrokeState, sortOrderState
+  showStrokesAsListState,
+  showStrokesOnMisstrokeState,
+  sortOrderState,
+  spacePlacementState, startFromWordSettingState,
+  stenoLayoutState, upcomingWordsLayoutState,
+  userSettingsState
 } from "../../../../states/userSettingsState";
 import { useAppMethods } from "../../../../states/legacy/AppMethodsContext";
 
@@ -31,7 +36,6 @@ export function useChangeShowScoresWhileTyping() {
   };
 }
 
-// TODO: continue like above in this file
 export function useChangeShowStrokesAs() {
   const setState = useSetAtom(showStrokesAsDiagramsState);
 
@@ -111,452 +115,405 @@ export function useChangeSortOrderUserSetting() {
   }
 }
 
-export function changeSpacePlacementUserSetting(event) {
-  let currentState = this.state.userSettings;
-  let newState = Object.assign({}, currentState);
+export function useChangeSpacePlacementUserSetting() {
+  const setState = useSetAtom(spacePlacementState);
+  return (event) => {
+    const value = event.target.value;
+    setState(value);
 
-  const name = "spacePlacement";
-  const value = event.target.value;
-
-  newState[name] = value;
-
-  this.setState({ userSettings: newState }, () => {
-    this.setupLesson();
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
-
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
-  }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change spacePlacement",
-    label: labelString,
-  });
-
-  return value;
-}
-
-export function changeStenoLayout(event) {
-  let currentState = this.state.userSettings;
-  let newState = Object.assign({}, currentState);
-
-  const name = event.target.name;
-  const value = event.target.value;
-
-  newState["stenoLayout"] = value;
-
-  this.setState({ userSettings: newState }, () => {
-    this.setupLesson();
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
-
-  let labelString = value;
-  let actionString = "Change steno layout";
-  if (name === "writerStenoLayout") {
-    actionString = "Change writer steno layout";
-  }
-  if (!value) {
-    labelString = "BAD_INPUT";
-  }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: actionString,
-    label: labelString,
-  });
-
-  return value;
-}
-
-export function changeUserSetting(event) {
-  let currentState = this.state.userSettings;
-  let newState = Object.assign({}, currentState);
-
-  const target = event.target;
-  const value = target.type === "checkbox" ? target.checked : target.value;
-  const name = target.name;
-
-  newState[name] = value;
-
-  if (!newState.speakMaterial && synth) {
-    synth.cancel();
-  }
-
-  this.setState({ userSettings: newState }, () => {
-    if (!(name === "caseSensitive")) {
-      this.setupLesson();
+    let labelString = value;
+    if (!value) {
+      labelString = "BAD_INPUT";
     }
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
 
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
-  } else {
-    labelString.toString();
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change spacePlacement",
+      label: labelString,
+    });
+
+    return value;
   }
+}
 
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change " + name,
-    label: labelString,
-  });
+export function useChangeStenoLayout() {
+  const setState = useSetAtom(stenoLayoutState);
 
-  return value;
+  return (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+
+    setState(value);
+
+    let labelString = value;
+    let actionString = "Change steno layout";
+    if (name === "writerStenoLayout") {
+      actionString = "Change writer steno layout";
+    }
+    if (!value) {
+      labelString = "BAD_INPUT";
+    }
+
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: actionString,
+      label: labelString,
+    });
+
+    return value;
+  }
+}
+
+export function useChangeUserSetting() {
+  const [currentState, setState] = useAtom(userSettingsState)
+  return (event) => {
+    let newState = Object.assign({}, currentState);
+
+    const target = event.target;
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    const name = target.name;
+
+    newState[name] = value;
+
+    if (!newState.speakMaterial && synth) {
+      synth.cancel();
+    }
+
+    setState(newState);
+    // unless caseSensitive setting, setupLesson
+
+    let labelString = value;
+    if (!value) {
+      labelString = "BAD_INPUT";
+    } else {
+      labelString.toString();
+    }
+
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change " + name,
+      label: labelString,
+    });
+
+    return value;
+  }
 }
 
 /**
- * @param {string} voiceName
- * @param {string} voiceURI
+ * @return {(voiceName: string, voiceURI: string) => void}
  */
-export function changeVoiceUserSetting(voiceName, voiceURI) {
-  let currentState = this.state.userSettings;
-  let newState = Object.assign({}, currentState);
+export function useChangeVoiceUserSetting() {
+  const [currentState, setState]= useAtom(userSettingsState)
+  return (voiceName, voiceURI) => {
+    let newState = Object.assign({}, currentState);
 
-  newState["voiceName"] = voiceName;
-  newState["voiceURI"] = voiceURI;
+    newState["voiceName"] = voiceName;
+    newState["voiceURI"] = voiceURI;
 
-  this.setState({ userSettings: newState }, () => {
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
+    setState(newState);
 
-  // Let's not bother with tracking voice name. URI is enough.
-  let labelString = voiceURI;
-  if (!voiceURI) {
-    labelString = "BAD_INPUT";
+    // Let's not bother with tracking voice name. URI is enough.
+    let labelString = voiceURI;
+    if (!voiceURI) {
+      labelString = "BAD_INPUT";
+    }
+
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change voice",
+      label: labelString,
+    });
   }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change voice",
-    label: labelString,
-  });
 }
 
-export function chooseStudy(event) {
-  let currentState = this.state.userSettings;
-  let newState = Object.assign({}, currentState);
+export function useChooseStudy() {
+  const [currentState, setState] = useAtom(userSettingsState)
+  return (event) => {
+    let newState = Object.assign({}, currentState);
 
-  const name = "study";
-  const value = event.target.value;
+    const name = "study";
+    const value = event.target.value;
 
-  newState[name] = value;
+    newState[name] = value;
 
-  switch (value) {
-    case "discover":
-      newState.showStrokes = PARAMS.discover.showStrokes;
-      newState.hideStrokesOnLastRepetition =
-        PARAMS.discover.hideStrokesOnLastRepetition;
-      newState.newWords = PARAMS.discover.newWords;
-      newState.seenWords = PARAMS.discover.seenWords;
-      newState.retainedWords = PARAMS.discover.retainedWords;
-      newState.repetitions =
-        this.state.userSettings.studyPresets[0].repetitions ||
-        PARAMS.discover.repetitions;
-      newState.limitNumberOfWords =
-        this.state.userSettings.studyPresets[0].limitNumberOfWords ||
-        PARAMS.discover.limitNumberOfWords;
-      newState.sortOrder = PARAMS.discover.sortOrder;
-      break;
-    case "revise":
-      newState.showStrokes = PARAMS.revise.showStrokes;
-      newState.hideStrokesOnLastRepetition =
-        PARAMS.revise.hideStrokesOnLastRepetition;
-      newState.newWords = PARAMS.revise.newWords;
-      newState.seenWords = PARAMS.revise.seenWords;
-      newState.retainedWords = PARAMS.revise.retainedWords;
-      newState.repetitions =
-        this.state.userSettings.studyPresets[1].repetitions ||
-        PARAMS.revise.repetitions;
-      newState.limitNumberOfWords =
-        this.state.userSettings.studyPresets[1].limitNumberOfWords ||
-        PARAMS.revise.limitNumberOfWords;
-      newState.sortOrder = PARAMS.revise.sortOrder;
-      break;
-    case "drill":
-      newState.showStrokes = PARAMS.drill.showStrokes;
-      newState.hideStrokesOnLastRepetition =
-        PARAMS.drill.hideStrokesOnLastRepetition;
-      newState.newWords = PARAMS.drill.newWords;
-      newState.seenWords = PARAMS.drill.seenWords;
-      newState.retainedWords = PARAMS.drill.retainedWords;
-      newState.repetitions =
-        this.state.userSettings.studyPresets[2].repetitions ||
-        PARAMS.drill.repetitions;
-      newState.limitNumberOfWords =
-        this.state.userSettings.studyPresets[2].limitNumberOfWords ||
-        PARAMS.drill.limitNumberOfWords;
-      newState.sortOrder = PARAMS.drill.sortOrder;
-      break;
-    case "practice":
-      newState.showStrokes = PARAMS.practice.showStrokes;
-      newState.hideStrokesOnLastRepetition =
-        PARAMS.practice.hideStrokesOnLastRepetition;
-      newState.newWords = PARAMS.practice.newWords;
-      newState.seenWords = PARAMS.practice.seenWords;
-      newState.retainedWords = PARAMS.practice.retainedWords;
-      newState.repetitions =
-        this.state.userSettings.studyPresets[3].repetitions ||
-        PARAMS.practice.repetitions;
-      newState.limitNumberOfWords =
-        this.state.userSettings.studyPresets[3].limitNumberOfWords ||
-        PARAMS.practice.limitNumberOfWords;
-      newState.sortOrder = PARAMS.practice.sortOrder;
-      break;
-    default:
-      break;
+    switch (value) {
+      case "discover":
+        newState.showStrokes = PARAMS.discover.showStrokes;
+        newState.hideStrokesOnLastRepetition =
+          PARAMS.discover.hideStrokesOnLastRepetition;
+        newState.newWords = PARAMS.discover.newWords;
+        newState.seenWords = PARAMS.discover.seenWords;
+        newState.retainedWords = PARAMS.discover.retainedWords;
+        newState.repetitions =
+          currentState.studyPresets[0].repetitions ||
+          PARAMS.discover.repetitions;
+        newState.limitNumberOfWords =
+          currentState.studyPresets[0].limitNumberOfWords ||
+          PARAMS.discover.limitNumberOfWords;
+        newState.sortOrder = PARAMS.discover.sortOrder;
+        break;
+      case "revise":
+        newState.showStrokes = PARAMS.revise.showStrokes;
+        newState.hideStrokesOnLastRepetition =
+          PARAMS.revise.hideStrokesOnLastRepetition;
+        newState.newWords = PARAMS.revise.newWords;
+        newState.seenWords = PARAMS.revise.seenWords;
+        newState.retainedWords = PARAMS.revise.retainedWords;
+        newState.repetitions =
+          currentState.studyPresets[1].repetitions ||
+          PARAMS.revise.repetitions;
+        newState.limitNumberOfWords =
+          currentState.studyPresets[1].limitNumberOfWords ||
+          PARAMS.revise.limitNumberOfWords;
+        newState.sortOrder = PARAMS.revise.sortOrder;
+        break;
+      case "drill":
+        newState.showStrokes = PARAMS.drill.showStrokes;
+        newState.hideStrokesOnLastRepetition =
+          PARAMS.drill.hideStrokesOnLastRepetition;
+        newState.newWords = PARAMS.drill.newWords;
+        newState.seenWords = PARAMS.drill.seenWords;
+        newState.retainedWords = PARAMS.drill.retainedWords;
+        newState.repetitions =
+          currentState.studyPresets[2].repetitions ||
+          PARAMS.drill.repetitions;
+        newState.limitNumberOfWords =
+          currentState.studyPresets[2].limitNumberOfWords ||
+          PARAMS.drill.limitNumberOfWords;
+        newState.sortOrder = PARAMS.drill.sortOrder;
+        break;
+      case "practice":
+        newState.showStrokes = PARAMS.practice.showStrokes;
+        newState.hideStrokesOnLastRepetition =
+          PARAMS.practice.hideStrokesOnLastRepetition;
+        newState.newWords = PARAMS.practice.newWords;
+        newState.seenWords = PARAMS.practice.seenWords;
+        newState.retainedWords = PARAMS.practice.retainedWords;
+        newState.repetitions =
+          currentState.studyPresets[3].repetitions ||
+          PARAMS.practice.repetitions;
+        newState.limitNumberOfWords =
+          currentState.studyPresets[3].limitNumberOfWords ||
+          PARAMS.practice.limitNumberOfWords;
+        newState.sortOrder = PARAMS.practice.sortOrder;
+        break;
+      default:
+        break;
+    }
+
+    setState(newState);
+
+    let labelString = value;
+    if (!value) {
+      labelString = "BAD_INPUT";
+    }
+
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Choose Study Type",
+      label: labelString,
+    });
+
+    return value;
   }
-
-  this.setState({ userSettings: newState }, () => {
-    this.setupLesson();
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
-
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
-  }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Choose Study Type",
-    label: labelString,
-  });
-
-  return value;
 }
 
-export function handleBeatsPerMinute(event) {
-  let currentState = this.state.userSettings;
-  let newState = Object.assign({}, currentState);
+export function useHandleBeatsPerMinute() {
+  const setState = useSetAtom(beatsPerMinuteState)
 
-  const name = "beatsPerMinute";
-  const value = event;
+  return (event) => {
+    const value = event;
 
-  newState[name] = value;
+    setState(value);
 
-  this.setState({ userSettings: newState }, () => {
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
+    let labelString = value;
+    if (!value) {
+      labelString = "BAD_INPUT";
+    }
 
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change beats per minute",
+      label: labelString,
+    });
+
+    return value;
   }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change beats per minute",
-    label: labelString,
-  });
-
-  return value;
 }
 
-export function handleDiagramSize(event) {
-  let currentState = this.state.userSettings;
-  let newState = Object.assign({}, currentState);
+export function useHandleDiagramSize() {
+  const setState = useSetAtom(diagramSizeState);
 
-  const name = "diagramSize";
-  let value = typeof event === "number" ? +event.toFixed(1) : 1.0;
-  if (value > 2) {
-    value = 2.0;
+  return (event) => {
+    let value = typeof event === "number" ? +event.toFixed(1) : 1.0;
+    if (value > 2) {
+      value = 2.0;
+    }
+    if (value < 1) {
+      value = 1.0;
+    }
+
+    setState(value);
+
+    const labelString = !!value ? `${value}` : "BAD_INPUT";
+
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change diagram size",
+      label: labelString,
+    });
+
+    return value;
   }
-  if (value < 1) {
-    value = 1.0;
-  }
-
-  newState[name] = value;
-
-  this.setState({ userSettings: newState }, () => {
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
-
-  const labelString = !!value ? `${value}` : "BAD_INPUT";
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change diagram size",
-    label: labelString,
-  });
-
-  return value;
 }
 
-export function handleLimitWordsChange(event) {
-  let currentState = this.state.userSettings;
-  let newState = Object.assign({}, currentState);
+export function useHandleLimitWordsChange() {
+  const setState = useSetAtom(limitNumberOfWordsState)
 
-  const name = "limitNumberOfWords";
-  const value = event;
+  return (event) => {
+    const value = event;
 
-  newState[name] = value;
+    setState(value);
 
-  this.setState({ userSettings: newState }, () => {
-    this.setupLesson();
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
+    let labelString = value;
+    if (!value) {
+      labelString = "BAD_INPUT";
+    }
 
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change limit word count",
+      label: labelString,
+    });
+
+    return value;
   }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change limit word count",
-    label: labelString,
-  });
-
-  return value;
 }
 
-export function handleRepetitionsChange(event) {
-  let currentState = this.state.userSettings;
-  let newState = Object.assign({}, currentState);
+export function useHandleRepetitionsChange() {
+  const setState = useSetAtom(repetitionsState);
 
-  const name = "repetitions";
-  const value = event;
+  return (event) => {
+    const value = event;
 
-  newState[name] = value;
+    setState(value);
 
-  this.setState({ userSettings: newState }, () => {
-    this.setupLesson();
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
+    let labelString = value;
+    if (!value) {
+      labelString = "BAD_INPUT";
+    }
 
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change repetitions",
+      label: labelString,
+    });
+
+    return value;
   }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change repetitions",
-    label: labelString,
-  });
-
-  return value;
 }
 
-export function handleStartFromWordChange(event) {
-  let currentState = this.state.userSettings;
-  let newState = Object.assign({}, currentState);
+export function useHandleStartFromWordChange() {
+  const setState = useSetAtom(startFromWordSettingState);
 
-  const name = "startFromWord";
-  const value = event;
+  return (event) => {
+    const value = event;
 
-  newState[name] = value;
+    setState(value);
 
-  this.setState({ userSettings: newState }, () => {
-    this.setupLesson();
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
+    let labelString = value;
+    if (!value) {
+      labelString = "BAD_INPUT";
+    }
 
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change start from word",
+      label: labelString,
+    });
+
+    return value;
   }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change start from word",
-    label: labelString,
-  });
-
-  return value;
 }
 
-export function handleUpcomingWordsLayout(event) {
-  let currentState = this.state.userSettings;
-  let newState = Object.assign({}, currentState);
+export function useHandleUpcomingWordsLayout() {
+  const setState = useSetAtom(upcomingWordsLayoutState);
 
-  const name = event.target.name;
-  const value = event.target.value;
+  return (event) => {
+    const value = event.target.value;
 
-  newState[name] = value;
+    setState(value);
 
-  this.setState({ userSettings: newState }, () => {
-    this.setupLesson();
-    writePersonalPreferences("userSettings", this.state.userSettings);
-  });
+    let labelString = value;
+    if (!value) {
+      labelString = "BAD_INPUT";
+    }
 
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Change upcoming words layout",
+      label: labelString,
+    });
+
+    return value;
   }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Change upcoming words layout",
-    label: labelString,
-  });
-
-  return value;
 }
 
 /**
  *
- * @param {"discover" | "revise" | "drill" | "practice"} studyType should have type Study
+ * @return {(studyType: "discover" | "revise" | "drill" | "practice") => void} studyType should have type Study
  */
-export function updatePreset(studyType) {
-  const newUserSettings = Object.assign({}, this.state.userSettings);
-  const presetSettings = {
-    limitNumberOfWords: this.state.userSettings.limitNumberOfWords,
-    repetitions: this.state.userSettings.repetitions,
-  };
+export function useUpdatePreset() {
+  const [currentState, setState] = useAtom(userSettingsState);
 
-  switch (studyType) {
-    case "discover":
-      newUserSettings.studyPresets[0] = presetSettings;
-      break;
+  return (studyType) => {
+    const newUserSettings = Object.assign({}, currentState);
+    const presetSettings = {
+      limitNumberOfWords: currentState.limitNumberOfWords,
+      repetitions: currentState.repetitions,
+    };
 
-    case "revise":
-      newUserSettings.studyPresets[1] = presetSettings;
-      break;
+    switch (studyType) {
+      case "discover":
+        newUserSettings.studyPresets[0] = presetSettings;
+        break;
 
-    case "drill":
-      newUserSettings.studyPresets[2] = presetSettings;
-      break;
+      case "revise":
+        newUserSettings.studyPresets[1] = presetSettings;
+        break;
 
-    case "practice":
-      newUserSettings.studyPresets[3] = presetSettings;
-      break;
+      case "drill":
+        newUserSettings.studyPresets[2] = presetSettings;
+        break;
 
-    default:
-      break;
+      case "practice":
+        newUserSettings.studyPresets[3] = presetSettings;
+        break;
+
+      default:
+        break;
+    }
+
+    setState(newUserSettings);
   }
-
-  this.setState({ userSettings: newUserSettings });
 }
 
-export function toggleHideOtherSettings(this_) {
-  let currentState = this_.state.userSettings;
-  let newState = Object.assign({}, currentState);
+export function useToggleHideOtherSettings() {
+  const [state, setState] = useAtom(hideOtherSettingsState)
 
-  const name = "hideOtherSettings";
-  const value = !currentState[name];
+  return () => {
+    const value = !state
 
-  newState[name] = value;
+    setState(value);
 
-  this_.setState({ userSettings: newState }, () => {
-    this_.setupLesson();
-    writePersonalPreferences("userSettings", this_.state.userSettings);
-  });
+    let labelString = value.toString();
 
-  let labelString = value;
-  if (!value) {
-    labelString = "BAD_INPUT";
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Toggle hide other settings",
+      label: labelString,
+    });
+
+    return value;
   }
-
-  GoogleAnalytics.event({
-    category: "UserSettings",
-    action: "Toggle hide other settings",
-    label: labelString,
-  });
-
-  return value;
 }

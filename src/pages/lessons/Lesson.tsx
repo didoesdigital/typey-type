@@ -17,6 +17,11 @@ import Zipper from "../../utils/zipper";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
+import {
+  useChooseStudy,
+  useToggleHideOtherSettings,
+  useUpdatePreset
+} from "./components/UserSettings/updateUserSetting";
 
 const isCustom = (pathname: string) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
@@ -78,11 +83,9 @@ const Lesson = ({
 }: LessonProps) => {
   const {
     appFetchAndSetupGlobalDict,
-    chooseStudy,
     customiseLesson,
     handleLesson,
     handleStopLesson,
-    toggleHideOtherSettings,
     changeFullscreen,
     changeShowStrokesInLesson,
     restartLesson,
@@ -98,11 +101,13 @@ const Lesson = ({
     updateGlobalLookupDictionary,
     updateMarkup,
     updatePersonalDictionaries,
-    updatePreset,
     updateRevisionMaterial,
     updateTopSpeedPersonalBest,
   } = useAppMethods();
   const userSettings = useAtomValue(userSettingsState);
+  const chooseStudy = useChooseStudy();
+  const toggleHideOtherSettings = useToggleHideOtherSettings();
+  const updatePreset = useUpdatePreset();
   const loadedLessonPath = useRef("");
 
   // const mainHeading = useRef<HTMLHeadingElement>(null);
