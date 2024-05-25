@@ -13,7 +13,6 @@ const appMethods: AppMethods = {
   reviseLesson: () => undefined,
   sayCurrentPhraseAgain: () => undefined,
   setCustomLessonContent: () => undefined,
-  setDictionaryIndex: () => undefined,
   setPersonalPreferences: () => [],
   setUpProgressRevisionLesson: () => undefined,
   setupLesson: () => undefined,

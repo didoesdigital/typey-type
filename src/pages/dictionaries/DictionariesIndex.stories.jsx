@@ -1,6 +1,8 @@
 import React from "react";
 import DictionariesIndex from "./DictionariesIndex";
 import userSettings from "../../stories/fixtures/userSettings";
+import { useHydrateAtoms } from "jotai/utils";
+import { dictionaryIndexState } from "../../states/dictionaryIndexState";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -59,10 +61,9 @@ const globalLookupDictionary = new Map([
 ]);
 
 const Template = (args) => {
+  useHydrateAtoms([[dictionaryIndexState, dictionaryIndex]]);
   return (
     <DictionariesIndex
-      dictionaryIndex={dictionaryIndex}
-      setDictionaryIndex={() => console.log("set dictionaryIndex")}
       fetchAndSetupGlobalDict={() => Promise.resolve(true)}
       globalLookupDictionary={globalLookupDictionary}
       globalLookupDictionaryLoaded={true}

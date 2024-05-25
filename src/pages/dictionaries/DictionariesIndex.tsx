@@ -15,16 +15,16 @@ import type {
   StenoDictionary,
   UserSettings,
 } from "../../types";
+import { useAtomValue } from "jotai";
+import { dictionaryIndexState } from "../../states/dictionaryIndexState";
 
 /** Example: "/lessons/collections/tech/react/" */
 type DictLink = string;
 
 type Props = {
-  dictionaryIndex: any;
   fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
-  setDictionaryIndex: () => void;
   stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
   userSettings: UserSettings;
 };
@@ -89,14 +89,13 @@ const getExternalLink = (
   );
 
 const DictionariesIndex = ({
-  dictionaryIndex,
-  setDictionaryIndex,
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   stenohintsonthefly,
   userSettings,
 }: Props) => {
+  const dictionaryIndex = useAtomValue(dictionaryIndexState);
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const announceTooltip = useAnnounceTooltip();
 
@@ -106,14 +105,7 @@ const DictionariesIndex = ({
     }
   }, []);
 
-  useEffect(() => {
-    if (dictionaryIndex && dictionaryIndex.length < 2) {
-      setDictionaryIndex();
-    }
-
-    // FIXME: setDictionaryIndex in dependency array
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dictionaryIndex]);
+  // TODO(na2hiro): dictionary index should be loaded at this point
 
   const linkList = dictionaryIndex.map((dictionary: StenoDictionary) => {
     const author =

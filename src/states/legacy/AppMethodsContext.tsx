@@ -28,7 +28,6 @@ export type AppMethods = {
   restartLesson: typeof App.prototype.restartLesson,
   reviseLesson: typeof App.prototype.reviseLesson,
   sayCurrentPhraseAgain: typeof App.prototype.sayCurrentPhraseAgain,
-  setDictionaryIndex: typeof App.prototype.setDictionaryIndex,
   setPersonalPreferences: typeof App.prototype.setPersonalPreferences,
   setUpProgressRevisionLesson: typeof App.prototype.setUpProgressRevisionLesson,
   setupLesson: typeof App.prototype.setupLesson,

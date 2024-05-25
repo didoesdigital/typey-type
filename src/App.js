@@ -84,15 +84,6 @@ class App extends Component {
       customLessonMaterialValidationState: 'unvalidated',
       customLesson: fallbackLesson,
       actualText: ``,
-      dictionaryIndex: [{
-        "title": "Dictionary",
-        "author": "Typey Type",
-        "category": "Typey Type",
-        "tagline": "Typey Type’s dictionary is a version of the Plover dictionary with misstrokes removed for the top 10,000 words.",
-        "subcategory": "",
-        "link": "/support#typey-type-dictionary",
-        "path": "/dictionaries/typey-type/typey-type.json"
-      }],
       flashcardsMetWords: {
         "the": {
           phrase: "the",
@@ -1339,12 +1330,6 @@ class App extends Component {
     return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getRemaining().slice().map(item => item.phrase) : [];
   }
 
-  setDictionaryIndex() {
-    fetchDictionaryIndex().then((json) => {
-      this.setState({ dictionaryIndex: json })
-    });
-  }
-
   render() {
     let completedMaterial = this.presentCompletedMaterial();
     let upcomingMaterial = this.presentUpcomingMaterial();
@@ -1382,7 +1367,6 @@ class App extends Component {
               restartLesson: this.restartLesson.bind(this),
               reviseLesson: this.reviseLesson.bind(this),
               sayCurrentPhraseAgain: this.sayCurrentPhraseAgain.bind(this),
-              setDictionaryIndex: this.setDictionaryIndex.bind(this),
               setPersonalPreferences: this.setPersonalPreferences.bind(this),
               setUpProgressRevisionLesson: this.setUpProgressRevisionLesson.bind(this),
               setupLesson: this.setupLesson.bind(this),

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Route, Switch, useRouteMatch } from "react-router-dom";
 import Loadable from "react-loadable";
 import DictionariesIndex from "./DictionariesIndex";
@@ -26,7 +26,6 @@ const AsyncDictionaryManagement = Loadable({
 });
 
 type Props = {
-  dictionaryIndex: any;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
@@ -34,7 +33,6 @@ type Props = {
 };
 
 const Dictionaries = ({
-  dictionaryIndex,
   globalLookupDictionaryLoaded,
   globalLookupDictionary,
   stenohintsonthefly,
@@ -42,7 +40,6 @@ const Dictionaries = ({
 }: Props) => {
   const userSettings = useAtomValue(userSettingsState);
   const {
-    setDictionaryIndex,
     updatePersonalDictionaries,
     appFetchAndSetupGlobalDict,
   } = useAppMethods();
@@ -80,16 +77,16 @@ const Dictionaries = ({
           />
         </Route>
         <Route exact={true} path={url}>
-          <DictionariesIndex
-            dictionaryIndex={dictionaryIndex}
-            setDictionaryIndex={setDictionaryIndex}
-            stenohintsonthefly={stenohintsonthefly}
-            userSettings={userSettings}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
-            {...dictionaryProps}
-          />
+          <Suspense fallback={<PageLoading />}>
+            <DictionariesIndex
+              stenohintsonthefly={stenohintsonthefly}
+              userSettings={userSettings}
+              globalLookupDictionary={globalLookupDictionary}
+              globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+              fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
+              {...dictionaryProps}
+            />
+          </Suspense>
         </Route>
       </Switch>
     </div>

@@ -116,15 +116,6 @@ type AppStateForDescendants = {
   customLessonMaterialValidationState: CustomLessonMaterialValidationState,
   customLesson: Lesson,
   actualText: ActualTypedText,
-  dictionaryIndex: unknown, // TODO: type like [{
-//   "title": "Dictionary",
-//   "author": "Typey Type",
-//   "category": "Typey Type",
-//   "tagline": "Typey Type’s dictionary is a version of the Plover di  ctionary with misstrokes removed for the top 10,000 words.",
-//   "subcategory": "",
-//   "link": "/support#typey-type-dictionary",
-//   "path": "/dictionaries/typey-type/typey-type.json"
-// }],
   flashcardsMetWords: unknown, // TODO: type like {
 //   "the": {
 //     phrase: "the",
@@ -391,7 +382,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                         appState.globalLookupDictionaryLoaded
                       }
                       stenohintsonthefly={appProps.stenohintsonthefly}
-                      dictionaryIndex={appState.dictionaryIndex}
                       {...props}
                     />
                   </ErrorBoundary>
