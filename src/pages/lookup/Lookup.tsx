@@ -5,9 +5,7 @@ import PseudoContentButton from "../../components/PseudoContentButton";
 import Subheader from "../../components/Subheader";
 import getWordFamilyGroup from "./utilities/getWordFamilyGroup";
 
-import type {
-  GlobalUserSettings, MaterialItem,
-} from "../../types";
+import type { MaterialItem } from "../../types";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
@@ -15,14 +13,12 @@ import { userSettingsState } from "../../states/userSettingsState";
 type Props = {
   globalLookupDictionary: any;
   globalLookupDictionaryLoaded: boolean;
-  globalUserSettings: GlobalUserSettings;
   lookupTerm?: string;
 };
 
 const Lookup = ({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
-  globalUserSettings,
   lookupTerm,
 }: Props) => {
   const userSettings = useAtomValue(userSettingsState);
@@ -113,7 +109,6 @@ const Lookup = ({
                 fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
                 globalLookupDictionary={globalLookupDictionary}
                 globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-                globalUserSettings={globalUserSettings}
                 lookupTerm={lookupTerm}
                 onChange={strokesForWordsChange}
                 trackPhrase={setTrackPhrase}

@@ -32,7 +32,6 @@ const Template = (args) => (
             flashcardsProgress={flashcardsProgress}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={true}
-            globalUserSettings={{}}
             personalDictionaries={{}}
             updateFlashcardsMetWords={() => undefined}
             updateFlashcardsProgress={() => flashcardsProgress}

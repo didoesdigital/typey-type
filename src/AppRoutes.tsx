@@ -15,7 +15,6 @@ import {
   MaterialItem,
   MaterialText,
   Lesson,
-  GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
   CurrentLessonStrokes, ActualTypedText, PersonalDictionaryNameAndContents
@@ -146,7 +145,6 @@ type AppStateForDescendants = {
 // },
 // flashcardsCourseIndex: 0,
   fullscreen: boolean,
-  globalUserSettings: GlobalUserSettings,
 // isPloverDictionaryLoaded: false,
 // isGlobalLookupDictionaryLoaded: false,
   lookupTerm: string,
@@ -256,7 +254,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                 <DocumentTitle title={"Typey Type | Writer"}>
                   <ErrorBoundary>
                     <AsyncWriter
-                      globalUserSettings={appState.globalUserSettings}
                       {...props}
                     />
                   </ErrorBoundary>
@@ -278,7 +275,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       }
                       metWords={appState.metWords}
                       startingMetWordsToday={appState.startingMetWordsToday}
-                      globalUserSettings={appState.globalUserSettings}
                       {...props}
                     />
                   </ErrorBoundary>
@@ -322,7 +318,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                     <AsyncProgress
                       metWords={appState.metWords}
                       flashcardsNextLesson={appState.flashcardsNextLesson}
-                      globalUserSettings={appState.globalUserSettings}
                       recommendationHistory={appState.recommendationHistory}
                       recommendedNextLesson={appState.recommendedNextLesson}
                       lessonsProgress={appState.lessonsProgress}
@@ -354,7 +349,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                     globalLookupDictionaryLoaded={
                       appState.globalLookupDictionaryLoaded
                     }
-                    globalUserSettings={appState.globalUserSettings}
                     lessonpath="flashcards"
                     locationpathname={appProps.location.pathname}
                     personalDictionaries={appState.personalDictionaries}
@@ -376,7 +370,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       globalLookupDictionaryLoaded={
                         appState.globalLookupDictionaryLoaded
                       }
-                      globalUserSettings={appState.globalUserSettings}
                       lookupTerm={appState.lookupTerm}
                       {...props}
                     />
@@ -397,7 +390,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       globalLookupDictionaryLoaded={
                         appState.globalLookupDictionaryLoaded
                       }
-                      globalUserSettings={appState.globalUserSettings}
                       stenohintsonthefly={appProps.stenohintsonthefly}
                       dictionaryIndex={appState.dictionaryIndex}
                       {...props}
@@ -429,7 +421,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       globalLookupDictionaryLoaded={
                         appState.globalLookupDictionaryLoaded
                       }
-                      globalUserSettings={appState.globalUserSettings}
                       personalDictionaries={appState.personalDictionaries}
                       lessonNotFound={appState.lessonNotFound}
                       fullscreen={appState.fullscreen}

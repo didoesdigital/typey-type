@@ -100,7 +100,6 @@ const Template = (args) => {
     <AppMethodsContext.Provider value={appMethods}>
       <Progress
         flashcardsNextLesson={flashcardsNextLesson}
-        globalUserSettings={{}}
         lessonIndex={lessonIndex}
         lessonsProgress={testLessonsProgress}
         metWords={{}}

@@ -12,7 +12,6 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
-  globalUserSettings: any;
   userSettings: any;
 };
 
@@ -20,7 +19,6 @@ export default function Index({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   metWords,
-  globalUserSettings,
   userSettings,
 }: Props) {
   const {
@@ -55,7 +53,6 @@ export default function Index({
         metWords={metWords}
         globalLookupDictionary={globalLookupDictionary}
         globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-        globalUserSettings={globalUserSettings}
         userSettings={userSettings}
         updateMultipleMetWords={updateMultipleMetWords}
       />

@@ -17,7 +17,6 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
-  globalUserSettings: any;
   userSettings: any;
   updateMultipleMetWords: (newMetWords: string[]) => void;
 };
@@ -31,7 +30,6 @@ export default function Game({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   metWords,
-  globalUserSettings,
   userSettings,
   updateMultipleMetWords,
 }: Props) {
@@ -68,7 +66,6 @@ export default function Game({
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             userSettings={userSettings}
           />
         </div>

@@ -3,7 +3,6 @@ import FinishedPossibleStrokeImprovements from "./FinishedPossibleStrokeImprovem
 
 type FinishedMisstrokesSummaryProps = {
   currentLessonStrokes: any;
-  globalUserSettings: any;
   metWords: any;
   path: string;
   reviseLesson: () => void;
@@ -13,7 +12,6 @@ type FinishedMisstrokesSummaryProps = {
 
 const FinishedMisstrokesSummary = ({
   currentLessonStrokes,
-  globalUserSettings,
   metWords,
   path,
   reviseLesson,
@@ -39,7 +37,6 @@ const FinishedMisstrokesSummary = ({
         <ol className="mb0 unstyled-list">
           <FinishedPossibleStrokeImprovements
             currentLessonStrokes={currentLessonStrokes}
-            globalUserSettings={globalUserSettings}
             metWords={metWords}
             updateRevisionMaterial={updateRevisionMaterial}
           />

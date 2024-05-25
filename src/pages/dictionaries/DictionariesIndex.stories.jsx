@@ -68,7 +68,6 @@ const Template = (args) => {
       globalLookupDictionaryLoaded={true}
       lookupTerm={undefined}
       userSettings={userSettings}
-      globalUserSettings={{}}
       personalDictionaries={{ dictionariesNamesAndContents: null }}
       updateGlobalLookupDictionary={() => undefined}
       updatePersonalDictionaries={() => undefined}

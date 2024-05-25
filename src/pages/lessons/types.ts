@@ -37,7 +37,6 @@ export type LessonProps = {
   fullscreen: any;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: any;
-  globalUserSettings: GlobalUserSettings;
   lesson: Lesson;
   lessonIndex: any;
   lessonLength: number;
@@ -72,7 +71,6 @@ export type FinishedProps = {
   chooseStudy: () => void;
   currentLessonStrokes: any; // CurrentLessonStrokes;
   disableUserSettings: boolean;
-  globalUserSettings: GlobalUserSettings;
   toggleHideOtherSettings: () => void;
   lesson: Lesson;
   lessonLength: number;

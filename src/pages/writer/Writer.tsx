@@ -25,15 +25,16 @@ import mapBriefToPalantypeKeys from '../../utils/stenoLayouts/mapBriefToPalantyp
 import { fetchResource } from '../../utils/getData';
 import Subheader from "../../components/Subheader";
 
-import type { Outline, UserSettings } from "../../types";
+import type { GlobalUserSettings, Outline, UserSettings } from "../../types";
 import { WithAppMethods, withAppMethods } from "../../states/legacy/AppMethodsContext";
 import { userSettingsState } from "../../states/userSettingsState";
-import { withAtomCompat } from "../../states/atomUtils";
+import { withAtomsCompat } from "../../states/atomUtils";
 import { useChangeStenoLayout } from "../lessons/components/UserSettings/updateUserSetting";
+import { globalUserSettingsState } from "../../states/globalUserSettingsState";
 
 type Props = {
   userSettings: UserSettings,
-  globalUserSettings: any,
+  globalUserSettings: GlobalUserSettings,
   // stenoHintsOnTheFly: boolean
 };
 
@@ -416,4 +417,7 @@ function WriterWrapper(props: WithAppMethods<Props>) {
   return <Writer {...props} {...{changeStenoLayout}} />;
 }
 
-export default withAppMethods(withAtomCompat(WriterWrapper, "userSettings", userSettingsState));
+export default withAppMethods(withAtomsCompat(WriterWrapper, [
+  ["userSettings", userSettingsState],
+  ["globalUserSettings", globalUserSettingsState]
+]));

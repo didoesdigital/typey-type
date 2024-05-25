@@ -26,7 +26,6 @@ const Template = (args) => {
     <DictionaryManagement
       fetchAndSetupGlobalDict={() => Promise.resolve(true)}
       globalLookupDictionary={globalLookupDictionary}
-      globalUserSettings={{}}
       personalDictionaries={{ dictionariesNamesAndContents: null }}
       updatePersonalDictionaries={() => undefined}
       toggleExperiment={() => console.log("toggle experiment")}

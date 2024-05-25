@@ -33,7 +33,6 @@ const Finished = ({
   chooseStudy,
   currentLessonStrokes,
   disableUserSettings,
-  globalUserSettings,
   toggleHideOtherSettings,
   lesson,
   lessonLength,
@@ -198,7 +197,6 @@ const Finished = ({
                     </div>
                     <FinishedMisstrokesSummary
                       currentLessonStrokes={currentLessonStrokes}
-                      globalUserSettings={globalUserSettings}
                       metWords={metWords}
                       path={path}
                       reviseLesson={reviseLesson}

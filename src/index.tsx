@@ -7,8 +7,9 @@ import App from "./App";
 import withAnalyticsTracker from "./utils/withAnalyticsTracker";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.scss";
-import { withAtomCompat } from "./states/atomUtils";
+import { withAtomsCompat } from "./states/atomUtils";
 import { userSettingsState } from "./states/userSettingsState";
+import { globalUserSettingsState } from "./states/globalUserSettingsState";
 
 if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
   init({
@@ -26,7 +27,10 @@ ReactDOM.render(
   <DocumentTitle title="Typey Type for Stenographers">
     <Router basename="/typey-type">
       <ErrorBoundary>
-        <Route component={withAtomCompat(withAnalyticsTracker(App), "userSettings", userSettingsState)} />
+        <Route component={withAtomsCompat(withAnalyticsTracker(App), [
+          ["userSettings", userSettingsState],
+          ["globalUserSettings", globalUserSettingsState],
+        ])} />
       </ErrorBoundary>
     </Router>
   </DocumentTitle>,

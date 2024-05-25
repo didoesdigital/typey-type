@@ -500,7 +500,6 @@ currentSlide: currentSlide
                   fetchAndSetupGlobalDict={this.props.fetchAndSetupGlobalDict}
                   globalLookupDictionary={this.props.globalLookupDictionary}
                   globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
-                  globalUserSettings={this.props.globalUserSettings}
                   userSettings={this.props.userSettings}
                 />
               </div>

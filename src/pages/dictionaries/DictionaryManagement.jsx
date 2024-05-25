@@ -11,6 +11,8 @@ import { writePersonalPreferences } from "../../utils/typey-type";
 import misstrokesJSON from "../../json/misstrokes.json";
 import Subheader from "../../components/Subheader";
 import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
+import { useAtomValue } from "jotai";
+import { globalUserSettingsState } from "../../states/globalUserSettingsState";
 
 // type Props = {
 //   fetchAndSetupGlobalDict
@@ -33,6 +35,7 @@ const invalidEntries = {
 };
 
 const DictionaryManagement = (props) => {
+  const globalUserSettings = useAtomValue(globalUserSettingsState);
   const mainHeading = useRef(null);
   // const mainHeading = useRef<HTMLHeadingElement>(null);
   const { updateMessage } = useAnnouncerApi();
@@ -817,7 +820,7 @@ const DictionaryManagement = (props) => {
                   name="stenohintsonthefly"
                   id="stenohintsonthefly"
                   checked={
-                    !!props.globalUserSettings.experiments?.stenohintsonthefly
+                    !!globalUserSettings.experiments?.stenohintsonthefly
                   }
                   onChange={props.toggleExperiment}
                 />

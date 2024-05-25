@@ -13,7 +13,6 @@ const Template = (args) => {
   return (
     <AppMethodsContext.Provider value={appMethods}>
       <Writer
-        globalUserSettings={{}}
         userSettings={{ stenoLayout: "stenoLayoutAmericanSteno" }}
         {...args}
       />

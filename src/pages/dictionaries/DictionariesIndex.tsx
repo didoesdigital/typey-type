@@ -10,7 +10,6 @@ import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 import type {
   Experiments,
   FetchAndSetupGlobalDict,
-  GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   PrettyLessonTitle,
   StenoDictionary,
@@ -25,7 +24,6 @@ type Props = {
   fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
-  globalUserSettings: GlobalUserSettings;
   setDictionaryIndex: () => void;
   stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
   userSettings: UserSettings;
@@ -96,7 +94,6 @@ const DictionariesIndex = ({
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
-  globalUserSettings,
   stenohintsonthefly,
   userSettings,
 }: Props) => {
@@ -435,7 +432,6 @@ const DictionariesIndex = ({
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-              globalUserSettings={globalUserSettings}
               userSettings={userSettings}
             />
           </div>

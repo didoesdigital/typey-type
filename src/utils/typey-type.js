@@ -621,14 +621,6 @@ function loadPersonalDictionariesFromLocalStorage() {
 function loadPersonalPreferences() {
   let metWords = {};
   let flashcardsProgress = {};
-  let globalUserSettings = {
-    experiments: {},
-    flashcardsCourseLevel: "noviceCourse",
-    showMisstrokesInLookup: false,
-    writerInput: "qwerty",
-    inputForKAOES: "qwerty",
-    backupBannerDismissedTime: null,
-  };
   let flashcardsMetWords = {
     "the": {
       phrase: "the",
@@ -654,9 +646,6 @@ function loadPersonalPreferences() {
       if (window.localStorage.getItem('flashcardsProgress')) {
         flashcardsProgress = Object.assign(flashcardsProgress, JSON.parse(window.localStorage.getItem('flashcardsProgress')));
       }
-      if (window.localStorage.getItem('globalUserSettings')) {
-        globalUserSettings = Object.assign(globalUserSettings, JSON.parse(window.localStorage.getItem('globalUserSettings')));
-      }
       if (window.localStorage.getItem('lessonsProgress')) {
         lessonsProgress = Object.assign(lessonsProgress, JSON.parse(window.localStorage.getItem('lessonsProgress')));
       }
@@ -669,13 +658,13 @@ function loadPersonalPreferences() {
       if (window.localStorage.getItem('userGoals')) {
         userGoals = Object.assign(userGoals, JSON.parse(window.localStorage.getItem('userGoals')));
       }
-      return [metWords, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
+      return [metWords, flashcardsMetWords, flashcardsProgress, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
     }
   }
   catch(error) {
     console.log('Unable to read local storage.', error);
   }
-  return [metWords, flashcardsMetWords, flashcardsProgress, globalUserSettings, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
+  return [metWords, flashcardsMetWords, flashcardsProgress, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
 }
 
 function writePersonalPreferences(itemToStore, JSONToStore) {

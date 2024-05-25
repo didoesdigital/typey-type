@@ -14,12 +14,13 @@ import ProgressSummaryAndLinks from "./components/ProgressSummaryAndLinks";
 import LessonsProgress from "./components/LessonsProgress";
 import DownloadProgressButton from "./components/DownloadProgressButton";
 import Subheader from "../../components/Subheader";
-import { GlobalUserSettings, MetWords } from "../../types";
+import { MetWords } from "../../types";
 import BackupBanner from "./components/BackupBanner";
 import BackupModal from "./components/BackupModal";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
+import { globalUserSettingsState } from "../../states/globalUserSettingsState";
 
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
@@ -28,7 +29,6 @@ let particles: any[] = [];
 
 type Props = {
   flashcardsNextLesson: any;
-  globalUserSettings: GlobalUserSettings;
   lessonIndex: any;
   lessonsProgress: any;
   metWords: MetWords;
@@ -54,6 +54,7 @@ const Progress = (props: Props) => {
     updateUserGoalsUnveiled,
     dismissBackupBanner,
   } = useAppMethods();
+  const globalUserSettings = useAtomValue(globalUserSettingsState);
   const userSettings = useAtomValue(userSettingsState);
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const canvas = useRef(null);
@@ -446,7 +447,7 @@ const Progress = (props: Props) => {
         <FlashcardsSection
           showOnSmallScreen={true}
           changeFlashcardCourseLevel={changeFlashcardCourseLevel}
-          flashcardsCourseLevel={props.globalUserSettings.flashcardsCourseLevel}
+          flashcardsCourseLevel={globalUserSettings.flashcardsCourseLevel}
           flashcardsNextLesson={props.flashcardsNextLesson}
           loadingLessonIndex={loadingLessonIndex}
           skipButtonId={mobileSkipButtonId}
@@ -485,7 +486,7 @@ const Progress = (props: Props) => {
           </div>
 
           <BackupBanner
-            dismissedTime={props.globalUserSettings.backupBannerDismissedTime}
+            dismissedTime={globalUserSettings.backupBannerDismissedTime}
             dismiss={dismissBackupBanner}
           />
 
@@ -559,7 +560,7 @@ const Progress = (props: Props) => {
                 showOnSmallScreen={false}
                 changeFlashcardCourseLevel={changeFlashcardCourseLevel}
                 flashcardsCourseLevel={
-                  props.globalUserSettings.flashcardsCourseLevel
+                  globalUserSettings.flashcardsCourseLevel
                 }
                 flashcardsNextLesson={props.flashcardsNextLesson}
                 loadingLessonIndex={loadingLessonIndex}

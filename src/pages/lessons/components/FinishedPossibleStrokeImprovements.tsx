@@ -1,10 +1,10 @@
 import React from "react";
 import { useAtomValue } from "jotai";
 import { spacePlacementState } from "../../../states/userSettingsState";
+import { globalUserSettingsState } from "../../../states/globalUserSettingsState";
 
 type FinishedPossibleStrokeImprovementsProps = {
   currentLessonStrokes: any;
-  globalUserSettings: any;
   metWords: any;
   updateRevisionMaterial: any;
 };
@@ -21,10 +21,10 @@ const getWordWithSpacing = (
 
 const FinishedPossibleStrokeImprovements = ({
   currentLessonStrokes,
-  globalUserSettings,
   metWords,
   updateRevisionMaterial,
 }: FinishedPossibleStrokeImprovementsProps) => {
+  const globalUserSettings = useAtomValue(globalUserSettingsState);
   const spacePlacement = useAtomValue(spacePlacementState);
   return currentLessonStrokes.length > 0
     ? currentLessonStrokes.map((phrase: any, i: number) => {

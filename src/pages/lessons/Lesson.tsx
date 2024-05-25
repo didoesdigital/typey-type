@@ -51,7 +51,6 @@ const Lesson = ({
   fullscreen,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
-  globalUserSettings,
   lesson,
   lessonIndex,
   lessonLength,
@@ -338,7 +337,6 @@ const Lesson = ({
               chooseStudy={chooseStudy}
               currentLessonStrokes={currentLessonStrokes}
               disableUserSettings={disableUserSettings}
-              globalUserSettings={globalUserSettings}
               toggleHideOtherSettings={toggleHideOtherSettings}
               metadata={metadata}
               lesson={lesson}
@@ -403,7 +401,6 @@ const Lesson = ({
                     flashcardsProgress={flashcardsProgress}
                     globalLookupDictionary={globalLookupDictionary}
                     globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-                    globalUserSettings={globalUserSettings}
                     personalDictionaries={personalDictionaries}
                     updateFlashcardsMetWords={updateFlashcardsMetWords.bind(
                       this

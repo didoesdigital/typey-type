@@ -41,7 +41,6 @@ const Lessons = ({
   fullscreen,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
-  globalUserSettings,
   lesson,
   lessonIndex,
   lessonLength,
@@ -88,7 +87,6 @@ const Lessons = ({
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -136,7 +134,6 @@ const Lessons = ({
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -184,7 +181,6 @@ const Lessons = ({
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -232,7 +228,6 @@ const Lessons = ({
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -280,7 +275,6 @@ const Lessons = ({
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -328,7 +322,6 @@ const Lessons = ({
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -377,7 +370,6 @@ const Lessons = ({
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -426,7 +418,6 @@ const Lessons = ({
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -475,7 +466,6 @@ const Lessons = ({
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -561,7 +551,6 @@ const Lessons = ({
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -610,7 +599,6 @@ const Lessons = ({
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error
@@ -659,7 +647,6 @@ const Lessons = ({
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             lesson={lesson}
             lessonIndex={lessonIndex}
             // @ts-expect-error

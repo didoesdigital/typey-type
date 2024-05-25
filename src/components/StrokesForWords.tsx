@@ -10,12 +10,13 @@ import StrokesAsDiagrams from "./StrokesAsDiagrams";
 
 import type {
   FetchAndSetupGlobalDict,
-  GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   StenoDictionary,
   StrokeAndDictionaryAndNamespace,
   UserSettings,
 } from "../types";
+import { useAtomValue } from "jotai";
+import { globalUserSettingsState } from "../states/globalUserSettingsState";
 
 type Props = {
   fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
@@ -23,7 +24,6 @@ type Props = {
   onChange?: (phrase: string) => void;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
-  globalUserSettings: GlobalUserSettings;
   trackPhrase?: (value: React.SetStateAction<string>) => void;
   userSettings: UserSettings;
 };
@@ -34,10 +34,10 @@ const StrokesForWords = ({
   onChange,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
-  globalUserSettings,
   trackPhrase,
   userSettings,
 }: Props) => {
+  const globalUserSettings = useAtomValue(globalUserSettingsState);
   const [modifiedWordOrPhraseState, setModifiedWordOrPhraseState] =
     useState("");
   const [phraseState, setPhraseState] = useState("");
@@ -74,7 +74,7 @@ const StrokesForWords = ({
   };
 
   const showMisstrokesInLookup =
-    globalUserSettings?.showMisstrokesInLookup ?? false;
+    globalUserSettings.showMisstrokesInLookup ?? false;
 
   function updateWordsForStrokes(phrase: string) {
     if (onChange) {

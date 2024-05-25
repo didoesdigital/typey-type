@@ -6,7 +6,6 @@ import PageLoading from "../../components/PageLoading";
 
 import type {
   Experiments,
-  GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
 } from "../../types";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
@@ -29,7 +28,6 @@ type Props = {
   dictionaryIndex: any;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
-  globalUserSettings: GlobalUserSettings;
   stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
   [restProps: string]: any;
 };
@@ -38,7 +36,6 @@ const Dictionaries = ({
   dictionaryIndex,
   globalLookupDictionaryLoaded,
   globalLookupDictionary,
-  globalUserSettings,
   stenohintsonthefly,
   ...dictionaryProps
 }: Props) => {
@@ -76,7 +73,6 @@ const Dictionaries = ({
           <AsyncDictionaryManagement
             fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
-            globalUserSettings={globalUserSettings}
             toggleExperiment={toggleExperiment}
             updatePersonalDictionaries={updatePersonalDictionaries}
             {...dictionaryProps}
@@ -90,7 +86,6 @@ const Dictionaries = ({
             userSettings={userSettings}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-            globalUserSettings={globalUserSettings}
             fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
             {...dictionaryProps}
           />

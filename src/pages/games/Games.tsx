@@ -6,12 +6,12 @@ import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 import "./Games.scss";
 import type {
-  GlobalUserSettings,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
 } from "../../types";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
+import { globalUserSettingsState } from "../../states/globalUserSettingsState";
 
 const AsyncGamesIndex = Loadable({
   loader: () => import("./GamesIndex"),
@@ -61,7 +61,6 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
   startingMetWordsToday: MetWords;
-  globalUserSettings: GlobalUserSettings;
 };
 
 const Games = ({
@@ -69,9 +68,9 @@ const Games = ({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   metWords,
-  globalUserSettings,
   startingMetWordsToday,
 }: Props) => {
+  const globalUserSettings = useAtomValue(globalUserSettingsState);
   const userSettings = useAtomValue(userSettingsState);
   return (
     <Switch>
@@ -125,7 +124,6 @@ const Games = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               metWords={metWords}
-              globalUserSettings={globalUserSettings}
               userSettings={userSettings}
             />
           </ErrorBoundary>

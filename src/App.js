@@ -79,7 +79,7 @@ class App extends Component {
     // add the same default to load/set personal preferences code and test.
     let metWordsFromStorage = loadPersonalPreferences()[0];
     let startingMetWordsToday = loadPersonalPreferences()[0];
-    let recentLessons = loadPersonalPreferences()[5];
+    let recentLessons = loadPersonalPreferences()[4];
     this.appFetchAndSetupGlobalDict = fetchAndSetupGlobalDict.bind(this);
 
     this.state = {
@@ -122,14 +122,6 @@ class App extends Component {
       },
       flashcardsCourseIndex: 0,
       fullscreen: false,
-      globalUserSettings: {
-        experiments: {},
-        flashcardsCourseLevel: "noviceCourse", // see types.ts noviceCourse || beginnerCourse || competentCourse || proficientCourse || expertCourse
-        writerInput: "qwerty", // qwerty || raw
-        inputForKAOES: "qwerty", // qwerty || raw
-        showMisstrokesInLookup: false,
-        backupBannerDismissedTime: null,
-      },
       isPloverDictionaryLoaded: false,
       isGlobalLookupDictionaryLoaded: false,
       lookupTerm: '',
@@ -275,7 +267,6 @@ class App extends Component {
     let metWordsFromStateOrArg = this.state.metWords;
     let flashcardsMetWordsState = this.state.flashcardsMetWords;
     let flashcardsProgressState = this.state.flashcardsProgress;
-    let globalUserSettingsState = this.state.globalUserSettings;
     let lessonsProgressState = this.state.lessonsProgress;
     let recentLessonsState = this.state.recentLessons;
     let topSpeedPersonalBestState = this.state.topSpeedPersonalBest;
@@ -290,7 +281,7 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWordsFromStateOrArg, flashcardsMetWordsState, flashcardsProgressState, globalUserSettingsState, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState, userGoalsState] = loadPersonalPreferences();
+      [metWordsFromStateOrArg, flashcardsMetWordsState, flashcardsProgressState, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState, userGoalsState] = loadPersonalPreferences();
     }
 
     let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
@@ -299,7 +290,6 @@ class App extends Component {
     this.setState({
       flashcardsMetWords: flashcardsMetWordsState,
       flashcardsProgress: flashcardsProgressState,
-      globalUserSettings: globalUserSettingsState,
       lessonsProgress: lessonsProgressState,
       recentLessons: recentLessonsState,
       topSpeedPersonalBest: topSpeedPersonalBestState,
@@ -310,7 +300,6 @@ class App extends Component {
     }, () => {
       writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
       writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
-      writePersonalPreferences('globalUserSettings', this.state.globalUserSettings);
       writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
       writePersonalPreferences('recentLessons', this.state.recentLessons);
       writePersonalPreferences('topSpeedPersonalBest', this.state.topSpeedPersonalBest);
@@ -319,7 +308,7 @@ class App extends Component {
       this.setupLesson();
     });
 
-    return [metWordsFromStateOrArg, undefined, flashcardsMetWordsState, flashcardsProgressState, globalUserSettingsState, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState['wpm'], userGoalsState];
+    return [metWordsFromStateOrArg, undefined, flashcardsMetWordsState, flashcardsProgressState, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState['wpm'], userGoalsState];
   }
 
   // TODO: sub state of userSettings
@@ -794,7 +783,7 @@ class App extends Component {
         this.setState({lessonNotFound: false});
         let lesson = parseLesson(lessonText, path);
         if (
-          this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly &&
+          this.props.globalUserSettings.experiments && !!this.props.globalUserSettings.experiments.stenohintsonthefly &&
           !path.includes("phrasing") &&
           !path.includes("prefixes") &&
           !path.includes("suffixes") &&
@@ -1059,7 +1048,7 @@ class App extends Component {
   }
 
   updateFlashcardsRecommendation() {
-    getFlashcardsNextLesson(this.state.flashcardsProgress, this.state.globalUserSettings.flashcardsCourseLevel, this.state.flashcardsCourseIndex)
+    getFlashcardsNextLesson(this.state.flashcardsProgress, this.props.globalUserSettings.flashcardsCourseLevel, this.state.flashcardsCourseIndex)
       .then((nextFlashcardsLessonAndCourseIndex) => {
         let [nextFlashcardsLesson, currentFlashcardsCourseIndex] = nextFlashcardsLessonAndCourseIndex;
 
@@ -1379,7 +1368,7 @@ class App extends Component {
       };
     }
 
-    let stenohintsonthefly = this.state.globalUserSettings && this.state.globalUserSettings.experiments && !!this.state.globalUserSettings.experiments.stenohintsonthefly;
+    let stenohintsonthefly = this.props.globalUserSettings.experiments && !!this.props.globalUserSettings.experiments.stenohintsonthefly;
 
     let presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
     return (
