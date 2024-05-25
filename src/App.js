@@ -72,7 +72,7 @@ class App extends Component {
     // add the same default to load/set personal preferences code and test.
     let metWordsFromStorage = loadPersonalPreferences()[0];
     let startingMetWordsToday = loadPersonalPreferences()[0];
-    let recentLessons = loadPersonalPreferences()[4];
+    let recentLessons = loadPersonalPreferences()[3];
     this.appFetchAndSetupGlobalDict = fetchAndSetupGlobalDict.bind(this);
 
     this.state = {
@@ -84,13 +84,6 @@ class App extends Component {
       customLessonMaterialValidationState: 'unvalidated',
       customLesson: fallbackLesson,
       actualText: ``,
-      flashcardsMetWords: {
-        "the": {
-          phrase: "the",
-          stroke: "-T",
-          rung: 0,
-        },
-      },
       globalLookupDictionary: new Map(),
       globalLookupDictionaryLoaded: false,
       lessonNotFound: false,
@@ -185,7 +178,6 @@ class App extends Component {
     }
 
     writePersonalPreferences('metWords', this.state.metWords);
-    writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
     writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
 
     if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
@@ -249,7 +241,6 @@ class App extends Component {
 
   setPersonalPreferences(source) {
     let metWordsFromStateOrArg = this.state.metWords;
-    let flashcardsMetWordsState = this.state.flashcardsMetWords;
     let flashcardsProgressState = this.state.flashcardsProgress;
     let lessonsProgressState = this.state.lessonsProgress;
     let recentLessonsState = this.state.recentLessons;
@@ -265,14 +256,13 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWordsFromStateOrArg, flashcardsMetWordsState, flashcardsProgressState, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState, userGoalsState] = loadPersonalPreferences();
+      [metWordsFromStateOrArg, flashcardsProgressState, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState, userGoalsState] = loadPersonalPreferences();
     }
 
     let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
     let calculatedYourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
 
     this.setState({
-      flashcardsMetWords: flashcardsMetWordsState,
       flashcardsProgress: flashcardsProgressState,
       lessonsProgress: lessonsProgressState,
       recentLessons: recentLessonsState,
@@ -282,7 +272,6 @@ class App extends Component {
       yourSeenWordCount: calculatedYourSeenWordCount,
       yourMemorisedWordCount: calculatedYourMemorisedWordCount,
     }, () => {
-      writePersonalPreferences('flashcardsMetWords', this.state.flashcardsMetWords);
       writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
       writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
       writePersonalPreferences('recentLessons', this.state.recentLessons);
@@ -291,8 +280,6 @@ class App extends Component {
       writePersonalPreferences('userGoals', this.state.userGoals);
       this.setupLesson();
     });
-
-    return [metWordsFromStateOrArg, undefined, flashcardsMetWordsState, flashcardsProgressState, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState['wpm'], userGoalsState];
   }
 
   // TODO: sub state of userSettings
@@ -465,41 +452,6 @@ class App extends Component {
       writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
     });
     return flashcardsProgress;
-  }
-
-  updateFlashcardsMetWords(word, feedback, stroke, rung = 0) {
-    let localStroke = stroke || "XXX";
-    let flashcardsMetWords = Object.assign({}, this.state.flashcardsMetWords);
-    if (flashcardsMetWords[word]) {
-      if (flashcardsMetWords[word].rung) {
-        rung = flashcardsMetWords[word].rung;
-      }
-    }
-
-    if (feedback === "easy") {
-      rung = rung + 1;
-      // debugger
-    } else if (feedback === "hard") {
-      rung = rung - 1;
-      // debugger
-      if (rung < 0 ) { rung = 0;}
-    }
-
-    flashcardsMetWords[word] = {
-      phrase: word,
-      stroke: localStroke,
-      rung: rung
-    }
-
-    // debugger
-
-    this.setState({
-      flashcardsMetWords: flashcardsMetWords,
-    }, () => {
-      writePersonalPreferences('flashcardsMetWords', flashcardsMetWords);
-    });
-    // debugger
-    return flashcardsMetWords;
   }
 
   updateStartingMetWordsAndCounts(providedMetWords) {
@@ -1373,7 +1325,6 @@ class App extends Component {
               startCustomLesson: this.startCustomLesson.bind(this),
               startFromWordOne: this.startFromWordOne.bind(this),
               stopLesson: this.stopLesson.bind(this),
-              updateFlashcardsMetWords: this.updateFlashcardsMetWords.bind(this),
               updateFlashcardsProgress: this.updateFlashcardsProgress.bind(this),
               updateFlashcardsRecommendation: this.updateFlashcardsRecommendation.bind(this),
               updateGlobalLookupDictionary: this.updateGlobalLookupDictionary.bind(this),

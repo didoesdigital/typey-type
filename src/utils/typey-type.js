@@ -621,13 +621,6 @@ function loadPersonalDictionariesFromLocalStorage() {
 function loadPersonalPreferences() {
   let metWords = {};
   let flashcardsProgress = {};
-  let flashcardsMetWords = {
-    "the": {
-      phrase: "the",
-      stroke: "-T",
-      rung: 0,
-    },
-  };
   let lessonsProgress = {};
   let recentLessons = {history: []};
   let topSpeedPersonalBest = { wpm: 0 };
@@ -639,9 +632,6 @@ function loadPersonalPreferences() {
     if (window.localStorage) {
       if (window.localStorage.getItem('metWords')) {
         metWords = JSON.parse(window.localStorage.getItem('metWords'));
-      }
-      if (window.localStorage.getItem('flashcardsMetWords')) {
-        flashcardsMetWords = Object.assign(flashcardsMetWords, JSON.parse(window.localStorage.getItem('flashcardsMetWords')));
       }
       if (window.localStorage.getItem('flashcardsProgress')) {
         flashcardsProgress = Object.assign(flashcardsProgress, JSON.parse(window.localStorage.getItem('flashcardsProgress')));
@@ -658,13 +648,13 @@ function loadPersonalPreferences() {
       if (window.localStorage.getItem('userGoals')) {
         userGoals = Object.assign(userGoals, JSON.parse(window.localStorage.getItem('userGoals')));
       }
-      return [metWords, flashcardsMetWords, flashcardsProgress, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
+      return [metWords, flashcardsProgress, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
     }
   }
   catch(error) {
     console.log('Unable to read local storage.', error);
   }
-  return [metWords, flashcardsMetWords, flashcardsProgress, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
+  return [metWords, flashcardsProgress, lessonsProgress, recentLessons, topSpeedPersonalBest['wpm'], userGoals];
 }
 
 function writePersonalPreferences(itemToStore, JSONToStore) {

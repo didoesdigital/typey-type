@@ -28,12 +28,10 @@ const Template = (args) => (
         <div>
           <Flashcards
             fetchAndSetupGlobalDict={() => Promise.resolve(true)}
-            flashcardsMetWords={{}}
             flashcardsProgress={flashcardsProgress}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={true}
             personalDictionaries={{}}
-            updateFlashcardsMetWords={() => undefined}
             updateFlashcardsProgress={() => flashcardsProgress}
             updateGlobalLookupDictionary={() => undefined}
             updatePersonalDictionaries={() => undefined}

@@ -19,7 +19,6 @@ const appMethods: AppMethods = {
   startCustomLesson: () => undefined,
   startFromWordOne: () => undefined,
   stopLesson: () => console.log("stop lesson"),
-  updateFlashcardsMetWords: () => ({ the: { phrase: "the", stroke: "-T", rung: 1 } }),
   updateFlashcardsProgress: () => ({}),
   updateFlashcardsRecommendation: () => console.log("update flashcards recommendation"),
   updateGlobalLookupDictionary: () => undefined,

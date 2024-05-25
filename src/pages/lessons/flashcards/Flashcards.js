@@ -5,7 +5,7 @@ import ReactModal from 'react-modal';
 import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
 import { withAppMethods } from "../../../states/legacy/AppMethodsContext";
 import { userSettingsState } from "../../../states/userSettingsState";
-import { withAtomCompat } from "../../../states/atomUtils";
+import { withAtomsCompat } from "../../../states/atomUtils";
 import FlashcardsCarouselActionButtons from './components/FlashcardsCarouselActionButtons';
 import FlashcardsModal from './components/FlashcardsModal';
 import StrokesForWords from '../../../components/StrokesForWords';
@@ -26,6 +26,7 @@ import SlideNodes from './components/SlideNodes';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Link } from 'react-router-dom';
 import Subheader from "../../../components/Subheader";
+import { flashcardsMetWordsState } from "../../../states/flashcardsMetWordsState";
 
 const shortestDimension = 3;
 const longestDimension = 4;
@@ -255,11 +256,11 @@ currentSlide: currentSlide
     let [currentSlideContent, currentSlideContentType] = getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
     if (currentSlideContentType === "stroke") {
       let word = getWordForCurrentStrokeSlideIndex(this.state.flashcards, slideIndex);
-      this.props.updateFlashcardsMetWords(word, "show", currentSlideContent, this.state.flashcardsMetWords);
+      this.props.setFlashcardsMetWords(word, "show", currentSlideContent);
     }
     else if (currentSlideContentType === "phrase") {
       let stroke = getStrokeForCurrentSlideContent(currentSlideContent, this.state.sourceMaterial);
-      this.props.updateFlashcardsMetWords(currentSlideContent, "show", stroke, this.state.flashcardsMetWords);
+      this.props.setFlashcardsMetWords(currentSlideContent, "show", stroke);
     }
 
     let labelString = currentSlideContent;
@@ -294,11 +295,11 @@ currentSlide: currentSlide
     let [currentSlideContent, currentSlideContentType] = getCurrentSlideContentAndType(this.state.flashcards, slideIndex);
     if (currentSlideContentType === "stroke") {
       let word = getWordForCurrentStrokeSlideIndex(this.state.flashcards, this.state.currentSlide);
-      this.props.updateFlashcardsMetWords(word, feedback, currentSlideContent, this.state.flashcardsMetWords);
+      this.props.setFlashcardsMetWords(word, feedback, currentSlideContent);
     }
     else if (currentSlideContentType === "phrase") {
       let stroke = getStrokeForCurrentSlideContent(currentSlideContent, this.state.sourceMaterial);
-      this.props.updateFlashcardsMetWords(currentSlideContent, "show", stroke, this.state.flashcardsMetWords);
+      this.props.setFlashcardsMetWords(currentSlideContent, "show", stroke);
     }
 
     let actionString = feedback;
@@ -518,7 +519,6 @@ function FlashcardsWrapper(props) {
   const {
     changeFullscreen,
     appFetchAndSetupGlobalDict,
-    updateFlashcardsMetWords,
     updateFlashcardsProgress,
   } = useAppMethods();
 
@@ -527,12 +527,14 @@ function FlashcardsWrapper(props) {
       {...props}
       changeFullscreen={changeFullscreen}
       fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
-      updateFlashcardsMetWords={updateFlashcardsMetWords}
       updateFlashcardsProgress={updateFlashcardsProgress}
     />
   );
 }
 
 export default withAppMethods(
-  withAtomCompat(FlashcardsWrapper, "userSettings", userSettingsState)
+  withAtomsCompat(FlashcardsWrapper, [
+    ["userSettings", userSettingsState],
+    ["flashcardsMetWords", flashcardsMetWordsState]
+  ])
 );

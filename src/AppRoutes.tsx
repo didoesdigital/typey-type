@@ -116,7 +116,6 @@ type AppStateForDescendants = {
   customLessonMaterialValidationState: CustomLessonMaterialValidationState,
   customLesson: Lesson,
   actualText: ActualTypedText,
-  flashcardsMetWords: unknown, // TODO: type like {
 //   "the": {
 //     phrase: "the",
 //     stroke: "-T",
@@ -333,7 +332,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                 <Header fullscreen={appState.fullscreen} />
                 <DocumentTitle title={"Typey Type | Flashcards"}>
                   <AsyncFlashcards
-                    flashcardsMetWords={appState.flashcardsMetWords}
                     flashcardsProgress={appState.flashcardsProgress}
                     fullscreen={appState.fullscreen}
                     globalLookupDictionary={appState.globalLookupDictionary}
@@ -405,7 +403,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       customLessonMaterialValidationMessages={
                         appState.customLessonMaterialValidationMessages
                       }
-                      flashcardsMetWords={appState.flashcardsMetWords}
                       flashcardsProgress={appState.flashcardsProgress}
                       globalLookupDictionary={appState.globalLookupDictionary}
                       globalLookupDictionaryLoaded={
