@@ -21,7 +21,7 @@ import {
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
-import { fetchDictionaryIndex, getLesson } from './utils/getData';
+import { getLesson } from './utils/getData';
 import describePunctuation, { punctuationDescriptions } from "./utils/describePunctuation";
 import {
   generateListOfWordsAndStrokes

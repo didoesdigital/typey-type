@@ -7,12 +7,13 @@ import PseudoContentButton from "../../components/PseudoContentButton";
 import { IconExternal } from "../../components/IconExternal";
 import { Tooltip } from "react-tippy";
 import { lookUpDictionaryInIndex } from "../../utils/typey-type";
-import { fetchDictionaryIndex } from "../../utils/getData";
 import Subheader from "../../components/Subheader";
 import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
 
 import type { PrettyLessonTitle, StenoDictionary } from "../../types";
+import { useAtomValue } from "jotai";
+import { dictionaryIndexState } from "../../states/dictionaryIndexState";
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSfqBBEs5Fl8vgay03fEXzSU7Ey_pms6Y6Nt2Yk8gFftGhAWQA/viewform?usp=pp_url&entry.1884511690=Example";
 const googleFormURL =
@@ -99,6 +100,7 @@ const getDictionaryContentsString = (dictContents: StenoDictionary) => {
 };
 
 const Dictionary = () => {
+  const dictionaryIndex = useAtomValue(dictionaryIndexState);
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const announceTooltip = useAnnounceTooltip();
   const { updateMessage } = useAnnouncerApi();
@@ -142,42 +144,38 @@ const Dictionary = () => {
       !location.pathname.startsWith("/dictionaries/custom") &&
       location.pathname.startsWith("/dictionaries")
     ) {
-      fetchDictionaryIndex()
-        .then((dictIndexEntryJSON) => {
-          return fetch(
-            process.env.PUBLIC_URL + location.pathname.replace(/\/$/, ".json"),
-            {
-              method: "GET",
-              credentials: "same-origin",
-            }
-          ).then((response) => {
-            const contentType = response.headers.get("content-type");
+      fetch(
+        process.env.PUBLIC_URL + location.pathname.replace(/\/$/, ".json"),
+        {
+          method: "GET",
+          credentials: "same-origin",
+        }
+      ).then((response) => {
+        const contentType = response.headers.get("content-type");
 
-            if (contentType && contentType.indexOf("application/json") !== -1) {
-              return response.json().then((dictionaryContents) => {
-                const dictIndexEntry = lookUpDictionaryInIndex(
-                  process.env.PUBLIC_URL + location.pathname,
-                  dictIndexEntryJSON
-                );
-                const dictionaryData = {
-                  ...dictIndexEntry,
-                  contents: dictionaryContents,
-                };
+        if (contentType && contentType.indexOf("application/json") !== -1) {
+          return response.json().then((dictionaryContents) => {
+            const dictIndexEntry = lookUpDictionaryInIndex(
+              process.env.PUBLIC_URL + location.pathname,
+              dictionaryIndex
+            );
+            const dictionaryData = {
+              ...dictIndexEntry,
+              contents: dictionaryContents,
+            };
 
-                setDictionary(dictionaryData);
-                updateMessage("Finished loading: " + dictionaryData.title);
-                setLoadingDictionaryContents(false);
-              });
-            } else {
-              throw new Error("Unable to load dictionary");
-            }
+            setDictionary(dictionaryData);
+            updateMessage("Finished loading: " + dictionaryData.title);
+            setLoadingDictionaryContents(false);
           });
-        })
-        .catch((error) => {
-          console.log("Unable to load dictionary", error);
-          updateMessage("Unable to load dictionary");
-          setHasError(true);
-        });
+        } else {
+          throw new Error("Unable to load dictionary");
+        }
+      }).catch((error) => {
+        console.log("Unable to load dictionary", error);
+        updateMessage("Unable to load dictionary");
+        setHasError(true);
+      });
     }
     // FIXME: updateMessage in dependency array
     // eslint-disable-next-line react-hooks/exhaustive-deps

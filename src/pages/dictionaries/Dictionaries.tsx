@@ -65,7 +65,9 @@ const Dictionaries = ({
             `${url}/plover/:dictionaryPath`,
           ]}
         >
-          <AsyncDictionary />
+          <Suspense fallback={<PageLoading />}>
+            <AsyncDictionary />
+          </Suspense>
         </Route>
         <Route exact={true} path={`${url}/management`}>
           <AsyncDictionaryManagement
