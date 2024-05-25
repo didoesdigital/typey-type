@@ -2,6 +2,9 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Flashcards from "./Flashcards";
+import { useHydrateAtoms } from "jotai/utils";
+import { flashcardsProgressState } from "../../../states/flashcardsProgressState";
+import AppMethodsContext from "../../../states/legacy/AppMethodsContext";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -21,34 +24,39 @@ const globalLookupDictionary = new Map([
   ["gonna", [["TKPW*G", "typey:typey-type.json"]]],
 ]);
 
-const Template = (args) => (
-  <div className="p3">
-    <Switch>
-      <Route path={`/`}>
-        <div>
-          <Flashcards
-            fetchAndSetupGlobalDict={() => Promise.resolve(true)}
-            flashcardsProgress={flashcardsProgress}
-            globalLookupDictionary={globalLookupDictionary}
-            globalLookupDictionaryLoaded={true}
-            personalDictionaries={{}}
-            updateFlashcardsProgress={() => flashcardsProgress}
-            updateGlobalLookupDictionary={() => undefined}
-            updatePersonalDictionaries={() => undefined}
-            userSettings={{}}
-            fullscreen={false}
-            changeFullscreen={() => undefined}
-            lessonpath={
-              process.env.PUBLIC_URL +
-              lessonPath.replace(/flashcards/, "") +
-              "lesson.txt"
-            }
-            locationpathname={lessonPath}
-          />
-        </div>
-      </Route>
-    </Switch>
-  </div>
-);
+const Template = (args) => {
+  useHydrateAtoms([[flashcardsProgressState, flashcardsProgress]])
+  return (
+    <div className="p3">
+      <Switch>
+        <Route path={`/`}>
+          <div>
+            <AppMethodsContext.Provider value={{
+              appFetchAndSetupGlobalDict: () => Promise.resolve(true),
+            }}>
+              <Flashcards
+                fetchAndSetupGlobalDict={() => Promise.resolve(true)}
+                globalLookupDictionary={globalLookupDictionary}
+                globalLookupDictionaryLoaded={true}
+                personalDictionaries={{}}
+                updateGlobalLookupDictionary={() => undefined}
+                updatePersonalDictionaries={() => undefined}
+                userSettings={{}}
+                fullscreen={false}
+                changeFullscreen={() => undefined}
+                lessonpath={
+                  process.env.PUBLIC_URL +
+                  lessonPath.replace(/flashcards/, "") +
+                  "lesson.txt"
+                }
+                locationpathname={lessonPath}
+              />
+            </AppMethodsContext.Provider>
+          </div>
+        </Route>
+      </Switch>
+    </div>
+  );
+};
 
 export const FlashcardsStory = Template.bind({});

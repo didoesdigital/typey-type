@@ -32,7 +32,6 @@ export type LessonProps = {
   currentPhraseID: number;
   currentStroke: string;
   disableUserSettings: boolean;
-  flashcardsProgress: any;
   fullscreen: any;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: any;

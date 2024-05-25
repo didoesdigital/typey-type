@@ -72,7 +72,7 @@ class App extends Component {
     // add the same default to load/set personal preferences code and test.
     let metWordsFromStorage = loadPersonalPreferences()[0];
     let startingMetWordsToday = loadPersonalPreferences()[0];
-    let recentLessons = loadPersonalPreferences()[3];
+    let recentLessons = loadPersonalPreferences()[2];
     this.appFetchAndSetupGlobalDict = fetchAndSetupGlobalDict.bind(this);
 
     this.state = {
@@ -88,8 +88,6 @@ class App extends Component {
       globalLookupDictionaryLoaded: false,
       lessonNotFound: false,
       lessonsProgress: {
-      },
-      flashcardsProgress: {
       },
       flashcardsNextLesson: {
         lastSeen: Date.now(), // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
@@ -178,7 +176,6 @@ class App extends Component {
     }
 
     writePersonalPreferences('metWords', this.state.metWords);
-    writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
 
     if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
       let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path, this.state.lesson, this.props.userSettings, this.state.lessonsProgress);
@@ -241,7 +238,6 @@ class App extends Component {
 
   setPersonalPreferences(source) {
     let metWordsFromStateOrArg = this.state.metWords;
-    let flashcardsProgressState = this.state.flashcardsProgress;
     let lessonsProgressState = this.state.lessonsProgress;
     let recentLessonsState = this.state.recentLessons;
     let topSpeedPersonalBestState = this.state.topSpeedPersonalBest;
@@ -256,14 +252,13 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWordsFromStateOrArg, flashcardsProgressState, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState, userGoalsState] = loadPersonalPreferences();
+      [metWordsFromStateOrArg, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState, userGoalsState] = loadPersonalPreferences();
     }
 
     let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
     let calculatedYourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
 
     this.setState({
-      flashcardsProgress: flashcardsProgressState,
       lessonsProgress: lessonsProgressState,
       recentLessons: recentLessonsState,
       topSpeedPersonalBest: topSpeedPersonalBestState,
@@ -272,7 +267,6 @@ class App extends Component {
       yourSeenWordCount: calculatedYourSeenWordCount,
       yourMemorisedWordCount: calculatedYourMemorisedWordCount,
     }, () => {
-      writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
       writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
       writePersonalPreferences('recentLessons', this.state.recentLessons);
       writePersonalPreferences('topSpeedPersonalBest', this.state.topSpeedPersonalBest);
@@ -438,20 +432,6 @@ class App extends Component {
       writePersonalPreferences('recentLessons', recentLessons);
     });
     return recentLessons;
-  }
-
-  updateFlashcardsProgress(lessonpath) {
-    let flashcardsProgress = Object.assign({}, this.state.flashcardsProgress);
-
-    flashcardsProgress[lessonpath] = {
-      lastSeen: Date.now()
-    }
-    this.setState({
-      flashcardsProgress: flashcardsProgress,
-    }, () => {
-      writePersonalPreferences('flashcardsProgress', this.state.flashcardsProgress);
-    });
-    return flashcardsProgress;
   }
 
   updateStartingMetWordsAndCounts(providedMetWords) {
@@ -984,7 +964,7 @@ class App extends Component {
   }
 
   updateFlashcardsRecommendation() {
-    getFlashcardsNextLesson(this.state.flashcardsProgress, this.props.globalUserSettings.flashcardsCourseLevel, this.state.flashcardsCourseIndex)
+    getFlashcardsNextLesson(this.props.flashcardsProgress, this.props.globalUserSettings.flashcardsCourseLevel, this.state.flashcardsCourseIndex)
       .then((nextFlashcardsLessonAndCourseIndex) => {
         let [nextFlashcardsLesson, currentFlashcardsCourseIndex] = nextFlashcardsLessonAndCourseIndex;
 
@@ -1325,7 +1305,6 @@ class App extends Component {
               startCustomLesson: this.startCustomLesson.bind(this),
               startFromWordOne: this.startFromWordOne.bind(this),
               stopLesson: this.stopLesson.bind(this),
-              updateFlashcardsProgress: this.updateFlashcardsProgress.bind(this),
               updateFlashcardsRecommendation: this.updateFlashcardsRecommendation.bind(this),
               updateGlobalLookupDictionary: this.updateGlobalLookupDictionary.bind(this),
               updateMarkup: this.updateMarkup.bind(this),

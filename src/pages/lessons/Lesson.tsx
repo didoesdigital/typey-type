@@ -46,7 +46,6 @@ const Lesson = ({
   currentPhraseID,
   currentStroke,
   disableUserSettings,
-  flashcardsProgress,
   fullscreen,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
@@ -94,7 +93,6 @@ const Lesson = ({
     startCustomLesson,
     startFromWordOne,
     stopLesson,
-    updateFlashcardsProgress,
     updateGlobalLookupDictionary,
     updateMarkup,
     updatePersonalDictionaries,
@@ -395,13 +393,9 @@ const Lesson = ({
                 <DocumentTitle title={"Typey Type | Flashcards"}>
                   <Flashcards
                     fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
-                    flashcardsProgress={flashcardsProgress}
                     globalLookupDictionary={globalLookupDictionary}
                     globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
                     personalDictionaries={personalDictionaries}
-                    updateFlashcardsProgress={updateFlashcardsProgress.bind(
-                      this
-                    )}
                     updateGlobalLookupDictionary={updateGlobalLookupDictionary}
                     updatePersonalDictionaries={updatePersonalDictionaries}
                     fullscreen={fullscreen}

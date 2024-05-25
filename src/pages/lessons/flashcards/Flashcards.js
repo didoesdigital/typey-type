@@ -27,6 +27,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Link } from 'react-router-dom';
 import Subheader from "../../../components/Subheader";
 import { flashcardsMetWordsState } from "../../../states/flashcardsMetWordsState";
+import { flashcardsProgressState, useUpdateFlashcardsProgress } from "../../../states/flashcardsProgressState";
 
 const shortestDimension = 3;
 const longestDimension = 4;
@@ -535,6 +536,7 @@ function FlashcardsWrapper(props) {
 export default withAppMethods(
   withAtomsCompat(FlashcardsWrapper, [
     ["userSettings", userSettingsState],
-    ["flashcardsMetWords", flashcardsMetWordsState]
+    ["flashcardsMetWords", flashcardsMetWordsState],
+    ["flashcardsProgress", flashcardsProgressState],
   ])
 );

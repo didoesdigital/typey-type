@@ -126,7 +126,6 @@ type AppStateForDescendants = {
   globalLookupDictionaryLoaded: boolean,
   lessonNotFound: boolean,
   lessonsProgress: unknown,
-  flashcardsProgress: unknown,
   flashcardsNextLesson: unknown, // TODO: type like {
 //   lastSeen: Date.now(), // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
 //   linkTitle: "Loading…",
@@ -332,7 +331,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                 <Header fullscreen={appState.fullscreen} />
                 <DocumentTitle title={"Typey Type | Flashcards"}>
                   <AsyncFlashcards
-                    flashcardsProgress={appState.flashcardsProgress}
                     fullscreen={appState.fullscreen}
                     globalLookupDictionary={appState.globalLookupDictionary}
                     globalLookupDictionaryLoaded={
@@ -403,7 +401,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       customLessonMaterialValidationMessages={
                         appState.customLessonMaterialValidationMessages
                       }
-                      flashcardsProgress={appState.flashcardsProgress}
                       globalLookupDictionary={appState.globalLookupDictionary}
                       globalLookupDictionaryLoaded={
                         appState.globalLookupDictionaryLoaded
