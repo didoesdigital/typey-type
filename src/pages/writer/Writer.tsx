@@ -31,6 +31,7 @@ import { userSettingsState } from "../../states/userSettingsState";
 import { withAtomsCompat } from "../../states/atomUtils";
 import { useChangeStenoLayout } from "../lessons/components/UserSettings/updateUserSetting";
 import { globalUserSettingsState } from "../../states/globalUserSettingsState";
+import { useChangeWriterInput } from "../lessons/components/UserSettings/updateGlobalUserSetting";
 
 type Props = {
   userSettings: UserSettings,
@@ -53,7 +54,7 @@ type StenoLayout = {
 
 type MapBriefToKeys = (brief: Outline) => StenoLayout
 
-class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: ReturnType<typeof useChangeStenoLayout>}>, State> {
+class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: ReturnType<typeof useChangeStenoLayout>, changeWriterInput: ReturnType<typeof useChangeWriterInput>}>, State> {
   state: State = {
     stenoBrief: '',
     stenoStroke: new Stroke(),
@@ -388,14 +389,14 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
                     <div className="flex flex-wrap justify-between">
                       <p className="radio mr3">
                         <label htmlFor="raw" className="mb1">
-                          <input type="radio" name="raw" id="raw" onChange={this.props.appMethods.changeWriterInput} checked={this.props.globalUserSettings.writerInput === "raw"} /> Raw
+                          <input type="radio" name="raw" id="raw" onChange={this.props.changeWriterInput} checked={this.props.globalUserSettings.writerInput === "raw"} /> Raw
                         </label>
                       </p>
                     </div>
                     <div className="flex flex-wrap justify-between">
                       <p className="radio mr3">
                         <label htmlFor="qwerty" className="mb1">
-                          <input type="radio" name="qwerty" id="qwerty" onChange={this.props.appMethods.changeWriterInput} checked={this.props.globalUserSettings.writerInput === "qwerty"} /> QWERTY
+                          <input type="radio" name="qwerty" id="qwerty" onChange={this.props.changeWriterInput} checked={this.props.globalUserSettings.writerInput === "qwerty"} /> QWERTY
                         </label>
                       </p>
                     </div>
@@ -414,7 +415,8 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
 
 function WriterWrapper(props: WithAppMethods<Props>) {
   const changeStenoLayout = useChangeStenoLayout()
-  return <Writer {...props} {...{changeStenoLayout}} />;
+  const changeWriterInput = useChangeWriterInput()
+  return <Writer {...props} {...{changeStenoLayout, changeWriterInput}} />;
 }
 
 export default withAppMethods(withAtomsCompat(WriterWrapper, [

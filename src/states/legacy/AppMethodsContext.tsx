@@ -5,17 +5,12 @@ import customiseLesson from "../../pages/lessons/utilities/customiseLesson";
 import generateCustomLesson from "../../pages/lessons/custom/generator/utilities/generateCustomLesson";
 import updateMultipleMetWords from "../../pages/games/KPOES/updateMultipleMetWords";
 import {
-  changeFlashcardCourseLevel,
   changeFullscreen
 } from "../../pages/lessons/components/UserSettings/updateFlashcardSetting";
 import {
   changeShowStrokesInLesson,
   updateRevisionMaterial
 } from "../../pages/lessons/components/UserSettings/updateLessonSetting";
-import {
-  changeInputForKAOES,
-  changeWriterInput, dismissBackupBanner, toggleExperiment
-} from "../../pages/lessons/components/UserSettings/updateGlobalUserSetting";
 import fetchAndSetupGlobalDict from "../../utils/app/fetchAndSetupGlobalDict";
 import App from "../../App";
 
@@ -25,11 +20,8 @@ export type AppMethods = {
   customiseLesson: typeof customiseLesson,
   generateCustomLesson: typeof generateCustomLesson,
   updateMultipleMetWords: typeof updateMultipleMetWords,
-  changeFlashcardCourseLevel: typeof changeFlashcardCourseLevel,
   changeFullscreen: typeof changeFullscreen,
   changeShowStrokesInLesson: typeof changeShowStrokesInLesson,
-  changeInputForKAOES: typeof changeInputForKAOES,
-  changeWriterInput: typeof changeWriterInput,
   createCustomLesson: typeof App.prototype.createCustomLesson,
   handleLesson: typeof App.prototype.handleLesson,
   handleStopLesson: typeof App.prototype.handleStopLesson,
@@ -43,8 +35,6 @@ export type AppMethods = {
   startCustomLesson: typeof App.prototype.startCustomLesson,
   startFromWordOne: typeof App.prototype.startFromWordOne,
   stopLesson: typeof App.prototype.stopLesson,
-  toggleExperiment: typeof toggleExperiment,
-  dismissBackupBanner: typeof dismissBackupBanner,
   updateFlashcardsMetWords: typeof App.prototype.updateFlashcardsMetWords,
   updateFlashcardsProgress: typeof App.prototype.updateFlashcardsProgress,
   updateFlashcardsRecommendation: typeof App.prototype.updateFlashcardsRecommendation,

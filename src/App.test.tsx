@@ -7,6 +7,7 @@ import fs from "node:fs/promises";
 import { SpacePlacement } from "./types";
 import { useAtom } from "jotai";
 import { userSettingsState } from "./states/userSettingsState";
+import { globalUserSettingsState } from "./states/globalUserSettingsState";
 
 // Depending on environment, userEvent.type() could be so slow that keydowns have interval of more than 16ms.
 // Increase this if test gets too flaky
@@ -66,7 +67,8 @@ describe(App, () => {
     const location = useLocation();
     const history = useHistory();
     const [userSettings, setUserSettings] = useAtom(userSettingsState)
-    return <StateLoggingApp {...{location, history, userSettings, setUserSettings}} />;
+    const [globalUserSettings, setGlobalUserSettings] = useAtom(globalUserSettingsState)
+    return <StateLoggingApp {...{location, history, userSettings, setUserSettings, globalUserSettings, setGlobalUserSettings}} />;
   }
 
   beforeEach(() => {

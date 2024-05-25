@@ -2,14 +2,10 @@ import { AppMethods } from "../../states/legacy/AppMethodsContext";
 
 const appMethods: AppMethods = {
   appFetchAndSetupGlobalDict: () => Promise.resolve(true),
-  changeFlashcardCourseLevel: () => console.log("change flashcard course level"),
   changeFullscreen: () => undefined,
-  changeInputForKAOES: () => undefined,
   changeShowStrokesInLesson: () => undefined,
-  changeWriterInput: () => console.log("change writer input"),
   createCustomLesson: () => console.log("create custom lesson"),
   customiseLesson: () => undefined,
-  dismissBackupBanner: () => undefined,
   generateCustomLesson: () => console.log("generate custom lesson"),
   handleLesson: () => undefined,
   handleStopLesson: () => undefined,
@@ -24,7 +20,6 @@ const appMethods: AppMethods = {
   startCustomLesson: () => undefined,
   startFromWordOne: () => undefined,
   stopLesson: () => console.log("stop lesson"),
-  toggleExperiment: () => undefined,
   updateFlashcardsMetWords: () => ({ the: { phrase: "the", stroke: "-T", rung: 1 } }),
   updateFlashcardsProgress: () => ({}),
   updateFlashcardsRecommendation: () => console.log("update flashcards recommendation"),

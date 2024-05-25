@@ -45,14 +45,12 @@ type Props = {
 
 const Progress = (props: Props) => {
   const {
-    changeFlashcardCourseLevel,
     setPersonalPreferences,
     updateFlashcardsRecommendation,
     updateRecommendationHistory,
     updateStartingMetWordsAndCounts,
     updateUserGoals,
     updateUserGoalsUnveiled,
-    dismissBackupBanner,
   } = useAppMethods();
   const globalUserSettings = useAtomValue(globalUserSettingsState);
   const userSettings = useAtomValue(userSettingsState);
@@ -446,7 +444,6 @@ const Progress = (props: Props) => {
 
         <FlashcardsSection
           showOnSmallScreen={true}
-          changeFlashcardCourseLevel={changeFlashcardCourseLevel}
           flashcardsCourseLevel={globalUserSettings.flashcardsCourseLevel}
           flashcardsNextLesson={props.flashcardsNextLesson}
           loadingLessonIndex={loadingLessonIndex}
@@ -485,10 +482,7 @@ const Progress = (props: Props) => {
             </div>
           </div>
 
-          <BackupBanner
-            dismissedTime={globalUserSettings.backupBannerDismissedTime}
-            dismiss={dismissBackupBanner}
-          />
+          <BackupBanner />
 
           <ProgressSummaryAndLinks
             metWords={props.metWords}
@@ -558,7 +552,6 @@ const Progress = (props: Props) => {
               </ErrorBoundary>
               <FlashcardsSection
                 showOnSmallScreen={false}
-                changeFlashcardCourseLevel={changeFlashcardCourseLevel}
                 flashcardsCourseLevel={
                   globalUserSettings.flashcardsCourseLevel
                 }

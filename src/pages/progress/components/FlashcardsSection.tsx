@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import GoogleAnalytics from "react-ga4";
 import ErrorBoundary from "../../../components/ErrorBoundary";
 import FlashcardsBox from "./FlashcardsBox";
@@ -7,11 +7,11 @@ import type {
   FlashcardsNextLesson,
 } from "./FlashcardsBox";
 import type { FlashcardsCourseLevel } from "../../../types";
+import { useChangeFlashcardCourseLevel } from "../../lessons/components/UserSettings/updateFlashcardSetting";
 
 type Props = {
   showOnSmallScreen: boolean;
   flashcardsCourseLevel: FlashcardsCourseLevel;
-  changeFlashcardCourseLevel: () => void;
   flashcardsNextLesson: FlashcardsNextLesson;
   skipButtonId: FlashcardsBoxProps["skipButtonId"];
   loadingLessonIndex: FlashcardsBoxProps["loadingLessonIndex"];
@@ -21,12 +21,17 @@ type Props = {
 const FlashcardsSection = ({
   showOnSmallScreen,
   flashcardsCourseLevel,
-  changeFlashcardCourseLevel,
   flashcardsNextLesson,
   skipButtonId,
   loadingLessonIndex,
   updateFlashcardsRecommendation,
 }: Props) => {
+  const changeFlashcardCourseLevel = useChangeFlashcardCourseLevel();
+  useEffect(() => {
+    updateFlashcardsRecommendation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [flashcardsCourseLevel])
+
   const startFlashcards = () => {
     GoogleAnalytics.event({
       category: "Flashcards",

@@ -12,7 +12,6 @@ export const FlashcardsSectionStory = () => {
     <div className="mw-368">
       <FlashcardsSection
         showOnSmallScreen={false}
-        changeFlashcardCourseLevel={() => undefined}
         flashcardsCourseLevel={"noviceCourse"}
         flashcardsNextLesson={{
           linkTitle: "Top 1000 words flashcards",

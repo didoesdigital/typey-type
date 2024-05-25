@@ -1,6 +1,6 @@
 import { atomWithStorage } from "jotai/utils";
-import { atom } from "jotai";
 import { UserSettings } from "../types";
+import { subFieldAtomGenerator } from "./atomUtils";
 
 export const userSettingsState = atomWithStorage<UserSettings>("userSettings", {
     beatsPerMinute: 10,
@@ -39,11 +39,7 @@ export const userSettingsState = atomWithStorage<UserSettings>("userSettings", {
     hideOtherSettings: false,
   });
 
-const subFieldAtom = <T extends keyof UserSettings>(field: T) => atom(
-  (get) => get(userSettingsState)[field],
-  (get, set, update: any) => {
-    set(userSettingsState, { ...get(userSettingsState), [field]: update });
-  });
+const subFieldAtom = subFieldAtomGenerator(userSettingsState);
 
 export const startFromWordSettingState = subFieldAtom('startFromWord');
 export const beatsPerMinuteState = subFieldAtom('beatsPerMinute');

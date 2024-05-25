@@ -11,6 +11,7 @@ import type {
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
+import { useToggleExperiment } from "../lessons/components/UserSettings/updateGlobalUserSetting";
 
 const AsyncDictionary = Loadable({
   loader: () => import("./Dictionary"),
@@ -42,10 +43,10 @@ const Dictionaries = ({
   const userSettings = useAtomValue(userSettingsState);
   const {
     setDictionaryIndex,
-    toggleExperiment,
     updatePersonalDictionaries,
     appFetchAndSetupGlobalDict,
   } = useAppMethods();
+  const toggleExperiment = useToggleExperiment();
   const match = useRouteMatch({
     path: "/dictionaries",
     strict: true,

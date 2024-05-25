@@ -46,13 +46,6 @@ import {
   updateRevisionMaterial,
 } from './pages/lessons/components/UserSettings/updateLessonSetting';
 import {
-  changeInputForKAOES,
-  changeWriterInput,
-  dismissBackupBanner,
-  toggleExperiment
-} from './pages/lessons/components/UserSettings/updateGlobalUserSetting';
-import {
-  changeFlashcardCourseLevel,
   changeFullscreen,
 } from './pages/lessons/components/UserSettings/updateFlashcardSetting';
 import AppRoutes from './AppRoutes';
@@ -1381,11 +1374,8 @@ class App extends Component {
               customiseLesson: customiseLesson.bind(this),
               generateCustomLesson: generateCustomLesson.bind(this),
               updateMultipleMetWords: updateMultipleMetWords.bind(this),
-              changeFlashcardCourseLevel: changeFlashcardCourseLevel.bind(this),
               changeFullscreen: changeFullscreen.bind(this),
               changeShowStrokesInLesson: changeShowStrokesInLesson.bind(this),
-              changeInputForKAOES: changeInputForKAOES.bind(this),
-              changeWriterInput: changeWriterInput.bind(this),
               createCustomLesson: this.createCustomLesson.bind(this),
               handleLesson: this.handleLesson.bind(this),
               handleStopLesson: this.handleStopLesson.bind(this),
@@ -1399,8 +1389,6 @@ class App extends Component {
               startCustomLesson: this.startCustomLesson.bind(this),
               startFromWordOne: this.startFromWordOne.bind(this),
               stopLesson: this.stopLesson.bind(this),
-              toggleExperiment: toggleExperiment.bind(this),
-              dismissBackupBanner: dismissBackupBanner.bind(this),
               updateFlashcardsMetWords: this.updateFlashcardsMetWords.bind(this),
               updateFlashcardsProgress: this.updateFlashcardsProgress.bind(this),
               updateFlashcardsRecommendation: this.updateFlashcardsRecommendation.bind(this),

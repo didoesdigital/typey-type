@@ -1,109 +1,95 @@
 import GoogleAnalytics from "react-ga4";
-import { writePersonalPreferences } from "../../../../utils/typey-type";
+import { useSetAtom } from "jotai";
+import {
+  backupBannerDismissedTime,
+  experimentsState,
+  inputForKAOESState,
+  writerInputState
+} from "../../../../states/globalUserSettingsState";
 
-// changeWriterInput(event: SyntheticInputEvent<HTMLInputElement>) {
-export function changeWriterInput(event) {
-  let globalUserSettings = Object.assign({}, this.state.globalUserSettings);
-  let name = "BAD_INPUT";
+// (event: SyntheticInputEvent<HTMLInputElement>) => void
+export function useChangeWriterInput() {
+  const setState = useSetAtom(writerInputState);
+  return (event) => {
+    let name = "BAD_INPUT";
 
-  if (event && event.target && event.target.name) {
-    globalUserSettings["writerInput"] = event.target.name;
-    name = event.target.name;
+    if (event && event.target && event.target.name) {
+      setState(event.target.name);
+      name = event.target.name;
+    }
+
+    let labelString = name;
+    if (!name) {
+      labelString = "BAD_INPUT";
+    }
+
+    GoogleAnalytics.event({
+      category: "Global user settings",
+      action: "Change writer input",
+      label: labelString,
+    });
   }
-
-  this.setState({ globalUserSettings: globalUserSettings }, () => {
-    writePersonalPreferences("globalUserSettings", globalUserSettings);
-  });
-
-  let labelString = name;
-  if (!name) {
-    labelString = "BAD_INPUT";
-  }
-
-  GoogleAnalytics.event({
-    category: "Global user settings",
-    action: "Change writer input",
-    label: labelString,
-  });
 }
 
-export function changeInputForKAOES(event) {
-  let globalUserSettings = Object.assign({}, this.state.globalUserSettings);
-  let name = "BAD_INPUT";
+export function useChangeInputForKAOES() {
+  const setState = useSetAtom(inputForKAOESState);
+  return (event) => {
+    let name = "BAD_INPUT";
 
-  if (event && event.target && event.target.name) {
-    globalUserSettings["inputForKAOES"] = event.target.name;
-    name = event.target.name;
+    if (event && event.target && event.target.name) {
+      setState(event.target.name);
+      name = event.target.name;
+    }
+
+    let labelString = name;
+    if (!name) {
+      labelString = "BAD_INPUT";
+    }
+
+    GoogleAnalytics.event({
+      category: "Global user settings",
+      action: "Change input for KAOES",
+      label: labelString,
+    });
   }
-
-  this.setState({ globalUserSettings: globalUserSettings }, () => {
-    writePersonalPreferences("globalUserSettings", globalUserSettings);
-  });
-
-  let labelString = name;
-  if (!name) {
-    labelString = "BAD_INPUT";
-  }
-
-  GoogleAnalytics.event({
-    category: "Global user settings",
-    action: "Change input for KAOES",
-    label: labelString,
-  });
 }
 
-export function toggleExperiment(event) {
-  let newState = Object.assign({}, this.state.globalUserSettings);
+export function useToggleExperiment() {
+  const setState = useSetAtom(experimentsState);
+  return (event) => {
+    const target = event.target;
+    const value = target.checked;
+    const name = target.name;
 
-  const target = event.target;
-  const value = target.checked;
-  const name = target.name;
+    console.log("set", name, value)
+    setState(name, value);
 
-  newState.experiments[name] = value;
+    let labelString = value;
+    if (value === undefined) {
+      labelString = "BAD_INPUT";
+    } else {
+      labelString.toString();
+    }
 
-  this.setState({ globalUserSettings: newState }, () => {
-    writePersonalPreferences(
-      "globalUserSettings",
-      this.state.globalUserSettings
-    );
-  });
-
-  let labelString = value;
-  if (value === undefined) {
-    labelString = "BAD_INPUT";
-  } else {
-    labelString.toString();
+    GoogleAnalytics.event({
+      category: "Global user settings",
+      action: "Change " + name,
+      label: labelString,
+    });
   }
-
-  GoogleAnalytics.event({
-    category: "Global user settings",
-    action: "Change " + name,
-    label: labelString,
-  });
-
-  return value;
 }
 
-export function dismissBackupBanner(event) {
-  let newState = Object.assign({}, this.state.globalUserSettings);
+export function useDismissBackupBanner() {
+  const setState = useSetAtom(backupBannerDismissedTime);
+  return () => {
+    setState(Date.now());
 
-  const value = Date.now();
-  const name = "backupBannerDismissedTime";
+    let labelString = "Dismiss";
 
-  newState[name] = value;
-
-  this.setState({ globalUserSettings: newState }, () => {
-    writePersonalPreferences(
-      "globalUserSettings",
-      this.state.globalUserSettings
-    );
-  });
-
-  let labelString = "Dismiss";
-
-  GoogleAnalytics.event({
-    category: "Global user settings",
-    action: "Dismiss backup banner",
-    label: labelString,
-  });
+    GoogleAnalytics.event({
+      category: "Global user settings",
+      action: "Dismiss backup banner",
+      label: labelString,
+    });
+  }
 }

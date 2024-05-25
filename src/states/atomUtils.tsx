@@ -1,5 +1,12 @@
-import { Atom, useAtom } from "jotai";
+import { Atom, useAtom, WritableAtom } from "jotai";
 import React, { ComponentType } from "react";
+import { atom } from "jotai";
+
+export const subFieldAtomGenerator = <S,>(state: WritableAtom<S, [S], void>) => <T extends keyof S>(field: T) => atom(
+  (get) => get(state)[field],
+  (get, set, update: any) => {
+    set(state, { ...get(state), [field]: update });
+  });
 
 /**
  * Since a class component cannot consume atom directly, this allows providing it via props.

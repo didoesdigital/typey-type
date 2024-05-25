@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import Game from "./Game";
 import Subheader from "../../../components/Subheader";
-import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
+import { useChangeInputForKAOES } from "../../lessons/components/UserSettings/updateGlobalUserSetting";
 
 export default function Index({ inputForKAOES }) {
-  const {changeInputForKAOES} = useAppMethods();
+  const changeInputForKAOES = useChangeInputForKAOES()
   const mainHeading = useRef(null);
   useEffect(() => {
     if (mainHeading) {

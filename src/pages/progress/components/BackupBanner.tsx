@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import BackupModal from "./BackupModal";
 import ClosingCross from "../../../components/Icons/icon-images/ClosingCross.svg";
 import Icon from "../../../components/Icons/Icon";
+import { useAtomValue } from "jotai";
+import { backupBannerDismissedTime } from "../../../states/globalUserSettingsState";
+import { useDismissBackupBanner } from "../../lessons/components/UserSettings/updateGlobalUserSetting";
 
 const BANNER_REAPPEAR_INTERVAL = 1000 * 60 * 60 * 24 * 7; // 1 week
 
-type Props = {
-  dismissedTime: number | null;
-  dismiss: () => void;
-};
-const BackupBanner: React.FC<Props> = ({ dismissedTime, dismiss }) => {
+const BackupBanner: React.FC = () => {
+  const dismissedTime = useAtomValue(backupBannerDismissedTime);
+  const dismiss = useDismissBackupBanner();
   const [isModalOpen, setModalOpen] = useState(false);
   if (
     dismissedTime !== null &&
