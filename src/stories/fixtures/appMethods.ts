@@ -2,7 +2,6 @@ import { AppMethods } from "../../states/legacy/AppMethodsContext";
 
 const appMethods: AppMethods = {
   appFetchAndSetupGlobalDict: () => Promise.resolve(true),
-  changeFullscreen: () => undefined,
   changeShowStrokesInLesson: () => undefined,
   createCustomLesson: () => console.log("create custom lesson"),
   customiseLesson: () => undefined,

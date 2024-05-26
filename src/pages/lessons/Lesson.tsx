@@ -47,7 +47,6 @@ const Lesson = ({
   currentPhraseID,
   currentStroke,
   disableUserSettings,
-  fullscreen,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   lesson,
@@ -83,7 +82,6 @@ const Lesson = ({
     customiseLesson,
     handleLesson,
     handleStopLesson,
-    changeFullscreen,
     changeShowStrokesInLesson,
     restartLesson,
     reviseLesson,
@@ -400,8 +398,6 @@ const Lesson = ({
                     personalDictionaries={personalDictionaries}
                     updateGlobalLookupDictionary={updateGlobalLookupDictionary}
                     updatePersonalDictionaries={updatePersonalDictionaries}
-                    fullscreen={fullscreen}
-                    changeFullscreen={changeFullscreen.bind(this)}
                     lessonpath={
                       process.env.PUBLIC_URL +
                       location.pathname.replace(/flashcards/, "") +

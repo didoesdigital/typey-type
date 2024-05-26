@@ -5,9 +5,6 @@ import customiseLesson from "../../pages/lessons/utilities/customiseLesson";
 import generateCustomLesson from "../../pages/lessons/custom/generator/utilities/generateCustomLesson";
 import updateMultipleMetWords from "../../pages/games/KPOES/updateMultipleMetWords";
 import {
-  changeFullscreen
-} from "../../pages/lessons/components/UserSettings/updateFlashcardSetting";
-import {
   changeShowStrokesInLesson,
   updateRevisionMaterial
 } from "../../pages/lessons/components/UserSettings/updateLessonSetting";
@@ -20,7 +17,6 @@ export type AppMethods = {
   customiseLesson: typeof customiseLesson,
   generateCustomLesson: typeof generateCustomLesson,
   updateMultipleMetWords: typeof updateMultipleMetWords,
-  changeFullscreen: typeof changeFullscreen,
   changeShowStrokesInLesson: typeof changeShowStrokesInLesson,
   createCustomLesson: typeof App.prototype.createCustomLesson,
   handleLesson: typeof App.prototype.handleLesson,

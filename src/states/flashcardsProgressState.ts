@@ -52,3 +52,5 @@ export function useUpdateFlashcardsRecommendation() {
     });
   };
 }
+
+export const fullscreenState = atom(false);

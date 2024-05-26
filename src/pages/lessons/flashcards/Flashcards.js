@@ -27,7 +27,12 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import { Link } from 'react-router-dom';
 import Subheader from "../../../components/Subheader";
 import { flashcardsMetWordsState } from "../../../states/flashcardsMetWordsState";
-import { flashcardsProgressState, useUpdateFlashcardsProgress } from "../../../states/flashcardsProgressState";
+import {
+  flashcardsProgressState,
+  fullscreenState,
+  useUpdateFlashcardsProgress
+} from "../../../states/flashcardsProgressState";
+import { useChangeFullscreen } from "../components/UserSettings/updateFlashcardSetting";
 
 const shortestDimension = 3;
 const longestDimension = 4;
@@ -481,7 +486,7 @@ currentSlide: currentSlide
                         name="fullscreen"
                         id="fullscreen"
                         checked={this.props.fullscreen}
-                        onChange={this.props.changeFullscreen.bind(this)}
+                        onChange={this.props.changeFullscreen}
                       />
                       <Icon
                         iconSVGImport={FullscreenIcon}
@@ -518,10 +523,10 @@ currentSlide: currentSlide
 
 function FlashcardsWrapper(props) {
   const {
-    changeFullscreen,
     appFetchAndSetupGlobalDict,
-    updateFlashcardsProgress,
   } = useAppMethods();
+  const updateFlashcardsProgress = useUpdateFlashcardsProgress();
+  const changeFullscreen = useChangeFullscreen();
 
   return (
     <Flashcards
@@ -538,5 +543,6 @@ export default withAppMethods(
     ["userSettings", userSettingsState],
     ["flashcardsMetWords", flashcardsMetWordsState],
     ["flashcardsProgress", flashcardsProgressState],
+    ["fullscreen", fullscreenState],
   ])
 );

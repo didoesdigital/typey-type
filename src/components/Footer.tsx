@@ -4,12 +4,11 @@ import OutboundLink from "./OutboundLink";
 import { IconExternal } from "./IconExternal";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "./Announcer/useAnnounceTooltip";
+import { useAtomValue } from "jotai";
+import { fullscreenState } from "../states/flashcardsProgressState";
 
-type Props = {
-  fullscreen: boolean;
-};
-
-const Footer = ({ fullscreen }: Props) => {
+const Footer = () => {
+  const fullscreen = useAtomValue(fullscreenState)
   const fullscreenClass = fullscreen ? " fullscreen" : "";
   const announceTooltip = useAnnounceTooltip();
 

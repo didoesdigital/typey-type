@@ -42,7 +42,6 @@ const Template = (args) => {
                 updateGlobalLookupDictionary={() => undefined}
                 updatePersonalDictionaries={() => undefined}
                 userSettings={{}}
-                fullscreen={false}
                 changeFullscreen={() => undefined}
                 lessonpath={
                   process.env.PUBLIC_URL +

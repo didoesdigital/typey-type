@@ -42,9 +42,6 @@ import {
   changeShowStrokesInLesson,
   updateRevisionMaterial,
 } from './pages/lessons/components/UserSettings/updateLessonSetting';
-import {
-  changeFullscreen,
-} from './pages/lessons/components/UserSettings/updateFlashcardSetting';
 import AppRoutes from './AppRoutes';
 import applyQueryParamsToUserSettings from './pages/lessons/components/UserSettings/applyQueryParamsToUserSettings';
 import removeIgnoredCharsFromSplitText from './utils/app/removeIgnoredCharsFromSplitText';
@@ -86,7 +83,6 @@ class App extends Component {
       lessonNotFound: false,
       lessonsProgress: {
       },
-      fullscreen: false,
       isPloverDictionaryLoaded: false,
       isGlobalLookupDictionaryLoaded: false,
       lookupTerm: '',
@@ -1245,7 +1241,6 @@ class App extends Component {
               customiseLesson: customiseLesson.bind(this),
               generateCustomLesson: generateCustomLesson.bind(this),
               updateMultipleMetWords: updateMultipleMetWords.bind(this),
-              changeFullscreen: changeFullscreen.bind(this),
               changeShowStrokesInLesson: changeShowStrokesInLesson.bind(this),
               createCustomLesson: this.createCustomLesson.bind(this),
               handleLesson: this.handleLesson.bind(this),

@@ -126,7 +126,6 @@ type AppStateForDescendants = {
   globalLookupDictionaryLoaded: boolean,
   lessonNotFound: boolean,
   lessonsProgress: unknown,
-  fullscreen: boolean,
 // isPloverDictionaryLoaded: false,
 // isGlobalLookupDictionaryLoaded: false,
   lookupTerm: string,
@@ -198,7 +197,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
             path="/"
             render={() => (
               <div>
-                <Header fullscreen={appState.fullscreen} />
+                <Header />
 
                 <DocumentTitle title="Typey Type for Stenographers">
                   <AsyncHome />
@@ -210,7 +209,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
             path="/support"
             render={() => (
               <div>
-                <Header fullscreen={appState.fullscreen} />
+                <Header />
 
                 <DocumentTitle title={"Typey Type | About"}>
                   <ErrorBoundary>
@@ -224,7 +223,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
             path="/writer"
             render={(props) => (
               <div>
-                <Header fullscreen={appState.fullscreen} />
+                <Header />
 
                 <DocumentTitle title={"Typey Type | Writer"}>
                   <ErrorBoundary>
@@ -240,7 +239,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
             path="/games"
             render={(props) => (
               <div>
-                <Header fullscreen={appState.fullscreen} />
+                <Header />
                 <DocumentTitle title={"Typey Type | Games"}>
                   <ErrorBoundary>
                     <AsyncGames
@@ -261,7 +260,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
             path="/break"
             render={() => (
               <div>
-                <Header fullscreen={appState.fullscreen} />
+                <Header />
                 <DocumentTitle title={"Typey Type | Take a break"}>
                   <ErrorBoundary>
                     <AsyncBreak />
@@ -274,7 +273,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
             path="/contribute"
             render={() => (
               <div>
-                <Header fullscreen={appState.fullscreen} />
+                <Header />
                 <DocumentTitle title={"Typey Type | Contribute"}>
                   <ErrorBoundary>
                     <AsyncContribute />
@@ -287,7 +286,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
             path="/progress"
             render={() => (
               <div>
-                <Header fullscreen={appState.fullscreen} />
+                <Header />
                 <DocumentTitle title={"Typey Type | Progress"}>
                   <ErrorBoundary>
                     <Suspense fallback={<PageLoading />}>
@@ -314,10 +313,9 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
             path="/flashcards"
             render={() => (
               <div>
-                <Header fullscreen={appState.fullscreen} />
+                <Header />
                 <DocumentTitle title={"Typey Type | Flashcards"}>
                   <AsyncFlashcards
-                    fullscreen={appState.fullscreen}
                     globalLookupDictionary={appState.globalLookupDictionary}
                     globalLookupDictionaryLoaded={
                       appState.globalLookupDictionaryLoaded
@@ -335,7 +333,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
             path="/lookup"
             render={(props) => (
               <div>
-                <Header fullscreen={appState.fullscreen} />
+                <Header  />
                 <DocumentTitle title={"Typey Type | Lookup"}>
                   <ErrorBoundary>
                     <AsyncLookup
@@ -355,7 +353,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
             path="/dictionaries"
             render={(props) => (
               <div>
-                <Header fullscreen={appState.fullscreen} />
+                <Header />
                 <DocumentTitle title={"Typey Type | Dictionaries"}>
                   <ErrorBoundary>
                     <AsyncDictionaries
@@ -375,7 +373,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
             path="/lessons"
             render={(props) => (
               <div>
-                <Header fullscreen={appState.fullscreen} />
+                <Header />
                 <DocumentTitle title={"Typey Type | Lessons"}>
                   <ErrorBoundary>
                     <Lessons
@@ -393,7 +391,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       }
                       personalDictionaries={appState.personalDictionaries}
                       lessonNotFound={appState.lessonNotFound}
-                      fullscreen={appState.fullscreen}
                       lessonSubTitle={appState.lesson.subtitle}
                       lessonTitle={appState.lesson.title}
                       lesson={appState.lesson}
@@ -461,7 +458,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
           />
         </Switch>
       </div>
-      <Footer fullscreen={appState.fullscreen} />
+      <Footer />
     </AnnouncerController>
   );
 };

@@ -2,8 +2,11 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import TypeyTypeIcon from "./Icons/icon-images/TypeyTypeIcon.svg";
 import Icon from "./Icons/Icon";
+import { useAtomValue } from "jotai";
+import { fullscreenState } from "../states/flashcardsProgressState";
 
-const Header = ({ fullscreen }: { fullscreen: boolean }) => {
+const Header = () => {
+  const fullscreen = useAtomValue(fullscreenState);
   const mainHeading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     if (mainHeading) {

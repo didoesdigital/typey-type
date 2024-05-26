@@ -32,7 +32,6 @@ export type LessonProps = {
   currentPhraseID: number;
   currentStroke: string;
   disableUserSettings: boolean;
-  fullscreen: any;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: any;
   lesson: Lesson;
