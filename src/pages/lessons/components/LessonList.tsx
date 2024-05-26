@@ -3,9 +3,9 @@ import GoogleAnalytics from "react-ga4";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { groups } from "d3-array";
 import type { LessonIndexEntry } from "../../../types";
+import { useLessonIndex } from "../../../states/lessonIndexState";
 
 type LessonListProps = {
-  lessonIndex: LessonIndexEntry[];
   url: string;
 };
 
@@ -34,7 +34,7 @@ const LessonLink = ({
   </Link>
 );
 
-const InnerLessonList = ({ lessonIndex, url }: LessonListProps) => (
+const InnerLessonList = ({ lessonIndex, url }: LessonListProps & { lessonIndex: LessonIndexEntry[] }) => (
   <ul className="unstyled-list">
     {lessonIndex.map((lesson) => (
       <li className="unstyled-list-item mb1" key={lesson.path}>
@@ -117,8 +117,9 @@ function debounce<T extends Function>(cb: T, wait = 20) {
   return callable;
 }
 
-export default function LessonList({ lessonIndex, url }: LessonListProps) {
+export default function LessonList({ url }: LessonListProps) {
   const location = useLocation();
+  const lessonIndex = useLessonIndex();
   const [searchFilter, setSearchFilter] = useState(
     () => new URLSearchParams(location.search).get("q") ?? ""
   );

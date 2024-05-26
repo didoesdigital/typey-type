@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import DocumentTitle from "react-document-title";
 import { Link } from "react-router-dom";
-import { getLessonIndexData } from "../../utils/lessonIndexData";
 import getLessonMetadata from "./utilities/getLessonMetadata";
 import Subheader from "../../components/Subheader";
+import { LessonIndexEntry } from "../../types";
 
 const getLessonOverview = async (lessonFile: any) => {
   const response = await fetch(lessonFile, {
@@ -14,6 +14,7 @@ const getLessonOverview = async (lessonFile: any) => {
 };
 
 type LessonOverviewProps = {
+  lessonIndex: LessonIndexEntry[];
   lessonMetadata?: any;
   lessonPath: string;
   lessonTitle?: string;
@@ -21,6 +22,7 @@ type LessonOverviewProps = {
 };
 
 const LessonOverview = ({
+  lessonIndex,
   lessonMetadata,
   lessonPath,
   lessonTitle,
@@ -52,6 +54,7 @@ const LessonOverview = ({
           console.error(e);
         });
     } else {
+      console.error("no metadat aoverview")
       setError(true);
     }
   }, []);
@@ -64,20 +67,18 @@ const LessonOverview = ({
     if (lessonMetadata && lessonMetadata.title && lessonMetadata.overview) {
       updateLessonOverviewContent(lessonMetadata);
     } else {
-      getLessonIndexData()
-        .then((lessonIndex: any) => {
-          const metadata = getLessonMetadata(
-            lessonIndex,
-            process.env.PUBLIC_URL + lessonTxtPath
-          );
-          updateLessonOverviewContent(metadata);
-        })
-        .catch((e: unknown) => {
-          setError(true);
-          console.error(e);
-        });
+      try {
+        const metadata = getLessonMetadata(
+          lessonIndex,
+          process.env.PUBLIC_URL + lessonTxtPath
+        );
+        updateLessonOverviewContent(metadata);
+      } catch(e: unknown) {
+        setError(true);
+        console.error(e);
+      }
     }
-  }, [lessonMetadata, lessonTxtPath, updateLessonOverviewContent]);
+  }, [lessonMetadata, lessonTxtPath, updateLessonOverviewContent, lessonIndex]);
 
   const showLessonOverview = () => {
     return { __html: content };

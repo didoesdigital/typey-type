@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import LessonsIndex from "./LessonsIndex";
 import Zipper from "../../utils/zipper";
 import AppMethodsContext from "../../states/legacy/AppMethodsContext";
@@ -46,13 +46,22 @@ const customLesson = {
 
 const Template = (args) => {
   return (
-    <AppMethodsContext.Provider value={appMethods}>
-      <LessonsIndex
-        lessonIndex={lessonIndex}
-        customLesson={customLesson}
-        {...args}
-      />
-    </AppMethodsContext.Provider>
+    <Component {...args} />
+  );
+};
+
+// Suspense doesn't work in Template which is not a component
+const Component = (args) => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AppMethodsContext.Provider value={appMethods}>
+        <LessonsIndex
+          lessonIndex={lessonIndex}
+          customLesson={customLesson}
+          {...args}
+        />
+      </AppMethodsContext.Provider>
+    </Suspense>
   );
 };
 

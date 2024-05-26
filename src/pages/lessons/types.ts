@@ -36,7 +36,6 @@ export type LessonProps = {
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: any;
   lesson: Lesson;
-  lessonIndex: any;
   lessonLength: number;
   lessonNotFound: any;
   lessonSubTitle: any;

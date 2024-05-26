@@ -755,11 +755,6 @@ function shouldShowStroke(showStrokesInLesson, showStrokes, repetitionsRemaining
   return false;
 }
 
-function setupLessonProgress(lessonIndex) {
-  let lessonProgress = {};
-  return lessonProgress;
-}
-
 function updateCapitalisationStrokesInNextItem(nextItem, lastWord) {
   if (nextItem.stroke.startsWith("KPA/") || nextItem.stroke.startsWith("HRO*ER/") || nextItem.stroke.startsWith("*URP/")) {
     if (lastWord.endsWith(".") || lastWord.endsWith("!") || lastWord.endsWith("?") || lastWord.endsWith("…") || lastWord.endsWith('!"') || lastWord.endsWith('?"') || lastWord.endsWith('."')) {
@@ -796,7 +791,6 @@ export {
   parseWordList,
   repetitionsRemaining,
   runAllPersonalDictionariesMigrations,
-  setupLessonProgress,
   shouldShowStroke,
   strokeAccuracy,
   getTargetStrokeCount,

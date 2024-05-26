@@ -22,6 +22,7 @@ import {
   useToggleHideOtherSettings,
   useUpdatePreset
 } from "./components/UserSettings/updateUserSetting";
+import { useLessonIndex } from "../../states/lessonIndexState";
 
 const isCustom = (pathname: string) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
@@ -50,7 +51,6 @@ const Lesson = ({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   lesson,
-  lessonIndex,
   lessonLength,
   lessonNotFound,
   lessonSubTitle: lessonSubTitleProp,
@@ -99,6 +99,7 @@ const Lesson = ({
     updateRevisionMaterial,
     updateTopSpeedPersonalBest,
   } = useAppMethods();
+  const lessonIndex = useLessonIndex()
   const userSettings = useAtomValue(userSettingsState);
   const chooseStudy = useChooseStudy();
   const toggleHideOtherSettings = useToggleHideOtherSettings();
@@ -371,16 +372,17 @@ const Lesson = ({
               <div>
                 <ErrorBoundary>
                   <DocumentTitle title={"Typey Type | Lesson overview"}>
-                    <LessonOverview
-                      lessonMetadata={metadata}
-                      lessonPath={location.pathname.replace("overview", "")}
-                      lessonTxtPath={location.pathname.replace(
-                        "overview",
-                        "lesson.txt"
-                      )}
-                      lessonTitle={lesson.title}
-                      {...routeProps}
-                    />
+                      <LessonOverview
+                        lessonIndex={lessonIndex}
+                        lessonMetadata={metadata}
+                        lessonPath={location.pathname.replace("overview", "")}
+                        lessonTxtPath={location.pathname.replace(
+                          "overview",
+                          "lesson.txt"
+                        )}
+                        lessonTitle={lesson.title}
+                        {...routeProps}
+                      />
                   </DocumentTitle>
                 </ErrorBoundary>
               </div>

@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import "react-tippy/dist/tippy.css";
 import PARAMS from './utils/params.js';
 import { isLessonTextValid } from './utils/utils';
-import { getLessonIndexData } from './utils/lessonIndexData';
 import { getRecommendedNextLesson } from './utils/recommendations';
 import { getFlashcardsNextLesson } from './utils/flashcardsRecommendations';
 import {
   createWordListFromMetWords,
   parseCustomMaterial,
   parseWordList,
-  setupLessonProgress,
   loadPersonalPreferences,
   matchSplitText,
   parseLesson,
@@ -129,13 +127,6 @@ class App extends Component {
         oldWords: 50
       },
       lesson: fallbackLesson,
-      lessonIndex: [{
-        "title": "Steno",
-        "subtitle": "",
-        "category": "Drills",
-        "subcategory": "",
-        "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
-      }],
       recentLessons: recentLessons,
       recommendedNextLesson: {
         studyType: "practice",
@@ -155,12 +146,6 @@ class App extends Component {
 
   componentDidMount() {
     this.setPersonalPreferences();
-
-    getLessonIndexData().then((json) => {
-      this.setState({ lessonIndex: json }, () => {
-        setupLessonProgress(json);
-      });
-    });
   }
 
   handleStopLesson(event) {
@@ -899,7 +884,7 @@ class App extends Component {
     this.setState({globalLookupDictionary: combinedLookupDictionary});
   }
 
-  updateRecommendationHistory(prevRecommendationHistory, lessonIndex = this.state.lessonIndex) {
+  updateRecommendationHistory(prevRecommendationHistory, lessonIndex = this.props.lessonIndex) {
     let newRecommendationHistory = Object.assign({}, prevRecommendationHistory);
 
     if ((typeof newRecommendationHistory['currentStep'] === 'undefined') || (newRecommendationHistory['currentStep'] === null)) {

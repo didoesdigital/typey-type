@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Progress from "./Progress";
 import lessonIndex from "../../stories/fixtures/lessonIndex";
 import userSettings from "../../stories/fixtures/userSettings";
@@ -97,10 +97,16 @@ const recommendedNextLesson = {
 
 const Template = (args) => {
   return (
-    <AppMethodsContext.Provider value={appMethods}>
+    <Component {...args} />
+  );
+};
+
+// Suspense doesn't work in Template which is not a component
+function Component (args) {
+  return <AppMethodsContext.Provider value={appMethods}>
+    <Suspense fallback={<div>Loading...</div>}>
       <Progress
         flashcardsNextLesson={flashcardsNextLesson}
-        lessonIndex={lessonIndex}
         lessonsProgress={testLessonsProgress}
         metWords={{}}
         newWordsGoalUnveiled={false}
@@ -115,8 +121,8 @@ const Template = (args) => {
         yourSeenWordCount={8750}
         {...args}
       />
-    </AppMethodsContext.Provider>
-  );
-};
+    </Suspense>
+  </AppMethodsContext.Provider>
+}
 
 export const ProgressStory = Template.bind({});

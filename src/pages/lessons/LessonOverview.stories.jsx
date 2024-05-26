@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import LessonOverview from "./LessonOverview";
+import { useHydrateAtoms } from "jotai/utils";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -14,12 +15,14 @@ const lessonIndex = [
     category: "Fundamentals",
     subcategory: "",
     path: "/lessons/fundamentals/test/",
+    overview: "/fundamentals/introduction/lesson-overview.html",
   },
 ];
 
 const Template = (args) => {
   return (
     <LessonOverview
+      lessonIndex={lessonIndex}
       lessonMetadata={lessonIndex[0]}
       lessonPath={"/lessons/fundamentals/test/"}
       lessonTxtPath={"/lessons/fundamentals/introduction/lesson.txt"}

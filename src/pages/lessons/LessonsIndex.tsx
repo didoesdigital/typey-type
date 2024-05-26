@@ -10,12 +10,10 @@ import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 
 type LessonsIndexProps = {
   customLesson: any;
-  lessonIndex: any;
 };
 
 const LessonsIndex = ({
   customLesson,
-  lessonIndex,
 }: LessonsIndexProps) => {
   const { stopLesson } = useAppMethods();
   const mainHeading = useRef<HTMLHeadingElement>(null);
@@ -67,7 +65,7 @@ const LessonsIndex = ({
       </Subheader>
       <div className="p3 mx-auto mw-1024">
         <h3>Typey&nbsp;Type lessons</h3>
-        <LessonList lessonIndex={lessonIndex} url={url} />
+        <LessonList url={url} />
         <div className="mw-584">
           <h3 className="mt3 pt6">Community lessons</h3>
           <p>

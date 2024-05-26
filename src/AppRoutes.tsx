@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import "react-tippy/dist/tippy.css";
 import { Route, Switch } from "react-router-dom";
 import DocumentTitle from "react-document-title";
@@ -164,13 +164,6 @@ type AppStateForDescendants = {
 //   oldWords: 50
 // },
   lesson: Lesson,
-  lessonIndex: unknown, // TODO type like {
-//   "title": "Steno",
-//   "subtitle": "",
-//   "category": "Drills",
-//   "subcategory": "",
-//   "path": process.env.PUBLIC_URL + "/drills/steno/lesson.txt"
-// }],
   recentLessons: { history: RecentLessonHistoryItem[] },
   recommendedNextLesson: unknown, // TODO type like {
 //   studyType: "practice",
@@ -304,21 +297,22 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                 <Header fullscreen={appState.fullscreen} />
                 <DocumentTitle title={"Typey Type | Progress"}>
                   <ErrorBoundary>
-                    <AsyncProgress
-                      metWords={appState.metWords}
-                      flashcardsNextLesson={appState.flashcardsNextLesson}
-                      recommendationHistory={appState.recommendationHistory}
-                      recommendedNextLesson={appState.recommendedNextLesson}
-                      lessonsProgress={appState.lessonsProgress}
-                      lessonIndex={appState.lessonIndex}
-                      recentLessonHistory={appState.recentLessons.history}
-                      startingMetWordsToday={appState.startingMetWordsToday}
-                      userGoals={appState.userGoals}
-                      oldWordsGoalUnveiled={appState.oldWordsGoalUnveiled}
-                      newWordsGoalUnveiled={appState.newWordsGoalUnveiled}
-                      yourSeenWordCount={appState.yourSeenWordCount}
-                      yourMemorisedWordCount={appState.yourMemorisedWordCount}
-                    />
+                    <Suspense fallback={<PageLoading />}>
+                      <AsyncProgress
+                        metWords={appState.metWords}
+                        flashcardsNextLesson={appState.flashcardsNextLesson}
+                        recommendationHistory={appState.recommendationHistory}
+                        recommendedNextLesson={appState.recommendedNextLesson}
+                        lessonsProgress={appState.lessonsProgress}
+                        recentLessonHistory={appState.recentLessons.history}
+                        startingMetWordsToday={appState.startingMetWordsToday}
+                        userGoals={appState.userGoals}
+                        oldWordsGoalUnveiled={appState.oldWordsGoalUnveiled}
+                        newWordsGoalUnveiled={appState.newWordsGoalUnveiled}
+                        yourSeenWordCount={appState.yourSeenWordCount}
+                        yourMemorisedWordCount={appState.yourMemorisedWordCount}
+                      />
+                    </Suspense>
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -410,7 +404,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       fullscreen={appState.fullscreen}
                       lessonSubTitle={appState.lesson.subtitle}
                       lessonTitle={appState.lesson.title}
-                      lessonIndex={appState.lessonIndex}
                       lesson={appState.lesson}
                       actualText={appState.actualText}
                       completedPhrases={appProps.completedMaterial}

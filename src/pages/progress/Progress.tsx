@@ -5,7 +5,7 @@ import PseudoContentButton from "../../components/PseudoContentButton";
 import RecommendationBox from "./components/RecommendationBox";
 import RecentLessons from "./components/RecentLessons";
 import * as Confetti from "../../utils/confetti";
-import { getLessonIndexData } from "../../utils/lessonIndexData";
+import { useLessonIndex } from "../../states/lessonIndexState";
 import { Link, Redirect } from "react-router-dom";
 import FlashcardsSection from "./components/FlashcardsSection";
 import TodaysEffortsOrGoals from "./components/TodaysEffortsOrGoals";
@@ -29,7 +29,6 @@ let particles: any[] = [];
 
 type Props = {
   flashcardsNextLesson: any;
-  lessonIndex: any;
   lessonsProgress: any;
   metWords: MetWords;
   newWordsGoalUnveiled: any;
@@ -54,6 +53,7 @@ const Progress = (props: Props) => {
   } = useAppMethods();
   const globalUserSettings = useAtomValue(globalUserSettingsState);
   const userSettings = useAtomValue(userSettingsState);
+  const lessonIndex = useLessonIndex();
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const canvas = useRef(null);
   const firstGoalsRender = useRef(true);
@@ -79,20 +79,18 @@ const Progress = (props: Props) => {
       mainHeading.current?.focus();
     }
 
-    getLessonIndexData()
-      .then((lessonIndex: any) => {
-        if (props.recommendationHistory?.["currentStep"] === null) {
-          updateRecommendationHistory(
-            props.recommendationHistory,
-            lessonIndex
-          );
-          updateFlashcardsRecommendation();
-        }
-        setLoadingLessonIndex(false);
-      })
-      .catch((e: any) => {
-        console.error(e);
-      });
+    try {
+      if (props.recommendationHistory?.["currentStep"] === null) {
+        updateRecommendationHistory(
+          props.recommendationHistory,
+          lessonIndex
+        );
+        updateFlashcardsRecommendation();
+      }
+      setLoadingLessonIndex(false);
+    } catch(e: any)  {
+      console.error(e);
+    }
 
     const [todayOldWordCountToUpdate, todayNewWordCountToUpdate] =
       Object.entries(props.metWords).reduce(
@@ -546,7 +544,7 @@ const Progress = (props: Props) => {
             <div className="mw-368 flex-grow order-1">
               <ErrorBoundary relative={true}>
                 <RecentLessons
-                  lessonIndex={props.lessonIndex}
+                  lessonIndex={lessonIndex}
                   recentLessonHistory={props.recentLessonHistory}
                 />
               </ErrorBoundary>
@@ -567,7 +565,7 @@ const Progress = (props: Props) => {
               <h3>Lessons progress</h3>
               <ul className="unstyled-list">
                 <LessonsProgress
-                  lessonIndex={props.lessonIndex}
+                  lessonIndex={lessonIndex}
                   lessonsProgress={props.lessonsProgress}
                 />
               </ul>

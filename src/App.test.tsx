@@ -8,6 +8,7 @@ import { SpacePlacement } from "./types";
 import { useAtom } from "jotai";
 import { userSettingsState } from "./states/userSettingsState";
 import { globalUserSettingsState } from "./states/globalUserSettingsState";
+import { useLessonIndexWithFallback } from "./states/lessonIndexState";
 
 // Depending on environment, userEvent.type() could be so slow that keydowns have interval of more than 16ms.
 // Increase this if test gets too flaky
@@ -68,7 +69,16 @@ describe(App, () => {
     const history = useHistory();
     const [userSettings, setUserSettings] = useAtom(userSettingsState)
     const [globalUserSettings, setGlobalUserSettings] = useAtom(globalUserSettingsState)
-    return <StateLoggingApp {...{location, history, userSettings, setUserSettings, globalUserSettings, setGlobalUserSettings}} />;
+    const lessonIndex = useLessonIndexWithFallback()
+    return <StateLoggingApp {...{
+      location,
+      history,
+      userSettings,
+      setUserSettings,
+      globalUserSettings,
+      setGlobalUserSettings,
+      lessonIndex,
+    }} />;
   }
 
   beforeEach(() => {
@@ -112,6 +122,9 @@ describe(App, () => {
           <AppWithRouterInfo />
         </MemoryRouter>
       );
+      await waitFor(async() => {
+        expect(screen.getByRole("combobox", { name: "Match spaces" })).toBeInTheDocument();
+      })
       await userEvent.selectOptions(
         screen.getByRole("combobox", { name: "Match spaces" }),
         spacePlacement
