@@ -34,7 +34,6 @@ export type AppMethods = {
   startCustomLesson: typeof App.prototype.startCustomLesson,
   startFromWordOne: typeof App.prototype.startFromWordOne,
   stopLesson: typeof App.prototype.stopLesson,
-  updateFlashcardsRecommendation: typeof App.prototype.updateFlashcardsRecommendation,
   updateGlobalLookupDictionary: typeof App.prototype.updateGlobalLookupDictionary,
   updateMarkup: typeof App.prototype.updateMarkup,
   updateMetWords: typeof App.prototype.updateMetWords,

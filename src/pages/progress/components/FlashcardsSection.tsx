@@ -2,17 +2,15 @@ import React, { useEffect } from "react";
 import GoogleAnalytics from "react-ga4";
 import ErrorBoundary from "../../../components/ErrorBoundary";
 import FlashcardsBox from "./FlashcardsBox";
-import type {
-  Props as FlashcardsBoxProps,
-  FlashcardsNextLesson,
-} from "./FlashcardsBox";
+import type { Props as FlashcardsBoxProps } from "./FlashcardsBox";
 import type { FlashcardsCourseLevel } from "../../../types";
 import { useChangeFlashcardCourseLevel } from "../../lessons/components/UserSettings/updateFlashcardSetting";
+import { useAtomValue } from "jotai";
+import { flashcardsRecommendationState } from "../../../states/flashcardsProgressState";
 
 type Props = {
   showOnSmallScreen: boolean;
   flashcardsCourseLevel: FlashcardsCourseLevel;
-  flashcardsNextLesson: FlashcardsNextLesson;
   skipButtonId: FlashcardsBoxProps["skipButtonId"];
   loadingLessonIndex: FlashcardsBoxProps["loadingLessonIndex"];
   updateFlashcardsRecommendation: () => void;
@@ -21,11 +19,11 @@ type Props = {
 const FlashcardsSection = ({
   showOnSmallScreen,
   flashcardsCourseLevel,
-  flashcardsNextLesson,
   skipButtonId,
   loadingLessonIndex,
   updateFlashcardsRecommendation,
 }: Props) => {
+  const {flashcardsNextLesson} = useAtomValue(flashcardsRecommendationState);
   const changeFlashcardCourseLevel = useChangeFlashcardCourseLevel();
   useEffect(() => {
     updateFlashcardsRecommendation();

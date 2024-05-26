@@ -4,6 +4,8 @@ import lessonIndex from "../../stories/fixtures/lessonIndex";
 import userSettings from "../../stories/fixtures/userSettings";
 import AppMethodsContext from "../../states/legacy/AppMethodsContext";
 import appMethods from "../../stories/fixtures/appMethods";
+import { useHydrateAtoms } from "jotai/utils";
+import { flashcardsRecommendationState } from "../../states/flashcardsProgressState";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -103,10 +105,13 @@ const Template = (args) => {
 
 // Suspense doesn't work in Template which is not a component
 function Component (args) {
+  useHydrateAtoms([[flashcardsRecommendationState, {
+    flashcardsNextLesson,
+    flashcardsCourseIndex: 0,
+  }]])
   return <AppMethodsContext.Provider value={appMethods}>
     <Suspense fallback={<div>Loading...</div>}>
       <Progress
-        flashcardsNextLesson={flashcardsNextLesson}
         lessonsProgress={testLessonsProgress}
         metWords={{}}
         newWordsGoalUnveiled={false}

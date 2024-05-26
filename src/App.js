@@ -3,7 +3,6 @@ import "react-tippy/dist/tippy.css";
 import PARAMS from './utils/params.js';
 import { isLessonTextValid } from './utils/utils';
 import { getRecommendedNextLesson } from './utils/recommendations';
-import { getFlashcardsNextLesson } from './utils/flashcardsRecommendations';
 import {
   createWordListFromMetWords,
   parseCustomMaterial,
@@ -87,13 +86,6 @@ class App extends Component {
       lessonNotFound: false,
       lessonsProgress: {
       },
-      flashcardsNextLesson: {
-        lastSeen: Date.now(), // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
-        linkTitle: "Loading…",
-        linkText: "Study",
-        link: "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
-      },
-      flashcardsCourseIndex: 0,
       fullscreen: false,
       isPloverDictionaryLoaded: false,
       isGlobalLookupDictionaryLoaded: false,
@@ -948,29 +940,6 @@ class App extends Component {
       });
   }
 
-  updateFlashcardsRecommendation() {
-    getFlashcardsNextLesson(this.props.flashcardsProgress, this.props.globalUserSettings.flashcardsCourseLevel, this.state.flashcardsCourseIndex)
-      .then((nextFlashcardsLessonAndCourseIndex) => {
-        let [nextFlashcardsLesson, currentFlashcardsCourseIndex] = nextFlashcardsLessonAndCourseIndex;
-
-        this.setState({
-          flashcardsCourseIndex: currentFlashcardsCourseIndex,
-          flashcardsNextLesson: nextFlashcardsLesson
-        });
-      })
-      .catch( error => {
-        console.log(error);
-        this.setState({
-          flashcardsNextLesson: {
-            lastSeen: Date.now(), // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
-            linkTitle: "Error",
-            linkText: "Error",
-            link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
-          }
-        });
-      });
-  }
-
   markupBuffer = [];
   updateBufferTimer = null;
 
@@ -1290,7 +1259,6 @@ class App extends Component {
               startCustomLesson: this.startCustomLesson.bind(this),
               startFromWordOne: this.startFromWordOne.bind(this),
               stopLesson: this.stopLesson.bind(this),
-              updateFlashcardsRecommendation: this.updateFlashcardsRecommendation.bind(this),
               updateGlobalLookupDictionary: this.updateGlobalLookupDictionary.bind(this),
               updateMarkup: this.updateMarkup.bind(this),
               updateMetWords: this.updateMetWords.bind(this),

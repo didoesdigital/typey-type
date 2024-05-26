@@ -21,6 +21,7 @@ import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
 import { globalUserSettingsState } from "../../states/globalUserSettingsState";
+import { useUpdateFlashcardsRecommendation } from "../../states/flashcardsProgressState";
 
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
@@ -28,7 +29,6 @@ const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
 let particles: any[] = [];
 
 type Props = {
-  flashcardsNextLesson: any;
   lessonsProgress: any;
   metWords: MetWords;
   newWordsGoalUnveiled: any;
@@ -45,7 +45,6 @@ type Props = {
 const Progress = (props: Props) => {
   const {
     setPersonalPreferences,
-    updateFlashcardsRecommendation,
     updateRecommendationHistory,
     updateStartingMetWordsAndCounts,
     updateUserGoals,
@@ -54,6 +53,7 @@ const Progress = (props: Props) => {
   const globalUserSettings = useAtomValue(globalUserSettingsState);
   const userSettings = useAtomValue(userSettingsState);
   const lessonIndex = useLessonIndex();
+  const updateFlashcardsRecommendation = useUpdateFlashcardsRecommendation()
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const canvas = useRef(null);
   const firstGoalsRender = useRef(true);
@@ -443,7 +443,6 @@ const Progress = (props: Props) => {
         <FlashcardsSection
           showOnSmallScreen={true}
           flashcardsCourseLevel={globalUserSettings.flashcardsCourseLevel}
-          flashcardsNextLesson={props.flashcardsNextLesson}
           loadingLessonIndex={loadingLessonIndex}
           skipButtonId={mobileSkipButtonId}
           updateFlashcardsRecommendation={updateFlashcardsRecommendation}
@@ -553,7 +552,6 @@ const Progress = (props: Props) => {
                 flashcardsCourseLevel={
                   globalUserSettings.flashcardsCourseLevel
                 }
-                flashcardsNextLesson={props.flashcardsNextLesson}
                 loadingLessonIndex={loadingLessonIndex}
                 skipButtonId={skipButtonId}
                 updateFlashcardsRecommendation={

@@ -126,13 +126,6 @@ type AppStateForDescendants = {
   globalLookupDictionaryLoaded: boolean,
   lessonNotFound: boolean,
   lessonsProgress: unknown,
-  flashcardsNextLesson: unknown, // TODO: type like {
-//   lastSeen: Date.now(), // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
-//   linkTitle: "Loading…",
-//   linkText: "Study",
-//   link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
-// },
-// flashcardsCourseIndex: 0,
   fullscreen: boolean,
 // isPloverDictionaryLoaded: false,
 // isGlobalLookupDictionaryLoaded: false,
@@ -300,7 +293,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                     <Suspense fallback={<PageLoading />}>
                       <AsyncProgress
                         metWords={appState.metWords}
-                        flashcardsNextLesson={appState.flashcardsNextLesson}
                         recommendationHistory={appState.recommendationHistory}
                         recommendedNextLesson={appState.recommendedNextLesson}
                         lessonsProgress={appState.lessonsProgress}

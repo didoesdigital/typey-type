@@ -21,7 +21,7 @@ function fetchFlashcardsRecommendations() {
   });
 }
 
-function getFlashcardsRecommendedCourses() {
+export function getFlashcardsRecommendedCourses() {
   let recommendedCourses = {};
   if (data === null) {
     recommendedCourses = fetchFlashcardsRecommendations();
@@ -32,10 +32,10 @@ function getFlashcardsRecommendedCourses() {
   return recommendedCourses;
 };
 
-function getFlashcardsNextLesson(flashcardsProgress = {}, courseLevel = "expertCourse", currentFlashcardsCourseIndex = 0) {
-  return getFlashcardsRecommendedCourses()
-  .then(courses => {
-
+/**
+ * @returns {[flashcardsNextLesson, currentFlashcardsCourseIndex]}
+ */
+function getFlashcardsNextLesson(courses, flashcardsProgress = {}, courseLevel = "expertCourse", currentFlashcardsCourseIndex = 0) {
     // fallback lesson:
     let flashcardsNextLesson = {
       lastSeen: 1558144862000, // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
@@ -69,7 +69,6 @@ function getFlashcardsNextLesson(flashcardsProgress = {}, courseLevel = "expertC
     }
 
     return [flashcardsNextLesson, currentFlashcardsCourseIndex];
-  });
 }
 
 export {
