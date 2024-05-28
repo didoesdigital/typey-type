@@ -110,10 +110,6 @@ class App extends Component {
       revisionMode: false,
       oldWordsGoalUnveiled: false,
       newWordsGoalUnveiled: false,
-      userGoals: {
-        newWords: 15,
-        oldWords: 50
-      },
       lesson: fallbackLesson,
       recentLessons: recentLessons,
       recommendedNextLesson: {
@@ -214,7 +210,6 @@ class App extends Component {
     let lessonsProgressState = this.state.lessonsProgress;
     let recentLessonsState = this.state.recentLessons;
     let topSpeedPersonalBestState = this.state.topSpeedPersonalBest;
-    let userGoalsState = this.state.userGoals;
     if (source && source !== '') {
       try {
         let parsedSource = JSON.parse(source);
@@ -225,7 +220,7 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWordsFromStateOrArg, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState, userGoalsState] = loadPersonalPreferences();
+      [metWordsFromStateOrArg, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState] = loadPersonalPreferences();
     }
 
     let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
@@ -236,7 +231,6 @@ class App extends Component {
       recentLessons: recentLessonsState,
       topSpeedPersonalBest: topSpeedPersonalBestState,
       metWords: metWordsFromStateOrArg,
-      userGoals: userGoalsState,
       yourSeenWordCount: calculatedYourSeenWordCount,
       yourMemorisedWordCount: calculatedYourMemorisedWordCount,
     }, () => {
@@ -244,7 +238,6 @@ class App extends Component {
       writePersonalPreferences('recentLessons', this.state.recentLessons);
       writePersonalPreferences('topSpeedPersonalBest', this.state.topSpeedPersonalBest);
       writePersonalPreferences('metWords', this.state.metWords);
-      writePersonalPreferences('userGoals', this.state.userGoals);
       this.setupLesson();
     });
   }
@@ -418,11 +411,6 @@ class App extends Component {
   updateTopSpeedPersonalBest(wpm) {
     this.setState({topSpeedPersonalBest: wpm});
     writePersonalPreferences('topSpeedPersonalBest', wpm);
-  }
-
-  updateUserGoals(userGoals) {
-    this.setState({userGoals: userGoals});
-    writePersonalPreferences('userGoals', userGoals);
   }
 
   updateUserGoalsUnveiled(oldWordsGoalUnveiled, newWordsGoalUnveiled) {
@@ -1262,7 +1250,6 @@ class App extends Component {
               updateRevisionMaterial: updateRevisionMaterial.bind(this),
               updateStartingMetWordsAndCounts: this.updateStartingMetWordsAndCounts.bind(this),
               updateTopSpeedPersonalBest: this.updateTopSpeedPersonalBest.bind(this),
-              updateUserGoals: this.updateUserGoals.bind(this),
               updateUserGoalsUnveiled: this.updateUserGoalsUnveiled.bind(this),
             }
           }>

@@ -151,10 +151,6 @@ type AppStateForDescendants = {
   revisionMode: boolean,
   oldWordsGoalUnveiled: boolean,
   newWordsGoalUnveiled: boolean,
-  userGoals: unknown // TODO type like {
-//   newWords: 15,
-//   oldWords: 50
-// },
   lesson: Lesson,
   recentLessons: { history: RecentLessonHistoryItem[] },
   recommendedNextLesson: unknown, // TODO type like {
@@ -297,7 +293,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                         lessonsProgress={appState.lessonsProgress}
                         recentLessonHistory={appState.recentLessons.history}
                         startingMetWordsToday={appState.startingMetWordsToday}
-                        userGoals={appState.userGoals}
                         oldWordsGoalUnveiled={appState.oldWordsGoalUnveiled}
                         newWordsGoalUnveiled={appState.newWordsGoalUnveiled}
                         yourSeenWordCount={appState.yourSeenWordCount}

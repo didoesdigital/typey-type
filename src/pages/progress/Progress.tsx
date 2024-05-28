@@ -18,10 +18,11 @@ import { MetWords } from "../../types";
 import BackupBanner from "./components/BackupBanner";
 import BackupModal from "./components/BackupModal";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
 import { globalUserSettingsState } from "../../states/globalUserSettingsState";
 import { useUpdateFlashcardsRecommendation } from "../../states/flashcardsProgressState";
+import { userGoalsState } from "../../states/userGoalsState";
 
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
@@ -37,7 +38,6 @@ type Props = {
   recommendationHistory: any;
   recommendedNextLesson: any;
   startingMetWordsToday: any;
-  userGoals: any;
   yourMemorisedWordCount: any;
   yourSeenWordCount: any;
 };
@@ -47,13 +47,13 @@ const Progress = (props: Props) => {
     setPersonalPreferences,
     updateRecommendationHistory,
     updateStartingMetWordsAndCounts,
-    updateUserGoals,
     updateUserGoalsUnveiled,
   } = useAppMethods();
   const globalUserSettings = useAtomValue(globalUserSettingsState);
   const userSettings = useAtomValue(userSettingsState);
   const lessonIndex = useLessonIndex();
   const updateFlashcardsRecommendation = useUpdateFlashcardsRecommendation()
+  const [userGoals, setUserGoals] = useAtom(userGoalsState);
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const canvas = useRef(null);
   const firstGoalsRender = useRef(true);
@@ -109,11 +109,11 @@ const Progress = (props: Props) => {
       );
 
     const oldWordsGoalMetToUpdate =
-      props.userGoals.oldWords <= todayOldWordCountToUpdate
+      userGoals.oldWords <= todayOldWordCountToUpdate
         ? true
         : oldWordsGoalMet;
     const newWordsGoalMetToUpdate =
-      props.userGoals.newWords <= todayNewWordCountToUpdate
+      userGoals.newWords <= todayNewWordCountToUpdate
         ? true
         : newWordsGoalMet;
 
@@ -249,18 +249,18 @@ const Progress = (props: Props) => {
     };
 
     if (isNaN(currentOldWords) || currentOldWords === null) {
-      userGoalsToUpdate["oldWords"] = props.userGoals.oldWords || 1;
+      userGoalsToUpdate["oldWords"] = userGoals.oldWords || 1;
     }
     if (isNaN(currentNewWords) || currentNewWords === null) {
-      userGoalsToUpdate["newWords"] = props.userGoals.newWords || 1;
+      userGoalsToUpdate["newWords"] = userGoals.newWords || 1;
     }
 
     const oldWordsGoalUnveiledToUpdate =
-      currentOldWords > props.userGoals.oldWords
+      currentOldWords > userGoals.oldWords
         ? false
         : props.oldWordsGoalUnveiled;
     const newWordsGoalUnveiledToUpdate =
-      currentNewWords > props.userGoals.newWords
+      currentNewWords > userGoals.newWords
         ? false
         : props.newWordsGoalUnveiled;
 
@@ -278,7 +278,7 @@ const Progress = (props: Props) => {
         ? false
         : newWordsGoalMet;
 
-    updateUserGoals(userGoalsToUpdate);
+    setUserGoals(userGoalsToUpdate);
 
     setOldWordsGoalMet(oldWordsGoalMetToUpdate);
     setNewWordsGoalMet(newWordsGoalMetToUpdate);
@@ -305,8 +305,8 @@ const Progress = (props: Props) => {
     });
 
     setShowSetGoalsForm(true);
-    setUserGoalInputOldWords(props.userGoals.oldWords);
-    setUserGoalInputNewWords(props.userGoals.newWords);
+    setUserGoalInputOldWords(userGoals.oldWords);
+    setUserGoalInputNewWords(userGoals.newWords);
   }
 
   function celebrateCompletedGoals(oldGoal: any, newGoal: any) {
@@ -527,7 +527,7 @@ const Progress = (props: Props) => {
                 updateUserGoalsUnveiled={updateUserGoalsUnveiled}
                 userGoalInputOldWords={userGoalInputOldWords}
                 userGoalInputNewWords={userGoalInputNewWords}
-                userGoals={props.userGoals}
+                userGoals={userGoals}
               />
             </div>
           </div>

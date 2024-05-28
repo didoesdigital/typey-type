@@ -38,7 +38,6 @@ export type AppMethods = {
   updateRevisionMaterial: typeof updateRevisionMaterial,
   updateStartingMetWordsAndCounts: typeof App.prototype.updateStartingMetWordsAndCounts,
   updateTopSpeedPersonalBest: typeof App.prototype.updateTopSpeedPersonalBest,
-  updateUserGoals: typeof App.prototype.updateUserGoals,
   updateUserGoalsUnveiled: typeof App.prototype.updateUserGoalsUnveiled,
 }
 
