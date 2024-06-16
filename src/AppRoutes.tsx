@@ -459,8 +459,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       targetStrokeCount={appState.targetStrokeCount}
                       timer={appState.timer}
                       topSpeedPersonalBest={appState.topSpeedPersonalBest}
-                      // TODO: typo of appMethods? Anyway Lesson seems to not use it. Remove?
-                      // updateUserGoals={appState.updateUserGoals}
                       totalNumberOfMatchedWords={
                         appState.totalNumberOfMatchedWords
                       }

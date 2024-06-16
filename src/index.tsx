@@ -26,7 +26,6 @@ ReactDOM.render(
   <DocumentTitle title="Typey Type for Stenographers">
     <Router basename="/typey-type">
       <ErrorBoundary>
-        {/* @ts-ignore */}
         <Route component={withAtomCompat(withAnalyticsTracker(App), "userSettings", userSettingsState)} />
       </ErrorBoundary>
     </Router>

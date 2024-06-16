@@ -70,7 +70,6 @@ export function useChangeShowStrokesAsList() {
         console.error(error)
       })
     } else {
-      // TODO: is it correct?
       labelString = "BAD_INPUT";
     }
 

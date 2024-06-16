@@ -5,6 +5,8 @@ import React from "react";
 import { userEvent } from "@storybook/testing-library";
 import fs from "node:fs/promises";
 import { SpacePlacement } from "./types";
+import { useAtom } from "jotai";
+import { userSettingsState } from "./states/userSettingsState";
 
 // Depending on environment, userEvent.type() could be so slow that keydowns have interval of more than 16ms.
 // Increase this if test gets too flaky
@@ -63,7 +65,8 @@ describe(App, () => {
   function AppWithRouterInfo() {
     const location = useLocation();
     const history = useHistory();
-    return <StateLoggingApp location={location} history={history} />;
+    const [userSettings, setUserSettings] = useAtom(userSettingsState)
+    return <StateLoggingApp {...{location, history, userSettings, setUserSettings}} />;
   }
 
   beforeEach(() => {

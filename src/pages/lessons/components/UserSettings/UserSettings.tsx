@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Tooltip } from "react-tippy";
 import ErrorBoundary from "../../../../components/ErrorBoundary";
 import NumericInput from "react-numeric-input";
@@ -61,7 +61,7 @@ const UserSettings = ({
   const announceTooltip = useAnnounceTooltip();
 
   const {setupLesson} = useAppMethods();
-  const mounted = React.useRef(false);
+  const mounted = useRef(false);
   useEffect(() => {
     if (!mounted.current) {
       mounted.current = true;
@@ -70,7 +70,9 @@ const UserSettings = ({
     // Call whenever settings change
     setupLesson();
 
-    // eslint-disable-next-line
+    // TODO: add `setupLesson` to dependency array
+    // after reducing parent component re-renders:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     userSettings.sortOrder,
     userSettings.spacePlacement,
