@@ -179,6 +179,7 @@ const Lessons = ({
             currentPhraseID={currentPhraseID}
             currentStroke={currentStroke}
             disableUserSettings={disableUserSettings}
+            flashcardsMetWords={flashcardsMetWords}
             flashcardsProgress={flashcardsProgress}
             fullscreen={fullscreen}
             globalLookupDictionary={globalLookupDictionary}
