@@ -1,3 +1,5 @@
+import fetchAndSetupGlobalDict from "./utils/app/fetchAndSetupGlobalDict";
+
 /**
  * Examples:
  * "H-L"
@@ -72,10 +74,7 @@ export type ImportedPersonalDictionaries = {
   dictionariesNamesAndContents: PersonalDictionaryNameAndContents[];
 };
 
-export type FetchAndSetupGlobalDict = (
-  withPlover: boolean,
-  importedPersonalDictionaries?: ImportedPersonalDictionaries | null
-) => Promise<any>;
+export type FetchAndSetupGlobalDict = typeof fetchAndSetupGlobalDict;
 
 /**
  * Examples:

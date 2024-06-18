@@ -40,7 +40,7 @@ const CustomLessonSetup = ({
       globalLookupDictionary.size < 2 &&
       !globalLookupDictionaryLoaded
     ) {
-      appFetchAndSetupGlobalDict(false).catch((error: unknown) => {
+      appFetchAndSetupGlobalDict(false).catch((error) => {
         console.error(error);
         // this.showDictionaryErrorNotification();
       });

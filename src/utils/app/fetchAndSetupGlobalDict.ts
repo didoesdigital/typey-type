@@ -5,7 +5,10 @@ import createAGlobalLookupDictionary from "../transformingDictionaries/createAGl
 import { AffixList } from "../affixList";
 import { loadPersonalDictionariesFromLocalStorage } from "../typey-type";
 
-import type { PersonalDictionaryNameAndContents } from "../../types";
+import type {
+  PersonalDictionaryNameAndContents,
+  ImportedPersonalDictionaries,
+} from "../../types";
 
 // @ts-ignore TODO
 let loadingPromise = null;
@@ -19,8 +22,8 @@ let isGlobalDictionaryUpToDate = null;
  */
 function fetchAndSetupGlobalDict(
   withPlover: boolean,
-  importedPersonalDictionaries?: any
-) {
+  importedPersonalDictionaries?: ImportedPersonalDictionaries | null
+): Promise<any> {
   const personalDictionaries: PersonalDictionaryNameAndContents[] =
     importedPersonalDictionaries?.dictionariesNamesAndContents ??
     loadPersonalDictionariesFromLocalStorage() ??
