@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import React, { ComponentPropsWithoutRef } from "react";
 import UserSettings from "./UserSettings";
 import userSettingsFixture from "../../../../stories/fixtures/userSettings";
 import AppMethodsContext from "../../../../states/legacy/AppMethodsContext";
@@ -12,15 +12,15 @@ const meta = {
 };
 export default meta;
 
-const defaultArgs: ComponentProps<typeof UserSettings> = {
+const defaultArgs: ComponentPropsWithoutRef<typeof UserSettings> = {
   disableUserSettings: false,
   maxStartFromWord: 100,
   revisionMode: false,
   totalWordCount: 50,
 };
 
-const Template = (args: ComponentProps<typeof UserSettings>) => {
-  useHydrateAtoms([[userSettingsState, userSettingsFixture]])
+const Template = (args: ComponentPropsWithoutRef<typeof UserSettings>) => {
+  useHydrateAtoms([[userSettingsState, userSettingsFixture]]);
   return (
     <div
       id="lesson-page"

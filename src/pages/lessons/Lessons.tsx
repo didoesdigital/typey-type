@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import React, { ComponentPropsWithoutRef } from "react";
 import { Route, RouteComponentProps, Switch } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
@@ -11,9 +11,9 @@ import PageLoading from "../../components/PageLoading";
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 type LessonsRoutingProps = Optional<
   & RouteComponentProps
-  & ComponentProps<typeof Lesson>
-  & ComponentProps<typeof CustomLessonSetup>
-  & ComponentProps<typeof AsyncCustomLessonGenerator>
+  & ComponentPropsWithoutRef<typeof Lesson>
+  & ComponentPropsWithoutRef<typeof CustomLessonSetup>
+  & ComponentPropsWithoutRef<typeof AsyncCustomLessonGenerator>
   // TODO: check this. it's not passed from parent
   , "lessonLength">
 
