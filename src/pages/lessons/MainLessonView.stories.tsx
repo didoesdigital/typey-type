@@ -1,5 +1,7 @@
 import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
+import { useHydrateAtoms } from "jotai/utils";
+import { userSettingsState } from "../../states/userSettingsState";
 import MainLessonView from "./MainLessonView";
 import userSettings from "../../stories/fixtures/userSettings";
 import Zipper from "../../utils/zipper";
@@ -69,6 +71,7 @@ const createNewCustomLesson = (
 );
 
 const Template = (args: any) => {
+  useHydrateAtoms([[userSettingsState, userSettings]])
   return (
     <AppMethodsContext.Provider value={appMethods}>
       <Switch>
@@ -79,7 +82,6 @@ const Template = (args: any) => {
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={true}
               lesson={lesson}
-              userSettings={userSettings}
               lessonLength={1}
               lessonSubTitle={""}
               lessonTitle={"Test lesson"}

@@ -1,7 +1,11 @@
 import React from "react";
+import { useHydrateAtoms } from "jotai/utils";
 import StrokeTip from "./StrokeTip";
 import userSettings from "../../../stories/fixtures/userSettings";
+import { userSettingsState } from "../../../states/userSettingsState";
 import globalLookupDictionaryMinimalJSON from "../../../stories/fixtures/globalLookupDictionaryMinimal.json";
+import AppMethodsContext from "../../../states/legacy/AppMethodsContext";
+import appMethods from "../../../stories/fixtures/appMethods";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -16,19 +20,21 @@ const globalLookupDictionaryMinimal = new Map(
 );
 
 const Template = (args) => {
+  useHydrateAtoms([[userSettingsState, userSettings]]);
   return (
-    <StrokeTip
-      changeShowStrokesInLesson={() => undefined}
-      currentPhrase={"test"}
-      currentStroke={"TEFT"}
-      globalLookupDictionary={globalLookupDictionaryMinimal}
-      globalLookupDictionaryLoaded={true}
-      showStrokesInLesson={false}
-      targetStrokeCount={1}
-      userSettings={userSettings}
-      repetitionsRemaining={1}
-      {...args}
-    />
+    <AppMethodsContext.Provider value={appMethods}>
+      <StrokeTip
+        changeShowStrokesInLesson={() => undefined}
+        currentPhrase={"test"}
+        currentStroke={"TEFT"}
+        globalLookupDictionary={globalLookupDictionaryMinimal}
+        globalLookupDictionaryLoaded={true}
+        showStrokesInLesson={false}
+        targetStrokeCount={1}
+        repetitionsRemaining={1}
+        {...args}
+      />
+    </AppMethodsContext.Provider>
   );
 };
 
