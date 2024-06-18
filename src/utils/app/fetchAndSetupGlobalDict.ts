@@ -22,7 +22,7 @@ let isGlobalDictionaryUpToDate = null;
  */
 function fetchAndSetupGlobalDict(
   withPlover: boolean,
-  importedPersonalDictionaries?: ImportedPersonalDictionaries | null
+  importedPersonalDictionaries: ImportedPersonalDictionaries | null
 ): Promise<any> {
   const personalDictionaries: PersonalDictionaryNameAndContents[] =
     importedPersonalDictionaries?.dictionariesNamesAndContents ??
