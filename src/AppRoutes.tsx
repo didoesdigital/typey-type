@@ -104,19 +104,6 @@ const AsyncGames = Loadable({
 //   loading: PageLoading,
 // });
 
-type Props = {
-  appProps: AppProps;
-  appState: AppStateForDescendants;
-};
-
-type AppProps = {
-  location: Location,
-  completedMaterial: MaterialText[],
-  presentedMaterialCurrentItem: MaterialItem,
-  stateLesson: Lesson,
-  stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">,
-  upcomingMaterial: unknown,
-}
 /**
  * This is based on state initialization in App.tsx.
  * This type only reflects App's state that is needed by descendants.
@@ -212,6 +199,21 @@ type AppStateForDescendants = {
   yourSeenWordCount: number,
   yourMemorisedWordCount: number
 }
+
+type Props = {
+  appProps: AppProps;
+  appState: AppStateForDescendants;
+};
+
+type AppProps = {
+  location: Location,
+  completedMaterial: MaterialText[],
+  presentedMaterialCurrentItem: MaterialItem,
+  stateLesson: Lesson,
+  stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">,
+  upcomingMaterial: unknown,
+}
+
 const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
   return (
     <AnnouncerController>
