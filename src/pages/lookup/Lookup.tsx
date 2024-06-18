@@ -60,7 +60,7 @@ const Lookup = ({
     const words = wordFamilyGroup.slice();
     words.unshift(trackedPhrase);
 
-    const material = words
+    const maybeMaterial: (undefined | MaterialItem)[] = words
       .map((word) => {
         if (globalLookupDictionary.get(word)) {
           return {
@@ -71,7 +71,10 @@ const Lookup = ({
           return undefined;
         }
       })
-      .filter((notUndefined) => !!notUndefined) as MaterialItem[];
+      .filter((notUndefined) => !!notUndefined);
+
+    const material: MaterialItem[] = maybeMaterial as MaterialItem[];
+
     setCustomLessonContent(material);
   };
 
