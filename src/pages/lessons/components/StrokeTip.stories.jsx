@@ -19,31 +19,30 @@ const globalLookupDictionaryMinimal = new Map(
   globalLookupDictionaryMinimalJSON
 );
 
-const Template = (args) => {
-  useHydrateAtoms([[userSettingsState, userSettings]]);
+export const StrokeTipListStory = (args) => {
+  const userSettingsForStrokeTipListStory = {
+    ...userSettings,
+    showStrokesAsList: true,
+  };
+  useHydrateAtoms([[userSettingsState, userSettingsForStrokeTipListStory]]);
   return (
     <AppMethodsContext.Provider value={appMethods}>
       <StrokeTip
         changeShowStrokesInLesson={() => undefined}
-        currentPhrase={"test"}
-        currentStroke={"TEFT"}
+        currentPhrase="quadruplicate"
+        currentStroke="KWAD/RUP/KAT"
         globalLookupDictionary={globalLookupDictionaryMinimal}
         globalLookupDictionaryLoaded={true}
-        showStrokesInLesson={false}
-        targetStrokeCount={1}
+        showStrokesInLesson={true}
+        targetStrokeCount={2}
         repetitionsRemaining={1}
         {...args}
       />
     </AppMethodsContext.Provider>
   );
 };
-
-export const StrokeTipListStory = Template.bind({});
 StrokeTipListStory.storyName = "Stroke tip list, lots of briefs";
 StrokeTipListStory.args = {
-  changeShowStrokesInLesson: () => undefined,
-  currentPhrase: "quadruplicate",
-  currentStroke: "KWAD/RUP/KAT",
   globalLookupDictionary: new Map([
     ["{^cate}", [["KAEUT", "typey:typey-type.json"]]],
     [
@@ -87,17 +86,32 @@ StrokeTipListStory.args = {
       ],
     ],
   ]),
-  globalLookupDictionaryLoaded: true,
-  showStrokesInLesson: true,
-  targetStrokeCount: 2,
-  userSettings: {
-    ...userSettings,
-    showStrokesAsList: true,
-  },
-  repetitionsRemaining: 1,
 };
 
-export const StrokeTipListNoBriefsStory = Template.bind({});
+export const StrokeTipListNoBriefsStory = (args) => {
+  const userSettingsForStrokeTipListNoBriefsStory = {
+    ...userSettings,
+    showStrokesAsList: true,
+  };
+  useHydrateAtoms([
+    [userSettingsState, userSettingsForStrokeTipListNoBriefsStory],
+  ]);
+  return (
+    <AppMethodsContext.Provider value={appMethods}>
+      <StrokeTip
+        changeShowStrokesInLesson={() => undefined}
+        currentPhrase={"test"}
+        currentStroke={"TEFT"}
+        globalLookupDictionary={globalLookupDictionaryMinimal}
+        globalLookupDictionaryLoaded={true}
+        showStrokesInLesson={false}
+        targetStrokeCount={1}
+        repetitionsRemaining={1}
+        {...args}
+      />
+    </AppMethodsContext.Provider>
+  );
+};
 StrokeTipListNoBriefsStory.storyName = "Stroke tip list, no briefs";
 StrokeTipListNoBriefsStory.args = {
   changeShowStrokesInLesson: () => undefined,
@@ -107,14 +121,27 @@ StrokeTipListNoBriefsStory.args = {
   globalLookupDictionaryLoaded: true,
   showStrokesInLesson: true,
   targetStrokeCount: 2,
-  userSettings: {
-    ...userSettings,
-    showStrokesAsList: true,
-  },
   repetitionsRemaining: 1,
 };
 
-export const StrokeTipDiagramStory = Template.bind({});
+export const StrokeTipDiagramStory = (args) => {
+  useHydrateAtoms([[userSettingsState, userSettings]]);
+  return (
+    <AppMethodsContext.Provider value={appMethods}>
+      <StrokeTip
+        changeShowStrokesInLesson={() => undefined}
+        currentPhrase={"test"}
+        currentStroke={"TEFT"}
+        globalLookupDictionary={globalLookupDictionaryMinimal}
+        globalLookupDictionaryLoaded={true}
+        showStrokesInLesson={false}
+        targetStrokeCount={1}
+        repetitionsRemaining={1}
+        {...args}
+      />
+    </AppMethodsContext.Provider>
+  );
+};
 StrokeTipDiagramStory.storyName = "Stroke tip diagram";
 StrokeTipDiagramStory.args = {
   changeShowStrokesInLesson: () => undefined,
@@ -124,11 +151,35 @@ StrokeTipDiagramStory.args = {
   globalLookupDictionaryLoaded: true,
   showStrokesInLesson: true,
   targetStrokeCount: 1,
-  userSettings: userSettings,
   repetitionsRemaining: 1,
 };
 
-export const StrokeTipPalantypeStory = Template.bind({});
+export const StrokeTipPalantypeStory = (args) => {
+  const userSettingsForStrokeTipPalantypeStory = {
+    ...userSettings,
+    stenoLayout: "stenoLayoutPalantype",
+    diagramSize: 2,
+  };
+  // @ts-ignore TODO: add UserSettings type to user settings object
+  useHydrateAtoms([
+    [userSettingsState, userSettingsForStrokeTipPalantypeStory],
+  ]);
+  return (
+    <AppMethodsContext.Provider value={appMethods}>
+      <StrokeTip
+        changeShowStrokesInLesson={() => undefined}
+        currentPhrase={"test"}
+        currentStroke={"TEFT"}
+        globalLookupDictionary={globalLookupDictionaryMinimal}
+        globalLookupDictionaryLoaded={true}
+        showStrokesInLesson={false}
+        targetStrokeCount={1}
+        repetitionsRemaining={1}
+        {...args}
+      />
+    </AppMethodsContext.Provider>
+  );
+};
 StrokeTipPalantypeStory.storyName = "Stroke tip diagram Palantype";
 StrokeTipPalantypeStory.args = {
   changeShowStrokesInLesson: () => undefined,
@@ -138,15 +189,32 @@ StrokeTipPalantypeStory.args = {
   globalLookupDictionaryLoaded: true,
   showStrokesInLesson: true,
   targetStrokeCount: 1,
-  userSettings: {
-    ...userSettings,
-    stenoLayout: "stenoLayoutPalantype",
-    diagramSize: 2,
-  },
+  userSettings: {},
   repetitionsRemaining: 1,
 };
 
-export const StrokeTipTextStory = Template.bind({});
+export const StrokeTipTextStory = (args) => {
+  const userSettingsForStrokeTipTextStory = {
+    ...userSettings,
+    showStrokesAsDiagrams: false,
+  };
+  useHydrateAtoms([[userSettingsState, userSettingsForStrokeTipTextStory]]);
+  return (
+    <AppMethodsContext.Provider value={appMethods}>
+      <StrokeTip
+        changeShowStrokesInLesson={() => undefined}
+        currentPhrase={"test"}
+        currentStroke={"TEFT"}
+        globalLookupDictionary={globalLookupDictionaryMinimal}
+        globalLookupDictionaryLoaded={true}
+        showStrokesInLesson={false}
+        targetStrokeCount={1}
+        repetitionsRemaining={1}
+        {...args}
+      />
+    </AppMethodsContext.Provider>
+  );
+};
 StrokeTipTextStory.storyName = "Stroke tip text";
 StrokeTipTextStory.args = {
   changeShowStrokesInLesson: () => undefined,
@@ -156,11 +224,31 @@ StrokeTipTextStory.args = {
   globalLookupDictionaryLoaded: true,
   showStrokesInLesson: true,
   targetStrokeCount: 2,
-  userSettings: { ...userSettings, showStrokesAsDiagrams: false },
   repetitionsRemaining: 1,
 };
 
-export const StrokeTipHiddenStory = Template.bind({});
+export const StrokeTipHiddenStory = (args) => {
+  const userSettingsForStrokeTipHiddenStory = {
+    ...userSettings,
+    showStrokesAsDiagrams: false,
+  };
+  useHydrateAtoms([[userSettingsState, userSettingsForStrokeTipHiddenStory]]);
+  return (
+    <AppMethodsContext.Provider value={appMethods}>
+      <StrokeTip
+        changeShowStrokesInLesson={() => undefined}
+        currentPhrase={"test"}
+        currentStroke={"TEFT"}
+        globalLookupDictionary={globalLookupDictionaryMinimal}
+        globalLookupDictionaryLoaded={true}
+        showStrokesInLesson={false}
+        targetStrokeCount={1}
+        repetitionsRemaining={1}
+        {...args}
+      />
+    </AppMethodsContext.Provider>
+  );
+};
 StrokeTipHiddenStory.storyName = "Stroke tip hidden";
 StrokeTipHiddenStory.args = {
   changeShowStrokesInLesson: () => undefined,
@@ -170,6 +258,5 @@ StrokeTipHiddenStory.args = {
   globalLookupDictionaryLoaded: true,
   showStrokesInLesson: false,
   targetStrokeCount: 2,
-  userSettings: { ...userSettings, showStrokesAsDiagrams: false },
   repetitionsRemaining: 1,
 };
