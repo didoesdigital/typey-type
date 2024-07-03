@@ -247,7 +247,7 @@ export function useChooseStudy() {
           currentState.studyPresets?.[0]?.repetitions ||
           PARAMS.discover.repetitions;
         newState.limitNumberOfWords =
-          currentState.studyPresets?.[0]?.limitNumberOfWords ||
+          currentState.studyPresets?.[0]?.limitNumberOfWords ??
           PARAMS.discover.limitNumberOfWords;
         newState.sortOrder = PARAMS.discover.sortOrder;
         break;
@@ -262,7 +262,7 @@ export function useChooseStudy() {
           currentState.studyPresets?.[1]?.repetitions ||
           PARAMS.revise.repetitions;
         newState.limitNumberOfWords =
-          currentState.studyPresets?.[1]?.limitNumberOfWords ||
+          currentState.studyPresets?.[1]?.limitNumberOfWords ??
           PARAMS.revise.limitNumberOfWords;
         newState.sortOrder = PARAMS.revise.sortOrder;
         break;
@@ -277,7 +277,7 @@ export function useChooseStudy() {
           currentState.studyPresets?.[2]?.repetitions ||
           PARAMS.drill.repetitions;
         newState.limitNumberOfWords =
-          currentState.studyPresets?.[2]?.limitNumberOfWords ||
+          currentState.studyPresets?.[2]?.limitNumberOfWords ??
           PARAMS.drill.limitNumberOfWords;
         newState.sortOrder = PARAMS.drill.sortOrder;
         break;
@@ -292,7 +292,7 @@ export function useChooseStudy() {
           currentState.studyPresets?.[3]?.repetitions ||
           PARAMS.practice.repetitions;
         newState.limitNumberOfWords =
-          currentState.studyPresets?.[3]?.limitNumberOfWords ||
+          currentState.studyPresets?.[3]?.limitNumberOfWords ??
           PARAMS.practice.limitNumberOfWords;
         newState.sortOrder = PARAMS.practice.sortOrder;
         break;
