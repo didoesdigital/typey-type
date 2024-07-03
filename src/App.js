@@ -118,7 +118,7 @@ class App extends Component {
         lastSeen: Date.now(), // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
         linkTitle: "Loading…",
         linkText: "Study",
-        link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
+        link: "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
       },
       flashcardsCourseIndex: 0,
       fullscreen: false,
