@@ -138,11 +138,15 @@ export default function FinishedSpeedChart({ data }) {
   const bisect = bisector((d) => xAccessor(d));
 
   const onMove = (event) => {
-    const pointerX = pointer(event)[0] - dimensions.marginLeft;
-    const pointerXValue = xScale.invert(pointerX);
-    const nearestXIndex = bisect.center(data.dataPoints, pointerXValue);
-    const datum = data.dataPoints[nearestXIndex];
-    setHighlightedDatum(datum);
+    try {
+      const pointerX = pointer(event)?.[0] || 0 - dimensions.marginLeft;
+      const pointerXValue = xScale.invert(pointerX);
+      const nearestXIndex = bisect.center(data.dataPoints, pointerXValue);
+      const datum = data.dataPoints[nearestXIndex];
+      setHighlightedDatum(datum);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onOut = () => {
