@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { Tooltip } from "react-tippy";
 import GoogleAnalytics from "react-ga4";
 import ReactModal from 'react-modal';
+import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
+import { withAppMethods } from "../../../states/legacy/AppMethodsContext";
+import { userSettingsState } from "../../../states/userSettingsState";
+import { withAtomCompat } from "../../../states/atomUtils";
 import FlashcardsCarouselActionButtons from './components/FlashcardsCarouselActionButtons';
 import FlashcardsModal from './components/FlashcardsModal';
 import StrokesForWords from '../../../components/StrokesForWords';
@@ -511,4 +515,18 @@ currentSlide: currentSlide
   }
 }
 
-export default Flashcards;
+function FlashcardsWrapper(props) {
+  const { changeFullscreen, appFetchAndSetupGlobalDict } = useAppMethods();
+
+  return (
+    <Flashcards
+      {...props}
+      changeFullscreen={changeFullscreen}
+      fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
+    />
+  );
+}
+
+export default withAppMethods(
+  withAtomCompat(FlashcardsWrapper, "userSettings", userSettingsState)
+);
