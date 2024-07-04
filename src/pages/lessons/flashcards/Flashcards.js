@@ -516,13 +516,20 @@ currentSlide: currentSlide
 }
 
 function FlashcardsWrapper(props) {
-  const { changeFullscreen, appFetchAndSetupGlobalDict } = useAppMethods();
+  const {
+    changeFullscreen,
+    appFetchAndSetupGlobalDict,
+    updateFlashcardsMetWords,
+    updateFlashcardsProgress,
+  } = useAppMethods();
 
   return (
     <Flashcards
       {...props}
       changeFullscreen={changeFullscreen}
       fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
+      updateFlashcardsMetWords={updateFlashcardsMetWords}
+      updateFlashcardsProgress={updateFlashcardsProgress}
     />
   );
 }
