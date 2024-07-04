@@ -284,8 +284,18 @@ const DictionaryManagement = (props) => {
                   .pop();
                 if (filename.endsWith(".json")) {
                   validDictionariesListedInConfig.push(filename);
+                } else if (
+                  filename.endsWith(".py" || filename.endsWith(".rtf"))
+                ) {
+                  // Skip valid, but unhandled dictionary formats
                 } else {
-                  throw new Error("No valid dictionary filenames.");
+                  debugger;
+                  throw new Error(
+                    `This doesn't look like a valid dictionary filename: ${filename.slice(
+                      0,
+                      50
+                    )}.`
+                  );
                 }
               }
             } else {
@@ -293,6 +303,12 @@ const DictionaryManagement = (props) => {
                 "The list of dictionaries has no enabled dictionary paths."
               );
             }
+          }
+
+          if (validDictionariesListedInConfig.length === 0) {
+            throw new Error(
+              "There were no valid JSON dictionaries found enabled in this config."
+            );
           }
 
           validConfig = configName;
