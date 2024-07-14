@@ -36,7 +36,6 @@ import { useChangeWriterInput } from "../lessons/components/UserSettings/updateG
 type Props = {
   userSettings: UserSettings,
   globalUserSettings: GlobalUserSettings,
-  // stenoHintsOnTheFly: boolean
 };
 
 type State = {

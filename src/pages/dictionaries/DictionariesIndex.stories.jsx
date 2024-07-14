@@ -72,7 +72,6 @@ const Template = (args) => {
       personalDictionaries={{ dictionariesNamesAndContents: null }}
       updateGlobalLookupDictionary={() => undefined}
       updatePersonalDictionaries={() => undefined}
-      stenohintsonthefly={true}
       match={{
         isExact: true,
         params: {},

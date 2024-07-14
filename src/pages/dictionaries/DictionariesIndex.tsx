@@ -8,7 +8,6 @@ import Subheader from "../../components/Subheader";
 import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
 import type {
-  Experiments,
   FetchAndSetupGlobalDict,
   LookupDictWithNamespacedDictsAndConfig,
   PrettyLessonTitle,
@@ -25,7 +24,6 @@ type Props = {
   fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
-  stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
   userSettings: UserSettings;
 };
 
@@ -92,7 +90,6 @@ const DictionariesIndex = ({
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
-  stenohintsonthefly,
   userSettings,
 }: Props) => {
   const dictionaryIndex = useAtomValue(dictionaryIndexState);

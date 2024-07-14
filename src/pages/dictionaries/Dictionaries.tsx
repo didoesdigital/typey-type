@@ -4,10 +4,7 @@ import Loadable from "react-loadable";
 import DictionariesIndex from "./DictionariesIndex";
 import PageLoading from "../../components/PageLoading";
 
-import type {
-  Experiments,
-  LookupDictWithNamespacedDictsAndConfig,
-} from "../../types";
+import type { LookupDictWithNamespacedDictsAndConfig } from "../../types";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
@@ -28,14 +25,12 @@ const AsyncDictionaryManagement = Loadable({
 type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
-  stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
   [restProps: string]: any;
 };
 
 const Dictionaries = ({
   globalLookupDictionaryLoaded,
   globalLookupDictionary,
-  stenohintsonthefly,
   ...dictionaryProps
 }: Props) => {
   const userSettings = useAtomValue(userSettingsState);
@@ -81,7 +76,6 @@ const Dictionaries = ({
         <Route exact={true} path={url}>
           <Suspense fallback={<PageLoading />}>
             <DictionariesIndex
-              stenohintsonthefly={stenohintsonthefly}
               userSettings={userSettings}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
