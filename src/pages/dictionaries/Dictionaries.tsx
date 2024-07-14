@@ -34,10 +34,8 @@ const Dictionaries = ({
   ...dictionaryProps
 }: Props) => {
   const userSettings = useAtomValue(userSettingsState);
-  const {
-    updatePersonalDictionaries,
-    appFetchAndSetupGlobalDict,
-  } = useAppMethods();
+  const { updatePersonalDictionaries, appFetchAndSetupGlobalDict } =
+    useAppMethods();
   const toggleExperiment = useToggleExperiment();
   const match = useRouteMatch({
     path: "/dictionaries",
