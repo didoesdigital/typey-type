@@ -497,7 +497,7 @@ export type LessonTitle = string;
 
 export type LessonIndexEntry = {
   category: Category;
-  overview: OverviewPathWithoutBasenameAndWithFilename;
+  overview?: OverviewPathWithoutBasenameAndWithFilename;
   path: LessonPathWithoutBasenameAndWithFilename;
   subcategory: Subcategory;
   subtitle: string; // could probably be "" because it's always empty, or remove it completely
