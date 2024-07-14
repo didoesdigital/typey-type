@@ -27,7 +27,6 @@ export function useChangeFullscreen() {
   const setState = useSetAtom(fullscreenState);
 
   return (event) => {
-    console.log("change fullscreen", event.target);
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     setState(value);

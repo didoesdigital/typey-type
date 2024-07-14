@@ -54,7 +54,6 @@ const LessonOverview = ({
           console.error(e);
         });
     } else {
-      console.error("no metadat aoverview")
       setError(true);
     }
   }, []);

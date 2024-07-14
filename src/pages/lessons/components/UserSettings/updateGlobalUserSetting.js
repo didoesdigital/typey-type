@@ -61,7 +61,6 @@ export function useToggleExperiment() {
     const value = target.checked;
     const name = target.name;
 
-    console.log("set", name, value)
     setState(name, value);
 
     let labelString = value;
