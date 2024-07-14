@@ -23,12 +23,13 @@ const FlashcardsSection = ({
   loadingLessonIndex,
   updateFlashcardsRecommendation,
 }: Props) => {
-  const {flashcardsNextLesson} = useAtomValue(flashcardsRecommendationState);
+  const { flashcardsNextLesson } = useAtomValue(flashcardsRecommendationState);
   const changeFlashcardCourseLevel = useChangeFlashcardCourseLevel();
+
   useEffect(() => {
     updateFlashcardsRecommendation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [flashcardsCourseLevel])
+  }, [flashcardsCourseLevel]);
 
   const startFlashcards = () => {
     GoogleAnalytics.event({
@@ -36,8 +37,6 @@ const FlashcardsSection = ({
       action: "Start recommended flashcards",
       label: flashcardsNextLesson?.link || "BAD_INPUT",
     });
-
-    updateFlashcardsRecommendation();
   };
 
   return (
