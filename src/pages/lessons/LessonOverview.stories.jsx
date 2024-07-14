@@ -1,6 +1,5 @@
-import React, { Suspense } from "react";
+import React from "react";
 import LessonOverview from "./LessonOverview";
-import { useHydrateAtoms } from "jotai/utils";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
