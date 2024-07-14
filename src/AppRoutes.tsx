@@ -116,12 +116,6 @@ type AppStateForDescendants = {
   customLessonMaterialValidationState: CustomLessonMaterialValidationState,
   customLesson: Lesson,
   actualText: ActualTypedText,
-//   "the": {
-//     phrase: "the",
-//     stroke: "-T",
-//     rung: 0,
-//   },
-// },
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig,
   globalLookupDictionaryLoaded: boolean,
   lessonNotFound: boolean,
