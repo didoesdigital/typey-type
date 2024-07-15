@@ -102,8 +102,6 @@ const DictionariesIndex = ({
     }
   }, []);
 
-  // TODO(na2hiro): dictionary index should be loaded at this point
-
   const linkList = dictionaryIndex.map((dictionary: StenoDictionary) => {
     const author =
       dictionary.author && dictionary.author.length > 0
