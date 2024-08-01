@@ -243,12 +243,8 @@ class ActionProvider {
       ? "A brief is an arbitrary combination of keys to produce a word or phrase, usually shorter than a phonetic outline"
       : userMessage.includes("Lapwing")
       ? "Lapwing is an alternative steno theory to Plover that is more consistent, developed by Aerick"
-      : userMessage.includes("Aerick")
-      ? "Aerick is a steno enthusiast with a popular YouTube channel"
       : userMessage.includes("Magnum")
       ? "Magnum steno is Mark Kislingbury's steno theory for writing short"
-      : userMessage.includes("Kislingbury")
-      ? "Mark Kislingbury has a Guinness World Record in speed writing and is the fastest, shortest writer in the world"
       : "Maybe you could share some feedback about that one";
     const botMessage = this.createChatBotMessage(reply);
     this.updateChatbotState(botMessage);
