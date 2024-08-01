@@ -15,6 +15,7 @@ import {
   lookupKeywords,
   nameQuestions,
   whatQuestions,
+  whoQuestions,
 } from "./constants.js";
 import { escapeRegExp } from "../../../utils/utils";
 
@@ -129,6 +130,9 @@ class MessageParser {
         lowerCaseMessage.includes("?"))
     ) {
       this.actionProvider.handleAboutYouQuestions(message);
+      foundSomething = true;
+    } else if (messageMatchesAKeyword(lowerCaseMessage, whoQuestions)) {
+      this.actionProvider.handleWhoQuestions(message);
       foundSomething = true;
     }
 
