@@ -85,6 +85,7 @@ const UserSettings = ({
     userSettings.newWords,
     userSettings.seenWords,
     userSettings.retainedWords,
+    userSettings.simpleTypography,
   ]);
 
   return (
