@@ -24,7 +24,6 @@ import {
   generateListOfWordsAndStrokes
 } from './utils/transformingDictionaries/transformingDictionaries';
 import queryString from 'query-string';
-import GoogleAnalytics from "react-ga4";
 import fallbackLesson from './constant/fallbackLesson';
 import fetchAndSetupGlobalDict from './utils/app/fetchAndSetupGlobalDict';
 import calculateMemorisedWordCount from './utils/calculateMemorisedWordCount';
@@ -239,46 +238,6 @@ class App extends Component {
       writePersonalPreferences('topSpeedPersonalBest', this.state.topSpeedPersonalBest);
       writePersonalPreferences('metWords', this.state.metWords);
       this.setupLesson();
-    });
-  }
-
-  // TODO: sub state of userSettings
-  startFromWordOne() {
-    let currentState = this.props.userSettings;
-    let newState = Object.assign({}, currentState);
-
-    const name = "startFromWord"
-    const value = 1;
-
-    newState[name] = value;
-
-    this.setState({userSettings: newState}, () => {
-      if (!(name === 'caseSensitive')) {
-        this.setupLesson();
-      }
-      writePersonalPreferences('userSettings', this.props.userSettings);
-
-      // A hack for returning focus somewhere sensible
-      // https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
-      // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
-      window.setTimeout(function ()
-      {
-        let yourTypedText = document.getElementById('your-typed-text')
-        let noWordsToWrite = document.getElementById('js-no-words-to-write');
-        if (yourTypedText) {
-          yourTypedText.focus();
-        }
-        else if (noWordsToWrite) {
-          noWordsToWrite.focus(); // Note: not an interactive element
-        }
-      }, 0);
-
-    });
-
-    GoogleAnalytics.event({
-      category: 'UserSettings',
-      action: 'Start from word 1',
-      label: 'true'
     });
   }
 
@@ -594,14 +553,17 @@ class App extends Component {
         // newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0);
       }
       else if (startFromWord > 0 && limitNumberOfWords > 0) {
+        console.log("start from word > 0 && limitNumberOfWords > 0 so slice from zero based startFrom to startFrom + limitNumberOfWords")
         let startFrom = startFromWord - 1;
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom, startFrom + limitNumberOfWords);
       }
       else if (startFromWord > 0) {
+        console.log("start from word > 0 so slice from zero based startFrom to the end")
         let startFrom = startFromWord - 1;
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom);
       }
       else if (limitNumberOfWords > 0) {
+        console.log("limitNumberOfWords > 0 so slice from zero to the limit")
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, limitNumberOfWords);
       }
 
@@ -1240,7 +1202,6 @@ class App extends Component {
               setUpProgressRevisionLesson: this.setUpProgressRevisionLesson.bind(this),
               setupLesson: this.setupLesson.bind(this),
               startCustomLesson: this.startCustomLesson.bind(this),
-              startFromWordOne: this.startFromWordOne.bind(this),
               stopLesson: this.stopLesson.bind(this),
               updateGlobalLookupDictionary: this.updateGlobalLookupDictionary.bind(this),
               updateMarkup: this.updateMarkup.bind(this),

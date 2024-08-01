@@ -78,7 +78,6 @@ export type FinishedProps = {
   reviseLesson: any;
   revisionMode: any;
   settings: any;
-  startFromWordOne: any;
   startTime: any;
   timer: number;
   topSpeedPersonalBest: any;

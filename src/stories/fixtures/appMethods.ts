@@ -16,7 +16,6 @@ const appMethods: AppMethods = {
   setUpProgressRevisionLesson: () => undefined,
   setupLesson: () => undefined,
   startCustomLesson: () => undefined,
-  startFromWordOne: () => undefined,
   stopLesson: () => console.log("stop lesson"),
   updateGlobalLookupDictionary: () => undefined,
   updateMarkup: () => undefined,

@@ -28,7 +28,6 @@ export type AppMethods = {
   setUpProgressRevisionLesson: typeof App.prototype.setUpProgressRevisionLesson,
   setupLesson: typeof App.prototype.setupLesson,
   startCustomLesson: typeof App.prototype.startCustomLesson,
-  startFromWordOne: typeof App.prototype.startFromWordOne,
   stopLesson: typeof App.prototype.stopLesson,
   updateGlobalLookupDictionary: typeof App.prototype.updateGlobalLookupDictionary,
   updateMarkup: typeof App.prototype.updateMarkup,

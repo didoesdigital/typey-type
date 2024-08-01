@@ -44,7 +44,6 @@ const Finished = ({
   reviseLesson,
   revisionMode,
   settings,
-  startFromWordOne,
   startTime,
   timer,
   topSpeedPersonalBest,
@@ -158,7 +157,6 @@ const Finished = ({
             <div className="lesson-canvas lesson-canvas--finished panel overflow-hidden flex relative bg-white dark:bg-coolgrey-1000 p3 mb3">
               {lessonLength === 0 ? (
                 <FinishedZeroAndEmptyStateMessage
-                  startFromWordOneClickHandler={startFromWordOne}
                   suggestedNextUrl={getNextLessonPath(metadata)}
                 />
               ) : (

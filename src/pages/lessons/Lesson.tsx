@@ -89,7 +89,6 @@ const Lesson = ({
     setUpProgressRevisionLesson,
     setupLesson,
     startCustomLesson,
-    startFromWordOne,
     stopLesson,
     updateGlobalLookupDictionary,
     updateMarkup,
@@ -342,7 +341,6 @@ const Lesson = ({
               restartLesson={restartLesson}
               reviseLesson={reviseLesson}
               settings={lesson.settings}
-              startFromWordOne={startFromWordOne}
               startTime={startTime}
               timer={timer}
               topSpeedPersonalBest={topSpeedPersonalBest}

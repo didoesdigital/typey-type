@@ -435,6 +435,32 @@ export function useHandleStartFromWordChange() {
   }
 }
 
+export function useStartFromWordOne() {
+  const setState = useSetAtom(startFromWordSettingState);
+  return () => {
+    setState(1);
+
+    // A hack for returning focus somewhere sensible
+    // https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
+    // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
+    window.setTimeout(function () {
+      let yourTypedText = document.getElementById("your-typed-text");
+      let noWordsToWrite = document.getElementById("js-no-words-to-write");
+      if (yourTypedText) {
+        yourTypedText.focus();
+      } else if (noWordsToWrite) {
+        noWordsToWrite.focus(); // Note: not an interactive element
+      }
+    }, 0);
+
+    GoogleAnalytics.event({
+      category: "UserSettings",
+      action: "Start from word 1",
+      label: "true",
+    });
+  };
+}
+
 export function useHandleUpcomingWordsLayout() {
   const setState = useSetAtom(upcomingWordsLayoutState);
 
