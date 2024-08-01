@@ -553,17 +553,14 @@ class App extends Component {
         // newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0);
       }
       else if (startFromWord > 0 && limitNumberOfWords > 0) {
-        console.log("start from word > 0 && limitNumberOfWords > 0 so slice from zero based startFrom to startFrom + limitNumberOfWords")
         let startFrom = startFromWord - 1;
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom, startFrom + limitNumberOfWords);
       }
       else if (startFromWord > 0) {
-        console.log("start from word > 0 so slice from zero based startFrom to the end")
         let startFrom = startFromWord - 1;
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(startFrom);
       }
       else if (limitNumberOfWords > 0) {
-        console.log("limitNumberOfWords > 0 so slice from zero to the limit")
         newLesson.presentedMaterial = newLesson.presentedMaterial.slice(0, limitNumberOfWords);
       }
 
