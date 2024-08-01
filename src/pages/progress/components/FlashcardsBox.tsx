@@ -61,11 +61,7 @@ const FlashcardsBox = ({
   return flashcardsNextLesson !== undefined && !loadingLessonIndex ? (
     <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
       <p className="text-right">
-        <strong>
-          {flashcardsNextLesson.linkTitle === "Error"
-            ? "Unable to load flashcards"
-            : flashcardsNextLesson.linkTitle}
-        </strong>
+        <strong>{flashcardsNextLesson.linkTitle}</strong>
       </p>
       <p className="text-right de-emphasized" data-chromatic="ignore">
         {flashcardsNextLesson.lastSeen === defaultTimestamp
@@ -84,20 +80,14 @@ const FlashcardsBox = ({
           Skip
         </button>
         <div className="text-right">
-          {flashcardsNextLesson.linkTitle === "Error" ? (
-            <a href="." className="link-button dib" style={{ lineHeight: 2 }}>
-              Refresh
-            </a>
-          ) : (
-            <Link
-              onClick={startFlashcards}
-              to={flashcardsNextLesson.link}
-              className="link-button dib"
-              style={{ lineHeight: 2 }}
-            >
-              Study
-            </Link>
-          )}
+          <Link
+            onClick={startFlashcards}
+            to={flashcardsNextLesson.link}
+            className="link-button dib"
+            style={{ lineHeight: 2 }}
+          >
+            Study
+          </Link>
         </div>
         <div className="hide" id="js-next-recommended-link-text">
           {flashcardsNextLesson.linkTitle}
