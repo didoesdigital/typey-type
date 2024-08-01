@@ -82,6 +82,9 @@ const UserSettings = ({
     userSettings.repetitions,
     userSettings.startFromWord,
     userSettings.upcomingWordsLayout,
+    userSettings.newWords,
+    userSettings.seenWords,
+    userSettings.retainedWords,
   ]);
 
   return (

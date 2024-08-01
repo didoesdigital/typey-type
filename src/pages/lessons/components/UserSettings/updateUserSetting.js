@@ -179,7 +179,6 @@ export function useChangeUserSetting() {
     }
 
     setState(newState);
-    // unless caseSensitive setting, setupLesson
 
     let labelString = value;
     if (!value) {
