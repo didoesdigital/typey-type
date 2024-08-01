@@ -820,7 +820,7 @@ const DictionaryManagement = (props) => {
                   name="stenohintsonthefly"
                   id="stenohintsonthefly"
                   checked={
-                    !!globalUserSettings.experiments?.stenohintsonthefly
+                    !!globalUserSettings?.experiments?.stenohintsonthefly
                   }
                   onChange={props.toggleExperiment}
                 />

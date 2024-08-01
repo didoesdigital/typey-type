@@ -1216,7 +1216,7 @@ class App extends Component {
       };
     }
 
-    let stenohintsonthefly = this.props.globalUserSettings.experiments && !!this.props.globalUserSettings.experiments.stenohintsonthefly;
+    let stenohintsonthefly = this.props.globalUserSettings?.experiments && !!this.props.globalUserSettings?.experiments?.stenohintsonthefly;
 
     let presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
     return (

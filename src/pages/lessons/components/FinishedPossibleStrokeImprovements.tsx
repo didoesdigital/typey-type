@@ -55,7 +55,7 @@ const FinishedPossibleStrokeImprovements = ({
 
         const showTimesSeen =
           globalUserSettings?.experiments &&
-          !!globalUserSettings.experiments.timesSeen;
+          !!globalUserSettings?.experiments?.timesSeen;
         const timesSeen =
           metWords[
             getWordWithSpacing(phrase.word, spacePlacement)
