@@ -85,6 +85,7 @@ const applyQueryParamsToUserSettings = (
         "stenoLayoutNoNumberBarOuterThumbNumbers",
         "stenoLayoutPalantype",
         "stenoLayoutBrazilianPortugueseSteno",
+        "stenoLayoutYaweiChineseSteno",
         "stenoLayoutDanishSteno",
         "stenoLayoutItalianMichelaSteno",
         "stenoLayoutItalianMelaniSteno",

@@ -2,6 +2,7 @@ import mapBriefToAmericanStenoKeys from "../../../utils/stenoLayouts/mapBriefToA
 import mapBriefToNoNumberBarInnerThumbNumbersStenoKeys from "../../../utils/stenoLayouts/mapBriefToNoNumberBarInnerThumbNumbersStenoKeys";
 import mapBriefToNoNumberBarOuterThumbNumbersStenoKeys from "../../../utils/stenoLayouts/mapBriefToNoNumberBarOuterThumbNumbersStenoKeys";
 import mapBriefToBrazilianPortugueseStenoKeys from "../../../utils/stenoLayouts/mapBriefToBrazilianPortugueseStenoKeys";
+import mapBriefToYaweiChineseStenoKeys from "../../../utils/stenoLayouts/mapBriefToYaweiChineseStenoKeys";
 import mapBriefToDanishStenoKeys from "../../../utils/stenoLayouts/mapBriefToDanishStenoKeys";
 import mapBriefToItalianMichelaStenoKeys from "../../../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys";
 import mapBriefToJapaneseStenoKeys from "../../../utils/stenoLayouts/mapBriefToJapaneseStenoKeys";
@@ -20,6 +21,8 @@ const getMapsBriefsFn = (stenoLayout: StenoLayout) => {
       return mapBriefToNoNumberBarOuterThumbNumbersStenoKeys;
     case "stenoLayoutBrazilianPortugueseSteno":
       return mapBriefToBrazilianPortugueseStenoKeys;
+    case "stenoLayoutYaweiChineseSteno":
+      return mapBriefToYaweiChineseStenoKeys;
     case "stenoLayoutDanishSteno":
       return mapBriefToDanishStenoKeys;
     case "stenoLayoutItalianMichelaSteno":

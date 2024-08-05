@@ -350,6 +350,7 @@ export type StenoLayout =
   | "stenoLayoutNoNumberBarOuterThumbNumbers"
   | "stenoLayoutPalantype"
   | "stenoLayoutBrazilianPortugueseSteno"
+  | "stenoLayoutYaweiChineseSteno"
   | "stenoLayoutDanishSteno"
   | "stenoLayoutItalianMichelaSteno"
   | "stenoLayoutJapaneseSteno"

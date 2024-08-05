@@ -607,6 +607,9 @@ const UserSettings = ({
                       <option value="stenoLayoutKoreanModernCSteno">
                         Korean Modern C steno
                       </option>
+                      <option value="stenoLayoutYaweiChineseSteno">
+                        Yawei Chinese
+                      </option>
                     </optgroup>
                   </select>
                 </div>

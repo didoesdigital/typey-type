@@ -2,6 +2,7 @@ import AmericanStenoDiagram from "../../../StenoLayout/AmericanStenoDiagram";
 import NoNumberBarInnerThumbNumbersStenoDiagram from "../../../StenoLayout/NoNumberBarInnerThumbNumbersStenoDiagram";
 import NoNumberBarOuterThumbNumbersStenoDiagram from "../../../StenoLayout/NoNumberBarOuterThumbNumbersStenoDiagram";
 import BrazilianPortugueseStenoDiagram from "../../../StenoLayout/BrazilianPortugueseStenoDiagram";
+import YaweiChineseStenoDiagram from "../../../StenoLayout/YaweiChineseStenoDiagram";
 import DanishStenoDiagram from "../../../StenoLayout/DanishStenoDiagram";
 import ItalianMichelaStenoDiagram from "../../../StenoLayout/ItalianMichelaStenoDiagram";
 import JapaneseStenoDiagram from "../../../StenoLayout/JapaneseStenoDiagram";
@@ -20,6 +21,8 @@ const getStenoDiagram = (stenoLayout: StenoLayout) => {
       return NoNumberBarOuterThumbNumbersStenoDiagram;
     case "stenoLayoutBrazilianPortugueseSteno":
       return BrazilianPortugueseStenoDiagram;
+    case "stenoLayoutYaweiChineseSteno":
+      return YaweiChineseStenoDiagram;
     case "stenoLayoutDanishSteno":
       return DanishStenoDiagram;
     case "stenoLayoutItalianMichelaSteno":

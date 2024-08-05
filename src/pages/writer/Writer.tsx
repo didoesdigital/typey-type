@@ -3,6 +3,7 @@ import GoogleAnalytics from "react-ga4";
 import AmericanStenoDiagram from '../../StenoLayout/AmericanStenoDiagram';
 import NoNumberBarInnerThumbNumbersStenoDiagram from '../../StenoLayout/NoNumberBarInnerThumbNumbersStenoDiagram';
 import NoNumberBarOuterThumbNumbersStenoDiagram from '../../StenoLayout/NoNumberBarOuterThumbNumbersStenoDiagram';
+import YaweiChineseStenoDiagram from '../../StenoLayout/YaweiChineseStenoDiagram';
 import BrazilianPortugueseStenoDiagram from '../../StenoLayout/BrazilianPortugueseStenoDiagram';
 import DanishStenoDiagram from '../../StenoLayout/DanishStenoDiagram';
 import ItalianMichelaStenoDiagram from '../../StenoLayout/ItalianMichelaStenoDiagram';
@@ -16,6 +17,7 @@ import {
 import mapBriefToAmericanStenoKeys from '../../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
 import mapBriefToNoNumberBarInnerThumbNumbersStenoKeys from '../../utils/stenoLayouts/mapBriefToNoNumberBarInnerThumbNumbersStenoKeys';
 import mapBriefToNoNumberBarOuterThumbNumbersStenoKeys from '../../utils/stenoLayouts/mapBriefToNoNumberBarOuterThumbNumbersStenoKeys';
+import mapBriefToYaweiChineseStenoKeys from '../../utils/stenoLayouts/mapBriefToYaweiChineseStenoKeys';
 import mapBriefToBrazilianPortugueseStenoKeys from '../../utils/stenoLayouts/mapBriefToBrazilianPortugueseStenoKeys';
 import mapBriefToDanishStenoKeys from '../../utils/stenoLayouts/mapBriefToDanishStenoKeys';
 import mapBriefToItalianMichelaStenoKeys from '../../utils/stenoLayouts/mapBriefToItalianMichelaStenoKeys';
@@ -248,6 +250,11 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
         StenoLayoutDiagram = BrazilianPortugueseStenoDiagram;
         placeholderRawSteno = "e.g. #SKTFPLRAO*EURWBPGHTSDZ";
         break;
+      case 'stenoLayoutYaweiChineseSteno':
+        mapBriefsFunction = mapBriefToYaweiChineseStenoKeys;
+        StenoLayoutDiagram = YaweiChineseStenoDiagram;
+        placeholderRawSteno = "e.g. #XBDZGWIUNEAO-#XBDZGWIUNEAO";
+        break;
       case 'stenoLayoutDanishSteno':
         mapBriefsFunction = mapBriefToDanishStenoKeys;
         StenoLayoutDiagram = DanishStenoDiagram;
@@ -375,6 +382,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
                   <option value="stenoLayoutNoNumberBarOuterThumbNumbers">Outer thumbers (Uni, Georgi, etc.)</option>
                   <option value="stenoLayoutPalantype">Palantype</option>
                   <option value="stenoLayoutBrazilianPortugueseSteno">Brazilian Portuguese steno</option>
+                  <option value="stenoLayoutYaweiChineseSteno">Yawei Chinese steno</option>
                   <option value="stenoLayoutDanishSteno">Danish steno</option>
                   <option value="stenoLayoutItalianMichelaSteno">Italian Michela steno</option>
                   <option value="stenoLayoutJapaneseSteno">Japanese steno</option>
