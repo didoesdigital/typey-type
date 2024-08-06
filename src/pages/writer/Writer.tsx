@@ -382,7 +382,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
                   <option value="stenoLayoutNoNumberBarOuterThumbNumbers">Outer thumbers (Uni, Georgi, etc.)</option>
                   <option value="stenoLayoutPalantype">Palantype</option>
                   <option value="stenoLayoutBrazilianPortugueseSteno">Brazilian Portuguese steno</option>
-                  <option value="stenoLayoutYaweiChineseSteno">Yawei Chinese steno</option>
+                  <option value="stenoLayoutYaweiChineseSteno">Chinese Yawei steno</option>
                   <option value="stenoLayoutDanishSteno">Danish steno</option>
                   <option value="stenoLayoutItalianMichelaSteno">Italian Michela steno</option>
                   <option value="stenoLayoutJapaneseSteno">Japanese steno</option>
