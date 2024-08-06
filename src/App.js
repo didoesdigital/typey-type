@@ -888,8 +888,9 @@ class App extends Component {
 
   updateMarkup(event) {
     let actualText = event.target.value;
-    // TODO: remove cookie thing before merging
-    const batchUpdate = document.cookie.indexOf("batchUpdate=1")>=0;
+    // TODO: once we're happy that this will be the permanent new default behaviour, remove all the `batchUpdate`-specific branching code and tests:
+    // const batchUpdate = document.cookie.indexOf("batchUpdate=1")>=0;
+    const batchUpdate = true;
     if(!batchUpdate) {
       this.updateBufferSingle(actualText);
       return;

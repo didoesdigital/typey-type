@@ -232,8 +232,8 @@ describe(App, () => {
           }
         );
       });
-      // Current behavior
-      it("accepts excess chars except for spaceAfterOutput", async () => {
+      // TODO: once we're happy that with the new behaviour as the permanent default, remove all the `batchUpdate`-specific branching code and tests:
+      xit("accepts excess chars except for spaceAfterOutput", async () => {
         document.cookie = "batchUpdate=0";
         // This user with spaceOff setting actually puts space after
         const spBefore = spacePlacement === "spaceBeforeOutput" ? " " : "";
@@ -607,7 +607,9 @@ describe(App, () => {
       beforeEach(async () => {
         await loadPage(PAGES.partyTricks);
       });
-      it.each([1, 0])("records interim strokes for correct phrase (batchUpdate=%s)", async (batchUpdate) => {
+      // TODO: once we're happy that this will be the permanent new default behaviour, remove all the `batchUpdate`-specific branching code and tests:
+      // it.each([1, 0])("records interim strokes for correct phrase (batchUpdate=%s)", async (batchUpdate) => {
+      it.each([1])("records interim strokes for correct phrase (batchUpdate=%s)", async (batchUpdate) => {
         document.cookie = `batchUpdate=${batchUpdate}`;
         const { spBefore, spAfter } = getSpacer(spacePlacement);
         await typeIn(spBefore + "sigh" + spAfter);
