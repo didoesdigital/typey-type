@@ -595,6 +595,9 @@ const UserSettings = ({
                       <option value="stenoLayoutBrazilianPortugueseSteno">
                         Brazilian Portuguese steno
                       </option>
+                      <option value="stenoLayoutYaweiChineseSteno">
+                        Chinese Yawei steno
+                      </option>
                       <option value="stenoLayoutDanishSteno">
                         Danish steno
                       </option>
@@ -606,9 +609,6 @@ const UserSettings = ({
                       </option>
                       <option value="stenoLayoutKoreanModernCSteno">
                         Korean Modern C steno
-                      </option>
-                      <option value="stenoLayoutYaweiChineseSteno">
-                        Yawei Chinese
                       </option>
                     </optgroup>
                   </select>
