@@ -122,7 +122,6 @@ type AppStateForDescendants = {
   lessonsProgress: unknown,
 // isPloverDictionaryLoaded: false,
 // isGlobalLookupDictionaryLoaded: false,
-  lookupTerm: string,
   recommendationHistory: unknown // TODO: type like { currentStep: null },
   personalDictionaries: PersonalDictionaryNameAndContents[],
   previousCompletedPhraseAsTyped: ActualTypedText,
@@ -330,7 +329,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       globalLookupDictionaryLoaded={
                         appState.globalLookupDictionaryLoaded
                       }
-                      lookupTerm={appState.lookupTerm}
                       {...props}
                     />
                   </ErrorBoundary>

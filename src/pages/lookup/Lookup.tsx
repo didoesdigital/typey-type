@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import StrokesForWords from "../../components/StrokesForWords";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import Subheader from "../../components/Subheader";
@@ -13,19 +13,17 @@ import { userSettingsState } from "../../states/userSettingsState";
 type Props = {
   globalLookupDictionary: any;
   globalLookupDictionaryLoaded: boolean;
-  lookupTerm?: string;
 };
 
 const Lookup = ({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
-  lookupTerm,
 }: Props) => {
+  const location = useLocation();
+  const lookupTerm = new URLSearchParams(location.search).get("q") ?? "";
   const userSettings = useAtomValue(userSettingsState);
-  const {
-    appFetchAndSetupGlobalDict,
-    setCustomLessonContent
-  } = useAppMethods();
+  const { appFetchAndSetupGlobalDict, setCustomLessonContent } =
+    useAppMethods();
   const [bookmarkURL, setBookmarkURL] = useState(
     process.env.PUBLIC_URL + "/lookup"
   );

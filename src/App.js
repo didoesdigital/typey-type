@@ -84,7 +84,6 @@ class App extends Component {
       },
       isPloverDictionaryLoaded: false,
       isGlobalLookupDictionaryLoaded: false,
-      lookupTerm: '',
       recommendationHistory: { currentStep: null },
       personalDictionaries: {
         dictionariesNamesAndContents: null,
@@ -514,14 +513,10 @@ class App extends Component {
     // Get URL search query parameters:
     const parsedParams = queryString.parse(search);
 
-    // Get lookupTerm from URL:
-    const lookupTerm = parsedParams['q'];
-
     // Update newSettings using URL search query parameters:
     applyQueryParamsToUserSettings(newSettings, parsedParams);
 
     this.setState({
-      lookupTerm: lookupTerm,
       userSettings: newSettings
     }, () => {
       // Write updated user settings to local storage:
@@ -529,9 +524,10 @@ class App extends Component {
 
       // Clean up URL, remove parameters:
       const newHistory = Object.assign({}, this.props.location)
-      newHistory.search = "";
-      // Note: this affects StrokesForWords lookup ?q= behaviour:
-      this.props.history.replace(newHistory);
+      if (!this.props.location?.pathname.includes("/lookup")) {
+        newHistory.search = "";
+        this.props.history.replace(newHistory);
+      }
 
       // Replace smart typography in presented material:
       if (simpleTypography) {

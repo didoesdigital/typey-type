@@ -35,7 +35,6 @@ const Template = (args) => {
       <Lookup
         globalLookupDictionary={globalLookupDictionary}
         globalLookupDictionaryLoaded={true}
-        lookupTerm={undefined}
         userSettings={userSettings}
         personalDictionaries={{ dictionariesNamesAndContents: null }}
         stenohintsonthefly={true}
