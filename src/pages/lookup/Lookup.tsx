@@ -51,7 +51,7 @@ const Lookup = ({
   }, []);
 
   useEffect(() => {
-    updateSearchParams(lookupTerm);
+    updateSearchParams(encodeURIComponent(lookupTerm));
   }, [lookupTerm, updateSearchParams]);
 
   useEffect(() => {
