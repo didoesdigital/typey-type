@@ -2,8 +2,9 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga4";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { groups } from "d3-array";
-import type { LessonIndexEntry } from "../../../types";
 import { useLessonIndex } from "../../../states/lessonIndexState";
+import debounce from "../../../utils/debounce";
+import type { LessonIndexEntry } from "../../../types";
 
 type LessonListProps = {
   url: string;
@@ -34,7 +35,10 @@ const LessonLink = ({
   </Link>
 );
 
-const InnerLessonList = ({ lessonIndex, url }: LessonListProps & { lessonIndex: LessonIndexEntry[] }) => (
+const InnerLessonList = ({
+  lessonIndex,
+  url,
+}: LessonListProps & { lessonIndex: LessonIndexEntry[] }) => (
   <ul className="unstyled-list">
     {lessonIndex.map((lesson) => (
       <li className="unstyled-list-item mb1" key={lesson.path}>
@@ -106,15 +110,6 @@ function filterLessons(searchTerm: string, lessonIndex: LessonIndexEntry[]) {
   }
 
   return filteredLessons;
-}
-
-export function debounce<T extends Function>(cb: T, wait = 20) {
-  let h = 0;
-  let callable = (...args: any) => {
-    clearTimeout(h);
-    h = window.setTimeout(() => cb(...args), wait);
-  };
-  return callable;
 }
 
 export default function LessonList({ url }: LessonListProps) {

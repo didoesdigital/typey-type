@@ -9,7 +9,7 @@ import type { MaterialItem } from "../../types";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
-import { debounce } from "../lessons/components/LessonList";
+import debounce from "../../utils/debounce";
 
 type Props = {
   globalLookupDictionary: any;
