@@ -29,7 +29,7 @@ const globalLookupDictionary = new Map([
 ]);
 
 const Template = (args) => {
-  useHydrateAtoms([[userSettingsState, userSettings]])
+  useHydrateAtoms([[userSettingsState, userSettings]]);
   return (
     <AppMethodsContext.Provider value={appMethods}>
       <Lookup
@@ -46,12 +46,14 @@ const Template = (args) => {
 
 export const LookupStory = Template.bind({});
 
-export const LookupFromURLStory = Template.bind({});
-LookupFromURLStory.args = {
-  lookupTerm: "a phrase that is not in any dictionary",
-};
-LookupFromURLStory.play = async ({ canvasElement }) => {
+export const LookupMissingWordStory = Template.bind({});
+LookupMissingWordStory.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
+
+  await userEvent.type(
+    await within(canvasElement).getByLabelText("Enter words to look up"),
+    "a phrase that is not in any dictionary"
+  );
 
   await canvas.findByText("No results found");
   await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
@@ -78,11 +80,11 @@ LookupSearchStory.play = async ({ canvasElement }) => {
 };
 
 export const LookupPersonalDictionariesStory = Template.bind({});
-LookupPersonalDictionariesStory.args = {
-  lookupTerm: "!",
-};
 LookupPersonalDictionariesStory.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
+  const canvas = await within(canvasElement);
+
+  const inputElement = canvas.getByLabelText("Enter words to look up");
+  await userEvent.type(inputElement, "!");
 
   // await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
   //   "text shown in dictionary"
