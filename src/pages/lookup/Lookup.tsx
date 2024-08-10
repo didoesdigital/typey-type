@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import StrokesForWords from "../../components/StrokesForWords";
 import PseudoContentButton from "../../components/PseudoContentButton";
 import Subheader from "../../components/Subheader";
@@ -9,6 +9,7 @@ import type { MaterialItem } from "../../types";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
+import { debounce } from "../lessons/components/LessonList";
 
 type Props = {
   globalLookupDictionary: any;
@@ -20,7 +21,21 @@ const Lookup = ({
   globalLookupDictionaryLoaded,
 }: Props) => {
   const location = useLocation();
-  const lookupTerm = new URLSearchParams(location.search).get("q") ?? "";
+  const history = useHistory();
+
+  const [lookupTerm, setLookupTerm] = useState(
+    () => new URLSearchParams(location.search).get("q") ?? ""
+  );
+
+  const updateSearchParams = useMemo(
+    () =>
+      debounce((q: string) => {
+        const search = q === "" ? undefined : `?q=${q}`;
+        history.replace({ search, hash: history.location.hash });
+      }, 100),
+    [history]
+  );
+
   const userSettings = useAtomValue(userSettingsState);
   const { appFetchAndSetupGlobalDict, setCustomLessonContent } =
     useAppMethods();
@@ -36,6 +51,10 @@ const Lookup = ({
   }, []);
 
   useEffect(() => {
+    updateSearchParams(lookupTerm);
+  }, [lookupTerm, updateSearchParams]);
+
+  useEffect(() => {
     if (trackedPhrase.length > 0) {
       setWordFamilyGroup(
         getWordFamilyGroup(trackedPhrase, globalLookupDictionary)
@@ -46,6 +65,7 @@ const Lookup = ({
   }, [trackedPhrase, globalLookupDictionary]);
 
   const strokesForWordsChange = (phrase: string) => {
+    setLookupTerm(phrase);
     const encodedPhrase = encodeURIComponent(phrase);
     setBookmarkURL(process.env.PUBLIC_URL + "/lookup?q=" + encodedPhrase);
   };
