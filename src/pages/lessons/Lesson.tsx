@@ -376,17 +376,17 @@ const Lesson = ({
               <div>
                 <ErrorBoundary>
                   <DocumentTitle title={"Typey Type | Lesson overview"}>
-                      <LessonOverview
-                        lessonIndex={lessonIndex}
-                        lessonMetadata={metadata}
-                        lessonPath={location.pathname.replace("overview", "")}
-                        lessonTxtPath={location.pathname.replace(
-                          "overview",
-                          "lesson.txt"
-                        )}
-                        lessonTitle={lesson.title}
-                        {...routeProps}
-                      />
+                    <LessonOverview
+                      lessonIndex={lessonIndex}
+                      lessonMetadata={metadata}
+                      lessonPath={location.pathname.replace("overview", "")}
+                      lessonTxtPath={location.pathname.replace(
+                        "overview",
+                        "lesson.txt"
+                      )}
+                      lessonTitle={lesson.title}
+                      {...routeProps}
+                    />
                   </DocumentTitle>
                 </ErrorBoundary>
               </div>
