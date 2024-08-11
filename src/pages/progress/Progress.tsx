@@ -49,7 +49,7 @@ const Progress = (props: Props) => {
   const globalUserSettings = useAtomValue(globalUserSettingsState);
   const userSettings = useAtomValue(userSettingsState);
   const lessonIndex = useLessonIndex();
-  const updateFlashcardsRecommendation = useUpdateFlashcardsRecommendation()
+  const updateFlashcardsRecommendation = useUpdateFlashcardsRecommendation();
   const [userGoals, setUserGoals] = useAtom(userGoalsState);
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const canvas = useRef(null);
@@ -80,14 +80,11 @@ const Progress = (props: Props) => {
 
     try {
       if (props.recommendationHistory?.["currentStep"] === null) {
-        updateRecommendationHistory(
-          props.recommendationHistory,
-          lessonIndex
-        );
+        updateRecommendationHistory(props.recommendationHistory, lessonIndex);
         updateFlashcardsRecommendation();
       }
       setLoadingLessonIndex(false);
-    } catch(e: any)  {
+    } catch (e: any) {
       console.error(e);
     }
 
@@ -108,13 +105,9 @@ const Progress = (props: Props) => {
       );
 
     const oldWordsGoalMetToUpdate =
-      userGoals.oldWords <= todayOldWordCountToUpdate
-        ? true
-        : oldWordsGoalMet;
+      userGoals.oldWords <= todayOldWordCountToUpdate ? true : oldWordsGoalMet;
     const newWordsGoalMetToUpdate =
-      userGoals.newWords <= todayNewWordCountToUpdate
-        ? true
-        : newWordsGoalMet;
+      userGoals.newWords <= todayNewWordCountToUpdate ? true : newWordsGoalMet;
 
     setOldWordsGoalMet(oldWordsGoalMetToUpdate);
     setNewWordsGoalMet(newWordsGoalMetToUpdate);
@@ -491,9 +484,7 @@ const Progress = (props: Props) => {
                   loadingLessonIndex={loadingLessonIndex}
                   startRecommendedStep={startRecommendedStep.bind(this)}
                   recommendationHistory={props.recommendationHistory}
-                  updateRecommendationHistory={
-                    updateRecommendationHistory
-                  }
+                  updateRecommendationHistory={updateRecommendationHistory}
                 />
               </ErrorBoundary>
             </div>
@@ -544,14 +535,10 @@ const Progress = (props: Props) => {
               </ErrorBoundary>
               <FlashcardsSection
                 showOnSmallScreen={false}
-                flashcardsCourseLevel={
-                  globalUserSettings.flashcardsCourseLevel
-                }
+                flashcardsCourseLevel={globalUserSettings.flashcardsCourseLevel}
                 loadingLessonIndex={loadingLessonIndex}
                 skipButtonId={skipButtonId}
-                updateFlashcardsRecommendation={
-                  updateFlashcardsRecommendation
-                }
+                updateFlashcardsRecommendation={updateFlashcardsRecommendation}
               />
             </div>
             <div className="mw-568">
