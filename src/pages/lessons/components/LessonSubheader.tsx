@@ -9,7 +9,7 @@ type LessonSubheaderProps = {
   lessonTitle: any;
   overviewLink: JSX.Element | undefined;
   path: string;
-  restartLesson: () => void;
+  restartLesson: (event: React.MouseEvent<HTMLAnchorElement>) => void;
 };
 
 const LessonSubheader = React.forwardRef(

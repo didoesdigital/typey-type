@@ -46,7 +46,6 @@ export type LessonProps = {
   previousCompletedPhraseAsTyped: string;
   recentLessonHistory: RecentLessonHistoryItem[];
   repetitionsRemaining: number;
-  revisionMode: any;
   settings: any;
   showStrokesInLesson: any;
   startTime: any;

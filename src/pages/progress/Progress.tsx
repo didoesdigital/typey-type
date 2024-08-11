@@ -18,11 +18,12 @@ import { MetWords } from "../../types";
 import BackupBanner from "./components/BackupBanner";
 import BackupModal from "./components/BackupModal";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
 import { globalUserSettingsState } from "../../states/globalUserSettingsState";
 import { useUpdateFlashcardsRecommendation } from "../../states/flashcardsProgressState";
 import { userGoalsState } from "../../states/userGoalsState";
+import { revisionModeState } from "../../states/lessonState";
 
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
@@ -46,6 +47,7 @@ const Progress = (props: Props) => {
     updateRecommendationHistory,
     updateStartingMetWordsAndCounts,
   } = useAppMethods();
+  const setRevisionMode = useSetAtom(revisionModeState);
   const globalUserSettings = useAtomValue(globalUserSettingsState);
   const userSettings = useAtomValue(userSettingsState);
   const lessonIndex = useLessonIndex();
@@ -80,6 +82,7 @@ const Progress = (props: Props) => {
 
     try {
       if (props.recommendationHistory?.["currentStep"] === null) {
+        setRevisionMode(false);
         updateRecommendationHistory(props.recommendationHistory, lessonIndex);
         updateFlashcardsRecommendation();
       }
@@ -162,6 +165,7 @@ const Progress = (props: Props) => {
     });
 
     if (props.recommendedNextLesson.link?.startsWith("http")) {
+      setRevisionMode(false);
       // lets external link open in a new tab
       updateRecommendationHistory(props.recommendationHistory);
     } else {
@@ -175,6 +179,7 @@ const Progress = (props: Props) => {
     if (firstRecommendationBoxRender.current) {
       firstRecommendationBoxRender.current = false;
     } else {
+      setRevisionMode(false);
       updateRecommendationHistory(props.recommendationHistory);
     }
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component

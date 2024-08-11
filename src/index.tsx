@@ -11,6 +11,7 @@ import { withAtomsCompat } from "./states/atomUtils";
 import { userSettingsState } from "./states/userSettingsState";
 import { globalUserSettingsState } from "./states/globalUserSettingsState";
 import { useLessonIndexWithFallback } from "./states/lessonIndexState";
+import { revisionModeState } from "./states/lessonState";
 
 if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
   init({
@@ -25,18 +26,21 @@ if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
 }
 
 function AppWrapper(props: object) {
-  const lessonIndex = useLessonIndexWithFallback()
-  return <App {...props} {...{lessonIndex}} />;
+  const lessonIndex = useLessonIndexWithFallback();
+  return <App {...props} {...{ lessonIndex }} />;
 }
 
 ReactDOM.render(
   <DocumentTitle title="Typey Type for Stenographers">
     <Router basename="/typey-type">
       <ErrorBoundary>
-        <Route component={withAtomsCompat(withAnalyticsTracker(AppWrapper), [
-          ["userSettings", userSettingsState],
-          ["globalUserSettings", globalUserSettingsState],
-        ])} />
+        <Route
+          component={withAtomsCompat(withAnalyticsTracker(AppWrapper), [
+            ["revisionMode", revisionModeState],
+            ["userSettings", userSettingsState],
+            ["globalUserSettings", globalUserSettingsState],
+          ])}
+        />
       </ErrorBoundary>
     </Router>
   </DocumentTitle>,

@@ -297,6 +297,8 @@ export type PresentedMaterialItem = MaterialItem;
 export type PresentedMaterial = PresentedMaterialItem[];
 export type SourceMaterialItem = MaterialItem;
 export type SourceMaterial = SourceMaterialItem[];
+export type RevisionMaterial = SourceMaterialItem[];
+export type RevisionMode = boolean;
 
 export type NewPresentedMaterial = {
   // These should possibly be optionally undefined to match Zipper

@@ -59,7 +59,7 @@ type Props = {
   previousCompletedPhraseAsTyped: ActualTypedText;
   recentLessonHistory: RecentLessonHistoryItem[];
   repetitionsRemaining: number;
-  restartLesson: () => void;
+  restartLesson: React.MouseEventHandler<HTMLAnchorElement>;
   revisionMode: boolean;
   sayCurrentPhraseAgain: () => void;
   settings: LessonSettings;
@@ -121,7 +121,7 @@ const MainLessonView = ({
   updatePreset,
 }: Props) => {
   const userSettings = useAtomValue(userSettingsState);
-  const changeShowScoresWhileTyping = useChangeShowScoresWhileTyping()
+  const changeShowScoresWhileTyping = useChangeShowScoresWhileTyping();
   const previousLesson = useRef<string | null>(null);
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const location = useLocation();
@@ -218,6 +218,7 @@ const MainLessonView = ({
                     <div>
                       <Link
                         to={lesson?.path.replace(/lesson\.txt$/, "")}
+                        // @ts-ignore
                         onClick={restartLesson}
                         className="revision-mode-button no-underline absolute right-0"
                         aria-label="Exit revision mode"

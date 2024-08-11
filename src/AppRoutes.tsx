@@ -141,7 +141,6 @@ type AppStateForDescendants = {
   totalNumberOfHintedWords: number,
   disableUserSettings: boolean,
   metWords: MetWords,
-  revisionMode: boolean,
   lesson: Lesson,
   recentLessons: { history: RecentLessonHistoryItem[] },
   recommendedNextLesson: unknown, // TODO type like {
@@ -394,7 +393,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       }
                       recentLessonHistory={appState.recentLessons.history}
                       repetitionsRemaining={appState.repetitionsRemaining}
-                      revisionMode={appState.revisionMode}
                       startTime={appState.startTime}
                       settings={appState.lesson.settings}
                       showStrokesInLesson={appState.showStrokesInLesson}

@@ -199,6 +199,7 @@ const Finished = ({
                       path={path}
                       reviseLesson={reviseLesson}
                       showMisstrokesSummary={currentLessonStrokes.length > 0}
+                      sourceMaterial={lesson.sourceMaterial}
                       updateRevisionMaterial={updateRevisionMaterial}
                     />
                   </div>

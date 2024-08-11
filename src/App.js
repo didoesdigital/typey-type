@@ -103,7 +103,6 @@ class App extends Component {
       totalNumberOfHintedWords: 0,
       disableUserSettings: false,
       metWords: metWordsFromStorage,
-      revisionMode: false,
       lesson: fallbackLesson,
       recentLessons: recentLessons,
       recommendedNextLesson: {
@@ -430,7 +429,7 @@ class App extends Component {
   }
 
   setupLesson() {
-    const revisionMode = this.state.revisionMode;
+    const revisionMode = this.props.revisionMode;
     const revisionMaterial = this.state.revisionMaterial;
     const userSettings = this.props.userSettings;
     const lessonPath = this.state.lesson.path;
@@ -681,36 +680,21 @@ class App extends Component {
     return event;
   }
 
-  reviseLesson(event) {
+  reviseLesson(event, newRevisionMaterial) {
     event.preventDefault();
-    let currentLessonStrokes = this.state.currentLessonStrokes;
-    let revisionMode = true;
-    let newRevisionMaterial = [];
-    for (let i = 0; i < currentLessonStrokes.length; i++) {
-      if (currentLessonStrokes[i].checked === true) {
-        newRevisionMaterial.push({ phrase: currentLessonStrokes[i].word, stroke: currentLessonStrokes[i].stroke });
-      }
-    }
-    if (newRevisionMaterial.length === 0 ) {
-      newRevisionMaterial.push(this.state.lesson.sourceMaterial);
-      revisionMode = false;
-    }
     this.setState({
       revisionMaterial: newRevisionMaterial,
-      revisionMode: revisionMode
     }, () => {
       this.stopLesson();
       this.setupLesson();
     });
-    this.restartLesson(event, revisionMode);
+    this.restartLesson(event);
   }
 
-  restartLesson(event, revise = false) {
+  restartLesson(event) {
     event.preventDefault();
-    let revisionMode = revise;
     this.setState({
       currentPhraseID: 0,
-      revisionMode: revisionMode
     }, () => {
       this.stopLesson();
       this.setupLesson();
@@ -783,7 +767,6 @@ class App extends Component {
       .then((nextRecommendedLesson) => {
         let prevRecommendedLesson = this.state.recommendedNextLesson;
         this.setState({
-          revisionMode: false,
           recommendationHistory: newRecommendationHistory,
           recommendedNextLesson: nextRecommendedLesson
         }, () => {
@@ -795,7 +778,6 @@ class App extends Component {
       .catch( error => {
         console.log(error);
         this.setState({
-          revisionMode: false,
           recommendationHistory: newRecommendationHistory,
           recommendedNextLesson: {
             studyType: "error",

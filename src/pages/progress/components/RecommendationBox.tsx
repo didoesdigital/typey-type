@@ -9,6 +9,8 @@ import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip
 import { useAnnouncerApi } from "../../../components/Announcer/useAnnouncer";
 
 import type { FullRecommendationsStudyType } from "../../../types";
+import { useSetAtom } from "jotai";
+import { revisionModeState } from "../../../states/lessonState";
 
 /**
  * Examples:
@@ -53,6 +55,7 @@ const RecommendationBox = ({
   recommendationHistory,
   updateRecommendationHistory,
 }: Props) => {
+  const setRevisionMode = useSetAtom(revisionModeState);
   const announceTooltip = useAnnounceTooltip();
   const { updateMessage } = useAnnouncerApi();
 
@@ -83,6 +86,7 @@ const RecommendationBox = ({
       }
     }, 100);
 
+    setRevisionMode(false);
     updateRecommendationHistory(recommendationHistory);
   };
 

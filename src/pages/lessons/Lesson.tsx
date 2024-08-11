@@ -25,6 +25,7 @@ import {
 import { useLessonIndex } from "../../states/lessonIndexState";
 import applyQueryParamsToUserSettings from "./components/UserSettings/applyQueryParamsToUserSettings";
 import getProgressRevisionUserSettings from "./components/UserSettings/getProgressRevisionUserSettings";
+import { revisionModeState } from "../../states/lessonState";
 
 const isCustom = (pathname: string) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
@@ -63,7 +64,6 @@ const Lesson = ({
   previousCompletedPhraseAsTyped,
   recentLessonHistory,
   repetitionsRemaining,
-  revisionMode,
   settings,
   showStrokesInLesson,
   startTime,
@@ -102,6 +102,7 @@ const Lesson = ({
   } = useAppMethods();
   const lessonIndex = useLessonIndex();
   const [userSettings, setUserSettings] = useAtom(userSettingsState);
+  const [revisionMode, setRevisionMode] = useAtom(revisionModeState);
   const chooseStudy = useChooseStudy();
   const toggleHideOtherSettings = useToggleHideOtherSettings();
   const updatePreset = useUpdatePreset();
@@ -131,7 +132,10 @@ const Lesson = ({
       ) {
         let loadedPersonalPreferences = loadPersonalPreferences();
         const newSeenOrMemorised = [false, true, true] as const;
-        const newUserSettings = getProgressRevisionUserSettings(userSettings, newSeenOrMemorised);
+        const newUserSettings = getProgressRevisionUserSettings(
+          userSettings,
+          newSeenOrMemorised
+        );
         setUserSettings(newUserSettings);
         setUpProgressRevisionLesson(
           loadedPersonalPreferences[0],
@@ -141,7 +145,10 @@ const Lesson = ({
       } else if (location.pathname.startsWith("/lessons/progress/seen/")) {
         let loadedPersonalPreferences = loadPersonalPreferences();
         let newSeenOrMemorised = [false, true, false] as const;
-        const newUserSettings = getProgressRevisionUserSettings(userSettings, newSeenOrMemorised);
+        const newUserSettings = getProgressRevisionUserSettings(
+          userSettings,
+          newSeenOrMemorised
+        );
         setUserSettings(newUserSettings);
         setUpProgressRevisionLesson(
           loadedPersonalPreferences[0],
@@ -151,7 +158,10 @@ const Lesson = ({
       } else if (location.pathname.startsWith("/lessons/progress/memorised/")) {
         let loadedPersonalPreferences = loadPersonalPreferences();
         let newSeenOrMemorised = [false, false, true] as const;
-        const newUserSettings = getProgressRevisionUserSettings(userSettings, newSeenOrMemorised);
+        const newUserSettings = getProgressRevisionUserSettings(
+          userSettings,
+          newSeenOrMemorised
+        );
         setUserSettings(newUserSettings);
         setUpProgressRevisionLesson(
           loadedPersonalPreferences[0],
@@ -267,6 +277,13 @@ const Lesson = ({
     customiseLesson();
   }
 
+  const setRevisionModeAndRestartLesson: React.MouseEventHandler<
+    HTMLAnchorElement
+  > = (event) => {
+    setRevisionMode(false);
+    restartLesson(event);
+  };
+
   if (lessonNotFound) {
     return <LessonNotFound lessonIndex={lessonIndex} />;
   }
@@ -339,7 +356,7 @@ const Lesson = ({
               lessonTitle={lessonTitle}
               overviewLink={overviewLink}
               path={lesson?.path}
-              restartLesson={restartLesson}
+              restartLesson={setRevisionModeAndRestartLesson}
               ref={mainHeading}
             />
             <Finished
@@ -353,7 +370,7 @@ const Lesson = ({
               lessonTitle={lessonTitle}
               metWords={metWords}
               path={lesson?.path}
-              restartLesson={restartLesson}
+              restartLesson={setRevisionModeAndRestartLesson}
               reviseLesson={reviseLesson}
               settings={lesson.settings}
               startTime={startTime}
@@ -450,7 +467,7 @@ const Lesson = ({
                 previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
                 recentLessonHistory={recentLessonHistory}
                 repetitionsRemaining={repetitionsRemaining}
-                restartLesson={restartLesson}
+                restartLesson={setRevisionModeAndRestartLesson}
                 revisionMode={revisionMode}
                 sayCurrentPhraseAgain={sayCurrentPhraseAgain}
                 settings={settings}
