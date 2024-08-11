@@ -157,24 +157,6 @@ const Progress = (props: Props) => {
     };
   }, []);
 
-  function startRecommendedStep(e: any) {
-    GoogleAnalytics.event({
-      category: "Recommendations",
-      action: "Start recommended step",
-      label: props.recommendedNextLesson.link || "BAD_INPUT",
-    });
-
-    if (props.recommendedNextLesson.link?.startsWith("http")) {
-      setRevisionMode(false);
-      // lets external link open in a new tab
-      updateRecommendationHistory(props.recommendationHistory);
-    } else {
-      setToRecommendedNextLesson(true);
-      // does not navigate using link but instead allows Router Redirect
-      e.preventDefault();
-    }
-  }
-
   useEffect(() => {
     if (firstRecommendationBoxRender.current) {
       firstRecommendationBoxRender.current = false;
@@ -487,8 +469,8 @@ const Progress = (props: Props) => {
                 <RecommendationBox
                   recommendedNextLesson={props.recommendedNextLesson}
                   loadingLessonIndex={loadingLessonIndex}
-                  startRecommendedStep={startRecommendedStep.bind(this)}
                   recommendationHistory={props.recommendationHistory}
+                  setToRecommendedNextLesson={setToRecommendedNextLesson}
                   updateRecommendationHistory={updateRecommendationHistory}
                 />
               </ErrorBoundary>

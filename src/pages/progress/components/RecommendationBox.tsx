@@ -40,9 +40,9 @@ type RecommendationHistory = {
 
 type Props = {
   recommendedNextLesson: RecommendedNextLesson;
-  startRecommendedStep: (event: any) => void;
   loadingLessonIndex: boolean;
   recommendationHistory: RecommendationHistory;
+  setToRecommendedNextLesson: React.Dispatch<React.SetStateAction<boolean>>;
   updateRecommendationHistory: (
     previousRecommendationHistory: RecommendationHistory
   ) => void;
@@ -50,9 +50,9 @@ type Props = {
 
 const RecommendationBox = ({
   recommendedNextLesson,
-  startRecommendedStep,
   loadingLessonIndex,
   recommendationHistory,
+  setToRecommendedNextLesson,
   updateRecommendationHistory,
 }: Props) => {
   const setRevisionMode = useSetAtom(revisionModeState);
@@ -89,6 +89,24 @@ const RecommendationBox = ({
     setRevisionMode(false);
     updateRecommendationHistory(recommendationHistory);
   };
+
+  function startRecommendedStep(e: any) {
+    GoogleAnalytics.event({
+      category: "Recommendations",
+      action: "Start recommended step",
+      label: recommendedNextLesson.link || "BAD_INPUT",
+    });
+
+    if (recommendedNextLesson.link?.startsWith("http")) {
+      setRevisionMode(false);
+      // lets external link open in a new tab
+      updateRecommendationHistory(recommendationHistory);
+    } else {
+      setToRecommendedNextLesson(true);
+      // does not navigate using link but instead allows Router Redirect
+      e.preventDefault();
+    }
+  }
 
   let recommendedNextLessonBox;
   let recommendedNextLessonHeading;
