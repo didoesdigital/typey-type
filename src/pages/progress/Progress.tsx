@@ -77,9 +77,7 @@ const Progress = (props: Props) => {
     }
 
     try {
-      if (props.recommendationHistory?.["currentStep"] === null) {
-        updateFlashcardsRecommendation();
-      }
+      updateFlashcardsRecommendation();
       setLoadingLessonIndex(false);
     } catch (e: any) {
       console.error(e);
