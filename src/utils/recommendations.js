@@ -1,7 +1,5 @@
 import PARAMS from './params.js';
 
-let data = null;
-
 let recommendedStudySession = [
   // null,
   'practice',
@@ -40,58 +38,7 @@ const games = [
   }
 ]
 
-function fetchRecommendations() {
-  return fetch(process.env.PUBLIC_URL + '/lessons/recommendations.json', {
-    method: "GET",
-    credentials: "same-origin"
-  }).then((response) => {
-    return response.json()
-  }).then(json => {
-    return json;
-  }).catch(function(e) {
-    return {
-      "discoverCourse": [
-        {
-          "path": "/lessons/fundamentals/one-syllable-words-with-simple-keys/lesson.txt",
-          "lessonTitle": "One-syllable words with simple keys",
-          "target": 15
-        }
-      ],
-      "revisionCourse": [
-        {
-          "path": "/lessons/drills/top-10000-project-gutenberg-words/lesson.txt",
-          "lessonTitle": "Top 10000 Project Gutenberg words",
-          "target": 10000
-        }
-      ],
-      "drillCourse": [
-        {
-          "path": "/lessons/drills/top-10000-project-gutenberg-words/lesson.txt",
-          "lessonTitle": "Top 10000 Project Gutenberg words",
-          "target": 10000
-        }
-      ]
-    };
-  });
-}
-
-function getRecommendedCourses() {
-  let recommendedCourses;
-  if (data === null) {
-    recommendedCourses = fetchRecommendations().then(courses => {
-      data = courses;
-      return courses;
-    });
-  } else {
-    recommendedCourses = Promise.resolve(data);
-  }
-
-  return recommendedCourses;
-};
-
-function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWordsSeen = 0, numberOfWordsMemorised = 0, lessonIndex = {}, metWords = {}) {
-  return getRecommendedCourses()
-  .then(courses => {
+function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, numberOfWordsSeen = 0, numberOfWordsMemorised = 0, lessonIndex = {}, metWords = {}) {
     // fallback lesson:
     let recommendedNextLesson = {
       studyType: "practice",
@@ -481,7 +428,6 @@ function getRecommendedNextLesson(lessonsProgress = {}, history = {}, numberOfWo
     }
 
     return recommendedNextLesson;
-  });
 }
 
 export {

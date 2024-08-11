@@ -346,6 +346,21 @@ export type FullRecommendationsStudyType =
   | OtherRecommendationsStudyType
   | "error";
 
+export type CourseItem = {
+  /** e.g. "/lessons/fundamentals/one-syllable-words-with-simple-keys/lesson.txt" */
+  "path": string;
+  /** e.g. "One-syllable words with simple keys" */
+  "lessonTitle": string;
+  "target": number;
+};
+
+export type RecommendedCoursesType = {
+  "discoverCourse": CourseItem[];
+  "revisionCourse": CourseItem[];
+  "drillCourse": CourseItem[];
+  "practiceCourse": CourseItem[];
+};
+
 export type StenoLayout =
   | "stenoLayoutAmericanSteno"
   | "stenoLayoutNoNumberBarInnerThumbNumbers"

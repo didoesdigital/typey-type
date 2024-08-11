@@ -33,7 +33,6 @@ export type AppMethods = {
   updateMarkup: typeof App.prototype.updateMarkup,
   updateMetWords: typeof App.prototype.updateMetWords,
   updatePersonalDictionaries: typeof App.prototype.updatePersonalDictionaries,
-  updateRecommendationHistory: typeof App.prototype.updateRecommendationHistory,
   updateRevisionMaterial: typeof updateRevisionMaterial,
   updateStartingMetWordsAndCounts: typeof App.prototype.updateStartingMetWordsAndCounts,
   updateTopSpeedPersonalBest: typeof App.prototype.updateTopSpeedPersonalBest,

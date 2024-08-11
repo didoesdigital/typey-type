@@ -122,7 +122,6 @@ type AppStateForDescendants = {
   lessonsProgress: unknown,
 // isPloverDictionaryLoaded: false,
 // isGlobalLookupDictionaryLoaded: false,
-  recommendationHistory: unknown // TODO: type like { currentStep: null },
   personalDictionaries: PersonalDictionaryNameAndContents[],
   previousCompletedPhraseAsTyped: ActualTypedText,
   repetitionsRemaining: number,
@@ -143,14 +142,6 @@ type AppStateForDescendants = {
   metWords: MetWords,
   lesson: Lesson,
   recentLessons: { history: RecentLessonHistoryItem[] },
-  recommendedNextLesson: unknown, // TODO type like {
-//   studyType: "practice",
-//   limitNumberOfWords: 50,
-//   repetitions: 1,
-//   linkTitle: "Top 10000 Project Gutenberg words",
-//   linkText: "Practice 150 words from Top 10000 Project Gutenberg wo  rds",
-// link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&" + PARAMS.practiceParams
-// },
 // revisionMaterial: [
 // ],
   startingMetWordsToday: MetWords,
@@ -278,8 +269,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                     <Suspense fallback={<PageLoading />}>
                       <AsyncProgress
                         metWords={appState.metWords}
-                        recommendationHistory={appState.recommendationHistory}
-                        recommendedNextLesson={appState.recommendedNextLesson}
                         lessonsProgress={appState.lessonsProgress}
                         recentLessonHistory={appState.recentLessons.history}
                         startingMetWordsToday={appState.startingMetWordsToday}

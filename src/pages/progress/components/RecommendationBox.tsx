@@ -8,9 +8,16 @@ import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 import { useAnnouncerApi } from "../../../components/Announcer/useAnnouncer";
 
-import type { FullRecommendationsStudyType } from "../../../types";
-import { useSetAtom } from "jotai";
+import type { FullRecommendationsStudyType, MetWords } from "../../../types";
+import { useAtom, useSetAtom } from "jotai";
 import { revisionModeState } from "../../../states/lessonState";
+import { useLessonIndex } from "../../../states/lessonIndexState";
+import { getRecommendedNextLesson } from "../../../utils/recommendations";
+import { useRecommendedCourses } from "../../../states/recommendedCoursesState";
+import {
+  recommendationHistoryState,
+  recommendedNextLessonState,
+} from "../../../states/recommendationsState";
 
 /**
  * Examples:
@@ -19,7 +26,7 @@ import { revisionModeState } from "../../../states/lessonState";
  */
 type RecommendationLink = string;
 
-type RecommendedNextLesson = {
+export type RecommendedNextLesson = {
   /** Example: 15 */
   limitNumberOfWords: number | null;
   /** Example: 3 */
@@ -34,30 +41,38 @@ type RecommendedNextLesson = {
   linkText?: string; // FIXME: may not be used?
 };
 
-type RecommendationHistory = {
-  currentStep: FullRecommendationsStudyType;
+export type RecommendationHistory = {
+  currentStep: FullRecommendationsStudyType | null;
 };
 
 type Props = {
-  recommendedNextLesson: RecommendedNextLesson;
   loadingLessonIndex: boolean;
-  recommendationHistory: RecommendationHistory;
-  updateRecommendationHistory: (
-    previousRecommendationHistory: RecommendationHistory
-  ) => void;
+  lessonsProgress: any;
+  yourMemorisedWordCount: number;
+  yourSeenWordCount: number;
+  metWords: MetWords;
 };
 
 const RecommendationBox = ({
-  recommendedNextLesson,
   loadingLessonIndex,
-  recommendationHistory,
-  updateRecommendationHistory,
+  lessonsProgress,
+  yourSeenWordCount,
+  yourMemorisedWordCount,
+  metWords,
 }: Props) => {
   const [toRecommendedNextLesson, setToRecommendedNextLesson] = useState(false);
+  const lessonIndex = useLessonIndex();
+  const recommendedCourses = useRecommendedCourses();
   const setRevisionMode = useSetAtom(revisionModeState);
   const announceTooltip = useAnnounceTooltip();
   const { updateMessage } = useAnnouncerApi();
   const firstRecommendationBoxRender = useRef(true);
+  const [recommendationHistory, setRecommendationHistory] = useAtom(
+    recommendationHistoryState
+  );
+  const [recommendedNextLesson, setRecommendedNextLesson] = useAtom(
+    recommendedNextLessonState
+  );
 
   useEffect(() => {
     try {
@@ -83,6 +98,71 @@ const RecommendationBox = ({
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [toRecommendedNextLesson]);
+
+  function updateRecommendationHistory(
+    prevRecommendationHistory: RecommendationHistory
+  ) {
+    let newRecommendationHistory = Object.assign({}, prevRecommendationHistory);
+
+    if (
+      typeof newRecommendationHistory["currentStep"] === "undefined" ||
+      newRecommendationHistory["currentStep"] === null
+    ) {
+      newRecommendationHistory["currentStep"] = "break";
+    }
+
+    switch (newRecommendationHistory["currentStep"]) {
+      case null:
+        newRecommendationHistory["currentStep"] = "drill";
+        break;
+      case "practice":
+        newRecommendationHistory["currentStep"] = "drill";
+        break;
+      case "drill":
+        newRecommendationHistory["currentStep"] = "revise";
+        break;
+      case "revise":
+        newRecommendationHistory["currentStep"] = "discover";
+        break;
+      case "discover":
+        newRecommendationHistory["currentStep"] = "wildcard";
+        break;
+      case "wildcard":
+        newRecommendationHistory["currentStep"] = "break";
+        break;
+      case "break":
+        newRecommendationHistory["currentStep"] = "practice";
+        break;
+      default:
+        newRecommendationHistory["currentStep"] = "practice";
+        break;
+    }
+
+    const nextRecommendedLesson = getRecommendedNextLesson(
+      recommendedCourses,
+      lessonsProgress,
+      newRecommendationHistory,
+      yourSeenWordCount,
+      yourMemorisedWordCount,
+      lessonIndex,
+      metWords
+    );
+
+    const typedNextRecommendedLesson =
+      nextRecommendedLesson as RecommendedNextLesson;
+    setRecommendationHistory(newRecommendationHistory);
+    setRecommendedNextLesson(typedNextRecommendedLesson);
+
+    // For new Typey Type students, there may be no valid practice/drill/revision recommendations so it may recommend "Discover" 4 times in a row. If the recommendation is the same as the previous recommendation, update the recommendation history again to skip ahead:
+    let prevRecommendedLesson = recommendedNextLesson;
+    if (
+      prevRecommendedLesson.linkText === nextRecommendedLesson.linkText &&
+      nextRecommendedLesson.studyType !== "error" &&
+      nextRecommendedLesson.studyType !== "break"
+    ) {
+      updateRecommendationHistory(newRecommendationHistory);
+    }
+  }
 
   const recommendAnotherLesson = () => {
     GoogleAnalytics.event({

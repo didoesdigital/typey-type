@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { Suspense, useEffect, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga4";
 import ErrorBoundary from "../../components/ErrorBoundary";
 import PseudoContentButton from "../../components/PseudoContentButton";
@@ -23,6 +23,7 @@ import { userSettingsState } from "../../states/userSettingsState";
 import { globalUserSettingsState } from "../../states/globalUserSettingsState";
 import { useUpdateFlashcardsRecommendation } from "../../states/flashcardsProgressState";
 import { userGoalsState } from "../../states/userGoalsState";
+import RecommendationBoxFallback from "./components/RecommendationBoxFallback";
 
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
@@ -33,19 +34,14 @@ type Props = {
   lessonsProgress: any;
   metWords: MetWords;
   recentLessonHistory: any;
-  recommendationHistory: any;
-  recommendedNextLesson: any;
   startingMetWordsToday: any;
   yourMemorisedWordCount: any;
   yourSeenWordCount: any;
 };
 
 const Progress = (props: Props) => {
-  const {
-    setPersonalPreferences,
-    updateRecommendationHistory,
-    updateStartingMetWordsAndCounts,
-  } = useAppMethods();
+  const { setPersonalPreferences, updateStartingMetWordsAndCounts } =
+    useAppMethods();
   const globalUserSettings = useAtomValue(globalUserSettingsState);
   const userSettings = useAtomValue(userSettingsState);
   const lessonIndex = useLessonIndex();
@@ -443,12 +439,15 @@ const Progress = (props: Props) => {
           <div className="flex flex-wrap justify-between pt3">
             <div className="mw-568 mr3 flex-grow nt-1">
               <ErrorBoundary relative={true}>
-                <RecommendationBox
-                  recommendedNextLesson={props.recommendedNextLesson}
-                  loadingLessonIndex={loadingLessonIndex}
-                  recommendationHistory={props.recommendationHistory}
-                  updateRecommendationHistory={updateRecommendationHistory}
-                />
+                <Suspense fallback={<RecommendationBoxFallback />}>
+                  <RecommendationBox
+                    loadingLessonIndex={loadingLessonIndex}
+                    lessonsProgress={props.lessonsProgress}
+                    yourSeenWordCount={props.yourSeenWordCount}
+                    yourMemorisedWordCount={props.yourMemorisedWordCount}
+                    metWords={props.metWords}
+                  />
+                </Suspense>
               </ErrorBoundary>
             </div>
 

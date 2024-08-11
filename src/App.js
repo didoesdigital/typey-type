@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import "react-tippy/dist/tippy.css";
-import PARAMS from './utils/params.js';
 import { isLessonTextValid } from './utils/utils';
-import { getRecommendedNextLesson } from './utils/recommendations';
 import {
   createWordListFromMetWords,
   parseCustomMaterial,
@@ -82,7 +80,6 @@ class App extends Component {
       },
       isPloverDictionaryLoaded: false,
       isGlobalLookupDictionaryLoaded: false,
-      recommendationHistory: { currentStep: null },
       personalDictionaries: {
         dictionariesNamesAndContents: null,
       },
@@ -105,14 +102,6 @@ class App extends Component {
       metWords: metWordsFromStorage,
       lesson: fallbackLesson,
       recentLessons: recentLessons,
-      recommendedNextLesson: {
-        studyType: "practice",
-        limitNumberOfWords: 50,
-        repetitions: 1,
-        linkTitle: "Top 10000 Project Gutenberg words",
-        linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
-        link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&" + PARAMS.practiceParams
-      },
       revisionMaterial: [
       ],
       startingMetWordsToday: startingMetWordsToday,
@@ -729,67 +718,6 @@ class App extends Component {
     this.setState({globalLookupDictionary: combinedLookupDictionary});
   }
 
-  updateRecommendationHistory(prevRecommendationHistory, lessonIndex = this.props.lessonIndex) {
-    let newRecommendationHistory = Object.assign({}, prevRecommendationHistory);
-
-    if ((typeof newRecommendationHistory['currentStep'] === 'undefined') || (newRecommendationHistory['currentStep'] === null)) {
-      newRecommendationHistory['currentStep'] = 'break';
-    }
-
-    switch (newRecommendationHistory['currentStep']) {
-      case "null":
-        newRecommendationHistory['currentStep'] = 'drill';
-        break;
-      case "practice":
-        newRecommendationHistory['currentStep'] = 'drill';
-        break;
-      case "drill":
-        newRecommendationHistory['currentStep'] = 'revise';
-        break;
-      case "revise":
-        newRecommendationHistory['currentStep'] = 'discover';
-        break;
-      case "discover":
-        newRecommendationHistory['currentStep'] = 'wildcard';
-        break;
-      case "wildcard":
-        newRecommendationHistory['currentStep'] = 'break';
-        break;
-      case "break":
-        newRecommendationHistory['currentStep'] = 'practice';
-        break;
-      default:
-        newRecommendationHistory['currentStep'] = 'practice';
-        break;
-    }
-
-    getRecommendedNextLesson(this.state.lessonsProgress, newRecommendationHistory, this.state.yourSeenWordCount, this.state.yourMemorisedWordCount, lessonIndex, this.state.metWords)
-      .then((nextRecommendedLesson) => {
-        let prevRecommendedLesson = this.state.recommendedNextLesson;
-        this.setState({
-          recommendationHistory: newRecommendationHistory,
-          recommendedNextLesson: nextRecommendedLesson
-        }, () => {
-          if (prevRecommendedLesson.linkText === nextRecommendedLesson.linkText && nextRecommendedLesson.studyType !== 'error' && nextRecommendedLesson.studyType !== 'break') {
-            this.updateRecommendationHistory(newRecommendationHistory, lessonIndex);
-          }
-        });
-      })
-      .catch( error => {
-        console.log(error);
-        this.setState({
-          recommendationHistory: newRecommendationHistory,
-          recommendedNextLesson: {
-            studyType: "error",
-            limitNumberOfWords: 50,
-            repetitions: 1,
-            linkTitle: "Top 10000 Project Gutenberg words",
-            linkText: "Practice 150 words from Top 10000 Project Gutenberg words",
-            link: process.env.PUBLIC_URL + "/lessons/drills/top-10000-project-gutenberg-words/?recommended=true&" + PARAMS.practiceParams
-          }
-        });
-      });
-  }
 
   markupBuffer = [];
   updateBufferTimer = null;
@@ -1113,7 +1041,6 @@ class App extends Component {
               updateMarkup: this.updateMarkup.bind(this),
               updateMetWords: this.updateMetWords.bind(this),
               updatePersonalDictionaries: this.updatePersonalDictionaries.bind(this),
-              updateRecommendationHistory: this.updateRecommendationHistory.bind(this),
               updateRevisionMaterial: updateRevisionMaterial.bind(this),
               updateStartingMetWordsAndCounts: this.updateStartingMetWordsAndCounts.bind(this),
               updateTopSpeedPersonalBest: this.updateTopSpeedPersonalBest.bind(this),

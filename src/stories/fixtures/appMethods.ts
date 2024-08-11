@@ -22,7 +22,6 @@ const appMethods: AppMethods = {
   updateMetWords: () => undefined,
   updateMultipleMetWords: () => undefined,
   updatePersonalDictionaries: () => undefined,
-  updateRecommendationHistory: () => console.log("update recommendation history"),
   updateRevisionMaterial: () => undefined,
   updateStartingMetWordsAndCounts: () => console.log("update starting met words and counts"),
   updateTopSpeedPersonalBest: () => undefined,
