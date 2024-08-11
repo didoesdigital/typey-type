@@ -37,7 +37,6 @@ export type AppMethods = {
   updateRevisionMaterial: typeof updateRevisionMaterial,
   updateStartingMetWordsAndCounts: typeof App.prototype.updateStartingMetWordsAndCounts,
   updateTopSpeedPersonalBest: typeof App.prototype.updateTopSpeedPersonalBest,
-  updateUserGoalsUnveiled: typeof App.prototype.updateUserGoalsUnveiled,
 }
 
 const AppMethodsContext = createContext<AppMethods>(null!);

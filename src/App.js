@@ -104,8 +104,6 @@ class App extends Component {
       disableUserSettings: false,
       metWords: metWordsFromStorage,
       revisionMode: false,
-      oldWordsGoalUnveiled: false,
-      newWordsGoalUnveiled: false,
       lesson: fallbackLesson,
       recentLessons: recentLessons,
       recommendedNextLesson: {
@@ -367,13 +365,6 @@ class App extends Component {
   updateTopSpeedPersonalBest(wpm) {
     this.setState({topSpeedPersonalBest: wpm});
     writePersonalPreferences('topSpeedPersonalBest', wpm);
-  }
-
-  updateUserGoalsUnveiled(oldWordsGoalUnveiled, newWordsGoalUnveiled) {
-    this.setState({
-      oldWordsGoalUnveiled: oldWordsGoalUnveiled,
-      newWordsGoalUnveiled: newWordsGoalUnveiled
-    });
   }
 
   // set user settings
@@ -1144,7 +1135,6 @@ class App extends Component {
               updateRevisionMaterial: updateRevisionMaterial.bind(this),
               updateStartingMetWordsAndCounts: this.updateStartingMetWordsAndCounts.bind(this),
               updateTopSpeedPersonalBest: this.updateTopSpeedPersonalBest.bind(this),
-              updateUserGoalsUnveiled: this.updateUserGoalsUnveiled.bind(this),
             }
           }>
             <AppRoutes

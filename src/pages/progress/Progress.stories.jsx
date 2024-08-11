@@ -118,8 +118,6 @@ function Component (args) {
       <Progress
         lessonsProgress={testLessonsProgress}
         metWords={{}}
-        newWordsGoalUnveiled={false}
-        oldWordsGoalUnveiled={false}
         recentLessonHistory={recentLessonHistory}
         recommendationHistory={{ currentStep: "practice" }}
         recommendedNextLesson={recommendedNextLesson}

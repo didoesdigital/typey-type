@@ -26,7 +26,6 @@ const appMethods: AppMethods = {
   updateRevisionMaterial: () => undefined,
   updateStartingMetWordsAndCounts: () => console.log("update starting met words and counts"),
   updateTopSpeedPersonalBest: () => undefined,
-  updateUserGoalsUnveiled: () => undefined
 }
 
 export default appMethods;

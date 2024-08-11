@@ -32,8 +32,6 @@ let particles: any[] = [];
 type Props = {
   lessonsProgress: any;
   metWords: MetWords;
-  newWordsGoalUnveiled: any;
-  oldWordsGoalUnveiled: any;
   recentLessonHistory: any;
   recommendationHistory: any;
   recommendedNextLesson: any;
@@ -47,7 +45,6 @@ const Progress = (props: Props) => {
     setPersonalPreferences,
     updateRecommendationHistory,
     updateStartingMetWordsAndCounts,
-    updateUserGoalsUnveiled,
   } = useAppMethods();
   const globalUserSettings = useAtomValue(globalUserSettingsState);
   const userSettings = useAtomValue(userSettingsState);
@@ -70,6 +67,8 @@ const Progress = (props: Props) => {
   const [todayOldWordCount, setTodayOldWordCount] = useState(0);
   const [oldWordsGoalMet, setOldWordsGoalMet] = useState(false);
   const [newWordsGoalMet, setNewWordsGoalMet] = useState(false);
+  const [oldWordsGoalUnveiled, setOldWordsGoalUnveiled] = useState(false);
+  const [newWordsGoalUnveiled, setNewWordsGoalUnveiled] = useState(false);
   const [userGoalInputOldWords, setUserGoalInputOldWords] = useState(50);
   const [userGoalInputNewWords, setUserGoalInputNewWords] = useState(15);
   const [isBackupModalOpen, setBackupModalOpen] = useState(false);
@@ -211,7 +210,8 @@ const Progress = (props: Props) => {
 
       updateStartingMetWordsAndCounts(parsedMetWords);
 
-      updateUserGoalsUnveiled(false, false);
+      setOldWordsGoalUnveiled(false);
+      setNewWordsGoalUnveiled(false);
       setTodayOldWordCount(0);
       setTodayNewWordCount(0);
       setOldWordsGoalMet(false);
@@ -256,18 +256,12 @@ const Progress = (props: Props) => {
     }
 
     const oldWordsGoalUnveiledToUpdate =
-      currentOldWords > userGoals.oldWords
-        ? false
-        : props.oldWordsGoalUnveiled;
+      currentOldWords > userGoals.oldWords ? false : oldWordsGoalUnveiled;
     const newWordsGoalUnveiledToUpdate =
-      currentNewWords > userGoals.newWords
-        ? false
-        : props.newWordsGoalUnveiled;
+      currentNewWords > userGoals.newWords ? false : newWordsGoalUnveiled;
 
-    updateUserGoalsUnveiled(
-      oldWordsGoalUnveiledToUpdate,
-      newWordsGoalUnveiledToUpdate
-    );
+    setOldWordsGoalUnveiled(oldWordsGoalUnveiledToUpdate);
+    setNewWordsGoalUnveiled(newWordsGoalUnveiledToUpdate);
 
     const oldWordsGoalMetToUpdate =
       todayOldWordCount < userGoalsToUpdate["oldWords"]
@@ -514,9 +508,9 @@ const Progress = (props: Props) => {
                   this
                 )}
                 newWordsGoalMet={newWordsGoalMet}
-                newWordsGoalUnveiled={props.newWordsGoalUnveiled}
+                newWordsGoalUnveiled={newWordsGoalUnveiled}
                 oldWordsGoalMet={oldWordsGoalMet}
-                oldWordsGoalUnveiled={props.oldWordsGoalUnveiled}
+                oldWordsGoalUnveiled={oldWordsGoalUnveiled}
                 celebrateCompletedGoals={celebrateCompletedGoals.bind(this)}
                 saveGoals={saveGoals.bind(this)}
                 showSetGoalsForm={showSetGoalsForm}
@@ -524,7 +518,8 @@ const Progress = (props: Props) => {
                 startingMetWordsToday={props.startingMetWordsToday}
                 todayNewWordCount={todayNewWordCount}
                 todayOldWordCount={todayOldWordCount}
-                updateUserGoalsUnveiled={updateUserGoalsUnveiled}
+                unveilOldWordsGoal={setOldWordsGoalUnveiled}
+                unveilNewWordsGoal={setNewWordsGoalUnveiled}
                 userGoalInputOldWords={userGoalInputOldWords}
                 userGoalInputNewWords={userGoalInputNewWords}
                 userGoals={userGoals}
