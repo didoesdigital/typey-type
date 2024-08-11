@@ -1,6 +1,5 @@
 import React, { Suspense } from "react";
 import Progress from "./Progress";
-import lessonIndex from "../../stories/fixtures/lessonIndex";
 import userSettings from "../../stories/fixtures/userSettings";
 import AppMethodsContext from "../../states/legacy/AppMethodsContext";
 import appMethods from "../../stories/fixtures/appMethods";
