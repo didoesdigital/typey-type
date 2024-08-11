@@ -6,7 +6,7 @@ import RecommendationBox from "./components/RecommendationBox";
 import RecentLessons from "./components/RecentLessons";
 import * as Confetti from "../../utils/confetti";
 import { useLessonIndex } from "../../states/lessonIndexState";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FlashcardsSection from "./components/FlashcardsSection";
 import TodaysEffortsOrGoals from "./components/TodaysEffortsOrGoals";
 import ReformatProgress from "./components/ReformatProgress";
@@ -18,12 +18,11 @@ import { MetWords } from "../../types";
 import BackupBanner from "./components/BackupBanner";
 import BackupModal from "./components/BackupModal";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
 import { globalUserSettingsState } from "../../states/globalUserSettingsState";
 import { useUpdateFlashcardsRecommendation } from "../../states/flashcardsProgressState";
 import { userGoalsState } from "../../states/userGoalsState";
-import { revisionModeState } from "../../states/lessonState";
 
 const skipButtonId = "js-flashcards-skip-button";
 const mobileSkipButtonId = "js-mobile-flashcards-skip-button";
@@ -47,7 +46,6 @@ const Progress = (props: Props) => {
     updateRecommendationHistory,
     updateStartingMetWordsAndCounts,
   } = useAppMethods();
-  const setRevisionMode = useSetAtom(revisionModeState);
   const globalUserSettings = useAtomValue(globalUserSettingsState);
   const userSettings = useAtomValue(userSettingsState);
   const lessonIndex = useLessonIndex();
@@ -56,14 +54,12 @@ const Progress = (props: Props) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const canvas = useRef(null);
   const firstGoalsRender = useRef(true);
-  const firstRecommendationBoxRender = useRef(true);
 
   const [canvasWidth] = useState(Math.floor(window.innerWidth));
   const [canvasHeight] = useState(Math.floor(window.innerHeight));
   const [flashWarning, setFlashWarning] = useState("");
   const [loadingLessonIndex, setLoadingLessonIndex] = useState(true);
   const [showLoadInput, setShowLoadInput] = useState(false);
-  const [toRecommendedNextLesson, setToRecommendedNextLesson] = useState(false);
   const [showSetGoalsForm, setShowSetGoalsForm] = useState(false);
   const [todayNewWordCount, setTodayNewWordCount] = useState(0);
   const [todayOldWordCount, setTodayOldWordCount] = useState(0);
@@ -82,8 +78,6 @@ const Progress = (props: Props) => {
 
     try {
       if (props.recommendationHistory?.["currentStep"] === null) {
-        setRevisionMode(false);
-        updateRecommendationHistory(props.recommendationHistory, lessonIndex);
         updateFlashcardsRecommendation();
       }
       setLoadingLessonIndex(false);
@@ -156,17 +150,6 @@ const Progress = (props: Props) => {
       setLoadingLessonIndex(false);
     };
   }, []);
-
-  useEffect(() => {
-    if (firstRecommendationBoxRender.current) {
-      firstRecommendationBoxRender.current = false;
-    } else {
-      setRevisionMode(false);
-      updateRecommendationHistory(props.recommendationHistory);
-    }
-    // TODO: revisit this after reducing parent component re-renders and converting class component to function component
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [toRecommendedNextLesson]);
 
   function showLoadInputFn() {
     setShowLoadInput(true);
@@ -350,10 +333,6 @@ const Progress = (props: Props) => {
     }
   }
 
-  if (toRecommendedNextLesson === true) {
-    return <Redirect push to={props.recommendedNextLesson.link} />;
-  }
-
   const loadForm = showLoadInput ? (
     <React.Fragment>
       <label
@@ -470,7 +449,6 @@ const Progress = (props: Props) => {
                   recommendedNextLesson={props.recommendedNextLesson}
                   loadingLessonIndex={loadingLessonIndex}
                   recommendationHistory={props.recommendationHistory}
-                  setToRecommendedNextLesson={setToRecommendedNextLesson}
                   updateRecommendationHistory={updateRecommendationHistory}
                 />
               </ErrorBoundary>

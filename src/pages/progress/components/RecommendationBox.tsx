@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../../components/OutboundLink";
 import RecommendationDescription from "./RecommendationDescription";
 import { IconExternal } from "../../../components/IconExternal";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Tooltip } from "react-tippy";
 import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 import { useAnnouncerApi } from "../../../components/Announcer/useAnnouncer";
@@ -42,7 +42,6 @@ type Props = {
   recommendedNextLesson: RecommendedNextLesson;
   loadingLessonIndex: boolean;
   recommendationHistory: RecommendationHistory;
-  setToRecommendedNextLesson: React.Dispatch<React.SetStateAction<boolean>>;
   updateRecommendationHistory: (
     previousRecommendationHistory: RecommendationHistory
   ) => void;
@@ -52,12 +51,38 @@ const RecommendationBox = ({
   recommendedNextLesson,
   loadingLessonIndex,
   recommendationHistory,
-  setToRecommendedNextLesson,
   updateRecommendationHistory,
 }: Props) => {
+  const [toRecommendedNextLesson, setToRecommendedNextLesson] = useState(false);
   const setRevisionMode = useSetAtom(revisionModeState);
   const announceTooltip = useAnnounceTooltip();
   const { updateMessage } = useAnnouncerApi();
+  const firstRecommendationBoxRender = useRef(true);
+
+  useEffect(() => {
+    try {
+      if (recommendationHistory?.["currentStep"] === null) {
+        setRevisionMode(false);
+        updateRecommendationHistory(recommendationHistory);
+      }
+    } catch (e: any) {
+      console.error(e);
+    }
+    // TODO: review this:
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  // }, [recommendationHistory, setRevisionMode, updateRecommendationHistory]);
+
+  useEffect(() => {
+    if (firstRecommendationBoxRender.current) {
+      firstRecommendationBoxRender.current = false;
+    } else {
+      setRevisionMode(false);
+      updateRecommendationHistory(recommendationHistory);
+    }
+    // TODO: revisit this after reducing parent component re-renders and converting class component to function component
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toRecommendedNextLesson]);
 
   const recommendAnotherLesson = () => {
     GoogleAnalytics.event({
@@ -384,6 +409,10 @@ const RecommendationBox = ({
         </div>
       </React.Fragment>
     );
+  }
+
+  if (toRecommendedNextLesson === true) {
+    return <Redirect push to={recommendedNextLesson.link} />;
   }
 
   return <React.Fragment>{recommendedNextLessonBox}</React.Fragment>;
