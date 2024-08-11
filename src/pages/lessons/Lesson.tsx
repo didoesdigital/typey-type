@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Link, Route, Switch } from "react-router-dom";
+import { Link, Route, Switch, useHistory } from "react-router-dom";
 import queryString from "query-string";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
@@ -15,14 +15,15 @@ import { LessonProps } from "./types";
 import type { Lesson as LessonType } from "../../types";
 import Zipper from "../../utils/zipper";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
-import { useAtomValue } from "jotai";
+import { useAtom } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
 import {
   useChooseStudy,
   useToggleHideOtherSettings,
-  useUpdatePreset
+  useUpdatePreset,
 } from "./components/UserSettings/updateUserSetting";
 import { useLessonIndex } from "../../states/lessonIndexState";
+import applyQueryParamsToUserSettings from "./components/UserSettings/applyQueryParamsToUserSettings";
 
 const isCustom = (pathname: string) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
@@ -77,6 +78,8 @@ const Lesson = ({
   totalWordCount,
   upcomingPhrases,
 }: LessonProps) => {
+  const history = useHistory();
+
   const {
     appFetchAndSetupGlobalDict,
     customiseLesson,
@@ -96,8 +99,8 @@ const Lesson = ({
     updateRevisionMaterial,
     updateTopSpeedPersonalBest,
   } = useAppMethods();
-  const lessonIndex = useLessonIndex()
-  const userSettings = useAtomValue(userSettingsState);
+  const lessonIndex = useLessonIndex();
+  const [userSettings, setUserSettings] = useAtom(userSettingsState);
   const chooseStudy = useChooseStudy();
   const toggleHideOtherSettings = useToggleHideOtherSettings();
   const updatePreset = useUpdatePreset();
@@ -165,19 +168,24 @@ const Lesson = ({
       }
 
       const parsedParams = queryString.parse(location.search);
-      let hasSettingsParams = false;
 
       if (
         Object.keys(parsedParams).some((param) => {
           return userSettings.hasOwnProperty(param);
         })
       ) {
-        hasSettingsParams = true;
-      }
-
-      if (hasSettingsParams) {
+        const currentUserSettings = Object.assign({}, userSettings);
+        const newUserSettings = applyQueryParamsToUserSettings(
+          currentUserSettings,
+          parsedParams
+        );
+        setUserSettings(newUserSettings);
         setupLesson();
-        hasSettingsParams = false;
+      }
+      const urlSearchParams = new URLSearchParams(location.search);
+      const needsSetupLesson = [...urlSearchParams].length > 0;
+      if (needsSetupLesson) {
+        history.replace({ search: "", hash: history.location.hash });
       }
     }
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component

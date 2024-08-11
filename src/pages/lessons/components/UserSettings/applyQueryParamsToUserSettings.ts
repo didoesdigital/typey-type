@@ -115,6 +115,8 @@ const applyQueryParamsToUserSettings = (
       }
     }
   }
+
+  return newSettings;
 };
 
 export default applyQueryParamsToUserSettings;

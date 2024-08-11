@@ -23,7 +23,6 @@ import describePunctuation, { punctuationDescriptions } from "./utils/describePu
 import {
   generateListOfWordsAndStrokes
 } from './utils/transformingDictionaries/transformingDictionaries';
-import queryString from 'query-string';
 import fallbackLesson from './constant/fallbackLesson';
 import fetchAndSetupGlobalDict from './utils/app/fetchAndSetupGlobalDict';
 import calculateMemorisedWordCount from './utils/calculateMemorisedWordCount';
@@ -42,7 +41,6 @@ import {
   updateRevisionMaterial,
 } from './pages/lessons/components/UserSettings/updateLessonSetting';
 import AppRoutes from './AppRoutes';
-import applyQueryParamsToUserSettings from './pages/lessons/components/UserSettings/applyQueryParamsToUserSettings';
 import removeIgnoredCharsFromSplitText from './utils/app/removeIgnoredCharsFromSplitText';
 import AppMethodsContext from "./states/legacy/AppMethodsContext";
 
@@ -479,7 +477,6 @@ class App extends Component {
   setupLesson() {
     const revisionMode = this.state.revisionMode;
     const revisionMaterial = this.state.revisionMaterial;
-    const search = this.props.location.search;
     const userSettings = this.props.userSettings;
     const lessonPath = this.state.lesson.path;
     let newLesson = Object.assign({}, this.state.lesson);
@@ -509,12 +506,6 @@ class App extends Component {
 
     // Stop existing lesson timer:
     this.stopTimer();
-
-    // Get URL search query parameters:
-    const parsedParams = queryString.parse(search);
-
-    // Update newSettings using URL search query parameters:
-    applyQueryParamsToUserSettings(newSettings, parsedParams);
 
     this.setState({
       userSettings: newSettings
