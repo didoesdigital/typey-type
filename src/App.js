@@ -974,7 +974,7 @@ class App extends Component {
       // e.g. unmatchedActual is "es" if "Frenches" is typed for "French"
       // In case of spaceAfterOutput, unmatchedChars is not empty and don't care here.
       // In case of spaceExact, proceed without checking next actual chars.
-      const excessLookFine = this.state.userSettings.spacePlacement === "spaceAfterOutput" || this.state.userSettings.spacePlacement === "spaceExact" || unmatchedActual.length === 0 || unmatchedActual[0] === " ";
+      const excessLookFine = this.props.userSettings.spacePlacement === "spaceAfterOutput" || this.props.userSettings.spacePlacement === "spaceExact" || unmatchedActual.length === 0 || unmatchedActual[0] === " ";
       proceedToNextWord = numberOfUnmatchedChars === 0 && excessLookFine;
     } else {
       proceedToNextWord = numberOfUnmatchedChars === 0;
