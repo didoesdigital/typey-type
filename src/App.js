@@ -513,13 +513,6 @@ class App extends Component {
       // Write updated user settings to local storage:
       writePersonalPreferences('userSettings', newSettings);
 
-      // Clean up URL, remove parameters:
-      const newHistory = Object.assign({}, this.props.location)
-      if (!this.props.location?.pathname.includes("/lookup")) {
-        newHistory.search = "";
-        this.props.history.replace(newHistory);
-      }
-
       // Replace smart typography in presented material:
       if (simpleTypography) {
         newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial, newSettings);
