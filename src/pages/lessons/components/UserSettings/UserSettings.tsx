@@ -16,13 +16,17 @@ import {
   useChangeShowStrokesAs,
   useChangeShowStrokesAsList,
   useChangeShowStrokesOnMisstroke,
-  useChangeSortOrderUserSetting, useChangeSpacePlacementUserSetting,
+  useChangeSortOrderUserSetting,
+  useChangeSpacePlacementUserSetting,
   useChangeStenoLayout,
   useChangeUserSetting,
   useChangeVoiceUserSetting,
   useHandleBeatsPerMinute,
   useHandleDiagramSize,
-  useHandleLimitWordsChange, useHandleRepetitionsChange, useHandleStartFromWordChange, useHandleUpcomingWordsLayout
+  useHandleLimitWordsChange,
+  useHandleRepetitionsChange,
+  useHandleStartFromWordChange,
+  useHandleUpcomingWordsLayout,
 } from "./updateUserSetting";
 
 const grabStyle = function () {
@@ -43,12 +47,12 @@ const UserSettings = ({
   totalWordCount,
 }: Props) => {
   const userSettings = useAtomValue(userSettingsState);
-  const changeShowScoresWhileTyping = useChangeShowScoresWhileTyping()
+  const changeShowScoresWhileTyping = useChangeShowScoresWhileTyping();
   const changeShowStrokesAs = useChangeShowStrokesAs();
-  const changeShowStrokesAsList = useChangeShowStrokesAsList()
+  const changeShowStrokesAsList = useChangeShowStrokesAsList();
   const changeShowStrokesOnMisstroke = useChangeShowStrokesOnMisstroke();
   const changeSortOrderUserSetting = useChangeSortOrderUserSetting();
-  const changeSpacePlacementUserSetting = useChangeSpacePlacementUserSetting()
+  const changeSpacePlacementUserSetting = useChangeSpacePlacementUserSetting();
   const changeStenoLayout = useChangeStenoLayout();
   const changeUserSetting = useChangeUserSetting();
   const changeVoiceUserSetting = useChangeVoiceUserSetting();
@@ -60,7 +64,7 @@ const UserSettings = ({
   const handleUpcomingWordsLayout = useHandleUpcomingWordsLayout();
   const announceTooltip = useAnnounceTooltip();
 
-  const {setupLesson} = useAppMethods();
+  const { setupLesson } = useAppMethods();
   const mounted = useRef(false);
   useEffect(() => {
     if (!mounted.current) {
