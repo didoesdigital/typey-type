@@ -83,7 +83,6 @@
     "@types/react-transition-group": "^4.4.5",
     "chromatic": "^10.9.6",
     "eslint-plugin-storybook": "^0.6.15",
-    "jest-fetch-mock": "^3.0.3",
     "jest-mock-random": "^1.1.1",
     "react-scripts": "5.0.1",
     "storybook": "^7.5.1",

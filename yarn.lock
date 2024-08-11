@@ -10964,15 +10964,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-fetch@npm:^3.0.4":
-  version: 3.1.5
-  resolution: "cross-fetch@npm:3.1.5"
-  dependencies:
-    node-fetch: "npm:2.6.7"
-  checksum: 29b457f8df11b46b8388a53c947de80bfe04e6466a59c1628c9870b48505b90ec1d28a05b543a0247416a99f1cfe147d1efe373afdeb46a192334ba5fe91b871
-  languageName: node
-  linkType: hard
-
 "cross-spawn@npm:^6.0.5":
   version: 6.0.5
   resolution: "cross-spawn@npm:6.0.5"
@@ -15419,16 +15410,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-fetch-mock@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "jest-fetch-mock@npm:3.0.3"
-  dependencies:
-    cross-fetch: "npm:^3.0.4"
-    promise-polyfill: "npm:^8.1.3"
-  checksum: 21ffe8c902ca5adafa7ed61760e100e4c290e99b0b487645f5bb92938ea64c2d1d9dc8af46e65fb7917d6237586067d53af756583a77330dbb4fbda079a63c29
-  languageName: node
-  linkType: hard
-
 "jest-get-type@npm:^27.5.1":
   version: 27.5.1
   resolution: "jest-get-type@npm:27.5.1"
@@ -17184,20 +17165,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:2.6.7, node-fetch@npm:^2.6.7":
-  version: 2.6.7
-  resolution: "node-fetch@npm:2.6.7"
-  dependencies:
-    whatwg-url: "npm:^5.0.0"
-  peerDependencies:
-    encoding: ^0.1.0
-  peerDependenciesMeta:
-    encoding:
-      optional: true
-  checksum: fcae80f5ac52fbf5012f5e19df2bd3915e67d3b3ad51cb5942943df2238d32ba15890fecabd0e166876a9f98a581ab50f3f10eb942b09405c49ef8da36b826c7
-  languageName: node
-  linkType: hard
-
 "node-fetch@npm:^2.0.0":
   version: 2.7.0
   resolution: "node-fetch@npm:2.7.0"
@@ -17209,6 +17176,20 @@ __metadata:
     encoding:
       optional: true
   checksum: b55786b6028208e6fbe594ccccc213cab67a72899c9234eb59dba51062a299ea853210fcf526998eaa2867b0963ad72338824450905679ff0fa304b8c5093ae8
+  languageName: node
+  linkType: hard
+
+"node-fetch@npm:^2.6.7":
+  version: 2.6.7
+  resolution: "node-fetch@npm:2.6.7"
+  dependencies:
+    whatwg-url: "npm:^5.0.0"
+  peerDependencies:
+    encoding: ^0.1.0
+  peerDependenciesMeta:
+    encoding:
+      optional: true
+  checksum: fcae80f5ac52fbf5012f5e19df2bd3915e67d3b3ad51cb5942943df2238d32ba15890fecabd0e166876a9f98a581ab50f3f10eb942b09405c49ef8da36b826c7
   languageName: node
   linkType: hard
 
@@ -19203,13 +19184,6 @@ __metadata:
   version: 2.0.3
   resolution: "progress@npm:2.0.3"
   checksum: 1697e07cb1068055dbe9fe858d242368ff5d2073639e652b75a7eb1f2a1a8d4afd404d719de23c7b48481a6aa0040686310e2dac2f53d776daa2176d3f96369c
-  languageName: node
-  linkType: hard
-
-"promise-polyfill@npm:^8.1.3":
-  version: 8.2.3
-  resolution: "promise-polyfill@npm:8.2.3"
-  checksum: 8d0418ef94d92ff53b3d8a42f47596bd354f4dfadcf21a5d52682f3addba05b05c02d88d4674e4909c069c8e14128a6d0d5e646392fb088b5300f99982a11a6c
   languageName: node
   linkType: hard
 
@@ -22540,7 +22514,6 @@ __metadata:
     d3-time-format: "npm:^4.1.0"
     eslint-plugin-storybook: "npm:^0.6.15"
     howler: "npm:^2.2.3"
-    jest-fetch-mock: "npm:^3.0.3"
     jest-mock-random: "npm:^1.1.1"
     jotai: "npm:^2.8.0"
     npm-run-all: "npm:^4.1.1"
