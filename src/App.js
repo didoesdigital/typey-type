@@ -483,8 +483,6 @@ class App extends Component {
     const prevRecentLessons = this.state.recentLessons;
     const prevLessonsProgress = this.state.lessonsProgress;
 
-    // Copy userSettings before mutating:
-    const newSettings = Object.assign({}, userSettings);
     const limitNumberOfWords = this.props.userSettings.limitNumberOfWords;
     const startFromWord = this.props.userSettings.startFromWord;
     const simpleTypography = this.props.userSettings.simpleTypography;
@@ -509,14 +507,14 @@ class App extends Component {
 
     // Replace smart typography in presented material:
     if (simpleTypography) {
-      newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial, newSettings);
+      newLesson.presentedMaterial = replaceSmartTypographyInPresentedMaterial.call(this, newLesson.presentedMaterial, userSettings);
     }
 
     // Filter lesson by familiarity:
-    newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, newSettings, revisionMode);
+    newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, userSettings, revisionMode);
 
     // Sort lesson:
-    newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, this.state.metWords, newSettings);
+    newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, this.state.metWords, userSettings);
 
     // Apply range (start from & limit) to lesson:
     if (revisionMode && limitNumberOfWords > 0) {
@@ -555,7 +553,7 @@ class App extends Component {
 
     // Update lesson progress and recent lesson history:
     if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
-      const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, newSettings, prevLessonsProgress);
+      const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, userSettings, prevLessonsProgress);
       const recentLessons = this.updateRecentLessons(lessonPath, study, prevRecentLessons);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
       writePersonalPreferences('recentLessons', recentLessons);
