@@ -35,8 +35,8 @@ type Props = {
   metWords: MetWords;
   recentLessonHistory: any;
   startingMetWordsToday: any;
-  yourMemorisedWordCount: any;
-  yourSeenWordCount: any;
+  yourMemorisedWordCount: number;
+  yourSeenWordCount: number;
 };
 
 const Progress = (props: Props) => {
