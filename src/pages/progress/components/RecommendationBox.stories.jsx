@@ -1,5 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
+import metWordsNovice from "../../../fixtures/metWordsNovice.json";
 import RecommendationBox from "./RecommendationBox";
+import RecommendationBoxFallback from "./RecommendationBoxFallback";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -17,8 +19,25 @@ const testRecommendedNextLesson = {
   linkText: "Discover",
 };
 
+const testLessonsProgress = {
+  "/typey-type/lessons/fundamentals/introduction/lesson.txt": {
+    numberOfWordsMemorised: 0,
+    numberOfWordsSeen: 1,
+    numberOfWordsToDiscover: 5,
+  },
+};
+
 const Template = (args) => {
-  return <RecommendationBox {...args} />;
+  return <Component {...args} />;
+};
+
+// Suspense doesn't work in Template which is not a component
+const Component = (args) => {
+  return (
+    <Suspense fallback={<RecommendationBoxFallback />}>
+      <RecommendationBox {...args} />
+    </Suspense>
+  );
 };
 
 export const RecommendationBoxIdeal = Template.bind({});
@@ -27,6 +46,12 @@ RecommendationBoxIdeal.args = {
   recommendAnotherLesson: () => undefined,
   startRecommendedStep: () => undefined,
   loadingLessonIndex: false,
+  lessonsProgress: testLessonsProgress,
+  yourSeenWordCount: 1,
+  yourMemorisedWordCount: 1,
+  metWords: metWordsNovice,
 };
 
-export const RecommendationBoxLoading = Template.bind({});
+export const RecommendationBoxLoading = () => {
+  return <RecommendationBoxFallback />;
+};
