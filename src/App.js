@@ -483,11 +483,11 @@ class App extends Component {
     const prevRecentLessons = this.state.recentLessons;
     const prevLessonsProgress = this.state.lessonsProgress;
 
-    const limitNumberOfWords = this.props.userSettings.limitNumberOfWords;
-    const startFromWord = this.props.userSettings.startFromWord;
-    const simpleTypography = this.props.userSettings.simpleTypography;
-    const reps = this.props.userSettings.repetitions;
-    const study = this.props.userSettings.study
+    const limitNumberOfWords = userSettings.limitNumberOfWords;
+    const startFromWord = userSettings.startFromWord;
+    const simpleTypography = userSettings.simpleTypography;
+    const reps = userSettings.repetitions;
+    const study = userSettings.study
 
     // If there's no lesson data, use fallback lesson:
     if ((typeof newLesson === 'object' && Object.entries(newLesson).length === 0 && newLesson.constructor === Object) || newLesson === null ) {
