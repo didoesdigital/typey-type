@@ -24,6 +24,7 @@ import {
 } from "./components/UserSettings/updateUserSetting";
 import { useLessonIndex } from "../../states/lessonIndexState";
 import applyQueryParamsToUserSettings from "./components/UserSettings/applyQueryParamsToUserSettings";
+import getProgressRevisionUserSettings from "./components/UserSettings/getProgressRevisionUserSettings";
 
 const isCustom = (pathname: string) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
@@ -129,7 +130,9 @@ const Lesson = ({
         !location.pathname.includes("/lessons/progress/memorised/")
       ) {
         let loadedPersonalPreferences = loadPersonalPreferences();
-        let newSeenOrMemorised = [false, true, true];
+        const newSeenOrMemorised = [false, true, true] as const;
+        const newUserSettings = getProgressRevisionUserSettings(userSettings, newSeenOrMemorised);
+        setUserSettings(newUserSettings);
         setUpProgressRevisionLesson(
           loadedPersonalPreferences[0],
           userSettings,
@@ -137,7 +140,9 @@ const Lesson = ({
         );
       } else if (location.pathname.startsWith("/lessons/progress/seen/")) {
         let loadedPersonalPreferences = loadPersonalPreferences();
-        let newSeenOrMemorised = [false, true, false];
+        let newSeenOrMemorised = [false, true, false] as const;
+        const newUserSettings = getProgressRevisionUserSettings(userSettings, newSeenOrMemorised);
+        setUserSettings(newUserSettings);
         setUpProgressRevisionLesson(
           loadedPersonalPreferences[0],
           userSettings,
@@ -145,7 +150,9 @@ const Lesson = ({
         );
       } else if (location.pathname.startsWith("/lessons/progress/memorised/")) {
         let loadedPersonalPreferences = loadPersonalPreferences();
-        let newSeenOrMemorised = [false, false, true];
+        let newSeenOrMemorised = [false, false, true] as const;
+        const newUserSettings = getProgressRevisionUserSettings(userSettings, newSeenOrMemorised);
+        setUserSettings(newUserSettings);
         setUpProgressRevisionLesson(
           loadedPersonalPreferences[0],
           userSettings,

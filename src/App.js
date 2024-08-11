@@ -378,41 +378,6 @@ class App extends Component {
 
   // set user settings
   setUpProgressRevisionLesson(metWordsFromStorage, userSettings, newSeenOrMemorised) {
-    let newUserSettings = Object.assign({}, userSettings);
-    newUserSettings.newWords = newSeenOrMemorised[0];
-    newUserSettings.seenWords = newSeenOrMemorised[1];
-    newUserSettings.retainedWords = newSeenOrMemorised[2];
-
-    // eslint-disable-next-line no-unused-vars
-    const [_, revisePreset, drillPreset, practicePreset] =
-      userSettings?.studyPresets ?? [
-        { limitNumberOfWords: 5, repetitions: 5 },
-        { limitNumberOfWords: 50, repetitions: 3 },
-        { limitNumberOfWords: 100, repetitions: 3 },
-        { limitNumberOfWords: 300, repetitions: 1 },
-      ];
-
-    if (newSeenOrMemorised[1] && !newSeenOrMemorised[2]) {
-      newUserSettings.study = 'revise';
-      newUserSettings.sortOrder = PARAMS.revise.sortOrder;
-      newUserSettings.limitNumberOfWords = revisePreset.limitNumberOfWords;
-      newUserSettings.repetitions = revisePreset.repetitions;
-      newUserSettings.showStrokes = PARAMS.revise.showStrokes;
-    }
-    else if (newSeenOrMemorised[2] && !newSeenOrMemorised[1]) {
-      newUserSettings.study = 'drill';
-      newUserSettings.sortOrder = PARAMS.drill.sortOrder;
-      newUserSettings.limitNumberOfWords = drillPreset.limitNumberOfWords;
-      newUserSettings.repetitions = drillPreset.repetitions;
-      newUserSettings.showStrokes = PARAMS.drill.showStrokes;
-    } else {
-      newUserSettings.study = 'practice';
-      newUserSettings.sortOrder = PARAMS.practice.sortOrder;
-      newUserSettings.limitNumberOfWords = practicePreset.limitNumberOfWords;
-      newUserSettings.repetitions = practicePreset.repetitions;
-      newUserSettings.showStrokes = PARAMS.practice.showStrokes;
-    }
-
     let lesson = {};
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.props.userSettings) { stenoLayout = this.props.userSettings.stenoLayout; }
@@ -453,7 +418,6 @@ class App extends Component {
       this.setState({
         currentPhraseID: 0,
         lesson: lesson,
-        userSettings: newUserSettings
       }, () => {
         this.setupLesson();
 
