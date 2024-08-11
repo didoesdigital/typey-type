@@ -485,11 +485,11 @@ class App extends Component {
 
     // Copy userSettings before mutating:
     const newSettings = Object.assign({}, userSettings);
-    const limitNumberOfWords = newSettings.limitNumberOfWords;
-    const startFromWord = newSettings.startFromWord;
-    const simpleTypography = newSettings.simpleTypography;
-    const reps = newSettings.repetitions;
-    const study = newSettings.study
+    const limitNumberOfWords = this.props.userSettings.limitNumberOfWords;
+    const startFromWord = this.props.userSettings.startFromWord;
+    const simpleTypography = this.props.userSettings.simpleTypography;
+    const reps = this.props.userSettings.repetitions;
+    const study = this.props.userSettings.study
 
     // If there's no lesson data, use fallback lesson:
     if ((typeof newLesson === 'object' && Object.entries(newLesson).length === 0 && newLesson.constructor === Object) || newLesson === null ) {
