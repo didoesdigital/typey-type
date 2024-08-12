@@ -131,7 +131,6 @@ const Template = (args: any) => {
               updatePreset={() => undefined}
               updateMarkup={() => undefined}
               overviewLink={undefined}
-              recentLessonHistory={[]}
               {...args}
             />
           </div>

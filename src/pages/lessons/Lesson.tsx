@@ -26,6 +26,10 @@ import { useLessonIndex } from "../../states/lessonIndexState";
 import applyQueryParamsToUserSettings from "./components/UserSettings/applyQueryParamsToUserSettings";
 import getProgressRevisionUserSettings from "./components/UserSettings/getProgressRevisionUserSettings";
 import { revisionModeState } from "../../states/lessonState";
+import { recentLessonHistoryState } from "../../states/recentLessonHistoryState";
+import updateRecentLessons, {
+  trimBasenameAndFilename,
+} from "../progress/RecentLessons/updateRecentLessons";
 
 const isCustom = (pathname: string) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
@@ -62,7 +66,6 @@ const Lesson = ({
   metWords,
   personalDictionaries,
   previousCompletedPhraseAsTyped,
-  recentLessonHistory,
   repetitionsRemaining,
   settings,
   showStrokesInLesson,
@@ -103,6 +106,7 @@ const Lesson = ({
   const lessonIndex = useLessonIndex();
   const [userSettings, setUserSettings] = useAtom(userSettingsState);
   const [revisionMode, setRevisionMode] = useAtom(revisionModeState);
+  const [recentLessons, setRecentLessons] = useAtom(recentLessonHistoryState);
   const chooseStudy = useChooseStudy();
   const toggleHideOtherSettings = useToggleHideOtherSettings();
   const updatePreset = useUpdatePreset();
@@ -271,6 +275,36 @@ const Lesson = ({
     // TODO: revisit this after reducing parent component re-renders and converting class component to function component
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // This effect is to update recent lessons when the lesson path or study type changes:
+  const mostRecentLesson =
+    recentLessons?.history && recentLessons.history.length > 0
+      ? recentLessons.history[recentLessons.history.length - 1]?.path
+      : undefined;
+  useEffect(() => {
+    if (
+      lesson.path &&
+      mostRecentLesson &&
+      trimBasenameAndFilename(lesson.path) !== mostRecentLesson &&
+      !lesson.path.includes("/lessons/custom")
+    ) {
+      const updatedRecentLessons = updateRecentLessons(
+        lesson.path,
+        userSettings?.study,
+        recentLessons
+      );
+      setRecentLessons(updatedRecentLessons);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    lesson.path,
+    mostRecentLesson,
+    // This changes too frequently to include as a dependency:
+    // recentLessons,
+    setRecentLessons,
+    // Note: If we change study from "discover" to "drill", the item in the recent lesson history will be *updated*
+    userSettings?.study,
+  ]);
 
   function stopAndCustomiseLesson() {
     stopLesson();
@@ -465,7 +499,6 @@ const Lesson = ({
                 lessonLength={lessonLength}
                 lessonTitle={lessonTitle}
                 previousCompletedPhraseAsTyped={previousCompletedPhraseAsTyped}
-                recentLessonHistory={recentLessonHistory}
                 repetitionsRemaining={repetitionsRemaining}
                 restartLesson={setRevisionModeAndRestartLesson}
                 revisionMode={revisionMode}

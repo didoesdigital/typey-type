@@ -1,5 +1,7 @@
 import React from "react";
 import RecentLessons from "./RecentLessons";
+import { recentLessonHistoryState } from "../../../states/recentLessonHistoryState";
+import { useHydrateAtoms } from "jotai/utils";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -31,24 +33,28 @@ const testLessonIndex = [
   },
 ];
 
-const Template = (args) => {
+const recentLessonHistoryIdeal = [
+  { path: "/lessons/fundamentals/introduction/", studyType: "practice" },
+  {
+    path: "/lessons/stories/proverbial-phrases/proverbial-phrases-starting-with-e/",
+    studyType: "practice",
+  },
+];
+
+export const RecentLessonsIdeal = (args) => {
+  useHydrateAtoms([
+    [recentLessonHistoryState, { history: recentLessonHistoryIdeal }],
+  ]);
   return <RecentLessons {...args} />;
 };
-
-export const RecentLessonsIdeal = Template.bind({});
 RecentLessonsIdeal.args = {
-  recentLessonHistory: [
-    { path: "/lessons/fundamentals/introduction/", studyType: "practice" },
-    {
-      path: "/lessons/stories/proverbial-phrases/proverbial-phrases-starting-with-e/",
-      studyType: "practice",
-    },
-  ],
   lessonIndex: testLessonIndex,
 };
 
-export const NoRecentLessons = Template.bind({});
+export const NoRecentLessons = (args) => {
+  useHydrateAtoms([[recentLessonHistoryState, { history: [] }]]);
+  return <RecentLessons {...args} />;
+};
 NoRecentLessons.args = {
-  recentLessonHistory: [],
   lessonIndex: testLessonIndex,
 };

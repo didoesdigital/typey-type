@@ -61,7 +61,6 @@ class App extends Component {
     // add the same default to load/set personal preferences code and test.
     let metWordsFromStorage = loadPersonalPreferences()[0];
     let startingMetWordsToday = loadPersonalPreferences()[0];
-    let recentLessons = loadPersonalPreferences()[2];
     this.appFetchAndSetupGlobalDict = fetchAndSetupGlobalDict.bind(this);
 
     this.state = {
@@ -101,7 +100,6 @@ class App extends Component {
       disableUserSettings: false,
       metWords: metWordsFromStorage,
       lesson: fallbackLesson,
-      recentLessons: recentLessons,
       revisionMaterial: [
       ],
       startingMetWordsToday: startingMetWordsToday,
@@ -130,9 +128,7 @@ class App extends Component {
 
     if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
       let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path, this.state.lesson, this.props.userSettings, this.state.lessonsProgress);
-      let recentLessons = this.updateRecentLessons(this.state.lesson.path, this.props.userSettings.study, this.state.recentLessons);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
-      writePersonalPreferences('recentLessons', recentLessons);
     }
 
     const currentLessonStrokes = this.state.currentLessonStrokes.map(copy => ({...copy}));
@@ -190,7 +186,6 @@ class App extends Component {
   setPersonalPreferences(source) {
     let metWordsFromStateOrArg = this.state.metWords;
     let lessonsProgressState = this.state.lessonsProgress;
-    let recentLessonsState = this.state.recentLessons;
     let topSpeedPersonalBestState = this.state.topSpeedPersonalBest;
     if (source && source !== '') {
       try {
@@ -202,7 +197,7 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWordsFromStateOrArg, lessonsProgressState, recentLessonsState, topSpeedPersonalBestState] = loadPersonalPreferences();
+      [metWordsFromStateOrArg, lessonsProgressState, topSpeedPersonalBestState] = loadPersonalPreferences();
     }
 
     let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
@@ -210,14 +205,12 @@ class App extends Component {
 
     this.setState({
       lessonsProgress: lessonsProgressState,
-      recentLessons: recentLessonsState,
       topSpeedPersonalBest: topSpeedPersonalBestState,
       metWords: metWordsFromStateOrArg,
       yourSeenWordCount: calculatedYourSeenWordCount,
       yourMemorisedWordCount: calculatedYourMemorisedWordCount,
     }, () => {
       writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
-      writePersonalPreferences('recentLessons', this.state.recentLessons);
       writePersonalPreferences('topSpeedPersonalBest', this.state.topSpeedPersonalBest);
       writePersonalPreferences('metWords', this.state.metWords);
       this.setupLesson();
@@ -315,33 +308,6 @@ class App extends Component {
     return lessonsProgress;
   }
 
-  updateRecentLessons(recentLessonPath, studyType, prevRecentLessons) {
-    let trimmedRecentLessonPath = recentLessonPath.replace(process.env.PUBLIC_URL,'').replace('lesson.txt','');
-    const recentLessons = Object.assign({}, prevRecentLessons);
-
-    if (!trimmedRecentLessonPath.includes("/lessons/custom") && recentLessons.history) {
-      let existingLessonIndex = recentLessons.history.findIndex(historyRecentLesson => historyRecentLesson.path === trimmedRecentLessonPath);
-      if (existingLessonIndex >= 0) {
-        recentLessons.history.splice(existingLessonIndex, 1);
-      }
-      else {
-        if (recentLessons.history.length >=10) { recentLessons.history.shift(); }
-      }
-
-      recentLessons.history.push({
-        path: trimmedRecentLessonPath,
-        studyType: studyType
-      });
-    }
-
-    this.setState({
-      recentLessons: recentLessons,
-    }, () => {
-      writePersonalPreferences('recentLessons', recentLessons);
-    });
-    return recentLessons;
-  }
-
   updateStartingMetWordsAndCounts(providedMetWords) {
     this.setState({
       startingMetWordsToday: providedMetWords,
@@ -423,14 +389,12 @@ class App extends Component {
     const userSettings = this.props.userSettings;
     const lessonPath = this.state.lesson.path;
     let newLesson = Object.assign({}, this.state.lesson);
-    const prevRecentLessons = this.state.recentLessons;
     const prevLessonsProgress = this.state.lessonsProgress;
 
     const limitNumberOfWords = userSettings.limitNumberOfWords;
     const startFromWord = userSettings.startFromWord;
     const simpleTypography = userSettings.simpleTypography;
     const reps = userSettings.repetitions;
-    const study = userSettings.study
 
     // If there's no lesson data, use fallback lesson:
     if ((typeof newLesson === 'object' && Object.entries(newLesson).length === 0 && newLesson.constructor === Object) || newLesson === null ) {
@@ -494,12 +458,10 @@ class App extends Component {
     // Get target stroke count:
     const target = getTargetStrokeCount(newLesson.presentedMaterial[0] || { phrase: '', stroke: 'TK-LS' });
 
-    // Update lesson progress and recent lesson history:
+    // Update lesson progress:
     if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
       const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, userSettings, prevLessonsProgress);
-      const recentLessons = this.updateRecentLessons(lessonPath, study, prevRecentLessons);
       writePersonalPreferences('lessonsProgress', lessonsProgress);
-      writePersonalPreferences('recentLessons', recentLessons);
     }
 
     // Reset lesson state for starting lesson:

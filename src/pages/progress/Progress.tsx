@@ -33,7 +33,6 @@ let particles: any[] = [];
 type Props = {
   lessonsProgress: any;
   metWords: MetWords;
-  recentLessonHistory: any;
   startingMetWordsToday: any;
   yourMemorisedWordCount: number;
   yourSeenWordCount: number;
@@ -480,10 +479,7 @@ const Progress = (props: Props) => {
           <div className="flex flex-wrap justify-between">
             <div className="mw-368 flex-grow order-1">
               <ErrorBoundary relative={true}>
-                <RecentLessons
-                  lessonIndex={lessonIndex}
-                  recentLessonHistory={props.recentLessonHistory}
-                />
+                <RecentLessons lessonIndex={lessonIndex} />
               </ErrorBoundary>
               <FlashcardsSection
                 showOnSmallScreen={false}

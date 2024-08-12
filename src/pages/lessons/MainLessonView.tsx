@@ -30,10 +30,10 @@ import type {
   Study,
 } from "../../types";
 
-import type { RecentLessonHistoryItem } from "../progress/components/RecentLessons";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
 import { useChangeShowScoresWhileTyping } from "./components/UserSettings/updateUserSetting";
+import { recentLessonHistoryState } from "../../states/recentLessonHistoryState";
 
 type Props = {
   createNewCustomLesson: JSX.Element | undefined;
@@ -57,7 +57,6 @@ type Props = {
   lessonLength: number;
   lessonTitle: string;
   previousCompletedPhraseAsTyped: ActualTypedText;
-  recentLessonHistory: RecentLessonHistoryItem[];
   repetitionsRemaining: number;
   restartLesson: React.MouseEventHandler<HTMLAnchorElement>;
   revisionMode: boolean;
@@ -100,7 +99,6 @@ const MainLessonView = ({
   lessonLength,
   lessonTitle,
   previousCompletedPhraseAsTyped,
-  recentLessonHistory,
   repetitionsRemaining,
   restartLesson,
   revisionMode,
@@ -121,6 +119,7 @@ const MainLessonView = ({
   updatePreset,
 }: Props) => {
   const userSettings = useAtomValue(userSettingsState);
+  const recentLessonHistory = useAtomValue(recentLessonHistoryState)?.history;
   const changeShowScoresWhileTyping = useChangeShowScoresWhileTyping();
   const previousLesson = useRef<string | null>(null);
   const mainHeading = useRef<HTMLHeadingElement>(null);

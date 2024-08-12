@@ -6,8 +6,13 @@ import type {
   LessonPathWithoutBasenameOrFilename,
   Study,
 } from "../../../types";
+import { recentLessonHistoryState } from "../../../states/recentLessonHistoryState";
+import { useAtomValue } from "jotai";
 
 type RecentLessonIndex = Pick<LessonIndexEntry, "path" | "title">;
+
+/** The most *recent* lesson is the *last* history item in the array */
+export type RecentLessonHistory = RecentLessonHistoryItem[];
 
 export type RecentLessonHistoryItem = {
   path: LessonPathWithoutBasenameOrFilename;
@@ -15,11 +20,12 @@ export type RecentLessonHistoryItem = {
 };
 
 type Props = {
-  recentLessonHistory: RecentLessonHistoryItem[];
   lessonIndex: RecentLessonIndex[];
 };
 
-const RecentLessons = ({ recentLessonHistory, lessonIndex }: Props) => {
+const RecentLessons = ({ lessonIndex }: Props) => {
+  const recentLessonHistory = useAtomValue(recentLessonHistoryState)?.history;
+
   const hasRecentLessons =
     recentLessonHistory &&
     recentLessonHistory.length > 0 &&

@@ -6,6 +6,7 @@ import appMethods from "../../stories/fixtures/appMethods";
 import { useHydrateAtoms } from "jotai/utils";
 import { flashcardsRecommendationState } from "../../states/flashcardsProgressState";
 import { userGoalsState } from "../../states/userGoalsState";
+import { recentLessonHistoryState } from "../../states/recentLessonHistoryState";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
@@ -103,6 +104,7 @@ function Component(args) {
       },
     ],
     [userGoalsState, { newWords: 2, oldWords: 1 }],
+    [recentLessonHistoryState, { history: recentLessonHistory }],
   ]);
   return (
     <AppMethodsContext.Provider value={appMethods}>
@@ -110,7 +112,6 @@ function Component(args) {
         <Progress
           lessonsProgress={testLessonsProgress}
           metWords={{}}
-          recentLessonHistory={recentLessonHistory}
           startingMetWordsToday={{}}
           userSettings={userSettings}
           yourMemorisedWordCount={878}

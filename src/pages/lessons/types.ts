@@ -9,7 +9,6 @@ import type {
   LookupDictWithNamespacedDictsAndConfig,
   PersonalDictionaryNameAndContents,
 } from "../../types";
-import { RecentLessonHistoryItem } from "../progress/components/RecentLessons";
 
 export type LessonData = {
   version: number;
@@ -44,7 +43,6 @@ export type LessonProps = {
   metWords: MetWords;
   personalDictionaries: PersonalDictionaryNameAndContents[];
   previousCompletedPhraseAsTyped: string;
-  recentLessonHistory: RecentLessonHistoryItem[];
   repetitionsRemaining: number;
   settings: any;
   showStrokesInLesson: any;

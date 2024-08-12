@@ -21,7 +21,6 @@ import {
 } from "./types";
 import { Location } from "history";
 import { CustomLessonMaterialValidationState } from "./pages/lessons/custom/components/CustomLessonIntro";
-import { RecentLessonHistoryItem } from "./pages/progress/components/RecentLessons";
 
 const AsyncBreak = Loadable({
   loader: () => import("./pages/break/Break"),
@@ -141,7 +140,6 @@ type AppStateForDescendants = {
   disableUserSettings: boolean,
   metWords: MetWords,
   lesson: Lesson,
-  recentLessons: { history: RecentLessonHistoryItem[] },
 // revisionMaterial: [
 // ],
   startingMetWordsToday: MetWords,
@@ -270,7 +268,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       <AsyncProgress
                         metWords={appState.metWords}
                         lessonsProgress={appState.lessonsProgress}
-                        recentLessonHistory={appState.recentLessons.history}
                         startingMetWordsToday={appState.startingMetWordsToday}
                         yourSeenWordCount={appState.yourSeenWordCount}
                         yourMemorisedWordCount={appState.yourMemorisedWordCount}
@@ -380,7 +377,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       previousCompletedPhraseAsTyped={
                         appState.previousCompletedPhraseAsTyped
                       }
-                      recentLessonHistory={appState.recentLessons.history}
                       repetitionsRemaining={appState.repetitionsRemaining}
                       startTime={appState.startTime}
                       settings={appState.lesson.settings}
