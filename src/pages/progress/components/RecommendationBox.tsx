@@ -47,7 +47,6 @@ export type RecommendationHistory = {
 };
 
 type Props = {
-  loadingLessonIndex: boolean;
   lessonsProgress: any;
   yourMemorisedWordCount: number;
   yourSeenWordCount: number;
@@ -55,7 +54,6 @@ type Props = {
 };
 
 const RecommendationBox = ({
-  loadingLessonIndex,
   lessonsProgress,
   yourSeenWordCount,
   yourMemorisedWordCount,
@@ -224,7 +222,7 @@ const RecommendationBox = ({
   let recommendedNextLessonHeadingClassNames =
     "mt0 pb1 bb b--brand-primary-tint mb3";
 
-  if (recommendedNextLesson !== undefined && !loadingLessonIndex) {
+  if (!!recommendedNextLesson) {
     metadataStats = (
       <React.Fragment>
         {recommendedNextLesson.limitNumberOfWords}{" "}

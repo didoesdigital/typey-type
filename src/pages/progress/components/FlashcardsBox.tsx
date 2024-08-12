@@ -15,7 +15,6 @@ export type FlashcardsNextLesson = {
 
 export type Props = {
   flashcardsNextLesson: FlashcardsNextLesson;
-  loadingLessonIndex: boolean;
   skipButtonId: string;
   startFlashcards: () => void;
   updateFlashcardsRecommendation: () => void;
@@ -26,7 +25,6 @@ const defaultTimestamp = 1558144862000;
 
 const FlashcardsBox = ({
   flashcardsNextLesson,
-  loadingLessonIndex,
   skipButtonId,
   startFlashcards,
   updateFlashcardsRecommendation,
@@ -58,7 +56,7 @@ const FlashcardsBox = ({
     updateFlashcardsRecommendation();
   };
 
-  return flashcardsNextLesson !== undefined && !loadingLessonIndex ? (
+  return !!flashcardsNextLesson ? (
     <div className="bw-12 br-4 b--solid b--brand-primary p3 mb3">
       <p className="text-right">
         <strong>{flashcardsNextLesson.linkTitle}</strong>

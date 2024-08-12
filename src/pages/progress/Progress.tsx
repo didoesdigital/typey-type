@@ -54,7 +54,6 @@ const Progress = (props: Props) => {
   const [canvasWidth] = useState(Math.floor(window.innerWidth));
   const [canvasHeight] = useState(Math.floor(window.innerHeight));
   const [flashWarning, setFlashWarning] = useState("");
-  const [loadingLessonIndex, setLoadingLessonIndex] = useState(true);
   const [showLoadInput, setShowLoadInput] = useState(false);
   const [showSetGoalsForm, setShowSetGoalsForm] = useState(false);
   const [todayNewWordCount, setTodayNewWordCount] = useState(0);
@@ -74,7 +73,6 @@ const Progress = (props: Props) => {
 
     try {
       updateFlashcardsRecommendation();
-      setLoadingLessonIndex(false);
     } catch (e: any) {
       console.error(e);
     }
@@ -138,12 +136,6 @@ const Progress = (props: Props) => {
       }
     }
   }, [showLoadInput]);
-
-  useEffect(() => {
-    return () => {
-      setLoadingLessonIndex(false);
-    };
-  }, []);
 
   function showLoadInputFn() {
     setShowLoadInput(true);
@@ -390,7 +382,6 @@ const Progress = (props: Props) => {
         <FlashcardsSection
           showOnSmallScreen={true}
           flashcardsCourseLevel={globalUserSettings.flashcardsCourseLevel}
-          loadingLessonIndex={loadingLessonIndex}
           skipButtonId={mobileSkipButtonId}
           updateFlashcardsRecommendation={updateFlashcardsRecommendation}
         />
@@ -441,7 +432,6 @@ const Progress = (props: Props) => {
               <ErrorBoundary relative={true}>
                 <Suspense fallback={<RecommendationBoxFallback />}>
                   <RecommendationBox
-                    loadingLessonIndex={loadingLessonIndex}
                     lessonsProgress={props.lessonsProgress}
                     yourSeenWordCount={props.yourSeenWordCount}
                     yourMemorisedWordCount={props.yourMemorisedWordCount}
@@ -498,7 +488,6 @@ const Progress = (props: Props) => {
               <FlashcardsSection
                 showOnSmallScreen={false}
                 flashcardsCourseLevel={globalUserSettings.flashcardsCourseLevel}
-                loadingLessonIndex={loadingLessonIndex}
                 skipButtonId={skipButtonId}
                 updateFlashcardsRecommendation={updateFlashcardsRecommendation}
               />

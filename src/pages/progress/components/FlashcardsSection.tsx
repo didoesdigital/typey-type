@@ -12,7 +12,6 @@ type Props = {
   showOnSmallScreen: boolean;
   flashcardsCourseLevel: FlashcardsCourseLevel;
   skipButtonId: FlashcardsBoxProps["skipButtonId"];
-  loadingLessonIndex: FlashcardsBoxProps["loadingLessonIndex"];
   updateFlashcardsRecommendation: () => void;
 };
 
@@ -20,7 +19,6 @@ const FlashcardsSection = ({
   showOnSmallScreen,
   flashcardsCourseLevel,
   skipButtonId,
-  loadingLessonIndex,
   updateFlashcardsRecommendation,
 }: Props) => {
   const { flashcardsNextLesson } = useAtomValue(flashcardsRecommendationState);
@@ -80,7 +78,6 @@ const FlashcardsSection = ({
           <FlashcardsBox
             skipButtonId={skipButtonId}
             flashcardsNextLesson={flashcardsNextLesson}
-            loadingLessonIndex={loadingLessonIndex}
             startFlashcards={startFlashcards}
             updateFlashcardsRecommendation={updateFlashcardsRecommendation}
           />
