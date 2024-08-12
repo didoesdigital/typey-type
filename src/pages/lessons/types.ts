@@ -1,6 +1,5 @@
 import type {
   // CurrentLessonStrokes,
-  GlobalUserSettings,
   Lesson,
   MetWords,
   PrettyLessonTitle,

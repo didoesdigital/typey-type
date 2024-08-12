@@ -2,7 +2,6 @@ import {
   createWordListFromMetWords,
   parseCustomMaterial,
   matchSplitText,
-  loadPersonalPreferences,
   lookUpDictionaryInIndex,
   mapQWERTYKeysToStenoStroke,
   strokeAccuracy,

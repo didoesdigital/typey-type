@@ -7,8 +7,8 @@ import lessonIndexJSON from '../../typey-type-data/lessons/lessonIndex.json'
 import lessonsProgressNovice from './../fixtures/lessonsProgressNovice.json'
 import lessonsProgressBeginner from './../fixtures/lessonsProgressBeginner.json'
 import lessonsProgressCompetent from './../fixtures/lessonsProgressCompetent.json'
-import lessonsProgressProficient from './../fixtures/lessonsProgressProficient.json'
-import lessonsProgressExpert from './../fixtures/lessonsProgressExpert.json'
+// import lessonsProgressProficient from './../fixtures/lessonsProgressProficient.json'
+// import lessonsProgressExpert from './../fixtures/lessonsProgressExpert.json'
 
 import metWordsCompetent from './../fixtures/metWordsCompetent.json'
 
