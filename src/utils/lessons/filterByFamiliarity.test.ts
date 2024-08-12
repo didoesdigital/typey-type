@@ -89,27 +89,27 @@ describe('filterByFamiliarity with different spacing settings', () => {
     {phrase: 'and', stroke: 'SKP'}
   ];
 
-  let metWords = {
-    " the":30,
-    " of":1,
-    " I":1,
-    " be spoke":1,
-    " bespoke":1,
+  // let metWords = {
+  //   " the":30,
+  //   " of":1,
+  //   " I":1,
+  //   " be spoke":1,
+  //   " bespoke":1,
 
-    "the ":1,
-    "of ":30,
-    "I ":1,
-    "be spoke ":1,
-    "bespoke ":1,
+  //   "the ":1,
+  //   "of ":30,
+  //   "I ":1,
+  //   "be spoke ":1,
+  //   "bespoke ":1,
 
-    "the":1,
-    "of":1,
-    "I":30,
-    "be spoke":1,
-    "bespoke":1,
+  //   "the":1,
+  //   "of":1,
+  //   "I":30,
+  //   "be spoke":1,
+  //   "bespoke":1,
 
-    "bes poke":1,
-  };
+  //   "bes poke":1,
+  // };
   const revisionMode = false;
 
   describe('when spaceOff ignores spaces and new words selected', () => {
