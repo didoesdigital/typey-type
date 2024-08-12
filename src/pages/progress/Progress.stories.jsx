@@ -98,34 +98,37 @@ const recommendedNextLesson = {
 };
 
 const Template = (args) => {
-  return (
-    <Component {...args} />
-  );
+  return <Component {...args} />;
 };
 
 // Suspense doesn't work in Template which is not a component
-function Component (args) {
+function Component(args) {
   useHydrateAtoms([
-    [flashcardsRecommendationState, {
-      flashcardsNextLesson,
-      flashcardsCourseIndex: 0
-    }],
-    [userGoalsState, { newWords: 2, oldWords: 1 }]
+    [
+      flashcardsRecommendationState,
+      {
+        flashcardsNextLesson,
+        flashcardsCourseIndex: 0,
+      },
+    ],
+    [userGoalsState, { newWords: 2, oldWords: 1 }],
   ]);
-  return <AppMethodsContext.Provider value={appMethods}>
-    <Suspense fallback={<div>Loading...</div>}>
-      <Progress
-        lessonsProgress={testLessonsProgress}
-        metWords={{}}
-        recentLessonHistory={recentLessonHistory}
-        startingMetWordsToday={{}}
-        userSettings={userSettings}
-        yourMemorisedWordCount={878}
-        yourSeenWordCount={8750}
-        {...args}
-      />
-    </Suspense>
-  </AppMethodsContext.Provider>
+  return (
+    <AppMethodsContext.Provider value={appMethods}>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Progress
+          lessonsProgress={testLessonsProgress}
+          metWords={{}}
+          recentLessonHistory={recentLessonHistory}
+          startingMetWordsToday={{}}
+          userSettings={userSettings}
+          yourMemorisedWordCount={878}
+          yourSeenWordCount={8750}
+          {...args}
+        />
+      </Suspense>
+    </AppMethodsContext.Provider>
+  );
 }
 
 export const ProgressStory = Template.bind({});
