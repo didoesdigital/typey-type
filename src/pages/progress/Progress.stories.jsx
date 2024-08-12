@@ -88,15 +88,6 @@ const recentLessonHistory = [
   { path: "/lessons/fundamentals/introduction/", studyType: "discover" },
 ];
 
-const recommendedNextLesson = {
-  limitNumberOfWords: 11,
-  link: "/lessons/stories/proverbial-phrases/proverbial-phrases-starting-with-v/?recommended=true&study=practice&showStrokes=0&hideStrokesOnLastRepetition=1&newWords=1&seenWords=1&retainedWords=1&repetitions=1&limitNumberOfWords=0&sortOrder=sortOff",
-  linkText: "Practice Proverbial phrases starting with V",
-  linkTitle: "Proverbial phrases starting with V",
-  repetitions: 1,
-  studyType: "practice",
-};
-
 const Template = (args) => {
   return <Component {...args} />;
 };
