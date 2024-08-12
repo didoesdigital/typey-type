@@ -118,8 +118,6 @@ function Component (args) {
         lessonsProgress={testLessonsProgress}
         metWords={{}}
         recentLessonHistory={recentLessonHistory}
-        recommendationHistory={{ currentStep: "practice" }}
-        recommendedNextLesson={recommendedNextLesson}
         startingMetWordsToday={{}}
         userSettings={userSettings}
         yourMemorisedWordCount={878}
