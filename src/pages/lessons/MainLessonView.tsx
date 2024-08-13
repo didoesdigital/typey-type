@@ -73,7 +73,7 @@ type Props = {
   totalNumberOfRetainedWords: number;
   totalWordCount: number;
   upcomingPhrases: MaterialText[];
-  updateMarkup: () => void;
+  updateMarkup: React.ChangeEventHandler<HTMLTextAreaElement>;
   updatePreset: (studyType: Study) => void;
 };
 
