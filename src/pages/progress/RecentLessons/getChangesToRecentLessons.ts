@@ -9,9 +9,7 @@ type TrimBasenameAndFilename = (
   lessonPath: LessonPathWithBasenameAndFilename
 ) => LessonPathWithoutBasenameOrFilename;
 
-export const trimBasenameAndFilename: TrimBasenameAndFilename = (
-  lessonPath
-) => {
+const trimBasenameAndFilename: TrimBasenameAndFilename = (lessonPath) => {
   return lessonPath
     .replace(process.env.PUBLIC_URL, "")
     .replace("lesson.txt", "");
