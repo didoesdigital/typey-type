@@ -17,7 +17,7 @@ export const trimBasenameAndFilename: TrimBasenameAndFilename = (
     .replace("lesson.txt", "");
 };
 
-const updateRecentLessons = (
+const getChangesToRecentLessons = (
   recentLessonPath: LessonPathWithBasenameAndFilename,
   studyType: Study,
   prevRecentLessons: RecentLessons
@@ -95,4 +95,4 @@ const updateRecentLessons = (
   return changedRecentLessons;
 };
 
-export default updateRecentLessons;
+export default getChangesToRecentLessons;
