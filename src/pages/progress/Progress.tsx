@@ -22,7 +22,11 @@ import { useAtom, useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
 import { globalUserSettingsState } from "../../states/globalUserSettingsState";
 import { useUpdateFlashcardsRecommendation } from "../../states/flashcardsProgressState";
-import { userGoalsState } from "../../states/userGoalsState";
+import {
+  newWordsGoalUnveiledState,
+  oldWordsGoalUnveiledState,
+  userGoalsState,
+} from "../../states/userGoalsState";
 import RecommendationBoxFallback from "./components/RecommendationBoxFallback";
 
 const skipButtonId = "js-flashcards-skip-button";
@@ -46,6 +50,12 @@ const Progress = (props: Props) => {
   const lessonIndex = useLessonIndex();
   const updateFlashcardsRecommendation = useUpdateFlashcardsRecommendation();
   const [userGoals, setUserGoals] = useAtom(userGoalsState);
+  const [oldWordsGoalUnveiled, setOldWordsGoalUnveiled] = useAtom(
+    oldWordsGoalUnveiledState
+  );
+  const [newWordsGoalUnveiled, setNewWordsGoalUnveiled] = useAtom(
+    newWordsGoalUnveiledState
+  );
   const mainHeading = useRef<HTMLHeadingElement>(null);
   const canvas = useRef(null);
   const firstGoalsRender = useRef(true);
@@ -59,8 +69,6 @@ const Progress = (props: Props) => {
   const [todayOldWordCount, setTodayOldWordCount] = useState(0);
   const [oldWordsGoalMet, setOldWordsGoalMet] = useState(false);
   const [newWordsGoalMet, setNewWordsGoalMet] = useState(false);
-  const [oldWordsGoalUnveiled, setOldWordsGoalUnveiled] = useState(false);
-  const [newWordsGoalUnveiled, setNewWordsGoalUnveiled] = useState(false);
   const [userGoalInputOldWords, setUserGoalInputOldWords] = useState(50);
   const [userGoalInputNewWords, setUserGoalInputNewWords] = useState(15);
   const [isBackupModalOpen, setBackupModalOpen] = useState(false);
