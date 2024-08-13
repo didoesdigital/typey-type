@@ -10,12 +10,13 @@ import PageLoading from "../../components/PageLoading";
 
 type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
 type LessonsRoutingProps = Optional<
-  & RouteComponentProps
-  & ComponentPropsWithoutRef<typeof Lesson>
-  & ComponentPropsWithoutRef<typeof CustomLessonSetup>
-  & ComponentPropsWithoutRef<typeof AsyncCustomLessonGenerator>
+  RouteComponentProps &
+    ComponentPropsWithoutRef<typeof Lesson> &
+    ComponentPropsWithoutRef<typeof CustomLessonSetup> &
+    ComponentPropsWithoutRef<typeof AsyncCustomLessonGenerator>,
   // TODO: check this. it's not passed from parent
-  , "lessonLength">
+  "lessonLength"
+>;
 
 const AsyncCustomLessonGenerator = Loadable({
   loader: () => import("./custom/CustomLessonGenerator"),
