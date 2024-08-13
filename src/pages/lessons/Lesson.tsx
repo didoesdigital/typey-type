@@ -27,7 +27,7 @@ import applyQueryParamsToUserSettings from "./components/UserSettings/applyQuery
 import getProgressRevisionUserSettings from "./components/UserSettings/getProgressRevisionUserSettings";
 import { revisionModeState } from "../../states/lessonState";
 import { recentLessonHistoryState } from "../../states/recentLessonHistoryState";
-import getChangesToRecentLessons from "../progress/RecentLessons/updateRecentLessons";
+import getChangesToRecentLessons from "../progress/RecentLessons/getChangesToRecentLessons";
 
 const isCustom = (pathname: string) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
