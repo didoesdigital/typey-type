@@ -1,7 +1,7 @@
 import { atomWithStorage } from "jotai/utils";
 import type { RecentLessonHistory } from "../pages/progress/components/RecentLessons";
 
-type RecentLessons = {
+export type RecentLessons = {
   history: RecentLessonHistory;
 };
 

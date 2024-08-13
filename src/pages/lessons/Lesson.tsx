@@ -27,9 +27,7 @@ import applyQueryParamsToUserSettings from "./components/UserSettings/applyQuery
 import getProgressRevisionUserSettings from "./components/UserSettings/getProgressRevisionUserSettings";
 import { revisionModeState } from "../../states/lessonState";
 import { recentLessonHistoryState } from "../../states/recentLessonHistoryState";
-import updateRecentLessons, {
-  trimBasenameAndFilename,
-} from "../progress/RecentLessons/updateRecentLessons";
+import updateRecentLessons from "../progress/RecentLessons/updateRecentLessons";
 
 const isCustom = (pathname: string) =>
   pathname === "/lessons/custom" || pathname === "/lessons/custom/setup";
@@ -276,35 +274,24 @@ const Lesson = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // This effect is to update recent lessons when the lesson path or study type changes:
-  const mostRecentLesson =
-    recentLessons?.history && recentLessons.history.length > 0
-      ? recentLessons.history[recentLessons.history.length - 1]?.path
-      : undefined;
-  useEffect(() => {
-    if (
-      lesson.path &&
-      mostRecentLesson &&
-      trimBasenameAndFilename(lesson.path) !== mostRecentLesson &&
-      !lesson.path.includes("/lessons/custom")
-    ) {
-      const updatedRecentLessons = updateRecentLessons(
+  const firstKeystroke = !startTime;
+  const updateRecentLessonsAndUpdateMarkup: React.ChangeEventHandler<
+    HTMLTextAreaElement
+  > = (event) => {
+    if (firstKeystroke) {
+      const changesToRecentLessons = updateRecentLessons(
         lesson.path,
         userSettings?.study,
         recentLessons
       );
-      setRecentLessons(updatedRecentLessons);
+
+      if (changesToRecentLessons) {
+        setRecentLessons(changesToRecentLessons);
+      }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    lesson.path,
-    mostRecentLesson,
-    // This changes too frequently to include as a dependency:
-    // recentLessons,
-    setRecentLessons,
-    // Note: If we change study from "discover" to "drill", the item in the recent lesson history will be *updated*
-    userSettings?.study,
-  ]);
+
+    updateMarkup(event);
+  };
 
   function stopAndCustomiseLesson() {
     stopLesson();
@@ -516,7 +503,7 @@ const Lesson = ({
                 totalWordCount={totalWordCount}
                 upcomingPhrases={upcomingPhrases}
                 updatePreset={updatePreset}
-                updateMarkup={updateMarkup.bind(this)}
+                updateMarkup={updateRecentLessonsAndUpdateMarkup}
               />
             )}
           />
