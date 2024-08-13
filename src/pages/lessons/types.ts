@@ -48,7 +48,6 @@ export type LessonProps = {
   startTime: any;
   targetStrokeCount: any;
   timer: number;
-  topSpeedPersonalBest: any;
   totalNumberOfHintedWords: any;
   totalNumberOfLowExposuresSeen: any;
   totalNumberOfMatchedWords: any;
@@ -76,7 +75,6 @@ export type FinishedProps = {
   settings: any;
   startTime: any;
   timer: number;
-  topSpeedPersonalBest: any;
   totalNumberOfHintedWords: any;
   totalNumberOfLowExposuresSeen: any;
   totalNumberOfMatchedWords: any;
@@ -86,5 +84,4 @@ export type FinishedProps = {
   totalWordCount: any;
   updatePreset: (studyType: Study) => void;
   updateRevisionMaterial: any;
-  updateTopSpeedPersonalBest: any;
 };

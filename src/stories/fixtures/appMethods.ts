@@ -23,8 +23,8 @@ const appMethods: AppMethods = {
   updateMultipleMetWords: () => undefined,
   updatePersonalDictionaries: () => undefined,
   updateRevisionMaterial: () => undefined,
-  updateStartingMetWordsAndCounts: () => console.log("update starting met words and counts"),
-  updateTopSpeedPersonalBest: () => undefined,
-}
+  updateStartingMetWordsAndCounts: () =>
+    console.log("update starting met words and counts"),
+};
 
 export default appMethods;

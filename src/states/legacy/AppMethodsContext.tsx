@@ -35,7 +35,6 @@ export type AppMethods = {
   updatePersonalDictionaries: typeof App.prototype.updatePersonalDictionaries,
   updateRevisionMaterial: typeof updateRevisionMaterial,
   updateStartingMetWordsAndCounts: typeof App.prototype.updateStartingMetWordsAndCounts,
-  updateTopSpeedPersonalBest: typeof App.prototype.updateTopSpeedPersonalBest,
 }
 
 const AppMethodsContext = createContext<AppMethods>(null!);

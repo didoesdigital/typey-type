@@ -70,7 +70,6 @@ const Lesson = ({
   startTime,
   targetStrokeCount,
   timer,
-  topSpeedPersonalBest,
   totalNumberOfHintedWords,
   totalNumberOfLowExposuresSeen,
   totalNumberOfMatchedWords,
@@ -99,7 +98,6 @@ const Lesson = ({
     updateMarkup,
     updatePersonalDictionaries,
     updateRevisionMaterial,
-    updateTopSpeedPersonalBest,
   } = useAppMethods();
   const lessonIndex = useLessonIndex();
   const [userSettings, setUserSettings] = useAtom(userSettingsState);
@@ -396,11 +394,9 @@ const Lesson = ({
               settings={lesson.settings}
               startTime={startTime}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               revisionMode={revisionMode}
               updatePreset={updatePreset}
               updateRevisionMaterial={updateRevisionMaterial}
-              updateTopSpeedPersonalBest={updateTopSpeedPersonalBest}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
               totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}

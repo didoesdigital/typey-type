@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useAtom } from "jotai";
 import LessonCanvasFooter from "./LessonCanvasFooter";
 import FinishedZeroAndEmptyStateMessage from "./FinishedZeroAndEmptyState";
 import UserSettings from "./UserSettings/UserSettings";
@@ -16,6 +17,11 @@ import LessonFinePrintFooter from "./LessonFinePrintFooter";
 import getNumericAccuracy from "../utilities/getNumericAccuracy";
 import type { ConfettiConfig } from "./FinishedSummaryHeadings";
 import type { FinishedProps, LessonData, TransformedData } from "../types";
+import {
+  newTopSpeedPersonalBestState,
+  newTopSpeedTodayState,
+  topSpeedPersonalBestState,
+} from "../../../states/finishedLessonState";
 
 const calculateScores = (duration: number, wordCount: number) =>
   duration > 0
@@ -46,7 +52,6 @@ const Finished = ({
   settings,
   startTime,
   timer,
-  topSpeedPersonalBest,
   totalNumberOfHintedWords,
   totalNumberOfLowExposuresSeen,
   totalNumberOfMatchedWords,
@@ -56,14 +61,20 @@ const Finished = ({
   totalWordCount,
   updatePreset,
   updateRevisionMaterial,
-  updateTopSpeedPersonalBest,
 }: FinishedProps) => {
   const location = useLocation();
 
   const [chartData, setChartData] = useState<TransformedData>(null);
   const [confettiConfig, setConfettiConfig] = useState<ConfettiConfig>(null);
-  const [newTopSpeedPersonalBest, setNewTopSpeedPersonalBest] = useState(false);
-  const [newTopSpeedToday, setNewTopSpeedToday] = useState(false);
+  const [topSpeedPersonalBest, setTopSpeedPersonalBest] = useAtom(
+    topSpeedPersonalBestState
+  );
+  const [newTopSpeedPersonalBest, setNewTopSpeedPersonalBest] = useAtom(
+    newTopSpeedPersonalBestState
+  );
+  const [newTopSpeedToday, setNewTopSpeedToday] = useAtom(
+    newTopSpeedTodayState
+  );
   const [numericAccuracy, setNumericAccuracy] = useState(0);
   const [wpm, setWpm] = useState(0);
 
@@ -103,7 +114,7 @@ const Finished = ({
   // update top speed today or ever and headings and confetti
   useEffect(() => {
     const fasterSpeedToday = wpm > topSpeedToday;
-    const fasterPersonalBest = wpm > topSpeedPersonalBest;
+    const fasterPersonalBest = wpm > topSpeedPersonalBest?.wpm ?? 0;
     const minimumStrokes = currentLessonStrokes.length > 3;
     const minimumSpeed = wpm > 3;
     const thirtyStrokesOrNotRevision =
@@ -118,7 +129,7 @@ const Finished = ({
     ) {
       setConfettiConfig({ sparsity: 17, colors: 5 });
       topSpeedToday = wpm;
-      updateTopSpeedPersonalBest(wpm);
+      setTopSpeedPersonalBest({ wpm });
       setNewTopSpeedPersonalBest(true);
       setNewTopSpeedToday(true);
     } else if (

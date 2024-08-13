@@ -88,7 +88,6 @@ class App extends Component {
       showStrokesInLesson: false,
       targetStrokeCount: 1,
       timer: 0,
-      topSpeedPersonalBest: 0,
       totalNumberOfMatchedWords: 0,
       numberOfMatchedChars: 0,
       totalNumberOfMatchedChars: 0,
@@ -186,7 +185,6 @@ class App extends Component {
   setPersonalPreferences(source) {
     let metWordsFromStateOrArg = this.state.metWords;
     let lessonsProgressState = this.state.lessonsProgress;
-    let topSpeedPersonalBestState = this.state.topSpeedPersonalBest;
     if (source && source !== '') {
       try {
         let parsedSource = JSON.parse(source);
@@ -197,7 +195,7 @@ class App extends Component {
       catch (error) { }
     }
     else {
-      [metWordsFromStateOrArg, lessonsProgressState, topSpeedPersonalBestState] = loadPersonalPreferences();
+      [metWordsFromStateOrArg, lessonsProgressState] = loadPersonalPreferences();
     }
 
     let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
@@ -205,13 +203,11 @@ class App extends Component {
 
     this.setState({
       lessonsProgress: lessonsProgressState,
-      topSpeedPersonalBest: topSpeedPersonalBestState,
       metWords: metWordsFromStateOrArg,
       yourSeenWordCount: calculatedYourSeenWordCount,
       yourMemorisedWordCount: calculatedYourMemorisedWordCount,
     }, () => {
       writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
-      writePersonalPreferences('topSpeedPersonalBest', this.state.topSpeedPersonalBest);
       writePersonalPreferences('metWords', this.state.metWords);
       this.setupLesson();
     });
@@ -314,11 +310,6 @@ class App extends Component {
       yourSeenWordCount: calculateSeenWordCount(providedMetWords),
       yourMemorisedWordCount: calculateMemorisedWordCount(providedMetWords)
     });
-  }
-
-  updateTopSpeedPersonalBest(wpm) {
-    this.setState({topSpeedPersonalBest: wpm});
-    writePersonalPreferences('topSpeedPersonalBest', wpm);
   }
 
   // set user settings
@@ -1005,7 +996,6 @@ class App extends Component {
               updatePersonalDictionaries: this.updatePersonalDictionaries.bind(this),
               updateRevisionMaterial: updateRevisionMaterial.bind(this),
               updateStartingMetWordsAndCounts: this.updateStartingMetWordsAndCounts.bind(this),
-              updateTopSpeedPersonalBest: this.updateTopSpeedPersonalBest.bind(this),
             }
           }>
             <AppRoutes

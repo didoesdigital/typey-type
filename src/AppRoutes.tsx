@@ -128,7 +128,6 @@ type AppStateForDescendants = {
   showStrokesInLesson: boolean,
   targetStrokeCount: number,
   timer: number,
-  topSpeedPersonalBest: number,
   totalNumberOfMatchedWords: number,
 // numberOfMatchedChars: 0,
 // totalNumberOfMatchedChars: 0,
@@ -383,7 +382,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       showStrokesInLesson={appState.showStrokesInLesson}
                       targetStrokeCount={appState.targetStrokeCount}
                       timer={appState.timer}
-                      topSpeedPersonalBest={appState.topSpeedPersonalBest}
                       totalNumberOfMatchedWords={
                         appState.totalNumberOfMatchedWords
                       }

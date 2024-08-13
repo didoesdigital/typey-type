@@ -53,7 +53,6 @@ const Lessons = ({
   startTime,
   targetStrokeCount,
   timer,
-  topSpeedPersonalBest,
   totalNumberOfHintedWords,
   totalNumberOfLowExposuresSeen,
   totalNumberOfMatchedWords,
@@ -94,7 +93,6 @@ const Lessons = ({
               startTime={startTime}
               targetStrokeCount={targetStrokeCount}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
@@ -135,7 +133,6 @@ const Lessons = ({
               startTime={startTime}
               targetStrokeCount={targetStrokeCount}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
@@ -176,7 +173,6 @@ const Lessons = ({
               startTime={startTime}
               targetStrokeCount={targetStrokeCount}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
@@ -217,7 +213,6 @@ const Lessons = ({
               startTime={startTime}
               targetStrokeCount={targetStrokeCount}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
@@ -258,7 +253,6 @@ const Lessons = ({
               startTime={startTime}
               targetStrokeCount={targetStrokeCount}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
@@ -299,7 +293,6 @@ const Lessons = ({
               startTime={startTime}
               targetStrokeCount={targetStrokeCount}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
@@ -341,7 +334,6 @@ const Lessons = ({
               startTime={startTime}
               targetStrokeCount={targetStrokeCount}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
@@ -383,7 +375,6 @@ const Lessons = ({
               startTime={startTime}
               targetStrokeCount={targetStrokeCount}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
@@ -425,7 +416,6 @@ const Lessons = ({
               startTime={startTime}
               targetStrokeCount={targetStrokeCount}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
@@ -504,7 +494,6 @@ const Lessons = ({
               startTime={startTime}
               targetStrokeCount={targetStrokeCount}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
@@ -546,7 +535,6 @@ const Lessons = ({
               startTime={startTime}
               targetStrokeCount={targetStrokeCount}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
@@ -588,7 +576,6 @@ const Lessons = ({
               startTime={startTime}
               targetStrokeCount={targetStrokeCount}
               timer={timer}
-              topSpeedPersonalBest={topSpeedPersonalBest}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
               totalNumberOfLowExposuresSeen={totalNumberOfLowExposuresSeen}
               totalNumberOfMatchedWords={totalNumberOfMatchedWords}
@@ -606,9 +593,7 @@ const Lessons = ({
           path={match.url}
           render={() => (
             <Suspense fallback={<PageLoading />}>
-              <LessonsIndex
-                customLesson={customLesson}
-              />
+              <LessonsIndex customLesson={customLesson} />
             </Suspense>
           )}
         />
