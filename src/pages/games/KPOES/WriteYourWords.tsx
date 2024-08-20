@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useAtomValue } from "jotai";
 import PseudoContentButton from "../../../components/PseudoContentButton";
 import YourWordsHighlighted from "./YourWordsHighlighted";
 import Legend from "./Legend";
 import WordCount from "./WordCount";
+import { spacePlacementState } from "../../../states/userSettingsState";
 
 import type { MetWords, UserSettings } from "../../../types";
+import updateMultipleMetWords from "./updateMultipleMetWords";
 
 type Props = {
   metWords: MetWords;
-  updateMultipleMetWords: (newMetWords: string[]) => void;
+  updateMultipleMetWords: typeof updateMultipleMetWords;
   userSettings: UserSettings;
 };
 
@@ -24,6 +27,7 @@ const YourWords = ({
   const [wordCount, setWordCount] = useState(0);
   const [yourWords, setYourWords] = useState("");
   const [done, setDone] = useState(false);
+  const spacePlacement = useAtomValue(spacePlacementState);
 
   useEffect(() => {
     try {
@@ -63,7 +67,7 @@ const YourWords = ({
   const doneHandler: React.MouseEventHandler = () => {
     setDone(true);
 
-    updateMultipleMetWords(yourWords.split(/\s/));
+    updateMultipleMetWords(yourWords.split(/\s/), spacePlacement);
 
     const copyButton = document.querySelector(
       ".js-clipboard-button"

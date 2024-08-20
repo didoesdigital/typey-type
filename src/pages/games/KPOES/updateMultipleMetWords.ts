@@ -1,16 +1,18 @@
 import { writePersonalPreferences } from "../../../utils/typey-type";
+import type { SpacePlacement } from "../../../types";
 
-function updateMultipleMetWords(newMetWords: string[]) {
+function updateMultipleMetWords(
+  newMetWords: string[],
+  spacePlacement: SpacePlacement
+) {
   // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation.
   const newMetWordsState = Object.assign({}, this.state.metWords);
 
   for (const newMetWord of newMetWords) {
     const phraseText =
-      // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation.
-      this.state.userSettings.spacePlacement === "spaceBeforeOutput"
+      spacePlacement === "spaceBeforeOutput"
         ? " " + newMetWord
-        : // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation.
-        this.state.userSettings.spacePlacement === "spaceAfterOutput"
+        : spacePlacement === "spaceAfterOutput"
         ? newMetWord + " "
         : newMetWord;
     const meetingsCount = newMetWordsState[phraseText] || 0;

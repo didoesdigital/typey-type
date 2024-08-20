@@ -4,6 +4,7 @@ import Prompt from "./Prompt";
 import WriteYourWords from "./WriteYourWords";
 import { ReactComponent as ComposingRobot } from "../../../images/ComposingRobot.svg";
 import StrokesForWords from "../../../components/StrokesForWords";
+import updateMultipleMetWords from "./updateMultipleMetWords";
 import "./styles.scss";
 
 import type {
@@ -18,7 +19,7 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
   userSettings: any;
-  updateMultipleMetWords: (newMetWords: string[]) => void;
+  updateMultipleMetWords: typeof updateMultipleMetWords;
 };
 
 const gameName = "KPOES";
