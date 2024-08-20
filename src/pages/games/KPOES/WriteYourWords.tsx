@@ -47,22 +47,21 @@ const YourWords = ({
     }
   }, []);
 
-  const changeYourWordsHandler: React.ChangeEventHandler<HTMLTextAreaElement> =
-    (event) => {
-      setWordCount(
-        event.target.value.trim().split(/\s/).filter(Boolean).length
-      );
+  const changeYourWordsHandler: React.ChangeEventHandler<
+    HTMLTextAreaElement
+  > = (event) => {
+    setWordCount(event.target.value.trim().split(/\s/).filter(Boolean).length);
 
-      const slicedYourWords = event.target.value.slice(0, 10000);
-      setYourWords(slicedYourWords);
+    const slicedYourWords = event.target.value.slice(0, 10000);
+    setYourWords(slicedYourWords);
 
-      try {
-        window.localStorage.setItem(wordsStorageKey, slicedYourWords);
-        window.localStorage.setItem(timeStorageKey, `${Date.now()}`);
-      } catch (error) {
-        console.error("Unable to write to local storage. ", error);
-      }
-    };
+    try {
+      window.localStorage.setItem(wordsStorageKey, slicedYourWords);
+      window.localStorage.setItem(timeStorageKey, `${Date.now()}`);
+    } catch (error) {
+      console.error("Unable to write to local storage. ", error);
+    }
+  };
 
   const doneHandler: React.MouseEventHandler = () => {
     setDone(true);
