@@ -886,7 +886,6 @@ const DictionaryManagement = (props) => {
               >
                 <p>
                   <PseudoContentButton
-                    type="submit"
                     className="pseudo-text--applied button mt1"
                   >
                     Apply
