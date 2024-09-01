@@ -1,6 +1,9 @@
+import isNormalInteger from "../../../utils/isNormalInteger";
 import { actions } from "../utilities/gameActions";
 
 export const roundToWin = 8;
+
+const roundToWinStorageKey = "typey-KAOES-rounds";
 
 const defaultState = {
   firstGuess: true,
@@ -14,6 +17,22 @@ export const initConfig = (state) => ({
 });
 
 export const gameReducer = (state, action) => {
+  let experimentalRoundToWin = roundToWin;
+
+  try {
+    let storageRounds =
+      window.localStorage.getItem(roundToWinStorageKey) ?? "0";
+    if (
+      isNormalInteger(storageRounds) &&
+      +storageRounds > 1 &&
+      +storageRounds < 10000
+    ) {
+      experimentalRoundToWin = +storageRounds;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+
   switch (action?.type) {
     case actions.makeGuess:
       return {
@@ -21,7 +40,7 @@ export const gameReducer = (state, action) => {
         firstGuess: false,
       };
     case actions.roundCompleted:
-      return state.roundIndex + 1 === roundToWin
+      return state.roundIndex + 1 === experimentalRoundToWin
         ? {
             ...state,
             gameComplete: true,
