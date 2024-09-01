@@ -179,12 +179,20 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
       setRightWrongColor(rightColor);
       dispatch({ type: actions.roundCompleted });
     } else {
-      // Note: we don't auto-clear incorrect steno input because we need to allow multi-character
-      // keys like "-R" to be typed, but qwerty steno is always 1 char so this should make it easier
-      // for people to try again with another character
+      // NOTE: we don't auto-clear just *any* incorrect steno input because we
+      // need to allow multi-character keys like "-R" to be typed. Qwerty steno
+      // is always 1 char so we auto-clear that incorrect input to make it
+      // easier for people to try again with another character. For people
+      // using raw steno and raw-steno.json with no * stroke for =undo, we
+      // auto-clear incorrect input ending in ` *`
       if (inputForKAOES === "qwerty") {
         setTypedText("");
+      } else {
+        if (typedStenoKey.endsWith(" *")) {
+          setTypedText("");
+        }
       }
+
       setStenoStroke(stenoStroke.set(comparableTypedKeyNumber));
       setRightWrongColor(wrongColor);
     }
