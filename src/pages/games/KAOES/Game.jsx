@@ -414,7 +414,8 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
                             </a>{" "}
                             and set it as the highest priority dictionary in
                             Plover. When you're done playing the KAOES game,
-                            disable the raw steno dictionary.
+                            disable the raw steno dictionary. Typey Type will
+                            clear incorrect raw steno input ending in “&nbsp;*”.
                           </li>
                           <li>
                             Turn off all of your steno dictionaries to produce
@@ -432,9 +433,8 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
                         <h4>QWERTY steno</h4>
                         <p>
                           When the “QWERTY steno” setting is on, type regular
-                          QWERTY letters in the equivalent position of where the
-                          matching steno key would be. For example, to press the
-                          right{" "}
+                          QWERTY letters in the equivalent position of the
+                          matching steno key. For example, to press the right{" "}
                           <kbd className="steno-stroke steno-stroke--subtle">
                             -R
                           </kbd>{" "}
