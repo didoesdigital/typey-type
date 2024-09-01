@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import GoogleAnalytics from "react-ga4";
 import ReactModal from "react-modal";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import * as Confetti from "../../../utils/confetti.js";
@@ -22,10 +23,6 @@ import { ReactComponent as MischievousRobot } from "../../../images/MischievousR
 import { choosePuzzleKey, prettyKey } from "./utilities";
 import * as stroke from "../../../utils/stroke";
 import { mapQWERTYKeysToStenoStroke } from "../../../utils/typey-type";
-import OutboundLink from "../../../components/OutboundLink";
-import { IconExternal } from "../../../components/IconExternal";
-import { Tooltip } from "react-tippy";
-import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 
 const stenoTypedTextToKeysMapping = {
   "-Z": stroke.Z,
@@ -88,8 +85,6 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
   const canvasRef = useRef(null);
   const canvasWidth = Math.floor(window.innerWidth);
   const canvasHeight = Math.floor(window.innerHeight);
-
-  const announceTooltip = useAnnounceTooltip();
 
   const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
     useState("");
@@ -195,6 +190,14 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
     }
     setPreviousStenoStroke(tmpBoard.set(comparableTypedKeyNumber));
     dispatch({ type: actions.makeGuess });
+  };
+
+  const trackDownloadDictionary = () => {
+    GoogleAnalytics.event({
+      category: "Downloads",
+      action: "Click",
+      label: "Raw steno dictionary",
+    });
   };
 
   return (
@@ -391,37 +394,16 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
                         </p>
                         <ol>
                           <li>
-                            Download{" "}
-                            <OutboundLink
-                              className="no-underline"
-                              eventLabel="a raw steno dictionary (external link opens in new tab)"
-                              aria-label="a raw steno dictionary (external link opens in new tab)"
-                              to="https://github.com/didoesdigital/steno-dictionaries?tab=readme-ov-file#raw-steno-dictionary"
+                            <a
+                              href={
+                                process.env.PUBLIC_URL +
+                                "/dictionaries/didoesdigital/raw-steno.json"
+                              }
+                              download={"raw-steno.json"}
+                              onClick={trackDownloadDictionary}
                             >
-                              a raw steno dictionary
-                              {/* @ts-ignore */}
-                              <Tooltip
-                                title="(external link opens in new tab)"
-                                animation="shift"
-                                arrow="true"
-                                className=""
-                                duration="200"
-                                tabIndex="0"
-                                tag="span"
-                                theme="didoesdigital"
-                                trigger="mouseenter focus click"
-                                onShow={announceTooltip}
-                              >
-                                <IconExternal
-                                  ariaHidden="true"
-                                  role="presentation"
-                                  iconWidth="24"
-                                  iconHeight="24"
-                                  className="ml1 svg-icon-wrapper svg-baseline"
-                                  iconTitle=""
-                                />
-                              </Tooltip>
-                            </OutboundLink>{" "}
+                              Download a raw steno dictionary
+                            </a>{" "}
                             and set it as the highest priority dictionary in
                             Plover. When you're done playing the KAOES game,
                             disable the raw steno dictionary.
