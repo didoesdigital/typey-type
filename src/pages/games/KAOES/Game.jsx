@@ -22,6 +22,10 @@ import { ReactComponent as MischievousRobot } from "../../../images/MischievousR
 import { choosePuzzleKey, prettyKey } from "./utilities";
 import * as stroke from "../../../utils/stroke";
 import { mapQWERTYKeysToStenoStroke } from "../../../utils/typey-type";
+import OutboundLink from "../../../components/OutboundLink";
+import { IconExternal } from "../../../components/IconExternal";
+import { Tooltip } from "react-tippy";
+import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 
 const stenoTypedTextToKeysMapping = {
   "-Z": stroke.Z,
@@ -84,6 +88,8 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
   const canvasRef = useRef(null);
   const canvasWidth = Math.floor(window.innerWidth);
   const canvasHeight = Math.floor(window.innerHeight);
+
+  const announceTooltip = useAnnounceTooltip();
 
   const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
     useState("");
@@ -377,21 +383,62 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
                         </p>
                         <h4>Raw steno</h4>
                         <p>
-                          When the “Raw steno” setting is on, you can turn off
-                          all of your steno dictionaries to produce raw steno
-                          output. That way, when you press the{" "}
-                          <kbd className="steno-stroke steno-stroke--subtle">
-                            S
-                          </kbd>{" "}
-                          key, the steno engine will output “S” instead of “is”.
-                          Likewise, pressing the{" "}
-                          <kbd className="steno-stroke steno-stroke--subtle">
-                            -T
-                          </kbd>{" "}
-                          key will output “-T” instead of “the”. The dash is
+                          When the “Raw steno” setting is on, you need to type
+                          “-T” to prove that you know that key. The dash is
                           necessary for keys on the right-hand side of the
-                          board.
+                          board. There are 2 main options to type “raw steno”
+                          keys like that:
                         </p>
+                        <ol>
+                          <li>
+                            Download{" "}
+                            <OutboundLink
+                              className="no-underline"
+                              eventLabel="a raw steno dictionary (external link opens in new tab)"
+                              aria-label="a raw steno dictionary (external link opens in new tab)"
+                              to="https://github.com/didoesdigital/steno-dictionaries?tab=readme-ov-file#raw-steno-dictionary"
+                            >
+                              a raw steno dictionary
+                              {/* @ts-ignore */}
+                              <Tooltip
+                                title="(external link opens in new tab)"
+                                animation="shift"
+                                arrow="true"
+                                className=""
+                                duration="200"
+                                tabIndex="0"
+                                tag="span"
+                                theme="didoesdigital"
+                                trigger="mouseenter focus click"
+                                onShow={announceTooltip}
+                              >
+                                <IconExternal
+                                  ariaHidden="true"
+                                  role="presentation"
+                                  iconWidth="24"
+                                  iconHeight="24"
+                                  className="ml1 svg-icon-wrapper svg-baseline"
+                                  iconTitle=""
+                                />
+                              </Tooltip>
+                            </OutboundLink>{" "}
+                            and set it as the highest priority dictionary in
+                            Plover. When you're done playing the KAOES game,
+                            disable the raw steno dictionary.
+                          </li>
+                          <li>
+                            Turn off all of your steno dictionaries to produce
+                            raw steno output. That way, when you press the{" "}
+                            <kbd className="steno-stroke steno-stroke--subtle">
+                              -T
+                            </kbd>{" "}
+                            key, the steno engine will output “-T” instead of
+                            “the”. Because the “*” key in Plover does undo by
+                            default, you may still need to click the “*” key or
+                            otherwise find a way to write “*”.
+                          </li>
+                        </ol>
+
                         <h4>QWERTY steno</h4>
                         <p>
                           When the “QWERTY steno” setting is on, type regular
