@@ -11,7 +11,7 @@ const Round: FC<RoundProps> = ({ round, roundToWin }) => (
     Round:{" "}
     <TransitionGroup className={"dib"} component={"span"} key={round}>
       <CSSTransition timeout={500} classNames="bloop" appear={true}>
-        <strong className="dib">{round}</strong>
+        <strong className="dib">{round < 1 ? "∞" : round}</strong>
       </CSSTransition>
     </TransitionGroup>{" "}
     of {roundToWin}

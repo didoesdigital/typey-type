@@ -242,7 +242,8 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
               />
               <div id={"good-guess"} className="flex flex-grow">
                 <GameProgress
-                  round={state.roundIndex + 1}
+                  // NOTE: this is a hack to show "∞" when current round is higher than expected
+                  round={state.roundIndex + 1 > 9 ? -1 : state.roundIndex + 1}
                   roundToWin={roundToWin}
                 />
               </div>
