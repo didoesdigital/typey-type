@@ -20,14 +20,14 @@ const Round: FC<RoundProps> = ({ round, roundToWin }) => (
 );
 
 type LevelProps = {
-  level: number;
-  levelToWin: number;
+  level?: number;
+  levelToWin?: number;
 };
 
 const Level: FC<LevelProps> = ({ level, levelToWin }) => {
   return level ? (
     <>
-      Level: <strong>{level || 1}</strong> of {levelToWin}
+      Level: <strong>{level || 1}</strong> of {levelToWin || 1}
     </>
   ) : null;
 };
@@ -35,8 +35,8 @@ const Level: FC<LevelProps> = ({ level, levelToWin }) => {
 type Props = {
   round: number;
   roundToWin: number;
-  level: number;
-  levelToWin: number;
+  level?: number;
+  levelToWin?: number;
 };
 
 const GameProgress: FC<Props> = ({ level, levelToWin, round, roundToWin }) => (
