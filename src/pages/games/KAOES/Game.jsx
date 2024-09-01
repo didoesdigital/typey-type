@@ -410,7 +410,7 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
                               download={"raw-steno.json"}
                               onClick={trackDownloadDictionary}
                             >
-                              Download a raw steno dictionary
+                              Download a dictionary to type raw steno
                             </a>{" "}
                             and set it as the highest priority dictionary in
                             Plover. When you're done playing the KAOES game,
