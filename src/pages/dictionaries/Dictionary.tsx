@@ -4,11 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 import DictionaryNotFound from "./DictionaryNotFound";
 import GoogleAnalytics from "react-ga4";
 import PseudoContentButton from "../../components/PseudoContentButton";
-import { IconExternal } from "../../components/IconExternal";
-import { Tooltip } from "react-tippy";
 import { lookUpDictionaryInIndex } from "../../utils/typey-type";
 import Subheader from "../../components/Subheader";
-import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
 
 import type { PrettyLessonTitle, StenoDictionary } from "../../types";
@@ -32,34 +29,11 @@ const isInternalDictLink = (dictLink: DictLink) =>
 
 const getExternalLink = (
   dictLink: DictLink,
-  announceTooltip: (this: HTMLElement) => void
 ) =>
   isInternalDictLink(dictLink) ? null : (
     <p className="mt3">
       <a href={dictLink} target="_blank" rel="noopener noreferrer">
-        Learn more
-        {/* @ts-ignore */}
-        <Tooltip
-          title="Opens in a new tab"
-          animation="shift"
-          arrow="true"
-          className=""
-          duration="200"
-          tabIndex={0}
-          tag="span"
-          theme="didoesdigital"
-          trigger="mouseenter focus click"
-          onShow={announceTooltip}
-        >
-          <IconExternal
-            ariaHidden="true"
-            role="presentation"
-            iconWidth="24"
-            iconHeight="24"
-            className="ml1 svg-icon-wrapper svg-baseline"
-            iconTitle=""
-          />
-        </Tooltip>
+        Learn more (opens in new tab)
       </a>
     </p>
   );
@@ -102,7 +76,6 @@ const getDictionaryContentsString = (dictContents: StenoDictionary) => {
 const Dictionary = () => {
   const dictionaryIndex = useAtomValue(dictionaryIndexState);
   const mainHeading = useRef<HTMLHeadingElement>(null);
-  const announceTooltip = useAnnounceTooltip();
   const { updateMessage } = useAnnouncerApi();
 
   const [loadingDictionaryContents, setLoadingDictionaryContents] =
@@ -212,7 +185,7 @@ const Dictionary = () => {
         ""
       );
 
-    const externalLink = getExternalLink(dictionary.link, announceTooltip);
+    const externalLink = getExternalLink(dictionary.link);
     const internalLink = getInternalLink(dictionary.link, dictionary.title);
 
     return (
