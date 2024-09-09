@@ -1,9 +1,6 @@
 import React from "react";
 import OutboundLink from "../../../../components/OutboundLink";
 import { Link } from "react-router-dom";
-import { IconExternal } from "../../../../components/IconExternal";
-import { Tooltip } from "react-tippy";
-import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTooltip";
 
 export type CustomLessonMaterialValidationState =
   | "unvalidated"
@@ -24,8 +21,6 @@ const CustomLessonIntro = ({
   customLessonMaterialValidationState,
   customLessonMaterialValidationMessages,
 }: Props) => {
-  const announceTooltip = useAnnounceTooltip();
-
   let validationStateStyle = "";
   let listOfValidationMessages;
   switch (customLessonMaterialValidationState) {
@@ -63,31 +58,10 @@ const CustomLessonIntro = ({
               spreadsheet. See the&nbsp;&#8203;
               <OutboundLink
                 eventLabel="community’s lessons"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
               >
-                community’s lessons
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="Opens in a new tab"
-                  animation="shift"
-                  arrow="true"
-                  className=""
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
+                community’s lessons (opens in new tab)
               </OutboundLink>
               .
             </p>
@@ -150,7 +124,7 @@ examples.	KP-PLS TP-PL"
         </div>
         <div className="mt1 mw-336 flex-grow">
           <h3 className="mt3">Community lessons</h3>
-          <p>
+          <p className="text-balance">
             Community lessons cover topics like spacing, capitalisation,
             quotations, and using{" "}
             <span className="steno-stroke steno-stroke--subtle px05">
@@ -160,34 +134,10 @@ examples.	KP-PLS TP-PL"
             faster, add your custom lessons to the{" "}
             <OutboundLink
               eventLabel="community's lessons"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
             >
-              community’s{" "}
-              <span className="whitespace-nowrap">
-                lessons
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="Opens in a new tab"
-                  animation="shift"
-                  arrow="true"
-                  className=""
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
+              community’s lessons (opens in new tab)
             </OutboundLink>
             .
           </p>
