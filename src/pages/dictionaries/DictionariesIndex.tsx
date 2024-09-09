@@ -268,40 +268,6 @@ const DictionariesIndex = ({
                 </OutboundLink>
                 .
               </p>
-
-              <p className="text-small">
-                You might also be interested in{" "}
-                <OutboundLink
-                  eventLabel="Stenodict"
-                  aria-label="Stenodict (external link opens in new tab)"
-                  to="http://www.openstenoproject.org/stenodict/"
-                >
-                  Stenodict
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="Opens in a new tab"
-                    animation="shift"
-                    arrow="true"
-                    className=""
-                    duration="200"
-                    tabIndex={0}
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </OutboundLink>
-                .
-              </p>
             </div>
 
             <div className="mw-584">
