@@ -1,6 +1,6 @@
 import React from "react";
 import Icon from "./Icon";
-import ExternalIcon from "./icon-images/External.svg";
+import ClosingCross from "./icon-images/ClosingCross.svg";
 import "./Icon.stories.scss";
 
 import type { Meta, StoryObj } from "@storybook/react";
@@ -13,15 +13,15 @@ const meta: Meta<typeof Icon> = {
 export default meta;
 type Story = StoryObj<typeof Icon>;
 
-export const ExternalIconStory: Story = {
+export const ClosingCrossIconStory: Story = {
   args: {
-    iconSVGImport: ExternalIcon,
+    iconSVGImport: ClosingCross,
   },
 };
 
 export const MultipleIcons: Story = {
   args: {
-    ...ExternalIconStory.args,
+    ...ClosingCrossIconStory.args,
   },
   render: (args) => {
     return (
@@ -35,7 +35,7 @@ export const MultipleIcons: Story = {
 
 export const Colors: Story = {
   args: {
-    ...ExternalIconStory.args,
+    ...ClosingCrossIconStory.args,
     color: "#ff1493",
   },
 };
@@ -50,7 +50,7 @@ const buttonStyles: React.CSSProperties = {
 
 export const Sizes: Story = {
   args: {
-    ...ExternalIconStory.args,
+    ...ClosingCrossIconStory.args,
   },
   render: (args) => {
     return (
@@ -82,7 +82,7 @@ export const Sizes: Story = {
 /** For an icon-only button, use `aria-label="Example action label"` on the button */
 export const IconOnlyButton: Story = {
   args: {
-    ...ExternalIconStory.args,
+    ...ClosingCrossIconStory.args,
   },
   render: (args) => {
     return (
@@ -96,7 +96,7 @@ export const IconOnlyButton: Story = {
 /** Using a custom color on an icon in a button will override hover/focus/active styles. You can use `currentColor` to make it match the parent button hover/focus/active styles. */
 export const ButtonWithCustomColor: Story = {
   args: {
-    ...ExternalIconStory.args,
+    ...ClosingCrossIconStory.args,
   },
   render: (args) => {
     return (
@@ -108,8 +108,8 @@ export const ButtonWithCustomColor: Story = {
         }}
       >
         <button style={buttonStyles}>
-          <Icon {...args} width={"12px"} height={"12px"} color="#ff1493" /> No hover
-          color
+          <Icon {...args} width={"12px"} height={"12px"} color="#ff1493" /> No
+          hover color
         </button>
         <button style={buttonStyles} className="test-button">
           <Icon {...args} width={"12px"} height={"12px"} color="currentColor" />{" "}

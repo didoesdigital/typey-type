@@ -1,7 +1,7 @@
 import React from "react";
 
 interface IconProps {
-  /** e.g. `ExternalIcon` with `import ExternalIcon from "./icon-images/External.svg";` */
+  /** e.g. `ClosingCross` with `import ClosingCross from "./icon-images/ClosingCross.svg";` */
   iconSVGImport: string;
   /** Use `em` unit to adjust icon with font size e.g. `1em` */
   width?: string;
