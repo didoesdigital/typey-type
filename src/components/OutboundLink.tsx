@@ -8,6 +8,7 @@ type Props = {
   eventLabel: string;
   onClick?: React.MouseEventHandler;
   style?: React.CSSProperties;
+  newTabAndIUnderstandTheAccessibilityImplications?: boolean;
   to: string;
 };
 
@@ -18,6 +19,7 @@ const OutboundLink = ({
   "aria-label": ariaLabel,
   onClick,
   style,
+  newTabAndIUnderstandTheAccessibilityImplications,
   to,
 }: Props) => {
   const clickHandler: React.MouseEventHandler = (e) => {
@@ -32,6 +34,17 @@ const OutboundLink = ({
     }
   };
 
+  const newTabProps = newTabAndIUnderstandTheAccessibilityImplications
+    ? {
+        target: "_blank",
+        rel: "noopener noreferrer",
+      }
+    : // FIXME: replace this part of the ternary expression with an empty object once new prop is rolled out everywhere
+      {
+        target: "_blank",
+        rel: "noopener noreferrer",
+      };
+
   return (
     <a
       href={to}
@@ -39,8 +52,7 @@ const OutboundLink = ({
       className={className}
       onClick={clickHandler}
       style={style}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...newTabProps}
     >
       {children}
     </a>
