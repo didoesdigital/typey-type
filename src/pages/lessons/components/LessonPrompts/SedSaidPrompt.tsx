@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { IconExternal } from "../../../../components/IconExternal";
-import { Tooltip } from "react-tippy";
-import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTooltip";
+import OutboundLink from "../../../../components/OutboundLink";
 import { useAnnouncerApi } from "../../../../components/Announcer/useAnnouncer";
 
 export const hasSedSaid = (currentPhrase: string, actualText: string) => {
@@ -17,7 +15,6 @@ type Props = {
 };
 
 const SedSaidPrompt = ({ currentPhrase, actualText }: Props) => {
-  const announceTooltip = useAnnounceTooltip();
   const showSedSaidPrompt = hasSedSaid(currentPhrase, actualText);
   const { updateMessage } = useAnnouncerApi();
 
@@ -33,38 +30,13 @@ const SedSaidPrompt = ({ currentPhrase, actualText }: Props) => {
     return (
       <p>
         It looks like you might be using an older Plover dictionary. Try{" "}
-        <a
-          href="https://github.com/openstenoproject/plover/wiki/Upgrading-V3-Dictionaries"
-          target="_blank"
-          rel="noopener noreferrer"
+        <OutboundLink
+          eventLabel="Open steno project upgrade V3 dictionaries"
+          newTabAndIUnderstandTheAccessibilityImplications={true}
+          to="https://plover.wiki/index.php/Updating_V3_Dictionaries"
         >
-          Upgrading{" "}
-          <span className="whitespace-nowrap">
-            V3 Dictionaries
-            {/* @ts-ignore */}
-            <Tooltip
-              title="Opens in a new tab"
-              animation="shift"
-              arrow="true"
-              className=""
-              duration="200"
-              tabIndex="0"
-              tag="span"
-              theme="didoesdigital"
-              trigger="mouseenter focus click"
-              onShow={announceTooltip}
-            >
-              <IconExternal
-                ariaHidden="true"
-                role="presentation"
-                iconWidth="24"
-                iconHeight="24"
-                className="ml1 svg-icon-wrapper svg-baseline"
-                iconTitle=""
-              />
-            </Tooltip>
-          </span>
-        </a>
+          Upgrading V3 Dictionaries (opens in new tab)
+        </OutboundLink>
       </p>
     );
   } else {
