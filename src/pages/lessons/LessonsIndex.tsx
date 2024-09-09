@@ -1,23 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import OutboundLink from "../../components/OutboundLink";
-import { IconExternal } from "../../components/IconExternal";
 import LessonList from "./components/LessonList";
-import { Tooltip } from "react-tippy";
 import Subheader from "../../components/Subheader";
-import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 
 type LessonsIndexProps = {
   customLesson: any;
 };
 
-const LessonsIndex = ({
-  customLesson,
-}: LessonsIndexProps) => {
+const LessonsIndex = ({ customLesson }: LessonsIndexProps) => {
   const { stopLesson } = useAppMethods();
   const mainHeading = useRef<HTMLHeadingElement>(null);
-  const announceTooltip = useAnnounceTooltip();
 
   useEffect(() => {
     mainHeading.current?.focus();
@@ -68,7 +62,7 @@ const LessonsIndex = ({
         <LessonList url={url} />
         <div className="mw-584">
           <h3 className="mt3 pt6">Community lessons</h3>
-          <p>
+          <p className="text-balance">
             The Typey&nbsp;Type community lessons cover topics like spacing,
             capitalisation, quotations, and using{" "}
             <span className="steno-stroke steno-stroke--subtle px05">
@@ -77,36 +71,11 @@ const LessonsIndex = ({
             for “inter-” and “enter-” words. To help Typey&nbsp;Type grow even
             faster, add your custom lessons to the{" "}
             <OutboundLink
-              aria-label="community's lessons (external link opens in new tab)"
               eventLabel="community's lessons"
               to="https://docs.google.com/spreadsheets/d/1AlO2SSUwuv3yrz7RI9ix_z1Efbiu_j50c_ibGYwdsgc/edit?usp=sharing"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
             >
-              community’s{" "}
-              <span className="whitespace-nowrap">
-                lessons
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="Opens in a new tab"
-                  animation="shift"
-                  arrow="true"
-                  className=""
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
+              community’s lessons (opens in new tab)
             </OutboundLink>
             .
           </p>
