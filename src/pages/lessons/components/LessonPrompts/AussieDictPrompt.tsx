@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { IconExternal } from "../../../../components/IconExternal";
-import { Tooltip } from "react-tippy";
-import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTooltip";
+import OutboundLink from "../../../../components/OutboundLink";
 import { useAnnouncerApi } from "../../../../components/Announcer/useAnnouncer";
 
 export const missingAussieDict = (
@@ -23,7 +21,6 @@ type Props = {
 };
 
 const AussieDictPrompt = ({ currentStroke, actualText }: Props) => {
-  const announceTooltip = useAnnounceTooltip();
   const { updateMessage } = useAnnouncerApi();
 
   const isMissingAussieDict = missingAussieDict(currentStroke, actualText);
@@ -41,35 +38,13 @@ const AussieDictPrompt = ({ currentStroke, actualText }: Props) => {
       <p>
         To use <span className="steno-stroke steno-stroke--subtle">/A*U</span>{" "}
         for Aussie spelling, add the{" "}
-        <a
-          href="https://github.com/didoesdigital/steno-dictionaries#australian-english-dictionaries"
-          target="_blank"
-          rel="noopener noreferrer"
+        <OutboundLink
+          eventLabel="dict-en-AU-with-extra-stroke.json dictionary"
+          newTabAndIUnderstandTheAccessibilityImplications={true}
+          to="https://github.com/didoesdigital/steno-dictionaries#australian-english-dictionaries"
         >
-          dict-en-AU-with-extra-stroke.json dictionary
-          {/* @ts-ignore */}
-          <Tooltip
-            title="Opens in a new tab"
-            animation="shift"
-            arrow="true"
-            className=""
-            duration="200"
-            tabIndex="0"
-            tag="span"
-            theme="didoesdigital"
-            trigger="mouseenter focus click"
-            onShow={announceTooltip}
-          >
-            <IconExternal
-              ariaHidden="true"
-              role="presentation"
-              iconWidth="24"
-              iconHeight="24"
-              className="ml1 svg-icon-wrapper svg-baseline"
-              iconTitle=""
-            />
-          </Tooltip>
-        </a>{" "}
+          dict-en-AU-with-extra-stroke.json dictionary (link opens in new tab)
+        </OutboundLink>{" "}
         or fingerspell <span className="whitespace-nowrap">this entry</span>.
       </p>
     );
