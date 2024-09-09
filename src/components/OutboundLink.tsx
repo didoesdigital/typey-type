@@ -45,11 +45,7 @@ const OutboundLink = ({
         target: "_blank",
         rel: "noopener noreferrer",
       }
-    : // FIXME: replace this part of the ternary expression with an empty object once new prop is rolled out everywhere
-      {
-        target: "_blank",
-        rel: "noopener noreferrer",
-      };
+    : {};
 
   return (
     <a
