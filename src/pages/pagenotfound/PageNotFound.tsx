@@ -3,11 +3,8 @@ import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../components/OutboundLink";
 import * as Sentry from "@sentry/browser";
 import { Link } from "react-router-dom";
-import { Tooltip } from "react-tippy";
-import { IconExternal } from "../../components/IconExternal";
 import TypeyTypeIcon from "../../components/Icons/icon-images/TypeyTypeIcon.svg";
 import Icon from "../../components/Icons/Icon";
-import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
 type Props = {
   location: any;
@@ -15,7 +12,6 @@ type Props = {
 
 const PageNotFound = ({ location }: Props) => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
-  const announceTooltip = useAnnounceTooltip();
 
   useEffect(() => {
     if (mainHeading) {
@@ -108,32 +104,10 @@ const PageNotFound = ({ location }: Props) => {
         <p>
           <OutboundLink
             eventLabel="Typey Type for Stenographers feedback form"
-            aria-label="Share your feedback (form opens in new tab)"
+            newTabAndIUnderstandTheAccessibilityImplications={true}
             to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
           >
-            Share your feedback
-            {/* @ts-ignore */}
-            <Tooltip
-              title="(form opens in new tab)"
-              animation="shift"
-              arrow="true"
-              className=""
-              duration="200"
-              tabIndex="0"
-              tag="span"
-              theme="didoesdigital"
-              trigger="mouseenter focus click"
-              onShow={announceTooltip}
-            >
-              <IconExternal
-                ariaHidden="true"
-                role="presentation"
-                iconWidth="24"
-                iconHeight="24"
-                className="ml1 svg-icon-wrapper svg-baseline"
-                iconTitle=""
-              />
-            </Tooltip>
+            Share your feedback (opens in new tab)
           </OutboundLink>
           .
         </p>
