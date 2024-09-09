@@ -27,9 +27,7 @@ const isInternalDictLink = (dictLink: DictLink) =>
   dictLink.startsWith("/lessons/") ||
   dictLink.startsWith("/support");
 
-const getExternalLink = (
-  dictLink: DictLink,
-) =>
+const getExternalLink = (dictLink: DictLink) =>
   isInternalDictLink(dictLink) ? null : (
     <p className="mt3">
       <a href={dictLink} target="_blank" rel="noopener noreferrer">
@@ -128,32 +126,34 @@ const Dictionary = () => {
           method: "GET",
           credentials: "same-origin",
         }
-      ).then((response) => {
-        const contentType = response.headers.get("content-type");
+      )
+        .then((response) => {
+          const contentType = response.headers.get("content-type");
 
-        if (contentType && contentType.indexOf("application/json") !== -1) {
-          return response.json().then((dictionaryContents) => {
-            const dictIndexEntry = lookUpDictionaryInIndex(
-              process.env.PUBLIC_URL + location.pathname,
-              dictionaryIndex
-            );
-            const dictionaryData = {
-              ...dictIndexEntry,
-              contents: dictionaryContents,
-            };
+          if (contentType && contentType.indexOf("application/json") !== -1) {
+            return response.json().then((dictionaryContents) => {
+              const dictIndexEntry = lookUpDictionaryInIndex(
+                process.env.PUBLIC_URL + location.pathname,
+                dictionaryIndex
+              );
+              const dictionaryData = {
+                ...dictIndexEntry,
+                contents: dictionaryContents,
+              };
 
-            setDictionary(dictionaryData);
-            updateMessage("Finished loading: " + dictionaryData.title);
-            setLoadingDictionaryContents(false);
-          });
-        } else {
-          throw new Error("Unable to load dictionary");
-        }
-      }).catch((error) => {
-        console.log("Unable to load dictionary", error);
-        updateMessage("Unable to load dictionary");
-        setHasError(true);
-      });
+              setDictionary(dictionaryData);
+              updateMessage("Finished loading: " + dictionaryData.title);
+              setLoadingDictionaryContents(false);
+            });
+          } else {
+            throw new Error("Unable to load dictionary");
+          }
+        })
+        .catch((error) => {
+          console.log("Unable to load dictionary", error);
+          updateMessage("Unable to load dictionary");
+          setHasError(true);
+        });
     }
     // FIXME: updateMessage in dependency array
     // eslint-disable-next-line react-hooks/exhaustive-deps
