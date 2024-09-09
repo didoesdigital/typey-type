@@ -2,23 +2,16 @@ import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import OutboundLink from "../../components/OutboundLink";
 import StrokesForWords from "../../components/StrokesForWords";
-import { IconExternal } from "../../components/IconExternal";
-import { Tooltip } from "react-tippy";
 import Subheader from "../../components/Subheader";
-import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
 import type {
   FetchAndSetupGlobalDict,
   LookupDictWithNamespacedDictsAndConfig,
-  PrettyLessonTitle,
   StenoDictionary,
   UserSettings,
 } from "../../types";
 import { useAtomValue } from "jotai";
 import { dictionaryIndexState } from "../../states/dictionaryIndexState";
-
-/** Example: "/lessons/collections/tech/react/" */
-type DictLink = string;
 
 type Props = {
   fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
@@ -26,65 +19,6 @@ type Props = {
   globalLookupDictionaryLoaded: boolean;
   userSettings: UserSettings;
 };
-
-const isInternalDictLink = (dictLink: DictLink) =>
-  dictLink.startsWith("/typey-type") ||
-  dictLink.startsWith("/dictionaries/") ||
-  dictLink.startsWith("/lessons/") || // This is deprecated
-  dictLink.startsWith("/support");
-
-const getInternalLink = (dictLink: DictLink, dictTitle: PrettyLessonTitle) =>
-  isInternalDictLink(dictLink) ? (
-    `${process.env.PUBLIC_URL}${dictLink}`.startsWith(
-      process.env.PUBLIC_URL + "/lessons" // This is deprecated
-    ) ? (
-      <Link to={dictLink} aria-label={"Lesson: " + dictTitle}>
-        Lesson
-      </Link>
-    ) : (
-      <Link to={dictLink} aria-label={"Learn more about " + dictTitle}>
-        Learn more
-      </Link>
-    )
-  ) : null;
-
-const getExternalLink = (
-  dictLink: DictLink,
-  dictTitle: PrettyLessonTitle,
-  announceTooltip: (this: HTMLElement) => void
-) =>
-  isInternalDictLink(dictLink) ? null : (
-    <a
-      href={dictLink}
-      aria-label={"Learn more about " + dictTitle}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Learn more
-      {/* @ts-ignore */}
-      <Tooltip
-        title="Opens in a new tab"
-        animation="shift"
-        arrow="true"
-        className=""
-        duration="200"
-        tabIndex={0}
-        tag="span"
-        theme="didoesdigital"
-        trigger="mouseenter focus click"
-        onShow={announceTooltip}
-      >
-        <IconExternal
-          ariaHidden="true"
-          role="presentation"
-          iconWidth="24"
-          iconHeight="24"
-          className="ml1 svg-icon-wrapper svg-baseline"
-          iconTitle=""
-        />
-      </Tooltip>
-    </a>
-  );
 
 const DictionariesIndex = ({
   fetchAndSetupGlobalDict,
@@ -94,7 +28,6 @@ const DictionariesIndex = ({
 }: Props) => {
   const dictionaryIndex = useAtomValue(dictionaryIndexState);
   const mainHeading = useRef<HTMLHeadingElement>(null);
-  const announceTooltip = useAnnounceTooltip();
 
   useEffect(() => {
     if (mainHeading) {
@@ -108,21 +41,10 @@ const DictionariesIndex = ({
         ? dictionary.author
         : "Typey Type";
 
-    const title =
-      dictionary.title && dictionary.title.length > 0
-        ? dictionary.title
-        : "dictionary";
-
     const subtitle =
       dictionary.subtitle && dictionary.subtitle.length > 0
         ? ": " + dictionary.subtitle
         : "";
-
-    const learnMoreLink =
-      dictionary.link && dictionary.link.length > 0
-        ? getInternalLink(dictionary.link, title) ||
-          getExternalLink(dictionary.link, dictionary.title, announceTooltip)
-        : null;
 
     const dictionarypath = dictionary.path
       .replace(/lesson.txt/, "lesson/") // This is deprecated
@@ -139,11 +61,6 @@ const DictionariesIndex = ({
           {author}’s {dictionary.title}
           {subtitle}
         </Link>
-        <span>
-          {" "}
-          · 
-          {learnMoreLink}
-        </span>
       </li>
     );
   });
@@ -176,35 +93,10 @@ const DictionariesIndex = ({
                 dictionaries that power Typey Type’s stroke suggestions from{" "}
                 <OutboundLink
                   eventLabel="Di’s Steno Dictionaries repo"
-                  aria-label="Di’s Steno Dictionaries repo (external link opens in new tab)"
+                  newTabAndIUnderstandTheAccessibilityImplications={true}
                   to="https://github.com/didoesdigital/steno-dictionaries"
                 >
-                  Di’s Steno Dictionaries{" "}
-                  <span className="whitespace-nowrap">
-                    repo
-                    {/* @ts-ignore */}
-                    <Tooltip
-                      title="Opens in a new tab"
-                      animation="shift"
-                      arrow="true"
-                      className=""
-                      duration="200"
-                      tabIndex={0}
-                      tag="span"
-                      theme="didoesdigital"
-                      trigger="mouseenter focus click"
-                      onShow={announceTooltip}
-                    >
-                      <IconExternal
-                        ariaHidden="true"
-                        role="presentation"
-                        iconWidth="24"
-                        iconHeight="24"
-                        className="ml1 svg-icon-wrapper svg-baseline"
-                        iconTitle=""
-                      />
-                    </Tooltip>
-                  </span>
+                  Di’s Steno Dictionaries repo (opens in new tab)
                 </OutboundLink>
                 .
               </p>
@@ -236,74 +128,27 @@ const DictionariesIndex = ({
                 If you notice any odd strokes,{" "}
                 <OutboundLink
                   eventLabel="post to the feedback form"
-                  aria-label="post to the feedback form (external link opens in new tab)"
+                  newTabAndIUnderstandTheAccessibilityImplications={true}
                   to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
                 >
-                  use the feedback{" "}
-                  <span className="whitespace-nowrap">
-                    form
-                    {/* @ts-ignore */}
-                    <Tooltip
-                      title="(external link opens in new tab)"
-                      className=""
-                      animation="shift"
-                      arrow="true"
-                      duration="200"
-                      tabIndex={0}
-                      tag="span"
-                      theme="didoesdigital"
-                      trigger="mouseenter focus click"
-                      onShow={announceTooltip}
-                    >
-                      <IconExternal
-                        ariaHidden="true"
-                        role="presentation"
-                        iconWidth="24"
-                        iconHeight="24"
-                        className="ml1 svg-icon-wrapper svg-baseline"
-                        iconTitle=""
-                      />
-                    </Tooltip>
-                  </span>
+                  use the feedback form to let Di know (opens in new tab)
                 </OutboundLink>
                 .
               </p>
             </div>
 
             <div className="mw-584">
-              <h3>Typey&nbsp;Type dictionaries</h3>
+              <h3>Useful dictionaries</h3>
               <ul className="unstyled-list">{linkList}</ul>
 
               <p>
                 Want to add another dictionary to this list?{" "}
                 <OutboundLink
                   eventLabel="Typey Type for Stenographers dictionary feedback form"
-                  aria-label="Share your feedback (form opens in new tab)"
+                  newTabAndIUnderstandTheAccessibilityImplications={true}
                   to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
                 >
-                  Share your dictionary
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(form opens in new tab)"
-                    animation="shift"
-                    arrow="true"
-                    className=""
-                    duration="200"
-                    tabIndex={0}
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
+                  Share your dictionary (opens in a new tab)
                 </OutboundLink>
                 .
               </p>
@@ -349,35 +194,10 @@ const DictionariesIndex = ({
               faster, add your custom dictionaries to the{" "}
               <OutboundLink
                 eventLabel="community’s dictionaries"
-                aria-label="community’s dictionaries (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://docs.google.com/spreadsheets/d/1w-9GciR8D7sWuLVxw9ATstF1tcyCjCe7UtIn7l80cXk/edit?usp=sharing"
               >
-                community’s{" "}
-                <span className="whitespace-nowrap">
-                  dictionaries
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="Opens in a new tab"
-                    animation="shift"
-                    arrow="true"
-                    className=""
-                    duration="200"
-                    tabIndex={0}
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                community’s dictionaries (opens in new tab)
               </OutboundLink>
               .
             </p>
