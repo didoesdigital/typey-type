@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Tooltip } from "react-tippy";
 import GoogleAnalytics from "react-ga4";
 import ReactModal from 'react-modal';
 import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
@@ -16,8 +15,6 @@ import {
   getStrokeForCurrentSlideContent,
   getWordForCurrentStrokeSlideIndex,
 } from './utilities';
-import FullscreenIcon from "../../../components/Icons/icon-images/Fullscreen.svg";
-import Icon from "../../../components/Icons/Icon";
 import * as Utils from '../../../utils/utils';
 import { parseLesson } from '../../../utils/typey-type';
 import { getLesson } from '../../../utils/getData';
@@ -461,21 +458,8 @@ currentSlide: currentSlide
                       fullscreen
                     }
                   >
-                    {/* @ts-ignore */}
-                    <Tooltip
-                      title={fullscreen ? "Leave fullscreen" : "Enter fullscreen"}
-                      className=""
-                      animation="shift"
-                      arrow="true"
-                      duration="0"
-                      tabIndex={0}
-                      tag="span"
-                      theme="didoesdigital didoesdigital-sm"
-                      trigger="mouseenter focus click"
-                    >
                     <label
-                      className="absolute absolute--fill flex items-center justify-center"
-                      aria-label={fullscreen ? "Leave fullscreen" : "Enter fullscreen"}
+                      className="de-emphasized flex items-center justify-center"
                       style={{
                         cursor: "pointer",
                       }}
@@ -488,14 +472,8 @@ currentSlide: currentSlide
                         checked={this.props.fullscreen}
                         onChange={this.props.changeFullscreen}
                       />
-                      <Icon
-                        iconSVGImport={FullscreenIcon}
-                        width="1.5em"
-                        height="1.5em"
-                        color="currentColor"
-                      />
+                      {fullscreen ? "Leave fullscreen" : "Enter fullscreen"}
                     </label>
-                    </Tooltip>
                   </div>
                 </CarouselProvider>
               </div>
