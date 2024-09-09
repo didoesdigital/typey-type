@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
-import { IconExternal } from "../../../../components/IconExternal";
-import { Tooltip } from "react-tippy";
-import useAnnounceTooltip from "../../../../components/Announcer/useAnnounceTooltip";
+import OutboundLink from "../../../../components/OutboundLink";
 import { useAnnouncerApi } from "../../../../components/Announcer/useAnnouncer";
 
 export const hasWordBoundaryError = (
@@ -17,7 +15,6 @@ type Props = {
 };
 
 const WordBoundaryErrorPrompt = ({ currentPhrase, actualText }: Props) => {
-  const announceTooltip = useAnnounceTooltip();
   const { updateMessage } = useAnnouncerApi();
   const showWordBoundaryPrompt = hasWordBoundaryError(
     currentPhrase,
@@ -35,39 +32,14 @@ const WordBoundaryErrorPrompt = ({ currentPhrase, actualText }: Props) => {
   if (showWordBoundaryPrompt) {
     return (
       <p>
-        It’s a trap! It looks like you hit a{" "}
-        <a
-          href="https://www.openstenoproject.org/learn-plover/lesson-6-prefix-suffix-alternatives.html"
-          target="_blank"
-          rel="noopener noreferrer"
+        It’s a trap! This looks like a{" "}
+        <OutboundLink
+          eventLabel="Open steno project word boundary error"
+          newTabAndIUnderstandTheAccessibilityImplications={true}
+          to="https://www.openstenoproject.org/learn-plover/lesson-6-prefix-suffix-alternatives.html"
         >
-          word boundary{" "}
-          <span className="whitespace-nowrap">
-            error
-            {/* @ts-ignore */}
-            <Tooltip
-              title="Opens in a new tab"
-              animation="shift"
-              arrow="true"
-              className=""
-              duration="200"
-              tabIndex="0"
-              tag="span"
-              theme="didoesdigital"
-              trigger="mouseenter focus click"
-              onShow={announceTooltip}
-            >
-              <IconExternal
-                ariaHidden="true"
-                role="presentation"
-                iconWidth="24"
-                iconHeight="24"
-                className="ml1 svg-icon-wrapper svg-baseline"
-                iconTitle=""
-              />
-            </Tooltip>
-          </span>
-        </a>
+          word boundary error (link opens in new tab)
+        </OutboundLink>
         . You might avoid this by manually inserting a space e.g.{" "}
         <span className="steno-stroke steno-stroke--subtle">STAR/S-P/WARS</span>
       </p>
