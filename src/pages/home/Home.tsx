@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import OutboundLink from "../../components/OutboundLink";
 import { Link } from "react-router-dom";
-import { IconExternal } from "../../components/IconExternal";
 import { Tooltip } from "react-tippy";
 import typeyTypeDemoGIF from "../../images/typey-type-for-stenographers-demo.gif";
 import typeyTypeyDemoCoverImage from "../../images/typey-type-for-stenographers-demo-cover-image.png";
@@ -410,32 +409,10 @@ const Home = () => {
                 Sign up for{" "}
                 <OutboundLink
                   eventLabel="DiDoesDigital: Typey Type updates and steno news (external link opens in new tab)"
+                  newTabAndIUnderstandTheAccessibilityImplications={true}
                   to="https://didoesdigital.com/#newsletter"
-                  aria-label="Typey Type updates and steno news (external link opens in new tab)"
                 >
-                  Typey&nbsp;Type updates and steno news
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    animation="shift"
-                    arrow="true"
-                    className=""
-                    duration="200"
-                    tabIndex={0}
-                    tag="span"
-                    theme="didoesdigital"
-                    title="External link opens in new tab"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
+                  Typey&nbsp;Type updates and steno news (opens in new tab)
                 </OutboundLink>
                 .
               </p>
