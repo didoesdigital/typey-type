@@ -1,12 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import OutboundLink from "../../components/OutboundLink";
-import { Tooltip } from "react-tippy";
 import { Link } from "react-router-dom";
 import DescriptionList from "../../components/DescriptionList";
 import DescriptionTerm from "../../components/DescriptionTerm";
 import DescriptionDetails from "../../components/DescriptionDetails";
 import Subheader from "../../components/Subheader";
-import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
 function hashToQuery(hash: string) {
   if (hash.includes(":~:text")) {
@@ -33,7 +31,6 @@ const dictionaryEntryForMacReviseAccessKey =
 
 const Support = () => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
-  const announceTooltip = useAnnounceTooltip();
 
   useEffect(() => {
     window.location.hash = window.decodeURIComponent(window.location.hash);
@@ -92,25 +89,10 @@ const Support = () => {
         <div className="mw-568">
           <p className="mt3">
             Typey&nbsp;Type is a typing app designed to help{" "}
-            <a href="#about-stenography">stenography</a> students learn{" "}
-            {/* @ts-ignore */}
-            <Tooltip
-              animation="shift"
-              arrow="true"
-              className="abbr"
-              duration="200"
-              tabIndex="0"
-              tag="abbr"
-              theme="didoesdigital"
-              title="stenography"
-              trigger="mouseenter focus click"
-              onShow={announceTooltip}
-            >
-              steno
-            </Tooltip>{" "}
-            faster. You can learn briefs and improve your stenographic speed and
-            accuracy. Lessons evolve as you progress. They have tight feedback
-            loops so you learn to fix misstrokes immediately. You can
+            <a href="#about-stenography">stenography</a> (steno) students learn
+            steno faster. You can learn briefs and improve your stenographic
+            speed and accuracy. Lessons evolve as you progress. They have tight
+            feedback loops so you learn to fix misstrokes immediately. You can
             effortlessly track progress in your brief vocabulary and rapidly
             increase in steno skill.
           </p>
