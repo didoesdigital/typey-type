@@ -1,15 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import OutboundLink from "../../components/OutboundLink";
 import { Link } from "react-router-dom";
-import { Tooltip } from "react-tippy";
 import typeyTypeDemoGIF from "../../images/typey-type-for-stenographers-demo.gif";
 import typeyTypeyDemoCoverImage from "../../images/typey-type-for-stenographers-demo-cover-image.png";
 import Subheader from "../../components/Subheader";
-import useAnnounceTooltip from "../../components/Announcer/useAnnounceTooltip";
 
 const Home = () => {
   const mainHeading = useRef<HTMLHeadingElement>(null);
-  const announceTooltip = useAnnounceTooltip();
 
   const [typeyTypeDemoSrc, setTypeyTypeDemoSrc] = useState(typeyTypeDemoGIF);
 
@@ -58,28 +55,13 @@ const Home = () => {
               <h3 className="tiny-rule relative">What is stenography?</h3>
               <p>
                 The process of writing shorthand is called{" "}
-                <strong>stenography</strong>. Want to write over 100 words per
-                minute? Grab yourself a fancy keyboard and start learning
-                stenography!
+                <strong>stenography</strong> (steno). Want to write over 100
+                words per minute? Grab yourself a fancy keyboard and start
+                learning stenography!
               </p>
               <p>
                 Typey&nbsp;Type for Stenographers is a free typing app designed
-                to help {/* @ts-ignore */}
-                <Tooltip
-                  animation="shift"
-                  arrow="true"
-                  className="abbr"
-                  duration="200"
-                  tabIndex={0}
-                  tag="abbr"
-                  theme="didoesdigital"
-                  title="stenography"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  steno
-                </Tooltip>{" "}
-                students practise and master stenography.
+                to help steno students practise and master stenography.
               </p>
               <div className="relative">
                 <img
