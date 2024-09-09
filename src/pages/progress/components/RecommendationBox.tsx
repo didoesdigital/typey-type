@@ -2,10 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../../components/OutboundLink";
 import RecommendationDescription from "./RecommendationDescription";
-import { IconExternal } from "../../../components/IconExternal";
 import { Link, Redirect } from "react-router-dom";
-import { Tooltip } from "react-tippy";
-import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 import { useAnnouncerApi } from "../../../components/Announcer/useAnnouncer";
 
 import type { FullRecommendationsStudyType, MetWords } from "../../../types";
@@ -63,7 +60,6 @@ const RecommendationBox = ({
   const lessonIndex = useLessonIndex();
   const recommendedCourses = useRecommendedCourses();
   const setRevisionMode = useSetAtom(revisionModeState);
-  const announceTooltip = useAnnounceTooltip();
   const { updateMessage } = useAnnouncerApi();
   const firstRecommendationBoxRender = useRef(true);
   const [recommendationHistory, setRecommendationHistory] = useAtom(
@@ -374,29 +370,7 @@ const RecommendationBox = ({
           className="mr2 link-button dib"
           style={{ lineHeight: 2 }}
         >
-          {recommendedNextLessonCallToActionButton}
-          {/* @ts-ignore */}
-          <Tooltip
-            title="(external link opens in new tab)"
-            className=""
-            animation="shift"
-            arrow="true"
-            duration="200"
-            tabIndex="0"
-            tag="span"
-            theme="didoesdigital"
-            trigger="mouseenter focus click"
-            onShow={announceTooltip}
-          >
-            <IconExternal
-              ariaHidden="true"
-              role="presentation"
-              iconWidth="24"
-              iconHeight="24"
-              className="ml1 svg-icon-wrapper svg-baseline"
-              iconTitle=""
-            />
-          </Tooltip>
+          {recommendedNextLessonCallToActionButton} (opens in new tab)
         </OutboundLink>
       );
     } else {
@@ -434,7 +408,7 @@ const RecommendationBox = ({
           <RecommendationDescription
             studyType={recommendedNextLesson.studyType}
           />
-          <div className="flex flex-wrap">
+          <div className="flex flex-wrap gap-4">
             <div>{recommendedLink}</div>
             <button
               onClick={recommendAnotherLesson}
