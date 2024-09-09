@@ -53,7 +53,12 @@ const getInternalLink = (dictLink: DictLink, dictTitle: PrettyLessonTitle) =>
     )
   ) : null;
 
-const getDictionaryContentsString = (dictContents: StenoDictionary) => {
+type FormattedDictContents = string;
+type NumberOfDictionaryLines = number;
+
+const getDictionaryContentsString = (
+  dictContents: StenoDictionary
+): [FormattedDictContents, NumberOfDictionaryLines] => {
   let contents = "";
   contents = JSON.stringify(dictContents).split('",').join('",\n');
   contents = "{\n" + contents.slice(1, contents.length); // split first line {"STROKE": "TRANSLATION", on {"
