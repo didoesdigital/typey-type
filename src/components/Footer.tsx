@@ -1,16 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import OutboundLink from "./OutboundLink";
-import { IconExternal } from "./IconExternal";
-import { Tooltip } from "react-tippy";
-import useAnnounceTooltip from "./Announcer/useAnnounceTooltip";
 import { useAtomValue } from "jotai";
 import { fullscreenState } from "../states/flashcardsProgressState";
 
 const Footer = () => {
-  const fullscreen = useAtomValue(fullscreenState)
+  const fullscreen = useAtomValue(fullscreenState);
   const fullscreenClass = fullscreen ? " fullscreen" : "";
-  const announceTooltip = useAnnounceTooltip();
 
   return (
     <div
@@ -40,7 +36,7 @@ const Footer = () => {
         <p className="text-center mb0">
           <small>
             <Link to="/contribute" className="no-underline">
-              Contribute
+              Contribute and donate
             </Link>
           </small>
         </p>
@@ -68,32 +64,10 @@ const Footer = () => {
             <OutboundLink
               className="no-underline"
               eventLabel="DiDoesDigital: Typey Type updates and steno news (external link opens in new tab)"
-              aria-label="Typey Type updates and steno news (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://didoesdigital.com/#newsletter"
             >
-              Steno&nbsp;news
-              {/* @ts-ignore */}
-              <Tooltip
-                title="(external link opens in new tab)"
-                animation="shift"
-                arrow="true"
-                className=""
-                duration="200"
-                tabIndex="0"
-                tag="span"
-                theme="didoesdigital"
-                trigger="mouseenter focus click"
-                onShow={announceTooltip}
-              >
-                <IconExternal
-                  ariaHidden="true"
-                  role="presentation"
-                  iconWidth="24"
-                  iconHeight="24"
-                  className="ml1 svg-icon-wrapper svg-baseline"
-                  iconTitle=""
-                />
-              </Tooltip>
+              Steno&nbsp;news (opens in new tab)
             </OutboundLink>
           </small>
         </p>
