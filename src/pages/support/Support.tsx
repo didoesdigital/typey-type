@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import OutboundLink from "../../components/OutboundLink";
-import { IconExternal } from "../../components/IconExternal";
 import { Tooltip } from "react-tippy";
 import { Link } from "react-router-dom";
 import DescriptionList from "../../components/DescriptionList";
@@ -128,35 +127,10 @@ const Support = () => {
             learn more about Plover from the{" "}
             <OutboundLink
               eventLabel="Open steno project"
-              aria-label="Open steno project (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="http://openstenoproject.org/"
             >
-              Open steno{" "}
-              <span className="whitespace-nowrap">
-                project
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
+              Open steno project (opens in new tab)
             </OutboundLink>
             .
           </p>
@@ -182,32 +156,10 @@ const Support = () => {
             If you want to help fund my efforts on this project, you can{" "}
             <OutboundLink
               eventLabel="Patreon"
-              aria-label="Patreon (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://www.patreon.com/didoesdigital"
             >
-              become a supporter on Patreon.
-              {/* @ts-ignore */}
-              <Tooltip
-                title="Opens in a new tab"
-                animation="shift"
-                arrow="true"
-                className=""
-                duration="200"
-                tabIndex="0"
-                tag="span"
-                theme="didoesdigital"
-                trigger="mouseenter focus click"
-                onShow={announceTooltip}
-              >
-                <IconExternal
-                  ariaHidden="true"
-                  role="presentation"
-                  iconWidth="24"
-                  iconHeight="24"
-                  className="ml1 svg-icon-wrapper svg-baseline"
-                  iconTitle=""
-                />
-              </Tooltip>
+              become a supporter on Patreon (opens in new tab).
             </OutboundLink>
           </p>
 
@@ -244,34 +196,10 @@ const Support = () => {
               {" "}
               <OutboundLink
                 eventLabel="Plover"
-                aria-label="Plover (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="http://www.openstenoproject.org/plover/"
               >
-                <span className="whitespace-nowrap">
-                  Plover
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                Plover (opens in new tab)
               </OutboundLink>{" "}
               is the world’s first free, open-source stenography program. It
               works cross-platform on Windows, macOS, and Linux operating
@@ -281,74 +209,29 @@ const Support = () => {
 
           <h3 id="typey-type-notes">Typey&nbsp;Type notes</h3>
           <p>
-            Typey&nbsp;Type embraces ideas of{" "}
-            <OutboundLink
-              eventLabel="spaced repetitions"
-              aria-label="spaced repetitions (external link opens in new tab)"
-              to="https://en.wikipedia.org/wiki/Spaced_repetition"
-            >
-              spaced{" "}
-              <span className="whitespace-nowrap">
-                repetitions
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
-            </OutboundLink>{" "}
-            and{" "}
-            <OutboundLink
-              eventLabel="deliberate practice"
-              aria-label="deliberate practice (external link opens in new tab)"
-              to="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice"
-            >
-              deliberate{" "}
-              <span className="whitespace-nowrap">
-                practice
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
-            </OutboundLink>{" "}
-            to teach steno effectively.
+            Typey&nbsp;Type embraces ideas of spaced repetitions and deliberate
+            practice to teach steno effectively:
           </p>
+          <ul>
+            <li>
+              <OutboundLink
+                eventLabel="spaced repetitions"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
+                to="https://en.wikipedia.org/wiki/Spaced_repetition"
+              >
+                Spaced repetitions (opens in new tab)
+              </OutboundLink>
+            </li>
+            <li>
+              <OutboundLink
+                eventLabel="deliberate practice"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
+                to="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice"
+              >
+                Deliberate practice (opens in new tab)
+              </OutboundLink>
+            </li>
+          </ul>
 
           <h4 id="typey-type-progress-tracking">
             Typey Type progress tracking
@@ -391,35 +274,10 @@ const Support = () => {
             If you notice any odd strokes,{" "}
             <OutboundLink
               eventLabel="post to the feedback form"
-              aria-label="post to the feedback form (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
             >
-              post to the feedback{" "}
-              <span className="whitespace-nowrap">
-                form
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
+              post to the feedback form (opens in new tab)
             </OutboundLink>
             .
           </p>
@@ -443,34 +301,12 @@ const Support = () => {
             that make use of the browser’s built in{" "}
             <OutboundLink
               eventLabel="accesskey"
-              aria-label="accesskey (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://en.m.wikipedia.org/wiki/Access_key"
             >
-              accesskey
-              {/* @ts-ignore */}
-              <Tooltip
-                title="(external link opens in new tab)"
-                className=""
-                animation="shift"
-                arrow="true"
-                duration="200"
-                tabIndex="0"
-                tag="span"
-                theme="didoesdigital"
-                trigger="mouseenter focus click"
-                onShow={announceTooltip}
-              >
-                <IconExternal
-                  ariaHidden="true"
-                  role="presentation"
-                  iconWidth="24"
-                  iconHeight="24"
-                  className="ml1 svg-icon-wrapper svg-baseline"
-                  iconTitle=""
-                />
-              </Tooltip>
-            </OutboundLink>{" "}
-            functionality.
+              accesskey functionality (opens in new tab)
+            </OutboundLink>
+            .
           </p>
           <p>
             To jump to the <strong className="fw7">next lesson</strong>, use the{" "}
@@ -613,73 +449,30 @@ const Support = () => {
             more time has passed.
           </p>
           <p>
-            Thanks to Jim Ladd, you can also use the{" "}
-            <OutboundLink
-              eventLabel="Anki"
-              aria-label="Anki (external link opens in new tab)"
-              to="https://apps.ankiweb.net/"
-            >
-              Anki
-              <span className="whitespace-nowrap">
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
-            </OutboundLink>{" "}
-            app to memorise briefs using the{" "}
-            <OutboundLink
-              eventLabel="flashcard decks for the Top 2000 Words"
-              aria-label="flashcard decks for the Top 2000 Words (external link opens in new tab)"
-              to="https://github.com/jladdjr/anki-decks/tree/master/Plover%20-%20Project%20Gutenberg%20Top%2010k%20Words"
-            >
-              flashcard decks for the Top 2000 Words
-              <span className="whitespace-nowrap">
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
-            </OutboundLink>{" "}
-            from Project Gutenberg he built using Typey&nbsp;Type steno
-            diagrams.
+            Thanks to Jim Ladd, you can also use the Anki app to memorise
+            briefs. He built flashcard decks for the Top 2000 Words from Project
+            Gutenberg using Typey&nbsp;Type steno diagrams:
           </p>
+          <ul>
+            <li>
+              <OutboundLink
+                eventLabel="Anki"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
+                to="https://apps.ankiweb.net/"
+              >
+                Anki (opens in new tab)
+              </OutboundLink>
+            </li>
+            <li>
+              <OutboundLink
+                eventLabel="flashcard decks for the Top 2000 Words"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
+                to="https://github.com/jladdjr/anki-decks/tree/master/Plover%20-%20Project%20Gutenberg%20Top%2010k%20Words"
+              >
+                Flashcard decks for the Top 2000 Words (opens in new tab)
+              </OutboundLink>
+            </li>
+          </ul>
 
           <h4 id="offline" tabIndex={-1}>
             Offline
@@ -691,35 +484,10 @@ const Support = () => {
             the{" "}
             <OutboundLink
               eventLabel="Typey Type repo README"
-              aria-label="Typey Type repo README (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://github.com/didoesdigital/typey-type/blob/master/README.md"
             >
-              Typey&nbsp;Type repo{" "}
-              <span className="whitespace-nowrap">
-                README
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
+              Typey&nbsp;Type repo README (opens in new tab)
             </OutboundLink>
             .
           </p>
@@ -730,34 +498,10 @@ const Support = () => {
             For an idea of how steno feels and works, you can{" "}
             <OutboundLink
               eventLabel="install Plover"
-              aria-label="install Plover (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="http://openstenoproject.org/"
             >
-              install Plover
-              <span className="whitespace-nowrap">
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
+              install Plover (opens in new tab)
             </OutboundLink>{" "}
             and use its “arpeggiate” setting. This setting lets you use a QWERTY
             keyboard to write stenography. The trick is that you press each key
@@ -771,107 +515,39 @@ const Support = () => {
 
           <h4 id="requirements-for-steno">What do you need to learn steno?</h4>
           <p>
-            You need a{" "}
-            <OutboundLink
-              eventLabel="true NKRO (N-key roll over) supported keyboard"
-              aria-label="true NKRO (N-key roll over) supported keyboard (external link opens in new tab)"
-              to="https://github.com/openstenoproject/plover/wiki/Supported-Hardware#known-supported-keyboards"
-            >
-              true NKRO (N-key roll over) supported{" "}
-              <span className="whitespace-nowrap">
-                keyboard
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
-            </OutboundLink>{" "}
-            with key caps or key toppers, or a{" "}
-            <OutboundLink
-              eventLabel="stenotype machine"
-              aria-label="stenotype machine (external link opens in new tab)"
-              to="https://github.com/openstenoproject/plover/wiki/Supported-Hardware"
-            >
-              stenotype{" "}
-              <span className="whitespace-nowrap">
-                machine
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
-            </OutboundLink>{" "}
-            and software like{" "}
-            <OutboundLink
-              eventLabel="Plover (free and open)"
-              aria-label="Plover (free and open) (external link opens in new tab)"
-              to="http://www.openstenoproject.org/plover/"
-            >
-              Plover (free and{" "}
-              <span className="whitespace-nowrap">
-                open)
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
-            </OutboundLink>
-            .
+            You need a true NKRO (N-key roll over) supported keyboard and
+            software like Plover (a free and open steno engine).
           </p>
+          <ul>
+            <li>
+              <OutboundLink
+                eventLabel="true NKRO (N-key roll over) supported keyboard"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
+                to="https://plover.wiki/index.php/Supported_hardware#Known_supported_stenotypes"
+              >
+                True NKRO (N-key roll over) supported keyboards (opens in new
+                tab)
+              </OutboundLink>{" "}
+            </li>
+            <li>
+              <OutboundLink
+                eventLabel="stenotype machine"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
+                to="https://plover.wiki/index.php/Supported_hardware#Stenotype_machines"
+              >
+                Stenotype machines (opens in new tab)
+              </OutboundLink>{" "}
+            </li>
+            <li>
+              <OutboundLink
+                eventLabel="Plover (free and open)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
+                to="http://www.openstenoproject.org/plover/"
+              >
+                Plover (opens in new tab)
+              </OutboundLink>
+            </li>
+          </ul>
 
           <h4 id="time-to-learn">How long does it take to learn steno?</h4>
           <p>
@@ -949,68 +625,18 @@ const Support = () => {
             popular and more ergonomic.{" "}
             <OutboundLink
               eventLabel="Learn palantype"
-              aria-label="Learn palantype (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="http://www.openstenoproject.org/palantype/tutorial/2016/08/21/learn-palantype.html"
             >
-              Learn{" "}
-              <span className="whitespace-nowrap">
-                palantype
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
+              Learn palantype (opens in new tab)
             </OutboundLink>{" "}
             and learn more about{" "}
             <OutboundLink
               eventLabel="Palan versus Steno"
-              aria-label="Palan versus Steno (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="http://www.openstenoproject.org/palantype/palantype/2016/08/21/palan-versus-steno.html"
             >
-              Palan versus{" "}
-              <span className="whitespace-nowrap">
-                Steno
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
+              Palan versus Steno (opens in new tab)
             </OutboundLink>{" "}
             from the Open Steno Project.
           </p>
@@ -1035,32 +661,10 @@ const Support = () => {
             You can support my efforts on{" "}
             <OutboundLink
               eventLabel="Patreon"
-              aria-label="Patreon (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://www.patreon.com/didoesdigital"
             >
-              Patreon
-              {/* @ts-ignore */}
-              <Tooltip
-                title="Opens in a new tab"
-                animation="shift"
-                arrow="true"
-                className=""
-                duration="200"
-                tabIndex="0"
-                tag="span"
-                theme="didoesdigital"
-                trigger="mouseenter focus click"
-                onShow={announceTooltip}
-              >
-                <IconExternal
-                  ariaHidden="true"
-                  role="presentation"
-                  iconWidth="24"
-                  iconHeight="24"
-                  className="ml1 svg-icon-wrapper svg-baseline"
-                  iconTitle=""
-                />
-              </Tooltip>
+              Patreon (opens in new tab)
             </OutboundLink>
             . A monthly donation helps me build more lessons and features to
             help you fast-track your steno progress.
@@ -1074,35 +678,10 @@ const Support = () => {
             <li>
               <OutboundLink
                 eventLabel="Typey Type repo"
-                aria-label="Typey Type repo (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://github.com/didoesdigital/typey-type"
               >
-                Typey&nbsp;Type{" "}
-                <span className="whitespace-nowrap">
-                  repo
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                Typey&nbsp;Type repo (opens in new tab)
               </OutboundLink>
               . This contains the application code that makes Typey&nbsp;Type do
               useful things.
@@ -1110,34 +689,10 @@ const Support = () => {
             <li>
               <OutboundLink
                 eventLabel="Typey Type data repo"
-                aria-label="Typey Type data repo (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://github.com/didoesdigital/typey-type-data"
               >
-                Typey&nbsp;Type data repo
-                <span className="whitespace-nowrap">
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                Typey&nbsp;Type data repo (opens in new tab)
               </OutboundLink>
               . This project is the result of automated scripts that produce
               lesson data used by Typey&nbsp;Type. The scripts are not included.
@@ -1145,34 +700,10 @@ const Support = () => {
             <li>
               <OutboundLink
                 eventLabel="Steno dictionaries repo"
-                aria-label="Steno dictionaries repo (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://github.com/didoesdigital/steno-dictionaries/"
               >
-                Steno dictionaries
-                <span className="whitespace-nowrap">
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                Steno dictionaries (opens in new tab)
               </OutboundLink>
               . This repository contains Di’s stenography dictionaries that
               power Typey&nbsp;Type’s stroke suggestions, as well as extra
@@ -1181,34 +712,10 @@ const Support = () => {
             <li>
               <OutboundLink
                 eventLabel="Stenoboard diagram SVG to React repo"
-                aria-label="Stenoboard diagram SVG to React repo (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://github.com/didoesdigital/typey-type-stenoboard-diagram-svg-to-react"
               >
-                Stenoboard diagram SVG to React
-                <span className="whitespace-nowrap">
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                Stenoboard diagram SVG to React (opens in new tab)
               </OutboundLink>
               . This project contains scripts used to manually convert SVG steno
               diagrams into React syntax to be used by the main Typey&nbsp;Type
@@ -1221,35 +728,10 @@ const Support = () => {
             Sign up for{" "}
             <OutboundLink
               eventLabel="Typey Type updates and steno news"
-              aria-label="Typey Type updates and steno news (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://didoesdigital.com/#newsletter"
             >
-              Typey&nbsp;Type updates and steno{" "}
-              <span className="whitespace-nowrap">
-                news
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
+              Typey&nbsp;Type updates and steno news (opens in new tab)
             </OutboundLink>
             .
           </p>
@@ -1257,179 +739,53 @@ const Support = () => {
           <h3 id="credits">Credits</h3>
           <ul>
             <li>
-              {" "}
               <OutboundLink
                 eventLabel="Wikipedia provides homophones"
-                aria-label="Wikipedia provides homophones (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/Homophones"
               >
-                Wikipedia provides{" "}
-                <span className="whitespace-nowrap">
-                  homophones
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                Wikipedia provides homophones (opens in new tab)
               </OutboundLink>
               .
             </li>
             <li>
-              {" "}
               <OutboundLink
                 eventLabel="Wikipedia provides proverbial phrases"
-                aria-label="Wikipedia provides proverbial phrases (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://en.wikipedia.org/wiki/List_of_proverbial_phrases"
               >
-                Wikipedia provides{" "}
-                <span className="whitespace-nowrap">
-                  proverbial phrases
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                Wikipedia provides proverbial phrases (opens in new tab)
               </OutboundLink>
               .
             </li>
             <li>
-              {" "}
               <OutboundLink
                 eventLabel="Wikipedia provides proverbs"
-                aria-label="Wikipedia provides proverbs (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://en.wiktionary.org/wiki/Appendix:English_proverbs"
               >
-                Wiktionary provides proverbs
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
+                Wiktionary provides proverbs (opens in new tab)
               </OutboundLink>
               .
             </li>
             <li>
-              {" "}
               <OutboundLink
                 eventLabel="Wikipedia provides irreversible binomials"
                 aria-label="Wikipedia provides irreversible binomials (external link opens in new tab)"
                 to="https://en.wikipedia.org/wiki/Irreversible_binomial"
               >
-                Wikipedia provides{" "}
-                <span className="whitespace-nowrap">
-                  irreversible binomials
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                Wikipedia provides irreversible binomials (opens in new tab)
               </OutboundLink>
               .
             </li>
             <li>
-              {" "}
               <OutboundLink
                 eventLabel="Wikipedia provides Speech to the Troops at Tilbury"
-                aria-label="Wikipedia provides Speech to the Troops at Tilbury (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://en.wikipedia.org/wiki/Speech_to_the_Troops_at_Tilbury"
               >
-                Wikipedia provides Speech to the Troops{" "}
-                <span className="whitespace-nowrap">
-                  at Tilbury
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                Wikipedia provides Speech to the Troops at Tilbury (opens in new
+                tab)
               </OutboundLink>
               .
             </li>
@@ -1437,104 +793,29 @@ const Support = () => {
               {" "}
               <OutboundLink
                 eventLabel="Wiktionary provides frequency lists"
-                aria-label="Wiktionary provides frequency lists (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists"
               >
-                Wiktionary provides frequency{" "}
-                <span className="whitespace-nowrap">
-                  lists
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                Wiktionary provides frequency lists (opens in new tab)
               </OutboundLink>
               .
             </li>
             <li>
-              {" "}
               <OutboundLink
                 eventLabel="Metronome sounds come from Dev_Tones by RCP Tones"
-                aria-label="Metronome sounds come from Dev_Tones by RCP Tones (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://rcptones.com/dev_tones/"
               >
-                The metronome sound, “digi_plink”, comes from Dev_Tones by{" "}
-                <span className="whitespace-nowrap">
-                  RCP Tones
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                The metronome sound, “digi_plink”, comes from Dev_Tones by RCP
+                Tones (opens in new tab)
               </OutboundLink>{" "}
               under a{" "}
               <OutboundLink
                 eventLabel="Creative Commons license (CC BY 3.0 US)"
-                aria-label="Creative Commons license (CC BY 3.0 US) (external link opens in new tab)"
+                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://creativecommons.org/licenses/by/3.0/us/legalcode"
               >
-                Creative Commons license{" "}
-                <span className="whitespace-nowrap">
-                  (CC BY 3.0 US)
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="(external link opens in new tab)"
-                    className=""
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    <IconExternal
-                      ariaHidden="true"
-                      role="presentation"
-                      iconWidth="24"
-                      iconHeight="24"
-                      className="ml1 svg-icon-wrapper svg-baseline"
-                      iconTitle=""
-                    />
-                  </Tooltip>
-                </span>
+                Creative Commons license (CC BY 3.0 US) (opens in new tab)
               </OutboundLink>{" "}
               and was adapted to include silence at the end for a slower
               metronome tempo.
@@ -1546,72 +827,14 @@ const Support = () => {
             For help with Typey&nbsp;Type,{" "}
             <a href="mailto:typeytype@didoesdigital.com">
               email typeytype@didoesdigital.com
-            </a>
-            ,{" "}
+            </a>{" "}
+            or{" "}
             <OutboundLink
               eventLabel="post to the feedback form"
-              aria-label="post to the feedback form (form opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
             >
-              post to the feedback{" "}
-              <span className="whitespace-nowrap">
-                form
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(form opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
-            </OutboundLink>
-            , or{" "}
-            <OutboundLink
-              eventLabel="tweet @DiDoesDigital"
-              aria-label="tweet @DiDoesDigital (external link opens in new tab)"
-              to="https://twitter.com/didoesdigital"
-            >
-              tweet{" "}
-              <span className="whitespace-nowrap">
-                @DiDoesDigital
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
+              post to the feedback form (opens in new tab)
             </OutboundLink>
             .
           </p>
@@ -1623,35 +846,10 @@ const Support = () => {
             This site uses{" "}
             <OutboundLink
               eventLabel="Google Analytics"
-              aria-label="Google Analytics (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://www.google.com/intl/en/policies/privacy/"
             >
-              Google{" "}
-              <span className="whitespace-nowrap">
-                Analytics
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
+              Google Analytics (opens in new tab)
             </OutboundLink>{" "}
             to track usage data for improving the site using cookies.
             Typey&nbsp;Type anonymises IP addresses before sending them to
@@ -1661,34 +859,10 @@ const Support = () => {
             This site uses{" "}
             <OutboundLink
               eventLabel="Sentry"
-              aria-label="Sentry (external link opens in new tab)"
+              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://sentry.io/privacy/"
             >
-              <span className="whitespace-nowrap">
-                Sentry
-                {/* @ts-ignore */}
-                <Tooltip
-                  title="(external link opens in new tab)"
-                  className=""
-                  animation="shift"
-                  arrow="true"
-                  duration="200"
-                  tabIndex="0"
-                  tag="span"
-                  theme="didoesdigital"
-                  trigger="mouseenter focus click"
-                  onShow={announceTooltip}
-                >
-                  <IconExternal
-                    ariaHidden="true"
-                    role="presentation"
-                    iconWidth="24"
-                    iconHeight="24"
-                    className="ml1 svg-icon-wrapper svg-baseline"
-                    iconTitle=""
-                  />
-                </Tooltip>
-              </span>
+              Sentry (opens in new tab)
             </OutboundLink>{" "}
             for error reporting to improve the site.
           </p>
