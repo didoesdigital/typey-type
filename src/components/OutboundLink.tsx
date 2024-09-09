@@ -8,6 +8,12 @@ type Props = {
   eventLabel: string;
   onClick?: React.MouseEventHandler;
   style?: React.CSSProperties;
+  /** Open new tabs from a link only when necessary, give users control of changes of context, and use link text to give advance warning that a link will open in a new window:
+   * - <https://webaim.org/techniques/hypertext/hypertext_links#new_window>
+   * - <https://www.w3.org/WAI/WCAG21/Understanding/change-on-request>
+   * - <https://www.w3.org/WAI/WCAG21/Techniques/html/H83>
+   * - <https://www.w3.org/WAI/WCAG21/Techniques/general/G200>
+   */
   newTabAndIUnderstandTheAccessibilityImplications?: boolean;
   to: string;
 };
