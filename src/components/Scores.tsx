@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Tooltip } from "react-tippy";
-import useAnnounceTooltip from "./Announcer/useAnnounceTooltip";
+import Tooltip from "./Tooltip";
 
 type Props = {
   timer: number;
@@ -22,8 +21,6 @@ const Scores = ({
   totalNumberOfHintedWords,
 }: Props) => {
   const prevTimer = useRef<number | null>(null);
-
-  const announceTooltip = useAnnounceTooltip();
 
   const [wordCount, setWordCount] = useState(0);
   const [wordsPerMinute, setWordsPerMinute] = useState(0);
@@ -66,21 +63,16 @@ const Scores = ({
             {wordsPerMinute}
           </div>
           <div className="stat__label text-center">
-            {/* @ts-ignore */}
-            <Tooltip
-              animation="shift"
-              arrow="true"
+            <span
+              aria-label="words per minute"
               className="abbr"
-              duration="200"
-              tabIndex="0"
-              tag="abbr"
-              theme="didoesdigital"
-              title="words per minute"
-              trigger="mouseenter focus click"
-              onShow={announceTooltip}
+              data-tooltip-content={"words per minute"}
+              data-tooltip-id={"wpmTooltip"}
+              tabIndex={0}
             >
               WPM
-            </Tooltip>
+            </span>
+            <Tooltip id={"wpmTooltip"} />
           </div>
         </div>
         <div className="stat">
