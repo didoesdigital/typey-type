@@ -901,7 +901,7 @@ input:focus::placeholder {
 
 .min-width70 {min-width: 70%; }
 .min-width-320 { min-width: 320px; }
-.min-width-336 { min-width: 336px; }
+.min-width-344 { min-width: 344px; }
 
 .p0      { padding: 0px; }
 .p1      { padding: 8px; }
@@ -1825,6 +1825,9 @@ $textarea-padding-x: 8px;
 
 .gap-1 {
   gap: 0.25rem; /* 4px */
+}
+.gap-2 {
+  gap: 0.5rem; /* 8px */
 }
 .gap-4 {
   gap: 1rem; /* 16px */

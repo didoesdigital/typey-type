@@ -96,7 +96,7 @@ const UserSettings = ({
         <div className="text-small">
           <div
             id="collapsible-settings"
-            className={`mh-page bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 min-width-336${
+            className={`mh-page bg-slat dark:bg-coolgrey-1100 bl b--brand-primary-tint--60 dark:border-coolgrey-800 min-width-344${
               userSettings.hideOtherSettings ? " hide" : ""
             }`}
             aria-hidden={userSettings.hideOtherSettings}
@@ -112,7 +112,7 @@ const UserSettings = ({
                   <label className="mr1" htmlFor="limitNumberOfWords">
                     Limit word count
                   </label>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <NumericInput
                       autoCapitalize="off"
                       autoComplete="on"
@@ -145,7 +145,7 @@ const UserSettings = ({
                   <label className="mr1" htmlFor="startFromWord">
                     Start from word
                   </label>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <NumericInput
                       autoCapitalize="off"
                       autoComplete="on"
@@ -179,7 +179,7 @@ const UserSettings = ({
                   <label className="mr1" htmlFor="repetitions">
                     Repetitions
                   </label>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <NumericInput
                       autoCapitalize="off"
                       autoComplete="on"
@@ -213,7 +213,7 @@ const UserSettings = ({
                   <label className="mr1 db" htmlFor="sortOrder">
                     Sort
                   </label>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <select
                       name="sortOrder"
                       id="sortOrder"
@@ -242,7 +242,7 @@ const UserSettings = ({
                   <label className="mr1" htmlFor="beatsPerMinute">
                     Metronome BPM
                   </label>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <NumericInput
                       data-1p-ignore
                       autoCapitalize="off"
@@ -469,7 +469,7 @@ const UserSettings = ({
                   <label className="mr1 db" htmlFor="spacePlacement">
                     Match spaces
                   </label>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <select
                       name="spacePlacement"
                       id="spacePlacement"
@@ -500,7 +500,7 @@ const UserSettings = ({
                   <label className="mr1 db" htmlFor="stenoLayout">
                     Steno layout
                   </label>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <select
                       name="stenoLayout"
                       id="stenoLayout"
@@ -557,7 +557,7 @@ const UserSettings = ({
                   <label className="mr1" htmlFor="diagramSize">
                     Diagram size
                   </label>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <NumericInput
                       autoCapitalize="off"
                       autoComplete="on"
@@ -591,7 +591,7 @@ const UserSettings = ({
                   <label className="mr1 db" htmlFor="upcomingWordsLayout">
                     Upcoming words
                   </label>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-2">
                     <select
                       name="upcomingWordsLayout"
                       id="upcomingWordsLayout"
