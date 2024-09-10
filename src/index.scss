@@ -257,6 +257,7 @@ $small-breakpoint: 432px;
 $focus-outline: 9px double #000;
 $focus-shadow: 0 0 0 6px $brand-highlight;
 
+$z-index-tooltips: 8;
 $z-index-modal-overlay: 7;
 $z-index-particles: 6;
 // $z-index-autocomplete-menu: 5;
@@ -2106,6 +2107,27 @@ small .svg-icon-wrapper.svg-baseline svg {
     max-width: 100%;
     width: calc(1440px - 584px - 24px - 24px);
   }
+}
+
+.typey-type-tooltip.typey-type-tooltip {
+  --rt-transition-show-delay: 0.15s;
+  --rt-transition-closing-delay: 0.1s;
+  background-color: #fff;
+  border: 2px solid var(--coolgrey-500, #A6A1AF);
+  box-shadow: 1px 4px 24px 1px rgba(0, 0, 0, 0.1);
+  color: var(--coolgrey-700, #676170);
+  font-size: $h6-size;
+  font-weight: bold;
+  max-width: 240px;
+  z-index: $z-index-tooltips;
+}
+.typey-type-tooltip.react-tooltip__show {
+  transition: opacity var(--rt-transition-show-delay) linear, transform var(--rt-transition-show-delay) ease-in-out;
+  transform: translateY(-8px);
+}
+.typey-type-tooltip.react-tooltip__closing {
+  transition: opacity var(--rt-transition-closing-delay) linear, transform var(--rt-transition-closing-delay) ease-in-out;
+  transform: translateY(0px);
 }
 .tippy-tooltip.didoesdigital-theme {
   background-color: #fff;
