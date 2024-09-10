@@ -2400,6 +2400,10 @@ small .svg-icon-wrapper.svg-baseline svg {
   transform: translate(-50%, -50%)
              scale(.8);
   transition: transform .3s cubic-bezier(0.645, 0.045, 0.355, 1); // needs to match `closeTimeoutMS={300}` in JS
+
+  strong {
+    font-weight: 700;
+  }
 }
 @media (prefers-color-scheme: dark) {
   .modal {

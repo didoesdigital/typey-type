@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
 import Metronome from "./Metronome";
-import { Tooltip } from "react-tippy";
-import type { Study } from "../../../types";
-import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../../states/userSettingsState";
+import type { Study } from "../../../types";
 
 type LessonCanvasFooterProps = {
   chooseStudy: () => void;
@@ -21,8 +19,8 @@ const LessonCanvasFooter = ({
   updatePreset,
 }: LessonCanvasFooterProps) => {
   const userSettings = useAtomValue(userSettingsState);
-  const [showModal, setShowModal] = useState(false);
-  const announceTooltip = useAnnounceTooltip();
+  const [showPresetsModal, setShowPresetsModal] = useState(false);
+  const [showStudyTypeModal, setShowStudyTypeModal] = useState(false);
 
   const studyBlurb =
     userSettings.study === "practice"
@@ -37,19 +35,29 @@ const LessonCanvasFooter = ({
     ReactModal.setAppElement("#js-app");
   }, []);
 
+  function handleOpenStudyTypeModal(event: any) {
+    event.preventDefault();
+    setShowStudyTypeModal(true);
+  }
+
+  function handleCloseStudyTypeModal(event: any) {
+    event.preventDefault();
+    setShowStudyTypeModal(false);
+  }
+
   function handleOpenStudyPresetsModal(event: any) {
     event.preventDefault();
-    setShowModal(true);
+    setShowPresetsModal(true);
   }
 
   function handleCloseStudyPresetsModal(event: any) {
     event.preventDefault();
-    setShowModal(false);
+    setShowPresetsModal(false);
   }
 
   function savePreset() {
     updatePreset(userSettings.study);
-    setShowModal(false);
+    setShowPresetsModal(false);
   }
 
   return (
@@ -57,22 +65,17 @@ const LessonCanvasFooter = ({
       <Metronome />
       <div className="flex flex-wrap content-center">
         <fieldset className="dc hide-sm">
-          {/* @ts-ignore */}
-          <Tooltip
-            title="Study types are recommended presets for settings you can change"
-            className="mw-240"
-            animation="shift"
-            arrow="true"
-            duration="200"
-            position="bottom"
-            tabIndex="0"
-            tag="p"
-            theme="didoesdigital didoesdigital-sm"
-            trigger="mouseenter focus click"
-            onShow={announceTooltip}
-          >
-            <legend className="flex mr3">Study type:</legend>
-          </Tooltip>
+          <p>
+            <legend className="flex mr3">
+              <button
+                className="de-emphasized-button text-small"
+                onClick={handleOpenStudyTypeModal}
+                style={{ height: "fit-content", lineHeight: 2 }}
+              >
+                Study type:
+              </button>
+            </legend>
+          </p>
           <div className="flex mb1">
             <div className="flex flex-wrap justify-between">
               <p className="block relative mr3 mb0">
@@ -87,22 +90,7 @@ const LessonCanvasFooter = ({
                     checked={userSettings.study === "discover"}
                     onChange={chooseStudy}
                   />
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="Discover 5–15 new words with their briefs shown, concentrating on accuracy"
-                    className="mw-240"
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    position="bottom"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital didoesdigital-sm"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    Discover
-                  </Tooltip>
+                  Discover
                 </label>
                 <button
                   className="de-emphasized-button text-small"
@@ -129,22 +117,7 @@ const LessonCanvasFooter = ({
                     checked={userSettings.study === "revise"}
                     onChange={chooseStudy}
                   />
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="Revise 50 briefs, recalling the briefs before revealing their strokes and avoiding fingerspelling"
-                    className="mw-240"
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    position="bottom"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital didoesdigital-sm"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    Revise
-                  </Tooltip>
+                  Revise
                 </label>
                 <button
                   className="de-emphasized-button text-small"
@@ -173,22 +146,7 @@ const LessonCanvasFooter = ({
                     checked={userSettings.study === "drill"}
                     onChange={chooseStudy}
                   />
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="Drill common words to build your muscle memory, writing as fast as you can"
-                    className="mw-240"
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    position="bottom"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital didoesdigital-sm"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    Drill
-                  </Tooltip>
+                  Drill
                 </label>
                 <button
                   className="de-emphasized-button text-small"
@@ -215,22 +173,7 @@ const LessonCanvasFooter = ({
                     checked={userSettings.study === "practice"}
                     onChange={chooseStudy}
                   />
-                  {/* @ts-ignore */}
-                  <Tooltip
-                    title="Practice longer text in order, mimicking real usage as closely as possible"
-                    className="mw-240"
-                    animation="shift"
-                    arrow="true"
-                    duration="200"
-                    position="bottom"
-                    tabIndex="0"
-                    tag="span"
-                    theme="didoesdigital didoesdigital-sm"
-                    trigger="mouseenter focus click"
-                    onShow={announceTooltip}
-                  >
-                    Practice
-                  </Tooltip>
+                  Practice
                 </label>
                 <button
                   className="de-emphasized-button text-small"
@@ -249,7 +192,66 @@ const LessonCanvasFooter = ({
           </div>
         </fieldset>
         <ReactModal
-          isOpen={showModal}
+          isOpen={showStudyTypeModal}
+          aria={{
+            labelledby: "aria-study-type-modal-heading",
+            describedby: "aria-study-type-modal-description",
+          }}
+          ariaHideApp={true}
+          closeTimeoutMS={300}
+          role="dialog"
+          onRequestClose={handleCloseStudyTypeModal}
+          className={{
+            "base": "modal",
+            "afterOpen": "modal--after-open",
+            "beforeClose": "modal--before-close",
+          }}
+          overlayClassName={{
+            "base": "modal__overlay",
+            "afterOpen": "modal__overlay--after-open",
+            "beforeClose": "modal__overlay--before-close",
+          }}
+        >
+          <div className="fr">
+            <button
+              className="de-emphasized-button hide-md"
+              onClick={handleCloseStudyTypeModal}
+            >
+              Close
+            </button>
+          </div>
+          <h3 id="aria-study-type-modal-heading">Study types</h3>
+          <div id="aria-study-type-modal-description">
+            <p>
+              Study types are recommended presets for settings you can change:
+            </p>
+            <ul>
+              <li>
+                <strong>Discover</strong> 5–15 new words with their briefs
+                shown, concentrating on accuracy.
+              </li>
+              <li>
+                <strong>Revise</strong> 50 briefs, recalling the briefs before
+                revealing their strokes and avoiding fingerspelling.
+              </li>
+              <li>
+                <strong>Drill</strong> common words to build your muscle memory,
+                writing as fast as you can.
+              </li>
+              <li>
+                <strong>Practice</strong> longer text in order, mimicking real
+                usage as closely as possible.
+              </li>
+            </ul>
+          </div>
+          <div className="text-right">
+            <button className="button" onClick={handleCloseStudyTypeModal}>
+              OK
+            </button>
+          </div>
+        </ReactModal>
+        <ReactModal
+          isOpen={showPresetsModal}
           aria={{
             labelledby: "aria-study-presets-modal-heading",
             describedby: "aria-study-presets-modal-description",
