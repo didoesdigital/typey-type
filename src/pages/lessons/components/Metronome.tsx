@@ -9,16 +9,14 @@ import React, {
 import { Howl } from "howler";
 import MetronomeIcon from "../../../components/Icons/icon-images/Metronome.svg";
 import Icon from "../../../components/Icons/Icon";
-import { Tooltip } from "react-tippy";
+import Tooltip from "../../../components/Tooltip";
 import GoogleAnalytics from "react-ga4";
 import plink from "../../../sounds/digi_plink-with-silence.mp3";
-import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
 
 import { useAtomValue } from "jotai";
 import { beatsPerMinuteState } from "../../../states/userSettingsState";
 
-type Props = {
-};
+type Props = {};
 
 type Options = {
   id: string;
@@ -103,7 +101,6 @@ function playId(beatsPerMinute: number) {
 const Metronome: FC<Props> = (props) => {
   const beatsPerMinuteSetting = useAtomValue(beatsPerMinuteState);
   const prevBpmRef = useRef<number>(10);
-  const announceTooltip = useAnnounceTooltip();
 
   const [userGestureToStartMetronome, setUserGestureToStartMetronome] =
     useState(false);
@@ -139,7 +136,11 @@ const Metronome: FC<Props> = (props) => {
   return (
     <p>
       <button
-        aria-label="Start metronome"
+        aria-label="Start the metronome for finger drills and improving rhythm"
+        data-tooltip-id={"metronome-start"}
+        data-tooltip-content={
+          "Start the metronome for finger drills and improving rhythm"
+        }
         className="button button--secondary mr2"
         onClick={() =>
           playMetronome.call(
@@ -150,54 +151,30 @@ const Metronome: FC<Props> = (props) => {
           )
         }
       >
-        {/* @ts-ignore */}
-        <Tooltip
-          title="Start the metronome for finger drills and improving rhythm"
-          className="mw-240"
-          animation="shift"
-          arrow="true"
-          duration="200"
-          tabIndex="0"
-          tag="span"
-          theme="didoesdigital didoesdigital-sm"
-          trigger="mouseenter focus click"
-          onShow={announceTooltip}
-        >
-          <Icon
-            iconSVGImport={MetronomeIcon}
-            width="1em"
-            height="1em"
-            style={{ transform: "translateY(0.125em)" }}
-          />{" "}
-          Start
-        </Tooltip>
+        <Icon
+          iconSVGImport={MetronomeIcon}
+          width="1em"
+          height="1em"
+          style={{ transform: "translateY(0.125em)" }}
+        />{" "}
+        Start
+        <Tooltip id={"metronome-start"} place="top-start" />
       </button>
       <button
-        aria-label="Stop metronome"
+        aria-label="Stop the metronome"
+        data-tooltip-id={"metronome-stop"}
+        data-tooltip-content={"Stop the metronome"}
         className="button button--secondary"
         onClick={() => stopMetronome.call(this, "withAnalytics")}
       >
-        {/* @ts-ignore */}
-        <Tooltip
-          title="Stop the metronome"
-          className="mw-240"
-          animation="shift"
-          arrow="true"
-          duration="200"
-          tabIndex="0"
-          tag="span"
-          theme="didoesdigital didoesdigital-sm"
-          trigger="mouseenter focus click"
-          onShow={announceTooltip}
-        >
-          <Icon
-            iconSVGImport={MetronomeIcon}
-            width="1em"
-            height="1em"
-            style={{ transform: "translateY(0.125em)" }}
-          />{" "}
-          Stop
-        </Tooltip>
+        <Icon
+          iconSVGImport={MetronomeIcon}
+          width="1em"
+          height="1em"
+          style={{ transform: "translateY(0.125em)" }}
+        />{" "}
+        Stop
+        <Tooltip id={"metronome-stop"} />
       </button>
     </p>
   );

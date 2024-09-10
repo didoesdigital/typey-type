@@ -2129,6 +2129,10 @@ small .svg-icon-wrapper.svg-baseline svg {
   transition: opacity var(--rt-transition-closing-delay) linear, transform var(--rt-transition-closing-delay) ease-in-out;
   transform: translateY(0px);
 }
+.button .typey-type-tooltip {
+  text-wrap: initial;
+}
+
 .tippy-tooltip.didoesdigital-theme {
   background-color: #fff;
   border: 2px solid desaturate(add-tint($brand-primary, 50%), 40%);
