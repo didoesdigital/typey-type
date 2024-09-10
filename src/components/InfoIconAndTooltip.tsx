@@ -12,10 +12,12 @@ const InfoIconAndTooltip = ({ id, content, place }: Props) => {
   return (
     <>
       <div
-        data-tooltip-id={id}
-        data-tooltip-content={content}
-        tabIndex={0}
+        aria-label="More information"
         className="flex items-center"
+        data-tooltip-content={content}
+        data-tooltip-id={id}
+        role="note"
+        tabIndex={0}
       >
         <Icon
           iconSVGImport={Info}
