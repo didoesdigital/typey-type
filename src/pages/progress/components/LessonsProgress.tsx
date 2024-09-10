@@ -1,10 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Checkmark from "../../../components/Icons/icon-images/Checkmark.svg";
 import TriangleRight from "../../../components/Icons/icon-images/TriangleRight.svg";
 import Icon from "../../../components/Icons/Icon";
-import { Link } from "react-router-dom";
-import { Tooltip } from "react-tippy";
-import useAnnounceTooltip from "../../../components/Announcer/useAnnounceTooltip";
+import Tooltip from "../../../components/Tooltip";
+import slugifyTitle from "../../../utils/slugifyTitle";
 
 import type { LessonIndexEntry, LessonsProgressIndex } from "../../../types";
 
@@ -13,34 +13,7 @@ type Props = {
   lessonsProgress: LessonsProgressIndex;
 };
 
-type ProgressTooltipProps = {
-  title: string;
-  onShow: () => void;
-  children: JSX.Element | JSX.Element[];
-};
-
-const ProgressTooltip = ({ title, onShow, children }: ProgressTooltipProps) => {
-  return (
-    // @ts-ignore
-    <Tooltip
-      title={title}
-      className=""
-      animation="shift"
-      arrow="true"
-      duration="200"
-      tabIndex={0}
-      tag="span"
-      theme="didoesdigital didoesdigital-sm"
-      trigger="mouseenter focus click"
-      onShow={onShow}
-    >
-      {children}
-    </Tooltip>
-  );
-};
-
 const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
-  const announceTooltip = useAnnounceTooltip();
   function progressIconClasses(color: string) {
     return (
       `text-${color}-600 ` +
@@ -51,19 +24,29 @@ const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
     );
   }
 
-  function unstarted() {
+  function unstarted(id: string) {
     return (
-      <ProgressTooltip title="Unstarted" onShow={announceTooltip}>
-        <div aria-hidden="true" className={progressIconClasses("violet")} />
-        <span className="visually-hidden">Unstarted</span>
-      </ProgressTooltip>
+      <div className="dib">
+        <div
+          data-tooltip-id={id}
+          data-tooltip-content={"Unstarted"}
+          tabIndex={0}
+          className={progressIconClasses("violet")}
+        />
+        <Tooltip id={id} />
+      </div>
     );
   }
 
-  function inProgress() {
+  function inProgress(id: string) {
     return (
-      <ProgressTooltip title="In progress" onShow={announceTooltip}>
-        <div className={progressIconClasses("violet")}>
+      <div className="dib">
+        <div
+          data-tooltip-id={id}
+          data-tooltip-content={"In progress"}
+          tabIndex={0}
+          className={progressIconClasses("violet")}
+        >
           <Icon
             iconSVGImport={TriangleRight}
             width="1em"
@@ -71,18 +54,20 @@ const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
             style={{ transform: "translateX(0.025em) scale(0.6)" }}
           />
         </div>
-        <span className="visually-hidden">In progress</span>
-      </ProgressTooltip>
+        <Tooltip id={id} />
+      </div>
     );
   }
 
-  function lessonComplete() {
+  function lessonComplete(id: string) {
     return (
-      <ProgressTooltip
-        title="100 words done or lesson complete"
-        onShow={announceTooltip}
-      >
-        <div className={progressIconClasses("green")}>
+      <div className="dib">
+        <div
+          data-tooltip-id={id}
+          data-tooltip-content={"100 words done or lesson complete"}
+          tabIndex={0}
+          className={progressIconClasses("green")}
+        >
           <Icon
             iconSVGImport={Checkmark}
             width="1em"
@@ -90,14 +75,15 @@ const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
             style={{ transform: "scale(0.6)" }}
           />
         </div>
-        <span className="visually-hidden">
-          100 words done or lesson complete
-        </span>
-      </ProgressTooltip>
+        <Tooltip id={id} />
+      </div>
     );
   }
 
   const linkList = lessonIndex.map((lesson) => {
+    let htmlIdForLesson = slugifyTitle(
+      lesson.path.slice(1).replace("/lesson.txt", "")
+    );
     let lessonsubtitle = "";
     let wordCountDenominator = 0;
     let numberOfWordsSeenOrMemorised = 0;
@@ -130,14 +116,14 @@ const LessonsProgress = ({ lessonIndex, lessonsProgress }: Props) => {
         if (numberOfWordsSeenOrMemorised >= wordCountDenominator) {
           numberOfWordsSeenOrMemorised = wordCountDenominator;
         }
-        lessonCompletion = lessonComplete();
+        lessonCompletion = lessonComplete(htmlIdForLesson);
       } else if (numberOfWordsSeenOrMemorised > 0) {
-        lessonCompletion = inProgress();
+        lessonCompletion = inProgress(htmlIdForLesson);
       } else {
-        lessonCompletion = unstarted();
+        lessonCompletion = unstarted(htmlIdForLesson);
       }
     } else {
-      lessonCompletion = unstarted();
+      lessonCompletion = unstarted(htmlIdForLesson);
     }
     if (
       lesson.category === "Fundamentals" ||
