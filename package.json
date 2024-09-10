@@ -43,6 +43,7 @@
     "react-numeric-input": "^2.2.0",
     "react-router-dom": "5.1.2",
     "react-tippy": "https://github.com/tvkhoa/react-tippy.git",
+    "react-tooltip": "^5.28.0",
     "react-transition-group": "^2.4.0",
     "sass": "^1.49.8",
     "typescript": "^4.7.4",
