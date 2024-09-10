@@ -2123,6 +2123,11 @@ small .svg-icon-wrapper.svg-baseline svg {
   max-width: 240px;
   z-index: $z-index-tooltips;
 }
+@media (prefers-color-scheme: dark) {
+  .typey-type-tooltip.typey-type-tooltip {
+    background-color: var(--coolgrey-300);
+  }
+}
 .typey-type-tooltip.react-tooltip__show {
   transition: opacity var(--rt-transition-show-delay) linear, transform var(--rt-transition-show-delay) ease-in-out;
   transform: translateY(0px);
