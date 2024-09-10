@@ -2123,11 +2123,11 @@ small .svg-icon-wrapper.svg-baseline svg {
 }
 .typey-type-tooltip.react-tooltip__show {
   transition: opacity var(--rt-transition-show-delay) linear, transform var(--rt-transition-show-delay) ease-in-out;
-  transform: translateY(-8px);
+  transform: translateY(0px);
 }
 .typey-type-tooltip.react-tooltip__closing {
   transition: opacity var(--rt-transition-closing-delay) linear, transform var(--rt-transition-closing-delay) ease-in-out;
-  transform: translateY(0px);
+  transform: translateY(8px);
 }
 .button .typey-type-tooltip {
   text-wrap: initial;
