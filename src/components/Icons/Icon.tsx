@@ -1,6 +1,6 @@
 import React from "react";
 
-interface IconProps {
+type IconProps = React.ComponentPropsWithoutRef<"span"> & {
   /** e.g. `ClosingCross` with `import ClosingCross from "./icon-images/ClosingCross.svg";` */
   iconSVGImport: string;
   /** Use `em` unit to adjust icon with font size e.g. `1em` */
@@ -10,7 +10,7 @@ interface IconProps {
   color?: string;
   className?: string;
   style?: React.CSSProperties;
-}
+};
 
 const Icon: React.FC<IconProps> = ({
   iconSVGImport,
@@ -19,6 +19,7 @@ const Icon: React.FC<IconProps> = ({
   color,
   className,
   style,
+  ...props
 }) => {
   const iconStyle: React.CSSProperties = {
     backgroundColor: color,
@@ -33,7 +34,9 @@ const Icon: React.FC<IconProps> = ({
     ...style,
   };
 
-  return <span className={className || "icon"} style={iconStyle}></span>;
+  return (
+    <span {...props} className={className || "icon"} style={iconStyle}></span>
+  );
 };
 
 export default Icon;
