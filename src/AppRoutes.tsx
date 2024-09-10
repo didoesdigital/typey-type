@@ -1,5 +1,4 @@
 import React, { Suspense } from "react";
-import "react-tippy/dist/tippy.css";
 import { Route, Switch } from "react-router-dom";
 import DocumentTitle from "react-document-title";
 import Loadable from "react-loadable";

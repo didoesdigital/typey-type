@@ -2144,62 +2144,6 @@ small .svg-icon-wrapper.svg-baseline svg {
   text-wrap: initial;
 }
 
-.tippy-tooltip.didoesdigital-theme {
-  background-color: #fff;
-  border: 2px solid desaturate(add-tint($brand-primary, 50%), 40%);
-  box-shadow: 1px 4px 24px 1px rgba(0, 0, 0, 0.1);
-  font-weight: bold;
-  color: desaturate(add-tint($brand-primary, 30%), 40%);
-  &.didoesdigital-sm-theme {
-    max-width: 240px;
-  }
-}
-.tippy-popper[x-placement^=top] .tippy-tooltip.didoesdigital-theme .arrow-regular {
-  border-top-color: desaturate(add-tint($brand-primary, 50%), 40%);
-  &:before {
-    content: '';
-    position: absolute;
-    border-top: 5px solid #fff;
-    border-right: 5px solid transparent;
-    border-left: 5px solid transparent;
-    transform: translate(-5px,-8px);
-  }
-}
-.tippy-popper[x-placement^=right] .tippy-tooltip.didoesdigital-theme .arrow-regular {
-  border-right-color: desaturate(add-tint($brand-primary, 50%), 40%);
-  &:before {
-    content: '';
-    position: absolute;
-    border-top: 5px solid transparent;
-    border-right: 5px solid #fff;
-    border-bottom: 5px solid transparent;
-    transform: translate(3px,-5px);
-  }
-}
-.tippy-popper[x-placement^=bottom] .tippy-tooltip.didoesdigital-theme .arrow-regular {
-  border-bottom-color: desaturate(add-tint($brand-primary, 50%), 40%);
-  &:before {
-    content: '';
-    position: absolute;
-    border-right: 5px solid transparent;
-    border-left: 5px solid transparent;
-    border-bottom: 5px solid #fff;
-    transform: translate(-5px,3px);
-  }
-}
-.tippy-popper[x-placement^=left] .tippy-tooltip.didoesdigital-theme .arrow-regular {
-  border-left-color: desaturate(add-tint($brand-primary, 50%), 40%);
-  &:before {
-    content: '';
-    position: absolute;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    border-left: 5px solid #fff;
-    transform: translate(-8px,-5px);
-  }
-}
-
-
 
 
 
