@@ -1047,9 +1047,11 @@ input:focus::placeholder {
 .color-text                     { color: $type-color; }
 .color-text--reverse            { color: $type-color--reverse; }
 .de-emphasized                  { color: var(--coolgrey-700); }
+.icon.de-emphasized                  { color: var(--coolgrey-600); }
 
 @media (prefers-color-scheme: dark) {
   .de-emphasized                { color: var(--coolgrey-600); }
+  .icon.de-emphasized                { color: var(--coolgrey-600); }
   .lesson-canvas .de-emphasized { color: var(--coolgrey-500); }
 }
 
