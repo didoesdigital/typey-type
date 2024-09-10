@@ -1,6 +1,6 @@
 import React from "react";
-import { Tooltip } from "react-tippy";
-import useAnnounceTooltip from "./Announcer/useAnnounceTooltip";
+import Tooltip from "./Tooltip";
+import slugifyTitle from "../utils/slugifyTitle";
 
 type Props = {
   value: number;
@@ -17,8 +17,6 @@ export default function DisplayMetric({
   size,
   tooltipMessage,
 }: Props) {
-  const announceTooltip = useAnnounceTooltip();
-
   const classes =
     size && size === "L"
       ? "stat__number stat__number--min-w lh-single text-center stat__number--display"
@@ -30,21 +28,19 @@ export default function DisplayMetric({
         {valueSuffix && <span className="smaller">{valueSuffix}</span>}
       </div>
       {tooltipMessage ? (
-        // @ts-ignore
-        <Tooltip
-          animation="shift"
-          arrow="true"
-          className="mw-240"
-          duration="200"
-          tabIndex="0"
-          tag="abbr"
-          theme="didoesdigital didoesdigital-sm"
-          title={tooltipMessage}
-          trigger="mouseenter focus click"
-          onShow={announceTooltip}
-        >
-          <div className="stat__label text-center dib">{label}</div>
-        </Tooltip>
+        <div>
+          <div
+            data-tooltip-id={slugifyTitle(label)}
+            data-tooltip-content={tooltipMessage}
+            className="abbr dib"
+            tabIndex={0}
+            role="button"
+          >
+            <div className="stat__label text-center dib">{label}</div>
+          </div>
+
+          <Tooltip id={slugifyTitle(label)} />
+        </div>
       ) : (
         <div className="stat__label text-center">{label}</div>
       )}
