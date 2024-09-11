@@ -367,7 +367,7 @@ const RecommendationBox = ({
           }
           to={recommendedNextLesson.link}
           onClick={startRecommendedStep}
-          className="mr2 link-button dib"
+          className="link-button dib"
           style={{ lineHeight: 2 }}
         >
           {recommendedNextLessonCallToActionButton} (opens in new tab)
@@ -378,7 +378,7 @@ const RecommendationBox = ({
         <Link
           onClick={startRecommendedStep}
           to={recommendedNextLesson.link}
-          className="mr2 link-button dib"
+          className="link-button dib"
           style={{ lineHeight: 2 }}
         >
           {recommendedNextLessonCallToActionButton}
@@ -389,7 +389,7 @@ const RecommendationBox = ({
     if (studyType === "error") {
       recommendedLinkTitle = "Unable to load recommendation";
       recommendedLink = (
-        <a href="." className="mr2 link-button dib" style={{ lineHeight: 2 }}>
+        <a href="." className="link-button dib" style={{ lineHeight: 2 }}>
           Refresh
         </a>
       );
