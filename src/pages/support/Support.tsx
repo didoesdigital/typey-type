@@ -109,10 +109,9 @@ const Support = () => {
             learn more about Plover from the{" "}
             <OutboundLink
               eventLabel="Open steno project"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="http://openstenoproject.org/"
             >
-              Open steno project (opens in new tab)
+              Open steno project
             </OutboundLink>
             .
           </p>
@@ -138,10 +137,9 @@ const Support = () => {
             If you want to help fund my efforts on this project, you can{" "}
             <OutboundLink
               eventLabel="Patreon"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://www.patreon.com/didoesdigital"
             >
-              become a supporter on Patreon (opens in new tab).
+              become a supporter on Patreon.
             </OutboundLink>
           </p>
 
@@ -178,10 +176,9 @@ const Support = () => {
               {" "}
               <OutboundLink
                 eventLabel="Plover"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="http://www.openstenoproject.org/plover/"
               >
-                Plover (opens in new tab)
+                Plover
               </OutboundLink>{" "}
               is the world’s first free, open-source stenography program. It
               works cross-platform on Windows, macOS, and Linux operating
@@ -198,19 +195,17 @@ const Support = () => {
             <li>
               <OutboundLink
                 eventLabel="spaced repetitions"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://en.wikipedia.org/wiki/Spaced_repetition"
               >
-                Spaced repetitions (opens in new tab)
+                Spaced repetitions
               </OutboundLink>
             </li>
             <li>
               <OutboundLink
                 eventLabel="deliberate practice"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://en.wikipedia.org/wiki/Practice_(learning_method)#Deliberate_practice"
               >
-                Deliberate practice (opens in new tab)
+                Deliberate practice
               </OutboundLink>
             </li>
           </ul>
@@ -256,10 +251,9 @@ const Support = () => {
             If you notice any odd strokes,{" "}
             <OutboundLink
               eventLabel="post to the feedback form"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
             >
-              post to the feedback form (opens in new tab)
+              post to the feedback form
             </OutboundLink>
             .
           </p>
@@ -283,10 +277,9 @@ const Support = () => {
             that make use of the browser’s built in{" "}
             <OutboundLink
               eventLabel="accesskey"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://en.m.wikipedia.org/wiki/Access_key"
             >
-              accesskey functionality (opens in new tab)
+              accesskey functionality
             </OutboundLink>
             .
           </p>
@@ -437,21 +430,16 @@ const Support = () => {
           </p>
           <ul>
             <li>
-              <OutboundLink
-                eventLabel="Anki"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
-                to="https://apps.ankiweb.net/"
-              >
-                Anki (opens in new tab)
+              <OutboundLink eventLabel="Anki" to="https://apps.ankiweb.net/">
+                Anki
               </OutboundLink>
             </li>
             <li>
               <OutboundLink
                 eventLabel="flashcard decks for the Top 2000 Words"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://github.com/jladdjr/anki-decks/tree/master/Plover%20-%20Project%20Gutenberg%20Top%2010k%20Words"
               >
-                Flashcard decks for the Top 2000 Words (opens in new tab)
+                Flashcard decks for the Top 2000 Words
               </OutboundLink>
             </li>
           </ul>
@@ -466,10 +454,9 @@ const Support = () => {
             the{" "}
             <OutboundLink
               eventLabel="Typey Type repo README"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://github.com/didoesdigital/typey-type/blob/master/README.md"
             >
-              Typey&nbsp;Type repo README (opens in new tab)
+              Typey&nbsp;Type repo README
             </OutboundLink>
             .
           </p>
@@ -480,10 +467,9 @@ const Support = () => {
             For an idea of how steno feels and works, you can{" "}
             <OutboundLink
               eventLabel="install Plover"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="http://openstenoproject.org/"
             >
-              install Plover (opens in new tab)
+              install Plover
             </OutboundLink>{" "}
             and use its “arpeggiate” setting. This setting lets you use a QWERTY
             keyboard to write stenography. The trick is that you press each key
@@ -504,29 +490,25 @@ const Support = () => {
             <li>
               <OutboundLink
                 eventLabel="true NKRO (N-key roll over) supported keyboard"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://plover.wiki/index.php/Supported_hardware#Known_supported_stenotypes"
               >
-                True NKRO (N-key roll over) supported keyboards (opens in new
-                tab)
+                True NKRO (N-key roll over) supported keyboards
               </OutboundLink>{" "}
             </li>
             <li>
               <OutboundLink
                 eventLabel="stenotype machine"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://plover.wiki/index.php/Supported_hardware#Stenotype_machines"
               >
-                Stenotype machines (opens in new tab)
+                Stenotype machines
               </OutboundLink>{" "}
             </li>
             <li>
               <OutboundLink
                 eventLabel="Plover (free and open)"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="http://www.openstenoproject.org/plover/"
               >
-                Plover (opens in new tab)
+                Plover
               </OutboundLink>
             </li>
           </ul>
@@ -607,18 +589,16 @@ const Support = () => {
             popular and more ergonomic.{" "}
             <OutboundLink
               eventLabel="Learn palantype"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="http://www.openstenoproject.org/palantype/tutorial/2016/08/21/learn-palantype.html"
             >
-              Learn palantype (opens in new tab)
+              Learn palantype
             </OutboundLink>{" "}
             and learn more about{" "}
             <OutboundLink
               eventLabel="Palan versus Steno"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="http://www.openstenoproject.org/palantype/palantype/2016/08/21/palan-versus-steno.html"
             >
-              Palan versus Steno (opens in new tab)
+              Palan versus Steno
             </OutboundLink>{" "}
             from the Open Steno Project.
           </p>
@@ -643,10 +623,9 @@ const Support = () => {
             You can support my efforts on{" "}
             <OutboundLink
               eventLabel="Patreon"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://www.patreon.com/didoesdigital"
             >
-              Patreon (opens in new tab)
+              Patreon
             </OutboundLink>
             . A monthly donation helps me build more lessons and features to
             help you fast-track your steno progress.
@@ -660,10 +639,9 @@ const Support = () => {
             <li>
               <OutboundLink
                 eventLabel="Typey Type repo"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://github.com/didoesdigital/typey-type"
               >
-                Typey&nbsp;Type repo (opens in new tab)
+                Typey&nbsp;Type repo
               </OutboundLink>
               . This contains the application code that makes Typey&nbsp;Type do
               useful things.
@@ -671,10 +649,9 @@ const Support = () => {
             <li>
               <OutboundLink
                 eventLabel="Typey Type data repo"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://github.com/didoesdigital/typey-type-data"
               >
-                Typey&nbsp;Type data repo (opens in new tab)
+                Typey&nbsp;Type data repo
               </OutboundLink>
               . This project is the result of automated scripts that produce
               lesson data used by Typey&nbsp;Type. The scripts are not included.
@@ -682,10 +659,9 @@ const Support = () => {
             <li>
               <OutboundLink
                 eventLabel="Steno dictionaries repo"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://github.com/didoesdigital/steno-dictionaries/"
               >
-                Steno dictionaries (opens in new tab)
+                Steno dictionaries
               </OutboundLink>
               . This repository contains Di’s stenography dictionaries that
               power Typey&nbsp;Type’s stroke suggestions, as well as extra
@@ -694,10 +670,9 @@ const Support = () => {
             <li>
               <OutboundLink
                 eventLabel="Stenoboard diagram SVG to React repo"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://github.com/didoesdigital/typey-type-stenoboard-diagram-svg-to-react"
               >
-                Stenoboard diagram SVG to React (opens in new tab)
+                Stenoboard diagram SVG to React
               </OutboundLink>
               . This project contains scripts used to manually convert SVG steno
               diagrams into React syntax to be used by the main Typey&nbsp;Type
@@ -710,10 +685,9 @@ const Support = () => {
             Sign up for{" "}
             <OutboundLink
               eventLabel="Typey Type updates and steno news"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://didoesdigital.com/#newsletter"
             >
-              Typey&nbsp;Type updates and steno news (opens in new tab)
+              Typey&nbsp;Type updates and steno news
             </OutboundLink>
             .
           </p>
@@ -723,51 +697,45 @@ const Support = () => {
             <li>
               <OutboundLink
                 eventLabel="Wikipedia provides homophones"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://en.wikipedia.org/wiki/Wikipedia:Lists_of_common_misspellings/Homophones"
               >
-                Wikipedia provides homophones (opens in new tab)
+                Wikipedia provides homophones
               </OutboundLink>
               .
             </li>
             <li>
               <OutboundLink
                 eventLabel="Wikipedia provides proverbial phrases"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://en.wikipedia.org/wiki/List_of_proverbial_phrases"
               >
-                Wikipedia provides proverbial phrases (opens in new tab)
+                Wikipedia provides proverbial phrases
               </OutboundLink>
               .
             </li>
             <li>
               <OutboundLink
                 eventLabel="Wikipedia provides proverbs"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://en.wiktionary.org/wiki/Appendix:English_proverbs"
               >
-                Wiktionary provides proverbs (opens in new tab)
+                Wiktionary provides proverbs
               </OutboundLink>
               .
             </li>
             <li>
               <OutboundLink
                 eventLabel="Wikipedia provides irreversible binomials"
-                aria-label="Wikipedia provides irreversible binomials (external link opens in new tab)"
                 to="https://en.wikipedia.org/wiki/Irreversible_binomial"
               >
-                Wikipedia provides irreversible binomials (opens in new tab)
+                Wikipedia provides irreversible binomials
               </OutboundLink>
               .
             </li>
             <li>
               <OutboundLink
                 eventLabel="Wikipedia provides Speech to the Troops at Tilbury"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://en.wikipedia.org/wiki/Speech_to_the_Troops_at_Tilbury"
               >
-                Wikipedia provides Speech to the Troops at Tilbury (opens in new
-                tab)
+                Wikipedia provides Speech to the Troops at Tilbury
               </OutboundLink>
               .
             </li>
@@ -775,29 +743,26 @@ const Support = () => {
               {" "}
               <OutboundLink
                 eventLabel="Wiktionary provides frequency lists"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://en.wiktionary.org/wiki/Wiktionary:Frequency_lists"
               >
-                Wiktionary provides frequency lists (opens in new tab)
+                Wiktionary provides frequency lists
               </OutboundLink>
               .
             </li>
             <li>
               <OutboundLink
                 eventLabel="Metronome sounds come from Dev_Tones by RCP Tones"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://rcptones.com/dev_tones/"
               >
                 The metronome sound, “digi_plink”, comes from Dev_Tones by RCP
-                Tones (opens in new tab)
+                Tones
               </OutboundLink>{" "}
               under a{" "}
               <OutboundLink
                 eventLabel="Creative Commons license (CC BY 3.0 US)"
-                newTabAndIUnderstandTheAccessibilityImplications={true}
                 to="https://creativecommons.org/licenses/by/3.0/us/legalcode"
               >
-                Creative Commons license (CC BY 3.0 US) (opens in new tab)
+                Creative Commons license (CC BY 3.0 US)
               </OutboundLink>{" "}
               and was adapted to include silence at the end for a slower
               metronome tempo.
@@ -813,10 +778,9 @@ const Support = () => {
             or{" "}
             <OutboundLink
               eventLabel="post to the feedback form"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://docs.google.com/forms/d/e/1FAIpQLSeevsX2oYEvnDHd3y8weg5_7-T8QZsF93ElAo28JO9Tmog-7Q/viewform?usp=sf_link"
             >
-              post to the feedback form (opens in new tab)
+              post to the feedback form
             </OutboundLink>
             .
           </p>
@@ -828,10 +792,9 @@ const Support = () => {
             This site uses{" "}
             <OutboundLink
               eventLabel="Google Analytics"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
               to="https://www.google.com/intl/en/policies/privacy/"
             >
-              Google Analytics (opens in new tab)
+              Google Analytics
             </OutboundLink>{" "}
             to track usage data for improving the site using cookies.
             Typey&nbsp;Type anonymises IP addresses before sending them to
@@ -839,12 +802,8 @@ const Support = () => {
           </p>
           <p>
             This site uses{" "}
-            <OutboundLink
-              eventLabel="Sentry"
-              newTabAndIUnderstandTheAccessibilityImplications={true}
-              to="https://sentry.io/privacy/"
-            >
-              Sentry (opens in new tab)
+            <OutboundLink eventLabel="Sentry" to="https://sentry.io/privacy/">
+              Sentry
             </OutboundLink>{" "}
             for error reporting to improve the site.
           </p>
