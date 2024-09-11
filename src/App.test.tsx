@@ -50,6 +50,15 @@ const PAGES: { [name: string]: Page } = {
   }
 };
 
+// For some reason these tooltip components cause the tests to time out.
+// That's not what we're testing here so let's just mock them:
+jest.mock('./components/Tooltip.tsx', () => () => {
+  return <div data-testid="test-tooltip" />;
+});
+jest.mock("./components/InfoIconAndTooltip.tsx", () => () => {
+  return <div data-testid="test-info-icon-and-tooltip" />;
+});
+
 describe(App, () => {
   let currentState: any = undefined;
 
