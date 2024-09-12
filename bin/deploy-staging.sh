@@ -14,7 +14,7 @@ VERSION=`git describe --abbrev=0 --tags`
 # Build the production app!
 REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build
 
-rsync --archive --verbose --exclude=".DS_Store" -e "ssh -p 2222" ~/projects/typey-type/build/ di@localhost:www/typey-type/
+rsync --archive --verbose --exclude=".DS_Store" ~/projects/typey-type/build/ stg.lan:www/typey-type/
 
 # git tag -n
 
