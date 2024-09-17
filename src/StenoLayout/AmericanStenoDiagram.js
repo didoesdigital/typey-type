@@ -1,5 +1,5 @@
-import React from 'react';
-import * as stroke from '../utils/stroke';
+import React from "react";
+import * as stroke from "../utils/stroke";
 
 const idKeyLookup = {
   "rightZ": stroke.Z,
@@ -53,12 +53,12 @@ const idKeyLookup = {
 }
 
 export default function AmericanStenoDiagram(props) {
-  const onStrokeColor = props.onStrokeColor || '#7109AA';
-  const offStrokeColor = props.offStrokeColor || '#7109AA';
-  const onTextColor = props.onTextColor || '#fff';
-  const offTextColor = props.offTextColor || '#fff';
-  const onKeyColor = props.onKeyColor || '#7109AA';
-  const offKeyColor = props.offKeyColor || '#e9d9f2';
+  const onStrokeColor = props.onStrokeColor || "#7109AA";
+  const offStrokeColor = props.offStrokeColor || "#7109AA";
+  const onTextColor = props.onTextColor || "#fff";
+  const offTextColor = props.offTextColor || "#fff";
+  const onKeyColor = props.onKeyColor || "#7109AA";
+  const offKeyColor = props.offKeyColor || "#e9d9f2";
 
   const handleClick = (event) => {
     if (props.handleOnClick) {
@@ -70,7 +70,7 @@ export default function AmericanStenoDiagram(props) {
   }
 
   return (
-    <svg id={props.id || 'stenoDiagram'} viewBox="0 0 215 101" width={props.diagramWidth || 140} xmlns="http://www.w3.org/2000/svg" aria-hidden={true} onClick={handleClick} className={props.classes}>
+    <svg id={props.id || "stenoDiagram"} viewBox="0 0 215 101" width={props.diagramWidth || 140} xmlns="http://www.w3.org/2000/svg" aria-hidden={true} onClick={handleClick} className={props.classes}>
       <g id={"stenoboard-" + props.brief } transform="translate(1 1)" fill="none" fillRule="evenodd">
         <rect id="rightZ" stroke={props.rightZ ? onStrokeColor : offStrokeColor} fill={props.rightZ ? onKeyColor : offKeyColor} x="195" y="48" width="18" height="23" rx="4"/>
         <rect id="rightD" stroke={props.rightD ? onStrokeColor : offStrokeColor} fill={props.rightD ? onKeyColor : offKeyColor} x="195" y="20" width="18" height="23" rx="4"/>
