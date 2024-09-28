@@ -115,8 +115,8 @@ const DictionaryManagement = (props) => {
           let text = event.target.result;
 
           try {
-            if (dictionary.size > 20000000) {
-              throw new Error("This file is too big (>20MB).");
+            if (dictionary.size > 25000000) {
+              throw new Error("This file is too big (>25MB).");
             }
             if (!dictionary.type.startsWith("application/json")) {
               throw new Error("This is not a JSON file.");
