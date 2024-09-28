@@ -38,7 +38,10 @@ const getPrompt = (composePrompt: ComposePrompt) => {
       );
 
     case "journalling":
-      return prompts[composePrompt][promptIndex] ?? "Write about your thoughts and feelings";
+      return (
+        prompts[composePrompt][promptIndex] ??
+        "Write about your thoughts and feelings"
+      );
 
     case "open-ended":
       return prompts[composePrompt][promptIndex] ?? "Write anything you like";
@@ -122,7 +125,10 @@ const Prompt = () => {
           </div>
         </fieldset>
       </div>
-      <p data-chromatic="ignore" className="mt3 b--solid bw-2 b--brand-primary-tint bg-coolgrey-300 dark:bg-coolgrey-900 text-center pr3">
+      <p
+        data-chromatic="ignore"
+        className="mt3 b--solid bw-2 b--brand-primary-tint bg-coolgrey-300 dark:bg-coolgrey-900 text-center pr3"
+      >
         “{getPrompt(composePrompt)}”
       </p>
     </>

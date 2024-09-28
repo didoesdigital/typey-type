@@ -16,8 +16,9 @@ import {
   Lesson,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
-  CurrentLessonStrokes, ActualTypedText,
-  ImportedPersonalDictionaries
+  CurrentLessonStrokes,
+  ActualTypedText,
+  ImportedPersonalDictionaries,
 } from "./types";
 import { Location } from "history";
 import { CustomLessonMaterialValidationState } from "./pages/lessons/custom/components/CustomLessonIntro";
@@ -107,44 +108,44 @@ const AsyncGames = Loadable({
  * This type only reflects App's state that is needed by descendants.
  */
 type AppStateForDescendants = {
-// currentPhraseAttempts: [],
-  currentPhraseID: number,
-  currentLessonStrokes: CurrentLessonStrokes[],
-  customLessonMaterial: string,
-  customLessonMaterialValidationMessages: string[],
-  customLessonMaterialValidationState: CustomLessonMaterialValidationState,
-  customLesson: Lesson,
-  actualText: ActualTypedText,
-  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig,
-  globalLookupDictionaryLoaded: boolean,
-  lessonNotFound: boolean,
-  lessonsProgress: unknown,
-// isPloverDictionaryLoaded: false,
-// isGlobalLookupDictionaryLoaded: false,
-  personalDictionaries: ImportedPersonalDictionaries,
-  previousCompletedPhraseAsTyped: ActualTypedText,
-  repetitionsRemaining: number,
-  startTime: Date,
-  showStrokesInLesson: boolean,
-  targetStrokeCount: number,
-  timer: number,
-  totalNumberOfMatchedWords: number,
-// numberOfMatchedChars: 0,
-// totalNumberOfMatchedChars: 0,
-  totalNumberOfNewWordsMet: number,
-  totalNumberOfLowExposuresSeen: number,
-  totalNumberOfRetainedWords: number,
-  totalNumberOfMistypedWords: number,
-  totalNumberOfHintedWords: number,
-  disableUserSettings: boolean,
-  metWords: MetWords,
-  lesson: Lesson,
-// revisionMaterial: [
-// ],
-  startingMetWordsToday: MetWords,
-  yourSeenWordCount: number,
-  yourMemorisedWordCount: number
-}
+  // currentPhraseAttempts: [],
+  currentPhraseID: number;
+  currentLessonStrokes: CurrentLessonStrokes[];
+  customLessonMaterial: string;
+  customLessonMaterialValidationMessages: string[];
+  customLessonMaterialValidationState: CustomLessonMaterialValidationState;
+  customLesson: Lesson;
+  actualText: ActualTypedText;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+  globalLookupDictionaryLoaded: boolean;
+  lessonNotFound: boolean;
+  lessonsProgress: unknown;
+  // isPloverDictionaryLoaded: false,
+  // isGlobalLookupDictionaryLoaded: false,
+  personalDictionaries: ImportedPersonalDictionaries;
+  previousCompletedPhraseAsTyped: ActualTypedText;
+  repetitionsRemaining: number;
+  startTime: Date;
+  showStrokesInLesson: boolean;
+  targetStrokeCount: number;
+  timer: number;
+  totalNumberOfMatchedWords: number;
+  // numberOfMatchedChars: 0,
+  // totalNumberOfMatchedChars: 0,
+  totalNumberOfNewWordsMet: number;
+  totalNumberOfLowExposuresSeen: number;
+  totalNumberOfRetainedWords: number;
+  totalNumberOfMistypedWords: number;
+  totalNumberOfHintedWords: number;
+  disableUserSettings: boolean;
+  metWords: MetWords;
+  lesson: Lesson;
+  // revisionMaterial: [
+  // ],
+  startingMetWordsToday: MetWords;
+  yourSeenWordCount: number;
+  yourMemorisedWordCount: number;
+};
 
 type Props = {
   appProps: AppProps;
@@ -152,15 +153,15 @@ type Props = {
 };
 
 type AppProps = {
-  location: Location,
-  completedMaterial: MaterialText[],
-  presentedMaterialCurrentItem: MaterialItem,
-  stateLesson: Lesson,
-  stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">,
-  upcomingMaterial: unknown,
-}
+  location: Location;
+  completedMaterial: MaterialText[];
+  presentedMaterialCurrentItem: MaterialItem;
+  stateLesson: Lesson;
+  stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
+  upcomingMaterial: unknown;
+};
 
-const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
+const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
   return (
     <AnnouncerController>
       <Announcer />
@@ -201,9 +202,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
 
                 <DocumentTitle title={"Typey Type | Writer"}>
                   <ErrorBoundary>
-                    <AsyncWriter
-                      {...props}
-                    />
+                    <AsyncWriter {...props} />
                   </ErrorBoundary>
                 </DocumentTitle>
               </div>
@@ -302,7 +301,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
             path="/lookup"
             render={(props) => (
               <div>
-                <Header  />
+                <Header />
                 <DocumentTitle title={"Typey Type | Lookup"}>
                   <ErrorBoundary>
                     <AsyncLookup
