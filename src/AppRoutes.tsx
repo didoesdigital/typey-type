@@ -222,6 +222,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                         appState.globalLookupDictionaryLoaded
                       }
                       metWords={appState.metWords}
+                      personalDictionaries={appState.personalDictionaries}
                       startingMetWordsToday={appState.startingMetWordsToday}
                       {...props}
                     />
@@ -329,6 +330,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       globalLookupDictionaryLoaded={
                         appState.globalLookupDictionaryLoaded
                       }
+                      personalDictionaries={appState.personalDictionaries}
                       stenohintsonthefly={appProps.stenohintsonthefly}
                       {...props}
                     />

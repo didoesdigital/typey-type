@@ -6,6 +6,7 @@ import Subheader from "../../components/Subheader";
 
 import type {
   FetchAndSetupGlobalDict,
+  ImportedPersonalDictionaries,
   LookupDictWithNamespacedDictsAndConfig,
   StenoDictionary,
   UserSettings,
@@ -17,6 +18,7 @@ type Props = {
   fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
+  personalDictionaries?: ImportedPersonalDictionaries;
   userSettings: UserSettings;
 };
 
@@ -24,6 +26,7 @@ const DictionariesIndex = ({
   fetchAndSetupGlobalDict,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
+  personalDictionaries,
   userSettings,
 }: Props) => {
   const dictionaryIndex = useAtomValue(dictionaryIndexState);
@@ -205,6 +208,7 @@ const DictionariesIndex = ({
               fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+              personalDictionaries={personalDictionaries}
               userSettings={userSettings}
             />
           </div>

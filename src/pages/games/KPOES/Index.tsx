@@ -3,6 +3,7 @@ import Game from "./Game";
 import Subheader from "../../../components/Subheader";
 
 import type {
+  ImportedPersonalDictionaries,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
 } from "../../../types";
@@ -12,19 +13,19 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
+  personalDictionaries?: ImportedPersonalDictionaries;
   userSettings: any;
 };
 
 export default function Index({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
+  personalDictionaries,
   metWords,
   userSettings,
 }: Props) {
-  const {
-    appFetchAndSetupGlobalDict,
-    updateMultipleMetWords,
-  } = useAppMethods();
+  const { appFetchAndSetupGlobalDict, updateMultipleMetWords } =
+    useAppMethods();
   const mainHeading = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
@@ -53,6 +54,7 @@ export default function Index({
         metWords={metWords}
         globalLookupDictionary={globalLookupDictionary}
         globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+        personalDictionaries={personalDictionaries}
         userSettings={userSettings}
         updateMultipleMetWords={updateMultipleMetWords}
       />

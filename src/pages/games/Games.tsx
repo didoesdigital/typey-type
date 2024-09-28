@@ -6,6 +6,7 @@ import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 import "./Games.scss";
 import type {
+  ImportedPersonalDictionaries,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
 } from "../../types";
@@ -59,6 +60,7 @@ type Props = {
   match: any;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
+  personalDictionaries?: ImportedPersonalDictionaries;
   metWords: MetWords;
   startingMetWordsToday: MetWords;
 };
@@ -68,6 +70,7 @@ const Games = ({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   metWords,
+  personalDictionaries,
   startingMetWordsToday,
 }: Props) => {
   const globalUserSettings = useAtomValue(globalUserSettingsState);
@@ -77,18 +80,14 @@ const Games = ({
       <Route exact={true} path={`${match.url}/KAOES`}>
         <DocumentTitle title={"Typey Type | KAOES game"}>
           <ErrorBoundary>
-            <AsyncKAOES
-              inputForKAOES={globalUserSettings.inputForKAOES}
-            />
+            <AsyncKAOES inputForKAOES={globalUserSettings.inputForKAOES} />
           </ErrorBoundary>
         </DocumentTitle>
       </Route>
       <Route exact={true} path={`${match.url}/KHAERT`}>
         <DocumentTitle title={"Typey Type | KHAERT"}>
           <ErrorBoundary>
-            <AsyncKHAERT
-              globalLookupDictionary={globalLookupDictionary}
-            />
+            <AsyncKHAERT globalLookupDictionary={globalLookupDictionary} />
           </ErrorBoundary>
         </DocumentTitle>
       </Route>
@@ -124,6 +123,7 @@ const Games = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               metWords={metWords}
+              personalDictionaries={personalDictionaries}
               userSettings={userSettings}
             />
           </ErrorBoundary>

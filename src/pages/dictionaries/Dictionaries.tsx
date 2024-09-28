@@ -4,7 +4,10 @@ import Loadable from "react-loadable";
 import DictionariesIndex from "./DictionariesIndex";
 import PageLoading from "../../components/PageLoading";
 
-import type { LookupDictWithNamespacedDictsAndConfig } from "../../types";
+import type {
+  ImportedPersonalDictionaries,
+  LookupDictWithNamespacedDictsAndConfig,
+} from "../../types";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
@@ -25,12 +28,14 @@ const AsyncDictionaryManagement = Loadable({
 type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
+  personalDictionaries?: ImportedPersonalDictionaries;
   [restProps: string]: any;
 };
 
 const Dictionaries = ({
   globalLookupDictionaryLoaded,
   globalLookupDictionary,
+  personalDictionaries,
   ...dictionaryProps
 }: Props) => {
   const userSettings = useAtomValue(userSettingsState);
@@ -77,6 +82,7 @@ const Dictionaries = ({
               userSettings={userSettings}
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+              personalDictionaries={personalDictionaries}
               fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
               {...dictionaryProps}
             />

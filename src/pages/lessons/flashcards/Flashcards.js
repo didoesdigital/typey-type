@@ -485,6 +485,7 @@ currentSlide: currentSlide
                   fetchAndSetupGlobalDict={this.props.fetchAndSetupGlobalDict}
                   globalLookupDictionary={this.props.globalLookupDictionary}
                   globalLookupDictionaryLoaded={this.props.globalLookupDictionaryLoaded}
+                  personalDictionaries={this.props.personalDictionaries}
                   userSettings={this.props.userSettings}
                 />
               </div>
@@ -512,6 +513,7 @@ function FlashcardsWrapper(props) {
       changeFullscreen={changeFullscreen}
       fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
       updateFlashcardsProgress={updateFlashcardsProgress}
+      personalDictionaries={props.personalDictionaries}
     />
   );
 }

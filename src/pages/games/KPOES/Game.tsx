@@ -9,6 +9,7 @@ import "./styles.scss";
 
 import type {
   FetchAndSetupGlobalDict,
+  ImportedPersonalDictionaries,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
 } from "../../../types";
@@ -18,6 +19,7 @@ type Props = {
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
   metWords: MetWords;
+  personalDictionaries?: ImportedPersonalDictionaries;
   userSettings: any;
   updateMultipleMetWords: typeof updateMultipleMetWords;
 };
@@ -31,6 +33,7 @@ export default function Game({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
   metWords,
+  personalDictionaries,
   userSettings,
   updateMultipleMetWords,
 }: Props) {
@@ -67,6 +70,7 @@ export default function Game({
             fetchAndSetupGlobalDict={fetchAndSetupGlobalDict}
             globalLookupDictionary={globalLookupDictionary}
             globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+            personalDictionaries={personalDictionaries}
             userSettings={userSettings}
           />
         </div>
