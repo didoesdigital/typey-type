@@ -6,7 +6,7 @@ import type {
   Study,
   CurrentLessonStrokes,
   LookupDictWithNamespacedDictsAndConfig,
-  PersonalDictionaryNameAndContents,
+  ImportedPersonalDictionaries,
 } from "../../types";
 
 export type LessonData = {
@@ -40,7 +40,7 @@ export type LessonProps = {
   location: any;
   match: any;
   metWords: MetWords;
-  personalDictionaries: PersonalDictionaryNameAndContents[];
+  personalDictionaries: ImportedPersonalDictionaries;
   previousCompletedPhraseAsTyped: string;
   repetitionsRemaining: number;
   settings: any;

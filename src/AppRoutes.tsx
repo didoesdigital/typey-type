@@ -16,7 +16,8 @@ import {
   Lesson,
   LookupDictWithNamespacedDictsAndConfig,
   MetWords,
-  CurrentLessonStrokes, ActualTypedText, PersonalDictionaryNameAndContents
+  CurrentLessonStrokes, ActualTypedText,
+  ImportedPersonalDictionaries
 } from "./types";
 import { Location } from "history";
 import { CustomLessonMaterialValidationState } from "./pages/lessons/custom/components/CustomLessonIntro";
@@ -120,7 +121,7 @@ type AppStateForDescendants = {
   lessonsProgress: unknown,
 // isPloverDictionaryLoaded: false,
 // isGlobalLookupDictionaryLoaded: false,
-  personalDictionaries: PersonalDictionaryNameAndContents[],
+  personalDictionaries: ImportedPersonalDictionaries,
   previousCompletedPhraseAsTyped: ActualTypedText,
   repetitionsRemaining: number,
   startTime: Date,
