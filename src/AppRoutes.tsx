@@ -309,6 +309,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState  }) => {
                       globalLookupDictionaryLoaded={
                         appState.globalLookupDictionaryLoaded
                       }
+                      personalDictionaries={appState.personalDictionaries}
                       {...props}
                     />
                   </ErrorBoundary>

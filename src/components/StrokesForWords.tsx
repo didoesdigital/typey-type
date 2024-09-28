@@ -10,6 +10,7 @@ import StrokesAsDiagrams from "./StrokesAsDiagrams";
 
 import type {
   FetchAndSetupGlobalDict,
+  ImportedPersonalDictionaries,
   LookupDictWithNamespacedDictsAndConfig,
   StenoDictionary,
   StrokeAndDictionaryAndNamespace,
@@ -24,6 +25,7 @@ type Props = {
   onChange?: (phrase: string) => void;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
+  personalDictionaries?: ImportedPersonalDictionaries;
   trackPhrase?: (value: React.SetStateAction<string>) => void;
   userSettings: UserSettings;
 };
@@ -34,6 +36,7 @@ const StrokesForWords = ({
   onChange,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
+  personalDictionaries,
   trackPhrase,
   userSettings,
 }: Props) => {
@@ -48,10 +51,19 @@ const StrokesForWords = ({
   const misstrokesJSON = misstrokes as StenoDictionary;
 
   useEffect(() => {
-    fetchAndSetupGlobalDict(true, null).catch((error) => {
-      console.error(error);
-      // this.showDictionaryErrorNotification();
-    });
+    const shouldUsePersonalDictionaries =
+      globalLookupDictionaryLoaded && personalDictionaries;
+
+    const maybeImportedPersonalDictionaries = shouldUsePersonalDictionaries
+      ? personalDictionaries
+      : null;
+
+    fetchAndSetupGlobalDict(true, maybeImportedPersonalDictionaries).catch(
+      (error) => {
+        console.error(error);
+        // this.showDictionaryErrorNotification();
+      }
+    );
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchAndSetupGlobalDict, lookupTerm]);

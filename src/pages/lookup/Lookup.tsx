@@ -5,7 +5,7 @@ import PseudoContentButton from "../../components/PseudoContentButton";
 import Subheader from "../../components/Subheader";
 import getWordFamilyGroup from "./utilities/getWordFamilyGroup";
 
-import type { MaterialItem } from "../../types";
+import type { ImportedPersonalDictionaries, MaterialItem } from "../../types";
 import { useAppMethods } from "../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
@@ -14,11 +14,13 @@ import debounce from "../../utils/debounce";
 type Props = {
   globalLookupDictionary: any;
   globalLookupDictionaryLoaded: boolean;
+  personalDictionaries: ImportedPersonalDictionaries;
 };
 
 const Lookup = ({
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
+  personalDictionaries,
 }: Props) => {
   const location = useLocation();
   const history = useHistory();
@@ -129,6 +131,7 @@ const Lookup = ({
                 globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
                 lookupTerm={lookupTerm}
                 onChange={strokesForWordsChange}
+                personalDictionaries={personalDictionaries}
                 trackPhrase={setTrackPhrase}
                 userSettings={userSettings}
               />
