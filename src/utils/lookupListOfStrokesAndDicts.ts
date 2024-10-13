@@ -10,6 +10,14 @@ import type {
   StrokeAndDictionaryAndNamespace,
 } from "../types";
 
+function hasEmojiVariantSelector(lookupText: string) {
+  const trimmedLookupText = lookupText.trim();
+
+  return (
+    trimmedLookupText.endsWith("\ufe0e") || trimmedLookupText.endsWith("\ufe0f")
+  );
+}
+
 function lookupListOfStrokesAndDicts(
   phrase: string,
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig,
@@ -138,6 +146,23 @@ function lookupListOfStrokesAndDicts(
     listOfStrokesAndDicts = listOfStrokesAndDicts.concat(
       listOfStrokesAndDictsWithSuppressedSpaces
     );
+  }
+
+  if (
+    listOfStrokesAndDicts.length === 0 &&
+    hasEmojiVariantSelector(lookupText)
+  ) {
+    modifiedWordOrPhrase = lookupText.trim().replace(/(\ufe0e|\ufe0f)$/, "");
+
+    if (modifiedWordOrPhrase !== lookupText) {
+      let listOfStrokesAndDictsWithSuppressedSpaces = createListOfStrokes(
+        modifiedWordOrPhrase,
+        globalLookupDictionary
+      );
+      listOfStrokesAndDicts = listOfStrokesAndDicts.concat(
+        listOfStrokesAndDictsWithSuppressedSpaces
+      );
+    }
   }
 
   listOfStrokesAndDicts = rankOutlines(
