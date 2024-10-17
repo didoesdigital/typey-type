@@ -9,8 +9,7 @@ if [[ $REPLY =~ ^[Yy]$ ]];
     exit 1
 fi
 
-# branch-name is a git alias to `!git rev-parse --abbrev-ref HEAD`
-if [[ `git branch-name` != master ]];
+if [[ $(git rev-parse --abbrev-ref HEAD) != master ]];
   then
     echo "Not on master!"
     exit 1
