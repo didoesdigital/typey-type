@@ -1,8 +1,7 @@
-#!/bin/zsh
+#!/usr/bin/env bash
+set -euo pipefail
 
-set -e
-
-read -q "?Have you built lessons and dictionaries, sync'd everything, run tests, and checked Storybook? (y/n) "
+read -r -n 1 -p "Have you built lessons and dictionaries, sync'd everything, run tests, and checked Storybook? (y/n) " REPLY
 if [[ $REPLY =~ ^[Yy]$ ]];
   then
     echo "Great! Let's deploy to staging."

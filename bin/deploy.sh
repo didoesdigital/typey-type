@@ -1,8 +1,7 @@
-#!/bin/zsh
+#!/usr/bin/env bash
+set -euo pipefail
 
-set -e
-
-read -q "?Reviewed deploy checklist? (y/n) "
+read -r -n 1 -p "Reviewed deploy checklist? (y/n) " REPLY
 if [[ $REPLY =~ ^[Yy]$ ]];
   then
     echo "Continuing... "
@@ -22,7 +21,7 @@ fi
 git tag -n
 tig status
 
-read -q "?Have you git tagged this commit? (y/n) "
+read -r -n 1 -p "Have you git tagged this commit? (y/n) " REPLY
 if [[ $REPLY =~ ^[Yy]$ ]];
   then
     echo "Great! Let's deploy to production."
