@@ -27,4 +27,6 @@ REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" REACT_APP_QA=true yarn run build
 # rsync build to prod server QA directory:
 rsync --archive --verbose --compress --exclude=".DS_Store" ~/projects/typey-type/build/ di@167.99.9.71:www/qa-typey-type/typey-type/
 
-say "Deployed $VERSION to QA"
+SPOKEN_VERSION=$(echo "$VERSION" | tr -d 'v')
+
+say "Deployed version $SPOKEN_VERSION to QA"

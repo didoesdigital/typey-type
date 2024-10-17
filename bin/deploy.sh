@@ -42,4 +42,9 @@ yarn run sentry-cli releases files "$VERSION" upload-sourcemaps --url-prefix '~/
 yarn run sentry-cli releases finalize "$VERSION"
 yarn run sentry-cli releases deploys "$VERSION" new -e production
 
-say "Deployed $VERSION to production at DaɪDoesDigital.com"
+SPOKEN_VERSION=$(echo "$VERSION" | tr -d 'v')
+
+echo
+echo "https://didoesdigital.com/typey-type/"
+
+say "Deployed version $SPOKEN_VERSION to production at DaɪDoesDigital.com"
