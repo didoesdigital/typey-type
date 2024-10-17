@@ -9,7 +9,7 @@ if [[ $REPLY =~ ^[Yy]$ ]];
     exit 1
 fi
 
-VERSION=`git describe --abbrev=0 --tags`
+VERSION=$(git describe --abbrev=0 --tags)
 # Build the production app!
 REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build
 

@@ -28,7 +28,7 @@ if [[ $REPLY =~ ^[Yy]$ ]];
     exit 1
 fi
 
-VERSION=`git describe --abbrev=0 --tags`
+VERSION=$(git describe --abbrev=0 --tags)
 yarn run sentry-cli releases new "$VERSION"
 
 # Build the production app!
