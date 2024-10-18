@@ -299,7 +299,7 @@ const CustomLessonGenerator = ({
                         Build lesson
                       </button>
                       <Link
-                        to="/lessons/custom?study=practice&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1"
+                        to="/lessons/custom?study=practice&newWords=1&seenWords=1&retainedWords=1&startFromWord=1"
                         className="link-button dib button button--secondary"
                         style={{ lineHeight: 2 }}
                       >

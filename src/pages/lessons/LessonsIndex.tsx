@@ -37,7 +37,7 @@ const LessonsIndex = ({ customLesson }: LessonsIndexProps) => {
         <div className="flex flex-wrap mxn2">
           {customLesson.title !== "Steno" ? (
             <Link
-              to={`${url}/custom?study=discover&newWords=1&seenWords=1&retainedWords=1&sortOrder=sortOff&startFromWord=1`.replace(
+              to={`${url}/custom?study=discover&newWords=1&seenWords=1&retainedWords=1&startFromWord=1`.replace(
                 /\/{2,}/g,
                 "/"
               )}
