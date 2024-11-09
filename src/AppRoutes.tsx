@@ -157,7 +157,6 @@ type AppProps = {
   completedMaterial: MaterialText[];
   presentedMaterialCurrentItem: MaterialItem;
   stateLesson: Lesson;
-  stenohintsonthefly: Pick<Experiments, "stenohintsonthefly">;
   upcomingMaterial: unknown;
 };
 
@@ -291,7 +290,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                     lessonpath="flashcards"
                     locationpathname={appProps.location.pathname}
                     personalDictionaries={appState.personalDictionaries}
-                    stenoHintsOnTheFly={appProps.stenohintsonthefly}
                   />
                 </DocumentTitle>
               </div>
@@ -330,7 +328,6 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                         appState.globalLookupDictionaryLoaded
                       }
                       personalDictionaries={appState.personalDictionaries}
-                      stenohintsonthefly={appProps.stenohintsonthefly}
                       {...props}
                     />
                   </ErrorBoundary>
