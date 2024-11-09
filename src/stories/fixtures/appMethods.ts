@@ -7,7 +7,6 @@ const appMethods: AppMethods = {
   customiseLesson: () => undefined,
   generateCustomLesson: () => console.log("generate custom lesson"),
   handleLesson: () => undefined,
-  handleStopLesson: () => undefined,
   restartLesson: () => undefined,
   reviseLesson: () => undefined,
   sayCurrentPhraseAgain: () => undefined,

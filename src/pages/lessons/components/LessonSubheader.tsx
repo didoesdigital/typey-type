@@ -4,7 +4,7 @@ import Subheader from "../../../components/Subheader";
 
 type LessonSubheaderProps = {
   createNewCustomLesson: JSX.Element | undefined;
-  handleStopLesson: () => void;
+  stopLesson: () => void;
   lessonSubTitle: any;
   lessonTitle: any;
   overviewLink: JSX.Element | undefined;
@@ -16,7 +16,7 @@ const LessonSubheader = React.forwardRef(
   (
     {
       createNewCustomLesson,
-      handleStopLesson,
+      stopLesson,
       lessonSubTitle,
       lessonTitle,
       overviewLink,
@@ -66,7 +66,10 @@ const LessonSubheader = React.forwardRef(
           </a>
           <a
             href={path}
-            onClick={handleStopLesson}
+            onClick={(evt) => {
+              evt.preventDefault();
+              stopLesson()
+            }}
             className="button button--secondary table-cell mr2"
             style={{ lineHeight: 2 }}
             role="button"

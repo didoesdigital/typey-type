@@ -51,7 +51,7 @@ type Props = {
   disableUserSettings: boolean;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
   globalLookupDictionaryLoaded: boolean;
-  handleStopLesson: () => void;
+  stopLesson: () => void;
   toggleHideOtherSettings: () => void;
   lesson: Lesson;
   lessonLength: number;
@@ -93,7 +93,7 @@ const MainLessonView = ({
   disableUserSettings,
   globalLookupDictionary,
   globalLookupDictionaryLoaded,
-  handleStopLesson,
+  stopLesson,
   toggleHideOtherSettings,
   lesson,
   lessonLength,
@@ -150,7 +150,7 @@ const MainLessonView = ({
       <main id="main">
         <LessonSubheader
           createNewCustomLesson={createNewCustomLesson}
-          handleStopLesson={handleStopLesson}
+          stopLesson={stopLesson}
           lessonSubTitle={lessonSubTitle}
           lessonTitle={lessonTitle}
           overviewLink={overviewLink}
