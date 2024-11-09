@@ -10,7 +10,6 @@ import Footer from "./components/Footer";
 import AnnouncerController from "./components/Announcer/AnnouncerController";
 import Announcer from "./components/Announcer/Announcer";
 import {
-  Experiments,
   MaterialItem,
   MaterialText,
   Lesson,
