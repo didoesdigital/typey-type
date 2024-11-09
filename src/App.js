@@ -964,8 +964,6 @@ class App extends Component {
       };
     }
 
-    let stenohintsonthefly = this.props.globalUserSettings?.experiments && !!this.props.globalUserSettings?.experiments?.stenohintsonthefly;
-
     let presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
     return (
       <div id="js-app" className="app">
@@ -1003,7 +1001,6 @@ class App extends Component {
                 completedMaterial,
                 presentedMaterialCurrentItem,
                 stateLesson,
-                stenohintsonthefly,
                 upcomingMaterial
               }}
               appState={this.state}
