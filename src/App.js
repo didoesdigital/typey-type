@@ -16,7 +16,6 @@ import {
   writePersonalPreferences
 } from './utils/typey-type';
 import { getLesson } from './utils/getData';
-import describePunctuation, { punctuationDescriptions } from "./utils/describePunctuation";
 import {
   generateListOfWordsAndStrokes
 } from './utils/transformingDictionaries/transformingDictionaries';
@@ -40,17 +39,7 @@ import {
 import AppRoutes from './AppRoutes';
 import removeIgnoredCharsFromSplitText from './utils/app/removeIgnoredCharsFromSplitText';
 import AppMethodsContext from "./states/legacy/AppMethodsContext";
-
-/** @type {SpeechSynthesis | null} */
-let synth = null;
-try {
-  synth = window.speechSynthesis;
-}
-catch (e) {
-  console.log("This device doesn't support speechSynthesis", e);
-}
-/** @type {SpeechSynthesisVoice[]} */
-let voices = [];
+import { synth, synthesizeSpeech } from "./utils/speechSynthesis";
 
 class App extends Component {
   constructor(props) {
@@ -854,71 +843,14 @@ class App extends Component {
     });
   }
 
-  /** @param { string } utteranceText */
-  say(utteranceText) {
-    try {
-      if (synth && synth.speaking) {
-        synth.cancel();
-      }
-
-      utteranceText = utteranceText.replaceAll("—", "em dash");
-      if (utteranceText in punctuationDescriptions) {
-        utteranceText = describePunctuation(utteranceText);
-      }
-
-      if (window.SpeechSynthesisUtterance) {
-        if (!voices || !voices.length) {
-          voices = synth?.getVoices() ?? [];
-        }
-
-        let utterThis = new SpeechSynthesisUtterance(utteranceText);
-        // Debugging:
-        // utterThis.onerror = function (event) {
-        //   console.warn(`${event.error}: ${this.text}`);
-        // };
-
-        const preferredVoiceURI = this.props.userSettings.voiceURI;
-        const preferredVoiceName = this.props.userSettings.voiceName;
-        const voiceInVoices =
-          voices.find((voice) => voice.voiceURI === preferredVoiceURI) ??
-          voices.find((voice) => voice.name === preferredVoiceName);
-
-        if (voiceInVoices) {
-          utterThis.lang = voiceInVoices.lang;
-          utterThis.voice = voiceInVoices;
-        }
-
-        // No lang?
-        if (!utterThis.lang) {
-          utterThis.lang = "en";
-
-          const lang = navigator.language;
-          if (lang && (lang === "de" || lang.startsWith("de-")) && this.props.userSettings?.stenoLayout === "stenoLayoutPalantype") {
-            utterThis.lang = lang;
-          }
-        }
-
-        // TODO: scale the rate in proportion to:
-        // A) words per minute and
-        // B) length of word as a proxy for the time it takes to say a long word
-        // Note: this likely has floating point math rounding errors.
-        const wordsPerMinute =
-          this.state.timer > 0
-            ? this.state.totalNumberOfMatchedWords /
-              (this.state.timer / 60 / 1000)
-            : 0;
-        wordsPerMinute > 100 ? (utterThis.rate = 2) : (utterThis.rate = 1);
-
-        // @ts-ignore 'chrome' isn't on Window because it is browser specific and that's why we are using it to check for chromium browsers
-        const isChromium = !!window.chrome;
-        const timeoutDelay = isChromium ? 50 : 0;
-        setTimeout(function () {
-          synth?.speak(utterThis);
-        }, timeoutDelay);
-      }
-    } catch (e) {
-      console.warn("Unable to speak material", e);
-    }
+  say(utteranceText: string) {
+    synthesizeSpeech(utteranceText, {
+      voiceURI: this.props.userSettings.voiceURI,
+      voiceName: this.props.userSettings.voiceName,
+      stenoLayout: this.props.userSettings?.stenoLayout,
+      timeElapsedMillis: this.state.timer,
+      totalNumberOfMatchedWords: this.state.totalNumberOfMatchedWords,
+    });
   }
 
   sayCurrentPhraseAgain() {
