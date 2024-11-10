@@ -47,8 +47,8 @@ export function synthesizeSpeech(
     timeElapsedMillis,
     totalNumberOfMatchedWords,
   }: {
-    voiceURI: string | null,
-    voiceName: string | null,
+    voiceURI: string,
+    voiceName: string,
     stenoLayout: string,
     timeElapsedMillis: number,
     totalNumberOfMatchedWords: number,
