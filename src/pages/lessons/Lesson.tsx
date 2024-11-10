@@ -85,7 +85,6 @@ const Lesson = ({
     appFetchAndSetupGlobalDict,
     customiseLesson,
     handleLesson,
-    handleStopLesson,
     changeShowStrokesInLesson,
     restartLesson,
     reviseLesson,
@@ -370,7 +369,7 @@ const Lesson = ({
           <main id="main">
             <LessonSubheader
               createNewCustomLesson={createNewCustomLesson}
-              handleStopLesson={handleStopLesson}
+              stopLesson={stopLesson}
               lessonSubTitle={lessonSubTitle}
               lessonTitle={lessonTitle}
               overviewLink={overviewLink}
@@ -476,7 +475,7 @@ const Lesson = ({
                 disableUserSettings={disableUserSettings}
                 globalLookupDictionary={globalLookupDictionary}
                 globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-                handleStopLesson={handleStopLesson}
+                stopLesson={stopLesson}
                 toggleHideOtherSettings={toggleHideOtherSettings}
                 lesson={lesson}
                 lessonLength={lessonLength}

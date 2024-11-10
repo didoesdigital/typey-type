@@ -103,7 +103,7 @@ const Template = (args: any) => {
               totalNumberOfMistypedWords={0}
               totalNumberOfHintedWords={0}
               restartLesson={() => undefined}
-              handleStopLesson={() => undefined}
+              stopLesson={() => undefined}
               changeShowStrokesAsList={() => undefined}
               changeShowStrokesInLesson={() => undefined}
               changeShowStrokesOnMisstroke={() => undefined}

@@ -110,11 +110,6 @@ class App extends Component {
     this.setPersonalPreferences();
   }
 
-  handleStopLesson(event) {
-    event.preventDefault();
-    this.stopLesson();
-  }
-
   stopLesson() {
     this.stopTimer();
 
@@ -980,7 +975,6 @@ class App extends Component {
               changeShowStrokesInLesson: changeShowStrokesInLesson.bind(this),
               createCustomLesson: this.createCustomLesson.bind(this),
               handleLesson: this.handleLesson.bind(this),
-              handleStopLesson: this.handleStopLesson.bind(this),
               restartLesson: this.restartLesson.bind(this),
               reviseLesson: this.reviseLesson.bind(this),
               sayCurrentPhraseAgain: this.sayCurrentPhraseAgain.bind(this),

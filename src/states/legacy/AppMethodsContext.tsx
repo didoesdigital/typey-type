@@ -19,7 +19,6 @@ export type AppMethods = {
   changeShowStrokesInLesson: typeof changeShowStrokesInLesson,
   createCustomLesson: typeof App.prototype.createCustomLesson,
   handleLesson: typeof App.prototype.handleLesson,
-  handleStopLesson: typeof App.prototype.handleStopLesson,
   restartLesson: typeof App.prototype.restartLesson,
   reviseLesson: typeof App.prototype.reviseLesson,
   sayCurrentPhraseAgain: typeof App.prototype.sayCurrentPhraseAgain,
