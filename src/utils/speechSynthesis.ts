@@ -1,6 +1,5 @@
 import describePunctuation, { punctuationDescriptions } from "./describePunctuation";
 
-/** @type {SpeechSynthesis | null} */
 export let synth: SpeechSynthesis | null = null;
 try {
   synth = window.speechSynthesis;
@@ -9,11 +8,9 @@ catch (e) {
   console.log("This device doesn't support speechSynthesis", e);
 }
 
-/** @type {SpeechSynthesisVoice[]} */
 let voices: SpeechSynthesisVoice[] = [];
 
 
-/** @param { string } stenoLayout */
 function getSpeechSynthesisFallbackLang(stenoLayout: string) {
   const lang = navigator.language;
   if (lang && (lang === "de" || lang.startsWith("de-")) && stenoLayout === "stenoLayoutPalantype") {
@@ -37,7 +34,6 @@ function getSpeechSynthesisRate(timeElapsedMillis: number, totalNumberOfMatchedW
 }
 
 
-/** @param { string } utteranceText */
 export function synthesizeSpeech(
   utteranceText: string,
   {
