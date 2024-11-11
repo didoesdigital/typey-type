@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import GoogleAnalytics from "react-ga4";
 import { CurrentLessonStrokes } from "../types";
@@ -13,10 +13,13 @@ type Props = {
   previousCompletedPhraseAsTyped: string;
   sayCurrentPhraseAgain: () => void;
   updateMarkup: (event: any) => void;
+  focusTriggerInt: number;
 };
 
 const TypedText = (props: Props) => {
   const userSettings = useAtomValue(userSettingsState);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+
   useEffect(() => {
     return () => {
       let synth = window.speechSynthesis;
@@ -25,6 +28,11 @@ const TypedText = (props: Props) => {
       }
     };
   }, []);
+
+  const focusTriggerInt = props.focusTriggerInt;
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [focusTriggerInt]);
 
   function speak() {
     props.sayCurrentPhraseAgain();
@@ -41,10 +49,7 @@ const TypedText = (props: Props) => {
   function onDoubleClickSpeakAndFocus() {
     props.sayCurrentPhraseAgain();
     // This makes it hard for screen readers to hear the word:
-    const yourTypedText = document.getElementById("your-typed-text");
-    if (yourTypedText) {
-      yourTypedText.focus();
-    }
+    inputRef.current?.focus();
 
     GoogleAnalytics.event({
       category: "SpeakMaterial",
@@ -137,6 +142,7 @@ const TypedText = (props: Props) => {
                 isMultiline ? " text-center" : ""
               }`}
               id="your-typed-text"
+              ref={inputRef}
               data-testid="your-typed-text"
               aria-describedby="punctuation-description"
               onChange={props.updateMarkup}

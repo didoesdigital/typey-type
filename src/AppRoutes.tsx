@@ -144,6 +144,7 @@ type AppStateForDescendants = {
   startingMetWordsToday: MetWords;
   yourSeenWordCount: number;
   yourMemorisedWordCount: number;
+  focusTriggerInt: number;
 };
 
 type Props = {
@@ -402,6 +403,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                         appProps.stateLesson.presentedMaterial.length
                       }
                       upcomingPhrases={appProps.upcomingMaterial}
+                      focusTriggerInt={appState.focusTriggerInt}
                       {...props}
                     />
                   </ErrorBoundary>

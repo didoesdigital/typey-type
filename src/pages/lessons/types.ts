@@ -56,6 +56,7 @@ export type LessonProps = {
   totalNumberOfRetainedWords: any;
   totalWordCount: any;
   upcomingPhrases: any;
+  focusTriggerInt: number;
 };
 
 export type FinishedProps = {

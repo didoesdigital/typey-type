@@ -91,7 +91,13 @@ class App extends Component {
       ],
       startingMetWordsToday: startingMetWordsToday,
       yourSeenWordCount: calculateSeenWordCount(metWordsFromStorage),
-      yourMemorisedWordCount: calculateMemorisedWordCount(metWordsFromStorage)
+      yourMemorisedWordCount: calculateMemorisedWordCount(metWordsFromStorage),
+      /**
+       * focusTriggerInt is used to trigger focus on the header or the main text input
+       * I was unable to find where this.mainHeading is defined, either something was lost
+       * or this.mainHeading is not relevant anymore.
+       */
+      focusTriggerInt: 0
     };
   }
 
@@ -334,21 +340,10 @@ class App extends Component {
       else {
         lesson = fallbackLesson
       }
-      this.setState({
+      this.setupLesson({
         currentPhraseID: 0,
         lesson: lesson,
-      }, () => {
-        this.setupLesson();
-
-        if (this.mainHeading) {
-          this.mainHeading.focus();
-        } else {
-          const yourTypedText = document.getElementById('your-typed-text');
-          if (yourTypedText) {
-            yourTypedText.focus();
-            // this.sayCurrentPhraseAgain(); // this is called too soon in progress revision lessons so it announces dummy text instead of actual material
-          }
-        }
+        focusTriggerInt: this.state.focusTriggerInt + 1
       });
     })
     .catch(error => {
@@ -357,7 +352,7 @@ class App extends Component {
     });
   }
 
-  setupLesson() {
+  setupLesson(lessonProps) {
     const revisionMode = this.props.revisionMode;
     const revisionMaterial = this.state.revisionMaterial;
     const userSettings = this.props.userSettings;
@@ -460,6 +455,7 @@ class App extends Component {
       totalNumberOfHintedWords: 0,
       lesson: newLesson,
       currentPhraseID: 0,
+      ...lessonProps
     });
   }
 
@@ -485,21 +481,10 @@ class App extends Component {
               lesson.presentedMaterial = lessonWordsAndStrokes;
               lesson.newPresentedMaterial = new Zipper([lessonWordsAndStrokes]);
 
-            this.setState({
+            this.setupLesson({
               lesson: lesson,
-              currentPhraseID: 0
-            }, () => {
-              this.setupLesson();
-
-              if (this.mainHeading) {
-                this.mainHeading.focus();
-              } else {
-                const yourTypedText = document.getElementById('your-typed-text');
-                if (yourTypedText) {
-                  yourTypedText.focus();
-                  // this.sayCurrentPhraseAgain(); // this is called too soon, when setupLesson() hasn't finished updating material
-                }
-              }
+              currentPhraseID: 0,
+              focusTriggerInt: this.state.focusTriggerInt + 1
             });
           });
         }
@@ -513,44 +498,20 @@ class App extends Component {
             shouldUsePersonalDictionaries ? this.state.personalDictionaries : null
           )
             .then(() => {
-              this.setState(
-                {
-                  lesson: lesson,
-                  currentPhraseID: 0,
-                },
-                () => {
-                  this.setupLesson();
-
-                  if (this.mainHeading) {
-                    this.mainHeading.focus();
-                  } else {
-                    const yourTypedText = document.getElementById("your-typed-text");
-                    if (yourTypedText) {
-                      yourTypedText.focus();
-                    }
-                  }
-                }
-              );
-            })
-            .catch((error) =>
+              this.setupLesson({
+                lesson: lesson,
+                currentPhraseID: 0,
+                focusTriggerInt: this.state.focusTriggerInt + 1
+              });
+            }).catch((error) =>
               console.error("failed to fetch and setup global dictionary", error)
             );
         }
         else {
-          this.setState({
+          this.setupLesson({
             lesson: lesson,
-            currentPhraseID: 0
-          }, () => {
-            this.setupLesson();
-
-            if (this.mainHeading) {
-              this.mainHeading.focus();
-            } else {
-              const yourTypedText = document.getElementById('your-typed-text');
-              if (yourTypedText) {
-                yourTypedText.focus();
-              }
-            }
+            currentPhraseID: 0,
+            focusTriggerInt: this.state.focusTriggerInt + 1
           });
         }
       } else {
@@ -618,31 +579,9 @@ class App extends Component {
 
   restartLesson(event) {
     event.preventDefault();
-    this.setState({
-      currentPhraseID: 0,
-    }, () => {
-      this.stopLesson();
-      this.setupLesson();
-
-      // A hack for returning focus to your-typed-text
-      // https://stackoverflow.com/questions/1096436/document-getelementbyidid-focus-is-not-working-for-firefox-or-chrome
-      // https://stackoverflow.com/questions/33955650/what-is-settimeout-doing-when-set-to-0-milliseconds/33955673
-      window.setTimeout(function ()
-      {
-        const yourTypedText = document.getElementById('your-typed-text');
-        if (yourTypedText) {
-          yourTypedText.focus();
-        }
-      }, 0);
-      // Possible alternative approach:
-      // function focusAndSpeak() {
-      //   const yourTypedText = document.getElementById('your-typed-text');
-      //   if (yourTypedText) {
-      //     yourTypedText.focus();
-      //     // this.sayCurrentPhraseAgain();
-      //   }
-      // }
-      // window.setTimeout(focusAndSpeak.bind(this), 0);
+    this.stopLesson();
+    this.setupLesson({
+      focusTriggerInt: this.state.focusTriggerInt + 1
     });
   }
 

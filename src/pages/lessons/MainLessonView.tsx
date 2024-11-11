@@ -75,6 +75,7 @@ type Props = {
   upcomingPhrases: MaterialText[];
   updateMarkup: React.ChangeEventHandler<HTMLTextAreaElement>;
   updatePreset: (studyType: Study) => void;
+  focusTriggerInt: number;
 };
 
 const MainLessonView = ({
@@ -117,6 +118,7 @@ const MainLessonView = ({
   upcomingPhrases,
   updateMarkup,
   updatePreset,
+  focusTriggerInt,
 }: Props) => {
   const userSettings = useAtomValue(userSettingsState);
   const recentLessonHistory = useAtomValue(recentLessonHistoryState)?.history;
@@ -262,6 +264,7 @@ const MainLessonView = ({
                       }
                       sayCurrentPhraseAgain={sayCurrentPhraseAgain}
                       updateMarkup={updateMarkup}
+                      focusTriggerInt={focusTriggerInt}
                     />
                     <WordBoundaryErrorPrompt
                       actualText={actualText}

@@ -78,6 +78,7 @@ const Lesson = ({
   totalNumberOfRetainedWords,
   totalWordCount,
   upcomingPhrases,
+  focusTriggerInt,
 }: LessonProps) => {
   const history = useHistory();
 
@@ -499,6 +500,7 @@ const Lesson = ({
                 upcomingPhrases={upcomingPhrases}
                 updatePreset={updatePreset}
                 updateMarkup={updateRecentLessonsAndUpdateMarkup}
+                focusTriggerInt={focusTriggerInt}
               />
             )}
           />
