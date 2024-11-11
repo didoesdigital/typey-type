@@ -14,7 +14,7 @@ let voices: SpeechSynthesisVoice[] = [];
 
 
 /** @param { string } stenoLayout */
-function getSpeechSynthesisFalbackLang(stenoLayout: string) {
+function getSpeechSynthesisFallbackLang(stenoLayout: string) {
   const lang = navigator.language;
   if (lang && (lang === "de" || lang.startsWith("de-")) && stenoLayout === "stenoLayoutPalantype") {
     return lang
@@ -88,7 +88,7 @@ export function synthesizeSpeech(
 
       // No lang?
       if (!utterThis.lang) {
-        utterThis.lang = getSpeechSynthesisFalbackLang(stenoLayout);
+        utterThis.lang = getSpeechSynthesisFallbackLang(stenoLayout);
       }
 
       utterThis.rate = getSpeechSynthesisRate(timeElapsedMillis, totalNumberOfMatchedWords);
