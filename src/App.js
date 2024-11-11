@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { isLessonTextValid } from './utils/utils';
+import { isLessonTextValid } from 'utils/utils';
 import {
   createWordListFromMetWords,
   parseCustomMaterial,

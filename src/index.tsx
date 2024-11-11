@@ -7,7 +7,7 @@ import App from "./App";
 import withAnalyticsTracker from "./utils/withAnalyticsTracker";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./index.scss";
-import { withAtomsCompat } from "./states/atomUtils";
+import { withAtomsCompat } from "states/atomUtils";
 import { userSettingsState } from "./states/userSettingsState";
 import { globalUserSettingsState } from "./states/globalUserSettingsState";
 import { useLessonIndexWithFallback } from "./states/lessonIndexState";
