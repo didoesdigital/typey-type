@@ -92,11 +92,6 @@ class App extends Component {
       startingMetWordsToday: startingMetWordsToday,
       yourSeenWordCount: calculateSeenWordCount(metWordsFromStorage),
       yourMemorisedWordCount: calculateMemorisedWordCount(metWordsFromStorage),
-      /**
-       * focusTriggerInt is used to trigger focus on the header or the main text input
-       * I was unable to find where this.mainHeading is defined, either something was lost
-       * or this.mainHeading is not relevant anymore.
-       */
       focusTriggerInt: 0
     };
   }
