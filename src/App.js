@@ -323,7 +323,7 @@ class App extends Component {
         if (lessonWordsAndStrokes && lessonWordsAndStrokes.length > 0) {
           lesson.sourceMaterial = lessonWordsAndStrokes;
           lesson.presentedMaterial = lessonWordsAndStrokes;
-          lesson.newPresentedMaterial = new Zipper([lessonWordsAndStrokes]);
+          lesson.newPresentedMaterial = new Zipper(lessonWordsAndStrokes);
           lesson.settings = {
             ignoredChars: '',
             customMessage: ''
@@ -479,7 +479,7 @@ class App extends Component {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
               lesson.presentedMaterial = lessonWordsAndStrokes;
-              lesson.newPresentedMaterial = new Zipper([lessonWordsAndStrokes]);
+              lesson.newPresentedMaterial = new Zipper(lessonWordsAndStrokes);
 
             this.setupLesson({
               lesson: lesson,

@@ -354,7 +354,7 @@ function parseLesson(lessonText, path) {
     settings: settings,
     title: lessonTitle,
     subtitle: lessonSubtitle,
-    newPresentedMaterial: new Zipper([sourceMaterial]),
+    newPresentedMaterial: new Zipper(sourceMaterial),
     path: path
   }
 }
