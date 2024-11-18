@@ -348,12 +348,13 @@ class App extends Component {
   }
 
   setupLesson(lessonProps) {
+    const newState = {...this.state, ...lessonProps};
     const revisionMode = this.props.revisionMode;
-    const revisionMaterial = this.state.revisionMaterial;
+    const revisionMaterial = newState.revisionMaterial;
     const userSettings = this.props.userSettings;
-    const lessonPath = this.state.lesson.path;
-    let newLesson = Object.assign({}, this.state.lesson);
-    const prevLessonsProgress = this.state.lessonsProgress;
+    const lessonPath = newState.lesson.path;
+    let newLesson = Object.assign({}, newState.lesson);
+    const prevLessonsProgress = newState.lessonsProgress;
 
     const limitNumberOfWords = userSettings.limitNumberOfWords;
     const startFromWord = userSettings.startFromWord;
@@ -382,10 +383,10 @@ class App extends Component {
     }
 
     // Filter lesson by familiarity:
-    newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, this.state.metWords, userSettings, revisionMode);
+    newLesson.presentedMaterial = filterByFamiliarity.call(this, newLesson.presentedMaterial, newState.metWords, userSettings, revisionMode);
 
     // Sort lesson:
-    newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, this.state.metWords, userSettings);
+    newLesson.presentedMaterial = sortLesson.call(this, newLesson.presentedMaterial, newState.metWords, userSettings);
 
     // Apply range (start from & limit) to lesson:
     if (revisionMode && limitNumberOfWords > 0) {
@@ -429,29 +430,27 @@ class App extends Component {
     }
 
     // Reset lesson state for starting lesson:
-    this.setState({
-      actualText: ``,
-      currentPhraseAttempts: [],
-      currentLessonStrokes: [],
-      disableUserSettings: false,
-      numberOfMatchedChars: 0,
-      previousCompletedPhraseAsTyped: '',
-      repetitionsRemaining: reps,
-      startTime: null,
-      showStrokesInLesson: false,
-      timer: 0,
-      targetStrokeCount: target,
-      totalNumberOfMatchedChars: 0,
-      totalNumberOfMatchedWords: 0,
-      totalNumberOfNewWordsMet: 0,
-      totalNumberOfLowExposuresSeen: 0,
-      totalNumberOfRetainedWords: 0,
-      totalNumberOfMistypedWords: 0,
-      totalNumberOfHintedWords: 0,
-      lesson: newLesson,
-      currentPhraseID: 0,
-      ...lessonProps
-    });
+    newState.actualText = ``;
+    newState.currentPhraseAttempts = [];
+    newState.currentLessonStrokes = [];
+    newState.disableUserSettings = false;
+    newState.numberOfMatchedChars = 0;
+    newState.previousCompletedPhraseAsTyped = '';
+    newState.repetitionsRemaining = reps;
+    newState.startTime = null;
+    newState.showStrokesInLesson = false;
+    newState.timer = 0;
+    newState.targetStrokeCount = target;
+    newState.totalNumberOfMatchedChars = 0;
+    newState.totalNumberOfMatchedWords = 0;
+    newState.totalNumberOfNewWordsMet = 0;
+    newState.totalNumberOfLowExposuresSeen = 0;
+    newState.totalNumberOfRetainedWords = 0;
+    newState.totalNumberOfMistypedWords = 0;
+    newState.totalNumberOfHintedWords = 0;
+    newState.lesson = newLesson;
+    newState.currentPhraseID = 0;
+    this.setState(newState);
   }
 
   handleLesson(path) {
