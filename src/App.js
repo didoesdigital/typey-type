@@ -129,6 +129,7 @@ class App extends Component {
       currentPhraseAttempts: [],
       disableUserSettings: false,
       numberOfMatchedChars: 0,
+      // revisionMode: false,
       totalNumberOfMatchedChars: 0,
       yourSeenWordCount: calculateSeenWordCount(this.state.metWords),
       yourMemorisedWordCount: calculateMemorisedWordCount(this.state.metWords)
@@ -349,7 +350,7 @@ class App extends Component {
 
   setupLesson(lessonProps) {
     const newState = {...this.state, ...lessonProps};
-    const revisionMode = this.props.revisionMode;
+    const revisionMode = lessonProps?.revisionMode ?? this.props.revisionMode;
     const revisionMaterial = newState.revisionMaterial;
     const userSettings = this.props.userSettings;
     const lessonPath = newState.lesson.path;
@@ -566,16 +567,20 @@ class App extends Component {
       revisionMaterial: newRevisionMaterial,
     }, () => {
       this.stopLesson();
-      this.setupLesson();
+      this.setupLesson({
+        focusTriggerInt: this.state.focusTriggerInt + 1,
+        // revisionMaterial: newRevisionMaterial,
+        revisionMode: true,
+      });
     });
-    this.restartLesson(event);
   }
 
   restartLesson(event) {
     event.preventDefault();
     this.stopLesson();
     this.setupLesson({
-      focusTriggerInt: this.state.focusTriggerInt + 1
+      focusTriggerInt: this.state.focusTriggerInt + 1,
+      revisionMode: false
     });
   }
 
