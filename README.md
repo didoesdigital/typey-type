@@ -92,6 +92,11 @@ Run the test runner during development:
 yarn test
 ```
 
+`yarn test` will run all of the tests, but if you want to focus on a specific subset, there's also:
+
+- `yarn test:unit`, which has the most coverage for the app and runs quickly
+- `yarn test:ui`, which covers the most critical part of progressing through words in lessons and takes longer to run
+
 ### Storybook
 
 Run Storybook to develop and test components in isolation:
