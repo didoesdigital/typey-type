@@ -1,4 +1,5 @@
 import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
+import LATEST_TYPEY_TYPE_DICT_NAME from "../../constant/latestTypeyTypeDictName";
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
 import { addOutlinesToWordsInCombinedDict } from "./transformingDictionaries";
 import {
@@ -35,7 +36,7 @@ const combineValidDictionaries = (
   [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(
     dictTypeyType,
     combinedLookupDictionary,
-    `${SOURCE_NAMESPACES.get("typey")}:typey-type.json`,
+    `${SOURCE_NAMESPACES.get("typey")}:${LATEST_TYPEY_TYPE_DICT_NAME}`,
     new Set()
   );
 

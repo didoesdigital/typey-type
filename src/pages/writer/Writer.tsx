@@ -34,6 +34,7 @@ import { withAtomsCompat } from "../../states/atomUtils";
 import { useChangeStenoLayout } from "../lessons/components/UserSettings/updateUserSetting";
 import { globalUserSettingsState } from "../../states/globalUserSettingsState";
 import { useChangeWriterInput } from "../lessons/components/UserSettings/updateGlobalUserSetting";
+import LATEST_TYPEY_TYPE_DICT_NAME from 'constant/latestTypeyTypeDictName';
 
 type Props = {
   userSettings: UserSettings,
@@ -120,7 +121,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
   }
 
   componentDidMount() {
-    let dict:string = '' + (process.env.PUBLIC_URL || '') + '/dictionaries/typey-type/typey-type.json';
+    let dict:string = '' + (process.env.PUBLIC_URL || '') + `/dictionaries/typey-type/${LATEST_TYPEY_TYPE_DICT_NAME}`;
     fetchResource(dict)
       .then((json) => {
         this.setState({

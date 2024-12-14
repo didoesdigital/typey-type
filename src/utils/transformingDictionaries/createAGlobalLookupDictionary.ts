@@ -1,4 +1,5 @@
 import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
+import LATEST_TYPEY_TYPE_DICT_NAME from "../../constant/latestTypeyTypeDictName";
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
 
 import combineValidDictionaries from "./combineValidDictionaries";
@@ -34,7 +35,7 @@ const createAGlobalLookupDictionary = (
 
   // let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary); // has a bug; instead of sorted entire dict, we sort per entry used within chooseOutlineForPhrase function
   let configuration = [
-    `${SOURCE_NAMESPACES.get("typey")}:typey-type.json`,
+    `${SOURCE_NAMESPACES.get("typey")}:${LATEST_TYPEY_TYPE_DICT_NAME}`,
     ...personalDictionariesNamesAndContents.map(
       (d) => `${SOURCE_NAMESPACES.get("user")}:${d[0]}`
     ),
