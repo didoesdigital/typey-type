@@ -128,7 +128,7 @@ const DictionaryManagement = (props) => {
               );
             }
 
-            if (dictName === "typey-type.json" && dictionary.size >= 2144740) {
+            if ((dictName === "typey-type.json" || dictName === "typey-type-full.json") && dictionary.size >= 2144740) {
               throw new Error(
                 "This dictionary looks like a copy of Typey Type's so we'll exclude it for now."
               );
