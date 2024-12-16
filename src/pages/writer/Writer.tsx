@@ -24,10 +24,9 @@ import mapBriefToItalianMichelaStenoKeys from '../../utils/stenoLayouts/mapBrief
 import mapBriefToJapaneseStenoKeys from '../../utils/stenoLayouts/mapBriefToJapaneseStenoKeys';
 import mapBriefToKoreanModernCStenoKeys from '../../utils/stenoLayouts/mapBriefToKoreanModernCStenoKeys';
 import mapBriefToPalantypeKeys from '../../utils/stenoLayouts/mapBriefToPalantypeKeys';
-import { fetchResource } from '../../utils/getData';
+import fetchResource from 'utils/getData/fetchResource';
 import Subheader from "../../components/Subheader";
 
-import type { GlobalUserSettings, Outline, UserSettings } from "../../types";
 import { WithAppMethods, withAppMethods } from "../../states/legacy/AppMethodsContext";
 import { userSettingsState } from "../../states/userSettingsState";
 import { withAtomsCompat } from "../../states/atomUtils";
@@ -35,6 +34,8 @@ import { useChangeStenoLayout } from "../lessons/components/UserSettings/updateU
 import { globalUserSettingsState } from "../../states/globalUserSettingsState";
 import { useChangeWriterInput } from "../lessons/components/UserSettings/updateGlobalUserSetting";
 import LATEST_TYPEY_TYPE_DICT_NAME from 'constant/latestTypeyTypeDictName';
+
+import type { StenoDictionary, GlobalUserSettings, Outline, UserSettings } from "../../types";
 
 type Props = {
   userSettings: UserSettings,
@@ -122,7 +123,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
 
   componentDidMount() {
     let dict:string = '' + (process.env.PUBLIC_URL || '') + `/dictionaries/typey-type/${LATEST_TYPEY_TYPE_DICT_NAME}`;
-    fetchResource(dict)
+    fetchResource<StenoDictionary>(dict)
       .then((json) => {
         this.setState({
           stenoDictionary: json
