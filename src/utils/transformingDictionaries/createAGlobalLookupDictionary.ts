@@ -8,6 +8,7 @@ import {
   LookupDictWithNamespacedDictsAndConfig,
   PersonalDictionaryNameAndContents,
   DictionaryConfigurationList,
+  ReadDictionariesData,
   StenoDictionary,
 } from "../../types";
 
@@ -19,9 +20,10 @@ const addConfig = (
   return dict as LookupDictWithNamespacedDictsAndConfig;
 };
 
-const createAGlobalLookupDictionary = (
+// Note: This is the new preferred method to create a global lookup dictionary
+export const createGlobalLookupDictionary = (
   personalDictionariesNamesAndContents: PersonalDictionaryNameAndContents[],
-  dictTypeyType: StenoDictionary,
+  typeyDicts: ReadDictionariesData,
   ploverDict: any = null
 ): LookupDictWithNamespacedDictsAndConfig => {
   // TODO: one day, this could be the place we check for whether Typey Type dictionaries or the Plover dictionary are enabled and if so combineValidDictionaries with them and add to 'configuration'
@@ -29,13 +31,17 @@ const createAGlobalLookupDictionary = (
   let combinedLookupDictionary: LookupDictWithNamespacedDicts =
     combineValidDictionaries(
       personalDictionariesNamesAndContents,
-      dictTypeyType,
+      typeyDicts,
       ploverDict
     );
 
+  const typeyDictsConfigEntries = typeyDicts.map(
+    (readDictData) => `${SOURCE_NAMESPACES.get("typey")}:${readDictData[1]}`
+  );
+
   // let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary); // has a bug; instead of sorted entire dict, we sort per entry used within chooseOutlineForPhrase function
   let configuration = [
-    `${SOURCE_NAMESPACES.get("typey")}:${LATEST_TYPEY_TYPE_DICT_NAME}`,
+    ...typeyDictsConfigEntries,
     ...personalDictionariesNamesAndContents.map(
       (d) => `${SOURCE_NAMESPACES.get("user")}:${d[0]}`
     ),
@@ -48,6 +54,25 @@ const createAGlobalLookupDictionary = (
   }
 
   return addConfig(combinedLookupDictionary, configuration);
+};
+
+/**
+ * @deprecated This function is deprecated. Use `createGlobalLookupDictionary`
+ * without "A" instead.
+ *
+ * This deprecated function only exists so we don't have to change the
+ * structure of a hundred existing tests.
+ */
+const createAGlobalLookupDictionary = (
+  personalDictionariesNamesAndContents: PersonalDictionaryNameAndContents[],
+  typeyDicts: StenoDictionary,
+  ploverDict: any = null
+): LookupDictWithNamespacedDictsAndConfig => {
+  return createGlobalLookupDictionary(
+    personalDictionariesNamesAndContents,
+    [[typeyDicts, LATEST_TYPEY_TYPE_DICT_NAME]],
+    ploverDict
+  );
 };
 
 export default createAGlobalLookupDictionary;

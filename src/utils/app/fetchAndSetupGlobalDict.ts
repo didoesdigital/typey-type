@@ -1,8 +1,9 @@
 import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
 import LATEST_TYPEY_TYPE_DICT_NAME from "../../constant/latestTypeyTypeDictName";
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
-import { getLatestPloverDict, getTypeyTypeDict } from "../getData";
-import createAGlobalLookupDictionary from "../transformingDictionaries/createAGlobalLookupDictionary";
+import { getLatestPloverDict } from "../getData";
+import getTypeyTypeDict from "../getData/getTypeyTypeDicts";
+import { createGlobalLookupDictionary } from "../transformingDictionaries/createAGlobalLookupDictionary";
 import { AffixList } from "../affixList";
 import { loadPersonalDictionariesFromLocalStorage } from "../typey-type";
 
@@ -96,15 +97,16 @@ function fetchAndSetupGlobalDict(
       getTypeyTypeDict(),
       withPlover ? getLatestPloverDict() : {},
     ]).then((data) => {
-      let [typeyDict, latestPloverDict] = data;
+      let [typeyDictionaries, latestPloverDict] = data;
+
       // let t0 = performance.now();
       // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
       //   dictAndMisstrokes[1] = {};
       // }
 
-      let sortedAndCombinedLookupDictionary = createAGlobalLookupDictionary(
+      let sortedAndCombinedLookupDictionary = createGlobalLookupDictionary(
         personalDictionaries,
-        typeyDict,
+        typeyDictionaries,
         withPlover ? latestPloverDict : null
       );
       // let t1 = performance.now();

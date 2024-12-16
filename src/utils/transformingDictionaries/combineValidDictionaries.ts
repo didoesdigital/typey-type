@@ -1,15 +1,14 @@
 import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
-import LATEST_TYPEY_TYPE_DICT_NAME from "../../constant/latestTypeyTypeDictName";
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
 import { addOutlinesToWordsInCombinedDict } from "./transformingDictionaries";
 import {
   PersonalDictionaryNameAndContents,
-  StenoDictionary,
+  ReadDictionariesData,
 } from "../../types";
 
 const combineValidDictionaries = (
   personalDictionariesNamesAndContents: PersonalDictionaryNameAndContents[],
-  dictTypeyType: StenoDictionary,
+  typeyDicts: ReadDictionariesData,
   ploverDict: any = null
 ) => {
   let combinedLookupDictionary = new Map();
@@ -33,12 +32,14 @@ const combineValidDictionaries = (
   }
 
   // 2. Add Typey Type entries
-  [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(
-    dictTypeyType,
-    combinedLookupDictionary,
-    `${SOURCE_NAMESPACES.get("typey")}:${LATEST_TYPEY_TYPE_DICT_NAME}`,
-    new Set()
-  );
+  typeyDicts.forEach((readDictData) => {
+    [combinedLookupDictionary, _] = addOutlinesToWordsInCombinedDict(
+      readDictData[0],
+      combinedLookupDictionary,
+      `${SOURCE_NAMESPACES.get("typey")}:${readDictData[1]}`,
+      new Set()
+    );
+  });
 
   // 3. Add Plover dictionary entries
   if (!!ploverDict) {
