@@ -186,15 +186,13 @@ class App extends Component {
     let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
     let calculatedYourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
 
-    this.setState({
+    writePersonalPreferences('lessonsProgress', lessonsProgressState);
+    writePersonalPreferences('metWords', metWordsFromStateOrArg);
+    this.setupLesson({
       lessonsProgress: lessonsProgressState,
       metWords: metWordsFromStateOrArg,
       yourSeenWordCount: calculatedYourSeenWordCount,
       yourMemorisedWordCount: calculatedYourMemorisedWordCount,
-    }, () => {
-      writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
-      writePersonalPreferences('metWords', this.state.metWords);
-      this.setupLesson();
     });
   }
 
