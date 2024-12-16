@@ -143,6 +143,55 @@ const Support = () => {
             </OutboundLink>
           </p>
 
+          <h3 id="try-steno">Try steno in the browser with zero setup</h3>
+          <p>
+            There are demos to help you try steno in the browser without
+            installing software and without a proper keyboard or steno machine.
+            Without guidance, they might still be a little confusing. When you
+            visit them, try something like pressing the keys “a” and “p” at the
+            same time on a QWERTY keyboard then let go and maybe you can enjoy
+            the magic of seeing “is the” appear! Then for a longer word word,
+            try pressing the keys “e”, “f”, and “j” together then let go to
+            watch “prerequisite” pop out!
+          </p>
+          <ul>
+            <li>
+              You can try the{" "}
+              <OutboundLink
+                eventLabel="interactive steno demo on StenoKnight Cart Services"
+                to="https://stenoknight.com/kws.html"
+              >
+                interactive steno demo on StenoKnight's site
+              </OutboundLink>
+              . This site is Mirabai Knight's, the founder of the founder of The
+              Open Steno Project and Plover. You can also go directly to the{" "}
+              <OutboundLink
+                eventLabel="standalone steno demo on StenoKnight Cart Services"
+                to="https://stenoknight.com/plover/ploverdemo/ploverdemo.html"
+              >
+                standalone steno demo
+              </OutboundLink>
+              .
+            </li>
+            <li>
+              You can read about{" "}
+              <OutboundLink
+                eventLabel="Stenopad on the StenoKeyboards blog"
+                to="https://stenokeyboards.com/blogs/posts/stenopad"
+              >
+                Stenopad on the StenoKeyboards blog
+              </OutboundLink>
+              . You can also go directly to the{" "}
+              <OutboundLink
+                eventLabel="Stenopad"
+                to="https://stenopad.stenokeyboards.com/"
+              >
+                Stenopad
+              </OutboundLink>{" "}
+              demo to try out steno.
+            </li>
+          </ul>
+
           <h3 id="steno-terms">Steno terms</h3>
           <DescriptionList>
             <DescriptionTerm>Briefs</DescriptionTerm>
@@ -462,7 +511,9 @@ const Support = () => {
           </p>
 
           <h3 id="learn-steno">Learning stenography</h3>
-          <h4 id="try-steno">How can you try out steno?</h4>
+          <h4 id="try-steno-on-a-computer">
+            How can you try steno on your computer?
+          </h4>
           <p>
             For an idea of how steno feels and works, you can{" "}
             <OutboundLink
