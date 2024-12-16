@@ -17,6 +17,7 @@ const ExternalLink = ({ linkText, linkUrl }) => {
       <OutboundLink
         className="no-underline"
         eventLabel={`${text} (external link opens in new tab)`}
+        newTabAndIUnderstandTheAccessibilityImplications={true}
         to={url}
       >
         <strong>{text}</strong> (external link opens in new tab)
