@@ -520,11 +520,9 @@ class App extends Component {
   startCustomLesson() {
     let lesson = Object.assign({}, this.state.customLesson);
     lesson.title = 'Custom'
-    this.setState({
+    this.setupLesson({
       currentPhraseID: 0,
       lesson: lesson
-    }, () => {
-      this.setupLesson();
     });
   }
 
@@ -534,15 +532,13 @@ class App extends Component {
       let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
       let customLesson = Object.assign({}, this.state.customLesson);
       if (validationMessages && validationMessages.length < 1) { customLesson = lesson; }
-      this.setState({
-        lesson: lesson,
+      this.setupLesson({
+        lesson,
         currentPhraseID: 0,
-        customLesson: customLesson,
+        customLesson,
         customLessonMaterial: providedText,
         customLessonMaterialValidationState: validationState,
         customLessonMaterialValidationMessages: validationMessages
-      }, () => {
-        this.setupLesson();
       });
     }
     else { // for navigating straight to custom lesson page without setup
@@ -550,12 +546,10 @@ class App extends Component {
     // TODO: is this the place where I should set a default empty custom lesson?
       let lesson = Object.assign({}, this.state.customLesson);
       lesson.title = 'Custom'
-      this.setState({
+      this.setupLesson({
         customLesson: lesson,
-        lesson: lesson,
+        lesson,
         currentPhraseID: 0
-      }, () => {
-        this.setupLesson();
       });
     }
     return event;
@@ -563,15 +557,11 @@ class App extends Component {
 
   reviseLesson(event, newRevisionMaterial) {
     event.preventDefault();
-    this.setState({
+    this.stopLesson();
+    this.setupLesson({
       revisionMaterial: newRevisionMaterial,
-    }, () => {
-      this.stopLesson();
-      this.setupLesson({
-        focusTriggerInt: this.state.focusTriggerInt + 1,
-        // revisionMaterial: newRevisionMaterial,
-        revisionMode: true,
-      });
+      focusTriggerInt: this.state.focusTriggerInt + 1,
+      revisionMode: true,
     });
   }
 
