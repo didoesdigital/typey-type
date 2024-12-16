@@ -72,21 +72,8 @@ function fetchDictionaryIndex() {
   });
 }
 
-// for custom lesson setup
-function DEPRECATED_fetchResource(resource = process.env.PUBLIC_URL + '/dictionaries/typey-type/typey-type.json') {
-  return fetch(resource, {
-    method: "GET",
-    credentials: "same-origin"
-  }).then((response) => {
-    return response.json()
-  }).then(json => {
-    return(json);
-  });
-}
-
 export {
   fetchDictionaryIndex,
-  DEPRECATED_fetchResource, // for custom lesson setup and more
   getLesson,
   getLatestPloverDict,
 };
