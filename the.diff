@@ -1,0 +1,3 @@
+src/App.js: 
+
+* flattening setState calls in the most obvious places

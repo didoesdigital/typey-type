@@ -279,11 +279,8 @@ class App extends Component {
       numberOfWordsToDiscover: numberOfWordsToDiscover
     }
 
-    this.setState({
-      lessonsProgress: lessonsProgress,
-    }, () => {
-      writePersonalPreferences('lessonsProgress', lessonsProgress);
-    });
+    writePersonalPreferences('lessonsProgress', lessonsProgress);
+    this.setState({ lessonsProgress });
     return lessonsProgress;
   }
 
