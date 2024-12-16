@@ -56,7 +56,10 @@ class ActionProvider {
   handleLearningQuestions(userMessage) {
     const [linkText, linkUrl] =
       userMessage.includes("learn") || userMessage.includes("theory")
-        ? ["Learn Plover", "https://www.openstenoproject.org/learn-plover/home.html"]
+        ? [
+            "Learn Plover",
+            "https://www.openstenoproject.org/learn-plover/home.html",
+          ]
         : userMessage.includes("practice") || userMessage.includes("drill")
         ? ["Stenojig", "https://joshuagrams.github.io/steno-jig/"]
         : ["Plover Discord", "https://discord.gg/0lQde43a6dGmAMp2"];
@@ -92,6 +95,31 @@ class ActionProvider {
     this.setState((prevState) => ({
       ...prevState,
       phraseToLookup: strippedUserMessage,
+      messages: [...prevState.messages, botMessage],
+    }));
+  }
+
+  handleTrySteno() {
+    const options = [
+      ["Ploverpad", "https://stenopad.stenokeyboards.com/"],
+      [
+        "StenoKnight's Interactive Steno Demo",
+        "https://stenoknight.com/plover/ploverdemo/ploverdemo.html",
+      ],
+    ];
+    const selectedOption = Math.random() >= 0.5 ? options[0] : options[1];
+    const [linkText, linkUrl] = selectedOption;
+    const botMessage = this.createChatBotMessage(
+      `To try steno in the browser with zero setup, you could visit:`,
+      {
+        widget: "externalLink",
+      }
+    );
+
+    this.setState((prevState) => ({
+      ...prevState,
+      linkText,
+      linkUrl,
       messages: [...prevState.messages, botMessage],
     }));
   }

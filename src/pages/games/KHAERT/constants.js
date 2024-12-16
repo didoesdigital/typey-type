@@ -57,6 +57,22 @@ export const keyboardFunctions = [
   "undo",
 ];
 
+export const tryStenoKeywords = [
+  "try steno",
+  "test steno",
+  "give steno a", // … go/try
+  "steno demo",
+  "steno trial",
+  "steno example",
+  "zero setup",
+  "without installing",
+  "without software",
+  "without technology",
+  "without hardware",
+  "without a keyboard",
+  "without a steno machine",
+];
+
 export const lessonKeywords = [
   "lesson",
   "lessons",

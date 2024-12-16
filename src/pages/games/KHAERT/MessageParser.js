@@ -14,6 +14,7 @@ import {
   locationQuestions,
   lookupKeywords,
   nameQuestions,
+  tryStenoKeywords,
   whatQuestions,
   whoQuestions,
 } from "./constants.js";
@@ -72,6 +73,11 @@ class MessageParser {
       messageMatchesAKeyword(lowerCaseMessage, keyboardFunctions)
     ) {
       this.actionProvider.handleHowToKeyboard(lowerCaseMessage);
+      foundSomething = true;
+    }
+
+    if (messageMatchesAKeyword(lowerCaseMessage, tryStenoKeywords)) {
+      this.actionProvider.handleTrySteno(lowerCaseMessage);
       foundSomething = true;
     }
 
