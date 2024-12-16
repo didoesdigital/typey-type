@@ -1,3 +1,5 @@
+import fetchResource from "utils/getData/fetchResource";
+
 let latestPloverDict = null;
 
 function fetchLatestPloverDict() {
@@ -71,7 +73,7 @@ function fetchDictionaryIndex() {
 }
 
 // for custom lesson setup
-function fetchResource(resource = process.env.PUBLIC_URL + '/dictionaries/typey-type/typey-type.json') {
+function DEPRECATED_fetchResource(resource = process.env.PUBLIC_URL + '/dictionaries/typey-type/typey-type.json') {
   return fetch(resource, {
     method: "GET",
     credentials: "same-origin"
@@ -84,7 +86,7 @@ function fetchResource(resource = process.env.PUBLIC_URL + '/dictionaries/typey-
 
 export {
   fetchDictionaryIndex,
-  fetchResource, // for custom lesson setup and more
+  DEPRECATED_fetchResource, // for custom lesson setup and more
   getLesson,
   getLatestPloverDict,
 };
