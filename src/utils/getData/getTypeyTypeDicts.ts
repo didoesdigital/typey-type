@@ -5,7 +5,7 @@ import type { ReadDictionariesData, ReadDictionaryData } from "types";
 
 let allDicts: null | ReadDictionariesData = null;
 
-const allTypeyTypeDictNames = [LATEST_TYPEY_TYPE_DICT_NAME];
+export const allTypeyTypeDictNames = [LATEST_TYPEY_TYPE_DICT_NAME];
 const typeyDictionariesSubDir = "dictionaries/typey-type";
 
 const allTypeyTypeDictURLs = allTypeyTypeDictNames.map(

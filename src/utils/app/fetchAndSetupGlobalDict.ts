@@ -1,8 +1,9 @@
 import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
-import LATEST_TYPEY_TYPE_DICT_NAME from "../../constant/latestTypeyTypeDictName";
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
 import { getLatestPloverDict } from "../getData";
-import getTypeyTypeDict from "../getData/getTypeyTypeDicts";
+import getTypeyTypeDict, {
+  allTypeyTypeDictNames,
+} from "../getData/getTypeyTypeDicts";
 import { createGlobalLookupDictionary } from "../transformingDictionaries/createAGlobalLookupDictionary";
 import { AffixList } from "../affixList";
 import { loadPersonalDictionariesFromLocalStorage } from "../typey-type";
@@ -39,7 +40,9 @@ function fetchAndSetupGlobalDict(
   // personal dictionary usage…
   let localConfigPlusTypeyType = localConfig.slice(0);
   localConfigPlusTypeyType.unshift(
-    `${SOURCE_NAMESPACES.get("typey")}:${LATEST_TYPEY_TYPE_DICT_NAME}`
+    ...allTypeyTypeDictNames.map(
+      (typeyDict) => `${SOURCE_NAMESPACES.get("typey")}:${typeyDict}`
+    )
   );
   const previouslyAppliedConfig =
     // @ts-ignore TODO
