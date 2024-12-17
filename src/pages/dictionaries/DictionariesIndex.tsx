@@ -85,21 +85,45 @@ const DictionariesIndex = ({
             <div className="mw-584">
               <h3 id="typey-type-dictionary">Typey&nbsp;Type dictionary</h3>
               <p>
-                <Link to="/dictionaries/typey-type/typey-type/">
-                  Typey&nbsp;Type’s dictionary
+                <Link to="/dictionaries/typey-type/typey-type-full/">
+                  Typey&nbsp;Type’s full dictionary
                 </Link>{" "}
-                removes many misstrokes and mimics the{" "}
-                <strong>Plover version 4 dictionary</strong>.
+                uses Plover theory. It builds on the Plover version&nbsp;4
+                dictionary and removes many misstrokes. I highly recommend you
+                use{" "}
+                <Link to="/dictionaries/typey-type/typey-type-full/">
+                  Typey&nbsp;Type’s full&nbsp;dictionary
+                </Link>{" "}
+                instead of Plover’s default main dictionary. Plover’s built-in
+                dictionary has not had substantial updates since 2018.
               </p>
               <p>
-                You can use Plover’s dictionary or you can use use Di’s
-                dictionaries that power Typey Type’s stroke suggestions from{" "}
+                You could alternatively explore Di’s dictionaries that power
+                Typey&nbsp;Type’s stroke suggestions from{" "}
                 <OutboundLink
                   eventLabel="Di’s Steno Dictionaries repo"
                   newTabAndIUnderstandTheAccessibilityImplications={true}
                   to="https://github.com/didoesdigital/steno-dictionaries"
                 >
                   Di’s Steno Dictionaries repo (opens in new tab)
+                </OutboundLink>
+                .
+              </p>
+              <p>
+                If you want to use{" "}
+                <OutboundLink
+                  eventLabel="Lapwing theory"
+                  to="https://lapwing.aerick.ca/"
+                >
+                  Lapwing theory
+                </OutboundLink>{" "}
+                instead of Plover theory, check out the{" "}
+                <OutboundLink
+                  eventLabel="Chapter 5: Lapwing setup and basics: Typey Type"
+                  newTabAndIUnderstandTheAccessibilityImplications={true}
+                  to="https://lapwing.aerick.ca/Chapter-05.html#typey-type"
+                >
+                  Lapwing Typey&nbsp;Type guide (opens in new tab)
                 </OutboundLink>
                 .
               </p>
