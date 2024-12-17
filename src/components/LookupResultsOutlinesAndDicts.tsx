@@ -1,15 +1,19 @@
 import React from "react";
 import SOURCE_NAMESPACES from "../constant/sourceNamespaces";
+import TypeyTypeIcon from "components/Icons/icon-images/TypeyTypeIcon.svg";
+import Icon from "components/Icons/Icon";
 
-import type { StrokeAndDictionaryAndNamespace, StenoLayout } from "../types";
+import type { StenoLayout } from "../types";
+import type { StrokeDictNamespaceAndMisstrokeStatus } from "components/StrokesForWords";
+import LATEST_TYPEY_TYPE_DICT_NAME from "constant/latestTypeyTypeDictName";
 
 type Props = {
-  listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[];
+  listOfStrokeDictNamespaceMisstroke: StrokeDictNamespaceAndMisstrokeStatus[];
   stenoLayout: StenoLayout;
 };
 
 const LookupResultsOutlinesAndDicts = ({
-  listOfStrokesAndDicts,
+  listOfStrokeDictNamespaceMisstroke,
   stenoLayout,
 }: Props) => {
   let layoutTypeStyle = "";
@@ -20,7 +24,7 @@ const LookupResultsOutlinesAndDicts = ({
     layoutTypeStyle = " type-face--japanese";
   }
 
-  const strokeListItems = listOfStrokesAndDicts.map(
+  const strokeListItems = listOfStrokeDictNamespaceMisstroke.map(
     (strokeAndDict, indexInListOfStrokesAndDicts) => {
       const briefWithSpacesBetweenLetters = [...strokeAndDict[0]]
         .join(" ")
@@ -51,12 +55,22 @@ const LookupResultsOutlinesAndDicts = ({
 
       return (
         <li
-          className="unstyled-list-item mb1 flex flex-wrap items-baseline"
+          className="unstyled-list-item mb1 flex flex-wrap items-baseline gap-y-1"
           key={indexInListOfStrokesAndDicts}
         >
           <div className={"overflow-auto di mw-408 mr1" + layoutTypeStyle}>
             {stenoBriefKeysWithOrWithoutStrongTag}
           </div>
+          {strokeAndDict[2] === SOURCE_NAMESPACES.get("typey") ? (
+            <Icon
+              iconSVGImport={TypeyTypeIcon}
+              color="currentColor"
+              width="1.5em"
+              height="1.5em"
+              className="icon mr1"
+              style={{ alignSelf: "center" }}
+            />
+          ) : null}
           <span
             className={
               strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")
@@ -64,13 +78,22 @@ const LookupResultsOutlinesAndDicts = ({
                 : "de-emphasized"
             }
           >
-            {strokeAndDict[1]}
-          </span>
+            {strokeAndDict[1] === LATEST_TYPEY_TYPE_DICT_NAME &&
+            strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")
+              ? "Typey Type"
+              : strokeAndDict[1]}
+          </span>{" "}
+          {strokeAndDict[3] === true ? (
+            <span className="ml1 px1 bg-magenta-300 dark:bg-coolgrey-800 dark:text-magenta-400">
+              Possible misstroke
+            </span>
+          ) : null}
         </li>
       );
     }
   );
-  return listOfStrokesAndDicts && listOfStrokesAndDicts.length > 0 ? (
+  return listOfStrokeDictNamespaceMisstroke &&
+    listOfStrokeDictNamespaceMisstroke.length > 0 ? (
     <ul className="unstyled-list wrap">{strokeListItems}</ul>
   ) : null;
 };

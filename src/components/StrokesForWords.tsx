@@ -9,11 +9,13 @@ import PloverMisstrokesDetail from "./PloverMisstrokesDetail";
 import StrokesAsDiagrams from "./StrokesAsDiagrams";
 
 import type {
+  DictName,
   FetchAndSetupGlobalDict,
   ImportedPersonalDictionaries,
   LookupDictWithNamespacedDictsAndConfig,
+  Namespace,
+  Outline,
   StenoDictionary,
-  StrokeAndDictionaryAndNamespace,
   UserSettings,
 } from "../types";
 import { useAtomValue } from "jotai";
@@ -30,6 +32,13 @@ type Props = {
   userSettings: UserSettings;
 };
 
+export type StrokeDictNamespaceAndMisstrokeStatus = [
+  Outline,
+  DictName,
+  Namespace,
+  boolean
+];
+
 const StrokesForWords = ({
   fetchAndSetupGlobalDict,
   lookupTerm,
@@ -44,9 +53,10 @@ const StrokesForWords = ({
   const [modifiedWordOrPhraseState, setModifiedWordOrPhraseState] =
     useState("");
   const [phraseState, setPhraseState] = useState("");
-  const [listOfStrokesAndDictsState, setListOfStrokesAndDictsState] = useState<
-    StrokeAndDictionaryAndNamespace[]
-  >([]);
+  const [
+    listOfStrokeDictNamespaceMisstroke,
+    setListOfStrokeDictNamespaceMisstroke,
+  ] = useState<StrokeDictNamespaceAndMisstrokeStatus[]>([]);
 
   const misstrokesJSON = misstrokes as StenoDictionary;
 
@@ -107,22 +117,36 @@ const StrokesForWords = ({
       );
     }
 
+    const listOfStrokesDictsNamespaceMisstroke: StrokeDictNamespaceAndMisstrokeStatus[] =
+      listOfStrokesAndDicts.map((row) => {
+        const misstrokeStatus =
+          !!misstrokesJSON[row[0]] &&
+          modifiedWordOrPhrase === misstrokesJSON[row[0]];
+
+        const result: StrokeDictNamespaceAndMisstrokeStatus = [
+          ...row,
+          misstrokeStatus,
+        ];
+
+        return result;
+      });
+
     if (trackPhrase) {
       trackPhrase(phrase);
     }
 
     setModifiedWordOrPhraseState(modifiedWordOrPhrase);
     setPhraseState(phrase);
-    setListOfStrokesAndDictsState(listOfStrokesAndDicts);
+    setListOfStrokeDictNamespaceMisstroke(listOfStrokesDictsNamespaceMisstroke);
   }
 
   const stenoLayout = userSettings?.stenoLayout ?? "stenoLayoutAmericanSteno";
 
   const brief =
-    listOfStrokesAndDictsState &&
-    listOfStrokesAndDictsState[0] &&
-    listOfStrokesAndDictsState[0][0]
-      ? listOfStrokesAndDictsState[0][0]
+    listOfStrokeDictNamespaceMisstroke &&
+    listOfStrokeDictNamespaceMisstroke[0] &&
+    listOfStrokeDictNamespaceMisstroke[0][0]
+      ? listOfStrokeDictNamespaceMisstroke[0][0]
       : "";
 
   const strokes = splitBriefsIntoStrokes(brief);
@@ -151,20 +175,22 @@ const StrokesForWords = ({
         wrap="off"
       ></textarea>
       <MatchedModifiedTranslation
-        listOfStrokesAndDicts={listOfStrokesAndDictsState}
+        listOfStrokeDictNamespaceMisstroke={listOfStrokeDictNamespaceMisstroke}
         modifiedWordOrPhrase={modifiedWordOrPhraseState}
         phrase={phraseState}
       />
       <div className="mb1">
         <StrokesAsDiagrams
-          listOfStrokesAndDicts={listOfStrokesAndDictsState}
+          listOfStrokeDictNamespaceMisstroke={
+            listOfStrokeDictNamespaceMisstroke
+          }
           stenoLayout={stenoLayout}
           strokes={strokes}
           userSettings={userSettings}
         />
       </div>
       <LookupResultsOutlinesAndDicts
-        listOfStrokesAndDicts={listOfStrokesAndDictsState}
+        listOfStrokeDictNamespaceMisstroke={listOfStrokeDictNamespaceMisstroke}
         stenoLayout={stenoLayout}
       />
       <PloverMisstrokesDetail

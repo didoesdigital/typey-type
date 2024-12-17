@@ -2,22 +2,18 @@ import React from "react";
 import getStenoDiagram from "../pages/lessons/utilities/getStenoDiagram";
 import getMapBriefsFn from "../pages/lessons/utilities/getMapBriefsFn";
 
-import type {
-  SingleStroke,
-  StenoLayout,
-  StrokeAndDictionaryAndNamespace,
-  UserSettings,
-} from "../types";
+import type { SingleStroke, StenoLayout, UserSettings } from "../types";
+import type { StrokeDictNamespaceAndMisstrokeStatus } from "components/StrokesForWords";
 
 type Props = {
-  listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[];
+  listOfStrokeDictNamespaceMisstroke: StrokeDictNamespaceAndMisstrokeStatus[];
   stenoLayout: StenoLayout;
   strokes: SingleStroke[];
   userSettings: UserSettings;
 };
 
 const StrokesAsDiagrams = ({
-  listOfStrokesAndDicts,
+  listOfStrokeDictNamespaceMisstroke,
   stenoLayout,
   strokes,
   userSettings,
@@ -27,7 +23,7 @@ const StrokesAsDiagrams = ({
   return (
     <div className="flex flex-wrap mr05 overflow-y-auto max-h-240">
       {userSettings?.showStrokesAsDiagrams &&
-        listOfStrokesAndDicts.length > 0 &&
+        listOfStrokeDictNamespaceMisstroke.length > 0 &&
         strokes.map((strokeToDraw, index) => (
           <React.Fragment key={index}>
             {Object.values(mapBriefsFunction(strokeToDraw)).some(
@@ -46,7 +42,7 @@ const StrokesAsDiagrams = ({
           </React.Fragment>
         ))}
       {userSettings?.showStrokesAsDiagrams &&
-      listOfStrokesAndDicts.length === 0 ? (
+      listOfStrokeDictNamespaceMisstroke.length === 0 ? (
         <React.Fragment>
           <div className="mt1 mr2 mb2">
             <StenoLayoutDiagram

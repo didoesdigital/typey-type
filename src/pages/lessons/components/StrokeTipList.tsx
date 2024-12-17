@@ -75,10 +75,9 @@ const StrokeTipList = ({
           </p>
         ) : (
           <LookupResultsOutlinesAndDicts
-            listOfStrokesAndDicts={currentPhraseOutlines.slice(
-              0,
-              maxOutlinesShown
-            )}
+            listOfStrokeDictNamespaceMisstroke={currentPhraseOutlines
+              .slice(0, maxOutlinesShown)
+              .map((row) => [...row, false])}
             stenoLayout={userSettings.stenoLayout}
           />
         )}

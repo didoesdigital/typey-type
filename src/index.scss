@@ -48,7 +48,7 @@
   --magenta-100: #FCF8FA; //#FCF8FA;
   // --magenta-200: #; //#FAEBF0;
   --magenta-300: #ead6de; //#F5D6E1;
-  // --magenta-400: #F2C5D6; //#F2C5D6;
+  --magenta-400: #F2C5D6; //#F2C5D6;
   // --magenta-500: #; //#E89BB7;
   // --magenta-600: #; //#E26F99;
   --magenta-700: #d64e84; //#CC2E68;
@@ -126,6 +126,7 @@
     --green-600: #09A573;
     --green-700: #067551;
     --magenta-300: #F5D6E1;
+    --magenta-400: #F0BCD0;
     --type-color: var(--coolgrey-400);
   }
 }
@@ -146,6 +147,14 @@
   .dark\:text-violet-900 {
     color: var(--violet-900);
   }
+
+  .dark\:text-magenta-400 {
+    color: var(--magenta-400);
+  }
+}
+
+.bg-magenta-300 {
+  background-color: var(--magenta-300);
 }
 
 .bg-violet-200 {
@@ -1832,6 +1841,10 @@ $textarea-padding-x: 8px;
 .gap-4 {
   gap: 1rem; /* 16px */
 }
+.gap-y-1 {
+  row-gap: 0.25rem; /* 4px */
+}
+
 .columns-xs {
   column-width: 20rem; /* 320px */
 }
