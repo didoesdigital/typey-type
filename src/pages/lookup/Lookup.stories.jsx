@@ -75,7 +75,7 @@ LookupSearchStory.play = async ({ canvasElement }) => {
   ).not.toHaveTextContent("No results found");
 
   await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
-    "typey-type.json"
+    "Typey Type"
   );
 };
 
