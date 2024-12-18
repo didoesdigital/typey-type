@@ -259,6 +259,17 @@ const Dictionary = () => {
                   <code>{contents}</code>
                 </pre>
               )}
+              {!!(dictionary.title.toUpperCase() === "FULL DICTIONARY") && (
+                <a
+                  href={process.env.PUBLIC_URL + dictionary.path}
+                  download=""
+                  onClick={trackDownloadDictionary}
+                  style={{ lineHeight: 2 }}
+                  className="button db mr1 mb3"
+                >
+                  Download the Full Dictionary
+                </a>
+              )}
             </div>
             <p>
               <a
