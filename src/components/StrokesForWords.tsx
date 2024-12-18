@@ -16,6 +16,7 @@ import type {
   Namespace,
   Outline,
   StenoDictionary,
+  StrokeAndDictionaryAndNamespace,
   UserSettings,
 } from "../types";
 
@@ -37,6 +38,54 @@ export type StrokeDictNamespaceAndMisstrokeStatus = [
   boolean
 ];
 
+const misstrokesJSON = misstrokes as StenoDictionary;
+
+const addMisstrokeStatus = (
+  listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[],
+  modifiedWordOrPhrase: string
+): StrokeDictNamespaceAndMisstrokeStatus[] => {
+  return listOfStrokesAndDicts.map((row) => {
+    const misstrokeStatus =
+      !!misstrokesJSON[row[0]] &&
+      modifiedWordOrPhrase === misstrokesJSON[row[0]];
+
+    const result: StrokeDictNamespaceAndMisstrokeStatus = [
+      ...row,
+      misstrokeStatus,
+    ];
+
+    return result;
+  });
+};
+
+/**
+ *
+ * @param listOfStrokesDictsNamespaceMisstroke - list of sorted entries
+ * @returns list of entries without repeating typey: outlines if
+ * typey:top-10000-project-gutenberg-words.json already has the outline
+ */
+const removePreferredOutlineDuplicates = (
+  listOfStrokesDictsNamespaceMisstroke: StrokeDictNamespaceAndMisstrokeStatus[]
+): StrokeDictNamespaceAndMisstrokeStatus[] => {
+  let tpgOutline: null | Outline = null;
+
+  const filteredResult = listOfStrokesDictsNamespaceMisstroke.filter(
+    ([outline, dictName, namespace]) => {
+      if (
+        dictName === tpgDict &&
+        namespace === SOURCE_NAMESPACES.get("typey")
+      ) {
+        tpgOutline = outline;
+        return true;
+      }
+
+      return outline === tpgOutline ? false : true;
+    }
+  );
+
+  return filteredResult;
+};
+
 const StrokesForWords = ({
   fetchAndSetupGlobalDict,
   lookupTerm,
@@ -54,8 +103,6 @@ const StrokesForWords = ({
     listOfStrokeDictNamespaceMisstroke,
     setListOfStrokeDictNamespaceMisstroke,
   ] = useState<StrokeDictNamespaceAndMisstrokeStatus[]>([]);
-
-  const misstrokesJSON = misstrokes as StenoDictionary;
 
   useEffect(() => {
     const shouldUsePersonalDictionaries =
@@ -100,32 +147,10 @@ const StrokesForWords = ({
     let [listOfStrokesAndDicts, modifiedWordOrPhrase] =
       lookupListOfStrokesAndDicts(phrase, globalLookupDictionary);
 
-    let tpgOutline: null | Outline = null;
     const listOfStrokesDictsNamespaceMisstroke: StrokeDictNamespaceAndMisstrokeStatus[] =
-      listOfStrokesAndDicts
-        .map((row) => {
-          const misstrokeStatus =
-            !!misstrokesJSON[row[0]] &&
-            modifiedWordOrPhrase === misstrokesJSON[row[0]];
-
-          const result: StrokeDictNamespaceAndMisstrokeStatus = [
-            ...row,
-            misstrokeStatus,
-          ];
-
-          return result;
-        })
-        .filter(([outline, dictName, namespace]) => {
-          if (
-            dictName === tpgDict &&
-            namespace === SOURCE_NAMESPACES.get("typey")
-          ) {
-            tpgOutline = outline;
-            return true;
-          }
-
-          return outline === tpgOutline ? false : true;
-        });
+      removePreferredOutlineDuplicates(
+        addMisstrokeStatus(listOfStrokesAndDicts, modifiedWordOrPhrase)
+      );
 
     if (trackPhrase) {
       trackPhrase(phrase);
