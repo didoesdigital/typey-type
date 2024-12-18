@@ -1,5 +1,5 @@
 import rankOutlines from "./rankOutlines";
-import { createGlobalLookupDictionary } from "../createAGlobalLookupDictionary";
+import { createGlobalLookupDictionary } from "../createGlobalLookupDictionary";
 import { AffixList } from "../../affixList";
 import {
   testTypeyTypeDict,

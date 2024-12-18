@@ -1,4 +1,4 @@
-import { createGlobalLookupDictionary } from "./createAGlobalLookupDictionary";
+import { createGlobalLookupDictionary } from "./createGlobalLookupDictionary";
 import chooseOutlineForPhrase from "./chooseOutlineForPhrase";
 import { AffixList } from "../affixList";
 import {
