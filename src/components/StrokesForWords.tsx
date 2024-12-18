@@ -214,11 +214,6 @@ const StrokesForWords = ({
         listOfStrokeDictNamespaceMisstroke={listOfStrokeDictNamespaceMisstroke}
         stenoLayout={stenoLayout}
       />
-      <p>
-        <span className="py05 de-emphasized dark:text-coolgrey-900">
-          (4000 misstrokes hidden.)
-        </span>
-      </p>
     </React.Fragment>
   );
 };
