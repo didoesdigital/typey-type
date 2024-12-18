@@ -1,12 +1,12 @@
-import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "constant/latestTypeyTypeFullDictName";
 import fetchDictionaries from "./fetchDictionaries";
+import standardDictionarySet from "constant/standardDictionarySet";
 
 import type { ReadDictionariesData, ReadDictionaryData } from "types";
 
 let allDicts: null | ReadDictionariesData = null;
 
-export const allTypeyTypeDictNames = [LATEST_TYPEY_TYPE_FULL_DICT_NAME];
-const typeyDictionariesSubDir = "dictionaries/typey-type";
+export const allTypeyTypeDictNames = standardDictionarySet;
+const typeyDictionariesSubDir = "dictionaries/didoesdigital";
 
 const allTypeyTypeDictURLs = allTypeyTypeDictNames.map(
   (filename) =>
