@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import SOURCE_NAMESPACES from "../constant/sourceNamespaces";
-import misstrokes from "../json/misstrokes.json";
 import lookupListOfStrokesAndDicts from "../utils/lookupListOfStrokesAndDicts";
 import splitBriefsIntoStrokes from "./../utils/splitBriefsIntoStrokes";
 import LookupResultsOutlinesAndDicts from "./LookupResultsOutlinesAndDicts";
 import MatchedModifiedTranslation from "./MatchedModifiedTranslation";
 import StrokesAsDiagrams from "./StrokesAsDiagrams";
 import tpgDict from "constant/topProjectGutenbergDictName";
+import addMisstrokeStatus from "utils/transformingDictionaries/addMisstrokeStatus";
 
 import type {
   DictName,
@@ -15,8 +15,6 @@ import type {
   LookupDictWithNamespacedDictsAndConfig,
   Namespace,
   Outline,
-  StenoDictionary,
-  StrokeAndDictionaryAndNamespace,
   UserSettings,
 } from "../types";
 
@@ -37,26 +35,6 @@ export type StrokeDictNamespaceAndMisstrokeStatus = [
   Namespace,
   boolean
 ];
-
-const misstrokesJSON = misstrokes as StenoDictionary;
-
-const addMisstrokeStatus = (
-  listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[],
-  modifiedWordOrPhrase: string
-): StrokeDictNamespaceAndMisstrokeStatus[] => {
-  return listOfStrokesAndDicts.map((row) => {
-    const misstrokeStatus =
-      !!misstrokesJSON[row[0]] &&
-      modifiedWordOrPhrase === misstrokesJSON[row[0]];
-
-    const result: StrokeDictNamespaceAndMisstrokeStatus = [
-      ...row,
-      misstrokeStatus,
-    ];
-
-    return result;
-  });
-};
 
 /**
  *
