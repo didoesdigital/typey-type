@@ -49,11 +49,11 @@ function fetchDictionaryIndex() {
       [
         {
           "author": "Typey Type",
-          "title": "Dictionary",
+          "title": "Full Dictionary",
           "subtitle": "",
           "category": "Typey Type",
           "subcategory": "",
-          "path": "/dictionaries/typey-type/typey-type.json",
+          "path": "/dictionaries/typey-type/typey-type-full.json",
           "link": "/support#typey-type-dictionary",
           "tagline": "Typey Type’s dictionary follows the Plover dictionary with misstrokes removed from the top 10,000 words."
         },
