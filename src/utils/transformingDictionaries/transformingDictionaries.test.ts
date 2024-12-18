@@ -6,7 +6,6 @@ import createAGlobalLookupDictionary from "./createAGlobalLookupDictionary";
 import { AffixList } from "../affixList";
 import {
   testTypeyTypeDict,
-  testPloverDict,
   personalDictionaries,
 } from "./transformingDictionaries.fixtures";
 import type { LookupDictWithNamespacedDicts } from "../../types";
@@ -14,7 +13,7 @@ import type { LookupDictWithNamespacedDicts } from "../../types";
 const globalLookupDictionary = createAGlobalLookupDictionary(
   personalDictionaries,
   testTypeyTypeDict,
-  testPloverDict
+  {}
 );
 
 describe("add outlines for words to combined lookup dict", () => {

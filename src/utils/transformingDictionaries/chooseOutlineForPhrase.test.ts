@@ -3,15 +3,17 @@ import chooseOutlineForPhrase from "./chooseOutlineForPhrase";
 import { AffixList } from "../affixList";
 import {
   testTypeyTypeDict,
-  testPloverDict,
   personalDictionaries,
+  testTypeyTypeExtras,
 } from "./transformingDictionaries.fixtures";
 import type { LookupDictWithNamespacedDicts } from "../../types";
 
+const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
+
 const globalLookupDictionary = createAGlobalLookupDictionary(
   personalDictionaries,
-  testTypeyTypeDict,
-  testPloverDict
+  testTypeyTypeFull,
+  {}
 );
 const precedingChar = "";
 

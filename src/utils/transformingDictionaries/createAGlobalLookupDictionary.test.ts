@@ -2,15 +2,17 @@ import createAGlobalLookupDictionary from "./createAGlobalLookupDictionary";
 import { AffixList } from "../affixList";
 import {
   testTypeyTypeDict,
-  testPloverDict,
+  testTypeyTypeExtras,
   personalDictionaries,
 } from "./transformingDictionaries.fixtures";
 import type { PersonalDictionaryNameAndContents } from "../../types";
 
+const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
+
 const globalLookupDictionary = createAGlobalLookupDictionary(
   personalDictionaries,
-  testTypeyTypeDict,
-  testPloverDict
+  testTypeyTypeFull,
+  {}
 );
 
 describe("create a global lookup dictionary", () => {
@@ -26,11 +28,9 @@ describe("create a global lookup dictionary", () => {
     let personalDicts: PersonalDictionaryNameAndContents[] = [
       ["personal.json", { "TAO*EUPT": "Typey Type" }],
     ];
-    let typeyDict = { "SKP": "and" };
-    let ploverDict = {
-      "APBD": "and",
+    let typeyDict = {
       "SKP": "and",
-      "SP": "and",
+      "APBD": "and",
     };
     let expectedGlobalDict = new Map([
       ["Typey Type", [["TAO*EUPT", "user:personal.json"]]],
@@ -38,14 +38,12 @@ describe("create a global lookup dictionary", () => {
         "and",
         [
           ["SKP", "typey:typey-type.json"],
-          ["APBD", "plover:plover-main-3-jun-2018.json"],
-          ["SKP", "plover:plover-main-3-jun-2018.json"],
-          ["SP", "plover:plover-main-3-jun-2018.json"],
+          ["APBD", "typey:typey-type.json"],
         ],
       ],
     ]);
-    expect(
-      createAGlobalLookupDictionary(personalDicts, typeyDict, ploverDict)
-    ).toEqual(expectedGlobalDict);
+    expect(createAGlobalLookupDictionary(personalDicts, typeyDict, {})).toEqual(
+      expectedGlobalDict
+    );
   });
 });

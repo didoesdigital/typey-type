@@ -3,15 +3,17 @@ import createAGlobalLookupDictionary from "./createAGlobalLookupDictionary";
 import { AffixList } from "../affixList";
 import {
   testTypeyTypeDict,
-  testPloverDict,
+  testTypeyTypeExtras,
   personalDictionaries,
 } from "./transformingDictionaries.fixtures";
 import type { PersonalDictionaryNameAndContents } from "../../types";
 
+const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
+
 const globalLookupDictionary = createAGlobalLookupDictionary(
   personalDictionaries,
-  testTypeyTypeDict,
-  testPloverDict
+  testTypeyTypeFull,
+  {}
 );
 
 describe("create stroke hint for phrase", () => {

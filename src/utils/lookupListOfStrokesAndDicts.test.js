@@ -263,15 +263,15 @@ describe('lookup list of strokes and dicts with fingerspelling and single-letter
 describe("lookup list of strokes and dicts with capitalization dictionary formatting", () => {
   let globalLookupDictionary = new Map(
     Object.entries({
-      "Mx.{-|}": [["PH-BGS", "plover:plover-main-3-jun-2018.json"]],
-      "{~|'^}til": [["T*EUL", "plover:plover-main-3-jun-2018.json"]],
+      "Mx.{-|}": [["PH-BGS", "typey:typey-type-full.json"]],
+      "{~|'^}til": [["T*EUL", "typey:typey-type-full.json"]],
     })
   );
 
   it("shows list of strokes and dictionary for “Mx.” that use capitalize next word dictionary formatting", () => {
     let phrase = "Mx.";
     let listOfStrokesAndDicts = [
-      ["PH-BGS", "plover-main-3-jun-2018.json", "plover"],
+      ["PH-BGS", "typey-type-full.json", "typey"],
     ];
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(
@@ -282,7 +282,7 @@ describe("lookup list of strokes and dicts with capitalization dictionary format
   it("shows list of strokes and dictionary for “'til” that use carry capitalization dictionary formatting", () => {
     let phrase = "'til";
     let listOfStrokesAndDicts = [
-      ["T*EUL", "plover-main-3-jun-2018.json", "plover"],
+      ["T*EUL", "typey-type-full.json", "typey"],
     ];
 
     expect(lookupListOfStrokesAndDicts(phrase, globalLookupDictionary)).toEqual(

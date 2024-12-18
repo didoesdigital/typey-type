@@ -22,8 +22,8 @@ const globalLookupDictionary = new Map([
     [
       ["KPHR", "user:punctuation-di.json"],
       ["SKHRAPL", "typey:typey-type.json"],
-      ["TP-BG", "plover:plover-main-3-jun-2018.json"],
-      ["STKPWHR-FPLT", "plover:plover-main-3-jun-2018.json"],
+      ["TP-BG", "typey:typey-type-full.json"],
+      ["STKPWHR-FPLT", "typey:typey-type-full.json"],
     ],
   ],
 ]);
@@ -97,6 +97,6 @@ LookupPersonalDictionariesStory.play = async ({ canvasElement }) => {
   //   "punctuation-di.json"
   // );
   // await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
-  //   "plover-main-3-jun-2018.json"
+  //   "typey-type-full.json"
   // );
 };

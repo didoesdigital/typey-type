@@ -19,9 +19,9 @@ const globalLookupDictionary = new Map([
     "{!}",
     [
       ["KPHR", "user:punctuation-di.json"],
-      ["SKHRAPL", "typey:typey-type.json"],
-      ["TP-BG", "plover:plover-main-3-jun-2018.json"],
-      ["STKPWHR-FPLT", "plover:plover-main-3-jun-2018.json"],
+      ["SKHRAPL", "typey:typey-type-full.json"],
+      ["TP-BG", "typey:typey-type-full.json"],
+      ["STKPWHR-FPLT", "typey:typey-type-full.json"],
     ],
   ],
 ]);

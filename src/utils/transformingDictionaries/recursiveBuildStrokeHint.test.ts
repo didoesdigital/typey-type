@@ -3,17 +3,19 @@ import createAGlobalLookupDictionary from "./createAGlobalLookupDictionary";
 import { AffixList } from "../affixList";
 import {
   testTypeyTypeDict,
-  testPloverDict,
+  testTypeyTypeExtras,
   personalDictionaries,
 } from "./transformingDictionaries.fixtures";
 import unknownStroke from "../../constant/unknownStroke";
 
 import type { PersonalDictionaryNameAndContents } from "../../types";
 
+const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
+
 const globalLookupDictionary = createAGlobalLookupDictionary(
   personalDictionaries,
-  testTypeyTypeDict,
-  testPloverDict
+  testTypeyTypeFull,
+  {}
 );
 
 describe("recursively build stroke hint for phrase", () => {

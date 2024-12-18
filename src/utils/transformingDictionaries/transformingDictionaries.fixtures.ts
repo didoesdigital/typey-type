@@ -524,11 +524,10 @@ const testTypeyTypeDict = {
 };
 
 // multiple entries per phrase:
-const testPloverDict = {
+const testTypeyTypeExtras = {
   "A/HREF": '<a href="{^}',
   "APBD": "and",
   "SKP": "and",
-  "SP": "and",
   "P-R": "for",
   "PHO": "no",
   "WH": "when",
@@ -2392,4 +2391,4 @@ const personalDictionaries: PersonalDictionaryNameAndContents[] = [
   ["test-aussie.json", testAussieDict],
 ];
 
-export { testTypeyTypeDict, testPloverDict, personalDictionaries };
+export { testTypeyTypeDict, testTypeyTypeExtras, personalDictionaries };
