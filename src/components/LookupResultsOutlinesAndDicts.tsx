@@ -5,7 +5,6 @@ import Icon from "components/Icons/Icon";
 
 import type { StenoLayout } from "../types";
 import type { StrokeDictNamespaceAndMisstrokeStatus } from "components/StrokesForWords";
-import LATEST_TYPEY_TYPE_DICT_NAME from "constant/latestTypeyTypeDictName";
 
 type Props = {
   listOfStrokeDictNamespaceMisstroke: StrokeDictNamespaceAndMisstrokeStatus[];
@@ -78,8 +77,7 @@ const LookupResultsOutlinesAndDicts = ({
                 : "de-emphasized"
             }
           >
-            {strokeAndDict[1] === LATEST_TYPEY_TYPE_DICT_NAME &&
-            strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")
+            {strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")
               ? "Typey Type"
               : strokeAndDict[1]}
           </span>{" "}

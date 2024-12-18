@@ -1,5 +1,5 @@
 import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
-import LATEST_TYPEY_TYPE_DICT_NAME from "../../constant/latestTypeyTypeDictName";
+import LATEST_TYPEY_TYPE_SLIM_DICT_NAME from "../../constant/latestTypeyTypeSlimDictName";
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
 
 import combineValidDictionaries from "./combineValidDictionaries";
@@ -70,7 +70,7 @@ const createAGlobalLookupDictionary = (
 ): LookupDictWithNamespacedDictsAndConfig => {
   return createGlobalLookupDictionary(
     personalDictionariesNamesAndContents,
-    [[typeyDicts, LATEST_TYPEY_TYPE_DICT_NAME]],
+    [[typeyDicts, LATEST_TYPEY_TYPE_SLIM_DICT_NAME]],
     ploverDict
   );
 };

@@ -1,11 +1,11 @@
-import LATEST_TYPEY_TYPE_DICT_NAME from "constant/latestTypeyTypeDictName";
+import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "constant/latestTypeyTypeFullDictName";
 import fetchDictionaries from "./fetchDictionaries";
 
 import type { ReadDictionariesData, ReadDictionaryData } from "types";
 
 let allDicts: null | ReadDictionariesData = null;
 
-export const allTypeyTypeDictNames = [LATEST_TYPEY_TYPE_DICT_NAME];
+export const allTypeyTypeDictNames = [LATEST_TYPEY_TYPE_FULL_DICT_NAME];
 const typeyDictionariesSubDir = "dictionaries/typey-type";
 
 const allTypeyTypeDictURLs = allTypeyTypeDictNames.map(
