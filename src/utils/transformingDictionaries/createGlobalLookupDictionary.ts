@@ -1,4 +1,3 @@
-import LATEST_TYPEY_TYPE_SLIM_DICT_NAME from "../../constant/latestTypeyTypeSlimDictName";
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
 
 import combineValidDictionaries from "./combineValidDictionaries";
@@ -8,7 +7,6 @@ import {
   PersonalDictionaryNameAndContents,
   DictionaryConfigurationList,
   ReadDictionariesData,
-  StenoDictionary,
 } from "../../types";
 
 const addConfig = (
@@ -19,7 +17,6 @@ const addConfig = (
   return dict as LookupDictWithNamespacedDictsAndConfig;
 };
 
-// Note: This is the new preferred method to create a global lookup dictionary
 export const createGlobalLookupDictionary = (
   personalDictionariesNamesAndContents: PersonalDictionaryNameAndContents[],
   typeyDicts: ReadDictionariesData
@@ -44,21 +41,4 @@ export const createGlobalLookupDictionary = (
   return addConfig(combinedLookupDictionary, configuration);
 };
 
-/**
- * @deprecated This function is deprecated. Use `createGlobalLookupDictionary`
- * without "A" instead.
- *
- * This deprecated function only exists so we don't have to change the
- * structure of a hundred existing tests.
- */
-const createAGlobalLookupDictionary = (
-  personalDictionariesNamesAndContents: PersonalDictionaryNameAndContents[],
-  typeyDicts: StenoDictionary,
-  _ploverDict: any = null
-): LookupDictWithNamespacedDictsAndConfig => {
-  return createGlobalLookupDictionary(personalDictionariesNamesAndContents, [
-    [typeyDicts, LATEST_TYPEY_TYPE_SLIM_DICT_NAME],
-  ]);
-};
-
-export default createAGlobalLookupDictionary;
+export default createGlobalLookupDictionary;
