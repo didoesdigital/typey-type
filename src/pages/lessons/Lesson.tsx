@@ -139,7 +139,6 @@ const Lesson = ({
         setUserSettings(newUserSettings);
         setUpProgressRevisionLesson(
           loadedPersonalPreferences[0],
-          userSettings,
           newSeenOrMemorised
         );
       } else if (location.pathname.startsWith("/lessons/progress/seen/")) {
@@ -152,7 +151,6 @@ const Lesson = ({
         setUserSettings(newUserSettings);
         setUpProgressRevisionLesson(
           loadedPersonalPreferences[0],
-          userSettings,
           newSeenOrMemorised
         );
       } else if (location.pathname.startsWith("/lessons/progress/memorised/")) {
@@ -165,7 +163,6 @@ const Lesson = ({
         setUserSettings(newUserSettings);
         setUpProgressRevisionLesson(
           loadedPersonalPreferences[0],
-          userSettings,
           newSeenOrMemorised
         );
       } else if (

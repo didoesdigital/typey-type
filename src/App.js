@@ -297,7 +297,7 @@ class App extends Component {
   }
 
   // set user settings
-  setUpProgressRevisionLesson(metWordsFromStorage, _userSettings, newSeenOrMemorised) {
+  setUpProgressRevisionLesson(metWordsFromStorage, newSeenOrMemorised) {
     let lesson = {};
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.props.userSettings) { stenoLayout = this.props.userSettings.stenoLayout; }
