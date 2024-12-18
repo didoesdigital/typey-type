@@ -5,7 +5,6 @@ import lookupListOfStrokesAndDicts from "../utils/lookupListOfStrokesAndDicts";
 import splitBriefsIntoStrokes from "./../utils/splitBriefsIntoStrokes";
 import LookupResultsOutlinesAndDicts from "./LookupResultsOutlinesAndDicts";
 import MatchedModifiedTranslation from "./MatchedModifiedTranslation";
-import PloverMisstrokesDetail from "./PloverMisstrokesDetail";
 import StrokesAsDiagrams from "./StrokesAsDiagrams";
 
 import type {
@@ -193,9 +192,11 @@ const StrokesForWords = ({
         listOfStrokeDictNamespaceMisstroke={listOfStrokeDictNamespaceMisstroke}
         stenoLayout={stenoLayout}
       />
-      <PloverMisstrokesDetail
-        showMisstrokesInLookup={globalUserSettings?.showMisstrokesInLookup}
-      />
+      <p>
+        <span className="py05 de-emphasized dark:text-coolgrey-900">
+          (4000 misstrokes hidden.)
+        </span>
+      </p>
     </React.Fragment>
   );
 };
