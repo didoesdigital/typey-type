@@ -1,11 +1,13 @@
 import rankOutlines from "./rankOutlines";
-import createAGlobalLookupDictionary from "../createAGlobalLookupDictionary";
+import { createGlobalLookupDictionary } from "../createAGlobalLookupDictionary";
 import { AffixList } from "../../affixList";
 import {
   testTypeyTypeDict,
   testTypeyTypeExtras,
   personalDictionaries,
 } from "../transformingDictionaries.fixtures";
+import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "constant/latestTypeyTypeFullDictName";
+
 import type {
   AffixObject,
   StrokeAndDictionaryAndNamespace,
@@ -13,11 +15,11 @@ import type {
 
 const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
 
-const globalLookupDictionary = createAGlobalLookupDictionary(
+const globalLookupDictionary = createGlobalLookupDictionary(
   personalDictionaries,
-  testTypeyTypeFull,
-  {}
+  [[testTypeyTypeFull, LATEST_TYPEY_TYPE_FULL_DICT_NAME]]
 );
+
 let sharedAffixes = AffixList.getSharedInstance();
 
 describe("rankOutlines", () => {

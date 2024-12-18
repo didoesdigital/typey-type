@@ -79,7 +79,7 @@ function fetchAndSetupGlobalDict(
         typeyDictionaries
       );
       // let t1 = performance.now();
-      // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
+      // console.log("Call to createGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
 
       // For debugging:
       // window.lookupDict = sortedAndCombinedLookupDictionary;

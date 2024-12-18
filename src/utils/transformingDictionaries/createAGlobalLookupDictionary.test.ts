@@ -1,18 +1,18 @@
-import createAGlobalLookupDictionary from "./createAGlobalLookupDictionary";
+import { createGlobalLookupDictionary } from "./createAGlobalLookupDictionary";
 import { AffixList } from "../affixList";
 import {
   testTypeyTypeDict,
   testTypeyTypeExtras,
   personalDictionaries,
 } from "./transformingDictionaries.fixtures";
+import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "constant/latestTypeyTypeFullDictName";
 import type { PersonalDictionaryNameAndContents } from "../../types";
 
 const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
 
-const globalLookupDictionary = createAGlobalLookupDictionary(
+const globalLookupDictionary = createGlobalLookupDictionary(
   personalDictionaries,
-  testTypeyTypeFull,
-  {}
+  [[testTypeyTypeFull, LATEST_TYPEY_TYPE_FULL_DICT_NAME]]
 );
 
 describe("create a global lookup dictionary", () => {
@@ -37,13 +37,15 @@ describe("create a global lookup dictionary", () => {
       [
         "and",
         [
-          ["SKP", "typey:typey-type.json"],
-          ["APBD", "typey:typey-type.json"],
+          ["SKP", "typey:typey-type-full.json"],
+          ["APBD", "typey:typey-type-full.json"],
         ],
       ],
     ]);
-    expect(createAGlobalLookupDictionary(personalDicts, typeyDict, {})).toEqual(
-      expectedGlobalDict
-    );
+    expect(
+      createGlobalLookupDictionary(personalDicts, [
+        [typeyDict, LATEST_TYPEY_TYPE_FULL_DICT_NAME],
+      ])
+    ).toEqual(expectedGlobalDict);
   });
 });

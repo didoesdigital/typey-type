@@ -1,4 +1,4 @@
-import createAGlobalLookupDictionary from "./createAGlobalLookupDictionary";
+import { createGlobalLookupDictionary } from "./createAGlobalLookupDictionary";
 import chooseOutlineForPhrase from "./chooseOutlineForPhrase";
 import { AffixList } from "../affixList";
 import {
@@ -6,15 +6,17 @@ import {
   personalDictionaries,
   testTypeyTypeExtras,
 } from "./transformingDictionaries.fixtures";
+import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "constant/latestTypeyTypeFullDictName";
+
 import type { LookupDictWithNamespacedDicts } from "../../types";
 
 const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
 
-const globalLookupDictionary = createAGlobalLookupDictionary(
+const globalLookupDictionary = createGlobalLookupDictionary(
   personalDictionaries,
-  testTypeyTypeFull,
-  {}
+  [[testTypeyTypeFull, LATEST_TYPEY_TYPE_FULL_DICT_NAME]]
 );
+
 const precedingChar = "";
 
 describe("choose outline for phrase", () => {

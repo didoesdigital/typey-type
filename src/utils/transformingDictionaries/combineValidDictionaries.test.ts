@@ -1,19 +1,19 @@
 import combineValidDictionaries from "./combineValidDictionaries";
-import createAGlobalLookupDictionary from "./createAGlobalLookupDictionary";
+import { createGlobalLookupDictionary } from "./createAGlobalLookupDictionary";
 import {
   testTypeyTypeDict,
   testTypeyTypeExtras,
   personalDictionaries,
 } from "./transformingDictionaries.fixtures";
 import { AffixList } from "../affixList";
+import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "constant/latestTypeyTypeFullDictName";
 import type { PersonalDictionaryNameAndContents } from "../../types";
 
 const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
 
-const globalLookupDictionary = createAGlobalLookupDictionary(
+const globalLookupDictionary = createGlobalLookupDictionary(
   personalDictionaries,
-  testTypeyTypeFull,
-  {}
+  [[testTypeyTypeFull, LATEST_TYPEY_TYPE_FULL_DICT_NAME]]
 );
 
 describe("combining valid dictionaries without sorting", () => {
