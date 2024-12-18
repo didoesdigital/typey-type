@@ -31,11 +31,7 @@ const LookupResultsOutlinesAndDicts = ({
 
       const stenoBriefKeys = (
         <span
-          className={
-            strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")
-              ? "steno-stroke px05 db fw7"
-              : "steno-stroke px05 db steno-stroke--subtle"
-          }
+          className="steno-stroke px05 db fw7"
           role="note"
           aria-label={briefWithSpacesBetweenLetters}
         >
@@ -71,11 +67,6 @@ const LookupResultsOutlinesAndDicts = ({
             />
           ) : null}
           <span
-            className={
-              strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")
-                ? ""
-                : "de-emphasized"
-            }
             title={
               strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")
                 ? strokeAndDict[1]
