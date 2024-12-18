@@ -2,7 +2,7 @@ import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
 import getTypeyTypeDict, {
   allTypeyTypeDictNames,
 } from "../getData/getTypeyTypeDicts";
-import { createGlobalLookupDictionary } from "../transformingDictionaries/createGlobalLookupDictionary";
+import createGlobalLookupDictionary from "../transformingDictionaries/createGlobalLookupDictionary";
 import { AffixList } from "../affixList";
 import { loadPersonalDictionariesFromLocalStorage } from "../typey-type";
 

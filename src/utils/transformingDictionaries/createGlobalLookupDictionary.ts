@@ -17,7 +17,7 @@ const addConfig = (
   return dict as LookupDictWithNamespacedDictsAndConfig;
 };
 
-export const createGlobalLookupDictionary = (
+const createGlobalLookupDictionary = (
   personalDictionariesNamesAndContents: PersonalDictionaryNameAndContents[],
   typeyDicts: ReadDictionariesData
 ): LookupDictWithNamespacedDictsAndConfig => {

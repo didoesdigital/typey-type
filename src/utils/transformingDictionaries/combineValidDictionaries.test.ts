@@ -1,5 +1,5 @@
 import combineValidDictionaries from "./combineValidDictionaries";
-import { createGlobalLookupDictionary } from "./createGlobalLookupDictionary";
+import createGlobalLookupDictionary from "./createGlobalLookupDictionary";
 import {
   testTypeyTypeDict,
   testTypeyTypeExtras,

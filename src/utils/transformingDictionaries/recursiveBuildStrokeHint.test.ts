@@ -1,5 +1,5 @@
 import recursiveBuildStrokeHint from "./recursiveBuildStrokeHint";
-import { createGlobalLookupDictionary } from "./createGlobalLookupDictionary";
+import createGlobalLookupDictionary from "./createGlobalLookupDictionary";
 import { AffixList } from "../affixList";
 import {
   testTypeyTypeDict,

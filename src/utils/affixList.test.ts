@@ -1,5 +1,5 @@
 import { AffixList } from "./affixList";
-import { createGlobalLookupDictionary } from "./transformingDictionaries/createGlobalLookupDictionary";
+import createGlobalLookupDictionary from "./transformingDictionaries/createGlobalLookupDictionary";
 import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "constant/latestTypeyTypeFullDictName";
 
 import type { PersonalDictionaryNameAndContents } from "../types";
