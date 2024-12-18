@@ -280,17 +280,33 @@ const Support = () => {
 
           <h4 id="typey-type-dictionary">Typey&nbsp;Type dictionary</h4>
           <p>
-            Typey&nbsp;Type uses a version of the Plover dictionary that comes
-            built into the Plover software. Typey&nbsp;Type’s version is based
-            on a copy of Plover’s from a few years ago. I have since spent many
-            hours meticulously amending it. This helps Typey&nbsp;Type suggests
-            the best brief available. It chooses the “best” stroke by looking
-            for the shortest stroke, where there are penalties for multi-stroke
-            briefs and briefs that use the star (<code>*</code>) key. I have
-            also removed thousands of misstrokes to hide them when learning
-            Plover theory. There are some manual adjustments too. These show
-            strokes that are more consistent with similar words, more consistent
-            with Plover’s theory, phonetic, or easier to stroke.
+            Typey&nbsp;Type’s dictionary uses Plover theory and builds upon the
+            Plover dictionary that comes built into the Plover software. The
+            built-in Plover dictionary has not been significantly updated since
+            2018. Typey&nbsp;Type’s dictionary continues to receive updates. I
+            have spent many hours meticulously amending it. This helps
+            Typey&nbsp;Type suggest good briefs to use. It sorts the possible
+            stroke hints by looking for the shortest strokes and penalising
+            multi-stroke hints and strokes that use the star (<code>*</code>)
+            key. Along with community contributors (most notably{" "}
+            <OutboundLink
+              eventLabel="Paul Fioravanti"
+              to="https://www.paulfioravanti.com"
+            >
+              Paul Fioravanti
+            </OutboundLink>
+            ), I have also moved thousands of misstrokes out of
+            Typey&nbsp;Type’s dictionary. This makes it easier for students to
+            learn Plover theory without worrying about spending time learning
+            the “wrong” strokes. There are some other manual adjustments too.
+            These show strokes that are more consistent with similar words, more
+            consistent with Plover’s theory, phonetic, or easier to stroke.
+          </p>
+          <p>
+            Prior to December 2024, Typey&nbsp;Type showed only the “best”
+            stroke hint available plus other strokes from Plover’s dictionary
+            (if you had that setting turned on). Now, Typey&nbsp;Type uses only
+            its own full dictionary.
           </p>
           <p>
             <Link to="/lessons/custom">Typey&nbsp;Type custom lessons</Link> let
