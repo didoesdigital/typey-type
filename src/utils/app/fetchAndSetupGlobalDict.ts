@@ -70,10 +70,6 @@ function fetchAndSetupGlobalDict(
       let [typeyDictionaries] = data;
 
       // let t0 = performance.now();
-      // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
-      //   dictAndMisstrokes[1] = {};
-      // }
-
       let sortedAndCombinedLookupDictionary = createGlobalLookupDictionary(
         personalDictionaries,
         typeyDictionaries

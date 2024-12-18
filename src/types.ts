@@ -424,7 +424,6 @@ export type UserSettings = {
 export type GlobalUserSettings = {
   experiments: Experiments;
   flashcardsCourseLevel: FlashcardsCourseLevel;
-  showMisstrokesInLookup: boolean;
   writerInput: "raw" | "qwerty";
   inputForKAOES: "raw" | "qwerty";
   backupBannerDismissedTime: number | null;

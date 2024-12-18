@@ -6,7 +6,6 @@ import { atom, Getter, Setter } from "jotai";
 export const globalUserSettingsState = atomWithStorage<GlobalUserSettings>("globalUserSettings", {
   experiments: {},
   flashcardsCourseLevel: "noviceCourse",
-  showMisstrokesInLookup: false,
   writerInput: "qwerty",
   inputForKAOES: "qwerty",
   backupBannerDismissedTime: null

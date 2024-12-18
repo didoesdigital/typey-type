@@ -4,7 +4,6 @@ const globalUserSettings = {
     "timesSeen": false,
   },
   "flashcardsCourseLevel": "noviceCourse",
-  "showMisstrokesInLookup": true,
   "writerInput": "raw",
   "inputForKAOES": "raw",
 };
