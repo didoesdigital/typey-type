@@ -1,7 +1,10 @@
 import misstrokes from "../../json/misstrokes.json";
-import { StrokeDictNamespaceAndMisstrokeStatus } from "components/StrokesForWords";
 
-import type { StenoDictionary, StrokeAndDictionaryAndNamespace } from "types";
+import type {
+  StenoDictionary,
+  StrokeAndDictionaryAndNamespace,
+  StrokeDictNamespaceAndMisstrokeStatus,
+} from "types";
 
 const misstrokesJSON = misstrokes as StenoDictionary;
 

@@ -2,8 +2,12 @@ import React from "react";
 import getStenoDiagram from "../pages/lessons/utilities/getStenoDiagram";
 import getMapBriefsFn from "../pages/lessons/utilities/getMapBriefsFn";
 
-import type { SingleStroke, StenoLayout, UserSettings } from "../types";
-import type { StrokeDictNamespaceAndMisstrokeStatus } from "components/StrokesForWords";
+import type {
+  SingleStroke,
+  StenoLayout,
+  StrokeDictNamespaceAndMisstrokeStatus,
+  UserSettings,
+} from "../types";
 
 type Props = {
   listOfStrokeDictNamespaceMisstroke: StrokeDictNamespaceAndMisstrokeStatus[];

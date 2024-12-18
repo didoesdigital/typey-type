@@ -98,6 +98,13 @@ export type StrokeAndNamespacedDict = [Outline, NamespacedDictionary];
  */
 export type StrokeAndDictionaryAndNamespace = [Outline, DictName, Namespace];
 
+export type StrokeDictNamespaceAndMisstrokeStatus = [
+  Outline,
+  DictName,
+  Namespace,
+  boolean
+];
+
 /**
  * An outline-first JSON-formatted steno dictionary that could be used by a steno engine, such as Plover
  *

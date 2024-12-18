@@ -1,7 +1,6 @@
 import React from "react";
 
-import type { MaterialText } from "../types";
-import type { StrokeDictNamespaceAndMisstrokeStatus } from "components/StrokesForWords";
+import type { MaterialText, StrokeDictNamespaceAndMisstrokeStatus } from "../types";
 
 type Props = {
   modifiedWordOrPhrase: MaterialText;

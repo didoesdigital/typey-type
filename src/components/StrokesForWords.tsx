@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from "react";
-import SOURCE_NAMESPACES from "../constant/sourceNamespaces";
 import lookupListOfStrokesAndDicts from "../utils/lookupListOfStrokesAndDicts";
 import splitBriefsIntoStrokes from "./../utils/splitBriefsIntoStrokes";
 import LookupResultsOutlinesAndDicts from "./LookupResultsOutlinesAndDicts";
 import MatchedModifiedTranslation from "./MatchedModifiedTranslation";
 import StrokesAsDiagrams from "./StrokesAsDiagrams";
-import tpgDict from "constant/topProjectGutenbergDictName";
 import addMisstrokeStatus from "utils/transformingDictionaries/addMisstrokeStatus";
 
 import type {
-  DictName,
   FetchAndSetupGlobalDict,
   ImportedPersonalDictionaries,
   LookupDictWithNamespacedDictsAndConfig,
-  Namespace,
-  Outline,
+  StrokeDictNamespaceAndMisstrokeStatus,
   UserSettings,
 } from "../types";
+import removePreferredOutlineDuplicates from "utils/transformingDictionaries/removePreferredOutlineDuplicates";
 
 type Props = {
   fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
@@ -27,41 +24,6 @@ type Props = {
   personalDictionaries?: ImportedPersonalDictionaries;
   trackPhrase?: (value: React.SetStateAction<string>) => void;
   userSettings: UserSettings;
-};
-
-export type StrokeDictNamespaceAndMisstrokeStatus = [
-  Outline,
-  DictName,
-  Namespace,
-  boolean
-];
-
-/**
- *
- * @param listOfStrokesDictsNamespaceMisstroke - list of sorted entries
- * @returns list of entries without repeating typey: outlines if
- * typey:top-10000-project-gutenberg-words.json already has the outline
- */
-const removePreferredOutlineDuplicates = (
-  listOfStrokesDictsNamespaceMisstroke: StrokeDictNamespaceAndMisstrokeStatus[]
-): StrokeDictNamespaceAndMisstrokeStatus[] => {
-  let tpgOutline: null | Outline = null;
-
-  const filteredResult = listOfStrokesDictsNamespaceMisstroke.filter(
-    ([outline, dictName, namespace]) => {
-      if (
-        dictName === tpgDict &&
-        namespace === SOURCE_NAMESPACES.get("typey")
-      ) {
-        tpgOutline = outline;
-        return true;
-      }
-
-      return outline === tpgOutline ? false : true;
-    }
-  );
-
-  return filteredResult;
 };
 
 const StrokesForWords = ({

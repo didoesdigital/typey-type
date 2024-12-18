@@ -3,8 +3,10 @@ import SOURCE_NAMESPACES from "../constant/sourceNamespaces";
 import TypeyTypeIcon from "components/Icons/icon-images/TypeyTypeIcon.svg";
 import Icon from "components/Icons/Icon";
 
-import type { StenoLayout } from "../types";
-import type { StrokeDictNamespaceAndMisstrokeStatus } from "components/StrokesForWords";
+import type {
+  StenoLayout,
+  StrokeDictNamespaceAndMisstrokeStatus,
+} from "../types";
 
 type Props = {
   listOfStrokeDictNamespaceMisstroke: StrokeDictNamespaceAndMisstrokeStatus[];
