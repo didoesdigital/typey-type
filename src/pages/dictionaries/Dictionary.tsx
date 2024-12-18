@@ -210,21 +210,21 @@ const Dictionary = () => {
               </header>
             </div>
             <div className="flex mxn2">
-              <a
-                href={process.env.PUBLIC_URL + dictionary.path}
-                download=""
-                onClick={trackDownloadDictionary}
-                className="link-button link-button-ghost table-cell mr1"
-              >
-                Download
-              </a>
               <PseudoContentButton
-                className="js-clipboard-button button button--secondary table-cell mr1 copy-to-clipboard"
-                style={{ lineHeight: 2 }}
+                className="js-clipboard-button link-button link-button-ghost table-cell mr1 copy-to-clipboard"
                 dataClipboardTarget="#js-dictionary-json-pre"
               >
                 Copy to clipboard
               </PseudoContentButton>
+              <a
+                href={process.env.PUBLIC_URL + dictionary.path}
+                download=""
+                onClick={trackDownloadDictionary}
+                style={{ lineHeight: 2 }}
+                className="button button--secondary table-cell mr1"
+              >
+                Download
+              </a>
             </div>
           </Subheader>
           <div className="p3 mx-auto mw-1024">
