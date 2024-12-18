@@ -1,5 +1,4 @@
 import React from "react";
-import SOURCE_NAMESPACES from "../../../constant/sourceNamespaces";
 
 import LookupResultsOutlinesAndDicts from "../../../components/LookupResultsOutlinesAndDicts";
 import createListOfStrokes from "../../../utils/createListOfStrokes";
@@ -49,15 +48,7 @@ const StrokeTipList = ({
         misstrokesJSON,
         currentPhrase,
         AffixList.getSharedInstance()
-      ).filter(
-        ([outline, _dictName, dictNamespace]) =>
-          (dictNamespace === SOURCE_NAMESPACES.get("user") ||
-            !(
-              misstrokesJSON[outline] &&
-              currentPhrase === misstrokesJSON[outline]
-            )) &&
-          outline !== currentStroke
-      );
+      ).filter(([outline, _dictName]) => outline !== currentStroke);
 
   return !!currentPhraseOutlines && userSettings.showStrokesAsList ? (
     <div className={"stroke-tip min-h-160"}>
