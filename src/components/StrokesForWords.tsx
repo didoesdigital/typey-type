@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import SOURCE_NAMESPACES from "../constant/sourceNamespaces";
 import misstrokes from "../json/misstrokes.json";
 import lookupListOfStrokesAndDicts from "../utils/lookupListOfStrokesAndDicts";
 import splitBriefsIntoStrokes from "./../utils/splitBriefsIntoStrokes";
@@ -17,8 +16,6 @@ import type {
   StenoDictionary,
   UserSettings,
 } from "../types";
-import { useAtomValue } from "jotai";
-import { globalUserSettingsState } from "../states/globalUserSettingsState";
 
 type Props = {
   fetchAndSetupGlobalDict: FetchAndSetupGlobalDict;
@@ -48,7 +45,6 @@ const StrokesForWords = ({
   trackPhrase,
   userSettings,
 }: Props) => {
-  const globalUserSettings = useAtomValue(globalUserSettingsState);
   const [modifiedWordOrPhraseState, setModifiedWordOrPhraseState] =
     useState("");
   const [phraseState, setPhraseState] = useState("");
@@ -94,9 +90,6 @@ const StrokesForWords = ({
     updateWordsForStrokes(phrase);
   };
 
-  const showMisstrokesInLookup =
-    globalUserSettings.showMisstrokesInLookup ?? false;
-
   function updateWordsForStrokes(phrase: string) {
     if (onChange) {
       onChange(phrase);
@@ -104,17 +97,6 @@ const StrokesForWords = ({
 
     let [listOfStrokesAndDicts, modifiedWordOrPhrase] =
       lookupListOfStrokesAndDicts(phrase, globalLookupDictionary);
-
-    if (!showMisstrokesInLookup) {
-      listOfStrokesAndDicts = listOfStrokesAndDicts.filter(
-        (row) =>
-          row[2] === SOURCE_NAMESPACES.get("user") ||
-          !(
-            misstrokesJSON[row[0]] &&
-            modifiedWordOrPhrase === misstrokesJSON[row[0]]
-          )
-      );
-    }
 
     const listOfStrokesDictsNamespaceMisstroke: StrokeDictNamespaceAndMisstrokeStatus[] =
       listOfStrokesAndDicts.map((row) => {
