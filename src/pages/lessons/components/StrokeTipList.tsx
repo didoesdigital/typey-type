@@ -5,6 +5,8 @@ import createListOfStrokes from "../../../utils/createListOfStrokes";
 import rankOutlines from "../../../utils/transformingDictionaries/rankOutlines/rankOutlines";
 import misstrokes from "../../../json/misstrokes.json";
 import { AffixList } from "../../../utils/affixList";
+import addMisstrokeStatus from "utils/transformingDictionaries/addMisstrokeStatus";
+import removePreferredOutlineDuplicates from "utils/transformingDictionaries/removePreferredOutlineDuplicates";
 
 import type {
   LookupDictWithNamespacedDictsAndConfig,
@@ -43,12 +45,17 @@ const StrokeTipList = ({
     globalLookupDictionaryLoaded
   )
     ? false
-    : rankOutlines(
-        createListOfStrokes(currentPhrase, globalLookupDictionary),
-        misstrokesJSON,
-        currentPhrase,
-        AffixList.getSharedInstance()
-      ).filter(([outline, _dictName]) => outline !== currentStroke);
+    : removePreferredOutlineDuplicates(
+        addMisstrokeStatus(
+          rankOutlines(
+            createListOfStrokes(currentPhrase, globalLookupDictionary),
+            misstrokesJSON,
+            currentPhrase,
+            AffixList.getSharedInstance()
+          ).filter(([outline, _dictName]) => outline !== currentStroke),
+          currentPhrase
+        )
+      );
 
   return !!currentPhraseOutlines && userSettings.showStrokesAsList ? (
     <div className={"stroke-tip min-h-160"}>
@@ -66,9 +73,10 @@ const StrokeTipList = ({
           </p>
         ) : (
           <LookupResultsOutlinesAndDicts
-            listOfStrokeDictNamespaceMisstroke={currentPhraseOutlines
-              .slice(0, maxOutlinesShown)
-              .map((row) => [...row, false])}
+            listOfStrokeDictNamespaceMisstroke={currentPhraseOutlines.slice(
+              0,
+              maxOutlinesShown
+            )}
             stenoLayout={userSettings.stenoLayout}
           />
         )}
