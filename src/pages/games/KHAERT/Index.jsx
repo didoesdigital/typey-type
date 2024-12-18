@@ -9,7 +9,7 @@ export default function Index({globalLookupDictionary}) {
 } = useAppMethods();
   const mainHeading = useRef(null);
   useEffect(() => {
-    appFetchAndSetupGlobalDict(false, null).catch((error) => {
+    appFetchAndSetupGlobalDict(null).catch((error) => {
       console.error(error);
     });
 

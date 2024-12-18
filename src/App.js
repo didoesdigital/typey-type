@@ -65,7 +65,6 @@ class App extends Component {
       lessonNotFound: false,
       lessonsProgress: {
       },
-      isPloverDictionaryLoaded: false,
       isGlobalLookupDictionaryLoaded: false,
       personalDictionaries: {
         dictionariesNamesAndContents: null,
@@ -298,14 +297,12 @@ class App extends Component {
   }
 
   // set user settings
-  setUpProgressRevisionLesson(metWordsFromStorage, userSettings, newSeenOrMemorised) {
+  setUpProgressRevisionLesson(metWordsFromStorage, _userSettings, newSeenOrMemorised) {
     let lesson = {};
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.props.userSettings) { stenoLayout = this.props.userSettings.stenoLayout; }
 
-    const loadPlover = userSettings.showStrokesAsList ? true : false;
-
-    this.appFetchAndSetupGlobalDict(loadPlover, null).then(() => {
+    this.appFetchAndSetupGlobalDict(null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWordsFromStorage).join("\n");
       // parseWordList appears to remove empty lines and other garbage, we might not need it here
@@ -468,9 +465,7 @@ class App extends Component {
           !path.includes("collections/tech")
         ) {
 
-          const loadPlover = this.props.userSettings.showStrokesAsList ? true : false;
-
-          this.appFetchAndSetupGlobalDict(loadPlover, null).then(() => {
+          this.appFetchAndSetupGlobalDict(null).then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
               lesson.presentedMaterial = lessonWordsAndStrokes;
@@ -489,7 +484,6 @@ class App extends Component {
             && !!this.state.personalDictionaries.dictionariesNamesAndContents;
 
           this.appFetchAndSetupGlobalDict(
-            true,
             shouldUsePersonalDictionaries ? this.state.personalDictionaries : null
           )
             .then(() => {

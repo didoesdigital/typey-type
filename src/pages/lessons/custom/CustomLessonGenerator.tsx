@@ -57,7 +57,7 @@ const CustomLessonGenerator = ({
   };
 
   useEffect(() => {
-    appFetchAndSetupGlobalDict(false, null).catch((error: Error) => {
+    appFetchAndSetupGlobalDict(null).catch((error: Error) => {
       console.error(error);
     });
     // }, [appFetchAndSetupGlobalDict]);

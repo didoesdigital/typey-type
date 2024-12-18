@@ -33,7 +33,7 @@ export default function Index({
   }, []);
 
   useEffect(() => {
-    appFetchAndSetupGlobalDict(false, null).catch((error) => {
+    appFetchAndSetupGlobalDict(null).catch((error) => {
       console.error(error);
     });
   }, [appFetchAndSetupGlobalDict]);

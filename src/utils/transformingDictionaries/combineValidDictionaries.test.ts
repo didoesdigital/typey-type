@@ -45,27 +45,6 @@ describe("combining valid dictionaries without sorting", () => {
       "WHEPB": "when",
     };
 
-    let testPloverDict = {
-      "*F": "of",
-      "-F": "of",
-      "1-R": "I",
-      "APBD": "and",
-      "E": "he",
-      "HE": "he",
-      "O": "to",
-      "P-R": "for",
-      "PHO": "no",
-      "SAEUD": "said",
-      "SED": "said",
-      "SKP": "and",
-      "SOUPBD/-Z": "sounds",
-      "SOUPBDZ": "sounds",
-      "SOUPBSD": "sounds",
-      "SP": "and",
-      "SPH": "some",
-      "WH": "when",
-    };
-
     let expectedCombinedDict = new Map([
       ["Typey Type", [["TAO*EUPT", "user:personal.json"]]],
       [
@@ -161,7 +140,6 @@ describe("combining valid dictionaries without sorting", () => {
       combineValidDictionaries(
         personalDictionaries,
         [[testTypeyTypeDict, "typey-type.json"]],
-        testPloverDict
       )
     ).toEqual(expectedCombinedDict);
   });

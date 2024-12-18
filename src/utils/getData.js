@@ -1,31 +1,3 @@
-import fetchResource from "utils/getData/fetchResource";
-
-let latestPloverDict = null;
-
-function fetchLatestPloverDict() {
-  return fetchResource(process.env.PUBLIC_URL + '/dictionaries/plover/main-3-jun-2018.json').then((json) => {
-    return json;
-  }).catch(function(e) {
-    return {};
-  });
-}
-
-function getLatestPloverDict() {
-  let dict;
-
-  if (latestPloverDict === null) {
-    dict = fetchLatestPloverDict().then(data => {
-      latestPloverDict = data;
-      return data;
-    });
-  }
-  else {
-    dict = Promise.resolve(latestPloverDict);
-  }
-
-  return dict;
-}
-
 function getLesson(lessonFile) {
   return fetch(lessonFile, {
     method: "GET",
@@ -72,8 +44,4 @@ function fetchDictionaryIndex() {
   });
 }
 
-export {
-  fetchDictionaryIndex,
-  getLesson,
-  getLatestPloverDict,
-};
+export { fetchDictionaryIndex, getLesson };

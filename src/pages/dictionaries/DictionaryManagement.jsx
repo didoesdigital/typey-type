@@ -481,7 +481,7 @@ const DictionaryManagement = (props) => {
       dictionariesNamesAndContents: validDictionariesState,
     };
     props
-      .fetchAndSetupGlobalDict(true, personalDictionaries)
+      .fetchAndSetupGlobalDict(personalDictionaries)
       .then(() => {
         setImportedDictionariesLoaded(true);
         setImportedDictionariesLoading(false);
@@ -871,7 +871,6 @@ const DictionaryManagement = (props) => {
                   <ul>
                     <li>Typey Type's dictionaries</li>
                     {dictionariesTypeyTypeWillUse}
-                    <li>… and for Lookup, Plover's latest dictionary too</li>
                   </ul>
                 </>
               ) : (

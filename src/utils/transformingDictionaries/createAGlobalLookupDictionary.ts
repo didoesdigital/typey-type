@@ -1,4 +1,3 @@
-import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
 import LATEST_TYPEY_TYPE_SLIM_DICT_NAME from "../../constant/latestTypeyTypeSlimDictName";
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
 
@@ -23,17 +22,12 @@ const addConfig = (
 // Note: This is the new preferred method to create a global lookup dictionary
 export const createGlobalLookupDictionary = (
   personalDictionariesNamesAndContents: PersonalDictionaryNameAndContents[],
-  typeyDicts: ReadDictionariesData,
-  ploverDict: any = null
+  typeyDicts: ReadDictionariesData
 ): LookupDictWithNamespacedDictsAndConfig => {
-  // TODO: one day, this could be the place we check for whether Typey Type dictionaries or the Plover dictionary are enabled and if so combineValidDictionaries with them and add to 'configuration'
+  // TODO: one day, this could be the place we check for whether Typey Type dictionaries are enabled and if so combineValidDictionaries with them and add to 'configuration'
 
   let combinedLookupDictionary: LookupDictWithNamespacedDicts =
-    combineValidDictionaries(
-      personalDictionariesNamesAndContents,
-      typeyDicts,
-      ploverDict
-    );
+    combineValidDictionaries(personalDictionariesNamesAndContents, typeyDicts);
 
   const typeyDictsConfigEntries = typeyDicts.map(
     (readDictData) => `${SOURCE_NAMESPACES.get("typey")}:${readDictData[1]}`
@@ -46,12 +40,6 @@ export const createGlobalLookupDictionary = (
       (d) => `${SOURCE_NAMESPACES.get("user")}:${d[0]}`
     ),
   ];
-
-  if (!!ploverDict) {
-    configuration.push(
-      `${SOURCE_NAMESPACES.get("plover")}:${LATEST_PLOVER_DICT_NAME}`
-    );
-  }
 
   return addConfig(combinedLookupDictionary, configuration);
 };
@@ -66,13 +54,11 @@ export const createGlobalLookupDictionary = (
 const createAGlobalLookupDictionary = (
   personalDictionariesNamesAndContents: PersonalDictionaryNameAndContents[],
   typeyDicts: StenoDictionary,
-  ploverDict: any = null
+  _ploverDict: any = null
 ): LookupDictWithNamespacedDictsAndConfig => {
-  return createGlobalLookupDictionary(
-    personalDictionariesNamesAndContents,
-    [[typeyDicts, LATEST_TYPEY_TYPE_SLIM_DICT_NAME]],
-    ploverDict
-  );
+  return createGlobalLookupDictionary(personalDictionariesNamesAndContents, [
+    [typeyDicts, LATEST_TYPEY_TYPE_SLIM_DICT_NAME],
+  ]);
 };
 
 export default createAGlobalLookupDictionary;

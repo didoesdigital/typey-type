@@ -66,7 +66,7 @@ export function useChangeShowStrokesAsList() {
 
     let labelString = value;
     if (value) {
-      appFetchAndSetupGlobalDict(true, null).catch(error => {
+      appFetchAndSetupGlobalDict(null).catch(error => {
         console.error(error)
       })
     } else {

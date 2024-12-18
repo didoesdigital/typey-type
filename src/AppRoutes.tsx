@@ -119,7 +119,6 @@ type AppStateForDescendants = {
   globalLookupDictionaryLoaded: boolean;
   lessonNotFound: boolean;
   lessonsProgress: unknown;
-  // isPloverDictionaryLoaded: false,
   // isGlobalLookupDictionaryLoaded: false,
   personalDictionaries: ImportedPersonalDictionaries;
   previousCompletedPhraseAsTyped: ActualTypedText;

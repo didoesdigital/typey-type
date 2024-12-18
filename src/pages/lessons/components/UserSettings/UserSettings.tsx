@@ -390,7 +390,7 @@ const UserSettings = ({
                     <InfoIconAndTooltip
                       id="strokesAsTextTooltip"
                       place="top-end"
-                      content="Show alternative stroke hints from personal and Plover dictionaries"
+                      content="Show alternative stroke hints from personal and Typey Type dictionaries"
                     />
                   </div>
                 </div>

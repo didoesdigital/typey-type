@@ -68,7 +68,7 @@ const StrokesForWords = ({
       ? personalDictionaries
       : null;
 
-    fetchAndSetupGlobalDict(true, maybeImportedPersonalDictionaries).catch(
+    fetchAndSetupGlobalDict(maybeImportedPersonalDictionaries).catch(
       (error) => {
         console.error(error);
         // this.showDictionaryErrorNotification();

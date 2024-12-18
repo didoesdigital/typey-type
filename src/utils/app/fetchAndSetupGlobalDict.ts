@@ -1,6 +1,4 @@
-import LATEST_PLOVER_DICT_NAME from "../../constant/latestPloverDictName";
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
-import { getLatestPloverDict } from "../getData";
 import getTypeyTypeDict, {
   allTypeyTypeDictNames,
 } from "../getData/getTypeyTypeDicts";
@@ -19,12 +17,10 @@ let isGlobalDictionaryUpToDate = null;
 
 /**
  *
- * @param withPlover whether or not to fetch the Plover dictionary file. We don't need to load that extra 4.2MB for new users on first use in lessons until they turn on "Show other stroke hints". We don't need multiple outlines for entries in games like SHUFL.
  * @param importedPersonalDictionaries recently imported personal dictionaries (on dictionary management page) OR personal dictionaries passed down from props or null.
  * @returns a loading promise
  */
 function fetchAndSetupGlobalDict(
-  withPlover: boolean,
   importedPersonalDictionaries: ImportedPersonalDictionaries | null
 ): Promise<any> {
   const personalDictionaries: PersonalDictionaryNameAndContents[] =
@@ -55,36 +51,10 @@ function fetchAndSetupGlobalDict(
     JSON.stringify(previouslyAppliedConfig) ===
       JSON.stringify(localConfigPlusTypeyType);
 
-  let localConfigPlusTypeyTypeAndPlover = localConfigPlusTypeyType.slice(0);
-  localConfigPlusTypeyTypeAndPlover.push(
-    `${SOURCE_NAMESPACES.get("plover")}:${LATEST_PLOVER_DICT_NAME}`
-  ); // reminder: .push() returns length of array, not result const
-  const globalLookupDictionaryMatchesConfigWithPlover =
-    // @ts-ignore TODO
-    this.state.globalLookupDictionary &&
-    // @ts-ignore TODO
-    !!this.state.globalLookupDictionary["configuration"] &&
-    JSON.stringify(previouslyAppliedConfig) ===
-      JSON.stringify(localConfigPlusTypeyTypeAndPlover);
-
-  // @ts-ignore TODO
-  let isPloverDictionaryLoaded = this.state.isPloverDictionaryLoaded;
   if (
-    withPlover &&
     // @ts-ignore TODO
     this.state.globalLookupDictionary &&
-    isPloverDictionaryLoaded &&
-    globalLookupDictionaryMatchesConfigWithPlover
-  ) {
-    isGlobalDictionaryUpToDate = true;
-  } else if (withPlover) {
-    isGlobalDictionaryUpToDate = false;
-  } else if (
-    !withPlover &&
-    // @ts-ignore TODO
-    this.state.globalLookupDictionary &&
-    (globalLookupDictionaryMatchesConfig ||
-      globalLookupDictionaryMatchesConfigWithPlover)
+    globalLookupDictionaryMatchesConfig
   ) {
     isGlobalDictionaryUpToDate = true;
   } else {
@@ -96,11 +66,8 @@ function fetchAndSetupGlobalDict(
     // @ts-ignore TODO
     return loadingPromise;
   } else {
-    loadingPromise = Promise.all([
-      getTypeyTypeDict(),
-      withPlover ? getLatestPloverDict() : {},
-    ]).then((data) => {
-      let [typeyDictionaries, latestPloverDict] = data;
+    loadingPromise = Promise.all([getTypeyTypeDict()]).then((data) => {
+      let [typeyDictionaries] = data;
 
       // let t0 = performance.now();
       // if (this.state.globalUserSettings && this.state.globalUserSettings.showMisstrokesInLookup) {
@@ -109,8 +76,7 @@ function fetchAndSetupGlobalDict(
 
       let sortedAndCombinedLookupDictionary = createGlobalLookupDictionary(
         personalDictionaries,
-        typeyDictionaries,
-        withPlover ? latestPloverDict : null
+        typeyDictionaries
       );
       // let t1 = performance.now();
       // console.log("Call to createAGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
@@ -126,10 +92,6 @@ function fetchAndSetupGlobalDict(
       AffixList.setSharedInstance(affixList);
     });
 
-    if (!isPloverDictionaryLoaded && withPlover) {
-      // @ts-ignore TODO
-      this.setState({ isPloverDictionaryLoaded: true });
-    }
     return loadingPromise;
   }
 }
