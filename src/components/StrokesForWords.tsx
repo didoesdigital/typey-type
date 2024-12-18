@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import SOURCE_NAMESPACES from "../constant/sourceNamespaces";
 import misstrokes from "../json/misstrokes.json";
 import lookupListOfStrokesAndDicts from "../utils/lookupListOfStrokesAndDicts";
 import splitBriefsIntoStrokes from "./../utils/splitBriefsIntoStrokes";
 import LookupResultsOutlinesAndDicts from "./LookupResultsOutlinesAndDicts";
 import MatchedModifiedTranslation from "./MatchedModifiedTranslation";
 import StrokesAsDiagrams from "./StrokesAsDiagrams";
+import tpgDict from "constant/topProjectGutenbergDictName";
 
 import type {
   DictName,
@@ -98,19 +100,32 @@ const StrokesForWords = ({
     let [listOfStrokesAndDicts, modifiedWordOrPhrase] =
       lookupListOfStrokesAndDicts(phrase, globalLookupDictionary);
 
+    let tpgOutline: null | Outline = null;
     const listOfStrokesDictsNamespaceMisstroke: StrokeDictNamespaceAndMisstrokeStatus[] =
-      listOfStrokesAndDicts.map((row) => {
-        const misstrokeStatus =
-          !!misstrokesJSON[row[0]] &&
-          modifiedWordOrPhrase === misstrokesJSON[row[0]];
+      listOfStrokesAndDicts
+        .map((row) => {
+          const misstrokeStatus =
+            !!misstrokesJSON[row[0]] &&
+            modifiedWordOrPhrase === misstrokesJSON[row[0]];
 
-        const result: StrokeDictNamespaceAndMisstrokeStatus = [
-          ...row,
-          misstrokeStatus,
-        ];
+          const result: StrokeDictNamespaceAndMisstrokeStatus = [
+            ...row,
+            misstrokeStatus,
+          ];
 
-        return result;
-      });
+          return result;
+        })
+        .filter(([outline, dictName, namespace]) => {
+          if (
+            dictName === tpgDict &&
+            namespace === SOURCE_NAMESPACES.get("typey")
+          ) {
+            tpgOutline = outline;
+            return true;
+          }
+
+          return outline === tpgOutline ? false : true;
+        });
 
     if (trackPhrase) {
       trackPhrase(phrase);
