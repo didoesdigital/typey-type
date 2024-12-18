@@ -76,6 +76,11 @@ const LookupResultsOutlinesAndDicts = ({
                 ? ""
                 : "de-emphasized"
             }
+            title={
+              strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")
+                ? strokeAndDict[1]
+                : undefined
+            }
           >
             {strokeAndDict[2] === SOURCE_NAMESPACES.get("typey")
               ? "Typey Type"
