@@ -25,13 +25,6 @@ function rankOutlines(
       return 1; // sort a after b
     }
 
-    if (a[2] === "plover" && b[2] !== "plover") {
-      return 1; // sort a after b
-    }
-    if (b[2] === "plover" && a[2] !== "plover") {
-      return -1; // sort a before b
-    }
-
     if (a[1] === "top-10000-project-gutenberg-words.json") {
       return -1; // sort a before b
     }
