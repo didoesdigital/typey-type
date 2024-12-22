@@ -186,6 +186,8 @@ class App extends Component {
     let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
     let calculatedYourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
 
+    // these two writePersonalPreferences calls were in a callback of setState - so 
+    // these moy need to be moved to useEffect later
     writePersonalPreferences('lessonsProgress', lessonsProgressState);
     writePersonalPreferences('metWords', metWordsFromStateOrArg);
     this.setupLesson({
@@ -279,6 +281,8 @@ class App extends Component {
       numberOfWordsToDiscover: numberOfWordsToDiscover
     }
 
+    // this writePersonalPreferences call was in a callback of setState - so
+    // this may need to be moved to useEffect later
     writePersonalPreferences('lessonsProgress', lessonsProgress);
     this.setState({ lessonsProgress });
     return lessonsProgress;
