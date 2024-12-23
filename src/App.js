@@ -213,6 +213,7 @@ class App extends Component {
     // these two writePersonalPreferences calls were in a callback of setState - so 
     // these may need to be moved to useEffect later, for example, when
     // this component is converted to a functional component
+    // care should be taken to not over-fire these updates
     writePersonalPreferences('lessonsProgress', lessonsProgressState);
     writePersonalPreferences('metWords', metWordsFromStateOrArg);
     this.setupLesson({

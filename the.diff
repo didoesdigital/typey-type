@@ -1,0 +1,4 @@
+Flattening the setState calls in App.js
+
+* adds App.shouldUpdateLessonsProgress(state)
+* moves update of lessonsProgress from applyStopLessonSideEffects to getFutureStateToStopLesson
