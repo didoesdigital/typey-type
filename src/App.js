@@ -110,9 +110,7 @@ class App extends Component {
   /* anything that needs to be done when stopping the lesson, excluding the state update */
   applyStopLessonSideEffects(state) {
     this.stopTimer();
-    if (synth) {
-      synth.cancel();
-    }
+    synth?.cancel();
     writePersonalPreferences('metWords', state.metWords);
     if (this.shouldUpdateLessonsProgress(state)) {
       writePersonalPreferences('lessonsProgress', state.lessonsProgress);
