@@ -643,17 +643,20 @@ class App extends Component {
    */
   processBuffer(actualText, buffer) {
     const [newState, sideEffects] = this.getNewStateAndSideEffectsForBuffer(actualText,
-                                                                              buffer,
-                                                                              this.state,
-                                                                              []);
+                                                                            buffer,
+                                                                            this.state,
+                                                                            []);
     sideEffects.forEach(effect => effect());
     this.setState(newState);
   }
 
   /*
-   * Takes buffer of inputs and returns the new state corresponding to the strokes
-   * in the buffer and the corresponding side effects to be applied - such as
-   * starting/stopping the timer, uttering the phrases, etc.
+   * Takes the buffer of inputs and returns the new state and the side effects
+   * corresponding to the strokes in the buffer.
+   * The side effects are actions, such as starting/stopping the timer,
+   * uttering the phrases, etc.
+   * This function may be executed recursively, until all the strokes in the buffer
+   * are processed.
    */
   getNewStateAndSideEffectsForBuffer(actualText, buffer, state, sideEffects) {
     let time = Date.now();
