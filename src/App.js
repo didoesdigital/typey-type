@@ -100,23 +100,29 @@ class App extends Component {
     this.setPersonalPreferences();
   }
 
+  shouldUpdateLessonsProgress(state) {
+    /*
+     * Should this also check for /lessons/custom/setup?  - see setupLesson()
+     */
+    return state.lesson.path && !state.lesson.path.endsWith("/lessons/custom");
+  }
+
   /* anything that needs to be done when stopping the lesson, excluding the state update */
-  applyStopLessonSideEffects(currentState) {
+  applyStopLessonSideEffects(state) {
     this.stopTimer();
     if (synth) {
       synth.cancel();
     }
-    writePersonalPreferences('metWords', currentState.metWords);
-    if (currentState.lesson.path && !currentState.lesson.path.endsWith("/lessons/custom")) {
-      let lessonsProgress = this.updateLessonsProgress(currentState.lesson.path, currentState.lesson, this.props.userSettings, currentState.lessonsProgress);
-      writePersonalPreferences('lessonsProgress', lessonsProgress);
+    writePersonalPreferences('metWords', state.metWords);
+    if (this.shouldUpdateLessonsProgress(state)) {
+      writePersonalPreferences('lessonsProgress', state.lessonsProgress);
     }
   }
 
   stopLesson() {
-    this.applyStopLessonSideEffects(this.state);
-    const statePatch = this.getFutureStateToStopLesson(this.state);
-    this.setState(statePatch);
+    const newState = this.getFutureStateToStopLesson(this.state);
+    this.applyStopLessonSideEffects(newState);
+    this.setState(newState);
   }
 
   getFutureStateToStopLesson(prevState) {
@@ -126,7 +132,8 @@ class App extends Component {
         currentLessonStrokes[i].checked = false;
       }
     }
-    return {
+
+    const newState = {
       ...prevState,
       actualText: '',
       currentLessonStrokes: currentLessonStrokes,
@@ -140,6 +147,17 @@ class App extends Component {
       yourSeenWordCount: calculateSeenWordCount(prevState.metWords),
       yourMemorisedWordCount: calculateMemorisedWordCount(prevState.metWords)
     };
+
+    if (this.shouldUpdateLessonsProgress(newState)) {
+      let lessonsProgress = this.getUpdatedLessonsProgress({lessonPath: prevState.lesson.path,
+                                                            lesson: prevState.lesson,
+                                                            userSettings: this.props.userSettings,
+                                                            prevLessonsProgress: prevState.lessonsProgress,
+                                                            metWords: prevState.metWords});
+      prevState.lessonsProgress = lessonsProgress;
+    }
+
+    return newState;
   }
 
   startTimer() {
@@ -205,10 +223,8 @@ class App extends Component {
     });
   }
 
-  updateLessonsProgress(lessonpath, lesson, userSettings, prevlessonsProgress) {
-    const metWords = this.state.metWords;
-    const lessonsProgress = Object.assign({}, prevlessonsProgress);
-
+  getUpdatedLessonsProgress({lessonPath, lesson, userSettings, prevLessonsProgress, metWords}) {
+    const lessonsProgress = {...prevLessonsProgress};
     // This is actually UNIQUE numberOfWordsSeen.
     // It seems low value to update localStorage data to rename it only for readability.
     // More FIXMEs below
@@ -217,8 +233,8 @@ class App extends Component {
 
     // See comment above
     // FIXME
-    if (lessonsProgress[lessonpath] && lessonsProgress[lessonpath].numberOfWordsSeen) {
-      numberOfWordsSeen = lessonsProgress[lessonpath].numberOfWordsSeen;
+    if (lessonsProgress[lessonPath]?.numberOfWordsSeen) {
+      numberOfWordsSeen = lessonsProgress[lessonPath].numberOfWordsSeen;
     }
 
     let material = lesson?.sourceMaterial ? lesson.sourceMaterial.map(copy => ({...copy})) : [{phrase: "the", stroke: "-T"}];
@@ -282,17 +298,11 @@ class App extends Component {
     // See comment above
     // FIXME
     numberOfWordsSeen = seenAccumulator;
-    lessonsProgress[lessonpath] = {
+    lessonsProgress[lessonPath] = {
       numberOfWordsMemorised: memorisedAccumulator,
       numberOfWordsSeen: numberOfWordsSeen,
       numberOfWordsToDiscover: numberOfWordsToDiscover
     }
-
-    // this writePersonalPreferences call was in a callback of setState - so
-    // this may need to be moved to useEffect later, for example, when
-    // this component is converted to a functional component
-    writePersonalPreferences('lessonsProgress', lessonsProgress);
-    this.setState({ lessonsProgress });
     return lessonsProgress;
   }
 
@@ -433,7 +443,13 @@ class App extends Component {
 
     // Update lesson progress:
     if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
-      const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, userSettings, prevLessonsProgress);
+      const lessonsProgress = this.getUpdatedLessonsProgress({lessonPath,
+                                                              lesson: newLesson,
+                                                              userSettings,
+                                                              prevLessonsProgress,
+                                                              metWords: newState.metWords
+                                                            });
+      newState.lessonsProgress = lessonsProgress;
       writePersonalPreferences('lessonsProgress', lessonsProgress);
     }
 
@@ -795,8 +811,9 @@ class App extends Component {
     }
 
     if (this.isFinished(state)) {
-      sideEffects.push(() => this.applyStopLessonSideEffects({...state}));
-      return [this.getFutureStateToStopLesson(state), sideEffects];
+      const newState = this.getFutureStateToStopLesson(state);
+      sideEffects.push(() => this.applyStopLessonSideEffects({...newState}));
+      return [newState, sideEffects];
     } else if (buffer && proceedToNextWord && unmatchedActual.length > 0) {
       // Repetitively apply buffer with already accepted phrases excluded
       const newBuffer = buffer
