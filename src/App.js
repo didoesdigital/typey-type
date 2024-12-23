@@ -620,12 +620,27 @@ class App extends Component {
     return 16; // 60 fps
   }
 
+  /*
+   * Given the buffer of inputs, determines the new state, collects the side effects,
+   * then applies the side effects and updates the state.
+   *
+   * @actualText param is not used - probably should be removed
+   */
   processBuffer(actualText, buffer) {
-    const newState = this.getFutureStateAfterProcessingBuffer(actualText, buffer, this.state);
+    const [newState, sideEffects] = this.getNewStateAndSideEffectsForBuffer(actualText,
+                                                                              buffer,
+                                                                              this.state,
+                                                                              []);
+    sideEffects.forEach(effect => effect());
     this.setState(newState);
   }
 
-  getFutureStateAfterProcessingBuffer(actualText, buffer, state) {
+  /*
+   * Takes buffer of inputs and returns the new state corresponding to the strokes
+   * in the buffer and the corresponding side effects to be applied - such as
+   * starting/stopping the timer, uttering the phrases, etc.
+   */
+  getNewStateAndSideEffectsForBuffer(actualText, buffer, state, sideEffects) {
     let time = Date.now();
     if (buffer) {
       const latest = buffer[buffer.length - 1];
@@ -638,13 +653,16 @@ class App extends Component {
       state.startTime = new Date();
       state.timer = 0;
       state.disableUserSettings = true;
-      this.startTimer();
+      sideEffects.push(() => this.startTimer());
     }
 
     // This informs word count, WPM, moving onto next phrase, ending lesson
     // eslint-disable-next-line
     let [matchedChars, unmatchedChars, matchedActual, unmatchedActual] =
-      matchSplitText(state.lesson.presentedMaterial[state.currentPhraseID].phrase, actualText, state.lesson.settings, this.props.userSettings);
+      matchSplitText(state.lesson.presentedMaterial[state.currentPhraseID].phrase,
+                     actualText,
+                     state.lesson.settings,
+                     this.props.userSettings);
 
     if (state.lesson.settings.ignoredChars) {
       matchedChars = removeIgnoredCharsFromSplitText(matchedChars, state.lesson.settings.ignoredChars);
@@ -747,7 +765,8 @@ class App extends Component {
       if (this.props.userSettings.speakMaterial) {
         const remaining = state.lesson.newPresentedMaterial.getRemaining();
         if (remaining && remaining.length > 0 && remaining[0].hasOwnProperty('phrase')) {
-          this.say(remaining[0].phrase);
+          const phrase = remaining[0].phrase;
+          sideEffects.push(() => this.say(phrase));
         }
       }
 
@@ -776,16 +795,16 @@ class App extends Component {
     }
 
     if (this.isFinished(state)) {
-      this.applyStopLessonSideEffects(state);
-      return this.getFutureStateToStopLesson(state);
+      sideEffects.push(() => this.applyStopLessonSideEffects({...state}));
+      return [this.getFutureStateToStopLesson(state), sideEffects];
     } else if (buffer && proceedToNextWord && unmatchedActual.length > 0) {
       // Repetitively apply buffer with already accepted phrases excluded
       const newBuffer = buffer
         .filter(stroke => stroke.text.length > matchedActual.length && stroke.text.startsWith(matchedActual))
         .map(stroke => ({ text: stroke.text.slice(matchedActual.length), time: stroke.time }));
-      return this.getFutureStateAfterProcessingBuffer(null, newBuffer, state);
+      return this.getNewStateAndSideEffectsForBuffer(null, newBuffer, state, sideEffects);
     }
-    return state;
+    return [state, sideEffects];
   }
 
   say(utteranceText: string) {
