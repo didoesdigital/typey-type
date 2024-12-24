@@ -564,7 +564,6 @@ class App extends Component {
       });
     }
     else { // for navigating straight to custom lesson page without setup
-      // debugger;
     // TODO: is this the place where I should set a default empty custom lesson?
       let lesson = Object.assign({}, this.state.customLesson);
       lesson.title = 'Custom'
@@ -779,7 +778,6 @@ class App extends Component {
         state.metWords[phraseText] = meetingsCount + 1;
       }
 
-      // TODO: this is a side-effect, move to a separate function
       if (this.props.userSettings.speakMaterial) {
         const remaining = state.lesson.newPresentedMaterial.getRemaining();
         if (remaining && remaining.length > 0 && remaining[0].hasOwnProperty('phrase')) {
