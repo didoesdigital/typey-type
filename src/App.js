@@ -99,28 +99,39 @@ class App extends Component {
     this.setPersonalPreferences();
   }
 
-  stopLesson() {
+  shouldUpdateLessonsProgress(state) {
+    /*
+     * Should this also check for /lessons/custom/setup?  - see setupLesson()
+     */
+    return state.lesson.path && !state.lesson.path.endsWith("/lessons/custom");
+  }
+
+  /* anything that needs to be done when stopping the lesson, excluding the state update */
+  applyStopLessonSideEffects(state) {
     this.stopTimer();
-
-    if (synth) {
-      synth.cancel();
+    synth?.cancel();
+    writePersonalPreferences('metWords', state.metWords);
+    if (this.shouldUpdateLessonsProgress(state)) {
+      writePersonalPreferences('lessonsProgress', state.lessonsProgress);
     }
+  }
 
-    writePersonalPreferences('metWords', this.state.metWords);
+  stopLesson() {
+    const newState = this.getFutureStateToStopLesson(this.state);
+    this.applyStopLessonSideEffects(newState);
+    this.setState(newState);
+  }
 
-    if (this.state.lesson.path && !this.state.lesson.path.endsWith("/lessons/custom")) {
-      let lessonsProgress = this.updateLessonsProgress(this.state.lesson.path, this.state.lesson, this.props.userSettings, this.state.lessonsProgress);
-      writePersonalPreferences('lessonsProgress', lessonsProgress);
-    }
-
-    const currentLessonStrokes = this.state.currentLessonStrokes.map(copy => ({...copy}));
+  getFutureStateToStopLesson(prevState) {
+    const currentLessonStrokes = prevState.currentLessonStrokes.map(copy => ({...copy}));
     for (let i = 0; i < currentLessonStrokes.length; i++) {
       if (currentLessonStrokes[i].accuracy === true) {
         currentLessonStrokes[i].checked = false;
       }
     }
 
-    this.setState({
+    const newState = {
+      ...prevState,
       actualText: '',
       currentLessonStrokes: currentLessonStrokes,
       currentPhraseID: this.state.lesson.presentedMaterial.length,
@@ -130,9 +141,20 @@ class App extends Component {
       numberOfMatchedChars: 0,
       // revisionMode: false,
       totalNumberOfMatchedChars: 0,
-      yourSeenWordCount: calculateSeenWordCount(this.state.metWords),
-      yourMemorisedWordCount: calculateMemorisedWordCount(this.state.metWords)
-    });
+      yourSeenWordCount: calculateSeenWordCount(prevState.metWords),
+      yourMemorisedWordCount: calculateMemorisedWordCount(prevState.metWords)
+    };
+
+    if (this.shouldUpdateLessonsProgress(newState)) {
+      let lessonsProgress = this.getUpdatedLessonsProgress({lessonPath: prevState.lesson.path,
+                                                            lesson: prevState.lesson,
+                                                            userSettings: this.props.userSettings,
+                                                            prevLessonsProgress: prevState.lessonsProgress,
+                                                            metWords: prevState.metWords});
+      prevState.lessonsProgress = lessonsProgress;
+    }
+
+    return newState;
   }
 
   startTimer() {
@@ -185,22 +207,22 @@ class App extends Component {
     let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
     let calculatedYourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
 
-    this.setState({
+    // these two writePersonalPreferences calls were in a callback of setState - so 
+    // these may need to be moved to useEffect later, for example, when
+    // this component is converted to a functional component
+    // care should be taken to not over-fire these updates
+    writePersonalPreferences('lessonsProgress', lessonsProgressState);
+    writePersonalPreferences('metWords', metWordsFromStateOrArg);
+    this.setupLesson({
       lessonsProgress: lessonsProgressState,
       metWords: metWordsFromStateOrArg,
       yourSeenWordCount: calculatedYourSeenWordCount,
       yourMemorisedWordCount: calculatedYourMemorisedWordCount,
-    }, () => {
-      writePersonalPreferences('lessonsProgress', this.state.lessonsProgress);
-      writePersonalPreferences('metWords', this.state.metWords);
-      this.setupLesson();
     });
   }
 
-  updateLessonsProgress(lessonpath, lesson, userSettings, prevlessonsProgress) {
-    const metWords = this.state.metWords;
-    const lessonsProgress = Object.assign({}, prevlessonsProgress);
-
+  getUpdatedLessonsProgress({lessonPath, lesson, userSettings, prevLessonsProgress, metWords}) {
+    const lessonsProgress = {...prevLessonsProgress};
     // This is actually UNIQUE numberOfWordsSeen.
     // It seems low value to update localStorage data to rename it only for readability.
     // More FIXMEs below
@@ -209,8 +231,8 @@ class App extends Component {
 
     // See comment above
     // FIXME
-    if (lessonsProgress[lessonpath] && lessonsProgress[lessonpath].numberOfWordsSeen) {
-      numberOfWordsSeen = lessonsProgress[lessonpath].numberOfWordsSeen;
+    if (lessonsProgress[lessonPath]?.numberOfWordsSeen) {
+      numberOfWordsSeen = lessonsProgress[lessonPath].numberOfWordsSeen;
     }
 
     let material = lesson?.sourceMaterial ? lesson.sourceMaterial.map(copy => ({...copy})) : [{phrase: "the", stroke: "-T"}];
@@ -274,17 +296,11 @@ class App extends Component {
     // See comment above
     // FIXME
     numberOfWordsSeen = seenAccumulator;
-    lessonsProgress[lessonpath] = {
+    lessonsProgress[lessonPath] = {
       numberOfWordsMemorised: memorisedAccumulator,
       numberOfWordsSeen: numberOfWordsSeen,
       numberOfWordsToDiscover: numberOfWordsToDiscover
     }
-
-    this.setState({
-      lessonsProgress: lessonsProgress,
-    }, () => {
-      writePersonalPreferences('lessonsProgress', lessonsProgress);
-    });
     return lessonsProgress;
   }
 
@@ -423,7 +439,13 @@ class App extends Component {
 
     // Update lesson progress:
     if (lessonPath && !lessonPath.endsWith("/lessons/custom") && !lessonPath.endsWith("/lessons/custom/setup")) {
-      const lessonsProgress = this.updateLessonsProgress(lessonPath, newLesson, userSettings, prevLessonsProgress);
+      const lessonsProgress = this.getUpdatedLessonsProgress({lessonPath,
+                                                              lesson: newLesson,
+                                                              userSettings,
+                                                              prevLessonsProgress,
+                                                              metWords: newState.metWords
+                                                            });
+      newState.lessonsProgress = lessonsProgress;
       writePersonalPreferences('lessonsProgress', lessonsProgress);
     }
 
@@ -514,11 +536,9 @@ class App extends Component {
   startCustomLesson() {
     let lesson = Object.assign({}, this.state.customLesson);
     lesson.title = 'Custom'
-    this.setState({
+    this.setupLesson({
       currentPhraseID: 0,
       lesson: lesson
-    }, () => {
-      this.setupLesson();
     });
   }
 
@@ -528,28 +548,23 @@ class App extends Component {
       let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
       let customLesson = Object.assign({}, this.state.customLesson);
       if (validationMessages && validationMessages.length < 1) { customLesson = lesson; }
-      this.setState({
-        lesson: lesson,
+      this.setupLesson({
+        lesson,
         currentPhraseID: 0,
-        customLesson: customLesson,
+        customLesson,
         customLessonMaterial: providedText,
         customLessonMaterialValidationState: validationState,
         customLessonMaterialValidationMessages: validationMessages
-      }, () => {
-        this.setupLesson();
       });
     }
     else { // for navigating straight to custom lesson page without setup
-      // debugger;
     // TODO: is this the place where I should set a default empty custom lesson?
       let lesson = Object.assign({}, this.state.customLesson);
       lesson.title = 'Custom'
-      this.setState({
+      this.setupLesson({
         customLesson: lesson,
-        lesson: lesson,
+        lesson,
         currentPhraseID: 0
-      }, () => {
-        this.setupLesson();
       });
     }
     return event;
@@ -557,15 +572,11 @@ class App extends Component {
 
   reviseLesson(event, newRevisionMaterial) {
     event.preventDefault();
-    this.setState({
+    this.stopLesson();
+    this.setupLesson({
       revisionMaterial: newRevisionMaterial,
-    }, () => {
-      this.stopLesson();
-      this.setupLesson({
-        focusTriggerInt: this.state.focusTriggerInt + 1,
-        // revisionMaterial: newRevisionMaterial,
-        revisionMode: true,
-      });
+      focusTriggerInt: this.state.focusTriggerInt + 1,
+      revisionMode: true,
     });
   }
 
@@ -596,7 +607,7 @@ class App extends Component {
     // const batchUpdate = document.cookie.indexOf("batchUpdate=1")>=0;
     const batchUpdate = true;
     if(!batchUpdate) {
-      this.updateBufferSingle(actualText);
+      this.processBuffer(actualText);
       return;
     }
     // Immediately update the text in the input field
@@ -609,7 +620,7 @@ class App extends Component {
     this.updateBufferTimer = setTimeout(() => {
       const buffer = this.markupBuffer;
       this.markupBuffer = [];
-      this.updateBufferSingle(null, buffer);
+      this.processBuffer(null, buffer);
     }, this.bufferIntervalMillis());
   }
 
@@ -617,37 +628,62 @@ class App extends Component {
     return 16; // 60 fps
   }
 
-  updateBufferSingle(actualText, buffer) {
+  /*
+   * Given the buffer of inputs, determines the new state, collects the side effects,
+   * then applies the side effects and updates the state.
+   *
+   * @actualText param is not used - probably should be removed
+   */
+  processBuffer(actualText, buffer) {
+    const [newState, sideEffects] = this.getNewStateAndSideEffectsForBuffer(actualText,
+                                                                            buffer,
+                                                                            this.state,
+                                                                            []);
+    sideEffects.forEach(effect => effect());
+    this.setState(newState);
+  }
+
+  /*
+   * Takes the buffer of inputs and returns the new state and the side effects
+   * corresponding to the strokes in the buffer.
+   * The side effects are actions, such as starting/stopping the timer,
+   * uttering the phrases, etc.
+   * This function may be executed recursively, until all the strokes in the buffer
+   * are processed.
+   */
+  getNewStateAndSideEffectsForBuffer(actualText, buffer, state, sideEffects) {
     let time = Date.now();
     if (buffer) {
       const latest = buffer[buffer.length - 1];
       actualText = latest.text;
       time = latest.time;
     }
+
     // Start timer on first key stroke
-    if (this.state.startTime === null) {
-      this.setState({
-        startTime: new Date(),
-        timer: 0,
-        disableUserSettings: true
-      });
-      this.startTimer();
+    if (state.startTime === null) {
+      state.startTime = new Date();
+      state.timer = 0;
+      state.disableUserSettings = true;
+      sideEffects.push(() => this.startTimer());
     }
 
     // This informs word count, WPM, moving onto next phrase, ending lesson
     // eslint-disable-next-line
     let [matchedChars, unmatchedChars, matchedActual, unmatchedActual] =
-      matchSplitText(this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase, actualText, this.state.lesson.settings, this.props.userSettings);
+      matchSplitText(state.lesson.presentedMaterial[state.currentPhraseID].phrase,
+                     actualText,
+                     state.lesson.settings,
+                     this.props.userSettings);
 
-    if (this.state.lesson.settings.ignoredChars) {
-      matchedChars = removeIgnoredCharsFromSplitText(matchedChars, this.state.lesson.settings.ignoredChars);
-      unmatchedChars = removeIgnoredCharsFromSplitText(unmatchedChars, this.state.lesson.settings.ignoredChars);
+    if (state.lesson.settings.ignoredChars) {
+      matchedChars = removeIgnoredCharsFromSplitText(matchedChars, state.lesson.settings.ignoredChars);
+      unmatchedChars = removeIgnoredCharsFromSplitText(unmatchedChars, state.lesson.settings.ignoredChars);
     }
 
     const [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
     // @ts-ignore this should be ok when currentPhraseAttempts is typed correctly instead of never[]
-    const currentPhraseAttempts = this.state.currentPhraseAttempts.map(copy => ({...copy}));
+    const currentPhraseAttempts = state.currentPhraseAttempts.map(copy => ({...copy}));
 
     if (buffer) {
       // Assuming a single buffer contains inputs from one stroke, peaks are always at the end of buffer. (i.e. steno can either keep typing or backspace first and then keep typing) Since currentPhraseAttempts is only used to calculate attempts and its logic is to use peaks or the last strokes, it's safe to push elements that lacks `numberOfMatchedWordsSoFar` and `hintWasShown` into `currentPhraseAttempts`.
@@ -656,34 +692,32 @@ class App extends Component {
     currentPhraseAttempts.push({
       text: actualText,
       time: time,
-      numberOfMatchedWordsSoFar: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
-      hintWasShown: shouldShowStroke(this.state.showStrokesInLesson, this.props.userSettings.showStrokes, this.state.repetitionsRemaining, this.props.userSettings.hideStrokesOnLastRepetition)
+      numberOfMatchedWordsSoFar: (state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
+      hintWasShown: shouldShowStroke(state.showStrokesInLesson,
+                                     this.props.userSettings.showStrokes,
+                                     state.repetitionsRemaining,
+                                     this.props.userSettings.hideStrokesOnLastRepetition)
     });
 
-    const newState = {
+    state = {
+      ...state,
       currentPhraseAttempts: currentPhraseAttempts,
       numberOfMatchedChars: numberOfMatchedChars,
-      totalNumberOfMatchedWords: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
-      totalNumberOfNewWordsMet: this.state.totalNumberOfNewWordsMet,
-      totalNumberOfLowExposuresSeen: this.state.totalNumberOfLowExposuresSeen,
-      totalNumberOfRetainedWords: this.state.totalNumberOfRetainedWords,
-      totalNumberOfMistypedWords: this.state.totalNumberOfMistypedWords,
-      totalNumberOfHintedWords: this.state.totalNumberOfHintedWords,
+      totalNumberOfMatchedWords: (state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       actualText: actualText,
-      metWords: this.state.metWords,
     };
     // NOTE: here is where attempts are defined before being pushed with completed phrases
     const phraseMisstrokes = strokeAccuracy(
-      buffer ? currentPhraseAttempts : this.state.currentPhraseAttempts,
-      buffer ? getTargetObservableStrokeCount(this.state.lesson.presentedMaterial[this.state.currentPhraseID]) : this.state.targetStrokeCount,
+      buffer ? currentPhraseAttempts : state.currentPhraseAttempts,
+      buffer ? getTargetObservableStrokeCount(state.lesson.presentedMaterial[state.currentPhraseID]) : state.targetStrokeCount,
       unmatchedActual,
       !!buffer
     );
     const accurateStroke = phraseMisstrokes.strokeAccuracy; // false
     const attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
 
-    if (!accurateStroke && !this.state.showStrokesInLesson && this.props.userSettings.showStrokesOnMisstroke) {
-      this.setState({showStrokesInLesson: true});
+    if (!accurateStroke && !state.showStrokesInLesson && this.props.userSettings.showStrokesOnMisstroke) {
+      state.showStrokesInLesson = true;
     }
 
     let proceedToNextWord;
@@ -697,82 +731,91 @@ class App extends Component {
       proceedToNextWord = numberOfUnmatchedChars === 0;
     }
     if (proceedToNextWord) {
-      newState.currentPhraseAttempts = []; // reset for next word
-      newState.currentLessonStrokes = this.state.currentLessonStrokes; // [{word: "cat", attempts: ["cut"], stroke: "KAT"}, {word: "sciences", attempts ["sign", "ss"], stroke: "SAOEUPB/EPBC/-S"]
+      state.currentPhraseAttempts = []; // reset for next word
 
-      const strokeHintShown = shouldShowStroke(this.state.showStrokesInLesson, this.props.userSettings.showStrokes, this.state.repetitionsRemaining, this.props.userSettings.hideStrokesOnLastRepetition);
+      const strokeHintShown = shouldShowStroke(state.showStrokesInLesson,
+                                               this.props.userSettings.showStrokes,
+                                               state.repetitionsRemaining,
+                                               this.props.userSettings.hideStrokesOnLastRepetition);
 
       // NOTE: here is where completed phrases are pushed
-      newState.currentLessonStrokes.push({
-        numberOfMatchedWordsSoFar: (this.state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
-        word: this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase,
+      state.currentLessonStrokes.push({
+        numberOfMatchedWordsSoFar: (state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
+        word: state.lesson.presentedMaterial[state.currentPhraseID].phrase,
         typedText: actualText,
         attempts: attempts,
         hintWasShown: strokeHintShown,
-        stroke: this.state.lesson.presentedMaterial[this.state.currentPhraseID].stroke,
+        stroke: state.lesson.presentedMaterial[state.currentPhraseID].stroke,
         checked: true,
         accuracy: accurateStroke,
         time: time
       });
       // can these newState assignments be moved down below the scores assignments?
 
-      if (strokeHintShown) { newState.totalNumberOfHintedWords = this.state.totalNumberOfHintedWords + 1; }
+      if (strokeHintShown) { state.totalNumberOfHintedWords = state.totalNumberOfHintedWords + 1; }
 
-      if (!accurateStroke) { newState.totalNumberOfMistypedWords = this.state.totalNumberOfMistypedWords + 1; }
+      if (!accurateStroke) { state.totalNumberOfMistypedWords = state.totalNumberOfMistypedWords + 1; }
 
       if (!strokeHintShown && accurateStroke) {
         // Use the original text when recording to preserve case and spacing
         const phraseText = this.props.userSettings.spacePlacement === 'spaceBeforeOutput'
-          ? ' ' + this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase
+          ? ' ' + state.lesson.presentedMaterial[state.currentPhraseID].phrase
           : this.props.userSettings.spacePlacement === 'spaceAfterOutput'
-          ? this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase + ' '
-          : this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
+          ? state.lesson.presentedMaterial[state.currentPhraseID].phrase + ' '
+          : state.lesson.presentedMaterial[state.currentPhraseID].phrase;
 
-        const meetingsCount = newState.metWords[phraseText] || 0;
-        Object.assign(newState, increaseMetWords(meetingsCount, this.state.totalNumberOfNewWordsMet, this.state.totalNumberOfLowExposuresSeen, this.state.totalNumberOfRetainedWords));
-        newState.metWords[phraseText] = meetingsCount + 1;
+        const meetingsCount = state.metWords[phraseText] || 0;
+        Object.assign(state, increaseMetWords(meetingsCount,
+                                              state.totalNumberOfNewWordsMet,
+                                              state.totalNumberOfLowExposuresSeen,
+                                              state.totalNumberOfRetainedWords));
+        state.metWords[phraseText] = meetingsCount + 1;
       }
 
       if (this.props.userSettings.speakMaterial) {
-        const remaining = this.state.lesson.newPresentedMaterial.getRemaining();
+        const remaining = state.lesson.newPresentedMaterial.getRemaining();
         if (remaining && remaining.length > 0 && remaining[0].hasOwnProperty('phrase')) {
-          this.say(remaining[0].phrase);
+          const phrase = remaining[0].phrase;
+          sideEffects.push(() => this.say(phrase));
         }
       }
 
-      const nextPhraseID = this.state.currentPhraseID + 1;
-      let nextItem = this.state.lesson.presentedMaterial[nextPhraseID];
+      const nextPhraseID = state.currentPhraseID + 1;
+      let nextItem = state.lesson.presentedMaterial[nextPhraseID];
 
-      if (!!nextItem && this.state.lesson?.presentedMaterial?.[this.state.currentPhraseID]?.phrase) {
-        const lastWord = this.state.lesson.presentedMaterial[this.state.currentPhraseID].phrase;
+      if (!!nextItem && state.lesson?.presentedMaterial?.[state.currentPhraseID]?.phrase) {
+        const lastWord = state.lesson.presentedMaterial[state.currentPhraseID].phrase;
         nextItem = updateCapitalisationStrokesInNextItem(nextItem, lastWord);
       }
 
-      newState.targetStrokeCount = getTargetStrokeCount(nextItem || { phrase: '', stroke: 'TK-LS' });
-      this.state.lesson.newPresentedMaterial.visitNext();
+      state.targetStrokeCount = getTargetStrokeCount(nextItem || { phrase: '', stroke: 'TK-LS' });
+      state.lesson.newPresentedMaterial.visitNext();
 
-      newState.repetitionsRemaining = repetitionsRemaining(this.props.userSettings, this.state.lesson.presentedMaterial, this.state.currentPhraseID + 1);
-      newState.totalNumberOfMatchedChars = this.state.totalNumberOfMatchedChars + numberOfMatchedChars;
-      newState.previousCompletedPhraseAsTyped = actualText;
-      newState.actualText = buffer ? unmatchedActual : '';
-      newState.showStrokesInLesson = false;
-      newState.currentPhraseID = nextPhraseID;
+      state.repetitionsRemaining = repetitionsRemaining(this.props.userSettings,
+                                                        state.lesson.presentedMaterial,
+                                                        state.currentPhraseID + 1);
+      state.totalNumberOfMatchedChars = state.totalNumberOfMatchedChars + numberOfMatchedChars;
+      state.previousCompletedPhraseAsTyped = actualText;
+      state.actualText = buffer ? unmatchedActual : '';
+      state.showStrokesInLesson = false;
+      state.currentPhraseID = nextPhraseID;
 
-      newState.yourSeenWordCount = calculateSeenWordCount(this.state.metWords);
-      newState.yourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
+      state.yourSeenWordCount = calculateSeenWordCount(state.metWords);
+      state.yourMemorisedWordCount = calculateMemorisedWordCount(state.metWords);
     }
 
-    this.setState(newState, () => {
-      if (this.isFinished()) {
-        this.stopLesson();
-      } else if (buffer && proceedToNextWord && unmatchedActual.length > 0) {
-        // Repetitively apply buffer with already accepted phrases excluded
-        const newBuffer = buffer
-          .filter(stroke => stroke.text.length > matchedActual.length && stroke.text.startsWith(matchedActual))
-          .map(stroke => ({ text: stroke.text.slice(matchedActual.length), time: stroke.time }));
-        this.updateBufferSingle(null, newBuffer);
-      }
-    });
+    if (this.isFinished(state)) {
+      const newState = this.getFutureStateToStopLesson(state);
+      sideEffects.push(() => this.applyStopLessonSideEffects({...newState}));
+      return [newState, sideEffects];
+    } else if (buffer && proceedToNextWord && unmatchedActual.length > 0) {
+      // Repetitively apply buffer with already accepted phrases excluded
+      const newBuffer = buffer
+        .filter(stroke => stroke.text.length > matchedActual.length && stroke.text.startsWith(matchedActual))
+        .map(stroke => ({ text: stroke.text.slice(matchedActual.length), time: stroke.time }));
+      return this.getNewStateAndSideEffectsForBuffer(null, newBuffer, state, sideEffects);
+    }
+    return [state, sideEffects];
   }
 
   say(utteranceText: string) {
@@ -794,9 +837,9 @@ class App extends Component {
     }
   }
 
-  isFinished() {
-    let presentedMaterialLength = (this.state.lesson && this.state.lesson.presentedMaterial) ? this.state.lesson.presentedMaterial.length : 0;
-    return (this.state.currentPhraseID === presentedMaterialLength);
+  isFinished(currentState) {
+    const presentedMaterialLength = currentState.lesson?.presentedMaterial?.length || 0;
+    return currentState.currentPhraseID === presentedMaterialLength;
   }
 
   presentCompletedMaterial() {
