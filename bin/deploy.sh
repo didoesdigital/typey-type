@@ -35,8 +35,7 @@ yarn run sentry-cli releases new "$VERSION"
 REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" yarn run build
 
 # Sync static build files to server
-# rsync --archive --verbose --delete --exclude=".DS_Store" -e "ssh -p 4242" ~/projects/typey-type/build/ di@didoesdigital:www/typey-type/
-rsync -avz --exclude=".DS_Store" ~/projects/typey-type/build/ di@167.99.9.71:www/typey-type/
+rsync --itemize-changes -avz --exclude=".DS_Store" ~/projects/typey-type/build/ di@159.203.100.121:www/typey-type/
 
 yarn run sentry-cli releases files "$VERSION" upload-sourcemaps --url-prefix '~/typey-type/static/js' ~/projects/typey-type/build/static/js
 yarn run sentry-cli releases finalize "$VERSION"
