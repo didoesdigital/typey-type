@@ -25,7 +25,7 @@ VERSION=$(git describe --abbrev=0 --tags)
 REACT_APP_TYPEY_TYPE_RELEASE="$VERSION" REACT_APP_QA=true yarn run build
 
 # rsync build to prod server QA directory:
-rsync --archive --verbose --compress --exclude=".DS_Store" ~/projects/typey-type/build/ di@167.99.9.71:www/qa-typey-type/typey-type/
+rsync --archive --verbose --compress --exclude=".DS_Store" ~/projects/typey-type/build/ di@159.203.100.121:www/qa-typey-type/typey-type/
 
 SPOKEN_VERSION=$(echo "$VERSION" | tr -d 'v')
 
