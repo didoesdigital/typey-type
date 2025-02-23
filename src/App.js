@@ -99,6 +99,30 @@ class App extends Component {
     this.setPersonalPreferences();
   }
 
+  /**
+   * calls setupLesson() if when the user settings change - 
+   * this should probably be moved inside the Lesson component
+   * when and if the lesson state is moved into the Lesson component
+   */
+  componentDidUpdate(prevProps) {
+    const curUserSettings = this.props.userSettings;
+    const prevUserSettings = prevProps.userSettings;
+    if (curUserSettings.sortOrder !== prevUserSettings.sortOrder ||
+        curUserSettings.spacePlacement !== prevUserSettings.spacePlacement ||
+        curUserSettings.stenoLayout !== prevUserSettings.stenoLayout ||
+        curUserSettings.study !== prevUserSettings.study ||
+        curUserSettings.limitNumberOfWords !== prevUserSettings.limitNumberOfWords ||
+        curUserSettings.repetitions !== prevUserSettings.repetitions ||
+        curUserSettings.startFromWord !== prevUserSettings.startFromWord ||
+        curUserSettings.upcomingWordsLayout !== prevUserSettings.upcomingWordsLayout ||
+        curUserSettings.newWords !== prevUserSettings.newWords ||
+        curUserSettings.seenWords !== prevUserSettings.seenWords ||
+        curUserSettings.retainedWords !== prevUserSettings.retainedWords ||
+        curUserSettings.simpleTypography !== prevUserSettings.simpleTypography) {
+      this.setupLesson();
+    }
+  }
+
   shouldUpdateLessonsProgress(state) {
     /*
      * Should this also check for /lessons/custom/setup?  - see setupLesson()
