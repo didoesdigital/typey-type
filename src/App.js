@@ -107,26 +107,25 @@ class App extends Component {
   componentDidUpdate(prevProps) {
     const curUserSettings = this.props.userSettings;
     const prevUserSettings = prevProps.userSettings;
-    if (curUserSettings.sortOrder !== prevUserSettings.sortOrder ||
-        curUserSettings.spacePlacement !== prevUserSettings.spacePlacement ||
-        curUserSettings.stenoLayout !== prevUserSettings.stenoLayout ||
-        curUserSettings.study !== prevUserSettings.study ||
-        curUserSettings.limitNumberOfWords !== prevUserSettings.limitNumberOfWords ||
-        curUserSettings.repetitions !== prevUserSettings.repetitions ||
-        curUserSettings.startFromWord !== prevUserSettings.startFromWord ||
-        curUserSettings.upcomingWordsLayout !== prevUserSettings.upcomingWordsLayout ||
-        curUserSettings.newWords !== prevUserSettings.newWords ||
-        curUserSettings.seenWords !== prevUserSettings.seenWords ||
-        curUserSettings.retainedWords !== prevUserSettings.retainedWords ||
-        curUserSettings.simpleTypography !== prevUserSettings.simpleTypography) {
+    if (
+      curUserSettings.sortOrder !== prevUserSettings.sortOrder ||
+      curUserSettings.spacePlacement !== prevUserSettings.spacePlacement ||
+      curUserSettings.stenoLayout !== prevUserSettings.stenoLayout ||
+      curUserSettings.study !== prevUserSettings.study ||
+      curUserSettings.limitNumberOfWords !== prevUserSettings.limitNumberOfWords ||
+      curUserSettings.repetitions !== prevUserSettings.repetitions ||
+      curUserSettings.startFromWord !== prevUserSettings.startFromWord ||
+      curUserSettings.upcomingWordsLayout !== prevUserSettings.upcomingWordsLayout ||
+      curUserSettings.newWords !== prevUserSettings.newWords ||
+      curUserSettings.seenWords !== prevUserSettings.seenWords ||
+      curUserSettings.retainedWords !== prevUserSettings.retainedWords ||
+      curUserSettings.simpleTypography !== prevUserSettings.simpleTypography
+    ) {
       this.setupLesson();
     }
   }
 
   shouldUpdateLessonsProgress(state) {
-    /*
-     * Should this also check for /lessons/custom/setup?  - see setupLesson()
-     */
     return state.lesson.path && !state.lesson.path.endsWith("/lessons/custom");
   }
 
@@ -175,7 +174,7 @@ class App extends Component {
                                                             userSettings: this.props.userSettings,
                                                             prevLessonsProgress: prevState.lessonsProgress,
                                                             metWords: prevState.metWords});
-      prevState.lessonsProgress = lessonsProgress;
+      newState.lessonsProgress = lessonsProgress;
     }
 
     return newState;
@@ -659,9 +658,10 @@ class App extends Component {
    * @actualText param is not used - probably should be removed
    */
   processBuffer(actualText, buffer) {
+    const stateCopy = {...this.state};
     const [newState, sideEffects] = this.getNewStateAndSideEffectsForBuffer(actualText,
                                                                             buffer,
-                                                                            this.state,
+                                                                            stateCopy,
                                                                             []);
     sideEffects.forEach(effect => effect());
     this.setState(newState);
