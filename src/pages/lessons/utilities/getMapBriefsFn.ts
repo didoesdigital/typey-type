@@ -1,4 +1,5 @@
 import mapBriefToAmericanStenoKeys from "../../../utils/stenoLayouts/mapBriefToAmericanStenoKeys";
+import mapBriefToLapwingStenoKeys from "../../../utils/stenoLayouts/mapBriefToLapwingStenoKeys";
 import mapBriefToNoNumberBarInnerThumbNumbersStenoKeys from "../../../utils/stenoLayouts/mapBriefToNoNumberBarInnerThumbNumbersStenoKeys";
 import mapBriefToNoNumberBarOuterThumbNumbersStenoKeys from "../../../utils/stenoLayouts/mapBriefToNoNumberBarOuterThumbNumbersStenoKeys";
 import mapBriefToBrazilianPortugueseStenoKeys from "../../../utils/stenoLayouts/mapBriefToBrazilianPortugueseStenoKeys";
@@ -15,6 +16,8 @@ const getMapsBriefsFn = (stenoLayout: StenoLayout) => {
   switch (stenoLayout) {
     case "stenoLayoutAmericanSteno":
       return mapBriefToAmericanStenoKeys;
+    case "stenoLayoutLapwingSteno":
+      return mapBriefToLapwingStenoKeys;
     case "stenoLayoutNoNumberBarInnerThumbNumbers":
       return mapBriefToNoNumberBarInnerThumbNumbersStenoKeys;
     case "stenoLayoutNoNumberBarOuterThumbNumbers":

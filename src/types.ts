@@ -386,6 +386,7 @@ export type RecommendedCoursesType = {
 
 export type StenoLayout =
   | "stenoLayoutAmericanSteno"
+  | "stenoLayoutLapwingSteno"
   | "stenoLayoutNoNumberBarInnerThumbNumbers"
   | "stenoLayoutNoNumberBarOuterThumbNumbers"
   | "stenoLayoutPalantype"

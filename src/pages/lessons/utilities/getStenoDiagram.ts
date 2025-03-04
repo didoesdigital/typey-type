@@ -1,4 +1,5 @@
 import AmericanStenoDiagram from "../../../StenoLayout/AmericanStenoDiagram";
+import LapwingStenoDiagram from "../../../StenoLayout/LapwingStenoDiagram";
 import NoNumberBarInnerThumbNumbersStenoDiagram from "../../../StenoLayout/NoNumberBarInnerThumbNumbersStenoDiagram";
 import NoNumberBarOuterThumbNumbersStenoDiagram from "../../../StenoLayout/NoNumberBarOuterThumbNumbersStenoDiagram";
 import BrazilianPortugueseStenoDiagram from "../../../StenoLayout/BrazilianPortugueseStenoDiagram";
@@ -15,6 +16,8 @@ const getStenoDiagram = (stenoLayout: StenoLayout) => {
   switch (stenoLayout) {
     case "stenoLayoutAmericanSteno":
       return AmericanStenoDiagram;
+    case "stenoLayoutLapwingSteno":
+      return LapwingStenoDiagram;
     case "stenoLayoutNoNumberBarInnerThumbNumbers":
       return NoNumberBarInnerThumbNumbersStenoDiagram;
     case "stenoLayoutNoNumberBarOuterThumbNumbers":

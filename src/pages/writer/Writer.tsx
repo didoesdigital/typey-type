@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from "react-ga4";
 import AmericanStenoDiagram from '../../StenoLayout/AmericanStenoDiagram';
+import LapwingStenoDiagram from '../../StenoLayout/LapwingStenoDiagram';
 import NoNumberBarInnerThumbNumbersStenoDiagram from '../../StenoLayout/NoNumberBarInnerThumbNumbersStenoDiagram';
 import NoNumberBarOuterThumbNumbersStenoDiagram from '../../StenoLayout/NoNumberBarOuterThumbNumbersStenoDiagram';
 import YaweiChineseStenoDiagram from '../../StenoLayout/YaweiChineseStenoDiagram';
@@ -15,6 +16,7 @@ import {
   mapQWERTYKeysToStenoStroke,
 } from '../../utils/typey-type';
 import mapBriefToAmericanStenoKeys from '../../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
+import mapBriefToLapwingStenoKeys from 'utils/stenoLayouts/mapBriefToLapwingStenoKeys';
 import mapBriefToNoNumberBarInnerThumbNumbersStenoKeys from '../../utils/stenoLayouts/mapBriefToNoNumberBarInnerThumbNumbersStenoKeys';
 import mapBriefToNoNumberBarOuterThumbNumbersStenoKeys from '../../utils/stenoLayouts/mapBriefToNoNumberBarOuterThumbNumbersStenoKeys';
 import mapBriefToYaweiChineseStenoKeys from '../../utils/stenoLayouts/mapBriefToYaweiChineseStenoKeys';
@@ -237,6 +239,11 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
         StenoLayoutDiagram = AmericanStenoDiagram;
         placeholderRawSteno = "e.g. HEU";
         break;
+      case 'stenoLayoutLapwingSteno':
+        mapBriefsFunction = mapBriefToLapwingStenoKeys;
+        StenoLayoutDiagram = LapwingStenoDiagram;
+        placeholderRawSteno = "e.g. HEU";
+        break;
       case 'stenoLayoutNoNumberBarInnerThumbNumbers':
         mapBriefsFunction = mapBriefToNoNumberBarInnerThumbNumbersStenoKeys;
         StenoLayoutDiagram = NoNumberBarInnerThumbNumbersStenoDiagram;
@@ -381,6 +388,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
                 <select id="stenoLayout" name="writerStenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} className="text-small form-control w6">
                   <option value="stenoLayoutAmericanSteno">Ward Stone Ireland (Plover, EcoSteno, SOFT/HRUF etc.)</option>
                   <option value="stenoLayoutNoNumberBarInnerThumbNumbers">Inner thumbers (TinyMod, Steko, etc.)</option>
+                  <option value="stenoLayoutLapwingSteno">Lapwing</option>
                   <option value="stenoLayoutNoNumberBarOuterThumbNumbers">Outer thumbers (Uni, Georgi, etc.)</option>
                   <option value="stenoLayoutPalantype">Palantype</option>
                   <option value="stenoLayoutBrazilianPortugueseSteno">Brazilian Portuguese steno</option>

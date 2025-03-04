@@ -81,6 +81,7 @@ const applyQueryParamsToUserSettings = (
 
       const stenoLayoutValidValues = [
         "stenoLayoutAmericanSteno",
+        "stenoLayoutLapwingSteno",
         "stenoLayoutNoNumberBarInnerThumbNumbers",
         "stenoLayoutNoNumberBarOuterThumbNumbers",
         "stenoLayoutPalantype",
