@@ -369,6 +369,7 @@ const RecommendationBox = ({
           onClick={startRecommendedStep}
           className="link-button dib"
           style={{ lineHeight: 2 }}
+          newTabAndIUnderstandTheAccessibilityImplications={true}
         >
           {recommendedNextLessonCallToActionButton} (opens in new tab)
         </OutboundLink>
