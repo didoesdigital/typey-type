@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import InfoIconAndTooltip from "../../../../components/InfoIconAndTooltip";
 import ErrorBoundary from "../../../../components/ErrorBoundary";
 import NumericInput from "react-numeric-input";
@@ -7,7 +7,6 @@ import SettingListItem from "../../../../components/SettingListItem";
 import SpeakWordsHelp from "../SpeakWordsHelp";
 import VoiceSetting from "../VoiceSetting";
 
-import { useAppMethods } from "../../../../states/legacy/AppMethodsContext";
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../../../states/userSettingsState";
 import {
@@ -61,34 +60,6 @@ const UserSettings = ({
   const handleRepetitionsChange = useHandleRepetitionsChange();
   const handleStartFromWordChange = useHandleStartFromWordChange();
   const handleUpcomingWordsLayout = useHandleUpcomingWordsLayout();
-
-  const { setupLesson } = useAppMethods();
-  const mounted = useRef(false);
-  useEffect(() => {
-    if (!mounted.current) {
-      mounted.current = true;
-      return;
-    }
-    // Call whenever settings change
-    setupLesson();
-
-    // TODO: add `setupLesson` to dependency array
-    // after reducing parent component re-renders:
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    userSettings.sortOrder,
-    userSettings.spacePlacement,
-    userSettings.stenoLayout,
-    userSettings.study,
-    userSettings.limitNumberOfWords,
-    userSettings.repetitions,
-    userSettings.startFromWord,
-    userSettings.upcomingWordsLayout,
-    userSettings.newWords,
-    userSettings.seenWords,
-    userSettings.retainedWords,
-    userSettings.simpleTypography,
-  ]);
 
   return (
     <div className="user-settings">
