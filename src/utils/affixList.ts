@@ -54,6 +54,10 @@ export class AffixList {
       }
     }
 
+    // Sort by translation length so that longer affixes are selected first
+    suffixes.sort((a, b) => b[1].length - a[1].length);
+    prefixes.sort((a, b) => b[1].length - a[1].length);
+
     this.suffixes = suffixes;
     this.prefixes = prefixes;
   }
