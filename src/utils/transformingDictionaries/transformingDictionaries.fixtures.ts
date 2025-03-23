@@ -1533,6 +1533,7 @@ const testSuffixesDict = {
   "*FP": "{^ch}",
   "*FPL": "{^sm}",
   "*L": "{^le}",
+  "*LD": "{^led}",
   "*P": "{^p}",
   "*PB": "{^n}",
   "*PBD": "{^nd}",

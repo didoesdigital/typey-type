@@ -296,7 +296,7 @@ describe("create stroke hint for phrase", () => {
       expect(
         createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
         // ).toEqual("KWAS/KWREU/KAUPB/TP*/*U/STKPW*/STKPW*/HR*/-D");
-      ).toEqual("KWAS/KWREU/KAUPB/TP*/*U/STKPW*/STKPW*/*LD/A*U");
+      ).toEqual("KWAS/KWREU/KAUPB/TP*/*U/STKPW*/STKPW*/*LD");
     });
 
     it("with prefix that is not a word that has trailing hyphen and a word", () => {
@@ -312,7 +312,7 @@ describe("create stroke hint for phrase", () => {
       expect(
         createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
         // ).toEqual("TKPWHRAOEU/KAUPB/TP*/*U/STKPW*/STKPW*/HR*/-D");
-      ).toEqual("TKPWHRAOEU/KAUPB/TP*/*U/STKPW*/STKPW*/*LD/A*U");
+      ).toEqual("TKPWHRAOEU/KAUPB/TP*/*U/STKPW*/STKPW*/*LD");
     });
 
     it("with hyphenated compound word and suffix", () => {
