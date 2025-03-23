@@ -62,7 +62,12 @@ export class AffixList {
       }
 
       if (phrase.match(prefixRegex)) {
-        const prefixOutlineWithSlash: PrefixOutlineWithSlash = `${outlinesAndSourceDicts[0][0]}/`;
+        const bestPrefixOutline = rankAffixes(
+          splitIntoStrokesDictsAndNamespaces(outlinesAndSourceDicts),
+          affixMisstrokes,
+          phrase
+        )[0][0];
+        const prefixOutlineWithSlash: PrefixOutlineWithSlash = `${bestPrefixOutline}/`;
         const prefixTextWithNoTPRBGTS: PrefixTextWithNoTPRBGTS = phrase
           .replace("{", "")
           .replace("^}", "");
