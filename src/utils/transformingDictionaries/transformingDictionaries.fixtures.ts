@@ -599,7 +599,7 @@ const testPrefixesDict = {
   "A*RT/RO": "{arthro^}",
   "A*T/RO": "{athero^}",
   "A*T/ROE": "{athero^}",
-  "A*UT": "{auto^}",
+  // "A*UT": "{auto^}", // misstroke
   "A/PHAOEB": "{ameb^}",
   "A/PHEUG/TKA/HRO": "{amygdalo^}",
   "A/PHO*EUPB": "{amino^}",
