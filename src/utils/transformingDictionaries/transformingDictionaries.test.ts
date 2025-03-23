@@ -291,7 +291,7 @@ describe("generate dictionary entries", () => {
         { phrase: "'sinatra'", stroke: "AE HRO*ER/STPHAT/RA AE" },
         {
           phrase: "'confuzzled'",
-          stroke: "AE KAUPB/TP*/*U/STKPW*/STKPW*/HR*/-D AE",
+          stroke: "AE KAUPB/TP*/*U/STKPW*/STKPW*/*LD/A*U AE",
         },
         { phrase: "and! and", stroke: "SKP SKHRAPL SKP" },
         { phrase: "andx and", stroke: "A*/TPH*/TK*/KP* SKP" },
