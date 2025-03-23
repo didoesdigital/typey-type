@@ -136,4 +136,77 @@ describe("AffixList", () => {
       });
     });
   });
+
+  describe("creates an affix list with sorted, ranked prefixes and suffixes", () => {
+    it("prioritises longer translations over shorter translations to select affixes so that the hint for suitors is SAOUT/O*RS not SAOU/TOR/-S", () => {
+      const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
+      const customGlobalLookupDictionary = createGlobalLookupDictionary(
+        emptyPersonalDictionaries,
+        [
+          [
+            {
+              "-S": "{^s}",
+              "O*R": "{^or}",
+              "O*RS": "{^ors}",
+              "SAOU/TOR": "suitor",
+              "SAOUT": "suit",
+              "SAOUT/TOR": "suitor",
+            },
+            LATEST_TYPEY_TYPE_FULL_DICT_NAME,
+          ],
+        ]
+      );
+      new AffixList(customGlobalLookupDictionary);
+
+      expect(new AffixList(customGlobalLookupDictionary)).toEqual({
+        "prefixes": [],
+        "suffixes": [
+          ["/O*RS", "ors"],
+          ["/O*R", "or"],
+          ["/-S", "s"],
+        ],
+      });
+    });
+
+    it("ranks available affix outlines and chooses the first outline to add to the affix list", () => {
+      const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
+      const customGlobalLookupDictionary = createGlobalLookupDictionary(
+        emptyPersonalDictionaries,
+        [
+          [
+            {
+              "STPA": "{^a}",
+              "STPO": "{^o}",
+              "STPE": "{^e}",
+              "STPEU": "{^i}",
+              "STPU": "{^u}",
+              "SKWRA": "{^a}",
+              "SKWRO": "{^o}",
+              "SKWR*E": "{^e}",
+              "SKWRE": "{^e}",
+              "SKWREU": "{^i}",
+              "SKWRU": "{^u}",
+              "KWRA": "{^a}",
+              "KWRO": "{^o}",
+              "KWREU": "{^y}",
+            },
+            LATEST_TYPEY_TYPE_FULL_DICT_NAME,
+          ],
+        ]
+      );
+      new AffixList(customGlobalLookupDictionary);
+
+      expect(new AffixList(customGlobalLookupDictionary)).toEqual({
+        "prefixes": [],
+        "suffixes": [
+          ["/SKWRA", "a"],
+          ["/SKWRO", "o"],
+          ["/SKWRE", "e"],
+          ["/SKWREU", "i"],
+          ["/SKWRU", "u"],
+          ["/KWREU", "y"],
+        ],
+      });
+    });
+  });
 });
