@@ -1815,6 +1815,30 @@ describe("create stroke hint for phrase", () => {
         );
         expect(result).toEqual("PWE/KET/*L");
       });
+
+      it("returns hints using the affix strokes with the longest translation available such as SAOUT/O*RS instead of SAOU/TOR/-S for 'suitors'", () => {
+        const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] =
+          [];
+        const wordOrPhraseMaterial = "suitors";
+        const result = createStrokeHintForPhrase(
+          wordOrPhraseMaterial,
+          createGlobalLookupDictionary(emptyPersonalDictionaries, [
+            [
+              {
+                "-S": "{^s}",
+                "O*R": "{^or}",
+                "O*RS": "{^ors}",
+                "SAOU/TOR": "suitor",
+                "SAOUT": "suit",
+                "SAOUT/TOR": "suitor",
+              },
+              LATEST_TYPEY_TYPE_FULL_DICT_NAME,
+            ],
+          ]),
+          AffixList.getSharedInstance()
+        );
+        expect(result).toEqual("SAOUT/O*RS");
+      });
     });
   });
 
