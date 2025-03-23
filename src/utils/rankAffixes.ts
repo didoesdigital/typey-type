@@ -43,7 +43,6 @@ function rankAffixes(
   arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[],
   affixMisstrokes: StenoDictionary,
   translation: string
-  // affixes: AffixObject = { suffixes: [], prefixes: [] }
 ) {
   arrayOfStrokesAndTheirSourceDictNames.sort((a, b) => {
     if (a[2] === "user" && b[2] !== "user") return -1;

@@ -10,6 +10,7 @@ import type {
   StrokeAndDictionaryAndNamespace,
 } from "../../../types";
 
+// This function shares a lot of code with rankAffixes but handles all dictionary entries
 function rankOutlines(
   arrayOfStrokesAndTheirSourceDictNames: StrokeAndDictionaryAndNamespace[],
   misstrokesJSON: StenoDictionary,
