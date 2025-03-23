@@ -11,6 +11,9 @@ import type {
 
 let SHARED_INSTANCE: AffixObject = { suffixes: [], prefixes: [] };
 
+const prefixRegex = /^\{([A-Za-z0-9.=<>\\:'"#-])+\^\}$/;
+const suffixRegex = /^\{\^([A-Za-z0-9.=<>\\:'"#-])+\}$/;
+
 export class AffixList {
   suffixes: SuffixEntry[];
   prefixes: PrefixEntry[];
@@ -26,8 +29,6 @@ export class AffixList {
   constructor(dict: LookupDictWithNamespacedDicts) {
     const suffixes = [];
     const prefixes = [];
-    const prefixRegex = /^\{([A-Za-z0-9.=<>\\:'"#-])+\^\}$/;
-    const suffixRegex = /^\{\^([A-Za-z0-9.=<>\\:'"#-])+\}$/;
     for (const [phrase, outlinesAndSourceDicts] of dict) {
       if (phrase.match(suffixRegex)) {
         const suffixOutlineWithLeadingSlash: SuffixOutlineWithLeadingSlash = `/${outlinesAndSourceDicts[0][0]}`;
