@@ -158,6 +158,16 @@ const Support = () => {
             <li>
               You can try the{" "}
               <OutboundLink
+                eventLabel="interactive steno demo on the Open Steno Project"
+                to="https://www.openstenoproject.org/demo/"
+              >
+                interactive steno demo on the Open Steno Project
+              </OutboundLink>
+              .
+            </li>
+            <li>
+              You can see the original version of that{" "}
+              <OutboundLink
                 eventLabel="interactive steno demo on StenoKnight Cart Services"
                 to="https://stenoknight.com/kws.html"
               >

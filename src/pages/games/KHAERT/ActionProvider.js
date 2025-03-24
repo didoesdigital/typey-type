@@ -1,4 +1,4 @@
-import { shuffle } from "d3-array";
+import { shuffle, range } from "d3-array";
 import { timeMonth } from "d3-time";
 import { botName } from "./config";
 import { lessonRepliesMap } from "./constants";
@@ -102,12 +102,13 @@ class ActionProvider {
   handleTrySteno() {
     const options = [
       ["Ploverpad", "https://stenopad.stenokeyboards.com/"],
+      ["Open Steno Project Demo", "https://www.openstenoproject.org/demo/"],
       [
         "StenoKnight's Interactive Steno Demo",
         "https://stenoknight.com/plover/ploverdemo/ploverdemo.html",
       ],
     ];
-    const selectedOption = Math.random() >= 0.5 ? options[0] : options[1];
+    const selectedOption = options[shuffle(range(options.length))[0]];
     const [linkText, linkUrl] = selectedOption;
     const botMessage = this.createChatBotMessage(
       `To try steno in the browser with zero setup, you could visit:`,

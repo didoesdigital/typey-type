@@ -58,6 +58,7 @@ export const keyboardFunctions = [
 ];
 
 export const tryStenoKeywords = [
+  "demo",
   "try steno",
   "test steno",
   "give steno a", // … go/try
