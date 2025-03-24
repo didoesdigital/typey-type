@@ -67,7 +67,7 @@ describe("isOneSyllable", () => {
 
   it("returns false for phrases with punctuation", async () => {
     expect(
-      isOneSyllable("KHR-PB/STREUPBG/PREPB/#T-/#A/#A/PR*EPB", ":string(255)")
+      isOneSyllable("KHR-PB/STREUPBG/PREPB/#T/#A/#A/PR*EPB", ":string(255)")
     ).toEqual(false);
   });
 
