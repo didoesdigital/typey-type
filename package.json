@@ -117,5 +117,5 @@
       }
     ]
   },
-  "packageManager": "yarn@4.0.1"
+  "packageManager": "yarn@4.7.0"
 }
