@@ -36,7 +36,7 @@ export class AffixList {
     return SHARED_INSTANCE;
   }
 
-  static setSharedInstance(inst: any) {
+  static setSharedInstance(inst: AffixObject) {
     SHARED_INSTANCE = inst;
   }
 

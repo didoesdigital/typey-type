@@ -10,7 +10,7 @@ import {
 } from "./transformingDictionaries.fixtures";
 import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "constant/latestTypeyTypeFullDictName";
 
-import type { LookupDictWithNamespacedDicts } from "../../types";
+import type { LookupDictWithNamespacedDicts, Outline } from "../../types";
 
 const globalLookupDictionary = createGlobalLookupDictionary(
   personalDictionaries,
@@ -43,8 +43,8 @@ describe("add outlines for words to combined lookup dict", () => {
     //   "SED": "sed",
     //   "SOUPBSD": "sounds"
     // }));
-    let seenSet = new Set();
-    let expectedSet = new Set();
+    let seenSet = new Set<Outline>();
+    let expectedSet = new Set<Outline>();
     expectedSet.add("TO");
     expectedSet.add("O");
     expectedSet.add("SED");

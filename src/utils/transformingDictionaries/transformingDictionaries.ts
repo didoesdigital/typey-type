@@ -2,6 +2,7 @@ import createStrokeHintForPhrase from "./createStrokeHintForPhrase";
 import type {
   DictName,
   LookupDictWithNamespacedDicts,
+  Outline,
   StenoDictionary,
 } from "../../types";
 
@@ -39,16 +40,28 @@ function generateListOfWordsAndStrokes(
 //   return combinedLookupDictionary;
 // }
 
+/**
+ * This function takes all the entries in a newly provided dictionary and adds
+ * its outlines to the combined lookup dictionary unless a specific outline has
+ * already been used for another word. An outline can only be used for 1 word
+ * using Plover and that will be defined based on dictionary order.
+ *
+ * @param dictContent - the next Typey Type or personal dictionary in order
+ * @param combinedLookupDictionary - the word-first lookup dictionary we have so far
+ * @param dictName - the name of this dictionary
+ * @param outlinesWeHaveSeen - outlines we have already added for other words
+ * @returns the combined lookup dictionary with added entries and the updated list of outlines we've seen
+ */
 function addOutlinesToWordsInCombinedDict(
   dictContent: StenoDictionary,
   combinedLookupDictionary: LookupDictWithNamespacedDicts,
   dictName: DictName,
-  outlinesWeHaveSeen: any //Set<string>
-) {
+  outlinesWeHaveSeen: Set<Outline>
+): [LookupDictWithNamespacedDicts, Set<Outline>] {
   for (let [outline, translation] of Object.entries(dictContent)) {
     let seen = outlinesWeHaveSeen.has(outline);
     if (!seen) {
-      // current = [[PWAZ: dict.json], [PWA*Z: typey.json]];
+      // current = [[PWAZ, user:dict.json], [PWA*Z, typey:typey.json]];
       let current = combinedLookupDictionary.get(translation);
       if (current) {
         current.push([outline, dictName]);

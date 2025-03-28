@@ -50,7 +50,7 @@ function generateCustomLesson(
     }
   }
 
-  const ruleFilters = (entry: [string, string]) =>
+  const ruleFilters = (entry: [Outline, Translation]) =>
     filters.every(([rule, expected]) => rule(...entry) === expected);
 
   const entriesList = [];

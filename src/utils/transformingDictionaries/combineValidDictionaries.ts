@@ -1,6 +1,7 @@
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
 import { addOutlinesToWordsInCombinedDict } from "./transformingDictionaries";
-import {
+import type {
+  Outline,
   PersonalDictionaryNameAndContents,
   ReadDictionariesData,
 } from "../../types";
@@ -12,7 +13,7 @@ const combineValidDictionaries = (
   let combinedLookupDictionary = new Map();
   let numberOfPersonalDictionaries =
     personalDictionariesNamesAndContents.length;
-  let outlinesWeHaveSeen = new Set();
+  let outlinesWeHaveSeen = new Set<Outline>();
   // eslint-disable-next-line
   let _;
 
