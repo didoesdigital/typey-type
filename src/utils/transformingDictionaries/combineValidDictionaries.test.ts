@@ -22,7 +22,7 @@ describe("combining valid dictionaries without sorting", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   it("returns a combined Map with strokes left unsorted which means dictionary insertion order and alphabetic where personal dictionaries are processed first, then Typey Type", () => {

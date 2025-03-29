@@ -20,7 +20,7 @@ describe("findFingerspellingOutline", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   it('returns fingerspelled outline for phrase `houses?" It`', () => {

@@ -20,7 +20,7 @@ describe("findSingleLetterWordOutline", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   it("returns outline for word “a” in the middle of a sentence with no personal dictionary entry", () => {

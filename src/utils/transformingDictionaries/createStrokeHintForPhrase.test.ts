@@ -23,7 +23,7 @@ describe("create stroke hint for phrase", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   describe("returns string showing all the space or slash separated strokes to write a whole phrase", () => {

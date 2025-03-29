@@ -21,7 +21,7 @@ describe("create a global lookup dictionary", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   it("returns combined lookup Map of words with strokes and their source dictionaries", () => {

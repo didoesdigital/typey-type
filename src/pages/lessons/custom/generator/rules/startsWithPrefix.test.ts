@@ -16,7 +16,7 @@ describe("startsWithPrefix", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   it("returns true for entries that start with a prefix outline that matches the start of the translation", async () => {

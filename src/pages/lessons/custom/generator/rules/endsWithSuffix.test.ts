@@ -14,7 +14,7 @@ describe("endsWithSuffix", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   it("returns true for word ending in suffix text and outline ending in suffix outline", async () => {

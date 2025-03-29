@@ -23,7 +23,7 @@ describe("add outlines for words to combined lookup dict", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   it("returns combined dict including misstrokes", () => {
@@ -93,7 +93,7 @@ describe("generate dictionary entries", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   it("returns array of phrases and strokes for top 100 words", () => {

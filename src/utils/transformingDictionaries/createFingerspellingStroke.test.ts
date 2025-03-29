@@ -20,7 +20,7 @@ describe("createFingerspellingStroke", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   it("returns fingerspelled strokes for Kosciusko", () => {

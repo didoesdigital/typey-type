@@ -19,7 +19,7 @@ describe("AffixList", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   describe("creates an affix list with prefixes and suffixes, excluding certain items", () => {

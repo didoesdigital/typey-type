@@ -29,7 +29,7 @@ describe("rankOutlines", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   describe("sorts the many outlines for quadruplicate", () => {

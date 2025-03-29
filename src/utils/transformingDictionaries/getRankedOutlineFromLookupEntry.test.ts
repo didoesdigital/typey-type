@@ -14,7 +14,7 @@ describe("getRankedOutlineFromLookupEntry", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   it("splits the dict names into namespaces and returns the ranked outline with provided affixList", () => {

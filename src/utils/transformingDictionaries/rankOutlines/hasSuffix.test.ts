@@ -16,7 +16,7 @@ describe("hasSuffix", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   it("returns true for outline with suffix", () => {

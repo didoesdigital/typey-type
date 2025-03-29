@@ -16,7 +16,7 @@ describe("penaliseSlashesWithoutPrefixesOrSuffixes", () => {
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance([]);
+    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
   });
 
   it("returns penalty of 2 for multi-stroke outlines without affix strokes", () => {
