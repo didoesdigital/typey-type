@@ -855,7 +855,6 @@ const testPrefixesDict = {
   "KORPBT": "{contra^}",
   "KORT/KO": "{cortico^}",
   "KORT/KOE": "{cortico^}",
-  "KOUFRPBT": "{counter^}",
   "KOURPBT": "{counter^}",
   "KPAOE/TPHO": "{xeno^}",
   "KPAOE/TPHOE": "{xeno^}",
