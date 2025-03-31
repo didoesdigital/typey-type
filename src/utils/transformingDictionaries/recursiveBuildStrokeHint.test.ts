@@ -7,7 +7,7 @@ import {
   personalDictionaries,
 } from "./transformingDictionaries.fixtures";
 import unknownStroke from "../../constant/unknownStroke";
-import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "constant/latestTypeyTypeFullDictName";
+import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "../../constant/latestTypeyTypeFullDictName";
 
 import type { PersonalDictionaryNameAndContents } from "../../types";
 

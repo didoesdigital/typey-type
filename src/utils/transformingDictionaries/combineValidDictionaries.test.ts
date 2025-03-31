@@ -6,7 +6,7 @@ import {
   personalDictionaries,
 } from "./transformingDictionaries.fixtures";
 import { AffixList } from "../affixList";
-import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "constant/latestTypeyTypeFullDictName";
+import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "../../constant/latestTypeyTypeFullDictName";
 import type { PersonalDictionaryNameAndContents } from "../../types";
 
 const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };

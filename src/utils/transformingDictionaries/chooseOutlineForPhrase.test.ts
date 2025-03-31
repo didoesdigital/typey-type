@@ -6,7 +6,7 @@ import {
   personalDictionaries,
   testTypeyTypeExtras,
 } from "./transformingDictionaries.fixtures";
-import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "constant/latestTypeyTypeFullDictName";
+import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "../../constant/latestTypeyTypeFullDictName";
 
 import type { LookupDictWithNamespacedDicts } from "../../types";
 
