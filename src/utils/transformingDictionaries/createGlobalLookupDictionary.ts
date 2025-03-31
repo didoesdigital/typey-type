@@ -1,7 +1,6 @@
 import SOURCE_NAMESPACES from "../../constant/sourceNamespaces";
-
 import combineValidDictionaries from "./combineValidDictionaries";
-import {
+import type {
   LookupDictWithNamespacedDicts,
   LookupDictWithNamespacedDictsAndConfig,
   PersonalDictionaryNameAndContents,
@@ -30,7 +29,6 @@ const createGlobalLookupDictionary = (
     (readDictData) => `${SOURCE_NAMESPACES.get("typey")}:${readDictData[1]}`
   );
 
-  // let sortedAndCombinedLookupDictionary = rankAllOutlinesInCombinedLookupDictionary(combinedLookupDictionary); // has a bug; instead of sorted entire dict, we sort per entry used within chooseOutlineForPhrase function
   let configuration = [
     ...typeyDictsConfigEntries,
     ...personalDictionariesNamesAndContents.map(
