@@ -12,7 +12,9 @@ describe("hasContractionsPluralsOrPossessives", () => {
   });
 
   it("returns false for L'Oreal", async () => {
-    expect(hasContractionsPluralsOrPossessives("HRAUR/KWRAL", "L'Oreal")).toEqual(false);
+    expect(
+      hasContractionsPluralsOrPossessives("HRAUR/KWRAL", "L'Oreal")
+    ).toEqual(false);
   });
 
   it("returns false for test", async () => {

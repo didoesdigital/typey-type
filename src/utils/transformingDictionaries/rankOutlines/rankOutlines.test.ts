@@ -1,35 +1,25 @@
+import AFFIXES from "../../affixes/affixes";
+import { testAffixes } from "../transformingDictionaries.fixtures";
 import rankOutlines from "./rankOutlines";
-import createGlobalLookupDictionary from "../createGlobalLookupDictionary";
-import { AffixList } from "../../affixList";
-import {
-  testTypeyTypeDict,
-  testTypeyTypeExtras,
-  personalDictionaries,
-} from "../transformingDictionaries.fixtures";
-import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "../../../constant/latestTypeyTypeFullDictName";
 
 import type {
   AffixObject,
   StrokeAndDictionaryAndNamespace,
 } from "../../../types";
 
-const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
-
-const globalLookupDictionary = createGlobalLookupDictionary(
-  personalDictionaries,
-  [[testTypeyTypeFull, LATEST_TYPEY_TYPE_FULL_DICT_NAME]]
-);
-
-let sharedAffixes = AffixList.getSharedInstance();
-
 describe("rankOutlines", () => {
+  beforeAll(() => {
+    AFFIXES.setLoadFunction(() => {
+      return testAffixes;
+    });
+  });
+
   beforeEach(() => {
-    AffixList.setSharedInstance(new AffixList(globalLookupDictionary));
-    sharedAffixes = AffixList.getSharedInstance();
+    AFFIXES.setSharedAffixes(testAffixes);
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
+    AFFIXES.setSharedAffixes({ prefixes: [], suffixes: [] });
   });
 
   describe("sorts the many outlines for quadruplicate", () => {
@@ -78,7 +68,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "quadruplicate",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual(
         // As we presently keep original order of a and b when penalties match but one uses a
@@ -377,7 +367,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "GitHub",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["TKPWEUT/HUB", "code.json", "typey"],
@@ -400,7 +390,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "GitHub",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["TKPWEUT/HUB", "typey-type.json", "typey"],
@@ -423,7 +413,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "GitHub",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["TKWEUT/HUB", "code.json", "typey"],
@@ -450,7 +440,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "exercises",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["KPERSZ", "typey-type.json", "typey"],
@@ -479,7 +469,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "exercises",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["KPERSZ", "typey-type.json", "typey"],
@@ -514,7 +504,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "exercises",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["KPERSZ", "typey-type.json", "typey"],
@@ -545,7 +535,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "slept",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["TEFT/SHREPT", "plover.json", "plover"],
@@ -567,7 +557,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "intermediate",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["EUPBT/PHAOET", "plover.json", "plover"],
@@ -588,7 +578,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "credit card",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["KRED/EUT/KARD", "plover.json", "plover"],
@@ -636,7 +626,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "and",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         // This is the order when prioritising phrasing brief starters:
@@ -684,7 +674,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "cite",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["SAO*EUT", "briefs.json", "user"],
@@ -725,7 +715,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "quiz",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["KWEUZ", "plover.json", "plover"],
@@ -753,7 +743,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "he",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["E", "magnum.json", "user"],
@@ -781,7 +771,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "test",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["TEFL", "plover.json", "plover"],
@@ -804,7 +794,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "test",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["TAEFT", "user.json", "user"],
@@ -825,7 +815,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "test",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["TAEFT/TAEFTS", "user.json", "user"],
@@ -846,7 +836,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "test",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["T*EFT/T*EFT", "user.json", "user"],
@@ -873,7 +863,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "grasshopper",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["TKPWHRFRPBLG", "user.json", "user"],
@@ -903,7 +893,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "upstarted",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["AUP/STARTD", "plover.json", "plover"],
@@ -971,7 +961,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "upstarted",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["TKPWET", "top-10000-project-gutenberg-words.json", "typey"],
@@ -1000,7 +990,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "it'd",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         // This is the order when prioritising phrasing brief starters:
@@ -1028,7 +1018,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "it was",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         // This is the order when prioritising phrasing brief starters:
@@ -1071,7 +1061,7 @@ describe("rankOutlines", () => {
           arrayOfStrokesAndTheirSourceDictNames,
           misstrokesJSON,
           "hors d'oeuvres",
-          sharedAffixes
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual([
         ["HOR/TKEFRBZ", "condensed-strokes.json", "typey"],
@@ -1116,7 +1106,7 @@ describe("rankOutlines", () => {
   //     ]
   //     const misstrokesJSON = {};
 
-  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upholstery", sharedAffixes)).toEqual([
+  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upholstery", AFFIXES.getSharedAffixes())).toEqual([
   //       ["AUP/HOELT/REU", "personal.json"],
   //       ["AUP/HOFLT/REU", "personal.json"],
   //       ["AUP/HOL/STREU", "personal.json"],
@@ -1153,7 +1143,7 @@ describe("rankOutlines", () => {
   //     ];
   //     const misstrokesJSON = {};
 
-  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upholstery", sharedAffixes)).toEqual([
+  //     expect(rankOutlines(arrayOfStrokesAndTheirSourceDictNames, misstrokesJSON, "upholstery", AFFIXES.getSharedAffixes())).toEqual([
   //       ["SA*EF", "user.json"],
   //       ["SAEBGS", "typey-type.json"],
   //       ["SAEBGS", "dict.json"],

@@ -1,4 +1,4 @@
-import { AffixList } from "../affixList";
+import AFFIXES from "../affixes/affixes";
 import recursiveBuildStrokeHint from "./recursiveBuildStrokeHint";
 
 import type { LookupDictWithNamespacedDicts } from "../../types";
@@ -6,7 +6,7 @@ import type { LookupDictWithNamespacedDicts } from "../../types";
 const createStrokeHintForPhrase = (
   wordOrPhraseMaterial: string,
   globalLookupDictionary: LookupDictWithNamespacedDicts,
-  affixList = AffixList.getSharedInstance()
+  affixList = AFFIXES.getSharedAffixes()
 ) => {
   return (
     recursiveBuildStrokeHint(

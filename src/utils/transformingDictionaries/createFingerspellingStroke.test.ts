@@ -1,30 +1,38 @@
 import createFingerspellingStroke from "./createFingerspellingStroke";
-import { AffixList } from "../affixList";
+import AFFIXES from "../affixes/affixes";
+import testAffixes from "../affixes/testAffixes.fixtures";
 import type { LookupDictWithNamespacedDicts } from "../../types";
 
 describe("createFingerspellingStroke", () => {
+  beforeAll(() => {
+    AFFIXES.setLoadFunction(() => {
+      return testAffixes;
+    });
+  });
+
   beforeEach(() => {
-    const affixList = new AffixList(
-      new Map([
-        ["{^en}", [["*EPB", "typey:typey-type.json"]]],
-        ["{^ment}", [["*PLT", "typey:typey-type.json"]]],
-        ["{a^}", [["A", "typey:typey-type.json"]]],
-        ["{in^}", [["EUPB", "typey:typey-type.json"]]],
-        ["{^ly}", [["HREU", "typey:typey-type.json"]]],
-        ["{con^}", [["KAUPB", "typey:typey-type.json"]]],
-        ["{^ent}", [["EPBT", "typey:typey-type.json"]]],
-        ["{^ed}", [["-D", "typey:typey-type.json"]]],
-      ])
-    );
-    AffixList.setSharedInstance(affixList);
+    AFFIXES.setSharedAffixes({
+      prefixes: [
+        ["A/", "a"],
+        ["EUPB/", "in"],
+        ["KAUPB/", "con"],
+      ],
+      suffixes: [
+        ["/*EPB", "en"],
+        ["/*PLT", "ment"],
+        ["/HREU", "ly"],
+        ["/EPBT", "ent"],
+        ["/-D", "ed"],
+      ],
+    });
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
+    AFFIXES.setSharedAffixes({ prefixes: [], suffixes: [] });
   });
 
   it("returns fingerspelled strokes for Kosciusko", () => {
-    const affixList = AffixList.getSharedInstance();
+    const affixList = AFFIXES.getSharedAffixes();
     const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["a", [["AEU", "typey:typey-type.json"]]],
     ]);
@@ -34,7 +42,7 @@ describe("createFingerspellingStroke", () => {
   });
 
   it('returns fingerspelled strokes for "es"', () => {
-    const affixList = AffixList.getSharedInstance();
+    const affixList = AFFIXES.getSharedAffixes();
     const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["{&e}", [["E*", "typey:typey-type.json"]]],
       ["{&s}", [["S*", "typey:typey-type.json"]]],
@@ -45,7 +53,7 @@ describe("createFingerspellingStroke", () => {
   });
 
   it("returns empty string in strokes for €100", () => {
-    const affixList = AffixList.getSharedInstance();
+    const affixList = AFFIXES.getSharedAffixes();
     const lookupDict: LookupDictWithNamespacedDicts = new Map([
       ["a", [["AEU", "typey:typey-type.json"]]],
     ]);
@@ -55,7 +63,7 @@ describe("createFingerspellingStroke", () => {
   });
 
   // xit("returns number bar key and letter keys for numbers", () => {
-  //   const affixList = AffixList.getSharedInstance();
+  //   const affixList = AFFIXES.getSharedAffixes();
   //   const lookupDict: LookupDictWithNamespacedDicts = new Map([
   //     ["a", [["AEU", "typey:typey-type.json"]]],
   //   ]);

@@ -1,27 +1,23 @@
-import createGlobalLookupDictionary from "./createGlobalLookupDictionary";
-import { AffixList } from "../affixList";
-import {
-  testTypeyTypeDict,
-  testTypeyTypeExtras,
-  personalDictionaries,
-} from "./transformingDictionaries.fixtures";
 import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "../../constant/latestTypeyTypeFullDictName";
+import AFFIXES from "../affixes/affixes";
+import createGlobalLookupDictionary from "./createGlobalLookupDictionary";
+import { testAffixes } from "./transformingDictionaries.fixtures";
+
 import type { PersonalDictionaryNameAndContents } from "../../types";
 
-const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
-
-const globalLookupDictionary = createGlobalLookupDictionary(
-  personalDictionaries,
-  [[testTypeyTypeFull, LATEST_TYPEY_TYPE_FULL_DICT_NAME]]
-);
-
 describe("create a global lookup dictionary", () => {
+  beforeAll(() => {
+    AFFIXES.setLoadFunction(() => {
+      return testAffixes;
+    });
+  });
+
   beforeEach(() => {
-    AffixList.setSharedInstance(new AffixList(globalLookupDictionary));
+    AFFIXES.setSharedAffixes(testAffixes);
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
+    AFFIXES.setSharedAffixes({ prefixes: [], suffixes: [] });
   });
 
   it("returns combined lookup Map of words with strokes and their source dictionaries", () => {

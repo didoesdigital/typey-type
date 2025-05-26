@@ -3,13 +3,20 @@ import getTypeyTypeDict, {
   allTypeyTypeDictNames,
 } from "../getData/getTypeyTypeDicts";
 import createGlobalLookupDictionary from "../transformingDictionaries/createGlobalLookupDictionary";
-import { AffixList } from "../affixList";
+import getAffixesFromLookupDict from "utils/affixes/getAffixesFromLookupDict";
+import misstrokesJSON from "../../json/misstrokes.json";
+import AFFIXES from "utils/affixes/affixes";
+import getAffixMisstrokesFromMisstrokes from "utils/affixes/getAffixMisstrokesFromMisstrokes";
 import { loadPersonalDictionariesFromLocalStorage } from "../typey-type";
 
 import type {
   PersonalDictionaryNameAndContents,
   ImportedPersonalDictionaries,
+  StenoDictionary,
 } from "../../types";
+
+const misstrokes = misstrokesJSON as StenoDictionary;
+const affixMisstrokes = getAffixMisstrokesFromMisstrokes(misstrokes);
 
 // @ts-ignore TODO
 let loadingPromise = null;
@@ -84,8 +91,16 @@ function fetchAndSetupGlobalDict(
       this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
       // @ts-ignore TODO
       this.setState({ globalLookupDictionaryLoaded: true });
-      const affixList = new AffixList(sortedAndCombinedLookupDictionary);
-      AffixList.setSharedInstance(affixList);
+
+      const newAffixes = getAffixesFromLookupDict(
+        sortedAndCombinedLookupDictionary,
+        affixMisstrokes
+      );
+      const affixesLoadFunction = () => {
+        return newAffixes;
+      };
+      AFFIXES.setLoadFunction(affixesLoadFunction);
+      AFFIXES.setSharedAffixes(newAffixes);
     });
 
     return loadingPromise;

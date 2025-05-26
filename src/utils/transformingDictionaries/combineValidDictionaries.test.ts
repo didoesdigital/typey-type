@@ -1,28 +1,21 @@
 import combineValidDictionaries from "./combineValidDictionaries";
-import createGlobalLookupDictionary from "./createGlobalLookupDictionary";
-import {
-  testTypeyTypeDict,
-  testTypeyTypeExtras,
-  personalDictionaries,
-} from "./transformingDictionaries.fixtures";
-import { AffixList } from "../affixList";
-import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "../../constant/latestTypeyTypeFullDictName";
+import AFFIXES from "../affixes/affixes";
+import testAffixes from "../affixes/testAffixes.fixtures";
 import type { PersonalDictionaryNameAndContents } from "../../types";
 
-const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
-
-const globalLookupDictionary = createGlobalLookupDictionary(
-  personalDictionaries,
-  [[testTypeyTypeFull, LATEST_TYPEY_TYPE_FULL_DICT_NAME]]
-);
-
 describe("combining valid dictionaries without sorting", () => {
+  beforeAll(() => {
+    AFFIXES.setLoadFunction(() => {
+      return testAffixes;
+    });
+  });
+
   beforeEach(() => {
-    AffixList.setSharedInstance(new AffixList(globalLookupDictionary));
+    AFFIXES.setSharedAffixes(testAffixes);
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
+    AFFIXES.setSharedAffixes({ prefixes: [], suffixes: [] });
   });
 
   it("returns a combined Map with strokes left unsorted which means dictionary insertion order and alphabetic where personal dictionaries are processed first, then Typey Type", () => {

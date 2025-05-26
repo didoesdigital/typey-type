@@ -241,6 +241,8 @@ export type AffixItem = [
  *   prefixes: [["A*UT/", "auto"], ["TPHRAOUR/", "fluoro"]],
  *   suffixes: [["/WAL", "ual"], ["/AOEUBL", "izable"]]
  * }
+ *
+ * Note: there will be only one, "best" outline/entry per affix translation
  */
 export type AffixObject = {
   prefixes: AffixItem[];

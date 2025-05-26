@@ -1,30 +1,25 @@
-import recursiveBuildStrokeHint from "./recursiveBuildStrokeHint";
-import createGlobalLookupDictionary from "./createGlobalLookupDictionary";
-import { AffixList } from "../affixList";
-import {
-  testTypeyTypeDict,
-  testTypeyTypeExtras,
-  personalDictionaries,
-} from "./transformingDictionaries.fixtures";
-import unknownStroke from "../../constant/unknownStroke";
 import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "../../constant/latestTypeyTypeFullDictName";
+import unknownStroke from "../../constant/unknownStroke";
+import AFFIXES from "../affixes/affixes";
+import createGlobalLookupDictionary from "./createGlobalLookupDictionary";
+import recursiveBuildStrokeHint from "./recursiveBuildStrokeHint";
+import { testAffixes } from "./transformingDictionaries.fixtures";
 
 import type { PersonalDictionaryNameAndContents } from "../../types";
 
-const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
-
-const globalLookupDictionary = createGlobalLookupDictionary(
-  personalDictionaries,
-  [[testTypeyTypeFull, LATEST_TYPEY_TYPE_FULL_DICT_NAME]]
-);
-
 describe("recursively build stroke hint for phrase", () => {
+  beforeAll(() => {
+    AFFIXES.setLoadFunction(() => {
+      return testAffixes;
+    });
+  });
+
   beforeEach(() => {
-    AffixList.setSharedInstance(new AffixList(globalLookupDictionary));
+    AFFIXES.setSharedAffixes(testAffixes);
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
+    AFFIXES.setSharedAffixes({ prefixes: [], suffixes: [] });
   });
 
   describe("no matches", () => {
@@ -43,7 +38,7 @@ describe("recursively build stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance(),
+          AFFIXES.getSharedAffixes(),
           25
         );
         expect(result).toEqual(unknownStroke);
@@ -65,7 +60,7 @@ describe("recursively build stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance(),
+          AFFIXES.getSharedAffixes(),
           0
         );
         expect(result).toEqual(unknownStroke);

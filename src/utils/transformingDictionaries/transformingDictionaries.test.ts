@@ -3,11 +3,12 @@ import {
   generateListOfWordsAndStrokes,
 } from "./transformingDictionaries";
 import createGlobalLookupDictionary from "./createGlobalLookupDictionary";
-import { AffixList } from "../affixList";
 import {
   testTypeyTypeDict,
   personalDictionaries,
+  testAffixes,
 } from "./transformingDictionaries.fixtures";
+import AFFIXES from "../affixes/affixes";
 import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "../../constant/latestTypeyTypeFullDictName";
 
 import type { LookupDictWithNamespacedDicts, Outline } from "../../types";
@@ -18,12 +19,18 @@ const globalLookupDictionary = createGlobalLookupDictionary(
 );
 
 describe("add outlines for words to combined lookup dict", () => {
+  beforeAll(() => {
+    AFFIXES.setLoadFunction(() => {
+      return testAffixes;
+    });
+  });
+
   beforeEach(() => {
-    AffixList.setSharedInstance(new AffixList(globalLookupDictionary));
+    AFFIXES.setSharedAffixes(testAffixes);
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
+    AFFIXES.setSharedAffixes({ prefixes: [], suffixes: [] });
   });
 
   it("returns combined dict including misstrokes", () => {
@@ -88,12 +95,18 @@ describe("add outlines for words to combined lookup dict", () => {
 });
 
 describe("generate dictionary entries", () => {
+  beforeAll(() => {
+    AFFIXES.setLoadFunction(() => {
+      return testAffixes;
+    });
+  });
+
   beforeEach(() => {
-    AffixList.setSharedInstance(new AffixList(globalLookupDictionary));
+    AFFIXES.setSharedAffixes(testAffixes);
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
+    AFFIXES.setSharedAffixes({ prefixes: [], suffixes: [] });
   });
 
   it("returns array of phrases and strokes for top 100 words", () => {

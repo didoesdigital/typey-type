@@ -1,4 +1,4 @@
-import { AffixList } from "../utils/affixList";
+import AFFIXES from "../utils/affixes/affixes";
 import rankOutlines from "../utils/transformingDictionaries/rankOutlines/rankOutlines";
 
 import misstrokesJSON from "../json/misstrokes.json";
@@ -21,7 +21,7 @@ function hasEmojiVariantSelector(lookupText: string) {
 function lookupListOfStrokesAndDicts(
   phrase: string,
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig,
-  affixList = AffixList.getSharedInstance()
+  affixList = AFFIXES.getSharedAffixes()
 ): [StrokeAndDictionaryAndNamespace[], string] {
   let lookupText = phrase;
   let modifiedWordOrPhrase = lookupText.slice();

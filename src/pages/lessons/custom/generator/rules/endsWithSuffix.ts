@@ -1,13 +1,9 @@
-// import AFFIXES from "../../consts/affixes.json";
-import { AffixList } from "../../../../../utils/affixList";
+import AFFIXES from "../../../../../utils/affixes/affixes";
 
-const endsWithSuffix = (outline: string, translation: string) => {
-  const AFFIXES = AffixList.getSharedInstance();
-
-  return AFFIXES.suffixes.some(
+const endsWithSuffix = (outline: string, translation: string) =>
+  AFFIXES.getSharedAffixes().suffixes.some(
     ([suffixOutline, suffixText]) =>
       outline.endsWith(suffixOutline) && translation.endsWith(suffixText)
   );
-};
 
 export default endsWithSuffix;

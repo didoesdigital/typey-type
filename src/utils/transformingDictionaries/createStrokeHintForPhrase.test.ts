@@ -1,33 +1,41 @@
+import misstrokesJSON from "../../json/misstrokes.json";
 import createStrokeHintForPhrase from "./createStrokeHintForPhrase";
 import createGlobalLookupDictionary from "./createGlobalLookupDictionary";
-import { AffixList } from "../affixList";
 import {
-  testTypeyTypeDict,
-  testTypeyTypeExtras,
-  personalDictionaries,
+  testGlobalLookupDictionary as globalLookupDictionary,
+  testAffixes,
 } from "./transformingDictionaries.fixtures";
+import AFFIXES from "../affixes/affixes";
 import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "../../constant/latestTypeyTypeFullDictName";
+import getAffixMisstrokesFromMisstrokes from "../affixes/getAffixMisstrokesFromMisstrokes";
+import getAffixesFromLookupDict from "../affixes/getAffixesFromLookupDict";
 
-import type { PersonalDictionaryNameAndContents } from "../../types";
+import type {
+  PersonalDictionaryNameAndContents,
+  StenoDictionary,
+} from "../../types";
 
-const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
-
-const globalLookupDictionary = createGlobalLookupDictionary(
-  personalDictionaries,
-  [[testTypeyTypeFull, LATEST_TYPEY_TYPE_FULL_DICT_NAME]]
-);
+const misstrokes = misstrokesJSON as StenoDictionary;
 
 describe("create stroke hint for phrase", () => {
+  beforeAll(() => {
+    AFFIXES.setLoadFunction(() => {
+      return testAffixes;
+    });
+  });
+
   beforeEach(() => {
-    AffixList.setSharedInstance(new AffixList(globalLookupDictionary));
+    AFFIXES.setSharedAffixes(testAffixes);
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
+    AFFIXES.setSharedAffixes({ prefixes: [], suffixes: [] });
   });
 
   describe("returns string showing all the space or slash separated strokes to write a whole phrase", () => {
-    it('showing "KPA/AEU KPA/TPAR/PHER" for "A Farmer"', () => {
+    it('showing slash separated words with capitalisation strokes for "A Farmer"', () => {
+      // Note: we used to do space-separated strokes for separate words but that caused dictionary issues so now it's all slashes all the time
+      // it('showing "KPA/AEU KPA/TPAR/PHER" for "A Farmer"', () => {
       let wordOrPhraseMaterial = "A Farmer";
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("KPA/AEU KPA/TPAR/PHER");
       expect(
@@ -35,9 +43,8 @@ describe("create stroke hint for phrase", () => {
       ).toEqual("KPA/AEU/KPA/TPAR/PHER");
     });
 
-    it('showing "*EU/TP*P/A*/R*/PH*/*E/R*" for "iFarmer"', () => {
+    it('showing sensible slash separated strokes for "iFarmer"', () => {
       let wordOrPhraseMaterial = "iFarmer";
-      // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("*EU/TP*P/A*/R*/PH*/*E/R*");
       expect(
         createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)
       ).toEqual("*EU/KPA*/TPAR/PHER");
@@ -655,12 +662,16 @@ describe("create stroke hint for phrase", () => {
           ],
         ]
       );
+      AFFIXES.setSharedAffixes({
+        prefixes: [],
+        suffixes: [["/KROPL", ".com"]],
+      });
 
       expect(
         createStrokeHintForPhrase(
           wordOrPhraseMaterial,
           customGlobalLookupDictionary,
-          new AffixList(customGlobalLookupDictionary)
+          AFFIXES.getSharedAffixes()
         )
       ).toEqual("TK*/*EU/TK*/O*/*E/S*/TK*/*EU/TKPW*/*EU/T*/A*/HR*/KROPL");
       // expect(createStrokeHintForPhrase(wordOrPhraseMaterial, globalLookupDictionary)).toEqual("TK*/*EU/TK*/O*/*E/S*/TK*/*EU/TKPW*/*EU/T*/A*/HR* KROPL");
@@ -1148,7 +1159,7 @@ describe("create stroke hint for phrase", () => {
             LATEST_TYPEY_TYPE_FULL_DICT_NAME,
           ],
         ]),
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       );
       expect(result).toEqual("WEUS");
     });
@@ -1169,7 +1180,7 @@ describe("create stroke hint for phrase", () => {
             LATEST_TYPEY_TYPE_FULL_DICT_NAME,
           ],
         ]),
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       );
       expect(result).toEqual("WR-PT");
     });
@@ -1669,12 +1680,12 @@ describe("create stroke hint for phrase", () => {
   });
 
   describe("McKenna", () => {
-    it("returns a mostly fingerspelling hint without erroneous spaces", () => {
+    it("returns a cobbled together hint without erroneous spaces", () => {
       const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
       let wordOrPhraseMaterial = "McKenna";
-      const result = createStrokeHintForPhrase(
-        wordOrPhraseMaterial,
-        createGlobalLookupDictionary(emptyPersonalDictionaries, [
+      const customGlobalLookupDictionary = createGlobalLookupDictionary(
+        emptyPersonalDictionaries,
+        [
           [
             {
               "*PB": "{^n}",
@@ -1687,9 +1698,22 @@ describe("create stroke hint for phrase", () => {
             },
             LATEST_TYPEY_TYPE_FULL_DICT_NAME,
           ],
-        ])
+        ]
       );
-      // expect(result).toEqual("PH-BG/KEPB/*PB/KWRA");
+
+      const customAffixMisstrokes =
+        getAffixMisstrokesFromMisstrokes(misstrokes);
+      const customTestAffixes = getAffixesFromLookupDict(
+        customGlobalLookupDictionary,
+        customAffixMisstrokes
+      );
+      AFFIXES.setSharedAffixes(customTestAffixes);
+
+      const result = createStrokeHintForPhrase(
+        wordOrPhraseMaterial,
+        customGlobalLookupDictionary
+      );
+
       expect(result).toEqual("PH-BG/KEPB/*PB/SKWRA");
     });
   });
@@ -1766,7 +1790,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("-T");
       });
@@ -1788,7 +1812,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("KPA/-T");
       });
@@ -1811,7 +1835,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("PWE/KET/*L");
       });
@@ -1835,7 +1859,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("SAOUT/O*RS");
       });
@@ -1844,16 +1868,7 @@ describe("create stroke hint for phrase", () => {
 
   describe("split on affixes", () => {
     describe("split on prefix", () => {
-      xit("returns a prefix stroke and strokes for remaining text", () => {
-        // const affixList = new AffixList(
-        //   new Map([
-        //     ["{a^}", [["A", "typey:typey-type.json"]]],
-        //     ["{^quasi-}", [["KWAS/KWREU", "typey:typey-type.json"]]],
-        //     ["{^con}", [["KAUPB", "typey:typey-type.json"]]],
-        //     // ["{^quasi-}", [["KWAS/KWREU", "typey:typey-type.json"]]],
-        //   ])
-        // );
-        // AffixList.setSharedInstance(affixList);
+      it("returns a prefix stroke and strokes for remaining text", () => {
         const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] =
           [];
         const wordOrPhraseMaterial = "quasi-confuzzled";
@@ -1862,6 +1877,8 @@ describe("create stroke hint for phrase", () => {
           createGlobalLookupDictionary(emptyPersonalDictionaries, [
             [
               {
+                "A": "{a^}",
+                "KAUPB": "{^con}",
                 "KWAS/KWREU": "{quasi-}",
                 "KWA/SEU": "quasi",
                 "H-PB": "{^-^}",
@@ -1869,11 +1886,9 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
-        expect(result).toEqual(
-          "KWAS/KWREU/KR*/O*/TPH*/TP*/*U/STKPW*/STKPW*/HR*/*E/TK*"
-        );
+        expect(result).toEqual("KWAS/KWREU/KAUPB/TP*/*U/STKPW*/STKPW*/*LD");
       });
     });
   });
@@ -1901,7 +1916,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("S/EPL/TKA*RB/EPL/TKA*RB/W-RS");
       });
@@ -1929,7 +1944,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("POED/TREUFT/AES");
       });
@@ -1956,7 +1971,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("POED/TREUFT/AES/OP/TOPL/TREUFT/AES");
       });
@@ -1984,7 +1999,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("SOFR/KW-BG/SO/TKPWAOD");
       });
@@ -2012,7 +2027,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("WHAPL/KW-BG/PWAPL/KW-BG/THAUG/KW-BG/PHAPL");
         // expect(result).toEqual("WHAPL/KW-BG/PWAPL/KW-BG/THAPBG/U/KW-BG/PHAPL");
@@ -2041,7 +2056,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("AEU/HR-PS");
       });
@@ -2060,7 +2075,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("AEU/xxx");
       });
@@ -2081,7 +2096,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("AEU/TP-PL/TP-PL/TP-PL");
       });
@@ -2102,7 +2117,7 @@ describe("create stroke hint for phrase", () => {
             LATEST_TYPEY_TYPE_FULL_DICT_NAME,
           ],
         ]),
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       );
       expect(result).toEqual("HAS/OEPB/PROT");
     });
@@ -2120,7 +2135,7 @@ describe("create stroke hint for phrase", () => {
             LATEST_TYPEY_TYPE_FULL_DICT_NAME,
           ],
         ]),
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       );
       expect(result).toEqual("S/KPA*/PRO/TOE/TAOEUP/KPA*/-F");
     });
@@ -2138,7 +2153,7 @@ describe("create stroke hint for phrase", () => {
             LATEST_TYPEY_TYPE_FULL_DICT_NAME,
           ],
         ]),
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       );
       expect(result).toEqual("SRAOUL/KPA*/-F");
     });
@@ -2156,7 +2171,7 @@ describe("create stroke hint for phrase", () => {
             LATEST_TYPEY_TYPE_FULL_DICT_NAME,
           ],
         ]),
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       );
       expect(result).toEqual("TO/STR*EUPBG");
     });
@@ -2179,7 +2194,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         // expect(result).toEqual("20/OEU/20");
         // expect(result).toEqual("#TO/OEU/#TO");
@@ -2203,7 +2218,7 @@ describe("create stroke hint for phrase", () => {
               LATEST_TYPEY_TYPE_FULL_DICT_NAME,
             ],
           ]),
-          AffixList.getSharedInstance()
+          AFFIXES.getSharedAffixes()
         );
         expect(result).toEqual("20/OEU/20/TP-PL");
       });
@@ -2226,7 +2241,7 @@ describe("create stroke hint for phrase", () => {
             LATEST_TYPEY_TYPE_FULL_DICT_NAME,
           ],
         ]),
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       );
       expect(result).toEqual("S-P/TPRO*E");
     });
@@ -2248,7 +2263,7 @@ describe("create stroke hint for phrase", () => {
             LATEST_TYPEY_TYPE_FULL_DICT_NAME,
           ],
         ]),
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       );
       // expect(result).toEqual("PHAERPBLG H-PB PORGS");
       expect(result).toEqual("PHAERPBLG/H-PB/PORGS");
@@ -2269,7 +2284,7 @@ describe("create stroke hint for phrase", () => {
             LATEST_TYPEY_TYPE_FULL_DICT_NAME,
           ],
         ]),
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       );
       expect(result).toEqual("SEF/KROL");
     });
@@ -2288,7 +2303,7 @@ describe("create stroke hint for phrase", () => {
             LATEST_TYPEY_TYPE_FULL_DICT_NAME,
           ],
         ]),
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       );
       // expect(result).toEqual("SEF/TPH*/O*/T*/A*/R*/*E/A*/HR*/W*/O*/R*/TK*");
       // expect(result).toEqual("SEF/TPH*/O*/T*/A*/R*/*E/A*/HR*/W*/KWRO/R*D");
@@ -2310,7 +2325,7 @@ describe("create stroke hint for phrase", () => {
             LATEST_TYPEY_TYPE_FULL_DICT_NAME,
           ],
         ]),
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       );
       expect(result).toEqual("KW-GS/KPA*/HRA*ED/H-PB/PWEURD/KW-BG");
     });

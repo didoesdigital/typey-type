@@ -1,6 +1,6 @@
-import penaliseStars from "utils/transformingDictionaries/rankOutlines/penaliseStars";
-import penaliseStretchKeys from "utils/transformingDictionaries/rankOutlines/penaliseStretchKeys";
-import penaliseSlashes from "utils/transformingDictionaries/rankOutlines/penaliseSlashes";
+import penaliseStars from "../utils/transformingDictionaries/rankOutlines/penaliseStars";
+import penaliseStretchKeys from "../utils/transformingDictionaries/rankOutlines/penaliseStretchKeys";
+import penaliseSlashes from "../utils/transformingDictionaries/rankOutlines/penaliseSlashes";
 
 import type {
   StenoDictionary,

@@ -1,10 +1,11 @@
+import misstrokesJSON from "../../json/misstrokes.json";
+import AFFIXES from "../affixes/affixes";
 import rankOutlines from "./rankOutlines/rankOutlines";
 import splitIntoStrokesDictsAndNamespaces from "./splitIntoStrokesDictsAndNamespaces";
-import misstrokesJSON from "../../json/misstrokes.json";
-import { AffixList } from "../affixList";
+
 import type {
-  StrokeAndNamespacedDict,
   StenoDictionary,
+  StrokeAndNamespacedDict,
   Translation,
 } from "../../types";
 
@@ -23,7 +24,7 @@ const misstrokes = misstrokesJSON as StenoDictionary;
 const getRankedOutlineFromLookupEntry = (
   lookupEntries: StrokeAndNamespacedDict[],
   translation: Translation,
-  affixList = AffixList.getSharedInstance()
+  affixList = AFFIXES.getSharedAffixes()
 ) =>
   rankOutlines(
     splitIntoStrokesDictsAndNamespaces(lookupEntries),

@@ -1,31 +1,27 @@
-import createGlobalLookupDictionary from "./createGlobalLookupDictionary";
+import AFFIXES from "../affixes/affixes";
 import chooseOutlineForPhrase from "./chooseOutlineForPhrase";
-import { AffixList } from "../affixList";
 import {
-  testTypeyTypeDict,
-  personalDictionaries,
-  testTypeyTypeExtras,
+  testGlobalLookupDictionary as globalLookupDictionary,
+  testAffixes,
 } from "./transformingDictionaries.fixtures";
-import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "../../constant/latestTypeyTypeFullDictName";
 
 import type { LookupDictWithNamespacedDicts } from "../../types";
-
-const testTypeyTypeFull = { ...testTypeyTypeDict, ...testTypeyTypeExtras };
-
-const globalLookupDictionary = createGlobalLookupDictionary(
-  personalDictionaries,
-  [[testTypeyTypeFull, LATEST_TYPEY_TYPE_FULL_DICT_NAME]]
-);
 
 const precedingChar = "";
 
 describe("choose outline for phrase", () => {
+  beforeAll(() => {
+    AFFIXES.setLoadFunction(() => {
+      return testAffixes;
+    });
+  });
+
   beforeEach(() => {
-    AffixList.setSharedInstance(new AffixList(globalLookupDictionary));
+    AFFIXES.setSharedAffixes(testAffixes);
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
+    AFFIXES.setSharedAffixes({ prefixes: [], suffixes: [] });
   });
 
   describe("returns array of chosen outline and number of lookup attempts", () => {
@@ -696,7 +692,7 @@ describe("choose outline for phrase", () => {
       const chosenStroke = undefined;
       const strokeLookupAttempts = 0;
       const precedingChar = "";
-      const affixList = AffixList.getSharedInstance();
+      const affixList = AFFIXES.getSharedAffixes();
 
       expect(
         chooseOutlineForPhrase(

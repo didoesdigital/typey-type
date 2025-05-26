@@ -1,10 +1,10 @@
 import React from "react";
 
+import AFFIXES from "../../../utils/affixes/affixes";
 import LookupResultsOutlinesAndDicts from "../../../components/LookupResultsOutlinesAndDicts";
 import createListOfStrokes from "../../../utils/createListOfStrokes";
 import rankOutlines from "../../../utils/transformingDictionaries/rankOutlines/rankOutlines";
 import misstrokes from "../../../json/misstrokes.json";
-import { AffixList } from "../../../utils/affixList";
 import addMisstrokeStatus from "utils/transformingDictionaries/addMisstrokeStatus";
 import removePreferredOutlineDuplicates from "utils/transformingDictionaries/removePreferredOutlineDuplicates";
 
@@ -51,7 +51,7 @@ const StrokeTipList = ({
             createListOfStrokes(currentPhrase, globalLookupDictionary),
             misstrokesJSON,
             currentPhrase,
-            AffixList.getSharedInstance()
+            AFFIXES.getSharedAffixes()
           ).filter(([outline, _dictName]) => outline !== currentStroke),
           currentPhrase
         )

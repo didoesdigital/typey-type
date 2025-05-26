@@ -3,9 +3,10 @@ import findFingerspellingOutline from "./findFingerspellingOutline";
 import fingerspelledCharacters from "../../constant/fingerspelledCharacters";
 import fingerspelledSpacedPunctuation from "../../constant/fingerspelledSpacedPunctuation";
 import singleLetterWords from "../../constant/singleLetterWords";
-import getRankedOutlineFromLookupEntry from "./getRankedOutlineFromLookupEntry";
-import { AffixList } from "../affixList";
+import AFFIXES from "../affixes/affixes";
 import { escapeRegExp } from "../utils";
+import getRankedOutlineFromLookupEntry from "./getRankedOutlineFromLookupEntry";
+
 import type { LookupDictWithNamespacedDicts } from "../../types";
 
 type ChooseOutlineForPhraseResult = [string, number];
@@ -16,7 +17,7 @@ const chooseOutlineForPhrase = (
   chosenStroke: string | undefined,
   strokeLookupAttempts: number,
   precedingChar: string,
-  affixList = AffixList.getSharedInstance()
+  affixList = AFFIXES.getSharedAffixes()
 ): ChooseOutlineForPhraseResult => {
   let suffixes = affixList.suffixes;
   let suffixesLength = suffixes.length;

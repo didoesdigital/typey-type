@@ -1,20 +1,53 @@
+import misstrokesJSON from "../../json/misstrokes.json";
+import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "../../constant/latestTypeyTypeFullDictName";
+import AFFIXES from "../affixes/affixes";
+import getAffixMisstrokesFromMisstrokes from "../affixes/getAffixMisstrokesFromMisstrokes";
+import getAffixesFromLookupDict from "../affixes/getAffixesFromLookupDict";
+import createGlobalLookupDictionary from "./createGlobalLookupDictionary";
 import getRankedOutlineFromLookupEntry from "./getRankedOutlineFromLookupEntry";
-import { AffixList } from "../affixList";
-import type { StrokeAndNamespacedDict } from "../../types";
+import { testAffixes } from "./transformingDictionaries.fixtures";
+
+import type {
+  PersonalDictionaryNameAndContents,
+  StenoDictionary,
+  StrokeAndNamespacedDict,
+} from "../../types";
+
+const misstrokes = misstrokesJSON as StenoDictionary;
 
 describe("getRankedOutlineFromLookupEntry", () => {
+  beforeAll(() => {
+    AFFIXES.setLoadFunction(() => {
+      return testAffixes;
+    });
+  });
+
   beforeEach(() => {
-    const affixList = new AffixList(
-      new Map([
-        ["{con^}", [["KAUPB", "typey:typey-type.json"]]],
-        ["{^ent}", [["EPBT", "typey:typey-type.json"]]],
-      ])
+    const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
+    const customGlobalLookupDictionary = createGlobalLookupDictionary(
+      emptyPersonalDictionaries,
+      [
+        [
+          {
+            "KAUPB": "{con^}",
+            "EPBT": "{^ent}",
+          },
+          LATEST_TYPEY_TYPE_FULL_DICT_NAME,
+        ],
+      ]
     );
-    AffixList.setSharedInstance(affixList);
+
+    const customAffixMisstrokes = getAffixMisstrokesFromMisstrokes(misstrokes);
+    const customTestAffixes = getAffixesFromLookupDict(
+      customGlobalLookupDictionary,
+      customAffixMisstrokes
+    );
+
+    AFFIXES.setSharedAffixes(customTestAffixes);
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
+    AFFIXES.setSharedAffixes({ prefixes: [], suffixes: [] });
   });
 
   it("splits the dict names into namespaces and returns the ranked outline with provided affixList", () => {
@@ -33,7 +66,7 @@ describe("getRankedOutlineFromLookupEntry", () => {
       getRankedOutlineFromLookupEntry(
         lookupEntry,
         translation,
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       )
     ).toEqual("KAOPBT");
   });

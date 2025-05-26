@@ -1,4 +1,3 @@
-import { AffixList } from "../affixList";
 import chooseOutlineForPhrase from "./chooseOutlineForPhrase";
 import splitOnPrefix from "./splitOnPrefix";
 import splitOnPrefixWithHyphen from "./splitOnPrefixWithHyphen";
@@ -8,6 +7,7 @@ import splitOnSuffixWithFullStop from "./splitOnSuffixWithFullStop";
 import splitOnRegex from "./splitOnRegex";
 import splitOnSpace from "./splitOnSpace";
 import createFingerspellingStroke from "./createFingerspellingStroke";
+import AFFIXES from "../affixes/affixes";
 import unknownStroke from "../../constant/unknownStroke";
 import strokeLimit from "../../constant/strokeLimit";
 
@@ -58,7 +58,7 @@ const limit = strokeLimit + 1;
 const recursiveBuildStrokeHint = (
   wordOrPhraseMaterial: string,
   globalLookupDictionary: LookupDictWithNamespacedDicts,
-  affixList = AffixList.getSharedInstance(),
+  affixList = AFFIXES.getSharedAffixes(),
   depth: number,
   precedingChar = ""
 ): null | Outline | UnknownStroke => {

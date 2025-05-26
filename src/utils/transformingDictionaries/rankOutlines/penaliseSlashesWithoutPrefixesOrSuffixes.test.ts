@@ -1,22 +1,55 @@
+import misstrokesJSON from "../../../json/misstrokes.json";
+import LATEST_TYPEY_TYPE_FULL_DICT_NAME from "../../../constant/latestTypeyTypeFullDictName";
+import AFFIXES from "../../affixes/affixes";
+import getAffixMisstrokesFromMisstrokes from "../../affixes/getAffixMisstrokesFromMisstrokes";
+import getAffixesFromLookupDict from "../../affixes/getAffixesFromLookupDict";
+import createGlobalLookupDictionary from "../createGlobalLookupDictionary";
+import { testAffixes } from "../transformingDictionaries.fixtures";
 import penaliseSlashesWithoutPrefixesOrSuffixes from "./penaliseSlashesWithoutPrefixesOrSuffixes";
-import { AffixList } from "../../affixList";
+
+import type {
+  PersonalDictionaryNameAndContents,
+  StenoDictionary,
+} from "../../../types";
+
+const misstrokes = misstrokesJSON as StenoDictionary;
 
 describe("penaliseSlashesWithoutPrefixesOrSuffixes", () => {
+  beforeAll(() => {
+    AFFIXES.setLoadFunction(() => {
+      return testAffixes;
+    });
+  });
+
   beforeEach(() => {
-    const affixList = new AffixList(
-      new Map([
-        ["{^en}", [["*EPB", "typey:typey-type.json"]]],
-        ["{^ment}", [["*PLT", "typey:typey-type.json"]]],
-        ["{a^}", [["A", "typey:typey-type.json"]]],
-        ["{in^}", [["EUPB", "typey:typey-type.json"]]],
-        ["{^ly}", [["HREU", "typey:typey-type.json"]]],
-      ])
+    const emptyPersonalDictionaries: PersonalDictionaryNameAndContents[] = [];
+    const customGlobalLookupDictionary = createGlobalLookupDictionary(
+      emptyPersonalDictionaries,
+      [
+        [
+          {
+            "*EPB": "{^en}",
+            "*PLT": "{^ment}",
+            "A": "{a^}",
+            "EUPB": "{in^}",
+            "HREU": "{^ly}",
+          },
+          LATEST_TYPEY_TYPE_FULL_DICT_NAME,
+        ],
+      ]
     );
-    AffixList.setSharedInstance(affixList);
+
+    const customAffixMisstrokes = getAffixMisstrokesFromMisstrokes(misstrokes);
+    const customTestAffixes = getAffixesFromLookupDict(
+      customGlobalLookupDictionary,
+      customAffixMisstrokes
+    );
+
+    AFFIXES.setSharedAffixes(customTestAffixes);
   });
 
   afterEach(() => {
-    AffixList.setSharedInstance({ prefixes: [], suffixes: [] });
+    AFFIXES.setSharedAffixes({ prefixes: [], suffixes: [] });
   });
 
   it("returns penalty of 2 for multi-stroke outlines without affix strokes", () => {
@@ -26,7 +59,7 @@ describe("penaliseSlashesWithoutPrefixesOrSuffixes", () => {
       penaliseSlashesWithoutPrefixesOrSuffixes(
         outline,
         translation,
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       )
     ).toEqual(2);
   });
@@ -38,7 +71,7 @@ describe("penaliseSlashesWithoutPrefixesOrSuffixes", () => {
     const penalty = penaliseSlashesWithoutPrefixesOrSuffixes(
       outline,
       translation,
-      AffixList.getSharedInstance()
+      AFFIXES.getSharedAffixes()
     );
 
     expect(penalty).toBeGreaterThan(0);
@@ -51,7 +84,7 @@ describe("penaliseSlashesWithoutPrefixesOrSuffixes", () => {
       penaliseSlashesWithoutPrefixesOrSuffixes(
         outline,
         translation,
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       )
     ).toEqual(0);
   });
@@ -62,7 +95,7 @@ describe("penaliseSlashesWithoutPrefixesOrSuffixes", () => {
     const penalty = penaliseSlashesWithoutPrefixesOrSuffixes(
       outline,
       translation,
-      AffixList.getSharedInstance()
+      AFFIXES.getSharedAffixes()
     );
 
     expect(penalty).toEqual(0);
@@ -75,7 +108,7 @@ describe("penaliseSlashesWithoutPrefixesOrSuffixes", () => {
       penaliseSlashesWithoutPrefixesOrSuffixes(
         outline,
         translation,
-        AffixList.getSharedInstance()
+        AFFIXES.getSharedAffixes()
       )
     ).toEqual(0);
   });
