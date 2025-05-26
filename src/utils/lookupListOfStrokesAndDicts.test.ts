@@ -1,6 +1,13 @@
-import AFFIXES from "../utils/affixes/affixes";
+import AFFIXES from "./affixes/affixes";
 import lookupListOfStrokesAndDicts from "./lookupListOfStrokesAndDicts";
 import { testAffixes } from "./transformingDictionaries/transformingDictionaries.fixtures";
+
+import type {
+  DictionaryConfig,
+  LookupDictWithNamespacedDicts,
+  LookupDictWithNamespacedDictsAndConfig,
+  StrokeAndDictionaryAndNamespace,
+} from "types";
 
 describe("lookup list of strokes and dicts with punctuation with carry capitalisation", () => {
   beforeAll(() => {
@@ -9,13 +16,20 @@ describe("lookup list of strokes and dicts with punctuation with carry capitalis
     });
   });
 
-  let globalLookupDictionary = new Map(
+  let lookupDictionary: LookupDictWithNamespacedDicts = new Map(
     Object.entries({
       "ago": [["AG", "typey:typey-type.json"]],
       '{~|"^}': [["KW-GS", "typey:typey-type.json"]],
       '{^~|"}': [["KR-GS", "typey:typey-type.json"]],
     })
   );
+  let config: DictionaryConfig = {
+    configuration: ["typey:typey-type.json"],
+  };
+  lookupDictionary.configuration = config.configuration;
+
+  let globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig =
+    lookupDictionary as LookupDictWithNamespacedDictsAndConfig;
 
   it("shows list of strokes and dictionary for word without whitespace", () => {
     let phrase = "ago";
@@ -55,7 +69,7 @@ describe("lookup list of strokes and dicts with punctuation with carry capitalis
 });
 
 describe("lookup list of strokes and dicts with fingerspelling and single-letter words", () => {
-  let globalLookupDictionary = new Map(
+  let lookupDictionary: LookupDictWithNamespacedDicts = new Map(
     Object.entries({
       "{a^}": [
         ["AEU", "user:personal.json"],
@@ -113,6 +127,13 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
       "&": [["SP-PBD", "plover:plover.json"]],
     })
   );
+  lookupDictionary.configuration = [
+    "typey:typey-type.json",
+    "user:personal.json",
+    "plover:plover.json",
+  ];
+  const globalLookupDictionary =
+    lookupDictionary as LookupDictWithNamespacedDictsAndConfig;
 
   it("shows list of strokes and dictionary for fingerspelled letter “a” without whitespace", () => {
     let phrase = "a";
@@ -165,7 +186,7 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
   // TODO: might be wrong expectation
   it("shows list of strokes and dictionary for word “ A” with whitespace", () => {
     let phrase = " A";
-    let listOfStrokesAndDicts = [];
+    let listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[] = [];
     // TODO: make this possible:
     // let listOfStrokesAndDicts = [
     //   ["KPA/A", "personal.json", "user"],
@@ -191,7 +212,7 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
 
   it("shows list of strokes and dictionary for word “ i” with whitespace", () => {
     let phrase = " i";
-    let listOfStrokesAndDicts = [];
+    let listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[] = [];
     // TODO: make this possible:
     // let listOfStrokesAndDicts = [
     //   ["*EU", "personal.json", "user"],
@@ -242,7 +263,7 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
 
   it("shows list of strokes and dictionary for word “ x” with whitespace", () => {
     let phrase = " x";
-    let listOfStrokesAndDicts = [];
+    let listOfStrokesAndDicts: StrokeAndDictionaryAndNamespace[] = [];
     // TODO: make this possible:
     // let listOfStrokesAndDicts = [
     //   [KP-FPLT", "personal.json", "user"],
@@ -294,12 +315,15 @@ describe("lookup list of strokes and dicts with fingerspelling and single-letter
 });
 
 describe("lookup list of strokes and dicts with capitalization dictionary formatting", () => {
-  let globalLookupDictionary = new Map(
+  let lookupDictionary: LookupDictWithNamespacedDicts = new Map(
     Object.entries({
       "Mx.{-|}": [["PH-BGS", "typey:typey-type-full.json"]],
       "{~|'^}til": [["T*EUL", "typey:typey-type-full.json"]],
     })
   );
+  lookupDictionary.configuration = ["typey:typey-type-full.json"];
+  const globalLookupDictionary =
+    lookupDictionary as LookupDictWithNamespacedDictsAndConfig;
 
   it("shows list of strokes and dictionary for “Mx.” that use capitalize next word dictionary formatting", () => {
     let phrase = "Mx.";
