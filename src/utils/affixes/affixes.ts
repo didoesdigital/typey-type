@@ -1,4 +1,6 @@
-import { AffixObject } from "../../types";
+import * as Sentry from "@sentry/browser";
+
+import type { AffixObject } from "../../types";
 
 export type LoadFunction = () => AffixObject;
 
@@ -12,9 +14,14 @@ let maybeAffixes: AffixObject | null = null;
  * affixes object using `getAffixesFromLookupDict()`.
  */
 let loadFunction: LoadFunction = () => {
-  throw new Error("There's no affix load function to load the affixes.");
-  // const defaultAffixes: AffixObject = { prefixes: [], suffixes: [] };
-  // return defaultAffixes;
+  try {
+    throw new Error("There's no affix load function to load the affixes.");
+  } catch (error) {
+    console.error(error);
+    Sentry.captureException(error);
+  }
+  const defaultAffixes: AffixObject = { prefixes: [], suffixes: [] };
+  return defaultAffixes;
 };
 
 /**
