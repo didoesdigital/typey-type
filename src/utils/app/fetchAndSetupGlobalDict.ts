@@ -84,14 +84,6 @@ function fetchAndSetupGlobalDict(
       // let t1 = performance.now();
       // console.log("Call to createGlobalLookupDictionary took " + (Number.parseFloat((t1 - t0) / 1000).toPrecision(3)) + " seconds.");
 
-      // For debugging:
-      // window.lookupDict = sortedAndCombinedLookupDictionary;
-      isGlobalDictionaryUpToDate = true;
-      // @ts-ignore TODO
-      this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
-      // @ts-ignore TODO
-      this.setState({ globalLookupDictionaryLoaded: true });
-
       const newAffixes = getAffixesFromLookupDict(
         sortedAndCombinedLookupDictionary,
         affixMisstrokes
@@ -99,8 +91,22 @@ function fetchAndSetupGlobalDict(
       const affixesLoadFunction = () => {
         return newAffixes;
       };
+      // NOTE: Because this code won't run until after the dictionaries have been
+      // fetched, it will always come after the first call to try and use the
+      // affixes e.g. on https://didoesdigital.com/typey-type/lookup?q=strangled
+      // it will first show results that assume the affixes object is empty. So
+      // long as another render comes after this setLoadFunction() call, the
+      // results will be updated to use the actual affixes.
       AFFIXES.setLoadFunction(affixesLoadFunction);
       AFFIXES.setSharedAffixes(newAffixes);
+
+      // For debugging:
+      // window.lookupDict = sortedAndCombinedLookupDictionary;
+      isGlobalDictionaryUpToDate = true;
+      // @ts-ignore TODO
+      this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
+      // @ts-ignore TODO
+      this.setState({ globalLookupDictionaryLoaded: true });
     });
 
     return loadingPromise;
