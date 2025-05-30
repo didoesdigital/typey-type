@@ -382,7 +382,7 @@ const Lesson = ({
               toggleHideOtherSettings={toggleHideOtherSettings}
               metadata={metadata}
               lesson={lesson}
-              lessonLength={propsLesson.presentedMaterial.length}
+              lessonLength={lessonLength}
               lessonTitle={lessonTitle}
               metWords={metWords}
               path={lesson?.path}
@@ -400,7 +400,7 @@ const Lesson = ({
               totalNumberOfRetainedWords={totalNumberOfRetainedWords}
               totalNumberOfMistypedWords={totalNumberOfMistypedWords}
               totalNumberOfHintedWords={totalNumberOfHintedWords}
-              totalWordCount={propsLesson.presentedMaterial.length}
+              totalWordCount={totalWordCount}
             />
           </main>
         </DocumentTitle>
