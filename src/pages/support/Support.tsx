@@ -536,6 +536,37 @@ const Support = () => {
             .
           </p>
 
+          <h4 id="lapwing" tabIndex={-1}>
+            Lapwing
+          </h4>
+          <p>
+            If you prefer{" "}
+            <OutboundLink
+              eventLabel="Lapwing theory"
+              to="https://lapwing.aerick.ca/Home.html"
+            >
+              Lapwing theory
+            </OutboundLink>{" "}
+            to Plover theory, you can{" "}
+            <OutboundLink
+              eventLabel="use custom Typey Type lessons to practice Lapwing"
+              to="https://lapwing.aerick.ca/Chapter-05.html#typey-type"
+            >
+              use custom Typey&nbsp;Type lessons to practice Lapwing
+            </OutboundLink>
+            . In lessons, you can set the "Steno layout" to "Lapwing" to see
+            steno hint diagrams using a number{" "}
+            <span className="steno-stroke">#</span> key at the upper left. On
+            the{" "}
+            <Link to="/dictionaries/management">
+              Dictionary Management page
+            </Link>
+            , you can add the Lapwing dictionaries so that Lapwing hints appear
+            in regular lessons. Typey&nbsp;Type does not yet have complete
+            support for Lapwing, so you might not see diagram hints for
+            everything in the Numbers lesson, among other oddities.
+          </p>
+
           <h3 id="learn-steno">Learning stenography</h3>
           <h4 id="try-steno-on-a-computer">
             How can you try steno on your computer?
