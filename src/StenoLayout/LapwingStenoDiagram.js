@@ -116,7 +116,7 @@ const rightDOffColor = "#FFFFFF";
 const rightZOnColor = "#FFFFFF";
 const rightZOffColor = "#FFFFFF";
 
-class LapwingDiagram extends Component {
+class LapwingStenoDiagram extends Component {
   render() {
     const diagramWidth = this.props.diagramWidth || 140;
     const svgDiagramID = this.props.id || "stenoDiagram";
@@ -487,4 +487,4 @@ class LapwingDiagram extends Component {
   }
 }
 
-export default LapwingDiagram;
+export default LapwingStenoDiagram;
