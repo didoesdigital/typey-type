@@ -314,54 +314,59 @@ const CustomLessonGenerator = ({
                         Start generated lesson
                       </Link>
                     </p>
-                    {invalidRegex && (
-                      <p className="bg-warning">
-                        There's a syntax error in the regex so you won't be able
-                        to generate a lesson until you fix it.
-                      </p>
-                    )}
-                    {regexRuleIgnoredButHasText && (
-                      <p>
-                        Note: an advanced setting is set to “ignored” but has
-                        text. You can change the setting to “on” or “off” or
-                        delete the text to hide this message.
-                      </p>
-                    )}
-                    <p>
-                      {customLessonMaterialValidationState === "fail" && (
-                        <>
-                          That combination of rule settings results in no
-                          material. Try setting some rules to “ignored”.
-                          {rulesState.isOneSyllable ===
-                            rulesState.moreThanOneSyllable &&
-                          rulesState.isOneSyllable !== "ignored"
-                            ? " Change one of the syllable count settings."
-                            : ""}
-                          {(rulesState.isOneSyllable ===
-                            rulesState.hasLongWords ||
-                            rulesState.isOneSyllable ===
-                              rulesState.hasLongTranslations) &&
-                          rulesState.isOneSyllable !== "ignored"
-                            ? " Change the one syllable or long words/translations settings."
-                            : ""}
-                          {rulesState.isSingleStroke ===
-                            rulesState.isMultiStroke &&
-                          rulesState.isSingleStroke !== "ignored"
-                            ? " Change one of the stroke count settings."
-                            : ""}
-                        </>
+                    <div aria-live="polite" aria-atomic="true">
+                      {invalidRegex && (
+                        <p className="bg-warning">
+                          There's a syntax error in the regex so you won't be
+                          able to generate a lesson until you fix it.
+                        </p>
                       )}
-                      {customLessonMaterialValidationState === "unvalidated" &&
-                        "Preview generated lesson here after building."}
-                      {customLessonMaterialValidationState === "success" &&
-                        `Preview generated lesson with ${
-                          customLesson.presentedMaterial.length === maxItems
-                            ? "max "
-                            : ""
-                        }${customLesson.presentedMaterial.length} item${
-                          customLesson.presentedMaterial.length === 1 ? "" : "s"
-                        }:`}
-                    </p>
+                      {regexRuleIgnoredButHasText && (
+                        <p>
+                          Note: an advanced setting is set to “ignored” but has
+                          text. You can change the setting to “on” or “off” or
+                          delete the text to hide this message.
+                        </p>
+                      )}
+                      <p>
+                        {customLessonMaterialValidationState === "fail" && (
+                          <>
+                            That combination of rule settings results in no
+                            material. Try setting some rules to “ignored”.
+                            {rulesState.isOneSyllable ===
+                              rulesState.moreThanOneSyllable &&
+                            rulesState.isOneSyllable !== "ignored"
+                              ? " Change one of the syllable count settings."
+                              : ""}
+                            {(rulesState.isOneSyllable ===
+                              rulesState.hasLongWords ||
+                              rulesState.isOneSyllable ===
+                                rulesState.hasLongTranslations) &&
+                            rulesState.isOneSyllable !== "ignored"
+                              ? " Change the one syllable or long words/translations settings."
+                              : ""}
+                            {rulesState.isSingleStroke ===
+                              rulesState.isMultiStroke &&
+                            rulesState.isSingleStroke !== "ignored"
+                              ? " Change one of the stroke count settings."
+                              : ""}
+                          </>
+                        )}
+                        {customLessonMaterialValidationState ===
+                          "unvalidated" &&
+                          "Preview generated lesson here after building."}
+                        {customLessonMaterialValidationState === "success" &&
+                          `Preview generated lesson with ${
+                            customLesson.presentedMaterial.length === maxItems
+                              ? "max "
+                              : ""
+                          }${customLesson.presentedMaterial.length} item${
+                            customLesson.presentedMaterial.length === 1
+                              ? ""
+                              : "s"
+                          }:`}
+                      </p>
+                    </div>
                     <div>
                       <ul>
                         {customLessonMaterialValidationState === "fail" ||
