@@ -386,9 +386,9 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
               <div className="mb2 mw-240">
                 <label className="mb1 db" htmlFor="stenoLayout">Steno layout</label>
                 <select id="stenoLayout" name="writerStenoLayout" value={this.props.userSettings.stenoLayout} onChange={this.props.changeStenoLayout} className="text-small form-control w6">
-                  <option value="stenoLayoutAmericanSteno">Ward Stone Ireland (Plover, EcoSteno, SOFT/HRUF etc.)</option>
-                  <option value="stenoLayoutNoNumberBarInnerThumbNumbers">Inner thumbers (TinyMod, Steko, etc.)</option>
+                  <option value="stenoLayoutAmericanSteno">Ward Stone Ireland (Plover, EcoSteno, etc.)</option>
                   <option value="stenoLayoutLapwingSteno">Lapwing</option>
+                  <option value="stenoLayoutNoNumberBarInnerThumbNumbers">Inner thumbers (TinyMod, etc.)</option>
                   <option value="stenoLayoutNoNumberBarOuterThumbNumbers">Outer thumbers (Uni, Georgi, etc.)</option>
                   <option value="stenoLayoutPalantype">Palantype</option>
                   <option value="stenoLayoutBrazilianPortugueseSteno">Brazilian Portuguese steno</option>
@@ -420,7 +420,7 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
                   </div>
                 </fieldset>
                 :
-                  <p className="text-small">Note: clicking on the diagram only works for the Ward Stone Ireland (Plover, EcoSteno, SOFT/HRUF etc.) layout at this time.</p>
+                  <p className="text-small">Note: clicking on the diagram only works for the Ward Stone Ireland layout for now.</p>
               }
             </div>
           </div>

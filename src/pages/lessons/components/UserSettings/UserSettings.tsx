@@ -482,13 +482,11 @@ const UserSettings = ({
                     >
                       <optgroup label="English">
                         <option value="stenoLayoutAmericanSteno">
-                          Ward Stone Ireland (Plover, EcoSteno, SOFT/HRUF etc.)
+                          Ward Stone Ireland (Plover, EcoSteno, etc.)
                         </option>
-                        <option value="stenoLayoutLapwingSteno">
-                          Lapwing
-                        </option>
+                        <option value="stenoLayoutLapwingSteno">Lapwing</option>
                         <option value="stenoLayoutNoNumberBarInnerThumbNumbers">
-                          Inner thumbers (TinyMod, Steko, etc.)
+                          Inner thumbers (TinyMod, etc.)
                         </option>
                         <option value="stenoLayoutNoNumberBarOuterThumbNumbers">
                           Outer thumbers (Uni, Georgi, etc.)
