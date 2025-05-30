@@ -42,15 +42,14 @@ const CustomLessonGenerator = ({
   customLessonMaterialValidationState,
   globalLookupDictionary,
 }: Props) => {
-  const {
-    appFetchAndSetupGlobalDict,
-    generateCustomLesson,
-  } = useAppMethods();
+  const { appFetchAndSetupGlobalDict, generateCustomLesson } = useAppMethods();
   const mainHeading = useRef<HTMLHeadingElement>(null);
 
   const [hideHelp, setHideHelp] = useState(true);
   const [regexRuleIgnoredButHasText, setRegexRuleIgnoredButHasText] =
     useState(false);
+
+  const [invalidRegex, setInvalidRegex] = useState(false);
 
   const toggleHideHelp = () => {
     setHideHelp(!hideHelp);
@@ -129,17 +128,26 @@ const CustomLessonGenerator = ({
   };
 
   const buildLesson = () => {
-    generateCustomLesson(globalLookupDictionary, onRules, regexRules);
-    if (
-      (rulesWithDataState.translationRegexText.length > 0 &&
-        rulesWithDataState.translationMatching === "ignored") ||
-      (rulesWithDataState.outlineRegexText.length > 0 &&
-        rulesWithDataState.outlineMatching === "ignored")
-    ) {
-      setRegexRuleIgnoredButHasText(true);
+    try {
+      generateCustomLesson(globalLookupDictionary, onRules, regexRules);
+      if (
+        (rulesWithDataState.translationRegexText.length > 0 &&
+          rulesWithDataState.translationMatching === "ignored") ||
+        (rulesWithDataState.outlineRegexText.length > 0 &&
+          rulesWithDataState.outlineMatching === "ignored")
+      ) {
+        setRegexRuleIgnoredButHasText(true);
+      }
+      setRulesSettings(rulesState);
+      setRulesWithDataSettings(rulesWithDataState);
+      setInvalidRegex(false);
+    } catch (error) {
+      if (error instanceof Error && error.name.includes("SyntaxError")) {
+        setInvalidRegex(true);
+      } else {
+        console.error(error);
+      }
     }
-    setRulesSettings(rulesState);
-    setRulesWithDataSettings(rulesWithDataState);
   };
 
   const onChangeRuleStatus: React.ChangeEventHandler<HTMLSelectElement> = (
@@ -306,6 +314,12 @@ const CustomLessonGenerator = ({
                         Start generated lesson
                       </Link>
                     </p>
+                    {invalidRegex && (
+                      <p className="bg-warning">
+                        There's a syntax error in the regex so you won't be able
+                        to generate a lesson until you fix it.
+                      </p>
+                    )}
                     {regexRuleIgnoredButHasText && (
                       <p>
                         Note: an advanced setting is set to “ignored” but has
