@@ -1,8 +1,8 @@
 import type { PresentedMaterial, PresentedMaterialItem } from "../types";
 
 class Zipper {
-  completed: (PresentedMaterialItem | undefined)[];
-  current: PresentedMaterialItem | undefined;
+  completed: PresentedMaterialItem[];
+  current: PresentedMaterialItem;
   remaining: PresentedMaterial;
 
   constructor(items: PresentedMaterial) {
@@ -21,10 +21,13 @@ class Zipper {
     return this.remaining;
   }
   visitNext() {
-    if (this.remaining.length !== 0) {
+    if (this.remaining.length > 0) {
       this.completed.push(this.current);
-      this.current = this.remaining.shift();
+      // NOTE: we use a non-null assertion here because we've already checked that the array length is greater than 0:
+      this.current = this.remaining.shift()!;
+      // return true; // Could return true here to indicate successful movement to next element
     }
+    // return false; // Could return false here to indicate there are no more elements to visit
   }
 }
 

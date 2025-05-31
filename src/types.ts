@@ -324,9 +324,8 @@ export type RevisionMaterial = SourceMaterialItem[];
 export type RevisionMode = boolean;
 
 export type NewPresentedMaterial = {
-  // These should possibly be optionally undefined to match Zipper
-  completed: MaterialItem[]; // | undefined
-  current: MaterialItem; // | undefined
+  completed: MaterialItem[];
+  current: MaterialItem;
   remaining: MaterialItem[];
 };
 
