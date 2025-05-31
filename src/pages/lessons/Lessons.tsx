@@ -62,7 +62,7 @@ const Lessons = ({
   totalNumberOfRetainedWords,
   totalWordCount,
   upcomingPhrases,
-  focusTriggerInt
+  focusTriggerInt,
 }: LessonsRoutingProps) => {
   return (
     <Suspense fallback={<PageLoading />}>
@@ -185,6 +185,7 @@ const Lessons = ({
               totalNumberOfRetainedWords={totalNumberOfRetainedWords}
               totalWordCount={totalWordCount}
               upcomingPhrases={upcomingPhrases}
+              focusTriggerInt={focusTriggerInt}
               {...props}
             />
           )}
@@ -391,7 +392,7 @@ const Lessons = ({
               totalNumberOfRetainedWords={totalNumberOfRetainedWords}
               totalWordCount={totalWordCount}
               upcomingPhrases={upcomingPhrases}
-              focusTiggerInt={focusTriggerInt}
+              focusTriggerInt={focusTriggerInt}
               {...props}
             />
           )}
