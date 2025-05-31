@@ -8,7 +8,7 @@ import LessonOverview from "./LessonOverview";
 import LessonSubheader from "./components/LessonSubheader";
 import Finished from "./components/Finished";
 import Flashcards from "./flashcards/Flashcards";
-import { loadPersonalPreferences } from "../../utils/typey-type";
+import { loadPersonalPreferences } from 'utils/storage';
 import getLessonMetadata from "./utilities/getLessonMetadata";
 import MainLessonView from "./MainLessonView";
 import { LessonProps } from "./types";

@@ -106,7 +106,7 @@ const AsyncGames = Loadable({
  * This is based on state initialization in App.tsx.
  * This type only reflects App's state that is needed by descendants.
  */
-type AppStateForDescendants = {
+export type AppStateForDescendants = {
   // currentPhraseAttempts: [],
   currentPhraseID: number;
   currentLessonStrokes: CurrentLessonStrokes[];
@@ -120,10 +120,10 @@ type AppStateForDescendants = {
   lessonNotFound: boolean;
   lessonsProgress: unknown;
   // isGlobalLookupDictionaryLoaded: false,
-  personalDictionaries: ImportedPersonalDictionaries;
+  personalDictionaries?: ImportedPersonalDictionaries;
   previousCompletedPhraseAsTyped: ActualTypedText;
   repetitionsRemaining: number;
-  startTime: Date;
+  startTime: number | null;
   showStrokesInLesson: boolean;
   targetStrokeCount: number;
   timer: number;
@@ -151,7 +151,7 @@ type Props = {
   appState: AppStateForDescendants;
 };
 
-type AppProps = {
+export type AppProps = {
   location: Location;
   completedMaterial: MaterialText[];
   presentedMaterialCurrentItem: MaterialItem;

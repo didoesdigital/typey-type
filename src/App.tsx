@@ -4,7 +4,6 @@ import {
   createWordListFromMetWords,
   parseCustomMaterial,
   parseWordList,
-  loadPersonalPreferences,
   matchSplitText,
   parseLesson,
   repetitionsRemaining,
@@ -15,6 +14,7 @@ import {
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
+import { loadPersonalPreferences } from 'utils/storage';
 import { getLesson } from './utils/getData';
 import {
   generateListOfWordsAndStrokes
@@ -36,23 +36,59 @@ import {
   changeShowStrokesInLesson,
   updateRevisionMaterial,
 } from './pages/lessons/components/UserSettings/updateLessonSetting';
-import AppRoutes from './AppRoutes';
+import AppRoutes, { type AppProps } from './AppRoutes';
 import removeIgnoredCharsFromSplitText from './utils/app/removeIgnoredCharsFromSplitText';
 import AppMethodsContext from "./states/legacy/AppMethodsContext";
 import { synth, synthesizeSpeech } from "./utils/speechSynthesis";
 
-class App extends Component {
-  // @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-  constructor(props) {
+import type {
+  DictionaryConfig,
+  GlobalUserSettings,
+  LookupDictWithNamespacedDicts,
+  LookupDictWithNamespacedDictsAndConfig,
+  RevisionMode,
+  UserSettings,
+} from 'types';
+
+import type {
+  AppState,
+  GetNewStateAndSideEffectsForBufferReturn,
+  OverrunBuffer,
+  SideEffectsForBuffer
+} from 'App.types';
+
+import type { LessonProps } from 'pages/lessons/types';
+import type { LessonsRoutingProps } from 'pages/lessons/Lessons';
+
+type Props = AppProps & {
+  userSettings: UserSettings;
+  revisionMode: RevisionMode;
+  globalUserSettings: GlobalUserSettings;
+};
+
+class App extends Component<Props, AppState> {
+  private charsPerWord: number;
+  private appFetchAndSetupGlobalDict: typeof fetchAndSetupGlobalDict;
+  private intervalID: number | null;
+
+  constructor(props: Props) {
     super(props);
-    // @ts-ignore
     this.charsPerWord = 5;
+    this.intervalID = null;
     // When updating default state for anything stored in local storage,
     // add the same default to load/set personal preferences code and test.
     let metWordsFromStorage = loadPersonalPreferences()[0];
     let startingMetWordsToday = loadPersonalPreferences()[0];
-    // @ts-ignore
     this.appFetchAndSetupGlobalDict = fetchAndSetupGlobalDict.bind(this);
+    
+    const emptyGlobalLookupDict: LookupDictWithNamespacedDicts = new Map();
+    let config: DictionaryConfig = {
+      configuration: [],
+    };
+    emptyGlobalLookupDict.configuration = config.configuration;
+
+    let initGlobalLookupDictionary: LookupDictWithNamespacedDictsAndConfig =
+      emptyGlobalLookupDict as LookupDictWithNamespacedDictsAndConfig;
 
     this.state = {
       currentPhraseAttempts: [],
@@ -63,15 +99,18 @@ class App extends Component {
       customLessonMaterialValidationState: 'unvalidated',
       customLesson: fallbackLesson,
       actualText: ``,
-      globalLookupDictionary: new Map(),
+      globalLookupDictionary: initGlobalLookupDictionary,
       globalLookupDictionaryLoaded: false,
       lessonNotFound: false,
       lessonsProgress: {
       },
       isGlobalLookupDictionaryLoaded: false,
-      personalDictionaries: {
-        dictionariesNamesAndContents: null,
-      },
+      // NOTE: personalDictionaries should be undefined at initialization
+      // because the student has not yet imported any dictionaries in this
+      // session. If we want to use dictionaries from previous sessions from
+      // local storage, they'll be used directly in globalLookupDictionary and
+      // not here on personalDictionaries.
+      // personalDictionaries: { dictionariesNamesAndContents: [] },
       previousCompletedPhraseAsTyped: '',
       repetitionsRemaining: 1,
       startTime: null,
@@ -92,16 +131,13 @@ class App extends Component {
       revisionMaterial: [
       ],
       startingMetWordsToday: startingMetWordsToday,
-      // @ts-expect-error TS(2345) FIXME: Argument of type '{}' is not assignable to paramet... Remove this comment to see the full error message
       yourSeenWordCount: calculateSeenWordCount(metWordsFromStorage),
-      // @ts-expect-error TS(2345) FIXME: Argument of type '{}' is not assignable to paramet... Remove this comment to see the full error message
       yourMemorisedWordCount: calculateMemorisedWordCount(metWordsFromStorage),
       focusTriggerInt: 0
     };
   }
 
   componentDidMount() {
-    // @ts-ignore
     this.setPersonalPreferences();
   }
 
@@ -112,7 +148,6 @@ class App extends Component {
    */
   // @ts-expect-error TS(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps) {
-    // @ts-ignore
     const curUserSettings = this.props.userSettings;
     const prevUserSettings = prevProps.userSettings;
     if (
@@ -170,7 +205,6 @@ class App extends Component {
       ...prevState,
       actualText: '',
       currentLessonStrokes: currentLessonStrokes,
-      // @ts-ignore
       currentPhraseID: this.state.lesson.presentedMaterial.length,
       previousCompletedPhraseAsTyped: '',
       currentPhraseAttempts: [],
@@ -185,7 +219,6 @@ class App extends Component {
     if (this.shouldUpdateLessonsProgress(newState)) {
       let lessonsProgress = this.getUpdatedLessonsProgress({lessonPath: prevState.lesson.path,
                                                             lesson: prevState.lesson,
-      // @ts-ignore
                                                             userSettings: this.props.userSettings,
                                                             prevLessonsProgress: prevState.lessonsProgress,
                                                             metWords: prevState.metWords});
@@ -196,36 +229,28 @@ class App extends Component {
   }
 
   startTimer() {
-    // @ts-ignore
     this.intervalID = window.setInterval(this.updateWPM.bind(this), 1000);
   }
 
   stopTimer() {
-    // @ts-ignore
     if (this.intervalID) {
-      // @ts-ignore
       clearInterval(this.intervalID);
-      // @ts-ignore
       this.intervalID = null;
     }
   }
 
   updateWPM() {
     this.setState({
-      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
-      timer: new Date().getTime() - this.state.startTime
+      timer: new Date().getTime() - (this.state.startTime ?? 0)
     });
   }
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'newMetWord' implicitly has an 'any' typ... Remove this comment to see the full error message
   updateMetWords(newMetWord) {
-    // @ts-ignore
     const newMetWordsState = Object.assign({}, this.state.metWords);
     const phraseText =
-      // @ts-ignore
       this.props.userSettings.spacePlacement === "spaceBeforeOutput"
         ? " " + newMetWord
-        // @ts-ignore
         : this.props.userSettings.spacePlacement === "spaceAfterOutput"
         ? newMetWord + " "
         : newMetWord;
@@ -235,11 +260,12 @@ class App extends Component {
     writePersonalPreferences("metWords", newMetWordsState);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'source' implicitly has an 'any' type.
-  setPersonalPreferences(source) {
-    // @ts-ignore
+  /**
+   *
+   * @param source - MetWords as stringified JSON
+   */
+  setPersonalPreferences(source?: string) {
     let metWordsFromStateOrArg = this.state.metWords;
-    // @ts-ignore
     let lessonsProgressState = this.state.lessonsProgress;
     if (source && source !== '') {
       try {
@@ -254,9 +280,7 @@ class App extends Component {
       [metWordsFromStateOrArg, lessonsProgressState] = loadPersonalPreferences();
     }
 
-    // @ts-expect-error TS(2345) FIXME: Argument of type '{}' is not assignable to paramet... Remove this comment to see the full error message
     let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
-    // @ts-expect-error TS(2345) FIXME: Argument of type '{}' is not assignable to paramet... Remove this comment to see the full error message
     let calculatedYourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
 
     // these two writePersonalPreferences calls were in a callback of setState - so 
@@ -376,7 +400,7 @@ class App extends Component {
   // set user settings
   // @ts-expect-error TS(7006) FIXME: Parameter 'metWordsFromStorage' implicitly has an ... Remove this comment to see the full error message
   setUpProgressRevisionLesson(metWordsFromStorage, newSeenOrMemorised) {
-    let lesson = {};
+    let lesson = fallbackLesson;
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.props.userSettings) { stenoLayout = this.props.userSettings.stenoLayout; }
 
@@ -391,43 +415,28 @@ class App extends Component {
         // let result = parseWordList(myWords);
       if (result && result.length > 0) {
         // look up strokes for each word
-        // @ts-ignore
         let lessonWordsAndStrokes = generateListOfWordsAndStrokes(result, this.state.globalLookupDictionary);
         if (lessonWordsAndStrokes && lessonWordsAndStrokes.length > 0) {
-          // @ts-expect-error TS(2339) FIXME: Property 'sourceMaterial' does not exist on type '... Remove this comment to see the full error message
           lesson.sourceMaterial = lessonWordsAndStrokes;
-          // @ts-expect-error TS(2339) FIXME: Property 'presentedMaterial' does not exist on typ... Remove this comment to see the full error message
           lesson.presentedMaterial = lessonWordsAndStrokes;
-          // @ts-expect-error TS(2339) FIXME: Property 'newPresentedMaterial' does not exist on ... Remove this comment to see the full error message
           lesson.newPresentedMaterial = new Zipper(lessonWordsAndStrokes);
-          // @ts-expect-error TS(2339) FIXME: Property 'settings' does not exist on type '{}'.
           lesson.settings = {
             ignoredChars: '',
             customMessage: ''
           };
-          // @ts-expect-error TS(2339) FIXME: Property 'path' does not exist on type '{}'.
           lesson.path = process.env.PUBLIC_URL + '/lessons/progress/seen/'
-          // @ts-expect-error TS(2339) FIXME: Property 'title' does not exist on type '{}'.
           lesson.title = 'Your revision words'
-          // @ts-expect-error TS(2339) FIXME: Property 'path' does not exist on type '{}'.
           if (newSeenOrMemorised[2]) { lesson.path = process.env.PUBLIC_URL + '/lessons/progress/memorised/'; }
-          // @ts-expect-error TS(2339) FIXME: Property 'title' does not exist on type '{}'.
           if (newSeenOrMemorised[2]) { lesson.title = 'Your memorised words'; }
-          // @ts-expect-error TS(2339) FIXME: Property 'title' does not exist on type '{}'.
           if (newSeenOrMemorised[1] && newSeenOrMemorised[2]) { lesson.title = 'Your words'; }
-          // @ts-expect-error TS(2339) FIXME: Property 'path' does not exist on type '{}'.
           if (newSeenOrMemorised[1] && newSeenOrMemorised[2]) { lesson.path = process.env.PUBLIC_URL + '/lessons/progress/'; }
-          // @ts-expect-error TS(2339) FIXME: Property 'subtitle' does not exist on type '{}'.
           lesson.subtitle = ''
         }
       }
-      else {
-        lesson = fallbackLesson
-      }
+
       this.setupLesson({
         currentPhraseID: 0,
-        lesson: lesson,
-        // @ts-ignore
+        lesson,
         focusTriggerInt: this.state.focusTriggerInt + 1
       });
     })
@@ -438,13 +447,14 @@ class App extends Component {
     });
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'lessonProps' implicitly has an 'any' ty... Remove this comment to see the full error message
-  setupLesson(lessonProps) {
+  setupLesson(
+    lessonProps?: (Partial<LessonProps> | Partial<LessonsRoutingProps>) &
+      Partial<Pick<Props, "revisionMode">> &
+      Partial<AppState>
+  ) {
     const newState = {...this.state, ...lessonProps};
-    // @ts-ignore
     const revisionMode = lessonProps?.revisionMode ?? this.props.revisionMode;
     const revisionMaterial = newState.revisionMaterial;
-    // @ts-ignore
     const userSettings = this.props.userSettings;
     const lessonPath = newState.lesson.path;
     let newLesson = Object.assign({}, newState.lesson);
@@ -466,7 +476,6 @@ class App extends Component {
       newLesson.presentedMaterial = revisionMaterial.map(line => ({...line}));
     }
     else {
-      // @ts-expect-error TS(7006) FIXME: Parameter 'line' implicitly has an 'any' type.
       newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
     }
 
@@ -562,7 +571,6 @@ class App extends Component {
         this.setState({lessonNotFound: false});
         let lesson = parseLesson(lessonText, path);
         if (
-          // @ts-ignore
           this.props.globalUserSettings.experiments && !!this.props.globalUserSettings.experiments.stenohintsonthefly &&
           !path.includes("phrasing") &&
           !path.includes("prefixes") &&
@@ -571,9 +579,7 @@ class App extends Component {
           !path.includes("collections/tech")
         ) {
 
-          // @ts-ignore
           this.appFetchAndSetupGlobalDict(null).then(() => {
-            // @ts-ignore
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
               lesson.presentedMaterial = lessonWordsAndStrokes;
@@ -582,30 +588,22 @@ class App extends Component {
             this.setupLesson({
               lesson: lesson,
               currentPhraseID: 0,
-              // @ts-ignore
               focusTriggerInt: this.state.focusTriggerInt + 1
             });
           });
         }
-        // @ts-ignore
         else if (this.props.userSettings.showStrokesAsList) {
-          // @ts-ignore
           const shouldUsePersonalDictionaries = this.state.personalDictionaries
-          // @ts-ignore
             && Object.entries(this.state.personalDictionaries).length > 0
-            // @ts-ignore
             && !!this.state.personalDictionaries.dictionariesNamesAndContents;
 
-            // @ts-ignore
           this.appFetchAndSetupGlobalDict(
-            // @ts-expect-error TS(2345) FIXME: Argument of type '{ dictionariesNamesAndContents: ... Remove this comment to see the full error message
-            shouldUsePersonalDictionaries ? this.state.personalDictionaries : null
+            shouldUsePersonalDictionaries ? (this.state.personalDictionaries ?? null) : null
           )
             .then(() => {
               this.setupLesson({
                 lesson: lesson,
                 currentPhraseID: 0,
-                // @ts-ignore
                 focusTriggerInt: this.state.focusTriggerInt + 1
               });
               // @ts-ignore
@@ -617,7 +615,6 @@ class App extends Component {
           this.setupLesson({
             lesson: lesson,
             currentPhraseID: 0,
-            // @ts-ignore
             focusTriggerInt: this.state.focusTriggerInt + 1
           });
         }
@@ -630,7 +627,6 @@ class App extends Component {
   }
 
   startCustomLesson() {
-    // @ts-ignore
     let lesson = Object.assign({}, this.state.customLesson);
     lesson.title = 'Custom'
     this.setupLesson({
@@ -644,9 +640,7 @@ class App extends Component {
     if (event && event.target) {
       let providedText = event.target.value || '';
       let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
-      // @ts-ignore
       let customLesson = Object.assign({}, this.state.customLesson);
-      // @ts-expect-error TS(2339) FIXME: Property 'length' does not exist on type 'string |... Remove this comment to see the full error message
       if (validationMessages && validationMessages.length < 1) { customLesson = lesson; }
       this.setupLesson({
         lesson,
@@ -659,7 +653,6 @@ class App extends Component {
     }
     else { // for navigating straight to custom lesson page without setup
     // TODO: is this the place where I should set a default empty custom lesson?
-    // @ts-ignore
       let lesson = Object.assign({}, this.state.customLesson);
       lesson.title = 'Custom'
       this.setupLesson({
@@ -677,7 +670,6 @@ class App extends Component {
     this.stopLesson();
     this.setupLesson({
       revisionMaterial: newRevisionMaterial,
-      // @ts-ignore
       focusTriggerInt: this.state.focusTriggerInt + 1,
       revisionMode: true,
     });
@@ -688,7 +680,6 @@ class App extends Component {
     event.preventDefault();
     this.stopLesson();
     this.setupLesson({
-      // @ts-ignore
       focusTriggerInt: this.state.focusTriggerInt + 1,
       revisionMode: false
     });
@@ -752,11 +743,10 @@ class App extends Component {
                                                                             buffer,
                                                                             stateCopy,
                                                                             []);
-    // @ts-expect-error TS(7006) FIXME: Parameter 'effect' implicitly has an 'any' type.
     sideEffects.forEach(effect => effect());
     this.setState(newState);
   }
-
+  
   /*
    * Takes the buffer of inputs and returns the new state and the side effects
    * corresponding to the strokes in the buffer.
@@ -765,8 +755,13 @@ class App extends Component {
    * This function may be executed recursively, until all the strokes in the buffer
    * are processed.
    */
-  // @ts-expect-error TS(7023) FIXME: 'getNewStateAndSideEffectsForBuffer' implicitly ha... Remove this comment to see the full error message
-  getNewStateAndSideEffectsForBuffer(actualText, buffer, state, sideEffects) {
+  getNewStateAndSideEffectsForBuffer(
+    // NOTE: refactoring should be done to remove the actualText param from processBuffer() so we can fix it here, but this is an iterative step towards more types:
+    actualText: string | null | any,
+    buffer: OverrunBuffer,
+    state: AppState,
+    sideEffects: SideEffectsForBuffer
+  ): GetNewStateAndSideEffectsForBufferReturn {
     let time = Date.now();
     if (buffer) {
       const latest = buffer[buffer.length - 1];
@@ -776,7 +771,7 @@ class App extends Component {
 
     // Start timer on first key stroke
     if (state.startTime === null) {
-      state.startTime = new Date();
+      state.startTime = Date.now();
       state.timer = 0;
       state.disableUserSettings = true;
       sideEffects.push(() => this.startTimer());
@@ -788,7 +783,6 @@ class App extends Component {
       matchSplitText(state.lesson.presentedMaterial[state.currentPhraseID].phrase,
                      actualText,
                      state.lesson.settings,
-                     // @ts-ignore
                      this.props.userSettings);
 
     if (state.lesson.settings.ignoredChars) {
@@ -798,8 +792,6 @@ class App extends Component {
 
     const [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
-    // @ts-ignore this should be ok when currentPhraseAttempts is typed correctly instead of never[]
-    // @ts-expect-error TS(7006) FIXME: Parameter 'copy' implicitly has an 'any' type.
     const currentPhraseAttempts = state.currentPhraseAttempts.map(copy => ({...copy}));
 
     if (buffer) {
@@ -809,13 +801,10 @@ class App extends Component {
     currentPhraseAttempts.push({
       text: actualText,
       time: time,
-      // @ts-ignore
       numberOfMatchedWordsSoFar: (state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       hintWasShown: shouldShowStroke(state.showStrokesInLesson,
-                                     // @ts-ignore
                                      this.props.userSettings.showStrokes,
                                      state.repetitionsRemaining,
-                                     // @ts-ignore
                                      this.props.userSettings.hideStrokesOnLastRepetition)
     });
 
@@ -823,7 +812,6 @@ class App extends Component {
       ...state,
       currentPhraseAttempts: currentPhraseAttempts,
       numberOfMatchedChars: numberOfMatchedChars,
-      // @ts-ignore
       totalNumberOfMatchedWords: (state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       actualText: actualText,
     };
@@ -837,7 +825,6 @@ class App extends Component {
     const accurateStroke = phraseMisstrokes.strokeAccuracy; // false
     const attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
 
-    // @ts-ignore
     if (!accurateStroke && !state.showStrokesInLesson && this.props.userSettings.showStrokesOnMisstroke) {
       state.showStrokesInLesson = true;
     }
@@ -847,7 +834,6 @@ class App extends Component {
       // e.g. unmatchedActual is "es" if "Frenches" is typed for "French"
       // In case of spaceAfterOutput, unmatchedChars is not empty and don't care here.
       // In case of spaceExact, proceed without checking next actual chars.
-      // @ts-ignore
       const excessLookFine = this.props.userSettings.spacePlacement === "spaceAfterOutput" || this.props.userSettings.spacePlacement === "spaceExact" || unmatchedActual.length === 0 || unmatchedActual[0] === " ";
       proceedToNextWord = numberOfUnmatchedChars === 0 && excessLookFine;
     } else {
@@ -857,15 +843,12 @@ class App extends Component {
       state.currentPhraseAttempts = []; // reset for next word
 
       const strokeHintShown = shouldShowStroke(state.showStrokesInLesson,
-                                               // @ts-ignore
                                                this.props.userSettings.showStrokes,
                                                state.repetitionsRemaining,
-                                               // @ts-ignore
                                                this.props.userSettings.hideStrokesOnLastRepetition);
 
       // NOTE: here is where completed phrases are pushed
       state.currentLessonStrokes.push({
-        // @ts-ignore
         numberOfMatchedWordsSoFar: (state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
         word: state.lesson.presentedMaterial[state.currentPhraseID].phrase,
         typedText: actualText,
@@ -884,10 +867,8 @@ class App extends Component {
 
       if (!strokeHintShown && accurateStroke) {
         // Use the original text when recording to preserve case and spacing
-        // @ts-ignore
         const phraseText = this.props.userSettings.spacePlacement === 'spaceBeforeOutput'
           ? ' ' + state.lesson.presentedMaterial[state.currentPhraseID].phrase
-          // @ts-ignore
           : this.props.userSettings.spacePlacement === 'spaceAfterOutput'
           ? state.lesson.presentedMaterial[state.currentPhraseID].phrase + ' '
           : state.lesson.presentedMaterial[state.currentPhraseID].phrase;
@@ -900,7 +881,6 @@ class App extends Component {
         state.metWords[phraseText] = meetingsCount + 1;
       }
 
-      // @ts-ignore
       if (this.props.userSettings.speakMaterial) {
         const remaining = state.lesson.newPresentedMaterial.getRemaining();
         if (remaining && remaining.length > 0 && remaining[0].hasOwnProperty('phrase')) {
@@ -920,7 +900,6 @@ class App extends Component {
       state.targetStrokeCount = getTargetStrokeCount(nextItem || { phrase: '', stroke: 'TK-LS' });
       state.lesson.newPresentedMaterial.visitNext();
 
-      // @ts-ignore
       state.repetitionsRemaining = repetitionsRemaining(this.props.userSettings,
                                                         state.lesson.presentedMaterial,
                                                         state.currentPhraseID + 1);
@@ -941,10 +920,9 @@ class App extends Component {
     } else if (buffer && proceedToNextWord && unmatchedActual.length > 0) {
       // Repetitively apply buffer with already accepted phrases excluded
       const newBuffer = buffer
-        // @ts-expect-error TS(7006) FIXME: Parameter 'stroke' implicitly has an 'any' type.
         .filter(stroke => stroke.text.length > matchedActual.length && stroke.text.startsWith(matchedActual))
-        // @ts-expect-error TS(7006) FIXME: Parameter 'stroke' implicitly has an 'any' type.
         .map(stroke => ({ text: stroke.text.slice(matchedActual.length), time: stroke.time }));
+      // @ts-expect-error
       return this.getNewStateAndSideEffectsForBuffer(null, newBuffer, state, sideEffects);
     }
     return [state, sideEffects];
@@ -952,23 +930,16 @@ class App extends Component {
 
   say(utteranceText: string) {
     synthesizeSpeech(utteranceText, {
-      // @ts-ignore
       voiceURI: this.props.userSettings.voiceURI,
-      // @ts-ignore
       voiceName: this.props.userSettings.voiceName,
-      // @ts-ignore
       stenoLayout: this.props.userSettings?.stenoLayout,
-      // @ts-ignore
       timeElapsedMillis: this.state.timer,
-      // @ts-ignore
       totalNumberOfMatchedWords: this.state.totalNumberOfMatchedWords,
     });
   }
 
   sayCurrentPhraseAgain() {
-    // @ts-ignore
     if (this.props.userSettings.speakMaterial) {
-      // @ts-ignore
       let currentPhrase = this.state.lesson.presentedMaterial[this.state.currentPhraseID];
       if (currentPhrase && currentPhrase.hasOwnProperty('phrase')) {
         this.say(currentPhrase.phrase);
@@ -983,7 +954,6 @@ class App extends Component {
   }
 
   presentCompletedMaterial() {
-    // @ts-expect-error TS(2532) FIXME: Object is possibly 'undefined'.
     return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getCompleted().map(item => item.phrase) : [];
   }
 
@@ -996,7 +966,6 @@ class App extends Component {
     let completedMaterial = this.presentCompletedMaterial();
     let upcomingMaterial = this.presentUpcomingMaterial();
 
-    // @ts-ignore
     let stateLesson = this.state.lesson;
     if ((Object.keys(stateLesson).length === 0 && stateLesson.constructor === Object) || !stateLesson) {
       stateLesson = {
@@ -1009,14 +978,12 @@ class App extends Component {
       };
     }
 
-    // @ts-ignore
     let presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
     return (
       <div id="js-app" className="app">
         <div className="flex flex-column justify-between min-vh-100">
           <AppMethodsContext.Provider value={
             {
-              // @ts-ignore
               appFetchAndSetupGlobalDict: this.appFetchAndSetupGlobalDict,
               setCustomLessonContent: setCustomLessonContent.bind(this),
               customiseLesson: customiseLesson.bind(this),
@@ -1043,14 +1010,12 @@ class App extends Component {
           }>
             <AppRoutes
               appProps={{
-                // @ts-ignore
                 location: this.props.location,
                 completedMaterial,
                 presentedMaterialCurrentItem,
                 stateLesson,
                 upcomingMaterial
               }}
-              // @ts-expect-error TS(2322) FIXME: Type '{ currentPhraseAttempts: never[]; currentPhr... Remove this comment to see the full error message
               appState={this.state}
             />
           </AppMethodsContext.Provider>

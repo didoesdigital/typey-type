@@ -1,6 +1,8 @@
 import Zipper from "../utils/zipper";
 
-const fallbackLesson = {
+import type { Lesson } from "types";
+
+const fallbackLesson: Lesson = {
   sourceMaterial: [
     { phrase: "The", stroke: "-T" },
     { phrase: "process", stroke: "PROEUS" },

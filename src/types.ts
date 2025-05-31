@@ -1,3 +1,4 @@
+import Zipper from "./utils/zipper";
 import fetchAndSetupGlobalDict from "./utils/app/fetchAndSetupGlobalDict";
 
 /**
@@ -70,6 +71,11 @@ export type DictName = string;
  */
 export type PersonalDictionaryNameAndContents = [DictName, StenoDictionary];
 
+/**
+ * ImportedPersonalDictionaries contains recently imported personal dictionaries (on dictionary management page) OR personal dictionaries from this session passed down from props. They're used to create the globalLookupDictionary.
+ *
+ * If personalDictionaries: ImportedPersonalDictionaries is not present, we may try to read from local storage.
+ */
 export type ImportedPersonalDictionaries = {
   dictionariesNamesAndContents: PersonalDictionaryNameAndContents[];
 };
@@ -273,9 +279,9 @@ export type Attempt = {
    * */
   text: string;
   /** e.g. 1670211049535 */
-  time: 1670212079120;
+  time: number;
   /** e.g. 1.6 */
-  numberOfMatchedWordsSoFar: 1.6;
+  numberOfMatchedWordsSoFar: number;
   hintWasShown: boolean;
 };
 
@@ -322,13 +328,6 @@ export type SourceMaterialItem = MaterialItem;
 export type SourceMaterial = SourceMaterialItem[];
 export type RevisionMaterial = SourceMaterialItem[];
 export type RevisionMode = boolean;
-
-export type NewPresentedMaterial = {
-  // These should possibly be optionally undefined to match Zipper
-  completed: MaterialItem[]; // | undefined
-  current: MaterialItem; // | undefined
-  remaining: MaterialItem[];
-};
 
 export type LessonSettings = {
   ignoredChars: string;
@@ -456,7 +455,7 @@ export type Lesson = {
   settings: LessonSettings;
   title: PrettyLessonTitle;
   subtitle: string;
-  newPresentedMaterial: NewPresentedMaterial;
+  newPresentedMaterial: Zipper;
   path: LessonPathWithBasenameAndFilename;
 };
 

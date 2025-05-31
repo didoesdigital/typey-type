@@ -48,7 +48,6 @@ const lesson: Lesson = {
   },
   title: "Test lesson",
   subtitle: "",
-  // @ts-expect-error
   newPresentedMaterial: new Zipper(sourceMaterial),
   path: "/lessons/fundamentals/test/",
 };
