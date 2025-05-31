@@ -59,30 +59,32 @@ export type LessonProps = {
   focusTriggerInt: number;
 };
 
-export type FinishedProps = {
+export type FinishedProps = Pick<
+  LessonProps,
+  | "currentLessonStrokes"
+  | "disableUserSettings"
+  | "lesson"
+  | "lessonLength"
+  | "lessonTitle"
+  | "metWords"
+  | "settings"
+  | "startTime"
+  | "timer"
+  | "totalNumberOfHintedWords"
+  | "totalNumberOfLowExposuresSeen"
+  | "totalNumberOfMatchedWords"
+  | "totalNumberOfMistypedWords"
+  | "totalNumberOfNewWordsMet"
+  | "totalNumberOfRetainedWords"
+  | "totalWordCount"
+> & {
   chooseStudy: () => void;
-  currentLessonStrokes: any; // CurrentLessonStrokes;
-  disableUserSettings: boolean;
   toggleHideOtherSettings: () => void;
-  lesson: Lesson;
-  lessonLength: number;
-  lessonTitle: PrettyLessonTitle;
   metadata: any;
-  metWords: MetWords;
   path: any;
   restartLesson: any;
   reviseLesson: any;
   revisionMode: any;
-  settings: any;
-  startTime: number | null;
-  timer: number;
-  totalNumberOfHintedWords: any;
-  totalNumberOfLowExposuresSeen: any;
-  totalNumberOfMatchedWords: any;
-  totalNumberOfMistypedWords: any;
-  totalNumberOfNewWordsMet: any;
-  totalNumberOfRetainedWords: any;
-  totalWordCount: any;
   updatePreset: (studyType: Study) => void;
   updateRevisionMaterial: any;
 };
