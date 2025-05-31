@@ -106,7 +106,7 @@ const AsyncGames = Loadable({
  * This is based on state initialization in App.tsx.
  * This type only reflects App's state that is needed by descendants.
  */
-type AppStateForDescendants = {
+export type AppStateForDescendants = {
   // currentPhraseAttempts: [],
   currentPhraseID: number;
   currentLessonStrokes: CurrentLessonStrokes[];
@@ -151,7 +151,7 @@ type Props = {
   appState: AppStateForDescendants;
 };
 
-type AppProps = {
+export type AppProps = {
   location: Location;
   completedMaterial: MaterialText[];
   presentedMaterialCurrentItem: MaterialItem;
