@@ -215,9 +215,7 @@ class App extends Component {
         : this.props.userSettings.spacePlacement === "spaceAfterOutput"
         ? newMetWord + " "
         : newMetWord;
-    // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     const meetingsCount = newMetWordsState[phraseText] || 0;
-    // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     newMetWordsState[phraseText] = meetingsCount + 1;
     this.setState({ metWords: newMetWordsState });
     writePersonalPreferences("metWords", newMetWordsState);
@@ -668,7 +666,6 @@ class App extends Component {
   }
 
 
-  // @ts-expect-error TS(7008) FIXME: Member 'markupBuffer' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   markupBuffer = [];
   updateBufferTimer = null;
 
@@ -983,7 +980,6 @@ class App extends Component {
                 location: this.props.location,
                 completedMaterial,
                 presentedMaterialCurrentItem,
-                // @ts-expect-error TS(2322) FIXME: Type '{ sourceMaterial: { phrase: string; stroke: ... Remove this comment to see the full error message
                 stateLesson,
                 upcomingMaterial
               }}
