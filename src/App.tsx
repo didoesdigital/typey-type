@@ -66,7 +66,7 @@ type Props = AppProps & {
 class App extends Component<Props, AppState> {
   private charsPerWord: number;
   private appFetchAndSetupGlobalDict: typeof fetchAndSetupGlobalDict;
-  // TODO: add types for setPersonalPreferences, setupLesson, processBuffer
+  // TODO: add types for setupLesson, processBuffer
   // TODO: add type for intervalID
 
   constructor(props: Props) {
@@ -135,7 +135,6 @@ class App extends Component<Props, AppState> {
   }
 
   componentDidMount() {
-    // @ts-ignore
     this.setPersonalPreferences();
   }
 
@@ -262,8 +261,11 @@ class App extends Component<Props, AppState> {
     writePersonalPreferences("metWords", newMetWordsState);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'source' implicitly has an 'any' type.
-  setPersonalPreferences(source) {
+  /**
+   *
+   * @param source - MetWords as stringified JSON
+   */
+  setPersonalPreferences(source?: string) {
     let metWordsFromStateOrArg = this.state.metWords;
     let lessonsProgressState = this.state.lessonsProgress;
     if (source && source !== '') {
