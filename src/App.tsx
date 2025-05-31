@@ -50,7 +50,12 @@ import type {
   UserSettings,
 } from 'types';
 
-import type { AppState } from 'App.types';
+import type {
+  AppState,
+  GetNewStateAndSideEffectsForBufferReturn,
+  OverrunBuffer,
+  SideEffectsForBuffer
+} from 'App.types';
 
 type Props = AppProps & {
   userSettings: UserSettings;
@@ -756,11 +761,10 @@ class App extends Component<Props, AppState> {
                                                                             buffer,
                                                                             stateCopy,
                                                                             []);
-    // @ts-expect-error TS(7006) FIXME: Parameter 'effect' implicitly has an 'any' type.
     sideEffects.forEach(effect => effect());
     this.setState(newState);
   }
-
+  
   /*
    * Takes the buffer of inputs and returns the new state and the side effects
    * corresponding to the strokes in the buffer.
@@ -769,8 +773,13 @@ class App extends Component<Props, AppState> {
    * This function may be executed recursively, until all the strokes in the buffer
    * are processed.
    */
-  // @ts-expect-error TS(7023) FIXME: 'getNewStateAndSideEffectsForBuffer' implicitly ha... Remove this comment to see the full error message
-  getNewStateAndSideEffectsForBuffer(actualText, buffer, state, sideEffects) {
+  getNewStateAndSideEffectsForBuffer(
+    // NOTE: refactoring should be done to remove the actualText param from processBuffer() so we can fix it here, but this is an iterative step towards more types:
+    actualText: string | null | any,
+    buffer: OverrunBuffer,
+    state: AppState,
+    sideEffects: SideEffectsForBuffer
+  ): GetNewStateAndSideEffectsForBufferReturn {
     let time = Date.now();
     if (buffer) {
       const latest = buffer[buffer.length - 1];
@@ -801,8 +810,6 @@ class App extends Component<Props, AppState> {
 
     const [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
-    // @ts-ignore this should be ok when currentPhraseAttempts is typed correctly instead of never[]
-    // @ts-expect-error TS(7006) FIXME: Parameter 'copy' implicitly has an 'any' type.
     const currentPhraseAttempts = state.currentPhraseAttempts.map(copy => ({...copy}));
 
     if (buffer) {
@@ -931,10 +938,9 @@ class App extends Component<Props, AppState> {
     } else if (buffer && proceedToNextWord && unmatchedActual.length > 0) {
       // Repetitively apply buffer with already accepted phrases excluded
       const newBuffer = buffer
-        // @ts-expect-error TS(7006) FIXME: Parameter 'stroke' implicitly has an 'any' type.
         .filter(stroke => stroke.text.length > matchedActual.length && stroke.text.startsWith(matchedActual))
-        // @ts-expect-error TS(7006) FIXME: Parameter 'stroke' implicitly has an 'any' type.
         .map(stroke => ({ text: stroke.text.slice(matchedActual.length), time: stroke.time }));
+      // @ts-expect-error
       return this.getNewStateAndSideEffectsForBuffer(null, newBuffer, state, sideEffects);
     }
     return [state, sideEffects];

@@ -8,3 +8,20 @@ export type AppState = AppStateForDescendants & {
   totalNumberOfMatchedChars: number;
   revisionMaterial: PresentedMaterial[];
 };
+
+export type BufferEntry = {
+  text: string;
+  time: number;
+  // TODO: this should possibly be optional:
+  numberOfMatchedWordsSoFar: number;
+  // TODO: this should possibly be optional:
+  hintWasShown: boolean;
+};
+
+export type OverrunBuffer = BufferEntry[];
+export type SideEffectForBuffer = (...args: any[]) => any;
+export type SideEffectsForBuffer = SideEffectForBuffer[];
+export type GetNewStateAndSideEffectsForBufferReturn = [
+  AppState,
+  SideEffectsForBuffer
+];
