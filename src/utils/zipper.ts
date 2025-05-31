@@ -1,7 +1,7 @@
 import type { PresentedMaterial, PresentedMaterialItem } from "../types";
 
 class Zipper {
-  completed: PresentedMaterialItem[];
+  completed: PresentedMaterial;
   current: PresentedMaterialItem;
   remaining: PresentedMaterial;
 
