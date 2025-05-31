@@ -8,7 +8,7 @@ import CustomLessonSetup from "./custom/CustomLessonSetup";
 import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 
-type LessonsRoutingProps = RouteComponentProps &
+export type LessonsRoutingProps = RouteComponentProps &
   ComponentPropsWithoutRef<typeof Lesson> &
   ComponentPropsWithoutRef<typeof CustomLessonSetup> &
   ComponentPropsWithoutRef<typeof AsyncCustomLessonGenerator>;

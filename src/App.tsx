@@ -57,6 +57,9 @@ import type {
   SideEffectsForBuffer
 } from 'App.types';
 
+import type { LessonProps } from 'pages/lessons/types';
+import type { LessonsRoutingProps } from 'pages/lessons/Lessons';
+
 type Props = AppProps & {
   userSettings: UserSettings;
   revisionMode: RevisionMode;
@@ -67,7 +70,6 @@ class App extends Component<Props, AppState> {
   private charsPerWord: number;
   private appFetchAndSetupGlobalDict: typeof fetchAndSetupGlobalDict;
   private intervalID: number | null;
-  // TODO: add types for setupLesson, processBuffer
 
   constructor(props: Props) {
     super(props);
@@ -398,7 +400,7 @@ class App extends Component<Props, AppState> {
   // set user settings
   // @ts-expect-error TS(7006) FIXME: Parameter 'metWordsFromStorage' implicitly has an ... Remove this comment to see the full error message
   setUpProgressRevisionLesson(metWordsFromStorage, newSeenOrMemorised) {
-    let lesson = {};
+    let lesson = fallbackLesson;
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.props.userSettings) { stenoLayout = this.props.userSettings.stenoLayout; }
 
@@ -415,39 +417,26 @@ class App extends Component<Props, AppState> {
         // look up strokes for each word
         let lessonWordsAndStrokes = generateListOfWordsAndStrokes(result, this.state.globalLookupDictionary);
         if (lessonWordsAndStrokes && lessonWordsAndStrokes.length > 0) {
-          // @ts-expect-error TS(2339) FIXME: Property 'sourceMaterial' does not exist on type '... Remove this comment to see the full error message
           lesson.sourceMaterial = lessonWordsAndStrokes;
-          // @ts-expect-error TS(2339) FIXME: Property 'presentedMaterial' does not exist on typ... Remove this comment to see the full error message
           lesson.presentedMaterial = lessonWordsAndStrokes;
-          // @ts-expect-error TS(2339) FIXME: Property 'newPresentedMaterial' does not exist on ... Remove this comment to see the full error message
           lesson.newPresentedMaterial = new Zipper(lessonWordsAndStrokes);
-          // @ts-expect-error TS(2339) FIXME: Property 'settings' does not exist on type '{}'.
           lesson.settings = {
             ignoredChars: '',
             customMessage: ''
           };
-          // @ts-expect-error TS(2339) FIXME: Property 'path' does not exist on type '{}'.
           lesson.path = process.env.PUBLIC_URL + '/lessons/progress/seen/'
-          // @ts-expect-error TS(2339) FIXME: Property 'title' does not exist on type '{}'.
           lesson.title = 'Your revision words'
-          // @ts-expect-error TS(2339) FIXME: Property 'path' does not exist on type '{}'.
           if (newSeenOrMemorised[2]) { lesson.path = process.env.PUBLIC_URL + '/lessons/progress/memorised/'; }
-          // @ts-expect-error TS(2339) FIXME: Property 'title' does not exist on type '{}'.
           if (newSeenOrMemorised[2]) { lesson.title = 'Your memorised words'; }
-          // @ts-expect-error TS(2339) FIXME: Property 'title' does not exist on type '{}'.
           if (newSeenOrMemorised[1] && newSeenOrMemorised[2]) { lesson.title = 'Your words'; }
-          // @ts-expect-error TS(2339) FIXME: Property 'path' does not exist on type '{}'.
           if (newSeenOrMemorised[1] && newSeenOrMemorised[2]) { lesson.path = process.env.PUBLIC_URL + '/lessons/progress/'; }
-          // @ts-expect-error TS(2339) FIXME: Property 'subtitle' does not exist on type '{}'.
           lesson.subtitle = ''
         }
       }
-      else {
-        lesson = fallbackLesson
-      }
+
       this.setupLesson({
         currentPhraseID: 0,
-        lesson: lesson,
+        lesson,
         focusTriggerInt: this.state.focusTriggerInt + 1
       });
     })
@@ -458,8 +447,11 @@ class App extends Component<Props, AppState> {
     });
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'lessonProps' implicitly has an 'any' ty... Remove this comment to see the full error message
-  setupLesson(lessonProps) {
+  setupLesson(
+    lessonProps?: (Partial<LessonProps> | Partial<LessonsRoutingProps>) &
+      Partial<Pick<Props, "revisionMode">> &
+      Partial<AppState>
+  ) {
     const newState = {...this.state, ...lessonProps};
     const revisionMode = lessonProps?.revisionMode ?? this.props.revisionMode;
     const revisionMaterial = newState.revisionMaterial;
@@ -484,7 +476,6 @@ class App extends Component<Props, AppState> {
       newLesson.presentedMaterial = revisionMaterial.map(line => ({...line}));
     }
     else {
-      // @ts-expect-error TS(7006) FIXME: Parameter 'line' implicitly has an 'any' type.
       newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
     }
 
@@ -650,7 +641,6 @@ class App extends Component<Props, AppState> {
       let providedText = event.target.value || '';
       let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
       let customLesson = Object.assign({}, this.state.customLesson);
-      // @ts-expect-error TS(2339) FIXME: Property 'length' does not exist on type 'string |... Remove this comment to see the full error message
       if (validationMessages && validationMessages.length < 1) { customLesson = lesson; }
       this.setupLesson({
         lesson,

@@ -232,8 +232,15 @@ const SETTINGS_NAME_MAP = {
   locales: 'locales'
 }
 
+/**
+ * @param {string} lessonTextAndStrokes
+ * @return {[import('types').CustomLesson, any, any[]]}
+ */
 function parseCustomMaterial(lessonTextAndStrokes) {
   let validationState = 'unvalidated';
+  /**
+   * @type {any[]}
+   */
   let validationMessages = [];
 
   let emptyCustomLesson = {
