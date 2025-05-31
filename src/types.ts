@@ -71,6 +71,11 @@ export type DictName = string;
  */
 export type PersonalDictionaryNameAndContents = [DictName, StenoDictionary];
 
+/**
+ * ImportedPersonalDictionaries contains recently imported personal dictionaries (on dictionary management page) OR personal dictionaries from this session passed down from props. They're used to create the globalLookupDictionary.
+ *
+ * If personalDictionaries: ImportedPersonalDictionaries is not present, we may try to read from local storage.
+ */
 export type ImportedPersonalDictionaries = {
   dictionariesNamesAndContents: PersonalDictionaryNameAndContents[];
 };

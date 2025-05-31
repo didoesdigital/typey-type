@@ -40,7 +40,7 @@ export type LessonProps = {
   location: any;
   match: any;
   metWords: MetWords;
-  personalDictionaries: ImportedPersonalDictionaries;
+  personalDictionaries?: ImportedPersonalDictionaries;
   previousCompletedPhraseAsTyped: string;
   repetitionsRemaining: number;
   settings: any;

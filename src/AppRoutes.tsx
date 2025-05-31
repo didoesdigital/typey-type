@@ -120,7 +120,7 @@ export type AppStateForDescendants = {
   lessonNotFound: boolean;
   lessonsProgress: unknown;
   // isGlobalLookupDictionaryLoaded: false,
-  personalDictionaries: ImportedPersonalDictionaries;
+  personalDictionaries?: ImportedPersonalDictionaries;
   previousCompletedPhraseAsTyped: ActualTypedText;
   repetitionsRemaining: number;
   startTime: Date;

@@ -102,10 +102,12 @@ class App extends Component<Props, AppState> {
       lessonsProgress: {
       },
       isGlobalLookupDictionaryLoaded: false,
-      personalDictionaries: {
-        // @ts-expect-error Type 'null' is not assignable to type 'PersonalDictionaryNameAndContents[]'.ts(2322)
-        dictionariesNamesAndContents: null,
-      },
+      // NOTE: personalDictionaries should be undefined at initialization
+      // because the student has not yet imported any dictionaries in this
+      // session. If we want to use dictionaries from previous sessions from
+      // local storage, they'll be used directly in globalLookupDictionary and
+      // not here on personalDictionaries.
+      // personalDictionaries: { dictionariesNamesAndContents: [] },
       previousCompletedPhraseAsTyped: '',
       repetitionsRemaining: 1,
       // @ts-expect-error Type 'null' is not assignable to type 'Date'.ts(2322)

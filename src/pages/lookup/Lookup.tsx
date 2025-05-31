@@ -14,7 +14,7 @@ import debounce from "../../utils/debounce";
 type Props = {
   globalLookupDictionary: any;
   globalLookupDictionaryLoaded: boolean;
-  personalDictionaries: ImportedPersonalDictionaries;
+  personalDictionaries?: ImportedPersonalDictionaries;
 };
 
 const Lookup = ({
