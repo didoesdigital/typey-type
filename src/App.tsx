@@ -4,7 +4,6 @@ import {
   createWordListFromMetWords,
   parseCustomMaterial,
   parseWordList,
-  loadPersonalPreferences,
   matchSplitText,
   parseLesson,
   repetitionsRemaining,
@@ -15,6 +14,7 @@ import {
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
+import { loadPersonalPreferences } from 'utils/storage';
 import { getLesson } from './utils/getData';
 import {
   generateListOfWordsAndStrokes
@@ -123,16 +123,12 @@ class App extends Component<Props, AppState> {
       totalNumberOfMistypedWords: 0,
       totalNumberOfHintedWords: 0,
       disableUserSettings: false,
-      // @ts-expect-error Type '{}' is not assignable to type 'MetWords'. Index signature for type 'string' is missing in type '{}'.ts(2322)
       metWords: metWordsFromStorage,
       lesson: fallbackLesson,
       revisionMaterial: [
       ],
-      // @ts-expect-error Type '{}' is not assignable to type 'MetWords'. Index signature for type 'string' is missing in type '{}'.ts(2322)
       startingMetWordsToday: startingMetWordsToday,
-      // @ts-expect-error TS(2345) FIXME: Argument of type '{}' is not assignable to paramet... Remove this comment to see the full error message
       yourSeenWordCount: calculateSeenWordCount(metWordsFromStorage),
-      // @ts-expect-error TS(2345) FIXME: Argument of type '{}' is not assignable to paramet... Remove this comment to see the full error message
       yourMemorisedWordCount: calculateMemorisedWordCount(metWordsFromStorage),
       focusTriggerInt: 0
     };
@@ -280,7 +276,6 @@ class App extends Component<Props, AppState> {
       catch (error) { }
     }
     else {
-      // @ts-expect-error Type '{}' is not assignable to type 'MetWords'. Index signature for type 'string' is missing in type '{}'.ts(2322)
       [metWordsFromStateOrArg, lessonsProgressState] = loadPersonalPreferences();
     }
 

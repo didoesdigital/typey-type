@@ -618,26 +618,6 @@ function loadPersonalDictionariesFromLocalStorage() {
   return null;
 }
 
-function loadPersonalPreferences() {
-  let metWords = {};
-  let lessonsProgress = {};
-  try {
-    if (window.localStorage) {
-      if (window.localStorage.getItem('metWords')) {
-        metWords = JSON.parse(window.localStorage.getItem('metWords'));
-      }
-      if (window.localStorage.getItem('lessonsProgress')) {
-        lessonsProgress = Object.assign(lessonsProgress, JSON.parse(window.localStorage.getItem('lessonsProgress')));
-      }
-      return [metWords, lessonsProgress];
-    }
-  }
-  catch(error) {
-    console.log('Unable to read local storage.', error);
-  }
-  return [metWords, lessonsProgress];
-}
-
 function writePersonalPreferences(itemToStore, JSONToStore) {
   const localStorageErrorMessage = "Local storage is unavailable. Changes to personal preferences and progress will be lost.";
   try {
@@ -758,7 +738,6 @@ function updateCapitalisationStrokesInNextItem(nextItem, lastWord) {
 
 export {
   createWordListFromMetWords,
-  loadPersonalPreferences,
   loadPersonalDictionariesFromLocalStorage,
   lookUpDictionaryInIndex,
   matchSplitText,
