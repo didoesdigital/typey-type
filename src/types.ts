@@ -1,3 +1,4 @@
+import Zipper from "./utils/zipper";
 import fetchAndSetupGlobalDict from "./utils/app/fetchAndSetupGlobalDict";
 
 /**
@@ -323,12 +324,6 @@ export type SourceMaterial = SourceMaterialItem[];
 export type RevisionMaterial = SourceMaterialItem[];
 export type RevisionMode = boolean;
 
-export type NewPresentedMaterial = {
-  completed: MaterialItem[];
-  current: MaterialItem;
-  remaining: MaterialItem[];
-};
-
 export type LessonSettings = {
   ignoredChars: string;
   customMessage?: string;
@@ -455,7 +450,7 @@ export type Lesson = {
   settings: LessonSettings;
   title: PrettyLessonTitle;
   subtitle: string;
-  newPresentedMaterial: NewPresentedMaterial;
+  newPresentedMaterial: Zipper;
   path: LessonPathWithBasenameAndFilename;
 };
 

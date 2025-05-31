@@ -966,7 +966,6 @@ class App extends Component<Props, AppState> {
   }
 
   presentCompletedMaterial() {
-    // @ts-expect-error TS(2532) FIXME: Object is possibly 'undefined'.
     return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getCompleted().map(item => item.phrase) : [];
   }
 
