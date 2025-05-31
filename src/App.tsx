@@ -45,11 +45,13 @@ class App extends Component {
   // @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props);
+    // @ts-ignore
     this.charsPerWord = 5;
     // When updating default state for anything stored in local storage,
     // add the same default to load/set personal preferences code and test.
     let metWordsFromStorage = loadPersonalPreferences()[0];
     let startingMetWordsToday = loadPersonalPreferences()[0];
+    // @ts-ignore
     this.appFetchAndSetupGlobalDict = fetchAndSetupGlobalDict.bind(this);
 
     this.state = {
@@ -99,6 +101,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // @ts-ignore
     this.setPersonalPreferences();
   }
 
@@ -109,6 +112,7 @@ class App extends Component {
    */
   // @ts-expect-error TS(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps) {
+    // @ts-ignore
     const curUserSettings = this.props.userSettings;
     const prevUserSettings = prevProps.userSettings;
     if (
@@ -125,6 +129,7 @@ class App extends Component {
       curUserSettings.retainedWords !== prevUserSettings.retainedWords ||
       curUserSettings.simpleTypography !== prevUserSettings.simpleTypography
     ) {
+      // @ts-ignore
       this.setupLesson();
     }
   }
@@ -165,6 +170,7 @@ class App extends Component {
       ...prevState,
       actualText: '',
       currentLessonStrokes: currentLessonStrokes,
+      // @ts-ignore
       currentPhraseID: this.state.lesson.presentedMaterial.length,
       previousCompletedPhraseAsTyped: '',
       currentPhraseAttempts: [],
@@ -179,6 +185,7 @@ class App extends Component {
     if (this.shouldUpdateLessonsProgress(newState)) {
       let lessonsProgress = this.getUpdatedLessonsProgress({lessonPath: prevState.lesson.path,
                                                             lesson: prevState.lesson,
+      // @ts-ignore
                                                             userSettings: this.props.userSettings,
                                                             prevLessonsProgress: prevState.lessonsProgress,
                                                             metWords: prevState.metWords});
@@ -189,12 +196,16 @@ class App extends Component {
   }
 
   startTimer() {
+    // @ts-ignore
     this.intervalID = window.setInterval(this.updateWPM.bind(this), 1000);
   }
 
   stopTimer() {
+    // @ts-ignore
     if (this.intervalID) {
+      // @ts-ignore
       clearInterval(this.intervalID);
+      // @ts-ignore
       this.intervalID = null;
     }
   }
@@ -208,10 +219,13 @@ class App extends Component {
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'newMetWord' implicitly has an 'any' typ... Remove this comment to see the full error message
   updateMetWords(newMetWord) {
+    // @ts-ignore
     const newMetWordsState = Object.assign({}, this.state.metWords);
     const phraseText =
+      // @ts-ignore
       this.props.userSettings.spacePlacement === "spaceBeforeOutput"
         ? " " + newMetWord
+        // @ts-ignore
         : this.props.userSettings.spacePlacement === "spaceAfterOutput"
         ? newMetWord + " "
         : newMetWord;
@@ -223,7 +237,9 @@ class App extends Component {
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'source' implicitly has an 'any' type.
   setPersonalPreferences(source) {
+    // @ts-ignore
     let metWordsFromStateOrArg = this.state.metWords;
+    // @ts-ignore
     let lessonsProgressState = this.state.lessonsProgress;
     if (source && source !== '') {
       try {
@@ -364,6 +380,7 @@ class App extends Component {
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.props.userSettings) { stenoLayout = this.props.userSettings.stenoLayout; }
 
+    // @ts-ignore
     this.appFetchAndSetupGlobalDict(null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWordsFromStorage).join("\n");
@@ -374,6 +391,7 @@ class App extends Component {
         // let result = parseWordList(myWords);
       if (result && result.length > 0) {
         // look up strokes for each word
+        // @ts-ignore
         let lessonWordsAndStrokes = generateListOfWordsAndStrokes(result, this.state.globalLookupDictionary);
         if (lessonWordsAndStrokes && lessonWordsAndStrokes.length > 0) {
           // @ts-expect-error TS(2339) FIXME: Property 'sourceMaterial' does not exist on type '... Remove this comment to see the full error message
@@ -409,9 +427,11 @@ class App extends Component {
       this.setupLesson({
         currentPhraseID: 0,
         lesson: lesson,
+        // @ts-ignore
         focusTriggerInt: this.state.focusTriggerInt + 1
       });
     })
+    // @ts-ignore
     .catch(error => {
       console.error(error);
       // this.showDictionaryErrorNotification();
@@ -421,8 +441,10 @@ class App extends Component {
   // @ts-expect-error TS(7006) FIXME: Parameter 'lessonProps' implicitly has an 'any' ty... Remove this comment to see the full error message
   setupLesson(lessonProps) {
     const newState = {...this.state, ...lessonProps};
+    // @ts-ignore
     const revisionMode = lessonProps?.revisionMode ?? this.props.revisionMode;
     const revisionMaterial = newState.revisionMaterial;
+    // @ts-ignore
     const userSettings = this.props.userSettings;
     const lessonPath = newState.lesson.path;
     let newLesson = Object.assign({}, newState.lesson);
@@ -540,6 +562,7 @@ class App extends Component {
         this.setState({lessonNotFound: false});
         let lesson = parseLesson(lessonText, path);
         if (
+          // @ts-ignore
           this.props.globalUserSettings.experiments && !!this.props.globalUserSettings.experiments.stenohintsonthefly &&
           !path.includes("phrasing") &&
           !path.includes("prefixes") &&
@@ -548,7 +571,9 @@ class App extends Component {
           !path.includes("collections/tech")
         ) {
 
+          // @ts-ignore
           this.appFetchAndSetupGlobalDict(null).then(() => {
+            // @ts-ignore
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
               lesson.presentedMaterial = lessonWordsAndStrokes;
@@ -557,15 +582,21 @@ class App extends Component {
             this.setupLesson({
               lesson: lesson,
               currentPhraseID: 0,
+              // @ts-ignore
               focusTriggerInt: this.state.focusTriggerInt + 1
             });
           });
         }
+        // @ts-ignore
         else if (this.props.userSettings.showStrokesAsList) {
+          // @ts-ignore
           const shouldUsePersonalDictionaries = this.state.personalDictionaries
+          // @ts-ignore
             && Object.entries(this.state.personalDictionaries).length > 0
+            // @ts-ignore
             && !!this.state.personalDictionaries.dictionariesNamesAndContents;
 
+            // @ts-ignore
           this.appFetchAndSetupGlobalDict(
             // @ts-expect-error TS(2345) FIXME: Argument of type '{ dictionariesNamesAndContents: ... Remove this comment to see the full error message
             shouldUsePersonalDictionaries ? this.state.personalDictionaries : null
@@ -574,8 +605,10 @@ class App extends Component {
               this.setupLesson({
                 lesson: lesson,
                 currentPhraseID: 0,
+                // @ts-ignore
                 focusTriggerInt: this.state.focusTriggerInt + 1
               });
+              // @ts-ignore
             }).catch((error) =>
               console.error("failed to fetch and setup global dictionary", error)
             );
@@ -584,6 +617,7 @@ class App extends Component {
           this.setupLesson({
             lesson: lesson,
             currentPhraseID: 0,
+            // @ts-ignore
             focusTriggerInt: this.state.focusTriggerInt + 1
           });
         }
@@ -596,6 +630,7 @@ class App extends Component {
   }
 
   startCustomLesson() {
+    // @ts-ignore
     let lesson = Object.assign({}, this.state.customLesson);
     lesson.title = 'Custom'
     this.setupLesson({
@@ -609,6 +644,7 @@ class App extends Component {
     if (event && event.target) {
       let providedText = event.target.value || '';
       let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
+      // @ts-ignore
       let customLesson = Object.assign({}, this.state.customLesson);
       // @ts-expect-error TS(2339) FIXME: Property 'length' does not exist on type 'string |... Remove this comment to see the full error message
       if (validationMessages && validationMessages.length < 1) { customLesson = lesson; }
@@ -623,6 +659,7 @@ class App extends Component {
     }
     else { // for navigating straight to custom lesson page without setup
     // TODO: is this the place where I should set a default empty custom lesson?
+    // @ts-ignore
       let lesson = Object.assign({}, this.state.customLesson);
       lesson.title = 'Custom'
       this.setupLesson({
@@ -640,6 +677,7 @@ class App extends Component {
     this.stopLesson();
     this.setupLesson({
       revisionMaterial: newRevisionMaterial,
+      // @ts-ignore
       focusTriggerInt: this.state.focusTriggerInt + 1,
       revisionMode: true,
     });
@@ -650,6 +688,7 @@ class App extends Component {
     event.preventDefault();
     this.stopLesson();
     this.setupLesson({
+      // @ts-ignore
       focusTriggerInt: this.state.focusTriggerInt + 1,
       revisionMode: false
     });
@@ -676,11 +715,13 @@ class App extends Component {
     // const batchUpdate = document.cookie.indexOf("batchUpdate=1")>=0;
     const batchUpdate = true;
     if(!batchUpdate) {
+      // @ts-ignore
       this.processBuffer(actualText);
       return;
     }
     // Immediately update the text in the input field
     this.setState({ actualText });
+    // @ts-ignore
     this.markupBuffer.push({text: actualText, time: Date.now()});
 
     if (this.updateBufferTimer) {
@@ -747,6 +788,7 @@ class App extends Component {
       matchSplitText(state.lesson.presentedMaterial[state.currentPhraseID].phrase,
                      actualText,
                      state.lesson.settings,
+                     // @ts-ignore
                      this.props.userSettings);
 
     if (state.lesson.settings.ignoredChars) {
@@ -767,10 +809,13 @@ class App extends Component {
     currentPhraseAttempts.push({
       text: actualText,
       time: time,
+      // @ts-ignore
       numberOfMatchedWordsSoFar: (state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       hintWasShown: shouldShowStroke(state.showStrokesInLesson,
+                                     // @ts-ignore
                                      this.props.userSettings.showStrokes,
                                      state.repetitionsRemaining,
+                                     // @ts-ignore
                                      this.props.userSettings.hideStrokesOnLastRepetition)
     });
 
@@ -778,6 +823,7 @@ class App extends Component {
       ...state,
       currentPhraseAttempts: currentPhraseAttempts,
       numberOfMatchedChars: numberOfMatchedChars,
+      // @ts-ignore
       totalNumberOfMatchedWords: (state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
       actualText: actualText,
     };
@@ -791,6 +837,7 @@ class App extends Component {
     const accurateStroke = phraseMisstrokes.strokeAccuracy; // false
     const attempts = phraseMisstrokes.attempts; // [" sign", " ss"]
 
+    // @ts-ignore
     if (!accurateStroke && !state.showStrokesInLesson && this.props.userSettings.showStrokesOnMisstroke) {
       state.showStrokesInLesson = true;
     }
@@ -800,6 +847,7 @@ class App extends Component {
       // e.g. unmatchedActual is "es" if "Frenches" is typed for "French"
       // In case of spaceAfterOutput, unmatchedChars is not empty and don't care here.
       // In case of spaceExact, proceed without checking next actual chars.
+      // @ts-ignore
       const excessLookFine = this.props.userSettings.spacePlacement === "spaceAfterOutput" || this.props.userSettings.spacePlacement === "spaceExact" || unmatchedActual.length === 0 || unmatchedActual[0] === " ";
       proceedToNextWord = numberOfUnmatchedChars === 0 && excessLookFine;
     } else {
@@ -809,12 +857,15 @@ class App extends Component {
       state.currentPhraseAttempts = []; // reset for next word
 
       const strokeHintShown = shouldShowStroke(state.showStrokesInLesson,
+                                               // @ts-ignore
                                                this.props.userSettings.showStrokes,
                                                state.repetitionsRemaining,
+                                               // @ts-ignore
                                                this.props.userSettings.hideStrokesOnLastRepetition);
 
       // NOTE: here is where completed phrases are pushed
       state.currentLessonStrokes.push({
+        // @ts-ignore
         numberOfMatchedWordsSoFar: (state.totalNumberOfMatchedChars + numberOfMatchedChars) / this.charsPerWord,
         word: state.lesson.presentedMaterial[state.currentPhraseID].phrase,
         typedText: actualText,
@@ -833,8 +884,10 @@ class App extends Component {
 
       if (!strokeHintShown && accurateStroke) {
         // Use the original text when recording to preserve case and spacing
+        // @ts-ignore
         const phraseText = this.props.userSettings.spacePlacement === 'spaceBeforeOutput'
           ? ' ' + state.lesson.presentedMaterial[state.currentPhraseID].phrase
+          // @ts-ignore
           : this.props.userSettings.spacePlacement === 'spaceAfterOutput'
           ? state.lesson.presentedMaterial[state.currentPhraseID].phrase + ' '
           : state.lesson.presentedMaterial[state.currentPhraseID].phrase;
@@ -847,6 +900,7 @@ class App extends Component {
         state.metWords[phraseText] = meetingsCount + 1;
       }
 
+      // @ts-ignore
       if (this.props.userSettings.speakMaterial) {
         const remaining = state.lesson.newPresentedMaterial.getRemaining();
         if (remaining && remaining.length > 0 && remaining[0].hasOwnProperty('phrase')) {
@@ -866,6 +920,7 @@ class App extends Component {
       state.targetStrokeCount = getTargetStrokeCount(nextItem || { phrase: '', stroke: 'TK-LS' });
       state.lesson.newPresentedMaterial.visitNext();
 
+      // @ts-ignore
       state.repetitionsRemaining = repetitionsRemaining(this.props.userSettings,
                                                         state.lesson.presentedMaterial,
                                                         state.currentPhraseID + 1);
@@ -897,16 +952,23 @@ class App extends Component {
 
   say(utteranceText: string) {
     synthesizeSpeech(utteranceText, {
+      // @ts-ignore
       voiceURI: this.props.userSettings.voiceURI,
+      // @ts-ignore
       voiceName: this.props.userSettings.voiceName,
+      // @ts-ignore
       stenoLayout: this.props.userSettings?.stenoLayout,
+      // @ts-ignore
       timeElapsedMillis: this.state.timer,
+      // @ts-ignore
       totalNumberOfMatchedWords: this.state.totalNumberOfMatchedWords,
     });
   }
 
   sayCurrentPhraseAgain() {
+    // @ts-ignore
     if (this.props.userSettings.speakMaterial) {
+      // @ts-ignore
       let currentPhrase = this.state.lesson.presentedMaterial[this.state.currentPhraseID];
       if (currentPhrase && currentPhrase.hasOwnProperty('phrase')) {
         this.say(currentPhrase.phrase);
@@ -926,6 +988,7 @@ class App extends Component {
   }
 
   presentUpcomingMaterial() {
+    // @ts-ignore
     return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getRemaining().slice().map(item => item.phrase) : [];
   }
 
@@ -933,6 +996,7 @@ class App extends Component {
     let completedMaterial = this.presentCompletedMaterial();
     let upcomingMaterial = this.presentUpcomingMaterial();
 
+    // @ts-ignore
     let stateLesson = this.state.lesson;
     if ((Object.keys(stateLesson).length === 0 && stateLesson.constructor === Object) || !stateLesson) {
       stateLesson = {
@@ -945,12 +1009,14 @@ class App extends Component {
       };
     }
 
+    // @ts-ignore
     let presentedMaterialCurrentItem = (stateLesson.presentedMaterial && stateLesson.presentedMaterial[this.state.currentPhraseID]) ? stateLesson.presentedMaterial[this.state.currentPhraseID] : { phrase: '', stroke: '' };
     return (
       <div id="js-app" className="app">
         <div className="flex flex-column justify-between min-vh-100">
           <AppMethodsContext.Provider value={
             {
+              // @ts-ignore
               appFetchAndSetupGlobalDict: this.appFetchAndSetupGlobalDict,
               setCustomLessonContent: setCustomLessonContent.bind(this),
               customiseLesson: customiseLesson.bind(this),
@@ -977,6 +1043,7 @@ class App extends Component {
           }>
             <AppRoutes
               appProps={{
+                // @ts-ignore
                 location: this.props.location,
                 completedMaterial,
                 presentedMaterialCurrentItem,

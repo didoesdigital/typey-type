@@ -79,6 +79,7 @@ describe(App, () => {
     const [userSettings, setUserSettings] = useAtom(userSettingsState)
     const [globalUserSettings, setGlobalUserSettings] = useAtom(globalUserSettingsState)
     const lessonIndex = useLessonIndexWithFallback()
+    // @ts-ignore
     return <StateLoggingApp {...{
       location,
       history,

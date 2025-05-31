@@ -27,6 +27,7 @@ if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
 
 function AppWrapper(props: object) {
   const lessonIndex = useLessonIndexWithFallback();
+  // @ts-ignore
   return <App {...props} {...{ lessonIndex }} />;
 }
 

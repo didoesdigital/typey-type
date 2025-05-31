@@ -194,6 +194,7 @@ const Lesson = ({
           parsedParams
         );
         setUserSettings(newUserSettings);
+        // @ts-ignore
         setupLesson();
       }
       const urlSearchParams = new URLSearchParams(location.search);
