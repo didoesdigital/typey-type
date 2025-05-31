@@ -273,9 +273,9 @@ export type Attempt = {
    * */
   text: string;
   /** e.g. 1670211049535 */
-  time: 1670212079120;
+  time: number;
   /** e.g. 1.6 */
-  numberOfMatchedWordsSoFar: 1.6;
+  numberOfMatchedWordsSoFar: number;
   hintWasShown: boolean;
 };
 
