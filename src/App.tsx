@@ -42,6 +42,7 @@ import AppMethodsContext from "./states/legacy/AppMethodsContext";
 import { synth, synthesizeSpeech } from "./utils/speechSynthesis";
 
 class App extends Component {
+  // @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props);
     this.charsPerWord = 5;
@@ -89,7 +90,9 @@ class App extends Component {
       revisionMaterial: [
       ],
       startingMetWordsToday: startingMetWordsToday,
+      // @ts-expect-error TS(2345) FIXME: Argument of type '{}' is not assignable to paramet... Remove this comment to see the full error message
       yourSeenWordCount: calculateSeenWordCount(metWordsFromStorage),
+      // @ts-expect-error TS(2345) FIXME: Argument of type '{}' is not assignable to paramet... Remove this comment to see the full error message
       yourMemorisedWordCount: calculateMemorisedWordCount(metWordsFromStorage),
       focusTriggerInt: 0
     };
@@ -104,6 +107,7 @@ class App extends Component {
    * this should probably be moved inside the Lesson component
    * when and if the lesson state is moved into the Lesson component
    */
+  // @ts-expect-error TS(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps) {
     const curUserSettings = this.props.userSettings;
     const prevUserSettings = prevProps.userSettings;
@@ -125,11 +129,13 @@ class App extends Component {
     }
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
   shouldUpdateLessonsProgress(state) {
     return state.lesson.path && !state.lesson.path.endsWith("/lessons/custom");
   }
 
   /* anything that needs to be done when stopping the lesson, excluding the state update */
+  // @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
   applyStopLessonSideEffects(state) {
     this.stopTimer();
     synth?.cancel();
@@ -145,7 +151,9 @@ class App extends Component {
     this.setState(newState);
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'prevState' implicitly has an 'any' type... Remove this comment to see the full error message
   getFutureStateToStopLesson(prevState) {
+    // @ts-expect-error TS(7006) FIXME: Parameter 'copy' implicitly has an 'any' type.
     const currentLessonStrokes = prevState.currentLessonStrokes.map(copy => ({...copy}));
     for (let i = 0; i < currentLessonStrokes.length; i++) {
       if (currentLessonStrokes[i].accuracy === true) {
@@ -193,10 +201,12 @@ class App extends Component {
 
   updateWPM() {
     this.setState({
+      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
       timer: new Date().getTime() - this.state.startTime
     });
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'newMetWord' implicitly has an 'any' typ... Remove this comment to see the full error message
   updateMetWords(newMetWord) {
     const newMetWordsState = Object.assign({}, this.state.metWords);
     const phraseText =
@@ -205,12 +215,15 @@ class App extends Component {
         : this.props.userSettings.spacePlacement === "spaceAfterOutput"
         ? newMetWord + " "
         : newMetWord;
+    // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     const meetingsCount = newMetWordsState[phraseText] || 0;
+    // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     newMetWordsState[phraseText] = meetingsCount + 1;
     this.setState({ metWords: newMetWordsState });
     writePersonalPreferences("metWords", newMetWordsState);
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'source' implicitly has an 'any' type.
   setPersonalPreferences(source) {
     let metWordsFromStateOrArg = this.state.metWords;
     let lessonsProgressState = this.state.lessonsProgress;
@@ -227,7 +240,9 @@ class App extends Component {
       [metWordsFromStateOrArg, lessonsProgressState] = loadPersonalPreferences();
     }
 
+    // @ts-expect-error TS(2345) FIXME: Argument of type '{}' is not assignable to paramet... Remove this comment to see the full error message
     let calculatedYourSeenWordCount = calculateSeenWordCount(this.state.metWords);
+    // @ts-expect-error TS(2345) FIXME: Argument of type '{}' is not assignable to paramet... Remove this comment to see the full error message
     let calculatedYourMemorisedWordCount = calculateMemorisedWordCount(this.state.metWords);
 
     // these two writePersonalPreferences calls were in a callback of setState - so 
@@ -244,6 +259,7 @@ class App extends Component {
     });
   }
 
+  // @ts-expect-error TS(7031) FIXME: Binding element 'lessonPath' implicitly has an 'an... Remove this comment to see the full error message
   getUpdatedLessonsProgress({lessonPath, lesson, userSettings, prevLessonsProgress, metWords}) {
     const lessonsProgress = {...prevLessonsProgress};
     // This is actually UNIQUE numberOfWordsSeen.
@@ -258,6 +274,7 @@ class App extends Component {
       numberOfWordsSeen = lessonsProgress[lessonPath].numberOfWordsSeen;
     }
 
+    // @ts-expect-error TS(7006) FIXME: Parameter 'copy' implicitly has an 'any' type.
     let material = lesson?.sourceMaterial ? lesson.sourceMaterial.map(copy => ({...copy})) : [{phrase: "the", stroke: "-T"}];
     if (userSettings.simpleTypography) {
       material = replaceSmartTypographyInPresentedMaterial.call(this, material, userSettings);
@@ -269,10 +286,13 @@ class App extends Component {
 
     let normalisedMetWords = {};
     Object.keys(metWords).forEach(function(key) {
+      // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       if (normalisedMetWords[key.trim()]) {
+        // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         normalisedMetWords[key.trim()] = metWords[key] + normalisedMetWords[key.trim()];
       }
       else {
+        // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         normalisedMetWords[key.trim()] = metWords[key];
       }
     });
@@ -288,16 +308,19 @@ class App extends Component {
       sourceMaterialPhrase = sourceMaterialPhrase.trim();
 
       // have you seen this word?
+      // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       if (normalisedMetWords[sourceMaterialPhrase] && normalisedMetWords[sourceMaterialPhrase] > 0) {
 
         // console.log(sourceMaterialPhrase);
         // have you seen this word and seen it in this lesson already?
         if (!(alreadyChecked.indexOf(sourceMaterialPhrase) > -1)) {
           alreadyChecked.push(sourceMaterialPhrase);
+          // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           if (normalisedMetWords[sourceMaterialPhrase] < 30) {
             seenAccumulator = seenAccumulator + 1;
             // console.log("Seen: " + sourceMaterialPhrase);
           }
+          // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
           if (normalisedMetWords[sourceMaterialPhrase] > 29) {
             memorisedAccumulator = memorisedAccumulator + 1;
             // console.log("Memorised: " + sourceMaterialPhrase);
@@ -327,6 +350,7 @@ class App extends Component {
     return lessonsProgress;
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'providedMetWords' implicitly has an 'an... Remove this comment to see the full error message
   updateStartingMetWordsAndCounts(providedMetWords) {
     this.setState({
       startingMetWordsToday: providedMetWords,
@@ -336,6 +360,7 @@ class App extends Component {
   }
 
   // set user settings
+  // @ts-expect-error TS(7006) FIXME: Parameter 'metWordsFromStorage' implicitly has an ... Remove this comment to see the full error message
   setUpProgressRevisionLesson(metWordsFromStorage, newSeenOrMemorised) {
     let lesson = {};
     // let stenoLayout = "stenoLayoutAmericanSteno";
@@ -353,19 +378,30 @@ class App extends Component {
         // look up strokes for each word
         let lessonWordsAndStrokes = generateListOfWordsAndStrokes(result, this.state.globalLookupDictionary);
         if (lessonWordsAndStrokes && lessonWordsAndStrokes.length > 0) {
+          // @ts-expect-error TS(2339) FIXME: Property 'sourceMaterial' does not exist on type '... Remove this comment to see the full error message
           lesson.sourceMaterial = lessonWordsAndStrokes;
+          // @ts-expect-error TS(2339) FIXME: Property 'presentedMaterial' does not exist on typ... Remove this comment to see the full error message
           lesson.presentedMaterial = lessonWordsAndStrokes;
+          // @ts-expect-error TS(2339) FIXME: Property 'newPresentedMaterial' does not exist on ... Remove this comment to see the full error message
           lesson.newPresentedMaterial = new Zipper(lessonWordsAndStrokes);
+          // @ts-expect-error TS(2339) FIXME: Property 'settings' does not exist on type '{}'.
           lesson.settings = {
             ignoredChars: '',
             customMessage: ''
           };
+          // @ts-expect-error TS(2339) FIXME: Property 'path' does not exist on type '{}'.
           lesson.path = process.env.PUBLIC_URL + '/lessons/progress/seen/'
+          // @ts-expect-error TS(2339) FIXME: Property 'title' does not exist on type '{}'.
           lesson.title = 'Your revision words'
+          // @ts-expect-error TS(2339) FIXME: Property 'path' does not exist on type '{}'.
           if (newSeenOrMemorised[2]) { lesson.path = process.env.PUBLIC_URL + '/lessons/progress/memorised/'; }
+          // @ts-expect-error TS(2339) FIXME: Property 'title' does not exist on type '{}'.
           if (newSeenOrMemorised[2]) { lesson.title = 'Your memorised words'; }
+          // @ts-expect-error TS(2339) FIXME: Property 'title' does not exist on type '{}'.
           if (newSeenOrMemorised[1] && newSeenOrMemorised[2]) { lesson.title = 'Your words'; }
+          // @ts-expect-error TS(2339) FIXME: Property 'path' does not exist on type '{}'.
           if (newSeenOrMemorised[1] && newSeenOrMemorised[2]) { lesson.path = process.env.PUBLIC_URL + '/lessons/progress/'; }
+          // @ts-expect-error TS(2339) FIXME: Property 'subtitle' does not exist on type '{}'.
           lesson.subtitle = ''
         }
       }
@@ -384,6 +420,7 @@ class App extends Component {
     });
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'lessonProps' implicitly has an 'any' ty... Remove this comment to see the full error message
   setupLesson(lessonProps) {
     const newState = {...this.state, ...lessonProps};
     const revisionMode = lessonProps?.revisionMode ?? this.props.revisionMode;
@@ -405,9 +442,11 @@ class App extends Component {
 
     // Copy source or revision material to presented material:
     if (revisionMode) {
+      // @ts-expect-error TS(7006) FIXME: Parameter 'line' implicitly has an 'any' type.
       newLesson.presentedMaterial = revisionMaterial.map(line => ({...line}));
     }
     else {
+      // @ts-expect-error TS(7006) FIXME: Parameter 'line' implicitly has an 'any' type.
       newLesson.presentedMaterial = newLesson.sourceMaterial.map(line => ({...line}));
     }
 
@@ -496,6 +535,7 @@ class App extends Component {
     this.setState(newState);
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'path' implicitly has an 'any' type.
   handleLesson(path) {
     getLesson(path).then((lessonText) => {
       if (isLessonTextValid(lessonText)) {
@@ -529,6 +569,7 @@ class App extends Component {
             && !!this.state.personalDictionaries.dictionariesNamesAndContents;
 
           this.appFetchAndSetupGlobalDict(
+            // @ts-expect-error TS(2345) FIXME: Argument of type '{ dictionariesNamesAndContents: ... Remove this comment to see the full error message
             shouldUsePersonalDictionaries ? this.state.personalDictionaries : null
           )
             .then(() => {
@@ -565,11 +606,13 @@ class App extends Component {
     });
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   createCustomLesson(event) {
     if (event && event.target) {
       let providedText = event.target.value || '';
       let [lesson, validationState, validationMessages] = parseCustomMaterial(providedText);
       let customLesson = Object.assign({}, this.state.customLesson);
+      // @ts-expect-error TS(2339) FIXME: Property 'length' does not exist on type 'string |... Remove this comment to see the full error message
       if (validationMessages && validationMessages.length < 1) { customLesson = lesson; }
       this.setupLesson({
         lesson,
@@ -593,6 +636,7 @@ class App extends Component {
     return event;
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   reviseLesson(event, newRevisionMaterial) {
     event.preventDefault();
     this.stopLesson();
@@ -603,6 +647,7 @@ class App extends Component {
     });
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   restartLesson(event) {
     event.preventDefault();
     this.stopLesson();
@@ -612,18 +657,22 @@ class App extends Component {
     });
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'personalDictionaries' implicitly has an... Remove this comment to see the full error message
   updatePersonalDictionaries(personalDictionaries) {
     this.setState({personalDictionaries: personalDictionaries});
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'combinedLookupDictionary' implicitly ha... Remove this comment to see the full error message
   updateGlobalLookupDictionary(combinedLookupDictionary) {
     this.setState({globalLookupDictionary: combinedLookupDictionary});
   }
 
 
+  // @ts-expect-error TS(7008) FIXME: Member 'markupBuffer' implicitly has an 'any[]' ty... Remove this comment to see the full error message
   markupBuffer = [];
   updateBufferTimer = null;
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   updateMarkup(event) {
     let actualText = event.target.value;
     // TODO: once we're happy that this will be the permanent new default behaviour, remove all the `batchUpdate`-specific branching code and tests:
@@ -640,6 +689,7 @@ class App extends Component {
     if (this.updateBufferTimer) {
       clearTimeout(this.updateBufferTimer);
     }
+    // @ts-expect-error TS(2322) FIXME: Type 'Timeout' is not assignable to type 'null'.
     this.updateBufferTimer = setTimeout(() => {
       const buffer = this.markupBuffer;
       this.markupBuffer = [];
@@ -657,12 +707,14 @@ class App extends Component {
    *
    * @actualText param is not used - probably should be removed
    */
+  // @ts-expect-error TS(7006) FIXME: Parameter 'actualText' implicitly has an 'any' typ... Remove this comment to see the full error message
   processBuffer(actualText, buffer) {
     const stateCopy = {...this.state};
     const [newState, sideEffects] = this.getNewStateAndSideEffectsForBuffer(actualText,
                                                                             buffer,
                                                                             stateCopy,
                                                                             []);
+    // @ts-expect-error TS(7006) FIXME: Parameter 'effect' implicitly has an 'any' type.
     sideEffects.forEach(effect => effect());
     this.setState(newState);
   }
@@ -675,6 +727,7 @@ class App extends Component {
    * This function may be executed recursively, until all the strokes in the buffer
    * are processed.
    */
+  // @ts-expect-error TS(7023) FIXME: 'getNewStateAndSideEffectsForBuffer' implicitly ha... Remove this comment to see the full error message
   getNewStateAndSideEffectsForBuffer(actualText, buffer, state, sideEffects) {
     let time = Date.now();
     if (buffer) {
@@ -707,6 +760,7 @@ class App extends Component {
     const [numberOfMatchedChars, numberOfUnmatchedChars] = [matchedChars, unmatchedChars].map(text => text.length);
 
     // @ts-ignore this should be ok when currentPhraseAttempts is typed correctly instead of never[]
+    // @ts-expect-error TS(7006) FIXME: Parameter 'copy' implicitly has an 'any' type.
     const currentPhraseAttempts = state.currentPhraseAttempts.map(copy => ({...copy}));
 
     if (buffer) {
@@ -835,7 +889,9 @@ class App extends Component {
     } else if (buffer && proceedToNextWord && unmatchedActual.length > 0) {
       // Repetitively apply buffer with already accepted phrases excluded
       const newBuffer = buffer
+        // @ts-expect-error TS(7006) FIXME: Parameter 'stroke' implicitly has an 'any' type.
         .filter(stroke => stroke.text.length > matchedActual.length && stroke.text.startsWith(matchedActual))
+        // @ts-expect-error TS(7006) FIXME: Parameter 'stroke' implicitly has an 'any' type.
         .map(stroke => ({ text: stroke.text.slice(matchedActual.length), time: stroke.time }));
       return this.getNewStateAndSideEffectsForBuffer(null, newBuffer, state, sideEffects);
     }
@@ -861,12 +917,14 @@ class App extends Component {
     }
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'currentState' implicitly has an 'any' t... Remove this comment to see the full error message
   isFinished(currentState) {
     const presentedMaterialLength = currentState.lesson?.presentedMaterial?.length || 0;
     return currentState.currentPhraseID === presentedMaterialLength;
   }
 
   presentCompletedMaterial() {
+    // @ts-expect-error TS(2532) FIXME: Object is possibly 'undefined'.
     return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getCompleted().map(item => item.phrase) : [];
   }
 
@@ -925,9 +983,11 @@ class App extends Component {
                 location: this.props.location,
                 completedMaterial,
                 presentedMaterialCurrentItem,
+                // @ts-expect-error TS(2322) FIXME: Type '{ sourceMaterial: { phrase: string; stroke: ... Remove this comment to see the full error message
                 stateLesson,
                 upcomingMaterial
               }}
+              // @ts-expect-error TS(2322) FIXME: Type '{ currentPhraseAttempts: never[]; currentPhr... Remove this comment to see the full error message
               appState={this.state}
             />
           </AppMethodsContext.Provider>
