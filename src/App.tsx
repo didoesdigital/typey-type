@@ -65,7 +65,8 @@ type Props = AppProps & {
 
 class App extends Component<Props, AppState> {
   private charsPerWord: number;
-  // TODO: add types for appFetchAndSetupGlobalDict, setPersonalPreferences, setupLesson, processBuffer
+  private appFetchAndSetupGlobalDict: typeof fetchAndSetupGlobalDict;
+  // TODO: add types for setPersonalPreferences, setupLesson, processBuffer
   // TODO: add type for intervalID
 
   constructor(props: Props) {
@@ -75,7 +76,6 @@ class App extends Component<Props, AppState> {
     // add the same default to load/set personal preferences code and test.
     let metWordsFromStorage = loadPersonalPreferences()[0];
     let startingMetWordsToday = loadPersonalPreferences()[0];
-    // @ts-ignore
     this.appFetchAndSetupGlobalDict = fetchAndSetupGlobalDict.bind(this);
     
     const emptyGlobalLookupDict: LookupDictWithNamespacedDicts = new Map();
@@ -589,7 +589,6 @@ class App extends Component<Props, AppState> {
           !path.includes("collections/tech")
         ) {
 
-          // @ts-ignore
           this.appFetchAndSetupGlobalDict(null).then(() => {
             let lessonWordsAndStrokes = generateListOfWordsAndStrokes(lesson['sourceMaterial'].map(i => i.phrase), this.state.globalLookupDictionary);
               lesson.sourceMaterial = lessonWordsAndStrokes;
@@ -608,9 +607,8 @@ class App extends Component<Props, AppState> {
             && Object.entries(this.state.personalDictionaries).length > 0
             && !!this.state.personalDictionaries.dictionariesNamesAndContents;
 
-            // @ts-ignore
           this.appFetchAndSetupGlobalDict(
-            shouldUsePersonalDictionaries ? this.state.personalDictionaries : null
+            shouldUsePersonalDictionaries ? (this.state.personalDictionaries ?? null) : null
           )
             .then(() => {
               this.setupLesson({
@@ -997,7 +995,6 @@ class App extends Component<Props, AppState> {
         <div className="flex flex-column justify-between min-vh-100">
           <AppMethodsContext.Provider value={
             {
-              // @ts-ignore
               appFetchAndSetupGlobalDict: this.appFetchAndSetupGlobalDict,
               setCustomLessonContent: setCustomLessonContent.bind(this),
               customiseLesson: customiseLesson.bind(this),
