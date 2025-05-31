@@ -66,12 +66,13 @@ type Props = AppProps & {
 class App extends Component<Props, AppState> {
   private charsPerWord: number;
   private appFetchAndSetupGlobalDict: typeof fetchAndSetupGlobalDict;
+  private intervalID: number | null;
   // TODO: add types for setupLesson, processBuffer
-  // TODO: add type for intervalID
 
   constructor(props: Props) {
     super(props);
     this.charsPerWord = 5;
+    this.intervalID = null;
     // When updating default state for anything stored in local storage,
     // add the same default to load/set personal preferences code and test.
     let metWordsFromStorage = loadPersonalPreferences()[0];
@@ -226,16 +227,12 @@ class App extends Component<Props, AppState> {
   }
 
   startTimer() {
-    // @ts-ignore
     this.intervalID = window.setInterval(this.updateWPM.bind(this), 1000);
   }
 
   stopTimer() {
-    // @ts-ignore
     if (this.intervalID) {
-      // @ts-ignore
       clearInterval(this.intervalID);
-      // @ts-ignore
       this.intervalID = null;
     }
   }
