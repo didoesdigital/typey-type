@@ -110,7 +110,6 @@ class App extends Component<Props, AppState> {
       // personalDictionaries: { dictionariesNamesAndContents: [] },
       previousCompletedPhraseAsTyped: '',
       repetitionsRemaining: 1,
-      // @ts-expect-error Type 'null' is not assignable to type 'Date'.ts(2322)
       startTime: null,
       showStrokesInLesson: false,
       targetStrokeCount: 1,
@@ -248,8 +247,7 @@ class App extends Component<Props, AppState> {
 
   updateWPM() {
     this.setState({
-      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
-      timer: new Date().getTime() - this.state.startTime
+      timer: new Date().getTime() - (this.state.startTime ?? 0)
     });
   }
 
@@ -791,7 +789,7 @@ class App extends Component<Props, AppState> {
 
     // Start timer on first key stroke
     if (state.startTime === null) {
-      state.startTime = new Date();
+      state.startTime = Date.now();
       state.timer = 0;
       state.disableUserSettings = true;
       sideEffects.push(() => this.startTimer());

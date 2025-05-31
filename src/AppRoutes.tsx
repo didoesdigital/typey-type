@@ -123,7 +123,7 @@ export type AppStateForDescendants = {
   personalDictionaries?: ImportedPersonalDictionaries;
   previousCompletedPhraseAsTyped: ActualTypedText;
   repetitionsRemaining: number;
-  startTime: Date;
+  startTime: number | null;
   showStrokesInLesson: boolean;
   targetStrokeCount: number;
   timer: number;

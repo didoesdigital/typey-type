@@ -12,7 +12,7 @@ import type {
 export type LessonData = {
   version: number;
   lessonStrokes: any[];
-  startTime: number;
+  startTime: number; // We can assume it's a number by the time it's recorded here
   wpm: number;
 } | null;
 
@@ -45,7 +45,7 @@ export type LessonProps = {
   repetitionsRemaining: number;
   settings: any;
   showStrokesInLesson: any;
-  startTime: any;
+  startTime: number | null;
   targetStrokeCount: any;
   timer: number;
   totalNumberOfHintedWords: any;
@@ -74,7 +74,7 @@ export type FinishedProps = {
   reviseLesson: any;
   revisionMode: any;
   settings: any;
-  startTime: any;
+  startTime: number | null;
   timer: number;
   totalNumberOfHintedWords: any;
   totalNumberOfLowExposuresSeen: any;
