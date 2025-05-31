@@ -8,15 +8,10 @@ import CustomLessonSetup from "./custom/CustomLessonSetup";
 import Loadable from "react-loadable";
 import PageLoading from "../../components/PageLoading";
 
-type Optional<T, K extends keyof T> = Pick<Partial<T>, K> & Omit<T, K>;
-type LessonsRoutingProps = Optional<
-  RouteComponentProps &
-    ComponentPropsWithoutRef<typeof Lesson> &
-    ComponentPropsWithoutRef<typeof CustomLessonSetup> &
-    ComponentPropsWithoutRef<typeof AsyncCustomLessonGenerator>,
-  // TODO: check this. it's not passed from parent
-  "lessonLength"
->;
+type LessonsRoutingProps = RouteComponentProps &
+  ComponentPropsWithoutRef<typeof Lesson> &
+  ComponentPropsWithoutRef<typeof CustomLessonSetup> &
+  ComponentPropsWithoutRef<typeof AsyncCustomLessonGenerator>;
 
 const AsyncCustomLessonGenerator = Loadable({
   loader: () => import("./custom/CustomLessonGenerator"),
@@ -81,7 +76,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
-              // @ts-expect-error
               lessonLength={lessonLength}
               lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
@@ -122,7 +116,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
-              // @ts-expect-error
               lessonLength={lessonLength}
               lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
@@ -163,7 +156,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
-              // @ts-expect-error
               lessonLength={lessonLength}
               lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
@@ -204,7 +196,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
-              // @ts-expect-error
               lessonLength={lessonLength}
               lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
@@ -245,7 +236,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
-              // @ts-expect-error
               lessonLength={lessonLength}
               lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
@@ -286,7 +276,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
-              // @ts-expect-error
               lessonLength={lessonLength}
               lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
@@ -328,7 +317,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
-              // @ts-expect-error
               lessonLength={lessonLength}
               lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
@@ -370,7 +358,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
-              // @ts-expect-error
               lessonLength={lessonLength}
               lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
@@ -412,7 +399,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
-              // @ts-expect-error
               lessonLength={lessonLength}
               lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
@@ -491,7 +477,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
-              // @ts-expect-error
               lessonLength={lessonLength}
               lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
@@ -533,7 +518,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
-              // @ts-expect-error
               lessonLength={lessonLength}
               lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}
@@ -575,7 +559,6 @@ const Lessons = ({
               globalLookupDictionary={globalLookupDictionary}
               globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
               lesson={lesson}
-              // @ts-expect-error
               lessonLength={lessonLength}
               lessonNotFound={lessonNotFound}
               lessonSubTitle={lessonSubTitle}

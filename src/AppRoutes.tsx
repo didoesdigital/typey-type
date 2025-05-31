@@ -358,6 +358,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                       lessonNotFound={appState.lessonNotFound}
                       lessonSubTitle={appState.lesson.subtitle}
                       lessonTitle={appState.lesson.title}
+                      lessonLength={appProps.stateLesson.presentedMaterial.length}
                       lesson={appState.lesson}
                       actualText={appState.actualText}
                       completedPhrases={appProps.completedMaterial}
