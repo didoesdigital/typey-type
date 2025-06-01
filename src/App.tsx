@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { isLessonTextValid } from 'utils/utils';
 import {
   parseCustomMaterial,
-  parseWordList,
   parseLesson,
   repetitionsRemaining,
   shouldShowStroke,
@@ -11,6 +10,7 @@ import {
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
+import { parseWordList } from './utils/parseWordList';
 import { matchSplitText } from "./utils/matchSplitText";
 import { createWordListFromMetWords } from "./utils/createWordListFromMetWords";
 import { strokeAccuracy } from './utils/strokeAccuracy';

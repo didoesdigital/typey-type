@@ -78,25 +78,6 @@ function parseCustomMaterial(lessonTextAndStrokes) {
   ]
 }
 
-function parseWordList(userInputWordList) {
-  let wordList = [];
-  if (userInputWordList.length === 0) {
-    return wordList;
-  }
-  let lines = userInputWordList.split("\n");
-  lines = lines.filter(phrase => phrase !== '');
-  if (lines.length === 0) {
-    return wordList;
-  }
-
-  for (let i = 0; i < lines.length; i++) {
-    let line = lines[i];
-    wordList.push( line );
-  }
-
-  return wordList;
-}
-
 function parseLesson(lessonText, path) {
   let lines = lessonText.split("\n");
   let lessonTitle = lines[0];
@@ -524,7 +505,6 @@ export {
   // migratePersonalDictionariesV1ToV2,
   parseCustomMaterial,
   parseLesson,
-  parseWordList,
   repetitionsRemaining,
   runAllPersonalDictionariesMigrations,
   shouldShowStroke,

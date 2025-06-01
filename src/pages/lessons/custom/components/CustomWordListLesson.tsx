@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useState } from "react";
 import PseudoContentButton from "../../../../components/PseudoContentButton";
 import CustomLessonFormattedCode from "./CustomLessonFormattedCode";
-import { parseWordList } from "../../../../utils/typey-type";
+import { parseWordList } from 'utils/parseWordList';
 import { generateListOfWordsAndStrokes } from "../../../../utils/transformingDictionaries/transformingDictionaries";
 
 type PhraseAndStroke = { phrase: string; stroke: string };
