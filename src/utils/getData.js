@@ -7,6 +7,9 @@ function getLesson(lessonFile) {
   });
 }
 
+/**
+ * @returns DictionaryIndexEntry[]
+ */
 function fetchDictionaryIndex() {
   return fetch(process.env.PUBLIC_URL + '/dictionaries/dictionaryIndex.json', {
     method: "GET",

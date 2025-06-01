@@ -134,7 +134,6 @@ const Dictionary = () => {
             return response.json().then((dictionaryContents) => {
               const dictIndexEntry = lookUpDictionaryInIndex(
                 process.env.PUBLIC_URL + location.pathname,
-                // @ts-expect-error FIXME
                 dictionaryIndex
               );
               const dictionaryData = {
