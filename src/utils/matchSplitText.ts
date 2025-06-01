@@ -7,16 +7,17 @@ export type PartialUserSettingsAndCaseAndSpacePlacement =
 /** e.g. " ant" (with space) */
 type ActualText = string;
 
-// Object { expected: "and", actualText: " ant" }
-/** e.g. "an" */
+/** e.g. " an" */
 type MatchedExpected = string;
 /** e.g. "d" */
 type UnmatchedExpected = string;
-/** e.g. "an" */
+/** e.g. " an" */
 type MatchedActual = string;
 /** e.g. "t" */
 type UnmatchedActual = string;
-/** e.g. ["an", "d", "an", "t"] */
+/**
+ * return type for matchSplitText that
+ * */
 type MatchSplitTextReturn = [
   MatchedExpected,
   UnmatchedExpected,
@@ -30,7 +31,7 @@ type MatchSplitTextReturn = [
  * @param actualText - e.g. " ant" (with space)
  * @param settings - e.g. { ignoredChars: "" }
  * @param userSettings - e.g. { spacePlacement: "spaceBeforeOutput", caseSensitive: true}
- * @returns MatchSplitTextReturn - e.g. ["an", "d", "an", "t"]
+ * @returns MatchSplitTextReturn - e.g. [" an", "d", " an", "t"], including spaces in returned matchedExpected: MatchedExpected unlike the input argument expected: MaterialText
  */
 function matchSplitText(
   expected: MaterialText,

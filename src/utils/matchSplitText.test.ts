@@ -208,14 +208,13 @@ describe("matchSplitText", () => {
       showStrokes: false,
       showStrokesAsDiagrams: false,
       hideStrokesOnLastRepetition: false,
-      // @ts-ignore FIXME
-      spacePlacement: "spaceBefore",
+      spacePlacement: "spaceBeforeOutput",
       sortOrder: "sortOff",
       seenWords: true,
     };
 
     it("splits typed text into matching and not matching text for partially matching typed text with a misstroke, space before", () => {
-      const expectedText = " and";
+      const expectedText = "and";
       const actualText = " ant";
       const expected = [" an", "d", " an", "t"];
       expect(
@@ -224,7 +223,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for typed text that matches so far but is not finished, space before", () => {
-      const expectedText = " and";
+      const expectedText = "and";
       const actualText = " an";
       const expected = [" an", "d", " an", ""];
       expect(
@@ -233,7 +232,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for a misstroke, space before", () => {
-      const expectedText = " and";
+      const expectedText = "and";
       const actualText = " the";
       const expected = [" ", "and", " ", "the"];
       expect(
@@ -242,7 +241,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for perfectly stroked text, space before", () => {
-      const expectedText = " and";
+      const expectedText = "and";
       const actualText = " and";
       const expected = [" and", "", " and", ""];
       expect(
@@ -251,7 +250,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for correctly stroked text with incorrect capitalisation, space before", () => {
-      const expectedText = " And";
+      const expectedText = "And";
       const actualText = " and";
       const expected = [" ", "And", " ", "and"];
       expect(
@@ -260,7 +259,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for correctly stroked multi-word text, space before", () => {
-      const expectedText = " as well as";
+      const expectedText = "as well as";
       const actualText = " as well as";
       const expected = [" as well as", "", " as well as", ""];
       expect(
@@ -269,7 +268,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for incorrectly spaced multi-word text, space before", () => {
-      const expectedText = " as well as";
+      const expectedText = "as well as";
       const actualText = "as well as";
       const expected = ["", " as well as", "", "as well as"];
       expect(
@@ -279,7 +278,7 @@ describe("matchSplitText", () => {
 
     it("splits typed text into matching and not matching text for prefix with ignored chars, ignore spacing", () => {
       let settings = { ignoredChars: "^" };
-      const expectedText = " over-the-^";
+      const expectedText = "over-the-^";
       const actualText = " over-the-";
       const expected = [" over-the-", "", " over-the-", ""];
       expect(
@@ -288,7 +287,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits a word with excess chars", () => {
-      const expectedText = " French";
+      const expectedText = "French";
       const actualText = " Frenches";
       const expected = [" French", "", " French", "es"];
       expect(
@@ -297,7 +296,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits multiple words", () => {
-      const expectedText = " There";
+      const expectedText = "There";
       const actualText = " There are";
       const expected = [" There", "", " There", " are"];
       expect(
@@ -319,14 +318,13 @@ describe("matchSplitText", () => {
       showStrokes: false,
       showStrokesAsDiagrams: false,
       hideStrokesOnLastRepetition: false,
-      // @ts-ignore FIXME
-      spacePlacement: "spaceBefore",
+      spacePlacement: "spaceBeforeOutput",
       sortOrder: "sortOff",
       seenWords: true,
     };
 
     it("splits typed text into matching and not matching text for partially matching typed text with a misstroke, an ignored char, space before", () => {
-      const expectedText = " ^and";
+      const expectedText = "^and";
       const actualText = " ant";
       const expected = [" ^an", "t", " an", "t"];
       expect(
@@ -335,7 +333,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for a misstroke, an ignored char, space before", () => {
-      const expectedText = " and";
+      const expectedText = "and";
       const actualText = " ^an the";
       const expected = [" ", "and", " ", "^an the"];
       expect(
@@ -344,7 +342,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for typed text that matches so far but is not finished, an ignored char, space before", () => {
-      const expectedText = " and^";
+      const expectedText = "and^";
       const actualText = " an^";
       const expected = [" an", "d^", " an", "^"];
       expect(
@@ -353,7 +351,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for perfectly stroked text, an ignored char, space before", () => {
-      const expectedText = " -and";
+      const expectedText = "-and";
       const actualText = " and";
       const expected = [" -and", "", " and", ""];
       expect(
@@ -362,7 +360,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for correctly stroked text with incorrect capitalisation, an ignored char, space before", () => {
-      const expectedText = " -And";
+      const expectedText = "-And";
       const actualText = " and";
       const expected = [" -", "And", " ", "and"];
       expect(
@@ -371,7 +369,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for incorrectly spaced multi-word text, an ignored char, space before", () => {
-      const expectedText = " as^well^as";
+      const expectedText = "as^well^as";
       const actualText = " aswell as";
       const expected = [" as^well^", "as", " aswell", " as"];
       expect(
@@ -393,14 +391,13 @@ describe("matchSplitText", () => {
       showStrokes: false,
       showStrokesAsDiagrams: false,
       hideStrokesOnLastRepetition: false,
-      // @ts-ignore FIXME
-      spacePlacement: "spaceAfter",
+      spacePlacement: "spaceAfterOutput",
       sortOrder: "sortOff",
       seenWords: true,
     };
 
     it("splits typed text into matching and not matching text for partially matching typed text with a misstroke, an ignored char, space after", () => {
-      const expectedText = "^and ";
+      const expectedText = "^and";
       const actualText = "ant ";
       const expected = ["^an", "d ", "an", "t "];
       expect(
@@ -409,7 +406,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for a misstroke, an ignored char, space after", () => {
-      const expectedText = "and ";
+      const expectedText = "and";
       const actualText = "and";
       const expected = ["and", " ", "and", ""];
       expect(
@@ -418,7 +415,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for typed text that matches so far but is not finished, an ignored char, space after", () => {
-      const expectedText = "and^ ";
+      const expectedText = "and^";
       const actualText = "and";
       const expected = ["and", "^ ", "and", ""];
       expect(
@@ -427,7 +424,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for perfectly stroked text, space after", () => {
-      const expectedText = "and ";
+      const expectedText = "and";
       const actualText = "and ";
       const expected = ["and ", "", "and ", ""];
       expect(
@@ -436,7 +433,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for correctly stroked text with incorrect capitalisation, an ignored char, space after", () => {
-      const expectedText = "And ";
+      const expectedText = "And";
       const actualText = "and ";
       const expected = ["", "And ", "", "and "];
       expect(
@@ -445,7 +442,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits typed text into matching and not matching text for incorrectly spaced multi-word text, an ignored char, space after", () => {
-      const expectedText = "as^well^as ";
+      const expectedText = "as^well^as";
       const actualText = "aswell as ";
       const expected = ["as^well^", "as ", "aswell", " as "];
       expect(
@@ -455,7 +452,7 @@ describe("matchSplitText", () => {
 
     it("splits typed text into matching and not matching text for prefix with ignored chars, ignore spacing", () => {
       let settings = { ignoredChars: "^" };
-      const expectedText = "over-the-^ ";
+      const expectedText = "over-the-^";
       const actualText = "over-the- ";
       const expected = ["over-the- ", "", "over-the- ", ""];
       expect(
@@ -464,7 +461,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits a word with excess chars", () => {
-      const expectedText = "French ";
+      const expectedText = "French";
       const actualText = "Frenches ";
       const expected = ["French", " ", "French", "es "];
       expect(
@@ -473,7 +470,7 @@ describe("matchSplitText", () => {
     });
 
     it("splits multiple words", () => {
-      const expectedText = "There ";
+      const expectedText = "There";
       const actualText = "There are ";
       const expected = ["There ", "", "There ", "are "];
       expect(
