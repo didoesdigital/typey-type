@@ -14,7 +14,7 @@ import PalantypeDiagram from '../../StenoLayout/PalantypeDiagram';
 import Stroke from '../../utils/stroke';
 import {
   mapQWERTYKeysToStenoStroke,
-} from '../../utils/typey-type';
+} from '../../utils/mapQWERTYKeysToStenoStroke';
 import mapBriefToAmericanStenoKeys from '../../utils/stenoLayouts/mapBriefToAmericanStenoKeys';
 import mapBriefToLapwingStenoKeys from 'utils/stenoLayouts/mapBriefToLapwingStenoKeys';
 import mapBriefToNoNumberBarInnerThumbNumbersStenoKeys from '../../utils/stenoLayouts/mapBriefToNoNumberBarInnerThumbNumbersStenoKeys';

@@ -22,7 +22,7 @@ import Puzzle from "./Puzzle";
 import { ReactComponent as MischievousRobot } from "../../../images/MischievousRobot.svg";
 import { choosePuzzleKey, prettyKey } from "./utilities";
 import * as stroke from "../../../utils/stroke";
-import { mapQWERTYKeysToStenoStroke } from "../../../utils/typey-type";
+import { mapQWERTYKeysToStenoStroke } from "../../../utils/mapQWERTYKeysToStenoStroke";
 
 const stenoTypedTextToKeysMapping = {
   "-Z": stroke.Z,
