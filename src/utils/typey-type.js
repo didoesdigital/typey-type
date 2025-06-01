@@ -121,55 +121,6 @@ function parseLesson(lessonText, path) {
   }
 }
 
-function lookUpDictionaryInIndex(path, dictionaryIndex = []) {
-  let dictionaryMetadata = dictionaryIndex.find(metadataEntry => process.env.PUBLIC_URL + metadataEntry.path === path.replace(/\/$/,'.json'));
-
-  if (typeof dictionaryMetadata === "undefined") {
-    dictionaryMetadata = {
-      author: "Typey Type",
-      title: 'Missing dictionary details',
-      subtitle: "",
-      category: "Typey Type",
-      subcategory: "",
-      tagline: "Loading dictionary details…",
-      link: "/typey-type/support#typey-type-dictionary",
-      path: "/dictionaries/typey-type/top-10.json",
-    }
-  }
-
-
-  // let dictionaryMetadata = {
-  //   author: "Typey Type",
-  //   title: "Dictionary",
-  //   subtitle: "",
-  //   category: "Typey Type",
-  //   subcategory: "",
-  //   tagline: "Typey Type’s dictionary is a version of the Plover dictionary with misstrokes removed for the top 10,000 words.",
-  //   link: "/typey-type/support#typey-type-dictionary",
-  //   path: "/dictionaries/typey-type/typey-type.json"
-  // }
-  // let dictionaryIndex = [
-  //   {
-  //     "author": "Typey Type",
-  //     "title": "Dictionary",
-  //     "subtitle": "",
-  //     "category": "Typey Type",
-  //     "subcategory": "",
-  //     "tagline": "Typey Type’s dictionary is a version of the Plover dictionary with misstrokes removed for the top 10,000 words.",
-  //     "link": "/typey-type/support#typey-type-dictionary",
-  //     "path": "/dictionaries/typey-type/typey-type.json"
-  //   }
-  // ];
-
-  // let len = dictionaryIndex.length;
-  // for (let i = 0; i < len; i++) {
-  //   if (i.path === path) {
-  //   }
-  // }
-
-  return dictionaryMetadata;
-}
-
 // function processDictionary(swappedDictionaryFile, stenoLayout) {
 //   let processedDictionary = {};
 //   let charsToRemove = [
@@ -500,7 +451,6 @@ function updateCapitalisationStrokesInNextItem(nextItem, lastWord) {
 
 export {
   loadPersonalDictionariesFromLocalStorage,
-  lookUpDictionaryInIndex,
   migratePersonalDictionariesV0ToV1,
   // migratePersonalDictionariesV1ToV2,
   parseCustomMaterial,

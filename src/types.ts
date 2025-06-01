@@ -192,6 +192,25 @@ export type LookupDictWithNamespacedDictsAndConfig = Omit<
 > &
   DictionaryConfig;
 
+export type DictionaryIndexEntry = {
+  /** e.g. "Typey Type" */
+  author: string;
+  /** e.g. "Full Dictionary" */
+  title: string;
+  /** "" */
+  subtitle: string; // could probably be "" because it's always empty, or remove it completely
+  /** e.g. "Typey Type", "Plover","Di Does Digital", "Individual" */
+  category: string;
+  /** e.g. "", "Commands", "Code", "Symbols", "Punctuation", "Phrasing" */
+  subcategory: string;
+  /** e.g. "Typey Type’s full dictionary builds on the Plover dictionary with misstrokes removed from the top 10,000 words. Use this instead of Plover’s default main dictionary." */
+  tagline: string;
+  /** e.g. "/support#typey-type-dictionary" */
+  link: string;
+  /** path without basename and with filename e.g. "/dictionaries/typey-type/typey-type-full.json" */
+  path: string;
+};
+
 /**
  * Example:
  * "/AOUL/A*T"

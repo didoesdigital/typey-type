@@ -4,7 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import DictionaryNotFound from "./DictionaryNotFound";
 import GoogleAnalytics from "react-ga4";
 import PseudoContentButton from "../../components/PseudoContentButton";
-import { lookUpDictionaryInIndex } from "../../utils/typey-type";
+import { lookUpDictionaryInIndex } from 'utils/lookUpDictionaryInIndex';
 import Subheader from "../../components/Subheader";
 import { useAnnouncerApi } from "../../components/Announcer/useAnnouncer";
 
@@ -134,6 +134,7 @@ const Dictionary = () => {
             return response.json().then((dictionaryContents) => {
               const dictIndexEntry = lookUpDictionaryInIndex(
                 process.env.PUBLIC_URL + location.pathname,
+                // @ts-expect-error FIXME
                 dictionaryIndex
               );
               const dictionaryData = {
