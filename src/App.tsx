@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { isLessonTextValid } from 'utils/utils';
 import {
-  createWordListFromMetWords,
   parseCustomMaterial,
   parseWordList,
   matchSplitText,
@@ -13,6 +12,7 @@ import {
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
+import { createWordListFromMetWords } from "./utils/createWordListFromMetWords";
 import { strokeAccuracy } from './utils/strokeAccuracy';
 import { loadPersonalPreferences } from 'utils/storage';
 import { getLesson } from './utils/getData';
