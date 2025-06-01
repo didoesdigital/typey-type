@@ -16,8 +16,8 @@ describe("stroke accuracy for current phrase", () => {
       let targetStrokeCount = 1;
       let unmatchedActual = "";
       expect(
-        // @ts-ignore
         strokeAccuracy(
+          // @ts-expect-error
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -44,8 +44,8 @@ describe("stroke accuracy for current phrase", () => {
       let targetStrokeCount = 1;
       let unmatchedActual = "";
       expect(
-        // @ts-ignore
         strokeAccuracy(
+          // @ts-expect-error
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -74,8 +74,8 @@ describe("stroke accuracy for current phrase", () => {
       let targetStrokeCount = 1;
       let unmatchedActual = "";
       expect(
-        // @ts-ignore
         strokeAccuracy(
+          // @ts-expect-error
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -111,8 +111,8 @@ describe("stroke accuracy for current phrase", () => {
       let targetStrokeCount = 3;
       let unmatchedActual = "";
       expect(
-        // @ts-ignore
         strokeAccuracy(
+          // @ts-expect-error
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -144,8 +144,8 @@ describe("stroke accuracy for current phrase", () => {
       let targetStrokeCount = 2;
       let unmatchedActual = "";
       expect(
-        // @ts-ignore
         strokeAccuracy(
+          // @ts-expect-error
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -180,8 +180,8 @@ describe("stroke accuracy for current phrase", () => {
       let targetStrokeCount = 1;
       let unmatchedActual = "r";
       expect(
-        // @ts-ignore
         strokeAccuracy(
+          // @ts-expect-error
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -197,8 +197,8 @@ describe("stroke accuracy for current phrase", () => {
       let targetStrokeCount = 1;
       let unmatchedActual = "x";
       expect(
-        // @ts-ignore
         strokeAccuracy(
+          // @ts-expect-error
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -230,8 +230,8 @@ describe("stroke accuracy for current phrase", () => {
       let targetStrokeCount = 1;
       let unmatchedActual = "r";
       expect(
-        // @ts-ignore
         strokeAccuracy(
+          // @ts-expect-error
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -261,8 +261,8 @@ describe("stroke accuracy for current phrase", () => {
       let targetStrokeCount = 1;
       let unmatchedActual = "";
       expect(
-        // @ts-ignore
         strokeAccuracy(
+          // @ts-expect-error
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -296,8 +296,8 @@ describe("stroke accuracy for current phrase", () => {
       let targetStrokeCount = 3;
       let unmatchedActual = "";
       expect(
-        // @ts-ignore
         strokeAccuracy(
+          // @ts-expect-error
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -320,8 +320,8 @@ describe("stroke accuracy for current phrase", () => {
       let targetStrokeCount = 2;
       let unmatchedActual = "g";
       expect(
-        // @ts-ignore
         strokeAccuracy(
+          // @ts-expect-error
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual

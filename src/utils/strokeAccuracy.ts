@@ -1,14 +1,16 @@
-import { isPeak } from './utils';
+import { isPeak } from "./utils";
 
-/**
- * @param {import('../types').Attempt[]} currentPhraseAttempts
- * @param {number} targetStrokeCount
- * @param {string} unmatchedActual
- * @param {boolean=} batchUpdate
- * @returns {{strokeAccuracy: boolean, attempts: import('../types').Attempt[]}}
- */
-// @ts-ignore
-function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual, batchUpdate) {
+import type { Attempt } from "types";
+
+function strokeAccuracy(
+  currentPhraseAttempts: Attempt[],
+  targetStrokeCount: number,
+  unmatchedActual: string,
+  batchUpdate?: boolean | undefined
+): {
+  strokeAccuracy: boolean;
+  attempts: Attempt[];
+} {
   let strokeAccuracy = true;
   let attempts = [];
 
