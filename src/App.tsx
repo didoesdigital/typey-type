@@ -3,7 +3,6 @@ import { isLessonTextValid } from 'utils/utils';
 import {
   parseCustomMaterial,
   parseWordList,
-  matchSplitText,
   parseLesson,
   repetitionsRemaining,
   shouldShowStroke,
@@ -12,6 +11,7 @@ import {
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
+import { matchSplitText } from "./utils/matchSplitText";
 import { createWordListFromMetWords } from "./utils/createWordListFromMetWords";
 import { strokeAccuracy } from './utils/strokeAccuracy';
 import { loadPersonalPreferences } from 'utils/storage';

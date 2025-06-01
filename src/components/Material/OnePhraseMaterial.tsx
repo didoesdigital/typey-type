@@ -1,5 +1,5 @@
 import React from "react";
-import { matchSplitText } from "../../utils/typey-type";
+import { matchSplitText } from "utils/matchSplitText";
 
 import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../states/userSettingsState";
