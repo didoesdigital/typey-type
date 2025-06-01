@@ -1,7 +1,6 @@
 import Zipper from './zipper';
 import Stroke from './stroke';
 import * as stroke from './stroke';
-import { isPeak } from './utils';
 import trimAndSumUniqMetWords from './trimAndSumUniqMetWords';
 
 function createWordListFromMetWords (metWords) {
@@ -80,71 +79,6 @@ function mapQWERTYKeysToStenoStroke(qwertyString, stenoLayout = "stenoLayoutAmer
   return stenoStroke;
 }
 
-/**
- * @param {import('../types').Attempt[]} currentPhraseAttempts
- * @param {number} targetStrokeCount
- * @param {string} unmatchedActual
- * @param {boolean=} batchUpdate
- * @returns {{strokeAccuracy: boolean, attempts: import('../types').Attempt[]}}
- */
-function strokeAccuracy(currentPhraseAttempts, targetStrokeCount, unmatchedActual, batchUpdate) {
-  let strokeAccuracy = true;
-  let attempts = [];
-
-  for (let i = 0; i < currentPhraseAttempts.length - 1; i++) {
-    let isAPeak = false;
-    if (currentPhraseAttempts[i-1] !== undefined && currentPhraseAttempts[i+1] !== undefined) {
-      if (isPeak(currentPhraseAttempts[i].text.length, currentPhraseAttempts[i-1].text.length, currentPhraseAttempts[i+1].text.length)) {
-        isAPeak = true;
-        // console.log("IS A PEAK");
-      } else if (currentPhraseAttempts[i].text.length === currentPhraseAttempts[i-1].text.length || currentPhraseAttempts[i].text.length === currentPhraseAttempts[i+1].text.length) {
-        isAPeak = true;
-        // console.log("IS A PEAK");
-      }
-    } else if (currentPhraseAttempts[i+1] !== undefined) {
-      if (currentPhraseAttempts[i].text.length > currentPhraseAttempts[i+1].text.length) {
-        isAPeak = true;
-        // console.log("IS A PEAK");
-      } else if (currentPhraseAttempts[i].text.length === currentPhraseAttempts[i+1].text.length) {
-        isAPeak = true;
-        // console.log("IS A PEAK");
-      }
-    } else if (currentPhraseAttempts[i-1] !== undefined) {
-      if (currentPhraseAttempts[i].text.length > currentPhraseAttempts[i-1].text.length) {
-        isAPeak = true;
-        // console.log("IS A PEAK");
-      } else if (currentPhraseAttempts[i].text.length === currentPhraseAttempts[i-1].text.length) {
-        isAPeak = true;
-        // console.log("IS A PEAK");
-      }
-    }
-
-    if (isAPeak) {
-      attempts.push(currentPhraseAttempts[i]);
-    }
-  }
-
-  if (attempts.length >= targetStrokeCount) {
-    // console.log("More attempts than expected strokes");
-    return {strokeAccuracy: false, attempts: attempts};
-  }
-
-  if (!batchUpdate) {
-    // If it's the final stroke, fail any unmatched characters immediately
-    // (unless you're undoing a stroke and typed text is getting shorter)
-    let nextAttempt = attempts.length + 1;
-    let isFinalStroke = nextAttempt >= targetStrokeCount;
-    let hasUnmatchedChars = unmatchedActual.length > 0;
-    let failedSingleStrokeBrief = currentPhraseAttempts.length === 1 && targetStrokeCount === 1;
-    let isTypedTextLongerThanPrevious = currentPhraseAttempts.length > 1 && currentPhraseAttempts[currentPhraseAttempts.length - 1].text.length > currentPhraseAttempts[currentPhraseAttempts.length - 2].text.length;
-    if (isFinalStroke && hasUnmatchedChars && (failedSingleStrokeBrief || isTypedTextLongerThanPrevious)) {
-      attempts.push(currentPhraseAttempts[currentPhraseAttempts.length - 1]);
-      return { strokeAccuracy: false, attempts: attempts };
-    }
-  }
-
-  return {strokeAccuracy: strokeAccuracy, attempts: attempts};
-}
 
 function matchSplitText(expected, actualText, settings={ignoredChars: ''}, userSettings={}) {
   if (userSettings.spacePlacement === 'spaceBeforeOutput') {
@@ -757,7 +691,6 @@ export {
   repetitionsRemaining,
   runAllPersonalDictionariesMigrations,
   shouldShowStroke,
-  strokeAccuracy,
   getTargetStrokeCount,
   getTargetObservableStrokeCount,
   updateCapitalisationStrokesInNextItem,

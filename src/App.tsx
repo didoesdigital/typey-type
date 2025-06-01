@@ -8,12 +8,12 @@ import {
   parseLesson,
   repetitionsRemaining,
   shouldShowStroke,
-  strokeAccuracy,
   getTargetStrokeCount,
   getTargetObservableStrokeCount,
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
+import { strokeAccuracy } from './utils/strokeAccuracy';
 import { loadPersonalPreferences } from 'utils/storage';
 import { getLesson } from './utils/getData';
 import {
