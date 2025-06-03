@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import { isLessonTextValid } from 'utils/utils';
 import {
-  parseCustomMaterial,
-  parseLesson,
-  repetitionsRemaining,
-  shouldShowStroke,
-  getTargetStrokeCount,
-  getTargetObservableStrokeCount,
-  updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
+import { parseCustomMaterial } from './utils/parseCustomMaterial';
+import { parseLesson } from './utils/parseLesson';
+import { updateCapitalisationStrokesInNextItem } from './utils/updateCapitalisationStrokesInNextItem';
+import { repetitionsRemaining } from './utils/repetitionsRemaining';
+import { shouldShowStroke } from './utils/shouldShowStroke';
+import { getTargetObservableStrokeCount } from './utils/getTargetObservableStrokeCount';
+import { getTargetStrokeCount } from './utils/getTargetStrokeCount';
 import { parseWordList } from './utils/parseWordList';
 import { matchSplitText } from "./utils/matchSplitText";
 import { createWordListFromMetWords } from "./utils/createWordListFromMetWords";

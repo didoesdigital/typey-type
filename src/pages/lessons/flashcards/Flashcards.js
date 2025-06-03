@@ -16,7 +16,7 @@ import {
   getWordForCurrentStrokeSlideIndex,
 } from './utilities';
 import * as Utils from '../../../utils/utils';
-import { parseLesson } from '../../../utils/typey-type';
+import { parseLesson } from '../../../utils/parseLesson';
 import { getLesson } from '../../../utils/getData';
 import { CarouselProvider, Slider, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import SlideNodes from './components/SlideNodes';
