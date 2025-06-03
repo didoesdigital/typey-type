@@ -1,78 +1,3 @@
-import Zipper from './zipper';
-
-/**
- * @param {string} lessonTextAndStrokes
- * @return {[import('types').CustomLesson, any, any[]]}
- */
-function parseCustomMaterial(lessonTextAndStrokes) {
-  let validationState = 'unvalidated';
-  /**
-   * @type {any[]}
-   */
-  let validationMessages = [];
-
-  let emptyCustomLesson = {
-    sourceMaterial: [],
-    presentedMaterial: [{phrase: '', stroke: ''}],
-    settings: { ignoredChars: '' },
-    title: 'Custom',
-    subtitle: '',
-    newPresentedMaterial: new Zipper([{phrase: '', stroke: ''}]),
-    path: process.env.PUBLIC_URL + '/lessons/custom'
-  }
-  if (lessonTextAndStrokes.length === 0) {
-    validationState = 'fail';
-    validationMessages.push('Your material needs at least 1 word');
-    return [emptyCustomLesson, validationState, validationMessages];
-  }
-
-  if (!lessonTextAndStrokes.includes("	")) {
-    validationState = 'fail';
-    validationMessages.push('Your material needs at least 1 “Tab” character');
-    return [emptyCustomLesson, validationState, validationMessages];
-  }
-
-  let lessonTitle = 'Custom';
-  let lessonSubtitle = '';
-
-  let lines = lessonTextAndStrokes.split("\n");
-  lines = lines.filter(phrase => phrase !== '');
-  lines = lines.filter(phrase => phrase.includes("	"));
-  lines = lines.filter(phrase => !phrase.startsWith("	"));
-  if (lines.length === 0) {
-    validationState = 'fail';
-    validationMessages.push('Your material needs at least 1 word and 1 “Tab” character');
-    return [emptyCustomLesson, validationState, validationMessages];
-  }
-
-  let sourceMaterial = [];
-  let settings = {ignoredChars: ''};
-
-  for (let i = 0; i < lines.length; i++) {
-    let line = lines[i];
-    let phraseAndStroke = line.split("	");
-    let phrase = phraseAndStroke[0];
-    let stroke = phraseAndStroke[1];
-    sourceMaterial.push( {phrase: phrase, stroke: stroke} );
-  }
-
-  validationState = 'success';
-
-  return [{
-    sourceMaterial: sourceMaterial,
-    presentedMaterial: sourceMaterial,
-    settings: settings,
-    title: lessonTitle,
-    subtitle: lessonSubtitle,
-    newPresentedMaterial: new Zipper(sourceMaterial),
-    path: process.env.PUBLIC_URL + '/lessons/custom'
-  },
-    validationState,
-    validationMessages
-  ]
-}
-
-
 const migratePersonalDictionariesV0ToV1 = function (personalDictionaries, dirtyFlag) {
   if (!personalDictionaries.v) {
     personalDictionaries = {v:'1',dicts:personalDictionaries};
@@ -207,7 +132,6 @@ export {
   loadPersonalDictionariesFromLocalStorage,
   migratePersonalDictionariesV0ToV1,
   // migratePersonalDictionariesV1ToV2,
-  parseCustomMaterial,
   runAllPersonalDictionariesMigrations,
   writePersonalPreferences
 };

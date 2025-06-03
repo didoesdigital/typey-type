@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { isLessonTextValid } from 'utils/utils';
 import {
-  parseCustomMaterial,
   writePersonalPreferences
 } from './utils/typey-type';
+import { parseCustomMaterial } from './utils/parseCustomMaterial';
 import { parseLesson } from './utils/parseLesson';
 import { updateCapitalisationStrokesInNextItem } from './utils/updateCapitalisationStrokesInNextItem';
 import { repetitionsRemaining } from './utils/repetitionsRemaining';

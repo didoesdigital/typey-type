@@ -1,5 +1,5 @@
 import { lookUpDictionaryInIndex } from "./lookUpDictionaryInIndex";
-import { parseCustomMaterial } from "./typey-type";
+import { parseCustomMaterial } from "./parseCustomMaterial";
 import Zipper from "./zipper";
 
 import type { DictionaryIndexEntry } from "types";
