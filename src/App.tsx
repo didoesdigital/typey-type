@@ -5,11 +5,11 @@ import {
   parseLesson,
   repetitionsRemaining,
   shouldShowStroke,
-  getTargetStrokeCount,
-  getTargetObservableStrokeCount,
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
+import { getTargetObservableStrokeCount } from './utils/getTargetObservableStrokeCount';
+import { getTargetStrokeCount } from './utils/getTargetStrokeCount';
 import { parseWordList } from './utils/parseWordList';
 import { matchSplitText } from "./utils/matchSplitText";
 import { createWordListFromMetWords } from "./utils/createWordListFromMetWords";
