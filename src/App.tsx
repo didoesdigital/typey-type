@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { isLessonTextValid } from 'utils/utils';
 import {
   parseCustomMaterial,
-  parseLesson,
   writePersonalPreferences
 } from './utils/typey-type';
+import { parseLesson } from './utils/parseLesson';
 import { updateCapitalisationStrokesInNextItem } from './utils/updateCapitalisationStrokesInNextItem';
 import { repetitionsRemaining } from './utils/repetitionsRemaining';
 import { shouldShowStroke } from './utils/shouldShowStroke';
