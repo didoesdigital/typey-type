@@ -3,10 +3,10 @@ import { isLessonTextValid } from 'utils/utils';
 import {
   parseCustomMaterial,
   parseLesson,
-  repetitionsRemaining,
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
+import { repetitionsRemaining } from './utils/repetitionsRemaining';
 import { shouldShowStroke } from './utils/shouldShowStroke';
 import { getTargetObservableStrokeCount } from './utils/getTargetObservableStrokeCount';
 import { getTargetStrokeCount } from './utils/getTargetStrokeCount';

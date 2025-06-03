@@ -251,15 +251,6 @@ function writePersonalPreferences(itemToStore, JSONToStore) {
   }
 }
 
-function repetitionsRemaining(userSettings, presentedMaterial, currentPhraseID) {
-  let lessonLength = presentedMaterial.length;
-  if (currentPhraseID > lessonLength) { return 0; }
-  let reps = userSettings.repetitions;
-  let wordsPerRep = lessonLength/ userSettings.repetitions;
-  let wordsRemaining = lessonLength - currentPhraseID;
-  return reps - Math.floor(((lessonLength - wordsRemaining)/wordsPerRep));
-}
-
 function updateCapitalisationStrokesInNextItem(nextItem, lastWord) {
   if (nextItem.stroke.startsWith("KPA/") || nextItem.stroke.startsWith("HRO*ER/") || nextItem.stroke.startsWith("*URP/")) {
     if (lastWord.endsWith(".") || lastWord.endsWith("!") || lastWord.endsWith("?") || lastWord.endsWith("…") || lastWord.endsWith('!"') || lastWord.endsWith('?"') || lastWord.endsWith('."')) {
@@ -288,7 +279,6 @@ export {
   // migratePersonalDictionariesV1ToV2,
   parseCustomMaterial,
   parseLesson,
-  repetitionsRemaining,
   runAllPersonalDictionariesMigrations,
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
