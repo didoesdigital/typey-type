@@ -3,9 +3,9 @@ import { isLessonTextValid } from 'utils/utils';
 import {
   parseCustomMaterial,
   parseLesson,
-  updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 } from './utils/typey-type';
+import { updateCapitalisationStrokesInNextItem } from './utils/updateCapitalisationStrokesInNextItem';
 import { repetitionsRemaining } from './utils/repetitionsRemaining';
 import { shouldShowStroke } from './utils/shouldShowStroke';
 import { getTargetObservableStrokeCount } from './utils/getTargetObservableStrokeCount';

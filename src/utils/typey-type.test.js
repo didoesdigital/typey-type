@@ -3,9 +3,8 @@ import {
   // writePersonalPreferences,
   migratePersonalDictionariesV0ToV1,
   // migratePersonalDictionariesV1ToV2,
-  runAllPersonalDictionariesMigrations,
-  updateCapitalisationStrokesInNextItem
-} from './typey-type';
+  runAllPersonalDictionariesMigrations} from './typey-type';
+import { updateCapitalisationStrokesInNextItem } from './updateCapitalisationStrokesInNextItem';
 import Zipper from './zipper';
 
 describe('parseCustomMaterial', () => {
