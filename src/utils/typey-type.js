@@ -260,21 +260,6 @@ function repetitionsRemaining(userSettings, presentedMaterial, currentPhraseID) 
   return reps - Math.floor(((lessonLength - wordsRemaining)/wordsPerRep));
 }
 
-function shouldShowStroke(showStrokesInLesson, showStrokes, repetitionsRemaining, hideStrokesOnLastRepetition) {
-  if (showStrokesInLesson) {
-    // console.log("You clicked the hint linked");
-    return true;
-  } else if (showStrokes && repetitionsRemaining > 1) {
-    // console.log("show strokes and more than 1 rep left");
-    return true;
-  } else if (showStrokes && repetitionsRemaining <= 1 && !(hideStrokesOnLastRepetition) ) {
-    // console.log("show strokes and <=1 rep and not hide briefs on lest rep");
-    return true;
-  }
-    // console.log("show stroke");
-  return false;
-}
-
 function updateCapitalisationStrokesInNextItem(nextItem, lastWord) {
   if (nextItem.stroke.startsWith("KPA/") || nextItem.stroke.startsWith("HRO*ER/") || nextItem.stroke.startsWith("*URP/")) {
     if (lastWord.endsWith(".") || lastWord.endsWith("!") || lastWord.endsWith("?") || lastWord.endsWith("…") || lastWord.endsWith('!"') || lastWord.endsWith('?"') || lastWord.endsWith('."')) {
@@ -305,7 +290,6 @@ export {
   parseLesson,
   repetitionsRemaining,
   runAllPersonalDictionariesMigrations,
-  shouldShowStroke,
   updateCapitalisationStrokesInNextItem,
   writePersonalPreferences
 };
