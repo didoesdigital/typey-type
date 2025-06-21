@@ -1,8 +1,8 @@
 import type { PersonalDictionaryNameAndContents } from "types";
 
-type LocalStoragePersonalDictionariesV0 = PersonalDictionaryNameAndContents[];
+export type LocalStoragePersonalDictionariesV0 = PersonalDictionaryNameAndContents[];
 
-type LocalStoragePersonalDictionariesV1 = {
+export type LocalStoragePersonalDictionariesV1 = {
   v: string;
   dicts: PersonalDictionaryNameAndContents[];
 };

@@ -1,4 +1,6 @@
 import {
+  type LocalStoragePersonalDictionariesV0,
+  type LocalStoragePersonalDictionariesV1,
   // writePersonalPreferences,
   migratePersonalDictionariesV0ToV1,
   // migratePersonalDictionariesV1ToV2,
@@ -150,8 +152,8 @@ describe('update capitalisation strokes in next item', () => {
 });
 
 describe('migratePersonalDictionariesV', () => {
-  let startingV0Dictionaries = [["personal.json",{"TAO*EUPT": "Typey Type"}]];
-  let startingV1Dictionaries = {"v":"1","dicts":[["personal.json",{"TAO*EUPT": "Typey Type"}]]};
+  let startingV0Dictionaries: LocalStoragePersonalDictionariesV0 = [["personal.json",{"TAO*EUPT": "Typey Type"}]];
+  let startingV1Dictionaries: LocalStoragePersonalDictionariesV1 = {"v":"1","dicts":[["personal.json",{"TAO*EUPT": "Typey Type"}]]};
   let migratedV1Dictionaries = Object.assign({}, startingV1Dictionaries);
 
   describe('runAllPersonalDictionariesMigrations', () => {
