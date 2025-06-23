@@ -1,6 +1,7 @@
 import type { PersonalDictionaryNameAndContents } from "types";
 
-export type LocalStoragePersonalDictionariesV0 = PersonalDictionaryNameAndContents[];
+export type LocalStoragePersonalDictionariesV0 =
+  PersonalDictionaryNameAndContents[];
 
 export type LocalStoragePersonalDictionariesV1 = {
   v: string;
@@ -17,7 +18,7 @@ function isV1(
   return "v" in data;
 }
 
-const migratePersonalDictionariesV0ToV1 = function(
+const migratePersonalDictionariesV0ToV1 = function (
   localStoragePersonalDictionaries: LocalStoragePersonalDictionariesUnknownVersion,
   dirtyFlag: boolean
 ): [LocalStoragePersonalDictionariesV1, boolean] {
@@ -45,7 +46,7 @@ const migratePersonalDictionariesV0ToV1 = function(
 //   return [personalDictionaries, dirtyFlag];
 // }
 
-const runAllPersonalDictionariesMigrations = function(
+const runAllPersonalDictionariesMigrations = function (
   personalDictionaries: LocalStoragePersonalDictionariesUnknownVersion,
   dirtyFlag: boolean
 ): [LocalStoragePersonalDictionariesV1 | null, boolean, string | null] {
@@ -57,21 +58,25 @@ const runAllPersonalDictionariesMigrations = function(
     );
     // [personalDictionaries, dirtyFlag] = migratePersonalDictionariesV1ToV2(personalDictionaries, dirtyFlag);
   } catch (exception) {
-    return [null, false, "Personal dictionaries found in local storage are either missing a version number or are not in valid version 0 format for migrating to version 1."];
+    return [
+      null,
+      false,
+      "Personal dictionaries found in local storage are either missing a version number or are not in valid version 0 format for migrating to version 1.",
+    ];
   }
   return [personalDictionaries, dirtyFlag, error];
 };
 
-function migratePersonalDictionariesV(personalDictionaries: LocalStoragePersonalDictionariesUnknownVersion): [LocalStoragePersonalDictionariesV1 | null, string | null] {
+function migratePersonalDictionariesV(
+  personalDictionaries: LocalStoragePersonalDictionariesUnknownVersion
+): [LocalStoragePersonalDictionariesV1 | null, string | null] {
   let dirtyFlag = false;
   let error: string | null = null;
-  let maybePersonalDictionaries: null | LocalStoragePersonalDictionariesUnknownVersion = personalDictionaries;
+  let maybePersonalDictionaries: null | LocalStoragePersonalDictionariesUnknownVersion =
+    personalDictionaries;
 
   [maybePersonalDictionaries, dirtyFlag, error] =
-    runAllPersonalDictionariesMigrations(
-      maybePersonalDictionaries,
-      dirtyFlag,
-    );
+    runAllPersonalDictionariesMigrations(maybePersonalDictionaries, dirtyFlag);
 
   if (maybePersonalDictionaries !== null && dirtyFlag && error === null) {
     writePersonalPreferences("personalDictionaries", maybePersonalDictionaries);

@@ -4,8 +4,9 @@ import {
   // writePersonalPreferences,
   migratePersonalDictionariesV0ToV1,
   // migratePersonalDictionariesV1ToV2,
-  runAllPersonalDictionariesMigrations} from './typey-type';
-import { updateCapitalisationStrokesInNextItem } from './updateCapitalisationStrokesInNextItem';
+  runAllPersonalDictionariesMigrations,
+} from "./typey-type";
+import { updateCapitalisationStrokesInNextItem } from "./updateCapitalisationStrokesInNextItem";
 
 // describe('writePersonalPreferences', () => {
 //   describe('without localStorage', () => {
@@ -29,175 +30,196 @@ import { updateCapitalisationStrokesInNextItem } from './updateCapitalisationStr
 //   });
 // });
 
-describe('update capitalisation strokes in next item', () => {
-  describe('where previous word ends in a letter', () => {
+describe("update capitalisation strokes in next item", () => {
+  describe("where previous word ends in a letter", () => {
     let lastWord = "cat";
 
     // ` cat "A`
-    describe('where next item has quotes', () => {
-      let nextItem = {phrase: '"A', stroke: 'KW-GS KPA/AEU'};
-      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
-        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+    describe("where next item has quotes", () => {
+      let nextItem = { phrase: '"A', stroke: "KW-GS KPA/AEU" };
+      it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
+        expect(
+          updateCapitalisationStrokesInNextItem(nextItem, lastWord)
+        ).toEqual({
           phrase: '"A',
-          stroke: "KW-GS KPA*/AEU"
-        })
+          stroke: "KW-GS KPA*/AEU",
+        });
       });
     });
   });
 
   // ` cat. "A`
-  describe('where previous word ends in full stop', () => {
+  describe("where previous word ends in full stop", () => {
     let lastWord = "cat.";
 
-    describe('where next item has quotes', () => {
-      let nextItem = {phrase: '"A', stroke: 'KW-GS KPA/AEU'};
-      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
-        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+    describe("where next item has quotes", () => {
+      let nextItem = { phrase: '"A', stroke: "KW-GS KPA/AEU" };
+      it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
+        expect(
+          updateCapitalisationStrokesInNextItem(nextItem, lastWord)
+        ).toEqual({
           phrase: '"A',
-          stroke: "KW-GS AEU"
-        })
+          stroke: "KW-GS AEU",
+        });
       });
     });
   });
 
   // ` request. When`
-  describe('where previous word ends in full stop', () => {
+  describe("where previous word ends in full stop", () => {
     let lastWord = "request.";
 
-    describe('where next item has quotes', () => {
-      let nextItem = {phrase: 'When', stroke: 'KPA/WHEPB'};
-      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
-        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
-          phrase: 'When',
-          stroke: "WHEPB"
-        })
+    describe("where next item has quotes", () => {
+      let nextItem = { phrase: "When", stroke: "KPA/WHEPB" };
+      it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
+        expect(
+          updateCapitalisationStrokesInNextItem(nextItem, lastWord)
+        ).toEqual({
+          phrase: "When",
+          stroke: "WHEPB",
+        });
       });
     });
   });
 
   // ` cat… "A`
-  describe('where previous word ends in an ellipsis', () => {
+  describe("where previous word ends in an ellipsis", () => {
     let lastWord = "cat…";
 
-    describe('where next item has quotes', () => {
-      let nextItem = {phrase: '"A', stroke: 'KW-GS KPA/AEU'};
-      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
-        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+    describe("where next item has quotes", () => {
+      let nextItem = { phrase: '"A', stroke: "KW-GS KPA/AEU" };
+      it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
+        expect(
+          updateCapitalisationStrokesInNextItem(nextItem, lastWord)
+        ).toEqual({
           phrase: '"A',
-          stroke: "KW-GS AEU"
-        })
+          stroke: "KW-GS AEU",
+        });
       });
     });
   });
 
   // ` everything." "Be`
-  describe('where previous word ends in an ellipsis', () => {
+  describe("where previous word ends in an ellipsis", () => {
     let lastWord = 'everything."';
 
-    describe('where next item has quotes', () => {
-      let nextItem = {phrase: '"Be', stroke: 'KW-GS KPA/-B'};
-      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
-        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+    describe("where next item has quotes", () => {
+      let nextItem = { phrase: '"Be', stroke: "KW-GS KPA/-B" };
+      it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
+        expect(
+          updateCapitalisationStrokesInNextItem(nextItem, lastWord)
+        ).toEqual({
           phrase: '"Be',
-          stroke: "KW-GS -B"
-        })
+          stroke: "KW-GS -B",
+        });
       });
     });
   });
 
   // ` "Be everything."`
-  describe('where previous word ends in an ellipsis', () => {
+  describe("where previous word ends in an ellipsis", () => {
     let lastWord = '"Be';
 
-    describe('where next item has quotes', () => {
-      let nextItem = {phrase: 'everything."', stroke: 'EFG TP-PL KR-GS'};
-      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
-        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+    describe("where next item has quotes", () => {
+      let nextItem = { phrase: 'everything."', stroke: "EFG TP-PL KR-GS" };
+      it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
+        expect(
+          updateCapitalisationStrokesInNextItem(nextItem, lastWord)
+        ).toEqual({
           phrase: 'everything."',
-          stroke: "EFG TP-PL KR-GS"
-        })
+          stroke: "EFG TP-PL KR-GS",
+        });
       });
     });
   });
 
   // ` said: "Be`
-  describe('where previous word ends in a colon', () => {
+  describe("where previous word ends in a colon", () => {
     let lastWord = "said:";
 
-    describe('where next item has quotes', () => {
-      let nextItem = {phrase: '"Be', stroke: 'KR-GS KPA/-B'};
-      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
-        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+    describe("where next item has quotes", () => {
+      let nextItem = { phrase: '"Be', stroke: "KR-GS KPA/-B" };
+      it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
+        expect(
+          updateCapitalisationStrokesInNextItem(nextItem, lastWord)
+        ).toEqual({
           phrase: '"Be',
-          stroke: "KR-GS KPA*/-B"
-        })
+          stroke: "KR-GS KPA*/-B",
+        });
       });
     });
   });
 
   // ` cat… "A`
-  describe('where previous word ends in an ellipsis', () => {
+  describe("where previous word ends in an ellipsis", () => {
     let lastWord = "cat…";
 
-    describe('where next item has quotes', () => {
-      let nextItem = {phrase: '"A', stroke: 'KW-GS KPA/AEU'};
-      it('removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke', () => {
-        expect(updateCapitalisationStrokesInNextItem(nextItem, lastWord)).toEqual({
+    describe("where next item has quotes", () => {
+      let nextItem = { phrase: '"A', stroke: "KW-GS KPA/AEU" };
+      it("removes redundant capitalisation strokes when following terminating punctuation that probably uses a carry capitalisation stroke", () => {
+        expect(
+          updateCapitalisationStrokesInNextItem(nextItem, lastWord)
+        ).toEqual({
           phrase: '"A',
-          stroke: "KW-GS AEU"
-        })
+          stroke: "KW-GS AEU",
+        });
       });
     });
   });
 });
 
-describe('migratePersonalDictionariesV', () => {
-  let startingV0Dictionaries: LocalStoragePersonalDictionariesV0 = [["personal.json",{"TAO*EUPT": "Typey Type"}]];
-  let startingV1Dictionaries: LocalStoragePersonalDictionariesV1 = {"v":"1","dicts":[["personal.json",{"TAO*EUPT": "Typey Type"}]]};
+describe("migratePersonalDictionariesV", () => {
+  let startingV0Dictionaries: LocalStoragePersonalDictionariesV0 = [
+    ["personal.json", { "TAO*EUPT": "Typey Type" }],
+  ];
+  let startingV1Dictionaries: LocalStoragePersonalDictionariesV1 = {
+    "v": "1",
+    "dicts": [["personal.json", { "TAO*EUPT": "Typey Type" }]],
+  };
   let migratedV1Dictionaries = Object.assign({}, startingV1Dictionaries);
 
-  describe('runAllPersonalDictionariesMigrations', () => {
+  describe("runAllPersonalDictionariesMigrations", () => {
     let dirtyFlag = false;
 
-    describe('where local storage had v0 format', () => {
-      it('returns true dirty flag', () => {
-        expect(runAllPersonalDictionariesMigrations(startingV0Dictionaries, dirtyFlag)).toEqual([
-          migratedV1Dictionaries,
-          true,
-          null
-        ])
+    describe("where local storage had v0 format", () => {
+      it("returns true dirty flag", () => {
+        expect(
+          runAllPersonalDictionariesMigrations(
+            startingV0Dictionaries,
+            dirtyFlag
+          )
+        ).toEqual([migratedV1Dictionaries, true, null]);
       });
     });
 
-    describe('where local storage had v1 format', () => {
-      it('returns false dirty flag', () => {
-        expect(runAllPersonalDictionariesMigrations(startingV1Dictionaries, dirtyFlag)).toEqual([
-          migratedV1Dictionaries,
-          false,
-          null
-        ])
+    describe("where local storage had v1 format", () => {
+      it("returns false dirty flag", () => {
+        expect(
+          runAllPersonalDictionariesMigrations(
+            startingV1Dictionaries,
+            dirtyFlag
+          )
+        ).toEqual([migratedV1Dictionaries, false, null]);
       });
     });
   });
 
-  describe('v0 to v1', () => {
+  describe("v0 to v1", () => {
     let dirtyFlag = false;
 
-    describe('where local storage had v0 format', () => {
-      it('returns dictionary migrated to v1 and true dirty flag', () => {
-        expect(migratePersonalDictionariesV0ToV1(startingV0Dictionaries, dirtyFlag)).toEqual([
-          migratedV1Dictionaries,
-          true
-        ])
+    describe("where local storage had v0 format", () => {
+      it("returns dictionary migrated to v1 and true dirty flag", () => {
+        expect(
+          migratePersonalDictionariesV0ToV1(startingV0Dictionaries, dirtyFlag)
+        ).toEqual([migratedV1Dictionaries, true]);
       });
     });
 
-    describe('where local storage had v1 format', () => {
-      it('returns same v1 dictionary and false dirty flag', () => {
-        expect(migratePersonalDictionariesV0ToV1(startingV1Dictionaries, dirtyFlag)).toEqual([
-          migratedV1Dictionaries,
-          false
-        ])
+    describe("where local storage had v1 format", () => {
+      it("returns same v1 dictionary and false dirty flag", () => {
+        expect(
+          migratePersonalDictionariesV0ToV1(startingV1Dictionaries, dirtyFlag)
+        ).toEqual([migratedV1Dictionaries, false]);
       });
     });
   });
