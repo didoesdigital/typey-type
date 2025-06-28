@@ -44,8 +44,9 @@ export function useChangeShowScoresWhileTyping() {
 export function useChangeShowStrokesAs() {
   const setState = useSetAtom(showStrokesAsDiagramsState);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+  const onChangeShowStrokesAs: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
     const value = event.target.value;
     setState(value !== "strokesAsText");
 
@@ -60,18 +61,21 @@ export function useChangeShowStrokesAs() {
       label: labelString,
     });
   };
+
+  return onChangeShowStrokesAs;
 }
 
 export function useChangeShowStrokesAsList() {
   const setState = useSetAtom(showStrokesAsListState);
   const { appFetchAndSetupGlobalDict } = useAppMethods();
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+  const onChangeShowStrokesAsList: React.ChangeEventHandler<
+    HTMLInputElement
+  > = (event) => {
     const value = event.target.checked;
     setState(value);
 
-    let labelString = value;
+    let labelString = value.toString();
     if (value) {
       appFetchAndSetupGlobalDict(null).catch((error) => {
         console.error(error);
@@ -86,6 +90,8 @@ export function useChangeShowStrokesAsList() {
       label: labelString,
     });
   };
+
+  return onChangeShowStrokesAsList;
 }
 
 export function useChangeShowStrokesOnMisstroke() {
@@ -104,8 +110,10 @@ export function useChangeShowStrokesOnMisstroke() {
 
 export function useChangeSortOrderUserSetting() {
   const setState = useSetAtom(sortOrderState);
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+
+  const onChangeSortOrderUserSetting: React.ChangeEventHandler<
+    HTMLSelectElement
+  > = (event) => {
     const value = event.target.value;
     setState(value);
 
@@ -120,12 +128,16 @@ export function useChangeSortOrderUserSetting() {
       label: labelString,
     });
   };
+
+  return onChangeSortOrderUserSetting;
 }
 
 export function useChangeSpacePlacementUserSetting() {
   const setState = useSetAtom(spacePlacementState);
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+
+  const onChangeSpacePlacementUserSetting: React.ChangeEventHandler<
+    HTMLSelectElement
+  > = (event) => {
     const value = event.target.value;
     setState(value);
 
@@ -142,13 +154,16 @@ export function useChangeSpacePlacementUserSetting() {
 
     return value;
   };
+
+  return onChangeSpacePlacementUserSetting;
 }
 
 export function useChangeStenoLayout() {
   const setState = useSetAtom(stenoLayoutState);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+  const onChangeStenoLayout: React.ChangeEventHandler<HTMLSelectElement> = (
+    event
+  ) => {
     const name = event.target.name;
     const value = event.target.value;
 
@@ -171,6 +186,8 @@ export function useChangeStenoLayout() {
 
     return value;
   };
+
+  return onChangeStenoLayout;
 }
 
 export function useChangeUserSetting() {
@@ -339,16 +356,18 @@ export function useChooseStudy() {
 export function useHandleBeatsPerMinute() {
   const setState = useSetAtom(beatsPerMinuteState);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+  const onHandleBeatsPerMinute:
+    | ((
+        value: number | null,
+        stringValue: string,
+        input: HTMLInputElement
+      ) => void)
+    | undefined = (event) => {
     const value = event;
 
     setState(value);
 
-    let labelString = value;
-    if (!value) {
-      labelString = "BAD_INPUT";
-    }
+    const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({
       category: "UserSettings",
@@ -358,6 +377,8 @@ export function useHandleBeatsPerMinute() {
 
     return value;
   };
+
+  return onHandleBeatsPerMinute;
 }
 
 export function useHandleDiagramSize() {
