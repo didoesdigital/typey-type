@@ -12,8 +12,8 @@ async function fetchDictionaryIndex() {
     );
     const json = await response.json();
     return json;
-  } catch (e) {
-    console.log("Unable to load dictionary index", e);
+  } catch (error) {
+    console.error("Unable to load dictionary index", error);
     return [
       {
         "author": "Typey Type",
