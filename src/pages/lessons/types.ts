@@ -78,7 +78,7 @@ export type FinishedProps = Pick<
   | "totalNumberOfRetainedWords"
   | "totalWordCount"
 > & {
-  chooseStudy: () => void;
+  chooseStudy: React.ChangeEventHandler<HTMLInputElement>;
   toggleHideOtherSettings: () => void;
   metadata: any;
   path: any;

@@ -20,8 +20,7 @@ import {
 } from "../../../../states/userSettingsState";
 import { useAppMethods } from "../../../../states/legacy/AppMethodsContext";
 
-/** @type {SpeechSynthesis | null} */
-let synth = null;
+let synth: SpeechSynthesis | null = null;
 try {
   synth = window.speechSynthesis;
 } catch (e) {
@@ -30,6 +29,7 @@ try {
 
 export function useChangeShowScoresWhileTyping() {
   const [state, setState] = useAtom(showScoresWhileTypingState);
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const newState = !state;
 
@@ -45,6 +45,7 @@ export function useChangeShowScoresWhileTyping() {
 export function useChangeShowStrokesAs() {
   const setState = useSetAtom(showStrokesAsDiagramsState);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const value = event.target.value;
     setState(value !== "strokesAsText");
@@ -66,6 +67,7 @@ export function useChangeShowStrokesAsList() {
   const setState = useSetAtom(showStrokesAsListState);
   const { appFetchAndSetupGlobalDict } = useAppMethods();
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const value = event.target.checked;
     setState(value);
@@ -89,6 +91,7 @@ export function useChangeShowStrokesAsList() {
 
 export function useChangeShowStrokesOnMisstroke() {
   const [state, setState] = useAtom(showStrokesOnMisstrokeState);
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const value = !state;
     setState(value);
@@ -103,6 +106,7 @@ export function useChangeShowStrokesOnMisstroke() {
 
 export function useChangeSortOrderUserSetting() {
   const setState = useSetAtom(sortOrderState);
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const value = event.target.value;
     setState(value);
@@ -122,6 +126,7 @@ export function useChangeSortOrderUserSetting() {
 
 export function useChangeSpacePlacementUserSetting() {
   const setState = useSetAtom(spacePlacementState);
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const value = event.target.value;
     setState(value);
@@ -144,6 +149,7 @@ export function useChangeSpacePlacementUserSetting() {
 export function useChangeStenoLayout() {
   const setState = useSetAtom(stenoLayoutState);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const name = event.target.name;
     const value = event.target.value;
@@ -171,6 +177,7 @@ export function useChangeStenoLayout() {
 
 export function useChangeUserSetting() {
   const [currentState, setState] = useAtom(userSettingsState);
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     let newState = Object.assign({}, currentState);
 
@@ -178,6 +185,7 @@ export function useChangeUserSetting() {
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
+    // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     newState[name] = value;
 
     if (!newState.speakMaterial && synth) {
@@ -208,6 +216,7 @@ export function useChangeUserSetting() {
  */
 export function useChangeVoiceUserSetting() {
   const [currentState, setState] = useAtom(userSettingsState);
+  // @ts-expect-error TS(7006) FIXME: Parameter 'voiceName' implicitly has an 'any' type... Remove this comment to see the full error message
   return (voiceName, voiceURI) => {
     let newState = Object.assign({}, currentState);
 
@@ -232,16 +241,14 @@ export function useChangeVoiceUserSetting() {
 
 export function useChooseStudy() {
   const [currentState, setState] = useAtom(userSettingsState);
-  return (event) => {
+  const onChooseStudy: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     let newState = Object.assign({}, currentState);
 
-    const name = "study";
     const value = event.target.value;
-
-    newState[name] = value;
 
     switch (value) {
       case "discover":
+        newState.study = "discover";
         newState.showStrokes = PARAMS.discover.showStrokes;
         newState.hideStrokesOnLastRepetition =
           PARAMS.discover.hideStrokesOnLastRepetition;
@@ -254,9 +261,11 @@ export function useChooseStudy() {
         newState.limitNumberOfWords =
           currentState.studyPresets?.[0]?.limitNumberOfWords ??
           PARAMS.discover.limitNumberOfWords;
+        // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'SortOrder... Remove this comment to see the full error message
         newState.sortOrder = PARAMS.discover.sortOrder;
         break;
       case "revise":
+        newState.study = "revise";
         newState.showStrokes = PARAMS.revise.showStrokes;
         newState.hideStrokesOnLastRepetition =
           PARAMS.revise.hideStrokesOnLastRepetition;
@@ -269,9 +278,11 @@ export function useChooseStudy() {
         newState.limitNumberOfWords =
           currentState.studyPresets?.[1]?.limitNumberOfWords ??
           PARAMS.revise.limitNumberOfWords;
+        // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'SortOrder... Remove this comment to see the full error message
         newState.sortOrder = PARAMS.revise.sortOrder;
         break;
       case "drill":
+        newState.study = "drill";
         newState.showStrokes = PARAMS.drill.showStrokes;
         newState.hideStrokesOnLastRepetition =
           PARAMS.drill.hideStrokesOnLastRepetition;
@@ -284,9 +295,11 @@ export function useChooseStudy() {
         newState.limitNumberOfWords =
           currentState.studyPresets?.[2]?.limitNumberOfWords ??
           PARAMS.drill.limitNumberOfWords;
+        // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'SortOrder... Remove this comment to see the full error message
         newState.sortOrder = PARAMS.drill.sortOrder;
         break;
       case "practice":
+        newState.study = "practice";
         newState.showStrokes = PARAMS.practice.showStrokes;
         newState.hideStrokesOnLastRepetition =
           PARAMS.practice.hideStrokesOnLastRepetition;
@@ -299,6 +312,7 @@ export function useChooseStudy() {
         newState.limitNumberOfWords =
           currentState.studyPresets?.[3]?.limitNumberOfWords ??
           PARAMS.practice.limitNumberOfWords;
+        // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'SortOrder... Remove this comment to see the full error message
         newState.sortOrder = PARAMS.practice.sortOrder;
         break;
       default:
@@ -320,11 +334,14 @@ export function useChooseStudy() {
 
     return value;
   };
+
+  return onChooseStudy;
 }
 
 export function useHandleBeatsPerMinute() {
   const setState = useSetAtom(beatsPerMinuteState);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const value = event;
 
@@ -348,6 +365,7 @@ export function useHandleBeatsPerMinute() {
 export function useHandleDiagramSize() {
   const setState = useSetAtom(diagramSizeState);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     let value = typeof event === "number" ? +event.toFixed(1) : 1.0;
     if (value > 2) {
@@ -374,6 +392,7 @@ export function useHandleDiagramSize() {
 export function useHandleLimitWordsChange() {
   const setState = useSetAtom(limitNumberOfWordsState);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const value = event;
 
@@ -397,6 +416,7 @@ export function useHandleLimitWordsChange() {
 export function useHandleRepetitionsChange() {
   const setState = useSetAtom(repetitionsState);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const value = event;
 
@@ -420,6 +440,7 @@ export function useHandleRepetitionsChange() {
 export function useHandleStartFromWordChange() {
   const setState = useSetAtom(startFromWordSettingState);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const value = event;
 
@@ -469,6 +490,7 @@ export function useStartFromWordOne() {
 export function useHandleUpcomingWordsLayout() {
   const setState = useSetAtom(upcomingWordsLayoutState);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const value = event.target.value;
 
@@ -496,6 +518,7 @@ export function useHandleUpcomingWordsLayout() {
 export function useUpdatePreset() {
   const [currentState, setState] = useAtom(userSettingsState);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'studyType' implicitly has an 'any' type... Remove this comment to see the full error message
   return (studyType) => {
     const newUserSettings = Object.assign({}, currentState);
     const presetSettings = {

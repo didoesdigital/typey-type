@@ -42,7 +42,7 @@ type Props = {
   propsLesson: Lesson;
   actualText: string;
   changeShowStrokesInLesson: () => void;
-  chooseStudy: () => void;
+  chooseStudy: React.ChangeEventHandler<HTMLInputElement>;
   completedPhrases: MaterialText[];
   currentLessonStrokes: CurrentLessonStrokes[];
   currentPhrase: MaterialText;

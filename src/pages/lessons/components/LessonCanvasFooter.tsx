@@ -6,7 +6,7 @@ import { userSettingsState } from "../../../states/userSettingsState";
 import type { Study } from "../../../types";
 
 type LessonCanvasFooterProps = {
-  chooseStudy: () => void;
+  chooseStudy: React.ChangeEventHandler<HTMLInputElement>;
   disableUserSettings: boolean;
   toggleHideOtherSettings: () => void;
   updatePreset: (studyType: Study) => void;
