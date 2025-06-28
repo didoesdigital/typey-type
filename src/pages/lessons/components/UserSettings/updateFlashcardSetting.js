@@ -6,6 +6,7 @@ import { fullscreenState } from "../../../../states/flashcardsProgressState";
 // TODO: move to globalUserSettingsState
 export function useChangeFlashcardCourseLevel() {
   const setState = useSetAtom(flashcardsCourseLevelState);
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const value = event.target.value;
     setState(value);
@@ -26,6 +27,7 @@ export function useChangeFlashcardCourseLevel() {
 export function useChangeFullscreen() {
   const setState = useSetAtom(fullscreenState);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;

@@ -1,15 +1,18 @@
 import GoogleAnalytics from "react-ga4";
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
 export function changeShowStrokesInLesson(event) {
   const target = event.target;
   const value = target.type === "checkbox" ? target.checked : target.value;
 
+  // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
   this.setState({ showStrokesInLesson: value });
   const yourTypedText = document.getElementById("your-typed-text");
   if (yourTypedText) {
     yourTypedText.focus();
   }
 
+  // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
   if (this.props.location.pathname.includes("custom")) {
     GoogleAnalytics.event({
       category: "Stroke hint",
@@ -20,8 +23,10 @@ export function changeShowStrokesInLesson(event) {
     let labelShowStrokesInLesson = "true";
     try {
       labelShowStrokesInLesson =
+        // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.state.lesson.newPresentedMaterial.current.phrase +
         ": " +
+        // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
         this.state.lesson.newPresentedMaterial.current.stroke;
     } catch {}
 
@@ -35,8 +40,11 @@ export function changeShowStrokesInLesson(event) {
   return value;
 }
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
 export function updateRevisionMaterial(event) {
+  // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
   let newCurrentLessonStrokes = this.state.currentLessonStrokes.map(
+    // @ts-expect-error TS(7006) FIXME: Parameter 'stroke' implicitly has an 'any' type.
     (stroke) => ({ ...stroke })
   );
   const target = event.target;
@@ -46,6 +54,7 @@ export function updateRevisionMaterial(event) {
 
   newCurrentLessonStrokes[index].checked = checked;
 
+  // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
   this.setState({ currentLessonStrokes: newCurrentLessonStrokes });
   return checked;
 }

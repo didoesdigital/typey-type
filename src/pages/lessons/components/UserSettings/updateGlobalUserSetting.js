@@ -10,6 +10,7 @@ import {
 // (event: SyntheticInputEvent<HTMLInputElement>) => void
 export function useChangeWriterInput() {
   const setState = useSetAtom(writerInputState);
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     let name = "BAD_INPUT";
 
@@ -33,6 +34,7 @@ export function useChangeWriterInput() {
 
 export function useChangeInputForKAOES() {
   const setState = useSetAtom(inputForKAOESState);
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     let name = "BAD_INPUT";
 
@@ -56,6 +58,7 @@ export function useChangeInputForKAOES() {
 
 export function useToggleExperiment() {
   const setState = useSetAtom(experimentsState);
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   return (event) => {
     const target = event.target;
     const value = target.checked;
