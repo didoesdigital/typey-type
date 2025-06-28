@@ -259,12 +259,11 @@ export function useChangeUserSetting() {
   return onChangeUserSetting;
 }
 
-/**
- * @return {(voiceName: string, voiceURI: string) => void}
- */
-export function useChangeVoiceUserSetting() {
+export function useChangeVoiceUserSetting(): (
+  voiceName: string,
+  voiceURI: string
+) => void {
   const [currentState, setState] = useAtom(userSettingsState);
-  // @ts-expect-error TS(7006) FIXME: Parameter 'voiceName' implicitly has an 'any' type... Remove this comment to see the full error message
   return (voiceName, voiceURI) => {
     let newState = Object.assign({}, currentState);
 
