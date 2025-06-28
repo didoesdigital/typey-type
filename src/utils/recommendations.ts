@@ -1,4 +1,4 @@
-import type { RecommendedCoursesType } from 'types';
+import type { LessonIndexEntry, RecommendedCoursesType } from 'types';
 import PARAMS from './params';
 
 let recommendedStudySession = [
@@ -39,7 +39,7 @@ const games = [
   }
 ]
 
-function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgress = {}, history = {}, numberOfWordsSeen = 0, numberOfWordsMemorised = 0, lessonIndex = {}) {
+function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgress = {}, history = {}, numberOfWordsSeen = 0, numberOfWordsMemorised = 0, lessonIndex: LessonIndexEntry[] = []) {
     // fallback lesson:
     let recommendedNextLesson = {
       studyType: "practice",
@@ -161,7 +161,8 @@ function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgre
 
           let wordCount = 300;
 
-          // @ts-expect-error TS(2339) FIXME: Property 'find' does not exist on type '{}'.
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           let recommendedPracticeLessonInIndex = lessonIndex.find((recommended) => {
             return "/lessons" + recommended.path === (recommendedPracticeLesson?.path ?? "");
           });
@@ -354,7 +355,6 @@ function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgre
 
       let wordCount = 15;
 
-      // @ts-expect-error TS(2339) FIXME: Property 'find' does not exist on type '{}'.
       let recommendedDiscoverLessonInIndex = lessonIndex.find((recommended) => {
         return "/lessons" + recommended.path === recommendedDiscoverLessonPath;
       });
