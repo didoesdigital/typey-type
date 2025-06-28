@@ -1,5 +1,12 @@
-import type { LessonIndexEntry, RecommendedCoursesType } from 'types';
+import type {
+  LessonIndexEntry,
+  LessonsProgressEntry,
+  LessonsProgressIndex,
+  RecommendedCoursesType,
+} from "types";
 import PARAMS from './params';
+
+import type { RecommendedNextLesson } from "pages/progress/components/RecommendationBox";
 
 let recommendedStudySession = [
   // null,
@@ -39,9 +46,16 @@ const games = [
   }
 ]
 
-function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgress = {}, history = {}, numberOfWordsSeen = 0, numberOfWordsMemorised = 0, lessonIndex: LessonIndexEntry[] = []) {
+function getRecommendedNextLesson(
+  courses: RecommendedCoursesType,
+  lessonsProgress: LessonsProgressIndex = {},
+  history = {},
+  numberOfWordsSeen = 0,
+  numberOfWordsMemorised = 0,
+  lessonIndex: LessonIndexEntry[] = []
+) {
     // fallback lesson:
-    let recommendedNextLesson = {
+    let recommendedNextLesson: RecommendedNextLesson = {
       studyType: "practice",
       limitNumberOfWords: 300,
       repetitions: 1,
@@ -120,9 +134,11 @@ function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgre
 
         case "practiceLessons":
           let recommendedPracticeLesson = courses.practiceCourse.find((recommendable) => {
-            // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             let entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
-            let seenOrMemorisedChoice = Math.random() <.9 ? "numberOfWordsSeen" : "numberOfWordsMemorised";
+            let seenOrMemorisedChoice: keyof LessonsProgressEntry =
+              Math.random() < 0.9
+                ? "numberOfWordsSeen"
+                : "numberOfWordsMemorised";
 
             // You've never seen it before, so it's probably a good one to start
             if (typeof entryInLessonsProgress === "undefined") {
@@ -218,7 +234,6 @@ function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgre
         case "drillLessons":
           let recommendedDrillLesson = courses.drillCourse.find((recommendable) => {
 
-            // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
 
             // No lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
@@ -286,7 +301,6 @@ function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgre
 
             // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
             // so it's probably not a good candidate for revision
-            // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
             if (typeof entryInLessonsProgress === "undefined") { return false; }
 
@@ -336,10 +350,8 @@ function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgre
 
         // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
         // so it's probably a good candidate
-        // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         if (typeof lessonsProgress[process.env.PUBLIC_URL + recommendable.path] === "undefined") { return true; }
 
-        // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
 
         // don't pick this lesson if you've already seen/memorised 15 words and its target was 15
@@ -366,10 +378,8 @@ function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgre
       }
 
       let wordsLeftToDiscover = 15;
-      // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      if (lessonsProgress[recommendedDiscoverLesson.path] && lessonsProgress[recommendedDiscoverLesson.path].numberOfWordsToDiscover) {
-        // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-        wordsLeftToDiscover = lessonsProgress[recommendedDiscoverLesson.path].numberOfWordsToDiscover;
+      if (lessonsProgress[recommendedDiscoverLessonPath] && lessonsProgress[recommendedDiscoverLessonPath].numberOfWordsToDiscover) {
+        wordsLeftToDiscover = lessonsProgress[recommendedDiscoverLessonPath].numberOfWordsToDiscover;
       }
 
       let limitNumberOfWords = Math.min(15, wordCount, wordsLeftToDiscover);
@@ -400,9 +410,7 @@ function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgre
       switch (wildcardChoice) {
         case "compete":
           recommendedNextLesson.studyType = 'compete';
-          // @ts-expect-error TS(2322) FIXME: Type 'null' is not assignable to type 'number'.
           recommendedNextLesson.limitNumberOfWords = null;
-          // @ts-expect-error TS(2322) FIXME: Type 'null' is not assignable to type 'number'.
           recommendedNextLesson.repetitions = null;
           recommendedNextLesson.linkTitle = "Type Racer";
           recommendedNextLesson.linkText = "Play Type Racer";
@@ -423,9 +431,7 @@ function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgre
           break;
         default:
           recommendedNextLesson.studyType = 'break';
-          // @ts-expect-error TS(2322) FIXME: Type 'null' is not assignable to type 'number'.
           recommendedNextLesson.limitNumberOfWords = null;
-          // @ts-expect-error TS(2322) FIXME: Type 'null' is not assignable to type 'number'.
           recommendedNextLesson.repetitions = null;
           recommendedNextLesson.linkTitle = "Take a break";
           recommendedNextLesson.linkText = "Take a break";
@@ -437,9 +443,7 @@ function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgre
 
     if (recommendedStudySession[recommendedStudySessionIndex] === "break") {
       recommendedNextLesson.studyType = 'break';
-      // @ts-expect-error TS(2322) FIXME: Type 'null' is not assignable to type 'number'.
       recommendedNextLesson.limitNumberOfWords = null;
-      // @ts-expect-error TS(2322) FIXME: Type 'null' is not assignable to type 'number'.
       recommendedNextLesson.repetitions = null;
       recommendedNextLesson.linkTitle = "Save your progress and take a break";
       recommendedNextLesson.linkText = "Take a break";
