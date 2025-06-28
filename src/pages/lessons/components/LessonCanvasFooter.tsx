@@ -5,7 +5,7 @@ import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../../states/userSettingsState";
 import type { Study } from "../../../types";
 
-type LessonCanvasFooterProps = {
+export type LessonCanvasFooterProps = {
   chooseStudy: React.ChangeEventHandler<HTMLInputElement>;
   disableUserSettings: boolean;
   toggleHideOtherSettings: () => void;

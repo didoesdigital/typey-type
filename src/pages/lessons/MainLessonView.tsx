@@ -4,7 +4,9 @@ import Icon from "../../components/Icons/Icon";
 import { Link, useLocation } from "react-router-dom";
 import AnimateHeight from "react-animate-height";
 import DocumentTitle from "react-document-title";
-import LessonCanvasFooter from "./components/LessonCanvasFooter";
+import LessonCanvasFooter, {
+  type LessonCanvasFooterProps,
+} from "./components/LessonCanvasFooter";
 import LessonLengthPreview from "./components/LessonLengthPreview";
 import LessonSubheader from "./components/LessonSubheader";
 import Material from "../../components/Material";
@@ -35,14 +37,14 @@ import { userSettingsState } from "../../states/userSettingsState";
 import { useChangeShowScoresWhileTyping } from "./components/UserSettings/updateUserSetting";
 import { recentLessonHistoryState } from "../../states/recentLessonHistoryState";
 
-type Props = {
+type MainLessonViewProps = {
   createNewCustomLesson: JSX.Element | undefined;
   lessonSubTitle: string;
   overviewLink: JSX.Element | undefined;
   propsLesson: Lesson;
   actualText: string;
   changeShowStrokesInLesson: () => void;
-  chooseStudy: React.ChangeEventHandler<HTMLInputElement>;
+  chooseStudy: LessonCanvasFooterProps["chooseStudy"];
   completedPhrases: MaterialText[];
   currentLessonStrokes: CurrentLessonStrokes[];
   currentPhrase: MaterialText;
@@ -119,7 +121,7 @@ const MainLessonView = ({
   updateMarkup,
   updatePreset,
   focusTriggerInt,
-}: Props) => {
+}: MainLessonViewProps) => {
   const userSettings = useAtomValue(userSettingsState);
   const recentLessonHistory = useAtomValue(recentLessonHistoryState)?.history;
   const changeShowScoresWhileTyping = useChangeShowScoresWhileTyping();

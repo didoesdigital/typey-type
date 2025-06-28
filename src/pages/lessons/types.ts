@@ -1,3 +1,4 @@
+import type { LessonCanvasFooterProps } from "pages/lessons/components/LessonCanvasFooter";
 import type {
   // CurrentLessonStrokes,
   Lesson,
@@ -78,7 +79,7 @@ export type FinishedProps = Pick<
   | "totalNumberOfRetainedWords"
   | "totalWordCount"
 > & {
-  chooseStudy: React.ChangeEventHandler<HTMLInputElement>;
+  chooseStudy: LessonCanvasFooterProps["chooseStudy"];
   toggleHideOtherSettings: () => void;
   metadata: any;
   path: any;

@@ -21,6 +21,7 @@ import {
 import { useAppMethods } from "../../../../states/legacy/AppMethodsContext";
 
 import type { Study, UserSettings } from "types";
+import type { LessonCanvasFooterProps } from "pages/lessons/components/LessonCanvasFooter";
 
 let synth: SpeechSynthesis | null = null;
 try {
@@ -288,7 +289,7 @@ export function useChangeVoiceUserSetting(): (
 
 export function useChooseStudy() {
   const [currentState, setState] = useAtom(userSettingsState);
-  const onChooseStudy: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+  const onChooseStudy: LessonCanvasFooterProps["chooseStudy"] = (event) => {
     let newState = Object.assign({}, currentState);
 
     const value = event.target.value;
