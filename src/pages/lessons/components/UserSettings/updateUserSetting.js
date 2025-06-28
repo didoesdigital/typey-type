@@ -2,15 +2,21 @@ import GoogleAnalytics from "react-ga4";
 import PARAMS from "../../../../utils/params";
 import { useAtom, useSetAtom } from "jotai";
 import {
-  beatsPerMinuteState, diagramSizeState, hideOtherSettingsState, limitNumberOfWordsState, repetitionsState,
+  beatsPerMinuteState,
+  diagramSizeState,
+  hideOtherSettingsState,
+  limitNumberOfWordsState,
+  repetitionsState,
   showScoresWhileTypingState,
   showStrokesAsDiagramsState,
   showStrokesAsListState,
   showStrokesOnMisstrokeState,
   sortOrderState,
-  spacePlacementState, startFromWordSettingState,
-  stenoLayoutState, upcomingWordsLayoutState,
-  userSettingsState
+  spacePlacementState,
+  startFromWordSettingState,
+  stenoLayoutState,
+  upcomingWordsLayoutState,
+  userSettingsState,
 } from "../../../../states/userSettingsState";
 import { useAppMethods } from "../../../../states/legacy/AppMethodsContext";
 
@@ -30,7 +36,7 @@ export function useChangeShowScoresWhileTyping() {
     GoogleAnalytics.event({
       category: "UserSettings",
       action: "Change show scores while typing",
-      label: newState.toString()
+      label: newState.toString(),
     });
     setState(newState);
   };
@@ -53,12 +59,12 @@ export function useChangeShowStrokesAs() {
       action: "Change show strokes as",
       label: labelString,
     });
-  }
+  };
 }
 
 export function useChangeShowStrokesAsList() {
   const setState = useSetAtom(showStrokesAsListState);
-  const {appFetchAndSetupGlobalDict} = useAppMethods()
+  const { appFetchAndSetupGlobalDict } = useAppMethods();
 
   return (event) => {
     const value = event.target.checked;
@@ -66,9 +72,9 @@ export function useChangeShowStrokesAsList() {
 
     let labelString = value;
     if (value) {
-      appFetchAndSetupGlobalDict(null).catch(error => {
-        console.error(error)
-      })
+      appFetchAndSetupGlobalDict(null).catch((error) => {
+        console.error(error);
+      });
     } else {
       labelString = "BAD_INPUT";
     }
@@ -78,7 +84,7 @@ export function useChangeShowStrokesAsList() {
       action: "Change show strokes as list",
       label: labelString,
     });
-  }
+  };
 }
 
 export function useChangeShowStrokesOnMisstroke() {
@@ -92,7 +98,7 @@ export function useChangeShowStrokesOnMisstroke() {
       action: "Change show strokes on misstroke",
       label: value.toString(),
     });
-  }
+  };
 }
 
 export function useChangeSortOrderUserSetting() {
@@ -111,7 +117,7 @@ export function useChangeSortOrderUserSetting() {
       action: "Change sort order",
       label: labelString,
     });
-  }
+  };
 }
 
 export function useChangeSpacePlacementUserSetting() {
@@ -132,7 +138,7 @@ export function useChangeSpacePlacementUserSetting() {
     });
 
     return value;
-  }
+  };
 }
 
 export function useChangeStenoLayout() {
@@ -160,11 +166,11 @@ export function useChangeStenoLayout() {
     });
 
     return value;
-  }
+  };
 }
 
 export function useChangeUserSetting() {
-  const [currentState, setState] = useAtom(userSettingsState)
+  const [currentState, setState] = useAtom(userSettingsState);
   return (event) => {
     let newState = Object.assign({}, currentState);
 
@@ -194,14 +200,14 @@ export function useChangeUserSetting() {
     });
 
     return value;
-  }
+  };
 }
 
 /**
  * @return {(voiceName: string, voiceURI: string) => void}
  */
 export function useChangeVoiceUserSetting() {
-  const [currentState, setState]= useAtom(userSettingsState)
+  const [currentState, setState] = useAtom(userSettingsState);
   return (voiceName, voiceURI) => {
     let newState = Object.assign({}, currentState);
 
@@ -221,11 +227,11 @@ export function useChangeVoiceUserSetting() {
       action: "Change voice",
       label: labelString,
     });
-  }
+  };
 }
 
 export function useChooseStudy() {
-  const [currentState, setState] = useAtom(userSettingsState)
+  const [currentState, setState] = useAtom(userSettingsState);
   return (event) => {
     let newState = Object.assign({}, currentState);
 
@@ -313,11 +319,11 @@ export function useChooseStudy() {
     });
 
     return value;
-  }
+  };
 }
 
 export function useHandleBeatsPerMinute() {
-  const setState = useSetAtom(beatsPerMinuteState)
+  const setState = useSetAtom(beatsPerMinuteState);
 
   return (event) => {
     const value = event;
@@ -336,7 +342,7 @@ export function useHandleBeatsPerMinute() {
     });
 
     return value;
-  }
+  };
 }
 
 export function useHandleDiagramSize() {
@@ -362,11 +368,11 @@ export function useHandleDiagramSize() {
     });
 
     return value;
-  }
+  };
 }
 
 export function useHandleLimitWordsChange() {
-  const setState = useSetAtom(limitNumberOfWordsState)
+  const setState = useSetAtom(limitNumberOfWordsState);
 
   return (event) => {
     const value = event;
@@ -385,7 +391,7 @@ export function useHandleLimitWordsChange() {
     });
 
     return value;
-  }
+  };
 }
 
 export function useHandleRepetitionsChange() {
@@ -408,7 +414,7 @@ export function useHandleRepetitionsChange() {
     });
 
     return value;
-  }
+  };
 }
 
 export function useHandleStartFromWordChange() {
@@ -431,7 +437,7 @@ export function useHandleStartFromWordChange() {
     });
 
     return value;
-  }
+  };
 }
 
 export function useStartFromWordOne() {
@@ -480,7 +486,7 @@ export function useHandleUpcomingWordsLayout() {
     });
 
     return value;
-  }
+  };
 }
 
 /**
@@ -519,14 +525,14 @@ export function useUpdatePreset() {
     }
 
     setState(newUserSettings);
-  }
+  };
 }
 
 export function useToggleHideOtherSettings() {
-  const [state, setState] = useAtom(hideOtherSettingsState)
+  const [state, setState] = useAtom(hideOtherSettingsState);
 
   return () => {
-    const value = !state
+    const value = !state;
 
     setState(value);
 
@@ -539,5 +545,5 @@ export function useToggleHideOtherSettings() {
     });
 
     return value;
-  }
+  };
 }
