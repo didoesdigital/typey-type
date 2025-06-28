@@ -1,5 +1,6 @@
 import { atomWithLazy } from "jotai/utils";
-import { fetchDictionaryIndex } from "../utils/getData";
+import fetchDictionaryIndex from "../utils/fetchDictionaryIndex";
 import { DictionaryIndexEntry } from "../types";
 
-export const dictionaryIndexState = atomWithLazy<Promise<DictionaryIndexEntry[]>>(fetchDictionaryIndex);
+export const dictionaryIndexState =
+  atomWithLazy<Promise<DictionaryIndexEntry[]>>(fetchDictionaryIndex);

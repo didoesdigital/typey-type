@@ -40,4 +40,4 @@ async function fetchDictionaryIndex() {
   }
 }
 
-export { fetchDictionaryIndex };
+export default fetchDictionaryIndex;
