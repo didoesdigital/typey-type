@@ -44,6 +44,7 @@ import { synth, synthesizeSpeech } from "./utils/speechSynthesis";
 import type {
   DictionaryConfig,
   GlobalUserSettings,
+  LessonPathWithBasenameAndFilename,
   LookupDictWithNamespacedDicts,
   LookupDictWithNamespacedDictsAndConfig,
   RevisionMode,
@@ -564,8 +565,7 @@ class App extends Component<Props, AppState> {
     this.setState(newState);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'path' implicitly has an 'any' type.
-  handleLesson(path) {
+  handleLesson(path: LessonPathWithBasenameAndFilename) {
     fetchLesson(path).then((lessonText) => {
       if (isLessonTextValid(lessonText)) {
         this.setState({lessonNotFound: false});
