@@ -29,8 +29,7 @@ try {
 
 export function useChangeShowScoresWhileTyping() {
   const [state, setState] = useAtom(showScoresWhileTypingState);
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+  return () => {
     const newState = !state;
 
     GoogleAnalytics.event({
@@ -91,8 +90,7 @@ export function useChangeShowStrokesAsList() {
 
 export function useChangeShowStrokesOnMisstroke() {
   const [state, setState] = useAtom(showStrokesOnMisstrokeState);
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+  return () => {
     const value = !state;
     setState(value);
 
