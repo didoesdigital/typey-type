@@ -17,7 +17,7 @@ import {
 } from './utilities';
 import * as Utils from '../../../utils/utils';
 import { parseLesson } from '../../../utils/parseLesson';
-import { getLesson } from '../../../utils/getData';
+import fetchLesson from '../../../utils/fetchLesson';
 import { CarouselProvider, Slider, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import SlideNodes from './components/SlideNodes';
 import 'pure-react-carousel/dist/react-carousel.es.css';
@@ -125,7 +125,7 @@ currentSlide: currentSlide
       if (path === 'flashcards') { path = process.env.PUBLIC_URL + '/lessons/drills/top-1000-words/lesson.txt'; }
     }
 
-    getLesson(path).then((lessonText) => {
+    fetchLesson(path).then((lessonText) => {
       if (Utils.isLessonTextValid(lessonText)) {
         let lesson = parseLesson(lessonText, path);
         this.setState({

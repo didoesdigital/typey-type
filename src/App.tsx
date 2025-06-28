@@ -15,7 +15,7 @@ import { matchSplitText } from "./utils/matchSplitText";
 import { createWordListFromMetWords } from "./utils/createWordListFromMetWords";
 import { strokeAccuracy } from './utils/strokeAccuracy';
 import { loadPersonalPreferences } from 'utils/storage';
-import { getLesson } from './utils/getData';
+import fetchLesson from './utils/fetchLesson';
 import {
   generateListOfWordsAndStrokes
 } from './utils/transformingDictionaries/transformingDictionaries';
@@ -566,7 +566,7 @@ class App extends Component<Props, AppState> {
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'path' implicitly has an 'any' type.
   handleLesson(path) {
-    getLesson(path).then((lessonText) => {
+    fetchLesson(path).then((lessonText) => {
       if (isLessonTextValid(lessonText)) {
         this.setState({lessonNotFound: false});
         let lesson = parseLesson(lessonText, path);

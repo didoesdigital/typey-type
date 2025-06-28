@@ -1,12 +1,3 @@
-function getLesson(lessonFile) {
-  return fetch(lessonFile, {
-    method: "GET",
-    credentials: "same-origin"
-  }).then((response) => {
-    return response.text();
-  });
-}
-
 /**
  * @returns DictionaryIndexEntry[]
  */
@@ -47,4 +38,4 @@ function fetchDictionaryIndex() {
   });
 }
 
-export { fetchDictionaryIndex, getLesson };
+export { fetchDictionaryIndex };
