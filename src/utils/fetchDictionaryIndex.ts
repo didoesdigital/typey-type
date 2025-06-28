@@ -1,7 +1,6 @@
-/**
- * @returns DictionaryIndexEntry[]
- */
-async function fetchDictionaryIndex() {
+import type { DictionaryIndexEntry } from "types";
+
+async function fetchDictionaryIndex(): Promise<DictionaryIndexEntry[]> {
   try {
     const response = await fetch(
       process.env.PUBLIC_URL + "/dictionaries/dictionaryIndex.json",
