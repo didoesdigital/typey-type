@@ -1,6 +1,10 @@
 import Zipper from "utils/zipper";
 
-import type { LessonPathWithBasenameAndFilename, LessonSettings } from "types";
+import type {
+  LessonPathWithBasenameAndFilename,
+  LessonSettings,
+  LessonText,
+} from "types";
 
 const SETTINGS_NAME_MAP = {
   ignore_characters: "ignoredChars",
@@ -9,7 +13,7 @@ const SETTINGS_NAME_MAP = {
 } as const;
 
 export function parseLesson(
-  lessonText: string,
+  lessonText: LessonText,
   path: LessonPathWithBasenameAndFilename
 ) {
   let lines = lessonText.split("\n");
