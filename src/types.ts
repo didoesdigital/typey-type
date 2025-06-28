@@ -463,6 +463,14 @@ export type Experiments = {
 };
 
 /**
+ * Entire lesson.txt file as a string, including title, maybe subtitle, empty lines, entries as 'word': HEUPBT, and lesson settings like `warning_message`
+ *
+ * Example:
+ * "One-syllable words with F as V or S\n\n'rest': REFT\n'past': PAFT\n'west': WEFT\n'cost': KOFT\n'cast': KAFT\n'trust': TRUFT\n'prove': PROF\n'costs': KOFTS\n'test': TEFT\n'stove': STOF\n'rests': REFTS\n"
+ */
+export type LessonText = string;
+
+/**
  * Examples:
  * "Proverbs starting with V"
  */
