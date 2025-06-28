@@ -14,7 +14,7 @@ import { useAtomValue } from "jotai";
 import { userSettingsState } from "../../../states/userSettingsState";
 
 type Props = {
-  changeShowStrokesInLesson: () => void;
+  changeShowStrokesInLesson: (event: React.ChangeEvent<HTMLInputElement>) => boolean;
   currentPhrase: MaterialText;
   currentStroke: Outline;
   globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;

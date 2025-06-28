@@ -2,7 +2,7 @@ import { AppMethods } from "../../states/legacy/AppMethodsContext";
 
 const appMethods: AppMethods = {
   appFetchAndSetupGlobalDict: () => Promise.resolve(true),
-  changeShowStrokesInLesson: () => undefined,
+  changeShowStrokesInLesson: () => false,
   createCustomLesson: () => console.log("create custom lesson"),
   customiseLesson: () => undefined,
   generateCustomLesson: () => console.log("generate custom lesson"),
@@ -21,7 +21,7 @@ const appMethods: AppMethods = {
   updateMetWords: () => undefined,
   updateMultipleMetWords: () => undefined,
   updatePersonalDictionaries: () => undefined,
-  updateRevisionMaterial: () => undefined,
+  updateRevisionMaterial: () => false,
   updateStartingMetWordsAndCounts: () =>
     console.log("update starting met words and counts"),
 };

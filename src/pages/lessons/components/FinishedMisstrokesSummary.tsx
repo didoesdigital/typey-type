@@ -18,7 +18,9 @@ type FinishedMisstrokesSummaryProps = {
   ) => void;
   showMisstrokesSummary: boolean;
   sourceMaterial: SourceMaterial;
-  updateRevisionMaterial: any;
+  updateRevisionMaterial: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => boolean;
 };
 
 const FinishedMisstrokesSummary = ({

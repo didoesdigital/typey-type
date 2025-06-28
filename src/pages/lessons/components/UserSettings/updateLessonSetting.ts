@@ -1,9 +1,11 @@
 import GoogleAnalytics from "react-ga4";
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-export function changeShowStrokesInLesson(event) {
+export function changeShowStrokesInLesson(
+  event: React.ChangeEvent<HTMLInputElement>
+) {
   const target = event.target;
-  const value = target.type === "checkbox" ? target.checked : target.value;
+  const value =
+    target.type === "checkbox" ? target.checked : Boolean(target.value);
 
   // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
   this.setState({ showStrokesInLesson: value });
@@ -40,15 +42,17 @@ export function changeShowStrokesInLesson(event) {
   return value;
 }
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-export function updateRevisionMaterial(event) {
+export function updateRevisionMaterial(
+  event: React.ChangeEvent<HTMLInputElement>
+) {
   // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
   let newCurrentLessonStrokes = this.state.currentLessonStrokes.map(
     // @ts-expect-error TS(7006) FIXME: Parameter 'stroke' implicitly has an 'any' type.
     (stroke) => ({ ...stroke })
   );
   const target = event.target;
-  const checked = target.type === "checkbox" ? target.checked : target.value;
+  const checked =
+    target.type === "checkbox" ? target.checked : Boolean(target.value);
   const name = target.name.replace(/-checkbox/, "");
   const index = name;
 

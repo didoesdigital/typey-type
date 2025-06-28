@@ -6,7 +6,7 @@ import { globalUserSettingsState } from "../../../states/globalUserSettingsState
 type FinishedPossibleStrokeImprovementsProps = {
   currentLessonStrokes: any;
   metWords: any;
-  updateRevisionMaterial: any;
+  updateRevisionMaterial: (event: React.ChangeEvent<HTMLInputElement>) => boolean;
 };
 
 const getWordWithSpacing = (

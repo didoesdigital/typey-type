@@ -43,7 +43,9 @@ type MainLessonViewProps = {
   overviewLink: JSX.Element | undefined;
   propsLesson: Lesson;
   actualText: string;
-  changeShowStrokesInLesson: () => void;
+  changeShowStrokesInLesson: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => boolean;
   chooseStudy: LessonCanvasFooterProps["chooseStudy"];
   completedPhrases: MaterialText[];
   currentLessonStrokes: CurrentLessonStrokes[];

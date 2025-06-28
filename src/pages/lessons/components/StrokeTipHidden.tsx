@@ -3,7 +3,7 @@ import React from "react";
 type Props = {
   isMultiline: boolean;
   showStrokesInLesson: boolean;
-  changeShowStrokesInLesson: () => void;
+  changeShowStrokesInLesson: (event: React.ChangeEvent<HTMLInputElement>) => boolean;
   targetStrokeCount: number;
 };
 

@@ -102,5 +102,5 @@ export type FinishedProps = Pick<
   reviseLesson: any;
   revisionMode: any;
   updatePreset: (studyType: Study) => void;
-  updateRevisionMaterial: any;
+  updateRevisionMaterial: (event: React.ChangeEvent<HTMLInputElement>) => boolean;
 };
