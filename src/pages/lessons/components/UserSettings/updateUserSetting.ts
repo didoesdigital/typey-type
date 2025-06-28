@@ -416,8 +416,13 @@ export function useHandleBeatsPerMinute() {
 export function useHandleDiagramSize() {
   const setState = useSetAtom(diagramSizeState);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+  const onHandleDiagramSize:
+    | ((
+        value: number | null,
+        stringValue: string,
+        input: HTMLInputElement
+      ) => void)
+    | undefined = (event) => {
     let value = typeof event === "number" ? +event.toFixed(1) : 1.0;
     if (value > 2) {
       value = 2.0;
@@ -438,21 +443,25 @@ export function useHandleDiagramSize() {
 
     return value;
   };
+
+  return onHandleDiagramSize;
 }
 
 export function useHandleLimitWordsChange() {
   const setState = useSetAtom(limitNumberOfWordsState);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+  const onHandleLimitWordsChange:
+    | ((
+        value: number | null,
+        stringValue: string,
+        input: HTMLInputElement
+      ) => void)
+    | undefined = (event) => {
     const value = event;
 
     setState(value);
 
-    let labelString = value;
-    if (!value) {
-      labelString = "BAD_INPUT";
-    }
+    const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({
       category: "UserSettings",
@@ -462,21 +471,25 @@ export function useHandleLimitWordsChange() {
 
     return value;
   };
+
+  return onHandleLimitWordsChange;
 }
 
 export function useHandleRepetitionsChange() {
   const setState = useSetAtom(repetitionsState);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+  const onHandleRepetitionsChange:
+    | ((
+        value: number | null,
+        stringValue: string,
+        input: HTMLInputElement
+      ) => void)
+    | undefined = (event) => {
     const value = event;
 
     setState(value);
 
-    let labelString = value;
-    if (!value) {
-      labelString = "BAD_INPUT";
-    }
+    const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({
       category: "UserSettings",
@@ -486,21 +499,25 @@ export function useHandleRepetitionsChange() {
 
     return value;
   };
+
+  return onHandleRepetitionsChange;
 }
 
 export function useHandleStartFromWordChange() {
   const setState = useSetAtom(startFromWordSettingState);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+  const onHandleStartFromWordChange:
+    | ((
+        value: number | null,
+        stringValue: string,
+        input: HTMLInputElement
+      ) => void)
+    | undefined = (event) => {
     const value = event;
 
     setState(value);
 
-    let labelString = value;
-    if (!value) {
-      labelString = "BAD_INPUT";
-    }
+    const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({
       category: "UserSettings",
@@ -510,6 +527,8 @@ export function useHandleStartFromWordChange() {
 
     return value;
   };
+
+  return onHandleStartFromWordChange;
 }
 
 export function useStartFromWordOne() {
@@ -541,8 +560,9 @@ export function useStartFromWordOne() {
 export function useHandleUpcomingWordsLayout() {
   const setState = useSetAtom(upcomingWordsLayoutState);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+  const onHandleUpcomingWordsLayout: React.ChangeEventHandler<
+    HTMLSelectElement
+  > = (event) => {
     const value = event.target.value;
 
     setState(value);
@@ -560,6 +580,8 @@ export function useHandleUpcomingWordsLayout() {
 
     return value;
   };
+
+  return onHandleUpcomingWordsLayout;
 }
 
 /**
