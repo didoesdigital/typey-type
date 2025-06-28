@@ -20,7 +20,7 @@ import {
 } from "../../../../states/userSettingsState";
 import { useAppMethods } from "../../../../states/legacy/AppMethodsContext";
 
-import type { UserSettings } from "types";
+import type { Study, UserSettings } from "types";
 
 let synth: SpeechSynthesis | null = null;
 try {
@@ -584,14 +584,9 @@ export function useHandleUpcomingWordsLayout() {
   return onHandleUpcomingWordsLayout;
 }
 
-/**
- *
- * @return {(studyType: "discover" | "revise" | "drill" | "practice") => void} studyType should have type Study
- */
-export function useUpdatePreset() {
+export function useUpdatePreset(): (studyType: Study) => void {
   const [currentState, setState] = useAtom(userSettingsState);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'studyType' implicitly has an 'any' type... Remove this comment to see the full error message
   return (studyType) => {
     const newUserSettings = Object.assign({}, currentState);
     const presetSettings = {
