@@ -140,7 +140,6 @@ const RecommendationBox = ({
       yourSeenWordCount,
       yourMemorisedWordCount,
       lessonIndex,
-      metWords
     );
 
     const typedNextRecommendedLesson =

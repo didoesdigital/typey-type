@@ -1,3 +1,4 @@
+import type { RecommendedCoursesType } from 'types';
 import PARAMS from './params';
 
 let recommendedStudySession = [
@@ -38,8 +39,7 @@ const games = [
   }
 ]
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'courses' implicitly has an 'any' type.
-function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, numberOfWordsSeen = 0, numberOfWordsMemorised = 0, lessonIndex = {}, metWords = {}) {
+function getRecommendedNextLesson(courses: RecommendedCoursesType, lessonsProgress = {}, history = {}, numberOfWordsSeen = 0, numberOfWordsMemorised = 0, lessonIndex = {}) {
     // fallback lesson:
     let recommendedNextLesson = {
       studyType: "practice",
@@ -119,7 +119,6 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
           break;
 
         case "practiceLessons":
-          // @ts-expect-error TS(7006) FIXME: Parameter 'recommendable' implicitly has an 'any' ... Remove this comment to see the full error message
           let recommendedPracticeLesson = courses.practiceCourse.find((recommendable) => {
             // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             let entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
@@ -164,7 +163,7 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
 
           // @ts-expect-error TS(2339) FIXME: Property 'find' does not exist on type '{}'.
           let recommendedPracticeLessonInIndex = lessonIndex.find((recommended) => {
-            return "/lessons" + recommended.path === recommendedPracticeLesson.path;
+            return "/lessons" + recommended.path === (recommendedPracticeLesson?.path ?? "");
           });
 
           if (typeof recommendedPracticeLessonInIndex !== "undefined") {
@@ -216,7 +215,6 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
           break;
 
         case "drillLessons":
-          // @ts-expect-error TS(7006) FIXME: Parameter 'recommendable' implicitly has an 'any' ... Remove this comment to see the full error message
           let recommendedDrillLesson = courses.drillCourse.find((recommendable) => {
 
             // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
@@ -283,7 +281,6 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
 
         case "reviseLessons":
           let entryInLessonsProgress;
-          // @ts-expect-error TS(7006) FIXME: Parameter 'recommendable' implicitly has an 'any' ... Remove this comment to see the full error message
           let recommendedRevisionLesson = courses.revisionCourse.find((recommendable) => {
 
             // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
@@ -334,7 +331,6 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
     if (recommendedStudySession[recommendedStudySessionIndex] === "discover") {
       let discoverParams = "?recommended=true&" + PARAMS.discoverParams;
       let entryInLessonsProgress;
-      // @ts-expect-error TS(7006) FIXME: Parameter 'recommendable' implicitly has an 'any' ... Remove this comment to see the full error message
       let recommendedDiscoverLesson = courses.discoverCourse.find((recommendable) => {
 
         // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
@@ -353,12 +349,14 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
 
         return true;
       });
+      
+      let recommendedDiscoverLessonPath = recommendedDiscoverLesson?.path ?? "";
 
       let wordCount = 15;
 
       // @ts-expect-error TS(2339) FIXME: Property 'find' does not exist on type '{}'.
       let recommendedDiscoverLessonInIndex = lessonIndex.find((recommended) => {
-        return "/lessons" + recommended.path === recommendedDiscoverLesson.path;
+        return "/lessons" + recommended.path === recommendedDiscoverLessonPath;
       });
 
       if (typeof recommendedDiscoverLessonInIndex !== "undefined") {
@@ -376,7 +374,7 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
 
       let limitNumberOfWords = Math.min(15, wordCount, wordsLeftToDiscover);
 
-      if (recommendedDiscoverLesson.path.includes("briefs") || recommendedDiscoverLesson.path.includes("punctuation") || recommendedDiscoverLesson.path.includes("longest")) {
+      if (recommendedDiscoverLessonPath.includes("briefs") || recommendedDiscoverLessonPath.includes("punctuation") || recommendedDiscoverLessonPath.includes("longest")) {
         limitNumberOfWords = Math.min(5, wordCount, wordsLeftToDiscover);
         discoverParams = discoverParams.replace("limitNumberOfWords=15", "limitNumberOfWords=" + limitNumberOfWords.toString());
       }
