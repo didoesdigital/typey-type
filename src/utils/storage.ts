@@ -1,4 +1,6 @@
-function loadPersonalPreferences() {
+import type { LessonsProgressIndex, MetWords } from "types";
+
+function loadPersonalPreferences(): [MetWords, LessonsProgressIndex] {
   let metWords = {};
   let lessonsProgress = {};
   try {
