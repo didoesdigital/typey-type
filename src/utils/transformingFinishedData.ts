@@ -55,7 +55,6 @@ function transformLessonDataToChartData(lessonData: LessonData) {
     const nonZeroAttempts = typedMaterial.attempts?.length > 0;
 
     if (nonZeroAttempts) {
-      // @ts-expect-error TS(7006) FIXME: Parameter 'attempt' implicitly has an 'any' type.
       typedMaterial.attempts.forEach((attempt, attemptIndex) => {
         const firstAttempt = firstPhrase && attemptIndex === 0;
         dataPoints.push({

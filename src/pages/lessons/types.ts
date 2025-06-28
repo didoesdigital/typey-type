@@ -15,7 +15,7 @@ import type {
 
 export type LessonData = {
   version: number;
-  lessonStrokes: any[];
+  lessonStrokes: CurrentLessonStrokes[];
   startTime: number; // We can assume it's a number by the time it's recorded here
   wpm: number;
 };
