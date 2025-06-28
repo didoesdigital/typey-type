@@ -1,4 +1,4 @@
-import PARAMS from './params.js';
+import PARAMS from './params';
 
 let recommendedStudySession = [
   // null,

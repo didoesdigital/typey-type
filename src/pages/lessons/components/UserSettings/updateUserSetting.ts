@@ -308,7 +308,6 @@ export function useChooseStudy() {
         newState.limitNumberOfWords =
           currentState.studyPresets?.[0]?.limitNumberOfWords ??
           PARAMS.discover.limitNumberOfWords;
-        // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'SortOrder... Remove this comment to see the full error message
         newState.sortOrder = PARAMS.discover.sortOrder;
         break;
       case "revise":
@@ -325,7 +324,6 @@ export function useChooseStudy() {
         newState.limitNumberOfWords =
           currentState.studyPresets?.[1]?.limitNumberOfWords ??
           PARAMS.revise.limitNumberOfWords;
-        // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'SortOrder... Remove this comment to see the full error message
         newState.sortOrder = PARAMS.revise.sortOrder;
         break;
       case "drill":
@@ -342,7 +340,6 @@ export function useChooseStudy() {
         newState.limitNumberOfWords =
           currentState.studyPresets?.[2]?.limitNumberOfWords ??
           PARAMS.drill.limitNumberOfWords;
-        // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'SortOrder... Remove this comment to see the full error message
         newState.sortOrder = PARAMS.drill.sortOrder;
         break;
       case "practice":
@@ -359,7 +356,6 @@ export function useChooseStudy() {
         newState.limitNumberOfWords =
           currentState.studyPresets?.[3]?.limitNumberOfWords ??
           PARAMS.practice.limitNumberOfWords;
-        // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'SortOrder... Remove this comment to see the full error message
         newState.sortOrder = PARAMS.practice.sortOrder;
         break;
       default:

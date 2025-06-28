@@ -1,5 +1,5 @@
 import React from "react";
-import PARAMS from "../../../utils/params.js";
+import PARAMS from "../../../utils/params";
 import { Link } from "react-router-dom";
 import type {
   LessonIndexEntry,

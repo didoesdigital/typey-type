@@ -449,6 +449,19 @@ export type UserSettings = {
   hideOtherSettings: boolean;
 };
 
+export type StudyTypeParams = Pick<
+  UserSettings,
+  | "hideStrokesOnLastRepetition"
+  | "limitNumberOfWords"
+  | "newWords"
+  | "repetitions"
+  | "retainedWords"
+  | "seenWords"
+  | "sortOrder"
+  | "showStrokes"
+  | "study"
+>;
+
 export type GlobalUserSettings = {
   experiments: Experiments;
   flashcardsCourseLevel: FlashcardsCourseLevel;
