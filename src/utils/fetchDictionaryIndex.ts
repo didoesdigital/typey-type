@@ -9,7 +9,7 @@ async function fetchDictionaryIndex(): Promise<DictionaryIndexEntry[]> {
         credentials: "same-origin",
       }
     );
-    const json = await response.json();
+    const json = (await response.json()) as Promise<DictionaryIndexEntry[]>;
     return json;
   } catch (error) {
     console.error("Unable to load dictionary index", error);
