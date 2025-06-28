@@ -2,7 +2,8 @@ import { mean } from "d3-array";
 import type { LessonData } from "pages/lessons/types";
 
 // @ts-expect-error TS(7006) FIXME: Parameter 'wordCount' implicitly has an 'any' type... Remove this comment to see the full error message
-const calculatedAdjustedWPM = (wordCount, duration) => Math.max(wordCount - 1, 0) / (duration / 1000 / 60);
+const calculatedAdjustedWPM = (wordCount, duration) =>
+  Math.max(wordCount - 1, 0) / (duration / 1000 / 60);
 
 function stitchTogetherLessonData(
   lessonStrokes: any[],
@@ -35,7 +36,10 @@ function transformLessonDataToChartData(lessonData: LessonData) {
   const avgMinimumStrokesData = mean(minimumStrokesData, (d, i) =>
     i === 0
       ? 0
-      : calculatedAdjustedWPM(d.numberOfMatchedWordsSoFar, (d.time - lessonData.startTime))
+      : calculatedAdjustedWPM(
+          d.numberOfMatchedWordsSoFar,
+          d.time - lessonData.startTime
+        )
   );
 
   lessonData.lessonStrokes.forEach((typedMaterial, materialIndex) => {
@@ -52,7 +56,10 @@ function transformLessonDataToChartData(lessonData: LessonData) {
           elapsedTime: attempt.time - lessonData.startTime,
           wordsPerMinute: firstAttempt
             ? 0
-            : calculatedAdjustedWPM(attempt.numberOfMatchedWordsSoFar, elapsedTime),
+            : calculatedAdjustedWPM(
+                attempt.numberOfMatchedWordsSoFar,
+                elapsedTime
+              ),
           typedText: attempt.text,
           material: typedMaterial.word,
           markedCorrect: typedMaterial.accuracy,
