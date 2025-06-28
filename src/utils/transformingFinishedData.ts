@@ -1,10 +1,14 @@
 import { mean } from "d3-array";
+import type { LessonData } from "pages/lessons/types";
 
 // @ts-expect-error TS(7006) FIXME: Parameter 'wordCount' implicitly has an 'any' type... Remove this comment to see the full error message
 const calculatedAdjustedWPM = (wordCount, duration) => Math.max(wordCount - 1, 0) / (duration / 1000 / 60);
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'lessonStrokes' implicitly has an 'any' ... Remove this comment to see the full error message
-function stitchTogetherLessonData(lessonStrokes, startTime, wpm) {
+function stitchTogetherLessonData(
+  lessonStrokes: any[],
+  startTime: number,
+  wpm: number
+): LessonData {
   let lessonData = {
     version: 3,
     lessonStrokes,
@@ -15,8 +19,7 @@ function stitchTogetherLessonData(lessonStrokes, startTime, wpm) {
   return lessonData;
 }
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'lessonData' implicitly has an 'any' typ... Remove this comment to see the full error message
-function transformLessonDataToChartData(lessonData) {
+function transformLessonDataToChartData(lessonData: LessonData) {
   let transformedData = {
     averageWPM: lessonData.wpm,
     version: lessonData.version,
@@ -27,17 +30,14 @@ function transformLessonDataToChartData(lessonData) {
 
   const minimumStrokes = 4;
   const minimumStrokesData = lessonData.lessonStrokes
-    // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
     .map((d) => ({ ...d }))
     .slice(0, minimumStrokes);
   const avgMinimumStrokesData = mean(minimumStrokesData, (d, i) =>
     i === 0
       ? 0
-      // @ts-ignore
       : calculatedAdjustedWPM(d.numberOfMatchedWordsSoFar, (d.time - lessonData.startTime))
   );
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'typedMaterial' implicitly has an 'any' ... Remove this comment to see the full error message
   lessonData.lessonStrokes.forEach((typedMaterial, materialIndex) => {
     const elapsedTime = typedMaterial.time - lessonData.startTime;
     const numberOfWords = typedMaterial.numberOfMatchedWordsSoFar;

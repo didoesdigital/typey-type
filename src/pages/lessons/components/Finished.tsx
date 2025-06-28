@@ -88,7 +88,8 @@ const Finished = ({
   useEffect(() => {
     const lessonData: LessonData = stitchTogetherLessonData(
       currentLessonStrokes,
-      startTime,
+      // In theory, startTime should always be set to a number already if the lesson was run in order to even reach the Finished component, but we'll use a nullish coalesce operator here so we don't have to handle null type
+      startTime ?? 0,
       wpm
     );
     setChartData(transformLessonDataToChartData(lessonData));

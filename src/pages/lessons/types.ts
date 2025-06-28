@@ -15,7 +15,7 @@ export type LessonData = {
   lessonStrokes: any[];
   startTime: number; // We can assume it's a number by the time it's recorded here
   wpm: number;
-} | null;
+};
 
 export type TransformedData = {
   averageWPM: number;
