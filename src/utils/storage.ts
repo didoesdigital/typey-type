@@ -4,13 +4,13 @@ function loadPersonalPreferences() {
   try {
     if (window.localStorage) {
       if (window.localStorage.getItem("metWords")) {
-        // @ts-ignore
+        // @ts-expect-error TS(2345) FIXME: Argument of type 'string | null' is not assignable... Remove this comment to see the full error message
         metWords = JSON.parse(window.localStorage.getItem("metWords"));
       }
       if (window.localStorage.getItem("lessonsProgress")) {
         lessonsProgress = Object.assign(
           lessonsProgress,
-          // @ts-ignore
+          // @ts-expect-error TS(2345) FIXME: Argument of type 'string | null' is not assignable... Remove this comment to see the full error message
           JSON.parse(window.localStorage.getItem("lessonsProgress"))
         );
       }

@@ -1,3 +1,4 @@
+// @ts-expect-error TS(7006) FIXME: Parameter 'durationInMilliseconds' implicitly has ... Remove this comment to see the full error message
 function durationFormatter (durationInMilliseconds) {
   // more than 10 hours, return early
   if (durationInMilliseconds >= 36000000) {
@@ -14,8 +15,11 @@ function durationFormatter (durationInMilliseconds) {
   let minutes = Math.floor((durationInSeconds - (hours * 3600)) / 60);
   let seconds = durationInSeconds - (hours * 3600) - (minutes * 60);
 
+  // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'number'.
   if (hours < 10) { hours = "0" + hours; }
+  // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'number'.
   if (minutes < 10) { minutes = "0" + minutes; }
+  // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'number'.
   if (seconds < 10) { seconds = "0" + seconds; }
 
   if (durationInMilliseconds < 3600000) {
@@ -26,6 +30,7 @@ function durationFormatter (durationInMilliseconds) {
   }
 }
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'durationInMinutes' implicitly has an 'a... Remove this comment to see the full error message
 function humanDurationFormatter (durationInMinutes) {
   // more than 10 hours, return early
   if (durationInMinutes >= 600) {

@@ -1,5 +1,6 @@
 import { getRandomBetween } from './utils';
 
+// @ts-expect-error TS(7034) FIXME: Variable 'animationFrame' implicitly has type 'any... Remove this comment to see the full error message
 let animationFrame;
 
 let ConfettiParticle = function() {
@@ -41,34 +42,45 @@ let ConfettiParticle = function() {
   this.remainingLife = this.life;
 
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'ctx' implicitly has an 'any' type.
   this.draw = ctx => {
     let p = this;
 
     if (this.remainingLife > 0 && this.radius > 0) {
       ctx.beginPath();
+      // @ts-expect-error TS(2339) FIXME: Property 'startX' does not exist on type 'Confetti... Remove this comment to see the full error message
       ctx.arc(p.startX, p.startY, p.radius, 0, Math.PI * 2);
+      // @ts-expect-error TS(2339) FIXME: Property 'rgbArray' does not exist on type 'Confet... Remove this comment to see the full error message
       ctx.fillStyle = "rgba(" + this.rgbArray[0] + ',' + this.rgbArray[1] + ',' + this.rgbArray[2] + "," + this.rgbArray[3] + ")";
       ctx.fill();
 
       p.remainingLife -= confettiDecaySpeed;
       p.radius -= confettiShrinkSpeed;
+      // @ts-expect-error TS(2339) FIXME: Property 'startX' does not exist on type 'Confetti... Remove this comment to see the full error message
       p.startX += p.velocity.x;
+      // @ts-expect-error TS(2339) FIXME: Property 'startY' does not exist on type 'Confetti... Remove this comment to see the full error message
       p.startY += p.velocity.y;
       p.velocity.y = p.velocity.y + gravity;
     }
   }
 }
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'x' implicitly has an 'any' type.
 function createParticleAtPoint(x, y, colorData, particles) {
   let particle = new ConfettiParticle();
+  // @ts-expect-error TS(2339) FIXME: Property 'rgbArray' does not exist on type 'Confet... Remove this comment to see the full error message
   particle.rgbArray = colorData;
+  // @ts-expect-error TS(2339) FIXME: Property 'startX' does not exist on type 'Confetti... Remove this comment to see the full error message
   particle.startX = x;
+  // @ts-expect-error TS(2339) FIXME: Property 'startY' does not exist on type 'Confetti... Remove this comment to see the full error message
   particle.startY = y;
+  // @ts-expect-error TS(2339) FIXME: Property 'startTime' does not exist on type 'Confe... Remove this comment to see the full error message
   particle.startTime = Date.now();
 
   particles.push(particle);
 }
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'config' implicitly has an 'any' type.
 function setupCanvas(config, confettiSourceID, particles) {
   if (!config['sparsity']) { throw new Error("Bad confetti config"); }
   if (!config['colors']) { throw new Error("Bad confetti config"); }
@@ -119,6 +131,7 @@ function setupCanvas(config, confettiSourceID, particles) {
   }
 }
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'localParticles' implicitly has an 'any'... Remove this comment to see the full error message
 function updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) {
   if (canvas) {
     const ctx = canvas.getContext('2d');
@@ -151,9 +164,11 @@ function updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) {
 }
 
 function cancelAnimation() {
+  // @ts-expect-error TS(7005) FIXME: Variable 'animationFrame' implicitly has an 'any' ... Remove this comment to see the full error message
   window.cancelAnimationFrame(animationFrame);
 }
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'particles' implicitly has an 'any' type... Remove this comment to see the full error message
 function restartAnimation(particles, canvas, canvasWidth, canvasHeight) {
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     animationFrame = window.requestAnimationFrame(function () { updateCanvas(particles, canvas, canvasWidth, canvasHeight) });

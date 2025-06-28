@@ -38,6 +38,7 @@ const games = [
   }
 ]
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'courses' implicitly has an 'any' type.
 function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, numberOfWordsSeen = 0, numberOfWordsMemorised = 0, lessonIndex = {}, metWords = {}) {
     // fallback lesson:
     let recommendedNextLesson = {
@@ -63,6 +64,7 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
     // If not viable, move to next step; if nothing is valid (e.g. you've discovered ALL words on Typey Type, fall back to top 10,000 project gutenberg words practice
     let recommendedStudySessionIndex = 0;
     if (typeof history === "object") {
+      // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       switch (history["currentStep"]) {
         case "practice":
           recommendedStudySessionIndex = 0;
@@ -117,7 +119,9 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
           break;
 
         case "practiceLessons":
+          // @ts-expect-error TS(7006) FIXME: Parameter 'recommendable' implicitly has an 'any' ... Remove this comment to see the full error message
           let recommendedPracticeLesson = courses.practiceCourse.find((recommendable) => {
+            // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             let entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
             let seenOrMemorisedChoice = Math.random() <.9 ? "numberOfWordsSeen" : "numberOfWordsMemorised";
 
@@ -158,6 +162,7 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
 
           let wordCount = 300;
 
+          // @ts-expect-error TS(2339) FIXME: Property 'find' does not exist on type '{}'.
           let recommendedPracticeLessonInIndex = lessonIndex.find((recommended) => {
             return "/lessons" + recommended.path === recommendedPracticeLesson.path;
           });
@@ -211,8 +216,10 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
           break;
 
         case "drillLessons":
+          // @ts-expect-error TS(7006) FIXME: Parameter 'recommendable' implicitly has an 'any' ... Remove this comment to see the full error message
           let recommendedDrillLesson = courses.drillCourse.find((recommendable) => {
 
+            // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
 
             // No lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
@@ -276,10 +283,12 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
 
         case "reviseLessons":
           let entryInLessonsProgress;
+          // @ts-expect-error TS(7006) FIXME: Parameter 'recommendable' implicitly has an 'any' ... Remove this comment to see the full error message
           let recommendedRevisionLesson = courses.revisionCourse.find((recommendable) => {
 
             // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
             // so it's probably not a good candidate for revision
+            // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
             entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
             if (typeof entryInLessonsProgress === "undefined") { return false; }
 
@@ -325,12 +334,15 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
     if (recommendedStudySession[recommendedStudySessionIndex] === "discover") {
       let discoverParams = "?recommended=true&" + PARAMS.discoverParams;
       let entryInLessonsProgress;
+      // @ts-expect-error TS(7006) FIXME: Parameter 'recommendable' implicitly has an 'any' ... Remove this comment to see the full error message
       let recommendedDiscoverLesson = courses.discoverCourse.find((recommendable) => {
 
         // no lessonsProgress lesson matches recommendable.path, then you've never seen that lesson
         // so it's probably a good candidate
+        // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         if (typeof lessonsProgress[process.env.PUBLIC_URL + recommendable.path] === "undefined") { return true; }
 
+        // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         entryInLessonsProgress = lessonsProgress[process.env.PUBLIC_URL + recommendable.path];
 
         // don't pick this lesson if you've already seen/memorised 15 words and its target was 15
@@ -344,6 +356,7 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
 
       let wordCount = 15;
 
+      // @ts-expect-error TS(2339) FIXME: Property 'find' does not exist on type '{}'.
       let recommendedDiscoverLessonInIndex = lessonIndex.find((recommended) => {
         return "/lessons" + recommended.path === recommendedDiscoverLesson.path;
       });
@@ -355,7 +368,9 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
       }
 
       let wordsLeftToDiscover = 15;
+      // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       if (lessonsProgress[recommendedDiscoverLesson.path] && lessonsProgress[recommendedDiscoverLesson.path].numberOfWordsToDiscover) {
+        // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         wordsLeftToDiscover = lessonsProgress[recommendedDiscoverLesson.path].numberOfWordsToDiscover;
       }
 
@@ -387,7 +402,9 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
       switch (wildcardChoice) {
         case "compete":
           recommendedNextLesson.studyType = 'compete';
+          // @ts-expect-error TS(2322) FIXME: Type 'null' is not assignable to type 'number'.
           recommendedNextLesson.limitNumberOfWords = null;
+          // @ts-expect-error TS(2322) FIXME: Type 'null' is not assignable to type 'number'.
           recommendedNextLesson.repetitions = null;
           recommendedNextLesson.linkTitle = "Type Racer";
           recommendedNextLesson.linkText = "Play Type Racer";
@@ -408,7 +425,9 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
           break;
         default:
           recommendedNextLesson.studyType = 'break';
+          // @ts-expect-error TS(2322) FIXME: Type 'null' is not assignable to type 'number'.
           recommendedNextLesson.limitNumberOfWords = null;
+          // @ts-expect-error TS(2322) FIXME: Type 'null' is not assignable to type 'number'.
           recommendedNextLesson.repetitions = null;
           recommendedNextLesson.linkTitle = "Take a break";
           recommendedNextLesson.linkText = "Take a break";
@@ -420,7 +439,9 @@ function getRecommendedNextLesson(courses, lessonsProgress = {}, history = {}, n
 
     if (recommendedStudySession[recommendedStudySessionIndex] === "break") {
       recommendedNextLesson.studyType = 'break';
+      // @ts-expect-error TS(2322) FIXME: Type 'null' is not assignable to type 'number'.
       recommendedNextLesson.limitNumberOfWords = null;
+      // @ts-expect-error TS(2322) FIXME: Type 'null' is not assignable to type 'number'.
       recommendedNextLesson.repetitions = null;
       recommendedNextLesson.linkTitle = "Save your progress and take a break";
       recommendedNextLesson.linkText = "Take a break";
