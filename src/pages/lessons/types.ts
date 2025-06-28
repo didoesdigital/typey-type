@@ -8,6 +8,9 @@ import type {
   CurrentLessonStrokes,
   LookupDictWithNamespacedDictsAndConfig,
   ImportedPersonalDictionaries,
+  Outline,
+  MaterialText,
+  ActualTypedText,
 } from "../../types";
 
 export type LessonData = {
@@ -17,10 +20,22 @@ export type LessonData = {
   wpm: number;
 };
 
+export type DataPoint = {
+  attemptPeak: boolean;
+  elapsedTime: number;
+  hint: Outline;
+  hintWasShown: boolean;
+  markedCorrect: boolean;
+  material: MaterialText;
+  materialIndex?: number;
+  typedText: ActualTypedText;
+  wordsPerMinute: number;
+};
+
 export type TransformedData = {
   averageWPM: number;
   version: number;
-  dataPoints?: any[];
+  dataPoints?: DataPoint[];
 } | null;
 
 export type LessonProps = {

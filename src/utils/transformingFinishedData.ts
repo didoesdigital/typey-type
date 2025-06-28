@@ -1,5 +1,9 @@
 import { mean } from "d3-array";
-import type { LessonData } from "pages/lessons/types";
+import type {
+  DataPoint,
+  LessonData,
+  TransformedData,
+} from "pages/lessons/types";
 
 // @ts-expect-error TS(7006) FIXME: Parameter 'wordCount' implicitly has an 'any' type... Remove this comment to see the full error message
 const calculatedAdjustedWPM = (wordCount, duration) =>
@@ -21,26 +25,29 @@ function stitchTogetherLessonData(
 }
 
 function transformLessonDataToChartData(lessonData: LessonData) {
-  let transformedData = {
+  let transformedData: TransformedData = {
     averageWPM: lessonData.wpm,
     version: lessonData.version,
   };
 
-  // @ts-expect-error TS(7034) FIXME: Variable 'dataPoints' implicitly has type 'any[]' ... Remove this comment to see the full error message
-  let dataPoints = [];
+  let dataPoints: DataPoint[] = [];
 
   const minimumStrokes = 4;
   const minimumStrokesData = lessonData.lessonStrokes
     .map((d) => ({ ...d }))
     .slice(0, minimumStrokes);
-  const avgMinimumStrokesData = mean(minimumStrokesData, (d, i) =>
-    i === 0
-      ? 0
-      : calculatedAdjustedWPM(
-          d.numberOfMatchedWordsSoFar,
-          d.time - lessonData.startTime
-        )
-  );
+  const avgMinimumStrokesData =
+    mean(
+      minimumStrokesData,
+      (d, i) =>
+        i === 0
+          ? 0
+          : calculatedAdjustedWPM(
+              d.numberOfMatchedWordsSoFar,
+              d.time - lessonData.startTime
+            )
+      // Note: `?? 0` should never happen but ensures we don't have `undefined`:
+    ) ?? 0;
 
   lessonData.lessonStrokes.forEach((typedMaterial, materialIndex) => {
     const elapsedTime = typedMaterial.time - lessonData.startTime;
@@ -87,7 +94,6 @@ function transformLessonDataToChartData(lessonData: LessonData) {
     });
   });
 
-  // @ts-expect-error TS(2339) FIXME: Property 'dataPoints' does not exist on type '{ av... Remove this comment to see the full error message
   transformedData.dataPoints = dataPoints;
 
   /* NOTE:
