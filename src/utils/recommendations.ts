@@ -6,7 +6,10 @@ import type {
 } from "types";
 import PARAMS from './params';
 
-import type { RecommendedNextLesson } from "pages/progress/components/RecommendationBox";
+import type {
+  RecommendationHistory,
+  RecommendedNextLesson,
+} from "pages/progress/components/RecommendationBox";
 
 let recommendedStudySession = [
   // null,
@@ -49,7 +52,7 @@ const games = [
 function getRecommendedNextLesson(
   courses: RecommendedCoursesType,
   lessonsProgress: LessonsProgressIndex = {},
-  history = {},
+  history: RecommendationHistory = { currentStep: null },
   numberOfWordsSeen = 0,
   numberOfWordsMemorised = 0,
   lessonIndex: LessonIndexEntry[] = []
@@ -78,7 +81,6 @@ function getRecommendedNextLesson(
     // If not viable, move to next step; if nothing is valid (e.g. you've discovered ALL words on Typey Type, fall back to top 10,000 project gutenberg words practice
     let recommendedStudySessionIndex = 0;
     if (typeof history === "object") {
-      // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       switch (history["currentStep"]) {
         case "practice":
           recommendedStudySessionIndex = 0;
