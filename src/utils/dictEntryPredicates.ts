@@ -1,22 +1,20 @@
-// @ts-expect-error TS(7006) FIXME: Parameter 'translation' implicitly has an 'any' ty... Remove this comment to see the full error message
-export const hasFewerThan7Letters = (translation) => {
+import type { Translation } from "types";
+
+export const hasFewerThan7Letters = (translation: Translation) => {
   // if (process.env.NODE_ENV === 'development') {return translation.trim().length < 5;}
   return translation.trim().length < 7;
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'translation' implicitly has an 'any' ty... Remove this comment to see the full error message
-export const hasMoreThan2Letters = (translation) => {
+export const hasMoreThan2Letters = (translation: Translation) => {
   return translation.trim().length > 2;
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'translation' implicitly has an 'any' ty... Remove this comment to see the full error message
-export const hasNoRepeatLetters = (translation) => {
+export const hasNoRepeatLetters = (translation: Translation) => {
   const uniqLetters = new Set(Array.from(translation));
   return uniqLetters.size === translation.length;
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'translation' implicitly has an 'any' ty... Remove this comment to see the full error message
-export const hasOnlyLowercaseLetters = (translation) => {
+export const hasOnlyLowercaseLetters = (translation: Translation) => {
   const regexp = /^[a-z]+$/;
   return regexp.test(translation.trim());
 };
