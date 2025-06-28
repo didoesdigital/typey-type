@@ -115,7 +115,7 @@ const Finished = ({
   // update top speed today or ever and headings and confetti
   useEffect(() => {
     const fasterSpeedToday = wpm > topSpeedToday;
-    const fasterPersonalBest = wpm > topSpeedPersonalBest?.wpm ?? 0;
+    const fasterPersonalBest = wpm > (topSpeedPersonalBest?.wpm ?? 0);
     const minimumStrokes = currentLessonStrokes.length > 3;
     const minimumSpeed = wpm > 3;
     const thirtyStrokesOrNotRevision =
