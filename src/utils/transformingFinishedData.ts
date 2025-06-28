@@ -5,8 +5,7 @@ import type {
   TransformedData,
 } from "pages/lessons/types";
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'wordCount' implicitly has an 'any' type... Remove this comment to see the full error message
-const calculatedAdjustedWPM = (wordCount, duration) =>
+const calculatedAdjustedWPM = (wordCount: number, duration: number) =>
   Math.max(wordCount - 1, 0) / (duration / 1000 / 60);
 
 function stitchTogetherLessonData(
