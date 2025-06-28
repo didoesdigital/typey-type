@@ -48,11 +48,11 @@ const practice: StudyTypeParams = {
   sortOrder: "sortOff",
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'studyTypeObject' implicitly has an 'any... Remove this comment to see the full error message
-export function createParamString(studyTypeObject) {
+export function createParamString(studyTypeObject: StudyTypeParams) {
   let paramList = [];
   for (const [key, value] of Object.entries(studyTypeObject)) {
-    let shortStringValue = value;
+    let shortStringValue: string | StudyTypeParams[keyof StudyTypeParams] =
+      value;
     if (value === false) {
       shortStringValue = "0";
     }
