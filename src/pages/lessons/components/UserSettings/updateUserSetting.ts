@@ -20,6 +20,8 @@ import {
 } from "../../../../states/userSettingsState";
 import { useAppMethods } from "../../../../states/legacy/AppMethodsContext";
 
+import type { UserSettings } from "types";
+
 let synth: SpeechSynthesis | null = null;
 try {
   synth = window.speechSynthesis;
@@ -190,18 +192,52 @@ export function useChangeStenoLayout() {
   return onChangeStenoLayout;
 }
 
+type CheckboxSetting = keyof Pick<
+  UserSettings,
+  | "blurMaterial"
+  | "caseSensitive"
+  | "hideStrokesOnLastRepetition"
+  | "newWords"
+  | "punctuationDescriptions"
+  | "retainedWords"
+  | "seenWords"
+  | "showStrokes"
+  | "simpleTypography"
+  | "speakMaterial"
+  | "textInputAccessibility"
+>;
+const validCheckboxSettings: CheckboxSetting[] = [
+  "blurMaterial",
+  "caseSensitive",
+  "hideStrokesOnLastRepetition",
+  "newWords",
+  "punctuationDescriptions",
+  "retainedWords",
+  "seenWords",
+  "showStrokes",
+  "simpleTypography",
+  "speakMaterial",
+  "textInputAccessibility",
+];
 export function useChangeUserSetting() {
   const [currentState, setState] = useAtom(userSettingsState);
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+
+  const onChangeUserSetting: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
     let newState = Object.assign({}, currentState);
 
     const target = event.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
     const name = target.name;
 
-    // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-    newState[name] = value;
+    if (
+      typeof value === "boolean" &&
+      validCheckboxSettings.includes(name as CheckboxSetting)
+    ) {
+      const settingName = name as CheckboxSetting;
+      newState[settingName] = value;
+    }
 
     if (!newState.speakMaterial && synth) {
       synth.cancel();
@@ -209,12 +245,7 @@ export function useChangeUserSetting() {
 
     setState(newState);
 
-    let labelString = value;
-    if (!value) {
-      labelString = "BAD_INPUT";
-    } else {
-      labelString.toString();
-    }
+    const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({
       category: "UserSettings",
@@ -224,6 +255,8 @@ export function useChangeUserSetting() {
 
     return value;
   };
+
+  return onChangeUserSetting;
 }
 
 /**
