@@ -28,6 +28,7 @@ const globalLookupDictionary = new Map([
   ],
 ]);
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => {
   useHydrateAtoms([[userSettingsState, userSettings]]);
   return (
@@ -47,6 +48,7 @@ const Template = (args) => {
 export const LookupStory = Template.bind({});
 
 export const LookupMissingWordStory = Template.bind({});
+// @ts-expect-error TS(2339) FIXME: Property 'play' does not exist on type '(args: any... Remove this comment to see the full error message
 LookupMissingWordStory.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
@@ -62,6 +64,7 @@ LookupMissingWordStory.play = async ({ canvasElement }) => {
 };
 
 export const LookupSearchStory = Template.bind({});
+// @ts-expect-error TS(2339) FIXME: Property 'play' does not exist on type '(args: any... Remove this comment to see the full error message
 LookupSearchStory.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
@@ -80,6 +83,7 @@ LookupSearchStory.play = async ({ canvasElement }) => {
 };
 
 export const LookupPersonalDictionariesStory = Template.bind({});
+// @ts-expect-error TS(2339) FIXME: Property 'play' does not exist on type '(args: any... Remove this comment to see the full error message
 LookupPersonalDictionariesStory.play = async ({ canvasElement }) => {
   const canvas = await within(canvasElement);
 

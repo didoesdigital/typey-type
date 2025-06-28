@@ -35,11 +35,11 @@ const Template = (args: ComponentPropsWithoutRef<typeof UserSettings>) => {
 };
 
 export const UserSettingsStory = Template.bind({});
-// @ts-expect-error
+// @ts-expect-error TS(2339) FIXME: Property 'args' does not exist on type '(args: Pro... Remove this comment to see the full error message
 UserSettingsStory.args = { ...defaultArgs };
 
 export const UserSettingsDisabled = Template.bind({});
-// @ts-expect-error
+// @ts-expect-error TS(2339) FIXME: Property 'args' does not exist on type '(args: Pro... Remove this comment to see the full error message
 UserSettingsDisabled.args = {
   ...defaultArgs,
   disableUserSettings: true,

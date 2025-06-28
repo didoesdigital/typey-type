@@ -10,6 +10,7 @@ export default {
   component: ProgressSummaryAndLinks,
   id: "progress-summary", // permalink
   decorators: [
+    // @ts-expect-error TS(7006) FIXME: Parameter 'Story' implicitly has an 'any' type.
     (Story) => (
       <div className="p3 mx-auto mw-1024">
         <Story />
@@ -20,10 +21,13 @@ export default {
 
 const restartConfetti = () => console.log("Restart confetti");
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => <ProgressSummaryAndLinks {...args} />;
 
 export const ProgressSummaryAndLinksStory = Template.bind({});
+// @ts-expect-error TS(2339) FIXME: Property 'storyName' does not exist on type '(args... Remove this comment to see the full error message
 ProgressSummaryAndLinksStory.storyName = "Summary and links";
+// @ts-expect-error TS(2339) FIXME: Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
 ProgressSummaryAndLinksStory.args = {
   metWords: metWordsNovice,
   userSettings: userSettings,
@@ -32,6 +36,7 @@ ProgressSummaryAndLinksStory.args = {
   yourSeenWordCount: 128,
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 export const CompletedProgressSummaryAndLinksStory = (args) => (
   <ProgressSummaryAndLinks
     {...args}

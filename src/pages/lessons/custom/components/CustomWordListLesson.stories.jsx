@@ -11,6 +11,7 @@ export default {
   component: CustomWordListLesson,
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => (
   <div className="p3">
     <CustomWordListLesson
@@ -26,7 +27,9 @@ const Template = (args) => (
 );
 
 export const CustomWordListLessonEmptyState = Template.bind({});
+// @ts-expect-error TS(2339) FIXME: Property 'storyName' does not exist on type '(args... Remove this comment to see the full error message
 CustomWordListLessonEmptyState.storyName = "Empty state";
+// @ts-expect-error TS(2339) FIXME: Property 'play' does not exist on type '(args: any... Remove this comment to see the full error message
 CustomWordListLessonEmptyState.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
@@ -36,7 +39,9 @@ CustomWordListLessonEmptyState.play = async ({ canvasElement }) => {
 };
 
 export const CustomWordListLessonFilled = Template.bind({});
+// @ts-expect-error TS(2339) FIXME: Property 'storyName' does not exist on type '(args... Remove this comment to see the full error message
 CustomWordListLessonFilled.storyName = "Dictionary filled";
+// @ts-expect-error TS(2339) FIXME: Property 'play' does not exist on type '(args: any... Remove this comment to see the full error message
 CustomWordListLessonFilled.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 

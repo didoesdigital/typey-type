@@ -18,6 +18,7 @@ const lessonIndex = [
   },
 ];
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => {
   return (
     <LessonOverview

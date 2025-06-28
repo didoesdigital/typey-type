@@ -8,6 +8,7 @@ export default {
   component: LessonsProgress,
   id: "progress-lessons", // permalink
   decorators: [
+    // @ts-expect-error TS(7006) FIXME: Parameter 'Story' implicitly has an 'any' type.
     (Story) => (
       <div className="p3 mx-auto mw-1024 mt3">
         <div className="flex flex-wrap justify-between">
@@ -55,6 +56,7 @@ const testLessonsProgress = {
     },
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => (
   <ul className="unstyled-list">
     <LessonsProgress {...args} />
@@ -62,7 +64,9 @@ const Template = (args) => (
 );
 
 export const LessonsProgressStory = Template.bind({});
+// @ts-expect-error TS(2339) FIXME: Property 'storyName' does not exist on type '(args... Remove this comment to see the full error message
 LessonsProgressStory.storyName = "Lessons progress";
+// @ts-expect-error TS(2339) FIXME: Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
 LessonsProgressStory.args = {
   lessonIndex: lessonIndex,
   lessonsProgress: testLessonsProgress,

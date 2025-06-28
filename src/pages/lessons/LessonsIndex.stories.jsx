@@ -44,6 +44,7 @@ const customLesson = {
   path: "/lessons/fundamentals/test/",
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => {
   return (
     <Component {...args} />
@@ -51,6 +52,7 @@ const Template = (args) => {
 };
 
 // Suspense doesn't work in Template which is not a component
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Component = (args) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>

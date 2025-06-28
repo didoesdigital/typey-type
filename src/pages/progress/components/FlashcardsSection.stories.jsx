@@ -23,6 +23,7 @@ export const FlashcardsSectionStory = () => {
       <FlashcardsSection
         showOnSmallScreen={false}
         flashcardsCourseLevel={"noviceCourse"}
+        // @ts-expect-error TS(2322) FIXME: Type '{ showOnSmallScreen: false; flashcardsCourse... Remove this comment to see the full error message
         loadingLessonIndex={false}
         skipButtonId={"js-test-flashcards-button-in-storybook"}
         updateFlashcardsRecommendation={() => undefined}

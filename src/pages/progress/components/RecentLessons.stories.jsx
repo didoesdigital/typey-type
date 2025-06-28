@@ -41,7 +41,9 @@ const recentLessonHistoryIdeal = [
   },
 ];
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 export const RecentLessonsIdeal = (args) => {
+  // @ts-expect-error TS(2769) FIXME: No overload matches this call.
   useHydrateAtoms([
     [recentLessonHistoryState, { history: recentLessonHistoryIdeal }],
   ]);
@@ -51,6 +53,7 @@ RecentLessonsIdeal.args = {
   lessonIndex: testLessonIndex,
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 export const NoRecentLessons = (args) => {
   useHydrateAtoms([[recentLessonHistoryState, { history: [] }]]);
   return <RecentLessons {...args} />;

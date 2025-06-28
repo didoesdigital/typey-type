@@ -8,6 +8,7 @@ export default {
   component: SingleLineMaterialComponent,
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => (
   <div className="p3 mw-40">
     <SingleLineMaterialComponent {...args} />
@@ -15,6 +16,7 @@ const Template = (args) => (
 );
 
 export const SingleLineMaterial = Template.bind({});
+// @ts-expect-error TS(2339) FIXME: Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
 SingleLineMaterial.args = {
   actualText: "how ",
   completedPhrases: ["how about"],

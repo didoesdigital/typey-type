@@ -7,6 +7,7 @@ export default {
   component: Completed,
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => {
   return (
     <div className="p3">
@@ -16,6 +17,7 @@ const Template = (args) => {
 };
 
 export const GameCompleted = Template.bind({});
+// @ts-expect-error TS(2339) FIXME: Property 'parameters' does not exist on type '(arg... Remove this comment to see the full error message
 GameCompleted.parameters = {
   chromatic: { delay: 3001 },
 };

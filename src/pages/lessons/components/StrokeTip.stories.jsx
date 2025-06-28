@@ -15,10 +15,11 @@ export default {
 };
 
 const globalLookupDictionaryMinimal = new Map(
-  // @ts-ignore
+  // @ts-expect-error TS(2769) FIXME: No overload matches this call.
   globalLookupDictionaryMinimalJSON
 );
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 export const StrokeTipListStory = (args) => {
   const userSettingsForStrokeTipListStory = {
     ...userSettings,
@@ -88,6 +89,7 @@ StrokeTipListStory.args = {
   ]),
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 export const StrokeTipListNoBriefsStory = (args) => {
   const userSettingsForStrokeTipListNoBriefsStory = {
     ...userSettings,
@@ -124,6 +126,7 @@ StrokeTipListNoBriefsStory.args = {
   repetitionsRemaining: 1,
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 export const StrokeTipDiagramStory = (args) => {
   useHydrateAtoms([[userSettingsState, userSettings]]);
   return (
@@ -154,13 +157,14 @@ StrokeTipDiagramStory.args = {
   repetitionsRemaining: 1,
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 export const StrokeTipPalantypeStory = (args) => {
   const userSettingsForStrokeTipPalantypeStory = {
     ...userSettings,
     stenoLayout: "stenoLayoutPalantype",
     diagramSize: 2,
   };
-  // @ts-ignore TODO: add UserSettings type to user settings object
+  // @ts-expect-error TS(2769) FIXME: No overload matches this call.
   useHydrateAtoms([
     [userSettingsState, userSettingsForStrokeTipPalantypeStory],
   ]);
@@ -193,6 +197,7 @@ StrokeTipPalantypeStory.args = {
   repetitionsRemaining: 1,
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 export const StrokeTipTextStory = (args) => {
   const userSettingsForStrokeTipTextStory = {
     ...userSettings,
@@ -227,6 +232,7 @@ StrokeTipTextStory.args = {
   repetitionsRemaining: 1,
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 export const StrokeTipHiddenStory = (args) => {
   const userSettingsForStrokeTipHiddenStory = {
     ...userSettings,

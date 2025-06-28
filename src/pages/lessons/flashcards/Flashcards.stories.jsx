@@ -24,6 +24,7 @@ const globalLookupDictionary = new Map([
   ["gonna", [["TKPW*G", "typey:typey-type.json"]]],
 ]);
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => {
   useHydrateAtoms([[flashcardsProgressState, flashcardsProgress]])
   return (
@@ -31,6 +32,7 @@ const Template = (args) => {
       <Switch>
         <Route path={`/`}>
           <div>
+            {/* @ts-expect-error TS(2740) FIXME: Type '{ appFetchAndSetupGlobalDict: () => Promise<... Remove this comment to see the full error message */}
             <AppMethodsContext.Provider value={{
               appFetchAndSetupGlobalDict: () => Promise.resolve(true),
             }}>

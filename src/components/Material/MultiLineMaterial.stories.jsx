@@ -8,6 +8,7 @@ export default {
   component: MultiLineMaterialComponent,
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => (
   <div className="p3">
     <MultiLineMaterialComponent {...args} />
@@ -15,6 +16,7 @@ const Template = (args) => (
 );
 
 export const MultiLineMaterial = Template.bind({});
+// @ts-expect-error TS(2339) FIXME: Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
 MultiLineMaterial.args = {
   actualText: "how ",
   currentPhrase: "how can",
@@ -29,6 +31,7 @@ MultiLineMaterial.args = {
   userSettings: userSettings,
   currentPhraseID: 1,
 };
+// @ts-expect-error TS(2339) FIXME: Property 'parameters' does not exist on type '(arg... Remove this comment to see the full error message
 MultiLineMaterial.parameters = {
   chromatic: { delay: 300, diffThreshold: 0.78 },
   // If the delay ☝️ doesn't work, try tweaking the diffThreshold:

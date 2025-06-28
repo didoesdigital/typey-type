@@ -52,7 +52,7 @@ const lesson: Lesson = {
   path: "/lessons/fundamentals/test/",
 };
 
-// @ts-expect-error
+// @ts-expect-error TS(2322) FIXME: Type 'Map<string, [string, string][]>' is not assi... Remove this comment to see the full error message
 const globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig = new Map([
   ["huh", [["H*U", "typey:typey-type.json"]]],
   ["gonna", [["TKPW*G", "typey:typey-type.json"]]],
@@ -140,5 +140,5 @@ const Template = (args: any) => {
 };
 
 export const MainLessonViewStory = Template.bind({});
-// @ts-expect-error
+// @ts-expect-error TS(2339) FIXME: Property 'storyName' does not exist on type '(args... Remove this comment to see the full error message
 MainLessonViewStory.storyName = "Main lesson view";

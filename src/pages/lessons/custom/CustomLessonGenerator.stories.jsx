@@ -36,6 +36,7 @@ const sourceMaterial = [
   },
 ];
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => {
   return (
     <AppMethodsContext.Provider value={appMethods}>
@@ -64,7 +65,9 @@ const Template = (args) => {
 export const CustomLessonGeneratorStory = Template.bind({});
 
 export const CustomLessonGeneratorHelp = Template.bind({});
+// @ts-expect-error TS(2339) FIXME: Property 'storyName' does not exist on type '(args... Remove this comment to see the full error message
 CustomLessonGeneratorHelp.storyName = "Show generator help";
+// @ts-expect-error TS(2339) FIXME: Property 'play' does not exist on type '(args: any... Remove this comment to see the full error message
 CustomLessonGeneratorHelp.play = async ({ canvasElement }) => {
   const canvas = await within(canvasElement);
 
