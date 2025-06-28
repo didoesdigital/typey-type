@@ -33,6 +33,7 @@ function transformLessonDataToChartData(lessonData) {
   const avgMinimumStrokesData = mean(minimumStrokesData, (d, i) =>
     i === 0
       ? 0
+      // @ts-ignore
       : calculatedAdjustedWPM(d.numberOfMatchedWordsSoFar, (d.time - lessonData.startTime))
   );
 
