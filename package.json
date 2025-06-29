@@ -103,7 +103,7 @@
     ]
   },
   "engines": {
-    "node": ">=18.8.0"
+    "node": ">=20.0.0"
   },
   "eslintConfig": {
     "overrides": [
