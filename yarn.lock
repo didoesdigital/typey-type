@@ -19759,7 +19759,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-numeric-input@npm:^2.2.0":
+"react-numeric-input@npm:^2.2.3":
   version: 2.2.3
   resolution: "react-numeric-input@npm:2.2.3"
   peerDependencies:
@@ -22549,7 +22549,7 @@ __metadata:
     react-ga4: "npm:^2.1.0"
     react-loadable: "npm:^5.5.0"
     react-modal: "npm:^3.14.4"
-    react-numeric-input: "npm:^2.2.0"
+    react-numeric-input: "npm:^2.2.3"
     react-router-dom: "npm:5.1.2"
     react-scripts: "npm:5.0.1"
     react-tooltip: "npm:^5.28.0"
