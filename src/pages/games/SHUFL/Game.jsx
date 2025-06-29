@@ -15,9 +15,13 @@ const introText =
   "The steno robots have been dancing too much and shuffled all the letters! You need to type the correct word to get them all back in order.";
 
 export default function Game({
+  // @ts-expect-error TS(7031) FIXME: Binding element 'globalLookupDictionary' implicitl... Remove this comment to see the full error message
   globalLookupDictionary,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'globalLookupDictionaryLoaded' imp... Remove this comment to see the full error message
   globalLookupDictionaryLoaded,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'startingMetWordsToday' implicitly... Remove this comment to see the full error message
   startingMetWordsToday,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'updateMetWords' implicitly has an... Remove this comment to see the full error message
   updateMetWords,
 }) {
   const [typedText, setTypedText] = useState("");
@@ -32,6 +36,7 @@ export default function Game({
   );
 
   useEffect(() => {
+    // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
     dispatch({
       type: actions.gameStarted,
       payload: { startingMetWordsToday, globalLookupDictionary },
@@ -39,6 +44,7 @@ export default function Game({
     setShowHint(false);
   }, [startingMetWordsToday, globalLookupDictionary]);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'inputText' implicitly has an 'any' type... Remove this comment to see the full error message
   const onChangeSHUFLInput = (inputText) => {
     setTypedText(inputText);
     if (gameState.rightAnswers.includes(inputText.trim().toLowerCase())) {
@@ -46,6 +52,7 @@ export default function Game({
       setTypedText("");
       setPreviousCompletedPhraseAsTyped(inputText);
       setShowHint(false);
+      // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
       dispatch({ type: actions.roundCompleted });
     }
 
@@ -60,6 +67,7 @@ export default function Game({
           SHUFL game
         </h3>
         {gameState.gameComplete ? (
+          // @ts-expect-error TS(2322) FIXME: Type '{ gameName: string; dispatch: DispatchWithou... Remove this comment to see the full error message
           <Completed gameName={gameName} dispatch={dispatch} />
         ) : (
           <>
@@ -87,6 +95,7 @@ export default function Game({
               </p>
             ) : gameState.levelComplete ? (
               <LevelCompleted
+                // @ts-expect-error TS(2322) FIXME: Type '{ dispatch: DispatchWithoutAction; gameName:... Remove this comment to see the full error message
                 dispatch={dispatch}
                 gameName={gameName}
                 level={gameState.level}

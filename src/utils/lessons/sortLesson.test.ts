@@ -1,6 +1,5 @@
 import sortLesson from "./sortLesson";
 import { PresentedMaterial, UserSettings } from "../../types";
-// @ts-ignore TODO: sort out types
 import { mockRandomForEach } from "jest-mock-random";
 
 describe("sortLesson", () => {

@@ -124,7 +124,6 @@ function generateCustomLesson(
     settings: { ignoredChars: "" },
     title: "Generated lesson",
     subtitle: "Generated lesson",
-    // @ts-ignore FIXME: might be a Zipper typing issue
     newPresentedMaterial: new Zipper(rulesFilteredMaterial),
     path: process.env.PUBLIC_URL + "/lessons/custom",
   };
@@ -139,7 +138,7 @@ function generateCustomLesson(
     .map((materialItem) => `${materialItem.phrase}	${materialItem.stroke}`)
     .join("\n");
 
-  // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation.
+  // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
   this.setState({
     lesson: newCustomLesson,
     currentPhraseID: 0,

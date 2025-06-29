@@ -5,13 +5,18 @@ const formatter = format(",");
 
 // An ok default value: numberOfTicks = dimensions.boundedWidth / 80
 const AxisHorizontal = ({
+  // @ts-expect-error TS(7031) FIXME: Binding element 'dimensions' implicitly has an 'an... Remove this comment to see the full error message
   dimensions,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'scale' implicitly has an 'any' ty... Remove this comment to see the full error message
   scale,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'gridLines' implicitly has an 'any... Remove this comment to see the full error message
   gridLines,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'numberOfTicks' implicitly has an ... Remove this comment to see the full error message
   numberOfTicks,
   ...props
 }) => {
   const ticks = useMemo(() => {
+    // @ts-expect-error TS(7006) FIXME: Parameter 'value' implicitly has an 'any' type.
     return scale.ticks(numberOfTicks).map((value) => ({
       value,
       xOffset: scale(value),
@@ -20,6 +25,7 @@ const AxisHorizontal = ({
 
   return (
     <g transform={`translate(0, ${dimensions.boundedHeight})`} role="presentation" {...props}>
+      {/* @ts-expect-error TS(7031) FIXME: Binding element 'value' implicitly has an 'any' ty... Remove this comment to see the full error message */}
       {ticks.map(({ value, xOffset }) => {
         return (
           <g
@@ -57,15 +63,20 @@ const AxisHorizontal = ({
 
 // An ok default value: numberOfTicks = dimensions.boundedHeight / 80
 const AxisVertical = ({
+  // @ts-expect-error TS(7031) FIXME: Binding element 'dimensions' implicitly has an 'an... Remove this comment to see the full error message
   dimensions,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'scale' implicitly has an 'any' ty... Remove this comment to see the full error message
   scale,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'gridLines' implicitly has an 'any... Remove this comment to see the full error message
   gridLines,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'numberOfTicks' implicitly has an ... Remove this comment to see the full error message
   numberOfTicks,
   ...props
 }) => {
   const [x1, x2] = gridLines === true ? [-dimensions.boundedWidth, 0] : [0, 4];
 
   const ticks = useMemo(() => {
+    // @ts-expect-error TS(7006) FIXME: Parameter 'value' implicitly has an 'any' type.
     return scale.ticks(numberOfTicks).map((value) => ({
       value,
       yOffset: scale(value),
@@ -74,6 +85,7 @@ const AxisVertical = ({
 
   return (
     <g transform={`translate(${dimensions.boundedWidth}, 0)`} role="presentation" {...props}>
+      {/* @ts-expect-error TS(7031) FIXME: Binding element 'value' implicitly has an 'any' ty... Remove this comment to see the full error message */}
       {ticks.map(({ value, yOffset }, i) => {
         return (
           <g
@@ -116,7 +128,9 @@ const axisComponentsByDimension = {
   y: AxisVertical,
 };
 
+// @ts-expect-error TS(7031) FIXME: Binding element 'dimension' implicitly has an 'any... Remove this comment to see the full error message
 const Axis = ({ dimension, dimensions, ...props }) => {
+  // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   const AxisByDimension = axisComponentsByDimension[dimension];
   if (!AxisByDimension) return null;
 

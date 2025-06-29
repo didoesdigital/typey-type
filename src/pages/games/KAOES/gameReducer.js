@@ -11,11 +11,13 @@ const defaultState = {
   roundIndex: 0,
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 export const initConfig = (state) => ({
   ...defaultState,
   ...state,
 });
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 export const gameReducer = (state, action) => {
   let experimentalRoundToWin = roundToWin;
 

@@ -165,7 +165,6 @@ class App extends Component<Props, AppState> {
       curUserSettings.retainedWords !== prevUserSettings.retainedWords ||
       curUserSettings.simpleTypography !== prevUserSettings.simpleTypography
     ) {
-      // @ts-ignore
       this.setupLesson();
     }
   }
@@ -405,7 +404,6 @@ class App extends Component<Props, AppState> {
     // let stenoLayout = "stenoLayoutAmericanSteno";
     // if (this.props.userSettings) { stenoLayout = this.props.userSettings.stenoLayout; }
 
-    // @ts-ignore
     this.appFetchAndSetupGlobalDict(null).then(() => {
       // grab metWords, trim spaces, and sort by times seen
       let myWords = createWordListFromMetWords(metWordsFromStorage).join("\n");
@@ -441,7 +439,6 @@ class App extends Component<Props, AppState> {
         focusTriggerInt: this.state.focusTriggerInt + 1
       });
     })
-    // @ts-ignore
     .catch(error => {
       console.error(error);
       // this.showDictionaryErrorNotification();
@@ -473,7 +470,7 @@ class App extends Component<Props, AppState> {
 
     // Copy source or revision material to presented material:
     if (revisionMode) {
-      // @ts-expect-error TS(7006) FIXME: Parameter 'line' implicitly has an 'any' type.
+      // @ts-expect-error TS(2322) FIXME: Type '{ [x: number]: MaterialItem; length: number;... Remove this comment to see the full error message
       newLesson.presentedMaterial = revisionMaterial.map(line => ({...line}));
     }
     else {
@@ -606,7 +603,6 @@ class App extends Component<Props, AppState> {
                 currentPhraseID: 0,
                 focusTriggerInt: this.state.focusTriggerInt + 1
               });
-              // @ts-ignore
             }).catch((error) =>
               console.error("failed to fetch and setup global dictionary", error)
             );
@@ -706,13 +702,13 @@ class App extends Component<Props, AppState> {
     // const batchUpdate = document.cookie.indexOf("batchUpdate=1")>=0;
     const batchUpdate = true;
     if(!batchUpdate) {
-      // @ts-ignore
+      // @ts-expect-error TS(2554) FIXME: Expected 2 arguments, but got 1.
       this.processBuffer(actualText);
       return;
     }
     // Immediately update the text in the input field
     this.setState({ actualText });
-    // @ts-ignore
+    // @ts-expect-error TS(2322) FIXME: Type 'any' is not assignable to type 'never'.
     this.markupBuffer.push({text: actualText, time: Date.now()});
 
     if (this.updateBufferTimer) {
@@ -922,7 +918,7 @@ class App extends Component<Props, AppState> {
       const newBuffer = buffer
         .filter(stroke => stroke.text.length > matchedActual.length && stroke.text.startsWith(matchedActual))
         .map(stroke => ({ text: stroke.text.slice(matchedActual.length), time: stroke.time }));
-      // @ts-expect-error
+      // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
       return this.getNewStateAndSideEffectsForBuffer(null, newBuffer, state, sideEffects);
     }
     return [state, sideEffects];
@@ -958,7 +954,6 @@ class App extends Component<Props, AppState> {
   }
 
   presentUpcomingMaterial() {
-    // @ts-ignore
     return this.state.lesson.newPresentedMaterial ? this.state.lesson.newPresentedMaterial.getRemaining().slice().map(item => item.phrase) : [];
   }
 

@@ -18,7 +18,7 @@ import type {
 const misstrokes = misstrokesJSON as StenoDictionary;
 const affixMisstrokes = getAffixMisstrokesFromMisstrokes(misstrokes);
 
-// @ts-ignore TODO
+// @ts-expect-error TS(7034) FIXME: Variable 'loadingPromise' implicitly has type 'any... Remove this comment to see the full error message
 let loadingPromise = null;
 let isGlobalDictionaryUpToDate = null;
 
@@ -48,18 +48,18 @@ function fetchAndSetupGlobalDict(
     )
   );
   const previouslyAppliedConfig =
-    // @ts-ignore TODO
+    // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.state.globalLookupDictionary["configuration"];
   const globalLookupDictionaryMatchesConfig =
-    // @ts-ignore TODO
+    // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.state.globalLookupDictionary &&
-    // @ts-ignore TODO
+    // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     !!this.state.globalLookupDictionary["configuration"] &&
     JSON.stringify(previouslyAppliedConfig) ===
       JSON.stringify(localConfigPlusTypeyType);
 
   if (
-    // @ts-ignore TODO
+    // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
     this.state.globalLookupDictionary &&
     globalLookupDictionaryMatchesConfig
   ) {
@@ -68,9 +68,9 @@ function fetchAndSetupGlobalDict(
     isGlobalDictionaryUpToDate = false;
   }
 
-  // @ts-ignore TODO
+  // @ts-expect-error TS(7005) FIXME: Variable 'loadingPromise' implicitly has an 'any' ... Remove this comment to see the full error message
   if (loadingPromise && isGlobalDictionaryUpToDate) {
-    // @ts-ignore TODO
+    // @ts-expect-error TS(7005) FIXME: Variable 'loadingPromise' implicitly has an 'any' ... Remove this comment to see the full error message
     return loadingPromise;
   } else {
     loadingPromise = Promise.all([getTypeyTypeDict()]).then((data) => {
@@ -103,9 +103,9 @@ function fetchAndSetupGlobalDict(
       // For debugging:
       // window.lookupDict = sortedAndCombinedLookupDictionary;
       isGlobalDictionaryUpToDate = true;
-      // @ts-ignore TODO
+      // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
       this.updateGlobalLookupDictionary(sortedAndCombinedLookupDictionary);
-      // @ts-ignore TODO
+      // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
       this.setState({ globalLookupDictionaryLoaded: true });
     });
 

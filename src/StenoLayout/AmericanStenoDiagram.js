@@ -52,6 +52,7 @@ const idKeyLookup = {
   "hashLetter": stroke.HASH
 }
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
 export default function AmericanStenoDiagram(props) {
   const onStrokeColor = props.onStrokeColor || "#7109AA";
   const offStrokeColor = props.offStrokeColor || "#7109AA";
@@ -60,9 +61,11 @@ export default function AmericanStenoDiagram(props) {
   const onKeyColor = props.onKeyColor || "#7109AA";
   const offKeyColor = props.offKeyColor || "#e9d9f2";
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   const handleClick = (event) => {
     if (props.handleOnClick) {
       const clickedKeyID = event.target["id"];
+      // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       const key = (idKeyLookup[clickedKeyID]) ? idKeyLookup[clickedKeyID] : 0;
 
       props.handleOnClick(key);

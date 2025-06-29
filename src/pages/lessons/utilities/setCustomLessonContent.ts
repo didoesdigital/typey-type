@@ -9,7 +9,6 @@ function setCustomLessonContent(material: MaterialItem[]) {
     settings: { ignoredChars: "" },
     title: "Custom", // "Start custom lesson" overrides this anyway
     subtitle: "",
-    // @ts-ignore FIXME: might be a Zipper typing issue
     newPresentedMaterial: new Zipper(material.slice()),
     path: process.env.PUBLIC_URL + "/lessons/custom",
   };
@@ -20,7 +19,7 @@ function setCustomLessonContent(material: MaterialItem[]) {
     .map((materialItem) => `${materialItem.phrase}	${materialItem.stroke}`)
     .join("\n");
 
-  // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation.
+  // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
   this.setState({
     lesson: customisedLesson,
     currentPhraseID: 0,

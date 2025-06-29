@@ -4,9 +4,13 @@ const popoverMaxWidth = 240;
 const halfPopoverMaxWidth = popoverMaxWidth / 2;
 
 const Popover = ({
+  // @ts-expect-error TS(7031) FIXME: Binding element 'dimensions' implicitly has an 'an... Remove this comment to see the full error message
   dimensions,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'translateX' implicitly has an 'an... Remove this comment to see the full error message
   translateX,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'translateY' implicitly has an 'an... Remove this comment to see the full error message
   translateY,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'children' implicitly has an 'any'... Remove this comment to see the full error message
   children,
   ...props
 }) => {
@@ -34,6 +38,7 @@ const Popover = ({
   // console.log(`${format(",d")(xAccessor(data[dataIndex]) / 1000)} seconds`);
 
   return (
+    // @ts-expect-error TS(2322) FIXME: Type '{ backgroundColor: string; border: string; b... Remove this comment to see the full error message
     <div style={popoverStyles} aria-hidden={true}>
       {children}
     </div>

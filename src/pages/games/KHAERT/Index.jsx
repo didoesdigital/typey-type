@@ -3,6 +3,7 @@ import Game from "./Game";
 import Subheader from "../../../components/Subheader";
 import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
 
+// @ts-expect-error TS(7031) FIXME: Binding element 'globalLookupDictionary' implicitl... Remove this comment to see the full error message
 export default function Index({globalLookupDictionary}) {
   const {
   appFetchAndSetupGlobalDict,
@@ -14,6 +15,7 @@ export default function Index({globalLookupDictionary}) {
     });
 
     if (mainHeading) {
+      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
       mainHeading.current.focus();
     }
   }, [appFetchAndSetupGlobalDict]);

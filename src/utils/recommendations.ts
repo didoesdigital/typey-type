@@ -191,7 +191,6 @@ function getRecommendedNextLesson(
         let wordCount = 300;
 
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         let recommendedPracticeLessonInIndex = lessonIndex.find(
           (recommended) => {
             return (

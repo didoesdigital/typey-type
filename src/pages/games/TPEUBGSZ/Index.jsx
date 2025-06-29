@@ -2,10 +2,12 @@ import React, { useEffect, useRef } from "react";
 import Game from "./Game";
 import Subheader from "../../../components/Subheader";
 
+// @ts-expect-error TS(7031) FIXME: Binding element 'startingMetWordsToday' implicitly... Remove this comment to see the full error message
 export default function Index({ startingMetWordsToday }) {
   const mainHeading = useRef(null);
   useEffect(() => {
     if (mainHeading) {
+      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
       mainHeading.current.focus();
     }
   }, []);

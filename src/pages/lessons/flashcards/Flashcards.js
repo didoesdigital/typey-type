@@ -35,6 +35,7 @@ const shortestDimension = 3;
 const longestDimension = 4;
 
 class Flashcards extends Component {
+  // @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props);
     this.state = {
@@ -80,6 +81,7 @@ class Flashcards extends Component {
     this.fetchAndSetupFlashCards();
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'prevProps' implicitly has an 'any' type... Remove this comment to see the full error message
   componentDidUpdate(prevProps, prevState) {
     if ((prevProps.lessonpath !== this.props.lessonpath) && (this.props.locationpathname.endsWith('flashcards'))) {
       this.fetchAndSetupFlashCards();
@@ -90,6 +92,7 @@ class Flashcards extends Component {
     window.removeEventListener('resize', this.handleResize)
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleResize = (event) => {
     if (window.matchMedia("(orientation: landscape)").matches) {
       let currentSlide = 0;
@@ -146,6 +149,7 @@ currentSlide: currentSlide
     });
   };
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   setupFlashCards(event) {
     let shuffle = false;
     let restart = false;
@@ -227,18 +231,21 @@ currentSlide: currentSlide
       window.setTimeout(function ()
       {
         if (unfocus) {
+          // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
           if (this.hardButton) {
             let element = document.getElementById('hardButton');
             if (element) {
               element.focus();
             }
           }
+          // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
           else if (this.showButton) {
             let element = document.getElementById('showButton');
             if (element) {
               element.focus();
             }
           }
+          // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
           else if (this.shuffleButton) {
             let element = document.getElementById('shuffleButton');
             if (element) {
@@ -252,6 +259,7 @@ currentSlide: currentSlide
 
   // this happens automagically whenever a slide changes, including on Easy/Hard,
   // but doesn't have user feedback to say if it was a known flashcard or not
+  // @ts-expect-error TS(7006) FIXME: Parameter 'slideIndex' implicitly has an 'any' typ... Remove this comment to see the full error message
   onChangeCurrentSlide(slideIndex) {
     let lessonpath = this.props.locationpathname;
     this.props.updateFlashcardsProgress(lessonpath);
@@ -286,6 +294,7 @@ currentSlide: currentSlide
   }
 
   // this happens specifically when you click Easy/Hard and that feedback needs to be recorded
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   nextSlide(event) {
     let feedback = "show";
     let unfocus = false;
@@ -328,18 +337,21 @@ currentSlide: currentSlide
       window.setTimeout(function ()
       {
         if (unfocus) {
+          // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
           if (this.hardButton) {
             let element = document.getElementById('hardButton');
             if (element) {
               element.focus();
             }
           }
+          // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
           else if (this.showButton) {
             let element = document.getElementById('showButton');
             if (element) {
               element.focus();
             }
           }
+          // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
           else if (this.shuffleButton) {
             let element = document.getElementById('shuffleButton');
             if (element) {
@@ -369,11 +381,13 @@ currentSlide: currentSlide
     }
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleOpenModal (event) {
     event.preventDefault();
     this.setState({ showModal: true });
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   handleCloseModal (event) {
     event.preventDefault();
     this.setState({ showModal: false });
@@ -392,6 +406,7 @@ currentSlide: currentSlide
             <div className="flex mr1 self-center">
               <header className="flex items-center min-h-40">
                 <a href="./flashcards" onClick={this.setupFlashCards.bind(this)} className="heading-link table-cell mr2" role="button">
+                  {/* @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'number'. */}
                   <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex="-1" id="flashcards">{flashcardsHeading}</h2>
                 </a>
               </header>
@@ -423,22 +438,26 @@ currentSlide: currentSlide
                 >
                   <Slider
                     className={"carousel__slider" + fullscreen}
+                    // @ts-expect-error TS(2322) FIXME: Type '{ children: Element; className: string; flas... Remove this comment to see the full error message
                     flashcards={this.state.flashcards}
                     key={this.state.flashcards.length + this.props.fullscreen}
                     ref={flashcardsCarousel => this.flashcardsCarousel = flashcardsCarousel}
                     callback={this.onChangeCurrentSlide.bind(this)}
                     aria-labelledby="flashcards-listbox-label"
                   >
+                    {/* @ts-expect-error TS(2786) FIXME: 'SlideNodes' cannot be used as a JSX component. */}
                     <SlideNodes flashcards={this.state.flashcards} />
                   </Slider>
 
                   {/* Page left, previous flashcard */}
                   <div className={"pagination-nav-button pagination-nav-button--prev absolute hide-in-fullscreen" + fullscreen}>
+                    {/* @ts-expect-error TS(2322) FIXME: Type '{ children: Element; className: string; type... Remove this comment to see the full error message */}
                     <ButtonBack className="link-button" type="button" aria-label="Previous card"><span className="pagination-nav-button--prev__icon">◂</span></ButtonBack>
                   </div>
 
                   {/* Page right, next flashcard */}
                   <div className={"pagination-nav-button pagination-nav-button--next absolute right-0 hide-in-fullscreen" + fullscreen}>
+                    {/* @ts-expect-error TS(2322) FIXME: Type '{ children: string; className: string; type:... Remove this comment to see the full error message */}
                     <ButtonNext className="link-button" type="button" aria-label="Next card">▸</ButtonNext>
                   </div>
 
@@ -490,6 +509,7 @@ currentSlide: currentSlide
                 />
               </div>
 
+              {/* @ts-expect-error TS(2322) FIXME: Type 'void' is not assignable to type 'string | un... Remove this comment to see the full error message */}
               <p className={"text-small text-center mt1 pt6 hide-in-fullscreen" + fullscreen}><a href={this.prefillSurveyLink()} className="mt0" target="_blank" rel="noopener noreferrer" ref={(surveyLink) => { this.surveyLink = surveyLink; }} onClick={this.prefillSurveyLink.bind(this)} id="ga--flashcards--give-feedback">Give feedback on this flashcard (form opens in a new tab)</a>.</p>
 
             </div>
@@ -500,6 +520,7 @@ currentSlide: currentSlide
   }
 }
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
 function FlashcardsWrapper(props) {
   const {
     appFetchAndSetupGlobalDict,

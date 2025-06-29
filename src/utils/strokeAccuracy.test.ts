@@ -17,7 +17,7 @@ describe("stroke accuracy for current phrase", () => {
       let unmatchedActual = "";
       expect(
         strokeAccuracy(
-          // @ts-expect-error
+          // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -45,7 +45,7 @@ describe("stroke accuracy for current phrase", () => {
       let unmatchedActual = "";
       expect(
         strokeAccuracy(
-          // @ts-expect-error
+          // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -75,7 +75,7 @@ describe("stroke accuracy for current phrase", () => {
       let unmatchedActual = "";
       expect(
         strokeAccuracy(
-          // @ts-expect-error
+          // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -112,7 +112,7 @@ describe("stroke accuracy for current phrase", () => {
       let unmatchedActual = "";
       expect(
         strokeAccuracy(
-          // @ts-expect-error
+          // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -145,7 +145,7 @@ describe("stroke accuracy for current phrase", () => {
       let unmatchedActual = "";
       expect(
         strokeAccuracy(
-          // @ts-expect-error
+          // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -181,7 +181,7 @@ describe("stroke accuracy for current phrase", () => {
       let unmatchedActual = "r";
       expect(
         strokeAccuracy(
-          // @ts-expect-error
+          // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -198,7 +198,7 @@ describe("stroke accuracy for current phrase", () => {
       let unmatchedActual = "x";
       expect(
         strokeAccuracy(
-          // @ts-expect-error
+          // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -231,7 +231,7 @@ describe("stroke accuracy for current phrase", () => {
       let unmatchedActual = "r";
       expect(
         strokeAccuracy(
-          // @ts-expect-error
+          // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -262,7 +262,7 @@ describe("stroke accuracy for current phrase", () => {
       let unmatchedActual = "";
       expect(
         strokeAccuracy(
-          // @ts-expect-error
+          // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -297,7 +297,7 @@ describe("stroke accuracy for current phrase", () => {
       let unmatchedActual = "";
       expect(
         strokeAccuracy(
-          // @ts-expect-error
+          // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual
@@ -321,7 +321,7 @@ describe("stroke accuracy for current phrase", () => {
       let unmatchedActual = "g";
       expect(
         strokeAccuracy(
-          // @ts-expect-error
+          // @ts-expect-error TS(2345) FIXME: Argument of type '{ text: string; time: number; }[... Remove this comment to see the full error message
           currentPhraseAttempts,
           targetStrokeCount,
           unmatchedActual

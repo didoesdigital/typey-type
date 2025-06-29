@@ -27,11 +27,13 @@ const defaultState = {
   rightAnswers: [],
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 export const initConfig = (state) => ({
   ...defaultState,
   ...state,
 });
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 const getGameStartedState = (state, action) => {
   const material = selectMaterial(action.payload.startingMetWordsToday);
   const firstPickedWord = pickAWord(getLevelMaterial(material, 1));
@@ -53,6 +55,7 @@ const getGameStartedState = (state, action) => {
   };
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 const getGameRestartedState = (state) => {
   const pickedWord = pickAWord(getLevelMaterial(state.material, 1));
   const rightAnswers = getRightAnswers(
@@ -71,6 +74,7 @@ const getGameRestartedState = (state) => {
   };
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 const getAllLevelsCompletedState = (state) => {
   const roundCompletedPickedWord = pickAWord(
     getLevelMaterial(state.material, 1)
@@ -92,6 +96,7 @@ const getAllLevelsCompletedState = (state) => {
   };
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 const getEarlyLevelCompletedState = (state) => {
   const increasedLevel = state.level + 1;
   const roundCompletedPickedWord = pickAWord(
@@ -115,6 +120,7 @@ const getEarlyLevelCompletedState = (state) => {
   };
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 const getEarlyRoundCompletedState = (state) => {
   const roundCompletedPickedWord = pickAWord(
     getLevelMaterial(state.material, state.level)
@@ -135,12 +141,14 @@ const getEarlyRoundCompletedState = (state) => {
   };
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 export const gameReducer = (state, action) => {
   switch (action?.type) {
     case actions.gameStarted:
       return getGameStartedState(state, action);
 
     case actions.gameRestarted:
+      // @ts-expect-error TS(2554) FIXME: Expected 0-1 arguments, but got 2.
       return getGameRestartedState(state, action);
 
     case actions.levelRestarted:

@@ -34,6 +34,7 @@ const invalidEntries = {
   "WEUBG/*APB": "Wiccan",
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
 const DictionaryManagement = (props) => {
   const globalUserSettings = useAtomValue(globalUserSettingsState);
   const mainHeading = useRef(null);
@@ -67,15 +68,17 @@ const DictionaryManagement = (props) => {
 
   const globalDict = props.globalLookupDictionary;
   useEffect(() => {
-    // @ts-ignore FIXME: remove this in TSX
+    // @ts-expect-error TS(2339) FIXME: Property 'focus' does not exist on type 'never'.
     mainHeading.current?.focus();
 
     let config = [];
     if (globalDict && globalDict["configuration"]) {
       config = globalDict["configuration"]
+        // @ts-expect-error TS(7006) FIXME: Parameter 'dictName' implicitly has an 'any' type.
         .filter((dictName) =>
           dictName.startsWith(SOURCE_NAMESPACES.get("user") + ":")
         )
+        // @ts-expect-error TS(7006) FIXME: Parameter 'dictName' implicitly has an 'any' type.
         .map((dictName) => dictName.replace(/^.+:/, ""));
     }
     setDictionariesTypeyTypeWillUseState(config);
@@ -93,17 +96,23 @@ const DictionaryManagement = (props) => {
   //   return true;
   // }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'files' implicitly has an 'any' type.
   function validateDictionaries(files) {
+    // @ts-expect-error TS(7005) FIXME: Variable 'validDictionaries' implicitly has an 'an... Remove this comment to see the full error message
     let validDictionaries = validDictionariesState.slice();
+    // @ts-expect-error TS(7034) FIXME: Variable 'invalidDictionaries' implicitly has type... Remove this comment to see the full error message
     let invalidDictionaries = [];
     let filesLength = files.length;
 
     if (filesLength === 0) {
+      // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
       setValidDictionariesState(validDictionaries);
       setInvalidDictionariesState([
+        // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'never'.
         ["No dictionary", "Choose a dictionary file to import."],
       ]);
     } else {
+      // @ts-expect-error TS(7034) FIXME: Variable 'misstrokesInDictionaries' implicitly has... Remove this comment to see the full error message
       let misstrokesInDictionaries = [];
       for (let i = 0; i < filesLength; ++i) {
         let dictionary = files[i];
@@ -112,6 +121,7 @@ const DictionaryManagement = (props) => {
         const reader = new FileReader();
 
         reader.onload = (event) => {
+          // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
           let text = event.target.result;
 
           try {
@@ -122,6 +132,7 @@ const DictionaryManagement = (props) => {
               throw new Error("This is not a JSON file.");
             }
 
+            // @ts-expect-error TS(2345) FIXME: Argument of type 'any' is not assignable to parame... Remove this comment to see the full error message
             if (validDictionariesState.map((d) => d[0]).includes(dictName)) {
               throw new Error(
                 "This dictionary name conflicts with an existing dictionary. You may have imported it already."
@@ -143,6 +154,7 @@ const DictionaryManagement = (props) => {
               );
             }
 
+            // @ts-expect-error TS(2345) FIXME: Argument of type 'string | ArrayBuffer | null' is ... Remove this comment to see the full error message
             let parsedDictionary = JSON.parse(text);
 
             if (parsedDictionary.constructor !== {}.constructor) {
@@ -175,14 +187,18 @@ const DictionaryManagement = (props) => {
               }
 
               if (
+                // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 misstrokesJSON[outline] &&
+                // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 misstrokesJSON[outline] === translation
               ) {
                 probableMisstrokes.push([outline, translation]);
               }
 
               if (
+                // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 invalidEntries[outline] &&
+                // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 invalidEntries[outline] === translation
               ) {
                 probableMisstrokes.push([outline, translation]);
@@ -200,6 +216,7 @@ const DictionaryManagement = (props) => {
               });
             }
           } catch (error) {
+            // @ts-expect-error TS(2571) FIXME: Object is of type 'unknown'.
             invalidDictionaries.push([dictName, error.message]);
           }
 
@@ -215,37 +232,49 @@ const DictionaryManagement = (props) => {
               namesOfValidImportedDictionaries
             );
 
+          // @ts-expect-error TS(2345) FIXME: Argument of type 'string[]' is not assignable to p... Remove this comment to see the full error message
           setDictionariesTypeyTypeWillUseState(dictionariesTypeyTypeWillUse);
           setNamesOfValidImportedDictionariesState(
+            // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
             namesOfValidImportedDictionaries
           );
+          // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
           setValidDictionariesState(validDictionaries);
+          // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
           setInvalidDictionariesState(invalidDictionaries);
         };
 
         reader.readAsText(dictionary);
       }
 
+      // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
       setMisstrokesInDictionaries(misstrokesInDictionaries);
     }
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'files' implicitly has an 'any' type.
   function validateConfig(files) {
     let validConfig = "";
+    // @ts-expect-error TS(7034) FIXME: Variable 'validDictionariesListedInConfig' implici... Remove this comment to see the full error message
     let validDictionariesListedInConfig = [];
+    // @ts-expect-error TS(7034) FIXME: Variable 'invalidConfig' implicitly has type 'any[... Remove this comment to see the full error message
     let invalidConfig = [];
     let filesLength = files.length;
 
     if (filesLength > 1) {
       setValidConfig(validConfig);
+      // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'never'.
       setInvalidConfig(["Too many files", "Choose one config file."]);
     } else if (filesLength !== 1) {
       setValidConfig(validConfig);
+      // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'never'.
       setInvalidConfig(["No config file", "Choose a config file to import."]);
     } else if (!files[0].name.endsWith(".cfg")) {
       setValidConfig(validConfig);
       setInvalidConfig([
+        // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'never'.
         "Incorrect file type",
+        // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'never'.
         "The file name must end in “.cfg”.",
       ]);
     } else {
@@ -255,9 +284,11 @@ const DictionaryManagement = (props) => {
       const reader = new FileReader();
 
       reader.onload = (event) => {
+        // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
         let text = event.target.result;
 
         try {
+          // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
           let lines = text.split("\n");
           let linesLength = lines.length;
           let parsedConfig = "";
@@ -279,7 +310,9 @@ const DictionaryManagement = (props) => {
               parsedConfig[i].hasOwnProperty("enabled") &&
               parsedConfig[i].hasOwnProperty("path")
             ) {
+              // @ts-expect-error TS(7015) FIXME: Element implicitly has an 'any' type because index... Remove this comment to see the full error message
               if (parsedConfig[i]["enabled"]) {
+                // @ts-expect-error TS(7015) FIXME: Element implicitly has an 'any' type because index... Remove this comment to see the full error message
                 let filename = parsedConfig[i]["path"]
                   .split("\\")
                   .pop()
@@ -316,20 +349,25 @@ const DictionaryManagement = (props) => {
 
           validConfig = configName;
         } catch (error) {
+          // @ts-expect-error TS(2571) FIXME: Object is of type 'unknown'.
           invalidConfig = [configName, error.message];
         }
 
         let dictionariesTypeyTypeWillUse =
           getListOfValidDictionariesAddedAndInConfig(
+            // @ts-expect-error TS(7005) FIXME: Variable 'validDictionariesListedInConfig' implici... Remove this comment to see the full error message
             validDictionariesListedInConfig,
             namesOfValidImportedDictionariesState
           );
 
+        // @ts-expect-error TS(2345) FIXME: Argument of type 'string[]' is not assignable to p... Remove this comment to see the full error message
         setDictionariesTypeyTypeWillUseState(dictionariesTypeyTypeWillUse);
         setValidConfig(validConfig);
         setValidDictionariesListedInConfigState(
+          // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
           validDictionariesListedInConfig
         );
+        // @ts-expect-error TS(2345) FIXME: Argument of type 'any[]' is not assignable to para... Remove this comment to see the full error message
         setInvalidConfig(invalidConfig);
       };
 
@@ -337,6 +375,7 @@ const DictionaryManagement = (props) => {
     }
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   function handleOnSubmit(event) {
     event.preventDefault();
 
@@ -344,6 +383,7 @@ const DictionaryManagement = (props) => {
     setImportedDictionariesLoading(false);
 
     const filesInput = document.querySelector("#dictionariesFileInput");
+    // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
     const files = filesInput.files;
 
     let labelString = "No files for dictionaries";
@@ -363,6 +403,7 @@ const DictionaryManagement = (props) => {
     validateDictionaries(files);
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   function handleOnSubmitConfig(event) {
     event.preventDefault();
 
@@ -370,6 +411,7 @@ const DictionaryManagement = (props) => {
     setImportedDictionariesLoading(false);
 
     const filesInput = document.querySelector("#dictionaryConfigFileInput");
+    // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
     const files = filesInput.files;
 
     let labelString = "No files for config";
@@ -391,6 +433,7 @@ const DictionaryManagement = (props) => {
     validateConfig(files);
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   function handleOnSubmitClear(event) {
     event.preventDefault();
 
@@ -404,6 +447,7 @@ const DictionaryManagement = (props) => {
         Sentry.captureException(writeDictionariesError.error);
         Sentry.captureMessage(
           "Write dictionaries error… " + writeDictionariesError.message,
+          // @ts-expect-error TS(2345) FIXME: Argument of type '"debug"' is not assignable to pa... Remove this comment to see the full error message
           "debug"
         );
       }
@@ -428,13 +472,16 @@ const DictionaryManagement = (props) => {
     });
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   function handleOnSubmitApplyChanges(event) {
     event.preventDefault();
 
     setImportedDictionariesLoaded(false);
     setImportedDictionariesLoading(true);
 
+    // @ts-expect-error TS(7005) FIXME: Variable 'configOrder' implicitly has an 'any[]' t... Remove this comment to see the full error message
     let configOrder = validDictionariesListedInConfigState;
+    // @ts-expect-error TS(7005) FIXME: Variable 'sortedValidDictionaries' implicitly has ... Remove this comment to see the full error message
     let sortedValidDictionaries = validDictionariesState.slice(0);
     sortedValidDictionaries = sortedValidDictionaries.sort((a, b) => {
       // dictionaries that don't appear in config will be before dictionaries that do
@@ -463,17 +510,20 @@ const DictionaryManagement = (props) => {
         Sentry.captureException(writeDictionariesError.error);
         Sentry.captureMessage(
           "Write dictionaries error… " + writeDictionariesError.message,
+          // @ts-expect-error TS(2345) FIXME: Argument of type '"debug"' is not assignable to pa... Remove this comment to see the full error message
           "debug"
         );
       }
     }
 
+    // @ts-expect-error TS(7005) FIXME: Variable 'dictionariesTypeyTypeWillUse' implicitly... Remove this comment to see the full error message
     let dictionariesTypeyTypeWillUse = dictionariesTypeyTypeWillUseState;
 
     let labelString = dictionariesTypeyTypeWillUse || "No files for config";
     GoogleAnalytics.event({
       category: "Apply dictionary changes",
       action: "Click apply button",
+      // @ts-expect-error TS(2322) FIXME: Type 'any[]' is not assignable to type 'string'.
       label: labelString,
     });
 
@@ -486,6 +536,7 @@ const DictionaryManagement = (props) => {
         setImportedDictionariesLoaded(true);
         setImportedDictionariesLoading(false);
       })
+      // @ts-expect-error TS(7006) FIXME: Parameter 'error' implicitly has an 'any' type.
       .catch((error) => {
         console.error(error);
         showDictionaryErrorNotification("FetchAndSetupGlobalDictFailed");
@@ -494,6 +545,7 @@ const DictionaryManagement = (props) => {
       });
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'name' implicitly has an 'any' type.
   function showDictionaryErrorNotification(name) {
     updateMessage(
       "Unable to save dictionaries. See the message at the top of the page for more details."
@@ -547,6 +599,7 @@ const DictionaryManagement = (props) => {
   );
 
   let misstrokesBlurb =
+    // @ts-expect-error TS(2339) FIXME: Property 'length' does not exist on type 'never'.
     misstrokesInDictionaries?.length > 0 ? (
       <>
         <p>
@@ -554,8 +607,10 @@ const DictionaryManagement = (props) => {
           habits:
         </p>
         <ul>
+          {/* @ts-expect-error TS(2531) FIXME: Object is possibly 'null'. */}
           {misstrokesInDictionaries.map((dict, dictIndex) => {
             const probableMisstrokes = dict.probableMisstrokes.map(
+              // @ts-expect-error TS(7006) FIXME: Parameter 'entry' implicitly has an 'any' type.
               (entry, misstrokeIndex) => (
                 <li className="bg-warning wrap" key={misstrokeIndex}>
                   "{entry[0]}": "{entry[1]}"
@@ -601,6 +656,7 @@ const DictionaryManagement = (props) => {
     }
   );
 
+  // @ts-expect-error TS(7005) FIXME: Variable 'namesOfValidImportedDictionaries' implic... Remove this comment to see the full error message
   const namesOfValidImportedDictionaries =
     namesOfValidImportedDictionariesState;
   const validDictionariesListedInConfig =
@@ -674,6 +730,7 @@ const DictionaryManagement = (props) => {
 
   let notificationBody;
   switch (dictionaryErrorNotification) {
+    // @ts-expect-error TS(2678) FIXME: Type '"AddToStorageFailed"' is not comparable to t... Remove this comment to see the full error message
     case "AddToStorageFailed":
       notificationBody = (
         <p>
@@ -691,6 +748,7 @@ const DictionaryManagement = (props) => {
       );
       break;
 
+    // @ts-expect-error TS(2678) FIXME: Type '"WriteToStorageFailed"' is not comparable to... Remove this comment to see the full error message
     case "WriteToStorageFailed":
       notificationBody = (
         <p>
@@ -701,6 +759,7 @@ const DictionaryManagement = (props) => {
       );
       break;
 
+    // @ts-expect-error TS(2678) FIXME: Type '"NoLocalStorage"' is not comparable to type ... Remove this comment to see the full error message
     case "NoLocalStorage":
       notificationBody = (
         <p>
@@ -711,6 +770,7 @@ const DictionaryManagement = (props) => {
       );
       break;
 
+    // @ts-expect-error TS(2678) FIXME: Type '"FetchAndSetupGlobalDictFailed"' is not comp... Remove this comment to see the full error message
     case "FetchAndSetupGlobalDictFailed":
       notificationBody = (
         <p>

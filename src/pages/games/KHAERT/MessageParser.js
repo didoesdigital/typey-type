@@ -20,7 +20,9 @@ import {
 } from "./constants.js";
 import { escapeRegExp } from "../../../utils/utils";
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'message' implicitly has an 'any' type.
 const messageMatchesAKeyword = (message, keywords) => {
+  // @ts-expect-error TS(7006) FIXME: Parameter 'keyword' implicitly has an 'any' type.
   return keywords.some((keyword) => {
     const regexp = new RegExp(`\\b${escapeRegExp(keyword)}\\b`, "g");
     const result = regexp.test(message);
@@ -29,11 +31,13 @@ const messageMatchesAKeyword = (message, keywords) => {
 };
 
 class MessageParser {
+  // @ts-expect-error TS(7006) FIXME: Parameter 'actionProvider' implicitly has an 'any'... Remove this comment to see the full error message
   constructor(actionProvider, state) {
     this.actionProvider = actionProvider;
     this.state = state;
   }
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'message' implicitly has an 'any' type.
   parse(message) {
     const lowerCaseMessage = message.toLowerCase();
     let foundSomething = false;

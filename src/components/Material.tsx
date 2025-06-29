@@ -27,7 +27,6 @@ const Material = ({
   const upcomingWordsLayout = useAtomValue(upcomingWordsLayoutState);
   return upcomingWordsLayout === "multiline" ? (
     <MultiLineMaterial
-      // @ts-ignore TODO: work out what React.memo(function MultiLineMaterial({… needs here
       actualText={actualText}
       currentPhrase={currentPhrase}
       currentPhraseID={currentPhraseID}

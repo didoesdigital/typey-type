@@ -9,6 +9,7 @@ class FlashcardsCarouselActionButtons extends Component {
     return (
       <React.Fragment>
         <div className="text-center">
+          {/* @ts-expect-error TS(7006) FIXME: Parameter 'showButton' implicitly has an 'any' typ... Remove this comment to see the full error message */}
           { currentSlideContentType === 'phrase' && numberOfFlashcards > 0 ? <ButtonNext className="link-button carousel__button carousel__button--skip" type="button" onClick={this.props.nextSlide} data-flashcard-feedback="show" value={this.props.currentSlideContent} aria-label="Next card" data-unfocus="true" id="showButton" ref={(showButton) => { this.showButton = showButton; }}>Show</ButtonNext> : null }
 
           { currentSlideContentType === 'stroke' && numberOfFlashcards > 0 ?
@@ -17,6 +18,7 @@ class FlashcardsCarouselActionButtons extends Component {
               </> : null }
           { currentSlideContentType === 'stroke' && numberOfFlashcards > 0 ?
               <>
+                {/* @ts-expect-error TS(7006) FIXME: Parameter 'hardButton' implicitly has an 'any' typ... Remove this comment to see the full error message */}
                 <ButtonNext className="link-button carousel__button carousel__button--hard ml1" type="button" onClick={this.props.nextSlide} data-flashcard-feedback="hard" value={this.props.currentSlideContent} aria-label="Hard, Next card" data-unfocus="true" id="hardButton" ref={(hardButton) => { this.hardButton = hardButton; }}>Hard</ButtonNext>
               </>
               :

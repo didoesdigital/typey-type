@@ -2,6 +2,7 @@ import { shuffle } from "d3-array";
 import affixList from "./affixesForTPEUBGSZ.json";
 import advancedAffixList from "./advancedAffixesForTPEUBGSZ.json";
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'affixType' implicitly has an 'any' type... Remove this comment to see the full error message
 const isSuffix = (affixType) => affixType === "suffixes";
 
 const baseAndAdvancedAffixList = {
@@ -10,11 +11,17 @@ const baseAndAdvancedAffixList = {
 };
 
 const addSomeAffixes = (
+  // @ts-expect-error TS(7006) FIXME: Parameter 'madeUpWordParts' implicitly has an 'any... Remove this comment to see the full error message
   madeUpWordParts,
+  // @ts-expect-error TS(7006) FIXME: Parameter 'madeUpAffixParts' implicitly has an 'an... Remove this comment to see the full error message
   madeUpAffixParts,
+  // @ts-expect-error TS(7006) FIXME: Parameter 'affixType' implicitly has an 'any' type... Remove this comment to see the full error message
   affixType,
+  // @ts-expect-error TS(7006) FIXME: Parameter 'count' implicitly has an 'any' type.
   count,
+  // @ts-expect-error TS(7006) FIXME: Parameter 'level' implicitly has an 'any' type.
   level,
+  // @ts-expect-error TS(7006) FIXME: Parameter 'numberOfMetWords' implicitly has an 'an... Remove this comment to see the full error message
   numberOfMetWords
 ) => {
   const affixSource =
@@ -42,11 +49,16 @@ const addSomeAffixes = (
   return [madeUpWordParts, madeUpAffixParts];
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'level' implicitly has an 'any' type.
 export const makeUpAWordAndHint = (level, numberOfMetWords) => {
+  // @ts-expect-error TS(7034) FIXME: Variable 'madeUpWordParts' implicitly has type 'an... Remove this comment to see the full error message
   const madeUpWordParts = [];
+  // @ts-expect-error TS(7034) FIXME: Variable 'madeUpAffixParts' implicitly has type 'a... Remove this comment to see the full error message
   const madeUpAffixParts = [];
   addSomeAffixes(
+    // @ts-expect-error TS(7005) FIXME: Variable 'madeUpWordParts' implicitly has an 'any[... Remove this comment to see the full error message
     madeUpWordParts,
+    // @ts-expect-error TS(7005) FIXME: Variable 'madeUpAffixParts' implicitly has an 'any... Remove this comment to see the full error message
     madeUpAffixParts,
     "prefixes",
     1,

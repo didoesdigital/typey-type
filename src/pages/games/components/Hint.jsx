@@ -1,6 +1,7 @@
 import React from "react";
 import GoogleAnalytics from "react-ga4";
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
 const handleHintClick = (event, setShowHint, gameName) => {
   event.preventDefault();
 
@@ -19,9 +20,13 @@ const handleHintClick = (event, setShowHint, gameName) => {
 };
 
 export default function Hint({
+  // @ts-expect-error TS(7031) FIXME: Binding element 'currentStroke' implicitly has an ... Remove this comment to see the full error message
   currentStroke,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'setShowHint' implicitly has an 'a... Remove this comment to see the full error message
   setShowHint,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'showHint' implicitly has an 'any'... Remove this comment to see the full error message
   showHint,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'gameName' implicitly has an 'any'... Remove this comment to see the full error message
   gameName,
 }) {
   return (

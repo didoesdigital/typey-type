@@ -5,8 +5,10 @@ import { actions } from "../utilities/gameActions";
 import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";
 import * as Confetti from "../../../utils/confetti.js";
 
+// @ts-expect-error TS(7034) FIXME: Variable 'particles' implicitly has type 'any[]' i... Remove this comment to see the full error message
 const particles = [];
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
 const handlePlayAgainClick = (event, gameName, dispatch) => {
   event.preventDefault();
 
@@ -21,6 +23,7 @@ const handlePlayAgainClick = (event, gameName, dispatch) => {
   });
 };
 
+// @ts-expect-error TS(2339) FIXME: Property 'gameName' does not exist on type '{ chil... Remove this comment to see the full error message
 export default React.memo(function Completed({ gameName, dispatch }) {
   const playAgainButton = useRef(null);
   const canvasRef = useRef(null);
@@ -29,14 +32,17 @@ export default React.memo(function Completed({ gameName, dispatch }) {
 
   useEffect(() => {
     if (playAgainButton) {
+      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
       playAgainButton.current.focus();
     }
   }, []);
 
   useEffect(() => {
+    // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
     Confetti.setupCanvas({ sparsity: 960, colors: 5 }, "you-win", particles);
     if (canvasRef.current) {
       Confetti.restartAnimation(
+        // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
         particles,
         canvasRef.current,
         canvasWidth,
@@ -54,14 +60,17 @@ export default React.memo(function Completed({ gameName, dispatch }) {
         event &&
         ((event.keyCode && event.keyCode === 13) || event.type === "click")
       ) {
+        // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
         particles.splice(0);
         Confetti.cancelAnimation();
         Confetti.setupCanvas(
           { sparsity: 170, colors: 4 },
           "you-win",
+          // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
           particles
         );
         Confetti.restartAnimation(
+          // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
           particles,
           canvasRef.current,
           canvasWidth,

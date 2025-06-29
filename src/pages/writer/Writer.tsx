@@ -133,9 +133,9 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
       })
       .catch((e) => console.error(e));
 
-    // @ts-ignore
+    // @ts-expect-error TS(2339) FIXME: Property 'mainHeading' does not exist on type 'Wri... Remove this comment to see the full error message
     if (this.mainHeading) {
-      // @ts-ignore
+      // @ts-expect-error TS(2339) FIXME: Property 'mainHeading' does not exist on type 'Wri... Remove this comment to see the full error message
       this.mainHeading.focus();
     }
   }
@@ -166,9 +166,9 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
       downloadDiagramSVG = null;
     }
 
-    // @ts-ignore
+    // @ts-expect-error TS(2339) FIXME: Property 'downloadLink' does not exist on type 'Wr... Remove this comment to see the full error message
     if (this.downloadLink && downloadDiagramSVG) {
-      // @ts-ignore
+      // @ts-expect-error TS(2339) FIXME: Property 'downloadLink' does not exist on type 'Wr... Remove this comment to see the full error message
       this.downloadLink.href = downloadDiagramSVG;
     }
   }
@@ -311,12 +311,12 @@ class Writer extends Component<WithAppMethods<Props & {changeStenoLayout: Return
         <Subheader>
           <div className="flex mr1 self-center">
             <header className="flex items-center min-h-40">
-              {/* @ts-ignore */}
+              {/* @ts-expect-error TS(2339) FIXME: Property 'mainHeading' does not exist on type 'Wri... Remove this comment to see the full error message */}
               <h2 ref={(heading) => { this.mainHeading = heading; }} tabIndex={-1} id="writer">Writer</h2>
             </header>
           </div>
           <div className="flex mxn2">
-            {/* @ts-ignore */}
+            {/* @ts-expect-error TS(2339) FIXME: Property 'downloadLink' does not exist on type 'Wr... Remove this comment to see the full error message */}
             {downloadDiagramSVG ? <a href={downloadDiagramSVG} ref={(downloadLink) => { this.downloadLink = downloadLink; }} download={svgFileName} onClick={this.downloadDiagramSVG.bind(this)} className="link-button link-button-ghost table-cell mr1">Download diagram (SVG)</a>
               :
               null

@@ -5,7 +5,7 @@ function updateMultipleMetWords(
   newMetWords: string[],
   spacePlacement: SpacePlacement
 ) {
-  // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation.
+  // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
   const newMetWordsState = Object.assign({}, this.state.metWords);
 
   for (const newMetWord of newMetWords) {
@@ -19,7 +19,7 @@ function updateMultipleMetWords(
     newMetWordsState[phraseText] = meetingsCount + 1;
   }
 
-  // @ts-ignore 'this' implicitly has type 'any' because it does not have a type annotation.
+  // @ts-expect-error TS(2683) FIXME: 'this' implicitly has type 'any' because it does n... Remove this comment to see the full error message
   this.setState({
     metWords: newMetWordsState,
   });

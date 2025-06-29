@@ -13,7 +13,7 @@ const SlideNodes = ({ flashcards }: Props) => {
       <React.Fragment key={i}>
         <Slide
           role="option"
-          // @ts-ignore
+          // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'number'.
           index={`${i}-phrase`}
           key={i + "-phrase"}
           innerClassName={"carousel__slider__slide__slideInner"}
@@ -26,7 +26,7 @@ const SlideNodes = ({ flashcards }: Props) => {
         </Slide>
         <Slide
           role="option"
-          // @ts-ignore
+          // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'number'.
           index={`${i}-stroke`}
           key={i + "-stroke"}
           innerClassName={"carousel__slider__slide__slideInner"}
@@ -43,7 +43,7 @@ const SlideNodes = ({ flashcards }: Props) => {
 
   slides.push(
     <Slide
-      // @ts-ignore
+      // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'number'.
       index={"finished"}
       key={"finished"}
       innerClassName={"carousel__slider__slide__slideInner"}

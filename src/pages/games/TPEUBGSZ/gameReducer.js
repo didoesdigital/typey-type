@@ -18,11 +18,13 @@ const defaultState = {
   currentHint: "",
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 export const initConfig = (state) => ({
   ...defaultState,
   ...state,
 });
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 const getGameStartedState = (state, action) => {
   const [madeUpWord, hint] = makeUpAWordAndHint(
     state.level,
@@ -37,6 +39,7 @@ const getGameStartedState = (state, action) => {
   };
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 const getGameRestartedState = (state) => {
   const [madeUpWord, hint] = makeUpAWordAndHint(
     state.level,
@@ -50,6 +53,7 @@ const getGameRestartedState = (state) => {
   };
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 const getAllLevelsCompletedState = (state) => {
   const [madeUpWord, hint] = makeUpAWordAndHint(1, state.numberOfMetWords);
   return {
@@ -61,6 +65,7 @@ const getAllLevelsCompletedState = (state) => {
   };
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 const getEarlyLevelCompletedState = (state) => {
   const increasedLevel = state.level + 1;
   const [madeUpWord, hint] = makeUpAWordAndHint(
@@ -77,6 +82,7 @@ const getEarlyLevelCompletedState = (state) => {
   };
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 const getEarlyRoundCompletedState = (state) => {
   const [madeUpWord, hint] = makeUpAWordAndHint(
     state.level,
@@ -90,6 +96,7 @@ const getEarlyRoundCompletedState = (state) => {
   };
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
 export const gameReducer = (state, action) => {
   switch (action?.type) {
     case actions.gameStarted:

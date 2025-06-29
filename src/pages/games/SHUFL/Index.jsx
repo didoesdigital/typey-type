@@ -4,8 +4,11 @@ import Subheader from "../../../components/Subheader";
 import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
 
 export default function Index({
+  // @ts-expect-error TS(7031) FIXME: Binding element 'globalLookupDictionary' implicitl... Remove this comment to see the full error message
   globalLookupDictionary,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'globalLookupDictionaryLoaded' imp... Remove this comment to see the full error message
   globalLookupDictionaryLoaded,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'startingMetWordsToday' implicitly... Remove this comment to see the full error message
   startingMetWordsToday,
 }) {
   const {
@@ -15,6 +18,7 @@ export default function Index({
   const mainHeading = useRef(null);
   useEffect(() => {
     if (mainHeading) {
+      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
       mainHeading.current.focus();
     }
   }, []);

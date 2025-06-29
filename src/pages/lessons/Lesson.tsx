@@ -112,7 +112,7 @@ const Lesson = ({
   const mainHeading = useRef(null);
   useEffect(() => {
     if (mainHeading) {
-      // @ts-ignore
+      // @ts-expect-error TS(2339) FIXME: Property 'focus' does not exist on type 'never'.
       mainHeading.current?.focus();
     }
   }, []);
@@ -194,7 +194,6 @@ const Lesson = ({
           parsedParams
         );
         setUserSettings(newUserSettings);
-        // @ts-ignore
         setupLesson();
       }
       const urlSearchParams = new URLSearchParams(location.search);
@@ -348,7 +347,6 @@ const Lesson = ({
       sourceMaterial: [{ phrase: "The", stroke: "-T" }],
       presentedMaterial: [{ phrase: "The", stroke: "-T" }],
       // possibly incorrect `newPresentedMaterial`?
-      // @ts-ignore
       newPresentedMaterial: new Zipper([{ phrase: "The", stroke: "-T" }]),
       settings: { ignoredChars: "" },
       title: "Steno",

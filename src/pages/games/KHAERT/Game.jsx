@@ -11,6 +11,7 @@ const gameName = "KHAERT";
 const introText =
   "Meet Shazza, the Aussie steno bot who loves to have a yarn. You can ask her how to write steno phrases and she'll do her best to look it up.";
 
+// @ts-expect-error TS(7031) FIXME: Binding element 'globalLookupDictionary' implicitl... Remove this comment to see the full error message
 export default function Game({ globalLookupDictionary }) {
   const [config, setConfig] = useState(makeConfig());
 
@@ -68,6 +69,7 @@ export default function Game({ globalLookupDictionary }) {
           <div className="mt1 mw-336 flex-grow">
             <div className="flex flex-wrap flex-grow py3">
               <Chatbot
+                // @ts-expect-error TS(2322) FIXME: Type '{ initialMessages: { loading: boolean; widge... Remove this comment to see the full error message
                 config={config}
                 messageParser={MessageParser}
                 actionProvider={ActionProvider}

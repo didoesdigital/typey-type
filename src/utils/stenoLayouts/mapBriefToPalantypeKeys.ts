@@ -112,7 +112,7 @@ function mapBriefToPalantypeKeys(brief: Outline) {
   for (let i = 0; i < palantypeOrder.length; i++) {
     if (briefLetters.length > 0) {
       if (briefLetters[0] === palantypeOrder[i]) {
-        // @ts-ignore Element implicitly has an 'any' type because expression of type 'string' can't be used to index type '{…}'
+        // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         keys[palantypeKeys[i]] = true;
         briefLetters.shift();
       }

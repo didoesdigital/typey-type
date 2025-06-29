@@ -190,7 +190,7 @@ const MainLessonView = ({
                 <AnimateHeight
                   duration={300}
                   height={userSettings.showScoresWhileTyping ? "auto" : 0}
-                  // @ts-ignore TODO see if this is a real issue
+                  // @ts-expect-error TS(2769) FIXME: No overload matches this call.
                   ease={"cubic-bezier(0.645, 0.045, 0.355, 1)"}
                 >
                   <div
@@ -223,7 +223,6 @@ const MainLessonView = ({
                     <div>
                       <Link
                         to={lesson?.path.replace(/lesson\.txt$/, "")}
-                        // @ts-ignore
                         onClick={restartLesson}
                         className="revision-mode-button no-underline absolute right-0"
                         aria-label="Exit revision mode"

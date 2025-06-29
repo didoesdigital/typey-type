@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'dimensions' implicitly has an 'any' typ... Remove this comment to see the full error message
 export const combineChartDimensions = (dimensions) => {
   let parsedDimensions = {
     marginTop: 16,
@@ -26,6 +27,7 @@ export const combineChartDimensions = (dimensions) => {
   };
 };
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'passedSettings' implicitly has an 'any'... Remove this comment to see the full error message
 export const useChartDimensions = (passedSettings) => {
   const ref = useRef();
   const dimensions = combineChartDimensions(passedSettings);
@@ -33,6 +35,7 @@ export const useChartDimensions = (passedSettings) => {
   const [width, changeWidth] = useState(0);
   const [height, changeHeight] = useState(0);
 
+  // @ts-expect-error TS(2345) FIXME: Argument of type '() => any[] | (() => void)' is n... Remove this comment to see the full error message
   useEffect(() => {
     if (dimensions.width && dimensions.height) return [ref, dimensions];
 
@@ -49,8 +52,10 @@ export const useChartDimensions = (passedSettings) => {
         changeHeight(entry.contentRect.height);
     });
 
+    // @ts-expect-error TS(2345) FIXME: Argument of type 'undefined' is not assignable to ... Remove this comment to see the full error message
     resizeObserver.observe(element);
 
+    // @ts-expect-error TS(2345) FIXME: Argument of type 'undefined' is not assignable to ... Remove this comment to see the full error message
     return () => resizeObserver.unobserve(element);
   }, [passedSettings, height, width, dimensions]);
 

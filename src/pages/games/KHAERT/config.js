@@ -12,6 +12,7 @@ const defaultEmptyDict = new Map([]);
 
 const makeConfig = (globalLookupDictionary = undefined) => ({
   initialMessages: [
+    // @ts-expect-error TS(2554) FIXME: Expected 2 arguments, but got 1.
     createChatBotMessage(`Hi! I'm ${botName} and I love talking about steno`),
     createChatBotMessage(
       `I'm a newly built bot so I don't have much to say yet`,
@@ -24,6 +25,7 @@ const makeConfig = (globalLookupDictionary = undefined) => ({
   ],
   botName: botName,
   customComponents: {
+    // @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
     botAvatar: (props) => (
       <div className="mw-48">
         <AussieRobotAvatar
@@ -33,6 +35,7 @@ const makeConfig = (globalLookupDictionary = undefined) => ({
         />
       </div>
     ),
+    // @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
     userAvatar: (props) => (
       <div className="mw-40 min-w-40 react-chatbot-kit-user-avatar-container">
         <Stenographer
@@ -56,15 +59,18 @@ const makeConfig = (globalLookupDictionary = undefined) => ({
   widgets: [
     {
       widgetName: "dogPicture",
+      // @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
       widgetFunc: (props) => <DogPicture {...props} />,
     },
     {
       widgetName: "externalLink",
+      // @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
       widgetFunc: (props) => <ExternalLink {...props} />,
       mapStateToProps: ["linkText", "linkUrl"],
     },
     {
       widgetName: "phraseLookup",
+      // @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
       widgetFunc: (props) => (
         <PhraseLookup
           {...props}

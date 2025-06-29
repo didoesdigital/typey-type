@@ -28,6 +28,7 @@ describe("recommended next lesson for novice stenographer", () => {
       numberOfWordsSeen,
       numberOfWordsMemorised,
       lessonIndexJSON,
+      // @ts-expect-error TS(2554) FIXME: Expected 1-6 arguments, but got 7.
       metWords
     );
 
@@ -60,6 +61,7 @@ describe('recommended next lesson for beginner stenographer a few lessons in', (
       numberOfWordsSeen,
       numberOfWordsMemorised,
       lessonIndexJSON,
+      // @ts-expect-error TS(2554) FIXME: Expected 1-6 arguments, but got 7.
       metWords
     );
 
@@ -90,6 +92,7 @@ describe('recommended next lesson for beginner stenographer a few lessons in', (
       numberOfWordsSeen,
       numberOfWordsMemorised,
       lessonIndexJSON,
+      // @ts-expect-error TS(2554) FIXME: Expected 1-6 arguments, but got 7.
       metWords
     );
 
@@ -121,6 +124,7 @@ describe("recommended next lesson for competent stenographer", () => {
       numberOfWordsSeen,
       numberOfWordsMemorised,
       lessonIndexJSON,
+      // @ts-expect-error TS(2554) FIXME: Expected 1-6 arguments, but got 7.
       metWordsCompetent
     );
 

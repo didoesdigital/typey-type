@@ -79,7 +79,7 @@ describe(App, () => {
     const [userSettings, setUserSettings] = useAtom(userSettingsState)
     const [globalUserSettings, setGlobalUserSettings] = useAtom(globalUserSettingsState)
     const lessonIndex = useLessonIndexWithFallback()
-    // @ts-ignore
+    // @ts-expect-error TS(2739) FIXME: Type '{ location: Location<unknown>; history: Hist... Remove this comment to see the full error message
     return <StateLoggingApp {...{
       location,
       history,

@@ -56,6 +56,7 @@ const stenoTypedTextToKeysMapping = {
   "F": stroke.F,
 };
 
+// @ts-expect-error TS(7034) FIXME: Variable 'particles' implicitly has type 'any[]' i... Remove this comment to see the full error message
 const particles = [];
 const gameName = "KAOES";
 const introText =
@@ -81,6 +82,7 @@ const GiveKAOESfeedback = ({ idModifier = "" }) => (
   </p>
 );
 
+// @ts-expect-error TS(7031) FIXME: Binding element 'changeInputForKAOES' implicitly h... Remove this comment to see the full error message
 export default function Game({ changeInputForKAOES, inputForKAOES }) {
   const canvasRef = useRef(null);
   const canvasWidth = Math.floor(window.innerWidth);
@@ -105,21 +107,26 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
     ReactModal.setAppElement("#js-app");
   }, []);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   const handleOpenModal = (event) => {
     event.preventDefault();
     setModalVisibility(true);
   };
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   const handleCloseModal = (event) => {
     event.preventDefault();
     setModalVisibility(false);
   };
 
   const restartConfetti = useCallback(() => {
+    // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
     particles.splice(0);
     Confetti.cancelAnimation();
+    // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
     Confetti.setupCanvas({ sparsity: 240, colors: 4 }, "good-guess", particles);
     Confetti.restartAnimation(
+      // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
       particles,
       canvasRef.current,
       canvasWidth,
@@ -127,6 +134,7 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
     );
   }, [canvasRef, canvasWidth, canvasHeight]);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'key' implicitly has an 'any' type.
   const onClickHandler = (key) => {
     if (!key) {
       return;
@@ -139,12 +147,14 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
       setPuzzleText(choosePuzzleKey(clickedKey));
       setStenoStroke(new Stroke());
       setRightWrongColor(rightColor);
+      // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
       dispatch({ type: actions.roundCompleted });
     } else {
       setStenoStroke(stenoStroke.set(key));
       setRightWrongColor(wrongColor);
     }
     setPreviousStenoStroke(tmpBoard.set(key));
+    // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
     dispatch({ type: actions.makeGuess });
   };
 
@@ -155,6 +165,7 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
 
     // Raw steno:
     const upperTrimmedKey = trimmedTypedKey.toUpperCase();
+    // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     const rawStenoKeyNumber = stenoTypedTextToKeysMapping[upperTrimmedKey] ?? 0;
     const tmpBoard = new Stroke();
     const rawStenoKey = tmpBoard.set(rawStenoKeyNumber);
@@ -167,7 +178,8 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
     const comparableTypedKeyString = typedKeyStroke.toString();
     const comparableTypedKeyNumber =
       inputForKAOES === "qwerty"
-        ? stenoTypedTextToKeysMapping[comparableTypedKeyString] ?? 0
+        ? // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+          stenoTypedTextToKeysMapping[comparableTypedKeyString] ?? 0
         : rawStenoKeyNumber;
 
     if (puzzleText === comparableTypedKeyString) {
@@ -177,6 +189,7 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
       setPuzzleText(choosePuzzleKey(comparableTypedKeyString));
       setStenoStroke(new Stroke());
       setRightWrongColor(rightColor);
+      // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
       dispatch({ type: actions.roundCompleted });
     } else {
       // NOTE: we don't auto-clear just *any* incorrect steno input because we
@@ -197,6 +210,7 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
       setRightWrongColor(wrongColor);
     }
     setPreviousStenoStroke(tmpBoard.set(comparableTypedKeyNumber));
+    // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
     dispatch({ type: actions.makeGuess });
   };
 
@@ -222,6 +236,7 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
         />
         {state.gameComplete ? (
           <>
+            {/* @ts-expect-error TS(2322) FIXME: Type '{ gameName: string; dispatch: DispatchWithou... Remove this comment to see the full error message */}
             <Completed gameName={gameName} dispatch={dispatch} />
             <div className="mt10">
               <GiveKAOESfeedback />

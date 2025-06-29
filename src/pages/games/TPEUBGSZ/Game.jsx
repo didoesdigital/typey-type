@@ -14,6 +14,7 @@ const gameName = "TPEUBGSZ";
 const introText =
   "Oh no! The steno robots have broken English! They’ve destroyed most of the useful words. The only bits left are prefixes and suffixes. And robot sounds. Let’s stick them together to make some new words for the robots.";
 
+// @ts-expect-error TS(7031) FIXME: Binding element 'startingMetWordsToday' implicitly... Remove this comment to see the full error message
 export default function Game({ startingMetWordsToday }) {
   const [typedText, setTypedText] = useState("");
   const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
@@ -28,6 +29,7 @@ export default function Game({ startingMetWordsToday }) {
   useEffect(() => {
     setShowHint(false);
     const numberOfMetWords = Object.keys(startingMetWordsToday).length;
+    // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
     dispatch({
       type: actions.gameStarted,
       payload: { numberOfMetWords },
@@ -35,12 +37,14 @@ export default function Game({ startingMetWordsToday }) {
     setShowHint(false);
   }, [startingMetWordsToday]);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'inputText' implicitly has an 'any' type... Remove this comment to see the full error message
   const onChangeInput = (inputText) => {
     setTypedText(inputText);
     if (gameState.puzzleText === inputText.trim()) {
       setTypedText("");
       setPreviousCompletedPhraseAsTyped(inputText);
       setShowHint(false);
+      // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
       dispatch({ type: actions.roundCompleted });
     }
   };
@@ -52,6 +56,7 @@ export default function Game({ startingMetWordsToday }) {
           TPEUBGSZ game
         </h3>
         {gameState.gameComplete ? (
+          // @ts-expect-error TS(2322) FIXME: Type '{ gameName: string; dispatch: DispatchWithou... Remove this comment to see the full error message
           <Completed gameName={gameName} dispatch={dispatch} />
         ) : (
           <>
@@ -75,6 +80,7 @@ export default function Game({ startingMetWordsToday }) {
             </div>
             {gameState.levelComplete ? (
               <LevelCompleted
+                // @ts-expect-error TS(2322) FIXME: Type '{ dispatch: DispatchWithoutAction; gameName:... Remove this comment to see the full error message
                 dispatch={dispatch}
                 gameName={gameName}
                 level={gameState.level}

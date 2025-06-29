@@ -23,21 +23,18 @@ const getProgressRevisionUserSettings = (
 
   if (newSeenOrMemorised[1] && !newSeenOrMemorised[2]) {
     newUserSettings.study = "revise";
-    // @ts-ignore TODO: convert params.js to TS
     newUserSettings.sortOrder = PARAMS.revise.sortOrder;
     newUserSettings.limitNumberOfWords = revisePreset.limitNumberOfWords;
     newUserSettings.repetitions = revisePreset.repetitions;
     newUserSettings.showStrokes = PARAMS.revise.showStrokes;
   } else if (newSeenOrMemorised[2] && !newSeenOrMemorised[1]) {
     newUserSettings.study = "drill";
-    // @ts-ignore TODO: convert params.js to TS
     newUserSettings.sortOrder = PARAMS.drill.sortOrder;
     newUserSettings.limitNumberOfWords = drillPreset.limitNumberOfWords;
     newUserSettings.repetitions = drillPreset.repetitions;
     newUserSettings.showStrokes = PARAMS.drill.showStrokes;
   } else {
     newUserSettings.study = "practice";
-    // @ts-ignore TODO: convert params.js to TS
     newUserSettings.sortOrder = PARAMS.practice.sortOrder;
     newUserSettings.limitNumberOfWords = practicePreset.limitNumberOfWords;
     newUserSettings.repetitions = practicePreset.repetitions;

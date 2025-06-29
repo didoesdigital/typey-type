@@ -2,20 +2,27 @@ import React, { useEffect, useRef } from "react";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 export default function Input({
+  // @ts-expect-error TS(7031) FIXME: Binding element 'onChangeInput' implicitly has an ... Remove this comment to see the full error message
   onChangeInput,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'previousCompletedPhraseAsTyped' i... Remove this comment to see the full error message
   previousCompletedPhraseAsTyped,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'round' implicitly has an 'any' ty... Remove this comment to see the full error message
   round,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'typedText' implicitly has an 'any... Remove this comment to see the full error message
   typedText,
+  // @ts-expect-error TS(7031) FIXME: Binding element 'gameName' implicitly has an 'any'... Remove this comment to see the full error message
   gameName,
 }) {
   const inputRef = useRef(null);
 
   useEffect(() => {
     if (inputRef) {
+      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
       inputRef.current.focus();
     }
   }, []);
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   const onChangeTypedText = (event) => {
     const inputText = event?.target?.value || "";
     onChangeInput(inputText);

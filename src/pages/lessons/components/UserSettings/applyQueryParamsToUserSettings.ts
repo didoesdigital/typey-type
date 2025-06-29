@@ -31,11 +31,11 @@ const applyQueryParamsToUserSettings = (
 
       if (booleanParams.includes(param)) {
         if (paramVal === "1") {
-          // @ts-ignore
+          // @ts-expect-error TS(2322) FIXME: Type 'boolean' is not assignable to type 'never'.
           newSettings[param] = true;
         }
         if (paramVal === "0") {
-          // @ts-ignore
+          // @ts-expect-error TS(2322) FIXME: Type 'boolean' is not assignable to type 'never'.
           newSettings[param] = false;
         }
       }
@@ -49,10 +49,10 @@ const applyQueryParamsToUserSettings = (
 
       if (
         param === "spacePlacement" &&
-        // @ts-ignore
+        // @ts-expect-error TS(2345) FIXME: Argument of type 'string | string[]' is not assign... Remove this comment to see the full error message
         spacePlacementValidValues.includes(paramVal ?? "")
       ) {
-        // @ts-ignore
+        // @ts-expect-error TS(2322) FIXME: Type 'string | string[] | null | undefined' is not... Remove this comment to see the full error message
         newSettings[param] = paramVal;
       }
 
@@ -65,17 +65,17 @@ const applyQueryParamsToUserSettings = (
         "sortShortest",
       ];
 
-      // @ts-ignore
+      // @ts-expect-error TS(2345) FIXME: Argument of type 'string | string[] | null | undef... Remove this comment to see the full error message
       if (param === "sortOrder" && sortOrderValidValues.includes(paramVal)) {
-        // @ts-ignore
+        // @ts-expect-error TS(2322) FIXME: Type 'string | string[] | null | undefined' is not... Remove this comment to see the full error message
         newSettings[param] = paramVal;
       }
 
       const studyValidValues = ["discover", "revise", "drill", "practice"];
 
-      // @ts-ignore
+      // @ts-expect-error TS(2345) FIXME: Argument of type 'string | string[] | null | undef... Remove this comment to see the full error message
       if (param === "study" && studyValidValues.includes(paramVal)) {
-        // @ts-ignore
+        // @ts-expect-error TS(2322) FIXME: Type 'string | string[] | null | undefined' is not... Remove this comment to see the full error message
         newSettings[param] = paramVal;
       }
 
@@ -97,10 +97,10 @@ const applyQueryParamsToUserSettings = (
 
       if (
         param === "stenoLayout" &&
-        // @ts-ignore
+        // @ts-expect-error TS(2345) FIXME: Argument of type 'string | string[] | null | undef... Remove this comment to see the full error message
         stenoLayoutValidValues.includes(paramVal)
       ) {
-        // @ts-ignore
+        // @ts-expect-error TS(2322) FIXME: Type 'string | string[] | null | undefined' is not... Remove this comment to see the full error message
         newSettings[param] = paramVal;
       }
 
@@ -108,7 +108,7 @@ const applyQueryParamsToUserSettings = (
         (param === "repetitions" ||
           param === "limitNumberOfWords" ||
           param === "startFromWord") &&
-        // @ts-ignore
+        // @ts-expect-error TS(2345) FIXME: Argument of type 'string | string[]' is not assign... Remove this comment to see the full error message
         isNormalInteger(paramVal ?? "")
       ) {
         let paramValNumber = Number(paramVal);

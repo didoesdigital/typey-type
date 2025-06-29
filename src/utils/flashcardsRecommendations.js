@@ -1,3 +1,4 @@
+// @ts-expect-error TS(7034) FIXME: Variable 'data' implicitly has type 'any' in some ... Remove this comment to see the full error message
 let data = null;
 
 function fetchFlashcardsRecommendations() {
@@ -23,9 +24,11 @@ function fetchFlashcardsRecommendations() {
 
 export function getFlashcardsRecommendedCourses() {
   let recommendedCourses = {};
+  // @ts-expect-error TS(7005) FIXME: Variable 'data' implicitly has an 'any' type.
   if (data === null) {
     recommendedCourses = fetchFlashcardsRecommendations();
   } else {
+    // @ts-expect-error TS(7005) FIXME: Variable 'data' implicitly has an 'any' type.
     recommendedCourses = Promise.resolve(data);
   }
 
@@ -35,6 +38,7 @@ export function getFlashcardsRecommendedCourses() {
 /**
  * @returns {[flashcardsNextLesson, currentFlashcardsCourseIndex]}
  */
+// @ts-expect-error TS(7006) FIXME: Parameter 'courses' implicitly has an 'any' type.
 function getFlashcardsNextLesson(courses, flashcardsProgress = {}, courseLevel = "expertCourse", currentFlashcardsCourseIndex = 0) {
     // fallback lesson:
     let flashcardsNextLesson = {
@@ -59,12 +63,16 @@ function getFlashcardsNextLesson(courses, flashcardsProgress = {}, courseLevel =
         flashcardsNextLesson.link = courses[courseLevel][currentFlashcardsCourseIndex].path;
       }
 
+      // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       if (flashcardsProgress[flashcardsNextLesson.link]) {
+        // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         flashcardsNextLesson.lastSeen = flashcardsProgress[flashcardsNextLesson.link].lastSeen;
       }
     }
 
+    // @ts-expect-error TS(2538) FIXME: Type '{ lastSeen: number; linkTitle: string; linkT... Remove this comment to see the full error message
     if (flashcardsProgress[flashcardsNextLesson] && flashcardsProgress[flashcardsNextLesson]["lastSeen"]) {
+      // @ts-expect-error TS(2538) FIXME: Type '{ lastSeen: number; linkTitle: string; linkT... Remove this comment to see the full error message
       flashcardsNextLesson.lastSeen = flashcardsProgress[flashcardsNextLesson]["lastSeen"];
     }
 

@@ -22,6 +22,7 @@ import Rule from "./Chart/Rule";
 const highlightCircleRadius = 8;
 const tickSize = 4;
 
+// @ts-expect-error TS(7006) FIXME: Parameter 'datum' implicitly has an 'any' type.
 const claps = (datum, htmlOutput = false) => {
   if (htmlOutput) {
     return datum.markedCorrect && !datum.attemptPeak ? (
@@ -41,6 +42,7 @@ const claps = (datum, htmlOutput = false) => {
   }
 };
 
+// @ts-expect-error TS(7031) FIXME: Binding element 'data' implicitly has an 'any' typ... Remove this comment to see the full error message
 export default function FinishedSpeedChart({ data }) {
   const [highlightedDatum, setHighlightedDatum] = useState(null);
   const [ref, dimensions] = useChartDimensions({
@@ -60,10 +62,13 @@ export default function FinishedSpeedChart({ data }) {
 
   const xAccessor = useCallback((d) => d.elapsedTime, []);
   const yAccessor = useCallback((d) => d.wordsPerMinute, []);
+  // @ts-expect-error TS(7006) FIXME: Parameter '_' implicitly has an 'any' type.
   const keyAccessor = (_, i) => i;
+  // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
   const nominalAccessor = (d) => d.material;
 
   const minimumStrokes = 4;
+  // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
   const colorAccessor = (d) => {
     if ("materialIndex" in d && d.materialIndex < minimumStrokes) {
       return "#868091";
@@ -75,6 +80,7 @@ export default function FinishedSpeedChart({ data }) {
       return d.markedCorrect ? "#9880C2" : "#E26F99";
     }
   };
+  // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
   const backgroundColorAccessor = (d) => {
     if (d.attemptPeak) {
       return d.markedCorrect ? "#FCF5E9" : "#FAEFEA";
@@ -85,11 +91,14 @@ export default function FinishedSpeedChart({ data }) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const xScale = useCallback(
+    // @ts-expect-error TS(2345) FIXME: Argument of type 'ScaleLinear<number, number, neve... Remove this comment to see the full error message
     data === null
       ? null
       : scaleLinear()
           .domain([
+            // @ts-expect-error TS(2362) FIXME: The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
             Math.floor(min(data.dataPoints, xAccessor) / 1000) * 1000,
+            // @ts-expect-error TS(2362) FIXME: The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
             Math.ceil(max(data.dataPoints, xAccessor) / 1000) * 1000,
           ])
           .range([0, dimensions.boundedWidth]),
@@ -97,7 +106,9 @@ export default function FinishedSpeedChart({ data }) {
   );
 
   const maxY = max(data.dataPoints, yAccessor);
+  // @ts-expect-error TS(2362) FIXME: The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
   const maxYPlusBuffer = maxY * 1.2;
+  // @ts-expect-error TS(7006) FIXME: Parameter 'maxYPlusBuffer' implicitly has an 'any'... Remove this comment to see the full error message
   const yScaleDomainMax = (maxYPlusBuffer) => {
     if (maxYPlusBuffer < 60) return 60;
     if (maxYPlusBuffer < 100) return 100;
@@ -108,6 +119,7 @@ export default function FinishedSpeedChart({ data }) {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const yScale = useCallback(
+    // @ts-expect-error TS(2345) FIXME: Argument of type 'ScaleLinear<number, number, neve... Remove this comment to see the full error message
     data === null
       ? null
       : scaleLinear()
@@ -127,6 +139,7 @@ export default function FinishedSpeedChart({ data }) {
   );
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const y0AccessorScaled = useCallback(
+    // @ts-expect-error TS(2339) FIXME: Property 'domain' does not exist on type '(...args... Remove this comment to see the full error message
     data === null ? null : yScale(yScale.domain()[0]),
     [data, yScale]
   );
@@ -137,9 +150,11 @@ export default function FinishedSpeedChart({ data }) {
 
   const bisect = bisector((d) => xAccessor(d));
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   const onMove = (event) => {
     try {
       const pointerX = pointer(event)?.[0] || 0 - dimensions.marginLeft;
+      // @ts-expect-error TS(2339) FIXME: Property 'invert' does not exist on type '(...args... Remove this comment to see the full error message
       const pointerXValue = xScale.invert(pointerX);
       const nearestXIndex = bisect.center(data.dataPoints, pointerXValue);
       const datum = data.dataPoints[nearestXIndex];
@@ -153,10 +168,12 @@ export default function FinishedSpeedChart({ data }) {
     setHighlightedDatum(null);
   };
 
+  // @ts-expect-error TS(7006) FIXME: Parameter '_' implicitly has an 'any' type.
   const onCircleFocus = (_, d) => {
     d ? setHighlightedDatum(d) : setHighlightedDatum(null);
   };
 
+  // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
   const accessibleLabel = (d) => {
     const wpmText = `${format(",d")(yAccessor(d))} WPM`;
     const hinted = `${d.hintWasShown ? " (hinted). " : ""}`;
@@ -221,16 +238,19 @@ export default function FinishedSpeedChart({ data }) {
                   borderBottom: `2px solid ${colorAccessor(highlightedDatum)}`,
                 }}
               >
+                {/* @ts-expect-error TS(2339) FIXME: Property 'typedText' does not exist on type 'never... Remove this comment to see the full error message */}
                 {highlightedDatum.typedText.replace(/^ $/, " ")}
               </span>
               {claps(highlightedDatum, true)}
             </p>
             <p className="mb0">
               {"materialIndex" in highlightedDatum &&
+              // @ts-expect-error TS(2339) FIXME: Property 'materialIndex' does not exist on type 'n... Remove this comment to see the full error message
               highlightedDatum.materialIndex < minimumStrokes
                 ? "~"
                 : ""}
               {format(",d")(yAccessor(highlightedDatum))} WPM
+              {/* @ts-expect-error TS(2339) FIXME: Property 'hintWasShown' does not exist on type 'ne... Remove this comment to see the full error message */}
               {highlightedDatum.hintWasShown ? (
                 <span aria-label="(hinted)" role="img">
                   &nbsp;ℹ️
@@ -242,9 +262,13 @@ export default function FinishedSpeedChart({ data }) {
       )}
       <Chart
         dimensions={dimensions}
+        // @ts-expect-error TS(2322) FIXME: Type '(event: any) => void' is not assignable to t... Remove this comment to see the full error message
         onMouseMove={onMove}
+        // @ts-expect-error TS(2322) FIXME: Type '(event: any) => void' is not assignable to t... Remove this comment to see the full error message
         onTouchMove={onMove}
+        // @ts-expect-error TS(2322) FIXME: Type '() => void' is not assignable to type 'null ... Remove this comment to see the full error message
         onMouseOut={onOut}
+        // @ts-expect-error TS(2322) FIXME: Type '() => void' is not assignable to type 'null ... Remove this comment to see the full error message
         onTouchEnd={onOut}
         accessibleTitle="Line chart of your typing speed over time"
       >
@@ -261,10 +285,12 @@ export default function FinishedSpeedChart({ data }) {
               role="presentation"
               transform={`translate(0, ${dimensions.boundedHeight})`}
             >
+              {/* @ts-expect-error TS(2339) FIXME: Property 'range' does not exist on type '(...args:... Remove this comment to see the full error message */}
               <Baseline scaleRange={xScale.range()} tickSize={tickSize} />
             </g>
             <Line
               type="line"
+              // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
               data={data.dataPoints.filter((d) => !d.attemptPeak)}
               xAccessor={xAccessorScaled}
               yAccessor={yAccessorScaled}
@@ -274,6 +300,7 @@ export default function FinishedSpeedChart({ data }) {
             />
             <Line
               type="area"
+              // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
               data={data.dataPoints.filter((d) => !d.attemptPeak)}
               xAccessor={xAccessorScaled}
               yAccessor={yAccessorScaled}
@@ -284,6 +311,7 @@ export default function FinishedSpeedChart({ data }) {
             <Line
               type="line"
               data={data.dataPoints.filter(
+                // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
                 (d) =>
                   !d.attemptPeak &&
                   "materialIndex" in d &&
@@ -298,6 +326,7 @@ export default function FinishedSpeedChart({ data }) {
             {crowdedDataPoints ? (
               data.dataPoints
                 .filter(
+                  // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
                   (d) =>
                     !d.attemptPeak &&
                     !(
@@ -305,6 +334,7 @@ export default function FinishedSpeedChart({ data }) {
                     ) &&
                     !d.markedCorrect
                 )
+                // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
                 .map((d) => (
                   <Rule
                     key={d.materialIndex}
@@ -343,15 +373,18 @@ export default function FinishedSpeedChart({ data }) {
               <tspan role="img" aria-label="Start time">
                 ⏱
               </tspan>{" "}
+              {/* @ts-expect-error TS(2339) FIXME: Property 'domain' does not exist on type '(...args... Remove this comment to see the full error message */}
               {durationFormatter(xScale.domain()[0])}
             </text>
             <text
               textAnchor="end"
+              // @ts-expect-error TS(2339) FIXME: Property 'range' does not exist on type '(...args:... Remove this comment to see the full error message
               transform={`translate(${xScale.range()[1]}, ${
                 dimensions.boundedHeight
               })`}
               dy="1.5em"
             >
+              {/* @ts-expect-error TS(2339) FIXME: Property 'domain' does not exist on type '(...args... Remove this comment to see the full error message */}
               {durationFormatter(xScale.domain()[1])}{" "}
               <tspan role="img" aria-label="Finished time">
                 ⏱

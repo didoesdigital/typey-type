@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === "production" && !process.env.REACT_APP_QA) {
 
 function AppWrapper(props: object) {
   const lessonIndex = useLessonIndexWithFallback();
-  // @ts-ignore
+  // @ts-expect-error TS(2740) FIXME: Type '{ lessonIndex: LessonIndexEntry[]; }' is mis... Remove this comment to see the full error message
   return <App {...props} {...{ lessonIndex }} />;
 }
 
