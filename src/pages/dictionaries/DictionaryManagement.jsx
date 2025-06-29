@@ -100,7 +100,6 @@ const DictionaryManagement = (props) => {
   function validateDictionaries(files) {
     // @ts-expect-error TS(7005) FIXME: Variable 'validDictionaries' implicitly has an 'an... Remove this comment to see the full error message
     let validDictionaries = validDictionariesState.slice();
-    // @ts-expect-error TS(7034) FIXME: Variable 'invalidDictionaries' implicitly has type... Remove this comment to see the full error message
     let invalidDictionaries = [];
     let filesLength = files.length;
 
@@ -259,7 +258,6 @@ const DictionaryManagement = (props) => {
   // @ts-expect-error TS(7006) FIXME: Parameter 'files' implicitly has an 'any' type.
   function validateConfig(files) {
     let validConfig = "";
-    // @ts-expect-error TS(7034) FIXME: Variable 'validDictionariesListedInConfig' implici... Remove this comment to see the full error message
     let validDictionariesListedInConfig = [];
     // @ts-expect-error TS(7034) FIXME: Variable 'invalidConfig' implicitly has type 'any[... Remove this comment to see the full error message
     let invalidConfig = [];
@@ -360,7 +358,6 @@ const DictionaryManagement = (props) => {
 
         let dictionariesTypeyTypeWillUse =
           getListOfValidDictionariesAddedAndInConfig(
-            // @ts-expect-error TS(7005) FIXME: Variable 'validDictionariesListedInConfig' implici... Remove this comment to see the full error message
             validDictionariesListedInConfig,
             namesOfValidImportedDictionariesState
           );

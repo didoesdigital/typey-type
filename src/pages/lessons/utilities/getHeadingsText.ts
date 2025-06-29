@@ -1,4 +1,4 @@
-const wpmCommentary = [
+const wpmCommentary: [number, string][] = [
   [5000, "Faster than you can think…"],
   [1500, "Faster than a speed reader!"],
   [300, "Faster than you can read!"],
