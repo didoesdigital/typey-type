@@ -84,7 +84,7 @@
     "@types/react-numeric-input": "^2.2.4",
     "@types/react-router-dom": "^5.3.3",
     "@types/react-transition-group": "^4.4.5",
-    "chromatic": "^11.29.0",
+    "chromatic": "^12.2.0",
     "eslint-plugin-storybook": "^0.6.15",
     "jest-mock-random": "^1.1.1",
     "react-scripts": "5.0.1",
