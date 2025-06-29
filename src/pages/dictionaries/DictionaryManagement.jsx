@@ -321,7 +321,8 @@ const DictionaryManagement = (props) => {
                 if (filename.endsWith(".json")) {
                   validDictionariesListedInConfig.push(filename);
                 } else if (
-                  filename.endsWith(".py" || filename.endsWith(".rtf"))
+                  filename.endsWith(".py") ||
+                  filename.endsWith(".rtf")
                 ) {
                   // Skip valid, but unhandled dictionary formats
                 } else {
