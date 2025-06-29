@@ -86,8 +86,7 @@
     "jest-mock-random": "^1.1.1",
     "react-scripts": "5.0.1",
     "storybook": "^7.5.1",
-    "webpack": "5",
-    "why-did-you-update": "^0.1.1"
+    "webpack": "5"
   },
   "browserslist": {
     "production": [

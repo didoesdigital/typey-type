@@ -16588,48 +16588,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.every@npm:^4.6.0":
-  version: 4.6.0
-  resolution: "lodash.every@npm:4.6.0"
-  checksum: 10c0/67dd78cf01e3a4dbeaf6095d766e6868a229bb71a9a438d4a0bf5425326fd8e8ceee97c0079961697dae984e1052db6c31d4e7c54da7899f36a88702ed13cee1
-  languageName: node
-  linkType: hard
-
-"lodash.filter@npm:^4.6.0":
-  version: 4.6.0
-  resolution: "lodash.filter@npm:4.6.0"
-  checksum: 10c0/bb65002f3ee02b94400b9d8728a46d3ac9fc3eb7df387b3c642f36eff82d716714283ca674889a29edae3c28ea8a4048e6c7bb90598670ab9c97b5d125bffda2
-  languageName: node
-  linkType: hard
-
-"lodash.isequal@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "lodash.isequal@npm:4.5.0"
-  checksum: 10c0/dfdb2356db19631a4b445d5f37868a095e2402292d59539a987f134a8778c62a2810c2452d11ae9e6dcac71fc9de40a6fedcb20e2952a15b431ad8b29e50e28f
-  languageName: node
-  linkType: hard
-
-"lodash.isfunction@npm:^3.0.8":
-  version: 3.0.9
-  resolution: "lodash.isfunction@npm:3.0.9"
-  checksum: 10c0/e88620922f5f104819496884779ca85bfc542efb2946df661ab3e2cd38da5c8375434c6adbedfc76dd3c2b04075d2ba8ec215cfdedf08ddd2e3c3467e8a26ccd
-  languageName: node
-  linkType: hard
-
-"lodash.isstring@npm:^4.0.1":
-  version: 4.0.1
-  resolution: "lodash.isstring@npm:4.0.1"
-  checksum: 10c0/09eaf980a283f9eef58ef95b30ec7fee61df4d6bf4aba3b5f096869cc58f24c9da17900febc8ffd67819b4e29de29793190e88dc96983db92d84c95fa85d1c92
-  languageName: node
-  linkType: hard
-
-"lodash.keys@npm:^4.2.0":
-  version: 4.2.0
-  resolution: "lodash.keys@npm:4.2.0"
-  checksum: 10c0/e21565d5076f4afc99e517d2b3dc84f05bc83e036f532c6e691c318f9ffd7eca3006365e0dafae1c5f046e344aaa722b01fe102b9f68e7cc63b79d2f9196f667
-  languageName: node
-  linkType: hard
-
 "lodash.memoize@npm:^4.1.2":
   version: 4.1.2
   resolution: "lodash.memoize@npm:4.1.2"
@@ -16644,31 +16602,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.pick@npm:^4.4.0":
-  version: 4.4.0
-  resolution: "lodash.pick@npm:4.4.0"
-  checksum: 10c0/a04c460b95d1aaa44e9513d1dacf72ea74d838da843e45831de9de64c303f13cdde1859702a6f4dcef417816898ffd47c6ae0614c957ac70245bed2809b8d2e2
-  languageName: node
-  linkType: hard
-
-"lodash.some@npm:^4.6.0":
-  version: 4.6.0
-  resolution: "lodash.some@npm:4.6.0"
-  checksum: 10c0/9d3cdb1c8a2ed3d19b02ce146d4962a7859016f752b40fc143d78d3e70985259d6bea71c2c31b8e78f492830f49d755f1be2cdbf85461c54a523089e0c8c0e75
-  languageName: node
-  linkType: hard
-
 "lodash.sortby@npm:^4.7.0":
   version: 4.7.0
   resolution: "lodash.sortby@npm:4.7.0"
   checksum: 10c0/fc48fb54ff7669f33bb32997cab9460757ee99fafaf72400b261c3e10fde21538e47d8cfcbe6a25a31bcb5b7b727c27d52626386fc2de24eb059a6d64a89cdf5
-  languageName: node
-  linkType: hard
-
-"lodash.union@npm:^4.6.0":
-  version: 4.6.0
-  resolution: "lodash.union@npm:4.6.0"
-  checksum: 10c0/6da7f72d1facd472f6090b49eefff984c9f9179e13172039c0debca6851d21d37d83c7ad5c43af23bd220f184cd80e6897e8e3206509fae491f9068b02ae6319
   languageName: node
   linkType: hard
 
@@ -22769,7 +22706,6 @@ __metadata:
     typescript: "npm:^4.7.4"
     usehooks-ts: "npm:^2.9.1"
     webpack: "npm:5"
-    why-did-you-update: "npm:^0.1.1"
   languageName: unknown
   linkType: soft
 
@@ -23647,25 +23583,6 @@ __metadata:
   bin:
     node-which: bin/which.js
   checksum: 10c0/449fa5c44ed120ccecfe18c433296a4978a7583bf2391c50abce13f76878d2476defde04d0f79db8165bdf432853c1f8389d0485ca6e8ebce3bbcded513d5e6a
-  languageName: node
-  linkType: hard
-
-"why-did-you-update@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "why-did-you-update@npm:0.1.1"
-  dependencies:
-    lodash.every: "npm:^4.6.0"
-    lodash.filter: "npm:^4.6.0"
-    lodash.isequal: "npm:^4.5.0"
-    lodash.isfunction: "npm:^3.0.8"
-    lodash.isstring: "npm:^4.0.1"
-    lodash.keys: "npm:^4.2.0"
-    lodash.pick: "npm:^4.4.0"
-    lodash.some: "npm:^4.6.0"
-    lodash.union: "npm:^4.6.0"
-  peerDependencies:
-    react: ">=15.0 || 0.14.x"
-  checksum: 10c0/7e4e3c5c014da485b899a178ed2c371959f540b0dfeff1bb1d68b0d72b94d6d7586d42ae1785c9145701535394ffabb2003a7681056d088c9d938b00c94867d2
   languageName: node
   linkType: hard
 
