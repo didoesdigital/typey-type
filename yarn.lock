@@ -7805,26 +7805,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chromatic@npm:^10.9.6":
-  version: 10.9.6
-  resolution: "chromatic@npm:10.9.6"
-  peerDependencies:
-    "@chromatic-com/cypress": ^0.5.2 || ^1.0.0
-    "@chromatic-com/playwright": ^0.5.2 || ^1.0.0
-  peerDependenciesMeta:
-    "@chromatic-com/cypress":
-      optional: true
-    "@chromatic-com/playwright":
-      optional: true
-  bin:
-    chroma: dist/bin.js
-    chromatic: dist/bin.js
-    chromatic-cli: dist/bin.js
-  checksum: 10c0/73fc169cc23ae2ff45259d533c0129fda2cdcb1bc6269987b51fc79c01ed85b205fc46099768e522725b83ed343433a42572f8d95a30c04a51d0df9ccac67f7b
-  languageName: node
-  linkType: hard
-
-"chromatic@npm:^11.15.0":
+"chromatic@npm:^11.15.0, chromatic@npm:^11.29.0":
   version: 11.29.0
   resolution: "chromatic@npm:11.29.0"
   peerDependencies:
@@ -18198,7 +18179,7 @@ __metadata:
     "@types/react-numeric-input": "npm:^2.2.4"
     "@types/react-router-dom": "npm:^5.3.3"
     "@types/react-transition-group": "npm:^4.4.5"
-    chromatic: "npm:^10.9.6"
+    chromatic: "npm:^11.29.0"
     clipboard: "npm:^1.7.1"
     d3-array: "npm:^3.1.1"
     d3-format: "npm:^3.1.0"
