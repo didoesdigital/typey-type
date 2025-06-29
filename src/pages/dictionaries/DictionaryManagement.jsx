@@ -139,7 +139,11 @@ const DictionaryManagement = (props) => {
               );
             }
 
-            if ((dictName === "typey-type.json" || dictName === "typey-type-full.json") && dictionary.size >= 2144740) {
+            if (
+              (dictName === "typey-type.json" ||
+                dictName === "typey-type-full.json") &&
+              dictionary.size >= 2144740
+            ) {
               throw new Error(
                 "This dictionary looks like a copy of Typey Type's so we'll exclude it for now."
               );
@@ -945,9 +949,7 @@ const DictionaryManagement = (props) => {
                 onSubmit={handleOnSubmitApplyChanges.bind(this)}
               >
                 <p>
-                  <PseudoContentButton
-                    className="pseudo-text--applied button mt1"
-                  >
+                  <PseudoContentButton className="pseudo-text--applied button mt1">
                     Apply
                   </PseudoContentButton>
                   {importedDictionariesLoading ? (
