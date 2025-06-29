@@ -1,8 +1,8 @@
 import React from "react";
 import Lookup from "./Lookup";
 import userSettings from "../../stories/fixtures/userSettings";
-import { within, userEvent } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { within, userEvent } from "@storybook/test";
+import { expect } from "@storybook/test";
 import AppMethodsContext from "../../states/legacy/AppMethodsContext";
 import appMethods from "../../stories/fixtures/appMethods";
 import { useHydrateAtoms } from "jotai/utils";
@@ -54,12 +54,12 @@ LookupMissingWordStory.play = async ({ canvasElement }) => {
 
   await userEvent.type(
     await within(canvasElement).getByLabelText("Enter words to look up"),
-    "a phrase that is not in any dictionary"
+    "a phrase that is not in any dictionary",
   );
 
   await canvas.findByText("No results found");
   await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
-    "No results found"
+    "No results found",
   );
 };
 
@@ -70,15 +70,15 @@ LookupSearchStory.play = async ({ canvasElement }) => {
 
   await userEvent.type(
     await within(canvasElement).getByLabelText("Enter words to look up"),
-    "huh"
+    "huh",
   );
 
   await expect(
-    canvas.getByTestId("lookup-page-contents")
+    canvas.getByTestId("lookup-page-contents"),
   ).not.toHaveTextContent("No results found");
 
   await expect(canvas.getByTestId("lookup-page-contents")).toHaveTextContent(
-    "Typey Type"
+    "Typey Type",
   );
 };
 

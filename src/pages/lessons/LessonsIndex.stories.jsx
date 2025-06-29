@@ -46,9 +46,7 @@ const customLesson = {
 
 // @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => {
-  return (
-    <Component {...args} />
-  );
+  return <Component {...args} />;
 };
 
 // Suspense doesn't work in Template which is not a component

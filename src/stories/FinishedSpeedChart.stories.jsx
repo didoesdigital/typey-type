@@ -185,7 +185,7 @@ WPM111Data.dataPoints = WPM111Data.dataPoints.map(
   ({ wordsPerMinute, ...datumProps }, i) => ({
     ...datumProps,
     wordsPerMinute: i !== 0 ? wordsPerMinute + 30 : wordsPerMinute,
-  })
+  }),
 );
 // @ts-expect-error TS(2339) FIXME: Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
 WPM111.args = {
@@ -200,7 +200,7 @@ WPM151Data.dataPoints = WPM151Data.dataPoints.map(
   ({ wordsPerMinute, ...datumProps }, i) => ({
     ...datumProps,
     wordsPerMinute: i !== 0 ? wordsPerMinute + 120 : wordsPerMinute,
-  })
+  }),
 );
 // @ts-expect-error TS(2339) FIXME: Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
 WPM151.args = {
@@ -215,7 +215,7 @@ WPM226Data.dataPoints = WPM226Data.dataPoints.map(
   ({ wordsPerMinute, ...datumProps }, i) => ({
     ...datumProps,
     wordsPerMinute: i !== 0 ? wordsPerMinute + 160 : wordsPerMinute,
-  })
+  }),
 );
 // @ts-expect-error TS(2339) FIXME: Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
 WPM226.args = {
@@ -230,7 +230,7 @@ WPM320Data.dataPoints = WPM320Data.dataPoints.map(
   ({ wordsPerMinute, ...datumProps }, i) => ({
     ...datumProps,
     wordsPerMinute: i !== 0 ? wordsPerMinute + 260 : wordsPerMinute,
-  })
+  }),
 );
 // @ts-expect-error TS(2339) FIXME: Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
 WPM320.args = {

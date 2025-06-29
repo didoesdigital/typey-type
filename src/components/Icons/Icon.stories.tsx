@@ -1,7 +1,7 @@
 import React from "react";
 import Icon from "./Icon";
 import ClosingCross from "./icon-images/ClosingCross.svg";
-import "./Icon.stories.scss";
+import "./Icon.stories.css";
 
 import type { Meta, StoryObj } from "@storybook/react";
 

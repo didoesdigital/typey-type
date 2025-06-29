@@ -70,7 +70,7 @@ const createNewCustomLesson = (
 );
 
 const Template = (args: any) => {
-  useHydrateAtoms([[userSettingsState, userSettings]])
+  useHydrateAtoms([[userSettingsState, userSettings]]);
   return (
     <AppMethodsContext.Provider value={appMethods}>
       <Switch>

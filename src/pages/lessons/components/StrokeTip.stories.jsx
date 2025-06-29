@@ -16,7 +16,7 @@ export default {
 
 const globalLookupDictionaryMinimal = new Map(
   // @ts-expect-error TS(2769) FIXME: No overload matches this call.
-  globalLookupDictionaryMinimalJSON
+  globalLookupDictionaryMinimalJSON,
 );
 
 // @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.

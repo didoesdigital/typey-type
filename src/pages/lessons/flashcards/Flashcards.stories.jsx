@@ -26,16 +26,18 @@ const globalLookupDictionary = new Map([
 
 // @ts-expect-error TS(7006) FIXME: Parameter 'args' implicitly has an 'any' type.
 const Template = (args) => {
-  useHydrateAtoms([[flashcardsProgressState, flashcardsProgress]])
+  useHydrateAtoms([[flashcardsProgressState, flashcardsProgress]]);
   return (
     <div className="p3">
       <Switch>
         <Route path={`/`}>
           <div>
-            {/* @ts-expect-error TS(2740) FIXME: Type '{ appFetchAndSetupGlobalDict: () => Promise<... Remove this comment to see the full error message */}
-            <AppMethodsContext.Provider value={{
-              appFetchAndSetupGlobalDict: () => Promise.resolve(true),
-            }}>
+            <AppMethodsContext.Provider
+              // @ts-expect-error TS(2740) FIXME: Type '{ appFetchAndSetupGlobalDict: () => Promise<... Remove this comment to see the full error message
+              value={{
+                appFetchAndSetupGlobalDict: () => Promise.resolve(true),
+              }}
+            >
               <Flashcards
                 fetchAndSetupGlobalDict={() => Promise.resolve(true)}
                 globalLookupDictionary={globalLookupDictionary}

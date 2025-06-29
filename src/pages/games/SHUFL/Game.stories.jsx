@@ -18,7 +18,7 @@ const Template = (args) => (
       globalLookupDictionary={new Map()}
       updateMetWords={fauxUpdateMetWords}
       globalLookupDictionaryLoaded={true}
-      startingMetWordsToday={{'the': 2}}
+      startingMetWordsToday={{ "the": 2 }}
       {...args}
     />
   </div>

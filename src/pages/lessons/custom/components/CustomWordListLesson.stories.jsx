@@ -1,7 +1,7 @@
 import React from "react";
 
-import { within, userEvent } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { within, userEvent } from "@storybook/test";
+import { expect } from "@storybook/test";
 
 import CustomWordListLesson from "./CustomWordListLesson";
 
@@ -34,7 +34,7 @@ CustomWordListLessonEmptyState.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   await expect(
-    canvas.getByTestId("custom-lesson-formatted-pre")
+    canvas.getByTestId("custom-lesson-formatted-pre"),
   ).not.toHaveClass("quote");
 };
 
@@ -47,19 +47,19 @@ CustomWordListLessonFilled.play = async ({ canvasElement }) => {
 
   await userEvent.type(
     within(canvasElement).getByLabelText(
-      "Paste a word list without strokes here to create a custom lesson (using Plover theory by default):"
+      "Paste a word list without strokes here to create a custom lesson (using Plover theory by default):",
     ),
     `hello
-world`
+world`,
   );
 
   await expect(canvas.getByTestId("custom-lesson-formatted-pre")).toHaveClass(
-    "quote"
+    "quote",
   );
   await expect(
-    canvas.getByTestId("custom-lesson-formatted-code")
+    canvas.getByTestId("custom-lesson-formatted-code"),
   ).toHaveTextContent(/WORLD/);
   await expect(
-    canvas.getByTestId("custom-lesson-formatted-code")
+    canvas.getByTestId("custom-lesson-formatted-code"),
   ).toHaveTextContent(/H-L/);
 };

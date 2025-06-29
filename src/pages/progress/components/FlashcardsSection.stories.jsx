@@ -10,14 +10,20 @@ export default {
 };
 
 export const FlashcardsSectionStory = () => {
-  useHydrateAtoms([[flashcardsRecommendationState, {
-    flashcardsNextLesson: {
-      linkTitle: "Top 1000 words flashcards",
-      lastSeen: 1558144862000,
-      link: "http://localhost:3000/typey-type/lessons/drills/top-1000-words/flashcards",
-      linkText: "linkText"
-    }, flashcardsCourseIndex: 0
-  }]]);
+  useHydrateAtoms([
+    [
+      flashcardsRecommendationState,
+      {
+        flashcardsNextLesson: {
+          linkTitle: "Top 1000 words flashcards",
+          lastSeen: 1558144862000,
+          link: "http://localhost:3000/typey-type/lessons/drills/top-1000-words/flashcards",
+          linkText: "linkText",
+        },
+        flashcardsCourseIndex: 0,
+      },
+    ],
+  ]);
   return (
     <div className="mw-368">
       <FlashcardsSection

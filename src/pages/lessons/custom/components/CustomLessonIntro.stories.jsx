@@ -1,7 +1,7 @@
 import React from "react";
 
-import { within, userEvent } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
+import { within, userEvent } from "@storybook/test";
+import { expect } from "@storybook/test";
 
 import CustomLessonIntro from "./CustomLessonIntro";
 
@@ -28,19 +28,19 @@ CustomLessonIntroFilled.storyName = "Lesson filled";
 // @ts-expect-error TS(2339) FIXME: Property 'play' does not exist on type '(args: any... Remove this comment to see the full error message
 CustomLessonIntroFilled.play = async ({ canvasElement }) => {
   userEvent.type(
-    await within(canvasElement).getByLabelText(
-      "Enter your material here:"
-    ),
-    'test	TEFT'
+    await within(canvasElement).getByLabelText("Enter your material here:"),
+    "test	TEFT",
   );
 };
 
 export const CustomLessonIntroError = Template.bind({});
 // @ts-expect-error TS(2339) FIXME: Property 'args' does not exist on type '(args: any... Remove this comment to see the full error message
 CustomLessonIntroError.args = {
-  customLessonMaterialValidationMessages: [ "Your material needs at least 1 “Tab” character" ],
-  customLessonMaterialValidationState: "fail"
-}
+  customLessonMaterialValidationMessages: [
+    "Your material needs at least 1 “Tab” character",
+  ],
+  customLessonMaterialValidationState: "fail",
+};
 // @ts-expect-error TS(2339) FIXME: Property 'storyName' does not exist on type '(args... Remove this comment to see the full error message
 CustomLessonIntroError.storyName = "Error state";
 // @ts-expect-error TS(2339) FIXME: Property 'play' does not exist on type '(args: any... Remove this comment to see the full error message
@@ -48,15 +48,11 @@ CustomLessonIntroError.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   userEvent.type(
-    await within(canvasElement).getByLabelText(
-      "Enter your material here:"
-    ),
-    'test'
+    await within(canvasElement).getByLabelText("Enter your material here:"),
+    "test",
   );
 
   await expect(
-    canvas.getByText(
-      'Your material needs at least 1 “Tab” character'
-    )
+    canvas.getByText("Your material needs at least 1 “Tab” character"),
   ).toBeInTheDocument();
 };
