@@ -70,7 +70,6 @@ function fetchAndSetupGlobalDict(
 
   // @ts-expect-error TS(7005) FIXME: Variable 'loadingPromise' implicitly has an 'any' ... Remove this comment to see the full error message
   if (loadingPromise && isGlobalDictionaryUpToDate) {
-    // @ts-expect-error TS(7005) FIXME: Variable 'loadingPromise' implicitly has an 'any' ... Remove this comment to see the full error message
     return loadingPromise;
   } else {
     loadingPromise = Promise.all([getTypeyTypeDict()]).then((data) => {
