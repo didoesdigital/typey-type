@@ -144,7 +144,11 @@ const TypedText = (props: Props) => {
               id="your-typed-text"
               ref={inputRef}
               data-testid="your-typed-text"
-              aria-describedby="punctuation-description"
+              aria-describedby={
+                userSettings.punctuationDescriptions
+                  ? "punctuation-description"
+                  : undefined
+              }
               onChange={props.updateMarkup}
               onKeyPress={keyPress.bind(this)}
               rows={1}
