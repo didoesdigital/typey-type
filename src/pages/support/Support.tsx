@@ -416,6 +416,78 @@ const Support = () => {
             </li>
           </ul>
 
+          <h4 id="speak-words">Speak Words</h4>
+          <p>
+            On lesson pages, you can turn on “Speak words with sound” to speak
+            lesson words aloud when you have the sound turned on.
+          </p>
+          <p>
+            If you have working sound but hear no words, your system might be
+            missing a language pack or “voice”.
+          </p>
+          <p>For Windows, you can download a “language pack” from Microsoft.</p>
+          <p>
+            For Linux systems, you may need to install a speech engine with
+            voices, such as <code>speech-dispatcher</code> and{" "}
+            <code>espeak-ng</code>.
+          </p>
+          <p>
+            Chrome has a range of voices built in. If you use a different
+            browser, you will need voices installed by your system instead.
+          </p>
+          <p>
+            On macOS, you can download "enhanced" and "premium" voices (which
+            sound much nicer) by going to System Settings, Accessibility, Spoken
+            Content, hitting the "i" icon, and downloading the nicer voices.
+            When you restart the browser and open Typey&nbsp;Type, the new
+            voices should appear under "Voice settings".
+          </p>
+          <p>
+            Double-click the “Say word” button or type ⇧Enter (e.g.{" "}
+            <code>{`"STP*R": "{#Shift_L(Return)}",`}</code>) from the text area
+            to hear the word again and keep focus on the text area.
+          </p>
+
+          <h4 id="screen-readers">Screen readers</h4>
+          <p>
+            If you use macOS and VoiceOver with Typey&nbsp;Type, I suggest the
+            following:
+          </p>
+          <ul>
+            <li>
+              In a Typey&nbsp;Type lesson, turn off the “Screen reader echoes”
+              setting in the settings panel. This will stop VoiceOver from
+              announcing each of your completed words as deleted text. It will
+              also avoid announcing “Write” before each word.
+            </li>
+            <li>Use Safari rather than other browsers for better support.</li>
+            <li>
+              In the VoiceOver Utility:
+              <ul>
+                <li>
+                  Under Hints, turn off “Speak instructions for using the item
+                  in the VoiceOver cursor” so it doesn't instructions on every
+                  typed word. Otherwise, you could also set “Speak hints after
+                  delay” to Long.
+                </li>
+                <li>
+                  Under Text, set “When deleting text” to “Do Nothing” to reduce
+                  sounds during multi-stroke words.
+                </li>
+                <li>
+                  If letter-by-letter announcements of whole words you've
+                  written is too noisy, set “While typing speak” to “Nothing”
+                  instead of the default option of “Characters and Words”.
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            Let me know if you use a different screen reader and any tips you
+            have or how I might improve Typey&nbsp;Type for people using screen
+            readers.
+          </p>
+
           <h4 id="typey-type-terms">Typey&nbsp;Type terms</h4>
           <DescriptionList>
             <DescriptionTerm>Spacing</DescriptionTerm>
