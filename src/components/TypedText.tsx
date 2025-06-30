@@ -106,7 +106,7 @@ const TypedText = (props: Props) => {
     <div className={isMultiline ? "mx-auto mw-844" : ""}>
       <div className="typed-text-container relative">
         <label className="visually-hidden mb1" htmlFor="your-typed-text">
-          Write {props.currentPhrase}
+          {`Write ${props.currentPhrase}`}
         </label>
         {sayCurrentPhraseButton}
         <p className="input-text mx-auto">
