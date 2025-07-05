@@ -254,27 +254,24 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
               </div>
             )}
           />
-          <Route
-            path="/progress"
-            render={() => (
-              <div>
-                <Header />
-                <DocumentTitle title={"Typey Type | Progress"}>
-                  <ErrorBoundary>
-                    <Suspense fallback={<PageLoading pastDelay={true} />}>
-                      <AsyncProgress
-                        metWords={appState.metWords}
-                        lessonsProgress={appState.lessonsProgress}
-                        startingMetWordsToday={appState.startingMetWordsToday}
-                        yourSeenWordCount={appState.yourSeenWordCount}
-                        yourMemorisedWordCount={appState.yourMemorisedWordCount}
-                      />
-                    </Suspense>
-                  </ErrorBoundary>
-                </DocumentTitle>
-              </div>
-            )}
-          />
+          <Route path="/progress">
+            <div>
+              <Header />
+              <DocumentTitle title={"Typey Type | Progress"}>
+                <ErrorBoundary>
+                  <Suspense fallback={<PageLoading pastDelay={true} />}>
+                    <AsyncProgress
+                      metWords={appState.metWords}
+                      lessonsProgress={appState.lessonsProgress}
+                      startingMetWordsToday={appState.startingMetWordsToday}
+                      yourSeenWordCount={appState.yourSeenWordCount}
+                      yourMemorisedWordCount={appState.yourMemorisedWordCount}
+                    />
+                  </Suspense>
+                </ErrorBoundary>
+              </DocumentTitle>
+            </div>
+          </Route>
           <Route path="/flashcards">
             <div>
               <Header />
