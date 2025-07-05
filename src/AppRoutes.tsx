@@ -275,25 +275,22 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
               </div>
             )}
           />
-          <Route
-            path="/flashcards"
-            render={() => (
-              <div>
-                <Header />
-                <DocumentTitle title={"Typey Type | Flashcards"}>
-                  <AsyncFlashcards
-                    globalLookupDictionary={appState.globalLookupDictionary}
-                    globalLookupDictionaryLoaded={
-                      appState.globalLookupDictionaryLoaded
-                    }
-                    lessonpath="flashcards"
-                    locationpathname={appProps.location.pathname}
-                    personalDictionaries={appState.personalDictionaries}
-                  />
-                </DocumentTitle>
-              </div>
-            )}
-          />
+          <Route path="/flashcards">
+            <div>
+              <Header />
+              <DocumentTitle title={"Typey Type | Flashcards"}>
+                <AsyncFlashcards
+                  globalLookupDictionary={appState.globalLookupDictionary}
+                  globalLookupDictionaryLoaded={
+                    appState.globalLookupDictionaryLoaded
+                  }
+                  lessonpath="flashcards"
+                  locationpathname={appProps.location.pathname}
+                  personalDictionaries={appState.personalDictionaries}
+                />
+              </DocumentTitle>
+            </div>
+          </Route>
           <Route
             path="/lookup"
             render={(props) => (
@@ -358,7 +355,9 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                       lessonNotFound={appState.lessonNotFound}
                       lessonSubTitle={appState.lesson.subtitle}
                       lessonTitle={appState.lesson.title}
-                      lessonLength={appProps.stateLesson.presentedMaterial.length}
+                      lessonLength={
+                        appProps.stateLesson.presentedMaterial.length
+                      }
                       lesson={appState.lesson}
                       actualText={appState.actualText}
                       completedPhrases={appProps.completedMaterial}
