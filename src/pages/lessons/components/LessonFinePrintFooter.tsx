@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
+import { useLocation } from "react-router-dom";
 import GoogleAnalytics from "react-ga4";
 import OutboundLink from "../../../components/OutboundLink";
 import makeDownloadHref from "../../../utils/makeDownloadHref";
@@ -8,7 +9,6 @@ import type { Lesson, StenoDictionary } from "../../../types";
 type Props = {
   lesson: Lesson;
   lessonTitle: string;
-  locationPathname: string;
 };
 
 // fullURL = "https://docs.google.com/forms/d/e/1FAIpQLSda64Wi5L-eVzZVo6HLJ2xnD9cu83H2-2af3WEE2atFiaoKyw/viewform?usp=pp_url&entry.1884511690=lesson&entry.1202724812&entry.936119214";
@@ -18,11 +18,8 @@ const googleFormParam = "&entry.1202724812&entry.936119214";
 
 const initialLessonDict: StenoDictionary = {};
 
-const LessonFinePrintFooter = ({
-  lesson,
-  lessonTitle,
-  locationPathname,
-}: Props) => {
+const LessonFinePrintFooter = ({ lesson, lessonTitle }: Props) => {
+  const location = useLocation();
   const [lessonHintsAsDict, setLessonHintsAsDict] = useState({});
 
   const downloadLessonAsDictHref = useMemo(
@@ -52,7 +49,7 @@ const LessonFinePrintFooter = ({
         <a
           href={
             googleFormURL +
-            encodeURIComponent(locationPathname) +
+            encodeURIComponent(location.pathname) +
             googleFormParam
           }
           className="text-small mt0"

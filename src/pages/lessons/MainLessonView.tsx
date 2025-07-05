@@ -310,7 +310,6 @@ const MainLessonView = ({
               <LessonFinePrintFooter
                 lesson={lesson}
                 lessonTitle={lessonTitle}
-                locationPathname={location?.pathname || ""}
               />
             </div>
           </div>

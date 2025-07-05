@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import { useAtom } from "jotai";
 import LessonCanvasFooter from "./LessonCanvasFooter";
 import FinishedZeroAndEmptyStateMessage from "./FinishedZeroAndEmptyState";
@@ -62,8 +61,6 @@ const Finished = ({
   updatePreset,
   updateRevisionMaterial,
 }: FinishedProps) => {
-  const location = useLocation();
-
   const [chartData, setChartData] = useState<TransformedData>(null);
   const [confettiConfig, setConfettiConfig] = useState<ConfettiConfig>(null);
   const [topSpeedPersonalBest, setTopSpeedPersonalBest] = useAtom(
@@ -225,11 +222,7 @@ const Finished = ({
               updatePreset={updatePreset}
             />
           </div>
-          <LessonFinePrintFooter
-            lesson={lesson}
-            lessonTitle={lessonTitle}
-            locationPathname={location?.pathname || ""}
-          />
+          <LessonFinePrintFooter lesson={lesson} lessonTitle={lessonTitle} />
         </div>
         <div>
           <UserSettings
