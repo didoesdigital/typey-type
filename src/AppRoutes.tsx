@@ -261,7 +261,7 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
                 <Header />
                 <DocumentTitle title={"Typey Type | Progress"}>
                   <ErrorBoundary>
-                    <Suspense fallback={<PageLoading />}>
+                    <Suspense fallback={<PageLoading pastDelay={true} />}>
                       <AsyncProgress
                         metWords={appState.metWords}
                         lessonsProgress={appState.lessonsProgress}

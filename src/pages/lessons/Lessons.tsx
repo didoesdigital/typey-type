@@ -60,7 +60,7 @@ const Lessons = ({
   focusTriggerInt,
 }: LessonsRoutingProps) => {
   return (
-    <Suspense fallback={<PageLoading />}>
+    <Suspense fallback={<PageLoading pastDelay={true} />}>
       <Switch>
         <Route
           path={`${match.url}/:category/:subcategory/:lessonPath/flashcards`}

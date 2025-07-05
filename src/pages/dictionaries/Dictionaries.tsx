@@ -63,7 +63,7 @@ const Dictionaries = ({
             `${url}/plover/:dictionaryPath`,
           ]}
         >
-          <Suspense fallback={<PageLoading />}>
+          <Suspense fallback={<PageLoading pastDelay={true} />}>
             <AsyncDictionary />
           </Suspense>
         </Route>
@@ -77,7 +77,7 @@ const Dictionaries = ({
           />
         </Route>
         <Route exact={true} path={url}>
-          <Suspense fallback={<PageLoading />}>
+          <Suspense fallback={<PageLoading pastDelay={true} />}>
             <DictionariesIndex
               userSettings={userSettings}
               globalLookupDictionary={globalLookupDictionary}
