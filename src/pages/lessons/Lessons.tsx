@@ -585,15 +585,11 @@ const Lessons = ({
             />
           )}
         />
-        <Route
-          exact={true}
-          path={match.url}
-          render={() => (
-            <Suspense fallback={<PageLoading />}>
-              <LessonsIndex customLesson={customLesson} />
-            </Suspense>
-          )}
-        />
+        <Route exact={true} path={match.url}>
+          <Suspense fallback={<PageLoading pastDelay={true} />}>
+            <LessonsIndex customLesson={customLesson} />
+          </Suspense>
+        </Route>
       </Switch>
     </Suspense>
   );
