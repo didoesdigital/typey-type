@@ -64,9 +64,9 @@ const LessonCanvasFooter = ({
     <div className="flex flex-wrap mx-auto mw-1440 justify-between text-small">
       <Metronome />
       <div className="flex flex-wrap content-center">
-        <fieldset className="dc hide-sm">
+        <fieldset aria-labelledby="study-type-legend" className="dc hide-sm">
           <p>
-            <legend className="flex mr3">
+            <legend id="study-type-legend" className="flex mr3">
               <button
                 className="de-emphasized-button text-small"
                 onClick={handleOpenStudyTypeModal}
