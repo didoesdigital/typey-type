@@ -8,7 +8,7 @@ import LessonOverview from "./LessonOverview";
 import LessonSubheader from "./components/LessonSubheader";
 import Finished from "./components/Finished";
 import Flashcards from "./flashcards/Flashcards";
-import { loadPersonalPreferences } from 'utils/storage';
+import { loadPersonalPreferences } from "utils/storage";
 import getLessonMetadata from "./utilities/getLessonMetadata";
 import MainLessonView from "./MainLessonView";
 import { LessonProps } from "./types";
@@ -407,27 +407,24 @@ const Lesson = ({
     } else {
       return (
         <Switch>
-          <Route
-            path={`/lessons/:category/:subcategory?/:lessonPath/overview`}
-            render={() => (
-              <div>
-                <ErrorBoundary>
-                  <DocumentTitle title={"Typey Type | Lesson overview"}>
-                    <LessonOverview
-                      lessonIndex={lessonIndex}
-                      lessonMetadata={metadata}
-                      lessonPath={location.pathname.replace("overview", "")}
-                      lessonTxtPath={location.pathname.replace(
-                        "overview",
-                        "lesson.txt"
-                      )}
-                      lessonTitle={lesson.title}
-                    />
-                  </DocumentTitle>
-                </ErrorBoundary>
-              </div>
-            )}
-          />
+          <Route path={`/lessons/:category/:subcategory?/:lessonPath/overview`}>
+            <div>
+              <ErrorBoundary>
+                <DocumentTitle title={"Typey Type | Lesson overview"}>
+                  <LessonOverview
+                    lessonIndex={lessonIndex}
+                    lessonMetadata={metadata}
+                    lessonPath={location.pathname.replace("overview", "")}
+                    lessonTxtPath={location.pathname.replace(
+                      "overview",
+                      "lesson.txt"
+                    )}
+                    lessonTitle={lesson.title}
+                  />
+                </DocumentTitle>
+              </ErrorBoundary>
+            </div>
+          </Route>
           <Route
             path={`/lessons/:category/:subcategory?/:lessonPath/flashcards`}
             render={() => (
