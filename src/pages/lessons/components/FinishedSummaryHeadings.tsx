@@ -101,6 +101,7 @@ const FinishedSummaryHeadings = ({
         width={canvasWidth}
         height={canvasHeight}
         className="fixed celebration-canvas top-0 left-0 pointer-none"
+        role="presentation"
       />
       <h3
         className="dib text-center mt3"

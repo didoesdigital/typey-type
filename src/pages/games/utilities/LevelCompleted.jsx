@@ -96,6 +96,7 @@ export default React.memo(function LevelCompleted({
         width={canvasWidth}
         height={canvasHeight}
         className="fixed celebration-canvas top-0 left-0 pointer-none"
+        role="presentation"
       />
       <div
         // @ts-expect-error TS(2322) FIXME: Type 'string' is not assignable to type 'number'.

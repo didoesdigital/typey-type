@@ -88,6 +88,7 @@ export default React.memo(function Completed({ gameName, dispatch }) {
         width={canvasWidth}
         height={canvasHeight}
         className="fixed celebration-canvas top-0 left-0 pointer-none"
+        role="presentation"
       />
       <div
         id="you-win"
@@ -111,7 +112,9 @@ export default React.memo(function Completed({ gameName, dispatch }) {
         </button>
       </p>
       <p className="mx-auto text-center mt3">
-        <Link to="/games" className="text-center py1">Games</Link>
+        <Link to="/games" className="text-center py1">
+          Games
+        </Link>
       </p>
     </>
   );

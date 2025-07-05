@@ -233,6 +233,7 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
           width={canvasWidth}
           height={canvasHeight}
           className="fixed top-0 left-0 celebration-canvas pointer-none"
+          role="presentation"
         />
         {state.gameComplete ? (
           <>
