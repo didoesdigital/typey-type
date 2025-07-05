@@ -605,6 +605,10 @@ input:focus::placeholder {
 .type-face--sans-serif {
   font-family: $type-face--sans-serif;
   font-weight: 300;
+  
+  strong {
+    font-weight: 700;
+  }
 }
 
 .type-face--korean {

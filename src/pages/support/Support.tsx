@@ -450,34 +450,68 @@ const Support = () => {
 
           <h4 id="screen-readers">Screen readers</h4>
           <p>
-            If you use macOS and VoiceOver with Typey&nbsp;Type, I suggest the
-            following:
+            If you use Typey&nbsp;Type with a screen reader, I suggest you turn
+            off the “Screen reader echoes” setting in the settings panel of any
+            lesson. This will stop screen readers from announcing each of your
+            completed words as deleted text and also avoid announcing “Write”
+            before each word.
+          </p>
+          <p>
+            If you use <strong>Windows and NVDA</strong> with Typey&nbsp;Type, I
+            suggest the following:
           </p>
           <ul>
             <li>
-              In a Typey&nbsp;Type lesson, turn off the “Screen reader echoes”
-              setting in the settings panel. This will stop VoiceOver from
-              announcing each of your completed words as deleted text. It will
-              also avoid announcing “Write” before each word.
+              In the NVDA Settings:
+              <ul>
+                <li>
+                  If announcements of what you've written are too noisy, go to
+                  the Keyboard category and set “Speak typed words” to “Off” and
+                  set “Speak typed characters” to “Off”. You might also turn off
+                  “Speech interrupt for typed characters”.
+                </li>
+              </ul>
             </li>
+          </ul>
+          <p>
+            If you use <strong>Windows and Narrator</strong> with
+            Typey&nbsp;Type, I suggest the following:
+          </p>
+          <ul>
+            <li>
+              In the Narrator settings:
+              <ul>
+                <li>
+                  If announcements of what you've written are too noisy, expand
+                  “Have Narrator announce when I type” and uncheck “Letters,
+                  numbers, and punctuation” and “Words”.
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <p>
+            If you use <strong>macOS and VoiceOver</strong> with
+            Typey&nbsp;Type, I suggest the following:
+          </p>
+          <ul>
             <li>Use Safari rather than other browsers for better support.</li>
             <li>
               In the VoiceOver Utility:
               <ul>
                 <li>
-                  Under Hints, turn off “Speak instructions for using the item
-                  in the VoiceOver cursor” so it doesn't instructions on every
-                  typed word. Otherwise, you could also set “Speak hints after
-                  delay” to Long.
+                  If announcements of what you've written are too noisy, set
+                  “While typing speak” to “Nothing” instead of the default
+                  option of “Characters and Words”.
                 </li>
                 <li>
                   Under Text, set “When deleting text” to “Do Nothing” to reduce
                   sounds during multi-stroke words.
                 </li>
                 <li>
-                  If letter-by-letter announcements of whole words you've
-                  written is too noisy, set “While typing speak” to “Nothing”
-                  instead of the default option of “Characters and Words”.
+                  Under Hints, turn off “Speak instructions for using the item
+                  in the VoiceOver cursor” so it doesn't announce instructions
+                  on every typed word. Otherwise, you could also set “Speak
+                  hints after delay” to Long.
                 </li>
               </ul>
             </li>
