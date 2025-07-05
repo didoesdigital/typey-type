@@ -228,19 +228,16 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
               </div>
             )}
           />
-          <Route
-            path="/break"
-            render={() => (
-              <div>
-                <Header />
-                <DocumentTitle title={"Typey Type | Take a break"}>
-                  <ErrorBoundary>
-                    <AsyncBreak />
-                  </ErrorBoundary>
-                </DocumentTitle>
-              </div>
-            )}
-          />
+          <Route path="/break">
+            <div>
+              <Header />
+              <DocumentTitle title={"Typey Type | Take a break"}>
+                <ErrorBoundary>
+                  <AsyncBreak />
+                </ErrorBoundary>
+              </DocumentTitle>
+            </div>
+          </Route>
           <Route path="/contribute">
             <div>
               <Header />
