@@ -178,20 +178,17 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
               </div>
             )}
           />
-          <Route
-            path="/support"
-            render={() => (
-              <div>
-                <Header />
+          <Route path="/support">
+            <div>
+              <Header />
 
-                <DocumentTitle title={"Typey Type | About"}>
-                  <ErrorBoundary>
-                    <AsyncSupport />
-                  </ErrorBoundary>
-                </DocumentTitle>
-              </div>
-            )}
-          />
+              <DocumentTitle title={"Typey Type | About"}>
+                <ErrorBoundary>
+                  <AsyncSupport />
+                </ErrorBoundary>
+              </DocumentTitle>
+            </div>
+          </Route>
           <Route
             path="/writer"
             render={(props) => (
