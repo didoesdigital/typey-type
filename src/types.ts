@@ -436,6 +436,7 @@ export type UserSettings = {
   hideStrokesOnLastRepetition: boolean;
   spacePlacement: SpacePlacement;
   speakMaterial: boolean;
+  /** "Screen reader echoes". This hides setting causes the TypedText textarea to re-mount for each completed word and re-focus it so that a screen reader never announces the deletion of completed word by React. It also changes the label to remove "Write " after the lesson has started. Historically, this setting controlled a hack to add aria-hidden to the textarea's parent to prevent screen readers announcing typed and completed/deleted words but macOS Safari and Chrome now announce them anyway. */
   textInputAccessibility: boolean;
   sortOrder: SortOrder;
   seenWords: boolean;

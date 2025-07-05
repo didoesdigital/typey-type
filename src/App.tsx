@@ -907,6 +907,11 @@ class App extends Component<Props, AppState> {
 
       state.yourSeenWordCount = calculateSeenWordCount(state.metWords);
       state.yourMemorisedWordCount = calculateMemorisedWordCount(state.metWords);
+
+      let screenReaderEchoes = this.props.userSettings.textInputAccessibility
+      if (!screenReaderEchoes) {
+        state.focusTriggerInt = state.focusTriggerInt + 1;
+      }
     }
 
     if (this.isFinished(state)) {

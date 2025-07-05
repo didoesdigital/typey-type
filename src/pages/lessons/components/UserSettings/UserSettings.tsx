@@ -699,14 +699,14 @@ const UserSettings = ({
                   <SettingCheckbox
                     checked={userSettings.textInputAccessibility}
                     disabled={disableUserSettings}
-                    label={"Text input accessibility"}
+                    label={"Screen reader echoes"}
                     nameAndId={"textInputAccessibility"}
                     onChange={changeUserSetting}
                   />
                   <InfoIconAndTooltip
                     id="textInputAccessibilityTooltip"
                     place="top-end"
-                    content="When unchecked, this hides the text input field from screen readers to mute echoes from typed words but might make it impossible to access for some devices"
+                    content="When unchecked, this adjusts the main text area for screen readers so that it mutes echoes from completed words and so it does not repeat the text area name"
                   />
                 </div>
               </SettingListItem>

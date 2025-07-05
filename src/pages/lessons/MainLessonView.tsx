@@ -260,6 +260,7 @@ const MainLessonView = ({
                       actualText={actualText}
                       currentLessonStrokes={currentLessonStrokes}
                       currentPhrase={currentPhrase}
+                      currentPhraseID={currentPhraseID}
                       completedPhrases={lesson.newPresentedMaterial.completed}
                       previousCompletedPhraseAsTyped={
                         previousCompletedPhraseAsTyped

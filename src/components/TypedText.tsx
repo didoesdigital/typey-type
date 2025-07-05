@@ -8,6 +8,7 @@ import { userSettingsState } from "../states/userSettingsState";
 type Props = {
   actualText: string;
   completedPhrases: any;
+  currentPhraseID: number;
   currentLessonStrokes: CurrentLessonStrokes[];
   currentPhrase: string;
   previousCompletedPhraseAsTyped: string;
@@ -86,8 +87,7 @@ const TypedText = (props: Props) => {
   let strokes = props.currentLessonStrokes;
   let previousCompletedPhraseAccuracy =
     strokes && strokes.length > 0 ? strokes[strokes.length - 1].accuracy : true;
-  let textInputAccessibilityAriaHidden =
-    !userSettings.textInputAccessibility;
+  let hideEchoesFromScreenReaders = !userSettings.textInputAccessibility;
 
   let sayCurrentPhraseButton = null;
   if (userSettings && userSettings.speakMaterial) {
@@ -106,7 +106,9 @@ const TypedText = (props: Props) => {
     <div className={isMultiline ? "mx-auto mw-844" : ""}>
       <div className="typed-text-container relative">
         <label className="visually-hidden mb1" htmlFor="your-typed-text">
-          {`Write ${props.currentPhrase}`}
+          {hideEchoesFromScreenReaders && props.currentPhraseID > 0
+            ? `${props.currentPhrase}`
+            : `Write ${props.currentPhrase}`}
         </label>
         {sayCurrentPhraseButton}
         <p className="input-text mx-auto">
@@ -133,7 +135,7 @@ const TypedText = (props: Props) => {
               </CSSTransition>
             </TransitionGroup>
           </samp>
-          <span aria-hidden={textInputAccessibilityAriaHidden}>
+          <span>
             <textarea
               autoCapitalize="off"
               autoComplete="off"
@@ -142,6 +144,11 @@ const TypedText = (props: Props) => {
                 isMultiline ? " text-center" : ""
               }`}
               id="your-typed-text"
+              key={
+                hideEchoesFromScreenReaders
+                  ? `remount-${props.currentPhraseID}`
+                  : "stableKey"
+              }
               ref={inputRef}
               data-testid="your-typed-text"
               aria-describedby={
