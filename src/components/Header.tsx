@@ -52,6 +52,17 @@ const Header = () => {
                 </h1>
               </Link>
             </div>
+            <div className="screen-reader-tips">
+              <p className="visually-hidden text-violet-200">
+                If you use a screen reader, I suggest reading the screen reader
+                tips on the About page, such as turning off the setting for
+                “screen reader echoes”.
+              </p>
+              <p className="visually-hidden text-violet-200">
+                Please let me (Di) know if you have any feedback about your
+                experience using Typey Type with a screen reader.
+              </p>
+            </div>
             <div className="nav-menu-xs">
               <Link
                 to="/progress"
