@@ -216,7 +216,6 @@ const MainLessonView = ({
                   </div>
                 </AnimateHeight>
                 <div
-                  role="article"
                   className="lesson-canvas panel overflow-hidden flex relative bg-white dark:bg-coolgrey-1000 mx-auto mw-1440 p2 mb3 flex"
                 >
                   {revisionMode && (

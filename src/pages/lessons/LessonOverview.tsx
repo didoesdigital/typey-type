@@ -72,7 +72,7 @@ const LessonOverview = ({
           process.env.PUBLIC_URL + lessonTxtPath
         );
         updateLessonOverviewContent(metadata);
-      } catch(e: unknown) {
+      } catch (e: unknown) {
         setError(true);
         console.error(e);
       }
@@ -90,7 +90,7 @@ const LessonOverview = ({
           <div className="flex mr1 self-center">
             <header className="flex items-center min-h-40">
               <h2 className="table-cell mr2" ref={mainHeading} tabIndex={-1}>
-                {title} overview
+                {`${title} overview`}
               </h2>
             </header>
           </div>
@@ -107,7 +107,7 @@ const LessonOverview = ({
         <div>
           {error ? (
             <div className="mx-auto mw-1024 p3">
-              <div role="article" className="mw-1024 mb3 mt3">
+              <div className="mw-1024 mb3 mt3">
                 <div className="mx-auto mw100 mt3 mb3 text-center">
                   That overview couldn’t be found.{" "}
                   <Link to={lessonPath}>Back to lesson</Link>.
