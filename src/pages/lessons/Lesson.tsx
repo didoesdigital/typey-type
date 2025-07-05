@@ -409,7 +409,7 @@ const Lesson = ({
         <Switch>
           <Route
             path={`/lessons/:category/:subcategory?/:lessonPath/overview`}
-            render={(routeProps) => (
+            render={() => (
               <div>
                 <ErrorBoundary>
                   <DocumentTitle title={"Typey Type | Lesson overview"}>
@@ -422,7 +422,6 @@ const Lesson = ({
                         "lesson.txt"
                       )}
                       lessonTitle={lesson.title}
-                      {...routeProps}
                     />
                   </DocumentTitle>
                 </ErrorBoundary>
