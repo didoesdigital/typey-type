@@ -4,10 +4,11 @@ import ComponentLoadingFailed from "./ComponentLoadingFailed";
 import ComponentLoadingPastDelay from "./ComponentLoadingPastDelay";
 
 type Props = {
-  error: any;
-  timedOut: any;
-  retry: any;
-  pastDelay: any;
+  isLoading?: boolean;
+  error?: any;
+  timedOut?: boolean;
+  retry?: () => void;
+  pastDelay?: boolean;
 };
 
 const ComponentLoading = (props: Props) => {
