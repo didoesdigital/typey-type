@@ -241,19 +241,16 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
               </div>
             )}
           />
-          <Route
-            path="/contribute"
-            render={() => (
-              <div>
-                <Header />
-                <DocumentTitle title={"Typey Type | Contribute"}>
-                  <ErrorBoundary>
-                    <AsyncContribute />
-                  </ErrorBoundary>
-                </DocumentTitle>
-              </div>
-            )}
-          />
+          <Route path="/contribute">
+            <div>
+              <Header />
+              <DocumentTitle title={"Typey Type | Contribute"}>
+                <ErrorBoundary>
+                  <AsyncContribute />
+                </ErrorBoundary>
+              </DocumentTitle>
+            </div>
+          </Route>
           <Route path="/progress">
             <div>
               <Header />
