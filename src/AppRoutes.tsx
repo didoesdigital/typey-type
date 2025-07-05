@@ -165,19 +165,15 @@ const AppRoutes: React.FC<Props> = ({ appProps, appState }) => {
       <Announcer />
       <div>
         <Switch>
-          <Route
-            exact={true}
-            path="/"
-            render={() => (
-              <div>
-                <Header />
+          <Route exact={true} path="/">
+            <div>
+              <Header />
 
-                <DocumentTitle title="Typey Type for Stenographers">
-                  <AsyncHome />
-                </DocumentTitle>
-              </div>
-            )}
-          />
+              <DocumentTitle title="Typey Type for Stenographers">
+                <AsyncHome />
+              </DocumentTitle>
+            </div>
+          </Route>
           <Route path="/support">
             <div>
               <Header />
