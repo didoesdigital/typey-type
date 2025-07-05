@@ -10,7 +10,7 @@ const PageLoadingPastDelay = () => {
   }, []);
 
   return (
-    <main id="main">
+    <main id="main" aria-busy="true">
       <Subheader>
         <div className="flex mr1 self-center">
           <header className="flex items-center min-h-40">
