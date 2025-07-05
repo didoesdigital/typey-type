@@ -53,7 +53,6 @@ export type LessonProps = {
   lessonNotFound: any;
   lessonSubTitle: any;
   lessonTitle: PrettyLessonTitle;
-  location: any;
   match: any;
   metWords: MetWords;
   personalDictionaries?: ImportedPersonalDictionaries;

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Link, Route, Switch, useHistory } from "react-router-dom";
+import { Link, Route, Switch, useHistory, useLocation } from "react-router-dom";
 import queryString from "query-string";
 import DocumentTitle from "react-document-title";
 import ErrorBoundary from "../../components/ErrorBoundary";
@@ -59,7 +59,6 @@ const Lesson = ({
   lessonNotFound,
   lessonSubTitle: lessonSubTitleProp,
   lessonTitle,
-  location,
   match,
   metWords,
   personalDictionaries,
@@ -80,6 +79,7 @@ const Lesson = ({
   upcomingPhrases,
   focusTriggerInt,
 }: LessonProps) => {
+  const location = useLocation();
   const history = useHistory();
 
   const {
