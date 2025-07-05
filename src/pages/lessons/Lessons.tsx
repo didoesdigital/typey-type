@@ -445,23 +445,19 @@ const Lessons = ({
             </DocumentTitle>
           )}
         />
-        <Route
-          exact={true}
-          path={`${match.url}/custom/generator`}
-          render={() => (
-            <DocumentTitle title="Typey Type | Lesson generator">
-              <ErrorBoundary>
-                <AsyncCustomLessonGenerator
-                  customLesson={customLesson}
-                  customLessonMaterialValidationState={
-                    customLessonMaterialValidationState
-                  }
-                  globalLookupDictionary={globalLookupDictionary}
-                />
-              </ErrorBoundary>
-            </DocumentTitle>
-          )}
-        />
+        <Route exact={true} path={`${match.url}/custom/generator`}>
+          <DocumentTitle title="Typey Type | Lesson generator">
+            <ErrorBoundary>
+              <AsyncCustomLessonGenerator
+                customLesson={customLesson}
+                customLessonMaterialValidationState={
+                  customLessonMaterialValidationState
+                }
+                globalLookupDictionary={globalLookupDictionary}
+              />
+            </ErrorBoundary>
+          </DocumentTitle>
+        </Route>
         <Route
           exact={true}
           path={`${match.url}/custom`}
