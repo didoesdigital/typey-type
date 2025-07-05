@@ -427,27 +427,26 @@ const Lesson = ({
           </Route>
           <Route
             path={`/lessons/:category/:subcategory?/:lessonPath/flashcards`}
-            render={() => (
-              <div>
-                <DocumentTitle title={"Typey Type | Flashcards"}>
-                  <Flashcards
-                    fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
-                    globalLookupDictionary={globalLookupDictionary}
-                    globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
-                    personalDictionaries={personalDictionaries}
-                    updateGlobalLookupDictionary={updateGlobalLookupDictionary}
-                    updatePersonalDictionaries={updatePersonalDictionaries}
-                    lessonpath={
-                      process.env.PUBLIC_URL +
-                      location.pathname.replace(/flashcards/, "") +
-                      "lesson.txt"
-                    }
-                    locationpathname={location.pathname}
-                  />
-                </DocumentTitle>
-              </div>
-            )}
-          />
+          >
+            <div>
+              <DocumentTitle title={"Typey Type | Flashcards"}>
+                <Flashcards
+                  fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
+                  globalLookupDictionary={globalLookupDictionary}
+                  globalLookupDictionaryLoaded={globalLookupDictionaryLoaded}
+                  personalDictionaries={personalDictionaries}
+                  updateGlobalLookupDictionary={updateGlobalLookupDictionary}
+                  updatePersonalDictionaries={updatePersonalDictionaries}
+                  lessonpath={
+                    process.env.PUBLIC_URL +
+                    location.pathname.replace(/flashcards/, "") +
+                    "lesson.txt"
+                  }
+                  locationpathname={location.pathname}
+                />
+              </DocumentTitle>
+            </div>
+          </Route>
           <Route
             exact={true}
             path={`${match.url}`}
