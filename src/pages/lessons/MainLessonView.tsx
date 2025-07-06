@@ -38,7 +38,7 @@ import { userSettingsState } from "../../states/userSettingsState";
 import { useChangeShowScoresWhileTyping } from "./components/UserSettings/updateUserSetting";
 import { recentLessonHistoryState } from "../../states/recentLessonHistoryState";
 
-type MainLessonViewProps = {
+export type MainLessonViewProps = {
   createNewCustomLesson: JSX.Element | undefined;
   lessonSubTitle: string;
   overviewLink: JSX.Element | undefined;

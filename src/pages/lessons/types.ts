@@ -12,6 +12,7 @@ import type {
   MaterialText,
   ActualTypedText,
 } from "../../types";
+import type { MainLessonViewProps } from "pages/lessons/MainLessonView";
 
 export type LessonData = {
   version: number;
@@ -38,40 +39,42 @@ export type TransformedData = {
   dataPoints?: DataPoint[];
 } | null;
 
-export type LessonProps = {
-  actualText: string;
-  completedPhrases: any;
-  currentLessonStrokes: CurrentLessonStrokes[];
-  currentPhrase: string;
-  currentPhraseID: number;
-  currentStroke: string;
-  disableUserSettings: boolean;
-  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
-  globalLookupDictionaryLoaded: any;
-  lesson: Lesson;
-  lessonLength: number;
-  lessonNotFound: any;
-  lessonSubTitle: any;
-  lessonTitle: PrettyLessonTitle;
+export type LessonProps = Pick<
+  MainLessonViewProps,
+  | "totalNumberOfHintedWords"
+  | "totalNumberOfLowExposuresSeen"
+  | "totalNumberOfMatchedWords"
+  | "totalNumberOfMistypedWords"
+  | "totalNumberOfNewWordsMet"
+  | "totalNumberOfRetainedWords"
+  | "totalWordCount"
+  | "actualText"
+  | "completedPhrases"
+  | "currentLessonStrokes"
+  | "currentPhrase"
+  | "currentPhraseID"
+  | "currentStroke"
+  | "disableUserSettings"
+  | "globalLookupDictionary"
+  | "globalLookupDictionaryLoaded"
+  | "lesson"
+  | "lessonLength"
+  | "lessonSubTitle"
+  | "lessonTitle"
+  | "previousCompletedPhraseAsTyped"
+  | "repetitionsRemaining"
+  | "settings"
+  | "showStrokesInLesson"
+  | "targetStrokeCount"
+  | "timer"
+  | "focusTriggerInt"
+> & {
+  lessonNotFound: boolean; // To show <LessonNotFound />
   match: any;
   metWords: MetWords;
   personalDictionaries?: ImportedPersonalDictionaries;
-  previousCompletedPhraseAsTyped: string;
-  repetitionsRemaining: number;
-  settings: any;
-  showStrokesInLesson: any;
   startTime: number | null;
-  targetStrokeCount: any;
-  timer: number;
-  totalNumberOfHintedWords: any;
-  totalNumberOfLowExposuresSeen: any;
-  totalNumberOfMatchedWords: any;
-  totalNumberOfMistypedWords: any;
-  totalNumberOfNewWordsMet: any;
-  totalNumberOfRetainedWords: any;
-  totalWordCount: any;
-  upcomingPhrases: any;
-  focusTriggerInt: number;
+  upcomingPhrases: MainLessonViewProps["upcomingPhrases"] | any;
 };
 
 export type FinishedProps = Pick<
