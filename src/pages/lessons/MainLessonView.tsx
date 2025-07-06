@@ -30,6 +30,7 @@ import type {
   LookupDictWithNamespacedDictsAndConfig,
   Outline,
   Study,
+  PrettyLessonTitle,
 } from "../../types";
 
 import { useAtomValue } from "jotai";
@@ -59,7 +60,7 @@ type MainLessonViewProps = {
   toggleHideOtherSettings: () => void;
   lesson: Lesson;
   lessonLength: number;
-  lessonTitle: string;
+  lessonTitle: PrettyLessonTitle;
   previousCompletedPhraseAsTyped: ActualTypedText;
   repetitionsRemaining: number;
   restartLesson: React.MouseEventHandler<HTMLAnchorElement>;
