@@ -301,7 +301,7 @@ const Lesson = ({
   };
 
   if (lessonNotFound) {
-    return <LessonNotFound lessonIndex={lessonIndex} />;
+    return <LessonNotFound />;
   }
 
   const lessonSubTitle =
