@@ -71,10 +71,10 @@ export type LessonProps = Pick<
 > & {
   lessonNotFound: boolean; // To show <LessonNotFound />
   match: any;
-  metWords: MetWords;
-  personalDictionaries?: ImportedPersonalDictionaries;
+  metWords: MetWords; // For Finished props
+  personalDictionaries?: ImportedPersonalDictionaries; // For Flashcards props
   startTime: number | null;
-  upcomingPhrases: MainLessonViewProps["upcomingPhrases"] | any;
+  upcomingPhrases: MainLessonViewProps["upcomingPhrases"] | any; // Should be picked above but not ready to pass correct type down yet
 };
 
 export type FinishedProps = Pick<
@@ -104,5 +104,7 @@ export type FinishedProps = Pick<
   reviseLesson: any;
   revisionMode: any;
   updatePreset: (studyType: Study) => void;
-  updateRevisionMaterial: (event: React.ChangeEvent<HTMLInputElement>) => boolean;
+  updateRevisionMaterial: (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => boolean;
 };
