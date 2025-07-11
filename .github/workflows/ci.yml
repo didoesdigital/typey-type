@@ -21,14 +21,5 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      - name: Check TypeScript
-        run: yarn tsc --version
-
       - name: Check TypeScript compiles
         run: yarn run types
-
-      - name: List files in the repository
-        run: |
-          ls -FA ${{ github.workspace }}
-
-      - run: echo "This job's status is ${{ job.status }}."
