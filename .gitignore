@@ -100,3 +100,6 @@ Thumbs.db
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Ignore Storybook built files compiled for production
+storybook-static
