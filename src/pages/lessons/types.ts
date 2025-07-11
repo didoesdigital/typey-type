@@ -1,12 +1,9 @@
 import type { LessonCanvasFooterProps } from "pages/lessons/components/LessonCanvasFooter";
 import type {
   // CurrentLessonStrokes,
-  Lesson,
   MetWords,
-  PrettyLessonTitle,
   Study,
   CurrentLessonStrokes,
-  LookupDictWithNamespacedDictsAndConfig,
   ImportedPersonalDictionaries,
   Outline,
   MaterialText,
