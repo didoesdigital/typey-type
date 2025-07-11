@@ -103,3 +103,6 @@ Thumbs.db
 
 # Ignore Storybook built files compiled for production
 storybook-static
+
+# Ignore TypeScript file for storing incremental compilation information
+*.tsbuildinfo
