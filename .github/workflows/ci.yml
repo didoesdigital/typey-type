@@ -7,10 +7,16 @@ jobs:
   check-types:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "This job was automatically triggered by a ${{ github.event_name }} event."
       - name: Check out repository code
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.x"
+
       - name: List files in the repository
         run: |
-          ls ${{ github.workspace }}
+          ls -FA ${{ github.workspace }}
+
       - run: echo "This job's status is ${{ job.status }}."
