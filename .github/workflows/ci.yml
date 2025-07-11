@@ -19,6 +19,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
+      - name: Check TypeScript compiles
+        run: yarn run types
+
       - name: List files in the repository
         run: |
           ls -FA ${{ github.workspace }}
