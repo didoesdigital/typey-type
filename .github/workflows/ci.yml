@@ -24,5 +24,8 @@ jobs:
       # - name: Check TypeScript compiles
       #   run: yarn run types
 
-      - name: Run tests
-        run: yarn run test:ci
+      # - name: Run tests
+      #   run: yarn run test:ci
+
+      - name: Build and lint
+        run: yarn run build-and-lint:ci

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-and-lint:ci": "CI=true react-scripts build",
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!d3-array)/\" --env=jsdom",
     "test:unit": "yarn test --testMatch \"**/*.test.{js,ts}\"",
     "test:ui": "yarn test --testMatch \"**/*.test.{jsx,tsx}\"",
