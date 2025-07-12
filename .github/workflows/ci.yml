@@ -8,7 +8,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  checks:
+  setup:
+    name: Set up environment
     runs-on: ubuntu-latest
     if: github.actor != 'dependabot[bot]'
     steps:
@@ -26,14 +27,34 @@ jobs:
       - name: 🏗️ Install dependencies
         run: yarn install --immutable
 
+  types:
+    name: Compile TypeScript
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: ☑️ Check TypeScript compiles
         run: yarn run types
 
+  tests:
+    name: Run tests
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: ☑️ Run tests
         run: yarn run test:ci
 
+  build-and-lint:
+    name: Build and lint app
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: ☑️ Build and lint
         run: yarn run build-and-lint:ci
 
+  build-storybook:
+    name: Build Storybook
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
       - name: ☑️ Build Storybook
         run: yarn run build-storybook
