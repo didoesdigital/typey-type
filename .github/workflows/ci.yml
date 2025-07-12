@@ -4,7 +4,7 @@ on:
     types: [opened, reopened, ready_for_review, synchronize]
 
 jobs:
-  check-types:
+  checks:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -21,11 +21,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable
 
-      # - name: Check TypeScript compiles
-      #   run: yarn run types
+      - name: Check TypeScript compiles
+        run: yarn run types
 
-      # - name: Run tests
-      #   run: yarn run test:ci
+      - name: Run tests
+        run: yarn run test:ci
 
       - name: Build and lint
         run: yarn run build-and-lint:ci
