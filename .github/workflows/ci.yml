@@ -30,3 +30,6 @@ jobs:
 
       - name: Build and lint
         run: yarn run build-and-lint:ci
+
+      - name: Build Storybook
+        run: yarn run build-storybook
