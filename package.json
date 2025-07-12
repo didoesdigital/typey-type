@@ -25,7 +25,7 @@
     "minimist": "^1.2.6"
   },
   "dependencies": {
-    "@sentry/browser": "^6.17.9",
+    "@sentry/browser": "^7.119.1",
     "clipboard": "^1.7.1",
     "d3-array": "^3.1.1",
     "d3-format": "^3.1.0",
