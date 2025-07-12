@@ -12,28 +12,28 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor != 'dependabot[bot]'
     steps:
-      - name: Check out repository code
+      - name: 🏗️ Check out repository code
         uses: actions/checkout@v4
         with:
           submodules: "true"
 
-      - name: Setup Node.js
+      - name: 🏗️ Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "22.x"
           cache: "yarn"
 
-      - name: Install dependencies
+      - name: 🏗️ Install dependencies
         run: yarn install --immutable
 
-      - name: Check TypeScript compiles
+      - name: ☑️ Check TypeScript compiles
         run: yarn run types
 
-      - name: Run tests
+      - name: ☑️ Run tests
         run: yarn run test:ci
 
-      - name: Build and lint
+      - name: ☑️ Build and lint
         run: yarn run build-and-lint:ci
 
-      - name: Build Storybook
+      - name: ☑️ Build Storybook
         run: yarn run build-storybook
