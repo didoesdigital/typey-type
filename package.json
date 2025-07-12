@@ -9,6 +9,7 @@
     "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!d3-array)/\" --env=jsdom",
     "test:unit": "yarn test --testMatch \"**/*.test.{js,ts}\"",
     "test:ui": "yarn test --testMatch \"**/*.test.{jsx,tsx}\"",
+    "test:ci": "CI=true yarn test --testMatch \"**/*.test.{js,ts}\"",
     "types": "yarn tsc",
     "eject": "react-scripts eject",
     "storybook": "storybook dev -p 6006",
