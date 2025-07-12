@@ -108,17 +108,5 @@
   "engines": {
     "node": ">=20.0.0"
   },
-  "eslintConfig": {
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
-  },
   "packageManager": "yarn@4.7.0"
 }
