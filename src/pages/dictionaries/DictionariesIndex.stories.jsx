@@ -4,7 +4,6 @@ import userSettings from "../../stories/fixtures/userSettings";
 import { useHydrateAtoms } from "jotai/utils";
 import { dictionaryIndexState } from "../../states/dictionaryIndexState";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Pages/DictionariesIndex",
   component: DictionariesIndex,

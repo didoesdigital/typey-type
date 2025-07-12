@@ -3,7 +3,6 @@ import FlashcardsSection from "./FlashcardsSection";
 import { useHydrateAtoms } from "jotai/utils";
 import { flashcardsRecommendationState } from "../../../states/flashcardsProgressState";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Progress/FlashcardsSection/Section on non-small screen",
   component: FlashcardsSection,

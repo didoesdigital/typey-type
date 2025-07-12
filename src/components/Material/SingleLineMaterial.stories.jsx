@@ -2,7 +2,6 @@ import React from "react";
 import SingleLineMaterialComponent from "./SingleLineMaterial";
 import userSettings from "../../stories/fixtures/userSettings.js";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Material/SingleLineMaterial",
   component: SingleLineMaterialComponent,

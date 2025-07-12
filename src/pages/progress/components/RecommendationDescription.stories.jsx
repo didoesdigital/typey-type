@@ -1,7 +1,6 @@
 import React from "react";
 import RecommendationDescription from "./RecommendationDescription";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Progress/RecommendationDescription",
   component: RecommendationDescription,

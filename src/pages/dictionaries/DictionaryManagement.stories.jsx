@@ -1,7 +1,6 @@
 import React from "react";
 import DictionaryManagement from "./DictionaryManagement";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Pages/DictionaryManagement",
   component: DictionaryManagement,

@@ -6,7 +6,6 @@ import { useHydrateAtoms } from "jotai/utils";
 import { flashcardsProgressState } from "../../../states/flashcardsProgressState";
 import AppMethodsContext from "../../../states/legacy/AppMethodsContext";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Lessons/Flashcards",
   component: Flashcards,

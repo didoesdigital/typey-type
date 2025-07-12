@@ -8,7 +8,6 @@ import { flashcardsRecommendationState } from "../../states/flashcardsProgressSt
 import { userGoalsState } from "../../states/userGoalsState";
 import { recentLessonHistoryState } from "../../states/recentLessonHistoryState";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Pages/Progress",
   component: Progress,

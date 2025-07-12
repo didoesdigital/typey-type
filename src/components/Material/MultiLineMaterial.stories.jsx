@@ -2,7 +2,6 @@ import React from "react";
 import MultiLineMaterialComponent from "./MultiLineMaterial";
 import userSettings from "../../stories/fixtures/userSettings.js";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Material/MultiLineMaterial",
   component: MultiLineMaterialComponent,

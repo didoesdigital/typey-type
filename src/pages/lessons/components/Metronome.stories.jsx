@@ -2,7 +2,6 @@ import React from "react";
 import Metronome from "./Metronome";
 import userSettings from "../../../stories/fixtures/userSettings";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Lessons/Metronome",
   component: Metronome,

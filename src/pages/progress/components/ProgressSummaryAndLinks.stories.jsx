@@ -4,7 +4,6 @@ import metWordsNovice from "../../../fixtures/metWordsNovice.json";
 import metWords10000WordsSeen10000Memorised from "../../../fixtures/metWords10000WordsSeen10000Memorised.json";
 import userSettings from "../../../stories/fixtures/userSettings";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Progress/SummaryAndLinks",
   component: ProgressSummaryAndLinks,

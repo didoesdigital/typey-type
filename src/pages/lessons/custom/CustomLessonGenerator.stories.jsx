@@ -6,7 +6,6 @@ import CustomLessonGenerator from "./CustomLessonGenerator";
 import AppMethodsContext from "../../../states/legacy/AppMethodsContext";
 import appMethods from "../../../stories/fixtures/appMethods";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Pages/CustomLessonGenerator",
   component: CustomLessonGenerator,

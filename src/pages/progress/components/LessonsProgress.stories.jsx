@@ -2,7 +2,6 @@ import React from "react";
 import LessonsProgress from "./LessonsProgress";
 import lessonIndex from "../../../stories/fixtures/lessonIndex";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Progress/LessonsProgress",
   component: LessonsProgress,

@@ -3,7 +3,6 @@ import RecentLessons from "./RecentLessons";
 import { recentLessonHistoryState } from "../../../states/recentLessonHistoryState";
 import { useHydrateAtoms } from "jotai/utils";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Progress/RecentLessons",
   component: RecentLessons,

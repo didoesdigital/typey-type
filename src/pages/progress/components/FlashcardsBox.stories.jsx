@@ -1,7 +1,6 @@
 import React from "react";
 import FlashcardsBox from "./FlashcardsBox";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Progress/FlashcardsSection/Box",
   component: FlashcardsBox,

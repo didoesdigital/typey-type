@@ -3,7 +3,6 @@ import metWordsNovice from "../../../fixtures/metWordsNovice.json";
 import RecommendationBox from "./RecommendationBox";
 import RecommendationBoxFallback from "./RecommendationBoxFallback";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Progress/RecommendationBox",
   component: RecommendationBox,

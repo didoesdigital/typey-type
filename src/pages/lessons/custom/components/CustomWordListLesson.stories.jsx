@@ -5,7 +5,6 @@ import { expect } from "@storybook/test";
 
 import CustomWordListLesson from "./CustomWordListLesson";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Lessons/Custom/CustomWordListLesson",
   component: CustomWordListLesson,

@@ -1,7 +1,6 @@
 import React from "react";
 import OutboundLink from "./OutboundLink";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Components/OutboundLink",
   component: OutboundLink,

@@ -15,7 +15,6 @@ import topProjectGutenbergWords from "./fixtures/topProjectGutenbergWords.json";
  * output of transformLessonDataToChartData and type out a lesson.
  */
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Lessons/Speed chart",
   component: FinishedSpeedChart,

@@ -2,7 +2,6 @@ import React from "react";
 import Game from "./Game";
 import metWordsBeginner from "../../../fixtures/metWordsBeginner.json";
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default {
   title: "Games/SHUFL game",
   component: Game,
