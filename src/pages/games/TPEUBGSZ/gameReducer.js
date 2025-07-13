@@ -1,5 +1,5 @@
 import { actions } from "./gameActions";
-import { makeUpAWordAndHint } from "./Utilities";
+import { makeUpAWordAndHint } from "./utilities";
 
 export const roundToWin = 3;
 export const levelToWin = 4;
