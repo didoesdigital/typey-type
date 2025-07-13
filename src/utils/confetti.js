@@ -1,5 +1,7 @@
 import { getRandomBetween } from './utils';
 
+// NOTE: see confetti.types.ts
+
 // @ts-expect-error TS(7034) FIXME: Variable 'animationFrame' implicitly has type 'any... Remove this comment to see the full error message
 let animationFrame;
 

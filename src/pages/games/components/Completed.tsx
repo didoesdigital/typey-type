@@ -4,21 +4,12 @@ import { Link } from "react-router-dom";
 import { actions } from "../utilities/gameActions";
 import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";
 import * as Confetti from "../../../utils/confetti.js";
+import type { Particles } from "utils/confetti.types";
 
 type CompletedProps = {
   gameName: string;
   dispatch: (...actions: any) => void;
 };
-
-type Particle = {
-  /** red, green, blue, alpha */
-  rgbArray: [number, number, number, number];
-  startX: number;
-  startY: number;
-  startTime: number;
-};
-
-type Particles = Particle[];
 
 const particles: Particles = [];
 
