@@ -3,19 +3,24 @@ import Intro from "../components/Intro";
 import { ReactComponent as AussieRobot } from "../../../images/AussieRobot.svg";
 import Chatbot from "react-chatbot-kit";
 import "./styles.scss";
-import makeConfig, { botName } from "./config.js";
-import MessageParser from "./MessageParser.js";
-import ActionProvider from "./ActionProvider.js";
+import makeConfig, { botName } from "./config";
+import MessageParser from "./MessageParser";
+import ActionProvider from "./ActionProvider";
+import type { LookupDictWithNamespacedDictsAndConfig } from "types";
 
 const gameName = "KHAERT";
 const introText =
   "Meet Shazza, the Aussie steno bot who loves to have a yarn. You can ask her how to write steno phrases and she'll do her best to look it up.";
 
-// @ts-expect-error TS(7031) FIXME: Binding element 'globalLookupDictionary' implicitl... Remove this comment to see the full error message
-export default function Game({ globalLookupDictionary }) {
+type Props = {
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+};
+
+export default function Game({ globalLookupDictionary }: Props) {
   const [config, setConfig] = useState(makeConfig());
 
   useEffect(() => {
+    // @ts-expect-error FIXME: needs proper types
     const newConfig = makeConfig(globalLookupDictionary);
     setConfig(newConfig);
   }, [globalLookupDictionary]);
@@ -62,7 +67,8 @@ export default function Game({ globalLookupDictionary }) {
             </div>
             <div className="flex flex-wrap pt3 pb1 ml4">
               <p className="ml3">
-                Note: Shazza is still in development and has a lot to learn! Please share feedback on what she should learn next.
+                Note: Shazza is still in development and has a lot to learn!
+                Please share feedback on what she should learn next.
               </p>
             </div>
           </div>
