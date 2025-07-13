@@ -5,20 +5,35 @@ export const roundToWin = 8;
 
 const roundToWinStorageKey = "typey-KAOES-rounds";
 
-const defaultState = {
+type KAOESState = {
+  firstGuess: boolean;
+  gameComplete: boolean;
+  roundIndex: number;
+};
+
+type KAOESActionGameRestarted = { type: typeof actions.gameRestarted };
+
+type KAOESActionMakeGuess = { type: typeof actions.makeGuess };
+
+type KAOESActionRoundCompleted = { type: typeof actions.roundCompleted };
+
+type KAOESAction =
+  | KAOESActionGameRestarted
+  | KAOESActionMakeGuess
+  | KAOESActionRoundCompleted;
+
+const defaultState: KAOESState = {
   firstGuess: true,
   gameComplete: false,
   roundIndex: 0,
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-export const initConfig = (state) => ({
+export const initConfig = (state: undefined | KAOESState): KAOESState => ({
   ...defaultState,
   ...state,
 });
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-export const gameReducer = (state, action) => {
+export const gameReducer = (state: KAOESState, action: KAOESAction) => {
   let experimentalRoundToWin = roundToWin;
 
   try {

@@ -153,14 +153,12 @@ export default function Game({
       setPuzzleText(choosePuzzleKey(clickedKey));
       setStenoStroke(new Stroke());
       setRightWrongColor(rightColor);
-      // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
       dispatch({ type: actions.roundCompleted });
     } else {
       setStenoStroke(stenoStroke.set(key));
       setRightWrongColor(wrongColor);
     }
     setPreviousStenoStroke(tmpBoard.set(key));
-    // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
     dispatch({ type: actions.makeGuess });
   };
 
@@ -195,7 +193,6 @@ export default function Game({
       setPuzzleText(choosePuzzleKey(comparableTypedKeyString));
       setStenoStroke(new Stroke());
       setRightWrongColor(rightColor);
-      // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
       dispatch({ type: actions.roundCompleted });
     } else {
       // NOTE: we don't auto-clear just *any* incorrect steno input because we
@@ -216,7 +213,6 @@ export default function Game({
       setRightWrongColor(wrongColor);
     }
     setPreviousStenoStroke(tmpBoard.set(comparableTypedKeyNumber));
-    // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
     dispatch({ type: actions.makeGuess });
   };
 
