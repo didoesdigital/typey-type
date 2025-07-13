@@ -17,7 +17,7 @@ import {
   tryStenoKeywords,
   whatQuestions,
   whoQuestions,
-} from "./constants.js";
+} from "./constants";
 import { escapeRegExp } from "../../../utils/utils";
 
 // @ts-expect-error TS(7006) FIXME: Parameter 'message' implicitly has an 'any' type.
