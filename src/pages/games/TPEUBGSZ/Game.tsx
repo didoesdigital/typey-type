@@ -9,13 +9,17 @@ import LevelCompleted from "../utilities/LevelCompleted";
 import Puzzle from "./Puzzle";
 import GameProgress from "../components/GameProgress";
 import { ReactComponent as ThinkingRobot } from "../../../images/ThinkingRobot.svg";
+import type { MetWords } from "types";
 
 const gameName = "TPEUBGSZ";
 const introText =
   "Oh no! The steno robots have broken English! They’ve destroyed most of the useful words. The only bits left are prefixes and suffixes. And robot sounds. Let’s stick them together to make some new words for the robots.";
 
-// @ts-expect-error TS(7031) FIXME: Binding element 'startingMetWordsToday' implicitly... Remove this comment to see the full error message
-export default function Game({ startingMetWordsToday }) {
+type Props = {
+  startingMetWordsToday: MetWords;
+};
+
+export default function Game({ startingMetWordsToday }: Props) {
   const [typedText, setTypedText] = useState("");
   const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
     useState("");
@@ -36,8 +40,7 @@ export default function Game({ startingMetWordsToday }) {
     setShowHint(false);
   }, [startingMetWordsToday]);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'inputText' implicitly has an 'any' type... Remove this comment to see the full error message
-  const onChangeInput = (inputText) => {
+  const onChangeInput = (inputText: string) => {
     setTypedText(inputText);
     if (gameState.puzzleText === inputText.trim()) {
       setTypedText("");
