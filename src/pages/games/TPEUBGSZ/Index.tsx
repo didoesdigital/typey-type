@@ -1,14 +1,17 @@
 import React, { useEffect, useRef } from "react";
 import Game from "./Game";
 import Subheader from "../../../components/Subheader";
+import type { MetWords } from "types";
 
-// @ts-expect-error TS(7031) FIXME: Binding element 'startingMetWordsToday' implicitly... Remove this comment to see the full error message
-export default function Index({ startingMetWordsToday }) {
-  const mainHeading = useRef(null);
+type Props = {
+  startingMetWordsToday: MetWords;
+};
+
+export default function Index({ startingMetWordsToday }: Props) {
+  const mainHeading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     if (mainHeading) {
-      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
-      mainHeading.current.focus();
+      mainHeading.current?.focus();
     }
   }, []);
 
