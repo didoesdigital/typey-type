@@ -9,11 +9,10 @@ import { ReactComponent as MischievousRobot } from "../../images/MischievousRobo
 import Subheader from "../../components/Subheader";
 
 export default function GamesIndex() {
-  const mainHeading = useRef(null);
+  const mainHeading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     if (mainHeading) {
-      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
-      mainHeading.current.focus();
+      mainHeading.current?.focus();
     }
   }, []);
 
