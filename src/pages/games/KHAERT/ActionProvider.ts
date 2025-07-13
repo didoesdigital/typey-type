@@ -3,9 +3,20 @@ import { timeMonth } from "d3-time";
 import { botName } from "./config";
 import { lessonRepliesMap } from "./constants";
 
+type CreateChatBotMessage = any;
+type SetStateFunc = any;
+type CreateClientMessage = any;
+
 class ActionProvider {
-  // @ts-expect-error TS(7006) FIXME: Parameter 'createChatBotMessage' implicitly has an... Remove this comment to see the full error message
-  constructor(createChatBotMessage, setStateFunc, createClientMessage) {
+  private createChatBotMessage: any;
+  private setState: any;
+  private createClientMessage: any;
+
+  constructor(
+    createChatBotMessage: CreateChatBotMessage,
+    setStateFunc: SetStateFunc,
+    createClientMessage: CreateClientMessage
+  ) {
     this.createChatBotMessage = createChatBotMessage;
     this.setState = setStateFunc;
     this.createClientMessage = createClientMessage;
@@ -40,8 +51,7 @@ class ActionProvider {
     this.updateChatbotState(botMessage, "HowAreYou");
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'userMessage' implicitly has an 'any' ty... Remove this comment to see the full error message
-  handleHowToKeyboard(userMessage) {
+  handleHowToKeyboard(userMessage: string) {
     const reply = userMessage.includes("tab")
       ? "You might be able to press Tab by writing TA*B"
       : userMessage.includes("delete")
@@ -55,8 +65,7 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'userMessage' implicitly has an 'any' ty... Remove this comment to see the full error message
-  handleLearningQuestions(userMessage) {
+  handleLearningQuestions(userMessage: string) {
     const [linkText, linkUrl] =
       userMessage.includes("learn") || userMessage.includes("theory")
         ? [
@@ -79,8 +88,7 @@ class ActionProvider {
     }));
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'userMessage' implicitly has an 'any' ty... Remove this comment to see the full error message
-  handlePhraseLookup(userMessage) {
+  handlePhraseLookup(userMessage: string) {
     const strippedUserMessage = userMessage
       .replaceAll(/[^A-Za-z0-9!#? ]/g, "")
       .replace(/brief/i, "")
@@ -141,9 +149,9 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'userMessage' implicitly has an 'any' ty... Remove this comment to see the full error message
-  handleAgeQuestions(userMessage) {
+  handleAgeQuestions(userMessage: string) {
     // @ts-expect-error TS(2345) FIXME: Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
+    // const ageInMonths = timeMonth.count(new Date(2022, 5, 25), new Date());
     const ageInMonths = timeMonth.count(new Date(2022, 5, 25), Date.now());
     const reply = userMessage.includes("age")
       ? `My age? I'm nearly ${ageInMonths} month${
@@ -156,8 +164,7 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'userMessage' implicitly has an 'any' ty... Remove this comment to see the full error message
-  handleAreYouQuestions(userMessage) {
+  handleAreYouQuestions(userMessage: string) {
     const reply = userMessage.includes("stenographer")
       ? shuffle([
           `I'm learning stenography. Boop, boop!`,
@@ -168,8 +175,7 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'userMessage' implicitly has an 'any' ty... Remove this comment to see the full error message
-  handleResponseToHowAreYou(userMessage) {
+  handleResponseToHowAreYou(userMessage: string) {
     const sentiment =
       (userMessage.includes("good") &&
         !userMessage.includes("not so good") &&
@@ -240,8 +246,7 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'userMessage' implicitly has an 'any' ty... Remove this comment to see the full error message
-  handleLessonKeywords(userMessage) {
+  handleLessonKeywords(userMessage: string) {
     const reply =
       Array.from(lessonRepliesMap.entries()).find(([userMessageFragment, _]) =>
         userMessage.includes(userMessageFragment)
@@ -269,8 +274,7 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'userMessage' implicitly has an 'any' ty... Remove this comment to see the full error message
-  handleWhatQuestions(userMessage) {
+  handleWhatQuestions(userMessage: string) {
     const reply = userMessage.includes("steno")
       ? "Stenography is the process of writing shorthand and with a stenotype machine or fancy keyboard you can write over 200 words per minute"
       : userMessage.includes("Plover")
@@ -292,8 +296,7 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'userMessage' implicitly has an 'any' ty... Remove this comment to see the full error message
-  handleWhoQuestions(userMessage) {
+  handleWhoQuestions(userMessage: string) {
     // TODO: add some more steno people!
     const reply = userMessage.toUpperCase().includes("MIRABAI")
       ? "Mirabai Knight is the founder of The Open Steno Project and Plover"
@@ -345,8 +348,7 @@ class ActionProvider {
     this.updateChatbotState(botMessage);
   }
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'message' implicitly has an 'any' type.
-  updateChatbotState(message, responseType) {
+  updateChatbotState(message: string, responseType?: string) {
     // @ts-expect-error TS(7006) FIXME: Parameter 'prevState' implicitly has an 'any' type... Remove this comment to see the full error message
     this.setState((prevState) => ({
       ...prevState,
