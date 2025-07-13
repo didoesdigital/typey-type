@@ -42,7 +42,6 @@ export default function Game({
   );
 
   useEffect(() => {
-    // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
     dispatch({
       type: actions.gameStarted,
       payload: { startingMetWordsToday, globalLookupDictionary },
@@ -57,7 +56,6 @@ export default function Game({
       setTypedText("");
       setPreviousCompletedPhraseAsTyped(inputText);
       setShowHint(false);
-      // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
       dispatch({ type: actions.roundCompleted });
     }
 

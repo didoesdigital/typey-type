@@ -7,18 +7,84 @@ import {
   shuffleWord,
 } from "./utilities";
 import createStrokeHintForPhrase from "../../../utils/transformingDictionaries/createStrokeHintForPhrase";
+import type { LookupDictWithNamespacedDicts, MetWords } from "types";
 
 export const roundToWin = 3;
 export const levelToWin = 4;
 
-const initialProgress = {
+type SHUFLMaterial = {
+  3: string[];
+  4: string[];
+  5: string[];
+  6: string[];
+};
+
+type SHUFLState = {
+  currentHint: string;
+  globalLookupDictionary: LookupDictWithNamespacedDicts;
+  material: Partial<SHUFLMaterial>;
+  puzzleText: string;
+  rightAnswers: string[];
+  gameComplete: boolean;
+  levelComplete: boolean;
+  level: number;
+  roundIndex: number;
+};
+
+type SHUFLActionGameRestarted = {
+  type: typeof actions.gameRestarted;
+  payload: {
+    globalLookupDictionary: LookupDictWithNamespacedDicts;
+    startingMetWordsToday: MetWords;
+  };
+};
+
+type SHUFLActionGameStarted = {
+  type: typeof actions.gameStarted;
+  payload: {
+    globalLookupDictionary: LookupDictWithNamespacedDicts;
+    startingMetWordsToday: MetWords;
+  };
+};
+
+type SHUFLActionLevelRestarted = {
+  type: typeof actions.levelRestarted;
+  payload: {
+    globalLookupDictionary: LookupDictWithNamespacedDicts;
+    startingMetWordsToday: MetWords;
+  };
+};
+
+type SHUFLActionRoundCompleted = { type: typeof actions.roundCompleted };
+
+type SHUFLAction =
+  | SHUFLActionGameRestarted
+  | SHUFLActionGameStarted
+  | SHUFLActionLevelRestarted
+  | SHUFLActionRoundCompleted;
+
+const initialProgress: Pick<
+  SHUFLState,
+  "gameComplete" | "levelComplete" | "level" | "roundIndex"
+> = {
   gameComplete: false,
   levelComplete: false,
   level: 1,
   roundIndex: 0,
 };
 
-const defaultState = {
+const defaultState: Pick<
+  SHUFLState,
+  | "gameComplete"
+  | "levelComplete"
+  | "level"
+  | "roundIndex"
+  | "currentHint"
+  | "globalLookupDictionary"
+  | "material"
+  | "puzzleText"
+  | "rightAnswers"
+> = {
   ...initialProgress,
   currentHint: "",
   globalLookupDictionary: new Map(),
@@ -27,14 +93,15 @@ const defaultState = {
   rightAnswers: [],
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-export const initConfig = (state) => ({
+export const initConfig = (state: undefined | SHUFLState): SHUFLState => ({
   ...defaultState,
   ...state,
 });
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-const getGameStartedState = (state, action) => {
+const getGameStartedState = (
+  state: SHUFLState,
+  action: SHUFLActionGameStarted
+) => {
   const material = selectMaterial(action.payload.startingMetWordsToday);
   const firstPickedWord = pickAWord(getLevelMaterial(material, 1));
   const rightAnswers = getRightAnswers(
@@ -55,8 +122,7 @@ const getGameStartedState = (state, action) => {
   };
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-const getGameRestartedState = (state) => {
+const getGameRestartedState = (state: SHUFLState) => {
   const pickedWord = pickAWord(getLevelMaterial(state.material, 1));
   const rightAnswers = getRightAnswers(
     getLevelMaterial(state.material, 1),
@@ -74,8 +140,7 @@ const getGameRestartedState = (state) => {
   };
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-const getAllLevelsCompletedState = (state) => {
+const getAllLevelsCompletedState = (state: SHUFLState) => {
   const roundCompletedPickedWord = pickAWord(
     getLevelMaterial(state.material, 1)
   );
@@ -96,8 +161,7 @@ const getAllLevelsCompletedState = (state) => {
   };
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-const getEarlyLevelCompletedState = (state) => {
+const getEarlyLevelCompletedState = (state: SHUFLState) => {
   const increasedLevel = state.level + 1;
   const roundCompletedPickedWord = pickAWord(
     getLevelMaterial(state.material, increasedLevel)
@@ -120,8 +184,7 @@ const getEarlyLevelCompletedState = (state) => {
   };
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-const getEarlyRoundCompletedState = (state) => {
+const getEarlyRoundCompletedState = (state: SHUFLState) => {
   const roundCompletedPickedWord = pickAWord(
     getLevelMaterial(state.material, state.level)
   );
@@ -141,15 +204,13 @@ const getEarlyRoundCompletedState = (state) => {
   };
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-export const gameReducer = (state, action) => {
+export const gameReducer = (state: SHUFLState, action: SHUFLAction) => {
   switch (action?.type) {
     case actions.gameStarted:
       return getGameStartedState(state, action);
 
     case actions.gameRestarted:
-      // @ts-expect-error TS(2554) FIXME: Expected 0-1 arguments, but got 2.
-      return getGameRestartedState(state, action);
+      return getGameRestartedState(state);
 
     case actions.levelRestarted:
       return { ...state, levelComplete: false };
