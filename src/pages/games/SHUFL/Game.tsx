@@ -9,21 +9,27 @@ import GameProgress from "../components/GameProgress";
 import LevelCompleted from "../utilities/LevelCompleted";
 import Puzzle from "./Puzzle";
 import { ReactComponent as RaverRobot } from "../../../images/RaverRobot.svg";
+import App from "../../../App";
+
+import type { LookupDictWithNamespacedDictsAndConfig, MetWords } from "types";
+
+type SHUFLGameProps = {
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+  globalLookupDictionaryLoaded: boolean;
+  startingMetWordsToday: MetWords;
+  updateMetWords: typeof App.prototype.updateMetWords;
+};
 
 const gameName = "SHUFL";
 const introText =
   "The steno robots have been dancing too much and shuffled all the letters! You need to type the correct word to get them all back in order.";
 
 export default function Game({
-  // @ts-expect-error TS(7031) FIXME: Binding element 'globalLookupDictionary' implicitl... Remove this comment to see the full error message
   globalLookupDictionary,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'globalLookupDictionaryLoaded' imp... Remove this comment to see the full error message
   globalLookupDictionaryLoaded,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'startingMetWordsToday' implicitly... Remove this comment to see the full error message
   startingMetWordsToday,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'updateMetWords' implicitly has an... Remove this comment to see the full error message
   updateMetWords,
-}) {
+}: SHUFLGameProps) {
   const [typedText, setTypedText] = useState("");
   const [previousCompletedPhraseAsTyped, setPreviousCompletedPhraseAsTyped] =
     useState("");
@@ -44,8 +50,7 @@ export default function Game({
     setShowHint(false);
   }, [startingMetWordsToday, globalLookupDictionary]);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'inputText' implicitly has an 'any' type... Remove this comment to see the full error message
-  const onChangeSHUFLInput = (inputText) => {
+  const onChangeSHUFLInput = (inputText: string): void => {
     setTypedText(inputText);
     if (gameState.rightAnswers.includes(inputText.trim().toLowerCase())) {
       updateMetWords(inputText.trim());
