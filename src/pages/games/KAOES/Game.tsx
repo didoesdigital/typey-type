@@ -8,7 +8,7 @@ import React, {
 import GoogleAnalytics from "react-ga4";
 import ReactModal from "react-modal";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import * as Confetti from "../../../utils/confetti.js";
+import * as Confetti from "../../../utils/confetti";
 import { actions } from "../utilities/gameActions";
 import { initConfig, gameReducer, roundToWin } from "./gameReducer";
 import Completed from "../components/Completed";
@@ -23,6 +23,8 @@ import { ReactComponent as MischievousRobot } from "../../../images/MischievousR
 import { choosePuzzleKey, prettyKey } from "./utilities";
 import * as stroke from "../../../utils/stroke";
 import { mapQWERTYKeysToStenoStroke } from "../../../utils/mapQWERTYKeysToStenoStroke";
+import type { GlobalUserSettings } from "types";
+import type { Particles } from "utils/confetti.types";
 
 const stenoTypedTextToKeysMapping = {
   "-Z": stroke.Z,
@@ -56,8 +58,7 @@ const stenoTypedTextToKeysMapping = {
   "F": stroke.F,
 };
 
-// @ts-expect-error TS(7034) FIXME: Variable 'particles' implicitly has type 'any[]' i... Remove this comment to see the full error message
-const particles = [];
+const particles: Particles = [];
 const gameName = "KAOES";
 const introText =
   "The mischievous steno robots have hidden all the steno keys. You need to find where they belong on the steno diagram.";
@@ -82,8 +83,15 @@ const GiveKAOESfeedback = ({ idModifier = "" }) => (
   </p>
 );
 
-// @ts-expect-error TS(7031) FIXME: Binding element 'changeInputForKAOES' implicitly h... Remove this comment to see the full error message
-export default function Game({ changeInputForKAOES, inputForKAOES }) {
+type KAOESGameProps = {
+  changeInputForKAOES: React.ChangeEventHandler<HTMLInputElement>;
+  inputForKAOES: GlobalUserSettings["inputForKAOES"];
+};
+
+export default function Game({
+  changeInputForKAOES,
+  inputForKAOES,
+}: KAOESGameProps) {
   const canvasRef = useRef(null);
   const canvasWidth = Math.floor(window.innerWidth);
   const canvasHeight = Math.floor(window.innerHeight);
@@ -107,26 +115,25 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
     ReactModal.setAppElement("#js-app");
   }, []);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  const handleOpenModal = (event) => {
+  const handleOpenModal: React.MouseEventHandler<HTMLButtonElement> = (
+    event
+  ) => {
     event.preventDefault();
     setModalVisibility(true);
   };
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  const handleCloseModal = (event) => {
+  const handleCloseModal: React.MouseEventHandler<HTMLButtonElement> = (
+    event
+  ) => {
     event.preventDefault();
     setModalVisibility(false);
   };
 
   const restartConfetti = useCallback(() => {
-    // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
     particles.splice(0);
     Confetti.cancelAnimation();
-    // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
     Confetti.setupCanvas({ sparsity: 240, colors: 4 }, "good-guess", particles);
     Confetti.restartAnimation(
-      // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
       particles,
       canvasRef.current,
       canvasWidth,
@@ -134,8 +141,7 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
     );
   }, [canvasRef, canvasWidth, canvasHeight]);
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'key' implicitly has an 'any' type.
-  const onClickHandler = (key) => {
+  const onClickHandler = (key: number) => {
     if (!key) {
       return;
     }
@@ -159,7 +165,7 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
   };
 
   /** @param typedStenoKey { string } - string hopefully containing a raw steno or qwerty steno */
-  const onChangeTextInput = (typedStenoKey) => {
+  const onChangeTextInput = (typedStenoKey: string) => {
     setTypedText(typedStenoKey);
     const trimmedTypedKey = typedStenoKey.trim();
 
