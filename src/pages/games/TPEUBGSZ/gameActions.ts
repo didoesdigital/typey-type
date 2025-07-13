@@ -3,4 +3,4 @@ export const actions = {
   gameStarted: "gameStarted",
   levelRestarted: "levelRestarted",
   roundCompleted: "roundCompleted",
-};
+} as const;

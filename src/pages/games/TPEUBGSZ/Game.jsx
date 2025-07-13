@@ -29,7 +29,6 @@ export default function Game({ startingMetWordsToday }) {
   useEffect(() => {
     setShowHint(false);
     const numberOfMetWords = Object.keys(startingMetWordsToday).length;
-    // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
     dispatch({
       type: actions.gameStarted,
       payload: { numberOfMetWords },
@@ -44,7 +43,6 @@ export default function Game({ startingMetWordsToday }) {
       setTypedText("");
       setPreviousCompletedPhraseAsTyped(inputText);
       setShowHint(false);
-      // @ts-expect-error TS(2554) FIXME: Expected 0 arguments, but got 1.
       dispatch({ type: actions.roundCompleted });
     }
   };

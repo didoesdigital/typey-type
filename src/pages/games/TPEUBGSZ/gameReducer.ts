@@ -4,28 +4,82 @@ import { makeUpAWordAndHint } from "./utilities";
 export const roundToWin = 3;
 export const levelToWin = 4;
 
-const initialProgress = {
+type TPEUBGSZState = {
+  currentHint: string;
+  puzzleText: string;
+  gameComplete: boolean;
+  levelComplete: boolean;
+  level: number;
+  roundIndex: number;
+  numberOfMetWords: number;
+};
+
+type TPEUBGSZActionGameRestarted = {
+  type: typeof actions.gameRestarted;
+  payload: {
+    numberOfMetWords: number;
+  };
+};
+
+type TPEUBGSZActionGameStarted = {
+  type: typeof actions.gameStarted;
+  payload: {
+    numberOfMetWords: number;
+  };
+};
+
+type TPEUBGSZActionLevelRestarted = {
+  type: typeof actions.levelRestarted;
+  payload: {
+    numberOfMetWords: number;
+  };
+};
+
+type TPEUBGSZActionRoundCompleted = { type: typeof actions.roundCompleted };
+
+type TPEUBGSZAction =
+  | TPEUBGSZActionGameRestarted
+  | TPEUBGSZActionGameStarted
+  | TPEUBGSZActionLevelRestarted
+  | TPEUBGSZActionRoundCompleted;
+
+const initialProgress: Pick<
+  TPEUBGSZState,
+  "gameComplete" | "levelComplete" | "level" | "roundIndex"
+> = {
   gameComplete: false,
   levelComplete: false,
   level: 1,
   roundIndex: 0,
 };
 
-const defaultState = {
+const defaultState: Pick<
+  TPEUBGSZState,
+  | "gameComplete"
+  | "levelComplete"
+  | "level"
+  | "roundIndex"
+  | "numberOfMetWords"
+  | "puzzleText"
+  | "currentHint"
+> = {
   ...initialProgress,
   numberOfMetWords: 0,
   puzzleText: "",
   currentHint: "",
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-export const initConfig = (state) => ({
+export const initConfig = (
+  state: undefined | TPEUBGSZState
+): TPEUBGSZState => ({
   ...defaultState,
   ...state,
 });
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-const getGameStartedState = (state, action) => {
+const getGameStartedState = (
+  state: TPEUBGSZState,
+  action: TPEUBGSZActionGameStarted
+) => {
   const [madeUpWord, hint] = makeUpAWordAndHint(
     state.level,
     action.payload.numberOfMetWords
@@ -39,8 +93,7 @@ const getGameStartedState = (state, action) => {
   };
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-const getGameRestartedState = (state) => {
+const getGameRestartedState = (state: TPEUBGSZState) => {
   const [madeUpWord, hint] = makeUpAWordAndHint(
     state.level,
     state.numberOfMetWords
@@ -53,8 +106,7 @@ const getGameRestartedState = (state) => {
   };
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-const getAllLevelsCompletedState = (state) => {
+const getAllLevelsCompletedState = (state: TPEUBGSZState) => {
   const [madeUpWord, hint] = makeUpAWordAndHint(1, state.numberOfMetWords);
   return {
     ...state,
@@ -65,8 +117,7 @@ const getAllLevelsCompletedState = (state) => {
   };
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-const getEarlyLevelCompletedState = (state) => {
+const getEarlyLevelCompletedState = (state: TPEUBGSZState) => {
   const increasedLevel = state.level + 1;
   const [madeUpWord, hint] = makeUpAWordAndHint(
     increasedLevel,
@@ -82,8 +133,7 @@ const getEarlyLevelCompletedState = (state) => {
   };
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-const getEarlyRoundCompletedState = (state) => {
+const getEarlyRoundCompletedState = (state: TPEUBGSZState) => {
   const [madeUpWord, hint] = makeUpAWordAndHint(
     state.level,
     state.numberOfMetWords
@@ -96,8 +146,7 @@ const getEarlyRoundCompletedState = (state) => {
   };
 };
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'state' implicitly has an 'any' type.
-export const gameReducer = (state, action) => {
+export const gameReducer = (state: TPEUBGSZState, action: TPEUBGSZAction) => {
   switch (action?.type) {
     case actions.gameStarted:
       return getGameStartedState(state, action);
