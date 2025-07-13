@@ -67,7 +67,6 @@ export default function Game({
           SHUFL game
         </h3>
         {gameState.gameComplete ? (
-          // @ts-expect-error TS(2322) FIXME: Type '{ gameName: string; dispatch: DispatchWithou... Remove this comment to see the full error message
           <Completed gameName={gameName} dispatch={dispatch} />
         ) : (
           <>

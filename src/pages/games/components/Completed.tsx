@@ -5,11 +5,28 @@ import { actions } from "../utilities/gameActions";
 import { ReactComponent as HappyRobot } from "../../../images/HappyRobot.svg";
 import * as Confetti from "../../../utils/confetti.js";
 
-// @ts-expect-error TS(7034) FIXME: Variable 'particles' implicitly has type 'any[]' i... Remove this comment to see the full error message
-const particles = [];
+type CompletedProps = {
+  gameName: string;
+  dispatch: (...actions: any) => void;
+};
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-const handlePlayAgainClick = (event, gameName, dispatch) => {
+type Particle = {
+  /** red, green, blue, alpha */
+  rgbArray: [number, number, number, number];
+  startX: number;
+  startY: number;
+  startTime: number;
+};
+
+type Particles = Particle[];
+
+const particles: Particles = [];
+
+const handlePlayAgainClick = (
+  event: React.MouseEvent,
+  gameName: string,
+  dispatch: (...actions: any) => void
+) => {
   event.preventDefault();
 
   if (dispatch) {
@@ -23,26 +40,22 @@ const handlePlayAgainClick = (event, gameName, dispatch) => {
   });
 };
 
-// @ts-expect-error TS(2339) FIXME: Property 'gameName' does not exist on type '{ chil... Remove this comment to see the full error message
-export default React.memo(function Completed({ gameName, dispatch }) {
-  const playAgainButton = useRef(null);
+function Completed({ gameName, dispatch }: CompletedProps) {
+  const playAgainButton = useRef<HTMLButtonElement>(null);
   const canvasRef = useRef(null);
   const canvasWidth = Math.floor(window.innerWidth);
   const canvasHeight = Math.floor(window.innerHeight);
 
   useEffect(() => {
     if (playAgainButton) {
-      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
-      playAgainButton.current.focus();
+      playAgainButton.current?.focus();
     }
   }, []);
 
   useEffect(() => {
-    // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
     Confetti.setupCanvas({ sparsity: 960, colors: 5 }, "you-win", particles);
     if (canvasRef.current) {
       Confetti.restartAnimation(
-        // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
         particles,
         canvasRef.current,
         canvasWidth,
@@ -60,17 +73,14 @@ export default React.memo(function Completed({ gameName, dispatch }) {
         event &&
         ((event.keyCode && event.keyCode === 13) || event.type === "click")
       ) {
-        // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
         particles.splice(0);
         Confetti.cancelAnimation();
         Confetti.setupCanvas(
           { sparsity: 170, colors: 4 },
           "you-win",
-          // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
           particles
         );
         Confetti.restartAnimation(
-          // @ts-expect-error TS(7005) FIXME: Variable 'particles' implicitly has an 'any[]' typ... Remove this comment to see the full error message
           particles,
           canvasRef.current,
           canvasWidth,
@@ -118,4 +128,6 @@ export default React.memo(function Completed({ gameName, dispatch }) {
       </p>
     </>
   );
-});
+}
+
+export default React.memo(Completed);

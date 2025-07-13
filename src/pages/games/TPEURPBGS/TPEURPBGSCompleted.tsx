@@ -15,7 +15,6 @@ const TPEURPBGSCompleted: FC<Props> = ({ gameName }) => {
 
   return isGameComplete ? (
     <Completed
-      // @ts-expect-error TS(2322) FIXME: Type '{ gameName: string; dispatch: () => void; }'... Remove this comment to see the full error message
       gameName={gameName}
       dispatch={() => {
         gameRestarted();

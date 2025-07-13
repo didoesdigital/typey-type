@@ -237,7 +237,6 @@ export default function Game({ changeInputForKAOES, inputForKAOES }) {
         />
         {state.gameComplete ? (
           <>
-            {/* @ts-expect-error TS(2322) FIXME: Type '{ gameName: string; dispatch: DispatchWithou... Remove this comment to see the full error message */}
             <Completed gameName={gameName} dispatch={dispatch} />
             <div className="mt10">
               <GiveKAOESfeedback />
