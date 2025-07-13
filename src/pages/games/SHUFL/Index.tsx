@@ -2,24 +2,24 @@ import React, { useEffect, useRef } from "react";
 import Game from "./Game";
 import Subheader from "../../../components/Subheader";
 import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
+import type { LookupDictWithNamespacedDictsAndConfig, MetWords } from "types";
+
+type Props = {
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+  globalLookupDictionaryLoaded: boolean;
+  startingMetWordsToday: MetWords;
+};
 
 export default function Index({
-  // @ts-expect-error TS(7031) FIXME: Binding element 'globalLookupDictionary' implicitl... Remove this comment to see the full error message
   globalLookupDictionary,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'globalLookupDictionaryLoaded' imp... Remove this comment to see the full error message
   globalLookupDictionaryLoaded,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'startingMetWordsToday' implicitly... Remove this comment to see the full error message
   startingMetWordsToday,
-}) {
-  const {
-    appFetchAndSetupGlobalDict,
-    updateMetWords
-  } = useAppMethods();
-  const mainHeading = useRef(null);
+}: Props) {
+  const { appFetchAndSetupGlobalDict, updateMetWords } = useAppMethods();
+  const mainHeading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     if (mainHeading) {
-      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
-      mainHeading.current.focus();
+      mainHeading.current?.focus();
     }
   }, []);
 
