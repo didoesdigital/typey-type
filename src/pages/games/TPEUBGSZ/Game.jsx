@@ -79,7 +79,6 @@ export default function Game({ startingMetWordsToday }) {
             </div>
             {gameState.levelComplete ? (
               <LevelCompleted
-                // @ts-expect-error TS(2322) FIXME: Type '{ dispatch: DispatchWithoutAction; gameName:... Remove this comment to see the full error message
                 dispatch={dispatch}
                 gameName={gameName}
                 level={gameState.level}
