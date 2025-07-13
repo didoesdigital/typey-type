@@ -2,21 +2,22 @@ import React, { useEffect, useRef } from "react";
 import Game from "./Game";
 import Subheader from "../../../components/Subheader";
 import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
+import type { LookupDictWithNamespacedDictsAndConfig } from "types";
 
-// @ts-expect-error TS(7031) FIXME: Binding element 'globalLookupDictionary' implicitl... Remove this comment to see the full error message
-export default function Index({globalLookupDictionary}) {
-  const {
-  appFetchAndSetupGlobalDict,
-} = useAppMethods();
-  const mainHeading = useRef(null);
+type Props = {
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+};
+
+export default function Index({ globalLookupDictionary }: Props) {
+  const { appFetchAndSetupGlobalDict } = useAppMethods();
+  const mainHeading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     appFetchAndSetupGlobalDict(null).catch((error) => {
       console.error(error);
     });
 
     if (mainHeading) {
-      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
-      mainHeading.current.focus();
+      mainHeading.current?.focus();
     }
   }, [appFetchAndSetupGlobalDict]);
 
