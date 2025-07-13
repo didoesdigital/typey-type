@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import createStrokeHintForPhrase from "../../../utils/transformingDictionaries/createStrokeHintForPhrase";
+import type { LookupDictWithNamespacedDictsAndConfig } from "types";
 
-// @ts-expect-error TS(7031) FIXME: Binding element 'phraseToLookup' implicitly has an... Remove this comment to see the full error message
-const PhraseLookup = ({ phraseToLookup, globalLookupDictionary }) => {
+type Props = {
+  phraseToLookup: string;
+  globalLookupDictionary: LookupDictWithNamespacedDictsAndConfig;
+};
+
+const PhraseLookup = ({ phraseToLookup, globalLookupDictionary }: Props) => {
   const [strokeHint, setStrokeHint] = useState("");
   useEffect(() => {
     const newStrokeHint = createStrokeHintForPhrase(
