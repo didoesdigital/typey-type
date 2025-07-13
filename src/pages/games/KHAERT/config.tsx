@@ -1,8 +1,8 @@
 import React from "react";
 import { createChatBotMessage } from "react-chatbot-kit";
-import DogPicture from "./DogPicture.jsx";
-import PhraseLookup from "./PhraseLookup.jsx";
-import ExternalLink from "./ExternalLink.jsx";
+import DogPicture from "./DogPicture";
+import PhraseLookup from "./PhraseLookup";
+import ExternalLink from "./ExternalLink";
 import { ReactComponent as AussieRobotAvatar } from "../../../images/AussieRobotAvatar.svg";
 import { ReactComponent as Stenographer } from "../../../images/Stenographer.svg";
 
