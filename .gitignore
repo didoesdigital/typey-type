@@ -104,5 +104,12 @@ Thumbs.db
 # Ignore Storybook built files compiled for production
 storybook-static
 
+# Ignore Storybook and Chromatic debugging/log files
+build-storybook.log
+chromatic.log
+chromatic-build-*.xml
+chromatic-diagnostics.json
+
 # Ignore TypeScript file for storing incremental compilation information
 *.tsbuildinfo
+
