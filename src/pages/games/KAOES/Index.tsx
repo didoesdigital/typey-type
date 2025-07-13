@@ -2,15 +2,18 @@ import React, { useEffect, useRef } from "react";
 import Game from "./Game";
 import Subheader from "../../../components/Subheader";
 import { useChangeInputForKAOES } from "../../lessons/components/UserSettings/updateGlobalUserSetting";
+import type { GlobalUserSettings } from "types";
 
-// @ts-expect-error TS(7031) FIXME: Binding element 'inputForKAOES' implicitly has an ... Remove this comment to see the full error message
-export default function Index({ inputForKAOES }) {
-  const changeInputForKAOES = useChangeInputForKAOES()
-  const mainHeading = useRef(null);
+type Props = {
+  inputForKAOES: GlobalUserSettings["inputForKAOES"];
+};
+
+export default function Index({ inputForKAOES }: Props) {
+  const changeInputForKAOES = useChangeInputForKAOES();
+  const mainHeading = useRef<HTMLHeadingElement>(null);
   useEffect(() => {
     if (mainHeading) {
-      // @ts-expect-error TS(2531) FIXME: Object is possibly 'null'.
-      mainHeading.current.focus();
+      mainHeading.current?.focus();
     }
   }, []);
 
