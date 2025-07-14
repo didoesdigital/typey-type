@@ -1,7 +1,7 @@
 name: Visual Regression Testing
 on:
   pull_request:
-    types: [opened, reopened, ready_for_review, synchronize]
+    types: [ready_for_review, synchronize]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
