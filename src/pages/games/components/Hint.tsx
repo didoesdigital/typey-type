@@ -1,8 +1,12 @@
 import React from "react";
 import GoogleAnalytics from "react-ga4";
+import type { SingleStroke } from "types";
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-const handleHintClick = (event, setShowHint, gameName) => {
+const handleHintClick = (
+  event: React.KeyboardEvent | React.MouseEvent,
+  setShowHint: (showHint: boolean) => void,
+  gameName: string
+) => {
   event.preventDefault();
 
   const yourInput = document.getElementById(`${gameName}-input`);
@@ -19,16 +23,19 @@ const handleHintClick = (event, setShowHint, gameName) => {
   });
 };
 
+type Props = {
+  currentStroke: SingleStroke;
+  setShowHint: (showHint: boolean) => void;
+  showHint: boolean;
+  gameName: string;
+};
+
 export default function Hint({
-  // @ts-expect-error TS(7031) FIXME: Binding element 'currentStroke' implicitly has an ... Remove this comment to see the full error message
   currentStroke,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'setShowHint' implicitly has an 'a... Remove this comment to see the full error message
   setShowHint,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'showHint' implicitly has an 'any'... Remove this comment to see the full error message
   showHint,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'gameName' implicitly has an 'any'... Remove this comment to see the full error message
   gameName,
-}) {
+}: Props) {
   return (
     <>
       {!showHint && (
