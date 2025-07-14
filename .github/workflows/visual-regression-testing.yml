@@ -1,7 +1,7 @@
 name: Visual Regression Testing
 on:
-  pull_request:
-    types: [opened, reopened, ready_for_review, synchronize]
+  # pull_request:
+  #   types: [opened, reopened, ready_for_review, synchronize]
   workflow_dispatch:
 
 concurrency:
@@ -35,4 +35,4 @@ jobs:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           exitZeroOnChanges: ${{ github.ref == 'refs/heads/master' && true || false }}
           skip: "dependabot/**"
-          dryRun: true
+          # dryRun: true
