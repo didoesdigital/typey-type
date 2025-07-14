@@ -1,0 +1,39 @@
+name: Visual Regression Testing
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, synchronize]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  chromatic:
+    name: Run Chromatic
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🏗️ Check out repository code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - name: 🏗️ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.14.0"
+          cache: "yarn"
+
+      - name: 🏗️ Install dependencies
+        run: yarn install --immutable
+
+      - name: ☑️ Build Storybook
+        run: yarn run build-storybook
+
+    #   - name: ☑️ Build Chromatic
+    #     uses: chromaui/action@v12.2.0
+    #     with:
+    #       projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+    #       exitZeroOnChanges: false
+    #       skip: "dependabot/**"
+    #       dryRun: true
