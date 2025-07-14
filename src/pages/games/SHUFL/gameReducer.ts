@@ -76,18 +76,7 @@ const initialProgress: Pick<
   roundIndex: 0,
 };
 
-const defaultState: Pick<
-  SHUFLState,
-  | "gameComplete"
-  | "levelComplete"
-  | "level"
-  | "roundIndex"
-  | "currentHint"
-  | "globalLookupDictionary"
-  | "material"
-  | "puzzleText"
-  | "rightAnswers"
-> = {
+const defaultState: SHUFLState = {
   ...initialProgress,
   currentHint: "",
   globalLookupDictionary: new Map(),
