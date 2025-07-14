@@ -1,7 +1,11 @@
 import React from "react";
 
-// @ts-expect-error TS(7031) FIXME: Binding element 'introText' implicitly has an 'any... Remove this comment to see the full error message
-export default function Intro({ introText, robot }) {
+type Props = {
+  introText: string;
+  robot: React.ReactNode;
+};
+
+export default function Intro({ introText, robot }: Props) {
   return (
     <div className="mw-824 mr3 flex-grow">
       <div className="flex">
