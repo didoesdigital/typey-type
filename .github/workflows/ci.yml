@@ -24,11 +24,6 @@ jobs:
           node-version: "22.14.0"
           cache: "yarn"
 
-      - name: 🔬 Experiment
-        run: |
-          echo "Experimenting ${{ secrets.EXPERIMENT }}"
-          echo "Actor ${{ github.actor }}, Owner ${{ github.repository_owner }}"
-
       - name: 🏗️ Install dependencies
         run: yarn install --immutable
 
