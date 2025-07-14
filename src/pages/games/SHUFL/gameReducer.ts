@@ -1,5 +1,6 @@
 import { actions } from "./gameActions";
 import {
+  defaultSHUFLMaterialByLevel,
   getLevelMaterial,
   getRightAnswers,
   pickAWord,
@@ -12,17 +13,19 @@ import type { LookupDictWithNamespacedDicts, MetWords } from "types";
 export const roundToWin = 3;
 export const levelToWin = 4;
 
-type SHUFLMaterial = {
-  3: string[];
-  4: string[];
-  5: string[];
-  6: string[];
+export type LevelMaterial = string[];
+
+export type SHUFLMaterialByLevel = {
+  3: LevelMaterial;
+  4: LevelMaterial;
+  5: LevelMaterial;
+  6: LevelMaterial;
 };
 
 type SHUFLState = {
   currentHint: string;
   globalLookupDictionary: LookupDictWithNamespacedDicts;
-  material: Partial<SHUFLMaterial>;
+  material: SHUFLMaterialByLevel;
   puzzleText: string;
   rightAnswers: string[];
   gameComplete: boolean;
@@ -88,7 +91,7 @@ const defaultState: Pick<
   ...initialProgress,
   currentHint: "",
   globalLookupDictionary: new Map(),
-  material: {},
+  material: defaultSHUFLMaterialByLevel,
   puzzleText: "",
   rightAnswers: [],
 };
