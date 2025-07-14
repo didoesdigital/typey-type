@@ -30,10 +30,10 @@ jobs:
       - name: ☑️ Build Storybook
         run: yarn run build-storybook
 
-    #   - name: ☑️ Build Chromatic
-    #     uses: chromaui/action@v12.2.0
-    #     with:
-    #       projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-    #       exitZeroOnChanges: false
-    #       skip: "dependabot/**"
-    #       dryRun: true
+      - name: ☑️ Build Chromatic
+        uses: chromaui/action@v12.2.0
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          exitZeroOnChanges: false
+          skip: "dependabot/**"
+          dryRun: true
