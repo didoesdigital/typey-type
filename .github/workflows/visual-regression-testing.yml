@@ -1,5 +1,7 @@
 name: Visual Regression Testing
 on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, synchronize]
   workflow_dispatch:
 
 concurrency:
@@ -31,5 +33,6 @@ jobs:
         uses: chromaui/action@v12.2.0
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
-          exitZeroOnChanges: false
+          exitZeroOnChanges: ${{ github.ref == 'refs/heads/master' && true || false }}
           skip: "dependabot/**"
+          dryRun: true
