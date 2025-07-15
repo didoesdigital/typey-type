@@ -1,7 +1,15 @@
 import React, { useRef } from "react";
 
-// @ts-ignore
-const FlashcardsCarouselActionButtons = (props) => {
+type Props = {
+  currentSlideContentType: any;
+  ButtonNext: any;
+  numberOfFlashcards: any;
+  nextSlide: () => void;
+  currentSlideContent: any;
+  setupFlashCards: React.MouseEventHandler<HTMLButtonElement> | undefined;
+};
+
+const FlashcardsCarouselActionButtons = (props: Props) => {
   const showButtonRef = useRef(null);
   const hardButtonRef = useRef(null);
   const shuffleButtonRef = useRef(null);
