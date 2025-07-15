@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "../src/index.scss";
 
@@ -12,7 +11,25 @@ export const parameters = {
   options: {
     storySort: {
       method: "alphabetical",
-      order: ["Getting Started", ["Overview"], "Pages", ["Home"], "Progress", "Lessons", ["Custom", "Flashcards", "Speed chart", "Metronome"], "Games", ["Games index", "KAOES game", "SHUFL game", "TPEUBGSZ game", "KHAERT game", "Completed"], "Material"]
+      order: [
+        "Getting Started",
+        ["Overview"],
+        "Pages",
+        ["Home"],
+        "Progress",
+        "Lessons",
+        ["Custom", "Flashcards", "Speed chart", "Metronome"],
+        "Games",
+        [
+          "Games index",
+          "KAOES game",
+          "SHUFL game",
+          "TPEUBGSZ game",
+          "KHAERT game",
+          "Completed",
+        ],
+        "Material",
+      ],
     },
   },
 };
