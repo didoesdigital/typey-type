@@ -4,14 +4,15 @@ import {
   backupBannerDismissedTime,
   experimentsState,
   inputForKAOESState,
-  writerInputState
+  writerInputState,
 } from "../../../../states/globalUserSettingsState";
+import type { Experiments } from "types";
 
-// (event: SyntheticInputEvent<HTMLInputElement>) => void
 export function useChangeWriterInput() {
   const setState = useSetAtom(writerInputState);
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+  const onChangeWriterInput: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
     let name = "BAD_INPUT";
 
     if (event && event.target && event.target.name) {
@@ -29,13 +30,17 @@ export function useChangeWriterInput() {
       action: "Change writer input",
       label: labelString,
     });
-  }
+  };
+
+  return onChangeWriterInput;
 }
 
 export function useChangeInputForKAOES() {
   const setState = useSetAtom(inputForKAOESState);
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+
+  const onChangeInputForKAOES: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
     let name = "BAD_INPUT";
 
     if (event && event.target && event.target.name) {
@@ -53,32 +58,36 @@ export function useChangeInputForKAOES() {
       action: "Change input for KAOES",
       label: labelString,
     });
-  }
+  };
+
+  return onChangeInputForKAOES;
 }
 
 export function useToggleExperiment() {
   const setState = useSetAtom(experimentsState);
-  // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
-  return (event) => {
+
+  const onToggleExperiment: React.ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
     const target = event.target;
     const value = target.checked;
     const name = target.name;
 
-    setState(name, value);
-
-    let labelString = value;
-    if (value === undefined) {
-      labelString = "BAD_INPUT";
-    } else {
-      labelString.toString();
+    if (name in ["stenohintsonthefly", "timesSeen"]) {
+      const typedName = name as keyof Experiments;
+      setState(typedName, value);
     }
+
+    const labelString = !!value ? `${value}` : "BAD_INPUT";
 
     GoogleAnalytics.event({
       category: "Global user settings",
       action: "Change " + name,
       label: labelString,
     });
-  }
+  };
+
+  return onToggleExperiment;
 }
 
 export function useDismissBackupBanner() {
@@ -93,5 +102,5 @@ export function useDismissBackupBanner() {
       action: "Dismiss backup banner",
       label: labelString,
     });
-  }
+  };
 }
