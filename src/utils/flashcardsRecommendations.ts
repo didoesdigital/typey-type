@@ -1,15 +1,33 @@
-// @ts-expect-error TS(7034) FIXME: Variable 'data' implicitly has type 'any' in some ... Remove this comment to see the full error message
-let data = null;
+import { FlashcardsNextLesson } from "pages/progress/components/FlashcardsBox";
 
-function fetchFlashcardsRecommendations() {
-  return fetch(process.env.PUBLIC_URL + '/lessons/flashcardsRecommendations.json', {
-    method: "GET",
-    credentials: "same-origin"
-  }).then((response) => {
-    return response.json()
-  }).then(json => {
+type FlashcardsCourseItem = {
+  /** e.g. "/lessons/fundamentals/numbers/flashcards" */
+  "path": string;
+  /** e.g. "Numbers" */
+  "lessonTitle": string;
+  /** e.g. 100 */
+  "target": number;
+};
+
+type FlashcardsRecommendedCoursesType = {
+  "noviceCourse": FlashcardsCourseItem[];
+  "beginnerCourse": FlashcardsCourseItem[];
+  "competentCourse":  FlashcardsCourseItem[];
+  "proficientCourse":  FlashcardsCourseItem[];
+  "expertCourse": FlashcardsCourseItem[];
+}
+
+let data: null | FlashcardsRecommendedCoursesType = null;
+
+async function fetchFlashcardsRecommendations(): Promise<FlashcardsRecommendedCoursesType> {
+  try {
+    const response = await fetch(process.env.PUBLIC_URL + '/lessons/flashcardsRecommendations.json', {
+      method: "GET",
+      credentials: "same-origin"
+    });
+    const json = await response.json();
     return json;
-  }).catch(function(e) {
+  } catch (e) {
     return {
       "beginnerCourse": [
         {
@@ -17,40 +35,37 @@ function fetchFlashcardsRecommendations() {
           "lessonTitle": "One-syllable words with simple keys",
           "target": 15
         }
-      ]
+      ],
+      "noviceCourse": [],
+      "competentCourse": [],
+      "proficientCourse": [],
+      "expertCourse": [],
     };
-  });
+  }
 }
 
 export function getFlashcardsRecommendedCourses() {
-  let recommendedCourses = {};
-  // @ts-expect-error TS(7005) FIXME: Variable 'data' implicitly has an 'any' type.
+  // @ts-expect-error
+  let recommendedCourses: Promise<FlashcardsRecommendedCoursesType> = {};
   if (data === null) {
     recommendedCourses = fetchFlashcardsRecommendations();
   } else {
-    // @ts-expect-error TS(7005) FIXME: Variable 'data' implicitly has an 'any' type.
     recommendedCourses = Promise.resolve(data);
   }
 
   return recommendedCourses;
 };
 
-/**
- * @returns {[flashcardsNextLesson, currentFlashcardsCourseIndex]}
- */
-// @ts-expect-error TS(7006) FIXME: Parameter 'courses' implicitly has an 'any' type.
-function getFlashcardsNextLesson(courses, flashcardsProgress = {}, courseLevel = "expertCourse", currentFlashcardsCourseIndex = 0) {
+function getFlashcardsNextLesson(courses: FlashcardsRecommendedCoursesType, flashcardsProgress = {}, courseLevel: keyof FlashcardsRecommendedCoursesType = "expertCourse", currentFlashcardsCourseIndex = 0): [FlashcardsNextLesson, number] {
     // fallback lesson:
     let flashcardsNextLesson = {
       lastSeen: 1558144862000, // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
       linkTitle: "Prefixes",
-      linkText: "Study",
       link: process.env.PUBLIC_URL + "/lessons/drills/prefixes/flashcards"// + "?recommended=true&" + PARAMS.practiceParams
     };
 
     if (courses && courses[courseLevel]) {
       flashcardsNextLesson.lastSeen = 1558144862000; // Saturday, May 18, 2019 12:00:55 PM GMT+10:00
-      flashcardsNextLesson.linkText = "Study";
 
       if (courses[courseLevel][currentFlashcardsCourseIndex + 1]) {
         currentFlashcardsCourseIndex = currentFlashcardsCourseIndex + 1;

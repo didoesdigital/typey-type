@@ -17,7 +17,6 @@ export const FlashcardsSectionStory = () => {
           linkTitle: "Top 1000 words flashcards",
           lastSeen: 1558144862000,
           link: "http://localhost:3000/typey-type/lessons/drills/top-1000-words/flashcards",
-          linkText: "linkText",
         },
         flashcardsCourseIndex: 0,
       },
