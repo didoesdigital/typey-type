@@ -1,20 +1,20 @@
-import { getRecommendedNextLesson } from './recommendations';
-import { mockRandom, resetMockRandom } from 'jest-mock-random';
+import { getRecommendedNextLesson } from "./recommendations";
+import { mockRandom, resetMockRandom } from "jest-mock-random";
 
-import recommendationsJSON from '../../typey-type-data/lessons/recommendations.json'
-import lessonIndexJSON from '../../typey-type-data/lessons/lessonIndex.json'
+import recommendationsJSON from "../../typey-type-data/lessons/recommendations.json";
+import lessonIndexJSON from "../../typey-type-data/lessons/lessonIndex.json";
 
-import lessonsProgressNovice from './../fixtures/lessonsProgressNovice.json'
-import lessonsProgressBeginner from './../fixtures/lessonsProgressBeginner.json'
-import lessonsProgressCompetent from './../fixtures/lessonsProgressCompetent.json'
+import lessonsProgressNovice from "../fixtures/lessonsProgressNovice.json";
+import lessonsProgressBeginner from "../fixtures/lessonsProgressBeginner.json";
+import lessonsProgressCompetent from "../fixtures/lessonsProgressCompetent.json";
 // import lessonsProgressProficient from './../fixtures/lessonsProgressProficient.json'
 // import lessonsProgressExpert from './../fixtures/lessonsProgressExpert.json'
 
-import metWordsCompetent from './../fixtures/metWordsCompetent.json'
+// import metWordsCompetent from "../fixtures/metWordsCompetent.json";
 
 describe("recommended next lesson for novice stenographer", () => {
   it("returns recommended next lesson", () => {
-    let metWords = { "was": 2, " has": 1, "the ": 8, "of": 5, "and": 3 };
+    // let metWords: MetWords = { "was": 2, " has": 1, "the ": 8, "of": 5, "and": 3 };
     let numberOfWordsSeen = 5;
     let numberOfWordsMemorised = 0;
     let history = { currentStep: null };
@@ -23,13 +23,12 @@ describe("recommended next lesson for novice stenographer", () => {
 
     const result = getRecommendedNextLesson(
       recommendationsJSON,
+      // @ts-expect-error missing `numberOfWordsMemorised` in lessonsProgress is handled in code by not typed to match (TODO fix that)
       lessonsProgressNovice,
       history,
       numberOfWordsSeen,
       numberOfWordsMemorised,
-      lessonIndexJSON,
-      // @ts-expect-error TS(2554) FIXME: Expected 1-6 arguments, but got 7.
-      metWords
+      lessonIndexJSON
     );
 
     expect(result).toEqual({
@@ -45,24 +44,23 @@ describe("recommended next lesson for novice stenographer", () => {
   });
 });
 
-describe('recommended next lesson for beginner stenographer a few lessons in', () => {
-  it('returns recommended next lesson, your revision words', () => {
+describe("recommended next lesson for beginner stenographer a few lessons in", () => {
+  it("returns recommended next lesson, your revision words", () => {
     let numberOfWordsSeen = 116;
     let numberOfWordsMemorised = 0;
-    let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
+    // let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
     let history = { currentStep: null };
 
     mockRandom(0.9);
 
     const result = getRecommendedNextLesson(
       recommendationsJSON,
+      // @ts-expect-error missing `numberOfWordsMemorised` in lessonsProgress is handled in code by not typed to match (TODO fix that)
       lessonsProgressBeginner,
       history,
       numberOfWordsSeen,
       numberOfWordsMemorised,
-      lessonIndexJSON,
-      // @ts-expect-error TS(2554) FIXME: Expected 1-6 arguments, but got 7.
-      metWords
+      lessonIndexJSON
     );
 
     expect(result).toEqual({
@@ -77,23 +75,22 @@ describe('recommended next lesson for beginner stenographer a few lessons in', (
     resetMockRandom();
   });
 
-  it('returns recommended next lesson, revision lesson', () => {
+  it("returns recommended next lesson, revision lesson", () => {
     let numberOfWordsSeen = 116;
     let numberOfWordsMemorised = 0;
-    let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
+    // let metWords = {" in":100," his":100," he":113," it":105," by":112," have":115," from":161," You can":7," has":113," web":16," top":11," world":33," ordinary":1," mountains":1};
     let history = { currentStep: null };
 
     mockRandom(0.3);
 
     const result = getRecommendedNextLesson(
       recommendationsJSON,
+      // @ts-expect-error missing `numberOfWordsMemorised` in lessonsProgress is handled in code by not typed to match (TODO fix that)
       lessonsProgressBeginner,
       history,
       numberOfWordsSeen,
       numberOfWordsMemorised,
-      lessonIndexJSON,
-      // @ts-expect-error TS(2554) FIXME: Expected 1-6 arguments, but got 7.
-      metWords
+      lessonIndexJSON
     );
 
     expect(result).toEqual({
@@ -119,13 +116,12 @@ describe("recommended next lesson for competent stenographer", () => {
 
     const result = getRecommendedNextLesson(
       recommendationsJSON,
+      // @ts-expect-error missing `numberOfWordsMemorised` in lessonsProgress is handled in code by not typed to match (TODO fix that)
       lessonsProgressCompetent,
       history,
       numberOfWordsSeen,
       numberOfWordsMemorised,
-      lessonIndexJSON,
-      // @ts-expect-error TS(2554) FIXME: Expected 1-6 arguments, but got 7.
-      metWordsCompetent
+      lessonIndexJSON
     );
 
     expect(result).toEqual({
@@ -164,4 +160,3 @@ describe("recommended next lesson for competent stenographer", () => {
 //     resetMockRandom();
 //   });
 // });
-
