@@ -1,8 +1,6 @@
-/**
- *
- * @type {import("../../types").UserSettings}
- */
-const userSettings = {
+import type { UserSettings } from "types";
+
+const userSettings: UserSettings = {
   beatsPerMinute: 10,
   blurMaterial: false,
   caseSensitive: false,

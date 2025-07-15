@@ -1,6 +1,6 @@
 import React from "react";
 import SingleLineMaterialComponent from "./SingleLineMaterial";
-import userSettings from "../../stories/fixtures/userSettings.js";
+import userSettings from "../../stories/fixtures/userSettings";
 
 export default {
   title: "Material/SingleLineMaterial",
