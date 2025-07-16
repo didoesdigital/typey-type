@@ -5,7 +5,8 @@ import { getRandomBetween } from './utils';
 // @ts-expect-error TS(7034) FIXME: Variable 'animationFrame' implicitly has type 'any... Remove this comment to see the full error message
 let animationFrame;
 
-let ConfettiParticle = function() {
+class ConfettiParticle {
+  constructor() {
   let confettiMinimumSize = 2; // pixels
   let confettiMaximumSize = 10; // pixels
   let confettiMinimumXVelocity = -30; // pixel distance per tick
@@ -64,6 +65,7 @@ let ConfettiParticle = function() {
       p.startY += p.velocity.y;
       p.velocity.y = p.velocity.y + gravity;
     }
+    };
   }
 }
 
