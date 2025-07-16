@@ -1,7 +1,11 @@
-import React from 'react'
+import React from "react";
 
-// @ts-expect-error TS(7031) FIXME: Binding element 'scaleRange' implicitly has an 'an... Remove this comment to see the full error message
-const Baseline = ({ scaleRange, tickSize }) => (
+type Props = {
+  scaleRange: [number, number];
+  tickSize: number;
+}
+
+const Baseline = ({ scaleRange, tickSize }: Props) => (
   <path
     d={`M ${scaleRange[0]} ${tickSize} v ${-tickSize} H ${scaleRange[1]} v ${tickSize}`}
     fill="none"
