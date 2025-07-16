@@ -262,13 +262,9 @@ export default function FinishedSpeedChart({ data }) {
       )}
       <Chart
         dimensions={dimensions}
-        // @ts-expect-error TS(2322) FIXME: Type '(event: any) => void' is not assignable to t... Remove this comment to see the full error message
         onMouseMove={onMove}
-        // @ts-expect-error TS(2322) FIXME: Type '(event: any) => void' is not assignable to t... Remove this comment to see the full error message
         onTouchMove={onMove}
-        // @ts-expect-error TS(2322) FIXME: Type '() => void' is not assignable to type 'null ... Remove this comment to see the full error message
         onMouseOut={onOut}
-        // @ts-expect-error TS(2322) FIXME: Type '() => void' is not assignable to type 'null ... Remove this comment to see the full error message
         onTouchEnd={onOut}
         accessibleTitle="Line chart of your typing speed over time"
       >
