@@ -3,25 +3,32 @@ import React from "react";
 const popoverMaxWidth = 240;
 const halfPopoverMaxWidth = popoverMaxWidth / 2;
 
+type Dimensions = {
+  width: number;
+};
+
+type Props = {
+  dimensions: Dimensions;
+  translateX: number;
+  translateY: number;
+  children: React.ReactNode;
+};
+
 const Popover = ({
-  // @ts-expect-error TS(7031) FIXME: Binding element 'dimensions' implicitly has an 'an... Remove this comment to see the full error message
   dimensions,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'translateX' implicitly has an 'an... Remove this comment to see the full error message
   translateX,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'translateY' implicitly has an 'an... Remove this comment to see the full error message
   translateY,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'children' implicitly has an 'any'... Remove this comment to see the full error message
   children,
   ...props
-}) => {
+}: Props) => {
   const leftEdge = translateX - halfPopoverMaxWidth < 0;
   const rightEdge = translateX + halfPopoverMaxWidth > dimensions.width;
 
-  const popoverStyles = {
+  const popoverStyles: React.CSSProperties = {
     backgroundColor: "#fff",
     border: "2px solid #E2E0E5",
     borderRadius: "4px",
-    color: 'var(--coolgrey-1000)',
+    color: "var(--coolgrey-1000)",
     padding: "8px 16px",
     pointerEvents: "none",
     position: "absolute",
@@ -38,7 +45,6 @@ const Popover = ({
   // console.log(`${format(",d")(xAccessor(data[dataIndex]) / 1000)} seconds`);
 
   return (
-    // @ts-expect-error TS(2322) FIXME: Type '{ backgroundColor: string; border: string; b... Remove this comment to see the full error message
     <div style={popoverStyles} aria-hidden={true}>
       {children}
     </div>
