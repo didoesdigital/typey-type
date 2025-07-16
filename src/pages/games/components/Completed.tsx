@@ -33,7 +33,7 @@ const handlePlayAgainClick = (
 
 function Completed({ gameName, dispatch }: CompletedProps) {
   const playAgainButton = useRef<HTMLButtonElement>(null);
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const canvasWidth = Math.floor(window.innerWidth);
   const canvasHeight = Math.floor(window.innerHeight);
 

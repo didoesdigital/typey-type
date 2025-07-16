@@ -2,10 +2,21 @@ import { getRandomBetween } from './utils';
 
 // NOTE: see confetti.types.ts
 
-// @ts-expect-error TS(7034) FIXME: Variable 'animationFrame' implicitly has type 'any... Remove this comment to see the full error message
-let animationFrame;
+type Velocity = {
+  x: number;
+  y: number;
+}
+
+let animationFrame: number;
 
 class ConfettiParticle {
+  maximumAnimationDuration: number;
+  velocity: Velocity;
+  radius: number;
+  life: number;
+  remainingLife: number;
+  draw: (ctx: CanvasRenderingContext2D) => void;
+
   constructor() {
   let confettiMinimumSize = 2; // pixels
   let confettiMaximumSize = 10; // pixels
@@ -35,26 +46,18 @@ class ConfettiParticle {
   // let confettiShrinkSpeed = 0.025; // pixels per tick
   // let confettiShrinkSpeed = 0.25; // pixels per tick
 
-  // @ts-ignore
   this.maximumAnimationDuration = 3000;
-  // @ts-ignore
   this.velocity = {
     x: getRandomBetween(confettiMinimumXVelocity, confettiMaximumXVelocity),
     y: getRandomBetween(confettiMinimumYVelocity, confettiMaximumYVelocity)
   };
-  // @ts-ignore
   this.radius = getRandomBetween(confettiMinimumSize, confettiMaximumSize);
-  // @ts-ignore
   this.life = confettiLife + getRandomBetween(0, confettiLifeVariation);
-  // @ts-ignore
   this.remainingLife = this.life;
 
-
-  // @ts-expect-error TS(7006) FIXME: Parameter 'ctx' implicitly has an 'any' type.
   this.draw = ctx => {
     let p = this;
 
-    // @ts-ignore
     if (this.remainingLife > 0 && this.radius > 0) {
       ctx.beginPath();
       // @ts-expect-error TS(2339) FIXME: Property 'startX' does not exist on type 'Confetti... Remove this comment to see the full error message
@@ -63,15 +66,12 @@ class ConfettiParticle {
       ctx.fillStyle = "rgba(" + this.rgbArray[0] + ',' + this.rgbArray[1] + ',' + this.rgbArray[2] + "," + this.rgbArray[3] + ")";
       ctx.fill();
 
-      // @ts-ignore
       p.remainingLife -= confettiDecaySpeed;
-      // @ts-ignore
       p.radius -= confettiShrinkSpeed;
       // @ts-expect-error TS(2339) FIXME: Property 'startX' does not exist on type 'Confetti... Remove this comment to see the full error message
       p.startX += p.velocity.x;
       // @ts-expect-error TS(2339) FIXME: Property 'startY' does not exist on type 'Confetti... Remove this comment to see the full error message
       p.startY += p.velocity.y;
-      // @ts-ignore
       p.velocity.y = p.velocity.y + gravity;
     }
     };
@@ -79,7 +79,7 @@ class ConfettiParticle {
 }
 
 // @ts-expect-error TS(7006) FIXME: Parameter 'x' implicitly has an 'any' type.
-function createParticleAtPoint(x, y, colorData, particles) {
+function createParticleAtPoint(x: number, y: number, colorData, particles) {
   let particle = new ConfettiParticle();
   // @ts-expect-error TS(2339) FIXME: Property 'rgbArray' does not exist on type 'Confet... Remove this comment to see the full error message
   particle.rgbArray = colorData;
@@ -145,12 +145,12 @@ function setupCanvas(config, confettiSourceID, particles) {
 }
 
 // @ts-expect-error TS(7006) FIXME: Parameter 'localParticles' implicitly has an 'any'... Remove this comment to see the full error message
-function updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) {
+function updateCanvas(localParticles, canvas: HTMLCanvasElement, canvasWidth, canvasHeight) {
   if (canvas) {
     const ctx = canvas.getContext('2d');
 
     if (typeof ctx !== "undefined") {
-      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      ctx?.clearRect(0, 0, canvasWidth, canvasHeight);
 
       const localParticlesLength = localParticles.length;
       for (let i = 0; i < localParticlesLength; i++) {
@@ -164,7 +164,7 @@ function updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) {
             localParticles = [];
             // If timing is off and we've reached percentCompleted before all particles have died,
             // we need to clear the canvas so confetti does not get stuck:
-            ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+            ctx?.clearRect(0, 0, canvasWidth, canvasHeight);
           }
         }
       }
@@ -177,7 +177,6 @@ function updateCanvas(localParticles, canvas, canvasWidth, canvasHeight) {
 }
 
 function cancelAnimation() {
-  // @ts-expect-error TS(7005) FIXME: Variable 'animationFrame' implicitly has an 'any' ... Remove this comment to see the full error message
   window.cancelAnimationFrame(animationFrame);
 }
 
