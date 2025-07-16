@@ -4,9 +4,8 @@ import { actions as SHUFLactions } from "../SHUFL/gameActions";
 import { actions as TPEUBGSZactions } from "../TPEUBGSZ/gameActions";
 import { ReactComponent as AlertRobot } from "../../../images/AlertRobot.svg";
 import * as Confetti from "../../../utils/confetti";
-import type { Particles } from "utils/confetti.types";
 
-const particles: Particles = [];
+const particles: Confetti.ConfettiParticle[] = [];
 const ConfettiConfig = { sparsity: 480, colors: 2 };
 
 const handleActionClick = (

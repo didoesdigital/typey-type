@@ -24,7 +24,6 @@ import { choosePuzzleKey, prettyKey } from "./utilities";
 import * as stroke from "../../../utils/stroke";
 import { mapQWERTYKeysToStenoStroke } from "../../../utils/mapQWERTYKeysToStenoStroke";
 import type { GlobalUserSettings } from "types";
-import type { Particles } from "utils/confetti.types";
 
 const stenoTypedTextToKeysMapping = {
   "-Z": stroke.Z,
@@ -58,7 +57,7 @@ const stenoTypedTextToKeysMapping = {
   "F": stroke.F,
 };
 
-const particles: Particles = [];
+const particles: Confetti.ConfettiParticle[] = [];
 const gameName = "KAOES";
 const introText =
   "The mischievous steno robots have hidden all the steno keys. You need to find where they belong on the steno diagram.";

@@ -1,6 +1,10 @@
 import { getRandomBetween } from './utils';
 
-// NOTE: see confetti.types.ts
+export type ConfettiConfig = {
+  sparsity: number;
+  colors: number;
+  positioningRandomness?: number;
+};
 
 type Velocity = {
   x: number;
@@ -17,7 +21,12 @@ class ConfettiParticle {
   remainingLife: number;
   draw: (ctx: CanvasRenderingContext2D) => void;
 
-  constructor() {
+  constructor(
+    private rgbArray: [number, number, number, number],
+    private startX: number,
+    private startY: number,
+    public startTime: number,
+  ) {
   let confettiMinimumSize = 2; // pixels
   let confettiMaximumSize = 10; // pixels
   let confettiMinimumXVelocity = -30; // pixel distance per tick
@@ -60,17 +69,13 @@ class ConfettiParticle {
 
     if (this.remainingLife > 0 && this.radius > 0) {
       ctx.beginPath();
-      // @ts-expect-error TS(2339) FIXME: Property 'startX' does not exist on type 'Confetti... Remove this comment to see the full error message
       ctx.arc(p.startX, p.startY, p.radius, 0, Math.PI * 2);
-      // @ts-expect-error TS(2339) FIXME: Property 'rgbArray' does not exist on type 'Confet... Remove this comment to see the full error message
       ctx.fillStyle = "rgba(" + this.rgbArray[0] + ',' + this.rgbArray[1] + ',' + this.rgbArray[2] + "," + this.rgbArray[3] + ")";
       ctx.fill();
 
       p.remainingLife -= confettiDecaySpeed;
       p.radius -= confettiShrinkSpeed;
-      // @ts-expect-error TS(2339) FIXME: Property 'startX' does not exist on type 'Confetti... Remove this comment to see the full error message
       p.startX += p.velocity.x;
-      // @ts-expect-error TS(2339) FIXME: Property 'startY' does not exist on type 'Confetti... Remove this comment to see the full error message
       p.startY += p.velocity.y;
       p.velocity.y = p.velocity.y + gravity;
     }
@@ -78,23 +83,13 @@ class ConfettiParticle {
   }
 }
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'x' implicitly has an 'any' type.
-function createParticleAtPoint(x: number, y: number, colorData, particles) {
-  let particle = new ConfettiParticle();
-  // @ts-expect-error TS(2339) FIXME: Property 'rgbArray' does not exist on type 'Confet... Remove this comment to see the full error message
-  particle.rgbArray = colorData;
-  // @ts-expect-error TS(2339) FIXME: Property 'startX' does not exist on type 'Confetti... Remove this comment to see the full error message
-  particle.startX = x;
-  // @ts-expect-error TS(2339) FIXME: Property 'startY' does not exist on type 'Confetti... Remove this comment to see the full error message
-  particle.startY = y;
-  // @ts-expect-error TS(2339) FIXME: Property 'startTime' does not exist on type 'Confe... Remove this comment to see the full error message
-  particle.startTime = Date.now();
+function createParticleAtPoint(x: number, y: number, colorData: ConfettiParticle['rgbArray'], particles: ConfettiParticle[]) {
+  let particle = new ConfettiParticle(colorData, x, y, Date.now());
 
   particles.push(particle);
 }
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'config' implicitly has an 'any' type.
-function setupCanvas(config, confettiSourceID, particles) {
+function setupCanvas(config: ConfettiConfig, confettiSourceID: string, particles: ConfettiParticle[]) {
   if (!config['sparsity']) { throw new Error("Bad confetti config"); }
   if (!config['colors']) { throw new Error("Bad confetti config"); }
 
@@ -116,9 +111,7 @@ function setupCanvas(config, confettiSourceID, particles) {
       for(let localY = 0; localY < height; localY++) {
         if (count % config['sparsity'] === 0) {
           // $brand-highlight #ffd073 or $brand-primary #402351 confetti
-          let colors;
-
-          colors = [
+          let colors: ConfettiParticle['rgbArray'][] = [
             [255, 208, 115, getRandomBetween(0.7, 1)], // #FFD073
             [130, 66, 168, getRandomBetween(0.7, 1)], // #8242A8
             [255, 191, 64, getRandomBetween(0.7, 1)], // #FFBF40
@@ -144,8 +137,12 @@ function setupCanvas(config, confettiSourceID, particles) {
   }
 }
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'localParticles' implicitly has an 'any'... Remove this comment to see the full error message
-function updateCanvas(localParticles, canvas: HTMLCanvasElement, canvasWidth, canvasHeight) {
+function updateCanvas(
+  localParticles: ConfettiParticle[],
+  canvas: HTMLCanvasElement | null,
+  canvasWidth: number,
+  canvasHeight: number
+) {
   if (canvas) {
     const ctx = canvas.getContext('2d');
 
@@ -154,7 +151,9 @@ function updateCanvas(localParticles, canvas: HTMLCanvasElement, canvasWidth, ca
 
       const localParticlesLength = localParticles.length;
       for (let i = 0; i < localParticlesLength; i++) {
-        localParticles[i].draw(ctx);
+        if (ctx) {
+          localParticles[i].draw(ctx);
+        }
         const lastParticle = i === localParticles.length - 1;
 
         if (lastParticle) {
@@ -180,10 +179,16 @@ function cancelAnimation() {
   window.cancelAnimationFrame(animationFrame);
 }
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'particles' implicitly has an 'any' type... Remove this comment to see the full error message
-function restartAnimation(particles, canvas, canvasWidth, canvasHeight) {
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    animationFrame = window.requestAnimationFrame(function () { updateCanvas(particles, canvas, canvasWidth, canvasHeight) });
+function restartAnimation(
+  particles: ConfettiParticle[],
+  canvas: HTMLCanvasElement | null,
+  canvasWidth: number,
+  canvasHeight: number
+) {
+  if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    animationFrame = window.requestAnimationFrame(function () {
+      updateCanvas(particles, canvas, canvasWidth, canvasHeight);
+    });
   }
 }
 
