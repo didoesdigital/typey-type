@@ -18,12 +18,14 @@ import HighlightCircle from "./Chart/HighlightCircle";
 import Line from "./Chart/Line";
 import Popover from "./Chart/Popover";
 import Rule from "./Chart/Rule";
+import type { DataPoint } from "pages/lessons/types";
 
 const highlightCircleRadius = 8;
 const tickSize = 4;
 
-// @ts-expect-error TS(7006) FIXME: Parameter 'datum' implicitly has an 'any' type.
-const claps = (datum, htmlOutput = false) => {
+type Datum = DataPoint;
+
+const claps = (datum: Datum, htmlOutput = false) => {
   if (htmlOutput) {
     return datum.markedCorrect && !datum.attemptPeak ? (
       <span
@@ -42,9 +44,18 @@ const claps = (datum, htmlOutput = false) => {
   }
 };
 
-// @ts-expect-error TS(7031) FIXME: Binding element 'data' implicitly has an 'any' typ... Remove this comment to see the full error message
-export default function FinishedSpeedChart({ data }) {
-  const [highlightedDatum, setHighlightedDatum] = useState(null);
+type ChartData = {
+  averageWPM: number;
+  version: number;
+  dataPoints: DataPoint[];
+};
+
+type Props = {
+  data: ChartData;
+};
+
+export default function FinishedSpeedChart({ data }: Props) {
+  const [highlightedDatum, setHighlightedDatum] = useState<Datum | null>(null);
   const [ref, dimensions] = useChartDimensions({
     marginTop: 24,
     marginRight: 96,
@@ -60,8 +71,14 @@ export default function FinishedSpeedChart({ data }) {
     });
   }, []);
 
-  const xAccessor = useCallback((d) => d.elapsedTime, []);
-  const yAccessor = useCallback((d) => d.wordsPerMinute, []);
+  const xAccessor: (d: DataPoint) => number = useCallback(
+    (d) => d.elapsedTime,
+    []
+  );
+  const yAccessor: (d: DataPoint) => number = useCallback(
+    (d) => d.wordsPerMinute,
+    []
+  );
   // @ts-expect-error TS(7006) FIXME: Parameter '_' implicitly has an 'any' type.
   const keyAccessor = (_, i) => i;
   // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
@@ -148,7 +165,7 @@ export default function FinishedSpeedChart({ data }) {
   const crowdedDataPoints =
     data.dataPoints.length * circleDiameter > dimensions.boundedWidth;
 
-  const bisect = bisector((d) => xAccessor(d));
+  const bisect = bisector<DataPoint, DataPoint>((d) => xAccessor(d));
 
   // @ts-expect-error TS(7006) FIXME: Parameter 'event' implicitly has an 'any' type.
   const onMove = (event) => {
@@ -168,13 +185,11 @@ export default function FinishedSpeedChart({ data }) {
     setHighlightedDatum(null);
   };
 
-  // @ts-expect-error TS(7006) FIXME: Parameter '_' implicitly has an 'any' type.
-  const onCircleFocus = (_, d) => {
+  const onCircleFocus = (_: any, d: Datum) => {
     d ? setHighlightedDatum(d) : setHighlightedDatum(null);
   };
 
-  // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
-  const accessibleLabel = (d) => {
+  const accessibleLabel = (d: Datum) => {
     const wpmText = `${format(",d")(yAccessor(d))} WPM`;
     const hinted = `${d.hintWasShown ? " (hinted). " : ""}`;
     if (d.markedCorrect) {
@@ -238,19 +253,16 @@ export default function FinishedSpeedChart({ data }) {
                   borderBottom: `2px solid ${colorAccessor(highlightedDatum)}`,
                 }}
               >
-                {/* @ts-expect-error TS(2339) FIXME: Property 'typedText' does not exist on type 'never... Remove this comment to see the full error message */}
                 {highlightedDatum.typedText.replace(/^ $/, " ")}
               </span>
               {claps(highlightedDatum, true)}
             </p>
             <p className="mb0">
               {"materialIndex" in highlightedDatum &&
-              // @ts-expect-error TS(2339) FIXME: Property 'materialIndex' does not exist on type 'n... Remove this comment to see the full error message
-              highlightedDatum.materialIndex < minimumStrokes
+              (highlightedDatum.materialIndex ?? 0 < minimumStrokes)
                 ? "~"
                 : ""}
               {format(",d")(yAccessor(highlightedDatum))} WPM
-              {/* @ts-expect-error TS(2339) FIXME: Property 'hintWasShown' does not exist on type 'ne... Remove this comment to see the full error message */}
               {highlightedDatum.hintWasShown ? (
                 <span aria-label="(hinted)" role="img">
                   &nbsp;ℹ️
@@ -289,7 +301,6 @@ export default function FinishedSpeedChart({ data }) {
             </g>
             <Line
               type="line"
-              // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
               data={data.dataPoints.filter((d) => !d.attemptPeak)}
               xAccessor={xAccessorScaled}
               yAccessor={yAccessorScaled}
@@ -299,7 +310,6 @@ export default function FinishedSpeedChart({ data }) {
             />
             <Line
               type="area"
-              // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
               data={data.dataPoints.filter((d) => !d.attemptPeak)}
               xAccessor={xAccessorScaled}
               yAccessor={yAccessorScaled}
@@ -310,11 +320,10 @@ export default function FinishedSpeedChart({ data }) {
             <Line
               type="line"
               data={data.dataPoints.filter(
-                // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
                 (d) =>
                   !d.attemptPeak &&
                   "materialIndex" in d &&
-                  d.materialIndex < minimumStrokes
+                  (d.materialIndex ?? 0) < minimumStrokes
               )}
               xAccessor={xAccessorScaled}
               yAccessor={yAccessorScaled}
@@ -325,15 +334,14 @@ export default function FinishedSpeedChart({ data }) {
             {crowdedDataPoints ? (
               data.dataPoints
                 .filter(
-                  // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
                   (d) =>
                     !d.attemptPeak &&
                     !(
-                      "materialIndex" in d && d.materialIndex < minimumStrokes
+                      "materialIndex" in d &&
+                      (d.materialIndex ?? 0) < minimumStrokes
                     ) &&
                     !d.markedCorrect
                 )
-                // @ts-expect-error TS(7006) FIXME: Parameter 'd' implicitly has an 'any' type.
                 .map((d) => (
                   <Rule
                     key={d.materialIndex}
