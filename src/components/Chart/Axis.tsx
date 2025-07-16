@@ -1,22 +1,34 @@
 import React, { useMemo } from "react";
 import { format } from "d3-format";
+import type { ScaleLinear } from "d3-scale";
 
 const formatter = format(",");
 
+type Dimensions = {
+  boundedWidth: string;
+  boundedHeight: string;
+};
+
+type AxisSharedProps = {
+  dimensions: Dimensions;
+  scale: ScaleLinear<any, any>;
+  gridLines: boolean;
+  numberOfTicks: number;
+};
+
+type AxisHorizontalProps = AxisSharedProps;
+
+type AxisVerticalProps = AxisSharedProps;
+
 // An ok default value: numberOfTicks = dimensions.boundedWidth / 80
 const AxisHorizontal = ({
-  // @ts-expect-error TS(7031) FIXME: Binding element 'dimensions' implicitly has an 'an... Remove this comment to see the full error message
   dimensions,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'scale' implicitly has an 'any' ty... Remove this comment to see the full error message
   scale,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'gridLines' implicitly has an 'any... Remove this comment to see the full error message
   gridLines,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'numberOfTicks' implicitly has an ... Remove this comment to see the full error message
   numberOfTicks,
   ...props
-}) => {
+}: AxisHorizontalProps) => {
   const ticks = useMemo(() => {
-    // @ts-expect-error TS(7006) FIXME: Parameter 'value' implicitly has an 'any' type.
     return scale.ticks(numberOfTicks).map((value) => ({
       value,
       xOffset: scale(value),
@@ -24,8 +36,11 @@ const AxisHorizontal = ({
   }, [scale, numberOfTicks]);
 
   return (
-    <g transform={`translate(0, ${dimensions.boundedHeight})`} role="presentation" {...props}>
-      {/* @ts-expect-error TS(7031) FIXME: Binding element 'value' implicitly has an 'any' ty... Remove this comment to see the full error message */}
+    <g
+      transform={`translate(0, ${dimensions.boundedHeight})`}
+      role="presentation"
+      {...props}
+    >
       {ticks.map(({ value, xOffset }) => {
         return (
           <g
@@ -63,20 +78,15 @@ const AxisHorizontal = ({
 
 // An ok default value: numberOfTicks = dimensions.boundedHeight / 80
 const AxisVertical = ({
-  // @ts-expect-error TS(7031) FIXME: Binding element 'dimensions' implicitly has an 'an... Remove this comment to see the full error message
   dimensions,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'scale' implicitly has an 'any' ty... Remove this comment to see the full error message
   scale,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'gridLines' implicitly has an 'any... Remove this comment to see the full error message
   gridLines,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'numberOfTicks' implicitly has an ... Remove this comment to see the full error message
   numberOfTicks,
   ...props
-}) => {
+}: AxisVerticalProps) => {
   const [x1, x2] = gridLines === true ? [-dimensions.boundedWidth, 0] : [0, 4];
 
   const ticks = useMemo(() => {
-    // @ts-expect-error TS(7006) FIXME: Parameter 'value' implicitly has an 'any' type.
     return scale.ticks(numberOfTicks).map((value) => ({
       value,
       yOffset: scale(value),
@@ -84,8 +94,11 @@ const AxisVertical = ({
   }, [scale, numberOfTicks]);
 
   return (
-    <g transform={`translate(${dimensions.boundedWidth}, 0)`} role="presentation" {...props}>
-      {/* @ts-expect-error TS(7031) FIXME: Binding element 'value' implicitly has an 'any' ty... Remove this comment to see the full error message */}
+    <g
+      transform={`translate(${dimensions.boundedWidth}, 0)`}
+      role="presentation"
+      {...props}
+    >
       {ticks.map(({ value, yOffset }, i) => {
         return (
           <g
@@ -128,9 +141,12 @@ const axisComponentsByDimension = {
   y: AxisVertical,
 };
 
-// @ts-expect-error TS(7031) FIXME: Binding element 'dimension' implicitly has an 'any... Remove this comment to see the full error message
-const Axis = ({ dimension, dimensions, ...props }) => {
-  // @ts-expect-error TS(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+type AxisProps = {
+  dimension: "x" | "y";
+  dimensions: Dimensions;
+} & AxisSharedProps;
+
+const Axis = ({ dimension, dimensions, ...props }: AxisProps) => {
   const AxisByDimension = axisComponentsByDimension[dimension];
   if (!AxisByDimension) return null;
 

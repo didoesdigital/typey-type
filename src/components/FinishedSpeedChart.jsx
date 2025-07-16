@@ -274,13 +274,16 @@ export default function FinishedSpeedChart({ data }) {
       >
         {data === null ? null : (
           <>
-            <Axis
-              dimension={"y"}
-              dimensions={dimensions}
-              scale={yScale}
-              numberOfTicks={4}
-              gridLines={true}
-            />
+            {yScale === null ? null : (
+              <Axis
+                dimension={"y"}
+                dimensions={dimensions}
+                // @ts-expect-error
+                scale={yScale}
+                numberOfTicks={4}
+                gridLines={true}
+              />
+            )}
             <g
               role="presentation"
               transform={`translate(0, ${dimensions.boundedHeight})`}
