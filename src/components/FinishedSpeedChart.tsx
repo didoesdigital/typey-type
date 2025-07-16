@@ -6,7 +6,7 @@ import { scaleLinear } from "d3-scale";
 import { pointer } from "d3-selection";
 import { curveMonotoneX } from "d3-shape";
 import { useChartDimensions } from "./Chart/utils";
-import { durationFormatter } from "./../utils/formatters";
+import { durationFormatter } from "../utils/formatters";
 import TypeyTypeIcon from "./Icons/icon-images/TypeyTypeIcon.svg";
 import Icon from "./Icons/Icon";
 import ErrorBoundary from "./ErrorBoundary";
