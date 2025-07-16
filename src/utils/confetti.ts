@@ -35,13 +35,18 @@ class ConfettiParticle {
   // let confettiShrinkSpeed = 0.025; // pixels per tick
   // let confettiShrinkSpeed = 0.25; // pixels per tick
 
+  // @ts-ignore
   this.maximumAnimationDuration = 3000;
+  // @ts-ignore
   this.velocity = {
     x: getRandomBetween(confettiMinimumXVelocity, confettiMaximumXVelocity),
     y: getRandomBetween(confettiMinimumYVelocity, confettiMaximumYVelocity)
   };
+  // @ts-ignore
   this.radius = getRandomBetween(confettiMinimumSize, confettiMaximumSize);
+  // @ts-ignore
   this.life = confettiLife + getRandomBetween(0, confettiLifeVariation);
+  // @ts-ignore
   this.remainingLife = this.life;
 
 
@@ -49,6 +54,7 @@ class ConfettiParticle {
   this.draw = ctx => {
     let p = this;
 
+    // @ts-ignore
     if (this.remainingLife > 0 && this.radius > 0) {
       ctx.beginPath();
       // @ts-expect-error TS(2339) FIXME: Property 'startX' does not exist on type 'Confetti... Remove this comment to see the full error message
@@ -57,12 +63,15 @@ class ConfettiParticle {
       ctx.fillStyle = "rgba(" + this.rgbArray[0] + ',' + this.rgbArray[1] + ',' + this.rgbArray[2] + "," + this.rgbArray[3] + ")";
       ctx.fill();
 
+      // @ts-ignore
       p.remainingLife -= confettiDecaySpeed;
+      // @ts-ignore
       p.radius -= confettiShrinkSpeed;
       // @ts-expect-error TS(2339) FIXME: Property 'startX' does not exist on type 'Confetti... Remove this comment to see the full error message
       p.startX += p.velocity.x;
       // @ts-expect-error TS(2339) FIXME: Property 'startY' does not exist on type 'Confetti... Remove this comment to see the full error message
       p.startY += p.velocity.y;
+      // @ts-ignore
       p.velocity.y = p.velocity.y + gravity;
     }
     };
