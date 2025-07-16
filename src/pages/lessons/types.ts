@@ -33,8 +33,8 @@ export type DataPoint = {
 export type TransformedData = {
   averageWPM: number;
   version: number;
-  dataPoints?: DataPoint[];
-} | null;
+  dataPoints: DataPoint[];
+};
 
 export type LessonProps = Pick<
   MainLessonViewProps,

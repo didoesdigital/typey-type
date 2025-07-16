@@ -61,7 +61,11 @@ const Finished = ({
   updatePreset,
   updateRevisionMaterial,
 }: FinishedProps) => {
-  const [chartData, setChartData] = useState<TransformedData>(null);
+  const [chartData, setChartData] = useState<TransformedData>(
+    transformLessonDataToChartData(
+      stitchTogetherLessonData(currentLessonStrokes, startTime ?? 0, 0)
+    )
+  );
   const [confettiConfig, setConfettiConfig] = useState<ConfettiConfig>(null);
   const [topSpeedPersonalBest, setTopSpeedPersonalBest] = useAtom(
     topSpeedPersonalBestState
@@ -179,19 +183,25 @@ const Finished = ({
                         newTopSpeedToday={newTopSpeedToday}
                         wpm={wpm}
                       />
-                      <FinishedDataViz
-                        wpm={wpm}
-                        numericAccuracy={numericAccuracy}
-                        chartData={chartData}
-                        totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
-                        totalNumberOfLowExposuresSeen={
-                          totalNumberOfLowExposuresSeen
-                        }
-                        totalNumberOfRetainedWords={totalNumberOfRetainedWords}
-                        totalNumberOfHintedWords={totalNumberOfHintedWords}
-                        totalNumberOfMistypedWords={totalNumberOfMistypedWords}
-                        wordsTyped={currentLessonStrokes?.length || 0}
-                      />
+                      {chartData === null ? null : (
+                        <FinishedDataViz
+                          wpm={wpm}
+                          numericAccuracy={numericAccuracy}
+                          chartData={chartData}
+                          totalNumberOfNewWordsMet={totalNumberOfNewWordsMet}
+                          totalNumberOfLowExposuresSeen={
+                            totalNumberOfLowExposuresSeen
+                          }
+                          totalNumberOfRetainedWords={
+                            totalNumberOfRetainedWords
+                          }
+                          totalNumberOfHintedWords={totalNumberOfHintedWords}
+                          totalNumberOfMistypedWords={
+                            totalNumberOfMistypedWords
+                          }
+                          wordsTyped={currentLessonStrokes?.length || 0}
+                        />
+                      )}
                       <FinishedActionButtons
                         numericAccuracy={numericAccuracy}
                         restartPath={path}

@@ -8,8 +8,8 @@ import type { DataPoint } from "pages/lessons/types";
 type ChartData = {
   averageWPM: number;
   version: number;
-  dataPoints?: DataPoint[];
-} | null;
+  dataPoints: DataPoint[];
+};
 
 type FinishedDataVizProps = {
   wpm: number;

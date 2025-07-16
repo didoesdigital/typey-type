@@ -27,6 +27,7 @@ function transformLessonDataToChartData(lessonData: LessonData) {
   let transformedData: TransformedData = {
     averageWPM: lessonData.wpm,
     version: lessonData.version,
+    dataPoints: [],
   };
 
   let dataPoints: DataPoint[] = [];
