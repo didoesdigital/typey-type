@@ -3,7 +3,7 @@ import GoogleAnalytics from "react-ga4";
 import { actions as SHUFLactions } from "../SHUFL/gameActions";
 import { actions as TPEUBGSZactions } from "../TPEUBGSZ/gameActions";
 import { ReactComponent as AlertRobot } from "../../../images/AlertRobot.svg";
-import * as Confetti from "../../../utils/confetti.js";
+import * as Confetti from "../../../utils/confetti";
 import type { Particles } from "utils/confetti.types";
 
 const particles: Particles = [];
