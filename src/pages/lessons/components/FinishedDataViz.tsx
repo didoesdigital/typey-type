@@ -3,11 +3,12 @@ import DisplayMetric from "../../../components/DisplayMetric";
 import ErrorBoundary from "../../../components/ErrorBoundary";
 import ComponentLoading from "../../../components/ComponentLoading";
 import Loadable from "react-loadable";
+import type { DataPoint } from "pages/lessons/types";
 
 type ChartData = {
   averageWPM: number;
   version: number;
-  dataPoints?: any[];
+  dataPoints?: DataPoint[];
 } | null;
 
 type FinishedDataVizProps = {

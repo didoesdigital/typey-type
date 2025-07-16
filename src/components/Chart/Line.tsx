@@ -1,22 +1,26 @@
-import React from "react";
-import { area, line } from "d3-shape";
+import React, { CSSProperties } from "react";
+import { area, type CurveFactory, line } from "d3-shape";
+
+type LineProps = {
+  type: "line" | "area";
+  data: any[];
+  xAccessor: (d: any) => number;
+  yAccessor: (d: any) => number;
+  y0Accessor: (d: any) => number;
+  colorAccessor: string;
+  interpolation: CurveFactory;
+};
 
 const Line = ({
-  // @ts-expect-error TS(7031) FIXME: Binding element 'type' implicitly has an 'any' typ... Remove this comment to see the full error message
   type,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'data' implicitly has an 'any' typ... Remove this comment to see the full error message
   data,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'xAccessor' implicitly has an 'any... Remove this comment to see the full error message
   xAccessor,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'yAccessor' implicitly has an 'any... Remove this comment to see the full error message
   yAccessor,
-  // @ts-expect-error TS(7031) FIXME: Binding element 'y0Accessor' implicitly has an 'an... Remove this comment to see the full error message
   y0Accessor,
   colorAccessor = "#9880C2",
-  // @ts-expect-error TS(7031) FIXME: Binding element 'interpolation' implicitly has an ... Remove this comment to see the full error message
   interpolation,
   ...props
-}) => {
+}: LineProps) => {
   const lineGenerator =
     type === "line"
       ? line().x(xAccessor).y(yAccessor).curve(interpolation)
@@ -27,7 +31,7 @@ const Line = ({
           .y1(yAccessor)
           .curve(interpolation);
 
-  const styles =
+  const styles: CSSProperties =
     type === "area"
       ? {
           fill: colorAccessor,
@@ -43,10 +47,8 @@ const Line = ({
   return (
     <path
       {...props}
-      // @ts-expect-error TS(2322) FIXME: Type '{ fill: string; strokeWidth: number; stroke?... Remove this comment to see the full error message
       style={styles}
-      // @ts-expect-error TS(2322) FIXME: Type 'string | null' is not assignable to type 'st... Remove this comment to see the full error message
-      d={lineGenerator(data)}
+      d={lineGenerator(data) ?? undefined}
       role="presentation"
     />
   );
