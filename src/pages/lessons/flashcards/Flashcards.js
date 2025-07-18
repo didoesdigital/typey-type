@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import GoogleAnalytics from "react-ga4";
 import ReactModal from 'react-modal';
-import { useAppMethods } from "../../../states/legacy/AppMethodsContext";
 import { withAppMethods } from "../../../states/legacy/AppMethodsContext";
 import { userSettingsState } from "../../../states/userSettingsState";
 import { withAtomsCompat } from "../../../states/atomUtils";
+import { FlashcardsWrapper } from 'pages/lessons/flashcards/FlashcardsWrapper';
 import FlashcardsCarouselActionButtons from './components/FlashcardsCarouselActionButtons';
 import FlashcardsModal from './components/FlashcardsModal';
 import StrokesForWords from '../../../components/StrokesForWords';
@@ -26,15 +26,12 @@ import Subheader from "../../../components/Subheader";
 import { flashcardsMetWordsState } from "../../../states/flashcardsMetWordsState";
 import {
   flashcardsProgressState,
-  fullscreenState,
-  useUpdateFlashcardsProgress
-} from "../../../states/flashcardsProgressState";
-import { useChangeFullscreen } from "../components/UserSettings/updateFlashcardSetting";
+  fullscreenState} from "../../../states/flashcardsProgressState";
 
 const shortestDimension = 3;
 const longestDimension = 4;
 
-class Flashcards extends Component {
+export class Flashcards extends Component {
   // @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
   constructor(props) {
     super(props);
@@ -518,25 +515,6 @@ currentSlide: currentSlide
       </div>
     )
   }
-}
-
-// @ts-expect-error TS(7006) FIXME: Parameter 'props' implicitly has an 'any' type.
-function FlashcardsWrapper(props) {
-  const {
-    appFetchAndSetupGlobalDict,
-  } = useAppMethods();
-  const updateFlashcardsProgress = useUpdateFlashcardsProgress();
-  const changeFullscreen = useChangeFullscreen();
-
-  return (
-    <Flashcards
-      {...props}
-      changeFullscreen={changeFullscreen}
-      fetchAndSetupGlobalDict={appFetchAndSetupGlobalDict}
-      updateFlashcardsProgress={updateFlashcardsProgress}
-      personalDictionaries={props.personalDictionaries}
-    />
-  );
 }
 
 export default withAppMethods(
